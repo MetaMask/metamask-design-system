@@ -1,14 +1,14 @@
 {
-  "name": "@metamask/module-template",
+  "name": "@metamask/eslint-plugin-metamask-design-tokens",
   "version": "0.0.0",
-  "description": "The MetaMask Node module template",
-  "homepage": "https://github.com/MetaMask/metamask-module-template#readme",
+  "description": "An ESLint plugin designed to enforce best practices and consistency for using MetaMask design tokens across various projects.",
+  "homepage": "https://github.com/MetaMask/eslint-plugin-metamask-design-tokens#readme",
   "bugs": {
-    "url": "https://github.com/MetaMask/metamask-module-template/issues"
+    "url": "https://github.com/MetaMask/eslint-plugin-metamask-design-tokens/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/metamask-module-template.git"
+    "url": "https://github.com/MetaMask/eslint-plugin-metamask-design-tokens.git"
   },
   "sideEffects": false,
   "exports": {
