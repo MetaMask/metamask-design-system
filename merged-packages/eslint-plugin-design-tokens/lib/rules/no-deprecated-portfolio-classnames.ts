@@ -1,50 +1,48 @@
-// eslint-plugin/rules/no-deprecated-tailwind-classnames.ts
-import type {
-  RuleContext,
-  RuleListener,
-  TSESTree,
-} from '@typescript-eslint/experimental-utils';
-import { ESLintUtils } from '@typescript-eslint/utils';
+// eslint-plugin/rules/my-rule.ts
+import { TSESTree } from '@typescript-eslint/types';
+
+export { ESLintUtils } from '@typescript-eslint/utils';
 
 // The Rule creator returns a function that is used to create a well-typed ESLint rule
 // The parameter passed into RuleCreator is a URL generator function.
-const createRule = ESLintUtils.RuleCreator(
+export const createRule = ESLintUtils.RuleCreator(
   (name) => `https://my-website.io/eslint/${name}`,
 );
 
-const deprecatedClasses: string[] = ['bg-white', 'bg-black', 'text-red-500']; // Simplified list, populate this based on your Tailwind config
-
 export const noDeprecatedTailwindClassnames = createRule({
-  name: 'no-deprecated-tailwind-classnames',
+  name: 'my-rule',
   meta: {
-    type: 'suggestion',
     docs: {
-      description: 'No deprecated tailwind classnames allowed',
-      recommended: false,
+      description: 'An example ESLint rule',
     },
-    fixable: 'code', // Or `code` or `whitespace`
-    schema: [], // Add a schema if the rule has options
+    type: 'suggestion',
+    schema: [],
+    fixable: 'code', // add the `fixable` property to tell ESLint that this problem is fixable
+    hasSuggestions: true, // tell ESLint that this rule has suggestions
     messages: {
-      deprecatedClass:
-        '{{className}} is a deprecated TailwindCSS class. Please update it according to the Tailwind config.',
+      'issue:var': 'Prefer using `let` or `const`',
+      'fix:let': 'Replace this `var` declaration with `let`',
+      'fix:const': 'Replace this `var` declaration with `const`',
     },
   },
   defaultOptions: [],
-  create(context: RuleContext<'deprecatedClass', []>): RuleListener {
+  create: (context) => {
     return {
-      Literal(node: TSESTree.Literal) {
-        if (typeof node.value === 'string') {
-          const classNames = node.value.split(' ');
-          classNames.forEach((className: string) => {
-            if (deprecatedClasses.includes(className)) {
-              context.report({
-                node,
-                messageId: 'deprecatedClass',
-                data: {
-                  className,
-                },
-              });
-            }
+      VariableDeclaration: (node) => {
+        if (node.kind === 'var') {
+          context.report({
+            node,
+            messageId: 'issue:var',
+            suggest: [
+              {
+                messageId: 'fix:let',
+                fix: (fixer) => fixer.replaceText(node, 'let'),
+              },
+              {
+                messageId: 'fix:const',
+                fix: (fixer) => fixer.replaceText(node, 'const'),
+              },
+            ],
           });
         }
       },
