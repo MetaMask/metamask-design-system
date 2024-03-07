@@ -7,7 +7,7 @@
     "inlineSources": true,
     "noEmit": false,
     "outDir": "dist/types",
-    "rootDir": "src",
+    "rootDir": "lib",
     "sourceMap": true
   },
   "include": ["./lib/**/*.ts"],

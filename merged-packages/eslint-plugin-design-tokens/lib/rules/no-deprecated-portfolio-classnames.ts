@@ -1,6 +1,6 @@
 // eslint-plugin/rules/my-rule.ts
 import { TSESTree } from '@typescript-eslint/types';
-
+import { ESLintUtils } from '@typescript-eslint/utils';
 export { ESLintUtils } from '@typescript-eslint/utils';
 
 // The Rule creator returns a function that is used to create a well-typed ESLint rule
