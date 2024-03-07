@@ -10,15 +10,15 @@
     "rootDir": "lib",
     "sourceMap": true
   },
-  "include": ["./lib/**/*.ts"],
+  "include": ["./src/**/*.ts"],
   "exclude": [
-    "./lib/**/__fixtures__/**/*",
-    "./lib/**/__mocks__/**/*",
-    "./lib/**/__test__/**/*",
-    "./lib/**/__tests__/**/*",
-    "./lib/**/__snapshots__/**/*",
-    "./lib/**/*.test.ts",
-    "./lib/**/*.test-d.ts",
-    "./lib/**/*.test.*.ts"
+    "./src/**/__fixtures__/**/*",
+    "./src/**/__mocks__/**/*",
+    "./src/**/__test__/**/*",
+    "./src/**/__tests__/**/*",
+    "./src/**/__snapshots__/**/*",
+    "./src/**/*.test.ts",
+    "./src/**/*.test-d.ts",
+    "./src/**/*.test.*.ts"
   ]
 }

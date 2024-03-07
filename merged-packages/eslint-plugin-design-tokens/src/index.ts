@@ -11,7 +11,7 @@ type Plugin = {
 
 const plugin: Plugin = {
   meta: {
-    name: '@metamask/eslint-plugin-eslint-plugin-design-tokens',
+    name: '@metamask/eslint-plugin-design-tokens',
     version: '0.0.1',
   },
   rules,

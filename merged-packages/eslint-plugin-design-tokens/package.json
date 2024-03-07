@@ -1,7 +1,7 @@
 {
   "name": "@metamask/eslint-plugin-design-tokens",
   "version": "0.0.0",
-  "description": "An ESLint plugin designed to enforce best practices and consistency for using MetaMask design tokens across various projects.",
+  "description": "An ESLint plugin designed to enforce best practices and consistency for using MetaMask design tokens across various projects",
   "homepage": "https://github.com/MetaMask/eslint-plugin-design-tokens#readme",
   "bugs": {
     "url": "https://github.com/MetaMask/eslint-plugin-design-tokens/issues"
@@ -39,6 +39,10 @@
     "prepack": "./scripts/prepack.sh",
     "test": "jest && jest-it-up",
     "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@typescript-eslint/types": "^7.1.1",
+    "@typescript-eslint/utils": "^7.1.1"
   },
   "devDependencies": {
     "@lavamoat/allow-scripts": "^3.0.0",
@@ -88,9 +92,5 @@
       "@lavamoat/preinstall-always-fail": false,
       "tsup>esbuild": true
     }
-  },
-  "dependencies": {
-    "@typescript-eslint/types": "^7.1.1",
-    "@typescript-eslint/utils": "^7.1.1"
   }
 }
