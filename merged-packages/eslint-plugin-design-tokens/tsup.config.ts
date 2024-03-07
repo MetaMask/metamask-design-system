@@ -3,15 +3,15 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   // The entry to bundle.
   entry: [
-    'src/**/*.ts',
-    '!src/**/__fixtures__/**/*',
-    '!src/**/__mocks__/**/*',
-    '!src/**/__test__/**/*',
-    '!src/**/__tests__/**/*',
-    '!src/**/__snapshots__/**/*',
-    '!src/**/*.test.ts',
-    '!src/**/*.test-d.ts',
-    '!src/**/*.test.*.ts',
+    'lib/**/*.ts',
+    '!lib/**/__fixtures__/**/*',
+    '!lib/**/__mocks__/**/*',
+    '!lib/**/__test__/**/*',
+    '!lib/**/__tests__/**/*',
+    '!lib/**/__snapshots__/**/*',
+    '!lib/**/*.test.ts',
+    '!lib/**/*.test-d.ts',
+    '!lib/**/*.test.*.ts',
   ],
 
   // The output formats. We want to generate both CommonJS and ESM bundles.

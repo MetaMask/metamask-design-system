@@ -1,5 +1,5 @@
 {
-  "entryPoints": ["./src/index.ts"],
+  "entryPoints": ["./lib/index.ts"],
   "excludePrivate": true,
   "hideGenerator": true,
   "out": "docs"
