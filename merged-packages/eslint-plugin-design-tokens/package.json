@@ -1,14 +1,14 @@
 {
-  "name": "@metamask/eslint-plugin-metamask-design-tokens",
+  "name": "@metamask/eslint-plugin-design-tokens",
   "version": "0.0.0",
   "description": "An ESLint plugin designed to enforce best practices and consistency for using MetaMask design tokens across various projects.",
-  "homepage": "https://github.com/MetaMask/eslint-plugin-metamask-design-tokens#readme",
+  "homepage": "https://github.com/MetaMask/eslint-plugin-design-tokens#readme",
   "bugs": {
-    "url": "https://github.com/MetaMask/eslint-plugin-metamask-design-tokens/issues"
+    "url": "https://github.com/MetaMask/eslint-plugin-design-tokens/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/eslint-plugin-metamask-design-tokens.git"
+    "url": "https://github.com/MetaMask/eslint-plugin-design-tokens.git"
   },
   "sideEffects": false,
   "exports": {
@@ -52,6 +52,7 @@
     "@types/jest": "^28.1.6",
     "@types/node": "^16",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/experimental-utils": "^5.62.0",
     "@typescript-eslint/parser": "^5.43.0",
     "@typescript-eslint/rule-tester": "^7.1.1",
     "depcheck": "^1.4.3",
