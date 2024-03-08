@@ -1,49 +1,45 @@
-// eslint-plugin/rules/my-rule.ts
-import { ESLintUtils } from '@typescript-eslint/utils';
+import { Rule } from 'eslint';
 
-// The Rule creator returns a function that is used to create a well-typed ESLint rule
-// The parameter passed into RuleCreator is a URL generator function.
-export const createRule = ESLintUtils.RuleCreator(
-  (name) => `https://my-website.io/eslint/${name}`,
-);
+interface DeprecatedClassnames {
+  [key: string]: string;
+}
 
-export const noDeprecatedTailwindClassnames = createRule({
-  name: 'my-rule',
+const deprecatedClasses: DeprecatedClassnames = {
+  'bg-white':
+    "Use 'bg-default' to align with the design system's color tokens.",
+  'bg-surface-default':
+    "Use 'bg-default' to align with the design system's color tokens.",
+  'text-red-500':
+    "Use 'text-error-default' to align with the design system's color tokens.",
+  'text-critical':
+    "Use 'text-error-default' to align with the design system's color tokens.",
+};
+
+export const noDeprecatedTailwindClassnames: Rule.RuleModule = {
   meta: {
-    docs: {
-      description: 'An example ESLint rule',
-    },
     type: 'suggestion',
-    schema: [],
-    fixable: 'code', // add the `fixable` property to tell ESLint that this problem is fixable
-    hasSuggestions: true, // tell ESLint that this rule has suggestions
-    messages: {
-      'issue:var': 'Prefer using `let` or `const`',
-      'fix:let': 'Replace this `var` declaration with `let`',
-      'fix:const': 'Replace this `var` declaration with `const`',
+    docs: {
+      description: 'No deprecated tailwind classnames allowed',
+      recommended: false,
+      url: null, // URL to the documentation page for this rule
     },
+    schema: [], // Add a schema if the rule has options
   },
-  defaultOptions: [],
-  create: (context) => {
+  create(context) {
     return {
-      VariableDeclaration: (node) => {
-        if (node.kind === 'var') {
-          context.report({
-            node,
-            messageId: 'issue:var',
-            suggest: [
-              {
-                messageId: 'fix:let',
-                fix: (fixer) => fixer.replaceText(node, 'let'),
-              },
-              {
-                messageId: 'fix:const',
-                fix: (fixer) => fixer.replaceText(node, 'const'),
-              },
-            ],
+      Literal(node) {
+        if (typeof node.value === 'string') {
+          const classNames = node.value.split(' ');
+          classNames.forEach((className) => {
+            if (Object.keys(deprecatedClasses).includes(className)) {
+              context.report({
+                node,
+                message: `${className} is a deprecated TailwindCSS class. ${deprecatedClasses[className]}`,
+              });
+            }
           });
         }
       },
     };
   },
-});
+};

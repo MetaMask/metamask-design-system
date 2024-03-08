@@ -1,40 +1,52 @@
-# MetaMask Module Template
+# ESlint Plugin Design Tokens 🪙✨
 
-This TypeScript module is maintained in the style of the MetaMask team.
+[![npm version](https://badge.fury.io/js/@metamask%2Feslint-plugin-design-tokens.svg)](https://npmjs.com/package/@metamask/eslint-plugin-design-tokens)
 
-## Template Instructions
+## `@metamask/eslint-plugin-design-tokens`
 
-Follow these instructions when using this template.
+An ESLint plugin designed to enforce best practices and consistency for using MetaMask design tokens across various projects
 
-- Update the package name, referenced in the following places:
-  - The `name` field of `package.json`
-  - The README title
-  - The README "Usage" section
-- Update the package description
-  - The package description is referenced at the beginning of the README, and in the `description` field of `package.json`.
-- Update the repository URL, referenced in the following places:
-  - `repository` field of `package.json`
-  - The links in the API section of the README
-- If your project has side effects, update the `sideEffects` field of
-  `package.json` to `true`, or an array of file globs that match the files that
-  have side effects.
-- Update the pull request template (`.github/pull_request_template.md`) to remove the `Examples` section that is specific to this template.
-- Update the README "Usage" section, or remove it if it's not needed.
-- Update the CODEOWNERS file to set the appropriate code owners for the repository (typically one or more engineering teams)
-  - Ensure each referenced team has write permission, and that the engineering team still has write permission.
-- Delete these instructions.
+Have a question, suggestion, feedback? Contributors can [create an issue](https://github.com/MetaMask/eslint-plugin-design-tokens/issues/new/choose) or internal folks can post on the [#metamask-design-system](https://consensys.slack.com/archives/C0354T27M5M) Slack channel. We're here to help! 💁
 
 ## Installation
 
-`yarn add @metamask/this-module`
+You'll first need to install [ESLint](https://eslint.org):
 
-or
+```shell
+$ npm install --save-dev eslint
+# or
+$ yarn add --dev eslint
+```
 
-`npm install @metamask/this-module`
+Next, install `eslint-plugin-design-tokens`:
+
+```shell
+$ npm install --save-dev eslint-plugin-design-tokens
+# or
+$ yarn add --dev eslint-plugin-design-tokens
+```
+
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-design-tokens` globally.
 
 ## Usage
 
-_Add examples here_
+Add `@metamask/design-tokens` to the plugins section of your `.eslintrc.js` configuration file. You can omit the `eslint-plugin-` prefix:
+
+```js
+module.exports = {
+  plugins: ['@metamask/design-tokens'],
+};
+```
+
+Then configure the rules you want to use within `rules` property of your `.eslintrc.js`:
+
+```js
+module.exports = {
+  rules: {
+    '@metamask/design-tokens/no-deprecated-portfolio-classnames': 'warn', // or "error" or "off"
+  },
+};
+```
 
 ## API
 
