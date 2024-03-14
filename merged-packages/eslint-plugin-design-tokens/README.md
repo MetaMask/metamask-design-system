@@ -18,15 +18,15 @@ $ npm install --save-dev eslint
 $ yarn add --dev eslint
 ```
 
-Next, install `eslint-plugin-design-tokens`:
+Next, install `@metamask/eslint-plugin-design-tokens`:
 
 ```shell
-$ npm install --save-dev eslint-plugin-design-tokens
+$ npm install --save-dev @metamask/eslint-plugin-design-tokens
 # or
-$ yarn add --dev eslint-plugin-design-tokens
+$ yarn add --dev @metamask/eslint-plugin-design-tokens
 ```
 
-**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-design-tokens` globally.
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `@metamask/eslint-plugin-design-tokens` globally.
 
 ## Usage
 
