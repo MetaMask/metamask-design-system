@@ -1,12 +1,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
+    // specifically disable declarations for the plugin
+    // see reasoning in ./rules.d.ts
+    "declaration": false,
+    "declarationMap": false,
     "inlineSources": true,
     "noEmit": false,
-    "outDir": "dist/types",
+    "outDir": "dist/",
     "rootDir": "src",
     "sourceMap": true
   },

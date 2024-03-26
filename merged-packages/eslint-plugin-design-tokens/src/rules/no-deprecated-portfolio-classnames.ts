@@ -1,8 +1,8 @@
-import { Rule } from 'eslint';
+import type { Rule } from 'eslint';
 
-interface DeprecatedClassnames {
+type DeprecatedClassnames = {
   [key: string]: string;
-}
+};
 
 const deprecatedClasses: DeprecatedClassnames = {
   'bg-white':
@@ -32,9 +32,12 @@ export const noDeprecatedTailwindClassnames: Rule.RuleModule = {
           const classNames = node.value.split(' ');
           classNames.forEach((className) => {
             if (Object.keys(deprecatedClasses).includes(className)) {
+              // Using nullish coalescing operator to ensure a string output
               context.report({
                 node,
-                message: `${className} is a deprecated TailwindCSS class. ${deprecatedClasses[className]}`,
+                message: `${className} is a deprecated TailwindCSS class. ${
+                  deprecatedClasses[className] ?? 'No alternative available.'
+                }`,
               });
             }
           });
