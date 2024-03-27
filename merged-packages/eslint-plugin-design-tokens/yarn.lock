@@ -1114,7 +1114,6 @@ __metadata:
     "@types/jest": ^28.1.6
     "@types/node": ^16
     "@typescript-eslint/eslint-plugin": ^5.43.0
-    "@typescript-eslint/experimental-utils": ^5.62.0
     "@typescript-eslint/parser": ^5.43.0
     depcheck: ^1.4.3
     eslint: ^8.57.0
@@ -1517,17 +1516,6 @@ __metadata:
     typescript:
       optional: true
   checksum: fc104b389c768f9fa7d45a48c86d5c1ad522c1d0512943e782a56b1e3096b2cbcc1eea3fcc590647bf0658eef61aac35120a9c6daf979bf629ad2956deb516a1
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/experimental-utils@npm:^5.62.0":
-  version: 5.62.0
-  resolution: "@typescript-eslint/experimental-utils@npm:5.62.0"
-  dependencies:
-    "@typescript-eslint/utils": 5.62.0
-  peerDependencies:
-    eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
-  checksum: ce55d9f74eac5cb94d66d5db9ead9a5d734f4301519fb5956a57f4b405a5318a115b0316195a3c039e0111489138680411709cb769085d71e1e1db1376ea0949
   languageName: node
   linkType: hard
 
