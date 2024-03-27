@@ -86,8 +86,5 @@
       "@lavamoat/preinstall-always-fail": false,
       "tsup>esbuild": true
     }
-  },
-  "resolutions": {
-    "metamask-portfolio": "portal:/Users/georgemarshall/Sites/metamask-portfolio"
   }
 }
