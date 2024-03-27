@@ -1,7 +1,5 @@
-import { rules } from './rules';
+import { noDeprecatedTailwindClassnames } from './rules';
 
-const plugin = {
-  rules,
+export const rules = {
+  'no-deprecated-portfolio-classnames': noDeprecatedTailwindClassnames,
 };
-
-export default plugin;
