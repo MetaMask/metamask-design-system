@@ -21,7 +21,7 @@ export const noDeprecatedTailwindClassnames: Rule.RuleModule = {
     docs: {
       description: 'No deprecated tailwind classnames allowed',
       recommended: false,
-      url: 'https://github.com/MetaMask/eslint-plugin-design-tokens?tab=readme-ov-file#metamask-module-template', // URL to the documentation page for this rule
+      url: 'https://github.com/MetaMask/eslint-plugin-design-tokens?tab=readme-ov-file#eslint-plugin-design-tokens-', // URL to the documentation page for this rule
     },
     schema: [], // Add a schema if the rule has options
   },
