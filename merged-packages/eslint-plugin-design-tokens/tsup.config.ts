@@ -20,7 +20,7 @@ export default defineConfig({
 
   // Generate sourcemaps as separate files.
   // https://tsup.egoist.dev/#generate-sourcemap-file
-  sourcemap: true,
+  sourcemap: false, // not required for eslint-plugin
 
   // Clean the dist folder before bundling.
   clean: true,
@@ -28,7 +28,7 @@ export default defineConfig({
   // Enables shimming of `__dirname` and `import.meta.url`, so that they work
   // in both CommonJS and ESM.
   // https://tsup.egoist.dev/#inject-cjs-and-esm-shims
-  shims: true,
+  shims: false, // not required for eslint-plugin
 
   // Hide unnecessary logs from the console. Warnings and errors will still be
   // shown.
@@ -36,5 +36,5 @@ export default defineConfig({
 
   // Split the output into chunks. This is useful for tree-shaking.
   // https://tsup.egoist.dev/#code-splitting
-  splitting: true,
+  splitting: false, // not required for eslint-plugin
 });

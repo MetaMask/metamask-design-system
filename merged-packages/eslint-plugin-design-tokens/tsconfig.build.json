@@ -5,7 +5,7 @@
     // see reasoning in ./rules.d.ts
     "declaration": false,
     "declarationMap": false,
-    "inlineSources": true,
+    "inlineSources": false,
     "noEmit": false,
     "outDir": "dist/",
     "rootDir": "src",
