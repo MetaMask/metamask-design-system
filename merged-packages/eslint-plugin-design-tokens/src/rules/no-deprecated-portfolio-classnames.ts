@@ -1,42 +1,65 @@
 import type { Rule } from 'eslint';
 
+/**
+ * Type definition for deprecated class names.
+ * Maps deprecated TailwindCSS class names to suggestion messages.
+ */
 type DeprecatedClassnames = {
   [key: string]: string;
 };
 
-const deprecatedClasses: DeprecatedClassnames = {
-  'bg-white':
-    "Use 'bg-default' to align with the design system's color tokens.",
-  'bg-surface-default':
-    "Use 'bg-default' to align with the design system's color tokens.",
-  'text-red-500':
-    "Use 'text-error-default' to align with the design system's color tokens.",
-  'text-critical':
-    "Use 'text-error-default' to align with the design system's color tokens.",
-};
-
+/**
+ * The main rule module for detecting deprecated TailwindCSS class names.
+ * This ESLint rule checks for the usage of deprecated TailwindCSS class names
+ * and suggests updated alternatives based on a configurable list.
+ */
 export const noDeprecatedTailwindClassnames: Rule.RuleModule = {
   meta: {
     type: 'suggestion',
     docs: {
       description: 'No deprecated tailwind classnames allowed',
       recommended: false,
-      url: 'https://github.com/MetaMask/eslint-plugin-design-tokens?tab=readme-ov-file#eslint-plugin-design-tokens-', // URL to the documentation page for this rule
+      // Make sure to replace the URL with the actual location of your rule's documentation
+      url: 'https://github.com/MetaMask/eslint-plugin-design-tokens?tab=readme-ov-file#eslint-plugin-design-tokens-',
     },
-    schema: [], // Add a schema if the rule has options
+    // Define the schema to accept an object of deprecated classnames
+    schema: [
+      {
+        type: 'object',
+        additionalProperties: {
+          type: 'string',
+        },
+      },
+    ],
   },
+  /**
+   * The `create` method that gets executed by ESLint when linting files.
+   * It checks for deprecated classnames and reports them.
+   *
+   * @param context - The ESLint rule context providing interfaces to report node information.
+   * @returns An object with methods targeting specific nodes in the AST.
+   */
   create(context) {
+    // Access the first option as the deprecatedClassnames object
+    const deprecatedClassnames: DeprecatedClassnames = context.options[0] || {};
+
     return {
+      /**
+       * Listener for Literal nodes in the AST. It splits class names in string literals
+       * and checks each against the list of deprecated class names.
+       *
+       * @param node - The AST node being visited.
+       */
       Literal(node) {
         if (typeof node.value === 'string') {
           const classNames = node.value.split(' ');
           classNames.forEach((className) => {
-            if (Object.keys(deprecatedClasses).includes(className)) {
-              // Using nullish coalescing operator to ensure a string output
+            if (Object.keys(deprecatedClassnames).includes(className)) {
+              // Report the deprecated class name usage with a suggestion message.
               context.report({
                 node,
                 message: `${className} is a deprecated TailwindCSS class. ${
-                  deprecatedClasses[className] ?? 'No alternative available.'
+                  deprecatedClassnames[className] ?? 'No alternative available.'
                 }`,
               });
             }
