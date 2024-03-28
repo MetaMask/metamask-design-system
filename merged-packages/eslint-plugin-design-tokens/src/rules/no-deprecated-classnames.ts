@@ -13,11 +13,11 @@ type DeprecatedClassnames = {
  * This ESLint rule checks for the usage of deprecated TailwindCSS class names
  * and suggests updated alternatives based on a configurable list.
  */
-export const noDeprecatedTailwindClassnames: Rule.RuleModule = {
+export const noDeprecatedClassnames: Rule.RuleModule = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'No deprecated tailwind classnames allowed',
+      description: 'No deprecated classnames allowed',
       recommended: false,
       // Make sure to replace the URL with the actual location of your rule's documentation
       url: 'https://github.com/MetaMask/eslint-plugin-design-tokens?tab=readme-ov-file#eslint-plugin-design-tokens-',

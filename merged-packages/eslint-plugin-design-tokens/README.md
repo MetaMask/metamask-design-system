@@ -43,17 +43,18 @@ Then configure the rules you want to use within `rules` property of your `.eslin
 ```js
 module.exports = {
   rules: {
-    '@metamask/design-tokens/no-deprecated-portfolio-classnames': 'warn', // or "error" or "off"
+    '@metamask/design-tokens/no-deprecated-classnames': 'warn', // or "error" or "off"
   },
 };
 ```
 
-## API
+## Supported Rules
 
-See our documentation:
+> Remember that all rules from this plugin are prefixed by `"@metamask/design-tokens/"`
 
-- [Latest published API documentation](https://metamask.github.io/eslint-plugin-design-tokens/latest/)
-- [Latest development API documentation](https://metamask.github.io/eslint-plugin-design-tokens/staging/)
+| Name                                                                              | Description                                                                       |
+| :-------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| [no-deprecated-classnames](docs/rules/no-deprecated-classnames.md)                | Enforce usage of up-to-date TailwindCSS class names, disallowing deprecated ones. |
 
 ## Contributing
 

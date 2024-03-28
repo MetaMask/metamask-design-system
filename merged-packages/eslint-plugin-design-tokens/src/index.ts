@@ -1,5 +1,5 @@
-import { noDeprecatedTailwindClassnames } from './rules';
+import { noDeprecatedClassnames } from './rules';
 
 export const rules = {
-  'no-deprecated-portfolio-classnames': noDeprecatedTailwindClassnames,
+  'no-deprecated-classnames': noDeprecatedClassnames,
 };
