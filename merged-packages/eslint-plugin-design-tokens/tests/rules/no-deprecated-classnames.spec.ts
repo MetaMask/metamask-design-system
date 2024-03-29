@@ -1,7 +1,9 @@
 import { RuleTester } from 'eslint';
+
 import { noDeprecatedClassnames } from '../../src/rules/no-deprecated-classnames';
 
 const ruleTester = new RuleTester({
+  // eslint-disable-next-line no-restricted-globals
   parser: require.resolve('@typescript-eslint/parser'),
   parserOptions: {
     ecmaVersion: 2020,
