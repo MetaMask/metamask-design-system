@@ -7,8 +7,6 @@ on:
         required: true
       SLACK_WEBHOOK_URL:
         required: true
-      PUBLISH_DOCS_TOKEN:
-        required: true
 
 jobs:
   publish-release:
@@ -97,25 +95,3 @@ jobs:
       - id: get-release-version
         shell: bash
         run: ./scripts/get.sh ".version" "RELEASE_VERSION"
-
-  publish-release-to-gh-pages:
-    needs: get-release-version
-    name: Publish docs to `${{ needs.get-release-version.outputs.RELEASE_VERSION }}` directory of `gh-pages` branch
-    permissions:
-      contents: write
-    uses: ./.github/workflows/publish-docs.yml
-    with:
-      destination_dir: ${{ needs.get-release-version.outputs.RELEASE_VERSION }}
-    secrets:
-      PUBLISH_DOCS_TOKEN: ${{ secrets.PUBLISH_DOCS_TOKEN }}
-
-  publish-release-to-latest-gh-pages:
-    needs: publish-npm
-    name: Publish docs to `latest` directory of `gh-pages` branch
-    permissions:
-      contents: write
-    uses: ./.github/workflows/publish-docs.yml
-    with:
-      destination_dir: latest
-    secrets:
-      PUBLISH_DOCS_TOKEN: ${{ secrets.PUBLISH_DOCS_TOKEN }}

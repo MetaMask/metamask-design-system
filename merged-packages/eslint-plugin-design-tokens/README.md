@@ -4,7 +4,7 @@
 
 ## `@metamask/eslint-plugin-design-tokens`
 
-An ESLint plugin designed to enforce best practices and consistency for using MetaMask design tokens across various projects
+An ESLint plugin designed to enforce best practices and consistency for using MetaMask [design tokens](https://github.com/MetaMask/design-tokens) across various projects
 
 Have a question, suggestion, feedback? Contributors can [create an issue](https://github.com/MetaMask/eslint-plugin-design-tokens/issues/new/choose) or internal folks can post on the [#metamask-design-system](https://consensys.slack.com/archives/C0354T27M5M) Slack channel. We're here to help! 💁
 
@@ -30,30 +30,39 @@ $ yarn add --dev @metamask/eslint-plugin-design-tokens
 
 ## Usage
 
-Add `@metamask/design-tokens` to the plugins section of your `.eslintrc.js` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `@metamask/design-tokens` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
-```js
-module.exports = {
-  plugins: ['@metamask/design-tokens'],
-};
+```json
+{
+  "plugins": ["@metamask/design-tokens"]
+}
 ```
 
-Then configure the rules you want to use within `rules` property of your `.eslintrc.js`:
+Then configure the rules you want to use within `rules` property of your `.eslintrc`:
 
-```js
-module.exports = {
-  rules: {
-    '@metamask/design-tokens/no-deprecated-portfolio-classnames': 'warn', // or "error" or "off"
-  },
-};
+```json
+{
+  "rules": {
+    "@metamask/design-tokens/no-deprecated-classnames": [
+      "warn",
+      {
+        "bg-white": "Use 'bg-default' to align with the design system's color tokens.",
+        "bg-surface-default": "Use 'bg-default' to align with the design system's color tokens.",
+        "text-red-500": "Use 'text-error-default' to align with the design system's color tokens.",
+        "text-critical": "Use 'text-error-default' to align with the design system's color tokens."
+      }
+    ]
+  }
+}
 ```
 
-## API
+## Supported Rules
 
-See our documentation:
+> Remember that all rules from this plugin are prefixed by `"@metamask/design-tokens/"`
 
-- [Latest published API documentation](https://metamask.github.io/eslint-plugin-design-tokens/latest/)
-- [Latest development API documentation](https://metamask.github.io/eslint-plugin-design-tokens/staging/)
+| Name                                                                              | Description                                                                       |
+| :-------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| [no-deprecated-classnames](docs/rules/no-deprecated-classnames.md)                | Enforce usage of up-to-date TailwindCSS class names, disallowing deprecated ones. |
 
 ## Contributing
 

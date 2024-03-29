@@ -1,1 +1,1 @@
-export { noDeprecatedTailwindClassnames } from './no-deprecated-portfolio-classnames';
+export { noDeprecatedClassnames } from './no-deprecated-classnames';

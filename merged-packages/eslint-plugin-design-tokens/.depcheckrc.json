@@ -6,7 +6,6 @@
     "@types/*",
     "prettier-plugin-packagejson",
     "ts-node",
-    "typedoc",
     "@yarnpkg/core",
     "@yarnpkg/cli",
     "clipanion",
