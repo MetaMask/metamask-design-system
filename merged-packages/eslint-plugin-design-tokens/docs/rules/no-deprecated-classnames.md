@@ -6,7 +6,7 @@ Ensure that only the current, recommended class names are used in your project, 
 
 ## Rule Details
 
-This rule is designed to help maintain a consistent and modern codebase by warning against the use of deprecated class names. It encourages the use of updated class names as specified in a project's design tokens or TailwindCSS configuration.
+This rule is designed to help maintain a consistent and modern codebase by warning against the use of deprecated class names. It encourages the use of updated class names as specified in a project's [design tokens](https://github.com/MetaMask/design-tokens) or TailwindCSS configuration.
 
 Examples of **incorrect** code for this rule:
 
@@ -44,4 +44,4 @@ This rule accepts an object option, where the keys are the deprecated class name
 
 ## When Not To Use It
 
-If your project does not use TailwindCSS, or if maintaining a strict alignment with design tokens and updated class names is not a priority, you might choose not to enable this rule.
+If your project does not use TailwindCSS, or if maintaining a strict alignment with [design tokens](https://github.com/MetaMask/design-tokens) and updated class names is not a priority, you might choose not to enable this rule.
