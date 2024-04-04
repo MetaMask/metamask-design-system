@@ -20,7 +20,7 @@ export const noDeprecatedClassnames: Rule.RuleModule = {
       description: 'No deprecated classnames allowed',
       recommended: false,
       // Make sure to replace the URL with the actual location of your rule's documentation
-      url: 'https://github.com/MetaMask/eslint-plugin-design-tokens?tab=readme-ov-file#eslint-plugin-design-tokens-',
+      url: 'https://github.com/MetaMask/eslint-plugin-design-tokens/blob/main/docs/rules/no-deprecated-classnames.md',
     },
     // Define the schema to accept an object of deprecated classnames
     schema: [
