@@ -1,4 +1,4 @@
-# Prevent the use of static hex color values (`@metamask/design-tokens/color-no-hex`)
+# Prevent the use of hex color values (`@metamask/design-tokens/color-no-hex`)
 
 This rule discourages the direct use of hexadecimal color codes in your styles, promoting the adoption of a centralized approach to color management via [design tokens](https://github.com/MetaMask/design-tokens). By enforcing the use of [design tokens](https://github.com/MetaMask/design-tokens) for colors, this rule aids in ensuring consistency, design system alignment, scalability, and ease of maintenance across your project's UI.
 

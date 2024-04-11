@@ -63,6 +63,7 @@ Then configure the rules you want to use within `rules` property of your `.eslin
 | Name                                                                              | Description                                                                       |
 | :-------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
 | [no-deprecated-classnames](docs/rules/no-deprecated-classnames.md)                | Enforce usage of up-to-date TailwindCSS class names, disallowing deprecated ones. |
+| [color-no-hex](docs/rules/color-no-hex.md)                                        | Prevent the use of hex color values.                                              |
 
 ## Contributing
 
