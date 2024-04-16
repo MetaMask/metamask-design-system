@@ -60,10 +60,11 @@ Then configure the rules you want to use within `rules` property of your `.eslin
 
 > Remember that all rules from this plugin are prefixed by `"@metamask/design-tokens/"`
 
-| Name                                                                              | Description                                                                       |
-| :-------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
-| [no-deprecated-classnames](docs/rules/no-deprecated-classnames.md)                | Enforce usage of up-to-date TailwindCSS class names, disallowing deprecated ones. |
-| [color-no-hex](docs/rules/color-no-hex.md)                                        | Prevent the use of hex color values.                                              |
+| Name                                                                              | Description                                                                        |
+| :-------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
+| [no-deprecated-classnames](docs/rules/no-deprecated-classnames.md)                | Enforce usage of up-to-date TailwindCSS class names, disallowing deprecated ones.  |
+| [color-no-hex](docs/rules/color-no-hex.md)                                        | Prevent the use of hex color values.                                               |
+| [prefer-theme-color-classnames](docs/rules/prefer-theme-color-classnames.md)      | Encourage the use of theme color class names instead of literal color class names. |
 
 ## Contributing
 

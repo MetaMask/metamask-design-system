@@ -1,6 +1,6 @@
 import { RuleTester } from 'eslint';
 
-import { colorNoHex } from '../../src/rules/color-no-hex'; // Adjust this import path to where your rule is actually defined
+import { colorNoHex } from '../../src/rules/color-no-hex';
 
 const ruleTester = new RuleTester({
   // eslint-disable-next-line no-restricted-globals

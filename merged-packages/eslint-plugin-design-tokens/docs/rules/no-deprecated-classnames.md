@@ -27,7 +27,7 @@ Examples of **correct** code for this rule:
 
 This rule accepts an object option, where the keys are the deprecated class names and the values are messages suggesting the updated class names to use instead. This allows teams to customize the rule based on their specific design system and TailwindCSS configuration.
 
-## Example
+## Example Configuration
 
 ```json
 {
