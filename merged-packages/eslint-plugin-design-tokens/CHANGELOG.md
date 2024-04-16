@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0]
+
+### Added
+
+- Adding `prefer-theme-color-classnames` rule ([#22](https://github.com/MetaMask/eslint-plugin-design-tokens/pull/22))
+- Updating PR template to align better with mobile and extension ([#19](https://github.com/MetaMask/eslint-plugin-design-tokens/pull/19))
+- Updating readme rule table with color-no-hex rule ([#18](https://github.com/MetaMask/eslint-plugin-design-tokens/pull/18))
+
 ## [1.0.0]
 
 ### Added
@@ -19,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[Unreleased]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v0.1.0...v1.0.0
 [0.1.0]: https://github.com/MetaMask/eslint-plugin-design-tokens/releases/tag/v0.1.0
