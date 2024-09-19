@@ -1,8 +1,8 @@
 # MetaMask Design System
 
-This TypeScript module is maintained in the style of the MetaMask team.
+WORK IN PROGRESS: This TypeScript module is maintained in the style of the MetaMask team.
 
-## Template Instructions
+## Instructions
 
 Follow these instructions when using this template.
 
@@ -24,11 +24,15 @@ Follow these instructions when using this template.
   - [] Ensure each referenced team has write permission, and that the engineering team still has write permission.
 - [] Delete these instructions.
 
-## Modules
+## Installation
 
 This repository contains the following packages:
 
 `yarn add @metamask/metamask-design-system/xyz`
+
+or
+
+`npm install @metamask/metamask-design-system/xyz`
 
 ## API
 
