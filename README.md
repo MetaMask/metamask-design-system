@@ -1,6 +1,6 @@
 # MetaMask Design System
 
-WORK IN PROGRESS: This TypeScript module is maintained in the style of the MetaMask team.
+The MetaMask Design System contains shared UI components, design tokens, and tooling to ensure consistency and scalability across MetaMask web and mobile products. (WORK IN PROGRESS)
 
 ## Instructions
 
