@@ -1,4 +1,6 @@
 # Lines starting with '#' are comments.
 # Each line is a file pattern followed by one or more owners.
 
-*                                    @MetaMask/engineering
+# Design System to own design system library
+# Slack handle: @metamask-design-system-team | Slack channel: #metamask-design-system
+*      @MetaMask/design-system-engineers
