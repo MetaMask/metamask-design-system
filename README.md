@@ -1,6 +1,6 @@
 # MetaMask Design System
 
-The MetaMask Design System contains shared UI components, design tokens, and tooling to ensure consistency and scalability across MetaMask web and mobile products. (WORK IN PROGRESS)
+The MetaMask Design System monorepo
 
 ## Instructions
 
