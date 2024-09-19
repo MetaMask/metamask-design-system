@@ -38,8 +38,8 @@ or
 
 See our documentation:
 
-- [Latest published API documentation](https://metamask.github.io/metamask-module-template/latest/)
-- [Latest development API documentation](https://metamask.github.io/metamask-module-template/staging/)
+- [Latest published API documentation](https://metamask.github.io/metamask-design-system/latest/)
+- [Latest development API documentation](https://metamask.github.io/metamask-design-system/staging/)
 
 ## Contributing
 
