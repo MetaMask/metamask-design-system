@@ -10,7 +10,6 @@
     "type": "git",
     "url": "https://github.com/MetaMask/metamask-design-system.git"
   },
-  "sideEffects": false,
   "exports": {
     ".": {
       "import": {
