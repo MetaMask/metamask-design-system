@@ -140,7 +140,7 @@ function expectWorkspaceDependencies(workspace) {
 async function expectReadme(workspace, workspaceName) {
   const readme = await getWorkspaceFile(workspace, 'README.md');
   if (
-    workspaceName !== 'metamask-module-template' &&
+    workspaceName !== 'metamask-design-system' &&
     readme.includes('## Template Instructions')
   ) {
     workspace.error(
@@ -173,13 +173,13 @@ async function expectReadme(workspace, workspaceName) {
  * @returns {Promise<void>}
  */
 async function expectPullRequestTemplate(workspace, workspaceName) {
-  if (workspaceName === 'metamask-module-template') {
+  if (workspaceName === 'metamask-design-system') {
     return;
   }
 
   const pullRequestTemplate = await getWorkspaceFile(
     workspace,
-    '.github/PULL_REQUEST_TEMPLATE.md',
+    '.github/pull_request_template.md',
   );
 
   if (!pullRequestTemplate) {

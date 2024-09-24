@@ -1002,9 +1002,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/metamask-module-template@workspace:.":
+"@metamask/metamask-design-system@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@metamask/metamask-module-template@workspace:."
+  resolution: "@metamask/metamask-design-system@workspace:."
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.3"
     "@lavamoat/allow-scripts": "npm:^3.0.4"

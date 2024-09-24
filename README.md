@@ -1,8 +1,8 @@
 # MetaMask Design System
 
-This TypeScript module is maintained in the style of the MetaMask team.
+The MetaMask Design System monorepo
 
-## Template Instructions
+## Instructions
 
 Follow these instructions when using this template.
 
@@ -11,17 +11,17 @@ Follow these instructions when using this template.
   - [x] The README title
   - [x] The README "Usage" section
 - Update the package description
-  - [] The package description is referenced at the beginning of the README, and in the `description` field of `package.json`.
-- [] Update the repository URL, referenced in the following places:
+  - [x] The package description is referenced at the beginning of the README, and in the `description` field of `package.json`.
+- [x] Update the repository URL, referenced in the following places:
   - `repository` field of `package.json`
   - The links in the API section of the README
-- [] If your project has side effects, update the `sideEffects` field of
-  `package.json` to `true`, or an array of file globs that match the files that
-  have side effects.
-- [] Update the pull request template (`.github/pull_request_template.md`) to remove the `Examples` section that is specific to this template.
+- [x] If your project has side effects, update the `sideEffects` field of
+      `package.json` to `true`, or an array of file globs that match the files that
+      have side effects.
+- [x] Update the pull request template (`.github/pull_request_template.md`) to remove the `Examples` section that is specific to this template.
 - [] Update the README "Usage" section, or remove it if it's not needed.
-- [] Update the CODEOWNERS file to set the appropriate code owners for the repository (typically one or more engineering teams)
-  - [] Ensure each referenced team has write permission, and that the engineering team still has write permission.
+- [x] Update the CODEOWNERS file to set the appropriate code owners for the repository (typically one or more engineering teams)
+  - [x] Ensure each referenced team has write permission, and that the engineering team still has write permission.
 - [] Delete these instructions.
 
 ## Modules
@@ -30,12 +30,16 @@ This repository contains the following packages:
 
 `yarn add @metamask/metamask-design-system/xyz`
 
+or
+
+`npm install @metamask/metamask-design-system/xyz`
+
 ## API
 
 See our documentation:
 
-- [Latest published API documentation](https://metamask.github.io/metamask-module-template/latest/)
-- [Latest development API documentation](https://metamask.github.io/metamask-module-template/staging/)
+- [Latest published API documentation](https://metamask.github.io/metamask-design-system/latest/)
+- [Latest development API documentation](https://metamask.github.io/metamask-design-system/staging/)
 
 ## Contributing
 

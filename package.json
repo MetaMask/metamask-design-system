@@ -1,7 +1,7 @@
 {
   "name": "@metamask/metamask-design-system",
   "version": "0.0.0",
-  "description": "The MetaMask Node module template",
+  "description": "The MetaMask Design System monorepo",
   "homepage": "https://github.com/MetaMask/metamask-design-system#readme",
   "bugs": {
     "url": "https://github.com/MetaMask/metamask-design-system/issues"
@@ -10,7 +10,6 @@
     "type": "git",
     "url": "https://github.com/MetaMask/metamask-design-system.git"
   },
-  "sideEffects": false,
   "exports": {
     ".": {
       "import": {
