@@ -24,7 +24,7 @@ Follow these instructions when using this template.
   - [x] Ensure each referenced team has write permission, and that the engineering team still has write permission.
 - [] Delete these instructions.
 
-## Modules
+## Installation
 
 This repository contains the following packages:
 
