@@ -1,6 +1,9 @@
 {
   "name": "storybook-react",
-  "packageManager": "yarn@4.1.1",
+  "scripts": {
+    "build-storybook": "storybook build",
+    "storybook": "storybook dev -p 6006"
+  },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.9.0",
     "@lavamoat/allow-scripts": "^3.2.1",
@@ -17,14 +20,11 @@
     "storybook": "^8.3.3",
     "vite": "^5.4.7"
   },
+  "packageManager": "yarn@4.1.1",
   "lavamoat": {
     "allowScripts": {
       "@lavamoat/allow-scripts>@lavamoat/preinstall-always-fail": false,
       "storybook>@storybook/core>esbuild": false
     }
-  },
-  "scripts": {
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
   }
 }

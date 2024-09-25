@@ -101,5 +101,7 @@
       "babel-runtime>core-js": false,
       "simple-git-hooks": false
     }
-  }
+  },
+  "npmClient": "yarn",
+  "useWorkspaces": true
 }
