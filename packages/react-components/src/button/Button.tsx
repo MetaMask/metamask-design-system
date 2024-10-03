@@ -9,10 +9,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => (
   <button
-    className={twMerge(
-      'bg-primary-default text-primary-inverse px-4 py-2 rounded',
-      className,
-    )}
+    className={twMerge('bg-blue-800 text-white px-4 py-2 rounded', className)}
     {...props}
   >
     {children}
