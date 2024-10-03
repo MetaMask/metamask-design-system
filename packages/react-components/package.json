@@ -1,18 +1,18 @@
 {
-  "name": "@metamask/ui",
+  "name": "@metamask/design-system-react-components",
   "version": "0.0.0",
   "description": "Reusable UI components for MetaMask",
   "keywords": [
     "MetaMask",
     "Ethereum"
   ],
-  "homepage": "https://github.com/georgewrmarshall/shared-ui-monorepo/tree/main/packages/ui#readme",
+  "homepage": "https://github.com/MetaMask/metamask-design-system/tree/main/packages/ui#readme",
   "bugs": {
-    "url": "https://github.com/georgewrmarshall/shared-ui-monorepo/issues"
+    "url": "https://github.com/MetaMask/metamask-design-system/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/georgewrmarshall/shared-ui-monorepo.git"
+    "url": "https://github.com/MetaMask/metamask-design-system.git"
   },
   "license": "MIT",
   "sideEffects": false,
@@ -50,6 +50,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@lavamoat/allow-scripts": "^3.2.1",
     "@metamask/auto-changelog": "^3.4.4",
     "@types/jest": "^27.4.1",
     "@types/react": "^18.3.3",
@@ -67,5 +68,11 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "@lavamoat/allow-scripts>@lavamoat/preinstall-always-fail": false,
+      "tailwind>crypto2>babel-runtime>core-js": false
+    }
   }
 }

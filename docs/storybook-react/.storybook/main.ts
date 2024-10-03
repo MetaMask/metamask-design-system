@@ -29,6 +29,7 @@ const config: StorybookConfig = {
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
+        '@metamask/design-tokens': path.resolve(__dirname, '../../../node_modules/@metamask/design-tokens'),
         '@components': path.resolve(__dirname, '../packages/react-components/src'),
       };
     }

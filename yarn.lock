@@ -1839,6 +1839,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 "@metamask/auto-changelog@npm:~3.3.0":
   version: 3.3.0
   resolution: "@metamask/auto-changelog@npm:3.3.0"
@@ -1875,6 +1876,33 @@ __metadata:
   checksum: 10/7a0b0044d64d9446bfb5de17311d06f6f52544c79367d4bb3963c060b43e9d6dde5215ef555d590a37175e1a6aa9313d2042eb06faed4c8eb73c4d17593ab47e
   languageName: node
   linkType: hard
+=======
+"@metamask/design-system-react-components@workspace:packages/react-components":
+  version: 0.0.0-use.local
+  resolution: "@metamask/design-system-react-components@workspace:packages/react-components"
+  dependencies:
+    "@lavamoat/allow-scripts": "npm:^3.2.1"
+    "@metamask/auto-changelog": "npm:^3.4.4"
+    "@metamask/design-tokens": "npm:^4.0.0"
+    "@types/jest": "npm:^27.4.1"
+    "@types/react": "npm:^18.3.3"
+    "@types/react-dom": "npm:^18"
+    class-variance-authority: "npm:^0.7.0"
+    clsx: "npm:^2.1.1"
+    deepmerge: "npm:^4.2.2"
+    jest: "npm:^27.5.1"
+    react: "npm:^18.3.1"
+    react-dom: "npm:^18.3.1"
+    tailwind: "npm:^4.0.0"
+    tailwind-merge: "npm:^2.5.2"
+    tailwindcss-animate: "npm:^1.0.7"
+    ts-jest: "npm:^27.1.4"
+    typedoc: "npm:^0.24.8"
+    typedoc-plugin-missing-exports: "npm:^2.0.0"
+    typescript: "npm:~5.0.4"
+  languageName: unknown
+  linkType: soft
+>>>>>>> adbf9bd (feat: design tokens working)
 
 "@metamask/design-tokens@npm:^4.0.0":
   version: 4.0.0
@@ -1982,6 +2010,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+<<<<<<< HEAD
 "@metamask/metamask-module-template@workspace:packages/metamask-module-template":
   version: 0.0.0-use.local
   resolution: "@metamask/metamask-module-template@workspace:packages/metamask-module-template"
@@ -2062,6 +2091,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> adbf9bd (feat: design tokens working)
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -11762,6 +11793,7 @@ __metadata:
     "@chromatic-com/storybook": "npm:^1.9.0"
     "@eslint/js": "npm:^9.9.0"
     "@lavamoat/allow-scripts": "npm:^3.2.1"
+    "@metamask/design-tokens": "npm:^4.0.0"
     "@storybook/addon-essentials": "npm:^8.3.4"
     "@storybook/addon-interactions": "npm:^8.3.4"
     "@storybook/addon-links": "npm:^8.3.4"

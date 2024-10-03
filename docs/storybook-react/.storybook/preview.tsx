@@ -1,4 +1,5 @@
 import React from 'react';
+import '@metamask/design-tokens/dist/styles.css';
 
 import { Preview } from '@storybook/react';
 
@@ -14,7 +15,7 @@ export const globalTypes = {
         { value: 'both', right: '🌞🌚', title: 'Both' },
       ],
       dynamicTitle: true,
-      icon: 'circlehollow',
+      icon: 'paintbrush',
     },
   },
 };
@@ -22,14 +23,13 @@ export const globalTypes = {
 function withColorScheme(Story, context) {
   const { colorScheme } = context.globals;
 
-  function Flex(props) {
+  function Wrapper(props) {
     return (
       <div
         {...props}
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '2rem 0 2rem',
+          padding: '1rem',
+          backgroundColor: 'var(--color-background-default)',
         }}
       />
     );
@@ -37,29 +37,29 @@ function withColorScheme(Story, context) {
 
   if (colorScheme === 'light') {
     return (
-      <Flex className="color-scheme--light">
+      <Wrapper data-theme="light">
         <Story {...context} />
-      </Flex>
+      </Wrapper>
     );
   }
 
   if (colorScheme === 'dark') {
     return (
-      <Flex className="color-scheme--dark">
+      <Wrapper data-theme="dark">
         <Story {...context} />
-      </Flex>
+      </Wrapper>
     );
   }
 
   return (
-    <div>
-      <Flex className="color-scheme--light">
+    <>
+      <Wrapper data-theme="light">
         <Story {...context} />
-      </Flex>
-      <Flex className="color-scheme--dark">
+      </Wrapper>
+      <Wrapper data-theme="dark">
         <Story {...context} />
-      </Flex>
-    </div>
+      </Wrapper>
+    </>
   );
 }
 
