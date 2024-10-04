@@ -11,8 +11,11 @@ function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, 'package.json')));
 }
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-    '../../../packages/react-components/src/**/*.stories.@(js|jsx|ts|tsx)',],
+  stories: [
+    '../src/**/*.mdx',
+    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../../../packages/react-components/src/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
 
   addons: [
     getAbsolutePath('@storybook/addon-onboarding'),
@@ -31,8 +34,14 @@ const config: StorybookConfig = {
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
-        '@metamask/design-tokens': path.resolve(__dirname, '../../../node_modules/@metamask/design-tokens'),
-        '@components': path.resolve(__dirname, '../packages/react-components/src'),
+        '@metamask/design-tokens': path.resolve(
+          __dirname,
+          '../../../node_modules/@metamask/design-tokens',
+        ),
+        '@components': path.resolve(
+          __dirname,
+          '../packages/react-components/src',
+        ),
       };
     }
     return config;
