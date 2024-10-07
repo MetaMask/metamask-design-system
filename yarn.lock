@@ -1111,9 +1111,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/metamask-monorepo-template@workspace:.":
+"@metamask/metamask-design-system@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@metamask/metamask-monorepo-template@workspace:."
+  resolution: "@metamask/metamask-design-system@workspace:."
   dependencies:
     "@babel/core": "npm:^7.23.5"
     "@babel/plugin-transform-modules-commonjs": "npm:^7.23.3"

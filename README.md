@@ -1,17 +1,6 @@
-# MetaMask Monorepo Template
+# MetaMask Design System
 
-MetaMask Monorepo Template
-
-## Template Instructions
-
-Follow these instructions when using this template.
-
-Find and replace all instances of "MetaMask Monorepo Template" with the correct casing as follows:
-
-- `MetaMask Monorepo Template` (Title Case)
-- `metamask monorepo template` (lowercase)
-- `metamask-monorepo-template` (kebab-case)
-- `METAMASK_MONOREPO_TEMPLATE` (SNAKE_CASE)
+The MetaMask Design System monorepo
 
 ## Modules
 

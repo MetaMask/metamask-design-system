@@ -68,15 +68,15 @@ If you're developing your project locally and want to test changes to a package,
    3. Add a line to this section that mirrors the dependency entry on the left-hand side and points to the local path on the right-hand side:
 
       ```
-      "@metamask/<PACKAGE_NAME>@<PUBLISHED_VERSION_RANGE>": "file:<PATH_TO_METAMASK_MONOREPO_TEMPLATE>/packages/<PACKAGE_NAME>"
+      "@metamask/<PACKAGE_NAME>@<PUBLISHED_VERSION_RANGE>": "file:<PATH_TO_METAMASK_DESIGN_SYSTEM>/packages/<PACKAGE_NAME>"
       ```
 
       > **Example:**
       >
-      > - If your project uses Yarn, `@metamask/metamask-module-template` is listed in dependencies at `^1.1.4`, and your clone of the `metamask-monorepo-template` repo is at the same level as your project, add the following to `resolutions`:
+      > - If your project uses Yarn, `@metamask/metamask-module-template` is listed in dependencies at `^1.1.4`, and your clone of the `metamask-design-system` repo is at the same level as your project, add the following to `resolutions`:
       >
       >   ```
-      >   "@metamask/metamask-module-template@^1.1.4": "file:../metamask-monorepo-template/packages/metamask-module-template"
+      >   "@metamask/metamask-module-template@^1.1.4": "file:../metamask-design-system/packages/metamask-module-template"
       >   ```
 
    4. Run `yarn install`.
@@ -130,7 +130,7 @@ If you make more changes to a package, follow step 3 again, making sure to updat
 
 To use a preview build for a package within a project, you need to override the resolution logic for your package manager so that the "production" version of that package is replaced with the preview version. Here's how you do that:
 
-1. Open `package.json` in the project and locate the dependency entry for the metamask monorepo template package for which you want to use a preview build.
+1. Open `package.json` in the project and locate the dependency entry for the metamask design system package for which you want to use a preview build.
 2. Locate the section responsible for resolution overrides (or create it if it doesn't exist). If you're using Yarn, this is `resolutions`; if you're using NPM or any other package manager, this is `overrides`.
 3. Add a line to this section that mirrors the dependency entry on the left-hand side and points to the preview version on the right-hand side:
 

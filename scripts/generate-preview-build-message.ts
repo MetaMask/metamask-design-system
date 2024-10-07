@@ -30,7 +30,7 @@ async function main() {
   }
 
   const previewBuildMessage = `
-Preview builds have been published. [See these instructions](https://github.com/MetaMask/metamask-monorepo-template/blob/main/docs/contributing.md#using-packages-in-other-projects-during-developmenttesting) for more information about preview builds.
+Preview builds have been published. [See these instructions](https://github.com/MetaMask/metamask-design-system/blob/main/docs/contributing.md#using-packages-in-other-projects-during-developmenttesting) for more information about preview builds.
 
 <details>
 

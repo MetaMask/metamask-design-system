@@ -1,13 +1,13 @@
 # `migrate-tags`
 
-When migrating libraries into the metamask monorepo template, the original git history is transferred using the `git-filter-repo` tool (instructions [here](https://github.com/MetaMask/core/issues/1079#issuecomment-1700126302)), but tags attached to release commits are excluded from the process. This is because the tag names (`v[major].[minor].[patch]`) first need to be adjusted to conform to the scheme used by the metamask monorepo template (`@metamask/<package-name>@[major].[minor].[patch]`).
+When migrating libraries into the metamask design system, the original git history is transferred using the `git-filter-repo` tool (instructions [here](https://github.com/MetaMask/core/issues/1079#issuecomment-1700126302)), but tags attached to release commits are excluded from the process. This is because the tag names (`v[major].[minor].[patch]`) first need to be adjusted to conform to the scheme used by the metamask design system (`@metamask/<package-name>@[major].[minor].[patch]`).
 
-The `./scripts/migrate-tags.sh` script automates the process of enumerating the tags and associated release commit messages in the original repo, searching the migrated git history in the metamask monorepo template's `merged-packages/<package-name>` directory for each commit message, creating tags with correctly-formatted names and attaching them to the found release commits, and pushing those tags to the metamask monorepo template.
+The `./scripts/migrate-tags.sh` script automates the process of enumerating the tags and associated release commit messages in the original repo, searching the migrated git history in the metamask design system's `merged-packages/<package-name>` directory for each commit message, creating tags with correctly-formatted names and attaching them to the found release commits, and pushing those tags to the metamask design system.
 
 ## A. Preparations
 
 - The migration target package must be inside of the `merged-packages/` directory with its git history fully migrated.
-- The script must be run from the root directory of the metamask monorepo template.
+- The script must be run from the root directory of the metamask design system.
 - The `/tmp/<package-name>` directory used during the git history migration process should still be accessible. If not, perform steps 1-5 of [these instructions](https://github.com/MetaMask/core/issues/1079#issuecomment-1700126302) before proceeding.
 - If the script isn't executable, run `chmod +x ./scripts/migrate-tags.sh`.
 - By default, this script will run in "dry mode", printing out all pairs of release commit hashes and prefixed tag names, but not modifying the local or remote repo in any way. To override this and actually create/push tags, run the script with a `--no-dry-run` flag appended at the end.
@@ -143,9 +143,9 @@ To https://github.com/[USERNAME]/[FORKNAME]
 ## E. Troubleshooting
 
 > [!WARNING]
-> DO NOT run this script on the metamask monorepo template until the results have been tested on a fork.
+> DO NOT run this script on the metamask design system until the results have been tested on a fork.
 
-The following commands should NOT be run on the metamask monorepo template unless something has gone very wrong.
+The following commands should NOT be run on the metamask design system unless something has gone very wrong.
 
 ### 1. Delete remote tags
 
