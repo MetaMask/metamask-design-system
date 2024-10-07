@@ -1096,21 +1096,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/metamask-module-template@workspace:packages/metamask-module-template":
-  version: 0.0.0-use.local
-  resolution: "@metamask/metamask-module-template@workspace:packages/metamask-module-template"
-  dependencies:
-    "@metamask/auto-changelog": "npm:^3.4.4"
-    "@types/jest": "npm:^27.4.1"
-    deepmerge: "npm:^4.2.2"
-    jest: "npm:^27.5.1"
-    ts-jest: "npm:^27.1.4"
-    typedoc: "npm:^0.24.8"
-    typedoc-plugin-missing-exports: "npm:^2.0.0"
-    typescript: "npm:~5.2.2"
-  languageName: unknown
-  linkType: soft
-
 "@metamask/metamask-design-system@workspace:.":
   version: 0.0.0-use.local
   resolution: "@metamask/metamask-design-system@workspace:."
@@ -1157,6 +1142,21 @@ __metadata:
     ts-node: "npm:^10.9.1"
     typescript: "npm:~5.2.2"
     yargs: "npm:^17.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@metamask/metamask-module-template@workspace:packages/metamask-module-template":
+  version: 0.0.0-use.local
+  resolution: "@metamask/metamask-module-template@workspace:packages/metamask-module-template"
+  dependencies:
+    "@metamask/auto-changelog": "npm:^3.4.4"
+    "@types/jest": "npm:^27.4.1"
+    deepmerge: "npm:^4.2.2"
+    jest: "npm:^27.5.1"
+    ts-jest: "npm:^27.1.4"
+    typedoc: "npm:^0.24.8"
+    typedoc-plugin-missing-exports: "npm:^2.0.0"
+    typescript: "npm:~5.2.2"
   languageName: unknown
   linkType: soft
 
