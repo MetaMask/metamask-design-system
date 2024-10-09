@@ -9,7 +9,8 @@
   },
   "files": [],
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "docs/*"
   ],
   "scripts": {
     "build": "yarn ts-bridge --project tsconfig.build.json --verbose",

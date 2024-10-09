@@ -1,0 +1,58 @@
+{
+  "name": "@metamask/storybook",
+  "version": "0.1.0",
+  "description": "Storybook for MetaMask Design System",
+  "keywords": [
+    "MetaMask",
+    "Ethereum"
+  ],
+  "homepage": "https://github.com/MetaMask/metamask-design-system/tree/main/docs/storybook#readme",
+  "bugs": {
+    "url": "https://github.com/MetaMask/metamask-design-system/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/metamask-design-system.git"
+  },
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.cts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build-storybook": "storybook build",
+    "changelog:update": "../../scripts/update-changelog.sh @metamask/storybook",
+    "changelog:validate": "../../scripts/validate-changelog.sh @metamask/storybook",
+    "storybook": "storybook dev -p 6006"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.9.0",
+    "@lavamoat/allow-scripts": "^3.0.4",
+    "@storybook/addon-essentials": "^8.3.5",
+    "@storybook/addon-interactions": "^8.3.5",
+    "@storybook/addon-links": "^8.3.5",
+    "@storybook/addon-onboarding": "^8.3.5",
+    "@storybook/blocks": "^8.3.5",
+    "@storybook/react": "^8.3.5",
+    "@storybook/react-vite": "^8.3.5",
+    "@storybook/test": "^8.3.5",
+    "@types/prop-types": "^15",
+    "@vitejs/plugin-react": "^4.3.2",
+    "prop-types": "^15.8.1",
+    "vite": "^5.4.8"
+  },
+  "engines": {
+    "node": "^18.18 || >=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "storybook>@storybook/core>esbuild": false,
+      "vite>esbuild": false
+    }
+  }
+}

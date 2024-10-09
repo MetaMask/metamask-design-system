@@ -1,6 +1,9 @@
 {
   "compilerOptions": { "esModuleInterop": true, "noEmit": true },
-  "references": [{ "path": "./packages/metamask-module-template" }],
+  "references": [
+    { "path": "./packages/metamask-module-template" },
+    { "path": "./packages/storybook" }
+  ],
   "files": [],
   "include": ["./types"]
 }
