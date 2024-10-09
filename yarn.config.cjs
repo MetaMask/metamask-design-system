@@ -38,9 +38,15 @@ module.exports = defineConfig({
       const isChildWorkspace = workspace.cwd !== '.';
       const isPrivate =
         'private' in workspace.manifest && workspace.manifest.private === true;
+      const isDocs = workspace.cwd.startsWith('docs/');
       const dependenciesByIdentAndType = getDependenciesByIdentAndType(
         Yarn.dependencies({ workspace }),
       );
+
+      // Completely ignore docs workspaces
+      if (isDocs) {
+        continue;
+      }
 
       // All packages must have a name.
       expectWorkspaceField(workspace, 'name');

@@ -1,0 +1,43 @@
+{
+  "name": "@metamask/storybook",
+  "version": "0.1.0",
+  "description": "Storybook for MetaMask Design System",
+  "type": "module",
+  "scripts": {
+    "build-storybook": "storybook build",
+    "storybook": "storybook dev -p 6006"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.9.0",
+    "@lavamoat/allow-scripts": "^3.0.4",
+    "@storybook/addon-essentials": "^8.3.5",
+    "@storybook/addon-interactions": "^8.3.5",
+    "@storybook/addon-links": "^8.3.5",
+    "@storybook/addon-onboarding": "^8.3.5",
+    "@storybook/blocks": "^8.3.5",
+    "@storybook/react": "^8.3.5",
+    "@storybook/react-vite": "^8.3.5",
+    "@storybook/test": "^8.3.5",
+    "@types/prop-types": "^15",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^8.3.5",
+    "typescript": "~5.2.2",
+    "vite": "^5.0.0"
+  },
+  "packageManager": "yarn@4.2.2",
+  "engines": {
+    "node": "^18.18 || >=20"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "storybook>@storybook/core>esbuild": false,
+      "vite>esbuild": false,
+      "@vitejs/plugin-react-swc>@swc/core": false
+    }
+  }
+}
