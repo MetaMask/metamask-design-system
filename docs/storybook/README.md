@@ -1,6 +1,6 @@
 # @metamask/storybook
 
-...
+Storybook for MetaMask Design System
 
 ## Installation
 

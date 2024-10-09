@@ -1577,6 +1577,28 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@metamask/storybook@workspace:docs/storybook":
+  version: 0.0.0-use.local
+  resolution: "@metamask/storybook@workspace:docs/storybook"
+  dependencies:
+    "@chromatic-com/storybook": "npm:^1.9.0"
+    "@lavamoat/allow-scripts": "npm:^3.0.4"
+    "@storybook/addon-essentials": "npm:^8.3.5"
+    "@storybook/addon-interactions": "npm:^8.3.5"
+    "@storybook/addon-links": "npm:^8.3.5"
+    "@storybook/addon-onboarding": "npm:^8.3.5"
+    "@storybook/blocks": "npm:^8.3.5"
+    "@storybook/react": "npm:^8.3.5"
+    "@storybook/react-vite": "npm:^8.3.5"
+    "@storybook/test": "npm:^8.3.5"
+    "@types/prop-types": "npm:^15"
+    "@vitejs/plugin-react": "npm:^4.3.2"
+    prop-types: "npm:^15.8.1"
+    storybook: "npm:^8.3.5"
+    vite: "npm:^5.4.8"
+  languageName: unknown
+  linkType: soft
+
 "@metamask/superstruct@npm:^3.1.0":
   version: 3.1.0
   resolution: "@metamask/superstruct@npm:3.1.0"
@@ -9621,28 +9643,6 @@ __metadata:
   checksum: 10/66ecb201522598902e363a7e14d6e5f4bf1bba77ea640de6b7431e1a7564dfe8a5f359da9f8b382d376989bf7a50bb0cdb665143ba609cdf16c21687e5183533
   languageName: node
   linkType: hard
-
-"storybook@workspace:docs/storybook":
-  version: 0.0.0-use.local
-  resolution: "storybook@workspace:docs/storybook"
-  dependencies:
-    "@chromatic-com/storybook": "npm:^1.9.0"
-    "@lavamoat/allow-scripts": "npm:^3.0.4"
-    "@storybook/addon-essentials": "npm:^8.3.5"
-    "@storybook/addon-interactions": "npm:^8.3.5"
-    "@storybook/addon-links": "npm:^8.3.5"
-    "@storybook/addon-onboarding": "npm:^8.3.5"
-    "@storybook/blocks": "npm:^8.3.5"
-    "@storybook/react": "npm:^8.3.5"
-    "@storybook/react-vite": "npm:^8.3.5"
-    "@storybook/test": "npm:^8.3.5"
-    "@types/prop-types": "npm:^15"
-    "@vitejs/plugin-react": "npm:^4.3.2"
-    prop-types: "npm:^15.8.1"
-    storybook: "npm:^8.3.5"
-    vite: "npm:^5.4.8"
-  languageName: unknown
-  linkType: soft
 
 "string-length@npm:^4.0.1":
   version: 4.0.2
