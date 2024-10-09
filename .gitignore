@@ -32,3 +32,6 @@ scripts/coverage
 
 # typescript
 packages/*/*.tsbuildinfo
+
+# storybook
+*storybook.log
