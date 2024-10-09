@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.packages.build.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/types",
+    "rootDir": "./src",
+    "jsx": "react-jsx"
+  },
+  "references": [],
+  "include": ["../../types", "./src"],
+  "exclude": ["**/*.stories.ts", "**/*.stories.tsx"]
+}

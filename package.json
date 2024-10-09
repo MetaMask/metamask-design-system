@@ -9,7 +9,8 @@
   },
   "files": [],
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "docs/*"
   ],
   "scripts": {
     "build": "yarn ts-bridge --project tsconfig.build.json --verbose",
@@ -100,5 +101,7 @@
       "babel-runtime>core-js": false,
       "simple-git-hooks": false
     }
-  }
+  },
+  "npmClient": "yarn",
+  "useWorkspaces": true
 }
