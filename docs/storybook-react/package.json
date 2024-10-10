@@ -38,6 +38,7 @@
     "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "build-storybook": "storybook build",
     "build:docs": "typedoc",
+    "changelog:update": "../../scripts/update-changelog.sh @metamask/storybook-react",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/storybook-react",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
