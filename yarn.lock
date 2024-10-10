@@ -1546,23 +1546,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lavamoat/allow-scripts@npm:^3.0.4":
-  version: 3.2.0
-  resolution: "@lavamoat/allow-scripts@npm:3.2.0"
-  dependencies:
-    "@lavamoat/aa": "npm:^4.3.0"
-    "@npmcli/run-script": "npm:8.1.0"
-    bin-links: "npm:4.0.4"
-    npm-normalize-package-bin: "npm:3.0.1"
-    yargs: "npm:17.7.2"
-  peerDependencies:
-    "@lavamoat/preinstall-always-fail": "*"
-  bin:
-    allow-scripts: src/cli.js
-  checksum: 10/21afb11ce25c0b2c9763bfb8f1127bb89f304ed83f64e00955c4d3007216a0ee553b777359e9ded874c61b3d7fa8d19ff8a35881cd3816985adab4d6b58bcb07
-  languageName: node
-  linkType: hard
-
 "@lavamoat/allow-scripts@npm:^3.2.1":
   version: 3.2.1
   resolution: "@lavamoat/allow-scripts@npm:3.2.1"
@@ -1719,7 +1702,7 @@ __metadata:
     "@babel/core": "npm:^7.23.5"
     "@babel/plugin-transform-modules-commonjs": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@lavamoat/allow-scripts": "npm:^3.0.4"
+    "@lavamoat/allow-scripts": "npm:^3.2.1"
     "@metamask/create-release-branch": "npm:^3.0.0"
     "@metamask/eslint-config": "npm:^12.2.0"
     "@metamask/eslint-config-jest": "npm:^12.1.0"
