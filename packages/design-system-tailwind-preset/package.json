@@ -1,7 +1,7 @@
 {
   "name": "@metamask/design-system-tailwind-preset",
   "version": "0.0.0",
-  "description": "Design system tailwind css preset",
+  "description": "Design system Tailwind CSS preset for MetaMask projects.",
   "keywords": [
     "MetaMask",
     "Ethereum"
@@ -51,10 +51,14 @@
     "@types/jest": "^27.4.1",
     "deepmerge": "^4.2.2",
     "jest": "^27.5.1",
+    "tailwindcss": "^3.4.13",
     "ts-jest": "^27.1.4",
     "typedoc": "^0.24.8",
     "typedoc-plugin-missing-exports": "^2.0.0",
     "typescript": "~5.2.2"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.13"
   },
   "engines": {
     "node": "^18.18 || >=20"

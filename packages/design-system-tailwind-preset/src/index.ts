@@ -1,9 +1,21 @@
-/**
- * Example function that returns a greeting for the given name.
- *
- * @param name - The name to greet.
- * @returns The greeting.
- */
-export default function greeter(name: string): string {
-  return `Hello, ${name}!`;
-}
+import type { Config } from 'tailwindcss';
+
+import { colors } from './colors';
+import { shadows } from './shadows';
+import { typography } from './typography';
+
+const tailwindConfig: Config = {
+  content: ['./node_modules/@metamask/ui/src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    extend: {
+      ...colors,
+      ...typography,
+      ...shadows,
+    },
+  },
+  plugins: [],
+};
+
+export default tailwindConfig;
+
+module.exports = tailwindConfig;

@@ -1,9 +1,6 @@
-import greeter from '.';
-
-describe('Test', () => {
-  it('greets', () => {
-    const name = 'Huey';
-    const result = greeter(name);
-    expect(result).toBe('Hello, Huey!');
+describe('Tailwind Preset', () => {
+  // TODO: Implement tests for Tailwind preset
+  it('should have a dummy test', () => {
+    expect(true).toBe(true);
   });
 });

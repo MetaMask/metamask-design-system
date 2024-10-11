@@ -1471,10 +1471,13 @@ __metadata:
     "@types/jest": "npm:^27.4.1"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^27.5.1"
+    tailwindcss: "npm:^3.4.13"
     ts-jest: "npm:^27.1.4"
     typedoc: "npm:^0.24.8"
     typedoc-plugin-missing-exports: "npm:^2.0.0"
     typescript: "npm:~5.2.2"
+  peerDependencies:
+    tailwindcss: ^3.4.13
   languageName: unknown
   linkType: soft
 
