@@ -1,6 +1,8 @@
+import { colors } from './colors';
+
 describe('Colors', () => {
-  // TODO: Implement tests for color
+  // TODO: Implement tests for colors
   it('should have a dummy test', () => {
-    expect(true).toBe(true);
+    expect(colors).toBeDefined();
   });
 });
