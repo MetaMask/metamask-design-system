@@ -1,6 +1,6 @@
 # `@metamask/design-system-tailwind-preset`
 
-Design system Tailwind CSS preset for MetaMask projects.
+Design system Tailwind CSS preset for MetaMask projects
 
 ## Installation
 
