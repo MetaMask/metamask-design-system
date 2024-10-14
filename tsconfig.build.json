@@ -1,7 +1,6 @@
 {
   "references": [
-    { "path": "./packages/metamask-module-template/tsconfig.build.json" },
-    { "path": "./packages/storybook-react/tsconfig.build.json" }
+    { "path": "./packages/metamask-module-template/tsconfig.build.json" }
   ],
   "files": [],
   "include": []
