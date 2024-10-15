@@ -4,11 +4,13 @@ storybook react
 
 ## Installation
 
-`yarn add @metamask/storybook-react`
+`yarn install`
 
-or
+## Running Storybook
 
-`npm install @metamask/storybook-react`
+To start the Storybook server locally, run the following command:
+
+`yarn storybook`
 
 ## Contributing
 
