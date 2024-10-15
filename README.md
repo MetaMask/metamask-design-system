@@ -20,6 +20,7 @@ Or, in graph form [^fn1]:
 %%{ init: { 'flowchart': { 'curve': 'bumpX' } } }%%
 graph LR;
 linkStyle default opacity:0.5
+
   metamask_module_template(["@metamask/design-system-react"]);
 ```
 
