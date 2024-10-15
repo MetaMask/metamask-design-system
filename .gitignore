@@ -3,6 +3,8 @@ npm-debug.log
 yarn-error.log
 node_modules
 package-lock.json
+**/package-lock.json
+**/yarn.lock
 
 # tarball from `yarn pack`
 *.tgz
@@ -10,6 +12,7 @@ package-lock.json
 # eslint cache
 .eslintcache
 
+# macOS system files
 .DS_STORE
 
 # Build preview message
@@ -32,3 +35,42 @@ scripts/coverage
 
 # typescript
 packages/*/*.tsbuildinfo
+
+# Logs
+*.log
+*.tlog
+*.log.*
+
+# Linux system files
+*~
+
+# Android/Java
+*.keystore
+**/android/.gradle/
+**/android/app/build/
+**/android/app/.cxx/
+**/android/local.properties
+**/android/.idea/
+**/android/.gradle/
+**/android/build/
+
+# iOS/Swift
+**/ios/Pods/
+**/ios/build/
+**/ios/DerivedData/
+**/ios/.xcuserdata/
+*.mode1v3
+*.pbxuser
+*.xccheckout
+*.xcuserstate
+*.xcworkspace
+!ios/Podfile.lock
+!ios/Pods/
+
+# React Native specific
+**/react-native/packager-*
+**/react-native/config-debug-*
+
+# Metro Bundler
+**/dist/
+**/build/

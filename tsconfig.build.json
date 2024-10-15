@@ -1,5 +1,6 @@
 {
   "references": [
+    { "path": "./packages/design-system-react-native/tsconfig.build.json" },
     { "path": "./packages/metamask-module-template/tsconfig.build.json" }
   ],
   "files": [],
