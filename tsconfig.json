@@ -1,6 +1,9 @@
 {
   "compilerOptions": { "esModuleInterop": true, "noEmit": true },
-  "references": [{ "path": "./packages/metamask-module-template" }],
+  "references": [
+    { "path": "./packages/design-system-react-native" },
+    { "path": "./packages/metamask-module-template" }
+  ],
   "files": [],
   "include": ["./types"]
 }

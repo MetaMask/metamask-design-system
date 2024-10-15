@@ -1046,6 +1046,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@metamask/design-system-react-native@workspace:packages/design-system-react-native":
+  version: 0.0.0-use.local
+  resolution: "@metamask/design-system-react-native@workspace:packages/design-system-react-native"
+  dependencies:
+    "@metamask/auto-changelog": "npm:^3.4.4"
+    "@types/jest": "npm:^27.4.1"
+    deepmerge: "npm:^4.2.2"
+    jest: "npm:^27.5.1"
+    ts-jest: "npm:^27.1.4"
+    typedoc: "npm:^0.24.8"
+    typedoc-plugin-missing-exports: "npm:^2.0.0"
+    typescript: "npm:~5.2.2"
+  languageName: unknown
+  linkType: soft
+
 "@metamask/eslint-config-jest@npm:^12.1.0":
   version: 12.1.0
   resolution: "@metamask/eslint-config-jest@npm:12.1.0"
