@@ -1,18 +1,20 @@
 export const colors = {
-  backgroundColor: {
+  background: {
     default: 'var(--color-background-default)',
-    hover: 'var(--color-background-default-hover)',
-    pressed: 'var(--color-background-default-pressed)',
+    'default-hover': 'var(--color-background-default-hover)',
+    'default-pressed': 'var(--color-background-default-pressed)',
     alternative: 'var(--color-background-alternative)',
     'alternative-hover': 'var(--color-background-alternative-hover)',
     'alternative-pressed': 'var(--color-background-alternative-pressed)',
+    hover: 'var(--color-background-hover)',
+    pressed: 'var(--color-background-pressed)',
   },
-  textColor: {
+  text: {
     default: 'var(--color-text-default)',
     alternative: 'var(--color-text-alternative)',
     muted: 'var(--color-text-muted)',
   },
-  borderColor: {
+  border: {
     default: 'var(--color-border-default)',
     muted: 'var(--color-border-muted)',
   },
@@ -28,23 +30,31 @@ export const colors = {
   },
   primary: {
     default: 'var(--color-primary-default)',
+    'default-hover': 'var(--color-primary-default-hover)',
+    'default-pressed': 'var(--color-primary-default-pressed)',
     alternative: 'var(--color-primary-alternative)',
     muted: 'var(--color-primary-muted)',
     inverse: 'var(--color-primary-inverse)',
   },
   error: {
     default: 'var(--color-error-default)',
+    'default-hover': 'var(--color-error-default-hover)',
+    'default-pressed': 'var(--color-error-default-pressed)',
     alternative: 'var(--color-error-alternative)',
     muted: 'var(--color-error-muted)',
     inverse: 'var(--color-error-inverse)',
   },
   warning: {
     default: 'var(--color-warning-default)',
+    'default-hover': 'var(--color-warning-default-hover)',
+    'default-pressed': 'var(--color-warning-default-pressed)',
     muted: 'var(--color-warning-muted)',
     inverse: 'var(--color-warning-inverse)',
   },
   success: {
     default: 'var(--color-success-default)',
+    'default-hover': 'var(--color-success-default-hover)',
+    'default-pressed': 'var(--color-success-default-pressed)',
     muted: 'var(--color-success-muted)',
     inverse: 'var(--color-success-inverse)',
   },
