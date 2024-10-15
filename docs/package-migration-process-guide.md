@@ -1,6 +1,6 @@
 # Package Migration Process Guide
 
-This document outlines the process for migrating a MetaMask library into the metamask module template. The migration target is assumed to comply with the requirements defined by [`metamask-module-template`](https://github.com/MetaMask/metamask-module-template) and [`module-lint`](https://github.com/MetaMask/module-lint).
+This document outlines the process for migrating a MetaMask library into the metamask module template. The migration target is assumed to comply with the requirements defined by [`design-system-react`](https://github.com/MetaMask/design-system-react) and [`module-lint`](https://github.com/MetaMask/module-lint).
 
 ## Phase A: **Preparation** in the _Source Repo_
 
@@ -28,7 +28,7 @@ This document outlines the process for migrating a MetaMask library into the met
 - Resolve any errors or issues resulting from these changes.
 - [Example PR](https://github.com/MetaMask/eth-json-rpc-provider/pull/28)
 
-### **[PR#3]** 5. Review the `metamask-module-template`, and add any missing files or elements (e.g. LICENSE)
+### **[PR#3]** 5. Review the `design-system-react`, and add any missing files or elements (e.g. LICENSE)
 
 - [Example PR](https://github.com/MetaMask/eth-json-rpc-provider/pull/24)
 

@@ -1,6 +1,6 @@
 {
   "compilerOptions": { "esModuleInterop": true, "noEmit": true },
-  "references": [{ "path": "./packages/metamask-module-template" }],
+  "references": [{ "path": "./packages/design-system-react" }],
   "files": [],
   "include": ["./types"]
 }

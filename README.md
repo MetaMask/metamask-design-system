@@ -8,7 +8,7 @@ This repository contains the following packages [^fn1]:
 
 <!-- start package list -->
 
-- [`@metamask/metamask-module-template`](packages/metamask-module-template)
+- [`@metamask/design-system-react`](packages/design-system-react)
 
 <!-- end package list -->
 
@@ -20,7 +20,7 @@ Or, in graph form [^fn1]:
 %%{ init: { 'flowchart': { 'curve': 'bumpX' } } }%%
 graph LR;
 linkStyle default opacity:0.5
-  metamask_module_template(["@metamask/metamask-module-template"]);
+  metamask_module_template(["@metamask/design-system-react"]);
 ```
 
 <!-- end dependency graph -->

@@ -1,14 +1,14 @@
-# `@metamask/metamask-module-template`
+# `@metamask/design-system-react`
 
 The MetaMask Node module template
 
 ## Installation
 
-`yarn add @metamask/metamask-module-template`
+`yarn add @metamask/design-system-react`
 
 or
 
-`npm install @metamask/metamask-module-template`
+`npm install @metamask/design-system-react`
 
 ## Contributing
 

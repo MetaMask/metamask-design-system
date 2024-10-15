@@ -1145,9 +1145,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/metamask-module-template@workspace:packages/metamask-module-template":
+"@metamask/design-system-react@workspace:packages/design-system-react":
   version: 0.0.0-use.local
-  resolution: "@metamask/metamask-module-template@workspace:packages/metamask-module-template"
+  resolution: "@metamask/design-system-react@workspace:packages/design-system-react"
   dependencies:
     "@metamask/auto-changelog": "npm:^3.4.4"
     "@types/jest": "npm:^27.4.1"
