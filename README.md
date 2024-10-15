@@ -9,6 +9,7 @@ This repository contains the following packages [^fn1]:
 <!-- start package list -->
 
 - [`@metamask/metamask-module-template`](packages/metamask-module-template)
+- [`@metamask/storybook-react`](packages/storybook-react)
 
 <!-- end package list -->
 
@@ -21,6 +22,7 @@ Or, in graph form [^fn1]:
 graph LR;
 linkStyle default opacity:0.5
   metamask_module_template(["@metamask/metamask-module-template"]);
+  storybook_react(["@metamask/storybook-react"]);
 ```
 
 <!-- end dependency graph -->
