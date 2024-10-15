@@ -1,3 +1,5 @@
+# TODO: Publish a preview build doesn't work and needs to be fixed https://github.com/MetaMask/metamask-design-system/issues/38
+
 name: Publish a preview build
 
 on:

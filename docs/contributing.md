@@ -85,6 +85,8 @@ If you're developing your project locally and want to test changes to a package,
 
 ### Testing changes to packages with preview builds
 
+> NOTE: Publish a preview builds doesn't work and needs to be fixed https://github.com/MetaMask/metamask-design-system/issues/38
+
 If you want to test changes to a package where it would be unwieldy or impossible to use a local version, such as on CI, you can publish a preview build and configure your project to use it.
 
 #### Publishing preview builds as a MetaMask contributor
