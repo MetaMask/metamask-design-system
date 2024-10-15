@@ -2,7 +2,8 @@
   "compilerOptions": { "esModuleInterop": true, "noEmit": true },
   "references": [
     { "path": "./packages/metamask-module-template" },
-    { "path": "./packages/storybook-react" }
+    { "path": "./packages/storybook-react" },
+    { "path": "./packages/design-system-tailwind-preset" }
   ],
   "files": [],
   "include": ["./types"]

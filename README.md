@@ -8,6 +8,7 @@ This repository contains the following packages [^fn1]:
 
 <!-- start package list -->
 
+- [`@metamask/design-system-tailwind-preset`](packages/design-system-tailwind-preset)
 - [`@metamask/metamask-module-template`](packages/metamask-module-template)
 - [`@metamask/storybook-react`](packages/storybook-react)
 
@@ -21,6 +22,7 @@ Or, in graph form [^fn1]:
 %%{ init: { 'flowchart': { 'curve': 'bumpX' } } }%%
 graph LR;
 linkStyle default opacity:0.5
+  design_system_tailwind_preset(["@metamask/design-system-tailwind-preset"]);
   metamask_module_template(["@metamask/metamask-module-template"]);
   storybook_react(["@metamask/storybook-react"]);
 ```
