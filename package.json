@@ -8,10 +8,18 @@
     "url": "https://github.com/MetaMask/metamask-design-system.git"
   },
   "files": [],
-  "workspaces": [
-    "docs/*",
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "docs/*"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**",
+      "**/react",
+      "**/react/**"
+    ]
+  },
   "scripts": {
     "build": "yarn ts-bridge --project tsconfig.build.json --verbose",
     "build:clean": "rimraf dist '**/*.tsbuildinfo' && yarn build",
@@ -44,7 +52,12 @@
   "resolutions": {
     "elliptic@6.5.4": "^6.5.7",
     "fast-xml-parser@^4.3.4": "^4.4.1",
+    "react-native": "^0.75.4",
     "ws@7.4.6": "^7.5.10"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-native": "^0.75.4"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
@@ -61,6 +74,8 @@
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.191",
     "@types/node": "^16.18.54",
+    "@types/react": "^18.3.11",
+    "@types/react-native": "^0.73.0",
     "@types/semver": "^7",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
