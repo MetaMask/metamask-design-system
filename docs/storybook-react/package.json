@@ -22,7 +22,6 @@
     "@types/prop-types": "^15",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@vitejs/plugin-react-swc": "^3.3.2",
     "autoprefixer": "^10.4.20",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -39,8 +38,7 @@
   "lavamoat": {
     "allowScripts": {
       "storybook>@storybook/core>esbuild": false,
-      "vite>esbuild": false,
-      "@vitejs/plugin-react-swc>@swc/core": false
+      "vite>esbuild": false
     }
   }
 }
