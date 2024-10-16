@@ -3,7 +3,8 @@
   "references": [
     { "path": "./packages/design-system-react-native" },
     { "path": "./packages/metamask-module-template" },
-    { "path": "./packages/storybook-react" }
+    { "path": "./packages/storybook-react" },
+    { "path": "./packages/design-system-tailwind-preset" }
   ],
   "files": [],
   "include": ["./types"]

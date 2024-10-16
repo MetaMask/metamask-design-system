@@ -1451,6 +1451,9 @@ __metadata:
 "@metamask/design-system-react-native@workspace:packages/design-system-react-native":
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-react-native@workspace:packages/design-system-react-native"
+"@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset":
+  version: 0.0.0-use.local
+  resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
     "@metamask/auto-changelog": "npm:^3.4.4"
     "@types/jest": "npm:^27.4.1"
