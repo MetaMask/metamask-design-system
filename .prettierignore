@@ -1,0 +1,3 @@
+packages/**/ios/
+packages/**/android
+packages/**/node_modules

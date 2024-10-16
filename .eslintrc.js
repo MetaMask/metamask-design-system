@@ -10,6 +10,9 @@ module.exports = {
     '**/coverage',
     'merged-packages',
     'scripts/create-package/package-template',
+    'packages/**/ios/',
+    'packages/**/android/',
+    'packages/**/node_modules/',
   ],
   overrides: [
     {
