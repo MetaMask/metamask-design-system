@@ -34,6 +34,7 @@
     "build:docs": "typedoc",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",
+    "postinstall": "cd ios && pod install || exit 0",
     "publish:preview": "yarn npm publish --tag preview",
     "run-android": "react-native run-android",
     "run-ios": "react-native run-ios --scheme MetamaskDesignSystemApp",

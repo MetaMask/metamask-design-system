@@ -28,6 +28,7 @@
     "changelog:update": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:update",
     "changelog:validate": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:validate",
     "create-package": "ts-node scripts/create-package",
+    "postinstall": "cd packages/design-system-react-native/ios && pod install || exit 0",
     "lint": "yarn lint:eslint && yarn lint:misc --check && yarn constraints && yarn lint:dependencies",
     "lint:dependencies": "depcheck && yarn dedupe --check",
     "lint:dependencies:fix": "depcheck && yarn dedupe",
@@ -114,7 +115,8 @@
       "@lavamoat/preinstall-always-fail": false,
       "@keystonehq/bc-ur-registry-eth>hdkey>secp256k1": true,
       "babel-runtime>core-js": false,
-      "simple-git-hooks": false
+      "simple-git-hooks": false,
+      "$root$": false
     }
   }
 }
