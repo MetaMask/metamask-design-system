@@ -99,7 +99,8 @@
       "@lavamoat/preinstall-always-fail": false,
       "@keystonehq/bc-ur-registry-eth>hdkey>secp256k1": true,
       "babel-runtime>core-js": false,
-      "simple-git-hooks": false
+      "simple-git-hooks": false,
+      "ts-node>@swc/core": false
     }
   }
 }
