@@ -26,10 +26,10 @@ View changes for a package since its latest release.
 
 Examples:
 
-  yarn workspace @metamask/metamask-module-template run since-latest-release
-  yarn workspace @metamask/metamask-module-template run since-latest-release diff
-  yarn workspace @metamask/metamask-module-template run since-latest-release log -p
-  yarn workspace @metamask/metamask-module-template run since-latest-release --include-head -- log -p
+  yarn workspace @metamask/design-system-react run since-latest-release
+  yarn workspace @metamask/design-system-react run since-latest-release diff
+  yarn workspace @metamask/design-system-react run since-latest-release log -p
+  yarn workspace @metamask/design-system-react run since-latest-release --include-head -- log -p
 
 EOT
 }

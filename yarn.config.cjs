@@ -767,7 +767,7 @@ async function expectReadme(workspace, workspaceBasename) {
   const readme = await getWorkspaceFile(workspace, 'README.md');
 
   if (
-    workspaceBasename !== 'metamask-module-template' &&
+    workspaceBasename !== 'design-system-react' &&
     readme.includes('## Template Instructions')
   ) {
     workspace.error(

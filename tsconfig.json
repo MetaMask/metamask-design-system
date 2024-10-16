@@ -1,9 +1,6 @@
 {
   "compilerOptions": { "esModuleInterop": true, "noEmit": true },
-  "references": [
-    { "path": "./packages/metamask-module-template" },
-    { "path": "./packages/storybook-react" }
-  ],
+  "references": [{ "path": "./packages/design-system-react" }],
   "files": [],
   "include": ["./types"]
 }

@@ -1,12 +1,12 @@
 {
-  "name": "@metamask/metamask-module-template",
+  "name": "@metamask/design-system-react",
   "version": "0.0.0",
   "description": "The MetaMask Node module template",
   "keywords": [
     "MetaMask",
     "Ethereum"
   ],
-  "homepage": "https://github.com/MetaMask/metamask-design-system/tree/main/packages/metamask-module-template#readme",
+  "homepage": "https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-system-react#readme",
   "bugs": {
     "url": "https://github.com/MetaMask/metamask-design-system/issues"
   },
@@ -37,8 +37,8 @@
   "scripts": {
     "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "build:docs": "typedoc",
-    "changelog:update": "../../scripts/update-changelog.sh @metamask/metamask-module-template",
-    "changelog:validate": "../../scripts/validate-changelog.sh @metamask/metamask-module-template",
+    "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react",
+    "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
@@ -46,15 +46,26 @@
     "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
+  "dependencies": {
+    "tailwind-merge": "^2.5.4"
+  },
   "devDependencies": {
     "@metamask/auto-changelog": "^3.4.4",
     "@types/jest": "^27.4.1",
     "deepmerge": "^4.2.2",
     "jest": "^27.5.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.14",
     "ts-jest": "^27.1.4",
     "typedoc": "^0.24.8",
     "typedoc-plugin-missing-exports": "^2.0.0",
     "typescript": "~5.2.2"
+  },
+  "peerDependencies": {
+    "@types/react-dom": "^18.0.0",
+    "react": "^18.0.0",
+    "tailwindcss": "^3.0.0"
   },
   "engines": {
     "node": "^18.18 || >=20"
