@@ -57,6 +57,7 @@ packages/*/*.tsbuildinfo
 **/ios/build/
 **/ios/DerivedData/
 **/ios/.xcuserdata/
+**/ios/.xcode.env.local
 *.mode1v3
 *.pbxuser
 *.xccheckout
