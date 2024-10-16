@@ -4,6 +4,7 @@ module.exports = {
     '../../.eslintrc.js', // Extends the root configuration
     '@react-native-community', // React Native ESLint rules
   ],
+  ignorePatterns: ['node_modules/', 'ios/', 'android/'],
   overrides: [
     {
       files: ['*.js', '*.jsx'],
