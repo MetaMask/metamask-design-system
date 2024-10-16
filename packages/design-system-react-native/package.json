@@ -32,15 +32,17 @@
   "scripts": {
     "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "build:docs": "typedoc",
+    "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",
     "publish:preview": "yarn npm publish --tag preview",
     "run-android": "react-native run-android",
     "run-ios": "react-native run-ios --scheme MetamaskDesignSystemApp",
+    "since-latest-release": "../../scripts/since-latest-release.sh",
     "start": "react-native start",
     "test": "jest --reporters=jest-silent-reporter",
     "test:clean": "jest --clearCache",
     "test:verbose": "jest --verbose",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
   },
   "dependencies": {
     "react": "18.2.0",

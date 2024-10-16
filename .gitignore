@@ -37,9 +37,7 @@ scripts/coverage
 packages/*/*.tsbuildinfo
 
 # Logs
-*.log
-*.tlog
-*.log.*
+*storybook.log
 
 # Linux system files
 *~

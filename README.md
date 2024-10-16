@@ -9,7 +9,9 @@ This repository contains the following packages [^fn1]:
 <!-- start package list -->
 
 - [`@metamask/design-system-react-native`](packages/design-system-react-native)
+- [`@metamask/design-system-tailwind-preset`](packages/design-system-tailwind-preset)
 - [`@metamask/metamask-module-template`](packages/metamask-module-template)
+- [`@metamask/storybook-react`](packages/storybook-react)
 
 <!-- end package list -->
 
@@ -22,7 +24,9 @@ Or, in graph form [^fn1]:
 graph LR;
 linkStyle default opacity:0.5
   design_system_react_native(["@metamask/design-system-react-native"]);
+  design_system_tailwind_preset(["@metamask/design-system-tailwind-preset"]);
   metamask_module_template(["@metamask/metamask-module-template"]);
+  storybook_react(["@metamask/storybook-react"]);
 ```
 
 <!-- end dependency graph -->
