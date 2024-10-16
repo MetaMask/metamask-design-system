@@ -2,7 +2,7 @@ import React from 'react';
 import { twMerge } from 'tailwind-merge';
 import { ComponentTemplateProps } from './ComponentTemplate.types';
 
-const ComponentTemplate: React.FC<ComponentTemplateProps> = ({
+export const ComponentTemplate: React.FC<ComponentTemplateProps> = ({
   title = 'Component Template',
   className,
 }) => {
@@ -12,5 +12,3 @@ const ComponentTemplate: React.FC<ComponentTemplateProps> = ({
     </div>
   );
 };
-
-export default ComponentTemplate;

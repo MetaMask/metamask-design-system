@@ -14,7 +14,7 @@ const config: StorybookConfig = {
   stories: [
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-    // '../../../packages/react-components/src/**/*.stories.@(js|jsx|ts|tsx)', TO DO: Update when react component package is created
+    '../../../packages/design-system-react/src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
 
   addons: [
@@ -40,7 +40,7 @@ const config: StorybookConfig = {
         ),
         '@components': path.resolve(
           __dirname,
-          '../packages/react-components/src',
+          '../packages/design-system-react/src/**/*',
         ),
       };
     }
