@@ -1468,9 +1468,13 @@ __metadata:
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
     "@metamask/auto-changelog": "npm:^3.4.4"
+    "@metamask/design-tokens": "npm:^4.0.0"
     "@types/jest": "npm:^27.4.1"
+    "@types/postcss-js": "npm:^4"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^27.5.1"
+    postcss: "npm:^8.4.47"
+    postcss-js: "npm:^4.0.1"
     tailwindcss: "npm:^3.4.13"
     ts-jest: "npm:^27.1.4"
     typedoc: "npm:^0.24.8"
@@ -2818,6 +2822,15 @@ __metadata:
   version: 4.0.2
   resolution: "@types/parse-json@npm:4.0.2"
   checksum: 10/5bf62eec37c332ad10059252fc0dab7e7da730764869c980b0714777ad3d065e490627be9f40fc52f238ffa3ac4199b19de4127196910576c2fe34dd47c7a470
+  languageName: node
+  linkType: hard
+
+"@types/postcss-js@npm:^4":
+  version: 4.0.4
+  resolution: "@types/postcss-js@npm:4.0.4"
+  dependencies:
+    postcss: "npm:^8.3.3"
+  checksum: 10/e6dc3213d56d6474c7f139e8836bd51c533b8db5bf57c9aea73aa0e61df9559ef396498abc222dfc0f035d51fc6e16d33e14b722bbba352d34802920668359e8
   languageName: node
   linkType: hard
 
@@ -8900,7 +8913,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.23, postcss@npm:^8.4.43, postcss@npm:^8.4.47":
+"postcss@npm:^8.3.3, postcss@npm:^8.4.23, postcss@npm:^8.4.43, postcss@npm:^8.4.47":
   version: 8.4.47
   resolution: "postcss@npm:8.4.47"
   dependencies:
