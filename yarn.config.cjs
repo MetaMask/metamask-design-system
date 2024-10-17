@@ -39,12 +39,13 @@ module.exports = defineConfig({
       const isPrivate =
         'private' in workspace.manifest && workspace.manifest.private === true;
       const isDocs = workspace.cwd.startsWith('docs/');
+      const isApps = workspace.cwd.startsWith('apps/');
       const dependenciesByIdentAndType = getDependenciesByIdentAndType(
         Yarn.dependencies({ workspace }),
       );
 
-      // Completely ignore docs workspaces
-      if (isDocs) {
+      // Completely ignore docs and apps workspaces
+      if (isDocs || isApps) {
         continue;
       }
 
