@@ -3,14 +3,16 @@
  * https://jestjs.io/docs/configuration
  */
 
-const merge = require('deepmerge');
 const path = require('path');
 
 const baseConfig = require('../../jest.config.packages');
 
 const displayName = path.basename(__dirname);
 
-module.exports = merge(baseConfig, {
+module.exports = {
+  // Spread the base configuration to inherit all default settings
+  ...baseConfig,
+
   // The display name when running multiple projects
   displayName,
 
@@ -23,4 +25,8 @@ module.exports = merge(baseConfig, {
       statements: 100,
     },
   },
-});
+
+  // In jest.config.packages.js we are ignoring all index.ts files e.g. coveragePathIgnorePatterns: ['./src/index.ts'],
+  // We want to include index.ts in coverage so we override the coveragePathIgnorePatterns
+  coveragePathIgnorePatterns: [],
+};
