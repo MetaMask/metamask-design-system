@@ -8,7 +8,7 @@ This repository contains the following packages [^fn1]:
 
 <!-- start package list -->
 
-- [`@metamask/storybook-react-native`](packages/storybook-react-native)
+- [`@metamask/storybook-react-native`](apps/storybook-react-native)
 - [`@metamask/design-system-tailwind-preset`](packages/design-system-tailwind-preset)
 - [`@metamask/metamask-module-template`](packages/metamask-module-template)
 - [`@metamask/storybook-react`](packages/storybook-react)

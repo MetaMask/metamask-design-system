@@ -21,6 +21,9 @@ preview-build-message.txt
 packages/*/coverage
 packages/*/dist
 packages/*/docs
+apps/*/coverage
+apps/*/dist
+apps/*/docs
 scripts/coverage
 
 # yarn v3 (w/o zero-install)
@@ -35,6 +38,7 @@ scripts/coverage
 
 # typescript
 packages/*/*.tsbuildinfo
+apps/*/*.tsbuildinfo
 
 # Logs
 *storybook.log

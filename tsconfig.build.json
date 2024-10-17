@@ -1,6 +1,6 @@
 {
   "references": [
-    { "path": "./packages/storybook-react-native/tsconfig.build.json" },
+    { "path": "./apps/storybook-react-native/tsconfig.build.json" },
     { "path": "./packages/design-system-tailwind-preset/tsconfig.build.json" },
     { "path": "./packages/metamask-module-template/tsconfig.build.json" }
   ],

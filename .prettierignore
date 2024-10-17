@@ -1,5 +1,5 @@
 node_modules/
 
 # Ignore all iOS and Android folders across packages
-packages/**/ios/**
-packages/**/android/**
+apps/**/ios/**
+apps/**/android/**

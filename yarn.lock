@@ -3012,9 +3012,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/storybook-react-native@workspace:packages/storybook-react-native":
+"@metamask/storybook-react-native@workspace:apps/storybook-react-native":
   version: 0.0.0-use.local
-  resolution: "@metamask/storybook-react-native@workspace:packages/storybook-react-native"
+  resolution: "@metamask/storybook-react-native@workspace:apps/storybook-react-native"
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@babel/preset-env": "npm:^7.20.0"
