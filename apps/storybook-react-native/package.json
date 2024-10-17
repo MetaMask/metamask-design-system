@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "description": "Storybook React Native",
-  "scripts": {},
   "devDependencies": {
     "typescript": "~5.2.2"
   },
