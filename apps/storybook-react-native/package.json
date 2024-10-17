@@ -1,0 +1,12 @@
+{
+  "name": "@metamask/storybook-react-native",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Storybook React Native",
+  "devDependencies": {
+    "typescript": "~5.2.2"
+  },
+  "engines": {
+    "node": "^18.18 || >=20"
+  }
+}

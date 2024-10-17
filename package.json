@@ -9,6 +9,7 @@
   },
   "files": [],
   "workspaces": [
+    "apps/*",
     "docs/*",
     "packages/*"
   ],

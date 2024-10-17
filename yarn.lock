@@ -1602,6 +1602,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@metamask/storybook-react-native@workspace:apps/storybook-react-native":
+  version: 0.0.0-use.local
+  resolution: "@metamask/storybook-react-native@workspace:apps/storybook-react-native"
+  dependencies:
+    typescript: "npm:~5.2.2"
+  languageName: unknown
+  linkType: soft
+
 "@metamask/storybook-react@workspace:docs/storybook-react":
   version: 0.0.0-use.local
   resolution: "@metamask/storybook-react@workspace:docs/storybook-react"
