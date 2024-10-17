@@ -26,7 +26,7 @@ describe('Tailwind Preset', () => {
     );
   });
 
-  it('textColor function incorporates theme colors and text colors', () => {
+  it('textColor function incorporates theme colors(e.g. text-primary-default, text-error-default) and text colors(e.g. text-default, text-muted)', () => {
     const textColorFn = tailwindConfig.theme?.extend?.textColor as (options: {
       theme: (path: string) => unknown;
     }) => Record<string, string>;
@@ -41,7 +41,7 @@ describe('Tailwind Preset', () => {
     );
   });
 
-  it('backgroundColor function incorporates theme colors and background colors', () => {
+  it('backgroundColor function incorporates theme colors(e.g. bg-primary-default, bg-error-default) and background colors(e.g. bg-default, bg-muted)', () => {
     const bgColorFn = tailwindConfig.theme?.extend
       ?.backgroundColor as (options: {
       theme: (path: string) => unknown;
@@ -57,7 +57,7 @@ describe('Tailwind Preset', () => {
     );
   });
 
-  it('borderColor function incorporates theme colors and border colors', () => {
+  it('borderColor function incorporates theme colors(e.g. border-primary-default, border-error-default) and border colors(e.g. border-default, border-muted)', () => {
     const borderColorFn = tailwindConfig.theme?.extend
       ?.borderColor as (options: {
       theme: (path: string) => unknown;
