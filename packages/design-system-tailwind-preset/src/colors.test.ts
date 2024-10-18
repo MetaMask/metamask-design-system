@@ -1,4 +1,3 @@
-// color.test.ts
 import {
   getDesignTokenVariables,
   collectCssVariables,
