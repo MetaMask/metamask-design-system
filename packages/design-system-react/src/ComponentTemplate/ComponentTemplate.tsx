@@ -1,5 +1,6 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
+
 import type { ComponentTemplateProps } from './ComponentTemplate.types';
 
 export const ComponentTemplate = React.forwardRef<
