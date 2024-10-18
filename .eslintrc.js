@@ -16,7 +16,7 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['*.test.{ts,js}'],
+      files: ['*.test.{ts,js,tsx,jsx}'],
       extends: ['@metamask/eslint-config-jest'],
     },
     {
@@ -27,7 +27,7 @@ module.exports = {
       },
     },
     {
-      files: ['*.ts'],
+      files: ['*.ts', '*.tsx'],
       extends: ['@metamask/eslint-config-typescript'],
       parserOptions: {
         tsconfigRootDir: __dirname,
