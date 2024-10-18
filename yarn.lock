@@ -1611,9 +1611,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/storybook-react@workspace:docs/storybook-react":
+"@metamask/storybook-react@workspace:apps/storybook-react":
   version: 0.0.0-use.local
-  resolution: "@metamask/storybook-react@workspace:docs/storybook-react"
+  resolution: "@metamask/storybook-react@workspace:apps/storybook-react"
   dependencies:
     "@chromatic-com/storybook": "npm:^1.9.0"
     "@metamask/design-tokens": "npm:^4.0.0"

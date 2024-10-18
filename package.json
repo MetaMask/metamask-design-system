@@ -10,7 +10,6 @@
   "files": [],
   "workspaces": [
     "apps/*",
-    "docs/*",
     "packages/*"
   ],
   "scripts": {
@@ -31,6 +30,7 @@
     "prepare-preview-builds": "./scripts/prepare-preview-builds.sh",
     "publish-previews": "yarn workspaces foreach --all --no-private --parallel --verbose run publish:preview",
     "setup": "yarn install",
+    "storybook": "yarn workspace @metamask/storybook-react storybook",
     "test": "yarn test:scripts --silent --collectCoverage=false --reporters=jest-silent-reporter && yarn test:packages",
     "test:clean": "yarn workspaces foreach --all --parallel --verbose run test:clean && yarn test",
     "test:packages": "yarn test:verbose --silent --collectCoverage=false --reporters=jest-silent-reporter",
