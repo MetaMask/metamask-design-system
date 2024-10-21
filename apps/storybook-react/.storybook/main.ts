@@ -12,8 +12,8 @@ function getAbsolutePath(value: string): any {
 }
 const config: StorybookConfig = {
   stories: [
-    '../src/**/*.mdx',
-    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../stories/**/*.mdx',
+    '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     // '../../../packages/react-components/src/**/*.stories.@(js|jsx|ts|tsx)', TO DO: Update when react component package is created
   ],
 

@@ -4,5 +4,6 @@
     "baseUrl": "./"
   },
   "references": [],
-  "include": ["../../types", "./src"]
+  // TODO: Remove "stories/**/*" once stories/ directory is removed
+  "include": ["stories/**/*", ".storybook/**/*"]
 }

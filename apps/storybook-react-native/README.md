@@ -1,14 +1,6 @@
 # `@metamask/storybook-react-native`
 
-Design System React Native
-
-## Installation
-
-`yarn add @metamask/storybook-react-native`
-
-or
-
-`npm install @metamask/storybook-react-native`
+Storybook React Native
 
 ## Contributing
 

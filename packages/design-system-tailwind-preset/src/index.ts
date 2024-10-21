@@ -1,9 +1,32 @@
-/**
- * Example function that returns a greeting for the given name.
- *
- * @param name - The name to greet.
- * @returns The greeting.
- */
-export default function greeter(name: string): string {
-  return `Hello, ${name}!`;
-}
+import type { Config } from 'tailwindcss';
+
+import { colors } from './colors';
+
+const tailwindConfig: Config = {
+  content: [],
+  theme: {
+    extend: {
+      colors: {
+        ...colors,
+      },
+      // Reduces redundancy by enabling shorter Tailwind class names
+      textColor: ({ theme }) => ({
+        ...theme('colors'), // Incorporate existing color utilities like text-primary-default
+        ...colors.text, // e.g. text-default instead of text-text-default
+      }),
+      backgroundColor: ({ theme }) => ({
+        ...theme('colors'), // Incorporate existing color utilities like bg-primary-default
+        ...colors.background, // e.g. bg-default instead of bg-background-default
+      }),
+      borderColor: ({ theme }) => ({
+        ...theme('colors'), // Incorporate existing color utilities like border-primary-default
+        ...colors.border, // e.g. border-default instead of border-border-default
+      }),
+    },
+  },
+  plugins: [],
+};
+
+export default tailwindConfig;
+
+module.exports = tailwindConfig;

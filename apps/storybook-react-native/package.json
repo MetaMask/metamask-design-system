@@ -1,7 +1,8 @@
 {
   "name": "@metamask/storybook-react-native",
   "version": "0.0.0",
-  "description": "Design System React Native",
+  "private": true,
+  "description": "Storybook React Native",
   "keywords": [
     "MetaMask",
     "Ethereum"
@@ -79,13 +80,9 @@
     "ts-jest": "^27.1.4",
     "typedoc": "^0.24.8",
     "typedoc-plugin-missing-exports": "^2.0.0",
-    "typescript": "5.0.4"
+    "typescript": "~5.2.2"
   },
   "engines": {
     "node": "^18.18 || >=20"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
   }
 }
