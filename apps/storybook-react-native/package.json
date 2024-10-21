@@ -51,6 +51,10 @@
     "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-native": "0.72.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
@@ -77,10 +81,6 @@
     "typedoc": "^0.24.8",
     "typedoc-plugin-missing-exports": "^2.0.0",
     "typescript": "~5.2.2"
-  },
-  "peerDependencies": {
-    "react": "18.2.0",
-    "react-native": "0.72.0"
   },
   "engines": {
     "node": "^18.18 || >=20"
