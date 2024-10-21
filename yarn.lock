@@ -3063,14 +3063,13 @@ __metadata:
     jest: "npm:^29.6.3"
     metro-react-native-babel-preset: "npm:^0.76.0"
     prettier: "npm:2.8.8"
+    react: "npm:18.2.0"
+    react-native: "npm:0.72.0"
     react-test-renderer: "npm:18.2.0"
     ts-jest: "npm:^27.1.4"
     typedoc: "npm:^0.24.8"
     typedoc-plugin-missing-exports: "npm:^2.0.0"
     typescript: "npm:~5.2.2"
-  peerDependencies:
-    react: 18.2.0
-    react-native: 0.72.0
   languageName: unknown
   linkType: soft
 
@@ -13692,6 +13691,15 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 10/39473e43f64eec92da35db9d4411f3887b368038670787d49dd23172eb3a29953eb13767d1bfa34cbe2665b6e25632cad146e362e8910ce33755d343537763ae
+  languageName: node
+  linkType: hard
+
+"react@npm:18.2.0":
+  version: 18.2.0
+  resolution: "react@npm:18.2.0"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+  checksum: 10/b9214a9bd79e99d08de55f8bef2b7fc8c39630be97c4e29d7be173d14a9a10670b5325e94485f74cd8bff4966ef3c78ee53c79a7b0b9b70cba20aa8973acc694
   languageName: node
   linkType: hard
 
