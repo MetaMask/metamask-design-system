@@ -9,7 +9,7 @@
     // Prevent automatic inclusion of @types packages by using an empty array
     // This gives us more control over type definitions and helps avoid conflicts
     // Types must be explicitly imported in files where they are needed
-    // or included in extending tsconfig files for specific parts of the projec
+    // or included in extending tsconfig files for specific parts of the project
     "types": []
   },
   "exclude": ["./jest.config.packages.ts", "**/*.test.ts", "**/jest.config.ts"]
