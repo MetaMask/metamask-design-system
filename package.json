@@ -46,17 +46,11 @@
   "resolutions": {
     "elliptic@6.5.4": "^6.5.7",
     "fast-xml-parser@^4.3.4": "^4.4.1",
-    "react-native": "^0.75.4",
     "ws@7.4.6": "^7.5.10"
-  },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-native": "^0.75.4"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
-    "@babel/plugin-transform-private-methods": "^7.25.7",
     "@babel/preset-typescript": "^7.23.3",
     "@lavamoat/allow-scripts": "^3.2.1",
     "@metamask/create-release-branch": "^3.0.0",
@@ -69,7 +63,6 @@
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.191",
     "@types/node": "^16.18.54",
-    "@types/react": "^18.3.11",
     "@types/react-native": "^0.73.0",
     "@types/semver": "^7",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
