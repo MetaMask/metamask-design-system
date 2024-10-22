@@ -1,18 +1,9 @@
 {
   "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["esnext"],
     "jsx": "react-native",
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "strict": true,
-    "noEmit": true,
-    "isolatedModules": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "lib": ["esnext"],
+    "moduleResolution": "Node16",
     "types": ["react", "react-native"]
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
