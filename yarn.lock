@@ -2717,7 +2717,6 @@ __metadata:
     "@types/jest": "npm:^27.4.1"
     "@types/lodash": "npm:^4.14.191"
     "@types/node": "npm:^16.18.54"
-    "@types/react-native": "npm:^0.73.0"
     "@types/semver": "npm:^7"
     "@typescript-eslint/eslint-plugin": "npm:^5.62.0"
     "@typescript-eslint/parser": "npm:^5.62.0"
