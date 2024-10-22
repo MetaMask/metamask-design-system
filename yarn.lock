@@ -2784,19 +2784,12 @@ __metadata:
     "@types/react-test-renderer": "npm:^18.2.0"
     "@typescript-eslint/eslint-plugin": "npm:^5.62.0"
     "@typescript-eslint/parser": "npm:^5.62.0"
-    babel-jest: "npm:^27.5.1"
     deepmerge: "npm:^4.2.2"
     eslint: "npm:^8.44.0"
-    eslint-plugin-ft-flow: "npm:^3.0.11"
-    jest: "npm:^27.5.1"
     metro-react-native-babel-preset: "npm:^0.76.0"
     prettier: "npm:^2.7.1"
     react: "npm:^18.2.0"
     react-native: "npm:0.72.0"
-    react-test-renderer: "npm:18.2.0"
-    ts-jest: "npm:^27.1.4"
-    typedoc: "npm:^0.24.8"
-    typedoc-plugin-missing-exports: "npm:^2.0.0"
     typescript: "npm:~5.2.2"
   languageName: unknown
   linkType: soft
@@ -4745,9 +4738,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:^16.18.54":
-  version: 16.18.113
-  resolution: "@types/node@npm:16.18.113"
-  checksum: 10/7d7d9c63fd910d0eb5ed9611cadec55d9af5585338394e1ecb8871f2f96bea338c14dd470c10d64fbe87ff703cb94d7cab9b9e6ce260f0ad171d79419b1c9201
+  version: 16.18.114
+  resolution: "@types/node@npm:16.18.114"
+  checksum: 10/b80a46c5f57f304700ade91ea0589684927c21e81e5655bb384a801baa013d53f5611e52d533787504d99fcdafb5476bed1760876795eb7cdd9241668b1b97d4
   languageName: node
   linkType: hard
 
@@ -7913,19 +7906,6 @@ __metadata:
     "@babel/eslint-parser": ^7.12.0
     eslint: ^8.1.0
   checksum: 10/ea03496d247b9de915f0c5cee3724d4cbec8c0ab22029e4c06301c524bd8a7cbc20598971bed792304c5b3a17c1a1004a1bf7c7f59b55d3887aa7581e00ad0e1
-  languageName: node
-  linkType: hard
-
-"eslint-plugin-ft-flow@npm:^3.0.11":
-  version: 3.0.11
-  resolution: "eslint-plugin-ft-flow@npm:3.0.11"
-  dependencies:
-    lodash: "npm:^4.17.21"
-    string-natural-compare: "npm:^3.0.1"
-  peerDependencies:
-    eslint: ^8.56.0 || ^9.0.0
-    hermes-eslint: ">=0.15.0"
-  checksum: 10/f516500f10e7659cac7cf42adbf15aa41dbe4ac75cdc5893658b073e0564acedba8ceb33c20de999c546208d3e94f03ef178df4d124cef113e179003070b53c7
   languageName: node
   linkType: hard
 
@@ -13340,7 +13320,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.12.0 || ^17.0.0 || ^18.0.0, react-is@npm:^18.0.0, react-is@npm:^18.2.0":
+"react-is@npm:^16.12.0 || ^17.0.0 || ^18.0.0, react-is@npm:^18.0.0":
   version: 18.3.1
   resolution: "react-is@npm:18.3.1"
   checksum: 10/d5f60c87d285af24b1e1e7eaeb123ec256c3c8bdea7061ab3932e3e14685708221bf234ec50b21e10dd07f008f1b966a2730a0ce4ff67905b3872ff2042aec22
@@ -13487,19 +13467,6 @@ __metadata:
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: 10/06457fe5bcaa44aeca998905b6849304742ea1cc2d3841e4a0964c745ff392bc4dec07f8c779f317faacce3a0bf6f84e15020ac0fa81adb931067dbb0baf707b
-  languageName: node
-  linkType: hard
-
-"react-test-renderer@npm:18.2.0":
-  version: 18.2.0
-  resolution: "react-test-renderer@npm:18.2.0"
-  dependencies:
-    react-is: "npm:^18.2.0"
-    react-shallow-renderer: "npm:^16.15.0"
-    scheduler: "npm:^0.23.0"
-  peerDependencies:
-    react: ^18.2.0
-  checksum: 10/39473e43f64eec92da35db9d4411f3887b368038670787d49dd23172eb3a29953eb13767d1bfa34cbe2665b6e25632cad146e362e8910ce33755d343537763ae
   languageName: node
   linkType: hard
 
@@ -14072,7 +14039,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.23.0, scheduler@npm:^0.23.2":
+"scheduler@npm:^0.23.2":
   version: 0.23.2
   resolution: "scheduler@npm:0.23.2"
   dependencies:

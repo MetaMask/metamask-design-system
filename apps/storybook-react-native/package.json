@@ -1,55 +1,12 @@
 {
   "name": "@metamask/storybook-react-native",
-  "version": "0.0.0",
   "private": true,
   "description": "Storybook React Native",
-  "keywords": [
-    "MetaMask",
-    "Ethereum"
-  ],
-  "homepage": "https://github.com/MetaMask/metamask-design-system/tree/main/apps/storybook-react-native#readme",
-  "bugs": {
-    "url": "https://github.com/MetaMask/metamask-design-system/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/MetaMask/metamask-design-system.git"
-  },
-  "license": "MIT",
-  "sideEffects": false,
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
-    },
-    "./package.json": "./package.json"
-  },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.cts",
-  "files": [
-    "dist/"
-  ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
-    "build:docs": "typedoc",
-    "changelog:update": "../../scripts/update-changelog.sh @metamask/storybook-react-native",
-    "changelog:validate": "../../scripts/validate-changelog.sh @metamask/storybook-react-native",
     "postinstall": "cd ios && pod install || exit 0",
-    "publish:preview": "yarn npm publish --tag preview",
     "run-android": "react-native run-android",
     "run-ios": "react-native run-ios --scheme MetamaskDesignSystemApp",
-    "since-latest-release": "../../scripts/since-latest-release.sh",
-    "start": "react-native start",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
-    "test:clean": "NODE_OPTIONS=--experimental-vm-modules jest --clearCache",
-    "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
-    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
+    "start": "react-native start"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -72,17 +29,10 @@
     "@types/react-test-renderer": "^18.2.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
-    "babel-jest": "^27.5.1",
     "deepmerge": "^4.2.2",
     "eslint": "^8.44.0",
-    "eslint-plugin-ft-flow": "^3.0.11",
-    "jest": "^27.5.1",
     "metro-react-native-babel-preset": "^0.76.0",
     "prettier": "^2.7.1",
-    "react-test-renderer": "18.2.0",
-    "ts-jest": "^27.1.4",
-    "typedoc": "^0.24.8",
-    "typedoc-plugin-missing-exports": "^2.0.0",
     "typescript": "~5.2.2"
   },
   "engines": {
