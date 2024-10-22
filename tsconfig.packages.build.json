@@ -5,7 +5,13 @@
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "inlineSources": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "types": []
   },
-  "exclude": ["./jest.config.packages.ts", "**/*.test.ts", "**/jest.config.ts"]
+  "exclude": [
+    "./jest.config.packages.ts",
+    "**/*.test.ts",
+    "**/jest.config.ts",
+    "node_modules"
+  ]
 }

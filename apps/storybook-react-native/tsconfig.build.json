@@ -7,8 +7,10 @@
     "jsx": "react-native",
     "lib": ["esnext"],
     "types": ["react-native"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noEmit": false
   },
   "references": [],
-  "include": ["../../types", "./src"]
+  "include": ["../../types", "./src"],
+  "exclude": ["node_modules", "jest.config.js", "**/__tests__/**/*"]
 }
