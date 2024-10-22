@@ -3297,6 +3297,7 @@ __metadata:
   dependencies:
     "@metamask/auto-changelog": "npm:^3.4.4"
     "@types/jest": "npm:^27.4.1"
+    "@types/node": "npm:^22.7.8"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^27.5.1"
     postcss: "npm:^8.4.47"
@@ -3455,6 +3456,7 @@ __metadata:
     babel-jest: "npm:^27.5.1"
     deepmerge: "npm:^4.2.2"
     eslint: "npm:^8.44.0"
+    eslint-plugin-ft-flow: "npm:^3.0.11"
     jest: "npm:^27.5.1"
     metro-react-native-babel-preset: "npm:^0.76.0"
     prettier: "npm:^2.7.1"
@@ -5415,6 +5417,15 @@ __metadata:
   version: 16.18.113
   resolution: "@types/node@npm:16.18.113"
   checksum: 10/7d7d9c63fd910d0eb5ed9611cadec55d9af5585338394e1ecb8871f2f96bea338c14dd470c10d64fbe87ff703cb94d7cab9b9e6ce260f0ad171d79419b1c9201
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^22.7.8":
+  version: 22.7.8
+  resolution: "@types/node@npm:22.7.8"
+  dependencies:
+    undici-types: "npm:~6.19.2"
+  checksum: 10/22a7cb6da6a1cf914016bdcfb1d20399ec549a6220a9fd03253dc995848fa328c9dbeaf291b63bd60b0cf44387044adc80fc8d97401c647711b0b839d0ed4fe5
   languageName: node
   linkType: hard
 
@@ -8580,6 +8591,19 @@ __metadata:
     "@babel/eslint-parser": ^7.12.0
     eslint: ^8.1.0
   checksum: 10/ea03496d247b9de915f0c5cee3724d4cbec8c0ab22029e4c06301c524bd8a7cbc20598971bed792304c5b3a17c1a1004a1bf7c7f59b55d3887aa7581e00ad0e1
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-ft-flow@npm:^3.0.11":
+  version: 3.0.11
+  resolution: "eslint-plugin-ft-flow@npm:3.0.11"
+  dependencies:
+    lodash: "npm:^4.17.21"
+    string-natural-compare: "npm:^3.0.1"
+  peerDependencies:
+    eslint: ^8.56.0 || ^9.0.0
+    hermes-eslint: ">=0.15.0"
+  checksum: 10/f516500f10e7659cac7cf42adbf15aa41dbe4ac75cdc5893658b073e0564acedba8ceb33c20de999c546208d3e94f03ef178df4d124cef113e179003070b53c7
   languageName: node
   linkType: hard
 
