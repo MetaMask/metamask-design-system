@@ -3,7 +3,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "jsx": "react-native",
+    "lib": ["esnext"],
+    "types": ["react-native"],
+    "skipLibCheck": true
   },
   "references": [],
   "include": ["../../types", "./src"]

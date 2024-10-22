@@ -3448,6 +3448,7 @@ __metadata:
     "@react-native/typescript-config": "npm:0.75.4"
     "@types/jest": "npm:^27.4.1"
     "@types/react": "npm:^18.2.0"
+    "@types/react-native": "npm:^0.73.0"
     "@types/react-test-renderer": "npm:^18.2.0"
     "@typescript-eslint/eslint-plugin": "npm:^5.62.0"
     "@typescript-eslint/parser": "npm:^5.62.0"
