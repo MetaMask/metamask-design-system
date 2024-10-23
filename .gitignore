@@ -40,7 +40,8 @@ apps/*/*.tsbuildinfo
 
 # Linux system files
 *~
-
+# bundle artifact
+*.jsbundle
 # Android/Java
 *.keystore
 **/android/.gradle/
