@@ -26,7 +26,7 @@
     "lint:dependencies:fix": "depcheck && yarn dedupe",
     "lint:eslint": "eslint . --cache --ext js,cjs,mjs,ts",
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write && yarn constraints --fix && yarn lint:dependencies:fix",
-    "lint:misc": "prettier --check 'packages/**/*.{json,jsonc,md,yml}' --ignore-path .prettierignore",
+    "lint:misc": "prettier '**/*.json' '**/*.md' '!**/CHANGELOG.old.md' '**/*.yml' '!.yarnrc.yml' '!merged-packages/**' --ignore-path .prettierignore",
     "prepack": "./scripts/prepack.sh",
     "prepare-preview-builds": "./scripts/prepare-preview-builds.sh",
     "publish-previews": "yarn workspaces foreach --all --no-private --parallel --verbose run publish:preview",
@@ -95,9 +95,6 @@
   "packageManager": "yarn@4.2.2",
   "engines": {
     "node": "^18.18 || >=20"
-  },
-  "installConfig": {
-    "hoistingLimits": "workspaces"
   },
   "lavamoat": {
     "allowScripts": {
