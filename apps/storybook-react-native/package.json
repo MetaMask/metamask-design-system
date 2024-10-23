@@ -2,6 +2,7 @@
   "name": "@metamask/storybook-react-native",
   "private": true,
   "description": "Storybook React Native",
+  "files": [],
   "scripts": {
     "postinstall": "cd ios && pod install || exit 0",
     "run-android": "react-native run-android",

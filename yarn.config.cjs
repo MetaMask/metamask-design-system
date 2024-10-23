@@ -43,15 +43,10 @@ module.exports = defineConfig({
         Yarn.dependencies({ workspace }),
       );
 
-      // Completely ignore apps workspaces
-      if (isApps) {
-        continue;
-      }
-
       // All packages must have a name.
       expectWorkspaceField(workspace, 'name');
 
-      if (isChildWorkspace) {
+      if (isChildWorkspace && !isApps) {
         // All non-root packages must have a name that matches its directory
         // (e.g., a package in a workspace directory called `foo` must be called
         // `@metamask/foo`).
@@ -164,7 +159,7 @@ module.exports = defineConfig({
         );
       }
 
-      if (isChildWorkspace) {
+      if (isChildWorkspace && !isApps) {
         // The list of files included in all non-root packages must only include
         // files generated during the build process.
         expectWorkspaceArrayField(workspace, 'files', 'dist/');
@@ -236,7 +231,7 @@ module.exports = defineConfig({
         );
       }
 
-      if (isChildWorkspace) {
+      if (isChildWorkspace && !isApps) {
         // All non-root packages must have a valid README.md file.
         await expectReadme(workspace, workspaceBasename);
       }
