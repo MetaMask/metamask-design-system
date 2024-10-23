@@ -63,7 +63,6 @@ apps/*/*.tsbuildinfo
 *.xcuserstate
 *.xcworkspace
 !ios/Podfile.lock
-!ios/Pods/
 
 # React Native specific
 **/react-native/packager-*

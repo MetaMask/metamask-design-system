@@ -20,7 +20,6 @@
     "changelog:update": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:update",
     "changelog:validate": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:validate",
     "create-package": "ts-node scripts/create-package",
-    "postinstall": "cd apps/storybook-react-native/ios && pod install || exit 0",
     "lint": "yarn lint:eslint && yarn lint:misc --check && yarn constraints && yarn lint:dependencies",
     "lint:dependencies": "depcheck && yarn dedupe --check",
     "lint:dependencies:fix": "depcheck && yarn dedupe",
@@ -28,6 +27,7 @@
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write && yarn constraints --fix && yarn lint:dependencies:fix",
     "lint:misc": "prettier '**/*.json' '**/*.md' '!**/CHANGELOG.old.md' '**/*.yml' '!.yarnrc.yml' '!merged-packages/**' --ignore-path .prettierignore",
     "prepack": "./scripts/prepack.sh",
+    "pod:install": "cd apps/storybook-react-native/ios && pod install || exit 0",
     "prepare-preview-builds": "./scripts/prepare-preview-builds.sh",
     "publish-previews": "yarn workspaces foreach --all --no-private --parallel --verbose run publish:preview",
     "setup": "yarn install",
@@ -101,8 +101,7 @@
       "@lavamoat/preinstall-always-fail": false,
       "@keystonehq/bc-ur-registry-eth>hdkey>secp256k1": true,
       "babel-runtime>core-js": false,
-      "simple-git-hooks": false,
-      "$root$": false
+      "simple-git-hooks": false
     }
   }
 }
