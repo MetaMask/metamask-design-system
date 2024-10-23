@@ -2829,21 +2829,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/test@workspace:packages/test":
-  version: 0.0.0-use.local
-  resolution: "@metamask/test@workspace:packages/test"
-  dependencies:
-    "@metamask/auto-changelog": "npm:^3.4.4"
-    "@types/jest": "npm:^27.4.1"
-    deepmerge: "npm:^4.2.2"
-    jest: "npm:^27.5.1"
-    ts-jest: "npm:^27.1.4"
-    typedoc: "npm:^0.24.8"
-    typedoc-plugin-missing-exports: "npm:^2.0.0"
-    typescript: "npm:~5.2.2"
-  languageName: unknown
-  linkType: soft
-
 "@metamask/utils@npm:^9.0.0, @metamask/utils@npm:^9.1.0":
   version: 9.3.0
   resolution: "@metamask/utils@npm:9.3.0"
