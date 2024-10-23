@@ -1,4 +1,3 @@
-// eslint-disable-next-line global-require
 const designSystemPreset = require('@metamask/design-system-tailwind-preset');
 
 /** @type {import('tailwindcss').Config} */

@@ -2,6 +2,7 @@
   "name": "@metamask/storybook-react",
   "private": true,
   "description": "storybook react",
+  "files": [],
   "scripts": {
     "build-storybook": "storybook build",
     "storybook": "storybook dev -p 6006"
