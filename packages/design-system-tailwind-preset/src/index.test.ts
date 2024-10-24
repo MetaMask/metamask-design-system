@@ -13,8 +13,7 @@ describe('Tailwind Preset', () => {
 
   it('configuration has correct structure', () => {
     expect(tailwindConfig).toHaveProperty('content');
-    expect(tailwindConfig).toHaveProperty('theme');
-    expect(tailwindConfig.theme).toHaveProperty('extend');
+    expect(tailwindConfig).toHaveProperty('theme.extend');
     expect(tailwindConfig).toHaveProperty('plugins');
   });
 

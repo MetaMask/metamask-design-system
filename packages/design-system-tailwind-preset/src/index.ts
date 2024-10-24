@@ -23,12 +23,13 @@ const tailwindConfig: Config = {
         ...theme('colors'), // Incorporate existing color utilities like border-primary-default
         ...colors.border, // e.g. border-default instead of border-border-default
       }),
-      boxShadow: shadows,
+      boxShadow: shadows, // Sets default shadows
     },
   },
   plugins: [
-    shadowPlugin, // Use the imported shadowPlugin
+    shadowPlugin, // Allows for combination of size and color shadow utilities
   ],
 };
 
 export default tailwindConfig;
+module.exports = tailwindConfig;
