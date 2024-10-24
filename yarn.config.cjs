@@ -572,8 +572,7 @@ function expectCorrectWorkspaceChangelogScripts(workspace) {
 /**
  * Expect that if the workspace package lists another workspace package within
  * `dependencies` or `devDependencies`, the version used within the dependency
- * range is exactly equal to the current version of the dependency (and the
- * range uses the `^` modifier).
+ * is `workspace:^`.
  *
  * @param {Yarn} Yarn - The Yarn "global".
  * @param {Workspace} workspace - The workspace to check.
@@ -589,7 +588,7 @@ function expectUpToDateWorkspaceDependenciesAndDevDependencies(
       dependencyWorkspace !== null &&
       dependency.type !== 'peerDependencies'
     ) {
-      dependency.update(`^${dependencyWorkspace.manifest.version}`);
+      dependency.update('workspace:^');
     }
   }
 }

@@ -7,6 +7,5 @@
     { "path": "./apps/storybook-react-native" },
     { "path": "./apps/storybook-react" }
   ],
-  "files": [],
-  "include": ["./types"]
+  "files": []
 }

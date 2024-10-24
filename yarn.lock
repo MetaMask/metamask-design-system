@@ -2622,7 +2622,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/design-system-tailwind-preset@npm:^0.0.0, @metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset":
+"@metamask/design-system-tailwind-preset@workspace:^, @metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset":
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
@@ -2798,7 +2798,7 @@ __metadata:
   resolution: "@metamask/storybook-react@workspace:apps/storybook-react"
   dependencies:
     "@chromatic-com/storybook": "npm:^1.9.0"
-    "@metamask/design-system-tailwind-preset": "npm:^0.0.0"
+    "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": "npm:^4.0.0"
     "@storybook/addon-a11y": "npm:^8.3.5"
     "@storybook/addon-essentials": "npm:^8.3.5"
