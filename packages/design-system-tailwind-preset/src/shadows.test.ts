@@ -2,9 +2,17 @@ import {
   getDesignTokenVariables,
   collectCssVariables,
 } from '../scripts/testUtils';
-import { shadows, shadowColors } from './shadows';
+import { shadows, shadowColors, shadowPlugin } from './shadows';
 
-describe('Shadows Preset', () => {
+// Mock version of Tailwind's PluginAPI with only the methods we use (addUtilities)
+type MockedPluginAPI = {
+  addUtilities: jest.Mock;
+};
+
+// Define a type for the Tailwind plugin handler function
+type TailwindPluginHandler = (api: MockedPluginAPI) => void;
+
+describe('Shadows', () => {
   // Collect all CSS variables used in the 'shadows' object
   const usedVariables = collectCssVariables({ ...shadows, ...shadowColors });
 
@@ -49,5 +57,49 @@ describe('Shadows Preset', () => {
 
     // Expect no unused variables
     expect(unusedVariables).toHaveLength(0);
+  });
+
+  /**
+   * Smoke Test: Verify that shadowPlugin is defined and has a handler function.
+   */
+  it('should be defined and have a handler function', () => {
+    expect(shadowPlugin).toBeDefined();
+    expect(shadowPlugin.handler).toBeDefined();
+    expect(typeof shadowPlugin.handler).toBe('function');
+  });
+
+  /**
+   * Basic Invocation Test: Ensure that the handler function executes without errors
+   * and interacts with addUtilities as expected.
+   */
+  it('should add shadow color utilities correctly', () => {
+    // Mock the addUtilities function
+    const addUtilitiesMock = jest.fn();
+
+    // Access the handler function and cast it to the defined type
+    const shadowPluginHandler =
+      shadowPlugin.handler as unknown as TailwindPluginHandler;
+
+    // Execute the shadow plugin's handler with the mocked addUtilities
+    shadowPluginHandler({
+      addUtilities: addUtilitiesMock,
+    });
+
+    // Prepare the expected utilities
+    const expectedUtilities: Record<string, Record<string, string>> = {};
+    Object.entries(shadowColors).forEach(([key, value]) => {
+      expectedUtilities[`.shadow-${key}`] = {
+        '--shadow-color': value,
+      };
+    });
+
+    // Verify that addUtilities was called with the correct utilities and options
+    expect(addUtilitiesMock).toHaveBeenCalledWith(
+      expect.objectContaining(expectedUtilities),
+      expect.objectContaining({
+        respectPrefix: false,
+        respectImportant: true,
+      }),
+    );
   });
 });
