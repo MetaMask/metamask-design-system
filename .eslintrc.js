@@ -67,7 +67,17 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      typescript: {},
+      typescript: {
+        project: './tsconfig.packages.json',
+        // Adding additional paths to resolver
+        paths: ['apps/*', 'packages/*'],
+      },
+      node: {
+        // Specify the extensions if necessary
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        // Include workspace directories
+        paths: ['apps', 'packages'],
+      },
     },
     jsdoc: {
       mode: 'typescript',
