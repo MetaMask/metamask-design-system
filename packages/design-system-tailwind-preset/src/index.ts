@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 import { colors } from './colors';
+import { shadows, shadowPlugin } from './shadows';
 
 const tailwindConfig: Config = {
   content: [],
@@ -22,11 +23,13 @@ const tailwindConfig: Config = {
         ...theme('colors'), // Incorporate existing color utilities like border-primary-default
         ...colors.border, // e.g. border-default instead of border-border-default
       }),
+      boxShadow: shadows, // Sets default shadows
     },
   },
-  plugins: [],
+  plugins: [
+    shadowPlugin, // Allows for combination of size and color shadow utilities
+  ],
 };
 
 export default tailwindConfig;
-
 module.exports = tailwindConfig;
