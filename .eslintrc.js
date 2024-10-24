@@ -68,15 +68,26 @@ module.exports = {
   settings: {
     'import/resolver': {
       typescript: {
+        // Specify the path to the TypeScript configuration file
         project: './tsconfig.packages.json',
-        // Adding additional paths to resolver
+        // Define additional paths for module resolution to match TypeScript paths
         paths: ['apps/*', 'packages/*'],
+        /**
+         * The 'paths' option allows ESLint to understand module aliases defined in TypeScript.
+         * Here, 'apps/*' and 'packages/*' correspond to the directories where your workspace packages reside.
+         * This should align with the 'paths' defined in your TypeScript compilerOptions.
+         */
       },
       node: {
-        // Specify the extensions if necessary
+        // Specify file extensions that ESLint should consider when resolving modules
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        // Include workspace directories
+        // Include workspace directories to help ESLint resolve modules within these folders
         paths: ['apps', 'packages'],
+        /**
+         * The 'node' resolver is configured to recognize JavaScript and TypeScript file extensions.
+         * The 'paths' array includes 'apps' and 'packages' directories, aligning with the workspace structure.
+         * This ensures that modules imported from these directories are correctly resolved by ESLint.
+         */
       },
     },
     jsdoc: {
