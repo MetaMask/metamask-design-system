@@ -1,5 +1,6 @@
 import tailwindConfig from '.';
 import { colors } from './colors';
+import { shadows } from './shadows';
 
 describe('Tailwind Preset', () => {
   /**
@@ -12,7 +13,8 @@ describe('Tailwind Preset', () => {
 
   it('configuration has correct structure', () => {
     expect(tailwindConfig).toHaveProperty('content');
-    expect(tailwindConfig).toHaveProperty('theme.extend');
+    expect(tailwindConfig).toHaveProperty('theme');
+    expect(tailwindConfig.theme).toHaveProperty('extend');
     expect(tailwindConfig).toHaveProperty('plugins');
   });
 
@@ -70,6 +72,20 @@ describe('Tailwind Preset', () => {
         ...colors,
         ...colors.border,
       }),
+    );
+  });
+
+  /**
+   * Shadows
+   */
+
+  it('boxShadow is correctly defined in theme.extend', () => {
+    expect(tailwindConfig.theme?.extend).toHaveProperty('boxShadow');
+  });
+
+  it('boxShadow contains all expected shadow sizes', () => {
+    expect(tailwindConfig.theme?.extend?.boxShadow).toStrictEqual(
+      expect.objectContaining(shadows),
     );
   });
 });
