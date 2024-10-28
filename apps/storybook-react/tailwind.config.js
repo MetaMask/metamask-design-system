@@ -8,4 +8,11 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx}',
     './stories/**/*.{js,jsx,ts,tsx}',
   ],
+  theme: {
+    extend: {
+      fontSize: {
+        'l-display-md': 'var(--typography-l-display-md-font-size)',
+      },
+    },
+  },
 };
