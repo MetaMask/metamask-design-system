@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.packages.build.jsonc",
+  "extends": "../../tsconfig.packages.build.json",
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
@@ -7,5 +7,5 @@
     "types": ["node"]
   },
   "references": [],
-  "include": ["../../types", "./src"]
+  "include": ["./src"]
 }

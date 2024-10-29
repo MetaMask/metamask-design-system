@@ -1,10 +1,10 @@
 {
-  "extends": "../../tsconfig.packages.build.jsonc",
+  "extends": "../../tsconfig.packages.build.json",
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
     "rootDir": "./src"
   },
   "references": [],
-  "include": ["../../types", "./src"]
+  "include": ["./src"]
 }
