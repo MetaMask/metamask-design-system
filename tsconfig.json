@@ -1,11 +1,12 @@
 {
   "compilerOptions": { "esModuleInterop": true, "noEmit": true },
   "references": [
+    { "path": "./apps/storybook-react" },
+    { "path": "./apps/storybook-react-native" },
+    { "path": "./packages/design-system-react" },
     { "path": "./packages/design-system-react-native" },
     { "path": "./packages/design-system-tailwind-preset" },
-    { "path": "./packages/metamask-module-template" },
-    { "path": "./apps/storybook-react-native" },
-    { "path": "./apps/storybook-react" }
+    { "path": "./packages/metamask-module-template" }
   ],
   "files": []
 }

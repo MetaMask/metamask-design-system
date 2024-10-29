@@ -8,6 +8,7 @@ This repository contains the following packages [^fn1]:
 
 <!-- start package list -->
 
+- [`@metamask/design-system-react`](packages/design-system-react)
 - [`@metamask/design-system-react-native`](packages/design-system-react-native)
 - [`@metamask/design-system-tailwind-preset`](packages/design-system-tailwind-preset)
 - [`@metamask/metamask-module-template`](packages/metamask-module-template)
@@ -22,6 +23,7 @@ Or, in graph form [^fn1]:
 %%{ init: { 'flowchart': { 'curve': 'bumpX' } } }%%
 graph LR;
 linkStyle default opacity:0.5
+  design_system_react(["@metamask/design-system-react"]);
   design_system_react_native(["@metamask/design-system-react-native"]);
   design_system_tailwind_preset(["@metamask/design-system-tailwind-preset"]);
   metamask_module_template(["@metamask/metamask-module-template"]);
