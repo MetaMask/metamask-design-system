@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@metamask/auto-changelog": "^3.4.4",
+    "@metamask/design-system-tailwind-preset": "workspace:^",
     "@storybook/react": "^8.3.5",
     "@storybook/test": "^8.3.5",
     "@types/jest": "^27.4.1",
@@ -61,7 +62,6 @@
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
-    "@metamask/design-system-tailwind-preset": "^0.0.0",
     "@metamask/design-tokens": "^4.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
