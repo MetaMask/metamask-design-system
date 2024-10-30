@@ -4,7 +4,7 @@ const designSystemPreset = require('@metamask/design-system-tailwind-preset');
 module.exports = {
   presets: [designSystemPreset],
   content: [
-    // '../../packages/react-components/src/**/*.{js,jsx,ts,tsx}', TO DO: Update when react component package is created
+    '../../packages/design-system-react/src/**/*.{js,jsx,ts,tsx}',
     './src/**/*.{js,jsx,ts,tsx}',
     './stories/**/*.{js,jsx,ts,tsx}',
   ],

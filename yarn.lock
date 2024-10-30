@@ -2627,13 +2627,22 @@ __metadata:
   resolution: "@metamask/design-system-react@workspace:packages/design-system-react"
   dependencies:
     "@metamask/auto-changelog": "npm:^3.4.4"
+    "@storybook/react": "npm:^8.3.5"
+    "@storybook/test": "npm:^8.3.5"
     "@types/jest": "npm:^27.4.1"
+    "@types/react": "npm:^18.2.0"
+    "@types/react-dom": "npm:^18.2.0"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^27.5.1"
     ts-jest: "npm:^27.1.4"
     typedoc: "npm:^0.24.8"
     typedoc-plugin-missing-exports: "npm:^2.0.0"
     typescript: "npm:~5.2.2"
+  peerDependencies:
+    "@metamask/design-system-tailwind-preset": "workspace:^"
+    react: ^16.0.0
+    react-dom: ^16.0.0
+    tailwindcss: ^3.0.0
   languageName: unknown
   linkType: soft
 
@@ -2832,7 +2841,7 @@ __metadata:
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     storybook: "npm:^8.3.5"
-    tailwindcss: "npm:^3.4.13"
+    tailwindcss: "npm:^3.0.0"
     typescript: "npm:~5.2.2"
     vite: "npm:^5.4.8"
   languageName: unknown
@@ -14832,7 +14841,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.4.13":
+"tailwindcss@npm:^3.0.0":
   version: 3.4.14
   resolution: "tailwindcss@npm:3.4.14"
   dependencies:

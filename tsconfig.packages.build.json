@@ -12,5 +12,11 @@
     // or included in extending tsconfig files for specific parts of the project
     "types": []
   },
-  "exclude": ["./jest.config.packages.ts", "**/*.test.ts", "**/jest.config.ts"]
+  "exclude": [
+    "./jest.config.packages.ts",
+    "**/*.test.ts",
+    "**/jest.config.ts",
+    "**/*.stories.ts",
+    "**/*.stories.tsx"
+  ]
 }

@@ -14,7 +14,7 @@ const config: StorybookConfig = {
   stories: [
     '../stories/**/*.mdx',
     '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-    // '../../../packages/react-components/src/**/*.stories.@(js|jsx|ts|tsx)', TO DO: Update when react component package is created
+    '../../../packages/design-system-react/src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
 
   addons: [
