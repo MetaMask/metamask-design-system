@@ -87,4 +87,33 @@ describe('Tailwind Preset', () => {
       expect.objectContaining(shadows),
     );
   });
+
+  /**
+   * Typography
+   */
+
+  it('typography includes correct fontSize configurations', () => {
+    const typographyConfig = tailwindConfig.theme?.extend?.fontSize;
+    expect(typographyConfig).toBeDefined();
+  });
+
+  it('typography includes correct fontFamily configurations', () => {
+    const typographyConfig = tailwindConfig.theme?.extend?.fontFamily;
+    expect(typographyConfig).toBeDefined();
+  });
+
+  it('typography includes correct letterSpacing configurations', () => {
+    const typographyConfig = tailwindConfig.theme?.extend?.letterSpacing;
+    expect(typographyConfig).toBeDefined();
+  });
+
+  it('typography includes correct fontWeight configurations', () => {
+    const typographyConfig = tailwindConfig.theme?.extend?.fontWeight;
+    expect(typographyConfig).toBeDefined();
+  });
+
+  it('typography includes correct lineHeight configurations', () => {
+    const typographyConfig = tailwindConfig.theme?.extend?.lineHeight;
+    expect(typographyConfig).toBeDefined();
+  });
 });
