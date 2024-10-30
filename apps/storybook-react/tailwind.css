@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Euclid Circular B'; /* This should match the font-family in typography.ts */
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/EuclidCircularB-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  font-style: italic;
+  font-weight: 400;
+  src: url('fonts/EuclidCircularB-RegularItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  font-style: normal;
+  font-weight: 500;
+  src: url('fonts/EuclidCircularB-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  font-style: italic;
+  font-weight: 500;
+  src: url('fonts/EuclidCircularB-MediumItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/EuclidCircularB-Bold.woff2') format('woff2');
+}
