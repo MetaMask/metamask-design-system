@@ -1,9 +1,11 @@
-import greeter from '.';
+import { Button, Text } from '.';
 
-describe('Test', () => {
-  it('greets', () => {
-    const name = 'Huey';
-    const result = greeter(name);
-    expect(result).toBe('Hello, Huey!');
+describe('Design System React Index', () => {
+  it('should export Button component', () => {
+    expect(Button).toBeDefined();
+  });
+
+  it('should export Text component', () => {
+    expect(Text).toBeDefined();
   });
 });

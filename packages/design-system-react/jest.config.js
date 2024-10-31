@@ -23,4 +23,10 @@ module.exports = merge(baseConfig, {
       statements: 100,
     },
   },
+
+  // Include setup file that configures testing utilities like @testing-library/react
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+
+  // Use jsdom environment to simulate a browser-like DOM for testing React components
+  testEnvironment: 'jsdom',
 });

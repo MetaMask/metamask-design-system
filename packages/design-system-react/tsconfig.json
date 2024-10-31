@@ -2,7 +2,13 @@
   "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "jsx": "react"
+    "jsx": "react",
+    "types": [
+      "react",
+      "jest",
+      "@testing-library/react",
+      "@testing-library/jest-dom"
+    ]
   },
   "references": [],
   "include": ["./src"]
