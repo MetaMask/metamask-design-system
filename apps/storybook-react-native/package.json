@@ -3,6 +3,9 @@
   "private": true,
   "description": "Storybook React Native",
   "files": [],
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "devDependencies": {
     "typescript": "~5.2.2"
   },
