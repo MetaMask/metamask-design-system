@@ -10,8 +10,9 @@ package-lock.json
 # eslint cache
 .eslintcache
 
-# macOS system files
-.DS_STORE
+# macOS
+.DS_Store
+*.pem
 
 # Build preview message
 preview-build-message.txt
@@ -40,3 +41,22 @@ apps/*/*.tsbuildinfo
 
 #Expo
 .expo
+dist/
+web-build/
+
+# Native
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+yarn-error.*
+
+# local env files
+.env*.local
