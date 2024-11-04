@@ -37,38 +37,3 @@ apps/*/*.tsbuildinfo
 
 # Logs
 *storybook.log
-
-# Linux system files
-*~
-# bundle artifact
-*.jsbundle
-# Android/Java
-*.keystore
-**/android/.gradle/
-**/android/app/build/
-**/android/app/.cxx/
-**/android/local.properties
-**/android/.idea/
-**/android/.gradle/
-**/android/build/
-
-# iOS/Swift
-**/ios/Pods/
-**/ios/build/
-**/ios/DerivedData/
-**/ios/.xcuserdata/
-**/ios/.xcode.env.local
-*.mode1v3
-*.pbxuser
-*.xccheckout
-*.xcuserstate
-*.xcworkspace
-!ios/Podfile.lock
-
-# React Native specific
-**/react-native/packager-*
-**/react-native/config-debug-*
-
-# Metro Bundler
-**/dist/
-**/build/

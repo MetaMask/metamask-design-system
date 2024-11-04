@@ -27,7 +27,6 @@
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write && yarn constraints --fix && yarn lint:dependencies:fix",
     "lint:misc": "prettier '**/*.json' '**/*.md' '!**/CHANGELOG.old.md' '**/*.yml' '!.yarnrc.yml' '!merged-packages/**' --ignore-path .prettierignore",
     "prepack": "./scripts/prepack.sh",
-    "pod:install": "cd apps/storybook-react-native/ios && pod install || exit 0",
     "prepare-preview-builds": "./scripts/prepare-preview-builds.sh",
     "publish-previews": "yarn workspaces foreach --all --no-private --parallel --verbose run publish:preview",
     "setup": "yarn install",
