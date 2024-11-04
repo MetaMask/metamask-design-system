@@ -1,10 +1,8 @@
 {
   "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
-    "jsx": "react-native",
-    "lib": ["esnext"],
-    "moduleResolution": "Node16",
-    "types": ["react", "react-native"]
+    "baseUrl": "./"
   },
-  "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
+  "references": [],
+  "include": ["../../types", "./src"]
 }
