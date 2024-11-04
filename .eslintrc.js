@@ -13,8 +13,11 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['*.test.{ts,js}'],
+      files: ['*.test.{ts,tsx,js}'],
       extends: ['@metamask/eslint-config-jest'],
+      rules: {
+        '@typescript-eslint/no-shadow': ['error', { allow: ['Text'] }],
+      },
     },
     {
       files: ['*.js', '*.cjs'],
@@ -24,7 +27,7 @@ module.exports = {
       },
     },
     {
-      files: ['*.ts'],
+      files: ['*.ts', '*.tsx'],
       extends: ['@metamask/eslint-config-typescript'],
       parserOptions: {
         tsconfigRootDir: __dirname,
@@ -32,6 +35,7 @@ module.exports = {
       },
       rules: {
         '@typescript-eslint/no-explicit-any': 'error',
+        '@typescript-eslint/no-shadow': ['error', { allow: ['Text'] }],
       },
     },
     {
