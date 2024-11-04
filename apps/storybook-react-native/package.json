@@ -1,6 +1,5 @@
 {
   "name": "@metamask/storybook-react-native",
-  "version": "0.0.0",
   "private": true,
   "description": "Storybook React Native",
   "files": [],
