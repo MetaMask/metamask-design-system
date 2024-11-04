@@ -2,15 +2,12 @@
   "name": "@metamask/storybook-react-native",
   "private": true,
   "description": "Storybook React Native",
-  "files": [],
   "main": "expo/AppEntry.js",
-  "installConfig": {
-    "hoistingLimits": "workspaces"
-  },
+  "files": [],
   "scripts": {
-    "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
+    "start": "expo start",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -30,10 +27,13 @@
     "react-native-safe-area-context": "^4.14.0",
     "typescript": "^5.2.2"
   },
+  "dependenciesMeta": {
+    "uuid": {}
+  },
   "engines": {
     "node": "^18.18 || >=20"
   },
-  "dependenciesMeta": {
-    "uuid": {}
+  "installConfig": {
+    "hoistingLimits": "workspaces"
   }
 }

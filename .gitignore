@@ -37,3 +37,6 @@ apps/*/*.tsbuildinfo
 
 # Logs
 *storybook.log
+
+#Expo
+.expo
