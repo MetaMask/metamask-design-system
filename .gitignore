@@ -10,6 +10,7 @@ package-lock.json
 # eslint cache
 .eslintcache
 
+# macOS system files
 .DS_STORE
 
 # Build preview message
