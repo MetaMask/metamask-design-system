@@ -17,7 +17,7 @@
 
 > **Note**
 >
-> `workspaceName` in these commands is the `name` field within a package's `package.json`, e.g., `@metamask/metamask-module-template`, not the directory where it is located, e.g., `packages/metamask-module-template`.
+> `workspaceName` in these commands is the `name` field within a package's `package.json`, e.g., `@metamask/design-system-tailwind-preset`, not the directory where it is located, e.g., `packages/design-system-tailwind-preset`.
 
 ## Linting
 
@@ -34,8 +34,8 @@ This repository relies on Yarn's [workspaces feature](https://yarnpkg.com/featur
 
 > **Note**
 >
-> - `workspaceName` in the Yarn documentation is the `name` field within a package's `package.json`, e.g., `@metamask/metamask-module-template`, not the directory where it is located, e.g., `packages/metamask-module-template`.
-> - `commandName` in the Yarn documentation is any sub-command that the `yarn` executable would usually take. Pay special attention to the difference between `run` vs `exec`. If you want to run a package script, you would use `run`, e.g., `yarn workspace @metamask/metamask-module-template run changelog:validate`; but if you want to run _any_ shell command, you'd use `exec`, e.g. `yarn workspace @metamask/metamask-module-template exec cat package.json | jq '.version'`.
+> - `workspaceName` in the Yarn documentation is the `name` field within a package's `package.json`, e.g., `@metamask/design-system-tailwind-preset`, not the directory where it is located, e.g., `packages/design-system-tailwind-preset`.
+> - `commandName` in the Yarn documentation is any sub-command that the `yarn` executable would usually take. Pay special attention to the difference between `run` vs `exec`. If you want to run a package script, you would use `run`, e.g., `yarn workspace @metamask/design-system-tailwind-preset run changelog:validate`; but if you want to run _any_ shell command, you'd use `exec`, e.g. `yarn workspace @metamask/design-system-tailwind-preset exec cat package.json | jq '.version'`.
 
 ## Creating pull requests
 
@@ -73,10 +73,10 @@ If you're developing your project locally and want to test changes to a package,
 
       > **Example:**
       >
-      > - If your project uses Yarn, `@metamask/metamask-module-template` is listed in dependencies at `^1.1.4`, and your clone of the `metamask-design-system` repo is at the same level as your project, add the following to `resolutions`:
+      > - If your project uses Yarn, `@metamask/design-system-tailwind-preset` is listed in dependencies at `^1.1.4`, and your clone of the `metamask-design-system` repo is at the same level as your project, add the following to `resolutions`:
       >
       >   ```
-      >   "@metamask/metamask-module-template@^1.1.4": "file:../metamask-design-system/packages/metamask-module-template"
+      >   "@metamask/design-system-tailwind-preset@^1.1.4": "file:../metamask-design-system/packages/design-system-tailwind-preset"
       >   ```
 
    4. Run `yarn install`.
@@ -142,10 +142,10 @@ To use a preview build for a package within a project, you need to override the 
 
    > **Example:**
    >
-   > - If your project uses Yarn, `@metamask/metamask-module-template` is listed in dependencies at `^1.1.4`, and you want to use the preview version `1.2.3-preview-e2df9b4`, add the following to `resolutions`:
+   > - If your project uses Yarn, `@metamask/design-system-tailwind-preset` is listed in dependencies at `^1.1.4`, and you want to use the preview version `1.2.3-preview-e2df9b4`, add the following to `resolutions`:
    >
    >   ```
-   >   "@metamask/metamask-module-template@^1.1.4": "npm:@metamask-previews/metamask-module-template@1.2.3-preview-e2df9b4"
+   >   "@metamask/design-system-tailwind-preset@^1.1.4": "npm:@metamask-previews/design-system-tailwind-preset@1.2.3-preview-e2df9b4"
    >   ```
 
 4. Run `yarn install`.
