@@ -1,6 +1,7 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { View } from 'react-native';
-import type { Meta, StoryObj } from '@storybook/react';
+
 import { MyButton } from './Button';
 
 const MyButtonMeta: Meta<typeof MyButton> = {
@@ -27,7 +28,7 @@ export const Basic: StoryObj<typeof MyButton> = {
   render: () => {
     return (
       <View>
-        <MyButton text="Brand Button - Themed" onPress={() => {}} />
+        <MyButton text="Sample Button" onPress={() => {}} />
       </View>
     );
   },
