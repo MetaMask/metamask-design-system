@@ -2,11 +2,12 @@
   "name": "@metamask/storybook-react-native",
   "private": true,
   "description": "Storybook React Native",
-  "main": "expo/AppEntry.js",
+  "main": ".storybook/index.js",
   "files": [],
   "scripts": {
     "android": "expo start --android",
     "ios": "expo start --ios",
+    "prestorybook": "sb-rn-get-stories",
     "start": "expo start",
     "web": "expo start --web"
   },
@@ -20,6 +21,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
+    "@react-native-async-storage/async-storage": "^2.0.0",
+    "@react-native-community/datetimepicker": "^8.2.0",
+    "@react-native-community/slider": "^4.5.5",
+    "@storybook/addon-actions": "6.5",
+    "@storybook/addon-controls": "6.5",
+    "@storybook/addon-ondevice-actions": "6.5",
+    "@storybook/addon-ondevice-controls": "6.5",
+    "@storybook/react-native": "6.5",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@types/react-native-get-random-values": "^1",
