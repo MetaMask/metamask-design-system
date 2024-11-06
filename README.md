@@ -1,6 +1,6 @@
 # MetaMask Design System
 
-The MetaMask Design System monorepo
+Publish Fail
 
 ## Modules
 
