@@ -1,6 +1,6 @@
 # `@metamask/storybook-react`
 
-Storybook setup for React Native components within the MetaMask design system monorepo. It allows developers to visualize and test components in isolation, ensuring consistency and reliability across the application.
+Storybook setup for React components within the MetaMask design system monorepo. It allows developers to visualize and test components in isolation, ensuring consistency and reliability across the application.
 
 ## Installation
 
