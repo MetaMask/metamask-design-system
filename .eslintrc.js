@@ -87,5 +87,9 @@ module.exports = {
     jsdoc: {
       mode: 'typescript',
     },
+    'import/ignore': [
+      'node_modules/react-native/types/index.d.ts',
+      'node_modules/react-native',
+    ],
   },
 };

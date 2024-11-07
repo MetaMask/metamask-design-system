@@ -35,7 +35,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "yarn ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "build:docs": "typedoc",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",
@@ -46,15 +46,26 @@
     "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
+  "dependencies": {
+    "@metamask/design-tokens": "^1.0.0",
+    "react-native": "0.72.15",
+    "twrnc": "^4.5.1"
+  },
   "devDependencies": {
     "@metamask/auto-changelog": "^3.4.4",
+    "@ts-bridge/cli": "^0.5.1",
     "@types/jest": "^27.4.1",
+    "@types/react-native": "^0.73.0",
     "deepmerge": "^4.2.2",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.4",
     "typedoc": "^0.24.8",
     "typedoc-plugin-missing-exports": "^2.0.0",
     "typescript": "~5.2.2"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.72.15"
   },
   "engines": {
     "node": "^18.18 || >=20"
