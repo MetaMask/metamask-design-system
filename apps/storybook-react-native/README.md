@@ -6,17 +6,6 @@ Storybook setup for React Native components within the MetaMask design system mo
 
 `yarn install`
 
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) (check package.json for version requirements)
-- [Yarn](https://yarnpkg.com/) package manager
-- [Expo CLI](https://docs.expo.dev/get-started/installation/):
-  ```bash
-  yarn global add expo-cli
-  ```
-- iOS Simulator (for iOS development) or Android Emulator (for Android development)
-- Xcode (for iOS development)
-
 ## Running Storybook
 
 Run one of these commands to start Storybook:
