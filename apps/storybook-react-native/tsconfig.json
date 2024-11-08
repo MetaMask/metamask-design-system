@@ -1,20 +1,17 @@
 {
+  "extends": "../../tsconfigs/tsconfig.react-native.packages.json",
   "compilerOptions": {
-    "jsx": "react-native",
-    "lib": ["esnext"],
+    "baseUrl": "./",
     "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "noEmit": true
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
+  "include": ["src", "stories", ".storybook"],
   "exclude": [
     "node_modules",
     "babel.config.js",
     "metro.config.js",
-    "jest.config.js"
-  ],
-  "extends": "expo/tsconfig.base"
+    "jest.config.js",
+    "dist"
+  ]
 }

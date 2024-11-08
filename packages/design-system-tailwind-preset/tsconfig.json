@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.packages.json",
+  "extends": "../../tsconfigs/tsconfig.packages.json",
   "compilerOptions": {
     "baseUrl": "./",
     "types": ["node", "jest"]

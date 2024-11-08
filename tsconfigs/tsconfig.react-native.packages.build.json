@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.react-native.packages.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.stories.ts",
+    "**/*.stories.tsx",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ]
+}

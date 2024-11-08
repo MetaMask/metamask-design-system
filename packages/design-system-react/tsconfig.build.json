@@ -1,17 +1,9 @@
 {
-  "extends": "../../tsconfig.packages.build.json",
+  "extends": "../../tsconfigs/tsconfig.react.packages.build.json",
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist",
-    "rootDir": "./src",
-    "jsx": "react",
-    "types": [
-      "react",
-      "jest",
-      "@testing-library/react",
-      "@testing-library/jest-dom"
-    ]
+    "rootDir": "./src"
   },
-  "references": [],
-  "include": ["./src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

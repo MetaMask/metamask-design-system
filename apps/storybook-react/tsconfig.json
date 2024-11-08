@@ -1,10 +1,8 @@
 {
-  "extends": "../../tsconfig.packages.json",
+  "extends": "../../tsconfigs/tsconfig.react.packages.json",
   "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react"
+    "baseUrl": "./"
   },
-  "references": [],
-  // TODO: Remove "stories/**/*" once stories/ directory is removed
-  "include": ["stories/**/*", ".storybook/**/*"]
+  "include": ["stories/**/*", ".storybook/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
