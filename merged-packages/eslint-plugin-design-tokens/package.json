@@ -1,6 +1,6 @@
 {
   "name": "@metamask/eslint-plugin-design-tokens",
-  "version": "1.2.0",
+  "version": "1.1.0",
   "description": "An ESLint plugin designed to enforce best practices and consistency for using MetaMask design tokens across various projects",
   "homepage": "https://github.com/MetaMask/eslint-plugin-design-tokens#readme",
   "bugs": {
