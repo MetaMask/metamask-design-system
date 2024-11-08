@@ -1,0 +1,320 @@
+{
+  "background": {
+    "default": {
+      "value": "{grey.800}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For default neutral backgrounds"
+    },
+    "alternative": {
+      "value": "{grey.900}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For secondary neutral backgrounds."
+    },
+    "default-hover": {
+      "value": "#313235",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For \"hover\" states that use background-default."
+    },
+    "default-pressed": {
+      "value": "#3f4145",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For \"pressed\" states that use background-alternative."
+    },
+    "alternative-hover": {
+      "value": "#1f2123",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For \"hover\" states that use background-alternative."
+    },
+    "alternative-pressed": {
+      "value": "#2e3033",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For \"pressed\" states that use background-alternative."
+    },
+    "hover": {
+      "value": "#ffffff0a",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For \"hover\" state that use no background fill."
+    },
+    "pressed": {
+      "value": "#ffffff14",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For \"pressed\" state that use no background fill."
+    }
+  },
+  "text": {
+    "default": {
+      "value": "{grey.000}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For default neutral text."
+    },
+    "alternative": {
+      "value": "{grey.200}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For softer contrast neutral text"
+    },
+    "muted": {
+      "value": "{grey.400}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the softest contrast neutral text (not accessible)"
+    }
+  },
+  "icon": {
+    "default": {
+      "value": "{grey.000}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For default neutral icons"
+    },
+    "alternative": {
+      "value": "{grey.200}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For softer neutral icons"
+    },
+    "muted": {
+      "value": "{grey.400}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the weakest contrast neutral icons (not accessible)"
+    }
+  },
+  "border": {
+    "default": {
+      "value": "{grey.400}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For soft contrast neutral border"
+    },
+    "muted": {
+      "value": "#848c9629",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the weakest  contrast neutral border"
+    }
+  },
+  "overlay": {
+    "default": {
+      "value": "#00000099",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the default shade of screen"
+    },
+    "alternative": {
+      "value": "#000000cc",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For a stronger shade of screen"
+    },
+    "inverse": {
+      "value": "{grey.000}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For elements used on top of overlay/alternative. Used for text, icon or border"
+    }
+  },
+  "primary": {
+    "default": {
+      "value": "{blue.300}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For interactive, active, and selected semantics. Used for text, background, icon or border"
+    },
+    "alternative": {
+      "value": "{blue.200}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the stronger contrast primary semantic elements."
+    },
+    "muted": {
+      "value": "#43aefc26",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the weakest contrast primary semantic backgrounds."
+    },
+    "inverse": {
+      "value": "{grey.900}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For elements used on top of primary/default. Used for text, icon or border"
+    },
+    "default-hover": {
+      "value": "#26a2fc",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the \"hover\" state of primary-default elements"
+    },
+    "default-pressed": {
+      "value": "#3baafd",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the \"pressed\" state of primary-default elements"
+    }
+  },
+  "error": {
+    "default": {
+      "value": "{red.300}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the critical alert semantic elements. Used for text, background, icon or border"
+    },
+    "alternative": {
+      "value": "{red.200}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the stronger contrast error semantic elements."
+    },
+    "muted": {
+      "value": "#e88f9726",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the weakest contrast critical alert semantic backgrounds."
+    },
+    "inverse": {
+      "value": "{grey.900}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For elements used on top of error/default. Used for text, icon or border"
+    },
+    "default-hover": {
+      "value": "#e47782",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the \"hover\" state of error-default elements."
+    },
+    "default-pressed": {
+      "value": "#e78891",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the \"pressed\" state of error-default elements."
+    }
+  },
+  "warning": {
+    "default": {
+      "value": "{yellow.100}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the caution alert semantic elements. Used for text, background, icon or border"
+    },
+    "muted": {
+      "value": "#ffdf7026",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the weakest contrast caution alert semantic backgrounds."
+    },
+    "inverse": {
+      "value": "{grey.900}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For elements used on top of warning/default. Used for text, icon or border"
+    },
+    "default-hover": {
+      "value": "#ffe485",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the \"hover\" state of warning-default elements"
+    },
+    "default-pressed": {
+      "value": "#ffe899",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the \"pressed\" state of warning-default elements"
+    }
+  },
+  "success": {
+    "default": {
+      "value": "{green.300}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the positive semantic elements. Used for text, background, icon or border"
+    },
+    "muted": {
+      "value": "#28a74526",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the weakest contrast positive semantic backgrounds."
+    },
+    "inverse": {
+      "value": "{grey.900}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For elements used on top of success/default. Used for text, icon or border"
+    },
+    "default-hover": {
+      "value": "#2cb94c",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the \"hover\" state of success-default elements"
+    },
+    "default-pressed": {
+      "value": "#30ca53",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the \"pressed\" state of success-default elements"
+    }
+  },
+  "info": {
+    "default": {
+      "value": "{blue.300}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For informational read-only elements. Used for text, background, icon or border"
+    },
+    "muted": {
+      "value": "#43aefc26",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For the weakest contrast informational semantic backgrounds."
+    },
+    "inverse": {
+      "value": "{grey.900}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For elements used on top of info/default. Used for text, icon or border"
+    }
+  },
+  "flask": {
+    "default": {
+      "value": "{purple.300}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For Flask primary accent color."
+    },
+    "inverse": {
+      "value": "{grey.900}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For elements used on top of flask/default. Used for text, icon or border"
+    }
+  },
+  "shadow": {
+    "default": {
+      "value": "#00000066",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For neutral drop shadow color."
+    },
+    "primary": {
+      "value": "#43aefc33",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For primary drop shadow color."
+    },
+    "error": {
+      "value": "#ff758466",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For critical/danger drop shadow color."
+    }
+  }
+}

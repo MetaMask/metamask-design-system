@@ -1,0 +1,570 @@
+{
+  "grey": {
+    "100": {
+      "value": "#d6d9dc",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "200": {
+      "value": "#bbc0c5",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "300": {
+      "value": "#9fa6ae",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "400": {
+      "value": "#848c96",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "500": {
+      "value": "#6a737d",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "600": {
+      "value": "#535a61",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "700": {
+      "value": "#3b4046",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "800": {
+      "value": "#24272a",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "900": {
+      "value": "#141618",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "1000": {
+      "value": "#000000",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "050": {
+      "value": "#f2f4f6",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "000": {
+      "value": "#ffffff",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "025": {
+      "value": "#fafbfc",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    }
+  },
+  "blue": {
+    "100": {
+      "value": "#a7d9fe",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "200": {
+      "value": "#75c4fd",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "300": {
+      "value": "#43aefc",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "400": {
+      "value": "#1098fc",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "500": {
+      "value": "#0376c9",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "600": {
+      "value": "#0260a4",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "700": {
+      "value": "#024272",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "800": {
+      "value": "#01253f",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "900": {
+      "value": "#00080d",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "050": {
+      "value": "#eaf6ff",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "025": {
+      "value": "#eaf6ff",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    }
+  },
+  "green": {
+    "100": {
+      "value": "#afecbd",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "200": {
+      "value": "#5dd879",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "300": {
+      "value": "#28a745",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "400": {
+      "value": "#28a745",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "500": {
+      "value": "#1c8234",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "600": {
+      "value": "#145523",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "700": {
+      "value": "#145523",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "800": {
+      "value": "#0a2c12",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "900": {
+      "value": "#041007",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "050": {
+      "value": "#d6ffdf",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "025": {
+      "value": "#f3fcf5",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    }
+  },
+  "red": {
+    "100": {
+      "value": "#f7d5d8",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "200": {
+      "value": "#f1b9be",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "300": {
+      "value": "#e88f97",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "400": {
+      "value": "#e06470",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "500": {
+      "value": "#d73847",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "600": {
+      "value": "#8e1d28",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "700": {
+      "value": "#64141c",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "800": {
+      "value": "#3a0c10",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "900": {
+      "value": "#3a0c10",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "050": {
+      "value": "#fcf2f3",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "025": {
+      "value": "#fcf2f3",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    }
+  },
+  "yellow": {
+    "100": {
+      "value": "#ffdf70",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "200": {
+      "value": "#ffc70a",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "300": {
+      "value": "#f8883b",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "400": {
+      "value": "#f66a0a",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "500": {
+      "value": "#bf5208",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "600": {
+      "value": "#954005",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "700": {
+      "value": "#632b04",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "800": {
+      "value": "#321602",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "900": {
+      "value": "#321602",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "050": {
+      "value": "#fff2c5",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "025": {
+      "value": "#fefcde",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    }
+  },
+  "orange": {
+    "100": {
+      "value": "#fbc49d",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "200": {
+      "value": "#faa66c",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "300": {
+      "value": "#f8883b",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "400": {
+      "value": "#f66a0a",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "500": {
+      "value": "#bf5208",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "600": {
+      "value": "#954005",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "700": {
+      "value": "#632b04",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "800": {
+      "value": "#321602",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "900": {
+      "value": "#321602",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "050": {
+      "value": "#fde2cf",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "025": {
+      "value": "#fef5ef",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    }
+  },
+  "purple": {
+    "100": {
+      "value": "#efd2ff",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "200": {
+      "value": "#cfb5f0",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "300": {
+      "value": "#d27dff",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "400": {
+      "value": "#b864f5",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "500": {
+      "value": "#8b45b6",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "600": {
+      "value": "#6c2ab2",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "700": {
+      "value": "#4c1178",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "800": {
+      "value": "#32054d",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "900": {
+      "value": "#280a00",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "050": {
+      "value": "#fbf2ff",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "025": {
+      "value": "#fcf6ff",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    }
+  },
+  "lime": {
+    "100": {
+      "value": "#b8ef4a",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "200": {
+      "value": "#95ca45",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "300": {
+      "value": "#7ab040",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "400": {
+      "value": "#64993d",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "500": {
+      "value": "#457a39",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "600": {
+      "value": "#275b35",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "700": {
+      "value": "#093a31",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "800": {
+      "value": "#022321",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "900": {
+      "value": "#011515",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "025": {
+      "value": "#effed9",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    },
+    "050": {
+      "value": "#e3febd",
+      "type": "color",
+      "parent": "Brand Colors/v1 - current",
+      "description": ""
+    }
+  },
+  "white": {
+    "value": "#ffffff",
+    "type": "color",
+    "parent": "Brand Colors/v1 - current",
+    "description": ""
+  },
+  "black": {
+    "value": "#000000",
+    "type": "color",
+    "parent": "Brand Colors/v1 - current",
+    "description": ""
+  }
+}
