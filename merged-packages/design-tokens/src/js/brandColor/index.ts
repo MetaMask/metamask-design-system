@@ -1,0 +1,1 @@
+export { brandColor } from './brandColor';
