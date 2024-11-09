@@ -88,16 +88,17 @@ module.exports = defineConfig({
         // All non-root packages must have a license, defaulting to MIT.
         await expectWorkspaceLicense(workspace);
 
-        // All non-root packages must set up ESM- and CommonJS-compatible
-        // exports correctly.
-        expectCorrectWorkspaceExports(workspace);
-
-        // All non-root packages must have the same "build" script.
-        expectWorkspaceField(
-          workspace,
-          'scripts.build',
-          'ts-bridge --project tsconfig.build.json --verbose --clean --no-references',
-        );
+        if (workspace.ident !== '@metamask/design-system-react-native') {
+          // All non-root packages must set up ESM- and CommonJS-compatible
+          // exports correctly.
+          expectCorrectWorkspaceExports(workspace);
+          // All non-root packages must have the same "build" script.
+          expectWorkspaceField(
+            workspace,
+            'scripts.build',
+            'ts-bridge --project tsconfig.build.json --verbose --clean --no-references',
+          );
+        }
 
         // All non-root packages must have the same "build:docs" script.
         expectWorkspaceField(workspace, 'scripts.build:docs', 'typedoc');

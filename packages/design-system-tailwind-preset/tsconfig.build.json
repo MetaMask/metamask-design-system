@@ -1,10 +1,10 @@
 {
-  "extends": "../../tsconfig.packages.build.json",
+  "extends": "../../tsconfigs/tsconfig.packages.build.json",
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
     "rootDir": "./src",
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
   "references": [],
   "include": ["./src"]

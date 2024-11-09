@@ -1,16 +1,23 @@
 {
   "extends": "./tsconfig.react-native.packages.json",
   "compilerOptions": {
+    "jsx": "react-native",
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["react-native"]
   },
   "exclude": [
     "node_modules",
     "dist",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.stories.ts",
-    "**/*.stories.tsx",
+    "../**/*.test.ts",
+    "../**/*.test.tsx",
+    "../**/*.stories.ts",
+    "../**/*.stories.tsx",
     "babel.config.js",
     "metro.config.js",
     "jest.config.js"

@@ -31,7 +31,7 @@ module.exports = {
       extends: ['@metamask/eslint-config-typescript'],
       parserOptions: {
         tsconfigRootDir: __dirname,
-        project: ['./tsconfig.packages.json'],
+        project: ['./tsconfigs/tsconfig.packages.json'],
       },
       rules: {
         '@typescript-eslint/no-explicit-any': 'error',
@@ -73,7 +73,7 @@ module.exports = {
     'import/resolver': {
       typescript: {
         // Ensures imports are resolved correctly when using TypeScript e.g. @metamask/ packages.
-        project: './tsconfig.packages.json',
+        project: './tsconfigs/tsconfig.packages.json',
         // Paths for module resolution to match TypeScript paths
         paths: ['apps/*', 'packages/*'],
       },
@@ -87,5 +87,9 @@ module.exports = {
     jsdoc: {
       mode: 'typescript',
     },
+  },
+  parserOptions: {
+    tsconfigRootDir: __dirname,
+    project: ['./tsconfig.json'],
   },
 };

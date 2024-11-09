@@ -13,6 +13,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@metamask/design-system-react-native": "workspace:^",
     "expo": "~49.0.23",
     "expo-status-bar": "~1.6.0",
     "react": "^18.2.0",
@@ -31,9 +32,7 @@
     "@storybook/addon-ondevice-controls": "6.5",
     "@storybook/react-native": "6.5",
     "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
     "@types/react-native-get-random-values": "^1",
-    "react-dom": "^18.2.0",
     "react-native-safe-area-context": "^4.14.0",
     "typescript": "~5.2.2"
   },

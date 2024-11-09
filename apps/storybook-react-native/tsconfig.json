@@ -4,7 +4,12 @@
     "baseUrl": "./",
     "allowJs": true,
     "noEmit": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@metamask/design-system-react-native": [
+        "../../packages/design-system-react-native/dist"
+      ]
+    }
   },
   "include": ["src", "stories", ".storybook"],
   "exclude": [
