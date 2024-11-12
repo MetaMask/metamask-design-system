@@ -11,6 +11,7 @@ This repository contains the following packages [^fn1]:
 - [`@metamask/design-system-react`](packages/design-system-react)
 - [`@metamask/design-system-react-native`](packages/design-system-react-native)
 - [`@metamask/design-system-tailwind-preset`](packages/design-system-tailwind-preset)
+- [`@metamask/design-system-twrnc-preset`](packages/design-system-twrnc-preset)
 
 <!-- end package list -->
 
@@ -25,6 +26,8 @@ linkStyle default opacity:0.5
   design_system_react(["@metamask/design-system-react"]);
   design_system_react_native(["@metamask/design-system-react-native"]);
   design_system_tailwind_preset(["@metamask/design-system-tailwind-preset"]);
+  design_system_twrnc_preset(["@metamask/design-system-twrnc-preset"]);
+  design_system_react --> design_system_tailwind_preset;
 ```
 
 <!-- end dependency graph -->
