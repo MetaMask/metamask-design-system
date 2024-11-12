@@ -3184,12 +3184,15 @@ __metadata:
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
     "@metamask/auto-changelog": "npm:^3.4.4"
+    "@testing-library/react-native": "npm:^12.8.1"
     "@types/babel__preset-env": "npm:^7"
     "@types/jest": "npm:^27.4.1"
+    "@types/react-test-renderer": "npm:^18"
     babel-jest: "npm:^27.5.1"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^27.5.1"
     metro-react-native-babel-preset: "npm:^0.77.0"
+    react-test-renderer: "npm:^18.3.1"
     ts-jest: "npm:^27.1.4"
     typedoc: "npm:^0.24.8"
     typedoc-plugin-missing-exports: "npm:^2.0.0"
@@ -5156,6 +5159,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@testing-library/react-native@npm:^12.8.1":
+  version: 12.8.1
+  resolution: "@testing-library/react-native@npm:12.8.1"
+  dependencies:
+    jest-matcher-utils: "npm:^29.7.0"
+    pretty-format: "npm:^29.7.0"
+    redent: "npm:^3.0.0"
+  peerDependencies:
+    jest: ">=28.0.0"
+    react: ">=16.8.0"
+    react-native: ">=0.59"
+    react-test-renderer: ">=16.8.0"
+  peerDependenciesMeta:
+    jest:
+      optional: true
+  checksum: 10/eaa09cb560a469c686b8eb0ee8085bb54654a481e6bcf9eb5bc7b756c5303ca6b5c17ab2ef1479b8c245ac153ac69907d47c30ec9b496a29a6e459baa3d3f5d9
+  languageName: node
+  linkType: hard
+
 "@testing-library/react@npm:^16.0.1":
   version: 16.0.1
   resolution: "@testing-library/react@npm:16.0.1"
@@ -5505,6 +5527,15 @@ __metadata:
   version: 1.8.2
   resolution: "@types/react-native-get-random-values@npm:1.8.2"
   checksum: 10/08f3f82efbb5b6d9acd8f7f55a2dac9f228886323ac3018a1bab46cd1b45f24809d194fd2a3fe02a9ec4196606325e5cfffde0b0057ae785208b658fdc83c821
+  languageName: node
+  linkType: hard
+
+"@types/react-test-renderer@npm:^18":
+  version: 18.3.0
+  resolution: "@types/react-test-renderer@npm:18.3.0"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 10/c53683990bd194cb68e3987bda79c78eff41517f7a747e92f3e54217c2ce3addd031b8a45bf631982c909cc2caeeb905372f322758e05bb76c03754a3f24426e
   languageName: node
   linkType: hard
 
@@ -8986,6 +9017,13 @@ __metadata:
   version: 27.5.1
   resolution: "diff-sequences@npm:27.5.1"
   checksum: 10/34d852a13eb82735c39944a050613f952038614ce324256e1c3544948fa090f1ca7f329a4f1f57c31fe7ac982c17068d8915b633e300f040b97708c81ceb26cd
+  languageName: node
+  linkType: hard
+
+"diff-sequences@npm:^29.6.3":
+  version: 29.6.3
+  resolution: "diff-sequences@npm:29.6.3"
+  checksum: 10/179daf9d2f9af5c57ad66d97cb902a538bcf8ed64963fa7aa0c329b3de3665ce2eb6ffdc2f69f29d445fa4af2517e5e55e5b6e00c00a9ae4f43645f97f7078cb
   languageName: node
   linkType: hard
 
@@ -12787,6 +12825,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-diff@npm:^29.7.0":
+  version: 29.7.0
+  resolution: "jest-diff@npm:29.7.0"
+  dependencies:
+    chalk: "npm:^4.0.0"
+    diff-sequences: "npm:^29.6.3"
+    jest-get-type: "npm:^29.6.3"
+    pretty-format: "npm:^29.7.0"
+  checksum: 10/6f3a7eb9cd9de5ea9e5aa94aed535631fa6f80221832952839b3cb59dd419b91c20b73887deb0b62230d06d02d6b6cf34ebb810b88d904bb4fe1e2e4f0905c98
+  languageName: node
+  linkType: hard
+
 "jest-docblock@npm:^27.5.1":
   version: 27.5.1
   resolution: "jest-docblock@npm:27.5.1"
@@ -12934,6 +12984,18 @@ __metadata:
     jest-get-type: "npm:^27.5.1"
     pretty-format: "npm:^27.5.1"
   checksum: 10/037f99878a0515581d7728ed3aed03707810f4da5a1c7ffb9d68a2c6c3180851a6ec40b559af37fbe891dde3ba12552b19e47b8188a27b6c5a53376be6907f32
+  languageName: node
+  linkType: hard
+
+"jest-matcher-utils@npm:^29.7.0":
+  version: 29.7.0
+  resolution: "jest-matcher-utils@npm:29.7.0"
+  dependencies:
+    chalk: "npm:^4.0.0"
+    jest-diff: "npm:^29.7.0"
+    jest-get-type: "npm:^29.6.3"
+    pretty-format: "npm:^29.7.0"
+  checksum: 10/981904a494299cf1e3baed352f8a3bd8b50a8c13a662c509b6a53c31461f94ea3bfeffa9d5efcfeb248e384e318c87de7e3baa6af0f79674e987482aa189af40
   languageName: node
   linkType: hard
 
@@ -16728,7 +16790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.12.0 || ^17.0.0 || ^18.0.0, react-is@npm:^18.0.0":
+"react-is@npm:^16.12.0 || ^17.0.0 || ^18.0.0, react-is@npm:^18.0.0, react-is@npm:^18.3.1":
   version: 18.3.1
   resolution: "react-is@npm:18.3.1"
   checksum: 10/d5f60c87d285af24b1e1e7eaeb123ec256c3c8bdea7061ab3932e3e14685708221bf234ec50b21e10dd07f008f1b966a2730a0ce4ff67905b3872ff2042aec22
@@ -16873,6 +16935,19 @@ __metadata:
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: 10/06457fe5bcaa44aeca998905b6849304742ea1cc2d3841e4a0964c745ff392bc4dec07f8c779f317faacce3a0bf6f84e15020ac0fa81adb931067dbb0baf707b
+  languageName: node
+  linkType: hard
+
+"react-test-renderer@npm:^18.3.1":
+  version: 18.3.1
+  resolution: "react-test-renderer@npm:18.3.1"
+  dependencies:
+    react-is: "npm:^18.3.1"
+    react-shallow-renderer: "npm:^16.15.0"
+    scheduler: "npm:^0.23.2"
+  peerDependencies:
+    react: ^18.3.1
+  checksum: 10/d53137315c677bdfba702a7179a69828233fc7635ae1e0c03b203923d643400ace72b343cb3dd3dafba8911c20bef53f55bff7aa2e4ddff3ccc423fdd9deeee2
   languageName: node
   linkType: hard
 
