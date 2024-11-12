@@ -3325,7 +3325,6 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.23.5"
     "@babel/plugin-transform-modules-commonjs": "npm:^7.23.3"
-    "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
     "@lavamoat/allow-scripts": "npm:^3.2.1"
     "@metamask/create-release-branch": "npm:^3.0.0"
