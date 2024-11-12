@@ -5,7 +5,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "jsx": "react-native",
-    "types": ["react-native"],
+    "types": ["react-native", "jest"],
     "emitDeclarationOnly": false
   },
   "references": [],
