@@ -19,23 +19,19 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
       }
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.cts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "tsc --project tsconfig.build.json",
     "build:docs": "typedoc",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",
@@ -55,6 +51,10 @@
     "typedoc": "^0.24.8",
     "typedoc-plugin-missing-exports": "^2.0.0",
     "typescript": "~5.2.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-native": "0.72.15"
   },
   "engines": {
     "node": "^18.18 || >=20"
