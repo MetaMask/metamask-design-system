@@ -13,7 +13,7 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ['.eslintrc.js', 'jest.config.js'],
+  ignorePatterns: ['.eslintrc.js', 'jest.config.js', 'babel.config.js'],
 
   rules: {
     'import/extensions': [

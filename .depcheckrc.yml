@@ -23,3 +23,4 @@ ignores:
   - 'babel-jest'
   # Ignore dependencies which plug into the NPM lifecycle
   - '@lavamoat/preinstall-always-fail'
+  - 'react-native'

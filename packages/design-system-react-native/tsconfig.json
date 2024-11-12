@@ -7,5 +7,5 @@
   },
   "references": [],
   "include": ["src/**/*"],
-  "exclude": ["jest.config.js", ".eslintrc.js"]
+  "exclude": ["jest.config.js", ".eslintrc.js", "babel.config.js"]
 }
