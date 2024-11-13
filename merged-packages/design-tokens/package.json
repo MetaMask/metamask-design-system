@@ -31,24 +31,17 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup --clean && yarn build:types && yarn build:css",
-    "build-storybook": "storybook build",
-    "build:clean": "rimraf dist && yarn build",
+    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references && yarn build:types && yarn build:css",
     "build:css": "cleancss -o dist/styles.css src/css/index.css",
     "build:types": "tsc --project tsconfig.build.json",
-    "lint": "yarn lint:eslint && yarn lint:constraints && yarn lint:misc --check && yarn lint:dependencies --check && yarn lint:changelog",
-    "lint:changelog": "auto-changelog validate --prettier",
-    "lint:constraints": "yarn constraints",
-    "lint:dependencies": "depcheck && yarn dedupe",
-    "lint:eslint": "eslint . --cache --ext js,cjs,ts",
-    "lint:fix": "yarn lint:eslint --fix && yarn lint:constraints --fix && yarn lint:misc --write && yarn lint:dependencies && yarn lint:changelog",
-    "lint:misc": "prettier '**/*.json' '**/*.md' '**/*.yml' '!.yarnrc.yml' --ignore-path .gitignore --no-error-on-unmatched-pattern",
-    "prepack": "./scripts/prepack.sh",
-    "prepublishOnly": "yarn build:clean && yarn lint && yarn test",
-    "setup": "yarn install && yarn allow-scripts",
-    "storybook": "storybook dev -p 6006",
-    "test": "jest && jest-it-up",
-    "test:watch": "jest --watch"
+    "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-tailwind-preset",
+    "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-tailwind-preset",
+    "publish:preview": "yarn npm publish --tag preview",
+    "since-latest-release": "../../scripts/since-latest-release.sh",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
+    "test:clean": "NODE_OPTIONS=--experimental-vm-modules jest --clearCache",
+    "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "resolutions": {
     "@storybook/node-logger": "7.6.16"
