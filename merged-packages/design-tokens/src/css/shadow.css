@@ -1,0 +1,10 @@
+/**
+ * Shadow
+ */
+:root {
+  /* shadow */
+  --shadow-size-xs: 0 2px 4px 0;
+  --shadow-size-sm: 0 2px 8px 0;
+  --shadow-size-md: 0 2px 16px 0;
+  --shadow-size-lg: 0 2px 40px 0;
+}

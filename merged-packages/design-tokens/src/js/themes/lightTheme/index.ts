@@ -1,0 +1,1 @@
+export { lightTheme } from './lightTheme';
