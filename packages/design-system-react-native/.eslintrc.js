@@ -13,7 +13,12 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ['.eslintrc.js', 'jest.config.js', 'babel.config.js'],
+  ignorePatterns: [
+    '.eslintrc.js',
+    'jest.config.js',
+    'babel.config.js',
+    'tailwind.config.js',
+  ],
 
   rules: {
     'import/extensions': [
@@ -21,7 +26,7 @@ module.exports = {
       'ignorePackages',
       {
         js: 'always',
-        jsx: 'never',
+        jsx: 'always',
         ts: 'never',
         tsx: 'never',
       },

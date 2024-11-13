@@ -1,4 +1,4 @@
-import { Button } from '@metamask/design-system-react-native';
+import { Button, useTailwind } from '@metamask/design-system-react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
@@ -15,8 +15,9 @@ export default ButtonMeta;
 
 export const Basic: StoryObj<typeof Button> = {
   render: () => {
+    const tw = useTailwind();
     return (
-      <View>
+      <View style={tw`bg-primary-default p-3`}>
         <Button text="Sample Button" />
       </View>
     );

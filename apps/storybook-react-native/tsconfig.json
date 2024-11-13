@@ -15,7 +15,8 @@
     "babel.config.js",
     "metro.config.js",
     "jest.config.js",
-    ".eslintrc.js"
+    ".eslintrc.js",
+    "tailwind.config.js"
   ],
   "extends": "expo/tsconfig.base"
 }

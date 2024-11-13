@@ -31,7 +31,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "rm -rf tsconfig.build.tsbuildinfo dist && tsc --project tsconfig.build.json",
     "build:docs": "typedoc",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",
@@ -62,8 +62,10 @@
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
+    "@metamask/design-tokens": "^4.0.0",
     "react": "^18.2.0",
-    "react-native": "0.72.15"
+    "react-native": "0.72.15",
+    "twrnc": "^4.5.1"
   },
   "engines": {
     "node": "^18.18 || >=20"

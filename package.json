@@ -94,6 +94,7 @@
     "semver": "^7.6.3",
     "simple-git-hooks": "^2.8.0",
     "ts-node": "^10.9.1",
+    "twrnc": "^4.5.1",
     "typescript": "~5.2.2",
     "yargs": "^17.7.2"
   },
