@@ -13,10 +13,9 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@metamask/design-system-react-native": "workspace:^",
     "expo": "~49.0.23",
     "expo-status-bar": "~1.6.0",
-    "react": "^18.2.0",
-    "react-native": "0.72.15",
     "react-native-reanimated": "3.3.0",
     "uuid": "^3.0.0"
   },
@@ -39,6 +38,10 @@
   },
   "dependenciesMeta": {
     "uuid": {}
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-native": "0.72.15"
   },
   "engines": {
     "node": "^18.18 || >=20"

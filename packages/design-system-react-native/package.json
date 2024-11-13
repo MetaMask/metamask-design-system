@@ -19,23 +19,19 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
       }
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.cts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "tsc --project tsconfig.build.json",
     "build:docs": "typedoc",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",
@@ -47,14 +43,27 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "@babel/preset-typescript": "^7.23.3",
     "@metamask/auto-changelog": "^3.4.4",
+    "@testing-library/react-native": "^12.8.1",
+    "@types/babel__preset-env": "^7",
     "@types/jest": "^27.4.1",
+    "@types/react-test-renderer": "^18",
+    "babel-jest": "^27.5.1",
     "deepmerge": "^4.2.2",
     "jest": "^27.5.1",
+    "metro-react-native-babel-preset": "^0.77.0",
+    "react-test-renderer": "^18.3.1",
     "ts-jest": "^27.1.4",
     "typedoc": "^0.24.8",
     "typedoc-plugin-missing-exports": "^2.0.0",
     "typescript": "~5.2.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-native": "0.72.15"
   },
   "engines": {
     "node": "^18.18 || >=20"
