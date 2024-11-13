@@ -38,7 +38,7 @@ function withColorScheme(Story, context) {
 
   if (colorScheme === 'light') {
     return (
-      <Wrapper data-theme="light">
+      <Wrapper className="light">
         <Story {...context} />
       </Wrapper>
     );
@@ -46,7 +46,7 @@ function withColorScheme(Story, context) {
 
   if (colorScheme === 'dark') {
     return (
-      <Wrapper data-theme="dark">
+      <Wrapper className="dark">
         <Story {...context} />
       </Wrapper>
     );
@@ -54,10 +54,10 @@ function withColorScheme(Story, context) {
 
   return (
     <>
-      <Wrapper data-theme="light">
+      <Wrapper className="light">
         <Story {...context} />
       </Wrapper>
-      <Wrapper data-theme="dark">
+      <Wrapper className="dark">
         <Story {...context} />
       </Wrapper>
     </>
