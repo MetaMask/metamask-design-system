@@ -86,7 +86,7 @@ This document outlines the process for migrating a MetaMask library into the met
 
 - Use the script to ensure that the tags have the correct package name prefixes.
 
-2. Create a fork of the metamask module template for testing, and push the ported tags to the test fork.
+2. Create a fork of the metamask design system for testing, and push the ported tags to the test fork.
 
 - **Do not run the script against `MetaMask/metamask-design-system` before testing it on a fork.**
 
@@ -95,9 +95,9 @@ This document outlines the process for migrating a MetaMask library into the met
 - Note: The diff between any tag before migration and any tag after will always include the entire history of the monorepo. This is due to the nature of the process we use for git history migration, and is a WONTFIX issue.
 - The correct diff can be derived using `git log --ancestry-path`, but GitHub compare links don't support --ancestry-path.
 
-4. Push the ported tags to the metamask module template.
+4. Push the ported tags to the metamask-design-system.
 
-5. From the metamask module template, verify that the tag diff links in CHANGELOG are working.
+5. From the metamask-design-system, verify that the tag diff links in CHANGELOG are working.
 
 6. Manually create tags for release commits that were never tagged in the original repo.
 
