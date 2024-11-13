@@ -1,7 +1,6 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
-
-import { useTailwind } from '../provider';
 
 export type ButtonProps = {
   text: string;

@@ -1,9 +1,13 @@
 /* eslint-disable jsdoc/require-returns */
 // src/hocs/withThemeProvider.tsx
 
+import {
+  ThemeProvider,
+  ThemeContext,
+  Theme,
+  ColorScheme,
+} from '@metamask/design-system-twrnc-preset';
 import React, { forwardRef, useContext } from 'react';
-
-import { ThemeProvider, ThemeContext, Theme, ColorScheme } from '../provider';
 
 /**
  * HOC to wrap components with ThemeProvider if none is present.

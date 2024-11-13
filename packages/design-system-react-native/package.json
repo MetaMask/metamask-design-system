@@ -31,7 +31,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "rm -rf tsconfig.build.tsbuildinfo dist && tsc --project tsconfig.build.json",
+    "build": "rm -rf tsconfig.build.tsbuildinfo dist && tsc --traceResolution --project tsconfig.build.json",
     "build:docs": "typedoc",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",
@@ -42,7 +42,11 @@
     "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
+  "dependencies": {
+    "@metamask/design-system-twrnc-preset": "workspace:^"
+  },
   "devDependencies": {
+    "@babel/core": "^7.23.5",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.23.3",
