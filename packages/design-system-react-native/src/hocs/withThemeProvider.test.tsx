@@ -1,19 +1,24 @@
 import {
   ThemeProvider,
-  useThemeContext,
+  ThemeContext,
   ColorSet,
   Theme,
 } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
-import React from 'react';
+import React, { forwardRef, useContext, createRef } from 'react';
 import { Text } from 'react-native';
 
 import { withThemeProvider } from './withThemeProvider';
 
-const TestThemeComponent = () => {
-  const { theme } = useThemeContext();
-  return <Text>{theme}</Text>;
-};
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const TestThemeComponent = forwardRef((props, ref) => {
+  const themeContext = useContext(ThemeContext);
+  return (
+    <Text ref={ref as React.Ref<Text>}>
+      {themeContext.theme ? themeContext.theme : 'No Theme'}
+    </Text>
+  );
+});
 const WrappedComponent = withThemeProvider(TestThemeComponent);
 
 describe('withThemeProvider HOC', () => {
@@ -28,7 +33,12 @@ describe('withThemeProvider HOC', () => {
         <WrappedComponent />
       </ThemeProvider>,
     );
-
     expect(getByText(Theme.Dark)).toBeDefined();
+  });
+
+  it('forwards ref to the wrapped component', () => {
+    const ref = createRef<Text>();
+    render(<WrappedComponent ref={ref} />);
+    expect(ref.current).toBeDefined();
   });
 });
