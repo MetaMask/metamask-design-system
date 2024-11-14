@@ -14,7 +14,7 @@ import { withThemeProvider } from './withThemeProvider';
 const TestThemeComponent = forwardRef((props, ref) => {
   const themeContext = useContext(ThemeContext);
   return (
-    <Text ref={ref as React.Ref<Text>}>
+    <Text ref={ref as React.Ref<Text>} testID="withthemprovider-text">
       {themeContext.theme ? themeContext.theme : 'No Theme'}
     </Text>
   );
@@ -41,5 +41,12 @@ describe('withThemeProvider HOC', () => {
 
     render(<WrappedComponent ref={ref as React.Ref<unknown>} />);
     expect(ref.current).toBeDefined();
+  });
+
+  it('forwards props to the wrapped component', () => {
+    const { getByTestId } = render(<WrappedComponent />);
+    const textElement = getByTestId('withthemprovider-text');
+
+    expect(textElement).toBeDefined();
   });
 });
