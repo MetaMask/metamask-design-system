@@ -37,8 +37,9 @@ describe('withThemeProvider HOC', () => {
   });
 
   it('forwards ref to the wrapped component', () => {
-    const ref = createRef<Text>();
-    render(<WrappedComponent ref={ref} />);
+    const ref = createRef<Text>(); // Create a ref with type Text
+
+    render(<WrappedComponent ref={ref as React.Ref<unknown>} />);
     expect(ref.current).toBeDefined();
   });
 });
