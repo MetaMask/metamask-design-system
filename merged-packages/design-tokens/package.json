@@ -17,9 +17,14 @@
   "license": "(MIT OR Apache-2.0)",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./package.json": "./package.json",
     "./styles.css": "./dist/styles.css"
@@ -43,78 +48,20 @@
     "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
-  "resolutions": {
-    "@storybook/node-logger": "7.6.16"
-  },
   "devDependencies": {
-    "@babel/core": "^7.23.5",
-    "@babel/preset-react": "^7.23.5",
-    "@chromatic-com/storybook": "^1.5.0",
-    "@lavamoat/allow-scripts": "^3.2.1",
-    "@lavamoat/preinstall-always-fail": "^2.0.0",
     "@metamask/auto-changelog": "^3.4.4",
-    "@metamask/eslint-config": "^12.2.0",
-    "@metamask/eslint-config-jest": "^12.1.0",
-    "@metamask/eslint-config-nodejs": "^12.1.0",
-    "@metamask/eslint-config-typescript": "^12.1.0",
-    "@storybook/addon-essentials": "^8.3.5",
-    "@storybook/addon-interactions": "^8.3.5",
-    "@storybook/addon-links": "^8.3.5",
-    "@storybook/blocks": "^8.3.5",
-    "@storybook/react": "^8.3.5",
-    "@storybook/react-vite": "^8.3.5",
-    "@storybook/test": "^8.3.5",
-    "@types/babel__core": "^7",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "@yarnpkg/types": "^4.0.0",
     "clean-css-cli": "^5.6.3",
-    "depcheck": "^1.4.3",
-    "eslint": "^8.44.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-jest": "^27.1.5",
-    "eslint-plugin-jsdoc": "^39.9.1",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-storybook": "^0.8.0",
     "jest": "^27.5.1",
-    "jest-it-up": "^2.0.2",
-    "node-fetch": "^2.6.0",
-    "prettier": "^2.7.1",
-    "prettier-plugin-packagejson": "^2.4.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "remark-gfm": "^4.0.0",
-    "sass": "^1.75.0",
-    "storybook": "^8.3.5",
     "ts-jest": "^27.1.4",
-    "ts-node": "^10.9.1",
-    "tsup": "^7.2.0",
-    "typescript": "~5.2.2",
-    "vite": "^5.2.10"
+    "typescript": "~5.2.2"
   },
-  "packageManager": "yarn@4.2.2",
   "engines": {
     "node": "^18.18 || >=20"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  },
-  "lavamoat": {
-    "allowScripts": {
-      "@lavamoat/preinstall-always-fail": false,
-      "tsup>esbuild": true,
-      "vite>esbuild": false,
-      "storybook>@storybook/core>esbuild": false,
-      "sass>@parcel/watcher": false
-    }
   }
 }
