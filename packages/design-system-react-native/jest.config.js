@@ -33,5 +33,6 @@ module.exports = merge(baseConfig, {
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
+    '^@components/(.*)$': '<rootDir>/src/components/$1',
   },
 });
