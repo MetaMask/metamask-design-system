@@ -1,31 +1,34 @@
 import {
   ThemeProvider,
+  useThemeContext,
   ColorSet,
   Theme,
 } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
+import { Text } from 'react-native';
 
 import { withThemeProvider } from './withThemeProvider';
 
-describe('withThemeProvider HOC', () => {
-  const TestComponent = () => <></>;
-  const WrappedComponent = withThemeProvider(TestComponent);
+const TestThemeComponent = () => {
+  const { theme } = useThemeContext();
+  return <Text>{theme}</Text>;
+};
+const WrappedComponent = withThemeProvider(TestThemeComponent);
 
-  it('wraps component with ThemeProvider if none is present', () => {
-    const { getByTestId } = render(<WrappedComponent />);
-    const themeProvider = getByTestId('ThemeProvider');
-    expect(themeProvider).toBeDefined();
+describe('withThemeProvider HOC', () => {
+  it('provides default theme when no ThemeProvider is present', () => {
+    const { getByText } = render(<WrappedComponent />);
+    expect(getByText(Theme.Default)).toBeDefined();
   });
 
-  it('does not wrap component with ThemeProvider if ThemeContext is already present', () => {
-    const { queryAllByTestId } = render(
-      <ThemeProvider colorSet={ColorSet.Brand} theme={Theme.Default}>
+  it('does not override existing theme context', () => {
+    const { getByText } = render(
+      <ThemeProvider colorSet={ColorSet.Brand} theme={Theme.Dark}>
         <WrappedComponent />
       </ThemeProvider>,
     );
 
-    // Ensures only one ThemeProvider exists, meaning the HOC did not add another
-    expect(queryAllByTestId('ThemeProvider')).toHaveLength(1);
+    expect(getByText(Theme.Dark)).toBeDefined();
   });
 });
