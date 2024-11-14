@@ -1,12 +1,12 @@
 import { addDecorator } from '@storybook/react-native';
 import {
-  Theme,
+  ColorSet,
   ThemeProvider,
-  ColorScheme,
+  Theme,
 } from '@metamask/design-system-twrnc-preset';
 
 addDecorator((Story) => (
-  <ThemeProvider theme={Theme.Brand} colorScheme={ColorScheme.Themed}>
+  <ThemeProvider colorSet={ColorSet.Brand} theme={Theme.Default}>
     <Story />
   </ThemeProvider>
 ));

@@ -64,7 +64,7 @@
   },
   "peerDependencies": {
     "@metamask/design-system-twrnc-preset": "workspace:^",
-    "@metamask/design-tokens": "^4.0.0",
+    "@metamask/design-tokens": "^4.1.0",
     "react": "^18.2.0",
     "react-native": "0.72.15",
     "twrnc": "^4.5.1"

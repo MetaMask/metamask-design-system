@@ -4,8 +4,8 @@
 import {
   ThemeProvider,
   ThemeContext,
+  ColorSet,
   Theme,
-  ColorScheme,
 } from '@metamask/design-system-twrnc-preset';
 import React, { forwardRef, useContext } from 'react';
 
@@ -27,7 +27,7 @@ export function withThemeProvider<Props extends object>(
 
     // Otherwise, wrap with ThemeProvider
     return (
-      <ThemeProvider theme={Theme.Brand} colorScheme={ColorScheme.Themed}>
+      <ThemeProvider colorSet={ColorSet.Brand} theme={Theme.Default}>
         <Component {...(props as Props)} ref={ref} />
       </ThemeProvider>
     );

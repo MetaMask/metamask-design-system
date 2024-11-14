@@ -11,7 +11,7 @@ export enum Theme {
   Dark = 'dark',
 }
 
-export type ColorSetProps = {
+export type ColorSetListProps = {
   brand: {
     light: DesignTokenTheme['colors'];
     dark: DesignTokenTheme['colors'];
