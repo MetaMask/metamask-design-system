@@ -29,7 +29,7 @@
     "prepack": "./scripts/prepack.sh",
     "prepare-preview-builds": "./scripts/prepare-preview-builds.sh",
     "publish-previews": "yarn workspaces foreach --all --no-private --parallel --verbose run publish:preview",
-    "setup": "yarn install",
+    "setup": "yarn install && yarn build",
     "storybook": "yarn workspace @metamask/storybook-react storybook",
     "storybook:android": "yarn workspace @metamask/storybook-react-native android",
     "storybook:ios": "yarn workspace @metamask/storybook-react-native ios",
