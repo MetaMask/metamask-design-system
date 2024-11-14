@@ -1,49 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable jsdoc/require-returns */
+// src/hocs/withThemeProvider.tsx
+
 import {
   ThemeProvider,
   ThemeContext,
   ColorSet,
   Theme,
 } from '@metamask/design-system-twrnc-preset';
-import { render } from '@testing-library/react-native';
-import React from 'react';
-import { Text } from 'react-native';
+import React, { forwardRef, useContext } from 'react';
 
-import { withThemeProvider } from './withThemeProvider';
+/**
+ * HOC to wrap components with ThemeProvider if none is present.
+ * @param Component - The component to wrap with ThemeProvider.
+ */
+export function withThemeProvider<Props extends object>(
+  Component: React.ComponentType<Props>,
+) {
+  const WrappedComponent = forwardRef<any, Props>((props, ref) => {
+    // Check if a ThemeProvider is already present
+    const themeContext = useContext(ThemeContext);
 
-const TestThemeComponent = React.forwardRef((props, ref) => {
-  const themeContext = React.useContext(ThemeContext);
-  return (
-    <Text ref={ref}>
-      {themeContext.theme ? themeContext.theme : 'No Theme'}
-    </Text>
-  );
-});
-const WrappedComponent = withThemeProvider(TestThemeComponent);
+    // If ThemeProvider exists, use the component as is
+    if (themeContext) {
+      return <Component {...(props as Props)} ref={ref} />;
+    }
 
-describe('withThemeProvider HOC', () => {
-  it('provides default theme when no ThemeProvider is present', () => {
-    const { getByText } = render(<WrappedComponent />);
-    expect(getByText(Theme.Default)).toBeDefined();
-  });
-
-  it('does not override existing theme context', () => {
-    const { getByText } = render(
-      <ThemeProvider colorSet={ColorSet.Brand} theme={Theme.Dark}>
-        <WrappedComponent />
-      </ThemeProvider>,
+    // Otherwise, wrap with ThemeProvider
+    return (
+      <ThemeProvider colorSet={ColorSet.Brand} theme={Theme.Default}>
+        <Component {...(props as Props)} ref={ref} />
+      </ThemeProvider>
     );
-    expect(getByText(Theme.Dark)).toBeDefined();
   });
 
-  it('forwards ref to the wrapped component', () => {
-    const ref = React.createRef();
-    render(<WrappedComponent ref={ref} />);
-    expect(ref.current).toBeDefined();
-  });
-
-  it('passes additional props to the wrapped component', () => {
-    const { getByText } = render(<WrappedComponent testProp="testValue" />);
-    // Update TestThemeComponent to display testProp for this test
-    expect(getByText('testValue')).toBeDefined();
-  });
-});
+  return WrappedComponent;
+}
