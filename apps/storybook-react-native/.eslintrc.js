@@ -18,7 +18,6 @@ module.exports = {
     'babel.config.js',
     'metro.config.js',
     'jest.config.js',
-    'tailwind.config.js',
   ],
   rules: {
     'import/extensions': [

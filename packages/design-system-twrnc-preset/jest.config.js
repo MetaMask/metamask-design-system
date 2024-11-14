@@ -23,4 +23,15 @@ module.exports = merge(baseConfig, {
       statements: 100,
     },
   },
+  preset: 'react-native',
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+  },
+  transformIgnorePatterns: [
+    'node_modules/(?!(react-native|@react-native|@react-navigation)/)',
+  ],
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  moduleNameMapper: {
+    '\\.(css|less|scss)$': 'identity-obj-proxy',
+  },
 });

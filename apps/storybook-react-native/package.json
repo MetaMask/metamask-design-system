@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@metamask/design-system-react-native": "workspace:^",
+    "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "^4.0.0",
     "expo": "~49.0.23",
     "expo-status-bar": "~1.6.0",

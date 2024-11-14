@@ -31,7 +31,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "rm -rf tsconfig.build.tsbuildinfo dist && tsc --traceResolution --project tsconfig.build.json",
+    "build": "rm -rf tsconfig.build.tsbuildinfo dist && tsc --project tsconfig.build.json",
     "build:docs": "typedoc",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",

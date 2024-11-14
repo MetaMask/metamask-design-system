@@ -3,7 +3,7 @@ import {
   Theme,
   ThemeProvider,
   ColorScheme,
-} from '@metamask/design-system-react-native';
+} from '@metamask/design-system-twrnc-preset';
 
 addDecorator((Story) => (
   <ThemeProvider theme={Theme.Brand} colorScheme={ColorScheme.Themed}>

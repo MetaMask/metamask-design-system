@@ -1,4 +1,5 @@
-import { Button, useTailwind } from '@metamask/design-system-react-native';
+import { Button } from '@metamask/design-system-react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';

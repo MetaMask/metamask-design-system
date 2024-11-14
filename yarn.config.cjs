@@ -88,7 +88,10 @@ module.exports = defineConfig({
         // All non-root packages must have a license, defaulting to MIT.
         await expectWorkspaceLicense(workspace);
 
-        if (workspace.ident !== '@metamask/design-system-react-native') {
+        if (
+          workspace.ident !== '@metamask/design-system-react-native' &&
+          workspace.ident !== '@metamask/design-system-twrnc-preset'
+        ) {
           // All non-root packages must set up ESM- and CommonJS-compatible
           // exports correctly.
           expectCorrectWorkspaceExports(workspace);

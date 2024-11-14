@@ -3,7 +3,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "jsx": "react-native",
+    "types": ["react-native", "jest"],
+    "emitDeclarationOnly": false
   },
   "references": [],
   "include": ["./src"]
