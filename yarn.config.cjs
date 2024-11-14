@@ -134,12 +134,14 @@ module.exports = defineConfig({
           '../../scripts/since-latest-release.sh',
         );
 
-        // All non-root packages must have the same "test" script.
-        expectWorkspaceField(
-          workspace,
-          'scripts.test',
-          'NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter',
-        );
+        if (workspace.ident !== '@metamask/design-system-twrnc-preset') {
+          // All non-root packages must have the same "test" script.
+          expectWorkspaceField(
+            workspace,
+            'scripts.test',
+            'NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter',
+          );
+        }
 
         // All non-root packages must have the same "test:clean" script.
         expectWorkspaceField(
