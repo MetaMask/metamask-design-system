@@ -5,52 +5,51 @@ import type { ColorSchemeName } from 'react-native';
 import { create } from 'twrnc';
 
 import type { ThemeContextProps, ThemeProviderProps } from './Theme.types';
-import { Theme, ColorScheme } from './Theme.types';
+import { ColorSet, Theme } from './Theme.types';
 import { generateTailwindConfig } from './Theme.utilities';
 
 export const ThemeContext = createContext<ThemeContextProps>({
   tw: create(
-    generateTailwindConfig(Theme.Brand, ColorScheme.Themed as ColorSchemeName),
+    generateTailwindConfig(ColorSet.Brand, Theme.Light as ColorSchemeName),
   ),
-  theme: Theme.Brand,
-  colorScheme: ColorScheme.Themed,
+  colorSet: ColorSet.Brand,
+  theme: Theme.Default,
+  setColorSet: () => {},
   setTheme: () => {},
-  setColorScheme: () => {},
 });
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
-  theme = Theme.Brand,
-  colorScheme = ColorScheme.Themed,
+  colorSet = ColorSet.Brand,
+  theme = Theme.Default,
 }) => {
+  const [currentColorSet, setCurrentColorSet] = useState<ColorSet>(colorSet);
   const [currentTheme, setCurrentTheme] = useState<Theme>(theme);
-  const [currentColorScheme, setCurrentColorScheme] =
-    useState<ColorScheme>(colorScheme);
   const systemColorScheme = useColorScheme(); // 'light' | 'dark' | null
 
   const activeColorScheme: 'light' | 'dark' = useMemo(() => {
-    if (currentColorScheme === ColorScheme.Themed) {
+    if (currentTheme === Theme.Default) {
       return systemColorScheme === 'dark' ? 'dark' : 'light';
     }
-    return currentColorScheme as 'light' | 'dark';
-  }, [currentColorScheme, systemColorScheme]);
+    return currentTheme as 'light' | 'dark';
+  }, [currentTheme, systemColorScheme]);
 
   const tw = useMemo(() => {
     const tailwindConfig = generateTailwindConfig(
-      currentTheme,
+      currentColorSet,
       activeColorScheme,
     );
     return create(tailwindConfig);
-  }, [currentTheme, activeColorScheme]);
+  }, [currentColorSet, activeColorScheme]);
 
   return (
     <ThemeContext.Provider
       value={{
         tw,
+        colorSet: currentColorSet,
         theme: currentTheme,
-        colorScheme: currentColorScheme,
+        setColorSet: setCurrentColorSet,
         setTheme: setCurrentTheme,
-        setColorScheme: setCurrentColorScheme,
       }}
     >
       {children}

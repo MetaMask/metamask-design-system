@@ -1,6 +1,6 @@
 # `@metamask/design-system-twrnc-preset`
 
-Design System React Native
+Design System twrnc preset
 
 ## Installation
 

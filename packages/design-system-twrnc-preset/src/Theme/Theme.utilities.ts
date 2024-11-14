@@ -1,8 +1,8 @@
 import type { ColorSchemeName } from 'react-native';
 
 import baseConfig from '../../tailwind.config';
-import { themes } from './Theme.constants';
-import type { Theme } from './Theme.types';
+import { colorSetList } from './Theme.constants';
+import type { ColorSet } from './Theme.types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const flattenColors = (colors: Record<string, any>, prefix = '') => {
@@ -20,11 +20,11 @@ const flattenColors = (colors: Record<string, any>, prefix = '') => {
 };
 
 export const generateTailwindConfig = (
-  theme: Theme,
+  colorSet: ColorSet,
   colorScheme: ColorSchemeName,
 ) => {
   const activeColorScheme = colorScheme === 'dark' ? 'dark' : 'light';
-  const themeColors = themes[theme][activeColorScheme];
+  const themeColors = colorSetList[colorSet][activeColorScheme];
 
   if (!themeColors) {
     console.error('Theme colors not found.');

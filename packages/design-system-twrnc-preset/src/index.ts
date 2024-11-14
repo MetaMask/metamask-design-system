@@ -1,8 +1,8 @@
-export type { ThemeContextProps, ThemeProviderProps } from './provider';
+export type { ThemeContextProps, ThemeProviderProps } from './Theme';
 export {
   useTailwind,
   ThemeContext,
   ThemeProvider,
+  ColorSet,
   Theme,
-  ColorScheme,
-} from './provider';
+} from './Theme';

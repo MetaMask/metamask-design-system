@@ -1,4 +1,3 @@
-// We use Babel for our tests in scripts/.
 module.exports = {
   env: {
     test: {
