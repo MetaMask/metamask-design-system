@@ -1,0 +1,1 @@
+export { withThemeProvider } from './withThemeProvider';

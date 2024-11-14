@@ -8,15 +8,19 @@ import type { ThemeContextProps, ThemeProviderProps } from './Theme.types';
 import { ColorSet, Theme } from './Theme.types';
 import { generateTailwindConfig } from './Theme.utilities';
 
-export const ThemeContext = createContext<ThemeContextProps>({
+export const defaultThemeContextValue: ThemeContextProps = {
   tw: create(
     generateTailwindConfig(ColorSet.Brand, Theme.Light as ColorSchemeName),
   ),
   colorSet: ColorSet.Brand,
-  theme: Theme.Default,
+  theme: Theme.Light,
   setColorSet: () => {},
   setTheme: () => {},
-});
+};
+
+export const ThemeContext = createContext<ThemeContextProps>(
+  defaultThemeContextValue,
+);
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,

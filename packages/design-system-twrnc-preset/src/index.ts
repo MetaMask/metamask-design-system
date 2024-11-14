@@ -6,3 +6,5 @@ export {
   ColorSet,
   Theme,
 } from './Theme';
+
+export { withThemeProvider } from './hocs';
