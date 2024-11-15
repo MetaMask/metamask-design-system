@@ -75,6 +75,13 @@ describe('Typography', () => {
     '--typography-l-body-xs-medium-line-height',
     '--typography-l-body-xs-medium-font-weight',
     '--typography-l-body-xs-medium-letter-spacing',
+    '--font-weight-regular',
+    '--typography-s-body-lg-medium-font-family',
+    '--typography-s-body-lg-medium-font-size',
+    '--typography-s-body-lg-medium-line-height',
+    '--typography-s-body-lg-medium-font-weight',
+    '--typography-s-body-lg-medium-letter-spacing',
+    '--typography-l-body-lg-medium-font-weight',
   ];
 
   /**
@@ -82,8 +89,11 @@ describe('Typography', () => {
    * are defined in the @metamask/design-tokens package.
    */
   it('should use only CSS variables that exist in @metamask/design-tokens', async () => {
-    // Retrieve all design token variables that start with '--typography'
-    const designTokens = await getDesignTokenVariables(['--typography']);
+    // Retrieve all design token variables that start with '--typography' or '--font-weight'
+    const designTokens = await getDesignTokenVariables([
+      '--typography',
+      '--font-weight',
+    ]);
 
     // Identify any used variables that are missing from the design tokens
     const missingVariables = usedVariables.filter(
