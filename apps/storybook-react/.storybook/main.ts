@@ -38,10 +38,6 @@ const config: StorybookConfig = {
           __dirname,
           '../../../node_modules/@metamask/design-tokens',
         ),
-        '@components': path.resolve(
-          __dirname,
-          '../packages/react-components/src',
-        ),
       };
     }
     return config;

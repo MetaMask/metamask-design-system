@@ -14,6 +14,9 @@ module.exports = merge(baseConfig, {
   // The display name when running multiple projects
   displayName,
 
+  // Add coverage ignore patterns
+  coveragePathIgnorePatterns: ['index.ts'],
+
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
