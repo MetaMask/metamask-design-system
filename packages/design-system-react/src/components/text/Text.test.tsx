@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Text, TextVariant, TextColor } from './Text';
+import { Text, TextVariant, TextColor } from '.';
 
 describe('Text Component', () => {
   it('renders children correctly', () => {

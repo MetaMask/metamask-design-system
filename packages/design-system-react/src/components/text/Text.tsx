@@ -68,5 +68,3 @@ export const Text: React.FC<TextProps> = ({
 
   return <Tag className={mergedClassName}>{children}</Tag>;
 };
-
-export { TextVariant, TextColor } from './Text.types';
