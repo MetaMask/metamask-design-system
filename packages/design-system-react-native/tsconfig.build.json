@@ -8,6 +8,10 @@
     "types": ["react-native", "jest"],
     "emitDeclarationOnly": false
   },
-  "references": [],
+  "references": [
+    {
+      "path": "../design-system-twrnc-preset/tsconfig.build.json"
+    }
+  ],
   "include": ["./src"]
 }

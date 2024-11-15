@@ -5,7 +5,11 @@
     "jsx": "react-native",
     "skipLibCheck": true
   },
-  "references": [],
+  "references": [
+    {
+      "path": "../design-system-twrnc-preset"
+    }
+  ],
   "include": ["src/**/*"],
   "exclude": ["jest.config.js", ".eslintrc.js", "babel.config.js"]
 }

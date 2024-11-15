@@ -1,9 +1,10 @@
-/**
- * Example function that returns a greeting for the given name.
- *
- * @param name - The name to greet.
- * @returns The greeting.
- */
-export default function greeter(name: string): string {
-  return `Hello, ${name}!`;
-}
+export type { ThemeContextProps, ThemeProviderProps } from './Theme';
+export {
+  useTailwind,
+  ThemeContext,
+  ThemeProvider,
+  ColorSet,
+  Theme,
+} from './Theme';
+
+export { withThemeProvider } from './hocs';
