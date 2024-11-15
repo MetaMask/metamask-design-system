@@ -1,0 +1,222 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as TextStories from './Text.stories';
+
+# Text
+
+Text is the used to render text and paragraphs within an interface
+
+<Canvas of={TextStories.Default} />
+
+## Props
+
+### Variant
+
+Use the `variant` prop and the `TextVariant` enum from `@metamask/design-system-react` to change the font size of the component. The `Text` component uses responsive font sizes.
+
+<table>
+  <thead>
+    <tr>
+      <th>Variant</th>
+      <th>Small Screen</th>
+      <th>Large Screen (tailwind prefix md:)</th>
+      <th>Default HTML Tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DisplayLg</td>
+      <td>2.5rem (40px)</td>
+      <td>4rem (64px)</td>
+      <td>
+        <code>h1</code>
+      </td>
+    </tr>
+    <tr>
+      <td>DisplayMd</td>
+      <td>2rem (32px)</td>
+      <td>3rem (48px)</td>
+      <td>
+        <code>h1</code>
+      </td>
+    </tr>
+    <tr>
+      <td>HeadingLg</td>
+      <td>1.5rem (24px)</td>
+      <td>2rem (32px)</td>
+      <td>
+        <code>h2</code>
+      </td>
+    </tr>
+    <tr>
+      <td>HeadingMd</td>
+      <td>1.125rem (18px)</td>
+      <td>1.5rem (24px)</td>
+      <td>
+        <code>h3</code>
+      </td>
+    </tr>
+    <tr>
+      <td>HeadingSm</td>
+      <td>1rem (16px)</td>
+      <td>1.125rem (18px)</td>
+      <td>
+        <code>h4</code>
+      </td>
+    </tr>
+    <tr>
+      <td>BodyLg</td>
+      <td>1rem (16px)</td>
+      <td>1.125rem (18px)</td>
+      <td>
+        <code>p</code>
+      </td>
+    </tr>
+    <tr>
+      <td>BodyMd</td>
+      <td>0.875rem (14px)</td>
+      <td>1rem (16px)</td>
+      <td>
+        <code>p</code>
+      </td>
+    </tr>
+    <tr>
+      <td>BodySm</td>
+      <td>0.75rem (12px)</td>
+      <td>0.875rem (14px)</td>
+      <td>
+        <code>p</code>
+      </td>
+    </tr>
+    <tr>
+      <td>BodyXs</td>
+      <td>0.625rem (10px)</td>
+      <td>0.75rem (12px)</td>
+      <td>
+        <code>p</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextStories.Variant} />
+
+### Color
+
+Use the `color` prop and the `TextColor` enum from `@metamask/design-system-react` to change the color of the `Text` component.
+
+<Canvas of={TextStories.Color} />
+
+### Font Weight
+
+Use the `fontWeight` prop and the `FontWeight` enum from `@metamask/design-system-react` to change the font weight of the `Text` component.
+
+<table>
+  <thead>
+    <tr>
+      <th>Font Weight</th>
+      <th>CSS Value</th>
+      <th>Weight Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>FontWeight.Normal</code>
+      </td>
+      <td>
+        <code>normal</code>
+      </td>
+      <td>400</td>
+    </tr>
+    <tr>
+      <td>
+        <code>FontWeight.Medium</code>
+      </td>
+      <td>
+        <code>medium</code>
+      </td>
+      <td>500</td>
+    </tr>
+    <tr>
+      <td>
+        <code>FontWeight.Bold</code>
+      </td>
+      <td>
+        <code>bold</code>
+      </td>
+      <td>700</td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextStories.FontWeightStory} />
+
+### Font Style
+
+Use the `fontStyle` prop and the `FontStyle` enum from `@metamask/design-system-react` to change the font style of the `Text` component. There are 2 font styles:
+
+- `FontStyle.Normal`
+- `FontStyle.Italic`
+
+<Canvas of={TextStories.FontStyleStory} />
+
+### Text Transform
+
+Use the `textTransform` prop and the `TextTransform` enum from `@metamask/design-system-react` to change the text transformation of the `Text` component.
+
+<Canvas of={TextStories.TextTransformStory} />
+
+### Text Align
+
+Use the `textAlign` prop and the `TextAlign` enum from `@metamask/design-system-react` to change the text alignment of the `Text` component.
+
+<Canvas of={TextStories.TextAlignStory} />
+
+### Overflow Wrap
+
+Use the `overflowWrap` prop and the `OverflowWrap` enum from `@metamask/design-system-react` to change the overflow wrap of the `Text` component.
+
+<Canvas of={TextStories.OverflowWrapStory} />
+
+### Ellipsis
+
+Use the boolean `ellipsis` prop to make the `Text` component have an ellipsis.
+
+<Canvas of={TextStories.Ellipsis} />
+
+### As
+
+Use the `as` prop to change the root HTML element of the `Text` component.
+
+You can also utilize the `ValidTag` enum from `@metamask/design-system-react` to ensure that you are using a valid HTML element.
+
+<Canvas of={TextStories.As} />
+
+Renders the HTML:
+
+```html
+<span>span</span> <strong>strong</strong>
+```
+
+### Strong
+
+Using the `as` prop with the value of `strong` will render the `Text` component as a `strong` element and any `strong` elements used within a `Text` component will be supported with bold styles.
+
+<Canvas of={TextStories.Strong} />
+
+### Class Name
+
+Adds an additional class to the `Text` component.
+
+### Children
+
+The text content of the `Text` component.
+
+### Component API
+
+<Controls of={TextStories.Default} />
+
+### References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

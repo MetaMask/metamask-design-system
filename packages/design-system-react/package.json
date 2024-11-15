@@ -46,6 +46,9 @@
     "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
+  "dependencies": {
+    "tailwind-merge": "^2.0.0"
+  },
   "devDependencies": {
     "@metamask/auto-changelog": "^3.4.4",
     "@metamask/design-system-tailwind-preset": "workspace:^",

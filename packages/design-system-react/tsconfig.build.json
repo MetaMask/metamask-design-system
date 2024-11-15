@@ -14,5 +14,6 @@
     "lib": ["ES2020", "DOM"]
   },
   "references": [],
-  "include": ["./src"]
+  "include": ["./src"],
+  "exclude": ["**/*.stories.tsx", "**/*.stories.ts"]
 }
