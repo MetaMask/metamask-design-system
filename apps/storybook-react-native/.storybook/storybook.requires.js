@@ -11,10 +11,10 @@ import {
 global.STORIES = [
   {
     titlePrefix: "",
-    directory: "./src",
-    files: "**/*.stories.?(ts|tsx)",
+    directory: "../../packages/design-system-react-native/src",
+    files: "**/*.stories.@(js|jsx|ts|tsx)",
     importPathMatcher:
-      "^\\.[\\\\/](?:src(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(?:ts|tsx)?)$",
+      "^(?:\\.\\.\\/\\.\\.\\/packages\\/design-system-react-native\\/src(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$",
   },
 ];
 
@@ -46,7 +46,9 @@ try {
 } catch {}
 
 const getStories = () => {
-  return { "./src/Button.stories.tsx": require("../src/Button.stories.tsx") };
+  return {
+    "./../../packages/design-system-react-native/src/components/Button.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button.stories.tsx"),
+  };
 };
 
 configure(getStories, module, false);
