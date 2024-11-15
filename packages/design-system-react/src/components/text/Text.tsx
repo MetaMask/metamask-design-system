@@ -16,7 +16,7 @@ export enum TextVariant {
   BodyXs = 'body-xs',
 }
 
-interface TextProps {
+export interface TextProps {
   variant: TextVariant;
   children: React.ReactNode;
   className?: string;
