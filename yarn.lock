@@ -3185,25 +3185,24 @@ __metadata:
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
     "@metamask/auto-changelog": "npm:^3.4.4"
+    "@metamask/design-system-twrnc-preset": "workspace:^"
     "@storybook/react-native": "npm:6.5"
     "@testing-library/react-native": "npm:^12.8.1"
     "@types/babel__preset-env": "npm:^7"
     "@types/jest": "npm:^27.4.1"
+    "@types/react": "npm:^18.2.0"
     "@types/react-test-renderer": "npm:^18"
     babel-jest: "npm:^27.5.1"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^27.5.1"
     metro-react-native-babel-preset: "npm:^0.77.0"
+    react: "npm:^18.2.0"
+    react-native: "npm:^0.72.15"
     react-test-renderer: "npm:^18.3.1"
     ts-jest: "npm:^27.1.4"
     typedoc: "npm:^0.24.8"
     typedoc-plugin-missing-exports: "npm:^2.0.0"
     typescript: "npm:~5.2.2"
-  peerDependencies:
-    "@metamask/design-system-twrnc-preset": "workspace:^"
-    "@metamask/design-tokens": ^4.1.0
-    react: ^18.2.0
-    react-native: 0.72.15
   languageName: unknown
   linkType: soft
 
@@ -3212,7 +3211,6 @@ __metadata:
   resolution: "@metamask/design-system-react@workspace:packages/design-system-react"
   dependencies:
     "@metamask/auto-changelog": "npm:^3.4.4"
-    "@metamask/design-system-tailwind-preset": "workspace:^"
     "@storybook/react": "npm:^8.3.5"
     "@storybook/test": "npm:^8.3.5"
     "@testing-library/jest-dom": "npm:^6.6.3"
@@ -3222,14 +3220,15 @@ __metadata:
     "@types/react-dom": "npm:^18.2.0"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^27.5.1"
+    react: "npm:^16.0.0"
+    react-dom: "npm:^16.0.0"
     ts-jest: "npm:^27.1.4"
     typedoc: "npm:^0.24.8"
     typedoc-plugin-missing-exports: "npm:^2.0.0"
     typescript: "npm:~5.2.2"
   peerDependencies:
+    "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": ^4.1.0
-    react: ^16.0.0
-    react-dom: ^16.0.0
     tailwindcss: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -3263,24 +3262,24 @@ __metadata:
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
     "@metamask/auto-changelog": "npm:^3.4.4"
+    "@metamask/design-tokens": "npm:^4.1.0"
     "@testing-library/react-native": "npm:^12.8.1"
     "@types/babel__preset-env": "npm:^7"
     "@types/jest": "npm:^27.4.1"
+    "@types/react": "npm:^18.2.0"
     "@types/react-test-renderer": "npm:^18"
     babel-jest: "npm:^27.5.1"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^27.5.1"
     metro-react-native-babel-preset: "npm:^0.77.0"
+    react: "npm:^18.2.0"
+    react-native: "npm:0.72.15"
     react-test-renderer: "npm:^18.3.1"
     ts-jest: "npm:^27.1.4"
+    twrnc: "npm:^4.5.1"
     typedoc: "npm:^0.24.8"
     typedoc-plugin-missing-exports: "npm:^2.0.0"
     typescript: "npm:~5.2.2"
-  peerDependencies:
-    "@metamask/design-tokens": ^4.1.0
-    react: ^18.2.0
-    react-native: 0.72.15
-    twrnc: ^4.5.1
   languageName: unknown
   linkType: soft
 
@@ -3382,7 +3381,7 @@ __metadata:
     prettier: "npm:^2.7.1"
     prettier-plugin-packagejson: "npm:^2.4.5"
     react: "npm:^18.2.0"
-    react-native: "npm:0.72.15"
+    react-native: "npm:^0.72.15"
     rimraf: "npm:^5.0.5"
     semver: "npm:^7.6.3"
     simple-git-hooks: "npm:^2.8.0"
@@ -9217,9 +9216,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.41":
-  version: 1.5.60
-  resolution: "electron-to-chromium@npm:1.5.60"
-  checksum: 10/0a608d23a5d0a582fe412f6f8d843a9f98c6375016e2f7b38e7b47e86f61a86477a42e4ee5ca48a0454895974990fc5ae66752adb81d57c8c91bb064dabb0304
+  version: 1.5.61
+  resolution: "electron-to-chromium@npm:1.5.61"
+  checksum: 10/ef5309e7c1c0a751765179cc4f14463faf4f4c38efeebb83a821f85c936430ac8c7421e7b0f3b5c4180d46c7c587f6bf6358280c96ee7e42672460e960c0ec30
   languageName: node
   linkType: hard
 
@@ -16565,7 +16564,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.0.0, prop-types@npm:^15.5.10, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.0.0, prop-types@npm:^15.5.10, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -16816,6 +16815,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-dom@npm:^16.0.0":
+  version: 16.14.0
+  resolution: "react-dom@npm:16.14.0"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+    object-assign: "npm:^4.1.1"
+    prop-types: "npm:^15.6.2"
+    scheduler: "npm:^0.19.1"
+  peerDependencies:
+    react: ^16.14.0
+  checksum: 10/d59f3376ab41ee874fbb9bd738160f6d70f619b4cba40531d5c60dfa289c216cff4d5e6552babdf59843a1a8e7f08faf4a746bf4df6c68d2b406a6c13bdbd92b
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0, react-dom@npm:^18.2.0":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
@@ -16970,6 +16983,55 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native@npm:^0.72.15":
+  version: 0.72.17
+  resolution: "react-native@npm:0.72.17"
+  dependencies:
+    "@jest/create-cache-key-function": "npm:^29.2.1"
+    "@react-native-community/cli": "npm:^11.4.1"
+    "@react-native-community/cli-platform-android": "npm:^11.4.1"
+    "@react-native-community/cli-platform-ios": "npm:^11.4.1"
+    "@react-native/assets-registry": "npm:^0.72.0"
+    "@react-native/codegen": "npm:^0.72.8"
+    "@react-native/gradle-plugin": "npm:^0.72.11"
+    "@react-native/js-polyfills": "npm:^0.72.1"
+    "@react-native/normalize-colors": "npm:^0.72.0"
+    "@react-native/virtualized-lists": "npm:^0.72.8"
+    abort-controller: "npm:^3.0.0"
+    anser: "npm:^1.4.9"
+    ansi-regex: "npm:^5.0.0"
+    base64-js: "npm:^1.1.2"
+    deprecated-react-native-prop-types: "npm:^4.2.3"
+    event-target-shim: "npm:^5.0.1"
+    flow-enums-runtime: "npm:^0.0.5"
+    invariant: "npm:^2.2.4"
+    jest-environment-node: "npm:^29.2.1"
+    jsc-android: "npm:^250231.0.0"
+    memoize-one: "npm:^5.0.0"
+    metro-runtime: "npm:^0.76.9"
+    metro-source-map: "npm:^0.76.9"
+    mkdirp: "npm:^0.5.1"
+    nullthrows: "npm:^1.1.1"
+    pretty-format: "npm:^26.5.2"
+    promise: "npm:^8.3.0"
+    react-devtools-core: "npm:^4.27.2"
+    react-refresh: "npm:^0.4.0"
+    react-shallow-renderer: "npm:^16.15.0"
+    regenerator-runtime: "npm:^0.13.2"
+    scheduler: "npm:0.24.0-canary-efb381bbf-20230505"
+    stacktrace-parser: "npm:^0.1.10"
+    use-sync-external-store: "npm:^1.0.0"
+    whatwg-fetch: "npm:^3.0.0"
+    ws: "npm:^6.2.2"
+    yargs: "npm:^17.6.2"
+  peerDependencies:
+    react: 18.2.0
+  bin:
+    react-native: cli.js
+  checksum: 10/fa5007b22f346cdef784ff358c22ae4bde5c88287caed15035e183efca63c1e5894ef944565086a7dfc5f7003e0f4d8ddb3c2f2c1167b14c3f1472867aa870c7
+  languageName: node
+  linkType: hard
+
 "react-refresh@npm:^0.14.2":
   version: 0.14.2
   resolution: "react-refresh@npm:0.14.2"
@@ -17006,6 +17068,17 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: 10/d53137315c677bdfba702a7179a69828233fc7635ae1e0c03b203923d643400ace72b343cb3dd3dafba8911c20bef53f55bff7aa2e4ddff3ccc423fdd9deeee2
+  languageName: node
+  linkType: hard
+
+"react@npm:^16.0.0":
+  version: 16.14.0
+  resolution: "react@npm:16.14.0"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+    object-assign: "npm:^4.1.1"
+    prop-types: "npm:^15.6.2"
+  checksum: 10/ee04c82f5ecb70fe15a48d8cfc3fb20ce2f7e65277d4adcb56a0ac2b82c54550d4c65eabce0d5dc0cc90d053831b9586d72ee515b11cdf0c5436c7f95aafdcda
   languageName: node
   linkType: hard
 
@@ -17686,6 +17759,16 @@ __metadata:
   dependencies:
     loose-envify: "npm:^1.1.0"
   checksum: 10/862881c8d3ece854331516cc048e26a86af461e896ab412506a5b1ffcc82990a08445e0127545ab524df15f88c2a691d8505fc2226a9bddf99bf8a8425bdcc0e
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:^0.19.1":
+  version: 0.19.1
+  resolution: "scheduler@npm:0.19.1"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+    object-assign: "npm:^4.1.1"
+  checksum: 10/2bf42cd56994dd8a97bad0ecb6fbd720674f640c4a95957f9ab453dda28133d5f56755d842e6a0b203efef89a49c52354d151946f50e5c0b633d97d718285c8d
   languageName: node
   linkType: hard
 

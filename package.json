@@ -49,10 +49,6 @@
     "fast-xml-parser@^4.3.4": "^4.4.1",
     "ws@7.4.6": "^7.5.10"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-native": "0.72.15"
-  },
   "devDependencies": {
     "@babel/core": "^7.23.5",
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
@@ -90,6 +86,8 @@
     "lodash": "^4.17.21",
     "prettier": "^2.7.1",
     "prettier-plugin-packagejson": "^2.4.5",
+    "react": "^18.2.0",
+    "react-native": "^0.72.15",
     "rimraf": "^5.0.5",
     "semver": "^7.6.3",
     "simple-git-hooks": "^2.8.0",
