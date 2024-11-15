@@ -1,5 +1,3 @@
-// utils/tw-merge.ts
-
 import { extendTailwindMerge } from 'tailwind-merge';
 
 // TODO create a test that checks against typographyMap in Text.tsx
@@ -22,6 +20,17 @@ const variantClassGroups = [
   'l-body-xs',
 ];
 
+/**
+ * Custom Tailwind Merge configuration to handle our design system's typography classes.
+ * This extends the default Tailwind Merge behavior to properly handle conflicts between:
+ * 1. Custom text color classes (text-default, text-alternative, text-muted)
+ * 2. Typography variant classes for font sizes (e.g., s-body-md, l-heading-lg)
+ * 3. Standard and custom font weight classes
+ *
+ * Without this configuration, Tailwind Merge wouldn't know these classes are meant
+ * to override each other, potentially leading to multiple conflicting classes
+ * being applied simultaneously.
+ */
 export const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
