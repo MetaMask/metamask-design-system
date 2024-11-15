@@ -73,10 +73,14 @@ export const typography = {
     's-heading-md': 'var(--typography-s-heading-md-font-weight)',
     's-heading-sm': 'var(--typography-s-heading-sm-font-weight)',
 <<<<<<< HEAD
+<<<<<<< HEAD
     's-body-lg': 'var(--font-weight-regular)',
 =======
     's-body-lg': 'var(--typography-s-body-lg-regular-font-weight)',
 >>>>>>> 56ffadf (chore: fixing body lg size)
+=======
+    's-body-lg': 'var(--font-weight-regular)',
+>>>>>>> a253b33 (fix: font weight)
     's-body-md': 'var(--typography-s-body-md-font-weight)',
     's-body-sm': 'var(--typography-s-body-sm-font-weight)',
     's-body-xs': 'var(--typography-s-body-xs-font-weight)',
