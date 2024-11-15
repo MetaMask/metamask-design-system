@@ -53,7 +53,7 @@ jobs:
         id: commit-sha
         run: echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
       - run: yarn prepare-preview-builds @metamask-previews ${{ steps.commit-sha.outputs.COMMIT_SHA }}
-      - run: yarn build
+      - run: yarn build:previews
       - name: Publish preview build
         run: yarn publish-previews
         env:
