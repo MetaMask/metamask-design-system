@@ -1,18 +1,16 @@
 {
+  "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
-    "esModuleInterop": true,
-    "exactOptionalPropertyTypes": true,
-    "forceConsistentCasingInFileNames": true,
-    "lib": ["ES2020", "dom"],
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "noEmit": true,
-    "noErrorTruncation": true,
-    "noUncheckedIndexedAccess": true,
-    "strict": true,
-    "target": "es2020",
-    "resolveJsonModule": true,
-    "jsx": "react"
+    "baseUrl": "./",
+    "jsx": "react",
+    "types": [
+      "react",
+      "jest",
+      "@testing-library/react",
+      "@testing-library/jest-dom"
+    ],
+    "lib": ["ES2020", "DOM"]
   },
-  "exclude": ["./dist", "**/node_modules"]
+  "references": [],
+  "include": ["./src"]
 }
