@@ -1,1 +1,0 @@
-export { ColorSwatchGroup } from './ColorSwatchGroup';

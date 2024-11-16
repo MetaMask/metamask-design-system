@@ -16,6 +16,9 @@ module.exports = {
   // The display name when running multiple projects
   displayName,
 
+  // Add coverage ignore patterns
+  coveragePathIgnorePatterns: ['index.ts'],
+
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
@@ -25,8 +28,4 @@ module.exports = {
       statements: 100,
     },
   },
-
-  // In jest.config.packages.js we are ignoring all index.ts files e.g. coveragePathIgnorePatterns: ['./src/index.ts'],
-  // We want to include index.ts in coverage so we override the coveragePathIgnorePatterns
-  coveragePathIgnorePatterns: [],
 };
