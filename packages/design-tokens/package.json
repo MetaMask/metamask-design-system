@@ -6,15 +6,15 @@
     "MetaMask",
     "Ethereum"
   ],
-  "homepage": "https://github.com/MetaMask/design-tokens#readme",
+  "homepage": "https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-tokens#readme",
   "bugs": {
-    "url": "https://github.com/MetaMask/design-tokens/issues"
+    "url": "https://github.com/MetaMask/metamask-design-system/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/design-tokens.git"
+    "url": "https://github.com/MetaMask/metamask-design-system.git"
   },
-  "license": "(MIT OR Apache-2.0)",
+  "license": "MIT",
   "exports": {
     ".": {
       "import": {
@@ -29,15 +29,17 @@
     "./package.json": "./package.json",
     "./styles.css": "./dist/styles.css"
   },
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/index.d.cts",
   "files": [
-    "dist"
+    "dist",
+    "dist/"
   ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references && yarn build:css",
+    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "build:css": "cleancss -o dist/styles.css src/css/index.css",
+    "build:docs": "typedoc",
     "build:types": "tsc --project tsconfig.build.json",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-tokens",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-tokens",
