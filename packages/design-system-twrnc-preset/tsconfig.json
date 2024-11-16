@@ -1,8 +1,16 @@
 {
   "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
-    "baseUrl": "./"
+    "baseUrl": ".",
+    "jsx": "react-native",
+    "skipLibCheck": true
   },
   "references": [],
-  "include": ["./src"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "jest.config.js",
+    ".eslintrc.js",
+    "babel.config.js",
+    "tailwind.config.js"
+  ]
 }

@@ -33,7 +33,7 @@ const typographyClassMap: Record<TextVariant, string> = {
   [TextVariant.HeadingSm]:
     'text-s-heading-sm font-s-heading-sm leading-s-heading-sm tracking-s-heading-sm lg:text-l-heading-sm lg:font-l-heading-sm lg:leading-l-heading-sm lg:tracking-l-heading-sm',
   [TextVariant.BodyLg]:
-    'text-s-body-lg-medium font-s-body-lg-medium leading-s-body-lg-medium tracking-s-body-lg-medium lg:text-l-body-lg-medium lg:font-l-body-lg-medium lg:leading-l-body-lg-medium lg:tracking-l-body-lg-medium',
+    'text-s-body-lg font-s-body-lg leading-s-body-lg tracking-s-body-lg lg:text-l-body-lg lg:font-l-body-lg lg:leading-l-body-lg lg:tracking-l-body-lg',
   [TextVariant.BodyMd]:
     'text-s-body-md font-s-body-md leading-s-body-md tracking-s-body-md lg:text-l-body-md lg:font-l-body-md lg:leading-l-body-md lg:tracking-l-body-md',
   [TextVariant.BodySm]:
