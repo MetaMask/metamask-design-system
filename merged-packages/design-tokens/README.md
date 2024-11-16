@@ -1,14 +1,14 @@
-# `@metamask/@metamask/design-tokens`
+# `@metamask/design-tokens`
 
 A collection of design tokens based on MetaMask's design system.
 
 ## Installation
 
-`yarn add @metamask/@metamask/design-tokens`
+`yarn add @metamask/design-tokens`
 
 or
 
-`npm install @metamask/@metamask/design-tokens`
+`npm install @metamask/design-tokens`
 
 ## Usage
 
