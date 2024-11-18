@@ -1,0 +1,79 @@
+import { Canvas } from '@storybook/blocks';
+import * as ThemeColorStories from './ThemeColors.stories';
+
+# Theme Colors (second tier)
+
+Theme colors are design tokens that are named based on their function rather than their actual color values. This makes them adaptable to different themes and ensures consistency and accessibility across your project.
+
+For most use cases, these function-based color tokens should be your first choice. They are derived from the first-tier [**brand colors**](/docs/colors-brand-colors--docs) and are applied to high-level applications within the UI.
+
+- [**Light theme colors**](#light-theme-colors)
+- [**Dark theme colors**](#dark-theme-colors)
+- [**Best practices**](#best-practices)
+- [**References**](#references)
+
+## Light theme colors
+
+The light theme colors are designed to be used in the styles for MetaMask UI when the light theme is active
+
+<Canvas of={ThemeColorStories.FigmaLightTheme} />
+
+## Dark theme colors
+
+The dark theme colors are designed for MetaMask UI when the dark theme is active. They have the same names as the light theme colors but different values. If you are using the light theme colors for their intended purpose, your UI will automatically be compatible with the dark theme.
+
+<Canvas of={ThemeColorStories.FigmaDarkTheme} />
+
+## Best practices
+
+### ✅ **DO**: Use theme colors in your components
+
+```jsx
+// Good
+background-color: theme.colors.background.default;
+background-color: var(--color-background-default);
+```
+
+### ❌ **DON'T**: Use static color values or brand colors in your components
+
+See when to use [brand colors](/docs/colors-brand-colors--docs#best-practices)
+
+```jsx
+// Avoid
+background-color: #ffffff; // Static color value
+background-color: brandColors.white.white000; // Brand color
+background-color: var(--brand-colors-white-white000); // Brand color
+```
+
+### ✅ **DO**: Store non-token colors in a global file
+
+If you need to use colors that are not included in the design tokens, store these colors in a global file in your project. This makes it easier to keep track of these colors and update them as needed. Always consider this as a last resort, and strive to use design tokens wherever possible.
+
+```jsx
+// colors.js
+export const customColors = {
+  myCustomColor: '#abc123',
+};
+
+// colors.css
+--custom-colors-my-custom-color: #abc123;
+
+// component.js
+import { customColors } from './colors.js';
+
+background-color: customColors.myCustomColor;
+background-color: var(--custom-colors-my-custom-color);
+```
+
+### ❌ **DON'T**: Use non-token colors directly in your components
+
+```jsx
+// Avoid
+background-color: #abc123; // Custom color not in design tokens or global file
+```
+
+## References
+
+- [Figma Brand Colors Library](https://www.figma.com/file/cBAUPFMnbv6tHR1J8KvBI2/Brand-Colors?node-id=0%3A1)(internal use only)
+- [Figma Light Theme Colors Library](https://www.figma.com/file/kdFzEC7xzSNw7cXteqgzDW/Light-Theme-Colors?node-id=0%3A1)(internal use only)
+- [Figma Dark Theme Colors Library](https://www.figma.com/file/rLKsoqpjyoKauYnFDcBIbO/Dark-Theme-Colors?node-id=0%3A1)(internal use only)

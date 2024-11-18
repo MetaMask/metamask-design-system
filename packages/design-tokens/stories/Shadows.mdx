@@ -1,0 +1,73 @@
+import { Meta, Canvas, Story } from '@storybook/blocks';
+import * as ShadowStories from './Shadows.stories';
+
+# Shadows
+
+Shadows in design are used to create depth and hierarchy. They can be used to differentiate between different elements, and to highlight interactive elements.
+
+<Canvas of={ShadowStories.DefaultStory} />
+
+## Size
+
+Shadows come in four different sizes: XS, SM, MD, and LG. The size of the shadow can be used to indicate the relative importance or prominence of an element.
+
+<Canvas of={ShadowStories.Size} />
+
+| Size   | JS                | CSS                     |
+| ------ | ----------------- | ----------------------- |
+| **XS** | `shadows.size.xs` | `var(--shadow-size-xs)` |
+| **SM** | `shadows.size.sm` | `var(--shadow-size-sm)` |
+| **MD** | `shadows.size.md` | `var(--shadow-size-md)` |
+| **LG** | `shadows.size.lg` | `var(--shadow-size-lg)` |
+
+## Color
+
+Shadows can have three different colors: default (neutral), primary, and error/danger. The color of the shadow can be used to indicate the state or functionality of an element.
+
+<Canvas of={ShadowStories.Color} />
+
+| Color       | JS                      | CSS                           |
+| ----------- | ----------------------- | ----------------------------- |
+| **neutral** | `colors.shadow.default` | `var(--color-shadow-default)` |
+| **primary** | `colors.primary.shadow` | `var(--color-primary-shadow)` |
+| **danger**  | `colors.error.shadow`   | `var(--color-error-shadow)`   |
+
+## Usage
+
+Shadows can be applied to various components to create depth and hierarchy. Here are some examples of how shadows can be used in different components:
+
+<Canvas of={ShadowStories.ExampleUsage} />
+
+| Component                | JS                                                                              | CSS                                                              |
+| ------------------------ | ------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **Card**                 | `cardShadow: {...shadows.size.xs }`                                             | `box-shadow: var(--shadow-size-xs) var(--color-shadow-default);` |
+| **Dropdown**             | `dropdownShadow: { ...shadows.size.sm }`                                        | `box-shadow: var(--shadow-size-sm) var(--color-shadow-default);` |
+| **Toast**                | `toastShadow: { ...shadows.size.md }`                                           | `box-shadow: var(--shadow-size-md) var(--color-shadow-default);` |
+| **Modal**                | `modalShadow: { ...shadows.size.lg }`                                           | `box-shadow: var(--shadow-size-lg) var(--color-shadow-default);` |
+| **Button Primary Hover** | `buttonPrimaryHover: { ...shadows.size.sm, shadowColor: colors.primary.shadow}` | `box-shadow: var(--shadow-size-sm) var(--color-primary-shadow);` |
+| **Button Danger Hover**  | `buttonDangerHover: { ...shadows.size.sm, shadowColor: colors.primary.shadow}`  | `box-shadow: var(--shadow-size-sm) var(--color-error-shadow);`   |
+
+**NOTE: The CSS-in-JS `shadows.size` objects for React Native contain all the correct tokens for neutral shadows. For primary and error/danger shadows change the `shadowColor` key**
+
+Example shape of the `xs` shadow size object from `shadows`
+
+```
+size: {
+    xs: {
+      shadowColor: colors.light.shadow.default,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 1,
+      shadowRadius: 4,
+    },
+    ...
+}
+
+```
+
+## References
+
+- [Figma Light Theme Colors Library(Shadows Page)](https://www.figma.com/file/kdFzEC7xzSNw7cXteqgzDW/%5BColor%5D-Light-Theme?node-id=753%3A719)(internal use only)
+- [Figma Dark Theme Colors Library(Shadows Page)](https://www.figma.com/file/rLKsoqpjyoKauYnFDcBIbO/%5BColor%5D-Dark-Theme?node-id=522%3A1022)(internal use only)
