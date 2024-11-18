@@ -1,5 +1,5 @@
-import { colors } from './colors';
 import { lightTheme, darkTheme } from '../themes';
+import { colors } from './colors';
 
 describe('Colors', () => {
   describe('light theme', () => {
@@ -12,7 +12,7 @@ describe('Colors', () => {
     it('should contain all lightTheme color properties', () => {
       const lightThemeKeys = Object.keys(lightTheme.colors);
       const colorKeys = Object.keys(colors.light);
-      expect(colorKeys).toEqual(lightThemeKeys);
+      expect(colorKeys).toStrictEqual(lightThemeKeys);
     });
   });
 
@@ -26,7 +26,7 @@ describe('Colors', () => {
     it('should contain all darkTheme color properties', () => {
       const darkThemeKeys = Object.keys(darkTheme.colors);
       const colorKeys = Object.keys(colors.dark);
-      expect(colorKeys).toEqual(darkThemeKeys);
+      expect(colorKeys).toStrictEqual(darkThemeKeys);
     });
   });
 });
