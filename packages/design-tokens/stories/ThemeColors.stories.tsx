@@ -8,7 +8,7 @@ import {
   getContrastYIQ,
   getJSColors,
   useJsonColor,
-} from './utils';
+} from './test-utils';
 
 export default {
   title: 'Colors/Theme Colors',

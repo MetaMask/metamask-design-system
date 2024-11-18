@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// TODO: Replace any types with proper types https://github.com/MetaMask/metamask-design-system/issues/127
+
 import { useEffect, useState } from 'react';
 
 import figmaBrandColors from '../../src/figma/brandColors.json';

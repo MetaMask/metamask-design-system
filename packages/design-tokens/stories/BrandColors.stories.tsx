@@ -5,7 +5,7 @@ import {
   getCSSVariablesFromStylesheet,
   getContrastYIQ,
   useJsonColor,
-} from './utils';
+} from './test-utils';
 import { ColorSwatchGroup, ColorSwatch } from './components';
 import README from './BrandColors.mdx';
 

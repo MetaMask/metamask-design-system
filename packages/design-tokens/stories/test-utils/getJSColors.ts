@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// TODO: Replace any types with proper types https://github.com/MetaMask/metamask-design-system/issues/127
 /**
  * Recursively collects color values and their names from a JavaScript color object using dot notation.
  *

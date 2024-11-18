@@ -1,6 +1,6 @@
 import React from 'react';
-import { Theme } from '../../utils/useJsonColor';
-import { getContrastYIQ } from '../../utils/getContrastYIQ';
+import { Theme } from '../../test-utils/useJsonColor';
+import { getContrastYIQ } from '../../test-utils/getContrastYIQ';
 import { ColorSwatch } from '..';
 
 interface ColorSwatchGroupProps {
