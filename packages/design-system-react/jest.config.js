@@ -15,9 +15,7 @@ module.exports = merge(baseConfig, {
   displayName,
 
   // Add coverage ignore patterns
-  coveragePathIgnorePatterns: [
-    'packages/design-tokens/src/js/colors/colors.ts',
-  ],
+  coveragePathIgnorePatterns: ['index.ts'],
 
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
