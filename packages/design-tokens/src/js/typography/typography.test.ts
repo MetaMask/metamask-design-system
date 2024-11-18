@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// TODO: Replace any types with proper types https://github.com/MetaMask/metamask-design-system/issues/127
 import { typography } from './typography';
 
 const designTokens = require('../../figma/tokens.json');

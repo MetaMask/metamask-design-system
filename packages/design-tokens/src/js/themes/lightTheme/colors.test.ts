@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// TODO: Replace any types with proper types https://github.com/MetaMask/metamask-design-system/issues/127
 import * as brandColors from '../../../figma/brandColors.json';
 import * as lightTheme from '../../../figma/lightTheme.json';
 import { colors as definedColors } from './colors';
