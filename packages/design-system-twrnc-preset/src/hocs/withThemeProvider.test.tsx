@@ -1,19 +1,19 @@
 import { render } from '@testing-library/react-native';
-import React, { forwardRef, useContext, createRef } from 'react';
+import * as React from 'react';
 import { Text } from 'react-native';
 
 import { ThemeProvider, ThemeContext, ColorSet, Theme } from '../Theme';
 import { withThemeProvider } from './withThemeProvider';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const TestThemeComponent = forwardRef((props, ref) => {
-  const themeContext = useContext(ThemeContext);
+const TestThemeComponent = React.forwardRef((props, ref) => {
+  const themeContext = React.useContext(ThemeContext);
   return (
     <Text ref={ref as React.Ref<Text>} testID="withthemprovider-text">
       {themeContext.theme ? themeContext.theme : 'No Theme'}
     </Text>
   );
 });
+
 const WrappedComponent = withThemeProvider(TestThemeComponent);
 
 describe('withThemeProvider HOC', () => {
@@ -32,7 +32,7 @@ describe('withThemeProvider HOC', () => {
   });
 
   it('forwards ref to the wrapped component', () => {
-    const ref = createRef<Text>(); // Create a ref with type Text
+    const ref = React.createRef<Text>();
 
     render(<WrappedComponent ref={ref as React.Ref<unknown>} />);
     expect(ref.current).toBeDefined();
