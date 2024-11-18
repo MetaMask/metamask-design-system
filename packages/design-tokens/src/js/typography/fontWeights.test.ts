@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports */
+import * as designTokens from '../../figma/tokens.json';
 import { fontWeights } from './fontWeights';
-
-const designTokens = require('../../figma/tokens.json');
 
 describe('Font Size', () => {
   it('euclid-circular-b-0 should equal Medium / 500', () => {

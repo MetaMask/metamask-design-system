@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports */
+import * as designTokens from '../../figma/tokens.json';
 import { lineHeights } from './lineHeights';
-
-const designTokens = require('../../figma/tokens.json');
 
 describe('Line Height', () => {
   it('js tokens for lineHeights1 matches figma tokens lineHeights6', () => {

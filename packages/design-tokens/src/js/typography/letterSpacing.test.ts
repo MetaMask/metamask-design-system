@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports */
+import * as designTokens from '../../figma/tokens.json';
 import { letterSpacing } from './letterSpacing';
-
-const designTokens = require('../../figma/tokens.json');
 
 describe('Letter Spacing', () => {
   it('js tokens for letterSpacing0 matches figma tokens letterSpacing0', () => {
