@@ -1,5 +1,5 @@
 import React from 'react';
-import '@metamask/design-tokens/dist/styles.css';
+import '@metamask/design-tokens/src/css/index.css';
 import '../tailwind.css';
 
 import { Preview } from '@storybook/react';

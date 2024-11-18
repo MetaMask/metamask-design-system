@@ -15,6 +15,7 @@ const config: StorybookConfig = {
     '../stories/**/*.mdx',
     '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     '../../../packages/design-system-react/src/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../../packages/design-tokens/stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
 
   addons: [
@@ -36,7 +37,7 @@ const config: StorybookConfig = {
         ...config.resolve.alias,
         '@metamask/design-tokens': path.resolve(
           __dirname,
-          '../../../node_modules/@metamask/design-tokens',
+          '../../../packages/design-tokens',
         ),
       };
     }
