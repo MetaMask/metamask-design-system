@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Migrate `@metamask/design-tokens` into the design system monorepo ([128](https://github.com/MetaMask/metamask-design-system/pull/128))
+
 ## [4.1.0]
 
 ### Added
