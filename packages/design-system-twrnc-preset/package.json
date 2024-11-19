@@ -36,7 +36,6 @@
   ],
   "scripts": {
     "build": "rm -rf tsconfig.build.tsbuildinfo dist && tsc --project tsconfig.build.json",
-    "build:docs": "typedoc",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-twrnc-preset",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-twrnc-preset",
     "publish:preview": "yarn npm publish --tag preview",
@@ -62,8 +61,6 @@
     "metro-react-native-babel-preset": "^0.77.0",
     "react-test-renderer": "^18.3.1",
     "ts-jest": "^29.2.5",
-    "typedoc": "^0.24.8",
-    "typedoc-plugin-missing-exports": "^2.0.0",
     "typescript": "~5.2.2"
   },
   "peerDependencies": {

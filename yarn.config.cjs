@@ -111,9 +111,6 @@ module.exports = defineConfig({
           }
         }
 
-        // All non-root packages must have the same "build:docs" script.
-        expectWorkspaceField(workspace, 'scripts.build:docs', 'typedoc');
-
         if (isPrivate) {
           // All private, non-root packages must not have a "publish:preview"
           // script.
