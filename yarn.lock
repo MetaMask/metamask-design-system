@@ -3285,10 +3285,10 @@ __metadata:
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
     clean-css-cli: "npm:^5.6.3"
-    jest: "npm:^27.5.1"
+    jest: "npm:^29.7.0"
     postcss: "npm:^8.4.47"
     react: "npm:^18.2.0"
-    ts-jest: "npm:^27.1.4"
+    ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.2.2"
   languageName: unknown
   linkType: soft
