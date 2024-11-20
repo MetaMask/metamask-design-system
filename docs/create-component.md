@@ -66,7 +66,7 @@ The script will also automatically:
 ## Example Component Creation
 
 ```bash
-yarn create-component:react --name TextField --description "A text input component that supports various input types and states"
+yarn create-component:react --name Button --description "A reusable button component that supports different variants and sizes"
 ```
 
 This will create a new TextField component with all the necessary files and boilerplate code.
