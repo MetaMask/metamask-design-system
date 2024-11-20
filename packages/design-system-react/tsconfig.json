@@ -7,10 +7,14 @@
       "react",
       "jest",
       "@testing-library/react",
-      "@testing-library/jest-dom"
+      "@testing-library/jest-dom",
+      "node"
     ],
-    "lib": ["ES2020", "DOM"]
+    "lib": ["ES2020", "DOM"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "references": [],
-  "include": ["./src", "./src/**/*.d.ts"]
+  "include": ["./src", "./src/**/*.d.ts", "scripts/**/*"]
 }

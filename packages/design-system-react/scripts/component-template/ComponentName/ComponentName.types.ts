@@ -1,4 +1,4 @@
-export type ComponentProps = {
+export type ComponentNameProps = {
   /**
    * The content to be rendered within the ComponentName.
    */
