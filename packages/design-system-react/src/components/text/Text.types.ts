@@ -74,22 +74,39 @@ export enum TextVariant {
 }
 
 export enum TextColor {
+  /** For default neutral text. */
   TextDefault = 'text-default',
+  /** For softer contrast neutral text */
   TextAlternative = 'text-alternative',
+  /** For the softest contrast neutral text (not accessible) */
   TextMuted = 'text-muted',
+  /** For elements used on top of overlay/alternative. Used for text, icon or border */
   OverlayInverse = 'text-overlay-inverse',
+  /** For interactive, active, and selected semantics. Used for text, background, icon or border */
   PrimaryDefault = 'text-primary-default',
+  /** For elements used on top of primary/default. Used for text, icon or border */
   PrimaryInverse = 'text-primary-inverse',
+  /** For the critical alert semantic elements. Used for text, background, icon or border */
   ErrorDefault = 'text-error-default',
+  /** For the stronger contrast error semantic elements. */
   ErrorAlternative = 'text-error-alternative',
+  /** For elements used on top of error/default. Used for text, icon or border */
   ErrorInverse = 'text-error-inverse',
+  /** For the positive semantic elements. Used for text, background, icon or border */
   SuccessDefault = 'text-success-default',
+  /** For elements used on top of success/default. Used for text, icon or border */
   SuccessInverse = 'text-success-inverse',
+  /** For the caution alert semantic elements. Used for text, background, icon or border */
   WarningDefault = 'text-warning-default',
+  /** For elements used on top of warning/default. Used for text, icon or border */
   WarningInverse = 'text-warning-inverse',
+  /** For informational read-only elements. Used for text, background, icon or border */
   InfoDefault = 'text-info-default',
+  /** For elements used on top of info/default. Used for text, icon or border */
   InfoInverse = 'text-info-inverse',
+  /** Inherit the color of the parent element */
   Inherit = 'text-inherit',
+  /** Make the text color transparent */
   Transparent = 'text-transparent',
 }
 
