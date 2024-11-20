@@ -1,14 +1,59 @@
 export type TextProps = {
+  /**
+   * Changes the font size of the component. The Text component uses responsive font sizes.
+   * Different variants map to specific HTML elements by default.
+   * @default TextVariant.BodyMd
+   */
   variant?: TextVariant;
+  /**
+   * The text content or elements to be rendered within the component.
+   */
   children: React.ReactNode;
+  /**
+   * Additional CSS classes to be applied to the Text component.
+   */
   className?: string;
+  /**
+   * Controls the font weight of the text.
+   * - Normal: 400
+   * - Medium: 500
+   * - Bold: 700
+   */
   fontWeight?: FontWeight;
+  /**
+   * Controls the font style of the text.
+   * Options: Normal, Italic
+   */
   fontStyle?: FontStyle;
+  /**
+   * Applies text transformation to the content.
+   * Options: Uppercase, Lowercase, Capitalize, Normal
+   */
   textTransform?: TextTransform;
+  /**
+   * Controls the text alignment within its container.
+   * Options: Left, Center, Right, Justify
+   */
   textAlign?: TextAlign;
+  /**
+   * Determines how text should wrap when it reaches the edge of its container.
+   * Options: BreakWord, Anywhere, Normal
+   */
   overflowWrap?: OverflowWrap;
+  /**
+   * When true, adds an ellipsis (...) when text overflows its container.
+   * @default false
+   */
   ellipsis?: boolean;
+  /**
+   * Changes the root HTML element of the Text component.
+   * Uses semantic HTML tags like h1, p, span, etc.
+   */
   as?: ValidTag;
+  /**
+   * Sets the color of the text using predefined theme colors.
+   * @default TextColor.TextDefault
+   */
   color?: TextColor;
 };
 export enum TextVariant {
