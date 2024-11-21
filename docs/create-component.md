@@ -1,6 +1,6 @@
 # Create Component Script
 
-The create-component script is a utility for generating new React components in the MetaMask Design System with consistent structure and boilerplate code.
+The create-component script is a utility for generating new React components(React Native coming soon!) in the MetaMask Design System with consistent structure and boilerplate code.
 
 ## Usage
 

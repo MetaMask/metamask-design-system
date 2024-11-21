@@ -10,10 +10,7 @@
       "@testing-library/jest-dom",
       "node"
     ],
-    "lib": ["ES2020", "DOM"],
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "resolveJsonModule": true
+    "lib": ["ES2020", "DOM"]
   },
   "references": [],
   "include": ["./src", "./src/**/*.d.ts", "scripts/**/*"]
