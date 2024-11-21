@@ -140,8 +140,17 @@ export type ValidTag =
   | 'button';
 
 export enum FontWeight {
+  /**
+   * Weight - 700
+   */
   Bold = 'font-bold',
+  /**
+   * Weight - 500
+   */
   Medium = 'font-medium',
+  /**
+   * Weight - 400
+   */
   Normal = 'font-normal',
 }
 
