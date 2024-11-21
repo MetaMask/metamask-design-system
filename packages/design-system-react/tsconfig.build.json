@@ -5,15 +5,9 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "jsx": "react",
-    "types": [
-      "react",
-      "jest",
-      "@testing-library/react",
-      "@testing-library/jest-dom"
-    ],
+    "types": ["react"],
     "lib": ["ES2020", "DOM"]
   },
   "references": [],
-  "include": ["./src"],
-  "exclude": ["**/*.stories.tsx", "**/*.stories.ts"]
+  "include": ["./src"]
 }
