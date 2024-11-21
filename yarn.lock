@@ -3278,12 +3278,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/design-tokens@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@metamask/design-tokens@npm:4.1.0"
-  checksum: 10/c56757521b749d8fd95f468e8d13edb2e36c98310966838fc40e44b72113c5b6eec53ff5548d2cef46d9232ec93fca3f3465fdb8e5d4018829289962a98d1367
-  languageName: node
-  linkType: hard
+"@metamask/design-tokens@workspace:^, @metamask/design-tokens@workspace:packages/design-tokens":
+  version: 0.0.0-use.local
+  resolution: "@metamask/design-tokens@workspace:packages/design-tokens"
+  dependencies:
+    "@metamask/auto-changelog": "npm:^3.4.4"
+    "@types/jest": "npm:^27.4.1"
+    "@types/node": "npm:^16.18.54"
+    clean-css-cli: "npm:^5.6.3"
+    jest: "npm:^29.7.0"
+    postcss: "npm:^8.4.47"
+    react: "npm:^18.2.0"
+    ts-jest: "npm:^29.2.5"
+    typescript: "npm:~5.2.2"
+  languageName: unknown
+  linkType: soft
 
 "@metamask/eslint-config-jest@npm:^12.1.0":
   version: 12.1.0
@@ -3394,7 +3403,7 @@ __metadata:
     "@babel/core": "npm:^7.23.5"
     "@metamask/design-system-react-native": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
-    "@metamask/design-tokens": "npm:^4.1.0"
+    "@metamask/design-tokens": "workspace:^"
     "@react-native-async-storage/async-storage": "npm:^2.0.0"
     "@react-native-community/datetimepicker": "npm:^8.2.0"
     "@react-native-community/slider": "npm:^4.5.5"
@@ -3426,7 +3435,7 @@ __metadata:
   dependencies:
     "@chromatic-com/storybook": "npm:^1.9.0"
     "@metamask/design-system-tailwind-preset": "workspace:^"
-    "@metamask/design-tokens": "npm:^4.1.0"
+    "@metamask/design-tokens": "workspace:^"
     "@storybook/addon-a11y": "npm:^8.3.5"
     "@storybook/addon-essentials": "npm:^8.3.5"
     "@storybook/addon-interactions": "npm:^8.3.5"
@@ -7842,7 +7851,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.4.1, chokidar@npm:^3.4.2, chokidar@npm:^3.5.1, chokidar@npm:^3.6.0":
+"chokidar@npm:^3.4.1, chokidar@npm:^3.4.2, chokidar@npm:^3.5.1, chokidar@npm:^3.5.2, chokidar@npm:^3.6.0":
   version: 3.6.0
   resolution: "chokidar@npm:3.6.0"
   dependencies:
@@ -7941,6 +7950,29 @@ __metadata:
     isobject: "npm:^3.0.0"
     static-extend: "npm:^0.1.1"
   checksum: 10/b236d9deb6594828966e45c5f48abac9a77453ee0dbdb89c635ce876f59755d7952309d554852b6f7d909198256c335a4bd51b09c1d238b36b92152eb2b9d47a
+  languageName: node
+  linkType: hard
+
+"clean-css-cli@npm:^5.6.3":
+  version: 5.6.3
+  resolution: "clean-css-cli@npm:5.6.3"
+  dependencies:
+    chokidar: "npm:^3.5.2"
+    clean-css: "npm:^5.3.3"
+    commander: "npm:7.x"
+    glob: "npm:^7.1.6"
+  bin:
+    cleancss: bin/cleancss
+  checksum: 10/64db9c6b40ce1050ec3cccd2ee38510813760fa950f1b73dda833301ba08120a315b0537ef63a2513a6c81518edd44202f05812897d456429fa377665e431b66
+  languageName: node
+  linkType: hard
+
+"clean-css@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "clean-css@npm:5.3.3"
+  dependencies:
+    source-map: "npm:~0.6.0"
+  checksum: 10/2db1ae37b384c8ff0a06a12bfa80f56cc02b4abcaaf340db98c0ae88a61dd67c856653fd8135ace6eb0ec13aeab3089c425d2e4238d2a2ad6b6917e6ccc74729
   languageName: node
   linkType: hard
 
@@ -8152,6 +8184,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:7.x, commander@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "commander@npm:7.2.0"
+  checksum: 10/9973af10727ad4b44f26703bf3e9fdc323528660a7590efe3aa9ad5042b4584c0deed84ba443f61c9d6f02dade54a5a5d3c95e306a1e1630f8374ae6db16c06d
+  languageName: node
+  linkType: hard
+
 "commander@npm:^2.20.0":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -8163,13 +8202,6 @@ __metadata:
   version: 4.1.1
   resolution: "commander@npm:4.1.1"
   checksum: 10/3b2dc4125f387dab73b3294dbcb0ab2a862f9c0ad748ee2b27e3544d25325b7a8cdfbcc228d103a98a716960b14478114a5206b5415bd48cdafa38797891562c
-  languageName: node
-  linkType: hard
-
-"commander@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "commander@npm:7.2.0"
-  checksum: 10/9973af10727ad4b44f26703bf3e9fdc323528660a7590efe3aa9ad5042b4584c0deed84ba443f61c9d6f02dade54a5a5d3c95e306a1e1630f8374ae6db16c06d
   languageName: node
   linkType: hard
 
@@ -18221,7 +18253,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map@npm:^0.6.0, source-map@npm:^0.6.1, source-map@npm:~0.6.1":
+"source-map@npm:^0.6.0, source-map@npm:^0.6.1, source-map@npm:~0.6.0, source-map@npm:~0.6.1":
   version: 0.6.1
   resolution: "source-map@npm:0.6.1"
   checksum: 10/59ef7462f1c29d502b3057e822cdbdae0b0e565302c4dd1a95e11e793d8d9d62006cdc10e0fd99163ca33ff2071360cf50ee13f90440806e7ed57d81cba2f7ff

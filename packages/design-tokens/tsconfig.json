@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.packages.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "types": ["node", "jest"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.json"],
+  "references": []
+}
