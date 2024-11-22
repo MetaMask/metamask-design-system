@@ -1,6 +1,5 @@
 import { extendTailwindMerge } from 'tailwind-merge';
 
-// TODO create a test that checks against typographyMap in Text.tsx
 const variantClassGroups = [
   's-display-md',
   's-heading-lg',
