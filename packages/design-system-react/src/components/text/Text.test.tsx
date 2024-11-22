@@ -157,10 +157,10 @@ describe('Text Component', () => {
     expect(container.firstChild).toHaveClass('truncate');
   });
 
-  it('renders with custom HTML element when as prop is provided', () => {
+  it('renders with asChild prop correctly', () => {
     const { container } = render(
-      <Text variant={TextVariant.BodyMd} as="span">
-        Span Text
+      <Text asChild>
+        <span>Span Text</span>
       </Text>,
     );
     expect(container.firstChild?.nodeName).toBe('SPAN');
@@ -180,9 +180,9 @@ describe('Text Component', () => {
         color={TextColor.SuccessDefault}
         ellipsis
         className="custom-class"
-        as="div"
+        asChild
       >
-        Combined Props Text
+        <div>Combined Props Text</div>
       </Text>,
     );
     expect(container.firstChild).toHaveClass(

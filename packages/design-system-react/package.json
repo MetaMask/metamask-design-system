@@ -46,6 +46,7 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {

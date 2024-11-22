@@ -1,4 +1,5 @@
 import React from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import { twMerge } from '../../utils/tw-merge';
 import { TextVariant, TextProps, TextColor } from './Text.types';
 import { TEXT_CLASS_MAP, TEXT_DEFAULT_TAG_MAP } from './Text.constants';
@@ -13,10 +14,11 @@ export const Text: React.FC<TextProps> = ({
   textAlign,
   overflowWrap,
   ellipsis,
-  as,
+  asChild,
   color = TextColor.TextDefault,
+  style,
 }) => {
-  const Tag = as || TEXT_DEFAULT_TAG_MAP[variant];
+  const Component = asChild ? Slot : TEXT_DEFAULT_TAG_MAP[variant];
 
   const mergedClassName = twMerge(
     color,
@@ -30,5 +32,9 @@ export const Text: React.FC<TextProps> = ({
     className,
   );
 
-  return <Tag className={mergedClassName}>{children}</Tag>;
+  return (
+    <Component className={mergedClassName} style={style}>
+      {children}
+    </Component>
+  );
 };
