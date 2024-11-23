@@ -4,5 +4,5 @@ export {
   ThemeProvider,
   defaultThemeContextValue,
 } from './Theme.providers';
-export { ColorSet, Theme } from './Theme.types';
+export { Theme } from './Theme.types';
 export type { ThemeContextProps, ThemeProviderProps } from './Theme.types';

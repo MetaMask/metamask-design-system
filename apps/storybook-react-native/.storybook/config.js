@@ -5,8 +5,12 @@ import {
   Theme,
 } from '@metamask/design-system-twrnc-preset';
 
+import FontLoader from './FontLoader';
+
 addDecorator((Story) => (
   <ThemeProvider colorSet={ColorSet.Brand} theme={Theme.Default}>
-    <Story />
+    <FontLoader>
+      <Story />
+    </FontLoader>
   </ThemeProvider>
 ));

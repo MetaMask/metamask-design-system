@@ -18,6 +18,7 @@ module.exports = {
     'babel.config.js',
     'metro.config.js',
     'jest.config.js',
+    'react-native.config.js',
   ],
   rules: {
     'import/extensions': [

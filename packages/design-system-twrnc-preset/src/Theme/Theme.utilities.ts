@@ -1,24 +1,56 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ColorSchemeName } from 'react-native';
 
 import baseConfig from '../../tailwind.config';
-import { colorSetList } from './Theme.constants';
-import type { ColorSet } from './Theme.types';
+import type { ColorSet } from '../twrnc-settings';
+import { colorSetList, typographyTailwindConfig } from '../twrnc-settings';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const flattenColors = (colors: Record<string, any>, prefix = '') => {
-  let result: Record<string, string> = {};
-  for (const [key, value] of Object.entries(colors)) {
-    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      result = { ...result, ...flattenColors(value, `${prefix}${key}-`) };
-    } else if (typeof value === 'string') {
-      result[`${prefix}${key}`] = value;
-    } else {
-      console.warn(`Invalid color value for ${prefix}${key}:`, value);
-    }
-  }
-  return result;
-};
-
+/**
+ * Generates a Tailwind CSS configuration object based on the specified color set and color scheme.
+ * This configuration extends the base Tailwind settings with custom theme colors, typography settings,
+ * and other style properties for use in React Native with `twrnc`.
+ *
+ * @param colorSet - The color set to use (e.g., 'Brand', 'Neutral'). Determines the base palette for the theme.
+ * @param colorScheme - The current color scheme ('light' or 'dark'). Specifies whether to use light or dark mode styles.
+ * @returns A Tailwind CSS configuration object with extended theme properties and plugins.
+ * @example
+ * const colorSet = 'Brand';
+ * const colorScheme = 'dark';
+ *
+ * const tailwindConfig = generateTailwindConfig(colorSet, colorScheme);
+ * console.log(tailwindConfig);
+ *
+ * // Output:
+ * // {
+ * //   theme: {
+ * //     extend: {
+ * //       colors: {
+ * //         primary: '#1a202c',
+ * //         secondary: '#2d3748',
+ * //         // ...additional flattened colors
+ * //       },
+ * //       fontSize: {
+ * //         'display-md': [32, { lineHeight: '40', letterSpacing: '0', fontWeight: '700' }],
+ * //         // ...other font sizes
+ * //       },
+ * //       fontFamily: {
+ * //         sans: ['Euclid Circular B', 'Helvetica Neue', 'Arial', 'sans-serif'],
+ * //         // ...other font families
+ * //       },
+ * //       letterSpacing: {
+ * //         'display-md': '0',
+ * //         // ...other letter spacings
+ * //       },
+ * //       lineHeight: {
+ * //         'display-md': '40',
+ * //         // ...other line heights
+ * //       },
+ * //     },
+ * //   },
+ * //   plugins: [],
+ * // }
+ * @throws Will log an error and return an empty object if theme colors are not found for the specified color set and color scheme.
+ */
 export const generateTailwindConfig = (
   colorSet: ColorSet,
   colorScheme: ColorSchemeName,
@@ -31,8 +63,6 @@ export const generateTailwindConfig = (
     return {};
   }
 
-  const flattenedColors = flattenColors(themeColors);
-
   return {
     ...baseConfig,
     theme: {
@@ -41,7 +71,19 @@ export const generateTailwindConfig = (
         ...baseConfig.theme?.extend,
         colors: {
           ...baseConfig.theme?.extend?.colors,
-          ...flattenedColors,
+          ...themeColors,
+        },
+        fontSize: {
+          ...typographyTailwindConfig.fontSize,
+        },
+        fontFamily: {
+          ...typographyTailwindConfig.fontFamily,
+        },
+        letterSpacing: {
+          ...typographyTailwindConfig.letterSpacing,
+        },
+        lineHeight: {
+          ...typographyTailwindConfig.lineHeight,
         },
       },
     },

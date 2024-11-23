@@ -1,22 +1,12 @@
-import type { Theme as DesignTokenTheme } from '@metamask/design-tokens';
 import type { create } from 'twrnc';
 
-export enum ColorSet {
-  Brand = 'brand',
-}
+import type { ColorSet } from '../twrnc-settings';
 
 export enum Theme {
   Default = 'default',
   Light = 'light',
   Dark = 'dark',
 }
-
-export type ColorSetListProps = {
-  brand: {
-    light: DesignTokenTheme['colors'];
-    dark: DesignTokenTheme['colors'];
-  };
-};
 
 export type ThemeContextProps = {
   tw: ReturnType<typeof create>;

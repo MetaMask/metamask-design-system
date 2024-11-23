@@ -11,5 +11,10 @@
     }
   ],
   "include": ["src/**/*"],
-  "exclude": ["jest.config.js", ".eslintrc.js", "babel.config.js"]
+  "exclude": [
+    "jest.config.js",
+    ".eslintrc.js",
+    "babel.config.js",
+    "react-native.config.js"
+  ]
 }

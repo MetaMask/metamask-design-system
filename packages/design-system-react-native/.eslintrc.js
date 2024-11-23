@@ -13,7 +13,12 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ['.eslintrc.js', 'jest.config.js', 'babel.config.js'],
+  ignorePatterns: [
+    '.eslintrc.js',
+    'jest.config.js',
+    'babel.config.js',
+    'react-native.config.js',
+  ],
 
   rules: {
     'import/extensions': [

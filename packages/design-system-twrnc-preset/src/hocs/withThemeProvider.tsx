@@ -7,10 +7,10 @@ import React, { forwardRef, useContext } from 'react';
 import {
   ThemeProvider,
   ThemeContext,
-  ColorSet,
   Theme,
   defaultThemeContextValue,
 } from '../Theme';
+import { ColorSet } from '../twrnc-settings';
 
 /**
  * HOC to wrap components with ThemeProvider if none is present.
