@@ -220,23 +220,21 @@ Examples:
 
 Note: When using `asChild` with form elements like inputs, the Text component's styles will be applied while maintaining the element's native functionality. You can also add additional className props to further customize the styling of the rendered element.
 
-### Ref Forwarding
+### Class Name
 
-The Text component supports ref forwarding, allowing you to access the underlying DOM element:
+Adds an additional class to the `Text` component.
 
-```jsx
-const ref = useRef(null);
-<Text ref={ref}>This text's DOM element can be accessed via ref</Text>;
-```
+### Style
 
-When used with `asChild`, the ref will be forwarded to the child component:
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
 
-```jsx
-const ref = useRef(null);
-<Text asChild ref={ref}>
-  <button>The ref will point to this button element</button>
-</Text>;
-```
+### Children
+
+The text content of the `Text` component.
+
+### Component API
+
+<Controls of={TextStories.Default} />
 
 ### References
 

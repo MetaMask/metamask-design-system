@@ -181,17 +181,3 @@ export const AsChild: Story = {
     </div>
   ),
 };
-AsChild.storyName = 'AsChild';
-
-export const Strong: Story = {
-  render: () => (
-    <div className="space-y-4">
-      <Text asChild>
-        <strong>Text as strong tag</strong>
-      </Text>
-      <Text>
-        This is a <strong>strong tag</strong> as a child inside of Text
-      </Text>
-    </div>
-  ),
-};
