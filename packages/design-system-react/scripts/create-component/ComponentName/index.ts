@@ -1,2 +1,2 @@
 export { ComponentName } from './ComponentName';
-export type { ComponentNameProps } from './ComponentName';
+export type { ComponentNameProps } from './ComponentName.types';
