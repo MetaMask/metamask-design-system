@@ -9,8 +9,8 @@
  * @example
  * const colors = {
  *   primary: {
- *     light: '#abc',
- *     dark: '#123',
+ *     default: '#abc',
+ *     alternative: '#123',
  *   },
  *   secondary: '#456',
  * };
@@ -18,8 +18,8 @@
  * flattenColors(colors);
  * // Returns:
  * // {
- * //   'primary-light': '#abc',
- * //   'primary-dark': '#123',
+ * //   'primary-default': '#abc',
+ * //   'primary-alternative': '#123',
  * //   'secondary': '#456'
  * // }
  */
