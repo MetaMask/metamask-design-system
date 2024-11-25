@@ -10,7 +10,6 @@ import {
   TextTransform,
   OverflowWrap,
 } from '.';
-import { ValidTag } from './Text.types';
 import { TEXT_CLASS_MAP } from './Text.constants';
 
 describe('Text Component', () => {
@@ -84,37 +83,6 @@ describe('Text Component', () => {
     });
   });
 
-  describe('HTML Elements', () => {
-    const regularElements: ValidTag[] = [
-      'dd',
-      'div',
-      'dt',
-      'em',
-      'h1',
-      'h2',
-      'h3',
-      'h4',
-      'h5',
-      'h6',
-      'li',
-      'p',
-      'span',
-      'strong',
-      'ul',
-      'label',
-      'header',
-      'a',
-      'button',
-    ];
-
-    regularElements.forEach((tag) => {
-      it(`renders as ${tag} element when specified`, () => {
-        const { container } = render(<Text as={tag}>Test</Text>);
-        expect(container.firstChild?.nodeName.toLowerCase()).toBe(tag);
-      });
-    });
-  });
-
   describe('Combined Props', () => {
     it('combines all styling props correctly', () => {
       const { container } = render(
@@ -128,9 +96,9 @@ describe('Text Component', () => {
           overflowWrap={OverflowWrap.BreakWord}
           ellipsis
           className="custom-class"
-          as="div"
+          asChild
         >
-          Test
+          <div>Test</div>
         </Text>,
       );
 
@@ -157,10 +125,10 @@ describe('Text Component', () => {
     expect(container.firstChild).toHaveClass('truncate');
   });
 
-  it('renders with custom HTML element when as prop is provided', () => {
+  it('renders with asChild prop correctly', () => {
     const { container } = render(
-      <Text variant={TextVariant.BodyMd} as="span">
-        Span Text
+      <Text asChild>
+        <span>Span Text</span>
       </Text>,
     );
     expect(container.firstChild?.nodeName).toBe('SPAN');
@@ -180,9 +148,9 @@ describe('Text Component', () => {
         color={TextColor.SuccessDefault}
         ellipsis
         className="custom-class"
-        as="div"
+        asChild
       >
-        Combined Props Text
+        <div>Combined Props Text</div>
       </Text>,
     );
     expect(container.firstChild).toHaveClass(
