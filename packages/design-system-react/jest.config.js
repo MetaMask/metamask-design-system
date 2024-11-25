@@ -15,7 +15,7 @@ module.exports = merge(baseConfig, {
   displayName,
 
   // Add coverage ignore patterns
-  coveragePathIgnorePatterns: ['index.ts'],
+  coveragePathIgnorePatterns: ['index.ts', '.d.ts'],
 
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {

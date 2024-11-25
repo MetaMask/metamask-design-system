@@ -6,7 +6,8 @@
     { "path": "./packages/design-system-react" },
     { "path": "./packages/design-system-react-native" },
     { "path": "./packages/design-system-tailwind-preset" },
-    { "path": "./packages/design-system-twrnc-preset" }
+    { "path": "./packages/design-system-twrnc-preset" },
+    { "path": "./packages/design-tokens" }
   ],
   "files": []
 }

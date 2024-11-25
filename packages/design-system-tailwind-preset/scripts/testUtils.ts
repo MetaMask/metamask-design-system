@@ -15,31 +15,38 @@ import postcss from 'postcss';
 export const getDesignTokenVariables = async (
   prefixes: string[] = ['--'],
 ): Promise<Set<string>> => {
-  // Resolve the absolute path to the styles.css file in the design-tokens package
-  const stylesheetPath = path.resolve(
+  const designTokensPath = path.resolve(
     __dirname,
-    '../../../node_modules/@metamask/design-tokens/dist/styles.css',
+    '../../../packages/design-tokens/src/css',
   );
 
-  // Asynchronously read the content of the stylesheet
-  const cssContent = await fs.promises.readFile(stylesheetPath, 'utf-8');
+  // List of CSS files to process
+  const cssFiles = [
+    'brand-colors.css',
+    'light-theme-colors.css',
+    'dark-theme-colors.css',
+    'typography.css',
+    'shadow.css',
+  ];
 
-  // Parse the CSS content using PostCSS to create an Abstract Syntax Tree (AST)
-  const parsedRoot = postcss.parse(cssContent);
-
-  // Initialize a Set to store the filtered CSS variable names
+  // Initialize a Set to store all variables
   const variables = new Set<string>();
 
-  // Traverse all CSS declarations in the AST
-  parsedRoot.walkDecls((decl) => {
-    const { prop } = decl;
-    // Check if the property name starts with any of the specified prefixes
-    if (prefixes.some((prefix) => prop.startsWith(prefix))) {
-      variables.add(prop); // Add the matching variable to the Set
-    }
-  });
+  // Process each CSS file
+  for (const file of cssFiles) {
+    const cssPath = path.join(designTokensPath, file);
+    const cssContent = await fs.promises.readFile(cssPath, 'utf-8');
+    const parsedRoot = postcss.parse(cssContent);
 
-  return variables; // Return the Set of filtered CSS variable names
+    parsedRoot.walkDecls((decl) => {
+      const { prop } = decl;
+      if (prefixes.some((prefix) => prop.startsWith(prefix))) {
+        variables.add(prop);
+      }
+    });
+  }
+
+  return variables;
 };
 
 /**
