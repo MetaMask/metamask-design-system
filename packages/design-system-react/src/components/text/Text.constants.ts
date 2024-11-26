@@ -16,9 +16,9 @@ export const TEXT_CLASS_MAP: Record<TextVariant, string> = {
   [TextVariant.BodyMd]:
     'text-s-body-md font-s-body-md leading-s-body-md tracking-s-body-md md:text-l-body-md',
   [TextVariant.BodySm]:
-    'text-s-body-sm font-s-body-sm leading-s-body-sm tracking-s-body-sm',
+    'text-s-body-sm font-s-body-sm leading-s-body-sm tracking-s-body-sm md:text-l-body-sm',
   [TextVariant.BodyXs]:
-    'text-s-body-xs font-s-body-xs leading-s-body-xs tracking-s-body-xs',
+    'text-s-body-xs font-s-body-xs leading-s-body-xs tracking-s-body-xs md:text-l-body-xs',
 };
 
 export const TEXT_DEFAULT_TAG_MAP: Record<

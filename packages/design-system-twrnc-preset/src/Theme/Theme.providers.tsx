@@ -1,18 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { createContext, useState, useMemo } from 'react';
 import { useColorScheme } from 'react-native';
-import type { ColorSchemeName } from 'react-native';
 import { create } from 'twrnc';
 
-import { ColorSet } from '../twrnc-settings';
+import { ColorSet, ColorScheme } from '../twrnc-settings';
 import type { ThemeContextProps, ThemeProviderProps } from './Theme.types';
 import { Theme } from './Theme.types';
 import { generateTailwindConfig } from './Theme.utilities';
 
 export const defaultThemeContextValue: ThemeContextProps = {
-  tw: create(
-    generateTailwindConfig(ColorSet.Brand, Theme.Light as ColorSchemeName),
-  ),
+  tw: create(generateTailwindConfig(ColorSet.Brand, ColorScheme.Light)),
   colorSet: ColorSet.Brand,
   theme: Theme.Light,
   setColorSet: () => {},
@@ -32,11 +29,19 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   const [currentTheme, setCurrentTheme] = useState<Theme>(theme);
   const systemColorScheme = useColorScheme(); // 'light' | 'dark' | null
 
-  const activeColorScheme: 'light' | 'dark' = useMemo(() => {
+  const activeColorScheme: ColorScheme = useMemo(() => {
     if (currentTheme === Theme.Default) {
-      return systemColorScheme === 'dark' ? 'dark' : 'light';
+      return systemColorScheme === 'dark'
+        ? ColorScheme.Dark
+        : ColorScheme.Light;
     }
-    return currentTheme as 'light' | 'dark';
+    if (currentTheme === Theme.Light) {
+      return ColorScheme.Light;
+    }
+    if (currentTheme === Theme.Dark) {
+      return ColorScheme.Dark;
+    }
+    throw new Error('Invalid theme value');
   }, [currentTheme, systemColorScheme]);
 
   const tw = useMemo(() => {

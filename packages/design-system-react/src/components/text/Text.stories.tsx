@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import { Text } from './Text';
 import {
   TextVariant,
@@ -159,21 +160,23 @@ export const Ellipsis: Story = {
   ),
 };
 
-export const As: Story = {
+export const AsChild: Story = {
   render: () => (
     <div className="space-y-4">
-      <Text as="span">span</Text>
-      <Text as="strong">strong</Text>
-    </div>
-  ),
-};
-
-export const Strong: Story = {
-  render: () => (
-    <div className="space-y-4">
-      <Text>Text as strong tag</Text>
-      <Text>
-        This is a <strong>strong tag</strong> as a child inside of Text
+      <Text asChild className="block">
+        <span>Text rendered as span</span>
+      </Text>
+      <Text asChild className="block">
+        <button type="button" onClick={action('button-clicked')}>
+          Text rendered as button
+        </button>
+      </Text>
+      <Text asChild className="bg-default border border-default">
+        <input
+          type="text"
+          placeholder="Rendered as input"
+          defaultValue="Text component as input"
+        />
       </Text>
     </div>
   ),

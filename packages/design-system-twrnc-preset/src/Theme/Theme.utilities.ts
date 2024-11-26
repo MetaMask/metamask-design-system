@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { ColorSchemeName } from 'react-native';
-
 import baseConfig from '../../tailwind.config';
-import type { ColorSet } from '../twrnc-settings';
+import type { ColorSet, ColorScheme } from '../twrnc-settings';
 import { colorSetList, typographyTailwindConfig } from '../twrnc-settings';
 
 /**
@@ -53,10 +51,9 @@ import { colorSetList, typographyTailwindConfig } from '../twrnc-settings';
  */
 export const generateTailwindConfig = (
   colorSet: ColorSet,
-  colorScheme: ColorSchemeName,
+  colorScheme: ColorScheme,
 ) => {
-  const activeColorScheme = colorScheme === 'dark' ? 'dark' : 'light';
-  const themeColors = colorSetList[colorSet][activeColorScheme];
+  const themeColors = colorSetList[colorSet][colorScheme];
 
   if (!themeColors) {
     console.error('Theme colors not found.');

@@ -1,5 +1,9 @@
 export type TextProps = {
   /**
+   * Optional prop for inline styles
+   */
+  style?: React.CSSProperties;
+  /**
    * Optional prop to change the font size of the component. The Text component uses responsive font sizes.
    * Different variants map to specific HTML elements by default.
    * @default TextVariant.BodyMd
@@ -46,16 +50,18 @@ export type TextProps = {
    */
   ellipsis?: boolean;
   /**
-   * Optional prop that changes the root HTML element of the Text component.
-   * Uses semantic HTML tags like h1, p, span, etc.
+   * Optional boolean that determines if the component should merge its props onto its immediate child
+   * instead of rendering a default DOM element.
+   * @default false
    */
-  as?: ValidTag;
+  asChild?: boolean;
   /**
    * Optional prop that sets the color of the text using predefined theme colors.
    * @default TextColor.TextDefault
    */
   color?: TextColor;
 };
+
 export enum TextVariant {
   // Display Sizes
   DisplayLg = 'display-lg',
@@ -116,28 +122,6 @@ export enum TextAlign {
   Right = 'text-right',
   Justify = 'text-justify',
 }
-
-export type ValidTag =
-  | 'dd'
-  | 'div'
-  | 'dt'
-  | 'em'
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6'
-  | 'li'
-  | 'p'
-  | 'span'
-  | 'strong'
-  | 'ul'
-  | 'label'
-  | 'input'
-  | 'header'
-  | 'a'
-  | 'button';
 
 export enum FontWeight {
   /**

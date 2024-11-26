@@ -185,29 +185,48 @@ Use the boolean `ellipsis` prop to make the `Text` component have an ellipsis.
 
 <Canvas of={TextStories.Ellipsis} />
 
-### As
+### AsChild
 
-Use the `as` prop to change the root HTML element of the `Text` component.
+Use the `asChild` prop to compose the Text component with other components while maintaining the Text's styles. This allows you to merge the Text component's styles onto its child component instead of rendering an additional DOM element.
 
-You can also utilize the `ValidTag` enum from `@metamask/design-system-react` to ensure that you are using a valid HTML element.
+When using `asChild`, you must provide exactly one child element that can accept a className prop. This works with both interactive elements like buttons and inputs, as well as standard HTML elements.
 
-<Canvas of={TextStories.As} />
+<Canvas of={TextStories.AsChild} />
 
-Renders the HTML:
+Examples:
 
-```html
-<span>span</span> <strong>strong</strong>
+```jsx
+// Span example
+<Text asChild className="block">
+  <span>Text rendered as span</span>
+</Text>
+
+// Button example with click handler
+<Text asChild className="block">
+  <button type="button" onClick={() => console.log('button clicked')}>
+    Text rendered as button
+  </button>
+</Text>
+
+// Input example with styling
+<Text asChild className="bg-default border border-default">
+  <input
+    type="text"
+    placeholder="Rendered as input"
+    defaultValue="Text component as input"
+  />
+</Text>
 ```
 
-### Strong
-
-Using the `as` prop with the value of `strong` will render the `Text` component as a `strong` element and any `strong` elements used within a `Text` component will be supported with bold styles.
-
-<Canvas of={TextStories.Strong} />
+Note: When using `asChild` with form elements like inputs, the Text component's styles will be applied while maintaining the element's native functionality. You can also add additional className props to further customize the styling of the rendered element.
 
 ### Class Name
 
 Adds an additional class to the `Text` component.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
 
 ### Children
 

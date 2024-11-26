@@ -1,4 +1,4 @@
 export { colorSetList } from './colors';
-export { ColorSet } from './colors.types';
+export { ColorSet, ColorScheme } from './colors.types';
 
 export { typographyTailwindConfig } from './typography';
