@@ -8,7 +8,7 @@ import { TextVariant, TextColor, FontWeight, FontStyle } from './Text.types';
 import { generateClassNames } from './Text.utilities';
 
 jest.mock('@metamask/design-system-twrnc-preset', () => ({
-  useTailwind: jest.fn(),
+  useTailwind,
 }));
 describe('Text', () => {
   beforeEach(() => {
