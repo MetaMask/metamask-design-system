@@ -62,13 +62,7 @@ export const CSSLightTheme = {
   render: () => {
     const lightThemeColors = getCSSVariablesFromStylesheet('--color-');
     return (
-      <div
-        style={{
-          display: 'grid',
-          gap: '16px',
-          gridTemplateColumns: 'repeat(auto-fill, 300px)',
-        }}
-      >
+      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
         {Object.entries(lightThemeColors).map(
           ([name, { color, name: colorName }]) => (
             <ColorSwatch
@@ -94,51 +88,25 @@ export const CSSLightTheme = {
 
 export const CSSDarkTheme = {
   render: () => {
-    console.log('Rendering CSSDarkTheme story');
     const darkThemeColors = getCSSVariablesFromStylesheet('--color-', 'dark');
-    console.log('Background color:', darkThemeJS.colors.background.default);
-
     return (
-      <div
-        style={{
-          backgroundColor: 'var(--color-background-default)',
-        }}
-      >
-        <div
-          style={{
-            display: 'grid',
-            gap: '16px',
-            gridTemplateColumns: 'repeat(auto-fill, 300px)',
-          }}
-        >
-          {Object.entries(darkThemeColors).map(
-            ([name, { color, name: colorName }]) => {
-              console.log(`Rendering swatch for ${name}:`, {
+      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
+        {Object.entries(darkThemeColors).map(
+          ([name, { color, name: colorName }]) => (
+            <ColorSwatch
+              key={name}
+              color={color}
+              name={colorName}
+              backgroundColor={colorName}
+              borderColor="var(--color-border-muted)"
+              textBackgroundColor="transparent"
+              textColor={getContrastYIQ(
                 color,
-                colorName,
-                contrastColor: getContrastYIQ(
-                  color,
-                  darkThemeJS.colors.background.default,
-                ),
-              });
-
-              return (
-                <ColorSwatch
-                  key={name}
-                  color={color}
-                  name={colorName}
-                  backgroundColor={colorName}
-                  borderColor="var(--color-border-muted)"
-                  textBackgroundColor="transparent"
-                  textColor={getContrastYIQ(
-                    color,
-                    darkThemeJS.colors.background.default,
-                  )}
-                />
-              );
-            },
-          )}
-        </div>
+                darkThemeJS.colors.background.default,
+              )}
+            />
+          ),
+        )}
       </div>
     );
   },
@@ -151,13 +119,7 @@ export const JSLightTheme = {
   render: () => {
     const colors = getJSColors(lightThemeJS.colors);
     return (
-      <div
-        style={{
-          display: 'grid',
-          gap: '16px',
-          gridTemplateColumns: 'repeat(auto-fill, 300px)',
-        }}
-      >
+      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
         {colors.map(({ name, color }) => (
           <ColorSwatch
             key={name}
@@ -182,14 +144,7 @@ export const JSDarkTheme = {
   render: () => {
     const colors = getJSColors(darkThemeJS.colors);
     return (
-      <div
-        style={{
-          display: 'grid',
-          gap: '16px',
-          gridTemplateColumns: 'repeat(auto-fill, 300px)',
-          backgroundColor: darkThemeJS.colors.background.default,
-        }}
-      >
+      <div className={`grid gap-4 grid-cols-[repeat(auto-fill,300px)]`}>
         {colors.map(({ name, color }) => (
           <ColorSwatch
             key={name}
