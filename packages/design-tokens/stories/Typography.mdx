@@ -13,9 +13,28 @@ The main font family used in MetaMask products is **Euclid Circular B**
 
 <Canvas of={TypographyStories.FontFamily} />
 
-| Font Family           | JS                   | CSS                                    |
-| --------------------- | -------------------- | -------------------------------------- |
-| **Euclid Circular B** | `Token not exported` | `var(--font-family-euclid-circular-b)` |
+<table>
+  <thead>
+    <tr>
+      <th>Font Family</th>
+      <th>JS</th>
+      <th>CSS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>Euclid Circular B</strong>
+      </td>
+      <td>
+        <code>Token not exported</code>
+      </td>
+      <td>
+        <code>var(--font-family-euclid-circular-b)</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Scale
 
@@ -29,24 +48,44 @@ For screens sizes `767px >` or smaller, use the small screen typography scale
 
 <Canvas of={TypographyStories.SmallScreen} />
 
-| Variation                            | JS                                                                                                                                                                                                                                             | CSS                                                                                                                                                                                                                                                                                                  |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **S DisplayMD**                      | `typography.sDisplayMD.fontFamily` <br /> `typography.sDisplayMD.fontWeight` <br /> `typography.sDisplayMD.fontSize` <br /> `typography.sDisplayMD.lineHeight` <br /> `typography.sDisplayMD.letterSpacing`                                    | `var(--typography-s-display-md-font-family)` <br /> `var(--typography-s-display-md-font-weight)`<br /> `var(--typography-s-display-md-font-size)` <br /> `var(--typography-s-display-md-line-height)` <br /> `var(--typography-s-display-md-letter-spacing)`                                         |
-| **S HeadingLG**                      | `typography.sHeadingLG.fontFamily` <br /> `typography.sHeadingLG.fontWeight` <br /> `typography.sHeadingLG.fontSize` <br /> `typography.sHeadingLG.lineHeight` <br /> `typography.sHeadingLG.letterSpacing`                                    | `var(--typography-s-heading-lg-font-family)` <br /> `var(--typography-s-heading-lg-font-weight)`<br /> `var(--typography-s-heading-lg-font-size)` <br /> `var(--typography-s-heading-lg-line-height)` <br /> `var(--typography-s-heading-lg-letter-spacing)`                                         |
-| **S HeadingMD**                      | `typography.sHeadingMD.fontFamily` <br /> `typography.sHeadingMD.fontWeight` <br /> `typography.sHeadingMD.fontSize` <br /> `typography.sHeadingMD.lineHeight` <br /> `typography.sHeadingMD.letterSpacing`                                    | `var(--typography-s-heading-md-font-family)` <br /> `var(--typography-s-heading-md-font-weight)`<br /> `var(--typography-s-heading-md-font-size)` <br /> `var(--typography-s-heading-md-line-height)` <br /> `var(--typography-s-heading-md-letter-spacing)`                                         |
-| **S HeadingSM**                      | `typography.sHeadingSM.fontFamily` <br /> `typography.sHeadingSM.fontWeight` <br /> `typography.sHeadingSM.fontSize` <br /> `typography.sHeadingSM.lineHeight` <br /> `typography.sHeadingSM.letterSpacing`                                    | `var(--typography-s-heading-sm-font-family)` <br /> `var(--typography-s-heading-sm-font-weight)`<br /> `var(--typography-s-heading-sm-font-size)` <br /> `var(--typography-s-heading-sm-line-height)` <br /> `var(--typography-s-heading-sm-letter-spacing)`                                         |
-| **S HeadingSM Regular** (DEPRECATED) | `typography.sHeadingSMRegular.fontFamily` <br /> `typography.sHeadingSMRegular.fontWeight` <br /> `typography.sHeadingSMRegular.fontSize` <br /> `typography.sHeadingSMRegular.lineHeight` <br /> `typography.sHeadingSMRegular.letterSpacing` | `var(--typography-s-heading-sm-regular-font-family)` <br /> `var(--typography-s-heading-sm-regular-font-weight)`<br /> `var(--typography-s-heading-sm-regular-font-size)` <br /> `var(--typography-s-heading-sm-regular-line-height)` <br /> `var(--typography-s-heading-sm-regular-letter-spacing)` |
-| **S BodyLG Medium**                  | `typography.sBodyLGMedium.fontFamily` <br /> `typography.sBodyLGMedium.fontWeight` <br /> `typography.sBodyLGMedium.fontSize` <br /> `typography.sBodyLGMedium.lineHeight` <br /> `typography.sBodyLGMedium.letterSpacing`                     | `var(--typography-s-body-lg-medium-font-family)` <br /> `var(--typography-s-body-lg-medium-font-weight)`<br /> `var(--typography-s-body-lg-medium-font-size)` <br /> `var(--typography-s-body-lg-medium-line-height)` <br /> `var(--typography-s-body-lg-medium-letter-spacing)`                     |
-| **S BodyMD Bold**                    | `typography.sBodyMDBold.fontFamily` <br /> `typography.sBodyMDBold.fontWeight` <br /> `typography.sBodyMDBold.fontSize` <br /> `typography.sBodyMDBold.lineHeight` <br /> `typography.sBodyMDBold.letterSpacing`                               | `var(--typography-s-body-md-bold-font-family)` <br /> `var(--typography-s-body-md-bold-font-weight)`<br /> `var(--typography-s-body-md-bold-font-size)` <br /> `var(--typography-s-body-md-bold-line-height)` <br /> `var(--typography-s-body-md-bold-letter-spacing)`                               |
-| **S BodyMD Medium**                  | `typography.sBodyMDMedium.fontFamily` <br /> `typography.sBodyMDMedium.fontWeight` <br /> `typography.sBodyMDMedium.fontSize` <br /> `typography.sBodyMDMedium.lineHeight` <br /> `typography.sBodyMDMedium.letterSpacing`                     | `var(--typography-s-body-md-bold-font-family)` <br /> `var(--typography-s-body-md-bold-font-weight)`<br /> `var(--typography-s-body-md-bold-font-size)` <br /> `var(--typography-s-body-md-bold-line-height)` <br /> `var(--typography-s-body-md-bold-letter-spacing)`                               |
-| **S BodyMD**                         | `typography.sBodyMD.fontFamily` <br /> `typography.sBodyMD.fontWeight` <br /> `typography.sBodyMD.fontSize` <br /> `typography.sBodyMD.lineHeight` <br /> `typography.sBodyMD.letterSpacing`                                                   | `var(--typography-s-body-md-font-family)` <br /> `var(--typography-s-body-md-font-weight)`<br /> `var(--typography-s-body-md-font-size)` <br /> `var(--typography-s-body-md-line-height)` <br /> `var(--typography-s-body-md-letter-spacing)`                                                        |
-| **S BodySM Bold**                    | `typography.sBodySMBold.fontFamily` <br /> `typography.sBodySMBold.fontWeight` <br /> `typography.sBodySMBold.fontSize` <br /> `typography.sBodySMBold.lineHeight` <br /> `typography.sBodySMBold.letterSpacing`                               | `var(--typography-s-body-sm-bold-font-family)` <br /> `var(--typography-s-body-sm-bold-font-weight)`<br /> `var(--typography-s-body-sm-bold-font-size)` <br /> `var(--typography-s-body-sm-bold-line-height)` <br /> `var(--typography-s-body-sm-bold-letter-spacing)`                               |
-| **S BodySM Medium**                  | `typography.sBodySMMedium.fontFamily` <br /> `typography.sBodySMMedium.fontWeight` <br /> `typography.sBodySMMedium.fontSize` <br /> `typography.sBodySMMedium.lineHeight` <br /> `typography.sBodySMMedium.letterSpacing`                     | `var(--typography-s-body-sm-bold-font-family)` <br /> `var(--typography-s-body-sm-bold-font-weight)`<br /> `var(--typography-s-body-sm-bold-font-size)` <br /> `var(--typography-s-body-sm-bold-line-height)` <br /> `var(--typography-s-body-sm-bold-letter-spacing)`                               |
-| **S BodySM**                         | `typography.sBodySM.fontFamily` <br /> `typography.sBodySM.fontWeight` <br /> `typography.sBodySM.fontSize` <br /> `typography.sBodySM.lineHeight` <br /> `typography.sBodySM.letterSpacing`                                                   | `var(--typography-s-body-sm-font-family)` <br /> `var(--typography-s-body-sm-font-weight)`<br /> `var(--typography-s-body-sm-font-size)` <br /> `var(--typography-s-body-sm-line-height)` <br /> `var(--typography-s-body-sm-letter-spacing)`                                                        |
-| **S BodyXS Medium**                  | `typography.sBodyXSMedium.fontFamily` <br /> `typography.sBodyXSMedium.fontWeight` <br /> `typography.sBodyXSMedium.fontSize` <br /> `typography.sBodyXSMedium.lineHeight` <br /> `typography.sBodyXSMedium.letterSpacing`                     | `var(--typography-s-body-xs-font-family)` <br /> `var(--typography-s-body-xs-font-weight)`<br /> `var(--typography-s-body-xs-font-size)` <br /> `var(--typography-s-body-xs-line-height)` <br /> `var(--typography-s-body-xs-letter-spacing)`                                                        |
-| **S BodyXS**                         | `typography.sBodyXS.fontFamily` <br /> `typography.sBodyXS.fontWeight` <br /> `typography.sBodyXS.fontSize` <br /> `typography.sBodyXS.lineHeight` <br /> `typography.sBodyXS.letterSpacing`                                                   | `var(--typography-s-body-xs-font-family)` <br /> `var(--typography-s-body-xs-font-weight)`<br /> `var(--typography-s-body-xs-font-size)` <br /> `var(--typography-s-body-xs-line-height)` <br /> `var(--typography-s-body-xs-letter-spacing)`                                                        |
-
-**NOTE: The JS token format was initially intended for React Native. Therefore, `fontSize` and `lineHeight` use integers not REMS or unitless values. Some conversion will need to happen at app level if the JS token format is used for web applications.**
+<table>
+  <thead>
+    <tr>
+      <th>Variation</th>
+      <th>JS</th>
+      <th>CSS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>S DisplayMD</strong>
+      </td>
+      <td>
+        <code>typography.sDisplayMD.fontFamily</code>
+        <br />
+        <code>typography.sDisplayMD.fontWeight</code>
+        <br />
+        <code>typography.sDisplayMD.fontSize</code>
+        <br />
+        <code>typography.sDisplayMD.lineHeight</code>
+        <br />
+        <code>typography.sDisplayMD.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-s-display-md-font-family)</code>
+        <br />
+        <code>var(--typography-s-display-md-font-weight)</code>
+        <br />
+        <code>var(--typography-s-display-md-font-size)</code>
+        <br />
+        <code>var(--typography-s-display-md-line-height)</code>
+        <br />
+        <code>var(--typography-s-display-md-letter-spacing)</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### **Large screen**
 
@@ -56,22 +95,395 @@ For screens sizes `768px <` or larger, use the large screen typography scale
 
 <Canvas of={TypographyStories.LargeScreen} />
 
-| Variation                            | JS                                                                                                                                                                                                                                             | CSS                                                                                                                                                                                                                                                                                                  |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **L DisplayMD**                      | `typography.lDisplayMD.fontFamily` <br /> `typography.lDisplayMD.fontWeight` <br /> `typography.lDisplayMD.fontSize` <br /> `typography.lDisplayMD.lineHeight` <br /> `typography.lDisplayMD.letterSpacing`                                    | `var(--typography-l-display-md-font-family)` <br /> `var(--typography-l-display-md-font-weight)`<br /> `var(--typography-l-display-md-font-size)` <br /> `var(--typography-l-display-md-line-height)` <br /> `var(--typography-l-display-md-letter-spacing)`                                         |
-| **L HeadingLG**                      | `typography.lHeadingLG.fontFamily` <br /> `typography.lHeadingLG.fontWeight` <br /> `typography.lHeadingLG.fontSize` <br /> `typography.lHeadingLG.lineHeight` <br /> `typography.lHeadingLG.letterSpacing`                                    | `var(--typography-l-heading-lg-font-family)` <br /> `var(--typography-l-heading-lg-font-weight)`<br /> `var(--typography-l-heading-lg-font-size)` <br /> `var(--typography-l-heading-lg-line-height)` <br /> `var(--typography-l-heading-lg-letter-spacing)`                                         |
-| **L HeadingMD**                      | `typography.lHeadingMD.fontFamily` <br /> `typography.lHeadingMD.fontWeight` <br /> `typography.lHeadingMD.fontSize` <br /> `typography.lHeadingMD.lineHeight` <br /> `typography.lHeadingMD.letterSpacing`                                    | `var(--typography-l-heading-md-font-family)` <br /> `var(--typography-l-heading-md-font-weight)`<br /> `var(--typography-l-heading-md-font-size)` <br /> `var(--typography-l-heading-md-line-height)` <br /> `var(--typography-l-heading-md-letter-spacing)`                                         |
-| **L HeadingSM**                      | `typography.lHeadingSM.fontFamily` <br /> `typography.lHeadingSM.fontWeight` <br /> `typography.lHeadingSM.fontSize` <br /> `typography.lHeadingSM.lineHeight` <br /> `typography.lHeadingSM.letterSpacing`                                    | `var(--typography-l-heading-sm-font-family)` <br /> `var(--typography-l-heading-sm-font-weight)`<br /> `var(--typography-l-heading-sm-font-size)` <br /> `var(--typography-l-heading-sm-line-height)` <br /> `var(--typography-l-heading-sm-letter-spacing)`                                         |
-| **L HeadingSM Regular** (DEPRECATED) | `typography.lHeadingSMRegular.fontFamily` <br /> `typography.lHeadingSMRegular.fontWeight` <br /> `typography.lHeadingSMRegular.fontSize` <br /> `typography.lHeadingSMRegular.lineHeight` <br /> `typography.lHeadingSMRegular.letterSpacing` | `var(--typography-l-heading-sm-regular-font-family)` <br /> `var(--typography-l-heading-sm-regular-font-weight)`<br /> `var(--typography-l-heading-sm-regular-font-size)` <br /> `var(--typography-l-heading-sm-regular-line-height)` <br /> `var(--typography-l-heading-sm-regular-letter-spacing)` |
-| **L BodyLGMedium**                   | `typography.lBodyLGMedium.fontFamily` <br /> `typography.lBodyLGMedium.fontWeight` <br /> `typography.lBodyLGMedium.fontSize` <br /> `typography.lBodyLGMedium.lineHeight` <br /> `typography.lBodyLGMedium.letterSpacing`                     | `var(--typography-l-body-large-medium-font-family)` <br /> `var(--typography-l-body-large-medium-font-weight)`<br /> `var(--typography-l-body-large-medium-font-size)` <br /> `var(--typography-l-body-large-medium-line-height)` <br /> `var(--typography-l-body-large-medium-letter-spacing)`      |
-| **L BodyMD Bold**                    | `typography.lBodyMDBold.fontFamily` <br /> `typography.lBodyMDBold.fontWeight` <br /> `typography.lBodyMDBold.fontSize` <br /> `typography.lBodyMDBold.lineHeight` <br /> `typography.lBodyMDBold.letterSpacing`                               | `var(--typography-l-body-md-bold-font-family)` <br /> `var(--typography-l-body-md-bold-font-weight)`<br /> `var(--typography-l-body-md-bold-font-size)` <br /> `var(--typography-l-body-md-bold-line-height)` <br /> `var(--typography-l-body-md-bold-letter-spacing)`                               |
-| **L BodyMD Medium**                  | `typography.lBodyMDMedium.fontFamily` <br /> `typography.lBodyMDMedium.fontWeight` <br /> `typography.lBodyMDMedium.fontSize` <br /> `typography.lBodyMDMedium.lineHeight` <br /> `typography.lBodyMDMedium.letterSpacing`                     | `var(--typography-l-body-md-bold-font-family)` <br /> `var(--typography-l-body-md-bold-font-weight)`<br /> `var(--typography-l-body-md-bold-font-size)` <br /> `var(--typography-l-body-md-bold-line-height)` <br /> `var(--typography-l-body-md-bold-letter-spacing)`                               |
-| **L BodyMD**                         | `typography.lBodyMD.fontFamily` <br /> `typography.lBodyMD.fontWeight` <br /> `typography.lBodyMD.fontSize` <br /> `typography.lBodyMD.lineHeight` <br /> `typography.lBodyMD.letterSpacing`                                                   | `var(--typography-l-body-md-font-family)` <br /> `var(--typography-l-body-md-font-weight)`<br /> `var(--typography-l-body-md-font-size)` <br /> `var(--typography-l-body-md-line-height)` <br /> `var(--typography-l-body-md-letter-spacing)`                                                        |
-| **L BodySM Bold**                    | `typography.lBodySMBold.fontFamily` <br /> `typography.lBodySMBold.fontWeight` <br /> `typography.lBodySMBold.fontSize` <br /> `typography.lBodySMBold.lineHeight` <br /> `typography.lBodySMBold.letterSpacing`                               | `var(--typography-l-body-sm-bold-font-family)` <br /> `var(--typography-l-body-sm-bold-font-weight)`<br /> `var(--typography-l-body-sm-bold-font-size)` <br /> `var(--typography-l-body-sm-bold-line-height)` <br /> `var(--typography-l-body-sm-bold-letter-spacing)`                               |
-| **L BodySM Medium**                  | `typography.lBodySMMedium.fontFamily` <br /> `typography.lBodySMMedium.fontWeight` <br /> `typography.lBodySMMedium.fontSize` <br /> `typography.lBodySMMedium.lineHeight` <br /> `typography.lBodySMMedium.letterSpacing`                     | `var(--typography-l-body-sm-bold-font-family)` <br /> `var(--typography-l-body-sm-bold-font-weight)`<br /> `var(--typography-l-body-sm-bold-font-size)` <br /> `var(--typography-l-body-sm-bold-line-height)` <br /> `var(--typography-l-body-sm-bold-letter-spacing)`                               |
-| **L BodySM**                         | `typography.lBodySM.fontFamily` <br /> `typography.lBodySM.fontWeight` <br /> `typography.lBodySM.fontSize` <br /> `typography.lBodySM.lineHeight` <br /> `typography.lBodySM.letterSpacing`                                                   | `var(--typography-l-body-sm-font-family)` <br /> `var(--typography-l-body-sm-font-weight)`<br /> `var(--typography-l-body-sm-font-size)` <br /> `var(--typography-l-body-sm-line-height)` <br /> `var(--typography-l-body-sm-letter-spacing)`                                                        |
-| **L BodyXS Medium**                  | `typography.lBodyXSMedium.fontFamily` <br /> `typography.lBodyXSMedium.fontWeight` <br /> `typography.lBodyXSMedium.fontSize` <br /> `typography.lBodyXSMedium.lineHeight` <br /> `typography.lBodyXSMedium.letterSpacing`                     | `var(--typography-l-body-xs-font-family)` <br /> `var(--typography-l-body-xs-font-weight)`<br /> `var(--typography-l-body-xs-font-size)` <br /> `var(--typography-l-body-xs-line-height)` <br /> `var(--typography-l-body-xs-letter-spacing)`                                                        |
-| **L BodyXS**                         | `typography.lBodyXS.fontFamily` <br /> `typography.lBodyXS.fontWeight` <br /> `typography.lBodyXS.fontSize` <br /> `typography.lBodyXS.lineHeight` <br /> `typography.lBodyXS.letterSpacing`                                                   | `var(--typography-l-body-xs-font-family)` <br /> `var(--typography-l-body-xs-font-weight)`<br /> `var(--typography-l-body-xs-font-size)` <br /> `var(--typography-l-body-xs-line-height)` <br /> `var(--typography-l-body-xs-letter-spacing)`                                                        |
+<table>
+  <thead>
+    <tr>
+      <th>Variation</th>
+      <th>JS</th>
+      <th>CSS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>L DisplayMD</strong>
+      </td>
+      <td>
+        <code>typography.lDisplayMD.fontFamily</code>
+        <br />
+        <code>typography.lDisplayMD.fontWeight</code>
+        <br />
+        <code>typography.lDisplayMD.fontSize</code>
+        <br />
+        <code>typography.lDisplayMD.lineHeight</code>
+        <br />
+        <code>typography.lDisplayMD.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-display-md-font-family)</code>
+        <br />
+        <code>var(--typography-l-display-md-font-weight)</code>
+        <br />
+        <code>var(--typography-l-display-md-font-size)</code>
+        <br />
+        <code>var(--typography-l-display-md-line-height)</code>
+        <br />
+        <code>var(--typography-l-display-md-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L HeadingLG</strong>
+      </td>
+      <td>
+        <code>typography.lHeadingLG.fontFamily</code>
+        <br />
+        <code>typography.lHeadingLG.fontWeight</code>
+        <br />
+        <code>typography.lHeadingLG.fontSize</code>
+        <br />
+        <code>typography.lHeadingLG.lineHeight</code>
+        <br />
+        <code>typography.lHeadingLG.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-heading-lg-font-family)</code>
+        <br />
+        <code>var(--typography-l-heading-lg-font-weight)</code>
+        <br />
+        <code>var(--typography-l-heading-lg-font-size)</code>
+        <br />
+        <code>var(--typography-l-heading-lg-line-height)</code>
+        <br />
+        <code>var(--typography-l-heading-lg-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L HeadingMD</strong>
+      </td>
+      <td>
+        <code>typography.lHeadingMD.fontFamily</code>
+        <br />
+        <code>typography.lHeadingMD.fontWeight</code>
+        <br />
+        <code>typography.lHeadingMD.fontSize</code>
+        <br />
+        <code>typography.lHeadingMD.lineHeight</code>
+        <br />
+        <code>typography.lHeadingMD.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-heading-md-font-family)</code>
+        <br />
+        <code>var(--typography-l-heading-md-font-weight)</code>
+        <br />
+        <code>var(--typography-l-heading-md-font-size)</code>
+        <br />
+        <code>var(--typography-l-heading-md-line-height)</code>
+        <br />
+        <code>var(--typography-l-heading-md-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L HeadingSM</strong>
+      </td>
+      <td>
+        <code>typography.lHeadingSM.fontFamily</code>
+        <br />
+        <code>typography.lHeadingSM.fontWeight</code>
+        <br />
+        <code>typography.lHeadingSM.fontSize</code>
+        <br />
+        <code>typography.lHeadingSM.lineHeight</code>
+        <br />
+        <code>typography.lHeadingSM.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-heading-sm-font-family)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-font-weight)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-font-size)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-line-height)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L HeadingSM Regular</strong> (DEPRECATED)
+      </td>
+      <td>
+        <code>typography.lHeadingSMRegular.fontFamily</code>
+        <br />
+        <code>typography.lHeadingSMRegular.fontWeight</code>
+        <br />
+        <code>typography.lHeadingSMRegular.fontSize</code>
+        <br />
+        <code>typography.lHeadingSMRegular.lineHeight</code>
+        <br />
+        <code>typography.lHeadingSMRegular.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-heading-sm-regular-font-family)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-regular-font-weight)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-regular-font-size)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-regular-line-height)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-regular-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyLGMedium</strong>
+      </td>
+      <td>
+        <code>typography.lBodyLGMedium.fontFamily</code>
+        <br />
+        <code>typography.lBodyLGMedium.fontWeight</code>
+        <br />
+        <code>typography.lBodyLGMedium.fontSize</code>
+        <br />
+        <code>typography.lBodyLGMedium.lineHeight</code>
+        <br />
+        <code>typography.lBodyLGMedium.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-lg-medium-font-family)</code>
+        <br />
+        <code>var(--typography-l-body-lg-medium-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-lg-medium-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-lg-medium-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-lg-medium-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyMD Bold</strong>
+      </td>
+      <td>
+        <code>typography.lBodyMDBold.fontFamily</code>
+        <br />
+        <code>typography.lBodyMDBold.fontWeight</code>
+        <br />
+        <code>typography.lBodyMDBold.fontSize</code>
+        <br />
+        <code>typography.lBodyMDBold.lineHeight</code>
+        <br />
+        <code>typography.lBodyMDBold.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-md-bold-font-family)</code>
+        <br />
+        <code>var(--typography-l-body-md-bold-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-md-bold-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-md-bold-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-md-bold-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyMD Medium</strong>
+      </td>
+      <td>
+        <code>typography.lBodyMDMedium.fontFamily</code>
+        <br />
+        <code>typography.lBodyMDMedium.fontWeight</code>
+        <br />
+        <code>typography.lBodyMDMedium.fontSize</code>
+        <br />
+        <code>typography.lBodyMDMedium.lineHeight</code>
+        <br />
+        <code>typography.lBodyMDMedium.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-md-medium-font-family)</code>
+        <br />
+        <code>var(--typography-l-body-md-medium-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-md-medium-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-md-medium-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-md-medium-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyMD</strong>
+      </td>
+      <td>
+        <code>typography.lBodyMD.fontFamily</code>
+        <br />
+        <code>typography.lBodyMD.fontWeight</code>
+        <br />
+        <code>typography.lBodyMD.fontSize</code>
+        <br />
+        <code>typography.lBodyMD.lineHeight</code>
+        <br />
+        <code>typography.lBodyMD.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-md-font-family)</code>
+        <br />
+        <code>var(--typography-l-body-md-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-md-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-md-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-md-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodySM Bold</strong>
+      </td>
+      <td>
+        <code>typography.lBodySMBold.fontFamily</code>
+        <br />
+        <code>typography.lBodySMBold.fontWeight</code>
+        <br />
+        <code>typography.lBodySMBold.fontSize</code>
+        <br />
+        <code>typography.lBodySMBold.lineHeight</code>
+        <br />
+        <code>typography.lBodySMBold.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-sm-bold-font-family)</code>
+        <br />
+        <code>var(--typography-l-body-sm-bold-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-sm-bold-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-sm-bold-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-sm-bold-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodySM Medium</strong>
+      </td>
+      <td>
+        <code>typography.lBodySMMedium.fontFamily</code>
+        <br />
+        <code>typography.lBodySMMedium.fontWeight</code>
+        <br />
+        <code>typography.lBodySMMedium.fontSize</code>
+        <br />
+        <code>typography.lBodySMMedium.lineHeight</code>
+        <br />
+        <code>typography.lBodySMMedium.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-sm-medium-font-family)</code>
+        <br />
+        <code>var(--typography-l-body-sm-medium-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-sm-medium-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-sm-medium-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-sm-medium-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodySM</strong>
+      </td>
+      <td>
+        <code>typography.lBodySM.fontFamily</code>
+        <br />
+        <code>typography.lBodySM.fontWeight</code>
+        <br />
+        <code>typography.lBodySM.fontSize</code>
+        <br />
+        <code>typography.lBodySM.lineHeight</code>
+        <br />
+        <code>typography.lBodySM.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-sm-font-family)</code>
+        <br />
+        <code>var(--typography-l-body-sm-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-sm-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-sm-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-sm-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyXS Medium</strong>
+      </td>
+      <td>
+        <code>typography.lBodyXSMedium.fontFamily</code>
+        <br />
+        <code>typography.lBodyXSMedium.fontWeight</code>
+        <br />
+        <code>typography.lBodyXSMedium.fontSize</code>
+        <br />
+        <code>typography.lBodyXSMedium.lineHeight</code>
+        <br />
+        <code>typography.lBodyXSMedium.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-xs-font-family)</code>
+        <br />
+        <code>var(--typography-l-body-xs-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-xs-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-xs-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-xs-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyXS</strong>
+      </td>
+      <td>
+        <code>typography.lBodyXS.fontFamily</code>
+        <br />
+        <code>typography.lBodyXS.fontWeight</code>
+        <br />
+        <code>typography.lBodyXS.fontSize</code>
+        <br />
+        <code>typography.lBodyXS.lineHeight</code>
+        <br />
+        <code>typography.lBodyXS.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-xs-font-family)</code>
+        <br />
+        <code>var(--typography-l-body-xs-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-xs-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-xs-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-xs-letter-spacing)</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 **NOTE: The JS token format was initially intended for React Native. Therefore, `fontSize` and `lineHeight` use integers not REMS or unitless values. Some conversion will need to happen at app level if the JS token format is used for web applications.**
 
@@ -83,11 +495,48 @@ There are three available font weights: regular`400`, medium`700` and bold`900`
 
 <Canvas of={TypographyStories.FontWeight} />
 
-| Font Weight                                   | JS                   | CSS                          |
-| --------------------------------------------- | -------------------- | ---------------------------- |
-| Regular                                       | `Token not exported` | `var(--font-weight-regular)` |
-| <span style={{fontWeight: 500}}>Medium</span> | `Token not exported` | `var(--font-weight-medium)`  |
-| **Bold**                                      | `Token not exported` | `var(--font-weight-bold)`    |
+<table>
+  <thead>
+    <tr>
+      <th>Font Weight</th>
+      <th>JS</th>
+      <th>CSS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Regular</td>
+      <td>
+        <code>Token not exported</code>
+      </td>
+      <td>
+        <code>var(--font-weight-regular)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span style={{ fontWeight: 500 }}>Medium</span>
+      </td>
+      <td>
+        <code>Token not exported</code>
+      </td>
+      <td>
+        <code>var(--font-weight-medium)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Bold</strong>
+      </td>
+      <td>
+        <code>Token not exported</code>
+      </td>
+      <td>
+        <code>var(--font-weight-bold)</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <br />
 
