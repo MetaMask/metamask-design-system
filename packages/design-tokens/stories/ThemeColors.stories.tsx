@@ -11,7 +11,7 @@ import {
 } from './test-utils';
 
 export default {
-  title: 'Colors/Theme Colors',
+  title: 'Design Tokens/Color/Theme Colors',
   component: ColorSwatchGroup,
   parameters: {
     docs: {
@@ -26,37 +26,35 @@ export const FigmaLightTheme = {
     if (!lightTheme) {
       return null; // or some fallback component
     }
-    console.log('lightTheme', lightTheme);
     return <ColorSwatchGroup swatchData={lightTheme} />;
+  },
+  parameters: {
+    colorScheme: 'light',
   },
 };
 
 export const FigmaDarkTheme = {
   render: () => {
     const { darkTheme } = useJsonColor();
-    console.log('darkTheme', darkTheme);
     if (!darkTheme) {
-      return null; // or some fallback component
+      return null;
     }
-    return (
-      <div
-        style={{
-          margin: '-1rem',
-          padding: '1rem',
-        }}
-      >
-        <ColorSwatchGroup
-          swatchData={darkTheme}
-          theme={darkTheme?.background?.default?.value}
-        />
-      </div>
-    );
+
+    const backgroundColor =
+      'background' in darkTheme &&
+      typeof darkTheme.background === 'object' &&
+      darkTheme.background !== null &&
+      'default' in darkTheme.background &&
+      typeof darkTheme.background.default === 'object' &&
+      darkTheme.background.default !== null &&
+      'value' in darkTheme.background.default
+        ? darkTheme.background.default.value
+        : undefined;
+
+    return <ColorSwatchGroup swatchData={darkTheme} theme={backgroundColor} />;
   },
   parameters: {
-    backgrounds: {
-      default: 'dark',
-      values: [{ name: 'dark', value: brandColor.grey[800].value }],
-    },
+    colorScheme: 'dark',
   },
 };
 
@@ -89,17 +87,21 @@ export const CSSLightTheme = {
       </div>
     );
   },
+  parameters: {
+    colorScheme: 'light',
+  },
 };
 
 export const CSSDarkTheme = {
   render: () => {
-    const darkThemeColors = getCSSVariablesFromStylesheet('--color-');
+    console.log('Rendering CSSDarkTheme story');
+    const darkThemeColors = getCSSVariablesFromStylesheet('--color-', 'dark');
+    console.log('Background color:', darkThemeJS.colors.background.default);
+
     return (
       <div
         style={{
           backgroundColor: 'var(--color-background-default)',
-          margin: '-1rem',
-          padding: '1rem',
         }}
       >
         <div
@@ -110,40 +112,39 @@ export const CSSDarkTheme = {
           }}
         >
           {Object.entries(darkThemeColors).map(
-            ([name, { color, name: colorName }]) => (
-              <ColorSwatch
-                key={name}
-                color={color}
-                name={colorName}
-                backgroundColor={colorName}
-                borderColor="var(--color-border-muted)"
-                textBackgroundColor="transparent"
-                textColor={getContrastYIQ(
+            ([name, { color, name: colorName }]) => {
+              console.log(`Rendering swatch for ${name}:`, {
+                color,
+                colorName,
+                contrastColor: getContrastYIQ(
                   color,
-                  darkThemeJS.colors.background.default, // TODO Use CSS instead of JS object once CSS object is cleaned up
-                )}
-              />
-            ),
+                  darkThemeJS.colors.background.default,
+                ),
+              });
+
+              return (
+                <ColorSwatch
+                  key={name}
+                  color={color}
+                  name={colorName}
+                  backgroundColor={colorName}
+                  borderColor="var(--color-border-muted)"
+                  textBackgroundColor="transparent"
+                  textColor={getContrastYIQ(
+                    color,
+                    darkThemeJS.colors.background.default,
+                  )}
+                />
+              );
+            },
           )}
         </div>
       </div>
     );
   },
-  backgrounds: {
-    default: 'dark',
-    values: [{ name: 'dark', value: 'var(--color-background-default)' }],
+  parameters: {
+    colorScheme: 'dark',
   },
-  decorators: [
-    (StoryFn) => {
-      // Check if document object is available
-      if (typeof document !== 'undefined') {
-        // Add the data-theme attribute to the root element
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-      // Render the story
-      return <StoryFn />;
-    },
-  ],
 };
 
 export const JSLightTheme = {
@@ -172,6 +173,9 @@ export const JSLightTheme = {
       </div>
     );
   },
+  parameters: {
+    colorScheme: 'light',
+  },
 };
 
 export const JSDarkTheme = {
@@ -183,8 +187,6 @@ export const JSDarkTheme = {
           display: 'grid',
           gap: '16px',
           gridTemplateColumns: 'repeat(auto-fill, 300px)',
-          padding: '1rem',
-          margin: '-1rem', // negates storybook padding and removes white border
           backgroundColor: darkThemeJS.colors.background.default,
         }}
       >
@@ -202,5 +204,8 @@ export const JSDarkTheme = {
         ))}
       </div>
     );
+  },
+  parameters: {
+    colorScheme: 'dark',
   },
 };

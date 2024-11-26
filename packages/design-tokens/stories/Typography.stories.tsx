@@ -8,12 +8,12 @@ import { fontFamilies } from '../src/js/typography/fontFamilies';
 import { fontWeights } from '../src/js/typography/fontWeights';
 import { letterSpacing } from '../src/js/typography/letterSpacing';
 
-import { Text } from './components';
+import { Text } from '@metamask/design-system-react';
 
 import README from './Typography.mdx';
 
 export default {
-  title: 'Typography/Typography',
+  title: 'Design Tokens/Typography/Typography',
   parameters: {
     docs: {
       page: README,

@@ -12,8 +12,10 @@ function getAbsolutePath(value: string): any {
 }
 const config: StorybookConfig = {
   stories: [
-    '../stories/**/*.mdx',
-    '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../stories/Introduction.mdx',
+    '../../../packages/design-tokens/stories/Introduction.mdx',
+    '../../../packages/design-tokens/stories/IntroductionColor.mdx',
+    '../../../packages/design-system-react/src/components/Introduction.mdx',
     '../../../packages/design-system-react/src/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/design-tokens/stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
@@ -38,6 +40,10 @@ const config: StorybookConfig = {
         '@metamask/design-tokens': path.resolve(
           __dirname,
           '../../../packages/design-tokens',
+        ),
+        '@metamask/design-system-react': path.resolve(
+          __dirname,
+          '../../../packages/design-system-react/src',
         ),
       };
     }
