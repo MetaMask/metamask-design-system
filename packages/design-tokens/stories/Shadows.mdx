@@ -13,12 +13,61 @@ Shadows come in four different sizes: XS, SM, MD, and LG. The size of the shadow
 
 <Canvas of={ShadowStories.Size} />
 
-| Size   | JS                | CSS                     |
-| ------ | ----------------- | ----------------------- |
-| **XS** | `shadows.size.xs` | `var(--shadow-size-xs)` |
-| **SM** | `shadows.size.sm` | `var(--shadow-size-sm)` |
-| **MD** | `shadows.size.md` | `var(--shadow-size-md)` |
-| **LG** | `shadows.size.lg` | `var(--shadow-size-lg)` |
+<table>
+  <thead>
+    <tr>
+      <th>Size</th>
+      <th>JS</th>
+      <th>CSS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>XS</strong>
+      </td>
+      <td>
+        <code>shadows.size.xs</code>
+      </td>
+      <td>
+        <code>var(--shadow-size-xs)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>SM</strong>
+      </td>
+      <td>
+        <code>shadows.size.sm</code>
+      </td>
+      <td>
+        <code>var(--shadow-size-sm)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>MD</strong>
+      </td>
+      <td>
+        <code>shadows.size.md</code>
+      </td>
+      <td>
+        <code>var(--shadow-size-md)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>LG</strong>
+      </td>
+      <td>
+        <code>shadows.size.lg</code>
+      </td>
+      <td>
+        <code>var(--shadow-size-lg)</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Color
 
@@ -26,11 +75,50 @@ Shadows can have three different colors: default (neutral), primary, and error/d
 
 <Canvas of={ShadowStories.Color} />
 
-| Color       | JS                      | CSS                           |
-| ----------- | ----------------------- | ----------------------------- |
-| **neutral** | `colors.shadow.default` | `var(--color-shadow-default)` |
-| **primary** | `colors.primary.shadow` | `var(--color-primary-shadow)` |
-| **danger**  | `colors.error.shadow`   | `var(--color-error-shadow)`   |
+<table>
+  <thead>
+    <tr>
+      <th>Color</th>
+      <th>JS</th>
+      <th>CSS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>neutral</strong>
+      </td>
+      <td>
+        <code>colors.shadow.default</code>
+      </td>
+      <td>
+        <code>var(--color-shadow-default)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>primary</strong>
+      </td>
+      <td>
+        <code>colors.primary.shadow</code>
+      </td>
+      <td>
+        <code>var(--color-primary-shadow)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>danger</strong>
+      </td>
+      <td>
+        <code>colors.error.shadow</code>
+      </td>
+      <td>
+        <code>var(--color-error-shadow)</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Usage
 
@@ -38,14 +126,95 @@ Shadows can be applied to various components to create depth and hierarchy. Here
 
 <Canvas of={ShadowStories.ExampleUsage} />
 
-| Component                | JS                                                                              | CSS                                                              |
-| ------------------------ | ------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| **Card**                 | `cardShadow: {...shadows.size.xs }`                                             | `box-shadow: var(--shadow-size-xs) var(--color-shadow-default);` |
-| **Dropdown**             | `dropdownShadow: { ...shadows.size.sm }`                                        | `box-shadow: var(--shadow-size-sm) var(--color-shadow-default);` |
-| **Toast**                | `toastShadow: { ...shadows.size.md }`                                           | `box-shadow: var(--shadow-size-md) var(--color-shadow-default);` |
-| **Modal**                | `modalShadow: { ...shadows.size.lg }`                                           | `box-shadow: var(--shadow-size-lg) var(--color-shadow-default);` |
-| **Button Primary Hover** | `buttonPrimaryHover: { ...shadows.size.sm, shadowColor: colors.primary.shadow}` | `box-shadow: var(--shadow-size-sm) var(--color-primary-shadow);` |
-| **Button Danger Hover**  | `buttonDangerHover: { ...shadows.size.sm, shadowColor: colors.primary.shadow}`  | `box-shadow: var(--shadow-size-sm) var(--color-error-shadow);`   |
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>JS</th>
+      <th>CSS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>Card</strong>
+      </td>
+      <td>
+        <code>cardShadow: shadows.size.xs</code>
+      </td>
+      <td>
+        <code>
+          box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
+        </code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Dropdown</strong>
+      </td>
+      <td>
+        <code>dropdownShadow: shadows.size.sm</code>
+      </td>
+      <td>
+        <code>
+          box-shadow: var(--shadow-size-sm) var(--color-shadow-default);
+        </code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Toast</strong>
+      </td>
+      <td>
+        <code>toastShadow: shadows.size.md</code>
+      </td>
+      <td>
+        <code>
+          box-shadow: var(--shadow-size-md) var(--color-shadow-default);
+        </code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Modal</strong>
+      </td>
+      <td>
+        <code>modalShadow: shadows.size.lg</code>
+      </td>
+      <td>
+        <code>
+          box-shadow: var(--shadow-size-lg) var(--color-shadow-default);
+        </code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Button Primary Hover</strong>
+      </td>
+      <td>
+        <code>buttonPrimaryHover: shadows.size.sm</code>
+      </td>
+      <td>
+        <code>
+          box-shadow: var(--shadow-size-sm) var(--color-primary-shadow);
+        </code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Button Danger Hover</strong>
+      </td>
+      <td>
+        <code>buttonDangerHover: shadows.size.sm</code>
+      </td>
+      <td>
+        <code>
+          box-shadow: var(--shadow-size-sm) var(--color-error-shadow);
+        </code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 **NOTE: The CSS-in-JS `shadows.size` objects for React Native contain all the correct tokens for neutral shadows. For primary and error/danger shadows change the `shadowColor` key**
 
