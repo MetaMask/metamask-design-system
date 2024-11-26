@@ -1,5 +1,5 @@
 import { withThemeProvider } from '@metamask/design-system-twrnc-preset';
 
-import ButtonComponent from './components/Button';
+import TextComponent from './components/Text';
 
-export const Button = withThemeProvider(ButtonComponent);
+export const Text = withThemeProvider(TextComponent);
