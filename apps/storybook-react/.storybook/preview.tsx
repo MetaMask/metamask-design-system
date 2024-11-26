@@ -90,7 +90,7 @@ const preview: Preview = {
         ],
       },
     },
-    layout: 'fullscreen',
+    layout: 'fullscreen', // removes default padding around stories
   },
 };
 
