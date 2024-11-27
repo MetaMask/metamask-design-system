@@ -65,6 +65,10 @@ export enum FontWeight {
    */
   Bold = '700',
   /**
+   * Weight - 500
+   */
+  Medium = '500',
+  /**
    * Weight - 400
    */
   Normal = '400',
@@ -102,5 +106,5 @@ export type TextProps = {
   /**
    * Optional prop to add twrnc overriding classNames.
    */
-  twClassNames?: string;
+  twClassName?: string;
 } & RNTextProps;

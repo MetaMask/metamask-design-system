@@ -1,6 +1,6 @@
 # Text
 
-The `Text` component is a customizable text component for React Native applications, leveraging `twrnc` for styling. It allows you to display text with various typography variants, colors, font weights, and styles.
+The `Text` component is a customizable text component for React Native applications, leveraging Tailwind CSS for styling. It allows you to display text with various typography variants, colors, font weights, and styles.
 
 ## Props
 
@@ -11,6 +11,17 @@ Optional enum to select between typography variants.
 | TYPE                           | REQUIRED | DEFAULT              |
 | :----------------------------- | :------- | :------------------- |
 | [TextVariant](./Text.types.ts) | No       | `TextVariant.BodyMd` |
+
+Available `TextVariant` options:
+
+- `TextVariant.DisplayMd`
+- `TextVariant.HeadingLg`
+- `TextVariant.HeadingMd`
+- `TextVariant.HeadingSm`
+- `TextVariant.BodyLg`
+- `TextVariant.BodyMd`
+- `TextVariant.BodySm`
+- `TextVariant.BodyXs`
 
 ### `children`
 
@@ -27,49 +38,6 @@ Optional prop to set the text color.
 | TYPE                         | REQUIRED | DEFAULT                 |
 | :--------------------------- | :------- | :---------------------- |
 | [TextColor](./Text.types.ts) | No       | `TextColor.TextDefault` |
-
-### `fontWeight`
-
-Optional prop to adjust the font weight.
-
-| TYPE                          | REQUIRED | DEFAULT             |
-| :---------------------------- | :------- | :------------------ |
-| [FontWeight](./Text.types.ts) | No       | `FontWeight.Normal` |
-
-### `fontStyle`
-
-Optional prop to adjust the font style.
-
-| TYPE                         | REQUIRED | DEFAULT            |
-| :--------------------------- | :------- | :----------------- |
-| [FontStyle](./Text.types.ts) | No       | `FontStyle.Normal` |
-
-### `twClassNames`
-
-Optional prop to add custom `twrnc` class names for additional styling.
-
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
-
-### Other Props
-
-All other props are passed directly to the underlying React Native `Text` component.
-
-## Text Variants
-
-Available `TextVariant` options:
-
-- `TextVariant.DisplayMd`
-- `TextVariant.HeadingLg`
-- `TextVariant.HeadingMd`
-- `TextVariant.HeadingSm`
-- `TextVariant.BodyLg`
-- `TextVariant.BodyMd`
-- `TextVariant.BodySm`
-- `TextVariant.BodyXs`
-
-## Text Colors
 
 Available `TextColor` options:
 
@@ -90,19 +58,40 @@ Available `TextColor` options:
 - `TextColor.InfoInverse`
 - `TextColor.Transparent`
 
-## Font Weights
+### `fontWeight`
+
+Optional prop to adjust the font weight.
+
+| TYPE                          | REQUIRED | DEFAULT             |
+| :---------------------------- | :------- | :------------------ |
+| [FontWeight](./Text.types.ts) | No       | `FontWeight.Normal` |
 
 Available `FontWeight` options:
 
 - `FontWeight.Normal` (Weight `400`)
+- `FontWeight.Medium` (Weight `500`)
 - `FontWeight.Bold` (Weight `700`)
 
-## Font Styles
+### `fontStyle`
+
+Optional prop to adjust the font style.
+
+| TYPE                         | REQUIRED | DEFAULT            |
+| :--------------------------- | :------- | :----------------- |
+| [FontStyle](./Text.types.ts) | No       | `FontStyle.Normal` |
 
 Available `FontStyle` options:
 
 - `FontStyle.Normal`
 - `FontStyle.Italic`
+
+### `twClassNames`
+
+Optional prop to add custom `twrnc` class names for additional styling.
+
+| TYPE     | REQUIRED | DEFAULT |
+| :------- | :------- | :------ |
+| `string` | No       | `''`    |
 
 ## Usage
 

@@ -5,7 +5,7 @@ import { Text as RNText } from 'react-native';
 import { DEFAULT_TEXT_COLOR, DEFAULT_TEXT_VARIANT } from './Text.constants';
 import type { TextProps } from './Text.types';
 import { FontWeight, FontStyle } from './Text.types';
-import { generateClassNames } from './Text.utilities';
+import { generateTextClassNames } from './Text.utilities';
 
 const Text: React.FC<TextProps> = ({
   variant = DEFAULT_TEXT_VARIANT,
@@ -14,16 +14,16 @@ const Text: React.FC<TextProps> = ({
   children,
   fontWeight = FontWeight.Normal,
   fontStyle = FontStyle.Normal,
-  twClassNames = '',
+  twClassName = '',
   ...props
 }) => {
   const tw = useTailwind();
-  const mergedClassnames = generateClassNames({
+  const mergedClassnames = generateTextClassNames({
     variant,
     color,
     fontWeight,
     fontStyle,
-    twClassNames,
+    twClassName,
   });
 
   return (

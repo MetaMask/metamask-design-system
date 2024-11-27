@@ -15,7 +15,7 @@ const meta: Meta<TextProps> = {
     fontWeight: FontWeight.Normal,
     fontStyle: FontStyle.Normal,
     children: 'The quick orange fox jumped over the lazy dog.',
-    twClassNames: '',
+    twClassName: '',
   },
   argTypes: {
     variant: {
@@ -37,7 +37,7 @@ const meta: Meta<TextProps> = {
     children: {
       control: 'text',
     },
-    twClassNames: {
+    twClassName: {
       control: 'text',
     },
   },
@@ -47,11 +47,15 @@ export default meta;
 type Story = StoryObj<TextProps>;
 
 export const Default: Story = {
-  render: () => (
-    <Text variant={TextVariant.BodyMd}>
-      The quick orange fox jumped over the lazy dog.
-    </Text>
-  ),
+  args: {
+    variant: TextVariant.BodyMd,
+    color: TextColor.TextDefault,
+    fontWeight: FontWeight.Normal,
+    fontStyle: FontStyle.Normal,
+    children: 'The quick orange fox jumped over the lazy dog.',
+    twClassName: '',
+  },
+  render: (args) => <Text {...args} />,
 };
 
 export const Variant: Story = {
@@ -72,52 +76,52 @@ export const Variant: Story = {
 export const Color: Story = {
   render: () => (
     <View>
-      <Text color={TextColor.TextDefault} twClassNames="p-4">
+      <Text color={TextColor.TextDefault} twClassName="p-4">
         TextDefault
       </Text>
-      <Text color={TextColor.TextAlternative} twClassNames="p-4">
+      <Text color={TextColor.TextAlternative} twClassName="p-4">
         TextAlternative
       </Text>
-      <Text color={TextColor.TextMuted} twClassNames="p-4">
+      <Text color={TextColor.TextMuted} twClassName="p-4">
         TextMuted
       </Text>
-      <Text color={TextColor.PrimaryDefault} twClassNames="p-4">
+      <Text color={TextColor.PrimaryDefault} twClassName="p-4">
         PrimaryDefault
       </Text>
       <Text
         color={TextColor.PrimaryInverse}
-        twClassNames="bg-primary-default p-4"
+        twClassName="bg-primary-default p-4"
       >
         PrimaryInverse on bg-primary-default
       </Text>
-      <Text color={TextColor.ErrorDefault} twClassNames="p-4">
+      <Text color={TextColor.ErrorDefault} twClassName="p-4">
         ErrorDefault
       </Text>
-      <Text color={TextColor.ErrorInverse} twClassNames="bg-error-default p-4">
+      <Text color={TextColor.ErrorInverse} twClassName="bg-error-default p-4">
         ErrorInverse on bg-error-default
       </Text>
-      <Text color={TextColor.SuccessDefault} twClassNames="p-4">
+      <Text color={TextColor.SuccessDefault} twClassName="p-4">
         SuccessDefault
       </Text>
       <Text
         color={TextColor.SuccessInverse}
-        twClassNames="bg-success-default p-4"
+        twClassName="bg-success-default p-4"
       >
         SuccessInverse on bg-success-default
       </Text>
-      <Text color={TextColor.WarningDefault} twClassNames="p-4">
+      <Text color={TextColor.WarningDefault} twClassName="p-4">
         WarningDefault
       </Text>
       <Text
         color={TextColor.WarningInverse}
-        twClassNames="bg-warning-default p-4"
+        twClassName="bg-warning-default p-4"
       >
         WarningInverse on bg-warning-default
       </Text>
-      <Text color={TextColor.InfoDefault} twClassNames="p-4">
+      <Text color={TextColor.InfoDefault} twClassName="p-4">
         InfoDefault
       </Text>
-      <Text color={TextColor.InfoInverse} twClassNames="bg-info-default p-4">
+      <Text color={TextColor.InfoInverse} twClassName="bg-info-default p-4">
         InfoInverse on bg-info-default
       </Text>
     </View>
@@ -128,6 +132,7 @@ export const FontWeightStory: Story = {
   render: () => (
     <View>
       <Text fontWeight={FontWeight.Normal}>Normal (400)</Text>
+      <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
       <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
     </View>
   ),
@@ -143,15 +148,3 @@ export const FontStyleStory: Story = {
   ),
 };
 FontStyleStory.storyName = 'Font Style';
-
-export const WithControls: Story = {
-  args: {
-    variant: TextVariant.BodyMd,
-    color: TextColor.TextDefault,
-    fontWeight: FontWeight.Normal,
-    fontStyle: FontStyle.Normal,
-    children: 'Customize me using the controls!',
-    twClassNames: '',
-  },
-  render: (args) => <Text {...args} />,
-};
