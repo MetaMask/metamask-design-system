@@ -3,7 +3,7 @@
 import {
   DEFAULT_TEXT_COLOR,
   DEFAULT_TEXT_VARIANT,
-  MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLE,
+  MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME,
 } from './Text.constants';
 import type { TextProps } from './Text.types';
 import { FontWeight, FontStyle } from './Text.types';
@@ -43,7 +43,7 @@ export const generateTextClassNames = ({
   twClassName = '',
 }: Partial<TextProps>): string => {
   const fontWeightStyleClassname =
-    MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLE[fontWeight];
+    MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME[fontWeight];
   const isItalic = fontStyle === FontStyle.Italic;
   const textClassname = `text-${variant}`;
   const fontFamilyClassname = `font-${variant}${fontWeightStyleClassname}${

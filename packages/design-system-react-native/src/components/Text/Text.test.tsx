@@ -1,3 +1,4 @@
+// Text.test.tsx
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
@@ -7,13 +8,7 @@ import { DEFAULT_TEXT_COLOR, DEFAULT_TEXT_VARIANT } from './Text.constants';
 import { TextVariant, TextColor, FontWeight, FontStyle } from './Text.types';
 import { generateTextClassNames } from './Text.utilities';
 
-jest.mock('@metamask/design-system-twrnc-preset', () => ({
-  useTailwind,
-}));
 describe('Text', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
   describe('generateTextClassNames', () => {
     it('returns default class names when no props are provided', () => {
       const classNames = generateTextClassNames({});
@@ -64,149 +59,192 @@ describe('Text', () => {
 
     it('includes twClassName', () => {
       const classNames = generateTextClassNames({
-        twClassName: 'custom-class',
+        twClassName: 'text-primary-default',
       });
-      expect(classNames).toContain('custom-class');
+      expect(classNames).toContain('text-primary-default');
     });
   });
 
-  describe('Variants', () => {
+  describe('Text Component', () => {
+    it('renders children correctly', () => {
+      const { getByText } = render(<Text>Hello, World!</Text>);
+      expect(getByText('Hello, World!')).toBeDefined();
+    });
+
+    it('applies default styles when no props are provided', () => {
+      let expectedStyles;
+
+      const TestComponent = () => {
+        const tw = useTailwind();
+        const expectedClassNames = generateTextClassNames({});
+        expectedStyles = tw`${expectedClassNames}`;
+        return <Text testID="text">Hello, World!</Text>;
+      };
+
+      const { getByTestId } = render(<TestComponent />);
+      const textElement = getByTestId('text');
+
+      expect(expectedStyles).toBeDefined();
+      expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+    });
+
+    it('applies custom styles based on props', () => {
+      let expectedStyles;
+      const props = {
+        variant: TextVariant.HeadingLg,
+        color: TextColor.PrimaryDefault,
+        fontWeight: FontWeight.Bold,
+        fontStyle: FontStyle.Italic,
+        twClassName: 'text-primary-default',
+      };
+
+      const TestComponent = () => {
+        const tw = useTailwind();
+        const expectedClassNames = generateTextClassNames(props);
+        expectedStyles = tw`${expectedClassNames}`;
+        return (
+          <Text testID="text" {...props}>
+            Styled Text
+          </Text>
+        );
+      };
+
+      const { getByTestId } = render(<TestComponent />);
+      const textElement = getByTestId('text');
+
+      expect(expectedStyles).toBeDefined();
+      expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+    });
+
     Object.values(TextVariant).forEach((variant) => {
-      it(`renders ${variant} variant correctly`, () => {
-        const twMock = jest.fn().mockReturnValue({});
-        (useTailwind as jest.Mock).mockReturnValue(twMock);
+      it(`applies variant ${variant} correctly`, () => {
+        let expectedStyles;
 
-        render(<Text variant={variant}>Test</Text>);
+        const TestComponent = () => {
+          const tw = useTailwind();
+          const expectedClassNames = generateTextClassNames({ variant });
+          expectedStyles = tw`${expectedClassNames}`;
+          return (
+            <Text testID="text" variant={variant}>
+              Test
+            </Text>
+          );
+        };
 
-        const expectedClassNames = generateTextClassNames({ variant });
-        expect(twMock).toHaveBeenCalledWith(expectedClassNames);
+        const { getByTestId } = render(<TestComponent />);
+        const textElement = getByTestId('text');
+
+        expect(expectedStyles).toBeDefined();
+        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
       });
     });
-  });
 
-  describe('Colors', () => {
     Object.values(TextColor).forEach((color) => {
-      it(`applies ${color} color correctly`, () => {
-        const twMock = jest.fn().mockReturnValue({});
-        (useTailwind as jest.Mock).mockReturnValue(twMock);
+      it(`applies color ${color} correctly`, () => {
+        let expectedStyles;
 
-        render(<Text color={color}>Test</Text>);
+        const TestComponent = () => {
+          const tw = useTailwind();
+          const expectedClassNames = generateTextClassNames({ color });
+          expectedStyles = tw`${expectedClassNames}`;
+          return (
+            <Text testID="text" color={color}>
+              Test
+            </Text>
+          );
+        };
 
-        const expectedClassNames = generateTextClassNames({ color });
-        expect(twMock).toHaveBeenCalledWith(expectedClassNames);
+        const { getByTestId } = render(<TestComponent />);
+        const textElement = getByTestId('text');
+
+        expect(expectedStyles).toBeDefined();
+        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
       });
     });
-  });
 
-  describe('Font Weight', () => {
     Object.values(FontWeight).forEach((weight) => {
       it(`applies font weight ${weight} correctly`, () => {
-        const twMock = jest.fn().mockReturnValue({});
-        (useTailwind as jest.Mock).mockReturnValue(twMock);
+        let expectedStyles;
 
-        render(<Text fontWeight={weight}>Test</Text>);
+        const TestComponent = () => {
+          const tw = useTailwind();
+          const expectedClassNames = generateTextClassNames({
+            fontWeight: weight,
+          });
+          expectedStyles = tw`${expectedClassNames}`;
+          return (
+            <Text testID="text" fontWeight={weight}>
+              Test
+            </Text>
+          );
+        };
 
-        const expectedClassNames = generateTextClassNames({
-          fontWeight: weight,
-        });
-        expect(twMock).toHaveBeenCalledWith(expectedClassNames);
+        const { getByTestId } = render(<TestComponent />);
+        const textElement = getByTestId('text');
+
+        expect(expectedStyles).toBeDefined();
+        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
       });
     });
-  });
 
-  describe('Font Style', () => {
-    Object.values(FontStyle).forEach((style) => {
-      it(`applies font style ${style} correctly`, () => {
-        const twMock = jest.fn().mockReturnValue({});
-        (useTailwind as jest.Mock).mockReturnValue(twMock);
+    Object.values(FontStyle).forEach((fontStyle) => {
+      it(`applies font style ${fontStyle} correctly`, () => {
+        let expectedStyles;
 
-        render(<Text fontStyle={style}>Test</Text>);
+        const TestComponent = () => {
+          const tw = useTailwind();
+          const expectedClassNames = generateTextClassNames({ fontStyle });
+          expectedStyles = tw`${expectedClassNames}`;
+          return (
+            <Text testID="text" fontStyle={fontStyle}>
+              Test
+            </Text>
+          );
+        };
 
-        const expectedClassNames = generateTextClassNames({ fontStyle: style });
-        expect(twMock).toHaveBeenCalledWith(expectedClassNames);
+        const { getByTestId } = render(<TestComponent />);
+        const textElement = getByTestId('text');
+
+        expect(expectedStyles).toBeDefined();
+        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
       });
     });
-  });
 
-  it('renders children correctly', () => {
-    const { getByText } = render(
-      <Text variant={TextVariant.BodyMd}>Hello, World!</Text>,
-    );
-    const textElement = getByText('Hello, World!');
-    expect(textElement).not.toBeNull();
-  });
+    it('combines custom style prop with generated styles', () => {
+      let expectedStyles;
+      const customStyle = { margin: 10 };
 
-  it('renders with default color when no color prop is provided', () => {
-    const twMock = jest.fn().mockReturnValue({});
-    (useTailwind as jest.Mock).mockReturnValue(twMock);
+      const TestComponent = () => {
+        const tw = useTailwind();
+        const expectedClassNames = generateTextClassNames({});
+        expectedStyles = tw`${expectedClassNames}`;
+        return (
+          <Text testID="text" style={customStyle}>
+            Styled Text
+          </Text>
+        );
+      };
 
-    render(<Text variant={TextVariant.BodyMd}>Default Color Text</Text>);
+      const { getByTestId } = render(<TestComponent />);
+      const textElement = getByTestId('text');
 
-    const expectedClassNames = generateTextClassNames({
-      variant: TextVariant.BodyMd,
+      expect(expectedStyles).toBeDefined();
+      expect(textElement.props.style).toContainEqual(customStyle);
     });
-    expect(twMock).toHaveBeenCalledWith(expectedClassNames);
-  });
 
-  it('renders with default variant (BodyMd) when no variant is provided', () => {
-    const twMock = jest.fn().mockReturnValue({});
-    (useTailwind as jest.Mock).mockReturnValue(twMock);
+    it('applies accessibilityRole="text"', () => {
+      const { getByText } = render(<Text>Accessible Text</Text>);
+      const textElement = getByText('Accessible Text');
+      expect(textElement.props.accessibilityRole).toBe('text');
+    });
 
-    render(<Text>Default Variant Text</Text>);
-
-    const expectedClassNames = generateTextClassNames({});
-    expect(twMock).toHaveBeenCalledWith(expectedClassNames);
-  });
-
-  it('applies accessibilityRole="text"', () => {
-    const { getByText } = render(<Text>Accessible Text</Text>);
-    const textElement = getByText('Accessible Text');
-    expect(textElement.props.accessibilityRole).toBe('text');
-  });
-
-  it('passes additional props to RNText', () => {
-    const onPressMock = jest.fn();
-    const { getByText } = render(
-      <Text onPress={onPressMock}>Pressable Text</Text>,
-    );
-    const textElement = getByText('Pressable Text');
-    expect(textElement.props.onPress).toBe(onPressMock);
-  });
-
-  it('combines style prop with generated styles', () => {
-    const customStyle = { margin: 10 };
-    const { getByText } = render(<Text style={customStyle}>Styled Text</Text>);
-    const textElement = getByText('Styled Text');
-    expect(textElement.props.style).toContain(customStyle);
-  });
-
-  it('applies custom class names from twClassName', () => {
-    const twMock = jest.fn().mockReturnValue({});
-    (useTailwind as jest.Mock).mockReturnValue(twMock);
-
-    render(<Text twClassName="text-success-default">Custom Class Text</Text>);
-
-    expect(twMock).toHaveBeenCalledWith(
-      expect.stringContaining('text-success-default'),
-    );
-  });
-
-  it('generates correct class names and applies styles', () => {
-    const twMock = jest.fn().mockReturnValue({});
-    (useTailwind as jest.Mock).mockReturnValue(twMock);
-
-    const props = {
-      variant: TextVariant.HeadingLg,
-      color: TextColor.PrimaryDefault,
-      fontWeight: FontWeight.Bold,
-      fontStyle: FontStyle.Italic,
-      twClassName: 'custom-class',
-    };
-
-    render(<Text {...props}>Styled Text</Text>);
-
-    const expectedClassNames = generateTextClassNames(props);
-
-    expect(twMock).toHaveBeenCalledWith(expectedClassNames);
+    it('passes additional props to RNText', () => {
+      const onPressMock = jest.fn();
+      const { getByText } = render(
+        <Text onPress={onPressMock}>Pressable Text</Text>,
+      );
+      const textElement = getByText('Pressable Text');
+      expect(textElement.props.onPress).toBe(onPressMock);
+    });
   });
 });

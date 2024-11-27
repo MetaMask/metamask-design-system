@@ -8,12 +8,12 @@ export const DEFAULT_TEXT_VARIANT = TextVariant.BodyMd;
 export const DEFAULT_TEXT_COLOR = TextColor.TextDefault;
 
 // Mappings
-export const MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLE: {
+export const MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME: {
   [key in FontWeight]: string;
 } = {
-  [FontWeight.Normal]: 'Regular',
-  [FontWeight.Medium]: 'Medium',
-  [FontWeight.Bold]: 'Bold',
+  [FontWeight.Normal]: '',
+  [FontWeight.Medium]: '-medium',
+  [FontWeight.Bold]: '-bold',
 };
 
 // Sample consts

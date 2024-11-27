@@ -84,10 +84,16 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       'sans-serif',
     ],
     bold: getFontFamilyFromWeightAndStyle('700', 'normal'),
+    medium: getFontFamilyFromWeightAndStyle('500', 'normal'),
     italic: getFontFamilyFromWeightAndStyle('400', 'italic'),
+    'medium-italic': getFontFamilyFromWeightAndStyle('500', 'italic'),
     'bold-italic': getFontFamilyFromWeightAndStyle('700', 'italic'),
     'display-md': getFontFamilyFromWeightAndStyle(
       typography.sDisplayMD.fontWeight as FontWeight,
+      'normal' as FontStyle,
+    ),
+    'display-md-medium': getFontFamilyFromWeightAndStyle(
+      '500' as FontWeight,
       'normal' as FontStyle,
     ),
     'display-md-bold': getFontFamilyFromWeightAndStyle(
@@ -98,12 +104,20 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       typography.sDisplayMD.fontWeight as FontWeight,
       'italic' as FontStyle,
     ),
+    'display-md-medium-italic': getFontFamilyFromWeightAndStyle(
+      '500',
+      'italic' as FontStyle,
+    ),
     'display-md-bold-italic': getFontFamilyFromWeightAndStyle(
       '700',
       'italic' as FontStyle,
     ),
     'heading-lg': getFontFamilyFromWeightAndStyle(
       typography.sHeadingLG.fontWeight as FontWeight,
+      'normal' as FontStyle,
+    ),
+    'heading-lg-medium': getFontFamilyFromWeightAndStyle(
+      '500' as FontWeight,
       'normal' as FontStyle,
     ),
     'heading-lg-bold': getFontFamilyFromWeightAndStyle(
@@ -114,12 +128,20 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       typography.sHeadingLG.fontWeight as FontWeight,
       'italic' as FontStyle,
     ),
+    'heading-lg-medium-italic': getFontFamilyFromWeightAndStyle(
+      '500',
+      'italic' as FontStyle,
+    ),
     'heading-lg-bold-italic': getFontFamilyFromWeightAndStyle(
       '700',
       'italic' as FontStyle,
     ),
     'heading-md': getFontFamilyFromWeightAndStyle(
       typography.sHeadingMD.fontWeight as FontWeight,
+      'normal' as FontStyle,
+    ),
+    'heading-md-medium': getFontFamilyFromWeightAndStyle(
+      '500' as FontWeight,
       'normal' as FontStyle,
     ),
     'heading-md-bold': getFontFamilyFromWeightAndStyle(
@@ -130,12 +152,20 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       typography.sHeadingMD.fontWeight as FontWeight,
       'italic' as FontStyle,
     ),
+    'heading-md-medium-italic': getFontFamilyFromWeightAndStyle(
+      '500',
+      'italic' as FontStyle,
+    ),
     'heading-md-bold-italic': getFontFamilyFromWeightAndStyle(
       '700',
       'italic' as FontStyle,
     ),
     'heading-sm': getFontFamilyFromWeightAndStyle(
       typography.sHeadingSM.fontWeight as FontWeight,
+      'normal' as FontStyle,
+    ),
+    'heading-sm-medium': getFontFamilyFromWeightAndStyle(
+      '700' as FontWeight,
       'normal' as FontStyle,
     ),
     'heading-sm-bold': getFontFamilyFromWeightAndStyle(
@@ -146,12 +176,20 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       typography.sHeadingSM.fontWeight as FontWeight,
       'italic' as FontStyle,
     ),
+    'heading-sm-medium-italic': getFontFamilyFromWeightAndStyle(
+      '500',
+      'italic' as FontStyle,
+    ),
     'heading-sm-bold-italic': getFontFamilyFromWeightAndStyle(
       '700',
       'italic' as FontStyle,
     ),
     'body-lg': getFontFamilyFromWeightAndStyle(
       typography.sBodyLGMedium.fontWeight as FontWeight,
+      'normal' as FontStyle,
+    ),
+    'body-lg-medium': getFontFamilyFromWeightAndStyle(
+      '500' as FontWeight,
       'normal' as FontStyle,
     ),
     'body-lg-bold': getFontFamilyFromWeightAndStyle(
@@ -162,12 +200,20 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       typography.sBodyLGMedium.fontWeight as FontWeight,
       'italic' as FontStyle,
     ),
+    'body-lg-medium-italic': getFontFamilyFromWeightAndStyle(
+      '500',
+      'italic' as FontStyle,
+    ),
     'body-lg-bold-italic': getFontFamilyFromWeightAndStyle(
       '700',
       'italic' as FontStyle,
     ),
     'body-md': getFontFamilyFromWeightAndStyle(
       typography.sBodyMD.fontWeight as FontWeight,
+      'normal' as FontStyle,
+    ),
+    'body-md-medium': getFontFamilyFromWeightAndStyle(
+      '500' as FontWeight,
       'normal' as FontStyle,
     ),
     'body-md-bold': getFontFamilyFromWeightAndStyle(
@@ -178,12 +224,20 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       typography.sBodyMD.fontWeight as FontWeight,
       'italic' as FontStyle,
     ),
+    'body-md-medium-italic': getFontFamilyFromWeightAndStyle(
+      '500',
+      'italic' as FontStyle,
+    ),
     'body-md-bold-italic': getFontFamilyFromWeightAndStyle(
       '700',
       'italic' as FontStyle,
     ),
     'body-sm': getFontFamilyFromWeightAndStyle(
       typography.sBodySM.fontWeight as FontWeight,
+      'normal' as FontStyle,
+    ),
+    'body-sm-medium': getFontFamilyFromWeightAndStyle(
+      '500' as FontWeight,
       'normal' as FontStyle,
     ),
     'body-sm-bold': getFontFamilyFromWeightAndStyle(
@@ -194,6 +248,10 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       typography.sBodySM.fontWeight as FontWeight,
       'italic' as FontStyle,
     ),
+    'body-sm-medium-italic': getFontFamilyFromWeightAndStyle(
+      '500',
+      'italic' as FontStyle,
+    ),
     'body-sm-bold-italic': getFontFamilyFromWeightAndStyle(
       '700',
       'italic' as FontStyle,
@@ -202,12 +260,20 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       typography.sBodyXS.fontWeight as FontWeight,
       'normal' as FontStyle,
     ),
+    'body-xs-medium': getFontFamilyFromWeightAndStyle(
+      '500' as FontWeight,
+      'normal' as FontStyle,
+    ),
     'body-xs-bold': getFontFamilyFromWeightAndStyle(
       '700' as FontWeight,
       'normal' as FontStyle,
     ),
     'body-xs-italic': getFontFamilyFromWeightAndStyle(
       typography.sBodyXS.fontWeight as FontWeight,
+      'italic' as FontStyle,
+    ),
+    'body-xs-medium-italic': getFontFamilyFromWeightAndStyle(
+      '500',
       'italic' as FontStyle,
     ),
     'body-xs-bold-italic': getFontFamilyFromWeightAndStyle(
