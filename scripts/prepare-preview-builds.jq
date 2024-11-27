@@ -8,6 +8,13 @@
 # This is just for testing, it doesn't need to strictly follow SemVer.
 .version |= split("-")[0] + "-preview.\($hash)" |
 
+# Update the build script in the root package.json to use the preview scope
+if .scripts and .scripts.build then
+  .scripts.build |= gsub("@metamask/"; "\($npm_scope)/")
+else
+  .
+end |
+
 # The workspace dependencies are updated to point to the exact preview build
 # version, so that Yarn does not try to resolve a different version from the
 # registry.
@@ -15,7 +22,7 @@
 if has("devDependencies") then
   .devDependencies |= with_entries(
     if .value | startswith("workspace:") then
-      .key |= sub("@metamask/"; "@metamask-previews/") |
+      .key |= sub("@metamask/"; "\($npm_scope)/") |
       .value |= sub("workspace:\\^"; "workspace:*")
     else
       .
@@ -28,7 +35,7 @@ end |
 if has("peerDependencies") then
   .peerDependencies |= with_entries(
     if .value | startswith("workspace:") then
-      .key |= sub("@metamask/"; "@metamask-previews/") |
+      .key |= sub("@metamask/"; "\($npm_scope)/") |
       .value |= sub("workspace:\\^"; "workspace:*")
     else
       .
@@ -41,7 +48,7 @@ end |
 if has("dependencies") then
   .dependencies |= with_entries(
     if .value | startswith("workspace:") then
-      .key |= sub("@metamask/"; "@metamask-previews/") |
+      .key |= sub("@metamask/"; "\($npm_scope)/") |
       .value |= sub("workspace:\\^"; "workspace:*")
     else
       .

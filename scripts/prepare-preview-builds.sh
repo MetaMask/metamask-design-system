@@ -30,6 +30,11 @@ prepare-preview-manifest() {
 }
 
 echo "Preparing manifests..."
+# First, update the root package.json
+echo "- root package.json"
+prepare-preview-manifest "package.json"
+
+# Then update all workspace package.json files
 while IFS=$'\t' read -r location name; do
   echo "- $name"
   prepare-preview-manifest "$location/package.json"
@@ -37,3 +42,16 @@ done < <(yarn workspaces list --json | jq --slurp --raw-output 'map(select(.loca
 
 echo "Installing dependencies..."
 yarn install --no-immutable
+
+echo "Updating TypeScript imports for React Native packages..."
+for pkg in "design-system-react-native" "design-system-twrnc-preset"; do
+  if [ -d "packages/$pkg/src" ]; then
+    echo "- $pkg source files"
+    # Use different sed syntax for Linux vs macOS
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i '' "s/@metamask\//@metamask-previews\//g" {} +
+    else
+      find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i "s/@metamask\//@metamask-previews\//g" {} +
+    fi
+  fi
+done

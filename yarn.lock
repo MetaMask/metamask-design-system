@@ -3252,6 +3252,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
     "@metamask/auto-changelog": "npm:^3.4.4"
+    "@metamask/design-tokens": "workspace:^"
     "@testing-library/react-native": "npm:^12.8.1"
     "@types/babel__preset-env": "npm:^7"
     "@types/jest": "npm:^27.4.1"
@@ -3264,7 +3265,6 @@ __metadata:
     ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-tokens": ^4.1.0
     react: ^18.2.0
     react-native: 0.72.15
     twrnc: ^4.5.1
