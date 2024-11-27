@@ -10,7 +10,7 @@
 
 # Update the build script in the root package.json to use the preview scope
 if .scripts and .scripts.build then
-  .scripts.build |= sub("@metamask/"; "\($npm_scope)/")
+  .scripts.build |= gsub("@metamask/"; "\($npm_scope)/")
 else
   .
 end |
