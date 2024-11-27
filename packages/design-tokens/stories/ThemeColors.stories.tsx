@@ -11,7 +11,7 @@ import {
 } from './test-utils';
 
 export default {
-  title: 'Colors/Theme Colors',
+  title: 'Design Tokens/Color/Theme Colors',
   component: ColorSwatchGroup,
   parameters: {
     docs: {
@@ -26,37 +26,35 @@ export const FigmaLightTheme = {
     if (!lightTheme) {
       return null; // or some fallback component
     }
-    console.log('lightTheme', lightTheme);
     return <ColorSwatchGroup swatchData={lightTheme} />;
+  },
+  parameters: {
+    colorScheme: 'light',
   },
 };
 
 export const FigmaDarkTheme = {
   render: () => {
     const { darkTheme } = useJsonColor();
-    console.log('darkTheme', darkTheme);
     if (!darkTheme) {
-      return null; // or some fallback component
+      return null;
     }
-    return (
-      <div
-        style={{
-          margin: '-1rem',
-          padding: '1rem',
-        }}
-      >
-        <ColorSwatchGroup
-          swatchData={darkTheme}
-          theme={darkTheme?.background?.default?.value}
-        />
-      </div>
-    );
+
+    const backgroundColor =
+      'background' in darkTheme &&
+      typeof darkTheme.background === 'object' &&
+      darkTheme.background !== null &&
+      'default' in darkTheme.background &&
+      typeof darkTheme.background.default === 'object' &&
+      darkTheme.background.default !== null &&
+      'value' in darkTheme.background.default
+        ? darkTheme.background.default.value
+        : undefined;
+
+    return <ColorSwatchGroup swatchData={darkTheme} theme={backgroundColor} />;
   },
   parameters: {
-    backgrounds: {
-      default: 'dark',
-      values: [{ name: 'dark', value: brandColor.grey[800].value }],
-    },
+    colorScheme: 'dark',
   },
 };
 
@@ -64,13 +62,7 @@ export const CSSLightTheme = {
   render: () => {
     const lightThemeColors = getCSSVariablesFromStylesheet('--color-');
     return (
-      <div
-        style={{
-          display: 'grid',
-          gap: '16px',
-          gridTemplateColumns: 'repeat(auto-fill, 300px)',
-        }}
-      >
+      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
         {Object.entries(lightThemeColors).map(
           ([name, { color, name: colorName }]) => (
             <ColorSwatch
@@ -89,74 +81,45 @@ export const CSSLightTheme = {
       </div>
     );
   },
+  parameters: {
+    colorScheme: 'light',
+  },
 };
 
 export const CSSDarkTheme = {
   render: () => {
-    const darkThemeColors = getCSSVariablesFromStylesheet('--color-');
+    const darkThemeColors = getCSSVariablesFromStylesheet('--color-', 'dark');
     return (
-      <div
-        style={{
-          backgroundColor: 'var(--color-background-default)',
-          margin: '-1rem',
-          padding: '1rem',
-        }}
-      >
-        <div
-          style={{
-            display: 'grid',
-            gap: '16px',
-            gridTemplateColumns: 'repeat(auto-fill, 300px)',
-          }}
-        >
-          {Object.entries(darkThemeColors).map(
-            ([name, { color, name: colorName }]) => (
-              <ColorSwatch
-                key={name}
-                color={color}
-                name={colorName}
-                backgroundColor={colorName}
-                borderColor="var(--color-border-muted)"
-                textBackgroundColor="transparent"
-                textColor={getContrastYIQ(
-                  color,
-                  darkThemeJS.colors.background.default, // TODO Use CSS instead of JS object once CSS object is cleaned up
-                )}
-              />
-            ),
-          )}
-        </div>
+      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
+        {Object.entries(darkThemeColors).map(
+          ([name, { color, name: colorName }]) => (
+            <ColorSwatch
+              key={name}
+              color={color}
+              name={colorName}
+              backgroundColor={colorName}
+              borderColor="var(--color-border-muted)"
+              textBackgroundColor="transparent"
+              textColor={getContrastYIQ(
+                color,
+                darkThemeJS.colors.background.default,
+              )}
+            />
+          ),
+        )}
       </div>
     );
   },
-  backgrounds: {
-    default: 'dark',
-    values: [{ name: 'dark', value: 'var(--color-background-default)' }],
+  parameters: {
+    colorScheme: 'dark',
   },
-  decorators: [
-    (StoryFn) => {
-      // Check if document object is available
-      if (typeof document !== 'undefined') {
-        // Add the data-theme attribute to the root element
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-      // Render the story
-      return <StoryFn />;
-    },
-  ],
 };
 
 export const JSLightTheme = {
   render: () => {
     const colors = getJSColors(lightThemeJS.colors);
     return (
-      <div
-        style={{
-          display: 'grid',
-          gap: '16px',
-          gridTemplateColumns: 'repeat(auto-fill, 300px)',
-        }}
-      >
+      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
         {colors.map(({ name, color }) => (
           <ColorSwatch
             key={name}
@@ -172,22 +135,16 @@ export const JSLightTheme = {
       </div>
     );
   },
+  parameters: {
+    colorScheme: 'light',
+  },
 };
 
 export const JSDarkTheme = {
   render: () => {
     const colors = getJSColors(darkThemeJS.colors);
     return (
-      <div
-        style={{
-          display: 'grid',
-          gap: '16px',
-          gridTemplateColumns: 'repeat(auto-fill, 300px)',
-          padding: '1rem',
-          margin: '-1rem', // negates storybook padding and removes white border
-          backgroundColor: darkThemeJS.colors.background.default,
-        }}
-      >
+      <div className={`grid gap-4 grid-cols-[repeat(auto-fill,300px)]`}>
         {colors.map(({ name, color }) => (
           <ColorSwatch
             key={name}
@@ -202,5 +159,8 @@ export const JSDarkTheme = {
         ))}
       </div>
     );
+  },
+  parameters: {
+    colorScheme: 'dark',
   },
 };

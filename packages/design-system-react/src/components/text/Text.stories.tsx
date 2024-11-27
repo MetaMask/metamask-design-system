@@ -13,7 +13,7 @@ import {
 } from './Text.types';
 import README from './README.mdx';
 const meta: Meta<typeof Text> = {
-  title: 'Components/Text',
+  title: 'React Components/Text',
   component: Text,
   parameters: {
     docs: {

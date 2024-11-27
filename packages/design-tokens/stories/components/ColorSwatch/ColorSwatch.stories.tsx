@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ColorSwatch } from './ColorSwatch';
 
 const meta: Meta<typeof ColorSwatch> = {
-  title: 'Documentation Components/ColorSwatch',
+  title: 'Docs Components/ColorSwatch',
   component: ColorSwatch,
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Theme } from '../../test-utils/useJsonColor';
 import { getContrastYIQ } from '../../test-utils/getContrastYIQ';
 import { ColorSwatch } from '..';
+import { Text, TextVariant } from '@metamask/design-system-react';
 
 interface ColorSwatchGroupProps {
   /**
@@ -54,19 +55,13 @@ export const ColorSwatchGroup: React.FC<ColorSwatchGroupProps> = ({
           <div
             key={category}
             style={{
-              fontSize: '0.875rem',
-              fontFamily: 'sans-serif',
               color: getContrastYIQ(theme, theme),
             }}
           >
-            <h2>{category}</h2>
-            <div
-              style={{
-                display: 'grid',
-                gap: '16px',
-                gridTemplateColumns: 'repeat(auto-fill, 300px)',
-              }}
-            >
+            <Text variant={TextVariant.HeadingSm} className="my-4">
+              {category}
+            </Text>
+            <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
               <div key={category}>
                 <ColorSwatch
                   color={value}
@@ -74,9 +69,7 @@ export const ColorSwatchGroup: React.FC<ColorSwatchGroupProps> = ({
                   textColor={getContrastYIQ(value, theme)}
                   {...{ textBackgroundColor }}
                 />
-                {description && (
-                  <p style={{ lineHeight: 1.3 }}>{description}</p>
-                )}
+                {description && <Text className="my-4">{description}</Text>}
               </div>
             </div>
           </div>
@@ -98,19 +91,13 @@ export const ColorSwatchGroup: React.FC<ColorSwatchGroupProps> = ({
           <div
             key={category}
             style={{
-              fontSize: '0.875rem',
-              fontFamily: 'sans-serif',
               color: getContrastYIQ(theme, theme),
             }}
           >
-            <h2>{category}</h2>
-            <div
-              style={{
-                display: 'grid',
-                gap: '16px',
-                gridTemplateColumns: 'repeat(auto-fill, 300px)',
-              }}
-            >
+            <Text variant={TextVariant.HeadingSm} className="my-4">
+              {category}
+            </Text>
+            <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
               {sortedColorKeys.map(({ originalKey, camelCaseKey }) => {
                 const colorDetails = colors[originalKey];
                 const { value = '', description } = colorDetails || {};
@@ -122,9 +109,7 @@ export const ColorSwatchGroup: React.FC<ColorSwatchGroupProps> = ({
                       textColor={getContrastYIQ(value ?? '', theme)}
                       {...{ textBackgroundColor }}
                     />
-                    {description && (
-                      <p style={{ lineHeight: 1.3 }}>{description}</p>
-                    )}
+                    {description && <Text className="my-4">{description}</Text>}
                   </div>
                 );
               })}

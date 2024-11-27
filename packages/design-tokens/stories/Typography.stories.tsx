@@ -8,12 +8,12 @@ import { fontFamilies } from '../src/js/typography/fontFamilies';
 import { fontWeights } from '../src/js/typography/fontWeights';
 import { letterSpacing } from '../src/js/typography/letterSpacing';
 
-import { Text } from './components';
+import { Text } from '@metamask/design-system-react';
 
 import README from './Typography.mdx';
 
 export default {
-  title: 'Typography/Typography',
+  title: 'Design Tokens/Typography/Typography',
   parameters: {
     docs: {
       page: README,
@@ -158,7 +158,7 @@ export const SmallScreen: StoryFn<typeof Text> = (...args) => {
         } ${
           styles.headingSMRegular.fontSize / smallScreenFontSizeBase
         }rem`}{' '}
-        <span style={{ color: 'var(--color-error-default)' }}>DEPRECATED</span>
+        <span className="text-error-default">DEPRECATED</span>
       </Text>
       <Text as="h4" style={styles.bodyLGMedium} {...args}>
         {`S BodyLG Medium ${styles.bodyLGMedium.fontSize}px/${
@@ -327,7 +327,7 @@ export const LargeScreen: StoryFn<typeof Text> = (...args) => {
         } ${
           styles.headingSMRegular.fontSize / largeScreenFontSizeBase
         }rem`}{' '}
-        <span style={{ color: 'var(--color-error-default)' }}>DEPRECATED</span>
+        <span className="text-error-default">DEPRECATED</span>
       </Text>
       <Text as="h4" style={styles.bodyLGMedium} {...args}>
         {`L BodyLG Medium ${styles.bodyLGMedium.fontSize}px/${
@@ -531,7 +531,7 @@ export const SmallScreenCSS: StoryFn<typeof Text> = (...args) => {
               value.lineHeight,
             )}rem `}
             {title === 'HeadingSM Regular' && (
-              <span style={{ color: 'var(--color-error-default)' }}>
+              <span className="text-error-default">
                 DEPRECATED
               </span>
             )}
@@ -661,7 +661,7 @@ export const LargeScreenCSS: StoryFn<typeof Text> = (...args) => {
 
             ${getCssVar(value.fontSize)}rem/${getCssVar(value.lineHeight)}rem `}
             {title === 'HeadingSM Regular' && (
-              <span style={{ color: 'var(--color-error-default)' }}>
+              <span className="text-error-default">
                 DEPRECATED
               </span>
             )}
