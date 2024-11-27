@@ -47,6 +47,11 @@ echo "Updating TypeScript imports for React Native packages..."
 for pkg in "design-system-react-native" "design-system-twrnc-preset"; do
   if [ -d "packages/$pkg/src" ]; then
     echo "- $pkg source files"
-    find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i '' "s/@metamask\//@metamask-previews\//g" {} +
+    # Use different sed syntax for Linux vs macOS
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i '' "s/@metamask\//@metamask-previews\//g" {} +
+    else
+      find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i "s/@metamask\//@metamask-previews\//g" {} +
+    fi
   fi
 done
