@@ -3252,7 +3252,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
     "@metamask/auto-changelog": "npm:^3.4.4"
-    "@metamask/design-tokens": "npm:^4.1.0"
+    "@metamask/design-tokens": "workspace:^"
     "@testing-library/react-native": "npm:^12.8.1"
     "@types/babel__preset-env": "npm:^7"
     "@types/jest": "npm:^27.4.1"
@@ -3271,7 +3271,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/design-tokens@npm:^4.1.0, @metamask/design-tokens@workspace:^, @metamask/design-tokens@workspace:packages/design-tokens":
+"@metamask/design-tokens@workspace:^, @metamask/design-tokens@workspace:packages/design-tokens":
   version: 0.0.0-use.local
   resolution: "@metamask/design-tokens@workspace:packages/design-tokens"
   dependencies:

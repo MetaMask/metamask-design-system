@@ -46,7 +46,7 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "dependencies": {
-    "@metamask/design-tokens": "^4.1.0"
+    "@metamask/design-tokens": "workspace:^"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
