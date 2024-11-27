@@ -3202,7 +3202,6 @@ __metadata:
   resolution: "@metamask/design-system-react@workspace:packages/design-system-react"
   dependencies:
     "@metamask/auto-changelog": "npm:^3.4.4"
-    "@metamask/design-system-tailwind-preset": "workspace:^"
     "@radix-ui/react-slot": "npm:^1.1.0"
     "@storybook/react": "npm:^8.3.5"
     "@storybook/test": "npm:^8.3.5"
