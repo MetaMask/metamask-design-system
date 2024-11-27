@@ -42,3 +42,11 @@ done < <(yarn workspaces list --json | jq --slurp --raw-output 'map(select(.loca
 
 echo "Installing dependencies..."
 yarn install --no-immutable
+
+echo "Updating TypeScript imports for React Native packages..."
+for pkg in "design-system-react-native" "design-system-twrnc-preset"; do
+  if [ -d "packages/$pkg/src" ]; then
+    echo "- $pkg source files"
+    find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i '' "s/@metamask\//@metamask-previews\//g" {} +
+  fi
+done
