@@ -3,6 +3,7 @@ import '@metamask/design-tokens/src/css/index.css';
 import '../tailwind.css';
 
 import { Preview } from '@storybook/react';
+import { StoryContext, StoryFn } from '@storybook/react';
 
 export const globalTypes = {
   colorScheme: {
@@ -21,10 +22,17 @@ export const globalTypes = {
   },
 };
 
-function withColorScheme(Story, context) {
-  const { colorScheme } = context.globals;
+function withColorScheme(Story: StoryFn, context: StoryContext) {
+  const storyColorScheme = context.parameters.colorScheme;
+  const globalColorScheme = context.globals.colorScheme;
 
-  function Wrapper(props) {
+  // Use story-level parameter if available, otherwise fall back to global
+  const colorScheme = storyColorScheme || globalColorScheme;
+
+  function Wrapper({
+    children,
+    ...props
+  }: { children: React.ReactNode } & Record<string, any>) {
     return (
       <div
         {...props}
@@ -32,7 +40,9 @@ function withColorScheme(Story, context) {
           padding: '1rem',
           backgroundColor: 'var(--color-background-default)',
         }}
-      />
+      >
+        {children}
+      </div>
     );
   }
 
@@ -69,6 +79,18 @@ const preview: Preview = {
   tags: ['autodocs'],
   parameters: {
     controls: { expanded: true },
+    options: {
+      storySort: {
+        order: [
+          'Getting Started',
+          'Design Tokens',
+          'React Components',
+          'Docs Components',
+          '*', // All other stories
+        ],
+      },
+    },
+    layout: 'fullscreen', // removes default padding around stories
   },
 };
 

@@ -1,17 +1,24 @@
-# `@metamask/storybook-react`
+# Storybook React
 
-Storybook setup for React components within the MetaMask design system monorepo. It allows developers to visualize and test components in isolation, ensuring consistency and reliability across the application.
+Storybook serves as the primary documentation and development environment for the MetaMask design system, showcasing both design tokens and React components. It provides a comprehensive view of our design system's building blocks and their implementation.
 
-## Installation
+## Overview
 
-`yarn install`
+Storybook instance contains:
+
+- Design Tokens documentation from `@metamask/design-tokens`
+- React Components documentation from `@metamask/design-system-react`
 
 ## Running Storybook
 
 To start the Storybook server locally, run the following command:
 
-`yarn storybook`
+```bash
+yarn storybook
+```
 
-## Contributing
+For React Native components, please use:
 
-This package is part of a monorepo. Instructions for contributing can be found in the [monorepo README](https://github.com/MetaMask/metamask-design-system#readme).
+```bash
+yarn storybook:ios
+```

@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { lightTheme } from '../../../src';
+import { Text, TextVariant } from '@metamask/design-system-react';
 
 interface ColorSwatchProps {
   /**
@@ -39,29 +40,26 @@ export const ColorSwatch: FunctionComponent<ColorSwatchProps> = ({
 }) => {
   return (
     <div
+      className="h-[120px] flex flex-col-reverse rounded-lg border-2"
       style={{
-        height: 120,
         backgroundColor: backgroundColor ? backgroundColor : color,
-        border: `2px solid ${borderColor}`,
-        display: 'flex',
-        flexDirection: 'column-reverse',
-        borderRadius: '8px',
+        borderColor: borderColor,
       }}
       {...props}
     >
-      <div
+      <Text
+        className="p-2 rounded-b-md"
+        variant={TextVariant.BodySm}
         style={{
           backgroundColor: textBackgroundColor,
-          padding: 8,
-          borderRadius: '0 0 6px 6px',
           color: textColor,
         }}
       >
-        <strong style={{ display: 'block', marginBottom: '8px' }}>
+        <strong className="block mb-2">
           <code>{`${name}`}</code>
         </strong>
         <code>{`${color}`}</code>
-      </div>
+      </Text>
     </div>
   );
 };

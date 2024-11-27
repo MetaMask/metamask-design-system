@@ -3197,7 +3197,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/design-system-react@workspace:packages/design-system-react":
+"@metamask/design-system-react@workspace:^, @metamask/design-system-react@workspace:packages/design-system-react":
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-react@workspace:packages/design-system-react"
   dependencies:
@@ -3276,6 +3276,7 @@ __metadata:
   resolution: "@metamask/design-tokens@workspace:packages/design-tokens"
   dependencies:
     "@metamask/auto-changelog": "npm:^3.4.4"
+    "@metamask/design-system-react": "workspace:^"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
     clean-css-cli: "npm:^5.6.3"

@@ -10,7 +10,7 @@ import { ColorSwatchGroup, ColorSwatch } from './components';
 import README from './BrandColors.mdx';
 
 const meta: Meta<typeof ColorSwatchGroup> = {
-  title: 'Colors/Brand Colors',
+  title: 'Design Tokens/Color/Brand Colors',
   component: ColorSwatchGroup,
   parameters: {
     docs: {
@@ -26,8 +26,10 @@ type Story = StoryObj<typeof ColorSwatchGroup>;
 export const Figma: Story = {
   render: () => {
     const { brandColor } = useJsonColor();
-    console.log('brandColor JSON', brandColor);
     return <ColorSwatchGroup swatchData={brandColor} />;
+  },
+  parameters: {
+    colorScheme: 'light',
   },
 };
 
@@ -35,13 +37,7 @@ export const CSS: Story = {
   render: () => {
     const cssBrandColors = getCSSVariablesFromStylesheet('--brand-colors');
     return (
-      <div
-        style={{
-          display: 'grid',
-          gap: '16px',
-          gridTemplateColumns: 'repeat(auto-fill, 300px)',
-        }}
-      >
+      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
         {/* Mapping through each brand color and rendering a ColorSwatch component for it */}
         {Object.values(cssBrandColors).map(({ color, name }) => (
           <ColorSwatch
@@ -56,17 +52,14 @@ export const CSS: Story = {
       </div>
     );
   },
+  parameters: {
+    colorScheme: 'light',
+  },
 };
 
 export const JS: Story = {
   render: () => (
-    <div
-      style={{
-        display: 'grid',
-        gap: '16px',
-        gridTemplateColumns: 'repeat(auto-fill, 300px)',
-      }}
-    >
+    <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
       {/* Mapping through each brand color and rendering a ColorSwatch component for it */}
       {Object.entries(brandColorJS).map(([name, color]) => (
         <ColorSwatch
@@ -79,4 +72,7 @@ export const JS: Story = {
       ))}
     </div>
   ),
+  parameters: {
+    colorScheme: 'light',
+  },
 };
