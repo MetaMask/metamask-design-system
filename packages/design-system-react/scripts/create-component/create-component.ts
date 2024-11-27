@@ -1,52 +1,63 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
+type CreateComponentArgs = {
+  name: string;
+  description: string;
+};
+
 /**
  * Parses command-line arguments to retrieve the component name and description.
  *
+ * @param args - The command line arguments to parse
+ * @returns An object containing the parsed name and description
  * @throws Will throw an error if the required arguments are missing.
  */
-const args = process.argv.slice(2);
-const nameIndex = args.indexOf('--name');
-const descIndex = args.indexOf('--description');
+export function parseArgs(args: string[]): CreateComponentArgs {
+  const nameIndex = args.indexOf('--name');
+  const descIndex = args.indexOf('--description');
 
-if (nameIndex === -1 || descIndex === -1) {
-  console.error(
-    'Usage: yarn create-component --name ComponentName --description "Description"',
-  );
-  throw new Error(
-    'Usage: yarn create-component --name ComponentName --description "Description"',
-  );
+  if (nameIndex === -1 || descIndex === -1) {
+    throw new Error(
+      'Usage: yarn create-component --name ComponentName --description "Description"',
+    );
+  }
+
+  const componentName = args[nameIndex + 1];
+  const description = args[descIndex + 1];
+
+  if (!componentName || !description) {
+    throw new Error('Both --name and --description are required.');
+  }
+
+  return { name: componentName, description };
 }
-
-const componentName = args[nameIndex + 1];
-const description = args[descIndex + 1];
-
-if (!componentName || !description) {
-  console.error('Both --name and --description are required.');
-  throw new Error('Both --name and --description are required.');
-}
-
-// Convert folder name to lowercase
-const folderName = componentName.toLowerCase();
-
-// Define paths - Updated to reflect new structure
-const templateDir = path.join(__dirname, 'ComponentName');
-const targetDir = path.join(
-  __dirname,
-  '..',
-  '..',
-  'src',
-  'components',
-  folderName,
-);
 
 /**
  * Creates a new React component based on the provided name and description.
  *
+ * @param args - The component creation arguments
  * @throws Will throw an error if the component already exists or if there's a filesystem error.
  */
-export async function createComponent(): Promise<void> {
+export async function createComponent(
+  args: CreateComponentArgs,
+): Promise<void> {
+  const { name: componentName, description } = args;
+
+  // Convert folder name to lowercase
+  const folderName = componentName.toLowerCase();
+
+  // Define paths
+  const templateDir = path.join(__dirname, 'ComponentName');
+  const targetDir = path.join(
+    __dirname,
+    '..',
+    '..',
+    'src',
+    'components',
+    folderName,
+  );
+
   try {
     // Check if component already exists
     try {
