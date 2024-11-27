@@ -30,6 +30,11 @@ prepare-preview-manifest() {
 }
 
 echo "Preparing manifests..."
+# First, update the root package.json
+echo "- root package.json"
+prepare-preview-manifest "package.json"
+
+# Then update all workspace package.json files
 while IFS=$'\t' read -r location name; do
   echo "- $name"
   prepare-preview-manifest "$location/package.json"
