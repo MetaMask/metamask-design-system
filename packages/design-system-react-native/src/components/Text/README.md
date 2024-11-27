@@ -85,7 +85,7 @@ Available `FontStyle` options:
 - `FontStyle.Normal`
 - `FontStyle.Italic`
 
-### `twClassNames`
+### `twClassName`
 
 Optional prop to add custom `twrnc` class names for additional styling.
 
@@ -131,15 +131,15 @@ import {
 </Text>;
 
 // Adding custom Tailwind class names
-<Text twClassNames="underline">Underlined Text</Text>;
+<Text twClassName="underline">Underlined Text</Text>;
 
 // Passing additional props to the underlying Text component
 <Text numberOfLines={1} ellipsizeMode="tail">
   This is a very long text that will be truncated at the end.
 </Text>;
 
-// Using custom styles alongside twClassNames
-<Text style={{ marginVertical: 10 }} twClassNames="tracking-wide">
+// Using custom styles alongside twClassName
+<Text style={{ marginVertical: 10 }} twClassName="tracking-wide">
   Custom Styled Text
 </Text>;
 
@@ -157,7 +157,7 @@ import {
   color={TextColor.ErrorDefault}
   fontWeight={FontWeight.Bold}
   fontStyle={FontStyle.Italic}
-  twClassNames="underline text-center"
+  twClassName="underline text-center"
   numberOfLines={2}
   ellipsizeMode="tail"
 >
@@ -168,9 +168,9 @@ import {
 ## Notes
 
 - The `Text` component is designed to be flexible and works seamlessly with `twrnc` for styling.
-- When using `twClassNames`, ensure the class names are compatible with your Tailwind configuration.
+- When using `twClassName`, ensure the class names are compatible with your Tailwind configuration.
 - The `variant` prop controls the overall typography, including font size and line height.
-- Custom styles can be applied via the `style` prop, which merges with the styles generated from `twClassNames` and other props.
+- Custom styles can be applied via the `style` prop, which merges with the styles generated from `twClassName` and other props.
 
 ## Importing Types
 
