@@ -3,28 +3,31 @@ import type { ThemeColors } from '../types';
 
 export const colors: ThemeColors = {
   background: {
-    default: brandColor.grey800, // For default neutral backgrounds
-    alternative: brandColor.grey900, // For secondary neutral backgrounds.
-    defaultHover: '#313235', // For "hover" states that use background-default.
-    defaultPressed: '#3f4145', // For "pressed" states that use background-alternative.
-    alternativeHover: '#1f2123', // For "hover" states that use background-alternative.
-    alternativePressed: '#2e3033', // For "pressed" states that use background-alternative.
-    hover: '#ffffff0a', // For "hover" state that use no background fill.
-    pressed: '#ffffff14', // For "pressed" state that use no background fill.
+    default: brandColor.grey900, // For default neutral surface
+    alternative: brandColor.grey1000, // For sunken neutral surface below background/default
+    muted: brandColor.grey800, // For raised neutral surface above background/default
+    defaultHover: '#1E2124', // Hover state surface for background/default
+    defaultPressed: '#272B2F', // Pressed state surface for background/default
+    alternativeHover: '#0A0A0A', // Hover state surface for background/alternative
+    alternativePressed: '#141414', // Pressed state surface for background/alternative
+    mutedHover: '#2D3034', // Hover state surface for background/muted
+    mutedPressed: '#363B3F', // Pressed state surface for background/muted
+    hover: '#ffffff0a', // General purpose hover state tint
+    pressed: '#ffffff14', // General purpose pressed state tint
   },
   text: {
-    default: brandColor.grey000, // For default neutral text.
-    alternative: brandColor.grey200, // For softer contrast neutral text
-    muted: brandColor.grey400, // For the softest contrast neutral text (not accessible)
+    default: brandColor.grey000, // Default color for text
+    alternative: brandColor.grey300, // Softer color for text
+    muted: brandColor.grey500, // Muted color for text (Not accessible)
   },
   icon: {
-    default: brandColor.grey000, // For default neutral icons
-    alternative: brandColor.grey200, // For softer neutral icons
-    muted: brandColor.grey400, // For the weakest contrast neutral icons (not accessible)
+    default: brandColor.grey000, // Default color for icons
+    alternative: brandColor.grey300, // Softer color for icons
+    muted: brandColor.grey500, // Muted color for icons (Not accessible)
   },
   border: {
-    default: brandColor.grey400, // For soft contrast neutral border
-    muted: '#848c9629', // For the weakest  contrast neutral border
+    default: brandColor.grey500, // Default color for borders
+    muted: '#848c9629', // Muted color for borders
   },
   overlay: {
     default: '#00000099', // For the default shade of screen
