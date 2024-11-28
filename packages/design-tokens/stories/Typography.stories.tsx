@@ -531,9 +531,7 @@ export const SmallScreenCSS: StoryFn<typeof Text> = (...args) => {
               value.lineHeight,
             )}rem `}
             {title === 'HeadingSM Regular' && (
-              <span className="text-error-default">
-                DEPRECATED
-              </span>
+              <span className="text-error-default">DEPRECATED</span>
             )}
           </Text>
         );
@@ -661,9 +659,7 @@ export const LargeScreenCSS: StoryFn<typeof Text> = (...args) => {
 
             ${getCssVar(value.fontSize)}rem/${getCssVar(value.lineHeight)}rem `}
             {title === 'HeadingSM Regular' && (
-              <span className="text-error-default">
-                DEPRECATED
-              </span>
+              <span className="text-error-default">DEPRECATED</span>
             )}
           </Text>
         );
