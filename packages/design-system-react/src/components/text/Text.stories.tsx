@@ -20,6 +20,11 @@ const meta: Meta<typeof Text> = {
       page: README,
     },
   },
+  args: {
+    children: 'The quick orange fox jumped over the lazy dog.',
+    variant: TextVariant.BodyMd,
+    color: TextColor.TextDefault,
+  },
 };
 
 export default meta;

@@ -12,3 +12,7 @@ export type { TextProps } from './text';
 
 export { Button } from './button';
 export type { ButtonProps } from './button';
+
+export { Icon } from './icon';
+export { IconName, IconSize, IconColor } from './icon';
+export type { IconProps } from './icon';
