@@ -21,7 +21,7 @@ export type ThemeShadows = {
   size: ShadowSizes;
 };
 
-export interface ThemeColors {
+export type ThemeColors = {
   background: {
     /** For default neutral surface */
     default: string;
@@ -150,7 +150,7 @@ export interface ThemeColors {
     /** For critical/danger drop shadow color */
     error: string;
   };
-}
+};
 
 export type Theme = {
   colors: ThemeColors;
