@@ -14,6 +14,7 @@ const meta = {
   },
   args: {
     name: IconName.AddSquare,
+    size: IconSize.Md,
   },
   argTypes: {
     name: {
@@ -61,7 +62,6 @@ export const Default: Story = {
           item.toLowerCase().includes(search.toLowerCase().replace(' ', '_')),
       )
       .sort();
-
     return (
       <div className="space-y-4">
         <div className="flex flex-col">
@@ -94,69 +94,69 @@ export const Default: Story = {
 };
 
 export const Name: Story = {
-  render: () => (
+  render: (args) => (
     <div className="flex items-baseline gap-4">
-      <Icon name={IconName.AddSquare} />
+      <Icon {...args} />
     </div>
   ),
 };
 
 export const Size: Story = {
-  render: () => (
+  render: (args) => (
     <div className="flex items-baseline gap-4">
-      <Icon name={IconName.AddSquare} size={IconSize.Xs} />
-      <Icon name={IconName.AddSquare} size={IconSize.Sm} />
-      <Icon name={IconName.AddSquare} size={IconSize.Md} />
-      <Icon name={IconName.AddSquare} size={IconSize.Lg} />
-      <Icon name={IconName.AddSquare} size={IconSize.Xl} />
+      <Icon {...args} size={IconSize.Xs} />
+      <Icon {...args} size={IconSize.Sm} />
+      <Icon {...args} size={IconSize.Md} />
+      <Icon {...args} size={IconSize.Lg} />
+      <Icon {...args} size={IconSize.Xl} />
     </div>
   ),
 };
 
 export const Color: Story = {
-  render: () => (
+  render: (args) => (
     <div className="flex gap-4">
       <div className="bg-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.IconDefault} />
+        <Icon {...args} color={IconColor.IconDefault} />
       </div>
       <div className="bg-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.IconAlternative} />
+        <Icon {...args} color={IconColor.IconAlternative} />
       </div>
       <div className="bg-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.IconMuted} />
+        <Icon {...args} color={IconColor.IconMuted} />
       </div>
       <div className="bg-overlay-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.OverlayInverse} />
+        <Icon {...args} color={IconColor.OverlayInverse} />
       </div>
       <div className="bg-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.PrimaryDefault} />
+        <Icon {...args} color={IconColor.PrimaryDefault} />
       </div>
       <div className="bg-primary-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.PrimaryInverse} />
+        <Icon {...args} color={IconColor.PrimaryInverse} />
       </div>
       <div className="bg-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.ErrorDefault} />
+        <Icon {...args} color={IconColor.ErrorDefault} />
       </div>
       <div className="bg-error-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.ErrorInverse} />
+        <Icon {...args} color={IconColor.ErrorInverse} />
       </div>
       <div className="bg-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.SuccessDefault} />
+        <Icon {...args} color={IconColor.SuccessDefault} />
       </div>
       <div className="bg-success-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.SuccessInverse} />
+        <Icon {...args} color={IconColor.SuccessInverse} />
       </div>
       <div className="bg-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.WarningDefault} />
+        <Icon {...args} color={IconColor.WarningDefault} />
       </div>
       <div className="bg-warning-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.WarningInverse} />
+        <Icon {...args} color={IconColor.WarningInverse} />
       </div>
       <div className="bg-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.InfoDefault} />
+        <Icon {...args} color={IconColor.InfoDefault} />
       </div>
       <div className="bg-info-default p-4">
-        <Icon name={IconName.AddSquare} color={IconColor.InfoInverse} />
+        <Icon {...args} color={IconColor.InfoInverse} />
       </div>
     </div>
   ),
