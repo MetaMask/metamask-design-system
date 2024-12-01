@@ -13,8 +13,8 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn ts-bridge --project tsconfig.build.json --verbose && yarn workspace @metamask/design-system-twrnc-preset build && yarn workspace @metamask/design-system-react-native build",
-    "build:clean": "rimraf dist '**/*.tsbuildinfo' && yarn build",
+    "build": "yarn workspaces foreach --all --topological-dev run build",
+    "build:clean": "rimraf 'packages/*/dist' '**/*.tsbuildinfo' && yarn build",
     "build:types": "tsc --build tsconfig.build.json --verbose",
     "changelog:update": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:update",
     "changelog:validate": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:validate",
@@ -59,7 +59,6 @@
     "@metamask/eslint-config-nodejs": "^12.1.0",
     "@metamask/eslint-config-typescript": "^12.1.0",
     "@metamask/utils": "^9.1.0",
-    "@ts-bridge/cli": "^0.5.1",
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.191",
     "@types/node": "^16.18.54",
