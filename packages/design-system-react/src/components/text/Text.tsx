@@ -1,8 +1,10 @@
-import React from 'react';
 import { Slot } from '@radix-ui/react-slot';
+import React from 'react';
+
 import { twMerge } from '../../utils/tw-merge';
-import { TextVariant, TextProps, TextColor } from './Text.types';
 import { TEXT_CLASS_MAP, TEXT_DEFAULT_TAG_MAP } from './Text.constants';
+import type { TextProps } from './Text.types';
+import { TextVariant, TextColor } from './Text.types';
 
 export const Text: React.FC<TextProps> = ({
   variant = TextVariant.BodyMd,

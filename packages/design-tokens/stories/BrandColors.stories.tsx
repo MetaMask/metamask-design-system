@@ -1,13 +1,14 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+
 import { brandColor as brandColorJS } from '../src/js';
+import README from './BrandColors.mdx';
+import { ColorSwatchGroup, ColorSwatch } from './components';
 import {
   getCSSVariablesFromStylesheet,
   getContrastYIQ,
   useJsonColor,
 } from './test-utils';
-import { ColorSwatchGroup, ColorSwatch } from './components';
-import README from './BrandColors.mdx';
 
 const meta: Meta<typeof ColorSwatchGroup> = {
   title: 'Design Tokens/Color/Brand Colors',

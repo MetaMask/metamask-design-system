@@ -1,8 +1,10 @@
-import React, { FunctionComponent } from 'react';
-import { lightTheme } from '../../../src';
 import { Text, TextVariant } from '@metamask/design-system-react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
-interface ColorSwatchProps {
+import { lightTheme } from '../../../src';
+
+type ColorSwatchProps = {
   /**
    * The color of the swatch
    */
@@ -27,7 +29,7 @@ interface ColorSwatchProps {
    * The name of the color
    */
   name?: string;
-}
+};
 
 export const ColorSwatch: FunctionComponent<ColorSwatchProps> = ({
   color,
@@ -42,8 +44,8 @@ export const ColorSwatch: FunctionComponent<ColorSwatchProps> = ({
     <div
       className="h-[120px] flex flex-col-reverse rounded-lg border-2"
       style={{
-        backgroundColor: backgroundColor ? backgroundColor : color,
-        borderColor: borderColor,
+        backgroundColor: backgroundColor ?? color,
+        borderColor,
       }}
       {...props}
     >
@@ -56,9 +58,9 @@ export const ColorSwatch: FunctionComponent<ColorSwatchProps> = ({
         }}
       >
         <strong className="block mb-2">
-          <code>{`${name}`}</code>
+          <code>{name ?? ''}</code>
         </strong>
-        <code>{`${color}`}</code>
+        <code>{color ?? ''}</code>
       </Text>
     </div>
   );

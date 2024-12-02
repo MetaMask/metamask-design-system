@@ -36,6 +36,15 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-explicit-any': 'error',
         '@typescript-eslint/no-shadow': ['error', { allow: ['Text'] }],
+        '@typescript-eslint/consistent-type-imports': [
+          'error',
+          {
+            prefer: 'type-imports',
+            disallowTypeAnnotations: true,
+            fixStyle: 'separate-type-imports',
+          },
+        ],
+        '@typescript-eslint/no-import-type-side-effects': 'error',
       },
     },
     {

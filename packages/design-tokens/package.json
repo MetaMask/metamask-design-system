@@ -50,6 +50,7 @@
   "devDependencies": {
     "@metamask/auto-changelog": "^3.4.4",
     "@metamask/design-system-react": "workspace:^",
+    "@storybook/react": "^8.3.5",
     "@ts-bridge/cli": "^0.5.1",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
