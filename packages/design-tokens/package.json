@@ -33,13 +33,11 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "files": [
-    "dist",
     "dist/"
   ],
   "scripts": {
     "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references && yarn build:css",
     "build:css": "cleancss -o dist/styles.css src/css/index.css",
-    "build:types": "tsc --project tsconfig.build.json",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-tokens",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-tokens",
     "publish:preview": "yarn npm publish --tag preview",
@@ -52,6 +50,7 @@
   "devDependencies": {
     "@metamask/auto-changelog": "^3.4.4",
     "@metamask/design-system-react": "workspace:^",
+    "@ts-bridge/cli": "^0.5.1",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
     "clean-css-cli": "^5.6.3",

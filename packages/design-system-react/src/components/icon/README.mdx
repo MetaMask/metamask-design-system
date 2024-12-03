@@ -1,0 +1,50 @@
+import { Controls, Canvas } from '@storybook/blocks';
+import * as IconStories from './Icon.stories';
+
+# Icon
+
+Icons are read-only symbols that represent ideas or objects, offered in standard sizes.
+
+```tsx
+import { Icon, IconName } from '@metamask/design-system-react';
+
+<Icon name={IconName.AddSquare} />;
+```
+
+<Canvas of={IconStories.Default} />
+
+## Props
+
+### Name
+
+Use the `name` prop and the `IconName` enum to specify which icon to display.
+
+<Canvas of={IconStories.Name} />
+
+### Size
+
+Use the `size` prop and the `IconSize` enum to change the size of the icon.
+
+Available sizes:
+
+- `IconSize.Xs` (12px)
+- `IconSize.Sm` (16px)
+- `IconSize.Md` (20px) - Default
+- `IconSize.Lg` (24px)
+- `IconSize.Xl` (32px)
+
+<Canvas of={IconStories.Size} />
+
+### Color
+
+Use the `color` prop and the `IconColor` enum to change the color of the icon.
+
+<Canvas of={IconStories.Color} />
+
+## Component API
+
+<Controls of={IconStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
