@@ -1,8 +1,10 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
+
 import { Icon } from './Icon';
-import { IconName, IconSize, IconColor } from './Icon.types';
 import { ICON_SIZE_CLASS_MAP } from './Icon.constants';
+import { IconName, IconSize, IconColor } from './Icon.types';
+import type { IconProps } from './Icon.types';
 
 describe('Icon', () => {
   it('should render correctly', () => {
@@ -21,7 +23,7 @@ describe('Icon', () => {
           data-testid={`icon-${size}`}
         />,
       );
-      const icon = container.firstChild as HTMLElement;
+      const icon = container.firstChild;
       expect(icon).toHaveClass('inline-block');
       expect(icon).toHaveClass(ICON_SIZE_CLASS_MAP[size]);
     });
@@ -36,7 +38,7 @@ describe('Icon', () => {
           data-testid={`icon-${color}`}
         />,
       );
-      const icon = container.firstChild as HTMLElement;
+      const icon = container.firstChild;
       expect(icon).toHaveClass('inline-block');
       expect(icon).toHaveClass(color);
     });
@@ -46,14 +48,14 @@ describe('Icon', () => {
     const { container } = render(
       <Icon name={IconName.AddSquare} className="custom-class" />,
     );
-    const icon = container.firstChild as HTMLElement;
+    const icon = container.firstChild;
     expect(icon).toHaveClass('inline-block');
     expect(icon).toHaveClass('custom-class');
   });
 
   it('should have correct SVG attributes', () => {
     const { container } = render(<Icon name={IconName.AddSquare} />);
-    const svg = container.firstChild as SVGElement;
+    const svg = container.firstChild;
 
     expect(svg).toHaveAttribute('xmlns', 'http://www.w3.org/2000/svg');
     expect(svg).toHaveAttribute('viewBox', '0 0 512 512');
@@ -65,7 +67,7 @@ describe('Icon', () => {
     const { container } = render(
       <Icon name={IconName.AddSquare} style={customStyle} />,
     );
-    const icon = container.firstChild as HTMLElement;
+    const icon = container.firstChild;
     expect(icon).toHaveStyle(customStyle);
   });
 });
@@ -86,7 +88,9 @@ describe('Icon error cases', () => {
   });
 
   it('should warn and return null when name prop is missing', () => {
-    const { container } = render(<Icon {...({} as any)} />);
+    const { container } = render(
+      <Icon {...({ name: undefined } as unknown as IconProps)} />,
+    );
     expect(consoleSpy).toHaveBeenCalledWith('Icon name is required');
     expect(container.firstChild).toBeNull();
   });
