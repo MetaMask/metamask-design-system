@@ -3208,6 +3208,7 @@ __metadata:
     "@storybook/test": "npm:^8.3.5"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.0.1"
+    "@ts-bridge/cli": "npm:^0.5.1"
     "@types/jest": "npm:^27.4.1"
     "@types/react": "npm:^18.2.0"
     "@types/react-dom": "npm:^18.2.0"
@@ -3230,6 +3231,7 @@ __metadata:
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
     "@metamask/auto-changelog": "npm:^3.4.4"
+    "@ts-bridge/cli": "npm:^0.5.1"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
     deepmerge: "npm:^4.2.2"
@@ -3277,6 +3279,7 @@ __metadata:
   dependencies:
     "@metamask/auto-changelog": "npm:^3.4.4"
     "@metamask/design-system-react": "workspace:^"
+    "@ts-bridge/cli": "npm:^0.5.1"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
     clean-css-cli: "npm:^5.6.3"
@@ -3352,7 +3355,6 @@ __metadata:
     "@metamask/eslint-config-nodejs": "npm:^12.1.0"
     "@metamask/eslint-config-typescript": "npm:^12.1.0"
     "@metamask/utils": "npm:^9.1.0"
-    "@ts-bridge/cli": "npm:^0.5.1"
     "@types/jest": "npm:^27.4.1"
     "@types/lodash": "npm:^4.14.191"
     "@types/node": "npm:^16.18.54"
