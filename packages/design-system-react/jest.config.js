@@ -19,7 +19,11 @@ module.exports = merge(baseConfig, {
     'index.ts',
     '.d.ts',
     'src/components/icon/icons/',
+    'scripts/create-component/ComponentName/',
   ],
+
+  // Add test match ignore patterns
+  testPathIgnorePatterns: ['scripts/create-component/ComponentName/'],
 
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {

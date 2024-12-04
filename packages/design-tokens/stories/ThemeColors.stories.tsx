@@ -1,16 +1,16 @@
 import React from 'react';
+
 import { lightTheme as lightThemeJS, darkTheme as darkThemeJS } from '../src';
-import brandColor from '../src/figma/brandColors.json';
 import { ColorSwatch, ColorSwatchGroup } from './components';
-import README from './ThemeColors.mdx';
 import {
   getCSSVariablesFromStylesheet,
   getContrastYIQ,
   getJSColors,
   useJsonColor,
 } from './test-utils';
+import README from './ThemeColors.mdx';
 
-export default {
+const meta = {
   title: 'Design Tokens/Color/Theme Colors',
   component: ColorSwatchGroup,
   parameters: {
@@ -19,6 +19,8 @@ export default {
     },
   },
 };
+
+export default meta;
 
 export const FigmaLightTheme = {
   render: () => {

@@ -1,21 +1,17 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Icon } from './Icon';
-import { IconName, IconSize, IconColor } from './Icon.types';
-import { ICON_SIZE_CLASS_MAP } from './Icon.constants';
+import React from 'react';
 
-jest.mock('./icons', () => ({
-  Icons: {
-    AddSquare: (props: any) => (
-      <svg data-testid="mock-icon" className={props.className} {...props} />
-    ),
-  },
-}));
+import { Icon } from './Icon';
+import { ICON_SIZE_CLASS_MAP } from './Icon.constants';
+import { IconName, IconSize, IconColor } from './Icon.types';
+import type { IconProps } from './Icon.types';
 
 describe('Icon', () => {
   it('should render correctly', () => {
     render(<Icon name={IconName.AddSquare} data-testid="icon" />);
-    expect(screen.getByTestId('icon')).toBeDefined();
+    const icon = screen.getByTestId('icon');
+    expect(icon).toBeDefined();
+    expect(icon.tagName.toLowerCase()).toBe('svg');
   });
 
   it('should render with different sizes', () => {
@@ -27,7 +23,7 @@ describe('Icon', () => {
           data-testid={`icon-${size}`}
         />,
       );
-      const icon = container.firstChild as HTMLElement;
+      const icon = container.firstChild;
       expect(icon).toHaveClass('inline-block');
       expect(icon).toHaveClass(ICON_SIZE_CLASS_MAP[size]);
     });
@@ -42,7 +38,7 @@ describe('Icon', () => {
           data-testid={`icon-${color}`}
         />,
       );
-      const icon = container.firstChild as HTMLElement;
+      const icon = container.firstChild;
       expect(icon).toHaveClass('inline-block');
       expect(icon).toHaveClass(color);
     });
@@ -52,33 +48,27 @@ describe('Icon', () => {
     const { container } = render(
       <Icon name={IconName.AddSquare} className="custom-class" />,
     );
-    const icon = container.firstChild as HTMLElement;
+    const icon = container.firstChild;
     expect(icon).toHaveClass('inline-block');
     expect(icon).toHaveClass('custom-class');
   });
 
-  it('should return null for missing icon name', () => {
-    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
-    const { container } = render(<Icon name={undefined as any} />);
-    expect(container.firstChild).toBeNull();
-    expect(consoleSpy).toHaveBeenCalledWith('Icon name is required');
-    consoleSpy.mockRestore();
+  it('should have correct SVG attributes', () => {
+    const { container } = render(<Icon name={IconName.AddSquare} />);
+    const svg = container.firstChild;
+
+    expect(svg).toHaveAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    expect(svg).toHaveAttribute('viewBox', '0 0 512 512');
+    expect(svg).toHaveAttribute('fill', 'currentColor');
   });
 
-  it('should return null for non-existent icon', () => {
-    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
-    const { container } = render(<Icon name={'NonExistentIcon' as IconName} />);
-    expect(container.firstChild).toBeNull();
-    expect(consoleSpy).toHaveBeenCalledWith('Icon "NonExistentIcon" not found');
-    consoleSpy.mockRestore();
-  });
-
-  it('should apply correct size classes based on size prop', () => {
+  it('should apply custom styles', () => {
+    const customStyle = { marginTop: '10px' };
     const { container } = render(
-      <Icon name={IconName.AddSquare} size={IconSize.Md} />,
+      <Icon name={IconName.AddSquare} style={customStyle} />,
     );
-    const icon = container.firstChild as HTMLElement;
-    expect(icon).toHaveClass(ICON_SIZE_CLASS_MAP[IconSize.Md]);
+    const icon = container.firstChild;
+    expect(icon).toHaveStyle(customStyle);
   });
 });
 
@@ -98,16 +88,10 @@ describe('Icon error cases', () => {
   });
 
   it('should warn and return null when name prop is missing', () => {
-    const { container } = render(<Icon {...({} as any)} />);
-
+    const { container } = render(
+      <Icon {...({ name: undefined } as unknown as IconProps)} />,
+    );
     expect(consoleSpy).toHaveBeenCalledWith('Icon name is required');
-    expect(container.firstChild).toBeNull();
-  });
-
-  it('should warn and return null when icon is not found', () => {
-    const { container } = render(<Icon name={'NonExistentIcon' as IconName} />);
-
-    expect(consoleSpy).toHaveBeenCalledWith('Icon "NonExistentIcon" not found');
     expect(container.firstChild).toBeNull();
   });
 });

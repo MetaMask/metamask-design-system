@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { twMerge } from '../../utils/tw-merge';
+import { ICON_SIZE_CLASS_MAP } from './Icon.constants';
 import { IconSize, IconColor, IconName } from './Icon.types';
 import type { IconProps } from './Icon.types';
-import { ICON_SIZE_CLASS_MAP } from './Icon.constants';
 import { Icons } from './icons';
 
 export const Icon: React.FC<IconProps> = ({

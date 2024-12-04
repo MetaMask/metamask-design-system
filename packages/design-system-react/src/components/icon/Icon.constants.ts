@@ -6,5 +6,4 @@ export const ICON_SIZE_CLASS_MAP: Record<IconSize, string> = {
   [IconSize.Md]: 'w-5 h-5', // 20px
   [IconSize.Lg]: 'w-6 h-6', // 24px
   [IconSize.Xl]: 'w-8 h-8', // 32px
-  [IconSize.Inherit]: 'w-[1em] h-[1em] relative top-[0.125em]', // Inherits font-size
 };

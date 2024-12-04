@@ -9,9 +9,7 @@
     "emitDeclarationOnly": false
   },
   "references": [
-    {
-      "path": "../design-system-twrnc-preset/tsconfig.build.json"
-    }
+    { "path": "../design-system-twrnc-preset/tsconfig.build.json" }
   ],
   "include": ["./src"]
 }
