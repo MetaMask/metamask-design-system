@@ -219,5 +219,5 @@ export enum IconName {
   WalletCard = 'WalletCard',
   WalletMoney = 'WalletMoney',
   Warning = 'Warning',
-  Wifi = 'Wifi'
+  Wifi = 'Wifi',
 }
