@@ -1,6 +1,7 @@
+import type { SVGProps, Ref } from 'react';
 import * as React from 'react';
-import type { SVGProps } from 'react';
-import { Ref, forwardRef } from 'react';
+import { forwardRef } from 'react';
+
 const SvgMoreHorizontal = (
   props: SVGProps<SVGSVGElement>,
   ref: Ref<SVGSVGElement>,

@@ -18,7 +18,7 @@ const TYPES_FILE = path.join(__dirname, '../src/components/icon/Icon.types.ts');
  * - Maintain type safety when using icons throughout the application
  *
  * @throws {Error} If file operations fail or icon generation encounters an error
- * @returns {Promise<void>}
+ * @returns Promise that resolves when the files are generated
  */
 const generateIconsIndex = async (): Promise<void> => {
   const files = (await fs.readdir(ICONS_DIR))

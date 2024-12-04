@@ -1,6 +1,7 @@
+import type { SVGProps, Ref } from 'react';
 import * as React from 'react';
-import type { SVGProps } from 'react';
-import { Ref, forwardRef } from 'react';
+import { forwardRef } from 'react';
+
 const SvgMobile = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
