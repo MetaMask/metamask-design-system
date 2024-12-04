@@ -94,4 +94,10 @@ describe('Icon error cases', () => {
     expect(consoleSpy).toHaveBeenCalledWith('Icon name is required');
     expect(container.firstChild).toBeNull();
   });
+
+  it('should warn and return null when icon is not found', () => {
+    const { container } = render(<Icon name={'NonExistentIcon' as any} />);
+    expect(consoleSpy).toHaveBeenCalledWith('Icon "NonExistentIcon" not found');
+    expect(container.firstChild).toBeNull();
+  });
 });

@@ -18,11 +18,10 @@ describe('template', () => {
     // Verify the template contains essential parts
     expect(result).toContain("import * as React from 'react'");
     expect(result).toContain(
-      'const TestIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>)',
+      'const TestIcon = forwardRef((props: SVGProps<SVGSVGElement>, ref: React.Ref<SVGSVGElement>)',
     );
     expect(result).toContain('SVGProps<SVGSVGElement>');
     expect(result).toContain('<path d="M0 0h24v24H0z" />');
-    expect(result).toContain('const ForwardRef = forwardRef(TestIcon)');
-    expect(result).toContain('export default ForwardRef');
+    expect(result).toContain('export default TestIcon');
   });
 });

@@ -20,6 +20,7 @@ module.exports = merge(baseConfig, {
     '.d.ts',
     'src/components/icon/icons/',
     'scripts/create-component/ComponentName/',
+    'src/components/icon/template.ts',
   ],
 
   // Add test match ignore patterns
