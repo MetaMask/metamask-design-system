@@ -1,7 +1,6 @@
-import type { SVGProps, Ref } from 'react';
 import * as React from 'react';
-import { forwardRef } from 'react';
-
+import type { SVGProps } from 'react';
+import { Ref, forwardRef } from 'react';
 const SvgAddSquare = (
   props: SVGProps<SVGSVGElement>,
   ref: Ref<SVGSVGElement>,
