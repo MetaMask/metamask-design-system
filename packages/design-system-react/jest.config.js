@@ -18,7 +18,9 @@ module.exports = merge(baseConfig, {
   coveragePathIgnorePatterns: [
     'index.ts',
     '.d.ts',
+    'src/components/icon/icons/',
     'scripts/create-component/ComponentName/',
+    'src/components/icon/template.ts',
   ],
 
   // Add test match ignore patterns

@@ -3,6 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "jsx": "react",
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "types": [
       "react",
       "jest",
@@ -10,7 +12,9 @@
       "@testing-library/jest-dom",
       "node"
     ],
-    "lib": ["ES2020", "DOM"]
+    "lib": ["ES2020", "DOM"],
+    "esModuleInterop": true,
+    "allowJs": true
   },
   "references": [],
   "include": ["./src", "./src/**/*.d.ts", "scripts/**/*", "jest.setup.ts"]
