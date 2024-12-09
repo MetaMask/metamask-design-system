@@ -1,6 +1,7 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import React from 'react';
+
+import README from './README.mdx';
 import { Text } from './Text';
 import {
   TextVariant,
@@ -11,7 +12,7 @@ import {
   OverflowWrap,
   TextColor,
 } from './Text.types';
-import README from './README.mdx';
+
 const meta: Meta<typeof Text> = {
   title: 'React Components/Text',
   component: Text,
@@ -167,7 +168,13 @@ export const AsChild: Story = {
         <span>Text rendered as span</span>
       </Text>
       <Text asChild className="block">
-        <button type="button" onClick={action('button-clicked')}>
+        <button
+          type="button"
+          onClick={() => {
+            // eslint-disable-next-line no-alert, no-restricted-globals
+            alert('button-clicked');
+          }}
+        >
           Text rendered as button
         </button>
       </Text>

@@ -1,12 +1,13 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
 import { Text, TextColor } from '@metamask/design-system-react';
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+
 import README from './Shadows.mdx';
 
-interface ShadowSwatchProps {
+type ShadowSwatchProps = {
   children: React.ReactNode;
   className?: string;
-}
+};
 
 const ShadowSwatch: React.FC<ShadowSwatchProps> = ({
   children,

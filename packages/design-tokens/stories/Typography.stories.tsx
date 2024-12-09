@@ -1,26 +1,27 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { typography } from '../src/js/typography';
-
-import { fontSizes } from '../src/js/typography/fontSizes';
-import { lineHeights } from '../src/js/typography/lineHeights';
-import { fontFamilies } from '../src/js/typography/fontFamilies';
-import { fontWeights } from '../src/js/typography/fontWeights';
-import { letterSpacing } from '../src/js/typography/letterSpacing';
+/* eslint-disable no-restricted-globals */
 
 import { Text } from '@metamask/design-system-react';
+import type { StoryFn, Meta } from '@storybook/react';
+import React from 'react';
 
+import { typography } from '../src/js/typography';
+import { fontFamilies } from '../src/js/typography/fontFamilies';
+import { fontSizes } from '../src/js/typography/fontSizes';
+import { fontWeights } from '../src/js/typography/fontWeights';
+import { letterSpacing } from '../src/js/typography/letterSpacing';
+import { lineHeights } from '../src/js/typography/lineHeights';
 import README from './Typography.mdx';
 
-export default {
+const meta: Meta<typeof Text> = {
   title: 'Design Tokens/Typography/Typography',
   parameters: {
     docs: {
       page: README,
     },
   },
-} as Meta<typeof Text>;
+};
 
+export default meta;
 export const FontFamily: StoryFn<typeof Text> = (...args) => {
   const styles = {
     displayMD: {

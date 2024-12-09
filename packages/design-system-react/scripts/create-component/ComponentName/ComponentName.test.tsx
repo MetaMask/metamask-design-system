@@ -1,7 +1,7 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
+
 import { ComponentName } from './ComponentName';
-import '@testing-library/jest-dom';
 
 describe('ComponentName Component', () => {
   it('renders children correctly', () => {

@@ -3,8 +3,17 @@
   "compilerOptions": {
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "types": ["node", "jest"]
+    "jsx": "react",
+    "types": ["react", "node", "jest"],
+    "paths": {
+      "@metamask/design-system-react": ["../design-system-react/src"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.json"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.json",
+    "stories/**/*.tsx",
+    "stories/**/*.ts"
+  ],
   "references": []
 }

@@ -30,11 +30,13 @@ function resolveColorReferences(
       if (match) {
         const [colorFamily, shade] = match[1].split('.');
         if (colors[colorFamily]?.[shade]) {
-          theme[key] = colors[colorFamily][shade].value;
+          theme[key] = colors[colorFamily][shade].value.toLowerCase();
         } else if (rootTheme?.[colorFamily]?.[shade]?.value) {
-          theme[key] = rootTheme[colorFamily][shade].value;
+          theme[key] = rootTheme[colorFamily][shade].value.toLowerCase();
         }
       }
+    } else if (typeof theme[key] === 'string' && theme[key].startsWith('#')) {
+      theme[key] = theme[key].toLowerCase();
     }
   });
 }
@@ -54,9 +56,10 @@ describe('Theme Color Resolution', () => {
           .replace(/-([a-z])/gu, (_, p1) => p1.toUpperCase())
           .replace(/\s*\(strong\)\s*/gu, '');
         it(`ensures ${category}.${cleanKey} matches defined color`, () => {
-          expect((definedColors as any)[category][cleanKey]).toStrictEqual(
-            detail.value,
-          );
+          const definedColor = (definedColors as any)[category][
+            cleanKey
+          ].toLowerCase();
+          expect(definedColor).toStrictEqual(detail.value);
         });
       });
     }

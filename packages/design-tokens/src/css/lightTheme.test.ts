@@ -26,11 +26,13 @@ describe('Light Theme Colors CSS', () => {
               throw new Error(`Invalid color or shade: ${value as string}`);
             }
           } else {
-            cssValue = value;
+            cssValue = value.toLowerCase();
           }
 
           it(`should have the correct value for ${variableName}`, () => {
-            expect(lightThemeCSS).toContain(`${variableName}: ${cssValue};`);
+            expect(lightThemeCSS.toLowerCase()).toContain(
+              `${variableName}: ${cssValue};`.toLowerCase(),
+            );
           });
         }
       }

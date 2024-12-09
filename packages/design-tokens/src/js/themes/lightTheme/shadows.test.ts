@@ -7,7 +7,7 @@ const designTokens = require('../../../figma/tokens.json');
 describe('Shadows', () => {
   it('js tokens shadows.size.xs matches figma tokens shadows.xs', () => {
     expect(shadows.size.xs.shadowColor.toLowerCase()).toStrictEqual(
-      jsonLightThemeTokens.shadow.default.value,
+      jsonLightThemeTokens.shadow.default.value.toLowerCase(),
     );
 
     expect(shadows.size.xs.shadowOffset.width).toStrictEqual(
@@ -15,19 +15,19 @@ describe('Shadows', () => {
     );
 
     expect(shadows.size.xs.shadowOffset.height).toStrictEqual(
-      Number(Number(designTokens.light.shadows.xs.value.y)),
+      Number(designTokens.light.shadows.xs.value.y),
     );
 
     expect(shadows.size.xs.shadowOpacity).toBe(1);
 
     expect(shadows.size.xs.shadowRadius).toStrictEqual(
-      Number(Number(designTokens.light.shadows.xs.value.blur)),
+      Number(designTokens.light.shadows.xs.value.blur),
     );
   });
 
   it('js tokens shadows.size.sm matches figma tokens shadows.sm', () => {
     expect(shadows.size.sm.shadowColor.toLowerCase()).toStrictEqual(
-      jsonLightThemeTokens.shadow.default.value,
+      jsonLightThemeTokens.shadow.default.value.toLowerCase(),
     );
 
     expect(shadows.size.sm.shadowOffset.width).toStrictEqual(
@@ -47,7 +47,7 @@ describe('Shadows', () => {
 
   it('js tokens shadows.size.md matches figma tokens shadows.md', () => {
     expect(shadows.size.md.shadowColor.toLowerCase()).toStrictEqual(
-      jsonLightThemeTokens.shadow.default.value,
+      jsonLightThemeTokens.shadow.default.value.toLowerCase(),
     );
 
     expect(shadows.size.md.shadowOffset.width).toStrictEqual(
@@ -67,7 +67,7 @@ describe('Shadows', () => {
 
   it('js tokens shadows.size.lg matches figma tokens shadows.lg', () => {
     expect(shadows.size.lg.shadowColor.toLowerCase()).toStrictEqual(
-      jsonLightThemeTokens.shadow.default.value,
+      jsonLightThemeTokens.shadow.default.value.toLowerCase(),
     );
 
     expect(shadows.size.lg.shadowOffset.width).toStrictEqual(
