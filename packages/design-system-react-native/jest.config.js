@@ -23,6 +23,11 @@ module.exports = merge(baseConfig, {
       statements: 100,
     },
   },
+  collectCoverageFrom: [
+    '!**/*.scripts.{js,ts}', // Exclude .scripts files
+    '!**/node_modules/**', // Exclude node_modules
+    '!**/dist/**', // Exclude build outputs
+  ],
   preset: 'react-native',
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
