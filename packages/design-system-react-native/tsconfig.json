@@ -3,7 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "react-native",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   },
   "references": [
     {
