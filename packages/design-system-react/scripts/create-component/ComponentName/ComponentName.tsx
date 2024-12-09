@@ -7,7 +7,7 @@ export const ComponentName: React.FC<ComponentNameProps> = ({
   children,
   className,
 }) => {
-  const mergedClassName = twMerge('your-default-classes', className);
+  const mergedClassName = twMerge('text-default', className);
 
   return <div className={mergedClassName}>{children}</div>;
 };
