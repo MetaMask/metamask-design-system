@@ -34,6 +34,28 @@ export function parseArgs(args: string[]): CreateComponentArgs {
 }
 
 /**
+ * Updates the README.mdx code example with the correct import statement and component usage.
+ *
+ * @param content - The README content to update
+ * @param componentName - The name of the component
+ * @returns The updated README content
+ */
+function updateReadmeCodeExample(
+  content: string,
+  componentName: string,
+): string {
+  const importStatement = `import { ${componentName} } from '@metamask/design-system-react';`;
+  const componentUsage = `<${componentName} />;`;
+
+  return content
+    .replace(
+      /import \{ ComponentName \} from '@metamask\/design-system-react';/u,
+      importStatement,
+    )
+    .replace(/<ComponentName \/>;/u, componentUsage);
+}
+
+/**
  * Creates a new React component based on the provided name and description.
  *
  * @param args - The component creation arguments
@@ -76,6 +98,11 @@ export async function createComponent(
     for (const file of files) {
       const templateFilePath = path.join(templateDir, file);
       let content = await fs.readFile(templateFilePath, 'utf8');
+
+      // Special handling for README.mdx
+      if (file === 'README.mdx') {
+        content = updateReadmeCodeExample(content, componentName);
+      }
 
       // Replace placeholders in content
       content = content.replace(/ComponentName/gu, componentName);
