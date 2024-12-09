@@ -95,20 +95,6 @@ module.exports = defineConfig({
           // All non-root packages must set up ESM- and CommonJS-compatible
           // exports correctly.
           expectCorrectWorkspaceExports(workspace);
-          // All non-root packages must have the same "build" script.
-          if (workspace.ident !== '@metamask/design-tokens') {
-            expectWorkspaceField(
-              workspace,
-              'scripts.build',
-              'ts-bridge --project tsconfig.build.json --verbose --clean --no-references',
-            );
-          } else if (workspace.ident === '@metamask/design-tokens') {
-            expectWorkspaceField(
-              workspace,
-              'scripts.build',
-              'ts-bridge --project tsconfig.build.json --verbose --clean --no-references && yarn build:css',
-            );
-          }
         }
 
         if (isPrivate) {

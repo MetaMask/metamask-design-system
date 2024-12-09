@@ -25,15 +25,28 @@
  */
 function template(variables, { tpl }) {
   return tpl`
+import type { SVGProps, Ref } from 'react';
 import * as React from 'react';
-import { SVGProps, forwardRef } from 'react';
+import { forwardRef } from 'react';
 
-const ${variables.componentName} = forwardRef((props: SVGProps<SVGSVGElement>, ref: React.Ref<SVGSVGElement>) => (
-  ${variables.jsx}
-));
+const ${variables.componentName} = (
+  props: SVGProps<SVGSVGElement>,
+  ref: Ref<SVGSVGElement>,
+) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+    fill="currentColor"
+    role="img"
+    ref={ref}
+    {...props}
+  >
+    ${variables.jsx}
+  </svg>
+);
 
-${variables.componentName}.displayName = '${variables.componentName}';
-export default ${variables.componentName};
+const ForwardRef = forwardRef(${variables.componentName});
+export default ForwardRef;
 `;
 }
 

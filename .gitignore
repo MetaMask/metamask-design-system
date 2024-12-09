@@ -60,3 +60,6 @@ yarn-error.*
 
 # local env files
 .env*.local
+
+# Auto-generated icons
+packages/design-system-react/src/components/icon/icons/

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
 import { Icon } from './Icon';
@@ -15,6 +15,38 @@ const meta = {
   },
   args: {
     name: IconName.AddSquare,
+    size: IconSize.Md,
+  },
+  argTypes: {
+    name: {
+      description:
+        'Required prop to specify which icon to render from the icon set',
+      control: 'select',
+      options: Object.values(IconName),
+      table: {
+        type: { summary: 'IconName' },
+        defaultValue: { summary: 'required' },
+      },
+    },
+    size: {
+      description: 'Optional prop to control the size of the icon',
+      control: 'select',
+      options: Object.values(IconSize),
+      table: {
+        type: { summary: 'IconSize' },
+        defaultValue: { summary: 'IconSize.Md' },
+      },
+    },
+    color: {
+      description:
+        'Optional prop that sets the color of the icon using predefined theme colors',
+      control: 'select',
+      options: Object.values(IconColor),
+      table: {
+        type: { summary: 'IconColor' },
+        defaultValue: { summary: 'IconColor.IconDefault' },
+      },
+    },
   },
 };
 
