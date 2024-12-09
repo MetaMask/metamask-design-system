@@ -16,4 +16,5 @@ module.exports = {
       },
     },
   ],
+  ignorePatterns: ['src/components/icon/icons/*'], // Auto-generated icons
 };

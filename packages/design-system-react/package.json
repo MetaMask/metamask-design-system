@@ -35,10 +35,13 @@
     "dist/"
   ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "yarn generate:icons && ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
+    "clean:icons": "rimraf src/components/icon/icons",
     "create-component": "ts-node scripts/create-component",
+    "generate:icons": "yarn clean:icons && svgr --config-file src/components/icon/.svgrrc.js -d src/components/icon/icons src/components/icon/assets/*.svg && yarn generate:icons:index",
+    "generate:icons:index": "ts-node scripts/generate-icons-index.ts",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
@@ -51,10 +54,12 @@
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@metamask/auto-changelog": "^3.4.4",
     "@metamask/design-system-tailwind-preset": "workspace:^",
     "@storybook/react": "^8.3.5",
     "@storybook/test": "^8.3.5",
+    "@svgr/cli": "^8.1.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@ts-bridge/cli": "^0.5.1",
@@ -65,6 +70,7 @@
     "deepmerge": "^4.2.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "rimraf": "^5.0.5",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.1",
     "typescript": "~5.2.2"

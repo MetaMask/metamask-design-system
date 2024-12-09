@@ -88,10 +88,17 @@ describe('Icon error cases', () => {
   });
 
   it('should warn and return null when name prop is missing', () => {
-    const { container } = render(
-      <Icon {...({ name: undefined } as unknown as IconProps)} />,
-    );
+    // @ts-expect-error Testing undefined name prop
+    const { container } = render(<Icon {...({} as Partial<IconProps>)} />);
+
     expect(consoleSpy).toHaveBeenCalledWith('Icon name is required');
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('should warn and return null when icon is not found', () => {
+    const { container } = render(<Icon name={'NonExistentIcon' as IconName} />);
+
+    expect(consoleSpy).toHaveBeenCalledWith('Icon "NonExistentIcon" not found');
     expect(container.firstChild).toBeNull();
   });
 });
