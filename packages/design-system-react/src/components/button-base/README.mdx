@@ -1,28 +1,74 @@
-import { Controls, Canvas } from '@storybook/blocks';
+import { Controls, Canvas, Meta } from '@storybook/blocks';
 
 import * as ButtonBaseStories from './ButtonBase.stories';
 
+<Meta of={ButtonBaseStories} />
+
 # ButtonBase
 
-ButtonBase is used to render standardized elements within an interface.
+The ButtonBase is the base component for buttons
+
+<Canvas of={ButtonBaseStories.Default} />
 
 ```tsx
 import { ButtonBase } from '@metamask/design-system-react';
 
-<ButtonBase />;
+<ButtonBase onClick={() => {}}>Button Base</ButtonBase>;
 ```
 
-<Canvas of={ButtonBaseStories.Default} />
+### Size
 
-## Props
+ButtonBase supports three sizes: `sm`, `md`, and `lg`.
 
-### Children
+<Canvas of={ButtonBaseStories.Size} />
 
-The content of the `ButtonBase` component.
+### IsFullWidth
 
-### Class Name
+ButtonBase can be set to take up the full width of its container.
 
-Adds an additional class to the `ButtonBase` component.
+<Canvas of={ButtonBaseStories.IsFullWidth} />
+
+### StartIconName and EndIconName
+
+ButtonBase can display icons at the start and/or end of the content.
+
+#### StartIconName
+
+<Canvas of={ButtonBaseStories.StartIconName} />
+
+#### EndIconName
+
+<Canvas of={ButtonBaseStories.EndIconName} />
+
+### StartAccessory and EndAccessory
+
+ButtonBase can display custom accessories at the start and/or end of the content.
+
+#### StartAccessory
+
+<Canvas of={ButtonBaseStories.StartAccessory} />
+
+#### EndAccessory
+
+<Canvas of={ButtonBaseStories.EndAccessory} />
+
+### IsLoading
+
+ButtonBase can show a loading state with optional loading text.
+
+<Canvas of={ButtonBaseStories.IsLoading} />
+
+### IsDisabled
+
+ButtonBase can be disabled.
+
+<Canvas of={ButtonBaseStories.IsDisabled} />
+
+### AsChild
+
+ButtonBase can render as different elements using the `asChild` prop.
+
+<Canvas of={ButtonBaseStories.AsChild} />
 
 ## Component API
 
