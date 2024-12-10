@@ -18,9 +18,21 @@ import { ButtonBase } from '@metamask/design-system-react';
 
 ### Size
 
-ButtonBase supports three sizes: `sm`, `md`, and `lg`.
+ButtonBase supports three sizes:
+
+- `ButtonBaseSize.Sm` (32px)
+- `ButtonBaseSize.Md` (40px) - default
+- `ButtonBaseSize.Lg` (48px)
 
 <Canvas of={ButtonBaseStories.Size} />
+
+```tsx
+import { ButtonBase, ButtonBaseSize } from '@metamask/design-system-react';
+
+<ButtonBase size={ButtonBaseSize.Sm}>Small</ButtonBase>
+<ButtonBase size={ButtonBaseSize.Md}>Medium</ButtonBase>
+<ButtonBase size={ButtonBaseSize.Lg}>Large</ButtonBase>
+```
 
 ### IsFullWidth
 
@@ -36,9 +48,21 @@ ButtonBase can display icons at the start and/or end of the content.
 
 <Canvas of={ButtonBaseStories.StartIconName} />
 
+```tsx
+import { ButtonBase, IconName } from '@metamask/design-system-react';
+
+<ButtonBase startIconName={IconName.AddSquare}>With Start Icon</ButtonBase>;
+```
+
 #### EndIconName
 
 <Canvas of={ButtonBaseStories.EndIconName} />
+
+```tsx
+import { ButtonBase, IconName } from '@metamask/design-system-react';
+
+<ButtonBase endIconName={IconName.AddSquare}>With End Icon</ButtonBase>;
+```
 
 ### StartAccessory and EndAccessory
 
