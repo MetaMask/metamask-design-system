@@ -120,16 +120,6 @@ export const IsFullWidth: Story = {
   },
 };
 
-export const AsChild: Story = {
-  render: (args) => (
-    <ButtonBase {...args} asChild>
-      <a href="#" target="_blank" rel="noopener noreferrer">
-        Custom Anchor Link
-      </a>
-    </ButtonBase>
-  ),
-};
-
 export const StartIconName: Story = {
   args: {
     children: 'With Start Icon',
@@ -171,4 +161,14 @@ export const IsDisabled: Story = {
     children: 'Disabled Button',
     isDisabled: true,
   },
+};
+
+export const AsChild: Story = {
+  render: (args) => (
+    <ButtonBase {...args} asChild>
+      <a href="#" target="_blank" rel="noopener noreferrer">
+        Custom Anchor Link
+      </a>
+    </ButtonBase>
+  ),
 };
