@@ -7,20 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Uncategorized
-
-- feat: color updates to the design tokens package ([#230](https://github.com/metamask/metamask-design-system/pull/230))
-- chore: linting fixes ([#261](https://github.com/metamask/metamask-design-system/pull/261))
-- feat: initial icon component that renders a basic svg ([#260](https://github.com/metamask/metamask-design-system/pull/260))
-- fix: build system improvements for package-level scripts ([#263](https://github.com/metamask/metamask-design-system/pull/263))
-- chore: fixes get css variables from stylesheet utility ([#156](https://github.com/metamask/metamask-design-system/pull/156))
-- chore: design token storybook fixes ([#155](https://github.com/metamask/metamask-design-system/pull/155))
-- chore: removing unused typedoc ([#135](https://github.com/metamask/metamask-design-system/pull/135))
-- feat: move design tokens in to packages directory ([#128](https://github.com/metamask/metamask-design-system/pull/128))
+## [4.2.0]
 
 ### Added
 
-- Migrate `@metamask/design-tokens` into the design system monorepo ([128](https://github.com/MetaMask/metamask-design-system/pull/128))
+- feat: color updates to the design tokens package ([#230](https://github.com/metamask/metamask-design-system/pull/230))
+
+- `@metamask/design-tokens` package migrated from standalone repository into the design system monorepo ([128](https://github.com/MetaMask/metamask-design-system/pull/128))
 
 ## [4.1.0]
 
@@ -323,42 +316,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-- Initial release.
-
-[Unreleased]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@4.1.0...HEAD
-[4.1.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@4.0.0...@metamask/design-tokens@4.1.0
-[4.0.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@3.0.0...@metamask/design-tokens@4.0.0
-[3.0.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@2.1.1...@metamask/design-tokens@3.0.0
-[2.1.1]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@2.1.0...@metamask/design-tokens@2.1.1
-[2.1.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@2.0.3...@metamask/design-tokens@2.1.0
-[2.0.3]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@2.0.2...@metamask/design-tokens@2.0.3
-[2.0.2]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@2.0.1...@metamask/design-tokens@2.0.2
-[2.0.1]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@2.0.0...@metamask/design-tokens@2.0.1
-[2.0.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.13.0...@metamask/design-tokens@2.0.0
-[1.13.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.12.0...@metamask/design-tokens@1.13.0
-[1.12.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.11.1...@metamask/design-tokens@1.12.0
-[1.11.1]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.11.0...@metamask/design-tokens@1.11.1
-[1.11.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.10.0...@metamask/design-tokens@1.11.0
-[1.10.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.9.1...@metamask/design-tokens@1.10.0
-[1.9.1]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.9.0...@metamask/design-tokens@1.9.1
-[1.9.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.8.0...@metamask/design-tokens@1.9.0
-[1.8.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.7.0...@metamask/design-tokens@1.8.0
-[1.7.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.6.5...@metamask/design-tokens@1.7.0
-[1.6.5]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.6.4...@metamask/design-tokens@1.6.5
-[1.6.4]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.6.3...@metamask/design-tokens@1.6.4
-[1.6.3]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.6.2...@metamask/design-tokens@1.6.3
-[1.6.2]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.6.1...@metamask/design-tokens@1.6.2
-[1.6.1]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.6.0...@metamask/design-tokens@1.6.1
-[1.6.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.5.1...@metamask/design-tokens@1.6.0
-[1.5.1]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.5.0...@metamask/design-tokens@1.5.1
-[1.5.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.4.4...@metamask/design-tokens@1.5.0
-[1.4.4]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.4.3...@metamask/design-tokens@1.4.4
-[1.4.3]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.4.2...@metamask/design-tokens@1.4.3
-[1.4.2]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.4.1...@metamask/design-tokens@1.4.2
-[1.4.1]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.4.0...@metamask/design-tokens@1.4.1
-[1.4.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.3.1...@metamask/design-tokens@1.4.0
-[1.3.1]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.3.0...@metamask/design-tokens@1.3.1
-[1.3.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.2.0...@metamask/design-tokens@1.3.0
-[1.2.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.1.0...@metamask/design-tokens@1.2.0
-[1.1.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@1.0.0...@metamask/design-tokens@1.1.0
-[1.0.0]: https://github.com/metamask/metamask-design-system/releases/tag/@metamask/design-tokens@1.0.0
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.2.0...HEAD
+[4.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.1.0...@metamask/design-tokens@4.2.0
+[4.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.0.0...@metamask/design-tokens@4.1.0
+[4.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@3.0.0...@metamask/design-tokens@4.0.0
+[3.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@2.1.1...@metamask/design-tokens@3.0.0
+[2.1.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@2.1.0...@metamask/design-tokens@2.1.1
+[2.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@2.0.3...@metamask/design-tokens@2.1.0
+[2.0.3]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@2.0.2...@metamask/design-tokens@2.0.3
+[2.0.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@2.0.1...@metamask/design-tokens@2.0.2
+[2.0.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@2.0.0...@metamask/design-tokens@2.0.1
+[2.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.13.0...@metamask/design-tokens@2.0.0
+[1.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.12.0...@metamask/design-tokens@1.13.0
+[1.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.11.1...@metamask/design-tokens@1.12.0
+[1.11.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.11.0...@metamask/design-tokens@1.11.1
+[1.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.10.0...@metamask/design-tokens@1.11.0
+[1.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.9.1...@metamask/design-tokens@1.10.0
+[1.9.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.9.0...@metamask/design-tokens@1.9.1
+[1.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.8.0...@metamask/design-tokens@1.9.0
+[1.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.7.0...@metamask/design-tokens@1.8.0
+[1.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.6.5...@metamask/design-tokens@1.7.0
+[1.6.5]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.6.4...@metamask/design-tokens@1.6.5
+[1.6.4]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.6.3...@metamask/design-tokens@1.6.4
+[1.6.3]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.6.2...@metamask/design-tokens@1.6.3
+[1.6.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.6.1...@metamask/design-tokens@1.6.2
+[1.6.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.6.0...@metamask/design-tokens@1.6.1
+[1.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.5.1...@metamask/design-tokens@1.6.0
+[1.5.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.5.0...@metamask/design-tokens@1.5.1
+[1.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.4.4...@metamask/design-tokens@1.5.0
+[1.4.4]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.4.3...@metamask/design-tokens@1.4.4
+[1.4.3]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.4.2...@metamask/design-tokens@1.4.3
+[1.4.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.4.1...@metamask/design-tokens@1.4.2
+[1.4.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.4.0...@metamask/design-tokens@1.4.1
+[1.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.3.1...@metamask/design-tokens@1.4.0
+[1.3.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.3.0...@metamask/design-tokens@1.3.1
+[1.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.2.0...@metamask/design-tokens@1.3.0
+[1.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.1.0...@metamask/design-tokens@1.2.0
+[1.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@1.0.0...@metamask/design-tokens@1.1.0
+[1.0.0]: https://github.com/MetaMask/metamask-design-system/releases/tag/@metamask/design-tokens@1.0.0
