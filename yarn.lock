@@ -3360,7 +3360,7 @@ __metadata:
     "@metamask/eslint-config-jest": "npm:^12.1.0"
     "@metamask/eslint-config-nodejs": "npm:^12.1.0"
     "@metamask/eslint-config-typescript": "npm:^12.1.0"
-    "@metamask/utils": "npm:^11.0.0"
+    "@metamask/utils": "npm:^11.0.1"
     "@types/jest": "npm:^27.4.1"
     "@types/lodash": "npm:^4.14.191"
     "@types/node": "npm:^16.18.54"
@@ -3469,9 +3469,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/utils@npm:^11.0.0":
-  version: 11.0.0
-  resolution: "@metamask/utils@npm:11.0.0"
+"@metamask/utils@npm:^11.0.1":
+  version: 11.0.1
+  resolution: "@metamask/utils@npm:11.0.1"
   dependencies:
     "@ethereumjs/tx": "npm:^4.2.0"
     "@metamask/superstruct": "npm:^3.1.0"
@@ -3482,7 +3482,7 @@ __metadata:
     pony-cause: "npm:^2.1.10"
     semver: "npm:^7.5.4"
     uuid: "npm:^9.0.1"
-  checksum: 10/a836fcbbc1e88af9c514f643bf5c6b85a9c9f433a6f43184e3c8e8d464390c6eafd788737904564c86b4ac81c4d3e0f070408ce6ae5b71f6abbd59a94f6137de
+  checksum: 10/3949d16c8021bfb5f70e3b1c99f097ffaf43158116734197b039b32be6aabecb12178deb62c0b182e45295b0865618636324020059821c5b053029d8bdc90d70
   languageName: node
   linkType: hard
 
