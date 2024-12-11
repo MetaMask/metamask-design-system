@@ -70,6 +70,71 @@ describe('Icon', () => {
     const icon = container.firstChild;
     expect(icon).toHaveStyle(customStyle);
   });
+
+  describe('className overrides', () => {
+    it('should allow className to override color prop', () => {
+      const { container } = render(
+        <Icon
+          name={IconName.AddSquare}
+          color={IconColor.IconDefault}
+          className="text-inherit text-lg"
+        />,
+      );
+      const icon = container.firstChild;
+
+      // Verify the custom class is present
+      expect(icon).toHaveClass('text-inherit');
+
+      // Verify the default color class is not present
+      expect(icon).not.toHaveClass(IconColor.IconDefault);
+    });
+
+    it('should allow className to override size prop', () => {
+      const { container } = render(
+        <Icon
+          name={IconName.AddSquare}
+          size={IconSize.Md}
+          className="w-10 h-10"
+        />,
+      );
+      const icon = container.firstChild;
+
+      // Verify the custom size classes are present
+      expect(icon).toHaveClass('w-10');
+      expect(icon).toHaveClass('h-10');
+
+      // Verify the default size classes are not present
+      const defaultSizeClasses = ICON_SIZE_CLASS_MAP[IconSize.Md].split(' ');
+      defaultSizeClasses.forEach((className) => {
+        expect(icon).not.toHaveClass(className);
+      });
+    });
+
+    it('should allow className to override both color and size props', () => {
+      const { container } = render(
+        <Icon
+          name={IconName.AddSquare}
+          color={IconColor.IconDefault}
+          size={IconSize.Md}
+          className="text-inherit w-10 h-10"
+        />,
+      );
+      const icon = container.firstChild;
+
+      // Verify custom classes are present
+      expect(icon).toHaveClass('text-inherit');
+      expect(icon).toHaveClass('w-10');
+      expect(icon).toHaveClass('h-10');
+
+      // Verify default classes are not present
+      expect(icon).not.toHaveClass(IconColor.IconDefault);
+
+      const defaultSizeClasses = ICON_SIZE_CLASS_MAP[IconSize.Md].split(' ');
+      defaultSizeClasses.forEach((className) => {
+        expect(icon).not.toHaveClass(className);
+      });
+    });
+  });
 });
 
 describe('Icon error cases', () => {
