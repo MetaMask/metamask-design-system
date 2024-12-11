@@ -182,7 +182,7 @@ import {
   TextColor,
   FontWeight,
   FontStyle,
-} from '@metamask/design-system-react-native/lib/components/Text/Text.types';
+} from '@metamask/design-system-react-native/';
 ```
 
 ## Accessibility

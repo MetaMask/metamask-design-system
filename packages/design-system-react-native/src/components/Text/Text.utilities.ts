@@ -23,7 +23,7 @@ import { FontWeight, FontStyle } from './Text.types';
  *
  * Example:
  * ```
- * const classNames = generateClassNames({
+ * const classNames = generateTextClassNames({
  *   variant: TextVariant.BodyMd,
  *   color: TextColor.PrimaryDefault,
  *   fontWeight: FontWeight.Bold,
