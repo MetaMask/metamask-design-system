@@ -3178,9 +3178,10 @@ __metadata:
     react: "npm:^18.2.0"
     react-native: "npm:^0.72.15"
     react-native-svg: "npm:^15.10.1"
+    react-native-svg-transformer: "npm:^1.5.0"
     react-test-renderer: "npm:^18.3.1"
     ts-jest: "npm:^29.2.5"
-    ts-node: "npm:^10.9.2"
+    ts-node: "npm:^10.9.1"
     typescript: "npm:~5.2.2"
   languageName: unknown
   linkType: soft
@@ -20072,7 +20073,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.9.1, ts-node@npm:^10.9.2":
+"ts-node@npm:^10.9.1":
   version: 10.9.2
   resolution: "ts-node@npm:10.9.2"
   dependencies:

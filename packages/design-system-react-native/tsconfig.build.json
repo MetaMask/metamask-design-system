@@ -11,5 +11,5 @@
   "references": [
     { "path": "../design-system-twrnc-preset/tsconfig.build.json" }
   ],
-  "include": ["./src"]
+  "include": ["./src", "global.d.ts"]
 }
