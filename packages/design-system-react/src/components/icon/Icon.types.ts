@@ -19,6 +19,14 @@ export type IconProps = SVGProps<SVGElementProps> & {
    * @default IconColor.IconDefault
    */
   color?: IconColor;
+  /**
+   * Optional prop to add a class to the icon
+   */
+  className?: string;
+  /**
+   * Optional prop to add a test id to the icon
+   */
+  'data-testid'?: string;
 };
 
 export enum IconSize {
