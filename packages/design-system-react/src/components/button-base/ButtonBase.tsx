@@ -37,7 +37,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       <span>
         <Icon
           name={IconName.Loading}
-          className="animate-spin mr-2"
+          className="animate-spin mr-2 text-inherit"
           {...loadingIconProps}
         />
         {loadingText ?? children}
@@ -53,7 +53,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
         );
       }
       if (startAccessory) {
-        return <span className="mr-2">{startAccessory}</span>;
+        return <span className="mr-2 ">{startAccessory}</span>;
       }
       return null;
     };
@@ -62,7 +62,13 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
     // Can be either an icon or a custom accessory element
     const renderEndContent = () => {
       if (endIconName) {
-        return <Icon name={endIconName} className="ml-2" {...endIconProps} />;
+        return (
+          <Icon
+            name={endIconName}
+            className="ml-2 text-inherit"
+            {...endIconProps}
+          />
+        );
       }
       if (endAccessory) {
         return <span className="ml-2">{endAccessory}</span>;
