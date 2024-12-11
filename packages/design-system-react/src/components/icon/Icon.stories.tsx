@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import type { StoryObj } from '@storybook/react';
+import React, { useState } from 'react';
+
 import { Icon } from './Icon';
 import { IconName, IconSize, IconColor } from './Icon.types';
 import README from './README.mdx';
@@ -80,7 +81,11 @@ export const Default: Story = {
               key={iconKey}
               className="flex flex-col items-center justify-center p-4 border rounded"
             >
-              <Icon className="mb-2" {...args} />
+              <Icon
+                className="mb-2"
+                {...args}
+                name={IconName[iconKey as keyof typeof IconName]}
+              />
               <div className="text-xs text-center">{iconKey}</div>
             </div>
           ))}

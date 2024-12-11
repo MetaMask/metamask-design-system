@@ -3,76 +3,131 @@ import type { ThemeColors } from '../types';
 
 export const colors: ThemeColors = {
   background: {
-    default: brandColor.grey000, // For default neutral backgrounds
-    alternative: brandColor.grey050, // For secondary neutral backgrounds.
-    defaultHover: '#f5f5f5', // For "hover" states that use background-default.
-    defaultPressed: '#ebebeb', // For "pressed" states that use background-alternative.
-    alternativeHover: '#e7ebee', // For "hover" states that use background-alternative.
-    alternativePressed: '#dbe0e6', // For "pressed" states that use background-alternative.
-    hover: '#0000000a', // For "hover" state that use no background fill.
-    pressed: '#00000014', // For "pressed" state that use no background fill.
+    /** For default neutral surface (#FFFFFF) */
+    default: brandColor.grey000,
+    /** For sunken neutral surface below background/default (#F2F4F6) */
+    alternative: brandColor.grey050,
+    /** For raised neutral surface above background/default (#F2F4F6) */
+    muted: brandColor.grey050,
+    /** Hover state surface for background/default (#F5F5F5) */
+    defaultHover: '#F5F5F5',
+    /** Pressed state surface for background/default (#EBEBEB) */
+    defaultPressed: '#EBEBEB',
+    /** Hover state surface for background/alternative (#E7EBEE) */
+    alternativeHover: '#E7EBEE',
+    /** Pressed state surface for background/alternative (#DBE0E6) */
+    alternativePressed: '#DBE0E6',
+    /** Hover state surface for background/muted (#E7EBEE) */
+    mutedHover: '#E7EBEE',
+    /** Pressed state surface for background/muted (#DBE0E6) */
+    mutedPressed: '#DBE0E6',
+    /** General purpose hover state tint (#0000000A) */
+    hover: '#0000000A',
+    /** General purpose pressed state tint (#00000014) */
+    pressed: '#00000014',
   },
   text: {
-    default: brandColor.grey900, // For default neutral text.
-    alternative: brandColor.grey500, // For softer contrast neutral text
-    muted: brandColor.grey300, // For the softest contrast neutral text (not accessible)
+    /** Default color for text (#24272A) */
+    default: brandColor.grey900,
+    /** Softer color for text (#848C96) */
+    alternative: brandColor.grey500,
+    /** Muted color for text (Not accessible) (#BBC0C5) */
+    muted: brandColor.grey300,
   },
   icon: {
-    default: brandColor.grey900, // For default neutral icons
-    alternative: brandColor.grey500, // For softer neutral icons
-    muted: brandColor.grey300, // For the weakest contrast neutral icons (not accessible)
+    /** Default color for icons (#24272A) */
+    default: brandColor.grey900,
+    /** Softer color for icons (#848C96) */
+    alternative: brandColor.grey500,
+    /** Muted color for icons (Not accessible) (#BBC0C5) */
+    muted: brandColor.grey300,
   },
   border: {
-    default: brandColor.grey200, // For soft contrast neutral border
-    muted: '#bbc0c566', // For the weakest  contrast neutral border
+    /** Default color for borders (#9FA6AE) */
+    default: brandColor.grey400,
+    /** Muted color for borders (#BBC0C566) */
+    muted: '#BBC0C566',
   },
   overlay: {
-    default: '#00000099', // For the default shade of screen
-    alternative: '#000000cc', // For a stronger shade of screen
-    inverse: brandColor.grey000, // For elements used on top of overlay/alternative. Used for text, icon or border
+    /** Default color for overlays(scrim) (#00000099) */
+    default: '#00000099',
+    /** Dimmer color for overlays(scrim) (#000000CC) */
+    alternative: '#000000CC',
+    /** For elements placed on top of overlay/alternative (#FFFFFF) */
+    inverse: brandColor.grey000,
   },
   primary: {
-    default: brandColor.blue500, // For interactive, active, and selected semantics. Used for text, background, icon or border
-    alternative: brandColor.blue600, // For the stronger contrast primary semantic elements.
-    muted: '#0376c91a', // For the weakest contrast primary semantic backgrounds.
-    inverse: brandColor.grey000, // For elements used on top of primary/default. Used for text, icon or border
-    defaultHover: '#036ab5', // For the "hover" state of primary-default elements
-    defaultPressed: '#025ea1', // For the "pressed" state of primary-default elements
+    /** For primary semantic elements: interactive, active, selected... (#0376C9) */
+    default: brandColor.blue500,
+    /** Stronger color for primary semantic elements (#0260A4) */
+    alternative: brandColor.blue600,
+    /** Muted color for primary semantic elements (#0376C91A) */
+    muted: '#0376C91A',
+    /** For elements placed on top of primary/default fill (#FFFFFF) */
+    inverse: brandColor.grey000,
+    /** Hover state surface for primary/default (#036AB5) */
+    defaultHover: '#036AB5',
+    /** Pressed state surface for primary/default (#025EA1) */
+    defaultPressed: '#025EA1',
   },
   error: {
-    default: brandColor.red500, // For the critical alert semantic elements. Used for text, background, icon or border
-    alternative: brandColor.red600, // For the stronger contrast error semantic elements.
-    muted: '#d738471a', // For the weakest contrast critical alert semantic backgrounds.
-    inverse: brandColor.grey000, // For elements used on top of error/default. Used for text, icon or border
-    defaultHover: '#d02a3a', // For the "hover" state of error-default elements.
-    defaultPressed: '#bf2635', // For the "pressed" state of error-default elements.
+    /** For danger semantic elements: error, critical, destructive... (#D73847) */
+    default: brandColor.red500,
+    /** Stronger color for danger semantic (#B92534) */
+    alternative: brandColor.red600,
+    /** Muted color for danger semantic (#D738471A) */
+    muted: '#D738471A',
+    /** For elements placed on top of error/default fill (#FFFFFF) */
+    inverse: brandColor.grey000,
+    /** Hover state surface for error/default (#D02A3A) */
+    defaultHover: '#D02A3A',
+    /** Pressed state surface for error/default (#BF2635) */
+    defaultPressed: '#BF2635',
   },
   warning: {
-    default: brandColor.yellow500, // For the caution alert semantic elements. Used for text, background, icon or border
-    muted: '#bf52081a', // For the weakest contrast caution alert semantic backgrounds.
-    inverse: brandColor.grey000, // For elements used on top of warning/default. Used for text, icon or border
-    defaultHover: '#ac4a07', // For the "hover" state of warning-default elements
-    defaultPressed: '#984106', // For the "pressed" state of warning-default elements
+    /** For warning semantic elements: caution, attention, precaution... (#BF5208) */
+    default: brandColor.yellow500,
+    /** Muted color option for warning semantic (#BF52081A) */
+    muted: '#BF52081A',
+    /** For elements placed on top of warning/default fill (#FFFFFF) */
+    inverse: brandColor.grey000,
+    /** Hover state surface for warning/default (#AC4A07) */
+    defaultHover: '#AC4A07',
+    /** Pressed state surface for warning/default (#984106) */
+    defaultPressed: '#984106',
   },
   success: {
-    default: brandColor.green500, // For the positive semantic elements. Used for text, background, icon or border
-    muted: '#1c82341a', // For the weakest contrast positive semantic backgrounds.
-    inverse: brandColor.grey000, // For elements used on top of success/default. Used for text, icon or border
-    defaultHover: '#18712d', // For the "hover" state of success-default elements
-    defaultPressed: '#156127', // For the "pressed" state of success-default elements
+    /** For positive semantic elements: success, confirm, complete, safe... (#1C8234) */
+    default: brandColor.green500,
+    /** Muted color for positive semantic (#1C82341A) */
+    muted: '#1C82341A',
+    /** For elements placed on top of success/default fill (#FFFFFF) */
+    inverse: brandColor.grey000,
+    /** Hover state surface for success/default (#18712D) */
+    defaultHover: '#18712D',
+    /** Pressed state surface for success/default (#156127) */
+    defaultPressed: '#156127',
   },
   info: {
-    default: brandColor.blue500, // For informational read-only elements. Used for text, background, icon or border
-    muted: '#0376c91a', // For the weakest contrast informational semantic backgrounds.
-    inverse: brandColor.grey000, // For elements used on top of info/default. Used for text, icon or border
+    /** For soft alert semantic elements: info, reminder, hint... (#0376C9) */
+    default: brandColor.blue500,
+    /** Muted color for soft alert semantic (#0376C91A) */
+    muted: '#0376C91A',
+    /** For elements placed on top of info/default fill (#FFFFFF) */
+    inverse: brandColor.grey000,
   },
   flask: {
-    default: brandColor.purple500, // For Flask primary accent color.
-    inverse: brandColor.grey000, // For elements used on top of flask/default. Used for text, icon or border
+    /** For Flask primary accent color (#6F4CFF) */
+    default: brandColor.purple500,
+    /** For elements placed on top of flask/default (#FFFFFF) */
+    inverse: brandColor.grey000,
   },
   shadow: {
-    default: '#0000001a', // For neutral drop shadow color.
-    primary: '#0376c933', // For primary drop shadow color.
-    error: '#ca354266', // For critical/danger drop shadow color.
+    /** For neutral drop shadow color (#0000001A) */
+    default: '#0000001A',
+    /** For primary drop shadow color (#0376C933) */
+    primary: '#0376C933',
+    /** For critical/danger drop shadow color (#CA354266) */
+    error: '#CA354266',
   },
 };

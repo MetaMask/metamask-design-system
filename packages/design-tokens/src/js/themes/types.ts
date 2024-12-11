@@ -23,224 +23,132 @@ export type ThemeShadows = {
 
 export type ThemeColors = {
   background: {
-    /**
-     * {string} background.default - For default neutral backgrounds
-     */
+    /** For default neutral surface */
     default: string;
-    /**
-     * {string} background.defaultHover - For component hover states that use background/default
-     */
-    defaultHover: string;
-    /**
-     * {string} background.defaultPressed - For component pressed states that use background/default.
-     */
-    defaultPressed: string;
-    /**
-     * {string} background.alternative - For a subtle contrast option for neutral backgrounds. (Example: backdrop, header background)
-     */
+    /** For sunken neutral surface below background/default */
     alternative: string;
-    /**
-     * {string} background.alternativeHover - For component hover states that use background/alternative
-     */
+    /** For raised neutral surface above background/default */
+    muted: string;
+    /** Hover state surface for background/default */
+    defaultHover: string;
+    /** Pressed state surface for background/default */
+    defaultPressed: string;
+    /** Hover state surface for background/alternative */
     alternativeHover: string;
-    /**
-     * {string} background.alternativePressed - For component pressed states that use background/alternative
-     */
+    /** Pressed state surface for background/alternative */
     alternativePressed: string;
-    /**
-     * {string} background.hover - For component hover states that don't have a background color
-     */
+    /** Hover state surface for background/muted */
+    mutedHover: string;
+    /** Pressed state surface for background/muted */
+    mutedPressed: string;
+    /** General purpose hover state tint */
     hover: string;
-    /**
-     * {string} background.pressed - For component pressed states that don't have a background color
-     */
+    /** General purpose pressed state tint */
     pressed: string;
   };
   text: {
-    /**
-     * {string} text.default - For general text that takes main priority in the information hierarchy
-     */
+    /** Default color for text */
     default: string;
-    /**
-     * {string} text.alternative - For a weaker contrast option for neutral text
-     */
+    /** Softer color for text */
     alternative: string;
-    /**
-     * {string} text.muted - For inactive or lowest priority text. (Example: placeholder)
-     */
+    /** Muted color for text (Not accessible) */
     muted: string;
   };
   icon: {
-    /**
-     * {string} icon.default - For default neutral icons
-     */
+    /** Default color for icons */
     default: string;
-    /**
-     * {string} icon.alternative - For a weaker contrast option for neutral icons
-     */
+    /** Softer color for icons */
     alternative: string;
-    /**
-     * {string} icon.muted - For inactive or lowest priority icons
-     */
+    /** Muted color for icons (Not accessible) */
     muted: string;
   };
   border: {
-    /**
-     * {string} border.default - For default neutral borders with visible contrast. (Example: text inputs)
-     */
+    /** Default color for borders */
     default: string;
-    /**
-     * {string} border.muted - For a weaker contrast option for neutral borders.
-     */
+    /** Muted color for borders */
     muted: string;
   };
   overlay: {
-    /**
-     * {string} overlay.default - For shading layers behind modality screens
-     */
+    /** Default color for overlays(scrim) */
     default: string;
-    /**
-     * {string} overlay.alternative - For a stronger shade of screen
-     */
+    /** Dimmer color for overlays(scrim) */
     alternative: string;
-    /**
-     * {string} overlay.inverse - For elements used on top of overlay/alternative. Used for text, icon or border
-     */
+    /** For elements placed on top of overlay/alternative */
     inverse: string;
-  };
-  shadow: {
-    /**
-     * {string} shadow.default - For neutral drop shadow color.
-     */
-    default: string;
-    /**
-     * {string} shadow.primary - For primary drop shadow color.
-     */
-    primary: string;
-    /**
-     * {string} shadow.default - For critical/danger drop shadow color.
-     */
-    error: string;
   };
   primary: {
-    /**
-     * {string} primary.default - For primary user action related elements
-     */
+    /** For primary semantic elements: interactive, active, selected... */
     default: string;
-    /**
-     * {string} defaultHover - For the "hover" state of interactive elements
-     */
-    defaultHover: string;
-    /**
-     * {string} defaultPressed - For the "pressed" state of interactive elements
-     */
-    defaultPressed: string;
-    /**
-     * {string} primary.alternative - For the \"pressed\" state of interactive primary elements
-     */
+    /** Stronger color for primary semantic elements */
     alternative: string;
-    /**
-     * {string} primary.muted - For lowest contrast background used in primary elements
-     */
+    /** Muted color for primary semantic elements */
     muted: string;
-    /**
-     * {string} primary.inverse - For elements used on top of primary/default. (Example: label of primary button, check in a checkbox)disabled state
-     */
+    /** For elements placed on top of primary/default fill */
     inverse: string;
+    /** Hover state surface for primary/default */
+    defaultHover: string;
+    /** Pressed state surface for primary/default */
+    defaultPressed: string;
   };
   error: {
-    /**
-     * {string} error.default - For high-level alert danger/critical elements. Used for text, background, icon or border
-     */
+    /** For danger semantic elements: error, critical, destructive... */
     default: string;
-    /**
-     * {string} defaultHover - For the "hover" state of interactive elements
-     */
-    defaultHover: string;
-    /**
-     * {string} defaultPressed - For the "pressed" state of interactive elements
-     */
-    defaultPressed: string;
-    /**
-     * {string} error.alternative - For the \"pressed\" state of interactive danger/critical elements
-     */
+    /** Stronger color for danger semantic */
     alternative: string;
-    /**
-     * {string} error.muted - For lowest contrast background used in high-level alert danger/critical elements. (Example: notification background)
-     */
+    /** Muted color for danger semantic */
     muted: string;
-    /**
-     * {string} error.inverse - For elements used on top of error/default (Example: label of danger/critical button)
-     */
+    /** For elements placed on top of error/default fill */
     inverse: string;
+    /** Hover state surface for error/default */
+    defaultHover: string;
+    /** Pressed state surface for error/default */
+    defaultPressed: string;
   };
   warning: {
-    /**
-     * {string} warning.muted - For lowest contrast background used in warning elements. (Example: notification background)
-     */
+    /** For warning semantic elements: caution, attention, precaution... */
     default: string;
-    /**
-     * {string} defaultHover - For the "hover" state of interactive elements
-     */
-    defaultHover: string;
-    /**
-     * {string} defaultPressed - For the "pressed" state of interactive elements
-     */
-    defaultPressed: string;
-    /**
-     * {string} warning.muted - For lowest contrast background used in warning elements. (Example: notification background)
-     */
+    /** Muted color option for warning semantic */
     muted: string;
-    /**
-     * {string} warning.inverse - For elements used on top of warning/default. Used for text, icon or border
-     */
+    /** For elements placed on top of warning/default fill */
     inverse: string;
+    /** Hover state surface for warning/default */
+    defaultHover: string;
+    /** Pressed state surface for warning/default */
+    defaultPressed: string;
   };
   success: {
-    /**
-     * {string} success.default - For positive & good semantic elements. Used for text, background, icon or border
-     */
+    /** For positive semantic elements: success, confirm, complete, safe... */
     default: string;
-    /**
-     * {string} defaultHover - For the "hover" state of interactive elements
-     */
-    defaultHover: string;
-    /**
-     * {string} defaultPressed - For the "pressed" state of interactive elements
-     */
-    defaultPressed: string;
-    /**
-     * {string} success.muted - For lowest contrast background used in success semantic. (Example: notification background)
-     */
+    /** Muted color for positive semantic */
     muted: string;
-    /**
-     * {string} success.inverse -  For elements used on top of success/default. Used for text, icon or border
-     */
+    /** For elements placed on top of success/default fill */
     inverse: string;
+    /** Hover state surface for success/default */
+    defaultHover: string;
+    /** Pressed state surface for success/default */
+    defaultPressed: string;
   };
   info: {
-    /**
-     * {string} info.default - For informational semantic elements. Used for text, background, icon or border
-     */
+    /** For soft alert semantic elements: info, reminder, hint... */
     default: string;
-    /**
-     * {string} info.muted - For lowest contrast background used in informational semantic. (Example: notification background)
-     */
+    /** Muted color for soft alert semantic */
     muted: string;
-    /**
-     * {string} info.inverse - For elements used on top of info/default. Used for text, icon or border
-     */
+    /** For elements placed on top of info/default fill */
     inverse: string;
   };
   flask: {
-    /**
-     * {string} flask.default - For Flask colored elements
-     */
+    /** For Flask primary accent color */
     default: string;
-    /**
-     * {string} flask.inverse - For elements used on top of flask/default
-     */
+    /** For elements placed on top of flask/default */
     inverse: string;
+  };
+  shadow: {
+    /** For neutral drop shadow color */
+    default: string;
+    /** For primary drop shadow color */
+    primary: string;
+    /** For critical/danger drop shadow color */
+    error: string;
   };
 };
 

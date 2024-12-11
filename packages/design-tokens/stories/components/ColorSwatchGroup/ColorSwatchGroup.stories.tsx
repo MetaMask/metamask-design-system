@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { ColorSwatchGroup } from './ColorSwatchGroup';
 
 const meta: Meta<typeof ColorSwatchGroup> = {
