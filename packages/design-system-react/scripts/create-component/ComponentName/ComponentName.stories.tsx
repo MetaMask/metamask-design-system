@@ -4,7 +4,7 @@ import { ComponentName } from './ComponentName';
 import README from './README.mdx';
 
 const meta: Meta<typeof ComponentName> = {
-  title: 'Components/ComponentName',
+  title: 'React Components/ComponentName',
   component: ComponentName,
   parameters: {
     docs: {
