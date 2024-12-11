@@ -85,6 +85,11 @@ const meta: Meta<typeof ButtonBase> = {
       control: 'boolean',
       description: 'Optional prop that when true, disables the button',
     },
+    loadingIconProps: {
+      control: 'object',
+      description:
+        'Optional prop to pass additional properties to the loading icon',
+    },
   },
 };
 

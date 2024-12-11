@@ -82,4 +82,8 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
    * @default false
    */
   isDisabled?: boolean;
+  /**
+   * Optional prop to pass additional properties to the loading icon
+   */
+  loadingIconProps?: MakePropsOptional<IconProps>;
 };

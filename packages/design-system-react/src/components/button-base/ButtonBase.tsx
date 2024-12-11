@@ -1,8 +1,8 @@
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import React from 'react';
 
+import { Icon, IconName } from '..';
 import { twMerge } from '../../utils/tw-merge';
-import { Icon } from '../icon';
 import { BUTTON_BASE_SIZE_CLASS_MAP } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
 import { ButtonBaseSize } from './ButtonBase.types';
@@ -18,6 +18,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       isDisabled,
       isLoading,
       loadingText,
+      loadingIconProps,
       startIconName,
       startIconProps,
       startAccessory,
@@ -34,7 +35,11 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
     // TODO: Add a loading icon
     const renderLoadingState = () => (
       <span>
-        <span className="animate-spin mr-2">⌛</span>
+        <Icon
+          name={IconName.Loading}
+          className="animate-spin mr-2"
+          {...loadingIconProps}
+        />
         {loadingText ?? children}
       </span>
     );

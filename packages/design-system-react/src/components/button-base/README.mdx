@@ -78,9 +78,29 @@ ButtonBase can display custom accessories at the start and/or end of the content
 
 ### IsLoading
 
-ButtonBase can show a loading state with optional loading text.
+ButtonBase can show a loading state with optional loading text. You can customize the loading icon using `loadingIconProps`.
 
 <Canvas of={ButtonBaseStories.IsLoading} />
+
+```tsx
+import { ButtonBase } from '@metamask/design-system-react';
+
+// Default loading state
+<ButtonBase isLoading loadingText="Submitting...">
+  Submit
+</ButtonBase>
+
+// Custom loading icon
+<ButtonBase
+  isLoading
+  loadingText="Submitting..."
+  loadingIconProps={{
+    'data-testid': 'loading-icon'
+  }}
+>
+  Submit
+</ButtonBase>
+```
 
 ### IsDisabled
 

@@ -50,14 +50,14 @@ describe('ButtonBase', () => {
         Submit
       </ButtonBase>,
     );
-    expect(screen.getByText('⌛')).toBeInTheDocument();
+    expect(screen.getByRole('img')).toBeInTheDocument();
     expect(screen.getByText('Please wait...')).toBeInTheDocument();
     expect(screen.queryByText('Submit')).not.toBeInTheDocument();
   });
 
   it('shows loading state with children when no loading text provided', () => {
     render(<ButtonBase isLoading>Submit</ButtonBase>);
-    expect(screen.getByText('⌛')).toBeInTheDocument();
+    expect(screen.getByRole('img')).toBeInTheDocument();
     expect(screen.getByText('Submit')).toBeInTheDocument();
   });
 
@@ -118,5 +118,40 @@ describe('ButtonBase', () => {
   it('does not apply full width class by default', () => {
     render(<ButtonBase>Default Width Button</ButtonBase>);
     expect(screen.getByRole('button')).not.toHaveClass('w-full');
+  });
+
+  it('applies custom loading icon props', () => {
+    render(
+      <ButtonBase
+        isLoading
+        loadingIconProps={{
+          className: 'custom-class',
+          'data-testid': 'custom-loading-icon',
+        }}
+      >
+        Submit
+      </ButtonBase>,
+    );
+
+    const loadingIcon = screen.getByTestId('custom-loading-icon');
+    expect(loadingIcon).toBeInTheDocument();
+    expect(loadingIcon).toHaveClass('custom-class');
+  });
+
+  it('merges loading icon classes correctly', () => {
+    render(
+      <ButtonBase
+        isLoading
+        loadingIconProps={{
+          className: 'custom-class',
+          'data-testid': 'custom-loading-icon',
+        }}
+      >
+        Submit
+      </ButtonBase>,
+    );
+
+    const loadingIcon = screen.getByTestId('custom-loading-icon');
+    expect(loadingIcon).toHaveClass('custom-class');
   });
 });
