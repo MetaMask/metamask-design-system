@@ -9,33 +9,33 @@ import type { SvgProps } from 'react-native-svg';
  */
 export enum IconColor {
   /** For default neutral icons */
-  IconDefault = 'text-icon-default',
+  IconDefault = 'icon-default',
   /** For softer neutral icons */
-  IconAlternative = 'text-icon-alternative',
+  IconAlternative = 'icon-alternative',
   /** For the weakest contrast neutral icons (not accessible) */
-  IconMuted = 'text-icon-muted',
+  IconMuted = 'icon-muted',
   /** For elements used on top of overlay/alternative. Used for text, icon or border */
-  OverlayInverse = 'text-overlay-inverse',
+  OverlayInverse = 'overlay-inverse',
   /** For interactive, active, and selected semantics. Used for text, background, icon or border */
-  PrimaryDefault = 'text-primary-default',
+  PrimaryDefault = 'primary-default',
   /** For elements used on top of primary/default. Used for text, icon or border */
-  PrimaryInverse = 'text-primary-inverse',
+  PrimaryInverse = 'primary-inverse',
   /** For the critical alert semantic elements. Used for text, background, icon or border */
-  ErrorDefault = 'text-error-default',
+  ErrorDefault = 'error-default',
   /** For elements used on top of error/default. Used for text, icon or border */
-  ErrorInverse = 'text-error-inverse',
+  ErrorInverse = 'error-inverse',
   /** For the positive semantic elements. Used for text, background, icon or border */
-  SuccessDefault = 'text-success-default',
+  SuccessDefault = 'success-default',
   /** For elements used on top of success/default. Used for text, icon or border */
-  SuccessInverse = 'text-success-inverse',
+  SuccessInverse = 'success-inverse',
   /** For the caution alert semantic elements. Used for text, background, icon or border */
-  WarningDefault = 'text-warning-default',
+  WarningDefault = 'warning-default',
   /** For elements used on top of warning/default. Used for text, icon or border */
-  WarningInverse = 'text-warning-inverse',
+  WarningInverse = 'warning-inverse',
   /** For informational read-only elements. Used for text, background, icon or border */
-  InfoDefault = 'text-info-default',
+  InfoDefault = 'info-default',
   /** For elements used on top of info/default. Used for text, icon or border */
-  InfoInverse = 'text-info-inverse',
+  InfoInverse = 'info-inverse',
 }
 
 /**
@@ -43,15 +43,15 @@ export enum IconColor {
  */
 export enum IconSize {
   /** Extra small - 12px */
-  Xs = 'w-[12px] h-[12px]',
+  Xs = 'xs',
   /** Small - 16px */
-  Sm = 'w-[16px] h-[16px]',
+  Sm = 'sm',
   /** Medium - 20px (Default) */
-  Md = 'w-[20px] h-[20px]',
+  Md = 'md',
   /** Large - 24px */
-  Lg = 'w-[24px] h-[24px]',
+  Lg = 'lg',
   /** Extra large - 32px */
-  Xl = 'w-[32px] h-[32px]',
+  Xl = 'xl',
 }
 
 /**

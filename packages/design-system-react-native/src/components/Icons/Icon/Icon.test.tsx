@@ -4,9 +4,9 @@ import React from 'react';
 
 import Icon from './Icon';
 import {
-  DEFAULT_ICON_NAME,
-  DEFAULT_ICON_COLOR,
-  DEFAULT_ICON_SIZE,
+  DEFAULT_ICON_ICONNAME,
+  DEFAULT_ICON_ICONCOLOR,
+  DEFAULT_ICON_ICONSIZE,
 } from './Icon.constants';
 import { IconSize, IconColor } from './Icon.types';
 import { generateIconClassNames } from './Icon.utilities';
@@ -15,7 +15,9 @@ describe('Icon', () => {
   describe('generateIconClassNames', () => {
     it('returns default class names when no props are provided', () => {
       const classNames = generateIconClassNames({});
-      expect(classNames).toBe(`${DEFAULT_ICON_COLOR} ${DEFAULT_ICON_SIZE} `);
+      expect(classNames).toBe(
+        `${DEFAULT_ICON_ICONCOLOR} ${DEFAULT_ICON_ICONSIZE} `,
+      );
     });
 
     it('generates class names correctly for each color', () => {
@@ -43,10 +45,10 @@ describe('Icon', () => {
   describe('Icon Component', () => {
     it('renders the specified icon', () => {
       const { getByTestId } = render(
-        <Icon name={DEFAULT_ICON_NAME} testID="icon" />,
+        <Icon name={DEFAULT_ICON_ICONNAME} testID="icon" />,
       );
       const iconElement = getByTestId('icon');
-      expect(iconElement.props.name).toBe(DEFAULT_ICON_NAME);
+      expect(iconElement.props.name).toBe(DEFAULT_ICON_ICONNAME);
     });
 
     it('applies default size and color', () => {
@@ -56,7 +58,7 @@ describe('Icon', () => {
         const tw = useTailwind();
         const expectedClassNames = generateIconClassNames({});
         expectedStyles = tw`${expectedClassNames}`;
-        return <Icon name={DEFAULT_ICON_NAME} testID="icon" />;
+        return <Icon name={DEFAULT_ICON_ICONNAME} testID="icon" />;
       };
       console.log(TestComponent);
 
@@ -75,7 +77,9 @@ describe('Icon', () => {
           const tw = useTailwind();
           const expectedClassNames = generateIconClassNames({ size });
           expectedStyles = tw`${expectedClassNames}`;
-          return <Icon name={DEFAULT_ICON_NAME} testID="icon" size={size} />;
+          return (
+            <Icon name={DEFAULT_ICON_ICONNAME} testID="icon" size={size} />
+          );
         };
 
         const { getByTestId } = render(<TestComponent />);
@@ -94,7 +98,9 @@ describe('Icon', () => {
           const tw = useTailwind();
           const expectedClassNames = generateIconClassNames({ color });
           expectedStyles = tw`${expectedClassNames}`;
-          return <Icon name={DEFAULT_ICON_NAME} testID="icon" color={color} />;
+          return (
+            <Icon name={DEFAULT_ICON_ICONNAME} testID="icon" color={color} />
+          );
         };
 
         const { getByTestId } = render(<TestComponent />);
@@ -116,7 +122,7 @@ describe('Icon', () => {
         const tw = useTailwind();
         const expectedClassNames = generateIconClassNames(props);
         expectedStyles = tw`${expectedClassNames}`;
-        return <Icon name={DEFAULT_ICON_NAME} testID="icon" {...props} />;
+        return <Icon name={DEFAULT_ICON_ICONNAME} testID="icon" {...props} />;
       };
 
       const { getByTestId } = render(<TestComponent />);
