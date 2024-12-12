@@ -22,7 +22,9 @@ function getIconNameInTitleCase(fileName: string): string {
   return path
     .basename(fileName, ASSET_EXT)
     .split('-')
-    .map((section) => `${section[0].toUpperCase()}${section.substring(1)}`)
+    .map(
+      (section: string) => `${section[0].toUpperCase()}${section.substring(1)}`,
+    )
     .join('');
 }
 
