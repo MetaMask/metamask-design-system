@@ -77,11 +77,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@babel/core@npm:^7.11.6, @babel/core@npm:^7.12.10, @babel/core@npm:^7.12.3, @babel/core@npm:^7.13.16, @babel/core@npm:^7.18.9, @babel/core@npm:^7.20.0, @babel/core@npm:^7.21.3, @babel/core@npm:^7.23.5, @babel/core@npm:^7.23.9, @babel/core@npm:^7.25.2":
-=======
 "@babel/core@npm:^7.11.6, @babel/core@npm:^7.12.10, @babel/core@npm:^7.12.3, @babel/core@npm:^7.13.16, @babel/core@npm:^7.18.9, @babel/core@npm:^7.20.0, @babel/core@npm:^7.21.3, @babel/core@npm:^7.23.5, @babel/core@npm:^7.23.9, @babel/core@npm:^7.26.0":
->>>>>>> 08e1d687b361a263df504bc984c4b753d26f0903
   version: 7.26.0
   resolution: "@babel/core@npm:7.26.0"
   dependencies:
@@ -1754,16 +1750,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.21.3":
-  version: 7.26.3
-  resolution: "@babel/types@npm:7.26.3"
-  dependencies:
-    "@babel/helper-string-parser": "npm:^7.25.9"
-    "@babel/helper-validator-identifier": "npm:^7.25.9"
-  checksum: 10/c31d0549630a89abfa11410bf82a318b0c87aa846fbf5f9905e47ba5e2aa44f41cc746442f105d622c519e4dc532d35a8d8080460ff4692f9fc7485fbf3a00eb
-  languageName: node
-  linkType: hard
-
 "@bcoe/v8-coverage@npm:^0.2.3":
   version: 0.2.3
   resolution: "@bcoe/v8-coverage@npm:0.2.3"
@@ -3192,16 +3178,10 @@ __metadata:
     react: "npm:^18.2.0"
     react-native: "npm:^0.72.15"
     react-native-svg: "npm:^15.10.1"
-<<<<<<< HEAD
-    react-test-renderer: "npm:^18.3.1"
-    ts-jest: "npm:^29.2.5"
-    ts-node: "npm:^10.9.2"
-=======
     react-native-svg-transformer: "npm:^1.5.0"
     react-test-renderer: "npm:^18.3.1"
     ts-jest: "npm:^29.2.5"
     ts-node: "npm:^10.9.1"
->>>>>>> 08e1d687b361a263df504bc984c4b753d26f0903
     typescript: "npm:~5.2.2"
   languageName: unknown
   linkType: soft
@@ -5305,9 +5285,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@svgr/core@npm:^8.1.0":
-=======
 "@svgr/cli@npm:^8.1.0":
   version: 8.1.0
   resolution: "@svgr/cli@npm:8.1.0"
@@ -5329,7 +5306,6 @@ __metadata:
   linkType: hard
 
 "@svgr/core@npm:8.1.0, @svgr/core@npm:^8.1.0":
->>>>>>> 08e1d687b361a263df504bc984c4b753d26f0903
   version: 8.1.0
   resolution: "@svgr/core@npm:8.1.0"
   dependencies:
@@ -5352,11 +5328,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@svgr/plugin-jsx@npm:^8.1.0":
-=======
 "@svgr/plugin-jsx@npm:8.1.0, @svgr/plugin-jsx@npm:^8.1.0":
->>>>>>> 08e1d687b361a263df504bc984c4b753d26f0903
   version: 8.1.0
   resolution: "@svgr/plugin-jsx@npm:8.1.0"
   dependencies:
@@ -5370,9 +5342,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@svgr/plugin-svgo@npm:^8.1.0":
-=======
 "@svgr/plugin-prettier@npm:8.1.0":
   version: 8.1.0
   resolution: "@svgr/plugin-prettier@npm:8.1.0"
@@ -5386,7 +5355,6 @@ __metadata:
   linkType: hard
 
 "@svgr/plugin-svgo@npm:8.1.0, @svgr/plugin-svgo@npm:^8.1.0":
->>>>>>> 08e1d687b361a263df504bc984c4b753d26f0903
   version: 8.1.0
   resolution: "@svgr/plugin-svgo@npm:8.1.0"
   dependencies:
@@ -9691,9 +9659,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.41":
-  version: 1.5.72
-  resolution: "electron-to-chromium@npm:1.5.72"
-  checksum: 10/005262a1c9e2a5ff93b7b1dae5b842105ecfb87a953b03e0f494814a0e7ff6fee86f5fb5cfce0df0023b033ac5b4f532055eab8af8b07eb3c74ad1cb9a8cdc8f
+  version: 1.5.73
+  resolution: "electron-to-chromium@npm:1.5.73"
+  checksum: 10/07d0885656c49ea4deb98340db23c68b43615c0325566e0ae6df751328460d4cdfb86ca0fcaaa745cf7b44c6141440fe2eb2f5d9518d1c110ba3872c73ed817d
   languageName: node
   linkType: hard
 
@@ -17602,35 +17570,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg-transformer@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "react-native-svg-transformer@npm:1.5.0"
-  dependencies:
-    "@svgr/core": "npm:^8.1.0"
-    "@svgr/plugin-jsx": "npm:^8.1.0"
-    "@svgr/plugin-svgo": "npm:^8.1.0"
-    path-dirname: "npm:^1.0.2"
-  peerDependencies:
-    react-native: ">=0.59.0"
-    react-native-svg: ">=12.0.0"
-  checksum: 10/589e7df1a9106722e9e45c67e6950e19c9d0881f810f06a46c7e3fa54ea34d1d9fe342870571d32e6e9c97195b2a521c821d608b953b797c2189c8869229bd77
-  languageName: node
-  linkType: hard
-
-"react-native-svg@npm:^15.10.1":
-  version: 15.10.1
-  resolution: "react-native-svg@npm:15.10.1"
-  dependencies:
-    css-select: "npm:^5.1.0"
-    css-tree: "npm:^1.1.3"
-    warn-once: "npm:0.1.1"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10/1a12294f3ef8bc3fd7fe613864b8b7f2dcad9256ec43112c3e94c8275fdc499e902d62d9ab534cc200f7fc48f49c14be80143f6625ffb052a4857bf747b72c2f
-  languageName: node
-  linkType: hard
-
 "react-native-swipe-gestures@npm:^1.0.5":
   version: 1.0.5
   resolution: "react-native-swipe-gestures@npm:1.0.5"
@@ -20134,7 +20073,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.9.1, ts-node@npm:^10.9.2":
+"ts-node@npm:^10.9.1":
   version: 10.9.2
   resolution: "ts-node@npm:10.9.2"
   dependencies:
