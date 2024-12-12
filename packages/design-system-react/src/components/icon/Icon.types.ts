@@ -19,6 +19,16 @@ export type IconProps = SVGProps<SVGElementProps> & {
    * @default IconColor.IconDefault
    */
   color?: IconColor;
+  /**
+   * Additional CSS classes to be added to the component.
+   * These classes will be merged with the component's default classes using twMerge.
+   */
+  className?: string;
+  /**
+   * Optional CSS styles to be applied to the component.
+   * Should be used sparingly and only for dynamic styles that can't be achieved with className.
+   */
+  style?: React.CSSProperties;
 };
 
 export enum IconSize {

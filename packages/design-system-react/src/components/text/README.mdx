@@ -228,7 +228,22 @@ Note: When using `asChild` with form elements like inputs, the Text component's 
 
 ### Class Name
 
-Adds an additional class to the `Text` component.
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<Text className="my-4 mx-2">Text content</Text>
+
+// Overriding default styles
+<Text className="text-inherit">Text content</Text>
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
 
 ### Style
 
