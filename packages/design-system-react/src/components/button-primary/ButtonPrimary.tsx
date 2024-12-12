@@ -40,7 +40,7 @@ export const ButtonPrimary = React.forwardRef<
         isInverse && isDanger && 'active:bg-default-pressed',
         // Scale animation
         'active:scale-95',
-        'active:ease-[cubic-bezier(0.3,0.8,0.3,1)]',
+        'active:ease-[cubic-bezier(0.3,0.8,0.3,1)]', // TODO: Add to design tokens
       ],
       className,
     );
