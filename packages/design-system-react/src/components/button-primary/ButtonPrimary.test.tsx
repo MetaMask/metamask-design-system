@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { ButtonPrimarySize, IconName } from '..';
 import { ButtonPrimary } from './ButtonPrimary';
 
 describe('ButtonPrimary', () => {
@@ -114,5 +115,59 @@ describe('ButtonPrimary', () => {
       'hover:bg-primary-default-hover',
       'active:bg-primary-default-pressed',
     );
+  });
+
+  it('renders with correct size classes', () => {
+    const { rerender } = render(
+      <ButtonPrimary size={ButtonPrimarySize.Sm}>Small</ButtonPrimary>,
+    );
+    expect(screen.getByRole('button')).toHaveClass('h-8');
+
+    rerender(<ButtonPrimary size={ButtonPrimarySize.Lg}>Large</ButtonPrimary>);
+    expect(screen.getByRole('button')).toHaveClass('h-12');
+  });
+
+  it('renders with icons correctly', () => {
+    render(
+      <ButtonPrimary
+        startIconName={IconName.AddSquare}
+        endIconName={IconName.AddSquare}
+      >
+        With Icons
+      </ButtonPrimary>,
+    );
+
+    const icons = screen.getAllByRole('img');
+    expect(icons).toHaveLength(2);
+    expect(icons[0]).toHaveClass('mr-2'); // start icon
+    expect(icons[1]).toHaveClass('ml-2'); // end icon
+  });
+
+  it('renders loading text when provided', () => {
+    render(
+      <ButtonPrimary isLoading loadingText="Please wait...">
+        Submit
+      </ButtonPrimary>,
+    );
+
+    expect(screen.getByText('Please wait...')).toBeInTheDocument();
+    expect(screen.queryByText('Submit')).not.toBeInTheDocument();
+  });
+
+  it('applies full width class correctly', () => {
+    render(<ButtonPrimary isFullWidth>Full Width</ButtonPrimary>);
+    expect(screen.getByRole('button')).toHaveClass('w-full');
+  });
+
+  it('renders as child component when asChild is true', () => {
+    render(
+      <ButtonPrimary asChild>
+        <a href="#">Link Button</a>
+      </ButtonPrimary>,
+    );
+
+    const link = screen.getByRole('link');
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute('href', '#');
   });
 });
