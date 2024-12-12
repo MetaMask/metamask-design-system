@@ -51,7 +51,6 @@ export const ButtonPrimary = React.forwardRef<
         className={mergedClassName}
         isDisabled={isDisabled}
         isLoading={isLoading}
-        data-theme={isInverse ? 'dark' : 'light'} // TODO: Implement ThemeProvider to properly handle theme state and context
         {...props}
       />
     );
