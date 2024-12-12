@@ -1,0 +1,146 @@
+import { Controls, Canvas, Meta } from '@storybook/blocks';
+
+import * as ButtonBaseStories from './ButtonBase.stories';
+
+<Meta of={ButtonBaseStories} />
+
+# ButtonBase
+
+The ButtonBase is the base component for buttons
+
+<Canvas of={ButtonBaseStories.Default} />
+
+```tsx
+import { ButtonBase } from '@metamask/design-system-react';
+
+<ButtonBase onClick={() => {}}>Button Base</ButtonBase>;
+```
+
+### Size
+
+ButtonBase supports three sizes:
+
+- `ButtonBaseSize.Sm` (32px)
+- `ButtonBaseSize.Md` (40px) - default
+- `ButtonBaseSize.Lg` (48px)
+
+<Canvas of={ButtonBaseStories.Size} />
+
+```tsx
+import { ButtonBase, ButtonBaseSize } from '@metamask/design-system-react';
+
+<ButtonBase size={ButtonBaseSize.Sm}>Small</ButtonBase>
+<ButtonBase size={ButtonBaseSize.Md}>Medium</ButtonBase>
+<ButtonBase size={ButtonBaseSize.Lg}>Large</ButtonBase>
+```
+
+### IsFullWidth
+
+ButtonBase can be set to take up the full width of its container.
+
+<Canvas of={ButtonBaseStories.IsFullWidth} />
+
+### StartIconName and EndIconName
+
+ButtonBase can display icons at the start and/or end of the content.
+
+#### StartIconName
+
+<Canvas of={ButtonBaseStories.StartIconName} />
+
+```tsx
+import { ButtonBase, IconName } from '@metamask/design-system-react';
+
+<ButtonBase startIconName={IconName.AddSquare}>With Start Icon</ButtonBase>;
+```
+
+#### EndIconName
+
+<Canvas of={ButtonBaseStories.EndIconName} />
+
+```tsx
+import { ButtonBase, IconName } from '@metamask/design-system-react';
+
+<ButtonBase endIconName={IconName.AddSquare}>With End Icon</ButtonBase>;
+```
+
+### StartAccessory and EndAccessory
+
+ButtonBase can display custom accessories at the start and/or end of the content.
+
+#### StartAccessory
+
+<Canvas of={ButtonBaseStories.StartAccessory} />
+
+#### EndAccessory
+
+<Canvas of={ButtonBaseStories.EndAccessory} />
+
+### IsLoading
+
+ButtonBase can show a loading state with optional loading text. You can customize the loading icon using `loadingIconProps`.
+
+<Canvas of={ButtonBaseStories.IsLoading} />
+
+```tsx
+import { ButtonBase } from '@metamask/design-system-react';
+
+// Default loading state
+<ButtonBase isLoading loadingText="Submitting...">
+  Submit
+</ButtonBase>
+
+// Custom loading icon
+<ButtonBase
+  isLoading
+  loadingText="Submitting..."
+  loadingIconProps={{
+    'data-testid': 'loading-icon'
+  }}
+>
+  Submit
+</ButtonBase>
+```
+
+### IsDisabled
+
+ButtonBase can be disabled.
+
+<Canvas of={ButtonBaseStories.IsDisabled} />
+
+### AsChild
+
+ButtonBase can render as different elements using the `asChild` prop.
+
+<Canvas of={ButtonBaseStories.AsChild} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<ButtonBase className="my-4 mx-2">Button content</ButtonBase>
+
+// Overriding default styles
+<ButtonBase className="bg-primary-default text-primary-inverse">Custom styled button</ButtonBase>
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+
+## Component API
+
+<Controls of={ButtonBaseStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
