@@ -65,4 +65,54 @@ describe('ButtonPrimary', () => {
       'text-error-default',
     );
   });
+
+  it('applies disabled styles while preserving variant-specific classes', () => {
+    render(<ButtonPrimary isDisabled>Disabled Button</ButtonPrimary>);
+
+    const button = screen.getByRole('button');
+    expect(button).toBeDisabled();
+    expect(button).toHaveClass(
+      'bg-primary-default',
+      'text-primary-inverse',
+      'opacity-50',
+      'cursor-not-allowed',
+    );
+  });
+
+  it('applies loading styles while preserving variant-specific classes', () => {
+    render(
+      <ButtonPrimary isLoading loadingText="Loading...">
+        Loading Button
+      </ButtonPrimary>,
+    );
+
+    const button = screen.getByRole('button');
+    expect(button).toBeDisabled();
+    expect(button).toHaveClass(
+      'bg-primary-default',
+      'text-primary-inverse',
+      'opacity-50',
+      'cursor-not-allowed',
+    );
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
+  });
+
+  it('does not apply hover/active classes when disabled or loading', () => {
+    const { rerender } = render(
+      <ButtonPrimary isDisabled>Disabled</ButtonPrimary>,
+    );
+
+    let button = screen.getByRole('button');
+    expect(button).not.toHaveClass(
+      'hover:bg-primary-default-hover',
+      'active:bg-primary-default-pressed',
+    );
+
+    rerender(<ButtonPrimary isLoading>Loading</ButtonPrimary>);
+    button = screen.getByRole('button');
+    expect(button).not.toHaveClass(
+      'hover:bg-primary-default-hover',
+      'active:bg-primary-default-pressed',
+    );
+  });
 });
