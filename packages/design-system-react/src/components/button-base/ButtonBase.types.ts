@@ -24,12 +24,12 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
    */
   children: React.ReactNode;
   /**
-   * Optional prop for additional CSS classes to be applied to the ButtonBase component
+   * Optional prop for additional CSS classes to be applied to the ButtonBase component.
+   * These classes will be merged with the component's default classes using twMerge.
    */
   className?: string;
   /**
    * Optional prop to control the size of the ButtonBase
-   * Possible values: ButtonBaseSize.Sm (32px), ButtonBaseSize.Md (40px), ButtonBaseSize.Lg (48px)
    * @default ButtonBaseSize.Md
    */
   size?: ButtonBaseSize;
@@ -86,4 +86,9 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
    * Optional prop to pass additional properties to the loading icon
    */
   loadingIconProps?: MakePropsOptional<IconProps>;
+  /**
+   * Optional CSS styles to be applied to the component.
+   * Should be used sparingly and only for dynamic styles that can't be achieved with className.
+   */
+  style?: React.CSSProperties;
 };

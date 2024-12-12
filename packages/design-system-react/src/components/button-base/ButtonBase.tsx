@@ -25,47 +25,49 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       endIconName,
       endIconProps,
       endAccessory,
+      style,
       ...props
     },
     ref,
   ) => {
     const Component = asChild ? Slot : 'button';
 
-    // Renders the loading state of the button
-    // TODO: Add a loading icon
     const renderLoadingState = () => (
-      <span>
+      <span className="inline-flex items-center">
         <Icon
           name={IconName.Loading}
-          className="animate-spin mr-2 text-inherit"
+          className={twMerge(
+            'animate-spin mr-2 text-inherit',
+            loadingIconProps?.className,
+          )}
           {...loadingIconProps}
         />
         {loadingText ?? children}
       </span>
     );
 
-    // Renders content at the start of the button
-    // Can be either an icon or a custom accessory element
     const renderStartContent = () => {
       if (startIconName) {
         return (
-          <Icon name={startIconName} className="mr-2" {...startIconProps} />
+          <Icon
+            name={startIconName}
+            className={twMerge('mr-2 text-inherit', startIconProps?.className)}
+            {...startIconProps}
+          />
         );
       }
       if (startAccessory) {
-        return <span className="mr-2 ">{startAccessory}</span>;
+        return <span className="mr-2">{startAccessory}</span>;
       }
       return null;
     };
 
-    // Renders content at the end of the button
-    // Can be either an icon or a custom accessory element
     const renderEndContent = () => {
       if (endIconName) {
         return (
           <Icon
             name={endIconName}
-            className="ml-2 text-inherit"
+            className={twMerge('ml-2 text-inherit', endIconProps?.className)}
             {...endIconProps}
           />
         );
@@ -100,6 +102,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
         ref={ref}
         className={mergedClassName}
         disabled={asChild ? undefined : isDisabled ?? isLoading}
+        style={style}
         {...props}
       >
         {renderStartContent()}
@@ -109,3 +112,5 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
     );
   },
 );
+
+ButtonBase.displayName = 'ButtonBase';
