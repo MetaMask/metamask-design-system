@@ -7,6 +7,8 @@ import {
   DEFAULT_ICON_ICONCOLOR,
   DEFAULT_ICON_ICONSIZE,
   SAMPLE_ICON_PROPS,
+  TWCLASSMAP_ICON_ICONCOLOR,
+  TWCLASSMAP_ICON_ICONSIZE,
 } from './Icon.constants';
 import { IconSize, IconColor } from './Icon.types';
 import { generateIconClassNames } from './Icon.utilities';
@@ -16,21 +18,24 @@ describe('Icon', () => {
     it('returns default class names when no props are provided', () => {
       const classNames = generateIconClassNames({});
       expect(classNames).toBe(
-        `${DEFAULT_ICON_ICONCOLOR} ${DEFAULT_ICON_ICONSIZE} `,
+        generateIconClassNames({
+          color: DEFAULT_ICON_ICONCOLOR,
+          size: DEFAULT_ICON_ICONSIZE,
+        }),
       );
     });
 
     it('generates class names correctly for each color', () => {
       Object.values(IconColor).forEach((color) => {
         const classNames = generateIconClassNames({ color });
-        expect(classNames).toContain(color);
+        expect(classNames).toContain(TWCLASSMAP_ICON_ICONCOLOR[color]);
       });
     });
 
     it('generates class names correctly for each size', () => {
       Object.values(IconSize).forEach((size) => {
         const classNames = generateIconClassNames({ size });
-        expect(classNames).toContain(size);
+        expect(classNames).toContain(TWCLASSMAP_ICON_ICONSIZE[size]);
       });
     });
 
