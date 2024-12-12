@@ -83,8 +83,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       'inline-flex items-center justify-center',
       'rounded-full px-4',
       'text-default font-medium',
-      'transition-colors duration-150',
-      'bg-muted hover:bg-muted-hover active:bg-muted-pressed',
+      'bg-muted',
       // Size
       BUTTON_BASE_SIZE_CLASS_MAP[size],
       // Full width

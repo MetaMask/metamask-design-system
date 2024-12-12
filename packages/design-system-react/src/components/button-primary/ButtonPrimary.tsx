@@ -28,9 +28,6 @@ export const ButtonPrimary = React.forwardRef<
         'transition-[transform,colors,opacity]',
         'duration-100',
         'ease-linear',
-      ],
-      // Interactive states - only applied when not disabled/loading
-      isInteractive && [
         // Hover states based on variant
         !isDanger && !isInverse && 'hover:bg-primary-default-hover',
         isDanger && !isInverse && 'hover:bg-error-default-hover',
