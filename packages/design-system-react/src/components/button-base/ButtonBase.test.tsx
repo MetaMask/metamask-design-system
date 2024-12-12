@@ -154,4 +154,27 @@ describe('ButtonBase', () => {
     const loadingIcon = screen.getByTestId('custom-loading-icon');
     expect(loadingIcon).toHaveClass('custom-class');
   });
+
+  it('disables the button when isLoading is true', () => {
+    render(<ButtonBase isLoading>Loading Button</ButtonBase>);
+
+    const button = screen.getByRole('button');
+    expect(button).toBeDisabled();
+    expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
+  });
+
+  it('applies disabled styles for both isDisabled and isLoading states', () => {
+    const { rerender } = render(
+      <ButtonBase isDisabled>Disabled Button</ButtonBase>,
+    );
+
+    let button = screen.getByRole('button');
+    expect(button).toBeDisabled();
+    expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
+
+    rerender(<ButtonBase isLoading>Loading Button</ButtonBase>);
+    button = screen.getByRole('button');
+    expect(button).toBeDisabled();
+    expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
+  });
 });

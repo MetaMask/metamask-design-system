@@ -89,8 +89,8 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       BUTTON_BASE_SIZE_CLASS_MAP[size],
       // Full width
       isFullWidth && 'w-full',
-      // Disabled state
-      isDisabled && 'opacity-50 cursor-not-allowed',
+      // Disabled state - apply to both isDisabled and isLoading
+      (isDisabled || isLoading) && 'opacity-50 cursor-not-allowed',
       // Loading state
       isLoading && 'cursor-wait',
       // Custom classes
