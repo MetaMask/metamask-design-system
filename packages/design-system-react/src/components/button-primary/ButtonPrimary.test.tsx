@@ -34,9 +34,9 @@ describe('ButtonPrimary', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
-      'bg-primary-inverse',
-      'hover:bg-primary-inverse-hover',
-      'active:bg-primary-inverse-pressed',
+      'bg-default',
+      'hover:bg-default-hover',
+      'active:bg-default-pressed',
       'text-default',
     );
   });
@@ -60,9 +60,9 @@ describe('ButtonPrimary', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
-      'bg-primary-inverse',
-      'hover:bg-primary-inverse-hover',
-      'active:bg-primary-inverse-pressed',
+      'bg-default',
+      'hover:bg-default-hover',
+      'active:bg-default-pressed',
       'text-error-default',
     );
   });
