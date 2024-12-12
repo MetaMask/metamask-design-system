@@ -15,8 +15,7 @@ module.exports = {
   },
   ignorePatterns: [
     '.eslintrc.js',
-    'jest.config.js',
-    'babel.config.js',
+    '**.config.js',
     '**.d.ts',
     '**.setup.js',
     'svgMock.js',

@@ -150,5 +150,112 @@ describe('create-component', () => {
         { recursive: true },
       );
     });
+
+    it('should update README.mdx code example correctly', async () => {
+      // Mock fs.access to throw ENOENT
+      (fs.access as jest.Mock).mockRejectedValue({
+        code: 'ENOENT',
+      });
+
+      // Mock README.mdx template content
+      const mockReadmeContent = `
+# ComponentName
+
+ComponentName is used to render standardized elements within an interface.
+
+\`\`\`tsx
+import { ComponentName } from '@metamask/design-system-react';
+
+<ComponentName />;
+\`\`\`
+      `;
+
+      (fs.readFile as jest.Mock).mockImplementation(async (path: string) => {
+        if (path.endsWith('README.mdx')) {
+          return Promise.resolve(mockReadmeContent);
+        }
+        return Promise.resolve('Other template content');
+      });
+
+      await createComponent({
+        name: 'Button',
+        description: 'A reusable button component',
+      });
+
+      // Find the README.mdx write operation
+      const writeFileCalls = (fs.writeFile as jest.Mock).mock.calls;
+      const readmeWriteCall = writeFileCalls.find((call) =>
+        call[0].endsWith('README.mdx'),
+      );
+
+      expect(readmeWriteCall).not.toBeNull();
+      const updatedContent = readmeWriteCall[1];
+
+      // Verify the import statement was updated
+      expect(updatedContent).toContain(
+        "import { Button } from '@metamask/design-system-react';",
+      );
+
+      // Verify the component usage was updated
+      expect(updatedContent).toContain('<Button />;');
+
+      // Verify the component name in the title and description was updated
+      expect(updatedContent).toContain('# Button');
+      expect(updatedContent).not.toContain('# ComponentName');
+    });
+
+    it('should preserve README.mdx content structure while updating component references', async () => {
+      // Mock fs.access to throw ENOENT
+      (fs.access as jest.Mock).mockRejectedValue({
+        code: 'ENOENT',
+      });
+
+      // Mock a more complex README.mdx template
+      const mockReadmeContent = `
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as ComponentNameStories from './ComponentName.stories';
+
+# ComponentName
+
+ComponentName is used to render standardized elements within an interface.
+
+\`\`\`tsx
+import { ComponentName } from '@metamask/design-system-react';
+
+<ComponentName />;
+\`\`\`
+
+<Canvas of={ComponentNameStories.Default} />
+      `;
+
+      (fs.readFile as jest.Mock).mockImplementation(async (path: string) => {
+        if (path.endsWith('README.mdx')) {
+          return Promise.resolve(mockReadmeContent);
+        }
+        return Promise.resolve('Other template content');
+      });
+
+      await createComponent({
+        name: 'Button',
+        description: 'A reusable button component',
+      });
+
+      // Find the README.mdx write operation
+      const writeFileCalls = (fs.writeFile as jest.Mock).mock.calls;
+      const readmeWriteCall = writeFileCalls.find((call) =>
+        call[0].endsWith('README.mdx'),
+      );
+
+      expect(readmeWriteCall).not.toBeNull();
+      const updatedContent = readmeWriteCall[1];
+
+      // Verify the structure is preserved
+      expect(updatedContent).toContain(
+        "import { Controls, Canvas } from '@storybook/blocks';",
+      );
+      expect(updatedContent).toContain('import * as ButtonStories from ');
+      expect(updatedContent).toContain('<Canvas of={ButtonStories.Default} />');
+    });
   });
 });

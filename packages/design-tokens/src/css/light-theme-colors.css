@@ -4,102 +4,108 @@
 :root,
 [data-theme='light'],
 .light {
-  /* For default neutral backgrounds */
+  /* For default neutral surface (#ffffff) */
   --color-background-default: var(--brand-colors-grey-grey000);
-  /* For secondary neutral backgrounds. */
+  /* For sunken neutral surface below background/default (#f2f4f6) */
   --color-background-alternative: var(--brand-colors-grey-grey050);
-  /* For "hover" states that use background-default. */
+  /* For raised neutral surface above background/default (#f2f4f6) */
+  --color-background-muted: var(--brand-colors-grey-grey050);
+  /* Hover state surface for background/default (#f5f5f5) */
   --color-background-default-hover: #f5f5f5;
-  /* For "pressed" states that use background-alternative. */
+  /* Pressed state surface for background/default (#ebebeb) */
   --color-background-default-pressed: #ebebeb;
-  /* For "hover" states that use background-alternative. */
+  /* Hover state surface for background/alternative (#e7ebee) */
   --color-background-alternative-hover: #e7ebee;
-  /* For "pressed" states that use background-alternative. */
+  /* Pressed state surface for background/alternative (#dbe0e6) */
   --color-background-alternative-pressed: #dbe0e6;
-  /* For "hover" state that use no background fill. */
+  /* Hover state surface for background/muted (#e7ebee) */
+  --color-background-muted-hover: #e7ebee;
+  /* Pressed state surface for background/muted (#dbe0e6) */
+  --color-background-muted-pressed: #dbe0e6;
+  /* General purpose hover state tint (#0000000a) */
   --color-background-hover: #0000000a;
-  /* For "pressed" state that use no background fill. */
+  /* General purpose pressed state tint (#00000014) */
   --color-background-pressed: #00000014;
-  /* For default neutral text. */
+  /* Default color for text (#141618) */
   --color-text-default: var(--brand-colors-grey-grey900);
-  /* For softer contrast neutral text */
+  /* Softer color for text (#6a737d) */
   --color-text-alternative: var(--brand-colors-grey-grey500);
-  /* For the softest contrast neutral text (not accessible) */
+  /* Muted color for text (Not accessible) (#9fa6ae) */
   --color-text-muted: var(--brand-colors-grey-grey300);
-  /* For default neutral icons */
+  /* Default color for icons, following text/default (#141618) */
   --color-icon-default: var(--brand-colors-grey-grey900);
-  /* For softer neutral icons */
+  /* Softer color for icons, following text/alternative (#6a737d) */
   --color-icon-alternative: var(--brand-colors-grey-grey500);
-  /* For the weakest contrast neutral icons (not accessible) */
+  /* Muted color for icons (Not accessible), following text/muted (#9fa6ae) */
   --color-icon-muted: var(--brand-colors-grey-grey300);
-  /* For soft contrast neutral border */
-  --color-border-default: var(--brand-colors-grey-grey200);
-  /* For the weakest  contrast neutral border */
+  /* Default color for borders (#848c96) */
+  --color-border-default: var(--brand-colors-grey-grey400);
+  /* Muted color for borders (#bbc0c566) */
   --color-border-muted: #bbc0c566;
-  /* For the default shade of screen */
+  /* Default color for overlays(scrim) (#00000099) */
   --color-overlay-default: #00000099;
-  /* For a stronger shade of screen */
+  /* Dimmer color for overlays(scrim) (#000000cc) */
   --color-overlay-alternative: #000000cc;
-  /* For elements used on top of overlay/alternative. Used for text, icon or border */
+  /* For elements placed on top of overlay/alternative (#ffffff) */
   --color-overlay-inverse: var(--brand-colors-grey-grey000);
-  /* For interactive, active, and selected semantics. Used for text, background, icon or border */
+  /* For primary semantic elements: interactive, active, selected (#0376c9) */
   --color-primary-default: var(--brand-colors-blue-blue500);
-  /* For the stronger contrast primary semantic elements. */
+  /* Stronger color for primary semantic elements (#0260a4) */
   --color-primary-alternative: var(--brand-colors-blue-blue600);
-  /* For the weakest contrast primary semantic backgrounds. */
+  /* Muted color for primary semantic elements (#0376c91a) */
   --color-primary-muted: #0376c91a;
-  /* For elements used on top of primary/default. Used for text, icon or border */
+  /* For elements placed on top of primary/default (#ffffff) */
   --color-primary-inverse: var(--brand-colors-grey-grey000);
-  /* For the "hover" state of primary-default elements */
+  /* Hover state surface for primary/default (#036ab5) */
   --color-primary-default-hover: #036ab5;
-  /* For the "pressed" state of primary-default elements */
+  /* Pressed state surface for primary/default (#025ea1) */
   --color-primary-default-pressed: #025ea1;
-  /* For the critical alert semantic elements. Used for text, background, icon or border */
+  /* For danger semantic elements: error, critical, destructive (#d73847) */
   --color-error-default: var(--brand-colors-red-red500);
-  /* For the stronger contrast error semantic elements. */
+  /* Stronger color for danger semantic (#8e1d28) */
   --color-error-alternative: var(--brand-colors-red-red600);
-  /* For the weakest contrast critical alert semantic backgrounds. */
+  /* Muted color for danger semantic (#d738471a) */
   --color-error-muted: #d738471a;
-  /* For elements used on top of error/default. Used for text, icon or border */
+  /* For elements placed on top of error/default (#ffffff) */
   --color-error-inverse: var(--brand-colors-grey-grey000);
-  /* For the "hover" state of error-default elements. */
+  /* Hover state surface for error/default (#d02a3a) */
   --color-error-default-hover: #d02a3a;
-  /* For the "pressed" state of error-default elements. */
+  /* Pressed state surface for error/default (#bf2635) */
   --color-error-default-pressed: #bf2635;
-  /* For the caution alert semantic elements. Used for text, background, icon or border */
+  /* For warning semantic elements: caution, attention, precaution (#bf5208) */
   --color-warning-default: var(--brand-colors-yellow-yellow500);
-  /* For the weakest contrast caution alert semantic backgrounds. */
+  /* Muted color option for warning semantic (#bf52081a) */
   --color-warning-muted: #bf52081a;
-  /* For elements used on top of warning/default. Used for text, icon or border */
+  /* For elements placed on top of warning/default (#ffffff) */
   --color-warning-inverse: var(--brand-colors-grey-grey000);
-  /* For the "hover" state of warning-default elements */
+  /* Hover state surface for warning/default (#ac4a07) */
   --color-warning-default-hover: #ac4a07;
-  /* For the "pressed" state of warning-default elements */
+  /* Pressed state surface for warning/default (#984106) */
   --color-warning-default-pressed: #984106;
-  /* For the positive semantic elements. Used for text, background, icon or border */
+  /* For positive semantic elements: success, confirm, complete, safe (#1c8234) */
   --color-success-default: var(--brand-colors-green-green500);
-  /* For the weakest contrast positive semantic backgrounds. */
+  /* Muted color for positive semantic (#1c82341a) */
   --color-success-muted: #1c82341a;
-  /* For elements used on top of success/default. Used for text, icon or border */
+  /* For elements placed on top of success/default (#ffffff) */
   --color-success-inverse: var(--brand-colors-grey-grey000);
-  /* For the "hover" state of success-default elements */
+  /* Hover state surface for success/default (#18712d) */
   --color-success-default-hover: #18712d;
-  /* For the "pressed" state of success-default elements */
+  /* Pressed state surface for success/default (#156127) */
   --color-success-default-pressed: #156127;
-  /* For informational read-only elements. Used for text, background, icon or border */
+  /* For soft alert semantic elements: info, reminder, hint (#0376c9) */
   --color-info-default: var(--brand-colors-blue-blue500);
-  /* For the weakest contrast informational semantic backgrounds. */
+  /* Muted color for soft alert semantic (#0376c91a) */
   --color-info-muted: #0376c91a;
-  /* For elements used on top of info/default. Used for text, icon or border */
+  /* For elements placed on top of info/default (#ffffff) */
   --color-info-inverse: var(--brand-colors-grey-grey000);
-  /* For Flask primary accent color. */
+  /* For Flask primary accent color (#8b45b6) */
   --color-flask-default: var(--brand-colors-purple-purple500);
-  /* For elements used on top of flask/default. Used for text, icon or border */
+  /* For elements placed on top of flask/default (#ffffff) */
   --color-flask-inverse: var(--brand-colors-grey-grey000);
-  /* For neutral drop shadow color. */
+  /* For neutral drop shadow color (#0000001a) */
   --color-shadow-default: #0000001a;
-  /* For primary drop shadow color. */
+  /* For primary drop shadow color (#0376c933) */
   --color-shadow-primary: #0376c933;
-  /* For critical/danger drop shadow color. */
+  /* For critical/danger drop shadow color (#ca354266) */
   --color-shadow-error: #ca354266;
 }

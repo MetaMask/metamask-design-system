@@ -8,7 +8,9 @@ describe('Light Theme', () => {
   it('color tokens are exported from lightTheme by checking a random color token', () => {
     expect(
       lightTheme.colors.background.defaultHover.toLowerCase(),
-    ).toStrictEqual(jsonLightThemeTokens.background['default-hover'].value);
+    ).toStrictEqual(
+      jsonLightThemeTokens.background['default-hover'].value.toLowerCase(),
+    );
   });
 
   it('typography tokens are exported from lightTheme by checking first typography token', () => {
@@ -18,8 +20,15 @@ describe('Light Theme', () => {
   });
 
   it('shadow tokens are exported from lightTheme by checking first shadow size object', () => {
-    expect(lightTheme.shadows.size.xs).toStrictEqual({
-      shadowColor: jsonLightThemeTokens.shadow.default.value,
+    const shadowColor = lightTheme.shadows.size.xs.shadowColor.toLowerCase();
+    const expectedShadowColor =
+      jsonLightThemeTokens.shadow.default.value.toLowerCase();
+
+    expect({
+      ...lightTheme.shadows.size.xs,
+      shadowColor,
+    }).toStrictEqual({
+      shadowColor: expectedShadowColor,
       shadowOffset: {
         width: Number(designTokens.light.shadows.xs.value.x),
         height: Number(designTokens.light.shadows.xs.value.y),

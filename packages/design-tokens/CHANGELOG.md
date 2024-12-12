@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.2.0]
+
 ### Added
 
-- Migrate `@metamask/design-tokens` into the design system monorepo ([128](https://github.com/MetaMask/metamask-design-system/pull/128))
+- feat: color updates to the design tokens package ([#230](https://github.com/metamask/metamask-design-system/pull/230))
+
+- `@metamask/design-tokens` package migrated from standalone repository into the design system monorepo ([128](https://github.com/MetaMask/metamask-design-system/pull/128))
 
 ## [4.1.0]
 
@@ -312,9 +316,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-- Initial release.
-
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.1.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.2.0...HEAD
+[4.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.1.0...@metamask/design-tokens@4.2.0
 [4.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.0.0...@metamask/design-tokens@4.1.0
 [4.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@3.0.0...@metamask/design-tokens@4.0.0
 [3.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@2.1.1...@metamask/design-tokens@3.0.0
