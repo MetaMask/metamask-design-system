@@ -20,9 +20,9 @@ export const ButtonPrimary = React.forwardRef<
       // Danger styles
       isDanger && !isInverse && 'bg-error-default text-error-inverse',
       // Inverse styles
-      isInverse && !isDanger && 'bg-primary-inverse text-default',
+      isInverse && !isDanger && 'bg-default text-default',
       // Inverse danger styles
-      isInverse && isDanger && 'bg-primary-inverse text-error-default',
+      isInverse && isDanger && 'bg-default text-error-default',
       // Animation classes - only applied when interactive
       isInteractive && [
         'transition-[transform,colors,opacity]',
@@ -31,11 +31,13 @@ export const ButtonPrimary = React.forwardRef<
         // Hover states based on variant
         !isDanger && !isInverse && 'hover:bg-primary-default-hover',
         isDanger && !isInverse && 'hover:bg-error-default-hover',
-        isInverse && 'hover:bg-primary-inverse-hover',
+        isInverse && !isDanger && 'hover:bg-default-hover',
+        isInverse && isDanger && 'hover:bg-default-hover',
         // Active/Pressed states
         !isDanger && !isInverse && 'active:bg-primary-default-pressed',
         isDanger && !isInverse && 'active:bg-error-default-pressed',
-        isInverse && 'active:bg-primary-inverse-pressed',
+        isInverse && !isDanger && 'active:bg-default-pressed',
+        isInverse && isDanger && 'active:bg-default-pressed',
         // Scale animation
         'active:scale-95',
         'active:ease-[cubic-bezier(0.3,0.8,0.3,1)]',
@@ -49,6 +51,7 @@ export const ButtonPrimary = React.forwardRef<
         className={mergedClassName}
         isDisabled={isDisabled}
         isLoading={isLoading}
+        data-theme={isInverse ? 'dark' : undefined}
         {...props}
       />
     );

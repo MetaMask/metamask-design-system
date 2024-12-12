@@ -15,7 +15,7 @@ export type ButtonPrimaryProps = Omit<
    */
   isDanger?: boolean;
   /**
-   * Optional prop that when true, applies inverse styling to the button
+   * Optional prop that when true, applies dark theme styling to the button
    * @default false
    */
   isInverse?: boolean;
