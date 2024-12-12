@@ -20,7 +20,6 @@
     "changelog:validate": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:validate",
     "create-component:react": "yarn workspace @metamask/design-system-react create-component",
     "create-package": "ts-node scripts/create-package",
-    "generate-icons:react-native": "yarn workspace @metamask/design-system-react-native ts-node src/components/Icons/Icon/scripts/generate-assets.scripts.ts",
     "lint": "yarn lint:eslint && yarn lint:misc --check && yarn constraints && yarn lint:dependencies",
     "lint:clear-cache": "rimraf .eslintcache",
     "lint:dependencies": "depcheck && yarn dedupe --check",

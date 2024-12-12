@@ -38,7 +38,7 @@ export async function main(): Promise<void> {
 
   const fileList = await fs.promises.readdir(assetsFolderPath);
   const assetFileList = fileList.filter(
-    (fileName) => path.extname(fileName) === ASSET_EXT,
+    (fileName: string) => path.extname(fileName) === ASSET_EXT,
   );
 
   // Replace the color black with currentColor (using 'gu' flag)
@@ -119,7 +119,7 @@ export async function main(): Promise<void> {
       .basename(fileName, ASSET_EXT)
       .split('-')
       .map(
-        (section) =>
+        (section: string) =>
           `${section[0].toUpperCase()}${section.substring(1, section.length)}`,
       )
       .join('');

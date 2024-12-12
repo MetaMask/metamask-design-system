@@ -18,6 +18,7 @@ module.exports = {
     '**.config.js',
     '**.d.ts',
     '**.setup.js',
+    '**.scripts.ts',
     'svgMock.js',
   ],
 
