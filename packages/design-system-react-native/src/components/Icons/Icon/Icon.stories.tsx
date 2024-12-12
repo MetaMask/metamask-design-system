@@ -7,7 +7,7 @@ import Icon from './Icon';
 import {
   DEFAULT_ICON_ICONSIZE,
   DEFAULT_ICON_ICONNAME,
-  DEFAULT_ICON_ICONCOLOR,
+  SAMPLE_ICON_PROPS,
 } from './Icon.constants';
 import type { IconProps } from './Icon.types';
 import { IconName, IconColor, IconSize } from './Icon.types';
@@ -57,9 +57,7 @@ type Story = StoryObj<IconProps>;
 
 export const Default: Story = {
   args: {
-    name: DEFAULT_ICON_ICONNAME,
-    size: DEFAULT_ICON_ICONSIZE,
-    color: DEFAULT_ICON_ICONCOLOR,
+    ...SAMPLE_ICON_PROPS,
   },
   render: (args) => <IconStory {...args} />,
 };
@@ -123,7 +121,7 @@ export const AllIcons: Story = {
             key={iconName}
             style={{ width: 60, alignItems: 'center', margin: 8 }}
           >
-            <Icon name={iconName} size={DEFAULT_ICON_ICONSIZE} />
+            <Icon name={iconName} />
           </View>
         ))}
       </View>
