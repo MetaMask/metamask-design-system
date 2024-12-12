@@ -44,8 +44,7 @@
   "dependencies": {
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "react": "^18.2.0",
-    "react-native": "^0.72.15",
-    "react-native-svg": "^15.10.1"
+    "react-native": "^0.72.15"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
