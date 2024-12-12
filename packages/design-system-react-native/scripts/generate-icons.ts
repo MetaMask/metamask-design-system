@@ -34,9 +34,18 @@ function getIconNameInTitleCase(fileName: string): string {
  * Throws an error if anything goes wrong.
  */
 export async function main(): Promise<void> {
-  const assetsFolderPath = path.join(__dirname, `../${ASSETS_FOLDER}`);
-  const assetsModulePath = path.join(__dirname, `../${GENERATED_ASSETS_FILE}`);
-  const typesFilePath = path.join(__dirname, `../${TYPES_FILE}`);
+  const assetsFolderPath = path.join(
+    __dirname,
+    `../src/components/Icons/Icon/${ASSETS_FOLDER}`,
+  );
+  const assetsModulePath = path.join(
+    __dirname,
+    `../src/components/Icons/Icon/${GENERATED_ASSETS_FILE}`,
+  );
+  const typesFilePath = path.join(
+    __dirname,
+    `../src/components/Icons/Icon/${TYPES_FILE}`,
+  );
 
   const fileList = await fs.promises.readdir(assetsFolderPath);
   const assetFileList = fileList.filter(
@@ -45,7 +54,10 @@ export async function main(): Promise<void> {
 
   // Replace the color black with currentColor (using 'gu' flag)
   for (const fileName of assetFileList) {
-    const filePath = path.join(__dirname, `../${ASSETS_FOLDER}/${fileName}`);
+    const filePath = path.join(
+      __dirname,
+      `../src/components/Icons/Icon/${ASSETS_FOLDER}/${fileName}`,
+    );
     const fileContent = await fs.promises.readFile(filePath, {
       encoding: 'utf-8',
     });
@@ -132,7 +144,7 @@ export async function main(): Promise<void> {
 
   await fs.promises.writeFile(typesFilePath, typesContentToWrite);
 
-  console.log(`✅ Finished assets file! 🎉🎉`);
+  console.log(`✅ Finished generating icons! 🎉🎉`);
 }
 
 if (require.main === module) {
