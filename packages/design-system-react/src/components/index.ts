@@ -17,3 +17,5 @@ export type { IconProps } from './icon';
 export { ButtonBase } from './button-base';
 export type { ButtonBaseProps } from './button-base';
 export { ButtonBaseSize } from './button-base';
+
+export * from './button-link';
