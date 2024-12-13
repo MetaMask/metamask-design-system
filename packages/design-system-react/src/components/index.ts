@@ -21,3 +21,7 @@ export { ButtonBaseSize } from './button-base';
 export { ButtonPrimary } from './button-primary';
 export type { ButtonPrimaryProps } from './button-primary';
 export { ButtonPrimarySize } from './button-primary';
+
+export { ButtonSecondary } from './button-secondary';
+export type { ButtonSecondaryProps } from './button-secondary';
+export { ButtonSecondarySize } from './button-secondary';
