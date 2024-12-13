@@ -1,0 +1,97 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as ButtonSecondaryStories from './ButtonSecondary.stories';
+
+# ButtonSecondary
+
+ButtonSecondary is used for secondary actions
+
+```tsx
+import { ButtonSecondary } from '@metamask/design-system-react';
+
+<ButtonSecondary onClick={() => {}>Secondary Button</ButtonSecondary>;
+```
+
+<Canvas of={ButtonSecondaryStories.Default} />
+
+## Props
+
+### Size
+
+ButtonSecondary supports three sizes:
+
+- `ButtonSecondarySize.Sm` (32px)
+- `ButtonSecondarySize.Md` (40px) - default
+- `ButtonSecondarySize.Lg` (48px)
+
+<Canvas of={ButtonSecondaryStories.Size} />
+
+### IsFullWidth
+
+ButtonSecondary can be set to take up the full width of its container.
+
+<Canvas of={ButtonSecondaryStories.IsFullWidth} />
+
+### IsDanger
+
+Use the danger variant for destructive actions.
+
+<Canvas of={ButtonSecondaryStories.IsDanger} />
+
+### IsInverse
+
+Use the inverse variant when the button needs to be displayed on a dark background. When combined with `isDanger`, the button will have inverse styling with error text color.
+
+<Canvas of={ButtonSecondaryStories.IsInverse} />
+
+### StartIconName and EndIconName
+
+ButtonSecondary can display icons at the start and/or end of the content.
+
+#### StartIconName
+
+<Canvas of={ButtonSecondaryStories.StartIconName} />
+
+#### EndIconName
+
+<Canvas of={ButtonSecondaryStories.EndIconName} />
+
+### IsLoading
+
+ButtonSecondary can show a loading state with optional loading text.
+
+<Canvas of={ButtonSecondaryStories.IsLoading} />
+
+### IsDisabled
+
+ButtonSecondary can be disabled.
+
+<Canvas of={ButtonSecondaryStories.IsDisabled} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<ButtonSecondary className="my-4 mx-2">Button content</ButtonSecondary>
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+
+## Component API
+
+<Controls of={ButtonSecondaryStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
