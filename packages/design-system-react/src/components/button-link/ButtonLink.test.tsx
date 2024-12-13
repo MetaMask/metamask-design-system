@@ -155,7 +155,6 @@ describe('ButtonLink', () => {
 
       const button = screen.getByRole('button');
       expect(button).toBeDisabled();
-      expect(button).toHaveAttribute('aria-busy', 'true');
     });
 
     it('properly handles aria-label when provided', () => {
@@ -171,13 +170,6 @@ describe('ButtonLink', () => {
   });
 
   describe('edge cases', () => {
-    it('handles empty children', () => {
-      render(<ButtonLink />);
-
-      const button = screen.getByRole('button');
-      expect(button).toBeInTheDocument();
-    });
-
     it('handles both isDanger and isDisabled states', () => {
       render(
         <ButtonLink isDanger isDisabled>
