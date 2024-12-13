@@ -5,6 +5,13 @@ import { ButtonBase, ButtonBaseSize } from '../button-base';
 import { ButtonLinkSize } from './ButtonLink.types';
 import type { ButtonLinkProps } from './ButtonLink.types';
 
+const mapToButtonBaseSize = (size: ButtonLinkSize): ButtonBaseSize => {
+  if (size === ButtonLinkSize.Inherit) {
+    return ButtonBaseSize.Md;
+  }
+  return size as unknown as ButtonBaseSize;
+};
+
 export const ButtonLink = React.forwardRef<HTMLButtonElement, ButtonLinkProps>(
   (
     {
@@ -46,7 +53,7 @@ export const ButtonLink = React.forwardRef<HTMLButtonElement, ButtonLinkProps>(
         className={mergedClassName}
         isDisabled={isDisabled}
         isLoading={isLoading}
-        size={size === ButtonLinkSize.Inherit ? ButtonBaseSize.Md : size}
+        size={mapToButtonBaseSize(size)}
         {...props}
       />
     );
