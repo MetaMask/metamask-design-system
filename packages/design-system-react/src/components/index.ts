@@ -25,3 +25,7 @@ export { ButtonPrimarySize } from './button-primary';
 export { ButtonSecondary } from './button-secondary';
 export type { ButtonSecondaryProps } from './button-secondary';
 export { ButtonSecondarySize } from './button-secondary';
+
+export { ButtonLink } from './button-link';
+export type { ButtonLinkProps } from './button-link';
+export { ButtonLinkSize } from './button-link';
