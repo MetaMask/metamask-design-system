@@ -1,0 +1,138 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as ButtonStories from './Button.stories';
+
+# Button
+
+A versatile button component that supports multiple variants: Primary, Secondary, and Link.
+
+```tsx
+import { Button, ButtonVariant } from '@metamask/design-system-react';
+
+<Button variant={ButtonVariant.Primary}>Primary Button</Button>
+<Button variant={ButtonVariant.Secondary}>Secondary Button</Button>
+<Button variant={ButtonVariant.Link}>Link Button</Button>
+```
+
+## Variants
+
+### Primary Button
+
+Primary buttons are used for primary actions. They have high emphasis and should be used sparingly.
+
+<Canvas of={ButtonStories.Primary} />
+
+### Secondary Button
+
+Secondary buttons are used for secondary actions. They have medium emphasis and can be used more frequently than primary buttons.
+
+<Canvas of={ButtonStories.Secondary} />
+
+### Link Button
+
+Link buttons are used for link-like actions. They maintain button behavior while appearing as links.
+
+<Canvas of={ButtonStories.Link} />
+
+## Common Features
+
+All button variants support these common features:
+
+### Size
+
+Buttons support three sizes:
+
+- `ButtonBaseSize.Sm` (32px)
+- `ButtonBaseSize.Md` (40px) - default
+- `ButtonBaseSize.Lg` (48px)
+
+Note: Link variant also supports `ButtonLinkSize.Inherit` which inherits size from parent element.
+
+### IsDanger
+
+Use the danger variant for destructive actions.
+
+<Canvas of={ButtonStories.Danger} />
+
+### IsInverse
+
+Use the inverse variant when the button needs to be displayed on a dark background. When combined with `isDanger`, the button will have inverse styling with error text color.
+
+Note: Only available for Primary and Secondary variants.
+
+### Icons and Accessories
+
+Buttons can display icons or custom accessories at the start and/or end of the content.
+
+<Canvas of={ButtonStories.WithIcon} />
+
+### Loading State
+
+Buttons can show a loading state with optional loading text.
+
+<Canvas of={ButtonStories.Loading} />
+
+### Disabled State
+
+Buttons can be disabled.
+
+<Canvas of={ButtonStories.Disabled} />
+
+### Full Width
+
+Buttons can be set to take up the full width of their container using `isFullWidth`.
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<Button className="my-4 mx-2">Button content</Button>
+
+// Overriding default styles
+<Button className="bg-custom text-custom">Custom styled button</Button>
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+
+## Component API
+
+<Controls of={ButtonStories.Primary} />
+
+## Variant-Specific Features
+
+### Primary Button
+
+- High emphasis styling
+- Solid background color
+- Inverse variant available
+- Danger variant available
+
+### Secondary Button
+
+- Medium emphasis styling
+- Outlined style with transparent background
+- Inverse variant available
+- Danger variant available
+
+### Link Button
+
+- Low emphasis styling
+- Text-only appearance
+- Inheritable size option
+- Danger variant available
+- No inverse variant
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
