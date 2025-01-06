@@ -31,9 +31,10 @@
     "dist/"
   ],
   "scripts": {
-    "build": "rm -rf tsconfig.build.tsbuildinfo dist && tsc --project tsconfig.build.json",
+    "build": "node scripts/build.js",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",
+    "generate-icons": "ts-node scripts/generate-icons.ts",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
@@ -56,6 +57,7 @@
     "@testing-library/react-native": "^12.8.1",
     "@types/babel__preset-env": "^7",
     "@types/jest": "^27.4.1",
+    "@types/node": "^16.18.54",
     "@types/react": "^18.2.0",
     "@types/react-test-renderer": "^18",
     "babel-jest": "^29.7.0",

@@ -1,6 +1,11 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
-import { DEFAULT_ICON_SIZE, DEFAULT_ICON_COLOR } from './Icon.constants';
+import {
+  DEFAULT_ICON_ICONCOLOR,
+  DEFAULT_ICON_ICONSIZE,
+  TWCLASSMAP_ICON_ICONCOLOR,
+  TWCLASSMAP_ICON_ICONSIZE,
+} from './Icon.constants';
 import type { IconProps } from './Icon.types';
 
 /**
@@ -23,10 +28,10 @@ import type { IconProps } from './Icon.types';
  * ```
  */
 export const generateIconClassNames = ({
-  color = DEFAULT_ICON_COLOR,
-  size = DEFAULT_ICON_SIZE,
+  color = DEFAULT_ICON_ICONCOLOR,
+  size = DEFAULT_ICON_ICONSIZE,
   twClassName = '',
 }: Partial<IconProps>): string => {
-  const mergedClassnames = `${color} ${size} ${twClassName}`;
+  const mergedClassnames = `${TWCLASSMAP_ICON_ICONCOLOR[color]} ${TWCLASSMAP_ICON_ICONSIZE[size]} ${twClassName}`;
   return mergedClassnames;
 };

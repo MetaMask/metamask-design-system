@@ -5,8 +5,11 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "jsx": "react-native",
-    "types": ["react-native", "jest"],
-    "emitDeclarationOnly": false
+    "types": ["react-native", "jest", "node"],
+    "emitDeclarationOnly": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Node16"
   },
   "references": [
     { "path": "../design-system-twrnc-preset/tsconfig.build.json" }

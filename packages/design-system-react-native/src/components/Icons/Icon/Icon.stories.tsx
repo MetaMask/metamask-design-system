@@ -5,9 +5,9 @@ import { ScrollView, View } from 'react-native';
 
 import Icon from './Icon';
 import {
-  DEFAULT_ICON_SIZE,
-  DEFAULT_ICON_NAME,
-  DEFAULT_ICON_COLOR,
+  DEFAULT_ICON_ICONSIZE,
+  DEFAULT_ICON_ICONNAME,
+  SAMPLE_ICON_PROPS,
 } from './Icon.constants';
 import type { IconProps } from './Icon.types';
 import { IconName, IconColor, IconSize } from './Icon.types';
@@ -43,7 +43,7 @@ const IconStory: React.FC<IconProps> = ({ color, ...props }) => {
       style={[
         tw`${
           color?.endsWith('-inverse')
-            ? color.replace('inverse', 'default').replace('text', 'bg')
+            ? `bg-${color.replace('inverse', 'default')}`
             : 'bg-background-default'
         }`,
       ]}
@@ -57,9 +57,7 @@ type Story = StoryObj<IconProps>;
 
 export const Default: Story = {
   args: {
-    name: DEFAULT_ICON_NAME,
-    size: DEFAULT_ICON_SIZE,
-    color: DEFAULT_ICON_COLOR,
+    ...SAMPLE_ICON_PROPS,
   },
   render: (args) => <IconStory {...args} />,
 };
@@ -68,27 +66,27 @@ export const Sizes: Story = {
   render: () => (
     <View style={{ flexDirection: 'row', alignItems: 'flex-end', padding: 16 }}>
       <Icon
-        name={DEFAULT_ICON_NAME}
+        name={DEFAULT_ICON_ICONNAME}
         size={IconSize.Xs}
         style={{ marginRight: 8 }}
       />
       <Icon
-        name={DEFAULT_ICON_NAME}
+        name={DEFAULT_ICON_ICONNAME}
         size={IconSize.Sm}
         style={{ marginRight: 8 }}
       />
       <Icon
-        name={DEFAULT_ICON_NAME}
+        name={DEFAULT_ICON_ICONNAME}
         size={IconSize.Md}
         style={{ marginRight: 8 }}
       />
       <Icon
-        name={DEFAULT_ICON_NAME}
+        name={DEFAULT_ICON_ICONNAME}
         size={IconSize.Lg}
         style={{ marginRight: 8 }}
       />
       <Icon
-        name={DEFAULT_ICON_NAME}
+        name={DEFAULT_ICON_ICONNAME}
         size={IconSize.Xl}
         style={{ marginRight: 8 }}
       />
@@ -104,9 +102,9 @@ export const Colors: Story = {
       {Object.values(IconColor).map((color) => (
         <View key={color} style={{ alignItems: 'center', gap: 8 }}>
           <IconStory
-            name={DEFAULT_ICON_NAME}
+            name={DEFAULT_ICON_ICONNAME}
             color={color}
-            size={DEFAULT_ICON_SIZE}
+            size={DEFAULT_ICON_ICONSIZE}
           />
         </View>
       ))}
@@ -123,7 +121,7 @@ export const AllIcons: Story = {
             key={iconName}
             style={{ width: 60, alignItems: 'center', margin: 8 }}
           >
-            <Icon name={iconName} size={DEFAULT_ICON_SIZE} />
+            <Icon name={iconName} />
           </View>
         ))}
       </View>
