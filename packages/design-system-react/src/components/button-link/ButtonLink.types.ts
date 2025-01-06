@@ -8,7 +8,7 @@ export enum ButtonLinkSize {
   /**
    * Inherits font size from parent, removes height/padding, displays inline
    */
-  Inherit = 'inherit',
+  Auto = 'auto',
 }
 
 export type ButtonLinkProps = Omit<

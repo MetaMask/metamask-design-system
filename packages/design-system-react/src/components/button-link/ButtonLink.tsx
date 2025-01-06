@@ -6,7 +6,7 @@ import { ButtonLinkSize } from './ButtonLink.types';
 import type { ButtonLinkProps } from './ButtonLink.types';
 
 const mapToButtonBaseSize = (size: ButtonLinkSize): ButtonBaseSize => {
-  if (size === ButtonLinkSize.Inherit) {
+  if (size === ButtonLinkSize.Auto) {
     return ButtonBaseSize.Md;
   }
   return size as unknown as ButtonBaseSize;
@@ -43,7 +43,7 @@ export const ButtonLink = React.forwardRef<HTMLButtonElement, ButtonLinkProps>(
       ],
       // Disabled/Loading styles
       !isInteractive && ['opacity-50', 'cursor-not-allowed'],
-      size === ButtonLinkSize.Inherit && 'inline p-0 h-auto',
+      size === ButtonLinkSize.Auto && 'inline p-0 h-auto',
       className,
     );
 

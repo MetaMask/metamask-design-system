@@ -67,7 +67,7 @@ describe('ButtonLink', () => {
     rerender(<ButtonLink size={ButtonLinkSize.Lg}>Large</ButtonLink>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
 
-    rerender(<ButtonLink size={ButtonLinkSize.Inherit}>Inherit</ButtonLink>);
+    rerender(<ButtonLink size={ButtonLinkSize.Auto}>Auto</ButtonLink>);
     expect(screen.getByRole('button')).toHaveClass('inline', 'p-0');
   });
 

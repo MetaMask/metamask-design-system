@@ -126,25 +126,25 @@ export const Size: Story = {
       <div className="mt-4 flex flex-col gap-2">
         <Text variant={TextVariant.BodyLg} fontWeight={FontWeight.Medium}>
           Inherits the font-size of the parent element.{' '}
-          <ButtonLink {...args} size={ButtonLinkSize.Inherit}>
+          <ButtonLink {...args} size={ButtonLinkSize.Auto}>
             Learn more
           </ButtonLink>
         </Text>
         <Text variant={TextVariant.BodyMd}>
           Inherits the font-size of the parent element.{' '}
-          <ButtonLink {...args} size={ButtonLinkSize.Inherit}>
+          <ButtonLink {...args} size={ButtonLinkSize.Auto}>
             Learn more
           </ButtonLink>
         </Text>
         <Text variant={TextVariant.BodySm}>
           Inherits the font-size of the parent element.{' '}
-          <ButtonLink {...args} size={ButtonLinkSize.Inherit}>
+          <ButtonLink {...args} size={ButtonLinkSize.Auto}>
             Learn more
           </ButtonLink>
         </Text>
         <Text variant={TextVariant.BodyXs}>
           Inherits the font-size of the parent element.{' '}
-          <ButtonLink {...args} size={ButtonLinkSize.Inherit}>
+          <ButtonLink {...args} size={ButtonLinkSize.Auto}>
             Learn more
           </ButtonLink>
         </Text>
