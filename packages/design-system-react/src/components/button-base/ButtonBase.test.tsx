@@ -208,6 +208,13 @@ describe('ButtonBase', () => {
       </ButtonBase>,
     );
     const customChild = screen.getByTestId('custom-child');
-    expect(customChild.parentElement).not.toHaveClass('text-base');
+    expect(customChild.parentElement).not.toHaveClass(
+      'text-default',
+      'text-s-body-md',
+      'font-s-body-md',
+      'leading-s-body-md',
+      'tracking-s-body-md',
+      'md:text-l-body-md',
+    );
   });
 });
