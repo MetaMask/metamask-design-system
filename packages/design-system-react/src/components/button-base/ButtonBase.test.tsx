@@ -178,24 +178,31 @@ describe('ButtonBase', () => {
     expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
   });
 
-  it('wraps string children in Text component', () => {
-    render(<ButtonBase>Click me</ButtonBase>);
-    expect(screen.getByText('Click me')).toHaveClass(
-      'text-default text-s-body-md font-s-body-md leading-s-body-md tracking-s-body-md md:text-l-body-md',
-    );
-  });
+  it('handles text children correctly', () => {
+    // Test basic text wrapping and styling
+    const { rerender } = render(<ButtonBase>Click me</ButtonBase>);
+    const textElement = screen.getByText('Click me');
 
-  it('passes textProps to Text component when children is string', () => {
-    render(
+    expect(textElement.tagName).toBe('SPAN');
+    expect(textElement).toHaveClass(
+      'text-default',
+      'text-s-body-md',
+      'font-s-body-md',
+      'leading-s-body-md',
+      'tracking-s-body-md',
+      'md:text-l-body-md',
+    );
+
+    // Test custom text props
+    rerender(
       <ButtonBase textProps={{ className: 'custom-text-class' }}>
         Click me
       </ButtonBase>,
     );
     expect(screen.getByText('Click me')).toHaveClass('custom-text-class');
-  });
 
-  it('does not wrap non-string children in Text component', () => {
-    render(
+    // Test non-string children
+    rerender(
       <ButtonBase>
         <div data-testid="custom-child">Custom Element</div>
       </ButtonBase>,

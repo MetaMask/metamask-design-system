@@ -82,7 +82,11 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
 
     const renderContent = () => {
       if (children && typeof children === 'string') {
-        return <Text {...textProps}>{children}</Text>;
+        return (
+          <Text asChild {...textProps}>
+            <span>{children}</span>
+          </Text>
+        );
       }
       return children;
     };
