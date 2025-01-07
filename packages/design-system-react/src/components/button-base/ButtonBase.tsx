@@ -3,6 +3,7 @@ import React from 'react';
 
 import { Icon, IconName } from '..';
 import { twMerge } from '../../utils/tw-merge';
+import { Text } from '../text';
 import { BUTTON_BASE_SIZE_CLASS_MAP } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
 import { ButtonBaseSize } from './ButtonBase.types';
@@ -25,6 +26,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       endIconName,
       endIconProps,
       endAccessory,
+      textProps,
       style,
       ...props
     },
@@ -78,6 +80,13 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       return null;
     };
 
+    const renderContent = () => {
+      if (children && typeof children === 'string') {
+        return <Text {...textProps}>{children}</Text>;
+      }
+      return children;
+    };
+
     const mergedClassName = twMerge(
       // Base styles
       'inline-flex items-center justify-center',
@@ -103,7 +112,9 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
         {...props}
       >
         {renderStartContent()}
-        <Slottable>{isLoading ? renderLoadingState() : children}</Slottable>
+        <Slottable>
+          {isLoading ? renderLoadingState() : renderContent()}
+        </Slottable>
         {renderEndContent()}
       </Component>
     );

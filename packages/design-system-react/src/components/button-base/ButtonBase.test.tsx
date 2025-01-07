@@ -177,4 +177,28 @@ describe('ButtonBase', () => {
     expect(button).toBeDisabled();
     expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
   });
+
+  it('wraps string children in Text component', () => {
+    render(<ButtonBase>Click me</ButtonBase>);
+    expect(screen.getByText('Click me')).toHaveClass('text-base');
+  });
+
+  it('passes textProps to Text component when children is string', () => {
+    render(
+      <ButtonBase textProps={{ className: 'custom-text-class' }}>
+        Click me
+      </ButtonBase>,
+    );
+    expect(screen.getByText('Click me')).toHaveClass('custom-text-class');
+  });
+
+  it('does not wrap non-string children in Text component', () => {
+    render(
+      <ButtonBase>
+        <div data-testid="custom-child">Custom Element</div>
+      </ButtonBase>,
+    );
+    const customChild = screen.getByTestId('custom-child');
+    expect(customChild.parentElement).not.toHaveClass('text-base');
+  });
 });

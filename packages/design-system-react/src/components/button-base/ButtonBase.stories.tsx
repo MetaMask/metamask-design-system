@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { IconName } from '..';
+import { IconName, TextVariant } from '..';
 import { ButtonBase } from './ButtonBase';
 import { ButtonBaseSize } from './ButtonBase.types';
 import README from './README.mdx';
@@ -90,6 +90,14 @@ const meta: Meta<typeof ButtonBase> = {
       description:
         'Optional prop to pass additional properties to the loading icon',
     },
+    textProps: {
+      control: 'object',
+      description:
+        'Optional props to be passed to the Text component when children is a string',
+      table: {
+        type: { summary: 'Partial<TextProps>' },
+      },
+    },
   },
 };
 
@@ -116,6 +124,15 @@ export const Size: Story = {
       </ButtonBase>
     </div>
   ),
+};
+
+export const TextProps: Story = {
+  args: {
+    children: 'Button with custom text variant',
+    textProps: {
+      variant: TextVariant.BodySm,
+    },
+  },
 };
 
 export const IsFullWidth: Story = {

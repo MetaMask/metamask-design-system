@@ -2,6 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { MakePropsOptional } from '../../types/make-props-optional';
 import type { IconName, IconProps } from '../icon';
+import type { TextProps } from '../text';
 
 export enum ButtonBaseSize {
   /**
@@ -91,4 +92,8 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
    * Should be used sparingly and only for dynamic styles that can't be achieved with className.
    */
   style?: React.CSSProperties;
+  /**
+   * Optional props to be passed to the Text component when children is a string
+   */
+  textProps?: Partial<TextProps>;
 };
