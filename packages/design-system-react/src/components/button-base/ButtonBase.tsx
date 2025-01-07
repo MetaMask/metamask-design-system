@@ -1,7 +1,7 @@
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import React from 'react';
 
-import { Icon, IconName, Text, TextColor } from '..';
+import { Icon, IconName, IconSize, Text, TextColor } from '..';
 import { twMerge } from '../../utils/tw-merge';
 import { BUTTON_BASE_SIZE_CLASS_MAP } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
@@ -37,6 +37,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       <span className="inline-flex items-center">
         <Icon
           name={IconName.Loading}
+          size={IconSize.Sm}
           className={twMerge(
             'animate-spin mr-2 text-inherit',
             loadingIconProps?.className,
@@ -52,6 +53,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
         return (
           <Icon
             name={startIconName}
+            size={IconSize.Sm}
             className={twMerge('mr-2 text-inherit', startIconProps?.className)}
             {...startIconProps}
           />
@@ -68,6 +70,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
         return (
           <Icon
             name={endIconName}
+            size={IconSize.Sm}
             className={twMerge('ml-2 text-inherit', endIconProps?.className)}
             {...endIconProps}
           />
