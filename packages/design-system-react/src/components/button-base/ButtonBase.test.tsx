@@ -180,7 +180,9 @@ describe('ButtonBase', () => {
 
   it('wraps string children in Text component', () => {
     render(<ButtonBase>Click me</ButtonBase>);
-    expect(screen.getByText('Click me')).toHaveClass('text-base');
+    expect(screen.getByText('Click me')).toHaveClass(
+      'text-default text-s-body-md font-s-body-md leading-s-body-md tracking-s-body-md md:text-l-body-md',
+    );
   });
 
   it('passes textProps to Text component when children is string', () => {
