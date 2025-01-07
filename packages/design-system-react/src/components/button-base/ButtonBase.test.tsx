@@ -185,7 +185,7 @@ describe('ButtonBase', () => {
 
     expect(textElement.tagName).toBe('SPAN');
     expect(textElement).toHaveClass(
-      'text-default',
+      'text-inherit',
       'text-s-body-md',
       'font-s-body-md',
       'leading-s-body-md',
@@ -209,7 +209,7 @@ describe('ButtonBase', () => {
     );
     const customChild = screen.getByTestId('custom-child');
     expect(customChild.parentElement).not.toHaveClass(
-      'text-default',
+      'text-inherit',
       'text-s-body-md',
       'font-s-body-md',
       'leading-s-body-md',
