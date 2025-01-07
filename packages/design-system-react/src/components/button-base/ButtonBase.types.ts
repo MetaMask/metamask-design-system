@@ -35,6 +35,10 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
    */
   size?: ButtonBaseSize;
   /**
+   * Optional props to be passed to the Text component when children is a string
+   */
+  textProps?: Partial<TextProps>;
+  /**
    * Optional prop that when true, makes the button take up the full width of its container
    * @default false
    */
@@ -92,8 +96,4 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
    * Should be used sparingly and only for dynamic styles that can't be achieved with className.
    */
   style?: React.CSSProperties;
-  /**
-   * Optional props to be passed to the Text component when children is a string
-   */
-  textProps?: Partial<TextProps>;
 };
