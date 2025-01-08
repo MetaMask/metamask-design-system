@@ -64,11 +64,11 @@ describe('ButtonLink', () => {
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
 
+    rerender(<ButtonLink size={ButtonLinkSize.Md}>Medium</ButtonLink>);
+    expect(screen.getByRole('button')).toHaveClass('h-10');
+
     rerender(<ButtonLink size={ButtonLinkSize.Lg}>Large</ButtonLink>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
-
-    rerender(<ButtonLink size={ButtonLinkSize.Auto}>Auto</ButtonLink>);
-    expect(screen.getByRole('button')).toHaveClass('inline', 'p-0');
   });
 
   it('renders with icons correctly', () => {

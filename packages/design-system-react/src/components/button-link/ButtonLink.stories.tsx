@@ -111,45 +111,17 @@ export const IsDanger: Story = {
 
 export const Size: Story = {
   render: (args) => (
-    <>
-      <div className="flex gap-2">
-        <ButtonLink {...args} size={ButtonLinkSize.Sm}>
-          Small
-        </ButtonLink>
-        <ButtonLink {...args} size={ButtonLinkSize.Md}>
-          Medium
-        </ButtonLink>
-        <ButtonLink {...args} size={ButtonLinkSize.Lg}>
-          Large
-        </ButtonLink>
-      </div>
-      <div className="mt-4 flex flex-col gap-2">
-        <Text variant={TextVariant.BodyLg} fontWeight={FontWeight.Medium}>
-          Inherits the font-size of the parent element.{' '}
-          <ButtonLink {...args} size={ButtonLinkSize.Auto}>
-            Learn more
-          </ButtonLink>
-        </Text>
-        <Text variant={TextVariant.BodyMd}>
-          Inherits the font-size of the parent element.{' '}
-          <ButtonLink {...args} size={ButtonLinkSize.Auto}>
-            Learn more
-          </ButtonLink>
-        </Text>
-        <Text variant={TextVariant.BodySm}>
-          Inherits the font-size of the parent element.{' '}
-          <ButtonLink {...args} size={ButtonLinkSize.Auto}>
-            Learn more
-          </ButtonLink>
-        </Text>
-        <Text variant={TextVariant.BodyXs}>
-          Inherits the font-size of the parent element.{' '}
-          <ButtonLink {...args} size={ButtonLinkSize.Auto}>
-            Learn more
-          </ButtonLink>
-        </Text>
-      </div>
-    </>
+    <div className="flex gap-2">
+      <ButtonLink {...args} size={ButtonLinkSize.Sm}>
+        Small
+      </ButtonLink>
+      <ButtonLink {...args} size={ButtonLinkSize.Md}>
+        Medium
+      </ButtonLink>
+      <ButtonLink {...args} size={ButtonLinkSize.Lg}>
+        Large
+      </ButtonLink>
+    </div>
   ),
 };
 

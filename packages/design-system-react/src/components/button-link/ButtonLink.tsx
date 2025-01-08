@@ -1,29 +1,11 @@
 import React from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { ButtonBase, ButtonBaseSize } from '../button-base';
-import { ButtonLinkSize } from './ButtonLink.types';
+import { ButtonBase } from '../button-base';
 import type { ButtonLinkProps } from './ButtonLink.types';
 
-const mapToButtonBaseSize = (size: ButtonLinkSize): ButtonBaseSize => {
-  if (size === ButtonLinkSize.Auto) {
-    return ButtonBaseSize.Md;
-  }
-  return size as unknown as ButtonBaseSize;
-};
-
 export const ButtonLink = React.forwardRef<HTMLButtonElement, ButtonLinkProps>(
-  (
-    {
-      className,
-      isDanger,
-      isDisabled,
-      isLoading,
-      size = ButtonLinkSize.Md,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ className, isDanger, isDisabled, isLoading, ...props }, ref) => {
     const isInteractive = !(isDisabled ?? isLoading);
 
     const mergedClassName = twMerge(
@@ -43,7 +25,6 @@ export const ButtonLink = React.forwardRef<HTMLButtonElement, ButtonLinkProps>(
       ],
       // Disabled/Loading styles
       !isInteractive && ['opacity-50', 'cursor-not-allowed'],
-      size === ButtonLinkSize.Auto && 'inline p-0 h-auto',
       className,
     );
 
@@ -53,7 +34,6 @@ export const ButtonLink = React.forwardRef<HTMLButtonElement, ButtonLinkProps>(
         className={mergedClassName}
         isDisabled={isDisabled}
         isLoading={isLoading}
-        size={mapToButtonBaseSize(size)}
         {...props}
       />
     );

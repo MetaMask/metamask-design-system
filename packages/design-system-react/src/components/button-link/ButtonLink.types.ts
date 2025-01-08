@@ -1,19 +1,8 @@
 import type { ButtonBaseProps } from '../button-base';
-import { ButtonBaseSize } from '../button-base';
-
-export enum ButtonLinkSize {
-  Sm = ButtonBaseSize.Sm,
-  Md = ButtonBaseSize.Md,
-  Lg = ButtonBaseSize.Lg,
-  /**
-   * Inherits font size from parent, removes height/padding, displays inline
-   */
-  Auto = 'auto',
-}
 
 export type ButtonLinkProps = Omit<
   ButtonBaseProps,
-  'className' | 'isDisabled' | 'isLoading' | 'style' | 'size'
+  'className' | 'isDisabled' | 'isLoading' | 'style'
 > & {
   /**
    * Optional prop for additional CSS classes to be applied to the ButtonLink component
@@ -39,9 +28,4 @@ export type ButtonLinkProps = Omit<
    * Should be used sparingly and only for dynamic styles that can't be achieved with className.
    */
   style?: React.CSSProperties;
-  /**
-   * Optional prop to control the size of the ButtonLink
-   * @default ButtonLinkSize.Md
-   */
-  size?: ButtonLinkSize;
 };
