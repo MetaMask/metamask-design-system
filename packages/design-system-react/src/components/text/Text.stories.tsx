@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { createEnumOptions } from '../../utils';
 import README from './README.mdx';
 import { Text } from './Text';
 import {
@@ -19,6 +20,72 @@ const meta: Meta<typeof Text> = {
   parameters: {
     docs: {
       page: README,
+    },
+  },
+  argTypes: {
+    children: {
+      control: 'text',
+      description:
+        'The text content or elements to be rendered within the component.',
+    },
+    variant: {
+      control: 'select',
+      options: createEnumOptions(TextVariant, 'TextVariant'),
+      description:
+        'Optional prop to change the font size of the component. The Text component uses responsive font sizes. Different variants map to specific HTML elements by default.',
+    },
+    color: {
+      control: 'select',
+      options: createEnumOptions(TextColor, 'TextColor'),
+      description:
+        'Optional prop that sets the color of the text using predefined theme colors.',
+    },
+    fontWeight: {
+      control: 'select',
+      options: createEnumOptions(FontWeight, 'FontWeight'),
+      description:
+        'Optional prop to control the font weight of the text. Normal: 400, Medium: 500, Bold: 700',
+    },
+    fontStyle: {
+      control: 'select',
+      options: createEnumOptions(FontStyle, 'FontStyle'),
+      description: 'Optional prop to control the font style of the text.',
+    },
+    textTransform: {
+      control: 'select',
+      options: createEnumOptions(TextTransform, 'TextTransform'),
+      description: 'Optional prop to apply text transformation to the content.',
+    },
+    textAlign: {
+      control: 'select',
+      options: createEnumOptions(TextAlign, 'TextAlign'),
+      description:
+        'Optional prop to control the text alignment within its container.',
+    },
+    overflowWrap: {
+      control: 'select',
+      options: createEnumOptions(OverflowWrap, 'OverflowWrap'),
+      description:
+        'Optional prop to determine how text should wrap when it reaches the edge of its container.',
+    },
+    ellipsis: {
+      control: 'boolean',
+      description:
+        'Optional prop that when true, adds an ellipsis (...) when text overflows its container.',
+    },
+    asChild: {
+      control: 'boolean',
+      description:
+        'Optional boolean that determines if the component should merge its props onto its immediate child instead of rendering a default DOM element.',
+    },
+    className: {
+      control: 'text',
+      description:
+        'Optional prop for additional CSS classes to be applied to the Text component.',
+    },
+    style: {
+      control: 'object',
+      description: 'Optional prop for inline styles.',
     },
   },
   args: {

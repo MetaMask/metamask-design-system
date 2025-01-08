@@ -19,7 +19,7 @@ describe('createEnumOptions', () => {
     Auto = 'auto',
   }
 
-  it('should create formatted options from string enum', () => {
+  it('should create formatted options from string enum with enum name', () => {
     const options = createEnumOptions(TestEnum, 'TestEnum');
     expect(options).toStrictEqual([
       'TestEnum.One',
@@ -28,7 +28,7 @@ describe('createEnumOptions', () => {
     ]);
   });
 
-  it('should create formatted options from numeric enum', () => {
+  it('should create formatted options from numeric enum with enum name', () => {
     const options = createEnumOptions(NumericEnum, 'NumericEnum');
     expect(options).toStrictEqual([
       'NumericEnum.Zero',
@@ -37,7 +37,7 @@ describe('createEnumOptions', () => {
     ]);
   });
 
-  it('should create formatted options from mixed enum', () => {
+  it('should create formatted options from mixed enum with enum name', () => {
     const options = createEnumOptions(MixedEnum, 'MixedEnum');
     expect(options).toStrictEqual([
       'MixedEnum.String',
@@ -46,7 +46,7 @@ describe('createEnumOptions', () => {
     ]);
   });
 
-  it('should handle empty enum', () => {
+  it('should handle empty enum with enum name', () => {
     enum EmptyEnum {}
     const options = createEnumOptions(EmptyEnum, 'EmptyEnum');
     expect(options).toStrictEqual([]);
@@ -59,5 +59,26 @@ describe('createEnumOptions', () => {
       'Test.Enum.Two',
       'Test.Enum.Three',
     ]);
+  });
+
+  it('should show only keys when no enum name is provided for string enum', () => {
+    const options = createEnumOptions(TestEnum);
+    expect(options).toStrictEqual(['One', 'Two', 'Three']);
+  });
+
+  it('should show only keys when no enum name is provided for numeric enum', () => {
+    const options = createEnumOptions(NumericEnum);
+    expect(options).toStrictEqual(['Zero', 'One', 'Two']);
+  });
+
+  it('should show only keys when no enum name is provided for mixed enum', () => {
+    const options = createEnumOptions(MixedEnum);
+    expect(options).toStrictEqual(['String', 'Number', 'Auto']);
+  });
+
+  it('should return empty array for empty enum when no enum name is provided', () => {
+    enum EmptyEnum {}
+    const options = createEnumOptions(EmptyEnum);
+    expect(options).toStrictEqual([]);
   });
 });
