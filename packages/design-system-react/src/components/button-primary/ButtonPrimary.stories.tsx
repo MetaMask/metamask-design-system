@@ -3,7 +3,6 @@ import React from 'react';
 
 import { ButtonPrimarySize } from '.';
 import { IconName } from '..';
-import { createEnumOptions } from '../../utils';
 import { ButtonPrimary } from './ButtonPrimary';
 import README from './README.mdx';
 

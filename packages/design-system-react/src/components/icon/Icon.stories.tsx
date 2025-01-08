@@ -1,7 +1,6 @@
 import type { StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { createEnumOptions } from '../../utils';
 import { Icon } from './Icon';
 import { IconName, IconSize, IconColor } from './Icon.types';
 import README from './README.mdx';
@@ -23,7 +22,8 @@ const meta = {
       description:
         'Required prop to specify which icon to render from the icon set',
       control: 'select',
-      options: createEnumOptions(IconName, 'IconName'),
+      options: Object.keys(IconName),
+      mapping: IconName,
       table: {
         type: { summary: 'IconName' },
         defaultValue: { summary: 'required' },
@@ -32,7 +32,8 @@ const meta = {
     size: {
       description: 'Optional prop to control the size of the icon',
       control: 'select',
-      options: createEnumOptions(IconSize, 'IconSize'),
+      options: Object.keys(IconSize),
+      mapping: IconSize,
       table: {
         type: { summary: 'IconSize' },
         defaultValue: { summary: 'IconSize.Md' },
@@ -42,7 +43,8 @@ const meta = {
       description:
         'Optional prop that sets the color of the icon using predefined theme colors',
       control: 'select',
-      options: createEnumOptions(IconColor, 'IconColor'),
+      options: Object.keys(IconColor),
+      mapping: IconColor,
       table: {
         type: { summary: 'IconColor' },
         defaultValue: { summary: 'IconColor.IconDefault' },

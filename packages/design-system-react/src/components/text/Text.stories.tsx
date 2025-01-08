@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { createEnumOptions } from '../../utils';
 import README from './README.mdx';
 import { Text } from './Text';
 import {

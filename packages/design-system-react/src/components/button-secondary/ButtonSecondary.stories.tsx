@@ -3,7 +3,6 @@ import React from 'react';
 
 import { ButtonSecondarySize } from '.';
 import { IconName } from '..';
-import { createEnumOptions } from '../../utils';
 import { ButtonSecondary } from './ButtonSecondary';
 import README from './README.mdx';
 
