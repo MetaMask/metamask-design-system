@@ -62,10 +62,10 @@ describe('ButtonSecondary', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
-      'bg-transparent',
-      'border-2',
-      'border-error-inverse',
-      'text-error-inverse',
+      'bg-default',
+      'text-error-default',
+      'hover:bg-default-hover',
+      'active:bg-default-pressed',
     );
   });
 
