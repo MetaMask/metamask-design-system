@@ -30,41 +30,48 @@ const meta: Meta<typeof Text> = {
     },
     variant: {
       control: 'select',
-      options: createEnumOptions(TextVariant, 'TextVariant'),
+      options: Object.keys(TextVariant),
+      mapping: TextVariant,
       description:
         'Optional prop to change the font size of the component. The Text component uses responsive font sizes. Different variants map to specific HTML elements by default.',
     },
     color: {
       control: 'select',
-      options: createEnumOptions(TextColor, 'TextColor'),
+      options: Object.keys(TextColor),
+      mapping: TextColor,
       description:
         'Optional prop that sets the color of the text using predefined theme colors.',
     },
     fontWeight: {
       control: 'select',
-      options: createEnumOptions(FontWeight, 'FontWeight'),
+      options: Object.keys(FontWeight),
+      mapping: FontWeight,
       description:
         'Optional prop to control the font weight of the text. Normal: 400, Medium: 500, Bold: 700',
     },
     fontStyle: {
       control: 'select',
-      options: createEnumOptions(FontStyle, 'FontStyle'),
+      options: Object.keys(FontStyle),
+      mapping: FontStyle,
       description: 'Optional prop to control the font style of the text.',
     },
     textTransform: {
       control: 'select',
-      options: createEnumOptions(TextTransform, 'TextTransform'),
+      options: Object.keys(TextTransform),
+      mapping: TextTransform,
       description: 'Optional prop to apply text transformation to the content.',
     },
     textAlign: {
       control: 'select',
-      options: createEnumOptions(TextAlign, 'TextAlign'),
+      options: Object.keys(TextAlign),
+      mapping: TextAlign,
       description:
         'Optional prop to control the text alignment within its container.',
     },
     overflowWrap: {
       control: 'select',
-      options: createEnumOptions(OverflowWrap, 'OverflowWrap'),
+      options: Object.keys(OverflowWrap),
+      mapping: OverflowWrap,
       description:
         'Optional prop to determine how text should wrap when it reaches the edge of its container.',
     },

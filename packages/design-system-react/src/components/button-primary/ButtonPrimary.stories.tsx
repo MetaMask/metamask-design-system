@@ -38,7 +38,8 @@ const meta: Meta<typeof ButtonPrimary> = {
     },
     size: {
       control: 'select',
-      options: createEnumOptions(ButtonPrimarySize, 'ButtonPrimarySize'),
+      options: Object.keys(ButtonPrimarySize),
+      mapping: ButtonPrimarySize,
       description: 'Optional prop to control the size of the ButtonPrimary',
     },
     isFullWidth: {
@@ -57,7 +58,8 @@ const meta: Meta<typeof ButtonPrimary> = {
     },
     startIconName: {
       control: 'select',
-      options: createEnumOptions(IconName, 'IconName'),
+      options: Object.keys(IconName),
+      mapping: IconName,
       description:
         'Optional prop to specify an icon to show at the start of the button',
     },
@@ -73,7 +75,8 @@ const meta: Meta<typeof ButtonPrimary> = {
     },
     endIconName: {
       control: 'select',
-      options: createEnumOptions(IconName, 'IconName'),
+      options: Object.keys(IconName),
+      mapping: IconName,
       description:
         'Optional prop to specify an icon to show at the end of the button',
     },
