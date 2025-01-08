@@ -3,6 +3,7 @@ import React from 'react';
 
 import { ButtonPrimarySize } from '.';
 import { IconName } from '..';
+import { createEnumOptions } from '../../utils';
 import { ButtonPrimary } from './ButtonPrimary';
 import README from './README.mdx';
 
@@ -37,7 +38,7 @@ const meta: Meta<typeof ButtonPrimary> = {
     },
     size: {
       control: 'select',
-      options: Object.values(ButtonPrimarySize),
+      options: createEnumOptions(ButtonPrimarySize, 'ButtonPrimarySize'),
       description: 'Optional prop to control the size of the ButtonPrimary',
     },
     isFullWidth: {
@@ -56,7 +57,7 @@ const meta: Meta<typeof ButtonPrimary> = {
     },
     startIconName: {
       control: 'select',
-      options: Object.values(IconName),
+      options: createEnumOptions(IconName, 'IconName'),
       description:
         'Optional prop to specify an icon to show at the start of the button',
     },
@@ -72,7 +73,7 @@ const meta: Meta<typeof ButtonPrimary> = {
     },
     endIconName: {
       control: 'select',
-      options: Object.values(IconName),
+      options: createEnumOptions(IconName, 'IconName'),
       description:
         'Optional prop to specify an icon to show at the end of the button',
     },

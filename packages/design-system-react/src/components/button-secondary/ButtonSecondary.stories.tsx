@@ -3,6 +3,7 @@ import React from 'react';
 
 import { ButtonSecondarySize } from '.';
 import { IconName } from '..';
+import { createEnumOptions } from '../../utils';
 import { ButtonSecondary } from './ButtonSecondary';
 import README from './README.mdx';
 
@@ -37,7 +38,7 @@ const meta: Meta<typeof ButtonSecondary> = {
     },
     size: {
       control: 'select',
-      options: Object.values(ButtonSecondarySize),
+      options: createEnumOptions(ButtonSecondarySize, 'ButtonSecondarySize'),
       description: 'Optional prop to control the size of the ButtonSecondary',
     },
     isFullWidth: {
@@ -56,7 +57,7 @@ const meta: Meta<typeof ButtonSecondary> = {
     },
     startIconName: {
       control: 'select',
-      options: Object.values(IconName),
+      options: createEnumOptions(IconName, 'IconName'),
       description:
         'Optional prop to specify an icon to show at the start of the button',
     },
@@ -72,7 +73,7 @@ const meta: Meta<typeof ButtonSecondary> = {
     },
     endIconName: {
       control: 'select',
-      options: Object.values(IconName),
+      options: createEnumOptions(IconName, 'IconName'),
       description:
         'Optional prop to specify an icon to show at the end of the button',
     },

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { IconName, TextVariant } from '..';
+import { createEnumOptions } from '../../utils';
 import { ButtonBase } from './ButtonBase';
 import { ButtonBaseSize } from './ButtonBase.types';
 import README from './README.mdx';
@@ -27,7 +28,7 @@ const meta: Meta<typeof ButtonBase> = {
     },
     size: {
       control: 'select',
-      options: Object.values(ButtonBaseSize),
+      options: createEnumOptions(ButtonBaseSize, 'ButtonBaseSize'),
       description: 'Optional prop to control the size of the ButtonBase',
     },
     isFullWidth: {
@@ -51,7 +52,7 @@ const meta: Meta<typeof ButtonBase> = {
     },
     startIconName: {
       control: 'select',
-      options: Object.values(IconName),
+      options: createEnumOptions(IconName, 'IconName'),
       description:
         'Optional prop to specify an icon to show at the start of the button',
     },
@@ -67,7 +68,7 @@ const meta: Meta<typeof ButtonBase> = {
     },
     endIconName: {
       control: 'select',
-      options: Object.values(IconName),
+      options: createEnumOptions(IconName, 'IconName'),
       description:
         'Optional prop to specify an icon to show at the end of the button',
     },
