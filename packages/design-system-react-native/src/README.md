@@ -1,64 +1,121 @@
 # Design System Component Structure
 
-This design system organizes components into two distinct folders:
+This design system organizes components into three distinct folders:
 
-## 1. `base-components`
+## 1. base-components
 
 The `base-components` folder contains foundational building blocks for constructing components in the `components` folder. These are the lower-level, reusable primitives used internally within the design system.
 
-### Key Points:
+### Key Points
 
-- **Purpose:** To provide the fundamental functionality and styling upon which higher-level components are built.
-- **Intended Usage:**
-  - Developers working on the design system should use `base-components` when creating new components for the `components` folder.
-  - End users or consumers of the design system **should not** directly use components from `base-components`.
-- **Examples:**
-  - A `BaseButton` component with minimal styling and functionality used to create higher-level button variants (e.g., `ButtonPrimary`, `ButtonSecondary`).
+**Purpose:**
 
-### Guidelines:
+- To provide the fundamental functionality and styling upon which higher-level components are built.
+
+**Intended Usage:**
+
+- Developers working on the design system should use `base-components` when creating new components for the `components` folder.
+- End users or consumers of the design system should not directly use components from `base-components`.
+
+**Examples:**
+
+- A `BaseButton` component with minimal styling and functionality used to create higher-level button variants (e.g., `PrimaryButton`, `SecondaryButton`).
+
+**Guidelines:**
 
 - `base-components` should remain minimal and abstract, focusing on functionality and avoiding domain-specific design decisions.
 - Ensure these components are well-documented and thoroughly tested to ensure reliability across the system.
 
-## 2. `components`
+---
+
+## 2. components
 
 The `components` folder contains fully realized components intended for direct use by end users or consumers of the design system. These components encapsulate the functionality and styling defined in the `base-components`, offering a cohesive and user-friendly API.
 
-### Key Points:
+### Key Points
 
-- **Purpose:** To provide ready-to-use components that adhere to the design system's guidelines and standards.
-- **Intended Usage:**
-  - Consumers of the design system should exclusively use components from this folder.
-  - These components are designed with a consistent API and pre-defined styling to fit seamlessly into applications.
-- **Examples:**
-  - A `Button` component that provides variants (e.g., `primary`, `secondary`) and responsive styling.
+**Purpose:**
 
-### Guidelines:
+- To provide ready-to-use components that adhere to the design system's guidelines and standards.
+
+**Intended Usage:**
+
+- Consumers of the design system should exclusively use components from this folder.
+- These components are designed with a consistent API and pre-defined styling to fit seamlessly into applications.
+
+**Examples:**
+
+- A `Button` component that provides variants (e.g., primary, secondary) and responsive styling.
+
+**Guidelines:**
 
 - Components in this folder should avoid re-implementing functionality available in `base-components`. Instead, they should compose and extend the `base-components`.
 - Provide comprehensive documentation and usage examples for each component to help consumers integrate them effectively.
 
+---
+
+## 3. temp-components
+
+The `temp-components` folder is for temporary components that are not yet officially vested by the team but are planned for future inclusion in the design system.
+
+### Key Points
+
+**Purpose:**
+
+- To serve as a staging area for experimental or under-review components before they are finalized and moved to the `components` folder.
+
+**Intended Usage:**
+
+- Developers can use `temp-components` to collaborate on new component ideas and gather feedback.
+- These components are not intended for use by end users or consumers until they are officially promoted to the `components` folder.
+
+**Examples:**
+
+- A `TempCard` component that is being evaluated for inclusion as a new `Card` component.
+
+**Guidelines:**
+
+- Clearly mark all components in this folder as experimental in their documentation.
+- Ensure basic functionality and tests are implemented for these components to facilitate feedback and iteration.
+- Regularly review and decide on the future of components in this folder to avoid stagnation.
+
+---
+
 ## Best Practices
 
-- **Clear Separation:** Maintain a clear distinction between `base-components` and `components` to prevent direct usage of `base-components` by end users.
-- **Naming Conventions:**
-  - Prefix all `base-components` with `Base` (e.g., `BaseButton`, `BaseInput`) to signal their purpose.
-  - Use descriptive and intuitive names for components in the `components` folder.
-- **Documentation:** Clearly indicate in the documentation of `base-components` that they are internal and not intended for external use.
-- **Testing:** Ensure robust testing for both `base-components` and `components`, with an emphasis on user-facing functionality in the `components` folder.
+### Clear Separation
+
+Maintain a clear distinction between `base-components`, `components`, and `temp-components` to prevent direct usage of `base-components` and `temp-components` by end users.
+
+### Naming Conventions
+
+- Prefix all `base-components` with `Base` (e.g., `BaseButton`, `BaseInput`) to signal their purpose.
+- Use descriptive and intuitive names for components in the `components` folder.
+- Prefix temporary components in `temp-components` with `Temp` (e.g., `TempCard`, `TempModal`).
+
+### Documentation
+
+- Clearly indicate in the documentation of `base-components` and `temp-components` that they are internal or experimental and not intended for external use.
+
+### Testing
+
+- Ensure robust testing for `base-components`, `components`, and `temp-components`, with an emphasis on user-facing functionality in the `components` folder.
+
+---
 
 ## Example Project Structure
 
-```plaintext
+```
 src/
 ├── base-components/
-│   ├── ButtonBase.tsx
-│   └── ...Base.tsx
+│   ├── BaseButton.tsx
+│   └── BaseInput.tsx
 ├── components/
 │   ├── Button.tsx
-│   ├── Icon.tsx
-│   ├── Text.tsx
-│   └── ....tsx
+│   └── Input.tsx
+├── temp-components/
+│   ├── TempCard.tsx
+│   └── TempModal.tsx
 ```
 
 By adhering to this structure, the design system ensures a clean separation of concerns, promoting maintainability and ease of use for all consumers.

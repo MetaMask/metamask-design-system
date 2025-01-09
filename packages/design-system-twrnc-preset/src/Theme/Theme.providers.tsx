@@ -3,7 +3,7 @@ import React, { createContext, useState, useMemo } from 'react';
 import { useColorScheme } from 'react-native';
 import { create } from 'twrnc';
 
-import { ColorSet, ColorScheme } from '../twrnc-settings';
+import { ColorSet, ColorScheme, colorSetList } from '../twrnc-settings';
 import type { ThemeContextProps, ThemeProviderProps } from './Theme.types';
 import { Theme } from './Theme.types';
 import { generateTailwindConfig } from './Theme.utilities';
@@ -11,6 +11,7 @@ import { generateTailwindConfig } from './Theme.utilities';
 export const defaultThemeContextValue: ThemeContextProps = {
   tw: create(generateTailwindConfig(ColorSet.Brand, ColorScheme.Light)),
   colorSet: ColorSet.Brand,
+  colorSetList: colorSetList[ColorSet.Brand][Theme.Light],
   theme: Theme.Light,
   setColorSet: () => {},
   setTheme: () => {},
@@ -57,6 +58,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       value={{
         tw,
         colorSet: currentColorSet,
+        colorSetList: colorSetList[colorSet][activeColorScheme],
         theme: currentTheme,
         setColorSet: setCurrentColorSet,
         setTheme: setCurrentTheme,

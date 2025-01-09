@@ -1,0 +1,151 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import type { Meta, StoryObj } from '@storybook/react-native';
+import { View } from 'react-native';
+
+import { IconName } from '../../../../Icons/Icon';
+import { ButtonSize } from '../../Button.types';
+import ButtonSecondary from './ButtonSecondary';
+import { DEFAULT_BUTTONSECONDARY_PROPS } from './ButtonSecondary.constants';
+import type { ButtonSecondaryProps } from './ButtonSecondary.types';
+
+const meta: Meta<ButtonSecondaryProps> = {
+  title: 'Components/Button Secondary',
+  component: ButtonSecondary,
+  argTypes: {
+    children: {
+      control: 'text',
+    },
+    size: {
+      control: 'select',
+      options: ButtonSize,
+    },
+    isLoading: {
+      control: 'boolean',
+    },
+    loadingText: {
+      control: 'text',
+    },
+    startIconName: {
+      control: 'select',
+      options: IconName,
+    },
+    endIconName: {
+      control: 'select',
+      options: IconName,
+    },
+    isDisabled: {
+      control: 'boolean',
+    },
+    isFullWidth: {
+      control: 'boolean',
+    },
+    isPressed: {
+      control: 'boolean',
+    },
+    isDanger: {
+      control: 'boolean',
+    },
+    isInverse: {
+      control: 'boolean',
+    },
+    twClassName: {
+      control: 'text',
+    },
+  },
+};
+
+export default meta;
+
+type Story = StoryObj<ButtonSecondaryProps>;
+const ButtonSecondaryStory: React.FC<ButtonSecondaryProps> = ({
+  isInverse,
+  ...props
+}) => {
+  const tw = useTailwind();
+  return (
+    <View
+      style={[
+        tw`${isInverse ? `bg-primary-default` : 'bg-background-default'}`,
+      ]}
+    >
+      <ButtonSecondary isInverse={isInverse} {...props} />
+    </View>
+  );
+};
+
+export const Default: Story = {
+  args: {
+    children: 'Sample ButtonSecondary Text',
+    size: DEFAULT_BUTTONSECONDARY_PROPS.size,
+    isLoading: DEFAULT_BUTTONSECONDARY_PROPS.isLoading,
+    loadingText: DEFAULT_BUTTONSECONDARY_PROPS.loadingText,
+    startIconName: IconName.Add,
+    endIconName: IconName.AddSquare,
+    isDisabled: DEFAULT_BUTTONSECONDARY_PROPS.isDisabled,
+    isFullWidth: DEFAULT_BUTTONSECONDARY_PROPS.isFullWidth,
+  },
+  render: (args) => <ButtonSecondaryStory {...args} />,
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonSecondary size={ButtonSize.Sm}>ButtonSize Sm</ButtonSecondary>
+      <ButtonSecondary size={ButtonSize.Md}>
+        ButtonSize Md (Default)
+      </ButtonSecondary>
+      <ButtonSecondary size={ButtonSize.Lg}>ButtonSize Lg</ButtonSecondary>
+    </View>
+  ),
+};
+
+export const IsLoading: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonSecondary isLoading>ButtonSecondary</ButtonSecondary>
+      <ButtonSecondary isLoading loadingText="With Loading Text">
+        ButtonSecondary
+      </ButtonSecondary>
+    </View>
+  ),
+};
+
+export const WithStartAccessory: Story = {
+  render: () => (
+    <ButtonSecondary startIconName={IconName.Add}>
+      ButtonSecondary
+    </ButtonSecondary>
+  ),
+};
+
+export const WithEndAccessory: Story = {
+  render: () => (
+    <ButtonSecondary endIconName={IconName.Add}>
+      ButtonSecondary
+    </ButtonSecondary>
+  ),
+};
+
+export const WithStartAndEndAccessory: Story = {
+  render: () => (
+    <ButtonSecondary
+      startIconName={IconName.Add}
+      endIconName={IconName.AddSquare}
+    >
+      ButtonSecondary
+    </ButtonSecondary>
+  ),
+};
+
+export const isDisabled: Story = {
+  render: () => <ButtonSecondary isDisabled>ButtonSecondary</ButtonSecondary>,
+};
+
+export const isFullWidth: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonSecondary>ButtonSecondary</ButtonSecondary>
+      <ButtonSecondary isFullWidth>ButtonSecondary</ButtonSecondary>
+    </View>
+  ),
+};

@@ -1,0 +1,147 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import type { Meta, StoryObj } from '@storybook/react-native';
+import { View } from 'react-native';
+
+import { IconName } from '../../../../Icons/Icon';
+import { ButtonSize } from '../../Button.types';
+import ButtonPrimary from './ButtonPrimary';
+import { DEFAULT_BUTTONPRIMARY_PROPS } from './ButtonPrimary.constants';
+import type { ButtonPrimaryProps } from './ButtonPrimary.types';
+
+const meta: Meta<ButtonPrimaryProps> = {
+  title: 'Components/Button Primary',
+  component: ButtonPrimary,
+  argTypes: {
+    children: {
+      control: 'text',
+    },
+    size: {
+      control: 'select',
+      options: ButtonSize,
+    },
+    isLoading: {
+      control: 'boolean',
+    },
+    loadingText: {
+      control: 'text',
+    },
+    startIconName: {
+      control: 'select',
+      options: IconName,
+    },
+    endIconName: {
+      control: 'select',
+      options: IconName,
+    },
+    isDisabled: {
+      control: 'boolean',
+    },
+    isFullWidth: {
+      control: 'boolean',
+    },
+    isPressed: {
+      control: 'boolean',
+    },
+    isDanger: {
+      control: 'boolean',
+    },
+    isInverse: {
+      control: 'boolean',
+    },
+    twClassName: {
+      control: 'text',
+    },
+  },
+};
+
+export default meta;
+
+type Story = StoryObj<ButtonPrimaryProps>;
+const ButtonPrimaryStory: React.FC<ButtonPrimaryProps> = ({
+  isInverse,
+  ...props
+}) => {
+  const tw = useTailwind();
+  return (
+    <View
+      style={[
+        tw`${isInverse ? `bg-primary-default` : 'bg-background-default'}`,
+      ]}
+    >
+      <ButtonPrimary isInverse={isInverse} {...props} />
+    </View>
+  );
+};
+
+export const Default: Story = {
+  args: {
+    children: 'Sample ButtonPrimary Text',
+    size: DEFAULT_BUTTONPRIMARY_PROPS.size,
+    isLoading: DEFAULT_BUTTONPRIMARY_PROPS.isLoading,
+    loadingText: DEFAULT_BUTTONPRIMARY_PROPS.loadingText,
+    startIconName: IconName.Add,
+    endIconName: IconName.AddSquare,
+    isDisabled: DEFAULT_BUTTONPRIMARY_PROPS.isDisabled,
+    isFullWidth: DEFAULT_BUTTONPRIMARY_PROPS.isFullWidth,
+  },
+  render: (args) => <ButtonPrimaryStory {...args} />,
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonPrimary size={ButtonSize.Sm}>ButtonSize Sm</ButtonPrimary>
+      <ButtonPrimary size={ButtonSize.Md}>
+        ButtonSize Md (Default)
+      </ButtonPrimary>
+      <ButtonPrimary size={ButtonSize.Lg}>ButtonSize Lg</ButtonPrimary>
+    </View>
+  ),
+};
+
+export const IsLoading: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonPrimary isLoading>ButtonPrimary</ButtonPrimary>
+      <ButtonPrimary isLoading loadingText="With Loading Text">
+        ButtonPrimary
+      </ButtonPrimary>
+    </View>
+  ),
+};
+
+export const WithStartAccessory: Story = {
+  render: () => (
+    <ButtonPrimary startIconName={IconName.Add}>ButtonPrimary</ButtonPrimary>
+  ),
+};
+
+export const WithEndAccessory: Story = {
+  render: () => (
+    <ButtonPrimary endIconName={IconName.Add}>ButtonPrimary</ButtonPrimary>
+  ),
+};
+
+export const WithStartAndEndAccessory: Story = {
+  render: () => (
+    <ButtonPrimary
+      startIconName={IconName.Add}
+      endIconName={IconName.AddSquare}
+    >
+      ButtonPrimary
+    </ButtonPrimary>
+  ),
+};
+
+export const isDisabled: Story = {
+  render: () => <ButtonPrimary isDisabled>ButtonPrimary</ButtonPrimary>,
+};
+
+export const isFullWidth: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonPrimary>ButtonPrimary</ButtonPrimary>
+      <ButtonPrimary isFullWidth>ButtonPrimary</ButtonPrimary>
+    </View>
+  ),
+};

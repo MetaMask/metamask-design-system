@@ -1,21 +1,27 @@
-import React from 'react';
+import {
+  useTailwind,
+  withThemeProvider,
+} from '@metamask/design-system-twrnc-preset';
+import React, { useMemo } from 'react';
 import { Pressable } from 'react-native';
 
+import type { IconProps } from '../../components/Icons/Icon';
 import Icon from '../../components/Icons/Icon';
-import Text from '../../components/Text';
-import {
-  DEFAULT_BUTTONBASE_LABEL_COLOR,
-  DEFAULT_BUTTONBASE_SIZE,
-  DEFAULT_BUTTONBASE_WIDTH,
-  DEFAULT_BUTTONBASE_ICON_SIZE,
-  DEFAULT_BUTTONBASE_LABEL_TEXTVARIANT,
-} from './ButtonBase.constants';
+import type { TextProps } from '../../components/Text/Text.types';
+import type { SpinnerTempProps } from '../../temp-components/SpinnerTemp';
+import SpinnerTemp from '../../temp-components/SpinnerTemp';
+import TextOrChildren from '../TextOrChildren/TextOrChildren';
+import { DEFAULT_BUTTONBASE_PROPS } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
+import { generateButtonBaseClassNames } from './ButtonBase.utilities';
 
 const ButtonBase = ({
   children,
-  size,
+  textProps,
+  size = DEFAULT_BUTTONBASE_PROPS.size,
   isLoading,
+  loadingText,
+  spinnerProps,
   startIconName,
   startIconProps,
   startAccessory,
@@ -23,49 +29,72 @@ const ButtonBase = ({
   endIconProps,
   endAccessory,
   isDisabled,
-  onPress,
+  isFullWidth,
+  twClassName,
   style,
-  width = DEFAULT_BUTTONBASE_WIDTH,
   ...props
 }: ButtonBaseProps) => {
+  const tw = useTailwind();
+  const twStyle = useMemo(() => {
+    const mergedClassnames = generateButtonBaseClassNames({
+      size,
+      twClassName,
+      isLoading,
+      isDisabled,
+      isFullWidth,
+    });
+    return tw`${mergedClassnames}`;
+  }, [tw, size, twClassName, isLoading, isDisabled, isFullWidth]);
+
+  const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
+    ...DEFAULT_BUTTONBASE_PROPS.textProps,
+    ...textProps,
+  };
+  const finalStartIconName = startIconName ?? startIconProps?.name;
+  const finalStartIconProps: Partial<IconProps> = {
+    ...DEFAULT_BUTTONBASE_PROPS.startIconProps,
+    ...startIconProps,
+  };
+
+  const finalEndIconName = endIconName ?? endIconProps?.name;
+  const finalEndIconProps: Partial<IconProps> = {
+    ...DEFAULT_BUTTONBASE_PROPS.endIconProps,
+    ...endIconProps,
+  };
+
+  const finalSpinnerProps: SpinnerTempProps = {
+    ...DEFAULT_BUTTONBASE_PROPS.spinnerProps,
+    loadingText,
+    ...spinnerProps,
+  };
+
   return (
     <Pressable
-      disabled={isDisabled}
-      onPress={onPress}
-      style={styles.base}
+      disabled={isDisabled ?? isLoading}
       accessibilityRole="button"
       accessible
+      style={[twStyle, style]}
       {...props}
     >
-      {startIconName && (
-        <Icon
-          color={labelColor.toString()}
-          name={startIconName}
-          size={DEFAULT_BUTTONBASE_ICON_SIZE}
-          style={styles.startIcon}
-        />
-      )}
-      {typeof label === 'string' ? (
-        <Text
-          variant={labelTextVariant}
-          style={styles.label}
-          accessibilityRole="none"
-        >
-          {label}
-        </Text>
+      {isLoading ? (
+        <SpinnerTemp {...finalSpinnerProps} />
       ) : (
-        label
-      )}
-      {endIconName && (
-        <Icon
-          color={labelColor.toString()}
-          name={endIconName}
-          size={DEFAULT_BUTTONBASE_ICON_SIZE}
-          style={styles.endIcon}
-        />
+        <>
+          {finalStartIconName ? (
+            <Icon name={finalStartIconName} {...finalStartIconProps} />
+          ) : (
+            startAccessory
+          )}
+          <TextOrChildren textProps={finalTextProps}>{children}</TextOrChildren>
+          {finalEndIconName ? (
+            <Icon name={finalEndIconName} {...finalEndIconProps} />
+          ) : (
+            endAccessory
+          )}
+        </>
       )}
     </Pressable>
   );
 };
 
-export default ButtonBase;
+export default withThemeProvider(ButtonBase);

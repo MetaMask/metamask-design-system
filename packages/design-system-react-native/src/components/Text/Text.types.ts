@@ -39,16 +39,22 @@ export enum TextColor {
   PrimaryInverse = 'primary-inverse',
   /** For the critical alert semantic elements. Used for text, background, icon or border */
   ErrorDefault = 'error-default',
+  /** For the critical alert semantic elements on pressed. Used for text, background, icon or border */
+  ErrorDefaultPressed = 'error-defaultPressed',
   /** For the stronger contrast error semantic elements. */
   ErrorAlternative = 'error-alternative',
   /** For elements used on top of error/default. Used for text, icon or border */
   ErrorInverse = 'error-inverse',
   /** For the positive semantic elements. Used for text, background, icon or border */
   SuccessDefault = 'success-default',
+  /** For the positive semantic elements on pressed. Used for text, background, icon or border */
+  SuccessDefaultPressed = 'success-defaultPressed',
   /** For elements used on top of success/default. Used for text, icon or border */
   SuccessInverse = 'success-inverse',
   /** For the caution alert semantic elements. Used for text, background, icon or border */
   WarningDefault = 'warning-default',
+  /** For the caution alert semantic elements on pressed. Used for text, background, icon or border */
+  WarningDefaultPressed = 'warning-defaultPressed',
   /** For elements used on top of warning/default. Used for text, icon or border */
   WarningInverse = 'warning-inverse',
   /** For informational read-only elements. Used for text, background, icon or border */

@@ -1,6 +1,8 @@
-import type { PressableProps } from 'react-native';
+import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
+import type { TextProps } from 'src/components/Text/Text.types';
 
 import type { IconProps, IconName } from '../../components/Icons/Icon';
+import type { SpinnerTempProps } from '../../temp-components/SpinnerTemp';
 
 export enum ButtonBaseSize {
   /**
@@ -24,7 +26,11 @@ export type ButtonBaseProps = {
   /**
    * Required prop for the content to be rendered within the ButtonBase
    */
-  children: React.ReactNode;
+  children: React.ReactNode | string;
+  /**
+   * Optional props to be passed to the Text component when children is a string
+   */
+  textProps?: Omit<Partial<TextProps>, 'children'>;
   /**
    * Optional prop to control the size of the ButtonBase
    * Possible values: ButtonBaseSize.Sm (32px), ButtonBaseSize.Md (40px), ButtonBaseSize.Lg (48px)
@@ -36,6 +42,14 @@ export type ButtonBaseProps = {
    * @default false
    */
   isLoading?: boolean;
+  /**
+   * Optional prop for text to display when button is in loading state
+   */
+  loadingText?: string;
+  /**
+   * Optional prop to pass additional properties to the end icon
+   */
+  spinnerProps?: Partial<SpinnerTempProps>;
   /**
    * Optional prop to specify an icon to show at the start of the button
    */
@@ -71,11 +85,11 @@ export type ButtonBaseProps = {
    */
   isFullWidth?: boolean;
   /**
-   * Optional prop to pass additional properties to the loading icon
-   */
-  loadingIconProps?: Partial<IconProps>;
-  /**
    * Optional prop to add twrnc overriding classNames.
    */
   twClassName?: string;
+  /**
+   * Optional prop to control the style.
+   */
+  style?: StyleProp<ViewStyle>;
 } & PressableProps;
