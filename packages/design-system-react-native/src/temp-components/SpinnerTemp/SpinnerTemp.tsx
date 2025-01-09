@@ -43,13 +43,14 @@ const SpinnerTemp = ({
 
   return (
     <View style={tw`flex-row gap-x-2`}>
-      <Animated.View style={[animatedStyle]}>
-        <Icon name={IconName.Loading} color={color} />
+      <Animated.View style={[animatedStyle]} testID="spinner-animated-view">
+        <Icon name={IconName.Loading} color={color} testID="spinner-icon" />
       </Animated.View>
       {loadingText && (
         <Text
           variant={TextVariant.BodyMd}
           color={TextColor.TextDefault}
+          testID="spinner-text"
           {...loadingTextProps}
         >
           {loadingText}
