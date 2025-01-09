@@ -42,7 +42,7 @@ const SpinnerTemp = ({
   }));
 
   return (
-    <View style={tw`flex-row gap-x-2`}>
+    <View style={tw`flex-row gap-x-2 items-center`}>
       <Animated.View style={[animatedStyle]} testID="spinner-animated-view">
         <Icon name={IconName.Loading} color={color} testID="spinner-icon" />
       </Animated.View>

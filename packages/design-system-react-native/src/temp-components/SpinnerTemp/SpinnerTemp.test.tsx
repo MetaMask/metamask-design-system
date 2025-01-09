@@ -1,8 +1,6 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconName, IconColor } from '../../components/Icons/Icon';
-import { TextVariant, TextColor } from '../../components/Text';
 import SpinnerTemp from './SpinnerTemp';
 
 describe('SpinnerTemp', () => {
