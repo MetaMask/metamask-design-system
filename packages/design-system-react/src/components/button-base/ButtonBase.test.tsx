@@ -177,4 +177,44 @@ describe('ButtonBase', () => {
     expect(button).toBeDisabled();
     expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
   });
+
+  it('handles text children correctly', () => {
+    // Test basic text wrapping and styling
+    const { rerender } = render(<ButtonBase>Click me</ButtonBase>);
+    const textElement = screen.getByText('Click me');
+
+    expect(textElement.tagName).toBe('SPAN');
+    expect(textElement).toHaveClass(
+      'text-inherit',
+      'text-s-body-md',
+      'font-s-body-md',
+      'leading-s-body-md',
+      'tracking-s-body-md',
+      'md:text-l-body-md',
+    );
+
+    // Test custom text props
+    rerender(
+      <ButtonBase textProps={{ className: 'custom-text-class' }}>
+        Click me
+      </ButtonBase>,
+    );
+    expect(screen.getByText('Click me')).toHaveClass('custom-text-class');
+
+    // Test non-string children
+    rerender(
+      <ButtonBase>
+        <div data-testid="custom-child">Custom Element</div>
+      </ButtonBase>,
+    );
+    const customChild = screen.getByTestId('custom-child');
+    expect(customChild.parentElement).not.toHaveClass(
+      'text-inherit',
+      'text-s-body-md',
+      'font-s-body-md',
+      'leading-s-body-md',
+      'tracking-s-body-md',
+      'md:text-l-body-md',
+    );
+  });
 });

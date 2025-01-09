@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { IconName, TextVariant } from '..';
-import { ButtonBase } from './ButtonBase';
-import { ButtonBaseSize } from './ButtonBase.types';
+import { ButtonPrimarySize } from '.';
+import { IconName } from '..';
+import { ButtonPrimary } from './ButtonPrimary';
 import README from './README.mdx';
 
-const meta: Meta<typeof ButtonBase> = {
-  title: 'React Components/ButtonBase',
-  component: ButtonBase,
+const meta: Meta<typeof ButtonPrimary> = {
+  title: 'React Components/ButtonPrimary',
+  component: ButtonPrimary,
   parameters: {
     docs: {
       page: README,
@@ -18,27 +18,32 @@ const meta: Meta<typeof ButtonBase> = {
     children: {
       control: 'text',
       description:
-        'Required prop for the content to be rendered within the ButtonBase',
+        'Required prop for the content to be rendered within the ButtonPrimary',
     },
     className: {
       control: 'text',
       description:
-        'Optional prop for additional CSS classes to be applied to the ButtonBase component',
+        'Optional prop for additional CSS classes to be applied to the ButtonPrimary component',
+    },
+    isDanger: {
+      control: 'boolean',
+      description:
+        'Optional prop that when true, applies error/danger styling to the button',
+    },
+    isInverse: {
+      control: 'boolean',
+      description:
+        'Optional prop that when true, applies inverse styling to the button',
     },
     size: {
       control: 'select',
-      options: Object.values(ButtonBaseSize),
-      description: 'Optional prop to control the size of the ButtonBase',
+      options: Object.values(ButtonPrimarySize),
+      description: 'Optional prop to control the size of the ButtonPrimary',
     },
     isFullWidth: {
       control: 'boolean',
       description:
         'Optional prop that when true, makes the button take up the full width of its container',
-    },
-    asChild: {
-      control: 'boolean',
-      description:
-        'Optional boolean that determines if the component should merge its props onto its immediate child instead of rendering a button element',
     },
     isLoading: {
       control: 'boolean',
@@ -90,49 +95,52 @@ const meta: Meta<typeof ButtonBase> = {
       description:
         'Optional prop to pass additional properties to the loading icon',
     },
-    textProps: {
-      control: 'object',
-      description:
-        'Optional props to be passed to the Text component when children is a string',
-      table: {
-        type: { summary: 'Partial<TextProps>' },
-      },
-    },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof ButtonBase>;
+type Story = StoryObj<typeof ButtonPrimary>;
 
 export const Default: Story = {
   args: {
-    children: 'Button Base',
+    children: 'Primary Button',
   },
+};
+
+export const IsDanger: Story = {
+  args: {
+    children: 'Danger Button',
+    isDanger: true,
+  },
+};
+
+export const IsInverse: Story = {
+  render: (args) => (
+    <div className="bg-primary-default p-4 rounded flex gap-2">
+      <ButtonPrimary {...args} isInverse>
+        Inverse Button
+      </ButtonPrimary>
+      <ButtonPrimary {...args} isInverse isDanger>
+        Inverse Danger Button
+      </ButtonPrimary>
+    </div>
+  ),
 };
 
 export const Size: Story = {
   render: (args) => (
     <div className="flex gap-2">
-      <ButtonBase {...args} size={ButtonBaseSize.Sm}>
+      <ButtonPrimary {...args} size={ButtonPrimarySize.Sm}>
         Small
-      </ButtonBase>
-      <ButtonBase {...args} size={ButtonBaseSize.Md}>
+      </ButtonPrimary>
+      <ButtonPrimary {...args} size={ButtonPrimarySize.Md}>
         Medium
-      </ButtonBase>
-      <ButtonBase {...args} size={ButtonBaseSize.Lg}>
+      </ButtonPrimary>
+      <ButtonPrimary {...args} size={ButtonPrimarySize.Lg}>
         Large
-      </ButtonBase>
+      </ButtonPrimary>
     </div>
   ),
-};
-
-export const TextProps: Story = {
-  args: {
-    children: 'Button with custom text variant',
-    textProps: {
-      variant: TextVariant.BodySm,
-    },
-  },
 };
 
 export const IsFullWidth: Story = {
@@ -156,25 +164,11 @@ export const EndIconName: Story = {
   },
 };
 
-export const StartAccessory: Story = {
-  args: {
-    children: 'With Start Accessory',
-    startAccessory: '→',
-  },
-};
-
-export const EndAccessory: Story = {
-  args: {
-    children: 'With End Accessory',
-    endAccessory: '←',
-  },
-};
-
 export const IsLoading: Story = {
   args: {
-    children: 'Submit',
+    children: 'Loading Button',
     isLoading: true,
-    loadingText: 'Submitting...',
+    loadingText: 'Loading...',
   },
 };
 
@@ -183,14 +177,4 @@ export const IsDisabled: Story = {
     children: 'Disabled Button',
     isDisabled: true,
   },
-};
-
-export const AsChild: Story = {
-  render: (args) => (
-    <ButtonBase {...args} asChild>
-      <a href="#" target="_blank" rel="noopener noreferrer">
-        Custom Anchor Link
-      </a>
-    </ButtonBase>
-  ),
 };

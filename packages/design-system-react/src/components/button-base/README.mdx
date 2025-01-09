@@ -34,6 +34,26 @@ import { ButtonBase, ButtonBaseSize } from '@metamask/design-system-react';
 <ButtonBase size={ButtonBaseSize.Lg}>Large</ButtonBase>
 ```
 
+### TextProps
+
+ButtonBase automatically wraps string children in a Text component for consistent typography. You can customize the Text component's appearance using the `textProps` prop.
+
+**Note:** `textProps` only applies when `children` is a string. Non-string children are rendered as-is without the Text wrapper.
+
+<Canvas of={ButtonBaseStories.TextProps} />
+
+```tsx
+import { ButtonBase, TextVariant } from '@metamask/design-system-react';
+
+<ButtonBase
+  textProps={{
+    variant: TextVariant.BodySm,
+  }}
+>
+  Custom text styling
+</ButtonBase>;
+```
+
 ### IsFullWidth
 
 ButtonBase can be set to take up the full width of its container.

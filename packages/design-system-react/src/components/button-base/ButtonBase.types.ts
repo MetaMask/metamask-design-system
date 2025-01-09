@@ -2,6 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { MakePropsOptional } from '../../types/make-props-optional';
 import type { IconName, IconProps } from '../icon';
+import type { TextProps } from '../text';
 
 export enum ButtonBaseSize {
   /**
@@ -33,6 +34,10 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
    * @default ButtonBaseSize.Md
    */
   size?: ButtonBaseSize;
+  /**
+   * Optional props to be passed to the Text component when children is a string
+   */
+  textProps?: Partial<TextProps>;
   /**
    * Optional prop that when true, makes the button take up the full width of its container
    * @default false
