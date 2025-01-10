@@ -42,12 +42,15 @@ export const ButtonSecondary = React.forwardRef<
           // Only apply hover/active styles when interactive
           isInteractive && ['hover:bg-hover', 'active:bg-pressed'],
         ],
-      // Inverse danger styles
+      // Inverse danger styles (matches ButtonPrimary
       isInverse &&
         isDanger && [
-          'bg-transparent border-2 border-error-inverse text-error-inverse',
+          'bg-default text-error-default',
           // Only apply hover/active styles when interactive
-          isInteractive && ['hover:bg-hover', 'active:bg-pressed'],
+          isInteractive && [
+            'hover:bg-default-hover',
+            'active:bg-default-pressed',
+          ],
         ],
       // Animation classes - only applied when interactive
       isInteractive && [
