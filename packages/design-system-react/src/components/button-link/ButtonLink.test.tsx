@@ -71,20 +71,32 @@ describe('ButtonLink', () => {
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 
-  it('renders with icons correctly', () => {
+  it('renders start icon when startIconName is provided', () => {
     render(
       <ButtonLink
         startIconName={IconName.AddSquare}
-        endIconName={IconName.AddSquare}
+        startIconProps={{ 'data-testid': 'icon-add-square' }}
       >
-        With Icons
+        With Icon
       </ButtonLink>,
     );
+    const icon = screen.getByTestId('icon-add-square');
+    expect(icon).toBeInTheDocument();
+    expect(icon).toHaveClass('mr-2');
+  });
 
-    const icons = screen.getAllByRole('img');
-    expect(icons).toHaveLength(2);
-    expect(icons[0]).toHaveClass('mr-2'); // start icon
-    expect(icons[1]).toHaveClass('ml-2'); // end icon
+  it('renders end icon when endIconName is provided', () => {
+    render(
+      <ButtonLink
+        endIconName={IconName.AddSquare}
+        endIconProps={{ 'data-testid': 'icon-add-square' }}
+      >
+        With Icon
+      </ButtonLink>,
+    );
+    const icon = screen.getByTestId('icon-add-square');
+    expect(icon).toBeInTheDocument();
+    expect(icon).toHaveClass('ml-2');
   });
 
   it('applies full width class correctly', () => {
