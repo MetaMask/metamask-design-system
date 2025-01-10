@@ -54,7 +54,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
           <Icon
             name={startIconName}
             size={IconSize.Sm}
-            className={twMerge('mr-2', startIconProps?.className)}
+            className={twMerge('mr-2 text-inherit', startIconProps?.className)}
             {...startIconProps}
           />
         );
@@ -71,7 +71,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
           <Icon
             name={endIconName}
             size={IconSize.Sm}
-            className={twMerge('ml-2', endIconProps?.className)}
+            className={twMerge('ml-2 text-inherit', endIconProps?.className)}
             {...endIconProps}
           />
         );
