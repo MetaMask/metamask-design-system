@@ -141,16 +141,18 @@ describe('ButtonSecondary', () => {
     render(
       <ButtonSecondary
         startIconName={IconName.AddSquare}
+        startIconProps={{ 'data-testid': 'start-icon' }}
         endIconName={IconName.AddSquare}
+        endIconProps={{ 'data-testid': 'end-icon' }}
       >
         With Icons
       </ButtonSecondary>,
     );
 
-    const icons = screen.getAllByRole('img');
-    expect(icons).toHaveLength(2);
-    expect(icons[0]).toHaveClass('mr-2'); // start icon
-    expect(icons[1]).toHaveClass('ml-2'); // end icon
+    const startIcon = screen.getByTestId('start-icon');
+    const endIcon = screen.getByTestId('end-icon');
+    expect(startIcon).toHaveClass('mr-2');
+    expect(endIcon).toHaveClass('ml-2');
   });
 
   it('renders loading text when provided', () => {

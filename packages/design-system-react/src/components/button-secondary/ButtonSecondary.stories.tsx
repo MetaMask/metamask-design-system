@@ -37,7 +37,8 @@ const meta: Meta<typeof ButtonSecondary> = {
     },
     size: {
       control: 'select',
-      options: Object.values(ButtonSecondarySize),
+      options: Object.keys(ButtonSecondarySize),
+      mapping: ButtonSecondarySize,
       description: 'Optional prop to control the size of the ButtonSecondary',
     },
     isFullWidth: {
@@ -56,7 +57,8 @@ const meta: Meta<typeof ButtonSecondary> = {
     },
     startIconName: {
       control: 'select',
-      options: Object.values(IconName),
+      options: Object.keys(IconName),
+      mapping: IconName,
       description:
         'Optional prop to specify an icon to show at the start of the button',
     },
@@ -72,7 +74,8 @@ const meta: Meta<typeof ButtonSecondary> = {
     },
     endIconName: {
       control: 'select',
-      options: Object.values(IconName),
+      options: Object.keys(IconName),
+      mapping: IconName,
       description:
         'Optional prop to specify an icon to show at the end of the button',
     },

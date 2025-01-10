@@ -9,7 +9,6 @@ const SvgEthereum = (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 417 417"
     fill="currentColor"
-    role="img"
     ref={ref}
     {...props}
   >
