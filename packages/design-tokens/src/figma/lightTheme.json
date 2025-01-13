@@ -177,6 +177,18 @@
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for primary/default."
+    },
+    "muted-hover": {
+      "value": "#0376c926",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Hover state surface for primary/muted."
+    },
+    "muted-pressed": {
+      "value": "#0376c933",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Pressed state surface for primary/muted."
     }
   },
   "error": {
@@ -215,6 +227,18 @@
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for error/default."
+    },
+    "error-hover": {
+      "value": "#d7384726",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Hover state surface for error/muted."
+    },
+    "error-pressed": {
+      "value": "#d7384733",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Pressed state surface for error/muted."
     }
   },
   "warning": {
@@ -247,6 +271,18 @@
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for warning/default."
+    },
+    "warning-hover": {
+      "value": "#bf520826",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Hover state surface for warning/muted."
+    },
+    "warning-pressed": {
+      "value": "#bf520833",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Pressed state surface for warning/muted."
     }
   },
   "success": {
