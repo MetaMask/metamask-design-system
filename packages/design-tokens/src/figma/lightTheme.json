@@ -315,6 +315,18 @@
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for success/default."
+    },
+    "muted-hover": {
+      "value": "#1c823426",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Hover state surface for success/muted."
+    },
+    "muted-pressed": {
+      "value": "#1c823433",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Pressed state surface for success/muted."
     }
   },
   "info": {
