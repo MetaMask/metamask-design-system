@@ -177,6 +177,18 @@
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for primary/default."
+    },
+    "muted-hover": {
+      "value": "#43aefc33",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Hover state surface for primary/muted."
+    },
+    "muted-pressed": {
+      "value": "#43aefc40",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Pressed state surface for primary/muted."
     }
   },
   "error": {
@@ -215,6 +227,18 @@
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for error/default."
+    },
+    "muted-hover": {
+      "value": "#e88f9733",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Hover state surface for error/muted."
+    },
+    "muted-pressed": {
+      "value": "#e88f9740",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Pressed state surface for error/muted."
     }
   },
   "warning": {
@@ -247,6 +271,18 @@
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for warning/default."
+    },
+    "muted-hover": {
+      "value": "#ffdf7033",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Hover state surface for warning/muted."
+    },
+    "muted-pressed": {
+      "value": "#ffdf7040",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Pressed state surface for warning/muted."
     }
   },
   "success": {
@@ -279,6 +315,18 @@
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for success/default."
+    },
+    "muted-hover": {
+      "value": "#28a74533",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Hover state surface for success/muted."
+    },
+    "muted-pressed": {
+      "value": "#28a74540",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Pressed state surface for success/muted."
     }
   },
   "info": {

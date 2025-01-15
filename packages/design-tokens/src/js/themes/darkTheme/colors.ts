@@ -69,6 +69,10 @@ export const colors: ThemeColors = {
     defaultHover: '#26A2FC',
     /** Pressed state surface for primary/default (#3BAAFD) */
     defaultPressed: '#3BAAFD',
+    /** Hover state surface for primary/muted (#43aefc33) */
+    mutedHover: '#43aefc33',
+    /** Pressed state surface for primary/muted (#43aefc40) */
+    mutedPressed: '#43aefc40',
   },
   error: {
     /** For danger semantic elements: error, critical, destructive... (#E88F97) */
@@ -83,6 +87,10 @@ export const colors: ThemeColors = {
     defaultHover: '#E47782',
     /** Pressed state surface for error/default (#E78891) */
     defaultPressed: '#E78891',
+    /** Hover state surface for error/muted (#e88f9733) */
+    mutedHover: '#e88f9733',
+    /** Pressed state surface for error/muted (#e88f9740) */
+    mutedPressed: '#e88f9740',
   },
   warning: {
     /** For warning semantic elements: caution, attention, precaution... (#FFD33D) */
@@ -95,6 +103,10 @@ export const colors: ThemeColors = {
     defaultHover: '#FFE485',
     /** Pressed state surface for warning/default (#FFE899) */
     defaultPressed: '#FFE899',
+    /** Hover state surface for warning/muted (#ffdf7033) */
+    mutedHover: '#ffdf7033',
+    /** Pressed state surface for warning/muted (#ffdf7040) */
+    mutedPressed: '#ffdf7040',
   },
   success: {
     /** For positive semantic elements: success, confirm, complete, safe... (#28A745) */
@@ -107,6 +119,10 @@ export const colors: ThemeColors = {
     defaultHover: '#2CB94C',
     /** Pressed state surface for success/default (#30CA53) */
     defaultPressed: '#30CA53',
+    /** Hover state surface for success/muted (#28a74533) */
+    mutedHover: '#28a74533',
+    /** Pressed state surface for success/muted (#28a74540) */
+    mutedPressed: '#28a74540',
   },
   info: {
     /** For soft alert semantic elements: info, reminder, hint... (#43AEFC) */
