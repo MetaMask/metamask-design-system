@@ -60,6 +60,10 @@
   --color-primary-default-hover: #036ab5;
   /* Pressed state surface for primary/default (#025ea1) */
   --color-primary-default-pressed: #025ea1;
+  /* Hover state surface for primary/muted (#0376c926) */
+  --color-primary-muted-hover: #0376c926;
+  /* Pressed state surface for primary/muted (#0376c933) */
+  --color-primary-muted-pressed: #0376c933;
   /* For danger semantic elements: error, critical, destructive (#d73847) */
   --color-error-default: var(--brand-colors-red-red500);
   /* Stronger color for danger semantic (#8e1d28) */
@@ -72,6 +76,10 @@
   --color-error-default-hover: #d02a3a;
   /* Pressed state surface for error/default (#bf2635) */
   --color-error-default-pressed: #bf2635;
+  /* Hover state surface for error/muted (#d7384726) */
+  --color-error-muted-hover: #d7384726;
+  /* Pressed state surface for error/muted (#d7384733) */
+  --color-error-muted-pressed: #d7384733;
   /* For warning semantic elements: caution, attention, precaution (#bf5208) */
   --color-warning-default: var(--brand-colors-yellow-yellow500);
   /* Muted color option for warning semantic (#bf52081a) */
@@ -82,6 +90,10 @@
   --color-warning-default-hover: #ac4a07;
   /* Pressed state surface for warning/default (#984106) */
   --color-warning-default-pressed: #984106;
+  /* Hover state surface for warning/muted (#bf520826) */
+  --color-warning-muted-hover: #bf520826;
+  /* Pressed state surface for warning/muted (#bf520833) */
+  --color-warning-muted-pressed: #bf520833;
   /* For positive semantic elements: success, confirm, complete, safe (#1c8234) */
   --color-success-default: var(--brand-colors-green-green500);
   /* Muted color for positive semantic (#1c82341a) */
@@ -92,6 +104,10 @@
   --color-success-default-hover: #18712d;
   /* Pressed state surface for success/default (#156127) */
   --color-success-default-pressed: #156127;
+  /* Hover state surface for success/muted (#1c823426) */
+  --color-success-muted-hover: #1c823426;
+  /* Pressed state surface for success/muted (#1c823433) */
+  --color-success-muted-pressed: #1c823433;
   /* For soft alert semantic elements: info, reminder, hint (#0376c9) */
   --color-info-default: var(--brand-colors-blue-blue500);
   /* Muted color for soft alert semantic (#0376c91a) */

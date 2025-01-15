@@ -89,6 +89,10 @@ export type ThemeColors = {
     defaultHover: string;
     /** Pressed state surface for primary/default */
     defaultPressed: string;
+    /** Hover state surface for primary/muted */
+    mutedHover: string;
+    /** Pressed state surface for primary/muted */
+    mutedPressed: string;
   };
   error: {
     /** For danger semantic elements: error, critical, destructive... */
@@ -103,6 +107,10 @@ export type ThemeColors = {
     defaultHover: string;
     /** Pressed state surface for error/default */
     defaultPressed: string;
+    /** Hover state surface for error/muted */
+    mutedHover: string;
+    /** Pressed state surface for error/muted */
+    mutedPressed: string;
   };
   warning: {
     /** For warning semantic elements: caution, attention, precaution... */
@@ -115,6 +123,10 @@ export type ThemeColors = {
     defaultHover: string;
     /** Pressed state surface for warning/default */
     defaultPressed: string;
+    /** Hover state surface for warning/muted */
+    mutedHover: string;
+    /** Pressed state surface for warning/muted */
+    mutedPressed: string;
   };
   success: {
     /** For positive semantic elements: success, confirm, complete, safe... */
@@ -127,6 +139,10 @@ export type ThemeColors = {
     defaultHover: string;
     /** Pressed state surface for success/default */
     defaultPressed: string;
+    /** Hover state surface for success/muted */
+    mutedHover: string;
+    /** Pressed state surface for success/muted */
+    mutedPressed: string;
   };
   info: {
     /** For soft alert semantic elements: info, reminder, hint... */
