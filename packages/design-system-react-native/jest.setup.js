@@ -1,3 +1,6 @@
+import 'react-native-reanimated/mock';
+
+// Mock react-native-svg
 jest.mock('react-native-svg', () => {
   const React = require('react');
   const { View } = require('react-native');
@@ -10,3 +13,6 @@ jest.mock('react-native-svg', () => {
     Rect: MockedSvg,
   };
 });
+
+// Silence the useNativeDriver warning
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');

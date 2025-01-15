@@ -13,7 +13,6 @@ const displayName = path.basename(__dirname);
 module.exports = merge(baseConfig, {
   // The display name when running multiple projects
   displayName,
-
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
@@ -33,12 +32,12 @@ module.exports = merge(baseConfig, {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-native|@react-navigation)/)',
+    'node_modules/(?!(react-native|react-native-reanimated|@react-native|@react-navigation)/)',
   ],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
     '\\.svg$': '<rootDir>/__mocks__/svgMock.js',
   },
-  setupFilesAfterEnv: ['./jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 });
