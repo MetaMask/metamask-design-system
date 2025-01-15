@@ -3,147 +3,152 @@ import type { ThemeColors } from '../types';
 
 export const colors: ThemeColors = {
   background: {
-    /** For default neutral surface (#24272A) */
-    default: brandColor.grey900,
-    /** For sunken neutral surface below background/default (#141618) */
-    alternative: brandColor.grey1000,
-    /** For raised neutral surface above background/default (#2A2D31) */
-    muted: brandColor.grey800,
-    /** Hover state surface for background/default (#1E2124) */
-    defaultHover: '#1E2124',
-    /** Pressed state surface for background/default (#272B2F) */
-    defaultPressed: '#272B2F',
-    /** Hover state surface for background/alternative (#0A0A0A) */
-    alternativeHover: '#0A0A0A',
-    /** Pressed state surface for background/alternative (#141414) */
-    alternativePressed: '#141414',
+    /** For default neutral surface (#222325) */
+    default: brandColor.grey800,
+    /** For sunken neutral surface below background/default (#121314) */
+    alternative: brandColor.grey900,
+    /** For raised neutral surface above background/default (#31333A) */
+    muted: brandColor.grey700,
+    /** Hover state surface for background/default (#313235) */
+    defaultHover: '#313235',
+    /** Pressed state surface for background/default (#3F4145) */
+    defaultPressed: '#3f4145',
+    /** Hover state surface for background/alternative (#1F2123) */
+    alternativeHover: '#1f2123',
+    /** Pressed state surface for background/alternative (#2E3033) */
+    alternativePressed: '#2e3033',
     /** Hover state surface for background/muted (#2D3034) */
     mutedHover: '#2D3034',
     /** Pressed state surface for background/muted (#363B3F) */
     mutedPressed: '#363B3F',
-    /** General purpose hover state tint (#FFFFFF0A) */
-    hover: '#FFFFFF0A',
-    /** General purpose pressed state tint (#FFFFFF14) */
-    pressed: '#FFFFFF14',
+    /** General purpose hover state tint (#FFFFFF0F) */
+    hover: '#ffffff0f',
+    /** General purpose pressed state tint (#FFFFFF1F) */
+    pressed: '#ffffff1f',
   },
   text: {
     /** Default color for text (#FFFFFF) */
     default: brandColor.grey000,
-    /** Softer color for text (#BBC0C5) */
-    alternative: brandColor.grey300,
-    /** Muted color for text (Not accessible) (#848C96) */
-    muted: brandColor.grey500,
+    /** Softer color for text (#ADB6FE) */
+    alternative: brandColor.grey200,
+    /** Muted color for text (Not accessible) (#9CA1AF) */
+    muted: brandColor.grey400,
   },
   icon: {
     /** Default color for icons (#FFFFFF) */
     default: brandColor.grey000,
-    /** Softer color for icons (#BBC0C5) */
-    alternative: brandColor.grey300,
-    /** Muted color for icons (Not accessible) (#848C96) */
-    muted: brandColor.grey500,
+    /** Softer color for icons (#ADB6FE) */
+    alternative: brandColor.grey200,
+    /** Muted color for icons (Not accessible) (#9CA1AF) */
+    muted: brandColor.grey400,
   },
   border: {
-    /** Default color for borders (#848C96) */
-    default: brandColor.grey500,
-    /** Muted color for borders (#848C9629) */
-    muted: '#848C9629',
+    /** Default color for borders (#9CA1AF) */
+    default: brandColor.grey400,
+    /** Muted color for borders (#858B9A33) */
+    muted: '#858b9a33',
   },
   overlay: {
-    /** Default color for overlays(scrim) (#00000099) */
-    default: '#00000099',
-    /** Dimmer color for overlays(scrim) (#000000CC) */
-    alternative: '#000000CC',
+    /** Default color for overlays (scrim) (#00000066) */
+    default: '#00000066',
+    /** Dimmer color for overlays (scrim) (#000000CC) */
+    alternative: '#000000cc',
     /** For elements placed on top of overlay/alternative (#FFFFFF) */
     inverse: brandColor.grey000,
   },
   primary: {
-    /** For primary semantic elements: interactive, active, selected... (#43AEFC) */
+    /** For primary semantic elements: interactive, active, selected (#8B99FF) */
     default: brandColor.blue300,
-    /** Stronger color for primary semantic elements (#75C6FD) */
+    /** Stronger color for primary semantic elements (#ADB6FE) */
     alternative: brandColor.blue200,
-    /** Muted color for primary semantic elements (#43AEFC26) */
-    muted: '#43AEFC26',
-    /** For elements placed on top of primary/default fill (#24272A) */
+    /** Muted color for primary semantic elements (#8B99FF26) */
+    muted: '#8b99ff26',
+    /** For elements placed on top of primary/default fill (#121314) */
     inverse: brandColor.grey900,
-    /** Hover state surface for primary/default (#26A2FC) */
-    defaultHover: '#26A2FC',
-    /** Pressed state surface for primary/default (#3BAAFD) */
-    defaultPressed: '#3BAAFD',
-    /** Hover state surface for primary/muted (#43aefc33) */
-    mutedHover: '#43aefc33',
-    /** Pressed state surface for primary/muted (#43aefc40) */
-    mutedPressed: '#43aefc40',
+    /** Hover state surface for primary/default (#A8B2FF) */
+    defaultHover: '#a8b2ff',
+    /** Pressed state surface for primary/default (#C7CEFF) */
+    defaultPressed: '#c7ceff',
+
+    /** Hover state surface for primary/muted (#8B99FF33) */
+    mutedHover: '#8b99ff33',
+    /** Pressed state surface for primary/muted (#8B99FF40) */
+    mutedPressed: '#8b99ff40',
   },
   error: {
-    /** For danger semantic elements: error, critical, destructive... (#E88F97) */
+    /** For danger semantic elements: error, critical, destructive (#FF7584) */
     default: brandColor.red300,
-    /** Stronger color for danger semantic (#F5B6BC) */
+    /** Stronger color for danger semantic (#FFA1AA) */
     alternative: brandColor.red200,
-    /** Muted color for danger semantic (#E88F9726) */
-    muted: '#E88F9726',
-    /** For elements placed on top of error/default fill (#24272A) */
+    /** Muted color for danger semantic (#FF758426) */
+    muted: '#ff758426',
+    /** For elements placed on top of error/default fill (#121314) */
     inverse: brandColor.grey900,
-    /** Hover state surface for error/default (#E47782) */
-    defaultHover: '#E47782',
-    /** Pressed state surface for error/default (#E78891) */
-    defaultPressed: '#E78891',
-    /** Hover state surface for error/muted (#e88f9733) */
-    mutedHover: '#e88f9733',
-    /** Pressed state surface for error/muted (#e88f9740) */
-    mutedPressed: '#e88f9740',
+
+    /** Hover state surface for error/default (#FF94A0) */
+    defaultHover: '#ff94a0',
+    /** Pressed state surface for error/default (#FFB2BB) */
+    defaultPressed: '#ffb2bb',
+
+    /** Hover state surface for error/muted (#FF758433) */
+    mutedHover: '#ff758433',
+    /** Pressed state surface for error/muted (#FF758440) */
+    mutedPressed: '#ff758440',
   },
   warning: {
-    /** For warning semantic elements: caution, attention, precaution... (#FFD33D) */
+    /** For warning semantic elements: caution, attention, precaution (#FFD957) */
     default: brandColor.yellow100,
-    /** Muted color option for warning semantic (#FFDF7026) */
-    muted: '#FFDF7026',
-    /** For elements placed on top of warning/default fill (#24272A) */
+    /** Muted color option for warning semantic (#FFD95726) */
+    muted: '#ffd95726',
+    /** For elements placed on top of warning/default fill (#121314) */
     inverse: brandColor.grey900,
-    /** Hover state surface for warning/default (#FFE485) */
-    defaultHover: '#FFE485',
-    /** Pressed state surface for warning/default (#FFE899) */
-    defaultPressed: '#FFE899',
-    /** Hover state surface for warning/muted (#ffdf7033) */
-    mutedHover: '#ffdf7033',
-    /** Pressed state surface for warning/muted (#ffdf7040) */
-    mutedPressed: '#ffdf7040',
+    /** Hover state surface for warning/default (#FFE794) */
+    defaultHover: '#ffe794',
+    /** Pressed state surface for warning/default (#FFEEB2) */
+    defaultPressed: '#ffeeb2',
+
+    /** Hover state surface for warning/muted (#FFD95733) */
+    mutedHover: '#ffd95733',
+    /** Pressed state surface for warning/muted (#FFD95740) */
+    mutedPressed: '#ffd95740',
   },
   success: {
-    /** For positive semantic elements: success, confirm, complete, safe... (#28A745) */
+    /** For positive semantic elements: success, confirm, complete, safe (#4CB564) */
     default: brandColor.green300,
-    /** Muted color for positive semantic (#28A74526) */
-    muted: '#28A74526',
-    /** For elements placed on top of success/default fill (#24272A) */
+    /** Muted color for positive semantic (#4CB56426) */
+    muted: '#4cb56426',
+    /** For elements placed on top of success/default fill (#121314) */
     inverse: brandColor.grey900,
-    /** Hover state surface for success/default (#2CB94C) */
-    defaultHover: '#2CB94C',
-    /** Pressed state surface for success/default (#30CA53) */
-    defaultPressed: '#30CA53',
-    /** Hover state surface for success/muted (#28a74533) */
-    mutedHover: '#28a74533',
-    /** Pressed state surface for success/muted (#28a74540) */
-    mutedPressed: '#28a74540',
+    /** Hover state surface for success/default (#60BD76) */
+    defaultHover: '#60bd76',
+    /** Pressed state surface for success/default (#76C688) */
+    defaultPressed: '#76c688',
+
+    /** Hover state surface for success/muted (#4CB56433) */
+    mutedHover: '#4cb56433',
+    /** Pressed state surface for success/muted (#4CB56440) */
+    mutedPressed: '#4cb56440',
   },
   info: {
-    /** For soft alert semantic elements: info, reminder, hint... (#43AEFC) */
+    /** For soft alert semantic elements: info, reminder, hint (#8B99FF) */
     default: brandColor.blue300,
-    /** Muted color for soft alert semantic (#43AEFC26) */
-    muted: '#43AEFC26',
-    /** For elements placed on top of info/default fill (#24272A) */
+    /** Muted color for soft alert semantic (#8B99FF26) */
+    muted: '#8b99ff26',
+    /** For elements placed on top of info/default fill (#121314) */
     inverse: brandColor.grey900,
   },
   flask: {
-    /** For Flask primary accent color (#8B45F5) */
+    /** For Flask primary accent color (#D27DFF) */
     default: brandColor.purple300,
-    /** For elements placed on top of flask/default (#24272A) */
+    /** For elements placed on top of flask/default fill (#121314) */
     inverse: brandColor.grey900,
   },
   shadow: {
     /** For neutral drop shadow color (#00000066) */
     default: '#00000066',
-    /** For primary drop shadow color (#43AEFC33) */
-    primary: '#43AEFC33',
-    /** For critical/danger drop shadow color (#FF758466) */
-    error: '#FF758466',
+    /** For primary drop shadow color (#8B99FF33) */
+    primary: '#8b99ff33',
+    /** For critical/danger drop shadow color (#FF758433) */
+    error: '#ff758433',
   },
 };
