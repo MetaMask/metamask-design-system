@@ -38,6 +38,8 @@ export const colors = {
     alternative: 'var(--color-primary-alternative)',
     muted: 'var(--color-primary-muted)',
     inverse: 'var(--color-primary-inverse)',
+    'muted-hover': 'var(--color-primary-muted-hover)',
+    'muted-pressed': 'var(--color-primary-muted-pressed)',
   },
   error: {
     default: 'var(--color-error-default)',
@@ -46,6 +48,8 @@ export const colors = {
     alternative: 'var(--color-error-alternative)',
     muted: 'var(--color-error-muted)',
     inverse: 'var(--color-error-inverse)',
+    'muted-hover': 'var(--color-error-muted-hover)',
+    'muted-pressed': 'var(--color-error-muted-pressed)',
   },
   warning: {
     default: 'var(--color-warning-default)',
@@ -53,6 +57,8 @@ export const colors = {
     'default-pressed': 'var(--color-warning-default-pressed)',
     muted: 'var(--color-warning-muted)',
     inverse: 'var(--color-warning-inverse)',
+    'muted-hover': 'var(--color-warning-muted-hover)',
+    'muted-pressed': 'var(--color-warning-muted-pressed)',
   },
   success: {
     default: 'var(--color-success-default)',
@@ -60,6 +66,8 @@ export const colors = {
     'default-pressed': 'var(--color-success-default-pressed)',
     muted: 'var(--color-success-muted)',
     inverse: 'var(--color-success-inverse)',
+    'muted-hover': 'var(--color-success-muted-hover)',
+    'muted-pressed': 'var(--color-success-muted-pressed)',
   },
   info: {
     default: 'var(--color-info-default)',

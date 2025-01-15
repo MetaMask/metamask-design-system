@@ -1,7 +1,7 @@
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import React from 'react';
 
-import { Icon, IconName } from '..';
+import { Icon, IconName, IconSize, Text, TextColor } from '..';
 import { twMerge } from '../../utils/tw-merge';
 import { BUTTON_BASE_SIZE_CLASS_MAP } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
@@ -25,6 +25,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       endIconName,
       endIconProps,
       endAccessory,
+      textProps,
       style,
       ...props
     },
@@ -36,6 +37,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       <span className="inline-flex items-center">
         <Icon
           name={IconName.Loading}
+          size={IconSize.Sm}
           className={twMerge(
             'animate-spin mr-2 text-inherit',
             loadingIconProps?.className,
@@ -51,6 +53,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
         return (
           <Icon
             name={startIconName}
+            size={IconSize.Sm}
             className={twMerge('mr-2 text-inherit', startIconProps?.className)}
             {...startIconProps}
           />
@@ -67,6 +70,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
         return (
           <Icon
             name={endIconName}
+            size={IconSize.Sm}
             className={twMerge('ml-2 text-inherit', endIconProps?.className)}
             {...endIconProps}
           />
@@ -78,13 +82,23 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       return null;
     };
 
+    const renderContent = () => {
+      if (children && typeof children === 'string') {
+        return (
+          <Text color={TextColor.Inherit} asChild {...textProps}>
+            <span>{children}</span>
+          </Text>
+        );
+      }
+      return children;
+    };
+
     const mergedClassName = twMerge(
       // Base styles
       'inline-flex items-center justify-center',
       'rounded-full px-4',
       'text-default font-medium',
-      'transition-colors duration-150',
-      'bg-muted hover:bg-muted-hover active:bg-muted-pressed',
+      'bg-muted',
       // Size
       BUTTON_BASE_SIZE_CLASS_MAP[size],
       // Full width
@@ -104,7 +118,9 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
         {...props}
       >
         {renderStartContent()}
-        <Slottable>{isLoading ? renderLoadingState() : children}</Slottable>
+        <Slottable>
+          {isLoading ? renderLoadingState() : renderContent()}
+        </Slottable>
         {renderEndContent()}
       </Component>
     );

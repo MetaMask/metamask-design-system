@@ -3,7 +3,6 @@ module.exports = {
   dimensions: false,
   ref: true,
   svgProps: {
-    role: 'img',
     fill: 'currentColor',
   },
   template: require('./template').default,

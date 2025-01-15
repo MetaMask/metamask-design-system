@@ -1,0 +1,97 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as ButtonPrimaryStories from './ButtonPrimary.stories';
+
+# ButtonPrimary
+
+ButtonPrimary is used for primary actions
+
+```tsx
+import { ButtonPrimary } from '@metamask/design-system-react';
+
+<ButtonPrimary>Primary Button</ButtonPrimary>;
+```
+
+<Canvas of={ButtonPrimaryStories.Default} />
+
+## Props
+
+### Size
+
+ButtonPrimary supports three sizes:
+
+- `ButtonPrimarySize.Sm` (32px)
+- `ButtonPrimarySize.Md` (40px) - default
+- `ButtonPrimarySize.Lg` (48px)
+
+<Canvas of={ButtonPrimaryStories.Size} />
+
+### IsFullWidth
+
+ButtonPrimary can be set to take up the full width of its container.
+
+<Canvas of={ButtonPrimaryStories.IsFullWidth} />
+
+### IsDanger
+
+Use the danger variant for destructive actions.
+
+<Canvas of={ButtonPrimaryStories.IsDanger} />
+
+### IsInverse
+
+Use the inverse variant when the button needs to be displayed on a dark background. When combined with `isDanger`, the button will have inverse styling with error text color.
+
+<Canvas of={ButtonPrimaryStories.IsInverse} />
+
+### StartIconName and EndIconName
+
+ButtonPrimary can display icons at the start and/or end of the content.
+
+#### StartIconName
+
+<Canvas of={ButtonPrimaryStories.StartIconName} />
+
+#### EndIconName
+
+<Canvas of={ButtonPrimaryStories.EndIconName} />
+
+### IsLoading
+
+ButtonPrimary can show a loading state with optional loading text.
+
+<Canvas of={ButtonPrimaryStories.IsLoading} />
+
+### IsDisabled
+
+ButtonPrimary can be disabled.
+
+<Canvas of={ButtonPrimaryStories.IsDisabled} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<ButtonPrimary className="my-4 mx-2">Button content</ButtonPrimary>
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+
+## Component API
+
+<Controls of={ButtonPrimaryStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

@@ -46,18 +46,29 @@ describe('ButtonBase', () => {
 
   it('shows loading state with loading text', () => {
     render(
-      <ButtonBase isLoading loadingText="Please wait...">
+      <ButtonBase
+        isLoading
+        loadingText="Please wait..."
+        loadingIconProps={{ 'data-testid': 'loading-spinner' }}
+      >
         Submit
       </ButtonBase>,
     );
-    expect(screen.getByRole('img')).toBeInTheDocument();
+    expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
     expect(screen.getByText('Please wait...')).toBeInTheDocument();
     expect(screen.queryByText('Submit')).not.toBeInTheDocument();
   });
 
   it('shows loading state with children when no loading text provided', () => {
-    render(<ButtonBase isLoading>Submit</ButtonBase>);
-    expect(screen.getByRole('img')).toBeInTheDocument();
+    render(
+      <ButtonBase
+        isLoading
+        loadingIconProps={{ 'data-testid': 'loading-spinner' }}
+      >
+        Submit
+      </ButtonBase>,
+    );
+    expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
     expect(screen.getByText('Submit')).toBeInTheDocument();
   });
 
@@ -176,5 +187,45 @@ describe('ButtonBase', () => {
     button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
+  });
+
+  it('handles text children correctly', () => {
+    // Test basic text wrapping and styling
+    const { rerender } = render(<ButtonBase>Click me</ButtonBase>);
+    const textElement = screen.getByText('Click me');
+
+    expect(textElement.tagName).toBe('SPAN');
+    expect(textElement).toHaveClass(
+      'text-inherit',
+      'text-s-body-md',
+      'font-s-body-md',
+      'leading-s-body-md',
+      'tracking-s-body-md',
+      'md:text-l-body-md',
+    );
+
+    // Test custom text props
+    rerender(
+      <ButtonBase textProps={{ className: 'custom-text-class' }}>
+        Click me
+      </ButtonBase>,
+    );
+    expect(screen.getByText('Click me')).toHaveClass('custom-text-class');
+
+    // Test non-string children
+    rerender(
+      <ButtonBase>
+        <div data-testid="custom-child">Custom Element</div>
+      </ButtonBase>,
+    );
+    const customChild = screen.getByTestId('custom-child');
+    expect(customChild.parentElement).not.toHaveClass(
+      'text-inherit',
+      'text-s-body-md',
+      'font-s-body-md',
+      'leading-s-body-md',
+      'tracking-s-body-md',
+      'md:text-l-body-md',
+    );
   });
 });

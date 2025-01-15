@@ -21,6 +21,79 @@ const meta: Meta<typeof Text> = {
       page: README,
     },
   },
+  argTypes: {
+    children: {
+      control: 'text',
+      description:
+        'The text content or elements to be rendered within the component.',
+    },
+    variant: {
+      control: 'select',
+      options: Object.keys(TextVariant),
+      mapping: TextVariant,
+      description:
+        'Optional prop to change the font size of the component. The Text component uses responsive font sizes. Different variants map to specific HTML elements by default.',
+    },
+    color: {
+      control: 'select',
+      options: Object.keys(TextColor),
+      mapping: TextColor,
+      description:
+        'Optional prop that sets the color of the text using predefined theme colors.',
+    },
+    fontWeight: {
+      control: 'select',
+      options: Object.keys(FontWeight),
+      mapping: FontWeight,
+      description:
+        'Optional prop to control the font weight of the text. Normal: 400, Medium: 500, Bold: 700',
+    },
+    fontStyle: {
+      control: 'select',
+      options: Object.keys(FontStyle),
+      mapping: FontStyle,
+      description: 'Optional prop to control the font style of the text.',
+    },
+    textTransform: {
+      control: 'select',
+      options: Object.keys(TextTransform),
+      mapping: TextTransform,
+      description: 'Optional prop to apply text transformation to the content.',
+    },
+    textAlign: {
+      control: 'select',
+      options: Object.keys(TextAlign),
+      mapping: TextAlign,
+      description:
+        'Optional prop to control the text alignment within its container.',
+    },
+    overflowWrap: {
+      control: 'select',
+      options: Object.keys(OverflowWrap),
+      mapping: OverflowWrap,
+      description:
+        'Optional prop to determine how text should wrap when it reaches the edge of its container.',
+    },
+    ellipsis: {
+      control: 'boolean',
+      description:
+        'Optional prop that when true, adds an ellipsis (...) when text overflows its container.',
+    },
+    asChild: {
+      control: 'boolean',
+      description:
+        'Optional boolean that determines if the component should merge its props onto its immediate child instead of rendering a default DOM element.',
+    },
+    className: {
+      control: 'text',
+      description:
+        'Optional prop for additional CSS classes to be applied to the Text component.',
+    },
+    style: {
+      control: 'object',
+      description: 'Optional prop for inline styles.',
+    },
+  },
   args: {
     children: 'The quick orange fox jumped over the lazy dog.',
     variant: TextVariant.BodyMd,

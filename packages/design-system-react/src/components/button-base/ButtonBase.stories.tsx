@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { IconName } from '..';
+import { IconName, TextVariant } from '..';
 import { ButtonBase } from './ButtonBase';
 import { ButtonBaseSize } from './ButtonBase.types';
 import README from './README.mdx';
@@ -27,7 +27,8 @@ const meta: Meta<typeof ButtonBase> = {
     },
     size: {
       control: 'select',
-      options: Object.values(ButtonBaseSize),
+      options: Object.keys(ButtonBaseSize),
+      mapping: ButtonBaseSize,
       description: 'Optional prop to control the size of the ButtonBase',
     },
     isFullWidth: {
@@ -51,7 +52,8 @@ const meta: Meta<typeof ButtonBase> = {
     },
     startIconName: {
       control: 'select',
-      options: Object.values(IconName),
+      options: Object.keys(IconName),
+      mapping: IconName,
       description:
         'Optional prop to specify an icon to show at the start of the button',
     },
@@ -67,7 +69,8 @@ const meta: Meta<typeof ButtonBase> = {
     },
     endIconName: {
       control: 'select',
-      options: Object.values(IconName),
+      options: Object.keys(IconName),
+      mapping: IconName,
       description:
         'Optional prop to specify an icon to show at the end of the button',
     },
@@ -89,6 +92,14 @@ const meta: Meta<typeof ButtonBase> = {
       control: 'object',
       description:
         'Optional prop to pass additional properties to the loading icon',
+    },
+    textProps: {
+      control: 'object',
+      description:
+        'Optional props to be passed to the Text component when children is a string',
+      table: {
+        type: { summary: 'Partial<TextProps>' },
+      },
     },
   },
 };
@@ -116,6 +127,15 @@ export const Size: Story = {
       </ButtonBase>
     </div>
   ),
+};
+
+export const TextProps: Story = {
+  args: {
+    children: 'Button with custom text variant',
+    textProps: {
+      variant: TextVariant.BodySm,
+    },
+  },
 };
 
 export const IsFullWidth: Story = {
