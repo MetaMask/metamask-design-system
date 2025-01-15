@@ -91,10 +91,10 @@ export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ButtonSecondary size={ButtonSize.Sm}>ButtonSize Sm</ButtonSecondary>
-      <ButtonSecondary size={ButtonSize.Md}>
-        ButtonSize Md (Default)
+      <ButtonSecondary size={ButtonSize.Md}>ButtonSize Md</ButtonSecondary>
+      <ButtonSecondary size={ButtonSize.Lg}>
+        ButtonSize Lg (Default)
       </ButtonSecondary>
-      <ButtonSecondary size={ButtonSize.Lg}>ButtonSize Lg</ButtonSecondary>
     </View>
   ),
 };
@@ -147,5 +147,22 @@ export const isFullWidth: Story = {
       <ButtonSecondary>ButtonSecondary</ButtonSecondary>
       <ButtonSecondary isFullWidth>ButtonSecondary</ButtonSecondary>
     </View>
+  ),
+};
+
+export const WithLongText: Story = {
+  render: () => (
+    <ButtonSecondary
+      startIconName={IconName.Add}
+      endIconName={IconName.AddSquare}
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </ButtonSecondary>
   ),
 };

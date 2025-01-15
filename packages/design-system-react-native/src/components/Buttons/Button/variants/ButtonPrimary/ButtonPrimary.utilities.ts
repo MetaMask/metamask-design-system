@@ -27,7 +27,7 @@ export const generateButtonPrimaryClassNames = ({
   twClassName = '',
 }: Partial<ButtonPrimaryProps>): string => {
   let backgroundStyle;
-  const isPressedOrLoading = isPressed ?? isLoading;
+  const isPressedOrLoading = isPressed || isLoading;
 
   if (isInverse && isDanger) {
     backgroundStyle = isPressedOrLoading

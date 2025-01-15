@@ -50,7 +50,7 @@ type Story = StoryObj<ButtonBaseProps>;
 
 export const Default: Story = {
   args: {
-    children: 'Sample ButtonBase Text',
+    children: 'ButtonBase',
     size: DEFAULT_BUTTONBASE_PROPS.size,
     isLoading: DEFAULT_BUTTONBASE_PROPS.isLoading,
     loadingText: DEFAULT_BUTTONBASE_PROPS.loadingText,
@@ -111,6 +111,25 @@ export const isFullWidth: Story = {
     <View style={{ gap: 16 }}>
       <ButtonBase>ButtonBase</ButtonBase>
       <ButtonBase isFullWidth>ButtonBase</ButtonBase>
+    </View>
+  ),
+};
+
+export const WithLongText: Story = {
+  render: () => (
+    <View style={{ paddingHorizontal: 32 }}>
+      <ButtonBase
+        startIconName={IconName.Add}
+        endIconName={IconName.ArrowRight}
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </ButtonBase>
     </View>
   ),
 };

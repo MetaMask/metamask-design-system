@@ -41,7 +41,8 @@ const ButtonLink = ({
   }, [tw, isPressed, isDanger, isInverse, isLoading, twClassName]);
 
   let finalTextColor, finalIconColor;
-  const isPressedOrLoading = isPressed ?? isLoading;
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const isPressedOrLoading = isPressed || isLoading;
   if (isInverse && isDanger) {
     finalTextColor = isPressedOrLoading
       ? TextColor.ErrorDefaultPressed

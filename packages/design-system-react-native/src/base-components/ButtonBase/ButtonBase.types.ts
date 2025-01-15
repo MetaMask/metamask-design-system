@@ -34,7 +34,7 @@ export type ButtonBaseProps = {
   /**
    * Optional prop to control the size of the ButtonBase
    * Possible values: ButtonBaseSize.Sm (32px), ButtonBaseSize.Md (40px), ButtonBaseSize.Lg (48px)
-   * @default ButtonBaseSize.Md
+   * @default ButtonBaseSize.Lg
    */
   size?: ButtonBaseSize;
   /**

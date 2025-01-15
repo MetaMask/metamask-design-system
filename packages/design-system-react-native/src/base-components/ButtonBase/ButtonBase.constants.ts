@@ -16,8 +16,10 @@ export const DEFAULT_BUTTONBASE_PROPS: Partial<ButtonBaseProps> = {
     variant: TextVariant.BodyMd,
     fontWeight: FontWeight.Medium,
     color: TextColor.TextDefault,
+    numberOfLines: 1,
+    ellipsizeMode: 'clip',
   },
-  size: ButtonBaseSize.Md,
+  size: ButtonBaseSize.Lg,
   isLoading: false,
   loadingText: 'Loading',
   spinnerProps: {

@@ -91,8 +91,8 @@ export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ButtonLink size={ButtonSize.Sm}>ButtonSize Sm</ButtonLink>
-      <ButtonLink size={ButtonSize.Md}>ButtonSize Md (Default)</ButtonLink>
-      <ButtonLink size={ButtonSize.Lg}>ButtonSize Lg</ButtonLink>
+      <ButtonLink size={ButtonSize.Md}>ButtonSize Md</ButtonLink>
+      <ButtonLink size={ButtonSize.Lg}>ButtonSize Lg (Default)</ButtonLink>
     </View>
   ),
 };
@@ -136,5 +136,19 @@ export const isFullWidth: Story = {
       <ButtonLink>ButtonLink</ButtonLink>
       <ButtonLink isFullWidth>ButtonLink</ButtonLink>
     </View>
+  ),
+};
+
+export const WithLongText: Story = {
+  render: () => (
+    <ButtonLink startIconName={IconName.Add} endIconName={IconName.AddSquare}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </ButtonLink>
   ),
 };

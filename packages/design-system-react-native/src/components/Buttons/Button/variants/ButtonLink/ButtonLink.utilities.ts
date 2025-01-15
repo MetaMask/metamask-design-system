@@ -26,8 +26,8 @@ export const generateButtonLinkClassNames = ({
   isLoading = false,
   twClassName = '',
 }: Partial<ButtonLinkProps>): string => {
-  let backgroundStyle;
-  let borderColorStyle;
+  let backgroundStyle, borderColorStyle;
+  let borderWidthStyle = 'border-0';
 
   const isPressedOrLoading = isPressed || isLoading;
 
@@ -48,6 +48,7 @@ export const generateButtonLinkClassNames = ({
       ? 'bg-background-pressed'
       : 'bg-transparent';
     borderColorStyle = 'border-primary-inverse';
+    borderWidthStyle = 'border-[1.5px]';
   } else {
     backgroundStyle = isPressedOrLoading
       ? 'bg-background-pressed'
@@ -56,8 +57,6 @@ export const generateButtonLinkClassNames = ({
       ? 'border-background-pressed'
       : 'border-transparent';
   }
-
-  const borderWidthStyle = 'border-[1.5px]';
 
   return `${backgroundStyle} ${borderWidthStyle} ${borderColorStyle} ${twClassName}`;
 };
