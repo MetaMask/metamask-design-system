@@ -3,8 +3,8 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
 
-import type { IconProps } from '../../components/Icon';
-import Icon from '../../components/Icon';
+import type { IconProps } from '../Icon';
+import Icon from '../Icon';
 import type { TextProps } from '../../components/Text/Text.types';
 import type { SpinnerProps } from '../../temp-components/Spinner';
 import Spinner from '../../temp-components/Spinner';

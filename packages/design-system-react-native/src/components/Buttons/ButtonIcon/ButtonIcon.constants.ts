@@ -1,4 +1,4 @@
-import { IconSize } from '../../Icons/Icon';
+import { IconSize } from '../../Icon';
 import type { ButtonIconProps } from './ButtonIcon.types';
 import { ButtonIconVariant } from './ButtonIcon.types';
 

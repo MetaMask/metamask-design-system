@@ -9,12 +9,7 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 
-import type { IconProps } from '../../components/Icons/Icon';
-import Icon, {
-  IconName,
-  IconColor,
-  IconSize,
-} from '../../components/Icons/Icon';
+import Icon, { IconName, IconColor, IconSize } from '../../components/Icon';
 import Text, { TextVariant, TextColor } from '../../components/Text';
 import type { SpinnerProps } from './Spinner.types';
 

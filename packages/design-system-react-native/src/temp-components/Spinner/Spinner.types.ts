@@ -1,6 +1,6 @@
 import type { ViewProps } from 'react-native';
 
-import type { IconColor, IconProps } from '../../components/Icons/Icon';
+import type { IconColor, IconProps } from '../../components/Icon';
 import type { TextProps } from '../../components/Text/Text.types';
 
 /**

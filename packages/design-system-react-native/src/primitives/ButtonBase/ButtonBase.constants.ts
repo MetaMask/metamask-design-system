@@ -1,4 +1,4 @@
-import { IconSize, IconColor } from '../../components/Icons/Icon';
+import { IconSize, IconColor } from '../../components/Icon';
 import { TextColor, TextVariant, FontWeight } from '../../components/Text';
 import type { ButtonBaseProps } from './ButtonBase.types';
 import { ButtonBaseSize } from './ButtonBase.types';

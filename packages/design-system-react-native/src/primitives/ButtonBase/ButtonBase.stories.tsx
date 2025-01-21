@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { IconName } from '../../components/Icons/Icon';
+import { IconName } from '../../components/Icon';
 import ButtonBase from './ButtonBase';
 import { DEFAULT_BUTTONBASE_PROPS } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';

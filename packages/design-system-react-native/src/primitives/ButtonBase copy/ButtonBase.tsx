@@ -1,14 +1,22 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import {
+  useTailwind,
+  withThemeProvider,
+} from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
-import { View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
+import { Pressable } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  Easing,
+} from 'react-native-reanimated';
 
 import type { IconProps } from '../../components/Icon';
 import Icon from '../../components/Icon';
 import type { TextProps } from '../../components/Text/Text.types';
 import type { SpinnerProps } from '../../temp-components/Spinner';
 import Spinner from '../../temp-components/Spinner';
-import ButtonAnimated from '../ButtonAnimated';
 import TextOrChildren from '../TextOrChildren/TextOrChildren';
 import { DEFAULT_BUTTONBASE_PROPS } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
@@ -30,6 +38,8 @@ const ButtonBase = ({
   isDisabled,
   isFullWidth,
   twClassName,
+  onPressIn,
+  onPressOut,
   style,
   ...props
 }: ButtonBaseProps) => {
@@ -44,6 +54,27 @@ const ButtonBase = ({
     });
     return tw`${mergedClassnames}`;
   }, [tw, size, twClassName, isLoading, isDisabled, isFullWidth]);
+  const animation = useSharedValue(1);
+  const scaleStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: animation.value }],
+    };
+  });
+  const onPressInHandler = (event: GestureResponderEvent) => {
+    animation.value = withTiming(0.97, {
+      duration: 100,
+      easing: Easing.bezier(0.3, 0.8, 0.3, 1),
+    });
+    onPressIn?.(event);
+  };
+
+  const onPressOutHandler = (event: GestureResponderEvent) => {
+    animation.value = withTiming(1, {
+      duration: 100,
+      easing: Easing.bezier(0.3, 0.8, 0.3, 1),
+    });
+    onPressOut?.(event);
+  };
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
     ...DEFAULT_BUTTONBASE_PROPS.textProps,
@@ -64,48 +95,42 @@ const ButtonBase = ({
   const finalSpinnerProps: SpinnerProps = {
     ...DEFAULT_BUTTONBASE_PROPS.spinnerProps,
     loadingText,
-    loadingTextProps: {
-      numberOfLines: 1,
-    },
     ...spinnerProps,
   };
 
   return (
-    <ButtonAnimated
-      disabled={isDisabled || isLoading}
-      accessibilityRole="button"
-      accessible
-      style={[twStyle, style]}
-      {...props}
-    >
-      <View
-        style={tw`absolute inset-0 flex items-center justify-center opacity-${
-          isLoading ? '100' : '0'
-        }`}
-        testID="spinner-container"
+    <Animated.View style={scaleStyle}>
+      <Pressable
+        disabled={isDisabled ?? isLoading}
+        accessibilityRole="button"
+        accessible
+        style={[twStyle, style]}
+        onPressIn={onPressInHandler}
+        onPressOut={onPressOutHandler}
+        {...props}
       >
-        <Spinner {...finalSpinnerProps} />
-      </View>
-      <View
-        style={tw`flex-row items-center justify-center gap-x-2 opacity-${
-          isLoading ? '0' : '100'
-        }`}
-        testID="content-container"
-      >
-        {finalStartIconName ? (
-          <Icon name={finalStartIconName} {...finalStartIconProps} />
+        {isLoading ? (
+          <Spinner {...finalSpinnerProps} />
         ) : (
-          startAccessory
+          <>
+            {finalStartIconName ? (
+              <Icon name={finalStartIconName} {...finalStartIconProps} />
+            ) : (
+              startAccessory
+            )}
+            <TextOrChildren textProps={finalTextProps}>
+              {children}
+            </TextOrChildren>
+            {finalEndIconName ? (
+              <Icon name={finalEndIconName} {...finalEndIconProps} />
+            ) : (
+              endAccessory
+            )}
+          </>
         )}
-        <TextOrChildren textProps={finalTextProps}>{children}</TextOrChildren>
-        {finalEndIconName ? (
-          <Icon name={finalEndIconName} {...finalEndIconProps} />
-        ) : (
-          endAccessory
-        )}
-      </View>
-    </ButtonAnimated>
+      </Pressable>
+    </Animated.View>
   );
 };
 
-export default ButtonBase;
+export default withThemeProvider(ButtonBase);

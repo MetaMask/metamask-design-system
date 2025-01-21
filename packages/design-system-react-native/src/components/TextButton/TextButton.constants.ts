@@ -1,4 +1,4 @@
-import { IconSize, IconColor } from '../Icons/Icon';
+import { IconSize, IconColor } from '../Icon';
 import { TextColor, TextVariant, FontWeight } from '../Text';
 import type { TextButtonProps } from './TextButton.types';
 

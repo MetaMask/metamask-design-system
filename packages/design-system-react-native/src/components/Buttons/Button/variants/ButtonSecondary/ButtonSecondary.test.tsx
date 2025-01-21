@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconName } from '../../../../Icons/Icon';
+import { IconName } from '../../../../Icon';
 import ButtonSecondary from './ButtonSecondary';
 import {
   generateButtonSecondaryContainerClassNames,

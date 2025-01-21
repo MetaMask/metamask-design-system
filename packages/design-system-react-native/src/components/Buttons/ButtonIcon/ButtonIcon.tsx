@@ -6,8 +6,8 @@ import { Pressable, View } from 'react-native';
 
 import type { SpinnerProps } from '../../../temp-components/Spinner';
 import Spinner from '../../../temp-components/Spinner';
-import type { IconProps, IconColor } from '../../Icons/Icon';
-import Icon from '../../Icons/Icon';
+import type { IconProps, IconColor } from '../../Icon';
+import Icon from '../../Icon';
 import { DEFAULT_BUTTONICON_PROPS } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
 import {
