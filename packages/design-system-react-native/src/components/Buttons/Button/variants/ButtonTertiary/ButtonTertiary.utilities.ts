@@ -150,7 +150,9 @@ export const generateButtonTertiaryTextClassNames = ({
   } else if (isInverse) {
     textColor = 'text-primary-inverse';
   } else {
-    textColor = 'text-primary-default';
+    textColor = isPressedOrLoading
+      ? 'text-primary-defaultPressed'
+      : 'text-primary-default';
   }
 
   return `${textColor}`;

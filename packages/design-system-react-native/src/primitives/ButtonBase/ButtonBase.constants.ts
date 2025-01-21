@@ -21,7 +21,6 @@ export const DEFAULT_BUTTONBASE_PROPS: Partial<ButtonBaseProps> = {
   },
   size: ButtonBaseSize.Lg,
   isLoading: false,
-  loadingText: 'Loading',
   spinnerProps: {
     color: IconColor.IconDefault,
   },

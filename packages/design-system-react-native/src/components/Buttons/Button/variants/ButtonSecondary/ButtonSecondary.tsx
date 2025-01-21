@@ -19,9 +19,9 @@ const ButtonSecondary = ({
   spinnerProps,
   startIconProps,
   endIconProps,
-  isDanger,
-  isInverse,
-  isLoading,
+  isDanger = DEFAULT_BUTTONSECONDARY_PROPS.isDanger,
+  isInverse = DEFAULT_BUTTONSECONDARY_PROPS.isInverse,
+  isLoading = DEFAULT_BUTTONSECONDARY_PROPS.isLoading,
   onPressIn,
   onPressOut,
   twClassName,
@@ -47,7 +47,7 @@ const ButtonSecondary = ({
       isInverse,
       isLoading,
     });
-  }, [isPressed, isDanger, isInverse, isLoading, textProps]);
+  }, [isPressed, isDanger, isInverse, isLoading]);
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
     ...DEFAULT_BUTTONSECONDARY_PROPS.textProps,

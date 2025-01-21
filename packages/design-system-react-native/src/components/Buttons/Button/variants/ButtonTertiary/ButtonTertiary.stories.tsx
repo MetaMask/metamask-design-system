@@ -75,7 +75,7 @@ export const Default: Story = {
     children: 'Sample ButtonTertiary Text',
     size: DEFAULT_BUTTONTERTIARY_PROPS.size,
     isLoading: DEFAULT_BUTTONTERTIARY_PROPS.isLoading,
-    loadingText: DEFAULT_BUTTONTERTIARY_PROPS.loadingText,
+    loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
     isDisabled: DEFAULT_BUTTONTERTIARY_PROPS.isDisabled,
@@ -139,6 +139,28 @@ export const isFullWidth: Story = {
     <View style={{ gap: 16 }}>
       <ButtonTertiary>ButtonTertiary</ButtonTertiary>
       <ButtonTertiary isFullWidth>ButtonTertiary</ButtonTertiary>
+    </View>
+  ),
+};
+
+export const isDanger: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonTertiary isDanger>ButtonTertiary</ButtonTertiary>
+      <ButtonTertiaryStory isDanger isInverse>
+        ButtonTertiary
+      </ButtonTertiaryStory>
+    </View>
+  ),
+};
+
+export const isInverse: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonTertiaryStory isInverse>ButtonTertiary</ButtonTertiaryStory>
+      <ButtonTertiaryStory isInverse isDanger>
+        ButtonTertiary
+      </ButtonTertiaryStory>
     </View>
   ),
 };

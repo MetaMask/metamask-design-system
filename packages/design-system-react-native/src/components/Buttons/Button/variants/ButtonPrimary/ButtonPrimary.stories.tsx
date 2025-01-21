@@ -75,7 +75,7 @@ export const Default: Story = {
     children: 'Sample ButtonPrimary Text',
     size: DEFAULT_BUTTONPRIMARY_PROPS.size,
     isLoading: DEFAULT_BUTTONPRIMARY_PROPS.isLoading,
-    loadingText: DEFAULT_BUTTONPRIMARY_PROPS.loadingText,
+    loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
     isDisabled: DEFAULT_BUTTONPRIMARY_PROPS.isDisabled,
@@ -139,6 +139,28 @@ export const isFullWidth: Story = {
     <View style={{ gap: 16 }}>
       <ButtonPrimary>ButtonPrimary</ButtonPrimary>
       <ButtonPrimary isFullWidth>ButtonPrimary</ButtonPrimary>
+    </View>
+  ),
+};
+
+export const isDanger: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonPrimary isDanger>ButtonPrimary</ButtonPrimary>
+      <ButtonPrimaryStory isDanger isInverse>
+        ButtonPrimary
+      </ButtonPrimaryStory>
+    </View>
+  ),
+};
+
+export const isInverse: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonPrimaryStory isInverse>ButtonPrimary</ButtonPrimaryStory>
+      <ButtonPrimaryStory isInverse isDanger>
+        ButtonPrimary
+      </ButtonPrimaryStory>
     </View>
   ),
 };

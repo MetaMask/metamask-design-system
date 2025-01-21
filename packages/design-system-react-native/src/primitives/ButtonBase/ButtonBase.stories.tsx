@@ -53,7 +53,7 @@ export const Default: Story = {
     children: 'ButtonBase',
     size: DEFAULT_BUTTONBASE_PROPS.size,
     isLoading: DEFAULT_BUTTONBASE_PROPS.isLoading,
-    loadingText: DEFAULT_BUTTONBASE_PROPS.loadingText,
+    loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
     isDisabled: DEFAULT_BUTTONBASE_PROPS.isDisabled,

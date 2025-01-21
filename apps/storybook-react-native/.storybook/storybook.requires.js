@@ -47,11 +47,14 @@ try {
 
 const getStories = () => {
   return {
+    "./../../packages/design-system-react-native/src/components/Buttons/Button/Button.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/Button.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/Buttons/ButtonIcon/ButtonIcon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/ButtonIcon/ButtonIcon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Icons/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icons/Icon/Icon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx"),
   };
 };

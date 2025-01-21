@@ -1,6 +1,6 @@
 import type { ViewProps } from 'react-native';
 
-import type { IconColor } from '../../components/Icons/Icon';
+import type { IconColor, IconProps } from '../../components/Icons/Icon';
 import type { TextProps } from '../../components/Text/Text.types';
 
 /**
@@ -12,6 +12,10 @@ export type SpinnerProps = {
    * @default IconColor.IconDefault
    */
   color?: IconColor;
+  /**
+   * Optional props to be passed to the loadingText element
+   */
+  spinnerIconProps?: Partial<IconProps>;
   /**
    * Optional text to display on the right of the spinner, providing additional context or information about the loading state.
    */

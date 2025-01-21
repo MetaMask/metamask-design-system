@@ -75,7 +75,7 @@ export const Default: Story = {
     children: 'Sample ButtonSecondary Text',
     size: DEFAULT_BUTTONSECONDARY_PROPS.size,
     isLoading: DEFAULT_BUTTONSECONDARY_PROPS.isLoading,
-    loadingText: DEFAULT_BUTTONSECONDARY_PROPS.loadingText,
+    loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
     isDisabled: DEFAULT_BUTTONSECONDARY_PROPS.isDisabled,
@@ -143,6 +143,28 @@ export const isFullWidth: Story = {
     <View style={{ gap: 16 }}>
       <ButtonSecondary>ButtonSecondary</ButtonSecondary>
       <ButtonSecondary isFullWidth>ButtonSecondary</ButtonSecondary>
+    </View>
+  ),
+};
+
+export const isDanger: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonSecondary isDanger>ButtonSecondary</ButtonSecondary>
+      <ButtonSecondaryStory isDanger isInverse>
+        ButtonSecondary
+      </ButtonSecondaryStory>
+    </View>
+  ),
+};
+
+export const isInverse: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <ButtonSecondaryStory isInverse>ButtonSecondary</ButtonSecondaryStory>
+      <ButtonSecondaryStory isInverse isDanger>
+        ButtonSecondary
+      </ButtonSecondaryStory>
     </View>
   ),
 };

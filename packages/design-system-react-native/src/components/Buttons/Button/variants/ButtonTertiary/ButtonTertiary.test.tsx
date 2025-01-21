@@ -173,14 +173,14 @@ describe('ButtonTertiary', () => {
       const classNames = generateButtonTertiaryTextClassNames({
         isPressed: true,
       });
-      expect(classNames).toContain('text-primary-default');
+      expect(classNames).toContain('text-primary-defaultPressed');
     });
 
     it('returns correct class name for loading state', () => {
       const classNames = generateButtonTertiaryTextClassNames({
         isLoading: true,
       });
-      expect(classNames).toContain('text-primary-default');
+      expect(classNames).toContain('text-primary-defaultPressed');
     });
   });
 
