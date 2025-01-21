@@ -1,7 +1,7 @@
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
-import type { SpinnerProps } from '../../../temp-components/Spinner';
-import type { IconProps, IconName, IconSize } from '../../Icon';
+import type { SpinnerProps } from '../../temp-components/Spinner';
+import type { IconProps, IconName, IconSize } from '../Icon';
 
 /**
  * Button variants.
