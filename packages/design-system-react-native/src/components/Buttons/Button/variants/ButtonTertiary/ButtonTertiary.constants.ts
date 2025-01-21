@@ -1,10 +1,10 @@
-import { DEFAULT_BUTTONBASE_PROPS } from '../../../../../base-components/ButtonBase/ButtonBase.constants';
+import { DEFAULT_BUTTONBASE_PROPS } from '../../../../../primitives/ButtonBase/ButtonBase.constants';
 import { IconColor } from '../../../../Icons/Icon';
 import { TextColor } from '../../../../Text';
-import type { ButtonLinkProps } from './ButtonLink.types';
+import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
 // Defaults
-export const DEFAULT_BUTTONLINK_PROPS: Partial<ButtonLinkProps> = {
+export const DEFAULT_BUTTONTERTIARY_PROPS: Partial<ButtonTertiaryProps> = {
   ...DEFAULT_BUTTONBASE_PROPS,
   textProps: {
     ...DEFAULT_BUTTONBASE_PROPS.textProps,

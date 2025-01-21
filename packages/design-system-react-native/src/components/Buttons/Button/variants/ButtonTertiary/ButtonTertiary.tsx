@@ -1,36 +1,36 @@
-import {
-  useTailwind,
-  withThemeProvider,
-} from '@metamask/design-system-twrnc-preset';
-import React, { useMemo } from 'react';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import React, { useMemo, useState } from 'react';
+import type { GestureResponderEvent } from 'react-native';
 
-import ButtonBase from '../../../../../base-components/ButtonBase';
-import type { SpinnerTempProps } from '../../../../../temp-components/SpinnerTemp';
+import ButtonBase from '../../../../../primitives/ButtonBase';
+import type { SpinnerProps } from '../../../../../temp-components/Spinner';
 import type { IconProps } from '../../../../Icons/Icon';
 import { IconColor } from '../../../../Icons/Icon';
 import type { TextProps } from '../../../../Text/Text.types';
 import { TextColor } from '../../../../Text/Text.types';
-import { DEFAULT_BUTTONLINK_PROPS } from './ButtonLink.constants';
-import type { ButtonLinkProps } from './ButtonLink.types';
-import { generateButtonLinkClassNames } from './ButtonLink.utilities';
+import { DEFAULT_BUTTONTERTIARY_PROPS } from './ButtonTertiary.constants';
+import type { ButtonTertiaryProps } from './ButtonTertiary.types';
+import { generateButtonTertiaryClassNames } from './ButtonTertiary.utilities';
 
-const ButtonLink = ({
+const ButtonTertiary = ({
   children,
   textProps,
   spinnerProps,
   startIconProps,
   endIconProps,
-  isPressed,
   isDanger,
   isInverse,
   isLoading,
+  onPressIn,
+  onPressOut,
   twClassName,
   style,
   ...props
-}: ButtonLinkProps) => {
+}: ButtonTertiaryProps) => {
+  const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
   const twStyle = useMemo(() => {
-    const mergedClassnames = generateButtonLinkClassNames({
+    const mergedClassnames = generateButtonTertiaryClassNames({
       isPressed,
       isDanger,
       isInverse,
@@ -66,29 +66,38 @@ const ButtonLink = ({
   }
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
-    ...DEFAULT_BUTTONLINK_PROPS.textProps,
+    ...DEFAULT_BUTTONTERTIARY_PROPS.textProps,
     color: finalTextColor,
     ...textProps,
   };
   const finalStartIconProps: Partial<IconProps> = {
-    ...DEFAULT_BUTTONLINK_PROPS.startIconProps,
+    ...DEFAULT_BUTTONTERTIARY_PROPS.startIconProps,
     color: finalIconColor,
     ...startIconProps,
   };
 
   const finalEndIconProps: Partial<IconProps> = {
-    ...DEFAULT_BUTTONLINK_PROPS.endIconProps,
+    ...DEFAULT_BUTTONTERTIARY_PROPS.endIconProps,
     color: finalIconColor,
     ...endIconProps,
   };
 
-  const finalSpinnerProps: SpinnerTempProps = {
-    ...DEFAULT_BUTTONLINK_PROPS.spinnerProps,
+  const finalSpinnerProps: SpinnerProps = {
+    ...DEFAULT_BUTTONTERTIARY_PROPS.spinnerProps,
     color: finalIconColor,
     loadingTextProps: {
       color: finalTextColor,
     },
     ...spinnerProps,
+  };
+  const onPressInHandler = (event: GestureResponderEvent) => {
+    setIsPressed(true);
+    onPressIn?.(event);
+  };
+
+  const onPressOutHandler = (event: GestureResponderEvent) => {
+    setIsPressed(false);
+    onPressOut?.(event);
   };
 
   return (
@@ -99,6 +108,8 @@ const ButtonLink = ({
       endIconProps={finalEndIconProps}
       isLoading={isLoading}
       style={[twStyle, style]}
+      onPressIn={onPressInHandler}
+      onPressOut={onPressOutHandler}
       {...props}
     >
       {children}
@@ -106,4 +117,4 @@ const ButtonLink = ({
   );
 };
 
-export default withThemeProvider(ButtonLink);
+export default ButtonTertiary;

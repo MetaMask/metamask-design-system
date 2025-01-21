@@ -1,10 +1,12 @@
+import type { ViewProps } from 'react-native';
+
 import type { IconColor } from '../../components/Icons/Icon';
 import type { TextProps } from '../../components/Text/Text.types';
 
 /**
- * SpinnerTemp component props.
+ * Spinner component props.
  */
-export type SpinnerTempProps = {
+export type SpinnerProps = {
   /**
    * Optional prop that sets the color of the spinner icon using predefined theme colors
    * @default IconColor.IconDefault
@@ -18,4 +20,8 @@ export type SpinnerTempProps = {
    * Optional props to be passed to the loadingText element
    */
   loadingTextProps?: Omit<Partial<TextProps>, 'children'>;
-};
+  /**
+   * Optional prop to add twrnc overriding classNames.
+   */
+  twClassName?: string;
+} & ViewProps;

@@ -4,13 +4,13 @@ import { View } from 'react-native';
 
 import { IconName } from '../../../../Icons/Icon';
 import { ButtonSize } from '../../Button.types';
-import ButtonLink from './ButtonLink';
-import { DEFAULT_BUTTONLINK_PROPS } from './ButtonLink.constants';
-import type { ButtonLinkProps } from './ButtonLink.types';
+import ButtonTertiary from './ButtonTertiary';
+import { DEFAULT_BUTTONTERTIARY_PROPS } from './ButtonTertiary.constants';
+import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
-const meta: Meta<ButtonLinkProps> = {
-  title: 'Components/Button Link',
-  component: ButtonLink,
+const meta: Meta<ButtonTertiaryProps> = {
+  title: 'Components/Button Tertiary',
+  component: ButtonTertiary,
   argTypes: {
     children: {
       control: 'text',
@@ -39,9 +39,6 @@ const meta: Meta<ButtonLinkProps> = {
     isFullWidth: {
       control: 'boolean',
     },
-    isPressed: {
-      control: 'boolean',
-    },
     isDanger: {
       control: 'boolean',
     },
@@ -56,8 +53,8 @@ const meta: Meta<ButtonLinkProps> = {
 
 export default meta;
 
-type Story = StoryObj<ButtonLinkProps>;
-const ButtonLinkStory: React.FC<ButtonLinkProps> = ({
+type Story = StoryObj<ButtonTertiaryProps>;
+const ButtonTertiaryStory: React.FC<ButtonTertiaryProps> = ({
   isInverse,
   ...props
 }) => {
@@ -68,31 +65,33 @@ const ButtonLinkStory: React.FC<ButtonLinkProps> = ({
         tw`${isInverse ? `bg-primary-default` : 'bg-background-default'}`,
       ]}
     >
-      <ButtonLink isInverse={isInverse} {...props} />
+      <ButtonTertiary isInverse={isInverse} {...props} />
     </View>
   );
 };
 
 export const Default: Story = {
   args: {
-    children: 'Sample ButtonLink Text',
-    size: DEFAULT_BUTTONLINK_PROPS.size,
-    isLoading: DEFAULT_BUTTONLINK_PROPS.isLoading,
-    loadingText: DEFAULT_BUTTONLINK_PROPS.loadingText,
+    children: 'Sample ButtonTertiary Text',
+    size: DEFAULT_BUTTONTERTIARY_PROPS.size,
+    isLoading: DEFAULT_BUTTONTERTIARY_PROPS.isLoading,
+    loadingText: DEFAULT_BUTTONTERTIARY_PROPS.loadingText,
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
-    isDisabled: DEFAULT_BUTTONLINK_PROPS.isDisabled,
-    isFullWidth: DEFAULT_BUTTONLINK_PROPS.isFullWidth,
+    isDisabled: DEFAULT_BUTTONTERTIARY_PROPS.isDisabled,
+    isFullWidth: DEFAULT_BUTTONTERTIARY_PROPS.isFullWidth,
   },
-  render: (args) => <ButtonLinkStory {...args} />,
+  render: (args) => <ButtonTertiaryStory {...args} />,
 };
 
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonLink size={ButtonSize.Sm}>ButtonSize Sm</ButtonLink>
-      <ButtonLink size={ButtonSize.Md}>ButtonSize Md</ButtonLink>
-      <ButtonLink size={ButtonSize.Lg}>ButtonSize Lg (Default)</ButtonLink>
+      <ButtonTertiary size={ButtonSize.Sm}>ButtonSize Sm</ButtonTertiary>
+      <ButtonTertiary size={ButtonSize.Md}>ButtonSize Md</ButtonTertiary>
+      <ButtonTertiary size={ButtonSize.Lg}>
+        ButtonSize Lg (Default)
+      </ButtonTertiary>
     </View>
   ),
 };
@@ -100,48 +99,56 @@ export const Sizes: Story = {
 export const IsLoading: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonLink isLoading>ButtonLink</ButtonLink>
-      <ButtonLink isLoading loadingText="With Loading Text">
-        ButtonLink
-      </ButtonLink>
+      <ButtonTertiary isLoading>ButtonTertiary</ButtonTertiary>
+      <ButtonTertiary isLoading loadingText="With Loading Text">
+        ButtonTertiary
+      </ButtonTertiary>
     </View>
   ),
 };
 
 export const WithStartAccessory: Story = {
   render: () => (
-    <ButtonLink startIconName={IconName.Add}>ButtonLink</ButtonLink>
+    <ButtonTertiary startIconName={IconName.Add}>ButtonTertiary</ButtonTertiary>
   ),
 };
 
 export const WithEndAccessory: Story = {
-  render: () => <ButtonLink endIconName={IconName.Add}>ButtonLink</ButtonLink>,
+  render: () => (
+    <ButtonTertiary endIconName={IconName.Add}>ButtonTertiary</ButtonTertiary>
+  ),
 };
 
 export const WithStartAndEndAccessory: Story = {
   render: () => (
-    <ButtonLink startIconName={IconName.Add} endIconName={IconName.AddSquare}>
-      ButtonLink
-    </ButtonLink>
+    <ButtonTertiary
+      startIconName={IconName.Add}
+      endIconName={IconName.AddSquare}
+    >
+      ButtonTertiary
+    </ButtonTertiary>
   ),
 };
 
 export const isDisabled: Story = {
-  render: () => <ButtonLink isDisabled>ButtonLink</ButtonLink>,
+  render: () => <ButtonTertiary isDisabled>ButtonTertiary</ButtonTertiary>,
 };
 
 export const isFullWidth: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonLink>ButtonLink</ButtonLink>
-      <ButtonLink isFullWidth>ButtonLink</ButtonLink>
+      <ButtonTertiary>ButtonTertiary</ButtonTertiary>
+      <ButtonTertiary isFullWidth>ButtonTertiary</ButtonTertiary>
     </View>
   ),
 };
 
 export const WithLongText: Story = {
   render: () => (
-    <ButtonLink startIconName={IconName.Add} endIconName={IconName.AddSquare}>
+    <ButtonTertiary
+      startIconName={IconName.Add}
+      endIconName={IconName.AddSquare}
+    >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -149,6 +156,6 @@ export const WithLongText: Story = {
       velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
       est laborum.
-    </ButtonLink>
+    </ButtonTertiary>
   ),
 };

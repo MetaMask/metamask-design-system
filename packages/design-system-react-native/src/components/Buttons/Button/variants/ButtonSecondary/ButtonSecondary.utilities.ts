@@ -25,7 +25,9 @@ export const generateButtonSecondaryClassNames = ({
   isInverse = false,
   isLoading = false,
   twClassName = '',
-}: Partial<ButtonSecondaryProps>): string => {
+}: Partial<ButtonSecondaryProps> & {
+  isPressed?: boolean;
+}): string => {
   let backgroundStyle;
   let borderColorStyle;
 
@@ -39,7 +41,9 @@ export const generateButtonSecondaryClassNames = ({
       ? 'border-background-defaultPressed'
       : 'border-background-default';
   } else if (isDanger) {
-    backgroundStyle = isPressedOrLoading ? 'bg-error-muted' : 'bg-transparent';
+    backgroundStyle = isPressedOrLoading
+      ? 'bg-error-mutedPressed'
+      : 'bg-transparent';
     borderColorStyle = isPressedOrLoading
       ? 'border-error-defaultPressed'
       : 'border-error-default';

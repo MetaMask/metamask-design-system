@@ -1,11 +1,9 @@
-import {
-  useTailwind,
-  withThemeProvider,
-} from '@metamask/design-system-twrnc-preset';
-import React, { useMemo } from 'react';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import React, { useMemo, useState } from 'react';
+import type { GestureResponderEvent } from 'react-native';
 
-import ButtonBase from '../../../../../base-components/ButtonBase';
-import type { SpinnerTempProps } from '../../../../../temp-components/SpinnerTemp';
+import ButtonBase from '../../../../../primitives/ButtonBase';
+import type { SpinnerProps } from '../../../../../temp-components/Spinner';
 import type { IconProps } from '../../../../Icons/Icon';
 import { IconColor } from '../../../../Icons/Icon';
 import type { TextProps } from '../../../../Text/Text.types';
@@ -20,14 +18,16 @@ const ButtonSecondary = ({
   spinnerProps,
   startIconProps,
   endIconProps,
-  isPressed,
   isDanger,
   isInverse,
   isLoading,
+  onPressIn,
+  onPressOut,
   twClassName,
   style,
   ...props
 }: ButtonSecondaryProps) => {
+  const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
   const twStyle = useMemo(() => {
     const mergedClassnames = generateButtonSecondaryClassNames({
@@ -82,13 +82,22 @@ const ButtonSecondary = ({
     ...endIconProps,
   };
 
-  const finalSpinnerProps: SpinnerTempProps = {
+  const finalSpinnerProps: SpinnerProps = {
     ...DEFAULT_BUTTONSECONDARY_PROPS.spinnerProps,
     color: finalIconColor,
     loadingTextProps: {
       color: finalTextColor,
     },
     ...spinnerProps,
+  };
+  const onPressInHandler = (event: GestureResponderEvent) => {
+    setIsPressed(true);
+    onPressIn?.(event);
+  };
+
+  const onPressOutHandler = (event: GestureResponderEvent) => {
+    setIsPressed(false);
+    onPressOut?.(event);
   };
 
   return (
@@ -99,6 +108,8 @@ const ButtonSecondary = ({
       endIconProps={finalEndIconProps}
       isLoading={isLoading}
       style={[twStyle, style]}
+      onPressIn={onPressInHandler}
+      onPressOut={onPressOutHandler}
       {...props}
     >
       {children}
@@ -106,4 +117,4 @@ const ButtonSecondary = ({
   );
 };
 
-export default withThemeProvider(ButtonSecondary);
+export default ButtonSecondary;

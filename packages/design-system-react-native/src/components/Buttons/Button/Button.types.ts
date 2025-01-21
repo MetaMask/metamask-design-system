@@ -1,3 +1,3 @@
-import { ButtonBaseSize } from '../../../base-components/ButtonBase';
+import { ButtonBaseSize } from '../../../primitives/ButtonBase';
 
 export const ButtonSize = ButtonBaseSize;

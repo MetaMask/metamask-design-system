@@ -2,9 +2,9 @@
 
 This design system organizes components into three distinct folders:
 
-## 1. base-components
+## 1. primitives
 
-The `base-components` folder contains foundational building blocks for constructing components in the `components` folder. These are the lower-level, reusable primitives used internally within the design system.
+The `primitives` folder contains foundational building blocks for constructing components in the `components` folder. These are the lower-level, reusable primitives used internally within the design system.
 
 ### Key Points
 
@@ -14,8 +14,8 @@ The `base-components` folder contains foundational building blocks for construct
 
 **Intended Usage:**
 
-- Developers working on the design system should use `base-components` when creating new components for the `components` folder.
-- End users or consumers of the design system should not directly use components from `base-components`.
+- Developers working on the design system should use `primitives` when creating new components for the `components` folder.
+- End users or consumers of the design system should not directly use components from `primitives`.
 
 **Examples:**
 
@@ -23,14 +23,14 @@ The `base-components` folder contains foundational building blocks for construct
 
 **Guidelines:**
 
-- `base-components` should remain minimal and abstract, focusing on functionality and avoiding domain-specific design decisions.
+- `primitives` should remain minimal and abstract, focusing on functionality and avoiding domain-specific design decisions.
 - Ensure these components are well-documented and thoroughly tested to ensure reliability across the system.
 
 ---
 
 ## 2. components
 
-The `components` folder contains fully realized components intended for direct use by end users or consumers of the design system. These components encapsulate the functionality and styling defined in the `base-components`, offering a cohesive and user-friendly API.
+The `components` folder contains fully realized components intended for direct use by end users or consumers of the design system. These components encapsulate the functionality and styling defined in the `primitives`, offering a cohesive and user-friendly API.
 
 ### Key Points
 
@@ -49,7 +49,7 @@ The `components` folder contains fully realized components intended for direct u
 
 **Guidelines:**
 
-- Components in this folder should avoid re-implementing functionality available in `base-components`. Instead, they should compose and extend the `base-components`.
+- Components in this folder should avoid re-implementing functionality available in `primitives`. Instead, they should compose and extend the `primitives`.
 - Provide comprehensive documentation and usage examples for each component to help consumers integrate them effectively.
 
 ---
@@ -85,21 +85,21 @@ The `temp-components` folder is for temporary components that are not yet offici
 
 ### Clear Separation
 
-Maintain a clear distinction between `base-components`, `components`, and `temp-components` to prevent direct usage of `base-components` and `temp-components` by end users.
+Maintain a clear distinction between `primitives`, `components`, and `temp-components` to prevent direct usage of `primitives` and `temp-components` by end users.
 
 ### Naming Conventions
 
-- Prefix all `base-components` with `Base` (e.g., `BaseButton`, `BaseInput`) to signal their purpose.
+- Prefix all `primitives` with `Base` (e.g., `BaseButton`, `BaseInput`) to signal their purpose.
 - Use descriptive and intuitive names for components in the `components` folder.
 - Prefix temporary components in `temp-components` with `Temp` (e.g., `TempCard`, `TempModal`).
 
 ### Documentation
 
-- Clearly indicate in the documentation of `base-components` and `temp-components` that they are internal or experimental and not intended for external use.
+- Clearly indicate in the documentation of `primitives` and `temp-components` that they are internal or experimental and not intended for external use.
 
 ### Testing
 
-- Ensure robust testing for `base-components`, `components`, and `temp-components`, with an emphasis on user-facing functionality in the `components` folder.
+- Ensure robust testing for `primitives`, `components`, and `temp-components`, with an emphasis on user-facing functionality in the `components` folder.
 
 ---
 
@@ -107,7 +107,7 @@ Maintain a clear distinction between `base-components`, `components`, and `temp-
 
 ```
 src/
-├── base-components/
+├── primitives/
 │   ├── BaseButton.tsx
 │   └── BaseInput.tsx
 ├── components/

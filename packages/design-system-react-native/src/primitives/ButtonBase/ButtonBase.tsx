@@ -1,15 +1,14 @@
-import {
-  useTailwind,
-  withThemeProvider,
-} from '@metamask/design-system-twrnc-preset';
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
-import { Pressable } from 'react-native';
+import { View } from 'react-native';
 
 import type { IconProps } from '../../components/Icons/Icon';
 import Icon from '../../components/Icons/Icon';
 import type { TextProps } from '../../components/Text/Text.types';
-import type { SpinnerTempProps } from '../../temp-components/SpinnerTemp';
-import SpinnerTemp from '../../temp-components/SpinnerTemp';
+import type { SpinnerProps } from '../../temp-components/Spinner';
+import Spinner from '../../temp-components/Spinner';
+import ButtonAnimated from '../ButtonAnimated';
 import TextOrChildren from '../TextOrChildren/TextOrChildren';
 import { DEFAULT_BUTTONBASE_PROPS } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
@@ -62,39 +61,51 @@ const ButtonBase = ({
     ...endIconProps,
   };
 
-  const finalSpinnerProps: SpinnerTempProps = {
+  const finalSpinnerProps: SpinnerProps = {
     ...DEFAULT_BUTTONBASE_PROPS.spinnerProps,
     loadingText,
+    loadingTextProps: {
+      numberOfLines: 1,
+    },
     ...spinnerProps,
   };
 
   return (
-    <Pressable
-      disabled={isDisabled ?? isLoading}
+    <ButtonAnimated
+      disabled={isDisabled || isLoading}
       accessibilityRole="button"
       accessible
       style={[twStyle, style]}
       {...props}
     >
-      {isLoading ? (
-        <SpinnerTemp {...finalSpinnerProps} />
-      ) : (
-        <>
-          {finalStartIconName ? (
-            <Icon name={finalStartIconName} {...finalStartIconProps} />
-          ) : (
-            startAccessory
-          )}
-          <TextOrChildren textProps={finalTextProps}>{children}</TextOrChildren>
-          {finalEndIconName ? (
-            <Icon name={finalEndIconName} {...finalEndIconProps} />
-          ) : (
-            endAccessory
-          )}
-        </>
-      )}
-    </Pressable>
+      <View
+        style={tw`absolute inset-0 flex items-center justify-center opacity-${
+          isLoading ? '100' : '0'
+        }`}
+        testID="spinner-container"
+      >
+        <Spinner {...finalSpinnerProps} />
+      </View>
+      <View
+        style={tw`flex-row items-center justify-center gap-x-2 opacity-${
+          isLoading ? '0' : '100'
+        }`}
+        testID="content-container"
+      >
+        {finalStartIconName ? (
+          <Icon name={finalStartIconName} {...finalStartIconProps} />
+        ) : (
+          startAccessory
+        )}
+        <TextOrChildren textProps={finalTextProps}>{children}</TextOrChildren>
+        {finalEndIconName ? (
+          <Icon name={finalEndIconName} {...finalEndIconProps} />
+        ) : (
+          endAccessory
+        )}
+      </View>
+    </ButtonAnimated>
   );
 };
 
-export default withThemeProvider(ButtonBase);
+export default ButtonBase;

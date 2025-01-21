@@ -30,7 +30,7 @@ export const generateButtonBaseClassNames = ({
   twClassName = '',
 }: Partial<ButtonBaseProps>): string => {
   const baseStyle =
-    'flex-row items-center justify-center rounded-full bg-background-muted px-4 gap-x-2';
+    'flex-row items-center justify-center rounded-full bg-background-muted px-4';
   const sizeStyle = TWCLASSMAP_BUTTONBASE_SIZE[size as ButtonBaseSize];
   const disabledStyle = isDisabled ? 'opacity-50' : 'opacity-100';
   const widthStyle = isFullWidth ? 'self-stretch' : 'self-start';

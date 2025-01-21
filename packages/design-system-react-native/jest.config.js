@@ -27,13 +27,17 @@ module.exports = merge(baseConfig, {
     '!**/*.scripts.{js,ts}', // Exclude .scripts files
     '!**/node_modules/**', // Exclude node_modules
     '!**/dist/**', // Exclude build outputs
+    '!**/*.utilities.{js,ts}', // Exclude .utilities files
+    '!**/*.constants.{js,ts}', // Exclude .constants files
+    '!**/*.assets.{js,ts}', // Exclude .assets files
+    '!**/*.types.{js,ts}', // Exclude .types files
   ],
   preset: 'react-native',
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-native|@react-navigation)/)',
+    'node_modules/(?!(react-native|react-native-reanimated|@react-native|@react-navigation)/)',
   ],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {

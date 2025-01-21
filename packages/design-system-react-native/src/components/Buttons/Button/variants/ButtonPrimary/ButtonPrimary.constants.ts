@@ -1,4 +1,4 @@
-import { DEFAULT_BUTTONBASE_PROPS } from '../../../../../base-components/ButtonBase/ButtonBase.constants';
+import { DEFAULT_BUTTONBASE_PROPS } from '../../../../../primitives/ButtonBase/ButtonBase.constants';
 import { IconColor } from '../../../../Icons/Icon';
 import { TextColor } from '../../../../Text';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';

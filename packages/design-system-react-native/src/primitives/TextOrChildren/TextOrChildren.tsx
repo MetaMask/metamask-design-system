@@ -1,4 +1,3 @@
-import { withThemeProvider } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
 import Text from '../../components/Text';
@@ -11,4 +10,4 @@ const TextOrChildren = ({ children, textProps }: TextOrChildrenProps) => {
   return <>{children}</>;
 };
 
-export default withThemeProvider(TextOrChildren);
+export default TextOrChildren;

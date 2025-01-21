@@ -39,9 +39,6 @@ const meta: Meta<ButtonSecondaryProps> = {
     isFullWidth: {
       control: 'boolean',
     },
-    isPressed: {
-      control: 'boolean',
-    },
     isDanger: {
       control: 'boolean',
     },

@@ -1,10 +1,6 @@
-import {
-  useTailwind,
-  withThemeProvider,
-} from '@metamask/design-system-twrnc-preset';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
-// eslint-disable-next-line import/default
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -15,13 +11,15 @@ import Animated, {
 
 import Icon, { IconName, IconColor } from '../../components/Icons/Icon';
 import Text, { TextVariant, TextColor } from '../../components/Text';
-import type { SpinnerTempProps } from './SpinnerTemp.types';
+import type { SpinnerProps } from './Spinner.types';
 
-const SpinnerTemp = ({
+const Spinner = ({
   color = IconColor.IconDefault,
   loadingText,
   loadingTextProps,
-}: SpinnerTempProps) => {
+  twClassName = '',
+  ...props
+}: SpinnerProps) => {
   const tw = useTailwind();
 
   // Create a shared value for rotation
@@ -42,14 +40,19 @@ const SpinnerTemp = ({
   }));
 
   return (
-    <View style={tw`flex-row gap-x-2`}>
-      <Animated.View style={[animatedStyle]}>
-        <Icon name={IconName.Loading} color={color} />
+    <View
+      style={tw`flex-row gap-x-2 items-center ${twClassName}`}
+      testID="spinner"
+      {...props}
+    >
+      <Animated.View style={[animatedStyle]} testID="spinner-animated-view">
+        <Icon name={IconName.Loading} color={color} testID="spinner-icon" />
       </Animated.View>
       {loadingText && (
         <Text
           variant={TextVariant.BodyMd}
           color={TextColor.TextDefault}
+          testID="spinner-text"
           {...loadingTextProps}
         >
           {loadingText}
@@ -59,4 +62,4 @@ const SpinnerTemp = ({
   );
 };
 
-export default withThemeProvider(SpinnerTemp);
+export default Spinner;

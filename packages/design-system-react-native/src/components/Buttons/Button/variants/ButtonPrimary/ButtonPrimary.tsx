@@ -1,11 +1,13 @@
 import {
   useTailwind,
   withThemeProvider,
+  Theme,
 } from '@metamask/design-system-twrnc-preset';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
+import type { GestureResponderEvent } from 'react-native';
 
-import ButtonBase from '../../../../../base-components/ButtonBase';
-import type { SpinnerTempProps } from '../../../../../temp-components/SpinnerTemp';
+import ButtonBase from '../../../../../primitives/ButtonBase';
+import type { SpinnerProps } from '../../../../../temp-components/Spinner';
 import type { IconProps } from '../../../../Icons/Icon';
 import { IconColor } from '../../../../Icons/Icon';
 import type { TextProps } from '../../../../Text/Text.types';
@@ -14,20 +16,22 @@ import { DEFAULT_BUTTONPRIMARY_PROPS } from './ButtonPrimary.constants';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 import { generateButtonPrimaryClassNames } from './ButtonPrimary.utilities';
 
-const ButtonPrimary = ({
+const ButtonPrimaryBase = ({
   children,
   textProps,
   spinnerProps,
   startIconProps,
   endIconProps,
-  isPressed,
   isDanger,
   isInverse,
   isLoading,
+  onPressIn,
+  onPressOut,
   twClassName,
   style,
   ...props
 }: ButtonPrimaryProps) => {
+  const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
   const twStyle = useMemo(() => {
     const mergedClassnames = generateButtonPrimaryClassNames({
@@ -81,13 +85,23 @@ const ButtonPrimary = ({
     ...endIconProps,
   };
 
-  const finalSpinnerProps: SpinnerTempProps = {
+  const finalSpinnerProps: SpinnerProps = {
     ...DEFAULT_BUTTONPRIMARY_PROPS.spinnerProps,
     color: finalIconColor,
     loadingTextProps: {
       color: finalTextColor,
     },
     ...spinnerProps,
+  };
+
+  const onPressInHandler = (event: GestureResponderEvent) => {
+    setIsPressed(true);
+    onPressIn?.(event);
+  };
+
+  const onPressOutHandler = (event: GestureResponderEvent) => {
+    setIsPressed(false);
+    onPressOut?.(event);
   };
 
   return (
@@ -97,6 +111,8 @@ const ButtonPrimary = ({
       startIconProps={finalStartIconProps}
       endIconProps={finalEndIconProps}
       isLoading={isLoading}
+      onPressIn={onPressInHandler}
+      onPressOut={onPressOutHandler}
       style={[twStyle, style]}
       {...props}
     >
@@ -105,4 +121,15 @@ const ButtonPrimary = ({
   );
 };
 
-export default withThemeProvider(ButtonPrimary);
+const ButtonPrimaryLightOnly = withThemeProvider(
+  ButtonPrimaryBase,
+  Theme.Light,
+);
+
+const ButtonPrimary = ({ isInverse, ...props }: ButtonPrimaryProps) => {
+  if (isInverse) {
+    return <ButtonPrimaryBase isInverse={isInverse} {...props} />;
+  }
+  return <ButtonPrimaryLightOnly isInverse={isInverse} {...props} />;
+};
+export default ButtonPrimary;

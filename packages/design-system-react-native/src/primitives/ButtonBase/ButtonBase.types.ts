@@ -2,7 +2,7 @@ import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 import type { TextProps } from 'src/components/Text/Text.types';
 
 import type { IconProps, IconName } from '../../components/Icons/Icon';
-import type { SpinnerTempProps } from '../../temp-components/SpinnerTemp';
+import type { SpinnerProps } from '../../temp-components/Spinner';
 
 export enum ButtonBaseSize {
   /**
@@ -49,7 +49,7 @@ export type ButtonBaseProps = {
   /**
    * Optional prop to pass additional properties to the end icon
    */
-  spinnerProps?: Partial<SpinnerTempProps>;
+  spinnerProps?: Partial<SpinnerProps>;
   /**
    * Optional prop to specify an icon to show at the start of the button
    */

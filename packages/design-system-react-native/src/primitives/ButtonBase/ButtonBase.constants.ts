@@ -27,9 +27,11 @@ export const DEFAULT_BUTTONBASE_PROPS: Partial<ButtonBaseProps> = {
   },
   startIconProps: {
     size: IconSize.Sm,
+    testID: 'start-icon',
   },
   endIconProps: {
     size: IconSize.Sm,
+    testID: 'end-icon',
   },
   onPress: () => {
     console.log('Button pressed');

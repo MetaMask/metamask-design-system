@@ -1,6 +1,6 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
-import type { ButtonLinkProps } from './ButtonLink.types';
+import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
 /**
  * Generates a Tailwind class name for the icon based on color and optional additional classes.
@@ -11,21 +11,23 @@ import type { ButtonLinkProps } from './ButtonLink.types';
  *
  * Example:
  * ```
- * const classNames = generateButtonLinkClassNames({
- *   size: ButtonLinkSize.Md
+ * const classNames = generateButtonTertiaryClassNames({
+ *   size: ButtonTertiarySize.Md
  * });
  *
  * console.log(classNames);
  * // Output: "h-10 items-center justify-center bg-muted px-4"
  * ```
  */
-export const generateButtonLinkClassNames = ({
+export const generateButtonTertiaryClassNames = ({
   isPressed = false,
   isDanger = false,
   isInverse = false,
   isLoading = false,
   twClassName = '',
-}: Partial<ButtonLinkProps>): string => {
+}: Partial<ButtonTertiaryProps> & {
+  isPressed?: boolean;
+}): string => {
   let backgroundStyle, borderColorStyle;
   let borderWidthStyle = 'border-0';
 
@@ -39,9 +41,11 @@ export const generateButtonLinkClassNames = ({
       ? 'border-background-defaultPressed'
       : 'border-background-default';
   } else if (isDanger) {
-    backgroundStyle = isPressedOrLoading ? 'bg-error-muted' : 'bg-transparent';
+    backgroundStyle = isPressedOrLoading
+      ? 'bg-error-mutedPressed'
+      : 'bg-transparent';
     borderColorStyle = isPressedOrLoading
-      ? 'border-error-muted'
+      ? 'border-error-mutedPressed'
       : 'border-transparent';
   } else if (isInverse) {
     backgroundStyle = isPressedOrLoading

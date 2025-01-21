@@ -1,14 +1,9 @@
-import type { ButtonBaseProps } from '../../../../../base-components/ButtonBase';
+import type { ButtonBaseProps } from '../../../../../primitives/ButtonBase';
 
 /**
- * ButtonLink component props.
+ * ButtonTertiary component props.
  */
-export type ButtonLinkProps = {
-  /**
-   * Optional prop to show the pressed state of the button.
-   * @default false
-   */
-  isPressed?: boolean;
+export type ButtonTertiaryProps = {
   /**
    * Optional prop to show the danger state of the button.
    * @default false
