@@ -1,26 +1,29 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { ButtonLinkSize, IconName } from '..';
-import { ButtonLink } from './ButtonLink';
+import { ButtonTertiarySize } from '.';
+import { IconName } from '../icon';
+import { ButtonTertiary } from './ButtonTertiary';
 
-describe('ButtonLink', () => {
+describe('ButtonTertiary', () => {
   it('renders with link button styles by default', () => {
-    render(<ButtonLink>Link Button</ButtonLink>);
+    render(<ButtonTertiary>Link Button</ButtonTertiary>);
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass('bg-transparent', 'text-primary-default');
   });
 
   it('renders with danger styles when isDanger is true', () => {
-    render(<ButtonLink isDanger>Danger Link</ButtonLink>);
+    render(<ButtonTertiary isDanger>Danger Link</ButtonTertiary>);
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass('bg-transparent', 'text-error-default');
   });
 
   it('merges custom className with default styles', () => {
-    render(<ButtonLink className="custom-class">Link Button</ButtonLink>);
+    render(
+      <ButtonTertiary className="custom-class">Link Button</ButtonTertiary>,
+    );
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass('custom-class');
@@ -28,7 +31,7 @@ describe('ButtonLink', () => {
   });
 
   it('applies disabled styles while preserving variant-specific classes', () => {
-    render(<ButtonLink isDisabled>Disabled Link</ButtonLink>);
+    render(<ButtonTertiary isDisabled>Disabled Link</ButtonTertiary>);
 
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
@@ -42,9 +45,9 @@ describe('ButtonLink', () => {
 
   it('applies loading styles while preserving variant-specific classes', () => {
     render(
-      <ButtonLink isLoading loadingText="Loading...">
+      <ButtonTertiary isLoading loadingText="Loading...">
         Loading Link
-      </ButtonLink>,
+      </ButtonTertiary>,
     );
 
     const button = screen.getByRole('button');
@@ -60,25 +63,29 @@ describe('ButtonLink', () => {
 
   it('renders with correct size classes', () => {
     const { rerender } = render(
-      <ButtonLink size={ButtonLinkSize.Sm}>Small</ButtonLink>,
+      <ButtonTertiary size={ButtonTertiarySize.Sm}>Small</ButtonTertiary>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
 
-    rerender(<ButtonLink size={ButtonLinkSize.Md}>Medium</ButtonLink>);
+    rerender(
+      <ButtonTertiary size={ButtonTertiarySize.Md}>Medium</ButtonTertiary>,
+    );
     expect(screen.getByRole('button')).toHaveClass('h-10');
 
-    rerender(<ButtonLink size={ButtonLinkSize.Lg}>Large</ButtonLink>);
+    rerender(
+      <ButtonTertiary size={ButtonTertiarySize.Lg}>Large</ButtonTertiary>,
+    );
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 
   it('renders start icon when startIconName is provided', () => {
     render(
-      <ButtonLink
+      <ButtonTertiary
         startIconName={IconName.AddSquare}
         startIconProps={{ 'data-testid': 'icon-add-square' }}
       >
         With Icon
-      </ButtonLink>,
+      </ButtonTertiary>,
     );
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
@@ -87,12 +94,12 @@ describe('ButtonLink', () => {
 
   it('renders end icon when endIconName is provided', () => {
     render(
-      <ButtonLink
+      <ButtonTertiary
         endIconName={IconName.AddSquare}
         endIconProps={{ 'data-testid': 'icon-add-square' }}
       >
         With Icon
-      </ButtonLink>,
+      </ButtonTertiary>,
     );
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
@@ -100,13 +107,13 @@ describe('ButtonLink', () => {
   });
 
   it('applies full width class correctly', () => {
-    render(<ButtonLink isFullWidth>Full Width</ButtonLink>);
+    render(<ButtonTertiary isFullWidth>Full Width</ButtonTertiary>);
     expect(screen.getByRole('button')).toHaveClass('w-full');
   });
 
   describe('interactive states', () => {
     it('applies interactive styles when neither disabled nor loading', () => {
-      render(<ButtonLink>Interactive Button</ButtonLink>);
+      render(<ButtonTertiary>Interactive Button</ButtonTertiary>);
 
       const button = screen.getByRole('button');
       expect(button).toHaveClass(
@@ -120,7 +127,7 @@ describe('ButtonLink', () => {
     });
 
     it('does not apply interactive styles when disabled', () => {
-      render(<ButtonLink isDisabled>Disabled Button</ButtonLink>);
+      render(<ButtonTertiary isDisabled>Disabled Button</ButtonTertiary>);
 
       const button = screen.getByRole('button');
       expect(button).not.toHaveClass('hover:bg-hover');
@@ -128,7 +135,7 @@ describe('ButtonLink', () => {
     });
 
     it('does not apply interactive styles when loading', () => {
-      render(<ButtonLink isLoading>Loading Button</ButtonLink>);
+      render(<ButtonTertiary isLoading>Loading Button</ButtonTertiary>);
 
       const button = screen.getByRole('button');
       expect(button).not.toHaveClass('hover:bg-hover');
@@ -139,7 +146,7 @@ describe('ButtonLink', () => {
   describe('ref forwarding', () => {
     it('forwards ref to the button element', () => {
       const ref = React.createRef<HTMLButtonElement>();
-      render(<ButtonLink ref={ref}>Button with Ref</ButtonLink>);
+      render(<ButtonTertiary ref={ref}>Button with Ref</ButtonTertiary>);
 
       expect(ref.current).toBeInstanceOf(HTMLButtonElement);
       expect(ref.current).toBe(screen.getByRole('button'));
@@ -149,7 +156,9 @@ describe('ButtonLink', () => {
   describe('style prop handling', () => {
     it('applies custom styles when style prop is provided', () => {
       render(
-        <ButtonLink style={{ marginTop: '10px' }}>Styled Button</ButtonLink>,
+        <ButtonTertiary style={{ marginTop: '10px' }}>
+          Styled Button
+        </ButtonTertiary>,
       );
 
       const button = screen.getByRole('button');
@@ -160,9 +169,9 @@ describe('ButtonLink', () => {
   describe('accessibility', () => {
     it('maintains button role and disabled state when loading', () => {
       render(
-        <ButtonLink isLoading loadingText="Loading...">
+        <ButtonTertiary isLoading loadingText="Loading...">
           Click Me
-        </ButtonLink>,
+        </ButtonTertiary>,
       );
 
       const button = screen.getByRole('button');
@@ -171,9 +180,9 @@ describe('ButtonLink', () => {
 
     it('properly handles aria-label when provided', () => {
       render(
-        <ButtonLink aria-label="Custom Label">
+        <ButtonTertiary aria-label="Custom Label">
           <span>♥</span>
-        </ButtonLink>,
+        </ButtonTertiary>,
       );
 
       const button = screen.getByRole('button');
@@ -184,9 +193,9 @@ describe('ButtonLink', () => {
   describe('edge cases', () => {
     it('handles both isDanger and isDisabled states', () => {
       render(
-        <ButtonLink isDanger isDisabled>
+        <ButtonTertiary isDanger isDisabled>
           Danger Disabled
-        </ButtonLink>,
+        </ButtonTertiary>,
       );
 
       const button = screen.getByRole('button');
