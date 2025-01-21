@@ -47,12 +47,12 @@ try {
 
 const getStories = () => {
   return {
-    "./../../packages/design-system-react-native/src/base-components/ButtonBase/ButtonBase.stories.tsx": require("../../../packages/design-system-react-native/src/base-components/ButtonBase/ButtonBase.stories.tsx"),
-    "./../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonLink/ButtonLink.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonLink/ButtonLink.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Icons/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icons/Icon/Icon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
+    "./../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx"),
   };
 };
 

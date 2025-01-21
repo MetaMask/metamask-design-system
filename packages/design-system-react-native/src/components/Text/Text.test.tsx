@@ -13,7 +13,7 @@ describe('Text', () => {
     it('returns default class names when no props are provided', () => {
       const classNames = generateTextClassNames({});
       expect(classNames).toBe(
-        `text-${DEFAULT_TEXT_VARIANT} font-${DEFAULT_TEXT_VARIANT} text-${DEFAULT_TEXT_COLOR}`,
+        `text-${DEFAULT_TEXT_VARIANT} font-${DEFAULT_TEXT_VARIANT} ${DEFAULT_TEXT_COLOR}`,
       );
     });
 
@@ -28,7 +28,7 @@ describe('Text', () => {
     it('generates class names correctly for each color', () => {
       Object.values(TextColor).forEach((color) => {
         const classNames = generateTextClassNames({ color });
-        expect(classNames).toContain(`text-${color}`);
+        expect(classNames).toContain(`${color}`);
       });
     });
 

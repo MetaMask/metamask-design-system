@@ -49,7 +49,7 @@ export const generateTextClassNames = ({
   const fontFamilyClassname = `font-${variant}${fontWeightStyleClassname}${
     isItalic ? '-italic' : ''
   }`;
-  const textColorClassname = `text-${color}`;
+  const textColorClassname = `${color}`;
   const mergedClassnames =
     `${textClassname} ${fontFamilyClassname} ${textColorClassname} ${twClassName}`.trim();
 

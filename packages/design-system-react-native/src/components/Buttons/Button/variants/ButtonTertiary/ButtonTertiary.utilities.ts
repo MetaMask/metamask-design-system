@@ -3,23 +3,49 @@
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
 /**
- * Generates a Tailwind class name for the icon based on color and optional additional classes.
+ * Generates Tailwind class names for a tertiary button's container based on its state.
  *
- * @param size - Different sizes map to specific pixel dimensions
+ * This function calculates the background, border color, and border width styles dynamically
+ * depending on the button's state (`isPressed`, `isDanger`, `isInverse`, `isLoading`). It also
+ * allows additional Tailwind classes to be appended using the `twClassName` parameter.
+ *
+ * @param isPressed - Indicates whether the button is currently being pressed.
+ * @param isDanger - Indicates whether the button is in a "danger" state.
+ * @param isInverse - Indicates whether the button is using an "inverse" theme.
+ * @param isLoading - Indicates whether the button is in a loading state.
  * @param twClassName - Additional Tailwind class names for customization.
- * @returns A combined string of class names.
+ * @returns A string containing the combined Tailwind class names for the container's background,
+ * border styles, and any additional classes.
  *
  * Example:
  * ```
- * const classNames = generateButtonTertiaryClassNames({
- *   size: ButtonTertiarySize.Md
+ * const classNames = generateButtonTertiaryContainerClassNames({
+ *   isPressed: true,
+ *   isDanger: true,
+ *   isInverse: false,
+ *   isLoading: false,
+ *   twClassName: 'rounded-full',
  * });
  *
  * console.log(classNames);
- * // Output: "h-10 items-center justify-center bg-muted px-4"
+ * // Output: "bg-error-mutedPressed border-0 border-error-mutedPressed rounded-full"
+ *
+ * const inverseClassNames = generateButtonTertiaryContainerClassNames({
+ *   isInverse: true,
+ *   twClassName: 'rounded-lg',
+ * });
+ *
+ * console.log(inverseClassNames);
+ * // Output: "bg-transparent border-[1.5px] border-primary-inverse rounded-lg"
  * ```
+ *
+ * State Priorities:
+ * 1. If `isInverse` and `isDanger` are true, styles are dynamically determined based on `isPressed` or `isLoading`.
+ * 2. If only `isDanger` is true, the styles reflect error-related colors with no borders.
+ * 3. If only `isInverse` is true, a border width is added along with inverse-specific styles.
+ * 4. If none of the above states are true, default styles are applied for a non-danger, non-inverse tertiary button.
  */
-export const generateButtonTertiaryClassNames = ({
+export const generateButtonTertiaryContainerClassNames = ({
   isPressed = false,
   isDanger = false,
   isInverse = false,
@@ -63,4 +89,69 @@ export const generateButtonTertiaryClassNames = ({
   }
 
   return `${backgroundStyle} ${borderWidthStyle} ${borderColorStyle} ${twClassName}`;
+};
+
+/**
+ * Generates Tailwind class names for a tertiary button's text styling based on its state.
+ *
+ * This function determines the appropriate text color class name for a tertiary button
+ * by evaluating the current states (`isPressed`, `isDanger`, `isInverse`, `isLoading`).
+ * The returned class name dynamically reflects the button's configuration.
+ *
+ * @param isPressed - Indicates whether the button is currently being pressed.
+ * @param isDanger - Indicates whether the button is in a "danger" state.
+ * @param isInverse - Indicates whether the button is using an "inverse" theme.
+ * @param isLoading - Indicates whether the button is in a loading state.
+ * @returns A string containing the Tailwind class name for the button's text color.
+ *
+ * Example:
+ * ```
+ * const classNames = generateButtonTertiaryTextClassNames({
+ *   isPressed: true,
+ *   isDanger: true,
+ *   isInverse: false,
+ *   isLoading: false,
+ * });
+ *
+ * console.log(classNames);
+ * // Output: "text-error-defaultPressed"
+ *
+ * const defaultClassNames = generateButtonTertiaryTextClassNames({});
+ *
+ * console.log(defaultClassNames);
+ * // Output: "text-primary-default"
+ * ```
+ *
+ * State Priorities:
+ * 1. If `isInverse` and `isDanger` are true, the text color is determined dynamically based on `isPressed` or `isLoading`.
+ * 2. If only `isDanger` is true, the text color defaults to `text-error-default` or `text-error-defaultPressed` depending on the state.
+ * 3. If only `isInverse` is true, the text color is `text-primary-inverse`.
+ * 4. If none of the above states are true, the text color defaults to `text-primary-default`.
+ */
+export const generateButtonTertiaryTextClassNames = ({
+  isPressed = false,
+  isDanger = false,
+  isInverse = false,
+  isLoading = false,
+}: Partial<ButtonTertiaryProps> & {
+  isPressed?: boolean;
+}): string => {
+  let textColor;
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const isPressedOrLoading = isPressed || isLoading;
+  if (isInverse && isDanger) {
+    textColor = isPressedOrLoading
+      ? 'text-error-defaultPressed'
+      : 'text-error-default';
+  } else if (isDanger) {
+    textColor = isPressedOrLoading
+      ? 'text-error-defaultPressed'
+      : 'text-error-default';
+  } else if (isInverse) {
+    textColor = 'text-primary-inverse';
+  } else {
+    textColor = 'text-primary-default';
+  }
+
+  return `${textColor}`;
 };

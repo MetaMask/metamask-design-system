@@ -1,7 +1,4 @@
-import {
-  useTailwind,
-  withThemeProvider,
-} from '@metamask/design-system-twrnc-preset';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 
 import { assetByIconName } from './Icon.assets';
@@ -36,4 +33,4 @@ const Icon = ({
   );
 };
 
-export default withThemeProvider(Icon);
+export default Icon;

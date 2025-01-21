@@ -8,13 +8,14 @@ import type { GestureResponderEvent } from 'react-native';
 
 import ButtonBase from '../../../../../primitives/ButtonBase';
 import type { SpinnerProps } from '../../../../../temp-components/Spinner';
-import type { IconProps } from '../../../../Icons/Icon';
-import { IconColor } from '../../../../Icons/Icon';
+import type { IconProps, IconColor } from '../../../../Icons/Icon';
 import type { TextProps } from '../../../../Text/Text.types';
-import { TextColor } from '../../../../Text/Text.types';
 import { DEFAULT_BUTTONPRIMARY_PROPS } from './ButtonPrimary.constants';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
-import { generateButtonPrimaryClassNames } from './ButtonPrimary.utilities';
+import {
+  generateButtonPrimaryContainerClassNames,
+  generateButtonPrimaryTextClassNames,
+} from './ButtonPrimary.utilities';
 
 const ButtonPrimaryBase = ({
   children,
@@ -33,63 +34,47 @@ const ButtonPrimaryBase = ({
 }: ButtonPrimaryProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
-  const twStyle = useMemo(() => {
-    const mergedClassnames = generateButtonPrimaryClassNames({
+  const twContainerClassNames = useMemo(() => {
+    return generateButtonPrimaryContainerClassNames({
       isPressed,
       isDanger,
       isInverse,
       isLoading,
       twClassName,
     });
-    return tw`${mergedClassnames}`;
-  }, [tw, isPressed, isDanger, isInverse, isLoading, twClassName]);
+  }, [isPressed, isDanger, isInverse, isLoading, twClassName]);
 
-  let finalTextColor, finalIconColor;
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const isPressedOrLoading = isPressed || isLoading;
-
-  if (isDanger) {
-    finalTextColor = TextColor.PrimaryInverse;
-    finalIconColor = IconColor.PrimaryInverse;
-  } else if (isInverse) {
-    finalTextColor = TextColor.TextDefault;
-    finalIconColor = IconColor.IconDefault;
-  } else {
-    finalTextColor = TextColor.PrimaryInverse;
-    finalIconColor = IconColor.PrimaryInverse;
-  }
-  if (isInverse && isDanger) {
-    const pressedOrLoading = isPressedOrLoading;
-    finalTextColor = pressedOrLoading
-      ? TextColor.ErrorDefaultPressed
-      : TextColor.ErrorDefault;
-    finalIconColor = pressedOrLoading
-      ? IconColor.ErrorDefaultPressed
-      : IconColor.ErrorDefault;
-  }
+  const twTextClassNames = useMemo(() => {
+    return generateButtonPrimaryTextClassNames({
+      isPressed,
+      isDanger,
+      isInverse,
+      isLoading,
+    });
+  }, [isPressed, isDanger, isInverse, isLoading, textProps]);
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
     ...DEFAULT_BUTTONPRIMARY_PROPS.textProps,
-    color: finalTextColor,
     ...textProps,
+    twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
   };
   const finalStartIconProps: Partial<IconProps> = {
     ...DEFAULT_BUTTONPRIMARY_PROPS.startIconProps,
-    color: finalIconColor,
     ...startIconProps,
+    twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };
 
   const finalEndIconProps: Partial<IconProps> = {
     ...DEFAULT_BUTTONPRIMARY_PROPS.endIconProps,
-    color: finalIconColor,
     ...endIconProps,
+    twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };
 
   const finalSpinnerProps: SpinnerProps = {
     ...DEFAULT_BUTTONPRIMARY_PROPS.spinnerProps,
-    color: finalIconColor,
+    color: twTextClassNames as IconColor,
     loadingTextProps: {
-      color: finalTextColor,
+      twClassName: twTextClassNames,
     },
     ...spinnerProps,
   };
@@ -113,7 +98,8 @@ const ButtonPrimaryBase = ({
       isLoading={isLoading}
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
-      style={[twStyle, style]}
+      style={[tw`${twContainerClassNames}`, style]}
+      testID="button-primary"
       {...props}
     >
       {children}

@@ -4,13 +4,14 @@ import type { GestureResponderEvent } from 'react-native';
 
 import ButtonBase from '../../../../../primitives/ButtonBase';
 import type { SpinnerProps } from '../../../../../temp-components/Spinner';
-import type { IconProps } from '../../../../Icons/Icon';
-import { IconColor } from '../../../../Icons/Icon';
+import type { IconProps, IconColor } from '../../../../Icons/Icon';
 import type { TextProps } from '../../../../Text/Text.types';
-import { TextColor } from '../../../../Text/Text.types';
 import { DEFAULT_BUTTONTERTIARY_PROPS } from './ButtonTertiary.constants';
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
-import { generateButtonTertiaryClassNames } from './ButtonTertiary.utilities';
+import {
+  generateButtonTertiaryContainerClassNames,
+  generateButtonTertiaryTextClassNames,
+} from './ButtonTertiary.utilities';
 
 const ButtonTertiary = ({
   children,
@@ -29,64 +30,47 @@ const ButtonTertiary = ({
 }: ButtonTertiaryProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
-  const twStyle = useMemo(() => {
-    const mergedClassnames = generateButtonTertiaryClassNames({
+  const twContainerClassNames = useMemo(() => {
+    return generateButtonTertiaryContainerClassNames({
       isPressed,
       isDanger,
       isInverse,
       isLoading,
       twClassName,
     });
-    return tw`${mergedClassnames}`;
-  }, [tw, isPressed, isDanger, isInverse, isLoading, twClassName]);
+  }, [isPressed, isDanger, isInverse, isLoading, twClassName]);
 
-  let finalTextColor, finalIconColor;
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const isPressedOrLoading = isPressed || isLoading;
-  if (isInverse && isDanger) {
-    finalTextColor = isPressedOrLoading
-      ? TextColor.ErrorDefaultPressed
-      : TextColor.ErrorDefault;
-    finalIconColor = isPressedOrLoading
-      ? IconColor.ErrorDefaultPressed
-      : IconColor.ErrorDefault;
-  } else if (isDanger) {
-    finalTextColor = isPressedOrLoading
-      ? TextColor.ErrorDefaultPressed
-      : TextColor.ErrorDefault;
-    finalIconColor = isPressedOrLoading
-      ? IconColor.ErrorDefaultPressed
-      : IconColor.ErrorDefault;
-  } else if (isInverse) {
-    finalTextColor = TextColor.PrimaryInverse;
-    finalIconColor = IconColor.PrimaryInverse;
-  } else {
-    finalTextColor = TextColor.PrimaryDefault;
-    finalIconColor = IconColor.PrimaryDefault;
-  }
+  const twTextClassNames = useMemo(() => {
+    return generateButtonTertiaryTextClassNames({
+      isPressed,
+      isDanger,
+      isInverse,
+      isLoading,
+    });
+  }, [isPressed, isDanger, isInverse, isLoading, textProps]);
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
     ...DEFAULT_BUTTONTERTIARY_PROPS.textProps,
-    color: finalTextColor,
     ...textProps,
+    twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
   };
   const finalStartIconProps: Partial<IconProps> = {
     ...DEFAULT_BUTTONTERTIARY_PROPS.startIconProps,
-    color: finalIconColor,
     ...startIconProps,
+    twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };
 
   const finalEndIconProps: Partial<IconProps> = {
     ...DEFAULT_BUTTONTERTIARY_PROPS.endIconProps,
-    color: finalIconColor,
     ...endIconProps,
+    twClassName: `${twTextClassNames} ${endIconProps?.twClassName ?? ''}`,
   };
 
   const finalSpinnerProps: SpinnerProps = {
     ...DEFAULT_BUTTONTERTIARY_PROPS.spinnerProps,
-    color: finalIconColor,
+    color: twTextClassNames as IconColor,
     loadingTextProps: {
-      color: finalTextColor,
+      twClassName: twTextClassNames,
     },
     ...spinnerProps,
   };
@@ -107,9 +91,10 @@ const ButtonTertiary = ({
       startIconProps={finalStartIconProps}
       endIconProps={finalEndIconProps}
       isLoading={isLoading}
-      style={[twStyle, style]}
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
+      style={[tw`${twContainerClassNames}`, style]}
+      testID="button-tertiary"
       {...props}
     >
       {children}

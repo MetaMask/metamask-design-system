@@ -16,9 +16,9 @@ Content to display inside the button.
 
 Defines the size of the button.
 
-| **Type** | **Required** | **Default** |
-| -------- | ------------ | ----------- | --- | ------ |
-| `'sm'    | 'md'         | 'lg'`       | No  | `'md'` |
+| **Type**     | **Required** | **Default**     |
+| ------------ | ------------ | --------------- |
+| `ButtonSize` | No           | `ButtonSize.Lg` |
 
 ### `isLoading`
 
