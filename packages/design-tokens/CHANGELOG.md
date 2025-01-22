@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: reverting release 2.0.0 ([#348](https://github.com/MetaMask/metamask-design-system/pull/348))
+- Release/2.0.0 ([#347](https://github.com/MetaMask/metamask-design-system/pull/347))
+- chore: exporting types from index in design tokens ([#340](https://github.com/MetaMask/metamask-design-system/pull/340))
+- Added 8 new colors (4 muted-hover & 4 muted-pressed) to design-tokens Figma Json. ([#325](https://github.com/MetaMask/metamask-design-system/pull/325))
+
 ## [4.2.0]
 
 ### Added
