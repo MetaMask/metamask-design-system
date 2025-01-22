@@ -36,15 +36,15 @@ function getIconNameInTitleCase(fileName: string): string {
 export async function main(): Promise<void> {
   const assetsFolderPath = path.join(
     __dirname,
-    `../src/components/Icons/Icon/${ASSETS_FOLDER}`,
+    `../src/components/Icon/${ASSETS_FOLDER}`,
   );
   const assetsModulePath = path.join(
     __dirname,
-    `../src/components/Icons/Icon/${GENERATED_ASSETS_FILE}`,
+    `../src/components/Icon/${GENERATED_ASSETS_FILE}`,
   );
   const typesFilePath = path.join(
     __dirname,
-    `../src/components/Icons/Icon/${TYPES_FILE}`,
+    `../src/components/Icon/${TYPES_FILE}`,
   );
 
   const fileList = await fs.promises.readdir(assetsFolderPath);
@@ -56,7 +56,7 @@ export async function main(): Promise<void> {
   for (const fileName of assetFileList) {
     const filePath = path.join(
       __dirname,
-      `../src/components/Icons/Icon/${ASSETS_FOLDER}/${fileName}`,
+      `../src/components/Icon/${ASSETS_FOLDER}/${fileName}`,
     );
     const fileContent = await fs.promises.readFile(filePath, {
       encoding: 'utf-8',
