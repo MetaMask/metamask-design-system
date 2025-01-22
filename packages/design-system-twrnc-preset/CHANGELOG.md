@@ -7,8 +7,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Uncategorized
-
-- chore: prep for Buttons - React Native ([#318](https://github.com/MetaMask/metamask-design-system/pull/318))
-
 [Unreleased]: https://github.com/MetaMask/metamask-design-system/
