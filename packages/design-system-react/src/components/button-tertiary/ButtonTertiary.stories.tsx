@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { ButtonLinkSize } from '.';
+import { ButtonTertiarySize } from '.';
 import { IconName } from '..';
-import { ButtonLink } from './ButtonLink';
+import { ButtonTertiary } from './ButtonTertiary';
 import README from './README.mdx';
 
-const meta: Meta<typeof ButtonLink> = {
-  title: 'React Components/ButtonLink',
-  component: ButtonLink,
+const meta: Meta<typeof ButtonTertiary> = {
+  title: 'React Components/ButtonTertiary',
+  component: ButtonTertiary,
   parameters: {
     docs: {
       page: README,
@@ -18,12 +18,12 @@ const meta: Meta<typeof ButtonLink> = {
     children: {
       control: 'text',
       description:
-        'Required prop for the content to be rendered within the ButtonLink',
+        'Required prop for the content to be rendered within the ButtonTertiary',
     },
     className: {
       control: 'text',
       description:
-        'Optional prop for additional CSS classes to be applied to the ButtonLink component',
+        'Optional prop for additional CSS classes to be applied to the ButtonTertiary component',
     },
     isDanger: {
       control: 'boolean',
@@ -32,8 +32,8 @@ const meta: Meta<typeof ButtonLink> = {
     },
     size: {
       control: 'select',
-      options: Object.values(ButtonLinkSize),
-      description: 'Optional prop to control the size of the ButtonLink',
+      options: Object.values(ButtonTertiarySize),
+      description: 'Optional prop to control the size of the ButtonTertiary',
     },
     isFullWidth: {
       control: 'boolean',
@@ -94,17 +94,17 @@ const meta: Meta<typeof ButtonLink> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof ButtonLink>;
+type Story = StoryObj<typeof ButtonTertiary>;
 
 export const Default: Story = {
   args: {
-    children: 'Link Button',
+    children: 'Button Tertiary',
   },
 };
 
 export const IsDanger: Story = {
   args: {
-    children: 'Danger Link',
+    children: 'Danger',
     isDanger: true,
   },
 };
@@ -112,22 +112,22 @@ export const IsDanger: Story = {
 export const Size: Story = {
   render: (args) => (
     <div className="flex gap-2">
-      <ButtonLink {...args} size={ButtonLinkSize.Sm}>
+      <ButtonTertiary {...args} size={ButtonTertiarySize.Sm}>
         Small
-      </ButtonLink>
-      <ButtonLink {...args} size={ButtonLinkSize.Md}>
+      </ButtonTertiary>
+      <ButtonTertiary {...args} size={ButtonTertiarySize.Md}>
         Medium
-      </ButtonLink>
-      <ButtonLink {...args} size={ButtonLinkSize.Lg}>
+      </ButtonTertiary>
+      <ButtonTertiary {...args} size={ButtonTertiarySize.Lg}>
         Large
-      </ButtonLink>
+      </ButtonTertiary>
     </div>
   ),
 };
 
 export const IsFullWidth: Story = {
   args: {
-    children: 'Full Width Link',
+    children: 'Full Width',
     isFullWidth: true,
   },
 };
@@ -148,7 +148,7 @@ export const EndIconName: Story = {
 
 export const IsLoading: Story = {
   args: {
-    children: 'Loading Link',
+    children: 'Loading',
     isLoading: true,
     loadingText: 'Loading...',
   },
@@ -156,7 +156,7 @@ export const IsLoading: Story = {
 
 export const IsDisabled: Story = {
   args: {
-    children: 'Disabled Link',
+    children: 'Disabled Button Tertiary',
     isDisabled: true,
   },
 };

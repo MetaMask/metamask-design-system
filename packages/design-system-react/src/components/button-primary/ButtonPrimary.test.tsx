@@ -164,7 +164,7 @@ describe('ButtonPrimary', () => {
   it('renders as child component when asChild is true', () => {
     render(
       <ButtonPrimary asChild>
-        <a href="#">Link Button</a>
+        <a href="#">Custom Anchor Link</a>
       </ButtonPrimary>,
     );
 

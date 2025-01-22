@@ -1,11 +1,11 @@
 import type { ButtonBaseProps } from '../button-base';
 
-export type ButtonLinkProps = Omit<
+export type ButtonTertiaryProps = Omit<
   ButtonBaseProps,
   'className' | 'isDisabled' | 'isLoading' | 'style'
 > & {
   /**
-   * Optional prop for additional CSS classes to be applied to the ButtonLink component
+   * Optional prop for additional CSS classes to be applied to the ButtonTertiary component
    */
   className?: string;
   /**
