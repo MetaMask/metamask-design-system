@@ -11,6 +11,7 @@ import { generateTailwindConfig } from './Theme.utilities';
 export const defaultThemeContextValue: ThemeContextProps = {
   tw: create(generateTailwindConfig(ColorSet.Brand, ColorScheme.Light)),
   colorSet: ColorSet.Brand,
+  colorSetList: colorSetList[ColorSet.Brand][Theme.Light],
   theme: Theme.Light,
   setColorSet: () => {},
   setTheme: () => {},
@@ -23,7 +24,6 @@ export const ThemeContext = createContext<ThemeContextProps>(
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
   colorSet = ColorSet.Brand,
-  colorSetList: colorSetList[ColorSet.Brand][Theme.Light],
   theme = Theme.Default,
 }) => {
   const [currentColorSet, setCurrentColorSet] = useState<ColorSet>(colorSet);
