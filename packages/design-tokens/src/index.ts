@@ -1,4 +1,14 @@
-export { colors, typography, lightTheme, darkTheme, brandColor } from './js';
-export type { Theme, ThemeColors, ThemeShadows } from './js';
-export type { ThemeTypography } from './js/typography';
-export type { BrandColor } from './js/brandColor/brandColor.types';
+export {
+  colors, // DEPRECATED in favor of importing lightTheme and darkTheme
+  brandColor,
+  lightTheme,
+  darkTheme,
+  typography,
+} from './js';
+export type {
+  BrandColor,
+  Theme,
+  ThemeColors,
+  ThemeShadows,
+  ThemeTypography,
+} from './js';
