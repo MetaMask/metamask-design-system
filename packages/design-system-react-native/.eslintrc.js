@@ -22,7 +22,21 @@ module.exports = {
     'svgMock.js',
     'scripts/',
   ],
-
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      rules: {
+        'import/default': [
+          'off',
+          {
+            patterns: {
+              'react-native-reanimated': false,
+            },
+          },
+        ],
+      },
+    },
+  ],
   rules: {
     'import/extensions': [
       'error',

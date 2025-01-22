@@ -12,6 +12,7 @@ export enum Theme {
 export type ThemeContextProps = {
   tw: ReturnType<typeof create>;
   colorSet: ColorSet;
+  colorSetList: Record<string, string>;
   theme: Theme;
   setColorSet: (theme: ColorSet) => void;
   setTheme: (scheme: Theme) => void;

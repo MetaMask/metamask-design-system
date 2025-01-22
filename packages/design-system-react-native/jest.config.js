@@ -27,6 +27,9 @@ module.exports = merge(baseConfig, {
     '!**/*.scripts.{js,ts}', // Exclude .scripts files
     '!**/node_modules/**', // Exclude node_modules
     '!**/dist/**', // Exclude build outputs
+    '!**/*.constants.{js,ts}', // Exclude .constants files
+    '!**/*.assets.{js,ts}', // Exclude .assets files
+    '!**/*.types.{js,ts}', // Exclude .types files
   ],
   preset: 'react-native',
   transform: {
@@ -34,6 +37,7 @@ module.exports = merge(baseConfig, {
   },
   transformIgnorePatterns: [
     'node_modules/(?!(react-native|@react-native|@react-navigation)/)',
+    'node_modules/(?!(react-native|react-native-reanimated|@react-native|@react-navigation)/)',
   ],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
