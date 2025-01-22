@@ -14,33 +14,57 @@ export enum IconColor {
   IconAlternative = 'text-icon-alternative',
   /** For the weakest contrast neutral icons (not accessible) */
   IconMuted = 'text-icon-muted',
-  /** For elements used on top of overlay/alternative. Used for text, icon or border */
+  /** For elements used on top of overlay/alternative. Used for text, icon, or border */
   OverlayInverse = 'text-overlay-inverse',
-  /** For interactive, active, and selected semantics. Used for text, background, icon or border */
+  /** For interactive, active, and selected semantics. Used for text, background, icon, or border */
   PrimaryDefault = 'text-primary-default',
-  /** For elements used on top of primary/default. Used for text, icon or border */
+  /** For softer variants of primary interactive elements */
+  PrimaryAlternative = 'text-primary-alternative',
+  /** For the weakest contrast primary icons (not accessible) */
+  PrimaryMuted = 'text-primary-muted',
+  /** For elements used on top of primary/default. Used for text, icon, or border */
   PrimaryInverse = 'text-primary-inverse',
-  /** For the critical alert semantic elements. Used for text, background, icon or border */
+  /** For primary interactive elements in a pressed state */
+  PrimaryDefaultPressed = 'text-primary-defaultPressed',
+  /** For muted primary elements in a pressed state */
+  PrimaryMutedPressed = 'text-primary-mutedPressed',
+  /** For critical alert semantic elements. Used for text, background, icon, or border */
   ErrorDefault = 'text-error-default',
-  /** For the critical alert semantic elements on Pressed. Used for text, background, icon or border */
-  ErrorDefaultPressed = 'text-error-defaultPressed',
-  /** For elements used on top of error/default. Used for text, icon or border */
+  /** For softer variants of error elements */
+  ErrorAlternative = 'text-error-alternative',
+  /** For the weakest contrast error elements (not accessible) */
+  ErrorMuted = 'text-error-muted',
+  /** For elements used on top of error/default. Used for text, icon, or border */
   ErrorInverse = 'text-error-inverse',
-  /** For the positive semantic elements. Used for text, background, icon or border */
-  SuccessDefault = 'text-success-default',
-  /** For the positive semantic elements on Pressed. Used for text, background, icon or border */
-  SuccessDefaultPressed = 'text-success-defaultPressed',
-  /** For elements used on top of success/default. Used for text, icon or border */
-  SuccessInverse = 'text-success-inverse',
-  /** For the caution alert semantic elements. Used for text, background, icon or border */
+  /** For critical alert semantic elements in a pressed state */
+  ErrorDefaultPressed = 'text-error-defaultPressed',
+  /** For muted error elements in a pressed state */
+  ErrorMutedPressed = 'text-error-mutedPressed',
+  /** For caution alert semantic elements. Used for text, background, icon, or border */
   WarningDefault = 'text-warning-default',
-  /** For the caution alert semantic elements on Pressed. Used for text, background, icon or border */
-  WarningDefaultPressed = 'text-warning-defaultPressed',
-  /** For elements used on top of warning/default. Used for text, icon or border */
+  /** For the weakest contrast caution elements */
+  WarningMuted = 'text-warning-muted',
+  /** For elements used on top of warning/default. Used for text, icon, or border */
   WarningInverse = 'text-warning-inverse',
-  /** For informational read-only elements. Used for text, background, icon or border */
+  /** For caution alert semantic elements in a pressed state */
+  WarningDefaultPressed = 'text-warning-defaultPressed',
+  /** For muted caution elements in a pressed state */
+  WarningMutedPressed = 'text-warning-mutedPressed',
+  /** For positive semantic elements. Used for text, background, icon, or border */
+  SuccessDefault = 'text-success-default',
+  /** For the weakest contrast positive elements */
+  SuccessMuted = 'text-success-muted',
+  /** For elements used on top of success/default. Used for text, icon, or border */
+  SuccessInverse = 'text-success-inverse',
+  /** For positive semantic elements in a pressed state */
+  SuccessDefaultPressed = 'text-success-defaultPressed',
+  /** For muted positive elements in a pressed state */
+  SuccessMutedPressed = 'text-success-mutedPressed',
+  /** For informational read-only elements. Used for text, background, icon, or border */
   InfoDefault = 'text-info-default',
-  /** For elements used on top of info/default. Used for text, icon or border */
+  /** For the weakest contrast informational elements */
+  InfoMuted = 'text-info-muted',
+  /** For elements used on top of info/default. Used for text, icon, or border */
   InfoInverse = 'text-info-inverse',
 }
 
