@@ -108,14 +108,14 @@ Maintain a clear distinction between `primitives`, `components`, and `temp-compo
 ```
 src/
 ├── primitives/
-│   ├── ButtonBase.tsx
-│   └── InputBase.tsx
+│   ├── ButtonBase/
+│   └── InputBase/
 ├── components/
-│   ├── Button.tsx
-│   └── Input.tsx
+│   ├── Button/
+│   └── Input/
 ├── temp-components/
-│   ├── TempCard.tsx
-│   └── TempModal.tsx
+│   ├── TempCard/
+│   └── TempModal/
 ```
 
 By adhering to this structure, the design system ensures a clean separation of concerns, promoting maintainability and ease of use for all consumers.
