@@ -20,19 +20,19 @@ const meta: Meta<TextProps> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: Object.values(TextVariant),
+      options: TextVariant,
     },
     color: {
       control: 'select',
-      options: Object.values(TextColor),
+      options: TextColor,
     },
     fontWeight: {
       control: 'select',
-      options: Object.values(FontWeight),
+      options: FontWeight,
     },
     fontStyle: {
       control: 'select',
-      options: Object.values(FontStyle),
+      options: FontStyle,
     },
     children: {
       control: 'text',

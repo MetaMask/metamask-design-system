@@ -43,7 +43,7 @@ const IconStory: React.FC<IconProps> = ({ color, ...props }) => {
       style={[
         tw`${
           color?.endsWith('-inverse')
-            ? `bg-${color.replace('inverse', 'default')}`
+            ? color.replace('inverse', 'default').replace('text', 'bg')
             : 'bg-background-default'
         }`,
       ]}
