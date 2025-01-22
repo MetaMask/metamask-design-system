@@ -100,7 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- chore: updating package.json and contraints.prop config to allow for css export ([#609](https://github.com/MetaMask/design-tokens/pull/609))
+- chore: updating package.json and constraints.pro config to allow for css export ([#609](https://github.com/MetaMask/design-tokens/pull/609))
 
 ## [2.0.0]
 
@@ -315,7 +315,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Adding css stylesheet containg color design tokens ([#17](https://github.com/MetaMask/design-tokens/pull/17))
+- Adding css stylesheet containing color design tokens ([#17](https://github.com/MetaMask/design-tokens/pull/17))
 - Add issue template ([#20](https://github.com/MetaMask/design-tokens/pull/20))
 
 ## [1.0.0]
