@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.0.0]
 
-### Uncategorized
+### Added
 
-- BREAKING CHANGE: exporting types from index in design tokens ([#340](https://github.com/MetaMask/metamask-design-system/pull/340))
+- **BREAKING:** Following the unintentional breaking change in `4.2.0` we are now exporting the types from root index instead of requiring deep imports ([#340](https://github.com/MetaMask/metamask-design-system/pull/340)). See the [migration guide](./MIGRATION.md#from-version-410-to-500) for details.
+
 - Added 8 new colors (4 muted-hover & 4 muted-pressed) to design-tokens Figma Json. ([#325](https://github.com/MetaMask/metamask-design-system/pull/325))
 
 ## [4.2.0]
@@ -20,13 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - feat: color updates to the design tokens package ([#230](https://github.com/metamask/metamask-design-system/pull/230))
 
-- `@metamask/design-tokens` package migrated from standalone repository into the design system monorepo ([128](https://github.com/MetaMask/metamask-design-system/pull/128))
+- **BREAKING:** `@metamask/design-tokens` package migrated from standalone repository into the design system monorepo, which unintentionally broke type imports ([128](https://github.com/MetaMask/metamask-design-system/pull/128)). See the [migration guide](./MIGRATION.md#from-version-410-to-500) for details on the fix in 5.0.0.
 
 ## [4.1.0]
 
 ### Added
 
-- Adding (MIT OR Apache 2.0) license aligning with MetaMask’s open-source standards ([#738](https://github.com/MetaMask/design-tokens/pull/738))
+- Adding (MIT OR Apache 2.0) license aligning with MetaMask's open-source standards ([#738](https://github.com/MetaMask/design-tokens/pull/738))
 - Adding dark/light classname ([#729](https://github.com/MetaMask/design-tokens/pull/729))
 
 ## [4.0.0]
