@@ -1,4 +1,4 @@
-import { ButtonBaseSize } from '../../../primitives/ButtonBase';
+import { ButtonBaseSize } from '../../primitives/ButtonBase';
 import type { ButtonPrimaryProps } from './variants/ButtonPrimary';
 import type { ButtonSecondaryProps } from './variants/ButtonSecondary';
 import type { ButtonTertiaryProps } from './variants/ButtonTertiary';

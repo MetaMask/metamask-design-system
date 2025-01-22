@@ -1,4 +1,4 @@
-import type { ButtonBaseProps } from '../../../../../primitives/ButtonBase';
+import type { ButtonBaseProps } from '../../../../primitives/ButtonBase';
 
 /**
  * ButtonPrimary component props.

@@ -1,41 +1,37 @@
-import {
-  useTailwind,
-  withThemeProvider,
-  Theme,
-} from '@metamask/design-system-twrnc-preset';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo, useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import ButtonBase from '../../../../../primitives/ButtonBase';
-import type { SpinnerProps } from '../../../../../temp-components/Spinner';
-import type { IconProps, IconColor } from '../../../../Icon';
-import type { TextProps } from '../../../../Text/Text.types';
-import { DEFAULT_BUTTONPRIMARY_PROPS } from './ButtonPrimary.constants';
-import type { ButtonPrimaryProps } from './ButtonPrimary.types';
+import ButtonBase from '../../../../primitives/ButtonBase';
+import type { SpinnerProps } from '../../../../temp-components/Spinner';
+import type { IconProps, IconColor } from '../../../Icon';
+import type { TextProps } from '../../../Text/Text.types';
+import { DEFAULT_BUTTONTERTIARY_PROPS } from './ButtonTertiary.constants';
+import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 import {
-  generateButtonPrimaryContainerClassNames,
-  generateButtonPrimaryTextClassNames,
-} from './ButtonPrimary.utilities';
+  generateButtonTertiaryContainerClassNames,
+  generateButtonTertiaryTextClassNames,
+} from './ButtonTertiary.utilities';
 
-const ButtonPrimaryBase = ({
+const ButtonTertiary = ({
   children,
   textProps,
   spinnerProps,
   startIconProps,
   endIconProps,
-  isDanger = DEFAULT_BUTTONPRIMARY_PROPS.isDanger,
-  isInverse = DEFAULT_BUTTONPRIMARY_PROPS.isInverse,
-  isLoading = DEFAULT_BUTTONPRIMARY_PROPS.isLoading,
+  isDanger = DEFAULT_BUTTONTERTIARY_PROPS.isDanger,
+  isInverse = DEFAULT_BUTTONTERTIARY_PROPS.isInverse,
+  isLoading = DEFAULT_BUTTONTERTIARY_PROPS.isLoading,
   onPressIn,
   onPressOut,
   twClassName,
   style,
   ...props
-}: ButtonPrimaryProps) => {
+}: ButtonTertiaryProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
   const twContainerClassNames = useMemo(() => {
-    return generateButtonPrimaryContainerClassNames({
+    return generateButtonTertiaryContainerClassNames({
       isPressed,
       isDanger,
       isInverse,
@@ -45,7 +41,7 @@ const ButtonPrimaryBase = ({
   }, [isPressed, isDanger, isInverse, isLoading, twClassName]);
 
   const twTextClassNames = useMemo(() => {
-    return generateButtonPrimaryTextClassNames({
+    return generateButtonTertiaryTextClassNames({
       isPressed,
       isDanger,
       isInverse,
@@ -54,31 +50,30 @@ const ButtonPrimaryBase = ({
   }, [isPressed, isDanger, isInverse, isLoading]);
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
-    ...DEFAULT_BUTTONPRIMARY_PROPS.textProps,
+    ...DEFAULT_BUTTONTERTIARY_PROPS.textProps,
     ...textProps,
     twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
   };
   const finalStartIconProps: Partial<IconProps> = {
-    ...DEFAULT_BUTTONPRIMARY_PROPS.startIconProps,
+    ...DEFAULT_BUTTONTERTIARY_PROPS.startIconProps,
     ...startIconProps,
     twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };
 
   const finalEndIconProps: Partial<IconProps> = {
-    ...DEFAULT_BUTTONPRIMARY_PROPS.endIconProps,
+    ...DEFAULT_BUTTONTERTIARY_PROPS.endIconProps,
     ...endIconProps,
-    twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
+    twClassName: `${twTextClassNames} ${endIconProps?.twClassName ?? ''}`,
   };
 
   const finalSpinnerProps: SpinnerProps = {
-    ...DEFAULT_BUTTONPRIMARY_PROPS.spinnerProps,
+    ...DEFAULT_BUTTONTERTIARY_PROPS.spinnerProps,
     color: twTextClassNames as IconColor,
     loadingTextProps: {
       twClassName: twTextClassNames,
     },
     ...spinnerProps,
   };
-
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);
     onPressIn?.(event);
@@ -99,7 +94,7 @@ const ButtonPrimaryBase = ({
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
       style={[tw`${twContainerClassNames}`, style]}
-      testID="button-primary"
+      testID="button-tertiary"
       {...props}
     >
       {children}
@@ -107,15 +102,4 @@ const ButtonPrimaryBase = ({
   );
 };
 
-const ButtonPrimaryLightOnly = withThemeProvider(
-  ButtonPrimaryBase,
-  Theme.Light,
-);
-
-const ButtonPrimary = ({ isInverse, ...props }: ButtonPrimaryProps) => {
-  if (isInverse) {
-    return <ButtonPrimaryBase isInverse={isInverse} {...props} />;
-  }
-  return <ButtonPrimaryLightOnly isInverse={isInverse} {...props} />;
-};
-export default ButtonPrimary;
+export default ButtonTertiary;

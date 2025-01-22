@@ -2,15 +2,15 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { IconName } from '../../../../Icon';
+import { IconName } from '../../../Icon';
 import { ButtonSize } from '../../Button.types';
-import ButtonSecondary from './ButtonSecondary';
-import { DEFAULT_BUTTONSECONDARY_PROPS } from './ButtonSecondary.constants';
-import type { ButtonSecondaryProps } from './ButtonSecondary.types';
+import ButtonTertiary from './ButtonTertiary';
+import { DEFAULT_BUTTONTERTIARY_PROPS } from './ButtonTertiary.constants';
+import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
-const meta: Meta<ButtonSecondaryProps> = {
-  title: 'Components/Button Secondary',
-  component: ButtonSecondary,
+const meta: Meta<ButtonTertiaryProps> = {
+  title: 'Components/Button Tertiary',
+  component: ButtonTertiary,
   argTypes: {
     children: {
       control: 'text',
@@ -53,8 +53,8 @@ const meta: Meta<ButtonSecondaryProps> = {
 
 export default meta;
 
-type Story = StoryObj<ButtonSecondaryProps>;
-const ButtonSecondaryStory: React.FC<ButtonSecondaryProps> = ({
+type Story = StoryObj<ButtonTertiaryProps>;
+const ButtonTertiaryStory: React.FC<ButtonTertiaryProps> = ({
   isInverse,
   ...props
 }) => {
@@ -65,33 +65,33 @@ const ButtonSecondaryStory: React.FC<ButtonSecondaryProps> = ({
         tw`${isInverse ? `bg-primary-default` : 'bg-background-default'}`,
       ]}
     >
-      <ButtonSecondary isInverse={isInverse} {...props} />
+      <ButtonTertiary isInverse={isInverse} {...props} />
     </View>
   );
 };
 
 export const Default: Story = {
   args: {
-    children: 'Sample ButtonSecondary Text',
-    size: DEFAULT_BUTTONSECONDARY_PROPS.size,
-    isLoading: DEFAULT_BUTTONSECONDARY_PROPS.isLoading,
+    children: 'Sample ButtonTertiary Text',
+    size: DEFAULT_BUTTONTERTIARY_PROPS.size,
+    isLoading: DEFAULT_BUTTONTERTIARY_PROPS.isLoading,
     loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
-    isDisabled: DEFAULT_BUTTONSECONDARY_PROPS.isDisabled,
-    isFullWidth: DEFAULT_BUTTONSECONDARY_PROPS.isFullWidth,
+    isDisabled: DEFAULT_BUTTONTERTIARY_PROPS.isDisabled,
+    isFullWidth: DEFAULT_BUTTONTERTIARY_PROPS.isFullWidth,
   },
-  render: (args) => <ButtonSecondaryStory {...args} />,
+  render: (args) => <ButtonTertiaryStory {...args} />,
 };
 
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonSecondary size={ButtonSize.Sm}>ButtonSize Sm</ButtonSecondary>
-      <ButtonSecondary size={ButtonSize.Md}>ButtonSize Md</ButtonSecondary>
-      <ButtonSecondary size={ButtonSize.Lg}>
+      <ButtonTertiary size={ButtonSize.Sm}>ButtonSize Sm</ButtonTertiary>
+      <ButtonTertiary size={ButtonSize.Md}>ButtonSize Md</ButtonTertiary>
+      <ButtonTertiary size={ButtonSize.Lg}>
         ButtonSize Lg (Default)
-      </ButtonSecondary>
+      </ButtonTertiary>
     </View>
   ),
 };
@@ -99,50 +99,46 @@ export const Sizes: Story = {
 export const IsLoading: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonSecondary isLoading>ButtonSecondary</ButtonSecondary>
-      <ButtonSecondary isLoading loadingText="With Loading Text">
-        ButtonSecondary
-      </ButtonSecondary>
+      <ButtonTertiary isLoading>ButtonTertiary</ButtonTertiary>
+      <ButtonTertiary isLoading loadingText="With Loading Text">
+        ButtonTertiary
+      </ButtonTertiary>
     </View>
   ),
 };
 
 export const WithStartAccessory: Story = {
   render: () => (
-    <ButtonSecondary startIconName={IconName.Add}>
-      ButtonSecondary
-    </ButtonSecondary>
+    <ButtonTertiary startIconName={IconName.Add}>ButtonTertiary</ButtonTertiary>
   ),
 };
 
 export const WithEndAccessory: Story = {
   render: () => (
-    <ButtonSecondary endIconName={IconName.Add}>
-      ButtonSecondary
-    </ButtonSecondary>
+    <ButtonTertiary endIconName={IconName.Add}>ButtonTertiary</ButtonTertiary>
   ),
 };
 
 export const WithStartAndEndAccessory: Story = {
   render: () => (
-    <ButtonSecondary
+    <ButtonTertiary
       startIconName={IconName.Add}
       endIconName={IconName.AddSquare}
     >
-      ButtonSecondary
-    </ButtonSecondary>
+      ButtonTertiary
+    </ButtonTertiary>
   ),
 };
 
 export const isDisabled: Story = {
-  render: () => <ButtonSecondary isDisabled>ButtonSecondary</ButtonSecondary>,
+  render: () => <ButtonTertiary isDisabled>ButtonTertiary</ButtonTertiary>,
 };
 
 export const isFullWidth: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonSecondary>ButtonSecondary</ButtonSecondary>
-      <ButtonSecondary isFullWidth>ButtonSecondary</ButtonSecondary>
+      <ButtonTertiary>ButtonTertiary</ButtonTertiary>
+      <ButtonTertiary isFullWidth>ButtonTertiary</ButtonTertiary>
     </View>
   ),
 };
@@ -150,10 +146,10 @@ export const isFullWidth: Story = {
 export const isDanger: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonSecondary isDanger>ButtonSecondary</ButtonSecondary>
-      <ButtonSecondaryStory isDanger isInverse>
-        ButtonSecondary
-      </ButtonSecondaryStory>
+      <ButtonTertiary isDanger>ButtonTertiary</ButtonTertiary>
+      <ButtonTertiaryStory isDanger isInverse>
+        ButtonTertiary
+      </ButtonTertiaryStory>
     </View>
   ),
 };
@@ -161,17 +157,17 @@ export const isDanger: Story = {
 export const isInverse: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonSecondaryStory isInverse>ButtonSecondary</ButtonSecondaryStory>
-      <ButtonSecondaryStory isInverse isDanger>
-        ButtonSecondary
-      </ButtonSecondaryStory>
+      <ButtonTertiaryStory isInverse>ButtonTertiary</ButtonTertiaryStory>
+      <ButtonTertiaryStory isInverse isDanger>
+        ButtonTertiary
+      </ButtonTertiaryStory>
     </View>
   ),
 };
 
 export const WithLongText: Story = {
   render: () => (
-    <ButtonSecondary
+    <ButtonTertiary
       startIconName={IconName.Add}
       endIconName={IconName.AddSquare}
     >
@@ -182,6 +178,6 @@ export const WithLongText: Story = {
       velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
       est laborum.
-    </ButtonSecondary>
+    </ButtonTertiary>
   ),
 };

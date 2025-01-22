@@ -47,11 +47,11 @@ try {
 
 const getStories = () => {
   return {
-    "./../../packages/design-system-react-native/src/components/Buttons/Button/Button.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/Button.stories.tsx"),
-    "./../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx"),
-    "./../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx"),
-    "./../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx"),
-    "./../../packages/design-system-react-native/src/components/Buttons/ButtonIcon/ButtonIcon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Buttons/ButtonIcon/ButtonIcon.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/Button/Button.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/Button.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/ButtonIcon/ButtonIcon.stories.tsx": require("../../../packages/design-system-react-native/src/components/ButtonIcon/ButtonIcon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
