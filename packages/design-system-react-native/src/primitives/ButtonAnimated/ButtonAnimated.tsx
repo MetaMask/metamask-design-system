@@ -24,22 +24,18 @@ const ButtonAnimated = ({
   });
 
   const onPressInHandler = (event: GestureResponderEvent) => {
-    if (!disabled) {
-      animation.value = withTiming(0.97, {
-        duration: 100,
-        easing: Easing.bezier(0.3, 0.8, 0.3, 1),
-      });
-    }
+    animation.value = withTiming(0.97, {
+      duration: 100,
+      easing: Easing.bezier(0.3, 0.8, 0.3, 1),
+    });
     onPressIn?.(event);
   };
 
   const onPressOutHandler = (event: GestureResponderEvent) => {
-    if (!disabled) {
-      animation.value = withTiming(1, {
-        duration: 100,
-        easing: Easing.bezier(0.3, 0.8, 0.3, 1),
-      });
-    }
+    animation.value = withTiming(1, {
+      duration: 100,
+      easing: Easing.bezier(0.3, 0.8, 0.3, 1),
+    });
     onPressOut?.(event);
   };
 

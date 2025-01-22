@@ -36,8 +36,14 @@ describe('ButtonAnimated', () => {
 
   it('disables interaction when the `disabled` prop is true', () => {
     const onPressInMock = jest.fn();
+    const onPressOutMock = jest.fn();
     const { getByTestId } = render(
-      <ButtonAnimated testID="button" disabled onPressIn={onPressInMock} />,
+      <ButtonAnimated
+        testID="button"
+        disabled
+        onPressIn={onPressInMock}
+        onPressOut={onPressOutMock}
+      />,
     );
 
     fireEvent(getByTestId('button'), 'pressIn');
