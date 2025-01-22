@@ -7,8 +7,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Uncategorized
-
-- Added 8 new colors (4 muted-hover & 4 muted-pressed) to design-tokens Figma Json. ([#325](https://github.com/metamask/metamask-design-system/pull/325))
-
-[Unreleased]: https://github.com/metamask/metamask-design-system/
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/

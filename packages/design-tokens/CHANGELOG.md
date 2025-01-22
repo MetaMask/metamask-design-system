@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Uncategorized
+## [4.3.0]
+
+### Added
 
 - chore: exporting types from index in design tokens ([#340](https://github.com/metamask/metamask-design-system/pull/340))
 - Added 8 new colors (4 muted-hover & 4 muted-pressed) to design-tokens Figma Json. ([#325](https://github.com/metamask/metamask-design-system/pull/325))
@@ -321,7 +323,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@4.2.0...HEAD
+[Unreleased]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@4.3.0...HEAD
+[4.3.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@4.2.0...@metamask/design-tokens@4.3.0
 [4.2.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@4.1.0...@metamask/design-tokens@4.2.0
 [4.1.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@4.0.0...@metamask/design-tokens@4.1.0
 [4.0.0]: https://github.com/metamask/metamask-design-system/compare/@metamask/design-tokens@3.0.0...@metamask/design-tokens@4.0.0
