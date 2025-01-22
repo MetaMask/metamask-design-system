@@ -3,7 +3,6 @@
 import {
   DEFAULT_ICON_ICONCOLOR,
   DEFAULT_ICON_ICONSIZE,
-  TWCLASSMAP_ICON_ICONCOLOR,
   TWCLASSMAP_ICON_ICONSIZE,
 } from './Icon.constants';
 import type { IconProps } from './Icon.types';
@@ -32,6 +31,6 @@ export const generateIconClassNames = ({
   size = DEFAULT_ICON_ICONSIZE,
   twClassName = '',
 }: Partial<IconProps>): string => {
-  const mergedClassnames = `${TWCLASSMAP_ICON_ICONCOLOR[color]} ${TWCLASSMAP_ICON_ICONSIZE[size]} ${twClassName}`;
+  const mergedClassnames = `${color} ${TWCLASSMAP_ICON_ICONSIZE[size]} ${twClassName}`;
   return mergedClassnames;
 };

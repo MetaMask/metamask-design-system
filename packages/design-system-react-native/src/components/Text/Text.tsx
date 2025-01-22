@@ -1,7 +1,4 @@
-import {
-  useTailwind,
-  withThemeProvider,
-} from '@metamask/design-system-twrnc-preset';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { Text as RNText } from 'react-native';
 
@@ -40,4 +37,4 @@ const Text: React.FC<TextProps> = ({
   );
 };
 
-export default withThemeProvider(Text);
+export default Text;

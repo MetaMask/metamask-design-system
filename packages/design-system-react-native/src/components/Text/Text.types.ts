@@ -26,37 +26,43 @@ export enum TextVariant {
  */
 export enum TextColor {
   /** For default neutral text. */
-  TextDefault = 'text-default',
+  TextDefault = 'text-text-default',
   /** For softer contrast neutral text */
-  TextAlternative = 'text-alternative',
+  TextAlternative = 'text-text-alternative',
   /** For the softest contrast neutral text (not accessible) */
-  TextMuted = 'text-muted',
+  TextMuted = 'text-text-muted',
   /** For elements used on top of overlay/alternative. Used for text, icon or border */
-  OverlayInverse = 'overlay-inverse',
+  OverlayInverse = 'text-overlay-inverse',
   /** For interactive, active, and selected semantics. Used for text, background, icon or border */
-  PrimaryDefault = 'primary-default',
+  PrimaryDefault = 'text-primary-default',
   /** For elements used on top of primary/default. Used for text, icon or border */
-  PrimaryInverse = 'primary-inverse',
+  PrimaryInverse = 'text-primary-inverse',
   /** For the critical alert semantic elements. Used for text, background, icon or border */
-  ErrorDefault = 'error-default',
+  ErrorDefault = 'text-error-default',
+  /** For the critical alert semantic elements on pressed. Used for text, background, icon or border */
+  ErrorDefaultPressed = 'text-error-defaultPressed',
   /** For the stronger contrast error semantic elements. */
-  ErrorAlternative = 'error-alternative',
+  ErrorAlternative = 'text-error-alternative',
   /** For elements used on top of error/default. Used for text, icon or border */
-  ErrorInverse = 'error-inverse',
+  ErrorInverse = 'text-error-inverse',
   /** For the positive semantic elements. Used for text, background, icon or border */
-  SuccessDefault = 'success-default',
+  SuccessDefault = 'text-success-default',
+  /** For the positive semantic elements on pressed. Used for text, background, icon or border */
+  SuccessDefaultPressed = 'text-success-defaultPressed',
   /** For elements used on top of success/default. Used for text, icon or border */
-  SuccessInverse = 'success-inverse',
+  SuccessInverse = 'text-success-inverse',
   /** For the caution alert semantic elements. Used for text, background, icon or border */
-  WarningDefault = 'warning-default',
+  WarningDefault = 'text-warning-default',
+  /** For the caution alert semantic elements on pressed. Used for text, background, icon or border */
+  WarningDefaultPressed = 'text-warning-defaultPressed',
   /** For elements used on top of warning/default. Used for text, icon or border */
-  WarningInverse = 'warning-inverse',
+  WarningInverse = 'text-warning-inverse',
   /** For informational read-only elements. Used for text, background, icon or border */
-  InfoDefault = 'info-default',
+  InfoDefault = 'text-info-default',
   /** For elements used on top of info/default. Used for text, icon or border */
-  InfoInverse = 'info-inverse',
+  InfoInverse = 'text-info-inverse',
   /** Make the text color transparent */
-  Transparent = 'transparent',
+  Transparent = 'text-transparent',
 }
 
 export enum FontWeight {
