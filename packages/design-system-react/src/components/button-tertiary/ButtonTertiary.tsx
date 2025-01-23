@@ -44,7 +44,12 @@ export const ButtonTertiary = React.forwardRef<
           isLoading && 'bg-default-pressed',
         ],
       // Hover/Active states - only applied when interactive
-      isInteractive && ['hover:bg-hover', 'active:bg-pressed'],
+      isInteractive && [
+        'hover:bg-hover',
+        'active:bg-pressed',
+        isInverse &&
+          isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
+      ],
       // Loading styles
       isLoading && 'cursor-not-allowed',
       // Disabled styles (but not loading)

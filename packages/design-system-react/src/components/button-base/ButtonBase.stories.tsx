@@ -109,7 +109,7 @@ type Story = StoryObj<typeof ButtonBase>;
 
 export const Default: Story = {
   args: {
-    children: 'Button Base (Large)',
+    children: 'Button Base',
   },
 };
 
@@ -173,7 +173,7 @@ export const EndAccessory: Story = {
 
 export const IsLoading: Story = {
   args: {
-    children: 'Submit',
+    children: 'Submit Button',
     isLoading: true,
     loadingText: 'Submitting...',
   },
