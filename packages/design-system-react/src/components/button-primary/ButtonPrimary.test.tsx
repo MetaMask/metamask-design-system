@@ -93,6 +93,7 @@ describe('ButtonPrimary', () => {
       'bg-primary-default-pressed',
       'cursor-not-allowed',
     );
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('does not apply hover/active classes when disabled or loading', () => {

@@ -122,7 +122,7 @@ export const Size: Story = {
       <ButtonBase {...args} size={ButtonBaseSize.Md}>
         Medium
       </ButtonBase>
-      <ButtonBase {...args}>Large (Default)</ButtonBase>
+      <ButtonBase {...args}>Large</ButtonBase>
     </div>
   ),
 };
@@ -173,7 +173,7 @@ export const EndAccessory: Story = {
 
 export const IsLoading: Story = {
   args: {
-    children: 'Submit Button',
+    children: 'Submit',
     isLoading: true,
     loadingText: 'Submitting...',
   },

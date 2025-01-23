@@ -161,15 +161,15 @@ export const EndIconName: Story = {
 
 export const IsLoading: Story = {
   args: {
-    children: 'Submit Button',
+    children: 'Loading',
     isLoading: true,
-    loadingText: 'Submitting...',
+    loadingText: 'Loading...',
   },
 };
 
 export const IsDisabled: Story = {
   args: {
-    children: 'Disabled Button',
+    children: 'Disabled Button Tertiary',
     isDisabled: true,
   },
 };
