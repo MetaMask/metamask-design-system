@@ -86,6 +86,7 @@ describe('ButtonPrimary', () => {
         Loading Button
       </ButtonPrimary>,
     );
+
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
