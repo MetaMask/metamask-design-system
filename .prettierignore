@@ -2,3 +2,8 @@ node_modules/
 
 .expo
 
+# Coverage directories
+packages/*/coverage
+
+# Auto-generated storybook file
+apps/storybook-react-native/.storybook/storybook.requires.js
