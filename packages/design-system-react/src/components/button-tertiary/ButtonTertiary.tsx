@@ -26,8 +26,8 @@ export const ButtonTertiary = React.forwardRef<
       isDanger &&
         !isInverse && [
           'bg-transparent text-error-default',
-          // Loading state uses pressed color
-          isLoading && 'bg-pressed',
+          // Loading state uses error muted pressed color
+          isLoading && 'bg-error-muted-pressed text-error-default-pressed',
         ],
       // Inverse styles
       isInverse &&
