@@ -43,25 +43,27 @@ export const ButtonPrimary = React.forwardRef<
           // Loading state uses pressed color
           isLoading && 'bg-default-pressed',
         ],
-      // Animation classes - only applied when interactive
+      // Hover/Active states - only applied when interactive
       isInteractive && [
-        'transition-[transform,colors,opacity]',
-        'duration-100',
-        'ease-linear',
-        // Hover states based on variant
-        !isDanger && !isInverse && 'hover:bg-primary-default-hover',
-        isDanger && !isInverse && 'hover:bg-error-default-hover',
-        isInverse && !isDanger && 'hover:bg-default-hover',
-        isInverse && isDanger && 'hover:bg-default-hover',
-        // Active/Pressed states
-        !isDanger && !isInverse && 'active:bg-primary-default-pressed',
-        isDanger && !isInverse && 'active:bg-error-default-pressed',
-        isInverse && !isDanger && 'active:bg-default-pressed',
-        isInverse && isDanger && 'active:bg-default-pressed',
-        // Scale animation
-        'active:scale-[0.98]',
-        'active:ease-[cubic-bezier(0.3,0.8,0.3,1)]',
+        !isDanger &&
+          !isInverse && [
+            'hover:bg-primary-default-hover',
+            'active:bg-primary-default-pressed',
+          ],
+        isDanger &&
+          !isInverse && [
+            'hover:bg-error-default-hover',
+            'active:bg-error-default-pressed',
+          ],
+        isInverse &&
+          !isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
+        isInverse &&
+          isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
       ],
+      // Loading styles
+      isLoading && 'cursor-not-allowed',
+      // Disabled styles (but not loading)
+      isDisabled && !isLoading && ['opacity-50', 'cursor-not-allowed'],
       className,
     );
 

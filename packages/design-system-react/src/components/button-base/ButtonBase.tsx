@@ -32,6 +32,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
     ref,
   ) => {
     const Component = asChild ? Slot : 'button';
+    const isInteractive = !(isDisabled ?? isLoading);
 
     const renderLoadingState = () => (
       <>
@@ -108,6 +109,14 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       BUTTON_BASE_SIZE_CLASS_MAP[size],
       // Full width
       isFullWidth && 'w-full',
+      // Animation classes - only applied when interactive
+      isInteractive && [
+        'transition-[transform,colors,opacity]',
+        'duration-100',
+        'ease-linear',
+        'active:scale-[0.98]',
+        'active:ease-[cubic-bezier(0.3,0.8,0.3,1)]',
+      ],
       // Disabled state - apply to both isDisabled and isLoading
       (isDisabled || isLoading) && 'cursor-not-allowed',
       isDisabled && 'opacity-50',

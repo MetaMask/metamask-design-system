@@ -43,19 +43,8 @@ export const ButtonTertiary = React.forwardRef<
           // Loading state uses pressed color
           isLoading && 'bg-default-pressed',
         ],
-      // Animation classes - only applied when interactive
-      isInteractive && [
-        'transition-[transform,colors,opacity]',
-        'duration-100',
-        'ease-linear',
-        // Hover states
-        'hover:bg-hover',
-        // Active/Pressed states
-        'active:bg-pressed',
-        // Scale animation
-        'active:scale-[0.98]',
-        'active:ease-[cubic-bezier(0.3,0.8,0.3,1)]',
-      ],
+      // Hover/Active states - only applied when interactive
+      isInteractive && ['hover:bg-hover', 'active:bg-pressed'],
       // Loading styles
       isLoading && 'cursor-not-allowed',
       // Disabled styles (but not loading)
