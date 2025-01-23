@@ -2,3 +2,6 @@ node_modules/
 
 .expo
 
+# Coverage directories
+packages/*/coverage
+
