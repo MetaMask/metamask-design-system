@@ -33,7 +33,7 @@ describe('ButtonBase', () => {
     render(
       <ButtonBase asChild>
         <a href="#" target="_blank" rel="noopener noreferrer">
-          Custom Anchor Link
+          Link
         </a>
       </ButtonBase>,
     );
