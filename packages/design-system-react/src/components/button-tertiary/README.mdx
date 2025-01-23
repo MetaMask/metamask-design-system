@@ -1,0 +1,91 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as ButtonTertiaryStories from './ButtonTertiary.stories';
+
+# ButtonTertiary
+
+ButtonTertiary is used for tertiary-like actions that maintain button behavior
+
+```tsx
+import { ButtonTertiary } from '@metamask/design-system-react';
+
+<ButtonTertiary onClick={() => {}}>Button Tertiary</ButtonTertiary>;
+```
+
+<Canvas of={ButtonTertiaryStories.Default} />
+
+## Props
+
+### Size
+
+ButtonTertiary supports three sizes:
+
+- `ButtonTertiarySize.Sm` (32px)
+- `ButtonTertiarySize.Md` (40px) - default
+- `ButtonTertiarySize.Lg` (48px)
+
+<Canvas of={ButtonTertiaryStories.Size} />
+
+### IsFullWidth
+
+ButtonTertiary can be set to take up the full width of its container.
+
+<Canvas of={ButtonTertiaryStories.IsFullWidth} />
+
+### IsDanger
+
+Use the danger variant for destructive actions.
+
+<Canvas of={ButtonTertiaryStories.IsDanger} />
+
+### StartIconName and EndIconName
+
+ButtonTertiary can display icons at the start and/or end of the content.
+
+#### StartIconName
+
+<Canvas of={ButtonTertiaryStories.StartIconName} />
+
+#### EndIconName
+
+<Canvas of={ButtonTertiaryStories.EndIconName} />
+
+### IsLoading
+
+ButtonTertiary can show a loading state with optional loading text.
+
+<Canvas of={ButtonTertiaryStories.IsLoading} />
+
+### IsDisabled
+
+ButtonTertiary can be disabled.
+
+<Canvas of={ButtonTertiaryStories.IsDisabled} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<ButtonTertiary className="my-4 mx-2">Button content</ButtonTertiary>
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+
+## Component API
+
+<Controls of={ButtonTertiaryStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
