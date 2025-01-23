@@ -2,8 +2,30 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
-- [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+- [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
+- [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 4.1.0 to 5.0.0
+
+### Changes to Type Imports (Breaking Changes)
+
+In version 5.0.0, we've simplified the type import system. Instead of deep importing types from specific paths, all types are now exported from the package root. You'll need to update your type imports as follows:
+
+#### Before (No Longer Works)
+
+```typescript
+import { ThemeColors } from '@metamask/design-tokens/dist/js/themes/types';
+import { BrandColor } from '@metamask/design-tokens/dist/types/js/brandColor/brandColor.types';
+```
+
+#### After
+
+```typescript
+import type { ThemeColors, BrandColor } from '@metamask/design-tokens';
+```
+
+This change simplifies imports and provides a more maintainable API for TypeScript users.
 
 ## From version 3.0.0 to 4.0.0
 

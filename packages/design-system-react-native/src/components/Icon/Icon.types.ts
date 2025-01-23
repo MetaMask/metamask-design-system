@@ -9,33 +9,45 @@ import type { SvgProps } from 'react-native-svg';
  */
 export enum IconColor {
   /** For default neutral icons */
-  IconDefault = 'icon-default',
+  IconDefault = 'text-icon-default',
   /** For softer neutral icons */
-  IconAlternative = 'icon-alternative',
+  IconAlternative = 'text-icon-alternative',
   /** For the weakest contrast neutral icons (not accessible) */
-  IconMuted = 'icon-muted',
-  /** For elements used on top of overlay/alternative. Used for text, icon or border */
-  OverlayInverse = 'overlay-inverse',
-  /** For interactive, active, and selected semantics. Used for text, background, icon or border */
-  PrimaryDefault = 'primary-default',
-  /** For elements used on top of primary/default. Used for text, icon or border */
-  PrimaryInverse = 'primary-inverse',
-  /** For the critical alert semantic elements. Used for text, background, icon or border */
-  ErrorDefault = 'error-default',
-  /** For elements used on top of error/default. Used for text, icon or border */
-  ErrorInverse = 'error-inverse',
-  /** For the positive semantic elements. Used for text, background, icon or border */
-  SuccessDefault = 'success-default',
-  /** For elements used on top of success/default. Used for text, icon or border */
-  SuccessInverse = 'success-inverse',
-  /** For the caution alert semantic elements. Used for text, background, icon or border */
-  WarningDefault = 'warning-default',
-  /** For elements used on top of warning/default. Used for text, icon or border */
-  WarningInverse = 'warning-inverse',
-  /** For informational read-only elements. Used for text, background, icon or border */
-  InfoDefault = 'info-default',
-  /** For elements used on top of info/default. Used for text, icon or border */
-  InfoInverse = 'info-inverse',
+  IconMuted = 'text-icon-muted',
+  /** For elements used on top of overlay/alternative. Used for text, icon, or border */
+  OverlayInverse = 'text-overlay-inverse',
+  /** For interactive, active, and selected semantics. Used for text, background, icon, or border */
+  PrimaryDefault = 'text-primary-default',
+  /** For softer variants of primary interactive elements */
+  PrimaryAlternative = 'text-primary-alternative',
+  /** For elements used on top of primary/default. Used for text, icon, or border */
+  PrimaryInverse = 'text-primary-inverse',
+  /** For primary interactive elements in a pressed state */
+  PrimaryDefaultPressed = 'text-primary-defaultPressed',
+  /** For critical alert semantic elements. Used for text, background, icon, or border */
+  ErrorDefault = 'text-error-default',
+  /** For softer variants of error elements */
+  ErrorAlternative = 'text-error-alternative',
+  /** For elements used on top of error/default. Used for text, icon, or border */
+  ErrorInverse = 'text-error-inverse',
+  /** For critical alert semantic elements in a pressed state */
+  ErrorDefaultPressed = 'text-error-defaultPressed',
+  /** For caution alert semantic elements. Used for text, background, icon, or border */
+  WarningDefault = 'text-warning-default',
+  /** For elements used on top of warning/default. Used for text, icon, or border */
+  WarningInverse = 'text-warning-inverse',
+  /** For caution alert semantic elements in a pressed state */
+  WarningDefaultPressed = 'text-warning-defaultPressed',
+  /** For positive semantic elements. Used for text, background, icon, or border */
+  SuccessDefault = 'text-success-default',
+  /** For elements used on top of success/default. Used for text, icon, or border */
+  SuccessInverse = 'text-success-inverse',
+  /** For positive semantic elements in a pressed state */
+  SuccessDefaultPressed = 'text-success-defaultPressed',
+  /** For informational read-only elements. Used for text, background, icon, or border */
+  InfoDefault = 'text-info-default',
+  /** For elements used on top of info/default. Used for text, icon, or border */
+  InfoInverse = 'text-info-inverse',
 }
 
 /**

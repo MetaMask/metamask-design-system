@@ -1,6 +1,7 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import Text from './Text';
 import type { TextProps } from './Text.types';
@@ -20,19 +21,19 @@ const meta: Meta<TextProps> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: Object.values(TextVariant),
+      options: TextVariant,
     },
     color: {
       control: 'select',
-      options: Object.values(TextColor),
+      options: TextColor,
     },
     fontWeight: {
       control: 'select',
-      options: Object.values(FontWeight),
+      options: FontWeight,
     },
     fontStyle: {
       control: 'select',
-      options: Object.values(FontStyle),
+      options: FontStyle,
     },
     children: {
       control: 'text',
@@ -45,6 +46,23 @@ const meta: Meta<TextProps> = {
 
 export default meta;
 type Story = StoryObj<TextProps>;
+
+const TextStory: React.FC<TextProps> = ({ color, ...props }) => {
+  const tw = useTailwind();
+  return (
+    <View
+      style={[
+        tw`p-4 ${
+          color?.endsWith('-inverse')
+            ? color.replace('inverse', 'default').replace('text', 'bg')
+            : 'bg-background-default'
+        }`,
+      ]}
+    >
+      <Text color={color} {...props} />
+    </View>
+  );
+};
 
 export const Default: Story = {
   args: {
@@ -73,58 +91,18 @@ export const Variant: Story = {
   ),
 };
 
-export const Color: Story = {
+export const Colors: Story = {
   render: () => (
-    <View>
-      <Text color={TextColor.TextDefault} twClassName="p-4">
-        TextDefault
-      </Text>
-      <Text color={TextColor.TextAlternative} twClassName="p-4">
-        TextAlternative
-      </Text>
-      <Text color={TextColor.TextMuted} twClassName="p-4">
-        TextMuted
-      </Text>
-      <Text color={TextColor.PrimaryDefault} twClassName="p-4">
-        PrimaryDefault
-      </Text>
-      <Text
-        color={TextColor.PrimaryInverse}
-        twClassName="bg-primary-default p-4"
-      >
-        PrimaryInverse on bg-primary-default
-      </Text>
-      <Text color={TextColor.ErrorDefault} twClassName="p-4">
-        ErrorDefault
-      </Text>
-      <Text color={TextColor.ErrorInverse} twClassName="bg-error-default p-4">
-        ErrorInverse on bg-error-default
-      </Text>
-      <Text color={TextColor.SuccessDefault} twClassName="p-4">
-        SuccessDefault
-      </Text>
-      <Text
-        color={TextColor.SuccessInverse}
-        twClassName="bg-success-default p-4"
-      >
-        SuccessInverse on bg-success-default
-      </Text>
-      <Text color={TextColor.WarningDefault} twClassName="p-4">
-        WarningDefault
-      </Text>
-      <Text
-        color={TextColor.WarningInverse}
-        twClassName="bg-warning-default p-4"
-      >
-        WarningInverse on bg-warning-default
-      </Text>
-      <Text color={TextColor.InfoDefault} twClassName="p-4">
-        InfoDefault
-      </Text>
-      <Text color={TextColor.InfoInverse} twClassName="bg-info-default p-4">
-        InfoInverse on bg-info-default
-      </Text>
-    </View>
+    <ScrollView>
+      {Object.keys(TextColor).map((colorKey) => (
+        <TextStory
+          key={colorKey}
+          color={TextColor[colorKey as keyof typeof TextColor]}
+        >
+          {colorKey}
+        </TextStory>
+      ))}
+    </ScrollView>
   ),
 };
 

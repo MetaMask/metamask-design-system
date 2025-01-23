@@ -7,19 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0]
+
+### Added
+
+- **BREAKING:** Following the unintentional breaking change in `4.2.0` we are now exporting the types from root index instead of requiring deep imports ([#340](https://github.com/MetaMask/metamask-design-system/pull/340)). See the [migration guide](./MIGRATION.md#from-version-410-to-500) for details.
+
+- Added 8 new colors (4 muted-hover & 4 muted-pressed) to design-tokens Figma Json. ([#325](https://github.com/MetaMask/metamask-design-system/pull/325))
+
 ## [4.2.0]
 
 ### Added
 
 - feat: color updates to the design tokens package ([#230](https://github.com/metamask/metamask-design-system/pull/230))
 
-- `@metamask/design-tokens` package migrated from standalone repository into the design system monorepo ([128](https://github.com/MetaMask/metamask-design-system/pull/128))
+- **BREAKING:** `@metamask/design-tokens` package migrated from standalone repository into the design system monorepo, which unintentionally broke type imports ([128](https://github.com/MetaMask/metamask-design-system/pull/128)). See the [migration guide](./MIGRATION.md#from-version-410-to-500) for details on the fix in 5.0.0.
 
 ## [4.1.0]
 
 ### Added
 
-- Adding (MIT OR Apache 2.0) license aligning with MetaMask’s open-source standards ([#738](https://github.com/MetaMask/design-tokens/pull/738))
+- Adding (MIT OR Apache 2.0) license aligning with MetaMask's open-source standards ([#738](https://github.com/MetaMask/design-tokens/pull/738))
 - Adding dark/light classname ([#729](https://github.com/MetaMask/design-tokens/pull/729))
 
 ## [4.0.0]
@@ -92,7 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- chore: updating package.json and contraints.prop config to allow for css export ([#609](https://github.com/MetaMask/design-tokens/pull/609))
+- chore: updating package.json and constraints.pro config to allow for css export ([#609](https://github.com/MetaMask/design-tokens/pull/609))
 
 ## [2.0.0]
 
@@ -307,7 +315,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Adding css stylesheet containg color design tokens ([#17](https://github.com/MetaMask/design-tokens/pull/17))
+- Adding css stylesheet containing color design tokens ([#17](https://github.com/MetaMask/design-tokens/pull/17))
 - Add issue template ([#20](https://github.com/MetaMask/design-tokens/pull/20))
 
 ## [1.0.0]
@@ -316,7 +324,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.2.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@5.0.0...HEAD
+[5.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.2.0...@metamask/design-tokens@5.0.0
 [4.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.1.0...@metamask/design-tokens@4.2.0
 [4.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.0.0...@metamask/design-tokens@4.1.0
 [4.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@3.0.0...@metamask/design-tokens@4.0.0

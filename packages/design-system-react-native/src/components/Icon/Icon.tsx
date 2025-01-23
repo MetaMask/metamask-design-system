@@ -1,7 +1,4 @@
-import {
-  useTailwind,
-  withThemeProvider,
-} from '@metamask/design-system-twrnc-preset';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 
 import { assetByIconName } from './Icon.assets';
@@ -16,17 +13,24 @@ const Icon = ({
   size = DEFAULT_ICON_ICONSIZE,
   name,
   color = DEFAULT_ICON_ICONCOLOR,
+  twClassName,
   style,
   ...props
 }: IconProps) => {
   const tw = useTailwind();
   const SVG = assetByIconName[name];
-  const styles = useMemo(() => {
-    const mergedClassnames = generateIconClassNames({ color, size });
+  const twStyle = useMemo(() => {
+    const mergedClassnames = generateIconClassNames({
+      color,
+      size,
+      twClassName,
+    });
     return tw`${mergedClassnames}`;
-  }, [color, size, tw]);
+  }, [color, size, tw, twClassName]);
 
-  return <SVG name={name} fill="currentColor" style={[styles]} {...props} />;
+  return (
+    <SVG name={name} fill="currentColor" style={[twStyle, style]} {...props} />
+  );
 };
 
-export default withThemeProvider(Icon);
+export default Icon;

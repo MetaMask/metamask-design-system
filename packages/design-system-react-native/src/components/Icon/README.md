@@ -142,7 +142,7 @@ When contributing to the `Icon` component, please ensure:
 - All new icons are flatten, exported, and optimized properly.
 - Make sure to remove colors from new icons.
 - Add new icons to the assets folder.
-- Run `yarn workspace @metamask/design-system-react-native ts-node src/components/Icons/Icon/scripts/generate-assets.scripts.ts` from root.
+- Run `yarn workspace @metamask/design-system-react-native ts-node scripts/generate-icons.ts` from root.
 
 ---
 
