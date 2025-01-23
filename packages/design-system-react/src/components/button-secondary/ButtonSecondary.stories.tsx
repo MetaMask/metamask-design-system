@@ -110,6 +110,22 @@ export const Default: Story = {
   },
 };
 
+export const Size: Story = {
+  render: (args) => (
+    <div className="flex gap-2">
+      <ButtonSecondary {...args} size={ButtonSecondarySize.Sm}>
+        Small
+      </ButtonSecondary>
+      <ButtonSecondary {...args} size={ButtonSecondarySize.Md}>
+        Medium
+      </ButtonSecondary>
+      <ButtonSecondary {...args} size={ButtonSecondarySize.Lg}>
+        Large
+      </ButtonSecondary>
+    </div>
+  ),
+};
+
 export const IsDanger: Story = {
   args: {
     children: 'Danger Button',
@@ -125,22 +141,6 @@ export const IsInverse: Story = {
       </ButtonSecondary>
       <ButtonSecondary {...args} isInverse isDanger>
         Inverse Danger Button
-      </ButtonSecondary>
-    </div>
-  ),
-};
-
-export const Size: Story = {
-  render: (args) => (
-    <div className="flex gap-2">
-      <ButtonSecondary {...args} size={ButtonSecondarySize.Sm}>
-        Small
-      </ButtonSecondary>
-      <ButtonSecondary {...args} size={ButtonSecondarySize.Md}>
-        Medium
-      </ButtonSecondary>
-      <ButtonSecondary {...args} size={ButtonSecondarySize.Lg}>
-        Large
       </ButtonSecondary>
     </div>
   ),

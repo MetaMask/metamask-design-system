@@ -9,41 +9,57 @@ export const ButtonTertiary = React.forwardRef<
   ButtonTertiaryProps
 >(
   (
-    { className, isDanger, isDisabled, isLoading, isInverse, ...props },
+    { className, isDanger, isInverse, isDisabled, isLoading, ...props },
     ref,
   ) => {
     const isInteractive = !(isDisabled ?? isLoading);
 
     const mergedClassName = twMerge(
-      // Base styles (always applied)
-      'bg-transparent',
-
-      // Text color based on variant combinations
-      isDanger && !isInverse && 'text-error-default',
-      !isDanger && !isInverse && 'text-primary-default',
-      !isDanger && isInverse && 'text-primary-inverse',
-      isDanger && isInverse && ['text-error-default', 'bg-default'],
-
-      // Interactive styles when not disabled/loading
+      // Default tertiary styles
+      !isDanger &&
+        !isInverse && [
+          'bg-transparent text-primary-default',
+          // Loading state uses pressed color
+          isLoading && 'bg-pressed',
+        ],
+      // Danger styles
+      isDanger &&
+        !isInverse && [
+          'bg-transparent text-error-default',
+          // Loading state uses pressed color
+          isLoading && 'bg-pressed',
+        ],
+      // Inverse styles
+      isInverse &&
+        !isDanger && [
+          'bg-transparent text-primary-inverse',
+          // Loading state uses pressed color
+          isLoading && 'bg-pressed',
+        ],
+      // Inverse danger styles
+      isInverse &&
+        isDanger && [
+          'bg-default text-error-default',
+          // Loading state uses pressed color
+          isLoading && 'bg-default-pressed',
+        ],
+      // Animation classes - only applied when interactive
       isInteractive && [
         'transition-[transform,colors,opacity]',
         'duration-100',
         'ease-linear',
+        // Hover states
         'hover:bg-hover',
+        // Active/Pressed states
         'active:bg-pressed',
+        // Scale animation
         'active:scale-[0.98]',
         'active:ease-[cubic-bezier(0.3,0.8,0.3,1)]',
       ],
-
       // Loading styles
-      isLoading && [
-        isDanger && isInverse ? 'bg-default-pressed' : 'bg-pressed',
-        'cursor-not-allowed',
-      ],
-
+      isLoading && 'cursor-not-allowed',
       // Disabled styles (but not loading)
       isDisabled && !isLoading && ['opacity-50', 'cursor-not-allowed'],
-
       className,
     );
 

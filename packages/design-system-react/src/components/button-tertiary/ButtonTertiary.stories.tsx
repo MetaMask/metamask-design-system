@@ -140,7 +140,7 @@ export const IsInverse: Story = {
 
 export const IsFullWidth: Story = {
   args: {
-    children: 'Full Width',
+    children: 'Full Width Button',
     isFullWidth: true,
   },
 };
@@ -161,7 +161,7 @@ export const EndIconName: Story = {
 
 export const IsLoading: Story = {
   args: {
-    children: 'Loading',
+    children: 'Loading Button',
     isLoading: true,
     loadingText: 'Loading...',
   },
@@ -169,7 +169,7 @@ export const IsLoading: Story = {
 
 export const IsDisabled: Story = {
   args: {
-    children: 'Disabled Button Tertiary',
+    children: 'Disabled Button',
     isDisabled: true,
   },
 };
