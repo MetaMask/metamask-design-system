@@ -1,7 +1,7 @@
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import React from 'react';
 
-import { Icon, IconName, IconSize, Text, TextColor } from '..';
+import { FontWeight, Icon, IconName, IconSize, Text, TextColor } from '..';
 import { twMerge } from '../../utils/tw-merge';
 import { BUTTON_BASE_SIZE_CLASS_MAP } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
@@ -89,7 +89,12 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const renderContent = () => {
       if (children && typeof children === 'string') {
         return (
-          <Text color={TextColor.Inherit} asChild {...textProps}>
+          <Text
+            fontWeight={FontWeight.Medium}
+            color={TextColor.Inherit}
+            asChild
+            {...textProps}
+          >
             <span>{children}</span>
           </Text>
         );

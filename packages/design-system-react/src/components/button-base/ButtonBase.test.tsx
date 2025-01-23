@@ -198,10 +198,10 @@ describe('ButtonBase', () => {
     expect(textElement).toHaveClass(
       'text-inherit',
       'text-s-body-md',
-      'font-s-body-md',
       'leading-s-body-md',
       'tracking-s-body-md',
       'md:text-l-body-md',
+      'font-medium',
     );
 
     // Test custom text props
