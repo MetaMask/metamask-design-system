@@ -20,13 +20,13 @@ describe('ButtonBase', () => {
     rerender(<ButtonBase size={ButtonBaseSize.Md}>Button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-10');
 
-    rerender(<ButtonBase size={ButtonBaseSize.Lg}>Button</ButtonBase>);
+    rerender(<ButtonBase>Button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 
-  it('applies medium size by default', () => {
+  it('applies large size by default', () => {
     render(<ButtonBase>Default Size</ButtonBase>);
-    expect(screen.getByRole('button')).toHaveClass('h-10');
+    expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 
   it('renders as child component when asChild is true', () => {
@@ -56,7 +56,7 @@ describe('ButtonBase', () => {
     );
     expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
     expect(screen.getByText('Please wait...')).toBeInTheDocument();
-    expect(screen.queryByText('Submit')).not.toBeInTheDocument();
+    expect(screen.getByText('Submit')).toHaveClass('invisible');
   });
 
   it('shows loading state with children when no loading text provided', () => {
@@ -171,7 +171,7 @@ describe('ButtonBase', () => {
 
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
-    expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
+    expect(button).toHaveClass('cursor-not-allowed');
   });
 
   it('applies disabled styles for both isDisabled and isLoading states', () => {
@@ -181,12 +181,12 @@ describe('ButtonBase', () => {
 
     let button = screen.getByRole('button');
     expect(button).toBeDisabled();
-    expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
+    expect(button).toHaveClass('cursor-not-allowed');
 
     rerender(<ButtonBase isLoading>Loading Button</ButtonBase>);
     button = screen.getByRole('button');
     expect(button).toBeDisabled();
-    expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
+    expect(button).toHaveClass('cursor-not-allowed');
   });
 
   it('handles text children correctly', () => {

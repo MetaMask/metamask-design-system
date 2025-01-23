@@ -31,7 +31,7 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
   className?: string;
   /**
    * Optional prop to control the size of the ButtonBase
-   * @default ButtonBaseSize.Md
+   * @default ButtonBaseSize.Lg
    */
   size?: ButtonBaseSize;
   /**

@@ -16,13 +16,33 @@ export const ButtonPrimary = React.forwardRef<
 
     const mergedClassName = twMerge(
       // Default primary styles
-      !isDanger && !isInverse && 'bg-primary-default text-primary-inverse',
+      !isDanger &&
+        !isInverse && [
+          'bg-primary-default text-primary-inverse',
+          // Loading state uses pressed color
+          isLoading && 'bg-primary-default-pressed',
+        ],
       // Danger styles
-      isDanger && !isInverse && 'bg-error-default text-error-inverse',
+      isDanger &&
+        !isInverse && [
+          'bg-error-default text-error-inverse',
+          // Loading state uses pressed color
+          isLoading && 'bg-error-default-pressed',
+        ],
       // Inverse styles
-      isInverse && !isDanger && 'bg-default text-default',
+      isInverse &&
+        !isDanger && [
+          'bg-default text-default',
+          // Loading state uses pressed color
+          isLoading && 'bg-default-pressed',
+        ],
       // Inverse danger styles
-      isInverse && isDanger && 'bg-default text-error-default',
+      isInverse &&
+        isDanger && [
+          'bg-default text-error-default',
+          // Loading state uses pressed color
+          isLoading && 'bg-default-pressed',
+        ],
       // Animation classes - only applied when interactive
       isInteractive && [
         'transition-[transform,colors,opacity]',
@@ -39,8 +59,8 @@ export const ButtonPrimary = React.forwardRef<
         isInverse && !isDanger && 'active:bg-default-pressed',
         isInverse && isDanger && 'active:bg-default-pressed',
         // Scale animation
-        'active:scale-95',
-        'active:ease-[cubic-bezier(0.3,0.8,0.3,1)]', // TODO: Add to design tokens
+        'active:scale-[0.98]',
+        'active:ease-[cubic-bezier(0.3,0.8,0.3,1)]',
       ],
       className,
     );
@@ -51,6 +71,7 @@ export const ButtonPrimary = React.forwardRef<
         className={mergedClassName}
         isDisabled={isDisabled}
         isLoading={isLoading}
+        data-theme={!isInverse && 'light'} // Lock button primary to light theme
         {...props}
       />
     );

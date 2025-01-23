@@ -14,6 +14,11 @@ export type ButtonTertiaryProps = Omit<
    */
   isDanger?: boolean;
   /**
+   * Optional prop that when true, applies inverse styling to the button
+   * @default false
+   */
+  isInverse?: boolean;
+  /**
    * Optional prop that when true, disables the button
    * @default false
    */

@@ -81,21 +81,14 @@ describe('ButtonPrimary', () => {
   });
 
   it('applies loading styles while preserving variant-specific classes', () => {
-    render(
-      <ButtonPrimary isLoading loadingText="Loading...">
-        Loading Button
-      </ButtonPrimary>,
-    );
-
+    render(<ButtonPrimary isLoading>Button</ButtonPrimary>);
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
-      'bg-primary-default',
       'text-primary-inverse',
-      'opacity-50',
+      'bg-primary-default-pressed',
       'cursor-not-allowed',
     );
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('does not apply hover/active classes when disabled or loading', () => {
@@ -153,7 +146,7 @@ describe('ButtonPrimary', () => {
     );
 
     expect(screen.getByText('Please wait...')).toBeInTheDocument();
-    expect(screen.queryByText('Submit')).not.toBeInTheDocument();
+    expect(screen.getByText('Submit')).toHaveClass('invisible');
   });
 
   it('applies full width class correctly', () => {
@@ -171,5 +164,117 @@ describe('ButtonPrimary', () => {
     const link = screen.getByRole('link');
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', '#');
+  });
+
+  describe('loading state', () => {
+    it('applies correct loading styles and removes hover/active states', () => {
+      render(<ButtonPrimary isLoading>Loading Button</ButtonPrimary>);
+
+      const button = screen.getByRole('button');
+
+      // Should have loading background
+      expect(button).toHaveClass('bg-primary-default-pressed');
+
+      // Should not have hover/active classes
+      expect(button).not.toHaveClass('hover:bg-primary-default-hover');
+      expect(button).not.toHaveClass('active:bg-primary-default-pressed');
+
+      // Should be disabled and have loading cursor
+      expect(button).toBeDisabled();
+      expect(button).toHaveClass('cursor-not-allowed');
+    });
+
+    it('applies correct loading styles for danger variant', () => {
+      render(
+        <ButtonPrimary isLoading isDanger>
+          Loading Button
+        </ButtonPrimary>,
+      );
+
+      const button = screen.getByRole('button');
+      expect(button).toHaveClass('bg-error-default-pressed');
+      expect(button).not.toHaveClass('hover:bg-error-default-hover');
+    });
+
+    it('applies correct loading styles for inverse variant', () => {
+      render(
+        <ButtonPrimary isLoading isInverse>
+          Loading Button
+        </ButtonPrimary>,
+      );
+
+      const button = screen.getByRole('button');
+      expect(button).toHaveClass('bg-default-pressed');
+      expect(button).not.toHaveClass('hover:bg-default-hover');
+    });
+
+    it('applies correct loading styles for inverse danger variant', () => {
+      render(
+        <ButtonPrimary isLoading isInverse isDanger>
+          Loading Button
+        </ButtonPrimary>,
+      );
+
+      const button = screen.getByRole('button');
+
+      // Should have the correct background and text colors
+      expect(button).toHaveClass('bg-default-pressed');
+      expect(button).toHaveClass('text-error-default');
+
+      // Should not have hover/active classes
+      expect(button).not.toHaveClass('hover:bg-default-hover');
+      expect(button).not.toHaveClass('active:bg-default-pressed');
+
+      // Should be disabled and have loading cursor
+      expect(button).toBeDisabled();
+      expect(button).toHaveClass('cursor-not-allowed');
+    });
+  });
+
+  describe('className combinations', () => {
+    it('handles all isDanger and isInverse combinations', () => {
+      const { rerender } = render(<ButtonPrimary>Button</ButtonPrimary>);
+
+      // Default state (both false)
+      expect(screen.getByRole('button')).toHaveClass('bg-primary-default');
+
+      // Only isDanger
+      rerender(<ButtonPrimary isDanger>Button</ButtonPrimary>);
+      expect(screen.getByRole('button')).toHaveClass('bg-error-default');
+
+      // Only isInverse
+      rerender(<ButtonPrimary isInverse>Button</ButtonPrimary>);
+      expect(screen.getByRole('button')).toHaveClass('bg-default');
+      expect(screen.getByRole('button')).toHaveClass('text-default');
+
+      // Both isDanger and isInverse
+      rerender(
+        <ButtonPrimary isDanger isInverse>
+          Button
+        </ButtonPrimary>,
+      );
+      expect(screen.getByRole('button')).toHaveClass('bg-default');
+      expect(screen.getByRole('button')).toHaveClass('text-error-default');
+    });
+
+    it('handles all interactive state combinations', () => {
+      const { rerender } = render(<ButtonPrimary>Button</ButtonPrimary>);
+
+      // Default interactive state
+      let button = screen.getByRole('button');
+      expect(button).toHaveClass('bg-primary-default');
+      expect(button).toHaveClass('hover:bg-primary-default-hover');
+      expect(button).toHaveClass('active:bg-primary-default-pressed');
+
+      // Disabled
+      rerender(<ButtonPrimary isDisabled>Button</ButtonPrimary>);
+      button = screen.getByRole('button');
+      expect(button).not.toHaveClass('hover:bg-primary-default-hover');
+
+      // Loading
+      rerender(<ButtonPrimary isLoading>Button</ButtonPrimary>);
+      button = screen.getByRole('button');
+      expect(button).not.toHaveClass('hover:bg-primary-default-hover');
+    });
   });
 });

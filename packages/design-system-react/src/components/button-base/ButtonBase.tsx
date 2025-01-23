@@ -12,7 +12,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
     {
       children,
       className,
-      size = ButtonBaseSize.Md,
+      size = ButtonBaseSize.Lg,
       isFullWidth,
       asChild,
       isDisabled,
@@ -34,18 +34,21 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const Component = asChild ? Slot : 'button';
 
     const renderLoadingState = () => (
-      <span className="inline-flex items-center">
-        <Icon
-          name={IconName.Loading}
-          size={IconSize.Sm}
-          className={twMerge(
-            'animate-spin mr-2 text-inherit',
-            loadingIconProps?.className,
-          )}
-          {...loadingIconProps}
-        />
-        {loadingText ?? children}
-      </span>
+      <>
+        <span className="absolute inline-flex items-center">
+          <Icon
+            name={IconName.Loading}
+            size={IconSize.Sm}
+            className={twMerge(
+              'animate-spin mr-2 text-inherit',
+              loadingIconProps?.className,
+            )}
+            {...loadingIconProps}
+          />
+          {loadingText}
+        </span>
+        <span className="invisible inline-flex items-center">{children}</span>
+      </>
     );
 
     const renderStartContent = () => {
@@ -99,12 +102,15 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       'rounded-full px-4',
       'text-default font-medium',
       'bg-muted',
+      // Add relative positioning for loading state
+      'relative',
       // Size
       BUTTON_BASE_SIZE_CLASS_MAP[size],
       // Full width
       isFullWidth && 'w-full',
       // Disabled state - apply to both isDisabled and isLoading
-      (isDisabled || isLoading) && 'opacity-50 cursor-not-allowed',
+      (isDisabled || isLoading) && 'cursor-not-allowed',
+      isDisabled && 'opacity-50',
       // Custom classes
       className,
     );

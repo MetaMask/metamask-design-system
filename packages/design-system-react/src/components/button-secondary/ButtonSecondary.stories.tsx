@@ -124,7 +124,7 @@ export const IsInverse: Story = {
         Inverse Button
       </ButtonSecondary>
       <ButtonSecondary {...args} isInverse isDanger>
-        No Inverse Danger Button
+        Inverse Danger Button
       </ButtonSecondary>
     </div>
   ),

@@ -109,7 +109,7 @@ type Story = StoryObj<typeof ButtonBase>;
 
 export const Default: Story = {
   args: {
-    children: 'Button Base',
+    children: 'Button Base (Large)',
   },
 };
 
@@ -122,9 +122,7 @@ export const Size: Story = {
       <ButtonBase {...args} size={ButtonBaseSize.Md}>
         Medium
       </ButtonBase>
-      <ButtonBase {...args} size={ButtonBaseSize.Lg}>
-        Large
-      </ButtonBase>
+      <ButtonBase {...args}>Large (Default)</ButtonBase>
     </div>
   ),
 };

@@ -10,9 +10,9 @@ describe('ButtonSecondary', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
-      'bg-default',
+      'bg-transparent',
       'border-2',
-      'border-muted',
+      'border-icon-muted',
       'text-default',
     );
   });
@@ -22,7 +22,7 @@ describe('ButtonSecondary', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
-      'bg-default',
+      'bg-transparent',
       'border-2',
       'border-error-default',
       'text-error-default',
@@ -41,18 +41,6 @@ describe('ButtonSecondary', () => {
     );
   });
 
-  it('merges custom className with default styles', () => {
-    render(
-      <ButtonSecondary className="custom-class">
-        Secondary Button
-      </ButtonSecondary>,
-    );
-
-    const button = screen.getByRole('button');
-    expect(button).toHaveClass('custom-class');
-    expect(button).toHaveClass('bg-default');
-  });
-
   it('renders with inverse danger styles when both isInverse and isDanger are true', () => {
     render(
       <ButtonSecondary isInverse isDanger>
@@ -61,12 +49,7 @@ describe('ButtonSecondary', () => {
     );
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass(
-      'bg-transparent',
-      'border-2',
-      'border-error-inverse',
-      'text-error-inverse',
-    );
+    expect(button).toHaveClass('bg-default', 'border-0', 'text-error-default');
   });
 
   it('applies disabled styles while preserving variant-specific classes', () => {
@@ -75,9 +58,9 @@ describe('ButtonSecondary', () => {
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
-      'bg-default',
+      'bg-transparent',
       'border-2',
-      'border-muted',
+      'border-icon-muted',
       'text-default',
       'opacity-50',
       'cursor-not-allowed',
@@ -85,23 +68,16 @@ describe('ButtonSecondary', () => {
   });
 
   it('applies loading styles while preserving variant-specific classes', () => {
-    render(
-      <ButtonSecondary isLoading loadingText="Loading...">
-        Loading Button
-      </ButtonSecondary>,
-    );
-
+    render(<ButtonSecondary isLoading>Button</ButtonSecondary>);
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
-      'bg-default',
       'border-2',
-      'border-muted',
+      'border-icon-muted',
       'text-default',
-      'opacity-50',
+      'bg-pressed',
       'cursor-not-allowed',
     );
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('does not apply hover/active classes when disabled or loading', () => {
@@ -163,7 +139,7 @@ describe('ButtonSecondary', () => {
     );
 
     expect(screen.getByText('Please wait...')).toBeInTheDocument();
-    expect(screen.queryByText('Submit')).not.toBeInTheDocument();
+    expect(screen.getByText('Submit')).toHaveClass('invisible');
   });
 
   it('applies full width class correctly', () => {
@@ -181,5 +157,60 @@ describe('ButtonSecondary', () => {
     const link = screen.getByRole('link');
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', '#');
+  });
+
+  describe('loading state', () => {
+    it('applies correct loading styles and removes hover/active states', () => {
+      render(<ButtonSecondary isLoading>Loading Button</ButtonSecondary>);
+
+      const button = screen.getByRole('button');
+
+      // Should have loading background
+      expect(button).toHaveClass('bg-pressed');
+
+      // Should not have hover/active classes
+      expect(button).not.toHaveClass('hover:bg-hover');
+      expect(button).not.toHaveClass('active:bg-pressed');
+
+      // Should be disabled and have loading cursor
+      expect(button).toBeDisabled();
+      expect(button).toHaveClass('cursor-not-allowed');
+    });
+
+    it('applies correct loading styles for danger variant', () => {
+      render(
+        <ButtonSecondary isLoading isDanger>
+          Loading Button
+        </ButtonSecondary>,
+      );
+
+      const button = screen.getByRole('button');
+      expect(button).toHaveClass('bg-pressed');
+      expect(button).not.toHaveClass('hover:bg-hover');
+    });
+
+    it('applies correct loading styles for inverse variant', () => {
+      render(
+        <ButtonSecondary isLoading isInverse>
+          Loading Button
+        </ButtonSecondary>,
+      );
+
+      const button = screen.getByRole('button');
+      expect(button).toHaveClass('bg-pressed');
+      expect(button).not.toHaveClass('hover:bg-hover');
+    });
+
+    it('applies correct loading styles for inverse danger variant', () => {
+      render(
+        <ButtonSecondary isLoading isInverse isDanger>
+          Loading Button
+        </ButtonSecondary>,
+      );
+
+      const button = screen.getByRole('button');
+      expect(button).toHaveClass('bg-default-pressed');
+      expect(button).not.toHaveClass('hover:bg-default-hover');
+    });
   });
 });

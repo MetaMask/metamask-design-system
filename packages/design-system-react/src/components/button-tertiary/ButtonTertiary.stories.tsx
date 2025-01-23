@@ -102,13 +102,6 @@ export const Default: Story = {
   },
 };
 
-export const IsDanger: Story = {
-  args: {
-    children: 'Danger',
-    isDanger: true,
-  },
-};
-
 export const Size: Story = {
   render: (args) => (
     <div className="flex gap-2">
@@ -120,6 +113,26 @@ export const Size: Story = {
       </ButtonTertiary>
       <ButtonTertiary {...args} size={ButtonTertiarySize.Lg}>
         Large
+      </ButtonTertiary>
+    </div>
+  ),
+};
+
+export const IsDanger: Story = {
+  args: {
+    children: 'Danger',
+    isDanger: true,
+  },
+};
+
+export const IsInverse: Story = {
+  render: (args) => (
+    <div className="bg-primary-default p-4 rounded flex gap-2">
+      <ButtonTertiary {...args} isInverse>
+        Inverse
+      </ButtonTertiary>
+      <ButtonTertiary {...args} isInverse isDanger>
+        Inverse Danger
       </ButtonTertiary>
     </div>
   ),
