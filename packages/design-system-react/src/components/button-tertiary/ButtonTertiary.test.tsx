@@ -114,7 +114,6 @@ describe('ButtonTertiary', () => {
         'duration-100',
         'ease-linear',
         'active:scale-[0.98]',
-        'active:ease-[cubic-bezier(0.3,0.8,0.3,1)]',
       );
     });
 
