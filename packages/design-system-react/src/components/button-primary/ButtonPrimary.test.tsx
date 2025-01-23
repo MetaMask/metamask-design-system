@@ -81,7 +81,11 @@ describe('ButtonPrimary', () => {
   });
 
   it('applies loading styles while preserving variant-specific classes', () => {
-    render(<ButtonPrimary isLoading>Button</ButtonPrimary>);
+    render(
+      <ButtonPrimary isLoading loadingText="Loading...">
+        Loading Button
+      </ButtonPrimary>,
+    );
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
