@@ -261,7 +261,11 @@ describe('ButtonTertiary', () => {
         </ButtonTertiary>,
       );
       button = screen.getByRole('button');
-      expect(button).toHaveClass('bg-pressed', 'cursor-not-allowed');
+      expect(button).toHaveClass(
+        'bg-error-muted-pressed',
+        'text-error-default-pressed',
+        'cursor-not-allowed',
+      );
 
       // Inverse loading
       rerender(

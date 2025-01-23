@@ -22,7 +22,7 @@ describe('ButtonSecondary', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
-      'bg-transparent',
+      'bg-error-muted',
       'border-2',
       'border-error-default',
       'text-error-default',
@@ -185,7 +185,10 @@ describe('ButtonSecondary', () => {
       );
 
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('bg-pressed');
+      expect(button).toHaveClass(
+        'bg-error-muted-pressed',
+        'text-error-default-pressed',
+      );
       expect(button).not.toHaveClass('hover:bg-hover');
     });
 
