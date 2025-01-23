@@ -49,6 +49,11 @@ export const ButtonTertiary = React.forwardRef<
         'active:bg-pressed',
         isInverse &&
           isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
+        isDanger &&
+          !isInverse && [
+            'hover:bg-error-muted-hover',
+            'active:bg-error-muted-pressed',
+          ],
       ],
       // Loading styles
       isLoading && 'cursor-not-allowed',

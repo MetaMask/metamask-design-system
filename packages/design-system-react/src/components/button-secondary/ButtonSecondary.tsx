@@ -26,8 +26,8 @@ export const ButtonSecondary = React.forwardRef<
       isDanger &&
         !isInverse && [
           'bg-transparent border-2 border-error-default text-error-default',
-          // Loading state uses pressed color
-          isLoading && 'bg-pressed',
+          // Loading state uses error muted pressed color
+          isLoading && 'bg-error-muted-pressed',
         ],
       // Inverse styles
       isInverse &&
@@ -46,7 +46,11 @@ export const ButtonSecondary = React.forwardRef<
       // Hover/Active states - only applied when interactive
       isInteractive && [
         !isDanger && !isInverse && ['hover:bg-hover', 'active:bg-pressed'],
-        isDanger && !isInverse && ['hover:bg-hover', 'active:bg-pressed'],
+        isDanger &&
+          !isInverse && [
+            'hover:bg-error-muted-hover',
+            'active:bg-error-muted-pressed',
+          ],
         isInverse && !isDanger && ['hover:bg-hover', 'active:bg-pressed'],
         isInverse &&
           isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
