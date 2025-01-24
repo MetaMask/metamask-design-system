@@ -69,10 +69,6 @@ The `temp-components` folder is for temporary components that are not yet offici
 - Developers can use `temp-components` to collaborate on new component ideas and gather feedback.
 - These components are not intended for use by end users or consumers until they are officially promoted to the `components` folder.
 
-**Examples:**
-
-- A `TempCard` component that is being evaluated for inclusion as a new `Card` component.
-
 **Guidelines:**
 
 - Clearly mark all components in this folder as experimental in their documentation.
@@ -89,9 +85,7 @@ Maintain a clear distinction between `primitives`, `components`, and `temp-compo
 
 ### Naming Conventions
 
-- Prefix all `primitives` with `Base` (e.g., `BaseButton`, `BaseInput`) to signal their purpose.
 - Use descriptive and intuitive names for components in the `components` folder.
-- Prefix temporary components in `temp-components` with `Temp` (e.g., `TempCard`, `TempModal`).
 
 ### Documentation
 
@@ -114,8 +108,8 @@ src/
 │   ├── Button/
 │   └── Input/
 ├── temp-components/
-│   ├── TempCard/
-│   └── TempModal/
+│   ├── Card/
+│   └── Modal/
 ```
 
 By adhering to this structure, the design system ensures a clean separation of concerns, promoting maintainability and ease of use for all consumers.

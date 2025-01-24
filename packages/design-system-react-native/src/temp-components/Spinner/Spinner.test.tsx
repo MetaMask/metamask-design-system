@@ -5,10 +5,11 @@ import Spinner from './Spinner';
 
 describe('Spinner', () => {
   it('renders the spinner icon', () => {
-    const { getByTestId } = render(<Spinner />);
+    const { getByTestId, queryByText } = render(<Spinner />);
     const iconElement = getByTestId('spinner-icon');
 
     expect(iconElement).toBeDefined();
+    expect(queryByText('Loading...')).toBeNull();
   });
 
   it('renders the loading text when provided', () => {
@@ -16,12 +17,6 @@ describe('Spinner', () => {
     const { getByText } = render(<Spinner loadingText={loadingText} />);
 
     expect(getByText(loadingText)).toBeDefined();
-  });
-
-  it('renders correctly without loading text', () => {
-    const { queryByText } = render(<Spinner />);
-
-    expect(queryByText('Loading...')).toBeNull();
   });
 
   it('renders with animation applied to the spinner', () => {
