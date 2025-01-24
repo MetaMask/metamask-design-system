@@ -8,17 +8,17 @@ The `Spinner` component is a loading indicator designed for React Native applica
 
 Optional prop that sets the color of the spinner icon using predefined theme colors.
 
-| TYPE           | REQUIRED | DEFAULT                    |
-| :------------- | :------- | :------------------------- |
-| `SpinnerColor` | No       | `SpinnerColor.IconDefault` |
+| TYPE        | REQUIRED | DEFAULT                 |
+| :---------- | :------- | :---------------------- |
+| `IconColor` | No       | `IconColor.IconDefault` |
 
-Available `SpinnerColor` options include:
+Available `IconColor` options include:
 
 - `IconDefault`
 - `PrimaryDefault`
 - `SuccessDefault`
 - `ErrorDefault`
-- ...and more, as defined in the `SpinnerColor` enum.
+- ...and more, as defined in the `IconColor` enum.
 
 ### `loadingText`
 
@@ -53,7 +53,7 @@ import Spinner from '@metamask/design-system-react-native';
 ### Customizing the Spinner Color
 
 ```tsx
-<Spinner color={SpinnerColor.PrimaryDefault} />
+<Spinner color={IconColor.PrimaryDefault} />
 ```
 
 ### Adding Loading Text
