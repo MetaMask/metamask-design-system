@@ -113,7 +113,7 @@ describe('ButtonTertiary', () => {
         'transition-[transform,colors,opacity]',
         'duration-100',
         'ease-linear',
-        'active:scale-[0.98]',
+        'active:scale-[0.97]',
       );
     });
 
