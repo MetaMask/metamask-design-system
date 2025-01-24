@@ -1,0 +1,109 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as ButtonStories from './Button.stories';
+
+# Button
+
+Button is used for user actions
+
+```tsx
+import { Button } from '@metamask/design-system-react';
+
+<Button onClick={() => {}}>Button</Button>;
+```
+
+<Canvas of={ButtonStories.Default} />
+
+## Props
+
+### Variant
+
+The Button component supports three variants:
+
+- `ButtonVariant.Primary` (default) - High emphasis, used for primary actions
+- `ButtonVariant.Secondary` - Medium emphasis, used for secondary actions
+- `ButtonVariant.Tertiary` - Low emphasis, used for tertiary actions
+
+<Canvas of={ButtonStories.Variant} />
+
+### Size
+
+Buttons support three sizes:
+
+- `Sm` (32px)
+- `Md` (40px)
+- `Lg` (48px) - default
+
+<Canvas of={ButtonStories.Size} />
+
+### IsDanger
+
+Use `isDanger` for destructive actions.
+
+<Canvas of={ButtonStories.IsDanger} />
+
+### IsInverse
+
+Use `isInverse` when the button needs to be displayed on a dark background.
+
+> NOTE: When both `isInverse` and `isDanger` are set to `true`, all button variants (Primary, Secondary, and Tertiary) will have the same inverse danger styling.
+
+<Canvas of={ButtonStories.IsInverse} />
+
+### StartIconName
+
+Buttons can display an icon at the start of the content.
+
+<Canvas of={ButtonStories.StartIconName} />
+
+### EndIconName
+
+Buttons can display an icon at the end of the content.
+
+<Canvas of={ButtonStories.EndIconName} />
+
+### IsLoading
+
+Buttons can show a loading state with optional loading text.
+
+<Canvas of={ButtonStories.IsLoading} />
+
+### IsDisabled
+
+Buttons can be disabled.
+
+<Canvas of={ButtonStories.IsDisabled} />
+
+### IsFullWidth
+
+Buttons can be set to take up the full width of their container.
+
+<Canvas of={ButtonStories.IsFullWidth} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<Button className="my-4 mx-2">Button content</Button>
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+
+## Component API
+
+<Controls of={ButtonStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
