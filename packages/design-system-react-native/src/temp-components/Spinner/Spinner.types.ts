@@ -1,7 +1,6 @@
 import type { ViewProps } from 'react-native';
 
-import type { SpinnerColor } from '.';
-import type { IconProps } from '../../components/Icon';
+import type { IconProps, IconColor } from '../../components/Icon';
 import type { TextProps } from '../../components/Text/Text.types';
 
 /**
@@ -10,9 +9,9 @@ import type { TextProps } from '../../components/Text/Text.types';
 export type SpinnerProps = {
   /**
    * Optional prop that sets the color of the spinner icon using predefined theme colors
-   * @default SpinnerColor.IconDefault
+   * @default IconColor.IconDefault
    */
-  color?: SpinnerColor;
+  color?: IconColor;
   /**
    * Optional props to be passed to the loadingText element
    */
