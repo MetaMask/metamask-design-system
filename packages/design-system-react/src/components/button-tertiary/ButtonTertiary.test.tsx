@@ -321,7 +321,7 @@ describe('ButtonTertiary', () => {
       expect(button).toHaveClass('transition-[transform,colors,opacity]');
       expect(button).toHaveClass('duration-100');
       expect(button).toHaveClass('ease-linear');
-      expect(button).toHaveClass('active:scale-[0.98]');
+      expect(button).toHaveClass('active:scale-[0.97]');
       expect(button).toHaveClass('active:ease-[cubic-bezier(0.3,0.8,0.3,1)]');
 
       // Disabled
