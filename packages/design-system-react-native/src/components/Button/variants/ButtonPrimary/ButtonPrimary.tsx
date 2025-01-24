@@ -56,7 +56,7 @@ const ButtonPrimaryBase = ({
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
     ...DEFAULT_BUTTONPRIMARY_PROPS.textProps,
     ...textProps,
-    twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
+    twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ' '}`,
   };
   const finalStartIconProps: Partial<IconProps> = {
     ...DEFAULT_BUTTONPRIMARY_PROPS.startIconProps,
