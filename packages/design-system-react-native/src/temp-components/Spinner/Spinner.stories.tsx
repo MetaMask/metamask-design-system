@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { SpinnerColor } from '.';
+import { IconColor } from '../../components/Icon';
 import { TextColor } from '../../components/Text';
 import Spinner from './Spinner';
 import { DEFAULT_SPINNER_PROPS } from './Spinner.constants';
@@ -15,7 +15,7 @@ const meta: Meta<SpinnerProps> = {
   argTypes: {
     color: {
       control: 'select',
-      options: SpinnerColor,
+      options: IconColor,
     },
     loadingText: {
       control: 'text',
@@ -59,10 +59,10 @@ export const Default: Story = {
 export const Colors: Story = {
   render: () => (
     <ScrollView>
-      {Object.keys(SpinnerColor).map((colorKey) => (
+      {Object.keys(IconColor).map((colorKey) => (
         <SpinnerStory
           key={colorKey}
-          color={SpinnerColor[colorKey as keyof typeof SpinnerColor]}
+          color={IconColor[colorKey as keyof typeof IconColor]}
           loadingText={DEFAULT_SPINNER_PROPS.loadingText}
           loadingTextProps={{
             color: TextColor[colorKey as keyof typeof TextColor],

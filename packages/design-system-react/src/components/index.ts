@@ -18,14 +18,14 @@ export { ButtonBase } from './button-base';
 export type { ButtonBaseProps } from './button-base';
 export { ButtonBaseSize } from './button-base';
 
-export { ButtonPrimary } from './button-primary';
+export { ButtonPrimary, ButtonPrimarySize } from './button-primary';
 export type { ButtonPrimaryProps } from './button-primary';
-export { ButtonPrimarySize } from './button-primary';
 
-export { ButtonSecondary } from './button-secondary';
+export { ButtonSecondary, ButtonSecondarySize } from './button-secondary';
 export type { ButtonSecondaryProps } from './button-secondary';
-export { ButtonSecondarySize } from './button-secondary';
 
-export { ButtonTertiary } from './button-tertiary';
+export { ButtonTertiary, ButtonTertiarySize } from './button-tertiary';
 export type { ButtonTertiaryProps } from './button-tertiary';
-export { ButtonTertiarySize } from './button-tertiary';
+
+export { Button, ButtonVariant } from './button';
+export type { ButtonProps } from './button';
