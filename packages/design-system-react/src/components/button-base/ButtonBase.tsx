@@ -133,7 +133,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       <Component
         ref={ref}
         className={mergedClassName}
-        disabled={asChild ? undefined : isDisabled ?? isLoading}
+        disabled={asChild ? undefined : (isDisabled ?? isLoading)}
         style={style}
         {...props}
       >
