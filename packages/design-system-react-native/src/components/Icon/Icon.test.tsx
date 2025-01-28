@@ -7,7 +7,6 @@ import {
   DEFAULT_ICON_ICONCOLOR,
   DEFAULT_ICON_ICONSIZE,
   SAMPLE_ICON_PROPS,
-  TWCLASSMAP_ICON_ICONSIZE,
 } from './Icon.constants';
 import { IconSize, IconColor } from './Icon.types';
 import { generateIconClassNames } from './Icon.utilities';
@@ -34,7 +33,7 @@ describe('Icon', () => {
     it('generates class names correctly for each size', () => {
       Object.values(IconSize).forEach((size) => {
         const classNames = generateIconClassNames({ size });
-        expect(classNames).toContain(TWCLASSMAP_ICON_ICONSIZE[size]);
+        expect(classNames).toContain(size);
       });
     });
 

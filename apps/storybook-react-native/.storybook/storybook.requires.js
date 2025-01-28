@@ -49,6 +49,7 @@ const getStories = () => {
   return {
     "./../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/ButtonAnimated/ButtonAnimated.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ButtonAnimated/ButtonAnimated.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/TextOrChildren/TextOrChildren.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/TextOrChildren/TextOrChildren.stories.tsx"),
     "./../../packages/design-system-react-native/src/temp-components/Spinner/Spinner.stories.tsx": require("../../../packages/design-system-react-native/src/temp-components/Spinner/Spinner.stories.tsx"),
