@@ -3,12 +3,12 @@
  */
 [data-theme='dark'],
 .dark {
-  /* For default neutral surface (#222325) */
-  --color-background-default: var(--brand-colors-grey-grey800);
-  /* For sunken neutral surface below background/default (#121314) */
-  --color-background-alternative: var(--brand-colors-grey-grey900);
-  /* For raised neutral surface above background/default (#31333a) */
-  --color-background-muted: var(--brand-colors-grey-grey700);
+  /* For default neutral surface (#121314) */
+  --color-background-default: var(--brand-colors-grey-grey900);
+  /* For sunken neutral surface below background/default (#000000) */
+  --color-background-alternative: var(--brand-colors-grey-grey1000);
+  /* For raised neutral surface above background/default (#222325s) */
+  --color-background-muted: var(--brand-colors-grey-grey800);
   /* Hover state surface for background/default (#313235) */
   --color-background-default-hover: #313235;
   /* Pressed state surface for background/default (#3f4145) */

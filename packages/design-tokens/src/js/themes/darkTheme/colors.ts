@@ -4,11 +4,11 @@ import type { ThemeColors } from '../types';
 export const colors: ThemeColors = {
   background: {
     /** For default neutral surface (#222325) */
-    default: brandColor.grey800,
+    default: brandColor.grey900,
     /** For sunken neutral surface below background/default (#121314) */
-    alternative: brandColor.grey900,
+    alternative: brandColor.grey1000,
     /** For raised neutral surface above background/default (#31333A) */
-    muted: brandColor.grey700,
+    muted: brandColor.grey800,
     /** Hover state surface for background/default (#313235) */
     defaultHover: '#313235',
     /** Pressed state surface for background/default (#3F4145) */
