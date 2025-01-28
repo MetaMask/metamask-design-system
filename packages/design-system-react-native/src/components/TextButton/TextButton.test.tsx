@@ -30,6 +30,13 @@ describe('TextButton', () => {
       expect(classNames).toContain('bg-background-pressed');
     });
 
+    it('returns correct class names when disabled', () => {
+      const classNames = generateTextButtonContainerClassNames({
+        isDisabled: true,
+      });
+      expect(classNames).toContain('opacity-50');
+    });
+
     it('returns correct class names when pressed and loading', () => {
       const classNames = generateTextButtonContainerClassNames({
         isPressed: true,
@@ -43,14 +50,18 @@ describe('TextButton', () => {
         isPressed: true,
         twClassName: 'rounded-lg px-2',
       });
-      expect(classNames).toContain('bg-background-pressed rounded-lg px-2');
+      expect(classNames).toContain(
+        'bg-background-pressed opacity-100 rounded-lg px-2',
+      );
     });
 
     it('appends additional Tailwind class names for default state', () => {
       const classNames = generateTextButtonContainerClassNames({
         twClassName: 'border border-solid',
       });
-      expect(classNames).toContain('bg-transparent border border-solid');
+      expect(classNames).toContain(
+        'bg-transparent opacity-100 border border-solid',
+      );
     });
   });
   describe('generateTextButtonTextClassNames', () => {

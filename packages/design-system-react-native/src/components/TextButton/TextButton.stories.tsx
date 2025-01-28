@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
 import { IconName } from '../Icon';
-import Text from '../Text/Text';
+import Text from '../Text';
 import TextButton from './TextButton';
 import { DEFAULT_TEXTBUTTON_PROPS } from './TextButton.constants';
 import type { TextButtonProps } from './TextButton.types';
@@ -81,6 +81,10 @@ export const IsLoading: Story = {
       </TextButton>
     </View>
   ),
+};
+
+export const WithoutAccessories: Story = {
+  render: () => <TextButton>TextButton</TextButton>,
 };
 
 export const WithStartAccessory: Story = {

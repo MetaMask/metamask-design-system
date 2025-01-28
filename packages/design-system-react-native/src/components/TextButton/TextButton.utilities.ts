@@ -10,6 +10,7 @@ import type { TextButtonProps } from './TextButton.types';
  *
  * @param isPressed - Indicates whether the button is currently being pressed.
  * @param isLoading - Indicates whether the button is in a loading state.
+ * @param isDisabled - Indicates whether the button is in a disabled state.
  * @param twClassName - Additional Tailwind class names for customization.
  * @returns A combined string of Tailwind class names for the container's background styling.
  *
@@ -28,6 +29,7 @@ import type { TextButtonProps } from './TextButton.types';
 export const generateTextButtonContainerClassNames = ({
   isPressed = false,
   isLoading = false,
+  isDisabled = false,
   twClassName = '',
 }: Partial<TextButtonProps> & {
   isPressed?: boolean;
@@ -36,8 +38,9 @@ export const generateTextButtonContainerClassNames = ({
   const backgroundStyle = isPressedOrLoading
     ? 'bg-background-pressed'
     : 'bg-transparent';
+  const opacityStyle = `opacity-${isDisabled ? 50 : 100}`;
 
-  return `${backgroundStyle} ${twClassName}`;
+  return `${backgroundStyle} ${opacityStyle} ${twClassName}`;
 };
 
 /**

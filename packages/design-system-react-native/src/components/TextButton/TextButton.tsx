@@ -49,16 +49,17 @@ const TextButton = ({
     return generateTextButtonContainerClassNames({
       isPressed,
       isLoading,
+      isDisabled,
       twClassName,
     });
-  }, [isPressed, isLoading, twClassName]);
+  }, [isPressed, isLoading, isDisabled, twClassName]);
 
   const twTextClassNames = useMemo(() => {
-    return `${generateTextButtonTextClassNames({
+    return generateTextButtonTextClassNames({
       isPressed,
       isInverse,
       isLoading,
-    })}`;
+    });
   }, [isPressed, isInverse, isLoading, textProps]);
 
   // Merging default settings for Icons with passed in props
@@ -173,6 +174,11 @@ const TextButton = ({
   return (
     <Text>
       {finalStartIconName && <Text style={tw`hidden`}> </Text>}
+      {isLoading && (
+        <View style={tw`${twContainerClassNames}`}>
+          <Spinner {...finalSpinnerProps} />
+        </View>
+      )}
       <Text
         onPress={onPressHandler}
         onPressIn={onPressInHandler}
@@ -186,9 +192,7 @@ const TextButton = ({
         suppressHighlighting
         {...props}
       >
-        {isLoading ? (
-          <Spinner {...finalSpinnerProps} />
-        ) : (
+        {!isLoading && (
           <>
             {finalStartIconName ? (
               // This additional View is needed, otherwise things are rendered
@@ -200,7 +204,8 @@ const TextButton = ({
                     items-start mt-[${nonTextOffSet}px] 
                     pt-[${finalStartIconOffset}px] 
                     h-[${componentHeight}px] 
-                    w-[${startIconWrapperWidth}px]`}
+                    w-[${startIconWrapperWidth}px]
+                    `}
                 >
                   <Icon name={finalStartIconName} {...finalStartIconProps} />
                 </View>

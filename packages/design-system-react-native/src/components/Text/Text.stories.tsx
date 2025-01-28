@@ -76,18 +76,18 @@ export const Default: Story = {
   render: (args) => <Text {...args} />,
 };
 
-export const Variant: Story = {
+export const Variants: Story = {
   render: () => (
-    <View>
-      <Text variant={TextVariant.DisplayMd}>DisplayMd</Text>
-      <Text variant={TextVariant.HeadingLg}>HeadingLg</Text>
-      <Text variant={TextVariant.HeadingMd}>HeadingMd</Text>
-      <Text variant={TextVariant.HeadingSm}>HeadingSm</Text>
-      <Text variant={TextVariant.BodyLg}>BodyLg</Text>
-      <Text variant={TextVariant.BodyMd}>BodyMd</Text>
-      <Text variant={TextVariant.BodySm}>BodySm</Text>
-      <Text variant={TextVariant.BodyXs}>BodyXs</Text>
-    </View>
+    <ScrollView>
+      {Object.keys(TextVariant).map((variantKey) => (
+        <TextStory
+          key={variantKey}
+          variant={TextVariant[variantKey as keyof typeof TextVariant]}
+        >
+          {variantKey}
+        </TextStory>
+      ))}
+    </ScrollView>
   ),
 };
 

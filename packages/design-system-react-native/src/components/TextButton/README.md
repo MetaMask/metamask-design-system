@@ -1,123 +1,226 @@
-# ButtonBase
+# TextButton
 
-The `ButtonBase` component is a foundational button component designed to provide flexibility and customization for various button styles and use cases. It integrates animations, icons, and loading states, allowing developers to create versatile buttons for React Native applications.
+Contextual inline link or button
+
+---
 
 ## Props
 
-### `children`
+### `children` (Required)
 
-Content to display inside the button.
+The content to be rendered within the `TextButton`.
 
-| **Type**          | **Required** | **Default** |
-| ----------------- | ------------ | ----------- |
-| `React.ReactNode` | Yes          | `undefined` |
+| TYPE     | REQUIRED | DEFAULT |
+| :------- | :------- | :------ |
+| `string` | Yes      | `N/A`   |
 
-### `size`
+---
 
-Defines the size of the button.
+### `textProps`
 
-| **Type**     | **Required** | **Default**     |
-| ------------ | ------------ | --------------- |
-| `ButtonSize` | No           | `ButtonSize.Lg` |
+Optional props to be passed to the `Text` component when the `children` is a string.
+
+| TYPE                                   | REQUIRED | DEFAULT                                                          |
+| :------------------------------------- | :------- | :--------------------------------------------------------------- |
+| `Omit<Partial<TextProps>, 'children'>` | No       | `{ variant: BodyMd, fontWeight: Medium, color: PrimaryDefault }` |
+
+---
 
 ### `isLoading`
 
-Indicates whether the button is in a loading state. If `true`, a spinner is displayed, and the button's content is hidden.
+Optional prop that, when `true`, shows a loading spinner.
 
-| **Type**  | **Required** | **Default** |
-| --------- | ------------ | ----------- |
-| `boolean` | No           | `false`     |
+| TYPE      | REQUIRED | DEFAULT |
+| :-------- | :------- | :------ |
+| `boolean` | No       | `false` |
+
+---
 
 ### `loadingText`
 
-Text to display alongside the spinner when the button is loading.
+Optional text to display when the button is in the loading state.
 
-| **Type** | **Required** | **Default** |
-| -------- | ------------ | ----------- |
-| `string` | No           | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| :------- | :------- | :---------- |
+| `string` | No       | `"Loading"` |
 
-### `isDisabled`
+---
 
-Disables the button, preventing interaction.
+### `spinnerProps`
 
-| **Type**  | **Required** | **Default** |
-| --------- | ------------ | ----------- |
-| `boolean` | No           | `false`     |
+Optional props to customize the appearance of the spinner.
+
+| TYPE                    | REQUIRED | DEFAULT                  |
+| :---------------------- | :------- | :----------------------- |
+| `Partial<SpinnerProps>` | No       | `{ color: IconDefault }` |
+
+---
 
 ### `startIconName`
 
-Name of the icon to display at the start of the button.
+Optional prop to specify an icon to show at the start of the button.
 
-| **Type** | **Required** | **Default** |
-| -------- | ------------ | ----------- |
-| `string` | No           | `undefined` |
+| TYPE       | REQUIRED | DEFAULT |
+| :--------- | :------- | :------ |
+| `IconName` | No       | `null`  |
 
-### `endIconName`
+---
 
-Name of the icon to display at the end of the button.
+### `startIconProps`
 
-| **Type** | **Required** | **Default** |
-| -------- | ------------ | ----------- |
-| `string` | No           | `undefined` |
+Optional props to pass additional properties to the start icon.
+
+| TYPE                 | REQUIRED | DEFAULT                              |
+| :------------------- | :------- | :----------------------------------- |
+| `Partial<IconProps>` | No       | `{ size: Sm, testID: 'start-icon' }` |
+
+---
 
 ### `startAccessory`
 
-Custom accessory to render at the start of the button.
+Optional prop for a custom element to show at the start of the button.
 
-| **Type**          | **Required** | **Default** |
-| ----------------- | ------------ | ----------- |
-| `React.ReactNode` | No           | `undefined` |
+| TYPE        | REQUIRED | DEFAULT |
+| :---------- | :------- | :------ |
+| `ReactNode` | No       | `null`  |
+
+---
+
+### `endIconName`
+
+Optional prop to specify an icon to show at the end of the button.
+
+| TYPE       | REQUIRED | DEFAULT |
+| :--------- | :------- | :------ |
+| `IconName` | No       | `null`  |
+
+---
+
+### `endIconProps`
+
+Optional props to pass additional properties to the end icon.
+
+| TYPE                 | REQUIRED | DEFAULT                            |
+| :------------------- | :------- | :--------------------------------- |
+| `Partial<IconProps>` | No       | `{ size: Sm, testID: 'end-icon' }` |
+
+---
 
 ### `endAccessory`
 
-Custom accessory to render at the end of the button.
+Optional prop for a custom element to show at the end of the button.
 
-| **Type**          | **Required** | **Default** |
-| ----------------- | ------------ | ----------- |
-| `React.ReactNode` | No           | `undefined` |
+| TYPE        | REQUIRED | DEFAULT |
+| :---------- | :------- | :------ |
+| `ReactNode` | No       | `null`  |
+
+---
+
+### `isDisabled`
+
+Optional prop that, when `true`, disables the button.
+
+| TYPE      | REQUIRED | DEFAULT |
+| :-------- | :------- | :------ |
+| `boolean` | No       | `false` |
+
+---
+
+### `isInverse`
+
+Optional prop to show the inverse state of the button, typically used for buttons on colored backgrounds.
+
+| TYPE      | REQUIRED | DEFAULT |
+| :-------- | :------- | :------ |
+| `boolean` | No       | `false` |
+
+---
 
 ### `twClassName`
 
-TailwindCSS class names to apply custom styling.
+Optional prop to add `twrnc` overriding class names.
 
-| **Type** | **Required** | **Default** |
-| -------- | ------------ | ----------- |
-| `string` | No           | `undefined` |
+| TYPE     | REQUIRED | DEFAULT |
+| :------- | :------- | :------ |
+| `string` | No       | `''`    |
+
+---
 
 ### `style`
 
-Custom styles to apply to the button.
+Optional prop to control the style.
 
-| **Type**               | **Required** | **Default** |
-| ---------------------- | ------------ | ----------- |
-| `StyleProp<ViewStyle>` | No           | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT |
+| :--------------------- | :------- | :------ |
+| `StyleProp<ViewStyle>` | No       | `null`  |
+
+---
 
 ## Usage
 
+### Basic Usage
+
 ```tsx
 import React from 'react';
-import ButtonBase from './ButtonBase';
+import TextButton from '@metamask/design-system-react-native';
 
-const App = () => {
-  return (
-    <ButtonBase
-      size="lg"
-      isLoading={false}
-      loadingText="Loading..."
-      startIconName="add"
-      endIconName="check"
-      onPress={() => console.log('Button pressed!')}
-    >
-      Click Me
-    </ButtonBase>
-  );
-};
-
-export default App;
+<TextButton onPress={() => console.log('Pressed!')}>Click Me</TextButton>;
 ```
 
-## Notes
+---
 
-- `ButtonBase` supports animations via the `ButtonAnimated` component.
-- For consistent styling, use TailwindCSS class names with the `twClassName` prop.
-- Loading and disabled states are handled automatically to improve UX.
+### Button with Icon
+
+```tsx
+<TextButton startIconName="ArrowLeft">Go Back</TextButton>
+```
+
+---
+
+### Button with Spinner
+
+```tsx
+<TextButton isLoading>Loading...</TextButton>
+```
+
+---
+
+### Customizing the Spinner
+
+```tsx
+<TextButton
+  isLoading
+  spinnerProps={{
+    color: IconColor.PrimaryDefault,
+  }}
+>
+  Please wait
+</TextButton>
+```
+
+---
+
+### Accessibility
+
+- Use the `accessibilityLabel` prop to provide meaningful labels for assistive technologies.
+- Ensure `children` describes the button's purpose or action.
+
+---
+
+### Notes
+
+- `TextButton` uses the `Text` component as its base to ensure proper inline rendering with other text elements.
+- Custom alignment logic is applied to ensure consistent layout of icons and spinners.
+- Use `isLoading` to disable user interactions during a loading state.
+
+---
+
+## Contributing
+
+1. Add tests for new features.
+2. Update this README for any changes to the API.
+3. Follow the design system's coding guidelines.
+
+---
+
+For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
