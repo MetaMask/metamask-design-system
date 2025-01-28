@@ -108,11 +108,11 @@ export const isDisabled: Story = {
 export const InlineWithText: Story = {
   render: () => (
     <Text>
-      Test Text
+      Pre TextButton text
       <TextButton startIconName={IconName.Add} endIconName={IconName.AddSquare}>
         Text Button
       </TextButton>
-      Test Text
+      Post TextButton text
     </Text>
   ),
 };

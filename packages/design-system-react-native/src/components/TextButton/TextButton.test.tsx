@@ -2,6 +2,7 @@ import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
 import { IconName } from '../Icon';
+import Text, { TextVariant } from '../Text';
 import TextButton from './TextButton';
 import {
   generateTextButtonContainerClassNames,
@@ -97,64 +98,248 @@ describe('TextButton', () => {
       expect(classNames).toContain('text-primary-defaultPressed underline');
     });
   });
-  describe('TextButton component', () => {
-    it('renders correctly with default props', () => {
-      const { getByTestId } = render(<TextButton>Default Button</TextButton>);
-      expect(getByTestId('button-primary')).not.toBeNull();
+  describe('TextButton Component', () => {
+    it('renders default state', () => {
+      const { getByTestId, queryByTestId } = render(
+        <TextButton>Default Text</TextButton>,
+      );
+
+      // Checks for presence of the main wrapper
+      const textButton = getByTestId('text-button');
+      expect(textButton).not.toBeNull();
+
+      // Should show children text
+      expect(textButton.props.children).not.toBeNull();
+
+      // Spinner should not be present
+      expect(queryByTestId('spinner')).toBeNull();
+
+      // No icons
+      expect(queryByTestId('icon')).toBeNull();
     });
 
-    it('shows a spinner when `isLoading` is true', () => {
-      const { getByTestId } = render(
+    it('renders with loading state', () => {
+      const { getByTestId, queryByText } = render(
         <TextButton isLoading loadingText="Loading...">
-          Default Button
+          Default Text
         </TextButton>,
       );
+      // Should display spinner
+      const spinner = getByTestId('spinner');
+      expect(spinner).not.toBeNull();
+      expect(queryByText('Loading...')).not.toBeNull();
 
-      expect(getByTestId('spinner-container')).toBeDefined();
+      // Should not show children text
+      expect(queryByText('Default Text')).toBeNull();
     });
 
-    it('renders start and end icons correctly', () => {
-      const { getByTestId } = render(
+    it('renders custom spinner props', () => {
+      const { getByTestId, queryByText } = render(
         <TextButton
-          startIconName={IconName.Add}
-          endIconName={IconName.ArrowRight}
+          isLoading
+          spinnerProps={{ loadingText: 'Custom Spinner Text' }}
         >
-          Button with Icons
+          Children
         </TextButton>,
       );
 
-      expect(getByTestId('content-container')).toBeDefined();
+      const spinner = getByTestId('spinner');
+      expect(spinner).not.toBeNull();
+      // Checking that custom spinner text is present
+      expect(queryByText('Custom Spinner Text')).not.toBeNull();
     });
 
-    it('triggers onPress when clicked', () => {
+    it('calls onPress when not disabled or loading', () => {
       const onPressMock = jest.fn();
-      const { getByText } = render(
-        <TextButton onPress={onPressMock}>Press Me</TextButton>,
+      const { getByTestId } = render(
+        <TextButton onPress={onPressMock}>Pressable</TextButton>,
       );
 
-      const button = getByText('Press Me');
-      fireEvent.press(button);
+      fireEvent.press(getByTestId('text-button'));
       expect(onPressMock).toHaveBeenCalledTimes(1);
     });
 
-    it('handles press in and out states', () => {
-      const onPressInMock = jest.fn();
-      const onPressOutMock = jest.fn();
-      const { getByText } = render(
-        <TextButton onPressIn={onPressInMock} onPressOut={onPressOutMock}>
-          Press Me
+    it('does NOT call onPress when disabled', () => {
+      const onPressMock = jest.fn();
+      const { getByTestId } = render(
+        <TextButton isDisabled onPress={onPressMock}>
+          Disabled
         </TextButton>,
       );
 
-      const button = getByText('Press Me');
+      fireEvent.press(getByTestId('text-button'));
+      expect(onPressMock).not.toHaveBeenCalled();
+    });
 
-      // Simulate press in
-      fireEvent(button, 'pressIn');
+    it('does NOT call onPress when loading', () => {
+      const onPressMock = jest.fn();
+      const { getByTestId } = render(
+        <TextButton isLoading onPress={onPressMock}>
+          Loading
+        </TextButton>,
+      );
+
+      fireEvent.press(getByTestId('text-button'));
+      expect(onPressMock).not.toHaveBeenCalled();
+    });
+
+    it('renders start icon when provided', () => {
+      const { getAllByTestId, getByText } = render(
+        <TextButton startIconName={IconName.Add}>With Start Icon</TextButton>,
+      );
+
+      const icons = getAllByTestId('start-icon');
+      expect(icons).toHaveLength(1);
+
+      // Children should still render
+      expect(getByText('With Start Icon')).not.toBeNull();
+    });
+
+    it('renders end icon when provided', () => {
+      const { getAllByTestId } = render(
+        <TextButton endIconName={IconName.AddSquare}>With End Icon</TextButton>,
+      );
+
+      const icons = getAllByTestId('end-icon');
+      expect(icons).toHaveLength(1);
+    });
+
+    it('renders start and end icons together', () => {
+      const { getAllByTestId, getByText } = render(
+        <TextButton
+          startIconName={IconName.Add}
+          endIconName={IconName.AddSquare}
+        >
+          Start and End Icon
+        </TextButton>,
+      );
+
+      const startIcons = getAllByTestId('start-icon');
+      expect(startIcons).toHaveLength(1);
+      const endIcons = getAllByTestId('end-icon');
+      expect(endIcons).toHaveLength(1);
+
+      expect(getByText('Start and End Icon')).not.toBeNull();
+    });
+
+    it('renders start accessory if provided', () => {
+      const StartAccessory = (
+        <Text testID="start-accessory">Start Accessory</Text>
+      );
+      const { getByTestId } = render(
+        <TextButton startAccessory={StartAccessory}>
+          Has Start Accessory
+        </TextButton>,
+      );
+
+      expect(getByTestId('start-accessory')).not.toBeNull();
+    });
+
+    it('renders end accessory if provided', () => {
+      const EndAccessory = <Text testID="end-accessory">End Accessory</Text>;
+      const { getByTestId } = render(
+        <TextButton endAccessory={EndAccessory}>Has End Accessory</TextButton>,
+      );
+
+      expect(getByTestId('end-accessory')).not.toBeNull();
+    });
+
+    it('does not call onPress if isPressed is set via internal state while disabled', () => {
+      // This tests pressing in and out transitions, but disabled means no call
+      const onPressMock = jest.fn();
+      const { getByTestId } = render(
+        <TextButton isDisabled onPress={onPressMock}>
+          Press me
+        </TextButton>,
+      );
+      const textButton = getByTestId('text-button');
+
+      fireEvent(textButton, 'onPressIn');
+      fireEvent(textButton, 'onPressOut');
+      fireEvent.press(textButton);
+
+      expect(onPressMock).not.toHaveBeenCalled();
+    });
+
+    it('calls onPressIn/onPressOut if not disabled or loading', () => {
+      const onPressInMock = jest.fn();
+      const onPressOutMock = jest.fn();
+
+      const { getByTestId } = render(
+        <TextButton onPressIn={onPressInMock} onPressOut={onPressOutMock}>
+          Events
+        </TextButton>,
+      );
+
+      const textButton = getByTestId('text-button');
+
+      fireEvent(textButton, 'onPressIn');
       expect(onPressInMock).toHaveBeenCalledTimes(1);
 
-      // Simulate press out
-      fireEvent(button, 'pressOut');
+      fireEvent(textButton, 'onPressOut');
       expect(onPressOutMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('calls onLongPress if not disabled or loading', () => {
+      const onLongPressMock = jest.fn();
+      const { getByTestId } = render(
+        <TextButton onLongPress={onLongPressMock}>Long Press</TextButton>,
+      );
+
+      const textButton = getByTestId('text-button');
+
+      fireEvent(textButton, 'onLongPress');
+      expect(onLongPressMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not call onLongPress if disabled or loading', () => {
+      const onLongPressMock = jest.fn();
+
+      const { getByTestId, rerender } = render(
+        <TextButton isDisabled onLongPress={onLongPressMock}>
+          Disabled
+        </TextButton>,
+      );
+
+      const textButton = getByTestId('text-button');
+      fireEvent(textButton, 'onLongPress');
+      expect(onLongPressMock).not.toHaveBeenCalled();
+
+      rerender(
+        <TextButton isLoading onLongPress={onLongPressMock}>
+          Loading
+        </TextButton>,
+      );
+
+      fireEvent(textButton, 'onLongPress');
+      expect(onLongPressMock).not.toHaveBeenCalled();
+    });
+
+    it('merges custom textProps', () => {
+      const { getByText } = render(
+        <TextButton
+          textProps={{
+            twClassName: 'text-error-default',
+            variant: TextVariant.DisplayMd,
+          }}
+        >
+          Custom Text Props
+        </TextButton>,
+      );
+
+      // Just check if text is rendered. The style merging is tested by snapshot or style mocking.
+      expect(getByText('Custom Text Props')).not.toBeNull();
+    });
+
+    it('merges style prop on container', () => {
+      // Provide a style prop to verify it merges with the container
+      const { getByTestId } = render(
+        <TextButton style={{ marginTop: 10 }}>Styled Container</TextButton>,
+      );
+
+      const textButton = getByTestId('text-button');
+      const styleJson = JSON.stringify(textButton.props.style);
+      expect(styleJson).toContain('"marginTop":10');
     });
   });
 });

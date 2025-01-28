@@ -171,23 +171,21 @@ const TextButton = ({
     Number(finalEndIconSize) + marginsBetweenIconAndText;
 
   return (
-    <Text
-      onPress={onPressHandler}
-      onPressIn={onPressInHandler}
-      onPressOut={onPressOutHandler}
-      onLongPress={onLongPressHandler}
-      accessible
-      accessibilityRole="button"
-      accessibilityLabel={accessibilityLabel}
-      style={[tw`${twContainerClassNames}`, style]}
-      testID="text-button"
-      suppressHighlighting
-      {...props}
-    >
-      {finalStartIconName && (
-        <Text style={{ display: 'none', marginLeft: 0 }}> </Text>
-      )}
-      <Text>
+    <Text>
+      {finalStartIconName && <Text style={tw`hidden`}> </Text>}
+      <Text
+        onPress={onPressHandler}
+        onPressIn={onPressInHandler}
+        onPressOut={onPressOutHandler}
+        onLongPress={onLongPressHandler}
+        accessible
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel}
+        style={[tw`${twContainerClassNames}`, style]}
+        testID="text-button"
+        suppressHighlighting
+        {...props}
+      >
         {isLoading ? (
           <Spinner {...finalSpinnerProps} />
         ) : (
@@ -195,7 +193,7 @@ const TextButton = ({
             {finalStartIconName ? (
               // This additional View is needed, otherwise things are rendered
               // VERY funkily
-              <View>
+              <View style={tw`h-[${componentHeight}px]`}>
                 <View
                   style={tw`
                     ${twContainerClassNames} 
@@ -214,7 +212,7 @@ const TextButton = ({
             {finalEndIconName ? (
               // This additional View is needed, otherwise things are rendered
               // VERY funkily
-              <View>
+              <View style={tw`h-[${componentHeight}px]`}>
                 <View
                   style={tw`
                     ${twContainerClassNames} 
@@ -227,14 +225,12 @@ const TextButton = ({
                 </View>
               </View>
             ) : (
-              startAccessory
+              endAccessory
             )}
           </>
         )}
       </Text>
-      {finalEndIconName && (
-        <Text style={{ display: 'none', marginLeft: 0 }}> </Text>
-      )}{' '}
+      {finalEndIconName && <Text style={tw`hidden`}> </Text>}
     </Text>
   );
 };
