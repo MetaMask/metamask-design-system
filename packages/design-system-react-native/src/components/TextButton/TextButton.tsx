@@ -4,7 +4,6 @@ import React, { useMemo, useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 import { View } from 'react-native';
 
-import TextOrChildren from '../../primitives/TextOrChildren/TextOrChildren';
 import type { SpinnerProps } from '../../temp-components/Spinner';
 import Spinner from '../../temp-components/Spinner';
 import type { IconProps, IconColor } from '../Icon';
@@ -44,6 +43,8 @@ const TextButton = ({
 }: TextButtonProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
+
+  // Styling calculation for state changes
   const twContainerClassNames = useMemo(() => {
     return generateTextButtonContainerClassNames({
       isPressed,
@@ -60,45 +61,34 @@ const TextButton = ({
     })}`;
   }, [isPressed, isInverse, isLoading, textProps]);
 
-  const finalVariant =
-    textProps?.variant || DEFAULT_TEXTBUTTON_PROPS.textProps.variant;
-
-  const { lineHeight } = tw`text-${finalVariant as string}`;
-
-  const finalStartIconName = startIconName ?? startIconProps?.name;
-  const startIconSize =
-    startIconProps?.size || DEFAULT_TEXTBUTTON_PROPS.startIconProps.size;
-  const containsStartIcon = startIconName || startIconProps;
+  // Merging default settings for Icons with passed in props
   const finalStartIconProps: Partial<IconProps> = {
     ...DEFAULT_TEXTBUTTON_PROPS.startIconProps,
     ...startIconProps,
     twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };
+  const finalStartIconName = startIconName ?? startIconProps?.name;
 
-  const finalEndIconName = endIconName ?? endIconProps?.name;
-  const endIconSize =
-    endIconProps?.size || DEFAULT_TEXTBUTTON_PROPS.endIconProps.size;
-  const containsEndIcon = endIconName || endIconProps;
   const finalEndIconProps: Partial<IconProps> = {
     ...DEFAULT_TEXTBUTTON_PROPS.endIconProps,
     ...endIconProps,
     twClassName: `${twTextClassNames} ${endIconProps?.twClassName ?? ''}`,
   };
+  const finalEndIconName = endIconName ?? endIconProps?.name;
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
     ...DEFAULT_TEXTBUTTON_PROPS.textProps,
     ...textProps,
-    twClassName: `ml-[${containsStartIcon ? Number(startIconSize) : 0}px] mr-[${
-      containsEndIcon ? Number(endIconSize) : 0
-    }px] ${twTextClassNames} ${textProps?.twClassName ?? ''}`,
+    twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
   };
 
+  // Merging spinner settings for Icons with passed in props
   const finalSpinnerProps: SpinnerProps = {
     ...DEFAULT_TEXTBUTTON_PROPS.spinnerProps,
     loadingText,
     color: twTextClassNames as IconColor,
     loadingTextProps: {
-      twClassName: twTextClassNames,
+      twClassName: `${twTextClassNames} mt-[2.5px]`,
     },
     ...spinnerProps,
   };
@@ -128,36 +118,91 @@ const TextButton = ({
     }
   };
 
+  /**
+   * Design Requirements
+   * TextButton needs to be able to be placed inline with other Texts along with
+   * accompanying icons.
+   *
+   * Limitations
+   * React Native renders Texts and components nested inside Texts very differently.
+   * In order to fulfil design requirements
+   * - TextButton needs to be built using Text wrapping the component to ensure
+   * when placed in line with other Texts, it can be properly displayed inline
+   * with other Texts.
+   * - Due to React Native Texts calculating the layout of nested components
+   * differently, there needs to be a few styling hacks applied below
+   */
+
+  // Get the line height of the text, which is also the height of the component
+  const finalVariant =
+    textProps?.variant || DEFAULT_TEXTBUTTON_PROPS.textProps.variant;
+  const { lineHeight } = tw`text-${finalVariant as string}`;
+  const componentHeight = Number(lineHeight);
+
+  // Due to React Native rendering Views slightly above Texts, any non-texts
+  // need to be moved down
+  const nonTextOffSet = 2.5;
+
+  // Get the final sizes of Icons to help with manual alignments
+  const finalStartIconSize =
+    startIconProps?.size || DEFAULT_TEXTBUTTON_PROPS.startIconProps.size;
+  const finalEndIconSize =
+    endIconProps?.size || DEFAULT_TEXTBUTTON_PROPS.endIconProps.size;
+
+  // Offsets to vertically center the Icon
+  const finalStartIconOffset =
+    (Number(lineHeight) - Number(finalStartIconSize)) / 2;
+  const finalEndIconOffset =
+    (Number(lineHeight) - Number(finalEndIconSize)) / 2;
+
+  /**
+   * Due to Texts restricting nested components to manipulating layout with
+   * margins/paddings, we needed to add Nested Views in order to properly add
+   * additional margins/paddings. However, this causes the Text component to
+   * somehow not include the Icons as part of the calculation for displaying
+   * a change in background color onPress. Because of that, we need to mimic
+   * the behavior on the Icon wrappers by baking the margins into the Icon
+   * wrappers in order to display the background change properly
+   */
+  const marginsBetweenIconAndText = 4;
+  const startIconWrapperWidth =
+    Number(finalStartIconSize) + marginsBetweenIconAndText;
+  const endIconWrapperWidth =
+    Number(finalEndIconSize) + marginsBetweenIconAndText;
+
   return (
-    <Text>
-      {containsStartIcon && (
+    <Text
+      onPress={onPressHandler}
+      onPressIn={onPressInHandler}
+      onPressOut={onPressOutHandler}
+      onLongPress={onLongPressHandler}
+      accessible
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel}
+      style={[tw`${twContainerClassNames}`, style]}
+      testID="text-button"
+      suppressHighlighting
+      {...props}
+    >
+      {finalStartIconName && (
         <Text style={{ display: 'none', marginLeft: 0 }}> </Text>
       )}
-      <Text
-        onPress={onPressHandler}
-        onPressIn={onPressInHandler}
-        onPressOut={onPressOutHandler}
-        onLongPress={onLongPressHandler}
-        accessible
-        accessibilityRole="button"
-        accessibilityLabel={accessibilityLabel}
-        style={[tw`${twContainerClassNames}`, style]}
-        testID="text-button"
-        suppressHighlighting
-        {...props}
-      >
+      <Text>
         {isLoading ? (
           <Spinner {...finalSpinnerProps} />
         ) : (
           <>
             {finalStartIconName ? (
-              <View style={tw`h-[${Number(lineHeight)}px]`}>
+              // This additional View is needed, otherwise things are rendered
+              // VERY funkily
+              <View>
                 <View
-                  style={tw`items-start mt-[2.5px] pt-[${
-                    (Number(lineHeight) - Number(startIconSize)) / 2
-                  }px] ${twContainerClassNames} h-[${Number(
-                    lineHeight,
-                  )}px] w-[${Number(startIconSize) + 4}px]`}
+                  style={tw`
+                    ${twContainerClassNames} 
+                    items-start mt-[${nonTextOffSet}px] 
+                    pt-[${finalStartIconOffset}px] 
+                    h-[${componentHeight}px] 
+                    w-[${startIconWrapperWidth}px]`}
                 >
                   <Icon name={finalStartIconName} {...finalStartIconProps} />
                 </View>
@@ -165,17 +210,18 @@ const TextButton = ({
             ) : (
               startAccessory
             )}
-            <TextOrChildren textProps={finalTextProps}>
-              {children}
-            </TextOrChildren>
+            <Text {...finalTextProps}>{children}</Text>
             {finalEndIconName ? (
-              <View style={tw`h-[${Number(lineHeight)}px]`}>
+              // This additional View is needed, otherwise things are rendered
+              // VERY funkily
+              <View>
                 <View
-                  style={tw`items-end mt-[2.5px] pt-[${
-                    (Number(lineHeight) - Number(endIconSize)) / 2
-                  }px] ${twContainerClassNames} h-[${Number(
-                    lineHeight,
-                  )}px] w-[${Number(endIconSize) + 4}px]`}
+                  style={tw`
+                    ${twContainerClassNames} 
+                    items-end 
+                    mt-[${nonTextOffSet}px] 
+                    pt-[${finalEndIconOffset}px] 
+                    h-[${componentHeight}px] w-[${endIconWrapperWidth}px]`}
                 >
                   <Icon name={finalEndIconName} {...finalEndIconProps} />
                 </View>
@@ -186,7 +232,7 @@ const TextButton = ({
           </>
         )}
       </Text>
-      {containsEndIcon && (
+      {finalEndIconName && (
         <Text style={{ display: 'none', marginLeft: 0 }}> </Text>
       )}{' '}
     </Text>

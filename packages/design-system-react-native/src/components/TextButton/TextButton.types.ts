@@ -11,7 +11,7 @@ export type TextButtonProps = {
   /**
    * Required prop for the content to be rendered within the TextButton
    */
-  children: React.ReactNode | string;
+  children: string;
   /**
    * Optional props to be passed to the Text component when children is a string
    */
