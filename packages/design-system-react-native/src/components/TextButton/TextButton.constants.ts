@@ -3,9 +3,22 @@ import { TextColor, TextVariant, FontWeight } from '../Text';
 import type { TextButtonProps } from './TextButton.types';
 
 // Defaults
-export const DEFAULT_TEXTBUTTON_PROPS: Partial<TextButtonProps> = {
+export const DEFAULT_TEXTBUTTON_PROPS: Required<
+  Pick<
+    TextButtonProps,
+    | 'textProps'
+    | 'isLoading'
+    | 'loadingText'
+    | 'spinnerProps'
+    | 'startIconProps'
+    | 'endIconProps'
+    | 'onPress'
+    | 'isDisabled'
+    | 'isInverse'
+  >
+> = {
   textProps: {
-    variant: TextVariant.DisplayMd,
+    variant: TextVariant.BodyMd,
     fontWeight: FontWeight.Medium,
     color: TextColor.PrimaryDefault,
   },
@@ -26,4 +39,5 @@ export const DEFAULT_TEXTBUTTON_PROPS: Partial<TextButtonProps> = {
     console.log('Button pressed');
   },
   isDisabled: false,
+  isInverse: false,
 };

@@ -4,7 +4,6 @@ import { View } from 'react-native';
 
 import { IconName } from '../Icon';
 import Text from '../Text/Text';
-import { TextVariant } from '../Text/Text.types';
 import TextButton from './TextButton';
 import { DEFAULT_TEXTBUTTON_PROPS } from './TextButton.constants';
 import type { TextButtonProps } from './TextButton.types';
@@ -31,9 +30,6 @@ const meta: Meta<TextButtonProps> = {
       options: IconName,
     },
     isDisabled: {
-      control: 'boolean',
-    },
-    isDanger: {
       control: 'boolean',
     },
     isInverse: {
@@ -89,13 +85,7 @@ export const IsLoading: Story = {
 
 export const WithStartAccessory: Story = {
   render: () => (
-    <Text variant={TextVariant.DisplayMd}>
-      Test Text
-      <TextButton startIconName={IconName.Add} endIconName={IconName.AddSquare}>
-        Text Button
-      </TextButton>
-      Test Text
-    </Text>
+    <TextButton startIconName={IconName.Add}>TextButton</TextButton>
   ),
 };
 
@@ -113,4 +103,16 @@ export const WithStartAndEndAccessory: Story = {
 
 export const isDisabled: Story = {
   render: () => <TextButton isDisabled>TextButton</TextButton>,
+};
+
+export const InlineWithText: Story = {
+  render: () => (
+    <Text>
+      Test Text
+      <TextButton startIconName={IconName.Add} endIconName={IconName.AddSquare}>
+        Text Button
+      </TextButton>
+      Test Text
+    </Text>
+  ),
 };

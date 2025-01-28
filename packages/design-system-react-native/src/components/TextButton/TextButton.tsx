@@ -31,7 +31,6 @@ const TextButton = ({
   endIconProps,
   endAccessory,
   isDisabled = DEFAULT_TEXTBUTTON_PROPS.isDisabled,
-  isDanger = DEFAULT_TEXTBUTTON_PROPS.isDanger,
   isInverse = DEFAULT_TEXTBUTTON_PROPS.isInverse,
   onPress,
   onPressIn,
@@ -48,47 +47,51 @@ const TextButton = ({
   const twContainerClassNames = useMemo(() => {
     return generateTextButtonContainerClassNames({
       isPressed,
-      isDanger,
-      isInverse,
       isLoading,
       twClassName,
     });
-  }, [isPressed, isDanger, isInverse, isLoading, twClassName]);
+  }, [isPressed, isLoading, twClassName]);
 
   const twTextClassNames = useMemo(() => {
     return `${generateTextButtonTextClassNames({
       isPressed,
-      isDanger,
       isInverse,
       isLoading,
     })}`;
-  }, [isPressed, isDanger, isInverse, isLoading, textProps]);
+  }, [isPressed, isInverse, isLoading, textProps]);
 
-  const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
-    ...DEFAULT_TEXTBUTTON_PROPS.textProps,
-    ...textProps,
-    twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
-  };
+  const finalVariant =
+    textProps?.variant || DEFAULT_TEXTBUTTON_PROPS.textProps.variant;
 
-  const { lineHeight } = tw`text-${finalTextProps.variant as string}`;
+  const { lineHeight } = tw`text-${finalVariant as string}`;
 
   const finalStartIconName = startIconName ?? startIconProps?.name;
+  const startIconSize =
+    startIconProps?.size || DEFAULT_TEXTBUTTON_PROPS.startIconProps.size;
+  const containsStartIcon = startIconName || startIconProps;
   const finalStartIconProps: Partial<IconProps> = {
     ...DEFAULT_TEXTBUTTON_PROPS.startIconProps,
     ...startIconProps,
     twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };
-  const finalStartIconOffset =
-    (Number(lineHeight) - Number(finalStartIconProps.size)) / 2 + 2;
 
   const finalEndIconName = endIconName ?? endIconProps?.name;
+  const endIconSize =
+    endIconProps?.size || DEFAULT_TEXTBUTTON_PROPS.endIconProps.size;
+  const containsEndIcon = endIconName || endIconProps;
   const finalEndIconProps: Partial<IconProps> = {
     ...DEFAULT_TEXTBUTTON_PROPS.endIconProps,
     ...endIconProps,
     twClassName: `${twTextClassNames} ${endIconProps?.twClassName ?? ''}`,
   };
-  const finalEndIconOffset =
-    (Number(lineHeight) - Number(finalEndIconProps.size)) / 2 + 2;
+
+  const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
+    ...DEFAULT_TEXTBUTTON_PROPS.textProps,
+    ...textProps,
+    twClassName: `ml-[${containsStartIcon ? Number(startIconSize) : 0}px] mr-[${
+      containsEndIcon ? Number(endIconSize) : 0
+    }px] ${twTextClassNames} ${textProps?.twClassName ?? ''}`,
+  };
 
   const finalSpinnerProps: SpinnerProps = {
     ...DEFAULT_TEXTBUTTON_PROPS.spinnerProps,
@@ -126,56 +129,66 @@ const TextButton = ({
   };
 
   return (
-    <Text
-      onPress={onPressHandler}
-      onPressIn={onPressInHandler}
-      onPressOut={onPressOutHandler}
-      onLongPress={onLongPressHandler}
-      accessible
-      accessibilityRole="button"
-      accessibilityLabel={accessibilityLabel}
-      style={[tw`${twContainerClassNames}`, style]}
-      testID="text-button"
-      suppressHighlighting
-      {...props}
-    >
-      {isLoading ? (
-        <Spinner {...finalSpinnerProps} />
-      ) : (
-        <>
-          {finalStartIconName ? (
-            <View
-              style={{
-                height: Number(lineHeight),
-              }}
-            >
-              <Icon
-                name={finalStartIconName}
-                style={{ marginTop: finalStartIconOffset, marginRight: 4 }}
-                {...finalStartIconProps}
-              />
-            </View>
-          ) : (
-            startAccessory
-          )}
-          <TextOrChildren textProps={finalTextProps}>{children}</TextOrChildren>
-          {finalEndIconName ? (
-            <View
-              style={{
-                height: Number(lineHeight),
-              }}
-            >
-              <Icon
-                name={finalEndIconName}
-                style={{ marginTop: finalEndIconOffset, marginLeft: 4 }}
-                {...finalEndIconProps}
-              />
-            </View>
-          ) : (
-            endAccessory
-          )}
-        </>
+    <Text>
+      {containsStartIcon && (
+        <Text style={{ display: 'none', marginLeft: 0 }}> </Text>
       )}
+      <Text
+        onPress={onPressHandler}
+        onPressIn={onPressInHandler}
+        onPressOut={onPressOutHandler}
+        onLongPress={onLongPressHandler}
+        accessible
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel}
+        style={[tw`${twContainerClassNames}`, style]}
+        testID="text-button"
+        suppressHighlighting
+        {...props}
+      >
+        {isLoading ? (
+          <Spinner {...finalSpinnerProps} />
+        ) : (
+          <>
+            {finalStartIconName ? (
+              <View style={tw`h-[${Number(lineHeight)}px]`}>
+                <View
+                  style={tw`items-start mt-[2.5px] pt-[${
+                    (Number(lineHeight) - Number(startIconSize)) / 2
+                  }px] ${twContainerClassNames} h-[${Number(
+                    lineHeight,
+                  )}px] w-[${Number(startIconSize) + 4}px]`}
+                >
+                  <Icon name={finalStartIconName} {...finalStartIconProps} />
+                </View>
+              </View>
+            ) : (
+              startAccessory
+            )}
+            <TextOrChildren textProps={finalTextProps}>
+              {children}
+            </TextOrChildren>
+            {finalEndIconName ? (
+              <View style={tw`h-[${Number(lineHeight)}px]`}>
+                <View
+                  style={tw`items-end mt-[2.5px] pt-[${
+                    (Number(lineHeight) - Number(endIconSize)) / 2
+                  }px] ${twContainerClassNames} h-[${Number(
+                    lineHeight,
+                  )}px] w-[${Number(endIconSize) + 4}px]`}
+                >
+                  <Icon name={finalEndIconName} {...finalEndIconProps} />
+                </View>
+              </View>
+            ) : (
+              startAccessory
+            )}
+          </>
+        )}
+      </Text>
+      {containsEndIcon && (
+        <Text style={{ display: 'none', marginLeft: 0 }}> </Text>
+      )}{' '}
     </Text>
   );
 };

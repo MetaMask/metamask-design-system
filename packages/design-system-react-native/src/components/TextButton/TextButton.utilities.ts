@@ -4,41 +4,21 @@ import type { TextButtonProps } from './TextButton.types';
 
 export const generateTextButtonContainerClassNames = ({
   isPressed = false,
-  isDanger = false,
-  isInverse = false,
   isLoading = false,
   twClassName = '',
 }: Partial<TextButtonProps> & {
   isPressed?: boolean;
 }): string => {
-  let backgroundStyle;
-
   const isPressedOrLoading = isPressed || isLoading;
-
-  if (isInverse && isDanger) {
-    backgroundStyle = isPressedOrLoading
-      ? 'bg-background-defaultPressed'
-      : 'bg-background-default';
-  } else if (isDanger) {
-    backgroundStyle = isPressedOrLoading
-      ? 'bg-error-mutedPressed'
-      : 'bg-transparent';
-  } else if (isInverse) {
-    backgroundStyle = isPressedOrLoading
-      ? 'bg-background-pressed'
-      : 'bg-transparent';
-  } else {
-    backgroundStyle = isPressedOrLoading
-      ? 'bg-background-pressed'
-      : 'bg-transparent';
-  }
+  const backgroundStyle = isPressedOrLoading
+    ? 'bg-background-pressed'
+    : 'bg-transparent';
 
   return `${backgroundStyle} ${twClassName}`;
 };
 
 export const generateTextButtonTextClassNames = ({
   isPressed = false,
-  isDanger = false,
   isInverse = false,
   isLoading = false,
 }: Partial<TextButtonProps> & {
@@ -47,17 +27,7 @@ export const generateTextButtonTextClassNames = ({
   let textColor, textStyle;
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const isPressedOrLoading = isPressed || isLoading;
-  if (isInverse && isDanger) {
-    textColor = isPressedOrLoading
-      ? 'text-error-defaultPressed'
-      : 'text-error-default';
-    textStyle = 'no-underline';
-  } else if (isDanger) {
-    textColor = isPressedOrLoading
-      ? 'text-error-defaultPressed'
-      : 'text-error-default';
-    textStyle = isPressedOrLoading ? 'underline' : 'no-underline';
-  } else if (isInverse) {
+  if (isInverse) {
     textColor = 'text-primary-inverse';
     textStyle = 'underline';
   } else {
