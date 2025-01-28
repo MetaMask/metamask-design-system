@@ -137,7 +137,7 @@ To use a preview build for a package within a project, you can use one of these 
    ```json
    {
      "dependencies": {
-       "@metamask/design-system-react": "npm:@metamask-previews/design-system-react@0.0.0-preview.07ad19d"
+       "@metamask/design-tokens": "npm:@metamask-previews/design-tokens@0.0.0-preview.07ad19d"
      }
    }
    ```
@@ -151,7 +151,7 @@ To use a preview build for a package within a project, you can use one of these 
    ```json
    {
      "resolutions": {
-       "@metamask/design-system-react": "npm:@metamask-previews/design-system-react@0.0.0-preview.07ad19d"
+       "@metamask/design-tokens": "npm:@metamask-previews/design-tokens@0.0.0-preview.07ad19d"
      }
    }
    ```
@@ -161,7 +161,7 @@ To use a preview build for a package within a project, you can use one of these 
    ```json
    {
      "overrides": {
-       "@metamask/design-system-react": "npm:@metamask-previews/design-system-react@0.0.0-preview.07ad19d"
+       "@metamask/design-tokens": "npm:@metamask-previews/design-tokens@0.0.0-preview.07ad19d"
      }
    }
    ```
