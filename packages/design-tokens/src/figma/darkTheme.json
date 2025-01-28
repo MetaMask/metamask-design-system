@@ -1,19 +1,19 @@
 {
   "background": {
     "default": {
-      "value": "{grey.800}",
+      "value": "{grey.900}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For default neutral surface."
     },
     "alternative": {
-      "value": "{grey.900}",
+      "value": "{grey.1000}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For sunken neutral surface below background/default."
     },
     "muted": {
-      "value": "{grey.700}",
+      "value": "{grey.800}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For raised neutral surface above background/default."
