@@ -156,16 +156,6 @@ To use a preview build for a package within a project, you can use one of these 
    }
    ```
 
-   For NPM:
-
-   ```json
-   {
-     "overrides": {
-       "@metamask/design-tokens": "npm:@metamask-previews/design-tokens@0.0.0-preview.07ad19d"
-     }
-   }
-   ```
-
 After making either change, run `yarn install` or `npm install` to update your dependencies.
 
 4. Run `yarn install`.
