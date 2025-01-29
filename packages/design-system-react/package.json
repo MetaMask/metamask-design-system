@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@metamask/auto-changelog": "^3.4.4",
+    "@metamask/auto-changelog": "^4.1.0",
     "@metamask/design-system-tailwind-preset": "workspace:^",
     "@storybook/react": "^8.3.5",
     "@storybook/test": "^8.3.5",
