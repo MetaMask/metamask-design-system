@@ -29,3 +29,6 @@ export type { ButtonTertiaryProps } from './button-tertiary';
 
 export { Button, ButtonVariant } from './button';
 export type { ButtonProps } from './button';
+
+export { TextButton } from './text-button';
+export type { TextButtonProps } from './text-button';

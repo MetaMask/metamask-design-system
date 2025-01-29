@@ -1,0 +1,102 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as TextButtonStories from './TextButton.stories';
+
+# TextButton
+
+TextButton is used for text-only button actions without padding or background
+
+```tsx
+import { TextButton } from '@metamask/design-system-react';
+
+<TextButton onClick={() => {}}>Text Button</TextButton>;
+```
+
+<Canvas of={TextButtonStories.Default} />
+
+## Props
+
+### TextVariant
+
+TextButton supports different text variants through the `textVariant` prop:
+
+<Canvas of={TextButtonStories.TextVariantStory} />
+
+### AsChild
+
+TextButton can render as different elements using the `asChild` prop. Defaults to rendering as a `button` element.
+
+<Canvas of={TextButtonStories.AsChild} />
+
+```tsx
+<Text variant={TextVariant.BodySm}>
+    To learn more about web3, visit{' '}
+    <TextButton textVariant={TextVariant.BodySm} asChild>
+        <a href="https://metamask.io" target="_blank" rel="noopener noreferrer">MetaMask Learn</a>
+    </TextButton>
+</Text>
+
+<TextButton asChild endIconName={IconName.Arrow2UpRight}>
+    <a href="https://portfolio.metamask.io" target="_blank" rel="noopener noreferrer">
+        Portfolio
+    </a>
+</TextButton>
+```
+
+### IsInverse
+
+Use the inverse variant when the button needs to be displayed on a dark background.
+
+<Canvas of={TextButtonStories.IsInverse} />
+
+### StartIconName and EndIconName
+
+TextButton can display icons at the start and/or end of the content.
+
+#### StartIconName
+
+<Canvas of={TextButtonStories.StartIconName} />
+
+#### EndIconName
+
+<Canvas of={TextButtonStories.EndIconName} />
+
+### IsLoading
+
+TextButton can show a loading state with optional loading text.
+
+<Canvas of={TextButtonStories.IsLoading} />
+
+### IsDisabled
+
+TextButton can be disabled.
+
+<Canvas of={TextButtonStories.IsDisabled} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<TextButton className="my-4 mx-2">Button content</TextButton>
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+
+## Component API
+
+<Controls of={TextButtonStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
