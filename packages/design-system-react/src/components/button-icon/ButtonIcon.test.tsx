@@ -93,6 +93,7 @@ describe('ButtonIcon', () => {
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
+    expect(button).not.toHaveClass('hover:bg-hover', 'active:bg-pressed');
   });
 
   it('merges custom className with default styles', () => {

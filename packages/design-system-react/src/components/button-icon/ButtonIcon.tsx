@@ -26,6 +26,8 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
     },
     ref,
   ) => {
+    const isInteractive = !isDisabled;
+
     const mergedClassName = twMerge(
       // Base styles
       'p-0',
@@ -39,7 +41,9 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
       ],
       // Non-floating styles
       !isFloating && [
-        'rounded bg-transparent hover:bg-hover active:bg-pressed',
+        'rounded bg-transparent',
+        // Only apply hover/active styles when interactive
+        isInteractive && 'hover:bg-hover active:bg-pressed',
         !isInverse && 'text-icon-default',
         isInverse && 'text-background-default',
       ],
