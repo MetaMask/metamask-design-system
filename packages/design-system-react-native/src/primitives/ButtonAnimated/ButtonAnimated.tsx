@@ -40,7 +40,9 @@ const ButtonAnimated = ({
   };
 
   return (
-    <Animated.View style={scaleStyle}>
+    <Animated.View
+      style={[scaleStyle, { alignItems: 'center', justifyContent: 'center' }]}
+    >
       <Pressable
         onPressIn={onPressInHandler}
         onPressOut={onPressOutHandler}
