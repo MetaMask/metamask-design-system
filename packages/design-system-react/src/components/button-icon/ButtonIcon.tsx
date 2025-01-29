@@ -4,8 +4,8 @@ import { twMerge } from '../../utils/tw-merge';
 import { ButtonBase } from '../button-base';
 import { Icon } from '../icon';
 import {
-  BUTTON_ICON_SIZE_CLASSMAP,
-  BUTTON_ICON_SIZE_TO_ICON_SIZE_MAP,
+  BUTTON_ICON_SIZE_CLASS_MAP,
+  BUTTON_ICON_SIZE_TO_ICON_SIZE_CLASS_MAP,
 } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
 import { ButtonIconSize } from './ButtonIcon.types';
@@ -32,7 +32,7 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
       // Base styles
       'p-0',
       // Size styles
-      BUTTON_ICON_SIZE_CLASSMAP[size],
+      BUTTON_ICON_SIZE_CLASS_MAP[size],
       // Floating styles
       isFloating && [
         'rounded-full',
@@ -60,7 +60,7 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
       >
         <Icon
           name={iconName}
-          size={BUTTON_ICON_SIZE_TO_ICON_SIZE_MAP[size]}
+          size={BUTTON_ICON_SIZE_TO_ICON_SIZE_CLASS_MAP[size]}
           className={twMerge('text-inherit', iconProps?.className)}
           {...iconProps}
         />
