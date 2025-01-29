@@ -32,3 +32,6 @@ export type { ButtonProps } from './button';
 
 export { TextButton } from './text-button';
 export type { TextButtonProps } from './text-button';
+
+export { ButtonIcon } from './button-icon';
+export type { ButtonIconProps } from './button-icon';
