@@ -2,7 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { AVATAR_BASE_SIZE_DIMENSIONS } from './AvatarBase.constants';
+import { AVATAR_BASE_SIZE_CLASS_MAP } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
 import { AvatarBaseSize } from './AvatarBase.types';
 
@@ -21,7 +21,7 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
       'text-default uppercase font-medium',
       'overflow-hidden',
       // Size
-      AVATAR_BASE_SIZE_DIMENSIONS[size],
+      AVATAR_BASE_SIZE_CLASS_MAP[size],
       // Custom classes
       className,
     );

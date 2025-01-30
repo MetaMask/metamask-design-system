@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { AvatarBase } from './AvatarBase';
-import { AVATAR_BASE_SIZE_DIMENSIONS } from './AvatarBase.constants';
+import { AVATAR_BASE_SIZE_CLASS_MAP } from './AvatarBase.constants';
 import { AvatarBaseSize } from './AvatarBase.types';
 
 describe('AvatarBase', () => {
@@ -26,7 +26,7 @@ describe('AvatarBase', () => {
       <AvatarBase size={AvatarBaseSize.Xs}>A</AvatarBase>,
     );
 
-    Object.entries(AVATAR_BASE_SIZE_DIMENSIONS).forEach(([size, classes]) => {
+    Object.entries(AVATAR_BASE_SIZE_CLASS_MAP).forEach(([size, classes]) => {
       rerender(<AvatarBase size={size as AvatarBaseSize}>A</AvatarBase>);
       const avatar = screen.getByText('A');
       const classArray = classes.split(' ');
