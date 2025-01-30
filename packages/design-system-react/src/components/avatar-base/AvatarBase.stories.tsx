@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { Icon, IconName, IconSize, Text, TextVariant } from '..';
+import { Icon, IconName, IconSize, Text, TextVariant, TextColor } from '..';
 import { AvatarBase } from './AvatarBase';
 import { AvatarBaseSize, AvatarBaseShape } from './AvatarBase.types';
 import README from './README.mdx';
@@ -44,6 +44,11 @@ export default meta;
 type Story = StoryObj<typeof AvatarBase>;
 
 export const Default: Story = {
+  render: (args) => (
+    <AvatarBase {...args}>
+      <Text>{args.children}</Text>
+    </AvatarBase>
+  ),
   args: {
     children: 'A',
   },
@@ -107,7 +112,9 @@ export const Children: Story = {
   render: () => (
     <div className="flex gap-2 items-center">
       {/* Text */}
-      <AvatarBase>A</AvatarBase>
+      <AvatarBase>
+        <Text>A</Text>
+      </AvatarBase>
       {/* Image */}
       <AvatarBase>
         <img
@@ -118,25 +125,7 @@ export const Children: Story = {
       </AvatarBase>
       {/* Icon */}
       <AvatarBase>
-        <Icon
-          name={IconName.User}
-          size={IconSize.Sm}
-          className="text-inherit"
-        />
-      </AvatarBase>
-    </div>
-  ),
-};
-
-export const ClassName: Story = {
-  render: () => (
-    <div className="flex gap-2">
-      <AvatarBase className="bg-success-default text-success-inverse">
-        S
-      </AvatarBase>
-      <AvatarBase className="bg-error-default text-error-inverse">E</AvatarBase>
-      <AvatarBase className="bg-warning-default text-warning-inverse">
-        W
+        <Icon name={IconName.User} size={IconSize.Sm} />
       </AvatarBase>
     </div>
   ),
