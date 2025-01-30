@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { Icon, IconName, IconSize } from '..';
+import { Icon, IconName, IconSize, Text, TextVariant } from '..';
 import { AvatarBase } from './AvatarBase';
 import { AvatarBaseSize } from './AvatarBase.types';
 import README from './README.mdx';
@@ -46,11 +46,21 @@ export const Default: Story = {
 export const Size: Story = {
   render: () => (
     <div className="flex gap-2 items-center">
-      <AvatarBase size={AvatarBaseSize.Xs}>Xs</AvatarBase>
-      <AvatarBase size={AvatarBaseSize.Sm}>Sm</AvatarBase>
-      <AvatarBase size={AvatarBaseSize.Md}>Md</AvatarBase>
-      <AvatarBase size={AvatarBaseSize.Lg}>Lg</AvatarBase>
-      <AvatarBase size={AvatarBaseSize.Xl}>Xl</AvatarBase>
+      <AvatarBase size={AvatarBaseSize.Xs}>
+        <Text variant={TextVariant.BodyXs}>Xs</Text>
+      </AvatarBase>
+      <AvatarBase size={AvatarBaseSize.Sm}>
+        <Text variant={TextVariant.BodyXs}>Sm</Text>
+      </AvatarBase>
+      <AvatarBase size={AvatarBaseSize.Md}>
+        <Text variant={TextVariant.BodySm}>Md</Text>
+      </AvatarBase>
+      <AvatarBase size={AvatarBaseSize.Lg}>
+        <Text variant={TextVariant.BodyMd}>Lg</Text>
+      </AvatarBase>
+      <AvatarBase size={AvatarBaseSize.Xl}>
+        <Text variant={TextVariant.BodyMd}>Xl</Text>
+      </AvatarBase>
     </div>
   ),
 };

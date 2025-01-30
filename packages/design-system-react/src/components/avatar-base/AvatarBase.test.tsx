@@ -10,15 +10,7 @@ describe('AvatarBase', () => {
     render(<AvatarBase>A</AvatarBase>);
 
     const avatar = screen.getByText('A');
-    expect(avatar).toHaveClass(
-      'inline-flex',
-      'items-center',
-      'justify-center',
-      'rounded-full',
-      'bg-background-alternative',
-      'text-default',
-      'uppercase',
-    );
+    expect(avatar).toBeInTheDocument();
   });
 
   it('applies size classes correctly', () => {

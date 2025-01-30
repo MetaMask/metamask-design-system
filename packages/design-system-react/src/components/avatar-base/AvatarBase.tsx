@@ -17,8 +17,7 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
       // Base styles
       'inline-flex items-center justify-center',
       'rounded-full',
-      'bg-background-alternative',
-      'text-default uppercase font-medium',
+      'bg-alternative',
       'overflow-hidden',
       // Size
       AVATAR_BASE_SIZE_CLASS_MAP[size],
