@@ -23,6 +23,17 @@ export enum AvatarBaseSize {
   Xl = 'xl',
 }
 
+export enum AvatarBaseShape {
+  /**
+   * Circular shape with fully rounded corners
+   */
+  Circle = 'circle',
+  /**
+   * Square shape with slight rounded corners
+   */
+  Square = 'square',
+}
+
 export type AvatarBaseProps = ComponentProps<'div'> & {
   /**
    * Required prop for the content to be rendered within the AvatarBase
@@ -49,4 +60,9 @@ export type AvatarBaseProps = ComponentProps<'div'> & {
    * Should be used sparingly and only for dynamic styles that can't be achieved with className.
    */
   style?: React.CSSProperties;
+  /**
+   * Optional prop to control the shape of the AvatarBase
+   * @default AvatarBaseShape.Circle
+   */
+  shape?: AvatarBaseShape;
 };

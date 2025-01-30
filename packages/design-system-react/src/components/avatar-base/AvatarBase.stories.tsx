@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Icon, IconName, IconSize, Text, TextVariant } from '..';
 import { AvatarBase } from './AvatarBase';
-import { AvatarBaseSize } from './AvatarBase.types';
+import { AvatarBaseSize, AvatarBaseShape } from './AvatarBase.types';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarBase> = {
@@ -31,6 +31,12 @@ const meta: Meta<typeof AvatarBase> = {
       mapping: AvatarBaseSize,
       description: 'Optional prop to control the size of the AvatarBase',
     },
+    shape: {
+      control: 'select',
+      options: Object.keys(AvatarBaseShape),
+      mapping: AvatarBaseShape,
+      description: 'Optional prop to control the shape of the AvatarBase',
+    },
   },
 };
 
@@ -43,24 +49,56 @@ export const Default: Story = {
   },
 };
 
-export const Size: Story = {
+export const Shape: Story = {
   render: () => (
     <div className="flex gap-2 items-center">
-      <AvatarBase size={AvatarBaseSize.Xs}>
-        <Text variant={TextVariant.BodyXs}>Xs</Text>
+      <AvatarBase shape={AvatarBaseShape.Circle}>
+        <Text variant={TextVariant.BodySm}>C</Text>
       </AvatarBase>
-      <AvatarBase size={AvatarBaseSize.Sm}>
-        <Text variant={TextVariant.BodyXs}>Sm</Text>
+      <AvatarBase shape={AvatarBaseShape.Square}>
+        <Text variant={TextVariant.BodySm}>S</Text>
       </AvatarBase>
-      <AvatarBase size={AvatarBaseSize.Md}>
-        <Text variant={TextVariant.BodySm}>Md</Text>
-      </AvatarBase>
-      <AvatarBase size={AvatarBaseSize.Lg}>
-        <Text variant={TextVariant.BodyMd}>Lg</Text>
-      </AvatarBase>
-      <AvatarBase size={AvatarBaseSize.Xl}>
-        <Text variant={TextVariant.BodyMd}>Xl</Text>
-      </AvatarBase>
+    </div>
+  ),
+};
+
+export const Size: Story = {
+  render: () => (
+    <div className="flex flex-col gap-2">
+      <div className="flex gap-2 items-center">
+        <AvatarBase size={AvatarBaseSize.Xs}>
+          <Text variant={TextVariant.BodyXs}>Xs</Text>
+        </AvatarBase>
+        <AvatarBase size={AvatarBaseSize.Sm}>
+          <Text variant={TextVariant.BodyXs}>Sm</Text>
+        </AvatarBase>
+        <AvatarBase size={AvatarBaseSize.Md}>
+          <Text variant={TextVariant.BodySm}>Md</Text>
+        </AvatarBase>
+        <AvatarBase size={AvatarBaseSize.Lg}>
+          <Text variant={TextVariant.BodyMd}>Lg</Text>
+        </AvatarBase>
+        <AvatarBase size={AvatarBaseSize.Xl}>
+          <Text variant={TextVariant.BodyMd}>Xl</Text>
+        </AvatarBase>
+      </div>
+      <div className="flex gap-2 items-center">
+        <AvatarBase shape={AvatarBaseShape.Square} size={AvatarBaseSize.Xs}>
+          <Text variant={TextVariant.BodyXs}>Xs</Text>
+        </AvatarBase>
+        <AvatarBase shape={AvatarBaseShape.Square} size={AvatarBaseSize.Sm}>
+          <Text variant={TextVariant.BodyXs}>Sm</Text>
+        </AvatarBase>
+        <AvatarBase shape={AvatarBaseShape.Square} size={AvatarBaseSize.Md}>
+          <Text variant={TextVariant.BodySm}>Md</Text>
+        </AvatarBase>
+        <AvatarBase shape={AvatarBaseShape.Square} size={AvatarBaseSize.Lg}>
+          <Text variant={TextVariant.BodyMd}>Lg</Text>
+        </AvatarBase>
+        <AvatarBase shape={AvatarBaseShape.Square} size={AvatarBaseSize.Xl}>
+          <Text variant={TextVariant.BodyMd}>Xl</Text>
+        </AvatarBase>
+      </div>
     </div>
   ),
 };
