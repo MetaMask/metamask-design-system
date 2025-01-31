@@ -12,7 +12,6 @@ export const DEFAULT_TEXTBUTTON_PROPS: Required<
     | 'spinnerProps'
     | 'startIconProps'
     | 'endIconProps'
-    | 'onPress'
     | 'isDisabled'
     | 'isInverse'
   >
@@ -34,9 +33,6 @@ export const DEFAULT_TEXTBUTTON_PROPS: Required<
   endIconProps: {
     size: IconSize.Sm,
     testID: 'end-icon',
-  },
-  onPress: () => {
-    console.log('Button pressed');
   },
   isDisabled: false,
   isInverse: false,

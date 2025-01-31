@@ -60,7 +60,7 @@ const TextButton = ({
       isInverse,
       isLoading,
     });
-  }, [isPressed, isInverse, isLoading, textProps]);
+  }, [isPressed, isInverse, isLoading]);
 
   // Merging default settings for Icons with passed in props
   const finalStartIconProps: Partial<IconProps> = {
