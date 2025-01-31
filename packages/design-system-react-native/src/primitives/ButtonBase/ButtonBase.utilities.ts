@@ -36,7 +36,7 @@ export const generateButtonBaseContainerClassNames = ({
 }: Partial<ButtonBaseProps>): string => {
   const baseStyle =
     'flex-row items-center justify-center rounded-full bg-background-muted px-4';
-  const sizeStyle = `h-[${size as string}px]`;
+  const sizeStyle = `h-[${size}px]`;
   const disabledStyle = isDisabled ? 'opacity-50' : 'opacity-100';
   const widthStyle = isFullWidth ? 'self-stretch' : 'self-start';
   const mergedClassnames = `${sizeStyle} ${baseStyle} ${disabledStyle} ${widthStyle} ${twClassName}`;

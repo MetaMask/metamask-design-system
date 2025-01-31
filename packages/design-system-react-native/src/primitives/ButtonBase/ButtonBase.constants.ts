@@ -25,9 +25,6 @@ export const DEFAULT_BUTTONBASE_PROPS: Partial<ButtonBaseProps> = {
     size: IconSize.Sm,
     testID: 'end-icon',
   },
-  onPress: () => {
-    console.log('Button pressed');
-  },
   isDisabled: false,
   isFullWidth: false,
 };

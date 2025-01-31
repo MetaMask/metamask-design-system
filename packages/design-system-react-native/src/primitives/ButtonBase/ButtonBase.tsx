@@ -78,16 +78,16 @@ const ButtonBase = ({
       {...props}
     >
       <View
-        style={tw`absolute inset-0 flex items-center justify-center opacity-${
-          isLoading ? '100' : '0'
+        style={tw`absolute inset-0 flex items-center justify-center ${
+          isLoading ? 'opacity-100' : 'opacity-0'
         }`}
         testID="spinner-container"
       >
         <Spinner {...finalSpinnerProps} />
       </View>
       <View
-        style={tw`flex-row items-center justify-center gap-x-2 opacity-${
-          isLoading ? '0' : '100'
+        style={tw`flex-row items-center justify-center gap-x-2 ${
+          isLoading ? 'opacity-0' : 'opacity-100'
         }`}
         testID="content-container"
       >
