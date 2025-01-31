@@ -31,10 +31,12 @@ describe('Icon', () => {
     });
 
     it('generates class names correctly for each size', () => {
-      Object.values(IconSize).forEach((size) => {
-        const classNames = generateIconClassNames({ size });
-        expect(classNames).toContain(size);
-      });
+      Object.values(IconSize)
+        .filter((size): size is IconSize => typeof size === 'number') // Ensure only numbers
+        .forEach((size) => {
+          const classNames = generateIconClassNames({ size });
+          expect(classNames).toContain(size.toString()); // Convert number to string for comparison
+        });
     });
 
     it('includes twClassName', () => {
