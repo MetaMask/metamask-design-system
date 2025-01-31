@@ -60,6 +60,10 @@ export type TextProps = {
    * @default TextColor.TextDefault
    */
   color?: TextColor;
+  /**
+   * Optional prop for testing purposes
+   */
+  'data-testid'?: string;
 };
 
 export enum TextVariant {
