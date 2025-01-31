@@ -17,7 +17,7 @@
 
 > **Note**
 >
-> `workspaceName` in these commands is the `name` field within a package's `package.json`, e.g., `@metamask/design-system-tailwind-preset`, not the directory where it is located, e.g., `packages/design-system-tailwind-preset`.
+> `workspaceName` in these commands is the `name` field within a package's `package.json`, e.g., `@metamask/design-tokens`, not the directory where it is located, e.g., `packages/design-tokens`.
 
 ## Linting
 
@@ -34,8 +34,8 @@ This repository relies on Yarn's [workspaces feature](https://yarnpkg.com/featur
 
 > **Note**
 >
-> - `workspaceName` in the Yarn documentation is the `name` field within a package's `package.json`, e.g., `@metamask/design-system-tailwind-preset`, not the directory where it is located, e.g., `packages/design-system-tailwind-preset`.
-> - `commandName` in the Yarn documentation is any sub-command that the `yarn` executable would usually take. Pay special attention to the difference between `run` vs `exec`. If you want to run a package script, you would use `run`, e.g., `yarn workspace @metamask/design-system-tailwind-preset run changelog:validate`; but if you want to run _any_ shell command, you'd use `exec`, e.g. `yarn workspace @metamask/design-system-tailwind-preset exec cat package.json | jq '.version'`.
+> - `workspaceName` in the Yarn documentation is the `name` field within a package's `package.json`, e.g., `@metamask/design-tokens`, not the directory where it is located, e.g., `packages/design-tokens`.
+> - `commandName` in the Yarn documentation is any sub-command that the `yarn` executable would usually take. Pay special attention to the difference between `run` vs `exec`. If you want to run a package script, you would use `run`, e.g., `yarn workspace @metamask/design-tokens run changelog:validate`; but if you want to run _any_ shell command, you'd use `exec`, e.g. `yarn workspace @metamask/design-tokens exec cat package.json | jq '.version'`.
 
 ## Creating pull requests
 
@@ -73,10 +73,10 @@ If you're developing your project locally and want to test changes to a package,
 
       > **Example:**
       >
-      > - If your project uses Yarn, `@metamask/design-system-tailwind-preset` is listed in dependencies at `^1.1.4`, and your clone of the `metamask-design-system` repo is at the same level as your project, add the following to `resolutions`:
+      > - If your project uses Yarn, `@metamask/design-tokens` is listed in dependencies at `^1.1.4`, and your clone of the `metamask-design-system` repo is at the same level as your project, add the following to `resolutions`:
       >
       >   ```
-      >   "@metamask/design-system-tailwind-preset@^1.1.4": "file:../metamask-design-system/packages/design-system-tailwind-preset"
+      >   "@metamask/design-tokens@^1.1.4": "file:../metamask-design-system/packages/design-tokens"
       >   ```
 
    4. Run `yarn install`.
@@ -84,8 +84,6 @@ If you're developing your project locally and want to test changes to a package,
 3. Due to the use of Yarn's `file:` protocol, if you update the package in the monorepo, then you'll need to run `yarn install` in the project again.
 
 ### Testing changes to packages with preview builds
-
-> NOTE: Publish a preview builds doesn't work and needs to be fixed https://github.com/MetaMask/metamask-design-system/issues/38
 
 If you want to test changes to a package where it would be unwieldy or impossible to use a local version, such as on CI, you can publish a preview build and configure your project to use it.
 
@@ -122,7 +120,7 @@ If you've forked this repository, you can create preview builds based on a branc
    You should be able to see the published version of each package in the output. Note two things:
 
    - The name is scoped to the NPM organization you entered instead of `@metamask`.
-   - The ID of the last commit in the branch is appended to the version, e.g. `1.2.3-preview-e2df9b4` instead of `1.2.3`.
+   - The ID of the last commit in the branch is appended to the version, e.g. `1.2.3-preview.e2df9b4` instead of `1.2.3`.
 
 Now you can [use these preview builds in your project](#using-preview-builds).
 
@@ -130,23 +128,35 @@ If you make more changes to a package, follow step 3 again, making sure to updat
 
 #### Using preview builds
 
-To use a preview build for a package within a project, you need to override the resolution logic for your package manager so that the "production" version of that package is replaced with the preview version. Here's how you do that:
+To use a preview build for a package within a project, you can use one of these two approaches:
 
-1. Open `package.json` in the project and locate the dependency entry for the metamask design system package for which you want to use a preview build.
-2. Locate the section responsible for resolution overrides (or create it if it doesn't exist). If you're using Yarn, this is `resolutions`; if you're using NPM or any other package manager, this is `overrides`.
-3. Add a line to this section that mirrors the dependency entry on the left-hand side and points to the preview version on the right-hand side:
+1. **Direct dependency approach (recommended)**:
 
+   Simply update the package version in your `dependencies` or `devDependencies` to point directly to the preview package:
+
+   ```json
+   {
+     "dependencies": {
+       "@metamask/design-tokens": "npm:@metamask-previews/design-tokens@0.0.0-preview.07ad19d"
+     }
+   }
    ```
-   "@metamask/<PACKAGE_NAME>@<PRODUCTION_VERSION_RANGE>": "npm:@<NPM_ORG>/<PACKAGE_NAME>@<PREVIEW_VERSION>"
+
+2. **Resolution override approach**:
+
+   Alternatively, you can use your package manager's resolution/override system to redirect the package:
+
+   For Yarn:
+
+   ```json
+   {
+     "resolutions": {
+       "@metamask/design-tokens": "npm:@metamask-previews/design-tokens@0.0.0-preview.07ad19d"
+     }
+   }
    ```
 
-   > **Example:**
-   >
-   > - If your project uses Yarn, `@metamask/design-system-tailwind-preset` is listed in dependencies at `^1.1.4`, and you want to use the preview version `1.2.3-preview-e2df9b4`, add the following to `resolutions`:
-   >
-   >   ```
-   >   "@metamask/design-system-tailwind-preset@^1.1.4": "npm:@metamask-previews/design-system-tailwind-preset@1.2.3-preview-e2df9b4"
-   >   ```
+After making either change, run `yarn install` or `npm install` to update your dependencies.
 
 4. Run `yarn install`.
 
