@@ -142,8 +142,8 @@ describe('ButtonIcon', () => {
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
       'rounded-full',
-      'text-icon-default',
-      'bg-background-default',
+      'bg-icon-default',
+      'text-background-default',
     );
   });
 });
