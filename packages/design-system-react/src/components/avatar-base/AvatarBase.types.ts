@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react';
+import type { TextProps } from '../text';
 
 export enum AvatarBaseSize {
   /**
@@ -37,8 +38,20 @@ export enum AvatarBaseShape {
 export type AvatarBaseProps = ComponentProps<'div'> & {
   /**
    * Required prop for the content to be rendered within the AvatarBase
+   * Not required if fallbackText is provided
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  /**
+   * Optional text to display when no children are provided
+   */
+  fallbackText?: string;
+  /**
+   * Optional props to be passed to the Text component when rendering fallback text
+   * Only used when fallbackText is provided and no children
+   */
+  fallbackTextProps?: Partial<
+    React.HTMLAttributes<HTMLSpanElement> & TextProps
+  >;
   /**
    * Optional prop for additional CSS classes to be applied to the AvatarBase component.
    * These classes will be merged with the component's default classes using twMerge.

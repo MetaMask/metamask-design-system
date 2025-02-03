@@ -18,7 +18,16 @@ const meta: Meta<typeof AvatarBase> = {
     children: {
       control: 'text',
       description:
-        'Required prop for the content to be rendered within the AvatarBase',
+        'Optional prop for the content to be rendered within the AvatarBase. Not required if fallbackText is provided',
+    },
+    fallbackText: {
+      control: 'text',
+      description: 'Optional text to display when no children are provided',
+    },
+    fallbackTextProps: {
+      control: 'object',
+      description:
+        'Optional props to be passed to the Text component when rendering fallback text',
     },
     className: {
       control: 'text',
@@ -44,25 +53,16 @@ export default meta;
 type Story = StoryObj<typeof AvatarBase>;
 
 export const Default: Story = {
-  render: (args) => (
-    <AvatarBase {...args}>
-      <Text>{args.children}</Text>
-    </AvatarBase>
-  ),
   args: {
-    children: 'A',
+    fallbackText: 'A',
   },
 };
 
 export const Shape: Story = {
   render: () => (
     <div className="flex gap-2 items-center">
-      <AvatarBase shape={AvatarBaseShape.Circle}>
-        <Text variant={TextVariant.BodySm}>C</Text>
-      </AvatarBase>
-      <AvatarBase shape={AvatarBaseShape.Square}>
-        <Text variant={TextVariant.BodySm}>S</Text>
-      </AvatarBase>
+      <AvatarBase shape={AvatarBaseShape.Circle} fallbackText="C" />
+      <AvatarBase shape={AvatarBaseShape.Square} fallbackText="S" />
     </div>
   ),
 };
@@ -71,39 +71,68 @@ export const Size: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
       <div className="flex gap-2 items-center">
-        <AvatarBase size={AvatarBaseSize.Xs}>
-          <Text variant={TextVariant.BodyXs}>Xs</Text>
-        </AvatarBase>
-        <AvatarBase size={AvatarBaseSize.Sm}>
-          <Text variant={TextVariant.BodyXs}>Sm</Text>
-        </AvatarBase>
-        <AvatarBase size={AvatarBaseSize.Md}>
-          <Text variant={TextVariant.BodySm}>Md</Text>
-        </AvatarBase>
-        <AvatarBase size={AvatarBaseSize.Lg}>
-          <Text variant={TextVariant.BodyMd}>Lg</Text>
-        </AvatarBase>
-        <AvatarBase size={AvatarBaseSize.Xl}>
-          <Text variant={TextVariant.BodyMd}>Xl</Text>
-        </AvatarBase>
+        <AvatarBase size={AvatarBaseSize.Xs} fallbackText="XS" />
+        <AvatarBase size={AvatarBaseSize.Sm} fallbackText="SM" />
+        <AvatarBase size={AvatarBaseSize.Md} fallbackText="MD" />
+        <AvatarBase size={AvatarBaseSize.Lg} fallbackText="LG" />
+        <AvatarBase size={AvatarBaseSize.Xl} fallbackText="XL" />
       </div>
       <div className="flex gap-2 items-center">
-        <AvatarBase shape={AvatarBaseShape.Square} size={AvatarBaseSize.Xs}>
-          <Text variant={TextVariant.BodyXs}>Xs</Text>
-        </AvatarBase>
-        <AvatarBase shape={AvatarBaseShape.Square} size={AvatarBaseSize.Sm}>
-          <Text variant={TextVariant.BodyXs}>Sm</Text>
-        </AvatarBase>
-        <AvatarBase shape={AvatarBaseShape.Square} size={AvatarBaseSize.Md}>
-          <Text variant={TextVariant.BodySm}>Md</Text>
-        </AvatarBase>
-        <AvatarBase shape={AvatarBaseShape.Square} size={AvatarBaseSize.Lg}>
-          <Text variant={TextVariant.BodyMd}>Lg</Text>
-        </AvatarBase>
-        <AvatarBase shape={AvatarBaseShape.Square} size={AvatarBaseSize.Xl}>
-          <Text variant={TextVariant.BodyMd}>Xl</Text>
-        </AvatarBase>
+        <AvatarBase
+          shape={AvatarBaseShape.Square}
+          size={AvatarBaseSize.Xs}
+          fallbackText="XS"
+        />
+        <AvatarBase
+          shape={AvatarBaseShape.Square}
+          size={AvatarBaseSize.Sm}
+          fallbackText="SM"
+        />
+        <AvatarBase
+          shape={AvatarBaseShape.Square}
+          size={AvatarBaseSize.Md}
+          fallbackText="MD"
+        />
+        <AvatarBase
+          shape={AvatarBaseShape.Square}
+          size={AvatarBaseSize.Lg}
+          fallbackText="LG"
+        />
+        <AvatarBase
+          shape={AvatarBaseShape.Square}
+          size={AvatarBaseSize.Xl}
+          fallbackText="XL"
+        />
       </div>
+    </div>
+  ),
+};
+
+export const FallbackText: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarBase fallbackText="A" />
+      <AvatarBase fallbackText="B" />
+      <AvatarBase fallbackText="C" />
+    </div>
+  ),
+};
+
+export const FallbackTextWithProps: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarBase
+        fallbackText="A"
+        fallbackTextProps={{ color: TextColor.PrimaryDefault }}
+      />
+      <AvatarBase
+        fallbackText="B"
+        fallbackTextProps={{ color: TextColor.ErrorDefault }}
+      />
+      <AvatarBase
+        fallbackText="C"
+        fallbackTextProps={{ color: TextColor.SuccessDefault }}
+      />
     </div>
   ),
 };
@@ -112,9 +141,7 @@ export const Children: Story = {
   render: () => (
     <div className="flex gap-2 items-center">
       {/* Text */}
-      <AvatarBase>
-        <Text>A</Text>
-      </AvatarBase>
+      <AvatarBase fallbackText="A" />
       {/* Image */}
       <AvatarBase>
         <img

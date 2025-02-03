@@ -2,7 +2,11 @@ import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { AVATAR_BASE_SIZE_CLASS_MAP } from './AvatarBase.constants';
+import { Text, FontWeight } from '..';
+import {
+  AVATAR_BASE_SIZE_CLASS_MAP,
+  AVATAR_BASE_SIZE_TO_TEXT_VARIANT_MAP,
+} from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
 import { AvatarBaseShape, AvatarBaseSize } from './AvatarBase.types';
 
@@ -10,6 +14,8 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
   (
     {
       children,
+      fallbackText,
+      fallbackTextProps,
       className,
       size = AvatarBaseSize.Md,
       shape = AvatarBaseShape.Circle,
@@ -25,7 +31,7 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
       // Base styles
       'inline-flex items-center justify-center',
       shape === AvatarBaseShape.Circle ? 'rounded-full' : 'rounded-lg',
-      'bg-alternative',
+      'bg-muted',
       'overflow-hidden',
       // Size
       AVATAR_BASE_SIZE_CLASS_MAP[size],
@@ -35,7 +41,17 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
 
     return (
       <Component ref={ref} className={mergedClassName} style={style} {...props}>
-        {children}
+        {children || (
+          <Text
+            variant={AVATAR_BASE_SIZE_TO_TEXT_VARIANT_MAP[size]}
+            fontWeight={FontWeight.Bold}
+            asChild
+            {...fallbackTextProps}
+          >
+            {/* asChild prop renders Text component as a span, it does not create an additional element */}
+            <span>{fallbackText}</span>
+          </Text>
+        )}
       </Component>
     );
   },

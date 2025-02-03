@@ -7,11 +7,9 @@ import * as AvatarBaseStories from './AvatarBase.stories';
 The AvatarBase is the base component for avatars
 
 ```tsx
-import { AvatarBase, Text } from '@metamask/design-system-react';
+import { AvatarBase } from '@metamask/design-system-react';
 
-<AvatarBase>
-  <Text>A</Text>
-</AvatarBase>;
+<AvatarBase fallbackText="A" />;
 ```
 
 <Canvas of={AvatarBaseStories.Default} />
@@ -37,11 +35,23 @@ AvatarBase supports five sizes:
 - `AvatarBaseSize.Lg` (40px)
 - `AvatarBaseSize.Xl` (48px)
 
+Each size automatically maps to an appropriate text size for the fallback text.
+
 <Canvas of={AvatarBaseStories.Size} />
+
+### Fallback Text
+
+The `fallbackText` prop provides a simple way to display text within the avatar. The text size automatically adjusts based on the avatar size.
+
+<Canvas of={AvatarBaseStories.FallbackText} />
+
+You can customize the appearance of the fallback text using `fallbackTextProps`:
+
+<Canvas of={AvatarBaseStories.FallbackTextWithProps} />
 
 ### Children
 
-AvatarBase can contain different types of content including text, images, and icons:
+While `fallbackText` is the recommended way to display text, AvatarBase can also contain custom content like images and icons:
 
 <Canvas of={AvatarBaseStories.Children} />
 
@@ -56,14 +66,14 @@ Example:
 
 ```tsx
 // Adding new styles
-<AvatarBase className="my-4 mx-2">
-  <Text>A</Text>
-</AvatarBase>
+<AvatarBase fallbackText="A" className="my-4 mx-2" />
 
 // Overriding default styles
-<AvatarBase className="bg-success-default">
-  <Text color={TextColor.SuccessInverse}>A</Text>
-</AvatarBase>
+<AvatarBase
+  fallbackText="A"
+  className="bg-success-default"
+  fallbackTextProps={{ color: TextColor.SuccessInverse }}
+/>
 ```
 
 ### Style
