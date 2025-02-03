@@ -96,16 +96,8 @@ export const IsFloating: Story = {
 
 export const IsInverse: Story = {
   render: () => (
-    <div className="bg-primary-default p-4 space-y-4">
-      <div className="flex gap-2">
-        <ButtonIcon iconName={IconName.Close} isInverse ariaLabel="Close" />
-        <ButtonIcon
-          iconName={IconName.Close}
-          isInverse
-          isFloating
-          ariaLabel="Close floating"
-        />
-      </div>
+    <div className="bg-primary-default p-4">
+      <ButtonIcon iconName={IconName.Close} isInverse ariaLabel="Close" />
     </div>
   ),
 };
