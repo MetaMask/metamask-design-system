@@ -8,15 +8,15 @@ export enum ButtonBaseSize {
   /**
    * Represents a small button size (32px).
    */
-  Sm = 32,
+  Sm = '32',
   /**
    * Represents a medium button size (40px).
    */
-  Md = 40,
+  Md = '40',
   /**
    * Represents a large button size (48px).
    */
-  Lg = 48,
+  Lg = '48',
 }
 
 /**
