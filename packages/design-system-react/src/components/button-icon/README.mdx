@@ -1,0 +1,94 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as ButtonIconStories from './ButtonIcon.stories';
+
+# ButtonIcon
+
+A Button Icon is a compact, icon-only button that triggers an action, designed for quick, space-efficient interactions
+
+```tsx
+import { ButtonIcon, IconName } from '@metamask/design-system-react';
+
+<ButtonIcon iconName={IconName.Close} ariaLabel="Close" onClick={() => {}} />;
+```
+
+<Canvas of={ButtonIconStories.Default} />
+
+## Props
+
+### Accessibility
+
+ButtonIcon requires an `ariaLabel` prop to ensure accessibility for screen readers. This label should clearly describe the button's action.
+
+```tsx
+<ButtonIcon
+  iconName={IconName.Close}
+  ariaLabel="Close dialog"
+  onClick={() => closeDialog()}
+/>
+```
+
+<Canvas of={ButtonIconStories.AriaLabel} />
+
+The `ariaLabel` should:
+
+- Be clear and concise
+- Describe the action (e.g., "Close dialog" rather than just "Close")
+- Be unique if multiple ButtonIcons are present
+- Reflect the current state if applicable
+
+### Size
+
+ButtonIcon supports three sizes:
+
+- `ButtonIconSize.Sm` (24px)
+- `ButtonIconSize.Md` (32px) - default
+- `ButtonIconSize.Lg` (40px)
+
+<Canvas of={ButtonIconStories.Size} />
+
+### IsFloating
+
+Use `isFloating` to apply a contained, floating button style.
+
+<Canvas of={ButtonIconStories.IsFloating} />
+
+### IsInverse
+
+Use `isInverse` when the button needs to be displayed on a dark background.
+
+<Canvas of={ButtonIconStories.IsInverse} />
+
+### IsDisabled
+
+ButtonIcon can be disabled.
+
+<Canvas of={ButtonIconStories.IsDisabled} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<ButtonIcon className="my-4 mx-2" iconName={IconName.Close} />
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+
+## Component API
+
+<Controls of={ButtonIconStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
