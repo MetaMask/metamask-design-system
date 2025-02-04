@@ -2,7 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Text, FontWeight, TextVariant } from '..';
+import { Text, FontWeight, TextVariant, TextColor } from '..';
 import { AVATAR_BASE_SIZE_CLASS_MAP } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
 import { AvatarBaseShape, AvatarBaseSize } from './AvatarBase.types';
@@ -42,7 +42,9 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
           <Text
             variant={TextVariant.BodySm}
             fontWeight={FontWeight.Medium}
+            color={TextColor.TextMuted}
             asChild
+            className="uppercase"
             {...fallbackTextProps}
           >
             {/* asChild prop renders Text component as a span, it does not create an additional element */}
