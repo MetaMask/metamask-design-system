@@ -38,3 +38,6 @@ export type { ButtonIconProps } from './button-icon';
 
 export { AvatarBase, AvatarBaseSize } from './avatar-base';
 export type { AvatarBaseProps } from './avatar-base';
+
+export { AvatarNetwork, AvatarNetworkSize } from './avatar-network';
+export type { AvatarNetworkProps } from './avatar-network';
