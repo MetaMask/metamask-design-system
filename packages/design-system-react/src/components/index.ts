@@ -27,8 +27,11 @@ export type { ButtonSecondaryProps } from './button-secondary';
 export { ButtonTertiary, ButtonTertiarySize } from './button-tertiary';
 export type { ButtonTertiaryProps } from './button-tertiary';
 
-export { Button, ButtonVariant } from './button';
+export { Button, ButtonSize, ButtonVariant } from './button';
 export type { ButtonProps } from './button';
 
 export { TextButton } from './text-button';
 export type { TextButtonProps } from './text-button';
+
+export { ButtonIcon } from './button-icon';
+export type { ButtonIconProps } from './button-icon';
