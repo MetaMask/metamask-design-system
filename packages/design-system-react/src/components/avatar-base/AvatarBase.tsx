@@ -41,7 +41,7 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
         {children || (
           <Text
             variant={TextVariant.BodySm}
-            fontWeight={FontWeight.Bold}
+            fontWeight={FontWeight.Medium}
             asChild
             {...fallbackTextProps}
           >
