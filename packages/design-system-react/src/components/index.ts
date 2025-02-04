@@ -41,3 +41,6 @@ export type { AvatarBaseProps } from './avatar-base';
 
 export { AvatarNetwork, AvatarNetworkSize } from './avatar-network';
 export type { AvatarNetworkProps } from './avatar-network';
+
+export { AvatarToken, AvatarTokenSize } from './avatar-token';
+export type { AvatarTokenProps } from './avatar-token';
