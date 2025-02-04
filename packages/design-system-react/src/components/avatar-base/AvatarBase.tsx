@@ -2,11 +2,8 @@ import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Text, FontWeight } from '..';
-import {
-  AVATAR_BASE_SIZE_CLASS_MAP,
-  AVATAR_BASE_SIZE_TO_TEXT_VARIANT_MAP,
-} from './AvatarBase.constants';
+import { Text, FontWeight, TextVariant } from '..';
+import { AVATAR_BASE_SIZE_CLASS_MAP } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
 import { AvatarBaseShape, AvatarBaseSize } from './AvatarBase.types';
 
@@ -43,7 +40,7 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
       <Component ref={ref} className={mergedClassName} style={style} {...props}>
         {children || (
           <Text
-            variant={AVATAR_BASE_SIZE_TO_TEXT_VARIANT_MAP[size]}
+            variant={TextVariant.BodySm}
             fontWeight={FontWeight.Bold}
             asChild
             {...fallbackTextProps}

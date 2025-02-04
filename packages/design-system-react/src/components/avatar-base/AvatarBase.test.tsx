@@ -146,7 +146,7 @@ describe('AvatarBase', () => {
     expect(fallbackText).toHaveClass('text-primary-default');
   });
 
-  it('uses correct text variant based on size', () => {
+  it('uses BodySm text variant for all sizes', () => {
     const { rerender } = render(
       <AvatarBase
         size={AvatarBaseSize.Xs}
@@ -157,7 +157,7 @@ describe('AvatarBase', () => {
 
     // Test XS size
     let fallbackText = screen.getByTestId('fallback-text');
-    expect(fallbackText).toHaveClass('text-s-body-xs');
+    expect(fallbackText).toHaveClass('text-s-body-sm');
 
     // Test MD size
     rerender(
@@ -179,6 +179,6 @@ describe('AvatarBase', () => {
       />,
     );
     fallbackText = screen.getByTestId('fallback-text');
-    expect(fallbackText).toHaveClass('text-s-body-md');
+    expect(fallbackText).toHaveClass('text-s-body-sm');
   });
 });

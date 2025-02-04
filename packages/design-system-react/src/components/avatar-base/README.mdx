@@ -35,13 +35,13 @@ AvatarBase supports five sizes:
 - `AvatarBaseSize.Lg` (40px)
 - `AvatarBaseSize.Xl` (48px)
 
-Each size automatically maps to an appropriate text size for the fallback text.
+The fallback text uses TextVariant.BodySm for all sizes to maintain consistency.
 
 <Canvas of={AvatarBaseStories.Size} />
 
 ### Fallback Text
 
-The `fallbackText` prop provides a simple way to display text within the avatar. The text size automatically adjusts based on the avatar size.
+The `fallbackText` prop provides a simple way to display text within the avatar. The text uses TextVariant.BodySm for consistent sizing across all avatar sizes.
 
 <Canvas of={AvatarBaseStories.FallbackText} />
 
