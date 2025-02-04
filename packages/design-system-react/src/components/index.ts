@@ -44,3 +44,6 @@ export type { AvatarNetworkProps } from './avatar-network';
 
 export { AvatarToken, AvatarTokenSize } from './avatar-token';
 export type { AvatarTokenProps } from './avatar-token';
+
+export { AvatarFavicon, AvatarFaviconSize } from './avatar-favicon';
+export type { AvatarFaviconProps } from './avatar-favicon';
