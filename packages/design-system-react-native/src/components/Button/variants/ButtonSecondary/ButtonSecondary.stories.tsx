@@ -62,7 +62,7 @@ const ButtonSecondaryStory: React.FC<ButtonSecondaryProps> = ({
   return (
     <View
       style={[
-        tw`${isInverse ? `bg-primary-default` : 'bg-background-default'}`,
+        tw`${isInverse ? `bg-primary-default p-4` : 'bg-background-default'}`,
       ]}
     >
       <ButtonSecondary isInverse={isInverse} {...props} />
@@ -108,34 +108,32 @@ export const IsLoading: Story = {
 };
 
 export const WithStartAccessory: Story = {
-  render: () => (
-    <ButtonSecondary startIconName={IconName.Add}>
-      ButtonSecondary
-    </ButtonSecondary>
-  ),
+  args: {
+    children: 'Start Accessory',
+    startIconName: IconName.Add,
+  },
 };
 
 export const WithEndAccessory: Story = {
-  render: () => (
-    <ButtonSecondary endIconName={IconName.Add}>
-      ButtonSecondary
-    </ButtonSecondary>
-  ),
+  args: {
+    children: 'End Accessory',
+    endIconName: IconName.AddSquare,
+  },
 };
 
 export const WithStartAndEndAccessory: Story = {
-  render: () => (
-    <ButtonSecondary
-      startIconName={IconName.Add}
-      endIconName={IconName.AddSquare}
-    >
-      ButtonSecondary
-    </ButtonSecondary>
-  ),
+  args: {
+    children: 'Start and End Accessory',
+    startIconName: IconName.Add,
+    endIconName: IconName.AddSquare,
+  },
 };
 
 export const isDisabled: Story = {
-  render: () => <ButtonSecondary isDisabled>ButtonSecondary</ButtonSecondary>,
+  args: {
+    children: 'isDisabled',
+    isDisabled: true,
+  },
 };
 
 export const isFullWidth: Story = {
