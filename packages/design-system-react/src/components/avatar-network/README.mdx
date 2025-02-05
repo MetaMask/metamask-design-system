@@ -64,13 +64,15 @@ The `fallbackText` prop is optional and is used for display text when no image i
 
 ### Size
 
-AvatarNetwork supports five sizes, each with a corresponding text variant for the fallback text:
+AvatarNetwork supports five sizes:
 
-- `AvatarNetworkSize.Xs` (16px) - uses TextVariant.BodyXs
-- `AvatarNetworkSize.Sm` (24px) - uses TextVariant.BodyXs
-- `AvatarNetworkSize.Md` (32px) - uses TextVariant.BodySm (default)
-- `AvatarNetworkSize.Lg` (40px) - uses TextVariant.BodyMd
-- `AvatarNetworkSize.Xl` (48px) - uses TextVariant.BodyMd
+- `AvatarNetworkSize.Xs` (16px)
+- `AvatarNetworkSize.Sm` (24px)
+- `AvatarNetworkSize.Md` (32px) - default
+- `AvatarNetworkSize.Lg` (40px)
+- `AvatarNetworkSize.Xl` (48px)
+
+The fallback text uses TextVariant.BodySm for all sizes to maintain consistency.
 
 <Canvas of={AvatarNetworkStories.Size} />
 
