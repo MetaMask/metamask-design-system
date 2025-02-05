@@ -4,7 +4,17 @@ import type { ButtonBaseProps } from './ButtonBase.types';
 import { ButtonBaseSize } from './ButtonBase.types';
 
 // Defaults
-export const DEFAULT_BUTTONBASE_PROPS: Partial<ButtonBaseProps> = {
+export const DEFAULT_BUTTONBASE_PROPS: Pick<
+  ButtonBaseProps,
+  | 'textProps'
+  | 'size'
+  | 'isLoading'
+  | 'spinnerProps'
+  | 'startIconProps'
+  | 'endIconProps'
+  | 'isDisabled'
+  | 'isFullWidth'
+> = {
   textProps: {
     variant: TextVariant.BodyMd,
     fontWeight: FontWeight.Medium,
