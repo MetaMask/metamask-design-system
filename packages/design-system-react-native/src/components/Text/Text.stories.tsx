@@ -114,8 +114,8 @@ export const FontWeightStory: Story = {
       <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
     </View>
   ),
+  name: 'Font Weight',
 };
-FontWeightStory.storyName = 'Font Weight';
 
 export const FontStyleStory: Story = {
   render: () => (
@@ -124,5 +124,5 @@ export const FontStyleStory: Story = {
       <Text fontStyle={FontStyle.Italic}>Italic</Text>
     </View>
   ),
+  name: 'Font Style',
 };
-FontStyleStory.storyName = 'Font Style';

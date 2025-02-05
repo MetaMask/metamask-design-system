@@ -180,8 +180,8 @@ export const FontWeightStory: Story = {
       <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
     </div>
   ),
+  name: 'Font Weight',
 };
-FontWeightStory.storyName = 'Font Weight';
 
 export const FontStyleStory: Story = {
   render: () => (
@@ -190,8 +190,8 @@ export const FontStyleStory: Story = {
       <Text fontStyle={FontStyle.Italic}>Italic</Text>
     </div>
   ),
+  name: 'Font Style',
 };
-FontStyleStory.storyName = 'Font Style';
 
 export const TextTransformStory: Story = {
   render: () => (
@@ -201,8 +201,8 @@ export const TextTransformStory: Story = {
       <Text textTransform={TextTransform.Capitalize}>capitalize</Text>
     </div>
   ),
+  name: 'Text Transform',
 };
-TextTransformStory.storyName = 'Text Transform';
 
 export const TextAlignStory: Story = {
   render: () => (
@@ -213,8 +213,8 @@ export const TextAlignStory: Story = {
       <Text textAlign={TextAlign.Justify}>Justify aligned</Text>
     </div>
   ),
+  name: 'Text Align',
 };
-TextAlignStory.storyName = 'Text Align';
 
 export const OverflowWrapStory: Story = {
   render: () => (
@@ -227,8 +227,8 @@ export const OverflowWrapStory: Story = {
       </Text>
     </div>
   ),
+  name: 'Overflow Wrap',
 };
-OverflowWrapStory.storyName = 'OverflowWrap';
 
 export const Ellipsis: Story = {
   render: () => (

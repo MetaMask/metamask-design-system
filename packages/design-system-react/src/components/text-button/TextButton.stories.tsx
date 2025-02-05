@@ -93,7 +93,7 @@ export const TextVariantStory: Story = {
       </div>
     </div>
   ),
-  storyName: 'TextVariant',
+  name: 'TextVariant',
 };
 
 export const AsChild: Story = {
