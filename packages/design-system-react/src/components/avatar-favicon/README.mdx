@@ -64,13 +64,15 @@ The `fallbackText` prop is optional and is used for display text when no image i
 
 ### Size
 
-AvatarFavicon supports five sizes, each with a corresponding text variant for the fallback text:
+AvatarFavicon supports five sizes:
 
-- `AvatarFaviconSize.Xs` (16px) - uses TextVariant.BodyXs
-- `AvatarFaviconSize.Sm` (24px) - uses TextVariant.BodyXs
-- `AvatarFaviconSize.Md` (32px) - uses TextVariant.BodySm (default)
-- `AvatarFaviconSize.Lg` (40px) - uses TextVariant.BodyMd
-- `AvatarFaviconSize.Xl` (48px) - uses TextVariant.BodyMd
+- `AvatarFaviconSize.Xs` (16px)
+- `AvatarFaviconSize.Sm` (24px)
+- `AvatarFaviconSize.Md` (32px) - default
+- `AvatarFaviconSize.Lg` (40px)
+- `AvatarFaviconSize.Xl` (48px)
+
+The fallback text uses TextVariant.BodySm for all sizes to maintain consistency.
 
 <Canvas of={AvatarFaviconStories.Size} />
 
