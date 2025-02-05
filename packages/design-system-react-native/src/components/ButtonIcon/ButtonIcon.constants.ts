@@ -15,7 +15,7 @@ export const DEFAULT_BUTTONICON_PROPS: Pick<
   ButtonIconProps,
   'iconName' | 'size' | 'isDisabled' | 'isInverse' | 'isFloating'
 > = {
-  iconName: IconName.Add,
+  iconName: IconName.Close,
   size: ButtonIconSize.Md,
   isDisabled: false,
   isInverse: false,

@@ -97,19 +97,3 @@ export const isFloating: Story = {
     <ButtonIconStory iconName={DEFAULT_BUTTONICON_PROPS.iconName} isFloating />
   ),
 };
-
-export const AllIcons: Story = {
-  render: () => (
-    <ScrollView>
-      <View style={{ flexWrap: 'wrap', flexDirection: 'row', padding: 16 }}>
-        {Object.values(IconName).map((iconName) => (
-          <ButtonIconStory
-            key={iconName}
-            iconName={iconName}
-            size={DEFAULT_BUTTONICON_PROPS.size}
-          />
-        ))}
-      </View>
-    </ScrollView>
-  ),
-};
