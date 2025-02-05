@@ -111,7 +111,34 @@ describe('AvatarBase', () => {
       />,
     );
     avatar = screen.getByTestId('avatar');
-    expect(avatar).toHaveClass('rounded-[8px]');
+    expect(avatar).toHaveClass('rounded-lg');
+  });
+
+  it('applies correct border radius for all square sizes', () => {
+    const { rerender } = render(
+      <AvatarBase
+        shape={AvatarBaseShape.Square}
+        size={AvatarBaseSize.Xs}
+        fallbackText="A"
+        data-testid="avatar"
+      />,
+    );
+
+    // Test all sizes
+    Object.entries(AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP).forEach(
+      ([size, borderRadiusClass]) => {
+        rerender(
+          <AvatarBase
+            shape={AvatarBaseShape.Square}
+            size={size as AvatarBaseSize}
+            fallbackText="A"
+            data-testid="avatar"
+          />,
+        );
+        const avatar = screen.getByTestId('avatar');
+        expect(avatar).toHaveClass(borderRadiusClass);
+      },
+    );
   });
 
   it('uses circle shape by default', () => {

@@ -12,9 +12,9 @@ export const AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP: Record<
   AvatarBaseSize,
   string
 > = {
-  [AvatarBaseSize.Xs]: 'rounded-[4px]',
-  [AvatarBaseSize.Sm]: 'rounded-[6px]',
-  [AvatarBaseSize.Md]: 'rounded-[8px]',
-  [AvatarBaseSize.Lg]: 'rounded-[10px]',
-  [AvatarBaseSize.Xl]: 'rounded-[12px]',
+  [AvatarBaseSize.Xs]: 'rounded-sm', // 4px
+  [AvatarBaseSize.Sm]: 'rounded-md', // 6px
+  [AvatarBaseSize.Md]: 'rounded-lg', // 8px
+  [AvatarBaseSize.Lg]: 'rounded-[10px]', // 10px (No tailwind class for this)
+  [AvatarBaseSize.Xl]: 'rounded-xl', // 12px
 };
