@@ -80,6 +80,8 @@ export const Default: Story = {
     endIconName: IconName.AddSquare,
     isDisabled: DEFAULT_BUTTONPRIMARY_PROPS.isDisabled,
     isFullWidth: DEFAULT_BUTTONPRIMARY_PROPS.isFullWidth,
+    isInverse: DEFAULT_BUTTONPRIMARY_PROPS.isInverse,
+    isDanger: DEFAULT_BUTTONPRIMARY_PROPS.isDanger,
   },
   render: (args) => <ButtonPrimaryStory {...args} />,
 };
