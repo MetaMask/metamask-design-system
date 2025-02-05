@@ -62,7 +62,7 @@ const ButtonPrimaryStory: React.FC<ButtonPrimaryProps> = ({
   return (
     <View
       style={[
-        tw`${isInverse ? `bg-primary-default` : 'bg-background-default'}`,
+        tw`${isInverse ? `bg-primary-default p-4` : 'bg-background-default'}`,
       ]}
     >
       <ButtonPrimary isInverse={isInverse} {...props} />
@@ -108,30 +108,32 @@ export const IsLoading: Story = {
 };
 
 export const WithStartAccessory: Story = {
-  render: () => (
-    <ButtonPrimary startIconName={IconName.Add}>ButtonPrimary</ButtonPrimary>
-  ),
+  args: {
+    children: 'Start Accessory',
+    startIconName: IconName.Add,
+  },
 };
 
 export const WithEndAccessory: Story = {
-  render: () => (
-    <ButtonPrimary endIconName={IconName.Add}>ButtonPrimary</ButtonPrimary>
-  ),
+  args: {
+    children: 'End Accessory',
+    endIconName: IconName.Add,
+  },
 };
 
 export const WithStartAndEndAccessory: Story = {
-  render: () => (
-    <ButtonPrimary
-      startIconName={IconName.Add}
-      endIconName={IconName.AddSquare}
-    >
-      ButtonPrimary
-    </ButtonPrimary>
-  ),
+  args: {
+    children: 'Start and End Accessory',
+    startIconName: IconName.Add,
+    endIconName: IconName.AddSquare,
+  },
 };
 
 export const isDisabled: Story = {
-  render: () => <ButtonPrimary isDisabled>ButtonPrimary</ButtonPrimary>,
+  args: {
+    children: 'isDisabled',
+    isDisabled: true,
+  },
 };
 
 export const isFullWidth: Story = {
