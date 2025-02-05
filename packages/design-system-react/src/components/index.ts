@@ -35,3 +35,6 @@ export type { TextButtonProps } from './text-button';
 
 export { ButtonIcon } from './button-icon';
 export type { ButtonIconProps } from './button-icon';
+
+export { AvatarBase, AvatarBaseSize } from './avatar-base';
+export type { AvatarBaseProps } from './avatar-base';
