@@ -1,0 +1,94 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as AvatarIconStories from './AvatarIcon.stories';
+
+# AvatarIcon
+
+Avatar reserved for representing static icons inside of an avatar.
+
+> Note: For icon buttons, use the [ButtonIcon](/docs/react-components-buttonicon--docs) component.
+
+```tsx
+import { AvatarIcon, IconName } from '@metamask/design-system-react';
+
+<AvatarIcon iconName={IconName.Arrow2Up} />;
+```
+
+<Canvas of={AvatarIconStories.Default} />
+
+## Props
+
+### Icon Name (required)
+
+The `iconName` prop is required and specifies which icon to display from the design system's icon set.
+
+<Canvas of={AvatarIconStories.IconNameStory} />
+
+> Note: The `iconProps` prop allows you to customize the icon's appearance. The size and color will be automatically mapped from the avatar's size and severity.
+
+```tsx
+import {
+  AvatarIcon,
+  IconName,
+  IconColor,
+  IconSize,
+} from '@metamask/design-system-react';
+
+<AvatarIcon
+  iconName={IconName.User}
+  iconProps={{
+    color: IconColor.IconDefault,
+    size: IconSize.Md,
+  }}
+/>;
+```
+
+### Size
+
+AvatarIcon supports five sizes, each with a corresponding icon size:
+
+- `AvatarIconSize.Xs` (16px) - uses IconSize.Xs (12px)
+- `AvatarIconSize.Sm` (24px) - uses IconSize.Sm (16px)
+- `AvatarIconSize.Md` (32px) - uses IconSize.Md (20px) - default
+- `AvatarIconSize.Lg` (40px) - uses IconSize.Lg (24px)
+- `AvatarIconSize.Xl` (48px) - uses IconSize.Xl (32px)
+
+<Canvas of={AvatarIconStories.Size} />
+
+### Severity
+
+The `severity` prop allows you to apply predefined color combinations to the avatar and icon. Each severity level uses appropriate background and icon colors:
+
+- `AvatarIconSeverity.Default` - neutral styling for general use
+- `AvatarIconSeverity.Info` - info styling for informational content
+- `AvatarIconSeverity.Success` - success styling for positive actions/states
+- `AvatarIconSeverity.Warning` - warning styling for cautionary content
+- `AvatarIconSeverity.Error` - error styling for critical issues
+
+<Canvas of={AvatarIconStories.Severity} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default
+classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+<AvatarIcon
+  iconName={IconName.User}
+  severity={AvatarIconSeverity.Default}
+  className="my-4 mx-2"
+/>
+```
+
+## Component API
+
+<Controls of={AvatarIconStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

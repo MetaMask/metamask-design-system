@@ -47,3 +47,6 @@ export type { AvatarTokenProps } from './avatar-token';
 
 export { AvatarFavicon, AvatarFaviconSize } from './avatar-favicon';
 export type { AvatarFaviconProps } from './avatar-favicon';
+
+export { AvatarIcon, AvatarIconSize, AvatarIconSeverity } from './avatar-icon';
+export type { AvatarIconProps } from './avatar-icon';
