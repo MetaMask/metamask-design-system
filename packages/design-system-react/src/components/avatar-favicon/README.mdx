@@ -1,0 +1,105 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as AvatarFaviconStories from './AvatarFavicon.stories';
+
+# AvatarFavicon
+
+Avatar reserved for representing websites and dapps
+
+```tsx
+import { AvatarFavicon } from '@metamask/design-system-react';
+
+<AvatarFavicon
+  name="OpenSea"
+  src="path/to/opensea-favicon.ico"
+  fallbackText="OS"
+/>;
+```
+
+<Canvas of={AvatarFaviconStories.Default} />
+
+## Props
+
+### Name (required)
+
+The `name` prop is required and serves two purposes:
+
+- Used as alt text for the dapp logo (unless overridden by `imageProps.alt`)
+- First letter is used as fallback display text when `fallbackText` is not provided
+
+<Canvas of={AvatarFaviconStories.Name} />
+
+### Src (image source)
+
+The `src` prop is optional and specifies the URL of the dapp's favicon or logo.
+
+<Canvas of={AvatarFaviconStories.Src} />
+
+> Note: The `imageProps` prop allows you to customize the img element when `src` is provided. All standard HTML img attributes are supported and will be passed to the underlying img element when `src` is provided. This is useful for overriding the default alt text (which is the dapp name) when the AvatarFavicon is used as an accompaniment to an image.
+
+```tsx
+<AvatarFavicon
+  name="OpenSea"
+  src="path/to/opensea-favicon.ico"
+  fallbackText="OS"
+  imageProps={{ alt: 'OpenSea Logo', loading: 'lazy' }}
+/>
+```
+
+### Fallback Text
+
+The `fallbackText` prop is optional and is used for display text when no image is provided. If not provided, the first letter of `name` will be used.
+
+<Canvas of={AvatarFaviconStories.FallbackText} />
+
+> Note: The `fallbackTextProps` prop allows you to customize the Text component used for the fallback display
+
+```tsx
+<AvatarFavicon
+  name="OpenSea"
+  fallbackText="OS"
+  fallbackTextProps={{ color: TextColor.PrimaryDefault }}
+/>
+```
+
+### Size
+
+AvatarFavicon supports five sizes:
+
+- `AvatarFaviconSize.Xs` (16px)
+- `AvatarFaviconSize.Sm` (24px)
+- `AvatarFaviconSize.Md` (32px) - default
+- `AvatarFaviconSize.Lg` (40px)
+- `AvatarFaviconSize.Xl` (48px)
+
+The fallback text uses TextVariant.BodySm for all sizes to maintain consistency.
+
+<Canvas of={AvatarFaviconStories.Size} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default
+classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<AvatarFavicon
+  name="OpenSea"
+  src="path/to/opensea-favicon.ico"
+  fallbackText="OS"
+  className="my-4 mx-2"
+/>
+```
+
+## Component API
+
+<Controls of={AvatarFaviconStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

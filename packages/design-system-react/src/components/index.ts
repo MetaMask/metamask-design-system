@@ -38,3 +38,15 @@ export type { ButtonIconProps } from './button-icon';
 
 export { AvatarBase, AvatarBaseSize } from './avatar-base';
 export type { AvatarBaseProps } from './avatar-base';
+
+export { AvatarNetwork, AvatarNetworkSize } from './avatar-network';
+export type { AvatarNetworkProps } from './avatar-network';
+
+export { AvatarToken, AvatarTokenSize } from './avatar-token';
+export type { AvatarTokenProps } from './avatar-token';
+
+export { AvatarFavicon, AvatarFaviconSize } from './avatar-favicon';
+export type { AvatarFaviconProps } from './avatar-favicon';
+
+export { AvatarIcon, AvatarIconSize, AvatarIconSeverity } from './avatar-icon';
+export type { AvatarIconProps } from './avatar-icon';

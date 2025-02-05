@@ -64,32 +64,12 @@ export const Default: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <View style={{ flexDirection: 'row', alignItems: 'flex-end', padding: 16 }}>
-      <Icon
-        name={DEFAULT_ICON_ICONNAME}
-        size={IconSize.Xs}
-        style={{ marginRight: 8 }}
-      />
-      <Icon
-        name={DEFAULT_ICON_ICONNAME}
-        size={IconSize.Sm}
-        style={{ marginRight: 8 }}
-      />
-      <Icon
-        name={DEFAULT_ICON_ICONNAME}
-        size={IconSize.Md}
-        style={{ marginRight: 8 }}
-      />
-      <Icon
-        name={DEFAULT_ICON_ICONNAME}
-        size={IconSize.Lg}
-        style={{ marginRight: 8 }}
-      />
-      <Icon
-        name={DEFAULT_ICON_ICONNAME}
-        size={IconSize.Xl}
-        style={{ marginRight: 8 }}
-      />
+    <View style={{ gap: 8 }}>
+      {Object.values(IconSize).map((size) => (
+        <View key={size}>
+          <Icon name={DEFAULT_ICON_ICONNAME} size={size} />
+        </View>
+      ))}
     </View>
   ),
 };

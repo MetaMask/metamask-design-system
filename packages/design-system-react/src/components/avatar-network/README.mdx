@@ -1,0 +1,105 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as AvatarNetworkStories from './AvatarNetwork.stories';
+
+# AvatarNetwork
+
+Avatar reserved for representing networks
+
+```tsx
+import { AvatarNetwork } from '@metamask/design-system-react';
+
+<AvatarNetwork
+  name="Ethereum Network"
+  src="path/to/ethereum-logo.png"
+  fallbackText="ETH"
+/>;
+```
+
+<Canvas of={AvatarNetworkStories.Default} />
+
+## Props
+
+### Name (required)
+
+The `name` prop is required and serves two purposes:
+
+- Used as alt text for the network image (unless overridden by `imageProps.alt`)
+- First letter is used as fallback display text when `fallbackText` is not provided
+
+<Canvas of={AvatarNetworkStories.Name} />
+
+### Src (image source)
+
+The `src` prop is optional and specifies the URL of the network's logo image.
+
+<Canvas of={AvatarNetworkStories.Src} />
+
+> Note: The `imageProps` prop allows you to customize the img element when `src` is provided. All standard HTML img attributes are supported and will be passed to the underlying img element when `src` is provided. This is useful for overriding the default alt text (which is the network name) when the AvatarNetwork is used as an accompaniment to an image.
+
+```tsx
+<AvatarNetwork
+  name="Ethereum"
+  src="path/to/ethereum-logo.png"
+  fallbackText="ETH"
+  imageProps={{ alt: 'Ethereum Logo', loading: 'lazy' }}
+/>
+```
+
+### Fallback Text
+
+The `fallbackText` prop is optional and is used for display text when no image is provided. If not provided, the first letter of `name` will be used.
+
+<Canvas of={AvatarNetworkStories.FallbackText} />
+
+> Note: The `fallbackTextProps` prop allows you to customize the Text component used for the fallback display
+
+```tsx
+<AvatarNetwork
+  name="Ethereum"
+  fallbackText="ETH"
+  fallbackTextProps={{ color: TextColor.PrimaryDefault }}
+/>
+```
+
+### Size
+
+AvatarNetwork supports five sizes:
+
+- `AvatarNetworkSize.Xs` (16px)
+- `AvatarNetworkSize.Sm` (24px)
+- `AvatarNetworkSize.Md` (32px) - default
+- `AvatarNetworkSize.Lg` (40px)
+- `AvatarNetworkSize.Xl` (48px)
+
+The fallback text uses TextVariant.BodySm for all sizes to maintain consistency.
+
+<Canvas of={AvatarNetworkStories.Size} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default
+classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<AvatarNetwork
+  name="Ethereum"
+  src="path/to/ethereum-logo.png"
+  fallbackText="ETH"
+  className="my-4 mx-2"
+/>
+```
+
+## Component API
+
+<Controls of={AvatarNetworkStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

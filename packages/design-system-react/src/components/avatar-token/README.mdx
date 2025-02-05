@@ -1,0 +1,105 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as AvatarTokenStories from './AvatarToken.stories';
+
+# AvatarToken
+
+Avatar reserved for representing tokens
+
+```tsx
+import { AvatarToken } from '@metamask/design-system-react';
+
+<AvatarToken
+  name="Ethereum"
+  src="path/to/ethereum-logo.png"
+  fallbackText="ETH"
+/>;
+```
+
+<Canvas of={AvatarTokenStories.Default} />
+
+## Props
+
+### Name (required)
+
+The `name` prop is required and serves two purposes:
+
+- Used as alt text for the token image (unless overridden by `imageProps.alt`)
+- First letter is used as fallback display text when `fallbackText` is not provided
+
+<Canvas of={AvatarTokenStories.Name} />
+
+### Src (image source)
+
+The `src` prop is optional and specifies the URL of the token's logo image.
+
+<Canvas of={AvatarTokenStories.Src} />
+
+> Note: The `imageProps` prop allows you to customize the img element when `src` is provided. All standard HTML img attributes are supported and will be passed to the underlying img element when `src` is provided. This is useful for overriding the default alt text (which is the token name) when the AvatarToken is used as an accompaniment to an image.
+
+```tsx
+<AvatarToken
+  name="Ethereum"
+  src="path/to/ethereum-logo.png"
+  fallbackText="ETH"
+  imageProps={{ alt: 'Ethereum Logo', loading: 'lazy' }}
+/>
+```
+
+### Fallback Text
+
+The `fallbackText` prop is optional and is used for display text when no image is provided. If not provided, the first letter of `name` will be used.
+
+<Canvas of={AvatarTokenStories.FallbackText} />
+
+> Note: The `fallbackTextProps` prop allows you to customize the Text component used for the fallback display
+
+```tsx
+<AvatarToken
+  name="Ethereum"
+  fallbackText="ETH"
+  fallbackTextProps={{ color: TextColor.PrimaryDefault }}
+/>
+```
+
+### Size
+
+AvatarToken supports five sizes:
+
+- `AvatarTokenSize.Xs` (16px)
+- `AvatarTokenSize.Sm` (24px)
+- `AvatarTokenSize.Md` (32px) - default
+- `AvatarTokenSize.Lg` (40px)
+- `AvatarTokenSize.Xl` (48px)
+
+The fallback text uses TextVariant.BodySm for all sizes to maintain consistency.
+
+<Canvas of={AvatarTokenStories.Size} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default
+classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<AvatarToken
+  name="Ethereum"
+  src="path/to/ethereum-logo.png"
+  fallbackText="ETH"
+  className="my-4 mx-2"
+/>
+```
+
+## Component API
+
+<Controls of={AvatarTokenStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
