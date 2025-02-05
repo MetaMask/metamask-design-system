@@ -4,7 +4,19 @@ import { TextColor } from '../../../Text';
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
 // Defaults
-export const DEFAULT_BUTTONTERTIARY_PROPS: Partial<ButtonTertiaryProps> = {
+export const DEFAULT_BUTTONTERTIARY_PROPS: Pick<
+  ButtonTertiaryProps,
+  | 'textProps'
+  | 'size'
+  | 'isLoading'
+  | 'spinnerProps'
+  | 'startIconProps'
+  | 'endIconProps'
+  | 'isDisabled'
+  | 'isFullWidth'
+  | 'isDanger'
+  | 'isInverse'
+> = {
   ...DEFAULT_BUTTONBASE_PROPS,
   textProps: {
     ...DEFAULT_BUTTONBASE_PROPS.textProps,
@@ -22,4 +34,6 @@ export const DEFAULT_BUTTONTERTIARY_PROPS: Partial<ButtonTertiaryProps> = {
     ...DEFAULT_BUTTONBASE_PROPS.endIconProps,
     color: IconColor.PrimaryInverse,
   },
+  isDanger: false,
+  isInverse: false,
 };

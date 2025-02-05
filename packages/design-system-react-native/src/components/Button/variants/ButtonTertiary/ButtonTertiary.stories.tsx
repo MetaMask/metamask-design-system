@@ -62,7 +62,7 @@ const ButtonTertiaryStory: React.FC<ButtonTertiaryProps> = ({
   return (
     <View
       style={[
-        tw`${isInverse ? `bg-primary-default` : 'bg-background-default'}`,
+        tw`${isInverse ? `bg-primary-default p-4` : 'bg-background-default'}`,
       ]}
     >
       <ButtonTertiary isInverse={isInverse} {...props} />
@@ -80,6 +80,8 @@ export const Default: Story = {
     endIconName: IconName.AddSquare,
     isDisabled: DEFAULT_BUTTONTERTIARY_PROPS.isDisabled,
     isFullWidth: DEFAULT_BUTTONTERTIARY_PROPS.isFullWidth,
+    isInverse: DEFAULT_BUTTONTERTIARY_PROPS.isInverse,
+    isDanger: DEFAULT_BUTTONTERTIARY_PROPS.isDanger,
   },
   render: (args) => <ButtonTertiaryStory {...args} />,
 };
@@ -108,30 +110,32 @@ export const IsLoading: Story = {
 };
 
 export const WithStartAccessory: Story = {
-  render: () => (
-    <ButtonTertiary startIconName={IconName.Add}>ButtonTertiary</ButtonTertiary>
-  ),
+  args: {
+    children: 'Start Acccessory',
+    startIconName: IconName.Add,
+  },
 };
 
 export const WithEndAccessory: Story = {
-  render: () => (
-    <ButtonTertiary endIconName={IconName.Add}>ButtonTertiary</ButtonTertiary>
-  ),
+  args: {
+    children: 'End Accessory',
+    endIconName: IconName.AddSquare,
+  },
 };
 
 export const WithStartAndEndAccessory: Story = {
-  render: () => (
-    <ButtonTertiary
-      startIconName={IconName.Add}
-      endIconName={IconName.AddSquare}
-    >
-      ButtonTertiary
-    </ButtonTertiary>
-  ),
+  args: {
+    children: 'Start and End Accessory',
+    startIconName: IconName.Add,
+    endIconName: IconName.AddSquare,
+  },
 };
 
 export const isDisabled: Story = {
-  render: () => <ButtonTertiary isDisabled>ButtonTertiary</ButtonTertiary>,
+  args: {
+    children: 'isDisabled',
+    isDisabled: true,
+  },
 };
 
 export const isFullWidth: Story = {
