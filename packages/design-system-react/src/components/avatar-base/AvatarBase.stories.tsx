@@ -81,27 +81,27 @@ export const Size: Story = {
         <AvatarBase
           shape={AvatarBaseShape.Square}
           size={AvatarBaseSize.Xs}
-          fallbackText="XS"
+          fallbackText="Xs"
         />
         <AvatarBase
           shape={AvatarBaseShape.Square}
           size={AvatarBaseSize.Sm}
-          fallbackText="SM"
+          fallbackText="Sm"
         />
         <AvatarBase
           shape={AvatarBaseShape.Square}
           size={AvatarBaseSize.Md}
-          fallbackText="MD"
+          fallbackText="Md"
         />
         <AvatarBase
           shape={AvatarBaseShape.Square}
           size={AvatarBaseSize.Lg}
-          fallbackText="LG"
+          fallbackText="Lg"
         />
         <AvatarBase
           shape={AvatarBaseShape.Square}
           size={AvatarBaseSize.Xl}
-          fallbackText="XL"
+          fallbackText="Xl"
         />
       </div>
     </div>

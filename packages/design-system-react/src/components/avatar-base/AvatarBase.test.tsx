@@ -3,7 +3,10 @@ import React from 'react';
 
 import { TextColor } from '../text';
 import { AvatarBase } from './AvatarBase';
-import { AVATAR_BASE_SIZE_CLASS_MAP } from './AvatarBase.constants';
+import {
+  AVATAR_BASE_SIZE_CLASS_MAP,
+  AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP,
+} from './AvatarBase.constants';
 import { AvatarBaseSize, AvatarBaseShape } from './AvatarBase.types';
 
 describe('AvatarBase', () => {
@@ -102,12 +105,40 @@ describe('AvatarBase', () => {
     rerender(
       <AvatarBase
         shape={AvatarBaseShape.Square}
+        size={AvatarBaseSize.Md}
         fallbackText="A"
         data-testid="avatar"
       />,
     );
     avatar = screen.getByTestId('avatar');
     expect(avatar).toHaveClass('rounded-lg');
+  });
+
+  it('applies correct border radius for all square sizes', () => {
+    const { rerender } = render(
+      <AvatarBase
+        shape={AvatarBaseShape.Square}
+        size={AvatarBaseSize.Xs}
+        fallbackText="A"
+        data-testid="avatar"
+      />,
+    );
+
+    // Test all sizes
+    Object.entries(AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP).forEach(
+      ([size, borderRadiusClass]) => {
+        rerender(
+          <AvatarBase
+            shape={AvatarBaseShape.Square}
+            size={size as AvatarBaseSize}
+            fallbackText="A"
+            data-testid="avatar"
+          />,
+        );
+        const avatar = screen.getByTestId('avatar');
+        expect(avatar).toHaveClass(borderRadiusClass);
+      },
+    );
   });
 
   it('uses circle shape by default', () => {
@@ -146,7 +177,7 @@ describe('AvatarBase', () => {
     expect(fallbackText).toHaveClass('text-primary-default');
   });
 
-  it('uses correct text variant based on size', () => {
+  it('uses BodySm text variant for all sizes', () => {
     const { rerender } = render(
       <AvatarBase
         size={AvatarBaseSize.Xs}
@@ -157,7 +188,7 @@ describe('AvatarBase', () => {
 
     // Test XS size
     let fallbackText = screen.getByTestId('fallback-text');
-    expect(fallbackText).toHaveClass('text-s-body-xs');
+    expect(fallbackText).toHaveClass('text-s-body-sm');
 
     // Test MD size
     rerender(
@@ -179,6 +210,6 @@ describe('AvatarBase', () => {
       />,
     );
     fallbackText = screen.getByTestId('fallback-text');
-    expect(fallbackText).toHaveClass('text-s-body-md');
+    expect(fallbackText).toHaveClass('text-s-body-sm');
   });
 });
