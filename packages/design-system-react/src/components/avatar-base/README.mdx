@@ -1,0 +1,89 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as AvatarBaseStories from './AvatarBase.stories';
+
+# AvatarBase
+
+The AvatarBase is the base component for avatars
+
+```tsx
+import { AvatarBase } from '@metamask/design-system-react';
+
+<AvatarBase fallbackText="A" />;
+```
+
+<Canvas of={AvatarBaseStories.Default} />
+
+## Props
+
+### Shape
+
+AvatarBase supports two shapes:
+
+- `AvatarBaseShape.Circle` (fully rounded) - default
+- `AvatarBaseShape.Square` (slightly rounded corners)
+
+<Canvas of={AvatarBaseStories.Shape} />
+
+### Size
+
+AvatarBase supports five sizes:
+
+- `AvatarBaseSize.Xs` (16px)
+- `AvatarBaseSize.Sm` (24px)
+- `AvatarBaseSize.Md` (32px) - default
+- `AvatarBaseSize.Lg` (40px)
+- `AvatarBaseSize.Xl` (48px)
+
+Each size automatically maps to an appropriate text size for the fallback text.
+
+<Canvas of={AvatarBaseStories.Size} />
+
+### Fallback Text
+
+The `fallbackText` prop provides a simple way to display text within the avatar. The text size automatically adjusts based on the avatar size.
+
+<Canvas of={AvatarBaseStories.FallbackText} />
+
+You can customize the appearance of the fallback text using `fallbackTextProps`:
+
+<Canvas of={AvatarBaseStories.FallbackTextWithProps} />
+
+### Children
+
+While `fallbackText` is the recommended way to display text, AvatarBase can also contain custom content like images and icons:
+
+<Canvas of={AvatarBaseStories.Children} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<AvatarBase fallbackText="A" className="my-4 mx-2" />
+
+// Overriding default styles
+<AvatarBase
+  fallbackText="A"
+  className="bg-success-default"
+  fallbackTextProps={{ color: TextColor.SuccessInverse }}
+/>
+```
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+
+## Component API
+
+<Controls of={AvatarBaseStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
