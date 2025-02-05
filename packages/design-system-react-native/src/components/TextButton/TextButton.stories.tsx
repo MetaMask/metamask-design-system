@@ -9,7 +9,7 @@ import { DEFAULT_TEXTBUTTON_PROPS } from './TextButton.constants';
 import type { TextButtonProps } from './TextButton.types';
 
 const meta: Meta<TextButtonProps> = {
-  title: 'Components/Text Button',
+  title: 'Components/TextButton',
   component: TextButton,
   argTypes: {
     children: {
