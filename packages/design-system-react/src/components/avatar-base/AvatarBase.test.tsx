@@ -3,7 +3,10 @@ import React from 'react';
 
 import { TextColor } from '../text';
 import { AvatarBase } from './AvatarBase';
-import { AVATAR_BASE_SIZE_CLASS_MAP } from './AvatarBase.constants';
+import {
+  AVATAR_BASE_SIZE_CLASS_MAP,
+  AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP,
+} from './AvatarBase.constants';
 import { AvatarBaseSize, AvatarBaseShape } from './AvatarBase.types';
 
 describe('AvatarBase', () => {
@@ -102,12 +105,13 @@ describe('AvatarBase', () => {
     rerender(
       <AvatarBase
         shape={AvatarBaseShape.Square}
+        size={AvatarBaseSize.Md}
         fallbackText="A"
         data-testid="avatar"
       />,
     );
     avatar = screen.getByTestId('avatar');
-    expect(avatar).toHaveClass('rounded-lg');
+    expect(avatar).toHaveClass('rounded-[8px]');
   });
 
   it('uses circle shape by default', () => {

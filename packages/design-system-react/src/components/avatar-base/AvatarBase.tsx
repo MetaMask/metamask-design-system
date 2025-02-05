@@ -3,7 +3,10 @@ import React from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 import { Text, FontWeight, TextVariant, TextColor } from '..';
-import { AVATAR_BASE_SIZE_CLASS_MAP } from './AvatarBase.constants';
+import {
+  AVATAR_BASE_SIZE_CLASS_MAP,
+  AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP,
+} from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
 import { AvatarBaseShape, AvatarBaseSize } from './AvatarBase.types';
 
@@ -27,7 +30,9 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
     const mergedClassName = twMerge(
       // Base styles
       'inline-flex items-center justify-center',
-      shape === AvatarBaseShape.Circle ? 'rounded-full' : 'rounded-lg',
+      shape === AvatarBaseShape.Circle
+        ? 'rounded-full'
+        : AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP[size],
       'bg-muted',
       'overflow-hidden',
       // Size
