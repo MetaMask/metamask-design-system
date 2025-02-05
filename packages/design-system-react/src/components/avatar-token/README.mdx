@@ -64,13 +64,15 @@ The `fallbackText` prop is optional and is used for display text when no image i
 
 ### Size
 
-AvatarToken supports five sizes, each with a corresponding text variant for the fallback text:
+AvatarToken supports five sizes:
 
-- `AvatarTokenSize.Xs` (16px) - uses TextVariant.BodyXs
-- `AvatarTokenSize.Sm` (24px) - uses TextVariant.BodyXs
-- `AvatarTokenSize.Md` (32px) - uses TextVariant.BodySm (default)
-- `AvatarTokenSize.Lg` (40px) - uses TextVariant.BodyMd
-- `AvatarTokenSize.Xl` (48px) - uses TextVariant.BodyMd
+- `AvatarTokenSize.Xs` (16px)
+- `AvatarTokenSize.Sm` (24px)
+- `AvatarTokenSize.Md` (32px) - default
+- `AvatarTokenSize.Lg` (40px)
+- `AvatarTokenSize.Xl` (48px)
+
+The fallback text uses TextVariant.BodySm for all sizes to maintain consistency.
 
 <Canvas of={AvatarTokenStories.Size} />
 
