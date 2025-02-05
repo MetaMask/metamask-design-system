@@ -19,6 +19,7 @@ export const Text: React.FC<TextProps> = ({
   asChild,
   color = TextColor.TextDefault,
   style,
+  ...props
 }) => {
   // When asChild is true, use Radix Slot to merge props onto the child component.
   // Otherwise, render the semantic HTML element mapped to this variant (e.g. h1-h4, p).
@@ -37,7 +38,7 @@ export const Text: React.FC<TextProps> = ({
   );
 
   return (
-    <Component className={mergedClassName} style={style}>
+    <Component className={mergedClassName} style={style} {...props}>
       {children}
     </Component>
   );

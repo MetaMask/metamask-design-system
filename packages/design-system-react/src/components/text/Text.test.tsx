@@ -14,6 +14,15 @@ import {
 import { TEXT_CLASS_MAP } from './Text.constants';
 
 describe('Text Component', () => {
+  it('renders with props applied to the underlying element', () => {
+    render(
+      <Text variant={TextVariant.BodyMd} data-testid="text">
+        Hello, World!
+      </Text>,
+    );
+    expect(screen.getByTestId('text')).toBeInTheDocument();
+  });
+
   it('renders children correctly', () => {
     render(<Text variant={TextVariant.BodyMd}>Hello, World!</Text>);
     expect(screen.getByText('Hello, World!')).toBeInTheDocument();

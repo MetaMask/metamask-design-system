@@ -55,15 +55,15 @@ export enum IconColor {
  */
 export enum IconSize {
   /** Extra small - 12px */
-  Xs = 'xs',
+  Xs = 12,
   /** Small - 16px */
-  Sm = 'sm',
+  Sm = 16,
   /** Medium - 20px (Default) */
-  Md = 'md',
+  Md = 20,
   /** Large - 24px */
-  Lg = 'lg',
+  Lg = 24,
   /** Extra large - 32px */
-  Xl = 'xl',
+  Xl = 32,
 }
 
 /**
