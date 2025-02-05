@@ -1,5 +1,4 @@
 import { AvatarBaseSize } from './AvatarBase.types';
-import { TextVariant } from '../text';
 
 export const AVATAR_BASE_SIZE_CLASS_MAP: Record<AvatarBaseSize, string> = {
   [AvatarBaseSize.Xs]: 'h-4 w-4',
@@ -9,13 +8,13 @@ export const AVATAR_BASE_SIZE_CLASS_MAP: Record<AvatarBaseSize, string> = {
   [AvatarBaseSize.Xl]: 'h-12 w-12',
 };
 
-export const AVATAR_BASE_SIZE_TO_TEXT_VARIANT_MAP: Record<
+export const AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP: Record<
   AvatarBaseSize,
-  TextVariant
+  string
 > = {
-  [AvatarBaseSize.Xs]: TextVariant.BodyXs,
-  [AvatarBaseSize.Sm]: TextVariant.BodyXs,
-  [AvatarBaseSize.Md]: TextVariant.BodySm,
-  [AvatarBaseSize.Lg]: TextVariant.BodyMd,
-  [AvatarBaseSize.Xl]: TextVariant.BodyMd,
+  [AvatarBaseSize.Xs]: 'rounded-sm', // 4px
+  [AvatarBaseSize.Sm]: 'rounded-md', // 6px
+  [AvatarBaseSize.Md]: 'rounded-lg', // 8px
+  [AvatarBaseSize.Lg]: 'rounded-[10px]', // 10px (No tailwind class for this)
+  [AvatarBaseSize.Xl]: 'rounded-xl', // 12px
 };
