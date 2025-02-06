@@ -47,6 +47,7 @@ try {
 
 const getStories = () => {
   return {
+    "./../../packages/design-system-react-native/src/components/Button/Button.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/Button.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx"),
