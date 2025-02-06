@@ -3,7 +3,7 @@
 ![Button](./Button.png)
 
 A Button is a labeled element that a user can tap to initiate an action. 
-This component is a union component, which consists of [ButtonLink](./variants/ButtonLink/ButtonLink.tsx), [ButtonPrimary](./variants/ButtonPrimary/ButtonPrimary.tsx), and [ButtonSecondary](./variants/ButtonSecondary/ButtonSecondary.tsx).
+This component is a union component, which consists of [ButtonTertiary](./variants/ButtonTertiary/ButtonTertiary.tsx), [ButtonPrimary](./variants/ButtonPrimary/ButtonPrimary.tsx), and [ButtonSecondary](./variants/ButtonSecondary/ButtonSecondary.tsx).
 
 ## ButtonLink Props
 
