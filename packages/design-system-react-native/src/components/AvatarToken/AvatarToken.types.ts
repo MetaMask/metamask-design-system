@@ -6,7 +6,8 @@ import { ImageSourcePropType, ImageProps } from 'react-native';
  */
 export type AvatarFaviconProps = {
   /**
-   * Prop to control the source of the favicon
+   * Optional prop to control the severity of the avatar
+   * @default AvatarFaviconSeverity.Default
    */
   src: ImageSourcePropType;
 } & Omit<AvatarBaseProps, 'children'>;
