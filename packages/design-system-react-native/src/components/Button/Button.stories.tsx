@@ -246,9 +246,8 @@ export const isDanger: Story = {
     <View style={{ gap: 16 }}>
       <View style={{ gap: 8 }}>
         {Object.keys(ButtonVariant).map((variantKey) => (
-          <>
+          <React.Fragment key={`${variantKey}-fragment`}>
             <ButtonStory
-              key={`${variantKey}-isDanger`}
               startIconName={IconName.ArrowLeft}
               endIconName={IconName.ArrowRight}
               variant={ButtonVariant[variantKey as keyof typeof ButtonVariant]}
@@ -257,7 +256,6 @@ export const isDanger: Story = {
               {`${variantKey}-isDanger`}
             </ButtonStory>
             <ButtonStory
-              key={`${variantKey}-isDanger-isInverse`}
               startIconName={IconName.ArrowLeft}
               endIconName={IconName.ArrowRight}
               variant={ButtonVariant[variantKey as keyof typeof ButtonVariant]}
@@ -266,7 +264,7 @@ export const isDanger: Story = {
             >
               {`${variantKey}-isDanger-isInverse`}
             </ButtonStory>
-          </>
+          </React.Fragment>
         ))}
       </View>
     </View>
