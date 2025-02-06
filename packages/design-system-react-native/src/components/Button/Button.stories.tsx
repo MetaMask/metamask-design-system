@@ -132,9 +132,8 @@ export const IsLoading: Story = {
     <View style={{ gap: 16 }}>
       <View style={{ gap: 8 }}>
         {Object.keys(ButtonVariant).map((variantKey) => (
-          <>
+          <React.Fragment key={`${variantKey}`}>
             <ButtonStory
-              key={variantKey}
               startIconName={IconName.ArrowLeft}
               endIconName={IconName.ArrowRight}
               variant={ButtonVariant[variantKey as keyof typeof ButtonVariant]}
@@ -143,7 +142,6 @@ export const IsLoading: Story = {
               {variantKey}
             </ButtonStory>
             <ButtonStory
-              key={`${variantKey}-withtext`}
               startIconName={IconName.ArrowLeft}
               endIconName={IconName.ArrowRight}
               variant={ButtonVariant[variantKey as keyof typeof ButtonVariant]}
@@ -152,7 +150,7 @@ export const IsLoading: Story = {
             >
               {variantKey}
             </ButtonStory>
-          </>
+          </React.Fragment>
         ))}
       </View>
     </View>
