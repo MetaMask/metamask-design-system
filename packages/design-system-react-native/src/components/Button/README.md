@@ -2,7 +2,7 @@
 
 ![Button](./Button.png)
 
-A Button is a labeled element that a user can tap to initiate an action. 
+A Button is a labeled element that a user can tap to initiate an action.
 This component is a union component, which consists of [ButtonTertiary](./variants/ButtonTertiary/ButtonTertiary.tsx), [ButtonPrimary](./variants/ButtonPrimary/ButtonPrimary.tsx), and [ButtonSecondary](./variants/ButtonSecondary/ButtonSecondary.tsx).
 
 ## ButtonTertiary Props
@@ -76,9 +76,9 @@ Optional param to control the width of the button.
 ## Usage
 
 ```javascript
-// ButtonLink
+// ButtonTertiary
 <Button
-  variant={ButtonVariants.Link}
+  variant={ButtonVariants.Tertiary}
   label={SAMPLE_LABEL}
   startIconName={IconName.Bank}
   endIconName={IconName.Bank}
