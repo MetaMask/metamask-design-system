@@ -276,9 +276,8 @@ export const isInverse: Story = {
     <View style={{ gap: 16 }}>
       <View style={{ gap: 8 }}>
         {Object.keys(ButtonVariant).map((variantKey) => (
-          <>
+          <React.Fragment key={`${variantKey}-fragment`}>
             <ButtonStory
-              key={`${variantKey}-isInverse`}
               startIconName={IconName.ArrowLeft}
               endIconName={IconName.ArrowRight}
               variant={ButtonVariant[variantKey as keyof typeof ButtonVariant]}
@@ -287,7 +286,6 @@ export const isInverse: Story = {
               {`${variantKey}-isInverse`}
             </ButtonStory>
             <ButtonStory
-              key={`${variantKey}-isInverse-isDanger`}
               startIconName={IconName.ArrowLeft}
               endIconName={IconName.ArrowRight}
               variant={ButtonVariant[variantKey as keyof typeof ButtonVariant]}
@@ -296,7 +294,7 @@ export const isInverse: Story = {
             >
               {`${variantKey}-isInverse-isDanger`}
             </ButtonStory>
-          </>
+          </React.Fragment>
         ))}
       </View>
     </View>
