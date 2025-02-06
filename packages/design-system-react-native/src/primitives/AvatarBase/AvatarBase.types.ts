@@ -1,42 +1,6 @@
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
-import type { TextProps } from 'src/components/Text/Text.types';
-
-import type { IconProps, IconName } from '../../components/Icon';
-import type { SpinnerProps } from '../../temp-components/Spinner';
-
-export enum AvatarBaseSize {
-  /**
-   * Represents an extra small avatar size (16px).
-   */
-  Xs = '16',
-  /**
-   * Represents a small avatar size (24px).
-   */
-  Sm = '24',
-  /**
-   * Represents a medium avatar size (32px).
-   */
-  Md = '32',
-  /**
-   * Represents a large avatar size (40px).
-   */
-  Lg = '40',
-  /**
-   * Represents an extra large avatar size (48px).
-   */
-  Xl = '48',
-}
-
-export enum AvatarBaseShape {
-  /**
-   * Represents a circular Avatar.
-   */
-  Circle = 'circle',
-  /**
-   * Represents a squared Avatar
-   */
-  Square = 'square',
-}
+import type { TextProps } from '../../components/Text/Text.types';
+import { AvatarSize, AvatarShape } from '../../shared/enums';
 
 /**
  * AvatarBase component props.
@@ -45,7 +9,7 @@ export type AvatarBaseProps = {
   /**
    * Required prop for the content to be rendered within the AvatarBase
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * Optional prop to control the size of the AvatarBase
    * Possible values:
@@ -56,15 +20,15 @@ export type AvatarBaseProps = {
    * - AvatarBaseSize.Xl (48px),
    * @default AvatarBaseSize.Md
    */
-  size?: AvatarBaseSize;
+  size?: AvatarSize;
   /**
    * Optional prop to control the shape of the AvatarBase
    * Possible values:
-   * - AvatarBaseShape.Circle
-   * - AvatarBaseShape.Square
-   * @default AvatarBaseShape.Circle
+   * - AvatarShape.Circle
+   * - AvatarShape.Square
+   * @default AvatarShape.Circle
    */
-  shape?: AvatarBaseShape;
+  shape?: AvatarShape;
   /**
    * Optional text to be rendered when the content fails to render
    */
@@ -74,16 +38,6 @@ export type AvatarBaseProps = {
    * fails to render
    */
   fallbackTextProps?: Omit<TextProps, 'children'>;
-  /**
-   * Optional icon to be rendered when the content fails to render
-   * and there's no fallbackText
-   */
-  fallbackIcon?: IconName;
-  /**
-   * Optional props to be passed to the fallbackIcon when the content
-   * fails to render and there's no fallbackText
-   */
-  fallbackIconProps?: Omit<IconProps, 'name'>;
   /**
    * Optional prop to add twrnc overriding classNames.
    */

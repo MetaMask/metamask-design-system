@@ -1,42 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
-import { View } from 'react-native';
+import { Image, ImageSourcePropType, View } from 'react-native';
 
-import { IconName } from '../../components/Icon';
-import ButtonBase from './AvatarBase';
-import { DEFAULT_BUTTONBASE_PROPS } from './AvatarBase.constants';
-import type { ButtonBaseProps } from './AvatarBase.types';
-import { ButtonBaseSize } from './AvatarBase.types';
+import AvatarBase from './AvatarBase';
+import { DEFAULT_AVATARBASE_PROPS } from './AvatarBase.constants';
+import type { AvatarBaseProps } from './AvatarBase.types';
+import { AvatarSize, AvatarShape } from '../../shared/enums';
 
-const meta: Meta<ButtonBaseProps> = {
-  title: 'Primitives/ButtonBase',
-  component: ButtonBase,
+const meta: Meta<AvatarBaseProps> = {
+  title: 'Primitives/AvatarBase',
+  component: AvatarBase,
   argTypes: {
     children: {
       control: 'text',
     },
     size: {
       control: 'select',
-      options: ButtonBaseSize,
+      options: AvatarSize,
     },
-    isLoading: {
-      control: 'boolean',
+    shape: {
+      control: 'select',
+      options: AvatarShape,
     },
-    loadingText: {
+    fallbackText: {
       control: 'text',
-    },
-    startIconName: {
-      control: 'select',
-      options: IconName,
-    },
-    endIconName: {
-      control: 'select',
-      options: IconName,
-    },
-    isDisabled: {
-      control: 'boolean',
-    },
-    isFullWidth: {
-      control: 'boolean',
     },
     twClassName: {
       control: 'text',
@@ -46,90 +32,102 @@ const meta: Meta<ButtonBaseProps> = {
 
 export default meta;
 
-type Story = StoryObj<ButtonBaseProps>;
+type Story = StoryObj<AvatarBaseProps>;
+const storyImageSource: ImageSourcePropType = {
+  uri: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
+};
+const TestImage = (
+  <Image
+    source={storyImageSource}
+    style={{ width: '100%', height: '100%' }}
+    resizeMode="contain"
+  />
+);
 
 export const Default: Story = {
   args: {
-    children: 'ButtonBase',
-    size: DEFAULT_BUTTONBASE_PROPS.size,
-    isLoading: DEFAULT_BUTTONBASE_PROPS.isLoading,
-    loadingText: 'Loading',
-    startIconName: IconName.Add,
-    endIconName: IconName.AddSquare,
-    isDisabled: DEFAULT_BUTTONBASE_PROPS.isDisabled,
-    isFullWidth: DEFAULT_BUTTONBASE_PROPS.isFullWidth,
+    size: DEFAULT_AVATARBASE_PROPS.size,
+    shape: DEFAULT_AVATARBASE_PROPS.shape,
+    fallbackText: '',
+    twClassName: '',
   },
+  render: (args) => <AvatarBase {...args}>{TestImage}</AvatarBase>,
 };
 
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonBase size={ButtonBaseSize.Sm}>ButtonBaseSize Sm</ButtonBase>
-      <ButtonBase size={ButtonBaseSize.Md}>ButtonBaseSize Md</ButtonBase>
-      <ButtonBase size={ButtonBaseSize.Lg}>
-        ButtonBaseSize Lg (Default)
-      </ButtonBase>
+      {Object.keys(AvatarSize).map((sizeKey) => (
+        <View style={{ flexDirection: 'row', gap: 16 }}>
+          <AvatarBase
+            key={`${sizeKey}-${AvatarShape.Circle}`}
+            shape={AvatarShape.Circle}
+            size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
+            fallbackText={sizeKey}
+          />
+          <AvatarBase
+            key={`${sizeKey}-${AvatarShape.Square}`}
+            shape={AvatarShape.Square}
+            size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
+            fallbackText={sizeKey}
+          />
+        </View>
+      ))}
     </View>
   ),
 };
 
-export const IsLoading: Story = {
+export const Shapes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonBase isLoading>ButtonBase</ButtonBase>
-      <ButtonBase isLoading loadingText="With Loading Text">
-        ButtonBase
-      </ButtonBase>
+      {Object.keys(AvatarShape).map((shapeKey) => (
+        <View style={{ flexDirection: 'row', gap: 16 }}>
+          <AvatarBase
+            key={`${shapeKey}-${AvatarSize.Xs}`}
+            shape={AvatarShape[shapeKey as keyof typeof AvatarShape]}
+            size={AvatarSize.Xs}
+          >
+            {TestImage}
+          </AvatarBase>
+          <AvatarBase
+            key={`${shapeKey}-${AvatarSize.Sm}`}
+            shape={AvatarShape[shapeKey as keyof typeof AvatarShape]}
+            size={AvatarSize.Sm}
+          >
+            {TestImage}
+          </AvatarBase>
+          <AvatarBase
+            key={`${shapeKey}-${AvatarSize.Md}`}
+            shape={AvatarShape[shapeKey as keyof typeof AvatarShape]}
+            size={AvatarSize.Md}
+          >
+            {TestImage}
+          </AvatarBase>
+          <AvatarBase
+            key={`${shapeKey}-${AvatarSize.Lg}`}
+            shape={AvatarShape[shapeKey as keyof typeof AvatarShape]}
+            size={AvatarSize.Lg}
+          >
+            {TestImage}
+          </AvatarBase>
+          <AvatarBase
+            key={`${shapeKey}-${AvatarSize.Xl}`}
+            shape={AvatarShape[shapeKey as keyof typeof AvatarShape]}
+            size={AvatarSize.Xl}
+          >
+            {TestImage}
+          </AvatarBase>
+        </View>
+      ))}
     </View>
   ),
 };
 
-export const WithStartAccessory: Story = {
-  render: () => (
-    <ButtonBase startIconName={IconName.Add}>ButtonBase</ButtonBase>
-  ),
-};
-
-export const WithEndAccessory: Story = {
-  render: () => <ButtonBase endIconName={IconName.Add}>ButtonBase</ButtonBase>,
-};
-
-export const WithStartAndEndAccessory: Story = {
-  render: () => (
-    <ButtonBase startIconName={IconName.Add} endIconName={IconName.AddSquare}>
-      ButtonBase
-    </ButtonBase>
-  ),
-};
-
-export const isDisabled: Story = {
-  render: () => <ButtonBase isDisabled>ButtonBase</ButtonBase>,
-};
-
-export const isFullWidth: Story = {
+export const FallbackText: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonBase>ButtonBase</ButtonBase>
-      <ButtonBase isFullWidth>ButtonBase</ButtonBase>
-    </View>
-  ),
-};
-
-export const WithLongText: Story = {
-  render: () => (
-    <View style={{ paddingHorizontal: 32 }}>
-      <ButtonBase
-        startIconName={IconName.Add}
-        endIconName={IconName.ArrowRight}
-      >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </ButtonBase>
+      <AvatarBase shape={AvatarShape.Circle} fallbackText="A" />
+      <AvatarBase shape={AvatarShape.Square} fallbackText="A" />
     </View>
   ),
 };

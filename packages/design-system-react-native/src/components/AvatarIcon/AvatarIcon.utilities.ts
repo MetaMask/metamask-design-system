@@ -1,9 +1,10 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
-import { DEFAULT_AVATARBASE_PROPS } from './AvatarBase.constants';
-import type { AvatarBaseProps } from './AvatarBase.types';
-import { TWCLASSMAP_AVATARBASE_SIZE_SHAPE } from './AvatarBase.constants';
-import { AvatarShape } from '../../shared/enums';
+import type { AvatarIconProps } from './AvatarIcon.types';
+import {
+  TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
+  DEFAULT_AVATARICON_PROPS,
+} from './AvatarIcon.constants';
 
 /**
  * Generates a Tailwind class name string for the base container of a button.
@@ -11,7 +12,7 @@ import { AvatarShape } from '../../shared/enums';
  * This function constructs a class name string based on the button's `size`,
  * `isDisabled`, `isFullWidth`, and optional additional Tailwind class names.
  *
- * @param size - The size of the button, defaulting to `DEFAULT_AVATARBASE_PROPS.size`.
+ * @param size - The size of the button, defaulting to `DEFAULT_AVATARICON_PROPS.size`.
  * @param isDisabled - A boolean indicating whether the button is disabled, affecting opacity.
  * @param isFullWidth - A boolean indicating whether the button should stretch to full width.
  * @param twClassName - Additional Tailwind class names for customization.
@@ -19,7 +20,7 @@ import { AvatarShape } from '../../shared/enums';
  *
  * Example:
  * ```
- * const classNames = generateAvatarBaseContainerClassNames({
+ * const classNames = generateAvatarIconContainerClassNames({
  *   size: 'md',
  *   isDisabled: true,
  *   isFullWidth: false,
@@ -30,19 +31,9 @@ import { AvatarShape } from '../../shared/enums';
  * // Output: "md-class flex-row items-center justify-center rounded-full bg-background-muted px-4 opacity-50 self-start border border-red-500"
  * ```
  */
-export const generateAvatarBaseContainerClassNames = ({
-  size = DEFAULT_AVATARBASE_PROPS.size,
-  shape = DEFAULT_AVATARBASE_PROPS.shape,
+export const generateAvatarIconContainerClassNames = ({
+  severity = DEFAULT_AVATARICON_PROPS.severity,
   twClassName = '',
-}: Partial<AvatarBaseProps>): string => {
-  const baseStyle = 'items-center justify-center overflow-hidden';
-  const fallbackBackgroundStyle = 'bg-background-muted';
-  const sizeStyle = `h-[${size}px] w-[${size}px]`;
-  const shapeStyle =
-    shape === AvatarShape.Circle
-      ? 'rounded-full'
-      : TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size];
-
-  const mergedClassnames = `${baseStyle} ${fallbackBackgroundStyle} ${sizeStyle} ${shapeStyle} ${twClassName}`;
-  return mergedClassnames;
+}: Partial<AvatarIconProps>): string => {
+  return `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity]} ${twClassName}`;
 };

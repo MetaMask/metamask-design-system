@@ -1,32 +1,26 @@
 import type { AvatarBaseProps } from './AvatarBase.types';
-import { AvatarBaseSize, AvatarBaseShape } from './AvatarBase.types';
 import { TextColor, TextVariant, FontWeight } from '../../components/Text';
-import { IconColor } from '../../components/Icon';
+import { AvatarSize, AvatarShape } from '../../shared/enums';
 
 // Mappings
-export const TWCLASSMAP_AVATARBASE_SHAPE: Record<AvatarBaseSize, string> = {
-  [AvatarBaseSize.Xs]: 'rounded-[4px]',
-  [AvatarBaseSize.Sm]: 'rounded-[6px]',
-  [AvatarBaseSize.Md]: 'rounded-[8px]',
-  [AvatarBaseSize.Lg]: 'rounded-[10px]',
-  [AvatarBaseSize.Xl]: 'rounded-[12px]',
+export const TWCLASSMAP_AVATARBASE_SIZE_SHAPE: Record<AvatarSize, string> = {
+  [AvatarSize.Xs]: 'rounded-sm',
+  [AvatarSize.Sm]: 'rounded-md',
+  [AvatarSize.Md]: 'rounded-lg',
+  [AvatarSize.Lg]: 'rounded-[10px]',
+  [AvatarSize.Xl]: 'rounded-xl',
 };
 
 // Defaults
 export const DEFAULT_AVATARBASE_PROPS: Required<
-  Pick<
-    AvatarBaseProps,
-    'size' | 'shape' | 'fallbackTextProps' | 'fallbackIconProps'
-  >
+  Pick<AvatarBaseProps, 'size' | 'shape' | 'fallbackTextProps'>
 > = {
-  size: AvatarBaseSize.Md,
-  shape: AvatarBaseShape.Circle,
+  size: AvatarSize.Md,
+  shape: AvatarShape.Circle,
   fallbackTextProps: {
-    color: TextColor.PrimaryInverse,
+    color: TextColor.TextMuted,
     variant: TextVariant.BodySm,
     fontWeight: FontWeight.Medium,
-  },
-  fallbackIconProps: {
-    color: IconColor.PrimaryInverse,
+    twClassName: 'uppercase',
   },
 };
