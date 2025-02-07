@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react-native';
-
 import ImageOrSvg from './ImageOrSvg';
 
 // --- Manual mock for react-native-svg ---
@@ -11,14 +10,18 @@ jest.mock('react-native-svg', () => {
   };
 });
 
-// Clear mocks and reset fetch before each test.
+// Dummy local SVG component for testing.
+const DummyLocalSvg = (props: any) => {
+  return <svg data-testid="localSvg" {...props} />;
+};
+
 beforeEach(() => {
   jest.clearAllMocks();
   (global.fetch as jest.Mock) = jest.fn();
 });
 
 describe('ImageOrSvg Component', () => {
-  it('renders a local image (src as number) as <Image>', () => {
+  it('renders a local bitmap image (src as number) as <Image>', () => {
     const { getByTestId } = render(
       <ImageOrSvg src={1} imageProps={{ testID: 'localImage' }} />,
     );
@@ -29,9 +32,7 @@ describe('ImageOrSvg Component', () => {
   });
 
   it('renders a remote image as <Image> when HEAD returns non-SVG content', async () => {
-    const fakeResponse = {
-      headers: { get: jest.fn(() => 'image/png') },
-    };
+    const fakeResponse = { headers: { get: jest.fn(() => 'image/png') } };
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
 
     const remoteSrc = { uri: 'https://example.com/photo.png' };
@@ -48,9 +49,7 @@ describe('ImageOrSvg Component', () => {
   });
 
   it('renders a remote image as <Image> when HEAD returns non-SVG content and no header', async () => {
-    const fakeResponse = {
-      headers: { get: jest.fn(() => null) },
-    };
+    const fakeResponse = { headers: { get: jest.fn(() => null) } };
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
 
     const remoteSrc = { uri: 'https://example.com/photo.png' };
@@ -64,9 +63,7 @@ describe('ImageOrSvg Component', () => {
   });
 
   it('renders a remote image as <SvgUri> when HEAD returns SVG content', async () => {
-    const fakeResponse = {
-      headers: { get: jest.fn(() => 'image/svg+xml') },
-    };
+    const fakeResponse = { headers: { get: jest.fn(() => 'image/svg+xml') } };
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
 
     const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };
@@ -98,11 +95,8 @@ describe('ImageOrSvg Component', () => {
   });
 
   it('renders <SvgUri> with null uri when remote src.uri is undefined and forceSvg is true', async () => {
-    const fakeResponse = {
-      headers: { get: jest.fn(() => 'image/svg+xml') },
-    };
+    const fakeResponse = { headers: { get: jest.fn(() => 'image/svg+xml') } };
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
-    // Pass a remote src with uri explicitly set to undefined and forceSvg true.
     const remoteSvgSrc: any = { uri: undefined };
     const { getByTestId } = render(
       <ImageOrSvg
@@ -119,12 +113,22 @@ describe('ImageOrSvg Component', () => {
     expect(svgElement.props.uri).toBe(null);
   });
 
-  it('calls onImageLoad callback when <Image> loads', async () => {
-    const fakeResponse = {
-      headers: { get: jest.fn(() => 'image/png') },
-    };
-    (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
+  it('renders a local SVG component correctly', () => {
+    const { getByTestId } = render(
+      <ImageOrSvg
+        src={DummyLocalSvg}
+        svgProps={{ testID: 'localSvgRendered' }} // use testID here
+        width={200}
+        height={200}
+      />,
+    );
+    const svgElement = getByTestId('localSvgRendered');
+    expect(svgElement).toBeTruthy();
+  });
 
+  it('calls onImageLoad callback when <Image> loads', async () => {
+    const fakeResponse = { headers: { get: jest.fn(() => 'image/png') } };
+    (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
     const onImageLoad = jest.fn();
     const remoteSrc = { uri: 'https://example.com/photo.png' };
     const { getByTestId } = render(
@@ -145,11 +149,8 @@ describe('ImageOrSvg Component', () => {
   });
 
   it('calls onImageError callback when <Image> errors', async () => {
-    const fakeResponse = {
-      headers: { get: jest.fn(() => 'image/png') },
-    };
+    const fakeResponse = { headers: { get: jest.fn(() => 'image/png') } };
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
-
     const onImageError = jest.fn();
     const remoteSrc = { uri: 'https://example.com/photo.png' };
     const { getByTestId } = render(
@@ -171,11 +172,8 @@ describe('ImageOrSvg Component', () => {
   });
 
   it('calls onSvgError callback when <SvgUri> errors', async () => {
-    const fakeResponse = {
-      headers: { get: jest.fn(() => 'image/svg+xml') },
-    };
+    const fakeResponse = { headers: { get: jest.fn(() => 'image/svg+xml') } };
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
-
     const onSvgError = jest.fn();
     const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };
     const { getByTestId } = render(
@@ -198,7 +196,6 @@ describe('ImageOrSvg Component', () => {
 
   it('renders <Image> when the HEAD request fails', async () => {
     (global.fetch as jest.Mock).mockRejectedValue(new Error('Network error'));
-
     const remoteSrc = { uri: 'https://example.com/photo.png' };
     const { getByTestId } = render(
       <ImageOrSvg src={remoteSrc} imageProps={{ testID: 'fetchFail' }} />,

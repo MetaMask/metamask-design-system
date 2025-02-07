@@ -15,15 +15,35 @@ const ImageOrSvg = ({
   style,
   imageProps,
   svgProps,
-  forceSvg, // optional prop to force SVG rendering (for testing)
+  forceSvg,
 }: ImageOrSvgProps) => {
+  // CASE 1: Local bitmap image (src is a number)
+  if (typeof src === 'number') {
+    return (
+      <Image
+        source={src}
+        style={[{ width, height } as any, style]}
+        resizeMode="contain"
+        onLoad={onImageLoad}
+        onError={onImageError}
+        {...imageProps}
+      />
+    );
+  }
+
+  // CASE 2: Local SVG component (src is a React component)
+  if (typeof src === 'function') {
+    const LocalSvg = src;
+    return <LocalSvg width={width} height={height} {...svgProps} />;
+  }
+
+  // CASE 3: Remote image or SVG (src is an object with a uri)
   const [isSvg, setIsSvg] = useState<boolean>(false);
 
-  // Helper: performs a HEAD request to check if a remote URL is an SVG.
   const checkSvgContentType = useCallback(async (uri: string) => {
     try {
       const response = await fetch(uri, { method: 'HEAD' });
-      // If the header is missing, get() returns null and we fallback to ''
+      // If no header is returned, fallback to an empty string.
       const contentType = response.headers.get('Content-Type') || '';
       return contentType.includes('image/svg+xml');
     } catch {
@@ -32,40 +52,28 @@ const ImageOrSvg = ({
   }, []);
 
   useEffect(() => {
-    // For local images (src is a number) no SVG detection is needed.
-    if (typeof src === 'number') {
-      setIsSvg(false);
+    if (forceSvg) {
+      setIsSvg(true);
       return;
     }
-
-    // For remote images/SVGs, check if the object has a "uri" property.
-    // (Normally we’d check its truthiness, but here we let forceSvg override.)
-    if ('uri' in src && src.uri) {
+    if (src.uri) {
       const uriLower = src.uri.toLowerCase();
       const isLikelySvg =
         uriLower.endsWith('.svg') || uriLower.startsWith('data:image/svg+xml');
-
       if (!src.uri.startsWith('data:')) {
-        // For non-data URIs, perform a HEAD request.
         checkSvgContentType(src.uri).then(setIsSvg);
       } else {
-        // For data URIs, rely on the prefix/extension.
         setIsSvg(isLikelySvg);
       }
     } else {
-      // If src.uri is falsy (undefined, empty, etc.) then we leave isSvg false.
       setIsSvg(false);
     }
-  }, [src, checkSvgContentType]);
+  }, [src, checkSvgContentType, forceSvg]);
 
-  // Determine whether to render the SVG.
-  const shouldRenderSvg = (forceSvg ?? false) || isSvg;
-
-  // If we should render an SVG—and src is a remote object with a "uri" property—render <SvgUri>.
-  if (shouldRenderSvg && typeof src !== 'number' && 'uri' in src) {
+  if (forceSvg || isSvg) {
     return (
       <SvgUri
-        uri={src.uri ?? null} // if src.uri is undefined, pass null
+        uri={src.uri ?? null}
         width={width}
         height={height}
         onError={onSvgError}
@@ -73,20 +81,18 @@ const ImageOrSvg = ({
         {...svgProps}
       />
     );
+  } else {
+    return (
+      <Image
+        source={src}
+        style={[{ width, height } as any, style]}
+        resizeMode="contain"
+        onLoad={onImageLoad}
+        onError={onImageError}
+        {...imageProps}
+      />
+    );
   }
-
-  // Otherwise, render a standard <Image>.
-  // Cast the inline style as any to bypass TS errors if a string is provided.
-  return (
-    <Image
-      source={src}
-      style={[{ width, height } as any, style]}
-      resizeMode="contain"
-      onLoad={onImageLoad}
-      onError={onImageError}
-      {...imageProps}
-    />
-  );
 };
 
 export default ImageOrSvg;

@@ -37,3 +37,12 @@ export const LocalImage: Story = {
     height: 200,
   },
 };
+
+import SampleLocalSvg from './assets/ethereum-eth-logo.svg';
+export const LocalSvg: Story = {
+  args: {
+    src: SampleLocalSvg,
+    width: 200,
+    height: 200,
+  },
+};
