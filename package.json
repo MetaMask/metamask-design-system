@@ -90,7 +90,7 @@
     "react": "^18.2.0",
     "react-native": "^0.72.15",
     "rimraf": "^5.0.5",
-    "semver": "^7.7.0",
+    "semver": "^7.7.1",
     "simple-git-hooks": "^2.8.0",
     "ts-node": "^10.9.1",
     "twrnc": "^4.5.1",
