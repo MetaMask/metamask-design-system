@@ -7,7 +7,7 @@ import path from 'path';
 type Workspace = {
   location: string;
   name: string;
-  workspaceDependencies: string[];
+  dependencies: string[];
 };
 
 const DEPENDENCY_GRAPH_START_MARKER = '<!-- start dependency graph -->';
@@ -56,7 +56,33 @@ async function retrieveWorkspaces(): Promise<Workspace[]> {
     '--verbose',
   ]);
 
-  return stdout.split('\n').map((line) => JSON.parse(line));
+  const workspaces = stdout.split('\n').map((line) => JSON.parse(line));
+
+  // Get actual dependencies for each workspace
+  return Promise.all(
+    workspaces.map(async (workspace) => {
+      const packageJsonPath = path.join(
+        process.cwd(),
+        workspace.location,
+        'package.json',
+      );
+      const packageJson = JSON.parse(
+        await fs.promises.readFile(packageJsonPath, 'utf8'),
+      );
+
+      // Collect all dependencies that are workspace packages
+      const deps = [
+        ...Object.keys(packageJson.dependencies || {}),
+        ...Object.keys(packageJson.devDependencies || {}),
+        ...Object.keys(packageJson.peerDependencies || {}),
+      ].filter((dep) => dep.startsWith('@metamask/'));
+
+      return {
+        ...workspace,
+        dependencies: deps,
+      };
+    }),
+  );
 }
 
 /**
@@ -99,16 +125,21 @@ function buildMermaidNodeLines(workspaces: Workspace[]): string[] {
  */
 function buildMermaidConnectionLines(workspaces: Workspace[]): string[] {
   const connections: string[] = [];
+  const workspacesByName = new Map(workspaces.map((w) => [w.name, w]));
+
   workspaces.forEach((workspace) => {
-    const fullPackageName = workspace.name;
-    const shortPackageName = fullPackageName
+    const shortPackageName = workspace.name
       .replace(/^@metamask\//u, '')
       .replace(/-/gu, '_');
-    workspace.workspaceDependencies.forEach((dependency) => {
-      const shortDependencyName = dependency
-        .replace(/^packages\//u, '')
-        .replace(/-/gu, '_');
-      connections.push(`${shortPackageName} --> ${shortDependencyName};`);
+
+    workspace.dependencies.forEach((dependencyName) => {
+      // Only create connection if dependency is a workspace package
+      if (workspacesByName.has(dependencyName)) {
+        const shortDependencyName = dependencyName
+          .replace(/^@metamask\//u, '')
+          .replace(/-/gu, '_');
+        connections.push(`${shortPackageName} --> ${shortDependencyName};`);
+      }
     });
   });
   return connections;
