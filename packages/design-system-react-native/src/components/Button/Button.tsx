@@ -17,7 +17,9 @@ const Button = (buttonProps: ButtonProps) => {
     case ButtonVariant.Secondary:
       return <ButtonSecondary {...restProps} />;
     default:
-      throw new Error(`Invalid Button Variant: ${variant}. Expected one of: ${Object.values(ButtonVariant).join(', ')}`);
+      throw new Error(
+        `Invalid Button Variant: ${variant}. Expected one of: ${Object.values(ButtonVariant).join(', ')}`,
+      );
   }
 };
 
