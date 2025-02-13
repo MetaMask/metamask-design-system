@@ -50,3 +50,14 @@ export type { AvatarFaviconProps } from './avatar-favicon';
 
 export { AvatarIcon, AvatarIconSize, AvatarIconSeverity } from './avatar-icon';
 export type { AvatarIconProps } from './avatar-icon';
+
+export {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  type TabsProps,
+  type TabsListProps,
+  type TabsTriggerProps,
+  type TabsContentProps,
+} from './tabs';
