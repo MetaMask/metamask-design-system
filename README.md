@@ -31,6 +31,8 @@ linkStyle default opacity:0.5
   design_tokens(["@metamask/design-tokens"]);
   design_system_react --> design_system_tailwind_preset;
   design_system_react_native --> design_system_twrnc_preset;
+  design_system_twrnc_preset --> design_tokens;
+  design_tokens --> design_system_react;
 ```
 
 <!-- end dependency graph -->
