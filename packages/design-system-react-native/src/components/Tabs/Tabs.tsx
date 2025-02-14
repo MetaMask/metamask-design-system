@@ -166,6 +166,7 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({
 
   const onLayout = (event: LayoutChangeEvent) => {
     const { width, x } = event.nativeEvent.layout;
+    console.log(`Tab ${value}:`, { width, x }); // Add logging for debugging
     context.registerTab(value, { width, x });
   };
 
@@ -179,6 +180,8 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({
         tw`px-4 py-2`,
         {
           opacity: pressed ? 0.7 : 1,
+          borderWidth: 1, // Temporary border for debugging
+          borderColor: 'red', // Make border visible
         },
         style,
       ]}
