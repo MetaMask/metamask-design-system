@@ -67,9 +67,9 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({
       role="tab"
       aria-selected={isSelected}
       className={twMerge(
-        'px-4 py-2 text-alternative hover:text-primary-default transition-colors relative',
+        'px-4 py-2 text-alternative hover:text-default transition-colors relative font-medium',
         isSelected &&
-          'text-primary-default after:absolute after:bottom-[-1px] after:left-0 after:right-0 after:h-0.5 after:bg-primary-default',
+          'text-default after:absolute after:bottom-[-1px] after:left-0 after:right-0 after:h-0.5 after:bg-primary-default',
         className,
       )}
       onClick={() => context.onValueChange(value)}
