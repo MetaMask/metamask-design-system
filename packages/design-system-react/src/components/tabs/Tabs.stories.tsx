@@ -40,11 +40,17 @@ export const Default: Story = {
     const [value, setValue] = React.useState('tokens');
 
     return (
-      <Tabs value={value} onValueChange={setValue} className="w-[400px]">
-        <TabsList>
-          <TabsTrigger value="tokens">Tokens</TabsTrigger>
-          <TabsTrigger value="nfts">NFTs</TabsTrigger>
-          <TabsTrigger value="activity">Activity</TabsTrigger>
+      <Tabs value={value} onValueChange={setValue} className="w-[500px]">
+        <TabsList className="flex flex-row w-full">
+          <TabsTrigger value="tokens" className="flex-1 text-center">
+            Tokens
+          </TabsTrigger>
+          <TabsTrigger value="nfts" className="flex-1 text-center">
+            NFTs
+          </TabsTrigger>
+          <TabsTrigger value="activity" className="flex-1 text-center">
+            Activity
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="tokens">
           <Text>View and manage your token balances.</Text>
