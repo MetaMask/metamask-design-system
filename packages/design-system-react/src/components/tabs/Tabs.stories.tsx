@@ -3,10 +3,16 @@ import React from 'react';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
 import { Text } from '../text';
+import README from './README.mdx';
 
 const meta: Meta<typeof Tabs> = {
   title: 'React Components/Tabs',
   component: Tabs,
+  parameters: {
+    docs: {
+      page: README,
+    },
+  },
   argTypes: {
     defaultValue: {
       control: 'text',

@@ -1,0 +1,40 @@
+import { Story, Canvas } from '@storybook/addon-docs';
+import * as TabsStories from './Tabs.stories';
+
+# Tabs
+
+Tabs allow navigation between different content areas within the same context, with only one tab being active at a time.
+
+<Canvas>
+  <Story of={TabsStories.Default} />
+</Canvas>
+
+## Usage
+
+```tsx
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from '@metamask/design-system-react';
+
+const [value, setValue] = React.useState('tokens');
+
+<Tabs value={value} onValueChange={setValue}>
+  <TabsList>
+    <TabsTrigger value="tokens">Tokens</TabsTrigger>
+    <TabsTrigger value="nfts">NFTs</TabsTrigger>
+    <TabsTrigger value="activity">Activity</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tokens">
+    <Text>View and manage your token balances.</Text>
+  </TabsContent>
+  <TabsContent value="nfts">
+    <Text>Browse and manage your NFT collection.</Text>
+  </TabsContent>
+  <TabsContent value="activity">
+    <Text>Track your recent transactions and wallet activity.</Text>
+  </TabsContent>
+</Tabs>;
+```
