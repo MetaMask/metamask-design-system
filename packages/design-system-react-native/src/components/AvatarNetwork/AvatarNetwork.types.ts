@@ -2,11 +2,12 @@ import { AvatarBaseProps } from '../../primitives/AvatarBase';
 import { ImageOrSvgProps } from '../../primitives/ImageOrSvg';
 
 /**
- * AvatarToken component props.
+ * AvatarNetwork component props.
  */
-export type AvatarTokenProps = {
+export type AvatarNetworkProps = {
   /**
-   * Optional props for token name, to be used to calculate the fallbackText.
+   * Optional props for token name, to be used to calculate the fallbackText
+   * when the image fails to load
    */
   name?: string;
 } & Omit<AvatarBaseProps, 'children'> &

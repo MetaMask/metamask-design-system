@@ -8,29 +8,29 @@ import {
 
 import AvatarBase from '../../primitives/AvatarBase';
 import ImageOrSvg from '../../primitives/ImageOrSvg';
-import { DEFAULT_AVATARTOKEN_PROPS } from './AvatarToken.constants';
-import type { AvatarTokenProps } from './AvatarToken.types';
+import { DEFAULT_AVATARNETWORK_PROPS } from './AvatarNetwork.constants';
+import type { AvatarNetworkProps } from './AvatarNetwork.types';
 
-const AvatarToken = ({
-  size,
-  shape = DEFAULT_AVATARTOKEN_PROPS.shape,
+const AvatarNetwork = ({
+  size = DEFAULT_AVATARNETWORK_PROPS.size,
+  shape = DEFAULT_AVATARNETWORK_PROPS.shape,
   fallbackText,
   fallbackTextProps,
   twClassName,
   style,
-  width = DEFAULT_AVATARTOKEN_PROPS.width,
-  height = DEFAULT_AVATARTOKEN_PROPS.height,
+  width = DEFAULT_AVATARNETWORK_PROPS.width,
+  height = DEFAULT_AVATARNETWORK_PROPS.height,
   name,
   imageProps,
   onImageError,
   onSvgError,
   ...props
-}: AvatarTokenProps) => {
+}: AvatarNetworkProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
 
   // Merging default settings with passed in props
   const finalImageProps: Partial<ImageProps> = {
-    ...DEFAULT_AVATARTOKEN_PROPS.imageProps,
+    ...DEFAULT_AVATARNETWORK_PROPS.imageProps,
     ...imageProps,
   };
 
@@ -68,4 +68,4 @@ const AvatarToken = ({
   );
 };
 
-export default AvatarToken;
+export default AvatarNetwork;

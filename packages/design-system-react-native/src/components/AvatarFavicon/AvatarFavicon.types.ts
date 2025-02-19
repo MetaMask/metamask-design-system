@@ -1,12 +1,8 @@
 import { AvatarBaseProps } from '../../primitives/AvatarBase';
-import { ImageSourcePropType, ImageProps } from 'react-native';
+import { ImageOrSvgProps } from '../../primitives/ImageOrSvg';
 
 /**
  * AvatarFavicon component props.
  */
-export type AvatarFaviconProps = {
-  /**
-   * Prop to control the source of the favicon
-   */
-  src: ImageSourcePropType;
-} & Omit<AvatarBaseProps, 'children'>;
+export type AvatarFaviconProps = Omit<AvatarBaseProps, 'children'> &
+  ImageOrSvgProps;

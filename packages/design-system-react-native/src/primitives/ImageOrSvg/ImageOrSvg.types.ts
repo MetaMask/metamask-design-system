@@ -5,6 +5,7 @@ import {
   NativeSyntheticEvent,
   StyleProp,
   ImageStyle,
+  ImageProps,
 } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
@@ -19,7 +20,7 @@ interface ExtendedSvgProps extends Omit<SvgProps, 'uri'> {
  * Base props common to all variations.
  * (The optional `forceSvg` prop is available for testing purposes.)
  */
-interface BaseProps {
+interface ImageOrSvgBaseProps {
   width?: number | string;
   height?: number | string;
   onImageLoad?: (event: NativeSyntheticEvent<ImageLoadEventData>) => void;
@@ -28,36 +29,32 @@ interface BaseProps {
   ) => void;
   onSvgError?: (error: Error) => void;
   style?: StyleProp<ImageStyle>;
-  imageProps?: Omit<React.ComponentProps<typeof Image>, 'source'>;
+  imageProps?: Omit<ImageProps, 'source'>;
   svgProps?: ExtendedSvgProps;
-  forceSvg?: boolean;
 }
 
 /**
  * Props for a local bitmap image (imported via require).
  */
-interface LocalImageProps extends BaseProps {
+interface LocalImageProps extends ImageOrSvgBaseProps {
   src: number;
 }
 
 /**
  * Props for a remote image or SVG (with a uri property).
  */
-interface RemoteImageOrSvgProps extends BaseProps {
-  src: { uri: string | undefined };
+interface RemoteImageOrSvgProps extends ImageOrSvgBaseProps {
+  src: { uri: string };
 }
 
 /**
  * Props for a local SVG (imported as a component).
  */
-interface LocalSvgProps extends BaseProps {
-  src: React.ComponentType<SvgProps>;
-}
+export type ImageOrSvgSrc =
+  | number
+  | { uri?: string }
+  | React.ComponentType<SvgProps>;
 
-/**
- * The union of all supported prop types.
- */
-export type ImageOrSvgProps =
-  | LocalImageProps
-  | RemoteImageOrSvgProps
-  | LocalSvgProps;
+export interface ImageOrSvgProps extends ImageOrSvgBaseProps {
+  src: ImageOrSvgSrc;
+}

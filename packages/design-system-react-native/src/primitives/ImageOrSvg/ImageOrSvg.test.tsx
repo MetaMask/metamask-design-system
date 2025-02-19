@@ -94,25 +94,6 @@ describe('ImageOrSvg Component', () => {
     expect(global.fetch).not.toHaveBeenCalled();
   });
 
-  it('renders <SvgUri> with null uri when remote src.uri is undefined and forceSvg is true', async () => {
-    const fakeResponse = { headers: { get: jest.fn(() => 'image/svg+xml') } };
-    (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
-    const remoteSvgSrc: any = { uri: undefined };
-    const { getByTestId } = render(
-      <ImageOrSvg
-        src={remoteSvgSrc}
-        forceSvg={true}
-        svgProps={{ testID: 'undefinedSvg' }}
-      />,
-    );
-
-    await waitFor(() => {
-      expect(getByTestId('undefinedSvg').type).toBe('SvgUri');
-    });
-    const svgElement = getByTestId('undefinedSvg');
-    expect(svgElement.props.uri).toBe(null);
-  });
-
   it('renders a local SVG component correctly', () => {
     const { getByTestId } = render(
       <ImageOrSvg

@@ -15,7 +15,6 @@ const ImageOrSvg = ({
   style,
   imageProps,
   svgProps,
-  forceSvg,
 }: ImageOrSvgProps) => {
   // CASE 1: Local bitmap image (src is a number)
   if (typeof src === 'number') {
@@ -52,10 +51,6 @@ const ImageOrSvg = ({
   }, []);
 
   useEffect(() => {
-    if (forceSvg) {
-      setIsSvg(true);
-      return;
-    }
     if (src.uri) {
       const uriLower = src.uri.toLowerCase();
       const isLikelySvg =
@@ -68,12 +63,12 @@ const ImageOrSvg = ({
     } else {
       setIsSvg(false);
     }
-  }, [src, checkSvgContentType, forceSvg]);
+  }, [src, checkSvgContentType]);
 
-  if (forceSvg || isSvg) {
+  if (isSvg && typeof src === 'object' && 'uri' in src) {
     return (
       <SvgUri
-        uri={src.uri ?? null}
+        uri={src.uri ?? ''}
         width={width}
         height={height}
         onError={onSvgError}
@@ -84,7 +79,7 @@ const ImageOrSvg = ({
   } else {
     return (
       <Image
-        source={src}
+        source={src as any}
         style={[{ width, height } as any, style]}
         resizeMode="contain"
         onLoad={onImageLoad}
