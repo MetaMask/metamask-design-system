@@ -1,12 +1,33 @@
 import type { ComponentProps } from 'react';
+import type { IconProps } from '../icon';
 
 import type { TextProps } from '../text';
-import { AvatarTokenSize } from '.';
+import type { AvatarBaseProps } from '../avatar-base';
 
-export type AvatarTokenProps = Omit<
-  ComponentProps<'img'>,
-  'children' | 'size'
-> & {
+export enum AvatarTokenSize {
+  /**
+   * Extra small size (16px)
+   */
+  Xs = 'xs',
+  /**
+   * Small size (24px)
+   */
+  Sm = 'sm',
+  /**
+   * Medium size (32px)
+   */
+  Md = 'md',
+  /**
+   * Large size (40px)
+   */
+  Lg = 'lg',
+  /**
+   * Extra large size (48px)
+   */
+  Xl = 'xl',
+}
+
+export type AvatarTokenProps = Omit<AvatarBaseProps, 'size'> & {
   /**
    * Required name of the token
    * Used as alt text for image and first letter is used as fallback if no fallbackText provided

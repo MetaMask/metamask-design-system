@@ -2,6 +2,7 @@ import React from 'react';
 
 import { AvatarBase, AvatarBaseShape, AvatarBaseSize } from '../avatar-base';
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
+import { AVATAR_NETWORK_TO_AVATAR_BASE_SIZE_MAP } from './AvatarNetwork.constants';
 
 export const AvatarNetwork = React.forwardRef<
   HTMLDivElement,
@@ -27,7 +28,7 @@ export const AvatarNetwork = React.forwardRef<
       <AvatarBase
         ref={ref}
         shape={AvatarBaseShape.Square}
-        size={size}
+        size={AVATAR_NETWORK_TO_AVATAR_BASE_SIZE_MAP[size]}
         className={className}
         fallbackText={displayText}
         fallbackTextProps={fallbackTextProps}

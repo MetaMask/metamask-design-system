@@ -1,12 +1,32 @@
 import type { ComponentProps } from 'react';
 
 import type { TextProps } from '../text';
-import { AvatarNetworkSize } from '.';
+import type { AvatarBaseProps } from '../avatar-base';
 
-export type AvatarNetworkProps = Omit<
-  ComponentProps<'img'>,
-  'children' | 'size'
-> & {
+export enum AvatarNetworkSize {
+  /**
+   * Extra small size (16px)
+   */
+  Xs = 'xs',
+  /**
+   * Small size (24px)
+   */
+  Sm = 'sm',
+  /**
+   * Medium size (32px)
+   */
+  Md = 'md',
+  /**
+   * Large size (40px)
+   */
+  Lg = 'lg',
+  /**
+   * Extra large size (48px)
+   */
+  Xl = 'xl',
+}
+
+export type AvatarNetworkProps = Omit<AvatarBaseProps, 'size'> & {
   /**
    * Required name of the network
    * Used as alt text for image and first letter is used as fallback if no fallbackText provided

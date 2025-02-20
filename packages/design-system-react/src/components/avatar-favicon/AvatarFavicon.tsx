@@ -2,6 +2,7 @@ import React from 'react';
 
 import { AvatarBase, AvatarBaseShape, AvatarBaseSize } from '../avatar-base';
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
+import { AVATAR_FAVICON_TO_AVATAR_BASE_SIZE_MAP } from './AvatarFavicon.constants';
 
 export const AvatarFavicon = React.forwardRef<
   HTMLDivElement,
@@ -27,7 +28,7 @@ export const AvatarFavicon = React.forwardRef<
       <AvatarBase
         ref={ref}
         shape={AvatarBaseShape.Circle}
-        size={size}
+        size={AVATAR_FAVICON_TO_AVATAR_BASE_SIZE_MAP[size]}
         className={className}
         fallbackText={displayText}
         fallbackTextProps={fallbackTextProps}

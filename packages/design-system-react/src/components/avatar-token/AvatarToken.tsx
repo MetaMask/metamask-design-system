@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AvatarBase, AvatarBaseShape, AvatarBaseSize } from '../avatar-base';
 import type { AvatarTokenProps } from './AvatarToken.types';
-
+import { AVATAR_TOKEN_TO_AVATAR_BASE_SIZE_MAP } from './AvatarToken.constants';
 export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
   (
     {
@@ -24,7 +24,7 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
       <AvatarBase
         ref={ref}
         shape={AvatarBaseShape.Circle}
-        size={size}
+        size={AVATAR_TOKEN_TO_AVATAR_BASE_SIZE_MAP[size]}
         className={className}
         fallbackText={displayText}
         fallbackTextProps={fallbackTextProps}
