@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { TextColor } from '..';
+import { TextColor } from '../text';
 import { AvatarFavicon } from './AvatarFavicon';
 import { AvatarFaviconSize } from '.';
 
