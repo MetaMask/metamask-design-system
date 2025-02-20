@@ -1,7 +1,8 @@
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import React from 'react';
 
-import { FontWeight, Icon, IconName, IconSize, Text, TextColor } from '..';
+import { Text, FontWeight, TextColor } from '../text';
+import { Icon, IconName, IconSize } from '../icon';
 import { twMerge } from '../../utils/tw-merge';
 import { BUTTON_BASE_SIZE_CLASS_MAP } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';

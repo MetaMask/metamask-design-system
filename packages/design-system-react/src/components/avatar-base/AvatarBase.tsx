@@ -2,7 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Text, FontWeight, TextVariant, TextColor } from '..';
+import { Text, FontWeight, TextVariant, TextColor } from '../text';
 import {
   AVATAR_BASE_SIZE_CLASS_MAP,
   AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP,
