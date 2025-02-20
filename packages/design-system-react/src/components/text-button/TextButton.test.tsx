@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { IconName, Text, TextVariant } from '..';
+import { IconName } from '../icon';
+import { Text, TextVariant } from '../text';
 import { TextButton } from './TextButton';
 
 describe('TextButton', () => {

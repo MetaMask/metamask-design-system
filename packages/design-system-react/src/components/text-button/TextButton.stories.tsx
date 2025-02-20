@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { IconName, Text, TextVariant } from '..';
+import { IconName } from '../icon';
+import { Text, TextVariant } from '../text';
 import README from './README.mdx';
 import { TextButton } from './TextButton';
 
