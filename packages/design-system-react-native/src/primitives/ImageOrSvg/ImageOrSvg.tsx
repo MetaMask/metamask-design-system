@@ -16,7 +16,7 @@ const ImageOrSvg = ({
   imageProps,
   svgProps,
 }: ImageOrSvgProps) => {
-  // CASE 1: Local bitmap image (src is a number)
+  // CASE 1: local image (src is a number)
   if (typeof src === 'number') {
     return (
       <Image
@@ -65,10 +65,10 @@ const ImageOrSvg = ({
     }
   }, [src, checkSvgContentType]);
 
-  if (isSvg && typeof src === 'object' && 'uri' in src) {
+  if (isSvg && typeof src === 'object' && 'uri' in src && src.uri) {
     return (
       <SvgUri
-        uri={src.uri ?? ''}
+        uri={src.uri}
         width={width}
         height={height}
         onError={onSvgError}
