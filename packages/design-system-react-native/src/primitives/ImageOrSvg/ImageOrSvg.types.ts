@@ -10,7 +10,6 @@ import { SvgProps } from 'react-native-svg';
 
 /**
  * Base props common to all variations.
- * (The optional `forceSvg` prop is available for testing purposes.)
  */
 interface ImageOrSvgBaseProps {
   /**
