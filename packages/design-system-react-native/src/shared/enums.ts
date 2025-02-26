@@ -1,3 +1,6 @@
+/**
+ * The size of all Avatars
+ */
 export enum AvatarSize {
   /**
    * Represents an extra small avatar size (16px).
@@ -20,7 +23,11 @@ export enum AvatarSize {
    */
   Xl = '48',
 }
+export { AvatarSize as AvatarBaseSize };
 
+/**
+ * The shape of all Avatars
+ */
 export enum AvatarShape {
   /**
    * Represents a circular Avatar.
@@ -31,3 +38,4 @@ export enum AvatarShape {
    */
   Square = 'square',
 }
+export { AvatarShape as AvatarBaseShape };

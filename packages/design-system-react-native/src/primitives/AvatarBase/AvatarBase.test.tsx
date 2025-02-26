@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react-native';
 
 import Text from '../../components/Text';
-import { AvatarSize, AvatarShape } from '../../shared/enums';
+import { AvatarBaseSize, AvatarBaseShape } from '../../shared/enums';
 import { generateAvatarBaseContainerClassNames } from './AvatarBase.utilities';
 import {
   DEFAULT_AVATARBASE_PROPS,
@@ -24,26 +24,28 @@ describe('AvatarBase', () => {
 
     it('applies correct shape class when circle', () => {
       const classNames = generateAvatarBaseContainerClassNames({
-        shape: AvatarShape.Circle,
+        shape: AvatarBaseShape.Circle,
       });
       expect(classNames).toContain('rounded-full');
     });
 
     it('applies correct shape class when not a circle', () => {
-      const size = AvatarSize.Lg;
-      const expectedShapeClass = TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size];
-      const classNames = generateAvatarBaseContainerClassNames({
-        size,
-        shape: AvatarShape.Square,
+      Object.values(AvatarBaseSize).forEach((size) => {
+        const expectedShapeClass = TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size];
+        const classNames = generateAvatarBaseContainerClassNames({
+          size,
+          shape: AvatarBaseShape.Square,
+        });
+        expect(classNames).toContain(expectedShapeClass);
       });
-      expect(classNames).toContain(expectedShapeClass);
     });
 
     it('applies correct size styles', () => {
-      const size = AvatarSize.Xl;
-      const classNames = generateAvatarBaseContainerClassNames({ size });
-      expect(classNames).toContain(`h-[${size}px]`);
-      expect(classNames).toContain(`w-[${size}px]`);
+      Object.values(AvatarBaseSize).forEach((size) => {
+        const classNames = generateAvatarBaseContainerClassNames({ size });
+        expect(classNames).toContain(`h-[${size}px]`);
+        expect(classNames).toContain(`w-[${size}px]`);
+      });
     });
 
     it('appends additional Tailwind class names', () => {
@@ -55,18 +57,18 @@ describe('AvatarBase', () => {
 
     it('applies all styles together correctly', () => {
       const classNames = generateAvatarBaseContainerClassNames({
-        size: AvatarSize.Md,
-        shape: AvatarShape.Square,
+        size: AvatarBaseSize.Md,
+        shape: AvatarBaseShape.Square,
         twClassName: 'border border-blue-500',
       });
       expect(classNames).toContain(
         'items-center justify-center overflow-hidden',
       );
       expect(classNames).toContain('bg-background-muted');
-      expect(classNames).toContain(`h-[${AvatarSize.Md}px]`);
-      expect(classNames).toContain(`w-[${AvatarSize.Md}px]`);
+      expect(classNames).toContain(`h-[${AvatarBaseSize.Md}px]`);
+      expect(classNames).toContain(`w-[${AvatarBaseSize.Md}px]`);
       expect(classNames).toContain(
-        TWCLASSMAP_AVATARBASE_SIZE_SHAPE[AvatarSize.Md],
+        TWCLASSMAP_AVATARBASE_SIZE_SHAPE[AvatarBaseSize.Md],
       );
       expect(classNames).toContain('border border-blue-500');
     });

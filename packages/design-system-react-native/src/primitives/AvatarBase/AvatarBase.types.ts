@@ -1,6 +1,6 @@
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 import type { TextProps } from '../../components/Text/Text.types';
-import { AvatarSize, AvatarShape } from '../../shared/enums';
+import { AvatarBaseSize, AvatarBaseShape } from '../../shared/enums';
 
 /**
  * AvatarBase component props.
@@ -20,15 +20,15 @@ export type AvatarBaseProps = {
    * - AvatarBaseSize.Xl (48px),
    * @default AvatarBaseSize.Md
    */
-  size?: AvatarSize;
+  size?: AvatarBaseSize;
   /**
    * Optional prop to control the shape of the AvatarBase
    * Possible values:
-   * - AvatarShape.Circle
-   * - AvatarShape.Square
-   * @default AvatarShape.Circle
+   * - AvatarBaseShape.Circle
+   * - AvatarBaseShape.Square
+   * @default AvatarBaseShape.Circle
    */
-  shape?: AvatarShape;
+  shape?: AvatarBaseShape;
   /**
    * Optional text to be rendered when the content fails to render
    */

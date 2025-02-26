@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { Image, ImageSourcePropType, View } from 'react-native';
 
+import { AvatarBaseSize, AvatarBaseShape } from '../../shared/enums';
+import Icon, { IconName } from '../../components/Icon';
 import AvatarBase from './AvatarBase';
 import { DEFAULT_AVATARBASE_PROPS } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
-import { AvatarSize, AvatarShape } from '../../shared/enums';
 
 const meta: Meta<AvatarBaseProps> = {
   title: 'Primitives/AvatarBase',
@@ -12,11 +13,11 @@ const meta: Meta<AvatarBaseProps> = {
   argTypes: {
     size: {
       control: 'select',
-      options: AvatarSize,
+      options: AvatarBaseSize,
     },
     shape: {
       control: 'select',
-      options: AvatarShape,
+      options: AvatarBaseShape,
     },
     fallbackText: {
       control: 'text',
@@ -54,18 +55,18 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      {Object.keys(AvatarSize).map((sizeKey) => (
+      {Object.keys(AvatarBaseSize).map((sizeKey) => (
         <View style={{ flexDirection: 'row', gap: 16 }} key={sizeKey}>
           <AvatarBase
-            key={`${sizeKey}-${AvatarShape.Circle}`}
-            shape={AvatarShape.Circle}
-            size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
+            key={`${sizeKey}-${AvatarBaseShape.Circle}`}
+            shape={AvatarBaseShape.Circle}
+            size={AvatarBaseSize[sizeKey as keyof typeof AvatarBaseSize]}
             fallbackText={sizeKey}
           />
           <AvatarBase
-            key={`${sizeKey}-${AvatarShape.Square}`}
-            shape={AvatarShape.Square}
-            size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
+            key={`${sizeKey}-${AvatarBaseShape.Square}`}
+            shape={AvatarBaseShape.Square}
+            size={AvatarBaseSize[sizeKey as keyof typeof AvatarBaseSize]}
             fallbackText={sizeKey}
           />
         </View>
@@ -77,40 +78,40 @@ export const Sizes: Story = {
 export const Shapes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      {Object.keys(AvatarShape).map((shapeKey) => (
+      {Object.keys(AvatarBaseShape).map((shapeKey) => (
         <View style={{ flexDirection: 'row', gap: 16 }} key={shapeKey}>
           <AvatarBase
-            key={`${shapeKey}-${AvatarSize.Xs}`}
-            shape={AvatarShape[shapeKey as keyof typeof AvatarShape]}
-            size={AvatarSize.Xs}
+            key={`${shapeKey}-${AvatarBaseSize.Xs}`}
+            shape={AvatarBaseShape[shapeKey as keyof typeof AvatarBaseShape]}
+            size={AvatarBaseSize.Xs}
           >
             {TestImage}
           </AvatarBase>
           <AvatarBase
-            key={`${shapeKey}-${AvatarSize.Sm}`}
-            shape={AvatarShape[shapeKey as keyof typeof AvatarShape]}
-            size={AvatarSize.Sm}
+            key={`${shapeKey}-${AvatarBaseSize.Sm}`}
+            shape={AvatarBaseShape[shapeKey as keyof typeof AvatarBaseShape]}
+            size={AvatarBaseSize.Sm}
           >
             {TestImage}
           </AvatarBase>
           <AvatarBase
-            key={`${shapeKey}-${AvatarSize.Md}`}
-            shape={AvatarShape[shapeKey as keyof typeof AvatarShape]}
-            size={AvatarSize.Md}
+            key={`${shapeKey}-${AvatarBaseSize.Md}`}
+            shape={AvatarBaseShape[shapeKey as keyof typeof AvatarBaseShape]}
+            size={AvatarBaseSize.Md}
           >
             {TestImage}
           </AvatarBase>
           <AvatarBase
-            key={`${shapeKey}-${AvatarSize.Lg}`}
-            shape={AvatarShape[shapeKey as keyof typeof AvatarShape]}
-            size={AvatarSize.Lg}
+            key={`${shapeKey}-${AvatarBaseSize.Lg}`}
+            shape={AvatarBaseShape[shapeKey as keyof typeof AvatarBaseShape]}
+            size={AvatarBaseSize.Lg}
           >
             {TestImage}
           </AvatarBase>
           <AvatarBase
-            key={`${shapeKey}-${AvatarSize.Xl}`}
-            shape={AvatarShape[shapeKey as keyof typeof AvatarShape]}
-            size={AvatarSize.Xl}
+            key={`${shapeKey}-${AvatarBaseSize.Xl}`}
+            shape={AvatarBaseShape[shapeKey as keyof typeof AvatarBaseShape]}
+            size={AvatarBaseSize.Xl}
           >
             {TestImage}
           </AvatarBase>
@@ -123,8 +124,26 @@ export const Shapes: Story = {
 export const FallbackText: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <AvatarBase shape={AvatarShape.Circle} fallbackText="A" />
-      <AvatarBase shape={AvatarShape.Square} fallbackText="A" />
+      <AvatarBase shape={AvatarBaseShape.Circle} fallbackText="A" />
+      <AvatarBase shape={AvatarBaseShape.Square} fallbackText="A" />
+    </View>
+  ),
+};
+
+export const Children: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <AvatarBase fallbackText="A" />
+      <AvatarBase>
+        <Image
+          source={storyImageSource}
+          style={{ width: '100%', height: '100%' }}
+          resizeMode="contain"
+        />
+      </AvatarBase>
+      <AvatarBase>
+        <Icon name={IconName.User} />
+      </AvatarBase>
     </View>
   ),
 };

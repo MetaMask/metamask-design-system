@@ -3,7 +3,7 @@
 import { DEFAULT_AVATARBASE_PROPS } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
 import { TWCLASSMAP_AVATARBASE_SIZE_SHAPE } from './AvatarBase.constants';
-import { AvatarShape } from '../../shared/enums';
+import { AvatarBaseShape } from '../../shared/enums';
 
 /**
  * Generates a Tailwind class name string for the base container of an avatar.
@@ -37,7 +37,7 @@ export const generateAvatarBaseContainerClassNames = ({
   const fallbackBackgroundStyle = 'bg-background-muted';
   const sizeStyle = `h-[${size}px] w-[${size}px]`;
   const shapeStyle =
-    shape === AvatarShape.Circle
+    shape === AvatarBaseShape.Circle
       ? 'rounded-full'
       : TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size];
 

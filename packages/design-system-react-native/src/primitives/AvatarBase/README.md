@@ -20,17 +20,17 @@ Optional prop for the content to be rendered within the `AvatarBase`.
 
 Optional prop to control the size of the `AvatarBase`.
 
-| TYPE         | REQUIRED | DEFAULT         |
-| :----------- | :------- | :-------------- |
-| `AvatarSize` | No       | `AvatarSize.Md` |
+| TYPE             | REQUIRED | DEFAULT             |
+| :--------------- | :------- | :------------------ |
+| `AvatarBaseSize` | No       | `AvatarBaseSize.Md` |
 
 Available sizes:
 
-- `AvatarSize.Xs` (16px)
-- `AvatarSize.Sm` (24px)
-- `AvatarSize.Md` (32px)
-- `AvatarSize.Lg` (40px)
-- `AvatarSize.Xl` (48px)
+- `AvatarBaseSize.Xs` (16px)
+- `AvatarBaseSize.Sm` (24px)
+- `AvatarBaseSize.Md` (32px)
+- `AvatarBaseSize.Lg` (40px)
+- `AvatarBaseSize.Xl` (48px)
 
 ---
 
@@ -38,14 +38,14 @@ Available sizes:
 
 Optional prop to control the shape of the `AvatarBase`.
 
-| TYPE          | REQUIRED | DEFAULT              |
-| :------------ | :------- | :------------------- |
-| `AvatarShape` | No       | `AvatarShape.Circle` |
+| TYPE              | REQUIRED | DEFAULT                  |
+| :---------------- | :------- | :----------------------- |
+| `AvatarBaseShape` | No       | `AvatarBaseShape.Circle` |
 
 Available shapes:
 
-- `AvatarShape.Circle`
-- `AvatarShape.Square`
+- `AvatarBaseShape.Circle`
+- `AvatarBaseShape.Square`
 
 ---
 
@@ -124,7 +124,7 @@ import AvatarBase from '@metamask/design-system-react-native';
 ### Changing Avatar Size
 
 ```tsx
-<AvatarBase size={AvatarSize.Lg}>👤</AvatarBase>
+<AvatarBase size={AvatarBaseSize.Lg}>👤</AvatarBase>
 ```
 
 ---
@@ -132,7 +132,7 @@ import AvatarBase from '@metamask/design-system-react-native';
 ### Changing Avatar Shape
 
 ```tsx
-<AvatarBase shape={AvatarShape.Square}>👤</AvatarBase>
+<AvatarBase shape={AvatarBaseShape.Square}>👤</AvatarBase>
 ```
 
 ---
