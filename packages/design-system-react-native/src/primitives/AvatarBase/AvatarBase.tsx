@@ -4,7 +4,6 @@ import React, { useMemo } from 'react';
 import { View } from 'react-native';
 
 import Text from '../../components/Text';
-import type { TextProps } from '../../components/Text/Text.types';
 import { DEFAULT_AVATARBASE_PROPS } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
 import { generateAvatarBaseContainerClassNames } from './AvatarBase.utilities';
@@ -28,15 +27,15 @@ const AvatarBase = ({
     });
   }, [size, shape, twClassName]);
 
-  const finalFallbackTextProps: Omit<TextProps, 'children'> = {
-    ...DEFAULT_AVATARBASE_PROPS.fallbackTextProps,
-    ...fallbackTextProps,
-  };
-
   return (
     <View style={[tw`${twContainerClassNames}`, style]} {...props}>
       {fallbackText ? (
-        <Text {...finalFallbackTextProps}>{fallbackText}</Text>
+        <Text
+          {...DEFAULT_AVATARBASE_PROPS.fallbackTextProps}
+          {...fallbackTextProps}
+        >
+          {fallbackText}
+        </Text>
       ) : (
         children
       )}
