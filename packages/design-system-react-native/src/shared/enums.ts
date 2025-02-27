@@ -24,6 +24,7 @@ export enum AvatarSize {
   Xl = '48',
 }
 export { AvatarSize as AvatarBaseSize };
+export { AvatarSize as AvatarIconSize };
 
 /**
  * The shape of all Avatars
@@ -39,3 +40,4 @@ export enum AvatarShape {
   Square = 'square',
 }
 export { AvatarShape as AvatarBaseShape };
+export { AvatarShape as AvatarIconShape };
