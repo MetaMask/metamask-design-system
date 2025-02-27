@@ -58,6 +58,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/primitives/AvatarBase/AvatarBase.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/AvatarBase/AvatarBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/ButtonAnimated/ButtonAnimated.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ButtonAnimated/ButtonAnimated.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx"),
+    "./../../packages/design-system-react-native/src/primitives/Jazzicon/Jazzicon.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/Jazzicon/Jazzicon.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/TextOrChildren/TextOrChildren.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/TextOrChildren/TextOrChildren.stories.tsx"),
     "./../../packages/design-system-react-native/src/temp-components/Spinner/Spinner.stories.tsx": require("../../../packages/design-system-react-native/src/temp-components/Spinner/Spinner.stories.tsx"),
   };
