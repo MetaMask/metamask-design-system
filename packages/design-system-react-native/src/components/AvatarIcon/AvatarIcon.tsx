@@ -30,12 +30,6 @@ const AvatarIcon = ({
     });
   }, [severity, twClassName]);
 
-  const finalIconProps: Omit<IconProps, 'name'> = {
-    size: MAP_AVATARICON_SIZE_ICONSIZE[size],
-    color: MAP_AVATARICON_SEVERITY_ICONCOLOR[severity],
-    ...iconProps,
-  };
-
   return (
     <AvatarBase
       size={size}
@@ -44,7 +38,12 @@ const AvatarIcon = ({
       accessibilityRole="image"
       {...props}
     >
-      <Icon name={iconName} {...finalIconProps} />
+      <Icon
+        name={iconName}
+        size={MAP_AVATARICON_SIZE_ICONSIZE[size]}
+        color={MAP_AVATARICON_SEVERITY_ICONCOLOR[severity]}
+        {...iconProps}
+      />
     </AvatarBase>
   );
 };
