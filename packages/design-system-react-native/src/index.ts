@@ -1,5 +1,9 @@
 import { withThemeProvider } from '@metamask/design-system-twrnc-preset';
 
+import BlockiesComponent from './primitives/Blockies';
+export const Blockies = BlockiesComponent;
+export { BlockiesProps } from './primitives/Blockies';
+
 import ButtonComponent from './components/Button';
 export const Button = withThemeProvider(ButtonComponent);
 export { ButtonProps, ButtonSize, ButtonVariant } from './components/Button';
