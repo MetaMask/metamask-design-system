@@ -40,4 +40,3 @@ export enum AvatarShape {
   Square = 'square',
 }
 export { AvatarShape as AvatarBaseShape };
-export { AvatarShape as AvatarIconShape };

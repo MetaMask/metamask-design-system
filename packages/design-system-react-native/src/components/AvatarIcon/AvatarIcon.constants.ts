@@ -1,7 +1,7 @@
 import type { AvatarIconProps } from './AvatarIcon.types';
 import { AvatarIconSeverity } from './AvatarIcon.types';
 import { IconSize, IconColor } from '../Icon';
-import { AvatarIconSize, AvatarIconShape } from '../../shared/enums';
+import { AvatarIconSize, AvatarBaseShape } from '../../shared/enums';
 
 // Mappings
 export const TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR: Record<
@@ -37,6 +37,6 @@ export const DEFAULT_AVATARICON_PROPS: Required<
   Pick<AvatarIconProps, 'size' | 'shape' | 'severity'>
 > = {
   size: AvatarIconSize.Md,
-  shape: AvatarIconShape.Circle,
+  shape: AvatarBaseShape.Circle,
   severity: AvatarIconSeverity.Default,
 };

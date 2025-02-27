@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react-native';
 
 import { IconName } from '../Icon';
-import { AvatarIconSize, AvatarIconShape } from '../../shared/enums';
+import { AvatarIconSize } from '../../shared/enums';
 import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
 import {
   DEFAULT_AVATARICON_PROPS,
@@ -63,7 +63,6 @@ describe('AvatarIcon', () => {
 
     it('renders with custom props', () => {
       const customSize = AvatarIconSize.Lg;
-      const customShape = AvatarIconShape.Square;
       const customSeverity = AvatarIconSeverity.Error;
       const customIconProps = { testID: 'custom-icon', extraProp: 'value' };
 
@@ -72,7 +71,6 @@ describe('AvatarIcon', () => {
         <AvatarIcon
           iconName={IconName.Close}
           size={customSize}
-          shape={customShape}
           severity={customSeverity}
           iconProps={customIconProps}
         />,

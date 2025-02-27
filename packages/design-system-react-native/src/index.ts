@@ -1,5 +1,25 @@
 import { withThemeProvider } from '@metamask/design-system-twrnc-preset';
 
+import AvatarBaseComponent from './primitives/AvatarBase';
+export const AvatarBase = withThemeProvider(AvatarBaseComponent);
+export { AvatarBaseProps, AvatarBaseSize } from './primitives/AvatarBase';
+
+import AvatarIconComponent from './components/AvatarIcon';
+export const AvatarIcon = withThemeProvider(AvatarIconComponent);
+export {
+  AvatarIconProps,
+  AvatarIconSeverity,
+  AvatarIconSize,
+} from './components/AvatarIcon';
+
+import ButtonAnimatedComponent from './primitives/ButtonAnimated';
+export const ButtonAnimated = withThemeProvider(ButtonAnimatedComponent);
+export { ButtonAnimatedProps } from './primitives/ButtonAnimated';
+
+import ButtonBaseComponent from './primitives/ButtonBase';
+export const ButtonBase = withThemeProvider(ButtonBaseComponent);
+export { ButtonBaseProps, ButtonBaseSize } from './primitives/ButtonBase';
+
 import ButtonComponent from './components/Button';
 export const Button = withThemeProvider(ButtonComponent);
 export { ButtonProps, ButtonSize, ButtonVariant } from './components/Button';
@@ -12,6 +32,10 @@ import IconComponent from './components/Icon';
 export const Icon = withThemeProvider(IconComponent);
 export { IconColor, IconName, IconProps, IconSize } from './components/Icon';
 
+import TextButtonComponent from './components/TextButton';
+export const TextButton = withThemeProvider(TextButtonComponent);
+export { TextButtonProps } from './components/TextButton';
+
 import TextComponent from './components/Text';
 export const Text = withThemeProvider(TextComponent);
 export {
@@ -22,6 +46,6 @@ export {
   TextVariant,
 } from './components/Text';
 
-import TextButtonComponent from './components/TextButton';
-export const TextButton = withThemeProvider(TextButtonComponent);
-export { TextButtonProps } from './components/TextButton';
+import TextOrChildrenComponent from './primitives/TextOrChildren';
+export const TextOrChildren = withThemeProvider(TextOrChildrenComponent);
+export { TextOrChildrenProps } from './primitives/TextOrChildren/';
