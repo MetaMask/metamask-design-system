@@ -135,8 +135,7 @@ const TextButton = ({
    */
 
   // Get the line height of the text, which is also the height of the component
-  const finalVariant =
-    textProps?.variant || DEFAULT_TEXTBUTTON_PROPS.textProps.variant;
+  const finalVariant = finalTextProps.variant;
   const { lineHeight } = tw`text-${finalVariant as string}`;
   const componentHeight = Number(lineHeight);
 
@@ -145,10 +144,8 @@ const TextButton = ({
   const nonTextOffSet = 2.5;
 
   // Get the final sizes of Icons to help with manual alignments
-  const finalStartIconSize =
-    startIconProps?.size || DEFAULT_TEXTBUTTON_PROPS.startIconProps.size;
-  const finalEndIconSize =
-    endIconProps?.size || DEFAULT_TEXTBUTTON_PROPS.endIconProps.size;
+  const finalStartIconSize = finalStartIconProps.size;
+  const finalEndIconSize = finalEndIconProps.size;
 
   // Offsets to vertically center the Icon
   const finalStartIconOffset =
