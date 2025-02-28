@@ -19,6 +19,10 @@ export {
   AvatarIconSize,
 } from './components/AvatarIcon';
 
+import BlockiesComponent from './primitives/Blockies';
+export const Blockies = BlockiesComponent;
+export { BlockiesProps } from './primitives/Blockies';
+
 import ButtonAnimatedComponent from './primitives/ButtonAnimated';
 export const ButtonAnimated = withThemeProvider(ButtonAnimatedComponent);
 export { ButtonAnimatedProps } from './primitives/ButtonAnimated';
@@ -38,6 +42,10 @@ export { ButtonIconProps, ButtonIconSize } from './components/ButtonIcon';
 import IconComponent from './components/Icon';
 export const Icon = withThemeProvider(IconComponent);
 export { IconColor, IconName, IconProps, IconSize } from './components/Icon';
+
+import JazziconComponent from './primitives/Jazzicon';
+export const Jazzicon = JazziconComponent;
+export { JazziconProps } from './primitives/Jazzicon';
 
 import TextButtonComponent from './components/TextButton';
 export const TextButton = withThemeProvider(TextButtonComponent);

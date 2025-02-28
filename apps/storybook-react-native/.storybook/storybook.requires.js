@@ -58,6 +58,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/AvatarBase/AvatarBase.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/AvatarBase/AvatarBase.stories.tsx"),
+    "./../../packages/design-system-react-native/src/primitives/Blockies/Blockies.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/Blockies/Blockies.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/ButtonAnimated/ButtonAnimated.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ButtonAnimated/ButtonAnimated.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/ImageOrSvg/ImageOrSvg.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ImageOrSvg/ImageOrSvg.stories.tsx"),
