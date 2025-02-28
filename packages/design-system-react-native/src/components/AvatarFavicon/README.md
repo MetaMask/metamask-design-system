@@ -1,6 +1,6 @@
 # AvatarFavicon
 
-The `AvatarFavicon` component extends the functionality of [`AvatarBase`](#) by incorporating support for both images and SVGs. It provides a fallback mechanism in case of an image load failure, ensuring a graceful degradation by displaying either an alternative text or a fallback icon.
+The `AvatarFavicon` component is reserved for representing websites and dapps. It extends the functionality of [`AvatarBase`](#) by incorporating support for both images and SVGs. It provides a fallback mechanism in case of an image load failure, ensuring a graceful degradation by displaying either an alternative text or a fallback icon.
 
 ---
 
