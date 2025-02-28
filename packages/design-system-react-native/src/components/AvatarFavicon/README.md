@@ -8,6 +8,16 @@ The `AvatarFavicon` component extends the functionality of [`AvatarBase`](#) by 
 
 The `AvatarFavicon` component accepts the following props:
 
+### `src` (Required)
+
+The source of the image or SVG. It determines whether a local image, a local SVG component, or a remote image/SVG (via URI) is rendered.
+
+| TYPE                                                    | REQUIRED | DEFAULT |
+| :------------------------------------------------------ | :------- | :------ |
+| `number \| ComponentType<SvgProps> \| { uri?: string }` | Yes      | `N/A`   |
+
+---
+
 ### `name` (Optional)
 
 Used to generate fallback text when the image or SVG fails to load.
