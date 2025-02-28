@@ -57,7 +57,7 @@ Optional props to pass additional properties to the icon.
 
 ## Accessibility
 
-Since `AvatarIcon` typically represents an icon-based avatar for tokens, accounts, or networks, it is important to ensure the component is usable by screen readers and assistive technologies. The following `react-native` accessibility props can be passed:
+Since `AvatarIcon` typically represents an icon-based avatar, it is important to ensure the component is usable by screen readers and assistive technologies. The following `react-native` accessibility props can be passed:
 
 - **`accessibilityLabel`**: Use to describe the AvatarIcon. For example, "Sent"
 - **`accessibilityRole`**:

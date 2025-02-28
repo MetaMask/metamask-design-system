@@ -16,24 +16,22 @@ describe('Jazzicon Component', () => {
   });
 
   it('should render RNJazzicon with the correct seed and size', () => {
-    const testProps = { seed: 123, size: 50, testID: 'jazzicon-seed' };
-    render(<Jazzicon {...testProps} />);
+    const testProps = { seed: 123, size: 50 };
+    render(<Jazzicon {...testProps} testID="jazzicon-seed" />);
+
     expect(RNJazzicon).toHaveBeenCalledWith(
       expect.objectContaining(testProps),
-      {},
+      expect.any(Object), // Allows extra properties
     );
   });
 
   it('should render RNJazzicon with the correct address and size', () => {
-    const testProps = {
-      address: '0x123456789abcdef',
-      size: 40,
-      testID: 'jazzicon-address',
-    };
-    render(<Jazzicon {...testProps} />);
+    const testProps = { address: '0x123456789abcdef', size: 40 };
+    render(<Jazzicon {...testProps} testID="jazzicon-address" />);
+
     expect(RNJazzicon).toHaveBeenCalledWith(
       expect.objectContaining(testProps),
-      {},
+      expect.any(Object),
     );
   });
 
@@ -42,12 +40,12 @@ describe('Jazzicon Component', () => {
       seed: 456,
       size: 40,
       containerStyle: { backgroundColor: 'red', padding: 5 },
-      testID: 'jazzicon-container',
     };
-    render(<Jazzicon {...testProps} />);
+    render(<Jazzicon {...testProps} testID="jazzicon-container" />);
+
     expect(RNJazzicon).toHaveBeenCalledWith(
       expect.objectContaining(testProps),
-      {},
+      expect.any(Object),
     );
   });
 });

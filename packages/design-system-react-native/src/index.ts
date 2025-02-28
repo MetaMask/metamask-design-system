@@ -1,5 +1,13 @@
 import { withThemeProvider } from '@metamask/design-system-twrnc-preset';
 
+import AvatarAccountComponent from './components/AvatarAccount';
+export const AvatarAccount = withThemeProvider(AvatarAccountComponent);
+export {
+  AvatarAccountProps,
+  AvatarAccountVariant,
+  AvatarAccountSize,
+} from './components/AvatarAccount';
+
 import AvatarBaseComponent from './primitives/AvatarBase';
 export const AvatarBase = withThemeProvider(AvatarBaseComponent);
 export { AvatarBaseProps, AvatarBaseSize } from './primitives/AvatarBase';
