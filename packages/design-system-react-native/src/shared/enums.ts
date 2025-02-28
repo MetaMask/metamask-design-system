@@ -25,6 +25,7 @@ export enum AvatarSize {
 }
 export { AvatarSize as AvatarBaseSize };
 export { AvatarSize as AvatarFaviconSize };
+export { AvatarSize as AvatarIconSize };
 
 /**
  * The shape of all Avatars
