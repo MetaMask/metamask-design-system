@@ -19,6 +19,13 @@ export {
   AvatarIconSize,
 } from './components/AvatarIcon';
 
+import AvatarNetworkComponent from './components/AvatarNetwork';
+export const AvatarNetwork = withThemeProvider(AvatarNetworkComponent);
+export {
+  AvatarNetworkProps,
+  AvatarNetworkSize,
+} from './components/AvatarNetwork';
+
 import BlockiesComponent from './primitives/Blockies';
 export const Blockies = BlockiesComponent;
 export { BlockiesProps } from './primitives/Blockies';
