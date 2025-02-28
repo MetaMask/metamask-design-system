@@ -76,16 +76,6 @@
   "engines": {
     "node": "^18.18 || >=20"
   },
-  "resolutions": {
-    "minimist": "1.2.6",
-    "node-fetch": "^2.6.7",
-    "xmldom": "npm:@xmldom/xmldom@0.7.13",
-    "@walletconnect/socket-transport/ws": "^7.5.10",
-    "@ethersproject/providers/ws": "^7.5.10",
-    "puppeteer-core/ws": "^8.17.1",
-    "react-native/ws": "^6.2.3",
-    "braces": "^3.0.3"
-  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
