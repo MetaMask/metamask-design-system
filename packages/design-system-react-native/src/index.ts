@@ -19,6 +19,10 @@ export {
   AvatarIconSize,
 } from './components/AvatarIcon';
 
+import AvatarTokenComponent from './components/AvatarToken';
+export const AvatarToken = withThemeProvider(AvatarTokenComponent);
+export { AvatarTokenProps, AvatarTokenSize } from './components/AvatarToken';
+
 import BlockiesComponent from './primitives/Blockies';
 export const Blockies = BlockiesComponent;
 export { BlockiesProps } from './primitives/Blockies';
