@@ -27,6 +27,7 @@ export { AvatarSize as AvatarBaseSize };
 export { AvatarSize as AvatarFaviconSize };
 export { AvatarSize as AvatarIconSize };
 export { AvatarSize as AvatarNetworkSize };
+export { AvatarSize as AvatarTokenSize };
 
 /**
  * The shape of all Avatars
