@@ -2,31 +2,31 @@ import type { BrandColor } from './brandColor.types';
 
 export const brandColor: BrandColor = {
   // Grey
-  grey100: '#d6d9dc',
+  grey100: '#dadce5',
   // Grey
-  grey200: '#bbc0c5',
+  grey200: '#b7bbc8',
   // Grey
-  grey300: '#9fa6ae',
+  grey300: '#9ca1af',
   // Grey
-  grey400: '#848c96',
+  grey400: '#858b9a',
   // Grey
-  grey500: '#6a737d',
+  grey500: '#686e7d',
   // Grey
-  grey600: '#535a61',
+  grey600: '#4b505c',
   // Grey
-  grey700: '#3b4046',
+  grey700: '#31333a',
   // Grey
-  grey800: '#24272a',
+  grey800: '#222325',
   // Grey
-  grey900: '#141618',
+  grey900: '#121314',
   // Grey
   grey1000: '#000000',
   // Grey
-  grey050: '#f2f4f6',
+  grey050: '#f3f5f9',
   // Grey
   grey000: '#ffffff',
   // Grey
-  grey025: '#fafbfc',
+  grey025: '#f7f9fc',
   // Blue
   blue100: '#a7d9fe',
   // Blue
@@ -50,109 +50,109 @@ export const brandColor: BrandColor = {
   // Blue
   blue025: '#eaf6ff',
   // Green
-  green100: '#afecbd',
+  green100: '#c1e6c9',
   // Green
-  green200: '#5dd879',
+  green200: '#80cb91',
   // Green
-  green300: '#28a745',
+  green300: '#4cb564',
   // Green
-  green400: '#28a745',
+  green400: '#279f41',
   // Green
-  green500: '#1c8234',
+  green500: '#1c7e33',
   // Green
-  green600: '#145523',
+  green600: '#145d25',
   // Green
-  green700: '#145523',
+  green700: '#0d3b18',
   // Green
-  green800: '#0a2c12',
+  green800: '#092912',
   // Green
-  green900: '#041007',
+  green900: '#051709',
   // Green
-  green050: '#d6ffdf',
+  green050: '#ebf7ee',
   // Green
-  green025: '#f3fcf5',
+  green025: '#f1faf4',
   // Red
-  red100: '#f7d5d8',
+  red100: '#ffd2d5',
   // Red
-  red200: '#f1b9be',
+  red200: '#ffa1aa',
   // Red
-  red300: '#e88f97',
+  red300: '#ff7584',
   // Red
-  red400: '#e06470',
+  red400: '#f74d5e',
   // Red
-  red500: '#d73847',
+  red500: '#ca3542',
   // Red
-  red600: '#8e1d28',
+  red600: '#952731',
   // Red
-  red700: '#64141c',
+  red700: '#611a20',
   // Red
-  red800: '#3a0c10',
+  red800: '#431216',
   // Red
-  red900: '#3a0c10',
+  red900: '#3b0f13',
   // Red
-  red050: '#fcf2f3',
+  red050: '#fff2f3',
   // Red
-  red025: '#fcf2f3',
+  red025: '#fff6f7',
   // Yellow
-  yellow100: '#ffdf70',
+  yellow100: '#ffd957',
   // Yellow
-  yellow200: '#ffc70a',
+  yellow200: '#f0b034',
   // Yellow
-  yellow300: '#f8883b',
+  yellow300: '#e18f01',
   // Yellow
-  yellow400: '#f66a0a',
+  yellow400: '#c37b02',
   // Yellow
-  yellow500: '#bf5208',
+  yellow500: '#9a6300',
   // Yellow
-  yellow600: '#954005',
+  yellow600: '#714802',
   // Yellow
-  yellow700: '#632b04',
+  yellow700: '#482d01',
   // Yellow
-  yellow800: '#321602',
+  yellow800: '#321f00',
   // Yellow
-  yellow900: '#321602',
+  yellow900: '#1c1100',
   // Yellow
-  yellow050: '#fff2c5',
+  yellow050: '#fff5d5',
   // Yellow
-  yellow025: '#fefcde',
+  yellow025: '#fff9e6',
   // Orange
-  orange100: '#fbc49d',
+  orange100: '#ffd4c1',
   // Orange
-  orange200: '#faa66c',
+  orange200: '#ffa47c',
   // Orange
-  orange300: '#f8883b',
+  orange300: '#ff7940',
   // Orange
-  orange400: '#f66a0a',
+  orange400: '#f35714',
   // Orange
-  orange500: '#bf5208',
+  orange500: '#c3420d',
   // Orange
-  orange600: '#954005',
+  orange600: '#932d06',
   // Orange
-  orange700: '#632b04',
+  orange700: '#631800',
   // Orange
-  orange800: '#321602',
+  orange800: '#451100',
   // Orange
-  orange900: '#321602',
+  orange900: '#280a00',
   // Orange
-  orange050: '#fde2cf',
+  orange050: '#fff0ea',
   // Orange
-  orange025: '#fef5ef',
+  orange025: '#fff8f5',
   // Purple
   purple100: '#efd2ff',
   // Purple
-  purple200: '#cfb5f0',
+  purple200: '#dfa4ff',
   // Purple
   purple300: '#d27dff',
   // Purple
   purple400: '#b864f5',
   // Purple
-  purple500: '#8b45b6',
+  purple500: '#8f44e4',
   // Purple
   purple600: '#6c2ab2',
   // Purple
-  purple700: '#4c1178',
+  purple700: '#6c2ab2',
   // Purple
-  purple800: '#32054d',
+  purple800: '#380658',
   // Purple
   purple900: '#280a00',
   // Purple
@@ -174,7 +174,7 @@ export const brandColor: BrandColor = {
   // Lime
   lime700: '#093a31',
   // Lime
-  lime800: '#022321',
+  lime800: '#012826',
   // Lime
   lime900: '#011515',
   // Lime
