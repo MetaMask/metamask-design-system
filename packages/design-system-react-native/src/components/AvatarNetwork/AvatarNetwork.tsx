@@ -4,25 +4,25 @@ import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
 import AvatarBase from '../../primitives/AvatarBase';
 import ImageOrSvg from '../../primitives/ImageOrSvg';
-import { DEFAULT_AVATARFAVICON_PROPS } from './AvatarFavicon.constants';
-import type { AvatarFaviconProps } from './AvatarFavicon.types';
+import { DEFAULT_AVATARNETWORK_PROPS } from './AvatarNetwork.constants';
+import type { AvatarNetworkProps } from './AvatarNetwork.types';
 
-const AvatarFavicon = ({
+const AvatarNetwork = ({
   size,
-  shape = DEFAULT_AVATARFAVICON_PROPS.shape,
+  shape = DEFAULT_AVATARNETWORK_PROPS.shape,
   fallbackText,
   fallbackTextProps,
   twClassName,
   testID,
   style,
-  width = DEFAULT_AVATARFAVICON_PROPS.width,
-  height = DEFAULT_AVATARFAVICON_PROPS.height,
+  width = DEFAULT_AVATARNETWORK_PROPS.width,
+  height = DEFAULT_AVATARNETWORK_PROPS.height,
   name,
   imageProps,
   onImageError,
   onSvgError,
   ...restImageOrSvgProps
-}: AvatarFaviconProps) => {
+}: AvatarNetworkProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
 
   const backupFallbackText = fallbackText || name?.[0] || '';
@@ -63,4 +63,4 @@ const AvatarFavicon = ({
   );
 };
 
-export default AvatarFavicon;
+export default AvatarNetwork;

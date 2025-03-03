@@ -1,12 +1,12 @@
-# AvatarFavicon
+# AvatarNetwork
 
-The `AvatarFavicon` component is reserved for representing websites and dapps. It extends the functionality of [`AvatarBase`](#) by incorporating support for both images and SVGs. It provides a fallback mechanism in case of an image load failure, ensuring a graceful degradation by displaying either an alternative text or a fallback icon.
+The `AvatarNetwork` component is reserved for representing networks. It extends the functionality of [`AvatarBase`](#) by incorporating support for both images and SVGs. It provides a fallback mechanism in case of an image load failure, ensuring a graceful degradation by displaying either an alternative text or a fallback icon.
 
 ---
 
 ## Props
 
-The `AvatarFavicon` component accepts the following props:
+The `AvatarNetwork` component accepts the following props:
 
 ### `src` (Required)
 
@@ -90,7 +90,7 @@ Callback function triggered when the SVG fails to load.
 
 ### Other Props
 
-`AvatarFavicon` supports all other props from [`AvatarBase`](#) and [`ImageOrSvg`](#), such as:
+`AvatarNetwork` supports all other props from [`AvatarBase`](#) and [`ImageOrSvg`](#), such as:
 
 - **`twClassName`** – Tailwind class names for styling.
 - **`testID`** – Identifier used for testing purposes.
@@ -113,12 +113,12 @@ To ensure proper accessibility, the following React Native accessibility props c
 
 ```tsx
 import React from 'react';
-import AvatarFavicon from '@metamask/design-system-react-native/avatar-favicon';
+import AvatarNetwork from '@metamask/design-system-react-native/avatar-network';
 
 const App = () => (
-  <AvatarFavicon
+  <AvatarNetwork
     name="MetaMask"
-    source={{ uri: 'https://example.com/favicon.png' }}
+    source={{ uri: 'https://example.com/network.png' }}
   />
 );
 
@@ -131,14 +131,14 @@ export default App;
 
 ```tsx
 import React from 'react';
-import AvatarFavicon from '@metamask/design-system-react-native/avatar-favicon';
+import AvatarNetwork from '@metamask/design-system-react-native/avatar-network';
 
 const handleError = () => {
   console.log('Image failed to load');
 };
 
 const App = () => (
-  <AvatarFavicon
+  <AvatarNetwork
     name="ETH"
     source={{ uri: 'https://invalid-url.com' }}
     onImageError={handleError}
@@ -154,15 +154,15 @@ export default App;
 
 ```tsx
 import React from 'react';
-import AvatarFavicon, {
-  AvatarFaviconSize,
-} from '@metamask/design-system-react-native/avatar-favicon';
+import AvatarNetwork, {
+  AvatarNetworkSize,
+} from '@metamask/design-system-react-native/avatar-network';
 
 const App = () => (
-  <AvatarFavicon
+  <AvatarNetwork
     name="ETH"
-    size={AvatarFaviconSize.Lg}
-    source={{ uri: 'https://example.com/favicon.png' }}
+    size={AvatarNetworkSize.Lg}
+    source={{ uri: 'https://example.com/network.png' }}
   />
 );
 
