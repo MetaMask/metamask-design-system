@@ -11,9 +11,9 @@ export const Blockies = ({
   } | null>(null);
 
   useEffect(() => {
-    import('blo')
-      .then((module) => setBloModule(module))
-      .catch((error) => console.error('Failed to load blo module:', error));
+    import('blo').then((module) =>
+      setBloModule(module as { blo: (address: string) => string }),
+    );
   }, []);
 
   if (!bloModule) {
