@@ -1,5 +1,13 @@
 import { withThemeProvider } from '@metamask/design-system-twrnc-preset';
 
+import AvatarAccountComponent from './components/AvatarAccount';
+export const AvatarAccount = withThemeProvider(AvatarAccountComponent);
+export {
+  AvatarAccountProps,
+  AvatarAccountVariant,
+  AvatarAccountSize,
+} from './components/AvatarAccount';
+
 import AvatarBaseComponent from './primitives/AvatarBase';
 export const AvatarBase = withThemeProvider(AvatarBaseComponent);
 export { AvatarBaseProps, AvatarBaseSize } from './primitives/AvatarBase';
@@ -18,6 +26,17 @@ export {
   AvatarIconSeverity,
   AvatarIconSize,
 } from './components/AvatarIcon';
+
+import AvatarNetworkComponent from './components/AvatarNetwork';
+export const AvatarNetwork = withThemeProvider(AvatarNetworkComponent);
+export {
+  AvatarNetworkProps,
+  AvatarNetworkSize,
+} from './components/AvatarNetwork';
+
+import AvatarTokenComponent from './components/AvatarToken';
+export const AvatarToken = withThemeProvider(AvatarTokenComponent);
+export { AvatarTokenProps, AvatarTokenSize } from './components/AvatarToken';
 
 import BlockiesComponent from './primitives/Blockies';
 export const Blockies = BlockiesComponent;

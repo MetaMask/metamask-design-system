@@ -23,10 +23,13 @@ export enum AvatarSize {
    */
   Xl = '48',
 }
+export { AvatarSize as AvatarAccountSize };
 export { AvatarSize as AvatarBaseSize };
 export { AvatarSize as AvatarFaviconSize };
 export { AvatarSize as AvatarGroupSize };
 export { AvatarSize as AvatarIconSize };
+export { AvatarSize as AvatarNetworkSize };
+export { AvatarSize as AvatarTokenSize };
 
 /**
  * The shape of all Avatars
