@@ -49,6 +49,7 @@ const getStories = () => {
   return {
     "./../../packages/design-system-react-native/src/components/AvatarAccount/AvatarAccount.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarAccount/AvatarAccount.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/AvatarFavicon/AvatarFavicon.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarFavicon/AvatarFavicon.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/AvatarGroup/AvatarGroup.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarGroup/AvatarGroup.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/AvatarIcon/AvatarIcon.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarIcon/AvatarIcon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/AvatarNetwork/AvatarNetwork.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarNetwork/AvatarNetwork.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/AvatarToken/AvatarToken.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarToken/AvatarToken.stories.tsx"),

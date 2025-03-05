@@ -12,6 +12,8 @@ const AvatarFavicon = ({
   shape = DEFAULT_AVATARFAVICON_PROPS.shape,
   fallbackText,
   fallbackTextProps,
+  hasBorder,
+  hasSolidBackgroundColor,
   twClassName,
   testID,
   style,
@@ -45,6 +47,8 @@ const AvatarFavicon = ({
       fallbackText={finalFallbackText}
       fallbackTextProps={fallbackTextProps}
       twClassName={twClassName}
+      hasBorder={hasBorder}
+      hasSolidBackgroundColor={hasSolidBackgroundColor}
       testID={testID}
       style={style}
     >

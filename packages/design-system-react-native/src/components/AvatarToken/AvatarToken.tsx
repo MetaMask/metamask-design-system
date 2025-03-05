@@ -12,6 +12,8 @@ const AvatarToken = ({
   shape = DEFAULT_AVATARTOKEN_PROPS.shape,
   fallbackText,
   fallbackTextProps,
+  hasBorder,
+  hasSolidBackgroundColor,
   twClassName,
   testID,
   style,
@@ -44,6 +46,8 @@ const AvatarToken = ({
       shape={shape}
       fallbackText={finalFallbackText}
       fallbackTextProps={fallbackTextProps}
+      hasBorder={hasBorder}
+      hasSolidBackgroundColor={hasSolidBackgroundColor}
       twClassName={twClassName}
       testID={testID}
       style={style}

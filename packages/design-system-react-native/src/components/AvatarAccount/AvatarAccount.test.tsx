@@ -5,11 +5,14 @@ import { render } from '@testing-library/react-native';
 import { AvatarAccountSize } from '../../shared/enums';
 import AvatarAccount from './AvatarAccount';
 import { AvatarAccountVariant } from './AvatarAccount.types';
-import { DEFAULT_AVATARACCOUNT_PROPS } from './AvatarAccount.constants';
+import {
+  DEFAULT_AVATARACCOUNT_PROPS,
+  SAMPLE_AVATARACCOUNT_ADDRESSES,
+} from './AvatarAccount.constants';
 
 describe('AvatarAccount', () => {
   it('renders Jazzicon by default when no variant is provided', () => {
-    const address = '0x12345';
+    const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
 
     const { getByTestId, queryByTestId } = render(
       <AvatarAccount address={address} />,
@@ -20,7 +23,7 @@ describe('AvatarAccount', () => {
   });
 
   it('renders Blockies when variant is blockies', () => {
-    const address = '0xabcdef';
+    const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
 
     const { getByTestId, queryByTestId } = render(
       <AvatarAccount
@@ -34,7 +37,7 @@ describe('AvatarAccount', () => {
   });
 
   it('respects the default size and shape', () => {
-    const address = '0xlmnop';
+    const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
     const { getByTestId } = render(
       <AvatarAccount address={address} testID="avatar-account" />,
     );
@@ -49,7 +52,7 @@ describe('AvatarAccount', () => {
   });
 
   it('overrides the size if provided', () => {
-    const address = '0x999999';
+    const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
     const { getByTestId } = render(
       <AvatarAccount
         address={address}
@@ -71,7 +74,7 @@ describe('AvatarAccount', () => {
   });
 
   it('passes additional props to AvatarBase', () => {
-    const address = '0x67890';
+    const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
     const customStyle = { margin: 10 };
     const { getByTestId } = render(
       <AvatarAccount

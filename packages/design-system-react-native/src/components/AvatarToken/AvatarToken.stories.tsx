@@ -2,7 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { ImageSourcePropType, View } from 'react-native';
 
 import AvatarToken from './AvatarToken';
-import { DEFAULT_AVATARTOKEN_PROPS } from './AvatarToken.constants';
+import {
+  DEFAULT_AVATARTOKEN_PROPS,
+  SAMPLE_AVATARTOKEN_URIS,
+} from './AvatarToken.constants';
 import type { AvatarTokenProps } from './AvatarToken.types';
 import { AvatarSize } from '../../shared/enums';
 
@@ -24,7 +27,7 @@ export default meta;
 
 type Story = StoryObj<AvatarTokenProps>;
 const storyImageSource: ImageSourcePropType = {
-  uri: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg',
+  uri: SAMPLE_AVATARTOKEN_URIS[0],
 };
 
 export const Default: Story = {
@@ -43,6 +46,21 @@ export const Sizes: Story = {
           src={storyImageSource}
           key={sizeKey}
           size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
+        />
+      ))}
+    </View>
+  ),
+};
+
+export const SampleTokens: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      {SAMPLE_AVATARTOKEN_URIS.map((tokenUri) => (
+        <AvatarToken
+          src={{
+            uri: tokenUri,
+          }}
+          key={tokenUri}
         />
       ))}
     </View>
