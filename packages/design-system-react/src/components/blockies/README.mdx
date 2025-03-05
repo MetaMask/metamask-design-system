@@ -1,0 +1,98 @@
+import { Controls, Canvas } from '@storybook/blocks';
+import * as BlockiesStories from './Blockies.stories';
+
+# Blockies
+
+The **Blockies** component generates a unique, blocky avatar image based on a provided address. It dynamically loads the `blo` module to create a visual representation of the address.
+
+```tsx
+import { Blockies } from '@metamask/design-system-react';
+
+<Blockies address="0x1234567890abcdef1234567890abcdef12345678" />;
+```
+
+<Canvas of={BlockiesStories.Default} />
+
+## Props
+
+### Address
+
+- **Type:** `string`
+- **Description:**  
+  The `address` prop is required and used as a unique identifier to generate the Blockies image.
+
+<Canvas of={BlockiesStories.SampleAddresses} />
+
+### Size
+
+- **Type:** `number`
+- **Default:** `32`
+- **Description:**  
+  Controls the dimensions (both height and width) of the Blockies image in pixels.
+
+### Additional Image Attributes
+
+Blockies extends the standard HTML `<img>` attributes (e.g., `alt`, `title`, etc.). Any additional props provided will be passed directly to the underlying `<img>` element.
+
+## Component API
+
+<Controls of={BlockiesStories.Default} />
+
+## Code Details
+
+Below is the implementation of the **Blockies** component:
+
+```tsx
+// Blockies.types
+import type { ComponentProps } from 'react';
+
+export type BlockiesProps = ComponentProps<'img'> & {
+  /**
+   * Required address used as a unique identifier to generate the Blockies.
+   */
+  address: string;
+  /**
+   * Optional prop to control the size of the Blockies.
+   */
+  size?: number;
+};
+
+// Blockies
+import React, { useState, useEffect } from 'react';
+import type { BlockiesProps } from './Blockies.types';
+
+export const Blockies = ({
+  address,
+  size = 32,
+  ...imageProps
+}: BlockiesProps) => {
+  const [bloModule, setBloModule] = useState<{
+    blo: (address: string) => string;
+  } | null>(null);
+
+  useEffect(() => {
+    import('blo')
+      .then((module) => setBloModule(module))
+      .catch((error) => console.error('Failed to load blo module:', error));
+  }, []);
+
+  if (!bloModule) {
+    return null;
+  }
+
+  return (
+    <img
+      src={bloModule.blo(address)}
+      height={size}
+      width={size}
+      {...imageProps}
+    />
+  );
+};
+
+Blockies.displayName = 'Blockies';
+```
+
+## References
+
+- [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
