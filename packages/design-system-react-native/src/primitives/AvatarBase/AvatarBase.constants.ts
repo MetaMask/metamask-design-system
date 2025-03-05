@@ -11,10 +11,24 @@ export const TWCLASSMAP_AVATARBASE_SIZE_SHAPE: Record<AvatarBaseSize, string> =
     [AvatarBaseSize.Lg]: 'rounded-[10px]',
     [AvatarBaseSize.Xl]: 'rounded-xl',
   };
+export const MAP_AVATARBASE_SIZE_BORDERWIDTH: Record<AvatarBaseSize, number> = {
+  [AvatarBaseSize.Xs]: 1,
+  [AvatarBaseSize.Sm]: 1,
+  [AvatarBaseSize.Md]: 1,
+  [AvatarBaseSize.Lg]: 2,
+  [AvatarBaseSize.Xl]: 2,
+};
 
 // Defaults
 export const DEFAULT_AVATARBASE_PROPS: Required<
-  Pick<AvatarBaseProps, 'size' | 'shape' | 'fallbackTextProps'>
+  Pick<
+    AvatarBaseProps,
+    | 'size'
+    | 'shape'
+    | 'fallbackTextProps'
+    | 'hasBorder'
+    | 'hasSolidBackgroundColor'
+  >
 > = {
   size: AvatarBaseSize.Md,
   shape: AvatarBaseShape.Circle,
@@ -24,4 +38,6 @@ export const DEFAULT_AVATARBASE_PROPS: Required<
     fontWeight: FontWeight.Medium,
     twClassName: 'uppercase',
   },
+  hasBorder: false,
+  hasSolidBackgroundColor: false,
 };

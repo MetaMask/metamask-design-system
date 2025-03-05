@@ -1,16 +1,21 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { View } from 'react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
+import AvatarAccount, { AvatarAccountProps } from '../AvatarAccount';
 import AvatarFavicon, { AvatarFaviconProps } from '../AvatarFavicon';
-import AvatarIcon, { AvatarIconProps } from '../AvatarIcon';
+import AvatarNetwork, { AvatarNetworkProps } from '../AvatarNetwork';
+import AvatarToken, { AvatarTokenProps } from '../AvatarToken';
 import Text, { TextColor } from '../Text';
 import {
-  MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS,
   MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT,
   DEFAULT_AVATARGROUP_PROPS,
 } from './AvatarGroup.constants';
 import { AvatarGroupProps, AvatarGroupVariant } from './AvatarGroup.types';
+import {
+  generateAvatarGroupContainerClassNames,
+  generateAvatarGroupOverflowTextContainerClassNames,
+} from './AvatarGroup.utilities';
 
 const AvatarGroup = ({
   variant,
@@ -24,14 +29,36 @@ const AvatarGroup = ({
 }: AvatarGroupProps) => {
   const tw = useTailwind();
   const overflowCounter = avatarPropsArr.length - max;
-  const avatarNegativeSpacing = MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS[size];
   const shouldRenderOverflowCounter = overflowCounter > 0;
+  const twContainerClassNames = useMemo(() => {
+    return generateAvatarGroupContainerClassNames({
+      size,
+      isReverse,
+      twClassName,
+    });
+  }, [size, isReverse, twClassName]);
+  const twOverflowTextContainerClassNames = useMemo(() => {
+    return generateAvatarGroupOverflowTextContainerClassNames({
+      size,
+      variant,
+    });
+  }, [size, variant]);
 
   const renderAvatarList = useCallback(
     () =>
       avatarPropsArr.slice(0, max).map((avatarProps, index) => {
-        const marginLeft = index === 0 ? 0 : avatarNegativeSpacing;
         switch (variant) {
+          case AvatarGroupVariant.Account:
+            return (
+              <AvatarAccount
+                key={`avatar-${index}`}
+                {...(avatarProps as AvatarAccountProps)}
+                size={size}
+                testID={`avatar-${variant}`}
+                hasBorder
+                hasSolidBackgroundColor
+              />
+            );
           case AvatarGroupVariant.Favicon:
             return (
               <AvatarFavicon
@@ -39,15 +66,30 @@ const AvatarGroup = ({
                 {...(avatarProps as AvatarFaviconProps)}
                 size={size}
                 testID={`avatar-${variant}`}
+                hasBorder
+                hasSolidBackgroundColor
               />
             );
-          case AvatarGroupVariant.Icon:
+          case AvatarGroupVariant.Network:
             return (
-              <AvatarIcon
+              <AvatarNetwork
                 key={`avatar-${index}`}
-                {...(avatarProps as AvatarIconProps)}
+                {...(avatarProps as AvatarNetworkProps)}
                 size={size}
                 testID={`avatar-${variant}`}
+                hasBorder
+                hasSolidBackgroundColor
+              />
+            );
+          case AvatarGroupVariant.Token:
+            return (
+              <AvatarToken
+                key={`avatar-${index}`}
+                {...(avatarProps as AvatarTokenProps)}
+                size={size}
+                testID={`avatar-${variant}`}
+                hasBorder
+                hasSolidBackgroundColor
               />
             );
           default:
@@ -56,22 +98,14 @@ const AvatarGroup = ({
             );
         }
       }),
-    [avatarPropsArr, avatarNegativeSpacing, max, size],
+    [avatarPropsArr, max, size, tw],
   );
 
   return (
-    <View
-      style={[
-        tw`${isReverse ? 'flex-row-reverse' : 'flex-row'} ${twClassName as string} gap-[${avatarNegativeSpacing}px]`,
-        style,
-      ]}
-      {...props}
-    >
+    <View style={[tw`${twContainerClassNames}`, style]} {...props}>
       {renderAvatarList()}
       {shouldRenderOverflowCounter && (
-        <View
-          style={tw`w-[${size}px] h-[${size}px] bg-icon-default rounded-full items-center justify-center`}
-        >
+        <View style={tw`${twOverflowTextContainerClassNames}`}>
           <Text
             variant={MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT[size]}
             color={TextColor.PrimaryInverse}

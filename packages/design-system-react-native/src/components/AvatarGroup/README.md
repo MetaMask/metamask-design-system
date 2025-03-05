@@ -1,95 +1,262 @@
 # AvatarGroup
 
-AvatarGroup is a component that horizontally stacks multiple Avatar components.
+The `AvatarGroup` component is designed to display a collection of avatars in a compact and structured layout. It supports different avatar variants and provides an overflow indicator when the number of avatars exceeds a specified limit.
 
-## AvatarGroup Props
+---
 
-This component extends React Native's [ViewProps](https://reactnative.dev/docs/view) component.
+## Props
 
-### `avatarPropsList`
+### `variant` (Required)
 
-A list of Avatars to be horizontally stacked.
-Note: AvatarGroup's `size` and `includesBorder` prop will overwrite each individual avatar's `size` and `includesBorder` prop.
+Determines the type of avatars used within the group.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| `AvatarProps[]`                                     | Yes                                                     |
+| TYPE                 | REQUIRED | DEFAULT |
+| :------------------- | :------- | :------ |
+| `AvatarGroupVariant` | Yes      | `N/A`   |
+
+Available variants:
+
+- `Account`
+- `Favicon`
+- `Network`
+- `Token`
+
+---
+
+### `avatarPropsArr` (Required)
+
+An array of props for each avatar within the group.
+
+| TYPE                 | REQUIRED | DEFAULT |
+| :------------------- | :------- | :------ |
+| `Array<AvatarProps>` | Yes      | `N/A`   |
+
+Each avatar follows the prop structure of the corresponding variant component (`AvatarAccount`, `AvatarFavicon`, `AvatarNetwork`, `AvatarToken`).
+
+---
 
 ### `size`
 
-Optional enum to select between Avatar Group sizes.
+Optional prop to control the size of the avatars in the group.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| [`AvatarSize`](../Avatar/Avatar.types.ts)           | No                                                      | `AvatarSize.Xs`                                        |
+| TYPE         | REQUIRED | DEFAULT         |
+| :----------- | :------- | :-------------- |
+| `AvatarSize` | No       | `AvatarSize.Md` |
 
-### `maxStackedAvatars`
+Available sizes:
 
-Optional enum to select the maximum number of Avatars visible before the overflow counter is displayed.
+- `AvatarSize.Xs`
+- `AvatarSize.Sm`
+- `AvatarSize.Md`
+- `AvatarSize.Lg`
+- `AvatarSize.Xl`
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| `number`                                            | No                                                      | 4                                                      |
+---
 
-### `includesBorder`
+### `max`
 
-Optional boolean to include a border or not.
+Determines the maximum number of avatars to display before showing an overflow indicator.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| `boolean`                                           | No                                                      | `false`                                                |
+| TYPE     | REQUIRED | DEFAULT |
+| :------- | :------- | :------ |
+| `number` | No       | `4`     |
 
-### `spaceBetweenAvatars`
+---
 
-Optional enum to configure the space between avatars.
-Note:
+### `isReverse`
 
-- Negative values for this prop will result in the Avatars moving closer to each other, positive values for this prop will result in the Avatars moving away from each other.
-- The default values of the space between avatars depend on the size.
-- Please refer to the constants file for the mappings.
+Optional prop to reverse the order of avatar stacking.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| `number`                                            | No                                                      |
+| TYPE      | REQUIRED | DEFAULT |
+| :-------- | :------- | :------ |
+| `boolean` | No       | `false` |
+
+---
+
+### `twClassName`
+
+Optional prop to add `twrnc` overriding class names.
+
+| TYPE     | REQUIRED | DEFAULT |
+| :------- | :------- | :------ |
+| `string` | No       | `''`    |
+
+---
+
+### `style`
+
+Optional prop to control the style of the avatar group container.
+
+| TYPE                   | REQUIRED | DEFAULT |
+| :--------------------- | :------- | :------ |
+| `StyleProp<ViewStyle>` | No       | `null`  |
+
+---
 
 ## Usage
 
-```javascript
-// Passing list of AvatarProps to avatarPropsList
-const avatarPropsList: AvatarProps[] = [
-  {
-    variant: AvatarVariant.Network,
-    name: SAMPLE_AVATARNETWORK_NAME,
-    imageSource: SAMPLE_AVATARNETWORK_IMAGESOURCE_REMOTE,
-  },
-  {
-    variant: AvatarVariant.Network,
-    name: SAMPLE_AVATARNETWORK_NAME,
-    imageSource: SAMPLE_AVATARNETWORK_IMAGESOURCE_REMOTE,
-  },
-  {
-    variant: AvatarVariant.Network,
-    name: SAMPLE_AVATARNETWORK_NAME,
-    imageSource: SAMPLE_AVATARNETWORK_IMAGESOURCE_REMOTE,
-  },
-];
-<AvatarGroup avatarPropsList={avatarPropsList} />;
+Below are examples illustrating how to structure the `avatarPropsArr` based on each avatar variant. Note that the data shown is purely illustrative.
 
-// Configuring different Avatar sizes
-<AvatarGroup avatarPropsList={avatarPropsList} size={AvatarSize.Xs} />;
-<AvatarGroup avatarPropsList={avatarPropsList} size={AvatarSize.Sm} />;
-<AvatarGroup avatarPropsList={avatarPropsList} size={AvatarSize.Md} />;
-<AvatarGroup avatarPropsList={avatarPropsList} size={AvatarSize.Lg} />;
-<AvatarGroup avatarPropsList={avatarPropsList} size={AvatarSize.Xl} />;
+### Account Avatars
 
-// Configuring max number of stacked Avatars
-<AvatarGroup avatarPropsList={avatarPropsList} maxStackedAvatars={3} />;
+```tsx
+import React from 'react';
+import AvatarGroup, {
+  AvatarGroupVariant,
+} from '@metamask/design-system-react-native';
+import { AvatarAccountVariant } from '@metamask/design-system-react-native';
 
-// Configuring border inclusion
-<AvatarGroup avatarPropsList={avatarPropsList} includesBorder />;
-<AvatarGroup avatarPropsList={avatarPropsList} includesBorder={false} />;
-
-// Configuring space between Avatars
-<AvatarGroup avatarPropsList={avatarPropsList} includesBorder />;
-<AvatarGroup avatarPropsList={avatarPropsList} spaceBetweenAvatars={-6} />;
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+/>;
 ```
+
+---
+
+### Favicon Avatars
+
+```tsx
+import React from 'react';
+import AvatarGroup, {
+  AvatarGroupVariant,
+} from '@metamask/design-system-react-native';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Favicon}
+  avatarPropsArr={[
+    {
+      src: { uri: 'https://example.com/favicon1.png' },
+    },
+    {
+      src: { uri: 'https://example.com/favicon2.png' },
+    },
+    {
+      src: { uri: 'https://example.com/favicon3.png' },
+    },
+  ]}
+/>;
+```
+
+---
+
+### Network Avatars
+
+```tsx
+import React from 'react';
+import AvatarGroup, {
+  AvatarGroupVariant,
+} from '@metamask/design-system-react-native';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Network}
+  avatarPropsArr={[
+    {
+      src: { uri: 'https://example.com/net1.png' },
+    },
+    {
+      src: { uri: 'https://example.com/net2.png' },
+    },
+    {
+      src: { uri: 'https://example.com/net3.png' },
+    },
+  ]}
+/>;
+```
+
+---
+
+### Token Avatars
+
+```tsx
+import React from 'react';
+import AvatarGroup, {
+  AvatarGroupVariant,
+} from '@metamask/design-system-react-native';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Token}
+  avatarPropsArr={[
+    {
+      src: { uri: 'https://example.com/token1.png' },
+    },
+    {
+      src: { uri: 'https://example.com/token2.png' },
+    },
+    {
+      src: { uri: 'https://example.com/token3.png' },
+    },
+  ]}
+/>;
+```
+
+---
+
+### Displaying More Avatars with Overflow
+
+```tsx
+<AvatarGroup
+  variant={AvatarGroupVariant.Token}
+  max={3}
+  avatarPropsArr={[
+    { src: { uri: 'https://example.com/token1.png' } },
+    { src: { uri: 'https://example.com/token2.png' } },
+    { src: { uri: 'https://example.com/token3.png' } },
+    { src: { uri: 'https://example.com/token4.png' } },
+  ]}
+/>
+```
+
+If more than `max` avatars are provided, an overflow counter (e.g., `+1`) will be displayed.
+
+---
+
+### Changing Avatar Size
+
+```tsx
+import AvatarGroup, {
+  AvatarGroupVariant,
+  AvatarGroupSize,
+} from '@metamask/design-system-react-native';
+<AvatarGroup
+  variant={AvatarGroupVariant.Network}
+  size={AvatarGroupSize.Lg}
+  avatarPropsArr={[
+    { src: { uri: 'https://example.com/net1.png' } },
+    { src: { uri: 'https://example.com/net2.png' } },
+  ]}
+/>;
+```
+
+---
+
+## Notes
+
+- `AvatarGroup` ensures consistent avatar alignment and spacing.
+- Overflow avatars are indicated with a counter.
+- It supports different avatar types based on the selected variant.
+
+---
+
+## Contributing
+
+1. Add tests for new features.
+2. Update this README for any changes to the API.
+3. Follow the design system's coding guidelines.
+
+---
+
+For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.

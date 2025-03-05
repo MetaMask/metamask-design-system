@@ -1,15 +1,19 @@
 import { ViewProps } from 'react-native';
 
 import { AvatarGroupSize } from '../../shared/enums';
+import { AvatarAccountProps } from '../AvatarAccount';
 import { AvatarFaviconProps } from '../AvatarFavicon';
-import { AvatarIconProps } from '../AvatarIcon';
+import { AvatarNetworkProps } from '../AvatarNetwork';
+import { AvatarTokenProps } from '../AvatarToken';
 
 /**
  * AvatarGroup variants.
  */
 export enum AvatarGroupVariant {
+  Account = 'Account',
   Favicon = 'Favicon',
-  Icon = 'Icon',
+  Network = 'Network',
+  Token = 'Token',
 }
 
 type BaseAvatarGroupProps = {
@@ -40,6 +44,14 @@ type BaseAvatarGroupProps = {
 export type AvatarGroupProps = BaseAvatarGroupProps &
   (
     | {
+        variant: AvatarGroupVariant.Account;
+        /**
+         * A list of Avatars to be horizontally stacked.
+         * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
+         */
+        avatarPropsArr: AvatarAccountProps[];
+      }
+    | {
         variant: AvatarGroupVariant.Favicon;
         /**
          * A list of Avatars to be horizontally stacked.
@@ -48,11 +60,19 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
         avatarPropsArr: AvatarFaviconProps[];
       }
     | {
-        variant: AvatarGroupVariant.Icon;
+        variant: AvatarGroupVariant.Network;
         /**
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
          */
-        avatarPropsArr: AvatarIconProps[];
+        avatarPropsArr: AvatarNetworkProps[];
+      }
+    | {
+        variant: AvatarGroupVariant.Token;
+        /**
+         * A list of Avatars to be horizontally stacked.
+         * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
+         */
+        avatarPropsArr: AvatarTokenProps[];
       }
   );
