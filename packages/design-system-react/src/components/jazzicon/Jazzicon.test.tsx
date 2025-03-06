@@ -1,5 +1,3 @@
-// Jazzicon.test.tsx
-
 // Polyfill TextEncoder for JSDOM (Node < 18)
 if (typeof TextEncoder === 'undefined') {
   // @ts-ignore
@@ -223,9 +221,7 @@ describe('Jazzicon', () => {
       spy.mockRestore();
     });
 
-    // --- Additional tests to cover uncovered lines ---
-
-    it('returns early if containerRef.current is null before effect runs (covering line 26)', async () => {
+    it('returns early if containerRef.current is null before effect runs', async () => {
       // Create a fake ref whose `current` is always null.
       const fakeRef = {
         get current() {
@@ -247,7 +243,7 @@ describe('Jazzicon', () => {
       useRefSpy.mockRestore();
     });
 
-    it('removes multiple existing children via while-loop (ensuring line 30 executes)', async () => {
+    it('removes multiple existing children via while-loop', async () => {
       const { getByTestId, rerender } = render(
         <Jazzicon address="0xclear" data-testid="jazzicon" />,
       );
@@ -287,7 +283,7 @@ describe('Jazzicon', () => {
       expect(container.querySelector('[data-testid="dummy3"]')).toBeNull();
     });
 
-    it('clears pre-existing children on initial mount (covering line 30) using delayed effect', async () => {
+    it('clears pre-existing children on initial mount using delayed effect', async () => {
       // Capture effect callbacks instead of letting them run automatically.
       const effectCallbacks: Array<() => void> = [];
       const originalUseEffect = React.useEffect;

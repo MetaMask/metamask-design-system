@@ -1,0 +1,98 @@
+import { Controls, Canvas } from '@storybook/blocks';
+import * as JazziconStories from './Jazzicon.stories';
+
+# Jazzicon
+
+The **Jazzicon** component generates a unique, jazzicon avatar image based on a provided address.
+
+```tsx
+import { Jazzicon } from '@metamask/design-system-react';
+
+<Jazzicon address="0x1234567890abcdef1234567890abcdef12345678" />;
+```
+
+<Canvas of={JazziconStories.Default} />
+
+## Props
+
+### Address
+
+- **Type:** `string`
+- **Description:**  
+  The `address` prop is required and used as a unique identifier to generate the Jazzicon image.
+
+<Canvas of={JazziconStories.SampleAddresses} />
+
+### Size
+
+- **Type:** `number`
+- **Default:** `32`
+- **Description:**  
+  Controls the dimensions (both height and width) of the Jazzicon image in pixels.
+
+### Additional Image Attributes
+
+Jazzicon extends the standard HTML `<div>` attributes. Any additional props provided will be passed directly to the underlying `<div>` element.
+
+## Component API
+
+<Controls of={JazziconStories.Default} />
+
+## Code Details
+
+Below is the implementation of the **Jazzicon** component:
+
+```tsx
+// Jazzicon.types
+import type { ComponentProps } from 'react';
+
+export type JazziconProps = ComponentProps<'img'> & {
+  /**
+   * Required address used as a unique identifier to generate the Jazzicon.
+   */
+  address: string;
+  /**
+   * Optional prop to control the size of the Jazzicon.
+   */
+  size?: number;
+};
+
+// Jazzicon
+import React, { useState, useEffect } from 'react';
+import type { JazziconProps } from './Jazzicon.types';
+
+export const Jazzicon = ({
+  address,
+  size = 32,
+  ...imageProps
+}: JazziconProps) => {
+  const [bloModule, setBloModule] = useState<{
+    blo: (address: string) => string;
+  } | null>(null);
+
+  useEffect(() => {
+    import('blo')
+      .then((module) => setBloModule(module))
+      .catch((error) => console.error('Failed to load blo module:', error));
+  }, []);
+
+  if (!bloModule) {
+    return null;
+  }
+
+  return (
+    <img
+      src={bloModule.blo(address)}
+      height={size}
+      width={size}
+      {...imageProps}
+    />
+  );
+};
+
+Jazzicon.displayName = 'Jazzicon';
+```
+
+## References
+
+- [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
