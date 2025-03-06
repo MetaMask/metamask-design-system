@@ -1,2 +1,2 @@
-export { Blockies } from './Jazzicon';
-export type { BlockiesProps } from './Jazzicon.types';
+export { Jazzicon } from './Jazzicon';
+export type { JazziconProps } from './Jazzicon.types';
