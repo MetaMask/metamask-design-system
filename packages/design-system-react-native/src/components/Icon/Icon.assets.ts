@@ -98,6 +98,7 @@ import NotificationSVG from './assets/notification.svg';
 import PasswordCheckSVG from './assets/password-check.svg';
 import PeopleSVG from './assets/people.svg';
 import PinSVG from './assets/pin.svg';
+import PlantSVG from './assets/plant.svg';
 import PlugSVG from './assets/plug.svg';
 import PlusMinusSVG from './assets/plus-minus.svg';
 import ProgrammingArrowsSVG from './assets/programming-arrows.svg';
@@ -130,7 +131,6 @@ import SnapsPlusSVG from './assets/snaps-plus.svg';
 import SnapsSVG from './assets/snaps.svg';
 import SpeedometerSVG from './assets/speedometer.svg';
 import SquareSVG from './assets/square.svg';
-import StakeSVG from './assets/stake.svg';
 import StarSVG from './assets/star.svg';
 import StudentSVG from './assets/student.svg';
 import SwapHorizontalSVG from './assets/swap-horizontal.svg';
@@ -258,6 +258,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.PasswordCheck]: PasswordCheckSVG,
   [IconName.People]: PeopleSVG,
   [IconName.Pin]: PinSVG,
+  [IconName.Plant]: PlantSVG,
   [IconName.Plug]: PlugSVG,
   [IconName.PlusMinus]: PlusMinusSVG,
   [IconName.ProgrammingArrows]: ProgrammingArrowsSVG,
@@ -290,7 +291,6 @@ export const assetByIconName: AssetByIconName = {
   [IconName.Snaps]: SnapsSVG,
   [IconName.Speedometer]: SpeedometerSVG,
   [IconName.Square]: SquareSVG,
-  [IconName.Stake]: StakeSVG,
   [IconName.Star]: StarSVG,
   [IconName.Student]: StudentSVG,
   [IconName.SwapHorizontal]: SwapHorizontalSVG,
