@@ -9,7 +9,6 @@ import {
   TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR,
 } from './BadgeStatus.constants';
 import type { BadgeStatusProps } from './BadgeStatus.types';
-import AvatarBase from '../../primitives/AvatarBase';
 
 const BadgeStatus = ({
   status,
@@ -29,6 +28,7 @@ const BadgeStatus = ({
         rounded-full 
         ${hasBorder ? 'border-[2px] border-background-default' : ''} 
         ${twClassName}`,
+        style,
       ]}
       {...props}
     >

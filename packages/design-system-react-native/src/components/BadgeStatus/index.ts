@@ -1,4 +1,3 @@
 export { default } from './BadgeStatus';
-export type { AvatarIconProps } from './BadgeStatus.types';
-export { AvatarIconSize } from '../../shared/enums';
-export { AvatarIconSeverity } from './BadgeStatus.types';
+export type { BadgeStatusProps } from './BadgeStatus.types';
+export { BadgeStatusStatus } from './BadgeStatus.types';

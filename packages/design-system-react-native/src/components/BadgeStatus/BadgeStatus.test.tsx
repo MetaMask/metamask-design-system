@@ -1,83 +1,161 @@
+import React from 'react';
 import { render } from '@testing-library/react-native';
-
-import { IconName } from '../Icon';
-import { AvatarIconSize } from '../../shared/enums';
-import { generateAvatarIconContainerClassNames } from './BadgeStatus.utilities';
+import BadgeStatus from './BadgeStatus';
+import { BadgeStatusStatus, BadgeStatusSize } from './BadgeStatus.types';
 import {
-  DEFAULT_AVATARICON_PROPS,
-  TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
+  DEFAULT_BADGESTATUS_PROPS,
+  TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR,
+  TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR,
 } from './BadgeStatus.constants';
-import AvatarIcon from './BadgeStatus';
-import { AvatarIconSeverity } from './BadgeStatus.types';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
-describe('AvatarIcon', () => {
-  describe('generateAvatarIconContainerClassNames', () => {
-    it('returns correct class names for default state', () => {
-      const classNames = generateAvatarIconContainerClassNames({});
-      expect(classNames).toStrictEqual(
-        `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[DEFAULT_AVATARICON_PROPS.severity]}`,
-      );
-    });
+describe('BadgeStatus', () => {
+  it('renders with default props and status Active', () => {
+    let expectedOuter;
+    let expectedInner;
+    const TestComponent = () => {
+      const tw = useTailwind();
+      const finalSize = DEFAULT_BADGESTATUS_PROPS.size;
+      const finalHasBorder = DEFAULT_BADGESTATUS_PROPS.hasBorder;
+      expectedOuter = tw`
+        self-start
+        rounded-full 
+        ${finalHasBorder ? 'border-[2px] border-background-default' : ''}
+      `;
+      expectedInner = tw`
+        h-[${finalSize}px] 
+        w-[${finalSize}px] 
+        ${TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR[BadgeStatusStatus.Active]}
+        rounded-full 
+        border-[2px]
+        ${TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR[BadgeStatusStatus.Active]}
+      `;
+      return <BadgeStatus status={BadgeStatusStatus.Active} testID="badge" />;
+    };
 
-    it('applies correct severity class', () => {
-      Object.values(AvatarIconSeverity).forEach((severity) => {
-        const expectedClass =
-          TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity];
-        const classNames = generateAvatarIconContainerClassNames({ severity });
-        expect(classNames).toStrictEqual(expectedClass);
-      });
-    });
-
-    it('appends additional Tailwind class names', () => {
-      const classNames = generateAvatarIconContainerClassNames({
-        twClassName: 'shadow-lg ring-2',
-      });
-      expect(classNames).toStrictEqual(
-        `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[DEFAULT_AVATARICON_PROPS.severity]} shadow-lg ring-2`,
-      );
-    });
-
-    it('applies severity and additional classes together correctly', () => {
-      const severity = AvatarIconSeverity.Success;
-      const classNames = generateAvatarIconContainerClassNames({
-        severity,
-        twClassName: 'border border-green-500',
-      });
-      expect(classNames).toStrictEqual(
-        `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity]} border border-green-500`,
-      );
-    });
+    const { getByTestId } = render(<TestComponent />);
+    const badge = getByTestId('badge');
+    expect(badge.props.style[0]).toStrictEqual(expectedOuter);
+    // The inner view is rendered as the child of the outer View.
+    const inner = badge.props.children;
+    expect(inner.props.style[0]).toStrictEqual(expectedInner);
   });
-  describe('AvatarIcon Component', () => {
-    it('renders with default props', () => {
-      const { getByTestId: getByTestIdIcon } = render(
-        <AvatarIcon
-          iconName={IconName.Add}
-          iconProps={{ testID: 'inner-icon' }}
-        />,
+
+  it('renders without border when hasBorder is false', () => {
+    let expectedOuter;
+    const TestComponent = () => {
+      const tw = useTailwind();
+      const finalSize = DEFAULT_BADGESTATUS_PROPS.size;
+      const finalHasBorder = false;
+      expectedOuter = tw`
+        self-start
+        rounded-full 
+        ${finalHasBorder ? 'border-[2px] border-background-default' : ''}
+      `;
+      return (
+        <BadgeStatus
+          status={BadgeStatusStatus.New}
+          hasBorder={false}
+          testID="badge"
+        />
       );
-      const icon = getByTestIdIcon('inner-icon');
+    };
 
-      expect(icon.props.name).toStrictEqual(IconName.Add);
-    });
+    const { getByTestId } = render(<TestComponent />);
+    const badge = getByTestId('badge');
+    expect(badge.props.style[0]).toStrictEqual(expectedOuter);
+  });
 
-    it('renders with custom props', () => {
-      const customSize = AvatarIconSize.Lg;
-      const customSeverity = AvatarIconSeverity.Error;
-      const customIconProps = { testID: 'custom-icon', extraProp: 'value' };
+  it('applies custom style to the outer container', () => {
+    const customStyle = { margin: 10 };
+    const TestComponent = () => {
+      return (
+        <BadgeStatus
+          status={BadgeStatusStatus.Inactive}
+          style={customStyle}
+          testID="badge"
+        />
+      );
+    };
 
-      // Render separately to test the Icon props.
-      const { getByTestId: getIcon } = render(
-        <AvatarIcon
-          iconName={IconName.Close}
+    const { getByTestId } = render(<TestComponent />);
+    const badge = getByTestId('badge');
+    // The outer container style is an array; the second element should equal customStyle.
+    expect(badge.props.style[1]).toStrictEqual(customStyle);
+  });
+
+  it('forwards additional props to the outer container', () => {
+    const extraProp = { accessibilityLabel: 'status-badge' };
+    const TestComponent = () => {
+      return (
+        <BadgeStatus
+          status={BadgeStatusStatus.Attention}
+          testID="badge"
+          {...extraProp}
+        />
+      );
+    };
+
+    const { getByTestId } = render(<TestComponent />);
+    const badge = getByTestId('badge');
+    expect(badge.props.accessibilityLabel).toStrictEqual('status-badge');
+  });
+
+  it('renders with custom size and status PartiallyActive', () => {
+    let expectedInner;
+    const customSize = BadgeStatusSize.Lg; // For example, '10'
+    const TestComponent = () => {
+      const tw = useTailwind();
+      expectedInner = tw`
+        h-[${customSize}px] 
+        w-[${customSize}px] 
+        ${TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR[BadgeStatusStatus.PartiallyActive]}
+        rounded-full 
+        border-[2px]
+        ${TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR[BadgeStatusStatus.PartiallyActive]}
+      `;
+      return (
+        <BadgeStatus
+          status={BadgeStatusStatus.PartiallyActive}
           size={customSize}
-          severity={customSeverity}
-          iconProps={customIconProps}
-        />,
+          testID="badge"
+        />
       );
-      const icon = getIcon('custom-icon');
-      expect(icon.props.name).toStrictEqual(IconName.Close);
-      expect(icon.props.extraProp).toStrictEqual('value');
-    });
+    };
+
+    const { getByTestId } = render(<TestComponent />);
+    const badge = getByTestId('badge');
+    const inner = badge.props.children;
+    expect(inner.props.style[0]).toStrictEqual(expectedInner);
+  });
+
+  it('uses default size and hasBorder when not provided', () => {
+    let expectedOuter;
+    let expectedInner;
+    const TestComponent = () => {
+      const tw = useTailwind();
+      const defaultSize = DEFAULT_BADGESTATUS_PROPS.size;
+      const defaultHasBorder = DEFAULT_BADGESTATUS_PROPS.hasBorder;
+      expectedOuter = tw`
+        self-start
+        rounded-full 
+        ${defaultHasBorder ? 'border-[2px] border-background-default' : ''}
+      `;
+      expectedInner = tw`
+        h-[${defaultSize}px] 
+        w-[${defaultSize}px] 
+        ${TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR[BadgeStatusStatus.Active]}
+        rounded-full 
+        border-[2px]
+        ${TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR[BadgeStatusStatus.Active]}
+      `;
+      return <BadgeStatus status={BadgeStatusStatus.Active} testID="badge" />;
+    };
+
+    const { getByTestId } = render(<TestComponent />);
+    const badge = getByTestId('badge');
+    expect(badge.props.style[0]).toStrictEqual(expectedOuter);
+    const inner = badge.props.children;
+    expect(inner.props.style[0]).toStrictEqual(expectedInner);
   });
 });
