@@ -38,6 +38,10 @@ import AvatarTokenComponent from './components/AvatarToken';
 export const AvatarToken = withThemeProvider(AvatarTokenComponent);
 export { AvatarTokenProps, AvatarTokenSize } from './components/AvatarToken';
 
+import BadgeIconComponent from './components/BadgeIcon';
+export const BadgeIcon = withThemeProvider(BadgeIconComponent);
+export { BadgeIconProps, BadgeIconVariant } from './components/BadgeIcon';
+
 import BlockiesComponent from './primitives/Blockies';
 export const Blockies = BlockiesComponent;
 export { BlockiesProps } from './primitives/Blockies';

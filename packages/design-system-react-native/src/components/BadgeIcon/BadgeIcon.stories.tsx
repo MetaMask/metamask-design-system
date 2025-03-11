@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { View } from 'react-native';
 
 import BadgeIcon from './BadgeIcon';
 import type { BadgeIconProps } from './BadgeIcon.types';
@@ -55,8 +56,13 @@ export const CustomVariant: Story = {
 };
 
 export const NonCustomVariant: Story = {
-  args: {
-    variant: BadgeIconVariant.Snaps,
-    twClassName: '',
-  },
+  render: () => (
+    <View style={{ gap: 16 }}>
+      {Object.values(BadgeIconVariant)
+        .filter((variant) => variant !== BadgeIconVariant.Custom)
+        .map((variant) => (
+          <BadgeIcon key={variant} variant={variant} />
+        ))}
+    </View>
+  ),
 };

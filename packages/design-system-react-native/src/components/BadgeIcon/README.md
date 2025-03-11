@@ -1,69 +1,67 @@
-# AvatarIcon
+# BadgeIcon
 
-The `AvatarIcon` component is reserved for representing static icons inside of an avatar. It extends the functionality of [`AvatarBase`](../../primitives/AvatarBase/) by incorporating an icon and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with icons.
+The `BadgeIcon` component represents static icons inside of a badge. It is useful for visually indicating different actions or statuses, such as sending, staking, or bridging assets.
 
 ---
 
 ## Props
 
-### `severity`
+### `variant` (Required)
 
-Optional prop to control the severity of the avatar.
+Determines the type of icon displayed within the badge.
 
-| TYPE                 | REQUIRED | DEFAULT                      |
-| :------------------- | :------- | :--------------------------- |
-| `AvatarIconSeverity` | No       | `AvatarIconSeverity.Default` |
+| TYPE               | REQUIRED | DEFAULT |
+| :----------------- | :------- | :------ |
+| `BadgeIconVariant` | Yes      | `N/A`   |
 
-Available severities:
+Available variants:
 
-- `Default`
-- `Info`
-- `Success`
-- `Error`
-- `Warning`
+- `Custom`
+- `Snaps`
+- `Send`
+- `Stake`
+- `Bridge`
 
----
+Each variant maps to a predefined icon:
 
-### `iconName` (Required)
+| Variant  | Icon                     |
+| -------- | ------------------------ |
+| `Snaps`  | `IconName.Snaps`         |
+| `Send`   | `IconName.Arrow2UpRight` |
+| `Stake`  | `IconName.Plant`         |
+| `Bridge` | `IconName.Bridge`        |
 
-The name of the icon to be displayed.
-
-| TYPE       | REQUIRED | DEFAULT |
-| :--------- | :------- | :------ |
-| `IconName` | Yes      | `N/A`   |
+For the `Custom` variant, you must specify an `iconName`.
 
 ---
 
 ### `iconProps`
 
-Optional props to pass additional properties to the icon.
+Optional props to customize the appearance of the icon inside the badge.
 
-| TYPE                      | REQUIRED | DEFAULT |
-| :------------------------ | :------- | :------ |
-| `Omit<IconProps, 'name'>` | No       | `{}`    |
-
----
-
-### Other Props
-
-`AvatarIcon` supports all props from [`AvatarBase`](#) except `children`, `fallbackText`, and `fallbackTextProps`. This includes:
-
-- `size` – Controls the avatar size. See [AvatarBase documentation](#) for details.
-- `shape` – Controls the avatar shape. See [AvatarBase documentation](#) for details.
-- `twClassName` – Additional Tailwind class names.
-- `style` – Override or extend style properties.
+| TYPE                 | REQUIRED | DEFAULT                                                  |
+| :------------------- | :------- | :------------------------------------------------------- |
+| `Partial<IconProps>` | No       | `{ size: IconSize.Xs, color: IconColor.PrimaryInverse }` |
 
 ---
 
-## Accessibility
+### `twClassName`
 
-Since `AvatarIcon` typically represents an icon-based avatar, it is important to ensure the component is usable by screen readers and assistive technologies. The following `react-native` accessibility props can be passed:
+Optional prop to add `twrnc` overriding class names.
 
-- **`accessibilityLabel`**: Use to describe the AvatarIcon. For example, "Sent"
-- **`accessibilityRole`**:
-  - If interactive (e.g., navigates to account details), set to `button` or another appropriate role.
-- **`accessibilityHint`**: Provide context if `AvatarIcon` triggers a navigation or action.
-- **`accessible`**: Set to `true` when the avatar is meaningful, so screen readers properly identify it. If the icon is strictly decorative or not essential, it can be set to `false`.
+| TYPE     | REQUIRED | DEFAULT |
+| :------- | :------- | :------ |
+| `string` | No       | `''`    |
+
+---
+
+### `style`
+
+Optional prop to control the style of the badge container.
+
+| TYPE                   | REQUIRED | DEFAULT |
+| :--------------------- | :------- | :------ |
+| `StyleProp<ViewStyle>` | No       | `null`  |
 
 ---
 
@@ -73,48 +71,52 @@ Since `AvatarIcon` typically represents an icon-based avatar, it is important to
 
 ```tsx
 import React from 'react';
-import AvatarIcon, {
-  AvatarIconSeverity,
+import BadgeIcon, {
+  BadgeIconVariant,
 } from '@metamask/design-system-react-native';
 
-<AvatarIcon iconName="User" />;
+<BadgeIcon variant={BadgeIconVariant.Send} />;
 ```
 
 ---
 
-### Setting Severity
+### Using a Custom Icon
 
 ```tsx
-<AvatarIcon iconName="Warning" severity={AvatarIconSeverity.Warning} />
+import { IconName } from '@metamask/design-system-react-native';
+
+<BadgeIcon variant={BadgeIconVariant.Custom} iconName={IconName.Star} />;
 ```
 
 ---
 
-### Customizing Icon Props
+### Adjusting Icon Properties
 
 ```tsx
-<AvatarIcon iconName="Bell" iconProps={{ size: 20, color: 'red' }} />
+import { IconColor, IconSize } from '@metamask/design-system-react-native';
+
+<BadgeIcon
+  variant={BadgeIconVariant.Stake}
+  iconProps={{ color: IconColor.SuccessDefault, size: IconSize.Sm }}
+/>;
 ```
 
 ---
 
-### Changing Size and Shape
+### Applying Tailwind Custom Styles
 
 ```tsx
-import { AvatarSize, AvatarShape } from '@metamask/design-system-react-native';
-
-<AvatarIcon iconName="User" size={AvatarSize.Lg} shape={AvatarShape.Square} />;
+<BadgeIcon variant={BadgeIconVariant.Bridge} twClassName="bg-blue-500" />
 ```
-
-See the [AvatarBase README](#) for more details on `size` and `shape`.
 
 ---
 
 ## Notes
 
-- `AvatarIcon` relies on [`AvatarBase`](#) for its foundational behavior.
-- The `severity` prop changes the icon color, making it easy to signal statuses.
-- You can override icon appearance via `iconProps`.
+- `BadgeIcon` provides a quick visual indication for different actions in the UI.
+- You can override the default icon properties using `iconProps`.
+- The `Custom` variant allows specifying any icon from the `IconName` set.
+- Tailwind classes and custom styles can be applied for further customization.
 
 ---
 
@@ -126,4 +128,4 @@ See the [AvatarBase README](#) for more details on `size` and `shape`.
 
 ---
 
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs), the [AvatarBase documentation](#), or contact the maintainers of the design system.
+For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.

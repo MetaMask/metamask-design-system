@@ -29,9 +29,9 @@ const BadgeIcon = (props: BadgeIconProps) => {
       {...props}
     >
       <Icon
-        size={DEFAULT_BADGEICON_PROPS.iconProps.size}
         color={DEFAULT_BADGEICON_PROPS.iconProps.color}
         {...iconProps}
+        size={DEFAULT_BADGEICON_PROPS.iconProps.size}
         name={finalIconName}
       />
     </View>
