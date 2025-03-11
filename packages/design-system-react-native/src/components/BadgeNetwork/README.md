@@ -1,69 +1,99 @@
-# AvatarIcon
+# BadgeNetwork
 
-The `AvatarIcon` component is reserved for representing static icons inside of an avatar. It extends the functionality of [`AvatarBase`](../../primitives/AvatarBase/) by incorporating an icon and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with icons.
+The `BadgeNetwork` component is reserved for badged representing networks. It provides a fallback mechanism in case of an image load failure, ensuring a graceful degradation by displaying either an alternative text or a fallback icon.
 
 ---
 
 ## Props
 
-### `severity`
+The `BadgeNetwork` component accepts the following props:
 
-Optional prop to control the severity of the avatar.
+### `src` (Required)
 
-| TYPE                 | REQUIRED | DEFAULT                      |
-| :------------------- | :------- | :--------------------------- |
-| `AvatarIconSeverity` | No       | `AvatarIconSeverity.Default` |
+The source of the image or SVG. It determines whether a local image, a local SVG component, or a remote image/SVG (via URI) is rendered.
 
-Available severities:
-
-- `Default`
-- `Info`
-- `Success`
-- `Error`
-- `Warning`
+| TYPE                                                    | REQUIRED | DEFAULT |
+| :------------------------------------------------------ | :------- | :------ |
+| `number \| ComponentType<SvgProps> \| { uri?: string }` | Yes      | `N/A`   |
 
 ---
 
-### `iconName` (Required)
+### `name` (Optional)
 
-The name of the icon to be displayed.
+Used to generate fallback text when the image or SVG fails to load.
 
-| TYPE       | REQUIRED | DEFAULT |
-| :--------- | :------- | :------ |
-| `IconName` | Yes      | `N/A`   |
+| TYPE     | REQUIRED | DEFAULT     |
+| :------- | :------- | :---------- |
+| `string` | No       | `undefined` |
 
 ---
 
-### `iconProps`
+### `fallbackText` (Optional)
 
-Optional props to pass additional properties to the icon.
+Custom fallback text displayed when the image fails to load.
 
-| TYPE                      | REQUIRED | DEFAULT |
-| :------------------------ | :------- | :------ |
-| `Omit<IconProps, 'name'>` | No       | `{}`    |
+| TYPE     | REQUIRED | DEFAULT     |
+| :------- | :------- | :---------- |
+| `string` | No       | `name?.[0]` |
+
+---
+
+### `fallbackTextProps` (Optional)
+
+Additional props for customizing the fallback text.
+
+| TYPE     | REQUIRED | DEFAULT |
+| :------- | :------- | :------ |
+| `object` | No       | `{}`    |
+
+---
+
+### `imageProps` (Optional)
+
+Additional properties for the image component.
+
+| TYPE         | REQUIRED | DEFAULT                     |
+| :----------- | :------- | :-------------------------- |
+| `ImageProps` | No       | `{ resizeMode: 'contain' }` |
+
+---
+
+### `onImageError` (Optional)
+
+Callback function triggered when the image fails to load.
+
+| TYPE                                                     | REQUIRED | DEFAULT     |
+| :------------------------------------------------------- | :------- | :---------- |
+| `(e: NativeSyntheticEvent<ImageErrorEventData>) => void` | No       | `undefined` |
+
+---
+
+### `onSvgError` (Optional)
+
+Callback function triggered when the SVG fails to load.
+
+| TYPE               | REQUIRED | DEFAULT     |
+| :----------------- | :------- | :---------- |
+| `(e: any) => void` | No       | `undefined` |
 
 ---
 
 ### Other Props
 
-`AvatarIcon` supports all props from [`AvatarBase`](#) except `children`, `fallbackText`, and `fallbackTextProps`. This includes:
+`BadgeNetwork` supports all other props from [`AvatarNetwork`](#) and [`ImageOrSvg`](#), such as:
 
-- `size` – Controls the avatar size. See [AvatarBase documentation](#) for details.
-- `shape` – Controls the avatar shape. See [AvatarBase documentation](#) for details.
-- `twClassName` – Additional Tailwind class names.
-- `style` – Override or extend style properties.
+- **`twClassName`** – Tailwind class names for styling.
+- **`testID`** – Identifier used for testing purposes.
+- **`style`** – Custom styles for the Badge container.
 
 ---
 
 ## Accessibility
 
-Since `AvatarIcon` typically represents an icon-based avatar, it is important to ensure the component is usable by screen readers and assistive technologies. The following `react-native` accessibility props can be passed:
+To ensure proper accessibility, the following React Native accessibility props can be passed:
 
-- **`accessibilityLabel`**: Use to describe the AvatarIcon. For example, "Sent"
-- **`accessibilityRole`**:
-  - If interactive (e.g., navigates to account details), set to `button` or another appropriate role.
-- **`accessibilityHint`**: Provide context if `AvatarIcon` triggers a navigation or action.
-- **`accessible`**: Set to `true` when the avatar is meaningful, so screen readers properly identify it. If the icon is strictly decorative or not essential, it can be set to `false`.
+- **`accessibilityLabel`**: Describes the Badge for screen readers.
+- **`accessible`**: Set to `true` if the Badge represents meaningful content.
 
 ---
 
@@ -73,57 +103,61 @@ Since `AvatarIcon` typically represents an icon-based avatar, it is important to
 
 ```tsx
 import React from 'react';
-import AvatarIcon, {
-  AvatarIconSeverity,
-} from '@metamask/design-system-react-native';
+import BadgeNetwork from '@metamask/design-system-react-native/badge-network';
 
-<AvatarIcon iconName="User" />;
+const App = () => (
+  <BadgeNetwork
+    name="MetaMask"
+    source={{ uri: 'https://example.com/network.png' }}
+  />
+);
+
+export default App;
 ```
 
 ---
 
-### Setting Severity
+### Handling Image Errors
 
 ```tsx
-<AvatarIcon iconName="Warning" severity={AvatarIconSeverity.Warning} />
+import React from 'react';
+import BadgeNetwork from '@metamask/design-system-react-native/badge-network';
+
+const handleError = () => {
+  console.log('Image failed to load');
+};
+
+const App = () => (
+  <BadgeNetwork
+    name="ETH"
+    source={{ uri: 'https://invalid-url.com' }}
+    onImageError={handleError}
+  />
+);
+
+export default App;
 ```
-
----
-
-### Customizing Icon Props
-
-```tsx
-<AvatarIcon iconName="Bell" iconProps={{ size: 20, color: 'red' }} />
-```
-
----
-
-### Changing Size and Shape
-
-```tsx
-import { AvatarSize, AvatarShape } from '@metamask/design-system-react-native';
-
-<AvatarIcon iconName="User" size={AvatarSize.Lg} shape={AvatarShape.Square} />;
-```
-
-See the [AvatarBase README](#) for more details on `size` and `shape`.
 
 ---
 
 ## Notes
 
-- `AvatarIcon` relies on [`AvatarBase`](#) for its foundational behavior.
-- The `severity` prop changes the icon color, making it easy to signal statuses.
-- You can override icon appearance via `iconProps`.
+- **Fallback Mechanism:**  
+  If an image or SVG fails to load, the component falls back to displaying text derived from the `name` prop.
+- **Customization:**  
+  Supports various props for shape, size, and additional styling.
+
+- **Extensibility:**  
+  Any additional `ImageOrSvg` props are forwarded for greater flexibility.
 
 ---
 
 ## Contributing
 
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
+1. Add tests for any new features or modifications.
+2. Update this README to reflect any changes in the API.
+3. Follow the project's coding guidelines and best practices.
 
 ---
 
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs), the [AvatarBase documentation](#), or contact the maintainers of the design system.
+For further details, refer to the [React Native documentation](https://reactnative.dev/docs/image).
