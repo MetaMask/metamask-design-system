@@ -9,6 +9,8 @@ import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   MAP_BADGECOUNT_SIZE_MINWIDTH,
   MAP_BADGECOUNT_SIZE_LINEHEIGHT,
+  MAP_BADGECOUNT_SIZE_PADDINGVERTICAL,
+  MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL,
 } from './BadgeCount.constants';
 import type { BadgeCountProps, BadgeCountSize } from './BadgeCount.types';
 
@@ -17,7 +19,7 @@ const BadgeCount = ({
   count,
   max = DEFAULT_BADGECOUNT_PROPS.max,
   textProps,
-  twClassName,
+  twClassName = '',
   style,
   ...props
 }: BadgeCountProps) => {
@@ -26,6 +28,8 @@ const BadgeCount = ({
     bg-error-default
     min-w-[${MAP_BADGECOUNT_SIZE_MINWIDTH[size as BadgeCountSize]}px] 
     h-[${size}px]
+    py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[size]}px]
+    px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[size]}px]
     rounded-full
     items-center
     justify-center
@@ -39,7 +43,7 @@ const BadgeCount = ({
         color={DEFAULT_BADGECOUNT_PROPS.textProps.color}
         fontWeight={DEFAULT_BADGECOUNT_PROPS.textProps.fontWeight}
         {...textProps}
-        twClassName={`leading-[${MAP_BADGECOUNT_SIZE_LINEHEIGHT[size]}px] ${textProps?.twClassName}`}
+        twClassName={`leading-[${MAP_BADGECOUNT_SIZE_LINEHEIGHT[size]}px] ${textProps?.twClassName || ''}`}
       >
         {count > max ? `${max}+` : `${count}`}
       </Text>

@@ -1,76 +1,55 @@
-# ButtonIcon
+# BadgeCount
 
-The `ButtonIcon` component is a flexible icon button designed for React Native applications. It supports different sizes, themes, and accessibility features.
+The `BadgeCount` component is a small, rounded badge used to display numerical values such as notifications, message counts, or other indicators. It supports different sizes and has a customizable maximum display value.
 
 ---
 
 ## Props
 
+### `count` (Required)
+
+The number to be displayed in the badge.
+
+| TYPE     | REQUIRED | DEFAULT |
+| :------- | :------- | :------ |
+| `number` | Yes      | `N/A`   |
+
+If `count` exceeds `max`, it will display as `max+`.
+
+---
+
+### `max`
+
+Optional prop to set the maximum count before displaying `max+`.
+
+| TYPE     | REQUIRED | DEFAULT |
+| :------- | :------- | :------ |
+| `number` | No       | `99`    |
+
+---
+
 ### `size`
 
-Optional prop to control the size of the `ButtonIcon`.
+Optional prop to control the size of the badge.
 
 | TYPE             | REQUIRED | DEFAULT             |
 | :--------------- | :------- | :------------------ |
-| `ButtonIconSize` | No       | `ButtonIconSize.Md` |
+| `BadgeCountSize` | No       | `BadgeCountSize.Md` |
 
 Available sizes:
 
-- `ButtonIconSize.Sm` (24px)
-- `ButtonIconSize.Md` (32px)
-- `ButtonIconSize.Lg` (40px)
+- `Md` (14px height)
+- `Lg` (20px height)
 
 ---
 
-### `iconName` (Required)
+### `textProps`
 
-The name of the icon to be displayed.
+Optional props to be passed to the `Text` component inside the badge.
 
-| TYPE       | REQUIRED | DEFAULT |
-| :--------- | :------- | :------ |
-| `IconName` | Yes      | `N/A`   |
-
----
-
-### `iconProps`
-
-Optional props to customize the icon.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `IconProps` | No       | `{}`    |
-
----
-
-### `isDisabled`
-
-Optional prop that, when `true`, disables the button.
-
-| TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
-| `boolean` | No       | `false` |
-
----
-
-### `isInverse`
-
-Optional prop to show the inverse state of the button, typically used for buttons on colored backgrounds.
-
-| TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
-| `boolean` | No       | `false` |
-
----
-
-### `isFloating`
-
-Optional prop to apply floating button styling.
-
-| TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
-| `boolean` | No       | `false` |
-
-**Note:** This prop applies styling only. There is no positioning logic.
+| TYPE                 | REQUIRED | DEFAULT |
+| :------------------- | :------- | :------ |
+| `Partial<TextProps>` | No       | `{}`    |
 
 ---
 
@@ -86,7 +65,7 @@ Optional prop to add `twrnc` overriding class names.
 
 ### `style`
 
-Optional prop to control the style.
+Optional prop to control the style of the badge container.
 
 | TYPE                   | REQUIRED | DEFAULT |
 | :--------------------- | :------- | :------ |
@@ -100,49 +79,54 @@ Optional prop to control the style.
 
 ```tsx
 import React from 'react';
-import ButtonIcon from '@metamask/design-system-react-native';
+import BadgeCount from '@metamask/design-system-react-native';
 
-<ButtonIcon iconName={IconName.Add} onPress={() => console.log('Pressed!')} />;
+<BadgeCount count={5} />;
 ```
 
 ---
 
-### Custom Icon Size
+### Setting a Maximum Count
 
 ```tsx
-<ButtonIcon size={ButtonIconSize.Lg} iconName={IconName.Add} />
+<BadgeCount count={120} max={99} />
 ```
+
+This will display `99+` instead of `120`.
 
 ---
 
-### Disabled Icon Button
+### Changing Badge Size
 
 ```tsx
-<ButtonIcon iconName={IconName.Add} isDisabled />
+import { BadgeCountSize } from '@metamask/design-system-react-native';
+
+<BadgeCount count={8} size={BadgeCountSize.Lg} />;
 ```
 
 ---
 
-### Floating Icon Button
+### Customizing Text Props
 
 ```tsx
-<ButtonIcon iconName={IconName.Add} isFloating />
+<BadgeCount count={3} textProps={{ color: 'white', fontWeight: 'bold' }} />
 ```
 
 ---
 
-### Accessibility
+### Applying Tailwind Custom Styles
 
-- Use the `accessibilityLabel` prop to provide meaningful labels for assistive technologies.
-- Ensure `iconName` represents a clear visual meaning for users.
+```tsx
+<BadgeCount count={10} twClassName="bg-blue-500" />
+```
 
 ---
 
-### Notes
+## Notes
 
-- `ButtonIcon` is optimized for handling different button states (disabled, floating, inverse).
-- Use `isFloating` for styling but apply additional logic if floating positioning is required.
-- Icons are fully customizable through props.
+- `BadgeCount` is useful for indicating unread notifications, message counts, or status indicators.
+- The text color and weight are customizable via `textProps`.
+- The component ensures that excessively large numbers are represented concisely with `max+`.
 
 ---
 

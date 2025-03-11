@@ -43,9 +43,7 @@ export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 8 }}>
       {Object.values(BadgeCountSize).map((size) => (
-        <View key={size}>
-          <BadgeCount size={size} count={100} />
-        </View>
+        <BadgeCount key={size} size={size} count={100} />
       ))}
     </View>
   ),

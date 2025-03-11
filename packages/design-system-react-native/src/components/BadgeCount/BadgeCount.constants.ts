@@ -18,6 +18,20 @@ export const MAP_BADGECOUNT_SIZE_LINEHEIGHT: Record<BadgeCountSize, number> = {
   [BadgeCountSize.Md]: 14,
   [BadgeCountSize.Lg]: 16,
 };
+export const MAP_BADGECOUNT_SIZE_PADDINGVERTICAL: Record<
+  BadgeCountSize,
+  number
+> = {
+  [BadgeCountSize.Md]: 0,
+  [BadgeCountSize.Lg]: 2,
+};
+export const MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL: Record<
+  BadgeCountSize,
+  number
+> = {
+  [BadgeCountSize.Md]: 4,
+  [BadgeCountSize.Lg]: 6,
+};
 
 // Defaults
 export const DEFAULT_BADGECOUNT_PROPS: Required<
