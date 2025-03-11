@@ -10,5 +10,5 @@
     "skipLibCheck": true // TODO: Remove this once we have a proper type definition for the blo module for blockies
   },
   "references": [],
-  "include": ["./src"]
+  "include": ["./src", "global.d.ts"]
 }
