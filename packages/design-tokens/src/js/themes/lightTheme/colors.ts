@@ -57,7 +57,7 @@ export const colors: ThemeColors = {
     inverse: brandColor.grey000,
   },
   primary: {
-    /** For primary semantic elements: interactive, active, selected... (#4459ff) */
+    /** For primary semantic elements: interactive, active, selected (#4459ff) */
     default: brandColor.blue500,
     /** Stronger color for primary semantic elements (#6f7eff) */
     alternative: brandColor.blue600,
