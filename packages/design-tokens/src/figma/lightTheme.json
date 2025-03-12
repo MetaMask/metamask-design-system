@@ -167,13 +167,13 @@
       "description": "For elements placed on top of primary/default fill."
     },
     "default-hover": {
-      "value": "#243cff",
+      "value": "#384DF5",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for primary/default."
     },
     "default-pressed": {
-      "value": "#0521ff",
+      "value": "#2B3EDA",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for primary/default."
