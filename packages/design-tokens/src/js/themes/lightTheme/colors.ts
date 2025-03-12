@@ -17,8 +17,8 @@ export const colors: ThemeColors = {
     alternativeHover: '#f6f6f7',
     /** Pressed state surface for background/alternative (#ebecef) */
     alternativePressed: '#ebecef',
-    /** Hover state surface for background/muted (#f6f6f7) */
-    mutedHover: '#f6f6f7',
+    /** Hover state surface for background/muted (#e7ebee) */
+    mutedHover: '#e7ebee',
     /** Pressed state surface for background/muted (#ebecef) */
     mutedPressed: '#ebecef',
     /** General purpose hover state tint (#858b9a14) */
@@ -57,22 +57,22 @@ export const colors: ThemeColors = {
     inverse: brandColor.grey000,
   },
   primary: {
-    /** For primary semantic elements: interactive, active, selected (#0376C9) */
+    /** For primary semantic elements: interactive, active, selected... (#4459ff) */
     default: brandColor.blue500,
-    /** Stronger color for primary semantic elements (#2C3DC5) */
+    /** Stronger color for primary semantic elements (#6f7eff) */
     alternative: brandColor.blue600,
-    /** Muted color for primary semantic elements (#0376C91A) */
-    muted: '#0376c91a',
+    /** Muted color for primary semantic elements (#4459ff1a) */
+    muted: '#4459ff1a',
     /** For elements placed on top of primary/default fill (#FFFFFF) */
     inverse: brandColor.grey000,
-    /** Hover state surface for primary/default (#036ab5) */
-    defaultHover: '#036ab5',
-    /** Pressed state surface for primary/default (#02538d) */
-    defaultPressed: '#02538d',
-    /** Hover state surface for primary/muted (#0376C926) */
-    mutedHover: '#0376c926',
-    /** Pressed state surface for primary/muted (#0376C933) */
-    mutedPressed: '#0376c933',
+    /** Hover state surface for primary/default (#243cff) */
+    defaultHover: '#243cff',
+    /** Pressed state surface for primary/default (#0521ff) */
+    defaultPressed: '#0521ff',
+    /** Hover state surface for primary/muted (#4459ff26) */
+    mutedHover: '#4459ff26',
+    /** Pressed state surface for primary/muted (#4459ff33) */
+    mutedPressed: '#4459ff33',
   },
   error: {
     /** For danger semantic elements: error, critical, destructive (#CA3542) */
@@ -125,10 +125,10 @@ export const colors: ThemeColors = {
     mutedPressed: '#1c7e3333',
   },
   info: {
-    /** For informational read-only elements: info, reminder, hint (#0376C9) */
+    /** For informational read-only elements: info, reminder, hint (#4459ff) */
     default: brandColor.blue500,
-    /** Muted color for informational semantic (#0376C91A) */
-    muted: '#0376c91a',
+    /** Muted color for informational semantic (#4459ff1a) */
+    muted: '#4459ff1a',
     /** For elements placed on top of info/default fill (#FFFFFF) */
     inverse: brandColor.grey000,
   },
@@ -141,8 +141,8 @@ export const colors: ThemeColors = {
   shadow: {
     /** For neutral drop shadow color (#0000001A) */
     default: '#0000001a',
-    /** For primary drop shadow color (#0376C933) */
-    primary: '#0376c933',
+    /** For primary drop shadow color (#4459ff33) */
+    primary: '#4459ff33',
     /** For critical/danger drop shadow color (#CA354266) */
     error: '#ca354266',
   },

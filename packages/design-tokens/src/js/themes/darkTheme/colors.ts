@@ -57,23 +57,22 @@ export const colors: ThemeColors = {
     inverse: brandColor.grey000,
   },
   primary: {
-    /** For primary semantic elements: interactive, active, selected (#43AEFC) */
+    /** For primary semantic elements: interactive, active, selected (#8b99ff) */
     default: brandColor.blue300,
-    /** Stronger color for primary semantic elements (#ADB6FE) */
+    /** Stronger color for primary semantic elements (#adb6fe) */
     alternative: brandColor.blue200,
-    /** Muted color for primary semantic elements (#43AEFC26) */
-    muted: '#43aefc26',
-    /** For elements placed on top of primary/default fill (#121314) */
+    /** Muted color for primary semantic elements (#8b99ff26) */
+    muted: '#8b99ff26',
+    /** For elements placed on top of primary/default (#121314) */
     inverse: brandColor.grey900,
-    /** Hover state surface for primary/default (#59b8fc) */
-    defaultHover: '#59b8fc',
-    /** Pressed state surface for primary/default (#82c9fd) */
-    defaultPressed: '#82c9fd',
-
-    /** Hover state surface for primary/muted (#43AEFC33) */
-    mutedHover: '#43aefc33',
-    /** Pressed state surface for primary/muted (#43AEFC40) */
-    mutedPressed: '#43aefc40',
+    /** Hover state surface for primary/default (#a8b2ff) */
+    defaultHover: '#a8b2ff',
+    /** Pressed state surface for primary/default (#c7ceff) */
+    defaultPressed: '#c7ceff',
+    /** Hover state surface for primary/muted (#8b99ff33) */
+    mutedHover: '#8b99ff33',
+    /** Pressed state surface for primary/muted (#8b99ff40) */
+    mutedPressed: '#8b99ff40',
   },
   error: {
     /** For danger semantic elements: error, critical, destructive (#FF7584) */
@@ -130,11 +129,11 @@ export const colors: ThemeColors = {
     mutedPressed: '#4cb56440',
   },
   info: {
-    /** For informational read-only elements: info, reminder, hint (#43AEFC) */
+    /** For informational read-only elements: info, reminder, hint (#8b99ff) */
     default: brandColor.blue300,
-    /** Muted color for informational semantic (#43AEFC26) */
-    muted: '#43aefc26',
-    /** For elements placed on top of info/default fill (#121314) */
+    /** Muted color for informational semantic (#8b99ff26) */
+    muted: '#8b99ff26',
+    /** For elements placed on top of info/default (#121314) */
     inverse: brandColor.grey900,
   },
   flask: {
@@ -146,9 +145,9 @@ export const colors: ThemeColors = {
   shadow: {
     /** For neutral drop shadow color (#00000066) */
     default: '#00000066',
-    /** For primary drop shadow color (#43AEFC33) */
-    primary: '#43aefc33',
-    /** For critical/danger drop shadow color (#FF758433) */
+    /** For primary drop shadow color (#8b99ff33) */
+    primary: '#8b99ff33',
+    /** For critical/danger drop shadow color (#ff758433) */
     error: '#ff758433',
   },
 };
