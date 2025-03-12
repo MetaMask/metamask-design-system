@@ -167,7 +167,7 @@
       "description": "For elements placed on top of primary/default fill."
     },
     "default-hover": {
-      "value": "#a8b2ff",
+      "value": "#9EAAFF",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for primary/default."
