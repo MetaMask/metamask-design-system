@@ -7,7 +7,7 @@
   --color-background-default: var(--brand-colors-grey-grey900);
   /* For sunken neutral surface below background/default (#000000) */
   --color-background-alternative: var(--brand-colors-grey-grey1000);
-  /* For raised neutral surface above background/default (#222325s) */
+  /* For raised neutral surface above background/default (#222325) */
   --color-background-muted: var(--brand-colors-grey-grey800);
   /* Hover state surface for background/default (#1a1b1c) */
   --color-background-default-hover: #1a1b1c;
@@ -107,7 +107,7 @@
   --color-success-muted-hover: #4cb56433;
   /* Pressed state surface for success/muted (#4cb56440) */
   --color-success-muted-pressed: #4cb56440;
-  /* For informational semantic elements: info, reminder, hint (#43aefc) */
+  /* For informational read-only elements: info, reminder, hint (#43aefc) */
   --color-info-default: var(--brand-colors-blue-blue300);
   /* Muted color for informational semantic (#43aefc26) */
   --color-info-muted: #43aefc26;

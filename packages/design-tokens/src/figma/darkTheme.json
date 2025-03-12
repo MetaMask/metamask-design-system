@@ -202,13 +202,13 @@
       "value": "{red.200}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
-      "description": "Stronger color for danger semantic."
+      "description": "Stronger color for error semantic."
     },
     "muted": {
       "value": "#ff758426",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
-      "description": "Muted color for danger semantic."
+      "description": "Muted color for error semantic."
     },
     "inverse": {
       "value": "{grey.900}",
@@ -334,13 +334,13 @@
       "value": "{blue.300}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
-      "description": "For soft alert semantic elements: info, reminder, hint..."
+      "description": "For information read-only elements: info, reminder, hint..."
     },
     "muted": {
       "value": "#43aefc26",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
-      "description": "Muted color for soft alert semantic."
+      "description": "Muted color for informational semantic."
     },
     "inverse": {
       "value": "{grey.900}",

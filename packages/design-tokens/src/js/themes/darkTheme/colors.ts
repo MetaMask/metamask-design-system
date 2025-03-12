@@ -78,9 +78,9 @@ export const colors: ThemeColors = {
   error: {
     /** For danger semantic elements: error, critical, destructive (#FF7584) */
     default: brandColor.red300,
-    /** Stronger color for danger semantic (#FFA1AA) */
+    /** Stronger color for error semantic (#FFA1AA) */
     alternative: brandColor.red200,
-    /** Muted color for danger semantic (#FF758426) */
+    /** Muted color for error semantic (#FF758426) */
     muted: '#ff758426',
     /** For elements placed on top of error/default fill (#121314) */
     inverse: brandColor.grey900,
@@ -130,9 +130,9 @@ export const colors: ThemeColors = {
     mutedPressed: '#4cb56440',
   },
   info: {
-    /** For soft alert semantic elements: info, reminder, hint (#43AEFC) */
+    /** For informational read-only elements: info, reminder, hint (#43AEFC) */
     default: brandColor.blue300,
-    /** Muted color for soft alert semantic (#43AEFC26) */
+    /** Muted color for informational semantic (#43AEFC26) */
     muted: '#43aefc26',
     /** For elements placed on top of info/default fill (#121314) */
     inverse: brandColor.grey900,

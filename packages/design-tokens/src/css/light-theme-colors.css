@@ -108,7 +108,7 @@
   --color-success-muted-hover: #1c7e3326;
   /* Pressed state surface for success/muted (#1c7e3333) */
   --color-success-muted-pressed: #1c7e3333;
-  /* For informational semantic elements: info, reminder, hint (#0376c9) */
+  /* For informational read-only elements: info, reminder, hint (#0376c9) */
   --color-info-default: var(--brand-colors-blue-blue500);
   /* Muted color for informational semantic (#0376c91a) */
   --color-info-muted: #0376c91a;
