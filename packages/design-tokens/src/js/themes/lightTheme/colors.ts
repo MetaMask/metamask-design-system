@@ -129,7 +129,7 @@ export const colors: ThemeColors = {
     default: brandColor.blue500,
     /** Muted color for informational semantic (#4459ff1a) */
     muted: '#4459ff1a',
-    /** For elements placed on top of info/default fill (#FFFFFF) */
+    /** For elements placed on top of info/default (#FFFFFF) */
     inverse: brandColor.grey000,
   },
   flask: {
