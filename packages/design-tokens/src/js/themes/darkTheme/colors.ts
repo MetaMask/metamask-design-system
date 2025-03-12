@@ -65,8 +65,8 @@ export const colors: ThemeColors = {
     muted: '#8b99ff26',
     /** For elements placed on top of primary/default (#121314) */
     inverse: brandColor.grey900,
-    /** Hover state surface for primary/default (#a8b2ff) */
-    defaultHover: '#a8b2ff',
+    /** Hover state surface for primary/default (#9eaaff) */
+    defaultHover: '#9eaaff',
     /** Pressed state surface for primary/default (#c7ceff) */
     defaultPressed: '#c7ceff',
     /** Hover state surface for primary/muted (#8b99ff33) */

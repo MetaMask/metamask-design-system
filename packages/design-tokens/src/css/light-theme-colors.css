@@ -56,10 +56,10 @@
   --color-primary-muted: #4459ff1a;
   /* For elements placed on top of primary/default (#ffffff) */
   --color-primary-inverse: var(--brand-colors-grey-grey000);
-  /* Hover state surface for primary/default (#243cff) */
-  --color-primary-default-hover: #243cff;
-  /* Pressed state surface for primary/default (#0521ff) */
-  --color-primary-default-pressed: #0521ff;
+  /* Hover state surface for primary/default (#384df5) */
+  --color-primary-default-hover: #384df5;
+  /* Pressed state surface for primary/default (#2b3eda) */
+  --color-primary-default-pressed: #2b3eda;
   /* Hover state surface for primary/muted (#4459ff26) */
   --color-primary-muted-hover: #4459ff26;
   /* Pressed state surface for primary/muted (#4459ff33) */

@@ -59,16 +59,16 @@ export const colors: ThemeColors = {
   primary: {
     /** For primary semantic elements: interactive, active, selected (#4459ff) */
     default: brandColor.blue500,
-    /** Stronger color for primary semantic elements (#6f7eff) */
+    /** Stronger color for primary semantic elements (#2c3dc5) */
     alternative: brandColor.blue600,
     /** Muted color for primary semantic elements (#4459ff1a) */
     muted: '#4459ff1a',
-    /** For elements placed on top of primary/default fill (#FFFFFF) */
+    /** For elements placed on top of primary/default (#ffffff) */
     inverse: brandColor.grey000,
-    /** Hover state surface for primary/default (#243cff) */
-    defaultHover: '#243cff',
-    /** Pressed state surface for primary/default (#0521ff) */
-    defaultPressed: '#0521ff',
+    /** Hover state surface for primary/default (#384df5) */
+    defaultHover: '#384df5',
+    /** Pressed state surface for primary/default (#2b3eda) */
+    defaultPressed: '#2b3eda',
     /** Hover state surface for primary/muted (#4459ff26) */
     mutedHover: '#4459ff26',
     /** Pressed state surface for primary/muted (#4459ff33) */
