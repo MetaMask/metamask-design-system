@@ -81,69 +81,69 @@
   },
   "blue": {
     "100": {
-      "value": "#a7d9fe",
+      "value": "#d6dbff",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "200": {
-      "value": "#75c4fd",
+      "value": "#adb6fe",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "300": {
-      "value": "#43aefc",
+      "value": "#8b99ff",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "400": {
-      "value": "#1098fc",
+      "value": "#6f7eff",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "500": {
-      "value": "#0376c9",
+      "value": "#4459ff",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "600": {
-      "value": "#0260a4",
+      "value": "#2c3dc5",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "700": {
-      "value": "#024272",
+      "value": "#1c277f",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "800": {
-      "value": "#01253f",
+      "value": "#131b59",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "900": {
-      "value": "#00080d",
+      "value": "#0b0f32",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "050": {
-      "value": "#eaf6ff",
+      "value": "#f4f5ff",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "025": {
-      "value": "#eaf6ff",
+      "value": "#f8f9ff",
       "type": "color",
-      "parent": "Brand Colors/v1 - current",
+      "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     }
   },
