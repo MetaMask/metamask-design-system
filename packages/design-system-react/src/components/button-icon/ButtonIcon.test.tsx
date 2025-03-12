@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { IconName, IconSize } from '..';
+import { IconName } from '../icon';
 import { ButtonIcon } from './ButtonIcon';
 import { ButtonIconSize } from './ButtonIcon.types';
 

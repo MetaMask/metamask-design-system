@@ -33,10 +33,10 @@ export type { ButtonProps } from './button';
 export { TextButton } from './text-button';
 export type { TextButtonProps } from './text-button';
 
-export { ButtonIcon } from './button-icon';
+export { ButtonIcon, ButtonIconSize } from './button-icon';
 export type { ButtonIconProps } from './button-icon';
 
-export { AvatarBase, AvatarBaseSize } from './avatar-base';
+export { AvatarBase, AvatarBaseSize, AvatarBaseShape } from './avatar-base';
 export type { AvatarBaseProps } from './avatar-base';
 
 export { AvatarNetwork, AvatarNetworkSize } from './avatar-network';

@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { IconName, TextVariant } from '..';
+import { IconName } from '../icon';
+import { TextVariant } from '../text';
 import { ButtonBase } from './ButtonBase';
 import { ButtonBaseSize } from './ButtonBase.types';
 import README from './README.mdx';
