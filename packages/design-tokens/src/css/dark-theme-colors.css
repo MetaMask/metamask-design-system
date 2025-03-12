@@ -47,22 +47,22 @@
   --color-overlay-alternative: #000000cc;
   /* For elements placed on top of overlay/alternative (#ffffff) */
   --color-overlay-inverse: var(--brand-colors-grey-grey000);
-  /* For primary semantic elements: interactive, active, selected (#43aefc) */
+  /* For primary semantic elements: interactive, active, selected (#8b99ff) */
   --color-primary-default: var(--brand-colors-blue-blue300);
   /* Stronger color for primary semantic elements (#adb6fe) */
   --color-primary-alternative: var(--brand-colors-blue-blue200);
-  /* Muted color for primary semantic elements (#43aefc26) */
-  --color-primary-muted: #43aefc26;
+  /* Muted color for primary semantic elements (#8b99ff26) */
+  --color-primary-muted: #8b99ff26;
   /* For elements placed on top of primary/default (#121314) */
   --color-primary-inverse: var(--brand-colors-grey-grey900);
-  /* Hover state surface for primary/default (#59b8fc) */
-  --color-primary-default-hover: #59b8fc;
-  /* Pressed state surface for primary/default (#82c9fd) */
-  --color-primary-default-pressed: #82c9fd;
-  /* Hover state surface for primary/muted (#43aefc33) */
-  --color-primary-muted-hover: #43aefc33;
-  /* Pressed state surface for primary/muted (#43aefc40) */
-  --color-primary-muted-pressed: #43aefc40;
+  /* Hover state surface for primary/default (#a8b2ff) */
+  --color-primary-default-hover: #a8b2ff;
+  /* Pressed state surface for primary/default (#c7ceff) */
+  --color-primary-default-pressed: #c7ceff;
+  /* Hover state surface for primary/muted (#8b99ff33) */
+  --color-primary-muted-hover: #8b99ff33;
+  /* Pressed state surface for primary/muted (#8b99ff40) */
+  --color-primary-muted-pressed: #8b99ff40;
   /* For danger semantic elements: error, critical, destructive (#ff7584) */
   --color-error-default: var(--brand-colors-red-red300);
   /* Stronger color for error semantic (#ffa1aa) */
@@ -107,10 +107,10 @@
   --color-success-muted-hover: #4cb56433;
   /* Pressed state surface for success/muted (#4cb56440) */
   --color-success-muted-pressed: #4cb56440;
-  /* For informational read-only elements: info, reminder, hint (#43aefc) */
+  /* For informational read-only elements: info, reminder, hint (#8b99ff) */
   --color-info-default: var(--brand-colors-blue-blue300);
-  /* Muted color for informational semantic (#43aefc26) */
-  --color-info-muted: #43aefc26;
+  /* Muted color for informational semantic (#8b99ff26) */
+  --color-info-muted: #8b99ff26;
   /* For elements placed on top of info/default (#121314) */
   --color-info-inverse: var(--brand-colors-grey-grey900);
   /* For Flask primary accent color (#d27dff) */
@@ -119,8 +119,8 @@
   --color-flask-inverse: var(--brand-colors-grey-grey900);
   /* For neutral drop shadow color (black-40%) */
   --color-shadow-default: #00000066;
-  /* For primary drop shadow color (#43aefc33) */
-  --color-shadow-primary: #43aefc33;
+  /* For primary drop shadow color (#8b99ff33) */
+  --color-shadow-primary: #8b99ff33;
   /* For critical/danger drop shadow color (#ff758433) */
   --color-shadow-error: #ff758433;
 }
