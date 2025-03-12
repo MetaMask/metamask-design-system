@@ -19,49 +19,49 @@
       "description": "For raised neutral surface above background/default."
     },
     "default-hover": {
-      "value": "#f0f0f0",
+      "value": "#F6F6F7",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for background/default."
     },
     "default-pressed": {
-      "value": "#e0e0e0",
+      "value": "#EBECEF",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for background/default."
     },
     "alternative-hover": {
-      "value": "#dde3ee",
+      "value": "#F6F6F7",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for background/alternative."
     },
     "alternative-pressed": {
-      "value": "#c9d2e4",
+      "value": "#EBECEF",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for background/alternative."
     },
     "muted-hover": {
-      "value": "#E7EBEE",
+      "value": "#F6F6F7",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for background/muted."
     },
     "muted-pressed": {
-      "value": "#DBE0E6",
+      "value": "#EBECEF",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for background/muted."
     },
     "hover": {
-      "value": "#0000000f",
+      "value": "#858B9A14",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "General purpose hover state tint."
     },
     "pressed": {
-      "value": "#0000001f",
+      "value": "#858B9A29",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "General purpose pressed state tint."
@@ -167,25 +167,25 @@
       "description": "For elements placed on top of primary/default fill."
     },
     "default-hover": {
-      "value": "#0379ce",
+      "value": "#036AB5",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for primary/default."
     },
     "default-pressed": {
-      "value": "#025ea1",
+      "value": "#02538D",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for primary/default."
     },
     "muted-hover": {
-      "value": "#0376c926",
+      "value": "#0376C926",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for primary/muted."
     },
     "muted-pressed": {
-      "value": "#0376c933",
+      "value": "#0376C933",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for primary/muted."
@@ -217,13 +217,13 @@
       "description": "For elements placed on top of error/default fill."
     },
     "default-hover": {
-      "value": "#b22f3a",
+      "value": "#BA313D",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for error/default."
     },
     "default-pressed": {
-      "value": "#9a2832",
+      "value": "#9A2832",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for error/default."
@@ -261,13 +261,13 @@
       "description": "For elements placed on top of warning/default fill."
     },
     "default-hover": {
-      "value": "#7a4f00",
+      "value": "#855500",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for warning/default."
     },
     "default-pressed": {
-      "value": "#5c3b00",
+      "value": "#5C3B00",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for warning/default."
@@ -305,13 +305,13 @@
       "description": "For elements placed on top of success/default fill."
     },
     "default-hover": {
-      "value": "#166429",
+      "value": "#186C2C",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for success/default."
     },
     "default-pressed": {
-      "value": "#114b1e",
+      "value": "#114B1E",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for success/default."
