@@ -11,10 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- feat: Updating blue to brand evolution blurple ([#474](https://github.com/MetaMask/metamask-design-system/pull/474))
-- chore: brand evolution updates part 1 ([#428](https://github.com/MetaMask/metamask-design-system/pull/428))
-- chore: upgrading storybook to 8.5.3 ([#412](https://github.com/MetaMask/metamask-design-system/pull/412))
-- chore: upgrading auto-changelog dependency ([#389](https://github.com/MetaMask/metamask-design-system/pull/389))
+- chore: Updating brand color blue to brand evolution blurple and theme colors that use blue (e.g. primary and info) ([#474](https://github.com/MetaMask/metamask-design-system/pull/474))
+- chore: All brand evolution color updates with the exception of brand color blue and theme colors that use blue (e.g. primary and info) ([#428](https://github.com/MetaMask/metamask-design-system/pull/428))
 
 ## [5.0.0]
 
