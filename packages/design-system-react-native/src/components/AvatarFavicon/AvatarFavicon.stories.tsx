@@ -2,7 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { ImageSourcePropType, View } from 'react-native';
 
 import AvatarFavicon from './AvatarFavicon';
-import { DEFAULT_AVATARFAVICON_PROPS } from './AvatarFavicon.constants';
+import {
+  DEFAULT_AVATARFAVICON_PROPS,
+  SAMPLE_AVATARFAVICON_URIS,
+} from './AvatarFavicon.constants';
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
 import { AvatarSize } from '../../shared/enums';
 
@@ -24,7 +27,7 @@ export default meta;
 
 type Story = StoryObj<AvatarFaviconProps>;
 const storyImageSource: ImageSourcePropType = {
-  uri: 'https://metamask.github.io/test-dapp/metamask-fox.svg',
+  uri: SAMPLE_AVATARFAVICON_URIS[0],
 };
 
 export const Default: Story = {
@@ -43,6 +46,21 @@ export const Sizes: Story = {
           src={storyImageSource}
           key={sizeKey}
           size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
+        />
+      ))}
+    </View>
+  ),
+};
+
+export const SampleFavicons: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      {SAMPLE_AVATARFAVICON_URIS.map((faviconUri) => (
+        <AvatarFavicon
+          src={{
+            uri: faviconUri,
+          }}
+          key={faviconUri}
         />
       ))}
     </View>
