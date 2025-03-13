@@ -30,7 +30,7 @@ const BadgeCount = ({
     h-[${size}px]
     py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[size]}px]
     px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[size]}px]
-    rounded-full
+    rounded-lg
     items-center
     justify-center
     self-start

@@ -25,7 +25,7 @@ describe('BadgeCount', () => {
         h-[${sizeVal}px]
         py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[sizeVal]}px]
         px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[sizeVal]}px]
-        rounded-full
+        rounded-lg
         items-center
         justify-center
         self-start
@@ -84,7 +84,7 @@ describe('BadgeCount', () => {
         h-[${sizeVal}px]
         py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[sizeVal]}px]
         px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[sizeVal]}px]
-        rounded-full
+        rounded-lg
         items-center
         justify-center
         self-start
@@ -125,7 +125,7 @@ describe('BadgeCount', () => {
         h-[${sizeVal}px]
         py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[sizeVal]}px]
         px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[sizeVal]}px]
-        rounded-full
+        rounded-lg
         items-center
         justify-center
         self-start
@@ -205,7 +205,7 @@ describe('BadgeCount', () => {
         h-[${customSize}px]
         py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[customSize]}px]
         px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[customSize]}px]
-        rounded-full
+        rounded-lg
         items-center
         justify-center
         self-start
