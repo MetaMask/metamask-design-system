@@ -15,7 +15,7 @@ const BadgeIcon = (props: BadgeIconProps) => {
   const tw = useTailwind();
   const { variant, iconProps, twClassName = '', style, ...rest } = props;
   const twContainerClassNames =
-    `h-[16px] w-[16px] bg-icon-default rounded-full items-center justify-center ${twClassName}`.trim();
+    `h-4 w-4 bg-icon-default rounded-full items-center justify-center ${twClassName}`.trim();
 
   const finalIconName =
     variant === BadgeIconVariant.Custom
@@ -29,9 +29,9 @@ const BadgeIcon = (props: BadgeIconProps) => {
       {...props}
     >
       <Icon
-        color={DEFAULT_BADGEICON_PROPS.iconProps.color}
+        color={DEFAULT_BADGEICON_PROPS.iconProps.color} // IconSize.Xs - 12px
         {...iconProps}
-        size={DEFAULT_BADGEICON_PROPS.iconProps.size}
+        size={DEFAULT_BADGEICON_PROPS.iconProps.size} // IconColor.PrimaryInverse
         name={finalIconName}
       />
     </View>
