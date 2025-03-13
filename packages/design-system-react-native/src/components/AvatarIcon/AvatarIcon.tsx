@@ -9,7 +9,7 @@ import {
 } from './AvatarIcon.constants';
 import type { AvatarIconProps } from './AvatarIcon.types';
 import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
-import Icon, { IconProps } from '../Icon';
+import Icon from '../Icon';
 import AvatarBase from '../../primitives/AvatarBase';
 
 const AvatarIcon = ({
