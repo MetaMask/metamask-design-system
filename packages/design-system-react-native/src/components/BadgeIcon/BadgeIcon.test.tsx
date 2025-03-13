@@ -54,7 +54,7 @@ describe('BadgeIcon', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const computedExpectedContainer = tw`
-        h-[16px] w-[16px] bg-icon-default rounded-full items-center justify-center`;
+        h-4 w-4 bg-icon-default rounded-full items-center justify-center`;
       return (
         <>
           <BadgeIcon variant={BadgeIconVariant.Snaps} testID="badge-icon" />
