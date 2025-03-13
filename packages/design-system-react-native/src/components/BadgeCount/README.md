@@ -1,6 +1,6 @@
 # BadgeCount
 
-The `BadgeCount` component is a small, rounded badge used to display numerical values such as notifications, message counts, or other indicators. It supports different sizes and has a customizable maximum display value.
+`BadgeCount` is a numeric indicator of unread messages or notifications on an app or UI element.
 
 ---
 
