@@ -77,7 +77,7 @@ export type ThemeColors = {
     inverse: string;
   };
   primary: {
-    /** For primary semantic elements: interactive, active, selected... */
+    /** For primary semantic elements: interactive, active, selected */
     default: string;
     /** Stronger color for primary semantic elements */
     alternative: string;

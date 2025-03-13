@@ -2,7 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { ImageSourcePropType, View } from 'react-native';
 
 import AvatarNetwork from './AvatarNetwork';
-import { DEFAULT_AVATARNETWORK_PROPS } from './AvatarNetwork.constants';
+import {
+  DEFAULT_AVATARNETWORK_PROPS,
+  SAMPLE_AVATARNETWORK_URIS,
+} from './AvatarNetwork.constants';
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
 import { AvatarSize } from '../../shared/enums';
 
@@ -24,7 +27,7 @@ export default meta;
 
 type Story = StoryObj<AvatarNetworkProps>;
 const storyImageSource: ImageSourcePropType = {
-  uri: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg',
+  uri: SAMPLE_AVATARNETWORK_URIS[0],
 };
 
 export const Default: Story = {
@@ -43,6 +46,21 @@ export const Sizes: Story = {
           src={storyImageSource}
           key={sizeKey}
           size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
+        />
+      ))}
+    </View>
+  ),
+};
+
+export const SampleNetworks: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      {SAMPLE_AVATARNETWORK_URIS.map((networkUri) => (
+        <AvatarNetwork
+          src={{
+            uri: networkUri,
+          }}
+          key={networkUri}
         />
       ))}
     </View>

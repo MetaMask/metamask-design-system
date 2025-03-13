@@ -6,6 +6,7 @@ import { generateAvatarBaseContainerClassNames } from './AvatarBase.utilities';
 import {
   DEFAULT_AVATARBASE_PROPS,
   TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
+  MAP_AVATARBASE_SIZE_BORDERWIDTH,
 } from './AvatarBase.constants';
 import AvatarBase from './AvatarBase';
 
@@ -16,10 +17,11 @@ describe('AvatarBase', () => {
       expect(classNames).toContain(
         'items-center justify-center overflow-hidden',
       );
-      expect(classNames).toContain('bg-background-muted');
+      expect(classNames).toContain('bg-background-default');
       expect(classNames).toContain(`h-[${DEFAULT_AVATARBASE_PROPS.size}px]`);
       expect(classNames).toContain(`w-[${DEFAULT_AVATARBASE_PROPS.size}px]`);
       expect(classNames).toContain('rounded-full'); // Default shape
+      expect(classNames).not.toContain('border'); // No border by default
     });
 
     it('applies correct shape class when circle', () => {
@@ -48,6 +50,22 @@ describe('AvatarBase', () => {
       });
     });
 
+    it('applies correct size styles with border', () => {
+      Object.values(AvatarBaseSize).forEach((size) => {
+        const borderWidth = MAP_AVATARBASE_SIZE_BORDERWIDTH[size];
+        const expectedSize = borderWidth * 2 + Number(size);
+        const classNames = generateAvatarBaseContainerClassNames({
+          size,
+          hasBorder: true,
+        });
+        expect(classNames).toContain(`h-[${expectedSize}px]`);
+        expect(classNames).toContain(`w-[${expectedSize}px]`);
+        expect(classNames).toContain(
+          `border-background-default border-[${borderWidth}px]`,
+        );
+      });
+    });
+
     it('appends additional Tailwind class names', () => {
       const classNames = generateAvatarBaseContainerClassNames({
         twClassName: 'shadow-lg ring-2',
@@ -56,19 +74,24 @@ describe('AvatarBase', () => {
     });
 
     it('applies all styles together correctly', () => {
+      const size = AvatarBaseSize.Lg;
+      const borderWidth = MAP_AVATARBASE_SIZE_BORDERWIDTH[size];
+      const expectedSize = borderWidth * 2 + Number(size);
       const classNames = generateAvatarBaseContainerClassNames({
-        size: AvatarBaseSize.Md,
+        size,
         shape: AvatarBaseShape.Square,
+        hasBorder: true,
         twClassName: 'border border-blue-500',
       });
       expect(classNames).toContain(
         'items-center justify-center overflow-hidden',
       );
-      expect(classNames).toContain('bg-background-muted');
-      expect(classNames).toContain(`h-[${AvatarBaseSize.Md}px]`);
-      expect(classNames).toContain(`w-[${AvatarBaseSize.Md}px]`);
+      expect(classNames).toContain('bg-background-default');
+      expect(classNames).toContain(`h-[${expectedSize}px]`);
+      expect(classNames).toContain(`w-[${expectedSize}px]`);
+      expect(classNames).toContain(TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size]);
       expect(classNames).toContain(
-        TWCLASSMAP_AVATARBASE_SIZE_SHAPE[AvatarBaseSize.Md],
+        `border-background-default border-[${borderWidth}px]`,
       );
       expect(classNames).toContain('border border-blue-500');
     });
