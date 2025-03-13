@@ -15,10 +15,10 @@ import {
 import type { BadgeCountProps, BadgeCountSize } from './BadgeCount.types';
 
 const BadgeCount = ({
-  size = DEFAULT_BADGECOUNT_PROPS.size,
+  size = DEFAULT_BADGECOUNT_PROPS.size, //BadgeCountSize.Md - 14px
   count,
-  max = DEFAULT_BADGECOUNT_PROPS.max,
-  textProps,
+  max = DEFAULT_BADGECOUNT_PROPS.max, // 99
+  textProps, // color: TextColor.ErrorInverse, fontWeight: FontWeight.Medium
   twClassName = '',
   style,
   ...props
