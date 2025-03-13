@@ -7,4 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: upgrading auto-changelog dependency ([#389](https://github.com/MetaMask/metamask-design-system/pull/389))
+
 [Unreleased]: https://github.com/MetaMask/metamask-design-system/
