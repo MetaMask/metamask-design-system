@@ -1,21 +1,21 @@
 export type BrandColor = {
   /** grey/grey100: #d6d9dc */
   grey100: string;
-  /** grey/grey200: #bbc0c5 */
+  /** grey/grey200: #b7bbc8 */
   grey200: string;
-  /** grey/grey300: #9fa6ae */
+  /** grey/grey300: #9ca1af */
   grey300: string;
-  /** grey/grey400: #848c96 */
+  /** grey/grey400: #858b9a */
   grey400: string;
-  /** grey/grey500: #6a737d */
+  /** grey/grey500: #686e7d */
   grey500: string;
-  /** grey/grey600: #535a61 */
+  /** grey/grey600: #4b505c */
   grey600: string;
-  /** grey/grey700: #3b4046 */
+  /** grey/grey700: #31333a */
   grey700: string;
   /** grey/grey800: #24272a */
   grey800: string;
-  /** grey/grey900: #141618 */
+  /** grey/grey900: #121314 */
   grey900: string;
   /** grey/grey1000: #000000 */
   grey1000: string;
@@ -27,21 +27,21 @@ export type BrandColor = {
   grey025: string;
   /** blue/blue100: #a7d9fe */
   blue100: string;
-  /** blue/blue200: #75c4fd */
+  /** blue/blue200: #adb6fe */
   blue200: string;
   /** blue/blue300: #43aefc */
   blue300: string;
-  /** blue/blue400: #1098fc */
+  /** blue/blue400: #6f7eff */
   blue400: string;
   /** blue/blue500: #0376c9 */
   blue500: string;
-  /** blue/blue600: #0260a4 */
+  /** blue/blue600: #2c3dc5 */
   blue600: string;
-  /** blue/blue700: #024272 */
+  /** blue/blue700: #1c277f */
   blue700: string;
-  /** blue/blue800: #01253f */
+  /** blue/blue800: #131b59 */
   blue800: string;
-  /** blue/blue900: #00080d */
+  /** blue/blue900: #0b0f32 */
   blue900: string;
   /** blue/blue050: #eaf6ff */
   blue050: string;
@@ -59,11 +59,11 @@ export type BrandColor = {
   green500: string;
   /** green/green600: #145523 */
   green600: string;
-  /** green/green700: #145523 */
+  /** green/green700: #0d3b18 */
   green700: string;
-  /** green/green800: #0a2c12 */
+  /** green/green800: #092912 */
   green800: string;
-  /** green/green900: #041007 */
+  /** green/green900: #051709 */
   green900: string;
   /** green/green050: #d6ffdf */
   green050: string;
@@ -71,13 +71,13 @@ export type BrandColor = {
   green025: string;
   /** red/red100: #f7d5d8 */
   red100: string;
-  /** red/red200: #f1b9be */
+  /** red/red200: #ffa1aa */
   red200: string;
-  /** red/red300: #e88f97 */
+  /** red/red300: #ff7584 */
   red300: string;
-  /** red/red400: #e06470 */
+  /** red/red400: #f74d5e */
   red400: string;
-  /** red/red500: #d73847 */
+  /** red/red500: #ca3542 */
   red500: string;
   /** red/red600: #8e1d28 */
   red600: string;
@@ -85,7 +85,7 @@ export type BrandColor = {
   red700: string;
   /** red/red800: #3a0c10 */
   red800: string;
-  /** red/red900: #3a0c10 */
+  /** red/red900: #3b0f13 */
   red900: string;
   /** red/red050: #fcf2f3 */
   red050: string;
@@ -171,7 +171,7 @@ export type BrandColor = {
   lime600: string;
   /** lime/lime700: #093a31 */
   lime700: string;
-  /** lime/lime800: #022321 */
+  /** lime/lime800: #012826 */
   lime800: string;
   /** lime/lime900: #011515 */
   lime900: string;

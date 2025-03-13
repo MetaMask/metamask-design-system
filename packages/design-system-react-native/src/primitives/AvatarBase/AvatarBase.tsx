@@ -14,6 +14,8 @@ const AvatarBase = ({
   shape = DEFAULT_AVATARBASE_PROPS.shape,
   fallbackText,
   fallbackTextProps,
+  hasBorder = DEFAULT_AVATARBASE_PROPS.hasBorder,
+  hasSolidBackgroundColor = DEFAULT_AVATARBASE_PROPS.hasSolidBackgroundColor,
   twClassName = '',
   style,
   ...props
@@ -23,12 +25,16 @@ const AvatarBase = ({
     return generateAvatarBaseContainerClassNames({
       size,
       shape,
+      hasBorder,
       twClassName,
     });
-  }, [size, shape, twClassName]);
+  }, [size, shape, hasBorder, twClassName]);
 
   return (
     <View style={[tw`${twContainerClassNames}`, style]} {...props}>
+      <View
+        style={tw`bg-background-muted absolute top-0 left-0 bottom-0 right-0`}
+      />
       {fallbackText ? (
         <Text
           {...DEFAULT_AVATARBASE_PROPS.fallbackTextProps}

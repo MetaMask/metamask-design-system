@@ -19,6 +19,14 @@ export {
   AvatarFaviconSize,
 } from './components/AvatarFavicon';
 
+import AvatarGroupComponent from './components/AvatarGroup';
+export const AvatarGroup = withThemeProvider(AvatarGroupComponent);
+export {
+  AvatarGroupProps,
+  AvatarGroupSize,
+  AvatarGroupVariant,
+} from './components/AvatarGroup';
+
 import AvatarIconComponent from './components/AvatarIcon';
 export const AvatarIcon = withThemeProvider(AvatarIconComponent);
 export {
