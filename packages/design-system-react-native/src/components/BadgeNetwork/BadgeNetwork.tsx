@@ -5,7 +5,12 @@ import AvatarNetwork, { AvatarNetworkSize } from '../AvatarNetwork';
 import type { BadgeNetworkProps } from './BadgeNetwork.types';
 
 const BadgeNetwork = (props: BadgeNetworkProps) => (
-  <AvatarNetwork {...props} size={AvatarNetworkSize.Xs} />
+  <AvatarNetwork
+    {...props}
+    size={AvatarNetworkSize.Xs}
+    hasSolidBackgroundColor
+    hasBorder
+  />
 );
 
 export default BadgeNetwork;

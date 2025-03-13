@@ -18,9 +18,10 @@ describe('BadgeNetwork', () => {
     const renderedComponent = getByTestId('badge-network');
     expect(renderedComponent).toBeTruthy();
     expect(renderedComponent.props.style[0].height.toString()).toStrictEqual(
-      AvatarNetworkSize.Xs,
+      (Number(AvatarNetworkSize.Xs) + 2).toString(),
     );
-    expect(renderedComponent.props.children.props.src).toStrictEqual(
+
+    expect(renderedComponent.props.children[1].props.src).toStrictEqual(
       remoteImageSrc,
     );
   });
