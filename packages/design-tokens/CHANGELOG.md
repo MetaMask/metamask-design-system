@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.1.0]
 
-### Uncategorized
+### Changed
 
 - feat: Updating blue to brand evolution blurple ([#474](https://github.com/MetaMask/metamask-design-system/pull/474))
 - chore: brand evolution updates part 1 ([#428](https://github.com/MetaMask/metamask-design-system/pull/428))

@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0]
 
-### Uncategorized
+### Added
+
+- Initial release.
 
 - chore: upgrading auto-changelog dependency ([#389](https://github.com/MetaMask/metamask-design-system/pull/389))
 
