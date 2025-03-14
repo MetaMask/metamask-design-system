@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ImageSourcePropType, View } from 'react-native';
 
+import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.constants';
 import BadgeNetwork from './BadgeNetwork';
 import type { BadgeNetworkProps } from './BadgeNetwork.types';
 
@@ -26,4 +27,19 @@ export const Default: Story = {
     twClassName: '',
   },
   render: (args) => <BadgeNetwork {...args} src={storyImageSource} />,
+};
+
+export const SampleNetworks: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      {SAMPLE_AVATARNETWORK_URIS.map((networkUri) => (
+        <BadgeNetwork
+          src={{
+            uri: networkUri,
+          }}
+          key={networkUri}
+        />
+      ))}
+    </View>
+  ),
 };
