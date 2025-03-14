@@ -12,11 +12,12 @@ import { AvatarBaseShape } from '../../shared/enums';
  * Generates a Tailwind class name string for the base container of an avatar.
  *
  * This function constructs a class name string based on the avatar's `size`,
- * `shape`, `hasBorder`, and optional additional Tailwind class names.
+ * `shape`, `hasBorder`, `hasSolidBackgroundColor`, and optional additional Tailwind class names.
  *
  * @param size - The size of the avatar, defaulting to `DEFAULT_AVATARBASE_PROPS.size`.
  * @param shape - The shape of the avatar, either `circle` or another defined shape.
  * @param hasBorder - A boolean indicating whether the avatar has a border.
+ * @param hasSolidBackgroundColor - A boolean indicating whether the avatar has a solid background color.
  * @param twClassName - Additional Tailwind class names for customization.
  * @returns A string of Tailwind class names representing the avatar's container styles.
  *
@@ -26,6 +27,7 @@ import { AvatarBaseShape } from '../../shared/enums';
  *   size: 48,
  *   shape: 'circle',
  *   hasBorder: true,
+ *   hasSolidBackgroundColor: true,
  *   twClassName: 'shadow-md',
  * });
  *
@@ -34,13 +36,16 @@ import { AvatarBaseShape } from '../../shared/enums';
  * ```
  */
 export const generateAvatarBaseContainerClassNames = ({
-  size = DEFAULT_AVATARBASE_PROPS.size,
-  shape = DEFAULT_AVATARBASE_PROPS.shape,
-  hasBorder = DEFAULT_AVATARBASE_PROPS.hasBorder,
+  size = DEFAULT_AVATARBASE_PROPS.size, // AvatarSize.Md
+  shape = DEFAULT_AVATARBASE_PROPS.shape, // AvatarShape.Circle
+  hasBorder = DEFAULT_AVATARBASE_PROPS.hasBorder, // false
+  hasSolidBackgroundColor = DEFAULT_AVATARBASE_PROPS.hasSolidBackgroundColor, // false
   twClassName = '',
 }: Partial<AvatarBaseProps>): string => {
   const baseStyle = 'items-center justify-center overflow-hidden';
-  const fallbackBackgroundStyle = 'bg-background-default';
+  const transparentBgStyle = hasSolidBackgroundColor
+    ? 'bg-background-default'
+    : 'bg-transparent';
   const totalSize = hasBorder
     ? Number(size) + MAP_AVATARBASE_SIZE_BORDERWIDTH[size] * 2
     : Number(size);
@@ -55,6 +60,6 @@ export const generateAvatarBaseContainerClassNames = ({
     : '';
 
   const mergedClassnames =
-    `${baseStyle} ${fallbackBackgroundStyle} ${sizeStyle} ${shapeStyle} ${borderStyle} ${twClassName}`.trim();
+    `${baseStyle} ${transparentBgStyle} ${sizeStyle} ${shapeStyle} ${borderStyle} ${twClassName}`.trim();
   return mergedClassnames;
 };
