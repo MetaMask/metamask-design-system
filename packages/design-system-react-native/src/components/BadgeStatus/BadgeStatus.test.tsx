@@ -37,7 +37,7 @@ describe('BadgeStatus', () => {
     const badge = getByTestId('badge');
     expect(badge.props.style[0]).toStrictEqual(expectedOuter);
     // The inner view is rendered as the child of the outer View.
-    const inner = badge.props.children;
+    const inner = badge.props.children[1];
     expect(inner.props.style[0]).toStrictEqual(expectedInner);
   });
 
@@ -125,7 +125,7 @@ describe('BadgeStatus', () => {
 
     const { getByTestId } = render(<TestComponent />);
     const badge = getByTestId('badge');
-    const inner = badge.props.children;
+    const inner = badge.props.children[1];
     expect(inner.props.style[0]).toStrictEqual(expectedInner);
   });
 
@@ -155,7 +155,7 @@ describe('BadgeStatus', () => {
     const { getByTestId } = render(<TestComponent />);
     const badge = getByTestId('badge');
     expect(badge.props.style[0]).toStrictEqual(expectedOuter);
-    const inner = badge.props.children;
+    const inner = badge.props.children[1];
     expect(inner.props.style[0]).toStrictEqual(expectedInner);
   });
 });
