@@ -39,6 +39,18 @@ export type AvatarBaseProps = {
    */
   fallbackTextProps?: Omit<TextProps, 'children'>;
   /**
+   * Optional prop to include the border with the Avatar.
+   * For internal use only
+   * @default false
+   */
+  hasBorder?: boolean;
+  /**
+   * Optional prop to make sure there's no transparency in the background color
+   * For internal use only
+   * @default false
+   */
+  hasSolidBackgroundColor?: boolean;
+  /**
    * Optional prop to add twrnc overriding classNames.
    */
   twClassName?: string;
