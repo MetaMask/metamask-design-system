@@ -52,4 +52,12 @@ describe('Blockies', () => {
 
     expect(img).toHaveAttribute('title', 'Blockies Title');
   });
+
+  it('applies default alt text when no alt prop is provided', async () => {
+    render(<Blockies address={address} data-testid="blockies" />);
+
+    const img = await waitFor(() => screen.getByTestId('blockies'));
+
+    expect(img).toHaveAttribute('alt', `Blockies for ${address}`);
+  });
 });

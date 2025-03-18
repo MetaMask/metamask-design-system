@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { BlockiesProps } from './Blockies.types';
 
-export const Blockies = ({
-  address,
-  size = 32,
-  ...imageProps
-}: BlockiesProps) => {
+export const Blockies = ({ address, size = 32, ...props }: BlockiesProps) => {
   const [bloModule, setBloModule] = useState<{
     blo: (address: string) => string;
   } | null>(null);
@@ -25,7 +21,8 @@ export const Blockies = ({
       src={bloModule.blo(address)}
       height={size}
       width={size}
-      {...imageProps}
+      alt={`Blockies for ${address}`} // TODO: Add localization for this
+      {...props}
     />
   );
 };

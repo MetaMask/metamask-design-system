@@ -17,82 +17,71 @@ import { Blockies } from '@metamask/design-system-react';
 
 ### Address
 
-- **Type:** `string`
-- **Description:**  
-  The `address` prop is required and used as a unique identifier to generate the Blockies image.
+The `address` prop is required and used as a unique identifier to generate the Blockies image. Each address will generate a unique, deterministic pattern.
 
-<Canvas of={BlockiesStories.SampleAddresses} />
+<Canvas of={BlockiesStories.Address} />
 
 ### Size
 
-- **Type:** `number`
-- **Default:** `32`
-- **Description:**  
-  Controls the dimensions (both height and width) of the Blockies image in pixels.
+The `size` prop controls the dimensions (both height and width) of the Blockies image in pixels. The default size is 32px.
 
-### Additional Image Attributes
+<Canvas of={BlockiesStories.Size} />
 
-Blockies extends the standard HTML `<img>` attributes (e.g., `alt`, `title`, etc.). Any additional props provided will be passed directly to the underlying `<img>` element.
+### Accessibility
+
+The `alt` attribute provides alternative text for screen readers. By default, it includes the address for context (`Blockies for {address}`). You can override this with custom alt text:
+
+#### Default alt text
+
+```tsx
+// Default alt text
+<Blockies address="0x1234567890abcdef" />
+```
+
+```html
+<!-- Renders: -->
+<img alt="Blockies for 0x1234567890abcdef" />
+```
+
+#### Custom alt text
+
+```tsx
+// Custom alt text
+<Blockies address="0x1234567890abcdef" alt="User avatar for John Doe" />
+```
+
+```html
+<!-- Renders: -->
+<img alt="User avatar for John Doe" />
+```
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed (Blockies has no default styles)
+
+Example:
+
+```tsx
+// Adding new styles
+<Blockies
+  address="0x1234567890abcdef1234567890abcdef12345678"
+  className="my-4 mx-2"
+/>
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
 
 ## Component API
 
 <Controls of={BlockiesStories.Default} />
 
-## Code Details
-
-Below is the implementation of the **Blockies** component:
-
-```tsx
-// Blockies.types
-import type { ComponentProps } from 'react';
-
-export type BlockiesProps = ComponentProps<'img'> & {
-  /**
-   * Required address used as a unique identifier to generate the Blockies.
-   */
-  address: string;
-  /**
-   * Optional prop to control the size of the Blockies.
-   */
-  size?: number;
-};
-
-// Blockies
-import React, { useState, useEffect } from 'react';
-import type { BlockiesProps } from './Blockies.types';
-
-export const Blockies = ({
-  address,
-  size = 32,
-  ...imageProps
-}: BlockiesProps) => {
-  const [bloModule, setBloModule] = useState<{
-    blo: (address: string) => string;
-  } | null>(null);
-
-  useEffect(() => {
-    import('blo')
-      .then((module) => setBloModule(module))
-      .catch((error) => console.error('Failed to load blo module:', error));
-  }, []);
-
-  if (!bloModule) {
-    return null;
-  }
-
-  return (
-    <img
-      src={bloModule.blo(address)}
-      height={size}
-      width={size}
-      {...imageProps}
-    />
-  );
-};
-
-Blockies.displayName = 'Blockies';
-```
-
 ## References
 
-- [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

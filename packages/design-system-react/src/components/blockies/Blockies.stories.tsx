@@ -13,7 +13,16 @@ const meta: Meta<BlockiesProps> = {
       page: README,
     },
   },
+  args: {
+    address: '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8',
+    size: 32,
+  },
   argTypes: {
+    address: {
+      control: 'text',
+      description:
+        'Required address used as a unique identifier to generate the Blockies.',
+    },
     size: {
       control: 'number',
       description: 'Optional prop to control the size of the Blockies.',
@@ -21,13 +30,14 @@ const meta: Meta<BlockiesProps> = {
     className: {
       control: 'text',
       description:
-        'Optional prop for additional CSS classes to be applied to the AvatarBase component',
+        'Optional prop for additional CSS classes to be applied to the Blockies component.',
     },
   },
 };
 
 export default meta;
 type Story = StoryObj<BlockiesProps>;
+
 const sampleAccountAddresses = [
   '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8',
   '0xb9b81f6bd23B953c5257C3b5E2F0c03B07E944eB',
@@ -42,23 +52,27 @@ const sampleAccountAddresses = [
   '0xEC5CE72f2e18B0017C88F7B12d3308119C5Cf129',
   '0xeC56Da21c90Af6b50E4Ba5ec252bD97e735290fc',
 ];
-export const Default: Story = {
-  args: {
-    size: 32,
-  },
-  render: (args) => {
-    return (
-      <Blockies {...args} address={args.address || sampleAccountAddresses[0]} />
-    );
-  },
+
+export const Default: Story = {};
+
+export const Address: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-2">
+      {sampleAccountAddresses.map((address) => (
+        <Blockies key={address} address={address} size={32} />
+      ))}
+    </div>
+  ),
 };
 
-export const SampleAddresses: Story = {
+export const Size: Story = {
   render: () => (
-    <div className="flex gap-2">
-      {sampleAccountAddresses.map((addressKey) => (
-        <Blockies address={addressKey} key={addressKey} size={32} />
-      ))}
+    <div className="flex items-center gap-4">
+      <Blockies address={sampleAccountAddresses[0]} size={16} />
+      <Blockies address={sampleAccountAddresses[1]} size={24} />
+      <Blockies address={sampleAccountAddresses[2]} size={32} />
+      <Blockies address={sampleAccountAddresses[3]} size={48} />
+      <Blockies address={sampleAccountAddresses[4]} size={64} />
     </div>
   ),
 };
