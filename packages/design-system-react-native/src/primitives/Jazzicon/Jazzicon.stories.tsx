@@ -12,10 +12,6 @@ const meta: Meta<JazziconProps> = {
       control: 'number',
     },
   },
-  args: {
-    size: 32,
-    address: '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8',
-  },
 };
 
 export default meta;
@@ -34,7 +30,14 @@ const sampleAccountAddresses = [
   '0xEC5CE72f2e18B0017C88F7B12d3308119C5Cf129',
   '0xeC56Da21c90Af6b50E4Ba5ec252bD97e735290fc',
 ];
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    size: 32,
+  },
+  render: (args) => {
+    return <Jazzicon {...args} address={sampleAccountAddresses[0]} />;
+  },
+};
 
 export const SampleAddresses: Story = {
   render: () => (
