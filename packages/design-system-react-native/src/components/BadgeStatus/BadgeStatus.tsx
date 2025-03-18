@@ -26,7 +26,7 @@ const BadgeStatus = ({
         tw`
         self-start
         rounded-full 
-        ${hasBorder ? 'border-[2px] border-background-default' : ''} 
+        ${hasBorder ? 'border-2 border-background-default' : ''} 
         ${twClassName}`,
         style,
       ]}
