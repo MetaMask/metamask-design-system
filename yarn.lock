@@ -8450,7 +8450,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-string@npm:^1.5.5":
+"color-string@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "color-string@npm:0.3.0"
+  dependencies:
+    color-name: "npm:^1.0.0"
+  checksum: 10/3755fe07d2f12539c5c4cf6aa69e3400bcc8cdb7d6aef64084d5f50c27a7337c22b7cfbefd1cf3a3f83ef3fce6014f86c0bfc008f436caa70b909f56b86ccee2
+  languageName: node
+  linkType: hard
+
+"color-string@npm:^1.6.0":
   version: 1.9.1
   resolution: "color-string@npm:1.9.1"
   dependencies:
