@@ -6,7 +6,8 @@
     "rootDir": "./src",
     "jsx": "react",
     "types": ["react"],
-    "lib": ["ES2020", "DOM"]
+    "lib": ["ES2020", "DOM"],
+    "skipLibCheck": true
   },
   "references": [],
   "include": ["./src"]
