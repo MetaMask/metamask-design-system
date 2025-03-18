@@ -9,4 +9,5 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx}',
     './stories/**/*.{js,jsx,ts,tsx}',
   ],
+  mode: 'jit',
 };
