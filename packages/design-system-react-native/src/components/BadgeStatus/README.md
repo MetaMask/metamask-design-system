@@ -1,6 +1,6 @@
 # BadgeStatus
 
-The `BadgeStatus` component indicates the status an entity is on. It is a small circular badge used to indicate status, such as activity, new items, or alerts. It supports different statuses, sizes, and an optional border for better visibility.
+`BadgeStatus` indicates the status an entity is on.
 
 ---
 
