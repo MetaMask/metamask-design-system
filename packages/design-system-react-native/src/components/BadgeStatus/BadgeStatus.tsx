@@ -26,7 +26,7 @@ const BadgeStatus = ({
         tw`
         self-start
         rounded-full 
-        ${hasBorder ? 'border-[2px] border-background-default' : ''} 
+        ${hasBorder ? 'border-2 border-background-default' : ''} 
         ${twClassName}`,
         style,
       ]}
@@ -39,7 +39,7 @@ const BadgeStatus = ({
         style={[
           tw`
           rounded-full 
-          border-[2px]
+          border-2
           ${TWCLASSMAP_BADGESTATUS_SIZE[size]} 
           ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[status]}
           `,
