@@ -128,6 +128,20 @@ import { BadgeStatusSize } from '@metamask/design-system-react-native';
 
 ---
 
+## Accessibility
+
+The `BadgeStatus` component supports accessibility through the optional `accessibilityLabel` prop. This allows developers to provide context-specific descriptions for screen readers.
+
+```tsx
+// Example with custom accessibility label
+<BadgeStatus
+  status={BadgeStatusStatus.Active}
+  accessibilityLabel="Connected to Uniswap"
+/>
+```
+
+---
+
 ## Notes
 
 - `BadgeStatus` is useful for indicating statuses such as online/offline states, alerts, or new updates.
