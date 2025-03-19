@@ -18,11 +18,11 @@ describe('BadgeStatus', () => {
       expectedOuter = tw`
         self-start
         rounded-full 
-        border-[2px] border-background-default
+        border-2 border-background-default
       `;
       expectedInner = tw`
         rounded-full 
-        border-[2px]
+        border-2
         ${TWCLASSMAP_BADGESTATUS_SIZE[finalSize]}
         ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Active]}
       `;
@@ -101,7 +101,7 @@ describe('BadgeStatus', () => {
       const tw = useTailwind();
       expectedInner = tw`
         rounded-full 
-        border-[2px]
+        border-2
         ${TWCLASSMAP_BADGESTATUS_SIZE[customSize]}
         ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.PartiallyActive]}
       `;
@@ -129,11 +129,11 @@ describe('BadgeStatus', () => {
       expectedOuter = tw`
         self-start
         rounded-full 
-        border-[2px] border-background-default
+        border-2 border-background-default
       `;
       expectedInner = tw`
         rounded-full 
-        border-[2px]
+        border-2
         ${TWCLASSMAP_BADGESTATUS_SIZE[defaultSize]}
         ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Active]}
       `;
