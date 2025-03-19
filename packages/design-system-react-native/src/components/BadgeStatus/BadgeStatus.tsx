@@ -42,7 +42,7 @@ const BadgeStatus = ({
             w-[${size}px] 
             ${TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR[status]}
             rounded-full 
-            border-[2px]
+            border-2
             ${TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR[status]}`,
         ]}
       />
