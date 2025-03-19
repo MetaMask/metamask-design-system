@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
+import { Slot } from '@radix-ui/react-slot';
 
 import { twMerge } from '../../utils/tw-merge';
 
@@ -12,6 +13,7 @@ import {
   AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP,
   AVATAR_GROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT_MAP,
   AVATAR_GROUP_SQUARE_BORDER_RADIUS_MAP,
+  AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP_2,
 } from './AvatarGroup.constants';
 import {
   AvatarGroupProps,
@@ -29,16 +31,18 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
       isReverse = false,
       style,
       className,
+      asChild,
       ...props
     },
     ref,
   ) => {
+    const Component = asChild ? Slot : 'div';
     const overflowCounter = avatarPropsArr.length - max;
     const shouldRenderOverflowCounter = overflowCounter > 0;
     const containerClassNames = twMerge(
       'flex',
       isReverse ? 'flex-row-reverse' : 'flex-row',
-      `-ml-[${AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP[size]}px]`,
+      AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP_2[size],
       className,
     );
     const twOverflowTextContainerClassNames = twMerge(
@@ -61,7 +65,6 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
                   {...(avatarProps as AvatarFaviconProps)}
                   size={size as unknown as AvatarBaseSize}
                   data-testid={`avatar-${variant}`}
-                  className={`ml-[${AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP[size]}px]`}
                 />
               );
             case AvatarGroupVariant.Network:
@@ -71,7 +74,6 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
                   {...(avatarProps as AvatarNetworkProps)}
                   size={size as unknown as AvatarBaseSize}
                   data-testid={`avatar-${variant}`}
-                  className={`ml-[${AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP[size]}px]`}
                 />
               );
             case AvatarGroupVariant.Token:
@@ -81,7 +83,6 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
                   {...(avatarProps as AvatarTokenProps)}
                   size={size as unknown as AvatarBaseSize}
                   data-testid={`avatar-${variant}`}
-                  className={`ml-[${AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP[size]}px]`}
                 />
               );
             default:
@@ -94,7 +95,12 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     );
 
     return (
-      <div ref={ref} {...props} style={style} className={containerClassNames}>
+      <Component
+        ref={ref}
+        {...props}
+        style={style}
+        className={containerClassNames}
+      >
         {renderAvatarList()}
         {shouldRenderOverflowCounter && (
           <div className={twOverflowTextContainerClassNames}>
@@ -105,7 +111,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
             >{`+${overflowCounter}`}</Text>
           </div>
         )}
-      </div>
+      </Component>
     );
   },
 );

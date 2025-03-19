@@ -16,13 +16,24 @@ export const AVATAR_GROUP_SIZE_CLASS_MAP: Record<AvatarGroupSize, string> = {
 
 export const AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP: Record<
   AvatarGroupSize,
-  number
+  string
 > = {
-  [AvatarGroupSize.Xs]: 6,
-  [AvatarGroupSize.Sm]: 10,
-  [AvatarGroupSize.Md]: 14,
-  [AvatarGroupSize.Lg]: 18,
-  [AvatarGroupSize.Xl]: 22,
+  [AvatarGroupSize.Xs]: 'ml-[-6px]',
+  [AvatarGroupSize.Sm]: 'ml-[-10px]',
+  [AvatarGroupSize.Md]: 'ml-[-14px]',
+  [AvatarGroupSize.Lg]: 'ml-[-18px]',
+  [AvatarGroupSize.Xl]: 'ml-[-22px]',
+};
+
+export const AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP_2: Record<
+  AvatarGroupSize,
+  string
+> = {
+  [AvatarGroupSize.Xs]: 'gap-[-6px]',
+  [AvatarGroupSize.Sm]: 'gap-[-10px]',
+  [AvatarGroupSize.Md]: 'gap-[-14px]',
+  [AvatarGroupSize.Lg]: 'gap-[-18px]',
+  [AvatarGroupSize.Xl]: 'gap-[-22px]',
 };
 
 export const AVATAR_GROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT_MAP: Record<

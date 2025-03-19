@@ -62,6 +62,12 @@ type BaseAvatarGroupProps = {
    * Should be used sparingly and only for dynamic styles that can't be achieved with className.
    */
   style?: React.CSSProperties;
+  /**
+   * Optional boolean that determines if the component should merge its props onto its immediate child
+   * instead of rendering a div element
+   * @default false
+   */
+  asChild?: boolean;
 } & ComponentProps<'div'>;
 
 /**
