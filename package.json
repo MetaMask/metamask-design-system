@@ -57,7 +57,6 @@
     "json5": "2.2.2",
     "merge": "2.1.1",
     "semver": "7.5.2",
-    "@metamask/utils": "^11.2.0",
     "braces": "^3.0.3",
     "elliptic@6.5.4": "^6.5.7",
     "fast-xml-parser@^4.3.4": "^4.4.1",
