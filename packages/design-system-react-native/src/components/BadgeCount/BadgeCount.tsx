@@ -7,10 +7,8 @@ import Text from '../Text';
 import {
   DEFAULT_BADGECOUNT_PROPS,
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
-  MAP_BADGECOUNT_SIZE_MINWIDTH,
+  TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
   MAP_BADGECOUNT_SIZE_LINEHEIGHT,
-  MAP_BADGECOUNT_SIZE_PADDINGVERTICAL,
-  MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL,
 } from './BadgeCount.constants';
 import type { BadgeCountProps, BadgeCountSize } from './BadgeCount.types';
 
@@ -26,14 +24,11 @@ const BadgeCount = ({
   const tw = useTailwind();
   const twContainerClassNames = `
     bg-error-default
-    min-w-[${MAP_BADGECOUNT_SIZE_MINWIDTH[size as BadgeCountSize]}px] 
-    h-[${size}px]
-    py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[size]}px]
-    px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[size]}px]
     rounded-lg
     items-center
     justify-center
     self-start
+    ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[size]}
     ${twClassName}`;
 
   return (
@@ -43,7 +38,7 @@ const BadgeCount = ({
         color={DEFAULT_BADGECOUNT_PROPS.textProps.color}
         fontWeight={DEFAULT_BADGECOUNT_PROPS.textProps.fontWeight}
         {...textProps}
-        twClassName={`leading-[${MAP_BADGECOUNT_SIZE_LINEHEIGHT[size]}px] ${textProps?.twClassName || ''}`}
+        twClassName={`${MAP_BADGECOUNT_SIZE_LINEHEIGHT[size]} ${textProps?.twClassName || ''}`}
       >
         {count > max ? `${max}+` : `${count}`}
       </Text>

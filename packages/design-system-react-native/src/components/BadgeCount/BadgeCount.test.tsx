@@ -8,10 +8,8 @@ import { BadgeCountSize } from './BadgeCount.types';
 import {
   DEFAULT_BADGECOUNT_PROPS,
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
-  MAP_BADGECOUNT_SIZE_MINWIDTH,
+  TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
   MAP_BADGECOUNT_SIZE_LINEHEIGHT,
-  MAP_BADGECOUNT_SIZE_PADDINGVERTICAL,
-  MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL,
 } from './BadgeCount.constants';
 
 describe('BadgeCount', () => {
@@ -21,21 +19,18 @@ describe('BadgeCount', () => {
       const sizeVal = DEFAULT_BADGECOUNT_PROPS.size;
       const computedExpectedOuter = tw`
         bg-error-default
-        min-w-[${MAP_BADGECOUNT_SIZE_MINWIDTH[sizeVal]}px] 
-        h-[${sizeVal}px]
-        py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[sizeVal]}px]
-        px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[sizeVal]}px]
         rounded-lg
         items-center
         justify-center
         self-start
+        ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]}
       `;
       const expectedTextProps = {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[sizeVal],
         color: DEFAULT_BADGECOUNT_PROPS.textProps.color,
         fontWeight: DEFAULT_BADGECOUNT_PROPS.textProps.fontWeight,
         // Note: trailing space comes from template literal if textProps.twClassName is undefined.
-        twClassName: `leading-[${MAP_BADGECOUNT_SIZE_LINEHEIGHT[sizeVal]}px] `,
+        twClassName: `${MAP_BADGECOUNT_SIZE_LINEHEIGHT[sizeVal]} `,
       };
       return (
         <>
@@ -70,7 +65,7 @@ describe('BadgeCount', () => {
       expectedTextProps.fontWeight,
     );
     expect(textElement.props.twClassName).toContain(
-      `leading-[${MAP_BADGECOUNT_SIZE_LINEHEIGHT[DEFAULT_BADGECOUNT_PROPS.size]}px]`,
+      MAP_BADGECOUNT_SIZE_LINEHEIGHT[DEFAULT_BADGECOUNT_PROPS.size],
     );
   });
 
@@ -80,14 +75,11 @@ describe('BadgeCount', () => {
       const sizeVal = DEFAULT_BADGECOUNT_PROPS.size;
       const computedExpectedOuter = tw`
         bg-error-default
-        min-w-[${MAP_BADGECOUNT_SIZE_MINWIDTH[sizeVal]}px] 
-        h-[${sizeVal}px]
-        py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[sizeVal]}px]
-        px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[sizeVal]}px]
         rounded-lg
         items-center
         justify-center
         self-start
+        ${sizeVal[sizeVal]}
       `;
       return (
         <>
@@ -104,6 +96,8 @@ describe('BadgeCount', () => {
       getByTestId('expectedOuter').props.children,
     );
     const container = getByTestId('badge-count');
+    console.log(container.props.style[0]);
+    console.log(expectedOuter);
     expect(container.props.style[0]).toStrictEqual(expectedOuter);
     const textElement = container.props.children;
     // When count > max, text should be "99+"
@@ -121,20 +115,17 @@ describe('BadgeCount', () => {
       const sizeVal = DEFAULT_BADGECOUNT_PROPS.size;
       const computedExpectedOuter = tw`
         bg-error-default
-        min-w-[${MAP_BADGECOUNT_SIZE_MINWIDTH[sizeVal]}px] 
-        h-[${sizeVal}px]
-        py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[sizeVal]}px]
-        px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[sizeVal]}px]
         rounded-lg
         items-center
         justify-center
         self-start
+        ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]}
       `;
       const expectedTextProps = {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[sizeVal],
         color: customTextProps.color, // overridden
         fontWeight: customTextProps.fontWeight, // overridden
-        twClassName: `leading-[${MAP_BADGECOUNT_SIZE_LINEHEIGHT[sizeVal]}px] ${customTextProps.twClassName}`,
+        twClassName: `${MAP_BADGECOUNT_SIZE_LINEHEIGHT[sizeVal]} ${customTextProps.twClassName}`,
       };
       return (
         <>
@@ -170,7 +161,7 @@ describe('BadgeCount', () => {
       expectedTextProps.fontWeight,
     );
     expect(textElement.props.twClassName).toContain(
-      `leading-[${MAP_BADGECOUNT_SIZE_LINEHEIGHT[DEFAULT_BADGECOUNT_PROPS.size]}px]`,
+      MAP_BADGECOUNT_SIZE_LINEHEIGHT[DEFAULT_BADGECOUNT_PROPS.size],
     );
     expect(textElement.props.twClassName).toContain('custom');
   });
@@ -201,20 +192,17 @@ describe('BadgeCount', () => {
       const tw = useTailwind();
       const computedExpectedOuter = tw`
         bg-error-default
-        min-w-[${MAP_BADGECOUNT_SIZE_MINWIDTH[customSize]}px] 
-        h-[${customSize}px]
-        py-[${MAP_BADGECOUNT_SIZE_PADDINGVERTICAL[customSize]}px]
-        px-[${MAP_BADGECOUNT_SIZE_PADDINGHORIZONTAL[customSize]}px]
         rounded-lg
         items-center
         justify-center
         self-start
+        ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[customSize]}
       `;
       const expectedTextProps = {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[customSize],
         color: DEFAULT_BADGECOUNT_PROPS.textProps.color,
         fontWeight: DEFAULT_BADGECOUNT_PROPS.textProps.fontWeight,
-        twClassName: `leading-[${MAP_BADGECOUNT_SIZE_LINEHEIGHT[customSize]}px] `,
+        twClassName: `${MAP_BADGECOUNT_SIZE_LINEHEIGHT[customSize]} `,
       };
       return (
         <>
@@ -241,7 +229,7 @@ describe('BadgeCount', () => {
     const textElement = container.props.children;
     expect(textElement.props.variant).toStrictEqual(expectedTextProps.variant);
     expect(textElement.props.twClassName).toContain(
-      `leading-[${MAP_BADGECOUNT_SIZE_LINEHEIGHT[customSize]}px]`,
+      MAP_BADGECOUNT_SIZE_LINEHEIGHT[customSize],
     );
   });
 });
