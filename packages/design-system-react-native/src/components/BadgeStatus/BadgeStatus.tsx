@@ -4,16 +4,16 @@ import React from 'react';
 import { View } from 'react-native';
 
 import {
-  DEFAULT_BADGESTATUS_PROPS,
-  TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR,
-  TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR,
+  TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE,
+  TWCLASSMAP_BADGESTATUS_SIZE,
 } from './BadgeStatus.constants';
 import type { BadgeStatusProps } from './BadgeStatus.types';
+import { BadgeStatusSize } from './BadgeStatus.types';
 
 const BadgeStatus = ({
   status,
-  size = DEFAULT_BADGESTATUS_PROPS.size,
-  hasBorder = DEFAULT_BADGESTATUS_PROPS.hasBorder,
+  size = BadgeStatusSize.Md,
+  hasBorder = true,
   twClassName = '',
   style,
   ...props
@@ -38,12 +38,11 @@ const BadgeStatus = ({
       <View
         style={[
           tw`
-            h-[${size}px] 
-            w-[${size}px] 
-            ${TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR[status]}
-            rounded-full 
-            border-[2px]
-            ${TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR[status]}`,
+          rounded-full 
+          border-[2px]
+          ${TWCLASSMAP_BADGESTATUS_SIZE[size]} 
+          ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[status]}
+          `,
         ]}
       />
     </View>

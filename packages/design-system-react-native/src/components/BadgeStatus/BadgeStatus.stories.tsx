@@ -3,7 +3,6 @@ import { View, ViewProps } from 'react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
 import BadgeStatus from './BadgeStatus';
-import { DEFAULT_BADGESTATUS_PROPS } from './BadgeStatus.constants';
 import type { BadgeStatusProps } from './BadgeStatus.types';
 import { BadgeStatusStatus, BadgeStatusSize } from './BadgeStatus.types';
 
@@ -46,9 +45,9 @@ type Story = StoryObj<BadgeStatusProps>;
 
 export const Default: Story = {
   args: {
-    size: DEFAULT_BADGESTATUS_PROPS.size,
+    size: BadgeStatusSize.Md,
     status: BadgeStatusStatus.Active,
-    hasBorder: DEFAULT_BADGESTATUS_PROPS.hasBorder,
+    hasBorder: true,
     twClassName: '',
   },
   render: (args) => (

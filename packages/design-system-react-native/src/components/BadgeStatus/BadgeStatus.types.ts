@@ -17,11 +17,11 @@ export enum BadgeStatusSize {
   /**
    * Represents a medium badge status size (8px).
    */
-  Md = '8',
+  Md = 'Md',
   /**
    * Represents a large avatar size (10px).
    */
-  Lg = '10',
+  Lg = 'Lg',
 }
 /**
  * BadgeStatus component props.

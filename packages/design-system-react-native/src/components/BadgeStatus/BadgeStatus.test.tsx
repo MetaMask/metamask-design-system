@@ -3,9 +3,8 @@ import { render } from '@testing-library/react-native';
 import BadgeStatus from './BadgeStatus';
 import { BadgeStatusStatus, BadgeStatusSize } from './BadgeStatus.types';
 import {
-  DEFAULT_BADGESTATUS_PROPS,
-  TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR,
-  TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR,
+  TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE,
+  TWCLASSMAP_BADGESTATUS_SIZE,
 } from './BadgeStatus.constants';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
@@ -15,20 +14,17 @@ describe('BadgeStatus', () => {
     let expectedInner;
     const TestComponent = () => {
       const tw = useTailwind();
-      const finalSize = DEFAULT_BADGESTATUS_PROPS.size;
-      const finalHasBorder = DEFAULT_BADGESTATUS_PROPS.hasBorder;
+      const finalSize = BadgeStatusSize.Md;
       expectedOuter = tw`
         self-start
         rounded-full 
-        ${finalHasBorder ? 'border-[2px] border-background-default' : ''}
+        border-[2px] border-background-default
       `;
       expectedInner = tw`
-        h-[${finalSize}px] 
-        w-[${finalSize}px] 
-        ${TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR[BadgeStatusStatus.Active]}
         rounded-full 
         border-[2px]
-        ${TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR[BadgeStatusStatus.Active]}
+        ${TWCLASSMAP_BADGESTATUS_SIZE[finalSize]}
+        ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Active]}
       `;
       return <BadgeStatus status={BadgeStatusStatus.Active} testID="badge" />;
     };
@@ -45,12 +41,9 @@ describe('BadgeStatus', () => {
     let expectedOuter;
     const TestComponent = () => {
       const tw = useTailwind();
-      const finalSize = DEFAULT_BADGESTATUS_PROPS.size;
-      const finalHasBorder = false;
       expectedOuter = tw`
         self-start
         rounded-full 
-        ${finalHasBorder ? 'border-[2px] border-background-default' : ''}
       `;
       return (
         <BadgeStatus
@@ -107,12 +100,10 @@ describe('BadgeStatus', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       expectedInner = tw`
-        h-[${customSize}px] 
-        w-[${customSize}px] 
-        ${TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR[BadgeStatusStatus.PartiallyActive]}
         rounded-full 
         border-[2px]
-        ${TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR[BadgeStatusStatus.PartiallyActive]}
+        ${TWCLASSMAP_BADGESTATUS_SIZE[customSize]}
+        ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.PartiallyActive]}
       `;
       return (
         <BadgeStatus
@@ -134,20 +125,17 @@ describe('BadgeStatus', () => {
     let expectedInner;
     const TestComponent = () => {
       const tw = useTailwind();
-      const defaultSize = DEFAULT_BADGESTATUS_PROPS.size;
-      const defaultHasBorder = DEFAULT_BADGESTATUS_PROPS.hasBorder;
+      const defaultSize = BadgeStatusSize.Md;
       expectedOuter = tw`
         self-start
         rounded-full 
-        ${defaultHasBorder ? 'border-[2px] border-background-default' : ''}
+        border-[2px] border-background-default
       `;
       expectedInner = tw`
-        h-[${defaultSize}px] 
-        w-[${defaultSize}px] 
-        ${TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR[BadgeStatusStatus.Active]}
         rounded-full 
         border-[2px]
-        ${TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR[BadgeStatusStatus.Active]}
+        ${TWCLASSMAP_BADGESTATUS_SIZE[defaultSize]}
+        ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Active]}
       `;
       return <BadgeStatus status={BadgeStatusStatus.Active} testID="badge" />;
     };

@@ -1,33 +1,19 @@
-import type { BadgeStatusProps } from './BadgeStatus.types';
 import { BadgeStatusStatus, BadgeStatusSize } from './BadgeStatus.types';
 
 // Mappings
-export const TWCLASSMAP_BADGESTATUS_STATUS_BACKGROUNDCOLOR: Record<
+export const TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE: Record<
   BadgeStatusStatus,
   string
 > = {
-  [BadgeStatusStatus.Active]: 'bg-success-default',
-  [BadgeStatusStatus.PartiallyActive]: 'bg-background-default',
-  [BadgeStatusStatus.Inactive]: 'bg-icon-muted',
-  [BadgeStatusStatus.New]: 'bg-primary-default',
-  [BadgeStatusStatus.Attention]: 'bg-error-default',
+  [BadgeStatusStatus.Active]: 'bg-success-default border-success-default',
+  [BadgeStatusStatus.PartiallyActive]:
+    'bg-background-default border-success-default',
+  [BadgeStatusStatus.Inactive]: 'bg-icon-muted border-icon-muted',
+  [BadgeStatusStatus.New]: 'bg-primary-default border-primary-default',
+  [BadgeStatusStatus.Attention]: 'bg-error-default border-error-default',
 };
 
-export const TWCLASSMAP_BADGESTATUS_STATUS_INNER_BORDERCOLOR: Record<
-  BadgeStatusStatus,
-  string
-> = {
-  [BadgeStatusStatus.Active]: 'border-success-default',
-  [BadgeStatusStatus.PartiallyActive]: 'border-success-default',
-  [BadgeStatusStatus.Inactive]: 'border-icon-muted',
-  [BadgeStatusStatus.New]: 'border-primary-default',
-  [BadgeStatusStatus.Attention]: 'border-error-default',
-};
-
-// Defaults
-export const DEFAULT_BADGESTATUS_PROPS: Required<
-  Pick<BadgeStatusProps, 'size' | 'hasBorder'>
-> = {
-  size: BadgeStatusSize.Md,
-  hasBorder: true,
+export const TWCLASSMAP_BADGESTATUS_SIZE: Record<BadgeStatusSize, string> = {
+  [BadgeStatusSize.Md]: 'h-2 w-2', // 8px width and height
+  [BadgeStatusSize.Lg]: 'h-2.5 w-2.5', // 10px width and height
 };
