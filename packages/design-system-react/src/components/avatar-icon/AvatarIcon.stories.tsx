@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { AvatarIconSize } from '../../types';
 import { AvatarIcon } from './AvatarIcon';
-import { AvatarIconSize, AvatarIconSeverity } from '.';
+import { AvatarIconSeverity } from '.';
 import { IconName } from '../icon';
 import README from './README.mdx';
 

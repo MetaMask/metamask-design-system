@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 
 import type { TextProps } from '../text';
-import { AvatarTokenSize } from '.';
+import { AvatarTokenSize } from '../../types';
 
 export type AvatarTokenProps = Omit<
   ComponentProps<'img'>,

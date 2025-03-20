@@ -4,7 +4,7 @@ import React from 'react';
 import { Icon, IconName, IconSize } from '../icon';
 import { TextColor } from '../text';
 import { AvatarBase } from './AvatarBase';
-import { AvatarBaseSize, AvatarBaseShape } from './AvatarBase.types';
+import { AvatarBaseShape, AvatarBaseSize } from '../../types';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarBase> = {

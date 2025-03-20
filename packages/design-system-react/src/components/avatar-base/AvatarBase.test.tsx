@@ -4,10 +4,10 @@ import React from 'react';
 import { TextColor } from '../text';
 import { AvatarBase } from './AvatarBase';
 import {
-  AVATAR_BASE_SIZE_CLASS_MAP,
-  AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP,
+  TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE,
 } from './AvatarBase.constants';
-import { AvatarBaseSize, AvatarBaseShape } from './AvatarBase.types';
+import { AvatarBaseShape, AvatarBaseSize } from '../../types';
 
 describe('AvatarBase', () => {
   it('renders with default styles', () => {
@@ -26,20 +26,22 @@ describe('AvatarBase', () => {
       />,
     );
 
-    Object.entries(AVATAR_BASE_SIZE_CLASS_MAP).forEach(([size, classes]) => {
-      rerender(
-        <AvatarBase
-          size={size as AvatarBaseSize}
-          fallbackText="A"
-          data-testid="avatar"
-        />,
-      );
-      const avatar = screen.getByTestId('avatar');
-      const classArray = classes.split(' ');
-      classArray.forEach((className) => {
-        expect(avatar).toHaveClass(className);
-      });
-    });
+    Object.entries(TWCLASSMAP_AVATARBASE_SIZE_DIMENSION).forEach(
+      ([size, classes]) => {
+        rerender(
+          <AvatarBase
+            size={size as AvatarBaseSize}
+            fallbackText="A"
+            data-testid="avatar"
+          />,
+        );
+        const avatar = screen.getByTestId('avatar');
+        const classArray = classes.split(' ');
+        classArray.forEach((className) => {
+          expect(avatar).toHaveClass(className);
+        });
+      },
+    );
   });
 
   it('renders children correctly', () => {
@@ -125,7 +127,7 @@ describe('AvatarBase', () => {
     );
 
     // Test all sizes
-    Object.entries(AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP).forEach(
+    Object.entries(TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE).forEach(
       ([size, borderRadiusClass]) => {
         rerender(
           <AvatarBase

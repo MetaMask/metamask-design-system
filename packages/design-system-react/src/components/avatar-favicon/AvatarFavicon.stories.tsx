@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { AvatarFaviconSize } from '../../types';
 import { AvatarFavicon } from './AvatarFavicon';
-import { AvatarFaviconSize } from '.';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarFavicon> = {

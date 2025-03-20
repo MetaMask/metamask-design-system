@@ -1,6 +1,9 @@
-import { AvatarBaseSize } from './AvatarBase.types';
+import { AvatarBaseSize } from '../../types';
 
-export const AVATAR_BASE_SIZE_CLASS_MAP: Record<AvatarBaseSize, string> = {
+export const TWCLASSMAP_AVATARBASE_SIZE_DIMENSION: Record<
+  AvatarBaseSize,
+  string
+> = {
   [AvatarBaseSize.Xs]: 'h-4 w-4',
   [AvatarBaseSize.Sm]: 'h-6 w-6',
   [AvatarBaseSize.Md]: 'h-8 w-8',
@@ -8,7 +11,7 @@ export const AVATAR_BASE_SIZE_CLASS_MAP: Record<AvatarBaseSize, string> = {
   [AvatarBaseSize.Xl]: 'h-12 w-12',
 };
 
-export const AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP: Record<
+export const TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE: Record<
   AvatarBaseSize,
   string
 > = {

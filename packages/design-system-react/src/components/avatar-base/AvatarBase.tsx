@@ -4,11 +4,11 @@ import React from 'react';
 import { twMerge } from '../../utils/tw-merge';
 import { Text, FontWeight, TextVariant, TextColor } from '../text';
 import {
-  AVATAR_BASE_SIZE_CLASS_MAP,
-  AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP,
+  TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE,
 } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
-import { AvatarBaseShape, AvatarBaseSize } from './AvatarBase.types';
+import { AvatarBaseShape, AvatarBaseSize } from '../../types';
 
 export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
   (
@@ -32,11 +32,11 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
       'inline-flex items-center justify-center',
       shape === AvatarBaseShape.Circle
         ? 'rounded-full'
-        : AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP[size],
+        : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE[size],
       'bg-muted',
       'overflow-hidden',
       // Size
-      AVATAR_BASE_SIZE_CLASS_MAP[size],
+      TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size],
       // Custom classes
       className,
     );
