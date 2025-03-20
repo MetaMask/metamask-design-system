@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { View } from 'react-native';
 
 import AvatarNetwork, { AvatarNetworkSize } from '../AvatarNetwork';
 import AvatarAccount, { AvatarAccountSize } from '../AvatarAccount';
@@ -59,5 +60,28 @@ export const Default: Story = {
         size={AvatarAccountSize.Md}
       />
     </BadgeWrapper>
+  ),
+};
+
+export const Position: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <BadgeWrapper
+        badge={
+          <AvatarNetwork
+            name="ETH"
+            src={{ uri: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg' }}
+            hasBorder
+            hasSolidBackgroundColor
+            size={AvatarNetworkSize.Xs}
+          />
+        }
+      >
+        <AvatarAccount
+          address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+          size={AvatarAccountSize.Md}
+        />
+      </BadgeWrapper>
+    </View>
   ),
 };
