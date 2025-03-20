@@ -43,11 +43,11 @@ const BadgeWrapper = ({
     const shapeXOffset =
       positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
         ? 0
-        : anchorWidth * 0.14;
+        : anchorWidth * 0.1464;
     const shapeYOffset =
       positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
         ? 0
-        : anchorHeight * 0.14;
+        : anchorHeight * 0.1464;
     const badgeCenteringXOffset = badgeWidth / 2;
     const badgeCenteringYOffset = badgeHeight / 2;
     const finalXOffset = shapeXOffset - badgeCenteringXOffset + positionXOffset;
