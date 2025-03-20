@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
 import BadgeCount from './BadgeCount';
-import { DEFAULT_BADGECOUNT_PROPS } from './BadgeCount.constants';
 import { BadgeCountSize } from './BadgeCount.types';
 import type { BadgeCountProps } from './BadgeCount.types';
 
@@ -32,9 +31,9 @@ type Story = StoryObj<BadgeCountProps>;
 
 export const Default: Story = {
   args: {
-    size: DEFAULT_BADGECOUNT_PROPS.size,
+    size: BadgeCountSize.Md,
     count: 8,
-    max: DEFAULT_BADGECOUNT_PROPS.max,
+    max: 99,
     twClassName: '',
   },
 };

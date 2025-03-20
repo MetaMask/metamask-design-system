@@ -6,11 +6,11 @@ export enum BadgeCountSize {
   /**
    * Represents a medium badge count (14px height).
    */
-  Md = '14',
+  Md = 'Md',
   /**
    * Represents a large badge count (20px height).
    */
-  Lg = '20',
+  Lg = 'Lg',
 }
 
 /**

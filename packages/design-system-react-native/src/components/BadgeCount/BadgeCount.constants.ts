@@ -1,5 +1,4 @@
-import { TextVariant, TextColor, FontWeight } from '../Text';
-import type { BadgeCountProps } from './BadgeCount.types';
+import { TextVariant } from '../Text';
 import { BadgeCountSize } from './BadgeCount.types';
 
 // Mappings
@@ -21,16 +20,4 @@ export const TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER: Record<
 > = {
   [BadgeCountSize.Md]: 'min-w-4 h-3.5 py-0 px-1', // min-width 16px, height 14px, padding-vertical 0, padding-horizontal 4
   [BadgeCountSize.Lg]: 'min-w-6 h-5 py-0.5 px-1.5', // min-width 24px, height 20px, padding-vertical 2, padding-horizontal 6
-};
-
-// Defaults
-export const DEFAULT_BADGECOUNT_PROPS: Required<
-  Pick<BadgeCountProps, 'size' | 'max' | 'textProps'>
-> = {
-  size: BadgeCountSize.Md,
-  max: 99,
-  textProps: {
-    color: TextColor.ErrorInverse,
-    fontWeight: FontWeight.Medium,
-  },
 };
