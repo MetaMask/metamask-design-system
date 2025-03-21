@@ -3,10 +3,11 @@
  */
 :root {
   /* font family */
-  --font-family-sans: 'Centra No1', 'Helvetica Neue', Helvetica, Arial,
+  --font-family-centra-no1: 'Centra No1', 'Helvetica Neue', Helvetica, Arial,
     sans-serif;
   --font-family-euclid-circular-b: 'Euclid Circular B', sans-serif; /* Deprecated to be removed in next major version */
   --font-family-roboto: 'Roboto', sans-serif; /* Deprecated to be removed in next major version */
+  --font-family-sans: var(--font-family-centra-no1);
   /* font sizes */
   --font-size-base: 16px;
   --font-size-1: 0.625rem;
