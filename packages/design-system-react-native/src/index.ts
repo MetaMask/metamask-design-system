@@ -50,6 +50,18 @@ import BadgeCountComponent from './components/BadgeCount';
 export const BadgeCount = withThemeProvider(BadgeCountComponent);
 export { BadgeCountProps, BadgeCountSize } from './components/BadgeCount';
 
+import BadgeNetworkComponent from './components/BadgeNetwork';
+export const BadgeNetwork = withThemeProvider(BadgeNetworkComponent);
+export { BadgeNetworkProps } from './components/BadgeNetwork';
+
+import BadgeStatusComponent from './components/BadgeStatus';
+export const BadgeStatus = withThemeProvider(BadgeStatusComponent);
+export {
+  BadgeStatusProps,
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from './components/BadgeStatus';
+
 import BlockiesComponent from './primitives/Blockies';
 export const Blockies = BlockiesComponent;
 export { BlockiesProps } from './primitives/Blockies';
