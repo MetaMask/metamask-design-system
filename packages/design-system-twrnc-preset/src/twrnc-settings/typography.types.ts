@@ -83,36 +83,36 @@ export type FontStyle = 'normal' | 'italic';
 /**
  * Props for TypographyTailwindConfig
  * @example
- * // {
- * //   fontSize: {
- * //     'display-md': {
- * //       fontFamily: 'EuclidCircularB-Bold',
- * //       fontSize: '32',
- * //       fontWeight: '700',
- * //       letterSpacing: '0',
- * //       lineHeight: '40px',
- * //     },
- * //   },
- * //   fontFamily: {
- * //     sans: [
- * //       'EuclidCircularB',
- * //       'Helvetica Neue',
- * //       'Helvetica',
- * //       'Arial',
- * //       'sans-serif',
- * //     ],
- * //     'display-md': 'EuclidCircularB',
- * //   },
- * //   letterSpacing: {
- * //     'display-md': '0',
- * //   },
- * //   fontWeight: {
- * //     'display-md': '400',
- * //   },
- * //   lineHeight: {
- * //     'display-md': '40px',
- * //   },
- * // }
+ * {
+ *   fontSize: {
+ *     'display-md': {
+ *       fontFamily: 'CentraNo1-Bold',
+ *       fontSize: '32',
+ *       fontWeight: '700',
+ *       letterSpacing: '0',
+ *       lineHeight: '40px',
+ *     },
+ *   },
+ *   fontFamily: {
+ *     sans: [
+ *       'CentraNo1',
+ *       'Helvetica Neue',
+ *       'Helvetica',
+ *       'Arial',
+ *       'sans-serif',
+ *     ],
+ *     'display-md': 'CentraNo1',
+ *   },
+ *   letterSpacing: {
+ *     'display-md': '0',
+ *   },
+ *   fontWeight: {
+ *     'display-md': '400',
+ *   },
+ *   lineHeight: {
+ *     'display-md': '40px',
+ *   },
+ * }
  */
 export type TypographyTailwindConfigProps = {
   fontSize: Record<

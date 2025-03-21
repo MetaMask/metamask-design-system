@@ -3,36 +3,43 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Euclid Circular B'; /* This should match the font-family in typography.ts */
+  font-family: 'CentraNo1';
   font-style: normal;
   font-weight: 400;
-  src: url('fonts/EuclidCircularB-Regular.woff2') format('woff2');
+  src: url('fonts/CentraNo1/CentraNo1-Book.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Euclid Circular B';
+  font-family: 'CentraNo1';
   font-style: italic;
   font-weight: 400;
-  src: url('fonts/EuclidCircularB-RegularItalic.woff2') format('woff2');
+  src: url('fonts/CentraNo1/CentraNo1-BookItalic.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Euclid Circular B';
+  font-family: 'CentraNo1';
   font-style: normal;
   font-weight: 500;
-  src: url('fonts/EuclidCircularB-Medium.woff2') format('woff2');
+  src: url('fonts/CentraNo1/CentraNo1-Medium.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Euclid Circular B';
+  font-family: 'CentraNo1';
   font-style: italic;
   font-weight: 500;
-  src: url('fonts/EuclidCircularB-MediumItalic.woff2') format('woff2');
+  src: url('fonts/CentraNo1/CentraNo1-MediumItalic.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Euclid Circular B';
+  font-family: 'CentraNo1';
   font-style: normal;
   font-weight: 700;
-  src: url('fonts/EuclidCircularB-Bold.woff2') format('woff2');
+  src: url('fonts/CentraNo1/CentraNo1-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'CentraNo1';
+  font-style: italic;
+  font-weight: 700;
+  src: url('fonts/CentraNo1/CentraNo1-BoldItalic.woff2') format('woff2');
 }

@@ -93,6 +93,7 @@ describe('Typography', () => {
     const designTokens = await getDesignTokenVariables([
       '--typography',
       '--font-weight',
+      '--font-family',
     ]);
 
     // Identify any used variables that are missing from the design tokens

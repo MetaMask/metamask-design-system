@@ -77,7 +77,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
   },
   fontFamily: {
     sans: [
-      'EuclidCircularB-Regular',
+      'CentraNo1-Book',
       'Helvetica Neue',
       'Helvetica',
       'Arial',
