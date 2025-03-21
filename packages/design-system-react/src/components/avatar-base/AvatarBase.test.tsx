@@ -11,9 +11,8 @@ import { AvatarBaseShape, AvatarBaseSize } from '../../types';
 
 describe('AvatarBase', () => {
   it('renders with default styles', () => {
-    render(<AvatarBase fallbackText="A" data-testid="avatar" />);
+    render(<AvatarBase fallbackText="A" />);
 
-    const avatar = screen.getByTestId('avatar');
     expect(screen.getByText('A')).toBeInTheDocument();
   });
 
@@ -42,6 +41,24 @@ describe('AvatarBase', () => {
         });
       },
     );
+  });
+
+  it('renders with border when hasBorder is true', () => {
+    render(<AvatarBase fallbackText="A" hasBorder data-testid="avatar" />);
+    const avatar = screen.getByTestId('avatar');
+    expect(avatar).toHaveClass('border-background-default');
+  });
+
+  it('renders with solid background color when hasSolidBackgroundColor is true', () => {
+    render(
+      <AvatarBase
+        fallbackText="A"
+        hasSolidBackgroundColor
+        data-testid="avatar"
+      />,
+    );
+    const avatar = screen.getByTestId('avatar');
+    expect(avatar).toHaveClass('bg-default');
   });
 
   it('renders children correctly', () => {
@@ -101,8 +118,7 @@ describe('AvatarBase', () => {
       />,
     );
 
-    let avatar = screen.getByTestId('avatar');
-    expect(avatar).toHaveClass('rounded-full');
+    expect(screen.getByTestId('avatar')).toHaveClass('rounded-full');
 
     rerender(
       <AvatarBase
@@ -112,8 +128,7 @@ describe('AvatarBase', () => {
         data-testid="avatar"
       />,
     );
-    avatar = screen.getByTestId('avatar');
-    expect(avatar).toHaveClass('rounded-lg');
+    expect(screen.getByTestId('avatar')).toHaveClass('rounded-lg');
   });
 
   it('applies correct border radius for all square sizes', () => {

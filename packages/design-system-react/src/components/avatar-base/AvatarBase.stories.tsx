@@ -47,6 +47,15 @@ const meta: Meta<typeof AvatarBase> = {
       mapping: AvatarBaseShape,
       description: 'Optional prop to control the shape of the AvatarBase',
     },
+    hasBorder: {
+      control: 'boolean',
+      description: 'Optional prop to add a border around the AvatarBase',
+    },
+    hasSolidBackgroundColor: {
+      control: 'boolean',
+      description:
+        'Optional prop to ensure no transparency in the background color',
+    },
   },
 };
 
@@ -78,33 +87,24 @@ export const Size: Story = {
         <AvatarBase size={AvatarBaseSize.Lg} fallbackText="LG" />
         <AvatarBase size={AvatarBaseSize.Xl} fallbackText="XL" />
       </div>
-      <div className="flex gap-2 items-center">
-        <AvatarBase
-          shape={AvatarBaseShape.Square}
-          size={AvatarBaseSize.Xs}
-          fallbackText="Xs"
-        />
-        <AvatarBase
-          shape={AvatarBaseShape.Square}
-          size={AvatarBaseSize.Sm}
-          fallbackText="Sm"
-        />
-        <AvatarBase
-          shape={AvatarBaseShape.Square}
-          size={AvatarBaseSize.Md}
-          fallbackText="Md"
-        />
-        <AvatarBase
-          shape={AvatarBaseShape.Square}
-          size={AvatarBaseSize.Lg}
-          fallbackText="Lg"
-        />
-        <AvatarBase
-          shape={AvatarBaseShape.Square}
-          size={AvatarBaseSize.Xl}
-          fallbackText="Xl"
-        />
-      </div>
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarBase fallbackText="A" />
+      <AvatarBase fallbackText="B" hasBorder />
+    </div>
+  ),
+};
+
+export const HasSolidBackgroundColor: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarBase fallbackText="A" />
+      <AvatarBase fallbackText="B" hasSolidBackgroundColor />
     </div>
   ),
 };
@@ -141,9 +141,7 @@ export const FallbackTextWithProps: Story = {
 export const Children: Story = {
   render: () => (
     <div className="flex gap-2 items-center">
-      {/* Text */}
       <AvatarBase fallbackText="A" />
-      {/* Image */}
       <AvatarBase>
         <img
           src="https://cryptologos.cc/logos/avalanche-avax-logo.png?v=040"
@@ -151,7 +149,6 @@ export const Children: Story = {
           className="w-full h-full object-cover"
         />
       </AvatarBase>
-      {/* Icon */}
       <AvatarBase>
         <Icon name={IconName.User} size={IconSize.Sm} />
       </AvatarBase>

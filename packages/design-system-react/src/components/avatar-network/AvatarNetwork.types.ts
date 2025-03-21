@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 
 import type { TextProps } from '../text';
-import { AvatarNetworkSize } from '../../index';
+import type { AvatarNetworkSize } from '../../index';
 
 export type AvatarNetworkProps = Omit<
   ComponentProps<'img'>,
@@ -43,4 +43,16 @@ export type AvatarNetworkProps = Omit<
    * Optional additional CSS classes to be applied to the component
    */
   className?: string;
+  /**
+   * Optional prop to include the border with the Avatar.
+   * For internal use only
+   * @default false
+   */
+  hasBorder?: boolean;
+  /**
+   * Optional prop to make sure there's no transparency in the background color
+   * For internal use only
+   * @default false
+   */
+  hasSolidBackgroundColor?: boolean;
 };
