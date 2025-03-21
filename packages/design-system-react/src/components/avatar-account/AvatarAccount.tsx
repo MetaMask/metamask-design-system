@@ -30,7 +30,6 @@ export const AvatarAccount = React.forwardRef<
           <Blockies
             address={address}
             size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
-            data-testid="blockies"
             {...blockiesProps}
           />
         );
