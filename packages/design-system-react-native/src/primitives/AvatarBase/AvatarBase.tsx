@@ -26,6 +26,7 @@ const AvatarBase = ({
       size,
       shape,
       hasBorder,
+      hasSolidBackgroundColor,
       twClassName,
     });
   }, [size, shape, hasBorder, twClassName]);
