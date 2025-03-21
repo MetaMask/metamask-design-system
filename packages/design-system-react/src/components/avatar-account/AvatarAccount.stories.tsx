@@ -52,6 +52,23 @@ export const Default: Story = {
   },
 };
 
+export const Address: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        variant={AvatarAccountVariant.Blockies}
+      />
+      <AvatarAccount address="0xb9b81f6bd23B953c5257C3b5E2F0c03B07E944eB" />
+      <AvatarAccount
+        address="0xb9b81f6bd23B953c5257C3b5E2F0c03B07E944eB"
+        variant={AvatarAccountVariant.Blockies}
+      />
+    </div>
+  ),
+};
+
 export const Variant: Story = {
   render: () => (
     <div className="flex gap-2">
@@ -86,23 +103,6 @@ export const Size: Story = {
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
         size={AvatarAccountSize.Xl}
-      />
-    </div>
-  ),
-};
-
-export const Address: Story = {
-  render: () => (
-    <div className="flex gap-2">
-      <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
-      <AvatarAccount
-        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-        variant={AvatarAccountVariant.Blockies}
-      />
-      <AvatarAccount address="0xb9b81f6bd23B953c5257C3b5E2F0c03B07E944eB" />
-      <AvatarAccount
-        address="0xb9b81f6bd23B953c5257C3b5E2F0c03B07E944eB"
-        variant={AvatarAccountVariant.Blockies}
       />
     </div>
   ),
