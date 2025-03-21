@@ -86,7 +86,7 @@ export type FontStyle = 'normal' | 'italic';
  * // {
  * //   fontSize: {
  * //     'display-md': {
- * //       fontFamily: 'EuclidCircularB-Bold',
+ * //       fontFamily: 'CentraNo1-Bold',
  * //       fontSize: '32',
  * //       fontWeight: '700',
  * //       letterSpacing: '0',
@@ -95,13 +95,13 @@ export type FontStyle = 'normal' | 'italic';
  * //   },
  * //   fontFamily: {
  * //     sans: [
- * //       'EuclidCircularB',
+ * //       'CentraNo1',
  * //       'Helvetica Neue',
  * //       'Helvetica',
  * //       'Arial',
  * //       'sans-serif',
  * //     ],
- * //     'display-md': 'EuclidCircularB',
+ * //     'display-md': 'CentraNo1',
  * //   },
  * //   letterSpacing: {
  * //     'display-md': '0',

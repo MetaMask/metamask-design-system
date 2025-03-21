@@ -11,13 +11,13 @@ import type { FontStyle, FontWeight } from './typography.types';
  * and style provided.
  * @example
  * getFontFamilyFromWeightAndStyle('400', 'normal');
- * // Returns: 'EuclidCircularB-Regular'
+ * Returns: 'CentraNo1-Book'
  *
  * getFontFamilyFromWeightAndStyle('700', 'italic');
- * // Returns: 'EuclidCircularB-BoldItalic'
+ * Returns: 'CentraNo1-BoldItalic'
  *
  * getFontFamilyFromWeightAndStyle('500');
- * // Returns: 'EuclidCircularB-Medium'
+ * Returns: 'CentraNo1-Medium'
  */
 export const getFontFamilyFromWeightAndStyle = (
   fontWeight: FontWeight = '400',
@@ -41,5 +41,5 @@ export const getFontFamilyFromWeightAndStyle = (
 
   const fontSuffix = weightMap[fontWeight];
 
-  return `EuclidCircularB-${fontSuffix}${styleSuffix}`;
+  return `CentraNo1-${fontSuffix}${styleSuffix}`;
 };

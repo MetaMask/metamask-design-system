@@ -15,7 +15,7 @@ describe('Light Theme', () => {
 
   it('typography tokens are exported from lightTheme by checking first typography token', () => {
     expect(lightTheme.typography.sDisplayMD.fontFamily).toStrictEqual(
-      designTokens.global.fontFamilies['euclid-circular-b'].value,
+      designTokens.global.fontFamilies['centra-no1'].value,
     );
   });
 
