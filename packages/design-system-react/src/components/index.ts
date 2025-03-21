@@ -50,3 +50,16 @@ export type { AvatarFaviconProps } from './avatar-favicon';
 
 export { AvatarIcon, AvatarIconSize, AvatarIconSeverity } from './avatar-icon';
 export type { AvatarIconProps } from './avatar-icon';
+
+export { Jazzicon } from './jazzicon';
+export type { JazziconProps } from './jazzicon';
+
+export {
+  AvatarAccount,
+  AvatarAccountSize,
+  AvatarAccountVariant,
+} from './avatar-account';
+export type { AvatarAccountProps } from './avatar-account';
+
+export { Blockies } from './blockies';
+export type { BlockiesProps } from './blockies';

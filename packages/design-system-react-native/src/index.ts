@@ -46,9 +46,25 @@ import AvatarTokenComponent from './components/AvatarToken';
 export const AvatarToken = withThemeProvider(AvatarTokenComponent);
 export { AvatarTokenProps, AvatarTokenSize } from './components/AvatarToken';
 
+import BadgeCountComponent from './components/BadgeCount';
+export const BadgeCount = withThemeProvider(BadgeCountComponent);
+export { BadgeCountProps, BadgeCountSize } from './components/BadgeCount';
+
 import BadgeIconComponent from './components/BadgeIcon';
 export const BadgeIcon = withThemeProvider(BadgeIconComponent);
-export { BadgeIconProps, BadgeIconVariant } from './components/BadgeIcon';
+export { BadgeIconProps } from './components/BadgeIcon';
+
+import BadgeNetworkComponent from './components/BadgeNetwork';
+export const BadgeNetwork = withThemeProvider(BadgeNetworkComponent);
+export { BadgeNetworkProps } from './components/BadgeNetwork';
+
+import BadgeStatusComponent from './components/BadgeStatus';
+export const BadgeStatus = withThemeProvider(BadgeStatusComponent);
+export {
+  BadgeStatusProps,
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from './components/BadgeStatus';
 
 import BlockiesComponent from './primitives/Blockies';
 export const Blockies = BlockiesComponent;

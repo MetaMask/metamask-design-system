@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.1.0]
+
+### Changed
+
+- chore: Updating brand color blue to brand evolution blurple and theme colors that use blue (e.g. primary and info) ([#474](https://github.com/MetaMask/metamask-design-system/pull/474))
+- chore: All brand evolution color updates with the exception of brand color blue and theme colors that use blue (e.g. primary and info) ([#428](https://github.com/MetaMask/metamask-design-system/pull/428))
+
 ## [5.0.0]
 
 ### Added
@@ -324,7 +331,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@5.0.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@5.1.0...HEAD
+[5.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@5.0.0...@metamask/design-tokens@5.1.0
 [5.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.2.0...@metamask/design-tokens@5.0.0
 [4.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.1.0...@metamask/design-tokens@4.2.0
 [4.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.0.0...@metamask/design-tokens@4.1.0
