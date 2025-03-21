@@ -1,6 +1,8 @@
 import type { ComponentProps } from 'react';
 
 import type { TextProps } from '../text';
+import type { Jazzicon } from '../jazzicon';
+import type { Blockies } from '../blockies';
 
 export enum AvatarAccountSize {
   /**
@@ -52,4 +54,12 @@ export type AvatarAccountProps = Omit<
    * Optional additional CSS classes to be applied to the component
    */
   className?: string;
+  /**
+   * Optional props to be passed to the Jazzicon component
+   */
+  jazziconProps?: Partial<ComponentProps<typeof Jazzicon>>;
+  /**
+   * Optional props to be passed to the Blockies component
+   */
+  blockiesProps?: Partial<ComponentProps<typeof Blockies>>;
 };

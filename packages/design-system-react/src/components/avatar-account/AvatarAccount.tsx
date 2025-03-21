@@ -17,6 +17,8 @@ export const AvatarAccount = React.forwardRef<
       variant = AvatarAccountVariant.Jazzicon,
       className,
       size = AvatarBaseSize.Md,
+      blockiesProps,
+      jazziconProps,
       ...props
     },
     ref,
@@ -29,6 +31,7 @@ export const AvatarAccount = React.forwardRef<
             address={address}
             size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
             data-testid="blockies"
+            {...blockiesProps}
           />
         );
         break;
@@ -38,7 +41,7 @@ export const AvatarAccount = React.forwardRef<
           <Jazzicon
             address={address}
             size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
-            data-testid="jazzicon"
+            {...jazziconProps}
           />
         );
         break;

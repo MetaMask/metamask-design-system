@@ -9,4 +9,8 @@ export type BlockiesProps = ComponentProps<'img'> & {
    * Optional prop to control the size of the Blockies.
    */
   size?: number;
+  /**
+   * Optional prop to add a test id to the icon
+   */
+  'data-testid'?: string;
 };

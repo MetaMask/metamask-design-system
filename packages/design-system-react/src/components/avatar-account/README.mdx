@@ -29,14 +29,7 @@ The `variant` prop controls the type of avatar art rendered. It accepts two opti
 - `AvatarAccountVariant.Jazzicon` (default): Displays a Jazzicon.
 - `AvatarAccountVariant.Blockies`: Displays a Blockies avatar.
 
-Example:
-
-```tsx
-<AvatarAccount
-  address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-  variant={AvatarAccountVariant.Blockies}
-/>
-```
+Access to the Jazzicon and Blockies children components is available through the `jazziconProps` and `blockiesProps` props respectively.
 
 <Canvas of={AvatarAccountStories.Variant} />
 

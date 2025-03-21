@@ -11,7 +11,10 @@ jest.mock('blo', () => ({
 describe('AvatarAccount', () => {
   it('renders Jazzicon variant by default', () => {
     render(
-      <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />,
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        jazziconProps={{ 'data-testid': 'jazzicon' }}
+      />,
     );
     expect(screen.getByTestId('jazzicon')).toBeInTheDocument();
   });
@@ -21,6 +24,7 @@ describe('AvatarAccount', () => {
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
         variant={AvatarAccountVariant.Blockies}
+        blockiesProps={{ 'data-testid': 'blockies' }}
       />,
     );
 
@@ -104,5 +108,35 @@ describe('AvatarAccount', () => {
     );
     const avatar = screen.getByTestId('avatar');
     expect(avatar).toHaveClass('h-8 w-8');
+  });
+
+  it('passes custom props to Jazzicon', () => {
+    render(
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        jazziconProps={{
+          className: 'custom-jazzicon-class',
+          'data-testid': 'jazzicon',
+        }}
+      />,
+    );
+    expect(screen.getByTestId('jazzicon')).toHaveClass('custom-jazzicon-class');
+  });
+
+  it('passes custom props to Blockies', async () => {
+    render(
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        variant={AvatarAccountVariant.Blockies}
+        blockiesProps={{
+          className: 'custom-blockies-class',
+          'data-testid': 'blockies',
+        }}
+      />,
+    );
+    const blockies = await screen.findByTestId('blockies');
+
+    expect(blockies).toBeInTheDocument();
+    expect(blockies).toHaveClass('custom-blockies-class');
   });
 });

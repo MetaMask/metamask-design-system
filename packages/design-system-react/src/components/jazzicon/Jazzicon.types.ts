@@ -9,4 +9,8 @@ export type JazziconProps = ComponentProps<'div'> & {
    * Optional prop to control the size of the Jazzicon.
    */
   size?: number;
+  /**
+   * Optional prop to add a test id to the icon
+   */
+  'data-testid'?: string;
 };
