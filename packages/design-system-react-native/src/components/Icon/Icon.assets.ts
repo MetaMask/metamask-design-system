@@ -98,6 +98,7 @@ import NotificationSVG from './assets/notification.svg';
 import PasswordCheckSVG from './assets/password-check.svg';
 import PeopleSVG from './assets/people.svg';
 import PinSVG from './assets/pin.svg';
+import PlantSVG from './assets/plant.svg';
 import PlugSVG from './assets/plug.svg';
 import PlusMinusSVG from './assets/plus-minus.svg';
 import ProgrammingArrowsSVG from './assets/programming-arrows.svg';
@@ -122,6 +123,7 @@ import SecurityUserSVG from './assets/security-user.svg';
 import SecuritySVG from './assets/security.svg';
 import Send1SVG from './assets/send-1.svg';
 import Send2SVG from './assets/send-2.svg';
+import SendSVG from './assets/send.svg';
 import SettingSVG from './assets/setting.svg';
 import ShareSVG from './assets/share.svg';
 import SlashSVG from './assets/slash.svg';
@@ -258,6 +260,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.PasswordCheck]: PasswordCheckSVG,
   [IconName.People]: PeopleSVG,
   [IconName.Pin]: PinSVG,
+  [IconName.Plant]: PlantSVG,
   [IconName.Plug]: PlugSVG,
   [IconName.PlusMinus]: PlusMinusSVG,
   [IconName.ProgrammingArrows]: ProgrammingArrowsSVG,
@@ -282,6 +285,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.Security]: SecuritySVG,
   [IconName.Send1]: Send1SVG,
   [IconName.Send2]: Send2SVG,
+  [IconName.Send]: SendSVG,
   [IconName.Setting]: SettingSVG,
   [IconName.Share]: ShareSVG,
   [IconName.Slash]: SlashSVG,

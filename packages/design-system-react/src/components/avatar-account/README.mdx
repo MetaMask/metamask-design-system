@@ -1,0 +1,69 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as AvatarAccountStories from './AvatarAccount.stories';
+
+# AvatarAccount
+
+Avatar reserved for representing accounts inside of an avatar
+
+```tsx
+import { AvatarAccount } from '@metamask/design-system-react';
+
+<AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />;
+```
+
+<Canvas of={AvatarAccountStories.Default} />
+
+## Props
+
+### Address (required)
+
+The `address` prop is required and is used as a unique identifier to generate the avatar art. Each address will produce a distinct visual representation.
+
+<Canvas of={AvatarAccountStories.Address} />
+
+### Variant
+
+The `variant` prop controls the type of avatar art rendered. It accepts two options:
+
+- `AvatarAccountVariant.Jazzicon` (default): Displays a Jazzicon.
+- `AvatarAccountVariant.Blockies`: Displays a Blockies avatar.
+
+Access to the Jazzicon and Blockies children components is available through the `jazziconProps` and `blockiesProps` props respectively.
+
+<Canvas of={AvatarAccountStories.Variant} />
+
+### Size
+
+AvatarAccount supports five sizes:
+
+- `AvatarAccountSize.Xs` (16px)
+- `AvatarAccountSize.Sm` (24px)
+- `AvatarAccountSize.Md` (32px) - default
+- `AvatarAccountSize.Lg` (40px)
+- `AvatarAccountSize.Xl` (48px)
+
+The avatar art scales according to the selected size.
+
+<Canvas of={AvatarAccountStories.Size} />
+
+### Class Name
+
+Use the `className` prop to apply custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to add new styles or override defaults as needed.
+
+Example:
+
+```tsx
+<AvatarAccount
+  address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+  className="my-4 mx-2"
+/>
+```
+
+## Component API
+
+<Controls of={AvatarAccountStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
