@@ -50,7 +50,11 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "dependencies": {
+    "@metamask/jazzicon": "^2.0.0",
+    "@metamask/utils": "^11.3.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@solana/addresses": "^2.1.0",
+    "bitcoin-address-validation": "^3.0.0",
     "blo": "^1.2.0",
     "tailwind-merge": "^2.0.0"
   },
