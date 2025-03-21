@@ -6,32 +6,13 @@ The `BadgeIcon` component represents static icons inside of a badge. It is usefu
 
 ## Props
 
-### `variant` (Required)
+### `iconName` (Required)
 
-Determines the type of icon displayed within the badge.
+The name of the icon to be displayed.
 
-| TYPE               | REQUIRED | DEFAULT |
-| :----------------- | :------- | :------ |
-| `BadgeIconVariant` | Yes      | `N/A`   |
-
-Available variants:
-
-- `Custom`
-- `Snaps`
-- `Send`
-- `Stake`
-- `Bridge`
-
-Each variant maps to a predefined icon:
-
-| Variant  | Icon                     |
-| -------- | ------------------------ |
-| `Snaps`  | `IconName.Snaps`         |
-| `Send`   | `IconName.Arrow2UpRight` |
-| `Stake`  | `IconName.Plant`         |
-| `Bridge` | `IconName.Bridge`        |
-
-For the `Custom` variant, you must specify an `iconName`.
+| TYPE       | REQUIRED | DEFAULT |
+| :--------- | :------- | :------ |
+| `IconName` | Yes      | `N/A`   |
 
 ---
 
@@ -71,21 +52,9 @@ Optional prop to control the style of the badge container.
 
 ```tsx
 import React from 'react';
-import BadgeIcon, {
-  BadgeIconVariant,
-} from '@metamask/design-system-react-native';
+import BadgeIcon, { IconName } from '@metamask/design-system-react-native';
 
-<BadgeIcon variant={BadgeIconVariant.Send} />;
-```
-
----
-
-### Using a Custom Icon
-
-```tsx
-import { IconName } from '@metamask/design-system-react-native';
-
-<BadgeIcon variant={BadgeIconVariant.Custom} iconName={IconName.Star} />;
+<BadgeIcon iconName={IconName.Send} />;
 ```
 
 ---
@@ -93,10 +62,14 @@ import { IconName } from '@metamask/design-system-react-native';
 ### Adjusting Icon Properties
 
 ```tsx
-import { IconColor, IconSize } from '@metamask/design-system-react-native';
+import {
+  IconColor,
+  IconSize,
+  IconName,
+} from '@metamask/design-system-react-native';
 
 <BadgeIcon
-  variant={BadgeIconVariant.Stake}
+  iconName={IconName.Send}
   iconProps={{ color: IconColor.SuccessDefault, size: IconSize.Sm }}
 />;
 ```
@@ -106,7 +79,7 @@ import { IconColor, IconSize } from '@metamask/design-system-react-native';
 ### Applying Tailwind Custom Styles
 
 ```tsx
-<BadgeIcon variant={BadgeIconVariant.Bridge} twClassName="bg-blue-500" />
+<BadgeIcon iconName={IconName.Send} twClassName="bg-blue-500" />
 ```
 
 ---
@@ -115,7 +88,6 @@ import { IconColor, IconSize } from '@metamask/design-system-react-native';
 
 - `BadgeIcon` provides a quick visual indication for different actions in the UI.
 - You can override the default icon properties using `iconProps`.
-- The `Custom` variant allows specifying any icon from the `IconName` set.
 - Tailwind classes and custom styles can be applied for further customization.
 
 ---

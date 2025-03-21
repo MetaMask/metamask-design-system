@@ -123,6 +123,7 @@ import SecurityUserSVG from './assets/security-user.svg';
 import SecuritySVG from './assets/security.svg';
 import Send1SVG from './assets/send-1.svg';
 import Send2SVG from './assets/send-2.svg';
+import SendSVG from './assets/send.svg';
 import SettingSVG from './assets/setting.svg';
 import ShareSVG from './assets/share.svg';
 import SlashSVG from './assets/slash.svg';
@@ -131,6 +132,7 @@ import SnapsPlusSVG from './assets/snaps-plus.svg';
 import SnapsSVG from './assets/snaps.svg';
 import SpeedometerSVG from './assets/speedometer.svg';
 import SquareSVG from './assets/square.svg';
+import StakeSVG from './assets/stake.svg';
 import StarSVG from './assets/star.svg';
 import StudentSVG from './assets/student.svg';
 import SwapHorizontalSVG from './assets/swap-horizontal.svg';
@@ -283,6 +285,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.Security]: SecuritySVG,
   [IconName.Send1]: Send1SVG,
   [IconName.Send2]: Send2SVG,
+  [IconName.Send]: SendSVG,
   [IconName.Setting]: SettingSVG,
   [IconName.Share]: ShareSVG,
   [IconName.Slash]: SlashSVG,
@@ -291,6 +294,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.Snaps]: SnapsSVG,
   [IconName.Speedometer]: SpeedometerSVG,
   [IconName.Square]: SquareSVG,
+  [IconName.Stake]: StakeSVG,
   [IconName.Star]: StarSVG,
   [IconName.Student]: StudentSVG,
   [IconName.SwapHorizontal]: SwapHorizontalSVG,

@@ -3,24 +3,25 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import Icon from '../Icon';
-import {
-  DEFAULT_BADGEICON_PROPS,
-  MAP_BADGEICON_VARIANT_ICONNAME,
-} from './BadgeIcon.constants';
+import Icon, { IconSize, IconColor } from '../Icon';
 import type { BadgeIconProps } from './BadgeIcon.types';
-import { BadgeIconVariant } from './BadgeIcon.types';
 
-const BadgeIcon = (props: BadgeIconProps) => {
+const BadgeIcon = ({
+  iconName,
+  iconProps,
+  twClassName = '',
+  style,
+  ...props
+}: BadgeIconProps) => {
   const tw = useTailwind();
-  const { variant, iconProps, twClassName = '', style, ...rest } = props;
-  const twContainerClassNames =
-    `h-4 w-4 bg-icon-default rounded-full items-center justify-center ${twClassName}`.trim();
-
-  const finalIconName =
-    variant === BadgeIconVariant.Custom
-      ? props.iconName
-      : MAP_BADGEICON_VARIANT_ICONNAME[variant];
+  const twContainerClassNames = `
+    h-4 w-4 
+    bg-icon-default 
+    rounded-full 
+    items-center 
+    justify-center 
+    ${twClassName}
+  `.trim();
 
   return (
     <View
@@ -29,10 +30,10 @@ const BadgeIcon = (props: BadgeIconProps) => {
       {...props}
     >
       <Icon
-        color={DEFAULT_BADGEICON_PROPS.iconProps.color} // IconSize.Xs - 12px
+        color={IconColor.PrimaryInverse}
         {...iconProps}
-        size={DEFAULT_BADGEICON_PROPS.iconProps.size} // IconColor.PrimaryInverse
-        name={finalIconName}
+        size={IconSize.Xs}
+        name={iconName}
       />
     </View>
   );
