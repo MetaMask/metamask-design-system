@@ -24,16 +24,16 @@ export const getFontFamilyFromWeightAndStyle = (
   fontStyle: FontStyle = 'normal',
 ): string => {
   const weightMap: { [key in FontWeight]: string } = {
-    '100': 'Regular',
-    '200': 'Regular',
-    '300': 'Regular',
-    '400': 'Regular',
+    '100': 'Book',
+    '200': 'Book',
+    '300': 'Book',
+    '400': 'Book',
     '500': 'Medium',
     '600': 'Medium',
     '700': 'Bold',
     '800': 'Bold',
     '900': 'Bold',
-    normal: 'Regular',
+    normal: 'Book',
     bold: 'Bold',
   };
 
