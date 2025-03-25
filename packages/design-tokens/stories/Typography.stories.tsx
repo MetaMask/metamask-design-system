@@ -25,7 +25,7 @@ export default meta;
 export const FontFamily: StoryFn<typeof Text> = (...args) => {
   const styles = {
     displayMD: {
-      fontFamily: fontFamilies.euclidCircularB,
+      fontFamily: fontFamilies.sans,
       fontSize: fontSizes.fontSize7,
       lineHeight: `${lineHeights.lineHeight6}px`,
       fontWeight: fontWeights.regular,
@@ -34,8 +34,8 @@ export const FontFamily: StoryFn<typeof Text> = (...args) => {
   };
   return (
     <>
-      <Text as="h1" style={styles.displayMD} {...args}>
-        Euclid Circular B
+      <Text style={styles.displayMD} {...args}>
+        Centra No1
       </Text>
     </>
   );
@@ -382,19 +382,19 @@ export const LargeScreen: StoryFn<typeof Text> = (...args) => {
 export const FontWeight: StoryFn<typeof Text> = (...args) => {
   const styles = {
     regular: {
-      fontFamily: fontFamilies.euclidCircularB,
+      fontFamily: fontFamilies.sans,
       fontSize: fontSizes.fontSize4,
       lineHeight: `${lineHeights.lineHeight5}px`,
       fontWeight: fontWeights.regular,
     },
     medium: {
-      fontFamily: fontFamilies.euclidCircularB,
+      fontFamily: fontFamilies.sans,
       fontSize: fontSizes.fontSize4,
       lineHeight: `${lineHeights.lineHeight5}px`,
       fontWeight: fontWeights.medium,
     },
     bold: {
-      fontFamily: fontFamilies.euclidCircularB,
+      fontFamily: fontFamilies.sans,
       fontSize: fontSizes.fontSize4,
       lineHeight: `${lineHeights.lineHeight5}px`,
       fontWeight: fontWeights.bold,

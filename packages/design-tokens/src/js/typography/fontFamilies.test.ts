@@ -4,8 +4,8 @@ import { fontFamilies } from './fontFamilies';
 
 describe('Font Families', () => {
   it('js tokens for font family matches figma tokens', () => {
-    expect(fontFamilies.euclidCircularB).toStrictEqual(
-      designTokens.global.fontFamilies['euclid-circular-b'].value,
+    expect(fontFamilies.sans).toStrictEqual(
+      designTokens.global.fontFamilies['centra-no1'].value,
     );
   });
 });
