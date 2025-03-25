@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
+
 import AvatarNetwork from './AvatarNetwork';
-import { DEFAULT_AVATARNETWORK_PROPS } from './AvatarNetwork.constants';
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };
@@ -21,12 +21,8 @@ describe('AvatarNetwork Component', () => {
 
     const imageOrSvg = getByTestId('image-or-svg');
     expect(imageOrSvg).toBeDefined();
-    expect(imageOrSvg.props.style[0].width).toStrictEqual(
-      DEFAULT_AVATARNETWORK_PROPS.width,
-    );
-    expect(imageOrSvg.props.style[0].height).toStrictEqual(
-      DEFAULT_AVATARNETWORK_PROPS.height,
-    );
+    expect(imageOrSvg.props.style[0].width).toStrictEqual('100%');
+    expect(imageOrSvg.props.style[0].height).toStrictEqual('100%');
 
     expect(imageOrSvg.props.resizeMode).toStrictEqual('contain');
   });

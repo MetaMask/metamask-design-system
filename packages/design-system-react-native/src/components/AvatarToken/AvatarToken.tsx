@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
+import { AvatarBaseShape } from '../../shared/enums';
 import AvatarBase from '../../primitives/AvatarBase';
 import ImageOrSvg from '../../primitives/ImageOrSvg';
-import { DEFAULT_AVATARTOKEN_PROPS } from './AvatarToken.constants';
 import type { AvatarTokenProps } from './AvatarToken.types';
 
 const AvatarToken = ({
   size,
-  shape = DEFAULT_AVATARTOKEN_PROPS.shape,
+  shape = AvatarBaseShape.Circle,
   fallbackText,
   fallbackTextProps,
   hasBorder,
@@ -17,8 +17,8 @@ const AvatarToken = ({
   twClassName,
   testID,
   style,
-  width = DEFAULT_AVATARTOKEN_PROPS.width,
-  height = DEFAULT_AVATARTOKEN_PROPS.height,
+  width = '100%',
+  height = '100%',
   name,
   imageProps,
   onImageError,
