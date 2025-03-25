@@ -104,3 +104,35 @@ export const Severity: Story = {
     </div>
   ),
 };
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarIcon
+        iconName={IconName.User}
+        severity={AvatarIconSeverity.Default}
+      />
+      <AvatarIcon
+        iconName={IconName.User}
+        severity={AvatarIconSeverity.Default}
+        hasBorder
+      />
+    </div>
+  ),
+};
+
+export const HasSolidBackgroundColor: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarIcon
+        iconName={IconName.User}
+        severity={AvatarIconSeverity.Default}
+      />
+      <AvatarIcon
+        iconName={IconName.User}
+        severity={AvatarIconSeverity.Default}
+        hasSolidBackgroundColor
+      />
+    </div>
+  ),
+};

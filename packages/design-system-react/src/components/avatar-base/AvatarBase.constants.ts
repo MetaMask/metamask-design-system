@@ -24,9 +24,9 @@ export const TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE: Record<
 
 export const TWCLASSMAP_AVATARBASE_SIZE_BORDER: Record<AvatarBaseSize, string> =
   {
-    [AvatarBaseSize.Xs]: 'border-background-default border-1',
-    [AvatarBaseSize.Sm]: 'border-background-default border-1',
-    [AvatarBaseSize.Md]: 'border-background-default border-1',
+    [AvatarBaseSize.Xs]: 'border-background-default border',
+    [AvatarBaseSize.Sm]: 'border-background-default border',
+    [AvatarBaseSize.Md]: 'border-background-default border',
     [AvatarBaseSize.Lg]: 'border-background-default border-2',
     [AvatarBaseSize.Xl]: 'border-background-default border-2',
   };

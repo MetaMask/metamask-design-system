@@ -93,7 +93,7 @@ export const Size: Story = {
 
 export const HasBorder: Story = {
   render: () => (
-    <div className="flex gap-2">
+    <div className="flex gap-2 p-2 bg-primary-muted">
       <AvatarBase fallbackText="A" />
       <AvatarBase fallbackText="B" hasBorder />
     </div>
@@ -102,7 +102,7 @@ export const HasBorder: Story = {
 
 export const HasSolidBackgroundColor: Story = {
   render: () => (
-    <div className="flex gap-2">
+    <div className="flex gap-2 p-2 bg-primary-muted">
       <AvatarBase fallbackText="A" />
       <AvatarBase fallbackText="B" hasSolidBackgroundColor />
     </div>

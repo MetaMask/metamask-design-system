@@ -27,7 +27,7 @@ export { AvatarSize as AvatarAccountSize };
 export { AvatarSize as AvatarBaseSize };
 export { AvatarSize as AvatarFaviconSize };
 export { AvatarSize as AvatarGroupSize };
-export { Omit<AvatarSize, 'Xs'> as AvatarIconSize };
+export { AvatarSize as AvatarIconSize };
 export { AvatarSize as AvatarNetworkSize };
 export { AvatarSize as AvatarTokenSize };
 

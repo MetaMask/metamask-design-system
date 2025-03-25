@@ -50,21 +50,23 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
     return (
       <Component ref={ref} className={mergedClassName} style={style} {...props}>
         <div className={'bg-muted absolute top-0 left-0 bottom-0 right-0'} />
-        {children ? (
-          <Slottable>{children}</Slottable>
-        ) : (
-          <Text
-            variant={TextVariant.BodySm}
-            fontWeight={FontWeight.Medium}
-            color={TextColor.TextMuted}
-            asChild
-            className="uppercase z-10"
-            {...fallbackTextProps}
-          >
-            {/* asChild prop renders Text component as a span, it does not create an additional element */}
-            <span>{fallbackText}</span>
-          </Text>
-        )}
+        <div className={'z-10'}>
+          {children ? (
+            <Slottable>{children}</Slottable>
+          ) : (
+            <Text
+              variant={TextVariant.BodySm}
+              fontWeight={FontWeight.Medium}
+              color={TextColor.TextMuted}
+              asChild
+              className="uppercase z-10"
+              {...fallbackTextProps}
+            >
+              {/* asChild prop renders Text component as a span, it does not create an additional element */}
+              <span>{fallbackText}</span>
+            </Text>
+          )}
+        </div>
       </Component>
     );
   },
