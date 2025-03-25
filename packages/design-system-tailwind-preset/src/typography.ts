@@ -20,13 +20,7 @@ export const typography = {
     'l-body-xs': 'var(--typography-l-body-xs-font-size)',
   },
   fontFamily: {
-    sans: [
-      'Euclid Circular B', // This should match @font-face set in tailwind.css
-      'Helvetica Neue',
-      'Helvetica',
-      'Arial',
-      'sans-serif',
-    ],
+    sans: ['var(--font-family-sans)'],
     // small screen typography
     's-display-md': 'var(--typography-s-display-md-font-family)',
     's-heading-lg': 'var(--typography-s-heading-lg-font-family)',

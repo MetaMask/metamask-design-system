@@ -17,7 +17,7 @@ describe('AvatarBase', () => {
       expect(classNames).toContain(
         'items-center justify-center overflow-hidden',
       );
-      expect(classNames).toContain('bg-background-default');
+      expect(classNames).toContain('bg-transparent'); // Default hasSolidBackgroundColor = false
       expect(classNames).toContain(`h-[${DEFAULT_AVATARBASE_PROPS.size}px]`);
       expect(classNames).toContain(`w-[${DEFAULT_AVATARBASE_PROPS.size}px]`);
       expect(classNames).toContain('rounded-full'); // Default shape
@@ -66,6 +66,13 @@ describe('AvatarBase', () => {
       });
     });
 
+    it('applies correct solid background color when hasSolidBackgroundColor is true', () => {
+      const classNames = generateAvatarBaseContainerClassNames({
+        hasSolidBackgroundColor: true,
+      });
+      expect(classNames).toContain('bg-background-default');
+    });
+
     it('appends additional Tailwind class names', () => {
       const classNames = generateAvatarBaseContainerClassNames({
         twClassName: 'shadow-lg ring-2',
@@ -81,12 +88,13 @@ describe('AvatarBase', () => {
         size,
         shape: AvatarBaseShape.Square,
         hasBorder: true,
+        hasSolidBackgroundColor: true,
         twClassName: 'border border-blue-500',
       });
       expect(classNames).toContain(
         'items-center justify-center overflow-hidden',
       );
-      expect(classNames).toContain('bg-background-default');
+      expect(classNames).toContain('bg-background-default'); // Solid background enabled
       expect(classNames).toContain(`h-[${expectedSize}px]`);
       expect(classNames).toContain(`w-[${expectedSize}px]`);
       expect(classNames).toContain(TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size]);

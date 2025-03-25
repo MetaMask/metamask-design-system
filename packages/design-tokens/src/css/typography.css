@@ -3,9 +3,8 @@
  */
 :root {
   /* font family */
-  --font-family-euclid-circular-b: 'Euclid Circular B', sans-serif;
-  --font-family-roboto: 'Roboto', sans-serif;
-  --font-family-sans: 'Euclid Circular B', 'Roboto', sans-serif;
+  --font-family-sans: 'Centra No1', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
   /* font sizes */
   --font-size-base: 16px;
   --font-size-1: 0.625rem;

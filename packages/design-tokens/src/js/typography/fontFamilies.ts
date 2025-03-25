@@ -1,3 +1,3 @@
 export const fontFamilies = {
-  euclidCircularB: 'Euclid Circular B',
+  sans: 'Centra No1',
 };
