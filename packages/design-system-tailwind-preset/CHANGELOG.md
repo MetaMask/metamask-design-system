@@ -9,10 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0]
 
-### Uncategorized
+### Changed
 
-- chore: adding centra fonts to design system ([#499](https://github.com/MetaMask/metamask-design-system/pull/499))
-- chore: upgrade design tokens in monorepo ([#498](https://github.com/MetaMask/metamask-design-system/pull/498))
+- Updated to use new font family configuration from @metamask/design-tokens@6.0.0 ([#499](https://github.com/MetaMask/metamask-design-system/pull/499)). Note: This includes breaking changes in the design-tokens package - see the [@metamask/design-tokens migration guide](../design-tokens/MIGRATION.md#from-version-510-to-600) for details.
 
 ## [0.1.0]
 
