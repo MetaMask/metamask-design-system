@@ -1,12 +1,10 @@
 import type { ComponentProps } from 'react';
 
+import { AvatarBaseProps } from '../avatar-base';
 import type { TextProps } from '../text';
 import { AvatarTokenSize } from '../../types';
 
-export type AvatarTokenProps = Omit<
-  ComponentProps<'img'>,
-  'children' | 'size'
-> & {
+export type AvatarTokenProps = Omit<AvatarBaseProps, 'children' | 'size'> & {
   /**
    * Required name of the token
    * Used as alt text for image and first letter is used as fallback if no fallbackText provided
@@ -27,32 +25,4 @@ export type AvatarTokenProps = Omit<
    * @default AvatarTokenSize.Md
    */
   size?: AvatarTokenSize;
-  /**
-   * Optional text to display when no image is provided
-   * If not provided, first letter of name will be used
-   */
-  fallbackText?: string;
-  /**
-   * Optional props to be passed to the Text component when rendering fallback text
-   * Only used when src is not provided
-   */
-  fallbackTextProps?: Partial<
-    React.HTMLAttributes<HTMLSpanElement> & TextProps
-  >;
-  /**
-   * Optional additional CSS classes to be applied to the component
-   */
-  className?: string;
-  /**
-   * Optional prop to include the border with the Avatar.
-   * For internal use only
-   * @default false
-   */
-  hasBorder?: boolean;
-  /**
-   * Optional prop to make sure there's no transparency in the background color
-   * For internal use only
-   * @default false
-   */
-  hasSolidBackgroundColor?: boolean;
 };
