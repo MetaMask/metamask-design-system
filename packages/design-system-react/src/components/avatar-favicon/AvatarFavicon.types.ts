@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 
 import type { TextProps } from '../text';
-import { AvatarFaviconSize } from '../../types';
+import { AvatarFaviconSize } from '.';
 
 export type AvatarFaviconProps = Omit<
   ComponentProps<'img'>,
@@ -43,16 +43,4 @@ export type AvatarFaviconProps = Omit<
    * Optional additional CSS classes to be applied to the component
    */
   className?: string;
-  /**
-   * Optional prop to include the border with the Avatar.
-   * For internal use only
-   * @default false
-   */
-  hasBorder?: boolean;
-  /**
-   * Optional prop to make sure there's no transparency in the background color
-   * For internal use only
-   * @default false
-   */
-  hasSolidBackgroundColor?: boolean;
 };

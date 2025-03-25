@@ -1,9 +1,6 @@
-import { AvatarBaseSize } from '../../types';
+import { AvatarBaseSize } from './AvatarBase.types';
 
-export const TWCLASSMAP_AVATARBASE_SIZE_DIMENSION: Record<
-  AvatarBaseSize,
-  string
-> = {
+export const AVATAR_BASE_SIZE_CLASS_MAP: Record<AvatarBaseSize, string> = {
   [AvatarBaseSize.Xs]: 'h-4 w-4',
   [AvatarBaseSize.Sm]: 'h-6 w-6',
   [AvatarBaseSize.Md]: 'h-8 w-8',
@@ -11,7 +8,7 @@ export const TWCLASSMAP_AVATARBASE_SIZE_DIMENSION: Record<
   [AvatarBaseSize.Xl]: 'h-12 w-12',
 };
 
-export const TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE: Record<
+export const AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP: Record<
   AvatarBaseSize,
   string
 > = {
@@ -21,12 +18,3 @@ export const TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE: Record<
   [AvatarBaseSize.Lg]: 'rounded-[10px]', // 10px (No tailwind class for this)
   [AvatarBaseSize.Xl]: 'rounded-xl', // 12px
 };
-
-export const TWCLASSMAP_AVATARBASE_SIZE_BORDER: Record<AvatarBaseSize, string> =
-  {
-    [AvatarBaseSize.Xs]: 'border-background-default border-1',
-    [AvatarBaseSize.Sm]: 'border-background-default border-1',
-    [AvatarBaseSize.Md]: 'border-background-default border-1',
-    [AvatarBaseSize.Lg]: 'border-background-default border-2',
-    [AvatarBaseSize.Xl]: 'border-background-default border-2',
-  };

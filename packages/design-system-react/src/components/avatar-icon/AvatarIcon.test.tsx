@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { AvatarIconSize } from '../../types';
 import { IconName } from '../icon';
 import { AvatarIcon } from './AvatarIcon';
 import {
-  TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
-  MAP_AVATARICON_SEVERITY_ICONCOLOR,
+  AVATAR_ICON_SEVERITY_CLASSNAME_MAP,
+  AVATAR_ICON_SIZE_TO_ICON_SIZE_CLASSNAME_MAP,
 } from './AvatarIcon.constants';
 import { AvatarIconSeverity } from './AvatarIcon.types';
+import { AvatarIconSize } from '.';
 import { ICON_SIZE_CLASS_MAP } from '../icon/Icon.constants';
 
 describe('AvatarIcon', () => {
@@ -19,9 +19,7 @@ describe('AvatarIcon', () => {
     const avatarIcon = screen.getByTestId('avatar-icon');
     expect(avatarIcon).toBeInTheDocument();
     expect(avatarIcon).toHaveClass(
-      TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[
-        AvatarIconSeverity.Default
-      ],
+      AVATAR_ICON_SEVERITY_CLASSNAME_MAP[AvatarIconSeverity.Default].background,
     );
   });
 
@@ -66,9 +64,11 @@ describe('AvatarIcon', () => {
         const avatarIcon = screen.getByTestId('avatar-icon');
         const icon = screen.getByTestId('icon');
         expect(avatarIcon).toHaveClass(
-          TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity],
+          AVATAR_ICON_SEVERITY_CLASSNAME_MAP[severity].background,
         );
-        expect(icon).toHaveClass(MAP_AVATARICON_SEVERITY_ICONCOLOR[severity]);
+        expect(icon).toHaveClass(
+          AVATAR_ICON_SEVERITY_CLASSNAME_MAP[severity].iconColor,
+        );
       });
     });
   });

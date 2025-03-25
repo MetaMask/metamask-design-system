@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { AvatarTokenSize } from '../../types';
-import { AvatarBase, AvatarBaseShape } from '../avatar-base';
+import { AvatarBase, AvatarBaseShape, AvatarBaseSize } from '../avatar-base';
 import type { AvatarTokenProps } from './AvatarToken.types';
 
 export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
@@ -12,7 +11,7 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
       fallbackText,
       fallbackTextProps,
       className,
-      size = AvatarTokenSize.Md,
+      size = AvatarBaseSize.Md,
       imageProps,
       ...props
     },
