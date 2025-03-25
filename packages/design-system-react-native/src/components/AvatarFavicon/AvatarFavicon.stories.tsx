@@ -1,10 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ImageSourcePropType, View } from 'react-native';
 
-import { AvatarFaviconSize } from '../../shared/enums';
 import AvatarFavicon from './AvatarFavicon';
-import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.constants';
+import {
+  DEFAULT_AVATARFAVICON_PROPS,
+  SAMPLE_AVATARFAVICON_URIS,
+} from './AvatarFavicon.constants';
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
+import { AvatarSize } from '../../shared/enums';
 
 const meta: Meta<AvatarFaviconProps> = {
   title: 'Components/AvatarFavicon',
@@ -12,7 +15,7 @@ const meta: Meta<AvatarFaviconProps> = {
   argTypes: {
     size: {
       control: 'select',
-      options: AvatarFaviconSize,
+      options: AvatarSize,
     },
     twClassName: {
       control: 'text',
@@ -29,7 +32,7 @@ const storyImageSource: ImageSourcePropType = {
 
 export const Default: Story = {
   args: {
-    size: AvatarFaviconSize.Md,
+    size: DEFAULT_AVATARFAVICON_PROPS.size,
     twClassName: '',
   },
   render: (args) => <AvatarFavicon {...args} src={storyImageSource} />,
@@ -38,11 +41,11 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      {Object.keys(AvatarFaviconSize).map((sizeKey) => (
+      {Object.keys(AvatarSize).map((sizeKey) => (
         <AvatarFavicon
           src={storyImageSource}
           key={sizeKey}
-          size={AvatarFaviconSize[sizeKey as keyof typeof AvatarFaviconSize]}
+          size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
         />
       ))}
     </View>

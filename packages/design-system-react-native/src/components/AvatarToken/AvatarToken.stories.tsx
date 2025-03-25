@@ -1,10 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ImageSourcePropType, View } from 'react-native';
 
-import { AvatarTokenSize } from '../../shared/enums';
 import AvatarToken from './AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.constants';
+import {
+  DEFAULT_AVATARTOKEN_PROPS,
+  SAMPLE_AVATARTOKEN_URIS,
+} from './AvatarToken.constants';
 import type { AvatarTokenProps } from './AvatarToken.types';
+import { AvatarSize } from '../../shared/enums';
 
 const meta: Meta<AvatarTokenProps> = {
   title: 'Components/AvatarToken',
@@ -12,7 +15,7 @@ const meta: Meta<AvatarTokenProps> = {
   argTypes: {
     size: {
       control: 'select',
-      options: AvatarTokenSize,
+      options: AvatarSize,
     },
     twClassName: {
       control: 'text',
@@ -29,7 +32,7 @@ const storyImageSource: ImageSourcePropType = {
 
 export const Default: Story = {
   args: {
-    size: AvatarTokenSize.Md,
+    size: DEFAULT_AVATARTOKEN_PROPS.size,
     twClassName: '',
   },
   render: (args) => <AvatarToken {...args} src={storyImageSource} />,
@@ -38,11 +41,11 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      {Object.keys(AvatarTokenSize).map((sizeKey) => (
+      {Object.keys(AvatarSize).map((sizeKey) => (
         <AvatarToken
           src={storyImageSource}
           key={sizeKey}
-          size={AvatarTokenSize[sizeKey as keyof typeof AvatarTokenSize]}
+          size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
         />
       ))}
     </View>

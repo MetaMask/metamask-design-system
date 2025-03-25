@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { AvatarAccountSize } from '../../shared/enums';
 import AvatarAccount from './AvatarAccount';
-import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
+import {
+  DEFAULT_AVATARACCOUNT_PROPS,
+  SAMPLE_AVATARACCOUNT_ADDRESSES,
+} from './AvatarAccount.constants';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 import { AvatarSize } from '../../shared/enums';
 import { AvatarAccountVariant } from './AvatarAccount.types';
@@ -14,7 +16,7 @@ const meta: Meta<AvatarAccountProps> = {
   argTypes: {
     size: {
       control: 'select',
-      options: AvatarAccountSize,
+      options: AvatarSize,
     },
     variant: {
       control: 'select',
@@ -31,8 +33,8 @@ export default meta;
 type Story = StoryObj<AvatarAccountProps>;
 export const Default: Story = {
   args: {
-    size: AvatarAccountSize.Md,
-    variant: AvatarAccountVariant.Jazzicon,
+    size: DEFAULT_AVATARACCOUNT_PROPS.size,
+    variant: DEFAULT_AVATARACCOUNT_PROPS.variant,
     twClassName: '',
   },
   render: (args) => {

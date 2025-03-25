@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import AvatarToken from './AvatarToken';
+import { DEFAULT_AVATARTOKEN_PROPS } from './AvatarToken.constants';
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };
@@ -20,8 +21,12 @@ describe('AvatarToken Component', () => {
 
     const imageOrSvg = getByTestId('image-or-svg');
     expect(imageOrSvg).toBeDefined();
-    expect(imageOrSvg.props.style[0].width).toStrictEqual('100%');
-    expect(imageOrSvg.props.style[0].height).toStrictEqual('100%');
+    expect(imageOrSvg.props.style[0].width).toStrictEqual(
+      DEFAULT_AVATARTOKEN_PROPS.width,
+    );
+    expect(imageOrSvg.props.style[0].height).toStrictEqual(
+      DEFAULT_AVATARTOKEN_PROPS.height,
+    );
 
     expect(imageOrSvg.props.resizeMode).toStrictEqual('contain');
   });

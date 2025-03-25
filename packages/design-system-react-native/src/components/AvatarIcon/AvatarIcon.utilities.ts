@@ -1,8 +1,10 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
 import type { AvatarIconProps } from './AvatarIcon.types';
-import { AvatarIconSeverity } from './AvatarIcon.types';
-import { TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR } from './AvatarIcon.constants';
+import {
+  TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
+  DEFAULT_AVATARICON_PROPS,
+} from './AvatarIcon.constants';
 
 /**
  * Generates a Tailwind class name string for the background color of an avatar icon.
@@ -26,7 +28,7 @@ import { TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR } from './AvatarIcon.con
  * ```
  */
 export const generateAvatarIconContainerClassNames = ({
-  severity = AvatarIconSeverity.Default,
+  severity = DEFAULT_AVATARICON_PROPS.severity,
   twClassName = '',
 }: Partial<AvatarIconProps>): string => {
   return `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity]} ${twClassName}`.trim();

@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
-import { AvatarFaviconSize, AvatarBaseShape } from '../../shared/enums';
 import AvatarBase from '../../primitives/AvatarBase';
 import ImageOrSvg from '../../primitives/ImageOrSvg';
+import { DEFAULT_AVATARFAVICON_PROPS } from './AvatarFavicon.constants';
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
 
 const AvatarFavicon = ({
-  size = AvatarFaviconSize.Md,
-  shape = AvatarBaseShape.Circle,
+  size,
+  shape = DEFAULT_AVATARFAVICON_PROPS.shape,
   fallbackText,
   fallbackTextProps,
   hasBorder,
@@ -17,8 +17,8 @@ const AvatarFavicon = ({
   twClassName,
   testID,
   style,
-  width = '100%',
-  height = '100%',
+  width = DEFAULT_AVATARFAVICON_PROPS.width,
+  height = DEFAULT_AVATARFAVICON_PROPS.height,
   name,
   imageProps,
   onImageError,

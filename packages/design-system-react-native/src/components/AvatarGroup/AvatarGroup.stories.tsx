@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { AvatarGroupSize } from '../../shared/enums';
 import AvatarGroup from './AvatarGroup';
 import {
+  DEFAULT_AVATARGROUP_PROPS,
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
   SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR,
   SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
@@ -83,9 +84,9 @@ const AvatarGroupStory: React.FC<Omit<AvatarGroupProps, 'avatarPropsArr'>> = ({
 export const Default: Story = {
   args: {
     variant: AvatarGroupVariant.Favicon,
-    size: AvatarGroupSize.Md,
-    max: 99,
-    isReverse: false,
+    size: DEFAULT_AVATARGROUP_PROPS.size,
+    max: DEFAULT_AVATARGROUP_PROPS.max,
+    isReverse: DEFAULT_AVATARGROUP_PROPS.isReverse,
     twClassName: '',
   },
   render: (args) => <AvatarGroupStory {...args} />,
