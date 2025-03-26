@@ -47,28 +47,11 @@ type Story = StoryObj<BadgeStatusProps>;
 
 export const Default: Story = {
   args: {
-    size: BadgeStatusSize.Md,
     status: BadgeStatusStatus.Active,
-    hasBorder: true,
-    className: '',
   },
   render: (args) => (
     <div className="flex gap-2 items-center bg-warning-muted p-1">
       <BadgeStatus {...args} />
-    </div>
-  ),
-};
-
-export const Size: Story = {
-  render: () => (
-    <div className="flex gap-2 items-center bg-warning-muted p-1">
-      {Object.keys(BadgeStatusSize).map((sizeKey) => (
-        <BadgeStatus
-          key={sizeKey}
-          size={BadgeStatusSize[sizeKey as keyof typeof BadgeStatusSize]}
-          status={BadgeStatusStatus.Active}
-        />
-      ))}
     </div>
   ),
 };
@@ -82,6 +65,20 @@ export const Status: Story = {
           status={
             BadgeStatusStatus[statusKey as keyof typeof BadgeStatusStatus]
           }
+        />
+      ))}
+    </div>
+  ),
+};
+
+export const Size: Story = {
+  render: () => (
+    <div className="flex gap-2 items-center bg-warning-muted p-1">
+      {Object.keys(BadgeStatusSize).map((sizeKey) => (
+        <BadgeStatus
+          key={sizeKey}
+          size={BadgeStatusSize[sizeKey as keyof typeof BadgeStatusSize]}
+          status={BadgeStatusStatus.Active}
         />
       ))}
     </div>
