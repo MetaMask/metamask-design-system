@@ -1,0 +1,71 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as BadgeStatusStories from './BadgeStatus.stories';
+
+# BadgeStatus
+
+BadgeStatus indicates the status an entity is on.
+
+```tsx
+import { BadgeStatus } from '@metamask/design-system-react';
+
+<BadgeStatus status={BadgeStatusStatus.Active} />;
+```
+
+<Canvas of={BadgeStatusStories.Default} />
+
+## Props
+
+### Status
+
+Use the `status` prop to indicate the visual state of the badge. Supported values:
+
+- `BadgeStatusStatus.Active`
+- `BadgeStatusStatus.PartiallyActive`
+- `BadgeStatusStatus.Inactive`
+- `BadgeStatusStatus.New`
+- `BadgeStatusStatus.Attention`
+
+<Canvas of={BadgeStatusStories.Status} />
+
+### Size
+
+BadgeStatus supports two size options:
+
+- `BadgeStatusSize.Md` (8px) – default
+- `BadgeStatusSize.Lg` (10px)
+
+<Canvas of={BadgeStatusStories.Size} />
+
+### Has Border
+
+The `hasBorder` prop adds an outer border to the badge, often used to separate the status from surrounding backgrounds. Default is `true`.
+
+<Canvas of={BadgeStatusStories.HasBorder} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the BadgeStatus component. These classes are merged with the component's default styles using `twMerge`, allowing you to:
+
+- Add new utility styles
+- Override default styles when needed
+
+```tsx
+// Custom border and spacing
+<BadgeStatus
+  status={BadgeStatusStatus.Active}
+  className="border-warning-default ml-2"
+/>
+```
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with Tailwind or className alone. For static styles, prefer `className`.
+
+## Component API
+
+<Controls of={BadgeStatusStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
