@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.0]
+
+### Changed
+
+- **BREAKING:** Replaced Euclid Circular B with Centra No1 as the primary font family ([#499](https://github.com/MetaMask/metamask-design-system/pull/499)). See the [migration guide](./MIGRATION.md#from-version-510-to-600) for details.
+
+  - Removed `--font-family-euclid-circular-b` and `--font-family-roboto` CSS variables
+  - Changed `--font-family-sans` to use Centra No1 with updated fallback chain
+  - Updated font files from Euclid Circular B to Centra No1 (where 'Book' is the 400 weight variant)
+  - Applications using the design system will need to update font imports and references
+
 ## [5.1.0]
 
 ### Changed
@@ -331,7 +342,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@5.1.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.0.0...HEAD
+[6.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@5.1.0...@metamask/design-tokens@6.0.0
 [5.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@5.0.0...@metamask/design-tokens@5.1.0
 [5.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.2.0...@metamask/design-tokens@5.0.0
 [4.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@4.1.0...@metamask/design-tokens@4.2.0
