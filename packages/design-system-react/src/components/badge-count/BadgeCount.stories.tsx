@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { TextColor } from '../text';
+import { FontWeight, TextColor } from '../text';
 import { BadgeCount } from './BadgeCount';
 import { BadgeCountSize } from './BadgeCount.types';
 import type { BadgeCountProps } from './BadgeCount.types';
@@ -70,15 +70,6 @@ export const Max: Story = {
     <div className="flex gap-2 items-center">
       <BadgeCount count={10} />
       <BadgeCount count={100} />
-    </div>
-  ),
-};
-
-export const CountWithTextProps: Story = {
-  render: () => (
-    <div className="flex gap-2">
-      <BadgeCount count={10} textProps={{ color: TextColor.PrimaryDefault }} />
-      <BadgeCount count={100} textProps={{ color: TextColor.PrimaryDefault }} />
     </div>
   ),
 };

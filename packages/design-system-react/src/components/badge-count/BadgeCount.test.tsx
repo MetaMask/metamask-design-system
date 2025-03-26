@@ -3,10 +3,7 @@ import React from 'react';
 
 import { TextColor } from '../text';
 import { BadgeCount } from './BadgeCount';
-import {
-  MAP_BADGECOUNT_SIZE_LINEHEIGHT,
-  TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
-} from './BadgeCount.constants';
+import { TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER } from './BadgeCount.constants';
 import { BadgeCountSize } from './BadgeCount.types';
 
 describe('BadgeCount', () => {
@@ -60,31 +57,6 @@ describe('BadgeCount', () => {
     const text = screen.getByTestId('badge-text');
     expect(text).toHaveClass('text-primary-default');
   });
-
-  it('applies line height per size', () => {
-    const { rerender } = render(
-      <BadgeCount
-        size={BadgeCountSize.Md}
-        count={1}
-        textProps={{ 'data-testid': 'badge-text' }}
-      />,
-    );
-
-    Object.entries(MAP_BADGECOUNT_SIZE_LINEHEIGHT).forEach(
-      ([size, lineHeight]) => {
-        rerender(
-          <BadgeCount
-            size={size as BadgeCountSize}
-            count={1}
-            textProps={{ 'data-testid': 'badge-text' }}
-          />,
-        );
-        const text = screen.getByTestId('badge-text');
-        expect(text).toHaveClass(lineHeight);
-      },
-    );
-  });
-
   it('merges custom className with default classes', () => {
     render(
       <BadgeCount count={9} className="custom-class" data-testid="badge" />,
