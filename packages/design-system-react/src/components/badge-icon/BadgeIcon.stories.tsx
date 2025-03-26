@@ -54,22 +54,3 @@ export const IconNameStory: Story = {
   ),
   name: 'IconName',
 };
-
-export const IconNameWithIconProps: Story = {
-  render: () => (
-    <div className="flex gap-2">
-      <BadgeIcon
-        iconName={IconName.Arrow2UpRight}
-        iconProps={{ color: IconColor.PrimaryDefault }}
-      />
-      <BadgeIcon
-        iconName={IconName.User}
-        iconProps={{ color: IconColor.ErrorDefault }}
-      />
-      <BadgeIcon
-        iconName={IconName.Setting}
-        iconProps={{ color: IconColor.SuccessDefault }}
-      />
-    </div>
-  ),
-};

@@ -42,7 +42,7 @@ describe('BadgeIcon', () => {
       />,
     );
     const icon = screen.getByTestId('icon');
-    expect(icon).toHaveClass('custom-icon-class');
+    expect(icon).toHaveClass('custom-icon-class text-error-default');
   });
 
   it('applies custom className', () => {

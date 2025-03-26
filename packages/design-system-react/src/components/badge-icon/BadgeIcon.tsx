@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Icon, IconSize, IconColor } from '../icon';
+import { Icon, IconSize } from '../icon';
 import type { BadgeIconProps } from './BadgeIcon.types';
 
 export const BadgeIcon = React.forwardRef<HTMLDivElement, BadgeIconProps>(
@@ -15,10 +15,13 @@ export const BadgeIcon = React.forwardRef<HTMLDivElement, BadgeIconProps>(
     return (
       <div ref={ref} className={mergedClassName} style={style} {...props}>
         <Icon
-          color={IconColor.PrimaryInverse}
-          {...iconProps}
           size={IconSize.Xs}
           name={iconName}
+          {...iconProps}
+          className={twMerge(
+            iconProps?.color ? '' : 'text-background-default', // if color is provided, use it, otherwise use background default
+            iconProps?.className,
+          )}
         />
       </div>
     );

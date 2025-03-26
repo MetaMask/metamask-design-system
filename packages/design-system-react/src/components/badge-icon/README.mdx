@@ -20,13 +20,9 @@ import { BadgeIcon } from '@metamask/design-system-react';
 
 Use the `iconName` prop to define which icon should appear inside the badge. This prop is required.
 
+Note: The `Icon` component is a child of the `BadgeIcon` component. Use the `iconProps` prop to customize the internal `Icon` component, such as changing the icon color.
+
 <Canvas of={BadgeIconStories.IconNameStory} />
-
-### Icon Props
-
-Use the `iconProps` prop to customize the internal `Icon` component, such as changing the icon color.
-
-<Canvas of={BadgeIconStories.IconNameWithIconProps} />
 
 ### Class Name
 
