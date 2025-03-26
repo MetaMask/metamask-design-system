@@ -27,12 +27,12 @@ const BadgeWrapper = ({
   const [badgeWidth, setbadgeWidth] = useState<number>(0);
   const [badgeHeight, setbadgeHeight] = useState<number>(0);
 
+  // Fetching the dimensions of the anchor and bagde element to properly position the badge
   const getAnchorSize = useCallback((event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout;
     setAnchorWidth(width);
     setAnchorHeight(height);
   }, []);
-
   const getBadgeSize = useCallback((event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout;
     setbadgeWidth(width);
@@ -40,27 +40,32 @@ const BadgeWrapper = ({
   }, []);
 
   const finalPositions = useMemo(() => {
-    const shapeXOffset =
+    if (customPosition) {
+      return customPosition;
+    }
+    // 0.1464 is a mathematical coeeficient to move
+    // from a 0,0 corner of a rectangular shape to the closest "corner"
+    // of a circular shape anchor element
+    const anchorShapeXOffset =
       positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
         ? 0
         : anchorWidth * 0.1464;
-    const shapeYOffset =
+    const anchorShapeYOffset =
       positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
         ? 0
         : anchorHeight * 0.1464;
+    // This is to center the badge in the corner of the anchor element
     const badgeCenteringXOffset = badgeWidth / 2;
     const badgeCenteringYOffset = badgeHeight / 2;
-    const finalXOffset = shapeXOffset - badgeCenteringXOffset + positionXOffset;
-    const finalYOffset = shapeYOffset - badgeCenteringYOffset + positionYOffset;
+
+    const finalXOffset =
+      anchorShapeXOffset - badgeCenteringXOffset + positionXOffset;
+    const finalYOffset =
+      anchorShapeYOffset - badgeCenteringYOffset + positionYOffset;
     switch (position) {
       case BadgeWrapperPosition.TopRight:
         return {
           top: finalYOffset,
-          right: finalXOffset,
-        };
-      case BadgeWrapperPosition.BottomRight:
-        return {
-          bottom: finalYOffset,
           right: finalXOffset,
         };
       case BadgeWrapperPosition.BottomLeft:
@@ -73,20 +78,27 @@ const BadgeWrapper = ({
           top: finalYOffset,
           left: finalXOffset,
         };
+      case BadgeWrapperPosition.BottomRight:
       default:
-        return customPosition;
+        return {
+          bottom: finalYOffset,
+          right: finalXOffset,
+        };
     }
   }, [
+    position,
+    positionAnchorShape,
     anchorWidth,
     anchorHeight,
     badgeWidth,
     badgeHeight,
     positionXOffset,
     positionYOffset,
+    customPosition,
   ]);
 
   return (
-    <View style={tw`relative self-start`}>
+    <View style={[tw`relative self-start`, style]} {...props}>
       <View onLayout={getAnchorSize}>{children}</View>
       <View
         onLayout={getBadgeSize}

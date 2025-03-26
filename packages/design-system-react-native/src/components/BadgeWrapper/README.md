@@ -1,90 +1,118 @@
-# AvatarBase
+# BadgeWrapper
 
-The `AvatarBase` component is the base component for all avatar variants.
+The `BadgeWrapper` component allows you to attach any badge (e.g., `BadgeNetwork`, `BadgeCount`, `BadgeStatus`) to another component such as an `Avatar`. It supports various position presets, anchor shape alignment, and full control via custom positioning.
 
 ---
 
 ## Props
 
-### `children`
+### `children` (Required)
 
-Optional prop for the content to be rendered within the `AvatarBase`.
+The main element that the badge will be anchored to.
 
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `ReactNode` | No       | `null`  |
-
----
-
-### `size`
-
-Optional prop to control the size of the `AvatarBase`.
-
-| TYPE             | REQUIRED | DEFAULT             |
-| :--------------- | :------- | :------------------ |
-| `AvatarBaseSize` | No       | `AvatarBaseSize.Md` |
-
-Available sizes:
-
-- `AvatarBaseSize.Xs` (16px)
-- `AvatarBaseSize.Sm` (24px)
-- `AvatarBaseSize.Md` (32px)
-- `AvatarBaseSize.Lg` (40px)
-- `AvatarBaseSize.Xl` (48px)
+| TYPE              | REQUIRED | DESCRIPTION                            |
+| ----------------- | -------- | -------------------------------------- |
+| `React.ReactNode` | Yes      | Anchor element to attach the badge to. |
 
 ---
 
-### `shape`
+### `badge` (Required)
 
-Optional prop to control the shape of the `AvatarBase`.
+The badge element that is positioned relative to the `children`.
 
-| TYPE              | REQUIRED | DEFAULT                  |
-| :---------------- | :------- | :----------------------- |
-| `AvatarBaseShape` | No       | `AvatarBaseShape.Circle` |
-
-Available shapes:
-
-- `AvatarBaseShape.Circle`
-- `AvatarBaseShape.Square`
+| TYPE              | REQUIRED | DESCRIPTION              |
+| ----------------- | -------- | ------------------------ |
+| `React.ReactNode` | Yes      | Badge element to render. |
 
 ---
 
-### `fallbackText`
+### `position`
 
-Optional text to be displayed when the avatar content fails to render.
+Optional preset to determine badge placement.
+
+| TYPE                   | REQUIRED | DEFAULT                            |
+| ---------------------- | -------- | ---------------------------------- |
+| `BadgeWrapperPosition` | No       | `BadgeWrapperPosition.BottomRight` |
+
+Options:
+
+- `TopRight`
+- `BottomRight`
+- `BottomLeft`
+- `TopLeft`
+
+---
+
+### `positionAnchorShape`
+
+Specifies the shape of the anchor to adjust badge alignment.
+
+| TYPE                              | REQUIRED | DEFAULT                                    |
+| --------------------------------- | -------- | ------------------------------------------ |
+| `BadgeWrapperPositionAnchorShape` | No       | `BadgeWrapperPositionAnchorShape.Circular` |
+
+Options:
+
+- `Circular`
+- `Rectangular`
+
+---
+
+### `positionXOffset`
+
+Horizontal adjustment for the badge position.
 
 | TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `null`  |
+| -------- | -------- | ------- |
+| `number` | No       | `0`     |
 
 ---
 
-### `fallbackTextProps`
+### `positionYOffset`
 
-Optional props to customize the fallback text.
+Vertical adjustment for the badge position.
 
-| TYPE                          | REQUIRED | DEFAULT |
-| :---------------------------- | :------- | :------ |
-| `Omit<TextProps, 'children'>` | No       | `{}`    |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `0`     |
+
+---
+
+### `customPosition`
+
+Allows complete control over badge positioning using style values.
+
+| TYPE                         | REQUIRED | DEFAULT     |
+| ---------------------------- | -------- | ----------- |
+| `BadgeWrapperCustomPosition` | No       | `undefined` |
+
+Example:
+
+```ts
+{
+  top: 5,
+  right: 10,
+}
+```
 
 ---
 
 ### `twClassName`
 
-Optional prop to add `twrnc` overriding class names.
+Tailwind class names to apply to the outermost wrapper.
 
 | TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
+| -------- | -------- | ------- |
 | `string` | No       | `''`    |
 
 ---
 
 ### `style`
 
-Optional prop to control the style.
+Optional style override for the outermost wrapper.
 
 | TYPE                   | REQUIRED | DEFAULT |
-| :--------------------- | :------- | :------ |
+| ---------------------- | -------- | ------- |
 | `StyleProp<ViewStyle>` | No       | `null`  |
 
 ---
@@ -94,70 +122,66 @@ Optional prop to control the style.
 ### Basic Usage
 
 ```tsx
-import React from 'react';
-import AvatarBase from '@metamask/design-system-react-native';
-
-<AvatarBase>👤</AvatarBase>;
+<BadgeWrapper badge={<BadgeStatus status={BadgeStatusStatus.Active} />}>
+  <AvatarAccount address="0x..." />
+</BadgeWrapper>
 ```
 
 ---
 
-### Avatar with Fallback Text
+### Preset Positions
 
 ```tsx
-<AvatarBase fallbackText="JD" />
+<BadgeWrapper
+  position={BadgeWrapperPosition.TopRight}
+  badge={<BadgeCount count={8} />}
+>
+  <AvatarAccount address="0x..." />
+</BadgeWrapper>
 ```
 
 ---
 
-### Customizing the Fallback Text
+### Custom Position
 
 ```tsx
-<AvatarBase
-  fallbackText="AB"
-  fallbackTextProps={{ color: 'red', fontWeight: 'bold' }}
-/>
+<BadgeWrapper
+  customPosition={{ top: 4, right: 10 }}
+  badge={<BadgeIcon variant={BadgeIconVariant.Send} />}
+>
+  <AvatarNetwork name="ETH" src={{ uri: 'https://...' }} />
+</BadgeWrapper>
 ```
 
 ---
 
-### Changing Avatar Size
+### Anchor Shape Adjustment
 
 ```tsx
-<AvatarBase size={AvatarBaseSize.Lg}>👤</AvatarBase>
+<BadgeWrapper
+  positionAnchorShape={BadgeWrapperPositionAnchorShape.Rectangular}
+  badge={<BadgeNetwork name="ETH" src={{ uri: 'https://...' }} />}
+>
+  <AvatarNetwork name="ETH" src={{ uri: 'https://...' }} />
+</BadgeWrapper>
 ```
 
 ---
 
-### Changing Avatar Shape
+## Notes
 
-```tsx
-<AvatarBase shape={AvatarBaseShape.Square}>👤</AvatarBase>
-```
-
----
-
-### Accessibility
-
-- Ensure `fallbackText` provides meaningful information when the avatar content is unavailable.
-- Use `fallbackTextProps` to style text for better visibility and contrast.
-
----
-
-### Notes
-
-- `AvatarBase` is optimized for handling different avatar states.
-- The fallback text ensures a meaningful representation when no image or content is available.
-- Custom styling can be applied using `twClassName` and `style` props.
+- You must wrap both `children` and `badge` elements using this component to ensure proper positioning.
+- Positioning logic adjusts based on anchor shape to better align on circular vs. rectangular anchors.
+- Offset props are additive and can help nudge badges pixel-perfect into place.
 
 ---
 
 ## Contributing
 
-1. Add tests for new features.
-2. Update this README for any changes to the API.
+1. Add tests for new props or layout logic.
+2. Document new functionality in this README.
 3. Follow the design system's coding guidelines.
 
 ---
 
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or reach out to the maintainers of the design system.
