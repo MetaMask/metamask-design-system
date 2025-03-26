@@ -18,35 +18,35 @@ import { colorSetList, typographyTailwindConfig } from '../twrnc-settings';
  * const tailwindConfig = generateTailwindConfig(colorSet, colorScheme);
  * console.log(tailwindConfig);
  *
- * // Output:
- * // {
- * //   theme: {
- * //     extend: {
- * //       colors: {
- * //         primary: '#1a202c',
- * //         secondary: '#2d3748',
- * //         // ...additional flattened colors
- * //       },
- * //       fontSize: {
- * //         'display-md': [32, { lineHeight: '40', letterSpacing: '0', fontWeight: '700' }],
- * //         // ...other font sizes
- * //       },
- * //       fontFamily: {
- * //         sans: ['Euclid Circular B', 'Helvetica Neue', 'Arial', 'sans-serif'],
- * //         // ...other font families
- * //       },
- * //       letterSpacing: {
- * //         'display-md': '0',
- * //         // ...other letter spacings
- * //       },
- * //       lineHeight: {
- * //         'display-md': '40',
- * //         // ...other line heights
- * //       },
- * //     },
- * //   },
- * //   plugins: [],
- * // }
+ * Output:
+ * {
+ *   theme: {
+ *     extend: {
+ *       colors: {
+ *         primary: '#1a202c',
+ *         secondary: '#2d3748',
+ *         ...additional flattened colors
+ *       },
+ *       fontSize: {
+ *         'display-md': [32, { lineHeight: '40', letterSpacing: '0', fontWeight: '700' }],
+ *         ...other font sizes
+ *       },
+ *       fontFamily: {
+ *         sans: ['Centra No1', 'Helvetica Neue', 'Arial', 'sans-serif'],
+ *         ...other font families
+ *       },
+ *       letterSpacing: {
+ *         'display-md': '0',
+ *         ...other letter spacings
+ *       },
+ *       lineHeight: {
+ *         'display-md': '40',
+ *         ...other line heights
+ *       },
+ *     },
+ *   },
+ *   plugins: [],
+ * }
  * @throws Will log an error and return an empty object if theme colors are not found for the specified color set and color scheme.
  */
 export const generateTailwindConfig = (

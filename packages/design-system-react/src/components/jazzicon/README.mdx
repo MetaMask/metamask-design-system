@@ -1,0 +1,67 @@
+import { Controls, Canvas } from '@storybook/blocks';
+import * as JazziconStories from './Jazzicon.stories';
+
+# Jazzicon
+
+The Jazzicon component generates a unique, jazzicon avatar image based on a provided address.
+
+```tsx
+import { Jazzicon } from '@metamask/design-system-react';
+
+<Jazzicon address="0x1234567890abcdef1234567890abcdef12345678" />;
+```
+
+<Canvas of={JazziconStories.Default} />
+
+## Props
+
+### Address
+
+The `address` prop is required and used as a unique identifier to generate the Jazzicon image. Each address will generate a unique, deterministic pattern. The component supports various address formats:
+
+- Standard Ethereum addresses (e.g. `0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8`)
+- Bitcoin addresses (e.g. `1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa`)
+- Solana addresses (e.g. `4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7`)
+- CAIP-10 formatted addresses:
+  - Ethereum (e.g. `eip155:1:0xabc`)
+  - Bitcoin (e.g. `bip122:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa`)
+  - Solana (e.g. `solana:mainnet:4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7`)
+
+<Canvas of={JazziconStories.Address} />
+
+### Size
+
+The `size` prop controls the dimensions (both height and width) of the Jazzicon image in pixels. The default size is 32px.
+
+<Canvas of={JazziconStories.Size} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed (Jazzicon has no default styles)
+
+Example:
+
+```tsx
+// Adding new styles
+<Jazzicon
+  address="0x1234567890abcdef1234567890abcdef12345678"
+  className="my-4 mx-2"
+/>
+```
+
+Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+
+## Component API
+
+<Controls of={JazziconStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
