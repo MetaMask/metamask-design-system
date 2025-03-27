@@ -67,3 +67,10 @@ export type { BlockiesProps } from './blockies';
 export { BadgeCount } from './badge-count';
 export type { BadgeCountProps } from './badge-count';
 export { BadgeCountSize } from './badge-count';
+
+export { BadgeIcon } from './badge-icon';
+export type { BadgeIconProps } from './badge-icon';
+
+export { BadgeStatus } from './badge-status';
+export type { BadgeStatusProps } from './badge-status';
+export { BadgeStatusStatus, BadgeStatusSize } from './badge-status';

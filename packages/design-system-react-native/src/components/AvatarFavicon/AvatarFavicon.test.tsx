@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import AvatarFavicon from './AvatarFavicon';
-import { DEFAULT_AVATARFAVICON_PROPS } from './AvatarFavicon.constants';
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };
@@ -21,12 +20,8 @@ describe('AvatarFavicon Component', () => {
 
     const imageOrSvg = getByTestId('image-or-svg');
     expect(imageOrSvg).toBeDefined();
-    expect(imageOrSvg.props.style[0].width).toStrictEqual(
-      DEFAULT_AVATARFAVICON_PROPS.width,
-    );
-    expect(imageOrSvg.props.style[0].height).toStrictEqual(
-      DEFAULT_AVATARFAVICON_PROPS.height,
-    );
+    expect(imageOrSvg.props.style[0].width).toStrictEqual('100%');
+    expect(imageOrSvg.props.style[0].height).toStrictEqual('100%');
 
     expect(imageOrSvg.props.resizeMode).toStrictEqual('contain');
   });

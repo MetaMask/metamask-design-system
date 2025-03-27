@@ -2,9 +2,83 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 5.1.0 to 6.0.0](#from-version-510-to-600)
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 5.1.0 to 6.0.0
+
+### Font Family Changes (Breaking Changes)
+
+In version 6.0.0, we've completely replaced Euclid Circular B with Centra No1 as our primary font family. This is a breaking change that affects both web and React Native applications.
+
+#### CSS Changes
+
+##### Removed
+
+```css
+--font-family-euclid-circular-b
+--font-family-roboto
+```
+
+##### Changed
+
+```css
+/* Before */
+--font-family-sans: 'Euclid Circular B', 'Roboto', sans-serif;
+
+/* After */
+--font-family-sans: 'Centra No1', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+```
+
+#### React Native Font Changes
+
+##### Before
+
+```javascript
+'EuclidCircularB-Regular';
+'EuclidCircularB-Bold';
+'EuclidCircularB-RegularItalic';
+'EuclidCircularB-BoldItalic';
+'EuclidCircularB-Medium';
+'EuclidCircularB-MediumItalic';
+```
+
+##### After
+
+```javascript
+'CentraNo1-Book';
+'CentraNo1-BookItalic';
+'CentraNo1-Medium';
+'CentraNo1-MediumItalic';
+'CentraNo1-Bold';
+'CentraNo1-BoldItalic';
+```
+
+#### Font Weight Mapping Changes
+
+The font weight tokens remain the same (400, 500, 700), but the font file names have changed:
+
+- Weight 400 uses 'CentraNo1-Book' (previously 'EuclidCircularB-Regular')
+- Weight 500 uses 'CentraNo1-Medium' (previously 'EuclidCircularB-Medium')
+- Weight 700 uses 'CentraNo1-Bold' (previously 'EuclidCircularB-Bold')
+
+### Migration Steps
+
+1. Update font imports to use Centra No1 instead of Euclid Circular B
+2. Replace all instances of `font-family: 'Euclid Circular B'` with `font-family: 'Centra No1'`
+3. Update font file references:
+   - Use 'CentraNo1-Book' for weight 400 (previously 'EuclidCircularB-Regular')
+   - Use 'CentraNo1-Medium' for weight 500
+   - Use 'CentraNo1-Bold' for weight 700
+4. For React Native applications:
+   - Update font file imports to use new Centra No1 .otf files
+   - Update font family references in your styles
+5. For web applications:
+   - Update font file imports to use new Centra No1 .woff2 files
+   - Update @font-face declarations
+6. Remove any references to Roboto font family as it's no longer included in the fallback chain
 
 ## From version 4.1.0 to 5.0.0
 

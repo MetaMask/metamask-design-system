@@ -2,15 +2,13 @@ import React, { useCallback, useMemo } from 'react';
 import { View } from 'react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
+import { AvatarGroupSize } from '../../shared/enums';
 import AvatarAccount, { AvatarAccountProps } from '../AvatarAccount';
 import AvatarFavicon, { AvatarFaviconProps } from '../AvatarFavicon';
 import AvatarNetwork, { AvatarNetworkProps } from '../AvatarNetwork';
 import AvatarToken, { AvatarTokenProps } from '../AvatarToken';
 import Text, { TextColor } from '../Text';
-import {
-  MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT,
-  DEFAULT_AVATARGROUP_PROPS,
-} from './AvatarGroup.constants';
+import { MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT } from './AvatarGroup.constants';
 import { AvatarGroupProps, AvatarGroupVariant } from './AvatarGroup.types';
 import {
   generateAvatarGroupContainerClassNames,
@@ -20,9 +18,9 @@ import {
 const AvatarGroup = ({
   variant,
   avatarPropsArr,
-  size = DEFAULT_AVATARGROUP_PROPS.size,
-  max = DEFAULT_AVATARGROUP_PROPS.max,
-  isReverse = DEFAULT_AVATARGROUP_PROPS.isReverse,
+  size = AvatarGroupSize.Md,
+  max = 4,
+  isReverse = false,
   style,
   twClassName,
   ...props
