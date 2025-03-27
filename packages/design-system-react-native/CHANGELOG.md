@@ -7,4 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- [DSR] Added BadgeIcon ([#513](https://github.com/MetaMask/metamask-design-system/pull/513))
+- [DSRN] Remove DEFAULT\_ props from Avatars ([#508](https://github.com/MetaMask/metamask-design-system/pull/508))
+
 [Unreleased]: https://github.com/MetaMask/metamask-design-system/

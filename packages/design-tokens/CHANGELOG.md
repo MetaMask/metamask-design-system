@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: fixing centrano1 font name in token by removing space ([#522](https://github.com/MetaMask/metamask-design-system/pull/522))
+
 ## [6.0.0]
 
 ### Changed
