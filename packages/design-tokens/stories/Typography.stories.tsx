@@ -35,7 +35,7 @@ export const FontFamily: StoryFn<typeof Text> = (...args) => {
   return (
     <>
       <Text style={styles.displayMD} {...args}>
-        Centra No1
+        CentraNo1
       </Text>
     </>
   );
