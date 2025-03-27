@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { AvatarFaviconSize } from '../../types';
 import { AvatarFavicon } from './AvatarFavicon';
-import { AvatarFaviconSize } from '.';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarFavicon> = {
@@ -137,6 +137,42 @@ export const Size: Story = {
         name="OpenSea"
         fallbackText="OS"
         size={AvatarFaviconSize.Xl}
+      />
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarFavicon
+        name="OpenSea"
+        fallbackText="OS"
+        src="https://opensea.io/static/images/favicon/favicon.ico"
+      />
+      <AvatarFavicon
+        name="OpenSea"
+        fallbackText="OS"
+        src="https://opensea.io/static/images/favicon/favicon.ico"
+        hasBorder
+      />
+    </div>
+  ),
+};
+
+export const HasSolidBackgroundColor: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarFavicon
+        name="OpenSea"
+        fallbackText="OS"
+        src="https://opensea.io/static/images/favicon/favicon.ico"
+      />
+      <AvatarFavicon
+        name="OpenSea"
+        fallbackText="OS"
+        src="https://opensea.io/static/images/favicon/favicon.ico"
+        hasSolidBackgroundColor
       />
     </div>
   ),

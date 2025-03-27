@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { AvatarTokenSize } from '../../types';
 import { TextColor } from '../text';
 import { AvatarToken } from './AvatarToken';
-import { AvatarTokenSize } from '.';
 
 describe('AvatarToken', () => {
   it('renders image when src is provided', () => {

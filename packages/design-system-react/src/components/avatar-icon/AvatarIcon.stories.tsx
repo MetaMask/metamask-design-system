@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { AvatarIconSize } from '../../types';
 import { AvatarIcon } from './AvatarIcon';
-import { AvatarIconSize, AvatarIconSeverity } from '.';
+import { AvatarIconSeverity } from '.';
 import { IconName } from '../icon';
 import README from './README.mdx';
 
@@ -99,6 +100,38 @@ export const Severity: Story = {
       <AvatarIcon
         iconName={IconName.Danger}
         severity={AvatarIconSeverity.Error}
+      />
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarIcon
+        iconName={IconName.User}
+        severity={AvatarIconSeverity.Default}
+      />
+      <AvatarIcon
+        iconName={IconName.User}
+        severity={AvatarIconSeverity.Default}
+        hasBorder
+      />
+    </div>
+  ),
+};
+
+export const HasSolidBackgroundColor: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarIcon
+        iconName={IconName.User}
+        severity={AvatarIconSeverity.Default}
+      />
+      <AvatarIcon
+        iconName={IconName.User}
+        severity={AvatarIconSeverity.Default}
+        hasSolidBackgroundColor
       />
     </div>
   ),
