@@ -3,9 +3,10 @@
  */
 :root {
   /* font family */
-  --font-family-centrano1: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial;
-  --font-family-mmsans: 'MMSans', 'Helvetica Neue', Helvetica, Arial;
-  --font-family-mmpoly: 'MMPoly', 'Helvetica Neue', Helvetica, Arial;
+  --font-family-centrano1: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+  --font-family-mmsans: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-mmpoly: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   /* font sizes */
   --font-size-base: 16px;
   --font-size-1: 0.625rem;
