@@ -4,6 +4,7 @@ export {
   TextColor,
   TextAlign,
   FontWeight,
+  FontFamily,
   FontStyle,
   TextTransform,
   OverflowWrap,
