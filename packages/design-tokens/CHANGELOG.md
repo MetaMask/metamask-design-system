@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.1.0]
+
+### Added
+
+- Updated brand colors to match branding and marketing color values ([#524](https://github.com/MetaMask/metamask-design-system/pull/524))
+
 ## [6.0.1]
 
 ### Fixed
@@ -348,7 +354,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.0.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.1.0...HEAD
+[6.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.0.1...@metamask/design-tokens@6.1.0
 [6.0.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.0.0...@metamask/design-tokens@6.0.1
 [6.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@5.1.0...@metamask/design-tokens@6.0.0
 [5.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@5.0.0...@metamask/design-tokens@5.1.0
