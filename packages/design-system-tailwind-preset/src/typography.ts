@@ -20,9 +20,9 @@ export const typography = {
     'l-body-xs': 'var(--typography-l-body-xs-font-size)',
   },
   fontFamily: {
-    default: 'var(--font-family-centrano1)',
-    accent: 'var(--font-family-mmsans)',
-    hero: 'var(--font-family-mmpoly)',
+    default: 'var(--font-family-default)',
+    accent: 'var(--font-family-accent)',
+    hero: 'var(--font-family-hero)',
   },
   letterSpacing: {
     // small screen typography
