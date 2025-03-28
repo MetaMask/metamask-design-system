@@ -17,7 +17,7 @@ import { FontWeight, FontStyle, FontFamily } from './Text.types';
  * @param variant - Specifies the typography variant (e.g., body, heading, display).
  * @param color - Specifies the text color based on the design system's color tokens.
  * @param fontWeight - Specifies the font weight (e.g., normal, bold).
- * @param fontFamily - Specifies the font family ('e.g. centrano1, mmsans, mmpoly)
+ * @param fontFamily - Specifies the font family ('e.g. default, hero, accent)
  * @param fontStyle - Specifies the font style (e.g., normal, italic).
  * @param twClassName - Additional custom Tailwind class names to be appended to the generated classes.
  * @returns A string of combined Tailwind CSS class names.
@@ -34,7 +34,7 @@ import { FontWeight, FontStyle, FontFamily } from './Text.types';
  * });
  *
  * console.log(classNames);
- * // Output: "text-body-md font-centrano1-bold-italic text-primary-default text-center underline"
+ * // Output: "text-body-md font-default-bold-italic text-primary-default text-center underline"
  * ```
  */
 export const generateTextClassNames = ({

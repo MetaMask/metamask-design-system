@@ -37,9 +37,9 @@ export type ThemeTypography = {
 };
 
 export type FontFamilies = {
-  centrano1: string;
-  mmsans: string;
-  mmpoly: string;
+  default: string;
+  accent: string;
+  hero: string;
 };
 
 export type FontSizes = {

@@ -26,9 +26,9 @@ export type TextProps = {
   fontWeight?: FontWeight;
   /**
    * Optional prop to adjust the font family.
-   *  - Default: centrano1
-   *  - Accent: mmsans
-   *  - Hero: mmpoly
+   *  - Default: CentraNo1
+   *  - Accent: MMSans
+   *  - Hero: MMPoly
    */
   fontFamily?: FontFamily;
   /**
@@ -168,7 +168,7 @@ export enum TextTransform {
 }
 
 export enum FontFamily {
-  Default = 'font-centrano1',
-  Accent = 'font-mmsans',
-  Hero = 'font-mmpoly',
+  Default = 'font-default',
+  Accent = 'font-accent',
+  Hero = 'font-hero',
 }

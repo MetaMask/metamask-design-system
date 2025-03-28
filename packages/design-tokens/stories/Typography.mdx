@@ -7,7 +7,7 @@ import * as TypographyStories from './Typography.stories';
 
 Good typography improves readability, legibility, and the prioritization of information.
 
-## Font Families
+## Font Family
 
 Our design system now offers three distinct font families to support a rich typographic hierarchy:
 
@@ -21,8 +21,8 @@ Our design system now offers three distinct font families to support a rich typo
   <thead>
     <tr>
       <th>Font Family</th>
-      <th>JS Token</th>
-      <th>CSS Variable</th>
+      <th>JS</th>
+      <th>CSS</th>
     </tr>
   </thead>
   <tbody>
@@ -31,10 +31,10 @@ Our design system now offers three distinct font families to support a rich typo
         <strong>CentraNo1</strong>
       </td>
       <td>
-        <code>typography.fontFamilies.centrano1</code>
+        <code>fontFamilies.default</code>
       </td>
       <td>
-        <code>var(--font-family-centrano1)</code>
+        <code>var(--font-family-default)</code>
       </td>
     </tr>
     <tr>
@@ -42,10 +42,10 @@ Our design system now offers three distinct font families to support a rich typo
         <strong>MM Sans</strong>
       </td>
       <td>
-        <code>typography.fontFamilies.mmsans</code>
+        <code>fontFamilies.accent</code>
       </td>
       <td>
-        <code>var(--font-family-mmsans)</code>
+        <code>var(--font-family-accent)</code>
       </td>
     </tr>
     <tr>
@@ -53,10 +53,10 @@ Our design system now offers three distinct font families to support a rich typo
         <strong>MM Poly</strong>
       </td>
       <td>
-        <code>typography.fontFamilies.mmpoly</code>
+        <code>fontFamilies.hero</code>
       </td>
       <td>
-        <code>var(--font-family-mmpoly)</code>
+        <code>var(--font-family-hero)</code>
       </td>
     </tr>
   </tbody>
@@ -64,39 +64,396 @@ Our design system now offers three distinct font families to support a rich typo
 
 ## Scale
 
-There are two typography scales for our products, both based on a default base font size of `16px`. Note that responsive typography adjustments occur at the component level rather than by altering the global base font size.
+There are 2 sets of typography scales for MetaMask products. Both are based on a default base font size of `16px`. Responsive typography changes on the component level rather than changing the base font size globally. **\*REMS does not apply to React Native**
 
-**\*REMS do not apply to React Native**
+### **Small screen**
 
-### **Small Screen**
+For screens sizes `767px >` or smaller, use the small screen typography scale
 
-For screens `767px >` or smaller, use the small screen typography scale.
-
-**Key:** S = small screen | L = large screen
+**Key:** S: small screen L: large screen | name | font-weight(regular if omitted) | font-size/line-height | rems
 
 <Canvas of={TypographyStories.SmallScreen} />
 
-| Variation       | JS Token                | CSS Variable                     |
-| --------------- | ----------------------- | -------------------------------- |
-| **S DisplayMD** | `typography.sDisplayMD` | `var(--typography-s-display-md)` |
-| **S HeadingLG** | `typography.sHeadingLG` | `var(--typography-s-heading-lg)` |
-| **S HeadingMD** | `typography.sHeadingMD` | `var(--typography-s-heading-md)` |
-| **S HeadingSM** | `typography.sHeadingSM` | `var(--typography-s-heading-sm)` |
-| ...             | ...                     | ...                              |
+<table>
+  <thead>
+    <tr>
+      <th>Variation</th>
+      <th>JS</th>
+      <th>CSS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>S DisplayMD</strong>
+      </td>
+      <td>
+        <code>typography.sDisplayMD.fontWeight</code>
+        <br />
+        <code>typography.sDisplayMD.fontSize</code>
+        <br />
+        <code>typography.sDisplayMD.lineHeight</code>
+        <br />
+        <code>typography.sDisplayMD.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-s-display-md-font-weight)</code>
+        <br />
+        <code>var(--typography-s-display-md-font-size)</code>
+        <br />
+        <code>var(--typography-s-display-md-line-height)</code>
+        <br />
+        <code>var(--typography-s-display-md-letter-spacing)</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-### **Large Screen**
+### **Large screen**
 
-For screens `768px <` or larger, use the large screen typography scale.
+For screens sizes `768px <` or larger, use the large screen typography scale
+
+**Key:** S: small screen L: large screen | name | font-weight (regular if omitted)| font-size/line-height | rems
 
 <Canvas of={TypographyStories.LargeScreen} />
 
-| Variation       | JS Token                | CSS Variable                     |
-| --------------- | ----------------------- | -------------------------------- |
-| **L DisplayMD** | `typography.lDisplayMD` | `var(--typography-l-display-md)` |
-| **L HeadingLG** | `typography.lHeadingLG` | `var(--typography-l-heading-lg)` |
-| **L HeadingMD** | `typography.lHeadingMD` | `var(--typography-l-heading-md)` |
-| **L HeadingSM** | `typography.lHeadingSM` | `var(--typography-l-heading-sm)` |
-| ...             | ...                     | ...                              |
+<table>
+  <thead>
+    <tr>
+      <th>Variation</th>
+      <th>JS</th>
+      <th>CSS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>L DisplayMD</strong>
+      </td>
+      <td>
+        <code>typography.lDisplayMD.fontWeight</code>
+        <br />
+        <code>typography.lDisplayMD.fontSize</code>
+        <br />
+        <code>typography.lDisplayMD.lineHeight</code>
+        <br />
+        <code>typography.lDisplayMD.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-display-md-font-weight)</code>
+        <br />
+        <code>var(--typography-l-display-md-font-size)</code>
+        <br />
+        <code>var(--typography-l-display-md-line-height)</code>
+        <br />
+        <code>var(--typography-l-display-md-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L HeadingLG</strong>
+      </td>
+      <td>
+        <code>typography.lHeadingLG.fontWeight</code>
+        <br />
+        <code>typography.lHeadingLG.fontSize</code>
+        <br />
+        <code>typography.lHeadingLG.lineHeight</code>
+        <br />
+        <code>typography.lHeadingLG.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-heading-lg-font-weight)</code>
+        <br />
+        <code>var(--typography-l-heading-lg-font-size)</code>
+        <br />
+        <code>var(--typography-l-heading-lg-line-height)</code>
+        <br />
+        <code>var(--typography-l-heading-lg-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L HeadingMD</strong>
+      </td>
+      <td>
+        <code>typography.lHeadingMD.fontWeight</code>
+        <br />
+        <code>typography.lHeadingMD.fontSize</code>
+        <br />
+        <code>typography.lHeadingMD.lineHeight</code>
+        <br />
+        <code>typography.lHeadingMD.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-heading-md-font-weight)</code>
+        <br />
+        <code>var(--typography-l-heading-md-font-size)</code>
+        <br />
+        <code>var(--typography-l-heading-md-line-height)</code>
+        <br />
+        <code>var(--typography-l-heading-md-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L HeadingSM</strong>
+      </td>
+      <td>
+        <code>typography.lHeadingSM.fontWeight</code>
+        <br />
+        <code>typography.lHeadingSM.fontSize</code>
+        <br />
+        <code>typography.lHeadingSM.lineHeight</code>
+        <br />
+        <code>typography.lHeadingSM.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-heading-sm-font-weight)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-font-size)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-line-height)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L HeadingSM Regular</strong> (DEPRECATED)
+      </td>
+      <td>
+        <code>typography.lHeadingSMRegular.fontWeight</code>
+        <br />
+        <code>typography.lHeadingSMRegular.fontSize</code>
+        <br />
+        <code>typography.lHeadingSMRegular.lineHeight</code>
+        <br />
+        <code>typography.lHeadingSMRegular.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-heading-sm-regular-font-weight)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-regular-font-size)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-regular-line-height)</code>
+        <br />
+        <code>var(--typography-l-heading-sm-regular-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyLGMedium</strong>
+      </td>
+      <td>
+        <code>typography.lBodyLGMedium.fontWeight</code>
+        <br />
+        <code>typography.lBodyLGMedium.fontSize</code>
+        <br />
+        <code>typography.lBodyLGMedium.lineHeight</code>
+        <br />
+        <code>typography.lBodyLGMedium.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-lg-medium-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-lg-medium-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-lg-medium-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-lg-medium-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyMD Bold</strong>
+      </td>
+      <td>
+        <code>typography.lBodyMDBold.fontWeight</code>
+        <br />
+        <code>typography.lBodyMDBold.fontSize</code>
+        <br />
+        <code>typography.lBodyMDBold.lineHeight</code>
+        <br />
+        <code>typography.lBodyMDBold.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-md-bold-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-md-bold-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-md-bold-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-md-bold-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyMD Medium</strong>
+      </td>
+      <td>
+        <code>typography.lBodyMDMedium.fontWeight</code>
+        <br />
+        <code>typography.lBodyMDMedium.fontSize</code>
+        <br />
+        <code>typography.lBodyMDMedium.lineHeight</code>
+        <br />
+        <code>typography.lBodyMDMedium.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-md-medium-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-md-medium-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-md-medium-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-md-medium-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyMD</strong>
+      </td>
+      <td>
+        <code>typography.lBodyMD.fontWeight</code>
+        <br />
+        <code>typography.lBodyMD.fontSize</code>
+        <br />
+        <code>typography.lBodyMD.lineHeight</code>
+        <br />
+        <code>typography.lBodyMD.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-md-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-md-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-md-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-md-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodySM Bold</strong>
+      </td>
+      <td>
+        <code>typography.lBodySMBold.fontWeight</code>
+        <br />
+        <code>typography.lBodySMBold.fontSize</code>
+        <br />
+        <code>typography.lBodySMBold.lineHeight</code>
+        <br />
+        <code>typography.lBodySMBold.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-sm-bold-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-sm-bold-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-sm-bold-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-sm-bold-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodySM Medium</strong>
+      </td>
+      <td>
+        <code>typography.lBodySMMedium.fontWeight</code>
+        <br />
+        <code>typography.lBodySMMedium.fontSize</code>
+        <br />
+        <code>typography.lBodySMMedium.lineHeight</code>
+        <br />
+        <code>typography.lBodySMMedium.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-sm-medium-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-sm-medium-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-sm-medium-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-sm-medium-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodySM</strong>
+      </td>
+      <td>
+        <code>typography.lBodySM.fontWeight</code>
+        <br />
+        <code>typography.lBodySM.fontSize</code>
+        <br />
+        <code>typography.lBodySM.lineHeight</code>
+        <br />
+        <code>typography.lBodySM.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-sm-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-sm-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-sm-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-sm-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyXS Medium</strong>
+      </td>
+      <td>
+        <code>typography.lBodyXSMedium.fontWeight</code>
+        <br />
+        <code>typography.lBodyXSMedium.fontSize</code>
+        <br />
+        <code>typography.lBodyXSMedium.lineHeight</code>
+        <br />
+        <code>typography.lBodyXSMedium.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-xs-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-xs-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-xs-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-xs-letter-spacing)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>L BodyXS</strong>
+      </td>
+      <td>
+        <code>typography.lBodyXS.fontWeight</code>
+        <br />
+        <code>typography.lBodyXS.fontSize</code>
+        <br />
+        <code>typography.lBodyXS.lineHeight</code>
+        <br />
+        <code>typography.lBodyXS.letterSpacing</code>
+      </td>
+      <td>
+        <code>var(--typography-l-body-xs-font-weight)</code>
+        <br />
+        <code>var(--typography-l-body-xs-font-size)</code>
+        <br />
+        <code>var(--typography-l-body-xs-line-height)</code>
+        <br />
+        <code>var(--typography-l-body-xs-letter-spacing)</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+**NOTE: The JS token format was initially intended for React Native. Therefore, `fontSize` and `lineHeight` use integers not REMS or unitless values. Some conversion will need to happen at app level if the JS token format is used for web applications.**
+
+<br />
 
 ## Font Weight
 

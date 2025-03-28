@@ -1,4 +1,3 @@
-import { fontFamilies } from './fontFamilies';
 import { fontSizes } from './fontSizes';
 import { fontWeights } from './fontWeights';
 import { letterSpacing } from './letterSpacing';
@@ -43,44 +42,44 @@ export const typography: ThemeTypography = {
   },
   sBodyLGMedium: {
     fontWeight: fontWeights.medium,
-    fontSize: fontSizes.fontSize5,
+    fontSize: fontSizes.fontSize4,
     lineHeight: lineHeights.lineHeight4,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   sBodyMD: {
     fontWeight: fontWeights.regular,
-    fontSize: fontSizes.fontSize4,
-    lineHeight: lineHeights.lineHeight4,
+    fontSize: fontSizes.fontSize3,
+    lineHeight: lineHeights.lineHeight3,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   sBodyMDMedium: {
     fontWeight: fontWeights.medium,
-    fontSize: fontSizes.fontSize4,
-    lineHeight: lineHeights.lineHeight4,
+    fontSize: fontSizes.fontSize3,
+    lineHeight: lineHeights.lineHeight3,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   sBodyMDBold: {
     fontWeight: fontWeights.bold,
-    fontSize: fontSizes.fontSize4,
-    lineHeight: lineHeights.lineHeight4,
+    fontSize: fontSizes.fontSize3,
+    lineHeight: lineHeights.lineHeight3,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   sBodySM: {
     fontWeight: fontWeights.regular,
-    fontSize: fontSizes.fontSize3,
-    lineHeight: lineHeights.lineHeight3,
+    fontSize: fontSizes.fontSize2,
+    lineHeight: lineHeights.lineHeight2,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   sBodySMMedium: {
     fontWeight: fontWeights.medium,
-    fontSize: fontSizes.fontSize3,
-    lineHeight: lineHeights.lineHeight3,
+    fontSize: fontSizes.fontSize2,
+    lineHeight: lineHeights.lineHeight2,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   sBodySMBold: {
     fontWeight: fontWeights.bold,
-    fontSize: fontSizes.fontSize3,
-    lineHeight: lineHeights.lineHeight3,
+    fontSize: fontSizes.fontSize2,
+    lineHeight: lineHeights.lineHeight2,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   sBodyXS: {

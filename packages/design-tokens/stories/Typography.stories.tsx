@@ -24,22 +24,22 @@ const meta: Meta<typeof Text> = {
 export default meta;
 export const FontFamily: StoryFn<typeof Text> = (...args) => {
   const styles = {
-    centrano1: {
-      fontFamily: fontFamilies.centrano1,
+    default: {
+      fontFamily: fontFamilies.default,
       fontSize: fontSizes.fontSize7,
       lineHeight: `${lineHeights.lineHeight6}px`,
       fontWeight: fontWeights.regular,
       letterSpacing: letterSpacing.letterSpacing1,
     },
-    mmsans: {
-      fontFamily: fontFamilies.mmsans,
+    accent: {
+      fontFamily: fontFamilies.accent,
       fontSize: fontSizes.fontSize7,
       lineHeight: `${lineHeights.lineHeight6}px`,
       fontWeight: fontWeights.regular,
       letterSpacing: letterSpacing.letterSpacing1,
     },
-    mmpoly: {
-      fontFamily: fontFamilies.mmpoly,
+    hero: {
+      fontFamily: fontFamilies.hero,
       fontSize: fontSizes.fontSize7,
       lineHeight: `${lineHeights.lineHeight6}px`,
       fontWeight: fontWeights.regular,
@@ -48,13 +48,13 @@ export const FontFamily: StoryFn<typeof Text> = (...args) => {
   };
   return (
     <>
-      <Text style={styles.centrano1} {...args}>
+      <Text style={styles.default} {...args}>
         Centra No1
       </Text>
-      <Text style={styles.mmsans} {...args}>
+      <Text style={styles.accent} {...args}>
         MM Sans
       </Text>
-      <Text style={styles.mmpoly} {...args}>
+      <Text style={styles.hero} {...args}>
         MM Poly
       </Text>
     </>
@@ -65,86 +65,86 @@ export const SmallScreen: StoryFn<typeof Text> = (...args) => {
   const smallScreenFontSizeBase = 16;
   const styles = {
     displayMD: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sDisplayMD.fontSize,
       lineHeight: `${typography.sDisplayMD.lineHeight}px`,
       fontWeight: typography.sDisplayMD.fontWeight,
     },
     headingLG: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sHeadingLG.fontSize,
       lineHeight: `${typography.sHeadingLG.lineHeight}px`,
       fontWeight: typography.sHeadingLG.fontWeight,
     },
     headingMD: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sHeadingMD.fontSize,
       lineHeight: `${typography.sHeadingMD.lineHeight}px`,
       fontWeight: typography.sHeadingMD.fontWeight,
     },
     headingSM: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sHeadingSM.fontSize,
       lineHeight: `${typography.sHeadingSM.lineHeight}px`,
       fontWeight: typography.sHeadingSM.fontWeight,
     },
     headingSMRegular: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sHeadingSMRegular.fontSize,
       lineHeight: `${typography.sHeadingSMRegular.lineHeight}px`,
       fontWeight: typography.sHeadingSMRegular.fontWeight,
     },
     bodyLGMedium: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sBodyLGMedium.fontSize,
       lineHeight: `${typography.sBodyLGMedium.lineHeight}px`,
       fontWeight: typography.sBodyLGMedium.fontWeight,
     },
     bodyMD: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sBodyMD.fontSize,
       lineHeight: `${typography.sBodyMD.lineHeight}px`,
       fontWeight: typography.sBodyMD.fontWeight,
     },
     bodyMDMedium: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sBodyMDMedium.fontSize,
       lineHeight: `${typography.sBodyMDMedium.lineHeight}px`,
       fontWeight: typography.sBodyMDMedium.fontWeight,
     },
     bodyMDBold: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sBodyMDBold.fontSize,
       lineHeight: `${typography.sBodyMDBold.lineHeight}px`,
       fontWeight: typography.sBodyMDBold.fontWeight,
     },
     bodySM: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sBodySM.fontSize,
       lineHeight: `${typography.sBodySM.lineHeight}px`,
       fontWeight: typography.sBodySM.fontWeight,
     },
     bodySMMedium: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sBodySMMedium.fontSize,
       lineHeight: `${typography.sBodySMMedium.lineHeight}px`,
       fontWeight: typography.sBodySMMedium.fontWeight,
     },
     bodySMBold: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sBodySMBold.fontSize,
       lineHeight: `${typography.sBodySMBold.lineHeight}px`,
       fontWeight: typography.sBodySMBold.fontWeight,
     },
     bodyXS: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sBodyXS.fontSize,
       lineHeight: `${typography.sBodyXS.lineHeight}px`,
       fontWeight: typography.sBodyXS.fontWeight,
       letterSpacing: typography.sBodyXS.letterSpacing,
     },
     bodyXSMedium: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.sBodyXSMedium.fontSize,
       lineHeight: `${typography.sBodyXSMedium.lineHeight}px`,
       fontWeight: typography.sBodyXSMedium.fontWeight,
@@ -234,86 +234,86 @@ export const LargeScreen: StoryFn<typeof Text> = (...args) => {
   const largeScreenFontSizeBase = 16;
   const styles = {
     displayMD: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lDisplayMD.fontSize,
       lineHeight: `${typography.lDisplayMD.lineHeight}px`,
       fontWeight: typography.lDisplayMD.fontWeight,
     },
     headingLG: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lHeadingLG.fontSize,
       lineHeight: `${typography.lHeadingLG.lineHeight}px`,
       fontWeight: typography.lHeadingLG.fontWeight,
     },
     headingMD: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lHeadingMD.fontSize,
       lineHeight: `${typography.lHeadingMD.lineHeight}px`,
       fontWeight: typography.lHeadingMD.fontWeight,
     },
     headingSM: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lHeadingSM.fontSize,
       lineHeight: `${typography.lHeadingSM.lineHeight}px`,
       fontWeight: typography.lHeadingSM.fontWeight,
     },
     headingSMRegular: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lHeadingSMRegular.fontSize,
       lineHeight: `${typography.lHeadingSMRegular.lineHeight}px`,
       fontWeight: typography.lHeadingSMRegular.fontWeight,
     },
     bodyLGMedium: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lBodyLGMedium.fontSize,
       lineHeight: `${typography.lBodyLGMedium.lineHeight}px`,
       fontWeight: typography.lBodyLGMedium.fontWeight,
     },
     bodyMDBold: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lBodyMDBold.fontSize,
       lineHeight: `${typography.lBodyMDBold.lineHeight}px`,
       fontWeight: typography.lBodyMDBold.fontWeight,
     },
     bodyMDMedium: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lBodyMDMedium.fontSize,
       lineHeight: `${typography.lBodyMDMedium.lineHeight}px`,
       fontWeight: typography.lBodyMDMedium.fontWeight,
     },
     bodyMD: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lBodyMD.fontSize,
       lineHeight: `${typography.lBodyMD.lineHeight}px`,
       fontWeight: typography.lBodyMD.fontWeight,
     },
     bodySMBold: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lBodySMBold.fontSize,
       lineHeight: `${typography.lBodySMBold.lineHeight}px`,
       fontWeight: typography.lBodySMBold.fontWeight,
     },
     bodySMMedium: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lBodySMMedium.fontSize,
       lineHeight: `${typography.lBodySMMedium.lineHeight}px`,
       fontWeight: typography.lBodySMMedium.fontWeight,
     },
     bodySM: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lBodySM.fontSize,
       lineHeight: `${typography.lBodySM.lineHeight}px`,
       fontWeight: typography.lBodySM.fontWeight,
     },
     bodyXSMedium: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lBodyXSMedium.fontSize,
       lineHeight: `${typography.lBodyXSMedium.lineHeight}px`,
       fontWeight: typography.lBodyXSMedium.fontWeight,
       letterSpacing: typography.lBodyXSMedium.letterSpacing,
     },
     bodyXS: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: typography.lBodyXS.fontSize,
       lineHeight: `${typography.lBodyXS.lineHeight}px`,
       fontWeight: typography.lBodyXS.fontWeight,
@@ -402,19 +402,19 @@ export const LargeScreen: StoryFn<typeof Text> = (...args) => {
 export const FontWeight: StoryFn<typeof Text> = (...args) => {
   const styles = {
     regular: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: fontSizes.fontSize4,
       lineHeight: `${lineHeights.lineHeight5}px`,
       fontWeight: fontWeights.regular,
     },
     medium: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: fontSizes.fontSize4,
       lineHeight: `${lineHeights.lineHeight5}px`,
       fontWeight: fontWeights.medium,
     },
     bold: {
-      fontFamily: fontFamilies.centrano1,
+      fontFamily: fontFamilies.default,
       fontSize: fontSizes.fontSize4,
       lineHeight: `${lineHeights.lineHeight5}px`,
       fontWeight: fontWeights.bold,
@@ -439,86 +439,86 @@ export const SmallScreenCSS: StoryFn<typeof Text> = (...args) => {
   const fontBase = 16;
   const styles = {
     DisplayMD: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-display-md-font-size)',
       lineHeight: 'var(--typography-s-display-md-line-height)',
       fontWeight: 'var(--typography-s-display-md-font-weight)',
     },
     HeadingLG: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-heading-lg-font-size)',
       lineHeight: 'var(--typography-s-heading-lg-line-height)',
       fontWeight: 'var(--typography-s-heading-lg-font-weight)',
     },
     HeadingMD: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-heading-md-font-size)',
       lineHeight: 'var(--typography-s-heading-md-line-height)',
       fontWeight: 'var(--typography-s-heading-md-font-weight)',
     },
     HeadingSM: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-heading-sm-font-size)',
       lineHeight: 'var(--typography-s-heading-sm-line-height)',
       fontWeight: 'var(--typography-s-heading-sm-font-weight)',
     },
     'HeadingSM Regular': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-heading-sm-regular-font-size)',
       lineHeight: 'var(--typography-s-heading-sm-regular-line-height)',
       fontWeight: 'var(--typography-s-heading-sm-regular-font-weight)',
     },
     'BodyLG Medium': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-body-lg-medium-font-size)',
       lineHeight: 'var(--typography-s-body-lg-medium-line-height)',
       fontWeight: 'var(--typography-s-body-lg-medium-font-weight)',
     },
     BodyMD: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-body-md-font-size)',
       lineHeight: 'var(--typography-s-body-md-line-height)',
       fontWeight: 'var(--typography-s-body-md-font-weight)',
     },
     'BodyMD Medium': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-body-md-medium-font-size)',
       lineHeight: 'var(--typography-s-body-md-medium-line-height)',
       fontWeight: 'var(--typography-s-body-md-medium-font-weight)',
     },
     'BodyMD Bold': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-body-md-bold-font-size)',
       lineHeight: 'var(--typography-s-body-md-bold-line-height)',
       fontWeight: 'var(--typography-s-body-md-bold-font-weight)',
     },
     BodySM: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-body-sm-font-size)',
       lineHeight: 'var(--typography-s-body-sm-line-height)',
       fontWeight: 'var(--typography-s-body-sm-font-weight)',
     },
     'BodySM Medium': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-body-sm-medium-font-size)',
       lineHeight: 'var(--typography-s-body-sm-medium-line-height)',
       fontWeight: 'var(--typography-s-body-sm-medium-font-weight)',
     },
     'BodySM Bold': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-body-sm-bold-font-size)',
       lineHeight: 'var(--typography-s-body-sm-bold-line-height)',
       fontWeight: 'var(--typography-s-body-sm-bold-font-weight)',
     },
     BodyXS: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-body-xs-font-size)',
       lineHeight: 'var(--typography-s-body-xs-line-height)',
       fontWeight: 'var(--typography-s-body-xs-font-weight)',
       letterSpacing: 'var(--typography-s-body-xs-letter-spacing)',
     },
     'BodyXS Medium': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-body-xs-medium-font-size)',
       lineHeight: 'var(--typography-s-body-xs-medium-line-height)',
       fontWeight: 'var(--typography-s-body-xs-medium-font-weight)',
@@ -565,86 +565,86 @@ export const LargeScreenCSS: StoryFn<typeof Text> = (...args) => {
 
   const styles = {
     DisplayMD: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-display-md-font-size)',
       lineHeight: 'var(--typography-l-display-md-line-height)',
       fontWeight: 'var(--typography-l-display-md-font-weight)',
     },
     HeadingLG: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-heading-lg-font-size)',
       lineHeight: 'var(--typography-l-heading-lg-line-height)',
       fontWeight: 'var(--typography-l-heading-lg-font-weight)',
     },
     HeadingMD: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-heading-md-font-size)',
       lineHeight: 'var(--typography-l-heading-md-line-height)',
       fontWeight: 'var(--typography-l-heading-md-font-weight)',
     },
     HeadingSM: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-heading-sm-font-size)',
       lineHeight: 'var(--typography-l-heading-sm-line-height)',
       fontWeight: 'var(--typography-l-heading-sm-font-weight)',
     },
     'HeadingSM Regular': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-heading-sm-regular-font-size)',
       lineHeight: 'var(--typography-l-heading-sm-regular-line-height)',
       fontWeight: 'var(--typography-l-heading-sm-regular-font-weight)',
     },
     'BodyLG Medium': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-body-lg-medium-font-size)',
       lineHeight: 'var(--typography-l-body-lg-medium-line-height)',
       fontWeight: 'var(--typography-l-body-lg-medium-font-weight)',
     },
     BodyMD: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-body-md-font-size)',
       lineHeight: 'var(--typography-l-body-md-line-height)',
       fontWeight: 'var(--typography-l-body-md-font-weight)',
     },
     'BodyMD Medium': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-body-md-medium-font-size)',
       lineHeight: 'var(--typography-l-body-md-medium-line-height)',
       fontWeight: 'var(--typography-l-body-md-medium-font-weight)',
     },
     'BodyMD Bold': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-body-md-bold-font-size)',
       lineHeight: 'var(--typography-l-body-md-bold-line-height)',
       fontWeight: 'var(--typography-l-body-md-bold-font-weight)',
     },
     BodySM: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-body-sm-font-size)',
       lineHeight: 'var(--typography-l-body-sm-line-height)',
       fontWeight: 'var(--typography-l-body-sm-font-weight)',
     },
     'BodySM Medium': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-body-sm-medium-font-size)',
       lineHeight: 'var(--typography-l-body-sm-medium-line-height)',
       fontWeight: 'var(--typography-l-body-sm-medium-font-weight)',
     },
     'BodySM Bold': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-body-sm-bold-font-size)',
       lineHeight: 'var(--typography-l-body-sm-bold-line-height)',
       fontWeight: 'var(--typography-l-body-sm-bold-font-weight)',
     },
     BodyXS: {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-body-xs-font-size)',
       lineHeight: 'var(--typography-l-body-xs-line-height)',
       fontWeight: 'var(--typography-l-body-xs-font-weight)',
       letterSpacing: 'var(--typography-l-body-xs-letter-spacing)',
     },
     'BodyXS Medium': {
-      fontFamily: 'var(--font-family-centrano1)',
+      fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-body-xs-medium-font-size)',
       lineHeight: 'var(--typography-l-body-xs-medium-line-height)',
       fontWeight: 'var(--typography-l-body-xs-medium-font-weight)',

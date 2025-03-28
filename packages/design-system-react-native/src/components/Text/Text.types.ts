@@ -90,9 +90,9 @@ export enum FontStyle {
 }
 
 export enum FontFamily {
-  Default = 'centrano1',
-  Accent = 'mmsans',
-  Hero = 'mmpoly',
+  Default = 'default',
+  Accent = 'accent',
+  Hero = 'hero',
 }
 /**
  * Text component props.

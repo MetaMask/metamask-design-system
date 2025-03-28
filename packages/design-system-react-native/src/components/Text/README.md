@@ -76,13 +76,13 @@ Available `FontWeight` options:
 
 Optional prop to adjust the font style.
 
-| TYPE                         | REQUIRED | DEFAULT             |
-| :--------------------------- | :------- | :------------------ |
-| [FontStyle](./Text.types.ts) | No       | `FontStyle.Regular` |
+| TYPE                         | REQUIRED | DEFAULT            |
+| :--------------------------- | :------- | :----------------- |
+| [FontStyle](./Text.types.ts) | No       | `FontStyle.Normal` |
 
 Available `FontStyle` options:
 
-- `FontStyle.Regular`
+- `FontStyle.Normal`
 - `FontStyle.Italic`
 
 ### `twClassName`

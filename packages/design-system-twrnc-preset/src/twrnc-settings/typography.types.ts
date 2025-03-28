@@ -76,19 +76,16 @@ export type TypographyTailwindConfigProps = {
     ]
   >;
   fontFamily: {
-    centrano1: string;
-    'centrano1-regular': string;
-    'centrano1-regular-italic': string;
-    'centrano1-medium': string;
-    'centrano1-medium-italic': string;
-    'centrano1-bold': string;
-    'centrano1-bold-italic': string;
-    mmsans: string;
-    'mmsans-regular': string;
-    'mmsans-medium': string;
-    'mmsans-bold': string;
-    mmpoly: string;
-    'mmpoly-regular': string;
+    'default-regular': string;
+    'default-regular-italic': string;
+    'default-medium': string;
+    'default-medium-italic': string;
+    'default-bold': string;
+    'default-bold-italic': string;
+    'accent-regular': string;
+    'accent-medium': string;
+    'accent-bold': string;
+    'hero-regular': string;
   };
   letterSpacing: Record<TypographyVariant, string>;
   lineHeight: Record<TypographyVariant, string>; // Make sure to include units - "40px" instead of "40"

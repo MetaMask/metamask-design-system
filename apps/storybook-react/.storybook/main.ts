@@ -32,7 +32,7 @@ const config: StorybookConfig = {
     options: {},
   },
   viteFinal: (config) => {
-    // Ensure Vite resolves modules outside the Storybook folder.
+    // This will ensure Vite knows how to resolve modules outside the storybook folder
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,

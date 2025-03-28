@@ -20,19 +20,9 @@ export const typography = {
     'l-body-xs': 'var(--typography-l-body-xs-font-size)',
   },
   fontFamily: {
-    centrano1: 'var(--font-family-centrano1)',
-    'centrano1-regular': 'var(--font-family-centrano1)',
-    'centrano1-regular-italic': 'var(--font-family-centrano1)',
-    'centrano1-medium': 'var(--font-family-centrano1)',
-    'centrano1-medium-italic': 'var(--font-family-centrano1)',
-    'centrano1-bold': 'var(--font-family-centrano1)',
-    'centrano1-bold-italic': 'var(--font-family-centrano1)',
-    mmsans: 'var(--font-family-mmsans)',
-    'mmsans-regular': 'var(--font-family-mmsans)',
-    'mmsans-medium': 'var(--font-family-mmsans)',
-    'mmsans-bold': 'var(--font-family-mmsans)',
-    mmpoly: 'var(--font-family-mmpoly)',
-    'mmpoly-regular': 'var(--font-family-mmpoly)',
+    default: 'var(--font-family-centrano1)',
+    accent: 'var(--font-family-mmsans)',
+    hero: 'var(--font-family-mmpoly)',
   },
   letterSpacing: {
     // small screen typography
