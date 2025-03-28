@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.1.0]
 
-### Uncategorized
+### Added
 
-- Updated brandColor.json ([#524](https://github.com/MetaMask/metamask-design-system/pull/524))
+- Updated brand colors to match branding and marketing color values ([#524](https://github.com/MetaMask/metamask-design-system/pull/524))
 
 ## [6.0.1]
 
