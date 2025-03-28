@@ -1,9 +1,9 @@
 type TypeStyle = {
   fontFamily: string;
-  fontSize: number;
-  fontWeight: string;
-  lineHeight: number;
-  letterSpacing: number;
+  fontSize: FontSizes[keyof FontSizes];
+  fontWeight: FontWeights[keyof FontWeights];
+  lineHeight: LineHeights[keyof LineHeights];
+  letterSpacing: LetterSpacing[keyof LetterSpacing];
 };
 
 export type ThemeTypography = {
@@ -35,4 +35,36 @@ export type ThemeTypography = {
   lBodySMBold: TypeStyle;
   lBodyXS: TypeStyle;
   lBodyXSMedium: TypeStyle;
+};
+
+export type FontSizes = {
+  fontSize1: number;
+  fontSize2: number;
+  fontSize3: number;
+  fontSize4: number;
+  fontSize5: number;
+  fontSize6: number;
+  fontSize7: number;
+  fontSize8: number;
+};
+
+export type FontWeights = {
+  regular: string;
+  medium: string;
+  bold: string;
+};
+
+export type LetterSpacing = {
+  letterSpacing0: number;
+  letterSpacing1: number;
+};
+
+export type LineHeights = {
+  lineHeight1: number;
+  lineHeight2: number;
+  lineHeight3: number;
+  lineHeight4: number;
+  lineHeight5: number;
+  lineHeight6: number;
+  lineHeight7: number;
 };

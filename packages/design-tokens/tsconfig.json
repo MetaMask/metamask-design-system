@@ -7,7 +7,8 @@
     "types": ["react", "node", "jest"],
     "paths": {
       "@metamask/design-system-react": ["../design-system-react/src"]
-    }
+    },
+    "lib": ["ES2020", "DOM"]
   },
   "include": [
     "src/**/*.ts",
