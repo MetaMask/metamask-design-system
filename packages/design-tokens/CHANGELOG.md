@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- Updated brandColor.json ([#524](https://github.com/MetaMask/metamask-design-system/pull/524))
+
 ## [6.0.1]
 
 ### Fixed
