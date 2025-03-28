@@ -1,9 +1,7 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
-import {
-  DEFAULT_AVATARGROUP_PROPS,
-  MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS,
-} from './AvatarGroup.constants';
+import { AvatarGroupSize } from '../../shared/enums';
+import { MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS } from './AvatarGroup.constants';
 import type { AvatarGroupProps } from './AvatarGroup.types';
 import { AvatarGroupVariant } from './AvatarGroup.types';
 import {
@@ -35,8 +33,8 @@ import {
  * ```
  */
 export const generateAvatarGroupContainerClassNames = ({
-  size = DEFAULT_AVATARGROUP_PROPS.size,
-  isReverse = DEFAULT_AVATARGROUP_PROPS.isReverse,
+  size = AvatarGroupSize.Md,
+  isReverse = false,
   twClassName = '',
 }: Partial<AvatarGroupProps>): string => {
   const rowStyle = isReverse ? 'flex-row-reverse' : 'flex-row';
@@ -67,7 +65,7 @@ export const generateAvatarGroupContainerClassNames = ({
  * ```
  */
 export const generateAvatarGroupOverflowTextContainerClassNames = ({
-  size = DEFAULT_AVATARGROUP_PROPS.size,
+  size = AvatarGroupSize.Md,
   variant,
 }: Partial<AvatarGroupProps>): string => {
   const baseStyle =

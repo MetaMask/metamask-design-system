@@ -1,3 +1,3 @@
 export const fontFamilies = {
-  sans: 'Centra No1',
+  sans: 'CentraNo1',
 };

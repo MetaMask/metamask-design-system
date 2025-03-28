@@ -1,16 +1,3 @@
-import type { AvatarAccountProps } from './AvatarAccount.types';
-import { AvatarAccountVariant } from './AvatarAccount.types';
-import { AvatarAccountSize, AvatarBaseShape } from '../../shared/enums';
-
-// Defaults
-export const DEFAULT_AVATARACCOUNT_PROPS: Required<
-  Pick<AvatarAccountProps, 'size' | 'shape' | 'variant'>
-> = {
-  size: AvatarAccountSize.Md,
-  shape: AvatarBaseShape.Circle,
-  variant: AvatarAccountVariant.Jazzicon,
-};
-
 // Sample account addresses
 export const SAMPLE_AVATARACCOUNT_ADDRESSES = [
   '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8',

@@ -2,17 +2,17 @@
 import React from 'react';
 
 import AvatarBase from '../../primitives/AvatarBase';
+import { AvatarAccountSize, AvatarBaseShape } from '../../shared/enums';
 import Jazzicon from '../../primitives/Jazzicon';
 import Blockies from '../../primitives/Blockies';
-import { DEFAULT_AVATARACCOUNT_PROPS } from './AvatarAccount.constants';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 import { AvatarAccountVariant } from './AvatarAccount.types';
 
 const AvatarAccount = ({
   address,
-  variant = DEFAULT_AVATARACCOUNT_PROPS.variant,
-  size = DEFAULT_AVATARACCOUNT_PROPS.size,
-  shape = DEFAULT_AVATARACCOUNT_PROPS.shape,
+  variant = AvatarAccountVariant.Jazzicon,
+  size = AvatarAccountSize.Md,
+  shape = AvatarBaseShape.Circle,
   ...props
 }: AvatarAccountProps) => {
   let AvatarArtComponent;

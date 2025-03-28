@@ -1,6 +1,5 @@
 import { render } from '@testing-library/react-native';
 
-import Text from '../../components/Text';
 import {
   MAP_AVATARBASE_SIZE_BORDERWIDTH,
   TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
@@ -13,7 +12,6 @@ import {
 import AvatarGroup from './AvatarGroup';
 import {
   MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS,
-  DEFAULT_AVATARGROUP_PROPS,
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
   SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR,
   SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
@@ -27,7 +25,7 @@ describe('AvatarGroup', () => {
       const classNames = generateAvatarGroupContainerClassNames({});
       expect(classNames).toContain('flex-row');
       expect(classNames).toContain(
-        `gap-[${MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS[DEFAULT_AVATARGROUP_PROPS.size]}px]`,
+        `gap-[${MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS[AvatarGroupSize.Md]}px]`,
       );
     });
 
@@ -74,11 +72,11 @@ describe('AvatarGroup', () => {
         'bg-icon-default items-center justify-center overflow-hidden',
       );
       expect(classNames).toContain(
-        `w-[${Number(DEFAULT_AVATARGROUP_PROPS.size) + MAP_AVATARBASE_SIZE_BORDERWIDTH[DEFAULT_AVATARGROUP_PROPS.size] * 2}px]`,
+        `w-[${Number(AvatarGroupSize.Md) + MAP_AVATARBASE_SIZE_BORDERWIDTH[AvatarGroupSize.Md] * 2}px]`,
       );
       expect(classNames).toContain('border-background-default');
       expect(classNames).toContain(
-        `border-[${MAP_AVATARBASE_SIZE_BORDERWIDTH[DEFAULT_AVATARGROUP_PROPS.size]}px]`,
+        `border-[${MAP_AVATARBASE_SIZE_BORDERWIDTH[AvatarGroupSize.Md]}px]`,
       );
       expect(classNames).toContain('rounded-full'); // Default shape
     });
@@ -170,14 +168,12 @@ describe('AvatarGroup', () => {
       );
       const container = getByTestId('avatar-group');
       // 4 Avatars + 1 OverflowText
-      expect(container.children.length).toStrictEqual(
-        DEFAULT_AVATARGROUP_PROPS.max + 1,
-      );
+      expect(container.children.length).toStrictEqual(5);
 
       const overflowText = getByTestId('avatar-overflow-text');
       expect(overflowText).toBeDefined();
       expect(overflowText.props.children).toStrictEqual(
-        `+${SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR.length - DEFAULT_AVATARGROUP_PROPS.max}`,
+        `+${SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR.length - 4}`,
       );
     });
 
