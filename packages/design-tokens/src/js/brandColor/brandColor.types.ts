@@ -179,6 +179,28 @@ export type BrandColor = {
   lime025: string;
   /** lime/lime050: #e3febd */
   lime050: string;
+  /** indigo/indigo025: #f3faff */
+  indigo025: string;
+  /** indigo/indigo050: #ebf5ff */
+  indigo050: string;
+  /** indigo/indigo100: #cce7ff */
+  indigo100: string;
+  /** indigo/indigo200: #89b0ff */
+  indigo200: string;
+  /** indigo/indigo300: #7e9ff0 */
+  indigo300: string;
+  /** indigo/indigo400: #6f87db */
+  indigo400: string;
+  /** indigo/indigo500: #5b66bf */
+  indigo500: string;
+  /** indigo/indigo600: #4544a1 */
+  indigo600: string;
+  /** indigo/indigo700: #2e2082 */
+  indigo700: string;
+  /** indigo/indigo800: #190066 */
+  indigo800: string;
+  /** indigo/indigo900: #13004a */
+  indigo900: string;
   /** white: #ffffff */
   white: string;
   /** black: #000000 */
