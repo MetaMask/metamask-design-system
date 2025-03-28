@@ -62,13 +62,13 @@ Available `TextColor` options:
 
 Optional prop to adjust the font weight.
 
-| TYPE                          | REQUIRED | DEFAULT             |
-| :---------------------------- | :------- | :------------------ |
-| [FontWeight](./Text.types.ts) | No       | `FontWeight.Normal` |
+| TYPE                          | REQUIRED | DEFAULT              |
+| :---------------------------- | :------- | :------------------- |
+| [FontWeight](./Text.types.ts) | No       | `FontWeight.Regular` |
 
 Available `FontWeight` options:
 
-- `FontWeight.Normal` (Weight `400`)
+- `FontWeight.Regular` (Weight `400`)
 - `FontWeight.Medium` (Weight `500`)
 - `FontWeight.Bold` (Weight `700`)
 
@@ -76,13 +76,13 @@ Available `FontWeight` options:
 
 Optional prop to adjust the font style.
 
-| TYPE                         | REQUIRED | DEFAULT            |
-| :--------------------------- | :------- | :----------------- |
-| [FontStyle](./Text.types.ts) | No       | `FontStyle.Normal` |
+| TYPE                         | REQUIRED | DEFAULT             |
+| :--------------------------- | :------- | :------------------ |
+| [FontStyle](./Text.types.ts) | No       | `FontStyle.Regular` |
 
 Available `FontStyle` options:
 
-- `FontStyle.Normal`
+- `FontStyle.Regular`
 - `FontStyle.Italic`
 
 ### `twClassName`

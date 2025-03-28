@@ -81,12 +81,18 @@ export enum FontWeight {
   /**
    * Weight - 400
    */
-  Normal = '400',
+  Regular = '400',
 }
 
 export enum FontStyle {
   Italic = 'italic',
   Normal = 'normal',
+}
+
+export enum FontFamily {
+  Default = 'centrano1',
+  Accent = 'mmsans',
+  Hero = 'mmpoly',
 }
 /**
  * Text component props.
@@ -106,9 +112,19 @@ export type TextProps = {
    */
   color?: TextColor;
   /**
-   * Optional prop to adjust the weight of the font.
+   * Optional prop to control the font weight of the text.
+   * - Normal: 400
+   * - Medium: 500
+   * - Bold: 700
    */
   fontWeight?: FontWeight;
+  /**
+   * Optional prop to adjust the font family.
+   *  - Default: CentraNo1
+   *  - Accent: MMSans
+   *  - Hero: MMPoly
+   */
+  fontFamily?: FontFamily;
   /**
    * Optional prop to adjust the style of the font.
    */

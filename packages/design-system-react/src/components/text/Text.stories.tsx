@@ -6,6 +6,7 @@ import { Text } from './Text';
 import {
   TextVariant,
   FontWeight,
+  FontFamily,
   FontStyle,
   TextTransform,
   TextAlign,
@@ -47,6 +48,13 @@ const meta: Meta<typeof Text> = {
       mapping: FontWeight,
       description:
         'Optional prop to control the font weight of the text. Normal: 400, Medium: 500, Bold: 700',
+    },
+    fontFamily: {
+      control: 'select',
+      options: Object.keys(FontFamily),
+      mapping: FontFamily,
+      description:
+        'Optional prop to adjust the font family. Default: CentraNo1, Accent: MMSans, Hero: MMPoly',
     },
     fontStyle: {
       control: 'select',
@@ -181,6 +189,17 @@ export const FontWeightStory: Story = {
     </div>
   ),
   name: 'Font Weight',
+};
+
+export const FontFamilyStory: Story = {
+  render: () => (
+    <div className="space-y-4">
+      <Text fontFamily={FontFamily.Default}>Default (CentraNo1)</Text>
+      <Text fontFamily={FontFamily.Accent}>Accent (MMSans)</Text>
+      <Text fontFamily={FontFamily.Hero}>Hero (MMPoly)</Text>
+    </div>
+  ),
+  name: 'Font Family',
 };
 
 export const FontStyleStory: Story = {

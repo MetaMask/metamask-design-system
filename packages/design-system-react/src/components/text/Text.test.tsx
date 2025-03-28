@@ -7,6 +7,7 @@ import {
   TextColor,
   TextAlign,
   FontWeight,
+  FontFamily,
   FontStyle,
   TextTransform,
   OverflowWrap,
@@ -60,6 +61,15 @@ describe('Text Component', () => {
       it(`applies ${weight} font weight correctly`, () => {
         const { container } = render(<Text fontWeight={weight}>Test</Text>);
         expect(container.firstChild).toHaveClass(weight);
+      });
+    });
+  });
+
+  describe('Font Family', () => {
+    Object.values(FontFamily).forEach((family) => {
+      it(`applies ${family} font family correctly`, () => {
+        const { container } = render(<Text fontFamily={family}>Test</Text>);
+        expect(container.firstChild).toHaveClass(family);
       });
     });
   });

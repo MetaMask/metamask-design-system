@@ -4,13 +4,14 @@ import React from 'react';
 import { twMerge } from '../../utils/tw-merge';
 import { TEXT_CLASS_MAP, TEXT_DEFAULT_TAG_MAP } from './Text.constants';
 import type { TextProps } from './Text.types';
-import { TextVariant, TextColor } from './Text.types';
+import { TextVariant, TextColor, FontFamily } from './Text.types';
 
 export const Text: React.FC<TextProps> = ({
   variant = TextVariant.BodyMd,
   children,
   className,
   fontWeight,
+  fontFamily = FontFamily.Default,
   fontStyle,
   textTransform,
   textAlign,
@@ -29,6 +30,7 @@ export const Text: React.FC<TextProps> = ({
     color,
     TEXT_CLASS_MAP[variant],
     fontWeight,
+    fontFamily,
     fontStyle,
     textTransform,
     textAlign,
