@@ -57,6 +57,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/BadgeIcon/BadgeIcon.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeIcon/BadgeIcon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BadgeNetwork/BadgeNetwork.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeNetwork/BadgeNetwork.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/Button.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/Button.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx"),
