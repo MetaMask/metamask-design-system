@@ -16,6 +16,17 @@ import {
 const meta: Meta<TextProps> = {
   title: 'Components/Text',
   component: Text,
+<<<<<<< HEAD
+=======
+  args: {
+    variant: TextVariant.BodyMd,
+    color: TextColor.TextDefault,
+    fontWeight: FontWeight.Regular,
+    fontStyle: FontStyle.Normal,
+    children: 'The quick orange fox jumped over the lazy dog.',
+    twClassName: '',
+  },
+>>>>>>> a26a1beea713c79f3ca76e91035d2ce1e9955d22
   argTypes: {
     variant: {
       control: 'select',
