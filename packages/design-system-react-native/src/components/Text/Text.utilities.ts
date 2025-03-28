@@ -16,7 +16,7 @@ import { FontWeight, FontStyle } from './Text.types';
  *
  * @param variant - Specifies the typography variant (e.g., body, heading, display).
  * @param color - Specifies the text color based on the design system's color tokens.
- * @param fontWeight - Specifies the font weight (e.g., normal, bold).
+ * @param fontWeight - Specifies the font weight (e.g., regular, bold).
  * @param fontStyle - Specifies the font style (e.g., normal, italic).
  * @param twClassName - Additional custom Tailwind class names to be appended to the generated classes.
  * @returns A string of combined Tailwind CSS class names.
@@ -38,7 +38,7 @@ import { FontWeight, FontStyle } from './Text.types';
 export const generateTextClassNames = ({
   variant = DEFAULT_TEXT_VARIANT,
   color = DEFAULT_TEXT_COLOR,
-  fontWeight = FontWeight.Normal,
+  fontWeight = FontWeight.Regular,
   fontStyle = FontStyle.Normal,
   twClassName = '',
 }: Partial<TextProps>): string => {

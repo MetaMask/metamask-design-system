@@ -175,7 +175,7 @@ export const Color: Story = {
 export const FontWeightStory: Story = {
   render: () => (
     <div className="space-y-4">
-      <Text fontWeight={FontWeight.Normal}>Normal (400)</Text>
+      <Text fontWeight={FontWeight.Regular}>Regular (400)</Text>
       <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
       <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
     </div>

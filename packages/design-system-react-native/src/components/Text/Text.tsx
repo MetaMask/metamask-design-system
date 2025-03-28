@@ -12,7 +12,7 @@ const Text: React.FC<TextProps> = ({
   color = DEFAULT_TEXT_COLOR,
   style,
   children,
-  fontWeight = FontWeight.Normal,
+  fontWeight = FontWeight.Regular,
   fontStyle = FontStyle.Normal,
   twClassName = '',
   ...props

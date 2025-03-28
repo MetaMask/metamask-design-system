@@ -11,7 +11,7 @@ export const DEFAULT_TEXT_COLOR = TextColor.TextDefault;
 export const MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME: {
   [key in FontWeight]: string;
 } = {
-  [FontWeight.Normal]: '',
+  [FontWeight.Regular]: '',
   [FontWeight.Medium]: '-medium',
   [FontWeight.Bold]: '-bold',
 };
