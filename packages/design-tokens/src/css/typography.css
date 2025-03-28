@@ -100,22 +100,18 @@
   --typography-s-body-xs-letter-spacing: var(--letter-spacing-0);
 
   /* typography scale large screen */
-  --typography-l-display-md-font-family: var(--font-family-sans);
   --typography-l-display-md-font-size: var(--font-size-8);
   --typography-l-display-md-line-height: var(--line-height-7);
   --typography-l-display-md-font-weight: var(--font-weight-medium);
   --typography-l-display-md-letter-spacing: var(--letter-spacing-0);
-  --typography-l-heading-lg-font-family: var(--font-family-sans);
   --typography-l-heading-lg-font-size: var(--font-size-7);
   --typography-l-heading-lg-line-height: var(--line-height-6);
   --typography-l-heading-lg-font-weight: var(--font-weight-bold);
   --typography-l-heading-lg-letter-spacing: var(--letter-spacing-0);
-  --typography-l-heading-md-font-family: var(--font-family-sans);
   --typography-l-heading-md-font-size: var(--font-size-6);
   --typography-l-heading-md-line-height: var(--line-height-5);
   --typography-l-heading-md-font-weight: var(--font-weight-bold);
   --typography-l-heading-md-letter-spacing: var(--letter-spacing-0);
-  --typography-l-heading-sm-font-family: var(--font-family-sans);
   --typography-l-heading-sm-font-size: var(--font-size-5);
   --typography-l-heading-sm-line-height: var(--line-height-4);
   --typography-l-heading-sm-font-weight: var(--font-weight-bold);
