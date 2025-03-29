@@ -199,10 +199,11 @@ describe('Text Component', () => {
     expect(container.firstChild).toHaveClass(
       'text-default',
       'text-s-body-md',
-      'font-s-body-md',
       'leading-s-body-md',
       'tracking-s-body-md',
       'md:text-l-body-md',
+      'font-regular',
+      'font-default',
     );
   });
 });
