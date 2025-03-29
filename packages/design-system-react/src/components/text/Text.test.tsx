@@ -8,6 +8,7 @@ import {
   TextColor,
   TextAlign,
   FontWeight,
+  FontFamily,
   FontStyle,
   TextTransform,
   OverflowWrap,
@@ -73,6 +74,15 @@ describe('Text Component', () => {
       it(`applies ${weight} font weight correctly`, () => {
         const { container } = render(<Text fontWeight={weight}>Test</Text>);
         expect(container.firstChild).toHaveClass(weight);
+      });
+    });
+  });
+
+  describe('Font Family', () => {
+    Object.values(FontFamily).forEach((family) => {
+      it(`applies ${family} font family correctly`, () => {
+        const { container } = render(<Text fontFamily={family}>Test</Text>);
+        expect(container.firstChild).toHaveClass(family);
       });
     });
   });
@@ -189,10 +199,11 @@ describe('Text Component', () => {
     expect(container.firstChild).toHaveClass(
       'text-default',
       'text-s-body-md',
-      'font-s-body-md',
       'leading-s-body-md',
       'tracking-s-body-md',
       'md:text-l-body-md',
+      'font-regular',
+      'font-default',
     );
   });
 });

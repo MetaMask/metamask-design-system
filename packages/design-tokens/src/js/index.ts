@@ -10,5 +10,5 @@ export { lightTheme, darkTheme } from './themes';
 export type { Theme, ThemeColors, ThemeShadows } from './themes/types';
 
 // Typography
-export { typography } from './typography';
+export { typography, fontFamilies } from './typography';
 export type { ThemeTypography } from './typography';

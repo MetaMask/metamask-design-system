@@ -20,25 +20,9 @@ export const typography = {
     'l-body-xs': 'var(--typography-l-body-xs-font-size)',
   },
   fontFamily: {
-    sans: ['var(--font-family-sans)'],
-    // small screen typography
-    's-display-md': 'var(--typography-s-display-md-font-family)',
-    's-heading-lg': 'var(--typography-s-heading-lg-font-family)',
-    's-heading-md': 'var(--typography-s-heading-md-font-family)',
-    's-heading-sm': 'var(--typography-s-heading-sm-font-family)',
-    's-body-lg': 'var(--typography-s-body-lg-regular-font-family)',
-    's-body-md': 'var(--typography-s-body-md-font-family)',
-    's-body-sm': 'var(--typography-s-body-sm-font-family)',
-    's-body-xs': 'var(--typography-s-body-xs-font-family)',
-    // large screen typography
-    'l-display-md': 'var(--typography-l-display-md-font-family)',
-    'l-heading-lg': 'var(--typography-l-heading-lg-font-family)',
-    'l-heading-md': 'var(--typography-l-heading-md-font-family)',
-    'l-heading-sm': 'var(--typography-l-heading-sm-font-family)',
-    'l-body-lg': 'var(--typography-l-body-lg-medium-font-family)',
-    'l-body-md': 'var(--typography-l-body-md-font-family)',
-    'l-body-sm': 'var(--typography-l-body-sm-font-family)',
-    'l-body-xs': 'var(--typography-l-body-xs-font-family)',
+    default: 'var(--font-family-default)',
+    accent: 'var(--font-family-accent)',
+    hero: 'var(--font-family-hero)',
   },
   letterSpacing: {
     // small screen typography

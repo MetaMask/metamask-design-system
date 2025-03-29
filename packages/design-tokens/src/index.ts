@@ -4,6 +4,7 @@ export {
   lightTheme,
   darkTheme,
   typography,
+  fontFamilies,
 } from './js';
 export type {
   BrandColor,
