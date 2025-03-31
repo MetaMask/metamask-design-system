@@ -102,13 +102,13 @@
   --typography-s-body-sm-font-weight: var(--font-weight-regular);
   --typography-s-body-sm-letter-spacing: var(--letter-spacing-0);
   --typography-s-body-xs-medium-font-family: var(--font-family-sans);
-  --typography-s-body-xs-medium-font-size: var(--font-size-1);
-  --typography-s-body-xs-medium-line-height: var(--line-height-1);
+  --typography-s-body-xs-medium-font-size: var(--font-size-2);
+  --typography-s-body-xs-medium-line-height: var(--line-height-2);
   --typography-s-body-xs-medium-font-weight: var(--font-weight-medium);
   --typography-s-body-xs-medium-letter-spacing: var(--letter-spacing-0);
   --typography-s-body-xs-font-family: var(--font-family-sans);
-  --typography-s-body-xs-font-size: var(--font-size-1);
-  --typography-s-body-xs-line-height: var(--line-height-1);
+  --typography-s-body-xs-font-size: var(--font-size-2);
+  --typography-s-body-xs-line-height: var(--line-height-2);
   --typography-s-body-xs-font-weight: var(--font-weight-regular);
   --typography-s-body-xs-letter-spacing: var(--letter-spacing-0);
 

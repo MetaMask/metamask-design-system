@@ -98,15 +98,15 @@ export const typography: ThemeTypography = {
   sBodyXS: {
     fontFamily: fontFamilies.sans,
     fontWeight: fontWeights.regular,
-    fontSize: fontSizes.fontSize1,
-    lineHeight: lineHeights.lineHeight1,
+    fontSize: fontSizes.fontSize2,
+    lineHeight: lineHeights.lineHeight2,
     letterSpacing: letterSpacing.letterSpacing1,
   },
   sBodyXSMedium: {
     fontFamily: fontFamilies.sans,
     fontWeight: fontWeights.medium,
-    fontSize: fontSizes.fontSize1,
-    lineHeight: lineHeights.lineHeight1,
+    fontSize: fontSizes.fontSize2,
+    lineHeight: lineHeights.lineHeight2,
     letterSpacing: letterSpacing.letterSpacing1,
   },
   lDisplayMD: {
