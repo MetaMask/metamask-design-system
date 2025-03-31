@@ -19,7 +19,7 @@ export type TextProps = {
   className?: string;
   /**
    * Optional prop to control the font weight of the text.
-   * - Normal: 400
+   * - Regular: 400
    * - Medium: 500
    * - Bold: 700
    */
@@ -139,7 +139,7 @@ export enum FontWeight {
   /**
    * Weight - 400
    */
-  Normal = 'font-normal',
+  Regular = 'font-regular',
 }
 
 export enum OverflowWrap {

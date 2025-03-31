@@ -13,7 +13,7 @@ const meta: Meta<TextProps> = {
   args: {
     variant: TextVariant.BodyMd,
     color: TextColor.TextDefault,
-    fontWeight: FontWeight.Normal,
+    fontWeight: FontWeight.Regular,
     fontStyle: FontStyle.Normal,
     children: 'The quick orange fox jumped over the lazy dog.',
     twClassName: '',
@@ -68,7 +68,7 @@ export const Default: Story = {
   args: {
     variant: TextVariant.BodyMd,
     color: TextColor.TextDefault,
-    fontWeight: FontWeight.Normal,
+    fontWeight: FontWeight.Regular,
     fontStyle: FontStyle.Normal,
     children: 'The quick orange fox jumped over the lazy dog.',
     twClassName: '',
@@ -109,7 +109,7 @@ export const Colors: Story = {
 export const FontWeightStory: Story = {
   render: () => (
     <View>
-      <Text fontWeight={FontWeight.Normal}>Normal (400)</Text>
+      <Text fontWeight={FontWeight.Regular}>Regular (400)</Text>
       <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
       <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
     </View>

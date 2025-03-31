@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { twMerge } from '../../utils/tw-merge';
 import {
   Text,
   TextVariant,
@@ -11,7 +12,10 @@ import {
   TextTransform,
   OverflowWrap,
 } from '.';
-import { TEXT_CLASS_MAP } from './Text.constants';
+import {
+  CLASSMAP_TEXT_VARIANT_FONTSTYLE,
+  CLASSMAP_TEXT_VARIANT_FONTWEIGHT,
+} from './Text.constants';
 
 describe('Text Component', () => {
   it('renders with props applied to the underlying element', () => {
@@ -32,7 +36,16 @@ describe('Text Component', () => {
     Object.values(TextVariant).forEach((variant) => {
       it(`renders ${variant} variant correctly`, () => {
         const { container } = render(<Text variant={variant}>Test</Text>);
-        expect(container.firstChild).toHaveClass(TEXT_CLASS_MAP[variant]);
+
+        const expectedClassNames = twMerge(
+          TextColor.TextDefault,
+          CLASSMAP_TEXT_VARIANT_FONTSTYLE[variant],
+          CLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
+        );
+
+        expectedClassNames.split(' ').forEach((className) => {
+          expect(container.firstChild).toHaveClass(className);
+        });
       });
     });
   });

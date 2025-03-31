@@ -81,7 +81,7 @@ export enum FontWeight {
   /**
    * Weight - 400
    */
-  Normal = '400',
+  Regular = '400',
 }
 
 export enum FontStyle {

@@ -15,7 +15,7 @@ const meta: Meta<TextOrChildrenProps> = {
     textProps: {
       variant: TextVariant.BodyMd,
       color: TextColor.TextDefault,
-      fontWeight: FontWeight.Normal,
+      fontWeight: FontWeight.Regular,
     },
   },
 };

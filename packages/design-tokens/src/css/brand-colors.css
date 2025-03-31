@@ -70,40 +70,52 @@
   --brand-colors-yellow-yellow025: #fff9e6;
   /* Orange */
   --brand-colors-orange-orange100: #ffd4c1;
-  --brand-colors-orange-orange200: #ffa47c;
+  --brand-colors-orange-orange200: #ffa680;
   --brand-colors-orange-orange300: #ff7940;
-  --brand-colors-orange-orange400: #f35714;
+  --brand-colors-orange-orange400: #ff5c16;
   --brand-colors-orange-orange500: #c3420d;
   --brand-colors-orange-orange600: #932d06;
-  --brand-colors-orange-orange700: #631800;
+  --brand-colors-orange-orange700: #661800;
   --brand-colors-orange-orange800: #451100;
   --brand-colors-orange-orange900: #280a00;
   --brand-colors-orange-orange050: #fff0ea;
   --brand-colors-orange-orange025: #fff8f5;
   /* Purple */
-  --brand-colors-purple-purple100: #efd2ff;
+  --brand-colors-purple-purple100: #eac2ff;
   --brand-colors-purple-purple200: #dfa4ff;
-  --brand-colors-purple-purple300: #d27dff;
+  --brand-colors-purple-purple300: #d075ff;
   --brand-colors-purple-purple400: #b864f5;
   --brand-colors-purple-purple500: #8f44e4;
   --brand-colors-purple-purple600: #6c2ab2;
   --brand-colors-purple-purple700: #6c2ab2;
-  --brand-colors-purple-purple800: #380658;
+  --brand-colors-purple-purple800: #3d065f;
   --brand-colors-purple-purple900: #280a00;
   --brand-colors-purple-purple050: #fbf2ff;
   --brand-colors-purple-purple025: #fcf6ff;
   /* Lime */
-  --brand-colors-lime-lime100: #b8ef4a;
+  --brand-colors-lime-lime100: #baf24a;
   --brand-colors-lime-lime200: #95ca45;
   --brand-colors-lime-lime300: #7ab040;
   --brand-colors-lime-lime400: #64993d;
   --brand-colors-lime-lime500: #457a39;
   --brand-colors-lime-lime600: #275b35;
-  --brand-colors-lime-lime700: #093a31;
+  --brand-colors-lime-lime700: #013330;
   --brand-colors-lime-lime800: #012826;
   --brand-colors-lime-lime900: #011515;
   --brand-colors-lime-lime025: #effed9;
-  --brand-colors-lime-lime050: #e3febd;
+  --brand-colors-lime-lime050: #e5ffc3;
+  /* Indigo */
+  --brand-colors-indigo-indigo025: #f3faff;
+  --brand-colors-indigo-indigo050: #ebf5ff;
+  --brand-colors-indigo-indigo100: #cce7ff;
+  --brand-colors-indigo-indigo200: #89b0ff;
+  --brand-colors-indigo-indigo300: #7e9ff0;
+  --brand-colors-indigo-indigo400: #6f87db;
+  --brand-colors-indigo-indigo500: #5b66bf;
+  --brand-colors-indigo-indigo600: #4544a1;
+  --brand-colors-indigo-indigo700: #2e2082;
+  --brand-colors-indigo-indigo800: #190066;
+  --brand-colors-indigo-indigo900: #13004a;
   /* White */
   --brand-colors-white: #ffffff;
   /* Black */

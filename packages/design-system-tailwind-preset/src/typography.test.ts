@@ -82,6 +82,20 @@ describe('Typography', () => {
     '--typography-s-body-lg-medium-font-weight',
     '--typography-s-body-lg-medium-letter-spacing',
     '--typography-l-body-lg-medium-font-weight',
+    '--typography-s-display-md-font-weight',
+    '--typography-s-heading-lg-font-weight',
+    '--typography-s-heading-md-font-weight',
+    '--typography-s-heading-sm-font-weight',
+    '--typography-s-body-md-font-weight',
+    '--typography-s-body-sm-font-weight',
+    '--typography-s-body-xs-font-weight',
+    '--typography-l-display-md-font-weight',
+    '--typography-l-heading-lg-font-weight',
+    '--typography-l-heading-md-font-weight',
+    '--typography-l-heading-sm-font-weight',
+    '--typography-l-body-md-font-weight',
+    '--typography-l-body-sm-font-weight',
+    '--typography-l-body-xs-font-weight',
   ];
 
   /**
@@ -122,7 +136,7 @@ describe('Typography', () => {
     const unusedVariables = Array.from(designTokens).filter(
       (varName) => !usedSet.has(varName) && !ignoredSet.has(varName),
     );
-
+    console.log(unusedVariables);
     // Expect no unused variables
     expect(unusedVariables).toHaveLength(0);
   });

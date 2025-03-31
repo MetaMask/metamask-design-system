@@ -61,24 +61,10 @@ export const typography = {
     'l-body-xs': 'var(--typography-l-body-xs-letter-spacing)',
   },
   fontWeight: {
-    // small screen typography
-    's-display-md': 'var(--typography-s-display-md-font-weight)',
-    's-heading-lg': 'var(--typography-s-heading-lg-font-weight)',
-    's-heading-md': 'var(--typography-s-heading-md-font-weight)',
-    's-heading-sm': 'var(--typography-s-heading-sm-font-weight)',
-    's-body-lg': 'var(--font-weight-regular)',
-    's-body-md': 'var(--typography-s-body-md-font-weight)',
-    's-body-sm': 'var(--typography-s-body-sm-font-weight)',
-    's-body-xs': 'var(--typography-s-body-xs-font-weight)',
-    // large screen typography
-    'l-display-md': 'var(--typography-l-display-md-font-weight)',
-    'l-heading-lg': 'var(--typography-l-heading-lg-font-weight)',
-    'l-heading-md': 'var(--typography-l-heading-md-font-weight)',
-    'l-heading-sm': 'var(--typography-l-heading-sm-font-weight)',
-    'l-body-lg': 'var(--font-weight-regular)',
-    'l-body-md': 'var(--typography-l-body-md-font-weight)',
-    'l-body-sm': 'var(--typography-l-body-sm-font-weight)',
-    'l-body-xs': 'var(--typography-l-body-xs-font-weight)',
+    // agnostic weights
+    regular: 'var(--font-weight-regular)',
+    medium: 'var(--font-weight-medium)',
+    bold: 'var(--font-weight-bold)',
   },
   lineHeight: {
     // small screen typography
