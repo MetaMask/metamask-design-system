@@ -20,6 +20,7 @@ export const typography = {
     'l-body-xs': 'var(--typography-l-body-xs-font-size)',
   },
   fontFamily: {
+    sans: 'var(--font-family-default)',
     default: 'var(--font-family-default)',
     accent: 'var(--font-family-accent)',
     hero: 'var(--font-family-hero)',
