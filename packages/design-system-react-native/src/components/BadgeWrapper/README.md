@@ -168,6 +168,22 @@ Optional style override for the outermost wrapper.
 
 ---
 
+### Offset Adjustments
+
+```tsx
+<BadgeWrapper
+  position={BadgeWrapperPosition.TopRight}
+  positionAnchorShape={BadgeWrapperPositionAnchorShape.Rectangular}
+  positionXOffset={5} // moving 5 pixel right from the TopRight corner
+  positionYOffset={10} // moving 10 pixel down from the TopRight corner
+  badge={<BadgeNetwork name="ETH" src={{ uri: 'https://...' }} />}
+>
+  <AvatarNetwork name="ETH" src={{ uri: 'https://...' }} />
+</BadgeWrapper>
+```
+
+---
+
 ## Notes
 
 - You must wrap both `children` and `badge` elements using this component to ensure proper positioning.
