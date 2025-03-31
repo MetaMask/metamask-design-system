@@ -4,24 +4,35 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import Text from './Text';
-import { DEFAULT_TEXT_COLOR, DEFAULT_TEXT_VARIANT } from './Text.constants';
-import { TextVariant, TextColor, FontWeight, FontStyle } from './Text.types';
+import {
+  DEFAULT_TEXT_COLOR,
+  DEFAULT_TEXT_VARIANT,
+  MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME,
+} from './Text.constants';
+import {
+  TextVariant,
+  TextColor,
+  FontWeight,
+  FontStyle,
+  FontFamily,
+} from './Text.types';
 import { generateTextClassNames } from './Text.utilities';
 
 describe('Text', () => {
   describe('generateTextClassNames', () => {
-    it('returns default class names when no props are provided', () => {
+    it('returns correct default class names when no props are provided', () => {
       const classNames = generateTextClassNames({});
-      expect(classNames).toBe(
-        `text-${DEFAULT_TEXT_VARIANT} font-${DEFAULT_TEXT_VARIANT} ${DEFAULT_TEXT_COLOR}`,
+      expect(classNames).toContain(`text-${DEFAULT_TEXT_VARIANT}`);
+      expect(classNames).toContain(
+        `font-${FontFamily.Default}${MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME[FontWeight.Regular]}`,
       );
+      expect(classNames).toContain(DEFAULT_TEXT_COLOR);
     });
 
     it('generates class names correctly for each variant', () => {
       Object.values(TextVariant).forEach((variant) => {
         const classNames = generateTextClassNames({ variant });
         expect(classNames).toContain(`text-${variant}`);
-        expect(classNames).toContain(`font-${variant}`);
       });
     });
 
@@ -37,7 +48,7 @@ describe('Text', () => {
         fontWeight: FontWeight.Bold,
         variant: TextVariant.BodyMd,
       });
-      expect(classNames).toContain(`font-body-md-bold`);
+      expect(classNames).toContain(`font-default-bold`);
     });
 
     it('includes italic in class names when fontStyle is Italic', () => {
@@ -45,7 +56,7 @@ describe('Text', () => {
         fontStyle: FontStyle.Italic,
         variant: TextVariant.BodyMd,
       });
-      expect(classNames).toContain(`font-body-md-italic`);
+      expect(classNames).toContain(`font-default-regular-italic`);
     });
 
     it('combines bold and italic correctly', () => {
@@ -54,7 +65,7 @@ describe('Text', () => {
         fontStyle: FontStyle.Italic,
         variant: TextVariant.BodyMd,
       });
-      expect(classNames).toContain(`font-body-md-bold-italic`);
+      expect(classNames).toContain(`font-default-bold-italic`);
     });
 
     it('includes twClassName', () => {

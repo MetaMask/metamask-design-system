@@ -1,5 +1,4 @@
 type TypeStyle = {
-  fontFamily: string;
   fontSize: FontSizes[keyof FontSizes];
   fontWeight: FontWeights[keyof FontWeights];
   lineHeight: LineHeights[keyof LineHeights];
@@ -35,6 +34,12 @@ export type ThemeTypography = {
   lBodySMBold: TypeStyle;
   lBodyXS: TypeStyle;
   lBodyXSMedium: TypeStyle;
+};
+
+export type FontFamilies = {
+  default: string;
+  accent: string;
+  hero: string;
 };
 
 export type FontSizes = {

@@ -14,8 +14,8 @@ describe('dark Theme', () => {
   });
 
   it('typography tokens are exported from darkTheme by checking first typography token', () => {
-    expect(darkTheme.typography.sDisplayMD.fontFamily).toStrictEqual(
-      designTokens.global.fontFamilies['centra-no1'].value,
+    expect(darkTheme.typography.sDisplayMD.fontWeight).toStrictEqual(
+      designTokens.global.fontWeights.bold.value,
     );
   });
 

@@ -8,13 +8,14 @@ import {
   MAP_TEXT_VARIANT_TAG,
 } from './Text.constants';
 import type { TextProps } from './Text.types';
-import { TextVariant, TextColor } from './Text.types';
+import { TextVariant, TextColor, FontFamily } from './Text.types';
 
 export const Text: React.FC<TextProps> = ({
   variant = TextVariant.BodyMd,
   children,
   className,
   fontWeight,
+  fontFamily = FontFamily.Default,
   fontStyle,
   textTransform,
   textAlign,
@@ -29,7 +30,7 @@ export const Text: React.FC<TextProps> = ({
   // Otherwise, render the semantic HTML element mapped to this variant (e.g. h1-h4, p).
   const Component = asChild ? Slot : MAP_TEXT_VARIANT_TAG[variant];
 
-  const mergedClassName = twMerge(
+  const mergedClassName = `${twMerge(
     color,
     CLASSMAP_TEXT_VARIANT_FONTSTYLE[variant],
     fontWeight || CLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
@@ -39,7 +40,7 @@ export const Text: React.FC<TextProps> = ({
     overflowWrap,
     ellipsis && 'truncate',
     className,
-  );
+  )} ${fontFamily}`.trim();
 
   return (
     <Component className={mergedClassName} style={style} {...props}>

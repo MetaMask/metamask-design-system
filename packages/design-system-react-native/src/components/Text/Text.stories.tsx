@@ -5,19 +5,17 @@ import { View, ScrollView } from 'react-native';
 
 import Text from './Text';
 import type { TextProps } from './Text.types';
-import { TextVariant, FontWeight, FontStyle, TextColor } from './Text.types';
+import {
+  TextVariant,
+  FontWeight,
+  FontStyle,
+  TextColor,
+  FontFamily,
+} from './Text.types';
 
 const meta: Meta<TextProps> = {
   title: 'Components/Text',
   component: Text,
-  args: {
-    variant: TextVariant.BodyMd,
-    color: TextColor.TextDefault,
-    fontWeight: FontWeight.Regular,
-    fontStyle: FontStyle.Normal,
-    children: 'The quick orange fox jumped over the lazy dog.',
-    twClassName: '',
-  },
   argTypes: {
     variant: {
       control: 'select',
@@ -30,6 +28,10 @@ const meta: Meta<TextProps> = {
     fontWeight: {
       control: 'select',
       options: FontWeight,
+    },
+    fontFamily: {
+      control: 'select',
+      options: FontFamily,
     },
     fontStyle: {
       control: 'select',
@@ -69,14 +71,15 @@ export const Default: Story = {
     variant: TextVariant.BodyMd,
     color: TextColor.TextDefault,
     fontWeight: FontWeight.Regular,
+    fontFamily: FontFamily.Default,
     fontStyle: FontStyle.Normal,
     children: 'The quick orange fox jumped over the lazy dog.',
     twClassName: '',
   },
-  render: (args) => <Text {...args} />,
+  render: (args) => <TextStory {...args} />,
 };
 
-export const Variants: Story = {
+export const Variant: Story = {
   render: () => (
     <ScrollView>
       {Object.keys(TextVariant).map((variantKey) => (
@@ -91,7 +94,7 @@ export const Variants: Story = {
   ),
 };
 
-export const Colors: Story = {
+export const Color: Story = {
   render: () => (
     <ScrollView>
       {Object.keys(TextColor).map((colorKey) => (
@@ -115,6 +118,17 @@ export const FontWeightStory: Story = {
     </View>
   ),
   name: 'Font Weight',
+};
+
+export const FontFamilyStory: Story = {
+  render: () => (
+    <View>
+      <Text fontFamily={FontFamily.Default}>Default (Centra No 1)</Text>
+      <Text fontFamily={FontFamily.Accent}>Accent (MM Sans)</Text>
+      <Text fontFamily={FontFamily.Hero}>Hero (MM Poly)</Text>
+    </View>
+  ),
+  name: 'Font Family',
 };
 
 export const FontStyleStory: Story = {

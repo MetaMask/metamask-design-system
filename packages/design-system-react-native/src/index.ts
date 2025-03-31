@@ -102,6 +102,7 @@ import TextComponent from './components/Text';
 export const Text = withThemeProvider(TextComponent);
 export {
   FontWeight,
+  FontFamily,
   FontStyle,
   TextColor,
   TextProps,
