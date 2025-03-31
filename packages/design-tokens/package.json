@@ -33,9 +33,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "files": [
-    "dist/",
-    "src/css",
-    "fonts/"
+    "dist/"
   ],
   "scripts": {
     "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references && yarn build:css",
