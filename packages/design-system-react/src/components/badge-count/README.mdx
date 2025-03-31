@@ -1,0 +1,66 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as BadgeCountStories from './BadgeCount.stories';
+
+# BadgeCount
+
+The BadgeCount is a numeric indicator of unread messages or notifications on an app or UI element.
+
+```tsx
+import { BadgeCount } from '@metamask/design-system-react';
+
+<BadgeCount count={5} />;
+```
+
+<Canvas of={BadgeCountStories.Default} />
+
+## Props
+
+### Size
+
+BadgeCount supports two sizes:
+
+- `BadgeCountSize.Md` (14px height) – default
+- `BadgeCountSize.Lg` (20px height)
+
+<Canvas of={BadgeCountStories.Size} />
+
+### Count and Max
+
+- **count**: Required numeric value displayed in the badge.
+- **max**: Optional upper bound. If `count > max`, it displays as `"max+"`. Default is `99`.
+
+<Canvas of={BadgeCountStories.Max} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the component. These classes are merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Example:
+
+```tsx
+// Adding new styles
+<BadgeCount count={3} className="my-2 mx-1" />
+
+// Overriding default styles
+<BadgeCount
+  count={5}
+  className="bg-primary-default"
+  textProps={{ color: TextColor.PrimaryInverse }}
+/>
+```
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+## Component API
+
+<Controls of={BadgeCountStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

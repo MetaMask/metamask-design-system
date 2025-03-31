@@ -1,13 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ImageSourcePropType, View } from 'react-native';
 
+import { AvatarNetworkSize } from '../../shared/enums';
 import AvatarNetwork from './AvatarNetwork';
-import {
-  DEFAULT_AVATARNETWORK_PROPS,
-  SAMPLE_AVATARNETWORK_URIS,
-} from './AvatarNetwork.constants';
+import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.constants';
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
-import { AvatarSize } from '../../shared/enums';
 
 const meta: Meta<AvatarNetworkProps> = {
   title: 'Components/AvatarNetwork',
@@ -15,7 +12,7 @@ const meta: Meta<AvatarNetworkProps> = {
   argTypes: {
     size: {
       control: 'select',
-      options: AvatarSize,
+      options: AvatarNetworkSize,
     },
     twClassName: {
       control: 'text',
@@ -32,7 +29,7 @@ const storyImageSource: ImageSourcePropType = {
 
 export const Default: Story = {
   args: {
-    size: DEFAULT_AVATARNETWORK_PROPS.size,
+    size: AvatarNetworkSize.Md,
     twClassName: '',
   },
   render: (args) => <AvatarNetwork {...args} src={storyImageSource} />,
@@ -41,11 +38,11 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      {Object.keys(AvatarSize).map((sizeKey) => (
+      {Object.keys(AvatarNetworkSize).map((sizeKey) => (
         <AvatarNetwork
           src={storyImageSource}
           key={sizeKey}
-          size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
+          size={AvatarNetworkSize[sizeKey as keyof typeof AvatarNetworkSize]}
         />
       ))}
     </View>

@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
+import { AvatarBaseShape } from '../../shared/enums';
 import AvatarBase from '../../primitives/AvatarBase';
 import ImageOrSvg from '../../primitives/ImageOrSvg';
-import { DEFAULT_AVATARNETWORK_PROPS } from './AvatarNetwork.constants';
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
 
 const AvatarNetwork = ({
   size,
-  shape = DEFAULT_AVATARNETWORK_PROPS.shape,
+  shape = AvatarBaseShape.Square,
   fallbackText,
   fallbackTextProps,
   hasBorder,
@@ -17,8 +17,8 @@ const AvatarNetwork = ({
   twClassName,
   testID,
   style,
-  width = DEFAULT_AVATARNETWORK_PROPS.width,
-  height = DEFAULT_AVATARNETWORK_PROPS.height,
+  width = '100%',
+  height = '100%',
   name,
   imageProps,
   onImageError,
