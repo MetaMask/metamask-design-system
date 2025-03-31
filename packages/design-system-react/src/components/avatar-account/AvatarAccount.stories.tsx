@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { AvatarAccountSize } from '../../types';
 import { AvatarAccount } from './AvatarAccount';
-import { AvatarAccountSize, AvatarAccountVariant } from './AvatarAccount.types';
+import { AvatarAccountVariant } from './AvatarAccount.types';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarAccount> = {
@@ -103,6 +104,38 @@ export const Size: Story = {
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
         size={AvatarAccountSize.Xl}
+      />
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        variant={AvatarAccountVariant.Blockies}
+      />
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        variant={AvatarAccountVariant.Blockies}
+        hasBorder
+      />
+    </div>
+  ),
+};
+
+export const HasSolidBackgroundColor: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        variant={AvatarAccountVariant.Blockies}
+      />
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        variant={AvatarAccountVariant.Blockies}
+        hasSolidBackgroundColor
       />
     </div>
   ),

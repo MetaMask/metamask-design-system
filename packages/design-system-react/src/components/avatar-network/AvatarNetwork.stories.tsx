@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { AvatarNetworkSize } from '../../index';
 import { AvatarNetwork } from './AvatarNetwork';
-import { AvatarNetworkSize } from '.';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarNetwork> = {
@@ -140,6 +140,42 @@ export const Size: Story = {
         name="Ethereum"
         fallbackText="ETH"
         size={AvatarNetworkSize.Xl}
+      />
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarNetwork
+        name="Ethereum"
+        fallbackText="ETH"
+        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+      />
+      <AvatarNetwork
+        name="Ethereum"
+        fallbackText="ETH"
+        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+        hasBorder
+      />
+    </div>
+  ),
+};
+
+export const HasSolidBackgroundColor: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarNetwork
+        name="Ethereum"
+        fallbackText="ETH"
+        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+      />
+      <AvatarNetwork
+        name="Ethereum"
+        fallbackText="ETH"
+        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+        hasSolidBackgroundColor
       />
     </div>
   ),
