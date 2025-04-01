@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [7.0.0]
 
-### Uncategorized
+### Added
 
-- [Design Tokens] Updated Body FontSize for Small Screens ([#531](https://github.com/MetaMask/metamask-design-system/pull/531))
-- Improve Quality of Life for Typography in Monorepo ([#529](https://github.com/MetaMask/metamask-design-system/pull/529))
+- **BREAKING:** Removed individual typography font family tokens in favor of base font family tokens. See the [migration guide](./MIGRATION.md#from-version-600-to-700) for details.
+- **BREAKING:** Updated Body variants(BodyXs, BodySm, BodyMd, BodyLg) font size for small screens ([#533](https://github.com/MetaMask/metamask-design-system/pull/533)). See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
 
 ## [6.1.0]
 
