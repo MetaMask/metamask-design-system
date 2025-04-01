@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0]
 
-### Uncategorized
+### Changed
 
-- chore: setting sans in tailwind preset ([#535](https://github.com/MetaMask/metamask-design-system/pull/535))
-- Updated and added new font families to monorepo ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
-- Improve Quality of Life for Typography in Monorepo ([#529](https://github.com/MetaMask/metamask-design-system/pull/529))
+- **BREAKING:** Removed variant-specific font family classnames in favor of base font families ([#533](https://github.com/MetaMask/metamask-design-system/pull/533)):
+  - Removed all `s-*` and `l-*` typography font family classnames (e.g., `s-display-md`, `s-heading-lg`, etc.)
+  - Now using three base font family classnames:
+    - `font-default` for default text (CentraNo1)
+    - `font-accent` for accent text (MMSans)
+    - `font-hero` for hero text (MMPoly)
+  - See the [@metamask/design-tokens migration guide](../design-tokens/MIGRATION.md#from-version-600-to-700) for details.
 
 ## [0.2.0]
 
