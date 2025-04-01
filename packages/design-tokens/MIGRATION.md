@@ -19,7 +19,8 @@ In version 7.0.0, we've simplified the typography system by removing individual 
 ##### CSS Variables
 
 ```css
-/* Typography font family tokens */
+/* Typography font family tokens have been removed in favor of --font-family-default*/
+--font-family-sans
 --typography-s-display-md-font-family
 --typography-s-heading-lg-font-family
 --typography-s-heading-md-font-family
@@ -89,8 +90,10 @@ typography.lBodyXSMedium.fontFamily;
 
 ```css
 /* Font family tokens */
---font-family-accent: 'MMSans', sans-serif;
---font-family-hero: 'MMPoly', sans-serif;
+--font-family-default: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial,
+  sans-serif;
+--font-family-accent: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+--font-family-hero: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 ```
 
 ##### JS Tokens
@@ -107,7 +110,7 @@ const FontFamilies = {
 
 1. Remove all references to individual typography font family tokens
 2. Use the base font family tokens instead:
-   - For web: Use `--font-family-default` for all typography variants
+   - For web: Update `--font-family-sans` to `--font-family-default` for all typography variants
    - For React Native: Use the appropriate font family from the base font tokens
 3. Update any CSS or style definitions that were using the removed tokens
 4. Test all typography variants to ensure they're using the correct font family
