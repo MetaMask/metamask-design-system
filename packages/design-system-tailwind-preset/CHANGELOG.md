@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: setting sans in tailwind preset ([#535](https://github.com/MetaMask/metamask-design-system/pull/535))
+- Updated and added new font families to monorepo ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
+- Improve Quality of Life for Typography in Monorepo ([#529](https://github.com/MetaMask/metamask-design-system/pull/529))
+
 ## [0.2.0]
 
 ### Changed

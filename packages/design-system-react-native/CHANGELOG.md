@@ -7,4 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- Updated and added new font families to monorepo ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
+- [DSRN] Added BadgeWrapper ([#516](https://github.com/MetaMask/metamask-design-system/pull/516))
+- Improve Quality of Life for Typography in Monorepo ([#529](https://github.com/MetaMask/metamask-design-system/pull/529))
+
 [Unreleased]: https://github.com/MetaMask/metamask-design-system/

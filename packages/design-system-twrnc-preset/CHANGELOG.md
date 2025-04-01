@@ -7,4 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- Updated and added new font families to monorepo ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
+
 [Unreleased]: https://github.com/MetaMask/metamask-design-system/
