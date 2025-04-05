@@ -70,7 +70,7 @@ export const IconNameStory: Story = {
 
 export const Size: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Xs} />
       <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Sm} />
       <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Md} />

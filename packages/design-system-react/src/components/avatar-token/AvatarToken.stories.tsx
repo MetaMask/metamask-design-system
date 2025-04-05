@@ -115,7 +115,7 @@ export const FallbackText: Story = {
 
 export const Size: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <AvatarToken name="Ethereum" fallbackText="E" size={AvatarTokenSize.Xs} />
       <AvatarToken
         name="Ethereum"

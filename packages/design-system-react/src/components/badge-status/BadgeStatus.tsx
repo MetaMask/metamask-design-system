@@ -23,7 +23,7 @@ export const BadgeStatus = React.forwardRef<HTMLDivElement, BadgeStatusProps>(
   ) => {
     const mergedClassName = twMerge(
       // Base styles
-      'inline-flex relative rounded-full',
+      'relative inline-flex rounded-full',
       // hasBorder style
       hasBorder ? 'border-2 border-background-default' : '',
       // Custom classes
@@ -32,7 +32,7 @@ export const BadgeStatus = React.forwardRef<HTMLDivElement, BadgeStatusProps>(
 
     const mergedCircleClassName = twMerge(
       // Base styles
-      'rounded-full border-2 z-10',
+      'z-10 rounded-full border-2',
       // Size styles
       CLASSMAP_BADGESTATUS_SIZE[size],
       // Circle with semantics style
@@ -41,7 +41,7 @@ export const BadgeStatus = React.forwardRef<HTMLDivElement, BadgeStatusProps>(
 
     return (
       <div ref={ref} className={mergedClassName} style={style} {...props}>
-        <div className="bg-background-default absolute top-0 left-0 bottom-0 right-0 rounded-full" />
+        <div className="absolute bottom-0 left-0 right-0 top-0 rounded-full bg-background-default" />
         <div className={mergedCircleClassName} />
       </div>
     );
