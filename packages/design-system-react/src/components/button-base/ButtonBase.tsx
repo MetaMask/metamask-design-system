@@ -42,7 +42,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
             name={IconName.Loading}
             size={IconSize.Sm}
             className={twMerge(
-              'animate-spin mr-2 text-inherit',
+              'mr-2 animate-spin text-inherit',
               loadingIconProps?.className,
             )}
             {...loadingIconProps}
@@ -107,7 +107,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       // Base styles
       'inline-flex items-center justify-center',
       'rounded-full px-4',
-      'text-default font-medium',
+      'font-medium text-default',
       'bg-muted',
       // Add relative positioning for loading state
       'relative',

@@ -61,7 +61,7 @@ export const Default: Story = {
 
 export const Shape: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <AvatarBase shape={AvatarBaseShape.Circle} fallbackText="C" />
       <AvatarBase shape={AvatarBaseShape.Square} fallbackText="S" />
     </div>
@@ -71,14 +71,14 @@ export const Shape: Story = {
 export const Size: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <AvatarBase size={AvatarBaseSize.Xs} fallbackText="XS" />
         <AvatarBase size={AvatarBaseSize.Sm} fallbackText="SM" />
         <AvatarBase size={AvatarBaseSize.Md} fallbackText="MD" />
         <AvatarBase size={AvatarBaseSize.Lg} fallbackText="LG" />
         <AvatarBase size={AvatarBaseSize.Xl} fallbackText="XL" />
       </div>
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <AvatarBase
           shape={AvatarBaseShape.Square}
           size={AvatarBaseSize.Xs}
@@ -140,7 +140,7 @@ export const FallbackTextWithProps: Story = {
 
 export const Children: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       {/* Text */}
       <AvatarBase fallbackText="A" />
       {/* Image */}
@@ -148,7 +148,7 @@ export const Children: Story = {
         <img
           src="https://cryptologos.cc/logos/avalanche-avax-logo.png?v=040"
           alt="Avalanche"
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover"
         />
       </AvatarBase>
       {/* Icon */}

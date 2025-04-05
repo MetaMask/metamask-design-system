@@ -34,7 +34,7 @@ const AvatarBase = ({
   return (
     <View style={[tw`${twContainerClassNames}`, style]} {...props}>
       <View
-        style={tw`bg-background-muted absolute top-0 left-0 bottom-0 right-0`}
+        style={tw`absolute bottom-0 left-0 right-0 top-0 bg-background-muted`}
       />
       {fallbackText ? (
         <Text

@@ -64,7 +64,7 @@ export const CSSLightTheme = {
   render: () => {
     const lightThemeColors = getCSSVariablesFromStylesheet('--color-');
     return (
-      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
+      <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {Object.entries(lightThemeColors).map(
           ([name, { color, name: colorName }]) => (
             <ColorSwatch
@@ -92,7 +92,7 @@ export const CSSDarkTheme = {
   render: () => {
     const darkThemeColors = getCSSVariablesFromStylesheet('--color-', 'dark');
     return (
-      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
+      <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {Object.entries(darkThemeColors).map(
           ([name, { color, name: colorName }]) => (
             <ColorSwatch
@@ -121,7 +121,7 @@ export const JSLightTheme = {
   render: () => {
     const colors = getJSColors(lightThemeJS.colors);
     return (
-      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
+      <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {colors.map(({ name, color }) => (
           <ColorSwatch
             key={name}
@@ -146,7 +146,7 @@ export const JSDarkTheme = {
   render: () => {
     const colors = getJSColors(darkThemeJS.colors);
     return (
-      <div className={`grid gap-4 grid-cols-[repeat(auto-fill,300px)]`}>
+      <div className={`grid grid-cols-[repeat(auto-fill,300px)] gap-4`}>
         {colors.map(({ name, color }) => (
           <ColorSwatch
             key={name}
