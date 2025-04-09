@@ -3,8 +3,10 @@
  */
 :root {
   /* font family */
-  --font-family-sans: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial,
+  --font-family-default: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial,
     sans-serif;
+  --font-family-accent: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-hero: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   /* font sizes */
   --font-size-base: 16px;
   --font-size-1: 0.625rem;
@@ -31,22 +33,18 @@
   --letter-spacing-0: 0;
   --letter-spacing-1: 2.5%;
   /* typography scale small screen */
-  --typography-s-display-md-font-family: var(--font-family-sans);
   --typography-s-display-md-font-size: var(--font-size-7);
   --typography-s-display-md-line-height: var(--line-height-6);
   --typography-s-display-md-font-weight: var(--font-weight-bold);
   --typography-s-display-md-letter-spacing: var(--letter-spacing-0);
-  --typography-s-heading-lg-font-family: var(--font-family-sans);
   --typography-s-heading-lg-font-size: var(--font-size-6);
   --typography-s-heading-lg-line-height: var(--line-height-5);
   --typography-s-heading-lg-font-weight: var(--font-weight-bold);
   --typography-s-heading-lg-letter-spacing: var(--letter-spacing-0);
-  --typography-s-heading-md-font-family: var(--font-family-sans);
   --typography-s-heading-md-font-size: var(--font-size-5);
   --typography-s-heading-md-line-height: var(--line-height-4);
   --typography-s-heading-md-font-weight: var(--font-weight-bold);
   --typography-s-heading-md-letter-spacing: var(--letter-spacing-0);
-  --typography-s-heading-sm-font-family: var(--font-family-sans);
   --typography-s-heading-sm-font-size: var(--font-size-4);
   --typography-s-heading-sm-line-height: var(--line-height-4);
   --typography-s-heading-sm-font-weight: var(--font-weight-bold);
@@ -56,79 +54,64 @@
    * @deprecated [#1] since version 1.9 [#2].
    * [#3] Will be deleted in version 2.0.
    */
-  --typography-s-heading-sm-regular-font-family: var(--font-family-sans);
   --typography-s-heading-sm-regular-font-size: var(--font-size-4);
   --typography-s-heading-sm-regular-line-height: var(--line-height-4);
   --typography-s-heading-sm-regular-font-weight: var(--font-weight-regular);
   --typography-s-heading-sm-regular-letter-spacing: var(--letter-spacing-0);
-  --typography-s-body-lg-medium-font-family: var(--font-family-sans);
   --typography-s-body-lg-medium-font-size: var(--font-size-5);
   --typography-s-body-lg-medium-line-height: var(--line-height-4);
   --typography-s-body-lg-medium-font-weight: var(--font-weight-medium);
   --typography-s-body-lg-medium-letter-spacing: var(--letter-spacing-0);
-  --typography-s-body-lg-regular-font-family: var(--font-family-sans);
   --typography-s-body-lg-regular-font-size: var(--font-size-5);
   --typography-s-body-lg-regular-line-height: var(--line-height-4);
   --typography-s-body-lg-regular-font-weight: var(--font-weight-medium);
   --typography-s-body-lg-regular-letter-spacing: var(--letter-spacing-0);
-  --typography-s-body-md-bold-font-family: var(--font-family-sans);
   --typography-s-body-md-bold-font-size: var(--font-size-4);
   --typography-s-body-md-bold-line-height: var(--line-height-4);
   --typography-s-body-md-bold-font-weight: var(--font-weight-bold);
   --typography-s-body-md-bold-letter-spacing: var(--letter-spacing-0);
-  --typography-s-body-md-medium-font-family: var(--font-family-sans);
   --typography-s-body-md-medium-font-size: var(--font-size-4);
   --typography-s-body-md-medium-line-height: var(--line-height-4);
   --typography-s-body-md-medium-font-weight: var(--font-weight-medium);
   --typography-s-body-md-medium-letter-spacing: var(--letter-spacing-0);
-  --typography-s-body-md-font-family: var(--font-family-sans);
   --typography-s-body-md-font-size: var(--font-size-4);
   --typography-s-body-md-line-height: var(--line-height-4);
   --typography-s-body-md-font-weight: var(--font-weight-regular);
   --typography-s-body-md-letter-spacing: var(--letter-spacing-0);
-  --typography-s-body-sm-bold-font-family: var(--font-family-sans);
   --typography-s-body-sm-bold-font-size: var(--font-size-3);
   --typography-s-body-sm-bold-line-height: var(--line-height-3);
   --typography-s-body-sm-bold-font-weight: var(--font-weight-bold);
   --typography-s-body-sm-bold-letter-spacing: var(--letter-spacing-0);
-  --typography-s-body-sm-medium-font-family: var(--font-family-sans);
   --typography-s-body-sm-medium-font-size: var(--font-size-3);
   --typography-s-body-sm-medium-line-height: var(--line-height-3);
   --typography-s-body-sm-medium-font-weight: var(--font-weight-medium);
   --typography-s-body-sm-medium-letter-spacing: var(--letter-spacing-0);
-  --typography-s-body-sm-font-family: var(--font-family-sans);
   --typography-s-body-sm-font-size: var(--font-size-3);
   --typography-s-body-sm-line-height: var(--line-height-3);
   --typography-s-body-sm-font-weight: var(--font-weight-regular);
   --typography-s-body-sm-letter-spacing: var(--letter-spacing-0);
-  --typography-s-body-xs-medium-font-family: var(--font-family-sans);
   --typography-s-body-xs-medium-font-size: var(--font-size-2);
   --typography-s-body-xs-medium-line-height: var(--line-height-2);
   --typography-s-body-xs-medium-font-weight: var(--font-weight-medium);
   --typography-s-body-xs-medium-letter-spacing: var(--letter-spacing-0);
-  --typography-s-body-xs-font-family: var(--font-family-sans);
   --typography-s-body-xs-font-size: var(--font-size-2);
   --typography-s-body-xs-line-height: var(--line-height-2);
   --typography-s-body-xs-font-weight: var(--font-weight-regular);
   --typography-s-body-xs-letter-spacing: var(--letter-spacing-0);
 
   /* typography scale large screen */
-  --typography-l-display-md-font-family: var(--font-family-sans);
   --typography-l-display-md-font-size: var(--font-size-8);
   --typography-l-display-md-line-height: var(--line-height-7);
   --typography-l-display-md-font-weight: var(--font-weight-medium);
   --typography-l-display-md-letter-spacing: var(--letter-spacing-0);
-  --typography-l-heading-lg-font-family: var(--font-family-sans);
   --typography-l-heading-lg-font-size: var(--font-size-7);
   --typography-l-heading-lg-line-height: var(--line-height-6);
   --typography-l-heading-lg-font-weight: var(--font-weight-bold);
   --typography-l-heading-lg-letter-spacing: var(--letter-spacing-0);
-  --typography-l-heading-md-font-family: var(--font-family-sans);
   --typography-l-heading-md-font-size: var(--font-size-6);
   --typography-l-heading-md-line-height: var(--line-height-5);
   --typography-l-heading-md-font-weight: var(--font-weight-bold);
   --typography-l-heading-md-letter-spacing: var(--letter-spacing-0);
-  --typography-l-heading-sm-font-family: var(--font-family-sans);
   --typography-l-heading-sm-font-size: var(--font-size-5);
   --typography-l-heading-sm-line-height: var(--line-height-4);
   --typography-l-heading-sm-font-weight: var(--font-weight-bold);
@@ -138,52 +121,42 @@
    * @deprecated [#1] since version 1.9 [#2].
    * [#3] Will be deleted in version 2.0.
    */
-  --typography-l-heading-sm-regular-font-family: var(--font-family-sans);
   --typography-l-heading-sm-regular-font-size: var(--font-size-5);
   --typography-l-heading-sm-regular-line-height: var(--line-height-4);
   --typography-l-heading-sm-regular-font-weight: var(--font-weight-regular);
   --typography-l-heading-sm-regular-letter-spacing: var(--letter-spacing-0);
-  --typography-l-body-lg-medium-font-family: var(--font-family-sans);
   --typography-l-body-lg-medium-font-size: var(--font-size-5);
   --typography-l-body-lg-medium-line-height: var(--line-height-4);
   --typography-l-body-lg-medium-font-weight: var(--font-weight-medium);
   --typography-l-body-lg-medium-letter-spacing: var(--letter-spacing-0);
-  --typography-l-body-md-bold-font-family: var(--font-family-sans);
   --typography-l-body-md-bold-font-size: var(--font-size-4);
   --typography-l-body-md-bold-line-height: var(--line-height-4);
   --typography-l-body-md-bold-font-weight: var(--font-weight-bold);
   --typography-l-body-md-bold-letter-spacing: var(--letter-spacing-0);
-  --typography-l-body-md-medium-font-family: var(--font-family-sans);
   --typography-l-body-md-medium-font-size: var(--font-size-4);
   --typography-l-body-md-medium-line-height: var(--line-height-4);
   --typography-l-body-md-medium-font-weight: var(--font-weight-medium);
   --typography-l-body-md-medium-letter-spacing: var(--letter-spacing-0);
-  --typography-l-body-md-font-family: var(--font-family-sans);
   --typography-l-body-md-font-size: var(--font-size-4);
   --typography-l-body-md-line-height: var(--line-height-4);
   --typography-l-body-md-font-weight: var(--font-weight-regular);
   --typography-l-body-md-letter-spacing: var(--letter-spacing-0);
-  --typography-l-body-sm-bold-font-family: var(--font-family-sans);
   --typography-l-body-sm-bold-font-size: var(--font-size-3);
   --typography-l-body-sm-bold-line-height: var(--line-height-3);
   --typography-l-body-sm-bold-font-weight: var(--font-weight-bold);
   --typography-l-body-sm-bold-letter-spacing: var(--letter-spacing-0);
-  --typography-l-body-sm-medium-font-family: var(--font-family-sans);
   --typography-l-body-sm-medium-font-size: var(--font-size-3);
   --typography-l-body-sm-medium-line-height: var(--line-height-3);
   --typography-l-body-sm-medium-font-weight: var(--font-weight-medium);
   --typography-l-body-sm-medium-letter-spacing: var(--letter-spacing-0);
-  --typography-l-body-sm-font-family: var(--font-family-sans);
   --typography-l-body-sm-font-size: var(--font-size-3);
   --typography-l-body-sm-line-height: var(--line-height-3);
   --typography-l-body-sm-font-weight: var(--font-weight-regular);
   --typography-l-body-sm-letter-spacing: var(--letter-spacing-0);
-  --typography-l-body-xs-medium-font-family: var(--font-family-sans);
   --typography-l-body-xs-medium-font-size: var(--font-size-2);
   --typography-l-body-xs-medium-line-height: var(--line-height-2);
   --typography-l-body-xs-medium-font-weight: var(--font-weight-medium);
   --typography-l-body-xs-medium-letter-spacing: var(--letter-spacing-0);
-  --typography-l-body-xs-font-family: var(--font-family-sans);
   --typography-l-body-xs-font-size: var(--font-size-2);
   --typography-l-body-xs-line-height: var(--line-height-2);
   --typography-l-body-xs-font-weight: var(--font-weight-regular);

@@ -54,12 +54,6 @@ function createNewFigmaTokenObject(str: string, obj: any) {
 describe('Typography', () => {
   describe('Typography Small Screen', () => {
     it('js tokens for sDisplayMD matches figma tokens sDisplayMD', () => {
-      expect(typography.sDisplayMD.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Display-MD'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sDisplayMD.fontWeight).toBe('700');
 
       expect(typography.sDisplayMD.fontSize).toStrictEqual(
@@ -91,12 +85,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sHeadingLG matches figma tokens sHeadingLG', () => {
-      expect(typography.sHeadingLG.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Heading-LG'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sHeadingLG.fontWeight).toBe('700');
 
       expect(typography.sHeadingLG.fontSize).toStrictEqual(
@@ -128,12 +116,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sHeadingMD matches figma tokens sHeadingMD', () => {
-      expect(typography.sHeadingMD.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Heading-MD'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sHeadingMD.fontWeight).toBe('700');
 
       expect(typography.sHeadingMD.fontSize).toStrictEqual(
@@ -165,12 +147,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sHeadingSMRegular matches figma tokens sHeadingSMRegular', () => {
-      expect(typography.sHeadingSMRegular.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Heading-SM-Regular'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sHeadingSMRegular.fontWeight).toBe('400');
 
       expect(typography.sHeadingSMRegular.fontSize).toStrictEqual(
@@ -202,12 +178,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sHeadingSM matches figma tokens sHeadingSM', () => {
-      expect(typography.sHeadingSM.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Heading-SM'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sHeadingSM.fontWeight).toBe('700');
 
       expect(typography.sHeadingSM.fontSize).toStrictEqual(
@@ -239,12 +209,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodyLGMedium matches figma tokens sBodyLGMedium', () => {
-      expect(typography.sBodyLGMedium.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Body-LG-Medium'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sBodyLGMedium.fontWeight).toBe('500');
 
       expect(typography.sBodyLGMedium.fontSize).toStrictEqual(
@@ -276,12 +240,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodyMDBold matches figma tokens sBodyMDBold', () => {
-      expect(typography.sBodyMDBold.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Body-MD-Bold'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sBodyMDBold.fontWeight).toBe('700');
 
       expect(typography.sBodyMDBold.fontSize).toStrictEqual(
@@ -313,12 +271,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodyMDMedium matches figma tokens sBodyMDMedium', () => {
-      expect(typography.sBodyMDMedium.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Body-MD-Medium'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sBodyMDMedium.fontWeight).toBe('500');
 
       expect(typography.sBodyMDMedium.fontSize).toStrictEqual(
@@ -350,12 +302,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodyMD matches figma tokens sBodyMD', () => {
-      expect(typography.sBodyMD.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Body-MD'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sBodyMD.fontWeight).toBe('400');
 
       expect(typography.sBodyMD.fontSize).toStrictEqual(
@@ -387,12 +333,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodySMBold matches figma tokens sBodySMBold', () => {
-      expect(typography.sBodySMBold.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Body-SM-Bold'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sBodySMBold.fontWeight).toBe('700');
 
       expect(typography.sBodySMBold.fontSize).toStrictEqual(
@@ -424,12 +364,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodySMMedium matches figma tokens sBodySMMedium', () => {
-      expect(typography.sBodySMMedium.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Body-SM-Medium'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sBodySMMedium.fontWeight).toBe('500');
 
       expect(typography.sBodySMMedium.fontSize).toStrictEqual(
@@ -461,12 +395,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodySM matches figma tokens sBodySM', () => {
-      expect(typography.sBodySM.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Body-SM'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sBodySM.fontWeight).toBe('400');
 
       expect(typography.sBodySM.fontSize).toStrictEqual(
@@ -498,12 +426,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodyXSMedium matches figma tokens sBodyXSMedium', () => {
-      expect(typography.sBodyXSMedium.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Body-XS-Medium'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sBodyXSMedium.fontWeight).toBe('500');
 
       expect(typography.sBodyXSMedium.fontSize).toStrictEqual(
@@ -535,12 +457,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodyXS matches figma tokens sBodyXS', () => {
-      expect(typography.sBodyXS.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['S-Body-XS'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.sBodyXS.fontWeight).toBe('400');
 
       expect(typography.sBodyXS.fontSize).toStrictEqual(
@@ -574,12 +490,6 @@ describe('Typography', () => {
 
   describe('Typography Large Screen', () => {
     it('js tokens for lDisplayMD matches figma tokens lDisplayMD', () => {
-      expect(typography.lDisplayMD.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Display-MD'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lDisplayMD.fontWeight).toBe('500');
 
       expect(typography.lDisplayMD.fontSize).toStrictEqual(
@@ -611,12 +521,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lHeadingLG matches figma tokens lHeadingLG', () => {
-      expect(typography.lHeadingLG.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Heading-LG'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lHeadingLG.fontWeight).toBe('700');
 
       expect(typography.lHeadingLG.fontSize).toStrictEqual(
@@ -648,12 +552,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lHeadingMD matches figma tokens lHeadingMD', () => {
-      expect(typography.lHeadingMD.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Heading-MD'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lHeadingMD.fontWeight).toBe('700');
 
       expect(typography.lHeadingMD.fontSize).toStrictEqual(
@@ -685,12 +583,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lHeadingSMRegular matches figma tokens lHeadingSMRegular', () => {
-      expect(typography.lHeadingSMRegular.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Heading-SM-Regular'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lHeadingSMRegular.fontWeight).toBe('400');
 
       expect(typography.lHeadingSMRegular.fontSize).toStrictEqual(
@@ -722,12 +614,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lHeadingSM matches figma tokens lHeadingSM', () => {
-      expect(typography.lHeadingSM.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Heading-SM'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lHeadingSM.fontWeight).toBe('700');
 
       expect(typography.lHeadingSM.fontSize).toStrictEqual(
@@ -759,12 +645,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodyLGMedium matches figma tokens lBodyLGMedium', () => {
-      expect(typography.lBodyLGMedium.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Body-LG-Medium'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lBodyLGMedium.fontWeight).toBe('500');
 
       expect(typography.lBodyLGMedium.fontSize).toStrictEqual(
@@ -796,12 +676,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodyMDBold matches figma tokens lBodyMDBold', () => {
-      expect(typography.lBodyMDBold.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Body-MD-Bold'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lBodyMDBold.fontWeight).toBe('700');
 
       expect(typography.lBodyMDBold.fontSize).toStrictEqual(
@@ -833,12 +707,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodyMDMedium matches figma tokens lBodyMDMedium', () => {
-      expect(typography.lBodyMDMedium.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Body-MD-Medium'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lBodyMDMedium.fontWeight).toBe('500');
 
       expect(typography.lBodyMDMedium.fontSize).toStrictEqual(
@@ -870,12 +738,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodyMD matches figma tokens lBodyMD', () => {
-      expect(typography.lBodyMD.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Body-MD'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lBodyMD.fontWeight).toBe('400');
 
       expect(typography.lBodyMD.fontSize).toStrictEqual(
@@ -907,12 +769,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodySMBold matches figma tokens lBodySMBold', () => {
-      expect(typography.lBodySMBold.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Body-SM-Bold'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lBodySMBold.fontWeight).toBe('700');
 
       expect(typography.lBodySMBold.fontSize).toStrictEqual(
@@ -944,12 +800,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodySMMedium matches figma tokens lBodySMMedium', () => {
-      expect(typography.lBodySMMedium.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Body-SM-Medium'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lBodySMMedium.fontWeight).toBe('500');
 
       expect(typography.lBodySMMedium.fontSize).toStrictEqual(
@@ -981,12 +831,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodySM matches figma tokens lBodySM', () => {
-      expect(typography.lBodySM.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Body-SM'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lBodySM.fontWeight).toBe('400');
 
       expect(typography.lBodySM.fontSize).toStrictEqual(
@@ -1018,12 +862,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodyXSMedium matches figma tokens lBodyXSMedium', () => {
-      expect(typography.lBodyXSMedium.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Body-XS-Medium'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lBodyXSMedium.fontWeight).toBe('500');
 
       expect(typography.lBodyXSMedium.fontSize).toStrictEqual(
@@ -1055,12 +893,6 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodyXS matches figma tokens lBodyXS', () => {
-      expect(typography.lBodyXS.fontFamily).toStrictEqual(
-        createNewFigmaTokenObject(
-          designTokens.global['L-Body-XS'].value.fontFamily,
-          designTokens.global,
-        ).value,
-      );
       expect(typography.lBodyXS.fontWeight).toBe('400');
 
       expect(typography.lBodyXS.fontSize).toStrictEqual(

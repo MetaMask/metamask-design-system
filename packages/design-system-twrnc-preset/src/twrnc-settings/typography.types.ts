@@ -12,57 +12,6 @@ export type TypographyVariant =
   | 'body-xs';
 
 /**
- * Different FontFamily variants to be used as twrnc classNames
- */
-export type FontFamilyVariant =
-  | TypographyVariant
-  | 'display-md-medium'
-  | 'display-md-bold'
-  | 'display-md-italic'
-  | 'display-md-medium-italic'
-  | 'display-md-bold-italic'
-  | 'heading-lg-medium'
-  | 'heading-lg-bold'
-  | 'heading-lg-italic'
-  | 'heading-lg-medium-italic'
-  | 'heading-lg-bold-italic'
-  | 'heading-md-medium'
-  | 'heading-md-bold'
-  | 'heading-md-italic'
-  | 'heading-md-medium-italic'
-  | 'heading-md-bold-italic'
-  | 'heading-sm-medium'
-  | 'heading-sm-bold'
-  | 'heading-sm-italic'
-  | 'heading-sm-medium-italic'
-  | 'heading-sm-bold-italic'
-  | 'body-lg-medium'
-  | 'body-lg-bold'
-  | 'body-lg-italic'
-  | 'body-lg-medium-italic'
-  | 'body-lg-bold-italic'
-  | 'body-md-medium'
-  | 'body-md-bold'
-  | 'body-md-italic'
-  | 'body-md-medium-italic'
-  | 'body-md-bold-italic'
-  | 'body-sm-medium'
-  | 'body-sm-bold'
-  | 'body-sm-italic'
-  | 'body-sm-medium-italic'
-  | 'body-sm-bold-italic'
-  | 'body-xs-medium'
-  | 'body-xs-bold'
-  | 'body-xs-italic'
-  | 'body-xs-medium-italic'
-  | 'body-xs-bold-italic'
-  | 'medium'
-  | 'bold'
-  | 'italic'
-  | 'medium-italic'
-  | 'bold-italic';
-
-/**
  * Different FontWeight and FontStyle to be used to calculate the FontFamily
  * in getFontFamilyFromWeightAndStyle
  */
@@ -127,8 +76,17 @@ export type TypographyTailwindConfigProps = {
     ]
   >;
   fontFamily: {
-    sans: string[];
-  } & Record<FontFamilyVariant, string>;
+    'default-regular': string;
+    'default-regular-italic': string;
+    'default-medium': string;
+    'default-medium-italic': string;
+    'default-bold': string;
+    'default-bold-italic': string;
+    'accent-regular': string;
+    'accent-medium': string;
+    'accent-bold': string;
+    'hero-regular': string;
+  };
   letterSpacing: Record<TypographyVariant, string>;
   lineHeight: Record<TypographyVariant, string>; // Make sure to include units - "40px" instead of "40"
 };

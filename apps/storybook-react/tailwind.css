@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Centra No 1 */
 @font-face {
   font-family: 'CentraNo1';
   font-style: normal;
@@ -42,4 +43,48 @@
   font-style: italic;
   font-weight: 700;
   src: url('fonts/CentraNo1/CentraNo1-BoldItalic.woff2') format('woff2');
+}
+
+/* MM Sans */
+@font-face {
+  font-family: 'MMSans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/MMSans/MMSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'MMSans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('fonts/MMSans/MMSans-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'MMSans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/MMSans/MMSans-Bold.woff2') format('woff2');
+}
+
+/* MM Poly */
+@font-face {
+  font-family: 'MMPoly';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'MMPoly';
+  font-style: normal;
+  font-weight: 500;
+  src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'MMPoly';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
 }

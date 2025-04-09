@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-
 import path, { join, dirname } from 'path';
 
 /**
@@ -10,6 +9,7 @@ import path, { join, dirname } from 'path';
 function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, 'package.json')));
 }
+
 const config: StorybookConfig = {
   stories: [
     '../stories/Introduction.mdx',
@@ -19,7 +19,6 @@ const config: StorybookConfig = {
     '../../../packages/design-system-react/src/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/design-tokens/stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-
   addons: [
     getAbsolutePath('@storybook/addon-onboarding'),
     getAbsolutePath('@storybook/addon-links'),
@@ -47,7 +46,12 @@ const config: StorybookConfig = {
         ),
       };
     }
+
+    // Add asset inclusion for font files so that Vite processes them correctly.
+    config.assetsInclude = ['**/*.woff2', '**/*.woff', '**/*.ttf', '**/*.otf'];
+
     return config;
   },
 };
+
 export default config;
