@@ -152,6 +152,38 @@ export type ThemeColors = {
     /** For elements placed on top of info/default fill */
     inverse: string;
   };
+  accent01: {
+    /** Expressive color in light orange */
+    light: string;
+    /** Expressive color in orange */
+    normal: string;
+    /** Expressive color in dark orange */
+    dark: string;
+  };
+  accent02: {
+    /** Expressive color in light purple */
+    light: string;
+    /** Expressive color in purple */
+    normal: string;
+    /** Expressive color in dark purple */
+    dark: string;
+  };
+  accent03: {
+    /** Expressive color in light lime */
+    light: string;
+    /** Expressive color in lime */
+    normal: string;
+    /** Expressive color in dark lime */
+    dark: string;
+  };
+  accent04: {
+    /** Expressive color in light indigo */
+    light: string;
+    /** Expressive color in indigo */
+    normal: string;
+    /** Expressive color in dark indigo */
+    dark: string;
+  };
   flask: {
     /** For Flask primary accent color */
     default: string;

@@ -113,6 +113,30 @@
   --color-info-muted: #8b99ff26;
   /* For elements placed on top of info/default (#121314) */
   --color-info-inverse: var(--brand-colors-grey-grey900);
+  /* Expressive color in light orange (#ffa680) */
+  --color-accent01-light: var(--brand-colors-orange-orange200);
+  /* Expressive color in orange (#ff5c16) */
+  --color-accent01-normal: var(--brand-colors-orange-orange400);
+  /* Expressive color in dark orange (#661800) */
+  --color-accent01-dark: var(--brand-colors-orange-orange700);
+  /* Expressive color in light purple (#eac2ff) */
+  --color-accent02-light: var(--brand-colors-purple-purple100);
+  /* Expressive color in purple (#d075ff) */
+  --color-accent02-normal: var(--brand-colors-purple-purple300);
+  /* Expressive color in dark purple (#3d065f) */
+  --color-accent02-dark: var(--brand-colors-purple-purple800);
+  /* Expressive color in light lime (#e5ffc3) */
+  --color-accent03-light: var(--brand-colors-lime-lime050);
+  /* Expressive color in lime (#baf24a) */
+  --color-accent03-normal: var(--brand-colors-lime-lime100);
+  /* Expressive color in dark lime (#013330) */
+  --color-accent03-dark: var(--brand-colors-lime-lime700);
+  /* Expressive color in light indigo (#cce7ff) */
+  --color-accent04-light: var(--brand-colors-indigo-indigo100);
+  /* Expressive color in indigo (#89b0ff) */
+  --color-accent04-normal: var(--brand-colors-indigo-indigo200);
+  /* Expressive color in dark indigo (#190066) */
+  --color-accent04-dark: var(--brand-colors-indigo-indigo800);
   /* For Flask primary accent color (#d27dff) */
   --color-flask-default: var(--brand-colors-purple-purple300);
   /* For elements placed on top of flask/default (#121314) */
