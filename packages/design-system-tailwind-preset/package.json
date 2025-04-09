@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-tailwind-preset",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Design System Tailwind CSS preset for MetaMask projects",
   "keywords": [
     "MetaMask",
@@ -46,7 +46,7 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "devDependencies": {
-    "@metamask/auto-changelog": "^4.1.0",
+    "@metamask/auto-changelog": "^5.0.1",
     "@ts-bridge/cli": "^0.5.1",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
@@ -57,7 +57,7 @@
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
-    "@metamask/design-tokens": "^6.0.0",
+    "@metamask/design-tokens": "^7.0.0",
     "tailwindcss": "^3.0.0"
   },
   "engines": {

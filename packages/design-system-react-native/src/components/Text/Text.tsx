@@ -1,10 +1,10 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Text as RNText } from 'react-native';
 
 import { DEFAULT_TEXT_COLOR, DEFAULT_TEXT_VARIANT } from './Text.constants';
 import type { TextProps } from './Text.types';
-import { FontWeight, FontStyle } from './Text.types';
+import { FontWeight, FontStyle, FontFamily } from './Text.types';
 import { generateTextClassNames } from './Text.utilities';
 
 const Text: React.FC<TextProps> = ({
@@ -13,18 +13,23 @@ const Text: React.FC<TextProps> = ({
   style,
   children,
   fontWeight = FontWeight.Regular,
+  fontFamily = FontFamily.Default,
   fontStyle = FontStyle.Normal,
   twClassName = '',
   ...props
 }) => {
   const tw = useTailwind();
-  const mergedClassnames = generateTextClassNames({
-    variant,
-    color,
-    fontWeight,
-    fontStyle,
-    twClassName,
-  });
+
+  const mergedClassnames = useMemo(() => {
+    return generateTextClassNames({
+      variant,
+      color,
+      fontWeight,
+      fontFamily,
+      fontStyle,
+      twClassName,
+    });
+  }, [variant, color, fontWeight, fontFamily, fontStyle, twClassName]);
 
   return (
     <RNText

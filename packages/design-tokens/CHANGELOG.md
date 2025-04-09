@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.0.0]
+
+### Added
+
+- **BREAKING:** Removed individual typography font family tokens in favor of base font family tokens. See the [migration guide](./MIGRATION.md#from-version-600-to-700) for details.
+- **BREAKING:** Updated Body variants(BodyXs, BodySm, BodyMd, BodyLg) font size for small screens ([#533](https://github.com/MetaMask/metamask-design-system/pull/533)). See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
+
 ## [6.1.0]
 
 ### Added
@@ -354,7 +361,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.1.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.0.0...HEAD
+[7.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.1.0...@metamask/design-tokens@7.0.0
 [6.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.0.1...@metamask/design-tokens@6.1.0
 [6.0.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.0.0...@metamask/design-tokens@6.0.1
 [6.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@5.1.0...@metamask/design-tokens@6.0.0
