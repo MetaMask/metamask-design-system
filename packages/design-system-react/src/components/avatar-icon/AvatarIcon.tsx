@@ -1,15 +1,15 @@
 import React from 'react';
 
+import { AvatarIconSize } from '../../types';
 import { AvatarBase, AvatarBaseShape } from '../avatar-base';
 import { Icon } from '../icon';
 import type { AvatarIconProps } from './AvatarIcon.types';
 import {
-  AVATAR_ICON_SIZE_TO_ICON_SIZE_CLASSNAME_MAP,
-  AVATAR_ICON_SEVERITY_CLASSNAME_MAP,
-  AVATAR_ICON_TO_AVATAR_BASE_SIZE_MAP,
+  MAP_AVATARICON_SIZE_ICONSIZE,
+  TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
+  MAP_AVATARICON_SEVERITY_ICONCOLOR,
 } from './AvatarIcon.constants';
 import { AvatarIconSeverity } from './AvatarIcon.types';
-import { AvatarIconSize } from './AvatarIcon.types';
 import { twMerge } from '../../utils/tw-merge';
 
 export const AvatarIcon = React.forwardRef<HTMLDivElement, AvatarIconProps>(
@@ -23,31 +23,27 @@ export const AvatarIcon = React.forwardRef<HTMLDivElement, AvatarIconProps>(
       ...props
     },
     ref,
-  ) => {
-    const baseSize = AVATAR_ICON_TO_AVATAR_BASE_SIZE_MAP[size];
-
-    return (
-      <AvatarBase
-        ref={ref}
-        shape={AvatarBaseShape.Circle}
-        size={baseSize}
-        className={twMerge(
-          AVATAR_ICON_SEVERITY_CLASSNAME_MAP[severity].background,
-          className,
-        )}
-        {...props}
-      >
-        {iconName && (
-          <Icon
-            name={iconName}
-            size={AVATAR_ICON_SIZE_TO_ICON_SIZE_CLASSNAME_MAP[size]}
-            color={AVATAR_ICON_SEVERITY_CLASSNAME_MAP[severity].iconColor}
-            {...iconProps}
-          />
-        )}
-      </AvatarBase>
-    );
-  },
+  ) => (
+    <AvatarBase
+      ref={ref}
+      shape={AvatarBaseShape.Circle}
+      size={size}
+      className={twMerge(
+        TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity],
+        className,
+      )}
+      {...props}
+    >
+      {iconName && (
+        <Icon
+          name={iconName}
+          size={MAP_AVATARICON_SIZE_ICONSIZE[size as AvatarIconSize]}
+          color={MAP_AVATARICON_SEVERITY_ICONCOLOR[severity]}
+          {...iconProps}
+        />
+      )}
+    </AvatarBase>
+  ),
 );
 
 AvatarIcon.displayName = 'AvatarIcon';

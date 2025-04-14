@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { AvatarTokenSize } from '../../types';
 import { AvatarToken } from './AvatarToken';
-import { AvatarTokenSize } from '.';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarToken> = {
@@ -50,6 +50,10 @@ const meta: Meta<typeof AvatarToken> = {
       control: 'text',
       description:
         'Optional additional CSS classes to be applied to the component',
+    },
+    hasBorder: {
+      control: 'boolean',
+      description: 'Optional prop to add a border around the AvatarToken',
     },
   },
 };
@@ -136,6 +140,24 @@ export const Size: Story = {
         name="Ethereum"
         fallbackText="ETH"
         size={AvatarTokenSize.Xl}
+      />
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarToken
+        name="Ethereum"
+        fallbackText="ETH"
+        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+      />
+      <AvatarToken
+        name="Ethereum"
+        fallbackText="ETH"
+        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+        hasBorder
       />
     </div>
   ),

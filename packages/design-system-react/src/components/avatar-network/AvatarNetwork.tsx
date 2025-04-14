@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { AvatarBase, AvatarBaseShape, AvatarBaseSize } from '../avatar-base';
+import { AvatarNetworkSize, AvatarBaseShape } from '../../types';
+import { AvatarBase } from '../avatar-base';
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
 
 export const AvatarNetwork = React.forwardRef<
@@ -14,7 +15,7 @@ export const AvatarNetwork = React.forwardRef<
       fallbackText,
       fallbackTextProps,
       className,
-      size = AvatarBaseSize.Md,
+      size = AvatarNetworkSize.Md,
       imageProps,
       ...props
     },

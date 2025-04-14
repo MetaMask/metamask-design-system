@@ -85,6 +85,22 @@ Example:
 />
 ```
 
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+### Border
+
+The `hasBorder` prop enables a border around the avatar.
+
+```tsx
+import { AvatarIcon, IconName } from '@metamask/design-system-react';
+
+<AvatarIcon iconName={IconName.Arrow2Up} hasBorder />;
+```
+
+<Canvas of={AvatarIconStories.HasBorder} />
+
 ## Component API
 
 <Controls of={AvatarIconStories.Default} />
