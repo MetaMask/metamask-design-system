@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import { typography } from '@metamask/design-tokens';
 
-import type {
-  TypographyTailwindConfigProps,
-  FontStyle,
-  FontWeight,
-} from './typography.types';
-import { getFontFamilyFromWeightAndStyle } from './typography.utilities';
+import type { TypographyTailwindConfigProps } from './typography.types';
 
 export const typographyTailwindConfig: TypographyTailwindConfigProps = {
   fontSize: {
@@ -76,210 +71,16 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
     ],
   },
   fontFamily: {
-    sans: [
-      'CentraNo1-Book',
-      'Helvetica Neue',
-      'Helvetica',
-      'Arial',
-      'sans-serif',
-    ],
-    bold: getFontFamilyFromWeightAndStyle('700', 'normal'),
-    medium: getFontFamilyFromWeightAndStyle('500', 'normal'),
-    italic: getFontFamilyFromWeightAndStyle('400', 'italic'),
-    'medium-italic': getFontFamilyFromWeightAndStyle('500', 'italic'),
-    'bold-italic': getFontFamilyFromWeightAndStyle('700', 'italic'),
-    'display-md': getFontFamilyFromWeightAndStyle(
-      typography.sDisplayMD.fontWeight as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'display-md-medium': getFontFamilyFromWeightAndStyle(
-      '500' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'display-md-bold': getFontFamilyFromWeightAndStyle(
-      '700' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'display-md-italic': getFontFamilyFromWeightAndStyle(
-      typography.sDisplayMD.fontWeight as FontWeight,
-      'italic' as FontStyle,
-    ),
-    'display-md-medium-italic': getFontFamilyFromWeightAndStyle(
-      '500',
-      'italic' as FontStyle,
-    ),
-    'display-md-bold-italic': getFontFamilyFromWeightAndStyle(
-      '700',
-      'italic' as FontStyle,
-    ),
-    'heading-lg': getFontFamilyFromWeightAndStyle(
-      typography.sHeadingLG.fontWeight as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'heading-lg-medium': getFontFamilyFromWeightAndStyle(
-      '500' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'heading-lg-bold': getFontFamilyFromWeightAndStyle(
-      '700' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'heading-lg-italic': getFontFamilyFromWeightAndStyle(
-      typography.sHeadingLG.fontWeight as FontWeight,
-      'italic' as FontStyle,
-    ),
-    'heading-lg-medium-italic': getFontFamilyFromWeightAndStyle(
-      '500',
-      'italic' as FontStyle,
-    ),
-    'heading-lg-bold-italic': getFontFamilyFromWeightAndStyle(
-      '700',
-      'italic' as FontStyle,
-    ),
-    'heading-md': getFontFamilyFromWeightAndStyle(
-      typography.sHeadingMD.fontWeight as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'heading-md-medium': getFontFamilyFromWeightAndStyle(
-      '500' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'heading-md-bold': getFontFamilyFromWeightAndStyle(
-      '700' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'heading-md-italic': getFontFamilyFromWeightAndStyle(
-      typography.sHeadingMD.fontWeight as FontWeight,
-      'italic' as FontStyle,
-    ),
-    'heading-md-medium-italic': getFontFamilyFromWeightAndStyle(
-      '500',
-      'italic' as FontStyle,
-    ),
-    'heading-md-bold-italic': getFontFamilyFromWeightAndStyle(
-      '700',
-      'italic' as FontStyle,
-    ),
-    'heading-sm': getFontFamilyFromWeightAndStyle(
-      typography.sHeadingSM.fontWeight as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'heading-sm-medium': getFontFamilyFromWeightAndStyle(
-      '700' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'heading-sm-bold': getFontFamilyFromWeightAndStyle(
-      '700' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'heading-sm-italic': getFontFamilyFromWeightAndStyle(
-      typography.sHeadingSM.fontWeight as FontWeight,
-      'italic' as FontStyle,
-    ),
-    'heading-sm-medium-italic': getFontFamilyFromWeightAndStyle(
-      '500',
-      'italic' as FontStyle,
-    ),
-    'heading-sm-bold-italic': getFontFamilyFromWeightAndStyle(
-      '700',
-      'italic' as FontStyle,
-    ),
-    'body-lg': getFontFamilyFromWeightAndStyle(
-      typography.sBodyLGMedium.fontWeight as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-lg-medium': getFontFamilyFromWeightAndStyle(
-      '500' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-lg-bold': getFontFamilyFromWeightAndStyle(
-      '700' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-lg-italic': getFontFamilyFromWeightAndStyle(
-      typography.sBodyLGMedium.fontWeight as FontWeight,
-      'italic' as FontStyle,
-    ),
-    'body-lg-medium-italic': getFontFamilyFromWeightAndStyle(
-      '500',
-      'italic' as FontStyle,
-    ),
-    'body-lg-bold-italic': getFontFamilyFromWeightAndStyle(
-      '700',
-      'italic' as FontStyle,
-    ),
-    'body-md': getFontFamilyFromWeightAndStyle(
-      typography.sBodyMD.fontWeight as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-md-medium': getFontFamilyFromWeightAndStyle(
-      '500' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-md-bold': getFontFamilyFromWeightAndStyle(
-      '700' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-md-italic': getFontFamilyFromWeightAndStyle(
-      typography.sBodyMD.fontWeight as FontWeight,
-      'italic' as FontStyle,
-    ),
-    'body-md-medium-italic': getFontFamilyFromWeightAndStyle(
-      '500',
-      'italic' as FontStyle,
-    ),
-    'body-md-bold-italic': getFontFamilyFromWeightAndStyle(
-      '700',
-      'italic' as FontStyle,
-    ),
-    'body-sm': getFontFamilyFromWeightAndStyle(
-      typography.sBodySM.fontWeight as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-sm-medium': getFontFamilyFromWeightAndStyle(
-      '500' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-sm-bold': getFontFamilyFromWeightAndStyle(
-      '700' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-sm-italic': getFontFamilyFromWeightAndStyle(
-      typography.sBodySM.fontWeight as FontWeight,
-      'italic' as FontStyle,
-    ),
-    'body-sm-medium-italic': getFontFamilyFromWeightAndStyle(
-      '500',
-      'italic' as FontStyle,
-    ),
-    'body-sm-bold-italic': getFontFamilyFromWeightAndStyle(
-      '700',
-      'italic' as FontStyle,
-    ),
-    'body-xs': getFontFamilyFromWeightAndStyle(
-      typography.sBodyXS.fontWeight as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-xs-medium': getFontFamilyFromWeightAndStyle(
-      '500' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-xs-bold': getFontFamilyFromWeightAndStyle(
-      '700' as FontWeight,
-      'normal' as FontStyle,
-    ),
-    'body-xs-italic': getFontFamilyFromWeightAndStyle(
-      typography.sBodyXS.fontWeight as FontWeight,
-      'italic' as FontStyle,
-    ),
-    'body-xs-medium-italic': getFontFamilyFromWeightAndStyle(
-      '500',
-      'italic' as FontStyle,
-    ),
-    'body-xs-bold-italic': getFontFamilyFromWeightAndStyle(
-      '700',
-      'italic' as FontStyle,
-    ),
+    'default-regular': 'CentraNo1-Book',
+    'default-regular-italic': 'CentraNo1-BookItalic',
+    'default-medium': 'CentraNo1-Medium',
+    'default-medium-italic': 'CentraNo1-MediumItalic',
+    'default-bold': 'CentraNo1-Bold',
+    'default-bold-italic': 'CentraNo1-BoldItalic',
+    'accent-regular': 'MMSans-Regular',
+    'accent-medium': 'MMSans-Medium',
+    'accent-bold': 'MMSans-Bold',
+    'hero-regular': 'MMPoly-Regular',
   },
   letterSpacing: {
     'display-md': `${typography.sDisplayMD.letterSpacing as number}`,

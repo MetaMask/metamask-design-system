@@ -14,8 +14,8 @@ describe('Light Theme', () => {
   });
 
   it('typography tokens are exported from lightTheme by checking first typography token', () => {
-    expect(lightTheme.typography.sDisplayMD.fontFamily).toStrictEqual(
-      designTokens.global.fontFamilies['centra-no1'].value,
+    expect(lightTheme.typography.sDisplayMD.fontWeight).toStrictEqual(
+      designTokens.global.fontWeights.bold.value,
     );
   });
 

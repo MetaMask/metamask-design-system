@@ -5,11 +5,15 @@ import * as TypographyStories from './Typography.stories';
 
 # Typography
 
-Good typography improves readability, legibility and prioritization of information.
+Good typography improves readability, legibility, and the prioritization of information.
 
 ## Font Family
 
-The main font family used in MetaMask products is **CentraNo1**.
+Our design system now offers three distinct font families to support a rich typographic hierarchy:
+
+- **Centra No1**: The default typeface for primary content, optimized for readability.
+- **MM Sans**: A secondary option that adds subtle visual flair and differentiates sections without overpowering the main content.
+- **MM Poly**: A display-oriented, expressive font used for bold, attention-grabbing statements.
 
 <Canvas of={TypographyStories.FontFamily} />
 
@@ -27,10 +31,32 @@ The main font family used in MetaMask products is **CentraNo1**.
         <strong>CentraNo1</strong>
       </td>
       <td>
-        <code>Token not exported</code>
+        <code>fontFamilies.default</code>
       </td>
       <td>
-        <code>var(--font-family-sans)</code>
+        <code>var(--font-family-default)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>MM Sans</strong>
+      </td>
+      <td>
+        <code>fontFamilies.accent</code>
+      </td>
+      <td>
+        <code>var(--font-family-accent)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>MM Poly</strong>
+      </td>
+      <td>
+        <code>fontFamilies.hero</code>
+      </td>
+      <td>
+        <code>var(--font-family-hero)</code>
       </td>
     </tr>
   </tbody>
@@ -62,8 +88,6 @@ For screens sizes `767px >` or smaller, use the small screen typography scale
         <strong>S DisplayMD</strong>
       </td>
       <td>
-        <code>typography.sDisplayMD.fontFamily</code>
-        <br />
         <code>typography.sDisplayMD.fontWeight</code>
         <br />
         <code>typography.sDisplayMD.fontSize</code>
@@ -73,8 +97,6 @@ For screens sizes `767px >` or smaller, use the small screen typography scale
         <code>typography.sDisplayMD.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-s-display-md-font-family)</code>
-        <br />
         <code>var(--typography-s-display-md-font-weight)</code>
         <br />
         <code>var(--typography-s-display-md-font-size)</code>
@@ -109,8 +131,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L DisplayMD</strong>
       </td>
       <td>
-        <code>typography.lDisplayMD.fontFamily</code>
-        <br />
         <code>typography.lDisplayMD.fontWeight</code>
         <br />
         <code>typography.lDisplayMD.fontSize</code>
@@ -120,8 +140,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lDisplayMD.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-display-md-font-family)</code>
-        <br />
         <code>var(--typography-l-display-md-font-weight)</code>
         <br />
         <code>var(--typography-l-display-md-font-size)</code>
@@ -136,8 +154,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L HeadingLG</strong>
       </td>
       <td>
-        <code>typography.lHeadingLG.fontFamily</code>
-        <br />
         <code>typography.lHeadingLG.fontWeight</code>
         <br />
         <code>typography.lHeadingLG.fontSize</code>
@@ -147,8 +163,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lHeadingLG.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-heading-lg-font-family)</code>
-        <br />
         <code>var(--typography-l-heading-lg-font-weight)</code>
         <br />
         <code>var(--typography-l-heading-lg-font-size)</code>
@@ -163,8 +177,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L HeadingMD</strong>
       </td>
       <td>
-        <code>typography.lHeadingMD.fontFamily</code>
-        <br />
         <code>typography.lHeadingMD.fontWeight</code>
         <br />
         <code>typography.lHeadingMD.fontSize</code>
@@ -174,8 +186,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lHeadingMD.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-heading-md-font-family)</code>
-        <br />
         <code>var(--typography-l-heading-md-font-weight)</code>
         <br />
         <code>var(--typography-l-heading-md-font-size)</code>
@@ -190,8 +200,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L HeadingSM</strong>
       </td>
       <td>
-        <code>typography.lHeadingSM.fontFamily</code>
-        <br />
         <code>typography.lHeadingSM.fontWeight</code>
         <br />
         <code>typography.lHeadingSM.fontSize</code>
@@ -201,8 +209,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lHeadingSM.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-heading-sm-font-family)</code>
-        <br />
         <code>var(--typography-l-heading-sm-font-weight)</code>
         <br />
         <code>var(--typography-l-heading-sm-font-size)</code>
@@ -217,8 +223,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L HeadingSM Regular</strong> (DEPRECATED)
       </td>
       <td>
-        <code>typography.lHeadingSMRegular.fontFamily</code>
-        <br />
         <code>typography.lHeadingSMRegular.fontWeight</code>
         <br />
         <code>typography.lHeadingSMRegular.fontSize</code>
@@ -228,8 +232,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lHeadingSMRegular.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-heading-sm-regular-font-family)</code>
-        <br />
         <code>var(--typography-l-heading-sm-regular-font-weight)</code>
         <br />
         <code>var(--typography-l-heading-sm-regular-font-size)</code>
@@ -244,8 +246,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L BodyLGMedium</strong>
       </td>
       <td>
-        <code>typography.lBodyLGMedium.fontFamily</code>
-        <br />
         <code>typography.lBodyLGMedium.fontWeight</code>
         <br />
         <code>typography.lBodyLGMedium.fontSize</code>
@@ -255,8 +255,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lBodyLGMedium.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-body-lg-medium-font-family)</code>
-        <br />
         <code>var(--typography-l-body-lg-medium-font-weight)</code>
         <br />
         <code>var(--typography-l-body-lg-medium-font-size)</code>
@@ -271,8 +269,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L BodyMD Bold</strong>
       </td>
       <td>
-        <code>typography.lBodyMDBold.fontFamily</code>
-        <br />
         <code>typography.lBodyMDBold.fontWeight</code>
         <br />
         <code>typography.lBodyMDBold.fontSize</code>
@@ -282,8 +278,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lBodyMDBold.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-body-md-bold-font-family)</code>
-        <br />
         <code>var(--typography-l-body-md-bold-font-weight)</code>
         <br />
         <code>var(--typography-l-body-md-bold-font-size)</code>
@@ -298,8 +292,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L BodyMD Medium</strong>
       </td>
       <td>
-        <code>typography.lBodyMDMedium.fontFamily</code>
-        <br />
         <code>typography.lBodyMDMedium.fontWeight</code>
         <br />
         <code>typography.lBodyMDMedium.fontSize</code>
@@ -309,8 +301,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lBodyMDMedium.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-body-md-medium-font-family)</code>
-        <br />
         <code>var(--typography-l-body-md-medium-font-weight)</code>
         <br />
         <code>var(--typography-l-body-md-medium-font-size)</code>
@@ -325,8 +315,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L BodyMD</strong>
       </td>
       <td>
-        <code>typography.lBodyMD.fontFamily</code>
-        <br />
         <code>typography.lBodyMD.fontWeight</code>
         <br />
         <code>typography.lBodyMD.fontSize</code>
@@ -336,8 +324,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lBodyMD.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-body-md-font-family)</code>
-        <br />
         <code>var(--typography-l-body-md-font-weight)</code>
         <br />
         <code>var(--typography-l-body-md-font-size)</code>
@@ -352,8 +338,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L BodySM Bold</strong>
       </td>
       <td>
-        <code>typography.lBodySMBold.fontFamily</code>
-        <br />
         <code>typography.lBodySMBold.fontWeight</code>
         <br />
         <code>typography.lBodySMBold.fontSize</code>
@@ -363,8 +347,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lBodySMBold.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-body-sm-bold-font-family)</code>
-        <br />
         <code>var(--typography-l-body-sm-bold-font-weight)</code>
         <br />
         <code>var(--typography-l-body-sm-bold-font-size)</code>
@@ -379,8 +361,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L BodySM Medium</strong>
       </td>
       <td>
-        <code>typography.lBodySMMedium.fontFamily</code>
-        <br />
         <code>typography.lBodySMMedium.fontWeight</code>
         <br />
         <code>typography.lBodySMMedium.fontSize</code>
@@ -390,8 +370,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lBodySMMedium.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-body-sm-medium-font-family)</code>
-        <br />
         <code>var(--typography-l-body-sm-medium-font-weight)</code>
         <br />
         <code>var(--typography-l-body-sm-medium-font-size)</code>
@@ -406,8 +384,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L BodySM</strong>
       </td>
       <td>
-        <code>typography.lBodySM.fontFamily</code>
-        <br />
         <code>typography.lBodySM.fontWeight</code>
         <br />
         <code>typography.lBodySM.fontSize</code>
@@ -417,8 +393,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lBodySM.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-body-sm-font-family)</code>
-        <br />
         <code>var(--typography-l-body-sm-font-weight)</code>
         <br />
         <code>var(--typography-l-body-sm-font-size)</code>
@@ -433,8 +407,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L BodyXS Medium</strong>
       </td>
       <td>
-        <code>typography.lBodyXSMedium.fontFamily</code>
-        <br />
         <code>typography.lBodyXSMedium.fontWeight</code>
         <br />
         <code>typography.lBodyXSMedium.fontSize</code>
@@ -444,8 +416,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lBodyXSMedium.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-body-xs-font-family)</code>
-        <br />
         <code>var(--typography-l-body-xs-font-weight)</code>
         <br />
         <code>var(--typography-l-body-xs-font-size)</code>
@@ -460,8 +430,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <strong>L BodyXS</strong>
       </td>
       <td>
-        <code>typography.lBodyXS.fontFamily</code>
-        <br />
         <code>typography.lBodyXS.fontWeight</code>
         <br />
         <code>typography.lBodyXS.fontSize</code>
@@ -471,8 +439,6 @@ For screens sizes `768px <` or larger, use the large screen typography scale
         <code>typography.lBodyXS.letterSpacing</code>
       </td>
       <td>
-        <code>var(--typography-l-body-xs-font-family)</code>
-        <br />
         <code>var(--typography-l-body-xs-font-weight)</code>
         <br />
         <code>var(--typography-l-body-xs-font-size)</code>
@@ -491,7 +457,7 @@ For screens sizes `768px <` or larger, use the large screen typography scale
 
 ## Font Weight
 
-There are three available font weights: regular`400`, medium`700` and bold`900`
+There are three available font weights: regular (`400`), medium (`500`), and bold (`700`).
 
 <Canvas of={TypographyStories.FontWeight} />
 
@@ -499,15 +465,15 @@ There are three available font weights: regular`400`, medium`700` and bold`900`
   <thead>
     <tr>
       <th>Font Weight</th>
-      <th>JS</th>
-      <th>CSS</th>
+      <th>JS Token</th>
+      <th>CSS Variable</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>Regular</td>
       <td>
-        <code>Token not exported</code>
+        <code>typography.fontWeights.regular</code>
       </td>
       <td>
         <code>var(--font-weight-regular)</code>
@@ -515,10 +481,10 @@ There are three available font weights: regular`400`, medium`700` and bold`900`
     </tr>
     <tr>
       <td>
-        <span className="font-medium">Medium</span>
+        <strong>Medium</strong>
       </td>
       <td>
-        <code>Token not exported</code>
+        <code>typography.fontWeights.medium</code>
       </td>
       <td>
         <code>var(--font-weight-medium)</code>
@@ -529,7 +495,7 @@ There are three available font weights: regular`400`, medium`700` and bold`900`
         <strong>Bold</strong>
       </td>
       <td>
-        <code>Token not exported</code>
+        <code>typography.fontWeights.bold</code>
       </td>
       <td>
         <code>var(--font-weight-bold)</code>
@@ -538,9 +504,9 @@ There are three available font weights: regular`400`, medium`700` and bold`900`
   </tbody>
 </table>
 
-<br />
+**NOTE:** The JS token format was originally designed for React Native; therefore, `fontSize` and `lineHeight` are defined as integers rather than REMs or unitless values. If these tokens are used in web applications, some conversion may be required at the application level.
 
 ## References
 
-- [Figma Typography (Large screen)](https://www.figma.com/file/likmuA72JatXDKDChibHBG/%5BTypo%5D-Large-screen?node-id=2%3A134)(internal use only)
-- [Figma Typography (Small screen)](https://www.figma.com/file/Na8UKll7g12UywIPGEVLvX/%5BTypo%5D-Small-screen?node-id=2%3A134)(internal use only)
+- [Figma Typography (Large screen)](https://www.figma.com/file/likmuA72JatXDKDChibHBG/%5BTypo%5D-Large-screen?node-id=2%3A134) (internal use only)
+- [Figma Typography (Small screen)](https://www.figma.com/file/Na8UKll7g12UywIPGEVLvX/%5BTypo%5D-Small-screen?node-id=2%3A134) (internal use only)
