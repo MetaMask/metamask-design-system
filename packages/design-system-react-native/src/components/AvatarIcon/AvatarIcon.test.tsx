@@ -2,9 +2,9 @@ import { render } from '@testing-library/react-native';
 
 import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconName } from '../Icon';
-import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
-import { TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR } from './AvatarIcon.constants';
 import AvatarIcon from './AvatarIcon';
+import { TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR } from './AvatarIcon.constants';
+import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
 
 describe('AvatarIcon', () => {
   describe('generateAvatarIconContainerClassNames', () => {

@@ -3,12 +3,12 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
 
+import Icon from '../Icon';
+import type { IconProps } from '../Icon';
+import ButtonAnimated from '../temp-components/ButtonAnimated';
 import type { SpinnerProps } from '../temp-components/Spinner';
 import Spinner from '../temp-components/Spinner';
-import ButtonAnimated from '../temp-components/ButtonAnimated';
 import TextOrChildren from '../temp-components/TextOrChildren/TextOrChildren';
-import type { IconProps } from '../Icon';
-import Icon from '../Icon';
 import type { TextProps } from '../Text';
 import { DEFAULT_BUTTONBASE_PROPS } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';

@@ -1,9 +1,9 @@
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
-import type { SpinnerProps } from '../temp-components/Spinner';
 import { ButtonBaseSize } from '../../types';
-import type { TextProps } from '../Text';
 import type { IconProps, IconName } from '../Icon';
+import type { SpinnerProps } from '../temp-components/Spinner';
+import type { TextProps } from '../Text';
 
 /**
  * ButtonBase component props.

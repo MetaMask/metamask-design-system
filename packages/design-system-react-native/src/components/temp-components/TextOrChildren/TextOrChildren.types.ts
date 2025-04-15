@@ -1,4 +1,4 @@
-import type { TextProps } from '../../Text/Text.types';
+import type { TextProps } from '../../Text';
 
 /**
  * TextOrChildren component props.

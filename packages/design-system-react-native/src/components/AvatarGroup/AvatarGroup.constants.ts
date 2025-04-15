@@ -1,5 +1,4 @@
 import { AvatarGroupSize } from '../../types';
-import { TextVariant } from '../Text';
 import { AvatarAccountProps, AvatarAccountVariant } from '../AvatarAccount';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from '../AvatarAccount/AvatarAccount.constants';
 import { AvatarFaviconProps } from '../AvatarFavicon';
@@ -8,6 +7,7 @@ import { AvatarNetworkProps } from '../AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.constants';
 import { AvatarTokenProps } from '../AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.constants';
+import { TextVariant } from '../Text';
 
 // Mappings
 export const MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS: Record<

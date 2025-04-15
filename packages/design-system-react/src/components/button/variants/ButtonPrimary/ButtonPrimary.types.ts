@@ -1,4 +1,4 @@
-import type { ButtonBaseProps } from '../ButtonBase';
+import type { ButtonBaseProps } from '../../../ButtonBase';
 
 export type ButtonPrimaryProps = Omit<
   ButtonBaseProps,

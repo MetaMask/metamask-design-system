@@ -1,7 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { FontWeight, TextColor } from '../Text';
 import { BadgeCount } from './BadgeCount';
 import { BadgeCountSize } from './BadgeCount.types';
 import type { BadgeCountProps } from './BadgeCount.types';

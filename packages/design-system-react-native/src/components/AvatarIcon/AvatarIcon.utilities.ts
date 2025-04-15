@@ -1,8 +1,8 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
 import { AvatarIconSeverity } from '../../types';
-import type { AvatarIconProps } from './AvatarIcon.types';
 import { TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR } from './AvatarIcon.constants';
+import type { AvatarIconProps } from './AvatarIcon.types';
 
 /**
  * Generates a Tailwind class name string for the background color of an avatar icon.

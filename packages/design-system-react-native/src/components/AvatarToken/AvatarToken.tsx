@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
 import { AvatarBaseShape } from '../../types';
-import ImageOrSvg from '../temp-components/ImageOrSvg';
 import AvatarBase from '../AvatarBase';
+import ImageOrSvg from '../temp-components/ImageOrSvg';
 import type { AvatarTokenProps } from './AvatarToken.types';
 
 const AvatarToken = ({

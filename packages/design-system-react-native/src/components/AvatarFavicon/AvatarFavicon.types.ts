@@ -1,5 +1,5 @@
-import { ImageOrSvgProps } from '../temp-components/ImageOrSvg';
 import { AvatarBaseProps } from '../AvatarBase';
+import { ImageOrSvgProps } from '../temp-components/ImageOrSvg';
 
 /**
  * AvatarFavicon component props.

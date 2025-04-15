@@ -1,5 +1,6 @@
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import React from 'react';
+
 import { Blockies } from './Blockies';
 
 // Mock the 'blo' module to return a predictable output for testing.

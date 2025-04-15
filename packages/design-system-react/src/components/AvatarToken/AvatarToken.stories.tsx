@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { AvatarToken } from './AvatarToken';
 import { AvatarTokenSize } from '.';
+import { AvatarToken } from './AvatarToken';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarToken> = {

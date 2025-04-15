@@ -2,9 +2,9 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { BadgeIcon } from './BadgeIcon';
 import { IconName, IconColor } from '../Icon';
 import { ICON_SIZE_CLASS_MAP } from '../Icon/Icon.constants';
+import { BadgeIcon } from './BadgeIcon';
 
 describe('BadgeIcon', () => {
   it('renders with default props', () => {

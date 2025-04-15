@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { ButtonBase } from '../ButtonBase';
+import { twMerge } from '../../../../utils/tw-merge';
+import { ButtonBase } from '../../../ButtonBase';
 import type { ButtonSecondaryProps } from './ButtonSecondary.types';
 
 export const ButtonSecondary = React.forwardRef<

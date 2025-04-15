@@ -1,8 +1,8 @@
 import type { ComponentProps } from 'react';
 
-import type { TextProps } from '../Text';
-import type { Jazzicon } from '../Jazzicon';
+import type { Jazzicon } from '../temp-components/Jazzicon';
 import type { Blockies } from '../temp-components/Blockies';
+import type { TextProps } from '../Text';
 
 export enum AvatarAccountSize {
   /**

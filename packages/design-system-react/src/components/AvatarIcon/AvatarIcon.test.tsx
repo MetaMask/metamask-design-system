@@ -2,14 +2,11 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { IconName } from '../Icon';
-import { AvatarIcon } from './AvatarIcon';
-import {
-  AVATAR_ICON_SEVERITY_CLASSNAME_MAP,
-  AVATAR_ICON_SIZE_TO_ICON_SIZE_CLASSNAME_MAP,
-} from './AvatarIcon.constants';
-import { AvatarIconSeverity } from './AvatarIcon.types';
-import { AvatarIconSize } from '.';
 import { ICON_SIZE_CLASS_MAP } from '../Icon/Icon.constants';
+import { AvatarIconSize } from '.';
+import { AvatarIcon } from './AvatarIcon';
+import { AVATAR_ICON_SEVERITY_CLASSNAME_MAP } from './AvatarIcon.constants';
+import { AvatarIconSeverity } from './AvatarIcon.types';
 
 describe('AvatarIcon', () => {
   it('renders with default props', () => {

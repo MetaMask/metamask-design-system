@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { AvatarNetwork } from './AvatarNetwork';
 import { AvatarNetworkSize } from '.';
+import { AvatarNetwork } from './AvatarNetwork';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarNetwork> = {

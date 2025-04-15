@@ -1,5 +1,3 @@
-export { default } from './Text';
-export type { TextProps } from './Text.types';
 export {
   TextVariant,
   TextColor,
@@ -7,3 +5,5 @@ export {
   FontStyle,
   FontFamily,
 } from '../../types';
+export { default } from './Text';
+export type { TextProps } from './Text.types';

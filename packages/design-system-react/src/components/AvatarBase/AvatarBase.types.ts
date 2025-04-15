@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react';
+
 import type { TextProps } from '../Text';
 
 export enum AvatarBaseSize {

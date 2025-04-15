@@ -1,12 +1,12 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
 import { AvatarBaseShape } from '../../types';
-import { DEFAULT_AVATARBASE_PROPS } from './AvatarBase.constants';
-import type { AvatarBaseProps } from './AvatarBase.types';
 import {
+  DEFAULT_AVATARBASE_PROPS,
   TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
   MAP_AVATARBASE_SIZE_BORDERWIDTH,
 } from './AvatarBase.constants';
+import type { AvatarBaseProps } from './AvatarBase.types';
 
 /**
  * Generates a Tailwind class name string for the base container of an avatar.

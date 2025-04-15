@@ -6,9 +6,9 @@ import {
   AvatarBaseShape,
   AvatarAccountVariant,
 } from '../../types';
-import Jazzicon from '../temp-components/Jazzicon';
-import Blockies from '../temp-components/Blockies';
 import AvatarBase from '../AvatarBase';
+import Blockies from '../temp-components/Blockies';
+import Jazzicon from '../temp-components/Jazzicon';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 
 const AvatarAccount = ({

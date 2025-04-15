@@ -3,8 +3,8 @@ import React, { useMemo, useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import ButtonBase from '../../../ButtonBase';
-import type { SpinnerProps } from '../../../temp-components/Spinner';
 import type { IconProps, IconColor } from '../../../Icon';
+import type { SpinnerProps } from '../../../temp-components/Spinner';
 import type { TextProps } from '../../../Text/Text.types';
 import { DEFAULT_BUTTONTERTIARY_PROPS } from './ButtonTertiary.constants';
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';

@@ -1,9 +1,9 @@
-import React from 'react';
-import { render } from '@testing-library/react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render } from '@testing-library/react-native';
+import React from 'react';
 
-import Text from '../Text';
 import { IconName, IconColor, IconSize } from '../Icon';
+import Text from '../Text';
 import BadgeIcon from './BadgeIcon';
 
 describe('BadgeIcon', () => {

@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { ButtonPrimarySize } from '.';
-import { IconName } from '../Icon';
-import { ButtonPrimary } from './ButtonPrimary';
+import { IconName } from '../../../Icon';
+import { ButtonTertiarySize } from '.';
+import { ButtonTertiary } from './ButtonTertiary';
 import README from './README.mdx';
 
-const meta: Meta<typeof ButtonPrimary> = {
-  title: 'React Components/ButtonPrimary',
-  component: ButtonPrimary,
+const meta: Meta<typeof ButtonTertiary> = {
+  title: 'React Components/ButtonTertiary',
+  component: ButtonTertiary,
   parameters: {
     docs: {
       page: README,
@@ -18,28 +18,22 @@ const meta: Meta<typeof ButtonPrimary> = {
     children: {
       control: 'text',
       description:
-        'Required prop for the content to be rendered within the ButtonPrimary',
+        'Required prop for the content to be rendered within the ButtonTertiary',
     },
     className: {
       control: 'text',
       description:
-        'Optional prop for additional CSS classes to be applied to the ButtonPrimary component',
+        'Optional prop for additional CSS classes to be applied to the ButtonTertiary component',
     },
     isDanger: {
       control: 'boolean',
       description:
         'Optional prop that when true, applies error/danger styling to the button',
     },
-    isInverse: {
-      control: 'boolean',
-      description:
-        'Optional prop that when true, applies inverse styling to the button',
-    },
     size: {
       control: 'select',
-      options: Object.keys(ButtonPrimarySize),
-      mapping: ButtonPrimarySize,
-      description: 'Optional prop to control the size of the ButtonPrimary',
+      options: Object.values(ButtonTertiarySize),
+      description: 'Optional prop to control the size of the ButtonTertiary',
     },
     isFullWidth: {
       control: 'boolean',
@@ -57,8 +51,7 @@ const meta: Meta<typeof ButtonPrimary> = {
     },
     startIconName: {
       control: 'select',
-      options: Object.keys(IconName),
-      mapping: IconName,
+      options: Object.values(IconName),
       description:
         'Optional prop to specify an icon to show at the start of the button',
     },
@@ -74,8 +67,7 @@ const meta: Meta<typeof ButtonPrimary> = {
     },
     endIconName: {
       control: 'select',
-      options: Object.keys(IconName),
-      mapping: IconName,
+      options: Object.values(IconName),
       description:
         'Optional prop to specify an icon to show at the end of the button',
     },
@@ -102,53 +94,53 @@ const meta: Meta<typeof ButtonPrimary> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof ButtonPrimary>;
+type Story = StoryObj<typeof ButtonTertiary>;
 
 export const Default: Story = {
   args: {
-    children: 'Primary Button',
+    children: 'Button Tertiary',
   },
 };
 
 export const IsDanger: Story = {
   args: {
-    children: 'Danger Button',
+    children: 'Danger',
     isDanger: true,
   },
-};
-
-export const IsInverse: Story = {
-  render: (args) => (
-    <div className="bg-primary-default p-4 rounded flex gap-2">
-      <ButtonPrimary {...args} isInverse>
-        Inverse Button
-      </ButtonPrimary>
-      <ButtonPrimary {...args} isInverse isDanger>
-        Inverse Danger Button
-      </ButtonPrimary>
-    </div>
-  ),
 };
 
 export const Size: Story = {
   render: (args) => (
     <div className="flex gap-2">
-      <ButtonPrimary {...args} size={ButtonPrimarySize.Sm}>
+      <ButtonTertiary {...args} size={ButtonTertiarySize.Sm}>
         Small
-      </ButtonPrimary>
-      <ButtonPrimary {...args} size={ButtonPrimarySize.Md}>
+      </ButtonTertiary>
+      <ButtonTertiary {...args} size={ButtonTertiarySize.Md}>
         Medium
-      </ButtonPrimary>
-      <ButtonPrimary {...args} size={ButtonPrimarySize.Lg}>
+      </ButtonTertiary>
+      <ButtonTertiary {...args} size={ButtonTertiarySize.Lg}>
         Large
-      </ButtonPrimary>
+      </ButtonTertiary>
+    </div>
+  ),
+};
+
+export const IsInverse: Story = {
+  render: (args) => (
+    <div className="bg-primary-default p-4 rounded flex gap-2">
+      <ButtonTertiary {...args} isInverse>
+        Inverse
+      </ButtonTertiary>
+      <ButtonTertiary {...args} isInverse isDanger>
+        Inverse Danger
+      </ButtonTertiary>
     </div>
   ),
 };
 
 export const IsFullWidth: Story = {
   args: {
-    children: 'Full Width Button',
+    children: 'Full Width',
     isFullWidth: true,
   },
 };
@@ -169,7 +161,7 @@ export const EndIconName: Story = {
 
 export const IsLoading: Story = {
   args: {
-    children: 'Loading Button',
+    children: 'Loading',
     isLoading: true,
     loadingText: 'Loading...',
   },
@@ -177,7 +169,7 @@ export const IsLoading: Story = {
 
 export const IsDisabled: Story = {
   args: {
-    children: 'Disabled Button',
+    children: 'Disabled Button Tertiary',
     isDisabled: true,
   },
 };

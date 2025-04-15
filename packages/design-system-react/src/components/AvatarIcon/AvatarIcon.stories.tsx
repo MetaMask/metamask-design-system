@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { AvatarIcon } from './AvatarIcon';
-import { AvatarIconSize, AvatarIconSeverity } from '.';
 import { IconName } from '../Icon';
+import { AvatarIconSize, AvatarIconSeverity } from '.';
+import { AvatarIcon } from './AvatarIcon';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarIcon> = {

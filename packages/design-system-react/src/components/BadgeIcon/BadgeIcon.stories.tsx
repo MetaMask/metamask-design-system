@@ -1,9 +1,9 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { IconName } from '../Icon';
 import { BadgeIcon } from './BadgeIcon';
 import type { BadgeIconProps } from './BadgeIcon.types';
-import { IconName, IconColor } from '../Icon';
 import README from './README.mdx';
 
 const meta: Meta<typeof BadgeIcon> = {

@@ -1,6 +1,6 @@
-import type { ButtonPrimaryProps } from '../ButtonPrimary';
-import type { ButtonSecondaryProps } from '../ButtonSecondary';
-import type { ButtonTertiaryProps } from '../ButtonTertiary';
+import type { ButtonPrimaryProps } from './variants/ButtonPrimary';
+import type { ButtonSecondaryProps } from './variants/ButtonSecondary';
+import type { ButtonTertiaryProps } from './variants/ButtonTertiary';
 
 export enum ButtonVariant {
   /**

@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { TextColor } from '../Text';
-import { AvatarNetwork } from './AvatarNetwork';
 import { AvatarNetworkSize } from '.';
+import { AvatarNetwork } from './AvatarNetwork';
 
 describe('AvatarNetwork', () => {
   it('renders image when src is provided', () => {

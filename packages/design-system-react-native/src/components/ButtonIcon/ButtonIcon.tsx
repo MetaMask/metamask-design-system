@@ -4,9 +4,9 @@ import React, { useMemo, useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import { ButtonIconSize } from '../../types';
-import ButtonAnimated from '../temp-components/ButtonAnimated';
-import type { IconProps } from '../Icon';
 import Icon from '../Icon';
+import type { IconProps } from '../Icon';
+import ButtonAnimated from '../temp-components/ButtonAnimated';
 import {
   DEFAULT_BUTTONICON_PROPS,
   MAPPING_BUTTONICONSIZE_ICONSIZE,

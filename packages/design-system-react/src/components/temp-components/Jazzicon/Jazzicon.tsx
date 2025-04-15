@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
 import jazzicon from '@metamask/jazzicon';
 import { KnownCaipNamespace } from '@metamask/utils';
+import React, { useEffect, useRef } from 'react';
 
 import { JazziconProps } from './Jazzicon.types';
 import {

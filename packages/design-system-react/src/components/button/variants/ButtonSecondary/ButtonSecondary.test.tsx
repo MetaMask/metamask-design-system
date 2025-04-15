@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { IconName } from '../Icon';
-import { ButtonBaseSize } from '../ButtonBase';
+import { ButtonBaseSize } from '../../../ButtonBase';
+import { IconName } from '../../../Icon';
 import { ButtonSecondary } from './ButtonSecondary';
 
 describe('ButtonSecondary', () => {

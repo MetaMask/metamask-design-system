@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { ButtonBase } from '../ButtonBase';
-import type { ButtonTertiaryProps } from './ButtonTertiary.types';
+import { twMerge } from '../../../../utils/tw-merge';
+import { ButtonBase } from '../../../ButtonBase';
+import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 
-export const ButtonTertiary = React.forwardRef<
+export const ButtonPrimary = React.forwardRef<
   HTMLButtonElement,
-  ButtonTertiaryProps
+  ButtonPrimaryProps
 >(
   (
     { className, isDanger, isInverse, isDisabled, isLoading, ...props },
@@ -15,26 +15,26 @@ export const ButtonTertiary = React.forwardRef<
     const isInteractive = !(isDisabled ?? isLoading);
 
     const mergedClassName = twMerge(
-      // Default tertiary styles
+      // Default primary styles
       !isDanger &&
         !isInverse && [
-          'bg-transparent text-primary-default',
+          'bg-primary-default text-primary-inverse',
           // Loading state uses pressed color
-          isLoading && 'bg-pressed',
+          isLoading && 'bg-primary-default-pressed',
         ],
       // Danger styles
       isDanger &&
         !isInverse && [
-          'bg-transparent text-error-default',
-          // Loading state uses error muted pressed color
-          isLoading && 'bg-error-muted-pressed text-error-default-pressed',
+          'bg-error-default text-error-inverse',
+          // Loading state uses pressed color
+          isLoading && 'bg-error-default-pressed',
         ],
       // Inverse styles
       isInverse &&
         !isDanger && [
-          'bg-transparent text-primary-inverse',
+          'bg-default text-default',
           // Loading state uses pressed color
-          isLoading && 'bg-pressed',
+          isLoading && 'bg-default-pressed',
         ],
       // Inverse danger styles
       isInverse &&
@@ -45,15 +45,20 @@ export const ButtonTertiary = React.forwardRef<
         ],
       // Hover/Active states - only applied when interactive
       isInteractive && [
-        'hover:bg-hover',
-        'active:bg-pressed',
-        isInverse &&
-          isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
+        !isDanger &&
+          !isInverse && [
+            'hover:bg-primary-default-hover',
+            'active:bg-primary-default-pressed',
+          ],
         isDanger &&
           !isInverse && [
-            'hover:bg-error-muted-hover',
-            'active:bg-error-muted-pressed',
+            'hover:bg-error-default-hover',
+            'active:bg-error-default-pressed',
           ],
+        isInverse &&
+          !isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
+        isInverse &&
+          isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
       ],
       // Loading styles
       isLoading && 'cursor-not-allowed',
@@ -68,10 +73,11 @@ export const ButtonTertiary = React.forwardRef<
         className={mergedClassName}
         isDisabled={isDisabled}
         isLoading={isLoading}
+        data-theme={!isInverse && 'light'} // Lock button primary to light theme
         {...props}
       />
     );
   },
 );
 
-ButtonTertiary.displayName = 'ButtonTertiary';
+ButtonPrimary.displayName = 'ButtonPrimary';

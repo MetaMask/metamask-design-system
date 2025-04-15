@@ -2,13 +2,13 @@ import { render } from '@testing-library/react-native';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import Text from '../Text';
-import { generateAvatarBaseContainerClassNames } from './AvatarBase.utilities';
+import AvatarBase from './AvatarBase';
 import {
   DEFAULT_AVATARBASE_PROPS,
   TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
   MAP_AVATARBASE_SIZE_BORDERWIDTH,
 } from './AvatarBase.constants';
-import AvatarBase from './AvatarBase';
+import { generateAvatarBaseContainerClassNames } from './AvatarBase.utilities';
 
 describe('AvatarBase', () => {
   describe('generateAvatarBaseContainerClassNames', () => {
