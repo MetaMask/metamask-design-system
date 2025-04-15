@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React from 'react';
 
+import { BadgeStatusSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import {
   CLASSMAP_BADGESTATUS_STATUS_CIRCLE,
   CLASSMAP_BADGESTATUS_SIZE,
 } from './BadgeStatus.constants';
 import type { BadgeStatusProps } from './BadgeStatus.types';
-import { BadgeStatusSize } from './BadgeStatus.types';
 
 export const BadgeStatus = React.forwardRef<HTMLDivElement, BadgeStatusProps>(
   (

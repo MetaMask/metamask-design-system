@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React from 'react';
 
+import { AvatarAccountVariant } from '../../types';
 import AvatarBase from '../../primitives/AvatarBase';
-import { AvatarAccountSize, AvatarBaseShape } from '../../shared/enums';
+import { AvatarAccountSize, AvatarBaseShape } from '../../types/';
 import Jazzicon from '../../primitives/Jazzicon';
 import Blockies from '../../primitives/Blockies';
 import type { AvatarAccountProps } from './AvatarAccount.types';
-import { AvatarAccountVariant } from './AvatarAccount.types';
 
 const AvatarAccount = ({
   address,

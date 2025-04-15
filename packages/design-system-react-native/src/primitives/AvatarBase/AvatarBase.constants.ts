@@ -1,6 +1,6 @@
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import type { AvatarBaseProps } from './AvatarBase.types';
 import { TextColor, TextVariant, FontWeight } from '../../components/Text';
-import { AvatarBaseSize, AvatarBaseShape } from '../../shared/enums';
 
 // Mappings
 export const TWCLASSMAP_AVATARBASE_SIZE_SHAPE: Record<AvatarBaseSize, string> =

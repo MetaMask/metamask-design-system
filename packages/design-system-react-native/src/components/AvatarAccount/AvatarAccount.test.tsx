@@ -2,9 +2,9 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import { AvatarAccountSize } from '../../shared/enums';
+import { AvatarAccountVariant } from '../../types';
+import { AvatarAccountSize } from '../../types/';
 import AvatarAccount from './AvatarAccount';
-import { AvatarAccountVariant } from './AvatarAccount.types';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
 
 describe('AvatarAccount', () => {

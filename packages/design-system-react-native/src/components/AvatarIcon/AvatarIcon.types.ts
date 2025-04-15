@@ -1,13 +1,6 @@
 import { AvatarBaseProps } from '../../primitives/AvatarBase';
 import { IconName, IconProps } from '../Icon';
-
-export enum AvatarIconSeverity {
-  Default = 'default',
-  Info = 'info',
-  Success = 'success',
-  Error = 'error',
-  Warning = 'warning',
-}
+import { AvatarIconSeverity } from '../../types';
 
 /**
  * AvatarIcon component props.

@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { ButtonPrimarySize } from '../../types';
 import { IconName } from '../icon';
-import { ButtonBaseSize } from '../button-base';
 import { ButtonPrimary } from './ButtonPrimary';
 
 describe('ButtonPrimary', () => {
@@ -119,11 +119,11 @@ describe('ButtonPrimary', () => {
 
   it('renders with correct size classes', () => {
     const { rerender } = render(
-      <ButtonPrimary size={ButtonBaseSize.Sm}>Small</ButtonPrimary>,
+      <ButtonPrimary size={ButtonPrimarySize.Sm}>Small</ButtonPrimary>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
 
-    rerender(<ButtonPrimary size={ButtonBaseSize.Lg}>Large</ButtonPrimary>);
+    rerender(<ButtonPrimary size={ButtonPrimarySize.Lg}>Large</ButtonPrimary>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 

@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
+import {
+  BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
+} from '../../types';
 import { IconName } from '../Icon';
 import BadgeCount from '../BadgeCount';
 import BadgeIcon from '../BadgeIcon';
@@ -10,10 +14,6 @@ import AvatarNetwork from '../AvatarNetwork';
 import AvatarAccount, { AvatarAccountSize } from '../AvatarAccount';
 import BadgeWrapper from './BadgeWrapper';
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
-import {
-  BadgeWrapperPositionAnchorShape,
-  BadgeWrapperPosition,
-} from './BadgeWrapper.types';
 
 const meta: Meta<BadgeWrapperProps> = {
   title: 'Components/BadgeWrapper',

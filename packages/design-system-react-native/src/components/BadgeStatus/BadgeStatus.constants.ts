@@ -1,4 +1,4 @@
-import { BadgeStatusStatus, BadgeStatusSize } from './BadgeStatus.types';
+import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
 
 // Mappings
 export const TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE: Record<

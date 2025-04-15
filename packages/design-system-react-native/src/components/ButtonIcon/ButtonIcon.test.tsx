@@ -1,9 +1,9 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
+import { ButtonIconSize } from '../../types';
 import ButtonIcon from './ButtonIcon';
 import { DEFAULT_BUTTONICON_PROPS } from './ButtonIcon.constants';
-import { ButtonIconSize } from './ButtonIcon.types';
 import {
   generateButtonIconContainerClassNames,
   generateButtonIconIconColorClassNames,

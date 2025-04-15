@@ -1,4 +1,4 @@
-import { IconSize } from './Icon.types';
+import { IconSize } from '../../types';
 
 export const ICON_SIZE_CLASS_MAP: Record<IconSize, string> = {
   [IconSize.Xs]: 'w-3 h-3', // 12px

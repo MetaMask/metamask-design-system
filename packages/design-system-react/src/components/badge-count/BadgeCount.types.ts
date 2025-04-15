@@ -1,17 +1,7 @@
 import type { ComponentProps } from 'react';
 
+import { BadgeCountSize } from '../../types';
 import type { TextProps } from '../text';
-
-export enum BadgeCountSize {
-  /**
-   * Represents a medium badge count (14px height).
-   */
-  Md = 'md',
-  /**
-   * Represents a large badge count (20px height).
-   */
-  Lg = 'lg',
-}
 
 /**
  * BadgeCount component props.

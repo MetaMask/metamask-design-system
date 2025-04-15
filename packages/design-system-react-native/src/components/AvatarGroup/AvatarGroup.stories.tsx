@@ -1,7 +1,7 @@
 import { ScrollView, View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
-import { AvatarGroupSize } from '../../shared/enums';
+import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import AvatarGroup from './AvatarGroup';
 import {
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
@@ -10,7 +10,6 @@ import {
   SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
 } from './AvatarGroup.constants';
 import type { AvatarGroupProps } from './AvatarGroup.types';
-import { AvatarGroupVariant } from './AvatarGroup.types';
 
 const meta: Meta<AvatarGroupProps> = {
   title: 'Components/AvatarGroup',

@@ -2,14 +2,14 @@ import React, { useCallback, useMemo } from 'react';
 import { View } from 'react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
-import { AvatarGroupSize } from '../../shared/enums';
+import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import AvatarAccount, { AvatarAccountProps } from '../AvatarAccount';
 import AvatarFavicon, { AvatarFaviconProps } from '../AvatarFavicon';
 import AvatarNetwork, { AvatarNetworkProps } from '../AvatarNetwork';
 import AvatarToken, { AvatarTokenProps } from '../AvatarToken';
 import Text, { TextColor } from '../Text';
 import { MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT } from './AvatarGroup.constants';
-import { AvatarGroupProps, AvatarGroupVariant } from './AvatarGroup.types';
+import { AvatarGroupProps } from './AvatarGroup.types';
 import {
   generateAvatarGroupContainerClassNames,
   generateAvatarGroupOverflowTextContainerClassNames,

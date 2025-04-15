@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { AvatarAccountSize } from '../../shared/enums';
+import { AvatarAccountVariant } from '../../types';
+import { AvatarAccountSize } from '../../types/';
 import AvatarAccount from './AvatarAccount';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
 import type { AvatarAccountProps } from './AvatarAccount.types';
-import { AvatarSize } from '../../shared/enums';
-import { AvatarAccountVariant } from './AvatarAccount.types';
+import { AvatarSize } from '../../types/';
 
 const meta: Meta<AvatarAccountProps> = {
   title: 'Components/AvatarAccount',

@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { IconSize, IconColor } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { ICON_SIZE_CLASS_MAP } from './Icon.constants';
-import { IconSize, IconColor } from './Icon.types';
 import type { IconProps } from './Icon.types';
 import { Icons } from './icons';
 

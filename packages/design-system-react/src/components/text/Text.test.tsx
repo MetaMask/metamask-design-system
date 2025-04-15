@@ -1,18 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
 import {
-  Text,
   TextVariant,
-  TextColor,
-  TextAlign,
   FontWeight,
   FontFamily,
   FontStyle,
   TextTransform,
+  TextAlign,
   OverflowWrap,
-} from '.';
+  TextColor,
+} from '../../types';
+import { twMerge } from '../../utils/tw-merge';
+import { Text } from '.';
 import {
   CLASSMAP_TEXT_VARIANT_FONTSTYLE,
   CLASSMAP_TEXT_VARIANT_FONTWEIGHT,

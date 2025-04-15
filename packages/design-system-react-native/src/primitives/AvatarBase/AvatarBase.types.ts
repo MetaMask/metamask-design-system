@@ -1,6 +1,7 @@
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
+
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import type { TextProps } from '../../components/Text/Text.types';
-import { AvatarBaseSize, AvatarBaseShape } from '../../shared/enums';
 
 /**
  * AvatarBase component props.

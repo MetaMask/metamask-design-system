@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { ButtonIconSize } from '../../types';
 import { IconName } from '../icon';
 import { ButtonIcon } from './ButtonIcon';
-import { ButtonIconSize } from './ButtonIcon.types';
 
 describe('ButtonIcon', () => {
   it('renders with default props', () => {

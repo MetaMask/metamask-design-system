@@ -1,4 +1,4 @@
-import { AvatarBaseSize } from './AvatarBase.types';
+import { AvatarBaseSize } from '../../types';
 
 export const AVATAR_BASE_SIZE_CLASS_MAP: Record<AvatarBaseSize, string> = {
   [AvatarBaseSize.Xs]: 'h-4 w-4',

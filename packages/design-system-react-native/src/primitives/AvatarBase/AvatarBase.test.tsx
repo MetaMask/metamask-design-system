@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react-native';
 
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import Text from '../../components/Text';
-import { AvatarBaseSize, AvatarBaseShape } from '../../shared/enums';
 import { generateAvatarBaseContainerClassNames } from './AvatarBase.utilities';
 import {
   DEFAULT_AVATARBASE_PROPS,

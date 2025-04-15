@@ -1,28 +1,7 @@
 import type { ComponentProps } from 'react';
 
-/**
- * The status of BadgeStatus
- */
-export enum BadgeStatusStatus {
-  Active = 'active',
-  PartiallyActive = 'partiallyactive',
-  Inactive = 'inactive',
-  New = 'new',
-  Attention = 'attention',
-}
-/**
- * The size of BadgeStatus
- */
-export enum BadgeStatusSize {
-  /**
-   * Represents a medium badge status size (8px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large avatar size (10px).
-   */
-  Lg = 'lg',
-}
+import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
+
 /**
  * BadgeStatus component props.
  */

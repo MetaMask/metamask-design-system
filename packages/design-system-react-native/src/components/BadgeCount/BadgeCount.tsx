@@ -3,6 +3,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
+import { BadgeCountSize } from '../../types';
 import Text, { TextColor, FontWeight } from '../Text';
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
@@ -10,7 +11,6 @@ import {
   MAP_BADGECOUNT_SIZE_LINEHEIGHT,
 } from './BadgeCount.constants';
 import type { BadgeCountProps } from './BadgeCount.types';
-import { BadgeCountSize } from './BadgeCount.types';
 
 const BadgeCount = ({
   size = BadgeCountSize.Md,

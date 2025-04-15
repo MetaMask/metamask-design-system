@@ -1,29 +1,10 @@
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
-export enum BadgeWrapperPositionAnchorShape {
-  Rectangular = 'Rectangular',
-  Circular = 'Circular',
-}
-
-/**
- * BadgeWrapper Position.
- */
-export enum BadgeWrapperPosition {
-  TopRight = 'TopRight',
-  BottomRight = 'BottomRight',
-  BottomLeft = 'BottomLeft',
-  TopLeft = 'TopLeft',
-}
-
-/**
- * Badge Position Obj.
- */
-export interface BadgeWrapperCustomPosition {
-  top?: number | string | undefined;
-  right?: number | string | undefined;
-  bottom?: number | string | undefined;
-  left?: number | string | undefined;
-}
+import {
+  BadgeWrapperPosition,
+  BadgeWrapperCustomPosition,
+  BadgeWrapperPositionAnchorShape,
+} from '../../types';
 
 /**
  * Badge component props.

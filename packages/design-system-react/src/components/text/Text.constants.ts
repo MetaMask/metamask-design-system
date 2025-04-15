@@ -1,4 +1,4 @@
-import { TextVariant } from './Text.types';
+import { TextVariant } from '../../types';
 
 export const CLASSMAP_TEXT_VARIANT_FONTSTYLE: Record<TextVariant, string> = {
   [TextVariant.DisplayLg]: 'text-[2.5rem] md:text-[4rem]',

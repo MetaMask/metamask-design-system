@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { TextColor } from '../text';
 import { AvatarBase } from './AvatarBase';
 import {
   AVATAR_BASE_SIZE_CLASS_MAP,
   AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP,
 } from './AvatarBase.constants';
-import { AvatarBaseSize, AvatarBaseShape } from './AvatarBase.types';
 
 describe('AvatarBase', () => {
   it('renders with default styles', () => {

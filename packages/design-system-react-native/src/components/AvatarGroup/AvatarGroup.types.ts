@@ -1,20 +1,10 @@
 import { ViewProps } from 'react-native';
 
-import { AvatarGroupSize } from '../../shared/enums';
+import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import { AvatarAccountProps } from '../AvatarAccount';
 import { AvatarFaviconProps } from '../AvatarFavicon';
 import { AvatarNetworkProps } from '../AvatarNetwork';
 import { AvatarTokenProps } from '../AvatarToken';
-
-/**
- * AvatarGroup variants.
- */
-export enum AvatarGroupVariant {
-  Account = 'Account',
-  Favicon = 'Favicon',
-  Network = 'Network',
-  Token = 'Token',
-}
 
 type BaseAvatarGroupProps = {
   /**

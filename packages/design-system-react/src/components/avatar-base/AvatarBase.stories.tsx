@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { Icon, IconName, IconSize } from '../icon';
 import { TextColor } from '../text';
 import { AvatarBase } from './AvatarBase';
-import { AvatarBaseSize, AvatarBaseShape } from './AvatarBase.types';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarBase> = {

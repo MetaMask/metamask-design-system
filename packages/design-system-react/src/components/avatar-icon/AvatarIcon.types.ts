@@ -1,43 +1,9 @@
-import type { ComponentProps } from 'react';
-
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
+import { AvatarBaseProps } from '../avatar-base';
 import { IconName } from '../icon';
 import type { IconProps } from '../icon';
 
-export enum AvatarIconSeverity {
-  Default = 'default',
-  Info = 'info',
-  Success = 'success',
-  Error = 'error',
-  Warning = 'warning',
-}
-
-export enum AvatarIconSize {
-  /**
-   * Extra small size (16px)
-   */
-  Xs = 'xs',
-  /**
-   * Small size (24px)
-   */
-  Sm = 'sm',
-  /**
-   * Medium size (32px)
-   */
-  Md = 'md',
-  /**
-   * Large size (40px)
-   */
-  Lg = 'lg',
-  /**
-   * Extra large size (48px)
-   */
-  Xl = 'xl',
-}
-
-export type AvatarIconProps = Omit<
-  ComponentProps<'div'>,
-  'children' | 'size'
-> & {
+export type AvatarIconProps = Omit<AvatarBaseProps, 'children' | 'size'> & {
   /**
    * Required icon name from the icon set
    */

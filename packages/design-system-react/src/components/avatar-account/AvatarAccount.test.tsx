@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { AvatarAccountVariant, AvatarAccountSize } from '../../types';
 import { AvatarAccount } from './AvatarAccount';
-import { AvatarAccountSize, AvatarAccountVariant } from './AvatarAccount.types';
 
 jest.mock('blo', () => ({
   blo: jest.fn(() => 'mocked-blockies-image-url'),

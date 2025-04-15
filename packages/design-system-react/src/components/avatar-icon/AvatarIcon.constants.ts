@@ -1,6 +1,5 @@
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconSize, IconColor } from '../icon';
-import { AvatarIconSize } from './AvatarIcon.types';
-import { AvatarIconSeverity } from './AvatarIcon.types';
 import { AvatarBaseSize } from '../avatar-base';
 
 export const AVATAR_ICON_SIZE_TO_ICON_SIZE_CLASSNAME_MAP: Record<
