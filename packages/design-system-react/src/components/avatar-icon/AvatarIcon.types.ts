@@ -1,15 +1,7 @@
-import { AvatarIconSize } from '../../types';
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
+import { AvatarBaseProps } from '../avatar-base';
 import { IconName } from '../icon';
 import type { IconProps } from '../icon';
-import { AvatarBaseProps } from '../avatar-base';
-
-export enum AvatarIconSeverity {
-  Default = 'default',
-  Info = 'info',
-  Success = 'success',
-  Error = 'error',
-  Warning = 'warning',
-}
 
 export type AvatarIconProps = Omit<AvatarBaseProps, 'children' | 'size'> & {
   /**

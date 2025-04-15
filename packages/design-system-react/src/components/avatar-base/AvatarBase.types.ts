@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react';
+
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import type { TextProps } from '../text';
-import { AvatarBaseSize, AvatarBaseShape } from 'src/types';
 
 export type AvatarBaseProps = ComponentProps<'div'> & {
   /**

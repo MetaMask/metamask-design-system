@@ -158,7 +158,7 @@ import WalletMoneySVG from './assets/wallet-money.svg';
 import WalletSVG from './assets/wallet.svg';
 import WarningSVG from './assets/warning.svg';
 import WifiSVG from './assets/wifi.svg';
-import { IconName } from './Icon.types';
+import { IconName } from '../../types';
 import type { AssetByIconName } from './Icon.types';
 
 /**

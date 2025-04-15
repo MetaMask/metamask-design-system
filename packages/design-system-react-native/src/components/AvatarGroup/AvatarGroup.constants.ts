@@ -1,4 +1,4 @@
-import { AvatarGroupSize } from '../../shared/enums';
+import { AvatarGroupSize } from '../../types';
 import { TextVariant } from '../Text';
 import { AvatarAccountProps, AvatarAccountVariant } from '../AvatarAccount';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from '../AvatarAccount/AvatarAccount.constants';

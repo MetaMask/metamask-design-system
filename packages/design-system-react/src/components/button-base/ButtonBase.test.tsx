@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { ButtonBaseSize } from '../../types';
 import { IconName } from '../icon';
 import { ButtonBase } from './ButtonBase';
-import { ButtonBaseSize } from './ButtonBase.types';
 
 describe('ButtonBase', () => {
   it('renders children correctly', () => {

@@ -1,20 +1,6 @@
+import { ButtonIconSize } from '../../types';
 import type { ButtonBaseProps } from '../button-base';
 import type { IconName, IconProps } from '../icon';
-
-export enum ButtonIconSize {
-  /**
-   * Represents a small button size (24px).
-   */
-  Sm = 'sm',
-  /**
-   * Represents a medium button size (32px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large button size (40px).
-   */
-  Lg = 'lg',
-}
 
 export type ButtonIconProps = Omit<
   ButtonBaseProps,

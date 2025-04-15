@@ -1,6 +1,5 @@
-import { AvatarIconSize } from '../../types';
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconSize, IconColor } from '../icon';
-import { AvatarIconSeverity } from './AvatarIcon.types';
 
 export const MAP_AVATARICON_SIZE_ICONSIZE: Record<AvatarIconSize, IconSize> = {
   [AvatarIconSize.Xs]: IconSize.Xs, // 16px avatar -> 12px icon

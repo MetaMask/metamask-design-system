@@ -1,9 +1,9 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
 import { BadgeStatus } from './BadgeStatus';
 import type { BadgeStatusProps } from './BadgeStatus.types';
-import { BadgeStatusStatus, BadgeStatusSize } from './BadgeStatus.types';
 import README from './README.mdx';
 
 const meta: Meta<BadgeStatusProps> = {

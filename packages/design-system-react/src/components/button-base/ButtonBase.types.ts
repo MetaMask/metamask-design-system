@@ -1,23 +1,9 @@
 import type { ComponentProps } from 'react';
 
+import { ButtonBaseSize } from '../../types';
 import type { MakePropsOptional } from '../../types/make-props-optional';
 import type { IconName, IconProps } from '../icon';
 import type { TextProps } from '../text';
-
-export enum ButtonBaseSize {
-  /**
-   * Represents a small button size (32px).
-   */
-  Sm = 'sm',
-  /**
-   * Represents a medium button size (40px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large button size (48px).
-   */
-  Lg = 'lg',
-}
 
 export type ButtonBaseProps = ComponentProps<'button'> & {
   /**

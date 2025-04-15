@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ButtonIconSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { ButtonBase } from '../button-base';
 import { Icon } from '../icon';
@@ -8,7 +9,6 @@ import {
   BUTTON_ICON_SIZE_TO_ICON_SIZE_CLASS_MAP,
 } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
-import { ButtonIconSize } from './ButtonIcon.types';
 
 export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
   (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AvatarIconSize } from '../../types';
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { AvatarBase, AvatarBaseShape } from '../avatar-base';
 import { Icon } from '../icon';
 import type { AvatarIconProps } from './AvatarIcon.types';
@@ -9,7 +9,6 @@ import {
   TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,
 } from './AvatarIcon.constants';
-import { AvatarIconSeverity } from './AvatarIcon.types';
 import { twMerge } from '../../utils/tw-merge';
 
 export const AvatarIcon = React.forwardRef<HTMLDivElement, AvatarIconProps>(

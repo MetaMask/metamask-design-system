@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { BadgeCountSize } from '../../types';
 import { TextColor } from '../text';
 import { BadgeCount } from './BadgeCount';
 import { TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER } from './BadgeCount.constants';
-import { BadgeCountSize } from './BadgeCount.types';
 
 describe('BadgeCount', () => {
   it('renders the correct count', () => {

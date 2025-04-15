@@ -9,7 +9,7 @@ import path from 'path';
 
 const ASSETS_FOLDER = 'assets';
 const GENERATED_ASSETS_FILE = 'Icon.assets.ts';
-const TYPES_FILE = 'Icon.types.ts';
+const TYPES_FILE = 'index.ts';
 const ASSET_EXT = '.svg';
 const TYPES_CONTENT_TO_DETECT = '// DO NOT EDIT - Use generate-assets.js';
 
@@ -42,10 +42,7 @@ export async function main(): Promise<void> {
     __dirname,
     `../src/components/Icon/${GENERATED_ASSETS_FILE}`,
   );
-  const typesFilePath = path.join(
-    __dirname,
-    `../src/components/Icon/${TYPES_FILE}`,
-  );
+  const typesFilePath = path.join(__dirname, `../src/types/${TYPES_FILE}`);
 
   const fileList = await fs.promises.readdir(assetsFolderPath);
   const assetFileList = fileList.filter(
@@ -89,7 +86,7 @@ export async function main(): Promise<void> {
   // Separate IconName (runtime) and AssetByIconName (type-only) imports
   await fs.promises.appendFile(
     assetsModulePath,
-    `\nimport { IconName } from './Icon.types';`,
+    `\nimport { IconName } from '../../types';`,
   );
   await fs.promises.appendFile(
     assetsModulePath,
@@ -126,7 +123,7 @@ export async function main(): Promise<void> {
     baseTypesFileContent + TYPES_CONTENT_TO_DETECT
   }\n// /////////////////////////////////////////////////////`;
 
-  typesContentToWrite += '\n\n/**\n * Icon names\n */\nexport enum IconName {';
+  typesContentToWrite += '\n\n/**\n * Icon - name\n */\nexport enum IconName {';
 
   for (const fileName of assetFileList) {
     const iconName = path

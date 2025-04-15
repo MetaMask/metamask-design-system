@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { Image, ImageSourcePropType, View } from 'react-native';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../shared/enums';
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import Icon, { IconName } from '../../components/Icon';
 import AvatarBase from './AvatarBase';
 import { DEFAULT_AVATARBASE_PROPS } from './AvatarBase.constants';

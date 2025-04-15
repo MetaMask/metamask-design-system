@@ -4,7 +4,7 @@ import { Text as RNText } from 'react-native';
 
 import { DEFAULT_TEXT_COLOR, DEFAULT_TEXT_VARIANT } from './Text.constants';
 import type { TextProps } from './Text.types';
-import { FontWeight, FontStyle, FontFamily } from './Text.types';
+import { FontWeight, FontFamily, FontStyle } from '../../types';
 import { generateTextClassNames } from './Text.utilities';
 
 const Text: React.FC<TextProps> = ({

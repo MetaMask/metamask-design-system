@@ -2,8 +2,12 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 
+import {
+  AvatarIconSize,
+  AvatarBaseShape,
+  AvatarIconSeverity,
+} from '../../types';
 import AvatarBase from '../../primitives/AvatarBase';
-import { AvatarIconSize, AvatarBaseShape } from '../../shared/enums';
 import {
   MAP_AVATARICON_SIZE_ICONSIZE,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,
@@ -11,7 +15,6 @@ import {
 import type { AvatarIconProps } from './AvatarIcon.types';
 import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
 import Icon from '../Icon';
-import { AvatarIconSeverity } from './AvatarIcon.types';
 
 const AvatarIcon = ({
   size = AvatarIconSize.Md,

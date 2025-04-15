@@ -1,3 +1,3 @@
+export { AvatarIconSize, AvatarIconSeverity } from '../../types';
 export { AvatarIcon } from './AvatarIcon';
-export { AvatarIconSeverity, AvatarIconProps } from './AvatarIcon.types';
-export { AvatarIconSize } from '../../types';
+export type { AvatarIconProps } from './AvatarIcon.types';

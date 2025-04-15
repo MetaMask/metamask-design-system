@@ -7,7 +7,7 @@ export type AvatarFaviconProps = Omit<
   ComponentProps<'img'>,
   'children' | 'size'
 > &
-  Omit<AvatarBaseProps, 'size'> & {
+  Omit<AvatarBaseProps, 'children' | 'size'> & {
     /**
      * Required name of the dapp
      * Used as alt text for image and first letter is used as fallback if no fallbackText provided

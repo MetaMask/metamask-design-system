@@ -1,5 +1,5 @@
+import { BadgeCountSize } from '../../types';
 import { TextVariant } from '../text';
-import { BadgeCountSize } from './BadgeCount.types';
 
 // Mappings
 export const MAP_BADGECOUNT_SIZE_TEXTVARIANT: Record<

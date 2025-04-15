@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { AvatarAccountSize } from '../../types';
+import { AvatarAccountVariant, AvatarAccountSize } from '../../types';
 import { AvatarAccount } from './AvatarAccount';
-import { AvatarAccountVariant } from './AvatarAccount.types';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarAccount> = {

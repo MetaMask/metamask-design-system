@@ -1,14 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { AvatarIconSize } from '../../types';
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconName } from '../icon';
 import { AvatarIcon } from './AvatarIcon';
 import {
   TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,
 } from './AvatarIcon.constants';
-import { AvatarIconSeverity } from './AvatarIcon.types';
 import { ICON_SIZE_CLASS_MAP } from '../icon/Icon.constants';
 
 describe('AvatarIcon', () => {

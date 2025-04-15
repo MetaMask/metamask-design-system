@@ -1,9 +1,8 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
-import { AvatarGroupSize } from '../../shared/enums';
+import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import { MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS } from './AvatarGroup.constants';
 import type { AvatarGroupProps } from './AvatarGroup.types';
-import { AvatarGroupVariant } from './AvatarGroup.types';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
   MAP_AVATARBASE_SIZE_BORDERWIDTH,

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
-import { AvatarBaseShape } from '../../shared/enums';
+import { AvatarBaseShape } from '../../types';
 import AvatarBase from '../../primitives/AvatarBase';
 import ImageOrSvg from '../../primitives/ImageOrSvg';
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
