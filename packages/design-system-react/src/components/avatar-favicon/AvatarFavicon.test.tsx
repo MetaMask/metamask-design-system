@@ -4,10 +4,6 @@ import React from 'react';
 import { AvatarFaviconSize } from '../../types';
 import { TextColor } from '../text';
 import { AvatarFavicon } from './AvatarFavicon';
-<<<<<<< HEAD
-import { AvatarFaviconSize } from '../../types';
-=======
->>>>>>> 7f861b1c210aaa9cc96bcfd848e9a5243279408c
 
 describe('AvatarFavicon', () => {
   it('renders image when src is provided', () => {
