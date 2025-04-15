@@ -6,7 +6,7 @@ import type { BlockiesProps } from './Blockies.types';
 import README from './README.mdx';
 
 const meta: Meta<BlockiesProps> = {
-  title: 'React Components/Blockies',
+  title: 'React Temp Components/Blockies',
   component: Blockies,
   parameters: {
     docs: {

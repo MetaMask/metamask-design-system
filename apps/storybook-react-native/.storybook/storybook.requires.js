@@ -48,6 +48,7 @@ try {
 const getStories = () => {
   return {
     "./../../packages/design-system-react-native/src/components/AvatarAccount/AvatarAccount.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarAccount/AvatarAccount.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/AvatarBase/AvatarBase.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarBase/AvatarBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/AvatarFavicon/AvatarFavicon.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarFavicon/AvatarFavicon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/AvatarGroup/AvatarGroup.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarGroup/AvatarGroup.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/AvatarIcon/AvatarIcon.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarIcon/AvatarIcon.stories.tsx"),
@@ -62,18 +63,17 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonSecondary/ButtonSecondary.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/ButtonBase/ButtonBase.stories.tsx": require("../../../packages/design-system-react-native/src/components/ButtonBase/ButtonBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/ButtonIcon/ButtonIcon.stories.tsx": require("../../../packages/design-system-react-native/src/components/ButtonIcon/ButtonIcon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/temp-components/Jazzicon/Jazzicon.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/Jazzicon/Jazzicon.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/temp-components/Spinner/Spinner.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/Spinner/Spinner.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
-    "./../../packages/design-system-react-native/src/primitives/AvatarBase/AvatarBase.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/AvatarBase/AvatarBase.stories.tsx"),
-    "./../../packages/design-system-react-native/src/primitives/Blockies/Blockies.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/Blockies/Blockies.stories.tsx"),
-    "./../../packages/design-system-react-native/src/primitives/ButtonAnimated/ButtonAnimated.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ButtonAnimated/ButtonAnimated.stories.tsx"),
-    "./../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx"),
-    "./../../packages/design-system-react-native/src/primitives/ImageOrSvg/ImageOrSvg.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ImageOrSvg/ImageOrSvg.stories.tsx"),
-    "./../../packages/design-system-react-native/src/primitives/Jazzicon/Jazzicon.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/Jazzicon/Jazzicon.stories.tsx"),
-    "./../../packages/design-system-react-native/src/primitives/TextOrChildren/TextOrChildren.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/TextOrChildren/TextOrChildren.stories.tsx"),
-    "./../../packages/design-system-react-native/src/temp-components/Spinner/Spinner.stories.tsx": require("../../../packages/design-system-react-native/src/temp-components/Spinner/Spinner.stories.tsx"),
   };
 };
 

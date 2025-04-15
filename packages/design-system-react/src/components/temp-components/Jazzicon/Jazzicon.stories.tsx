@@ -6,7 +6,7 @@ import type { JazziconProps } from './Jazzicon.types';
 import README from './README.mdx';
 
 const meta: Meta<JazziconProps> = {
-  title: 'React Components/Jazzicon',
+  title: 'React Temp Components/Jazzicon',
   component: Jazzicon,
   parameters: {
     docs: {
