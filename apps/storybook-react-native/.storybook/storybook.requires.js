@@ -72,6 +72,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ButtonBase/ButtonBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/ImageOrSvg/ImageOrSvg.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/ImageOrSvg/ImageOrSvg.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/Jazzicon/Jazzicon.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/Jazzicon/Jazzicon.stories.tsx"),
+    "./../../packages/design-system-react-native/src/primitives/Maskicon/Maskicon.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/Maskicon/Maskicon.stories.tsx"),
     "./../../packages/design-system-react-native/src/primitives/TextOrChildren/TextOrChildren.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/TextOrChildren/TextOrChildren.stories.tsx"),
     "./../../packages/design-system-react-native/src/temp-components/Spinner/Spinner.stories.tsx": require("../../../packages/design-system-react-native/src/temp-components/Spinner/Spinner.stories.tsx"),
   };

@@ -94,6 +94,10 @@ import JazziconComponent from './primitives/Jazzicon';
 export const Jazzicon = JazziconComponent;
 export { JazziconProps } from './primitives/Jazzicon';
 
+import MaskiconComponent from './primitives/Maskicon';
+export const Maskicon = MaskiconComponent;
+export { MaskiconProps } from './primitives/Maskicon';
+
 import TextButtonComponent from './components/TextButton';
 export const TextButton = withThemeProvider(TextButtonComponent);
 export { TextButtonProps } from './components/TextButton';
