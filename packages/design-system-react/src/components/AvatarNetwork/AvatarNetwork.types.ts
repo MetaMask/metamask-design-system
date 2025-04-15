@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import { AvatarNetworkSize } from '../../types';
 import { AvatarBaseProps } from '../AvatarBase';
-import type { TextProps } from '../Text';
 
 export type AvatarNetworkProps = Omit<
   ComponentProps<'img'>,

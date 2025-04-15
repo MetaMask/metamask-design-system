@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 
-import { FontFamily, TextVariant, TextColor } from '../../types';
+import { FontFamily, TextColor, TextVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import {
   CLASSMAP_TEXT_VARIANT_FONTSTYLE,

@@ -4,8 +4,8 @@ import React, { useCallback, useState, useMemo } from 'react';
 import { View, LayoutChangeEvent } from 'react-native';
 
 import {
-  BadgeWrapperPositionAnchorShape,
   BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
 } from '../../types';
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
 

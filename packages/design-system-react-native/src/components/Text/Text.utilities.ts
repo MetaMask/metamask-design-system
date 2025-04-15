@@ -7,6 +7,7 @@ import {
   MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME,
 } from './Text.constants';
 import type { TextProps } from './Text.types';
+
 /**
  * Generates a combined string of Tailwind CSS class names for the Text component
  * based on the provided props. This utility simplifies the process of combining

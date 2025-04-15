@@ -1,8 +1,8 @@
 import type { StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
+import { IconName, IconSize, IconColor } from '../../types';
 import { Icon } from './Icon';
-import { IconName, IconSize, IconColor } from './Icon.types';
 import README from './README.mdx';
 
 const meta = {

@@ -1,9 +1,9 @@
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
 import {
-  BadgeWrapperPositionAnchorShape,
   BadgeWrapperPosition,
   BadgeWrapperCustomPosition,
+  BadgeWrapperPositionAnchorShape,
 } from '../../types';
 
 /**

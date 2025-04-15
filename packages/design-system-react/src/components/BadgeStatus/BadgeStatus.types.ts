@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react';
 
 import { BadgeStatusSize, BadgeStatusStatus } from '../../types';
+
 /**
  * BadgeStatus component props.
  */

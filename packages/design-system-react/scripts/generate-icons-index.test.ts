@@ -11,19 +11,19 @@ const mockedFs = jest.mocked(fs);
 describe('generateIconsIndex', () => {
   // Add interface for better type handling
   type MockFiles = {
-    'Icon.types.ts': string;
-    'index.ts': string;
+    'types-index.ts': string;
+    'icons-index.ts': string;
   };
 
   const mockFiles: MockFiles = {
-    'Icon.types.ts': `
+    'types-index.ts': `
       // Other content
       export enum IconName {
         OldIcon = 'OldIcon',
       }
       // More content
     `,
-    'index.ts': '',
+    'icons-index.ts': '',
   };
 
   beforeEach(() => {
@@ -38,10 +38,9 @@ describe('generateIconsIndex', () => {
 
     // Use mockFiles object for consistent file content
     // @ts-expect-error - Mocking the function with a string parameter
-    mockedFs.readFile.mockImplementation(async (path: string) => {
-      const filePath = path.toString();
-      if (filePath.includes('Icon.types.ts')) {
-        return mockFiles['Icon.types.ts'];
+    mockedFs.readFile.mockImplementation(async (filePath: string) => {
+      if (filePath.includes('/src/types/index.ts')) {
+        return mockFiles['types-index.ts'];
       }
       throw new Error(`Unexpected file read: ${filePath}`);
     });
@@ -50,10 +49,10 @@ describe('generateIconsIndex', () => {
       // @ts-expect-error - Mocking the function with a string parameter
       async (path: string, content: string) => {
         const filePath = path.toString();
-        if (filePath.includes('Icon.types.ts')) {
-          mockFiles['Icon.types.ts'] = content;
-        } else if (filePath.includes('index.ts')) {
-          mockFiles['index.ts'] = content;
+        if (filePath.includes('/src/types/index.ts')) {
+          mockFiles['types-index.ts'] = content;
+        } else if (filePath.includes('/src/components/icon/icons/index.ts')) {
+          mockFiles['icons-index.ts'] = content;
         }
         return undefined;
       },
@@ -84,7 +83,7 @@ export type IconsType = typeof Icons;
 `;
 
     expect(mockedFs.writeFile).toHaveBeenCalledWith(
-      expect.stringContaining('index.ts'),
+      expect.stringContaining('/src/components/icon/icons/index.ts'),
       expectedIndexContent,
     );
   });
@@ -99,7 +98,7 @@ export type IconsType = typeof Icons;
 }`;
 
     expect(mockedFs.writeFile).toHaveBeenCalledWith(
-      expect.stringContaining('Icon.types.ts'),
+      expect.stringContaining('/src/types/index.ts'),
       expect.stringContaining(expectedEnumContent),
     );
   });
@@ -115,14 +114,15 @@ export type IconsType = typeof Icons;
     await generateIconsIndex();
 
     const writeFileCalls = mockedFs.writeFile.mock.calls;
-    const indexFileContent = writeFileCalls.find((call) =>
-      call[0].toString().includes('index.ts'),
-    )?.[1] as string;
+    const iconsIndexFileCall = writeFileCalls.find((call) =>
+      call[0].toString().includes('/src/components/icon/icons/index.ts'),
+    );
+    const iconsIndexFileContent = iconsIndexFileCall?.[1] as string;
 
-    expect(indexFileContent).toContain('import Icon1');
-    expect(indexFileContent).toContain('import Icon2');
-    expect(indexFileContent).not.toContain('README');
-    expect(indexFileContent).not.toContain('.DS_Store');
+    expect(iconsIndexFileContent).toContain('import Icon1');
+    expect(iconsIndexFileContent).toContain('import Icon2');
+    expect(iconsIndexFileContent).not.toContain('README');
+    expect(iconsIndexFileContent).not.toContain('.DS_Store');
   });
 
   it('should throw error when file operations fail', async () => {

@@ -1,7 +1,11 @@
 import React from 'react';
 
-import { AvatarAccountVariant } from '../../types';
-import { AvatarBase, AvatarBaseShape, AvatarBaseSize } from '../AvatarBase';
+import {
+  AvatarAccountVariant,
+  AvatarAccountSize,
+  AvatarBaseShape,
+} from '../../types';
+import { AvatarBase } from '../AvatarBase';
 import { Jazzicon } from '../temp-components/Jazzicon';
 import { Blockies } from '../temp-components/Blockies';
 import { MAP_AVATARACCOUNT_SIZE_SIZENUMBER } from './AvatarAccount.constants';
@@ -16,7 +20,7 @@ export const AvatarAccount = React.forwardRef<
       address,
       variant = AvatarAccountVariant.Jazzicon,
       className,
-      size = AvatarBaseSize.Md,
+      size = AvatarAccountSize.Md,
       blockiesProps,
       jazziconProps,
       ...props
@@ -50,7 +54,7 @@ export const AvatarAccount = React.forwardRef<
       <AvatarBase
         ref={ref}
         shape={AvatarBaseShape.Circle}
-        size={size as AvatarBaseSize}
+        size={size}
         className={className}
         {...props}
       >

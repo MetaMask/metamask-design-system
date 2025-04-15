@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import { AvatarFaviconSize } from '../../types';
 import { AvatarBaseProps } from '../AvatarBase';
-import type { TextProps } from '../Text';
 
 export type AvatarFaviconProps = Omit<
   ComponentProps<'img'>,

@@ -1,5 +1,5 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 
 import { IconName } from '../Icon';
 import { BadgeIcon } from './BadgeIcon';

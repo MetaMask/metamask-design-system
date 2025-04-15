@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-// Third party dependencies.
 import type React from 'react';
 import type { ViewProps } from 'react-native';
 import type { SvgProps } from 'react-native-svg';

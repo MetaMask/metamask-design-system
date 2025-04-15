@@ -2,8 +2,8 @@ export {
   TextVariant,
   TextColor,
   FontWeight,
-  FontStyle,
   FontFamily,
+  FontStyle,
 } from '../../types';
 export { default } from './Text';
 export type { TextProps } from './Text.types';
