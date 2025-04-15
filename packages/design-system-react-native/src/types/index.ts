@@ -1,5 +1,5 @@
 /**
- * The size of all Avatars
+ * AvatarBase - size
  */
 export enum AvatarBaseSize {
   /**
@@ -32,7 +32,7 @@ export { AvatarBaseSize as AvatarTokenSize };
 export { AvatarBaseSize as AvatarSize };
 
 /**
- * The shape of all Avatars
+ * Avatar - shape
  */
 export enum AvatarShape {
   /**
@@ -47,7 +47,7 @@ export enum AvatarShape {
 export { AvatarShape as AvatarBaseShape };
 
 /**
- * All AvatarAccountVariants
+ * AvatarAccount - variant
  */
 export enum AvatarAccountVariant {
   Jazzicon = 'jazzicon',
@@ -55,7 +55,7 @@ export enum AvatarAccountVariant {
 }
 
 /**
- * AvatarGroup variants.
+ * AvatarGroup - variant
  */
 export enum AvatarGroupVariant {
   Account = 'Account',
@@ -64,6 +64,9 @@ export enum AvatarGroupVariant {
   Token = 'Token',
 }
 
+/**
+ * AvatarIcon - severity
+ */
 export enum AvatarIconSeverity {
   Default = 'default',
   Info = 'info',
@@ -73,7 +76,7 @@ export enum AvatarIconSeverity {
 }
 
 /**
- * The size of all BadgeCounts
+ * BadgeCount - size
  */
 export enum BadgeCountSize {
   /**
@@ -87,7 +90,7 @@ export enum BadgeCountSize {
 }
 
 /**
- * The status of BadgeStatus
+ * BadgeStatus - status
  */
 export enum BadgeStatusStatus {
   Active = 'active',
@@ -97,7 +100,7 @@ export enum BadgeStatusStatus {
   Attention = 'attention',
 }
 /**
- * The size of BadgeStatus
+ * BadgeStatus - size
  */
 export enum BadgeStatusSize {
   /**
@@ -111,7 +114,7 @@ export enum BadgeStatusSize {
 }
 
 /**
- * Shapes of the Anchor element for the Badge
+ * BadgeWrapper - positionAnchorShape
  */
 export enum BadgeWrapperPositionAnchorShape {
   Rectangular = 'Rectangular',
@@ -119,7 +122,7 @@ export enum BadgeWrapperPositionAnchorShape {
 }
 
 /**
- * BadgeWrapper Position.
+ * BadgeWrapper - position.
  */
 export enum BadgeWrapperPosition {
   TopRight = 'TopRight',
@@ -129,7 +132,7 @@ export enum BadgeWrapperPosition {
 }
 
 /**
- * Badge Position Obj.
+ * BadgeWrapper - customPosition
  */
 export interface BadgeWrapperCustomPosition {
   top?: number | string | undefined;
@@ -139,7 +142,7 @@ export interface BadgeWrapperCustomPosition {
 }
 
 /**
- * The size of all Buttons
+ * ButtonBase - size
  */
 export enum ButtonBaseSize {
   /**
@@ -161,7 +164,7 @@ export { ButtonBaseSize as ButtonSecondarySize };
 export { ButtonBaseSize as ButtonTertiarySize };
 
 /**
- * Button variants.
+ * Button - variant
  */
 export enum ButtonVariant {
   Primary = 'Primary',
@@ -169,6 +172,9 @@ export enum ButtonVariant {
   Tertiary = 'Tertiary',
 }
 
+/**
+ * ButtonIcon - size
+ */
 export enum ButtonIconSize {
   /**
    * Represents a small button size (24px).
@@ -185,7 +191,7 @@ export enum ButtonIconSize {
 }
 
 /**
- * Text component variants.
+ * Text - variant
  */
 export enum TextVariant {
   // Display Sizes
@@ -204,7 +210,7 @@ export enum TextVariant {
 }
 
 /**
- * Text colors
+ * Text - color
  */
 export enum TextColor {
   /** For default neutral text. */
@@ -252,7 +258,7 @@ export enum TextColor {
 }
 
 /**
- * Font Weights
+ * Text - fontWeight
  */
 export enum FontWeight {
   /**
@@ -270,7 +276,7 @@ export enum FontWeight {
 }
 
 /**
- * Font Styles
+ * Text - fontStyle
  */
 export enum FontStyle {
   Italic = 'italic',
@@ -278,7 +284,7 @@ export enum FontStyle {
 }
 
 /**
- * Font Families
+ * Text - fontFamily
  */
 export enum FontFamily {
   Default = 'default',
@@ -287,7 +293,7 @@ export enum FontFamily {
 }
 
 /**
- * Icon color
+ * Icon - color
  */
 export enum IconColor {
   /** For default neutral icons */
@@ -333,7 +339,7 @@ export enum IconColor {
 }
 
 /**
- * Icon sizes
+ * Icon - size
  */
 export enum IconSize {
   /** Extra small - 12px */
@@ -354,7 +360,7 @@ export enum IconSize {
 // /////////////////////////////////////////////////////
 
 /**
- * Icon names
+ * Icon - name
  */
 export enum IconName {
   AddSquare = 'AddSquare',

@@ -1,21 +1,7 @@
+import { ButtonVariant } from '../../types';
 import type { ButtonPrimaryProps } from './variants/ButtonPrimary';
 import type { ButtonSecondaryProps } from './variants/ButtonSecondary';
 import type { ButtonTertiaryProps } from './variants/ButtonTertiary';
-
-export enum ButtonVariant {
-  /**
-   * Primary button variant - used for primary actions
-   */
-  Primary = 'primary',
-  /**
-   * Secondary button variant - used for secondary actions
-   */
-  Secondary = 'secondary',
-  /**
-   * Tertiary button variant - used for tertiary-like actions
-   */
-  Tertiary = 'tertiary',
-}
 
 export type ButtonProps = {
   /**

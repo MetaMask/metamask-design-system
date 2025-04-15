@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { AvatarTokenSize } from '../../types';
 import { TextColor } from '../Text';
-import { AvatarTokenSize } from '.';
 import { AvatarToken } from './AvatarToken';
 
 describe('AvatarToken', () => {

@@ -1,11 +1,11 @@
 import React from 'react';
 
+import { AvatarAccountVariant } from '../../types';
 import { AvatarBase, AvatarBaseShape, AvatarBaseSize } from '../AvatarBase';
 import { Jazzicon } from '../temp-components/Jazzicon';
 import { Blockies } from '../temp-components/Blockies';
 import { MAP_AVATARACCOUNT_SIZE_SIZENUMBER } from './AvatarAccount.constants';
 import type { AvatarAccountProps } from './AvatarAccount.types';
-import { AvatarAccountVariant } from './AvatarAccount.types';
 
 export const AvatarAccount = React.forwardRef<
   HTMLDivElement,

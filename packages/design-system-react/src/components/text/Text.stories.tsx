@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import README from './README.mdx';
-import { Text } from './Text';
 import {
-  TextVariant,
-  FontWeight,
   FontFamily,
   FontStyle,
-  TextTransform,
-  TextAlign,
+  FontWeight,
   OverflowWrap,
+  TextAlign,
+  TextVariant,
+  TextTransform,
   TextColor,
-} from './Text.types';
+} from '../../types';
+import README from './README.mdx';
+import { Text } from './Text';
 
 const meta: Meta<typeof Text> = {
   title: 'React Components/Text',

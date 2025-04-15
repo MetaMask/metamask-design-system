@@ -1,5 +1,5 @@
+import { ButtonIconSize } from '../../types';
 import { IconSize } from '../Icon';
-import { ButtonIconSize } from './ButtonIcon.types';
 
 export const BUTTON_ICON_SIZE_CLASS_MAP = {
   [ButtonIconSize.Sm]: 'h-6 w-6',

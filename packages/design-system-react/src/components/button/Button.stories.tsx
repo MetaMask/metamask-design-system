@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { ButtonVariant } from '../../types';
 import { IconName } from '../Icon';
 import { ButtonSize } from '.';
 import { Button } from './Button';
-import { ButtonVariant } from './Button.types';
 import README from './README.mdx';
 
 const meta: Meta<typeof Button> = {

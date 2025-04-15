@@ -1,12 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconName } from '../Icon';
 import { ICON_SIZE_CLASS_MAP } from '../Icon/Icon.constants';
-import { AvatarIconSize } from '.';
 import { AvatarIcon } from './AvatarIcon';
 import { AVATAR_ICON_SEVERITY_CLASSNAME_MAP } from './AvatarIcon.constants';
-import { AvatarIconSeverity } from './AvatarIcon.types';
 
 describe('AvatarIcon', () => {
   it('renders with default props', () => {

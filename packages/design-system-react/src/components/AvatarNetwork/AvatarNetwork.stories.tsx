@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { AvatarNetworkSize } from '.';
+import { AvatarNetworkSize } from '../../types';
 import { AvatarNetwork } from './AvatarNetwork';
 import README from './README.mdx';
 
