@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, act } from '@testing-library/react-native';
 
-import Text from '../Text';
-import BadgeWrapper from './BadgeWrapper';
 import {
   BadgeWrapperPosition,
   BadgeWrapperPositionAnchorShape,
-} from './BadgeWrapper.types';
+} from '../../types';
+import Text from '../Text';
+import BadgeWrapper from './BadgeWrapper';
 
 // Helper function to round numeric properties to two decimals.
 const roundPositions = (pos: {

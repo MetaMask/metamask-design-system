@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
+import { IconName, IconSize, IconColor } from '../../types';
 import Icon from './Icon';
 import {
   DEFAULT_ICON_ICONSIZE,
@@ -10,7 +11,6 @@ import {
   SAMPLE_ICON_PROPS,
 } from './Icon.constants';
 import type { IconProps } from './Icon.types';
-import { IconName, IconColor, IconSize } from './Icon.types';
 
 const meta: Meta<IconProps> = {
   title: 'Components/Icon',

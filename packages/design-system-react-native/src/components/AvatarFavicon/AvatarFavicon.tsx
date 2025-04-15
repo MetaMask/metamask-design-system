@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
-import { AvatarFaviconSize, AvatarBaseShape } from '../../shared/enums';
+import { AvatarFaviconSize, AvatarBaseShape } from '../../types';
 import AvatarBase from '../../primitives/AvatarBase';
 import ImageOrSvg from '../../primitives/ImageOrSvg';
 import type { AvatarFaviconProps } from './AvatarFavicon.types';

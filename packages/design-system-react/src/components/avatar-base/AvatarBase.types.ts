@@ -1,39 +1,7 @@
 import type { ComponentProps } from 'react';
+
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import type { TextProps } from '../text';
-
-export enum AvatarBaseSize {
-  /**
-   * Extra small size (16px)
-   */
-  Xs = 'xs',
-  /**
-   * Small size (24px)
-   */
-  Sm = 'sm',
-  /**
-   * Medium size (32px)
-   */
-  Md = 'md',
-  /**
-   * Large size (40px)
-   */
-  Lg = 'lg',
-  /**
-   * Extra large size (48px)
-   */
-  Xl = 'xl',
-}
-
-export enum AvatarBaseShape {
-  /**
-   * Circular shape with fully rounded corners
-   */
-  Circle = 'circle',
-  /**
-   * Square shape with slight rounded corners
-   */
-  Square = 'square',
-}
 
 export type AvatarBaseProps = ComponentProps<'div'> & {
   /**

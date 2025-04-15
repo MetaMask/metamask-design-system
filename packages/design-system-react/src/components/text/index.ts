@@ -1,12 +1,12 @@
-export { Text } from './Text';
 export {
   TextVariant,
-  TextColor,
-  TextAlign,
   FontWeight,
   FontFamily,
   FontStyle,
   TextTransform,
+  TextAlign,
   OverflowWrap,
-} from './Text.types';
+  TextColor,
+} from '../../types';
+export { Text } from './Text';
 export type { TextProps } from './Text.types';

@@ -1,9 +1,8 @@
-// BadgeNetwork.test.tsx
-
-import React from 'react';
 import { render } from '@testing-library/react-native';
-import BadgeNetwork from './BadgeNetwork';
+import React from 'react';
+
 import { AvatarNetworkSize } from '../AvatarNetwork';
+import BadgeNetwork from './BadgeNetwork';
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 describe('BadgeNetwork', () => {

@@ -6,7 +6,7 @@ import {
   TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
   MAP_AVATARBASE_SIZE_BORDERWIDTH,
 } from './AvatarBase.constants';
-import { AvatarBaseShape } from '../../shared/enums';
+import { AvatarBaseShape } from '../../types/';
 
 /**
  * Generates a Tailwind class name string for the base container of an avatar.

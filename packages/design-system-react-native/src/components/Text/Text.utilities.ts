@@ -1,12 +1,12 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
+import { FontWeight, FontFamily, FontStyle } from '../../types';
 import {
   DEFAULT_TEXT_COLOR,
   DEFAULT_TEXT_VARIANT,
   MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME,
 } from './Text.constants';
 import type { TextProps } from './Text.types';
-import { FontWeight, FontStyle, FontFamily } from './Text.types';
 
 /**
  * Generates a combined string of Tailwind CSS class names for the Text component

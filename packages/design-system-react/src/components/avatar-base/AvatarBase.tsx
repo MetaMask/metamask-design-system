@@ -1,6 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Text, FontWeight, TextVariant, TextColor } from '../text';
 import {
@@ -8,7 +9,6 @@ import {
   AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP,
 } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
-import { AvatarBaseShape, AvatarBaseSize } from './AvatarBase.types';
 
 export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
   (

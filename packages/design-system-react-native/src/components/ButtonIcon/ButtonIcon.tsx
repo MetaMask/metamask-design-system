@@ -3,6 +3,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo, useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
+import { ButtonIconSize } from '../../types';
 import ButtonAnimated from '../../primitives/ButtonAnimated';
 import type { IconProps } from '../Icon';
 import Icon from '../Icon';
@@ -10,7 +11,7 @@ import {
   DEFAULT_BUTTONICON_PROPS,
   MAPPING_BUTTONICONSIZE_ICONSIZE,
 } from './ButtonIcon.constants';
-import type { ButtonIconProps, ButtonIconSize } from './ButtonIcon.types';
+import type { ButtonIconProps } from './ButtonIcon.types';
 import {
   generateButtonIconContainerClassNames,
   generateButtonIconIconColorClassNames,

@@ -2,13 +2,13 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
+import { IconSize, IconColor } from '../../types';
 import Icon from './Icon';
 import {
   DEFAULT_ICON_ICONCOLOR,
   DEFAULT_ICON_ICONSIZE,
   SAMPLE_ICON_PROPS,
 } from './Icon.constants';
-import { IconSize, IconColor } from './Icon.types';
 import { generateIconClassNames } from './Icon.utilities';
 
 describe('Icon', () => {

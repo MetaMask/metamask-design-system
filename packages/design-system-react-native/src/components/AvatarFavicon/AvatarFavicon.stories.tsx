@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ImageSourcePropType, View } from 'react-native';
 
-import { AvatarFaviconSize } from '../../shared/enums';
+import { AvatarFaviconSize } from '../../types';
 import AvatarFavicon from './AvatarFavicon';
 import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.constants';
 import type { AvatarFaviconProps } from './AvatarFavicon.types';

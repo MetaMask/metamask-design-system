@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ImageSourcePropType, View } from 'react-native';
 
-import { AvatarNetworkSize } from '../../shared/enums';
+import { AvatarNetworkSize } from '../../types';
 import AvatarNetwork from './AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.constants';
 import type { AvatarNetworkProps } from './AvatarNetwork.types';

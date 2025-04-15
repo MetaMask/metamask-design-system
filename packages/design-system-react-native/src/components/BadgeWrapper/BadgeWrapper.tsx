@@ -3,11 +3,11 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback, useState, useMemo } from 'react';
 import { View, LayoutChangeEvent } from 'react-native';
 
-import type { BadgeWrapperProps } from './BadgeWrapper.types';
 import {
-  BadgeWrapperPositionAnchorShape,
   BadgeWrapperPosition,
-} from './BadgeWrapper.types';
+  BadgeWrapperPositionAnchorShape,
+} from '../../types';
+import type { BadgeWrapperProps } from './BadgeWrapper.types';
 
 const BadgeWrapper = ({
   children,

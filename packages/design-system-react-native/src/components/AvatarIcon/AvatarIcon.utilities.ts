@@ -1,7 +1,7 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
+import { AvatarIconSeverity } from '../../types';
 import type { AvatarIconProps } from './AvatarIcon.types';
-import { AvatarIconSeverity } from './AvatarIcon.types';
 import { TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR } from './AvatarIcon.constants';
 
 /**

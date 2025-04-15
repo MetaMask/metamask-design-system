@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { IconName, IconSize, IconColor } from '../../types';
 import { Icon } from './Icon';
 import { ICON_SIZE_CLASS_MAP } from './Icon.constants';
-import { IconName, IconSize, IconColor } from './Icon.types';
 import type { IconProps } from './Icon.types';
 
 describe('Icon', () => {

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ImageSourcePropType, View } from 'react-native';
 
-import { AvatarTokenSize } from '../../shared/enums';
+import { AvatarTokenSize } from '../../types';
 import AvatarToken from './AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.constants';
 import type { AvatarTokenProps } from './AvatarToken.types';

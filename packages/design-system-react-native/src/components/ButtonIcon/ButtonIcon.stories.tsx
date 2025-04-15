@@ -2,10 +2,10 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View, ScrollView } from 'react-native';
 
+import { ButtonIconSize } from '../../types';
 import { IconName } from '../Icon';
 import ButtonIcon from './ButtonIcon';
 import { DEFAULT_BUTTONICON_PROPS } from './ButtonIcon.constants';
-import { ButtonIconSize } from './ButtonIcon.types';
 import type { ButtonIconProps } from './ButtonIcon.types';
 
 const meta: Meta<ButtonIconProps> = {

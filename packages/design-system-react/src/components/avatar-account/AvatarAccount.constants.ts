@@ -1,4 +1,4 @@
-import { AvatarAccountSize } from './AvatarAccount.types';
+import { AvatarAccountSize } from '../../types';
 
 export const MAP_AVATARACCOUNT_SIZE_SIZENUMBER: Record<
   AvatarAccountSize,

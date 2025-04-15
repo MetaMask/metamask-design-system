@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { AvatarBase, AvatarBaseShape, AvatarBaseSize } from '../avatar-base';
+import { AvatarFaviconSize, AvatarBaseShape } from '../../types';
+import { AvatarBase } from '../avatar-base';
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
 
 export const AvatarFavicon = React.forwardRef<
@@ -14,7 +15,7 @@ export const AvatarFavicon = React.forwardRef<
       fallbackText,
       fallbackTextProps,
       className,
-      size = AvatarBaseSize.Md,
+      size = AvatarFaviconSize.Md,
       imageProps,
       ...props
     },

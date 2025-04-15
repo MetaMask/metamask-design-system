@@ -1,7 +1,7 @@
 import type { ViewProps } from 'react-native';
 
 import type { IconProps, IconColor } from '../../components/Icon';
-import type { TextProps } from '../../components/Text/Text.types';
+import type { TextProps } from '../../components/Text';
 
 /**
  * Spinner component props.
