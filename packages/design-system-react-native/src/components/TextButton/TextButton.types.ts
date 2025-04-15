@@ -1,7 +1,7 @@
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 import type { TextProps } from 'src/components/Text/Text.types';
 
-import type { SpinnerProps } from '../../temp-components/Spinner';
+import type { SpinnerProps } from '../temp-components/Spinner';
 import type { IconProps, IconName } from '../Icon';
 
 /**

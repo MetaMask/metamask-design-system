@@ -3,12 +3,12 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
+import { BadgeStatusSize } from '../../types';
 import {
   TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE,
   TWCLASSMAP_BADGESTATUS_SIZE,
 } from './BadgeStatus.constants';
 import type { BadgeStatusProps } from './BadgeStatus.types';
-import { BadgeStatusSize } from './BadgeStatus.types';
 
 const BadgeStatus = ({
   status,

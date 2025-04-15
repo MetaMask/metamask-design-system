@@ -2,8 +2,8 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo, useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import ButtonBase from '../../../../primitives/ButtonBase';
-import type { SpinnerProps } from '../../../../temp-components/Spinner';
+import type { SpinnerProps } from '../../../temp-components/Spinner';
+import ButtonBase from '../../../ButtonBase';
 import type { IconProps, IconColor } from '../../../Icon';
 import type { TextProps } from '../../../Text/Text.types';
 import { DEFAULT_BUTTONSECONDARY_PROPS } from './ButtonSecondary.constants';

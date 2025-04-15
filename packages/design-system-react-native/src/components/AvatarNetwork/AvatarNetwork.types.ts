@@ -1,5 +1,5 @@
-import { AvatarBaseProps } from '../../primitives/AvatarBase';
-import { ImageOrSvgProps } from '../../primitives/ImageOrSvg';
+import { ImageOrSvgProps } from '../temp-components/ImageOrSvg';
+import { AvatarBaseProps } from '../AvatarBase';
 
 /**
  * AvatarNetwork component props.

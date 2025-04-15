@@ -1,9 +1,5 @@
-import { AvatarBaseProps } from '../../primitives/AvatarBase';
-
-export enum AvatarAccountVariant {
-  Jazzicon = 'jazzicon',
-  Blockies = 'blockies',
-}
+import { AvatarAccountVariant } from '../../types';
+import { AvatarBaseProps } from '../AvatarBase';
 
 /**
  * AvatarAccount component props.

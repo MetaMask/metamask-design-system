@@ -3,21 +3,22 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo, useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import ButtonAnimated from '../../primitives/ButtonAnimated';
+import { ButtonIconSize } from '../../types';
+import ButtonAnimated from '../temp-components/ButtonAnimated';
 import type { IconProps } from '../Icon';
 import Icon from '../Icon';
 import {
   DEFAULT_BUTTONICON_PROPS,
   MAPPING_BUTTONICONSIZE_ICONSIZE,
 } from './ButtonIcon.constants';
-import type { ButtonIconProps, ButtonIconSize } from './ButtonIcon.types';
+import type { ButtonIconProps } from './ButtonIcon.types';
 import {
   generateButtonIconContainerClassNames,
   generateButtonIconIconColorClassNames,
 } from './ButtonIcon.utilities';
 
 const ButtonIcon = ({
-  size = DEFAULT_BUTTONICON_PROPS.size,
+  size = ButtonIconSize.Md,
   iconName,
   iconProps,
   isDisabled = DEFAULT_BUTTONICON_PROPS.isDisabled,
@@ -50,7 +51,7 @@ const ButtonIcon = ({
 
   const finalIconProps: Partial<IconProps> = {
     color: twIconColorClassNames,
-    size: MAPPING_BUTTONICONSIZE_ICONSIZE[size as ButtonIconSize],
+    size: MAPPING_BUTTONICONSIZE_ICONSIZE[size],
     ...iconProps,
   };
   const onPressInHandler = (event: GestureResponderEvent) => {

@@ -1,7 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-
-import type { TextProps } from './Text.types';
-import { FontWeight, TextColor, TextVariant } from './Text.types';
+import { TextVariant, TextColor, FontWeight } from '../../types';
 
 // Defaults
 export const DEFAULT_TEXT_VARIANT = TextVariant.BodyMd;

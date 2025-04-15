@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 // Internal dependencies.
+import { IconColor, IconName, IconSize } from '../../types';
 import type { IconProps } from './Icon.types';
-import { IconName, IconSize, IconColor } from './Icon.types';
 
 // Defaults
 export const DEFAULT_ICON_ICONSIZE = IconSize.Md;

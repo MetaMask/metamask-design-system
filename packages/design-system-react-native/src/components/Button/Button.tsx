@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { ButtonVariant } from '../../types';
 import type { ButtonProps } from './Button.types';
-import { ButtonVariant } from './Button.types';
 import ButtonPrimary from './variants/ButtonPrimary';
 import ButtonSecondary from './variants/ButtonSecondary';
 import ButtonTertiary from './variants/ButtonTertiary';

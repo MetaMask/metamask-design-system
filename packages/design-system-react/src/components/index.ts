@@ -1,4 +1,4 @@
-export { Text } from './text';
+export { Text } from './Text';
 export {
   TextVariant,
   TextColor,
@@ -8,70 +8,70 @@ export {
   FontStyle,
   TextTransform,
   OverflowWrap,
-} from './text';
-export type { TextProps } from './text';
+} from './Text';
+export type { TextProps } from './Text';
 
-export { Icon } from './icon';
-export { IconName, IconSize, IconColor } from './icon';
-export type { IconProps } from './icon';
+export { Icon } from './Icon';
+export { IconName, IconSize, IconColor } from './Icon';
+export type { IconProps } from './Icon';
 
-export { ButtonBase } from './button-base';
-export type { ButtonBaseProps } from './button-base';
-export { ButtonBaseSize } from './button-base';
+export { ButtonBase } from './ButtonBase';
+export type { ButtonBaseProps } from './ButtonBase';
+export { ButtonBaseSize } from './ButtonBase';
 
-export { ButtonPrimary, ButtonPrimarySize } from './button-primary';
-export type { ButtonPrimaryProps } from './button-primary';
+export { ButtonPrimary, ButtonPrimarySize } from './ButtonPrimary';
+export type { ButtonPrimaryProps } from './ButtonPrimary';
 
-export { ButtonSecondary, ButtonSecondarySize } from './button-secondary';
-export type { ButtonSecondaryProps } from './button-secondary';
+export { ButtonSecondary, ButtonSecondarySize } from './ButtonSecondary';
+export type { ButtonSecondaryProps } from './ButtonSecondary';
 
-export { ButtonTertiary, ButtonTertiarySize } from './button-tertiary';
-export type { ButtonTertiaryProps } from './button-tertiary';
+export { ButtonTertiary, ButtonTertiarySize } from './ButtonTertiary';
+export type { ButtonTertiaryProps } from './ButtonTertiary';
 
-export { Button, ButtonSize, ButtonVariant } from './button';
-export type { ButtonProps } from './button';
+export { Button, ButtonSize, ButtonVariant } from './Button';
+export type { ButtonProps } from './Button';
 
-export { TextButton } from './text-button';
-export type { TextButtonProps } from './text-button';
+export { TextButton } from './TextButton';
+export type { TextButtonProps } from './TextButton';
 
-export { ButtonIcon, ButtonIconSize } from './button-icon';
-export type { ButtonIconProps } from './button-icon';
+export { ButtonIcon, ButtonIconSize } from './ButtonIcon';
+export type { ButtonIconProps } from './ButtonIcon';
 
-export { AvatarBase, AvatarBaseSize, AvatarBaseShape } from './avatar-base';
-export type { AvatarBaseProps } from './avatar-base';
+export { AvatarBase, AvatarBaseSize, AvatarBaseShape } from './AvatarBase';
+export type { AvatarBaseProps } from './AvatarBase';
 
-export { AvatarNetwork, AvatarNetworkSize } from './avatar-network';
-export type { AvatarNetworkProps } from './avatar-network';
+export { AvatarNetwork, AvatarNetworkSize } from './AvatarNetwork';
+export type { AvatarNetworkProps } from './AvatarNetwork';
 
-export { AvatarToken, AvatarTokenSize } from './avatar-token';
-export type { AvatarTokenProps } from './avatar-token';
+export { AvatarToken, AvatarTokenSize } from './AvatarToken';
+export type { AvatarTokenProps } from './AvatarToken';
 
-export { AvatarFavicon, AvatarFaviconSize } from './avatar-favicon';
-export type { AvatarFaviconProps } from './avatar-favicon';
+export { AvatarFavicon, AvatarFaviconSize } from './AvatarFavicon';
+export type { AvatarFaviconProps } from './AvatarFavicon';
 
-export { AvatarIcon, AvatarIconSize, AvatarIconSeverity } from './avatar-icon';
-export type { AvatarIconProps } from './avatar-icon';
+export { AvatarIcon, AvatarIconSize, AvatarIconSeverity } from './AvatarIcon';
+export type { AvatarIconProps } from './AvatarIcon';
 
-export { Jazzicon } from './jazzicon';
-export type { JazziconProps } from './jazzicon';
+export { Jazzicon } from './temp-components/Jazzicon';
+export type { JazziconProps } from './temp-components/Jazzicon';
 
 export {
   AvatarAccount,
   AvatarAccountSize,
   AvatarAccountVariant,
-} from './avatar-account';
-export type { AvatarAccountProps } from './avatar-account';
+} from './AvatarAccount';
+export type { AvatarAccountProps } from './AvatarAccount';
 
-export { Blockies } from './blockies';
-export type { BlockiesProps } from './blockies';
+export { Blockies } from './temp-components/Blockies';
+export type { BlockiesProps } from './temp-components/Blockies';
 
-export { BadgeCount } from './badge-count';
-export type { BadgeCountProps } from './badge-count';
-export { BadgeCountSize } from './badge-count';
+export { BadgeCount } from './BadgeCount';
+export type { BadgeCountProps } from './BadgeCount';
+export { BadgeCountSize } from './BadgeCount';
 
-export { BadgeIcon } from './badge-icon';
-export type { BadgeIconProps } from './badge-icon';
+export { BadgeIcon } from './BadgeIcon';
+export type { BadgeIconProps } from './BadgeIcon';
 
-export { BadgeStatus } from './badge-status';
-export type { BadgeStatusProps } from './badge-status';
-export { BadgeStatusStatus, BadgeStatusSize } from './badge-status';
+export { BadgeStatus } from './BadgeStatus';
+export type { BadgeStatusProps } from './BadgeStatus';
+export { BadgeStatusStatus, BadgeStatusSize } from './BadgeStatus';

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
 import { IconName } from '../../../Icon';
-import { ButtonBaseSize } from '../../../../primitives/ButtonBase';
+import { ButtonBaseSize } from '../../../ButtonBase';
 import ButtonTertiary from './ButtonTertiary';
 import { DEFAULT_BUTTONTERTIARY_PROPS } from './ButtonTertiary.constants';
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';

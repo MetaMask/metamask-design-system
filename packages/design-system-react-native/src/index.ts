@@ -8,9 +8,9 @@ export {
   AvatarAccountSize,
 } from './components/AvatarAccount';
 
-import AvatarBaseComponent from './primitives/AvatarBase';
+import AvatarBaseComponent from './components/AvatarBase';
 export const AvatarBase = withThemeProvider(AvatarBaseComponent);
-export { AvatarBaseProps, AvatarBaseSize } from './primitives/AvatarBase';
+export { AvatarBaseProps, AvatarBaseSize } from './components/AvatarBase';
 
 import AvatarFaviconComponent from './components/AvatarFavicon';
 export const AvatarFavicon = withThemeProvider(AvatarFaviconComponent);
@@ -66,17 +66,17 @@ export {
   BadgeStatusSize,
 } from './components/BadgeStatus';
 
-import BlockiesComponent from './primitives/Blockies';
+import BlockiesComponent from './components/temp-components/Blockies';
 export const Blockies = BlockiesComponent;
-export { BlockiesProps } from './primitives/Blockies';
+export { BlockiesProps } from './components/temp-components/Blockies';
 
-import ButtonAnimatedComponent from './primitives/ButtonAnimated';
+import ButtonAnimatedComponent from './components/temp-components/ButtonAnimated';
 export const ButtonAnimated = withThemeProvider(ButtonAnimatedComponent);
-export { ButtonAnimatedProps } from './primitives/ButtonAnimated';
+export { ButtonAnimatedProps } from './components/temp-components/ButtonAnimated';
 
-import ButtonBaseComponent from './primitives/ButtonBase';
+import ButtonBaseComponent from './components/ButtonBase';
 export const ButtonBase = withThemeProvider(ButtonBaseComponent);
-export { ButtonBaseProps, ButtonBaseSize } from './primitives/ButtonBase';
+export { ButtonBaseProps, ButtonBaseSize } from './components/ButtonBase';
 
 import ButtonComponent from './components/Button';
 export const Button = withThemeProvider(ButtonComponent);
@@ -90,9 +90,9 @@ import IconComponent from './components/Icon';
 export const Icon = withThemeProvider(IconComponent);
 export { IconColor, IconName, IconProps, IconSize } from './components/Icon';
 
-import JazziconComponent from './primitives/Jazzicon';
+import JazziconComponent from './components/temp-components/Jazzicon';
 export const Jazzicon = JazziconComponent;
-export { JazziconProps } from './primitives/Jazzicon';
+export { JazziconProps } from './components/temp-components/Jazzicon';
 
 import TextButtonComponent from './components/TextButton';
 export const TextButton = withThemeProvider(TextButtonComponent);
@@ -109,6 +109,6 @@ export {
   TextVariant,
 } from './components/Text';
 
-import TextOrChildrenComponent from './primitives/TextOrChildren';
+import TextOrChildrenComponent from './components/temp-components/TextOrChildren';
 export const TextOrChildren = withThemeProvider(TextOrChildrenComponent);
-export { TextOrChildrenProps } from './primitives/TextOrChildren/';
+export { TextOrChildrenProps } from './components/temp-components/TextOrChildren';

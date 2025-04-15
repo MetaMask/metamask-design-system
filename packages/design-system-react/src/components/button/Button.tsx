@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { ButtonTertiary } from '../button-tertiary';
-import { ButtonPrimary } from '../button-primary';
-import { ButtonSecondary } from '../button-secondary';
-import type { ButtonTertiaryProps } from '../button-tertiary';
-import type { ButtonPrimaryProps } from '../button-primary';
-import type { ButtonSecondaryProps } from '../button-secondary';
+import { ButtonTertiary } from '../ButtonTertiary';
+import { ButtonPrimary } from '../ButtonPrimary';
+import { ButtonSecondary } from '../ButtonSecondary';
+import type { ButtonTertiaryProps } from '../ButtonTertiary';
+import type { ButtonPrimaryProps } from '../ButtonPrimary';
+import type { ButtonSecondaryProps } from '../ButtonSecondary';
 import type { ButtonProps } from './Button.types';
 import { ButtonVariant } from './Button.types';
 

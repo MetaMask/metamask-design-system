@@ -4,4 +4,4 @@ export {
   BadgeWrapperPosition,
   BadgeWrapperCustomPosition,
   BadgeWrapperPositionAnchorShape,
-} from './BadgeWrapper.types';
+} from '../../types';

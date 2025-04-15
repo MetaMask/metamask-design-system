@@ -1,10 +1,8 @@
-// AvatarAccount.test.tsx
 import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import { AvatarAccountSize } from '../../shared/enums';
+import { AvatarAccountSize, AvatarAccountVariant } from '../../types';
 import AvatarAccount from './AvatarAccount';
-import { AvatarAccountVariant } from './AvatarAccount.types';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
 
 describe('AvatarAccount', () => {

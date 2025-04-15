@@ -6,4 +6,4 @@ export {
   FontWeight,
   FontStyle,
   FontFamily,
-} from './Text.types';
+} from '../../types';

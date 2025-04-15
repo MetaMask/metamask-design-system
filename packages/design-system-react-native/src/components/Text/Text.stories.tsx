@@ -3,15 +3,15 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 
-import Text from './Text';
-import type { TextProps } from './Text.types';
 import {
   TextVariant,
-  FontWeight,
-  FontStyle,
   TextColor,
+  FontWeight,
   FontFamily,
-} from './Text.types';
+  FontStyle,
+} from '../../types';
+import Text from './Text';
+import type { TextProps } from './Text.types';
 
 const meta: Meta<TextProps> = {
   title: 'Components/Text',
