@@ -36,7 +36,7 @@ export const AvatarIcon = React.forwardRef<HTMLDivElement, AvatarIconProps>(
       {iconName && (
         <Icon
           name={iconName}
-          size={MAP_AVATARICON_SIZE_ICONSIZE[size as AvatarIconSize]}
+          size={MAP_AVATARICON_SIZE_ICONSIZE[size]}
           color={MAP_AVATARICON_SEVERITY_ICONCOLOR[severity]}
           {...iconProps}
         />
