@@ -51,6 +51,9 @@ export type { IconProps } from './Icon';
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
 
+export { Maskicon } from './temp-components/Maskicon';
+export type { MaskiconProps } from './temp-components/Maskicon';
+
 export { Text } from './Text';
 export {
   TextVariant,
