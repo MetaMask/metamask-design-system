@@ -3,7 +3,7 @@ import type React from 'react';
 import type { ViewProps } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 
-import { IconName, IconSize, IconColor } from '../../types';
+import { IconColor, IconName, IconSize } from '../../types';
 
 /**
  * Icon component props.

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { IconName, IconSize, IconColor } from '../../types';
+import { IconColor, IconName, IconSize } from '../../types';
 import Icon from './Icon';
 import {
   DEFAULT_ICON_ICONSIZE,
@@ -67,7 +67,7 @@ export const Sizes: Story = {
     <View style={{ gap: 8 }}>
       {Object.values(IconSize).map((size) => (
         <View key={size}>
-          <Icon name={DEFAULT_ICON_ICONNAME} size={size} />
+          <Icon name={DEFAULT_ICON_ICONNAME} size={size as IconSize} />
         </View>
       ))}
     </View>

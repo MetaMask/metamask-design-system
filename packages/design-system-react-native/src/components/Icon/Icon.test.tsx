@@ -2,7 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconSize, IconColor } from '../../types';
+import { IconColor, IconSize } from '../../types';
 import Icon from './Icon';
 import {
   DEFAULT_ICON_ICONCOLOR,
@@ -79,10 +79,16 @@ describe('Icon', () => {
 
         const TestComponent = () => {
           const tw = useTailwind();
-          const expectedClassNames = generateIconClassNames({ size });
+          const expectedClassNames = generateIconClassNames({
+            size: size as IconSize,
+          });
           expectedStyles = tw`${expectedClassNames}`;
           return (
-            <Icon name={SAMPLE_ICON_PROPS.name} testID="icon" size={size} />
+            <Icon
+              name={SAMPLE_ICON_PROPS.name}
+              testID="icon"
+              size={size as IconSize}
+            />
           );
         };
 

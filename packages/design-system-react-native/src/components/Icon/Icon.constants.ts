@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { IconName, IconSize, IconColor } from '../../types';
+import { IconColor, IconName, IconSize } from '../../types';
 import type { IconProps } from './Icon.types';
 
 // Defaults

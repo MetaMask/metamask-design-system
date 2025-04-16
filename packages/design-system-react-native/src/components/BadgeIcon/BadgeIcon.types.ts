@@ -1,4 +1,5 @@
 import { ViewProps } from 'react-native';
+
 import { IconName, IconProps } from '../Icon';
 
 /**

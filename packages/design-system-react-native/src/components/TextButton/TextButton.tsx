@@ -4,10 +4,10 @@ import React, { useMemo, useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 import { View } from 'react-native';
 
-import type { SpinnerProps } from '../../temp-components/Spinner';
-import Spinner from '../../temp-components/Spinner';
 import type { IconProps, IconColor } from '../Icon';
 import Icon from '../Icon';
+import type { SpinnerProps } from '../temp-components/Spinner';
+import Spinner from '../temp-components/Spinner';
 import Text from '../Text/Text';
 import type { TextProps } from '../Text/Text.types';
 import { DEFAULT_TEXTBUTTON_PROPS } from './TextButton.constants';

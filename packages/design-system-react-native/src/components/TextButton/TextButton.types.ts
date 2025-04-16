@@ -1,8 +1,8 @@
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
-import type { TextProps } from '../../components/Text';
 
-import type { SpinnerProps } from '../../temp-components/Spinner';
 import type { IconProps, IconName } from '../Icon';
+import type { SpinnerProps } from '../temp-components/Spinner';
+import type { TextProps } from '../Text';
 
 /**
  * TextButton component props.
