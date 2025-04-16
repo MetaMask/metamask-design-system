@@ -1,6 +1,9 @@
 import { stringToBytes, KnownCaipNamespace } from '@metamask/utils';
 import { isAddress as isSolanaAddress } from '@solana/addresses';
 
+// /////////////////////////////////////////////////////
+// Address validation
+// /////////////////////////////////////////////////////
 /**
  * Generates a numeric seed for Ethereum (eip155) addresses.
  */
