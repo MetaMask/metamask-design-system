@@ -70,11 +70,11 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/Jazzicon/Jazzicon.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/Jazzicon/Jazzicon.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/temp-components/Maskicon/Maskicon.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/Maskicon/Maskicon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/Spinner/Spinner.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/Spinner/Spinner.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
-    "./../../packages/design-system-react-native/src/primitives/Maskicon/Maskicon.stories.tsx": require("../../../packages/design-system-react-native/src/primitives/Maskicon/Maskicon.stories.tsx"),
   };
 };
 
