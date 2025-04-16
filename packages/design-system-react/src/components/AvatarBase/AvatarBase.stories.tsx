@@ -47,6 +47,10 @@ const meta: Meta<typeof AvatarBase> = {
       mapping: AvatarBaseShape,
       description: 'Optional prop to control the shape of the AvatarBase',
     },
+    hasBorder: {
+      control: 'boolean',
+      description: 'Optional prop to add a border around the AvatarBase',
+    },
   },
 };
 
@@ -105,6 +109,15 @@ export const Size: Story = {
           fallbackText="Xl"
         />
       </div>
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarBase fallbackText="A" />
+      <AvatarBase fallbackText="B" hasBorder />
     </div>
   ),
 };

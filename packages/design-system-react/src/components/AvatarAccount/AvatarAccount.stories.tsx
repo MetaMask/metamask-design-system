@@ -38,6 +38,10 @@ const meta: Meta<typeof AvatarAccount> = {
       description:
         'Optional additional CSS classes to be applied to the component',
     },
+    hasBorder: {
+      control: 'boolean',
+      description: 'Optional prop to add a border around the AvatarAccount',
+    },
   },
 };
 
@@ -103,6 +107,18 @@ export const Size: Story = {
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
         size={AvatarAccountSize.Xl}
+      />
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        hasBorder
       />
     </div>
   ),

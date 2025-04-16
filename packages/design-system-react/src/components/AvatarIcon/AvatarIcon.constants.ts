@@ -1,11 +1,7 @@
 import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconSize, IconColor } from '../Icon';
-import { AvatarBaseSize } from '../AvatarBase';
 
-export const AVATAR_ICON_SIZE_TO_ICON_SIZE_CLASSNAME_MAP: Record<
-  AvatarIconSize,
-  IconSize
-> = {
+export const MAP_AVATARICON_SIZE_ICONSIZE: Record<AvatarIconSize, IconSize> = {
   [AvatarIconSize.Xs]: IconSize.Xs, // 16px avatar -> 12px icon
   [AvatarIconSize.Sm]: IconSize.Sm, // 24px avatar -> 16px icon
   [AvatarIconSize.Md]: IconSize.Md, // 32px avatar -> 20px icon
@@ -13,39 +9,24 @@ export const AVATAR_ICON_SIZE_TO_ICON_SIZE_CLASSNAME_MAP: Record<
   [AvatarIconSize.Xl]: IconSize.Xl, // 48px avatar -> 32px icon
 };
 
-export const AVATAR_ICON_SEVERITY_CLASSNAME_MAP: Record<
+export const TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR: Record<
   AvatarIconSeverity,
-  { background: string; iconColor: IconColor }
+  string
 > = {
-  [AvatarIconSeverity.Default]: {
-    background: 'bg-background-muted',
-    iconColor: IconColor.IconAlternative,
-  },
-  [AvatarIconSeverity.Info]: {
-    background: 'bg-info-muted',
-    iconColor: IconColor.InfoDefault,
-  },
-  [AvatarIconSeverity.Success]: {
-    background: 'bg-success-muted',
-    iconColor: IconColor.SuccessDefault,
-  },
-  [AvatarIconSeverity.Error]: {
-    background: 'bg-error-muted',
-    iconColor: IconColor.ErrorDefault,
-  },
-  [AvatarIconSeverity.Warning]: {
-    background: 'bg-warning-muted',
-    iconColor: IconColor.WarningDefault,
-  },
+  [AvatarIconSeverity.Default]: 'bg-background-muted',
+  [AvatarIconSeverity.Info]: 'bg-info-muted',
+  [AvatarIconSeverity.Success]: 'bg-success-muted',
+  [AvatarIconSeverity.Error]: 'bg-error-muted',
+  [AvatarIconSeverity.Warning]: 'bg-warning-muted',
 };
 
-export const AVATAR_ICON_TO_AVATAR_BASE_SIZE_MAP: Record<
-  AvatarIconSize,
-  AvatarBaseSize
+export const MAP_AVATARICON_SEVERITY_ICONCOLOR: Record<
+  AvatarIconSeverity,
+  IconColor
 > = {
-  [AvatarIconSize.Xs]: AvatarBaseSize.Xs,
-  [AvatarIconSize.Sm]: AvatarBaseSize.Sm,
-  [AvatarIconSize.Md]: AvatarBaseSize.Md,
-  [AvatarIconSize.Lg]: AvatarBaseSize.Lg,
-  [AvatarIconSize.Xl]: AvatarBaseSize.Xl,
+  [AvatarIconSeverity.Default]: IconColor.IconAlternative,
+  [AvatarIconSeverity.Info]: IconColor.InfoDefault,
+  [AvatarIconSeverity.Success]: IconColor.SuccessDefault,
+  [AvatarIconSeverity.Error]: IconColor.ErrorDefault,
+  [AvatarIconSeverity.Warning]: IconColor.WarningDefault,
 };
