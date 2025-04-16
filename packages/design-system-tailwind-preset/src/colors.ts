@@ -74,4 +74,24 @@ export const colors = {
     muted: 'var(--color-info-muted)',
     inverse: 'var(--color-info-inverse)',
   },
+  accent01: {
+    light: 'var(--color-accent01-light)',
+    normal: 'var(--color-accent01-normal)',
+    dark: 'var(--color-accent01-dark)',
+  },
+  accent02: {
+    light: 'var(--color-accent02-light)',
+    normal: 'var(--color-accent02-normal)',
+    dark: 'var(--color-accent02-dark)',
+  },
+  accent03: {
+    light: 'var(--color-accent03-light)',
+    normal: 'var(--color-accent03-normal)',
+    dark: 'var(--color-accent03-dark)',
+  },
+  accent04: {
+    light: 'var(--color-accent04-light)',
+    normal: 'var(--color-accent04-normal)',
+    dark: 'var(--color-accent04-dark)',
+  },
 };

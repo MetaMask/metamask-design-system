@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { AvatarIconSize } from '../../shared/enums';
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import AvatarIcon from './AvatarIcon';
 import type { AvatarIconProps } from './AvatarIcon.types';
 import { IconName } from '../Icon';
-import { AvatarIconSeverity } from './AvatarIcon.types';
 
 const meta: Meta<AvatarIconProps> = {
   title: 'Components/AvatarIcon',

@@ -1,14 +1,10 @@
 import { render } from '@testing-library/react-native';
 
+import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import {
   MAP_AVATARBASE_SIZE_BORDERWIDTH,
   TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
-} from '../../primitives/AvatarBase/AvatarBase.constants';
-import { AvatarGroupSize } from '../../shared/enums';
-import {
-  generateAvatarGroupContainerClassNames,
-  generateAvatarGroupOverflowTextContainerClassNames,
-} from './AvatarGroup.utilities';
+} from '../AvatarBase/AvatarBase.constants';
 import AvatarGroup from './AvatarGroup';
 import {
   MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS,
@@ -17,7 +13,10 @@ import {
   SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
   SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
 } from './AvatarGroup.constants';
-import { AvatarGroupVariant } from './AvatarGroup.types';
+import {
+  generateAvatarGroupContainerClassNames,
+  generateAvatarGroupOverflowTextContainerClassNames,
+} from './AvatarGroup.utilities';
 
 describe('AvatarGroup', () => {
   describe('generateAvatarGroupContainerClassNames', () => {

@@ -1,12 +1,12 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react-native';
-import { View } from 'react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import type { Meta, StoryObj } from '@storybook/react-native';
+import React from 'react';
+import { View } from 'react-native';
 
+import { ButtonSize, ButtonVariant } from '../../types';
 import { IconName } from '../Icon';
 import Button from './Button';
 import { DEFAULT_BUTTON_PROPS } from './Button.constants';
-import { ButtonSize, ButtonVariant } from './Button.types';
 import type { ButtonProps } from './Button.types';
 
 const meta: Meta<ButtonProps> = {

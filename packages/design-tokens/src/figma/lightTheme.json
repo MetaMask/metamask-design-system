@@ -349,6 +349,86 @@
       "description": "For elements placed on top of info/default fill."
     }
   },
+  "accent01": {
+    "light": {
+      "value": "{orange.200}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in light orange."
+    },
+    "normal": {
+      "value": "{orange.400}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in orange."
+    },
+    "dark": {
+      "value": "{orange.700}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in dark orange."
+    }
+  },
+  "accent02": {
+    "light": {
+      "value": "{purple.100}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in light purple."
+    },
+    "normal": {
+      "value": "{purple.300}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in purple."
+    },
+    "dark": {
+      "value": "{purple.800}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in dark purple."
+    }
+  },
+  "accent03": {
+    "light": {
+      "value": "{lime.050}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in light lime."
+    },
+    "normal": {
+      "value": "{lime.100}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in lime."
+    },
+    "dark": {
+      "value": "{lime.700}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in dark lime."
+    }
+  },
+  "accent04": {
+    "light": {
+      "value": "{indigo.100}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in light indigo."
+    },
+    "normal": {
+      "value": "{indigo.200}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in indigo."
+    },
+    "dark": {
+      "value": "{indigo.800}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Expressive color in dark indigo."
+    }
+  },
   "flask": {
     "default": {
       "value": "{purple.500}",

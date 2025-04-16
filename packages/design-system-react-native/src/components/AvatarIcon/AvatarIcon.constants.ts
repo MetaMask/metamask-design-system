@@ -1,6 +1,5 @@
-import { AvatarIconSeverity } from './AvatarIcon.types';
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconSize, IconColor } from '../Icon';
-import { AvatarIconSize } from '../../shared/enums';
 
 // Mappings
 export const TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR: Record<

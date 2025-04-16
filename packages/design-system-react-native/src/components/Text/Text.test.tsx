@@ -3,19 +3,19 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
+import {
+  TextVariant,
+  TextColor,
+  FontWeight,
+  FontFamily,
+  FontStyle,
+} from '../../types';
 import Text from './Text';
 import {
   DEFAULT_TEXT_COLOR,
   DEFAULT_TEXT_VARIANT,
   MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME,
 } from './Text.constants';
-import {
-  TextVariant,
-  TextColor,
-  FontWeight,
-  FontStyle,
-  FontFamily,
-} from './Text.types';
 import { generateTextClassNames } from './Text.utilities';
 
 describe('Text', () => {

@@ -3210,6 +3210,8 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.3"
     "@metamask/auto-changelog": "npm:^5.0.1"
     "@metamask/design-system-twrnc-preset": "workspace:^"
+    "@metamask/utils": "npm:^11.4.0"
+    "@solana/addresses": "npm:^2.1.0"
     "@storybook/react-native": "npm:6.5"
     "@testing-library/react-native": "npm:^12.8.1"
     "@types/babel__preset-env": "npm:^7"
@@ -3256,7 +3258,7 @@ __metadata:
     "@types/react": "npm:^18.2.0"
     "@types/react-dom": "npm:^18.2.0"
     bitcoin-address-validation: "npm:^3.0.0"
-    blo: "npm:^1.2.0"
+    blo: "npm:^2.0.0"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
@@ -3524,7 +3526,7 @@ __metadata:
     storybook: "npm:^8.5.3"
     tailwindcss: "npm:^3.0.0"
     typescript: "npm:~5.2.2"
-    vite: "npm:^5.4.16"
+    vite: "npm:^5.4.18"
   languageName: unknown
   linkType: soft
 
@@ -7571,10 +7573,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"blo@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "blo@npm:1.2.0"
-  checksum: 10/17ec61e41b201bbba8ab3c874cad94696604b6ac4029de5050c92ea5817dff6814d8642b9b2948e0d6804194437b751fa2755652201f26fa5d606913c489b757
+"blo@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "blo@npm:2.0.0"
+  checksum: 10/a03c33f46349ee114825f3615e45038bc165cb74fdb38959dbc84e96841b33f24bd79aa732cbfe967877dfae2c684878d57bfa8a9f28618059028072de8f5a5e
   languageName: node
   linkType: hard
 
@@ -20710,9 +20712,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.16":
-  version: 5.4.17
-  resolution: "vite@npm:5.4.17"
+"vite@npm:^5.4.18":
+  version: 5.4.18
+  resolution: "vite@npm:5.4.18"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -20749,7 +20751,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/95b2f94d378305cf8a4fadb40f96da3e59593188733738c486252ecb67ac6439100a44ec9170b66fa319b4d61eea161800e610a0499e61bf110ae6e7e6f233f0
+  checksum: 10/491f0d047695a4bb3aafdb30822a3638ac41c23b022c1599bf51beab26a7cffe3ef1617bdf014592da48864079f217da5bf144a6c3238d2d74dea688ba3a549a
   languageName: node
   linkType: hard
 

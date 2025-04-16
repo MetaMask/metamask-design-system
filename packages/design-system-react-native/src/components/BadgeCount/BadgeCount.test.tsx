@@ -1,10 +1,10 @@
-import React from 'react';
-import { render } from '@testing-library/react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render } from '@testing-library/react-native';
+import React from 'react';
 
+import { BadgeCountSize } from '../../types';
 import Text, { TextColor, FontWeight } from '../Text';
 import BadgeCount from './BadgeCount';
-import { BadgeCountSize } from './BadgeCount.types';
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,

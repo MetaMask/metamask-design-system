@@ -1,28 +1,7 @@
 import { ViewProps } from 'react-native';
 
-/**
- * The status of BadgeStatus
- */
-export enum BadgeStatusStatus {
-  Active = 'active',
-  PartiallyActive = 'partiallyactive',
-  Inactive = 'inactive',
-  New = 'new',
-  Attention = 'attention',
-}
-/**
- * The size of BadgeStatus
- */
-export enum BadgeStatusSize {
-  /**
-   * Represents a medium badge status size (8px).
-   */
-  Md = 'Md',
-  /**
-   * Represents a large avatar size (10px).
-   */
-  Lg = 'Lg',
-}
+import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
+
 /**
  * BadgeStatus component props.
  */
