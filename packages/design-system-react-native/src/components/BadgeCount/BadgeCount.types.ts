@@ -1,17 +1,7 @@
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
+import { BadgeCountSize } from '../../types';
 import type { TextProps } from '../Text';
-
-export enum BadgeCountSize {
-  /**
-   * Represents a medium badge count (14px height).
-   */
-  Md = 'Md',
-  /**
-   * Represents a large badge count (20px height).
-   */
-  Lg = 'Lg',
-}
 
 /**
  * BadgeCount component props.

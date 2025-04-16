@@ -3,21 +3,19 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 
+import {
+  TextVariant,
+  TextColor,
+  FontWeight,
+  FontFamily,
+  FontStyle,
+} from '../../types';
 import Text from './Text';
 import type { TextProps } from './Text.types';
-import { TextVariant, FontWeight, FontStyle, TextColor } from './Text.types';
 
 const meta: Meta<TextProps> = {
   title: 'Components/Text',
   component: Text,
-  args: {
-    variant: TextVariant.BodyMd,
-    color: TextColor.TextDefault,
-    fontWeight: FontWeight.Normal,
-    fontStyle: FontStyle.Normal,
-    children: 'The quick orange fox jumped over the lazy dog.',
-    twClassName: '',
-  },
   argTypes: {
     variant: {
       control: 'select',
@@ -30,6 +28,10 @@ const meta: Meta<TextProps> = {
     fontWeight: {
       control: 'select',
       options: FontWeight,
+    },
+    fontFamily: {
+      control: 'select',
+      options: FontFamily,
     },
     fontStyle: {
       control: 'select',
@@ -68,15 +70,16 @@ export const Default: Story = {
   args: {
     variant: TextVariant.BodyMd,
     color: TextColor.TextDefault,
-    fontWeight: FontWeight.Normal,
+    fontWeight: FontWeight.Regular,
+    fontFamily: FontFamily.Default,
     fontStyle: FontStyle.Normal,
     children: 'The quick orange fox jumped over the lazy dog.',
     twClassName: '',
   },
-  render: (args) => <Text {...args} />,
+  render: (args) => <TextStory {...args} />,
 };
 
-export const Variants: Story = {
+export const Variant: Story = {
   render: () => (
     <ScrollView>
       {Object.keys(TextVariant).map((variantKey) => (
@@ -91,7 +94,7 @@ export const Variants: Story = {
   ),
 };
 
-export const Colors: Story = {
+export const Color: Story = {
   render: () => (
     <ScrollView>
       {Object.keys(TextColor).map((colorKey) => (
@@ -109,12 +112,23 @@ export const Colors: Story = {
 export const FontWeightStory: Story = {
   render: () => (
     <View>
-      <Text fontWeight={FontWeight.Normal}>Normal (400)</Text>
+      <Text fontWeight={FontWeight.Regular}>Regular (400)</Text>
       <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
       <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
     </View>
   ),
   name: 'Font Weight',
+};
+
+export const FontFamilyStory: Story = {
+  render: () => (
+    <View>
+      <Text fontFamily={FontFamily.Default}>Default (Centra No 1)</Text>
+      <Text fontFamily={FontFamily.Accent}>Accent (MM Sans)</Text>
+      <Text fontFamily={FontFamily.Hero}>Hero (MM Poly)</Text>
+    </View>
+  ),
+  name: 'Font Family',
 };
 
 export const FontStyleStory: Story = {

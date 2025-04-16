@@ -1,14 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
+import { AvatarAccountSize, AvatarAccountVariant } from '../../types';
 import AvatarAccount from './AvatarAccount';
-import {
-  DEFAULT_AVATARACCOUNT_PROPS,
-  SAMPLE_AVATARACCOUNT_ADDRESSES,
-} from './AvatarAccount.constants';
+import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
 import type { AvatarAccountProps } from './AvatarAccount.types';
-import { AvatarSize } from '../../shared/enums';
-import { AvatarAccountVariant } from './AvatarAccount.types';
 
 const meta: Meta<AvatarAccountProps> = {
   title: 'Components/AvatarAccount',
@@ -16,7 +12,7 @@ const meta: Meta<AvatarAccountProps> = {
   argTypes: {
     size: {
       control: 'select',
-      options: AvatarSize,
+      options: AvatarAccountSize,
     },
     variant: {
       control: 'select',
@@ -33,8 +29,8 @@ export default meta;
 type Story = StoryObj<AvatarAccountProps>;
 export const Default: Story = {
   args: {
-    size: DEFAULT_AVATARACCOUNT_PROPS.size,
-    variant: DEFAULT_AVATARACCOUNT_PROPS.variant,
+    size: AvatarAccountSize.Md,
+    variant: AvatarAccountVariant.Jazzicon,
     twClassName: '',
   },
   render: (args) => {
@@ -47,15 +43,15 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      {Object.keys(AvatarSize).map((sizeKey) => (
+      {Object.keys(AvatarAccountSize).map((sizeKey) => (
         <View key={sizeKey} style={{ flexDirection: 'row', gap: 8 }}>
           <AvatarAccount
-            size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
+            size={AvatarAccountSize[sizeKey as keyof typeof AvatarAccountSize]}
             variant={AvatarAccountVariant.Blockies}
             address={SAMPLE_AVATARACCOUNT_ADDRESSES[0]}
           />
           <AvatarAccount
-            size={AvatarSize[sizeKey as keyof typeof AvatarSize]}
+            size={AvatarAccountSize[sizeKey as keyof typeof AvatarAccountSize]}
             variant={AvatarAccountVariant.Jazzicon}
             address={SAMPLE_AVATARACCOUNT_ADDRESSES[0]}
           />

@@ -1,14 +1,9 @@
-// AvatarAccount.test.tsx
-import React from 'react';
 import { render } from '@testing-library/react-native';
+import React from 'react';
 
-import { AvatarAccountSize } from '../../shared/enums';
+import { AvatarAccountSize, AvatarAccountVariant } from '../../types';
 import AvatarAccount from './AvatarAccount';
-import { AvatarAccountVariant } from './AvatarAccount.types';
-import {
-  DEFAULT_AVATARACCOUNT_PROPS,
-  SAMPLE_AVATARACCOUNT_ADDRESSES,
-} from './AvatarAccount.constants';
+import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
 
 describe('AvatarAccount', () => {
   it('renders Jazzicon by default when no variant is provided', () => {
@@ -44,10 +39,10 @@ describe('AvatarAccount', () => {
     const avatarAccount = getByTestId('avatar-account');
     expect(avatarAccount).toBeDefined();
     expect(avatarAccount.props.style[0].width).toStrictEqual(
-      Number(DEFAULT_AVATARACCOUNT_PROPS.size),
+      Number(AvatarAccountSize.Md),
     );
     expect(avatarAccount.props.style[0].height).toStrictEqual(
-      Number(DEFAULT_AVATARACCOUNT_PROPS.size),
+      Number(AvatarAccountSize.Md),
     );
   });
 

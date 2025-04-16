@@ -1,5 +1,4 @@
-import { AvatarGroupSize } from '../../shared/enums';
-import { TextVariant } from '../Text';
+import { AvatarGroupSize } from '../../types';
 import { AvatarAccountProps, AvatarAccountVariant } from '../AvatarAccount';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from '../AvatarAccount/AvatarAccount.constants';
 import { AvatarFaviconProps } from '../AvatarFavicon';
@@ -8,7 +7,7 @@ import { AvatarNetworkProps } from '../AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.constants';
 import { AvatarTokenProps } from '../AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.constants';
-import type { AvatarGroupProps } from './AvatarGroup.types';
+import { TextVariant } from '../Text';
 
 // Mappings
 export const MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS: Record<
@@ -31,15 +30,6 @@ export const MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT: Record<
   [AvatarGroupSize.Md]: TextVariant.BodyMd,
   [AvatarGroupSize.Lg]: TextVariant.HeadingMd,
   [AvatarGroupSize.Xl]: TextVariant.HeadingMd,
-};
-
-// Defaults
-export const DEFAULT_AVATARGROUP_PROPS: Required<
-  Pick<AvatarGroupProps, 'size' | 'max' | 'isReverse'>
-> = {
-  size: AvatarGroupSize.Md,
-  max: 4,
-  isReverse: false,
 };
 
 // Sample consts

@@ -3,19 +3,23 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 
 import {
-  DEFAULT_AVATARICON_PROPS,
+  AvatarIconSize,
+  AvatarBaseShape,
+  AvatarIconSeverity,
+} from '../../types';
+import AvatarBase from '../AvatarBase';
+import Icon from '../Icon';
+import {
   MAP_AVATARICON_SIZE_ICONSIZE,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,
 } from './AvatarIcon.constants';
 import type { AvatarIconProps } from './AvatarIcon.types';
 import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
-import Icon from '../Icon';
-import AvatarBase from '../../primitives/AvatarBase';
 
 const AvatarIcon = ({
-  size = DEFAULT_AVATARICON_PROPS.size,
-  shape = DEFAULT_AVATARICON_PROPS.shape,
-  severity = DEFAULT_AVATARICON_PROPS.severity,
+  size = AvatarIconSize.Md,
+  shape = AvatarBaseShape.Circle,
+  severity = AvatarIconSeverity.Default,
   iconName,
   iconProps,
   twClassName = '',

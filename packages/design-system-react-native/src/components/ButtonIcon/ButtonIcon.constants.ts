@@ -1,5 +1,5 @@
+import { ButtonIconSize } from '../../types';
 import { IconSize, IconName } from '../Icon';
-import { ButtonIconSize } from './ButtonIcon.types';
 import type { ButtonIconProps } from './ButtonIcon.types';
 
 // Mappings

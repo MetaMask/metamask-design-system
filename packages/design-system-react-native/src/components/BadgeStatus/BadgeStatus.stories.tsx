@@ -1,10 +1,10 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View, ViewProps } from 'react-native';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
+import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
 import BadgeStatus from './BadgeStatus';
 import type { BadgeStatusProps } from './BadgeStatus.types';
-import { BadgeStatusStatus, BadgeStatusSize } from './BadgeStatus.types';
 
 const meta: Meta<BadgeStatusProps> = {
   title: 'Components/BadgeStatus',

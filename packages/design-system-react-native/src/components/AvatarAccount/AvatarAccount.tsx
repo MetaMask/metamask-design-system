@@ -1,18 +1,21 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React from 'react';
 
-import AvatarBase from '../../primitives/AvatarBase';
-import Jazzicon from '../../primitives/Jazzicon';
-import Blockies from '../../primitives/Blockies';
-import { DEFAULT_AVATARACCOUNT_PROPS } from './AvatarAccount.constants';
+import {
+  AvatarAccountSize,
+  AvatarBaseShape,
+  AvatarAccountVariant,
+} from '../../types';
+import AvatarBase from '../AvatarBase';
+import Blockies from '../temp-components/Blockies';
+import Jazzicon from '../temp-components/Jazzicon';
 import type { AvatarAccountProps } from './AvatarAccount.types';
-import { AvatarAccountVariant } from './AvatarAccount.types';
 
 const AvatarAccount = ({
   address,
-  variant = DEFAULT_AVATARACCOUNT_PROPS.variant,
-  size = DEFAULT_AVATARACCOUNT_PROPS.size,
-  shape = DEFAULT_AVATARACCOUNT_PROPS.shape,
+  variant = AvatarAccountVariant.Jazzicon,
+  size = AvatarAccountSize.Md,
+  shape = AvatarBaseShape.Circle,
   ...props
 }: AvatarAccountProps) => {
   let AvatarArtComponent;

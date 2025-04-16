@@ -1,6 +1,6 @@
 # AvatarAccount
 
-The `AvatarAccount` component is reserved for representing accounts inside of an avatar. It extends the functionality of [`AvatarBase`](../../primitives/AvatarBase/) by incorporating an Account and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with Accounts.
+The `AvatarAccount` component is reserved for representing accounts inside of an avatar. It extends the functionality of [`AvatarBase`](../AvatarBase/) by incorporating an Account and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with Accounts.
 
 ---
 

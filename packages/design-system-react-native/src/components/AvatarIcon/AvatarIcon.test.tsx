@@ -1,21 +1,17 @@
 import { render } from '@testing-library/react-native';
 
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconName } from '../Icon';
-import { AvatarIconSize } from '../../shared/enums';
-import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
-import {
-  DEFAULT_AVATARICON_PROPS,
-  TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
-} from './AvatarIcon.constants';
 import AvatarIcon from './AvatarIcon';
-import { AvatarIconSeverity } from './AvatarIcon.types';
+import { TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR } from './AvatarIcon.constants';
+import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
 
 describe('AvatarIcon', () => {
   describe('generateAvatarIconContainerClassNames', () => {
     it('returns correct class names for default state', () => {
       const classNames = generateAvatarIconContainerClassNames({});
       expect(classNames).toStrictEqual(
-        `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[DEFAULT_AVATARICON_PROPS.severity]}`,
+        `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[AvatarIconSeverity.Default]}`,
       );
     });
 
@@ -33,7 +29,7 @@ describe('AvatarIcon', () => {
         twClassName: 'shadow-lg ring-2',
       });
       expect(classNames).toStrictEqual(
-        `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[DEFAULT_AVATARICON_PROPS.severity]} shadow-lg ring-2`,
+        `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[AvatarIconSeverity.Default]} shadow-lg ring-2`,
       );
     });
 

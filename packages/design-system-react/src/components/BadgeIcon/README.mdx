@@ -1,0 +1,58 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as BadgeIconStories from './BadgeIcon.stories';
+
+# BadgeIcon
+
+The **BadgeIcon** component displays a small icon inside a circular badge. It is commonly used to indicate status, action triggers, or enhancements to other UI elements.
+
+```tsx
+import { BadgeIcon } from '@metamask/design-system-react';
+
+<BadgeIcon iconName={IconName.User} />;
+```
+
+<Canvas of={BadgeIconStories.Default} />
+
+## Props
+
+### Icon Name
+
+Use the `iconName` prop to define which icon should appear inside the badge. This prop is required.
+
+Note: The `Icon` component is a child of the `BadgeIcon` component. Use the `iconProps` prop to customize the internal `Icon` component, such as changing the icon color.
+
+<Canvas of={BadgeIconStories.IconNameStory} />
+
+### Class Name
+
+Use the `className` prop to add custom CSS classes to the BadgeIcon component. These classes are merged with the component's default styles using `twMerge`, allowing you to:
+
+- Add new utility styles
+- Override default styles when needed
+
+Example:
+
+```tsx
+// Adding spacing utilities
+<BadgeIcon iconName={IconName.User} className="ml-2" />
+
+// Overriding background color
+<BadgeIcon
+  iconName={IconName.User}
+  className="bg-success-default"
+  iconProps={{ color: IconColor.SuccessInverse }}
+/>
+```
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with Tailwind or className alone. For static styles, prefer `className`.
+
+## Component API
+
+<Controls of={BadgeIconStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

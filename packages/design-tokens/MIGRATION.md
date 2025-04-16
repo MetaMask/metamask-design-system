@@ -2,9 +2,194 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 6.0.0 to 7.0.0](#from-version-600-to-700)
+- [From version 5.1.0 to 6.0.0](#from-version-510-to-600)
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 6.0.0 to 7.0.0
+
+### Typography Changes (Breaking Changes)
+
+In version 7.0.0, we've simplified the typography system by removing individual font family tokens for each typography variant. This is a breaking change that affects both CSS and JS tokens.
+
+#### Removed Tokens
+
+##### CSS Variables
+
+```css
+/* Typography font family tokens have been removed in favor of --font-family-default*/
+--font-family-sans
+--typography-s-display-md-font-family
+--typography-s-heading-lg-font-family
+--typography-s-heading-md-font-family
+--typography-s-heading-sm-font-family
+--typography-s-heading-sm-regular-font-family
+--typography-s-body-lg-medium-font-family
+--typography-s-body-md-font-family
+--typography-s-body-md-medium-font-family
+--typography-s-body-md-bold-font-family
+--typography-s-body-sm-font-family
+--typography-s-body-sm-medium-font-family
+--typography-s-body-sm-bold-font-family
+--typography-s-body-xs-font-family
+--typography-s-body-xs-medium-font-family
+--typography-l-display-md-font-family
+--typography-l-heading-lg-font-family
+--typography-l-heading-md-font-family
+--typography-l-heading-sm-font-family
+--typography-l-heading-sm-regular-font-family
+--typography-l-body-lg-medium-font-family
+--typography-l-body-md-font-family
+--typography-l-body-md-medium-font-family
+--typography-l-body-md-bold-font-family
+--typography-l-body-sm-font-family
+--typography-l-body-sm-medium-font-family
+--typography-l-body-sm-bold-font-family
+--typography-l-body-xs-font-family
+--typography-l-body-xs-medium-font-family
+```
+
+##### JS Tokens
+
+```javascript
+typography.sDisplayMD.fontFamily;
+typography.sHeadingLG.fontFamily;
+typography.sHeadingMD.fontFamily;
+typography.sHeadingSM.fontFamily;
+typography.sHeadingSMRegular.fontFamily;
+typography.sBodyLGMedium.fontFamily;
+typography.sBodyMD.fontFamily;
+typography.sBodyMDMedium.fontFamily;
+typography.sBodyMDBold.fontFamily;
+typography.sBodySM.fontFamily;
+typography.sBodySMMedium.fontFamily;
+typography.sBodySMBold.fontFamily;
+typography.sBodyXS.fontFamily;
+typography.sBodyXSMedium.fontFamily;
+typography.lDisplayMD.fontFamily;
+typography.lHeadingLG.fontFamily;
+typography.lHeadingMD.fontFamily;
+typography.lHeadingSM.fontFamily;
+typography.lHeadingSMRegular.fontFamily;
+typography.lBodyLGMedium.fontFamily;
+typography.lBodyMD.fontFamily;
+typography.lBodyMDMedium.fontFamily;
+typography.lBodyMDBold.fontFamily;
+typography.lBodySM.fontFamily;
+typography.lBodySMMedium.fontFamily;
+typography.lBodySMBold.fontFamily;
+typography.lBodyXS.fontFamily;
+typography.lBodyXSMedium.fontFamily;
+```
+
+#### Added Tokens
+
+##### CSS Variables
+
+```css
+/* Font family tokens */
+--font-family-default: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial,
+  sans-serif;
+--font-family-accent: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+--font-family-hero: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+```
+
+##### JS Tokens
+
+```javascript
+const FontFamilies = {
+  default: 'CentraNo1',
+  accent: 'MMSans',
+  hero: 'MMPoly',
+};
+```
+
+### Migration Steps
+
+1. Remove all references to individual typography font family tokens
+2. Use the base font family tokens instead:
+   - For web: Update `--font-family-sans` to `--font-family-default` for all typography variants
+   - For React Native: Use the appropriate font family from the base font tokens
+3. Update any CSS or style definitions that were using the removed tokens
+4. Test all typography variants to ensure they're using the correct font family
+5. For special typography needs:
+   - Use `--font-family-accent` for accent text (CSS) or `FontFamilies.accent` (JS)
+   - Use `--font-family-hero` for hero text (CSS) or `FontFamilies.hero` (JS)
+
+## From version 5.1.0 to 6.0.0
+
+### Font Family Changes (Breaking Changes)
+
+In version 6.0.0, we've completely replaced Euclid Circular B with CentraNo1 as our primary font family. This is a breaking change that affects both web and React Native applications.
+
+#### CSS Changes
+
+##### Removed
+
+```css
+--font-family-euclid-circular-b
+--font-family-roboto
+```
+
+##### Changed
+
+```css
+/* Before */
+--font-family-sans: 'Euclid Circular B', 'Roboto', sans-serif;
+
+/* After */
+--font-family-sans: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+```
+
+#### React Native Font Changes
+
+##### Before
+
+```javascript
+'EuclidCircularB-Regular';
+'EuclidCircularB-Bold';
+'EuclidCircularB-RegularItalic';
+'EuclidCircularB-BoldItalic';
+'EuclidCircularB-Medium';
+'EuclidCircularB-MediumItalic';
+```
+
+##### After
+
+```javascript
+'CentraNo1-Book';
+'CentraNo1-BookItalic';
+'CentraNo1-Medium';
+'CentraNo1-MediumItalic';
+'CentraNo1-Bold';
+'CentraNo1-BoldItalic';
+```
+
+#### Font Weight Mapping Changes
+
+The font weight tokens remain the same (400, 500, 700), but the font file names have changed:
+
+- Weight 400 uses 'CentraNo1-Book' (previously 'EuclidCircularB-Regular')
+- Weight 500 uses 'CentraNo1-Medium' (previously 'EuclidCircularB-Medium')
+- Weight 700 uses 'CentraNo1-Bold' (previously 'EuclidCircularB-Bold')
+
+### Migration Steps
+
+1. Update font imports to use CentraNo1 instead of Euclid Circular B
+2. Replace all instances of `font-family: 'Euclid Circular B'` with `font-family: 'CentraNo1'`
+3. Update font file references:
+   - Use 'CentraNo1-Book' for weight 400 (previously 'EuclidCircularB-Regular')
+   - Use 'CentraNo1-Medium' for weight 500
+   - Use 'CentraNo1-Bold' for weight 700
+4. For React Native applications:
+   - Update font file imports to use new CentraNo1 .otf files
+   - Update font family references in your styles
+5. For web applications:
+   - Update font file imports to use new CentraNo1 .woff2 files
+   - Update @font-face declarations
+6. Remove any references to Roboto font family as it's no longer included in the fallback chain
 
 ## From version 4.1.0 to 5.0.0
 

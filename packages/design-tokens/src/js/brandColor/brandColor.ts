@@ -118,17 +118,17 @@ export const brandColor: BrandColor = {
   // Orange
   orange100: '#ffd4c1',
   // Orange
-  orange200: '#ffa47c',
+  orange200: '#ffa680',
   // Orange
   orange300: '#ff7940',
   // Orange
-  orange400: '#f35714',
+  orange400: '#ff5c16',
   // Orange
   orange500: '#c3420d',
   // Orange
   orange600: '#932d06',
   // Orange
-  orange700: '#631800',
+  orange700: '#661800',
   // Orange
   orange800: '#451100',
   // Orange
@@ -138,11 +138,11 @@ export const brandColor: BrandColor = {
   // Orange
   orange025: '#fff8f5',
   // Purple
-  purple100: '#efd2ff',
+  purple100: '#eac2ff',
   // Purple
   purple200: '#dfa4ff',
   // Purple
-  purple300: '#d27dff',
+  purple300: '#d075ff',
   // Purple
   purple400: '#b864f5',
   // Purple
@@ -152,7 +152,7 @@ export const brandColor: BrandColor = {
   // Purple
   purple700: '#6c2ab2',
   // Purple
-  purple800: '#380658',
+  purple800: '#3d065f',
   // Purple
   purple900: '#280a00',
   // Purple
@@ -160,7 +160,7 @@ export const brandColor: BrandColor = {
   // Purple
   purple025: '#fcf6ff',
   // Lime
-  lime100: '#b8ef4a',
+  lime100: '#baf24a',
   // Lime
   lime200: '#95ca45',
   // Lime
@@ -172,7 +172,7 @@ export const brandColor: BrandColor = {
   // Lime
   lime600: '#275b35',
   // Lime
-  lime700: '#093a31',
+  lime700: '#013330',
   // Lime
   lime800: '#012826',
   // Lime
@@ -180,7 +180,29 @@ export const brandColor: BrandColor = {
   // Lime
   lime025: '#effed9',
   // Lime
-  lime050: '#e3febd',
+  lime050: '#e5ffc3',
+  // Indigo
+  indigo025: '#f3faff',
+  // Indigo
+  indigo050: '#ebf5ff',
+  // Indigo
+  indigo100: '#cce7ff',
+  // Indigo
+  indigo200: '#89b0ff',
+  // Indigo
+  indigo300: '#7e9ff0',
+  // Indigo
+  indigo400: '#6f87db',
+  // Indigo
+  indigo500: '#5b66bf',
+  // Indigo
+  indigo600: '#4544a1',
+  // Indigo
+  indigo700: '#2e2082',
+  // Indigo
+  indigo800: '#190066',
+  // Indigo
+  indigo900: '#13004a',
   // White
   white: '#ffffff',
   // Black

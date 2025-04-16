@@ -38,9 +38,9 @@
     "build": "yarn generate:icons && ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
-    "clean:icons": "rimraf src/components/icon/icons",
+    "clean:icons": "rimraf src/components/Icon/icons",
     "create-component": "ts-node scripts/create-component",
-    "generate:icons": "yarn clean:icons && svgr --config-file src/components/icon/.svgrrc.js -d src/components/icon/icons src/components/icon/assets/*.svg && yarn generate:icons:index",
+    "generate:icons": "yarn clean:icons && svgr --config-file src/components/Icon/.svgrrc.js -d src/components/Icon/icons src/components/Icon/assets/*.svg && yarn generate:icons:index",
     "generate:icons:index": "ts-node scripts/generate-icons-index.ts",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@metamask/jazzicon": "^2.0.0",
-    "@metamask/utils": "^11.3.0",
+    "@metamask/utils": "^11.4.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@solana/addresses": "^2.1.0",
     "bitcoin-address-validation": "^3.0.0",
@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@metamask/auto-changelog": "^4.1.0",
+    "@metamask/auto-changelog": "^5.0.1",
     "@metamask/design-system-tailwind-preset": "workspace:^",
     "@storybook/react": "^8.5.3",
     "@storybook/test": "^8.5.3",
@@ -81,7 +81,7 @@
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
-    "@metamask/design-tokens": "^5.1.0",
+    "@metamask/design-tokens": "^7.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "tailwindcss": "^3.0.0"

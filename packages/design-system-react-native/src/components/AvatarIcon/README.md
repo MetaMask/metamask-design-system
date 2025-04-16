@@ -1,6 +1,6 @@
 # AvatarIcon
 
-The `AvatarIcon` component is reserved for representing static icons inside of an avatar. It extends the functionality of [`AvatarBase`](../../primitives/AvatarBase/) by incorporating an icon and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with icons.
+The `AvatarIcon` component is reserved for representing static icons inside of an avatar. It extends the functionality of [`AvatarBase`](../AvatarBase/) by incorporating an icon and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with icons.
 
 ---
 

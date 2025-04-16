@@ -1,4 +1,5 @@
 import { ViewProps } from 'react-native';
+
 import { IconName, IconProps } from '../Icon';
 
 /**
@@ -6,7 +7,7 @@ import { IconName, IconProps } from '../Icon';
  */
 export type BadgeIconProps = {
   /**
-   * Required prop to specify an icon to show when BadgeIconVariant is Custom.
+   * Required prop to specify an icon to show
    */
   iconName: IconName;
   /**

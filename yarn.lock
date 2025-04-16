@@ -3143,7 +3143,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/auto-changelog@npm:^4.0.0, @metamask/auto-changelog@npm:^4.1.0":
+"@metamask/auto-changelog@npm:^4.0.0":
   version: 4.1.0
   resolution: "@metamask/auto-changelog@npm:4.1.0"
   dependencies:
@@ -3156,6 +3156,22 @@ __metadata:
   bin:
     auto-changelog: dist/cli.js
   checksum: 10/fe31a9eb364939c83bc5098482b761ca93593081680c4cba17b221150b4d32636cb25fd708e3692c198feddc95d8bcf524e19fa93567fb5aa30b03ea93249250
+  languageName: node
+  linkType: hard
+
+"@metamask/auto-changelog@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@metamask/auto-changelog@npm:5.0.1"
+  dependencies:
+    diff: "npm:^5.0.0"
+    execa: "npm:^5.1.1"
+    semver: "npm:^7.3.5"
+    yargs: "npm:^17.0.1"
+  peerDependencies:
+    prettier: ">=3.0.0"
+  bin:
+    auto-changelog: dist/cli.mjs
+  checksum: 10/4f526c710b4d198ca51ac447823fbc5528a86b31cfcba1d3d0ed2d71f847fb4276672a5a93d321778c75fe62450cf088ae4e110381a190d1d0c7ae8846040270
   languageName: node
   linkType: hard
 
@@ -3192,7 +3208,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@metamask/auto-changelog": "npm:^4.1.0"
+    "@metamask/auto-changelog": "npm:^5.0.1"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@storybook/react-native": "npm:6.5"
     "@testing-library/react-native": "npm:^12.8.1"
@@ -3223,10 +3239,10 @@ __metadata:
   resolution: "@metamask/design-system-react@workspace:packages/design-system-react"
   dependencies:
     "@jest/globals": "npm:^29.7.0"
-    "@metamask/auto-changelog": "npm:^4.1.0"
+    "@metamask/auto-changelog": "npm:^5.0.1"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/jazzicon": "npm:^2.0.0"
-    "@metamask/utils": "npm:^11.3.0"
+    "@metamask/utils": "npm:^11.4.0"
     "@radix-ui/react-slot": "npm:^1.1.0"
     "@solana/addresses": "npm:^2.1.0"
     "@storybook/react": "npm:^8.5.3"
@@ -3250,7 +3266,7 @@ __metadata:
     ts-node: "npm:^10.9.1"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-tokens": ^5.1.0
+    "@metamask/design-tokens": ^7.0.0
     react: ^16.0.0
     react-dom: ^16.0.0
     tailwindcss: ^3.0.0
@@ -3261,7 +3277,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
-    "@metamask/auto-changelog": "npm:^4.1.0"
+    "@metamask/auto-changelog": "npm:^5.0.1"
     "@ts-bridge/cli": "npm:^0.5.1"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
@@ -3271,7 +3287,7 @@ __metadata:
     ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-tokens": ^5.1.0
+    "@metamask/design-tokens": ^7.0.0
     tailwindcss: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -3284,7 +3300,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@metamask/auto-changelog": "npm:^4.1.0"
+    "@metamask/auto-changelog": "npm:^5.0.1"
     "@metamask/design-tokens": "workspace:^"
     "@testing-library/react-native": "npm:^12.8.1"
     "@types/babel__preset-env": "npm:^7"
@@ -3308,7 +3324,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-tokens@workspace:packages/design-tokens"
   dependencies:
-    "@metamask/auto-changelog": "npm:^4.1.0"
+    "@metamask/auto-changelog": "npm:^5.0.1"
     "@metamask/design-system-react": "workspace:^"
     "@storybook/react": "npm:^8.5.3"
     "@ts-bridge/cli": "npm:^0.5.1"
@@ -3409,7 +3425,7 @@ __metadata:
     "@metamask/eslint-config-jest": "npm:^14.0.0"
     "@metamask/eslint-config-nodejs": "npm:^14.0.0"
     "@metamask/eslint-config-typescript": "npm:^14.0.0"
-    "@metamask/utils": "npm:^11.3.0"
+    "@metamask/utils": "npm:^11.4.0"
     "@types/jest": "npm:^27.4.1"
     "@types/lodash": "npm:^4.14.191"
     "@types/node": "npm:^16.18.54"
@@ -3508,20 +3524,20 @@ __metadata:
     storybook: "npm:^8.5.3"
     tailwindcss: "npm:^3.0.0"
     typescript: "npm:~5.2.2"
-    vite: "npm:^5.4.12"
+    vite: "npm:^5.4.18"
   languageName: unknown
   linkType: soft
 
 "@metamask/superstruct@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@metamask/superstruct@npm:3.1.0"
-  checksum: 10/5066fe228d5f11da387606d7f9545de2b473ab5a9e0f1bb8aea2f52d3e2c9d25e427151acde61f4a2de80a07a9871fe9505ad06abca6a61b7c3b54ed5c403b01
+  version: 3.2.1
+  resolution: "@metamask/superstruct@npm:3.2.1"
+  checksum: 10/9e29380f2cf8b129283ccb2b568296d92682b705109ba62dbd7739ffd6a1982fe38c7228cdcf3cbee94dbcdd5fcc1c846ab9d1dd3582167154f914422fcff547
   languageName: node
   linkType: hard
 
-"@metamask/utils@npm:^11.3.0":
-  version: 11.3.0
-  resolution: "@metamask/utils@npm:11.3.0"
+"@metamask/utils@npm:^11.4.0":
+  version: 11.4.0
+  resolution: "@metamask/utils@npm:11.4.0"
   dependencies:
     "@ethereumjs/tx": "npm:^4.2.0"
     "@metamask/superstruct": "npm:^3.1.0"
@@ -3532,7 +3548,7 @@ __metadata:
     pony-cause: "npm:^2.1.10"
     semver: "npm:^7.5.4"
     uuid: "npm:^9.0.1"
-  checksum: 10/178367aaf608339cd7d6f9cb97e1cc01b58b03c55c0017e83ab8e08e66bcf061ee2f0dd867d4ed2a916cc03672f8dd0bb04b9ff79a0b43657e7d76bdbb2e72f2
+  checksum: 10/7c976268e944b542b5e936bae89f58a50eef58501bd3512944995c6d416cb1a7dd3f712aec8c7ca0969dcee889ab963b815fbc3e863dc80ccf16e9258eaec3ff
   languageName: node
   linkType: hard
 
@@ -20694,9 +20710,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.12":
-  version: 5.4.14
-  resolution: "vite@npm:5.4.14"
+"vite@npm:^5.4.18":
+  version: 5.4.18
+  resolution: "vite@npm:5.4.18"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -20733,7 +20749,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/ce382f4059eb6c939823b8f62163794752243755d84c71a4b73ad0f7d4d9f4c7a557a6ef4c78e0640f4bcf5ae5ec6b20c7ee4816419af3c81ba275f478b73468
+  checksum: 10/491f0d047695a4bb3aafdb30822a3638ac41c23b022c1599bf51beab26a7cffe3ef1617bdf014592da48864079f217da5bf144a6c3238d2d74dea688ba3a549a
   languageName: node
   linkType: hard
 

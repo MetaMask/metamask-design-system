@@ -132,6 +132,38 @@ export const colors: ThemeColors = {
     /** For elements placed on top of info/default (#FFFFFF) */
     inverse: brandColor.grey000,
   },
+  accent01: {
+    /** Expressive color in light orange (#ffa680) */
+    light: brandColor.orange200,
+    /** Expressive color in orange (#ff5c16) */
+    normal: brandColor.orange400,
+    /** Expressive color in dark orange (#661800) */
+    dark: brandColor.orange700,
+  },
+  accent02: {
+    /** Expressive color in light purple (#eac2ff) */
+    light: brandColor.purple100,
+    /** Expressive color in purple (#d075ff) */
+    normal: brandColor.purple300,
+    /** Expressive color in dark purple (#3d065f) */
+    dark: brandColor.purple800,
+  },
+  accent03: {
+    /** Expressive color in light lime (#e5ffc3) */
+    light: brandColor.lime050,
+    /** Expressive color in lime (#baf24a) */
+    normal: brandColor.lime100,
+    /** Expressive color in dark lime (#013330) */
+    dark: brandColor.lime700,
+  },
+  accent04: {
+    /** Expressive color in light indigo (#cce7ff) */
+    light: brandColor.indigo100,
+    /** Expressive color in indigo (#89b0ff) */
+    normal: brandColor.indigo200,
+    /** Expressive color in dark indigo (#190066) */
+    dark: brandColor.indigo800,
+  },
   flask: {
     /** For Flask primary accent color (#8F44E4) */
     default: brandColor.purple500,

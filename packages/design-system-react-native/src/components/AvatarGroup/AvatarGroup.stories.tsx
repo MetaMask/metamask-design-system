@@ -1,17 +1,15 @@
-import { ScrollView, View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { ScrollView, View } from 'react-native';
 
-import { AvatarGroupSize } from '../../shared/enums';
+import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import AvatarGroup from './AvatarGroup';
 import {
-  DEFAULT_AVATARGROUP_PROPS,
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
   SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR,
   SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
   SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
 } from './AvatarGroup.constants';
 import type { AvatarGroupProps } from './AvatarGroup.types';
-import { AvatarGroupVariant } from './AvatarGroup.types';
 
 const meta: Meta<AvatarGroupProps> = {
   title: 'Components/AvatarGroup',
@@ -84,9 +82,9 @@ const AvatarGroupStory: React.FC<Omit<AvatarGroupProps, 'avatarPropsArr'>> = ({
 export const Default: Story = {
   args: {
     variant: AvatarGroupVariant.Favicon,
-    size: DEFAULT_AVATARGROUP_PROPS.size,
-    max: DEFAULT_AVATARGROUP_PROPS.max,
-    isReverse: DEFAULT_AVATARGROUP_PROPS.isReverse,
+    size: AvatarGroupSize.Md,
+    max: 99,
+    isReverse: false,
     twClassName: '',
   },
   render: (args) => <AvatarGroupStory {...args} />,

@@ -1,21 +1,7 @@
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
+import { ButtonIconSize } from '../../types';
 import type { IconProps, IconName } from '../Icon';
-
-export enum ButtonIconSize {
-  /**
-   * Represents a small button size (24px).
-   */
-  Sm = '24',
-  /**
-   * Represents a medium button size (32px).
-   */
-  Md = '32',
-  /**
-   * Represents a large button size (40px).
-   */
-  Lg = '40',
-}
 
 /**
  * ButtonIcon component props.
