@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { AvatarGroupSize } from './AvatarGroup.types';
+import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import { AvatarGroup } from './AvatarGroup';
 import {
+  SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
   SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR,
   SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
   SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
 } from './AvatarGroup.constants';
 import type { AvatarGroupProps } from './AvatarGroup.types';
-import { AvatarGroupVariant } from './AvatarGroup.types';
 
 const meta: Meta<AvatarGroupProps> = {
   title: 'React Components/AvatarGroup',
@@ -52,6 +52,14 @@ const AvatarGroupStory: React.FC<Omit<AvatarGroupProps, 'avatarPropsArr'>> = ({
   ...props
 }) => {
   switch (variant) {
+    case AvatarGroupVariant.Account:
+      return (
+        <AvatarGroup
+          {...props}
+          variant={variant}
+          avatarPropsArr={SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR}
+        />
+      );
     case AvatarGroupVariant.Favicon:
       return (
         <AvatarGroup
@@ -94,7 +102,7 @@ export const Default: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <div style={{ gap: 16 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       {Object.keys(AvatarGroupVariant).map((variantKey) => (
         <AvatarGroupStory
           key={variantKey}
@@ -111,7 +119,19 @@ export const Sizes: Story = {
   render: () => (
     <div>
       {Object.keys(AvatarGroupSize).map((sizeKey) => (
-        <div key={sizeKey} style={{ gap: 4, marginBottom: 16 }}>
+        <div
+          key={sizeKey}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 4,
+            marginBottom: 16,
+          }}
+        >
+          <AvatarGroupStory
+            variant={AvatarGroupVariant.Account}
+            size={AvatarGroupSize[sizeKey as keyof typeof AvatarGroupSize]}
+          />
           <AvatarGroupStory
             variant={AvatarGroupVariant.Favicon}
             size={AvatarGroupSize[sizeKey as keyof typeof AvatarGroupSize]}
@@ -132,16 +152,48 @@ export const Sizes: Story = {
 
 export const IsReverse: Story = {
   render: () => (
-    <div style={{ gap: 16 }}>
-      <div style={{ gap: 4, alignItems: 'flex-start' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 4,
+          alignItems: 'flex-start',
+        }}
+      >
+        <AvatarGroupStory variant={AvatarGroupVariant.Account} />
+        <AvatarGroupStory variant={AvatarGroupVariant.Account} isReverse />
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 4,
+          alignItems: 'flex-start',
+        }}
+      >
         <AvatarGroupStory variant={AvatarGroupVariant.Favicon} />
         <AvatarGroupStory variant={AvatarGroupVariant.Favicon} isReverse />
       </div>
-      <div style={{ gap: 4, alignItems: 'flex-start' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 4,
+          alignItems: 'flex-start',
+        }}
+      >
         <AvatarGroupStory variant={AvatarGroupVariant.Network} />
         <AvatarGroupStory variant={AvatarGroupVariant.Network} isReverse />
       </div>
-      <div style={{ gap: 4, alignItems: 'flex-start' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 4,
+          alignItems: 'flex-start',
+        }}
+      >
         <AvatarGroupStory variant={AvatarGroupVariant.Token} />
         <AvatarGroupStory variant={AvatarGroupVariant.Token} isReverse />
       </div>

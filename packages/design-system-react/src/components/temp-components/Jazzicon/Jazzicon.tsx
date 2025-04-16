@@ -78,7 +78,13 @@ export const Jazzicon = ({ address, size = 32, ...props }: JazziconProps) => {
     };
   }, [address, size]);
 
-  return <div ref={containerRef} {...props} />;
+  return (
+    <div
+      ref={containerRef}
+      style={{ height: `${size}px`, width: `${size}px` }}
+      {...props}
+    />
+  );
 };
 
 Jazzicon.displayName = 'Jazzicon';

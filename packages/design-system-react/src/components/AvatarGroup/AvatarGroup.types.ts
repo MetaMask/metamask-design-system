@@ -1,40 +1,10 @@
 import type { ComponentProps } from 'react';
 
-import { AvatarFaviconProps } from '../avatar-favicon';
-import { AvatarNetworkProps } from '../avatar-network';
-import { AvatarTokenProps } from '../avatar-token';
-
-export enum AvatarGroupSize {
-  /**
-   * Extra small size (16px)
-   */
-  Xs = 'xs',
-  /**
-   * Small size (24px)
-   */
-  Sm = 'sm',
-  /**
-   * Medium size (32px)
-   */
-  Md = 'md',
-  /**
-   * Large size (40px)
-   */
-  Lg = 'lg',
-  /**
-   * Extra large size (48px)
-   */
-  Xl = 'xl',
-}
-
-/**
- * AvatarGroup variants.
- */
-export enum AvatarGroupVariant {
-  Favicon = 'Favicon',
-  Network = 'Network',
-  Token = 'Token',
-}
+import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
+import { AvatarAccountProps } from '../AvatarAccount';
+import { AvatarFaviconProps } from '../AvatarFavicon';
+import { AvatarNetworkProps } from '../AvatarNetwork';
+import { AvatarTokenProps } from '../AvatarToken';
 
 type BaseAvatarGroupProps = {
   /**
@@ -62,12 +32,6 @@ type BaseAvatarGroupProps = {
    * Should be used sparingly and only for dynamic styles that can't be achieved with className.
    */
   style?: React.CSSProperties;
-  /**
-   * Optional boolean that determines if the component should merge its props onto its immediate child
-   * instead of rendering a div element
-   * @default false
-   */
-  asChild?: boolean;
 } & ComponentProps<'div'>;
 
 /**
@@ -75,6 +39,14 @@ type BaseAvatarGroupProps = {
  */
 export type AvatarGroupProps = BaseAvatarGroupProps &
   (
+    | {
+        variant: AvatarGroupVariant.Account;
+        /**
+         * A list of Avatars to be horizontally stacked.
+         * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
+         */
+        avatarPropsArr: AvatarAccountProps[];
+      }
     | {
         variant: AvatarGroupVariant.Favicon;
         /**

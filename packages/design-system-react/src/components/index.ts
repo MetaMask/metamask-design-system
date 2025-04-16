@@ -11,6 +11,13 @@ export type { AvatarBaseProps } from './AvatarBase';
 export { AvatarFavicon, AvatarFaviconSize } from './AvatarFavicon';
 export type { AvatarFaviconProps } from './AvatarFavicon';
 
+export {
+  AvatarGroup,
+  AvatarGroupSize,
+  AvatarGroupVariant,
+} from './AvatarGroup';
+export type { AvatarGroupProps } from './AvatarGroup';
+
 export { AvatarIcon, AvatarIconSize, AvatarIconSeverity } from './AvatarIcon';
 export type { AvatarIconProps } from './AvatarIcon';
 

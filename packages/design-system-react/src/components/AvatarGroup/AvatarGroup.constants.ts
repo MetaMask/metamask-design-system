@@ -1,17 +1,17 @@
-import { AvatarGroupSize } from './AvatarGroup.types';
-import { TextVariant } from '../text';
-
-import { AvatarFaviconProps } from '../avatar-favicon';
-import { AvatarNetworkProps } from '../avatar-network';
-import { AvatarTokenProps } from '../avatar-token';
+import { AvatarGroupSize } from '../../types';
+import { TextVariant } from '../Text';
+import { AvatarAccountProps, AvatarAccountVariant } from '../AvatarAccount';
+import { AvatarFaviconProps } from '../AvatarFavicon';
+import { AvatarNetworkProps } from '../AvatarNetwork';
+import { AvatarTokenProps } from '../AvatarToken';
 
 // Mappings
 export const AVATAR_GROUP_SIZE_CLASS_MAP: Record<AvatarGroupSize, string> = {
-  [AvatarGroupSize.Xs]: 'h-4 w-4',
-  [AvatarGroupSize.Sm]: 'h-6 w-6',
-  [AvatarGroupSize.Md]: 'h-8 w-8',
-  [AvatarGroupSize.Lg]: 'h-10 w-10',
-  [AvatarGroupSize.Xl]: 'h-12 w-12',
+  [AvatarGroupSize.Xs]: 'h-[17px] w-[17px]', // 16px with 1px border
+  [AvatarGroupSize.Sm]: 'h-[25px] w-[25px]', // 24px with 1px border
+  [AvatarGroupSize.Md]: 'h-[33px] w-[33px]', // 32px with 1px border
+  [AvatarGroupSize.Lg]: 'h-[42px] w-[42px]', // 40px with 2px border
+  [AvatarGroupSize.Xl]: 'h-[50px] w-[50px]', // 48px with 2px border
 };
 
 export const AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP: Record<
@@ -25,15 +25,15 @@ export const AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP: Record<
   [AvatarGroupSize.Xl]: 'ml-[-22px]',
 };
 
-export const AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP_2: Record<
+export const AVATAR_GROUP_SIZE_ISREVERSE_NEGATIVESPACEBETWEENAVATARS_MAP: Record<
   AvatarGroupSize,
   string
 > = {
-  [AvatarGroupSize.Xs]: 'gap-[-6px]',
-  [AvatarGroupSize.Sm]: 'gap-[-10px]',
-  [AvatarGroupSize.Md]: 'gap-[-14px]',
-  [AvatarGroupSize.Lg]: 'gap-[-18px]',
-  [AvatarGroupSize.Xl]: 'gap-[-22px]',
+  [AvatarGroupSize.Xs]: 'mr-[-6px]',
+  [AvatarGroupSize.Sm]: 'mr-[-10px]',
+  [AvatarGroupSize.Md]: 'mr-[-14px]',
+  [AvatarGroupSize.Lg]: 'mr-[-18px]',
+  [AvatarGroupSize.Xl]: 'mr-[-22px]',
 };
 
 export const AVATAR_GROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT_MAP: Record<
@@ -59,6 +59,36 @@ export const AVATAR_GROUP_SQUARE_BORDER_RADIUS_MAP: Record<
 };
 
 // Sample consts
+export const SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR: AvatarAccountProps[] = [
+  {
+    variant: AvatarAccountVariant.Jazzicon,
+    address: '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8',
+  },
+  {
+    variant: AvatarAccountVariant.Blockies,
+    address: '0xb9b81f6bd23B953c5257C3b5E2F0c03B07E944eB',
+  },
+  {
+    variant: AvatarAccountVariant.Jazzicon,
+    address: '0x360507dfEC4Bf0c03495f91154A78C672599F308',
+  },
+  {
+    variant: AvatarAccountVariant.Jazzicon,
+    address: '0x50cA820Ff810F7687E7d0aDb23A830e3ac6032C3',
+  },
+  {
+    variant: AvatarAccountVariant.Jazzicon,
+    address: '0x840C9Eb73729E626673714D6E4dA8afc8Ccc90d3',
+  },
+  {
+    variant: AvatarAccountVariant.Blockies,
+    address: '0xCA0361BE89B7d47a6233d1875F0727ddeAB23377',
+  },
+  {
+    variant: AvatarAccountVariant.Blockies,
+    address: '0xD78CBcA88eCd65c6128511e46a518CDc6c66fC74',
+  },
+];
 export const SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR: AvatarFaviconProps[] = [
   {
     name: 'Metamask',
