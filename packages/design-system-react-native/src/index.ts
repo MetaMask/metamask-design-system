@@ -94,6 +94,10 @@ import JazziconComponent from './components/temp-components/Jazzicon';
 export const Jazzicon = JazziconComponent;
 export { JazziconProps } from './components/temp-components/Jazzicon';
 
+import MaskiconComponent from './components/temp-components/Maskicon';
+export const Maskicon = MaskiconComponent;
+export { MaskiconProps } from './components/temp-components/Maskicon';
+
 import TextButtonComponent from './components/TextButton';
 export const TextButton = withThemeProvider(TextButtonComponent);
 export { TextButtonProps } from './components/TextButton';
