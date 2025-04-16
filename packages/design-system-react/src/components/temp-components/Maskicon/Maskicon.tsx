@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import React, { useEffect, useState } from 'react';
 
 import { MaskiconProps } from './Maskicon.types';
@@ -31,7 +32,7 @@ export const Maskicon = ({
   return (
     <div
       style={{ width: size, height: size, ...style }}
-      dangerouslySetInnerHTML={{ __html: svgString }}
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(svgString) }}
       {...props}
     />
   );
