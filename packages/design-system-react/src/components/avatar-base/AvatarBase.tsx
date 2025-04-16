@@ -6,6 +6,7 @@ import { twMerge } from '../../utils/tw-merge';
 import { Text, FontWeight, TextVariant, TextColor } from '../text';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
+  TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
 } from './AvatarBase.constants';
@@ -38,7 +39,9 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
       'bg-muted',
       'overflow-hidden',
       // Size
-      TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size],
+      hasBorder
+        ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size]
+        : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size],
       // Border
       hasBorder && TWCLASSMAP_AVATARBASE_SIZE_BORDER[size],
       // Custom classes
