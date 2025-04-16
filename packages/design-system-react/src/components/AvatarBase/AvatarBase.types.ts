@@ -46,4 +46,10 @@ export type AvatarBaseProps = ComponentProps<'div'> & {
    * @default AvatarBaseShape.Circle
    */
   shape?: AvatarBaseShape;
+  /**
+   * Optional prop to include the border with the Avatar.
+   * For internal use only
+   * @default false
+   */
+  hasBorder?: boolean;
 };

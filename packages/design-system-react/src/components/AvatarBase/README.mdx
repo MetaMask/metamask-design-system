@@ -4,7 +4,7 @@ import * as AvatarBaseStories from './AvatarBase.stories';
 
 # AvatarBase
 
-The AvatarBase is the base component for avatars
+The `AvatarBase` is the base component for avatars.
 
 ```tsx
 import { AvatarBase } from '@metamask/design-system-react';
@@ -35,13 +35,13 @@ AvatarBase supports five sizes:
 - `AvatarBaseSize.Lg` (40px)
 - `AvatarBaseSize.Xl` (48px)
 
-The fallback text uses TextVariant.BodySm for all sizes to maintain consistency.
+The fallback text uses `TextVariant.BodySm` for all sizes to maintain consistency.
 
 <Canvas of={AvatarBaseStories.Size} />
 
 ### Fallback Text
 
-The `fallbackText` prop provides a simple way to display text within the avatar. The text uses TextVariant.BodySm for consistent sizing across all avatar sizes.
+The `fallbackText` prop provides a simple way to display text within the avatar. The text uses `TextVariant.BodySm` for consistent sizing across all avatar sizes.
 
 <Canvas of={AvatarBaseStories.FallbackText} />
 
@@ -51,9 +51,15 @@ You can customize the appearance of the fallback text using `fallbackTextProps`:
 
 ### Children
 
-While `fallbackText` is the recommended way to display text, AvatarBase can also contain custom content like images and icons:
+While `fallbackText` is the recommended way to display text, `AvatarBase` can also contain custom content like images and icons:
 
 <Canvas of={AvatarBaseStories.Children} />
+
+### Has Border
+
+The `hasBorder` prop enables a border around the AvatarBase.
+
+<Canvas of={AvatarBaseStories.HasBorder} />
 
 ### Class Name
 
@@ -78,7 +84,7 @@ Example:
 
 ### Style
 
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
 ## Component API
 

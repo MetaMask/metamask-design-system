@@ -76,6 +76,12 @@ The fallback text uses TextVariant.BodySm for all sizes to maintain consistency.
 
 <Canvas of={AvatarNetworkStories.Size} />
 
+### Has Border
+
+The `hasBorder` prop enables a border around the AvatarNetwork.
+
+<Canvas of={AvatarNetworkStories.HasBorder} />
+
 ### Class Name
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default
@@ -95,6 +101,10 @@ Example:
   className="my-4 mx-2"
 />
 ```
+
+### Style
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
 ## Component API
 

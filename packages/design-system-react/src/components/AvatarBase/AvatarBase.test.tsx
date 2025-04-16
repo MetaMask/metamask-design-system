@@ -5,15 +5,14 @@ import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { TextColor } from '../Text';
 import { AvatarBase } from './AvatarBase';
 import {
-  AVATAR_BASE_SIZE_CLASS_MAP,
-  AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP,
+  TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
 } from './AvatarBase.constants';
 
 describe('AvatarBase', () => {
   it('renders with default styles', () => {
-    render(<AvatarBase fallbackText="A" data-testid="avatar" />);
+    render(<AvatarBase fallbackText="A" />);
 
-    const avatar = screen.getByTestId('avatar');
     expect(screen.getByText('A')).toBeInTheDocument();
   });
 
@@ -26,20 +25,28 @@ describe('AvatarBase', () => {
       />,
     );
 
-    Object.entries(AVATAR_BASE_SIZE_CLASS_MAP).forEach(([size, classes]) => {
-      rerender(
-        <AvatarBase
-          size={size as AvatarBaseSize}
-          fallbackText="A"
-          data-testid="avatar"
-        />,
-      );
-      const avatar = screen.getByTestId('avatar');
-      const classArray = classes.split(' ');
-      classArray.forEach((className) => {
-        expect(avatar).toHaveClass(className);
-      });
-    });
+    Object.entries(TWCLASSMAP_AVATARBASE_SIZE_DIMENSION).forEach(
+      ([size, classes]) => {
+        rerender(
+          <AvatarBase
+            size={size as AvatarBaseSize}
+            fallbackText="A"
+            data-testid="avatar"
+          />,
+        );
+        const avatar = screen.getByTestId('avatar');
+        const classArray = classes.split(' ');
+        classArray.forEach((className) => {
+          expect(avatar).toHaveClass(className);
+        });
+      },
+    );
+  });
+
+  it('renders with border when hasBorder is true', () => {
+    render(<AvatarBase fallbackText="A" hasBorder data-testid="avatar" />);
+    const avatar = screen.getByTestId('avatar');
+    expect(avatar).toHaveClass('border-background-default');
   });
 
   it('renders children correctly', () => {
@@ -99,8 +106,7 @@ describe('AvatarBase', () => {
       />,
     );
 
-    let avatar = screen.getByTestId('avatar');
-    expect(avatar).toHaveClass('rounded-full');
+    expect(screen.getByTestId('avatar')).toHaveClass('rounded-full');
 
     rerender(
       <AvatarBase
@@ -110,8 +116,7 @@ describe('AvatarBase', () => {
         data-testid="avatar"
       />,
     );
-    avatar = screen.getByTestId('avatar');
-    expect(avatar).toHaveClass('rounded-lg');
+    expect(screen.getByTestId('avatar')).toHaveClass('rounded-lg');
   });
 
   it('applies correct border radius for all square sizes', () => {
@@ -125,7 +130,7 @@ describe('AvatarBase', () => {
     );
 
     // Test all sizes
-    Object.entries(AVATAR_BASE_SQUARE_BORDER_RADIUS_MAP).forEach(
+    Object.entries(TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE).forEach(
       ([size, borderRadiusClass]) => {
         rerender(
           <AvatarBase

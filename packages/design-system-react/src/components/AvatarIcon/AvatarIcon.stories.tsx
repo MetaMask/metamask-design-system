@@ -44,6 +44,10 @@ const meta: Meta<typeof AvatarIcon> = {
       description:
         'Optional additional CSS classes to be applied to the component',
     },
+    hasBorder: {
+      control: 'boolean',
+      description: 'Optional prop to add a border around the AvatarIcon',
+    },
   },
 };
 
@@ -99,6 +103,22 @@ export const Severity: Story = {
       <AvatarIcon
         iconName={IconName.Danger}
         severity={AvatarIconSeverity.Error}
+      />
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarIcon
+        iconName={IconName.User}
+        severity={AvatarIconSeverity.Default}
+      />
+      <AvatarIcon
+        iconName={IconName.User}
+        severity={AvatarIconSeverity.Default}
+        hasBorder
       />
     </div>
   ),

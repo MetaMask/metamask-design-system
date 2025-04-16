@@ -51,6 +51,10 @@ const meta: Meta<typeof AvatarNetwork> = {
       description:
         'Optional additional CSS classes to be applied to the component',
     },
+    hasBorder: {
+      control: 'boolean',
+      description: 'Optional prop to add a border around the AvatarNetwork',
+    },
   },
 };
 
@@ -140,6 +144,22 @@ export const Size: Story = {
         name="Ethereum"
         fallbackText="ETH"
         size={AvatarNetworkSize.Xl}
+      />
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarNetwork
+        name="Ethereum"
+        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+      />
+      <AvatarNetwork
+        name="Ethereum"
+        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+        hasBorder
       />
     </div>
   ),

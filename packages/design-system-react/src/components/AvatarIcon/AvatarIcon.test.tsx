@@ -5,7 +5,10 @@ import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconName } from '../Icon';
 import { ICON_SIZE_CLASS_MAP } from '../Icon/Icon.constants';
 import { AvatarIcon } from './AvatarIcon';
-import { AVATAR_ICON_SEVERITY_CLASSNAME_MAP } from './AvatarIcon.constants';
+import {
+  TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
+  MAP_AVATARICON_SEVERITY_ICONCOLOR,
+} from './AvatarIcon.constants';
 
 describe('AvatarIcon', () => {
   it('renders with default props', () => {
@@ -15,7 +18,9 @@ describe('AvatarIcon', () => {
     const avatarIcon = screen.getByTestId('avatar-icon');
     expect(avatarIcon).toBeInTheDocument();
     expect(avatarIcon).toHaveClass(
-      AVATAR_ICON_SEVERITY_CLASSNAME_MAP[AvatarIconSeverity.Default].background,
+      TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[
+        AvatarIconSeverity.Default
+      ],
     );
   });
 
@@ -60,11 +65,9 @@ describe('AvatarIcon', () => {
         const avatarIcon = screen.getByTestId('avatar-icon');
         const icon = screen.getByTestId('icon');
         expect(avatarIcon).toHaveClass(
-          AVATAR_ICON_SEVERITY_CLASSNAME_MAP[severity].background,
+          TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity],
         );
-        expect(icon).toHaveClass(
-          AVATAR_ICON_SEVERITY_CLASSNAME_MAP[severity].iconColor,
-        );
+        expect(icon).toHaveClass(MAP_AVATARICON_SEVERITY_ICONCOLOR[severity]);
       });
     });
   });
