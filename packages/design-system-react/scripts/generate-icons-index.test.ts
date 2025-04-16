@@ -51,7 +51,7 @@ describe('generateIconsIndex', () => {
         const filePath = path.toString();
         if (filePath.includes('/src/types/index.ts')) {
           mockFiles['types-index.ts'] = content;
-        } else if (filePath.includes('/src/components/icon/icons/index.ts')) {
+        } else if (filePath.includes('/src/components/Icon/icons/index.ts')) {
           mockFiles['icons-index.ts'] = content;
         }
         return undefined;
@@ -83,7 +83,7 @@ export type IconsType = typeof Icons;
 `;
 
     expect(mockedFs.writeFile).toHaveBeenCalledWith(
-      expect.stringContaining('/src/components/icon/icons/index.ts'),
+      expect.stringContaining('/src/components/Icon/icons/index.ts'),
       expectedIndexContent,
     );
   });
@@ -115,7 +115,7 @@ export type IconsType = typeof Icons;
 
     const writeFileCalls = mockedFs.writeFile.mock.calls;
     const iconsIndexFileCall = writeFileCalls.find((call) =>
-      call[0].toString().includes('/src/components/icon/icons/index.ts'),
+      call[0].toString().includes('/src/components/Icon/icons/index.ts'),
     );
     const iconsIndexFileContent = iconsIndexFileCall?.[1] as string;
 

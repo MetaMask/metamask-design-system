@@ -1,6 +1,6 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 
 import { ButtonIconSize } from '../../types';
 import { IconName } from '../Icon';

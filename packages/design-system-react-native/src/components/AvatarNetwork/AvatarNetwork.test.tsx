@@ -1,5 +1,5 @@
-import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
+import React from 'react';
 
 import AvatarNetwork from './AvatarNetwork';
 

@@ -7,14 +7,14 @@ import {
   AvatarBaseShape,
   AvatarIconSeverity,
 } from '../../types';
-import AvatarBase from '../../primitives/AvatarBase';
+import AvatarBase from '../AvatarBase';
+import Icon from '../Icon';
 import {
   MAP_AVATARICON_SIZE_ICONSIZE,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,
 } from './AvatarIcon.constants';
 import type { AvatarIconProps } from './AvatarIcon.types';
 import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
-import Icon from '../Icon';
 
 const AvatarIcon = ({
   size = AvatarIconSize.Md,

@@ -2,7 +2,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 
 /** Path to the directory containing icon components */
-const ICONS_DIR = path.join(__dirname, '../src/components/icon/icons');
+const ICONS_DIR = path.join(__dirname, '../src/components/Icon/icons');
 /** Path to the Icon types definition file */
 const TYPES_FILE = path.join(__dirname, '../src/types/index.ts');
 

@@ -1,6 +1,6 @@
-import React from 'react';
-import { render } from '@testing-library/react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render } from '@testing-library/react-native';
+import React from 'react';
 
 import { BadgeCountSize } from '../../types';
 import Text, { TextColor, FontWeight } from '../Text';

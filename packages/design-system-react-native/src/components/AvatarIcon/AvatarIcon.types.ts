@@ -1,6 +1,6 @@
-import { AvatarBaseProps } from '../../primitives/AvatarBase';
-import { IconName, IconProps } from '../Icon';
 import { AvatarIconSeverity } from '../../types';
+import { AvatarBaseProps } from '../AvatarBase';
+import { IconName, IconProps } from '../Icon';
 
 /**
  * AvatarIcon component props.

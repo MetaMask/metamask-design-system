@@ -1,5 +1,5 @@
-import { AvatarBaseProps } from '../../primitives/AvatarBase';
 import { AvatarAccountVariant } from '../../types';
+import { AvatarBaseProps } from '../AvatarBase';
 
 /**
  * AvatarAccount component props.

@@ -1,12 +1,12 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
-import { MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS } from './AvatarGroup.constants';
-import type { AvatarGroupProps } from './AvatarGroup.types';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
   MAP_AVATARBASE_SIZE_BORDERWIDTH,
-} from '../../primitives/AvatarBase/AvatarBase.constants';
+} from '../AvatarBase/AvatarBase.constants';
+import { MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS } from './AvatarGroup.constants';
+import type { AvatarGroupProps } from './AvatarGroup.types';
 
 /**
  * Generates a Tailwind class name string for the container of an avatar group.

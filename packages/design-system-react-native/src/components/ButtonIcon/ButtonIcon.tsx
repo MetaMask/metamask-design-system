@@ -4,9 +4,9 @@ import React, { useMemo, useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import { ButtonIconSize } from '../../types';
-import ButtonAnimated from '../../primitives/ButtonAnimated';
-import type { IconProps } from '../Icon';
 import Icon from '../Icon';
+import type { IconProps } from '../Icon';
+import ButtonAnimated from '../temp-components/ButtonAnimated';
 import {
   DEFAULT_BUTTONICON_PROPS,
   MAPPING_BUTTONICONSIZE_ICONSIZE,
@@ -18,7 +18,7 @@ import {
 } from './ButtonIcon.utilities';
 
 const ButtonIcon = ({
-  size = DEFAULT_BUTTONICON_PROPS.size,
+  size = ButtonIconSize.Md,
   iconName,
   iconProps,
   isDisabled = DEFAULT_BUTTONICON_PROPS.isDisabled,
@@ -51,7 +51,7 @@ const ButtonIcon = ({
 
   const finalIconProps: Partial<IconProps> = {
     color: twIconColorClassNames,
-    size: MAPPING_BUTTONICONSIZE_ICONSIZE[size as ButtonIconSize],
+    size: MAPPING_BUTTONICONSIZE_ICONSIZE[size],
     ...iconProps,
   };
   const onPressInHandler = (event: GestureResponderEvent) => {

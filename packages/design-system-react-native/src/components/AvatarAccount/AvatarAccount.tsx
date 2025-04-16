@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React from 'react';
 
-import { AvatarAccountVariant } from '../../types';
-import AvatarBase from '../../primitives/AvatarBase';
-import { AvatarAccountSize, AvatarBaseShape } from '../../types/';
-import Jazzicon from '../../primitives/Jazzicon';
-import Blockies from '../../primitives/Blockies';
+import {
+  AvatarAccountSize,
+  AvatarBaseShape,
+  AvatarAccountVariant,
+} from '../../types';
+import AvatarBase from '../AvatarBase';
+import Blockies from '../temp-components/Blockies';
+import Jazzicon from '../temp-components/Jazzicon';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 
 const AvatarAccount = ({

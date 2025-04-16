@@ -2,9 +2,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { Text as RNText } from 'react-native';
 
+import { FontWeight, FontFamily, FontStyle } from '../../types';
 import { DEFAULT_TEXT_COLOR, DEFAULT_TEXT_VARIANT } from './Text.constants';
 import type { TextProps } from './Text.types';
-import { FontWeight, FontFamily, FontStyle } from '../../types';
 import { generateTextClassNames } from './Text.utilities';
 
 const Text: React.FC<TextProps> = ({

@@ -1,5 +1,5 @@
-import { AvatarBaseProps } from '../../primitives/AvatarBase';
-import { ImageOrSvgProps } from '../../primitives/ImageOrSvg';
+import { AvatarBaseProps } from '../AvatarBase';
+import { ImageOrSvgProps } from '../temp-components/ImageOrSvg';
 
 /**
  * AvatarToken component props.
