@@ -22,7 +22,7 @@ export const TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION: Record<
   [AvatarBaseSize.Xl]: 'h-[50px] w-[50px]', // 48px with 2px border
 };
 
-export const TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE: Record<
+export const TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE: Record<
   AvatarBaseSize,
   string
 > = {

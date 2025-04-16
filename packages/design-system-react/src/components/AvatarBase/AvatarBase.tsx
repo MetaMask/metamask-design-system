@@ -7,7 +7,7 @@ import { Text, FontWeight, TextVariant, TextColor } from '../Text';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
-  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
 } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
@@ -35,7 +35,7 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
       'inline-flex items-center justify-center',
       shape === AvatarBaseShape.Circle
         ? 'rounded-full'
-        : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE[size],
+        : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size],
       'bg-muted',
       'overflow-hidden',
       // Size
