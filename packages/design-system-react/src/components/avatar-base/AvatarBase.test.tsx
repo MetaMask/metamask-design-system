@@ -6,7 +6,7 @@ import { TextColor } from '../text';
 import { AvatarBase } from './AvatarBase';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
-  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
 } from './AvatarBase.constants';
 
 describe('AvatarBase', () => {
@@ -130,7 +130,7 @@ describe('AvatarBase', () => {
     );
 
     // Test all sizes
-    Object.entries(TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_QUARE).forEach(
+    Object.entries(TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE).forEach(
       ([size, borderRadiusClass]) => {
         rerender(
           <AvatarBase

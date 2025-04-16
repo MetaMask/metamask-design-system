@@ -55,6 +55,12 @@ While `fallbackText` is the recommended way to display text, `AvatarBase` can al
 
 <Canvas of={AvatarBaseStories.Children} />
 
+### Has Border
+
+The `hasBorder` prop enables a border around the AvatarBase.
+
+<Canvas of={AvatarBaseStories.HasBorder} />
+
 ### Class Name
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
@@ -79,16 +85,6 @@ Example:
 ### Style
 
 The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
-
-### Border
-
-The `hasBorder` prop enables a border around the avatar.
-
-```tsx
-<AvatarBase fallbackText="A" hasBorder />
-```
-
-<Canvas of={AvatarBaseStories.HasBorder} />
 
 ## Component API
 
