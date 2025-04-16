@@ -51,6 +51,10 @@ const meta: Meta<typeof AvatarFavicon> = {
       description:
         'Optional additional CSS classes to be applied to the component',
     },
+    hasBorder: {
+      control: 'boolean',
+      description: 'Optional prop to add a border around the AvatarFavicon',
+    },
   },
 };
 
@@ -137,6 +141,22 @@ export const Size: Story = {
         name="OpenSea"
         fallbackText="OS"
         size={AvatarFaviconSize.Xl}
+      />
+    </div>
+  ),
+};
+
+export const HasBorder: Story = {
+  render: () => (
+    <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarFavicon
+        name="OpenSea"
+        src="https://opensea.io/static/images/favicon/favicon.ico"
+      />
+      <AvatarFavicon
+        name="OpenSea"
+        src="https://opensea.io/static/images/favicon/favicon.ico"
+        hasBorder
       />
     </div>
   ),
