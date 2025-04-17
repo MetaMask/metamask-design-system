@@ -3,21 +3,23 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
 
+import { ButtonBaseSize } from '../../types';
 import Icon from '../Icon';
 import type { IconProps } from '../Icon';
+import { IconColor, IconSize } from '../Icon';
 import ButtonAnimated from '../temp-components/ButtonAnimated';
 import type { SpinnerProps } from '../temp-components/Spinner';
 import Spinner from '../temp-components/Spinner';
 import TextOrChildren from '../temp-components/TextOrChildren/TextOrChildren';
 import type { TextProps } from '../Text';
-import { DEFAULT_BUTTONBASE_PROPS } from './ButtonBase.constants';
+import { TextVariant, FontWeight, TextColor } from '../Text';
 import type { ButtonBaseProps } from './ButtonBase.types';
 import { generateButtonBaseContainerClassNames } from './ButtonBase.utilities';
 
 const ButtonBase = ({
   children,
   textProps,
-  size = DEFAULT_BUTTONBASE_PROPS.size,
+  size = ButtonBaseSize.Lg,
   isLoading,
   loadingText,
   spinnerProps,
@@ -45,23 +47,29 @@ const ButtonBase = ({
   }, [size, twClassName, isLoading, isDisabled, isFullWidth]);
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
-    ...DEFAULT_BUTTONBASE_PROPS.textProps,
+    variant: TextVariant.BodyMd,
+    fontWeight: FontWeight.Medium,
+    color: TextColor.TextDefault,
+    numberOfLines: 1,
+    ellipsizeMode: 'clip',
     ...textProps,
   };
   const finalStartIconName = startIconName ?? startIconProps?.name;
   const finalStartIconProps: Partial<IconProps> = {
-    ...DEFAULT_BUTTONBASE_PROPS.startIconProps,
+    size: IconSize.Sm,
+    testID: 'start-icon',
     ...startIconProps,
   };
 
   const finalEndIconName = endIconName ?? endIconProps?.name;
   const finalEndIconProps: Partial<IconProps> = {
-    ...DEFAULT_BUTTONBASE_PROPS.endIconProps,
+    size: IconSize.Sm,
+    testID: 'end-icon',
     ...endIconProps,
   };
 
   const finalSpinnerProps: SpinnerProps = {
-    ...DEFAULT_BUTTONBASE_PROPS.spinnerProps,
+    color: IconColor.IconDefault,
     loadingText,
     loadingTextProps: {
       numberOfLines: 1,

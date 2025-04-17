@@ -1,6 +1,6 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
-import { DEFAULT_BUTTONBASE_PROPS } from './ButtonBase.constants';
+import { ButtonBaseSize } from '../../types';
 import type { ButtonBaseProps } from './ButtonBase.types';
 
 /**
@@ -29,7 +29,7 @@ import type { ButtonBaseProps } from './ButtonBase.types';
  * ```
  */
 export const generateButtonBaseContainerClassNames = ({
-  size = DEFAULT_BUTTONBASE_PROPS.size,
+  size = ButtonBaseSize.Lg,
   isDisabled,
   isFullWidth,
   twClassName = '',

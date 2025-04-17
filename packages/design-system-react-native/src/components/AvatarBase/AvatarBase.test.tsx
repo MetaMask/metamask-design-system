@@ -4,7 +4,6 @@ import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import Text from '../Text';
 import AvatarBase from './AvatarBase';
 import {
-  DEFAULT_AVATARBASE_PROPS,
   TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
   MAP_AVATARBASE_SIZE_BORDERWIDTH,
 } from './AvatarBase.constants';
@@ -18,8 +17,8 @@ describe('AvatarBase', () => {
         'items-center justify-center overflow-hidden',
       );
       expect(classNames).toContain('bg-transparent'); // Default hasSolidBackgroundColor = false
-      expect(classNames).toContain(`h-[${DEFAULT_AVATARBASE_PROPS.size}px]`);
-      expect(classNames).toContain(`w-[${DEFAULT_AVATARBASE_PROPS.size}px]`);
+      expect(classNames).toContain(`h-[${AvatarBaseSize.Md}px]`);
+      expect(classNames).toContain(`w-[${AvatarBaseSize.Md}px]`);
       expect(classNames).toContain('rounded-full'); // Default shape
       expect(classNames).not.toContain('border'); // No border by default
     });
