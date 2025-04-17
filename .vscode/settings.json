@@ -1,9 +1,14 @@
 {
-  "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#4459ff",
-    "titleBar.activeForeground": "#fff",
-    "titleBar.inactiveBackground": "#4459ff1a",
-    "titleBar.inactiveForeground": "#858b9a",
-    "activityBar.activeBorder": "#4459ff"
-  }
+  "tailwindCSS.experimental.configFile": {
+    "apps/storybook-react/tailwind.config.js": "packages/design-system-react/src/**",
+    "packages/design-system-twrnc-preset/tailwind.config.js": "packages/design-system-react-native/src/**"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.classFunctions": ["tw", "tw`", "twClassName", "twMerge"],
+  "tailwindCSS.validate": true
 }

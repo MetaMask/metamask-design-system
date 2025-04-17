@@ -1,8 +1,8 @@
-// Polyfill TextEncoder for JSDOM (Node < 18)
-if (typeof TextEncoder === 'undefined') {
-  // @ts-ignore
-  global.TextEncoder = require('util').TextEncoder;
-}
+import React from 'react';
+import { render, screen, waitFor, act } from '@testing-library/react';
+import { Jazzicon } from './Jazzicon';
+import * as utilities from './Jazzicon.utilities';
+import { KnownCaipNamespace, stringToBytes } from '@metamask/utils';
 
 // Mock the external dependency for Bitcoin address validation.
 jest.mock('bitcoin-address-validation', () => ({
@@ -17,11 +17,11 @@ jest.mock('bitcoin-address-validation', () => ({
   },
 }));
 
-import React from 'react';
-import { render, screen, waitFor, act } from '@testing-library/react';
-import { Jazzicon } from './Jazzicon';
-import * as utilities from './Jazzicon.utilities';
-import { KnownCaipNamespace, stringToBytes } from '@metamask/utils';
+// Polyfill TextEncoder for JSDOM (Node < 18)
+if (typeof TextEncoder === 'undefined') {
+  // @ts-ignore
+  global.TextEncoder = require('util').TextEncoder;
+}
 
 describe('Jazzicon', () => {
   describe('Jazzicon utilities', () => {

@@ -3,6 +3,7 @@ import React from 'react';
 
 import { AvatarTokenSize } from '../../types';
 import { AvatarToken } from './AvatarToken';
+import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.constants';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarToken> = {
@@ -63,9 +64,9 @@ type Story = StoryObj<typeof AvatarToken>;
 
 export const Default: Story = {
   args: {
-    src: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
-    name: 'Ethereum',
-    fallbackText: 'ETH',
+    src: SAMPLE_AVATARTOKEN_URIS[0],
+    name: 'Bitcoin',
+    fallbackText: 'BTC',
   },
 };
 
@@ -73,19 +74,19 @@ export const Src: Story = {
   render: () => (
     <div className="flex gap-2">
       <AvatarToken
-        name="Ethereum"
-        fallbackText="ETH"
-        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
-      />
-      <AvatarToken
         name="Bitcoin"
         fallbackText="BTC"
-        src="https://cryptologos.cc/logos/bitcoin-btc-logo.png"
+        src={SAMPLE_AVATARTOKEN_URIS[0]}
       />
       <AvatarToken
-        name="USDC"
-        fallbackText="USDC"
-        src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png"
+        name="Ethereum"
+        fallbackText="ETH"
+        src={SAMPLE_AVATARTOKEN_URIS[1]}
+      />
+      <AvatarToken
+        name="Floki"
+        fallbackText="FLOKI"
+        src={SAMPLE_AVATARTOKEN_URIS[2]}
       />
     </div>
   ),
@@ -94,14 +95,8 @@ export const Src: Story = {
 export const Name: Story = {
   render: () => (
     <div className="flex gap-2">
-      <AvatarToken
-        name="Ethereum"
-        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
-      />
-      <AvatarToken
-        name="Bitcoin"
-        src="https://cryptologos.cc/logos/bitcoin-btc-logo.png"
-      />
+      <AvatarToken name="Bitcoin" src={SAMPLE_AVATARTOKEN_URIS[0]} />
+      <AvatarToken name="Ethereum" src={SAMPLE_AVATARTOKEN_URIS[1]} />
       <AvatarToken name="USDC" />
     </div>
   ),
@@ -149,14 +144,14 @@ export const HasBorder: Story = {
   render: () => (
     <div className="flex gap-2 p-2 bg-primary-muted">
       <AvatarToken
-        name="Ethereum"
-        fallbackText="ETH"
-        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+        name="Bitcoin"
+        fallbackText="BTC"
+        src={SAMPLE_AVATARTOKEN_URIS[0]}
       />
       <AvatarToken
         name="Ethereum"
         fallbackText="ETH"
-        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+        src={SAMPLE_AVATARTOKEN_URIS[1]}
         hasBorder
       />
     </div>
