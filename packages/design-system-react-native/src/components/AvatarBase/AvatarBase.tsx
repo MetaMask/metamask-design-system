@@ -42,7 +42,7 @@ const AvatarBase = ({
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
           {...fallbackTextProps}
-          twClassName={`uppercase ${fallbackTextProps?.twClassName}`.trim()}
+          twClassName={`uppercase ${fallbackTextProps?.twClassName ? ` ${fallbackTextProps.twClassName}` : ''}`.trim()}
         >
           {fallbackText}
         </Text>

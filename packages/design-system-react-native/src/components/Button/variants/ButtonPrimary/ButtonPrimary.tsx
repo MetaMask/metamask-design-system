@@ -11,7 +11,7 @@ import type { IconProps } from '../../../Icon';
 import { IconColor, IconSize } from '../../../Icon';
 import type { SpinnerProps } from '../../../temp-components/Spinner';
 import type { TextProps } from '../../../Text/Text.types';
-import { TextVariant, FontWeight, TextColor } from '../../../Text';
+import { TextVariant, FontWeight } from '../../../Text';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 import {
   generateButtonPrimaryContainerClassNames,
@@ -59,14 +59,12 @@ const ButtonPrimaryBase = ({
     fontWeight: FontWeight.Medium,
     numberOfLines: 1,
     ellipsizeMode: 'clip',
-    color: TextColor.PrimaryInverse,
     ...textProps,
     twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
   };
   const finalStartIconProps: Partial<IconProps> = {
     size: IconSize.Sm,
     testID: 'start-icon',
-    color: IconColor.PrimaryInverse,
     ...startIconProps,
     twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };
@@ -74,7 +72,6 @@ const ButtonPrimaryBase = ({
   const finalEndIconProps: Partial<IconProps> = {
     size: IconSize.Sm,
     testID: 'end-icon',
-    color: IconColor.PrimaryInverse,
     ...endIconProps,
     twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };

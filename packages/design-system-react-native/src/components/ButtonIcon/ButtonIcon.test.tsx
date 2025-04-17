@@ -2,8 +2,8 @@ import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
 import { ButtonIconSize } from '../../types';
+import { IconName } from '../Icon';
 import ButtonIcon from './ButtonIcon';
-import { DEFAULT_BUTTONICON_PROPS } from './ButtonIcon.constants';
 import {
   generateButtonIconContainerClassNames,
   generateButtonIconIconColorClassNames,
@@ -15,12 +15,8 @@ describe('ButtonIcon', () => {
       const classNames = generateButtonIconContainerClassNames({});
       expect(classNames).toContain('items-center justify-center');
       expect(classNames).toContain('rounded-sm');
-      expect(classNames).toContain(
-        `h-[${DEFAULT_BUTTONICON_PROPS.size as ButtonIconSize}px]`,
-      );
-      expect(classNames).toContain(
-        `w-[${DEFAULT_BUTTONICON_PROPS.size as ButtonIconSize}px]`,
-      );
+      expect(classNames).toContain(`h-[${ButtonIconSize.Md}px]`);
+      expect(classNames).toContain(`w-[${ButtonIconSize.Md}px]`);
       expect(classNames).toContain('bg-transparent');
       expect(classNames).toContain('opacity-100');
     });
@@ -117,9 +113,7 @@ describe('ButtonIcon', () => {
   });
   describe('ButtonIcon component', () => {
     it('renders with default props', () => {
-      const { getByTestId } = render(
-        <ButtonIcon iconName={DEFAULT_BUTTONICON_PROPS.iconName} />,
-      );
+      const { getByTestId } = render(<ButtonIcon iconName={IconName.Close} />);
       const button = getByTestId('button-icon');
       expect(button).toBeDefined();
     });
@@ -128,7 +122,7 @@ describe('ButtonIcon', () => {
       const onPressMock = jest.fn();
       const { getByTestId } = render(
         <ButtonIcon
-          iconName={DEFAULT_BUTTONICON_PROPS.iconName}
+          iconName={IconName.Close}
           isDisabled
           onPress={onPressMock}
         />,
@@ -142,10 +136,7 @@ describe('ButtonIcon', () => {
     it('calls `onPress` when pressed (and not disabled)', () => {
       const onPressMock = jest.fn();
       const { getByTestId } = render(
-        <ButtonIcon
-          iconName={DEFAULT_BUTTONICON_PROPS.iconName}
-          onPress={onPressMock}
-        />,
+        <ButtonIcon iconName={IconName.Close} onPress={onPressMock} />,
       );
 
       const button = getByTestId('button-icon');
@@ -158,7 +149,7 @@ describe('ButtonIcon', () => {
       const onPressOutMock = jest.fn();
       const { getByTestId } = render(
         <ButtonIcon
-          iconName={DEFAULT_BUTTONICON_PROPS.iconName}
+          iconName={IconName.Close}
           onPressIn={onPressInMock}
           onPressOut={onPressOutMock}
         />,
@@ -175,7 +166,7 @@ describe('ButtonIcon', () => {
 
     it('applies `isInverse` styling if provided', () => {
       const { getByTestId } = render(
-        <ButtonIcon iconName={DEFAULT_BUTTONICON_PROPS.iconName} isInverse />,
+        <ButtonIcon iconName={IconName.Close} isInverse />,
       );
       const button = getByTestId('button-icon');
       expect(button).toBeDefined();
@@ -183,7 +174,7 @@ describe('ButtonIcon', () => {
 
     it('applies `isFloating` styling if provided', () => {
       const { getByTestId } = render(
-        <ButtonIcon iconName={DEFAULT_BUTTONICON_PROPS.iconName} isFloating />,
+        <ButtonIcon iconName={IconName.Close} isFloating />,
       );
       const button = getByTestId('button-icon');
       expect(button).toBeDefined();
@@ -191,28 +182,19 @@ describe('ButtonIcon', () => {
 
     it('renders with different sizes correctly', () => {
       const { getByTestId, rerender } = render(
-        <ButtonIcon
-          iconName={DEFAULT_BUTTONICON_PROPS.iconName}
-          size={ButtonIconSize.Sm}
-        />,
+        <ButtonIcon iconName={IconName.Close} size={ButtonIconSize.Sm} />,
       );
       let button = getByTestId('button-icon');
       expect(button).toBeDefined();
 
       rerender(
-        <ButtonIcon
-          iconName={DEFAULT_BUTTONICON_PROPS.iconName}
-          size={ButtonIconSize.Md}
-        />,
+        <ButtonIcon iconName={IconName.Close} size={ButtonIconSize.Md} />,
       );
       button = getByTestId('button-icon');
       expect(button).toBeDefined();
 
       rerender(
-        <ButtonIcon
-          iconName={DEFAULT_BUTTONICON_PROPS.iconName}
-          size={ButtonIconSize.Lg}
-        />,
+        <ButtonIcon iconName={IconName.Close} size={ButtonIconSize.Lg} />,
       );
       button = getByTestId('button-icon');
       expect(button).toBeDefined();
@@ -221,7 +203,7 @@ describe('ButtonIcon', () => {
     it('passes additional iconProps correctly', () => {
       const { getByTestId } = render(
         <ButtonIcon
-          iconName={DEFAULT_BUTTONICON_PROPS.iconName}
+          iconName={IconName.Close}
           iconProps={{
             testID: 'custom-icon',
           }}
@@ -233,10 +215,7 @@ describe('ButtonIcon', () => {
 
     it('applies custom twClassName overrides', () => {
       const { getByTestId } = render(
-        <ButtonIcon
-          iconName={DEFAULT_BUTTONICON_PROPS.iconName}
-          twClassName="bg-red-500"
-        />,
+        <ButtonIcon iconName={IconName.Close} twClassName="bg-red-500" />,
       );
       const button = getByTestId('button-icon');
       expect(button).toBeDefined();
@@ -244,10 +223,7 @@ describe('ButtonIcon', () => {
 
     it('applies custom style', () => {
       const { getByTestId } = render(
-        <ButtonIcon
-          iconName={DEFAULT_BUTTONICON_PROPS.iconName}
-          style={{ margin: 10 }}
-        />,
+        <ButtonIcon iconName={IconName.Close} style={{ margin: 10 }} />,
       );
       const button = getByTestId('button-icon');
       expect(button.props.style).toStrictEqual(

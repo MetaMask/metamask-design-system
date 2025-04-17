@@ -7,8 +7,7 @@ import type { IconProps } from '../../../Icon';
 import { IconColor, IconSize } from '../../../Icon';
 import type { SpinnerProps } from '../../../temp-components/Spinner';
 import type { TextProps } from '../../../Text/Text.types';
-import { TextVariant, FontWeight, TextColor } from '../../../Text';
-import { DEFAULT_BUTTONTERTIARY_PROPS } from './ButtonTertiary.constants';
+import { TextVariant, FontWeight } from '../../../Text';
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 import {
   generateButtonTertiaryContainerClassNames,
@@ -21,9 +20,9 @@ const ButtonTertiary = ({
   spinnerProps,
   startIconProps,
   endIconProps,
-  isDanger = DEFAULT_BUTTONTERTIARY_PROPS.isDanger,
-  isInverse = DEFAULT_BUTTONTERTIARY_PROPS.isInverse,
-  isLoading = DEFAULT_BUTTONTERTIARY_PROPS.isLoading,
+  isDanger = false,
+  isInverse = false,
+  isLoading = false,
   onPressIn,
   onPressOut,
   twClassName,
@@ -52,24 +51,28 @@ const ButtonTertiary = ({
   }, [isPressed, isDanger, isInverse, isLoading]);
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
-    ...DEFAULT_BUTTONTERTIARY_PROPS.textProps,
+    variant: TextVariant.BodyMd,
+    fontWeight: FontWeight.Medium,
+    numberOfLines: 1,
+    ellipsizeMode: 'clip',
     ...textProps,
     twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
   };
   const finalStartIconProps: Partial<IconProps> = {
-    ...DEFAULT_BUTTONTERTIARY_PROPS.startIconProps,
+    size: IconSize.Sm,
+    testID: 'start-icon',
     ...startIconProps,
     twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };
 
   const finalEndIconProps: Partial<IconProps> = {
-    ...DEFAULT_BUTTONTERTIARY_PROPS.endIconProps,
+    size: IconSize.Sm,
+    testID: 'end-icon',
     ...endIconProps,
     twClassName: `${twTextClassNames} ${endIconProps?.twClassName ?? ''}`,
   };
 
   const finalSpinnerProps: SpinnerProps = {
-    ...DEFAULT_BUTTONTERTIARY_PROPS.spinnerProps,
     color: twTextClassNames as IconColor,
     loadingTextProps: {
       twClassName: twTextClassNames,
