@@ -83,7 +83,7 @@ export const Default: Story = {
   args: {
     variant: AvatarGroupVariant.Favicon,
     size: AvatarGroupSize.Md,
-    max: 99,
+    max: 4,
     isReverse: false,
     twClassName: '',
   },

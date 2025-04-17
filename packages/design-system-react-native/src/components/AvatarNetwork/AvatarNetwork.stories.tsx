@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
-import { ImageSourcePropType, View } from 'react-native';
+import { View } from 'react-native';
 
 import { AvatarNetworkSize } from '../../types';
 import AvatarNetwork from './AvatarNetwork';
@@ -23,16 +23,15 @@ const meta: Meta<AvatarNetworkProps> = {
 export default meta;
 
 type Story = StoryObj<AvatarNetworkProps>;
-const storyImageSource: ImageSourcePropType = {
-  uri: SAMPLE_AVATARNETWORK_URIS[0],
-};
 
 export const Default: Story = {
   args: {
     size: AvatarNetworkSize.Md,
     twClassName: '',
   },
-  render: (args) => <AvatarNetwork {...args} src={storyImageSource} />,
+  render: (args) => (
+    <AvatarNetwork {...args} src={SAMPLE_AVATARNETWORK_URIS[0]} />
+  ),
 };
 
 export const Sizes: Story = {
@@ -40,7 +39,7 @@ export const Sizes: Story = {
     <View style={{ gap: 16 }}>
       {Object.keys(AvatarNetworkSize).map((sizeKey) => (
         <AvatarNetwork
-          src={storyImageSource}
+          src={SAMPLE_AVATARNETWORK_URIS[0]}
           key={sizeKey}
           size={AvatarNetworkSize[sizeKey as keyof typeof AvatarNetworkSize]}
         />
@@ -52,13 +51,8 @@ export const Sizes: Story = {
 export const SampleNetworks: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      {SAMPLE_AVATARNETWORK_URIS.map((networkUri) => (
-        <AvatarNetwork
-          src={{
-            uri: networkUri,
-          }}
-          key={networkUri}
-        />
+      {SAMPLE_AVATARNETWORK_URIS.map((networkSrc, index) => (
+        <AvatarNetwork src={networkSrc} key={`network-${index}`} />
       ))}
     </View>
   ),
