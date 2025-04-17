@@ -31,6 +31,7 @@ const config: StorybookConfig = {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
+  staticDirs: [{ from: '../images', to: '/images' }],
   viteFinal: (config) => {
     // This will ensure Vite knows how to resolve modules outside the storybook folder
     if (config.resolve) {
@@ -48,7 +49,13 @@ const config: StorybookConfig = {
     }
 
     // Add asset inclusion for font files so that Vite processes them correctly.
-    config.assetsInclude = ['**/*.woff2', '**/*.woff', '**/*.ttf', '**/*.otf'];
+    config.assetsInclude = [
+      '**/*.woff2',
+      '**/*.woff',
+      '**/*.ttf',
+      '**/*.otf',
+      '**/*.svg',
+    ];
 
     return config;
   },

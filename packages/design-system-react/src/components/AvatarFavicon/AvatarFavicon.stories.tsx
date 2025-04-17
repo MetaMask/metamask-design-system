@@ -3,7 +3,6 @@ import React from 'react';
 
 import { AvatarFaviconSize } from '../../types';
 import { AvatarFavicon } from './AvatarFavicon';
-import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.constants';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarFavicon> = {
@@ -64,9 +63,9 @@ type Story = StoryObj<typeof AvatarFavicon>;
 
 export const Default: Story = {
   args: {
-    src: SAMPLE_AVATARFAVICON_URIS[0],
-    name: 'Adobe',
-    fallbackText: 'OS',
+    src: '/images/favicons/metamask.svg',
+    name: 'MetaMask Portfolio',
+    fallbackText: 'MP',
   },
 };
 
@@ -74,19 +73,19 @@ export const Src: Story = {
   render: () => (
     <div className="flex gap-2">
       <AvatarFavicon
-        name="Adobe"
-        fallbackText="A"
-        src={SAMPLE_AVATARFAVICON_URIS[0]}
+        name="MetaMask Portfolio"
+        fallbackText="MM"
+        src="/images/favicons/metamask.svg"
       />
       <AvatarFavicon
-        name="Github"
-        fallbackText="G"
-        src={SAMPLE_AVATARFAVICON_URIS[1]}
+        name="OpenSea"
+        fallbackText="OS"
+        src="/images/favicons/opensea.ico"
       />
       <AvatarFavicon
-        name="Google"
-        fallbackText="G"
-        src={SAMPLE_AVATARFAVICON_URIS[2]}
+        name="Uniswap"
+        fallbackText="UNI"
+        src="/images/favicons/uniswap.png"
       />
     </div>
   ),
@@ -95,9 +94,12 @@ export const Src: Story = {
 export const Name: Story = {
   render: () => (
     <div className="flex gap-2">
-      <AvatarFavicon name="Adobe" src={SAMPLE_AVATARFAVICON_URIS[0]} />
-      <AvatarFavicon name="Github" src={SAMPLE_AVATARFAVICON_URIS[1]} />
-      <AvatarFavicon name="Aave" />
+      <AvatarFavicon
+        name="MetaMask Portfolio"
+        src="/images/favicons/metamask.svg"
+      />
+      <AvatarFavicon name="OpenSea" src="/images/favicons/opensea.ico" />
+      <AvatarFavicon name="Aave" src="/images/favicons/aave.ico" />
     </div>
   ),
 };
@@ -105,9 +107,9 @@ export const Name: Story = {
 export const FallbackText: Story = {
   render: () => (
     <div className="flex gap-2">
+      <AvatarFavicon name="MetaMask Portfolio" fallbackText="MM" />
       <AvatarFavicon name="OpenSea" fallbackText="OS" />
       <AvatarFavicon name="Uniswap" fallbackText="UNI" />
-      <AvatarFavicon name="Aave" fallbackText="AAVE" />
     </div>
   ),
 };
@@ -116,28 +118,28 @@ export const Size: Story = {
   render: () => (
     <div className="flex gap-2 items-center">
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="O"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         size={AvatarFaviconSize.Xs}
       />
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         size={AvatarFaviconSize.Sm}
       />
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         size={AvatarFaviconSize.Md}
       />
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         size={AvatarFaviconSize.Lg}
       />
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         size={AvatarFaviconSize.Xl}
       />
     </div>
@@ -147,10 +149,13 @@ export const Size: Story = {
 export const HasBorder: Story = {
   render: () => (
     <div className="flex gap-2 p-2 bg-primary-muted">
-      <AvatarFavicon name="Adobe" src={SAMPLE_AVATARFAVICON_URIS[0]} />
       <AvatarFavicon
-        name="Github"
-        src={SAMPLE_AVATARFAVICON_URIS[1]}
+        name="MetaMask Portfolio"
+        src="/images/favicons/metamask.svg"
+      />
+      <AvatarFavicon
+        name="OpenSea"
+        src="/images/favicons/opensea.ico"
         hasBorder
       />
     </div>

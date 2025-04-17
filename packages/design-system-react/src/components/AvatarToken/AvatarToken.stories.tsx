@@ -3,7 +3,6 @@ import React from 'react';
 
 import { AvatarTokenSize } from '../../types';
 import { AvatarToken } from './AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.constants';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarToken> = {
@@ -64,7 +63,7 @@ type Story = StoryObj<typeof AvatarToken>;
 
 export const Default: Story = {
   args: {
-    src: SAMPLE_AVATARTOKEN_URIS[0],
+    src: '/images/token-icons/btc.svg',
     name: 'Bitcoin',
     fallbackText: 'BTC',
   },
@@ -76,17 +75,17 @@ export const Src: Story = {
       <AvatarToken
         name="Bitcoin"
         fallbackText="BTC"
-        src={SAMPLE_AVATARTOKEN_URIS[0]}
+        src="/images/token-icons/btc.svg"
       />
       <AvatarToken
         name="Ethereum"
         fallbackText="ETH"
-        src={SAMPLE_AVATARTOKEN_URIS[1]}
+        src="/images/token-icons/eth.svg"
       />
       <AvatarToken
         name="Floki"
         fallbackText="FLOKI"
-        src={SAMPLE_AVATARTOKEN_URIS[2]}
+        src="/images/token-icons/floki.svg"
       />
     </div>
   ),
@@ -95,8 +94,8 @@ export const Src: Story = {
 export const Name: Story = {
   render: () => (
     <div className="flex gap-2">
-      <AvatarToken name="Bitcoin" src={SAMPLE_AVATARTOKEN_URIS[0]} />
-      <AvatarToken name="Ethereum" src={SAMPLE_AVATARTOKEN_URIS[1]} />
+      <AvatarToken name="Bitcoin" src="/images/token-icons/btc.svg" />
+      <AvatarToken name="Ethereum" src="/images/token-icons/eth.svg" />
       <AvatarToken name="USDC" />
     </div>
   ),
@@ -146,12 +145,12 @@ export const HasBorder: Story = {
       <AvatarToken
         name="Bitcoin"
         fallbackText="BTC"
-        src={SAMPLE_AVATARTOKEN_URIS[0]}
+        src="/images/token-icons/btc.svg"
       />
       <AvatarToken
         name="Ethereum"
         fallbackText="ETH"
-        src={SAMPLE_AVATARTOKEN_URIS[1]}
+        src="/images/token-icons/eth.svg"
         hasBorder
       />
     </div>

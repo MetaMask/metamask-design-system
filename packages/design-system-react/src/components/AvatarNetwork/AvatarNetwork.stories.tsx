@@ -3,7 +3,6 @@ import React from 'react';
 
 import { AvatarNetworkSize } from '../../types';
 import { AvatarNetwork } from './AvatarNetwork';
-import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.constants';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarNetwork> = {
@@ -64,7 +63,7 @@ type Story = StoryObj<typeof AvatarNetwork>;
 
 export const Default: Story = {
   args: {
-    src: SAMPLE_AVATARNETWORK_URIS[0],
+    src: '/images/network-icons/arbitrum.svg',
     name: 'Arbitrum',
     fallbackText: 'ETH',
   },
@@ -76,17 +75,17 @@ export const Src: Story = {
       <AvatarNetwork
         name="Arbitrum"
         fallbackText="Arb"
-        src={SAMPLE_AVATARNETWORK_URIS[0]}
+        src="/images/network-icons/arbitrum.svg"
       />
       <AvatarNetwork
         name="Avalanche"
         fallbackText="AVA"
-        src={SAMPLE_AVATARNETWORK_URIS[1]}
+        src="/images/network-icons/avalanche.svg"
       />
       <AvatarNetwork
         name="BNB"
         fallbackText="BNB"
-        src={SAMPLE_AVATARNETWORK_URIS[2]}
+        src="/images/network-icons/binance-coin-bnb.svg"
       />
     </div>
   ),
@@ -95,9 +94,12 @@ export const Src: Story = {
 export const Name: Story = {
   render: () => (
     <div className="flex gap-2">
-      <AvatarNetwork name="Arbitrum" src={SAMPLE_AVATARNETWORK_URIS[0]} />
-      <AvatarNetwork name="Avalanche" src={SAMPLE_AVATARNETWORK_URIS[1]} />
-      <AvatarNetwork name="Polygon" />
+      <AvatarNetwork name="Arbitrum" src="/images/network-icons/arbitrum.svg" />
+      <AvatarNetwork
+        name="Avalanche"
+        src="/images/network-icons/avalanche.svg"
+      />
+      <AvatarNetwork name="Ethereum" />
     </div>
   ),
 };
@@ -147,10 +149,10 @@ export const Size: Story = {
 export const HasBorder: Story = {
   render: () => (
     <div className="flex gap-2 p-2 bg-primary-muted">
-      <AvatarNetwork name="Arbitrum" src={SAMPLE_AVATARNETWORK_URIS[0]} />
+      <AvatarNetwork name="Arbitrum" src="/images/network-icons/arbitrum.svg" />
       <AvatarNetwork
         name="Avalanche"
-        src={SAMPLE_AVATARNETWORK_URIS[1]}
+        src="/images/network-icons/avalanche.svg"
         hasBorder
       />
     </div>

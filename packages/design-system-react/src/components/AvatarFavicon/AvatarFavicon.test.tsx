@@ -8,25 +8,29 @@ import { AvatarFavicon } from './AvatarFavicon';
 describe('AvatarFavicon', () => {
   it('renders image when src is provided', () => {
     render(
-      <AvatarFavicon src="test-image.jpg" name="OpenSea" fallbackText="OS" />,
+      <AvatarFavicon
+        src="test-image.jpg"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
+      />,
     );
 
     const img = screen.getByRole('img');
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('src', 'test-image.jpg');
-    expect(img).toHaveAttribute('alt', 'OpenSea');
+    expect(img).toHaveAttribute('alt', 'MetaMask Portfolio');
   });
 
   it('renders fallbackText when src is not provided', () => {
-    render(<AvatarFavicon name="OpenSea" fallbackText="OS" />);
-    expect(screen.getByText('OS')).toBeInTheDocument();
+    render(<AvatarFavicon name="MetaMask Portfolio" fallbackText="MM" />);
+    expect(screen.getByText('MM')).toBeInTheDocument();
   });
 
   it('applies fallbackTextProps to Text component', () => {
     render(
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         fallbackTextProps={{
           color: TextColor.TextAlternative,
           className: 'test-class',
@@ -42,8 +46,8 @@ describe('AvatarFavicon', () => {
   it('applies custom className to root element', () => {
     render(
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         className="custom-class"
         data-testid="avatar"
       />,
@@ -57,8 +61,8 @@ describe('AvatarFavicon', () => {
     render(
       <AvatarFavicon
         src="test-image.jpg"
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         imageProps={{
           loading: 'lazy',
         }}
@@ -74,8 +78,8 @@ describe('AvatarFavicon', () => {
   it('applies size classes correctly', () => {
     const { rerender } = render(
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         size={AvatarFaviconSize.Xs}
         data-testid="avatar"
       />,
@@ -86,8 +90,8 @@ describe('AvatarFavicon', () => {
 
     rerender(
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         size={AvatarFaviconSize.Sm}
         data-testid="avatar"
       />,
@@ -97,8 +101,8 @@ describe('AvatarFavicon', () => {
 
     rerender(
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         size={AvatarFaviconSize.Md}
         data-testid="avatar"
       />,
@@ -108,8 +112,8 @@ describe('AvatarFavicon', () => {
 
     rerender(
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         size={AvatarFaviconSize.Lg}
         data-testid="avatar"
       />,
@@ -119,8 +123,8 @@ describe('AvatarFavicon', () => {
 
     rerender(
       <AvatarFavicon
-        name="OpenSea"
-        fallbackText="OS"
+        name="MetaMask Portfolio"
+        fallbackText="MM"
         size={AvatarFaviconSize.Xl}
         data-testid="avatar"
       />,
@@ -130,69 +134,75 @@ describe('AvatarFavicon', () => {
   });
 
   it('uses medium size by default', () => {
-    render(<AvatarFavicon name="OpenSea" data-testid="avatar" />);
+    render(<AvatarFavicon name="MetaMask Portfolio" data-testid="avatar" />);
     const avatar = screen.getByTestId('avatar');
     expect(avatar).toHaveClass('h-8 w-8');
   });
 
   it('uses name as alt text when fallbackText is not provided', () => {
-    render(<AvatarFavicon src="test-image.jpg" name="OpenSea" />);
+    render(<AvatarFavicon src="test-image.jpg" name="MetaMask Portfolio" />);
 
     const img = screen.getByRole('img');
-    expect(img).toHaveAttribute('alt', 'OpenSea');
+    expect(img).toHaveAttribute('alt', 'MetaMask Portfolio');
   });
 
   it('uses first letter of name as fallback text when fallbackText is not provided', () => {
-    render(<AvatarFavicon name="OpenSea" />);
-    expect(screen.getByText('O')).toBeInTheDocument();
+    render(<AvatarFavicon name="MetaMask Portfolio" />);
+    expect(screen.getByText('M')).toBeInTheDocument();
   });
 
   it('prioritizes fallbackText over name for both alt text and fallback display', () => {
     const { rerender } = render(
       <AvatarFavicon
         src="test-image.jpg"
-        name="OpenSea"
-        fallbackText="OS"
-        imageProps={{ alt: 'OS' }}
+        name="MetaMask Portfolio"
+        fallbackText="MM"
+        imageProps={{ alt: 'MM' }}
       />,
     );
 
     let img = screen.getByRole('img');
-    expect(img).toHaveAttribute('alt', 'OS');
+    expect(img).toHaveAttribute('alt', 'MM');
 
-    rerender(<AvatarFavicon name="OpenSea" fallbackText="OS" />);
+    rerender(<AvatarFavicon name="MetaMask Portfolio" fallbackText="MM" />);
 
-    expect(screen.getByText('OS')).toBeInTheDocument();
+    expect(screen.getByText('MM')).toBeInTheDocument();
   });
 });
 
 describe('text display and alt text logic', () => {
   it('uses first letter of name when fallbackText is not provided', () => {
-    render(<AvatarFavicon name="OpenSea" />);
-    expect(screen.getByText('O')).toBeInTheDocument();
+    render(<AvatarFavicon name="MetaMask Portfolio" />);
+    expect(screen.getByText('M')).toBeInTheDocument();
   });
 
   it('uses fallbackText for display when provided', () => {
-    render(<AvatarFavicon name="OpenSea" fallbackText="OS" />);
-    expect(screen.getByText('OS')).toBeInTheDocument();
+    render(<AvatarFavicon name="MetaMask Portfolio" fallbackText="MM" />);
+    expect(screen.getByText('MM')).toBeInTheDocument();
   });
 
   it('uses name for alt text when src is provided', () => {
-    render(<AvatarFavicon name="OpenSea" src="test.jpg" />);
+    render(<AvatarFavicon name="MetaMask Portfolio" src="test.jpg" />);
     const img = screen.getByRole('img');
-    expect(img).toHaveAttribute('alt', 'OpenSea');
+    expect(img).toHaveAttribute('alt', 'MetaMask Portfolio');
   });
 
   it('uses name for alt text even when fallbackText is provided', () => {
-    render(<AvatarFavicon name="OpenSea" fallbackText="OS" src="test.jpg" />);
+    render(
+      <AvatarFavicon
+        name="MetaMask Portfolio"
+        fallbackText="MM"
+        src="test.jpg"
+      />,
+    );
     const img = screen.getByRole('img');
-    expect(img).toHaveAttribute('alt', 'OpenSea');
+    expect(img).toHaveAttribute('alt', 'MetaMask Portfolio');
   });
 
   it('allows alt text override through imageProps', () => {
     render(
       <AvatarFavicon
-        name="OpenSea"
+        name="MetaMask Portfolio"
         src="test.jpg"
         imageProps={{ alt: 'Custom Alt' }}
       />,
