@@ -7,12 +7,12 @@ const SvgMinusBold = (
 ) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
+    viewBox="0 0 24 24"
     fill="currentColor"
     ref={ref}
     {...props}
   >
-    <path d="M93 224h320c18 0 32 14 32 32s-14 32-32 32H93c-18 0-32-14-32-32s14-32 32-32" />
+    <path d="M4.15 13.46v-3.15h15.7v3.15z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgMinusBold);
