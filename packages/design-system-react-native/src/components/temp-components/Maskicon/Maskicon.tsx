@@ -22,7 +22,7 @@ const Maskicon = ({ address, size = 32, ...props }: MaskiconProps) => {
     };
   }, [address, size]);
 
-  if (!svgString) {
+  if (!svgString || typeof SvgXml !== 'function') {
     return <View style={[{ width: size, height: size }]} />;
   }
 
