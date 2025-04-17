@@ -2,8 +2,11 @@ import { AvatarGroupSize } from '../../types';
 import { TextVariant } from '../Text';
 import { AvatarAccountProps, AvatarAccountVariant } from '../AvatarAccount';
 import { AvatarFaviconProps } from '../AvatarFavicon';
+import { SAMPLE_AVATARFAVICON_URIS } from '../AvatarFavicon/AvatarFavicon.constants';
 import { AvatarNetworkProps } from '../AvatarNetwork';
+import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.constants';
 import { AvatarTokenProps } from '../AvatarToken';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.constants';
 
 // Mappings
 export const AVATAR_GROUP_SIZE_CLASS_MAP: Record<AvatarGroupSize, string> = {
@@ -91,89 +94,93 @@ export const SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR: AvatarAccountProps[] = [
 ];
 export const SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR: AvatarFaviconProps[] = [
   {
+    name: 'Adobe',
+    src: SAMPLE_AVATARFAVICON_URIS[0],
+  },
+  {
+    name: 'Github',
+    src: SAMPLE_AVATARFAVICON_URIS[1],
+  },
+  {
+    name: 'Google',
+    src: SAMPLE_AVATARFAVICON_URIS[2],
+  },
+  {
     name: 'Metamask',
-    src: 'https://metamask.github.io/test-dapp/metamask-fox.svg',
+    src: SAMPLE_AVATARFAVICON_URIS[3],
   },
   {
-    name: 'Coinbase',
-    src: 'https://www.coinbase.com/favicon.ico',
+    name: 'Reddit',
+    src: SAMPLE_AVATARFAVICON_URIS[4],
   },
   {
-    name: 'Blockchain',
-    src: 'https://www.blockchain.com/static/favicon.ico',
+    name: 'Slack',
+    src: SAMPLE_AVATARFAVICON_URIS[5],
   },
   {
-    name: 'Trezor',
-    src: 'https://trezor.io/favicon.ico',
-  },
-  {
-    name: 'Electrum',
-    src: 'https://electrum.org/favicon.ico',
-  },
-  {
-    name: 'Ethereum',
-    src: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg',
+    name: 'Zoom',
+    src: SAMPLE_AVATARFAVICON_URIS[6],
   },
 ];
 
 export const SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR: AvatarNetworkProps[] = [
   {
-    name: 'Cardano',
-    src: 'https://cryptologos.cc/logos/cardano-ada-logo.svg',
+    name: 'Arbitrum',
+    src: SAMPLE_AVATARNETWORK_URIS[0],
   },
   {
-    name: 'Chainlink',
-    src: 'https://cryptologos.cc/logos/chainlink-link-logo.svg',
+    name: 'Avalanche',
+    src: SAMPLE_AVATARNETWORK_URIS[1],
   },
   {
-    name: 'Uniswap',
-    src: 'https://cryptologos.cc/logos/uniswap-uni-logo.svg',
-  },
-  {
-    name: 'Flare',
-    src: 'https://cryptologos.cc/logos/flare-flr-logo.svg',
+    name: 'BNB',
+    src: SAMPLE_AVATARNETWORK_URIS[2],
   },
   {
     name: 'Ethereum',
-    src: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg',
+    src: SAMPLE_AVATARNETWORK_URIS[3],
   },
   {
-    name: 'Solana',
-    src: 'https://cryptologos.cc/logos/solana-sol-logo.svg',
+    name: 'Linea',
+    src: SAMPLE_AVATARNETWORK_URIS[4],
   },
   {
-    name: 'Tether',
-    src: 'https://cryptologos.cc/logos/tether-usdt-logo.svg',
+    name: 'Optimism',
+    src: SAMPLE_AVATARNETWORK_URIS[5],
+  },
+  {
+    name: 'Polygon',
+    src: SAMPLE_AVATARNETWORK_URIS[6],
   },
 ];
 
 export const SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR: AvatarTokenProps[] = [
   {
-    name: 'Ethereum',
-    src: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg',
+    name: 'BTC',
+    src: SAMPLE_AVATARTOKEN_URIS[0],
   },
   {
-    name: 'Solana',
-    src: 'https://cryptologos.cc/logos/solana-sol-logo.svg',
+    name: 'ETH',
+    src: SAMPLE_AVATARTOKEN_URIS[1],
   },
   {
-    name: 'Tether',
-    src: 'https://cryptologos.cc/logos/tether-usdt-logo.svg',
+    name: 'FLOKI',
+    src: SAMPLE_AVATARTOKEN_URIS[2],
   },
   {
-    name: 'Cardano',
-    src: 'https://cryptologos.cc/logos/cardano-ada-logo.svg',
+    name: 'DOT',
+    src: SAMPLE_AVATARTOKEN_URIS[3],
   },
   {
-    name: 'Chainlink',
-    src: 'https://cryptologos.cc/logos/chainlink-link-logo.svg',
+    name: 'MEW',
+    src: SAMPLE_AVATARTOKEN_URIS[4],
   },
   {
-    name: 'Uniswap',
-    src: 'https://cryptologos.cc/logos/uniswap-uni-logo.svg',
+    name: 'SHIB',
+    src: SAMPLE_AVATARTOKEN_URIS[5],
   },
   {
-    name: 'Flare',
-    src: 'https://cryptologos.cc/logos/flare-flr-logo.svg',
+    name: 'USDC',
+    src: SAMPLE_AVATARTOKEN_URIS[6],
   },
 ];
