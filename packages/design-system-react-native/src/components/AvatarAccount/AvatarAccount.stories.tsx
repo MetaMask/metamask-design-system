@@ -55,6 +55,11 @@ export const Sizes: Story = {
             variant={AvatarAccountVariant.Jazzicon}
             address={SAMPLE_AVATARACCOUNT_ADDRESSES[0]}
           />
+          <AvatarAccount
+            size={AvatarAccountSize[sizeKey as keyof typeof AvatarAccountSize]}
+            variant={AvatarAccountVariant.Maskicon}
+            address={SAMPLE_AVATARACCOUNT_ADDRESSES[0]}
+          />
         </View>
       ))}
     </View>
@@ -90,6 +95,10 @@ export const SampleAddresses: Story = {
           />
           <AvatarAccount
             variant={AvatarAccountVariant.Jazzicon}
+            address={address}
+          />
+          <AvatarAccount
+            variant={AvatarAccountVariant.Maskicon}
             address={address}
           />
         </View>
