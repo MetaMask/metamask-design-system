@@ -15,7 +15,12 @@ import {
  */
 const iconCache: Record<string, HTMLDivElement> = {};
 
-export const Jazzicon = ({ address, size = 32, ...props }: JazziconProps) => {
+export const Jazzicon = ({
+  address,
+  size = 32,
+  className,
+  ...props
+}: JazziconProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -78,13 +83,7 @@ export const Jazzicon = ({ address, size = 32, ...props }: JazziconProps) => {
     };
   }, [address, size]);
 
-  return (
-    <div
-      ref={containerRef}
-      style={{ height: `${size}px`, width: `${size}px` }}
-      {...props}
-    />
-  );
+  return <div ref={containerRef} className={`flex ${className}`} {...props} />;
 };
 
 Jazzicon.displayName = 'Jazzicon';
