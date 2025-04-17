@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.constants';
 import { BadgeNetwork } from './BadgeNetwork';
 import README from './README.mdx';
 
@@ -51,9 +52,9 @@ type Story = StoryObj<typeof BadgeNetwork>;
 
 export const Default: Story = {
   args: {
-    src: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
-    name: 'Ethereum',
-    fallbackText: 'ETH',
+    src: SAMPLE_AVATARNETWORK_URIS[0],
+    name: 'Arbitrum',
+    fallbackText: 'ARB',
   },
 };
 
@@ -61,19 +62,19 @@ export const Src: Story = {
   render: () => (
     <div className="flex gap-2">
       <BadgeNetwork
-        name="Ethereum"
-        fallbackText="ETH"
-        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+        name="Arbitrum"
+        fallbackText="ARB"
+        src={SAMPLE_AVATARNETWORK_URIS[0]}
       />
       <BadgeNetwork
         name="Avalanche"
         fallbackText="AVA"
-        src="https://cryptologos.cc/logos/avalanche-avax-logo.png"
+        src={SAMPLE_AVATARNETWORK_URIS[1]}
       />
       <BadgeNetwork
-        name="Polygon"
-        fallbackText="POL"
-        src="https://cryptologos.cc/logos/polygon-matic-logo.png"
+        name="BNB"
+        fallbackText="BNB"
+        src={SAMPLE_AVATARNETWORK_URIS[2]}
       />
     </div>
   ),
@@ -82,14 +83,8 @@ export const Src: Story = {
 export const Name: Story = {
   render: () => (
     <div className="flex gap-2">
-      <BadgeNetwork
-        name="Ethereum"
-        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
-      />
-      <BadgeNetwork
-        name="Avalanche"
-        src="https://cryptologos.cc/logos/avalanche-avax-logo.png"
-      />
+      <BadgeNetwork name="Arbitrum" src={SAMPLE_AVATARNETWORK_URIS[0]} />
+      <BadgeNetwork name="Avalanche" src={SAMPLE_AVATARNETWORK_URIS[1]} />
       <BadgeNetwork name="Polygon" />
     </div>
   ),
