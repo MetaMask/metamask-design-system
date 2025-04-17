@@ -10,10 +10,16 @@ import {
   SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
 } from './AvatarGroup.constants';
 import type { AvatarGroupProps } from './AvatarGroup.types';
+import README from './README.mdx';
 
 const meta: Meta<AvatarGroupProps> = {
   title: 'React Components/AvatarGroup',
   component: AvatarGroup,
+  parameters: {
+    docs: {
+      page: README,
+    },
+  },
   argTypes: {
     variant: {
       control: 'select',
@@ -100,7 +106,7 @@ export const Default: Story = {
   ),
 };
 
-export const Variants: Story = {
+export const Variant: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       {Object.keys(AvatarGroupVariant).map((variantKey) => (
@@ -115,7 +121,22 @@ export const Variants: Story = {
   ),
 };
 
-export const Sizes: Story = {
+export const AvatarPropsArr: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {Object.keys(AvatarGroupVariant).map((variantKey) => (
+        <AvatarGroupStory
+          key={variantKey}
+          variant={
+            AvatarGroupVariant[variantKey as keyof typeof AvatarGroupVariant]
+          }
+        />
+      ))}
+    </div>
+  ),
+};
+
+export const Size: Story = {
   render: () => (
     <div>
       {Object.keys(AvatarGroupSize).map((sizeKey) => (
@@ -146,6 +167,24 @@ export const Sizes: Story = {
           />
         </div>
       ))}
+    </div>
+  ),
+};
+
+export const Max: Story = {
+  render: () => (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 4,
+        alignItems: 'flex-start',
+      }}
+    >
+      {' '}
+      <AvatarGroupStory variant={AvatarGroupVariant.Account} />
+      <AvatarGroupStory variant={AvatarGroupVariant.Account} max={1} />
+      <AvatarGroupStory variant={AvatarGroupVariant.Account} max={10} />
     </div>
   ),
 };
