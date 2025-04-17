@@ -65,114 +65,72 @@ export const SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR: AvatarAccountProps[] = [
 ];
 export const SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR: AvatarFaviconProps[] = [
   {
-    src: {
-      uri: SAMPLE_AVATARFAVICON_URIS[0],
-    },
+    src: SAMPLE_AVATARFAVICON_URIS[0],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARFAVICON_URIS[1],
-    },
+    src: SAMPLE_AVATARFAVICON_URIS[1],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARFAVICON_URIS[2],
-    },
+    src: SAMPLE_AVATARFAVICON_URIS[2],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARFAVICON_URIS[3],
-    },
+    src: SAMPLE_AVATARFAVICON_URIS[3],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARFAVICON_URIS[4],
-    },
+    src: SAMPLE_AVATARFAVICON_URIS[4],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARFAVICON_URIS[5],
-    },
+    src: SAMPLE_AVATARFAVICON_URIS[5],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARFAVICON_URIS[6],
-    },
+    src: SAMPLE_AVATARFAVICON_URIS[6],
   },
 ];
 
 export const SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR: AvatarNetworkProps[] = [
   {
-    src: {
-      uri: SAMPLE_AVATARNETWORK_URIS[0],
-    },
+    src: SAMPLE_AVATARNETWORK_URIS[0],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARNETWORK_URIS[1],
-    },
+    src: SAMPLE_AVATARNETWORK_URIS[1],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARNETWORK_URIS[2],
-    },
+    src: SAMPLE_AVATARNETWORK_URIS[2],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARNETWORK_URIS[3],
-    },
+    src: SAMPLE_AVATARNETWORK_URIS[3],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARNETWORK_URIS[4],
-    },
+    src: SAMPLE_AVATARNETWORK_URIS[4],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARNETWORK_URIS[5],
-    },
+    src: SAMPLE_AVATARNETWORK_URIS[5],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARNETWORK_URIS[6],
-    },
+    src: SAMPLE_AVATARNETWORK_URIS[6],
   },
 ];
 
 export const SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR: AvatarTokenProps[] = [
   {
-    src: {
-      uri: SAMPLE_AVATARTOKEN_URIS[0],
-    },
+    src: SAMPLE_AVATARTOKEN_URIS[0],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARTOKEN_URIS[1],
-    },
+    src: SAMPLE_AVATARTOKEN_URIS[1],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARTOKEN_URIS[2],
-    },
+    src: SAMPLE_AVATARTOKEN_URIS[2],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARTOKEN_URIS[3],
-    },
+    src: SAMPLE_AVATARTOKEN_URIS[3],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARTOKEN_URIS[4],
-    },
+    src: SAMPLE_AVATARTOKEN_URIS[4],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARTOKEN_URIS[5],
-    },
+    src: SAMPLE_AVATARTOKEN_URIS[5],
   },
   {
-    src: {
-      uri: SAMPLE_AVATARTOKEN_URIS[6],
-    },
+    src: SAMPLE_AVATARTOKEN_URIS[6],
   },
 ];

@@ -3,6 +3,7 @@ import React from 'react';
 
 import { AvatarNetworkSize } from '../../types';
 import { AvatarNetwork } from './AvatarNetwork';
+import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.constants';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarNetwork> = {
@@ -63,8 +64,8 @@ type Story = StoryObj<typeof AvatarNetwork>;
 
 export const Default: Story = {
   args: {
-    src: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
-    name: 'Ethereum',
+    src: SAMPLE_AVATARNETWORK_URIS[0],
+    name: 'Arbitrum',
     fallbackText: 'ETH',
   },
 };
@@ -73,19 +74,19 @@ export const Src: Story = {
   render: () => (
     <div className="flex gap-2">
       <AvatarNetwork
-        name="Ethereum"
-        fallbackText="ETH"
-        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+        name="Arbitrum"
+        fallbackText="Arb"
+        src={SAMPLE_AVATARNETWORK_URIS[0]}
       />
       <AvatarNetwork
         name="Avalanche"
         fallbackText="AVA"
-        src="https://cryptologos.cc/logos/avalanche-avax-logo.png"
+        src={SAMPLE_AVATARNETWORK_URIS[1]}
       />
       <AvatarNetwork
-        name="Polygon"
-        fallbackText="POL"
-        src="https://cryptologos.cc/logos/polygon-matic-logo.png"
+        name="BNB"
+        fallbackText="BNB"
+        src={SAMPLE_AVATARNETWORK_URIS[2]}
       />
     </div>
   ),
@@ -94,14 +95,8 @@ export const Src: Story = {
 export const Name: Story = {
   render: () => (
     <div className="flex gap-2">
-      <AvatarNetwork
-        name="Ethereum"
-        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
-      />
-      <AvatarNetwork
-        name="Avalanche"
-        src="https://cryptologos.cc/logos/avalanche-avax-logo.png"
-      />
+      <AvatarNetwork name="Arbitrum" src={SAMPLE_AVATARNETWORK_URIS[0]} />
+      <AvatarNetwork name="Avalanche" src={SAMPLE_AVATARNETWORK_URIS[1]} />
       <AvatarNetwork name="Polygon" />
     </div>
   ),
@@ -152,13 +147,10 @@ export const Size: Story = {
 export const HasBorder: Story = {
   render: () => (
     <div className="flex gap-2 p-2 bg-primary-muted">
+      <AvatarNetwork name="Arbitrum" src={SAMPLE_AVATARNETWORK_URIS[0]} />
       <AvatarNetwork
-        name="Ethereum"
-        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
-      />
-      <AvatarNetwork
-        name="Ethereum"
-        src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+        name="Avalanche"
+        src={SAMPLE_AVATARNETWORK_URIS[1]}
         hasBorder
       />
     </div>
