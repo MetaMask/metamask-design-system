@@ -1,25 +1,11 @@
-import React, { useState, useEffect } from 'react';
-
+import { blo } from 'blo';
+import React from 'react';
 import type { BlockiesProps } from './Blockies.types';
 
 export const Blockies = ({ address, size = 32, ...props }: BlockiesProps) => {
-  const [bloModule, setBloModule] = useState<{
-    blo: (address: string) => string;
-  } | null>(null);
-
-  useEffect(() => {
-    import('blo').then((module) =>
-      setBloModule(module as { blo: (address: string) => string }),
-    );
-  }, []);
-
-  if (!bloModule) {
-    return null;
-  }
-
   return (
     <img
-      src={bloModule.blo(address)}
+      src={blo(address as `0x${string}`)}
       height={size}
       width={size}
       alt={`Blockies for ${address}`} // TODO: Add localization for this
