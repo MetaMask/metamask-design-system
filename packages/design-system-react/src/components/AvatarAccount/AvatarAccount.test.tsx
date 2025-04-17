@@ -4,10 +4,6 @@ import React from 'react';
 import { AvatarAccountVariant, AvatarAccountSize } from '../../types';
 import { AvatarAccount } from './AvatarAccount';
 
-jest.mock('blo', () => ({
-  blo: jest.fn(() => 'mocked-blockies-image-url'),
-}));
-
 describe('AvatarAccount', () => {
   it('renders Jazzicon variant by default', () => {
     render(
@@ -19,19 +15,22 @@ describe('AvatarAccount', () => {
     expect(screen.getByTestId('jazzicon')).toBeInTheDocument();
   });
 
-  it('renders Blockies variant when specified', async () => {
+  it('renders Blockies variant when specified', () => {
+    const address = '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8';
     render(
       <AvatarAccount
-        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        address={address}
         variant={AvatarAccountVariant.Blockies}
         blockiesProps={{ 'data-testid': 'blockies' }}
       />,
     );
 
-    const blockies = await screen.findByTestId('blockies');
-
+    const blockies = screen.getByTestId('blockies');
     expect(blockies).toBeInTheDocument();
-    expect(blockies).toHaveAttribute('src', 'mocked-blockies-image-url');
+    expect(blockies.tagName.toLowerCase()).toBe('img');
+    expect(blockies).toHaveAttribute('alt', `Blockies for ${address}`);
+    expect(blockies).toHaveAttribute('height', '32'); // Default size
+    expect(blockies).toHaveAttribute('width', '32'); // Default size
   });
 
   it('applies custom className to root element', () => {
@@ -123,7 +122,7 @@ describe('AvatarAccount', () => {
     expect(screen.getByTestId('jazzicon')).toHaveClass('custom-jazzicon-class');
   });
 
-  it('passes custom props to Blockies', async () => {
+  it('passes custom props to Blockies', () => {
     render(
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
@@ -134,8 +133,7 @@ describe('AvatarAccount', () => {
         }}
       />,
     );
-    const blockies = await screen.findByTestId('blockies');
-
+    const blockies = screen.getByTestId('blockies');
     expect(blockies).toBeInTheDocument();
     expect(blockies).toHaveClass('custom-blockies-class');
   });

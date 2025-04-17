@@ -3258,8 +3258,9 @@ __metadata:
     "@types/react": "npm:^18.2.0"
     "@types/react-dom": "npm:^18.2.0"
     bitcoin-address-validation: "npm:^3.0.0"
-    blo: "npm:^1.2.0"
+    blo: "npm:^2.0.0"
     deepmerge: "npm:^4.2.2"
+    dompurify: "npm:^3.2.5"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
     rimraf: "npm:^5.0.5"
@@ -5983,6 +5984,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/trusted-types@npm:^2.0.7":
+  version: 2.0.7
+  resolution: "@types/trusted-types@npm:2.0.7"
+  checksum: 10/8e4202766a65877efcf5d5a41b7dd458480b36195e580a3b1085ad21e948bc417d55d6f8af1fd2a7ad008015d4117d5fdfe432731157da3c68678487174e4ba3
+  languageName: node
+  linkType: hard
+
 "@types/uuid@npm:^9.0.1":
   version: 9.0.8
   resolution: "@types/uuid@npm:9.0.8"
@@ -7573,10 +7581,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"blo@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "blo@npm:1.2.0"
-  checksum: 10/17ec61e41b201bbba8ab3c874cad94696604b6ac4029de5050c92ea5817dff6814d8642b9b2948e0d6804194437b751fa2755652201f26fa5d606913c489b757
+"blo@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "blo@npm:2.0.0"
+  checksum: 10/a03c33f46349ee114825f3615e45038bc165cb74fdb38959dbc84e96841b33f24bd79aa732cbfe967877dfae2c684878d57bfa8a9f28618059028072de8f5a5e
   languageName: node
   linkType: hard
 
@@ -9654,6 +9662,18 @@ __metadata:
   dependencies:
     domelementtype: "npm:^2.3.0"
   checksum: 10/809b805a50a9c6884a29f38aec0a4e1b4537f40e1c861950ed47d10b049febe6b79ab72adaeeebb3cc8fc1cd33f34e97048a72a9265103426d93efafa78d3e96
+  languageName: node
+  linkType: hard
+
+"dompurify@npm:^3.2.5":
+  version: 3.2.5
+  resolution: "dompurify@npm:3.2.5"
+  dependencies:
+    "@types/trusted-types": "npm:^2.0.7"
+  dependenciesMeta:
+    "@types/trusted-types":
+      optional: true
+  checksum: 10/03974f18851fb4e447d26adc0ebf7a64b6c5b4a11caebebec3e04de8fcaa19cdb67bf3575a2335727123d0fc1c2febc1bc992a84f327a8ce65a0bfd11e3afc50
   languageName: node
   linkType: hard
 
