@@ -66,6 +66,16 @@ export enum AvatarIconSeverity {
 }
 
 /**
+ * AvatarGroup - variant
+ */
+export enum AvatarGroupVariant {
+  Account = 'Account',
+  Favicon = 'Favicon',
+  Network = 'Network',
+  Token = 'Token',
+}
+
+/**
  * BadgeCount - size
  */
 export enum BadgeCountSize {
