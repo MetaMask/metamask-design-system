@@ -124,6 +124,18 @@ describe('AvatarBase', () => {
       expect(queryByText('Child Content')).toBeNull();
     });
 
+    it('applies fallbackTextProps.twClassName correctly', () => {
+      const fallback = 'Hello';
+      const { getByText } = render(
+        <AvatarBase
+          fallbackText={fallback}
+          fallbackTextProps={{ twClassName: 'text-text-default' }}
+        />,
+      );
+      const textEl = getByText(fallback);
+      expect(textEl.props.style[0].color).toBe('#121314');
+    });
+
     it('applies custom style to container', () => {
       const customStyle = { margin: 10 };
       const { getByTestId } = render(
