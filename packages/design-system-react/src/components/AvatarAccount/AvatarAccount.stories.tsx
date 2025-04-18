@@ -102,7 +102,7 @@ export const Variant: Story = {
 
 export const Size: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
         size={AvatarAccountSize.Xs}
@@ -129,7 +129,7 @@ export const Size: Story = {
 
 export const HasBorder: Story = {
   render: () => (
-    <div className="flex gap-2 p-2 bg-primary-muted">
+    <div className="flex gap-2 bg-primary-muted p-2">
       <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"

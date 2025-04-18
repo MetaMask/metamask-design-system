@@ -73,7 +73,7 @@ export const ColorSwatchGroup: React.FC<ColorSwatchGroupProps> = ({
             <Text variant={TextVariant.HeadingSm} className="my-4">
               {category}
             </Text>
-            <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
+            <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
               <div key={category}>
                 <ColorSwatch
                   color={value}
@@ -110,7 +110,7 @@ export const ColorSwatchGroup: React.FC<ColorSwatchGroupProps> = ({
           <Text variant={TextVariant.HeadingSm} className="my-4">
             {category}
           </Text>
-          <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
+          <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
             {sortedColorKeys.map(({ originalKey, camelCaseKey }) => {
               const colorDetails = colors[originalKey];
               const { value = '', description } = colorDetails || {};

@@ -197,13 +197,7 @@ const TextButton = ({
               // VERY funkily
               <View style={tw`h-[${componentHeight}px]`}>
                 <View
-                  style={tw`
-                    ${twContainerClassNames} 
-                    items-start mt-[${nonTextOffSet}px] 
-                    pt-[${finalStartIconOffset}px] 
-                    h-[${componentHeight}px] 
-                    w-[${startIconWrapperWidth}px]
-                    `}
+                  style={tw` ${twContainerClassNames} items-start mt-[${nonTextOffSet}px] pt-[${finalStartIconOffset}px] h-[${componentHeight}px] w-[${startIconWrapperWidth}px] `}
                 >
                   <Icon name={finalStartIconName} {...finalStartIconProps} />
                 </View>
@@ -217,12 +211,7 @@ const TextButton = ({
               // VERY funkily
               <View style={tw`h-[${componentHeight}px]`}>
                 <View
-                  style={tw`
-                    ${twContainerClassNames} 
-                    items-end 
-                    mt-[${nonTextOffSet}px] 
-                    pt-[${finalEndIconOffset}px] 
-                    h-[${componentHeight}px] w-[${endIconWrapperWidth}px]`}
+                  style={tw` ${twContainerClassNames} items-end mt-[${nonTextOffSet}px] pt-[${finalEndIconOffset}px] h-[${componentHeight}px] w-[${endIconWrapperWidth}px]`}
                 >
                   <Icon name={finalEndIconName} {...finalEndIconProps} />
                 </View>

@@ -3,7 +3,7 @@ import { twMerge } from './tw-merge';
 describe('twMerge utility', () => {
   describe('text color conflicts', () => {
     it('should override default text color with alternative', () => {
-      const result = twMerge('text-default text-alternative');
+      const result = twMerge('text-alternative text-default');
       expect(result).toBe('text-alternative');
     });
 
@@ -13,7 +13,7 @@ describe('twMerge utility', () => {
     });
 
     it('should maintain the last text color in a sequence', () => {
-      const result = twMerge('text-default text-muted text-alternative');
+      const result = twMerge('text-alternative text-default text-muted');
       expect(result).toBe('text-alternative');
     });
   });
@@ -30,14 +30,14 @@ describe('twMerge utility', () => {
     });
 
     it('should handle mixed size variant overrides', () => {
-      const result = twMerge('text-s-body-md text-l-heading-lg');
+      const result = twMerge('text-l-heading-lg text-s-body-md');
       expect(result).toBe('text-l-heading-lg');
     });
   });
 
   describe('font weight conflicts', () => {
     it('should handle standard Tailwind font weight overrides', () => {
-      const result = twMerge('font-normal font-bold');
+      const result = twMerge('font-bold font-normal');
       expect(result).toBe('font-bold');
     });
 
@@ -47,7 +47,7 @@ describe('twMerge utility', () => {
     });
 
     it('should handle mixed standard and custom font weight overrides', () => {
-      const result = twMerge('font-bold font-s-body-md');
+      const result = twMerge('font-s-body-md font-bold');
       expect(result).toBe('font-s-body-md');
     });
   });
@@ -55,16 +55,16 @@ describe('twMerge utility', () => {
   describe('complex class combinations', () => {
     it('should handle multiple property conflicts simultaneously', () => {
       const result = twMerge(
-        'text-default font-normal text-s-body-md',
-        'text-alternative font-bold text-l-heading-lg',
+        'text-s-body-md font-normal text-default',
+        'text-l-heading-lg font-bold text-alternative',
       );
       expect(result).toBe('text-alternative font-bold text-l-heading-lg');
     });
 
     it('should preserve non-conflicting classes', () => {
       const result = twMerge(
-        'px-4 text-default font-normal',
-        'py-2 text-alternative font-bold',
+        'px-4 font-normal text-default',
+        'py-2 font-bold text-alternative',
       );
       expect(result).toBe('px-4 py-2 text-alternative font-bold');
     });

@@ -75,21 +75,21 @@ export const Default: Story = {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search icons..."
-            className="border p-2 rounded"
+            className="rounded border p-2"
           />
         </div>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4">
           {iconList.map((iconKey) => (
             <div
               key={iconKey}
-              className="flex flex-col items-center justify-center p-4 border rounded"
+              className="flex flex-col items-center justify-center rounded border p-4"
             >
               <Icon
                 className="mb-2"
                 {...args}
                 name={IconName[iconKey as keyof typeof IconName]}
               />
-              <div className="text-xs text-center">{iconKey}</div>
+              <div className="text-center text-xs">{iconKey}</div>
             </div>
           ))}
         </div>
