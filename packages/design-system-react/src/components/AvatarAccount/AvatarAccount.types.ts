@@ -2,8 +2,9 @@ import type { ComponentProps } from 'react';
 
 import { AvatarAccountVariant, AvatarAccountSize } from '../../types';
 import { AvatarBaseProps } from '../AvatarBase';
-import type { Jazzicon } from '../temp-components/Jazzicon';
 import type { Blockies } from '../temp-components/Blockies';
+import type { Jazzicon } from '../temp-components/Jazzicon';
+import type { Maskicon } from '../temp-components/Maskicon';
 
 export type AvatarAccountProps = Omit<
   ComponentProps<'img'>,
@@ -25,11 +26,15 @@ export type AvatarAccountProps = Omit<
      */
     size?: AvatarAccountSize;
     /**
+     * Optional props to be passed to the Blockies component
+     */
+    blockiesProps?: Partial<ComponentProps<typeof Blockies>>;
+    /**
      * Optional props to be passed to the Jazzicon component
      */
     jazziconProps?: Partial<ComponentProps<typeof Jazzicon>>;
     /**
-     * Optional props to be passed to the Blockies component
+     * Optional props to be passed to the Maskicon component
      */
-    blockiesProps?: Partial<ComponentProps<typeof Blockies>>;
+    maskiconProps?: Partial<ComponentProps<typeof Maskicon>>;
   };

@@ -33,6 +33,21 @@ describe('AvatarAccount', () => {
     expect(blockies).toHaveAttribute('width', '32'); // Default size
   });
 
+  it('renders Maskicon variant when specified', () => {
+    const address = '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8';
+    render(
+      <AvatarAccount
+        address={address}
+        variant={AvatarAccountVariant.Maskicon}
+        maskiconProps={{ 'data-testid': 'maskicon' }}
+      />,
+    );
+
+    const maskicon = screen.getByTestId('maskicon');
+    expect(maskicon).toBeInTheDocument();
+    expect(maskicon.tagName.toLowerCase()).toBe('div');
+  });
+
   it('applies custom className to root element', () => {
     render(
       <AvatarAccount
@@ -136,5 +151,21 @@ describe('AvatarAccount', () => {
     const blockies = screen.getByTestId('blockies');
     expect(blockies).toBeInTheDocument();
     expect(blockies).toHaveClass('custom-blockies-class');
+  });
+
+  it('passes custom props to Maskicon', () => {
+    render(
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        variant={AvatarAccountVariant.Maskicon}
+        maskiconProps={{
+          className: 'custom-maskicon-class',
+          'data-testid': 'maskicon',
+        }}
+      />,
+    );
+    const maskicon = screen.getByTestId('maskicon');
+    expect(maskicon).toBeInTheDocument();
+    expect(maskicon).toHaveClass('custom-maskicon-class');
   });
 });
