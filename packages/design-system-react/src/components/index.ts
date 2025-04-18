@@ -27,6 +27,9 @@ export { BadgeCountSize } from './BadgeCount';
 export { BadgeIcon } from './BadgeIcon';
 export type { BadgeIconProps } from './BadgeIcon';
 
+export { BadgeNetwork } from './BadgeNetwork';
+export type { BadgeNetworkProps } from './BadgeNetwork';
+
 export { BadgeStatus } from './BadgeStatus';
 export type { BadgeStatusProps } from './BadgeStatus';
 export { BadgeStatusStatus, BadgeStatusSize } from './BadgeStatus';
