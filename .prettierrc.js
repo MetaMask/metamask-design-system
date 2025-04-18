@@ -8,4 +8,8 @@ module.exports = {
   singleQuote: true,
   tabWidth: 2,
   trailingComma: 'all',
+  plugins: ['prettier-plugin-tailwindcss'],
+  tailwindConfig: './apps/storybook-react/tailwind.config.js', // Main web config
+  tailwindFunctions: ['tw', 'twMerge'], // Support twrnc and twMerge template literals and utility functions
+  tailwindAttributes: ['twClassName'], // Support twClassName prop
 };
