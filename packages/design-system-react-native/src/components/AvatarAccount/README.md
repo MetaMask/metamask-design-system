@@ -18,6 +18,7 @@ Available severities:
 
 - `Jazzicon`
 - `Blockies`
+- `Maskicon`
 
 ---
 
@@ -75,6 +76,14 @@ import AvatarAccount, {
 <AvatarAccount
   address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
   variant={AvatarAccountVariant.Blockies}
+/>
+<AvatarAccount
+  address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+  variant={AvatarAccountVariant.Jazzicon}
+/>
+<AvatarAccount
+  address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+  variant={AvatarAccountVariant.Maskicon}
 />
 ```
 

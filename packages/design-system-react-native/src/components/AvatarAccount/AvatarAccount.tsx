@@ -9,6 +9,7 @@ import {
 import AvatarBase from '../AvatarBase';
 import Blockies from '../temp-components/Blockies';
 import Jazzicon from '../temp-components/Jazzicon';
+import Maskicon from '../temp-components/Maskicon';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 
 const AvatarAccount = ({
@@ -24,6 +25,11 @@ const AvatarAccount = ({
     case AvatarAccountVariant.Blockies:
       AvatarArtComponent = (
         <Blockies address={address} size={Number(size)} testID="blockies" />
+      );
+      break;
+    case AvatarAccountVariant.Maskicon:
+      AvatarArtComponent = (
+        <Maskicon address={address} size={Number(size)} testID="maskicon" />
       );
       break;
     case AvatarAccountVariant.Jazzicon:

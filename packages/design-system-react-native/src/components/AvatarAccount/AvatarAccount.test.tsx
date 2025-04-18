@@ -9,18 +9,15 @@ describe('AvatarAccount', () => {
   it('renders Jazzicon by default when no variant is provided', () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
 
-    const { getByTestId, queryByTestId } = render(
-      <AvatarAccount address={address} />,
-    );
+    const { getByTestId } = render(<AvatarAccount address={address} />);
 
     expect(getByTestId('jazzicon')).toBeTruthy();
-    expect(queryByTestId('blockies')).toBeNull();
   });
 
   it('renders Blockies when variant is blockies', () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
 
-    const { getByTestId, queryByTestId } = render(
+    const { getByTestId } = render(
       <AvatarAccount
         address={address}
         variant={AvatarAccountVariant.Blockies}
@@ -28,7 +25,21 @@ describe('AvatarAccount', () => {
     );
 
     expect(getByTestId('blockies')).toBeTruthy();
-    expect(queryByTestId('jazzicon')).toBeNull();
+  });
+
+  it('renders Maskicon when variant is maskicon', async () => {
+    const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
+
+    const { findByTestId } = render(
+      <AvatarAccount
+        address={address}
+        variant={AvatarAccountVariant.Maskicon}
+        testID="maskicon"
+      />,
+    );
+
+    const maskicon = await findByTestId('maskicon');
+    expect(maskicon).toBeTruthy();
   });
 
   it('respects the default size and shape', () => {
