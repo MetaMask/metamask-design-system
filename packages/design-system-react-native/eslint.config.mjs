@@ -33,7 +33,7 @@ const config = createConfig(
   },
   {
     ignores: [
-      'src/components/icon/icons/*', // Auto-generated icons
+      'src/components/Icon/icons/*', // Auto-generated icons
       '.eslintrc.js',
       '**.config.js',
       '**.d.ts',
