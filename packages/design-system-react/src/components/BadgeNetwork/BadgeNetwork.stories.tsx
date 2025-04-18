@@ -93,9 +93,9 @@ export const Name: Story = {
 export const FallbackText: Story = {
   render: () => (
     <div className="flex gap-2">
-      <BadgeNetwork name="Ethereum" fallbackText="ETH" />
-      <BadgeNetwork name="Avalanche" fallbackText="AVA" />
-      <BadgeNetwork name="Polygon" fallbackText="POL" />
+      <BadgeNetwork name="Ethereum" fallbackText="E" />
+      <BadgeNetwork name="Avalanche" fallbackText="A" />
+      <BadgeNetwork name="Polygon" fallbackText="P" />
     </div>
   ),
 };
