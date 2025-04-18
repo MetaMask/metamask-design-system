@@ -63,17 +63,17 @@ export const Src: Story = {
     <div className="flex gap-2">
       <BadgeNetwork
         name="Arbitrum"
-        fallbackText="ARB"
+        fallbackText="A"
         src={SAMPLE_AVATARNETWORK_URIS[0]}
       />
       <BadgeNetwork
         name="Avalanche"
-        fallbackText="AVA"
+        fallbackText="A"
         src={SAMPLE_AVATARNETWORK_URIS[1]}
       />
       <BadgeNetwork
         name="BNB"
-        fallbackText="BNB"
+        fallbackText="B"
         src={SAMPLE_AVATARNETWORK_URIS[2]}
       />
     </div>
