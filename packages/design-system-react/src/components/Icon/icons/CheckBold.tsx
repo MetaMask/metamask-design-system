@@ -7,12 +7,12 @@ const SvgCheckBold = (
 ) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
+    viewBox="0 0 24 24"
     fill="currentColor"
     ref={ref}
     {...props}
   >
-    <path d="M412 145c12 12 12 32 0 45L227 373c-12 12-32 12-45 0l-81-80c-13-13-13-33 0-46 12-12 32-12 45 0l59 58 161-161c13-12 33-12 46 1" />
+    <path d="m9.55 18.685-6.5-6.5 2.25-2.25 4.25 4.25 9.15-9.15 2.25 2.25z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgCheckBold);

@@ -4,12 +4,12 @@ import { Ref, forwardRef } from 'react';
 const SvgCheck = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
+    viewBox="0 0 24 24"
     fill="currentColor"
     ref={ref}
     {...props}
   >
-    <path d="M203 384c-5 0-8-2-11-5L85 267c-7-6-7-16 0-22 6-7 16-7 22 0l95 99 203-211c6-7 16-7 22 0 7 6 7 16 0 22L214 379c-3 3-8 5-11 5" />
+    <path d="m9.55 17.886-5.7-5.7 1.425-1.425 4.275 4.275 9.175-9.175 1.425 1.425z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgCheck);
