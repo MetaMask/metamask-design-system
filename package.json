@@ -68,7 +68,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@lavamoat/allow-scripts": "^3.2.1",
-    "@metamask/create-release-branch": "^4.1.1",
+    "@metamask/create-release-branch": "^4.1.2",
     "@metamask/eslint-config": "^14.0.0",
     "@metamask/eslint-config-jest": "^14.0.0",
     "@metamask/eslint-config-nodejs": "^14.0.0",
