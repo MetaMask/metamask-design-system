@@ -58,7 +58,7 @@ describe('Icon', () => {
     const svg = container.firstChild;
 
     expect(svg).toHaveAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    expect(svg).toHaveAttribute('viewBox', '0 0 512 512');
+    expect(svg).toHaveAttribute('viewBox', '0 0 24 24');
     expect(svg).toHaveAttribute('fill', 'currentColor');
   });
 
