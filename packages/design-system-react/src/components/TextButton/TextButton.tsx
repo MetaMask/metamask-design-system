@@ -22,7 +22,7 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
 
     const mergedClassName = twMerge(
       // Reset padding, height and animations
-      'px-0 h-auto bg-transparent rounded-none',
+      'h-auto rounded-none bg-transparent px-0',
       'transform-none transition-none active:scale-100',
       // Default text button styles
       !isInverse && [
@@ -39,11 +39,11 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
       // Hover/Active states - only applied when interactive
       isInteractive && [
         !isInverse && [
-          'hover:bg-hover hover:text-primary-default-hover hover:underline hover:decoration-2 hover:underline-offset-4 hover:decoration-primary-default-hover',
+          'hover:bg-hover hover:text-primary-default-hover hover:underline hover:decoration-primary-default-hover hover:decoration-2 hover:underline-offset-4',
           'active:bg-pressed active:text-primary-default-pressed active:decoration-primary-default-pressed',
         ],
         isInverse && [
-          'hover:bg-hover hover:text-primary-inverse hover:underline hover:decoration-2 hover:underline-offset-4 hover:decoration-primary-inverse',
+          'hover:bg-hover hover:text-primary-inverse hover:underline hover:decoration-primary-inverse hover:decoration-2 hover:underline-offset-4',
           'active:bg-pressed active:text-primary-inverse active:decoration-primary-inverse',
         ],
       ],

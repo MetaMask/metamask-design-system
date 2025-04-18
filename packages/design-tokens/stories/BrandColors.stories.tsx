@@ -38,7 +38,7 @@ export const CSS: Story = {
   render: () => {
     const cssBrandColors = getCSSVariablesFromStylesheet('--brand-colors');
     return (
-      <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
+      <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {/* Mapping through each brand color and rendering a ColorSwatch component for it */}
         {Object.values(cssBrandColors).map(({ color, name }) => (
           <ColorSwatch
@@ -60,7 +60,7 @@ export const CSS: Story = {
 
 export const JS: Story = {
   render: () => (
-    <div className="grid gap-4 grid-cols-[repeat(auto-fill,300px)]">
+    <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
       {/* Mapping through each brand color and rendering a ColorSwatch component for it */}
       {Object.entries(brandColorJS).map(([name, color]) => (
         <ColorSwatch
