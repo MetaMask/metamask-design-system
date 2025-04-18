@@ -38,7 +38,7 @@ export const AvatarNetwork = React.forwardRef<
           <img
             src={src}
             alt={altText}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
             {...imageProps}
           />
         )}

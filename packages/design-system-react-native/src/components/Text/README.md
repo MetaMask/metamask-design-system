@@ -157,7 +157,7 @@ import {
   color={TextColor.ErrorDefault}
   fontWeight={FontWeight.Bold}
   fontStyle={FontStyle.Italic}
-  twClassName="underline text-center"
+  twClassName="text-center underline"
   numberOfLines={2}
   ellipsizeMode="tail"
 >

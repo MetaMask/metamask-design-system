@@ -74,7 +74,7 @@ export const IconNameStory: Story = {
 
 export const Size: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Xs} />
       <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Sm} />
       <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Md} />
@@ -110,7 +110,7 @@ export const Severity: Story = {
 
 export const HasBorder: Story = {
   render: () => (
-    <div className="flex gap-2 p-2 bg-primary-muted">
+    <div className="flex gap-2 bg-primary-muted p-2">
       <AvatarIcon
         iconName={IconName.User}
         severity={AvatarIconSeverity.Default}

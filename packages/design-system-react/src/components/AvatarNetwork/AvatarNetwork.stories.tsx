@@ -114,7 +114,7 @@ export const FallbackText: Story = {
 
 export const Size: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <AvatarNetwork
         name="Ethereum"
         fallbackText="E"
@@ -146,7 +146,7 @@ export const Size: Story = {
 
 export const HasBorder: Story = {
   render: () => (
-    <div className="flex gap-2 p-2 bg-primary-muted">
+    <div className="flex gap-2 bg-primary-muted p-2">
       <AvatarNetwork name="Arbitrum" src={SAMPLE_AVATARNETWORK_URIS[0]} />
       <AvatarNetwork
         name="Avalanche"
