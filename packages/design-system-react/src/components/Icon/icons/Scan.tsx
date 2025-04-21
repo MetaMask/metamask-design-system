@@ -4,12 +4,12 @@ import { Ref, forwardRef } from 'react';
 const SvgScan = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
+    viewBox="0 0 24 24"
     fill="currentColor"
     ref={ref}
     {...props}
   >
-    <path d="M62 215c-8 0-15-7-15-16v-47C47 96 92 51 147 51h48c9 0 16 7 16 16s-7 16-16 16h-48c-38 0-69 31-69 69v47c0 9-7 16-16 16m379 0c-9 0-16-7-16-16v-47c0-38-31-69-69-69h-48c-9 0-16-7-16-16s7-16 16-16h48c55 0 100 45 100 101v47c0 9-7 16-15 16m-85 246h-29c-9 0-16-7-16-16s7-16 16-16h29c38 0 69-31 69-69v-28c0-9 7-16 16-16 8 0 15 7 15 16v28c0 56-45 101-100 101m-161 0h-48c-55 0-100-45-100-101v-47c0-9 7-16 15-16 9 0 16 7 16 16v47c0 38 31 69 69 69h48c8 0 16 7 16 16s-7 16-16 16m189-221H119c-9 0-16 7-16 16s7 16 16 16h265c9 0 16-7 16-16s-7-16-16-16m-237 56v6c0 34 28 62 62 62h86c34 0 61-28 61-62v-6c0-3-2-5-4-5H151c-2 0-4 2-4 5m0-80v-6c0-34 28-62 62-62h86c34 0 61 28 61 62v6c0 3-2 5-4 5H151c-2 0-4-2-4-5" />
+    <path d="M2 7V2h5v2H4v3zm0 15v-5h2v3h3v2zm15 0v-2h3v-3h2v5zm3-15V4h-3V2h5v5zm-2.5 10.5H19V19h-1.5zm0-3H19V16h-1.5zM16 16h1.5v1.5H16zm-1.5 1.5H16V19h-1.5zM13 16h1.5v1.5H13zm3-3h1.5v1.5H16zm-1.5 1.5H16V16h-1.5zM13 13h1.5v1.5H13zm6-8v6h-6V5zm-8 8v6H5v-6zm0-8v6H5V5zM9.5 17.5v-3h-3v3zm0-8v-3h-3v3zm8 0v-3h-3v3z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgScan);
