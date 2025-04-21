@@ -5,11 +5,6 @@ import { ScrollView, View } from 'react-native';
 
 import { IconColor, IconName, IconSize } from '../../types';
 import Icon from './Icon';
-import {
-  DEFAULT_ICON_ICONSIZE,
-  DEFAULT_ICON_ICONNAME,
-  SAMPLE_ICON_PROPS,
-} from './Icon.constants';
 import type { IconProps } from './Icon.types';
 
 const meta: Meta<IconProps> = {
@@ -57,7 +52,9 @@ type Story = StoryObj<IconProps>;
 
 export const Default: Story = {
   args: {
-    ...SAMPLE_ICON_PROPS,
+    name: IconName.Add,
+    size: IconSize.Md,
+    color: IconColor.IconDefault,
   },
   render: (args) => <IconStory {...args} />,
 };
@@ -67,7 +64,7 @@ export const Sizes: Story = {
     <View style={{ gap: 8 }}>
       {Object.values(IconSize).map((size) => (
         <View key={size}>
-          <Icon name={DEFAULT_ICON_ICONNAME} size={size as IconSize} />
+          <Icon name={IconName.Add} size={size as IconSize} />
         </View>
       ))}
     </View>
@@ -81,11 +78,7 @@ export const Colors: Story = {
     >
       {Object.values(IconColor).map((color) => (
         <View key={color} style={{ alignItems: 'center', gap: 8 }}>
-          <IconStory
-            name={DEFAULT_ICON_ICONNAME}
-            color={color}
-            size={DEFAULT_ICON_ICONSIZE}
-          />
+          <IconStory name={IconName.Add} color={color} size={IconSize.Md} />
         </View>
       ))}
     </View>

@@ -1,7 +1,7 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
+import { ButtonIconSize } from '../../types';
 import type { IconColor } from '../Icon';
-import { DEFAULT_BUTTONICON_PROPS } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
 
 /**
@@ -32,10 +32,10 @@ import type { ButtonIconProps } from './ButtonIcon.types';
  * ```
  */
 export const generateButtonIconContainerClassNames = ({
-  isDisabled = DEFAULT_BUTTONICON_PROPS.isDisabled,
+  isDisabled = false,
   isPressed = false,
-  isFloating = DEFAULT_BUTTONICON_PROPS.isFloating,
-  size = DEFAULT_BUTTONICON_PROPS.size,
+  isFloating = false,
+  size = ButtonIconSize.Md,
   twClassName = '',
 }: Partial<ButtonIconProps> & {
   isPressed?: boolean;
@@ -80,7 +80,7 @@ export const generateButtonIconContainerClassNames = ({
  */
 export const generateButtonIconIconColorClassNames = ({
   isInverse = false,
-  isFloating = DEFAULT_BUTTONICON_PROPS.isFloating,
+  isFloating = false,
 }: Partial<ButtonIconProps>): IconColor => {
   const iconColor =
     isInverse || isFloating ? 'text-primary-inverse' : 'text-icon-default';

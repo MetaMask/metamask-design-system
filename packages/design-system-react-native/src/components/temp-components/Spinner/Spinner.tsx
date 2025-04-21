@@ -10,14 +10,13 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import type { IconProps } from '../../Icon';
-import Icon, { IconName } from '../../Icon';
+import Icon, { IconColor, IconName, IconSize } from '../../Icon';
 import type { TextProps } from '../../Text';
-import Text from '../../Text';
-import { DEFAULT_SPINNER_PROPS } from './Spinner.constants';
+import Text, { TextVariant, TextColor } from '../../Text';
 import type { SpinnerProps } from './Spinner.types';
 
 const Spinner = ({
-  color = DEFAULT_SPINNER_PROPS.color,
+  color = IconColor.IconDefault,
   spinnerIconProps,
   loadingText,
   loadingTextProps,
@@ -44,14 +43,17 @@ const Spinner = ({
   }));
 
   const finalSpinnerIconProps: IconProps = {
-    ...DEFAULT_SPINNER_PROPS.spinnerIconProps,
+    size: IconSize.Md,
     name: IconName.Loading,
+    testID: 'spinner-icon',
     color,
     ...spinnerIconProps,
   };
 
   const finalLoadingTextProps: Partial<TextProps> = {
-    ...DEFAULT_SPINNER_PROPS.loadingTextProps,
+    variant: TextVariant.BodyMd,
+    color: TextColor.TextDefault,
+    testID: 'spinner-text',
     ...loadingTextProps,
   };
 

@@ -4,7 +4,6 @@ import { View } from 'react-native';
 import { ButtonBaseSize } from '../../types';
 import { IconName } from '../Icon';
 import ButtonBase from './ButtonBase';
-import { DEFAULT_BUTTONBASE_PROPS } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
 
 const meta: Meta<ButtonBaseProps> = {
@@ -51,13 +50,13 @@ type Story = StoryObj<ButtonBaseProps>;
 export const Default: Story = {
   args: {
     children: 'ButtonBase',
-    size: DEFAULT_BUTTONBASE_PROPS.size,
-    isLoading: DEFAULT_BUTTONBASE_PROPS.isLoading,
+    size: ButtonBaseSize.Lg,
+    isLoading: false,
     loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
-    isDisabled: DEFAULT_BUTTONBASE_PROPS.isDisabled,
-    isFullWidth: DEFAULT_BUTTONBASE_PROPS.isFullWidth,
+    isDisabled: false,
+    isFullWidth: false,
   },
 };
 

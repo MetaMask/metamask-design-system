@@ -1,18 +1,15 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 
+import { IconColor, IconSize } from '../../types';
 import { assetByIconName } from './Icon.assets';
-import {
-  DEFAULT_ICON_ICONSIZE,
-  DEFAULT_ICON_ICONCOLOR,
-} from './Icon.constants';
 import type { IconProps } from './Icon.types';
 import { generateIconClassNames } from './Icon.utilities';
 
 const Icon = ({
-  size = DEFAULT_ICON_ICONSIZE,
+  size = IconSize.Md,
   name,
-  color = DEFAULT_ICON_ICONCOLOR,
+  color = IconColor.IconDefault,
   twClassName,
   style,
   ...props
