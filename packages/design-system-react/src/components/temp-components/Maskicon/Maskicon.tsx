@@ -26,7 +26,7 @@ export const Maskicon = ({
   }, [address, size]);
 
   if (!svgString) {
-    return <div style={{ width: size, height: size, ...style }} />;
+    return <div style={{ width: size, height: size, ...style }} {...props} />;
   }
 
   return (
