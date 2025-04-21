@@ -6,6 +6,7 @@ module.exports = {
     fill: 'currentColor',
   },
   template: require('./template').default,
+  prettier: false,
   svgoConfig: {
     plugins: [
       {
