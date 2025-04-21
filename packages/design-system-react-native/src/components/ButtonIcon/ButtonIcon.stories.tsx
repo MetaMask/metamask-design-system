@@ -5,7 +5,6 @@ import { View } from 'react-native';
 import { ButtonIconSize } from '../../types';
 import { IconName } from '../Icon';
 import ButtonIcon from './ButtonIcon';
-import { DEFAULT_BUTTONICON_PROPS } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
 
 const meta: Meta<ButtonIconProps> = {
@@ -56,11 +55,11 @@ const ButtonIconStory: React.FC<ButtonIconProps> = ({
 
 export const Default: Story = {
   args: {
-    size: DEFAULT_BUTTONICON_PROPS.size,
-    iconName: DEFAULT_BUTTONICON_PROPS.iconName,
-    isDisabled: DEFAULT_BUTTONICON_PROPS.isDisabled,
-    isInverse: DEFAULT_BUTTONICON_PROPS.isInverse,
-    isFloating: DEFAULT_BUTTONICON_PROPS.isInverse,
+    size: ButtonIconSize.Md,
+    iconName: IconName.Close,
+    isDisabled: false,
+    isInverse: false,
+    isFloating: false,
   },
   render: (args) => <ButtonIconStory {...args} />,
 };
@@ -70,10 +69,7 @@ export const Sizes: Story = {
     <View style={{ gap: 8 }}>
       {Object.values(ButtonIconSize).map((size) => (
         <View key={size}>
-          <ButtonIconStory
-            iconName={DEFAULT_BUTTONICON_PROPS.iconName}
-            size={size}
-          />
+          <ButtonIconStory iconName={IconName.Close} size={size} />
         </View>
       ))}
     </View>
@@ -81,19 +77,13 @@ export const Sizes: Story = {
 };
 
 export const isDisabled: Story = {
-  render: () => (
-    <ButtonIconStory iconName={DEFAULT_BUTTONICON_PROPS.iconName} isDisabled />
-  ),
+  render: () => <ButtonIconStory iconName={IconName.Close} isDisabled />,
 };
 
 export const isInverse: Story = {
-  render: () => (
-    <ButtonIconStory iconName={DEFAULT_BUTTONICON_PROPS.iconName} isInverse />
-  ),
+  render: () => <ButtonIconStory iconName={IconName.Close} isInverse />,
 };
 
 export const isFloating: Story = {
-  render: () => (
-    <ButtonIconStory iconName={DEFAULT_BUTTONICON_PROPS.iconName} isFloating />
-  ),
+  render: () => <ButtonIconStory iconName={IconName.Close} isFloating />,
 };

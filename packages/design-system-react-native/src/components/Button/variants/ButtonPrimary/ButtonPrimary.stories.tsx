@@ -2,10 +2,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { ButtonBaseSize } from '../../../ButtonBase';
+import { ButtonPrimarySize } from '../../../../types';
 import { IconName } from '../../../Icon';
 import ButtonPrimary from './ButtonPrimary';
-import { DEFAULT_BUTTONPRIMARY_PROPS } from './ButtonPrimary.constants';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 
 const meta: Meta<ButtonPrimaryProps> = {
@@ -17,7 +16,7 @@ const meta: Meta<ButtonPrimaryProps> = {
     },
     size: {
       control: 'select',
-      options: ButtonBaseSize,
+      options: ButtonPrimarySize,
     },
     isLoading: {
       control: 'boolean',
@@ -73,15 +72,15 @@ const ButtonPrimaryStory: React.FC<ButtonPrimaryProps> = ({
 export const Default: Story = {
   args: {
     children: 'Sample ButtonPrimary Text',
-    size: DEFAULT_BUTTONPRIMARY_PROPS.size,
-    isLoading: DEFAULT_BUTTONPRIMARY_PROPS.isLoading,
+    size: ButtonPrimarySize.Lg,
+    isLoading: false,
     loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
-    isDisabled: DEFAULT_BUTTONPRIMARY_PROPS.isDisabled,
-    isFullWidth: DEFAULT_BUTTONPRIMARY_PROPS.isFullWidth,
-    isInverse: DEFAULT_BUTTONPRIMARY_PROPS.isInverse,
-    isDanger: DEFAULT_BUTTONPRIMARY_PROPS.isDanger,
+    isDisabled: false,
+    isFullWidth: false,
+    isInverse: false,
+    isDanger: false,
   },
   render: (args) => <ButtonPrimaryStory {...args} />,
 };
@@ -89,9 +88,9 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonPrimary size={ButtonBaseSize.Sm}>ButtonSize Sm</ButtonPrimary>
-      <ButtonPrimary size={ButtonBaseSize.Md}>ButtonSize Md</ButtonPrimary>
-      <ButtonPrimary size={ButtonBaseSize.Lg}>
+      <ButtonPrimary size={ButtonPrimarySize.Sm}>ButtonSize Sm</ButtonPrimary>
+      <ButtonPrimary size={ButtonPrimarySize.Md}>ButtonSize Md</ButtonPrimary>
+      <ButtonPrimary size={ButtonPrimarySize.Lg}>
         ButtonSize Lg (Default)
       </ButtonPrimary>
     </View>

@@ -5,7 +5,6 @@ import { View } from 'react-native';
 import { IconName } from '../Icon';
 import Text from '../Text';
 import TextButton from './TextButton';
-import { DEFAULT_TEXTBUTTON_PROPS } from './TextButton.constants';
 import type { TextButtonProps } from './TextButton.types';
 
 const meta: Meta<TextButtonProps> = {
@@ -63,11 +62,11 @@ const TextButtonStory: React.FC<TextButtonProps> = ({
 export const Default: Story = {
   args: {
     children: 'Sample TextButton Text',
-    isLoading: DEFAULT_TEXTBUTTON_PROPS.isLoading,
+    isLoading: false,
     loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
-    isDisabled: DEFAULT_TEXTBUTTON_PROPS.isDisabled,
+    isDisabled: false,
   },
   render: (args) => <TextButtonStory {...args} />,
 };
