@@ -4,7 +4,6 @@ import { Image, ImageSourcePropType, View } from 'react-native';
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import Icon, { IconName } from '../Icon';
 import AvatarBase from './AvatarBase';
-import { DEFAULT_AVATARBASE_PROPS } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
 
 const meta: Meta<AvatarBaseProps> = {
@@ -44,8 +43,8 @@ const TestImage = (
 
 export const Default: Story = {
   args: {
-    size: DEFAULT_AVATARBASE_PROPS.size,
-    shape: DEFAULT_AVATARBASE_PROPS.shape,
+    size: AvatarBaseSize.Md,
+    shape: AvatarBaseShape.Circle,
     fallbackText: '',
     twClassName: '',
   },

@@ -1,6 +1,6 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
-import { DEFAULT_BUTTONBASE_PROPS } from './ButtonBase.constants';
+import { ButtonBaseSize } from '../../types';
 import type { ButtonBaseProps } from './ButtonBase.types';
 
 /**
@@ -9,7 +9,7 @@ import type { ButtonBaseProps } from './ButtonBase.types';
  * This function constructs a class name string based on the button's `size`,
  * `isDisabled`, `isFullWidth`, and optional additional Tailwind class names.
  *
- * @param size - The size of the button, defaulting to `DEFAULT_BUTTONBASE_PROPS.size`.
+ * @param size - The size of the button, defaulting to `ButtonBaseSize.Lg`.
  * @param isDisabled - A boolean indicating whether the button is disabled, affecting opacity.
  * @param isFullWidth - A boolean indicating whether the button should stretch to full width.
  * @param twClassName - Additional Tailwind class names for customization.
@@ -29,7 +29,7 @@ import type { ButtonBaseProps } from './ButtonBase.types';
  * ```
  */
 export const generateButtonBaseContainerClassNames = ({
-  size = DEFAULT_BUTTONBASE_PROPS.size,
+  size = ButtonBaseSize.Lg,
   isDisabled,
   isFullWidth,
   twClassName = '',

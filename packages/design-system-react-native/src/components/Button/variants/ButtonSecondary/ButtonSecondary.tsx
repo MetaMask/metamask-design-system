@@ -3,10 +3,11 @@ import React, { useMemo, useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import ButtonBase from '../../../ButtonBase';
-import type { IconProps, IconColor } from '../../../Icon';
+import type { IconProps } from '../../../Icon';
+import { IconColor, IconSize } from '../../../Icon';
 import type { SpinnerProps } from '../../../temp-components/Spinner';
 import type { TextProps } from '../../../Text/Text.types';
-import { DEFAULT_BUTTONSECONDARY_PROPS } from './ButtonSecondary.constants';
+import { TextVariant, FontWeight } from '../../../Text';
 import type { ButtonSecondaryProps } from './ButtonSecondary.types';
 import {
   generateButtonSecondaryContainerClassNames,
@@ -19,9 +20,9 @@ const ButtonSecondary = ({
   spinnerProps,
   startIconProps,
   endIconProps,
-  isDanger = DEFAULT_BUTTONSECONDARY_PROPS.isDanger,
-  isInverse = DEFAULT_BUTTONSECONDARY_PROPS.isInverse,
-  isLoading = DEFAULT_BUTTONSECONDARY_PROPS.isLoading,
+  isDanger = false,
+  isInverse = false,
+  isLoading = false,
   onPressIn,
   onPressOut,
   twClassName,
@@ -50,24 +51,28 @@ const ButtonSecondary = ({
   }, [isPressed, isDanger, isInverse, isLoading]);
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
-    ...DEFAULT_BUTTONSECONDARY_PROPS.textProps,
+    variant: TextVariant.BodyMd,
+    fontWeight: FontWeight.Medium,
+    numberOfLines: 1,
+    ellipsizeMode: 'clip',
     ...textProps,
     twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
   };
   const finalStartIconProps: Partial<IconProps> = {
-    ...DEFAULT_BUTTONSECONDARY_PROPS.startIconProps,
+    size: IconSize.Sm,
+    testID: 'start-icon',
     ...startIconProps,
     twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };
 
   const finalEndIconProps: Partial<IconProps> = {
-    ...DEFAULT_BUTTONSECONDARY_PROPS.endIconProps,
+    size: IconSize.Sm,
+    testID: 'end-icon',
     ...endIconProps,
     twClassName: `${twTextClassNames} ${endIconProps?.twClassName ?? ''}`,
   };
 
   const finalSpinnerProps: SpinnerProps = {
-    ...DEFAULT_BUTTONSECONDARY_PROPS.spinnerProps,
     color: twTextClassNames as IconColor,
     loadingTextProps: {
       twClassName: twTextClassNames,

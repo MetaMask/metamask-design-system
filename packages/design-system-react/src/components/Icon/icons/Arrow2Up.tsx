@@ -7,12 +7,12 @@ const SvgArrow2Up = (
 ) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
+    viewBox="0 0 24 24"
     fill="currentColor"
     ref={ref}
     {...props}
   >
-    <path d="M256 469c-13 0-21-9-21-22V119l-93 99c-8 9-21 9-29 0s-8-23 0-32L241 49c9-9 21-9 30 0l128 137c8 9 8 23 0 32s-21 9-29 0l-93-99v328c0 13-8 22-21 22" />
+    <path d="M11 19.886V7.71l-5.6 5.6L4 11.885l8-8 8 8-1.4 1.425-5.6-5.6v12.176z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgArrow2Up);
