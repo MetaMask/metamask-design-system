@@ -10,5 +10,6 @@
     "strings": true
   },
   "tailwindCSS.classFunctions": ["tw", "tw`", "twClassName", "twMerge"],
-  "tailwindCSS.validate": true
+  "tailwindCSS.validate": true,
+  "editor.formatOnSave": false
 }

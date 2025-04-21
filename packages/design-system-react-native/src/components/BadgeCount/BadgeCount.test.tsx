@@ -16,7 +16,7 @@ describe('BadgeCount', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
-      const computedExpectedOuter = tw`items-center justify-center self-start rounded-lg bg-error-default ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]} `;
+      const computedExpectedOuter = tw`bg-error-default items-center justify-center self-start rounded-lg ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]} `;
       const expectedTextProps = {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[sizeVal],
         color: TextColor.ErrorInverse,
@@ -65,7 +65,7 @@ describe('BadgeCount', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
-      const computedExpectedOuter = tw`items-center justify-center self-start rounded-lg bg-error-default ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]} `;
+      const computedExpectedOuter = tw`bg-error-default items-center justify-center self-start rounded-lg ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]} `;
       return (
         <>
           <BadgeCount count={150} max={99} testID="badge-count" />
@@ -96,7 +96,7 @@ describe('BadgeCount', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
-      const computedExpectedOuter = tw`items-center justify-center self-start rounded-lg bg-error-default ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]} `;
+      const computedExpectedOuter = tw`bg-error-default items-center justify-center self-start rounded-lg ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]} `;
       const expectedTextProps = {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[sizeVal],
         color: customTextProps.color, // overridden
@@ -166,7 +166,7 @@ describe('BadgeCount', () => {
     const customSize = BadgeCountSize.Lg;
     const TestComponent = () => {
       const tw = useTailwind();
-      const computedExpectedOuter = tw`items-center justify-center self-start rounded-lg bg-error-default ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[customSize]} `;
+      const computedExpectedOuter = tw`bg-error-default items-center justify-center self-start rounded-lg ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[customSize]} `;
       const expectedTextProps = {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[customSize],
         color: TextColor.ErrorInverse,

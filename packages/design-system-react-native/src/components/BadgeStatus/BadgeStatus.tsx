@@ -29,7 +29,7 @@ const BadgeStatus = ({
       {...props}
     >
       <View
-        style={tw`absolute bottom-0 left-0 right-0 top-0 rounded-full bg-background-default`}
+        style={tw`bg-background-default absolute bottom-0 left-0 right-0 top-0 rounded-full`}
       />
       <View
         style={[
