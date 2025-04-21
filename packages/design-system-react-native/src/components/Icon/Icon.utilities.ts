@@ -1,9 +1,6 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
-import {
-  DEFAULT_ICON_ICONCOLOR,
-  DEFAULT_ICON_ICONSIZE,
-} from './Icon.constants';
+import { IconColor, IconSize } from '../../types';
 import type { IconProps } from './Icon.types';
 
 /**
@@ -26,8 +23,8 @@ import type { IconProps } from './Icon.types';
  * ```
  */
 export const generateIconClassNames = ({
-  color = DEFAULT_ICON_ICONCOLOR,
-  size = DEFAULT_ICON_ICONSIZE,
+  color = IconColor.IconDefault,
+  size = IconSize.Md,
   twClassName = '',
 }: Partial<IconProps>): string => {
   const mergedClassnames = `${color} w-[${size}px] h-[${size}px] ${twClassName}`;

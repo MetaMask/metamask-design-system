@@ -7,10 +7,7 @@ import { ButtonIconSize } from '../../types';
 import Icon from '../Icon';
 import type { IconProps } from '../Icon';
 import ButtonAnimated from '../temp-components/ButtonAnimated';
-import {
-  DEFAULT_BUTTONICON_PROPS,
-  MAPPING_BUTTONICONSIZE_ICONSIZE,
-} from './ButtonIcon.constants';
+import { MAPPING_BUTTONICONSIZE_ICONSIZE } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
 import {
   generateButtonIconContainerClassNames,
@@ -21,9 +18,9 @@ const ButtonIcon = ({
   size = ButtonIconSize.Md,
   iconName,
   iconProps,
-  isDisabled = DEFAULT_BUTTONICON_PROPS.isDisabled,
-  isInverse = DEFAULT_BUTTONICON_PROPS.isInverse,
-  isFloating = DEFAULT_BUTTONICON_PROPS.isFloating,
+  isDisabled = false,
+  isInverse = false,
+  isFloating = false,
   onPressIn,
   onPressOut,
   twClassName,

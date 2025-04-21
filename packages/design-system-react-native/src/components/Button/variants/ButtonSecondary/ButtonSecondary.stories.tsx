@@ -2,10 +2,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { ButtonBaseSize } from '../../../ButtonBase';
+import { ButtonSecondarySize } from '../../../../types';
 import { IconName } from '../../../Icon';
 import ButtonSecondary from './ButtonSecondary';
-import { DEFAULT_BUTTONSECONDARY_PROPS } from './ButtonSecondary.constants';
 import type { ButtonSecondaryProps } from './ButtonSecondary.types';
 
 const meta: Meta<ButtonSecondaryProps> = {
@@ -17,7 +16,7 @@ const meta: Meta<ButtonSecondaryProps> = {
     },
     size: {
       control: 'select',
-      options: ButtonBaseSize,
+      options: ButtonSecondarySize,
     },
     isLoading: {
       control: 'boolean',
@@ -73,15 +72,15 @@ const ButtonSecondaryStory: React.FC<ButtonSecondaryProps> = ({
 export const Default: Story = {
   args: {
     children: 'Sample ButtonSecondary Text',
-    size: DEFAULT_BUTTONSECONDARY_PROPS.size,
-    isLoading: DEFAULT_BUTTONSECONDARY_PROPS.isLoading,
+    size: ButtonSecondarySize.Lg,
+    isLoading: false,
     loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
-    isDisabled: DEFAULT_BUTTONSECONDARY_PROPS.isDisabled,
-    isFullWidth: DEFAULT_BUTTONSECONDARY_PROPS.isFullWidth,
-    isInverse: DEFAULT_BUTTONSECONDARY_PROPS.isInverse,
-    isDanger: DEFAULT_BUTTONSECONDARY_PROPS.isDanger,
+    isDisabled: false,
+    isFullWidth: false,
+    isInverse: false,
+    isDanger: false,
   },
   render: (args) => <ButtonSecondaryStory {...args} />,
 };
@@ -89,9 +88,13 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonSecondary size={ButtonBaseSize.Sm}>ButtonSize Sm</ButtonSecondary>
-      <ButtonSecondary size={ButtonBaseSize.Md}>ButtonSize Md</ButtonSecondary>
-      <ButtonSecondary size={ButtonBaseSize.Lg}>
+      <ButtonSecondary size={ButtonSecondarySize.Sm}>
+        ButtonSize Sm
+      </ButtonSecondary>
+      <ButtonSecondary size={ButtonSecondarySize.Md}>
+        ButtonSize Md
+      </ButtonSecondary>
+      <ButtonSecondary size={ButtonSecondarySize.Lg}>
         ButtonSize Lg (Default)
       </ButtonSecondary>
     </View>

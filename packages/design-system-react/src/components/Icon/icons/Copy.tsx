@@ -4,12 +4,12 @@ import { Ref, forwardRef } from 'react';
 const SvgCopy = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
+    viewBox="0 0 24 24"
     fill="currentColor"
     ref={ref}
     {...props}
   >
-    <path d="M333 274v86c0 72-28 101-100 101h-86c-72 0-100-29-100-101v-86c0-71 28-100 100-100h86c72 0 100 29 100 100m23-223h-86c-63 0-93 23-99 77-1 11 8 20 20 20h42c86 0 126 40 126 126v43c0 11 9 21 21 19 54-6 76-35 76-98v-86c0-72-28-101-100-101" />
+    <path d="M9 17.886q-.825 0-1.412-.588C7 16.71 7 16.436 7 15.886v-12q0-.825.588-1.413A1.93 1.93 0 0 1 9 1.886h9q.824 0 1.413.587.587.588.587 1.413v12q0 .824-.587 1.412c-.587.588-.863.588-1.413.588zm0-2h9v-12H9zm-4 6q-.824 0-1.412-.588C2.999 20.71 3 20.436 3 19.886v-14h2v14h11v2z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgCopy);

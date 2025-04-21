@@ -2,10 +2,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { ButtonBaseSize } from '../../../ButtonBase';
+import { ButtonTertiarySize } from '../../../../types';
 import { IconName } from '../../../Icon';
 import ButtonTertiary from './ButtonTertiary';
-import { DEFAULT_BUTTONTERTIARY_PROPS } from './ButtonTertiary.constants';
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
 const meta: Meta<ButtonTertiaryProps> = {
@@ -17,7 +16,7 @@ const meta: Meta<ButtonTertiaryProps> = {
     },
     size: {
       control: 'select',
-      options: ButtonBaseSize,
+      options: ButtonTertiarySize,
     },
     isLoading: {
       control: 'boolean',
@@ -73,15 +72,15 @@ const ButtonTertiaryStory: React.FC<ButtonTertiaryProps> = ({
 export const Default: Story = {
   args: {
     children: 'Sample ButtonTertiary Text',
-    size: DEFAULT_BUTTONTERTIARY_PROPS.size,
-    isLoading: DEFAULT_BUTTONTERTIARY_PROPS.isLoading,
+    size: ButtonTertiarySize.Lg,
+    isLoading: false,
     loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
-    isDisabled: DEFAULT_BUTTONTERTIARY_PROPS.isDisabled,
-    isFullWidth: DEFAULT_BUTTONTERTIARY_PROPS.isFullWidth,
-    isInverse: DEFAULT_BUTTONTERTIARY_PROPS.isInverse,
-    isDanger: DEFAULT_BUTTONTERTIARY_PROPS.isDanger,
+    isDisabled: false,
+    isFullWidth: false,
+    isInverse: false,
+    isDanger: false,
   },
   render: (args) => <ButtonTertiaryStory {...args} />,
 };
@@ -89,9 +88,13 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonTertiary size={ButtonBaseSize.Sm}>ButtonSize Sm</ButtonTertiary>
-      <ButtonTertiary size={ButtonBaseSize.Md}>ButtonSize Md</ButtonTertiary>
-      <ButtonTertiary size={ButtonBaseSize.Lg}>
+      <ButtonTertiary size={ButtonTertiarySize.Sm}>
+        ButtonSize Sm
+      </ButtonTertiary>
+      <ButtonTertiary size={ButtonTertiarySize.Md}>
+        ButtonSize Md
+      </ButtonTertiary>
+      <ButtonTertiary size={ButtonTertiarySize.Lg}>
         ButtonSize Lg (Default)
       </ButtonTertiary>
     </View>
