@@ -108,7 +108,7 @@ export const Default: Story = {
 
 export const Variant: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div className="flex flex-col gap-4">
       {Object.keys(AvatarGroupVariant).map((variantKey) => (
         <AvatarGroupStory
           key={variantKey}
@@ -123,7 +123,7 @@ export const Variant: Story = {
 
 export const AvatarPropsArr: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div className="flex flex-col gap-4">
       {Object.keys(AvatarGroupVariant).map((variantKey) => (
         <AvatarGroupStory
           key={variantKey}
@@ -142,12 +142,7 @@ export const Size: Story = {
       {Object.keys(AvatarGroupSize).map((sizeKey) => (
         <div
           key={sizeKey}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 4,
-            marginBottom: 16,
-          }}
+          className="flex flex-col gap-1 mb-4"
         >
           <AvatarGroupStory
             variant={AvatarGroupVariant.Account}
@@ -173,14 +168,7 @@ export const Size: Story = {
 
 export const Max: Story = {
   render: () => (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 4,
-        alignItems: 'flex-start',
-      }}
-    >
+    <div className="flex flex-col gap-1">
       {' '}
       <AvatarGroupStory variant={AvatarGroupVariant.Account} />
       <AvatarGroupStory variant={AvatarGroupVariant.Account} max={1} />
@@ -191,48 +179,20 @@ export const Max: Story = {
 
 export const IsReverse: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 4,
-          alignItems: 'flex-start',
-        }}
-      >
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1 items-start">
         <AvatarGroupStory variant={AvatarGroupVariant.Account} />
         <AvatarGroupStory variant={AvatarGroupVariant.Account} isReverse />
       </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 4,
-          alignItems: 'flex-start',
-        }}
-      >
+      <div className="flex flex-col gap-1 items-start">
         <AvatarGroupStory variant={AvatarGroupVariant.Favicon} />
         <AvatarGroupStory variant={AvatarGroupVariant.Favicon} isReverse />
       </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 4,
-          alignItems: 'flex-start',
-        }}
-      >
+      <div className="flex flex-col gap-1 items-start">
         <AvatarGroupStory variant={AvatarGroupVariant.Network} />
         <AvatarGroupStory variant={AvatarGroupVariant.Network} isReverse />
       </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 4,
-          alignItems: 'flex-start',
-        }}
-      >
+      <div className="flex flex-col gap-1 items-start">
         <AvatarGroupStory variant={AvatarGroupVariant.Token} />
         <AvatarGroupStory variant={AvatarGroupVariant.Token} isReverse />
       </div>

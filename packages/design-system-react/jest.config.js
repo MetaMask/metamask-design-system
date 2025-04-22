@@ -36,9 +36,6 @@ module.exports = merge(baseConfig, {
       statements: 100,
     },
   },
-  moduleNameMapper: {
-    '\\.svg$': '<rootDir>/__mocks__/svgMock.js',
-  },
 
   // Include setup file that configures testing utilities like @testing-library/react
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
