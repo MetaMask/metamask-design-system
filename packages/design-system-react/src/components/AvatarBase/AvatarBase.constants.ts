@@ -15,11 +15,11 @@ export const TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION: Record<
   AvatarBaseSize,
   string
 > = {
-  [AvatarBaseSize.Xs]: 'h-[17px] w-[17px]', // 16px with 1px border
-  [AvatarBaseSize.Sm]: 'h-[25px] w-[25px]', // 24px with 1px border
-  [AvatarBaseSize.Md]: 'h-[33px] w-[33px]', // 32px with 1px border
-  [AvatarBaseSize.Lg]: 'h-[42px] w-[42px]', // 40px with 2px border
-  [AvatarBaseSize.Xl]: 'h-[50px] w-[50px]', // 48px with 2px border
+  [AvatarBaseSize.Xs]: 'h-[18px] w-[18px]', // 16px with 1px border on each side
+  [AvatarBaseSize.Sm]: 'h-[26px] w-[26px]', // 24px with 1px border on each side
+  [AvatarBaseSize.Md]: 'h-[34px] w-[34px]', // 32px with 1px border on each side
+  [AvatarBaseSize.Lg]: 'h-[44px] w-[44px]', // 40px with 2px border on each side
+  [AvatarBaseSize.Xl]: 'h-[52px] w-[52px]', // 48px with 2px border on each side
 };
 
 export const TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE: Record<

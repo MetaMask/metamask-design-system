@@ -1,13 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { AvatarGroup } from './AvatarGroup';
+
 import { AvatarGroupVariant } from '../../types';
+import { AvatarGroup } from './AvatarGroup';
 import {
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
   SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR,
   SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
   SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
-} from './AvatarGroup.constants';
+} from './AvatarGroup.dev';
 
 describe('AvatarGroup', () => {
   it('renders default container classes', () => {

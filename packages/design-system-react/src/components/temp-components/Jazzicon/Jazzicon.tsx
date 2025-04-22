@@ -2,6 +2,7 @@ import jazzicon from '@metamask/jazzicon';
 import { KnownCaipNamespace } from '@metamask/utils';
 import React, { useEffect, useRef } from 'react';
 
+import { twMerge } from '../../../utils/tw-merge';
 import { JazziconProps } from './Jazzicon.types';
 import {
   generateSeedEthereum,
@@ -83,7 +84,9 @@ export const Jazzicon = ({
     };
   }, [address, size]);
 
-  return <div ref={containerRef} className={`flex ${className}`} {...props} />;
+  return (
+    <div ref={containerRef} className={twMerge('flex', className)} {...props} />
+  );
 };
 
 Jazzicon.displayName = 'Jazzicon';

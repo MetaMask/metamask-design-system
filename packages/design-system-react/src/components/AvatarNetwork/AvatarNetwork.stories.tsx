@@ -3,7 +3,7 @@ import React from 'react';
 
 import { AvatarNetworkSize } from '../../types';
 import { AvatarNetwork } from './AvatarNetwork';
-import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.constants';
+import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarNetwork> = {

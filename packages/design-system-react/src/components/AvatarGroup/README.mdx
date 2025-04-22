@@ -6,6 +6,8 @@ import * as AvatarGroupStories from './AvatarGroup.stories';
 
 The `AvatarGroup` component is designed to display a collection of avatars in a compact and structured layout. It supports different avatar variants and provides an overflow indicator when the number of avatars exceeds a specified limit.
 
+<Canvas of={AvatarGroupStories.Default} />
+
 ```tsx
 import {
   AvatarGroup,
@@ -76,8 +78,6 @@ import {
   ]}
 />;
 ```
-
-<Canvas of={AvatarGroupStories.Default} />
 
 ## Props
 
@@ -247,17 +247,230 @@ AvatarGroup supports five sizes, which map to Avatar sizes:
 
 <Canvas of={AvatarGroupStories.Size} />
 
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupSize,
+  AvatarGroupVariant,
+  AvatarAccountVariant,
+} from '@metamask/design-system-react';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+  size={AvatarGroupSize.Xs}
+/>;
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+  size={AvatarGroupSize.Sm}
+/>;
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+  size={AvatarGroupSize.Md}
+/>;
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+  size={AvatarGroupSize.Lg}
+/>;
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+  size={AvatarGroupSize.Xl}
+/>;
+```
+
 ### Max
 
 The `max` prop determines the maximum number of avatars to display before showing an overflow indicator. Default is `4`.
 
 <Canvas of={AvatarGroupStories.Max} />
 
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupVariant,
+  AvatarAccountVariant,
+} from '@metamask/design-system-react';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+/>;
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  max={1}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+/>;
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  max={10}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+/>;
+```
+
 ### Is Reverse
 
 The `isReverse` prop reverses the order of avatar stacking.
 
 <Canvas of={AvatarGroupStories.IsReverse} />
+
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupVariant,
+  AvatarAccountVariant,
+} from '@metamask/design-system-react';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+/>;
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  isReverse
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+/>;
+```
 
 ### Class Name
 

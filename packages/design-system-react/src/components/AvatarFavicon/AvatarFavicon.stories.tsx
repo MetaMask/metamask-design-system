@@ -3,7 +3,7 @@ import React from 'react';
 
 import { AvatarFaviconSize } from '../../types';
 import { AvatarFavicon } from './AvatarFavicon';
-import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.constants';
+import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.dev';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarFavicon> = {

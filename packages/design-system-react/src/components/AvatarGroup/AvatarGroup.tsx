@@ -2,19 +2,17 @@ import React, { useCallback } from 'react';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
+import { AvatarBase } from '../AvatarBase';
 import { AvatarAccount, AvatarAccountProps } from '../AvatarAccount';
-import { AvatarBaseSize } from '../AvatarBase';
-import { TWCLASSMAP_AVATARBASE_SIZE_BORDER } from '../AvatarBase/AvatarBase.constants';
+import { AvatarBaseSize, AvatarBaseShape } from '../AvatarBase';
 import { AvatarFavicon, AvatarFaviconProps } from '../AvatarFavicon';
 import { AvatarNetwork, AvatarNetworkProps } from '../AvatarNetwork';
 import { AvatarToken, AvatarTokenProps } from '../AvatarToken';
-import { Text, TextColor } from '../Text';
+import { TextColor } from '../Text';
 import {
-  AVATAR_GROUP_SIZE_CLASS_MAP,
   AVATAR_GROUP_SIZE_ISREVERSE_NEGATIVESPACEBETWEENAVATARS_MAP,
   AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP,
   AVATAR_GROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT_MAP,
-  AVATAR_GROUP_SQUARE_BORDER_RADIUS_MAP,
 } from './AvatarGroup.constants';
 import { AvatarGroupProps } from './AvatarGroup.types';
 
@@ -52,15 +50,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     );
     const overflowTextContainerClassNames = twMerge(
       // Base style
-      'flex bg-icon-default items-center justify-center overflow-hidden',
-      // Size
-      `${AVATAR_GROUP_SIZE_CLASS_MAP[size]}`,
-      // Border radius
-      variant === AvatarGroupVariant.Network
-        ? AVATAR_GROUP_SQUARE_BORDER_RADIUS_MAP[size]
-        : 'rounded-full',
-      // Border
-      TWCLASSMAP_AVATARBASE_SIZE_BORDER[size],
+      'bg-icon-default',
       // Negative spacing
       negativeSpaceBetweenAvatarsTwClassName,
     );
@@ -81,7 +71,6 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
                     zIndex: index + 1,
                     ...avatarProps.style,
                   }}
-                  data-testid={`avatar-${variant}`}
                 />
               );
             case AvatarGroupVariant.Favicon:
@@ -96,7 +85,6 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
                     zIndex: index + 1,
                     ...avatarProps.style,
                   }}
-                  data-testid={`avatar-${variant}`}
                 />
               );
             case AvatarGroupVariant.Network:
@@ -111,7 +99,6 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
                     zIndex: index + 1,
                     ...avatarProps.style,
                   }}
-                  data-testid={`avatar-${variant}`}
                 />
               );
             case AvatarGroupVariant.Token:
@@ -126,7 +113,6 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
                     zIndex: index + 1,
                     ...avatarProps.style,
                   }}
-                  data-testid={`avatar-${variant}`}
                 />
               );
             default:
@@ -144,18 +130,24 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
           {renderAvatarList()}
         </div>
         {shouldRenderOverflowCounter && (
-          <div
+          <AvatarBase
             className={overflowTextContainerClassNames}
             style={{
               zIndex: avatarPropsArr.length,
             }}
-          >
-            <Text
-              variant={AVATAR_GROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT_MAP[size]}
-              color={TextColor.PrimaryInverse}
-              data-testid="avatar-overflow-text"
-            >{`+${overflowCounter}`}</Text>
-          </div>
+            hasBorder
+            fallbackText={`+${overflowCounter}`}
+            fallbackTextProps={{
+              variant: AVATAR_GROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT_MAP[size],
+              color: TextColor.PrimaryInverse,
+            }}
+            size={size}
+            shape={
+              variant === AvatarGroupVariant.Network
+                ? AvatarBaseShape.Square
+                : AvatarBaseShape.Circle
+            }
+          />
         )}
       </div>
     );
