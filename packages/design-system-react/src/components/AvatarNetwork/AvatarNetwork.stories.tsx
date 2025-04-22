@@ -66,7 +66,7 @@ export const Default: Story = {
   args: {
     src: SAMPLE_AVATARNETWORK_URIS[0],
     name: 'Arbitrum',
-    fallbackText: 'ETH',
+    fallbackText: 'ARB',
   },
 };
 
@@ -75,7 +75,7 @@ export const Src: Story = {
     <div className="flex gap-2">
       <AvatarNetwork
         name="Arbitrum"
-        fallbackText="Arb"
+        fallbackText="ARB"
         src={SAMPLE_AVATARNETWORK_URIS[0]}
       />
       <AvatarNetwork
