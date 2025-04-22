@@ -6,7 +6,6 @@ import { View } from 'react-native';
 import { ButtonSize, ButtonVariant } from '../../types';
 import { IconName } from '../Icon';
 import Button from './Button';
-import { DEFAULT_BUTTON_PROPS } from './Button.constants';
 import type { ButtonProps } from './Button.types';
 
 const meta: Meta<ButtonProps> = {
@@ -76,15 +75,15 @@ export const Default: Story = {
   args: {
     variant: ButtonVariant.Primary,
     children: 'Sample Button Text',
-    size: DEFAULT_BUTTON_PROPS.size,
-    isLoading: DEFAULT_BUTTON_PROPS.isLoading,
+    size: ButtonSize.Lg,
+    isLoading: false,
     loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
-    isDisabled: DEFAULT_BUTTON_PROPS.isDisabled,
-    isFullWidth: DEFAULT_BUTTON_PROPS.isFullWidth,
-    isDanger: DEFAULT_BUTTON_PROPS.isDanger,
-    isInverse: DEFAULT_BUTTON_PROPS.isInverse,
+    isDisabled: false,
+    isFullWidth: false,
+    isDanger: false,
+    isInverse: false,
   },
 };
 

@@ -5,12 +5,11 @@ import type { GestureResponderEvent } from 'react-native';
 import { View } from 'react-native';
 
 import type { IconProps, IconColor } from '../Icon';
-import Icon from '../Icon';
+import Icon, { IconSize } from '../Icon';
 import type { SpinnerProps } from '../temp-components/Spinner';
 import Spinner from '../temp-components/Spinner';
-import Text from '../Text/Text';
-import type { TextProps } from '../Text/Text.types';
-import { DEFAULT_TEXTBUTTON_PROPS } from './TextButton.constants';
+import type { TextProps } from '../Text';
+import Text, { TextVariant, FontWeight } from '../Text';
 import type { TextButtonProps } from './TextButton.types';
 import {
   generateTextButtonContainerClassNames,
@@ -20,7 +19,7 @@ import {
 const TextButton = ({
   children,
   textProps,
-  isLoading = DEFAULT_TEXTBUTTON_PROPS.isLoading,
+  isLoading = false,
   loadingText,
   spinnerProps,
   startIconName,
@@ -29,8 +28,8 @@ const TextButton = ({
   endIconName,
   endIconProps,
   endAccessory,
-  isDisabled = DEFAULT_TEXTBUTTON_PROPS.isDisabled,
-  isInverse = DEFAULT_TEXTBUTTON_PROPS.isInverse,
+  isDisabled = false,
+  isInverse = false,
   onPress,
   onPressIn,
   onPressOut,
@@ -64,28 +63,30 @@ const TextButton = ({
 
   // Merging default settings for Icons with passed in props
   const finalStartIconProps: Partial<IconProps> = {
-    ...DEFAULT_TEXTBUTTON_PROPS.startIconProps,
+    size: IconSize.Sm,
+    testID: 'start-icon',
     ...startIconProps,
     twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
   };
   const finalStartIconName = startIconName ?? startIconProps?.name;
 
   const finalEndIconProps: Partial<IconProps> = {
-    ...DEFAULT_TEXTBUTTON_PROPS.endIconProps,
+    size: IconSize.Sm,
+    testID: 'end-icon',
     ...endIconProps,
     twClassName: `${twTextClassNames} ${endIconProps?.twClassName ?? ''}`,
   };
   const finalEndIconName = endIconName ?? endIconProps?.name;
 
   const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
-    ...DEFAULT_TEXTBUTTON_PROPS.textProps,
+    variant: TextVariant.BodyMd,
+    fontWeight: FontWeight.Medium,
     ...textProps,
     twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
   };
 
   // Merging spinner settings for Icons with passed in props
   const finalSpinnerProps: SpinnerProps = {
-    ...DEFAULT_TEXTBUTTON_PROPS.spinnerProps,
     loadingText,
     color: twTextClassNames as IconColor,
     loadingTextProps: {

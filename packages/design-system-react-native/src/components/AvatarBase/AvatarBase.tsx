@@ -3,19 +3,19 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
 
-import Text from '../Text';
-import { DEFAULT_AVATARBASE_PROPS } from './AvatarBase.constants';
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
+import Text, { TextColor, TextVariant, FontWeight } from '../Text';
 import type { AvatarBaseProps } from './AvatarBase.types';
 import { generateAvatarBaseContainerClassNames } from './AvatarBase.utilities';
 
 const AvatarBase = ({
   children,
-  size = DEFAULT_AVATARBASE_PROPS.size,
-  shape = DEFAULT_AVATARBASE_PROPS.shape,
+  size = AvatarBaseSize.Md,
+  shape = AvatarBaseShape.Circle,
   fallbackText,
   fallbackTextProps,
-  hasBorder = DEFAULT_AVATARBASE_PROPS.hasBorder,
-  hasSolidBackgroundColor = DEFAULT_AVATARBASE_PROPS.hasSolidBackgroundColor,
+  hasBorder = false,
+  hasSolidBackgroundColor = false,
   twClassName = '',
   style,
   ...props
@@ -38,8 +38,11 @@ const AvatarBase = ({
       />
       {fallbackText ? (
         <Text
-          {...DEFAULT_AVATARBASE_PROPS.fallbackTextProps}
+          color={TextColor.TextMuted}
+          variant={TextVariant.BodySm}
+          fontWeight={FontWeight.Medium}
           {...fallbackTextProps}
+          twClassName={`uppercase ${fallbackTextProps?.twClassName ? ` ${fallbackTextProps.twClassName}` : ''}`.trim()}
         >
           {fallbackText}
         </Text>

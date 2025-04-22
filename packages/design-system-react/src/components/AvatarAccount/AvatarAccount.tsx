@@ -6,8 +6,9 @@ import {
   AvatarBaseShape,
 } from '../../types';
 import { AvatarBase } from '../AvatarBase';
-import { Jazzicon } from '../temp-components/Jazzicon';
 import { Blockies } from '../temp-components/Blockies';
+import { Jazzicon } from '../temp-components/Jazzicon';
+import { Maskicon } from '../temp-components/Maskicon';
 import { MAP_AVATARACCOUNT_SIZE_SIZENUMBER } from './AvatarAccount.constants';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 
@@ -23,6 +24,7 @@ export const AvatarAccount = React.forwardRef<
       size = AvatarAccountSize.Md,
       blockiesProps,
       jazziconProps,
+      maskiconProps,
       ...props
     },
     ref,
@@ -35,6 +37,15 @@ export const AvatarAccount = React.forwardRef<
             address={address}
             size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
             {...blockiesProps}
+          />
+        );
+        break;
+      case AvatarAccountVariant.Maskicon:
+        AvatarArtComponent = (
+          <Maskicon
+            address={address}
+            size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
+            {...maskiconProps}
           />
         );
         break;

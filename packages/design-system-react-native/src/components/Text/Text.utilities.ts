@@ -1,11 +1,13 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
-import { FontWeight, FontFamily, FontStyle } from '../../types';
 import {
-  DEFAULT_TEXT_COLOR,
-  DEFAULT_TEXT_VARIANT,
-  MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME,
-} from './Text.constants';
+  FontWeight,
+  FontFamily,
+  FontStyle,
+  TextVariant,
+  TextColor,
+} from '../../types';
+import { MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME } from './Text.constants';
 import type { TextProps } from './Text.types';
 
 /**
@@ -38,8 +40,8 @@ import type { TextProps } from './Text.types';
  * ```
  */
 export const generateTextClassNames = ({
-  variant = DEFAULT_TEXT_VARIANT,
-  color = DEFAULT_TEXT_COLOR,
+  variant = TextVariant.BodyMd,
+  color = TextColor.TextDefault,
   fontWeight = FontWeight.Regular,
   fontFamily = FontFamily.Default,
   fontStyle = FontStyle.Normal,

@@ -1,4 +1,3 @@
-// Text.test.tsx
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
@@ -11,22 +10,18 @@ import {
   FontStyle,
 } from '../../types';
 import Text from './Text';
-import {
-  DEFAULT_TEXT_COLOR,
-  DEFAULT_TEXT_VARIANT,
-  MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME,
-} from './Text.constants';
+import { MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME } from './Text.constants';
 import { generateTextClassNames } from './Text.utilities';
 
 describe('Text', () => {
   describe('generateTextClassNames', () => {
     it('returns correct default class names when no props are provided', () => {
       const classNames = generateTextClassNames({});
-      expect(classNames).toContain(`text-${DEFAULT_TEXT_VARIANT}`);
+      expect(classNames).toContain(`text-${TextVariant.BodyMd}`);
       expect(classNames).toContain(
         `font-${FontFamily.Default}${MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME[FontWeight.Regular]}`,
       );
-      expect(classNames).toContain(DEFAULT_TEXT_COLOR);
+      expect(classNames).toContain(TextColor.TextDefault);
     });
 
     it('generates class names correctly for each variant', () => {

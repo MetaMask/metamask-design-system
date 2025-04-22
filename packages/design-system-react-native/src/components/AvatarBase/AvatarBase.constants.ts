@@ -1,6 +1,4 @@
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
-import { TextColor, TextVariant, FontWeight } from '../Text';
-import type { AvatarBaseProps } from './AvatarBase.types';
+import { AvatarBaseSize } from '../../types';
 
 // Mappings
 export const TWCLASSMAP_AVATARBASE_SIZE_SHAPE: Record<AvatarBaseSize, string> =
@@ -17,27 +15,4 @@ export const MAP_AVATARBASE_SIZE_BORDERWIDTH: Record<AvatarBaseSize, number> = {
   [AvatarBaseSize.Md]: 1,
   [AvatarBaseSize.Lg]: 2,
   [AvatarBaseSize.Xl]: 2,
-};
-
-// Defaults
-export const DEFAULT_AVATARBASE_PROPS: Required<
-  Pick<
-    AvatarBaseProps,
-    | 'size'
-    | 'shape'
-    | 'fallbackTextProps'
-    | 'hasBorder'
-    | 'hasSolidBackgroundColor'
-  >
-> = {
-  size: AvatarBaseSize.Md,
-  shape: AvatarBaseShape.Circle,
-  fallbackTextProps: {
-    color: TextColor.TextMuted,
-    variant: TextVariant.BodySm,
-    fontWeight: FontWeight.Medium,
-    twClassName: 'uppercase',
-  },
-  hasBorder: false,
-  hasSolidBackgroundColor: false,
 };

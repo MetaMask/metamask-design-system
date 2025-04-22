@@ -1,8 +1,7 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
-import { AvatarBaseShape } from '../../types';
+import { AvatarBaseShape, AvatarBaseSize } from '../../types';
 import {
-  DEFAULT_AVATARBASE_PROPS,
   TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
   MAP_AVATARBASE_SIZE_BORDERWIDTH,
 } from './AvatarBase.constants';
@@ -14,7 +13,7 @@ import type { AvatarBaseProps } from './AvatarBase.types';
  * This function constructs a class name string based on the avatar's `size`,
  * `shape`, `hasBorder`, `hasSolidBackgroundColor`, and optional additional Tailwind class names.
  *
- * @param size - The size of the avatar, defaulting to `DEFAULT_AVATARBASE_PROPS.size`.
+ * @param size - The size of the avatar, defaulting to `AvatarBaseSize.Md`.
  * @param shape - The shape of the avatar, either `circle` or another defined shape.
  * @param hasBorder - A boolean indicating whether the avatar has a border.
  * @param hasSolidBackgroundColor - A boolean indicating whether the avatar has a solid background color.
@@ -36,10 +35,10 @@ import type { AvatarBaseProps } from './AvatarBase.types';
  * ```
  */
 export const generateAvatarBaseContainerClassNames = ({
-  size = DEFAULT_AVATARBASE_PROPS.size, // AvatarSize.Md
-  shape = DEFAULT_AVATARBASE_PROPS.shape, // AvatarShape.Circle
-  hasBorder = DEFAULT_AVATARBASE_PROPS.hasBorder, // false
-  hasSolidBackgroundColor = DEFAULT_AVATARBASE_PROPS.hasSolidBackgroundColor, // false
+  size = AvatarBaseSize.Md,
+  shape = AvatarBaseShape.Circle,
+  hasBorder = false,
+  hasSolidBackgroundColor = false,
   twClassName = '',
 }: Partial<AvatarBaseProps>): string => {
   const baseStyle = 'items-center justify-center overflow-hidden';
