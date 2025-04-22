@@ -24,6 +24,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
       size = AvatarGroupSize.Md,
       max = 4,
       isReverse = false,
+      overflowTextProps,
       style,
       className,
       ...props
@@ -147,6 +148,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
                 ? AvatarBaseShape.Square
                 : AvatarBaseShape.Circle
             }
+            {...overflowTextProps}
           />
         )}
       </div>

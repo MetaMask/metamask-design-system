@@ -2,6 +2,7 @@ import type { ComponentProps } from 'react';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import { AvatarAccountProps } from '../AvatarAccount';
+import { AvatarBaseProps } from '../AvatarBase';
 import { AvatarFaviconProps } from '../AvatarFavicon';
 import { AvatarNetworkProps } from '../AvatarNetwork';
 import { AvatarTokenProps } from '../AvatarToken';
@@ -22,6 +23,10 @@ type BaseAvatarGroupProps = {
    * Optional prop to reverse the direction of the AvatarGroup
    */
   isReverse?: boolean;
+  /**
+   * Optional prop to pass additional AvatarBase props to the overflow Text element
+   */
+  overflowTextProps?: AvatarBaseProps;
   /**
    * Optional prop for additional CSS classes to be applied to the AvatarGroup component.
    * These classes will be merged with the component's default classes using twMerge.

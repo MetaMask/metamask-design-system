@@ -52,4 +52,8 @@ export type AvatarBaseProps = ComponentProps<'div'> & {
    * @default false
    */
   hasBorder?: boolean;
+  /**
+   * Optional prop to add a test id to the icon
+   */
+  'data-testid'?: string;
 };

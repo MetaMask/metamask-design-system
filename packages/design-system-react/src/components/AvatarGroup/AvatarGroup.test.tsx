@@ -1,174 +1,326 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import React, { createRef } from 'react';
 
-import { AvatarGroupVariant } from '../../types';
+import { AvatarGroupVariant, AvatarGroupSize } from '../../types';
+import { AvatarAccountVariant } from '../AvatarAccount';
+import { TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE } from '../AvatarBase/AvatarBase.constants';
+import { TextColor } from '../Text';
 import { AvatarGroup } from './AvatarGroup';
-import {
-  SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
-  SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR,
-  SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
-  SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
-} from './AvatarGroup.dev';
+import { AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP } from './AvatarGroup.constants';
 
 describe('AvatarGroup', () => {
-  it('renders default container classes', () => {
+  it('forwards ref to the root <div>', () => {
+    const ref = createRef<HTMLDivElement>();
+    render(
+      <AvatarGroup
+        ref={ref}
+        variant={AvatarGroupVariant.Account}
+        avatarPropsArr={[]}
+      />,
+    );
+    expect(ref.current?.tagName).toBe('DIV');
+  });
+
+  it('applies custom className and style on the container', () => {
     render(
       <AvatarGroup
         variant={AvatarGroupVariant.Account}
-        avatarPropsArr={SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR.slice(0, 2)}
-        data-testid="group"
+        avatarPropsArr={[]}
+        className="my-group"
+        style={{ margin: 8 }}
+        data-testid="avatar-group"
       />,
     );
-    const root = screen.getByTestId('group');
-    expect(root).toHaveClass('inline-flex', 'flex-row');
-    expect(root).not.toHaveClass('flex-row-reverse');
+    const avatarGroupElement = screen.getByTestId('avatar-group');
+    expect(avatarGroupElement).toHaveClass('my-group');
+    expect(avatarGroupElement).toHaveStyle({ margin: '8px' });
   });
 
-  it('renders account avatars up to max without overflow', () => {
-    const avatars = SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR.slice(0, 3);
-    render(
-      <AvatarGroup
-        variant={AvatarGroupVariant.Account}
-        avatarPropsArr={avatars}
-        max={4}
-        data-testid="group"
-      />,
-    );
-    expect(screen.queryByTestId('avatar-overflow-text')).toBeNull();
-    expect(screen.getAllByTestId('avatar-Account')).toHaveLength(3);
-  });
-
-  it('renders overflow counter when avatars exceed max', () => {
-    const avatars = SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR.slice(0, 6);
-    render(
-      <AvatarGroup
-        variant={AvatarGroupVariant.Account}
-        avatarPropsArr={avatars}
-        max={4}
-        data-testid="group"
-      />,
-    );
-    const overflow = screen.getByTestId('avatar-overflow-text');
-    expect(overflow).toBeInTheDocument();
-    expect(overflow).toHaveTextContent('+2');
-
-    const overflowContainer = overflow.parentElement!;
-    // default size Md → 'h-8 w-8', and circle → 'rounded-full'
-    expect(overflowContainer).toHaveClass(
-      'h-[33px]',
-      'w-[33px]',
-      'rounded-full',
-    );
-    // Z‐index should equal total avatars
-    expect(overflowContainer).toHaveStyle({ zIndex: avatars.length });
-  });
-
-  it('uses square border radius for Network variant overflow', () => {
-    const avatars = SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR.slice(0, 6);
-    render(
-      <AvatarGroup
-        variant={AvatarGroupVariant.Network}
-        avatarPropsArr={avatars}
-        max={4}
-        data-testid="group"
-      />,
-    );
-    const overflow = screen.getByTestId('avatar-overflow-text');
-    const overflowContainer = overflow.parentElement!;
-    // Network + default size Md → rounded-lg
-    expect(overflowContainer).toHaveClass('rounded-lg');
-  });
-
-  it('applies custom className and style on container', () => {
+  it('applies reverse layout classes when isReverse=true', () => {
     render(
       <AvatarGroup
         variant={AvatarGroupVariant.Favicon}
-        avatarPropsArr={SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR.slice(0, 2)}
-        className="custom-class"
-        style={{ backgroundColor: 'red' }}
-        data-testid="group"
-      />,
-    );
-    const root = screen.getByTestId('group');
-    expect(root).toHaveClass('custom-class');
-    expect(root).toHaveStyle({ backgroundColor: 'red' });
-  });
-
-  it('reverses direction when isReverse is true', () => {
-    const avatars = SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR.slice(0, 3);
-    render(
-      <AvatarGroup
-        variant={AvatarGroupVariant.Favicon}
-        avatarPropsArr={avatars}
+        avatarPropsArr={[]}
         isReverse
-        data-testid="group"
+        data-testid="avatar-group"
       />,
     );
-    const root = screen.getByTestId('group');
-    expect(root).toHaveClass('flex-row-reverse');
+    expect(screen.getByTestId('avatar-group')).toHaveClass('flex-row-reverse');
   });
 
-  it('renders correct avatars for Account variant', () => {
-    const arr = SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR.slice(0, 2);
-    render(
-      <AvatarGroup
-        variant={AvatarGroupVariant.Account}
-        avatarPropsArr={arr}
-        max={4}
-        data-testid="group-account"
-      />,
-    );
-    expect(screen.getAllByTestId('avatar-Account')).toHaveLength(2);
-  });
+  describe('AvatarGroup - Account', () => {
+    const avatarAccPropsArr = [
+      {
+        variant: AvatarAccountVariant.Jazzicon,
+        address: '0x1',
+        className: 'avataraccount-1',
+        'data-testid': 'avataraccount-1',
+      },
+      {
+        variant: AvatarAccountVariant.Blockies,
+        address: '0x2',
+        className: 'avataraccount-2',
+        'data-testid': 'avataraccount-2',
+      },
+    ];
 
-  it('renders correct avatars for Favicon variant', () => {
-    const arr = SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR.slice(0, 2);
-    render(
-      <AvatarGroup
-        variant={AvatarGroupVariant.Favicon}
-        avatarPropsArr={arr}
-        max={4}
-        data-testid="group-favicon"
-      />,
-    );
-    expect(screen.getAllByTestId('avatar-Favicon')).toHaveLength(2);
-  });
-
-  it('renders correct avatars for Network variant', () => {
-    const arr = SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR.slice(0, 2);
-    render(
-      <AvatarGroup
-        variant={AvatarGroupVariant.Network}
-        avatarPropsArr={arr}
-        max={4}
-        data-testid="group-network"
-      />,
-    );
-    expect(screen.getAllByTestId('avatar-Network')).toHaveLength(2);
-  });
-
-  it('renders correct avatars for Token variant', () => {
-    const arr = SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR.slice(0, 2);
-    render(
-      <AvatarGroup
-        variant={AvatarGroupVariant.Token}
-        avatarPropsArr={arr}
-        max={4}
-        data-testid="group-token"
-      />,
-    );
-    expect(screen.getAllByTestId('avatar-Token')).toHaveLength(2);
-  });
-
-  it('throws error for invalid variant', () => {
-    // @ts-ignore: force invalid variant
-    expect(() =>
+    it('renders Account avatars with test‑ids when ≤ max', () => {
       render(
         <AvatarGroup
-          variant={'not-a-variant' as any}
-          avatarPropsArr={[{ name: 'x', src: 'y' }]}
+          variant={AvatarGroupVariant.Account}
+          avatarPropsArr={avatarAccPropsArr}
+          max={2}
         />,
-      ),
-    ).toThrow(/Invalid Avatar Variant/);
+      );
+      expect(screen.getByTestId('avataraccount-1')).toBeInTheDocument();
+      expect(screen.getByTestId('avataraccount-2')).toBeInTheDocument();
+      expect(screen.queryByText('+')).toBeNull();
+    });
+
+    it('applies negative spacing, zIndex, className & style for Account avatars', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Account}
+          avatarPropsArr={avatarAccPropsArr}
+          max={2}
+        />,
+      );
+      const negativeMarginClass =
+        AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP[AvatarGroupSize.Md];
+
+      const first = screen.getByTestId('avataraccount-1');
+      expect(first).toHaveStyle({ zIndex: 1 });
+      expect(first).toHaveClass('avataraccount-1');
+      expect(first).not.toHaveClass(negativeMarginClass);
+
+      const second = screen.getByTestId('avataraccount-2');
+      expect(second).toHaveStyle({ zIndex: 2 });
+      expect(second).toHaveClass('avataraccount-2');
+      expect(second).toHaveClass(negativeMarginClass);
+    });
+
+    it('shows overflow counter when length > max with correct classes', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Account}
+          avatarPropsArr={[...avatarAccPropsArr, avatarAccPropsArr[0]]} // length = 3
+          max={2}
+          overflowTextProps={{ 'data-testid': 'overflow' }}
+        />,
+      );
+      expect(screen.getByTestId('overflow')).toHaveStyle({ zIndex: 3 });
+
+      const span = screen.getByText('+1');
+      expect(span).toHaveClass('text-s-body-md');
+      expect(span).toHaveClass(TextColor.PrimaryInverse.toLowerCase());
+    });
+
+    it('throws if an invalid variant is provided and there is at least one avatar', () => {
+      expect(() =>
+        render(
+          <AvatarGroup
+            variant={'Invalid' as any}
+            avatarPropsArr={[{ foo: 'bar' } as any]}
+          />,
+        ),
+      ).toThrow(/Invalid Avatar Variant: Invalid/);
+    });
+  });
+
+  describe('AvatarGroup - Favicon', () => {
+    const faviconPropsArr = [
+      {
+        name: 'A',
+        src: 'a.png',
+        className: 'avatarfavicon-1',
+        'data-testid': 'avatarfavicon-1',
+      },
+      {
+        name: 'B',
+        src: 'b.png',
+        className: 'avatarfavicon-2',
+        'data-testid': 'avatarfavicon-2',
+      },
+    ];
+
+    it('renders Favicon avatars with test‑ids', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Favicon}
+          avatarPropsArr={faviconPropsArr}
+        />,
+      );
+      expect(screen.getByTestId('avatarfavicon-1')).toBeInTheDocument();
+      expect(screen.getByTestId('avatarfavicon-2')).toBeInTheDocument();
+    });
+
+    it('applies negative spacing, zIndex, className & style for Favicon avatars', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Favicon}
+          avatarPropsArr={faviconPropsArr}
+          max={2}
+        />,
+      );
+      const negativeMarginClass =
+        AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP[AvatarGroupSize.Md];
+
+      const first = screen.getByTestId('avatarfavicon-1');
+      expect(first).toHaveStyle({ zIndex: 1 });
+      expect(first).toHaveClass('avatarfavicon-1');
+      expect(first).not.toHaveClass(negativeMarginClass);
+
+      const second = screen.getByTestId('avatarfavicon-2');
+      expect(second).toHaveStyle({ zIndex: 2 });
+      expect(second).toHaveClass('avatarfavicon-2');
+      expect(second).toHaveClass(negativeMarginClass);
+    });
+
+    it('shows overflow counter when length > max', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Favicon}
+          avatarPropsArr={[...faviconPropsArr, faviconPropsArr[0]]} // length = 3
+          max={1}
+          overflowTextProps={{ 'data-testid': 'overflow' }}
+        />,
+      );
+      expect(screen.getByTestId('overflow')).toHaveTextContent('+2');
+      expect(screen.getByTestId('overflow')).toHaveStyle({ zIndex: 3 });
+    });
+  });
+
+  describe('AvatarGroup - Network', () => {
+    const netArr = [
+      {
+        name: 'N1',
+        src: 'n1.png',
+        className: 'avatarnetwork-1',
+        'data-testid': 'avatarnetwork-1',
+      },
+      {
+        name: 'N2',
+        src: 'n2.png',
+        className: 'avatarnetwork-2',
+        'data-testid': 'avatarnetwork-2',
+      },
+    ];
+
+    it('renders Network avatars with test‑ids', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Network}
+          avatarPropsArr={netArr}
+        />,
+      );
+      expect(screen.getByTestId('avatarnetwork-1')).toBeInTheDocument();
+      expect(screen.getByTestId('avatarnetwork-2')).toBeInTheDocument();
+    });
+
+    it('applies negative spacing, zIndex, className & style for Network avatars', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Network}
+          avatarPropsArr={netArr}
+          max={2}
+        />,
+      );
+      const negativeMarginClass =
+        AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP[AvatarGroupSize.Md];
+
+      const first = screen.getByTestId('avatarnetwork-1');
+      expect(first).toHaveStyle({ zIndex: 1 });
+      expect(first).toHaveClass('avatarnetwork-1');
+      expect(first).not.toHaveClass(negativeMarginClass);
+
+      const second = screen.getByTestId('avatarnetwork-2');
+      expect(second).toHaveStyle({ zIndex: 2 });
+      expect(second).toHaveClass('avatarnetwork-2');
+      expect(second).toHaveClass(negativeMarginClass);
+    });
+
+    it('shows overflow counter with square shape when length > max', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Network}
+          avatarPropsArr={[...netArr, netArr[0]]} // length = 3
+          max={1}
+          overflowTextProps={{ 'data-testid': 'overflow' }}
+        />,
+      );
+      expect(screen.getByTestId('overflow')).toHaveTextContent('+2');
+      expect(screen.getByTestId('overflow')).toHaveStyle({ zIndex: 3 });
+
+      const squareClass =
+        TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[AvatarGroupSize.Md];
+      expect(screen.getByTestId('overflow')).toHaveClass(squareClass);
+    });
+  });
+
+  describe('AvatarGroup - Token', () => {
+    const tokArr = [
+      {
+        name: 'T1',
+        src: 't1.png',
+        className: 'avatartoken-1',
+        'data-testid': 'avatartoken-1',
+      },
+      {
+        name: 'T2',
+        src: 't2.png',
+        className: 'avatartoken-2',
+        'data-testid': 'avatartoken-2',
+      },
+    ];
+
+    it('renders Token avatars with test‑ids', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Token}
+          avatarPropsArr={tokArr}
+        />,
+      );
+      expect(screen.getByTestId('avatartoken-1')).toBeInTheDocument();
+      expect(screen.getByTestId('avatartoken-2')).toBeInTheDocument();
+    });
+
+    it('applies negative spacing, zIndex, className & style for Token avatars', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Token}
+          avatarPropsArr={tokArr}
+          max={2}
+        />,
+      );
+      const negativeMarginClass =
+        AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP[AvatarGroupSize.Md];
+
+      const first = screen.getByTestId('avatartoken-1');
+      expect(first).toHaveStyle({ zIndex: 1 });
+      expect(first).toHaveClass('avatartoken-1');
+      expect(first).not.toHaveClass(negativeMarginClass);
+
+      const second = screen.getByTestId('avatartoken-2');
+      expect(second).toHaveStyle({ zIndex: 2 });
+      expect(second).toHaveClass('avatartoken-2');
+      expect(second).toHaveClass(negativeMarginClass);
+    });
+
+    it('shows overflow counter when length > max', () => {
+      render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Token}
+          avatarPropsArr={[...tokArr, tokArr[0]]} // length = 3
+          max={1}
+          overflowTextProps={{ 'data-testid': 'overflow' }}
+        />,
+      );
+      expect(screen.getByTestId('overflow')).toHaveTextContent('+2');
+      expect(screen.getByTestId('overflow')).toHaveStyle({ zIndex: 3 });
+
+      const span = screen.getByText('+2');
+      expect(span).toHaveClass('text-s-body-md');
+      expect(span).toHaveClass(TextColor.PrimaryInverse.toLowerCase());
+    });
   });
 });

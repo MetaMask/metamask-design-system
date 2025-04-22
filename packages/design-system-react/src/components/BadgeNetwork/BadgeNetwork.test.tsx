@@ -12,8 +12,8 @@ describe('BadgeNetwork', () => {
 
     expect(classList).toEqual(
       expect.arrayContaining([
-        'h-[17px]',
-        'w-[17px]',
+        'h-[18px]',
+        'w-[18px]',
         'border',
         'border-background-default',
       ]),
