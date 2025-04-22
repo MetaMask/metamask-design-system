@@ -1,7 +1,7 @@
 {
   "tailwindCSS.experimental.configFile": {
     "apps/storybook-react/tailwind.config.js": "packages/design-system-react/src/**",
-    "packages/design-system-twrnc-preset/tailwind.config.js": "packages/design-system-react-native/src/**"
+    "apps/storybook-react-native/tailwind-intellisense.config.js": "packages/design-system-react-native/src/**"
   },
   "files.associations": {
     "*.css": "tailwindcss"
