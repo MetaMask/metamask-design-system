@@ -35,7 +35,7 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
           <img
             src={src}
             alt={altText}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
             {...imageProps}
           />
         )}

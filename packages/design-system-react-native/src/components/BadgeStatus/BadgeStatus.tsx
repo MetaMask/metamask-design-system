@@ -23,26 +23,17 @@ const BadgeStatus = ({
   return (
     <View
       style={[
-        tw`
-        self-start
-        rounded-full 
-        ${hasBorder ? 'border-2 border-background-default' : ''} 
-        ${twClassName}`,
+        tw`self-start rounded-full ${hasBorder ? 'border-2 border-background-default' : ''} ${twClassName}`,
         style,
       ]}
       {...props}
     >
       <View
-        style={tw`bg-background-default absolute top-0 left-0 bottom-0 right-0 rounded-full`}
+        style={tw`bg-background-default absolute bottom-0 left-0 right-0 top-0 rounded-full`}
       />
       <View
         style={[
-          tw`
-          rounded-full 
-          border-2
-          ${TWCLASSMAP_BADGESTATUS_SIZE[size]} 
-          ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[status]}
-          `,
+          tw`rounded-full border-2 ${TWCLASSMAP_BADGESTATUS_SIZE[size]} ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[status]} `,
         ]}
       />
     </View>

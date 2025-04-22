@@ -14,7 +14,7 @@ const ShadowSwatch: React.FC<ShadowSwatchProps> = ({
   className = '',
 }) => (
   <div
-    className={`h-[100px] bg-background-default rounded grid place-content-center text-center ${className}`}
+    className={`bg-background-default grid h-[100px] place-content-center rounded text-center ${className}`}
   >
     {children}
   </div>
@@ -38,7 +38,7 @@ export const DefaultStory: StoryObj<typeof ShadowSwatch> = {
     className: 'shadow-xs',
   },
   render: (args) => (
-    <div className="grid gap-8 grid-cols-[repeat(auto-fill,200px)]">
+    <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
       <ShadowSwatch {...args}>
         <Text>Shadow</Text>
       </ShadowSwatch>
@@ -48,7 +48,7 @@ export const DefaultStory: StoryObj<typeof ShadowSwatch> = {
 
 export const Size: StoryObj<typeof ShadowSwatch> = {
   render: () => (
-    <div className="grid gap-8 grid-cols-[repeat(auto-fill,200px)]">
+    <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
       <ShadowSwatch className="shadow-xs">
         <Text>XS</Text>
       </ShadowSwatch>
@@ -67,14 +67,14 @@ export const Size: StoryObj<typeof ShadowSwatch> = {
 
 export const Color: StoryObj<typeof ShadowSwatch> = {
   render: () => (
-    <div className="grid gap-8 grid-cols-[repeat(auto-fill,200px)]">
+    <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
       <ShadowSwatch className="shadow-xs">
         <Text>Default</Text>
       </ShadowSwatch>
-      <ShadowSwatch className="shadow-primary shadow-xs bg-primary-default">
+      <ShadowSwatch className="bg-primary-default shadow-xs shadow-primary">
         <Text color={TextColor.PrimaryInverse}>Primary</Text>
       </ShadowSwatch>
-      <ShadowSwatch className="shadow-error shadow-xs bg-error-default">
+      <ShadowSwatch className="bg-error-default shadow-xs shadow-error">
         <Text color={TextColor.ErrorInverse}>Error/Danger</Text>
       </ShadowSwatch>
     </div>
@@ -84,7 +84,7 @@ export const Color: StoryObj<typeof ShadowSwatch> = {
 export const ExampleUsage = {
   render: () => (
     <div>
-      <div className="grid gap-8 grid-cols-[repeat(auto-fill,200px)] mb-16">
+      <div className="mb-16 grid grid-cols-[repeat(auto-fill,200px)] gap-8">
         <ShadowSwatch className="shadow-xs">
           <Text>Card</Text>
         </ShadowSwatch>
@@ -98,11 +98,11 @@ export const ExampleUsage = {
           <Text>Modal</Text>
         </ShadowSwatch>
       </div>
-      <div className="grid gap-8 grid-cols-[repeat(auto-fill,200px)]">
-        <ShadowSwatch className="shadow-primary shadow-xs bg-primary-default">
+      <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
+        <ShadowSwatch className="bg-primary-default shadow-xs shadow-primary">
           <Text color={TextColor.PrimaryInverse}>Button Primary Hover</Text>
         </ShadowSwatch>
-        <ShadowSwatch className="shadow-error shadow-xs bg-error-default">
+        <ShadowSwatch className="bg-error-default shadow-xs shadow-error">
           <Text color={TextColor.ErrorInverse}>Button Error/Danger Hover</Text>
         </ShadowSwatch>
       </div>

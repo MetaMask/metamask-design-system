@@ -237,7 +237,7 @@ export const TextAlignStory: Story = {
 
 export const OverflowWrapStory: Story = {
   render: () => (
-    <div className="w-[200px] border border-warning">
+    <div className="border-warning w-[200px] border">
       <Text overflowWrap={OverflowWrap.Normal}>
         Normal: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
       </Text>
@@ -251,7 +251,7 @@ export const OverflowWrapStory: Story = {
 
 export const Ellipsis: Story = {
   render: () => (
-    <div className="w-1/3 border border-primary">
+    <div className="border-primary w-1/3 border">
       <Text ellipsis>Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d</Text>
       <Text>No Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d</Text>
     </div>
@@ -275,7 +275,7 @@ export const AsChild: Story = {
           Text rendered as button
         </button>
       </Text>
-      <Text asChild className="bg-default border border-default">
+      <Text asChild className="border border-default bg-default">
         <input
           type="text"
           placeholder="Rendered as input"

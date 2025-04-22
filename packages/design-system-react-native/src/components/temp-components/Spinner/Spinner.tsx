@@ -59,7 +59,7 @@ const Spinner = ({
 
   return (
     <View
-      style={tw`flex-row gap-x-2 items-center ${twClassName}`}
+      style={tw`flex-row items-center gap-x-2 ${twClassName}`}
       testID="spinner"
       {...props}
     >
