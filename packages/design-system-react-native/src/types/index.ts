@@ -50,8 +50,9 @@ export { AvatarShape as AvatarBaseShape };
  * AvatarAccount - variant
  */
 export enum AvatarAccountVariant {
-  Jazzicon = 'jazzicon',
   Blockies = 'blockies',
+  Jazzicon = 'jazzicon',
+  Maskicon = 'maskicon',
 }
 
 /**
