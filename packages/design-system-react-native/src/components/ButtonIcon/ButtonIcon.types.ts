@@ -1,6 +1,8 @@
-import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { ButtonIconSize } from '../../types';
+import { ButtonAnimatedProps } from '../temp-components/ButtonAnimated';
+import { SpinnerProps } from '../temp-components/Spinner';
 import type { IconProps, IconName } from '../Icon';
 
 /**
@@ -38,6 +40,17 @@ export type ButtonIconProps = {
    */
   isFloating?: boolean;
   /**
+   * Optional prop that when true, shows a loading spinner
+   * @default false
+   */
+  isLoading?: boolean;
+  /**
+   * Optional prop to pass additional properties to the spinner
+   */
+  spinnerProps?: Partial<
+    Omit<SpinnerProps, 'loadingText' | 'loadingTextProps'>
+  >;
+  /**
    * Optional prop to add twrnc overriding classNames.
    */
   twClassName?: string;
@@ -45,4 +58,4 @@ export type ButtonIconProps = {
    * Optional prop to control the style.
    */
   style?: StyleProp<ViewStyle>;
-} & Omit<PressableProps, 'children'>;
+} & Omit<ButtonAnimatedProps, 'children'>;

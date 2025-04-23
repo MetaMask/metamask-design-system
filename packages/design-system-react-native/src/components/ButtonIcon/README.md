@@ -1,6 +1,6 @@
 # ButtonIcon
 
-The `ButtonIcon` component is a flexible icon button designed for React Native applications. It supports different sizes, themes, and accessibility features.
+A Button Icon is a compact, icon-only button that triggers an action, designed for quick, space-efficient interactions
 
 ---
 
@@ -74,6 +74,16 @@ Optional prop to apply floating button styling.
 
 ---
 
+### `isLoading`
+
+Optional prop that when true, shows a loading spinner.
+
+| TYPE      | REQUIRED | DEFAULT |
+| :-------- | :------- | :------ |
+| `boolean` | No       | `false` |
+
+---
+
 ### `twClassName`
 
 Optional prop to add `twrnc` overriding class names.
@@ -127,6 +137,14 @@ import ButtonIcon from '@metamask/design-system-react-native';
 
 ```tsx
 <ButtonIcon iconName={IconName.Add} isFloating />
+```
+
+---
+
+### Loading Icon Button
+
+```tsx
+<ButtonIcon iconName={IconName.Add} isLoading />
 ```
 
 ---

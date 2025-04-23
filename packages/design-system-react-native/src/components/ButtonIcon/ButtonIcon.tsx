@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import { ButtonIconSize } from '../../types';
-import Icon from '../Icon';
-import type { IconProps } from '../Icon';
+import Icon, { IconColor } from '../Icon';
+import Spinner from '../temp-components/Spinner';
 import ButtonAnimated from '../temp-components/ButtonAnimated';
-import { MAPPING_BUTTONICONSIZE_ICONSIZE } from './ButtonIcon.constants';
-import type { ButtonIconProps } from './ButtonIcon.types';
 import {
-  generateButtonIconContainerClassNames,
-  generateButtonIconIconColorClassNames,
-} from './ButtonIcon.utilities';
+  MAP_BUTTONICON_SIZE_ICONSIZE,
+  TWCLASSMAP_BUTTONICON_SIZE_DIMENSION,
+} from './ButtonIcon.constants';
+import type { ButtonIconProps } from './ButtonIcon.types';
 
 const ButtonIcon = ({
   size = ButtonIconSize.Md,
@@ -21,36 +20,27 @@ const ButtonIcon = ({
   isDisabled = false,
   isInverse = false,
   isFloating = false,
+  isLoading = false,
+  spinnerProps,
   onPressIn,
   onPressOut,
-  twClassName,
+  twClassName = '',
   style,
   ...props
 }: ButtonIconProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
-  const twContainerClassNames = useMemo(() => {
-    return generateButtonIconContainerClassNames({
-      isDisabled,
-      isPressed,
-      isFloating,
-      size,
-      twClassName,
-    });
-  }, [isDisabled, isPressed, isFloating, size, twClassName]);
+  const twContainerClassNames = `
+    items-center justify-center
+    ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size]}
+    ${isFloating ? 'rounded-full' : 'rounded-sm'}
+    ${isFloating ? 'bg-icon-default' : isPressed ? 'bg-background-pressed' : 'bg-transparent'}
+    ${isDisabled ? 'opacity-50' : 'opacity-100'}
+    ${twClassName}`;
 
-  const twIconColorClassNames = useMemo(() => {
-    return generateButtonIconIconColorClassNames({
-      isInverse,
-      isFloating,
-    });
-  }, [isInverse, isFloating]);
+  const twIconColorClassNames =
+    isInverse || isFloating ? 'text-primary-inverse' : 'text-icon-default';
 
-  const finalIconProps: Partial<IconProps> = {
-    color: twIconColorClassNames,
-    size: MAPPING_BUTTONICONSIZE_ICONSIZE[size],
-    ...iconProps,
-  };
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);
     onPressIn?.(event);
@@ -61,9 +51,20 @@ const ButtonIcon = ({
     onPressOut?.(event);
   };
 
+  const renderLoadingState = () => (
+    <Spinner
+      color={twIconColorClassNames as IconColor}
+      {...spinnerProps}
+      spinnerIconProps={{
+        size: MAP_BUTTONICON_SIZE_ICONSIZE[size],
+        ...spinnerProps?.spinnerIconProps,
+      }}
+    />
+  );
+
   return (
     <ButtonAnimated
-      disabled={isDisabled}
+      disabled={isDisabled || isLoading}
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
       accessible
@@ -71,7 +72,16 @@ const ButtonIcon = ({
       testID="button-icon"
       {...props}
     >
-      <Icon name={iconName} {...finalIconProps} />
+      {isLoading ? (
+        renderLoadingState()
+      ) : (
+        <Icon
+          name={iconName}
+          color={twIconColorClassNames as IconColor}
+          size={MAP_BUTTONICON_SIZE_ICONSIZE[size]}
+          {...iconProps}
+        />
+      )}
     </ButtonAnimated>
   );
 };
