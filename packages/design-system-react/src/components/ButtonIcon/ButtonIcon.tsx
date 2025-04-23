@@ -8,7 +8,6 @@ import {
   MAP_BUTTONICON_SIZE_ICONSIZE,
 } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
-import { IconName } from '../../types';
 
 export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
   (
@@ -47,9 +46,8 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
         !isInverse && 'text-icon-default',
         isInverse && 'text-background-default',
       ],
-      // Disabled state - apply to both isDisabled and isLoading
-      isDisabled && 'cursor-not-allowed',
-      isDisabled && 'opacity-50',
+      // Disabled state
+      isDisabled && 'cursor-not-allowed opacity-50',
       className,
     );
 
