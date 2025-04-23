@@ -41,6 +41,10 @@ const meta: Meta<typeof ButtonIcon> = {
       description:
         'Optional prop that when true, applies floating/contained styling to the button',
     },
+    isLoading: {
+      control: 'boolean',
+      description: 'Optional prop that when true, shows a loading spinner',
+    },
     className: {
       control: 'text',
       description:
@@ -106,6 +110,14 @@ export const IsDisabled: Story = {
   args: {
     iconName: IconName.Close,
     isDisabled: true,
+    ariaLabel: 'Close',
+  },
+};
+
+export const IsLoading: Story = {
+  args: {
+    iconName: IconName.Close,
+    isLoading: true,
     ariaLabel: 'Close',
   },
 };

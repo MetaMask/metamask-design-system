@@ -2,13 +2,13 @@ import React from 'react';
 
 import { ButtonIconSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
-import { ButtonBase } from '../ButtonBase';
 import { Icon } from '../Icon';
 import {
-  BUTTON_ICON_SIZE_CLASS_MAP,
-  BUTTON_ICON_SIZE_TO_ICON_SIZE_CLASS_MAP,
+  TWCLASSMAP_BUTTONICON_SIZE_DIMENSION,
+  MAP_BUTTONICON_SIZE_ICONSIZE,
 } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
+import { IconName } from '../../types';
 
 export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
   (
@@ -21,6 +21,8 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
       isInverse = false,
       isFloating = false,
       size = ButtonIconSize.Md,
+      isLoading,
+      loadingIconProps,
       style,
       ...props
     },
@@ -28,11 +30,23 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
   ) => {
     const isInteractive = !isDisabled;
 
+    const renderLoadingState = () => (
+      <Icon
+        name={IconName.Loading}
+        size={MAP_BUTTONICON_SIZE_ICONSIZE[size]}
+        className={twMerge(
+          'animate-spin text-inherit',
+          loadingIconProps?.className,
+        )}
+        {...loadingIconProps}
+      />
+    );
+
     const mergedClassName = twMerge(
       // Base styles
-      'p-0',
+      'inline-flex items-center justify-center p-0',
       // Size styles
-      BUTTON_ICON_SIZE_CLASS_MAP[size],
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size],
       // Floating styles
       isFloating && [
         'rounded-full',
@@ -47,24 +61,31 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
         !isInverse && 'text-icon-default',
         isInverse && 'text-background-default',
       ],
+      // Disabled state - apply to both isDisabled and isLoading
+      (isDisabled || isLoading) && 'cursor-not-allowed',
+      isDisabled && 'opacity-50',
       className,
     );
 
     return (
-      <ButtonBase
+      <button
         ref={ref}
         className={mergedClassName}
-        isDisabled={isDisabled}
+        disabled={isDisabled}
         aria-label={ariaLabel}
         {...props}
       >
-        <Icon
-          name={iconName}
-          size={BUTTON_ICON_SIZE_TO_ICON_SIZE_CLASS_MAP[size]}
-          className={twMerge('text-inherit', iconProps?.className)}
-          {...iconProps}
-        />
-      </ButtonBase>
+        {isLoading ? (
+          renderLoadingState()
+        ) : (
+          <Icon
+            name={iconName}
+            size={MAP_BUTTONICON_SIZE_ICONSIZE[size]}
+            className={twMerge('text-inherit', iconProps?.className)}
+            {...iconProps}
+          />
+        )}
+      </button>
     );
   },
 );

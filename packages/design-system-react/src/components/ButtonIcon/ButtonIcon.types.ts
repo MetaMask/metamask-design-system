@@ -1,18 +1,10 @@
+import type { ComponentProps } from 'react';
+
 import { ButtonIconSize } from '../../types';
-import type { ButtonBaseProps } from '../ButtonBase';
+import type { MakePropsOptional } from '../../types/make-props-optional';
 import type { IconName, IconProps } from '../Icon';
 
-export type ButtonIconProps = Omit<
-  ButtonBaseProps,
-  // We handle these props in ButtonIcon
-  | 'className'
-  | 'isDisabled'
-  | 'isLoading'
-  | 'style'
-  | 'children'
-  | 'size'
-  | 'aria-label'
-> & {
+export type ButtonIconProps = ComponentProps<'button'> & {
   /**
    * Required prop to specify the icon to show
    */
@@ -40,6 +32,15 @@ export type ButtonIconProps = Omit<
    * @default false
    */
   isFloating?: boolean;
+  /**
+   * Optional prop that when true, shows a loading spinner
+   * @default false
+   */
+  isLoading?: boolean;
+  /**
+   * Optional prop to pass additional properties to the loading icon
+   */
+  loadingIconProps?: MakePropsOptional<IconProps>;
   /**
    * Optional prop to control the size of the button
    * @default ButtonIconSize.Md
