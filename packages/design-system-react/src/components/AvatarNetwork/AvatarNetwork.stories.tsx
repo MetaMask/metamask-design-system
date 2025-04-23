@@ -3,7 +3,7 @@ import React from 'react';
 
 import { AvatarNetworkSize } from '../../types';
 import { AvatarNetwork } from './AvatarNetwork';
-import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.constants';
+import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarNetwork> = {
@@ -66,7 +66,7 @@ export const Default: Story = {
   args: {
     src: SAMPLE_AVATARNETWORK_URIS[0],
     name: 'Arbitrum',
-    fallbackText: 'ETH',
+    fallbackText: 'ARB',
   },
 };
 
@@ -75,7 +75,7 @@ export const Src: Story = {
     <div className="flex gap-2">
       <AvatarNetwork
         name="Arbitrum"
-        fallbackText="Arb"
+        fallbackText="ARB"
         src={SAMPLE_AVATARNETWORK_URIS[0]}
       />
       <AvatarNetwork
@@ -114,7 +114,7 @@ export const FallbackText: Story = {
 
 export const Size: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <AvatarNetwork
         name="Ethereum"
         fallbackText="E"
@@ -146,7 +146,7 @@ export const Size: Story = {
 
 export const HasBorder: Story = {
   render: () => (
-    <div className="flex gap-2 p-2 bg-primary-muted">
+    <div className="flex gap-2 bg-primary-muted p-2">
       <AvatarNetwork name="Arbitrum" src={SAMPLE_AVATARNETWORK_URIS[0]} />
       <AvatarNetwork
         name="Avalanche"

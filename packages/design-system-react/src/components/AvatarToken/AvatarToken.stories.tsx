@@ -3,7 +3,7 @@ import React from 'react';
 
 import { AvatarTokenSize } from '../../types';
 import { AvatarToken } from './AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.constants';
+import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.dev';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarToken> = {
@@ -114,7 +114,7 @@ export const FallbackText: Story = {
 
 export const Size: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <AvatarToken name="Ethereum" fallbackText="E" size={AvatarTokenSize.Xs} />
       <AvatarToken
         name="Ethereum"
@@ -142,7 +142,7 @@ export const Size: Story = {
 
 export const HasBorder: Story = {
   render: () => (
-    <div className="flex gap-2 p-2 bg-primary-muted">
+    <div className="flex gap-2 bg-primary-muted p-2">
       <AvatarToken
         name="Bitcoin"
         fallbackText="BTC"

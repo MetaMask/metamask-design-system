@@ -64,10 +64,18 @@ export const Address: Story = {
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
         variant={AvatarAccountVariant.Blockies}
       />
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        variant={AvatarAccountVariant.Maskicon}
+      />
       <AvatarAccount address="0xb9b81f6bd23B953c5257C3b5E2F0c03B07E944eB" />
       <AvatarAccount
         address="0xb9b81f6bd23B953c5257C3b5E2F0c03B07E944eB"
         variant={AvatarAccountVariant.Blockies}
+      />
+      <AvatarAccount
+        address="0xb9b81f6bd23B953c5257C3b5E2F0c03B07E944eB"
+        variant={AvatarAccountVariant.Maskicon}
       />
     </div>
   ),
@@ -76,10 +84,17 @@ export const Address: Story = {
 export const Variant: Story = {
   render: () => (
     <div className="flex gap-2">
-      <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
         variant={AvatarAccountVariant.Blockies}
+      />
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        variant={AvatarAccountVariant.Jazzicon}
+      />
+      <AvatarAccount
+        address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+        variant={AvatarAccountVariant.Maskicon}
       />
     </div>
   ),
@@ -87,7 +102,7 @@ export const Variant: Story = {
 
 export const Size: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
         size={AvatarAccountSize.Xs}
@@ -114,7 +129,7 @@ export const Size: Story = {
 
 export const HasBorder: Story = {
   render: () => (
-    <div className="flex gap-2 p-2 bg-primary-muted">
+    <div className="flex gap-2 bg-primary-muted p-2">
       <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"

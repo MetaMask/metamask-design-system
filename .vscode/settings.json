@@ -1,7 +1,7 @@
 {
   "tailwindCSS.experimental.configFile": {
     "apps/storybook-react/tailwind.config.js": "packages/design-system-react/src/**",
-    "packages/design-system-twrnc-preset/tailwind.config.js": "packages/design-system-react-native/src/**"
+    "apps/storybook-react-native/tailwind-intellisense.config.js": "packages/design-system-react-native/src/**"
   },
   "files.associations": {
     "*.css": "tailwindcss"
@@ -10,5 +10,16 @@
     "strings": true
   },
   "tailwindCSS.classFunctions": ["tw", "tw`", "twClassName", "twMerge"],
-  "tailwindCSS.validate": true
+  "tailwindCSS.validate": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

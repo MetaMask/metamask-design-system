@@ -78,7 +78,7 @@ export const Default: Story = {
 export const TextVariantStory: Story = {
   render: (args) => (
     <div className="space-y-8">
-      <div className="flex flex-col gap-2 items-start">
+      <div className="flex flex-col items-start gap-2">
         <TextButton {...args} textVariant={TextVariant.BodyLg}>
           BodyLg
         </TextButton>
@@ -122,7 +122,7 @@ export const AsChild: Story = {
 
 export const IsInverse: Story = {
   render: (args) => (
-    <div className="bg-primary-default p-4 rounded">
+    <div className="rounded bg-primary-default p-4">
       <TextButton {...args} isInverse>
         Inverse Button
       </TextButton>

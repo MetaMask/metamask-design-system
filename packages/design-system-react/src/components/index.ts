@@ -11,6 +11,13 @@ export type { AvatarBaseProps } from './AvatarBase';
 export { AvatarFavicon, AvatarFaviconSize } from './AvatarFavicon';
 export type { AvatarFaviconProps } from './AvatarFavicon';
 
+export {
+  AvatarGroup,
+  AvatarGroupSize,
+  AvatarGroupVariant,
+} from './AvatarGroup';
+export type { AvatarGroupProps } from './AvatarGroup';
+
 export { AvatarIcon, AvatarIconSize, AvatarIconSeverity } from './AvatarIcon';
 export type { AvatarIconProps } from './AvatarIcon';
 
@@ -26,6 +33,9 @@ export { BadgeCountSize } from './BadgeCount';
 
 export { BadgeIcon } from './BadgeIcon';
 export type { BadgeIconProps } from './BadgeIcon';
+
+export { BadgeNetwork } from './BadgeNetwork';
+export type { BadgeNetworkProps } from './BadgeNetwork';
 
 export { BadgeStatus } from './BadgeStatus';
 export type { BadgeStatusProps } from './BadgeStatus';

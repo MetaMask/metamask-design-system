@@ -50,8 +50,9 @@ export { AvatarShape as AvatarBaseShape };
  * AvatarAccount - variant
  */
 export enum AvatarAccountVariant {
-  Jazzicon = 'jazzicon',
   Blockies = 'blockies',
+  Jazzicon = 'jazzicon',
+  Maskicon = 'maskicon',
 }
 
 /**
@@ -63,6 +64,16 @@ export enum AvatarIconSeverity {
   Success = 'success',
   Error = 'error',
   Warning = 'warning',
+}
+
+/**
+ * AvatarGroup - variant
+ */
+export enum AvatarGroupVariant {
+  Account = 'Account',
+  Favicon = 'Favicon',
+  Network = 'Network',
+  Token = 'Token',
 }
 
 /**

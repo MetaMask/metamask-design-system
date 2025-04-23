@@ -56,7 +56,7 @@ export const Default: Story = {
 
 export const Size: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       {Object.values(BadgeCountSize).map((size) => (
         <BadgeCount key={size} size={size} count={100} />
       ))}
@@ -66,7 +66,7 @@ export const Size: Story = {
 
 export const Max: Story = {
   render: () => (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <BadgeCount count={10} />
       <BadgeCount count={100} />
     </div>

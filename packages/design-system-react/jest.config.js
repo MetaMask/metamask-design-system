@@ -21,6 +21,7 @@ module.exports = merge(baseConfig, {
     'src/components/Icon/icons/', // Auto-generated icons
     'scripts/create-component/ComponentName/', // component template
     '\\.constants\\.(ts|js)$', // ignore all .constants.ts and .constants.js files
+    '\\.dev\\.(ts|js)$', // ignore all .constants.ts and .constants.js files
   ],
 
   // Add test match ignore patterns

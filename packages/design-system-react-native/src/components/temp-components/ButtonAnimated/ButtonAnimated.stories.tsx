@@ -34,7 +34,7 @@ export const Default: Story = {
       <View style={tw`p-4`}>
         <ButtonAnimated
           {...args}
-          style={tw`bg-icon-alternative p-4 rounded-full items-center justify-center`}
+          style={tw`bg-icon-alternative items-center justify-center rounded-full p-4`}
         >
           <Text
             variant={TextVariant.BodyMd}

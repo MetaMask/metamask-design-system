@@ -18,28 +18,28 @@ export const ButtonSecondary = React.forwardRef<
       // Default secondary styles
       !isDanger &&
         !isInverse && [
-          'bg-transparent border-2 border-icon-muted text-default',
+          'border-2 border-icon-muted bg-transparent text-default',
           // Loading state uses pressed color
           isLoading && 'bg-pressed',
         ],
       // Danger styles
       isDanger &&
         !isInverse && [
-          'bg-error-muted border-2 border-error-default text-error-default',
+          'border-2 border-error-default bg-error-muted text-error-default',
           // Loading state uses error muted pressed color
           isLoading && 'bg-error-muted-pressed text-error-default-pressed',
         ],
       // Inverse styles
       isInverse &&
         !isDanger && [
-          'bg-transparent border-2 border-primary-inverse text-primary-inverse',
+          'border-2 border-primary-inverse bg-transparent text-primary-inverse',
           // Loading state uses pressed color
           isLoading && 'bg-pressed',
         ],
       // Inverse danger styles
       isInverse &&
         isDanger && [
-          'bg-default border-0 text-error-default',
+          'border-0 bg-default text-error-default',
           // Loading state uses pressed color
           isLoading && 'bg-default-pressed',
         ],
