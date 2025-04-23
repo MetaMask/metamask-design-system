@@ -46,6 +46,7 @@
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/utils": "^11.4.0",
     "@solana/addresses": "^2.1.0",
+    "@testing-library/react-hooks": "^8.0.1",
     "react": "^18.2.0",
     "react-native": "^0.72.15",
     "react-native-jazzicon": "^0.1.2",
