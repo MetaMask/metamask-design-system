@@ -118,7 +118,7 @@ describe('ButtonIcon', () => {
     expect(handle).not.toHaveBeenCalled();
   });
 
-  it('renders loading spinner, applies cursor-not-allowed, but does not disable the button tag', () => {
+  it('renders loading spinner and applies cursor-not-allowed', () => {
     render(
       <ButtonIcon
         iconName={IconName.Close}
@@ -128,7 +128,7 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = screen.getByRole('button');
-    expect(btn).not.toBeDisabled();
+    expect(btn).toBeDisabled();
     expect(btn).toHaveClass('cursor-not-allowed');
 
     const spinner = screen.getByTestId('loader');
