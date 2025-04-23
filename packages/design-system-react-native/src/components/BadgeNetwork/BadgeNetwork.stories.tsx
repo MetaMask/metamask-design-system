@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
-import { ImageSourcePropType, View } from 'react-native';
+import { View } from 'react-native';
 
 import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.constants';
 import BadgeNetwork from './BadgeNetwork';
@@ -18,27 +18,21 @@ const meta: Meta<BadgeNetworkProps> = {
 export default meta;
 
 type Story = StoryObj<BadgeNetworkProps>;
-const storyImageSource: ImageSourcePropType = {
-  uri: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg',
-};
 
 export const Default: Story = {
   args: {
     twClassName: '',
   },
-  render: (args) => <BadgeNetwork {...args} src={storyImageSource} />,
+  render: (args) => (
+    <BadgeNetwork {...args} src={SAMPLE_AVATARNETWORK_URIS[0]} />
+  ),
 };
 
 export const SampleNetworks: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      {SAMPLE_AVATARNETWORK_URIS.map((networkUri) => (
-        <BadgeNetwork
-          src={{
-            uri: networkUri,
-          }}
-          key={networkUri}
-        />
+      {SAMPLE_AVATARNETWORK_URIS.map((networkSrc, index) => (
+        <BadgeNetwork src={networkSrc} key={`badgenetwork-${index}`} />
       ))}
     </View>
   ),
