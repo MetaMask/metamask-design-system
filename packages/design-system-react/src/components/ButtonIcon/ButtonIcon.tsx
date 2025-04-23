@@ -21,26 +21,12 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
       isInverse = false,
       isFloating = false,
       size = ButtonIconSize.Md,
-      isLoading,
-      loadingIconProps,
       style,
       ...props
     },
     ref,
   ) => {
     const isInteractive = !isDisabled;
-
-    const renderLoadingState = () => (
-      <Icon
-        name={IconName.Loading}
-        size={MAP_BUTTONICON_SIZE_ICONSIZE[size]}
-        className={twMerge(
-          'animate-spin text-inherit',
-          loadingIconProps?.className,
-        )}
-        {...loadingIconProps}
-      />
-    );
 
     const mergedClassName = twMerge(
       // Base styles
@@ -62,7 +48,7 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
         isInverse && 'text-background-default',
       ],
       // Disabled state - apply to both isDisabled and isLoading
-      (isDisabled || isLoading) && 'cursor-not-allowed',
+      isDisabled && 'cursor-not-allowed',
       isDisabled && 'opacity-50',
       className,
     );
@@ -71,20 +57,16 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
       <button
         ref={ref}
         className={mergedClassName}
-        disabled={isDisabled || isLoading}
+        disabled={isDisabled}
         aria-label={ariaLabel}
         {...props}
       >
-        {isLoading ? (
-          renderLoadingState()
-        ) : (
-          <Icon
-            name={iconName}
-            size={MAP_BUTTONICON_SIZE_ICONSIZE[size]}
-            className={twMerge('text-inherit', iconProps?.className)}
-            {...iconProps}
-          />
-        )}
+        <Icon
+          name={iconName}
+          size={MAP_BUTTONICON_SIZE_ICONSIZE[size]}
+          className={twMerge('text-inherit', iconProps?.className)}
+          {...iconProps}
+        />
       </button>
     );
   },

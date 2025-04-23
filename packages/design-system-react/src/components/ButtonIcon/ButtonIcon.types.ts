@@ -32,15 +32,6 @@ export type ButtonIconProps = ComponentProps<'button'> & {
    */
   isFloating?: boolean;
   /**
-   * Optional prop that when true, shows a loading spinner
-   * @default false
-   */
-  isLoading?: boolean;
-  /**
-   * Optional prop to pass additional properties to the loading icon
-   */
-  loadingIconProps?: Partial<IconProps>;
-  /**
    * Optional prop to control the size of the button
    * @default ButtonIconSize.Md
    */

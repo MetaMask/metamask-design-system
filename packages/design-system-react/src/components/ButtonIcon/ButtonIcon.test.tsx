@@ -118,23 +118,6 @@ describe('ButtonIcon', () => {
     expect(handle).not.toHaveBeenCalled();
   });
 
-  it('renders loading spinner and applies cursor-not-allowed', () => {
-    render(
-      <ButtonIcon
-        iconName={IconName.Close}
-        ariaLabel="Loading"
-        isLoading
-        loadingIconProps={{ 'data-testid': 'loader', className: 'ldr' }}
-      />,
-    );
-    const btn = screen.getByRole('button');
-    expect(btn).toBeDisabled();
-    expect(btn).toHaveClass('cursor-not-allowed');
-
-    const spinner = screen.getByTestId('loader');
-    expect(spinner).toHaveClass('text-icon-default', 'ldr');
-  });
-
   it('merges custom className only (style prop is not passed through)', () => {
     render(
       <ButtonIcon
