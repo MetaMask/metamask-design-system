@@ -1,7 +1,6 @@
 import type { ComponentProps } from 'react';
 
 import { ButtonIconSize } from '../../types';
-import type { MakePropsOptional } from '../../types/make-props-optional';
 import type { IconName, IconProps } from '../Icon';
 
 export type ButtonIconProps = ComponentProps<'button'> & {
@@ -40,7 +39,7 @@ export type ButtonIconProps = ComponentProps<'button'> & {
   /**
    * Optional prop to pass additional properties to the loading icon
    */
-  loadingIconProps?: MakePropsOptional<IconProps>;
+  loadingIconProps?: Partial<IconProps>;
   /**
    * Optional prop to control the size of the button
    * @default ButtonIconSize.Md
