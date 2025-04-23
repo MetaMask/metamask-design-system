@@ -57,6 +57,7 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
         className={mergedClassName}
         disabled={isDisabled}
         aria-label={ariaLabel}
+        style={style}
         {...props}
       >
         <Icon

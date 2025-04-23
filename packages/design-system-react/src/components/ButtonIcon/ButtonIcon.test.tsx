@@ -118,7 +118,7 @@ describe('ButtonIcon', () => {
     expect(handle).not.toHaveBeenCalled();
   });
 
-  it('merges custom className only (style prop is not passed through)', () => {
+  it('merges custom className and style', () => {
     render(
       <ButtonIcon
         iconName={IconName.Close}
@@ -129,7 +129,7 @@ describe('ButtonIcon', () => {
     );
     const btn = screen.getByRole('button');
     expect(btn).toHaveClass('my-btn');
-    expect(btn).not.toHaveStyle({ margin: '4px' });
+    expect(btn).toHaveStyle({ margin: '4px' });
   });
 
   it('forwards onClick when enabled', () => {
