@@ -2,11 +2,10 @@ import React from 'react';
 
 import { ButtonIconSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
-import { ButtonBase } from '../ButtonBase';
 import { Icon } from '../Icon';
 import {
-  BUTTON_ICON_SIZE_CLASS_MAP,
-  BUTTON_ICON_SIZE_TO_ICON_SIZE_CLASS_MAP,
+  TWCLASSMAP_BUTTONICON_SIZE_DIMENSION,
+  MAP_BUTTONICON_SIZE_ICONSIZE,
 } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
 
@@ -30,9 +29,9 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
 
     const mergedClassName = twMerge(
       // Base styles
-      'p-0',
+      'inline-flex items-center justify-center p-0',
       // Size styles
-      BUTTON_ICON_SIZE_CLASS_MAP[size],
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size],
       // Floating styles
       isFloating && [
         'rounded-full',
@@ -47,24 +46,26 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
         !isInverse && 'text-icon-default',
         isInverse && 'text-background-default',
       ],
+      // Disabled state
+      isDisabled && 'cursor-not-allowed opacity-50',
       className,
     );
 
     return (
-      <ButtonBase
+      <button
         ref={ref}
         className={mergedClassName}
-        isDisabled={isDisabled}
+        disabled={isDisabled}
         aria-label={ariaLabel}
         {...props}
       >
         <Icon
           name={iconName}
-          size={BUTTON_ICON_SIZE_TO_ICON_SIZE_CLASS_MAP[size]}
+          size={MAP_BUTTONICON_SIZE_ICONSIZE[size]}
           className={twMerge('text-inherit', iconProps?.className)}
           {...iconProps}
         />
-      </ButtonBase>
+      </button>
     );
   },
 );
