@@ -149,11 +149,23 @@ export const Color: Story = {
       <Text color={TextColor.PrimaryDefault} className="p-4">
         PrimaryDefault
       </Text>
+      <Text color={TextColor.PrimaryDefaultHover} className="p-4">
+        PrimaryDefaultHover
+      </Text>
+      <Text color={TextColor.PrimaryDefaultPressed} className="p-4">
+        PrimaryDefaultPressed
+      </Text>
       <Text color={TextColor.PrimaryInverse} className="bg-primary-default p-4">
         PrimaryInverse on bg-primary-default
       </Text>
       <Text color={TextColor.ErrorDefault} className="p-4">
         ErrorDefault
+      </Text>
+      <Text color={TextColor.ErrorDefaultHover} className="p-4">
+        ErrorDefaultHover
+      </Text>
+      <Text color={TextColor.ErrorDefaultPressed} className="p-4">
+        ErrorDefaultPressed
       </Text>
       <Text color={TextColor.ErrorInverse} className="bg-error-default p-4">
         ErrorInverse on bg-error-default
@@ -161,11 +173,23 @@ export const Color: Story = {
       <Text color={TextColor.SuccessDefault} className="p-4">
         SuccessDefault
       </Text>
+      <Text color={TextColor.SuccessDefaultHover} className="p-4">
+        SuccessDefaultHover
+      </Text>
+      <Text color={TextColor.SuccessDefaultPressed} className="p-4">
+        SuccessDefaultPressed
+      </Text>
       <Text color={TextColor.SuccessInverse} className="bg-success-default p-4">
         SuccessInverse on bg-success-default
       </Text>
       <Text color={TextColor.WarningDefault} className="p-4">
         WarningDefault
+      </Text>
+      <Text color={TextColor.WarningDefaultHover} className="p-4">
+        WarningDefaultHover
+      </Text>
+      <Text color={TextColor.WarningDefaultPressed} className="p-4">
+        WarningDefaultPressed
       </Text>
       <Text color={TextColor.WarningInverse} className="bg-warning-default p-4">
         WarningInverse on bg-warning-default
