@@ -1,16 +1,12 @@
-// ButtonIcon.test.tsx
-
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
-import ButtonIcon from './ButtonIcon';
+import { render, fireEvent } from '@testing-library/react-native';
+import React from 'react';
+
 import { ButtonIconSize } from '../../types';
 import { IconName } from '../Icon';
-import {
-  MAP_BUTTONICON_SIZE_ICONSIZE,
-  TWCLASSMAP_BUTTONICON_SIZE_DIMENSION,
-} from './ButtonIcon.constants';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import ButtonIcon from './ButtonIcon';
+import { TWCLASSMAP_BUTTONICON_SIZE_DIMENSION } from './ButtonIcon.constants';
 
 describe('ButtonIcon', () => {
   it('renders default state correctly', () => {
@@ -78,21 +74,6 @@ describe('ButtonIcon', () => {
     );
     const btn = getByTestId('button-icon');
     expect(btn.props.style[0]).toStrictEqual(expected);
-  });
-
-  it('renders loading state with Spinner', () => {
-    const { getByTestId, queryByTestId } = render(
-      <ButtonIcon
-        iconName={IconName.Close}
-        spinnerProps={{ testID: 'spinner' }}
-        isLoading
-        testID="button-icon"
-      />,
-    );
-    expect(queryByTestId('icon')).toBeNull();
-
-    const spinner = getByTestId('spinner');
-    expect(spinner).toBeDefined();
   });
 
   it('forwards style and twClassName', () => {

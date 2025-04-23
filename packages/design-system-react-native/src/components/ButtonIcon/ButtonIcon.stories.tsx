@@ -28,9 +28,6 @@ const meta: Meta<ButtonIconProps> = {
     isFloating: {
       control: 'boolean',
     },
-    isLoading: {
-      control: 'boolean',
-    },
     twClassName: {
       control: 'text',
     },
@@ -63,7 +60,6 @@ export const Default: Story = {
     isDisabled: false,
     isInverse: false,
     isFloating: false,
-    isLoading: false,
   },
   render: (args) => <ButtonIconStory {...args} />,
 };
@@ -90,8 +86,4 @@ export const isInverse: Story = {
 
 export const isFloating: Story = {
   render: () => <ButtonIconStory iconName={IconName.Close} isFloating />,
-};
-
-export const isLoading: Story = {
-  render: () => <ButtonIconStory iconName={IconName.Close} isLoading />,
 };

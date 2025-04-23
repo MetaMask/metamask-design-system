@@ -5,7 +5,6 @@ import type { GestureResponderEvent } from 'react-native';
 
 import { ButtonIconSize } from '../../types';
 import Icon, { IconColor } from '../Icon';
-import Spinner from '../temp-components/Spinner';
 import ButtonAnimated from '../temp-components/ButtonAnimated';
 import {
   MAP_BUTTONICON_SIZE_ICONSIZE,
@@ -20,8 +19,6 @@ const ButtonIcon = ({
   isDisabled = false,
   isInverse = false,
   isFloating = false,
-  isLoading = false,
-  spinnerProps,
   onPressIn,
   onPressOut,
   twClassName = '',
@@ -51,20 +48,9 @@ const ButtonIcon = ({
     onPressOut?.(event);
   };
 
-  const renderLoadingState = () => (
-    <Spinner
-      color={twIconColorClassNames as IconColor}
-      {...spinnerProps}
-      spinnerIconProps={{
-        size: MAP_BUTTONICON_SIZE_ICONSIZE[size],
-        ...spinnerProps?.spinnerIconProps,
-      }}
-    />
-  );
-
   return (
     <ButtonAnimated
-      disabled={isDisabled || isLoading}
+      disabled={isDisabled}
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
       accessible
@@ -72,16 +58,12 @@ const ButtonIcon = ({
       testID="button-icon"
       {...props}
     >
-      {isLoading ? (
-        renderLoadingState()
-      ) : (
-        <Icon
-          name={iconName}
-          color={twIconColorClassNames as IconColor}
-          size={MAP_BUTTONICON_SIZE_ICONSIZE[size]}
-          {...iconProps}
-        />
-      )}
+      <Icon
+        name={iconName}
+        color={twIconColorClassNames as IconColor}
+        size={MAP_BUTTONICON_SIZE_ICONSIZE[size]}
+        {...iconProps}
+      />
     </ButtonAnimated>
   );
 };
