@@ -1,6 +1,8 @@
 # AvatarAccount
 
-The `AvatarAccount` component is reserved for representing accounts inside of an avatar. It extends the functionality of [`AvatarBase`](../AvatarBase/) by incorporating an Account and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with Accounts.
+The `AvatarAccount` component is reserved for representing accounts inside of an avatar.
+
+_Developer Note: It extends the functionality of [`AvatarBase`](../AvatarBase/) by incorporating an Account and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with Accounts._
 
 ---
 
@@ -29,6 +31,42 @@ Required address used as a unique identifier to generate the AvatarAccount art.
 | TYPE     | REQUIRED | DEFAULT |
 | :------- | :------- | :------ |
 | `string` | Yes      | `N/A`   |
+
+---
+
+### `blockiesProps`
+
+Optional props to be passed to the `Blockies` component when the variant is `Blockies`.
+
+| TYPE                     | REQUIRED | DEFAULT     |
+| ------------------------ | -------- | ----------- |
+| `Partial<BlockiesProps>` | No       | `undefined` |
+
+Used to customize the `Blockies` identicon, such as block size or color settings.
+
+---
+
+### `jazziconProps`
+
+Optional props to be passed to the `Jazzicon` component when the variant is `Jazzicon`.
+
+| TYPE                     | REQUIRED | DEFAULT     |
+| ------------------------ | -------- | ----------- |
+| `Partial<JazziconProps>` | No       | `undefined` |
+
+Used to customize the `Jazzicon` identicon, such as diameter or address seed.
+
+---
+
+### `maskiconProps`
+
+Optional props to be passed to the `Maskicon` component itself.
+
+| TYPE                     | REQUIRED | DEFAULT     |
+| ------------------------ | -------- | ----------- |
+| `Partial<MaskiconProps>` | No       | `undefined` |
+
+Useful for forwarding additional `SvgProps`, accessibility attributes, or animation styles.
 
 ---
 
