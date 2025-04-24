@@ -10,7 +10,10 @@ import {
   FontStyle,
 } from '../../types';
 import Text from './Text';
-import { MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME } from './Text.constants';
+import {
+  TWCLASSMAP_TEXT_FONTWEIGHT,
+  MAP_TEXT_VARIANT_FONTWEIGHT,
+} from './Text.constants';
 import { generateTextClassNames } from './Text.utilities';
 
 describe('Text', () => {
@@ -19,7 +22,7 @@ describe('Text', () => {
       const classNames = generateTextClassNames({});
       expect(classNames).toContain(`text-${TextVariant.BodyMd}`);
       expect(classNames).toContain(
-        `font-${FontFamily.Default}${MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME[FontWeight.Regular]}`,
+        `font-${FontFamily.Default}${TWCLASSMAP_TEXT_FONTWEIGHT[FontWeight.Regular]}`,
       );
       expect(classNames).toContain(TextColor.TextDefault);
     });
@@ -128,7 +131,10 @@ describe('Text', () => {
 
         const TestComponent = () => {
           const tw = useTailwind();
-          const expectedClassNames = generateTextClassNames({ variant });
+          const expectedClassNames = generateTextClassNames({
+            variant,
+            fontWeight: MAP_TEXT_VARIANT_FONTWEIGHT[variant],
+          });
           expectedStyles = tw`${expectedClassNames}`;
           return (
             <Text testID="text" variant={variant}>
