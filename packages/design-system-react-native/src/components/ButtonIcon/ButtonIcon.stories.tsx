@@ -64,7 +64,7 @@ export const Default: Story = {
   render: (args) => <ButtonIconStory {...args} />,
 };
 
-export const Sizes: Story = {
+export const Size: Story = {
   render: () => (
     <View style={{ gap: 8 }}>
       {Object.values(ButtonIconSize).map((size) => (
