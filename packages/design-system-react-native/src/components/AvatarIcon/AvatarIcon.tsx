@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import {
   AvatarIconSize,
@@ -12,14 +12,14 @@ import Icon from '../Icon';
 import {
   MAP_AVATARICON_SIZE_ICONSIZE,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,
+  TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
 } from './AvatarIcon.constants';
 import type { AvatarIconProps } from './AvatarIcon.types';
-import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
 
 const AvatarIcon = ({
   size = AvatarIconSize.Md,
   shape = AvatarBaseShape.Circle,
-  severity = AvatarIconSeverity.Default,
+  severity = AvatarIconSeverity.Neutral,
   iconName,
   iconProps,
   twClassName = '',
@@ -27,12 +27,10 @@ const AvatarIcon = ({
   ...props
 }: AvatarIconProps) => {
   const tw = useTailwind();
-  const twContainerClassNames = useMemo(() => {
-    return generateAvatarIconContainerClassNames({
-      severity,
-      twClassName,
-    });
-  }, [severity, twClassName]);
+  const twContainerClassNames = `
+    ${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity]}
+    ${twClassName}
+  `;
 
   return (
     <AvatarBase

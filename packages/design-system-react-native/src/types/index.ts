@@ -69,7 +69,7 @@ export enum AvatarGroupVariant {
  * AvatarIcon - severity
  */
 export enum AvatarIconSeverity {
-  Default = 'default',
+  Neutral = 'neutral',
   Info = 'info',
   Success = 'success',
   Error = 'error',
