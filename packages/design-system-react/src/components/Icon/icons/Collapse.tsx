@@ -12,7 +12,7 @@ const SvgCollapse = (
     ref={ref}
     {...props}
   >
-    <path d="M11 12.886v6H9v-4H5v-2zm4-8v4h4v2h-6v-6z" />
+    <path d="M11 13v6H9v-4H5v-2zm4-8v4h4v2h-6V5z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgCollapse);

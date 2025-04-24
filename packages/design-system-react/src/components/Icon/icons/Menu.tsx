@@ -9,7 +9,7 @@ const SvgMenu = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     ref={ref}
     {...props}
   >
-    <path d="M3 17.886v-2h18v2zm0-5v-2h18v2zm0-5v-2h18v2z" />
+    <path d="M3 18v-2h18v2zm0-5v-2h18v2zm0-5V6h18v2z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgMenu);

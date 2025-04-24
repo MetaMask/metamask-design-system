@@ -9,7 +9,7 @@ const SvgLogin = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     ref={ref}
     {...props}
   >
-    <path d="M12 20.886v-2h7v-14h-7v-2h7q.824 0 1.413.587.587.588.587 1.413v14q0 .825-.587 1.412c-.587.587-.863.588-1.413.588zm-2-4-1.375-1.45 2.55-2.55H3v-2h8.175l-2.55-2.55L10 6.885l5 5z" />
+    <path d="M12 21v-2h7V5h-7V3h7q.824 0 1.413.588C21.002 4.175 21 4.45 21 5v14q0 .824-.587 1.413c-.587.589-.863.587-1.413.587zm-2-4-1.375-1.45 2.55-2.55H3v-2h8.175l-2.55-2.55L10 7l5 5z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgLogin);

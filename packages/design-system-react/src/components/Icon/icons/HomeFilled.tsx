@@ -12,7 +12,7 @@ const SvgHomeFilled = (
     ref={ref}
     {...props}
   >
-    <path d="M4 21.772v-12l8-6 8 6v12h-6v-7h-4v7z" />
+    <path d="M4 20.886v-12l8-6 8 6v12h-6v-7h-4v7z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgHomeFilled);

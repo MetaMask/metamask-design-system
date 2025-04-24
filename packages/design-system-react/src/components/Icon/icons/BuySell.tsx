@@ -14,7 +14,7 @@ const SvgBuySell = (
   >
     <path
       fillRule="evenodd"
-      d="M7 4.771H5v3H2v2h3v3h2v-3h3v-2H7zm11 1 1.06 1.061L5.627 20.267l-1.061-1.06zm4 11v-2h-8v2z"
+      d="M7 4.252H5v3H2v2h3v3h2v-3h3v-2H7zm11 1 1.06 1.06L5.627 19.749l-1.061-1.06zm4 11v-2h-8v2z"
       clipRule="evenodd"
     />
   </svg>
