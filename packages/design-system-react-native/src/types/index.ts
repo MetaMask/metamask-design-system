@@ -196,6 +196,7 @@ export enum ButtonIconSize {
  */
 export enum TextVariant {
   // Display Sizes
+  DisplayLg = 'display-lg',
   DisplayMd = 'display-md',
 
   // Heading Sizes
