@@ -1,6 +1,7 @@
-import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { ButtonIconSize } from '../../types';
+import { ButtonAnimatedProps } from '../temp-components/ButtonAnimated';
 import type { IconProps, IconName } from '../Icon';
 
 /**
@@ -45,4 +46,4 @@ export type ButtonIconProps = {
    * Optional prop to control the style.
    */
   style?: StyleProp<ViewStyle>;
-} & Omit<PressableProps, 'children'>;
+} & Omit<ButtonAnimatedProps, 'children'>;

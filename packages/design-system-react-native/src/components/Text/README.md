@@ -1,6 +1,6 @@
 # Text
 
-The `Text` component is a customizable text component for React Native applications, leveraging Tailwind CSS for styling. It allows you to display text with various typography variants, colors, font weights, and styles.
+Text is the used to render text and paragraphs within an interface
 
 ## Props
 

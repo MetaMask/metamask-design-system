@@ -206,20 +206,36 @@ export enum TextColor {
   OverlayInverse = 'text-overlay-inverse',
   /** For interactive, active, and selected semantics. Used for text, background, icon or border */
   PrimaryDefault = 'text-primary-default',
+  /** For primary text in a hover state. */
+  PrimaryDefaultHover = 'text-primary-default-hover',
+  /** For primary text in a pressed state. */
+  PrimaryDefaultPressed = 'text-primary-default-pressed',
   /** For elements used on top of primary/default. Used for text, icon or border */
   PrimaryInverse = 'text-primary-inverse',
   /** For the critical alert semantic elements. Used for text, background, icon or border */
   ErrorDefault = 'text-error-default',
+  /** For critical alert text in a hover state. */
+  ErrorDefaultHover = 'text-error-default-hover',
+  /** For critical alert text in a pressed state. */
+  ErrorDefaultPressed = 'text-error-default-pressed',
   /** For the stronger contrast error semantic elements. */
   ErrorAlternative = 'text-error-alternative',
   /** For elements used on top of error/default. Used for text, icon or border */
   ErrorInverse = 'text-error-inverse',
   /** For the positive semantic elements. Used for text, background, icon or border */
   SuccessDefault = 'text-success-default',
+  /** For positive text in a hover state. */
+  SuccessDefaultHover = 'text-success-default-hover',
+  /** For positive text in a pressed state. */
+  SuccessDefaultPressed = 'text-success-default-pressed',
   /** For elements used on top of success/default. Used for text, icon or border */
   SuccessInverse = 'text-success-inverse',
   /** For the caution alert semantic elements. Used for text, background, icon or border */
   WarningDefault = 'text-warning-default',
+  /** For caution text in a hover state. */
+  WarningDefaultHover = 'text-warning-default-hover',
+  /** For caution text in a pressed state. */
+  WarningDefaultPressed = 'text-warning-default-pressed',
   /** For elements used on top of warning/default. Used for text, icon or border */
   WarningInverse = 'text-warning-inverse',
   /** For informational read-only elements. Used for text, background, icon or border */

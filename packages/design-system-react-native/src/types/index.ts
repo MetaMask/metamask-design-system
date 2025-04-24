@@ -180,15 +180,15 @@ export enum ButtonIconSize {
   /**
    * Represents a small button size (24px).
    */
-  Sm = '24',
+  Sm = 'sm',
   /**
    * Represents a medium button size (32px).
    */
-  Md = '32',
+  Md = 'md',
   /**
    * Represents a large button size (40px).
    */
-  Lg = '40',
+  Lg = 'lg',
 }
 
 /**
