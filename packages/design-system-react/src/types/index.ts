@@ -59,7 +59,7 @@ export enum AvatarAccountVariant {
  * AvatarIcon - severity
  */
 export enum AvatarIconSeverity {
-  Default = 'default',
+  Neutral = 'neutral',
   Info = 'info',
   Success = 'success',
   Error = 'error',
@@ -473,6 +473,7 @@ export enum IconName {
   FirstPage = 'FirstPage',
   Flag = 'Flag',
   Flash = 'Flash',
+  FlashSlash = 'FlashSlash',
   Flask = 'Flask',
   Flower = 'Flower',
   Folder = 'Folder',
@@ -519,6 +520,7 @@ export enum IconName {
   MinusSquare = 'MinusSquare',
   Mobile = 'Mobile',
   Money = 'Money',
+  MoneyBag = 'MoneyBag',
   Monitor = 'Monitor',
   MoreHorizontal = 'MoreHorizontal',
   MoreVertical = 'MoreVertical',

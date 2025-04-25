@@ -104,6 +104,7 @@ import Fire from './Fire';
 import FirstPage from './FirstPage';
 import Flag from './Flag';
 import Flash from './Flash';
+import FlashSlash from './FlashSlash';
 import Flask from './Flask';
 import Flower from './Flower';
 import Folder from './Folder';
@@ -150,6 +151,7 @@ import MinusBold from './MinusBold';
 import MinusSquare from './MinusSquare';
 import Mobile from './Mobile';
 import Money from './Money';
+import MoneyBag from './MoneyBag';
 import Monitor from './Monitor';
 import MoreHorizontal from './MoreHorizontal';
 import MoreVertical from './MoreVertical';
@@ -374,6 +376,7 @@ export const Icons = {
   FirstPage,
   Flag,
   Flash,
+  FlashSlash,
   Flask,
   Flower,
   Folder,
@@ -420,6 +423,7 @@ export const Icons = {
   MinusSquare,
   Mobile,
   Money,
+  MoneyBag,
   Monitor,
   MoreHorizontal,
   MoreVertical,

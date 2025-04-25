@@ -35,13 +35,13 @@
     "dist/"
   ],
   "scripts": {
-    "build": "yarn generate:icons && ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "yarn generate-icons && ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
     "clean:icons": "rimraf src/components/Icon/icons",
     "create-component": "ts-node scripts/create-component",
-    "generate:icons": "yarn clean:icons && svgr --config-file src/components/Icon/.svgrrc.js -d src/components/Icon/icons src/components/Icon/assets/*.svg && yarn generate:icons:index && yarn workspace @metamask/metamask-design-system prettier --write \"packages/design-system-react/src/components/Icon/icons/**/*.{ts,tsx}\"",
-    "generate:icons:index": "ts-node scripts/generate-icons-index.ts",
+    "generate-icons": "yarn clean:icons && svgr --config-file src/components/Icon/.svgrrc.js -d src/components/Icon/icons src/components/Icon/assets/*.svg && yarn generate-icons:index && yarn workspace @metamask/metamask-design-system prettier --write \"packages/design-system-react/src/components/Icon/icons/**/*.{ts,tsx}\"",
+    "generate-icons:index": "ts-node scripts/generate-icons-index.ts",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",

@@ -9,7 +9,7 @@ const SvgFlag = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     ref={ref}
     {...props}
   >
-    <path d="M5 20.886v-17h9l.4 2H20v10h-7l-.4-2H7v7zm9.65-7H18v-6h-5.25l-.4-2H7v6h7.25z" />
+    <path d="M5 20.5v-17h9l.4 2H20v10h-7l-.4-2H7v7zm9.65-7H18v-6h-5.25l-.4-2H7v6h7.25z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgFlag);
