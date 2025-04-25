@@ -22,4 +22,8 @@ export const Default: Story = {
   },
 };
 
-// You can add more stories as needed
+export const Children: Story = {
+  args: {
+    children: 'This is an example of using children with ComponentName',
+  },
+};
