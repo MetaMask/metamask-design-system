@@ -66,8 +66,8 @@ export async function createComponent(
 ): Promise<void> {
   const { name: componentName, description } = args;
 
-  // Convert folder name to lowercase
-  const folderName = componentName.toLowerCase();
+  // Use PascalCase for the folder name
+  const folderName = componentName;
 
   // Define paths
   const templateDir = path.join(__dirname, 'ComponentName');

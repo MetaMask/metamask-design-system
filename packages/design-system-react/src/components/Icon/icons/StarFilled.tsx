@@ -12,7 +12,7 @@ const SvgStarFilled = (
     ref={ref}
     {...props}
   >
-    <path d="M5.825 20.886 7.45 13.86 2 9.136l7.2-.625L12 1.886l2.8 6.625 7.2.625-5.45 4.725 1.625 7.025L12 17.16z" />
+    <path d="m5.825 21 1.625-7.025L2 9.25l7.2-.625L12 2l2.8 6.625 7.2.625-5.45 4.725L18.175 21 12 17.275z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgStarFilled);

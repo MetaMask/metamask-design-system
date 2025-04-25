@@ -12,7 +12,7 @@ const SvgEthereum = (
     ref={ref}
     {...props}
   >
-    <path d="M17.934 12.124 12 15.748l-5.938-3.624L12 1.935zM12 16.913l-5.938-3.625L12 21.936l5.937-8.648z" />
+    <path d="M17.934 12.188 12 15.812l-5.938-3.624L12 2zM12 16.977l-5.938-3.625L12 22l5.937-8.648z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgEthereum);
