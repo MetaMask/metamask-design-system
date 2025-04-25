@@ -9,7 +9,7 @@ const SvgExpand = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     ref={ref}
     {...props}
   >
-    <path d="M3 20.886v-6h2v2.6l3.1-3.1 1.4 1.4-3.1 3.1H9v2zm12.9-11.5-1.4-1.4 3.1-3.1H15v-2h6v6h-2v-2.6z" />
+    <path d="M3 21v-6h2v2.6l3.1-3.1 1.4 1.4L6.4 19H9v2zM15.9 9.5l-1.4-1.4L17.6 5H15V3h6v6h-2V6.4z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgExpand);

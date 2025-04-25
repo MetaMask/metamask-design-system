@@ -12,7 +12,7 @@ const SvgWidgets = (
     ref={ref}
     {...props}
   >
-    <path d="M16.65 13.229 11 7.579l5.65-5.65 5.65 5.65zm-13.65-2v-8h8v8zm10 10v-8h8v8zm-10 0v-8h8v8zm2-12h4v-4H5zm11.675 1.2L19.5 7.604l-2.825-2.825-2.825 2.825zM15 19.229h4v-4h-4zm-10 0h4v-4H5z" />
+    <path d="M16.65 13 11 7.35l5.65-5.65 5.65 5.65zM3 11V3h8v8zm10 10v-8h8v8zM3 21v-8h8v8zM5 9h4V5H5zm11.675 1.2L19.5 7.375 16.675 4.55 13.85 7.375zM15 19h4v-4h-4zM5 19h4v-4H5z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgWidgets);

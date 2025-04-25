@@ -9,7 +9,7 @@ const SvgSend = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     ref={ref}
     {...props}
   >
-    <path d="M3 20.772v-16l19 8zm2-3 11.85-5-11.85-5v3.5l6 1.5-6 1.5z" />
+    <path d="M3 20V4l19 8zm2-3 11.85-5L5 7v3.5l6 1.5-6 1.5z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgSend);

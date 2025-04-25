@@ -12,7 +12,7 @@ const SvgTrendUp = (
     ref={ref}
     {...props}
   >
-    <path d="m3.4 17.886-1.4-1.4 7.4-7.45 4 4 5.2-5.15H16v-2h6v6h-2v-2.6l-6.6 6.6-4-4z" />
+    <path d="M3.4 18 2 16.6l7.4-7.45 4 4L18.6 8H16V6h6v6h-2V9.4L13.4 16l-4-4z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgTrendUp);

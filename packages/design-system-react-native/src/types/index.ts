@@ -344,15 +344,15 @@ export enum IconColor {
  */
 export enum IconSize {
   /** Extra small - 12px */
-  Xs = 12,
+  Xs = '12',
   /** Small - 16px */
-  Sm = 16,
+  Sm = '16',
   /** Medium - 20px (Default) */
-  Md = 20,
+  Md = '20',
   /** Large - 24px */
-  Lg = 24,
+  Lg = '24',
   /** Extra large - 32px */
-  Xl = 32,
+  Xl = '32',
 }
 
 // /////////////////////////////////////////////////////
@@ -466,6 +466,7 @@ export enum IconName {
   Fire = 'Fire',
   FirstPage = 'FirstPage',
   Flag = 'Flag',
+  FlashSlash = 'FlashSlash',
   Flash = 'Flash',
   Flask = 'Flask',
   Flower = 'Flower',
@@ -512,6 +513,7 @@ export enum IconName {
   MinusSquare = 'MinusSquare',
   Minus = 'Minus',
   Mobile = 'Mobile',
+  MoneyBag = 'MoneyBag',
   Money = 'Money',
   Monitor = 'Monitor',
   MoreHorizontal = 'MoreHorizontal',

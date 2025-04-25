@@ -12,7 +12,7 @@ const SvgLastPage = (
     ref={ref}
     {...props}
   >
-    <path d="m7 18.229-1.4-1.4 4.6-4.6-4.6-4.6 1.4-1.4 6 6zm9 0v-12h2v12z" />
+    <path d="m7.2 18-1.4-1.4 4.6-4.6-4.6-4.6L7.2 6l6 6zm9 0V6h2v12z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgLastPage);
