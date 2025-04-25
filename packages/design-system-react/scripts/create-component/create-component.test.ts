@@ -74,7 +74,7 @@ describe('create-component', () => {
 
       // Verify directory was created
       expect(fs.mkdir).toHaveBeenCalledWith(
-        expect.stringContaining('/src/components/button'),
+        expect.stringContaining('/src/components/Button'),
         { recursive: true },
       );
 
@@ -86,10 +86,10 @@ describe('create-component', () => {
       expect(appendFileCalls).toHaveLength(1);
       expect(appendFileCalls[0][0]).toMatch(/\/src\/components\/index\.ts$/u);
       expect(appendFileCalls[0][1]).toContain(
-        "export { Button } from './button'",
+        "export { Button } from './Button'",
       );
       expect(appendFileCalls[0][1]).toContain(
-        "export type { ButtonProps } from './button'",
+        "export type { ButtonProps } from './Button'",
       );
     });
 
@@ -133,7 +133,7 @@ describe('create-component', () => {
       expect(hasCorrectContent).toBe(true);
     });
 
-    it('should convert component folder name to lowercase', async () => {
+    it('should use PascalCase for component folder name', async () => {
       // Mock fs.access to throw ENOENT
       (fs.access as jest.Mock).mockRejectedValue({
         code: 'ENOENT',
@@ -144,9 +144,9 @@ describe('create-component', () => {
         description: 'A reusable button component',
       });
 
-      // Verify directory was created with lowercase name
+      // Verify directory was created with PascalCase name
       expect(fs.mkdir).toHaveBeenCalledWith(
-        expect.stringContaining('/src/components/mybutton'),
+        expect.stringContaining('/src/components/MyButton'),
         { recursive: true },
       );
     });
