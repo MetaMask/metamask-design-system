@@ -22,3 +22,22 @@ For React Native components, please use:
 ```bash
 yarn storybook:ios
 ```
+
+## Accessibility Testing
+
+Our Storybook setup includes accessibility testing capabilities. See [Accessibility Testing Documentation](../../docs/accessibility-testing.md).
+
+Quick start:
+
+```bash
+# Run storybook
+yarn storybook
+```
+
+```bash
+# In a new terminal run accessibility tests for all components
+yarn test:storybook
+
+# Run tests for a specific component
+yarn test:storybook "ComponentName"
+```
