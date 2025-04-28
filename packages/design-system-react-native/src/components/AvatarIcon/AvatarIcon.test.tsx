@@ -107,7 +107,7 @@ describe('AvatarIcon', () => {
   it.each(Object.values(AvatarIconSize))(
     'applies correct icon size for size %s',
     (size) => {
-      const expectedSize = MAP_AVATARICON_SIZE_ICONSIZE[size];
+      const expectedSize = MAP_AVATARICON_SIZE_ICONSIZE[size].toString();
       const { getByTestId } = render(
         <AvatarIcon
           iconName={IconName.Add}
@@ -117,8 +117,8 @@ describe('AvatarIcon', () => {
         />,
       );
       const icon = getByTestId('icon');
-      expect(icon.props.style[0].width).toStrictEqual(expectedSize);
-      expect(icon.props.style[0].height).toStrictEqual(expectedSize);
+      expect(icon.props.style[0].width.toString()).toStrictEqual(expectedSize);
+      expect(icon.props.style[0].height.toString()).toStrictEqual(expectedSize);
     },
   );
 });
