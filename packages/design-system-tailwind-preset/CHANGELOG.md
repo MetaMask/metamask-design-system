@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- Added "accent" colors to light & dark ([#534](https://github.com/MetaMask/metamask-design-system/pull/534))
+- chore(deps-dev): bump @metamask/auto-changelog from 4.1.0 to 5.0.1 ([#532](https://github.com/MetaMask/metamask-design-system/pull/532))
+
 ## [0.3.0]
 
 ### Changed
