@@ -9,7 +9,7 @@ const SvgCode = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     ref={ref}
     {...props}
   >
-    <path d="m8 18.229-6-6 6-6 1.425 1.425-4.6 4.6L9.4 16.829zm8 0-1.425-1.425 4.6-4.6L14.6 7.629l1.4-1.4 6 6z" />
+    <path d="m8 18-6-6 6-6 1.425 1.425-4.6 4.6L9.4 16.6zm8 0-1.425-1.425 4.6-4.6L14.6 7.4 16 6l6 6z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgCode);

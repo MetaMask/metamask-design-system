@@ -9,7 +9,7 @@ const SvgCheck = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     ref={ref}
     {...props}
   >
-    <path d="m9.55 17.886-5.7-5.7 1.425-1.425 4.275 4.275 9.175-9.175 1.425 1.425z" />
+    <path d="m9.55 17.886-5.7-5.7 1.425-1.425 4.275 4.275 9.175-9.176 1.425 1.425z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgCheck);

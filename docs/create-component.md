@@ -1,24 +1,24 @@
 # Create Component Script
 
-The create-component script is a utility for generating new React components(React Native coming soon!) in the MetaMask Design System with consistent structure and boilerplate code.
+The `create-component` script is a utility for generating new React components(React Native coming soon!) in the MetaMask Design System with consistent structure and boilerplate code.
 
 ## Usage
 
 From the root directory, run:
 
 ```bash
-yarn create-component:react --name ComponentName --description "Brief description of the component"
+yarn create-component:react --name MyComponent --description "Brief description of the MyComponent"
 ```
 
 ### Required Arguments
 
-- `--name`: The name of the component in PascalCase (e.g., Button, TextField, Modal)
+- `--name`: The name of the component in PascalCase (e.g., MyComponent, TextField, Modal)
 - `--description`: A brief description of the component's purpose in quotes
 
 ### Example
 
 ```bash
-yarn create-component:react --name Button --description "A reusable button component that supports different variants and sizes"
+yarn create-component:react --name MyComponent --description "A reusable component that supports different variants and sizes"
 ```
 
 ## Generated Files
@@ -26,12 +26,12 @@ yarn create-component:react --name Button --description "A reusable button compo
 The script will create a new directory under `packages/design-system-react/src/components` with the following structure:
 
 ```
-button/
-├── Button.constants.ts
-├── Button.stories.tsx
-├── Button.test.tsx
-├── Button.tsx
-├── Button.types.ts
+MyComponent/
+├── MyComponent.constants.ts
+├── MyComponent.stories.tsx
+├── MyComponent.test.tsx
+├── MyComponent.tsx
+├── MyComponent.types.ts
 ├── README.mdx
 └── index.ts
 ```
@@ -66,7 +66,7 @@ The script will also automatically:
 ## Example Component Creation
 
 ```bash
-yarn create-component:react --name Button --description "A reusable button component that supports different variants and sizes"
+yarn create-component:react --name MyComponent --description "A reusable component that supports different variants and sizes"
 ```
 
-This will create a new TextField component with all the necessary files and boilerplate code.
+This will create a new component with all the necessary files and boilerplate code.

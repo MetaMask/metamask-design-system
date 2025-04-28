@@ -9,7 +9,7 @@ const SvgMinus = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     ref={ref}
     {...props}
   >
-    <path d="M5 12.886v-2h14v2z" />
+    <path d="M5 13v-2h14v2z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgMinus);

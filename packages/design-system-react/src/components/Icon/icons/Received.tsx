@@ -12,7 +12,7 @@ const SvgReceived = (
     ref={ref}
     {...props}
   >
-    <path d="m19 6.286-9.6 9.6H18v2H6v-12h2v8.6l9.6-9.6z" />
+    <path d="m19 6.9-9.6 9.6H18v2H6v-12h2v8.6l9.6-9.6z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgReceived);

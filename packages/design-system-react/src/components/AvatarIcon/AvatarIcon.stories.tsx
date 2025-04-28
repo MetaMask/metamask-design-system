@@ -89,7 +89,7 @@ export const Severity: Story = {
     <div className="flex gap-2">
       <AvatarIcon
         iconName={IconName.User}
-        severity={AvatarIconSeverity.Default}
+        severity={AvatarIconSeverity.Neutral}
       />
       <AvatarIcon iconName={IconName.Info} severity={AvatarIconSeverity.Info} />
       <AvatarIcon
@@ -113,11 +113,11 @@ export const HasBorder: Story = {
     <div className="flex gap-2 bg-primary-muted p-2">
       <AvatarIcon
         iconName={IconName.User}
-        severity={AvatarIconSeverity.Default}
+        severity={AvatarIconSeverity.Neutral}
       />
       <AvatarIcon
         iconName={IconName.User}
-        severity={AvatarIconSeverity.Default}
+        severity={AvatarIconSeverity.Neutral}
         hasBorder
       />
     </div>
