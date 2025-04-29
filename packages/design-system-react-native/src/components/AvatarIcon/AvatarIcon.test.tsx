@@ -1,79 +1,124 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
+import React from 'react';
 
-import { AvatarIconSize, AvatarIconSeverity } from '../../types';
+import { AvatarIconSeverity, AvatarIconSize } from '../../types';
 import { IconName } from '../Icon';
 import AvatarIcon from './AvatarIcon';
-import { TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR } from './AvatarIcon.constants';
-import { generateAvatarIconContainerClassNames } from './AvatarIcon.utilities';
+import {
+  TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
+  MAP_AVATARICON_SEVERITY_ICONCOLOR,
+  MAP_AVATARICON_SIZE_ICONSIZE,
+} from './AvatarIcon.constants';
 
 describe('AvatarIcon', () => {
-  describe('generateAvatarIconContainerClassNames', () => {
-    it('returns correct class names for default state', () => {
-      const classNames = generateAvatarIconContainerClassNames({});
-      expect(classNames).toStrictEqual(
-        `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[AvatarIconSeverity.Default]}`,
-      );
-    });
+  it('applies default container style and default icon props', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
 
-    it('applies correct severity class', () => {
-      Object.values(AvatarIconSeverity).forEach((severity) => {
-        const expectedClass =
-          TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity];
-        const classNames = generateAvatarIconContainerClassNames({ severity });
-        expect(classNames).toStrictEqual(expectedClass);
-      });
-    });
+    const bgClass =
+      TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[
+        AvatarIconSeverity.Neutral
+      ];
+    const expectedIconBgStyle = tw`${bgClass}`;
 
-    it('appends additional Tailwind class names', () => {
-      const classNames = generateAvatarIconContainerClassNames({
-        twClassName: 'shadow-lg ring-2',
-      });
-      expect(classNames).toStrictEqual(
-        `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[AvatarIconSeverity.Default]} shadow-lg ring-2`,
-      );
-    });
+    const expectedIconColor =
+      tw`${MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral]}`
+        .color;
 
-    it('applies severity and additional classes together correctly', () => {
-      const severity = AvatarIconSeverity.Success;
-      const classNames = generateAvatarIconContainerClassNames({
-        severity,
-        twClassName: 'border border-green-500',
-      });
-      expect(classNames).toStrictEqual(
-        `${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity]} border border-green-500`,
-      );
-    });
+    const { getByTestId } = render(
+      <AvatarIcon
+        iconName={IconName.Add}
+        iconProps={{ testID: 'icon' }}
+        testID="avatar-icon"
+      />,
+    );
+    const container = getByTestId('avatar-icon');
+    expect(container.props.style[1][0]).toStrictEqual(expectedIconBgStyle);
+
+    const icon = getByTestId('icon');
+    expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);
+    expect(container.props.accessibilityRole).toStrictEqual('image');
   });
-  describe('AvatarIcon Component', () => {
-    it('renders with default props', () => {
-      const { getByTestId: getByTestIdIcon } = render(
+
+  it('applies custom twClassName and style props', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
+
+    const bgClass =
+      TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[
+        AvatarIconSeverity.Neutral
+      ];
+    const expectedIconBgStyle = tw`${bgClass} custom-class`;
+
+    const expectedIconColor =
+      tw`${MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral]}`
+        .color;
+    const customStyle = { margin: 10 };
+
+    const { getByTestId } = render(
+      <AvatarIcon
+        iconName={IconName.Add}
+        iconProps={{ testID: 'icon' }}
+        twClassName="custom-class"
+        style={customStyle}
+        accessibilityLabel="avatar"
+        testID="avatar-icon"
+      />,
+    );
+    const container = getByTestId('avatar-icon');
+    expect(container.props.style[1][0]).toStrictEqual(expectedIconBgStyle);
+    expect(container.props.style[1][1]).toStrictEqual(customStyle);
+    expect(container.props.accessibilityLabel).toStrictEqual('avatar');
+
+    const icon = getByTestId('icon');
+    expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);
+  });
+
+  it.each(Object.values(AvatarIconSeverity))(
+    'applies correct background and icon color for severity %s',
+    (severity) => {
+      const { result } = renderHook(() => useTailwind());
+      const tw = result.current;
+
+      const bgClass = TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity];
+      const expectedIconBgStyle = tw`${bgClass}`;
+
+      const expectedIconColor =
+        tw`${MAP_AVATARICON_SEVERITY_ICONCOLOR[severity]}`.color;
+
+      const { getByTestId } = render(
         <AvatarIcon
           iconName={IconName.Add}
-          iconProps={{ testID: 'inner-icon' }}
+          iconProps={{ testID: 'icon' }}
+          severity={severity}
+          testID="avatar-icon"
         />,
       );
-      const icon = getByTestIdIcon('inner-icon');
+      const container = getByTestId('avatar-icon');
+      expect(container.props.style[1][0]).toStrictEqual(expectedIconBgStyle);
 
-      expect(icon.props.name).toStrictEqual(IconName.Add);
-    });
+      const icon = getByTestId('icon');
+      expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);
+    },
+  );
 
-    it('renders with custom props', () => {
-      const customSize = AvatarIconSize.Lg;
-      const customSeverity = AvatarIconSeverity.Error;
-      const customIconProps = { testID: 'custom-icon', extraProp: 'value' };
-
-      // Render separately to test the Icon props.
-      const { getByTestId: getIcon } = render(
+  it.each(Object.values(AvatarIconSize))(
+    'applies correct icon size for size %s',
+    (size) => {
+      const expectedSize = MAP_AVATARICON_SIZE_ICONSIZE[size].toString();
+      const { getByTestId } = render(
         <AvatarIcon
-          iconName={IconName.Close}
-          size={customSize}
-          severity={customSeverity}
-          iconProps={customIconProps}
+          iconName={IconName.Add}
+          iconProps={{ testID: 'icon' }}
+          size={size}
+          testID="avatar-icon"
         />,
       );
-      const icon = getIcon('custom-icon');
-      expect(icon.props.name).toStrictEqual(IconName.Close);
-      expect(icon.props.extraProp).toStrictEqual('value');
-    });
-  });
+      const icon = getByTestId('icon');
+      expect(icon.props.style[0].width.toString()).toStrictEqual(expectedSize);
+      expect(icon.props.style[0].height.toString()).toStrictEqual(expectedSize);
+    },
+  );
 });
