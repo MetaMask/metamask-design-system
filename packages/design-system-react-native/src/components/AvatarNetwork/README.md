@@ -118,7 +118,7 @@ import AvatarNetwork from '@metamask/design-system-react-native/avatar-network';
 const App = () => (
   <AvatarNetwork
     name="MetaMask"
-    source={{ uri: 'https://example.com/network.png' }}
+    src={{ uri: 'https://example.com/network.png' }}
   />
 );
 
@@ -140,7 +140,7 @@ const handleError = () => {
 const App = () => (
   <AvatarNetwork
     name="ETH"
-    source={{ uri: 'https://invalid-url.com' }}
+    src={{ uri: 'https://invalid-url.com' }}
     onImageError={handleError}
   />
 );
@@ -162,7 +162,7 @@ const App = () => (
   <AvatarNetwork
     name="ETH"
     size={AvatarNetworkSize.Lg}
-    source={{ uri: 'https://example.com/network.png' }}
+    src={{ uri: 'https://example.com/network.png' }}
   />
 );
 
