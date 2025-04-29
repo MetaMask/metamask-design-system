@@ -8,7 +8,7 @@ import {
   SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR,
   SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
   SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
-} from './AvatarGroup.constants';
+} from './AvatarGroup.dev';
 import type { AvatarGroupProps } from './AvatarGroup.types';
 
 const meta: Meta<AvatarGroupProps> = {
