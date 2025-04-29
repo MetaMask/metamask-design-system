@@ -9,7 +9,7 @@ const SvgChart = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     ref={ref}
     {...props}
   >
-    <path d="M16 19.886v-7h4v7zm-6 0v-16h4v16zm-6 0v-11h4v11z" />
+    <path d="M16 20v-7h4v7zm-6 0V4h4v16zm-6 0V9h4v11z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgChart);

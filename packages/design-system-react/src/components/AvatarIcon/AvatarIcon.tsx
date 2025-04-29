@@ -17,7 +17,7 @@ export const AvatarIcon = React.forwardRef<HTMLDivElement, AvatarIconProps>(
       iconName,
       iconProps,
       size = AvatarIconSize.Md,
-      severity = AvatarIconSeverity.Default,
+      severity = AvatarIconSeverity.Neutral,
       className,
       ...props
     },

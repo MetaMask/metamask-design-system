@@ -12,7 +12,7 @@ const SvgSwapVertical = (
     ref={ref}
     {...props}
   >
-    <path d="M8 12.886V5.71L5.425 8.286 4 6.886l5-5 5 5-1.425 1.4L10 5.71v7.175zm7 9-5-5 1.425-1.4L14 18.06v-7.174h2v7.175l2.575-2.575 1.425 1.4z" />
+    <path d="M8 13V5.825L5.425 8.4 4 7l5-5 5 5-1.425 1.4L10 5.825V13zm7 9-5-5 1.425-1.4L14 18.175V11h2v7.175l2.575-2.575L20 17z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgSwapVertical);

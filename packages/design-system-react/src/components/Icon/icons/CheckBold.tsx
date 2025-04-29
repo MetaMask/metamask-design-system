@@ -12,7 +12,7 @@ const SvgCheckBold = (
     ref={ref}
     {...props}
   >
-    <path d="m9.55 18.685-6.5-6.5 2.25-2.25 4.25 4.25 9.15-9.15 2.25 2.25z" />
+    <path d="m9.55 18.686-6.5-6.5 2.25-2.25 4.25 4.25 9.15-9.15 2.25 2.25z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgCheckBold);
