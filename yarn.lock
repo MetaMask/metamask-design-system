@@ -3218,6 +3218,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.3"
     "@metamask/auto-changelog": "npm:^5.0.1"
     "@metamask/design-system-twrnc-preset": "workspace:^"
+    "@metamask/design-tokens": "workspace:^"
     "@metamask/utils": "npm:^11.4.0"
     "@solana/addresses": "npm:^2.1.0"
     "@storybook/react-native": "npm:6.5"

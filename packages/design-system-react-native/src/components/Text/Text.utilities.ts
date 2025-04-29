@@ -7,7 +7,7 @@ import {
   TextVariant,
   TextColor,
 } from '../../types';
-import { MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME } from './Text.constants';
+import { TWCLASSMAP_TEXT_FONTWEIGHT } from './Text.constants';
 import type { TextProps } from './Text.types';
 
 /**
@@ -49,7 +49,7 @@ export const generateTextClassNames = ({
 }: Partial<TextProps>): string => {
   const isItalic = fontStyle === FontStyle.Italic;
   const textClassname = `text-${variant}`;
-  const fontFamilyClassname = `font-${fontFamily}${MAPPING_FONTWEIGHT_TO_FONTFAMILYSTYLECLASSNAME[fontWeight]}${
+  const fontFamilyClassname = `font-${fontFamily}${TWCLASSMAP_TEXT_FONTWEIGHT[fontWeight]}${
     isItalic && fontFamily === FontFamily.Default ? '-italic' : ''
   }`;
   const textColorClassname = `${color}`;

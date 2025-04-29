@@ -64,6 +64,12 @@ export const FontFamily: StoryFn<typeof Text> = (...args) => {
 export const SmallScreen: StoryFn<typeof Text> = (...args) => {
   const smallScreenFontSizeBase = 16;
   const styles = {
+    displayLG: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.sDisplayLG.fontSize,
+      lineHeight: `${typography.sDisplayLG.lineHeight}px`,
+      fontWeight: typography.sDisplayLG.fontWeight,
+    },
     displayMD: {
       fontFamily: fontFamilies.default,
       fontSize: typography.sDisplayMD.fontSize,
@@ -153,6 +159,11 @@ export const SmallScreen: StoryFn<typeof Text> = (...args) => {
   };
   return (
     <>
+      <Text style={styles.displayLG} {...args}>
+        {`S DisplayLG ${styles.displayLG.fontSize}px/${
+          styles.displayLG.lineHeight
+        } ${styles.displayLG.fontSize / smallScreenFontSizeBase}rem`}
+      </Text>
       <Text style={styles.displayMD} {...args}>
         {`S DisplayMD ${styles.displayMD.fontSize}px/${
           styles.displayMD.lineHeight
@@ -233,6 +244,12 @@ export const SmallScreen: StoryFn<typeof Text> = (...args) => {
 export const LargeScreen: StoryFn<typeof Text> = (...args) => {
   const largeScreenFontSizeBase = 16;
   const styles = {
+    displayLG: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.lDisplayLG.fontSize,
+      lineHeight: `${typography.lDisplayLG.lineHeight}px`,
+      fontWeight: typography.lDisplayLG.fontWeight,
+    },
     displayMD: {
       fontFamily: fontFamilies.default,
       fontSize: typography.lDisplayMD.fontSize,
@@ -322,6 +339,11 @@ export const LargeScreen: StoryFn<typeof Text> = (...args) => {
   };
   return (
     <>
+      <Text style={styles.displayLG} {...args}>
+        {`L DisplayLG ${styles.displayLG.fontSize}px/${
+          styles.displayLG.lineHeight
+        } ${styles.displayLG.fontSize / largeScreenFontSizeBase}rem`}
+      </Text>
       <Text style={styles.displayMD} {...args}>
         {`L DisplayMD ${styles.displayMD.fontSize}px/${
           styles.displayMD.lineHeight
@@ -438,6 +460,12 @@ export const FontWeight: StoryFn<typeof Text> = (...args) => {
 export const SmallScreenCSS: StoryFn<typeof Text> = (...args) => {
   const fontBase = 16;
   const styles = {
+    DisplayLG: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-s-display-lg-font-size)',
+      lineHeight: 'var(--typography-s-display-lg-line-height)',
+      fontWeight: 'var(--typography-s-display-lg-font-weight)',
+    },
     DisplayMD: {
       fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-display-md-font-size)',
@@ -564,6 +592,12 @@ export const LargeScreenCSS: StoryFn<typeof Text> = (...args) => {
   const fontBase = 16;
 
   const styles = {
+    DisplayLG: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-l-display-lg-font-size)',
+      lineHeight: 'var(--typography-l-display-lg-line-height)',
+      fontWeight: 'var(--typography-l-display-lg-font-weight)',
+    },
     DisplayMD: {
       fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-display-md-font-size)',
