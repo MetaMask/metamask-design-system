@@ -35,7 +35,7 @@ type Story = StoryObj<AvatarIconProps>;
 export const Default: Story = {
   args: {
     size: AvatarIconSize.Md,
-    severity: AvatarIconSeverity.Default,
+    severity: AvatarIconSeverity.Neutral,
     iconName: IconName.Arrow2UpRight,
     twClassName: '',
   },

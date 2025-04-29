@@ -1,6 +1,8 @@
 # AvatarIcon
 
-The `AvatarIcon` component is reserved for representing static icons inside of an avatar. It extends the functionality of [`AvatarBase`](../AvatarBase/) by incorporating an icon and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with icons.
+The `AvatarIcon` component is reserved for representing static icons inside of an avatar.
+
+_Developer Note: This components extends the functionality of [`AvatarBase`](../AvatarBase/) by incorporating an icon and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with icons._
 
 ---
 
@@ -12,11 +14,11 @@ Optional prop to control the severity of the avatar.
 
 | TYPE                 | REQUIRED | DEFAULT                      |
 | :------------------- | :------- | :--------------------------- |
-| `AvatarIconSeverity` | No       | `AvatarIconSeverity.Default` |
+| `AvatarIconSeverity` | No       | `AvatarIconSeverity.Neutral` |
 
 Available severities:
 
-- `Default`
+- `Neutral`
 - `Info`
 - `Success`
 - `Error`
