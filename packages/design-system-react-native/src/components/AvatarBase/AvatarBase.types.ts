@@ -46,12 +46,6 @@ export type AvatarBaseProps = {
    */
   hasBorder?: boolean;
   /**
-   * Optional prop to make sure there's no transparency in the background color
-   * For internal use only
-   * @default false
-   */
-  hasSolidBackgroundColor?: boolean;
-  /**
    * Optional prop to add twrnc overriding classNames.
    */
   twClassName?: string;

@@ -20,7 +20,7 @@ describe('BadgeNetwork', () => {
       (Number(AvatarNetworkSize.Xs) + 2).toString(),
     );
 
-    expect(renderedComponent.props.children[1].props.src).toStrictEqual(
+    expect(renderedComponent.props.children.props.src).toStrictEqual(
       remoteImageSrc,
     );
   });

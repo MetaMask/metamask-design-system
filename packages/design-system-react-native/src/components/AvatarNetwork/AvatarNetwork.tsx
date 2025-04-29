@@ -13,7 +13,6 @@ const AvatarNetwork = ({
   fallbackText,
   fallbackTextProps,
   hasBorder,
-  hasSolidBackgroundColor,
   twClassName,
   testID,
   style,
@@ -47,7 +46,6 @@ const AvatarNetwork = ({
       fallbackText={finalFallbackText}
       fallbackTextProps={fallbackTextProps}
       hasBorder={hasBorder}
-      hasSolidBackgroundColor={hasSolidBackgroundColor}
       twClassName={twClassName}
       testID={testID}
       style={style}
