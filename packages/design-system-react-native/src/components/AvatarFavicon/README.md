@@ -118,7 +118,10 @@ All other props supported by `AvatarBase`, excluding `children`, are also accept
 ```tsx
 <AvatarFavicon
   src={{ uri: 'https://example.com/favicon.svg' }}
-  imageOrSvgProps={{ testID: 'favicon-image', imageProps: { accessibilityLabel: 'Dapp icon' } }}
+  imageOrSvgProps={{
+    testID: 'favicon-image',
+    imageProps: { accessibilityLabel: 'Dapp icon' },
+  }}
 />
 ```
 

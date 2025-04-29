@@ -95,10 +95,7 @@ All other props supported by `AvatarBase`, excluding `children`, are also accept
 ### Basic
 
 ```tsx
-<AvatarToken
-  src={{ uri: 'https://example.com/token.svg' }}
-  name="Uniswap"
-/>
+<AvatarToken src={{ uri: 'https://example.com/token.svg' }} name="Uniswap" />
 ```
 
 ### Custom Size and Fallback
@@ -118,7 +115,10 @@ All other props supported by `AvatarBase`, excluding `children`, are also accept
 ```tsx
 <AvatarToken
   src={{ uri: 'https://example.com/token.svg' }}
-  imageOrSvgProps={{ testID: 'token-image', imageProps: { accessibilityLabel: 'token icon' } }}
+  imageOrSvgProps={{
+    testID: 'token-image',
+    imageProps: { accessibilityLabel: 'token icon' },
+  }}
 />
 ```
 

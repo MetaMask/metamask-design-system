@@ -118,7 +118,10 @@ All other props supported by `AvatarBase`, excluding `children`, are also accept
 ```tsx
 <AvatarNetwork
   src={{ uri: 'https://example.com/network.svg' }}
-  imageOrSvgProps={{ testID: 'network-image', imageProps: { accessibilityLabel: 'Network icon' } }}
+  imageOrSvgProps={{
+    testID: 'network-image',
+    imageProps: { accessibilityLabel: 'Network icon' },
+  }}
 />
 ```
 
