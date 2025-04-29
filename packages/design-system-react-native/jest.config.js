@@ -28,6 +28,7 @@ module.exports = merge(baseConfig, {
     '!**/node_modules/**', // Exclude node_modules
     '!**/dist/**', // Exclude build outputs
     '!**/*.constants.{js,ts}', // Exclude .constants files
+    '!**/*.dev.{js,ts}', // Exclude .constants files
     '!**/*.assets.{js,ts}', // Exclude .assets files
     '!**/*.types.{js,ts}', // Exclude .types files
   ],
