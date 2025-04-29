@@ -6,7 +6,7 @@ import { ImageOrSvgProps, ImageOrSvgSrc } from '../temp-components/ImageOrSvg';
  */
 export type AvatarFaviconProps = {
   /**
-   * Optional prop for the source of the image or SVG.
+   * Optional prop for the source of the image or SVG
    */
   src?: ImageOrSvgSrc;
   /**
