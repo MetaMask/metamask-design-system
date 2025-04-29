@@ -9,10 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.0]
 
-### Uncategorized
+### Added
 
-- Added "accent" colors to light & dark ([#534](https://github.com/MetaMask/metamask-design-system/pull/534))
-- chore(deps-dev): bump @metamask/auto-changelog from 4.1.0 to 5.0.1 ([#532](https://github.com/MetaMask/metamask-design-system/pull/532))
+- Added "accent" colors for light and dark themes ([#534](https://github.com/MetaMask/metamask-design-system/pull/534))
 
 ## [0.3.0]
 

@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [7.1.0]
 
-### Uncategorized
+### Added
 
-- chore: adding tailwindcss prettier plugin ([#546](https://github.com/MetaMask/metamask-design-system/pull/546))
+- Added "accent" colors for light and dark themes ([#534](https://github.com/MetaMask/metamask-design-system/pull/534))
 
 ## [7.0.0]
 
