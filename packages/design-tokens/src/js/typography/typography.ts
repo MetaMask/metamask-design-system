@@ -6,6 +6,12 @@ import type { ThemeTypography } from './types';
 
 /* eslint-enable jsdoc/check-property-names, jsdoc/tag-lines */
 export const typography: ThemeTypography = {
+  sDisplayLG: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.fontSize8,
+    lineHeight: lineHeights.lineHeight7,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
   sDisplayMD: {
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.fontSize7,
@@ -94,10 +100,16 @@ export const typography: ThemeTypography = {
     lineHeight: lineHeights.lineHeight2,
     letterSpacing: letterSpacing.letterSpacing1,
   },
+  lDisplayLG: {
+    fontWeight: fontWeights.medium,
+    fontSize: fontSizes.fontSize10,
+    lineHeight: lineHeights.lineHeight9,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
   lDisplayMD: {
     fontWeight: fontWeights.medium,
-    fontSize: fontSizes.fontSize8,
-    lineHeight: lineHeights.lineHeight7,
+    fontSize: fontSizes.fontSize9,
+    lineHeight: lineHeights.lineHeight8,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   lHeadingLG: {
