@@ -12,7 +12,7 @@ describe('AvatarToken Component', () => {
       <AvatarToken
         src={remoteImageSrc}
         testID="avatar-base"
-        imageProps={{ testID: 'image-or-svg' }}
+        imageOrSvgProps={{ imageProps: { testID: 'image-or-svg' } }}
       />,
     );
 
@@ -34,9 +34,13 @@ describe('AvatarToken Component', () => {
       <AvatarToken
         src={remoteImageSrc}
         fallbackText={fallback}
-        onImageError={onImageErrorMock}
+        imageOrSvgProps={{
+          onImageError: onImageErrorMock,
+          imageProps: {
+            testID: 'image-or-svg',
+          },
+        }}
         testID="avatar-base"
-        imageProps={{ testID: 'image-or-svg' }}
       />,
     );
     const imageOrSvg = getByTestId('image-or-svg');
@@ -48,7 +52,6 @@ describe('AvatarToken Component', () => {
     expect(onImageErrorMock).toHaveBeenCalledWith(errorEvent);
 
     const avatarBase = getByTestId('avatar-base');
-
     expect(avatarBase.props.children[1].props.children).toStrictEqual(fallback);
   });
 
@@ -59,9 +62,13 @@ describe('AvatarToken Component', () => {
       <AvatarToken
         src={remoteSvgSrc}
         fallbackText={fallback}
-        onSvgError={onSvgErrorMock}
+        imageOrSvgProps={{
+          onSvgError: onSvgErrorMock,
+          imageProps: {
+            testID: 'image-or-svg',
+          },
+        }}
         testID="avatar-base"
-        imageProps={{ testID: 'image-or-svg' }}
       />,
     );
     const imageOrSvg = getByTestId('image-or-svg');
@@ -83,7 +90,11 @@ describe('AvatarToken Component', () => {
         src={remoteImageSrc}
         name="Example"
         testID="avatar-base"
-        imageProps={{ testID: 'image-or-svg' }}
+        imageOrSvgProps={{
+          imageProps: {
+            testID: 'image-or-svg',
+          },
+        }}
       />,
     );
     const imageOrSvg = getByTestId('image-or-svg');
@@ -102,7 +113,11 @@ describe('AvatarToken Component', () => {
         src={remoteImageSrc}
         style={customStyle}
         testID="avatar-base"
-        imageProps={{ testID: 'image-or-svg' }}
+        imageOrSvgProps={{
+          imageProps: {
+            testID: 'image-or-svg',
+          },
+        }}
       />,
     );
     const avatarBase = getByTestId('avatar-base');
