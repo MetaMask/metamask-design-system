@@ -69,7 +69,7 @@ export enum AvatarGroupVariant {
  * AvatarIcon - severity
  */
 export enum AvatarIconSeverity {
-  Default = 'default',
+  Neutral = 'neutral',
   Info = 'info',
   Success = 'success',
   Error = 'error',
@@ -196,6 +196,7 @@ export enum ButtonIconSize {
  */
 export enum TextVariant {
   // Display Sizes
+  DisplayLg = 'display-lg',
   DisplayMd = 'display-md',
 
   // Heading Sizes

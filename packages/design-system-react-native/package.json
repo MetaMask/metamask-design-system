@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@metamask/design-system-twrnc-preset": "workspace:^",
+    "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.4.0",
     "@solana/addresses": "^2.1.0",
     "@testing-library/react-hooks": "^8.0.1",
