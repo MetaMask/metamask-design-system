@@ -52,7 +52,8 @@ describe('AvatarFavicon Component', () => {
     expect(onImageErrorMock).toHaveBeenCalledWith(errorEvent);
 
     const avatarBase = getByTestId('avatar-base');
-    expect(avatarBase.props.children[1].props.children).toStrictEqual(fallback);
+
+    expect(avatarBase.props.children.props.children).toStrictEqual(fallback);
   });
 
   it('updates fallback text on svg error when fallbackText is provided', () => {
@@ -79,7 +80,7 @@ describe('AvatarFavicon Component', () => {
     expect(onSvgErrorMock).toHaveBeenCalledTimes(1);
     expect(onSvgErrorMock).toHaveBeenCalledWith(errorEvent);
     const avatarBase = getByTestId('avatar-base');
-    expect(avatarBase.props.children[1].props.children).toStrictEqual(fallback);
+    expect(avatarBase.props.children.props.children).toStrictEqual(fallback);
   });
 
   it('computes backupFallbackText from name when fallbackText is not provided', () => {
@@ -103,7 +104,7 @@ describe('AvatarFavicon Component', () => {
     fireEvent(imageOrSvg, 'onImageError', errorEvent);
 
     const avatarBase = getByTestId('avatar-base');
-    expect(avatarBase.props.children[1].props.children).toStrictEqual('E');
+    expect(avatarBase.props.children.props.children).toStrictEqual('E');
   });
 
   it('passes additional AvatarBase props correctly', () => {
