@@ -49,52 +49,79 @@ describe('AvatarBase', () => {
     expect(() => getByText('Should not render')).toThrow();
   });
 
-  it.each([
-    [AvatarBaseShape.Circle, AvatarBaseSize.Md, false],
-    [AvatarBaseShape.Square, AvatarBaseSize.Sm, false],
-    [AvatarBaseShape.Square, AvatarBaseSize.Lg, true],
-  ] as const)(
-    'applies correct container style for shape=%s size=%s hasBorder=%s',
-    (shape, size, hasBorder) => {
-      const { result } = renderHook(() => useTailwind());
-      const tw = result.current;
+  it('applies correct container style for all shapes & sizes without border', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
 
-      const shapeClass =
-        shape === AvatarBaseShape.Circle
-          ? 'rounded-full'
-          : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
-      const sizeClass = hasBorder
-        ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size]
-        : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const borderClass = hasBorder
-        ? TWCLASSMAP_AVATARBASE_SIZE_BORDER[size]
-        : '';
-      const classes = [
-        'items-center',
-        'justify-center',
-        'overflow-hidden',
-        'bg-background-muted',
-        shapeClass,
-        sizeClass,
-        borderClass,
-      ]
-        .filter(Boolean)
-        .join(' ');
+    Object.values(AvatarBaseShape).forEach((shape) => {
+      Object.values(AvatarBaseSize).forEach((size) => {
+        const shapeClass =
+          shape === AvatarBaseShape.Circle
+            ? 'rounded-full'
+            : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
 
-      const expectedStyle = tw`${classes}`;
+        const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
 
-      const { getByTestId } = render(
-        <AvatarBase
-          shape={shape}
-          size={size}
-          hasBorder={hasBorder}
-          testID="avatar"
-        />,
-      );
-      const container = getByTestId('avatar');
-      expect(container.props.style[0]).toStrictEqual(expectedStyle);
-    },
-  );
+        const classString = [
+          'items-center',
+          'justify-center',
+          'overflow-hidden',
+          'bg-background-muted',
+          shapeClass,
+          dimensionClass,
+        ]
+          .filter(Boolean)
+          .join(' ');
+
+        const expectedStyle = tw`${classString}`;
+
+        const { getByTestId } = render(
+          <AvatarBase shape={shape} size={size} testID="avatar" />,
+        );
+        const avatar = getByTestId('avatar');
+        expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
+      });
+    });
+  });
+
+  it('applies correct container style for all shapes & sizes with border', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
+
+    Object.values(AvatarBaseShape).forEach((shape) => {
+      Object.values(AvatarBaseSize).forEach((size) => {
+        const shapeClass =
+          shape === AvatarBaseShape.Circle
+            ? 'rounded-full'
+            : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
+
+        const dimensionClass =
+          TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
+
+        const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
+
+        const classString = [
+          'items-center',
+          'justify-center',
+          'overflow-hidden',
+          'bg-background-muted',
+          shapeClass,
+          dimensionClass,
+          borderClass,
+        ]
+          .filter(Boolean)
+          .join(' ');
+
+        const expectedStyle = tw`${classString}`;
+
+        const { getByTestId } = render(
+          <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
+        );
+        const avatar = getByTestId('avatar');
+        expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
+      });
+    });
+  });
 
   it('applies custom twClassName and style, forwards extra View props', () => {
     const { result } = renderHook(() => useTailwind());
