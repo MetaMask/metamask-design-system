@@ -58,9 +58,9 @@ Available sizes:
 
 Optional custom fallback text shown when image fails to load.
 
-| TYPE     | REQUIRED | DEFAULT                                   | DESCRIPTION |
-| -------- | -------- | ----------------------------------------- | ----------- |
-| `string` | No       | First character of `name` or empty string |
+| TYPE     | REQUIRED | DEFAULT                                   | DESCRIPTION           |
+| -------- | -------- | ----------------------------------------- | --------------------- |
+| `string` | No       | First character of `name` or empty string | Used when image fails |
 
 ---
 
