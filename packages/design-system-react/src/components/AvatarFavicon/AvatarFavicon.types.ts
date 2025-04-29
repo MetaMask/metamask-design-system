@@ -1,13 +1,12 @@
 import type { ComponentProps } from 'react';
 
-import { AvatarFaviconSize } from '../../types';
 import { AvatarBaseProps } from '../AvatarBase';
 
 export type AvatarFaviconProps = Omit<
   ComponentProps<'img'>,
   'children' | 'size'
 > &
-  Omit<AvatarBaseProps, 'children' | 'size'> & {
+  Omit<AvatarBaseProps, 'children'> & {
     /**
      * Required name of the dapp
      * Used as alt text for image and first letter is used as fallback if no fallbackText provided
@@ -24,8 +23,7 @@ export type AvatarFaviconProps = Omit<
      */
     imageProps?: ComponentProps<'img'>;
     /**
-     * Optional prop to control the size of the avatar
-     * @default AvatarFaviconSize.Md
+     * Optional prop to set callback triggered when there is an error rendering the image.
      */
-    size?: AvatarFaviconSize;
+    onImageError?: React.ReactEventHandler<HTMLImageElement>;
   };

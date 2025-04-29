@@ -50,7 +50,7 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
 
     return (
       <Component ref={ref} className={mergedClassName} style={style} {...props}>
-        {children || (
+        {fallbackText ? (
           <Text
             variant={TextVariant.BodySm}
             fontWeight={FontWeight.Medium}
@@ -62,6 +62,8 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
             {/* asChild prop renders Text component as a span, it does not create an additional element */}
             <span>{fallbackText}</span>
           </Text>
+        ) : (
+          children
         )}
       </Component>
     );

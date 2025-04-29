@@ -105,7 +105,11 @@ export const Name: Story = {
 export const FallbackText: Story = {
   render: () => (
     <div className="flex gap-2">
-      <AvatarToken name="Ethereum" fallbackText="ETH" />
+      <AvatarToken
+        name="Ethereum"
+        fallbackText="ETH"
+        src="https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=040"
+      />
       <AvatarToken name="Bitcoin" fallbackText="BTC" />
       <AvatarToken name="USDC" fallbackText="USDC" />
     </div>

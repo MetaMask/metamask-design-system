@@ -1,15 +1,14 @@
 import type { ComponentProps } from 'react';
 
-import { AvatarTokenSize } from '../../types';
 import { AvatarBaseProps } from '../AvatarBase';
 
 export type AvatarTokenProps = Omit<
   ComponentProps<'img'>,
   'children' | 'size'
 > &
-  Omit<AvatarBaseProps, 'children' | 'size'> & {
+  Omit<AvatarBaseProps, 'children'> & {
     /**
-     * Required name of the token
+     * Required name of the dapp
      * Used as alt text for image and first letter is used as fallback if no fallbackText provided
      */
     name: string;
@@ -20,12 +19,11 @@ export type AvatarTokenProps = Omit<
     src?: string;
     /**
      * Optional prop to pass to the underlying img element
-     * Useful for overriding the default alt text which is the token name
+     * Useful for overriding the default alt text which is the dapp name
      */
     imageProps?: ComponentProps<'img'>;
     /**
-     * Optional prop to control the size of the avatar
-     * @default AvatarTokenSize.Md
+     * Optional prop to set callback triggered when there is an error rendering the image.
      */
-    size?: AvatarTokenSize;
+    onImageError?: React.ReactEventHandler<HTMLImageElement>;
   };

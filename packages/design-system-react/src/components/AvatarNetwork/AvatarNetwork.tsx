@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { AvatarNetworkSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
@@ -17,12 +17,21 @@ export const AvatarNetwork = React.forwardRef<
       className,
       size = AvatarNetworkSize.Md,
       imageProps,
+      onImageError,
       ...props
     },
     ref,
   ) => {
-    const displayText = fallbackText || (name ? name[0] : '');
+    const [finalFallbackText, setFinalFallbackText] = useState<string>('');
+    const backupFallbackText = fallbackText || name?.[0] || '';
     const altText = name || 'Network logo'; // TBC: Add localization for default text
+
+    const onImageErrorHandler = (
+      e: React.SyntheticEvent<HTMLImageElement, Event>,
+    ) => {
+      setFinalFallbackText(backupFallbackText);
+      onImageError?.(e);
+    };
 
     return (
       <AvatarBase
@@ -30,7 +39,7 @@ export const AvatarNetwork = React.forwardRef<
         shape={AvatarBaseShape.Square}
         size={size}
         className={className}
-        fallbackText={displayText}
+        fallbackText={src ? finalFallbackText : backupFallbackText}
         fallbackTextProps={fallbackTextProps}
         {...props}
       >
@@ -38,7 +47,8 @@ export const AvatarNetwork = React.forwardRef<
           <img
             src={src}
             alt={altText}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
+            onError={onImageErrorHandler}
             {...imageProps}
           />
         )}
