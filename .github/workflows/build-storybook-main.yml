@@ -29,6 +29,13 @@ jobs:
       - name: Install dependencies
         run: yarn --immutable
 
+      - name: Build required packages
+        working-directory: .
+        run: |
+          yarn workspace @metamask/design-tokens build
+          yarn workspace @metamask/design-system-tailwind-preset build
+          yarn workspace @metamask/design-system-react build
+
       - name: Build Storybook
         run: yarn build-storybook
 
