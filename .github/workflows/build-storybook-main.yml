@@ -26,9 +26,6 @@ jobs:
           is-high-risk-environment: false
           cache-node-modules: true
 
-      - name: Install dependencies
-        run: yarn --immutable
-
       - name: Build required packages
         working-directory: .
         run: |

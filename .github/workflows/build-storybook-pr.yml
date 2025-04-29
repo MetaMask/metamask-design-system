@@ -12,14 +12,11 @@ jobs:
       run:
         working-directory: apps/storybook-react
     steps:
-      - name: Checkout and setup high risk environment
+      - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@v1
         with:
           is-high-risk-environment: true
-          skip-allow-scripts: true
-
-      - name: Install dependencies
-        run: yarn --immutable
+          cache-node-modules: true
 
       - name: Build required packages
         working-directory: .
