@@ -118,7 +118,7 @@ import AvatarFavicon from '@metamask/design-system-react-native/avatar-favicon';
 const App = () => (
   <AvatarFavicon
     name="MetaMask"
-    src={{ uri: 'https://example.com/favicon.png' }}
+    source={{ uri: 'https://example.com/favicon.png' }}
   />
 );
 
@@ -140,7 +140,7 @@ const handleError = () => {
 const App = () => (
   <AvatarFavicon
     name="ETH"
-    src={{ uri: 'https://invalid-url.com' }}
+    source={{ uri: 'https://invalid-url.com' }}
     onImageError={handleError}
   />
 );
@@ -162,7 +162,7 @@ const App = () => (
   <AvatarFavicon
     name="ETH"
     size={AvatarFaviconSize.Lg}
-    src={{ uri: 'https://example.com/favicon.png' }}
+    source={{ uri: 'https://example.com/favicon.png' }}
   />
 );
 

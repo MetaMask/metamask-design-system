@@ -118,7 +118,7 @@ import AvatarToken from '@metamask/design-system-react-native/avatar-token';
 const App = () => (
   <AvatarToken
     name="MetaMask"
-    src={{ uri: 'https://example.com/token.png' }}
+    source={{ uri: 'https://example.com/token.png' }}
   />
 );
 
@@ -140,7 +140,7 @@ const handleError = () => {
 const App = () => (
   <AvatarToken
     name="ETH"
-    src={{ uri: 'https://invalid-url.com' }}
+    source={{ uri: 'https://invalid-url.com' }}
     onImageError={handleError}
   />
 );
@@ -162,7 +162,7 @@ const App = () => (
   <AvatarToken
     name="ETH"
     size={AvatarTokenSize.Lg}
-    src={{ uri: 'https://example.com/token.png' }}
+    source={{ uri: 'https://example.com/token.png' }}
   />
 );
 
