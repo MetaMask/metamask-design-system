@@ -2,11 +2,11 @@ import { AvatarGroupSize } from '../../types';
 import { AvatarAccountProps, AvatarAccountVariant } from '../AvatarAccount';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from '../AvatarAccount/AvatarAccount.constants';
 import { AvatarFaviconProps } from '../AvatarFavicon';
-import { SAMPLE_AVATARFAVICON_URIS } from '../AvatarFavicon/AvatarFavicon.constants';
+import { SAMPLE_AVATARFAVICON_URIS } from '../AvatarFavicon/AvatarFavicon.dev';
 import { AvatarNetworkProps } from '../AvatarNetwork';
-import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.constants';
+import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
 import { AvatarTokenProps } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.constants';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
 import { TextVariant } from '../Text';
 
 // Mappings
