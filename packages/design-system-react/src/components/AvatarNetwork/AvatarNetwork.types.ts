@@ -8,10 +8,10 @@ export type AvatarNetworkProps = Omit<
 > &
   Omit<AvatarBaseProps, 'children'> & {
     /**
-     * Required name of the dapp
+     * Optional name of the network
      * Used as alt text for image and first letter is used as fallback if no fallbackText provided
      */
-    name: string;
+    name?: string;
     /**
      * Optional URL for the network image
      * When provided, displays the image instead of fallback text

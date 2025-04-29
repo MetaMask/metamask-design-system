@@ -8,10 +8,10 @@ export type AvatarFaviconProps = Omit<
 > &
   Omit<AvatarBaseProps, 'children'> & {
     /**
-     * Required name of the dapp
+     * Optional name of the dapp
      * Used as alt text for image and first letter is used as fallback if no fallbackText provided
      */
-    name: string;
+    name?: string;
     /**
      * Optional URL for the dapp favicon/logo
      * When provided, displays the image instead of fallback text
