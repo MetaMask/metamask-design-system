@@ -2,8 +2,9 @@ import { render } from '@testing-library/react-native';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import {
-  MAP_AVATARBASE_SIZE_BORDERWIDTH,
-  TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDER,
+  TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
 } from '../AvatarBase/AvatarBase.constants';
 import AvatarGroup from './AvatarGroup';
 import {
@@ -71,39 +72,35 @@ describe('AvatarGroup', () => {
         'bg-icon-default items-center justify-center overflow-hidden',
       );
       expect(classNames).toContain(
-        `w-[${Number(AvatarGroupSize.Md) + MAP_AVATARBASE_SIZE_BORDERWIDTH[AvatarGroupSize.Md] * 2}px]`,
+        TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[AvatarGroupSize.Md],
       );
-      expect(classNames).toContain('border-background-default');
       expect(classNames).toContain(
-        `border-[${MAP_AVATARBASE_SIZE_BORDERWIDTH[AvatarGroupSize.Md]}px]`,
+        TWCLASSMAP_AVATARBASE_SIZE_BORDER[AvatarGroupSize.Md],
       );
       expect(classNames).toContain('rounded-full'); // Default shape
     });
 
     it('applies correct size and border width for given size', () => {
       Object.values(AvatarGroupSize).forEach((size) => {
-        const expectedTotalSize =
-          Number(size) + MAP_AVATARBASE_SIZE_BORDERWIDTH[size] * 2;
-        const expectedBorderWidth = MAP_AVATARBASE_SIZE_BORDERWIDTH[size];
-
         const classNames = generateAvatarGroupOverflowTextContainerClassNames({
           size,
         });
-        expect(classNames).toContain(`w-[${expectedTotalSize}px]`);
-        expect(classNames).toContain(`h-[${expectedTotalSize}px]`);
-        expect(classNames).toContain(`border-[${expectedBorderWidth}px]`);
+        expect(classNames).toContain(
+          TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size],
+        );
+        expect(classNames).toContain(TWCLASSMAP_AVATARBASE_SIZE_BORDER[size]);
       });
     });
 
     it('applies correct border radius for network variant', () => {
       Object.values(AvatarGroupSize).forEach((size) => {
-        const expectedBorderRadius = TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size];
-
         const classNames = generateAvatarGroupOverflowTextContainerClassNames({
           size,
           variant: AvatarGroupVariant.Network,
         });
-        expect(classNames).toContain(expectedBorderRadius);
+        expect(classNames).toContain(
+          TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size],
+        );
       });
     });
 
@@ -116,11 +113,6 @@ describe('AvatarGroup', () => {
 
     it('applies all styles together correctly', () => {
       const size = AvatarGroupSize.Lg;
-      const expectedTotalSize =
-        Number(size) + MAP_AVATARBASE_SIZE_BORDERWIDTH[size] * 2;
-      const expectedBorderWidth = MAP_AVATARBASE_SIZE_BORDERWIDTH[size];
-      const expectedBorderRadius = TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size];
-
       const classNames = generateAvatarGroupOverflowTextContainerClassNames({
         size,
         variant: AvatarGroupVariant.Network,
@@ -129,10 +121,13 @@ describe('AvatarGroup', () => {
       expect(classNames).toContain(
         'bg-icon-default items-center justify-center overflow-hidden',
       );
-      expect(classNames).toContain(`w-[${expectedTotalSize}px]`);
-      expect(classNames).toContain(`h-[${expectedTotalSize}px]`);
-      expect(classNames).toContain(`border-[${expectedBorderWidth}px]`);
-      expect(classNames).toContain(expectedBorderRadius);
+      expect(classNames).toContain(
+        TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size],
+      );
+      expect(classNames).toContain(
+        TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size],
+      );
+      expect(classNames).toContain(TWCLASSMAP_AVATARBASE_SIZE_BORDER[size]);
     });
   });
   describe('AvatarGroup Component', () => {

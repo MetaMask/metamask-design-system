@@ -2,8 +2,9 @@
 /* eslint-disable jsdoc/require-param */
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import {
-  TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
-  MAP_AVATARBASE_SIZE_BORDERWIDTH,
+  TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDER,
 } from '../AvatarBase/AvatarBase.constants';
 import { MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS } from './AvatarGroup.constants';
 import type { AvatarGroupProps } from './AvatarGroup.types';
@@ -69,13 +70,11 @@ export const generateAvatarGroupOverflowTextContainerClassNames = ({
 }: Partial<AvatarGroupProps>): string => {
   const baseStyle =
     'bg-icon-default items-center justify-center overflow-hidden';
-  const totalSize = Number(size) + MAP_AVATARBASE_SIZE_BORDERWIDTH[size] * 2;
-  const sizeStyle = `w-[${totalSize}px] h-[${totalSize}px]`;
-  const borderColorStyle = 'border-background-default';
-  const borderWidthStyle = `border-[${MAP_AVATARBASE_SIZE_BORDERWIDTH[size]}px]`;
+  const sizeStyle = `${TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size]}`;
+  const borderStyle = `${TWCLASSMAP_AVATARBASE_SIZE_BORDER[size]}`;
   const borderRadiusStyle =
     variant === AvatarGroupVariant.Network
-      ? TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size]
+      ? TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size]
       : 'rounded-full';
-  return `${baseStyle} ${sizeStyle} ${borderRadiusStyle} ${borderColorStyle} ${borderWidthStyle}`;
+  return `${baseStyle} ${sizeStyle} ${borderRadiusStyle} ${borderStyle}`;
 };

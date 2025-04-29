@@ -1,6 +1,6 @@
 # AvatarBase
 
-The `AvatarBase` component is the base component for all avatar variants.
+The `AvatarBase` is the base component for avatars.
 
 ---
 
