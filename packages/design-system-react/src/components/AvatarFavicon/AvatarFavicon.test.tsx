@@ -97,14 +97,13 @@ describe('AvatarFavicon', () => {
       expect(screen.queryByTestId('fb-img')).toBeNull();
     });
 
-    it('calls onImageError callback when the image errors', () => {
+    it('calls onError callback when the image errors', () => {
       const onError = jest.fn();
       render(
         <AvatarFavicon
           name="Beta"
           src="bad.png"
-          onImageError={onError}
-          imageProps={{ 'data-testid': 'bad-img' } as any}
+          imageProps={{ 'data-testid': 'bad-img', onError } as any}
         />,
       );
       fireEvent.error(screen.getByTestId('bad-img'));

@@ -14,7 +14,6 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
       className,
       size = AvatarTokenSize.Md,
       imageProps,
-      onImageError,
       ...props
     },
     ref,
@@ -23,11 +22,11 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
     const backupFallbackText = fallbackText || name?.[0] || '';
     const altText = name || 'Token logo'; // TBC: Add localization for default text
 
-    const onImageErrorHandler = (
+    const onErrorHandler = (
       e: React.SyntheticEvent<HTMLImageElement, Event>,
     ) => {
       setFinalFallbackText(backupFallbackText);
-      onImageError?.(e);
+      imageProps?.onError?.(e);
     };
 
     return (
@@ -45,7 +44,7 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
             src={src}
             alt={altText}
             className="h-full w-full object-contain"
-            onError={onImageErrorHandler}
+            onError={onErrorHandler}
             {...imageProps}
           />
         )}

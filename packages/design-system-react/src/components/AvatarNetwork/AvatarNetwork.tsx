@@ -17,7 +17,6 @@ export const AvatarNetwork = React.forwardRef<
       className,
       size = AvatarNetworkSize.Md,
       imageProps,
-      onImageError,
       ...props
     },
     ref,
@@ -26,11 +25,11 @@ export const AvatarNetwork = React.forwardRef<
     const backupFallbackText = fallbackText || name?.[0] || '';
     const altText = name || 'Network logo'; // TBC: Add localization for default text
 
-    const onImageErrorHandler = (
+    const onErrorHandler = (
       e: React.SyntheticEvent<HTMLImageElement, Event>,
     ) => {
       setFinalFallbackText(backupFallbackText);
-      onImageError?.(e);
+      imageProps?.onError?.(e);
     };
 
     return (
@@ -48,8 +47,8 @@ export const AvatarNetwork = React.forwardRef<
             src={src}
             alt={altText}
             className="h-full w-full object-contain"
-            onError={onImageErrorHandler}
             {...imageProps}
+            onError={onErrorHandler}
           />
         )}
       </AvatarBase>

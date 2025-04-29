@@ -22,8 +22,4 @@ export type AvatarTokenProps = Omit<
      * Useful for overriding the default alt text which is the dapp name
      */
     imageProps?: ComponentProps<'img'>;
-    /**
-     * Optional prop to set callback triggered when there is an error rendering the image.
-     */
-    onImageError?: React.ReactEventHandler<HTMLImageElement>;
   };
