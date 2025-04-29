@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { AvatarBaseSize, AvatarShape as AvatarBaseShape } from '../../types';
+import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import Text, { TextColor, TextVariant } from '../Text';
 import AvatarBase from './AvatarBase';
 import {
