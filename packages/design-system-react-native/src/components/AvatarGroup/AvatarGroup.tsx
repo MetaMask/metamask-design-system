@@ -44,7 +44,6 @@ const AvatarGroup = ({
                 key={`avatar-${index}`}
                 {...(avatarProps as AvatarAccountProps)}
                 size={size}
-                testID={`avatar-${variant}`}
                 hasBorder
               />
             );
@@ -54,7 +53,6 @@ const AvatarGroup = ({
                 key={`avatar-${index}`}
                 {...(avatarProps as AvatarFaviconProps)}
                 size={size}
-                testID={`avatar-${variant}`}
                 hasBorder
               />
             );
@@ -64,7 +62,6 @@ const AvatarGroup = ({
                 key={`avatar-${index}`}
                 {...(avatarProps as AvatarNetworkProps)}
                 size={size}
-                testID={`avatar-${variant}`}
                 hasBorder
               />
             );
@@ -74,7 +71,6 @@ const AvatarGroup = ({
                 key={`avatar-${index}`}
                 {...(avatarProps as AvatarTokenProps)}
                 size={size}
-                testID={`avatar-${variant}`}
                 hasBorder
               />
             );
