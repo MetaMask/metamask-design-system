@@ -48,7 +48,7 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "devDependencies": {
-    "@metamask/auto-changelog": "^5.0.1",
+    "@metamask/auto-changelog": "^5.0.2",
     "@metamask/design-system-react": "workspace:^",
     "@storybook/react": "^8.6.12",
     "@ts-bridge/cli": "^0.5.1",
