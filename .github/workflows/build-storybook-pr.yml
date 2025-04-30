@@ -1,0 +1,38 @@
+name: Build Storybook PR
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-storybook:
+    name: Build Storybook PR
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/storybook-react
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v1
+        with:
+          is-high-risk-environment: true
+          cache-node-modules: true
+
+      - name: Build required packages
+        working-directory: .
+        run: |
+          yarn workspace @metamask/design-tokens build
+          yarn workspace @metamask/design-system-tailwind-preset build
+          yarn workspace @metamask/design-system-react build
+
+      - name: Build storybook
+        run: yarn build-storybook
+
+      - name: Upload 'storybook-build' to S3
+        if: ${{ vars.AWS_REGION && vars.AWS_IAM_ROLE && vars.AWS_S3_BUCKET }}
+        uses: metamask/github-tools/.github/actions/upload-s3@1233659b3850eb84824d7375e2e0c58eb237701d
+        with:
+          aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: ${{ vars.AWS_IAM_ROLE }}
+          s3-bucket: ${{ vars.AWS_S3_BUCKET }}/${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/storybook-build
+          path: apps/storybook-react/storybook-static
