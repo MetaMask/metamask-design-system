@@ -1,0 +1,45 @@
+name: Build Storybook Main
+
+on:
+  push:
+    branches:
+      - main
+  workflow_call:
+    secrets:
+      PUBLISH_STORYBOOK_TOKEN:
+        required: true
+
+jobs:
+  build-deploy-storybook:
+    name: Build and Deploy Storybook
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    environment: github-pages
+    defaults:
+      run:
+        working-directory: apps/storybook-react
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v1
+        with:
+          is-high-risk-environment: false
+          cache-node-modules: true
+
+      - name: Build required packages
+        working-directory: .
+        run: |
+          yarn workspace @metamask/design-tokens build
+          yarn workspace @metamask/design-system-tailwind-preset build
+          yarn workspace @metamask/design-system-react build
+
+      - name: Build Storybook
+        run: yarn build-storybook
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@de7ea6f8efb354206b205ef54722213d99067935
+        with:
+          personal_token: ${{ secrets.PUBLISH_STORYBOOK_TOKEN }}
+          publish_dir: apps/storybook-react/storybook-static
+          destination_dir: .
+          force_orphan: true
