@@ -24,14 +24,12 @@ jobs:
         uses: MetaMask/action-checkout-and-setup@v1
         with:
           is-high-risk-environment: false
-          cache-node-modules: true
+          skip-allow-scripts: true
 
       - name: Build required packages
         working-directory: .
         run: |
-          yarn workspace @metamask/design-tokens build
-          yarn workspace @metamask/design-system-tailwind-preset build
-          yarn workspace @metamask/design-system-react build
+          yarn build
 
       - name: Build Storybook
         run: yarn build-storybook
