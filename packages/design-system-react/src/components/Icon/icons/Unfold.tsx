@@ -9,7 +9,7 @@ const SvgUnfold = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     ref={ref}
     {...props}
   >
-    <path d="m12 21.229-4.5-4.5 1.45-1.45 3.05 3.05 3.05-3.05 1.45 1.45zM8.95 9.279 7.5 7.829l4.5-4.5 4.5 4.5-1.45 1.45L12 6.229z" />
+    <path d="m12 20.95-4.5-4.5L8.95 15 12 18.05 15.05 15l1.45 1.45zM8.95 9 7.5 7.55l4.5-4.5 4.5 4.5L15.05 9 12 5.95z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgUnfold);

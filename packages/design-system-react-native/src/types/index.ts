@@ -69,7 +69,7 @@ export enum AvatarGroupVariant {
  * AvatarIcon - severity
  */
 export enum AvatarIconSeverity {
-  Default = 'default',
+  Neutral = 'neutral',
   Info = 'info',
   Success = 'success',
   Error = 'error',
@@ -180,15 +180,15 @@ export enum ButtonIconSize {
   /**
    * Represents a small button size (24px).
    */
-  Sm = '24',
+  Sm = 'sm',
   /**
    * Represents a medium button size (32px).
    */
-  Md = '32',
+  Md = 'md',
   /**
    * Represents a large button size (40px).
    */
-  Lg = '40',
+  Lg = 'lg',
 }
 
 /**
@@ -196,6 +196,7 @@ export enum ButtonIconSize {
  */
 export enum TextVariant {
   // Display Sizes
+  DisplayLg = 'display-lg',
   DisplayMd = 'display-md',
 
   // Heading Sizes
@@ -344,15 +345,15 @@ export enum IconColor {
  */
 export enum IconSize {
   /** Extra small - 12px */
-  Xs = 12,
+  Xs = '12',
   /** Small - 16px */
-  Sm = 16,
+  Sm = '16',
   /** Medium - 20px (Default) */
-  Md = 20,
+  Md = '20',
   /** Large - 24px */
-  Lg = 24,
+  Lg = '24',
   /** Extra large - 32px */
-  Xl = 32,
+  Xl = '32',
 }
 
 // /////////////////////////////////////////////////////
@@ -466,6 +467,7 @@ export enum IconName {
   Fire = 'Fire',
   FirstPage = 'FirstPage',
   Flag = 'Flag',
+  FlashSlash = 'FlashSlash',
   Flash = 'Flash',
   Flask = 'Flask',
   Flower = 'Flower',
@@ -512,6 +514,7 @@ export enum IconName {
   MinusSquare = 'MinusSquare',
   Minus = 'Minus',
   Mobile = 'Mobile',
+  MoneyBag = 'MoneyBag',
   Money = 'Money',
   Monitor = 'Monitor',
   MoreHorizontal = 'MoreHorizontal',

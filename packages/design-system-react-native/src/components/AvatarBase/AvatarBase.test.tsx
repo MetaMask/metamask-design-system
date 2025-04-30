@@ -1,152 +1,157 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
+import React from 'react';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
-import Text from '../Text';
+import Text, { TextColor, TextVariant } from '../Text';
 import AvatarBase from './AvatarBase';
 import {
-  TWCLASSMAP_AVATARBASE_SIZE_SHAPE,
-  MAP_AVATARBASE_SIZE_BORDERWIDTH,
+  TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
+  TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDER,
 } from './AvatarBase.constants';
-import { generateAvatarBaseContainerClassNames } from './AvatarBase.utilities';
 
 describe('AvatarBase', () => {
-  describe('generateAvatarBaseContainerClassNames', () => {
-    it('returns correct class names for default state', () => {
-      const classNames = generateAvatarBaseContainerClassNames({});
-      expect(classNames).toContain(
-        'items-center justify-center overflow-hidden',
-      );
-      expect(classNames).toContain('bg-transparent'); // Default hasSolidBackgroundColor = false
-      expect(classNames).toContain(`h-[${AvatarBaseSize.Md}px]`);
-      expect(classNames).toContain(`w-[${AvatarBaseSize.Md}px]`);
-      expect(classNames).toContain('rounded-full'); // Default shape
-      expect(classNames).not.toContain('border'); // No border by default
-    });
+  it('renders children when no fallbackText is provided', () => {
+    const { getByText } = render(
+      <AvatarBase>
+        <Text testID="child">Hello</Text>
+      </AvatarBase>,
+    );
+    expect(getByText('Hello')).toBeTruthy();
+  });
 
-    it('applies correct shape class when circle', () => {
-      const classNames = generateAvatarBaseContainerClassNames({
-        shape: AvatarBaseShape.Circle,
-      });
-      expect(classNames).toContain('rounded-full');
-    });
+  it('renders fallbackText with correct Text props and twClassName', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
+    const fallback = 'XYZ';
+    const { getByTestId, getByText } = render(
+      <AvatarBase
+        fallbackText={fallback}
+        fallbackTextProps={{
+          testID: 'fb',
+          twClassName: 'mt-1',
+        }}
+      >
+        <Text>Should not render</Text>
+      </AvatarBase>,
+    );
+    const fallbackText = getByTestId('fb');
+    expect(fallbackText.props.children).toBe(fallback);
+    const expectedTextColor = tw`${TextColor.TextMuted}`.color;
+    const expectedFontSize = tw`text-${TextVariant.BodySm}`.fontSize;
+    const expectedMargin = tw`mt-1`.marginTop;
+    expect(fallbackText.props.style[0].color).toBe(expectedTextColor);
+    expect(fallbackText.props.style[0].fontSize).toBe(expectedFontSize);
+    expect(fallbackText.props.style[0].marginTop).toBe(expectedMargin);
+    expect(() => getByText('Should not render')).toThrow();
+  });
 
-    it('applies correct shape class when not a circle', () => {
+  it('applies correct container style for all shapes & sizes without border', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
+
+    Object.values(AvatarBaseShape).forEach((shape) => {
       Object.values(AvatarBaseSize).forEach((size) => {
-        const expectedShapeClass = TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size];
-        const classNames = generateAvatarBaseContainerClassNames({
-          size,
-          shape: AvatarBaseShape.Square,
-        });
-        expect(classNames).toContain(expectedShapeClass);
-      });
-    });
+        const shapeClass =
+          shape === AvatarBaseShape.Circle
+            ? 'rounded-full'
+            : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
 
-    it('applies correct size styles', () => {
-      Object.values(AvatarBaseSize).forEach((size) => {
-        const classNames = generateAvatarBaseContainerClassNames({ size });
-        expect(classNames).toContain(`h-[${size}px]`);
-        expect(classNames).toContain(`w-[${size}px]`);
-      });
-    });
+        const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
 
-    it('applies correct size styles with border', () => {
-      Object.values(AvatarBaseSize).forEach((size) => {
-        const borderWidth = MAP_AVATARBASE_SIZE_BORDERWIDTH[size];
-        const expectedSize = borderWidth * 2 + Number(size);
-        const classNames = generateAvatarBaseContainerClassNames({
-          size,
-          hasBorder: true,
-        });
-        expect(classNames).toContain(`h-[${expectedSize}px]`);
-        expect(classNames).toContain(`w-[${expectedSize}px]`);
-        expect(classNames).toContain(
-          `border-background-default border-[${borderWidth}px]`,
+        const classString = [
+          'items-center',
+          'justify-center',
+          'overflow-hidden',
+          'bg-background-muted',
+          shapeClass,
+          dimensionClass,
+        ]
+          .filter(Boolean)
+          .join(' ');
+
+        const expectedStyle = tw`${classString}`;
+
+        const { getByTestId } = render(
+          <AvatarBase shape={shape} size={size} testID="avatar" />,
         );
+        const avatar = getByTestId('avatar');
+        expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
       });
-    });
-
-    it('applies correct solid background color when hasSolidBackgroundColor is true', () => {
-      const classNames = generateAvatarBaseContainerClassNames({
-        hasSolidBackgroundColor: true,
-      });
-      expect(classNames).toContain('bg-background-default');
-    });
-
-    it('appends additional Tailwind class names', () => {
-      const classNames = generateAvatarBaseContainerClassNames({
-        twClassName: 'shadow-lg ring-2',
-      });
-      expect(classNames).toContain('shadow-lg ring-2');
-    });
-
-    it('applies all styles together correctly', () => {
-      const size = AvatarBaseSize.Lg;
-      const borderWidth = MAP_AVATARBASE_SIZE_BORDERWIDTH[size];
-      const expectedSize = borderWidth * 2 + Number(size);
-      const classNames = generateAvatarBaseContainerClassNames({
-        size,
-        shape: AvatarBaseShape.Square,
-        hasBorder: true,
-        hasSolidBackgroundColor: true,
-        twClassName: 'border border-blue-500',
-      });
-      expect(classNames).toContain(
-        'items-center justify-center overflow-hidden',
-      );
-      expect(classNames).toContain('bg-background-default'); // Solid background enabled
-      expect(classNames).toContain(`h-[${expectedSize}px]`);
-      expect(classNames).toContain(`w-[${expectedSize}px]`);
-      expect(classNames).toContain(TWCLASSMAP_AVATARBASE_SIZE_SHAPE[size]);
-      expect(classNames).toContain(
-        `border-background-default border-[${borderWidth}px]`,
-      );
-      expect(classNames).toContain('border border-blue-500');
     });
   });
-  describe('AvatarBase Component', () => {
-    it('renders children when fallbackText is not provided', () => {
-      const { getByText } = render(
-        <AvatarBase>
-          <Text>Child Content</Text>
-        </AvatarBase>,
-      );
-      expect(getByText('Child Content')).toBeDefined();
-    });
 
-    it('renders fallbackText when provided and does not render children', () => {
-      const fallback = 'Fallback Text';
-      const { getByText, queryByText } = render(
-        <AvatarBase fallbackText={fallback}>
-          <Text>Child Content</Text>
-        </AvatarBase>,
-      );
-      expect(getByText(fallback)).toBeDefined();
-      expect(queryByText('Child Content')).toBeNull();
-    });
+  it('applies correct container style for all shapes & sizes with border', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
 
-    it('applies fallbackTextProps.twClassName correctly', () => {
-      const fallback = 'Hello';
-      const { getByText } = render(
-        <AvatarBase
-          fallbackText={fallback}
-          fallbackTextProps={{ twClassName: 'text-text-default' }}
-        />,
-      );
-      const textEl = getByText(fallback);
-      expect(textEl.props.style[0].color).toBe('#121314');
-    });
+    Object.values(AvatarBaseShape).forEach((shape) => {
+      Object.values(AvatarBaseSize).forEach((size) => {
+        const shapeClass =
+          shape === AvatarBaseShape.Circle
+            ? 'rounded-full'
+            : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
 
-    it('applies custom style to container', () => {
-      const customStyle = { margin: 10 };
-      const { getByTestId } = render(
-        <AvatarBase style={customStyle} testID="avatar-container">
-          <Text>Child</Text>
-        </AvatarBase>,
-      );
-      const container = getByTestId('avatar-container');
-      // The container style is an array [twResult, customStyle]. Since we ignore tw,
-      // check that the second element is our custom style.
-      expect(container.props.style[1]).toStrictEqual(customStyle);
+        const dimensionClass =
+          TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
+
+        const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
+
+        const classString = [
+          'items-center',
+          'justify-center',
+          'overflow-hidden',
+          'bg-background-muted',
+          shapeClass,
+          dimensionClass,
+          borderClass,
+        ]
+          .filter(Boolean)
+          .join(' ');
+
+        const expectedStyle = tw`${classString}`;
+
+        const { getByTestId } = render(
+          <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
+        );
+        const avatar = getByTestId('avatar');
+        expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
+      });
     });
+  });
+
+  it('applies custom twClassName and style, forwards extra View props', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
+
+    const baseClasses = [
+      'items-center',
+      'justify-center',
+      'overflow-hidden',
+      'bg-background-muted',
+      'rounded-full',
+      TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[AvatarBaseSize.Md],
+    ].join(' ');
+    const customClasses = baseClasses + ' extra-class';
+    const expectedStyle = tw`${customClasses}`;
+
+    const customStyle = { margin: 42 };
+    const { getByTestId } = render(
+      <AvatarBase
+        twClassName="extra-class"
+        style={customStyle}
+        accessibilityLabel="my-avatar"
+        testID="avatar"
+      >
+        <Text>Hi</Text>
+      </AvatarBase>,
+    );
+    const container = getByTestId('avatar');
+    expect(container.props.style[0]).toStrictEqual(expectedStyle);
+    expect(container.props.style[1]).toStrictEqual(customStyle);
+    expect(container.props.accessibilityLabel).toBe('my-avatar');
   });
 });

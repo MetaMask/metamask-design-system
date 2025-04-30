@@ -1,18 +1,9 @@
+import type { ComponentProps } from 'react';
+
 import { ButtonIconSize } from '../../types';
-import type { ButtonBaseProps } from '../ButtonBase';
 import type { IconName, IconProps } from '../Icon';
 
-export type ButtonIconProps = Omit<
-  ButtonBaseProps,
-  // We handle these props in ButtonIcon
-  | 'className'
-  | 'isDisabled'
-  | 'isLoading'
-  | 'style'
-  | 'children'
-  | 'size'
-  | 'aria-label'
-> & {
+export type ButtonIconProps = ComponentProps<'button'> & {
   /**
    * Required prop to specify the icon to show
    */

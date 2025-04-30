@@ -19,7 +19,7 @@ describe('AvatarIcon', () => {
     expect(avatarIcon).toBeInTheDocument();
     expect(avatarIcon).toHaveClass(
       TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[
-        AvatarIconSeverity.Default
+        AvatarIconSeverity.Neutral
       ],
     );
   });

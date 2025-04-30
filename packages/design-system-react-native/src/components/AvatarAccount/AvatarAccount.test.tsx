@@ -5,13 +5,28 @@ import { AvatarAccountSize, AvatarAccountVariant } from '../../types';
 import AvatarAccount from './AvatarAccount';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
 
+jest.mock('react-native-svg', () => {
+  const React = require('react');
+  return {
+    SvgXml: (props: any) => React.createElement('SvgXml', props, props.xml),
+  };
+});
+jest.mock('react-native-jazzicon', () => {
+  return jest.fn(() => null);
+});
+
 describe('AvatarAccount', () => {
-  it('renders Jazzicon by default when no variant is provided', () => {
+  it('renders Jazzicon by default when no variant is provided', async () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
 
-    const { getByTestId } = render(<AvatarAccount address={address} />);
-
-    expect(getByTestId('jazzicon')).toBeTruthy();
+    const { findByTestId } = render(
+      <AvatarAccount
+        address={address}
+        jazziconProps={{ testID: 'jazzicon' }}
+      />,
+    );
+    const jazzicon = await findByTestId('jazzicon');
+    expect(jazzicon).toBeTruthy();
   });
 
   it('renders Blockies when variant is blockies', () => {
@@ -21,6 +36,7 @@ describe('AvatarAccount', () => {
       <AvatarAccount
         address={address}
         variant={AvatarAccountVariant.Blockies}
+        blockiesProps={{ testID: 'blockies' }}
       />,
     );
 
@@ -34,7 +50,7 @@ describe('AvatarAccount', () => {
       <AvatarAccount
         address={address}
         variant={AvatarAccountVariant.Maskicon}
-        testID="maskicon"
+        maskiconProps={{ testID: 'maskicon' }}
       />,
     );
 
@@ -57,17 +73,18 @@ describe('AvatarAccount', () => {
     );
   });
 
-  it('overrides the size if provided', () => {
+  it('overrides the size if provided', async () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
-    const { getByTestId } = render(
+    const { findByTestId, getByTestId } = render(
       <AvatarAccount
         address={address}
         size={AvatarAccountSize.Xl}
         testID="avatar-account"
+        jazziconProps={{ testID: 'jazzicon' }}
       />,
     );
 
-    const jazzicon = getByTestId('jazzicon');
+    const jazzicon = await findByTestId('jazzicon');
     expect(jazzicon).toBeTruthy();
     const avatarAccount = getByTestId('avatar-account');
     expect(avatarAccount).toBeDefined();

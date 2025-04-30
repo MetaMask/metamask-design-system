@@ -12,7 +12,7 @@ const SvgCurrencyYuan = (
     ref={ref}
     {...props}
   >
-    <path d="M11 21.229v-7H6v-2h4.725L5 3.229h2.375l4.625 7.3 4.625-7.3H19l-5.725 9H18v2h-5v7z" />
+    <path d="M11 21v-7H6v-2h4.725L5 3h2.375L12 10.3 16.625 3H19l-5.725 9H18v2h-5v7z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgCurrencyYuan);

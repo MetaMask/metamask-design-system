@@ -16,7 +16,9 @@ const AvatarAccount = ({
   address,
   variant = AvatarAccountVariant.Jazzicon,
   size = AvatarAccountSize.Md,
-  shape = AvatarBaseShape.Circle,
+  blockiesProps,
+  jazziconProps,
+  maskiconProps,
   ...props
 }: AvatarAccountProps) => {
   let AvatarArtComponent;
@@ -24,24 +26,29 @@ const AvatarAccount = ({
   switch (variant) {
     case AvatarAccountVariant.Blockies:
       AvatarArtComponent = (
-        <Blockies address={address} size={Number(size)} testID="blockies" />
+        <Blockies address={address} size={Number(size)} {...blockiesProps} />
       );
       break;
     case AvatarAccountVariant.Maskicon:
       AvatarArtComponent = (
-        <Maskicon address={address} size={Number(size)} testID="maskicon" />
+        <Maskicon address={address} size={Number(size)} {...maskiconProps} />
       );
       break;
     case AvatarAccountVariant.Jazzicon:
     default:
       AvatarArtComponent = (
-        <Jazzicon address={address} size={Number(size)} testID="jazzicon" />
+        <Jazzicon address={address} size={Number(size)} {...jazziconProps} />
       );
       break;
   }
 
   return (
-    <AvatarBase size={size} shape={shape} accessibilityRole="image" {...props}>
+    <AvatarBase
+      size={size}
+      shape={AvatarBaseShape.Circle}
+      accessibilityRole="image"
+      {...props}
+    >
       {AvatarArtComponent}
     </AvatarBase>
   );

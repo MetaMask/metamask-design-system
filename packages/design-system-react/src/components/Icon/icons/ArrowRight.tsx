@@ -12,7 +12,7 @@ const SvgArrowRight = (
     ref={ref}
     {...props}
   >
-    <path d="M8.025 21.886 6.25 20.11l8.225-8.225L6.25 3.66l1.775-1.775 10 10z" />
+    <path d="m8.887 22-1.775-1.775L15.337 12 7.112 3.775 8.887 2l10 10z" />
   </svg>
 );
 const ForwardRef = forwardRef(SvgArrowRight);

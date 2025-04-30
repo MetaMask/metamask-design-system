@@ -1,6 +1,6 @@
 # ButtonIcon
 
-The `ButtonIcon` component is a flexible icon button designed for React Native applications. It supports different sizes, themes, and accessibility features.
+A Button Icon is a compact, icon-only button that triggers an action, designed for quick, space-efficient interactions
 
 ---
 

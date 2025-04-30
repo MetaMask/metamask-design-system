@@ -1,7 +1,8 @@
 import { TextVariant } from '../../types';
 
 export const CLASSMAP_TEXT_VARIANT_FONTSTYLE: Record<TextVariant, string> = {
-  [TextVariant.DisplayLg]: 'text-[2.5rem] md:text-[4rem]',
+  [TextVariant.DisplayLg]:
+    'text-s-display-lg leading-s-display-lg tracking-s-display-lg md:text-l-display-lg',
   [TextVariant.DisplayMd]:
     'text-s-display-md leading-s-display-md tracking-s-display-md md:text-l-display-md',
   [TextVariant.HeadingLg]:
