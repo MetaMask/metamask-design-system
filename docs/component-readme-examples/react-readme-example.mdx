@@ -1,0 +1,142 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as ComponentNameStories from './ComponentName.stories';
+
+# ComponentName
+
+ComponentName is used to render standardized elements within an interface.
+
+<Canvas of={ComponentNameStories.Default} />
+
+## Props
+
+### `size`
+
+The size of the ComponentName.
+
+Available sizes:
+
+- `ComponentNameSize.Sm` (24px)
+- `ComponentNameSize.Md` (32px)
+- `ComponentNameSize.Lg` (40px)
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ComponentNameSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>ComponentNameSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ComponentNameStories.Size} />
+
+### `children`
+
+The content of the `ComponentName` component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ComponentNameStories.Children} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ComponentNameStories.CustomClassName} />
+
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ComponentNameStories.CustomStyle} />
+
+## Component API
+
+<Controls of={ComponentNameStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+```tsx
+import { ComponentName } from '@metamask/design-system-react';
+
+<ComponentName />;
+```
