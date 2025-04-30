@@ -49,6 +49,19 @@ describe('BadgeWrapper', () => {
     expect(badgeDiv).toHaveStyle({ bottom: '0px', right: '0px' });
   });
 
+  it('applies BottomLeft position correctly', () => {
+    render(
+      <BadgeWrapper
+        position={BadgeWrapperPosition.BottomLeft}
+        badge={<div data-testid="badge" />}
+      >
+        <div data-testid="anchor" />
+      </BadgeWrapper>,
+    );
+    const badgeDiv = screen.getByTestId('badge').parentElement!;
+    expect(badgeDiv).toHaveStyle({ bottom: '0px', left: '0px' });
+  });
+
   it('applies TopLeft position correctly', () => {
     render(
       <BadgeWrapper
@@ -60,6 +73,19 @@ describe('BadgeWrapper', () => {
     );
     const badgeDiv = screen.getByTestId('badge').parentElement!;
     expect(badgeDiv).toHaveStyle({ top: '0px', left: '0px' });
+  });
+
+  it('applies TopRight position correctly', () => {
+    render(
+      <BadgeWrapper
+        position={BadgeWrapperPosition.TopRight}
+        badge={<div data-testid="badge" />}
+      >
+        <div data-testid="anchor" />
+      </BadgeWrapper>,
+    );
+    const badgeDiv = screen.getByTestId('badge').parentElement!;
+    expect(badgeDiv).toHaveStyle({ top: '0px', right: '0px' });
   });
 
   it('respects positionXOffset and positionYOffset', () => {
