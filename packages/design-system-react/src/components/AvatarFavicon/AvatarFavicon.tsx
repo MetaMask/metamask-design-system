@@ -11,7 +11,7 @@ export const AvatarFavicon = React.forwardRef<
   (
     {
       src,
-      name,
+      name = '',
       fallbackText,
       fallbackTextProps,
       className,

@@ -138,6 +138,17 @@ describe('AvatarFavicon', () => {
       const fbOvr = screen.getByTestId('fb-ovr');
       expect(fbOvr).toHaveTextContent('XX');
     });
+
+    it('uses default alt text when name prop is omitted', () => {
+      render(
+        <AvatarFavicon
+          src={src}
+          imageProps={{ 'data-testid': 'img-no-name' } as any}
+        />,
+      );
+      const img = screen.getByTestId('img-no-name') as HTMLImageElement;
+      expect(img.alt).toBe('Dapp logo');
+    });
   });
 
   describe('size and border styling', () => {
