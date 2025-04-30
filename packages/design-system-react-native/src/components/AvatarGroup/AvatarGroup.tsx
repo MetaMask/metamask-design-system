@@ -46,7 +46,6 @@ const AvatarGroup = ({
                 size={size}
                 testID={`avatar-${variant}`}
                 hasBorder
-                hasSolidBackgroundColor
               />
             );
           case AvatarGroupVariant.Favicon:
@@ -57,7 +56,6 @@ const AvatarGroup = ({
                 size={size}
                 testID={`avatar-${variant}`}
                 hasBorder
-                hasSolidBackgroundColor
               />
             );
           case AvatarGroupVariant.Network:
@@ -68,7 +66,6 @@ const AvatarGroup = ({
                 size={size}
                 testID={`avatar-${variant}`}
                 hasBorder
-                hasSolidBackgroundColor
               />
             );
           case AvatarGroupVariant.Token:
@@ -79,7 +76,6 @@ const AvatarGroup = ({
                 size={size}
                 testID={`avatar-${variant}`}
                 hasBorder
-                hasSolidBackgroundColor
               />
             );
           default:

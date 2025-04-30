@@ -158,14 +158,14 @@ describe('AvatarBase', () => {
     expect(screen.getByText('Test')).toBeInTheDocument();
   });
 
-  it('prioritizes children over fallbackText', () => {
+  it('prioritizes fallbackText over children', () => {
     render(
       <AvatarBase fallbackText="Fallback">
         <span>Child</span>
       </AvatarBase>,
     );
-    expect(screen.getByText('Child')).toBeInTheDocument();
-    expect(screen.queryByText('Fallback')).not.toBeInTheDocument();
+    expect(screen.queryByText('Child')).not.toBeInTheDocument();
+    expect(screen.getByText('Fallback')).toBeInTheDocument();
   });
 
   it('applies fallbackTextProps correctly', () => {

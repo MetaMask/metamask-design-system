@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import Text, { TextColor, TextVariant, FontWeight } from '../Text';
+import {
+  TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
+  TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
+  TWCLASSMAP_AVATARBASE_SIZE_BORDER,
+} from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
-import { generateAvatarBaseContainerClassNames } from './AvatarBase.utilities';
 
 const AvatarBase = ({
   children,
@@ -15,27 +20,25 @@ const AvatarBase = ({
   fallbackText,
   fallbackTextProps,
   hasBorder = false,
-  hasSolidBackgroundColor = false,
   twClassName = '',
   style,
   ...props
 }: AvatarBaseProps) => {
   const tw = useTailwind();
-  const twContainerClassNames = useMemo(() => {
-    return generateAvatarBaseContainerClassNames({
-      size,
-      shape,
-      hasBorder,
-      hasSolidBackgroundColor,
-      twClassName,
-    });
-  }, [size, shape, hasBorder, twClassName]);
+  const twContainerClassNames = `
+    items-center justify-center overflow-hidden bg-background-muted
+    ${
+      shape === AvatarBaseShape.Circle
+        ? 'rounded-full'
+        : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size]
+    }
+    ${hasBorder ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size] : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size]}
+    ${hasBorder ? TWCLASSMAP_AVATARBASE_SIZE_BORDER[size] : ''}
+    ${twClassName}
+  `;
 
   return (
     <View style={[tw`${twContainerClassNames}`, style]} {...props}>
-      <View
-        style={tw`bg-background-muted absolute bottom-0 left-0 right-0 top-0`}
-      />
       {fallbackText ? (
         <Text
           color={TextColor.TextMuted}

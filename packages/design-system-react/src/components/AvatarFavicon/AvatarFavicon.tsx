@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { AvatarFaviconSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
@@ -11,7 +11,7 @@ export const AvatarFavicon = React.forwardRef<
   (
     {
       src,
-      name,
+      name = '',
       fallbackText,
       fallbackTextProps,
       className,
@@ -21,8 +21,16 @@ export const AvatarFavicon = React.forwardRef<
     },
     ref,
   ) => {
-    const displayText = fallbackText || (name ? name[0] : '');
+    const [finalFallbackText, setFinalFallbackText] = useState<string>('');
+    const backupFallbackText = fallbackText || name?.[0] || '';
     const altText = name || 'Dapp logo'; // TBC: Add localization for default text
+
+    const onErrorHandler = (
+      e: React.SyntheticEvent<HTMLImageElement, Event>,
+    ) => {
+      setFinalFallbackText(backupFallbackText);
+      imageProps?.onError?.(e);
+    };
 
     return (
       <AvatarBase
@@ -30,7 +38,7 @@ export const AvatarFavicon = React.forwardRef<
         shape={AvatarBaseShape.Circle}
         size={size}
         className={className}
-        fallbackText={displayText}
+        fallbackText={src ? finalFallbackText : backupFallbackText}
         fallbackTextProps={fallbackTextProps}
         {...props}
       >
@@ -38,8 +46,9 @@ export const AvatarFavicon = React.forwardRef<
           <img
             src={src}
             alt={altText}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
             {...imageProps}
+            onError={onErrorHandler}
           />
         )}
       </AvatarBase>

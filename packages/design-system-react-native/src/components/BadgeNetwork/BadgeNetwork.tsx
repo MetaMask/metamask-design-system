@@ -16,7 +16,6 @@ const BadgeNetwork = ({
     fallbackTextProps={fallbackTextProps}
     {...props}
     size={AvatarNetworkSize.Xs}
-    hasSolidBackgroundColor
     hasBorder
   />
 );

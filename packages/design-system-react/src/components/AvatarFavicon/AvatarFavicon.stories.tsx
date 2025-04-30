@@ -107,7 +107,11 @@ export const FallbackText: Story = {
     <div className="flex gap-2">
       <AvatarFavicon name="OpenSea" fallbackText="OS" />
       <AvatarFavicon name="Uniswap" fallbackText="UNI" />
-      <AvatarFavicon name="Aave" fallbackText="AAVE" />
+      <AvatarFavicon
+        name="Aave"
+        fallbackText="AAVE"
+        src="https://cryptologos.cc/logos/avalanche-avax-logo.png?v=040"
+      />
     </div>
   ),
 };

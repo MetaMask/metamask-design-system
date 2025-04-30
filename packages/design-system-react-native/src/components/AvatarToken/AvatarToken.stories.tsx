@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { AvatarTokenSize } from '../../types';
 import AvatarToken from './AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.constants';
+import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.dev';
 import type { AvatarTokenProps } from './AvatarToken.types';
 
 const meta: Meta<AvatarTokenProps> = {

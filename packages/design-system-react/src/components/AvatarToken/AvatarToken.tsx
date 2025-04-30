@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { AvatarTokenSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
@@ -8,7 +8,7 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
   (
     {
       src,
-      name,
+      name = '',
       fallbackText,
       fallbackTextProps,
       className,
@@ -18,8 +18,16 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
     },
     ref,
   ) => {
-    const displayText = fallbackText || (name ? name[0] : '');
+    const [finalFallbackText, setFinalFallbackText] = useState<string>('');
+    const backupFallbackText = fallbackText || name?.[0] || '';
     const altText = name || 'Token logo'; // TBC: Add localization for default text
+
+    const onErrorHandler = (
+      e: React.SyntheticEvent<HTMLImageElement, Event>,
+    ) => {
+      setFinalFallbackText(backupFallbackText);
+      imageProps?.onError?.(e);
+    };
 
     return (
       <AvatarBase
@@ -27,7 +35,7 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
         shape={AvatarBaseShape.Circle}
         size={size}
         className={className}
-        fallbackText={displayText}
+        fallbackText={src ? finalFallbackText : backupFallbackText}
         fallbackTextProps={fallbackTextProps}
         {...props}
       >
@@ -35,7 +43,8 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
           <img
             src={src}
             alt={altText}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
+            onError={onErrorHandler}
             {...imageProps}
           />
         )}

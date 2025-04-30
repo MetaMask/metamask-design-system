@@ -6,6 +6,7 @@ type TypeStyle = {
 };
 
 export type ThemeTypography = {
+  sDisplayLG: TypeStyle;
   sDisplayMD: TypeStyle;
   sHeadingLG: TypeStyle;
   sHeadingMD: TypeStyle;
@@ -20,6 +21,7 @@ export type ThemeTypography = {
   sBodySMBold: TypeStyle;
   sBodyXS: TypeStyle;
   sBodyXSMedium: TypeStyle;
+  lDisplayLG: TypeStyle;
   lDisplayMD: TypeStyle;
   lHeadingLG: TypeStyle;
   lHeadingMD: TypeStyle;
@@ -51,6 +53,8 @@ export type FontSizes = {
   fontSize6: number;
   fontSize7: number;
   fontSize8: number;
+  fontSize9: number;
+  fontSize10: number;
 };
 
 export type FontWeights = {
@@ -72,4 +76,6 @@ export type LineHeights = {
   lineHeight5: number;
   lineHeight6: number;
   lineHeight7: number;
+  lineHeight8: number;
+  lineHeight9: number;
 };

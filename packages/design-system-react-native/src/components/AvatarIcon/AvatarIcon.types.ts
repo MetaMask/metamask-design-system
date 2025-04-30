@@ -8,7 +8,7 @@ import { IconName, IconProps } from '../Icon';
 export type AvatarIconProps = {
   /**
    * Optional prop to control the severity of the avatar
-   * @default AvatarIconSeverity.Default
+   * @default AvatarIconSeverity.Neutral
    */
   severity?: AvatarIconSeverity;
   /**
