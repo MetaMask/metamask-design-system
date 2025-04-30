@@ -1,6 +1,6 @@
 # BadgeWrapper
 
-The `BadgeWrapper` component allows you to attach any badge (e.g., `BadgeNetwork`, `BadgeCount`, `BadgeStatus`) to another component such as an `Avatar`. It supports various position presets, anchor shape alignment, and full control via custom positioning.
+The `BadgeWrapper` positions a badge on top of another element.
 
 ---
 
