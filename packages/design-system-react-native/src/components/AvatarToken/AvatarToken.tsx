@@ -2,27 +2,20 @@
 import React, { useState } from 'react';
 import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
-import { AvatarBaseShape } from '../../types';
+import { AvatarTokenSize, AvatarBaseShape } from '../../types';
 import AvatarBase from '../AvatarBase';
 import ImageOrSvg from '../temp-components/ImageOrSvg';
 import type { AvatarTokenProps } from './AvatarToken.types';
 
 const AvatarToken = ({
-  size,
-  shape = AvatarBaseShape.Circle,
+  src,
+  size = AvatarTokenSize.Md,
+  name,
   fallbackText,
   fallbackTextProps,
-  hasBorder,
   twClassName,
-  testID,
-  style,
-  width = '100%',
-  height = '100%',
-  name,
-  imageProps,
-  onImageError,
-  onSvgError,
-  ...restImageOrSvgProps
+  imageOrSvgProps,
+  ...props
 }: AvatarTokenProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
 
@@ -31,36 +24,37 @@ const AvatarToken = ({
     e: NativeSyntheticEvent<ImageErrorEventData>,
   ) => {
     setFallbackText(backupFallbackText);
-    onImageError?.(e);
+    imageOrSvgProps?.onImageError?.(e);
   };
 
   const onSvgErrorHandler = (e: any) => {
     setFallbackText(backupFallbackText);
-    onSvgError?.(e);
+    imageOrSvgProps?.onSvgError?.(e);
   };
 
   return (
     <AvatarBase
       size={size}
-      shape={shape}
+      shape={AvatarBaseShape.Circle}
       fallbackText={finalFallbackText}
       fallbackTextProps={fallbackTextProps}
-      hasBorder={hasBorder}
       twClassName={twClassName}
-      testID={testID}
-      style={style}
+      {...props}
     >
-      <ImageOrSvg
-        width={width}
-        height={height}
-        imageProps={{
-          resizeMode: 'contain',
-          ...imageProps,
-        }}
-        onImageError={onImageErrorHandler}
-        onSvgError={onSvgErrorHandler}
-        {...restImageOrSvgProps}
-      />
+      {src && (
+        <ImageOrSvg
+          src={src}
+          width={'100%'}
+          height={'100%'}
+          {...imageOrSvgProps}
+          imageProps={{
+            resizeMode: 'contain',
+            ...imageOrSvgProps?.imageProps,
+          }}
+          onImageError={onImageErrorHandler}
+          onSvgError={onSvgErrorHandler}
+        />
+      )}
     </AvatarBase>
   );
 };

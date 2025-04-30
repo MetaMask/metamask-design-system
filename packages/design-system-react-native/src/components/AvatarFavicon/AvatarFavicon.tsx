@@ -8,21 +8,14 @@ import ImageOrSvg from '../temp-components/ImageOrSvg';
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
 
 const AvatarFavicon = ({
+  src,
   size = AvatarFaviconSize.Md,
-  shape = AvatarBaseShape.Circle,
+  name,
   fallbackText,
   fallbackTextProps,
-  hasBorder,
   twClassName,
-  testID,
-  style,
-  width = '100%',
-  height = '100%',
-  name,
-  imageProps,
-  onImageError,
-  onSvgError,
-  ...restImageOrSvgProps
+  imageOrSvgProps,
+  ...props
 }: AvatarFaviconProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
 
@@ -31,36 +24,37 @@ const AvatarFavicon = ({
     e: NativeSyntheticEvent<ImageErrorEventData>,
   ) => {
     setFallbackText(backupFallbackText);
-    onImageError?.(e);
+    imageOrSvgProps?.onImageError?.(e);
   };
 
   const onSvgErrorHandler = (e: any) => {
     setFallbackText(backupFallbackText);
-    onSvgError?.(e);
+    imageOrSvgProps?.onSvgError?.(e);
   };
 
   return (
     <AvatarBase
       size={size}
-      shape={shape}
+      shape={AvatarBaseShape.Circle}
       fallbackText={finalFallbackText}
       fallbackTextProps={fallbackTextProps}
       twClassName={twClassName}
-      hasBorder={hasBorder}
-      testID={testID}
-      style={style}
+      {...props}
     >
-      <ImageOrSvg
-        width={width}
-        height={height}
-        imageProps={{
-          resizeMode: 'contain',
-          ...imageProps,
-        }}
-        onImageError={onImageErrorHandler}
-        onSvgError={onSvgErrorHandler}
-        {...restImageOrSvgProps}
-      />
+      {src && (
+        <ImageOrSvg
+          src={src}
+          width={'100%'}
+          height={'100%'}
+          {...imageOrSvgProps}
+          imageProps={{
+            resizeMode: 'contain',
+            ...imageOrSvgProps?.imageProps,
+          }}
+          onImageError={onImageErrorHandler}
+          onSvgError={onSvgErrorHandler}
+        />
+      )}
     </AvatarBase>
   );
 };

@@ -7,13 +7,13 @@ import {
   TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
 } from '../AvatarBase/AvatarBase.constants';
 import AvatarGroup from './AvatarGroup';
+import { MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS } from './AvatarGroup.constants';
 import {
-  MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS,
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
   SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR,
   SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
   SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
-} from './AvatarGroup.constants';
+} from './AvatarGroup.dev';
 import {
   generateAvatarGroupContainerClassNames,
   generateAvatarGroupOverflowTextContainerClassNames,

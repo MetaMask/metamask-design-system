@@ -1,194 +1,161 @@
 # AvatarNetwork
 
-The `AvatarNetwork` component is reserved for representing networks. It extends the functionality of [`AvatarBase`](#) by incorporating support for both images and SVGs. It provides a fallback mechanism in case of an image load failure, ensuring a graceful degradation by displaying either an alternative text or a fallback icon.
+`AvatarNetwork` is reserved for representing networks.
 
 ---
 
 ## Props
 
-The `AvatarNetwork` component accepts the following props:
+### `src`
 
-### `src` (Required)
+Optional prop specifying the source of the network image or SVG.
 
-The source of the image or SVG. It determines whether a local image, a local SVG component, or a remote image/SVG (via URI) is rendered.
-
-| TYPE                                                    | REQUIRED | DEFAULT |
-| :------------------------------------------------------ | :------- | :------ |
-| `number \| ComponentType<SvgProps> \| { uri?: string }` | Yes      | `N/A`   |
+| TYPE            | REQUIRED | DEFAULT | DESCRIPTION                               |
+| --------------- | -------- | ------- | ----------------------------------------- |
+| `ImageOrSvgSrc` | No       | `null`  | URI, local asset, or inline SVG component |
 
 ---
 
-### `name` (Optional)
+### `name`
 
-Used to generate fallback text when the image or SVG fails to load.
+Optional string used to derive the fallback text (first character).
 
-| TYPE     | REQUIRED | DEFAULT     |
-| :------- | :------- | :---------- |
-| `string` | No       | `undefined` |
-
----
-
-### `size` (Optional)
-
-Defines the size of the avatar.
-
-| TYPE     | REQUIRED | DEFAULT     |
-| :------- | :------- | :---------- |
-| `number` | No       | `undefined` |
+| TYPE     | REQUIRED | DEFAULT | DESCRIPTION                            |
+| -------- | -------- | ------- | -------------------------------------- |
+| `string` | No       | `null`  | Used to create fallback if image fails |
 
 ---
 
-### `fallbackText` (Optional)
+### `imageOrSvgProps`
 
-Custom fallback text displayed when the image fails to load.
+Optional props forwarded to the `ImageOrSvg` component.
 
-| TYPE     | REQUIRED | DEFAULT     |
-| :------- | :------- | :---------- |
-| `string` | No       | `name?.[0]` |
+| TYPE              | REQUIRED | DEFAULT | DESCRIPTION                                        |
+| ----------------- | -------- | ------- | -------------------------------------------------- |
+| `ImageOrSvgProps` | No       | `null`  | Customize image handling, test IDs, alt text, etc. |
 
 ---
 
-### `fallbackTextProps` (Optional)
+### `size`
 
-Additional props for customizing the fallback text.
+Controls the size of the avatar. Inherits from `AvatarBaseSize`.
+
+| TYPE                | REQUIRED | DEFAULT                |
+| ------------------- | -------- | ---------------------- |
+| `AvatarNetworkSize` | No       | `AvatarNetworkSize.Md` |
+
+Available sizes:
+
+- `Xs` – 16px
+- `Sm` – 24px
+- `Md` – 32px
+- `Lg` – 40px
+- `Xl` – 48px
+
+---
+
+### `fallbackText`
+
+Optional custom fallback text shown when image fails to load.
+
+| TYPE     | REQUIRED | DEFAULT                                   | DESCRIPTION           |
+| -------- | -------- | ----------------------------------------- | --------------------- |
+| `string` | No       | First character of `name` or empty string | Used when image fails |
+
+---
+
+### `fallbackTextProps`
+
+Optional props to customize the fallback text appearance.
+
+| TYPE                 | REQUIRED | DEFAULT |
+| -------------------- | -------- | ------- |
+| `Partial<TextProps>` | No       | `{}`    |
+
+---
+
+### `twClassName`
+
+Optional Tailwind-style utility classes.
 
 | TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `object` | No       | `{}`    |
+| -------- | -------- | ------- |
+| `string` | No       | `''`    |
 
 ---
 
-### `imageProps` (Optional)
+### Additional Props
 
-Additional properties for the image component.
-
-| TYPE         | REQUIRED | DEFAULT                     |
-| :----------- | :------- | :-------------------------- |
-| `ImageProps` | No       | `{ resizeMode: 'contain' }` |
-
----
-
-### `onImageError` (Optional)
-
-Callback function triggered when the image fails to load.
-
-| TYPE                                                     | REQUIRED | DEFAULT     |
-| :------------------------------------------------------- | :------- | :---------- |
-| `(e: NativeSyntheticEvent<ImageErrorEventData>) => void` | No       | `undefined` |
-
----
-
-### `onSvgError` (Optional)
-
-Callback function triggered when the SVG fails to load.
-
-| TYPE               | REQUIRED | DEFAULT     |
-| :----------------- | :------- | :---------- |
-| `(e: any) => void` | No       | `undefined` |
-
----
-
-### Other Props
-
-`AvatarNetwork` supports all other props from [`AvatarBase`](#) and [`ImageOrSvg`](#), such as:
-
-- **`twClassName`** – Tailwind class names for styling.
-- **`testID`** – Identifier used for testing purposes.
-- **`style`** – Custom styles for the avatar container.
-
----
-
-## Accessibility
-
-To ensure proper accessibility, the following React Native accessibility props can be passed:
-
-- **`accessibilityLabel`**: Describes the avatar for screen readers.
-- **`accessible`**: Set to `true` if the avatar represents meaningful content.
+All other props supported by `AvatarBase`, excluding `children`, are also accepted (e.g., `style`, `testID`).
 
 ---
 
 ## Usage
 
-### Basic Usage
+### Basic
 
 ```tsx
-import React from 'react';
-import AvatarNetwork from '@metamask/design-system-react-native/avatar-network';
+<AvatarNetwork
+  src={{ uri: 'https://example.com/network.svg' }}
+  name="Uniswap"
+/>
+```
 
-const App = () => (
-  <AvatarNetwork
-    name="MetaMask"
-    source={{ uri: 'https://example.com/network.png' }}
-  />
-);
+### Custom Size and Fallback
 
-export default App;
+```tsx
+<AvatarNetwork
+  size={AvatarNetworkSize.Xl}
+  src={{ uri: 'https://bad-link.com/image.png' }}
+  name="Degen App"
+  fallbackText="DA"
+  fallbackTextProps={{ color: 'text-error-default' }}
+/>
+```
+
+### Forwarding props to ImageOrSvg
+
+```tsx
+<AvatarNetwork
+  src={{ uri: 'https://example.com/network.svg' }}
+  imageOrSvgProps={{
+    testID: 'network-image',
+    imageProps: { accessibilityLabel: 'Network icon' },
+  }}
+/>
 ```
 
 ---
 
-### Handling Image Errors
+## Behavior
 
-```tsx
-import React from 'react';
-import AvatarNetwork from '@metamask/design-system-react-native/avatar-network';
-
-const handleError = () => {
-  console.log('Image failed to load');
-};
-
-const App = () => (
-  <AvatarNetwork
-    name="ETH"
-    source={{ uri: 'https://invalid-url.com' }}
-    onImageError={handleError}
-  />
-);
-
-export default App;
-```
+- Falls back to the first character of `name` if image fails to load.
+- Defaults to `Md` (32px) size.
+- Always uses a circular shape.
 
 ---
 
-### Customizing Size
+## Accessibility
 
-```tsx
-import React from 'react';
-import AvatarNetwork, {
-  AvatarNetworkSize,
-} from '@metamask/design-system-react-native/avatar-network';
-
-const App = () => (
-  <AvatarNetwork
-    name="ETH"
-    size={AvatarNetworkSize.Lg}
-    source={{ uri: 'https://example.com/network.png' }}
-  />
-);
-
-export default App;
-```
+- Use `imageOrSvgProps.imageProps.accessibilityLabel` to describe the Network for screen readers.
+- The fallback text is rendered using the `Text` component and can be customized via `fallbackTextProps`.
 
 ---
 
 ## Notes
 
-- **Fallback Mechanism:**  
-  If an image or SVG fails to load, the component falls back to displaying text derived from the `name` prop.
-- **Customization:**  
-  Supports various props for shape, size, and additional styling.
-
-- **Extensibility:**  
-  Any additional `ImageOrSvg` props are forwarded for greater flexibility.
+- This component uses `AvatarBase` and `ImageOrSvg` under the hood.
+- SVGs and raster images are both supported.
+- For custom shapes or behaviors, extend `AvatarBase` directly.
 
 ---
 
 ## Contributing
 
-1. Add tests for any new features or modifications.
-2. Update this README to reflect any changes in the API.
-3. Follow the project's coding guidelines and best practices.
+1. Add tests for new features.
+2. Update this README for any changes to the API.
+3. Follow the design system's coding guidelines.
 
 ---
 
-For further details, refer to the [React Native documentation](https://reactnative.dev/docs/image).
+For questions, refer to the [React Native documentation](https://reactnative.dev/docs), the [AvatarFavicon documentation](#), or contact the maintainers of the design system.
