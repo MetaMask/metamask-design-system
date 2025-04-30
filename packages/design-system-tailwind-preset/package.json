@@ -46,7 +46,7 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "devDependencies": {
-    "@metamask/auto-changelog": "^5.0.1",
+    "@metamask/auto-changelog": "^5.0.2",
     "@ts-bridge/cli": "^0.5.1",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
