@@ -12,7 +12,7 @@ export type AvatarTokenProps = Omit<
      * Required name of the token
      * Used as alt text for image and first letter is used as fallback if no fallbackText provided
      */
-    name: string;
+    name?: string;
     /**
      * Optional URL for the token image
      * When provided, displays the image instead of fallback text

@@ -202,14 +202,12 @@ describe('text display and alt text logic', () => {
   });
 
   it('uses empty string for display text when name is not provided', () => {
-    // @ts-expect-error testing invalid props
     render(<AvatarToken data-testid="avatar" />);
     const base = screen.getByTestId('avatar');
     expect(base.querySelector('span')).toHaveTextContent('');
   });
 
   it('uses default "Token logo" for alt text when name is not provided', () => {
-    // @ts-expect-error testing invalid props
     render(<AvatarToken src="test.jpg" />);
     const img = screen.getByRole('img');
     expect(img).toHaveAttribute('alt', 'Token logo');
