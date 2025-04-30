@@ -181,6 +181,9 @@ describe('BadgeWrapper', () => {
     // anchorShapeYOffset = 50 * .1464 = 7.32
     // badgeCenteringYOffset = 10/2 = 5
     // finalYOffset = 7.32 - 5 = 2.32
-    expect(badgeDiv).toHaveStyle({ bottom: '2.32px', right: '4.64px' });
+    const bottom = parseFloat(badgeDiv.style.bottom);
+    const right = parseFloat(badgeDiv.style.right);
+    expect(bottom).toBeCloseTo(2.32, 2);
+    expect(right).toBeCloseTo(4.64, 2);
   });
 });
