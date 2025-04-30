@@ -8,7 +8,7 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
   (
     {
       src,
-      name,
+      name = '',
       fallbackText,
       fallbackTextProps,
       className,
