@@ -3,7 +3,7 @@ import React from 'react';
 
 import { ButtonBaseSize } from '../../types';
 import { IconName } from '../Icon';
-import { TextVariant } from '../Text';
+import { TextVariant, TextColor } from '../Text';
 import { ButtonBase } from './ButtonBase';
 import README from './README.mdx';
 
@@ -194,6 +194,7 @@ export const loadingTextProps: Story = {
     loadingText: 'Submitting...',
     loadingTextProps: {
       variant: TextVariant.BodySm,
+      color: TextColor.SuccessDefault,
     },
   },
 };

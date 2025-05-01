@@ -68,7 +68,10 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
           <Icon
             name={startIconName}
             size={IconSize.Sm}
-            className={twMerge('mr-2 text-inherit', startIconProps?.className)}
+            className={twMerge(
+              'mr-2 flex-shrink-0 text-inherit',
+              startIconProps?.className,
+            )}
             {...startIconProps}
           />
         );
@@ -85,7 +88,10 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
           <Icon
             name={endIconName}
             size={IconSize.Sm}
-            className={twMerge('ml-2 text-inherit', endIconProps?.className)}
+            className={twMerge(
+              'ml-2 flex-shrink-0 text-inherit',
+              endIconProps?.className,
+            )}
             {...endIconProps}
           />
         );
@@ -118,6 +124,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
       'rounded-full px-4',
       'font-medium text-default',
       'bg-muted',
+      'min-w-[80px] overflow-hidden',
       // Add relative positioning for loading state
       'relative',
       // Size

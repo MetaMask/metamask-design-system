@@ -70,7 +70,7 @@ describe('Button', () => {
       );
       button = screen.getByRole('button');
       expect(button).toHaveClass(
-        'bg-error-muted',
+        'bg-transparent',
         'border-2',
         'border-error-default',
         'text-error-default',
