@@ -6,7 +6,7 @@ import * as ButtonBaseStories from './ButtonBase.stories';
 
 # ButtonBase
 
-The ButtonBase is the base component for buttons
+`ButtonBase` is a labeled element that a user can click or tap to initiate an action.
 
 <Canvas of={ButtonBaseStories.Default} />
 
@@ -120,6 +120,26 @@ import { ButtonBase } from '@metamask/design-system-react';
 >
   Submit
 </ButtonBase>
+```
+
+### TextProps
+
+ButtonBase automatically wraps string children in a Text component for consistent typography. You can customize the Text component's appearance using the `textProps` prop.
+
+**Note:** `textProps` only applies when `children` is a string. Non-string children are rendered as-is without the Text wrapper.
+
+<Canvas of={ButtonBaseStories.TextProps} />
+
+```tsx
+import { ButtonBase, TextVariant } from '@metamask/design-system-react';
+
+<ButtonBase
+  textProps={{
+    variant: TextVariant.BodySm,
+  }}
+>
+  Custom text styling
+</ButtonBase>;
 ```
 
 ### IsDisabled

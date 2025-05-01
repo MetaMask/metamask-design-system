@@ -102,6 +102,13 @@ const meta: Meta<typeof ButtonBase> = {
         type: { summary: 'Partial<TextProps>' },
       },
     },
+    loadingTextProps: {
+      control: 'object',
+      description: 'Optional props to be passed to the loading Text component',
+      table: {
+        type: { summary: 'Partial<TextProps>' },
+      },
+    },
   },
 };
 
@@ -177,6 +184,17 @@ export const IsLoading: Story = {
     children: 'Submit',
     isLoading: true,
     loadingText: 'Submitting...',
+  },
+};
+
+export const loadingTextProps: Story = {
+  args: {
+    children: 'Submit',
+    isLoading: true,
+    loadingText: 'Submitting...',
+    loadingTextProps: {
+      variant: TextVariant.BodySm,
+    },
   },
 };
 
