@@ -5,6 +5,7 @@ import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { Icon, IconName, IconSize } from '../Icon';
 import { TextColor } from '../Text';
 import { AvatarBase } from './AvatarBase';
+import { SAMPLE_AVATARBASE_URIS } from './AvatarBase.dev';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarBase> = {
@@ -156,12 +157,26 @@ export const Children: Story = {
     <div className="flex items-center gap-2">
       {/* Text */}
       <AvatarBase fallbackText="A" />
-      {/* Image */}
+      {/* Image - Network/Token/Favicon */}
+      <AvatarBase shape={AvatarBaseShape.Square}>
+        <img
+          src={SAMPLE_AVATARBASE_URIS[0]}
+          alt="Eth"
+          className="h-full w-full object-contain"
+        />
+      </AvatarBase>
       <AvatarBase>
         <img
-          src="https://cryptologos.cc/logos/avalanche-avax-logo.png?v=040"
-          alt="Avalanche"
-          className="h-full w-full object-cover"
+          src={SAMPLE_AVATARBASE_URIS[0]}
+          alt="Eth"
+          className="h-full w-full object-contain"
+        />
+      </AvatarBase>
+      <AvatarBase>
+        <img
+          src={SAMPLE_AVATARBASE_URIS[1]}
+          alt="Eth"
+          className="h-full w-full object-contain"
         />
       </AvatarBase>
       {/* Icon */}

@@ -1,18 +1,17 @@
 import type { ComponentProps } from 'react';
 
-import { AvatarFaviconSize } from '../../types';
 import { AvatarBaseProps } from '../AvatarBase';
 
 export type AvatarFaviconProps = Omit<
   ComponentProps<'img'>,
   'children' | 'size'
 > &
-  Omit<AvatarBaseProps, 'children' | 'size'> & {
+  Omit<AvatarBaseProps, 'children'> & {
     /**
-     * Required name of the dapp
+     * Optional name of the dapp
      * Used as alt text for image and first letter is used as fallback if no fallbackText provided
      */
-    name: string;
+    name?: string;
     /**
      * Optional URL for the dapp favicon/logo
      * When provided, displays the image instead of fallback text
@@ -23,9 +22,4 @@ export type AvatarFaviconProps = Omit<
      * Useful for overriding the default alt text which is the dapp name
      */
     imageProps?: ComponentProps<'img'>;
-    /**
-     * Optional prop to control the size of the avatar
-     * @default AvatarFaviconSize.Md
-     */
-    size?: AvatarFaviconSize;
   };

@@ -12,7 +12,7 @@ describe('AvatarNetwork Component', () => {
       <AvatarNetwork
         src={remoteImageSrc}
         testID="avatar-base"
-        imageProps={{ testID: 'image-or-svg' }}
+        imageOrSvgProps={{ imageProps: { testID: 'image-or-svg' } }}
       />,
     );
 
@@ -34,9 +34,13 @@ describe('AvatarNetwork Component', () => {
       <AvatarNetwork
         src={remoteImageSrc}
         fallbackText={fallback}
-        onImageError={onImageErrorMock}
+        imageOrSvgProps={{
+          onImageError: onImageErrorMock,
+          imageProps: {
+            testID: 'image-or-svg',
+          },
+        }}
         testID="avatar-base"
-        imageProps={{ testID: 'image-or-svg' }}
       />,
     );
     const imageOrSvg = getByTestId('image-or-svg');
@@ -48,7 +52,7 @@ describe('AvatarNetwork Component', () => {
     expect(onImageErrorMock).toHaveBeenCalledWith(errorEvent);
 
     const avatarBase = getByTestId('avatar-base');
-    expect(avatarBase.props.children[1].props.children).toStrictEqual(fallback);
+    expect(avatarBase.props.children.props.children).toStrictEqual(fallback);
   });
 
   it('updates fallback text on svg error when fallbackText is provided', () => {
@@ -58,9 +62,13 @@ describe('AvatarNetwork Component', () => {
       <AvatarNetwork
         src={remoteSvgSrc}
         fallbackText={fallback}
-        onSvgError={onSvgErrorMock}
+        imageOrSvgProps={{
+          onSvgError: onSvgErrorMock,
+          imageProps: {
+            testID: 'image-or-svg',
+          },
+        }}
         testID="avatar-base"
-        imageProps={{ testID: 'image-or-svg' }}
       />,
     );
     const imageOrSvg = getByTestId('image-or-svg');
@@ -71,7 +79,7 @@ describe('AvatarNetwork Component', () => {
     expect(onSvgErrorMock).toHaveBeenCalledTimes(1);
     expect(onSvgErrorMock).toHaveBeenCalledWith(errorEvent);
     const avatarBase = getByTestId('avatar-base');
-    expect(avatarBase.props.children[1].props.children).toStrictEqual(fallback);
+    expect(avatarBase.props.children.props.children).toStrictEqual(fallback);
   });
 
   it('computes backupFallbackText from name when fallbackText is not provided', () => {
@@ -82,7 +90,11 @@ describe('AvatarNetwork Component', () => {
         src={remoteImageSrc}
         name="Example"
         testID="avatar-base"
-        imageProps={{ testID: 'image-or-svg' }}
+        imageOrSvgProps={{
+          imageProps: {
+            testID: 'image-or-svg',
+          },
+        }}
       />,
     );
     const imageOrSvg = getByTestId('image-or-svg');
@@ -91,7 +103,7 @@ describe('AvatarNetwork Component', () => {
     fireEvent(imageOrSvg, 'onImageError', errorEvent);
 
     const avatarBase = getByTestId('avatar-base');
-    expect(avatarBase.props.children[1].props.children).toStrictEqual('E');
+    expect(avatarBase.props.children.props.children).toStrictEqual('E');
   });
 
   it('passes additional AvatarBase props correctly', () => {
@@ -101,7 +113,11 @@ describe('AvatarNetwork Component', () => {
         src={remoteImageSrc}
         style={customStyle}
         testID="avatar-base"
-        imageProps={{ testID: 'image-or-svg' }}
+        imageOrSvgProps={{
+          imageProps: {
+            testID: 'image-or-svg',
+          },
+        }}
       />,
     );
     const avatarBase = getByTestId('avatar-base');

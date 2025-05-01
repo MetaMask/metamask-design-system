@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@metamask/design-system-twrnc-preset": "workspace:^",
+    "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.4.0",
     "@solana/addresses": "^2.1.0",
     "@testing-library/react-hooks": "^8.0.1",
@@ -57,7 +58,7 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.23.3",
-    "@metamask/auto-changelog": "^5.0.1",
+    "@metamask/auto-changelog": "^5.0.2",
     "@storybook/react-native": "6.5",
     "@testing-library/react-native": "^12.8.1",
     "@types/babel__preset-env": "^7",

@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
-import { Image, ImageSourcePropType, View } from 'react-native';
+import { View } from 'react-native';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
+import ImageOrSvg from '../temp-components/ImageOrSvg';
 import Icon, { IconName } from '../Icon';
 import AvatarBase from './AvatarBase';
+import { SAMPLE_AVATARBASE_URIS } from './AvatarBase.dev';
 import type { AvatarBaseProps } from './AvatarBase.types';
 
 const meta: Meta<AvatarBaseProps> = {
@@ -30,16 +32,6 @@ const meta: Meta<AvatarBaseProps> = {
 export default meta;
 
 type Story = StoryObj<AvatarBaseProps>;
-const storyImageSource: ImageSourcePropType = {
-  uri: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
-};
-const TestImage = (
-  <Image
-    source={storyImageSource}
-    style={{ width: '100%', height: '100%' }}
-    resizeMode="contain"
-  />
-);
 
 export const Default: Story = {
   args: {
@@ -48,10 +40,23 @@ export const Default: Story = {
     fallbackText: '',
     twClassName: '',
   },
-  render: (args) => <AvatarBase {...args}>{TestImage}</AvatarBase>,
+  render: (args) => (
+    <AvatarBase {...args}>
+      {
+        <ImageOrSvg
+          src={SAMPLE_AVATARBASE_URIS[0]}
+          width="100%"
+          height="100%"
+          imageProps={{
+            resizeMode: 'contain',
+          }}
+        />
+      }
+    </AvatarBase>
+  ),
 };
 
-export const Sizes: Story = {
+export const Size: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       {Object.keys(AvatarBaseSize).map((sizeKey) => (
@@ -74,7 +79,7 @@ export const Sizes: Story = {
   ),
 };
 
-export const Shapes: Story = {
+export const Shape: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       {Object.keys(AvatarBaseShape).map((shapeKey) => (
@@ -84,35 +89,80 @@ export const Shapes: Story = {
             shape={AvatarBaseShape[shapeKey as keyof typeof AvatarBaseShape]}
             size={AvatarBaseSize.Xs}
           >
-            {TestImage}
+            {
+              <ImageOrSvg
+                src={SAMPLE_AVATARBASE_URIS[0]}
+                width="100%"
+                height="100%"
+                imageProps={{
+                  resizeMode: 'contain',
+                }}
+              />
+            }
           </AvatarBase>
           <AvatarBase
             key={`${shapeKey}-${AvatarBaseSize.Sm}`}
             shape={AvatarBaseShape[shapeKey as keyof typeof AvatarBaseShape]}
             size={AvatarBaseSize.Sm}
           >
-            {TestImage}
+            {
+              <ImageOrSvg
+                src={SAMPLE_AVATARBASE_URIS[0]}
+                width="100%"
+                height="100%"
+                imageProps={{
+                  resizeMode: 'contain',
+                }}
+              />
+            }
           </AvatarBase>
           <AvatarBase
             key={`${shapeKey}-${AvatarBaseSize.Md}`}
             shape={AvatarBaseShape[shapeKey as keyof typeof AvatarBaseShape]}
             size={AvatarBaseSize.Md}
           >
-            {TestImage}
+            {
+              <ImageOrSvg
+                src={SAMPLE_AVATARBASE_URIS[0]}
+                width="100%"
+                height="100%"
+                imageProps={{
+                  resizeMode: 'contain',
+                }}
+              />
+            }
           </AvatarBase>
           <AvatarBase
             key={`${shapeKey}-${AvatarBaseSize.Lg}`}
             shape={AvatarBaseShape[shapeKey as keyof typeof AvatarBaseShape]}
             size={AvatarBaseSize.Lg}
           >
-            {TestImage}
+            {
+              <ImageOrSvg
+                src={SAMPLE_AVATARBASE_URIS[0]}
+                width="100%"
+                height="100%"
+                imageProps={{
+                  resizeMode: 'contain',
+                }}
+              />
+            }
           </AvatarBase>
           <AvatarBase
             key={`${shapeKey}-${AvatarBaseSize.Xl}`}
             shape={AvatarBaseShape[shapeKey as keyof typeof AvatarBaseShape]}
             size={AvatarBaseSize.Xl}
           >
-            {TestImage}
+            {
+              <ImageOrSvg
+                src={SAMPLE_AVATARBASE_URIS[0]}
+                width="100%"
+                height="100%"
+                imageProps={{
+                  resizeMode: 'contain',
+                }}
+              />
+            }
           </AvatarBase>
         </View>
       ))}
@@ -133,12 +183,41 @@ export const Children: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <AvatarBase fallbackText="A" />
+      <AvatarBase shape={AvatarBaseShape.Square}>
+        {
+          <ImageOrSvg
+            src={SAMPLE_AVATARBASE_URIS[0]}
+            width="100%"
+            height="100%"
+            imageProps={{
+              resizeMode: 'contain',
+            }}
+          />
+        }
+      </AvatarBase>
       <AvatarBase>
-        <Image
-          source={storyImageSource}
-          style={{ width: '100%', height: '100%' }}
-          resizeMode="contain"
-        />
+        {
+          <ImageOrSvg
+            src={SAMPLE_AVATARBASE_URIS[0]}
+            width="100%"
+            height="100%"
+            imageProps={{
+              resizeMode: 'contain',
+            }}
+          />
+        }
+      </AvatarBase>
+      <AvatarBase>
+        {
+          <ImageOrSvg
+            src={SAMPLE_AVATARBASE_URIS[1]}
+            width="100%"
+            height="100%"
+            imageProps={{
+              resizeMode: 'contain',
+            }}
+          />
+        }
       </AvatarBase>
       <AvatarBase>
         <Icon name={IconName.User} />

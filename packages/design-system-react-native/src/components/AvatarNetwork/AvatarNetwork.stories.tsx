@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { AvatarNetworkSize } from '../../types';
 import AvatarNetwork from './AvatarNetwork';
-import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.constants';
+import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev';
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
 
 const meta: Meta<AvatarNetworkProps> = {

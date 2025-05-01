@@ -54,7 +54,7 @@ const TextStory: React.FC<TextProps> = ({ color, ...props }) => {
   return (
     <View
       style={[
-        tw`p-4 ${
+        tw`${
           color?.endsWith('-inverse')
             ? color.replace('inverse', 'default').replace('text', 'bg')
             : 'bg-background-default'

@@ -32,12 +32,10 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
 
     const mergedClassName = twMerge(
       // Base styles
-      'inline-flex items-center justify-center',
+      'inline-flex items-center justify-center overflow-hidden bg-muted',
       shape === AvatarBaseShape.Circle
         ? 'rounded-full'
         : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size],
-      'bg-muted',
-      'overflow-hidden',
       // Size
       hasBorder
         ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size]
@@ -50,7 +48,7 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
 
     return (
       <Component ref={ref} className={mergedClassName} style={style} {...props}>
-        {children || (
+        {fallbackText ? (
           <Text
             variant={TextVariant.BodySm}
             fontWeight={FontWeight.Medium}
@@ -62,6 +60,8 @@ export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
             {/* asChild prop renders Text component as a span, it does not create an additional element */}
             <span>{fallbackText}</span>
           </Text>
+        ) : (
+          children
         )}
       </Component>
     );
