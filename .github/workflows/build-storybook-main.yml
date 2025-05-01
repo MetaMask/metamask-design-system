@@ -10,12 +10,9 @@ on:
         required: true
 
 jobs:
-  build-deploy-storybook:
-    name: Build and Deploy Storybook
-    permissions:
-      contents: write
+  build:
+    name: Build Storybook
     runs-on: ubuntu-latest
-    environment: github-pages
     defaults:
       run:
         working-directory: apps/storybook-react
@@ -34,10 +31,25 @@ jobs:
       - name: Build Storybook
         run: yarn build-storybook
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@de7ea6f8efb354206b205ef54722213d99067935
+      - name: Upload artifact
+        id: upload
+        uses: actions/upload-pages-artifact@v3
         with:
-          personal_token: ${{ secrets.PUBLISH_STORYBOOK_TOKEN }}
-          publish_dir: apps/storybook-react/storybook-static
-          destination_dir: .
-          force_orphan: true
+          name: github-pages
+          path: apps/storybook-react/storybook-static
+          retention-days: 1
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
