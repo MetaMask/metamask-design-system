@@ -3,20 +3,13 @@ import {
   withThemeProvider,
   Theme,
 } from '@metamask/design-system-twrnc-preset';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import ButtonBase from '../../../ButtonBase';
-import type { IconProps } from '../../../Icon';
 import { IconColor, IconSize } from '../../../Icon';
-import type { SpinnerProps } from '../../../temp-components/Spinner';
-import type { TextProps } from '../../../Text/Text.types';
 import { TextVariant, FontWeight } from '../../../Text';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
-import {
-  generateButtonPrimaryContainerClassNames,
-  generateButtonPrimaryTextClassNames,
-} from './ButtonPrimary.utilities';
 
 const ButtonPrimaryBase = ({
   children,
@@ -29,60 +22,43 @@ const ButtonPrimaryBase = ({
   isLoading = false,
   onPressIn,
   onPressOut,
-  twClassName,
+  twClassName = '',
   style,
   ...props
 }: ButtonPrimaryProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
-  const twContainerClassNames = useMemo(() => {
-    return generateButtonPrimaryContainerClassNames({
-      isPressed,
-      isDanger,
-      isInverse,
-      isLoading,
-      twClassName,
-    });
-  }, [isPressed, isDanger, isInverse, isLoading, twClassName]);
+  const twContainerClassNames = `
+    ${
+      isInverse && isDanger
+        ? isPressed || isLoading
+          ? 'bg-background-defaultPressed'
+          : 'bg-background-default'
+        : isDanger
+          ? isPressed || isLoading
+            ? 'bg-error-defaultPressed'
+            : 'bg-error-default'
+          : isInverse
+            ? isPressed || isLoading
+              ? 'bg-background-defaultPressed'
+              : 'bg-background-default'
+            : isPressed || isLoading
+              ? 'bg-primary-defaultPressed'
+              : 'bg-primary-default'
+    }
+    ${twClassName}
+  `;
 
-  const twTextClassNames = useMemo(() => {
-    return generateButtonPrimaryTextClassNames({
-      isPressed,
-      isDanger,
-      isInverse,
-      isLoading,
-    });
-  }, [isPressed, isDanger, isInverse, isLoading]);
-
-  const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
-    variant: TextVariant.BodyMd,
-    fontWeight: FontWeight.Medium,
-    numberOfLines: 1,
-    ellipsizeMode: 'clip',
-    ...textProps,
-    twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
-  };
-  const finalStartIconProps: Partial<IconProps> = {
-    size: IconSize.Sm,
-    testID: 'start-icon',
-    ...startIconProps,
-    twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
-  };
-
-  const finalEndIconProps: Partial<IconProps> = {
-    size: IconSize.Sm,
-    testID: 'end-icon',
-    ...endIconProps,
-    twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
-  };
-
-  const finalSpinnerProps: SpinnerProps = {
-    color: twTextClassNames as IconColor,
-    loadingTextProps: {
-      twClassName: twTextClassNames,
-    },
-    ...spinnerProps,
-  };
+  const twTextClassNames =
+    isInverse && isDanger
+      ? isPressed || isLoading
+        ? 'text-error-defaultPressed'
+        : 'text-error-default'
+      : isDanger
+        ? 'text-primary-inverse'
+        : isInverse
+          ? 'text-text-default'
+          : 'text-primary-inverse';
 
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);
@@ -96,10 +72,33 @@ const ButtonPrimaryBase = ({
 
   return (
     <ButtonBase
-      textProps={finalTextProps}
-      spinnerProps={finalSpinnerProps}
-      startIconProps={finalStartIconProps}
-      endIconProps={finalEndIconProps}
+      textProps={{
+        variant: TextVariant.BodyMd,
+        fontWeight: FontWeight.Medium,
+        numberOfLines: 1,
+        ellipsizeMode: 'clip',
+        ...textProps,
+        twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
+      }}
+      spinnerProps={{
+        color: twTextClassNames as IconColor,
+        loadingTextProps: {
+          twClassName: twTextClassNames,
+        },
+        ...spinnerProps,
+      }}
+      startIconProps={{
+        size: IconSize.Sm,
+        testID: 'start-icon',
+        ...startIconProps,
+        twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
+      }}
+      endIconProps={{
+        size: IconSize.Sm,
+        testID: 'end-icon',
+        ...endIconProps,
+        twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
+      }}
       isLoading={isLoading}
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}

@@ -1,249 +1,190 @@
-import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
-
-import { IconName } from '../../../Icon';
+import { render, fireEvent } from '@testing-library/react-native';
+import { renderHook } from '@testing-library/react-hooks';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import ButtonTertiary from './ButtonTertiary';
-import {
-  generateButtonTertiaryContainerClassNames,
-  generateButtonTertiaryTextClassNames,
-} from './ButtonTertiary.utilities';
+import { ButtonBaseSize } from '../../../../types';
 
 describe('ButtonTertiary', () => {
-  describe('generateButtonTertiaryContainerClassNames', () => {
-    it('returns correct class names for default state', () => {
-      const classNames = generateButtonTertiaryContainerClassNames({});
-      expect(classNames).toContain(
-        'bg-transparent border-0 border-transparent',
-      );
-    });
+  let tw: ReturnType<typeof useTailwind>;
 
-    it('returns correct class names for inverse mode', () => {
-      const classNames = generateButtonTertiaryContainerClassNames({
-        isInverse: true,
-      });
-      expect(classNames).toContain(
-        'bg-transparent border-[1.5px] border-primary-inverse',
-      );
-    });
-
-    it('returns correct class names for danger mode', () => {
-      const classNames = generateButtonTertiaryContainerClassNames({
-        isDanger: true,
-      });
-      expect(classNames).toContain(
-        'bg-transparent border-0 border-transparent',
-      );
-    });
-
-    it('returns correct class names for pressed danger mode', () => {
-      const classNames = generateButtonTertiaryContainerClassNames({
-        isDanger: true,
-        isPressed: true,
-      });
-      expect(classNames).toContain(
-        'bg-error-mutedPressed border-0 border-error-mutedPressed',
-      );
-    });
-
-    it('returns correct class names for loading danger mode', () => {
-      const classNames = generateButtonTertiaryContainerClassNames({
-        isDanger: true,
-        isLoading: true,
-      });
-      expect(classNames).toContain(
-        'bg-error-mutedPressed border-0 border-error-mutedPressed',
-      );
-    });
-
-    it('returns correct class names for inverse and danger mode', () => {
-      const classNames = generateButtonTertiaryContainerClassNames({
-        isInverse: true,
-        isDanger: true,
-      });
-      expect(classNames).toContain(
-        'bg-background-default border-0 border-background-default',
-      );
-    });
-
-    it('returns correct class names for inverse and danger mode when pressed', () => {
-      const classNames = generateButtonTertiaryContainerClassNames({
-        isInverse: true,
-        isDanger: true,
-        isPressed: true,
-      });
-      expect(classNames).toContain(
-        'bg-background-defaultPressed border-0 border-background-defaultPressed',
-      );
-    });
-
-    it('returns correct class names for inverse and danger mode when loading', () => {
-      const classNames = generateButtonTertiaryContainerClassNames({
-        isInverse: true,
-        isDanger: true,
-        isLoading: true,
-      });
-      expect(classNames).toContain(
-        'bg-background-defaultPressed border-0 border-background-defaultPressed',
-      );
-    });
-
-    it('returns correct class names for pressed inverse mode', () => {
-      const classNames = generateButtonTertiaryContainerClassNames({
-        isInverse: true,
-        isPressed: true,
-      });
-      expect(classNames).toContain(
-        'bg-background-pressed border-[1.5px] border-primary-inverse',
-      );
-    });
-
-    it('appends additional Tailwind classes', () => {
-      const classNames = generateButtonTertiaryContainerClassNames({
-        isInverse: true,
-        twClassName: 'rounded-lg',
-      });
-      expect(classNames).toContain(
-        'bg-transparent border-[1.5px] border-primary-inverse rounded-lg',
-      );
-    });
-  });
-  describe('generateButtonTertiaryTextClassNames', () => {
-    it('returns correct class name for default state', () => {
-      const classNames = generateButtonTertiaryTextClassNames({});
-      expect(classNames).toContain('text-primary-default');
-    });
-
-    it('returns correct class name for danger mode', () => {
-      const classNames = generateButtonTertiaryTextClassNames({
-        isDanger: true,
-      });
-      expect(classNames).toContain('text-error-default');
-    });
-
-    it('returns correct class name for danger mode when pressed', () => {
-      const classNames = generateButtonTertiaryTextClassNames({
-        isDanger: true,
-        isPressed: true,
-      });
-      expect(classNames).toContain('text-error-defaultPressed');
-    });
-
-    it('returns correct class name for danger mode when loading', () => {
-      const classNames = generateButtonTertiaryTextClassNames({
-        isDanger: true,
-        isLoading: true,
-      });
-      expect(classNames).toContain('text-error-defaultPressed');
-    });
-
-    it('returns correct class name for inverse mode', () => {
-      const classNames = generateButtonTertiaryTextClassNames({
-        isInverse: true,
-      });
-      expect(classNames).toContain('text-primary-inverse');
-    });
-
-    it('returns correct class name for inverse and danger mode', () => {
-      const classNames = generateButtonTertiaryTextClassNames({
-        isInverse: true,
-        isDanger: true,
-      });
-      expect(classNames).toContain('text-error-default');
-    });
-
-    it('returns correct class name for inverse and danger mode when pressed', () => {
-      const classNames = generateButtonTertiaryTextClassNames({
-        isInverse: true,
-        isDanger: true,
-        isPressed: true,
-      });
-      expect(classNames).toContain('text-error-defaultPressed');
-    });
-
-    it('returns correct class name for inverse and danger mode when loading', () => {
-      const classNames = generateButtonTertiaryTextClassNames({
-        isInverse: true,
-        isDanger: true,
-        isLoading: true,
-      });
-      expect(classNames).toContain('text-error-defaultPressed');
-    });
-
-    it('returns correct class name for pressed state', () => {
-      const classNames = generateButtonTertiaryTextClassNames({
-        isPressed: true,
-      });
-      expect(classNames).toContain('text-primary-defaultPressed');
-    });
-
-    it('returns correct class name for loading state', () => {
-      const classNames = generateButtonTertiaryTextClassNames({
-        isLoading: true,
-      });
-      expect(classNames).toContain('text-primary-defaultPressed');
-    });
+  beforeAll(() => {
+    const { result } = renderHook(() => useTailwind());
+    tw = result.current;
   });
 
-  describe('ButtonTertiary component', () => {
-    it('renders correctly with default props', () => {
-      const { getByTestId } = render(
-        <ButtonTertiary>Default Button</ButtonTertiary>,
-      );
-      expect(getByTestId('button-tertiary')).not.toBeNull();
-    });
+  function flattenStyles(styleProp: any): Record<string, any>[] {
+    if (styleProp == null) {
+      return [];
+    }
+    if (Array.isArray(styleProp)) {
+      return styleProp.flatMap((item) => flattenStyles(item));
+    }
+    if (typeof styleProp === 'object') {
+      return [styleProp];
+    }
+    return [];
+  }
 
-    it('shows a spinner when `isLoading` is true', () => {
-      const { getByTestId } = render(
-        <ButtonTertiary isLoading loadingText="Loading...">
-          Default Button
-        </ButtonTertiary>,
-      );
+  function expectBackground(styleProp: any, tailwindClass: string) {
+    const expected = tw`${tailwindClass}`;
+    const all = flattenStyles(styleProp);
+    expect(all).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ backgroundColor: expected.backgroundColor }),
+      ]),
+    );
+  }
 
-      expect(getByTestId('spinner-container')).toBeDefined();
-    });
+  function expectBorder(styleProp: any, tailwindClass: string) {
+    const expected = tw`${tailwindClass}`;
+    const all = flattenStyles(styleProp);
+    expect(all).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ borderColor: expected.borderColor }),
+      ]),
+    );
+  }
 
-    it('renders start and end icons correctly', () => {
-      const { getByTestId } = render(
-        <ButtonTertiary
-          startIconName={IconName.Add}
-          endIconName={IconName.ArrowRight}
-        >
-          Button with Icons
-        </ButtonTertiary>,
-      );
+  it('renders default (transparent bg + transparent border)', () => {
+    const { getByTestId } = render(
+      <ButtonTertiary size={ButtonBaseSize.Lg}>Default</ButtonTertiary>,
+    );
+    const btn = getByTestId('button-tertiary');
+    expectBackground(btn.props.style, 'bg-transparent');
+    expectBorder(btn.props.style, 'border-transparent');
+  });
 
-      expect(getByTestId('content-container')).toBeDefined();
-    });
+  it('renders danger (transparent bg + transparent border)', () => {
+    const { getByTestId } = render(
+      <ButtonTertiary isDanger>Danger</ButtonTertiary>,
+    );
+    const btn = getByTestId('button-tertiary');
+    expectBackground(btn.props.style, 'bg-transparent');
+    expectBorder(btn.props.style, 'border-transparent');
+  });
 
-    it('triggers onPress when clicked', () => {
-      const onPressMock = jest.fn();
-      const { getByText } = render(
-        <ButtonTertiary onPress={onPressMock}>Press Me</ButtonTertiary>,
-      );
+  it('renders inverse (transparent bg + primary-inverse border)', () => {
+    const { getByTestId } = render(
+      <ButtonTertiary isInverse>Inverse</ButtonTertiary>,
+    );
+    const btn = getByTestId('button-tertiary');
+    expectBackground(btn.props.style, 'bg-transparent');
+    expectBorder(btn.props.style, 'border-primary-inverse');
+  });
 
-      const button = getByText('Press Me');
-      fireEvent.press(button);
-      expect(onPressMock).toHaveBeenCalledTimes(1);
-    });
+  it('renders inverse+danger (bg-background-default + border-background-default)', () => {
+    const { getByTestId } = render(
+      <ButtonTertiary isInverse isDanger>
+        Both
+      </ButtonTertiary>,
+    );
+    const btn = getByTestId('button-tertiary');
+    expectBackground(btn.props.style, 'bg-background-default');
+    expectBorder(btn.props.style, 'border-background-default');
+  });
 
-    it('handles press in and out states', () => {
-      const onPressInMock = jest.fn();
-      const onPressOutMock = jest.fn();
-      const { getByText } = render(
-        <ButtonTertiary onPressIn={onPressInMock} onPressOut={onPressOutMock}>
-          Press Me
-        </ButtonTertiary>,
-      );
+  it('toggles pressed styles (default)', () => {
+    const { getByTestId } = render(<ButtonTertiary>Press me</ButtonTertiary>);
+    const btn = getByTestId('button-tertiary');
 
-      const button = getByText('Press Me');
+    fireEvent(btn, 'pressIn');
+    expectBackground(btn.props.style, 'bg-background-pressed');
+    expectBorder(btn.props.style, 'border-background-pressed');
 
-      // Simulate press in
-      fireEvent(button, 'pressIn');
-      expect(onPressInMock).toHaveBeenCalledTimes(1);
+    fireEvent(btn, 'pressOut');
+    expectBackground(btn.props.style, 'bg-transparent');
+    expectBorder(btn.props.style, 'border-transparent');
+  });
 
-      // Simulate press out
-      fireEvent(button, 'pressOut');
-      expect(onPressOutMock).toHaveBeenCalledTimes(1);
-    });
+  it('toggles pressed styles (danger)', () => {
+    const { getByTestId } = render(
+      <ButtonTertiary isDanger>Danger</ButtonTertiary>,
+    );
+    const btn = getByTestId('button-tertiary');
+
+    fireEvent(btn, 'pressIn');
+    expectBackground(btn.props.style, 'bg-error-mutedPressed');
+    expectBorder(btn.props.style, 'border-error-mutedPressed');
+
+    fireEvent(btn, 'pressOut');
+    expectBackground(btn.props.style, 'bg-transparent');
+    expectBorder(btn.props.style, 'border-transparent');
+  });
+
+  it('toggles pressed styles (inverse)', () => {
+    const { getByTestId } = render(
+      <ButtonTertiary isInverse>Inverse</ButtonTertiary>,
+    );
+    const btn = getByTestId('button-tertiary');
+
+    fireEvent(btn, 'pressIn');
+    expectBackground(btn.props.style, 'bg-background-pressed');
+    expectBorder(btn.props.style, 'border-primary-inverse');
+
+    fireEvent(btn, 'pressOut');
+    expectBackground(btn.props.style, 'bg-transparent');
+    expectBorder(btn.props.style, 'border-primary-inverse');
+  });
+
+  it('shows spinner + hides content when loading', () => {
+    const spinnerTW =
+      'absolute inset-0 flex items-center justify-center opacity-100';
+    const contentTW = 'flex-row items-center justify-center gap-x-2 opacity-0';
+
+    const { getByTestId } = render(
+      <ButtonTertiary isLoading spinnerProps={{ twClassName: spinnerTW }}>
+        Loading
+      </ButtonTertiary>,
+    );
+
+    const spinner = getByTestId('spinner-container');
+    const spinnerStyles = flattenStyles(spinner.props.style);
+    expect(spinnerStyles).toEqual(
+      expect.arrayContaining([expect.objectContaining(tw`${spinnerTW}`)]),
+    );
+
+    const content = getByTestId('content-container');
+    const contentStyles = flattenStyles(content.props.style);
+    expect(contentStyles).toEqual(
+      expect.arrayContaining([expect.objectContaining(tw`${contentTW}`)]),
+    );
+
+    expect(
+      getByTestId('button-tertiary').props.accessibilityState.disabled,
+    ).toBe(true);
+  });
+
+  it('renders danger+loading', () => {
+    const { getByTestId } = render(
+      <ButtonTertiary isDanger isLoading>
+        Hi
+      </ButtonTertiary>,
+    );
+    const btn = getByTestId('button-tertiary');
+    expectBackground(btn.props.style, 'bg-error-mutedPressed');
+    expectBorder(btn.props.style, 'border-error-mutedPressed');
+  });
+
+  it('renders inverse+loading', () => {
+    const { getByTestId } = render(
+      <ButtonTertiary isInverse isLoading>
+        Hi
+      </ButtonTertiary>,
+    );
+    const btn = getByTestId('button-tertiary');
+    expectBackground(btn.props.style, 'bg-background-pressed');
+    expectBorder(btn.props.style, 'border-primary-inverse');
+  });
+
+  it('renders inverse+danger+loading', () => {
+    const { getByTestId } = render(
+      <ButtonTertiary isInverse isDanger isLoading>
+        Hi
+      </ButtonTertiary>,
+    );
+    const btn = getByTestId('button-tertiary');
+    expectBackground(btn.props.style, 'bg-background-defaultPressed');
+    expectBorder(btn.props.style, 'border-background-defaultPressed');
   });
 });

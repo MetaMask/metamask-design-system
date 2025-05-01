@@ -1,246 +1,171 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconName } from '../../../Icon';
+import { ButtonBaseSize } from '../../../../types';
 import ButtonPrimary from './ButtonPrimary';
-import {
-  generateButtonPrimaryContainerClassNames,
-  generateButtonPrimaryTextClassNames,
-} from './ButtonPrimary.utilities';
 
 describe('ButtonPrimary', () => {
-  describe('generateButtonPrimaryContainerClassNames', () => {
-    it('returns correct class names for default state', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({});
-      expect(classNames).toContain('bg-primary-default');
-    });
+  let tw: ReturnType<typeof useTailwind>;
 
-    it('returns correct class names when pressed', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isPressed: true,
-      });
-      expect(classNames).toContain('bg-primary-defaultPressed');
-    });
-
-    it('returns correct class names when loading', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isLoading: true,
-      });
-      expect(classNames).toContain('bg-primary-defaultPressed');
-    });
-
-    it('returns correct class names for inverse mode', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isInverse: true,
-      });
-      expect(classNames).toContain('bg-background-default');
-    });
-
-    it('returns correct class names for inverse mode when pressed', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isInverse: true,
-        isPressed: true,
-      });
-      expect(classNames).toContain('bg-background-defaultPressed');
-    });
-
-    it('returns correct class names for inverse mode when loading', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isInverse: true,
-        isLoading: true,
-      });
-      expect(classNames).toContain('bg-background-defaultPressed');
-    });
-
-    it('returns correct class names for danger mode', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isDanger: true,
-      });
-      expect(classNames).toContain('bg-error-default');
-    });
-
-    it('returns correct class names for danger mode when pressed', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isDanger: true,
-        isPressed: true,
-      });
-      expect(classNames).toContain('bg-error-defaultPressed');
-    });
-
-    it('returns correct class names for danger mode when loading', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isDanger: true,
-        isLoading: true,
-      });
-      expect(classNames).toContain('bg-error-defaultPressed');
-    });
-
-    it('returns correct class names for inverse and danger mode', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isInverse: true,
-        isDanger: true,
-      });
-      expect(classNames).toContain('bg-background-default');
-    });
-
-    it('returns correct class names for inverse and danger mode when pressed', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isInverse: true,
-        isDanger: true,
-        isPressed: true,
-      });
-      expect(classNames).toContain('bg-background-defaultPressed');
-    });
-
-    it('returns correct class names for inverse and danger mode when loading', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isInverse: true,
-        isDanger: true,
-        isLoading: true,
-      });
-      expect(classNames).toContain('bg-background-defaultPressed');
-    });
-
-    it('appends additional Tailwind class names', () => {
-      const classNames = generateButtonPrimaryContainerClassNames({
-        isPressed: true,
-        twClassName: 'px-4',
-      });
-      expect(classNames).toContain('bg-primary-defaultPressed px-4');
-    });
+  beforeAll(() => {
+    const { result } = renderHook(() => useTailwind());
+    tw = result.current;
   });
-  describe('generateButtonPrimaryTextClassNames', () => {
-    it('returns correct class name for default state', () => {
-      const classNames = generateButtonPrimaryTextClassNames({});
-      expect(classNames).toBe('text-primary-inverse');
-    });
 
-    it('returns correct class name for inverse mode', () => {
-      const classNames = generateButtonPrimaryTextClassNames({
-        isInverse: true,
-      });
-      expect(classNames).toBe('text-text-default');
-    });
+  function flattenStyles(styleProp: any): Record<string, any>[] {
+    if (styleProp == null) {
+      return [];
+    }
+    if (Array.isArray(styleProp)) {
+      // flatten one level deep
+      return styleProp.flatMap((item) => flattenStyles(item));
+    }
+    if (typeof styleProp === 'object') {
+      return [styleProp];
+    }
+    return [];
+  }
 
-    it('returns correct class name for danger mode', () => {
-      const classNames = generateButtonPrimaryTextClassNames({
-        isDanger: true,
-      });
-      expect(classNames).toBe('text-primary-inverse');
-    });
+  function expectBackground(styleProp: any, tailwindClass: string) {
+    const expected = tw`${tailwindClass}`;
+    const allStyles = flattenStyles(styleProp);
+    expect(allStyles).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          backgroundColor: expected.backgroundColor,
+        }),
+      ]),
+    );
+  }
 
-    it('returns correct class name for inverse and danger mode', () => {
-      const classNames = generateButtonPrimaryTextClassNames({
-        isInverse: true,
-        isDanger: true,
-      });
-      expect(classNames).toBe('text-error-default');
-    });
-
-    it('returns correct class name for inverse and danger mode when pressed', () => {
-      const classNames = generateButtonPrimaryTextClassNames({
-        isInverse: true,
-        isDanger: true,
-        isPressed: true,
-      });
-      expect(classNames).toBe('text-error-defaultPressed');
-    });
-
-    it('returns correct class name for inverse and danger mode when loading', () => {
-      const classNames = generateButtonPrimaryTextClassNames({
-        isInverse: true,
-        isDanger: true,
-        isLoading: true,
-      });
-      expect(classNames).toBe('text-error-defaultPressed');
-    });
-
-    it('returns correct class name for pressed state', () => {
-      const classNames = generateButtonPrimaryTextClassNames({
-        isPressed: true,
-      });
-      expect(classNames).toBe('text-primary-inverse');
-    });
-
-    it('returns correct class name for loading state', () => {
-      const classNames = generateButtonPrimaryTextClassNames({
-        isLoading: true,
-      });
-      expect(classNames).toBe('text-primary-inverse');
-    });
+  it('renders default background', () => {
+    const { getByTestId } = render(
+      <ButtonPrimary size={ButtonBaseSize.Lg}>Press me</ButtonPrimary>,
+    );
+    const btn = getByTestId('button-primary');
+    expectBackground(btn.props.style, 'bg-primary-default');
   });
-  describe('ButtonPrimary component', () => {
-    it('renders correctly with default props', () => {
-      const { getByTestId } = render(
-        <ButtonPrimary>Default Button</ButtonPrimary>,
-      );
-      expect(getByTestId('button-primary')).not.toBeNull();
-    });
 
-    it('shows a spinner when `isLoading` is true', () => {
-      const { getByTestId } = render(
-        <ButtonPrimary isLoading loadingText="Loading...">
-          Default Button
-        </ButtonPrimary>,
-      );
+  it('renders danger background', () => {
+    const { getByTestId } = render(
+      <ButtonPrimary isDanger>Danger</ButtonPrimary>,
+    );
+    const btn = getByTestId('button-primary');
+    expectBackground(btn.props.style, 'bg-error-default');
+  });
 
-      expect(getByTestId('spinner-container')).toBeDefined();
-    });
+  it('renders inverse background', () => {
+    const { getByTestId } = render(
+      <ButtonPrimary isInverse>Inverse</ButtonPrimary>,
+    );
+    const btn = getByTestId('button-primary');
+    expectBackground(btn.props.style, 'bg-background-default');
+  });
 
-    it('renders start and end icons correctly', () => {
-      const { getByTestId } = render(
-        <ButtonPrimary
-          startIconName={IconName.Add}
-          endIconName={IconName.ArrowRight}
-        >
-          Button with Icons
-        </ButtonPrimary>,
-      );
+  it('renders inverse+danger fallback background', () => {
+    const { getByTestId } = render(
+      <ButtonPrimary isInverse isDanger>
+        Both
+      </ButtonPrimary>,
+    );
+    const btn = getByTestId('button-primary');
+    expectBackground(btn.props.style, 'bg-background-default');
+  });
 
-      expect(getByTestId('content-container')).toBeDefined();
-    });
+  it('toggles pressed styles (default)', () => {
+    const { getByTestId } = render(<ButtonPrimary>Press me</ButtonPrimary>);
+    const btn = getByTestId('button-primary');
 
-    it('triggers onPress when clicked', () => {
-      const onPressMock = jest.fn();
-      const { getByText } = render(
-        <ButtonPrimary onPress={onPressMock}>Press Me</ButtonPrimary>,
-      );
+    fireEvent(btn, 'pressIn');
+    expectBackground(btn.props.style, 'bg-primary-defaultPressed');
 
-      const button = getByText('Press Me');
-      fireEvent.press(button);
-      expect(onPressMock).toHaveBeenCalledTimes(1);
-    });
+    fireEvent(btn, 'pressOut');
+    expectBackground(btn.props.style, 'bg-primary-default');
+  });
 
-    it('handles press in and out states', () => {
-      const onPressInMock = jest.fn();
-      const onPressOutMock = jest.fn();
-      const { getByText } = render(
-        <ButtonPrimary onPressIn={onPressInMock} onPressOut={onPressOutMock}>
-          Press Me
-        </ButtonPrimary>,
-      );
+  it('toggles pressed styles (danger)', () => {
+    const { getByTestId } = render(
+      <ButtonPrimary isDanger>Danger</ButtonPrimary>,
+    );
+    const btn = getByTestId('button-primary');
 
-      const button = getByText('Press Me');
+    fireEvent(btn, 'pressIn');
+    expectBackground(btn.props.style, 'bg-error-defaultPressed');
 
-      // Simulate press in
-      fireEvent(button, 'pressIn');
-      expect(onPressInMock).toHaveBeenCalledTimes(1);
+    fireEvent(btn, 'pressOut');
+    expectBackground(btn.props.style, 'bg-error-default');
+  });
 
-      // Simulate press out
-      fireEvent(button, 'pressOut');
-      expect(onPressOutMock).toHaveBeenCalledTimes(1);
-    });
+  it('toggles pressed styles (inverse)', () => {
+    const { getByTestId } = render(
+      <ButtonPrimary isInverse>Inverse</ButtonPrimary>,
+    );
+    const btn = getByTestId('button-primary');
 
-    it('renders ButtonPrimaryBase directly when isInverse is true', () => {
-      const { getByTestId, getByText } = render(
-        <ButtonPrimary isInverse>Inverse Button</ButtonPrimary>,
-      );
+    fireEvent(btn, 'pressIn');
+    expectBackground(btn.props.style, 'bg-background-defaultPressed');
 
-      // Verify the component is rendered (ButtonBase has testID "button-primary")
-      expect(getByTestId('button-primary')).toBeTruthy();
+    fireEvent(btn, 'pressOut');
+    expectBackground(btn.props.style, 'bg-background-default');
+  });
 
-      // Optionally, check that the displayed text is correct
-      expect(getByText('Inverse Button')).toBeTruthy();
-    });
+  it('shows spinner + hides content when loading', () => {
+    const spinnerTW =
+      'absolute inset-0 flex items-center justify-center opacity-100';
+    const contentTW = 'flex-row items-center justify-center gap-x-2 opacity-0';
+
+    const { getByTestId } = render(
+      <ButtonPrimary isLoading spinnerProps={{ twClassName: spinnerTW }}>
+        Loading
+      </ButtonPrimary>,
+    );
+
+    const spinner = getByTestId('spinner-container');
+    const spinnerStyles = flattenStyles(spinner.props.style);
+    expect(spinnerStyles).toEqual(
+      expect.arrayContaining([expect.objectContaining(tw`${spinnerTW}`)]),
+    );
+
+    const content = getByTestId('content-container');
+    const contentStyles = flattenStyles(content.props.style);
+    expect(contentStyles).toEqual(
+      expect.arrayContaining([expect.objectContaining(tw`${contentTW}`)]),
+    );
+
+    expect(
+      getByTestId('button-primary').props.accessibilityState.disabled,
+    ).toBe(true);
+  });
+
+  it('renders danger+loading background', () => {
+    const { getByTestId } = render(
+      <ButtonPrimary isDanger isLoading>
+        Hi
+      </ButtonPrimary>,
+    );
+    const btn = getByTestId('button-primary');
+    expectBackground(btn.props.style, 'bg-error-defaultPressed');
+  });
+
+  it('renders inverse+loading background', () => {
+    const { getByTestId } = render(
+      <ButtonPrimary isInverse isLoading>
+        Hi
+      </ButtonPrimary>,
+    );
+    const btn = getByTestId('button-primary');
+    expectBackground(btn.props.style, 'bg-background-defaultPressed');
+  });
+
+  it('renders inverse+danger+loading background', () => {
+    const { getByTestId } = render(
+      <ButtonPrimary isInverse isDanger isLoading>
+        Hi
+      </ButtonPrimary>,
+    );
+    const btn = getByTestId('button-primary');
+    expectBackground(btn.props.style, 'bg-background-defaultPressed');
   });
 });

@@ -1,18 +1,11 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import ButtonBase from '../../../ButtonBase';
-import type { IconProps } from '../../../Icon';
 import { IconColor, IconSize } from '../../../Icon';
-import type { SpinnerProps } from '../../../temp-components/Spinner';
-import type { TextProps } from '../../../Text/Text.types';
 import { TextVariant, FontWeight } from '../../../Text';
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
-import {
-  generateButtonTertiaryContainerClassNames,
-  generateButtonTertiaryTextClassNames,
-} from './ButtonTertiary.utilities';
 
 const ButtonTertiary = ({
   children,
@@ -25,60 +18,58 @@ const ButtonTertiary = ({
   isLoading = false,
   onPressIn,
   onPressOut,
-  twClassName,
+  twClassName = '',
   style,
   ...props
 }: ButtonTertiaryProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
-  const twContainerClassNames = useMemo(() => {
-    return generateButtonTertiaryContainerClassNames({
-      isPressed,
-      isDanger,
-      isInverse,
-      isLoading,
-      twClassName,
-    });
-  }, [isPressed, isDanger, isInverse, isLoading, twClassName]);
+  const twContainerClassNames = `
+    ${
+      isInverse && isDanger
+        ? isPressed || isLoading
+          ? 'bg-background-defaultPressed'
+          : 'bg-background-default'
+        : isDanger
+          ? isPressed || isLoading
+            ? 'bg-error-mutedPressed'
+            : 'bg-transparent'
+          : isInverse
+            ? isPressed || isLoading
+              ? 'bg-background-pressed'
+              : 'bg-transparent'
+            : isPressed || isLoading
+              ? 'bg-background-pressed'
+              : 'bg-transparent'
+    }
+    ${isInverse && !isDanger ? 'border-[1.5px]' : 'border-0'}
+    ${
+      isInverse && isDanger
+        ? isPressed || isLoading
+          ? 'border-background-defaultPressed'
+          : 'border-background-default'
+        : isDanger
+          ? isPressed || isLoading
+            ? 'border-error-mutedPressed'
+            : 'border-transparent'
+          : isInverse
+            ? 'border-primary-inverse'
+            : isPressed || isLoading
+              ? 'border-background-pressed'
+              : 'border-transparent'
+    }
+  `;
 
-  const twTextClassNames = useMemo(() => {
-    return generateButtonTertiaryTextClassNames({
-      isPressed,
-      isDanger,
-      isInverse,
-      isLoading,
-    });
-  }, [isPressed, isDanger, isInverse, isLoading]);
+  const twTextClassNames = isDanger
+    ? isPressed || isLoading
+      ? 'text-error-defaultPressed'
+      : 'text-error-default'
+    : isInverse
+      ? 'text-primary-inverse'
+      : isPressed || isLoading
+        ? 'text-primary-defaultPressed'
+        : 'text-primary-default';
 
-  const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
-    variant: TextVariant.BodyMd,
-    fontWeight: FontWeight.Medium,
-    numberOfLines: 1,
-    ellipsizeMode: 'clip',
-    ...textProps,
-    twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
-  };
-  const finalStartIconProps: Partial<IconProps> = {
-    size: IconSize.Sm,
-    testID: 'start-icon',
-    ...startIconProps,
-    twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
-  };
-
-  const finalEndIconProps: Partial<IconProps> = {
-    size: IconSize.Sm,
-    testID: 'end-icon',
-    ...endIconProps,
-    twClassName: `${twTextClassNames} ${endIconProps?.twClassName ?? ''}`,
-  };
-
-  const finalSpinnerProps: SpinnerProps = {
-    color: twTextClassNames as IconColor,
-    loadingTextProps: {
-      twClassName: twTextClassNames,
-    },
-    ...spinnerProps,
-  };
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);
     onPressIn?.(event);
@@ -91,10 +82,33 @@ const ButtonTertiary = ({
 
   return (
     <ButtonBase
-      textProps={finalTextProps}
-      spinnerProps={finalSpinnerProps}
-      startIconProps={finalStartIconProps}
-      endIconProps={finalEndIconProps}
+      textProps={{
+        variant: TextVariant.BodyMd,
+        fontWeight: FontWeight.Medium,
+        numberOfLines: 1,
+        ellipsizeMode: 'clip',
+        ...textProps,
+        twClassName: `${twTextClassNames} ${textProps?.twClassName ?? ''}`,
+      }}
+      spinnerProps={{
+        color: twTextClassNames as IconColor,
+        loadingTextProps: {
+          twClassName: twTextClassNames,
+        },
+        ...spinnerProps,
+      }}
+      startIconProps={{
+        size: IconSize.Sm,
+        testID: 'start-icon',
+        ...startIconProps,
+        twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
+      }}
+      endIconProps={{
+        size: IconSize.Sm,
+        testID: 'end-icon',
+        ...endIconProps,
+        twClassName: `${twTextClassNames} ${endIconProps?.twClassName ?? ''}`,
+      }}
       isLoading={isLoading}
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}

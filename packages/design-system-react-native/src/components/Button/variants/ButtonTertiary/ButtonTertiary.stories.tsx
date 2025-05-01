@@ -8,7 +8,7 @@ import ButtonTertiary from './ButtonTertiary';
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
 const meta: Meta<ButtonTertiaryProps> = {
-  title: 'Components/ButtonTertiary',
+  title: 'Components/Button/variants/ButtonTertiary',
   component: ButtonTertiary,
   argTypes: {
     children: {

@@ -8,7 +8,7 @@ import ButtonSecondary from './ButtonSecondary';
 import type { ButtonSecondaryProps } from './ButtonSecondary.types';
 
 const meta: Meta<ButtonSecondaryProps> = {
-  title: 'Components/ButtonSecondary',
+  title: 'Components/Button/variants/ButtonSecondary',
   component: ButtonSecondary,
   argTypes: {
     children: {
