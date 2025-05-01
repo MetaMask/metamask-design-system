@@ -115,6 +115,34 @@ export enum BadgeStatusSize {
 }
 
 /**
+ * BadgeWrapper - positionAnchorShape
+ */
+export enum BadgeWrapperPositionAnchorShape {
+  Rectangular = 'Rectangular',
+  Circular = 'Circular',
+}
+
+/**
+ * BadgeWrapper - position.
+ */
+export enum BadgeWrapperPosition {
+  TopRight = 'TopRight',
+  BottomRight = 'BottomRight',
+  BottomLeft = 'BottomLeft',
+  TopLeft = 'TopLeft',
+}
+
+/**
+ * BadgeWrapper - customPosition
+ */
+export interface BadgeWrapperCustomPosition {
+  top?: number | string | undefined;
+  right?: number | string | undefined;
+  bottom?: number | string | undefined;
+  left?: number | string | undefined;
+}
+
+/**
  * ButtonBase - size
  */
 export enum ButtonBaseSize {

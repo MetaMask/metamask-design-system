@@ -41,6 +41,7 @@
     "test:clean": "yarn workspaces foreach --all --parallel --verbose run test:clean && yarn test",
     "test:packages": "yarn test:verbose --silent --collectCoverage=false --reporters=jest-silent-reporter",
     "test:scripts": "NODE_OPTIONS=--experimental-vm-modules yarn jest --config ./jest.config.scripts.js --silent",
+    "test:storybook": "yarn workspace @metamask/storybook-react test-storybook",
     "test:verbose": "yarn workspaces foreach --all --parallel --verbose run test:verbose",
     "update-readme-content": "ts-node scripts/update-readme-content.ts",
     "workspaces:list-versions": "./scripts/list-workspace-versions.sh"
@@ -122,7 +123,8 @@
       "@lavamoat/preinstall-always-fail": false,
       "@keystonehq/bc-ur-registry-eth>hdkey>secp256k1": true,
       "babel-runtime>core-js": false,
-      "simple-git-hooks": false
+      "simple-git-hooks": false,
+      "ts-node>@swc/core": false
     }
   }
 }

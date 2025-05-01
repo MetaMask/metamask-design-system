@@ -1,19 +1,19 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { View } from 'react-native';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import AvatarAccount, { AvatarAccountProps } from '../AvatarAccount';
+import AvatarBase, { AvatarBaseShape } from '../AvatarBase';
 import AvatarFavicon, { AvatarFaviconProps } from '../AvatarFavicon';
 import AvatarNetwork, { AvatarNetworkProps } from '../AvatarNetwork';
 import AvatarToken, { AvatarTokenProps } from '../AvatarToken';
 import Text, { TextColor } from '../Text';
-import { MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT } from './AvatarGroup.constants';
-import { AvatarGroupProps } from './AvatarGroup.types';
 import {
-  generateAvatarGroupContainerClassNames,
-  generateAvatarGroupOverflowTextContainerClassNames,
-} from './AvatarGroup.utilities';
+  MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT,
+  TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS,
+} from './AvatarGroup.constants';
+import { AvatarGroupProps } from './AvatarGroup.types';
 
 const AvatarGroup = ({
   variant,
@@ -21,6 +21,7 @@ const AvatarGroup = ({
   size = AvatarGroupSize.Md,
   max = 4,
   isReverse = false,
+  overflowTextProps,
   style,
   twClassName,
   ...props
@@ -28,19 +29,10 @@ const AvatarGroup = ({
   const tw = useTailwind();
   const overflowCounter = avatarPropsArr.length - max;
   const shouldRenderOverflowCounter = overflowCounter > 0;
-  const twContainerClassNames = useMemo(() => {
-    return generateAvatarGroupContainerClassNames({
-      size,
-      isReverse,
-      twClassName,
-    });
-  }, [size, isReverse, twClassName]);
-  const twOverflowTextContainerClassNames = useMemo(() => {
-    return generateAvatarGroupOverflowTextContainerClassNames({
-      size,
-      variant,
-    });
-  }, [size, variant]);
+  const twContainerClassNames = `
+    ${isReverse ? 'flex-row-reverse' : 'flex-row'}
+    ${TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS[size]}
+  `;
 
   const renderAvatarList = useCallback(
     () =>
@@ -52,7 +44,6 @@ const AvatarGroup = ({
                 key={`avatar-${index}`}
                 {...(avatarProps as AvatarAccountProps)}
                 size={size}
-                testID={`avatar-${variant}`}
                 hasBorder
               />
             );
@@ -62,7 +53,6 @@ const AvatarGroup = ({
                 key={`avatar-${index}`}
                 {...(avatarProps as AvatarFaviconProps)}
                 size={size}
-                testID={`avatar-${variant}`}
                 hasBorder
               />
             );
@@ -72,7 +62,6 @@ const AvatarGroup = ({
                 key={`avatar-${index}`}
                 {...(avatarProps as AvatarNetworkProps)}
                 size={size}
-                testID={`avatar-${variant}`}
                 hasBorder
               />
             );
@@ -82,7 +71,6 @@ const AvatarGroup = ({
                 key={`avatar-${index}`}
                 {...(avatarProps as AvatarTokenProps)}
                 size={size}
-                testID={`avatar-${variant}`}
                 hasBorder
               />
             );
@@ -99,13 +87,22 @@ const AvatarGroup = ({
     <View style={[tw`${twContainerClassNames}`, style]} {...props}>
       {renderAvatarList()}
       {shouldRenderOverflowCounter && (
-        <View style={tw`${twOverflowTextContainerClassNames}`}>
-          <Text
-            variant={MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT[size]}
-            color={TextColor.PrimaryInverse}
-            testID="avatar-overflow-text"
-          >{`+${overflowCounter}`}</Text>
-        </View>
+        <AvatarBase
+          twClassName="bg-icon-default"
+          hasBorder
+          fallbackText={`+${overflowCounter}`}
+          fallbackTextProps={{
+            variant: MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT[size],
+            color: TextColor.PrimaryInverse,
+          }}
+          size={size}
+          shape={
+            variant === AvatarGroupVariant.Network
+              ? AvatarBaseShape.Square
+              : AvatarBaseShape.Circle
+          }
+          {...overflowTextProps}
+        />
       )}
     </View>
   );

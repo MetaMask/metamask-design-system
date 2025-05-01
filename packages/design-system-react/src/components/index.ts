@@ -41,6 +41,14 @@ export { BadgeStatus } from './BadgeStatus';
 export type { BadgeStatusProps } from './BadgeStatus';
 export { BadgeStatusStatus, BadgeStatusSize } from './BadgeStatus';
 
+export { BadgeWrapper } from './BadgeWrapper';
+export type { BadgeWrapperProps } from './BadgeWrapper';
+export {
+  BadgeWrapperPosition,
+  BadgeWrapperCustomPosition,
+  BadgeWrapperPositionAnchorShape,
+} from './BadgeWrapper';
+
 export { Blockies } from './temp-components/Blockies';
 export type { BlockiesProps } from './temp-components/Blockies';
 
