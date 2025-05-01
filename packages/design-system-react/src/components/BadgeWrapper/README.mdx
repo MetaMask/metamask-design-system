@@ -316,20 +316,3 @@ Optional prop to add a test id to the outermost `<div>` for testing.
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { BadgeWrapper } from '@metamask/design-system-react';
-import { BadgeCount } from '@metamask/design-system-react';
-import { AvatarAccount, AvatarAccountSize } from '@metamask/design-system-react';
-
-<BadgeWrapper
-  badge={<BadgeCount count={5} />}
-  position={BadgeWrapperPosition.TopRight}
-  positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
->
-  <AvatarAccount
-    address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-    size={AvatarAccountSize.Md}
-  />
-</BadgeWrapper>
-```
