@@ -1,6 +1,6 @@
 # AvatarGroup
 
-The `AvatarGroup` component is designed to display a collection of avatars in a compact and structured layout. It supports different avatar variants and provides an overflow indicator when the number of avatars exceeds a specified limit.
+`AvatarGroup` is a stacked avatars to represent a group of avatars.
 
 ---
 
