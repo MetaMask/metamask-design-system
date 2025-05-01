@@ -31,25 +31,25 @@
       "description": "Pressed state surface for background/default."
     },
     "alternative-hover": {
-      "value": "#f6f6f7",
+      "value": "#EBEDF1",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for background/alternative."
     },
     "alternative-pressed": {
-      "value": "#ebecef",
+      "value": "#E1E4EA",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for background/alternative."
     },
     "muted-hover": {
-      "value": "#e7ebee",
+      "value": "#EBEDF1",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for background/muted."
     },
     "muted-pressed": {
-      "value": "#ebecef",
+      "value": "#E1E4EA",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for background/muted."
@@ -123,7 +123,7 @@
   },
   "overlay": {
     "default": {
-      "value": "#3F434A4D",
+      "value": "#3F434A66",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Default color for overlays(scrim)."
