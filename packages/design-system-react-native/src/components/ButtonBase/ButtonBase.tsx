@@ -1,20 +1,16 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 
 import { ButtonBaseSize } from '../../types';
 import Icon from '../Icon';
-import type { IconProps } from '../Icon';
 import { IconColor, IconSize } from '../Icon';
 import ButtonAnimated from '../temp-components/ButtonAnimated';
-import type { SpinnerProps } from '../temp-components/Spinner';
 import Spinner from '../temp-components/Spinner';
 import TextOrChildren from '../temp-components/TextOrChildren/TextOrChildren';
-import type { TextProps } from '../Text';
 import { TextVariant, FontWeight, TextColor } from '../Text';
 import type { ButtonBaseProps } from './ButtonBase.types';
-import { generateButtonBaseContainerClassNames } from './ButtonBase.utilities';
 
 const ButtonBase = ({
   children,
@@ -31,51 +27,21 @@ const ButtonBase = ({
   endAccessory,
   isDisabled,
   isFullWidth,
-  twClassName,
+  twClassName = '',
   style,
   ...props
 }: ButtonBaseProps) => {
   const tw = useTailwind();
-  const twContainerClassNames = useMemo(() => {
-    return generateButtonBaseContainerClassNames({
-      size,
-      twClassName,
-      isLoading,
-      isDisabled,
-      isFullWidth,
-    });
-  }, [size, twClassName, isLoading, isDisabled, isFullWidth]);
+  const twContainerClassNames = `
+    flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+    h-[${size}px]
+    ${isDisabled ? 'opacity-50' : 'opacity-100'}
+    ${isFullWidth ? 'self-stretch' : 'self-start'}
+    ${twClassName}
+  `;
 
-  const finalTextProps: Omit<Partial<TextProps>, 'children'> = {
-    variant: TextVariant.BodyMd,
-    fontWeight: FontWeight.Medium,
-    color: TextColor.TextDefault,
-    numberOfLines: 1,
-    ellipsizeMode: 'clip',
-    ...textProps,
-  };
   const finalStartIconName = startIconName ?? startIconProps?.name;
-  const finalStartIconProps: Partial<IconProps> = {
-    size: IconSize.Sm,
-    testID: 'start-icon',
-    ...startIconProps,
-  };
-
   const finalEndIconName = endIconName ?? endIconProps?.name;
-  const finalEndIconProps: Partial<IconProps> = {
-    size: IconSize.Sm,
-    testID: 'end-icon',
-    ...endIconProps,
-  };
-
-  const finalSpinnerProps: SpinnerProps = {
-    color: IconColor.IconDefault,
-    loadingText,
-    loadingTextProps: {
-      numberOfLines: 1,
-    },
-    ...spinnerProps,
-  };
 
   return (
     <ButtonAnimated
@@ -91,7 +57,12 @@ const ButtonBase = ({
         }`}
         testID="spinner-container"
       >
-        <Spinner {...finalSpinnerProps} />
+        <Spinner
+          color={IconColor.IconDefault}
+          loadingText={loadingText}
+          loadingTextProps={{ numberOfLines: 1 }}
+          {...spinnerProps}
+        />
       </View>
       <View
         style={tw`flex-row items-center justify-center gap-x-2 ${
@@ -100,13 +71,33 @@ const ButtonBase = ({
         testID="content-container"
       >
         {finalStartIconName ? (
-          <Icon name={finalStartIconName} {...finalStartIconProps} />
+          <Icon
+            name={finalStartIconName}
+            size={IconSize.Sm}
+            twClassName="shrink-0"
+            {...startIconProps}
+          />
         ) : (
           startAccessory
         )}
-        <TextOrChildren textProps={finalTextProps}>{children}</TextOrChildren>
+        <TextOrChildren
+          textProps={{
+            variant: TextVariant.BodyMd,
+            fontWeight: FontWeight.Medium,
+            color: TextColor.TextDefault,
+            twClassName: 'shrink grow-0 flex-wrap text-center',
+            ...textProps,
+          }}
+        >
+          {children}
+        </TextOrChildren>
         {finalEndIconName ? (
-          <Icon name={finalEndIconName} {...finalEndIconProps} />
+          <Icon
+            name={finalEndIconName}
+            size={IconSize.Sm}
+            twClassName="shrink-0"
+            {...endIconProps}
+          />
         ) : (
           endAccessory
         )}
