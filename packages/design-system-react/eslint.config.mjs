@@ -20,8 +20,17 @@ const config = createConfig(
       project: ['./tsconfig.json'],
     },
   },
+  // Icon files need special handling for naming conventions
   {
-    ignores: ['src/components/icon/icons/*'], // Auto-generated icons
+    files: ['src/components/Icon/icons/**/*.{ts,tsx}'],
+    rules: {
+      // Disable naming convention rules for icon files
+      '@typescript-eslint/naming-convention': 'off',
+      // Disable no-shadow rule for icon files - they often match global names
+      '@typescript-eslint/no-shadow': 'off',
+      // Disable return type requirement for icon components
+      '@typescript-eslint/explicit-function-return-type': 'off',
+    },
   },
 );
 

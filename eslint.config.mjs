@@ -1,11 +1,21 @@
 import base, { createConfig } from '@metamask/eslint-config';
-import nodejs from '@metamask/eslint-config-nodejs';
 import jest from '@metamask/eslint-config-jest';
+import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
 
-const config = createConfig(
+// Start with a basic configuration following the Core repo pattern
+const config = createConfig([
+  // First spread the base configuration (like Core does)
+  ...base,
+  // Basic ignores section
   {
     ignores: [
+      '**/dist/**',
+      '**/docs/**',
+      '**/coverage/**',
+      'merged-packages/**',
+      '.yarn/**',
+      'scripts/create-package/package-template/**',
       'yarn.lock',
       '**/**.map',
       '**/**.tsbuildinfo',
@@ -14,48 +24,18 @@ const config = createConfig(
       '**/LICENSE',
       '**/*.sh',
       '**/.DS_Store',
-      '**/dist/**',
-      '**/docs/**',
-      '**/coverage/**',
-      'merged-packages/**',
-      '.yarn/**',
-      'scripts/create-package/package-template/**',
+      // Design system specific ignores (from the original config)
       'apps/storybook-react-native/.storybook/FontLoader.js',
       'apps/storybook-react-native/.storybook/config.js',
       'packages/design-system-react-native/jest.setup.js',
     ],
   },
-  ...base,
+  // Common rule overrides and settings (from Core)
   {
     rules: {
-      // Left disabled because various properties throughout this repo are snake_case because the
-      // names come from external sources or must comply with standards
-      // e.g. `txreceipt_status`, `signTypedData_v4`, `token_id`
-      // camelcase: 'off',
+      // Common rule customizations
+      camelcase: 'off',
       'id-length': 'off',
-
-      // TODO: re-enble most of these rules
-      '@typescript-eslint/naming-convention': 'off',
-      'function-paren-newline': 'off',
-      'id-denylist': 'off',
-      'implicit-arrow-linebreak': 'off',
-      'import/no-anonymous-default-export': 'off',
-      'import/no-unassigned-import': 'off',
-      'lines-around-comment': 'off',
-      'n/no-sync': 'off',
-      'no-async-promise-executor': 'off',
-      'no-case-declarations': 'off',
-      'no-invalid-this': 'off',
-      'no-negated-condition': 'off',
-      'no-new': 'off',
-      'no-param-reassign': 'off',
-      'no-restricted-syntax': 'off',
-      radix: 'off',
-      'require-atomic-updates': 'off',
-      'jsdoc/match-description': [
-        'off',
-        { matchDescription: '^[A-Z`\\d_][\\s\\S]*[.?!`>)}]$' },
-      ],
     },
     settings: {
       jsdoc: {
@@ -63,56 +43,64 @@ const config = createConfig(
       },
     },
   },
+  // Node.js files config (from Core)
   {
     files: [
-      '**/jest.config.js',
-      '**/jest.environment.js',
-      '**/tests/**/*.{ts,js,tsx}',
-      '*.js',
-      '*.test.{ts,js,tsx}',
+      '**/*.{js,cjs,mjs}',
+      '**/*.test.{js,ts}',
+      '**/tests/**/*.{js,ts}',
       'scripts/*.ts',
-      'scripts/create-package/*.ts',
-      'yarn.config.cjs',
+      'scripts/create-package/**/*.ts',
     ],
     extends: [nodejs],
   },
+  // Test files config (from Core)
   {
-    files: ['*.test.{ts,js,tsx}', '**/tests/**/*.{ts,js,tsx}'],
+    files: ['**/*.test.{js,ts,tsx}', '**/tests/**/*.{js,ts,tsx}'],
     extends: [jest],
+    rules: {
+      'jest/no-conditional-in-test': 'warn',
+      'jest/prefer-lowercase-title': 'warn',
+      'jest/prefer-strict-equal': 'warn',
+    },
   },
+  // Test helper files (from Core)
   {
-    // These files are test helpers, not tests. We still use the Jest ESLint
-    // config here to ensure that ESLint expects a test-like environment, but
-    // various rules meant just to apply to tests have been disabled.
-    files: ['**/tests/**/*.{ts,js,tsx}', '!*.test.{ts,js,tsx}'],
+    files: ['**/tests/**/*.{js,ts,tsx}'],
+    ignores: ['**/*.test.{js,ts,tsx}'],
     rules: {
       'jest/no-export': 'off',
       'jest/require-top-level-describe': 'off',
       'jest/no-if': 'off',
     },
   },
+  // JavaScript files config (using ** patterns like Core)
   {
-    files: ['*.js', '*.cjs'],
-    parserOptions: {
+    files: ['**/*.{js,cjs}'],
+    languageOptions: {
       sourceType: 'script',
-      ecmaVersion: '2020',
+      ecmaVersion: 2020,
     },
   },
+  // TypeScript files config (notice the ** pattern as in Core)
   {
-    files: ['*.ts', '*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     extends: [typescript],
-    parserOptions: {
-      tsconfigRootDir: import.meta.dirname,
-      project: ['./tsconfig.packages.json'],
+    languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
+        project: './tsconfig.packages.json',
+        // Disable projectService like Core does
+        projectService: false,
+      },
     },
     rules: {
-      // Enable rules that are disabled in `@metamask/eslint-config-typescript`
+      // Add other typescript rules from Core
+      // This should really be in `@metamask/eslint-config-typescript`
       '@typescript-eslint/no-explicit-any': 'error',
 
-      // TODO: auto-fix breaks stuff
-      '@typescript-eslint/promise-function-async': 'off',
-
       // TODO: re-enable most of these rules
+      '@typescript-eslint/promise-function-async': 'off',
       '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       '@typescript-eslint/unbound-method': 'off',
       '@typescript-eslint/prefer-enum-initializers': 'off',
@@ -123,33 +111,37 @@ const config = createConfig(
       'no-restricted-globals': 'off',
     },
   },
+  // TypeScript declaration files (from Core)
   {
-    files: ['tests/setupAfterEnv/matchers.ts'],
-    parserOptions: {
-      sourceType: 'script',
-    },
-  },
-  {
-    files: ['*.d.ts'],
+    files: ['**/*.d.ts'],
     rules: {
       '@typescript-eslint/naming-convention': 'warn',
-      'import/unambiguous': 'off',
+      'import-x/unambiguous': 'off',
     },
   },
+  // Scripts with shebangs (from Core)
   {
     files: ['scripts/*.ts'],
     rules: {
-      // All scripts will have shebangs.
-      'n/shebang': 'off',
+      // Scripts may be self-executable and thus have hashbangs
+      'n/hashbang': 'off',
     },
   },
+  // Additional configuration for Jest environment files
   {
     files: ['**/jest.environment.js'],
     rules: {
-      // These files run under Node, and thus `require(...)` is expected.
+      // These files run under Node, and thus `require(...)` is expected
       'n/global-require': 'off',
     },
   },
-);
+  // Module files (from Core)
+  {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      sourceType: 'module',
+    },
+  },
+]);
 
 export default config;

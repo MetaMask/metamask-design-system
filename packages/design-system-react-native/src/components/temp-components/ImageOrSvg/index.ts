@@ -1,2 +1,2 @@
 export { default } from './ImageOrSvg';
-export { ImageOrSvgProps, ImageOrSvgSrc } from './ImageOrSvg.types';
+export type { ImageOrSvgProps, ImageOrSvgSrc } from './ImageOrSvg.types';

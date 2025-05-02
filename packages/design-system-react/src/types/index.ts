@@ -135,12 +135,12 @@ export enum BadgeWrapperPosition {
 /**
  * BadgeWrapper - customPosition
  */
-export interface BadgeWrapperCustomPosition {
+export type BadgeWrapperCustomPosition = {
   top?: number | string | undefined;
   right?: number | string | undefined;
   bottom?: number | string | undefined;
   left?: number | string | undefined;
-}
+};
 
 /**
  * ButtonBase - size
