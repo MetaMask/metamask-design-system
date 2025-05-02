@@ -16,6 +16,20 @@ import { ButtonBase } from '@metamask/design-system-react';
 <ButtonBase onClick={() => {}}>Button Base</ButtonBase>;
 ```
 
+### Children
+
+ButtonBase accepts both string and non-string children, with different rendering behavior:
+
+- **String children:** Automatically wrapped in a Text component for consistent typography
+- **Non-string children:** Rendered as-is without the Text wrapper
+
+This means:
+
+- When passing a string, you can customize its appearance with the `textProps` prop
+- When passing a custom component or HTML, you're responsible for styling it yourself
+
+<Canvas of={ButtonBaseStories.Children} />
+
 ### Size
 
 ButtonBase supports three sizes:
@@ -32,26 +46,6 @@ import { ButtonBase, ButtonBaseSize } from '@metamask/design-system-react';
 <ButtonBase size={ButtonBaseSize.Sm}>Small</ButtonBase>
 <ButtonBase size={ButtonBaseSize.Md}>Medium</ButtonBase>
 <ButtonBase size={ButtonBaseSize.Lg}>Large</ButtonBase>
-```
-
-### TextProps
-
-ButtonBase automatically wraps string children in a Text component for consistent typography. You can customize the Text component's appearance using the `textProps` prop.
-
-**Note:** `textProps` only applies when `children` is a string. Non-string children are rendered as-is without the Text wrapper.
-
-<Canvas of={ButtonBaseStories.TextProps} />
-
-```tsx
-import { ButtonBase, TextVariant } from '@metamask/design-system-react';
-
-<ButtonBase
-  textProps={{
-    variant: TextVariant.BodySm,
-  }}
->
-  Custom text styling
-</ButtonBase>;
 ```
 
 ### IsFullWidth
@@ -120,26 +114,6 @@ import { ButtonBase } from '@metamask/design-system-react';
 >
   Submit
 </ButtonBase>
-```
-
-### TextProps
-
-ButtonBase automatically wraps string children in a Text component for consistent typography. You can customize the Text component's appearance using the `textProps` prop.
-
-**Note:** `textProps` only applies when `children` is a string. Non-string children are rendered as-is without the Text wrapper.
-
-<Canvas of={ButtonBaseStories.TextProps} />
-
-```tsx
-import { ButtonBase, TextVariant } from '@metamask/design-system-react';
-
-<ButtonBase
-  textProps={{
-    variant: TextVariant.BodySm,
-  }}
->
-  Custom text styling
-</ButtonBase>;
 ```
 
 ### IsDisabled

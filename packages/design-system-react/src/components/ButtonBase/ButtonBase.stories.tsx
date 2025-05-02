@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { ButtonBaseSize } from '../../types';
-import { IconName } from '../Icon';
-import { TextVariant, TextColor } from '../Text';
+import { Icon, IconName } from '../Icon';
+import { Text } from '../Text';
 import { ButtonBase } from './ButtonBase';
 import README from './README.mdx';
 
@@ -121,6 +121,22 @@ export const Default: Story = {
   },
 };
 
+export const Children: Story = {
+  render: (args) => (
+    <div className="flex gap-2">
+      <ButtonBase {...args}>Children</ButtonBase>
+      <ButtonBase {...args} className="h-auto rounded-lg py-2">
+        <div className="flex flex-col items-center gap-2">
+          <Icon name={IconName.Arrow2UpRight} />
+          <Text asChild>
+            <span>Send</span>
+          </Text>
+        </div>
+      </ButtonBase>
+    </div>
+  ),
+};
+
 export const Size: Story = {
   render: (args) => (
     <div className="flex gap-2">
@@ -134,16 +150,6 @@ export const Size: Story = {
     </div>
   ),
 };
-
-export const TextProps: Story = {
-  args: {
-    children: 'Button with custom text variant',
-    textProps: {
-      variant: TextVariant.BodySm,
-    },
-  },
-};
-
 export const IsFullWidth: Story = {
   args: {
     children: 'Full Width Button',
@@ -180,23 +186,16 @@ export const EndAccessory: Story = {
 };
 
 export const IsLoading: Story = {
-  args: {
-    children: 'Submit',
-    isLoading: true,
-    loadingText: 'Submitting...',
-  },
-};
-
-export const loadingTextProps: Story = {
-  args: {
-    children: 'Submit',
-    isLoading: true,
-    loadingText: 'Submitting...',
-    loadingTextProps: {
-      variant: TextVariant.BodySm,
-      color: TextColor.SuccessDefault,
-    },
-  },
+  render: (args) => (
+    <div className="flex gap-2">
+      <ButtonBase {...args} isLoading>
+        Submit this form
+      </ButtonBase>
+      <ButtonBase {...args} isLoading loadingText="Submitting...">
+        Submit this form
+      </ButtonBase>
+    </div>
+  ),
 };
 
 export const IsDisabled: Story = {

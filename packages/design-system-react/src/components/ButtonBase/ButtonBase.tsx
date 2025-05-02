@@ -36,31 +36,30 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const Component = asChild ? Slot : 'button';
     const isInteractive = !(isDisabled ?? isLoading);
 
-    const renderLoadingState = () => {
-      return (
-        <>
-          <span className="absolute inline-flex items-center">
-            <Icon
-              name={IconName.Loading}
-              size={IconSize.Sm}
-              className={twMerge(
-                'mr-2 animate-spin text-inherit',
-                loadingIconProps?.className,
-              )}
-              {...loadingIconProps}
-            />
-            <Text
-              fontWeight={FontWeight.Medium}
-              color={TextColor.Inherit}
-              {...loadingTextProps}
-            >
-              {loadingText}
-            </Text>
-          </span>
-          <span className="invisible inline-flex items-center">{children}</span>
-        </>
-      );
-    };
+    const renderLoadingState = () => (
+      <>
+        <span className="absolute inline-flex items-center">
+          <Icon
+            name={IconName.Loading}
+            size={IconSize.Sm}
+            className={twMerge(
+              'mr-2 animate-spin text-inherit',
+              loadingIconProps?.className,
+            )}
+            {...loadingIconProps}
+          />
+          <Text
+            fontWeight={FontWeight.Medium}
+            color={TextColor.Inherit}
+            asChild
+            {...loadingTextProps}
+          >
+            <span>{loadingText}</span>
+          </Text>
+        </span>
+        <span className="invisible inline-flex items-center">{children}</span>
+      </>
+    );
 
     const renderStartContent = () => {
       if (startIconName) {
