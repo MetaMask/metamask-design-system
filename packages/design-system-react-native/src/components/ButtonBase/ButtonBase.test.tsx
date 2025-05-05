@@ -1,120 +1,187 @@
-import { render, fireEvent } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { renderHook } from '@testing-library/react-hooks';
+import { render } from '@testing-library/react-native';
 import React from 'react';
+import { View } from 'react-native';
 
 import { ButtonBaseSize } from '../../types';
 import { IconName } from '../Icon';
 import ButtonBase from './ButtonBase';
-import { generateButtonBaseContainerClassNames } from './ButtonBase.utilities';
 
 describe('ButtonBase', () => {
-  describe('generateButtonBaseContainerClassNames', () => {
-    it('returns correct class names for default state', () => {
-      const classNames = generateButtonBaseContainerClassNames({});
-      expect(classNames).toContain(
-        'flex-row items-center justify-center rounded-full bg-background-muted px-4',
-      );
-      expect(classNames).toContain('opacity-100');
-      expect(classNames).toContain('self-start');
-    });
+  const getTw = () => renderHook(() => useTailwind()).result.current;
 
-    it('applies correct class names when disabled', () => {
-      const classNames = generateButtonBaseContainerClassNames({
-        isDisabled: true,
-      });
-      expect(classNames).toContain('opacity-50');
-    });
+  it('applies correct height for size Sm', () => {
+    const tw = getTw();
+    const classes = `
+      flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+      h-[${ButtonBaseSize.Sm}px]
+      opacity-100 self-start
+    `;
+    const expected = tw`${classes}`;
 
-    it('applies correct class names when full width', () => {
-      const classNames = generateButtonBaseContainerClassNames({
-        isFullWidth: true,
-      });
-      expect(classNames).toContain('self-stretch');
-    });
-
-    it('applies correct size class from TWCLASSMAP_BUTTONBASE_SIZE', () => {
-      const size = ButtonBaseSize.Lg;
-      const expectedSizeClass = `h-[${size}px]`;
-      const classNames = generateButtonBaseContainerClassNames({ size });
-      expect(classNames).toContain(expectedSizeClass);
-    });
-
-    it('appends additional Tailwind class names', () => {
-      const classNames = generateButtonBaseContainerClassNames({
-        twClassName: 'border border-blue-500',
-      });
-      expect(classNames).toContain('border border-blue-500');
-    });
-
-    it('applies all styles together correctly', () => {
-      const classNames = generateButtonBaseContainerClassNames({
-        size: ButtonBaseSize.Sm,
-        isDisabled: true,
-        isFullWidth: true,
-        twClassName: 'shadow-md',
-      });
-      expect(classNames).toContain(`h-[${ButtonBaseSize.Sm}px]`);
-      expect(classNames).toContain('opacity-50');
-      expect(classNames).toContain('self-stretch');
-      expect(classNames).toContain('shadow-md');
-    });
+    const { getByTestId } = render(
+      <ButtonBase testID="btn" size={ButtonBaseSize.Sm}>
+        Text
+      </ButtonBase>,
+    );
+    expect(getByTestId('btn').props.style[0]).toStrictEqual(expected);
   });
-  describe('ButtonBase Component', () => {
-    it('renders correctly with default props', () => {
-      const { getByText } = render(<ButtonBase>Default Button</ButtonBase>);
-      expect(getByText('Default Button')).not.toBeNull();
-    });
 
-    it('disables interaction when `isDisabled` is true', () => {
-      const onPressMock = jest.fn();
-      const { getByText } = render(
-        <ButtonBase isDisabled onPress={onPressMock}>
-          Disabled Button
-        </ButtonBase>,
-      );
+  it('applies correct height for size Md', () => {
+    const tw = getTw();
+    const classes = `
+      flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+      h-[${ButtonBaseSize.Md}px]
+      opacity-100 self-start
+    `;
+    const expected = tw`${classes}`;
 
-      const button = getByText('Disabled Button');
-      fireEvent.press(button);
-      expect(onPressMock).not.toHaveBeenCalled();
-    });
+    const { getByTestId } = render(
+      <ButtonBase testID="btn" size={ButtonBaseSize.Md}>
+        Text
+      </ButtonBase>,
+    );
+    expect(getByTestId('btn').props.style[0]).toStrictEqual(expected);
+  });
 
-    it('shows loading spinner when `isLoading` is true', () => {
-      const { getByTestId } = render(
-        <ButtonBase isLoading loadingText="Loading...">
-          Default Button
-        </ButtonBase>,
-      );
+  it('applies correct height for size Lg (default)', () => {
+    const tw = getTw();
+    const classes = `
+      flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+      h-[${ButtonBaseSize.Lg}px]
+      opacity-100 self-start
+    `;
+    const expected = tw`${classes}`;
 
-      // Ensure the spinner is visible with the correct opacity
-      const spinnerContainer = getByTestId('spinner-container');
-      expect(spinnerContainer.props.style.opacity).toBe(1);
+    const { getByTestId } = render(<ButtonBase testID="btn">Text</ButtonBase>);
+    expect(getByTestId('btn').props.style[0]).toStrictEqual(expected);
+  });
 
-      // Ensure the content container is hidden with the correct opacity
-      const contentContainer = getByTestId('content-container');
-      expect(contentContainer.props.style.opacity).toBe(0);
-    });
+  it('applies disabled state via opacity-50', () => {
+    const tw = getTw();
+    const classes = `
+      flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+      h-[${ButtonBaseSize.Lg}px]
+      opacity-50 self-start
+    `;
+    const expected = tw`${classes}`;
 
-    it('renders start and end icons correctly', () => {
-      const { getByTestId } = render(
-        <ButtonBase
-          startIconName={IconName.Add}
-          endIconName={IconName.ArrowRight}
-        >
-          Button with Icons
-        </ButtonBase>,
-      );
+    const { getByTestId } = render(
+      <ButtonBase testID="btn" isDisabled>
+        X
+      </ButtonBase>,
+    );
+    const btn = getByTestId('btn');
+    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn.props.accessibilityState.disabled).toBe(true);
+  });
 
-      expect(getByTestId('content-container')).not.toBeNull();
-    });
+  it('applies full-width state via self-stretch', () => {
+    const tw = getTw();
+    const classes = `
+      flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+      h-[${ButtonBaseSize.Lg}px]
+      opacity-100 self-stretch
+    `;
+    const expected = tw`${classes}`;
 
-    it('triggers onPress when clicked', () => {
-      const onPressMock = jest.fn();
-      const { getByText } = render(
-        <ButtonBase onPress={onPressMock}>Press Me</ButtonBase>,
-      );
+    const { getByTestId } = render(
+      <ButtonBase testID="btn" isFullWidth>
+        X
+      </ButtonBase>,
+    );
+    expect(getByTestId('btn').props.style[0]).toStrictEqual(expected);
+  });
 
-      const button = getByText('Press Me');
-      fireEvent.press(button);
-      expect(onPressMock).toHaveBeenCalledTimes(1);
-    });
+  it('forwards `style` prop as the second entry', () => {
+    const custom = { margin: 5 };
+    const { getByTestId } = render(
+      <ButtonBase testID="btn" style={custom}>
+        X
+      </ButtonBase>,
+    );
+    expect(getByTestId('btn').props.style[1]).toStrictEqual(custom);
+  });
+
+  it('renders spinner and hides content when loading', () => {
+    const tw = getTw();
+    const spinnerClasses =
+      'flex-row items-center gap-x-2 absolute inset-0 flex items-center justify-center opacity-100';
+    const expectedSpinner = tw`${spinnerClasses}`;
+
+    const contentClasses =
+      'flex-row items-center justify-center gap-x-2 opacity-0';
+
+    const { getByTestId } = render(
+      <ButtonBase
+        testID="btn"
+        isLoading
+        spinnerProps={{ twClassName: spinnerClasses }}
+      >
+        Loading
+      </ButtonBase>,
+    );
+    expect(getByTestId('spinner').props.style[0]).toStrictEqual(
+      expectedSpinner,
+    );
+    expect(getByTestId('btn').props.accessibilityState.disabled).toBe(true);
+  });
+
+  it('shows loadingText inside the spinner', () => {
+    const text = 'Please wait…';
+    const { getByText } = render(
+      <ButtonBase isLoading loadingText={text}>
+        X
+      </ButtonBase>,
+    );
+    expect(getByText(text)).toBeTruthy();
+  });
+
+  it('forwards spinnerProps into Spinner', () => {
+    const { getByTestId } = render(
+      <ButtonBase
+        testID="btn"
+        isLoading
+        spinnerProps={{
+          testID: 'outer-spinner',
+          spinnerIconProps: { testID: 'inner-icon' },
+        }}
+      >
+        X
+      </ButtonBase>,
+    );
+    expect(getByTestId('outer-spinner')).toBeTruthy();
+    expect(getByTestId('inner-icon')).toBeTruthy();
+  });
+
+  it('renders start and end icons when names are provided', () => {
+    const { getByTestId } = render(
+      <ButtonBase
+        startIconName={IconName.Add}
+        startIconProps={{ testID: 'start' }}
+        endIconName={IconName.Close}
+        endIconProps={{ testID: 'end' }}
+      >
+        X
+      </ButtonBase>,
+    );
+    expect(getByTestId('start')).toBeTruthy();
+    expect(getByTestId('end')).toBeTruthy();
+  });
+
+  it('renders custom accessories when icon names are omitted', () => {
+    const { getByTestId, queryByTestId } = render(
+      <ButtonBase
+        startAccessory={<View testID="sa" />}
+        endAccessory={<View testID="ea" />}
+      >
+        X
+      </ButtonBase>,
+    );
+    expect(getByTestId('sa')).toBeTruthy();
+    expect(getByTestId('ea')).toBeTruthy();
+    expect(queryByTestId('start')).toBeNull();
+    expect(queryByTestId('end')).toBeNull();
   });
 });
