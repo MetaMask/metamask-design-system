@@ -21,6 +21,7 @@ const Spinner = ({
   loadingText,
   loadingTextProps,
   twClassName = '',
+  style,
   ...props
 }: SpinnerProps) => {
   const tw = useTailwind();
@@ -59,7 +60,7 @@ const Spinner = ({
 
   return (
     <View
-      style={tw`flex-row items-center gap-x-2 ${twClassName}`}
+      style={[tw`flex-row items-center gap-x-2 ${twClassName}`, style]}
       testID="spinner"
       {...props}
     >
