@@ -42,7 +42,9 @@ describe('ButtonPrimary', () => {
 
   it('renders default background', () => {
     const { getByTestId } = render(
-      <ButtonPrimary size={ButtonBaseSize.Lg}>Press me</ButtonPrimary>,
+      <ButtonPrimary size={ButtonBaseSize.Lg} testID="button-primary">
+        Press me
+      </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
     expectBackground(btn.props.style, 'bg-primary-default');
@@ -50,7 +52,9 @@ describe('ButtonPrimary', () => {
 
   it('renders danger background', () => {
     const { getByTestId } = render(
-      <ButtonPrimary isDanger>Danger</ButtonPrimary>,
+      <ButtonPrimary isDanger testID="button-primary">
+        Danger
+      </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
     expectBackground(btn.props.style, 'bg-error-default');
@@ -58,7 +62,9 @@ describe('ButtonPrimary', () => {
 
   it('renders inverse background', () => {
     const { getByTestId } = render(
-      <ButtonPrimary isInverse>Inverse</ButtonPrimary>,
+      <ButtonPrimary isInverse testID="button-primary">
+        Inverse
+      </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
     expectBackground(btn.props.style, 'bg-background-default');
@@ -66,7 +72,7 @@ describe('ButtonPrimary', () => {
 
   it('renders inverse+danger fallback background', () => {
     const { getByTestId } = render(
-      <ButtonPrimary isInverse isDanger>
+      <ButtonPrimary isInverse isDanger testID="button-primary">
         Both
       </ButtonPrimary>,
     );
@@ -75,7 +81,9 @@ describe('ButtonPrimary', () => {
   });
 
   it('toggles pressed styles (default)', () => {
-    const { getByTestId } = render(<ButtonPrimary>Press me</ButtonPrimary>);
+    const { getByTestId } = render(
+      <ButtonPrimary testID="button-primary">Press me</ButtonPrimary>,
+    );
     const btn = getByTestId('button-primary');
 
     fireEvent(btn, 'pressIn');
@@ -87,7 +95,9 @@ describe('ButtonPrimary', () => {
 
   it('toggles pressed styles (danger)', () => {
     const { getByTestId } = render(
-      <ButtonPrimary isDanger>Danger</ButtonPrimary>,
+      <ButtonPrimary isDanger testID="button-primary">
+        Danger
+      </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
 
@@ -100,7 +110,9 @@ describe('ButtonPrimary', () => {
 
   it('toggles pressed styles (inverse)', () => {
     const { getByTestId } = render(
-      <ButtonPrimary isInverse>Inverse</ButtonPrimary>,
+      <ButtonPrimary isInverse testID="button-primary">
+        Inverse
+      </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
 
@@ -117,7 +129,11 @@ describe('ButtonPrimary', () => {
     const contentTW = 'flex-row items-center justify-center gap-x-2 opacity-0';
 
     const { getByTestId } = render(
-      <ButtonPrimary isLoading spinnerProps={{ twClassName: spinnerTW }}>
+      <ButtonPrimary
+        isLoading
+        spinnerProps={{ twClassName: spinnerTW }}
+        testID="button-primary"
+      >
         Loading
       </ButtonPrimary>,
     );
@@ -141,7 +157,7 @@ describe('ButtonPrimary', () => {
 
   it('renders danger+loading background', () => {
     const { getByTestId } = render(
-      <ButtonPrimary isDanger isLoading>
+      <ButtonPrimary isDanger isLoading testID="button-primary">
         Hi
       </ButtonPrimary>,
     );
@@ -151,7 +167,7 @@ describe('ButtonPrimary', () => {
 
   it('renders inverse+loading background', () => {
     const { getByTestId } = render(
-      <ButtonPrimary isInverse isLoading>
+      <ButtonPrimary isInverse isLoading testID="button-primary">
         Hi
       </ButtonPrimary>,
     );
@@ -161,7 +177,7 @@ describe('ButtonPrimary', () => {
 
   it('renders inverse+danger+loading background', () => {
     const { getByTestId } = render(
-      <ButtonPrimary isInverse isDanger isLoading>
+      <ButtonPrimary isInverse isDanger isLoading testID="button-primary">
         Hi
       </ButtonPrimary>,
     );

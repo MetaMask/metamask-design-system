@@ -48,7 +48,9 @@ describe('ButtonTertiary', () => {
 
   it('renders default (transparent bg + transparent border)', () => {
     const { getByTestId } = render(
-      <ButtonTertiary size={ButtonBaseSize.Lg}>Default</ButtonTertiary>,
+      <ButtonTertiary size={ButtonBaseSize.Lg} testID="button-tertiary">
+        Default
+      </ButtonTertiary>,
     );
     const btn = getByTestId('button-tertiary');
     expectBackground(btn.props.style, 'bg-transparent');
@@ -57,7 +59,9 @@ describe('ButtonTertiary', () => {
 
   it('renders danger (transparent bg + transparent border)', () => {
     const { getByTestId } = render(
-      <ButtonTertiary isDanger>Danger</ButtonTertiary>,
+      <ButtonTertiary isDanger testID="button-tertiary">
+        Danger
+      </ButtonTertiary>,
     );
     const btn = getByTestId('button-tertiary');
     expectBackground(btn.props.style, 'bg-transparent');
@@ -66,7 +70,9 @@ describe('ButtonTertiary', () => {
 
   it('renders inverse (transparent bg + primary-inverse border)', () => {
     const { getByTestId } = render(
-      <ButtonTertiary isInverse>Inverse</ButtonTertiary>,
+      <ButtonTertiary isInverse testID="button-tertiary">
+        Inverse
+      </ButtonTertiary>,
     );
     const btn = getByTestId('button-tertiary');
     expectBackground(btn.props.style, 'bg-transparent');
@@ -75,7 +81,7 @@ describe('ButtonTertiary', () => {
 
   it('renders inverse+danger (bg-background-default + border-background-default)', () => {
     const { getByTestId } = render(
-      <ButtonTertiary isInverse isDanger>
+      <ButtonTertiary isInverse isDanger testID="button-tertiary">
         Both
       </ButtonTertiary>,
     );
@@ -85,7 +91,9 @@ describe('ButtonTertiary', () => {
   });
 
   it('toggles pressed styles (default)', () => {
-    const { getByTestId } = render(<ButtonTertiary>Press me</ButtonTertiary>);
+    const { getByTestId } = render(
+      <ButtonTertiary testID="button-tertiary">Press me</ButtonTertiary>,
+    );
     const btn = getByTestId('button-tertiary');
 
     fireEvent(btn, 'pressIn');
@@ -99,7 +107,9 @@ describe('ButtonTertiary', () => {
 
   it('toggles pressed styles (danger)', () => {
     const { getByTestId } = render(
-      <ButtonTertiary isDanger>Danger</ButtonTertiary>,
+      <ButtonTertiary isDanger testID="button-tertiary">
+        Danger
+      </ButtonTertiary>,
     );
     const btn = getByTestId('button-tertiary');
 
@@ -114,7 +124,9 @@ describe('ButtonTertiary', () => {
 
   it('toggles pressed styles (inverse)', () => {
     const { getByTestId } = render(
-      <ButtonTertiary isInverse>Inverse</ButtonTertiary>,
+      <ButtonTertiary isInverse testID="button-tertiary">
+        Inverse
+      </ButtonTertiary>,
     );
     const btn = getByTestId('button-tertiary');
 
@@ -133,7 +145,11 @@ describe('ButtonTertiary', () => {
     const contentTW = 'flex-row items-center justify-center gap-x-2 opacity-0';
 
     const { getByTestId } = render(
-      <ButtonTertiary isLoading spinnerProps={{ twClassName: spinnerTW }}>
+      <ButtonTertiary
+        isLoading
+        spinnerProps={{ twClassName: spinnerTW }}
+        testID="button-tertiary"
+      >
         Loading
       </ButtonTertiary>,
     );
@@ -157,7 +173,7 @@ describe('ButtonTertiary', () => {
 
   it('renders danger+loading', () => {
     const { getByTestId } = render(
-      <ButtonTertiary isDanger isLoading>
+      <ButtonTertiary isDanger isLoading testID="button-tertiary">
         Hi
       </ButtonTertiary>,
     );
@@ -168,7 +184,7 @@ describe('ButtonTertiary', () => {
 
   it('renders inverse+loading', () => {
     const { getByTestId } = render(
-      <ButtonTertiary isInverse isLoading>
+      <ButtonTertiary isInverse isLoading testID="button-tertiary">
         Hi
       </ButtonTertiary>,
     );
@@ -179,7 +195,7 @@ describe('ButtonTertiary', () => {
 
   it('renders inverse+danger+loading', () => {
     const { getByTestId } = render(
-      <ButtonTertiary isInverse isDanger isLoading>
+      <ButtonTertiary isInverse isDanger isLoading testID="button-tertiary">
         Hi
       </ButtonTertiary>,
     );

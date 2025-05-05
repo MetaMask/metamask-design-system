@@ -8,21 +8,27 @@ import Button from './Button';
 describe('Button', () => {
   it('renders the correct primary variant', () => {
     const { getByTestId } = render(
-      <Button variant={ButtonVariant.Primary}>Default Button</Button>,
+      <Button variant={ButtonVariant.Primary} testID="button-primary">
+        Default Button
+      </Button>,
     );
     expect(getByTestId('button-primary')).not.toBeNull();
   });
 
   it('renders the correct secondary variant', () => {
     const { getByTestId } = render(
-      <Button variant={ButtonVariant.Secondary}>Default Button</Button>,
+      <Button variant={ButtonVariant.Secondary} testID="button-secondary">
+        Default Button
+      </Button>,
     );
     expect(getByTestId('button-secondary')).not.toBeNull();
   });
 
   it('renders the correct tertiary variant', () => {
     const { getByTestId } = render(
-      <Button variant={ButtonVariant.Tertiary}>Default Button</Button>,
+      <Button variant={ButtonVariant.Tertiary} testID="button-tertiary">
+        Default Button
+      </Button>,
     );
     expect(getByTestId('button-tertiary')).not.toBeNull();
   });

@@ -89,13 +89,11 @@ const ButtonPrimaryBase = ({
       }}
       startIconProps={{
         size: IconSize.Sm,
-        testID: 'start-icon',
         ...startIconProps,
         twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
       }}
       endIconProps={{
         size: IconSize.Sm,
-        testID: 'end-icon',
         ...endIconProps,
         twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
       }}
@@ -103,7 +101,6 @@ const ButtonPrimaryBase = ({
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
       style={[tw`${twContainerClassNames}`, style]}
-      testID="button-primary"
       {...props}
     >
       {children}

@@ -99,13 +99,11 @@ const ButtonTertiary = ({
       }}
       startIconProps={{
         size: IconSize.Sm,
-        testID: 'start-icon',
         ...startIconProps,
         twClassName: `${twTextClassNames} ${startIconProps?.twClassName ?? ''}`,
       }}
       endIconProps={{
         size: IconSize.Sm,
-        testID: 'end-icon',
         ...endIconProps,
         twClassName: `${twTextClassNames} ${endIconProps?.twClassName ?? ''}`,
       }}
@@ -113,7 +111,6 @@ const ButtonTertiary = ({
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
       style={[tw`${twContainerClassNames}`, style]}
-      testID="button-tertiary"
       {...props}
     >
       {children}

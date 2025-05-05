@@ -54,7 +54,9 @@ describe('ButtonSecondary', () => {
 
   it('renders default background & border', () => {
     const { getByTestId } = render(
-      <ButtonSecondary size={ButtonBaseSize.Lg}>Press me</ButtonSecondary>,
+      <ButtonSecondary size={ButtonBaseSize.Lg} testID="button-secondary">
+        Press me
+      </ButtonSecondary>,
     );
     const btn = getByTestId('button-secondary');
     expectBackground(btn.props.style, 'bg-transparent');
@@ -63,7 +65,9 @@ describe('ButtonSecondary', () => {
 
   it('renders danger background & border', () => {
     const { getByTestId } = render(
-      <ButtonSecondary isDanger>Danger</ButtonSecondary>,
+      <ButtonSecondary isDanger testID="button-secondary">
+        Danger
+      </ButtonSecondary>,
     );
     const btn = getByTestId('button-secondary');
     expectBackground(btn.props.style, 'bg-transparent');
@@ -72,7 +76,9 @@ describe('ButtonSecondary', () => {
 
   it('renders inverse background & border', () => {
     const { getByTestId } = render(
-      <ButtonSecondary isInverse>Inverse</ButtonSecondary>,
+      <ButtonSecondary isInverse testID="button-secondary">
+        Inverse
+      </ButtonSecondary>,
     );
     const btn = getByTestId('button-secondary');
     expectBackground(btn.props.style, 'bg-transparent');
@@ -81,7 +87,7 @@ describe('ButtonSecondary', () => {
 
   it('renders inverse+danger background & border', () => {
     const { getByTestId } = render(
-      <ButtonSecondary isInverse isDanger>
+      <ButtonSecondary isInverse isDanger testID="button-secondary">
         Both
       </ButtonSecondary>,
     );
@@ -91,7 +97,9 @@ describe('ButtonSecondary', () => {
   });
 
   it('toggles pressed styles (default)', () => {
-    const { getByTestId } = render(<ButtonSecondary>Press me</ButtonSecondary>);
+    const { getByTestId } = render(
+      <ButtonSecondary testID="button-secondary">Press me</ButtonSecondary>,
+    );
     const btn = getByTestId('button-secondary');
 
     fireEvent(btn, 'pressIn');
@@ -105,7 +113,9 @@ describe('ButtonSecondary', () => {
 
   it('toggles pressed styles (danger)', () => {
     const { getByTestId } = render(
-      <ButtonSecondary isDanger>Danger</ButtonSecondary>,
+      <ButtonSecondary isDanger testID="button-secondary">
+        Danger
+      </ButtonSecondary>,
     );
     const btn = getByTestId('button-secondary');
 
@@ -120,7 +130,9 @@ describe('ButtonSecondary', () => {
 
   it('toggles pressed styles (inverse)', () => {
     const { getByTestId } = render(
-      <ButtonSecondary isInverse>Inverse</ButtonSecondary>,
+      <ButtonSecondary isInverse testID="button-secondary">
+        Inverse
+      </ButtonSecondary>,
     );
     const btn = getByTestId('button-secondary');
 
@@ -139,7 +151,11 @@ describe('ButtonSecondary', () => {
     const contentTW = 'flex-row items-center justify-center gap-x-2 opacity-0';
 
     const { getByTestId } = render(
-      <ButtonSecondary isLoading spinnerProps={{ twClassName: spinnerTW }}>
+      <ButtonSecondary
+        isLoading
+        spinnerProps={{ twClassName: spinnerTW }}
+        testID="button-secondary"
+      >
         Loading
       </ButtonSecondary>,
     );
@@ -163,7 +179,7 @@ describe('ButtonSecondary', () => {
 
   it('renders danger+loading background & border', () => {
     const { getByTestId } = render(
-      <ButtonSecondary isDanger isLoading>
+      <ButtonSecondary isDanger isLoading testID="button-secondary">
         Hi
       </ButtonSecondary>,
     );
@@ -174,7 +190,7 @@ describe('ButtonSecondary', () => {
 
   it('renders inverse+loading background & border', () => {
     const { getByTestId } = render(
-      <ButtonSecondary isInverse isLoading>
+      <ButtonSecondary isInverse isLoading testID="button-secondary">
         Hi
       </ButtonSecondary>,
     );
@@ -185,7 +201,7 @@ describe('ButtonSecondary', () => {
 
   it('renders inverse+danger+loading background & border', () => {
     const { getByTestId } = render(
-      <ButtonSecondary isInverse isDanger isLoading>
+      <ButtonSecondary isInverse isDanger isLoading testID="button-secondary">
         Hi
       </ButtonSecondary>,
     );
