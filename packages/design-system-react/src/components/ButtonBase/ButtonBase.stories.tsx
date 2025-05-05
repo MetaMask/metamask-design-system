@@ -35,12 +35,12 @@ const meta: Meta<typeof ButtonBase> = {
     isFullWidth: {
       control: 'boolean',
       description:
-        'Optional prop that when true, makes the button take up the full width of its container',
+        'Optional prop that when true, makes the ButtonBase take up the full width of its container',
     },
     asChild: {
       control: 'boolean',
       description:
-        'Optional boolean that determines if the component should merge its props onto its immediate child instead of rendering a button element',
+        'Optional boolean that determines if the component should merge its props onto its immediate child instead of rendering a ButtonBase element',
     },
     isLoading: {
       control: 'boolean',
@@ -49,14 +49,14 @@ const meta: Meta<typeof ButtonBase> = {
     loadingText: {
       control: 'text',
       description:
-        'Optional prop for text to display when button is in loading state',
+        'Optional prop for text to display when ButtonBase is in loading state',
     },
     startIconName: {
       control: 'select',
       options: Object.keys(IconName),
       mapping: IconName,
       description:
-        'Optional prop to specify an icon to show at the start of the button',
+        'Optional prop to specify an icon to show at the start of the ButtonBase',
     },
     startIconProps: {
       control: 'object',
@@ -66,14 +66,14 @@ const meta: Meta<typeof ButtonBase> = {
     startAccessory: {
       control: 'text',
       description:
-        'Optional prop for a custom element to show at the start of the button',
+        'Optional prop for a custom element to show at the start of the ButtonBase',
     },
     endIconName: {
       control: 'select',
       options: Object.keys(IconName),
       mapping: IconName,
       description:
-        'Optional prop to specify an icon to show at the end of the button',
+        'Optional prop to specify an icon to show at the end of the ButtonBase',
     },
     endIconProps: {
       control: 'object',
@@ -83,11 +83,11 @@ const meta: Meta<typeof ButtonBase> = {
     endAccessory: {
       control: 'text',
       description:
-        'Optional prop for a custom element to show at the end of the button',
+        'Optional prop for a custom element to show at the end of the ButtonBase',
     },
     isDisabled: {
       control: 'boolean',
-      description: 'Optional prop that when true, disables the button',
+      description: 'Optional prop that when true, disables the ButtonBase',
     },
     loadingIconProps: {
       control: 'object',
