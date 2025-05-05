@@ -2,15 +2,15 @@ import { AvatarGroupSize } from '../../types';
 import { TextVariant } from '../Text';
 
 // Mappings
-export const MAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS: Record<
+export const TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS: Record<
   AvatarGroupSize,
-  number
+  string
 > = {
-  [AvatarGroupSize.Xs]: -6,
-  [AvatarGroupSize.Sm]: -10,
-  [AvatarGroupSize.Md]: -14,
-  [AvatarGroupSize.Lg]: -18,
-  [AvatarGroupSize.Xl]: -22,
+  [AvatarGroupSize.Xs]: 'gap-[-6px]',
+  [AvatarGroupSize.Sm]: 'gap-[-10px]',
+  [AvatarGroupSize.Md]: 'gap-[-14px]',
+  [AvatarGroupSize.Lg]: 'gap-[-18px]',
+  [AvatarGroupSize.Xl]: 'gap-[-22px]',
 };
 
 export const MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT: Record<

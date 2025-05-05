@@ -1,0 +1,318 @@
+import { Controls, Canvas } from '@storybook/blocks';
+import * as BadgeWrapperStories from './BadgeWrapper.stories';
+
+# BadgeWrapper
+
+The `BadgeWrapper` positions a badge on top of another element.
+
+<Canvas of={BadgeWrapperStories.Default} />
+
+## Props
+
+### `position`
+
+Optional prop to control the preset position of the badge.  
+This prop gets used along with `positionAnchorShape`, `positionXOffset`, and `positionYOffset` to determine the final position.
+
+Available positions:
+
+- `BadgeWrapperPosition.TopRight`
+- `BadgeWrapperPosition.TopLeft`
+- `BadgeWrapperPosition.BottomLeft`
+- `BadgeWrapperPosition.BottomRight`
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>BadgeWrapperPosition</code>
+      </td>
+      <td>No</td>
+      <td>
+        <code>BadgeWrapperPosition.BottomRight</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BadgeWrapperStories.Position} />
+
+---
+
+### `positionAnchorShape`
+
+Optional prop to determine the shape of the anchoring element.  
+This prop gets used along with `position`, `positionXOffset`, and `positionYOffset` to determine the final position.  
+Possible values:
+
+- `BadgeWrapperPositionAnchorShape.Circular`
+- `BadgeWrapperPositionAnchorShape.Rectangular`
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>BadgeWrapperPositionAnchorShape</code>
+      </td>
+      <td>No</td>
+      <td>
+        <code>BadgeWrapperPositionAnchorShape.Circular</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BadgeWrapperStories.PositionAnchorShape} />
+
+---
+
+### `positionXOffset`
+
+Optional prop to move the preset position horizontally.  
+This prop gets used along with `position`, `positionAnchorShape`, and `positionYOffset` to determine the final position.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>number</code>
+      </td>
+      <td>No</td>
+      <td>
+        <code>0</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BadgeWrapperStories.PositionXOffset} />
+
+---
+
+### `positionYOffset`
+
+Optional prop to move the preset position vertically.  
+This prop gets used along with `position`, `positionAnchorShape`, and `positionXOffset` to determine the final position.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>number</code>
+      </td>
+      <td>No</td>
+      <td>
+        <code>0</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BadgeWrapperStories.PositionYOffset} />
+
+---
+
+### `customPosition`
+
+Optional prop to customize the position through a position object.  
+Shape of the object: `{ top?: number\|string; right?: number\|string; bottom?: number\|string; left?: number\|string }`.  
+If provided, this overrides the preset `position` + offsets.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>BadgeWrapperCustomPosition</code>
+      </td>
+      <td>No</td>
+      <td>
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BadgeWrapperStories.CustomPosition} />
+
+---
+
+### `children`
+
+The element that the badge will attach itself to.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>ReactNode</code>
+      </td>
+      <td>Yes</td>
+      <td>
+        <code>—</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+### `badge`
+
+Any element that will be placed in the position of the badge.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>ReactNode</code>
+      </td>
+      <td>Yes</td>
+      <td>
+        <code>—</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BadgeWrapperStories.Badge} />
+
+---
+
+### `className`
+
+Optional prop for additional CSS classes to be applied to the BadgeWrapper component.  
+These classes will be merged with the component’s default classes using `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>string</code>
+      </td>
+      <td>No</td>
+      <td>
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+### `style`
+
+Optional prop to control the style of the outer wrapper.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>React.CSSProperties</code>
+      </td>
+      <td>No</td>
+      <td>
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+### `data-testid`
+
+Optional prop to add a test id to the outermost `<div>` for testing.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>string</code>
+      </td>
+      <td>No</td>
+      <td>
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Component API
+
+<Controls of={BadgeWrapperStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

@@ -1,4 +1,4 @@
-import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
+import type { ComponentProps } from 'react';
 
 import {
   BadgeWrapperPosition,
@@ -55,11 +55,16 @@ export type BadgeWrapperProps = {
    */
   badge: React.ReactNode;
   /**
-   * Optional prop to add twrnc overriding classNames.
+   * Optional prop for additional CSS classes to be applied to the BadgeWrapper component.
+   * These classes will be merged with the component's default classes using twMerge.
    */
-  twClassName?: string;
+  className?: string;
   /**
    * Optional prop to control the style.
    */
-  style?: StyleProp<ViewStyle>;
-} & ViewProps;
+  style?: React.CSSProperties;
+  /**
+   * Optional prop to add a test id to the BadgeWrapper
+   */
+  'data-testid'?: string;
+} & ComponentProps<'div'>;
