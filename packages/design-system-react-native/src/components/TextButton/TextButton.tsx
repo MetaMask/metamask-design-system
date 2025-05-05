@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Pressable } from 'react-native';
 
 import { TextButtonSize } from '../../types';
@@ -21,10 +21,6 @@ const TextButton: React.FC<TextButtonProps> = ({
   endAccessory,
   isDisabled = false,
   isInverse = false,
-  onPress,
-  onLongPress,
-  onPressIn,
-  onPressOut,
   twClassName = '',
   accessibilityRole,
   accessibilityLabel,
@@ -32,23 +28,33 @@ const TextButton: React.FC<TextButtonProps> = ({
   ...props
 }) => {
   const tw = useTailwind();
-
-  const { fontSize = 0, lineHeight = 0 } =
-    tw`text-${MAP_TEXTBUTTON_SIZE_TEXTVARIANT[size] as string}` as {
-      fontSize?: number;
-      lineHeight?: number;
-    };
+  /**
+   * Calculating the baselineOffset. This baselineOffset is needed to make sure
+   * the TextButton aligns perfectly when placed within Text elements
+   */
+  const { fontSize, lineHeight } = tw`text-${
+    MAP_TEXTBUTTON_SIZE_TEXTVARIANT[size] as string
+  }` as {
+    fontSize: number;
+    lineHeight: number;
+  };
   const baselineOffset = (lineHeight - fontSize) / 2;
 
-  const getTextColor = (pressed: boolean): string => {
-    if (isInverse) {
-      return 'text-primary-inverse';
-    }
-    return pressed ? 'text-primary-defaultPressed' : 'text-primary-default';
-  };
+  const getTextColor = useCallback(
+    (pressed: boolean): string => {
+      if (isInverse) {
+        return 'text-primary-inverse';
+      }
+      return pressed ? 'text-primary-defaultPressed' : 'text-primary-default';
+    },
+    [isInverse],
+  );
 
-  const getTextDecoration = (pressed: boolean): string =>
-    isInverse || pressed ? 'underline' : 'no-underline';
+  const getTextDecoration = useCallback(
+    (pressed: boolean): string =>
+      isInverse || pressed ? 'underline' : 'no-underline',
+    [isInverse],
+  );
 
   return (
     <Text>
@@ -56,10 +62,6 @@ const TextButton: React.FC<TextButtonProps> = ({
         accessibilityRole={accessibilityRole ?? 'button'}
         accessibilityLabel={accessibilityLabel}
         disabled={isDisabled}
-        onPress={onPress}
-        onLongPress={onLongPress}
-        onPressIn={onPressIn}
-        onPressOut={onPressOut}
         style={({ pressed }) => [
           { transform: [{ translateY: baselineOffset }] },
           tw`flex-row items-center ${pressed ? 'bg-background-pressed' : 'bg-transparent'} ${isDisabled ? 'opacity-50' : 'opacity-100'} ${twClassName}`,
