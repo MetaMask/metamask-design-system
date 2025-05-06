@@ -1,6 +1,6 @@
 # ButtonSecondary
 
-The `ButtonSecondary` component is designed for secondary actions in your application. It builds on `ButtonBase` and provides additional styling and functionality, including support for inverse and danger states, icons, and loading indicators.
+`ButtonSecondary` is a button for additional options that are helpful.
 
 ## Props
 

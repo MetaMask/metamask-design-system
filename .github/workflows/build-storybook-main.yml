@@ -1,0 +1,51 @@
+name: Build Storybook Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/storybook-react
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v1
+        with:
+          is-high-risk-environment: false
+          skip-allow-scripts: true
+
+      - name: Build required packages
+        working-directory: .
+        run: |
+          yarn build
+
+      - name: Build Storybook
+        run: yarn build-storybook
+
+      - name: Upload artifact
+        id: upload
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: apps/storybook-react/storybook-static
+          retention-days: 1
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
