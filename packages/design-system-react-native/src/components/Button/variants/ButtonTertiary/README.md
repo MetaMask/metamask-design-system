@@ -1,6 +1,6 @@
 # ButtonTertiary
 
-The `ButtonTertiary` component is a styled button designed for tertiary actions in your application. It builds upon `ButtonBase` and provides additional customization options, including danger and inverse states, icons, and loading indicators.
+`ButtonTertiary` is a button for optional and lowest attention.
 
 ## Props
 
