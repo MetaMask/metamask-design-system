@@ -1,6 +1,6 @@
 # BadgeNetwork
 
-The `BadgeNetwork` component is reserved for badged representing networks. It provides a fallback mechanism in case of an image load failure, ensuring a graceful degradation by displaying either an alternative text or a fallback icon.
+`BadgeNetwork` indicates the network an entity is connected to.
 
 ---
 

@@ -5,15 +5,15 @@ import AvatarNetwork, { AvatarNetworkSize } from '../AvatarNetwork';
 import type { BadgeNetworkProps } from './BadgeNetwork.types';
 
 const BadgeNetwork = ({
+  src,
   name,
   fallbackText,
-  fallbackTextProps,
   ...props
 }: BadgeNetworkProps) => (
   <AvatarNetwork
+    src={src}
     name={name}
     fallbackText={fallbackText}
-    fallbackTextProps={fallbackTextProps}
     {...props}
     size={AvatarNetworkSize.Xs}
     hasBorder
