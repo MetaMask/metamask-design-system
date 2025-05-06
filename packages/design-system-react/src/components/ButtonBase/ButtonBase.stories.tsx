@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { ButtonBaseSize } from '../../types';
-import { IconName } from '../Icon';
-import { TextVariant } from '../Text';
+import { Icon, IconName } from '../Icon';
+import { Text } from '../Text';
 import { ButtonBase } from './ButtonBase';
 import README from './README.mdx';
 
@@ -35,12 +35,12 @@ const meta: Meta<typeof ButtonBase> = {
     isFullWidth: {
       control: 'boolean',
       description:
-        'Optional prop that when true, makes the button take up the full width of its container',
+        'Optional prop that when true, makes the ButtonBase take up the full width of its container',
     },
     asChild: {
       control: 'boolean',
       description:
-        'Optional boolean that determines if the component should merge its props onto its immediate child instead of rendering a button element',
+        'Optional boolean that determines if the component should merge its props onto its immediate child instead of rendering a ButtonBase element',
     },
     isLoading: {
       control: 'boolean',
@@ -49,14 +49,14 @@ const meta: Meta<typeof ButtonBase> = {
     loadingText: {
       control: 'text',
       description:
-        'Optional prop for text to display when button is in loading state',
+        'Optional prop for text to display when ButtonBase is in loading state',
     },
     startIconName: {
       control: 'select',
       options: Object.keys(IconName),
       mapping: IconName,
       description:
-        'Optional prop to specify an icon to show at the start of the button',
+        'Optional prop to specify an icon to show at the start of the ButtonBase',
     },
     startIconProps: {
       control: 'object',
@@ -66,14 +66,14 @@ const meta: Meta<typeof ButtonBase> = {
     startAccessory: {
       control: 'text',
       description:
-        'Optional prop for a custom element to show at the start of the button',
+        'Optional prop for a custom element to show at the start of the ButtonBase',
     },
     endIconName: {
       control: 'select',
       options: Object.keys(IconName),
       mapping: IconName,
       description:
-        'Optional prop to specify an icon to show at the end of the button',
+        'Optional prop to specify an icon to show at the end of the ButtonBase',
     },
     endIconProps: {
       control: 'object',
@@ -83,11 +83,11 @@ const meta: Meta<typeof ButtonBase> = {
     endAccessory: {
       control: 'text',
       description:
-        'Optional prop for a custom element to show at the end of the button',
+        'Optional prop for a custom element to show at the end of the ButtonBase',
     },
     isDisabled: {
       control: 'boolean',
-      description: 'Optional prop that when true, disables the button',
+      description: 'Optional prop that when true, disables the ButtonBase',
     },
     loadingIconProps: {
       control: 'object',
@@ -98,6 +98,13 @@ const meta: Meta<typeof ButtonBase> = {
       control: 'object',
       description:
         'Optional props to be passed to the Text component when children is a string',
+      table: {
+        type: { summary: 'Partial<TextProps>' },
+      },
+    },
+    loadingTextProps: {
+      control: 'object',
+      description: 'Optional props to be passed to the loading Text component',
       table: {
         type: { summary: 'Partial<TextProps>' },
       },
@@ -114,6 +121,22 @@ export const Default: Story = {
   },
 };
 
+export const Children: Story = {
+  render: (args) => (
+    <div className="flex gap-2">
+      <ButtonBase {...args}>Children</ButtonBase>
+      <ButtonBase {...args} className="h-auto rounded-lg py-2">
+        <div className="flex flex-col items-center gap-2">
+          <Icon name={IconName.Arrow2UpRight} />
+          <Text asChild>
+            <span>Send</span>
+          </Text>
+        </div>
+      </ButtonBase>
+    </div>
+  ),
+};
+
 export const Size: Story = {
   render: (args) => (
     <div className="flex gap-2">
@@ -127,16 +150,6 @@ export const Size: Story = {
     </div>
   ),
 };
-
-export const TextProps: Story = {
-  args: {
-    children: 'Button with custom text variant',
-    textProps: {
-      variant: TextVariant.BodySm,
-    },
-  },
-};
-
 export const IsFullWidth: Story = {
   args: {
     children: 'Full Width Button',
@@ -173,11 +186,16 @@ export const EndAccessory: Story = {
 };
 
 export const IsLoading: Story = {
-  args: {
-    children: 'Submit',
-    isLoading: true,
-    loadingText: 'Submitting...',
-  },
+  render: (args) => (
+    <div className="flex gap-2">
+      <ButtonBase {...args} isLoading>
+        Submit this form
+      </ButtonBase>
+      <ButtonBase {...args} isLoading loadingText="Submitting...">
+        Submit this form
+      </ButtonBase>
+    </div>
+  ),
 };
 
 export const IsDisabled: Story = {

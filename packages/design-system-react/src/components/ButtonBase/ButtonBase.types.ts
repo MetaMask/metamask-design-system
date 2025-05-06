@@ -1,7 +1,6 @@
 import type { ComponentProps } from 'react';
 
 import { ButtonBaseSize } from '../../types';
-import type { MakePropsOptional } from '../../types/make-props-optional';
 import type { IconName, IconProps } from '../Icon';
 import type { TextProps } from '../Text';
 
@@ -45,13 +44,17 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
    */
   loadingText?: string;
   /**
+   * Optional props to be passed to the loading Text component
+   */
+  loadingTextProps?: Partial<TextProps>;
+  /**
    * Optional prop to specify an icon to show at the start of the button
    */
   startIconName?: IconName;
   /**
    * Optional prop to pass additional properties to the start icon
    */
-  startIconProps?: MakePropsOptional<IconProps>;
+  startIconProps?: Partial<IconProps>;
   /**
    * Optional prop for a custom element to show at the start of the button
    */
@@ -63,7 +66,7 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
   /**
    * Optional prop to pass additional properties to the end icon
    */
-  endIconProps?: MakePropsOptional<IconProps>;
+  endIconProps?: Partial<IconProps>;
   /**
    * Optional prop for a custom element to show at the end of the button
    */
@@ -76,7 +79,7 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
   /**
    * Optional prop to pass additional properties to the loading icon
    */
-  loadingIconProps?: MakePropsOptional<IconProps>;
+  loadingIconProps?: Partial<IconProps>;
   /**
    * Optional CSS styles to be applied to the component.
    * Should be used sparingly and only for dynamic styles that can't be achieved with className.

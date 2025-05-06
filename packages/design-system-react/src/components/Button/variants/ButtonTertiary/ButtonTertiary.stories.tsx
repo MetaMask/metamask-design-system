@@ -7,7 +7,7 @@ import { ButtonTertiary } from './ButtonTertiary';
 import README from './README.mdx';
 
 const meta: Meta<typeof ButtonTertiary> = {
-  title: 'React Components/ButtonTertiary',
+  title: 'React Components/Button/variants/ButtonTertiary',
   component: ButtonTertiary,
   parameters: {
     docs: {
