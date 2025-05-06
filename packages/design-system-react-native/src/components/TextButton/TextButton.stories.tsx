@@ -2,6 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
+import { TextButtonSize } from '../../types';
 import { IconName } from '../Icon';
 import Text from '../Text';
 import TextButton from './TextButton';
@@ -14,11 +15,9 @@ const meta: Meta<TextButtonProps> = {
     children: {
       control: 'text',
     },
-    isLoading: {
-      control: 'boolean',
-    },
-    loadingText: {
-      control: 'text',
+    size: {
+      control: 'select',
+      options: TextButtonSize,
     },
     startIconName: {
       control: 'select',
@@ -62,8 +61,6 @@ const TextButtonStory: React.FC<TextButtonProps> = ({
 export const Default: Story = {
   args: {
     children: 'Sample TextButton Text',
-    isLoading: false,
-    loadingText: 'Loading',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
     isDisabled: false,
@@ -71,12 +68,36 @@ export const Default: Story = {
   render: (args) => <TextButtonStory {...args} />,
 };
 
-export const IsLoading: Story = {
+export const Size: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
-      <TextButton isLoading>TextButton</TextButton>
-      <TextButton isLoading loadingText="With Loading Text">
-        TextButton
+    <View style={{ gap: 8 }}>
+      <TextButton
+        startIconName={IconName.Add}
+        endIconName={IconName.AddSquare}
+        size={TextButtonSize.BodyXs}
+      >
+        TextButton - size BodyXs
+      </TextButton>
+      <TextButton
+        startIconName={IconName.Add}
+        endIconName={IconName.AddSquare}
+        size={TextButtonSize.BodySm}
+      >
+        TextButton - size BodySm
+      </TextButton>
+      <TextButton
+        startIconName={IconName.Add}
+        endIconName={IconName.AddSquare}
+        size={TextButtonSize.BodyMd}
+      >
+        TextButton - size BodyMd
+      </TextButton>
+      <TextButton
+        startIconName={IconName.Add}
+        endIconName={IconName.AddSquare}
+        size={TextButtonSize.BodyLg}
+      >
+        TextButton - size BodyLg
       </TextButton>
     </View>
   ),

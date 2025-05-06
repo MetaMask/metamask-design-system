@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { TextButtonSize } from '../../types';
 import { IconName } from '../Icon';
 import { Text, TextVariant } from '../Text';
 import README from './README.mdx';
@@ -30,20 +31,11 @@ const meta: Meta<typeof TextButton> = {
       description:
         'Optional prop that when true, applies inverse styling to the button',
     },
-    textVariant: {
+    size: {
       control: 'select',
-      options: Object.keys(TextVariant),
-      mapping: TextVariant,
-      description: 'Optional prop to specify the text variant',
-    },
-    isLoading: {
-      control: 'boolean',
-      description: 'Optional prop that when true, shows a loading spinner',
-    },
-    loadingText: {
-      control: 'text',
-      description:
-        'Optional prop for text to display when button is in loading state',
+      options: Object.keys(TextButtonSize),
+      mapping: TextButtonSize,
+      description: 'Optional prop to specify the size of the TextButton',
     },
     startIconName: {
       control: 'select',
@@ -75,26 +67,25 @@ export const Default: Story = {
   },
 };
 
-export const TextVariantStory: Story = {
+export const Size: Story = {
   render: (args) => (
     <div className="space-y-8">
       <div className="flex flex-col items-start gap-2">
-        <TextButton {...args} textVariant={TextVariant.BodyLg}>
+        <TextButton {...args} size={TextButtonSize.BodyLg}>
           BodyLg
         </TextButton>
-        <TextButton {...args} textVariant={TextVariant.BodyMd}>
+        <TextButton {...args} size={TextButtonSize.BodyMd}>
           BodyMd (Default)
         </TextButton>
-        <TextButton {...args} textVariant={TextVariant.BodySm}>
+        <TextButton {...args} size={TextButtonSize.BodySm}>
           BodySm
         </TextButton>
-        <TextButton {...args} textVariant={TextVariant.BodyXs}>
+        <TextButton {...args} size={TextButtonSize.BodyXs}>
           BodyXs
         </TextButton>
       </div>
     </div>
   ),
-  name: 'TextVariant',
 };
 
 export const AsChild: Story = {
@@ -102,7 +93,7 @@ export const AsChild: Story = {
     <div className="space-y-4">
       <Text variant={TextVariant.BodySm}>
         To learn more about web3, visit{' '}
-        <TextButton textVariant={TextVariant.BodySm} asChild>
+        <TextButton size={TextButtonSize.BodySm} asChild>
           <a href="https://metamask.io">MetaMask Learn</a>
         </TextButton>
       </Text>
@@ -141,14 +132,6 @@ export const EndIconName: Story = {
   args: {
     children: 'With End Icon',
     endIconName: IconName.AddSquare,
-  },
-};
-
-export const IsLoading: Story = {
-  args: {
-    children: 'Loading Button',
-    isLoading: true,
-    loadingText: 'Loading...',
   },
 };
 
