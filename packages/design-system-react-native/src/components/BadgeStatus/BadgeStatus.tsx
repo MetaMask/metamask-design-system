@@ -29,9 +29,6 @@ const BadgeStatus = ({
       {...props}
     >
       <View
-        style={tw`bg-background-default absolute bottom-0 left-0 right-0 top-0 rounded-full`}
-      />
-      <View
         style={[
           tw`rounded-full border-2 ${TWCLASSMAP_BADGESTATUS_SIZE[size]} ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[status]} `,
         ]}
