@@ -7,7 +7,7 @@ import { ButtonSecondary } from './ButtonSecondary';
 import README from './README.mdx';
 
 const meta: Meta<typeof ButtonSecondary> = {
-  title: 'React Components/ButtonSecondary',
+  title: 'React Components/Button/variants/ButtonSecondary',
   component: ButtonSecondary,
   parameters: {
     docs: {

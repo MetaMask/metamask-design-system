@@ -183,10 +183,19 @@ describe('ButtonBase', () => {
     expect(button).toBeDisabled();
     expect(button).toHaveClass('cursor-not-allowed');
 
-    rerender(<ButtonBase isLoading>Loading Button</ButtonBase>);
+    rerender(
+      <ButtonBase
+        isLoading
+        loadingText="Loading"
+        loadingTextProps={{ className: 'custom-text-class' }}
+      >
+        Loading Button
+      </ButtonBase>,
+    );
     button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass('cursor-not-allowed');
+    expect(screen.getByText('Loading')).toHaveClass('custom-text-class');
   });
 
   it('handles text children correctly', () => {

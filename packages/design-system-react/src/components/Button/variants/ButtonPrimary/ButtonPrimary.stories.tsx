@@ -7,7 +7,7 @@ import { ButtonPrimary } from './ButtonPrimary';
 import README from './README.mdx';
 
 const meta: Meta<typeof ButtonPrimary> = {
-  title: 'React Components/ButtonPrimary',
+  title: 'React Components/Button/variants/ButtonPrimary',
   component: ButtonPrimary,
   parameters: {
     docs: {
