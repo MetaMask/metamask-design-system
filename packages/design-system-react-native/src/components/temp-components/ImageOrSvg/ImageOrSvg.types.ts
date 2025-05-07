@@ -11,7 +11,7 @@ import { SvgProps } from 'react-native-svg';
 /**
  * Base props common to all variations.
  */
-interface ImageOrSvgBaseProps {
+export type ImageOrSvgBaseProps = {
   /**
    * Optional prop to set the width of the image/SVG.
    * Accepts numbers (pixels) or string values (like percentages).
@@ -50,7 +50,7 @@ interface ImageOrSvgBaseProps {
    * the 'uri' prop (which is handled separately).
    */
   svgProps?: Omit<SvgProps, 'uri'>;
-}
+};
 
 /**
  * Defines the source type for an image or SVG.
@@ -65,11 +65,11 @@ export type ImageOrSvgSrc =
   | React.ComponentType<SvgProps> // For local imported svg
   | { uri?: string }; // For remote image or SVG (with a uri property)
 
-export interface ImageOrSvgProps extends ImageOrSvgBaseProps {
+export type ImageOrSvgProps = ImageOrSvgBaseProps & {
   /**
    * Required prop for the source of the image or SVG.
    * This prop determines whether a local image, a local SVG component,
    * or a remote image/SVG (via URI) is rendered.
    */
   src: ImageOrSvgSrc;
-}
+};

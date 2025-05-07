@@ -32,6 +32,12 @@ module.exports = merge(baseConfig, {
     '!**/*.assets.{js,ts}', // Exclude .assets files
     '!**/*.types.{js,ts}', // Exclude .types files
   ],
+  // Add coverage ignore patterns
+  coveragePathIgnorePatterns: [
+    'index.ts', // Ignore all index.ts files
+    './src/index.ts', // Also keep the original pattern
+    '\\.stories\\.(ts|tsx)$',
+  ],
   preset: 'react-native',
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',

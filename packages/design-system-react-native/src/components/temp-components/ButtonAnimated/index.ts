@@ -1,2 +1,2 @@
 export { default } from './ButtonAnimated';
-export { ButtonAnimatedProps } from './ButtonAnimated.types';
+export type { ButtonAnimatedProps } from './ButtonAnimated.types';
