@@ -11,7 +11,9 @@ import type { BadgeWrapperProps } from './BadgeWrapper.types';
 
 const BadgeWrapper = ({
   children,
+  childrenContainerProps,
   badge,
+  badgeContainerProps,
   position = BadgeWrapperPosition.BottomRight,
   positionAnchorShape = BadgeWrapperPositionAnchorShape.Circular,
   positionXOffset = 0,
@@ -99,10 +101,13 @@ const BadgeWrapper = ({
 
   return (
     <View style={[tw`relative self-start`, style]} {...props}>
-      <View onLayout={getAnchorSize}>{children}</View>
+      <View onLayout={getAnchorSize} {...childrenContainerProps}>
+        {children}
+      </View>
       <View
         onLayout={getBadgeSize}
         style={[tw`absolute`, { ...finalPositions }]}
+        {...badgeContainerProps}
       >
         {badge}
       </View>

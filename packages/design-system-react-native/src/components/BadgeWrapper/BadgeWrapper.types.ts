@@ -51,9 +51,17 @@ export type BadgeWrapperProps = {
    */
   children: React.ReactNode;
   /**
+   * Optional prop to pass additional props to the children container
+   */
+  childrenContainerProps?: ViewProps;
+  /**
    * Any element that will be placed in the position of the badge.
    */
   badge: React.ReactNode;
+  /**
+   * Optional prop to pass additional props to the badge container
+   */
+  badgeContainerProps?: ViewProps;
   /**
    * Optional prop to add twrnc overriding classNames.
    */
