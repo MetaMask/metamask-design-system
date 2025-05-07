@@ -24,9 +24,7 @@ describe('BadgeStatus', () => {
     const { getByTestId } = render(<TestComponent />);
     const badge = getByTestId('badge');
     expect(badge.props.style[0]).toStrictEqual(expectedOuter);
-    // The inner view is rendered as the child of the outer View.
-    const inner = badge.props.children[1];
-    expect(inner.props.style[0]).toStrictEqual(expectedInner);
+    expect(badge.props.children.props.style[0]).toStrictEqual(expectedInner);
   });
 
   it('renders without border when hasBorder is false', () => {
@@ -53,7 +51,7 @@ describe('BadgeStatus', () => {
     const TestComponent = () => {
       return (
         <BadgeStatus
-          status={BadgeStatusStatus.Inactive}
+          status={BadgeStatusStatus.Disconnected}
           style={customStyle}
           testID="badge"
         />
@@ -83,15 +81,15 @@ describe('BadgeStatus', () => {
     expect(badge.props.accessibilityLabel).toStrictEqual('status-badge');
   });
 
-  it('renders with custom size and status PartiallyActive', () => {
+  it('renders with custom size and status Inactive', () => {
     let expectedInner;
     const customSize = BadgeStatusSize.Lg; // For example, '10'
     const TestComponent = () => {
       const tw = useTailwind();
-      expectedInner = tw`rounded-full border-2 ${TWCLASSMAP_BADGESTATUS_SIZE[customSize]} ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.PartiallyActive]} `;
+      expectedInner = tw`rounded-full border-2 ${TWCLASSMAP_BADGESTATUS_SIZE[customSize]} ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Inactive]} `;
       return (
         <BadgeStatus
-          status={BadgeStatusStatus.PartiallyActive}
+          status={BadgeStatusStatus.Inactive}
           size={customSize}
           testID="badge"
         />
@@ -100,8 +98,7 @@ describe('BadgeStatus', () => {
 
     const { getByTestId } = render(<TestComponent />);
     const badge = getByTestId('badge');
-    const inner = badge.props.children[1];
-    expect(inner.props.style[0]).toStrictEqual(expectedInner);
+    expect(badge.props.children.props.style[0]).toStrictEqual(expectedInner);
   });
 
   it('uses default size and hasBorder when not provided', () => {
@@ -118,7 +115,6 @@ describe('BadgeStatus', () => {
     const { getByTestId } = render(<TestComponent />);
     const badge = getByTestId('badge');
     expect(badge.props.style[0]).toStrictEqual(expectedOuter);
-    const inner = badge.props.children[1];
-    expect(inner.props.style[0]).toStrictEqual(expectedInner);
+    expect(badge.props.children.props.style[0]).toStrictEqual(expectedInner);
   });
 });
