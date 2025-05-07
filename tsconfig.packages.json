@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "lib": ["ES2020"],
     "module": "Node16",
+    "isolatedModules": true,
     "moduleResolution": "Node16",
     "baseUrl": ".",
     /**

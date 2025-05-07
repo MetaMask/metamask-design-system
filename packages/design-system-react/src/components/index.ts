@@ -45,9 +45,9 @@ export { BadgeWrapper } from './BadgeWrapper';
 export type { BadgeWrapperProps } from './BadgeWrapper';
 export {
   BadgeWrapperPosition,
-  BadgeWrapperCustomPosition,
   BadgeWrapperPositionAnchorShape,
 } from './BadgeWrapper';
+export type { BadgeWrapperCustomPosition } from './BadgeWrapper';
 
 export { Blockies } from './temp-components/Blockies';
 export type { BlockiesProps } from './temp-components/Blockies';
