@@ -1,6 +1,6 @@
 # ButtonBase
 
-The `ButtonBase` is the base component for `Button`.
+`ButtonBase` is a labeled element that a user can click or tap to initiate an action.
 
 ---
 

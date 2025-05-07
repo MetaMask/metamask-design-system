@@ -1,6 +1,6 @@
 # TextButton
 
-Contextual inline link or button
+`TextButton` is used for text-only button actions or hyperlink without padding or background.
 
 ---
 

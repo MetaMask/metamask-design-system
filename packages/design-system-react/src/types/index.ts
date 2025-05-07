@@ -341,6 +341,16 @@ export enum FontFamily {
 }
 
 /**
+ * TextButton - size
+ */
+export enum TextButtonSize {
+  BodyLg = 'body-lg',
+  BodyMd = 'body-md',
+  BodySm = 'body-sm',
+  BodyXs = 'body-xs',
+}
+
+/**
  * Icon - size
  */
 export enum IconSize {

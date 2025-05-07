@@ -1,6 +1,6 @@
 # BadgeIcon
 
-The `BadgeIcon` component represents static icons inside of a badge. It is useful for visually indicating different actions or statuses, such as sending, staking, or bridging assets.
+`BadgeIcon` is a circular indicator that contains an icon, used to provide quick context or visual tagging at a glance.
 
 ---
 

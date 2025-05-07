@@ -1,6 +1,6 @@
 # ButtonPrimary
 
-The `ButtonPrimary` component is a styled button designed for primary actions in your application. It builds upon `ButtonBase` and provides additional customization options, including danger and inverse states, icons, and loading indicators.
+`ButtonPrimary` is a button for most important and desired action to guide the user.
 
 ## Props
 

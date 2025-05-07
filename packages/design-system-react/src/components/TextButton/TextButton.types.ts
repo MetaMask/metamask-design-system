@@ -1,10 +1,16 @@
+import { TextButtonSize } from '../../types';
 import type { ButtonBaseProps } from '../ButtonBase';
-import type { TextVariant } from '../Text';
 
 export type TextButtonProps = Omit<
   ButtonBaseProps,
   // We handle these props in TextButton
-  'className' | 'isDisabled' | 'isLoading' | 'style' | 'size'
+  | 'className'
+  | 'isDisabled'
+  | 'isLoading'
+  | 'loadingIconProps'
+  | 'loadingTextProps'
+  | 'style'
+  | 'size'
 > & {
   /**
    * Optional prop for additional CSS classes to be applied to the TextButton component
@@ -21,15 +27,10 @@ export type TextButtonProps = Omit<
    */
   isDisabled?: boolean;
   /**
-   * Optional prop that when true, shows a loading spinner
-   * @default false
+   * Optional prop to specify the size of the TextButton
+   * @default TextButtonSize.BodyMd
    */
-  isLoading?: boolean;
-  /**
-   * Optional prop to specify the text variant
-   * @default TextVariant.BodyMd
-   */
-  textVariant?: TextVariant;
+  size?: TextButtonSize;
   /**
    * Optional CSS styles to be applied to the component.
    * Should be used sparingly and only for dynamic styles that can't be achieved with className.

@@ -17,7 +17,9 @@ export const BadgeWrapper = React.forwardRef<HTMLDivElement, BadgeWrapperProps>(
   (
     {
       children,
+      childrenContainerProps,
       badge,
+      badgeContainerProps,
       position = BadgeWrapperPosition.BottomRight,
       positionAnchorShape = BadgeWrapperPositionAnchorShape.Circular,
       positionXOffset = 0,
@@ -103,11 +105,20 @@ export const BadgeWrapper = React.forwardRef<HTMLDivElement, BadgeWrapperProps>(
 
     return (
       <div ref={ref} className={containerClassName} style={style} {...props}>
-        <div className="inline-flex" ref={anchorRef}>
+        <div
+          className="inline-flex"
+          ref={anchorRef}
+          {...childrenContainerProps}
+        >
           {children}
         </div>
 
-        <div ref={badgeRef} className="absolute" style={finalPositions}>
+        <div
+          ref={badgeRef}
+          className="absolute"
+          style={finalPositions}
+          {...badgeContainerProps}
+        >
           {badge}
         </div>
       </div>

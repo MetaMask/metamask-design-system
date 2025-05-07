@@ -8,7 +8,7 @@ import ButtonPrimary from './ButtonPrimary';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 
 const meta: Meta<ButtonPrimaryProps> = {
-  title: 'Components/ButtonPrimary',
+  title: 'Components/Button/variants/ButtonPrimary',
   component: ButtonPrimary,
   argTypes: {
     children: {

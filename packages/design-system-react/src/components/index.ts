@@ -85,5 +85,5 @@ export {
 } from './Text';
 export type { TextProps } from './Text';
 
-export { TextButton } from './TextButton';
+export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
