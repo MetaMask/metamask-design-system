@@ -1,7 +1,7 @@
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
+import { TextButtonSize } from '../../types';
 import type { IconProps, IconName } from '../Icon';
-import type { SpinnerProps } from '../temp-components/Spinner';
 import type { TextProps } from '../Text';
 
 /**
@@ -13,22 +13,14 @@ export type TextButtonProps = {
    */
   children: string;
   /**
+   * Optional prop to control the size of the TextButton
+   * @default TextButtonSize.BodyMd
+   */
+  size?: TextButtonSize;
+  /**
    * Optional props to be passed to the Text component when children is a string
    */
   textProps?: Omit<Partial<TextProps>, 'children'>;
-  /**
-   * Optional prop that when true, shows a loading spinner
-   * @default false
-   */
-  isLoading?: boolean;
-  /**
-   * Optional prop for text to display when button is in loading state
-   */
-  loadingText?: string;
-  /**
-   * Optional prop to pass additional properties to the end icon
-   */
-  spinnerProps?: Partial<SpinnerProps>;
   /**
    * Optional prop to specify an icon to show at the start of the button
    */

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { TextButtonSize } from '../../types';
 import { IconName } from '../Icon';
 import { Text, TextVariant } from '../Text';
 import { TextButton } from './TextButton';
@@ -28,9 +29,7 @@ describe('TextButton', () => {
 
   it('applies the specified text variant', () => {
     render(
-      <TextButton textVariant={TextVariant.BodyLg}>
-        Custom Text Variant
-      </TextButton>,
+      <TextButton size={TextButtonSize.BodyLg}>Custom Text Variant</TextButton>,
     );
 
     const text = screen.getByText('Custom Text Variant');
@@ -51,35 +50,6 @@ describe('TextButton', () => {
       'opacity-50',
       'cursor-not-allowed',
     );
-  });
-
-  it('applies loading styles while preserving variant-specific classes', () => {
-    render(
-      <TextButton isLoading loadingText="Loading...">
-        Button
-      </TextButton>,
-    );
-
-    const button = screen.getByRole('button');
-    expect(button).toBeDisabled();
-    expect(button).toHaveClass(
-      'text-primary-default-pressed',
-      'cursor-not-allowed',
-    );
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
-  });
-
-  it('applies loading styles with inverse variant', () => {
-    render(
-      <TextButton isLoading isInverse loadingText="Loading...">
-        Button
-      </TextButton>,
-    );
-
-    const button = screen.getByRole('button');
-    expect(button).toBeDisabled();
-    expect(button).toHaveClass('text-primary-inverse', 'cursor-not-allowed');
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('renders with icons correctly', () => {

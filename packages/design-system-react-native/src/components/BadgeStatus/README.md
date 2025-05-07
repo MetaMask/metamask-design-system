@@ -1,6 +1,6 @@
 # BadgeStatus
 
-`BadgeStatus` indicates the status an entity is on.
+`BadgeStatus` indicates the state of an item through color
 
 ---
 
@@ -16,21 +16,21 @@ Controls the status of the badge.
 
 Available statuses:
 
-- `Active`
-- `PartiallyActive`
-- `Inactive`
+- `Active` (Connected)
+- `Inactive` (Connected)
+- `Disconnected`
 - `New`
 - `Attention`
 
 Each status maps to a different background and border color:
 
-| Status            | Background Color        | Border Color             |
-| ----------------- | ----------------------- | ------------------------ |
-| `Active`          | `bg-success-default`    | `border-success-default` |
-| `PartiallyActive` | `bg-background-default` | `border-success-default` |
-| `Inactive`        | `bg-icon-muted`         | `border-icon-muted`      |
-| `New`             | `bg-primary-default`    | `border-primary-default` |
-| `Attention`       | `bg-error-default`      | `border-error-default`   |
+| Status         | Background Color        | Border Color             |
+| -------------- | ----------------------- | ------------------------ |
+| `Active`       | `bg-success-default`    | `border-success-default` |
+| `Inactive`     | `bg-background-default` | `border-success-default` |
+| `Disconnected` | `bg-icon-muted`         | `border-icon-muted`      |
+| `New`          | `bg-primary-default`    | `border-primary-default` |
+| `Attention`    | `bg-error-default`      | `border-error-default`   |
 
 ---
 

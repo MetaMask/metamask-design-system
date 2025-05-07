@@ -4,7 +4,7 @@ import * as TextButtonStories from './TextButton.stories';
 
 # TextButton
 
-TextButton is used for text-only button actions without padding or background
+`TextButton` is used for text-only button actions or hyperlink without padding or background.
 
 ```tsx
 import { TextButton } from '@metamask/design-system-react';
@@ -16,11 +16,16 @@ import { TextButton } from '@metamask/design-system-react';
 
 ## Props
 
-### TextVariant
+### Size
 
-TextButton supports different text variants through the `textVariant` prop:
+TextButton supports different sizes through the `size` prop:
 
-<Canvas of={TextButtonStories.TextVariantStory} />
+- `TextButtonSize.BodyXs`
+- `TextButtonSize.BodySm`
+- `TextButtonSize.BodyMd`
+- `TextButtonSize.BodyLg`
+
+<Canvas of={TextButtonStories.Size} />
 
 ### AsChild
 
@@ -60,12 +65,6 @@ TextButton can display icons at the start and/or end of the content.
 #### EndIconName
 
 <Canvas of={TextButtonStories.EndIconName} />
-
-### IsLoading
-
-TextButton can show a loading state with optional loading text.
-
-<Canvas of={TextButtonStories.IsLoading} />
 
 ### IsDisabled
 

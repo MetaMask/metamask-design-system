@@ -8,7 +8,7 @@ The `BadgeWrapper` positions a badge on top of another element.
 
 ### `children` (Required)
 
-The main element that the badge will be anchored to.
+The main element that the badge will be anchored to. Additional props can be passed to the children container using the `childrenContainerProps` prop.
 
 | TYPE              | REQUIRED | DESCRIPTION                            |
 | ----------------- | -------- | -------------------------------------- |
@@ -18,7 +18,7 @@ The main element that the badge will be anchored to.
 
 ### `badge` (Required)
 
-The badge element that is positioned relative to the `children`.
+The badge element that is positioned relative to the `children`. Additional props can be passed to the badge container using the `badgeContainerProps` prop.
 
 | TYPE              | REQUIRED | DESCRIPTION              |
 | ----------------- | -------- | ------------------------ |
