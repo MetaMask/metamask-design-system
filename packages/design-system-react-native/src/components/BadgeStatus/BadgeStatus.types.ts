@@ -9,9 +9,9 @@ export type BadgeStatusProps = {
   /**
    * Optional prop to control the status of the badge
    * Possible values:
-   * - BadgeStatusStatus.Active.
-   * - BadgeStatusStatus.PartiallyActive.
-   * - BadgeStatusStatus.Inactive.
+   * - BadgeStatusStatus.Active. (Connected)
+   * - BadgeStatusStatus.Inactive. (Connected)
+   * - BadgeStatusStatus.Disconnected.
    * - BadgeStatusStatus.New.
    * - BadgeStatusStatus.Attention.
    */

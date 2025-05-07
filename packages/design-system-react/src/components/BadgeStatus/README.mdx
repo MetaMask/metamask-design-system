@@ -4,7 +4,7 @@ import * as BadgeStatusStories from './BadgeStatus.stories';
 
 # BadgeStatus
 
-BadgeStatus indicates the status an entity is on.
+`BadgeStatus` indicates the state of an item through color.
 
 ```tsx
 import { BadgeStatus } from '@metamask/design-system-react';
@@ -20,9 +20,9 @@ import { BadgeStatus } from '@metamask/design-system-react';
 
 Use the `status` prop to indicate the visual state of the badge. Supported values:
 
-- `BadgeStatusStatus.Active`
-- `BadgeStatusStatus.PartiallyActive`
-- `BadgeStatusStatus.Inactive`
+- `BadgeStatusStatus.Active` (Connected)
+- `BadgeStatusStatus.Inactive` (Connected)
+- `BadgeStatusStatus.Disconnected`
 - `BadgeStatusStatus.New`
 - `BadgeStatusStatus.Attention`
 

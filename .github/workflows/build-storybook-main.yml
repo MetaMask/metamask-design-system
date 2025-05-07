@@ -25,7 +25,9 @@ jobs:
           yarn build
 
       - name: Build Storybook
-        run: yarn build-storybook
+        run: |
+          yarn build-storybook
+          touch storybook-static/.nojekyll
 
       - name: Upload artifact
         id: upload

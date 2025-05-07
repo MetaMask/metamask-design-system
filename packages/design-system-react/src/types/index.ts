@@ -94,9 +94,9 @@ export enum BadgeCountSize {
  * BadgeStatus - status
  */
 export enum BadgeStatusStatus {
-  Active = 'active',
-  PartiallyActive = 'partiallyactive',
-  Inactive = 'inactive',
+  Active = 'active', // Connected
+  Inactive = 'inactive', // Connected
+  Disconnected = 'disconnected',
   New = 'new',
   Attention = 'attention',
 }
