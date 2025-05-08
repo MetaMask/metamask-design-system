@@ -6,7 +6,7 @@ import { assetByIconName } from './Icon.assets';
 import type { IconProps } from './Icon.types';
 import { generateIconClassNames } from './Icon.utilities';
 
-const Icon = ({
+export const Icon = ({
   size = IconSize.Md,
   name,
   color = IconColor.IconDefault,
@@ -29,5 +29,3 @@ const Icon = ({
     <SVG name={name} fill="currentColor" style={[twStyle, style]} {...props} />
   );
 };
-
-export default Icon;

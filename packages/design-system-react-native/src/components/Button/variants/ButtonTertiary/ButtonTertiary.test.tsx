@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { renderHook } from '@testing-library/react-hooks';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import ButtonTertiary from './ButtonTertiary';
+import { ButtonTertiary } from './ButtonTertiary';
 import { ButtonBaseSize } from '../../../../types';
 
 describe('ButtonTertiary', () => {

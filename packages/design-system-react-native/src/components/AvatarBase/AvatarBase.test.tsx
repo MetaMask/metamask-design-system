@@ -4,8 +4,8 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
-import Text, { TextColor, TextVariant } from '../Text';
-import AvatarBase from './AvatarBase';
+import { Text, TextColor, TextVariant } from '../Text';
+import { AvatarBase } from './AvatarBase';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,

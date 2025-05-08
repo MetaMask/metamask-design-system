@@ -5,14 +5,14 @@ import {
   BadgeWrapperPositionAnchorShape,
   BadgeWrapperPosition,
 } from '../../types';
-import AvatarAccount, { AvatarAccountSize } from '../AvatarAccount';
-import AvatarNetwork from '../AvatarNetwork';
+import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
+import { AvatarNetwork } from '../AvatarNetwork';
 import { IconName } from '../Icon';
-import BadgeCount from '../BadgeCount';
-import BadgeIcon from '../BadgeIcon';
-import BadgeNetwork from '../BadgeNetwork';
-import BadgeStatus, { BadgeStatusStatus } from '../BadgeStatus';
-import BadgeWrapper from './BadgeWrapper';
+import { BadgeCount } from '../BadgeCount';
+import { BadgeIcon } from '../BadgeIcon';
+import { BadgeNetwork } from '../BadgeNetwork';
+import { BadgeStatus, BadgeStatusStatus } from '../BadgeStatus';
+import { BadgeWrapper } from './BadgeWrapper';
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
 
 const meta: Meta<BadgeWrapperProps> = {

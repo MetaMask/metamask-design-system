@@ -5,7 +5,7 @@ import { ScrollView, View } from 'react-native';
 
 import { IconColor } from '../../Icon';
 import { TextColor } from '../../Text';
-import Spinner from './Spinner';
+import { Spinner } from './Spinner';
 import type { SpinnerProps } from './Spinner.types';
 
 const meta: Meta<SpinnerProps> = {

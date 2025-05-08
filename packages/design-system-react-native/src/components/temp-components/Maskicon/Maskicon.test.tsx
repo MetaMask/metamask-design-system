@@ -2,7 +2,7 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react-native';
 import { KnownCaipNamespace, stringToBytes } from '@metamask/utils';
 
-import Maskicon from './Maskicon';
+import { Maskicon } from './Maskicon';
 import * as MaskiconUtilities from './Maskicon.utilities';
 
 jest.mock('bitcoin-address-validation', () => ({

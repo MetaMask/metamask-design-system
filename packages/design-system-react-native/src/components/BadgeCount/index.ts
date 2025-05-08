@@ -1,3 +1,3 @@
 export { BadgeCountSize } from '../../types';
-export { default } from './BadgeCount';
+export { BadgeCount } from './BadgeCount';
 export type { BadgeCountProps } from './BadgeCount.types';

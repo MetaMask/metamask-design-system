@@ -4,7 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { BadgeCountSize } from '../../types';
-import Text, { TextColor, FontWeight } from '../Text';
+import { Text, TextColor, FontWeight } from '../Text';
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
@@ -12,7 +12,7 @@ import {
 } from './BadgeCount.constants';
 import type { BadgeCountProps } from './BadgeCount.types';
 
-const BadgeCount = ({
+export const BadgeCount = ({
   size = BadgeCountSize.Md,
   count,
   max = 99,
@@ -45,5 +45,3 @@ const BadgeCount = ({
     </View>
   );
 };
-
-export default BadgeCount;

@@ -10,7 +10,7 @@ import {
   FontFamily,
   FontStyle,
 } from '../../types';
-import Text from './Text';
+import { Text } from './Text';
 import type { TextProps } from './Text.types';
 
 const meta: Meta<TextProps> = {

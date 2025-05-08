@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React from 'react';
 
-import AvatarNetwork, { AvatarNetworkSize } from '../AvatarNetwork';
+import { AvatarNetwork, AvatarNetworkSize } from '../AvatarNetwork';
 import type { BadgeNetworkProps } from './BadgeNetwork.types';
 
-const BadgeNetwork = ({
+export const BadgeNetwork = ({
   src,
   name,
   fallbackText,
@@ -19,5 +19,3 @@ const BadgeNetwork = ({
     hasBorder
   />
 );
-
-export default BadgeNetwork;

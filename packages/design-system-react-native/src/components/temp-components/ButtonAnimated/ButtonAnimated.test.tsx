@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-import ButtonAnimated from './ButtonAnimated';
+import { ButtonAnimated } from './ButtonAnimated';
 
 describe('ButtonAnimated', () => {
   it('renders correctly', () => {

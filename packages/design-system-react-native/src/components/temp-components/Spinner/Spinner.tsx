@@ -10,12 +10,12 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import type { IconProps } from '../../Icon';
-import Icon, { IconColor, IconName, IconSize } from '../../Icon';
+import { Icon, IconColor, IconName, IconSize } from '../../Icon';
 import type { TextProps } from '../../Text';
-import Text, { TextVariant, TextColor } from '../../Text';
+import { Text, TextVariant, TextColor } from '../../Text';
 import type { SpinnerProps } from './Spinner.types';
 
-const Spinner = ({
+export const Spinner = ({
   color = IconColor.IconDefault,
   spinnerIconProps,
   loadingText,
@@ -71,5 +71,3 @@ const Spinner = ({
     </View>
   );
 };
-
-export default Spinner;

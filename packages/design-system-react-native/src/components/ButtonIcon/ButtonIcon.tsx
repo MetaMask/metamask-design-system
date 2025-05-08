@@ -4,15 +4,15 @@ import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import { ButtonIconSize } from '../../types';
-import Icon, { IconColor } from '../Icon';
-import ButtonAnimated from '../temp-components/ButtonAnimated';
+import { Icon, IconColor } from '../Icon';
+import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import {
   MAP_BUTTONICON_SIZE_ICONSIZE,
   TWCLASSMAP_BUTTONICON_SIZE_DIMENSION,
 } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
 
-const ButtonIcon = ({
+export const ButtonIcon = ({
   size = ButtonIconSize.Md,
   iconName,
   iconProps,
@@ -67,5 +67,3 @@ const ButtonIcon = ({
     </ButtonAnimated>
   );
 };
-
-export default ButtonIcon;

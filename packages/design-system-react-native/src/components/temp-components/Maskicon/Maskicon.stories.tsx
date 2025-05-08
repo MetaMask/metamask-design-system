@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import Maskicon from './Maskicon';
+import { Maskicon } from './Maskicon';
 import type { MaskiconProps } from './Maskicon.types';
 
 const meta: Meta<MaskiconProps> = {

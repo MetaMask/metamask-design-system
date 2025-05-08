@@ -5,10 +5,8 @@ import RNJazzicon from 'react-native-jazzicon';
 
 import type { JazziconProps } from './Jazzicon.types';
 
-const Jazzicon = ({ testID, ...props }: JazziconProps) => (
+export const Jazzicon = ({ testID, ...props }: JazziconProps) => (
   <View testID={testID}>
     <RNJazzicon {...props} />
   </View>
 );
-
-export default Jazzicon;

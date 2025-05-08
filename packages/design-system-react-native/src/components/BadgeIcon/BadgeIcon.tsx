@@ -3,10 +3,10 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import Icon, { IconSize, IconColor } from '../Icon';
+import { Icon, IconSize, IconColor } from '../Icon';
 import type { BadgeIconProps } from './BadgeIcon.types';
 
-const BadgeIcon = ({
+export const BadgeIcon = ({
   iconName,
   iconProps,
   twClassName = '',
@@ -38,5 +38,3 @@ const BadgeIcon = ({
     </View>
   );
 };
-
-export default BadgeIcon;

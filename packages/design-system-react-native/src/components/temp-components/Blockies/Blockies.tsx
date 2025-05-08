@@ -6,7 +6,7 @@ import { Image } from 'react-native';
 import { toDataUrl } from './Blockies.utilities';
 import type { BlockiesProps } from './Blockies.types';
 
-const Blockies = ({ address, size = 32, ...props }: BlockiesProps) => {
+export const Blockies = ({ address, size = 32, ...props }: BlockiesProps) => {
   return (
     <Image
       source={{ uri: toDataUrl(address) }}
@@ -16,5 +16,3 @@ const Blockies = ({ address, size = 32, ...props }: BlockiesProps) => {
     />
   );
 };
-
-export default Blockies;

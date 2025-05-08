@@ -10,7 +10,7 @@ import Animated, {
 
 import type { ButtonAnimatedProps } from './ButtonAnimated.types';
 
-const ButtonAnimated = ({
+export const ButtonAnimated = ({
   onPressIn,
   onPressOut,
   disabled,
@@ -52,5 +52,3 @@ const ButtonAnimated = ({
     </Animated.View>
   );
 };
-
-export default ButtonAnimated;

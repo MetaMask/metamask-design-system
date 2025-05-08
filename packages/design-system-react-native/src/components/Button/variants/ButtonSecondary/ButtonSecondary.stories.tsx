@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import { ButtonSecondarySize } from '../../../../types';
 import { IconName } from '../../../Icon';
-import ButtonSecondary from './ButtonSecondary';
+import { ButtonSecondary } from './ButtonSecondary';
 import type { ButtonSecondaryProps } from './ButtonSecondary.types';
 
 const meta: Meta<ButtonSecondaryProps> = {

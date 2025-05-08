@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
 import { AvatarFaviconSize, AvatarBaseShape } from '../../types';
-import AvatarBase from '../AvatarBase';
-import ImageOrSvg from '../temp-components/ImageOrSvg';
+import { AvatarBase } from '../AvatarBase';
+import { ImageOrSvg } from '../temp-components/ImageOrSvg';
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
 
-const AvatarFavicon = ({
+export const AvatarFavicon = ({
   src,
   size = AvatarFaviconSize.Md,
   name,
@@ -58,5 +58,3 @@ const AvatarFavicon = ({
     </AvatarBase>
   );
 };
-
-export default AvatarFavicon;
