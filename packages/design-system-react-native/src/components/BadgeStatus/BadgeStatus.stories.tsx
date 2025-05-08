@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { View, ViewProps } from 'react-native';
 
 import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
-import BadgeStatus from './BadgeStatus';
+import { BadgeStatus } from './BadgeStatus';
 import type { BadgeStatusProps } from './BadgeStatus.types';
 
 const meta: Meta<BadgeStatusProps> = {

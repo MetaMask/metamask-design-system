@@ -7,8 +7,8 @@ import {
   BadgeWrapperPositionAnchorShape,
   BadgeWrapperPosition,
 } from '../../types';
-import Text from '../Text';
-import BadgeWrapper from './BadgeWrapper';
+import { Text } from '../Text';
+import { BadgeWrapper } from './BadgeWrapper';
 
 // Helper function to round numeric properties to two decimals.
 const roundPositions = (pos: {

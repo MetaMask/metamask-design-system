@@ -1,2 +1,2 @@
-export { default } from './Blockies';
+export { Blockies } from './Blockies';
 export type { BlockiesProps } from './Blockies.types';

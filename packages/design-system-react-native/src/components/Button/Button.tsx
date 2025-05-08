@@ -2,11 +2,11 @@ import React from 'react';
 
 import { ButtonVariant } from '../../types';
 import type { ButtonProps } from './Button.types';
-import ButtonPrimary from './variants/ButtonPrimary';
-import ButtonSecondary from './variants/ButtonSecondary';
-import ButtonTertiary from './variants/ButtonTertiary';
+import { ButtonPrimary } from './variants/ButtonPrimary';
+import { ButtonSecondary } from './variants/ButtonSecondary';
+import { ButtonTertiary } from './variants/ButtonTertiary';
 
-const Button = (buttonProps: ButtonProps) => {
+export const Button = (buttonProps: ButtonProps) => {
   const { variant, ...restProps } = buttonProps;
 
   switch (variant) {
@@ -22,5 +22,3 @@ const Button = (buttonProps: ButtonProps) => {
       );
   }
 };
-
-export default Button;

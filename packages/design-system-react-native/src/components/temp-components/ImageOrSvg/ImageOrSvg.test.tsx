@@ -1,7 +1,7 @@
 import { render, waitFor } from '@testing-library/react-native';
 import React from 'react';
 
-import ImageOrSvg from './ImageOrSvg';
+import { ImageOrSvg } from './ImageOrSvg';
 
 // --- Manual mock for react-native-svg ---
 jest.mock('react-native-svg', () => {

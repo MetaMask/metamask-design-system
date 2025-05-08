@@ -3,7 +3,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { ButtonVariant } from '../../types';
-import Button from './Button';
+import { Button } from './Button';
 
 describe('Button', () => {
   it('renders the correct primary variant', () => {

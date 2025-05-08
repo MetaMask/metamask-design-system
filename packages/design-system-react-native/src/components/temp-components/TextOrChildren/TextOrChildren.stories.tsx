@@ -4,7 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { TextColor, TextVariant, FontWeight } from '../../Text';
-import TextOrChildren from './TextOrChildren';
+import { TextOrChildren } from './TextOrChildren';
 import type { TextOrChildrenProps } from './TextOrChildren.types';
 
 const meta: Meta<TextOrChildrenProps> = {

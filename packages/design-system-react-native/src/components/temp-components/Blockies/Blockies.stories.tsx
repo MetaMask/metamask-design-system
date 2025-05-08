@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import Blockies from './Blockies';
+import { Blockies } from './Blockies';
 import type { BlockiesProps } from './Blockies.types';
 
 const meta: Meta<BlockiesProps> = {

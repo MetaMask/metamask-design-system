@@ -4,15 +4,15 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { ButtonBaseSize } from '../../types';
-import Icon from '../Icon';
+import { Icon } from '../Icon';
 import { IconColor, IconSize } from '../Icon';
-import ButtonAnimated from '../temp-components/ButtonAnimated';
-import Spinner from '../temp-components/Spinner';
-import TextOrChildren from '../temp-components/TextOrChildren/TextOrChildren';
+import { ButtonAnimated } from '../temp-components/ButtonAnimated';
+import { Spinner } from '../temp-components/Spinner';
+import { TextOrChildren } from '../temp-components/TextOrChildren/TextOrChildren';
 import { TextVariant, FontWeight, TextColor } from '../Text';
 import type { ButtonBaseProps } from './ButtonBase.types';
 
-const ButtonBase = ({
+export const ButtonBase = ({
   children,
   textProps,
   size = ButtonBaseSize.Lg,
@@ -105,5 +105,3 @@ const ButtonBase = ({
     </ButtonAnimated>
   );
 };
-
-export default ButtonBase;

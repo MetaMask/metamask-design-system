@@ -6,13 +6,13 @@ import {
   AvatarBaseShape,
   AvatarAccountVariant,
 } from '../../types';
-import AvatarBase from '../AvatarBase';
-import Blockies from '../temp-components/Blockies';
-import Jazzicon from '../temp-components/Jazzicon';
-import Maskicon from '../temp-components/Maskicon';
+import { AvatarBase } from '../AvatarBase';
+import { Blockies } from '../temp-components/Blockies';
+import { Jazzicon } from '../temp-components/Jazzicon';
+import { Maskicon } from '../temp-components/Maskicon';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 
-const AvatarAccount = ({
+export const AvatarAccount = ({
   address,
   variant = AvatarAccountVariant.Jazzicon,
   size = AvatarAccountSize.Md,
@@ -53,5 +53,3 @@ const AvatarAccount = ({
     </AvatarBase>
   );
 };
-
-export default AvatarAccount;

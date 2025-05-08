@@ -10,7 +10,7 @@ import {
 } from './BadgeStatus.constants';
 import type { BadgeStatusProps } from './BadgeStatus.types';
 
-const BadgeStatus = ({
+export const BadgeStatus = ({
   status,
   size = BadgeStatusSize.Md,
   hasBorder = true,
@@ -36,5 +36,3 @@ const BadgeStatus = ({
     </View>
   );
 };
-
-export default BadgeStatus;

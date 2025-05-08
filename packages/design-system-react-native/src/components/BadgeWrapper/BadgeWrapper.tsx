@@ -9,7 +9,7 @@ import {
 } from '../../types';
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
 
-const BadgeWrapper = ({
+export const BadgeWrapper = ({
   children,
   childrenContainerProps,
   badge,
@@ -114,5 +114,3 @@ const BadgeWrapper = ({
     </View>
   );
 };
-
-export default BadgeWrapper;

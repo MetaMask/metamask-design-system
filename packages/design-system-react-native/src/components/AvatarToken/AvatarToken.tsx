@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
 import { AvatarTokenSize, AvatarBaseShape } from '../../types';
-import AvatarBase from '../AvatarBase';
-import ImageOrSvg from '../temp-components/ImageOrSvg';
+import { AvatarBase } from '../AvatarBase';
+import { ImageOrSvg } from '../temp-components/ImageOrSvg';
 import type { AvatarTokenProps } from './AvatarToken.types';
 
-const AvatarToken = ({
+export const AvatarToken = ({
   src,
   size = AvatarTokenSize.Md,
   name,
@@ -58,5 +58,3 @@ const AvatarToken = ({
     </AvatarBase>
   );
 };
-
-export default AvatarToken;

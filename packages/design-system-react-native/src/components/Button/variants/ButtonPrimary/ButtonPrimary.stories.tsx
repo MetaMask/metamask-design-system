@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import { ButtonPrimarySize } from '../../../../types';
 import { IconName } from '../../../Icon';
-import ButtonPrimary from './ButtonPrimary';
+import { ButtonPrimary } from './ButtonPrimary';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 
 const meta: Meta<ButtonPrimaryProps> = {

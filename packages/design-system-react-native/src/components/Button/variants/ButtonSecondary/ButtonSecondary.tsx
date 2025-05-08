@@ -2,12 +2,12 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import ButtonBase from '../../../ButtonBase';
+import { ButtonBase } from '../../../ButtonBase';
 import { IconColor, IconSize } from '../../../Icon';
 import { TextVariant, FontWeight } from '../../../Text';
 import type { ButtonSecondaryProps } from './ButtonSecondary.types';
 
-const ButtonSecondary = ({
+export const ButtonSecondary = ({
   children,
   textProps,
   spinnerProps,
@@ -110,5 +110,3 @@ const ButtonSecondary = ({
     </ButtonBase>
   );
 };
-
-export default ButtonSecondary;

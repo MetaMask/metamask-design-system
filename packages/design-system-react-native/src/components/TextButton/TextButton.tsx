@@ -4,12 +4,12 @@ import React, { useCallback } from 'react';
 import { Pressable } from 'react-native';
 
 import { TextButtonSize } from '../../types';
-import Icon, { IconSize } from '../Icon';
-import Text, { FontWeight } from '../Text';
+import { Icon, IconSize } from '../Icon';
+import { Text, FontWeight } from '../Text';
 import { MAP_TEXTBUTTON_SIZE_TEXTVARIANT } from './TextButton.constants';
 import type { TextButtonProps } from './TextButton.types';
 
-const TextButton: React.FC<TextButtonProps> = ({
+export const TextButton: React.FC<TextButtonProps> = ({
   children,
   size = TextButtonSize.BodyMd,
   textProps,
@@ -109,5 +109,3 @@ const TextButton: React.FC<TextButtonProps> = ({
     </Text>
   );
 };
-
-export default TextButton;

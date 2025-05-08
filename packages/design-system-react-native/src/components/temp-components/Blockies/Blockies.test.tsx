@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import Blockies from './Blockies';
+import { Blockies } from './Blockies';
 // @ts-ignore
 import { toDataUrl } from './Blockies.utilities';
 

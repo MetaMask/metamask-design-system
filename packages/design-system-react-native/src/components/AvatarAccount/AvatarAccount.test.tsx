@@ -2,7 +2,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { AvatarAccountSize, AvatarAccountVariant } from '../../types';
-import AvatarAccount from './AvatarAccount';
+import { AvatarAccount } from './AvatarAccount';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
 
 jest.mock('react-native-svg', () => {

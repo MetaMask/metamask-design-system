@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-import AvatarFavicon from './AvatarFavicon';
+import { AvatarFavicon } from './AvatarFavicon';
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };

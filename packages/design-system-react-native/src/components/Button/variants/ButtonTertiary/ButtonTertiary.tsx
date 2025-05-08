@@ -2,12 +2,12 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import ButtonBase from '../../../ButtonBase';
+import { ButtonBase } from '../../../ButtonBase';
 import { IconColor, IconSize } from '../../../Icon';
 import { TextVariant, FontWeight } from '../../../Text';
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
-const ButtonTertiary = ({
+export const ButtonTertiary = ({
   children,
   textProps,
   spinnerProps,
@@ -117,5 +117,3 @@ const ButtonTertiary = ({
     </ButtonBase>
   );
 };
-
-export default ButtonTertiary;
