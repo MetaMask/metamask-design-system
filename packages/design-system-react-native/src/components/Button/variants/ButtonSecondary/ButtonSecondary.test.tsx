@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
 import { ButtonBaseSize } from '../../../../types';
-import ButtonSecondary from './ButtonSecondary';
+import { ButtonSecondary } from './ButtonSecondary';
 
 describe('ButtonSecondary', () => {
   let tw: ReturnType<typeof useTailwind>;

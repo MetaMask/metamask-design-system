@@ -4,7 +4,7 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { IconColor, IconName, IconSize } from '../../types';
-import Icon from './Icon';
+import { Icon } from './Icon';
 import type { IconProps } from './Icon.types';
 
 const meta: Meta<IconProps> = {

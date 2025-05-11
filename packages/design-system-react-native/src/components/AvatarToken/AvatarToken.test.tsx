@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-import AvatarToken from './AvatarToken';
+import { AvatarToken } from './AvatarToken';
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };

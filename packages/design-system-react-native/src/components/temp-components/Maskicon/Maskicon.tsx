@@ -6,7 +6,7 @@ import { SvgXml } from 'react-native-svg';
 import { getMaskiconSVG } from './Maskicon.utilities';
 import type { MaskiconProps } from './Maskicon.types';
 
-const Maskicon = ({ address, size = 32, ...props }: MaskiconProps) => {
+export const Maskicon = ({ address, size = 32, ...props }: MaskiconProps) => {
   const [svgString, setSvgString] = useState('');
 
   useEffect(() => {
@@ -28,5 +28,3 @@ const Maskicon = ({ address, size = 32, ...props }: MaskiconProps) => {
 
   return <SvgXml xml={svgString} width={size} height={size} {...props} />;
 };
-
-export default Maskicon;

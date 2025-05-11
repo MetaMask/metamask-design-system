@@ -3,8 +3,8 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { IconName, IconColor, IconSize } from '../Icon';
-import Text from '../Text';
-import BadgeIcon from './BadgeIcon';
+import { Text } from '../Text';
+import { BadgeIcon } from './BadgeIcon';
 
 describe('BadgeIcon', () => {
   it('renders with provided iconName and iconProps', () => {

@@ -3,7 +3,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { IconColor, IconName, IconSize } from '../../types';
-import Icon from './Icon';
+import { Icon } from './Icon';
 import { generateIconClassNames } from './Icon.utilities';
 
 describe('Icon', () => {

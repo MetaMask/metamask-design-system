@@ -6,7 +6,7 @@ import {
 import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import ButtonBase from '../../../ButtonBase';
+import { ButtonBase } from '../../../ButtonBase';
 import { IconColor, IconSize } from '../../../Icon';
 import { TextVariant, FontWeight } from '../../../Text';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
@@ -113,10 +113,9 @@ const ButtonPrimaryLightOnly = withThemeProvider(
   Theme.Light,
 );
 
-const ButtonPrimary = ({ isInverse, ...props }: ButtonPrimaryProps) => {
+export const ButtonPrimary = ({ isInverse, ...props }: ButtonPrimaryProps) => {
   if (isInverse) {
     return <ButtonPrimaryBase isInverse={isInverse} {...props} />;
   }
   return <ButtonPrimaryLightOnly isInverse={isInverse} {...props} />;
 };
-export default ButtonPrimary;

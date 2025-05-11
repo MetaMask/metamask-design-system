@@ -7,7 +7,7 @@ import { MAP_TEXT_VARIANT_FONTWEIGHT } from './Text.constants';
 import type { TextProps } from './Text.types';
 import { generateTextClassNames } from './Text.utilities';
 
-const Text: React.FC<TextProps> = ({
+export const Text: React.FC<TextProps> = ({
   variant = TextVariant.BodyMd,
   color = TextColor.TextDefault,
   style,
@@ -42,5 +42,3 @@ const Text: React.FC<TextProps> = ({
     </RNText>
   );
 };
-
-export default Text;

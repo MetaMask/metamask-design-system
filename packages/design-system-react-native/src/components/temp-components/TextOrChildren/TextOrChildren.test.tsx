@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import Text from '../../Text';
-import TextOrChildren from './TextOrChildren';
+import { Text } from '../../Text';
+import { TextOrChildren } from './TextOrChildren';
 
 describe('TextOrChildren', () => {
   it('renders Text component when children is a string', () => {

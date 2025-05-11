@@ -3,7 +3,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
-import BadgeStatus from './BadgeStatus';
+import { BadgeStatus } from './BadgeStatus';
 import {
   TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE,
   TWCLASSMAP_BADGESTATUS_SIZE,

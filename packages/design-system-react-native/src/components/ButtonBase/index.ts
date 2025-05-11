@@ -1,3 +1,3 @@
 export { ButtonBaseSize } from '../../types';
-export { default } from './ButtonBase';
+export { ButtonBase } from './ButtonBase';
 export type { ButtonBaseProps } from './ButtonBase.types';

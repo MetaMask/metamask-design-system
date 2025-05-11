@@ -5,7 +5,7 @@ import { SvgUri } from 'react-native-svg';
 
 import type { ImageOrSvgProps } from './ImageOrSvg.types';
 
-const ImageOrSvg = ({
+export const ImageOrSvg = ({
   src,
   width,
   height,
@@ -89,5 +89,3 @@ const ImageOrSvg = ({
     );
   }
 };
-
-export default ImageOrSvg;

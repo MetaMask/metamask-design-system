@@ -1,2 +1,2 @@
-export { default } from './Maskicon';
+export { Maskicon } from './Maskicon';
 export type { MaskiconProps } from './Maskicon.types';

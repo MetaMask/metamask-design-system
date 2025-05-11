@@ -7,8 +7,8 @@ import {
   AvatarBaseShape,
   AvatarIconSeverity,
 } from '../../types';
-import AvatarBase from '../AvatarBase';
-import Icon from '../Icon';
+import { AvatarBase } from '../AvatarBase';
+import { Icon } from '../Icon';
 import {
   MAP_AVATARICON_SIZE_ICONSIZE,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,
@@ -16,7 +16,7 @@ import {
 } from './AvatarIcon.constants';
 import type { AvatarIconProps } from './AvatarIcon.types';
 
-const AvatarIcon = ({
+export const AvatarIcon = ({
   size = AvatarIconSize.Md,
   shape = AvatarBaseShape.Circle,
   severity = AvatarIconSeverity.Neutral,
@@ -49,5 +49,3 @@ const AvatarIcon = ({
     </AvatarBase>
   );
 };
-
-export default AvatarIcon;

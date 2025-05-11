@@ -2,7 +2,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 import RNJazzicon from 'react-native-jazzicon';
 
-import Jazzicon from './Jazzicon';
+import { Jazzicon } from './Jazzicon';
 
 // Mock the underlying RNJazzicon component.
 jest.mock('react-native-jazzicon', () => {

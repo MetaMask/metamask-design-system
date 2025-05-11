@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
 import { AvatarFaviconSize } from '../../types';
-import AvatarFavicon from './AvatarFavicon';
+import { AvatarFavicon } from './AvatarFavicon';
 import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.dev';
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
 

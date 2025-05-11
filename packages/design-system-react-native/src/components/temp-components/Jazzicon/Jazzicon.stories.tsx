@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import Jazzicon from './Jazzicon';
+import { Jazzicon } from './Jazzicon';
 import type { JazziconProps } from './Jazzicon.types';
 
 const meta: Meta<JazziconProps> = {

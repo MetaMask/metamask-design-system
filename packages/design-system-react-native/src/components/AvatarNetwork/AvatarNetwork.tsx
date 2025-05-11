@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
 import { AvatarNetworkSize, AvatarBaseShape } from '../../types';
-import AvatarBase from '../AvatarBase';
-import ImageOrSvg from '../temp-components/ImageOrSvg';
+import { AvatarBase } from '../AvatarBase';
+import { ImageOrSvg } from '../temp-components/ImageOrSvg';
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
 
-const AvatarNetwork = ({
+export const AvatarNetwork = ({
   src,
   size = AvatarNetworkSize.Md,
   name,
@@ -58,5 +58,3 @@ const AvatarNetwork = ({
     </AvatarBase>
   );
 };
-
-export default AvatarNetwork;

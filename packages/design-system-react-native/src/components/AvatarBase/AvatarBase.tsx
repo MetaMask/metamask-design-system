@@ -4,7 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
-import Text, { TextColor, TextVariant, FontWeight } from '../Text';
+import { Text, TextColor, TextVariant, FontWeight } from '../Text';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
@@ -13,7 +13,7 @@ import {
 } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
 
-const AvatarBase = ({
+export const AvatarBase = ({
   children,
   size = AvatarBaseSize.Md,
   shape = AvatarBaseShape.Circle,
@@ -55,5 +55,3 @@ const AvatarBase = ({
     </View>
   );
 };
-
-export default AvatarBase;

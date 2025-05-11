@@ -1,3 +1,3 @@
 export { ButtonSecondarySize } from '../../../../types';
-export { default } from './ButtonSecondary';
+export { ButtonSecondary } from './ButtonSecondary';
 export type { ButtonSecondaryProps } from './ButtonSecondary.types';
