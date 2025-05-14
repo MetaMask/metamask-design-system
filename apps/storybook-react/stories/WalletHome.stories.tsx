@@ -96,10 +96,10 @@ const WalletHome: React.FC = () => {
       <div className="grid grid-cols-4 gap-2 p-4">
         <ButtonBase
           size={ButtonSize.Md}
-          className="bg-muted bg-prima hover:bg-muted-hover active:bg-muted-pressed h-auto flex-col justify-center rounded-lg p-4"
+          className="bg-muted hover:bg-muted-hover active:bg-muted-pressed h-auto flex-col justify-center rounded-lg p-4"
         >
           <Icon name={IconName.Bank} className="mb-2" />
-          <Text>Buy/Sell</Text>
+          Buy/Sell
         </ButtonBase>
         <ButtonBase
           size={ButtonSize.Md}
