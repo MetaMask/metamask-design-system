@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import { AvatarBaseProps } from '../AvatarBase';
+import type { AvatarBaseProps } from '../AvatarBase';
 
 export type AvatarNetworkProps = Omit<
   ComponentProps<'img'>,

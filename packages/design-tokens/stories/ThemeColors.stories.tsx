@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { lightTheme as lightThemeJS, darkTheme as darkThemeJS } from '../src';
+
 import { ColorSwatch, ColorSwatchGroup } from './components';
 import {
   getCSSVariablesFromStylesheet,

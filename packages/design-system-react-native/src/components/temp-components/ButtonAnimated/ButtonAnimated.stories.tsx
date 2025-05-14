@@ -4,6 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { Text, TextColor, TextVariant, FontWeight } from '../../Text';
+
 import { ButtonAnimated } from './ButtonAnimated';
 import type { ButtonAnimatedProps } from './ButtonAnimated.types';
 

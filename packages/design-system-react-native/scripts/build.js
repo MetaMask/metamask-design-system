@@ -13,5 +13,5 @@ try {
   console.log('Build completed successfully!');
 } catch (error) {
   console.error('Build process failed:', error.message);
-  process.exit(1);
+  throw new Error('Build failed');
 }

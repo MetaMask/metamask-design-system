@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports */
 import * as designTokens from '../../figma/tokens.json';
+
 import { fontFamilies } from './fontFamilies';
 
 describe('Font Families', () => {

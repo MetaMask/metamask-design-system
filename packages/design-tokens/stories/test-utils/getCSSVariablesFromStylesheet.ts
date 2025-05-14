@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable id-denylist */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable @typescript-eslint/prefer-for-of */
 /* eslint-disable require-unicode-regexp */

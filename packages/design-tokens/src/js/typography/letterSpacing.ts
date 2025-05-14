@@ -1,4 +1,4 @@
-import { LetterSpacing } from './types';
+import type { LetterSpacing } from './types';
 
 export const letterSpacing: LetterSpacing = {
   letterSpacing0: 0,

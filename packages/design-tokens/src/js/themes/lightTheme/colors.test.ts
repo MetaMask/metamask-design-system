@@ -2,6 +2,7 @@
 // TODO: Replace any types with proper types https://github.com/MetaMask/metamask-design-system/issues/127
 import * as brandColors from '../../../figma/brandColors.json';
 import * as lightTheme from '../../../figma/lightTheme.json';
+
 import { colors as definedColors } from './colors';
 
 type ColorDetails = {
@@ -13,6 +14,7 @@ type ColorDetails = {
 
 /**
  * Recursively resolve color references in a theme object.
+ *
  * @param theme - Object containing theme definitions.
  * @param colors - Object containing color definitions.
  * @param rootTheme - Root theme object.

@@ -16,6 +16,7 @@ export enum ColorScheme {
 /**
  * Props for ColorSet. Each color set - color scheme should contain
  * an object with twrnc-className string as key and color string as value.
+ *
  * @example
  * // {
  * //   'primary-default': '#abc',

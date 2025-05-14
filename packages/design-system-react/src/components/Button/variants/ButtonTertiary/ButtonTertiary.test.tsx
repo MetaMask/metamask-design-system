@@ -3,6 +3,7 @@ import React from 'react';
 
 import { ButtonTertiarySize } from '../../../../types';
 import { IconName } from '../../../Icon';
+
 import { ButtonTertiary } from './ButtonTertiary';
 
 describe('ButtonTertiary', () => {

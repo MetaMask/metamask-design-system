@@ -8,11 +8,12 @@ import {
 import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
 import { AvatarNetwork } from '../AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
-import { IconName } from '../Icon';
 import { BadgeCount } from '../BadgeCount';
 import { BadgeIcon } from '../BadgeIcon';
 import { BadgeNetwork } from '../BadgeNetwork';
 import { BadgeStatus, BadgeStatusStatus } from '../BadgeStatus';
+import { IconName } from '../Icon';
+
 import { BadgeWrapper } from './BadgeWrapper';
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
 import README from './README.mdx';

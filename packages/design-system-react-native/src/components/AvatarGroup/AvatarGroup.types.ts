@@ -1,21 +1,23 @@
-import { ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 
-import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
-import { AvatarAccountProps } from '../AvatarAccount';
-import { AvatarBaseProps } from '../AvatarBase';
-import { AvatarFaviconProps } from '../AvatarFavicon';
-import { AvatarNetworkProps } from '../AvatarNetwork';
-import { AvatarTokenProps } from '../AvatarToken';
+import type { AvatarGroupSize, AvatarGroupVariant } from '../../types';
+import type { AvatarAccountProps } from '../AvatarAccount';
+import type { AvatarBaseProps } from '../AvatarBase';
+import type { AvatarFaviconProps } from '../AvatarFavicon';
+import type { AvatarNetworkProps } from '../AvatarNetwork';
+import type { AvatarTokenProps } from '../AvatarToken';
 
 type BaseAvatarGroupProps = {
   /**
    * Optional enum to select between Avatar Group sizes.
+   *
    * @default AvatarGroupSize.Md
    */
   size?: AvatarGroupSize;
   /**
    * Optional enum to select max number of Avatars visible,
    * before the overflow counter being displayed
+   *
    * @default 4
    */
   max?: number;

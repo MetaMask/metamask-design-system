@@ -1,9 +1,10 @@
-import { AvatarAccountProps, AvatarAccountVariant } from '../AvatarAccount';
-import { AvatarFaviconProps } from '../AvatarFavicon';
+import type { AvatarAccountProps } from '../AvatarAccount';
+import { AvatarAccountVariant } from '../AvatarAccount';
+import type { AvatarFaviconProps } from '../AvatarFavicon';
 import { SAMPLE_AVATARFAVICON_URIS } from '../AvatarFavicon/AvatarFavicon.dev';
-import { AvatarNetworkProps } from '../AvatarNetwork';
+import type { AvatarNetworkProps } from '../AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
-import { AvatarTokenProps } from '../AvatarToken';
+import type { AvatarTokenProps } from '../AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
 
 // Sample consts

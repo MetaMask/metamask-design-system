@@ -3,6 +3,7 @@ import React from 'react';
 import { BadgeCountSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Text, TextColor, FontWeight } from '../Text';
+
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,

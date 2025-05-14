@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
@@ -9,6 +8,7 @@ import {
 } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 import { Icon } from '../Icon';
+
 import {
   MAP_AVATARICON_SIZE_ICONSIZE,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,

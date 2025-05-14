@@ -3,6 +3,7 @@ import React from 'react';
 
 import { FontFamily, TextColor, TextVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
+
 import {
   CLASSMAP_TEXT_VARIANT_FONTSTYLE,
   CLASSMAP_TEXT_VARIANT_FONTWEIGHT,

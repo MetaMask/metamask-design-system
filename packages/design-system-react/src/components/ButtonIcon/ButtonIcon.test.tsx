@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 
 import { ButtonIconSize, IconName } from '../../types';
+
 import { ButtonIcon } from './ButtonIcon';
 
 describe('ButtonIcon', () => {

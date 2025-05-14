@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import { ButtonBaseSize } from '../../types';
+import type { ButtonBaseSize } from '../../types';
 import type { IconName, IconProps } from '../Icon';
 import type { TextProps } from '../Text';
 
@@ -16,6 +16,7 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
   className?: string;
   /**
    * Optional prop to control the size of the ButtonBase
+   *
    * @default ButtonBaseSize.Lg
    */
   size?: ButtonBaseSize;
@@ -25,17 +26,20 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
   textProps?: Partial<TextProps>;
   /**
    * Optional prop that when true, makes the button take up the full width of its container
+   *
    * @default false
    */
   isFullWidth?: boolean;
   /**
    * Optional boolean that determines if the component should merge its props onto its immediate child
    * instead of rendering a button element
+   *
    * @default false
    */
   asChild?: boolean;
   /**
    * Optional prop that when true, shows a loading spinner
+   *
    * @default false
    */
   isLoading?: boolean;
@@ -73,6 +77,7 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
   endAccessory?: React.ReactNode;
   /**
    * Optional prop that when true, disables the button
+   *
    * @default false
    */
   isDisabled?: boolean;

@@ -10,6 +10,7 @@ import {
   FontFamily,
   FontStyle,
 } from '../../types';
+
 import { Text } from './Text';
 import type { TextProps } from './Text.types';
 

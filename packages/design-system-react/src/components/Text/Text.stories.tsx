@@ -11,6 +11,7 @@ import {
   TextTransform,
   TextColor,
 } from '../../types';
+
 import README from './README.mdx';
 import { Text } from './Text';
 
@@ -292,7 +293,7 @@ export const AsChild: Story = {
         <button
           type="button"
           onClick={() => {
-            // eslint-disable-next-line no-alert, no-restricted-globals
+            // eslint-disable-next-line no-alert
             alert('button-clicked');
           }}
         >

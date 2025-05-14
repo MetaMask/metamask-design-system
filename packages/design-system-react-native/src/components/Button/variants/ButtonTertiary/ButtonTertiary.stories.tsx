@@ -4,6 +4,7 @@ import { View } from 'react-native';
 
 import { ButtonTertiarySize } from '../../../../types';
 import { IconName } from '../../../Icon';
+
 import { ButtonTertiary } from './ButtonTertiary';
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 

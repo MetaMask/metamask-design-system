@@ -1,4 +1,4 @@
-import { TextButtonSize } from '../../types';
+import type { TextButtonSize } from '../../types';
 import type { ButtonBaseProps } from '../ButtonBase';
 
 export type TextButtonProps = Omit<
@@ -18,16 +18,19 @@ export type TextButtonProps = Omit<
   className?: string;
   /**
    * Optional prop that when true, applies inverse styling to the button
+   *
    * @default false
    */
   isInverse?: boolean;
   /**
    * Optional prop that when true, disables the button
+   *
    * @default false
    */
   isDisabled?: boolean;
   /**
    * Optional prop to specify the size of the TextButton
+   *
    * @default TextButtonSize.BodyMd
    */
   size?: TextButtonSize;

@@ -1,4 +1,4 @@
-import { ImageProps } from 'react-native';
+import type { ImageProps } from 'react-native';
 
 /**
  * Blockies component props.

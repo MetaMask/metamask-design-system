@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React from 'react';
 import { View } from 'react-native';
 import RNJazzicon from 'react-native-jazzicon';

@@ -1,11 +1,7 @@
-#!/usr/bin/env ts-node
-/* eslint-disable jsdoc/require-returns */
-/* eslint-disable jsdoc/require-description */
-/* eslint-disable n/shebang */
-/* eslint-disable import/no-commonjs, import/no-nodejs-modules, import/no-nodejs-modules, no-console */
-
+/* eslint-disable import-x/no-nodejs-modules */
 import fs from 'fs';
 import path from 'path';
+/* eslint-enable import-x/no-nodejs-modules */
 
 const ASSETS_FOLDER = 'assets';
 const GENERATED_ASSETS_FILE = 'Icon.assets.ts';
@@ -15,6 +11,7 @@ const TYPES_CONTENT_TO_DETECT = '// DO NOT EDIT - Use generate-assets.js';
 
 /**
  * Gets an icon name in TitleCase from the given file name.
+ *
  * @param fileName - The name of the file (including extension) to process.
  * @returns The formatted icon name in TitleCase.
  */

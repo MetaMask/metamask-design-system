@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { ButtonVariant } from '../../types';
+
+import type { ButtonProps } from './Button.types';
 import { ButtonPrimary } from './variants/ButtonPrimary';
 import type { ButtonPrimaryProps } from './variants/ButtonPrimary';
 import { ButtonSecondary } from './variants/ButtonSecondary';
 import type { ButtonSecondaryProps } from './variants/ButtonSecondary';
 import { ButtonTertiary } from './variants/ButtonTertiary';
 import type { ButtonTertiaryProps } from './variants/ButtonTertiary';
-import type { ButtonProps } from './Button.types';
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = ButtonVariant.Primary, ...props }, ref) => {

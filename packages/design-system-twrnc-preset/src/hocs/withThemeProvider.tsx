@@ -14,6 +14,7 @@ import { ColorSet } from '../twrnc-settings';
 
 /**
  * HOC to wrap components with ThemeProvider if none is present.
+ *
  * @param Component - The component to wrap with ThemeProvider.
  * @param theme - The theme to use for ThemeProvider.
  * @param colorSet - The colorSet to use for ThemeProvider.

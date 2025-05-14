@@ -21,10 +21,10 @@ describe('AvatarNetwork Component', () => {
 
     const imageOrSvg = getByTestId('image-or-svg');
     expect(imageOrSvg).toBeDefined();
-    expect(imageOrSvg.props.style[0].width).toStrictEqual('100%');
-    expect(imageOrSvg.props.style[0].height).toStrictEqual('100%');
+    expect(imageOrSvg.props.style[0].width).toBe('100%');
+    expect(imageOrSvg.props.style[0].height).toBe('100%');
 
-    expect(imageOrSvg.props.resizeMode).toStrictEqual('contain');
+    expect(imageOrSvg.props.resizeMode).toBe('contain');
   });
 
   it('updates fallback text on image error when fallbackText is provided', () => {
@@ -103,7 +103,7 @@ describe('AvatarNetwork Component', () => {
     fireEvent(imageOrSvg, 'onImageError', errorEvent);
 
     const avatarBase = getByTestId('avatar-base');
-    expect(avatarBase.props.children.props.children).toStrictEqual('E');
+    expect(avatarBase.props.children.props.children).toBe('E');
   });
 
   it('passes additional AvatarBase props correctly', () => {

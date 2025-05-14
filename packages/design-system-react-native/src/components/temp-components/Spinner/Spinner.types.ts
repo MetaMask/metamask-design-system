@@ -9,6 +9,7 @@ import type { TextProps } from '../../Text';
 export type SpinnerProps = {
   /**
    * Optional prop that sets the color of the spinner icon using predefined theme colors
+   *
    * @default IconColor.IconDefault
    */
   color?: IconColor;
