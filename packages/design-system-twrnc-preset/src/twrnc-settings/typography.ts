@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import { typography } from '@metamask/design-tokens';
 
 import type { TypographyTailwindConfigProps } from './typography.types';

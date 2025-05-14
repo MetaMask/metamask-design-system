@@ -5,6 +5,7 @@ import { View } from 'react-native';
 
 import { ButtonSize, ButtonVariant } from '../../types';
 import { IconName } from '../Icon';
+
 import { Button } from './Button';
 import type { ButtonProps } from './Button.types';
 

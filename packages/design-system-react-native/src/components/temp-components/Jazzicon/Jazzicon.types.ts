@@ -1,4 +1,4 @@
-import { IJazziconProps } from 'react-native-jazzicon';
+import type { IJazziconProps } from 'react-native-jazzicon';
 
 /**
  * Jazzicon component props.

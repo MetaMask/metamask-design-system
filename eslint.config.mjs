@@ -1,48 +1,102 @@
 import base, { createConfig } from '@metamask/eslint-config';
-import nodejs from '@metamask/eslint-config-nodejs';
 import jest from '@metamask/eslint-config-jest';
+import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
 
-const config = createConfig(
+const NODE_LTS_VERSION = 22;
+
+const config = createConfig([
+  ...base,
   {
     ignores: [
-      'yarn.lock',
-      '**/**.map',
-      '**/**.tsbuildinfo',
-      '**/*.json',
-      '**/*.md',
-      '**/LICENSE',
-      '**/*.sh',
-      '**/.DS_Store',
       '**/dist/**',
       '**/docs/**',
       '**/coverage/**',
       'merged-packages/**',
       '.yarn/**',
       'scripts/create-package/package-template/**',
-      'apps/storybook-react-native/.storybook/FontLoader.js',
-      'apps/storybook-react-native/.storybook/config.js',
+      /**
+       * Design System specific ignores
+       * TODO review these ignores and re-enable them
+       */
+      // design system react
+      'packages/design-system-react/src/components/Icon/icons/*.tsx',
+      'packages/design-system-react/src/components/Icon/icons/index.ts',
+      'packages/design-system-react/src/components/AvatarFavicon/AvatarFavicon.test.tsx',
+      'packages/design-system-react/src/components/AvatarGroup/AvatarGroup.stories.tsx',
+      'packages/design-system-react/src/components/AvatarGroup/AvatarGroup.test.tsx',
+      'packages/design-system-react/src/components/AvatarGroup/AvatarGroup.tsx',
+      'packages/design-system-react/src/components/AvatarNetwork/AvatarNetwork.test.tsx',
+      'packages/design-system-react/src/components/AvatarToken/AvatarToken.test.tsx',
+      'packages/design-system-react/src/components/BadgeNetwork/BadgeNetwork.test.tsx',
+      'packages/design-system-react/src/components/BadgeWrapper/BadgeWrapper.test.tsx',
+      'packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.test.tsx',
+      'packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.tsx',
+      'packages/design-system-react/src/components/temp-components/Maskicon/Maskicon.test.tsx',
+      'packages/design-system-react/src/components/temp-components/Maskicon/Maskicon.tsx',
+      'packages/design-system-react/src/components/temp-components/Maskicon/Maskicon.utilities.ts',
+      // design system react native
+      'packages/design-system-react-native/metro.config.js',
       'packages/design-system-react-native/jest.setup.js',
+      'packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.utilities.js',
+      'packages/design-system-react-native/src/components/Icon/**/*.tsx',
+      'packages/design-system-react-native/src/components/Icon/Icon.assets.ts',
+      'packages/design-system-react-native/src/components/AvatarAccount/AvatarAccount.test.tsx',
+      'packages/design-system-react-native/src/components/AvatarBase/AvatarBase.test.tsx',
+      'packages/design-system-react-native/src/components/AvatarFavicon/AvatarFavicon.tsx',
+      'packages/design-system-react-native/src/components/AvatarGroup/AvatarGroup.stories.tsx',
+      'packages/design-system-react-native/src/components/AvatarGroup/AvatarGroup.test.tsx',
+      'packages/design-system-react-native/src/components/AvatarGroup/AvatarGroup.tsx',
+      'packages/design-system-react-native/src/components/AvatarNetwork/AvatarNetwork.tsx',
+      'packages/design-system-react-native/src/components/AvatarToken/AvatarToken.tsx',
+      'packages/design-system-react-native/src/components/BadgeNetwork/BadgeNetwork.test.tsx',
+      'packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.test.tsx',
+      'packages/design-system-react-native/src/components/Button/Button.tsx',
+      'packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.test.tsx',
+      'packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.tsx',
+      'packages/design-system-react-native/src/components/Button/variants/ButtonSecondary/ButtonSecondary.test.tsx',
+      'packages/design-system-react-native/src/components/Button/variants/ButtonSecondary/ButtonSecondary.tsx',
+      'packages/design-system-react-native/src/components/Button/variants/ButtonTertiary/ButtonTertiary.test.tsx',
+      'packages/design-system-react-native/src/components/Button/variants/ButtonTertiary/ButtonTertiary.tsx',
+      'packages/design-system-react-native/src/components/ButtonBase/ButtonBase.test.tsx',
+      'packages/design-system-react-native/src/components/ButtonIcon/ButtonIcon.tsx',
+      'packages/design-system-react-native/src/components/TextButton/TextButton.test.tsx',
+      'packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.test.tsx',
+      'packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.tsx',
+      'packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.tsx',
+      'packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx',
+      'packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.test.tsx',
+      'packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.tsx',
+      'packages/design-system-react-native/src/components/temp-components/Maskicon/Maskicon.test.tsx',
+      'packages/design-system-react-native/src/components/temp-components/Maskicon/Maskicon.tsx',
+      'packages/design-system-react-native/src/components/temp-components/Maskicon/Maskicon.utilities.ts',
+      'packages/design-system-react-native/src/components/temp-components/Spinner/Spinner.tsx',
+      // storybook react
+      'apps/storybook-react/.storybook/*.ts',
+      'apps/storybook-react/.storybook/*.tsx',
+      'apps/storybook-react/vite.config.ts',
+      'apps/storybook-react/postcss.config.js',
+      'apps/storybook-react/tailwind.config.js',
+      // storybook react native
+      'apps/storybook-react-native/.storybook/**/*.js',
+      'apps/storybook-react-native/*.js',
     ],
   },
-  ...base,
   {
     rules: {
-      // Left disabled because various properties throughout this repo are snake_case because the
+      // Left disabled because various properties throughough this repo are snake_case because the
       // names come from external sources or must comply with standards
       // e.g. `txreceipt_status`, `signTypedData_v4`, `token_id`
-      // camelcase: 'off',
+      camelcase: 'off',
       'id-length': 'off',
 
       // TODO: re-enble most of these rules
-      '@typescript-eslint/naming-convention': 'off',
       'function-paren-newline': 'off',
       'id-denylist': 'off',
       'implicit-arrow-linebreak': 'off',
-      'import/no-anonymous-default-export': 'off',
-      'import/no-unassigned-import': 'off',
+      'import-x/no-anonymous-default-export': 'off',
+      'import-x/no-unassigned-import': 'off',
       'lines-around-comment': 'off',
-      'n/no-sync': 'off',
       'no-async-promise-executor': 'off',
       'no-case-declarations': 'off',
       'no-invalid-this': 'off',
@@ -56,6 +110,12 @@ const config = createConfig(
         'off',
         { matchDescription: '^[A-Z`\\d_][\\s\\S]*[.?!`>)}]$' },
       ],
+
+      // TODO: These rules created more errors after the upgrade to ESLint 9.
+      // Re-enable these rules and address any lint violations.
+      'import-x/no-named-as-default-member': 'warn',
+      'prettier/prettier': 'warn',
+      'no-empty-function': 'warn',
     },
     settings: {
       jsdoc: {
@@ -65,47 +125,71 @@ const config = createConfig(
   },
   {
     files: [
-      '**/jest.config.js',
-      '**/jest.environment.js',
-      '**/tests/**/*.{ts,js,tsx}',
-      '*.js',
-      '*.test.{ts,js,tsx}',
+      '**/*.{js,cjs,mjs}',
+      '**/*.test.{js,ts}',
+      '**/tests/**/*.{js,ts}',
       'scripts/*.ts',
-      'scripts/create-package/*.ts',
-      'yarn.config.cjs',
+      'scripts/create-package/**/*.ts',
     ],
     extends: [nodejs],
+    rules: {
+      // TODO: Re-enable this
+      'n/no-sync': 'off',
+      // TODO: These rules created more errors after the upgrade to ESLint 9.
+      // Re-enable these rules and address any lint violations.
+      'n/no-unsupported-features/node-builtins': 'warn',
+    },
   },
   {
-    files: ['*.test.{ts,js,tsx}', '**/tests/**/*.{ts,js,tsx}'],
+    files: ['**/*.test.{js,ts,tsx}'],
     extends: [jest],
-  },
-  {
-    // These files are test helpers, not tests. We still use the Jest ESLint
-    // config here to ensure that ESLint expects a test-like environment, but
-    // various rules meant just to apply to tests have been disabled.
-    files: ['**/tests/**/*.{ts,js,tsx}', '!*.test.{ts,js,tsx}'],
     rules: {
-      'jest/no-export': 'off',
-      'jest/require-top-level-describe': 'off',
-      'jest/no-if': 'off',
+      // TODO: These rules created more errors after the upgrade to ESLint 9.
+      // Re-enable these rules and address any lint violations.
+      'jest/no-conditional-in-test': 'warn',
+      'jest/prefer-lowercase-title': 'warn',
+      'jest/prefer-strict-equal': 'warn',
+    },
+    settings: {
+      node: {
+        version: `^${NODE_LTS_VERSION}`,
+      },
     },
   },
   {
-    files: ['*.js', '*.cjs'],
-    parserOptions: {
+    files: ['**/*.{js,cjs}'],
+    languageOptions: {
       sourceType: 'script',
-      ecmaVersion: '2020',
+      ecmaVersion: 2020,
     },
   },
   {
-    files: ['*.ts', '*.tsx'],
+    files: ['**/*.{ts,tsx}'],
     extends: [typescript],
-    parserOptions: {
-      tsconfigRootDir: import.meta.dirname,
-      project: ['./tsconfig.packages.json'],
+    languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
+        project: './tsconfig.packages.json',
+        // Disable `projectService` because we run into out-of-memory issues.
+        // See this ticket for inspiration out how to solve this:
+        // <https://github.com/typescript-eslint/typescript-eslint/issues/1192>
+        projectService: false,
+      },
     },
     rules: {
+      // These rules have been customized from their defaults.
+      '@typescript-eslint/switch-exhaustiveness-check': [
+        'error',
+        {
+          considerDefaultExhaustiveForUnions: true,
+        },
+      ],
+
+      // This rule does not detect multiple imports of the same file where types
+      // are being imported in one case and runtime values are being imported in
+      // another
+      'import-x/no-duplicates': 'off',
+
       // Enable rules that are disabled in `@metamask/eslint-config-typescript`
       '@typescript-eslint/no-explicit-any': 'error',
 
@@ -113,6 +197,7 @@ const config = createConfig(
       '@typescript-eslint/promise-function-async': 'off',
 
       // TODO: re-enable most of these rules
+      '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       '@typescript-eslint/unbound-method': 'off',
       '@typescript-eslint/prefer-enum-initializers': 'off',
@@ -121,26 +206,77 @@ const config = createConfig(
       '@typescript-eslint/prefer-reduce-type-parameter': 'off',
       'no-restricted-syntax': 'off',
       'no-restricted-globals': 'off',
+
+      // TODO: These rules created more errors after the upgrade to ESLint 9.
+      // Re-enable these rules and address any lint violations.
+      '@typescript-eslint/consistent-type-exports': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-base-to-string': 'warn',
+      '@typescript-eslint/no-duplicate-enum-values': 'warn',
+      '@typescript-eslint/no-misused-promises': 'warn',
+      '@typescript-eslint/no-unsafe-enum-comparison': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/only-throw-error': 'warn',
+      '@typescript-eslint/prefer-promise-reject-errors': 'warn',
+      '@typescript-eslint/prefer-readonly': 'warn',
+      '@typescript-eslint/no-shadow': 'warn',
+      'import-x/namespace': 'warn',
+      'import-x/no-named-as-default': 'warn',
+      // Overrides eslint base config which isn't following outer most pattern. Can be removed once this issue is resolved and eslint config updated
+      // issue: https://github.com/MetaMask/eslint-config/issues/403
+      'import-x/order': [
+        'error',
+        {
+          // Require newlines between different groups
+          'newlines-between': 'always',
+          // Define groups in order of "outermost inward" pattern
+          groups: [
+            // External libraries first (Node.js builtins and node_modules)
+            ['builtin', 'external'],
+            // Then parent imports (../../)
+            ['parent'],
+            // Then sibling imports (../)
+            ['sibling'],
+            // Then local imports (./) including index
+            ['index', 'internal'],
+          ],
+          // Alphabetically sort within each group
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+      ],
+      'jsdoc/check-tag-names': 'warn',
+      'jsdoc/require-returns': 'warn',
+      'jsdoc/require-param-description': 'warn',
+      'jsdoc/require-returns-description': 'warn',
+      'jsdoc/tag-lines': 'warn',
+      'no-unused-private-class-members': 'warn',
+      'promise/always-return': 'warn',
+      'promise/catch-or-return': 'warn',
+      'promise/param-names': 'warn',
     },
   },
   {
     files: ['tests/setupAfterEnv/matchers.ts'],
-    parserOptions: {
+    languageOptions: {
       sourceType: 'script',
     },
   },
+  // This should really be in `@metamask/eslint-config-typescript`
   {
-    files: ['*.d.ts'],
+    files: ['**/*.d.ts'],
     rules: {
       '@typescript-eslint/naming-convention': 'warn',
-      'import/unambiguous': 'off',
+      'import-x/unambiguous': 'off',
     },
   },
   {
     files: ['scripts/*.ts'],
     rules: {
-      // All scripts will have shebangs.
-      'n/shebang': 'off',
+      // Scripts may be self-executable and thus have hashbangs.
+      'n/hashbang': 'off',
     },
   },
   {
@@ -148,8 +284,20 @@ const config = createConfig(
     rules: {
       // These files run under Node, and thus `require(...)` is expected.
       'n/global-require': 'off',
+
+      // TODO: These rules created more errors after the upgrade to ESLint 9.
+      // Re-enable these rules and address any lint violations.
+      'n/prefer-global/text-encoder': 'warn',
+      'n/prefer-global/text-decoder': 'warn',
+      'no-shadow': 'warn',
     },
   },
-);
+  {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      sourceType: 'module',
+    },
+  },
+]);
 
 export default config;

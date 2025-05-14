@@ -3,6 +3,7 @@ import React from 'react';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { TextColor } from '../Text';
+
 import { AvatarBase } from './AvatarBase';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,

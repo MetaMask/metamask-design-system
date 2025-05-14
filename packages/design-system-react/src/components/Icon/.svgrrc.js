@@ -5,6 +5,7 @@ module.exports = {
   svgProps: {
     fill: 'currentColor',
   },
+  // eslint-disable-next-line n/global-require
   template: require('./template').default,
   prettier: false,
   svgoConfig: {

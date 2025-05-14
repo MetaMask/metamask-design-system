@@ -1,6 +1,7 @@
 /* eslint-disable jsdoc/check-param-names */
 /* eslint-disable jsdoc/require-param */
 import { IconColor, IconSize } from '../../types';
+
 import type { IconProps } from './Icon.types';
 
 /**

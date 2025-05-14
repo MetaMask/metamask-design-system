@@ -3,6 +3,7 @@ import React from 'react';
 
 import { ButtonBaseSize } from '../../types';
 import { IconName } from '../Icon';
+
 import { ButtonBase } from './ButtonBase';
 
 describe('ButtonBase', () => {

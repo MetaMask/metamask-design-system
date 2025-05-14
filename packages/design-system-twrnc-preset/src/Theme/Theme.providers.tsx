@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { createContext, useState, useMemo } from 'react';
 import { useColorScheme } from 'react-native';
 import { create } from 'twrnc';
 
 import { ColorSet, ColorScheme, colorSetList } from '../twrnc-settings';
+
 import type { ThemeContextProps, ThemeProviderProps } from './Theme.types';
 import { Theme } from './Theme.types';
 import { generateTailwindConfig } from './Theme.utilities';

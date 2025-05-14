@@ -5,6 +5,7 @@ import React from 'react';
 
 import { ButtonIconSize } from '../../types';
 import { IconName } from '../Icon';
+
 import { ButtonIcon } from './ButtonIcon';
 import { TWCLASSMAP_BUTTONICON_SIZE_DIMENSION } from './ButtonIcon.constants';
 

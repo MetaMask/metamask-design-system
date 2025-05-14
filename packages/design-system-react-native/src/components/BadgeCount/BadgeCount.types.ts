@@ -1,6 +1,6 @@
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
-import { BadgeCountSize } from '../../types';
+import type { BadgeCountSize } from '../../types';
 import type { TextProps } from '../Text';
 
 /**
@@ -10,6 +10,7 @@ export type BadgeCountProps = {
   /**
    * Optional prop to control the size of the BadgeCount
    * Different sizes map to specific height
+   *
    * @default IconSize.Md
    */
   size?: BadgeCountSize;
@@ -20,6 +21,7 @@ export type BadgeCountProps = {
   /**
    * Optional prop to determine the max the count can go up to.
    * If count > max, the count will be shown as "max+"
+   *
    * @default 99
    */
   max?: number;

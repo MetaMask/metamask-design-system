@@ -2,6 +2,7 @@ import {
   getDesignTokenVariables,
   collectCssVariables,
 } from '../scripts/testUtils';
+
 import { colors } from './colors';
 
 describe('Color Preset', () => {

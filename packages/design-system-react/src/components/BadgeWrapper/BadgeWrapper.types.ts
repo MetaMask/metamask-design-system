@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import {
+import type {
   BadgeWrapperPosition,
   BadgeWrapperCustomPosition,
   BadgeWrapperPositionAnchorShape,
@@ -15,8 +15,9 @@ export type BadgeWrapperProps = {
    * This prop gets used along with position, positionXOffset, and positionYOffset
    * to determine the final position.
    * Possible values:
-   *   BadgeWrapperPositionAnchorShape.Circular,
+   * BadgeWrapperPositionAnchorShape.Circular,
    * - BadgeWrapperPositionAnchorShape.Rectangular,
+   *
    * @default BadgeWrapperPositionAnchorShape.Circular
    */
   positionAnchorShape?: BadgeWrapperPositionAnchorShape;
@@ -24,6 +25,7 @@ export type BadgeWrapperProps = {
    * Optional prop to control the preset position of the badge.
    * This prop gets used along with positionAnchorShape, positionXOffset, and positionYOffset
    * to determine the final position.
+   *
    * @default BadgeWrapperPosition.TopRight
    */
   position?: BadgeWrapperPosition;
@@ -31,6 +33,7 @@ export type BadgeWrapperProps = {
    * Optional prop to move the preset position horizontally.
    * This prop gets used along with position, positionAnchorShape, and positionYOffset
    * to determine the final position.
+   *
    * @default 0
    */
   positionXOffset?: number;
@@ -38,6 +41,7 @@ export type BadgeWrapperProps = {
    * Optional prop to move the preset position vertically.
    * This prop gets used along with position, positionAnchorShape, and positionXOffset
    * to determine the final position.
+   *
    * @default 0
    */
   positionYOffset?: number;

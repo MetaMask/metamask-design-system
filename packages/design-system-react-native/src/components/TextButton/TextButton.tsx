@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback } from 'react';
 import { Pressable } from 'react-native';
@@ -6,6 +5,7 @@ import { Pressable } from 'react-native';
 import { TextButtonSize } from '../../types';
 import { Icon, IconSize } from '../Icon';
 import { Text, FontWeight } from '../Text';
+
 import { MAP_TEXTBUTTON_SIZE_TEXTVARIANT } from './TextButton.constants';
 import type { TextButtonProps } from './TextButton.types';
 

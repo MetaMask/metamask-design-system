@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
 import { TextButtonSize } from '../../types';
+import { twMerge } from '../../utils/tw-merge';
 import { ButtonBase } from '../ButtonBase';
+
 import { MAP_TEXTBUTTON_SIZE_TEXTVARIANT } from './TextButton.constants';
 import type { TextButtonProps } from './TextButton.types';
 

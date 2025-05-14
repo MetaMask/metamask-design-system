@@ -1,6 +1,6 @@
-import { AvatarIconSeverity } from '../../types';
-import { AvatarBaseProps } from '../AvatarBase';
-import { IconName, IconProps } from '../Icon';
+import type { AvatarIconSeverity } from '../../types';
+import type { AvatarBaseProps } from '../AvatarBase';
+import type { IconName, IconProps } from '../Icon';
 
 /**
  * AvatarIcon component props.
@@ -8,6 +8,7 @@ import { IconName, IconProps } from '../Icon';
 export type AvatarIconProps = {
   /**
    * Optional prop to control the severity of the avatar
+   *
    * @default AvatarIconSeverity.Neutral
    */
   severity?: AvatarIconSeverity;

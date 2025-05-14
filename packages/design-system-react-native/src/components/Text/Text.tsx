@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { Text as RNText } from 'react-native';
 
 import { FontFamily, FontStyle, TextVariant, TextColor } from '../../types';
+
 import { MAP_TEXT_VARIANT_FONTWEIGHT } from './Text.constants';
 import type { TextProps } from './Text.types';
 import { generateTextClassNames } from './Text.utilities';

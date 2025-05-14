@@ -1,8 +1,8 @@
-import { AvatarAccountVariant } from '../../types';
-import { AvatarBaseProps } from '../AvatarBase';
-import { BlockiesProps } from '../temp-components/Blockies';
-import { JazziconProps } from '../temp-components/Jazzicon';
-import { MaskiconProps } from '../temp-components/Maskicon';
+import type { AvatarAccountVariant } from '../../types';
+import type { AvatarBaseProps } from '../AvatarBase';
+import type { BlockiesProps } from '../temp-components/Blockies';
+import type { JazziconProps } from '../temp-components/Jazzicon';
+import type { MaskiconProps } from '../temp-components/Maskicon';
 
 /**
  * AvatarAccount component props.
@@ -14,6 +14,7 @@ export type AvatarAccountProps = {
   address: string;
   /**
    * Optional prop to control the variant of the avatar account
+   *
    * @default AvatarAccountVariant.Jazzicon
    */
   variant?: AvatarAccountVariant;

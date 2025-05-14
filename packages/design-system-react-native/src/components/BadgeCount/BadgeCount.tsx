@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
 import { BadgeCountSize } from '../../types';
 import { Text, TextColor, FontWeight } from '../Text';
+
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,

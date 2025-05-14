@@ -1,4 +1,4 @@
-import {
+import type {
   ImageErrorEventData,
   ImageLoadEventData,
   NativeSyntheticEvent,
@@ -6,7 +6,7 @@ import {
   ImageStyle,
   ImageProps,
 } from 'react-native';
-import { SvgProps } from 'react-native-svg';
+import type { SvgProps } from 'react-native-svg';
 
 /**
  * Base props common to all variations.

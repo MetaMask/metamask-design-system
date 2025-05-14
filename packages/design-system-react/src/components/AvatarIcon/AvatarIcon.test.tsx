@@ -4,6 +4,7 @@ import React from 'react';
 import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconName } from '../Icon';
 import { ICON_SIZE_CLASS_MAP } from '../Icon/Icon.constants';
+
 import { AvatarIcon } from './AvatarIcon';
 import {
   TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,

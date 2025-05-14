@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports */
+/* eslint-disable @typescript-eslint/no-require-imports */
 import { brandColor } from './brandColor';
 
 const designTokens = require('../../figma/brandColors.json');

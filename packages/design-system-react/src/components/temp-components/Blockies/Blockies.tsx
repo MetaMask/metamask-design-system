@@ -1,5 +1,6 @@
 import { blo } from 'blo';
 import React from 'react';
+
 import type { BlockiesProps } from './Blockies.types';
 
 export const Blockies = ({ address, size = 32, ...props }: BlockiesProps) => {
