@@ -87,3 +87,8 @@ export type { TextProps } from './Text';
 
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
+
+export { Box } from './Box';
+export type { BoxProps } from './Box';
+export { BoxBackgroundColor, BoxBorderColor } from './Box';
+export type { BoxPadding } from './Box';

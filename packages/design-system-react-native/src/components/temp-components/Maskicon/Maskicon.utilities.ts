@@ -24,8 +24,7 @@ export function generateSeedNonEthereum(address: string): number[] {
  * Dynamically checks if the address is Bitcoin or Solana; otherwise defaults to Ethereum.
  * Returns a Promise that resolves to one of the known CAIP-2 namespaces.
  *
- * In this update, if the address starts with "0x", we'll assume it's Ethereum (Eip155)
- * and avoid the dynamic import that can cause the "Requiring unknown module '2021'" error.
+ * This simplified version avoids dynamic imports that can cause bundling issues.
  */
 export async function getCaipNamespaceFromAddress(
   address: string,
@@ -47,17 +46,13 @@ export async function getCaipNamespaceFromAddress(
     }
   }
 
-  // Attempt to use bitcoin-address-validation if available.
-  try {
-    const { validate, Network } = await import('bitcoin-address-validation');
-    if (
-      validate(address, Network.mainnet) ||
-      validate(address, Network.testnet)
-    ) {
-      return KnownCaipNamespace.Bip122;
-    }
-  } catch {
-    // If the import fails, fall through.
+  // Basic check for Bitcoin addresses (simplified)
+  // This replaces the dynamic import of bitcoin-address-validation
+  const startsWithOneThroughNine = /^[1-9]/.test(address);
+  const bitcoinRegex =
+    /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$|^bc1[ac-hj-np-z02-9]{39,59}$/;
+  if (startsWithOneThroughNine && bitcoinRegex.test(address)) {
+    return KnownCaipNamespace.Bip122;
   }
 
   // Fallback: if it looks like a Solana address, return Solana.

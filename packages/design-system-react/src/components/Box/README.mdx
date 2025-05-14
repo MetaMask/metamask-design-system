@@ -1,0 +1,200 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as BoxStories from './Box.stories';
+
+# Box
+
+Box is used to render standardized elements within an interface.
+
+```tsx
+import { Box } from '@metamask/design-system-react';
+
+<Box />;
+```
+
+<Canvas of={BoxStories.Default} />
+
+## Props
+
+### `children`
+
+The content of the `Box` component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BoxStories.Default} />
+
+### `backgroundColor`
+
+The background color of the Box component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBackgroundColor</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BoxBackgroundColor.Transparent</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BoxStories.WithAlternativeBackground} />
+
+### `padding`
+
+The padding of the Box component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>0-12</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>0</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BoxStories.PaddingVariations} />
+
+### `borderColor`
+
+The border color of the Box component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBorderColor</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BoxBorderColor.None</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BoxStories.WithBorder} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+// Adding new styles
+<Box className="my-4 mx-2">Text content</Box>
+
+// Overriding default styles
+<Box className="bg-success-default">Text content</Box>
+```
+
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Box style={{ marginVertical: dynamicValue }}>
+  Text with custom style
+</Box>
+```
+
+## Component API
+
+<Controls of={BoxStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
