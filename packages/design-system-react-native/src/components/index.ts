@@ -5,7 +5,7 @@ export {
 } from './AvatarAccount';
 export type { AvatarAccountProps } from './AvatarAccount';
 
-export { AvatarBase, AvatarBaseSize } from './AvatarBase';
+export { AvatarBase, AvatarBaseSize, AvatarBaseShape } from './AvatarBase';
 export type { AvatarBaseProps } from './AvatarBase';
 
 export { AvatarFavicon, AvatarFaviconSize } from './AvatarFavicon';
@@ -88,3 +88,9 @@ export type { TextProps } from './Text';
 
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
+
+// Box
+export { Box } from './Box';
+export type { BoxProps } from './Box';
+export { BoxBackgroundColor, BoxBorderColor } from './Box';
+export type { BoxPadding } from './Box';
