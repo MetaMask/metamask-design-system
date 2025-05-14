@@ -13,7 +13,7 @@ function getAbsolutePath(value: string): any {
 
 const config: StorybookConfig = {
   stories: [
-    '../stories/Introduction.mdx',
+    '../stories/',
     '../../../packages/design-tokens/stories/Introduction.mdx',
     '../../../packages/design-tokens/stories/IntroductionColor.mdx',
     '../../../packages/design-system-react/src/components/Introduction.mdx',
