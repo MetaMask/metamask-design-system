@@ -1,6 +1,6 @@
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
+import type { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import type { TextProps } from '../Text';
 
 /**
@@ -14,11 +14,12 @@ export type AvatarBaseProps = {
   /**
    * Optional prop to control the size of the AvatarBase
    * Possible values:
-   *   AvatarBaseSize.Xs (16px),
+   * AvatarBaseSize.Xs (16px),
    * - AvatarBaseSize.Sm (24px),
    * - AvatarBaseSize.Md (32px).
    * - AvatarBaseSize.Lg (40px),
    * - AvatarBaseSize.Xl (48px),
+   *
    * @default AvatarBaseSize.Md
    */
   size?: AvatarBaseSize;
@@ -27,6 +28,7 @@ export type AvatarBaseProps = {
    * Possible values:
    * - AvatarBaseShape.Circle
    * - AvatarBaseShape.Square
+   *
    * @default AvatarBaseShape.Circle
    */
   shape?: AvatarBaseShape;
@@ -42,6 +44,7 @@ export type AvatarBaseProps = {
   /**
    * Optional prop to include the border with the Avatar.
    * For internal use only
+   *
    * @default false
    */
   hasBorder?: boolean;

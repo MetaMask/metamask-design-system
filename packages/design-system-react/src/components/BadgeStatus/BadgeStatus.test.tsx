@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { BadgeStatusSize, BadgeStatusStatus } from '../../types';
+
 import { BadgeStatus } from './BadgeStatus';
 import {
   CLASSMAP_BADGESTATUS_SIZE,

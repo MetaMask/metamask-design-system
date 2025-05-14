@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import { ButtonIconSize } from '../../types';
+import type { ButtonIconSize } from '../../types';
 import type { IconName, IconProps } from '../Icon';
 
 export type ButtonIconProps = ComponentProps<'button'> & {
@@ -18,21 +18,25 @@ export type ButtonIconProps = ComponentProps<'button'> & {
   iconProps?: Partial<IconProps>;
   /**
    * Optional prop that when true, disables the button
+   *
    * @default false
    */
   isDisabled?: boolean;
   /**
    * Optional prop that when true, applies inverse styling to the button
+   *
    * @default false
    */
   isInverse?: boolean;
   /**
    * Optional prop that when true, applies floating/contained styling to the button
+   *
    * @default false
    */
   isFloating?: boolean;
   /**
    * Optional prop to control the size of the button
+   *
    * @default ButtonIconSize.Md
    */
   size?: ButtonIconSize;

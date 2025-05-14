@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 import { Icon, IconSize } from '../Icon';
+
 import type { BadgeIconProps } from './BadgeIcon.types';
 
 export const BadgeIcon = React.forwardRef<HTMLDivElement, BadgeIconProps>(

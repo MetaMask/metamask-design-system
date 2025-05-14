@@ -1,4 +1,4 @@
-import {
+import type {
   FontFamily,
   FontStyle,
   FontWeight,
@@ -17,6 +17,7 @@ export type TextProps = {
   /**
    * Optional prop to change the font size of the component. The Text component uses responsive font sizes.
    * Different variants map to specific HTML elements by default.
+   *
    * @default TextVariant.BodyMd
    */
   variant?: TextVariant;
@@ -30,16 +31,16 @@ export type TextProps = {
   className?: string;
   /**
    * Optional prop to control the font weight of the text.
-   * - Regular: 400
-   * - Medium: 500
-   * - Bold: 700
+   * Regular: 400
+   * Medium: 500
+   * Bold: 700
    */
   fontWeight?: FontWeight;
   /**
    * Optional prop to adjust the font family.
-   *  - Default: CentraNo1
-   *  - Accent: MMSans
-   *  - Hero: MMPoly
+   * Default: CentraNo1
+   * Accent: MMSans
+   * Hero: MMPoly
    */
   fontFamily?: FontFamily;
   /**
@@ -64,17 +65,20 @@ export type TextProps = {
   overflowWrap?: OverflowWrap;
   /**
    * Optional prop that when true, adds an ellipsis (...) when text overflows its container.
+   *
    * @default false
    */
   ellipsis?: boolean;
   /**
    * Optional boolean that determines if the component should merge its props onto its immediate child
    * instead of rendering a default DOM element.
+   *
    * @default false
    */
   asChild?: boolean;
   /**
    * Optional prop that sets the color of the text using predefined theme colors.
+   *
    * @default TextColor.TextDefault
    */
   color?: TextColor;

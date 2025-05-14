@@ -4,6 +4,7 @@ import React from 'react';
 
 import { IconName, IconColor } from '../Icon';
 import { ICON_SIZE_CLASS_MAP } from '../Icon/Icon.constants';
+
 import { BadgeIcon } from './BadgeIcon';
 
 describe('BadgeIcon', () => {

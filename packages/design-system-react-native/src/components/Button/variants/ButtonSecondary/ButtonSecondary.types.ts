@@ -1,4 +1,4 @@
-import { ButtonBaseProps } from '../../../ButtonBase';
+import type { ButtonBaseProps } from '../../../ButtonBase';
 
 /**
  * ButtonSecondary component props.
@@ -6,11 +6,13 @@ import { ButtonBaseProps } from '../../../ButtonBase';
 export type ButtonSecondaryProps = {
   /**
    * Optional prop to show the danger state of the button.
+   *
    * @default false
    */
   isDanger?: boolean;
   /**
    * Optional prop to show the inverse state of the button, which is reserved for buttons on colored backgrounds.
+   *
    * @default false
    */
   isInverse?: boolean;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React from 'react';
 
 import {
@@ -10,6 +9,7 @@ import { AvatarBase } from '../AvatarBase';
 import { Blockies } from '../temp-components/Blockies';
 import { Jazzicon } from '../temp-components/Jazzicon';
 import { Maskicon } from '../temp-components/Maskicon';
+
 import type { AvatarAccountProps } from './AvatarAccount.types';
 
 export const AvatarAccount = ({

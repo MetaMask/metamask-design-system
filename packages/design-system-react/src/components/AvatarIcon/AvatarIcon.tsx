@@ -4,6 +4,7 @@ import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { AvatarBase, AvatarBaseShape } from '../AvatarBase';
 import { Icon } from '../Icon';
+
 import {
   MAP_AVATARICON_SIZE_ICONSIZE,
   TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,

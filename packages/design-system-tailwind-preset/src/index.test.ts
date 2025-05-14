@@ -1,6 +1,7 @@
-import tailwindConfig from '.';
 import { colors } from './colors';
 import { shadows } from './shadows';
+
+import tailwindConfig from '.';
 
 describe('Tailwind Preset', () => {
   /**

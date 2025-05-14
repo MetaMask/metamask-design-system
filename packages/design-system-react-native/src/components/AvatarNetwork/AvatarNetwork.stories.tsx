@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
 import { AvatarNetworkSize } from '../../types';
+
 import { AvatarNetwork } from './AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev';
 import type { AvatarNetworkProps } from './AvatarNetwork.types';

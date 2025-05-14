@@ -4,6 +4,7 @@ import React from 'react';
 
 import { IconName, IconColor, IconSize } from '../Icon';
 import { Text } from '../Text';
+
 import { BadgeIcon } from './BadgeIcon';
 
 describe('BadgeIcon', () => {
@@ -31,7 +32,7 @@ describe('BadgeIcon', () => {
     expect(badgeIcon.props.style[0]).toStrictEqual(expectedContainer);
     // Verify Icon receives the provided custom iconName.
     const icon = badgeIcon.props.children;
-    expect(icon.props.name).toStrictEqual('Add');
+    expect(icon.props.name).toBe('Add');
     expect(icon.props.color).toStrictEqual(IconColor.PrimaryInverse);
     expect(icon.props.size).toStrictEqual(IconSize.Xs);
   });
@@ -52,6 +53,6 @@ describe('BadgeIcon', () => {
     const { getByTestId } = render(<TestComponent />);
     const badgeIcon = getByTestId('badge-icon');
     expect(badgeIcon.props.style[1]).toEqual(customStyle);
-    expect(badgeIcon.props.accessibilityLabel).toStrictEqual('badge-icon');
+    expect(badgeIcon.props.accessibilityLabel).toBe('badge-icon');
   });
 });

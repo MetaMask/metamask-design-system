@@ -9,6 +9,7 @@ import { AvatarBase } from '../AvatarBase';
 import { Blockies } from '../temp-components/Blockies';
 import { Jazzicon } from '../temp-components/Jazzicon';
 import { Maskicon } from '../temp-components/Maskicon';
+
 import { MAP_AVATARACCOUNT_SIZE_SIZENUMBER } from './AvatarAccount.constants';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 

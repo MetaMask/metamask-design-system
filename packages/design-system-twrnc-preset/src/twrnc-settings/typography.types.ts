@@ -32,6 +32,7 @@ export type FontStyle = 'normal' | 'italic';
 
 /**
  * Props for TypographyTailwindConfig
+ *
  * @example
  * {
  *   fontSize: {

@@ -4,7 +4,6 @@ import { letterSpacing } from './letterSpacing';
 import { lineHeights } from './lineHeights';
 import type { ThemeTypography } from './types';
 
-/* eslint-enable jsdoc/check-property-names, jsdoc/tag-lines */
 export const typography: ThemeTypography = {
   sDisplayLG: {
     fontWeight: fontWeights.bold,

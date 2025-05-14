@@ -1,16 +1,12 @@
-import React, {
-  useState,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  CSSProperties,
-} from 'react';
+import type { CSSProperties } from 'react';
+import React, { useState, useLayoutEffect, useMemo, useRef } from 'react';
 
 import {
   BadgeWrapperPosition,
   BadgeWrapperPositionAnchorShape,
 } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
+
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
 
 export const BadgeWrapper = React.forwardRef<HTMLDivElement, BadgeWrapperProps>(

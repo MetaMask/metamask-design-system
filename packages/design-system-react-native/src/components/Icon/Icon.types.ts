@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import type React from 'react';
 import type { ViewProps } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 
-import { IconColor, IconName, IconSize } from '../../types';
+import type { IconColor, IconName, IconSize } from '../../types';
 
 /**
  * Icon component props.
@@ -16,11 +15,13 @@ export type IconProps = {
   /**
    * Optional prop to control the size of the icon
    * Different sizes map to specific pixel dimensions
+   *
    * @default IconSize.Md
    */
   size?: IconSize;
   /**
    * Optional prop that sets the color of the icon using predefined theme colors
+   *
    * @default IconColor.IconDefault
    */
   color?: IconColor;

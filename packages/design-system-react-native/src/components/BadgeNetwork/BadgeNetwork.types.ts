@@ -1,5 +1,5 @@
-import { AvatarNetworkProps } from '../AvatarNetwork';
-import { ImageOrSvgSrc } from '../temp-components/ImageOrSvg';
+import type { AvatarNetworkProps } from '../AvatarNetwork';
+import type { ImageOrSvgSrc } from '../temp-components/ImageOrSvg';
 
 export type BadgeNetworkProps = Omit<AvatarNetworkProps, 'size' | 'shape'> & {
   /**

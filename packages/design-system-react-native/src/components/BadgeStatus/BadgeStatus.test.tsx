@@ -3,6 +3,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
+
 import { BadgeStatus } from './BadgeStatus';
 import {
   TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE,
@@ -78,7 +79,7 @@ describe('BadgeStatus', () => {
 
     const { getByTestId } = render(<TestComponent />);
     const badge = getByTestId('badge');
-    expect(badge.props.accessibilityLabel).toStrictEqual('status-badge');
+    expect(badge.props.accessibilityLabel).toBe('status-badge');
   });
 
   it('renders with custom size and status Inactive', () => {

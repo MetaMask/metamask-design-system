@@ -1,4 +1,5 @@
-import { ButtonVariant } from '../../types';
+import type { ButtonVariant } from '../../types';
+
 import type { ButtonPrimaryProps } from './variants/ButtonPrimary';
 import type { ButtonSecondaryProps } from './variants/ButtonSecondary';
 import type { ButtonTertiaryProps } from './variants/ButtonTertiary';

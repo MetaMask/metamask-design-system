@@ -3,6 +3,7 @@ import React from 'react';
 
 import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconName } from '../Icon';
+
 import { AvatarIcon } from './AvatarIcon';
 import README from './README.mdx';
 

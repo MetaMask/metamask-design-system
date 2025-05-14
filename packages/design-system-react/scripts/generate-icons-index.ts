@@ -1,5 +1,7 @@
+/* eslint-disable import-x/no-nodejs-modules */
 import * as fs from 'fs/promises';
 import * as path from 'path';
+/* eslint-enable import-x/no-nodejs-modules */
 
 /** Path to the directory containing icon components */
 const ICONS_DIR = path.join(__dirname, '../src/components/Icon/icons');

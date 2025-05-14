@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import baseConfig from '../../tailwind.config';
 import type { ColorSet, ColorScheme } from '../twrnc-settings';
 import { colorSetList, typographyTailwindConfig } from '../twrnc-settings';

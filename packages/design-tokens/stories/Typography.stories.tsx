@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-globals */
-
 import { Text } from '@metamask/design-system-react';
 import type { StoryFn, Meta } from '@storybook/react';
 import React from 'react';
@@ -10,6 +8,7 @@ import { fontSizes } from '../src/js/typography/fontSizes';
 import { fontWeights } from '../src/js/typography/fontWeights';
 import { letterSpacing } from '../src/js/typography/letterSpacing';
 import { lineHeights } from '../src/js/typography/lineHeights';
+
 import README from './Typography.mdx';
 
 const meta: Meta<typeof Text> = {

@@ -3,6 +3,7 @@ import React from 'react';
 
 import { BadgeCountSize } from '../../types';
 import { TextColor } from '../Text';
+
 import { BadgeCount } from './BadgeCount';
 import { TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER } from './BadgeCount.constants';
 

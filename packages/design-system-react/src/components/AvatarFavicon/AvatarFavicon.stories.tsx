@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { AvatarFaviconSize } from '../../types';
+
 import { AvatarFavicon } from './AvatarFavicon';
 import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.dev';
 import README from './README.mdx';

@@ -3,6 +3,7 @@ import React from 'react';
 
 import { ButtonPrimarySize } from '../../../../types';
 import { IconName } from '../../../Icon';
+
 import { ButtonPrimary } from './ButtonPrimary';
 import README from './README.mdx';
 

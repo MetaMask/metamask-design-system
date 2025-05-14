@@ -1,6 +1,6 @@
 import type { SVGProps, ComponentPropsWithoutRef } from 'react';
 
-import { IconName, IconSize, IconColor } from '../../types';
+import type { IconName, IconSize, IconColor } from '../../types';
 
 // Use ComponentPropsWithoutRef to get SVG element props without relying on global SVGElement
 type SVGElementProps = ComponentPropsWithoutRef<'svg'>;
@@ -13,11 +13,13 @@ export type IconProps = SVGProps<SVGElementProps> & {
   /**
    * Optional prop to control the size of the icon
    * Different sizes map to specific pixel dimensions
+   *
    * @default IconSize.Md
    */
   size?: IconSize;
   /**
    * Optional prop that sets the color of the icon using predefined theme colors
+   *
    * @default IconColor.IconDefault
    */
   color?: IconColor;

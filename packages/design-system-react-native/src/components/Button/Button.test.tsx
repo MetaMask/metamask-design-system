@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { ButtonVariant } from '../../types';
+
 import { Button } from './Button';
 
 describe('Button', () => {

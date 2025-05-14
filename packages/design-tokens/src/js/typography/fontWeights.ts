@@ -1,4 +1,4 @@
-import { FontWeights } from './types';
+import type { FontWeights } from './types';
 
 export const fontWeights: FontWeights = {
   regular: '400',

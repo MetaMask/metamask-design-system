@@ -1,5 +1,7 @@
+/* eslint-disable import-x/no-nodejs-modules */
 import fs from 'fs';
 import path from 'path';
+/* eslint-enable import-x/no-nodejs-modules */
 import postcss from 'postcss';
 
 /**

@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
 import { Icon, IconSize, IconColor } from '../Icon';
+
 import type { BadgeIconProps } from './BadgeIcon.types';
 
 export const BadgeIcon = ({

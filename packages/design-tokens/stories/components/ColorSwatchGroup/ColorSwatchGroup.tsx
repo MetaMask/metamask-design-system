@@ -23,6 +23,7 @@ type ColorSwatchGroupProps = {
 
 /**
  * Converts a string to camelCase format, handling special cases for numeric suffixes
+ *
  * @param str - Input string to be converted to camelCase
  * @returns The string in camelCase format, preserving numeric suffixes
  */
@@ -31,8 +32,8 @@ function toCamelCase(str: string): string {
   if (/-\d+%$/u.test(str)) {
     return str;
   }
-  return str.replace(/-([a-z])/gu, (_, g) => {
-    return g.toUpperCase();
+  return str.replace(/-([a-z])/gu, (_, finalString) => {
+    return finalString.toUpperCase();
   });
 }
 

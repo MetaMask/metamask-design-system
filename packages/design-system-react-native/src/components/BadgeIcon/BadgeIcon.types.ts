@@ -1,6 +1,6 @@
-import { ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 
-import { IconName, IconProps } from '../Icon';
+import type { IconName, IconProps } from '../Icon';
 
 /**
  * BadgeIcon component props.

@@ -5,6 +5,7 @@ import React from 'react';
 
 import { AvatarIconSeverity, AvatarIconSize } from '../../types';
 import { IconName } from '../Icon';
+
 import { AvatarIcon } from './AvatarIcon';
 import {
   TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
@@ -39,7 +40,7 @@ describe('AvatarIcon', () => {
 
     const icon = getByTestId('icon');
     expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);
-    expect(container.props.accessibilityRole).toStrictEqual('image');
+    expect(container.props.accessibilityRole).toBe('image');
   });
 
   it('applies custom twClassName and style props', () => {
@@ -70,7 +71,7 @@ describe('AvatarIcon', () => {
     const container = getByTestId('avatar-icon');
     expect(container.props.style[1][0]).toStrictEqual(expectedIconBgStyle);
     expect(container.props.style[1][1]).toStrictEqual(customStyle);
-    expect(container.props.accessibilityLabel).toStrictEqual('avatar');
+    expect(container.props.accessibilityLabel).toBe('avatar');
 
     const icon = getByTestId('icon');
     expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);

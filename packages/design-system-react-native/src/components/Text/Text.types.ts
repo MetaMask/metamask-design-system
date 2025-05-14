@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 // Third party dependencies.
 import type { TextProps as RNTextProps } from 'react-native';
 
-import {
+import type {
   TextVariant,
   TextColor,
   FontWeight,
@@ -16,6 +15,7 @@ import {
 export type TextProps = {
   /**
    * Optional enum to select between Typography variants.
+   *
    * @default BodyMD
    */
   variant?: TextVariant;
@@ -29,16 +29,16 @@ export type TextProps = {
   color?: TextColor;
   /**
    * Optional prop to control the font weight of the text.
-   * - Normal: 400
-   * - Medium: 500
-   * - Bold: 700
+   * Normal: 400
+   * Medium: 500
+   * Bold: 700
    */
   fontWeight?: FontWeight;
   /**
    * Optional prop to adjust the font family.
-   *  - Default: CentraNo1
-   *  - Accent: MMSans
-   *  - Hero: MMPoly
+   * Default: CentraNo1
+   * Accent: MMSans
+   * Hero: MMPoly
    */
   fontFamily?: FontFamily;
   /**

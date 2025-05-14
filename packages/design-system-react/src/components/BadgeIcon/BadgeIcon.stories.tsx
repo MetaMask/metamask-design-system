@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { IconName } from '../Icon';
+
 import { BadgeIcon } from './BadgeIcon';
 import type { BadgeIconProps } from './BadgeIcon.types';
 import README from './README.mdx';
