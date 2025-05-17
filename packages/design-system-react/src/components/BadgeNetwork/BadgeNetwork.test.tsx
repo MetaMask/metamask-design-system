@@ -8,9 +8,9 @@ describe('BadgeNetwork', () => {
     render(<BadgeNetwork name="TestNet" src="icon.png" data-testid="badge" />);
 
     const wrapper = screen.getByTestId('badge');
-    const classList = wrapper.className.split(/\s+/);
+    const classList = wrapper.className.split(/\s+/u);
 
-    expect(classList).toEqual(
+    expect(classList).toStrictEqual(
       expect.arrayContaining([
         'h-[18px]',
         'w-[18px]',

@@ -3,7 +3,8 @@ import { KnownCaipNamespace } from '@metamask/utils';
 import React, { useEffect, useRef } from 'react';
 
 import { twMerge } from '../../../utils/tw-merge';
-import { JazziconProps } from './Jazzicon.types';
+
+import type { JazziconProps } from './Jazzicon.types';
 import {
   generateSeedEthereum,
   generateSeedNonEthereum,
@@ -27,7 +28,9 @@ export const Jazzicon = ({
   useEffect(() => {
     let isCancelled = false;
 
-    (async () => {
+    // Use void to explicitly mark the promise as intentionally not awaited or caught
+    // eslint-disable-next-line no-void
+    void (async () => {
       if (!containerRef.current) {
         return;
       }

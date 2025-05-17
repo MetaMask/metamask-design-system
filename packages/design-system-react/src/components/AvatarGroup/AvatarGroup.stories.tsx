@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
+
 import { AvatarGroup } from './AvatarGroup';
 import {
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
@@ -90,6 +91,14 @@ const AvatarGroupStory: React.FC<Omit<AvatarGroupProps, 'avatarPropsArr'>> = ({
           avatarPropsArr={SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR}
         />
       );
+    default:
+      return (
+        <AvatarGroup
+          {...props}
+          variant={AvatarGroupVariant.Favicon}
+          avatarPropsArr={SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR}
+        />
+      );
   }
 };
 
@@ -140,10 +149,7 @@ export const Size: Story = {
   render: () => (
     <div>
       {Object.keys(AvatarGroupSize).map((sizeKey) => (
-        <div
-          key={sizeKey}
-          className="flex flex-col gap-1 mb-4"
-        >
+        <div key={sizeKey} className="mb-4 flex flex-col gap-1">
           <AvatarGroupStory
             variant={AvatarGroupVariant.Account}
             size={AvatarGroupSize[sizeKey as keyof typeof AvatarGroupSize]}
@@ -180,19 +186,19 @@ export const Max: Story = {
 export const IsReverse: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1 items-start">
+      <div className="flex flex-col items-start gap-1">
         <AvatarGroupStory variant={AvatarGroupVariant.Account} />
         <AvatarGroupStory variant={AvatarGroupVariant.Account} isReverse />
       </div>
-      <div className="flex flex-col gap-1 items-start">
+      <div className="flex flex-col items-start gap-1">
         <AvatarGroupStory variant={AvatarGroupVariant.Favicon} />
         <AvatarGroupStory variant={AvatarGroupVariant.Favicon} isReverse />
       </div>
-      <div className="flex flex-col gap-1 items-start">
+      <div className="flex flex-col items-start gap-1">
         <AvatarGroupStory variant={AvatarGroupVariant.Network} />
         <AvatarGroupStory variant={AvatarGroupVariant.Network} isReverse />
       </div>
-      <div className="flex flex-col gap-1 items-start">
+      <div className="flex flex-col items-start gap-1">
         <AvatarGroupStory variant={AvatarGroupVariant.Token} />
         <AvatarGroupStory variant={AvatarGroupVariant.Token} isReverse />
       </div>
