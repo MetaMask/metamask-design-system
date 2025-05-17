@@ -55,9 +55,14 @@ jobs:
           mkdir -p merged-pages
           tar -xf current-pages/artifact.tar -C merged-pages
 
-      # Merge the PR preview with the current pages
+      # Handle both cases: with and without existing pages
       - name: Prepare merged pages
         run: |
+          # If download failed, create a fresh pages directory
+          if [ ! -d "merged-pages" ]; then
+            mkdir -p merged-pages
+          fi
+
           # Create PR-specific subdirectory in merged pages
           mkdir -p merged-pages/pr-preview/${{ github.event.pull_request.number }}
           # Copy PR preview content to the subdirectory

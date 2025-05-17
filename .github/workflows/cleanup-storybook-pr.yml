@@ -21,13 +21,20 @@ jobs:
         with:
           name: github-pages
           path: current-pages
+        continue-on-error: true
 
       # Extract and remove the PR preview
       - name: Remove PR preview
         run: |
           mkdir -p cleaned-pages
-          tar -xf current-pages/artifact.tar -C cleaned-pages
-          rm -rf cleaned-pages/pr-preview/${{ github.event.pull_request.number }}
+          # Only extract if download was successful
+          if [ -f "current-pages/artifact.tar" ]; then
+            tar -xf current-pages/artifact.tar -C cleaned-pages
+            rm -rf cleaned-pages/pr-preview/${{ github.event.pull_request.number }}
+          else
+            # No existing artifact, just create an empty directory
+            echo "No existing artifacts found. Creating empty directory."
+          fi
           touch cleaned-pages/.nojekyll
 
       # Upload the cleaned pages artifact
