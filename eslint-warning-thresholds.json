@@ -8,9 +8,6 @@
   "packages/design-system-react-native/src/components/BadgeIcon/BadgeIcon.test.tsx": {
     "jest/prefer-strict-equal": 1
   },
-  "packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.tsx": {
-    "@typescript-eslint/no-unused-vars": 1
-  },
   "packages/design-system-react-native/src/components/Button/Button.test.tsx": {
     "no-empty-function": 1
   },
@@ -26,15 +23,6 @@
   "packages/design-system-react/scripts/generate-icons-index.test.ts": {
     "@typescript-eslint/no-base-to-string": 1,
     "@typescript-eslint/no-shadow": 1
-  },
-  "packages/design-system-react/src/components/AvatarAccount/AvatarAccount.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/AvatarBase/AvatarBase.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/AvatarFavicon/AvatarFavicon.tsx": {
-    "import-x/no-named-as-default-member": 1
   },
   "packages/design-system-react/src/components/AvatarIcon/AvatarIcon.test.tsx": {
     "import-x/no-named-as-default-member": 1
@@ -99,10 +87,6 @@
   },
   "packages/design-system-react/src/components/TextButton/TextButton.tsx": {
     "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.utilities.ts": {
-    "jsdoc/require-param-description": 3,
-    "jsdoc/require-returns": 3
   },
   "packages/design-system-react/src/types/index.ts": {
     "@typescript-eslint/no-shadow": 7

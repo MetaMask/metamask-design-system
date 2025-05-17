@@ -10,7 +10,7 @@ describe('BadgeNetwork', () => {
     const wrapper = screen.getByTestId('badge');
     const classList = wrapper.className.split(/\s+/u);
 
-    expect(classList).toEqual(
+    expect(classList).toStrictEqual(
       expect.arrayContaining([
         'h-[18px]',
         'w-[18px]',

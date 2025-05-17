@@ -7,7 +7,7 @@ import * as utilities from './Jazzicon.utilities';
 
 // Mock the external dependency for Bitcoin address validation.
 jest.mock('bitcoin-address-validation', () => ({
-  validate: (address: string, network: unknown) => {
+  validate: (address: string, _network: unknown) => {
     // For our test Bitcoin address, return true; for others, return false.
     if (address === '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa') {
       return true;
@@ -23,7 +23,7 @@ jest.mock('bitcoin-address-validation', () => ({
 // Polyfill TextEncoder for JSDOM (Node < 18)
 if (typeof TextEncoder === 'undefined') {
   // We need to use dynamic import to avoid linting errors with Node.js modules
-  // eslint-disable-next-line @typescript-eslint/no-var-requires, import-x/no-nodejs-modules, @typescript-eslint/no-require-imports
+  // eslint-disable-next-line import-x/no-nodejs-modules, @typescript-eslint/no-require-imports
   global.TextEncoder = require('util').TextEncoder;
 }
 
@@ -43,7 +43,9 @@ describe('Jazzicon', () => {
         const expected = Array.from(
           stringToBytes(address.normalize('NFKC').toLowerCase()),
         );
-        expect(utilities.generateSeedNonEthereum(address)).toEqual(expected);
+        expect(utilities.generateSeedNonEthereum(address)).toStrictEqual(
+          expected,
+        );
       });
     });
 
@@ -197,7 +199,9 @@ describe('Jazzicon', () => {
       });
 
       unmount();
-      await act(async () => {}); // allow cleanup effect to run
+      await act(async () => {
+        // Empty function to allow cleanup effect to run
+      });
       expect(screen.queryByTestId('jazzicon')).toBeNull();
     });
 
@@ -206,8 +210,8 @@ describe('Jazzicon', () => {
         .spyOn(utilities, 'getCaipNamespaceFromAddress')
         .mockImplementation(
           () =>
-            new Promise((resolve) =>
-              setTimeout(() => resolve(KnownCaipNamespace.Eip155), 500),
+            new Promise((_resolve) =>
+              setTimeout(() => _resolve(KnownCaipNamespace.Eip155), 500),
             ),
         );
 
@@ -218,7 +222,7 @@ describe('Jazzicon', () => {
       unmount();
 
       await act(async () => {
-        await new Promise((res) => setTimeout(res, 600));
+        await new Promise((_resolve) => setTimeout(_resolve, 600));
       });
 
       expect(screen.queryByTestId('jazzicon')).toBeNull();
@@ -238,7 +242,7 @@ describe('Jazzicon', () => {
       const useRefSpy = jest.spyOn(React, 'useRef').mockReturnValue(fakeRef);
       render(<Jazzicon address="0xearly" data-testid="jazzicon" />);
       await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+        await new Promise((_resolve) => setTimeout(_resolve, 50));
       });
       // Even though the component renders a div, the effect sees containerRef.current as null,
       // so it should not append any children.
@@ -290,11 +294,10 @@ describe('Jazzicon', () => {
     it('clears pre-existing children on initial mount using delayed effect', async () => {
       // Capture effect callbacks instead of letting them run automatically.
       const effectCallbacks: (() => void)[] = [];
-      const originalUseEffect = React.useEffect;
       jest
         .spyOn(React, 'useEffect')
         .mockImplementation(
-          (cb: () => void | (() => void), deps?: React.DependencyList) => {
+          (cb: () => void | (() => void), _deps?: React.DependencyList) => {
             effectCallbacks.push(cb);
             // Do not call the callback automatically.
           },
@@ -324,7 +327,7 @@ describe('Jazzicon', () => {
       expect(container.querySelector('[data-testid="dummy"]')).toBeNull();
 
       // Restore the original useEffect implementation.
-      React.useEffect = originalUseEffect;
+      jest.spyOn(React, 'useEffect').mockRestore();
     });
   });
 });

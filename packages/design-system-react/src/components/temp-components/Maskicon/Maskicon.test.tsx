@@ -7,7 +7,7 @@ import { Maskicon } from './Maskicon';
 import * as MaskiconUtilities from './Maskicon.utilities';
 
 jest.mock('bitcoin-address-validation', () => ({
-  validate: (address: string, network: unknown) => {
+  validate: (address: string, _network: unknown) => {
     if (address === '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa') {
       return true;
     }
@@ -25,21 +25,21 @@ jest.mock('@solana/addresses', () => ({
 
 // Polyfill TextEncoder for JSDOM (Node < 18)
 if (typeof TextEncoder === 'undefined') {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires, import-x/no-nodejs-modules, @typescript-eslint/no-require-imports
+  // eslint-disable-next-line import-x/no-nodejs-modules, @typescript-eslint/no-require-imports
   global.TextEncoder = require('util').TextEncoder;
 }
 
 const createDeferred = <T,>() => {
-  let resolve: (value: T) => void;
-  let reject: (error: unknown) => void;
-  const promise = new Promise<T>((res, rej) => {
-    resolve = res;
-    reject = rej;
+  let resolver: (value: T) => void;
+  let rejector: (error: unknown) => void;
+  const promise = new Promise<T>((resolve, reject) => {
+    resolver = resolve;
+    rejector = reject;
   });
 
-  // Using non-null assertion is safe here because we know resolve and reject are assigned in the Promise constructor
+  // Using non-null assertion is safe here because we know resolver and rejector are assigned in the Promise constructor
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return { promise, resolve: resolve!, reject: reject! };
+  return { promise, resolve: resolver!, reject: rejector! };
 };
 
 describe('Maskicon Utilities', () => {
@@ -53,7 +53,7 @@ describe('Maskicon Utilities', () => {
     const address = 'TestAddress';
     const normalized = address.normalize('NFKC').toLowerCase();
     const expectedSeed = Array.from(stringToBytes(normalized));
-    expect(MaskiconUtilities.generateSeedNonEthereum(address)).toEqual(
+    expect(MaskiconUtilities.generateSeedNonEthereum(address)).toStrictEqual(
       expectedSeed,
     );
   });
@@ -167,7 +167,7 @@ describe('Maskicon Utilities', () => {
       const size = 100;
       const svg1 = await MaskiconUtilities.getMaskiconSVG(address, size);
       const svg2 = await MaskiconUtilities.getMaskiconSVG(address, size);
-      expect(svg1).toEqual(svg2);
+      expect(svg1).toStrictEqual(svg2);
     });
 
     it('uses generateSeedNonEthereum when namespace is not Eip155', async () => {
@@ -179,8 +179,8 @@ describe('Maskicon Utilities', () => {
       );
       const ethAddress = '0xABCDEF1234567890ABCDEF1234567890ABCDEF12';
       const svgEth = await MaskiconUtilities.getMaskiconSVG(ethAddress, size);
-      expect(svgNonEth).not.toEqual(svgEth);
-      expect(svgNonEth).toContain('<svg');
+      expect(svgNonEth).not.toStrictEqual(svgEth);
+      expect(svgNonEth).toStrictEqual(expect.stringContaining('<svg'));
     });
   });
 });
@@ -235,7 +235,9 @@ describe('Maskicon', () => {
     );
 
     await waitFor(() => {
-      expect((container.firstChild as HTMLElement).innerHTML).toContain('<svg');
+      expect((container.firstChild as HTMLElement).innerHTML).toStrictEqual(
+        expect.stringContaining('<svg'),
+      );
     });
     expect(container.firstChild).toHaveStyle({ width: '32px', height: '32px' });
     getSvgSpy.mockRestore();
@@ -256,7 +258,9 @@ describe('Maskicon', () => {
     );
 
     await waitFor(() => {
-      expect((container.firstChild as HTMLElement).innerHTML).toContain('<svg');
+      expect((container.firstChild as HTMLElement).innerHTML).toStrictEqual(
+        expect.stringContaining('<svg'),
+      );
     });
     const updatedDiv = container.querySelector(
       '[data-testid="maskicon-forward"]',

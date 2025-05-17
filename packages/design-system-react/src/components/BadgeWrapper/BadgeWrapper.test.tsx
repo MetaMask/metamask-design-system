@@ -19,7 +19,10 @@ describe('BadgeWrapper', () => {
       bottom: 0,
       x: 0,
       y: 0,
-      toJSON: () => {},
+      toJSON: () => {
+        // Empty implementation needed for mock
+        return '';
+      },
     });
   });
   afterEach(() => {
@@ -185,7 +188,10 @@ describe('BadgeWrapper', () => {
       bottom: 0,
       x: 0,
       y: 0,
-      toJSON: () => {},
+      toJSON: () => {
+        // Empty implementation needed for mock
+        return '';
+      },
     };
     const badgeRect = {
       width: 20,
@@ -196,7 +202,10 @@ describe('BadgeWrapper', () => {
       bottom: 0,
       x: 0,
       y: 0,
-      toJSON: () => {},
+      toJSON: () => {
+        // Empty implementation needed for mock
+        return '';
+      },
     };
     jest
       .spyOn(HTMLElement.prototype, 'getBoundingClientRect')
@@ -211,10 +220,9 @@ describe('BadgeWrapper', () => {
 
     const badgeEl = screen.getByTestId('badge-m');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    const badgeDiv = badgeEl.parentElement;
-    if (!badgeDiv) {
-      return; // This is just for TypeScript - the test will fail above if parentElement is null
-    }
+    // We can assert that parentElement exists since we checked it's in the document
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const badgeDiv = badgeEl.parentElement!;
 
     // Computed offsets:
     // anchorShapeXOffset = 100 * .1464 = 14.64

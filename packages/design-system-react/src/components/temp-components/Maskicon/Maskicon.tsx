@@ -1,8 +1,10 @@
-import DOMPurify from 'dompurify';
+import * as dompurify from 'dompurify';
 import React, { useEffect, useState } from 'react';
 
 import type { MaskiconProps } from './Maskicon.types';
 import { getMaskiconSVG } from './Maskicon.utilities';
+
+const DOMPurify = dompurify.default;
 
 export const Maskicon = ({
   address,

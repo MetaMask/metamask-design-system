@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, forwardRef } from 'react';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
@@ -22,7 +22,7 @@ import {
 } from './AvatarGroup.constants';
 import type { AvatarGroupProps } from './AvatarGroup.types';
 
-export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
+export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
   (
     {
       variant,
