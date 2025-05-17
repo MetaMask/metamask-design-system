@@ -31,12 +31,11 @@ jobs:
 
       - name: Upload artifact
         id: upload
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
           path: apps/storybook-react/storybook-static
           retention-days: 1
-          include-hidden-files: true
 
   deploy:
     name: Deploy to GitHub Pages
