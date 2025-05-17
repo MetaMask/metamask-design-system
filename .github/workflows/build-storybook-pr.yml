@@ -74,7 +74,7 @@ jobs:
       - name: Set PR preview path
         id: preview-path
         run: |
-          echo "PR_PREVIEW_PATH=pr-preview/${{ steps.pr-info.outputs.pr_number }}" >> $GITHUB_ENV
+          echo "PR_PREVIEW_PATH=pr-preview/${steps.pr-info.outputs.pr_number}" >> "$GITHUB_ENV"
 
       # Setup PR preview directory structure
       - name: Setup PR preview directory
