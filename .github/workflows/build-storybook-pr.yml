@@ -1,0 +1,130 @@
+name: Build Storybook PR
+
+on:
+  workflow_run:
+    workflows: ['Main']
+    types:
+      - completed
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    name: Build PR Storybook
+    # Only run if the main workflow passed successfully
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+      pages: write
+    defaults:
+      run:
+        working-directory: apps/storybook-react
+    steps:
+      # Get PR information
+      - name: Get PR information
+        id: pr-info
+        uses: actions/github-script@v6
+        with:
+          script: |
+            // The workflow_run event doesn't contain the PR number directly
+            // so we need to find which PR triggered the workflow run
+            const { owner, repo } = context.repo;
+            const headSha = '${{ github.event.workflow_run.head_sha }}';
+
+            // Find the PR associated with the commit
+            const result = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner,
+              repo,
+              commit_sha: headSha
+            });
+
+            if (result.data.length === 0) {
+              core.setFailed('No PR found for this commit');
+              return;
+            }
+
+            // Use the first PR (usually there's only one)
+            const pr = result.data[0];
+            core.setOutput('pr_number', pr.number);
+            core.setOutput('pr_head_sha', pr.head.sha);
+
+            console.log(`Found PR #${pr.number} for commit ${headSha}`);
+
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          is-high-risk-environment: false
+          skip-allow-scripts: true
+
+      - name: Build required packages
+        working-directory: .
+        run: |
+          yarn build
+
+      - name: Build storybook
+        run: |
+          yarn build-storybook
+          touch storybook-static/.nojekyll
+
+      # Create a PR-specific directory name
+      - name: Set PR preview path
+        id: preview-path
+        run: |
+          echo "PR_PREVIEW_PATH=pr-preview/${steps.pr-info.outputs.pr_number}" >> "$GITHUB_ENV"
+
+      # Setup PR preview directory structure
+      - name: Setup PR preview directory
+        run: |
+          # Create a directory with the PR number
+          mkdir -p pr-preview-deploy/${{ env.PR_PREVIEW_PATH }}
+          # Copy storybook files to the PR preview directory
+          cp -r storybook-static/* pr-preview-deploy/${{ env.PR_PREVIEW_PATH }}/
+          # Add .nojekyll file to the root
+          touch pr-preview-deploy/.nojekyll
+
+      # Upload the PR preview as a separate artifact
+      - name: Upload PR preview artifact
+        id: upload
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages-pr-${{ steps.pr-info.outputs.pr_number }}
+          path: pr-preview-deploy
+          retention-days: 1
+
+      # Deploy the PR preview to GitHub Pages
+      - name: Deploy PR preview to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-pr-${{ steps.pr-info.outputs.pr_number }}
+
+      # Post comment with preview URL
+      - name: Post Preview URL Comment
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const prNumber = ${{ steps.pr-info.outputs.pr_number }};
+            const shortSha = '${{ steps.pr-info.outputs.pr_head_sha }}'.slice(0, 7);
+
+            const commentBody = `
+            ## 🎨 Storybook Preview Ready [${shortSha}]
+
+            ### 🔍 Preview Links
+            - [View Storybook](https://${context.repo.owner}.github.io/${context.repo.repo}/${process.env.PR_PREVIEW_PATH}/)
+
+            ### 📝 Details
+            - **PR**: #${prNumber}
+            - **Commit**: ${shortSha}
+            - **Build Type**: Pull Request Preview
+            `;
+
+            await github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: commentBody
+            });

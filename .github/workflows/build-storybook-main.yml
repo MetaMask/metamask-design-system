@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build Storybook
+    name: Build Main Storybook
     runs-on: ubuntu-latest
     defaults:
       run:
