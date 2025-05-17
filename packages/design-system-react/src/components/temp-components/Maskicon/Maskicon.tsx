@@ -1,7 +1,7 @@
 import DOMPurify from 'dompurify';
 import React, { useEffect, useState } from 'react';
 
-import { MaskiconProps } from './Maskicon.types';
+import type { MaskiconProps } from './Maskicon.types';
 import { getMaskiconSVG } from './Maskicon.utilities';
 
 export const Maskicon = ({
@@ -14,7 +14,8 @@ export const Maskicon = ({
 
   useEffect(() => {
     let cancelled = false;
-    (async () => {
+    // eslint-disable-next-line no-void
+    void (async () => {
       const newSvg = await getMaskiconSVG(address, size);
       if (!cancelled) {
         setSvgString(newSvg);

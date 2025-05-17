@@ -1,5 +1,5 @@
-import { KnownCaipNamespace, stringToBytes } from '@metamask/utils';
 import '@testing-library/jest-dom';
+import { KnownCaipNamespace, stringToBytes } from '@metamask/utils';
 import { render, waitFor, cleanup, act } from '@testing-library/react';
 import React from 'react';
 
@@ -7,8 +7,10 @@ import { Maskicon } from './Maskicon';
 import * as MaskiconUtilities from './Maskicon.utilities';
 
 jest.mock('bitcoin-address-validation', () => ({
-  validate: (address: string, network: any) => {
-    if (address === '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa') return true;
+  validate: (address: string, network: unknown) => {
+    if (address === '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa') {
+      return true;
+    }
     return false;
   },
   Network: {
@@ -23,17 +25,20 @@ jest.mock('@solana/addresses', () => ({
 
 // Polyfill TextEncoder for JSDOM (Node < 18)
 if (typeof TextEncoder === 'undefined') {
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-var-requires, import-x/no-nodejs-modules, @typescript-eslint/no-require-imports
   global.TextEncoder = require('util').TextEncoder;
 }
 
 const createDeferred = <T,>() => {
   let resolve: (value: T) => void;
-  let reject: (error: any) => void;
+  let reject: (error: unknown) => void;
   const promise = new Promise<T>((res, rej) => {
     resolve = res;
     reject = rej;
   });
+
+  // Using non-null assertion is safe here because we know resolve and reject are assigned in the Promise constructor
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return { promise, resolve: resolve!, reject: reject! };
 };
 
@@ -65,6 +70,7 @@ describe('Maskicon Utilities', () => {
     });
 
     it('returns "seed000" for unsupported seed types', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result = MaskiconUtilities.seedToString({} as any);
       expect(result).toBe('seed000');
     });
@@ -198,7 +204,7 @@ describe('Maskicon', () => {
 
     // Check that initially the placeholder div is rendered.
     const initialDiv = container.firstChild as HTMLElement;
-    expect(initialDiv).toBeTruthy();
+    expect(initialDiv).toBeInTheDocument();
     expect(initialDiv.innerHTML).toBe('');
 
     // Wait for the async effect to update the div.
@@ -209,7 +215,7 @@ describe('Maskicon', () => {
     const updatedDiv = container.querySelector(
       '[data-testid="maskicon"]',
     ) as HTMLElement;
-    expect(updatedDiv).toBeTruthy();
+    expect(updatedDiv).toBeInTheDocument();
     expect(updatedDiv).toHaveStyle({ width: '32px', height: '32px' });
 
     getSvgSpy.mockRestore();
@@ -255,7 +261,7 @@ describe('Maskicon', () => {
     const updatedDiv = container.querySelector(
       '[data-testid="maskicon-forward"]',
     ) as HTMLElement;
-    expect(updatedDiv).toBeTruthy();
+    expect(updatedDiv).toBeInTheDocument();
     expect(updatedDiv.getAttribute('data-custom')).toBe('hello');
     getSvgSpy.mockRestore();
   });

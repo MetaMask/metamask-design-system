@@ -6,6 +6,7 @@ import { isAddress as isSolanaAddress } from '@solana/addresses';
 // /////////////////////////////////////////////////////
 /**
  * Generates a numeric seed for Ethereum (eip155) addresses.
+ * @param address
  */
 export function generateSeedEthereum(address: string): number {
   // Example: parse the first 8 chars of the address after '0x'
@@ -15,6 +16,7 @@ export function generateSeedEthereum(address: string): number {
 
 /**
  * Generates a byte-array seed for non-Ethereum addresses (Solana, Bitcoin, etc.).
+ * @param address
  */
 export function generateSeedNonEthereum(address: string): number[] {
   return Array.from(stringToBytes(address.normalize('NFKC').toLowerCase()));
@@ -26,6 +28,7 @@ export function generateSeedNonEthereum(address: string): number[] {
  *
  * In this update, if the address starts with "0x", we'll assume it's Ethereum (Eip155)
  * and avoid the dynamic import that can cause the "Requiring unknown module '2021'" error.
+ * @param address
  */
 export async function getCaipNamespaceFromAddress(
   address: string,
@@ -134,16 +137,24 @@ const complementaryPairs = [
 
 const colorPairs = neutralPairs.concat(tonalPairs).concat(complementaryPairs);
 
-/** SDBM hash function */
+/**
+ * SDBM hash function
+ * @param str
+ */
 export function sdbmHash(str: string): number {
   let hash = 0;
+  // eslint-disable-next-line no-bitwise
   for (let i = 0; i < str.length; i++) {
+    // eslint-disable-next-line no-bitwise
     hash = str.charCodeAt(i) + (hash << 6) + (hash << 16) - hash;
   }
   return hash;
 }
 
-/** Convert numeric/byte-array seed to a 6+ length string */
+/**
+ * Convert numeric/byte-array seed to a 6+ length string
+ * @param seed
+ */
 export function seedToString(seed: number | number[]): string {
   if (typeof seed === 'number') {
     let hex = seed.toString(16);
@@ -164,6 +175,8 @@ export function seedToString(seed: number | number[]): string {
 
 /**
  * Builds a full <svg> string containing the Maskicon shapes.
+ * @param seed
+ * @param size
  */
 export function createMaskiconSVG(seed: number | number[], size = 100): string {
   // 1) Convert seed to string, then hash
@@ -191,7 +204,10 @@ export function createMaskiconSVG(seed: number | number[], size = 100): string {
   filledGrid[startX][startY] = true;
 
   while (stack.length > 0) {
+    // Using destructuring assignment with a non-null assertion is safe here because we've verified stack.length > 0
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const [x, y] = stack.pop()!;
+    // eslint-disable-next-line no-bitwise
     const cellHash = Math.abs(hashVal >> (x * 3 + y * 5)) & 15;
 
     const neighbors: [number, number][] = [];
@@ -223,16 +239,14 @@ export function createMaskiconSVG(seed: number | number[], size = 100): string {
 
     if (isSquare) {
       pathData += `M${cx},${cy} h${cellSize} v${cellSize} h-${cellSize}z `;
+    } else if (rotation === 0) {
+      pathData += `M${cx},${cy} h${cellSize} v${cellSize}z `;
+    } else if (rotation === 90) {
+      pathData += `M${cx + cellSize},${cy} v${cellSize} h-${cellSize}z `;
+    } else if (rotation === 180) {
+      pathData += `M${cx + cellSize},${cy + cellSize} h-${cellSize} v-${cellSize}z `;
     } else {
-      if (rotation === 0) {
-        pathData += `M${cx},${cy} h${cellSize} v${cellSize}z `;
-      } else if (rotation === 90) {
-        pathData += `M${cx + cellSize},${cy} v${cellSize} h-${cellSize}z `;
-      } else if (rotation === 180) {
-        pathData += `M${cx + cellSize},${cy + cellSize} h-${cellSize} v-${cellSize}z `;
-      } else {
-        pathData += `M${cx},${cy + cellSize} v-${cellSize} h${cellSize}z `;
-      }
+      pathData += `M${cx},${cy + cellSize} v-${cellSize} h${cellSize}z `;
     }
   }
 
@@ -252,6 +266,8 @@ const svgCache: Record<CacheKey, string> = {};
 
 /**
  * Returns a Promise that resolves to the final <svg> string for the given address.
+ * @param address
+ * @param size
  */
 export async function getMaskiconSVG(
   address: string,
