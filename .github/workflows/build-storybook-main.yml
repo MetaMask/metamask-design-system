@@ -36,6 +36,7 @@ jobs:
           name: github-pages
           path: apps/storybook-react/storybook-static
           retention-days: 1
+          include-hidden-files: true
 
   deploy:
     name: Deploy to GitHub Pages

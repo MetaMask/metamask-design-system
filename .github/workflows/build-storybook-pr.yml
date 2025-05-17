@@ -78,6 +78,8 @@ jobs:
           name: github-pages
           path: merged-pages
           retention-days: 1
+          overwrite: true
+          include-hidden-files: true
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
