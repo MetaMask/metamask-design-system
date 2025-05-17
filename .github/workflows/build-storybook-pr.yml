@@ -2,12 +2,18 @@ name: Build Storybook PR
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 jobs:
-  build-storybook:
-    name: Build Storybook PR
+  build:
+    name: Build PR Storybook
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+      pages: write
     defaults:
       run:
         working-directory: apps/storybook-react
@@ -15,24 +21,87 @@ jobs:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@v1
         with:
-          is-high-risk-environment: true
-          cache-node-modules: true
+          is-high-risk-environment: false
+          skip-allow-scripts: true
 
       - name: Build required packages
         working-directory: .
         run: |
-          yarn workspace @metamask/design-tokens build
-          yarn workspace @metamask/design-system-tailwind-preset build
-          yarn workspace @metamask/design-system-react build
+          yarn build
 
       - name: Build storybook
-        run: yarn build-storybook
+        run: |
+          yarn build-storybook
+          # Create PR-specific directory
+          mkdir -p storybook-static-pr-preview
+          # Copy main storybook files to PR preview directory
+          cp -r storybook-static/* storybook-static-pr-preview/
+          # Add nojekyll file
+          touch storybook-static-pr-preview/.nojekyll
 
-      - name: Upload 'storybook-build' to S3
-        if: ${{ vars.AWS_REGION && vars.AWS_IAM_ROLE && vars.AWS_S3_BUCKET }}
-        uses: metamask/github-tools/.github/actions/upload-s3@1233659b3850eb84824d7375e2e0c58eb237701d
+      # Download the current pages artifact to preserve main branch build
+      - name: Download current GitHub Pages
+        id: download
+        uses: actions/download-artifact@v3
         with:
-          aws-region: ${{ vars.AWS_REGION }}
-          role-to-assume: ${{ vars.AWS_IAM_ROLE }}
-          s3-bucket: ${{ vars.AWS_S3_BUCKET }}/${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/storybook-build
-          path: apps/storybook-react/storybook-static
+          name: github-pages
+          path: current-pages
+        continue-on-error: true
+
+      # Extract the current pages content
+      - name: Extract current pages
+        if: steps.download.outcome == 'success'
+        run: |
+          mkdir -p merged-pages
+          tar -xf current-pages/artifact.tar -C merged-pages
+
+      # Merge the PR preview with the current pages
+      - name: Prepare merged pages
+        run: |
+          # Create PR-specific subdirectory in merged pages
+          mkdir -p merged-pages/pr-preview/${{ github.event.pull_request.number }}
+          # Copy PR preview content to the subdirectory
+          cp -r storybook-static-pr-preview/* merged-pages/pr-preview/${{ github.event.pull_request.number }}/
+          # Ensure nojekyll file exists
+          touch merged-pages/.nojekyll
+
+      # Upload the merged pages artifact
+      - name: Upload GitHub Pages artifact
+        id: upload
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: merged-pages
+          retention-days: 1
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      # Post comment with preview URL
+      - name: Post Preview URL Comment
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const shortSha = context.payload.pull_request.head.sha.slice(0, 7);
+
+            const commentBody = `
+            ## 🎨 Storybook Preview Ready [${shortSha}]
+
+            ### 🔍 Preview Links
+            - [View Storybook](https://${context.repo.owner}.github.io/${context.repo.repo}/pr-preview/${prNumber}/)
+
+            ### 📝 Details
+            - **PR**: #${prNumber}
+            - **Commit**: ${shortSha}
+            - **Build Type**: Pull Request Preview
+            `;
+
+            await github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: commentBody
+            });

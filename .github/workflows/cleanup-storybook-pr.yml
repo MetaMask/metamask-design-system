@@ -1,0 +1,45 @@
+name: Cleanup Storybook PR Preview
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      pages: write
+    environment:
+      name: github-pages
+    steps:
+      # Download the current GitHub Pages artifact
+      - name: Download current GitHub Pages
+        id: download
+        uses: actions/download-artifact@v3
+        with:
+          name: github-pages
+          path: current-pages
+
+      # Extract and remove the PR preview
+      - name: Remove PR preview
+        run: |
+          mkdir -p cleaned-pages
+          tar -xf current-pages/artifact.tar -C cleaned-pages
+          rm -rf cleaned-pages/pr-preview/${{ github.event.pull_request.number }}
+          touch cleaned-pages/.nojekyll
+
+      # Upload the cleaned pages artifact
+      - name: Upload GitHub Pages artifact
+        id: upload
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: cleaned-pages
+          retention-days: 1
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
