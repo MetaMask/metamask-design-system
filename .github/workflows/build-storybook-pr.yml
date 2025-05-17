@@ -42,7 +42,7 @@ jobs:
       # Download the current pages artifact to preserve main branch build
       - name: Download current GitHub Pages
         id: download
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: github-pages
           path: current-pages
@@ -68,7 +68,7 @@ jobs:
       # Upload the merged pages artifact
       - name: Upload GitHub Pages artifact
         id: upload
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           name: github-pages
           path: merged-pages
