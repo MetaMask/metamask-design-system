@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import {
   AvatarAccountVariant,
@@ -13,10 +13,7 @@ import { Maskicon } from '../temp-components/Maskicon';
 import { MAP_AVATARACCOUNT_SIZE_SIZENUMBER } from './AvatarAccount.constants';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 
-export const AvatarAccount = React.forwardRef<
-  HTMLDivElement,
-  AvatarAccountProps
->(
+export const AvatarAccount = forwardRef<HTMLDivElement, AvatarAccountProps>(
   (
     {
       address,
