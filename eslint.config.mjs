@@ -28,8 +28,6 @@ const config = createConfig([
       'packages/design-system-react/src/components/AvatarGroup/AvatarGroup.tsx',
       'packages/design-system-react/src/components/AvatarNetwork/AvatarNetwork.test.tsx',
       'packages/design-system-react/src/components/AvatarToken/AvatarToken.test.tsx',
-      'packages/design-system-react/src/components/BadgeNetwork/BadgeNetwork.test.tsx',
-      'packages/design-system-react/src/components/BadgeWrapper/BadgeWrapper.test.tsx',
       'packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.test.tsx',
       'packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.tsx',
       'packages/design-system-react/src/components/temp-components/Maskicon/Maskicon.test.tsx',
