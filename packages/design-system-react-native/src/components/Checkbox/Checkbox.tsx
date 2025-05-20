@@ -1,3 +1,4 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, {
   forwardRef,
   useState,
@@ -6,17 +7,12 @@ import React, {
   useCallback,
   useEffect,
 } from 'react';
-import {
-  Pressable,
-  Animated,
-  Easing,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { Pressable, Animated, Easing } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { Icon, IconName, IconColor, IconSize } from '../Icon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
+
 import type { CheckboxProps } from './Checkbox.types';
 
 const AnimatedView = Animated.View;
@@ -42,7 +38,9 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     // Internal state for uncontrolled
     const [internalSelected, setInternalSelected] = useState(defaultIsSelected);
     const isControlled = isSelected !== undefined;
-    const currentSelected = isControlled ? isSelected! : internalSelected;
+    const currentSelected = isControlled
+      ? Boolean(isSelected)
+      : internalSelected;
 
     // Animation values
     const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -80,7 +78,9 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
 
     // Press handler: update state, notify parent, then bounce
     const handlePress = () => {
-      if (isDisabled) return;
+      if (isDisabled) {
+        return;
+      }
       const next = !currentSelected;
       if (!isControlled) {
         setInternalSelected(next);
@@ -101,19 +101,21 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
         const baseBg = currentSelected
           ? 'bg-primary-default'
           : 'bg-background-default';
-        const baseBorder = currentSelected
-          ? 'border-primary-default'
-          : isInvalid
-            ? 'border-error-default'
-            : 'border-border-default';
+        let baseBorder = 'border-border-default';
+        if (currentSelected) {
+          baseBorder = 'border-primary-default';
+        } else if (isInvalid) {
+          baseBorder = 'border-error-default';
+        }
         const pressedBg = currentSelected
           ? 'bg-primary-defaultPressed'
           : 'bg-background-defaultPressed';
-        const pressedBorder = currentSelected
-          ? 'border-primary-defaultPressed'
-          : isInvalid
-            ? 'border-error-default'
-            : 'border-border-default';
+        let pressedBorder = 'border-border-default';
+        if (currentSelected) {
+          pressedBorder = 'border-primary-defaultPressed';
+        } else if (isInvalid) {
+          pressedBorder = 'border-error-default';
+        }
         return pressed
           ? `${pressedBg} ${pressedBorder}`
           : `${baseBg} ${baseBorder}`;

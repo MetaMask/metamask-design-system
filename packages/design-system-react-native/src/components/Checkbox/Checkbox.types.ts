@@ -1,57 +1,73 @@
 import type { StyleProp, PressableProps, ViewProps } from 'react-native';
 
-import { IconProps } from '../Icon';
-import { TextProps } from '../Text';
+import type { IconProps } from '../Icon';
+import type { TextProps } from '../Text';
 /**
  * Checkbox component props.
  */
+
 export type CheckboxProps = {
   /**
    * Optional prop that when true, shows a checked checkbox.
+   *
    * @default false
    */
   isSelected?: boolean;
+
   /**
    * Optional prop for the initial state of checkbox that when true, shows a checked checkbox.
    * Use this prop if you want Checkbox to automatically control the isSelected/checked state
+   *
    * @default false
    */
   defaultIsSelected?: boolean;
+
   /**
    * Optional prop that when true, disables the checkbox
+   *
    * @default false
    */
   isDisabled?: boolean;
+
   /**
    * Optional prop that when true, shows the invalid state
+   *
    * @default false
    */
   isInvalid?: boolean;
+
   /**
    * Optional label prop
    */
   label?: React.ReactNode | string;
+
   /**
    * Optional props to be passed to the label's Text component
    */
   labelProps?: Omit<Partial<TextProps>, 'children'>;
+
   /**
    * Optional callback for when the checked state changes
+   *
    * @default false
    */
   onChange?: (isSelected: boolean) => void;
+
   /**
    * Optional props to be passed to the checkbox container component
    */
   checkboxContainerProps?: Omit<Partial<ViewProps>, 'children'>;
+
   /**
    * Optional props to be passed to the label's Text component
    */
   checkedIconProps?: Partial<IconProps>;
+
   /**
    * Optional prop to add twrnc overriding classNames.
    */
   twClassName?: string;
+
   /**
    * Optional prop to control the style.
    */

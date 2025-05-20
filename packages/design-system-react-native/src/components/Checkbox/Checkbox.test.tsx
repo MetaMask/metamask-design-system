@@ -1,31 +1,45 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable import-x/no-named-as-default-member */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { Checkbox } from './Checkbox';
 
-// Helper to compute expected container styles
+/**
+ * Helper to compute expected container styles for the checkbox.
+ *
+ * @param tw - The tailwind instance.
+ * @param options - Checkbox state options.
+ * @param options.selected - Whether the checkbox is selected.
+ * @param options.invalid - Whether the checkbox is invalid.
+ * @param options.pressed - Whether the checkbox is pressed.
+ * @returns The expected container style.
+ */
 function getExpectedContainerStyle(
   tw: ReturnType<typeof useTailwind>,
   options: { selected?: boolean; invalid?: boolean; pressed?: boolean },
-): any {
+): StyleProp<ViewStyle> {
   const { selected = false, invalid = false, pressed = false } = options;
   const baseBg = selected ? 'bg-primary-default' : 'bg-background-default';
-  const baseBorder = selected
-    ? 'border-primary-default'
-    : invalid
-      ? 'border-error-default'
-      : 'border-border-default';
+  let baseBorder = 'border-border-default';
+  if (selected) {
+    baseBorder = 'border-primary-default';
+  } else if (invalid) {
+    baseBorder = 'border-error-default';
+  }
   const pressedBg = selected
     ? 'bg-primary-defaultPressed'
     : 'bg-background-defaultPressed';
-  const pressedBorder = selected
-    ? 'border-primary-defaultPressed'
-    : invalid
-      ? 'border-error-default'
-      : 'border-border-default';
+  let pressedBorder = 'border-border-default';
+  if (selected) {
+    pressedBorder = 'border-primary-defaultPressed';
+  } else if (invalid) {
+    pressedBorder = 'border-error-default';
+  }
   const stateClasses = pressed
     ? `${pressedBg} ${pressedBorder}`
     : `${baseBg} ${baseBorder}`;
@@ -48,22 +62,32 @@ describe('Checkbox', () => {
     jest.useRealTimers();
   });
 
-  function flattenStyles(styleProp: any): Record<string, any>[] {
-    if (styleProp == null) {
+  /**
+   * Flatten a style prop into an array of style objects.
+   *
+   * @param styleProp - The style prop to flatten.
+   * @returns A list of style objects.
+   */
+  function flattenStyles(
+    styleProp: StyleProp<ViewStyle> | undefined,
+  ): ViewStyle[] {
+    if (styleProp === null || styleProp === undefined) {
       return [];
     }
     if (Array.isArray(styleProp)) {
-      return styleProp.flatMap((item) => flattenStyles(item));
+      return styleProp.flatMap((item) =>
+        flattenStyles(item as StyleProp<ViewStyle>),
+      );
     }
     if (typeof styleProp === 'object') {
-      return [styleProp];
+      return [styleProp as ViewStyle];
     }
     return [];
   }
 
   it('renders label when provided', () => {
     const { getByText } = render(<Checkbox label="Accept" />);
-    expect(getByText('Accept')).toBeTruthy();
+    expect(getByText('Accept')).toBeDefined();
   });
 
   it('toggles selection state when pressed in uncontrolled mode', () => {
@@ -123,7 +147,7 @@ describe('Checkbox', () => {
     const { getByTestId } = render(<TestComp />);
     const inner = getByTestId('inner');
     const styles = flattenStyles(inner.props.style);
-    expect(styles).toEqual(
+    expect(styles).toStrictEqual(
       expect.arrayContaining([expect.objectContaining(expected)]),
     );
   });
@@ -139,7 +163,7 @@ describe('Checkbox', () => {
     const { getByTestId } = render(<TestComp />);
     const inner = getByTestId('inner');
     const styles = flattenStyles(inner.props.style);
-    expect(styles).toEqual(
+    expect(styles).toStrictEqual(
       expect.arrayContaining([expect.objectContaining(expected)]),
     );
   });
@@ -151,13 +175,13 @@ describe('Checkbox', () => {
     const pressable = getByTestId('chk');
     expect(pressable.props.accessible).toBe(true);
     expect(pressable.props.accessibilityRole).toBe('checkbox');
-    expect(pressable.props.accessibilityState).toEqual({
+    expect(pressable.props.accessibilityState).toStrictEqual({
       checked: true,
       disabled: false,
     });
     expect(pressable.props.accessibilityLabel).toBe('Accept');
     const styles = flattenStyles(pressable.props.style);
-    expect(styles).toEqual(
+    expect(styles).toStrictEqual(
       expect.arrayContaining([expect.objectContaining({ margin: 4 })]),
     );
   });
@@ -182,7 +206,7 @@ describe('Checkbox', () => {
     const renderedPressed = rtr.create(renderChildren({ pressed: true })).root;
     const pressedContainer = renderedPressed.findByProps({ testID: 'inner' });
     const styles = flattenStyles(pressedContainer.props.style);
-    expect(styles).toEqual(
+    expect(styles).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining(
           getExpectedContainerStyle(tw, { pressed: true }),
@@ -195,8 +219,8 @@ describe('Checkbox', () => {
     const ref = React.createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
     render(<Checkbox ref={ref} onChange={onChange} />);
-    expect(ref.current).toBeTruthy();
-    ref.current!.toggle();
+    expect(ref.current).not.toBeNull();
+    ref.current?.toggle();
     expect(onChange).toHaveBeenCalledWith(true);
   });
 
@@ -204,7 +228,7 @@ describe('Checkbox', () => {
     const ref = React.createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
     render(<Checkbox ref={ref} onChange={onChange} isDisabled />);
-    ref.current!.toggle();
+    ref.current?.toggle();
     expect(onChange).not.toHaveBeenCalled();
   });
 });

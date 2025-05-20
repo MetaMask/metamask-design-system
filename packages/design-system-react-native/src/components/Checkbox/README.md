@@ -89,7 +89,10 @@ Props forwarded to the underlying `Text` element used for rendering the label.
 | `Partial<TextProps>` | No       | `undefined` |
 
 ```tsx
-<Checkbox label="Label" labelProps={{ variant: 'BodySm', color: 'text-muted' }} />
+<Checkbox
+  label="Label"
+  labelProps={{ variant: 'BodySm', color: 'text-muted' }}
+/>
 ```
 
 ---
