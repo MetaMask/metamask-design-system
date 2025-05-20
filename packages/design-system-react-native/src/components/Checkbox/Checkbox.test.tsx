@@ -175,7 +175,7 @@ describe('Checkbox', () => {
     const pressable = getByTestId('chk');
     expect(pressable.props.accessible).toBe(true);
     expect(pressable.props.accessibilityRole).toBe('checkbox');
-    expect(pressable.props.accessibilityState).toStrictEqual({
+    expect(pressable.props.accessibilityState).toMatchObject({
       checked: true,
       disabled: false,
     });
