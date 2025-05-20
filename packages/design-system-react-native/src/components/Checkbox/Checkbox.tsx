@@ -1,0 +1,169 @@
+import React, {
+  forwardRef,
+  useState,
+  useRef,
+  useImperativeHandle,
+  useCallback,
+  useEffect,
+} from 'react';
+import {
+  Pressable,
+  Animated,
+  Easing,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+
+import { Icon, IconName, IconColor, IconSize } from '../Icon';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
+import type { CheckboxProps } from './Checkbox.types';
+
+// Use Animated.View directly
+const AnimatedView = Animated.View;
+
+export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
+  (
+    {
+      isSelected,
+      defaultIsSelected = false,
+      isDisabled = false,
+      isInvalid = false,
+      label = '',
+      labelProps,
+      onChange,
+      checkboxContainerProps,
+      checkedIconProps,
+      twClassName = '',
+      style,
+      ...props
+    },
+    ref,
+  ) => {
+    // Internal state for uncontrolled
+    const [internalSelected, setInternalSelected] = useState(defaultIsSelected);
+    const isControlled = isSelected !== undefined;
+    const currentSelected = isControlled ? isSelected! : internalSelected;
+
+    // Animation values
+    const scaleAnim = useRef(new Animated.Value(1)).current;
+    const iconAnim = useRef(
+      new Animated.Value(currentSelected ? 1 : 0),
+    ).current;
+
+    // Sync icon opacity whenever selection changes
+    useEffect(() => {
+      Animated.timing(iconAnim, {
+        toValue: currentSelected ? 1 : 0,
+        duration: 300,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }).start();
+    }, [currentSelected, iconAnim]);
+
+    // Bounce effect when toggling
+    const animateScale = useCallback(() => {
+      Animated.sequence([
+        Animated.timing(scaleAnim, {
+          toValue: 1.15,
+          duration: 100,
+          easing: Easing.ease,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnim, {
+          toValue: 1,
+          duration: 100,
+          easing: Easing.ease,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }, [scaleAnim]);
+
+    // Press handler: update state, notify parent, then bounce
+    const handlePress = () => {
+      if (isDisabled) return;
+      const next = !currentSelected;
+      if (!isControlled) {
+        setInternalSelected(next);
+      }
+      onChange?.(next);
+      animateScale();
+    };
+
+    useImperativeHandle(ref, () => ({ toggle: handlePress }), [handlePress]);
+
+    const tw = useTailwind();
+    const twContainerClassNames = `flex-row items-center ${
+      isDisabled ? 'opacity-50' : 'opacity-100'
+    } ${twClassName}`;
+
+    const getCheckboxContainerStyle = useCallback(
+      (pressed: boolean): string => {
+        const baseBg = currentSelected
+          ? 'bg-primary-default'
+          : 'bg-background-default';
+        const baseBorder = currentSelected
+          ? 'border-primary-default'
+          : isInvalid
+            ? 'border-error-default'
+            : 'border-border-default';
+        const pressedBg = currentSelected
+          ? 'bg-primary-defaultPressed'
+          : 'bg-background-defaultPressed';
+        const pressedBorder = currentSelected
+          ? 'border-primary-defaultPressed'
+          : isInvalid
+            ? 'border-error-default'
+            : 'border-border-default';
+        return pressed
+          ? `${pressedBg} ${pressedBorder}`
+          : `${baseBg} ${baseBorder}`;
+      },
+      [currentSelected, isInvalid],
+    );
+
+    return (
+      <Pressable
+        onPress={handlePress}
+        accessible
+        accessibilityRole="checkbox"
+        accessibilityState={{
+          checked: currentSelected,
+          disabled: isDisabled,
+        }}
+        accessibilityLabel={typeof label === 'string' ? label : undefined}
+        style={[tw`${twContainerClassNames}`, style as StyleProp<ViewStyle>]}
+        {...props}
+      >
+        {({ pressed }) => (
+          <>
+            <AnimatedView
+              {...checkboxContainerProps}
+              style={[
+                tw`${getCheckboxContainerStyle(pressed)} flex h-[22px] w-[22px] items-center justify-center rounded border-2`,
+                { transform: [{ scale: scaleAnim }] },
+              ]}
+            >
+              {/* Always render icon, opacity driven by iconAnim */}
+              <Animated.View style={{ opacity: iconAnim }}>
+                <Icon
+                  name={IconName.Check}
+                  color={IconColor.PrimaryInverse}
+                  size={IconSize.Sm}
+                  {...checkedIconProps}
+                />
+              </Animated.View>
+            </AnimatedView>
+            {label ? (
+              <TextOrChildren
+                textProps={{ ...labelProps, twClassName: 'ml-3' }}
+              >
+                {label}
+              </TextOrChildren>
+            ) : null}
+          </>
+        )}
+      </Pressable>
+    );
+  },
+);
