@@ -39,6 +39,15 @@ describe('Checkbox', () => {
     tw = renderHook(() => useTailwind()).result.current;
   });
 
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
+  });
+
   function flattenStyles(styleProp: any): Record<string, any>[] {
     if (styleProp == null) {
       return [];
@@ -189,5 +198,13 @@ describe('Checkbox', () => {
     expect(ref.current).toBeTruthy();
     ref.current!.toggle();
     expect(onChange).toHaveBeenCalledWith(true);
+  });
+
+  it('does not toggle when disabled via ref', () => {
+    const ref = React.createRef<{ toggle: () => void }>();
+    const onChange = jest.fn();
+    render(<Checkbox ref={ref} onChange={onChange} isDisabled />);
+    ref.current!.toggle();
+    expect(onChange).not.toHaveBeenCalled();
   });
 });
