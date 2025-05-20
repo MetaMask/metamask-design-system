@@ -1,0 +1,131 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as CheckboxStories from './Checkbox.stories';
+
+# Checkbox
+
+`Checkbox` allows users to select one or more options from a set of choices.
+
+```tsx
+import { Checkbox } from '@metamask/design-system-react';
+
+<Checkbox label="Enable notifications" />;
+```
+
+<Canvas of={CheckboxStories.Default} />
+
+## Props
+
+### `isSelected`
+
+Optional prop that when true, shows a checked checkbox.
+
+```tsx
+<Checkbox isSelected label="Selected" />
+```
+
+---
+
+### `defaultIsSelected`
+
+Optional prop for the initial state of checkbox when uncontrolled.
+
+```tsx
+<Checkbox defaultIsSelected label="Initial state" />
+```
+
+---
+
+### `isDisabled`
+
+Optional prop that when true, disables the checkbox.
+
+```tsx
+<Checkbox isDisabled label="Disabled checkbox" />
+```
+
+---
+
+### `isInvalid`
+
+Optional prop that when true, shows the invalid state.
+
+```tsx
+<Checkbox isInvalid label="Invalid checkbox" />
+```
+
+---
+
+### `label`
+
+Optional label prop that renders text or a React node as a label beside the checkbox.
+
+```tsx
+<Checkbox label="Agree to terms" />
+```
+
+---
+
+### `labelProps`
+
+Optional props to be passed to the label's Text component.
+
+```tsx
+<Checkbox label="Label" labelProps={{ className: 'text-muted' }} />
+```
+
+---
+
+### `onChange`
+
+Optional callback for when the checked state changes.
+
+```tsx
+<Checkbox label="Check me" onChange={(val) => console.log(val)} />
+```
+
+---
+
+### `checkboxContainerProps`
+
+Optional props to be passed to the checkbox container element.
+
+```tsx
+<Checkbox checkboxContainerProps={{className: "bg-success-default"}} />
+```
+
+---
+
+### `checkedIconProps`
+
+Optional props to be passed to the check Icon component.
+
+```tsx
+<Checkbox checkedIconProps={{ className: 'mr-2' }} />
+```
+
+---
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the outer container. These classes are merged with the default classes using `twMerge`.
+
+```tsx
+<Checkbox label="Custom" className="bg-primary-default" />
+```
+
+### `style`
+
+Custom styles for the outer button container.
+
+```tsx
+<Checkbox label="Styled" style={{ marginLeft: 10 }} />
+```
+
+## Component API
+
+<Controls of={CheckboxStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
