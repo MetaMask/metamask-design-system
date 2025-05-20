@@ -2,6 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
+import { Text } from 'react-native';
 
 import { Checkbox } from './Checkbox';
 
@@ -116,5 +117,46 @@ describe('Checkbox', () => {
     expect(styles).toEqual(
       expect.arrayContaining([expect.objectContaining(expected)]),
     );
+  });
+
+  it('applies selected container styles', () => {
+    let expected;
+    const TestComp = () => {
+      expected = getExpectedContainerStyle(tw, { selected: true });
+      return (
+        <Checkbox isSelected checkboxContainerProps={{ testID: 'inner' }} />
+      );
+    };
+    const { getByTestId } = render(<TestComp />);
+    const inner = getByTestId('inner');
+    const styles = flattenStyles(inner.props.style);
+    expect(styles).toEqual(
+      expect.arrayContaining([expect.objectContaining(expected)]),
+    );
+  });
+
+  it('sets accessibility props and merges style', () => {
+    const { getByTestId } = render(
+      <Checkbox label="Accept" isSelected style={{ margin: 4 }} testID="chk" />,
+    );
+    const pressable = getByTestId('chk');
+    expect(pressable.props.accessible).toBe(true);
+    expect(pressable.props.accessibilityRole).toBe('checkbox');
+    expect(pressable.props.accessibilityState).toEqual({
+      checked: true,
+      disabled: false,
+    });
+    expect(pressable.props.accessibilityLabel).toBe('Accept');
+    const styles = flattenStyles(pressable.props.style);
+    expect(styles).toEqual(
+      expect.arrayContaining([expect.objectContaining({ margin: 4 })]),
+    );
+  });
+
+  it('omits accessibilityLabel when label is a React element', () => {
+    const { getByTestId } = render(
+      <Checkbox label={<Text>Accept</Text>} testID="chk" />,
+    );
+    expect(getByTestId('chk').props.accessibilityLabel).toBeUndefined();
   });
 });
