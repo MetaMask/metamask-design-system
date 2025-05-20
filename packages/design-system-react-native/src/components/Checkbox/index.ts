@@ -1,3 +1,2 @@
-export { ButtonIconSize } from '../../types';
-export { ButtonIcon } from './Checkbox';
-export type { ButtonIconProps } from './Checkbox.types';
+export { Checkbox } from './Checkbox';
+export type { CheckboxProps } from './Checkbox.types';

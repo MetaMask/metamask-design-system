@@ -1,8 +1,5 @@
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
-
-import { IconName } from '../Icon';
 
 import { Checkbox } from './Checkbox';
 import type { CheckboxProps } from './Checkbox.types';

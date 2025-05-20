@@ -19,7 +19,6 @@ import { Icon, IconName, IconColor, IconSize } from '../Icon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
 import type { CheckboxProps } from './Checkbox.types';
 
-// Use Animated.View directly
 const AnimatedView = Animated.View;
 
 export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
