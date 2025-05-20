@@ -133,6 +133,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
         }}
         accessibilityLabel={typeof label === 'string' ? label : undefined}
         style={[tw`${twContainerClassNames}`, style as StyleProp<ViewStyle>]}
+        disabled={isDisabled}
         {...props}
       >
         {({ pressed }) => (

@@ -159,4 +159,35 @@ describe('Checkbox', () => {
     );
     expect(getByTestId('chk').props.accessibilityLabel).toBeUndefined();
   });
+
+  it('applies pressed container styles', () => {
+    const rtr = require('react-test-renderer');
+    const RN = require('react-native');
+    const tree = rtr.create(
+      <Checkbox checkboxContainerProps={{ testID: 'inner' }} />,
+    );
+    const pressable = tree.root.findByType(RN.Pressable);
+    const renderChildren = pressable.props.children as (p: {
+      pressed: boolean;
+    }) => React.ReactElement;
+    const renderedPressed = rtr.create(renderChildren({ pressed: true })).root;
+    const pressedContainer = renderedPressed.findByProps({ testID: 'inner' });
+    const styles = flattenStyles(pressedContainer.props.style);
+    expect(styles).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining(
+          getExpectedContainerStyle(tw, { pressed: true }),
+        ),
+      ]),
+    );
+  });
+
+  it('exposes toggle method via ref', () => {
+    const ref = React.createRef<{ toggle: () => void }>();
+    const onChange = jest.fn();
+    render(<Checkbox ref={ref} onChange={onChange} />);
+    expect(ref.current).toBeTruthy();
+    ref.current!.toggle();
+    expect(onChange).toHaveBeenCalledWith(true);
+  });
 });

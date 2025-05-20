@@ -41,3 +41,48 @@ export const Default: Story = {
     label: 'Checkbox label',
   },
 };
+
+export const isSelected: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <Checkbox isSelected={false} />
+      <Checkbox isSelected />
+    </View>
+  ),
+};
+
+export const defaultIsSelected: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <Checkbox />
+      <Checkbox defaultIsSelected />
+    </View>
+  ),
+};
+
+export const isDisabled: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <Checkbox />
+      <Checkbox isDisabled />
+    </View>
+  ),
+};
+
+export const isInvalid: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <Checkbox />
+      <Checkbox isInvalid />
+    </View>
+  ),
+};
+
+export const label: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <Checkbox />
+      <Checkbox label="Checkbox with label" />
+    </View>
+  ),
+};
