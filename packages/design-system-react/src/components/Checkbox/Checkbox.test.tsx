@@ -1,11 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { Checkbox } from './Checkbox';
-
-function getInner() {
-  return screen.getByTestId('inner');
-}
 
 describe('Checkbox', () => {
   it('renders label when provided', () => {
@@ -64,7 +60,7 @@ describe('Checkbox', () => {
         checkboxContainerProps={{ 'data-testid': 'inner' }}
       />,
     );
-    expect(getInner()).toHaveClass('border-error-default');
+    expect(screen.getByTestId('inner')).toHaveClass('border-error-default');
   });
 
   it('applies selected container styles', () => {
@@ -74,7 +70,7 @@ describe('Checkbox', () => {
         checkboxContainerProps={{ 'data-testid': 'inner' }}
       />,
     );
-    expect(getInner()).toHaveClass(
+    expect(screen.getByTestId('inner')).toHaveClass(
       'bg-primary-default',
       'border-primary-default',
     );
@@ -105,23 +101,23 @@ describe('Checkbox', () => {
         checkboxContainerProps={{ className: 'p-2', 'data-testid': 'inner' }}
       />,
     );
-    expect(getInner()).toHaveClass('p-2');
+    expect(screen.getByTestId('inner')).toHaveClass('p-2');
   });
 
   it('exposes toggle method via ref', () => {
-    const ref = React.createRef<{ toggle: () => void }>();
+    const ref = createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
     render(<Checkbox ref={ref} onChange={onChange} />);
-    expect(ref.current).toBeTruthy();
-    ref.current!.toggle();
+    expect(ref.current).not.toBeNull();
+    ref.current?.toggle();
     expect(onChange).toHaveBeenCalledWith(true);
   });
 
   it('does not toggle when disabled via ref', () => {
-    const ref = React.createRef<{ toggle: () => void }>();
+    const ref = createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
     render(<Checkbox ref={ref} onChange={onChange} isDisabled />);
-    ref.current!.toggle();
+    ref.current?.toggle();
     expect(onChange).not.toHaveBeenCalled();
   });
 });

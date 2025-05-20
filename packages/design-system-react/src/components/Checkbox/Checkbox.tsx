@@ -3,6 +3,7 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { twMerge } from '../../utils/tw-merge';
 import { Icon, IconName, IconColor, IconSize } from '../Icon';
 import { Text } from '../Text';
+
 import type { CheckboxProps } from './Checkbox.types';
 
 export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
@@ -25,7 +26,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
   ) => {
     const [internalSelected, setInternalSelected] = useState(defaultIsSelected);
     const isControlled = isSelected !== undefined;
-    const currentSelected = isControlled ? isSelected! : internalSelected;
+    const currentSelected = isSelected ?? internalSelected;
 
     const toggle = () => {
       if (isDisabled) {
@@ -49,11 +50,12 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     const baseBg = currentSelected
       ? 'bg-primary-default hover:bg-primary-default-hover active:bg-primary-default-pressed'
       : 'bg-background-default hover:bg-background-default-hover active:bg-background-default-pressed';
-    const baseBorder = currentSelected
-      ? 'border-primary-default'
-      : isInvalid
-        ? 'border-error-default'
-        : 'border-border-default';
+    let baseBorder = 'border-border-default';
+    if (currentSelected) {
+      baseBorder = 'border-primary-default';
+    } else if (isInvalid) {
+      baseBorder = 'border-error-default';
+    }
 
     const checkboxClasses = twMerge(
       'flex h-[22px] w-[22px] items-center justify-center rounded border-2 transition-transform active:scale-95',

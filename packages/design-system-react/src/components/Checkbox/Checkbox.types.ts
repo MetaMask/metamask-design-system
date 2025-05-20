@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react';
+
 import type { IconProps } from '../Icon';
 import type { TextProps } from '../Text';
 
@@ -8,21 +9,25 @@ export type CheckboxProps = Omit<
 > & {
   /**
    * Optional prop that when true, shows a checked checkbox
+   *
    * @default false
    */
   isSelected?: boolean;
   /**
    * Optional prop for the initial state of checkbox when uncontrolled
+   *
    * @default false
    */
   defaultIsSelected?: boolean;
   /**
    * Optional prop that when true, disables the checkbox
+   *
    * @default false
    */
   isDisabled?: boolean;
   /**
    * Optional prop that when true, shows the invalid state
+   *
    * @default false
    */
   isInvalid?: boolean;
