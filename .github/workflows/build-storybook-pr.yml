@@ -1,0 +1,61 @@
+name: Build Storybook PR
+
+on:
+  pull_request:
+
+jobs:
+  build-storybook:
+    name: Build Storybook PR
+    permissions:
+      pull-requests: write
+      contents: read
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/storybook-react
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v1
+        with:
+          is-high-risk-environment: false
+          skip-allow-scripts: true
+
+      - name: Build required packages
+        working-directory: .
+        run: |
+          yarn build
+
+      - name: Build storybook
+        run: yarn build-storybook
+
+      - name: Get PR commit info
+        id: pr-info
+        working-directory: .
+        run: |
+          PR_SHA="$(git rev-parse --short HEAD)"
+          echo "sha=${PR_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload 'storybook-build' to S3
+        if: ${{ vars.AWS_REGION && vars.AWS_IAM_ROLE && vars.AWS_S3_BUCKET }}
+        uses: metamask/github-tools/.github/actions/upload-s3@1233659b3850eb84824d7375e2e0c58eb237701d
+        with:
+          aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: ${{ vars.AWS_IAM_ROLE }}
+          s3-bucket: ${{ vars.AWS_S3_BUCKET }}/${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/storybook-build
+          path: apps/storybook-react/storybook-static
+
+      - name: Generate Preview Message
+        working-directory: .
+        run: |
+          cat > storybook-preview-message.txt << EOL
+          ### 📖 Storybook Preview
+          - [View PR Storybook](https://${{ vars.AWS_S3_BUCKET }}.s3.${{ vars.AWS_REGION }}.amazonaws.com/${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/storybook-build/index.html)
+          EOL
+
+      - name: Post Preview Comment
+        working-directory: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh pr comment "${PR_NUMBER}" --body-file storybook-preview-message.txt
