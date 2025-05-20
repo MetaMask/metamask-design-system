@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable import-x/no-named-as-default-member */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent } from '@testing-library/react-native';
-import React from 'react';
+import type { ReactElement } from 'react';
+import React, { createRef } from 'react';
 import { Text } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
@@ -202,7 +202,7 @@ describe('Checkbox', () => {
     const pressable = tree.root.findByType(RN.Pressable);
     const renderChildren = pressable.props.children as (p: {
       pressed: boolean;
-    }) => React.ReactElement;
+    }) => ReactElement;
     const renderedPressed = rtr.create(renderChildren({ pressed: true })).root;
     const pressedContainer = renderedPressed.findByProps({ testID: 'inner' });
     const styles = flattenStyles(pressedContainer.props.style);
@@ -216,7 +216,7 @@ describe('Checkbox', () => {
   });
 
   it('exposes toggle method via ref', () => {
-    const ref = React.createRef<{ toggle: () => void }>();
+    const ref = createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
     render(<Checkbox ref={ref} onChange={onChange} />);
     expect(ref.current).not.toBeNull();
@@ -225,7 +225,7 @@ describe('Checkbox', () => {
   });
 
   it('does not toggle when disabled via ref', () => {
-    const ref = React.createRef<{ toggle: () => void }>();
+    const ref = createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
     render(<Checkbox ref={ref} onChange={onChange} isDisabled />);
     ref.current?.toggle();
