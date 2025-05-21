@@ -39,11 +39,11 @@ jobs:
 
       - name: Post Preview Comment
         working-directory: .
-        if: ${{ vars.AWS_REGION && vars.AWS_IAM_ROLE && vars.AWS_S3_BUCKET }}
+        if: ${{ vars.AWS_CLOUDFRONT_URL }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
+          HOST_URL: ${{ vars.AWS_CLOUDFRONT_URL }}/${{ github.event.repository.name }}/${{ github.run_id }}
         run: |
-          BASE_URL="${{ vars.AWS_CLOUDFRONT_URL || format('https://{0}.s3.{1}.amazonaws.com', vars.AWS_S3_BUCKET, vars.AWS_REGION) }}"
           gh pr comment "${PR_NUMBER}" --body "### 📖 Storybook Preview
-          - [View PR Storybook](${BASE_URL}/${{ github.event.repository.name }}/${{ github.run_id }}/storybook-build/index.html)"
+          - [View PR Storybook](${HOST_URL}/storybook-build/index.html)"
