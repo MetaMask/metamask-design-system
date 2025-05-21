@@ -25,7 +25,7 @@
       "description": "For subsection bg usually over background/section."
     },
     "muted": {
-      "value": "#7C87B81A",
+      "value": "#3C4D9D1A",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "For muted neutral surface."
