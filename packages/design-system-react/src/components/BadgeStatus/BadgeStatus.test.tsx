@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { BadgeStatusSize, BadgeStatusStatus } from '../../types';
 
@@ -96,7 +96,7 @@ describe('BadgeStatus', () => {
   });
 
   it('forwards ref to the root div', () => {
-    const ref = React.createRef<HTMLDivElement>();
+    const ref = createRef<HTMLDivElement>();
     render(<BadgeStatus ref={ref} status={BadgeStatusStatus.Active} />);
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
   });
