@@ -1,5 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
@@ -13,7 +13,7 @@ import {
 } from './AvatarBase.constants';
 import type { AvatarBaseProps } from './AvatarBase.types';
 
-export const AvatarBase = React.forwardRef<HTMLDivElement, AvatarBaseProps>(
+export const AvatarBase = forwardRef<HTMLDivElement, AvatarBaseProps>(
   (
     {
       children,
