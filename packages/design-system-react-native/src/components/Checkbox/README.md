@@ -12,7 +12,7 @@ import { Checkbox } from '@metamask/design-system-react-native';
 
 ### `isSelected`
 
-Controlled prop to determine whether the checkbox is currently selected.
+Optional prop to determine whether the checkbox is currently selected.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -20,20 +20,6 @@ Controlled prop to determine whether the checkbox is currently selected.
 
 ```tsx
 <Checkbox isSelected={true} label="Selected by default" />
-```
-
----
-
-### `defaultIsSelected`
-
-Uncontrolled prop to set the initial checked state.
-
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `false` |
-
-```tsx
-<Checkbox defaultIsSelected label="Initial state" />
 ```
 
 ---

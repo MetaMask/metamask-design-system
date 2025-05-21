@@ -15,14 +15,6 @@ export type CheckboxProps = {
   isSelected?: boolean;
 
   /**
-   * Optional prop for the initial state of checkbox that when true, shows a checked checkbox.
-   * Use this prop if you want Checkbox to automatically control the isSelected/checked state
-   *
-   * @default false
-   */
-  defaultIsSelected?: boolean;
-
-  /**
    * Optional prop that when true, disables the checkbox
    *
    * @default false

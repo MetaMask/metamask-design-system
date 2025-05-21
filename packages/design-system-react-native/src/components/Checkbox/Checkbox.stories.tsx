@@ -8,9 +8,6 @@ const meta: Meta<CheckboxProps> = {
   title: 'Components/Checkbox',
   component: Checkbox,
   argTypes: {
-    isSelected: {
-      control: 'boolean',
-    },
     isDisabled: {
       control: 'boolean',
     },
@@ -32,50 +29,40 @@ type Story = StoryObj<CheckboxProps>;
 
 export const Default: Story = {
   args: {
-    isSelected: false,
     isDisabled: false,
     isInvalid: false,
     label: 'Checkbox label',
   },
 };
 
-export const isSelected: Story = {
+export const IsSelected: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <Checkbox isSelected={false} />
-      <Checkbox isSelected />
+      <Checkbox isSelected label="isSelected" />
     </View>
   ),
 };
 
-export const defaultIsSelected: Story = {
+export const IsDisabled: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <Checkbox />
-      <Checkbox defaultIsSelected />
+      <Checkbox isDisabled label="isDisabled" />
     </View>
   ),
 };
 
-export const isDisabled: Story = {
+export const IsInvalid: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <Checkbox />
-      <Checkbox isDisabled />
+      <Checkbox isInvalid label="isInvalid" />
     </View>
   ),
 };
 
-export const isInvalid: Story = {
-  render: () => (
-    <View style={{ gap: 16 }}>
-      <Checkbox />
-      <Checkbox isInvalid />
-    </View>
-  ),
-};
-
-export const label: Story = {
+export const Label: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <Checkbox />
