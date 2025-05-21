@@ -36,6 +36,9 @@ jobs:
         uses: MetaMask/action-checkout-and-setup@v1
         with:
           is-high-risk-environment: false
+      - name: Setup
+        # The Tailwind Prettier plugin requires the Tailwind preset to be built, as the plugin depends on the configuration provided by the preset for linting to function correctly.
+        run: yarn workspace @metamask/design-system-tailwind-preset build
       - run: yarn lint
       - name: Require clean working directory
         shell: bash

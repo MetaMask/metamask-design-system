@@ -9,6 +9,7 @@ import {
   FontFamily,
   FontStyle,
 } from '../../types';
+
 import { Text } from './Text';
 import {
   TWCLASSMAP_TEXT_FONTWEIGHT,

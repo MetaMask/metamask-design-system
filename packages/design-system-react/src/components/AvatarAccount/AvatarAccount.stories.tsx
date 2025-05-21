@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { AvatarAccountVariant, AvatarAccountSize } from '../../types';
+
 import { AvatarAccount } from './AvatarAccount';
 import README from './README.mdx';
 

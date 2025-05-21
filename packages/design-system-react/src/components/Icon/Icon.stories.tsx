@@ -2,6 +2,7 @@ import type { StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
 import { IconName, IconSize, IconColor } from '../../types';
+
 import { Icon } from './Icon';
 import README from './README.mdx';
 

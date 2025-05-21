@@ -1,0 +1,67 @@
+{
+  "packages/design-system-react-native/global.d.ts": {
+    "@typescript-eslint/naming-convention": 1
+  },
+  "packages/design-system-react-native/src/components/BadgeCount/BadgeCount.test.tsx": {
+    "jest/prefer-strict-equal": 1
+  },
+  "packages/design-system-react-native/src/components/BadgeIcon/BadgeIcon.test.tsx": {
+    "jest/prefer-strict-equal": 1
+  },
+  "packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.tsx": {
+    "@typescript-eslint/no-unused-vars": 1
+  },
+  "packages/design-system-react-native/src/components/Button/Button.test.tsx": {
+    "no-empty-function": 1
+  },
+  "packages/design-system-react-native/src/types/index.ts": {
+    "@typescript-eslint/no-shadow": 4
+  },
+  "packages/design-system-react/global.d.ts": {
+    "@typescript-eslint/naming-convention": 1
+  },
+  "packages/design-system-react/scripts/create-component/create-component.test.ts": {
+    "jest/no-conditional-in-test": 2
+  },
+  "packages/design-system-react/scripts/generate-icons-index.test.ts": {
+    "@typescript-eslint/no-base-to-string": 1,
+    "@typescript-eslint/no-shadow": 1
+  },
+  "packages/design-system-react/src/components/Icon/template.test.ts": {
+    "@typescript-eslint/no-base-to-string": 1,
+    "jest/no-conditional-in-test": 1
+  },
+  "packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.utilities.ts": {
+    "jsdoc/require-param-description": 3,
+    "jsdoc/require-returns": 3
+  },
+  "packages/design-system-react/src/types/index.ts": {
+    "@typescript-eslint/no-shadow": 7
+  },
+  "packages/design-system-tailwind-preset/src/colors.test.ts": {
+    "jest/no-conditional-in-test": 1
+  },
+  "packages/design-system-tailwind-preset/src/index.test.ts": {
+    "jest/no-conditional-in-test": 3
+  },
+  "packages/design-system-tailwind-preset/src/typography.test.ts": {
+    "jest/no-conditional-in-test": 1
+  },
+  "packages/design-system-twrnc-preset/src/Theme/Theme.providers.tsx": {
+    "no-empty-function": 2
+  },
+  "packages/design-tokens/src/js/brandColor/brandColor.test.ts": {
+    "jest/no-conditional-in-test": 2
+  },
+  "packages/design-tokens/stories/Typography.stories.tsx": {
+    "@typescript-eslint/no-unused-vars": 2
+  },
+  "scripts/create-package/utils.test.ts": {
+    "@typescript-eslint/no-unsafe-enum-comparison": 3,
+    "import-x/no-named-as-default-member": 2,
+    "jest/no-conditional-in-test": 1
+  },
+  "scripts/create-package/utils.ts": {
+    "@typescript-eslint/no-unsafe-enum-comparison": 5
+  }
+}

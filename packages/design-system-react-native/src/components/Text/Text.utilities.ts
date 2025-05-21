@@ -7,6 +7,7 @@ import {
   TextVariant,
   TextColor,
 } from '../../types';
+
 import { TWCLASSMAP_TEXT_FONTWEIGHT } from './Text.constants';
 import type { TextProps } from './Text.types';
 

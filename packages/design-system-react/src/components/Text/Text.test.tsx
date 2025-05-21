@@ -12,11 +12,13 @@ import {
   TextColor,
 } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
-import { Text } from '.';
+
 import {
   CLASSMAP_TEXT_VARIANT_FONTSTYLE,
   CLASSMAP_TEXT_VARIANT_FONTWEIGHT,
 } from './Text.constants';
+
+import { Text } from '.';
 
 describe('Text Component', () => {
   it('renders with props applied to the underlying element', () => {

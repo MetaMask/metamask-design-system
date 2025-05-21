@@ -1,4 +1,4 @@
-import { FontFamilies } from './types';
+import type { FontFamilies } from './types';
 
 export const fontFamilies: FontFamilies = {
   default: 'CentraNo1',

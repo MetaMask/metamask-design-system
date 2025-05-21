@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconName } from '../Icon';
 import { ICON_SIZE_CLASS_MAP } from '../Icon/Icon.constants';
+
 import { AvatarIcon } from './AvatarIcon';
 import {
   TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
@@ -99,7 +100,7 @@ describe('AvatarIcon', () => {
   });
 
   it('forwards ref to AvatarBase', () => {
-    const ref = React.createRef<HTMLDivElement>();
+    const ref = createRef<HTMLDivElement>();
     render(<AvatarIcon ref={ref} iconName={IconName.AddSquare} />);
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
   });

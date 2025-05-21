@@ -4,6 +4,7 @@ import React from 'react';
 
 import { BadgeCountSize } from '../../types';
 import { Text, TextColor, FontWeight } from '../Text';
+
 import { BadgeCount } from './BadgeCount';
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
@@ -49,7 +50,7 @@ describe('BadgeCount', () => {
     expect(container.props.style[0]).toStrictEqual(expectedOuter);
     // Inner Text should render the count as a string
     const textElement = container.props.children;
-    expect(textElement.props.children).toStrictEqual('50');
+    expect(textElement.props.children).toBe('50');
     // Verify that Text props are set correctly
     expect(textElement.props.variant).toStrictEqual(expectedTextProps.variant);
     expect(textElement.props.color).toStrictEqual(expectedTextProps.color);
@@ -84,7 +85,7 @@ describe('BadgeCount', () => {
     expect(container.props.style[0]).toStrictEqual(expectedOuter);
     const textElement = container.props.children;
     // When count > max, text should be "99+"
-    expect(textElement.props.children).toStrictEqual('99+');
+    expect(textElement.props.children).toBe('99+');
   });
 
   it('applies custom textProps overrides', () => {
@@ -130,7 +131,7 @@ describe('BadgeCount', () => {
     const container = getByTestId('badge-count');
     expect(container.props.style[0]).toStrictEqual(expectedOuter);
     const textElement = container.props.children;
-    expect(textElement.props.children).toStrictEqual('25');
+    expect(textElement.props.children).toBe('25');
     expect(textElement.props.variant).toStrictEqual(expectedTextProps.variant);
     expect(textElement.props.color).toStrictEqual(expectedTextProps.color);
     expect(textElement.props.fontWeight).toStrictEqual(
@@ -159,7 +160,7 @@ describe('BadgeCount', () => {
     expect(container.props.style).toEqual(
       expect.arrayContaining([customStyle]),
     );
-    expect(container.props.accessibilityLabel).toStrictEqual('badge');
+    expect(container.props.accessibilityLabel).toBe('badge');
   });
 
   it('renders with custom size Lg', () => {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
@@ -10,6 +9,7 @@ import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import { Spinner } from '../temp-components/Spinner';
 import { TextOrChildren } from '../temp-components/TextOrChildren/TextOrChildren';
 import { TextVariant, FontWeight, TextColor } from '../Text';
+
 import type { ButtonBaseProps } from './ButtonBase.types';
 
 export const ButtonBase = ({

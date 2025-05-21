@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import { AvatarTokenSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
+
 import type { AvatarTokenProps } from './AvatarToken.types';
 
-export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
+export const AvatarToken = forwardRef<HTMLDivElement, AvatarTokenProps>(
   (
     {
       src,
@@ -22,9 +23,7 @@ export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
     const backupFallbackText = fallbackText || name?.[0] || '';
     const altText = name || 'Token logo'; // TBC: Add localization for default text
 
-    const onErrorHandler = (
-      e: React.SyntheticEvent<HTMLImageElement, Event>,
-    ) => {
+    const onErrorHandler = (e: React.SyntheticEvent<HTMLImageElement>) => {
       setFinalFallbackText(backupFallbackText);
       imageProps?.onError?.(e);
     };

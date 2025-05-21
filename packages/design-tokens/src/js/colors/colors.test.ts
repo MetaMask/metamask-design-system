@@ -1,4 +1,5 @@
 import { lightTheme, darkTheme } from '../themes';
+
 import { colors } from './colors';
 
 describe('Colors', () => {

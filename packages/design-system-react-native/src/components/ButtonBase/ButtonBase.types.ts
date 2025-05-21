@@ -1,6 +1,6 @@
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
-import { ButtonBaseSize } from '../../types';
+import type { ButtonBaseSize } from '../../types';
 import type { IconProps, IconName } from '../Icon';
 import type { SpinnerProps } from '../temp-components/Spinner';
 import type { TextProps } from '../Text';
@@ -20,11 +20,13 @@ export type ButtonBaseProps = {
   /**
    * Optional prop to control the size of the ButtonBase
    * Possible values: ButtonBaseSize.Sm (32px), ButtonBaseSize.Md (40px), ButtonBaseSize.Lg (48px)
+   *
    * @default ButtonBaseSize.Lg
    */
   size?: ButtonBaseSize;
   /**
    * Optional prop that when true, shows a loading spinner
+   *
    * @default false
    */
   isLoading?: boolean;
@@ -62,11 +64,13 @@ export type ButtonBaseProps = {
   endAccessory?: React.ReactNode;
   /**
    * Optional prop that when true, disables the button
+   *
    * @default false
    */
   isDisabled?: boolean;
   /**
    * Optional prop that when true, makes the button take up the full width of its container
+   *
    * @default false
    */
   isFullWidth?: boolean;

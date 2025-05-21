@@ -4,6 +4,7 @@ import { Text } from 'react-native';
 
 import { ThemeProvider, ThemeContext, Theme } from '../Theme';
 import { ColorSet } from '../twrnc-settings';
+
 import { withThemeProvider } from './withThemeProvider';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

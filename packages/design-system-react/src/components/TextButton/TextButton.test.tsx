@@ -4,6 +4,7 @@ import React from 'react';
 import { TextButtonSize } from '../../types';
 import { IconName } from '../Icon';
 import { Text, TextVariant } from '../Text';
+
 import { TextButton } from './TextButton';
 
 describe('TextButton', () => {

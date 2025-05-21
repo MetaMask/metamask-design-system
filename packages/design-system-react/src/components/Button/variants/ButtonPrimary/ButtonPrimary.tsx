@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../../../utils/tw-merge';
 import { ButtonBase } from '../../../ButtonBase';
+
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 
-export const ButtonPrimary = React.forwardRef<
-  HTMLButtonElement,
-  ButtonPrimaryProps
->(
+export const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
   (
     { className, isDanger, isInverse, isDisabled, isLoading, ...props },
     ref,

@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import { BadgeStatusSize, BadgeStatusStatus } from '../../types';
+import type { BadgeStatusSize, BadgeStatusStatus } from '../../types';
 
 /**
  * BadgeStatus component props.
@@ -18,6 +18,7 @@ export type BadgeStatusProps = ComponentProps<'div'> & {
   status: BadgeStatusStatus;
   /**
    * Optional prop to determine whether the badge should display a border
+   *
    * @default true
    */
   hasBorder?: boolean;
@@ -26,6 +27,7 @@ export type BadgeStatusProps = ComponentProps<'div'> & {
    * Possible values:
    * - BadgeStatusSize.Md (8px),
    * - BadgeStatusSize.Lg (10px),
+   *
    * @default AvatarBaseSize.Md
    */
   size?: BadgeStatusSize;

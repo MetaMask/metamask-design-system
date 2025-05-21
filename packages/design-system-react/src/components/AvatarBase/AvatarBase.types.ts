@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
+import type { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import type { TextProps } from '../Text';
 
 export type AvatarBaseProps = ComponentProps<'div'> & {
@@ -27,12 +27,14 @@ export type AvatarBaseProps = ComponentProps<'div'> & {
   className?: string;
   /**
    * Optional prop to control the size of the AvatarBase
+   *
    * @default AvatarBaseSize.Md
    */
   size?: AvatarBaseSize;
   /**
    * Optional boolean that determines if the component should merge its props onto its immediate child
    * instead of rendering a div element
+   *
    * @default false
    */
   asChild?: boolean;
@@ -43,12 +45,14 @@ export type AvatarBaseProps = ComponentProps<'div'> & {
   style?: React.CSSProperties;
   /**
    * Optional prop to control the shape of the AvatarBase
+   *
    * @default AvatarBaseShape.Circle
    */
   shape?: AvatarBaseShape;
   /**
    * Optional prop to include the border with the Avatar.
    * For internal use only
+   *
    * @default false
    */
   hasBorder?: boolean;

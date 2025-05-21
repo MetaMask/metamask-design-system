@@ -1,9 +1,10 @@
+import type { CSSProperties } from 'react';
 import React, {
+  forwardRef,
   useState,
   useLayoutEffect,
   useMemo,
   useRef,
-  CSSProperties,
 } from 'react';
 
 import {
@@ -11,9 +12,10 @@ import {
   BadgeWrapperPositionAnchorShape,
 } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
+
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
 
-export const BadgeWrapper = React.forwardRef<HTMLDivElement, BadgeWrapperProps>(
+export const BadgeWrapper = forwardRef<HTMLDivElement, BadgeWrapperProps>(
   (
     {
       children,

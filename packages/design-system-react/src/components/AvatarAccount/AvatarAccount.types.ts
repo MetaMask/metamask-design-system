@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 
-import { AvatarAccountVariant, AvatarAccountSize } from '../../types';
-import { AvatarBaseProps } from '../AvatarBase';
+import type { AvatarAccountVariant, AvatarAccountSize } from '../../types';
+import type { AvatarBaseProps } from '../AvatarBase';
 import type { Blockies } from '../temp-components/Blockies';
 import type { Jazzicon } from '../temp-components/Jazzicon';
 import type { Maskicon } from '../temp-components/Maskicon';
@@ -17,11 +17,13 @@ export type AvatarAccountProps = Omit<
     address: string;
     /**
      * Optional prop to control the variant of the avatar account
+     *
      * @default AvatarAccountVariant.Jazzicon
      */
     variant?: AvatarAccountVariant;
     /**
      * Optional prop to control the size of the avatar
+     *
      * @default AvatarAccountSize.Md
      */
     size?: AvatarAccountSize;

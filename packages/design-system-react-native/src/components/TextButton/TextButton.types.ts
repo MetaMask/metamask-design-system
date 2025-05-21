@@ -1,6 +1,6 @@
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
-import { TextButtonSize } from '../../types';
+import type { TextButtonSize } from '../../types';
 import type { IconProps, IconName } from '../Icon';
 import type { TextProps } from '../Text';
 
@@ -14,6 +14,7 @@ export type TextButtonProps = {
   children: string;
   /**
    * Optional prop to control the size of the TextButton
+   *
    * @default TextButtonSize.BodyMd
    */
   size?: TextButtonSize;
@@ -47,11 +48,13 @@ export type TextButtonProps = {
   endAccessory?: React.ReactNode;
   /**
    * Optional prop that when true, disables the button
+   *
    * @default false
    */
   isDisabled?: boolean;
   /**
    * Optional prop to show the inverse state of the button, which is reserved for buttons on colored backgrounds.
+   *
    * @default false
    */
   isInverse?: boolean;

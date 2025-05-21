@@ -1,6 +1,6 @@
-/* eslint-disable import/prefer-default-export */
-import { FontWeight, TextVariant } from '../../types';
 import { typography } from '@metamask/design-tokens';
+
+import { FontWeight, TextVariant } from '../../types';
 
 // Mappings
 export const TWCLASSMAP_TEXT_FONTWEIGHT: {

@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { BadgeCountSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Text, TextColor, FontWeight } from '../Text';
+
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
 } from './BadgeCount.constants';
 import type { BadgeCountProps } from './BadgeCount.types';
 
-export const BadgeCount = React.forwardRef<HTMLDivElement, BadgeCountProps>(
+export const BadgeCount = forwardRef<HTMLDivElement, BadgeCountProps>(
   (
     {
       size = BadgeCountSize.Md,

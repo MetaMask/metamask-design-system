@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import { IconName, IconProps } from '../Icon';
+import type { IconName, IconProps } from '../Icon';
 
 /**
  * BadgeIcon component props.

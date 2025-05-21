@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { AvatarBase, AvatarBaseShape } from '../AvatarBase';
 import { Icon } from '../Icon';
+
 import {
   MAP_AVATARICON_SIZE_ICONSIZE,
   TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
@@ -11,7 +12,7 @@ import {
 } from './AvatarIcon.constants';
 import type { AvatarIconProps } from './AvatarIcon.types';
 
-export const AvatarIcon = React.forwardRef<HTMLDivElement, AvatarIconProps>(
+export const AvatarIcon = forwardRef<HTMLDivElement, AvatarIconProps>(
   (
     {
       iconName,

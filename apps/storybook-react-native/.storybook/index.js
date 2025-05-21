@@ -1,4 +1,3 @@
-import * as SystemUI from 'expo-system-ui';
 import './config';
 import { getStorybookUI } from '@storybook/react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';

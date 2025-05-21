@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { Text, TextColor, TextVariant, FontWeight } from '../Text';
+
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
