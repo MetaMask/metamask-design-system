@@ -24,6 +24,12 @@
       "parent": "Theme Colors/Light mode",
       "description": "For subsection bg usually over background/section."
     },
+    "muted": {
+      "value": "#7C87B81A",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "For muted neutral surface."
+    },
     "default-hover": {
       "value": "#f6f6f7",
       "type": "color",
