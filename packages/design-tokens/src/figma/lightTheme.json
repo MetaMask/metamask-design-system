@@ -12,11 +12,17 @@
       "parent": "Theme Colors/Light mode",
       "description": "For sunken neutral surface below background/default."
     },
-    "muted": {
+    "section": {
       "value": "{grey.050}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
-      "description": "For raised neutral surface above background/default."
+      "description": "For section bg usually over background/default."
+    },
+      "subsection": {
+      "value": "{grey.000}",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "For subsection bg usually over background/section."
     },
     "default-hover": {
       "value": "#f6f6f7",

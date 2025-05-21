@@ -10,13 +10,19 @@
       "value": "{grey.1000}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
-      "description": "For sunken neutral surface below background/default."
+      "description": "For section bg usually over background/default."
     },
-    "muted": {
+    "section": {
       "value": "{grey.800}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
-      "description": "For raised neutral surface above background/default."
+      "description": "For section bg usually over background/default."
+    },
+    "subsection": {
+      "value": "{grey.700}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For subsection bg usually over background/section."
     },
     "default-hover": {
       "value": "#1a1b1c",
