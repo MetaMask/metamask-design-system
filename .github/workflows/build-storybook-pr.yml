@@ -23,18 +23,10 @@ jobs:
 
       - name: Build required packages
         working-directory: .
-        run: |
-          yarn build
+        run: yarn build
 
       - name: Build storybook
         run: yarn build-storybook
-
-      - name: Get PR commit info
-        id: pr-info
-        working-directory: .
-        run: |
-          PR_SHA="$(git rev-parse --short HEAD)"
-          echo "sha=${PR_SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Upload 'storybook-build' to S3
         if: ${{ vars.AWS_REGION && vars.AWS_IAM_ROLE && vars.AWS_S3_BUCKET }}
@@ -42,21 +34,16 @@ jobs:
         with:
           aws-region: ${{ vars.AWS_REGION }}
           role-to-assume: ${{ vars.AWS_IAM_ROLE }}
-          s3-bucket: ${{ vars.AWS_S3_BUCKET }}/${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/storybook-build
-          path: apps/storybook-react/storybook-static
-
-      - name: Generate Preview Message
-        working-directory: .
-        run: |
-          cat > storybook-preview-message.txt << EOL
-          ### 📖 Storybook Preview
-          - [View PR Storybook](https://${{ vars.AWS_S3_BUCKET }}.s3.${{ vars.AWS_REGION }}.amazonaws.com/${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/storybook-build/index.html)
-          EOL
+          s3-bucket: ${{ vars.AWS_S3_BUCKET }}/${{ github.event.repository.name }}/${{ github.run_id }}/storybook-build
+          path: storybook-build
 
       - name: Post Preview Comment
         working-directory: .
+        if: ${{ vars.AWS_REGION && vars.AWS_IAM_ROLE && vars.AWS_S3_BUCKET }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          gh pr comment "${PR_NUMBER}" --body-file storybook-preview-message.txt
+          BASE_URL="${{ vars.AWS_CLOUDFRONT_URL || format('https://{0}.s3.{1}.amazonaws.com', vars.AWS_S3_BUCKET, vars.AWS_REGION) }}"
+          gh pr comment "${PR_NUMBER}" --body "### 📖 Storybook Preview
+          - [View PR Storybook](${BASE_URL}/${{ github.event.repository.name }}/${{ github.run_id }}/storybook-build/index.html)"
