@@ -1,6 +1,8 @@
 {
   "expo": {
     "name": "@metamask/storybook-react-native",
+    "sdkVersion": "52.0.0",
+    "entryPoint": "./index.js",
     "slug": "storybook-react-native",
     "version": "1.0.0",
     "orientation": "portrait",

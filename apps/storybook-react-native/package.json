@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "description": "Storybook React Native",
-  "main": ".storybook/index.js",
+  "main": "index.js",
   "files": [],
   "scripts": {
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "yarn prestorybook && expo start --android",
+    "ios": "yarn prestorybook && expo start --ios",
     "prestorybook": "sb-rn-get-stories",
     "start": "expo start",
     "web": "expo start --web"
@@ -16,10 +16,11 @@
     "@metamask/design-system-react-native": "workspace:^",
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
-    "expo": "~49.0.23",
+    "expo": "52.0.27",
     "expo-status-bar": "~1.6.0",
     "expo-system-ui": "~2.4.0",
-    "react-native-reanimated": "3.3.0",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-reanimated": "^3.17.2",
     "uuid": "^3.0.0"
   },
   "devDependencies": {
@@ -45,7 +46,7 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-native": "0.72.15"
+    "react-native": "0.76.9"
   },
   "engines": {
     "node": "^18.18 || >=20"

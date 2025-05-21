@@ -1,11 +1,9 @@
+// apps/storybook-react-native/.storybook/index.js
 import './config';
 import { getStorybookUI } from '@storybook/react-native';
-import registerRootComponent from 'expo/build/launch/registerRootComponent';
-import './storybook.requires'; // Ensure this file exists and the path is correct
+import './storybook.requires';
 
-const StorybookUIRoot = getStorybookUI({
+export default getStorybookUI({
   shouldPersistSelection: true,
-  asyncStorage: null, // Set to null if AsyncStorage causes issues
+  asyncStorage: null,
 });
-
-registerRootComponent(StorybookUIRoot);
