@@ -27,78 +27,9 @@
     "@typescript-eslint/no-base-to-string": 1,
     "@typescript-eslint/no-shadow": 1
   },
-  "packages/design-system-react/src/components/AvatarAccount/AvatarAccount.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/AvatarBase/AvatarBase.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/AvatarFavicon/AvatarFavicon.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/AvatarIcon/AvatarIcon.test.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/AvatarIcon/AvatarIcon.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/AvatarNetwork/AvatarNetwork.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/AvatarToken/AvatarToken.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/BadgeCount/BadgeCount.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/BadgeIcon/BadgeIcon.test.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/BadgeIcon/BadgeIcon.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/BadgeNetwork/BadgeNetwork.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/BadgeStatus/BadgeStatus.test.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/BadgeStatus/BadgeStatus.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/BadgeWrapper/BadgeWrapper.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/Button/Button.test.tsx": {
-    "import-x/no-named-as-default-member": 3
-  },
-  "packages/design-system-react/src/components/Button/Button.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/Button/variants/ButtonPrimary/ButtonPrimary.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/Button/variants/ButtonSecondary/ButtonSecondary.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/Button/variants/ButtonTertiary/ButtonTertiary.test.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/Button/variants/ButtonTertiary/ButtonTertiary.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/ButtonBase/ButtonBase.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
-  "packages/design-system-react/src/components/ButtonIcon/ButtonIcon.tsx": {
-    "import-x/no-named-as-default-member": 1
-  },
   "packages/design-system-react/src/components/Icon/template.test.ts": {
     "@typescript-eslint/no-base-to-string": 1,
     "jest/no-conditional-in-test": 1
-  },
-  "packages/design-system-react/src/components/TextButton/TextButton.tsx": {
-    "import-x/no-named-as-default-member": 1
   },
   "packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.utilities.ts": {
     "jsdoc/require-param-description": 3,

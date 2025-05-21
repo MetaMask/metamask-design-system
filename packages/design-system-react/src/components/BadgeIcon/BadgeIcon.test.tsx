@@ -1,6 +1,6 @@
 // BadgeIcon.test.tsx
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { IconName, IconColor } from '../Icon';
 import { ICON_SIZE_CLASS_MAP } from '../Icon/Icon.constants';
@@ -59,7 +59,7 @@ describe('BadgeIcon', () => {
   });
 
   it('forwards ref to the root div', () => {
-    const ref = React.createRef<HTMLDivElement>();
+    const ref = createRef<HTMLDivElement>();
     render(<BadgeIcon ref={ref} iconName={IconName.User} />);
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
   });

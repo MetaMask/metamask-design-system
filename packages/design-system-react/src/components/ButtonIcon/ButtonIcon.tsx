@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { ButtonIconSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
@@ -10,7 +10,7 @@ import {
 } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
 
-export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
+export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
   (
     {
       className,

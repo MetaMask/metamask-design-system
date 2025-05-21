@@ -5,6 +5,7 @@ import {
   BadgeWrapperPosition,
   BadgeWrapperPositionAnchorShape,
 } from '../../types';
+
 import { BadgeWrapper } from './BadgeWrapper';
 
 describe('BadgeWrapper', () => {
@@ -18,7 +19,10 @@ describe('BadgeWrapper', () => {
       bottom: 0,
       x: 0,
       y: 0,
-      toJSON: () => {},
+      toJSON: () => {
+        // Empty implementation needed for mock
+        return '';
+      },
     });
   });
   afterEach(() => {
@@ -45,8 +49,11 @@ describe('BadgeWrapper', () => {
         <div data-testid="anchor" />
       </BadgeWrapper>,
     );
-    const badgeDiv = screen.getByTestId('badge').parentElement!;
-    expect(badgeDiv).toHaveStyle({ bottom: '0px', right: '0px' });
+    const badgeEl = screen.getByTestId('badge');
+    // Ensure the parent element exists
+    expect(badgeEl.parentElement).toBeInTheDocument();
+    // Apply styles check only after confirming parent exists
+    expect(badgeEl.parentElement).toHaveStyle({ bottom: '0px', right: '0px' });
   });
 
   it('applies BottomLeft position correctly', () => {
@@ -58,8 +65,9 @@ describe('BadgeWrapper', () => {
         <div data-testid="anchor" />
       </BadgeWrapper>,
     );
-    const badgeDiv = screen.getByTestId('badge').parentElement!;
-    expect(badgeDiv).toHaveStyle({ bottom: '0px', left: '0px' });
+    const badgeEl = screen.getByTestId('badge');
+    expect(badgeEl.parentElement).toBeInTheDocument();
+    expect(badgeEl.parentElement).toHaveStyle({ bottom: '0px', left: '0px' });
   });
 
   it('applies TopLeft position correctly', () => {
@@ -71,8 +79,9 @@ describe('BadgeWrapper', () => {
         <div data-testid="anchor" />
       </BadgeWrapper>,
     );
-    const badgeDiv = screen.getByTestId('badge').parentElement!;
-    expect(badgeDiv).toHaveStyle({ top: '0px', left: '0px' });
+    const badgeEl = screen.getByTestId('badge');
+    expect(badgeEl.parentElement).toBeInTheDocument();
+    expect(badgeEl.parentElement).toHaveStyle({ top: '0px', left: '0px' });
   });
 
   it('applies TopRight position correctly', () => {
@@ -84,8 +93,9 @@ describe('BadgeWrapper', () => {
         <div data-testid="anchor" />
       </BadgeWrapper>,
     );
-    const badgeDiv = screen.getByTestId('badge').parentElement!;
-    expect(badgeDiv).toHaveStyle({ top: '0px', right: '0px' });
+    const badgeEl = screen.getByTestId('badge');
+    expect(badgeEl.parentElement).toBeInTheDocument();
+    expect(badgeEl.parentElement).toHaveStyle({ top: '0px', right: '0px' });
   });
 
   it('respects positionXOffset and positionYOffset', () => {
@@ -98,8 +108,9 @@ describe('BadgeWrapper', () => {
         <div data-testid="anchor" />
       </BadgeWrapper>,
     );
-    const badgeDiv = screen.getByTestId('badge').parentElement!;
-    expect(badgeDiv).toHaveStyle({ bottom: '10px', right: '5px' });
+    const badgeEl = screen.getByTestId('badge');
+    expect(badgeEl.parentElement).toBeInTheDocument();
+    expect(badgeEl.parentElement).toHaveStyle({ bottom: '10px', right: '5px' });
   });
 
   it('uses Rectangular anchor shape (no extra shape offset)', () => {
@@ -113,8 +124,9 @@ describe('BadgeWrapper', () => {
         <div data-testid="anchor" />
       </BadgeWrapper>,
     );
-    const badgeDiv = screen.getByTestId('badge').parentElement!;
-    expect(badgeDiv).toHaveStyle({ bottom: '4px', right: '3px' });
+    const badgeEl = screen.getByTestId('badge');
+    expect(badgeEl.parentElement).toBeInTheDocument();
+    expect(badgeEl.parentElement).toHaveStyle({ bottom: '4px', right: '3px' });
   });
 
   it('overrides with customPosition when provided', () => {
@@ -124,8 +136,9 @@ describe('BadgeWrapper', () => {
         <div data-testid="anchor" />
       </BadgeWrapper>,
     );
-    const badgeDiv = screen.getByTestId('badge').parentElement!;
-    expect(badgeDiv).toHaveStyle({
+    const badgeEl = screen.getByTestId('badge');
+    expect(badgeEl.parentElement).toBeInTheDocument();
+    expect(badgeEl.parentElement).toHaveStyle({
       top: '1px',
       right: '2px',
       bottom: '3px',
@@ -175,7 +188,10 @@ describe('BadgeWrapper', () => {
       bottom: 0,
       x: 0,
       y: 0,
-      toJSON: () => {},
+      toJSON: () => {
+        // Empty implementation needed for mock
+        return '';
+      },
     };
     const badgeRect = {
       width: 20,
@@ -186,7 +202,10 @@ describe('BadgeWrapper', () => {
       bottom: 0,
       x: 0,
       y: 0,
-      toJSON: () => {},
+      toJSON: () => {
+        // Empty implementation needed for mock
+        return '';
+      },
     };
     jest
       .spyOn(HTMLElement.prototype, 'getBoundingClientRect')
@@ -199,7 +218,12 @@ describe('BadgeWrapper', () => {
       </BadgeWrapper>,
     );
 
-    const badgeDiv = screen.getByTestId('badge-m').parentElement!;
+    const badgeEl = screen.getByTestId('badge-m');
+    expect(badgeEl.parentElement).toBeInTheDocument();
+    // We can assert that parentElement exists since we checked it's in the document
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const badgeDiv = badgeEl.parentElement!;
+
     // Computed offsets:
     // anchorShapeXOffset = 100 * .1464 = 14.64
     // badgeCenteringXOffset = 20/2 = 10
