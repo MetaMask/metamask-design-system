@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 export enum BoxBackgroundColor {
   BackgroundDefault = 'bg-background-default',
@@ -44,17 +44,20 @@ export type BoxProps = {
   style?: React.CSSProperties;
   /**
    * The background color of the Box.
+   *
    * @default BoxBackgroundColor.Transparent
    */
   backgroundColor?: BoxBackgroundColor;
   /**
    * The padding of the Box. Value from 0-12 that maps directly to Tailwind's spacing scale.
    * For example: 4 becomes p-4, 8 becomes p-8, etc.
+   *
    * @default 0
    */
   padding?: BoxPadding;
   /**
    * The border color of the Box.
+   *
    * @default BoxBorderColor.None
    */
   borderColor?: BoxBorderColor;

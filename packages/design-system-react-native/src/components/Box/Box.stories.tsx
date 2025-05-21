@@ -3,6 +3,7 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { Text, TextColor, TextVariant } from '../Text';
+
 import { Box } from './Box';
 import { BoxBackgroundColor, BoxBorderColor } from './Box.types';
 

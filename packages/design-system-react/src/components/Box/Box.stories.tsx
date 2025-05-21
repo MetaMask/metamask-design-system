@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { Text, TextColor, TextVariant } from '../Text';
+
 import { Box } from './Box';
 import { BoxBackgroundColor, BoxBorderColor } from './Box.types';
 import README from './README.mdx';

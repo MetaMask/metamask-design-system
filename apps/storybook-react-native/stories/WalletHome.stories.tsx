@@ -1,7 +1,3 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { View } from 'react-native';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import {
   AvatarBaseShape,
   AvatarToken,
@@ -22,6 +18,10 @@ import {
   Box,
   BoxBackgroundColor,
 } from '@metamask/design-system-react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import { View } from 'react-native';
 
 const meta: Meta = {
   title: 'Examples/Wallet Home',

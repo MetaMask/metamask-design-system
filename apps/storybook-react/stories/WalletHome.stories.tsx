@@ -1,5 +1,3 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
 import {
   AvatarBaseShape,
   AvatarToken,
@@ -20,6 +18,8 @@ import {
   BoxBackgroundColor,
   BoxBorderColor,
 } from '@metamask/design-system-react';
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 
 const meta: Meta = {
   title: 'Examples/Wallet Home',

@@ -29,24 +29,27 @@ export enum BoxBorderColor {
 
 export type BoxPadding = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
-export interface BoxProps extends ViewProps {
+export type BoxProps = {
   /**
    * The content to be rendered within the Box.
    */
   children?: React.ReactNode;
   /**
    * The background color of the Box.
+   *
    * @default BoxBackgroundColor.Transparent
    */
   backgroundColor?: BoxBackgroundColor;
   /**
    * The padding of the Box. Value from 0-12 that maps directly to Tailwind's spacing scale.
    * For example: 4 becomes p-4, 8 becomes p-8, etc.
+   *
    * @default 0
    */
   padding?: BoxPadding;
   /**
    * The border color of the Box.
+   *
    * @default BoxBorderColor.None
    */
   borderColor?: BoxBorderColor;
@@ -58,4 +61,4 @@ export interface BoxProps extends ViewProps {
    * Additional styles to apply to the Box.
    */
   style?: StyleProp<ViewStyle>;
-}
+} & ViewProps;

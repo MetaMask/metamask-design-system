@@ -10,9 +10,7 @@ describe('Box Component', () => {
   });
 
   it('applies the correct classes', () => {
-    render(
-      <Box className="custom-class">Styled Content</Box>,
-    );
+    render(<Box className="custom-class">Styled Content</Box>);
     expect(screen.getByText('Styled Content')).toHaveClass('custom-class');
     // Add more class-related tests as needed
   });
