@@ -55,13 +55,13 @@
       "description": "Pressed state surface for background/alternative."
     },
     "muted-hover": {
-      "value": "#2a2b2d",
+      "value": "#E0E5FF33",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for background/muted."
     },
     "muted-pressed": {
-      "value": "#303234",
+      "value": "#E0E5FF40",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for background/muted."
