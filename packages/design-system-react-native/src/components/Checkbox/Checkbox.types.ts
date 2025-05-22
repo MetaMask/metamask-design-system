@@ -13,21 +13,21 @@ import type { TextProps } from '../Text';
 
 export type CheckboxProps = {
   /**
-   * Required prop that when true, shows a checked checkbox.
-   * This component is fully controlled and requires this prop
-   * to be managed by parent component.
+   * Required prop to determine whether the checkbox is currently selected.
+   * This component is fully controlled, so you must manage this state
+   * in your parent component.
    */
   isSelected: boolean;
 
   /**
-   * Optional prop that when true, disables the checkbox
+   * Optional prop that when true, disables the checkbox.
    *
    * @default false
    */
   isDisabled?: boolean;
 
   /**
-   * Optional prop that when true, shows the invalid state
+   * Optional prop that when true, displays the invalid/error state of the checkbox.
    *
    * @default false
    */
@@ -45,7 +45,7 @@ export type CheckboxProps = {
 
   /**
    * Required callback for when the checked state changes.
-   * Parent component must update isSelected prop in response.
+   * Use this to update your state.
    */
   onChange: (isSelected: boolean) => void;
 

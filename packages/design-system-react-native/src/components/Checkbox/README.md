@@ -45,7 +45,7 @@ const [isSelected, setIsSelected] = useState(true);
 
 ### `isDisabled`
 
-Disables interaction and visually dims the checkbox.
+Optional prop that when true, disables the checkbox.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -66,7 +66,7 @@ const [isSelected, setIsSelected] = useState(false);
 
 ### `isInvalid`
 
-Displays the invalid/error state of the checkbox.
+Optional prop that when true, displays the invalid/error state of the checkbox.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -103,7 +103,7 @@ const [isSelected, setIsSelected] = useState(false);
 
 ### `label`
 
-Renders text or a React node as a label beside the checkbox.
+Optional label prop that renders text or a React node as a label beside the checkbox.
 
 | TYPE                  | REQUIRED | DEFAULT     |
 | --------------------- | -------- | ----------- |
@@ -123,7 +123,7 @@ const [isSelected, setIsSelected] = useState(false);
 
 ### `labelProps`
 
-Props forwarded to the underlying `Text` element used for rendering the label.
+Optional props to be passed to the label's Text component.
 
 | TYPE                 | REQUIRED | DEFAULT     |
 | -------------------- | -------- | ----------- |
@@ -144,7 +144,7 @@ const [isSelected, setIsSelected] = useState(false);
 
 ### `checkboxContainerProps`
 
-Props passed to the container view wrapping the checkbox icon.
+Optional props passed to the container view wrapping the checkbox icon.
 
 | TYPE                 | REQUIRED | DEFAULT     |
 | -------------------- | -------- | ----------- |
@@ -154,7 +154,7 @@ Props passed to the container view wrapping the checkbox icon.
 
 ### `checkedIconProps`
 
-Customize the check icon inside the checkbox.
+Optional props to be passed to the label's Text component.
 
 | TYPE                 | REQUIRED | DEFAULT     |
 | -------------------- | -------- | ----------- |
