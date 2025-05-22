@@ -6,7 +6,12 @@ import React, {
   useCallback,
   useEffect,
 } from 'react';
-import { Pressable, Animated, Easing } from 'react-native';
+import {
+  Pressable,
+  Animated,
+  Easing,
+  PressableStateCallbackType,
+} from 'react-native';
 
 import { Icon, IconName, IconColor, IconSize } from '../Icon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
@@ -117,7 +122,10 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
           disabled: isDisabled,
         }}
         accessibilityLabel={typeof label === 'string' ? label : undefined}
-        style={[twContainerClassNames, style]}
+        style={(state: PressableStateCallbackType) => [
+          twContainerClassNames,
+          typeof style === 'function' ? style(state) : style,
+        ]}
         disabled={isDisabled}
         {...props}
       >

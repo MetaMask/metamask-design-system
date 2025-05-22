@@ -5,7 +5,12 @@ import { render, fireEvent } from '@testing-library/react-native';
 import type { ReactElement } from 'react';
 import React, { createRef } from 'react';
 import { Text } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type {
+  StyleProp,
+  ViewStyle,
+  PressableProps,
+  PressableStateCallbackType,
+} from 'react-native';
 
 import { Checkbox } from './Checkbox';
 
@@ -132,6 +137,29 @@ describe('Checkbox', () => {
       disabled: false,
     });
     expect(pressable.props.accessibilityLabel).toBe('Accept');
+    const styles = flattenStyles(pressable.props.style);
+    expect(styles).toStrictEqual(
+      expect.arrayContaining([expect.objectContaining({ margin: 4 })]),
+    );
+  });
+
+  it('invokes a user-provided style function correctly', () => {
+    const fn = jest.fn();
+    const styleFn: PressableProps['style'] = (
+      _state: PressableStateCallbackType,
+    ): StyleProp<ViewStyle> => ({
+      margin: 4,
+    });
+    const { getByTestId } = render(
+      <Checkbox
+        label="Accept"
+        isSelected
+        onChange={fn}
+        style={styleFn}
+        testID="chk"
+      />,
+    );
+    const pressable = getByTestId('chk');
     const styles = flattenStyles(pressable.props.style);
     expect(styles).toStrictEqual(
       expect.arrayContaining([expect.objectContaining({ margin: 4 })]),

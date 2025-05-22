@@ -34,12 +34,12 @@ export type CheckboxProps = {
   isInvalid?: boolean;
 
   /**
-   * Optional label prop
+   * Optional label prop that renders text or a React node as a label beside the checkbox.
    */
   label?: React.ReactNode | string;
 
   /**
-   * Optional props to be passed to the label's Text component
+   * Optional props to be passed to the label's Text component.
    */
   labelProps?: Omit<Partial<TextProps>, 'children'>;
 
@@ -50,7 +50,7 @@ export type CheckboxProps = {
   onChange: (isSelected: boolean) => void;
 
   /**
-   * Optional props to be passed to the checkbox container component
+   * Optional props passed to the container view wrapping the checkbox icon.
    */
   checkboxContainerProps?: Omit<Partial<ViewProps>, 'children'>;
 
@@ -67,5 +67,5 @@ export type CheckboxProps = {
   /**
    * Optional prop to control the style.
    */
-  style?: StyleProp<ViewStyle>;
+  style?: PressableProps['style'];
 } & Omit<PressableProps, 'children'>;
