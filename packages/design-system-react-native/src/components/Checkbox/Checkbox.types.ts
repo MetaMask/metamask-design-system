@@ -1,9 +1,4 @@
-import type {
-  StyleProp,
-  PressableProps,
-  ViewProps,
-  ViewStyle,
-} from 'react-native';
+import type { PressableProps, ViewProps } from 'react-native';
 
 import type { IconProps } from '../Icon';
 import type { TextProps } from '../Text';

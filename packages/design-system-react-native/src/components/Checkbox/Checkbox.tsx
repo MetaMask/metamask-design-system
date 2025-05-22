@@ -6,12 +6,8 @@ import React, {
   useCallback,
   useEffect,
 } from 'react';
-import {
-  Pressable,
-  Animated,
-  Easing,
-  PressableStateCallbackType,
-} from 'react-native';
+import type { PressableStateCallbackType } from 'react-native';
+import { Pressable, Animated, Easing } from 'react-native';
 
 import { Icon, IconName, IconColor, IconSize } from '../Icon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
