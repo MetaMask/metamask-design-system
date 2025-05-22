@@ -49,8 +49,8 @@ export const colors: ThemeColors = {
     muted: '#858b9a33',
   },
   overlay: {
-    /** Default color for overlays (scrim) (#00000066) */
-    default: '#00000066',
+    /** Default color for overlays (scrim) (#3f434a99) */
+    default: '#3f434a99',
     /** Dimmer color for overlays (scrim) (#000000CC) */
     alternative: '#000000cc',
     /** For elements placed on top of overlay/alternative (#FFFFFF) */

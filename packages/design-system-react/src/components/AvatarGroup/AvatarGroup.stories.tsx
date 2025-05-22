@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
+
 import { AvatarGroup } from './AvatarGroup';
 import {
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
@@ -88,6 +89,14 @@ const AvatarGroupStory: React.FC<Omit<AvatarGroupProps, 'avatarPropsArr'>> = ({
           {...props}
           variant={variant}
           avatarPropsArr={SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR}
+        />
+      );
+    default:
+      return (
+        <AvatarGroup
+          {...props}
+          variant={AvatarGroupVariant.Favicon}
+          avatarPropsArr={SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR}
         />
       );
   }

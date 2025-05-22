@@ -14,14 +14,14 @@
   --color-background-default-hover: #f6f6f7;
   /* Pressed state surface for background/default (#ebecef) */
   --color-background-default-pressed: #ebecef;
-  /* Hover state surface for background/alternative (#f6f6f7) */
-  --color-background-alternative-hover: #f6f6f7;
-  /* Pressed state surface for background/alternative (#ebecef) */
-  --color-background-alternative-pressed: #ebecef;
-  /* Hover state surface for background/muted (#e7ebee) */
-  --color-background-muted-hover: #e7ebee;
-  /* Pressed state surface for background/muted (#ebecef) */
-  --color-background-muted-pressed: #ebecef;
+  /* Hover state surface for background/alternative (#ebedf1) */
+  --color-background-alternative-hover: #ebedf1;
+  /* Pressed state surface for background/alternative (#e1e4ea) */
+  --color-background-alternative-pressed: #e1e4ea;
+  /* Hover state surface for background/muted (#ebedf1) */
+  --color-background-muted-hover: #ebedf1;
+  /* Pressed state surface for background/muted (#e1e4ea) */
+  --color-background-muted-pressed: #e1e4ea;
   /* General purpose hover state tint (#858b9a14) */
   --color-background-hover: #858b9a14;
   /* General purpose pressed state tint (#858b9a29) */
@@ -42,8 +42,8 @@
   --color-border-default: var(--brand-colors-grey-grey200);
   /* Muted color for borders (b7bbc8-40%) */
   --color-border-muted: #b7bbc866;
-  /* Default color for overlays (scrim) (black-40%) */
-  --color-overlay-default: #00000066;
+  /* Default color for overlays (scrim) (#3f434a66) */
+  --color-overlay-default: #3f434a66;
   /* Dimmer color for overlays (scrim) (black-80%) */
   --color-overlay-alternative: #000000cc;
   /* For elements placed on top of overlay/alternative (#ffffff) */
