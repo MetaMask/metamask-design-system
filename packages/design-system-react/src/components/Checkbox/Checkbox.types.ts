@@ -42,7 +42,7 @@ export type CheckboxProps = Omit<
    * Required callback for when the checked state changes.
    * Use this to update your state.
    */
-  onChange?: (isSelected: boolean) => void;
+  onChange: (isSelected: boolean) => void;
 
   /**
    * Optional props passed to the container div wrapping the checkbox icon.
@@ -51,6 +51,7 @@ export type CheckboxProps = Omit<
     className?: string;
   }) &
     Record<string, unknown>;
+
   /**
    * Optional props to be passed to the check Icon component
    */

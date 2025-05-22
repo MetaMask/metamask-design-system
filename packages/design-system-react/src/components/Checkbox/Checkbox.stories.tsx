@@ -38,7 +38,7 @@ const meta: Meta<CheckboxProps> = {
 export default meta;
 
 type Story = StoryObj<CheckboxProps>;
-const CheckboxStory: React.FC<CheckboxProps> = (args) => {
+const CheckboxStory: React.FC<Omit<CheckboxProps, 'onChange'>> = (args) => {
   const { ref: _ref, ...rest } = args;
   const [isSelected, setIsSelected] = useState(args.isSelected);
   return (
@@ -59,7 +59,7 @@ export const Default: Story = {
   render: (args) => <CheckboxStory {...args} />,
 };
 
-export const isSelected: Story = {
+export const IsSelected: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <CheckboxStory isSelected={false} label="Unchecked" />
@@ -68,7 +68,7 @@ export const isSelected: Story = {
   ),
 };
 
-export const isDisabled: Story = {
+export const IsDisabled: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <CheckboxStory isSelected={false} label="Enabled" />
@@ -77,7 +77,7 @@ export const isDisabled: Story = {
   ),
 };
 
-export const isInvalid: Story = {
+export const IsInvalid: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <CheckboxStory isSelected={false} label="Normal" />
@@ -86,7 +86,7 @@ export const isInvalid: Story = {
   ),
 };
 
-export const label: Story = {
+export const Label: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <CheckboxStory isSelected={false} />

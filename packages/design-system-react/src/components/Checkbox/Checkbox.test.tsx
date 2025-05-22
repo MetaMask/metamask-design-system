@@ -5,7 +5,7 @@ import { Checkbox } from './Checkbox';
 
 describe('Checkbox', () => {
   it('renders label when provided', () => {
-    render(<Checkbox isSelected={false} label="Accept" />);
+    render(<Checkbox onChange={() => {}} isSelected={false} label="Accept" />);
     expect(screen.getByText('Accept')).toBeInTheDocument();
   });
 
@@ -42,6 +42,7 @@ describe('Checkbox', () => {
   it('applies invalid border styles', () => {
     render(
       <Checkbox
+        onChange={() => {}}
         isSelected={false}
         isInvalid
         checkboxContainerProps={{ 'data-testid': 'inner' }}
@@ -53,6 +54,7 @@ describe('Checkbox', () => {
   it('applies selected container styles', () => {
     render(
       <Checkbox
+        onChange={() => {}}
         isSelected
         checkboxContainerProps={{ 'data-testid': 'inner' }}
       />,
@@ -66,6 +68,7 @@ describe('Checkbox', () => {
   it('omits aria-label when label is a React element', () => {
     render(
       <Checkbox
+        onChange={() => {}}
         isSelected={false}
         label={<span>Label</span>}
         data-testid="chk"
@@ -77,6 +80,7 @@ describe('Checkbox', () => {
   it('merges className and style on outer container', () => {
     render(
       <Checkbox
+        onChange={() => {}}
         isSelected={false}
         label="Test"
         className="custom"
@@ -92,6 +96,7 @@ describe('Checkbox', () => {
   it('merges checkboxContainerProps className', () => {
     render(
       <Checkbox
+        onChange={() => {}}
         isSelected={false}
         checkboxContainerProps={{ className: 'p-2', 'data-testid': 'inner' }}
       />,

@@ -20,9 +20,7 @@ import { Checkbox } from '@metamask/design-system-react';
 
 Required prop to determine whether the checkbox is currently selected. This component is fully controlled, so you must manage this state in your parent component.
 
-```tsx
-<Checkbox isSelected label="Selected" />
-```
+<Canvas of={CheckboxStories.IsSelected} />
 
 ---
 
@@ -30,9 +28,7 @@ Required prop to determine whether the checkbox is currently selected. This comp
 
 Optional prop that when true, disables the checkbox.
 
-```tsx
-<Checkbox isDisabled label="Disabled checkbox" />
-```
+<Canvas of={CheckboxStories.IsDisabled} />
 
 ---
 
@@ -40,9 +36,7 @@ Optional prop that when true, disables the checkbox.
 
 Optional prop that when true, displays the invalid/error state of the checkbox.
 
-```tsx
-<Checkbox isInvalid label="Invalid checkbox" />
-```
+<Canvas of={CheckboxStories.IsInvalid} />
 
 ---
 
@@ -50,9 +44,7 @@ Optional prop that when true, displays the invalid/error state of the checkbox.
 
 Optional label prop that renders text or a React node as a label beside the checkbox.
 
-```tsx
-<Checkbox label="Agree to terms" />
-```
+<Canvas of={CheckboxStories.Label} />
 
 ---
 
@@ -93,6 +85,36 @@ Optional props to be passed to the check Icon component.
 ```tsx
 <Checkbox checkedIconProps={{ className: 'mr-2' }} />
 ```
+
+---
+
+### `ref`
+
+The Checkbox component exposes an imperative API through refs that allows for programmatic control. The `toggle` method allows a parent component to programmatically toggle the checkbox state.
+
+```tsx
+// Example of using the ref to toggle a checkbox
+const [isSelected, setIsSelected] = useState(false);
+const checkboxRef = useRef<{ toggle: () => void }>(null);
+
+// Inside your component render
+<>
+  <Checkbox
+    ref={checkboxRef}
+    isSelected={isSelected}
+    onChange={() => setIsEnabled(!isSelected)}}
+    label="Toggle me via ref"
+  />
+  <Button
+    variant={ButtonVariant.Primary}
+    onPress={() => checkboxRef.current?.toggle()}
+  >
+    Toggle checkbox
+  </Button>
+</>;
+```
+
+This can be useful in scenarios where you need to trigger the checkbox programmatically, such as when implementing "Select All" functionality or resetting forms.
 
 ---
 
