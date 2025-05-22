@@ -2658,6 +2658,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gorhom/bottom-sheet@npm:^2":
+  version: 2.4.1
+  resolution: "@gorhom/bottom-sheet@npm:2.4.1"
+  dependencies:
+    "@gorhom/portal": "npm:^1.0.9"
+    invariant: "npm:^2.2.4"
+    lodash.isequal: "npm:^4.5.0"
+    nanoid: "npm:^3.1.20"
+    react-native-redash: "npm:^14.2.4"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: ">=1.8.0"
+    react-native-reanimated: ">=1.9.0"
+  checksum: 10/56d503ea9dbae0b91c53bef3123564751e35cafb36057c1af4f6777d1fa9736ee37b50c898f11697e83ae94e6024bc44cd73ed0cc27148813e3cf22e4a2566b5
+  languageName: node
+  linkType: hard
+
+"@gorhom/portal@npm:^1.0.9":
+  version: 1.0.14
+  resolution: "@gorhom/portal@npm:1.0.14"
+  dependencies:
+    nanoid: "npm:^3.3.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/e0fa06be88b850cccdc6a1417a86e5ac21d82e3bfd1cec7eb05eccf7f3b595babe305541f278fdcbde34f3a9db465097dca2c785445c28bafb83b744e235da0c
+  languageName: node
+  linkType: hard
+
 "@graphql-typed-document-node/core@npm:^3.1.0":
   version: 3.2.0
   resolution: "@graphql-typed-document-node/core@npm:3.2.0"
@@ -3225,6 +3255,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
+    "@gorhom/bottom-sheet": "npm:^2"
     "@metamask/auto-changelog": "npm:^5.0.2"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
@@ -3245,15 +3276,16 @@ __metadata:
     metro-react-native-babel-preset: "npm:^0.77.0"
     react: "npm:^18.2.0"
     react-native: "npm:^0.72.15"
-    react-native-gesture-handler: "npm:^1.10.3"
     react-native-jazzicon: "npm:^0.1.2"
-    react-native-reanimated: "npm:3.3.0"
     react-native-svg: "npm:^15.10.1"
     react-native-svg-transformer: "npm:^1.5.0"
     react-test-renderer: "npm:^18.3.1"
     ts-jest: "npm:^29.2.5"
     ts-node: "npm:^10.9.1"
     typescript: "npm:~5.2.2"
+  peerDependencies:
+    react-native-gesture-handler: ^1.10.3
+    react-native-reanimated: 3.3.0
   languageName: unknown
   linkType: soft
 
@@ -3478,6 +3510,8 @@ __metadata:
     prettier-plugin-tailwindcss: "npm:^0.6.11"
     react: "npm:^18.2.0"
     react-native: "npm:^0.72.15"
+    react-native-gesture-handler: "npm:^1.10.3"
+    react-native-reanimated: "npm:3.3.0"
     rimraf: "npm:^5.0.5"
     semver: "npm:^7.7.1"
     simple-git-hooks: "npm:^2.8.0"
@@ -6795,6 +6829,13 @@ __metadata:
   dependencies:
     event-target-shim: "npm:^5.0.0"
   checksum: 10/ed84af329f1828327798229578b4fe03a4dd2596ba304083ebd2252666bdc1d7647d66d0b18704477e1f8aa315f055944aa6e859afebd341f12d0a53c37b4b40
+  languageName: node
+  linkType: hard
+
+"abs-svg-path@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "abs-svg-path@npm:0.1.1"
+  checksum: 10/af1a167c09e8bdb76c80adca7333f3d828e5b50e37b9702aa03675e271919e7b1eeaa35cce939970ecba14769953b7465ea34c2129ab683ddff9d973a07f164f
   languageName: node
   linkType: hard
 
@@ -15162,6 +15203,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.isequal@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.isequal@npm:4.5.0"
+  checksum: 10/82fc58a83a1555f8df34ca9a2cd300995ff94018ac12cc47c349655f0ae1d4d92ba346db4c19bbfc90510764e0c00ddcc985a358bdcd4b3b965abf8f2a48a214
+  languageName: node
+  linkType: hard
+
 "lodash.memoize@npm:^4.1.2":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
@@ -16474,6 +16522,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.1.20, nanoid@npm:^3.3.1":
+  version: 3.3.11
+  resolution: "nanoid@npm:3.3.11"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 10/73b5afe5975a307aaa3c95dfe3334c52cdf9ae71518176895229b8d65ab0d1c0417dd081426134eb7571c055720428ea5d57c645138161e7d10df80815527c48
+  languageName: node
+  linkType: hard
+
 "nanoid@npm:^3.3.7":
   version: 3.3.8
   resolution: "nanoid@npm:3.3.8"
@@ -16761,6 +16818,15 @@ __metadata:
   version: 0.1.2
   resolution: "normalize-range@npm:0.1.2"
   checksum: 10/9b2f14f093593f367a7a0834267c24f3cb3e887a2d9809c77d8a7e5fd08738bcd15af46f0ab01cc3a3d660386f015816b5c922cea8bf2ee79777f40874063184
+  languageName: node
+  linkType: hard
+
+"normalize-svg-path@npm:^1.0.1":
+  version: 1.1.0
+  resolution: "normalize-svg-path@npm:1.1.0"
+  dependencies:
+    svg-arc-to-cubic-bezier: "npm:^3.0.0"
+  checksum: 10/740b1f63e6041981e80fd1508b10d850a1bd78ff13008f011bf82783c10458fcf6597efb784c6380082d500f049d859666b2e275d53460d1b9427fee25ff7e1f
   languageName: node
   linkType: hard
 
@@ -17422,6 +17488,13 @@ __metadata:
   dependencies:
     pngjs: "npm:^3.3.0"
   checksum: 10/0c6b6c42c8830cd16f6f9e9aedafd53111c0ad2ff350ba79c629996887567558f5639ad0c95764f96f7acd1f9ff63d4ac73737e80efa3911a6de9839ee520c96
+  languageName: node
+  linkType: hard
+
+"parse-svg-path@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "parse-svg-path@npm:0.1.2"
+  checksum: 10/bba7d4b4207fcc9eaf553b0d34db96ea8a1173635bc94528b5b66e1581902d4792d8d6229103764f01af4d839274234e97a4fa1c6f0fe7dcce195383848cec56
   languageName: node
   linkType: hard
 
@@ -18490,6 +18563,22 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10/44496b834461dc6968f9add6a318d4ebc40c0989021fd4fab78832cef9507873cb7b9737ad2f7d9c8ac072b84870bfbddd2c27b94de4024d9103017388d7e3ed
+  languageName: node
+  linkType: hard
+
+"react-native-redash@npm:^14.2.4":
+  version: 14.2.4
+  resolution: "react-native-redash@npm:14.2.4"
+  dependencies:
+    abs-svg-path: "npm:^0.1.1"
+    normalize-svg-path: "npm:^1.0.1"
+    parse-svg-path: "npm:^0.1.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: "*"
+    react-native-reanimated: "*"
+  checksum: 10/34ed137018b3130e0a748b4f4ca452c94b1df30a4f76b4fd6b0613eec902a92d24f123c5ff613a108829949eb5c1a3095ae6ac78aaeb78545769fe7cf5e9e0d4
   languageName: node
   linkType: hard
 
@@ -20508,6 +20597,13 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 10/a9dc19ae2220c952bd2231d08ddeecb1b0328b61e72071ff4000c8384e145cc07c1c0bdb3b5a1cb06e186a7b2790f1dee793418b332f6ddf320de25d9125be7e
+  languageName: node
+  linkType: hard
+
+"svg-arc-to-cubic-bezier@npm:^3.0.0":
+  version: 3.2.0
+  resolution: "svg-arc-to-cubic-bezier@npm:3.2.0"
+  checksum: 10/1b017282c30ab81327dbf6b9657457726f6593e008bed7d7bda3e47ad152b7e90fdd41cde0992dcbeb48fcc1bd3e0df4c6564aee3429c2c14ce25e2536e04008
   languageName: node
   linkType: hard
 

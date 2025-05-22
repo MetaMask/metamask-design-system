@@ -1,5 +1,6 @@
 import { addDecorator } from '@storybook/react-native';
 import { addons } from '@storybook/addons';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import {
   ColorSet,
@@ -16,9 +17,11 @@ addons.setConfig({
 });
 
 addDecorator((Story) => (
-  <ThemeProvider colorSet={ColorSet.Brand} theme={Theme.Default}>
-    <FontLoader>
-      <Story />
-    </FontLoader>
-  </ThemeProvider>
+  <GestureHandlerRootView>
+    <ThemeProvider colorSet={ColorSet.Brand} theme={Theme.Default}>
+      <FontLoader>
+        <Story />
+      </FontLoader>
+    </ThemeProvider>
+  </GestureHandlerRootView>
 ));
