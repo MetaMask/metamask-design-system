@@ -50,7 +50,7 @@ export type CheckboxProps = {
   checkboxContainerProps?: Omit<Partial<ViewProps>, 'children'>;
 
   /**
-   * Optional props to be passed to the label's Text component
+   * Optional props to be passed to the check Icon component.
    */
   checkedIconProps?: Partial<IconProps>;
 

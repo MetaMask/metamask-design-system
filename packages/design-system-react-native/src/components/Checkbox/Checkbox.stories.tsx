@@ -30,88 +30,58 @@ const meta: Meta<CheckboxProps> = {
 export default meta;
 
 type Story = StoryObj<CheckboxProps>;
+const CheckboxStory: React.FC<Omit<CheckboxProps, 'onChange'>> = (args) => {
+  const [isSelected, setIsSelected] = useState(args.isSelected);
+  return (
+    <Checkbox
+      {...args}
+      isSelected={isSelected}
+      onChange={() => setIsSelected(!isSelected)}
+    />
+  );
+};
 
 export const Default: Story = {
-  render(args) {
-    const [isSelected, setIsSelected] = useState(false);
-    return (
-      <Checkbox
-        {...args}
-        isSelected={isSelected}
-        onChange={() => setIsSelected(!isSelected)}
-      />
-    );
-  },
+  render: (args) => <CheckboxStory {...args} />,
   args: {
     label: 'Checkbox',
   },
 };
 
 export const IsSelected: Story = {
-  render: () => {
-    const [isSelected, setIsSelected] = useState(true);
-    return (
-      <Checkbox
-        isSelected={isSelected}
-        onChange={() => setIsSelected(!isSelected)}
-        label="isSelected"
-      />
-    );
-  },
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <CheckboxStory isSelected={false} label="Unchecked" />
+      <CheckboxStory isSelected label="Checked" />
+    </View>
+  ),
 };
 
 export const IsDisabled: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <Checkbox
-        onChange={
-          (/* isSelected */) => {
-            // No action needed for disabled checkboxes
-          }
-        }
-        isSelected={true}
-        isDisabled
-        label="isDisabled"
-      />
-      <Checkbox
-        onChange={
-          (/* isSelected */) => {
-            // No action needed for disabled checkboxes
-          }
-        }
-        isSelected={false}
-        isDisabled
-        label="isDisabled"
-      />
+      <CheckboxStory isSelected={false} label="Enabled" />
+      <CheckboxStory isSelected={false} isDisabled label="Disabled" />
     </View>
   ),
 };
 
 export const IsInvalid: Story = {
-  render: () => {
-    const [isSelected, setIsSelected] = useState(false);
-    return (
-      <Checkbox
-        isSelected={isSelected}
-        onChange={() => setIsSelected(!isSelected)}
-        isInvalid
-        label="isInvalid"
-      />
-    );
-  },
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <CheckboxStory isSelected={false} label="Normal" />
+      <CheckboxStory isSelected={false} isInvalid label="Invalid" />
+    </View>
+  ),
 };
 
 export const Label: Story = {
-  render: () => {
-    const [isSelected, setIsSelected] = useState(false);
-    return (
-      <Checkbox
-        isSelected={isSelected}
-        onChange={() => setIsSelected(!isSelected)}
-        label="Checkbox with label"
-      />
-    );
-  },
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <CheckboxStory isSelected={false} />
+      <CheckboxStory isSelected={false} label="Checkbox with label" />
+    </View>
+  ),
 };
 
 export const Ref: Story = {

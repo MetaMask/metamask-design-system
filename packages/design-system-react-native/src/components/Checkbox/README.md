@@ -154,7 +154,7 @@ Optional props passed to the container view wrapping the checkbox icon.
 
 ### `checkedIconProps`
 
-Optional props to be passed to the label's Text component.
+Optional props to be passed to the check Icon component.
 
 | TYPE                 | REQUIRED | DEFAULT     |
 | -------------------- | -------- | ----------- |
