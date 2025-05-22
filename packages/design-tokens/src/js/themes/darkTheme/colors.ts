@@ -5,10 +5,14 @@ export const colors: ThemeColors = {
   background: {
     /** For default neutral surface (#222325) */
     default: brandColor.grey900,
-    /** For sunken neutral surface below background/default (#121314) */
+    /** For section bg usually over background/default (#121314) */
     alternative: brandColor.grey1000,
-    /** For raised neutral surface above background/default (#31333A) */
-    muted: brandColor.grey800,
+    /** For section bg usually over background/default (#31333A) */
+    section: brandColor.grey800,
+    /** For subsection bg usually over background/section (#222325) */
+    subsection: brandColor.grey700,
+    /** For muted neutral surface (#E0E5FF26) */
+    muted: '#E0E5FF26',
     /** Hover state surface for background/default (#1a1b1c) */
     defaultHover: '#1a1b1c',
     /** Pressed state surface for background/default (#222424) */
@@ -17,10 +21,10 @@ export const colors: ThemeColors = {
     alternativeHover: '#0d0d0e',
     /** Pressed state surface for background/alternative (#161617) */
     alternativePressed: '#161617',
-    /** Hover state surface for background/muted (#2a2b2d) */
-    mutedHover: '#2a2b2d',
-    /** Pressed state surface for background/muted (#303234) */
-    mutedPressed: '#303234',
+    /** Hover state surface for background/muted (#E0E5FF33) */
+    mutedHover: '#E0E5FF33',
+    /** Pressed state surface for background/muted (#E0E5FF40) */
+    mutedPressed: '#E0E5FF40',
     /** General purpose hover state tint (#dadce50a) */
     hover: '#dadce50a',
     /** General purpose pressed state tint (#dadce514) */
