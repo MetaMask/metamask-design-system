@@ -3529,6 +3529,7 @@ __metadata:
   resolution: "@metamask/storybook-react@workspace:apps/storybook-react"
   dependencies:
     "@chromatic-com/storybook": "npm:^1.9.0"
+    "@metamask/design-system-react": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
     "@storybook/addon-a11y": "npm:^8.6.12"
