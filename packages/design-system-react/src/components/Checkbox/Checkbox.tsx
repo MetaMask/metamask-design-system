@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 import { Icon, IconName, IconColor, IconSize } from '../Icon';
