@@ -1,14 +1,12 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, {
   forwardRef,
-  useState,
   useRef,
   useImperativeHandle,
   useCallback,
   useEffect,
 } from 'react';
 import { Pressable, Animated, Easing } from 'react-native';
-import type { StyleProp } from 'react-native';
 
 import { Icon, IconName, IconColor, IconSize } from '../Icon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
@@ -20,7 +18,7 @@ const AnimatedView = Animated.View;
 export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
   (
     {
-      isSelected = false,
+      isSelected,
       isDisabled = false,
       isInvalid = false,
       label = '',
@@ -34,24 +32,19 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     },
     ref,
   ) => {
-    // Internal state for uncontrolled
-    const [internalSelected, setInternalSelected] = useState(isSelected);
-
     // Animation values
     const scaleAnim = useRef(new Animated.Value(1)).current;
-    const iconAnim = useRef(
-      new Animated.Value(internalSelected ? 1 : 0),
-    ).current;
+    const iconAnim = useRef(new Animated.Value(isSelected ? 1 : 0)).current;
 
     // Sync icon opacity whenever selection changes
     useEffect(() => {
       Animated.timing(iconAnim, {
-        toValue: internalSelected ? 1 : 0,
+        toValue: isSelected ? 1 : 0,
         duration: 300,
         easing: Easing.ease,
         useNativeDriver: true,
       }).start();
-    }, [internalSelected, iconAnim]);
+    }, [isSelected, iconAnim]);
 
     // Bounce effect when toggling
     const animateScale = useCallback(() => {
@@ -71,14 +64,12 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       ]).start();
     }, [scaleAnim]);
 
-    // Press handler: update state, notify parent, then bounce
+    // Press handler: notify parent, then bounce
     const handlePress = () => {
       if (isDisabled) {
         return;
       }
-      const next = !internalSelected;
-      setInternalSelected(next);
-      onChange?.(next);
+      onChange?.(!isSelected);
       animateScale();
     };
 
@@ -91,20 +82,20 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
 
     const getCheckboxContainerStyle = useCallback(
       (pressed: boolean): string => {
-        const baseBg = internalSelected
+        const baseBg = isSelected
           ? 'bg-primary-default'
           : 'bg-background-default';
         let baseBorder = 'border-border-default';
-        if (internalSelected) {
+        if (isSelected) {
           baseBorder = 'border-primary-default';
         } else if (isInvalid) {
           baseBorder = 'border-error-default';
         }
-        const pressedBg = internalSelected
+        const pressedBg = isSelected
           ? 'bg-primary-defaultPressed'
           : 'bg-background-defaultPressed';
         let pressedBorder = 'border-border-default';
-        if (internalSelected) {
+        if (isSelected) {
           pressedBorder = 'border-primary-defaultPressed';
         } else if (isInvalid) {
           pressedBorder = 'border-error-default';
@@ -113,7 +104,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
           ? `${pressedBg} ${pressedBorder}`
           : `${baseBg} ${baseBorder}`;
       },
-      [internalSelected, isInvalid],
+      [isSelected, isInvalid],
     );
 
     return (
@@ -122,7 +113,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
         accessible
         accessibilityRole="checkbox"
         accessibilityState={{
-          checked: internalSelected,
+          checked: isSelected,
           disabled: isDisabled,
         }}
         accessibilityLabel={typeof label === 'string' ? label : undefined}
