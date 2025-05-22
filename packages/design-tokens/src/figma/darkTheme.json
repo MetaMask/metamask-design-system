@@ -25,7 +25,7 @@
       "description": "For subsection bg usually over background/section."
     },
     "muted": {
-      "value": "E0E5FF26",
+      "value": "#e0e5ff26",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For muted neutral surface."
@@ -55,13 +55,13 @@
       "description": "Pressed state surface for background/alternative."
     },
     "muted-hover": {
-      "value": "#E0E5FF33",
+      "value": "#e0e5ff33",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for background/muted."
     },
     "muted-pressed": {
-      "value": "#E0E5FF40",
+      "value": "#e0e5ff40",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for background/muted."
@@ -179,7 +179,7 @@
       "description": "For elements placed on top of primary/default fill."
     },
     "default-hover": {
-      "value": "#9EAAFF",
+      "value": "#9eaaff",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for primary/default."
