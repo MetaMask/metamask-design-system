@@ -22,10 +22,6 @@ const config = createConfig([
       // design system react
       'packages/design-system-react/src/components/Icon/icons/*.tsx',
       'packages/design-system-react/src/components/Icon/icons/index.ts',
-      'packages/design-system-react/src/components/BadgeNetwork/BadgeNetwork.test.tsx',
-      'packages/design-system-react/src/components/BadgeWrapper/BadgeWrapper.test.tsx',
-      'packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.test.tsx',
-      'packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.tsx',
       'packages/design-system-react/src/components/temp-components/Maskicon/Maskicon.test.tsx',
       'packages/design-system-react/src/components/temp-components/Maskicon/Maskicon.tsx',
       'packages/design-system-react/src/components/temp-components/Maskicon/Maskicon.utilities.ts',
