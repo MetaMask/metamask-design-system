@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React from 'react';
 import { Image } from 'react-native';
 
 // @ts-ignore
-import { toDataUrl } from './Blockies.utilities';
 import type { BlockiesProps } from './Blockies.types';
+import { toDataUrl } from './Blockies.utilities';
 
 export const Blockies = ({ address, size = 32, ...props }: BlockiesProps) => {
   return (

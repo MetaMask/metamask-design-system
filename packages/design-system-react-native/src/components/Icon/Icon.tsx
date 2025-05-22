@@ -2,6 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 
 import { IconColor, IconSize } from '../../types';
+
 import { assetByIconName } from './Icon.assets';
 import type { IconProps } from './Icon.types';
 import { generateIconClassNames } from './Icon.utilities';
