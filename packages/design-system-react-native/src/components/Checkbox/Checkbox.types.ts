@@ -1,4 +1,9 @@
-import type { StyleProp, PressableProps, ViewProps } from 'react-native';
+import type {
+  StyleProp,
+  PressableProps,
+  ViewProps,
+  ViewStyle,
+} from 'react-native';
 
 import type { IconProps } from '../Icon';
 import type { TextProps } from '../Text';
@@ -8,11 +13,11 @@ import type { TextProps } from '../Text';
 
 export type CheckboxProps = {
   /**
-   * Optional prop that when true, shows a checked checkbox.
-   *
-   * @default false
+   * Required prop that when true, shows a checked checkbox.
+   * This component is fully controlled and requires this prop
+   * to be managed by parent component.
    */
-  isSelected?: boolean;
+  isSelected: boolean;
 
   /**
    * Optional prop that when true, disables the checkbox
@@ -39,11 +44,10 @@ export type CheckboxProps = {
   labelProps?: Omit<Partial<TextProps>, 'children'>;
 
   /**
-   * Optional callback for when the checked state changes
-   *
-   * @default false
+   * Required callback for when the checked state changes.
+   * Parent component must update isSelected prop in response.
    */
-  onChange?: (isSelected: boolean) => void;
+  onChange: (isSelected: boolean) => void;
 
   /**
    * Optional props to be passed to the checkbox container component
@@ -63,5 +67,5 @@ export type CheckboxProps = {
   /**
    * Optional prop to control the style.
    */
-  style?: StyleProp<PressableProps>;
+  style?: StyleProp<ViewStyle>;
 } & Omit<PressableProps, 'children'>;
