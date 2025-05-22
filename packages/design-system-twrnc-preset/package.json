@@ -49,7 +49,7 @@
     "@metamask/design-tokens": "workspace:^"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.5",
+    "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.23.3",
@@ -64,11 +64,11 @@
     "metro-react-native-babel-preset": "^0.77.0",
     "react-test-renderer": "^18.3.1",
     "ts-jest": "^29.2.5",
-    "typescript": "~5.2.2"
+    "typescript": "~5.3.3"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-native": "0.72.15",
+    "react": "^18.3.1",
+    "react-native": "^0.76.9",
     "twrnc": "^4.5.1"
   },
   "engines": {

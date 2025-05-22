@@ -16,6 +16,13 @@ This repository contains the following packages [^fn1]:
 
 <!-- end package list -->
 
+## Applications
+
+This repository contains the following applications:
+
+- [`@metamask/storybook-react`](apps/storybook-react) - Storybook for React components
+- [`@metamask/storybook-react-native`](apps/storybook-react-native) - Storybook for React Native components
+
 Or, in graph form [^fn1]:
 
 <!-- start dependency graph -->

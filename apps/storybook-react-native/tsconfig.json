@@ -7,7 +7,17 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@metamask/design-system-react-native/*": [
+        "../../packages/design-system-react-native/src/*"
+      ],
+      "@metamask/design-system-twrnc-preset/*": [
+        "../../packages/design-system-twrnc-preset/dist/*"
+      ],
+      "@metamask/design-tokens/*": ["../../packages/design-tokens/src/*"]
+    }
   },
   "exclude": [
     "node_modules",
