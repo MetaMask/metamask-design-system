@@ -8,43 +8,44 @@ export type CheckboxProps = Omit<
   'style' | 'className' | 'children'
 > & {
   /**
-   * Optional prop that when true, shows a checked checkbox
-   *
-   * @default false
+   * Required prop to determine whether the checkbox is currently selected.
+   * This component is fully controlled, so you must manage this state
+   * in your parent component.
    */
-  isSelected?: boolean;
+  isSelected: boolean;
+
   /**
-   * Optional prop for the initial state of checkbox when uncontrolled
-   *
-   * @default false
-   */
-  defaultIsSelected?: boolean;
-  /**
-   * Optional prop that when true, disables the checkbox
+   * Optional prop that when true, disables the checkbox.
    *
    * @default false
    */
   isDisabled?: boolean;
+
   /**
-   * Optional prop that when true, shows the invalid state
+   * Optional prop that when true, displays the invalid/error state of the checkbox.
    *
    * @default false
    */
   isInvalid?: boolean;
+
   /**
-   * Optional label prop that renders text or a React node as a label beside the checkbox
+   * Optional label prop that renders text or a React node as a label beside the checkbox.
    */
   label?: React.ReactNode | string;
+
   /**
    * Optional props to be passed to the label's Text component
    */
   labelProps?: Omit<Partial<TextProps>, 'children'>;
+
   /**
-   * Optional callback for when the checked state changes
+   * Required callback for when the checked state changes.
+   * Use this to update your state.
    */
   onChange?: (isSelected: boolean) => void;
+
   /**
-   * Optional props to be passed to the checkbox container element
+   * Optional props passed to the container div wrapping the checkbox icon.
    */
   checkboxContainerProps?: (Omit<ComponentProps<'div'>, 'children'> & {
     className?: string;

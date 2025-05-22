@@ -10,7 +10,6 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
   (
     {
       isSelected,
-      defaultIsSelected = false,
       isDisabled = false,
       isInvalid = false,
       label,
@@ -24,22 +23,14 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     },
     ref,
   ) => {
-    const [internalSelected, setInternalSelected] = useState(defaultIsSelected);
-    const isControlled = isSelected !== undefined;
-    const currentSelected = isSelected ?? internalSelected;
-
-    const toggle = () => {
+    const handleClick = () => {
       if (isDisabled) {
         return;
       }
-      const next = !currentSelected;
-      if (!isControlled) {
-        setInternalSelected(next);
-      }
-      onChange?.(next);
+      onChange?.(!isSelected);
     };
 
-    useImperativeHandle(ref, () => ({ toggle }), [toggle]);
+    useImperativeHandle(ref, () => ({ toggle: handleClick }), [handleClick]);
 
     const outerClassName = twMerge(
       'inline-flex items-center',
@@ -47,21 +38,27 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       className,
     );
 
-    const baseBg = currentSelected
+    const baseBg = isSelected
       ? 'bg-primary-default hover:bg-primary-default-hover active:bg-primary-default-pressed'
       : 'bg-background-default hover:bg-background-default-hover active:bg-background-default-pressed';
     let baseBorder = 'border-border-default';
-    if (currentSelected) {
+    if (isSelected) {
       baseBorder = 'border-primary-default';
     } else if (isInvalid) {
       baseBorder = 'border-error-default';
     }
 
     const checkboxClasses = twMerge(
-      'flex h-[22px] w-[22px] items-center justify-center rounded border-2 transition-transform active:scale-95',
+      'flex h-6 w-6 items-center justify-center rounded border-2 p-0 transition-transform active:scale-95',
       baseBg,
       baseBorder,
       checkboxContainerProps?.className,
+    );
+
+    const iconClasses = twMerge(
+      'transition-opacity',
+      isSelected ? 'opacity-100' : 'opacity-0',
+      checkedIconProps?.className,
     );
 
     const ariaLabel = typeof label === 'string' ? label : props['aria-label'];
@@ -70,24 +67,23 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       <button
         type="button"
         role="checkbox"
-        aria-checked={currentSelected}
+        aria-checked={isSelected}
         aria-disabled={isDisabled}
         aria-label={ariaLabel}
-        onClick={toggle}
+        onClick={handleClick}
         disabled={isDisabled}
         className={outerClassName}
         style={style}
         {...props}
       >
         <div className={checkboxClasses} {...checkboxContainerProps}>
-          {currentSelected && (
-            <Icon
-              name={IconName.Check}
-              color={IconColor.PrimaryInverse}
-              size={IconSize.Sm}
-              {...checkedIconProps}
-            />
-          )}
+          <Icon
+            name={IconName.Check}
+            color={IconColor.PrimaryInverse}
+            size={IconSize.Sm}
+            {...checkedIconProps}
+            className={iconClasses}
+          />
         </div>
         {label ? (
           <Text

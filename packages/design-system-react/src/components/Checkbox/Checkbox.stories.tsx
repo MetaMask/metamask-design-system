@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Checkbox } from './Checkbox';
 import type { CheckboxProps } from './Checkbox.types';
@@ -14,10 +14,6 @@ const meta: Meta<CheckboxProps> = {
     },
   },
   argTypes: {
-    isSelected: {
-      control: 'boolean',
-      description: 'Optional prop that when true, shows a checked checkbox',
-    },
     isDisabled: {
       control: 'boolean',
       description: 'Optional prop that when true, disables the checkbox',
@@ -42,30 +38,32 @@ const meta: Meta<CheckboxProps> = {
 export default meta;
 
 type Story = StoryObj<CheckboxProps>;
+const CheckboxStory: React.FC<CheckboxProps> = (args) => {
+  const { ref: _ref, ...rest } = args;
+  const [isSelected, setIsSelected] = useState(args.isSelected);
+  return (
+    <Checkbox
+      {...rest}
+      isSelected={isSelected}
+      onChange={() => setIsSelected(!isSelected)}
+    />
+  );
+};
 
 export const Default: Story = {
   args: {
-    isSelected: false,
     isDisabled: false,
     isInvalid: false,
     label: 'Checkbox label',
   },
+  render: (args) => <CheckboxStory {...args} />,
 };
 
 export const isSelected: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Checkbox isSelected={false} label="Unchecked" />
-      <Checkbox isSelected label="Checked" />
-    </div>
-  ),
-};
-
-export const defaultIsSelected: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <Checkbox label="Default unchecked" />
-      <Checkbox defaultIsSelected label="Default checked" />
+      <CheckboxStory isSelected={false} label="Unchecked" />
+      <CheckboxStory isSelected label="Checked" />
     </div>
   ),
 };
@@ -73,8 +71,8 @@ export const defaultIsSelected: Story = {
 export const isDisabled: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Checkbox label="Enabled" />
-      <Checkbox isDisabled label="Disabled" />
+      <CheckboxStory isSelected={false} label="Enabled" />
+      <CheckboxStory isSelected={false} isDisabled label="Disabled" />
     </div>
   ),
 };
@@ -82,8 +80,8 @@ export const isDisabled: Story = {
 export const isInvalid: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Checkbox label="Normal" />
-      <Checkbox isInvalid label="Invalid" />
+      <CheckboxStory isSelected={false} label="Normal" />
+      <CheckboxStory isSelected={false} isInvalid label="Invalid" />
     </div>
   ),
 };
@@ -91,8 +89,8 @@ export const isInvalid: Story = {
 export const label: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Checkbox />
-      <Checkbox label="Checkbox with label" />
+      <CheckboxStory isSelected={false} />
+      <CheckboxStory isSelected={false} label="Checkbox with label" />
     </div>
   ),
 };

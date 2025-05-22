@@ -18,20 +18,10 @@ import { Checkbox } from '@metamask/design-system-react';
 
 ### `isSelected`
 
-Optional prop that when true, shows a checked checkbox.
+Required prop to determine whether the checkbox is currently selected. This component is fully controlled, so you must manage this state in your parent component.
 
 ```tsx
 <Checkbox isSelected label="Selected" />
-```
-
----
-
-### `defaultIsSelected`
-
-Optional prop for the initial state of checkbox when uncontrolled.
-
-```tsx
-<Checkbox defaultIsSelected label="Initial state" />
 ```
 
 ---
@@ -48,7 +38,7 @@ Optional prop that when true, disables the checkbox.
 
 ### `isInvalid`
 
-Optional prop that when true, shows the invalid state.
+Optional prop that when true, displays the invalid/error state of the checkbox.
 
 ```tsx
 <Checkbox isInvalid label="Invalid checkbox" />
@@ -78,7 +68,7 @@ Optional props to be passed to the label's Text component.
 
 ### `onChange`
 
-Optional callback for when the checked state changes.
+Required callback for when the checked state changes. Use this to update your state.
 
 ```tsx
 <Checkbox label="Check me" onChange={(val) => console.log(val)} />
@@ -88,7 +78,7 @@ Optional callback for when the checked state changes.
 
 ### `checkboxContainerProps`
 
-Optional props to be passed to the checkbox container element.
+Optional props passed to the container div wrapping the checkbox icon.
 
 ```tsx
 <Checkbox checkboxContainerProps={{className: "bg-success-default"}} />
