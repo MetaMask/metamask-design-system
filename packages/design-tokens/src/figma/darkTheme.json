@@ -10,7 +10,7 @@
       "value": "{grey.1000}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
-      "description": "For section bg usually over background/default."
+      "description": "For sunken neutral surface below background/default."
     },
     "section": {
       "value": "{grey.800}",

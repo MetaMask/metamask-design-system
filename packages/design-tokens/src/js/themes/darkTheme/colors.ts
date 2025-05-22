@@ -5,7 +5,7 @@ export const colors: ThemeColors = {
   background: {
     /** For default neutral surface (#222325) */
     default: brandColor.grey900,
-    /** For section bg usually over background/default (#121314) */
+    /** For sunken neutral surface below background/default. (#121314) */
     alternative: brandColor.grey1000,
     /** For section bg usually over background/default (#31333A) */
     section: brandColor.grey800,

@@ -5,7 +5,7 @@
 .dark {
   /* For default neutral surface (#121314) */
   --color-background-default: var(--brand-colors-grey-grey900);
-  /* For section bg usually over background/default (#000000) */
+  /* For sunken neutral surface below background/default (#000000) */
   --color-background-alternative: var(--brand-colors-grey-grey1000);
   /* For section bg usually over background/default (#202123) */
   --color-background-section: var(--brand-colors-grey-grey800);
