@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React, { useState } from 'react';
-import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
+import type { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
 import { AvatarNetworkSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 import { ImageOrSvg } from '../temp-components/ImageOrSvg';
+
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
 
 export const AvatarNetwork = ({

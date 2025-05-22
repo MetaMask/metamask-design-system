@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { ScrollView, View } from 'react-native';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
+
 import { AvatarGroup } from './AvatarGroup';
 import {
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,

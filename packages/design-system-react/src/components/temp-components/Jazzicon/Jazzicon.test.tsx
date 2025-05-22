@@ -1,14 +1,17 @@
-import React from 'react';
+import { KnownCaipNamespace, stringToBytes } from '@metamask/utils';
 import { render, screen, waitFor, act } from '@testing-library/react';
+import React from 'react';
+
 import { Jazzicon } from './Jazzicon';
 import * as utilities from './Jazzicon.utilities';
-import { KnownCaipNamespace, stringToBytes } from '@metamask/utils';
 
 // Mock the external dependency for Bitcoin address validation.
 jest.mock('bitcoin-address-validation', () => ({
   validate: (address: string, network: any) => {
     // For our test Bitcoin address, return true; for others, return false.
-    if (address === '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa') return true;
+    if (address === '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa') {
+      return true;
+    }
     return false;
   },
   Network: {
@@ -239,7 +242,7 @@ describe('Jazzicon', () => {
       // Even though the component renders a div, the effect sees containerRef.current as null,
       // so it should not append any children.
       const container = screen.getByTestId('jazzicon');
-      expect(container.childNodes.length).toBe(0);
+      expect(container.childNodes).toHaveLength(0);
       useRefSpy.mockRestore();
     });
 
@@ -274,7 +277,7 @@ describe('Jazzicon', () => {
 
       // Wait for the effect to run and remove the dummy nodes.
       await waitFor(() => {
-        expect(container.childNodes.length).toBe(1); // Only the new Jazzicon should remain
+        expect(container.childNodes).toHaveLength(1); // Only the new Jazzicon should remain
       });
 
       // Verify all dummy elements were removed.
@@ -285,7 +288,7 @@ describe('Jazzicon', () => {
 
     it('clears pre-existing children on initial mount using delayed effect', async () => {
       // Capture effect callbacks instead of letting them run automatically.
-      const effectCallbacks: Array<() => void> = [];
+      const effectCallbacks: (() => void)[] = [];
       const originalUseEffect = React.useEffect;
       jest
         .spyOn(React, 'useEffect')

@@ -3,17 +3,22 @@ import React, { useCallback } from 'react';
 import { View } from 'react-native';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
-import { AvatarAccount, AvatarAccountProps } from '../AvatarAccount';
+import type { AvatarAccountProps } from '../AvatarAccount';
+import { AvatarAccount } from '../AvatarAccount';
 import { AvatarBase, AvatarBaseShape } from '../AvatarBase';
-import { AvatarFavicon, AvatarFaviconProps } from '../AvatarFavicon';
-import { AvatarNetwork, AvatarNetworkProps } from '../AvatarNetwork';
-import { AvatarToken, AvatarTokenProps } from '../AvatarToken';
+import type { AvatarFaviconProps } from '../AvatarFavicon';
+import { AvatarFavicon } from '../AvatarFavicon';
+import type { AvatarNetworkProps } from '../AvatarNetwork';
+import { AvatarNetwork } from '../AvatarNetwork';
+import type { AvatarTokenProps } from '../AvatarToken';
+import { AvatarToken } from '../AvatarToken';
 import { Text, TextColor } from '../Text';
+
 import {
   MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT,
   TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS,
 } from './AvatarGroup.constants';
-import { AvatarGroupProps } from './AvatarGroup.types';
+import type { AvatarGroupProps } from './AvatarGroup.types';
 
 export const AvatarGroup = ({
   variant,
