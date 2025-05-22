@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
@@ -12,7 +12,7 @@ import {
 } from './AvatarIcon.constants';
 import type { AvatarIconProps } from './AvatarIcon.types';
 
-export const AvatarIcon = React.forwardRef<HTMLDivElement, AvatarIconProps>(
+export const AvatarIcon = forwardRef<HTMLDivElement, AvatarIconProps>(
   (
     {
       iconName,

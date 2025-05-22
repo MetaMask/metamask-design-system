@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { ButtonTertiarySize } from '../../../../types';
 import { IconName } from '../../../Icon';
@@ -138,7 +138,7 @@ describe('ButtonTertiary', () => {
 
   describe('ref forwarding', () => {
     it('forwards ref to the button element', () => {
-      const ref = React.createRef<HTMLButtonElement>();
+      const ref = createRef<HTMLButtonElement>();
       render(<ButtonTertiary ref={ref}>Button with Ref</ButtonTertiary>);
 
       expect(ref.current).toBeInstanceOf(HTMLButtonElement);

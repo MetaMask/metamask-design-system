@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { ButtonVariant } from '../../types';
 import { IconName } from '../Icon';
@@ -238,15 +238,13 @@ describe('Button', () => {
 
   describe('Ref Forwarding', () => {
     it('forwards ref to the button element for all variants', () => {
-      const { rerender } = render(
-        <Button ref={React.createRef()}>Button</Button>,
-      );
+      const { rerender } = render(<Button ref={createRef()}>Button</Button>);
 
       let button = screen.getByRole('button');
       expect(button).toBeInTheDocument();
 
       rerender(
-        <Button variant={ButtonVariant.Secondary} ref={React.createRef()}>
+        <Button variant={ButtonVariant.Secondary} ref={createRef()}>
           Button
         </Button>,
       );
@@ -254,7 +252,7 @@ describe('Button', () => {
       expect(button).toBeInTheDocument();
 
       rerender(
-        <Button variant={ButtonVariant.Tertiary} ref={React.createRef()}>
+        <Button variant={ButtonVariant.Tertiary} ref={createRef()}>
           Button
         </Button>,
       );
