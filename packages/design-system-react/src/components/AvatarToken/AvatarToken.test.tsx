@@ -7,6 +7,7 @@ import {
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
   TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
 } from '../AvatarBase/AvatarBase.constants';
+
 import { AvatarToken } from './AvatarToken';
 
 describe('AvatarToken', () => {
@@ -65,7 +66,7 @@ describe('AvatarToken', () => {
         <AvatarToken
           name="ACME"
           src={src}
-          imageProps={{ 'data-testid': 'img', id: 'img-id' } as any}
+          imageProps={{ 'data-testid': 'img', id: 'img-id' }}
         />,
       );
       const img = screen.getByTestId('img') as HTMLImageElement;
@@ -80,7 +81,7 @@ describe('AvatarToken', () => {
         <AvatarToken
           name=""
           src={src}
-          imageProps={{ 'data-testid': 'img2' } as any}
+          imageProps={{ 'data-testid': 'img2' }}
         />,
       );
       expect(screen.getByTestId('img2')).toHaveAttribute('alt', 'Token logo');
@@ -103,7 +104,7 @@ describe('AvatarToken', () => {
         <AvatarToken
           name="Beta"
           src="bad.png"
-          imageProps={{ 'data-testid': 'bad-img', onError } as any}
+          imageProps={{ 'data-testid': 'bad-img', onError }}
         />,
       );
       fireEvent.error(screen.getByTestId('bad-img'));
@@ -141,10 +142,7 @@ describe('AvatarToken', () => {
 
     it('uses default alt text when name prop is omitted', () => {
       render(
-        <AvatarToken
-          src={src}
-          imageProps={{ 'data-testid': 'img-no-name' } as any}
-        />,
+        <AvatarToken src={src} imageProps={{ 'data-testid': 'img-no-name' }} />,
       );
       const img = screen.getByTestId('img-no-name') as HTMLImageElement;
       expect(img.alt).toBe('Token logo');
