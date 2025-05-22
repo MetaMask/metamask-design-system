@@ -13,14 +13,14 @@ export const colors: ThemeColors = {
     defaultHover: '#f6f6f7',
     /** Pressed state surface for background/default (#ebecef) */
     defaultPressed: '#ebecef',
-    /** Hover state surface for background/alternative (#f6f6f7) */
-    alternativeHover: '#f6f6f7',
-    /** Pressed state surface for background/alternative (#ebecef) */
-    alternativePressed: '#ebecef',
-    /** Hover state surface for background/muted (#e7ebee) */
-    mutedHover: '#e7ebee',
-    /** Pressed state surface for background/muted (#ebecef) */
-    mutedPressed: '#ebecef',
+    /** Hover state surface for background/alternative (#ebedf1) */
+    alternativeHover: '#ebedf1',
+    /** Pressed state surface for background/alternative (#e1e4ea) */
+    alternativePressed: '#e1e4ea',
+    /** Hover state surface for background/muted (#ebedf1) */
+    mutedHover: '#ebedf1',
+    /** Pressed state surface for background/muted (#e1e4ea) */
+    mutedPressed: '#e1e4ea',
     /** General purpose hover state tint (#858b9a14) */
     hover: '#858b9a14',
     /** General purpose pressed state tint (#858b9a29) */
@@ -49,8 +49,8 @@ export const colors: ThemeColors = {
     muted: '#b7bbc866',
   },
   overlay: {
-    /** Default color for overlays (scrim) (#00000066) */
-    default: '#00000066',
+    /** Default color for overlays (scrim) (#3f434a66) */
+    default: '#3f434a66',
     /** Dimmer color for overlays (scrim) (#000000CC) */
     alternative: '#000000cc',
     /** For elements placed on top of overlay/alternative (#FFFFFF) */

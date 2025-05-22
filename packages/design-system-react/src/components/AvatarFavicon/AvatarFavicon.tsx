@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import { AvatarFaviconSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
 
-export const AvatarFavicon = React.forwardRef<
-  HTMLDivElement,
-  AvatarFaviconProps
->(
+export const AvatarFavicon = forwardRef<HTMLDivElement, AvatarFaviconProps>(
   (
     {
       src,
