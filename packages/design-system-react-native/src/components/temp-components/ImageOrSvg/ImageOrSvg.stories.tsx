@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { ImageOrSvg } from './ImageOrSvg';
 import type { ImageOrSvgProps } from './ImageOrSvg.types';

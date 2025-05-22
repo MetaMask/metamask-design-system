@@ -25,7 +25,15 @@ export const Icon = ({
     return tw`${mergedClassnames}`;
   }, [color, size, tw, twClassName]);
 
+  const { hitSlop, ...restProps } = props;
+  const svgProps = hitSlop === null ? restProps : props;
+
   return (
-    <SVG name={name} fill="currentColor" style={[twStyle, style]} {...props} />
+    <SVG
+      name={name}
+      fill="currentColor"
+      style={[twStyle, style]}
+      {...svgProps}
+    />
   );
 };

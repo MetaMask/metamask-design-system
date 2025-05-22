@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import * as Font from 'expo-font';
 
-const FontLoader = ({ children }) => {
+interface FontLoaderProps {
+  children: React.ReactNode;
+}
+
+export const FontLoader: React.FC<FontLoaderProps> = ({ children }) => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
@@ -27,7 +31,5 @@ const FontLoader = ({ children }) => {
     return <ActivityIndicator size="small" />;
   }
 
-  return children;
+  return <>{children}</>;
 };
-
-export default FontLoader;

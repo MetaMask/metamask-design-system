@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
+import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
 
 import { AvatarAccountSize, AvatarAccountVariant } from '../../types';
@@ -13,11 +13,11 @@ const meta: Meta<AvatarAccountProps> = {
   argTypes: {
     size: {
       control: 'select',
-      options: AvatarAccountSize,
+      options: Object.keys(AvatarAccountSize),
     },
     variant: {
       control: 'select',
-      options: AvatarAccountVariant,
+      options: Object.keys(AvatarAccountVariant),
     },
     twClassName: {
       control: 'text',
