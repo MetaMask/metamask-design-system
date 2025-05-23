@@ -2,6 +2,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { AvatarNetworkSize } from '../AvatarNetwork';
+
 import { BadgeNetwork } from './BadgeNetwork';
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };

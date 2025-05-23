@@ -1,6 +1,6 @@
 // Blockies.test.tsx
-import React from 'react';
 import { render } from '@testing-library/react-native';
+import React from 'react';
 
 import { Blockies } from './Blockies';
 // @ts-ignore

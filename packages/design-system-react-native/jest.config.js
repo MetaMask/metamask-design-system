@@ -31,6 +31,7 @@ module.exports = merge(baseConfig, {
     '!**/*.dev.{js,ts}', // Exclude .dev files
     '!**/*.assets.{js,ts}', // Exclude .assets files
     '!**/*.types.{js,ts}', // Exclude .types files
+    '!./src/components/temp-components/Blockies/Blockies.utilities.d.ts',
   ],
   // Add coverage ignore patterns
   coveragePathIgnorePatterns: [

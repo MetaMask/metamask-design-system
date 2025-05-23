@@ -7,8 +7,10 @@ import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import { ButtonBase } from '../../../ButtonBase';
-import { IconColor, IconSize } from '../../../Icon';
+import type { IconColor } from '../../../Icon';
+import { IconSize } from '../../../Icon';
 import { TextVariant, FontWeight } from '../../../Text';
+
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 
 const ButtonPrimaryBase = ({

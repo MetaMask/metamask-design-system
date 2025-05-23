@@ -26,9 +26,6 @@ const config = createConfig([
       'packages/design-system-react/src/components/BadgeWrapper/BadgeWrapper.test.tsx',
       'packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.test.tsx',
       'packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.tsx',
-      'packages/design-system-react/src/components/temp-components/Maskicon/Maskicon.test.tsx',
-      'packages/design-system-react/src/components/temp-components/Maskicon/Maskicon.tsx',
-      'packages/design-system-react/src/components/temp-components/Maskicon/Maskicon.utilities.ts',
       // design system react native
       'packages/design-system-react-native/metro.config.js',
       'packages/design-system-react-native/jest.setup.js',
@@ -61,9 +58,6 @@ const config = createConfig([
       'packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx',
       'packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.test.tsx',
       'packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.tsx',
-      'packages/design-system-react-native/src/components/temp-components/Maskicon/Maskicon.test.tsx',
-      'packages/design-system-react-native/src/components/temp-components/Maskicon/Maskicon.tsx',
-      'packages/design-system-react-native/src/components/temp-components/Maskicon/Maskicon.utilities.ts',
       'packages/design-system-react-native/src/components/temp-components/Spinner/Spinner.tsx',
       // storybook react
       'apps/storybook-react/.storybook/*.ts',

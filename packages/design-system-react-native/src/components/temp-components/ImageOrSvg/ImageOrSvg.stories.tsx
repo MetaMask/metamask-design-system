@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 
+import SampleLocalSvg from './assets/ethereum-eth-logo.svg';
 import { ImageOrSvg } from './ImageOrSvg';
 import type { ImageOrSvgProps } from './ImageOrSvg.types';
 
@@ -46,6 +47,7 @@ export const RemoteSvg: Story = {
 };
 
 const sampleLocalPng = require('./assets/ethereum-eth-logo.png');
+
 export const LocalImage: Story = {
   args: {
     width: 200,
@@ -53,8 +55,6 @@ export const LocalImage: Story = {
   },
   render: (args) => <ImageOrSvg {...args} src={sampleLocalPng} />,
 };
-
-import SampleLocalSvg from './assets/ethereum-eth-logo.svg';
 export const LocalSvg: Story = {
   args: {
     width: 200,
