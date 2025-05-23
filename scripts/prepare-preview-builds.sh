@@ -48,10 +48,19 @@ for pkg in "design-system-react-native" "design-system-twrnc-preset"; do
   if [ -d "packages/$pkg/src" ]; then
     echo "- $pkg source files"
     # Use different sed syntax for Linux vs macOS
+    # Transform @metamask/ to @metamask-previews/ except for external dependencies
     if [[ "$OSTYPE" == "darwin"* ]]; then
+      # First transform all @metamask/ to @metamask-previews/
       find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i '' "s/@metamask\//@metamask-previews\//g" {} +
+      # Then change external dependencies back to @metamask/ since they don't have preview versions
+      find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i '' "s/@metamask-previews\/utils/@metamask\/utils/g" {} +
+      find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i '' "s/@metamask-previews\/design-tokens/@metamask\/design-tokens/g" {} +
     else
+      # First transform all @metamask/ to @metamask-previews/
       find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i "s/@metamask\//@metamask-previews\//g" {} +
+      # Then change external dependencies back to @metamask/ since they don't have preview versions
+      find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i "s/@metamask-previews\/utils/@metamask\/utils/g" {} +
+      find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i "s/@metamask-previews\/design-tokens/@metamask\/design-tokens/g" {} +
     fi
   fi
 done
