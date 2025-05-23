@@ -19,3 +19,6 @@ jest.mock('react-native-reanimated', () => {
 
   return Reanimated;
 });
+
+// Silence warnings related to the Animated API
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
