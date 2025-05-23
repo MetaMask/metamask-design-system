@@ -4,6 +4,7 @@ import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
 import { ButtonBaseSize } from '../../../../types';
+
 import { ButtonPrimary } from './ButtonPrimary';
 
 describe('ButtonPrimary', () => {
@@ -14,6 +15,10 @@ describe('ButtonPrimary', () => {
     tw = result.current;
   });
 
+  /**
+   *
+   * @param styleProp
+   */
   function flattenStyles(styleProp: any): Record<string, any>[] {
     if (styleProp == null) {
       return [];
@@ -28,6 +33,11 @@ describe('ButtonPrimary', () => {
     return [];
   }
 
+  /**
+   *
+   * @param styleProp
+   * @param tailwindClass
+   */
   function expectBackground(styleProp: any, tailwindClass: string) {
     const expected = tw`${tailwindClass}`;
     const allStyles = flattenStyles(styleProp);

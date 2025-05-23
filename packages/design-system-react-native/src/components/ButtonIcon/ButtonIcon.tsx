@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
 import { ButtonIconSize } from '../../types';
-import { Icon, IconColor } from '../Icon';
+import type { IconColor } from '../Icon';
+import { Icon } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
+
 import {
   MAP_BUTTONICON_SIZE_ICONSIZE,
   TWCLASSMAP_BUTTONICON_SIZE_DIMENSION,

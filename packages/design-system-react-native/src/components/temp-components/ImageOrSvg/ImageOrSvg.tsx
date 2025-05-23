@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React, { useState, useCallback, useEffect } from 'react';
 import { Image } from 'react-native';
 import { SvgUri } from 'react-native-svg';
@@ -76,16 +75,15 @@ export const ImageOrSvg = ({
         {...svgProps}
       />
     );
-  } else {
-    return (
-      <Image
-        source={src as any}
-        style={[{ width, height } as any, style]}
-        resizeMode="contain"
-        onLoad={onImageLoad}
-        onError={onImageError}
-        {...imageProps}
-      />
-    );
   }
+  return (
+    <Image
+      source={src as any}
+      style={[{ width, height } as any, style]}
+      resizeMode="contain"
+      onLoad={onImageLoad}
+      onError={onImageError}
+      {...imageProps}
+    />
+  );
 };

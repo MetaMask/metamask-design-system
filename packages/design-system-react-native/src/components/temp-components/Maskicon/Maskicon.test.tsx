@@ -1,13 +1,15 @@
-import React from 'react';
-import { render, waitFor } from '@testing-library/react-native';
 import { KnownCaipNamespace, stringToBytes } from '@metamask/utils';
+import { render, waitFor } from '@testing-library/react-native';
+import React from 'react';
 
 import { Maskicon } from './Maskicon';
 import * as MaskiconUtilities from './Maskicon.utilities';
 
 jest.mock('bitcoin-address-validation', () => ({
-  validate: (address: string, network: any) => {
-    if (address === '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa') return true;
+  validate: (address: string, _network: unknown) => {
+    if (address === '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa') {
+      return true;
+    }
     return false;
   },
   Network: {
@@ -20,99 +22,117 @@ jest.mock('@solana/addresses', () => ({
   isAddress: (address: string) => address === 'ValidSolanaAddress',
 }));
 
+// Polyfill TextEncoder for JSDOM (Node < 18)
+if (typeof TextEncoder === 'undefined') {
+  // eslint-disable-next-line import-x/no-nodejs-modules, @typescript-eslint/no-require-imports
+  global.TextEncoder = require('util').TextEncoder;
+}
+
 // Stub for react-native-svg so the component renders without error.
 jest.mock('react-native-svg', () => {
-  const React = require('react');
   return {
-    SvgXml: (props: any) => React.createElement('SvgXml', props, props.xml),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    SvgXml: (props: any) => (
+      <div
+        data-testid={props.testID}
+        style={{ width: props.width, height: props.height }}
+        width={props.width}
+        height={props.height}
+        xml={props.xml}
+        {...props}
+      />
+    ),
   };
 });
 
 // A simple deferred promise helper to control when a Promise resolves.
 const createDeferred = <T,>() => {
-  let resolve: (value: T) => void;
-  let reject: (error: any) => void;
-  const promise = new Promise<T>((res, rej) => {
-    resolve = res;
-    reject = rej;
+  let resolver: (value: T) => void;
+  let rejector: (error: unknown) => void;
+  const promise = new Promise<T>((resolve, reject) => {
+    resolver = resolve;
+    rejector = reject;
   });
-  return { promise, resolve: resolve!, reject: reject! };
+
+  // Using non-null assertion is safe here because we know resolver and rejector are assigned in the Promise constructor
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return { promise, resolve: resolver!, reject: rejector! };
 };
 
 describe('Maskicon Utilities', () => {
-  test('generateSeedEthereum returns numeric seed based on address slice', () => {
+  it('generateSeedEthereum returns numeric seed based on address slice', () => {
     const address = '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8';
     const expectedSeed = parseInt(address.slice(2, 10), 16);
     expect(MaskiconUtilities.generateSeedEthereum(address)).toBe(expectedSeed);
   });
 
-  test('generateSeedNonEthereum returns byte-array seed from normalized lowercased address', () => {
+  it('generateSeedNonEthereum returns byte-array seed from normalized lowercased address', () => {
     const address = 'TestAddress';
     const normalized = address.normalize('NFKC').toLowerCase();
     const expectedSeed = Array.from(stringToBytes(normalized));
-    expect(MaskiconUtilities.generateSeedNonEthereum(address)).toEqual(
+    expect(MaskiconUtilities.generateSeedNonEthereum(address)).toStrictEqual(
       expectedSeed,
     );
   });
 
   describe('seedToString helper', () => {
-    test('pads a numeric seed if hex is less than 6 characters', () => {
+    it('pads a numeric seed if hex is less than 6 characters', () => {
       // For example, 1 in hex is "1", so it should be padded to "100000".
       const result = MaskiconUtilities.seedToString(1);
       expect(result).toBe('100000');
     });
 
-    test('converts a byte array seed to hex and pads if necessary', () => {
+    it('converts a byte array seed to hex and pads if necessary', () => {
       // For an array like [1] which converts to "01", it is padded to "010000".
       const result = MaskiconUtilities.seedToString([1]);
       expect(result).toBe('010000');
     });
 
-    test('returns "seed000" for unsupported seed types', () => {
-      // When provided seed is not a number or an array.
+    it('returns "seed000" for unsupported seed types', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result = MaskiconUtilities.seedToString({} as any);
       expect(result).toBe('seed000');
     });
   });
 
   describe('getCaipNamespaceFromAddress', () => {
-    test('returns Eip155 when address starts with "0x"', async () => {
+    it('returns Eip155 when address starts with "0x"', async () => {
       const address = '0xabcdef1234567890abcdef1234567890abcdef12';
       const ns = await MaskiconUtilities.getCaipNamespaceFromAddress(address);
       expect(ns).toBe(KnownCaipNamespace.Eip155);
     });
 
-    test('returns Bip122 for CAIP-10 formatted address "bip122:..."', async () => {
+    it('returns Bip122 for CAIP-10 formatted address "bip122:..."', async () => {
       const address = 'bip122:someAddress';
       const ns = await MaskiconUtilities.getCaipNamespaceFromAddress(address);
       expect(ns).toBe(KnownCaipNamespace.Bip122);
     });
 
-    test('returns Solana for CAIP-10 formatted address "solana:..."', async () => {
+    it('returns Solana for CAIP-10 formatted address "solana:..."', async () => {
       const address = 'solana:someAddress';
       const ns = await MaskiconUtilities.getCaipNamespaceFromAddress(address);
       expect(ns).toBe(KnownCaipNamespace.Solana);
     });
 
-    test('returns Bip122 for valid Bitcoin address (dynamic import branch)', async () => {
+    it('returns Bip122 for valid Bitcoin address (dynamic import branch)', async () => {
       const address = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
       const ns = await MaskiconUtilities.getCaipNamespaceFromAddress(address);
       expect(ns).toBe(KnownCaipNamespace.Bip122);
     });
 
-    test('returns Solana for valid Solana address (fallback branch)', async () => {
+    it('returns Solana for valid Solana address (fallback branch)', async () => {
       const address = 'ValidSolanaAddress';
       const ns = await MaskiconUtilities.getCaipNamespaceFromAddress(address);
       expect(ns).toBe(KnownCaipNamespace.Solana);
     });
 
-    test('returns Eip155 for CAIP-10 formatted address with mixed-case namespace "Eip155:someAddress"', async () => {
+    it('returns Eip155 for CAIP-10 formatted address with mixed-case namespace "Eip155:someAddress"', async () => {
       const address = 'Eip155:someAddress';
       const ns = await MaskiconUtilities.getCaipNamespaceFromAddress(address);
       expect(ns).toBe(KnownCaipNamespace.Eip155);
     });
 
-    test('returns Eip155 when none of the conditions match (fallback)', async () => {
+    it('returns Eip155 when none of the conditions match (fallback)', async () => {
       const address = 'nonEthereumNonSolanaAddress';
       const ns = await MaskiconUtilities.getCaipNamespaceFromAddress(address);
       expect(ns).toBe(KnownCaipNamespace.Eip155);
@@ -120,7 +140,7 @@ describe('Maskicon Utilities', () => {
   });
 
   describe('createMaskiconSVG', () => {
-    test('generates an SVG string using numeric seed', () => {
+    it('generates an SVG string using numeric seed', () => {
       const seed = 123456;
       const size = 100;
       const svg = MaskiconUtilities.createMaskiconSVG(seed, size);
@@ -131,7 +151,7 @@ describe('Maskicon Utilities', () => {
       expect(svg).toContain('<path');
     });
 
-    test('generates an SVG string using array seed', () => {
+    it('generates an SVG string using array seed', () => {
       const seed = [1, 2, 3, 4, 5];
       const size = 50;
       const svg = MaskiconUtilities.createMaskiconSVG(seed, size);
@@ -142,14 +162,14 @@ describe('Maskicon Utilities', () => {
       expect(svg).toContain('<path');
     });
 
-    test('uses default size 100 if size is not provided', () => {
+    it('uses default size 100 if size is not provided', () => {
       const seed = 123456;
       const svg = MaskiconUtilities.createMaskiconSVG(seed);
       expect(svg).toContain('width="100"');
       expect(svg).toContain('height="100"');
     });
 
-    test('triangle branch (rotation 270) produces expected path segment', () => {
+    it('triangle branch (rotation 270) produces expected path segment', () => {
       const hashSpy = jest
         .spyOn(MaskiconUtilities, 'sdbmHash')
         .mockReturnValue(768);
@@ -167,15 +187,15 @@ describe('Maskicon Utilities', () => {
   });
 
   describe('getMaskiconSVG caching and non-Ethereum branch', () => {
-    test('getMaskiconSVG returns consistent SVG and uses caching', async () => {
+    it('getMaskiconSVG returns consistent SVG and uses caching', async () => {
       const address = '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8';
       const size = 100;
       const svg1 = await MaskiconUtilities.getMaskiconSVG(address, size);
       const svg2 = await MaskiconUtilities.getMaskiconSVG(address, size);
-      expect(svg1).toEqual(svg2);
+      expect(svg1).toStrictEqual(svg2);
     });
 
-    test('uses generateSeedNonEthereum when namespace is not Eip155', async () => {
+    it('uses generateSeedNonEthereum when namespace is not Eip155', async () => {
       // Use a CAIP-formatted address that forces a non-Ethereum (e.g. Solana) branch.
       const addressNonEth = 'solana:someAddress';
       const size = 100;
@@ -183,20 +203,18 @@ describe('Maskicon Utilities', () => {
         addressNonEth,
         size,
       );
-
       // For comparison, generate an Ethereum version.
       const ethAddress = '0xABCDEF1234567890ABCDEF1234567890ABCDEF12';
       const svgEth = await MaskiconUtilities.getMaskiconSVG(ethAddress, size);
-
       // They should be different, indicating the non-Ethereum branch (using generateSeedNonEthereum) was taken.
-      expect(svgNonEth).not.toEqual(svgEth);
-      expect(svgNonEth).toContain('<svg');
+      expect(svgNonEth).not.toStrictEqual(svgEth);
+      expect(svgNonEth).toStrictEqual(expect.stringContaining('<svg'));
     });
   });
 });
 
 describe('Maskicon Component', () => {
-  test('defaults size prop to 32 if size is not provided', async () => {
+  it('defaults size prop to 32 if size is not provided', async () => {
     const { getByTestId } = render(
       <Maskicon
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
@@ -211,7 +229,7 @@ describe('Maskicon Component', () => {
     expect(svgElement.props.height).toBe(32);
   });
 
-  test('renders SvgXml with correct properties once SVG is ready', async () => {
+  it('renders SvgXml with correct properties once SVG is ready', async () => {
     const { getByTestId } = render(
       <Maskicon
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
@@ -225,7 +243,7 @@ describe('Maskicon Component', () => {
     expect(svgElement.props.xml).toContain('<svg');
   });
 
-  test('forwards additional props to the SvgXml component', async () => {
+  it('forwards additional props to the SvgXml component', async () => {
     const { getByTestId } = render(
       <Maskicon
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
@@ -239,7 +257,7 @@ describe('Maskicon Component', () => {
     expect(forwardedElement).toBeDefined();
   });
 
-  test('does not update state if component unmounts before the async effect resolves', async () => {
+  it('does not update state if component unmounts before the async effect resolves', async () => {
     const deferred = createDeferred<string>();
 
     const spy = jest

@@ -8,6 +8,7 @@ import {
   BadgeWrapperPosition,
 } from '../../types';
 import { Text } from '../Text';
+
 import { BadgeWrapper } from './BadgeWrapper';
 
 // Helper function to round numeric properties to two decimals.
@@ -61,7 +62,7 @@ describe('BadgeWrapper', () => {
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
-    const children = wrapper.props.children;
+    const { children } = wrapper.props;
     const anchorContainer = children[0];
     const badgeContainer = children[1];
 
@@ -133,7 +134,7 @@ describe('BadgeWrapper', () => {
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
-    const children = wrapper.props.children;
+    const { children } = wrapper.props;
     const anchorContainer = children[0];
     const badgeContainer = children[1];
 
@@ -204,7 +205,7 @@ describe('BadgeWrapper', () => {
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
-    const children = wrapper.props.children;
+    const { children } = wrapper.props;
     const anchorContainer = children[0];
     const badgeContainer = children[1];
 
@@ -276,7 +277,7 @@ describe('BadgeWrapper', () => {
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
-    const children = wrapper.props.children;
+    const { children } = wrapper.props;
     const anchorContainer = children[0];
     const badgeContainer = children[1];
 
@@ -347,7 +348,7 @@ describe('BadgeWrapper', () => {
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
-    const children = wrapper.props.children;
+    const { children } = wrapper.props;
     const anchorContainer = children[0];
     const badgeContainer = children[1];
 
@@ -419,7 +420,7 @@ describe('BadgeWrapper', () => {
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
-    const children = wrapper.props.children;
+    const { children } = wrapper.props;
     const anchorContainer = children[0];
     const badgeContainer = children[1];
 
@@ -490,7 +491,7 @@ describe('BadgeWrapper', () => {
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
-    const children = wrapper.props.children;
+    const { children } = wrapper.props;
     const anchorContainer = children[0];
     const badgeContainer = children[1];
 
@@ -562,7 +563,7 @@ describe('BadgeWrapper', () => {
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
-    const children = wrapper.props.children;
+    const { children } = wrapper.props;
     const anchorContainer = children[0];
     const badgeContainer = children[1];
 
@@ -619,7 +620,7 @@ describe('BadgeWrapper', () => {
       getByTestId('expectedBadgeStyle').props.children,
     );
     const wrapper = getByTestId('wrapper');
-    const children = wrapper.props.children;
+    const { children } = wrapper.props;
     const badgeContainer = children[1];
     expect(badgeContainer.props.style[1]).toStrictEqual(expectedBadgeStyle[1]);
   });
@@ -651,6 +652,6 @@ describe('BadgeWrapper', () => {
       alignSelf: 'flex-start',
       margin: 10,
     });
-    expect(wrapper.props.accessibilityLabel).toStrictEqual('badge-wrapper');
+    expect(wrapper.props.accessibilityLabel).toBe('badge-wrapper');
   });
 });

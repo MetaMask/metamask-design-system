@@ -15,10 +15,14 @@
    * @copyright Copyright (c) 2010, Robert Eisele
    * @link http://www.xarg.org/2010/03/generate-client-side-png-files-using-javascript/
    * @license http://www.opensource.org/licenses/bsd-license.php BSD License
-   *
    */
 
   // helper functions for that ctx
+  /**
+   *
+   * @param buffer
+   * @param offs
+   */
   function write(buffer, offs) {
     for (let i = 2; i < arguments.length; i++) {
       for (let j = 0; j < arguments[i].length; j++) {
@@ -27,10 +31,18 @@
     }
   }
 
+  /**
+   *
+   * @param w
+   */
   function byte2(w) {
     return String.fromCharCode((w >> 8) & 255, w & 255);
   }
 
+  /**
+   *
+   * @param w
+   */
   function byte4(w) {
     return String.fromCharCode(
       (w >> 24) & 255,
@@ -40,6 +52,10 @@
     );
   }
 
+  /**
+   *
+   * @param w
+   */
   function byte2lsb(w) {
     return String.fromCharCode(w & 255, (w >> 8) & 255);
   }
@@ -146,7 +162,9 @@
       const color = (((((alpha << 8) | red) << 8) | green) << 8) | blue;
 
       if (typeof this.palette[color] === 'undefined') {
-        if (this.pindex == this.depth) return '\x00';
+        if (this.pindex == this.depth) {
+          return '\x00';
+        }
 
         const ndx = this.plte_offs + 8 + 3 * this.pindex;
 
@@ -222,6 +240,12 @@
       );
 
       // compute crc32 of the PNG chunks
+      /**
+       *
+       * @param png
+       * @param offs
+       * @param size
+       */
       function crc32(png, offs, size) {
         let crc = -1;
         for (let i = 4; i < size - 4; i += 1) {
@@ -239,7 +263,7 @@
       crc32(this.buffer, this.iend_offs, this.iend_size);
 
       // convert PNG to string
-      return '\x89PNG\r\n\x1A\n' + this.buffer.join('');
+      return `\x89PNG\r\n\x1A\n${this.buffer.join('')}`;
     };
 
     this.fillRect = function (x, y, w, h, color) {
@@ -258,21 +282,43 @@
    * Assumes h, s, and l are contained in the set [0, 1] and
    * returns r, g, and b in the set [0, 255].
    *
-   * @param   {number}  h       The hue
-   * @param   {number}  s       The saturation
-   * @param   {number}  l       The lightness
-   * @return  {Array}           The RGB representation
+   * @param {number} h - The hue
+   * @param {number} s - The saturation
+   * @param {number} l - The lightness
+   * @returns {Array} The RGB representation
    */
 
+  /**
+   *
+   * @param p
+   * @param q
+   * @param t
+   */
   function hue2rgb(p, q, t) {
-    if (t < 0) t += 1;
-    if (t > 1) t -= 1;
-    if (t < 1 / 6) return p + (q - p) * 6 * t;
-    if (t < 1 / 2) return q;
-    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+    if (t < 0) {
+      t += 1;
+    }
+    if (t > 1) {
+      t -= 1;
+    }
+    if (t < 1 / 6) {
+      return p + (q - p) * 6 * t;
+    }
+    if (t < 1 / 2) {
+      return q;
+    }
+    if (t < 2 / 3) {
+      return p + (q - p) * (2 / 3 - t) * 6;
+    }
     return p;
   }
 
+  /**
+   *
+   * @param h
+   * @param s
+   * @param l
+   */
   function hsl2rgb(h, s, l) {
     let r, g, b;
 
@@ -292,6 +338,10 @@
   // The random number is a js implementation of the Xorshift PRNG
   const randseed = new Array(4); // Xorshift: [x, y, z, w] 32 bit values
 
+  /**
+   *
+   * @param seed
+   */
   function seedrand(seed) {
     for (var i = 0; i < randseed.length; i++) {
       randseed[i] = 0;
@@ -302,6 +352,9 @@
     }
   }
 
+  /**
+   *
+   */
   function rand() {
     // based on Java's String.hashCode(), expanded to 4 32bit values
     const t = randseed[0] ^ (randseed[0] << 11);
@@ -314,17 +367,24 @@
     return (randseed[3] >>> 0) / ((1 << 31) >>> 0);
   }
 
+  /**
+   *
+   */
   function createColor() {
-    //saturation is the whole color spectrum
+    // saturation is the whole color spectrum
     const h = Math.floor(rand() * 360);
-    //saturation goes from 40 to 100, it avoids greyish colors
+    // saturation goes from 40 to 100, it avoids greyish colors
     const s = rand() * 60 + 40;
-    //lightness can be anything from 0 to 100, but probabilities are a bell curve around 50%
+    // lightness can be anything from 0 to 100, but probabilities are a bell curve around 50%
     const l = (rand() + rand() + rand() + rand()) * 25;
 
     return [h / 360, s / 100, l / 100];
   }
 
+  /**
+   *
+   * @param size
+   */
   function createImageData(size) {
     const width = size; // Only support square icons for now
     const height = size;
@@ -352,6 +412,10 @@
     return data;
   }
 
+  /**
+   *
+   * @param opts
+   */
   function buildOpts(opts) {
     if (!opts.seed) {
       throw new Error('No seed provided');
@@ -371,6 +435,10 @@
     );
   }
 
+  /**
+   *
+   * @param address
+   */
   function toDataUrl(address) {
     const cache = Blockies.cache[address];
     if (address && cache) {
