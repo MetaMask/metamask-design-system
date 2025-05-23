@@ -27,7 +27,11 @@ export type ThemeColors = {
     default: string;
     /** For sunken neutral surface below background/default */
     alternative: string;
-    /** For raised neutral surface above background/default */
+    /** For section bg usually over background/default */
+    section: string;
+    /** For subsection bg usually over background/section */
+    subsection: string;
+    /** For muted neutral surface */
     muted: string;
     /** Hover state surface for background/default */
     defaultHover: string;

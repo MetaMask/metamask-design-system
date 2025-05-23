@@ -6,6 +6,8 @@ export const colors = {
     alternative: 'var(--color-background-alternative)',
     'alternative-hover': 'var(--color-background-alternative-hover)',
     'alternative-pressed': 'var(--color-background-alternative-pressed)',
+    section: 'var(--color-background-section)',
+    subsection: 'var(--color-background-subsection)',
     muted: 'var(--color-background-muted)',
     'muted-hover': 'var(--color-background-muted-hover)',
     'muted-pressed': 'var(--color-background-muted-pressed)',

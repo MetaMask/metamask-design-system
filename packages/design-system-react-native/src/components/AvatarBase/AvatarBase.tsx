@@ -26,7 +26,7 @@ export const AvatarBase = ({
 }: AvatarBaseProps) => {
   const tw = useTailwind();
   const twContainerClassNames = `
-    items-center justify-center overflow-hidden bg-background-muted
+    items-center justify-center overflow-hidden bg-background-section
     ${
       shape === AvatarBaseShape.Circle
         ? 'rounded-full'
