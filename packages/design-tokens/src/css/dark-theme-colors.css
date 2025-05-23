@@ -41,8 +41,8 @@
   --color-border-default: var(--brand-colors-grey-grey400);
   /* Muted color for borders (#858b9a33) */
   --color-border-muted: #858b9a33;
-  /* Default color for overlays (scrim) (black-40%) */
-  --color-overlay-default: #00000066;
+  /* Default color for overlays (scrim) (#3f434a99) */
+  --color-overlay-default: #3f434a99;
   /* Dimmer color for overlays (scrim) (black-80%) */
   --color-overlay-alternative: #000000cc;
   /* For elements placed on top of overlay/alternative (#ffffff) */

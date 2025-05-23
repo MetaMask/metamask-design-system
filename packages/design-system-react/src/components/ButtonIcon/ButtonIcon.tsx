@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { ButtonIconSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
@@ -10,7 +10,7 @@ import {
 } from './ButtonIcon.constants';
 import type { ButtonIconProps } from './ButtonIcon.types';
 
-export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
+export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
   (
     {
       className,
@@ -41,7 +41,7 @@ export const ButtonIcon = React.forwardRef<HTMLButtonElement, ButtonIconProps>(
       ],
       // Non-floating styles
       !isFloating && [
-        'rounded bg-transparent',
+        'bg-transparent rounded',
         // Only apply hover/active styles when interactive
         isInteractive && 'hover:bg-hover active:bg-pressed',
         !isInverse && 'text-icon-default',

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import { AvatarTokenSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 
 import type { AvatarTokenProps } from './AvatarToken.types';
 
-export const AvatarToken = React.forwardRef<HTMLDivElement, AvatarTokenProps>(
+export const AvatarToken = forwardRef<HTMLDivElement, AvatarTokenProps>(
   (
     {
       src,

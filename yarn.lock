@@ -1770,6 +1770,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@egjs/hammerjs@npm:^2.0.17":
+  version: 2.0.17
+  resolution: "@egjs/hammerjs@npm:2.0.17"
+  dependencies:
+    "@types/hammerjs": "npm:^2.0.36"
+  checksum: 10/f695129d45edfcfd6c5f2d1d36186da36ffade013991972ce23721a6b7ad7f214ce282abc4023e3f6b63062620852a63e897b523f247804afc7acd188fee9d9d
+  languageName: node
+  linkType: hard
+
 "@es-joy/jsdoccomment@npm:~0.49.0":
   version: 0.49.0
   resolution: "@es-joy/jsdoccomment@npm:0.49.0"
@@ -3236,6 +3245,7 @@ __metadata:
     metro-react-native-babel-preset: "npm:^0.77.0"
     react: "npm:^18.2.0"
     react-native: "npm:^0.72.15"
+    react-native-gesture-handler: "npm:^1.10.3"
     react-native-jazzicon: "npm:^0.1.2"
     react-native-reanimated: "npm:3.3.0"
     react-native-svg: "npm:^15.10.1"
@@ -3502,6 +3512,7 @@ __metadata:
     expo-status-bar: "npm:~1.6.0"
     expo-system-ui: "npm:~2.4.0"
     react-dom: "npm:^18.2.0"
+    react-native-gesture-handler: "npm:^1.10.3"
     react-native-reanimated: "npm:3.3.0"
     react-native-safe-area-context: "npm:^4.14.0"
     react-native-svg-transformer: "npm:^1.5.0"
@@ -5991,6 +6002,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/hammerjs@npm:^2.0.36":
+  version: 2.0.46
+  resolution: "@types/hammerjs@npm:2.0.46"
+  checksum: 10/1b6502d668f45ca49fb488c01f7938d3aa75e989d70c64801c8feded7d659ca1a118f745c1b604d220efe344c93231767d5cc68c05e00e069c14539b6143cfd9
+  languageName: node
+  linkType: hard
+
 "@types/is-function@npm:^1.0.0":
   version: 1.0.3
   resolution: "@types/is-function@npm:1.0.3"
@@ -8406,9 +8424,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001646, caniuse-lite@npm:^1.0.30001669":
-  version: 1.0.30001687
-  resolution: "caniuse-lite@npm:1.0.30001687"
-  checksum: 10/0b6a064d5df185ec60b842dba5a27d2c54a66967b7f89571bfd0a8256f0863b1f2a910da6a19ed1b8f534bedf0663cae90309a4a6899bba2286205d459b32f95
+  version: 1.0.30001718
+  resolution: "caniuse-lite@npm:1.0.30001718"
+  checksum: 10/e172a4c156f743cc947e659f353ad9edb045725cc109a02cc792dcbf98569356ebfa4bb4356e3febf87427aab0951c34c1ee5630629334f25ae6f76de7d86fd0
   languageName: node
   linkType: hard
 
@@ -12801,6 +12819,15 @@ __metadata:
     minimalistic-assert: "npm:^1.0.0"
     minimalistic-crypto-utils: "npm:^1.0.1"
   checksum: 10/0298a1445b8029a69b713d918ecaa84a1d9f614f5857e0c6e1ca517abfa1357216987b2ee08cc6cc73ba82a6c6ddf2ff11b9717a653530ef03be599d4699b836
+  languageName: node
+  linkType: hard
+
+"hoist-non-react-statics@npm:^3.3.0":
+  version: 3.3.2
+  resolution: "hoist-non-react-statics@npm:3.3.2"
+  dependencies:
+    react-is: "npm:^16.7.0"
+  checksum: 10/1acbe85f33e5a39f90c822ad4d28b24daeb60f71c545279431dc98c312cd28a54f8d64788e477fe21dc502b0e3cf58589ebe5c1ad22af27245370391c2d24ea6
   languageName: node
   linkType: hard
 
@@ -18383,7 +18410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.13.1":
+"react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 10/5aa564a1cde7d391ac980bedee21202fc90bdea3b399952117f54fb71a932af1e5902020144fb354b4690b2414a0c7aafe798eb617b76a3d441d956db7726fdf
@@ -18394,6 +18421,19 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 10/73b36281e58eeb27c9cc6031301b6ae19ecdc9f18ae2d518bdb39b0ac564e65c5779405d623f1df9abf378a13858b79442480244bd579968afc1faf9a2ce5e05
+  languageName: node
+  linkType: hard
+
+"react-native-gesture-handler@npm:^1.10.3":
+  version: 1.10.3
+  resolution: "react-native-gesture-handler@npm:1.10.3"
+  dependencies:
+    "@egjs/hammerjs": "npm:^2.0.17"
+    fbjs: "npm:^3.0.0"
+    hoist-non-react-statics: "npm:^3.3.0"
+    invariant: "npm:^2.2.4"
+    prop-types: "npm:^15.7.2"
+  checksum: 10/b7004d3fc40e53ee83f6d08049d5d8ea45441abe17d13eb608e0372a3f38109e063e6ebe78cbc83aed8ab15e436b67925d0ecb26bc331c97c816a44a6aed7df1
   languageName: node
   linkType: hard
 

@@ -78,7 +78,7 @@ describe('Icon', () => {
         <Icon
           name={IconName.AddSquare}
           color={IconColor.IconDefault}
-          className="text-lg text-inherit"
+          className="text-inherit text-lg"
         />,
       );
       const icon = container.firstChild;
@@ -117,7 +117,7 @@ describe('Icon', () => {
           name={IconName.AddSquare}
           color={IconColor.IconDefault}
           size={IconSize.Md}
-          className="h-10 w-10 text-inherit"
+          className="text-inherit h-10 w-10"
         />,
       );
       const icon = container.firstChild;
