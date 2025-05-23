@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import './config';
 import { getStorybookUI } from '@storybook/react-native';
 import { registerRootComponent } from 'expo';
