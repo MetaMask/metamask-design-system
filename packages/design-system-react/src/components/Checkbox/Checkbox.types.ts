@@ -4,8 +4,8 @@ import type { IconProps } from '../Icon';
 import type { TextProps } from '../Text';
 
 export type CheckboxProps = Omit<
-  ComponentProps<'button'>,
-  'style' | 'className' | 'children'
+  ComponentProps<'label'>,
+  'style' | 'className' | 'children' | 'htmlFor'
 > & {
   /**
    * Required prop to determine whether the checkbox is currently selected.
@@ -43,6 +43,16 @@ export type CheckboxProps = Omit<
    * Use this to update your state.
    */
   onChange: (isSelected: boolean) => void;
+
+  /**
+   * Optional props passed to the input element.
+   */
+  inputProps?: Omit<
+    ComponentProps<'input'>,
+    'type' | 'checked' | 'onChange' | 'disabled'
+  > & {
+    [key: `data-${string}`]: string;
+  };
 
   /**
    * Optional props passed to the container div wrapping the checkbox icon.

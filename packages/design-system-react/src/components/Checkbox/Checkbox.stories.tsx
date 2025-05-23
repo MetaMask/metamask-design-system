@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+
+import { Button, ButtonVariant } from '../Button';
 
 import { Checkbox } from './Checkbox';
 import type { CheckboxProps } from './Checkbox.types';
@@ -93,4 +95,28 @@ export const Label: Story = {
       <CheckboxStory isSelected={false} label="Checkbox with label" />
     </div>
   ),
+};
+
+export const Ref: Story = {
+  render: () => {
+    const [isSelected, setIsSelected] = useState(false);
+    const checkboxRef = useRef<{ toggle: () => void }>(null);
+
+    return (
+      <div className="inline-flex flex-col gap-4">
+        <Checkbox
+          ref={checkboxRef}
+          isSelected={isSelected}
+          onChange={() => setIsSelected(!isSelected)}
+          label="Toggle me via ref"
+        />
+        <Button
+          variant={ButtonVariant.Primary}
+          onClick={() => checkboxRef.current?.toggle()}
+        >
+          Toggle checkbox
+        </Button>
+      </div>
+    );
+  },
 };

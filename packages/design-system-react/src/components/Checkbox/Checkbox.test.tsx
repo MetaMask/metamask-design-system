@@ -12,15 +12,40 @@ describe('Checkbox', () => {
   it('toggles selection state when pressed', () => {
     const onChange = jest.fn();
     const { rerender } = render(
-      <Checkbox isSelected={false} onChange={onChange} data-testid="chk" />,
+      <Checkbox
+        isSelected={false}
+        onChange={onChange}
+        inputProps={{ 'data-testid': 'chk-input' }}
+      />,
     );
-    const button = screen.getByTestId('chk');
-    fireEvent.click(button);
+    const input = screen.getByTestId('chk-input');
+    fireEvent.click(input);
     expect(onChange).toHaveBeenCalledWith(true);
-    expect(button).toHaveAttribute('aria-checked', 'false');
+    expect(input).not.toBeChecked();
 
-    rerender(<Checkbox isSelected onChange={onChange} data-testid="chk" />);
-    expect(button).toHaveAttribute('aria-checked', 'true');
+    rerender(
+      <Checkbox
+        isSelected
+        onChange={onChange}
+        inputProps={{ 'data-testid': 'chk-input' }}
+      />,
+    );
+    expect(input).toBeChecked();
+  });
+
+  it('toggles when label is clicked', () => {
+    const onChange = jest.fn();
+    render(
+      <Checkbox
+        isSelected={false}
+        onChange={onChange}
+        label="Click me"
+        data-testid="chk-label"
+      />,
+    );
+    const label = screen.getByTestId('chk-label');
+    fireEvent.click(label);
+    expect(onChange).toHaveBeenCalledWith(true);
   });
 
   it('ignores clicks when disabled', () => {
@@ -30,13 +55,13 @@ describe('Checkbox', () => {
         isSelected={false}
         isDisabled
         onChange={onChange}
-        data-testid="chk"
+        inputProps={{ 'data-testid': 'chk-input' }}
       />,
     );
-    const button = screen.getByTestId('chk');
-    fireEvent.click(button);
+    const input = screen.getByTestId('chk-input');
+    fireEvent.click(input);
     expect(onChange).not.toHaveBeenCalled();
-    expect(button).toHaveAttribute('aria-disabled', 'true');
+    expect(input).toBeDisabled();
   });
 
   it('applies invalid border styles', () => {
@@ -65,19 +90,22 @@ describe('Checkbox', () => {
     );
   });
 
-  it('omits aria-label when label is a React element', () => {
+  it('sets aria-invalid on input when isInvalid is true', () => {
     render(
       <Checkbox
         onChange={jest.fn()}
         isSelected={false}
-        label={<span>Label</span>}
-        data-testid="chk"
+        isInvalid
+        inputProps={{ 'data-testid': 'chk-input' }}
       />,
     );
-    expect(screen.getByTestId('chk')).not.toHaveAttribute('aria-label');
+    expect(screen.getByTestId('chk-input')).toHaveAttribute(
+      'aria-invalid',
+      'true',
+    );
   });
 
-  it('merges className and style on outer container', () => {
+  it('merges className and style on label container', () => {
     render(
       <Checkbox
         onChange={jest.fn()}
@@ -85,12 +113,12 @@ describe('Checkbox', () => {
         label="Test"
         className="custom"
         style={{ marginLeft: 4 }}
-        data-testid="chk"
+        data-testid="chk-label"
       />,
     );
-    const button = screen.getByTestId('chk');
-    expect(button).toHaveClass('custom');
-    expect(button).toHaveStyle({ marginLeft: '4px' });
+    const label = screen.getByTestId('chk-label');
+    expect(label).toHaveClass('custom');
+    expect(label).toHaveStyle({ marginLeft: '4px' });
   });
 
   it('merges checkboxContainerProps className', () => {
@@ -102,6 +130,23 @@ describe('Checkbox', () => {
       />,
     );
     expect(screen.getByTestId('inner')).toHaveClass('p-2');
+  });
+
+  it('merges inputProps on the input element', () => {
+    render(
+      <Checkbox
+        onChange={jest.fn()}
+        isSelected={false}
+        inputProps={{
+          className: 'custom-input',
+          'data-testid': 'chk-input',
+          'aria-describedby': 'help-text',
+        }}
+      />,
+    );
+    const input = screen.getByTestId('chk-input');
+    expect(input).toHaveClass('custom-input');
+    expect(input).toHaveAttribute('aria-describedby', 'help-text');
   });
 
   it('exposes toggle method via ref', () => {
@@ -121,5 +166,19 @@ describe('Checkbox', () => {
     );
     ref.current?.toggle();
     expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('handles keyboard Enter key on input', () => {
+    const onChange = jest.fn();
+    render(
+      <Checkbox
+        isSelected={false}
+        onChange={onChange}
+        inputProps={{ 'data-testid': 'chk-input' }}
+      />,
+    );
+    const input = screen.getByTestId('chk-input');
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onChange).toHaveBeenCalledWith(true);
   });
 });

@@ -8,8 +8,11 @@ import * as CheckboxStories from './Checkbox.stories';
 
 ```tsx
 import { Checkbox } from '@metamask/design-system-react';
+import { useState } from 'react';
 
-<Checkbox label="Enable notifications" />;
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox label="Enable notifications" isSelected={isSelected} onChange={() => setIsSelected(!isSelected)} />;
 ```
 
 <Canvas of={CheckboxStories.Default} />
@@ -63,7 +66,11 @@ Optional props to be passed to the label's Text component.
 Required callback for when the checked state changes. Use this to update your state.
 
 ```tsx
-<Checkbox label="Check me" onChange={(val) => console.log(val)} />
+import { useState } from 'react';
+
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox label="Check me" isSelected={isSelected} onChange={() => setIsSelected(!isSelected)} />
 ```
 
 ---
@@ -102,7 +109,7 @@ const checkboxRef = useRef<{ toggle: () => void }>(null);
   <Checkbox
     ref={checkboxRef}
     isSelected={isSelected}
-    onChange={() => setIsEnabled(!isSelected)}}
+    onChange={() => setIsSelected(!isSelected)}}
     label="Toggle me via ref"
   />
   <Button
