@@ -10,6 +10,7 @@ import type { CheckboxProps } from './Checkbox.types';
 export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
   (
     {
+      id,
       isSelected,
       isDisabled = false,
       isInvalid = false,
@@ -48,10 +49,6 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
 
     useImperativeHandle(ref, () => ({ toggle: handleClick }), [handleClick]);
 
-    // Generate a unique ID for the input if not provided
-    const inputId =
-      inputProps?.id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
-
     const outerClassName = twMerge(
       'inline-flex items-center',
       isDisabled && 'cursor-not-allowed opacity-50',
@@ -82,16 +79,11 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     );
 
     return (
-      <label
-        htmlFor={inputId}
-        className={outerClassName}
-        style={style}
-        {...props}
-      >
+      <label htmlFor={id} className={outerClassName} style={style} {...props}>
         <div className="relative">
           <input
             type="checkbox"
-            id={inputId}
+            id={id}
             checked={isSelected}
             disabled={isDisabled}
             aria-invalid={isInvalid}

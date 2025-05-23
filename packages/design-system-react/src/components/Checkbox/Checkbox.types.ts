@@ -8,6 +8,12 @@ export type CheckboxProps = Omit<
   'style' | 'className' | 'children' | 'htmlFor'
 > & {
   /**
+   * Required unique identifier for the checkbox input element.
+   * This is used for the input's id and the label's htmlFor attributes.
+   */
+  id: string;
+
+  /**
    * Required prop to determine whether the checkbox is currently selected.
    * This component is fully controlled, so you must manage this state
    * in your parent component.

@@ -5,7 +5,14 @@ import { Checkbox } from './Checkbox';
 
 describe('Checkbox', () => {
   it('renders label when provided', () => {
-    render(<Checkbox onChange={jest.fn()} isSelected={false} label="Accept" />);
+    render(
+      <Checkbox
+        id="test-checkbox"
+        onChange={jest.fn()}
+        isSelected={false}
+        label="Accept"
+      />,
+    );
     expect(screen.getByText('Accept')).toBeInTheDocument();
   });
 
@@ -13,6 +20,7 @@ describe('Checkbox', () => {
     const onChange = jest.fn();
     const { rerender } = render(
       <Checkbox
+        id="test-checkbox"
         isSelected={false}
         onChange={onChange}
         inputProps={{ 'data-testid': 'chk-input' }}
@@ -25,6 +33,7 @@ describe('Checkbox', () => {
 
     rerender(
       <Checkbox
+        id="test-checkbox"
         isSelected
         onChange={onChange}
         inputProps={{ 'data-testid': 'chk-input' }}
@@ -37,6 +46,7 @@ describe('Checkbox', () => {
     const onChange = jest.fn();
     render(
       <Checkbox
+        id="test-checkbox"
         isSelected={false}
         onChange={onChange}
         label="Click me"
@@ -52,6 +62,7 @@ describe('Checkbox', () => {
     const onChange = jest.fn();
     render(
       <Checkbox
+        id="test-checkbox"
         isSelected={false}
         isDisabled
         onChange={onChange}
@@ -67,6 +78,7 @@ describe('Checkbox', () => {
   it('applies invalid border styles', () => {
     render(
       <Checkbox
+        id="test-checkbox"
         onChange={jest.fn()}
         isSelected={false}
         isInvalid
@@ -79,6 +91,7 @@ describe('Checkbox', () => {
   it('applies selected container styles', () => {
     render(
       <Checkbox
+        id="test-checkbox"
         onChange={jest.fn()}
         isSelected
         checkboxContainerProps={{ 'data-testid': 'inner' }}
@@ -93,6 +106,7 @@ describe('Checkbox', () => {
   it('sets aria-invalid on input when isInvalid is true', () => {
     render(
       <Checkbox
+        id="test-checkbox"
         onChange={jest.fn()}
         isSelected={false}
         isInvalid
@@ -108,6 +122,7 @@ describe('Checkbox', () => {
   it('merges className and style on label container', () => {
     render(
       <Checkbox
+        id="test-checkbox"
         onChange={jest.fn()}
         isSelected={false}
         label="Test"
@@ -124,6 +139,7 @@ describe('Checkbox', () => {
   it('merges checkboxContainerProps className', () => {
     render(
       <Checkbox
+        id="test-checkbox"
         onChange={jest.fn()}
         isSelected={false}
         checkboxContainerProps={{ className: 'p-2', 'data-testid': 'inner' }}
@@ -135,6 +151,7 @@ describe('Checkbox', () => {
   it('merges inputProps on the input element', () => {
     render(
       <Checkbox
+        id="test-checkbox"
         onChange={jest.fn()}
         isSelected={false}
         inputProps={{
@@ -149,10 +166,34 @@ describe('Checkbox', () => {
     expect(input).toHaveAttribute('aria-describedby', 'help-text');
   });
 
+  it('uses the provided id for input and label association', () => {
+    render(
+      <Checkbox
+        id="custom-checkbox-id"
+        onChange={jest.fn()}
+        isSelected={false}
+        label="Test label"
+        data-testid="chk-label"
+      />,
+    );
+    const label = screen.getByTestId('chk-label');
+    const input = screen.getByRole('checkbox');
+
+    expect(input).toHaveAttribute('id', 'custom-checkbox-id');
+    expect(label).toHaveAttribute('for', 'custom-checkbox-id');
+  });
+
   it('exposes toggle method via ref', () => {
     const ref = createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
-    render(<Checkbox isSelected={false} ref={ref} onChange={onChange} />);
+    render(
+      <Checkbox
+        id="test-checkbox"
+        isSelected={false}
+        ref={ref}
+        onChange={onChange}
+      />,
+    );
     expect(ref.current).not.toBeNull();
     ref.current?.toggle();
     expect(onChange).toHaveBeenCalledWith(true);
@@ -162,7 +203,13 @@ describe('Checkbox', () => {
     const ref = createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
     render(
-      <Checkbox isSelected={false} ref={ref} onChange={onChange} isDisabled />,
+      <Checkbox
+        id="test-checkbox"
+        isSelected={false}
+        ref={ref}
+        onChange={onChange}
+        isDisabled
+      />,
     );
     ref.current?.toggle();
     expect(onChange).not.toHaveBeenCalled();
@@ -172,6 +219,7 @@ describe('Checkbox', () => {
     const onChange = jest.fn();
     render(
       <Checkbox
+        id="test-checkbox"
         isSelected={false}
         onChange={onChange}
         inputProps={{ 'data-testid': 'chk-input' }}

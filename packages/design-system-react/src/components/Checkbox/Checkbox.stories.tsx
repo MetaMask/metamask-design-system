@@ -41,10 +41,13 @@ export default meta;
 
 type Story = StoryObj<CheckboxProps>;
 const CheckboxStory: React.FC<Omit<CheckboxProps, 'onChange'>> = (args) => {
-  const { ref: _ref, ...rest } = args;
+  const { ref: _ref, id, ...rest } = args;
   const [isSelected, setIsSelected] = useState(args.isSelected);
+  const checkboxId =
+    id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
   return (
     <Checkbox
+      id={checkboxId}
       {...rest}
       isSelected={isSelected}
       onChange={() => setIsSelected(!isSelected)}
@@ -64,8 +67,12 @@ export const Default: Story = {
 export const IsSelected: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <CheckboxStory isSelected={false} label="Unchecked" />
-      <CheckboxStory isSelected label="Checked" />
+      <CheckboxStory
+        id="unchecked-checkbox"
+        isSelected={false}
+        label="Unchecked"
+      />
+      <CheckboxStory id="checked-checkbox" isSelected label="Checked" />
     </div>
   ),
 };
@@ -73,8 +80,13 @@ export const IsSelected: Story = {
 export const IsDisabled: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <CheckboxStory isSelected={false} label="Enabled" />
-      <CheckboxStory isSelected={false} isDisabled label="Disabled" />
+      <CheckboxStory id="enabled-checkbox" isSelected={false} label="Enabled" />
+      <CheckboxStory
+        id="disabled-checkbox"
+        isSelected={false}
+        isDisabled
+        label="Disabled"
+      />
     </div>
   ),
 };
@@ -82,8 +94,13 @@ export const IsDisabled: Story = {
 export const IsInvalid: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <CheckboxStory isSelected={false} label="Normal" />
-      <CheckboxStory isSelected={false} isInvalid label="Invalid" />
+      <CheckboxStory id="normal-checkbox" isSelected={false} label="Normal" />
+      <CheckboxStory
+        id="invalid-checkbox"
+        isSelected={false}
+        isInvalid
+        label="Invalid"
+      />
     </div>
   ),
 };
@@ -91,8 +108,12 @@ export const IsInvalid: Story = {
 export const Label: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <CheckboxStory isSelected={false} />
-      <CheckboxStory isSelected={false} label="Checkbox with label" />
+      <CheckboxStory id="no-label-checkbox" isSelected={false} />
+      <CheckboxStory
+        id="with-label-checkbox"
+        isSelected={false}
+        label="Checkbox with label"
+      />
     </div>
   ),
 };
@@ -105,6 +126,7 @@ export const Ref: Story = {
     return (
       <div className="inline-flex flex-col gap-4">
         <Checkbox
+          id="ref-controlled-checkbox"
           ref={checkboxRef}
           isSelected={isSelected}
           onChange={() => setIsSelected(!isSelected)}
