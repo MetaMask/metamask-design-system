@@ -1,9 +1,11 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
-import { renderHook } from '@testing-library/react-hooks';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { ButtonTertiary } from './ButtonTertiary';
+import { renderHook } from '@testing-library/react-hooks';
+import { render, fireEvent } from '@testing-library/react-native';
+import React from 'react';
+
 import { ButtonBaseSize } from '../../../../types';
+
+import { ButtonTertiary } from './ButtonTertiary';
 
 describe('ButtonTertiary', () => {
   let tw: ReturnType<typeof useTailwind>;
@@ -13,6 +15,10 @@ describe('ButtonTertiary', () => {
     tw = result.current;
   });
 
+  /**
+   *
+   * @param styleProp
+   */
   function flattenStyles(styleProp: any): Record<string, any>[] {
     if (styleProp == null) {
       return [];
@@ -26,6 +32,11 @@ describe('ButtonTertiary', () => {
     return [];
   }
 
+  /**
+   *
+   * @param styleProp
+   * @param tailwindClass
+   */
   function expectBackground(styleProp: any, tailwindClass: string) {
     const expected = tw`${tailwindClass}`;
     const all = flattenStyles(styleProp);
@@ -36,6 +47,11 @@ describe('ButtonTertiary', () => {
     );
   }
 
+  /**
+   *
+   * @param styleProp
+   * @param tailwindClass
+   */
   function expectBorder(styleProp: any, tailwindClass: string) {
     const expected = tw`${tailwindClass}`;
     const all = flattenStyles(styleProp);
