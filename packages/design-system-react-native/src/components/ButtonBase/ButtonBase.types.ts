@@ -1,9 +1,4 @@
-import type {
-  PressableProps,
-  StyleProp,
-  ViewStyle,
-  ViewProps,
-} from 'react-native';
+import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { ButtonBaseSize } from '../../types';
 import type { IconProps, IconName } from '../Icon';

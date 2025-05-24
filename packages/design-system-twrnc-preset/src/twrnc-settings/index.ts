@@ -1,5 +1,14 @@
 export * from './colors';
-export * from './colors.types';
 export * from './colors.utilities';
 export * from './typography';
-export * from './typography.types';
+
+// Export runtime values (enums)
+export { ColorSet, ColorScheme } from './colors.types';
+export type { ColorSetListProps } from './colors.types';
+
+export type {
+  TypographyVariant,
+  FontWeight,
+  FontStyle,
+  TypographyTailwindConfigProps,
+} from './typography.types';
