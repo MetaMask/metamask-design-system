@@ -1,4 +1,9 @@
-import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
+import type {
+  PressableProps,
+  StyleProp,
+  ViewStyle,
+  ViewProps,
+} from 'react-native';
 
 import type { ButtonBaseSize } from '../../types';
 import type { IconProps, IconName } from '../Icon';
@@ -17,6 +22,13 @@ export type ButtonBaseProps = {
    * Optional props to be passed to the Text component when children is a string
    */
   textProps?: Omit<Partial<TextProps>, 'children'>;
+  /**
+   * Optional props to be passed to the content container View
+   */
+  contentContainerProps?: {
+    style?: StyleProp<ViewStyle>;
+    twClassName?: string;
+  };
   /**
    * Optional prop to control the size of the ButtonBase
    * Possible values: ButtonBaseSize.Sm (32px), ButtonBaseSize.Md (40px), ButtonBaseSize.Lg (48px)

@@ -1,4 +1,5 @@
-export { colorSetList } from './colors';
-export { ColorSet, ColorScheme } from './colors.types';
-
-export { typographyTailwindConfig } from './typography';
+export * from './colors';
+export * from './colors.types';
+export * from './colors.utilities';
+export * from './typography';
+export * from './typography.types';

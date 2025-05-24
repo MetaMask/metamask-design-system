@@ -20,6 +20,7 @@ export const ButtonIcon = ({
   isDisabled = false,
   isInverse = false,
   isFloating = false,
+  accessibilityLabel,
   onPressIn,
   onPressOut,
   twClassName = '',
@@ -55,6 +56,7 @@ export const ButtonIcon = ({
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
       accessible
+      accessibilityLabel={accessibilityLabel}
       style={[tw`${twContainerClassNames}`, style]}
       testID="button-icon"
       {...props}
