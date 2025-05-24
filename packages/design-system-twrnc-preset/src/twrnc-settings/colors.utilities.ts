@@ -36,3 +36,34 @@ export const flattenColors = (colors: Record<string, any>, prefix = '') => {
   }
   return result;
 };
+
+/**
+ * Helper function to extract shorthand color utilities for specific color categories.
+ * This enables shorter class names like bg-default instead of bg-background-default.
+ *
+ * @param flatColors - Flattened color object from flattenColors
+ * @returns Object with shorthand color utilities for text, background, and border
+ */
+export const generateShorthandColors = (flatColors: Record<string, string>) => {
+  const shorthandColors = {
+    text: {} as Record<string, string>,
+    background: {} as Record<string, string>,
+    border: {} as Record<string, string>,
+  };
+
+  // Extract background colors (bg-default instead of bg-background-default)
+  Object.entries(flatColors).forEach(([key, value]) => {
+    if (key.startsWith('background-')) {
+      const shortKey = key.replace('background-', '');
+      shorthandColors.background[shortKey] = value;
+    } else if (key.startsWith('text-')) {
+      const shortKey = key.replace('text-', '');
+      shorthandColors.text[shortKey] = value;
+    } else if (key.startsWith('border-')) {
+      const shortKey = key.replace('border-', '');
+      shorthandColors.border[shortKey] = value;
+    }
+  });
+
+  return shorthandColors;
+};

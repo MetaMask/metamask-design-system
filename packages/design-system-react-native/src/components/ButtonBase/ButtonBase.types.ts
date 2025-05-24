@@ -18,6 +18,13 @@ export type ButtonBaseProps = {
    */
   textProps?: Omit<Partial<TextProps>, 'children'>;
   /**
+   * Optional props to be passed to the content container View
+   */
+  contentContainerProps?: {
+    style?: StyleProp<ViewStyle>;
+    twClassName?: string;
+  };
+  /**
    * Optional prop to control the size of the ButtonBase
    * Possible values: ButtonBaseSize.Sm (32px), ButtonBaseSize.Md (40px), ButtonBaseSize.Lg (48px)
    *
