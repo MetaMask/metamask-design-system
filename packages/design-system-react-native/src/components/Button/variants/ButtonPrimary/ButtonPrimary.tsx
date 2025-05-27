@@ -34,18 +34,18 @@ const ButtonPrimaryBase = ({
     ${
       isInverse && isDanger
         ? isPressed || isLoading
-          ? 'bg-background-defaultPressed'
+          ? 'bg-background-default-pressed'
           : 'bg-background-default'
         : isDanger
           ? isPressed || isLoading
-            ? 'bg-error-defaultPressed'
+            ? 'bg-error-default-pressed'
             : 'bg-error-default'
           : isInverse
             ? isPressed || isLoading
-              ? 'bg-background-defaultPressed'
+              ? 'bg-background-default-pressed'
               : 'bg-background-default'
             : isPressed || isLoading
-              ? 'bg-primary-defaultPressed'
+              ? 'bg-primary-default-pressed'
               : 'bg-primary-default'
     }
     ${twClassName}
@@ -54,7 +54,7 @@ const ButtonPrimaryBase = ({
   const twTextClassNames =
     isInverse && isDanger
       ? isPressed || isLoading
-        ? 'text-error-defaultPressed'
+        ? 'text-error-default-pressed'
         : 'text-error-default'
       : isDanger
         ? 'text-primary-inverse'
