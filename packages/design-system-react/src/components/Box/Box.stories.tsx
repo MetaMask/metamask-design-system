@@ -12,8 +12,8 @@ import {
   BoxAlignItems,
   BoxJustifyContent,
 } from '../../types';
-
 import { Text } from '../Text';
+
 import { Box } from './Box';
 import type { BoxProps } from './Box.types';
 import README from './README.mdx';
