@@ -9,7 +9,7 @@ export type CheckboxProps = Omit<
 > & {
   /**
    * Required unique identifier for the checkbox input element.
-   * This is used for the input's id and the label's htmlFor attributes.
+   * This is used for the input's ID and the label's htmlFor attributes.
    */
   id: string;
 
