@@ -11,14 +11,6 @@ describe('Typography', () => {
 
   // Ignored CSS variables
   const ignoreList: string[] = [
-    '--typography-s-heading-sm-regular-font-size',
-    '--typography-s-heading-sm-regular-line-height',
-    '--typography-s-heading-sm-regular-font-weight',
-    '--typography-s-heading-sm-regular-letter-spacing',
-    '--typography-l-heading-sm-regular-font-size',
-    '--typography-l-heading-sm-regular-line-height',
-    '--typography-l-heading-sm-regular-font-weight',
-    '--typography-l-heading-sm-regular-letter-spacing',
     '--typography-s-body-lg-regular-font-size',
     '--typography-s-body-lg-regular-line-height',
     '--typography-s-body-lg-regular-font-weight',

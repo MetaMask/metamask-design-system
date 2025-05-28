@@ -9,4 +9,9 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx}',
     './stories/**/*.{js,jsx,ts,tsx}',
   ],
+  theme: {
+    colors: {}, // This removes all default Tailwind colors. We want to rely on the colors provided by @metamask-previews/design-system-tailwind-preset
+    extend: {},
+  },
+  plugins: [],
 };

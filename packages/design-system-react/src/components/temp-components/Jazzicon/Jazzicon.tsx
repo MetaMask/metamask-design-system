@@ -3,7 +3,8 @@ import { KnownCaipNamespace } from '@metamask/utils';
 import React, { useEffect, useRef } from 'react';
 
 import { twMerge } from '../../../utils/tw-merge';
-import { JazziconProps } from './Jazzicon.types';
+
+import type { JazziconProps } from './Jazzicon.types';
 import {
   generateSeedEthereum,
   generateSeedNonEthereum,

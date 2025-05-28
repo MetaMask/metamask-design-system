@@ -93,12 +93,6 @@ export const SmallScreen: StoryFn<typeof Text> = (...args) => {
       lineHeight: `${typography.sHeadingSM.lineHeight}px`,
       fontWeight: typography.sHeadingSM.fontWeight,
     },
-    headingSMRegular: {
-      fontFamily: fontFamilies.default,
-      fontSize: typography.sHeadingSMRegular.fontSize,
-      lineHeight: `${typography.sHeadingSMRegular.lineHeight}px`,
-      fontWeight: typography.sHeadingSMRegular.fontWeight,
-    },
     bodyLGMedium: {
       fontFamily: fontFamilies.default,
       fontSize: typography.sBodyLGMedium.fontSize,
@@ -183,14 +177,6 @@ export const SmallScreen: StoryFn<typeof Text> = (...args) => {
           styles.headingSM.lineHeight
         } ${styles.headingSM.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.headingSMRegular} {...args}>
-        {`S HeadingSM Regular ${styles.headingSMRegular.fontSize}px/${
-          styles.headingSMRegular.lineHeight
-        } ${
-          styles.headingSMRegular.fontSize / smallScreenFontSizeBase
-        }rem`}{' '}
-        <span className="text-error-default">DEPRECATED</span>
-      </Text>
       <Text style={styles.bodyLGMedium} {...args}>
         {`S BodyLG Medium ${styles.bodyLGMedium.fontSize}px/${
           styles.bodyLGMedium.lineHeight
@@ -272,12 +258,6 @@ export const LargeScreen: StoryFn<typeof Text> = (...args) => {
       fontSize: typography.lHeadingSM.fontSize,
       lineHeight: `${typography.lHeadingSM.lineHeight}px`,
       fontWeight: typography.lHeadingSM.fontWeight,
-    },
-    headingSMRegular: {
-      fontFamily: fontFamilies.default,
-      fontSize: typography.lHeadingSMRegular.fontSize,
-      lineHeight: `${typography.lHeadingSMRegular.lineHeight}px`,
-      fontWeight: typography.lHeadingSMRegular.fontWeight,
     },
     bodyLGMedium: {
       fontFamily: fontFamilies.default,
@@ -362,14 +342,6 @@ export const LargeScreen: StoryFn<typeof Text> = (...args) => {
         {`L HeadingSM ${styles.headingSM.fontSize}px/${
           styles.headingSM.lineHeight
         } ${styles.headingSM.fontSize / largeScreenFontSizeBase}rem`}
-      </Text>
-      <Text style={styles.headingSMRegular} {...args}>
-        {`L HeadingSM Regular ${styles.headingSMRegular.fontSize}px/${
-          styles.headingSMRegular.lineHeight
-        } ${
-          styles.headingSMRegular.fontSize / largeScreenFontSizeBase
-        }rem`}{' '}
-        <span className="text-error-default">DEPRECATED</span>
       </Text>
       <Text style={styles.bodyLGMedium} {...args}>
         {`L BodyLG Medium ${styles.bodyLGMedium.fontSize}px/${
@@ -488,12 +460,6 @@ export const SmallScreenCSS: StoryFn<typeof Text> = (...args) => {
       fontSize: 'var(--typography-s-heading-sm-font-size)',
       lineHeight: 'var(--typography-s-heading-sm-line-height)',
       fontWeight: 'var(--typography-s-heading-sm-font-weight)',
-    },
-    'HeadingSM Regular': {
-      fontFamily: 'var(--font-family-default)',
-      fontSize: 'var(--typography-s-heading-sm-regular-font-size)',
-      lineHeight: 'var(--typography-s-heading-sm-regular-line-height)',
-      fontWeight: 'var(--typography-s-heading-sm-regular-font-weight)',
     },
     'BodyLG Medium': {
       fontFamily: 'var(--font-family-default)',
@@ -620,12 +586,6 @@ export const LargeScreenCSS: StoryFn<typeof Text> = (...args) => {
       fontSize: 'var(--typography-l-heading-sm-font-size)',
       lineHeight: 'var(--typography-l-heading-sm-line-height)',
       fontWeight: 'var(--typography-l-heading-sm-font-weight)',
-    },
-    'HeadingSM Regular': {
-      fontFamily: 'var(--font-family-default)',
-      fontSize: 'var(--typography-l-heading-sm-regular-font-size)',
-      lineHeight: 'var(--typography-l-heading-sm-regular-line-height)',
-      fontWeight: 'var(--typography-l-heading-sm-regular-font-weight)',
     },
     'BodyLG Medium': {
       fontFamily: 'var(--font-family-default)',

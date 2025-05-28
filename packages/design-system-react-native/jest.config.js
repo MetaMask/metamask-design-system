@@ -31,12 +31,14 @@ module.exports = merge(baseConfig, {
     '!**/*.dev.{js,ts}', // Exclude .dev files
     '!**/*.assets.{js,ts}', // Exclude .assets files
     '!**/*.types.{js,ts}', // Exclude .types files
+    '!./src/components/temp-components/Blockies/Blockies.utilities.ts',
   ],
   // Add coverage ignore patterns
   coveragePathIgnorePatterns: [
     'index.ts', // Ignore all index.ts files
     './src/index.ts', // Also keep the original pattern
     '\\.stories\\.(ts|tsx)$',
+    '\\.d\\.ts$', // Ignore type declaration files
   ],
   preset: 'react-native',
   transform: {

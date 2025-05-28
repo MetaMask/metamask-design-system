@@ -6,6 +6,7 @@ import { View } from 'react-native';
 
 import { TextButtonSize } from '../../types';
 import { IconName, IconSize } from '../Icon';
+
 import { TextButton } from './TextButton';
 import { MAP_TEXTBUTTON_SIZE_TEXTVARIANT } from './TextButton.constants';
 
