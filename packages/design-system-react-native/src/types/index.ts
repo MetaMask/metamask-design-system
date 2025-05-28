@@ -143,6 +143,108 @@ export type BadgeWrapperCustomPosition = {
 };
 
 /**
+ * Box - all spacing-related props
+ */
+export type BoxSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+
+/**
+ * Box - flexDirection
+ */
+export enum BoxFlexDirection {
+  Row = 'flex-row',
+  RowReverse = 'flex-row-reverse',
+  Column = 'flex-col',
+  ColumnReverse = 'flex-col-reverse',
+}
+
+/**
+ * Box - flexWrap
+ */
+export enum BoxFlexWrap {
+  NoWrap = 'flex-nowrap',
+  Wrap = 'flex-wrap',
+  WrapReverse = 'flex-wrap-reverse',
+}
+
+/**
+ * Box - alignItems
+ */
+export enum BoxAlignItems {
+  Start = 'items-start',
+  Center = 'items-center',
+  End = 'items-end',
+  Stretch = 'items-stretch',
+  Baseline = 'items-baseline',
+}
+
+/**
+ * Box - justifyContent
+ */
+export enum BoxJustifyContent {
+  Start = 'justify-start',
+  Center = 'justify-center',
+  End = 'justify-end',
+  Between = 'justify-between',
+  Around = 'justify-around',
+  Evenly = 'justify-evenly',
+}
+
+/**
+ * Box - borderRadius
+ */
+export enum BoxBorderRadius {
+  None = 'rounded-none',
+  Sm = 'rounded-sm',
+  Md = 'rounded-md',
+  Lg = 'rounded-lg',
+  Full = 'rounded-full',
+}
+
+/**
+ * Box - borderStyle
+ */
+export enum BoxBorderStyle {
+  Solid = 'border-solid',
+  Dashed = 'border-dashed',
+  Dotted = 'border-dotted',
+  Double = 'border-double',
+  None = 'border-none',
+}
+
+/**
+ * Box - backgroundColor
+ */
+export enum BoxBackgroundColor {
+  BackgroundDefault = 'bg-background-default',
+  BackgroundAlternative = 'bg-background-alternative',
+  PrimaryDefault = 'bg-primary-default',
+  PrimaryMuted = 'bg-primary-muted',
+  ErrorDefault = 'bg-error-default',
+  ErrorMuted = 'bg-error-muted',
+  SuccessDefault = 'bg-success-default',
+  SuccessMuted = 'bg-success-muted',
+  InfoDefault = 'bg-info-default',
+  InfoMuted = 'bg-info-muted',
+  WarningDefault = 'bg-warning-default',
+  WarningMuted = 'bg-warning-muted',
+  Transparent = 'bg-transparent',
+}
+
+/**
+ * Box - borderColor
+ */
+export enum BoxBorderColor {
+  BorderDefault = 'border border-border-default',
+  BorderMuted = 'border border-border-muted',
+  PrimaryDefault = 'border border-primary-default',
+  ErrorDefault = 'border border-error-default',
+  SuccessDefault = 'border border-success-default',
+  InfoDefault = 'border border-info-default',
+  WarningDefault = 'border border-warning-default',
+  None = '',
+}
+
+/**
  * ButtonBase - size
  */
 export enum ButtonBaseSize {
