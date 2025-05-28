@@ -70,3 +70,171 @@ export const FlexDirection: Story = {
   },
   render: (args) => <BoxStory {...args} />,
 };
+
+export const FlexWrap: Story = {
+  args: {
+    flexWrap: BoxFlexWrap.Wrap,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const Gap: Story = {
+  args: {
+    gap: 4,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const Margin: Story = {
+  args: {
+    margin: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const MarginTop: Story = {
+  args: {
+    marginTop: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const MarginBottom: Story = {
+  args: {
+    marginBottom: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const MarginLeft: Story = {
+  args: {
+    marginLeft: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const MarginRight: Story = {
+  args: {
+    marginRight: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const Padding: Story = {
+  args: {
+    padding: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const PaddingTop: Story = {
+  args: {
+    paddingTop: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const PaddingBottom: Story = {
+  args: {
+    paddingBottom: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const PaddingLeft: Story = {
+  args: {
+    paddingLeft: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const PaddingRight: Story = {
+  args: {
+    paddingRight: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const BorderColor: Story = {
+  args: {
+    borderColor: BoxBorderColor.PrimaryDefault,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const BorderWidth: Story = {
+  args: {
+    borderWidth: 2,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const BorderRadius: Story = {
+  args: {
+    borderRadius: BoxBorderRadius.Lg,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const BorderStyle: Story = {
+  args: {
+    borderStyle: BoxBorderStyle.Dashed,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const AlignItems: Story = {
+  args: {
+    alignItems: BoxAlignItems.Center,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const JustifyContent: Story = {
+  args: {
+    justifyContent: BoxJustifyContent.Between,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const Width: Story = {
+  args: {
+    width: 6,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const MinWidth: Story = {
+  args: {
+    minWidth: 6,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const Height: Story = {
+  args: {
+    height: 6,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const MinHeight: Story = {
+  args: {
+    minHeight: 6,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const BackgroundColor: Story = {
+  args: {
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const TwClassName: Story = {
+  args: {
+    twClassName: 'border border-dashed',
+  },
+  render: (args) => <BoxStory {...args} />,
+};
