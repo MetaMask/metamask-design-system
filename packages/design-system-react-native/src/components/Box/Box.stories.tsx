@@ -53,15 +53,20 @@ type Story = StoryObj<BoxProps>;
 const BoxStory: React.FC<BoxProps> = (args) => {
   return (
     <Box {...args}>
-      <Text>Box Component</Text>
+      <Text>Text 1</Text>
+      <Text>Text 2</Text>
+      <Text>Text 3</Text>
     </Box>
   );
 };
 
 export const Default: Story = {
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const FlexDirection: Story = {
   args: {
-    padding: 2,
-    backgroundColor: BoxBackgroundColor.BackgroundDefault,
+    flexDirection: BoxFlexDirection.Column,
   },
   render: (args) => <BoxStory {...args} />,
 };
