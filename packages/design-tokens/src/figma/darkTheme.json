@@ -12,11 +12,23 @@
       "parent": "Theme Colors/Dark mode",
       "description": "For sunken neutral surface below background/default."
     },
-    "muted": {
+    "section": {
       "value": "{grey.800}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
-      "description": "For raised neutral surface above background/default."
+      "description": "For section bg usually over background/default."
+    },
+    "subsection": {
+      "value": "{grey.700}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For subsection bg usually over background/section."
+    },
+    "muted": {
+      "value": "#e0e5ff26",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For muted neutral surface."
     },
     "default-hover": {
       "value": "#1a1b1c",
@@ -43,13 +55,13 @@
       "description": "Pressed state surface for background/alternative."
     },
     "muted-hover": {
-      "value": "#2a2b2d",
+      "value": "#e0e5ff33",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for background/muted."
     },
     "muted-pressed": {
-      "value": "#303234",
+      "value": "#e0e5ff40",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for background/muted."
@@ -167,7 +179,7 @@
       "description": "For elements placed on top of primary/default fill."
     },
     "default-hover": {
-      "value": "#9EAAFF",
+      "value": "#9eaaff",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for primary/default."
