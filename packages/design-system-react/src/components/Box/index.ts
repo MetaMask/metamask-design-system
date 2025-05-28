@@ -4,6 +4,7 @@ export type {
   BoxSpacing,
   BoxBorderColor,
   BoxBorderRadius,
+  BoxBorderWidth,
   BoxBorderStyle,
   BoxAlignItems,
   BoxJustifyContent,

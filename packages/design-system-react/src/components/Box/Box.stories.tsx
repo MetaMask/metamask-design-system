@@ -5,6 +5,7 @@ import {
   BoxBackgroundColor,
   BoxBorderColor,
   BoxBorderRadius,
+  BoxBorderWidth,
   BoxBorderStyle,
   BoxFlexDirection,
   BoxFlexWrap,
@@ -30,13 +31,13 @@ const meta: Meta<BoxProps> = {
       control: 'select',
       options: Object.keys(BoxFlexDirection),
       mapping: BoxFlexDirection,
-      description: 'The flex direction of the component.',
+      description: 'The flex-direction style of the component.',
     },
     flexWrap: {
       control: 'select',
       options: Object.keys(BoxFlexWrap),
       mapping: BoxFlexWrap,
-      description: 'The flex wrap of the component.',
+      description: 'The flex-wrap style of the component.',
     },
     gap: {
       control: 'number',
@@ -44,99 +45,101 @@ const meta: Meta<BoxProps> = {
     },
     margin: {
       control: 'number',
-      description: 'The margin of the component.',
+      description: 'The margin style of the component.',
     },
     marginTop: {
       control: 'number',
-      description: 'The marginTop of the component.',
+      description: 'The margin-top style of the component.',
     },
     marginBottom: {
       control: 'number',
-      description: 'The marginBottom of the component.',
+      description: 'The margin-bottom style of the component.',
     },
     marginLeft: {
       control: 'number',
-      description: 'The marginLeft of the component.',
+      description: 'The margin-left style of the component.',
     },
     marginRight: {
       control: 'number',
-      description: 'The marginRight of the component.',
+      description: 'The margin-right style of the component.',
     },
     padding: {
       control: 'number',
-      description: 'The padding of the component.',
+      description: 'The padding style of the component.',
     },
     paddingTop: {
       control: 'number',
-      description: 'The paddingTop of the component.',
+      description: 'The padding-top style of the component.',
     },
     paddingBottom: {
       control: 'number',
-      description: 'The paddingBottom of the component.',
+      description: 'The padding-bottom style of the component.',
     },
     paddingLeft: {
       control: 'number',
-      description: 'The paddingLeft of the component.',
+      description: 'The padding-left style of the component.',
     },
     paddingRight: {
       control: 'number',
-      description: 'The paddingRight of the component.',
+      description: 'The padding-right style of the component.',
     },
     borderColor: {
       control: 'select',
       options: Object.keys(BoxBorderColor),
       mapping: BoxBorderColor,
-      description: 'The border-color of the component.',
+      description: 'The border-color style of the component.',
     },
     borderWidth: {
-      control: 'number',
-      description: 'The border-width of the component.',
+      control: 'select',
+      options: Object.keys(BoxBorderWidth),
+      mapping: BoxBorderWidth,
+      description: 'The border-width style of the component.',
     },
     borderRadius: {
       control: 'select',
       options: Object.keys(BoxBorderRadius),
       mapping: BoxBorderRadius,
-      description: 'The border-radius of the component.',
+      description: 'The border-radius style of the component.',
     },
     borderStyle: {
       control: 'select',
       options: Object.keys(BoxBorderStyle),
       mapping: BoxBorderStyle,
-      description: 'The border-style of the component.',
+      description: 'The border-style style of the component.',
     },
     alignItems: {
       control: 'select',
       options: Object.keys(BoxAlignItems),
       mapping: BoxAlignItems,
-      description: 'The align-items of the component.',
+      description: 'The align-items style of the component.',
     },
     justifyContent: {
       control: 'select',
       options: Object.keys(BoxJustifyContent),
       mapping: BoxJustifyContent,
-      description: 'The justify-content of the component.',
+      description: 'The justify-content style of the component.',
     },
     width: {
       control: 'number',
-      description: 'The width of the component.',
+      description: 'The width style of the component.',
     },
     minWidth: {
       control: 'number',
-      description: 'The min-width of the component.',
+      description: 'The min-width style of the component.',
     },
     height: {
       control: 'number',
-      description: 'The height of the component.',
+      description: 'The height style of the component.',
     },
     minHeight: {
       control: 'number',
-      description: 'The min-height of the component.',
+      description: 'The min-height style of the component.',
     },
     backgroundColor: {
       control: 'select',
       options: Object.keys(BoxBackgroundColor),
       mapping: BoxBackgroundColor,
-      description: 'The background-color of the component.',
+      description: 'The background-color style of the component.',
     },
     className: {
       control: 'text',
@@ -263,7 +266,7 @@ export const BorderColor: Story = {
 
 export const BorderWidth: Story = {
   args: {
-    borderWidth: 2,
+    borderWidth: BoxBorderWidth.Lg,
   },
   render: (args) => <BoxStory {...args} />,
 };

@@ -6,6 +6,7 @@ import type {
   BoxSpacing,
   BoxBorderColor,
   BoxBorderRadius,
+  BoxBorderWidth,
   BoxBorderStyle,
   BoxAlignItems,
   BoxJustifyContent,
@@ -14,11 +15,11 @@ import type {
 
 export type BoxProps = ComponentProps<'div'> & {
   /**
-   * The flex direction of the component.
+   * The flex-direction style of the component.
    */
   flexDirection?: BoxFlexDirection;
   /**
-   * The flex wrap of the component.
+   * The flex-wrap style of the component.
    */
   flexWrap?: BoxFlexWrap;
   /**
@@ -27,98 +28,97 @@ export type BoxProps = ComponentProps<'div'> & {
    */
   gap?: BoxSpacing;
   /**
-   * The margin of the component.
+   * The margin style of the component.
    * Use 0-12 for margin of 0px-48px.
    */
   margin?: BoxSpacing;
   /**
-   * The marginTop of the component.
+   * The margin-top style of the component.
    * Use 0-12 for marginTop of 0px-48px.
    */
   marginTop?: BoxSpacing;
   /**
-   * The marginBottom of the component.
+   * The margin-bottom style of the component.
    * Use 0-12 for marginBottom of 0px-48px.
    */
   marginBottom?: BoxSpacing;
   /**
-   * The marginLeft of the component.
+   * The margin-left style of the component.
    * Use 0-12 for marginLeft of 0px-48px.
    */
   marginLeft?: BoxSpacing;
   /**
-   * The marginRight of the component.
+   * The margin-right style of the component.
    * Use 0-12 for marginRight of 0px-48px.
    */
   marginRight?: BoxSpacing;
   /**
-   * The padding of the component.
+   * The padding style of the component.
    * Use 0-12 for padding of 0px-48px.
    */
   padding?: BoxSpacing;
   /**
-   * The paddingTop of the component.
+   * The padding-top style of the component.
    * Use 0-12 for paddingTop of 0px-48px.
    */
   paddingTop?: BoxSpacing;
   /**
-   * The paddingBottom of the component.
+   * The padding-bottom style of the component.
    * Use 0-12 for paddingBottom of 0px-48px.
    */
   paddingBottom?: BoxSpacing;
   /**
-   * The paddingLeft of the component.
+   * The padding-left style of the component.
    * Use 0-12 for paddingLeft of 0px-48px.
    */
   paddingLeft?: BoxSpacing;
   /**
-   * The paddingRight of the component.
+   * The padding-right style of the component.
    * Use 0-12 for paddingRight of 0px-48px.
    */
   paddingRight?: BoxSpacing;
   /**
-   * The border-color of the component.
+   * The border-color style of the component.
    */
   borderColor?: BoxBorderColor;
   /**
-   * The border-width of the component.
-   * Use 0-12 for borderWidth of 0px-12px.
+   * The border-width style of the component.
    */
-  borderWidth?: BoxSpacing;
+  borderWidth?: BoxBorderWidth;
   /**
-   * The border-radius of the component.
+   * The border-radius style of the component.
    */
   borderRadius?: BoxBorderRadius;
   /**
-   * The border-style of the component.
+   * The border-style style of the component.
    */
   borderStyle?: BoxBorderStyle;
   /**
-   * The align-items of the component.
+   * The align-items style of the component.
    */
   alignItems?: BoxAlignItems;
   /**
-   * The justify-content of the component.
+   * The justify-content style of the component.
    */
   justifyContent?: BoxJustifyContent;
   /**
-   * The width of the component.
+   * The width style of the component.
    */
   width?: BoxSpacing;
   /**
-   * The min-width of the component.
+   * The min-width style of the component.
    */
   minWidth?: BoxSpacing;
   /**
-   * The height of the component.
+   * The height style of the component.
    */
   height?: BoxSpacing;
   /**
-   * The min-height of the component.
+   * The min-height style of the component.
    */
   minHeight?: BoxSpacing;
   /**
-   * The background-color of the component.
+   * The background-color style of the component.
    */
   backgroundColor?: BoxBackgroundColor;
   /**

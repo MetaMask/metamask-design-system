@@ -201,6 +201,17 @@ export enum BoxBorderRadius {
 }
 
 /**
+ * Box - borderWidth
+ */
+export enum BoxBorderWidth {
+  None = 'border-0',
+  Sm = 'border',
+  Md = 'border-2',
+  Lg = 'border-4',
+  Xl = 'border-8',
+}
+
+/**
  * Box - borderStyle
  */
 export enum BoxBorderStyle {

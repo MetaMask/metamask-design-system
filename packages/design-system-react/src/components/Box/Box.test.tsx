@@ -6,6 +6,7 @@ import {
   BoxBackgroundColor,
   BoxBorderColor,
   BoxBorderRadius,
+  BoxBorderWidth,
   BoxBorderStyle,
   BoxFlexDirection,
   BoxFlexWrap,
@@ -13,7 +14,6 @@ import {
 } from '../../types';
 import { Box } from './Box';
 import {
-  TWCLASSMAP_BOX_BORDERWIDTH,
   TWCLASSMAP_BOX_GAP,
   TWCLASSMAP_BOX_HEIGHT,
   TWCLASSMAP_BOX_MARGIN,
@@ -60,7 +60,7 @@ describe('Box', () => {
         paddingLeft={10}
         paddingRight={11}
         borderColor={BoxBorderColor.PrimaryDefault}
-        borderWidth={2}
+        borderWidth={BoxBorderWidth.Lg}
         borderRadius={BoxBorderRadius.Lg}
         borderStyle={BoxBorderStyle.Dashed}
         alignItems={BoxAlignItems.Center}
@@ -91,7 +91,7 @@ describe('Box', () => {
       TWCLASSMAP_BOX_PADDINGLEFT[10],
       TWCLASSMAP_BOX_PADDINGRIGHT[11],
       BoxBorderColor.PrimaryDefault,
-      TWCLASSMAP_BOX_BORDERWIDTH[2],
+      BoxBorderWidth.Lg,
       BoxBorderRadius.Lg,
       BoxBorderStyle.Dashed,
       BoxAlignItems.Center,

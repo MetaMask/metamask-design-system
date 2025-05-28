@@ -21,7 +21,7 @@ import { BoxBackgroundColor } from '@metamask/design-system-react';
 
 ### FlexDirection
 
-Use the `flexDirection` prop to configure the flex direction style of the Box. Supported values:
+Use the `flexDirection` prop to configure the `flex-direction` style of the Box. Supported values:
 
 - `BoxFlexDirection.Row`
 - `BoxFlexDirection.RowReverse`
@@ -32,17 +32,7 @@ Use the `flexDirection` prop to configure the flex direction style of the Box. S
 
 ### FlexWrap
 
-Use the `FlexWrap` prop to configure the flex wrap style of the Box. Supported values:
-
-- `BoxFlexWrap.NoWrap`
-- `BoxFlexWrap.Wrap`
-- `BoxFlexWrap.WrapReverse`
-
-<Canvas of={BoxStories.FlexWrap} />
-
-### FlexWrap
-
-Use the `FlexWrap` prop to configure the flex wrap style of the Box. Supported values:
+Use the `FlexWrap` prop to configure the `flex-wrap` style of the Box. Supported values:
 
 - `BoxFlexWrap.NoWrap`
 - `BoxFlexWrap.Wrap`
@@ -133,7 +123,13 @@ Use the `BorderColor` prop to configure the `border-color` style of the Box. Sup
 
 ### BorderWidth
 
-Use the `borderWidth` prop with values from the `BoxSpacing` scale (0–12) to configure the `border-width` style of the Box.
+Use the `borderWidth` prop to configure the `border-width` style of the Box. Supported values:
+
+- `BoxBorderWidth.None`
+- `BoxBorderWidth.Sm`
+- `BoxBorderWidth.Md`
+- `BoxBorderWidth.Lg`
+- `BoxBorderWidth.Xl`
 
 <Canvas of={BoxStories.BorderWidth} />
 
