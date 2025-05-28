@@ -33,7 +33,7 @@ export const AvatarBase = forwardRef<HTMLDivElement, AvatarBaseProps>(
 
     const mergedClassName = twMerge(
       // Base styles
-      'bg-section inline-flex items-center justify-center overflow-hidden',
+      'inline-flex items-center justify-center overflow-hidden bg-section',
       shape === AvatarBaseShape.Circle
         ? 'rounded-full'
         : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size],
