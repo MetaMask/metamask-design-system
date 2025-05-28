@@ -147,37 +147,6 @@ describe('Typography', () => {
       );
     });
 
-    it('js tokens for sHeadingSMRegular matches figma tokens sHeadingSMRegular', () => {
-      expect(typography.sHeadingSMRegular.fontWeight).toBe('400');
-
-      expect(typography.sHeadingSMRegular.fontSize).toStrictEqual(
-        Number(
-          createNewFigmaTokenObject(
-            designTokens.global['S-Heading-SM-Regular'].value.fontSize,
-            designTokens.global,
-          ).value,
-        ),
-      );
-
-      expect(typography.sHeadingSMRegular.lineHeight).toStrictEqual(
-        Number(
-          createNewFigmaTokenObject(
-            designTokens.global['S-Heading-SM-Regular'].value.lineHeight,
-            designTokens.global,
-          ).value,
-        ),
-      );
-
-      expect(typography.sHeadingSMRegular.letterSpacing).toStrictEqual(
-        Number(
-          createNewFigmaTokenObject(
-            designTokens.global['S-Heading-SM-Regular'].value.letterSpacing,
-            designTokens.global,
-          ).value,
-        ),
-      );
-    });
-
     it('js tokens for sHeadingSM matches figma tokens sHeadingSM', () => {
       expect(typography.sHeadingSM.fontWeight).toBe('700');
 
@@ -233,7 +202,7 @@ describe('Typography', () => {
       expect(typography.sBodyLGMedium.letterSpacing).toStrictEqual(
         Number(
           createNewFigmaTokenObject(
-            designTokens.global['S-Heading-SM-Regular'].value.letterSpacing,
+            designTokens.global['S-Body-LG-Medium'].value.letterSpacing,
             designTokens.global,
           ).value,
         ),
@@ -577,37 +546,6 @@ describe('Typography', () => {
         Number(
           createNewFigmaTokenObject(
             designTokens.global['L-Heading-MD'].value.letterSpacing,
-            designTokens.global,
-          ).value,
-        ),
-      );
-    });
-
-    it('js tokens for lHeadingSMRegular matches figma tokens lHeadingSMRegular', () => {
-      expect(typography.lHeadingSMRegular.fontWeight).toBe('400');
-
-      expect(typography.lHeadingSMRegular.fontSize).toStrictEqual(
-        Number(
-          createNewFigmaTokenObject(
-            designTokens.global['L-Heading-SM-Regular'].value.fontSize,
-            designTokens.global,
-          ).value,
-        ),
-      );
-
-      expect(typography.lHeadingSMRegular.lineHeight).toStrictEqual(
-        Number(
-          createNewFigmaTokenObject(
-            designTokens.global['L-Heading-SM-Regular'].value.lineHeight,
-            designTokens.global,
-          ).value,
-        ),
-      );
-
-      expect(typography.lHeadingSMRegular.letterSpacing).toStrictEqual(
-        Number(
-          createNewFigmaTokenObject(
-            designTokens.global['L-Heading-SM-Regular'].value.letterSpacing,
             designTokens.global,
           ).value,
         ),
