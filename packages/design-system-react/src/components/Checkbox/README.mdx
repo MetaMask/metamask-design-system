@@ -8,13 +8,31 @@ import * as CheckboxStories from './Checkbox.stories';
 
 ```tsx
 import { Checkbox } from '@metamask/design-system-react';
+import { useState } from 'react';
 
-<Checkbox label="Enable notifications" />;
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox
+  id="notifications-checkbox"
+  label="Enable notifications"
+  isSelected={isSelected}
+  onChange={() => setIsSelected(!isSelected)}
+/>;
 ```
 
 <Canvas of={CheckboxStories.Default} />
 
 ## Props
+
+### `id`
+
+Required unique identifier for the checkbox input element. This is used for the input's id and the label's htmlFor attributes to ensure proper accessibility and form association.
+
+```tsx
+<Checkbox id="accept-terms" label="I accept the terms" isSelected={false} onChange={() => {}} />
+```
+
+---
 
 ### `isSelected`
 
@@ -53,7 +71,7 @@ Optional label prop that renders text or a React node as a label beside the chec
 Optional props to be passed to the label's Text component.
 
 ```tsx
-<Checkbox label="Label" labelProps={{ className: 'text-muted' }} />
+<Checkbox id="styled-label" label="Label" labelProps={{ className: 'text-muted' }} />
 ```
 
 ---
@@ -63,7 +81,32 @@ Optional props to be passed to the label's Text component.
 Required callback for when the checked state changes. Use this to update your state.
 
 ```tsx
-<Checkbox label="Check me" onChange={(val) => console.log(val)} />
+import { useState } from 'react';
+
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox
+  id="toggle-checkbox"
+  label="Check me"
+  isSelected={isSelected}
+  onChange={() => setIsSelected(!isSelected)}
+/>
+```
+
+---
+
+### `inputProps`
+
+Optional props passed to the input element. This allows you to pass additional attributes like data-testid, aria-describedby, etc.
+
+```tsx
+<Checkbox
+  id="accessible-checkbox"
+  inputProps={{
+    'data-testid': 'my-checkbox',
+    'aria-describedby': 'help-text'
+  }}
+/>
 ```
 
 ---
@@ -73,7 +116,7 @@ Required callback for when the checked state changes. Use this to update your st
 Optional props passed to the container div wrapping the checkbox icon.
 
 ```tsx
-<Checkbox checkboxContainerProps={{className: "bg-success-default"}} />
+<Checkbox id="styled-container" checkboxContainerProps={{className: "bg-success-default"}} />
 ```
 
 ---
@@ -83,7 +126,7 @@ Optional props passed to the container div wrapping the checkbox icon.
 Optional props to be passed to the check Icon component.
 
 ```tsx
-<Checkbox checkedIconProps={{ className: 'mr-2' }} />
+<Checkbox id="custom-icon" checkedIconProps={{ className: 'mr-2' }} />
 ```
 
 ---
@@ -92,27 +135,7 @@ Optional props to be passed to the check Icon component.
 
 The Checkbox component exposes an imperative API through refs that allows for programmatic control. The `toggle` method allows a parent component to programmatically toggle the checkbox state.
 
-```tsx
-// Example of using the ref to toggle a checkbox
-const [isSelected, setIsSelected] = useState(false);
-const checkboxRef = useRef<{ toggle: () => void }>(null);
-
-// Inside your component render
-<>
-  <Checkbox
-    ref={checkboxRef}
-    isSelected={isSelected}
-    onChange={() => setIsEnabled(!isSelected)}}
-    label="Toggle me via ref"
-  />
-  <Button
-    variant={ButtonVariant.Primary}
-    onPress={() => checkboxRef.current?.toggle()}
-  >
-    Toggle checkbox
-  </Button>
-</>;
-```
+<Canvas of={CheckboxStories.Ref} />
 
 This can be useful in scenarios where you need to trigger the checkbox programmatically, such as when implementing "Select All" functionality or resetting forms.
 
@@ -123,15 +146,15 @@ This can be useful in scenarios where you need to trigger the checkbox programma
 Use the `className` prop to add Tailwind CSS classes to the outer container. These classes are merged with the default classes using `twMerge`.
 
 ```tsx
-<Checkbox label="Custom" className="bg-primary-default" />
+<Checkbox id="custom-styled" label="Custom" className="bg-primary-default" />
 ```
 
 ### `style`
 
-Custom styles for the outer button container.
+Custom styles for the outer label container.
 
 ```tsx
-<Checkbox label="Styled" style={{ marginLeft: 10 }} />
+<Checkbox id="inline-styled" label="Styled" style={{ marginLeft: 10 }} />
 ```
 
 ## Component API

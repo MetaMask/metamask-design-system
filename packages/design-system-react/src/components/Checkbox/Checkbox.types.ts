@@ -4,9 +4,15 @@ import type { IconProps } from '../Icon';
 import type { TextProps } from '../Text';
 
 export type CheckboxProps = Omit<
-  ComponentProps<'button'>,
-  'style' | 'className' | 'children'
+  ComponentProps<'label'>,
+  'style' | 'className' | 'children' | 'htmlFor'
 > & {
+  /**
+   * Required unique identifier for the checkbox input element.
+   * This is used for the input's id and the label's htmlFor attributes.
+   */
+  id: string;
+
   /**
    * Required prop to determine whether the checkbox is currently selected.
    * This component is fully controlled, so you must manage this state
@@ -43,6 +49,16 @@ export type CheckboxProps = Omit<
    * Use this to update your state.
    */
   onChange: (isSelected: boolean) => void;
+
+  /**
+   * Optional props passed to the input element.
+   */
+  inputProps?: Omit<
+    ComponentProps<'input'>,
+    'type' | 'checked' | 'onChange' | 'disabled'
+  > & {
+    [key: `data-${string}`]: string;
+  };
 
   /**
    * Optional props passed to the container div wrapping the checkbox icon.
