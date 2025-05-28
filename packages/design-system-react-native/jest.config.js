@@ -38,6 +38,7 @@ module.exports = merge(baseConfig, {
     'index.ts', // Ignore all index.ts files
     './src/index.ts', // Also keep the original pattern
     '\\.stories\\.(ts|tsx)$',
+    '\\.d\\.ts$', // Ignore type declaration files
   ],
   preset: 'react-native',
   transform: {
