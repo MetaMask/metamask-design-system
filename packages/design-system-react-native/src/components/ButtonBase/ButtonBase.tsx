@@ -15,6 +15,7 @@ import type { ButtonBaseProps } from './ButtonBase.types';
 export const ButtonBase = ({
   children,
   textProps,
+  contentContainerProps,
   size = ButtonBaseSize.Lg,
   isLoading,
   loadingText,
@@ -32,13 +33,28 @@ export const ButtonBase = ({
   ...props
 }: ButtonBaseProps) => {
   const tw = useTailwind();
-  const twContainerClassNames = `
+
+  // Base styles that can be overridden
+  const baseStyles = `
     flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
     h-[${size}px]
+  `;
+
+  // State styles that should not be overridden
+  const stateStyles = `
     ${isDisabled ? 'opacity-50' : 'opacity-100'}
     ${isFullWidth ? 'self-stretch' : 'self-start'}
-    ${twClassName}
   `;
+
+  // Combine styles - put twClassName last to ensure overrides work
+  const twContainerClassNames = `${baseStyles} ${stateStyles} ${twClassName}`;
+
+  // Default content container styles
+  const defaultContentContainerStyles =
+    'flex-row items-center justify-center gap-x-2';
+  const contentContainerStyles = `${defaultContentContainerStyles} ${
+    isLoading ? 'opacity-0' : 'opacity-100'
+  } ${contentContainerProps?.twClassName || ''}`;
 
   const finalStartIconName = startIconName ?? startIconProps?.name;
   const finalEndIconName = endIconName ?? endIconProps?.name;
@@ -65,9 +81,7 @@ export const ButtonBase = ({
         />
       </View>
       <View
-        style={tw`flex-row items-center justify-center gap-x-2 ${
-          isLoading ? 'opacity-0' : 'opacity-100'
-        }`}
+        style={[tw`${contentContainerStyles}`, contentContainerProps?.style]}
         testID="content-container"
       >
         {finalStartIconName ? (

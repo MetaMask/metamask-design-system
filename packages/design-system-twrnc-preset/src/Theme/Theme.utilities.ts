@@ -1,6 +1,7 @@
 import baseConfig from '../../tailwind.config';
 import type { ColorSet, ColorScheme } from '../twrnc-settings';
 import { colorSetList, typographyTailwindConfig } from '../twrnc-settings';
+import { generateShorthandColors } from '../twrnc-settings/colors.utilities';
 
 /**
  * Generates a Tailwind CSS configuration object based on the specified color set and color scheme.
@@ -59,6 +60,9 @@ export const generateTailwindConfig = (
     return {};
   }
 
+  // Generate shorthand color utilities
+  const shorthandColors = generateShorthandColors(themeColors);
+
   return {
     ...baseConfig,
     theme: {
@@ -68,6 +72,19 @@ export const generateTailwindConfig = (
         colors: {
           ...baseConfig.theme?.extend?.colors,
           ...themeColors,
+        },
+        // Reduces redundancy by enabling shorter Tailwind class names
+        textColor: {
+          ...themeColors, // Incorporate existing color utilities like text-primary-default
+          ...shorthandColors.text, // e.g. text-default instead of text-text-default
+        },
+        backgroundColor: {
+          ...themeColors, // Incorporate existing color utilities like bg-primary-default
+          ...shorthandColors.background, // e.g. bg-default instead of bg-background-default
+        },
+        borderColor: {
+          ...themeColors, // Incorporate existing color utilities like border-primary-default
+          ...shorthandColors.border, // e.g. border-default instead of border-border-default
         },
         fontSize: {
           ...typographyTailwindConfig.fontSize,

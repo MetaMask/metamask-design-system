@@ -43,6 +43,10 @@ export type ButtonIconProps = {
    */
   isFloating?: boolean;
   /**
+   * Optional prop to provide an accessibility label for screen readers
+   */
+  accessibilityLabel?: string;
+  /**
    * Optional prop to add twrnc overriding classNames.
    */
   twClassName?: string;
