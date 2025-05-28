@@ -1,0 +1,250 @@
+import { Controls, Canvas } from '@storybook/blocks';
+
+import * as BoxStories from './Box.stories';
+
+# Box
+
+`Box` is a low level layout component. It exposes a number of props that map to Tailwind utility classes allowing easy spacing and alignment control.
+
+```tsx
+import { Box } from '@metamask/design-system-react';
+import { BoxBackgroundColor } from '@metamask/design-system-react';
+
+<Box padding={4} backgroundColor={BoxBackgroundColor.BackgroundAlternative}>
+  Content
+</Box>;
+```
+
+<Canvas of={BoxStories.Default} />
+
+## Props
+
+### FlexDirection
+
+Use the `flexDirection` prop to configure the flex direction style of the Box. Supported values:
+
+- `BoxFlexDirection.Row`
+- `BoxFlexDirection.RowReverse`
+- `BoxFlexDirection.Column`
+- `BoxFlexDirection.ColumnReverse`
+
+<Canvas of={BoxStories.FlexDirection} />
+
+### FlexWrap
+
+Use the `FlexWrap` prop to configure the flex wrap style of the Box. Supported values:
+
+- `BoxFlexWrap.NoWrap`
+- `BoxFlexWrap.Wrap`
+- `BoxFlexWrap.WrapReverse`
+
+<Canvas of={BoxStories.FlexWrap} />
+
+### FlexWrap
+
+Use the `FlexWrap` prop to configure the flex wrap style of the Box. Supported values:
+
+- `BoxFlexWrap.NoWrap`
+- `BoxFlexWrap.Wrap`
+- `BoxFlexWrap.WrapReverse`
+
+<Canvas of={BoxStories.FlexWrap} />
+
+### Gap
+
+Use the `gap` prop with values from the `BoxSpacing` scale (0–12) to configure the `gap` style of the Box.
+
+<Canvas of={BoxStories.Gap} />
+
+### Margin
+
+Use the `margin` prop with values from the `BoxSpacing` scale (0–12) to configure the `margin` style of the Box.
+
+<Canvas of={BoxStories.Margin} />
+
+### MarginTop
+
+Use the `marginTop` prop with values from the `BoxSpacing` scale (0–12) to configure the `margin-top` style of the Box.
+
+<Canvas of={BoxStories.MarginTop} />
+
+### MarginBottom
+
+Use the `marginBottom` prop with values from the `BoxSpacing` scale (0–12) to configure the `margin-bottom` style of the Box.
+
+<Canvas of={BoxStories.MarginBottom} />
+
+### MarginLeft
+
+Use the `marginLeft` prop with values from the `BoxSpacing` scale (0–12) to configure the `margin-left` style of the Box.
+
+<Canvas of={BoxStories.MarginLeft} />
+
+### MarginRight
+
+Use the `marginRight` prop with values from the `BoxSpacing` scale (0–12) to configure the `margin-right` style of the Box.
+
+<Canvas of={BoxStories.MarginRight} />
+
+### Padding
+
+Use the `padding` prop with values from the `BoxSpacing` scale (0–12) to configure the `padding` style of the Box.
+
+<Canvas of={BoxStories.Padding} />
+
+### PaddingTop
+
+Use the `paddingTop` prop with values from the `BoxSpacing` scale (0–12) to configure the `padding-top` style of the Box.
+
+<Canvas of={BoxStories.PaddingTop} />
+
+### PaddingBottom
+
+Use the `paddingBottom` prop with values from the `BoxSpacing` scale (0–12) to configure the `padding-bottom` style of the Box.
+
+<Canvas of={BoxStories.PaddingBottom} />
+
+### PaddingLeft
+
+Use the `paddingLeft` prop with values from the `BoxSpacing` scale (0–12) to configure the `padding-left` style of the Box.
+
+<Canvas of={BoxStories.PaddingLeft} />
+
+### PaddingRight
+
+Use the `paddingRight` prop with values from the `BoxSpacing` scale (0–12) to configure the `padding-right` style of the Box.
+
+<Canvas of={BoxStories.PaddingRight} />
+
+### BorderColor
+
+Use the `BorderColor` prop to configure the `border-color` style of the Box. Supported values:
+
+- `BoxBorderColor.BorderDefault`
+- `BoxBorderColor.BorderMuted`
+- `BoxBorderColor.PrimaryDefault`
+- `BoxBorderColor.ErrorDefault`
+- `BoxBorderColor.SuccessDefault`
+- `BoxBorderColor.InfoDefault`
+- `BoxBorderColor.WarningDefault`
+- `BoxBorderColor.None`
+
+<Canvas of={BoxStories.BorderColor} />
+
+### BorderWidth
+
+Use the `borderWidth` prop with values from the `BoxSpacing` scale (0–12) to configure the `border-width` style of the Box.
+
+<Canvas of={BoxStories.BorderWidth} />
+
+### BorderRadius
+
+Use the `borderRadius` prop to configure the `border-radius` style of the Box. Supported values:
+
+- `BoxBorderRadius.None`
+- `BoxBorderRadius.Sm` (4px)
+- `BoxBorderRadius.Md` (6px)
+- `BoxBorderRadius.Lg` (8px)
+- `BoxBorderRadius.Full`
+
+<Canvas of={BoxStories.BorderRadius} />
+
+### BorderStyle
+
+Use the `borderStyle` prop to configure the `border-style` style of the Box. Supported values:
+
+- `BoxBorderStyle.Solid`
+- `BoxBorderStyle.Dashed`
+- `BoxBorderStyle.Dotted`
+- `BoxBorderStyle.Double`
+- `BoxBorderStyle.None`
+
+<Canvas of={BoxStories.BorderStyle} />
+
+### AlignItems
+
+Use the `alignItems` prop to configure the `align-items` style of the Box. Supported values:
+
+- `BoxAlignItems.Start`
+- `BoxAlignItems.Center`
+- `BoxAlignItems.End`
+- `BoxAlignItems.Stretch`
+- `BoxAlignItems.Baseline`
+
+<Canvas of={BoxStories.AlignItems} />
+
+### JustifyContent
+
+Use the `justifyContent` prop to configure the `justify-content` style of the Box. Supported values:
+
+- `BoxJustifyContent.Start`
+- `BoxJustifyContent.Center`
+- `BoxJustifyContent.End`
+- `BoxJustifyContent.Stretch`
+- `BoxJustifyContent.Baseline`
+
+<Canvas of={BoxStories.JustifyContent} />
+
+### Width
+
+Use the `width` prop with values from the `BoxSpacing` scale (0–12) to configure the `width` style of the Box.
+
+<Canvas of={BoxStories.Width} />
+
+### MinWidth
+
+Use the `minWidth` prop with values from the `BoxSpacing` scale (0–12) to configure the `min-width` style of the Box.
+
+<Canvas of={BoxStories.MinWidth} />
+
+### Height
+
+Use the `height` prop with values from the `BoxSpacing` scale (0–12) to configure the `height` style of the Box.
+
+<Canvas of={BoxStories.Height} />
+
+### MinHeight
+
+Use the `minHeight` prop with values from the `BoxSpacing` scale (0–12) to configure the `min-height` style of the Box.
+
+<Canvas of={BoxStories.MinHeight} />
+
+### BackgroundColor
+
+Use the `BackgroundColor` prop to configure the `background-color` style of the Box. Supported values:
+
+- `BoxBackgroundColor.BackgroundDefault`
+- `BoxBackgroundColor.BackgroundAlternative`
+- `BoxBackgroundColor.PrimaryDefault`
+- `BoxBackgroundColor.PrimaryMuted`
+- `BoxBackgroundColor.ErrorDefault`
+- `BoxBackgroundColor.ErrorMuted`
+- `BoxBackgroundColor.SuccessDefault`
+- `BoxBackgroundColor.SuccessMuted`
+- `BoxBackgroundColor.InfoDefault`
+- `BoxBackgroundColor.InfoMuted`
+- `BoxBackgroundColor.WarningDefault`
+- `BoxBackgroundColor.WarningMuted`
+- `BoxBackgroundColor.Transparent`
+
+<Canvas of={BoxStories.BackgroundColor} />
+
+### Class Name
+
+Use `className` to merge custom classes with the Box styles.
+
+```tsx
+<Box className="my-4">Custom Box</Box>
+```
+
+### Style
+
+Use the `style` prop for dynamic inline styles.
+
+## Component API
+
+<Controls of={BoxStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

@@ -1,4 +1,4 @@
-import { BoxSpacing } from '../../types';
+import type { BoxSpacing } from '../../types';
 
 export const TWCLASSMAP_BOX_GAP: Record<BoxSpacing, string> = {
   0: 'gap-0',

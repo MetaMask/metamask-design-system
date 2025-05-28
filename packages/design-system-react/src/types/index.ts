@@ -194,9 +194,9 @@ export enum BoxJustifyContent {
  */
 export enum BoxBorderRadius {
   None = 'rounded-none',
-  Sm = 'rounded-sm',
-  Md = 'rounded-md',
-  Lg = 'rounded-lg',
+  Sm = 'rounded-sm', // 4px
+  Md = 'rounded-md', // 6px
+  Lg = 'rounded-lg', // 8px
   Full = 'rounded-full',
 }
 

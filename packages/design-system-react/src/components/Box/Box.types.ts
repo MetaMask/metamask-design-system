@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import {
+import type {
   BoxFlexDirection,
   BoxFlexWrap,
   BoxSpacing,
@@ -12,7 +12,7 @@ import {
   BoxBackgroundColor,
 } from '../../types';
 
-export interface BoxProps extends ComponentProps<'div'> {
+export type BoxProps = ComponentProps<'div'> & {
   /**
    * The flex direction of the component.
    */
@@ -23,57 +23,57 @@ export interface BoxProps extends ComponentProps<'div'> {
   flexWrap?: BoxFlexWrap;
   /**
    * The gap between the component's children.
-   * Use 1-12 for a gap of 4px-48px.
+   * Use 0-12 for a gap of 0px-48px.
    */
   gap?: BoxSpacing;
   /**
    * The margin of the component.
-   * Use 1-12 for margin of 4px-48px.
+   * Use 0-12 for margin of 0px-48px.
    */
   margin?: BoxSpacing;
   /**
    * The marginTop of the component.
-   * Use 1-12 for marginTop of 4px-48px.
+   * Use 0-12 for marginTop of 0px-48px.
    */
   marginTop?: BoxSpacing;
   /**
    * The marginBottom of the component.
-   * Use 1-12 for marginBottom of 4px-48px.
+   * Use 0-12 for marginBottom of 0px-48px.
    */
   marginBottom?: BoxSpacing;
   /**
    * The marginLeft of the component.
-   * Use 1-12 for marginLeft of 4px-48px.
+   * Use 0-12 for marginLeft of 0px-48px.
    */
   marginLeft?: BoxSpacing;
   /**
    * The marginRight of the component.
-   * Use 1-12 for marginRight of 4px-48px.
+   * Use 0-12 for marginRight of 0px-48px.
    */
   marginRight?: BoxSpacing;
   /**
    * The padding of the component.
-   * Use 1-12 for padding of 4px-48px.
+   * Use 0-12 for padding of 0px-48px.
    */
   padding?: BoxSpacing;
   /**
    * The paddingTop of the component.
-   * Use 1-12 for paddingTop of 4px-48px.
+   * Use 0-12 for paddingTop of 0px-48px.
    */
   paddingTop?: BoxSpacing;
   /**
    * The paddingBottom of the component.
-   * Use 1-12 for paddingBottom of 4px-48px.
+   * Use 0-12 for paddingBottom of 0px-48px.
    */
   paddingBottom?: BoxSpacing;
   /**
    * The paddingLeft of the component.
-   * Use 1-12 for paddingLeft of 4px-48px.
+   * Use 0-12 for paddingLeft of 0px-48px.
    */
   paddingLeft?: BoxSpacing;
   /**
    * The paddingRight of the component.
-   * Use 1-12 for paddingRight of 4px-48px.
+   * Use 0-12 for paddingRight of 0px-48px.
    */
   paddingRight?: BoxSpacing;
   /**
@@ -82,7 +82,7 @@ export interface BoxProps extends ComponentProps<'div'> {
   borderColor?: BoxBorderColor;
   /**
    * The border-width of the component.
-   * Use 1-12 for borderWidth of 1px-12px.
+   * Use 0-12 for borderWidth of 0px-12px.
    */
   borderWidth?: BoxSpacing;
   /**
@@ -125,4 +125,4 @@ export interface BoxProps extends ComponentProps<'div'> {
    * Optional prop for additional CSS classes to be applied to the Box component.
    */
   className?: string;
-}
+};

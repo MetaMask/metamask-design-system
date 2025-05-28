@@ -1,7 +1,6 @@
 import React from 'react';
-import { twMerge } from '../../utils/tw-merge';
 
-import type { BoxProps } from './Box.types';
+import { twMerge } from '../../utils/tw-merge';
 import {
   TWCLASSMAP_BOX_GAP,
   TWCLASSMAP_BOX_MARGIN,
@@ -20,6 +19,7 @@ import {
   TWCLASSMAP_BOX_HEIGHT,
   TWCLASSMAP_BOX_MINHEIGHT,
 } from './Box.constants';
+import type { BoxProps } from './Box.types';
 
 export const Box = ({
   flexDirection,
@@ -52,6 +52,7 @@ export const Box = ({
   ...props
 }: BoxProps) => {
   const mergedClassName = twMerge(
+    'flex',
     flexDirection,
     flexWrap,
     gap !== undefined ? TWCLASSMAP_BOX_GAP[gap] : '',

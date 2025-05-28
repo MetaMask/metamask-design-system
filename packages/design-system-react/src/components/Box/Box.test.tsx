@@ -11,6 +11,7 @@ import {
   BoxFlexWrap,
   BoxJustifyContent,
 } from '../../types';
+import { Box } from './Box';
 import {
   TWCLASSMAP_BOX_BORDERWIDTH,
   TWCLASSMAP_BOX_GAP,
@@ -29,7 +30,6 @@ import {
   TWCLASSMAP_BOX_PADDINGTOP,
   TWCLASSMAP_BOX_WIDTH,
 } from './Box.constants';
-import { Box } from './Box';
 
 describe('Box', () => {
   it('renders children and style', () => {
@@ -76,6 +76,7 @@ describe('Box', () => {
 
     const box = screen.getByTestId('box');
     const expectedClasses = [
+      'flex',
       BoxFlexDirection.Row,
       BoxFlexWrap.Wrap,
       TWCLASSMAP_BOX_GAP[1],
