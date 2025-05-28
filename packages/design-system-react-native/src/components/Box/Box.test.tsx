@@ -1,0 +1,139 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { renderHook } from '@testing-library/react-hooks';
+import { render } from '@testing-library/react-native';
+import React from 'react';
+import { Text } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
+
+import {
+  BoxFlexDirection,
+  BoxFlexWrap,
+  BoxAlignItems,
+  BoxJustifyContent,
+  BoxBorderRadius,
+  BoxBorderStyle,
+  BoxBackgroundColor,
+  BoxBorderColor,
+} from '../../types';
+import {
+  TWCLASSMAP_BOX_GAP,
+  TWCLASSMAP_BOX_MARGIN,
+  TWCLASSMAP_BOX_MARGINTOP,
+  TWCLASSMAP_BOX_MARGINBOTTOM,
+  TWCLASSMAP_BOX_MARGINLEFT,
+  TWCLASSMAP_BOX_MARGINRIGHT,
+  TWCLASSMAP_BOX_PADDING,
+  TWCLASSMAP_BOX_PADDINGTOP,
+  TWCLASSMAP_BOX_PADDINGBOTTOM,
+  TWCLASSMAP_BOX_PADDINGLEFT,
+  TWCLASSMAP_BOX_PADDINGRIGHT,
+  TWCLASSMAP_BOX_BORDERWIDTH,
+  TWCLASSMAP_BOX_WIDTH,
+  TWCLASSMAP_BOX_MINWIDTH,
+  TWCLASSMAP_BOX_HEIGHT,
+  TWCLASSMAP_BOX_MINHEIGHT,
+} from './Box.constants';
+
+import { Box } from './Box';
+
+function flattenStyles(
+  styleProp: StyleProp<ViewStyle> | undefined,
+): ViewStyle[] {
+  if (styleProp == null) {
+    return [];
+  }
+  if (Array.isArray(styleProp)) {
+    return styleProp.flatMap((item) =>
+      flattenStyles(item as StyleProp<ViewStyle>),
+    );
+  }
+  if (typeof styleProp === 'object') {
+    return [styleProp as ViewStyle];
+  }
+  return [];
+}
+
+describe('Box', () => {
+  let tw: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    tw = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('renders children and merges style', () => {
+    const { getByTestId, getByText } = render(
+      <Box testID="box" style={{ margin: 4 }}>
+        <Text>Hello</Text>
+      </Box>,
+    );
+    expect(getByText('Hello')).toBeDefined();
+    const box = getByTestId('box');
+    const styles = flattenStyles(box.props.style);
+    expect(styles[0]).toStrictEqual(tw``);
+    expect(styles[1]).toStrictEqual({ margin: 4 });
+  });
+
+  it('applies all style props', () => {
+    const { getByTestId } = render(
+      <Box
+        testID="box"
+        flexDirection={BoxFlexDirection.Row}
+        flexWrap={BoxFlexWrap.Wrap}
+        gap={1}
+        margin={2}
+        marginTop={3}
+        marginBottom={4}
+        marginLeft={5}
+        marginRight={6}
+        padding={7}
+        paddingTop={8}
+        paddingBottom={9}
+        paddingLeft={10}
+        paddingRight={11}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+        borderRadius={BoxBorderRadius.Lg}
+        borderStyle={BoxBorderStyle.Dashed}
+        alignItems={BoxAlignItems.Center}
+        justifyContent={BoxJustifyContent.Between}
+        width={1}
+        minWidth={2}
+        height={3}
+        minHeight={4}
+        backgroundColor={BoxBackgroundColor.SuccessDefault}
+        twClassName="extra"
+      />,
+    );
+    const box = getByTestId('box');
+    const expectedClasses = `
+      ${BoxFlexDirection.Row}
+      ${BoxFlexWrap.Wrap}
+      ${TWCLASSMAP_BOX_GAP[1]}
+      ${TWCLASSMAP_BOX_MARGIN[2]}
+      ${TWCLASSMAP_BOX_MARGINTOP[3]}
+      ${TWCLASSMAP_BOX_MARGINBOTTOM[4]}
+      ${TWCLASSMAP_BOX_MARGINLEFT[5]}
+      ${TWCLASSMAP_BOX_MARGINRIGHT[6]}
+      ${TWCLASSMAP_BOX_PADDING[7]}
+      ${TWCLASSMAP_BOX_PADDINGTOP[8]}
+      ${TWCLASSMAP_BOX_PADDINGBOTTOM[9]}
+      ${TWCLASSMAP_BOX_PADDINGLEFT[10]}
+      ${TWCLASSMAP_BOX_PADDINGRIGHT[11]}
+      ${BoxBorderColor.PrimaryDefault}
+      ${TWCLASSMAP_BOX_BORDERWIDTH[2]}
+      ${BoxBorderRadius.Lg}
+      ${BoxBorderStyle.Dashed}
+      ${BoxAlignItems.Center}
+      ${BoxJustifyContent.Between}
+      ${TWCLASSMAP_BOX_WIDTH[1]}
+      ${TWCLASSMAP_BOX_MINWIDTH[2]}
+      ${TWCLASSMAP_BOX_HEIGHT[3]}
+      ${TWCLASSMAP_BOX_MINHEIGHT[4]}
+      ${BoxBackgroundColor.SuccessDefault}
+      extra
+    `.trim();
+    const styles = flattenStyles(box.props.style);
+    expect(styles).toHaveLength(1);
+    expect(styles[0]).toStrictEqual(tw`${expectedClasses}`);
+  });
+});
