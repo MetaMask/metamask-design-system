@@ -5,6 +5,7 @@ import { AvatarGroupVariant, AvatarGroupSize } from '../../types';
 import { AvatarAccountVariant } from '../AvatarAccount';
 import { TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE } from '../AvatarBase/AvatarBase.constants';
 import { TextColor } from '../Text';
+
 import { AvatarGroup } from './AvatarGroup';
 import { AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP } from './AvatarGroup.constants';
 
@@ -119,11 +120,12 @@ describe('AvatarGroup', () => {
       expect(() =>
         render(
           <AvatarGroup
-            variant={'Invalid' as any}
-            avatarPropsArr={[{ foo: 'bar' } as any]}
+            variant={'Invalid' as unknown as AvatarGroupVariant}
+            // @ts-expect-error - invalid variant
+            avatarPropsArr={[{ foo: 'bar' }]}
           />,
         ),
-      ).toThrow(/Invalid Avatar Variant: Invalid/);
+      ).toThrow(/Invalid Avatar Variant: Invalid/u);
     });
   });
 

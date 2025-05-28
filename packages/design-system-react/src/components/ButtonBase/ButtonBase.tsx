@@ -1,5 +1,5 @@
 import { Slot, Slottable } from '@radix-ui/react-slot';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { ButtonBaseSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
@@ -9,7 +9,7 @@ import { Text, FontWeight, TextColor } from '../Text';
 import { BUTTON_BASE_SIZE_CLASS_MAP } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
 
-export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
+export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
   (
     {
       children,
@@ -44,7 +44,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
             name={IconName.Loading}
             size={IconSize.Sm}
             className={twMerge(
-              'mr-2 animate-spin text-inherit',
+              'text-inherit mr-2 animate-spin',
               loadingIconProps?.className,
             )}
             {...loadingIconProps}
@@ -69,7 +69,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
             name={startIconName}
             size={IconSize.Sm}
             className={twMerge(
-              'mr-2 flex-shrink-0 text-inherit',
+              'text-inherit mr-2 flex-shrink-0',
               startIconProps?.className,
             )}
             {...startIconProps}
@@ -89,7 +89,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
             name={endIconName}
             size={IconSize.Sm}
             className={twMerge(
-              'ml-2 flex-shrink-0 text-inherit',
+              'text-inherit ml-2 flex-shrink-0',
               endIconProps?.className,
             )}
             {...endIconProps}

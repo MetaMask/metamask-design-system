@@ -7,6 +7,7 @@ import {
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
   TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
 } from '../AvatarBase/AvatarBase.constants';
+
 import { AvatarNetwork } from './AvatarNetwork';
 
 describe('AvatarNetwork', () => {
@@ -65,7 +66,7 @@ describe('AvatarNetwork', () => {
         <AvatarNetwork
           name="ACME"
           src={src}
-          imageProps={{ 'data-testid': 'img', id: 'img-id' } as any}
+          imageProps={{ 'data-testid': 'img', id: 'img-id' }}
         />,
       );
       const img = screen.getByTestId('img') as HTMLImageElement;
@@ -80,7 +81,7 @@ describe('AvatarNetwork', () => {
         <AvatarNetwork
           name=""
           src={src}
-          imageProps={{ 'data-testid': 'img2' } as any}
+          imageProps={{ 'data-testid': 'img2' }}
         />,
       );
       expect(screen.getByTestId('img2')).toHaveAttribute('alt', 'Network logo');
@@ -103,7 +104,7 @@ describe('AvatarNetwork', () => {
         <AvatarNetwork
           name="Beta"
           src="bad.png"
-          imageProps={{ 'data-testid': 'bad-img', onError } as any}
+          imageProps={{ 'data-testid': 'bad-img', onError }}
         />,
       );
       fireEvent.error(screen.getByTestId('bad-img'));
@@ -143,7 +144,7 @@ describe('AvatarNetwork', () => {
       render(
         <AvatarNetwork
           src={src}
-          imageProps={{ 'data-testid': 'img-no-name' } as any}
+          imageProps={{ 'data-testid': 'img-no-name' }}
         />,
       );
       const img = screen.getByTestId('img-no-name') as HTMLImageElement;

@@ -7,20 +7,24 @@ export const colors: ThemeColors = {
     default: brandColor.grey000,
     /** For sunken neutral surface below background/default (#F3F5F9) */
     alternative: brandColor.grey050,
-    /** For raised neutral surface above background/default (#F3F5F9) */
-    muted: brandColor.grey050,
+    /** For section bg usually over background/default (#F3F5F9) */
+    section: brandColor.grey050,
+    /** For subsection bg usually over background/section (#FFFFFF) */
+    subsection: brandColor.grey000,
+    /** For muted neutral surface (#3c4d9d1a) */
+    muted: '#3c4d9d1a',
     /** Hover state surface for background/default (#f6f6f7) */
     defaultHover: '#f6f6f7',
     /** Pressed state surface for background/default (#ebecef) */
     defaultPressed: '#ebecef',
-    /** Hover state surface for background/alternative (#f6f6f7) */
-    alternativeHover: '#f6f6f7',
-    /** Pressed state surface for background/alternative (#ebecef) */
-    alternativePressed: '#ebecef',
-    /** Hover state surface for background/muted (#e7ebee) */
-    mutedHover: '#e7ebee',
-    /** Pressed state surface for background/muted (#ebecef) */
-    mutedPressed: '#ebecef',
+    /** Hover state surface for background/alternative (#ebedf1) */
+    alternativeHover: '#ebedf1',
+    /** Pressed state surface for background/alternative (#e1e4ea) */
+    alternativePressed: '#e1e4ea',
+    /** Hover state surface for background/muted (#3c4d9d26) */
+    mutedHover: '#3c4d9d26',
+    /** Pressed state surface for background/muted (#3c4d9d33) */
+    mutedPressed: '#3c4d9d33',
     /** General purpose hover state tint (#858b9a14) */
     hover: '#858b9a14',
     /** General purpose pressed state tint (#858b9a29) */
@@ -49,8 +53,8 @@ export const colors: ThemeColors = {
     muted: '#b7bbc866',
   },
   overlay: {
-    /** Default color for overlays (scrim) (#00000066) */
-    default: '#00000066',
+    /** Default color for overlays (scrim) (#3f434a66) */
+    default: '#3f434a66',
     /** Dimmer color for overlays (scrim) (#000000CC) */
     alternative: '#000000cc',
     /** For elements placed on top of overlay/alternative (#FFFFFF) */

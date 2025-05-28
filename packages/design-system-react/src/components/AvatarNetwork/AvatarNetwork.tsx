@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import { AvatarNetworkSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
 
-export const AvatarNetwork = React.forwardRef<
-  HTMLDivElement,
-  AvatarNetworkProps
->(
+export const AvatarNetwork = forwardRef<HTMLDivElement, AvatarNetworkProps>(
   (
     {
       src,

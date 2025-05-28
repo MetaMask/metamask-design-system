@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React, { useState } from 'react';
-import { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
+import type { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
 import { AvatarTokenSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 import { ImageOrSvg } from '../temp-components/ImageOrSvg';
+
 import type { AvatarTokenProps } from './AvatarToken.types';
 
 export const AvatarToken = ({

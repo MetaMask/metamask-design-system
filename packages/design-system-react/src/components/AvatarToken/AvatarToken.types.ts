@@ -21,5 +21,7 @@ export type AvatarTokenProps = Omit<
      * Optional prop to pass to the underlying img element
      * Useful for overriding the default alt text which is the token name
      */
-    imageProps?: ComponentProps<'img'>;
+    imageProps?: ComponentProps<'img'> & {
+      'data-testid'?: string;
+    };
   };

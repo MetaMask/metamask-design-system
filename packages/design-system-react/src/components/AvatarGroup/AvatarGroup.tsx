@@ -1,22 +1,28 @@
-import React, { useCallback } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
+import type { AvatarAccountProps } from '../AvatarAccount';
+import { AvatarAccount } from '../AvatarAccount';
+import type { AvatarBaseSize } from '../AvatarBase';
 import { AvatarBase } from '../AvatarBase';
-import { AvatarAccount, AvatarAccountProps } from '../AvatarAccount';
-import { AvatarBaseSize, AvatarBaseShape } from '../AvatarBase';
-import { AvatarFavicon, AvatarFaviconProps } from '../AvatarFavicon';
-import { AvatarNetwork, AvatarNetworkProps } from '../AvatarNetwork';
-import { AvatarToken, AvatarTokenProps } from '../AvatarToken';
+import { AvatarBaseShape } from '../AvatarBase';
+import type { AvatarFaviconProps } from '../AvatarFavicon';
+import { AvatarFavicon } from '../AvatarFavicon';
+import type { AvatarNetworkProps } from '../AvatarNetwork';
+import { AvatarNetwork } from '../AvatarNetwork';
+import type { AvatarTokenProps } from '../AvatarToken';
+import { AvatarToken } from '../AvatarToken';
 import { TextColor } from '../Text';
+
 import {
   AVATAR_GROUP_SIZE_ISREVERSE_NEGATIVESPACEBETWEENAVATARS_MAP,
   AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP,
   AVATAR_GROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT_MAP,
 } from './AvatarGroup.constants';
-import { AvatarGroupProps } from './AvatarGroup.types';
+import type { AvatarGroupProps } from './AvatarGroup.types';
 
-export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
+export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
   (
     {
       variant,
@@ -118,7 +124,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
               );
             default:
               throw new Error(
-                `Invalid Avatar Variant: ${variant}. Expected one of: ${Object.values(AvatarGroupVariant).join(', ')}`,
+                `Invalid Avatar Variant: ${String(variant)}. Expected one of: ${Object.values(AvatarGroupVariant).join(', ')}`,
               );
           }
         }),

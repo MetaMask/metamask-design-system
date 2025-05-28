@@ -10,7 +10,6 @@ export type ThemeTypography = {
   sDisplayMD: TypeStyle;
   sHeadingLG: TypeStyle;
   sHeadingMD: TypeStyle;
-  sHeadingSMRegular: TypeStyle;
   sHeadingSM: TypeStyle;
   sBodyLGMedium: TypeStyle;
   sBodyMD: TypeStyle;
@@ -25,7 +24,6 @@ export type ThemeTypography = {
   lDisplayMD: TypeStyle;
   lHeadingLG: TypeStyle;
   lHeadingMD: TypeStyle;
-  lHeadingSMRegular: TypeStyle;
   lHeadingSM: TypeStyle;
   lBodyLGMedium: TypeStyle;
   lBodyMD: TypeStyle;
