@@ -1,4 +1,4 @@
-import { BoxSpacing } from '../../types';
+import type { BoxSpacing } from '../../types';
 
 export const TWCLASSMAP_BOX_GAP: Record<BoxSpacing, string> = {
   0: 'gap-0',
@@ -174,22 +174,6 @@ export const TWCLASSMAP_BOX_PADDINGRIGHT: Record<BoxSpacing, string> = {
   10: 'pr-10',
   11: 'pr-11',
   12: 'pr-12',
-};
-
-export const TWCLASSMAP_BOX_BORDERWIDTH: Record<BoxSpacing, string> = {
-  0: 'border-0',
-  1: 'border-1',
-  2: 'border-2',
-  3: 'border-3',
-  4: 'border-4',
-  5: 'border-5',
-  6: 'border-6',
-  7: 'border-7',
-  8: 'border-8',
-  9: 'border-9',
-  10: 'border-10',
-  11: 'border-11',
-  12: 'border-12',
 };
 
 export const TWCLASSMAP_BOX_WIDTH: Record<BoxSpacing, string> = {

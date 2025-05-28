@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Text } from '../Text';
 import {
   BoxFlexDirection,
   BoxFlexWrap,
@@ -9,11 +8,14 @@ import {
   BoxJustifyContent,
   BoxBorderColor,
   BoxBorderRadius,
+  BoxBorderWidth,
   BoxBorderStyle,
   BoxBackgroundColor,
 } from '../../types';
-import type { BoxProps } from './Box.types';
+import { Text } from '../Text';
+
 import { Box } from './Box';
+import type { BoxProps } from './Box.types';
 
 const meta: Meta<BoxProps> = {
   title: 'Components/Box',
@@ -33,7 +35,7 @@ const meta: Meta<BoxProps> = {
     paddingLeft: { control: 'number', min: 0, max: 12 },
     paddingRight: { control: 'number', min: 0, max: 12 },
     borderColor: { control: 'select', options: BoxBorderColor },
-    borderWidth: { control: 'number', min: 0, max: 12 },
+    borderWidth: { control: 'select', options: BoxBorderWidth },
     borderRadius: { control: 'select', options: BoxBorderRadius },
     borderStyle: { control: 'select', options: BoxBorderStyle },
     alignItems: { control: 'select', options: BoxAlignItems },
@@ -164,7 +166,7 @@ export const BorderColor: Story = {
 
 export const BorderWidth: Story = {
   args: {
-    borderWidth: 2,
+    borderWidth: BoxBorderWidth.Lg,
   },
   render: (args) => <BoxStory {...args} />,
 };

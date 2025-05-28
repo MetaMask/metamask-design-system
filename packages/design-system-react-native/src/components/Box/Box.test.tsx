@@ -11,10 +11,13 @@ import {
   BoxAlignItems,
   BoxJustifyContent,
   BoxBorderRadius,
+  BoxBorderWidth,
   BoxBorderStyle,
   BoxBackgroundColor,
   BoxBorderColor,
 } from '../../types';
+
+import { Box } from './Box';
 import {
   TWCLASSMAP_BOX_GAP,
   TWCLASSMAP_BOX_MARGIN,
@@ -27,19 +30,22 @@ import {
   TWCLASSMAP_BOX_PADDINGBOTTOM,
   TWCLASSMAP_BOX_PADDINGLEFT,
   TWCLASSMAP_BOX_PADDINGRIGHT,
-  TWCLASSMAP_BOX_BORDERWIDTH,
   TWCLASSMAP_BOX_WIDTH,
   TWCLASSMAP_BOX_MINWIDTH,
   TWCLASSMAP_BOX_HEIGHT,
   TWCLASSMAP_BOX_MINHEIGHT,
 } from './Box.constants';
 
-import { Box } from './Box';
-
+/**
+ * Flattens a given style prop into a plain array of ViewStyle objects.
+ *
+ * @param styleProp - The style prop to flatten.
+ * @returns An array of flattened ViewStyle objects.
+ */
 function flattenStyles(
   styleProp: StyleProp<ViewStyle> | undefined,
 ): ViewStyle[] {
-  if (styleProp == null) {
+  if (styleProp === null) {
     return [];
   }
   if (Array.isArray(styleProp)) {
@@ -69,7 +75,7 @@ describe('Box', () => {
     expect(getByText('Hello')).toBeDefined();
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw``);
+    expect(styles[0]).toStrictEqual(tw`flex`);
     expect(styles[1]).toStrictEqual({ margin: 4 });
   });
 
@@ -91,7 +97,7 @@ describe('Box', () => {
         paddingLeft={10}
         paddingRight={11}
         borderColor={BoxBorderColor.PrimaryDefault}
-        borderWidth={2}
+        borderWidth={BoxBorderWidth.Lg}
         borderRadius={BoxBorderRadius.Lg}
         borderStyle={BoxBorderStyle.Dashed}
         alignItems={BoxAlignItems.Center}
@@ -106,6 +112,7 @@ describe('Box', () => {
     );
     const box = getByTestId('box');
     const expectedClasses = `
+      flex
       ${BoxFlexDirection.Row}
       ${BoxFlexWrap.Wrap}
       ${TWCLASSMAP_BOX_GAP[1]}
@@ -120,7 +127,7 @@ describe('Box', () => {
       ${TWCLASSMAP_BOX_PADDINGLEFT[10]}
       ${TWCLASSMAP_BOX_PADDINGRIGHT[11]}
       ${BoxBorderColor.PrimaryDefault}
-      ${TWCLASSMAP_BOX_BORDERWIDTH[2]}
+      ${BoxBorderWidth.Lg}
       ${BoxBorderRadius.Lg}
       ${BoxBorderStyle.Dashed}
       ${BoxAlignItems.Center}

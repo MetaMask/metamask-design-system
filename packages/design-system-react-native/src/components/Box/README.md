@@ -8,59 +8,135 @@
 
 ### `flexDirection`
 
-Controls the flex direction of the container.
-
-| TYPE                                          | REQUIRED |
-| :-------------------------------------------- | :------- |
-| [BoxFlexDirection](../../types/index.ts#L---) | No       |
-
-### `flexWrap`
-
-Controls how children wrap within the container.
+The flexDirection style of the component.
 
 | TYPE                                     | REQUIRED |
 | :--------------------------------------- | :------- |
-| [BoxFlexWrap](../../types/index.ts#L---) | No       |
+| [BoxFlexDirection](../../types/index.ts) | No       |
 
-### Spacing Props
+### `flexWrap`
 
-`gap`, `margin`, `marginTop`, `marginBottom`, `marginLeft`, `marginRight`, `padding`, `paddingTop`, `paddingBottom`, `paddingLeft`, and `paddingRight` all accept a `BoxSpacing` value from `0`–`12` which maps to 4px increments.
+The flexWrap style of the component.
 
-### Border Props
+| TYPE                                | REQUIRED |
+| :---------------------------------- | :------- |
+| [BoxFlexWrap](../../types/index.ts) | No       |
 
-`borderColor`, `borderWidth`, `borderRadius`, and `borderStyle` allow customizing the border around the container.
+### `gap`
 
-| PROP           | TYPE                                         |
-| :------------- | :------------------------------------------- |
-| `borderColor`  | [BoxBorderColor](../../types/index.ts#L---)  |
-| `borderWidth`  | `BoxSpacing`                                 |
-| `borderRadius` | [BoxBorderRadius](../../types/index.ts#L---) |
-| `borderStyle`  | [BoxBorderStyle](../../types/index.ts#L---)  |
+The gap between the component's children.
 
-### Alignment Props
+| TYPE   | REQUIRED |
+| :----- | :------- |
+| number | No       |
 
-Use `alignItems` and `justifyContent` to control flex alignment.
+### `margin`, `marginTop`, `marginBottom`, `marginLeft`, `marginRight`
 
-| PROP             | TYPE                                           |
-| :--------------- | :--------------------------------------------- |
-| `alignItems`     | [BoxAlignItems](../../types/index.ts#L---)     |
-| `justifyContent` | [BoxJustifyContent](../../types/index.ts#L---) |
+The margin style of the component.
 
-### Size Props
+| TYPE   | REQUIRED |
+| :----- | :------- |
+| number | No       |
 
-`width`, `minWidth`, `height`, and `minHeight` also accept `BoxSpacing` values.
+### `padding`, `paddingTop`, `paddingBottom`, `paddingLeft`, `paddingRight`
+
+The padding style of the component.
+
+| TYPE   | REQUIRED |
+| :----- | :------- |
+| number | No       |
+
+### `borderColor`
+
+The borderColor style of the component.
+
+| TYPE                                   | REQUIRED |
+| :------------------------------------- | :------- |
+| [BoxBorderColor](../../types/index.ts) | No       |
+
+### `borderWdith`
+
+The borderWdith style of the component.
+
+| TYPE                                   | REQUIRED |
+| :------------------------------------- | :------- |
+| [BoxBorderWdith](../../types/index.ts) | No       |
+
+### `borderRadius`
+
+The borderRadius style of the component.
+
+| TYPE                                    | REQUIRED |
+| :-------------------------------------- | :------- |
+| [BoxBorderRadius](../../types/index.ts) | No       |
+
+### `borderStyle`
+
+The borderStyle style of the component.
+
+| TYPE                                   | REQUIRED |
+| :------------------------------------- | :------- |
+| [BoxBorderStyle](../../types/index.ts) | No       |
+
+### `alignItems`
+
+The alignItems style of the component.
+
+| TYPE                                  | REQUIRED |
+| :------------------------------------ | :------- |
+| [BoxAlignItems](../../types/index.ts) | No       |
+
+### `justifyContent`
+
+The justifyContent style of the component.
+
+| TYPE                                      | REQUIRED |
+| :---------------------------------------- | :------- |
+| [BoxJustifyContent](../../types/index.ts) | No       |
+
+### `width`
+
+The width style of the component.
+
+| TYPE   | REQUIRED |
+| :----- | :------- |
+| number | No       |
+
+### `minWidth`
+
+The minWidth style of the component.
+
+| TYPE   | REQUIRED |
+| :----- | :------- |
+| number | No       |
+
+### `height`
+
+The height style of the component.
+
+| TYPE   | REQUIRED |
+| :----- | :------- |
+| number | No       |
+
+### `minHeight`
+
+The minHeight style of the component.
+
+| TYPE   | REQUIRED |
+| :----- | :------- |
+| number | No       |
 
 ### `backgroundColor`
 
-Optional prop to set a themed background color.
+The backgroundColor style of the component.
 
-| TYPE                                            | REQUIRED |
-| :---------------------------------------------- | :------- |
-| [BoxBackgroundColor](../../types/index.ts#L---) | No       |
+| TYPE                                       | REQUIRED |
+| :----------------------------------------- | :------- |
+| [BoxBackgroundColor](../../types/index.ts) | No       |
 
 ### `twClassName`
 
-Optional Tailwind class overrides.
+Optional prop to add twrnc overriding classNames.
 
 | TYPE     | REQUIRED | DEFAULT |
 | :------- | :------- | :------ |
@@ -82,20 +158,149 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 
 ## Usage
 
-### Basic Usage
+### `flexDirection`
 
 ```tsx
-<Box padding={2} backgroundColor={BoxBackgroundColor.BackgroundDefault}>
-  <Text>Content</Text>
+<Box flexDirection={BoxFlexDirection.Row}>
+  <Text>Row layout</Text>
 </Box>
 ```
 
-### Row Layout
+### `flexWrap`
 
 ```tsx
-<Box flexDirection={BoxFlexDirection.Row} gap={2}>
-  <Box backgroundColor={BoxBackgroundColor.PrimaryDefault} padding={1} />
-  <Box backgroundColor={BoxBackgroundColor.SuccessDefault} padding={1} />
+<Box flexWrap={BoxFlexWrap.Wrap}>
+  <Text>Wrapped content</Text>
+</Box>
+```
+
+### `gap`
+
+```tsx
+<Box gap={4}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+</Box>
+```
+
+### `margin`
+
+```tsx
+<Box margin={3}>
+  <Text>With margin</Text>
+</Box>
+```
+
+### `padding`
+
+```tsx
+<Box padding={2}>
+  <Text>With padding</Text>
+</Box>
+```
+
+### `borderColor`
+
+```tsx
+<Box borderColor={BoxBorderColor.BorderMuted} borderWidth={1}>
+  <Text>Muted border</Text>
+</Box>
+```
+
+### `borderWidth`
+
+```tsx
+<Box borderWidth={2}>
+  <Text>Thick border</Text>
+</Box>
+```
+
+### `borderRadius`
+
+```tsx
+<Box borderRadius={BoxBorderRadius.Md}>
+  <Text>Rounded corners</Text>
+</Box>
+```
+
+### `borderStyle`
+
+```tsx
+<Box borderStyle={BoxBorderStyle.Dashed} borderWidth={1}>
+  <Text>Dashed border</Text>
+</Box>
+```
+
+### `alignItems`
+
+```tsx
+<Box alignItems={BoxAlignItems.Center}>
+  <Text>Centered content</Text>
+</Box>
+```
+
+### `justifyContent`
+
+```tsx
+<Box justifyContent={BoxJustifyContent.SpaceBetween}>
+  <Text>Left</Text>
+  <Text>Right</Text>
+</Box>
+```
+
+### `width`
+
+```tsx
+<Box width={150}>
+  <Text>Fixed width</Text>
+</Box>
+```
+
+### `minWidth`
+
+```tsx
+<Box minWidth={100}>
+  <Text>Minimum width</Text>
+</Box>
+```
+
+### `height`
+
+```tsx
+<Box height={100}>
+  <Text>Fixed height</Text>
+</Box>
+```
+
+### `minHeight`
+
+```tsx
+<Box minHeight={80}>
+  <Text>Minimum height</Text>
+</Box>
+```
+
+### `backgroundColor`
+
+```tsx
+<Box backgroundColor={BoxBackgroundColor.BackgroundAlternative}>
+  <Text>Colored background</Text>
+</Box>
+```
+
+### `twClassName`
+
+```tsx
+<Box twClassName="rounded-xl bg-yellow-200 p-4">
+  <Text>Custom tailwind style</Text>
+</Box>
+```
+
+### `style`
+
+```tsx
+<Box style={{ shadowColor: 'black', shadowOpacity: 0.3 }}>
+  <Text>Custom style</Text>
 </Box>
 ```
 

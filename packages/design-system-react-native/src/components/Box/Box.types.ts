@@ -1,24 +1,25 @@
-import { ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 
-import {
+import type {
   BoxFlexDirection,
   BoxFlexWrap,
   BoxSpacing,
   BoxBorderColor,
   BoxBorderRadius,
+  BoxBorderWidth,
   BoxBorderStyle,
   BoxAlignItems,
   BoxJustifyContent,
   BoxBackgroundColor,
 } from '../../types';
 
-export interface BoxProps extends ViewProps {
+export type BoxProps = {
   /**
-   * The flex direction of the component.
+   * The flexDirection style of the component.
    */
   flexDirection?: BoxFlexDirection;
   /**
-   * The flex wrap of the component.
+   * The flexWrap style of the component.
    */
   flexWrap?: BoxFlexWrap;
   /**
@@ -27,102 +28,101 @@ export interface BoxProps extends ViewProps {
    */
   gap?: BoxSpacing;
   /**
-   * The margin of the component.
+   * The margin style of the component.
    * Use 1-12 for margin of 4px-48px.
    */
   margin?: BoxSpacing;
   /**
-   * The marginTop of the component.
+   * The marginTop style of the component.
    * Use 1-12 for marginTop of 4px-48px.
    */
   marginTop?: BoxSpacing;
   /**
-   * The marginBottom of the component.
+   * The marginBottom style of the component.
    * Use 1-12 for marginBottom of 4px-48px.
    */
   marginBottom?: BoxSpacing;
   /**
-   * The marginLeft of the component.
+   * The marginLeft style of the component.
    * Use 1-12 for marginLeft of 4px-48px.
    */
   marginLeft?: BoxSpacing;
   /**
-   * The marginRight of the component.
+   * The marginRight style of the component.
    * Use 1-12 for marginRight of 4px-48px.
    */
   marginRight?: BoxSpacing;
   /**
-   * The padding of the component.
+   * The padding style of the component.
    * Use 1-12 for padding of 4px-48px.
    */
   padding?: BoxSpacing;
   /**
-   * The paddingTop of the component.
+   * The paddingTop style of the component.
    * Use 1-12 for paddingTop of 4px-48px.
    */
   paddingTop?: BoxSpacing;
   /**
-   * The paddingBottom of the component.
+   * The paddingBottom style of the component.
    * Use 1-12 for paddingBottom of 4px-48px.
    */
   paddingBottom?: BoxSpacing;
   /**
-   * The paddingLeft of the component.
+   * The paddingLeft style of the component.
    * Use 1-12 for paddingLeft of 4px-48px.
    */
   paddingLeft?: BoxSpacing;
   /**
-   * The paddingRight of the component.
+   * The paddingRight style of the component.
    * Use 1-12 for paddingRight of 4px-48px.
    */
   paddingRight?: BoxSpacing;
   /**
-   * The border-color of the component.
+   * The borderColor style of the component.
    */
   borderColor?: BoxBorderColor;
   /**
-   * The border-width of the component.
-   * Use 1-12 for borderWidth of 1px-12px.
+   * The borderWidth style of the component.
    */
-  borderWidth?: BoxSpacing;
+  borderWidth?: BoxBorderWidth;
   /**
-   * The border-radius of the component.
+   * The borderRadius style of the component.
    */
   borderRadius?: BoxBorderRadius;
   /**
-   * The border-style of the component.
+   * The borderStyle style of the component.
    */
   borderStyle?: BoxBorderStyle;
   /**
-   * The align-items of the component.
+   * The alignItems style of the component.
    */
   alignItems?: BoxAlignItems;
   /**
-   * The justify-content of the component.
+   * The justifyContent style of the component.
    */
   justifyContent?: BoxJustifyContent;
   /**
-   * The width of the component.
+   * The width style of the component.
    */
   width?: BoxSpacing;
   /**
-   * The min-width of the component.
+   * The minWidth style of the component.
    */
   minWidth?: BoxSpacing;
   /**
-   * The height of the component.
+   * The height style of the component.
    */
   height?: BoxSpacing;
   /**
-   * The min-height of the component.
+   * The minHeight style of the component.
    */
   minHeight?: BoxSpacing;
   /**
-   * The background-color of the component.
+   * The backgroundColor style of the component.
    */
   backgroundColor?: BoxBackgroundColor;
   /**
    * Optional prop to add twrnc overriding classNames.
    */
   twClassName?: string;
-}
+} & ViewProps;

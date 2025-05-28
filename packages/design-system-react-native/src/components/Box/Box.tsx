@@ -2,7 +2,6 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import type { BoxProps } from './Box.types';
 import {
   TWCLASSMAP_BOX_GAP,
   TWCLASSMAP_BOX_MARGIN,
@@ -15,12 +14,12 @@ import {
   TWCLASSMAP_BOX_PADDINGBOTTOM,
   TWCLASSMAP_BOX_PADDINGLEFT,
   TWCLASSMAP_BOX_PADDINGRIGHT,
-  TWCLASSMAP_BOX_BORDERWIDTH,
   TWCLASSMAP_BOX_WIDTH,
   TWCLASSMAP_BOX_MINWIDTH,
   TWCLASSMAP_BOX_HEIGHT,
   TWCLASSMAP_BOX_MINHEIGHT,
 } from './Box.constants';
+import type { BoxProps } from './Box.types';
 
 export const Box = ({
   flexDirection,
@@ -54,6 +53,7 @@ export const Box = ({
 }: BoxProps) => {
   const tw = useTailwind();
   const twContainerClassNames = `
+    flex
     ${flexDirection ?? ''} 
     ${flexWrap ?? ''} 
     ${gap !== undefined ? TWCLASSMAP_BOX_GAP[gap] : ''} 
@@ -68,7 +68,7 @@ export const Box = ({
     ${paddingLeft !== undefined ? TWCLASSMAP_BOX_PADDINGLEFT[paddingLeft] : ''} 
     ${paddingRight !== undefined ? TWCLASSMAP_BOX_PADDINGRIGHT[paddingRight] : ''} 
     ${borderColor ?? ''} 
-    ${borderWidth !== undefined ? TWCLASSMAP_BOX_BORDERWIDTH[borderWidth] : ''} 
+    ${borderWidth ?? ''}    
     ${borderRadius ?? ''} 
     ${borderStyle ?? ''} 
     ${alignItems ?? ''} 
