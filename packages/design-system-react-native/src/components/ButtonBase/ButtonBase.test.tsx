@@ -6,6 +6,7 @@ import { View } from 'react-native';
 
 import { ButtonBaseSize } from '../../types';
 import { IconName } from '../Icon';
+
 import { ButtonBase } from './ButtonBase';
 
 describe('ButtonBase', () => {

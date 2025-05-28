@@ -5,6 +5,7 @@ import React from 'react';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { Text, TextColor, TextVariant } from '../Text';
+
 import { AvatarBase } from './AvatarBase';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
@@ -135,7 +136,7 @@ describe('AvatarBase', () => {
       'rounded-full',
       TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[AvatarBaseSize.Md],
     ].join(' ');
-    const customClasses = baseClasses + ' extra-class';
+    const customClasses = `${baseClasses} extra-class`;
     const expectedStyle = tw`${customClasses}`;
 
     const customStyle = { margin: 42 };

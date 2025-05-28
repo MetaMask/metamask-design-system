@@ -2,6 +2,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { AvatarGroupVariant, AvatarGroupSize } from '../../types';
+
 import { AvatarGroup } from './AvatarGroup';
 import {
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
