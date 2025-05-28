@@ -105,12 +105,15 @@ describe('Box', () => {
       'extra',
     ];
 
-    expectedClasses.forEach((className) => {
-      className.split(' ').forEach((c) => {
-        if (c && c !== 'border') {
-          expect(box).toHaveClass(c);
-        }
-      });
+    const classes = expectedClasses.flatMap((className) =>
+      className
+        .split(' ')
+        .filter(Boolean)
+        .filter((c) => c !== 'border'),
+    );
+
+    classes.forEach((c) => {
+      expect(box).toHaveClass(c);
     });
   });
 });
