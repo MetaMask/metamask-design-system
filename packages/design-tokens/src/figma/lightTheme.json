@@ -117,6 +117,18 @@
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Muted color for icons (Not accessible), following text/muted."
+    },
+    "default-hover": {
+      "value": "#2A2B2C",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Hover state surface for icon.default."
+    },
+    "default-pressed": {
+      "value": "#414243",
+      "type": "color",
+      "parent": "Theme Colors/Light mode",
+      "description": "Pressed state surface for icon.default."
     }
   },
   "border": {
