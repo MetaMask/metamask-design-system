@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "jsx": "react-native",
+    "lib": ["esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "noEmit": true
+  },
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js",
+    ".eslintrc.js",
+    "react-native.config.js"
+  ],
+  "extends": "expo/tsconfig.base"
+}

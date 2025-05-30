@@ -3512,7 +3512,7 @@ __metadata:
     expo-status-bar: "npm:~1.6.0"
     expo-system-ui: "npm:~2.4.0"
     react-dom: "npm:^18.2.0"
-    react-native-gesture-handler: "npm:^1.10.3"
+    react-native-gesture-handler: "npm:^2.25.0"
     react-native-reanimated: "npm:3.3.0"
     react-native-safe-area-context: "npm:^4.14.0"
     react-native-svg-transformer: "npm:^1.5.0"
@@ -18434,6 +18434,20 @@ __metadata:
     invariant: "npm:^2.2.4"
     prop-types: "npm:^15.7.2"
   checksum: 10/b7004d3fc40e53ee83f6d08049d5d8ea45441abe17d13eb608e0372a3f38109e063e6ebe78cbc83aed8ab15e436b67925d0ecb26bc331c97c816a44a6aed7df1
+  languageName: node
+  linkType: hard
+
+"react-native-gesture-handler@npm:^2.25.0":
+  version: 2.25.0
+  resolution: "react-native-gesture-handler@npm:2.25.0"
+  dependencies:
+    "@egjs/hammerjs": "npm:^2.0.17"
+    hoist-non-react-statics: "npm:^3.3.0"
+    invariant: "npm:^2.2.4"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/780c53e90b41c8bc151c5b4dc908386d5709e7b8e5eaf44e8bbadc02b39d7b07ec15c3865e08f30463bd1fbfcac14a79ff8238752712e6f15a0f98b7a658afd3
   languageName: node
   linkType: hard
 
