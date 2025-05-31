@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "setup": "yarn pack-twrnc-preset && yarn install && yarn prestorybook",
+    "pack-twrnc-preset": "cd ../../packages/design-system-twrnc-preset && yarn pack --out ../../apps-react-native/my-app/design-system-twrnc-preset.tgz && cd ../../apps-react-native/my-app",
+    "prestorybook": "yarn sb-rn-get-stories",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
