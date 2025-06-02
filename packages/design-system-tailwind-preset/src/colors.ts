@@ -25,6 +25,8 @@ export const colors = {
   },
   icon: {
     default: 'var(--color-icon-default)',
+    'default-hover': 'var(--color-icon-default-hover)',
+    'default-pressed': 'var(--color-icon-default-pressed)',
     alternative: 'var(--color-icon-alternative)',
     muted: 'var(--color-icon-muted)',
   },
