@@ -1,4 +1,4 @@
-# Tailwind CSS Best Practices for MetaMask Design System
+# Tailwind CSS Best Practices
 
 A comprehensive guide for using Tailwind effectively and consistently across our design system monorepo.
 
@@ -40,8 +40,8 @@ A comprehensive guide for using Tailwind effectively and consistently across our
 - **Example**:
 
   ```tsx
-  // ❌ Don't - Using default Tailwind colors or direct typography
-  <div className="bg-blue-500 text-white text-sm">
+  // ❌ Don't - Using default Tailwind colors, arbitrary color values or direct typography
+  <div className="bg-[#4459ff] text-white text-sm">
     <p className="text-gray-900 text-lg font-medium">Title</p>
     <span className="text-gray-600">Content</span>
   </div>
@@ -191,7 +191,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
   // ✅ Do - Using components with enums
   <Box
     backgroundColor={isActive ? BoxBackgroundColor.SuccessDefault : BoxBackgroundColor.BackgroundMuted}
-    padding={BoxPadding.Four}
+    padding={4}
   >
     <Text
       variant={TextVariant.BodyMd}
@@ -201,20 +201,6 @@ A comprehensive guide for using Tailwind effectively and consistently across our
     </Text>
   </Box>
   ```
-
-## 🔄 Maintenance & Updates
-
-### 10. Documentation
-
-- Keep component documentation up to date with Tailwind usage examples
-- Document any deviations from standard Tailwind practices
-- Maintain a catalog of common patterns and solutions
-
-### 11. Version Control
-
-- Document Tailwind config changes in commit messages
-- Review class usage in PR reviews
-- Ensure changes align with design system tokens
 
 ---
 
