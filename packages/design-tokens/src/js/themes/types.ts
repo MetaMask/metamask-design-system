@@ -69,6 +69,8 @@ export type ThemeColors = {
     alternative: string;
     /** Muted color for icons (Not accessible) */
     muted: string;
+    /** For elements placed on top of icon.default fill */
+    inverse: string;
   };
   border: {
     /** Default color for borders */

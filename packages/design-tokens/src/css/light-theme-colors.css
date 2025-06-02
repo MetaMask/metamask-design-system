@@ -46,6 +46,8 @@
   --color-icon-alternative: var(--brand-colors-grey-grey500);
   /* Muted color for icons (Not accessible) (#9ca1af) */
   --color-icon-muted: var(--brand-colors-grey-grey300);
+  /* For elements placed on top of icon.default fill (#ffffff) */
+  --color-icon-inverse: var(--brand-colors-grey-grey000);
   /* Default color for borders (#b7bbc8) */
   --color-border-default: var(--brand-colors-grey-grey200);
   /* Muted color for borders (b7bbc8-40%) */

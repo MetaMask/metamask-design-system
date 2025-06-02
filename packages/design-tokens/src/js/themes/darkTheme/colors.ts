@@ -49,6 +49,8 @@ export const colors: ThemeColors = {
     alternative: brandColor.grey300,
     /** Muted color for icons (Not accessible) (#686E7D) */
     muted: brandColor.grey500,
+    /** For elements placed on top of icon.default fill (#121314) */
+    inverse: brandColor.grey900,
   },
   border: {
     /** Default color for borders (#9CA1AF) */
