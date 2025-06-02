@@ -135,18 +135,6 @@
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For elements placed on top of icon.default fill."
-    },
-    "default-hover": {
-      "value": "#F0F0F0",
-      "type": "color",
-      "parent": "Theme Colors/Dark mode",
-      "description": "Hover state surface for icon.default."
-    },
-    "default-pressed": {
-      "value": "#D0D0D0",
-      "type": "color",
-      "parent": "Theme Colors/Dark mode",
-      "description": "Pressed state surface for icon.default."
     }
   },
   "border": {
