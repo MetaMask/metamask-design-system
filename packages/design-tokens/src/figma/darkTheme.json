@@ -118,6 +118,12 @@
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color for icons (Not accessible), following text/muted."
     },
+    "inverse": {
+      "value": "{grey.900}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "For elements placed on top of icon.default fill."
+    },
     "default-hover": {
       "value": "#F0F0F0",
       "type": "color",
