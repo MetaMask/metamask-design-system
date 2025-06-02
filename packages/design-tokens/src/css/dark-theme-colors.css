@@ -31,16 +31,16 @@
   --color-background-pressed: #dadce514;
   /* Default color for text (#ffffff) */
   --color-text-default: var(--brand-colors-grey-grey000);
-  /* Softer color for text (#adb6fe) */
-  --color-text-alternative: var(--brand-colors-grey-grey200);
-  /* Muted color for text (Not accessible) (#9ca1af) */
-  --color-text-muted: var(--brand-colors-grey-grey400);
+  /* Softer color for text (#858b9a) */
+  --color-text-alternative: var(--brand-colors-grey-grey300);
+  /* Muted color for text (Not accessible) (#686e7d) */
+  --color-text-muted: var(--brand-colors-grey-grey500);
   /* Default color for icons (#ffffff) */
   --color-icon-default: var(--brand-colors-grey-grey000);
-  /* Softer color for icons (#adb6fe) */
-  --color-icon-alternative: var(--brand-colors-grey-grey200);
-  /* Muted color for icons (Not accessible) (#9ca1af) */
-  --color-icon-muted: var(--brand-colors-grey-grey400);
+  /* Softer color for icons (#858b9a) */
+  --color-icon-alternative: var(--brand-colors-grey-grey300);
+  /* Muted color for icons (Not accessible) (#686e7d) */
+  --color-icon-muted: var(--brand-colors-grey-grey500);
   /* Default color for borders (#9ca1af) */
   --color-border-default: var(--brand-colors-grey-grey400);
   /* Muted color for borders (#858b9a33) */
@@ -151,4 +151,8 @@
   --color-shadow-primary: #8b99ff33;
   /* For critical/danger drop shadow color (#ff758433) */
   --color-shadow-error: #ff758433;
+  /* Hover state surface for icon.default (#f0f0f0) */
+  --color-icon-default-hover: #f0f0f0;
+  /* Pressed state surface for icon.default (#d0d0d0) */
+  --color-icon-default-pressed: #d0d0d0;
 }
