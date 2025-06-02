@@ -30,11 +30,11 @@ export const ButtonSecondary = ({
     ${
       isInverse && isDanger
         ? isPressed || isLoading
-          ? 'bg-background-defaultPressed'
+          ? 'bg-background-default-pressed'
           : 'bg-background-default'
         : isDanger
           ? isPressed || isLoading
-            ? 'bg-error-mutedPressed'
+            ? 'bg-error-muted-pressed'
             : 'bg-transparent'
           : isPressed || isLoading
             ? 'bg-background-pressed'
@@ -44,11 +44,11 @@ export const ButtonSecondary = ({
     ${
       isInverse && isDanger
         ? isPressed || isLoading
-          ? 'border-background-defaultPressed'
+          ? 'border-background-default-pressed'
           : 'border-background-default'
         : isDanger
           ? isPressed || isLoading
-            ? 'border-error-defaultPressed'
+            ? 'border-error-default-pressed'
             : 'border-error-default'
           : isInverse
             ? 'border-primary-inverse'
@@ -59,7 +59,7 @@ export const ButtonSecondary = ({
 
   const twTextClassNames = isDanger
     ? isPressed || isLoading
-      ? 'text-error-defaultPressed'
+      ? 'text-error-default-pressed'
       : 'text-error-default'
     : isInverse
       ? 'text-primary-inverse'

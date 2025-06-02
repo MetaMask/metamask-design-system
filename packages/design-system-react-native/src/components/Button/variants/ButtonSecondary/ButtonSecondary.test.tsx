@@ -135,8 +135,8 @@ describe('ButtonSecondary', () => {
     const btn = getByTestId('button-secondary');
 
     fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-error-mutedPressed');
-    expectBorder(btn.props.style, 'border-error-defaultPressed');
+    expectBackground(btn.props.style, 'bg-error-muted-pressed');
+    expectBorder(btn.props.style, 'border-error-default-pressed');
 
     fireEvent(btn, 'pressOut');
     expectBackground(btn.props.style, 'bg-transparent');
@@ -199,8 +199,8 @@ describe('ButtonSecondary', () => {
       </ButtonSecondary>,
     );
     const btn = getByTestId('button-secondary');
-    expectBackground(btn.props.style, 'bg-error-mutedPressed');
-    expectBorder(btn.props.style, 'border-error-defaultPressed');
+    expectBackground(btn.props.style, 'bg-error-muted-pressed');
+    expectBorder(btn.props.style, 'border-error-default-pressed');
   });
 
   it('renders inverse+loading background & border', () => {
@@ -221,7 +221,7 @@ describe('ButtonSecondary', () => {
       </ButtonSecondary>,
     );
     const btn = getByTestId('button-secondary');
-    expectBackground(btn.props.style, 'bg-background-defaultPressed');
-    expectBorder(btn.props.style, 'border-background-defaultPressed');
+    expectBackground(btn.props.style, 'bg-background-default-pressed');
+    expectBorder(btn.props.style, 'border-background-default-pressed');
   });
 });

@@ -97,7 +97,7 @@ describe('ButtonPrimary', () => {
     const btn = getByTestId('button-primary');
 
     fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-primary-defaultPressed');
+    expectBackground(btn.props.style, 'bg-primary-default-pressed');
 
     fireEvent(btn, 'pressOut');
     expectBackground(btn.props.style, 'bg-primary-default');
@@ -112,7 +112,7 @@ describe('ButtonPrimary', () => {
     const btn = getByTestId('button-primary');
 
     fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-error-defaultPressed');
+    expectBackground(btn.props.style, 'bg-error-default-pressed');
 
     fireEvent(btn, 'pressOut');
     expectBackground(btn.props.style, 'bg-error-default');
@@ -127,7 +127,7 @@ describe('ButtonPrimary', () => {
     const btn = getByTestId('button-primary');
 
     fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-background-defaultPressed');
+    expectBackground(btn.props.style, 'bg-background-default-pressed');
 
     fireEvent(btn, 'pressOut');
     expectBackground(btn.props.style, 'bg-background-default');
@@ -172,7 +172,7 @@ describe('ButtonPrimary', () => {
       </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
-    expectBackground(btn.props.style, 'bg-error-defaultPressed');
+    expectBackground(btn.props.style, 'bg-error-default-pressed');
   });
 
   it('renders inverse+loading background', () => {
@@ -182,7 +182,7 @@ describe('ButtonPrimary', () => {
       </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
-    expectBackground(btn.props.style, 'bg-background-defaultPressed');
+    expectBackground(btn.props.style, 'bg-background-default-pressed');
   });
 
   it('renders inverse+danger+loading background', () => {
@@ -192,6 +192,6 @@ describe('ButtonPrimary', () => {
       </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
-    expectBackground(btn.props.style, 'bg-background-defaultPressed');
+    expectBackground(btn.props.style, 'bg-background-default-pressed');
   });
 });

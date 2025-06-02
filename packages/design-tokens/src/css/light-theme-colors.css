@@ -38,6 +38,10 @@
   --color-text-muted: var(--brand-colors-grey-grey300);
   /* Default color for icons (#121314) */
   --color-icon-default: var(--brand-colors-grey-grey900);
+  /* Hover state surface for icon.default (#2a2b2c) */
+  --color-icon-default-hover: #2a2b2c;
+  /* Pressed state surface for icon.default (#414243) */
+  --color-icon-default-pressed: #414243;
   /* Softer color for icons (#686e7d) */
   --color-icon-alternative: var(--brand-colors-grey-grey500);
   /* Muted color for icons (Not accessible) (#9ca1af) */
