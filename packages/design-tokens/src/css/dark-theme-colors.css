@@ -37,6 +37,10 @@
   --color-text-muted: var(--brand-colors-grey-grey500);
   /* Default color for icons (#ffffff) */
   --color-icon-default: var(--brand-colors-grey-grey000);
+  /* Hover state surface for icon.default (#f0f0f0) */
+  --color-icon-default-hover: #f0f0f0;
+  /* Pressed state surface for icon.default (#d0d0d0) */
+  --color-icon-default-pressed: #d0d0d0;
   /* Softer color for icons (#858b9a) */
   --color-icon-alternative: var(--brand-colors-grey-grey300);
   /* Muted color for icons (Not accessible) (#686e7d) */
@@ -151,8 +155,4 @@
   --color-shadow-primary: #8b99ff33;
   /* For critical/danger drop shadow color (#ff758433) */
   --color-shadow-error: #ff758433;
-  /* Hover state surface for icon.default (#f0f0f0) */
-  --color-icon-default-hover: #f0f0f0;
-  /* Pressed state surface for icon.default (#d0d0d0) */
-  --color-icon-default-pressed: #d0d0d0;
 }

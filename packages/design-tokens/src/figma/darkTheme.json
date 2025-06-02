@@ -106,18 +106,6 @@
       "parent": "Theme Colors/Dark mode",
       "description": "Default color for icons, following text/default."
     },
-    "alternative": {
-      "value": "{grey.300}",
-      "type": "color",
-      "parent": "Theme Colors/Dark mode",
-      "description": "Softer color for icons, following text/alternative."
-    },
-    "muted": {
-      "value": "{grey.500}",
-      "type": "color",
-      "parent": "Theme Colors/Dark mode",
-      "description": "Muted color for icons (Not accessible), following text/muted."
-    },
     "default-hover": {
       "value": "#f0f0f0",
       "type": "color",
@@ -129,6 +117,18 @@
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for icon.default."
+    },
+    "alternative": {
+      "value": "{grey.300}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Softer color for icons, following text/alternative."
+    },
+    "muted": {
+      "value": "{grey.500}",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Muted color for icons (Not accessible), following text/muted."
     }
   },
   "border": {
