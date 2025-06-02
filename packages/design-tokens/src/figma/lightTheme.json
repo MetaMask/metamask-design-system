@@ -119,7 +119,7 @@
       "description": "Muted color for icons (Not accessible), following text/muted."
     },
     "default-hover": {
-      "value": "#2A2B2C",
+      "value": "#2a2b2c",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for icon.default."

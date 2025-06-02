@@ -119,13 +119,13 @@
       "description": "Muted color for icons (Not accessible), following text/muted."
     },
     "default-hover": {
-      "value": "#F0F0F0",
+      "value": "#f0f0f0",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for icon.default."
     },
     "default-pressed": {
-      "value": "#D0D0D0",
+      "value": "#d0d0d0",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for icon.default."

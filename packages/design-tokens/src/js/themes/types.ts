@@ -65,6 +65,10 @@ export type ThemeColors = {
     alternative: string;
     /** Muted color for icons (Not accessible) */
     muted: string;
+    /** Hover state surface for icon.default */
+    defaultHover: string;
+    /** Pressed state surface for icon.default */
+    defaultPressed: string;
   };
   border: {
     /** Default color for borders */
