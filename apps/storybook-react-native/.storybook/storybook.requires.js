@@ -12,9 +12,16 @@ global.STORIES = [
   {
     titlePrefix: "",
     directory: "../../packages/design-system-react-native/src",
+    files: "**/!(temp-components)/*.stories.@(js|jsx|ts|tsx)",
+    importPathMatcher:
+      "^(?:\\.\\.\\/\\.\\.\\/packages\\/design-system-react-native\\/src(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?:(?!(?:temp-components))[^/]*?)\\/(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$",
+  },
+  {
+    titlePrefix: "",
+    directory: "./stories",
     files: "**/*.stories.@(js|jsx|ts|tsx)",
     importPathMatcher:
-      "^(?:\\.\\.\\/\\.\\.\\/packages\\/design-system-react-native\\/src(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$",
+      "^\\.[\\\\/](?:stories(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$",
   },
 ];
 
@@ -76,6 +83,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
+    "./stories/WalletHome.stories.tsx": require("../stories/WalletHome.stories.tsx"),
   };
 };
 
