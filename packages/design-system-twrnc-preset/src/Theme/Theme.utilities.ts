@@ -1,6 +1,16 @@
-import baseConfig from '../../tailwind.config';
 import type { ColorSet, ColorScheme } from '../twrnc-settings';
 import { colorSetList, typographyTailwindConfig } from '../twrnc-settings';
+
+// Inline base Tailwind config to avoid relative import issues when package is consumed
+const baseConfig = {
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {},
+    },
+  },
+  plugins: [],
+};
 
 /**
  * Generates a Tailwind CSS configuration object based on the specified color set and color scheme.
