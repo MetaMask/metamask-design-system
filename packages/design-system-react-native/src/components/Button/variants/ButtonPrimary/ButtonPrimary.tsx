@@ -20,7 +20,7 @@ const ButtonPrimaryBase = ({
   startIconProps,
   endIconProps,
   isDanger = false,
-  isInverse = false,
+  isInverse,
   isLoading = false,
   onPressIn,
   onPressOut,
@@ -111,7 +111,10 @@ const ButtonPrimaryBase = ({
   );
 };
 
-export const ButtonPrimary = ({ isInverse, ...props }: ButtonPrimaryProps) => {
+export const ButtonPrimary = ({
+  isInverse = false,
+  ...props
+}: ButtonPrimaryProps) => {
   // If inverse, use the current theme context
   if (isInverse) {
     return <ButtonPrimaryBase isInverse {...props} />;
