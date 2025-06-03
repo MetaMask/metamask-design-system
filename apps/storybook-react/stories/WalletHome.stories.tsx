@@ -56,7 +56,7 @@ const WalletHome: React.FC = () => {
               <AvatarAccount
                 shape={AvatarBaseShape.Square}
                 variant={AvatarAccountVariant.Maskicon}
-                address=""
+                address="0x1234567890123456789012345678901234567890"
               />
               <Text asChild variant={TextVariant.HeadingMd} ellipsis>
                 <div>DeFi Account</div>

@@ -52,7 +52,7 @@ const WalletHome: React.FC = () => {
               <AvatarAccount
                 shape={AvatarBaseShape.Square}
                 variant={AvatarAccountVariant.Maskicon}
-                address=""
+                address="0x1234567890123456789012345678901234567890"
               />
               <View style={tw`ml-2 flex-1`}>
                 <Text variant={TextVariant.HeadingMd} numberOfLines={1}>
