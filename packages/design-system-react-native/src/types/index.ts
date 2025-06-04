@@ -147,6 +147,37 @@ export type BadgeWrapperCustomPosition = {
  */
 export type BoxSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
+export enum BoxBlockSize {
+  Zero = '0',
+  Half = '1/2',
+  OneThird = '1/3',
+  TwoThirds = '2/3',
+  OneFourth = '1/4',
+  ThreeFourths = '3/4',
+  OneFifth = '1/5',
+  TwoFifths = '2/5',
+  ThreeFifths = '3/5',
+  FourFifths = '4/5',
+  OneSixth = '1/6',
+  FiveSixths = '5/6',
+  OneTwelfth = '1/12',
+  TwoTwelfths = '2/12',
+  ThreeTwelfths = '3/12',
+  FourTwelfths = '4/12',
+  FiveTwelfths = '5/12',
+  SixTwelfths = '6/12',
+  SevenTwelfths = '7/12',
+  EightTwelfths = '8/12',
+  NineTwelfths = '9/12',
+  TenTwelfths = '10/12',
+  ElevenTwelfths = '11/12',
+  Full = 'full',
+  Screen = 'screen',
+  Auto = 'auto',
+  Min = 'min',
+  Max = 'max',
+}
+
 /**
  * Box - flexDirection
  */

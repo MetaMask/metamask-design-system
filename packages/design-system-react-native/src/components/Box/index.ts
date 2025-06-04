@@ -10,5 +10,6 @@ export type {
   BoxJustifyContent,
   BoxBackgroundColor,
 } from '../../types';
+export { BoxBlockSize } from '../../types';
 export { Box } from './Box';
 export type { BoxProps } from './Box.types';

@@ -96,35 +96,35 @@ The justifyContent style of the component.
 
 ### `width`
 
-The width style of the component.
+The width style of the component. Uses semantic size values based on Tailwind CSS sizing classes.
 
-| TYPE   | REQUIRED |
-| :----- | :------- |
-| number | No       |
+| TYPE                                 | REQUIRED |
+| :----------------------------------- | :------- |
+| [BoxBlockSize](../../types/index.ts) | No       |
 
 ### `minWidth`
 
-The minWidth style of the component.
+The minWidth style of the component. Uses semantic size values based on Tailwind CSS sizing classes.
 
-| TYPE   | REQUIRED |
-| :----- | :------- |
-| number | No       |
+| TYPE                                 | REQUIRED |
+| :----------------------------------- | :------- |
+| [BoxBlockSize](../../types/index.ts) | No       |
 
 ### `height`
 
-The height style of the component.
+The height style of the component. Uses semantic size values based on Tailwind CSS sizing classes.
 
-| TYPE   | REQUIRED |
-| :----- | :------- |
-| number | No       |
+| TYPE                                 | REQUIRED |
+| :----------------------------------- | :------- |
+| [BoxBlockSize](../../types/index.ts) | No       |
 
 ### `minHeight`
 
-The minHeight style of the component.
+The minHeight style of the component. Uses semantic size values based on Tailwind CSS sizing classes.
 
-| TYPE   | REQUIRED |
-| :----- | :------- |
-| number | No       |
+| TYPE                                 | REQUIRED |
+| :----------------------------------- | :------- |
+| [BoxBlockSize](../../types/index.ts) | No       |
 
 ### `backgroundColor`
 
@@ -251,32 +251,66 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 ### `width`
 
 ```tsx
-<Box width={150}>
-  <Text>Fixed width</Text>
+{/* Half width */}
+<Box width={BoxBlockSize.Half}>
+  <Text>50% width</Text>
+</Box>
+
+{/* Full width */}
+<Box width={BoxBlockSize.Full}>
+  <Text>100% width</Text>
+</Box>
+
+{/* Fractional width */}
+<Box width={BoxBlockSize.OneThird}>
+  <Text>33.33% width</Text>
 </Box>
 ```
 
 ### `minWidth`
 
 ```tsx
-<Box minWidth={100}>
-  <Text>Minimum width</Text>
+{/* Minimum quarter width */}
+<Box minWidth={BoxBlockSize.OneFourth}>
+  <Text>Minimum 25% width</Text>
+</Box>
+
+{/* Auto minimum width */}
+<Box minWidth={BoxBlockSize.Auto}>
+  <Text>Auto minimum width</Text>
 </Box>
 ```
 
 ### `height`
 
 ```tsx
-<Box height={100}>
-  <Text>Fixed height</Text>
+{/* Full height */}
+<Box height={BoxBlockSize.Full}>
+  <Text>100% height</Text>
+</Box>
+
+{/* Screen height */}
+<Box height={BoxBlockSize.Screen}>
+  <Text>Full viewport height</Text>
+</Box>
+
+{/* Fractional height */}
+<Box height={BoxBlockSize.TwoThirds}>
+  <Text>66.67% height</Text>
 </Box>
 ```
 
 ### `minHeight`
 
 ```tsx
-<Box minHeight={80}>
-  <Text>Minimum height</Text>
+{/* Auto minimum height */}
+<Box minHeight={BoxBlockSize.Auto}>
+  <Text>Auto minimum height</Text>
+</Box>
+
+{/* Half minimum height */}
+<Box minHeight={BoxBlockSize.Half}>
+  <Text>Minimum 50% height</Text>
 </Box>
 ```
 
@@ -306,9 +340,66 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 
 ---
 
+## BoxBlockSize Values
+
+The `width`, `height`, `minWidth`, and `minHeight` props accept `BoxBlockSize` enum values that map to Tailwind CSS sizing classes:
+
+- `BoxBlockSize.Half` - 50% (1/2)
+- `BoxBlockSize.OneThird` - 33.33% (1/3)
+- `BoxBlockSize.TwoThirds` - 66.67% (2/3)
+- `BoxBlockSize.OneFourth` - 25% (1/4)
+- `BoxBlockSize.ThreeFourths` - 75% (3/4)
+- `BoxBlockSize.OneFifth` - 20% (1/5)
+- `BoxBlockSize.TwoFifths` - 40% (2/5)
+- `BoxBlockSize.ThreeFifths` - 60% (3/5)
+- `BoxBlockSize.FourFifths` - 80% (4/5)
+- `BoxBlockSize.OneSixth` - 16.67% (1/6)
+- `BoxBlockSize.FiveSixths` - 83.33% (5/6)
+
+**Twelfths (12-column grid):**
+
+- `BoxBlockSize.OneTwelfth` to `BoxBlockSize.ElevenTwelfths` - 8.33% to 91.67% (1/12 to 11/12)
+
+**Utility Sizes:**
+
+- `BoxBlockSize.Zero` - 0
+- `BoxBlockSize.Full` - 100%
+- `BoxBlockSize.Screen` - 100vh/100vw
+- `BoxBlockSize.Auto` - auto
+- `BoxBlockSize.Min` - min-content
+- `BoxBlockSize.Max` - max-content
+
+---
+
+## BoxSpacing Values
+
+The spacing props (`gap`, `margin`, `padding`, and their directional variants) use the `BoxSpacing` numeric system for consistent spacing scales:
+
+**Available Values:** 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+
+**Pixel Mapping:**
+
+- `0` - 0px
+- `1` - 4px
+- `2` - 8px
+- `3` - 12px
+- `4` - 16px
+- `5` - 20px
+- `6` - 24px
+- `7` - 28px
+- `8` - 32px
+- `9` - 36px
+- `10` - 40px
+- `11` - 44px
+- `12` - 48px
+
+---
+
 ## Notes
 
 - `Box` provides a lightweight way to apply common spacing and layout patterns.
+- The `width`, `height`, `minWidth`, and `minHeight` props use the `BoxBlockSize` enum for better semantic sizing based on Tailwind CSS standards.
+- Spacing properties (`margin`, `padding`, `gap`) use the numeric BoxSpacing system (0-12) for consistent spacing scales.
 - Use `twClassName` or `style` for further customization when needed.
 
 ---
