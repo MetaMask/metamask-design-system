@@ -1,10 +1,11 @@
 import { lightTheme, darkTheme } from '@metamask/design-tokens';
 
-import type { ColorSetListProps } from './colors.types';
-import { ColorScheme } from './colors.types';
+import { Theme } from '../Theme/Theme.types';
+import type { ColorSetListProps } from '../Theme/Theme.types';
+
 import { flattenColors } from './colors.utilities';
 
 export const colorSetList: ColorSetListProps = {
-  [ColorScheme.Light]: flattenColors(lightTheme.colors),
-  [ColorScheme.Dark]: flattenColors(darkTheme.colors),
+  [Theme.Light]: flattenColors(lightTheme.colors),
+  [Theme.Dark]: flattenColors(darkTheme.colors),
 };

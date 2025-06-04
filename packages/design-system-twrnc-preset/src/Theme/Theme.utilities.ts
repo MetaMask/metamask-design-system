@@ -1,18 +1,19 @@
 import type { TwConfig } from 'twrnc';
 
-import type { ColorScheme } from '../twrnc-settings';
 import { colorSetList, typographyTailwindConfig } from '../twrnc-settings';
 
+import type { ThemeType } from './Theme.types';
+
 /**
- * Generates a Tailwind CSS configuration object based on the specified color scheme.
+ * Generates a Tailwind CSS configuration object based on the specified theme.
  * This configuration extends the base Tailwind settings with custom theme colors, typography settings,
  * and other style properties for use in React Native with `twrnc`.
  *
- * @param colorScheme - The color scheme ('light' or 'dark'). Specifies whether to use light or dark mode styles.
+ * @param theme - The theme ('light' or 'dark'). Specifies whether to use light or dark mode styles.
  * @returns A Tailwind CSS configuration object with extended theme properties and plugins.
  * @example
- * const colorScheme = 'dark';
- * const tailwindConfig = generateTailwindConfig(colorScheme);
+ * const theme = 'dark';
+ * const tailwindConfig = generateTailwindConfig(theme);
  * console.log(tailwindConfig);
  *
  * Output:
@@ -44,10 +45,10 @@ import { colorSetList, typographyTailwindConfig } from '../twrnc-settings';
  *   },
  *   plugins: [],
  * }
- * @throws Will log an error and return an empty object if theme colors are not found for the specified color set and color scheme.
+ * @throws Will log an error and return an empty object if theme colors are not found for the specified color set and theme.
  */
-export const generateTailwindConfig = (colorScheme: ColorScheme): TwConfig => {
-  const themeColors = colorSetList[colorScheme];
+export const generateTailwindConfig = (theme: ThemeType): TwConfig => {
+  const themeColors = colorSetList[theme];
 
   if (!themeColors) {
     console.error('Theme colors not found.');

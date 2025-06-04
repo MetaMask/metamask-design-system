@@ -1,21 +1,23 @@
 import type { create } from 'twrnc';
 
-import { ColorScheme } from '../twrnc-settings';
-
 export enum Theme {
-  Default = 'default',
-  Light = ColorScheme.Light,
-  Dark = ColorScheme.Dark,
+  Light = 'light',
+  Dark = 'dark',
 }
+
+export type ThemeType = Theme.Light | Theme.Dark;
+
+export type ColorSetListProps = {
+  [Theme.Light]: Record<string, string>;
+  [Theme.Dark]: Record<string, string>;
+};
 
 export type ThemeContextProps = {
   tw: ReturnType<typeof create>;
-  colorSetList: Record<string, string>;
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
+  theme: ThemeType;
 };
 
 export type ThemeProviderProps = {
   children: React.ReactNode;
-  theme?: Theme;
+  theme: ThemeType;
 };
