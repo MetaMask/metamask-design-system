@@ -1,6 +1,6 @@
 import {
   useTailwind,
-  withThemeProvider,
+  ThemeProvider,
   Theme,
 } from '@metamask/design-system-twrnc-preset';
 import React, { useState } from 'react';
@@ -20,7 +20,7 @@ const ButtonPrimaryBase = ({
   startIconProps,
   endIconProps,
   isDanger = false,
-  isInverse = false,
+  isInverse,
   isLoading = false,
   onPressIn,
   onPressOut,
@@ -30,22 +30,23 @@ const ButtonPrimaryBase = ({
 }: ButtonPrimaryProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
+
   const twContainerClassNames = `
     ${
       isInverse && isDanger
         ? isPressed || isLoading
-          ? 'bg-background-defaultPressed'
+          ? 'bg-background-default-pressed'
           : 'bg-background-default'
         : isDanger
           ? isPressed || isLoading
-            ? 'bg-error-defaultPressed'
+            ? 'bg-error-default-pressed'
             : 'bg-error-default'
           : isInverse
             ? isPressed || isLoading
-              ? 'bg-background-defaultPressed'
+              ? 'bg-background-default-pressed'
               : 'bg-background-default'
             : isPressed || isLoading
-              ? 'bg-primary-defaultPressed'
+              ? 'bg-primary-default-pressed'
               : 'bg-primary-default'
     }
     ${twClassName}
@@ -54,7 +55,7 @@ const ButtonPrimaryBase = ({
   const twTextClassNames =
     isInverse && isDanger
       ? isPressed || isLoading
-        ? 'text-error-defaultPressed'
+        ? 'text-error-default-pressed'
         : 'text-error-default'
       : isDanger
         ? 'text-primary-inverse'
@@ -110,14 +111,18 @@ const ButtonPrimaryBase = ({
   );
 };
 
-const ButtonPrimaryLightOnly = withThemeProvider(
-  ButtonPrimaryBase,
-  Theme.Light,
-);
-
-export const ButtonPrimary = ({ isInverse, ...props }: ButtonPrimaryProps) => {
+export const ButtonPrimary = ({
+  isInverse = false,
+  ...props
+}: ButtonPrimaryProps) => {
+  // If inverse, use the current theme context
   if (isInverse) {
-    return <ButtonPrimaryBase isInverse={isInverse} {...props} />;
+    return <ButtonPrimaryBase isInverse {...props} />;
   }
-  return <ButtonPrimaryLightOnly isInverse={isInverse} {...props} />;
+  // Otherwise, force light theme
+  return (
+    <ThemeProvider theme={Theme.Light}>
+      <ButtonPrimaryBase isInverse={false} {...props} />
+    </ThemeProvider>
+  );
 };

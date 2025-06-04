@@ -208,7 +208,7 @@ describe('TextButton', () => {
     expect(txtPrStyles).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          color: tw`text-primary-defaultPressed`.color,
+          color: tw`text-primary-default-pressed`.color,
         }),
         expect.objectContaining({ textDecorationLine: 'underline' }),
       ]),
@@ -216,7 +216,7 @@ describe('TextButton', () => {
 
     const iconPressed = renderedPressed.findByProps({ testID: 'start-icon' });
     expect(iconPressed.props.twClassName).toContain(
-      'text-primary-defaultPressed',
+      'text-primary-default-pressed',
     );
   });
 });

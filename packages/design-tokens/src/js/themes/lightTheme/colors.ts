@@ -42,9 +42,15 @@ export const colors: ThemeColors = {
     /** Default color for icons (#121314) */
     default: brandColor.grey900,
     /** Softer color for icons (#686E7D) */
+    /** Hover state surface for icon.default (#2a2b2c) */
+    defaultHover: '#2a2b2c',
+    /** Pressed state surface for icon.default (#414243) */
+    defaultPressed: '#414243',
     alternative: brandColor.grey500,
     /** Muted color for icons (Not accessible) (#9CA1AF) */
     muted: brandColor.grey300,
+    /** For elements placed on top of icon.default fill (#FFFFFF) */
+    inverse: brandColor.grey000,
   },
   border: {
     /** Default color for borders (#B7BBC8) */
