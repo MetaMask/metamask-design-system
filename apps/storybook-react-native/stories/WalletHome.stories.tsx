@@ -42,11 +42,11 @@ const WalletHome: React.FC = () => {
   const tw = useTailwind();
 
   return (
-    <ScrollView style={tw`bg-background-default flex-1`}>
+    <ScrollView style={tw`flex-1 bg-background-default`}>
       {/* Container */}
-      <View style={tw`bg-background-default w-full py-4`}>
+      <View style={tw`w-full bg-background-default py-4`}>
         {/* Header */}
-        <View style={tw`border-border-muted border-b px-4 py-4`}>
+        <View style={tw`border-b border-border-muted px-4 py-4`}>
           <View style={tw`flex-row items-center justify-between`}>
             <View style={tw`flex-1 flex-row items-center overflow-hidden`}>
               <AvatarAccount
@@ -94,25 +94,25 @@ const WalletHome: React.FC = () => {
 
         {/* Actions */}
         <View style={tw`flex-row gap-3 px-4 py-4`}>
-          <ButtonBase twClassName="bg-background-muted h-20 flex-1 rounded-lg px-0 py-4">
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-background-muted px-0 py-4">
             <View style={tw`flex-col items-center justify-center`}>
               <Icon name={IconName.Bank} />
               <Text fontWeight={FontWeight.Medium}>Buy/Sell</Text>
             </View>
           </ButtonBase>
-          <ButtonBase twClassName="bg-background-muted h-20 flex-1 rounded-lg px-0 py-4">
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-background-muted px-0 py-4">
             <View style={tw`flex-col items-center justify-center`}>
               <Icon name={IconName.SwapHorizontal} />
               <Text fontWeight={FontWeight.Medium}>Swap</Text>
             </View>
           </ButtonBase>
-          <ButtonBase twClassName="bg-background-muted h-20 flex-1 rounded-lg px-0 py-4">
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-background-muted px-0 py-4">
             <View style={tw`flex-col items-center justify-center`}>
               <Icon name={IconName.Receive} />
               <Text fontWeight={FontWeight.Medium}>Receive</Text>
             </View>
           </ButtonBase>
-          <ButtonBase twClassName="bg-background-muted h-20 flex-1 rounded-lg px-0 py-4">
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-background-muted px-0 py-4">
             <View style={tw`flex-col items-center justify-center`}>
               <Icon name={IconName.Send} />
               <Text fontWeight={FontWeight.Medium}>Send</Text>
@@ -121,10 +121,10 @@ const WalletHome: React.FC = () => {
         </View>
 
         {/* Tabs */}
-        <View style={tw`border-border-muted border-b px-4`}>
+        <View style={tw`border-b border-border-muted px-4`}>
           <View style={tw`flex-row`}>
             <Pressable
-              style={tw`border-border-default flex-1 items-center justify-center border-b-2 pb-2 pt-1`}
+              style={tw`flex-1 items-center justify-center border-b-2 border-border-default pb-2 pt-1`}
             >
               <Text fontWeight={FontWeight.Medium}>Tokens</Text>
             </Pressable>
