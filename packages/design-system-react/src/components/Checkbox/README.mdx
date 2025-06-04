@@ -29,7 +29,12 @@ const [isSelected, setIsSelected] = useState(false);
 Required unique identifier for the checkbox input element. This is used for the input's id and the label's htmlFor attributes to ensure proper accessibility and form association.
 
 ```tsx
-<Checkbox id="accept-terms" label="I accept the terms" isSelected={false} onChange={() => {}} />
+<Checkbox
+  id="accept-terms"
+  label="I accept the terms"
+  isSelected={false}
+  onChange={() => {}}
+/>
 ```
 
 ---
@@ -71,7 +76,11 @@ Optional label prop that renders text or a React node as a label beside the chec
 Optional props to be passed to the label's Text component.
 
 ```tsx
-<Checkbox id="styled-label" label="Label" labelProps={{ className: 'text-muted' }} />
+<Checkbox
+  id="styled-label"
+  label="Label"
+  labelProps={{ className: 'text-muted' }}
+/>
 ```
 
 ---
@@ -90,7 +99,7 @@ const [isSelected, setIsSelected] = useState(false);
   label="Check me"
   isSelected={isSelected}
   onChange={() => setIsSelected(!isSelected)}
-/>
+/>;
 ```
 
 ---
@@ -104,7 +113,7 @@ Optional props passed to the input element. This allows you to pass additional a
   id="accessible-checkbox"
   inputProps={{
     'data-testid': 'my-checkbox',
-    'aria-describedby': 'help-text'
+    'aria-describedby': 'help-text',
   }}
 />
 ```
@@ -116,7 +125,10 @@ Optional props passed to the input element. This allows you to pass additional a
 Optional props passed to the container div wrapping the checkbox icon.
 
 ```tsx
-<Checkbox id="styled-container" checkboxContainerProps={{className: "bg-success-default"}} />
+<Checkbox
+  id="styled-container"
+  checkboxContainerProps={{ className: 'bg-success-default' }}
+/>
 ```
 
 ---
