@@ -1,30 +1,18 @@
-import type { ColorSet, ColorScheme } from '../twrnc-settings';
+import type { TwConfig } from 'twrnc';
+
+import type { ColorScheme } from '../twrnc-settings';
 import { colorSetList, typographyTailwindConfig } from '../twrnc-settings';
 
-// Inline base Tailwind config to avoid relative import issues when package is consumed
-const baseConfig = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  theme: {
-    extend: {
-      colors: {},
-    },
-  },
-  plugins: [],
-};
-
 /**
- * Generates a Tailwind CSS configuration object based on the specified color set and color scheme.
+ * Generates a Tailwind CSS configuration object based on the specified color scheme.
  * This configuration extends the base Tailwind settings with custom theme colors, typography settings,
  * and other style properties for use in React Native with `twrnc`.
  *
- * @param colorSet - The color set to use (e.g., 'Brand', 'Neutral'). Determines the base palette for the theme.
- * @param colorScheme - The current color scheme ('light' or 'dark'). Specifies whether to use light or dark mode styles.
+ * @param colorScheme - The color scheme ('light' or 'dark'). Specifies whether to use light or dark mode styles.
  * @returns A Tailwind CSS configuration object with extended theme properties and plugins.
  * @example
- * const colorSet = 'Brand';
  * const colorScheme = 'dark';
- *
- * const tailwindConfig = generateTailwindConfig(colorSet, colorScheme);
+ * const tailwindConfig = generateTailwindConfig(colorScheme);
  * console.log(tailwindConfig);
  *
  * Output:
@@ -58,11 +46,8 @@ const baseConfig = {
  * }
  * @throws Will log an error and return an empty object if theme colors are not found for the specified color set and color scheme.
  */
-export const generateTailwindConfig = (
-  colorSet: ColorSet,
-  colorScheme: ColorScheme,
-) => {
-  const themeColors = colorSetList[colorSet][colorScheme];
+export const generateTailwindConfig = (colorScheme: ColorScheme): TwConfig => {
+  const themeColors = colorSetList[colorScheme];
 
   if (!themeColors) {
     console.error('Theme colors not found.');
@@ -70,13 +55,9 @@ export const generateTailwindConfig = (
   }
 
   return {
-    ...baseConfig,
     theme: {
-      ...baseConfig.theme,
       extend: {
-        ...baseConfig.theme?.extend,
         colors: {
-          ...baseConfig.theme?.extend?.colors,
           ...themeColors,
         },
         fontSize: {
@@ -93,6 +74,5 @@ export const generateTailwindConfig = (
         },
       },
     },
-    plugins: baseConfig.plugins || [],
   };
 };

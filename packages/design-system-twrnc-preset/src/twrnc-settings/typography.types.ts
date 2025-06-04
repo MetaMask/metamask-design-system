@@ -69,7 +69,7 @@ export type TypographyTailwindConfigProps = {
   fontSize: Record<
     TypographyVariant,
     [
-      number,
+      string,
       {
         lineHeight: string; // Make sure to include units - "40px" instead of "40"
         letterSpacing: string;
