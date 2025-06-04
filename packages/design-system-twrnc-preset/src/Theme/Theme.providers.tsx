@@ -2,19 +2,17 @@ import React, { createContext, useState, useMemo } from 'react';
 import { useColorScheme } from 'react-native';
 import { create } from 'twrnc';
 
-import { ColorSet, ColorScheme, colorSetList } from '../twrnc-settings';
+import { ColorScheme, colorSetList } from '../twrnc-settings';
 
 import type { ThemeContextProps, ThemeProviderProps } from './Theme.types';
 import { Theme } from './Theme.types';
 import { generateTailwindConfig } from './Theme.utilities';
 
 export const defaultThemeContextValue: ThemeContextProps = {
-  tw: create(generateTailwindConfig(ColorSet.Brand, ColorScheme.Light)),
-  colorSet: ColorSet.Brand,
-  colorSetList: colorSetList[ColorSet.Brand][Theme.Light],
+  tw: create(generateTailwindConfig(ColorScheme.Light)),
+  colorSetList: colorSetList[ColorScheme.Light],
   theme: Theme.Light,
-  setColorSet: () => {},
-  setTheme: () => {},
+  setTheme: () => undefined,
 };
 
 export const ThemeContext = createContext<ThemeContextProps>(
@@ -23,10 +21,8 @@ export const ThemeContext = createContext<ThemeContextProps>(
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
-  colorSet = ColorSet.Brand,
   theme = Theme.Default,
 }) => {
-  const [currentColorSet, setCurrentColorSet] = useState<ColorSet>(colorSet);
   const [currentTheme, setCurrentTheme] = useState<Theme>(theme);
   const systemColorScheme = useColorScheme(); // 'light' | 'dark' | null
 
@@ -44,23 +40,17 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     }
     throw new Error('Invalid theme value');
   }, [currentTheme, systemColorScheme]);
-
   const tw = useMemo(() => {
-    const tailwindConfig = generateTailwindConfig(
-      currentColorSet,
-      activeColorScheme,
-    );
+    const tailwindConfig = generateTailwindConfig(activeColorScheme);
     return create(tailwindConfig);
-  }, [currentColorSet, activeColorScheme]);
+  }, [activeColorScheme]);
 
   return (
     <ThemeContext.Provider
       value={{
         tw,
-        colorSet: currentColorSet,
-        colorSetList: colorSetList[colorSet][activeColorScheme],
+        colorSetList: colorSetList[activeColorScheme],
         theme: currentTheme,
-        setColorSet: setCurrentColorSet,
         setTheme: setCurrentTheme,
       }}
     >
