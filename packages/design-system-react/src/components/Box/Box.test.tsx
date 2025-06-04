@@ -11,6 +11,7 @@ import {
   BoxFlexDirection,
   BoxFlexWrap,
   BoxJustifyContent,
+  BoxBlockSize,
 } from '../../types';
 
 import { Box } from './Box';
@@ -66,10 +67,10 @@ describe('Box', () => {
         borderStyle={BoxBorderStyle.Dashed}
         alignItems={BoxAlignItems.Center}
         justifyContent={BoxJustifyContent.Between}
-        width={1}
-        minWidth={2}
-        height={3}
-        minHeight={4}
+        width={BoxBlockSize.Half}
+        minWidth={BoxBlockSize.OneFourth}
+        height={BoxBlockSize.Full}
+        minHeight={BoxBlockSize.Auto}
         backgroundColor={BoxBackgroundColor.SuccessDefault}
         className="extra"
       />,
@@ -97,10 +98,10 @@ describe('Box', () => {
       BoxBorderStyle.Dashed,
       BoxAlignItems.Center,
       BoxJustifyContent.Between,
-      TWCLASSMAP_BOX_WIDTH[1],
-      TWCLASSMAP_BOX_MINWIDTH[2],
-      TWCLASSMAP_BOX_HEIGHT[3],
-      TWCLASSMAP_BOX_MINHEIGHT[4],
+      TWCLASSMAP_BOX_WIDTH[BoxBlockSize.Half],
+      TWCLASSMAP_BOX_MINWIDTH[BoxBlockSize.OneFourth],
+      TWCLASSMAP_BOX_HEIGHT[BoxBlockSize.Full],
+      TWCLASSMAP_BOX_MINHEIGHT[BoxBlockSize.Auto],
       BoxBackgroundColor.SuccessDefault,
       'extra',
     ];

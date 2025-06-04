@@ -11,6 +11,7 @@ import type {
   BoxAlignItems,
   BoxJustifyContent,
   BoxBackgroundColor,
+  BoxBlockSize,
 } from '../../types';
 
 export type BoxProps = ComponentProps<'div'> & {
@@ -104,19 +105,19 @@ export type BoxProps = ComponentProps<'div'> & {
   /**
    * The width style of the component.
    */
-  width?: BoxSpacing;
+  width?: BoxBlockSize;
   /**
    * The min-width style of the component.
    */
-  minWidth?: BoxSpacing;
+  minWidth?: BoxBlockSize;
   /**
    * The height style of the component.
    */
-  height?: BoxSpacing;
+  height?: BoxBlockSize;
   /**
    * The min-height style of the component.
    */
-  minHeight?: BoxSpacing;
+  minHeight?: BoxBlockSize;
   /**
    * The background-color style of the component.
    */

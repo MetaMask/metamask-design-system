@@ -11,6 +11,7 @@ import {
   BoxFlexWrap,
   BoxAlignItems,
   BoxJustifyContent,
+  BoxBlockSize,
 } from '../../types';
 import { Text } from '../Text';
 
@@ -120,19 +121,27 @@ const meta: Meta<BoxProps> = {
       description: 'The justify-content style of the component.',
     },
     width: {
-      control: 'number',
+      control: 'select',
+      options: Object.keys(BoxBlockSize),
+      mapping: BoxBlockSize,
       description: 'The width style of the component.',
     },
     minWidth: {
-      control: 'number',
+      control: 'select',
+      options: Object.keys(BoxBlockSize),
+      mapping: BoxBlockSize,
       description: 'The min-width style of the component.',
     },
     height: {
-      control: 'number',
+      control: 'select',
+      options: Object.keys(BoxBlockSize),
+      mapping: BoxBlockSize,
       description: 'The height style of the component.',
     },
     minHeight: {
-      control: 'number',
+      control: 'select',
+      options: Object.keys(BoxBlockSize),
+      mapping: BoxBlockSize,
       description: 'The min-height style of the component.',
     },
     backgroundColor: {
@@ -168,91 +177,153 @@ export const Default: Story = {
 
 export const FlexDirection: Story = {
   args: {
-    flexDirection: BoxFlexDirection.Column,
+    flexDirection: BoxFlexDirection.Row,
+    gap: 2,
+    padding: 3,
+    backgroundColor: BoxBackgroundColor.BackgroundAlternative,
   },
   render: (args) => <BoxStory {...args} />,
 };
 
 export const FlexWrap: Story = {
   args: {
+    flexDirection: BoxFlexDirection.Row,
     flexWrap: BoxFlexWrap.Wrap,
+    gap: 2,
+    padding: 3,
+    backgroundColor: BoxBackgroundColor.BackgroundAlternative,
+    width: BoxBlockSize.Half,
   },
-  render: (args) => <BoxStory {...args} />,
+  render: (args) => (
+    <Box {...args}>
+      <Text>Long text item 1</Text>
+      <Text>Long text item 2</Text>
+      <Text>Long text item 3</Text>
+      <Text>Long text item 4</Text>
+    </Box>
+  ),
 };
 
 export const Gap: Story = {
   args: {
     gap: 4,
+    padding: 3,
+    backgroundColor: BoxBackgroundColor.BackgroundAlternative,
   },
   render: (args) => <BoxStory {...args} />,
 };
 
 export const Margin: Story = {
   args: {
-    margin: 2,
+    margin: 4,
+    padding: 3,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
   },
-  render: (args) => <BoxStory {...args} />,
+  render: (args) => (
+    <Box backgroundColor={BoxBackgroundColor.BackgroundAlternative} padding={2}>
+      <BoxStory {...args} />
+    </Box>
+  ),
 };
 
 export const MarginTop: Story = {
   args: {
-    marginTop: 2,
+    marginTop: 4,
+    padding: 3,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
   },
-  render: (args) => <BoxStory {...args} />,
+  render: (args) => (
+    <Box backgroundColor={BoxBackgroundColor.BackgroundAlternative} padding={2}>
+      <Box padding={2} backgroundColor={BoxBackgroundColor.InfoMuted}>
+        <Text>Reference box above</Text>
+      </Box>
+      <BoxStory {...args} />
+    </Box>
+  ),
 };
 
 export const MarginBottom: Story = {
   args: {
-    marginBottom: 2,
+    marginBottom: 4,
+    padding: 3,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
   },
-  render: (args) => <BoxStory {...args} />,
+  render: (args) => (
+    <Box backgroundColor={BoxBackgroundColor.BackgroundAlternative} padding={2}>
+      <BoxStory {...args} />
+      <Box padding={2} backgroundColor={BoxBackgroundColor.InfoMuted}>
+        <Text>Reference box below</Text>
+      </Box>
+    </Box>
+  ),
 };
 
 export const MarginLeft: Story = {
   args: {
-    marginLeft: 2,
+    marginLeft: 4,
+    padding: 3,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
   },
-  render: (args) => <BoxStory {...args} />,
+  render: (args) => (
+    <Box backgroundColor={BoxBackgroundColor.BackgroundAlternative} padding={2}>
+      <BoxStory {...args} />
+    </Box>
+  ),
 };
 
 export const MarginRight: Story = {
   args: {
-    marginRight: 2,
+    marginRight: 4,
+    padding: 3,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
   },
-  render: (args) => <BoxStory {...args} />,
+  render: (args) => (
+    <Box backgroundColor={BoxBackgroundColor.BackgroundAlternative} padding={2}>
+      <BoxStory {...args} />
+    </Box>
+  ),
 };
 
 export const Padding: Story = {
   args: {
-    padding: 2,
+    padding: 4,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
   },
   render: (args) => <BoxStory {...args} />,
 };
 
 export const PaddingTop: Story = {
   args: {
-    paddingTop: 2,
+    paddingTop: 4,
+    padding: 2,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
   },
   render: (args) => <BoxStory {...args} />,
 };
 
 export const PaddingBottom: Story = {
   args: {
-    paddingBottom: 2,
+    paddingBottom: 4,
+    padding: 2,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
   },
   render: (args) => <BoxStory {...args} />,
 };
 
 export const PaddingLeft: Story = {
   args: {
-    paddingLeft: 2,
+    paddingLeft: 4,
+    padding: 2,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
   },
   render: (args) => <BoxStory {...args} />,
 };
 
 export const PaddingRight: Story = {
   args: {
-    paddingRight: 2,
+    paddingRight: 4,
+    padding: 2,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
   },
   render: (args) => <BoxStory {...args} />,
 };
@@ -260,6 +331,8 @@ export const PaddingRight: Story = {
 export const BorderColor: Story = {
   args: {
     borderColor: BoxBorderColor.PrimaryDefault,
+    borderWidth: BoxBorderWidth.Md,
+    padding: 3,
   },
   render: (args) => <BoxStory {...args} />,
 };
@@ -267,6 +340,8 @@ export const BorderColor: Story = {
 export const BorderWidth: Story = {
   args: {
     borderWidth: BoxBorderWidth.Lg,
+    borderColor: BoxBorderColor.PrimaryDefault,
+    padding: 3,
   },
   render: (args) => <BoxStory {...args} />,
 };
@@ -274,6 +349,8 @@ export const BorderWidth: Story = {
 export const BorderRadius: Story = {
   args: {
     borderRadius: BoxBorderRadius.Lg,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
+    padding: 4,
   },
   render: (args) => <BoxStory {...args} />,
 };
@@ -281,6 +358,9 @@ export const BorderRadius: Story = {
 export const BorderStyle: Story = {
   args: {
     borderStyle: BoxBorderStyle.Dashed,
+    borderWidth: BoxBorderWidth.Md,
+    borderColor: BoxBorderColor.PrimaryDefault,
+    padding: 3,
   },
   render: (args) => <BoxStory {...args} />,
 };
@@ -288,48 +368,107 @@ export const BorderStyle: Story = {
 export const AlignItems: Story = {
   args: {
     alignItems: BoxAlignItems.Center,
+    height: BoxBlockSize.Half,
+    backgroundColor: BoxBackgroundColor.BackgroundAlternative,
+    padding: 3,
   },
   render: (args) => <BoxStory {...args} />,
 };
 
 export const JustifyContent: Story = {
   args: {
+    flexDirection: BoxFlexDirection.Row,
     justifyContent: BoxJustifyContent.Between,
+    backgroundColor: BoxBackgroundColor.BackgroundAlternative,
+    padding: 3,
   },
   render: (args) => <BoxStory {...args} />,
 };
 
 export const Width: Story = {
   args: {
-    width: 6,
+    width: BoxBlockSize.Half,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
+    padding: 3,
   },
-  render: (args) => <BoxStory {...args} />,
+  render: (args) => (
+    <Box backgroundColor={BoxBackgroundColor.BackgroundAlternative} padding={2}>
+      <BoxStory {...args} />
+    </Box>
+  ),
 };
 
 export const MinWidth: Story = {
   args: {
-    minWidth: 6,
+    minWidth: BoxBlockSize.Half,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
+    padding: 3,
   },
-  render: (args) => <BoxStory {...args} />,
+  render: (args) => (
+    <Box backgroundColor={BoxBackgroundColor.BackgroundAlternative} padding={2}>
+      <BoxStory {...args} />
+    </Box>
+  ),
 };
 
 export const Height: Story = {
   args: {
-    height: 6,
+    height: BoxBlockSize.Half,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
+    padding: 3,
   },
-  render: (args) => <BoxStory {...args} />,
+  render: (args) => (
+    <Box
+      backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+      padding={2}
+      style={{ height: '400px' }}
+    >
+      <BoxStory {...args} />
+    </Box>
+  ),
 };
 
 export const MinHeight: Story = {
   args: {
-    minHeight: 6,
+    minHeight: BoxBlockSize.OneFourth,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
+    padding: 3,
   },
-  render: (args) => <BoxStory {...args} />,
+  render: (args) => (
+    <Box
+      backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+      padding={2}
+      style={{ height: '200px' }}
+    >
+      <BoxStory {...args} />
+    </Box>
+  ),
 };
 
 export const BackgroundColor: Story = {
   args: {
-    backgroundColor: BoxBackgroundColor.PrimaryMuted,
+    backgroundColor: BoxBackgroundColor.SuccessMuted,
+    padding: 4,
   },
   render: (args) => <BoxStory {...args} />,
+};
+
+export const CombinedStyles: Story = {
+  args: {
+    flexDirection: BoxFlexDirection.Row,
+    gap: 3,
+    padding: 4,
+    margin: 2,
+    backgroundColor: BoxBackgroundColor.PrimaryMuted,
+    borderRadius: BoxBorderRadius.Lg,
+    borderWidth: BoxBorderWidth.Sm,
+    borderColor: BoxBorderColor.PrimaryDefault,
+    alignItems: BoxAlignItems.Center,
+    justifyContent: BoxJustifyContent.Between,
+  },
+  render: (args) => (
+    <Box backgroundColor={BoxBackgroundColor.BackgroundAlternative} padding={3}>
+      <BoxStory {...args} />
+    </Box>
+  ),
 };
