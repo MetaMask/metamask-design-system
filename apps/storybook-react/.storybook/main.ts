@@ -21,22 +21,29 @@ const config: StorybookConfig = {
     '../../../packages/design-tokens/stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
-    getAbsolutePath('@storybook/addon-onboarding'),
-    getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-essentials'),
     getAbsolutePath('@chromatic-com/storybook'),
-    getAbsolutePath('@storybook/addon-interactions'),
     getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-vitest'),
   ],
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {},
+  },
+  docs: {
+    defaultName: 'Documentation',
   },
   viteFinal: (config) => {
     // This will ensure Vite knows how to resolve modules outside the storybook folder
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
+        // Map the styles.css to the built version for consistency
+        '@metamask/design-tokens/styles.css': path.resolve(
+          __dirname,
+          '../../../packages/design-tokens/dist/styles.css',
+        ),
+        // Map the package to the source for immediate updates
         '@metamask/design-tokens': path.resolve(
           __dirname,
           '../../../packages/design-tokens',
