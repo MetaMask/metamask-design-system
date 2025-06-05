@@ -147,37 +147,6 @@ export type BadgeWrapperCustomPosition = {
  */
 export type BoxSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
-export enum BoxBlockSize {
-  Zero = '0',
-  Half = '1/2',
-  OneThird = '1/3',
-  TwoThirds = '2/3',
-  OneFourth = '1/4',
-  ThreeFourths = '3/4',
-  OneFifth = '1/5',
-  TwoFifths = '2/5',
-  ThreeFifths = '3/5',
-  FourFifths = '4/5',
-  OneSixth = '1/6',
-  FiveSixths = '5/6',
-  OneTwelfth = '1/12',
-  TwoTwelfths = '2/12',
-  ThreeTwelfths = '3/12',
-  FourTwelfths = '4/12',
-  FiveTwelfths = '5/12',
-  SixTwelfths = '6/12',
-  SevenTwelfths = '7/12',
-  EightTwelfths = '8/12',
-  NineTwelfths = '9/12',
-  TenTwelfths = '10/12',
-  ElevenTwelfths = '11/12',
-  Full = 'full',
-  Screen = 'screen',
-  Auto = 'auto',
-  Min = 'min',
-  Max = 'max',
-}
-
 /**
  * Box - flexDirection
  */
@@ -218,72 +187,6 @@ export enum BoxJustifyContent {
   Between = 'justify-between',
   Around = 'justify-around',
   Evenly = 'justify-evenly',
-}
-
-/**
- * Box - borderRadius
- */
-export enum BoxBorderRadius {
-  None = 'rounded-none',
-  Sm = 'rounded-sm', // 4px
-  Md = 'rounded-md', // 6px
-  Lg = 'rounded-lg', // 8px
-  Full = 'rounded-full',
-}
-
-/**
- * Box - borderWidth
- */
-export enum BoxBorderWidth {
-  None = 'border-0',
-  Sm = 'border',
-  Md = 'border-2',
-  Lg = 'border-4',
-  Xl = 'border-8',
-}
-
-/**
- * Box - borderStyle
- */
-export enum BoxBorderStyle {
-  Solid = 'border-solid',
-  Dashed = 'border-dashed',
-  Dotted = 'border-dotted',
-  Double = 'border-double',
-  None = 'border-none',
-}
-
-/**
- * Box - backgroundColor
- */
-export enum BoxBackgroundColor {
-  BackgroundDefault = 'bg-background-default',
-  BackgroundAlternative = 'bg-background-alternative',
-  PrimaryDefault = 'bg-primary-default',
-  PrimaryMuted = 'bg-primary-muted',
-  ErrorDefault = 'bg-error-default',
-  ErrorMuted = 'bg-error-muted',
-  SuccessDefault = 'bg-success-default',
-  SuccessMuted = 'bg-success-muted',
-  InfoDefault = 'bg-info-default',
-  InfoMuted = 'bg-info-muted',
-  WarningDefault = 'bg-warning-default',
-  WarningMuted = 'bg-warning-muted',
-  Transparent = 'bg-transparent',
-}
-
-/**
- * Box - borderColor
- */
-export enum BoxBorderColor {
-  BorderDefault = 'border border-border-default',
-  BorderMuted = 'border border-border-muted',
-  PrimaryDefault = 'border border-primary-default',
-  ErrorDefault = 'border border-error-default',
-  SuccessDefault = 'border border-success-default',
-  InfoDefault = 'border border-info-default',
-  WarningDefault = 'border border-warning-default',
-  None = '',
 }
 
 /**
