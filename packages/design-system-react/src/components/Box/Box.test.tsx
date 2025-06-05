@@ -129,12 +129,13 @@ describe('Box', () => {
   });
 
   it('forwards other props to the div element', () => {
+    const mockClick = jest.fn();
     render(
       <Box
         data-testid="box"
         role="main"
         aria-label="Test box"
-        onClick={() => {}}
+        onClick={mockClick}
       />,
     );
     const box = screen.getByTestId('box');
