@@ -30,11 +30,11 @@ export const ButtonTertiary = ({
     ${
       isInverse && isDanger
         ? isPressed || isLoading
-          ? 'bg-background-defaultPressed'
+          ? 'bg-background-default-pressed'
           : 'bg-background-default'
         : isDanger
           ? isPressed || isLoading
-            ? 'bg-error-mutedPressed'
+            ? 'bg-error-muted-pressed'
             : 'bg-transparent'
           : isInverse
             ? isPressed || isLoading
@@ -48,11 +48,11 @@ export const ButtonTertiary = ({
     ${
       isInverse && isDanger
         ? isPressed || isLoading
-          ? 'border-background-defaultPressed'
+          ? 'border-background-default-pressed'
           : 'border-background-default'
         : isDanger
           ? isPressed || isLoading
-            ? 'border-error-mutedPressed'
+            ? 'border-error-muted-pressed'
             : 'border-transparent'
           : isInverse
             ? 'border-primary-inverse'
@@ -64,12 +64,12 @@ export const ButtonTertiary = ({
 
   const twTextClassNames = isDanger
     ? isPressed || isLoading
-      ? 'text-error-defaultPressed'
+      ? 'text-error-default-pressed'
       : 'text-error-default'
     : isInverse
       ? 'text-primary-inverse'
       : isPressed || isLoading
-        ? 'text-primary-defaultPressed'
+        ? 'text-primary-default-pressed'
         : 'text-primary-default';
 
   const onPressInHandler = (event: GestureResponderEvent) => {

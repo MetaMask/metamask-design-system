@@ -72,6 +72,9 @@ export { ButtonBaseSize } from './ButtonBase';
 export { ButtonIcon, ButtonIconSize } from './ButtonIcon';
 export type { ButtonIconProps } from './ButtonIcon';
 
+export { Checkbox } from './Checkbox';
+export type { CheckboxProps } from './Checkbox';
+
 export { Icon } from './Icon';
 export { IconName, IconSize, IconColor } from './Icon';
 export type { IconProps } from './Icon';
