@@ -89,7 +89,11 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 ### `flexWrap`
 
 ```tsx
-<Box flexDirection={BoxFlexDirection.Row} flexWrap={BoxFlexWrap.Wrap} twClassName="w-full">
+<Box
+  flexDirection={BoxFlexDirection.Row}
+  flexWrap={BoxFlexWrap.Wrap}
+  twClassName="w-full"
+>
   <Text>Item 1</Text>
   <Text>Item 2</Text>
   <Text>Item 3</Text>
@@ -195,7 +199,11 @@ The `gap` prop uses the `BoxSpacing` numeric system for consistent spacing scale
 ### Basic Horizontal Layout
 
 ```tsx
-<Box flexDirection={BoxFlexDirection.Row} gap={3} alignItems={BoxAlignItems.Center}>
+<Box
+  flexDirection={BoxFlexDirection.Row}
+  gap={3}
+  alignItems={BoxAlignItems.Center}
+>
   <Text>Item 1</Text>
   <Text>Item 2</Text>
   <Text>Item 3</Text>
