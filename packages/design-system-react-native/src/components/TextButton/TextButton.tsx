@@ -45,7 +45,7 @@ export const TextButton: React.FC<TextButtonProps> = ({
       if (isInverse) {
         return 'text-primary-inverse';
       }
-      return pressed ? 'text-primary-defaultPressed' : 'text-primary-default';
+      return pressed ? 'text-primary-default-pressed' : 'text-primary-default';
     },
     [isInverse],
   );

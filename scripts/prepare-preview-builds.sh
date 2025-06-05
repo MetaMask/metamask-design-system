@@ -43,15 +43,32 @@ done < <(yarn workspaces list --json | jq --slurp --raw-output 'map(select(.loca
 echo "Installing dependencies..."
 yarn install --no-immutable
 
-echo "Updating TypeScript imports for React Native packages..."
-for pkg in "design-system-react-native" "design-system-twrnc-preset"; do
-  if [ -d "packages/$pkg/src" ]; then
-    echo "- $pkg source files"
-    # Use different sed syntax for Linux vs macOS
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i '' "s/@metamask\//@metamask-previews\//g" {} +
-    else
-      find "packages/$pkg/src" -type f -name "*.ts*" -exec sed -i "s/@metamask\//@metamask-previews\//g" {} +
-    fi
+echo "Updating TypeScript imports for specific packages..."
+
+# Update imports in design-system-react-native
+if [ -d "packages/design-system-react-native/src" ]; then
+  echo "- design-system-react-native source files"
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    # Update design-tokens import
+    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-tokens|@metamask-previews/design-tokens|g' {} +
+    # Update design-system-twrnc-preset import
+    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-system-twrnc-preset|@metamask-previews/design-system-twrnc-preset|g' {} +
+  else
+    # Update design-tokens import
+    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-tokens|@metamask-previews/design-tokens|g' {} +
+    # Update design-system-twrnc-preset import
+    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-system-twrnc-preset|@metamask-previews/design-system-twrnc-preset|g' {} +
   fi
-done
+fi
+
+# Update imports in design-system-twrnc-preset
+if [ -d "packages/design-system-twrnc-preset/src" ]; then
+  echo "- design-system-twrnc-preset source files"
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    # Update design-tokens import
+    find "packages/design-system-twrnc-preset/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-tokens|@metamask-previews/design-tokens|g' {} +
+  else
+    # Update design-tokens import
+    find "packages/design-system-twrnc-preset/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-tokens|@metamask-previews/design-tokens|g' {} +
+  fi
+fi

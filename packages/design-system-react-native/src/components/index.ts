@@ -5,7 +5,7 @@ export {
 } from './AvatarAccount';
 export type { AvatarAccountProps } from './AvatarAccount';
 
-export { AvatarBase, AvatarBaseSize } from './AvatarBase';
+export { AvatarBase, AvatarBaseSize, AvatarBaseShape } from './AvatarBase';
 export type { AvatarBaseProps } from './AvatarBase';
 
 export { AvatarFavicon, AvatarFaviconSize } from './AvatarFavicon';
