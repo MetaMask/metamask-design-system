@@ -1,0 +1,8 @@
+import{r as o,j as s}from"./iframe-BknD6R0A.js";import{A as w,g}from"./index-CiWXofBh.js";import{A as b}from"./AvatarBase-CokxalKV.js";const l=o.forwardRef(({src:a,name:t="",fallbackText:i,fallbackTextProps:d,className:p,size:f=g.Md,imageProps:e,...u},c)=>{const[m,k]=o.useState(""),r=i||(t==null?void 0:t[0])||"",x=t||"Network logo",h=v=>{var n;k(r),(n=e==null?void 0:e.onError)==null||n.call(e,v)};return s.jsx(b,{ref:c,shape:w.Square,size:f,className:p,fallbackText:a?m:r,fallbackTextProps:d,...u,children:a&&s.jsx("img",{src:a,alt:x,className:"h-full w-full object-contain",...e,onError:h})})});l.displayName="AvatarNetwork";l.__docgenInfo={description:"",methods:[],displayName:"AvatarNetwork",props:{name:{required:!1,tsType:{name:"string"},description:`Optional name of the network
+Used as alt text for image and first letter is used as fallback if no fallbackText provided`,defaultValue:{value:"''",computed:!1}},src:{required:!1,tsType:{name:"string"},description:`Optional URL for the network image
+When provided, displays the image instead of fallback text`},imageProps:{required:!1,tsType:{name:"intersection",raw:`ComponentProps<'img'> & {
+  'data-testid'?: string;
+}`,elements:[{name:"ComponentProps",elements:[{name:"literal",value:"'img'"}],raw:"ComponentProps<'img'>"},{name:"signature",type:"object",raw:`{
+  'data-testid'?: string;
+}`,signature:{properties:[{key:"data-testid",value:{name:"string",required:!1}}]}}]},description:`Optional prop to pass to the underlying img element
+Useful for overriding the default alt text which is the network name`},size:{defaultValue:{value:"AvatarNetworkSize.Md",computed:!0},required:!1}}};export{l as A};
