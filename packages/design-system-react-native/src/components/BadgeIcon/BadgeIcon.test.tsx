@@ -12,7 +12,7 @@ describe('BadgeIcon', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Compute expected container style using an empty twClassName.
-      const computedExpectedContainer = tw`bg-icon-default h-[16px] w-[16px] items-center justify-center rounded-full`;
+      const computedExpectedContainer = tw`h-[16px] w-[16px] items-center justify-center rounded-full bg-icon-default`;
       return (
         <>
           <BadgeIcon iconName={IconName.Add} testID="badge-icon" />
