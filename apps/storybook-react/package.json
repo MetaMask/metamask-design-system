@@ -5,8 +5,8 @@
   "description": "storybook react",
   "files": [],
   "scripts": {
-    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "storybook": "storybook dev -p 6006",
     "test-storybook": "vitest"
   },
   "devDependencies": {

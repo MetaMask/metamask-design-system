@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitest/config';
-import storybookTest from '@storybook/addon-vitest/vitest-plugin';
+import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -14,6 +14,7 @@ export default defineConfig({
       configDir: path.join(dirname, '.storybook'),
       storybookScript:
         'yarn workspace @metamask/storybook-react storybook --ci',
+      disableAddonDocs: true,
     }),
   ],
   test: {
@@ -31,10 +32,6 @@ export default defineConfig({
       '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*',
       '**/*.mdx',
       '**/*.md',
-      '**/README.mdx',
-      // Exclude specific problematic MDX files
-      '**/Introduction.mdx',
-      '**/IntroductionColor.mdx',
     ],
   },
 });
