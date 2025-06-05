@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { lightTheme, darkTheme } from '@metamask/design-tokens';
+
+import { Theme } from './ThemeProvider';
+import type { ThemeColorProps } from './ThemeProvider';
 
 /**
  * Helper function to convert a camelCase / PascalCase string to kebab-case.
@@ -46,13 +49,13 @@ const toKebab = (str: string): string =>
  * };
  *
  * flattenColors(colors);
- * // Returns:
- * // {
- * //   'primary-default': '#4459ff',
- * //   'primary-default-hover': '#384df5',
- * //   'primary-muted': '#4459ff1a',
- * //   'secondary': '#2c3dc5'
- * // }
+ * Returns:
+ * {
+ *   'primary-default': '#4459ff',
+ *   'primary-default-hover': '#384df5',
+ *   'primary-muted': '#4459ff1a',
+ *   'secondary': '#2c3dc5'
+ * }
  */
 export const flattenColors = (
   colors: Record<string, any>,
@@ -75,4 +78,12 @@ export const flattenColors = (
   }
 
   return result;
+};
+
+export const themeColors: {
+  [Theme.Light]: Record<string, string>;
+  [Theme.Dark]: Record<string, string>;
+} = {
+  [Theme.Light]: flattenColors(lightTheme.colors),
+  [Theme.Dark]: flattenColors(darkTheme.colors),
 };

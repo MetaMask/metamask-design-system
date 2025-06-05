@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ThemeContext } from './Theme.providers';
+import { ThemeContext } from './ThemeProvider';
 
 /**
  * Hook that provides access to both the theme context and tailwind utility.
