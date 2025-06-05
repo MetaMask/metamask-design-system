@@ -1,6 +1,6 @@
 # Box
 
-`Box` is a low level layout component built on top of the React Native `View` element. It exposes a number of props that map to Tailwind utility classes allowing easy spacing and alignment control.
+`Box` is a low level flexbox layout component built on top of the React Native `View` element. It provides a focused set of props that map to Tailwind flexbox utility classes for easy flex-based layout control.
 
 ---
 
@@ -8,7 +8,7 @@
 
 ### `flexDirection`
 
-The flexDirection style of the component.
+The flexDirection style of the component for controlling the main axis direction.
 
 | TYPE                                     | REQUIRED |
 | :--------------------------------------- | :------- |
@@ -16,7 +16,7 @@ The flexDirection style of the component.
 
 ### `flexWrap`
 
-The flexWrap style of the component.
+The flexWrap style of the component for controlling item wrapping behavior.
 
 | TYPE                                | REQUIRED |
 | :---------------------------------- | :------- |
@@ -24,63 +24,15 @@ The flexWrap style of the component.
 
 ### `gap`
 
-The gap between the component's children.
+The gap between the component's children. Use values from the BoxSpacing scale (0-12).
 
 | TYPE   | REQUIRED |
 | :----- | :------- |
 | number | No       |
-
-### `margin`, `marginTop`, `marginBottom`, `marginLeft`, `marginRight`
-
-The margin style of the component.
-
-| TYPE   | REQUIRED |
-| :----- | :------- |
-| number | No       |
-
-### `padding`, `paddingTop`, `paddingBottom`, `paddingLeft`, `paddingRight`
-
-The padding style of the component.
-
-| TYPE   | REQUIRED |
-| :----- | :------- |
-| number | No       |
-
-### `borderColor`
-
-The borderColor style of the component.
-
-| TYPE                                   | REQUIRED |
-| :------------------------------------- | :------- |
-| [BoxBorderColor](../../types/index.ts) | No       |
-
-### `borderWdith`
-
-The borderWdith style of the component.
-
-| TYPE                                   | REQUIRED |
-| :------------------------------------- | :------- |
-| [BoxBorderWdith](../../types/index.ts) | No       |
-
-### `borderRadius`
-
-The borderRadius style of the component.
-
-| TYPE                                    | REQUIRED |
-| :-------------------------------------- | :------- |
-| [BoxBorderRadius](../../types/index.ts) | No       |
-
-### `borderStyle`
-
-The borderStyle style of the component.
-
-| TYPE                                   | REQUIRED |
-| :------------------------------------- | :------- |
-| [BoxBorderStyle](../../types/index.ts) | No       |
 
 ### `alignItems`
 
-The alignItems style of the component.
+The alignItems style of the component for cross-axis alignment.
 
 | TYPE                                  | REQUIRED |
 | :------------------------------------ | :------- |
@@ -88,55 +40,15 @@ The alignItems style of the component.
 
 ### `justifyContent`
 
-The justifyContent style of the component.
+The justifyContent style of the component for main-axis alignment.
 
 | TYPE                                      | REQUIRED |
 | :---------------------------------------- | :------- |
 | [BoxJustifyContent](../../types/index.ts) | No       |
 
-### `width`
-
-The width style of the component. Uses semantic size values based on Tailwind CSS sizing classes.
-
-| TYPE                                 | REQUIRED |
-| :----------------------------------- | :------- |
-| [BoxBlockSize](../../types/index.ts) | No       |
-
-### `minWidth`
-
-The minWidth style of the component. Uses semantic size values based on Tailwind CSS sizing classes.
-
-| TYPE                                 | REQUIRED |
-| :----------------------------------- | :------- |
-| [BoxBlockSize](../../types/index.ts) | No       |
-
-### `height`
-
-The height style of the component. Uses semantic size values based on Tailwind CSS sizing classes.
-
-| TYPE                                 | REQUIRED |
-| :----------------------------------- | :------- |
-| [BoxBlockSize](../../types/index.ts) | No       |
-
-### `minHeight`
-
-The minHeight style of the component. Uses semantic size values based on Tailwind CSS sizing classes.
-
-| TYPE                                 | REQUIRED |
-| :----------------------------------- | :------- |
-| [BoxBlockSize](../../types/index.ts) | No       |
-
-### `backgroundColor`
-
-The backgroundColor style of the component.
-
-| TYPE                                       | REQUIRED |
-| :----------------------------------------- | :------- |
-| [BoxBackgroundColor](../../types/index.ts) | No       |
-
 ### `twClassName`
 
-Optional prop to add twrnc overriding classNames.
+Optional prop to add twrnc overriding classNames for styling beyond flex properties.
 
 | TYPE     | REQUIRED | DEFAULT |
 | :------- | :------- | :------ |
@@ -161,246 +73,188 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 ### `flexDirection`
 
 ```tsx
+// Horizontal layout (default)
 <Box flexDirection={BoxFlexDirection.Row}>
-  <Text>Row layout</Text>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+</Box>
+
+// Vertical layout
+<Box flexDirection={BoxFlexDirection.Column}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
 </Box>
 ```
 
 ### `flexWrap`
 
 ```tsx
-<Box flexWrap={BoxFlexWrap.Wrap}>
-  <Text>Wrapped content</Text>
+<Box flexDirection={BoxFlexDirection.Row} flexWrap={BoxFlexWrap.Wrap} twClassName="w-full">
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+  <Text>Item 3</Text>
+  <Text>Item 4</Text>
 </Box>
 ```
 
 ### `gap`
 
 ```tsx
-<Box gap={4}>
+// Small gap (8px)
+<Box gap={2}>
   <Text>Item 1</Text>
   <Text>Item 2</Text>
 </Box>
-```
 
-### `margin`
-
-```tsx
-<Box margin={3}>
-  <Text>With margin</Text>
-</Box>
-```
-
-### `padding`
-
-```tsx
-<Box padding={2}>
-  <Text>With padding</Text>
-</Box>
-```
-
-### `borderColor`
-
-```tsx
-<Box borderColor={BoxBorderColor.BorderMuted} borderWidth={1}>
-  <Text>Muted border</Text>
-</Box>
-```
-
-### `borderWidth`
-
-```tsx
-<Box borderWidth={2}>
-  <Text>Thick border</Text>
-</Box>
-```
-
-### `borderRadius`
-
-```tsx
-<Box borderRadius={BoxBorderRadius.Md}>
-  <Text>Rounded corners</Text>
-</Box>
-```
-
-### `borderStyle`
-
-```tsx
-<Box borderStyle={BoxBorderStyle.Dashed} borderWidth={1}>
-  <Text>Dashed border</Text>
+// Large gap (24px)
+<Box gap={6}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
 </Box>
 ```
 
 ### `alignItems`
 
 ```tsx
-<Box alignItems={BoxAlignItems.Center}>
+// Center items on cross axis
+<Box alignItems={BoxAlignItems.Center} twClassName="h-32">
   <Text>Centered content</Text>
+</Box>
+
+// Stretch items to fill cross axis
+<Box alignItems={BoxAlignItems.Stretch}>
+  <Text>Stretched content</Text>
 </Box>
 ```
 
 ### `justifyContent`
 
 ```tsx
-<Box justifyContent={BoxJustifyContent.SpaceBetween}>
+// Space between items
+<Box flexDirection={BoxFlexDirection.Row} justifyContent={BoxJustifyContent.Between}>
   <Text>Left</Text>
   <Text>Right</Text>
 </Box>
-```
 
-### `width`
-
-```tsx
-{/* Half width */}
-<Box width={BoxBlockSize.Half}>
-  <Text>50% width</Text>
-</Box>
-
-{/* Full width */}
-<Box width={BoxBlockSize.Full}>
-  <Text>100% width</Text>
-</Box>
-
-{/* Fractional width */}
-<Box width={BoxBlockSize.OneThird}>
-  <Text>33.33% width</Text>
-</Box>
-```
-
-### `minWidth`
-
-```tsx
-{/* Minimum quarter width */}
-<Box minWidth={BoxBlockSize.OneFourth}>
-  <Text>Minimum 25% width</Text>
-</Box>
-
-{/* Auto minimum width */}
-<Box minWidth={BoxBlockSize.Auto}>
-  <Text>Auto minimum width</Text>
-</Box>
-```
-
-### `height`
-
-```tsx
-{/* Full height */}
-<Box height={BoxBlockSize.Full}>
-  <Text>100% height</Text>
-</Box>
-
-{/* Screen height */}
-<Box height={BoxBlockSize.Screen}>
-  <Text>Full viewport height</Text>
-</Box>
-
-{/* Fractional height */}
-<Box height={BoxBlockSize.TwoThirds}>
-  <Text>66.67% height</Text>
-</Box>
-```
-
-### `minHeight`
-
-```tsx
-{/* Auto minimum height */}
-<Box minHeight={BoxBlockSize.Auto}>
-  <Text>Auto minimum height</Text>
-</Box>
-
-{/* Half minimum height */}
-<Box minHeight={BoxBlockSize.Half}>
-  <Text>Minimum 50% height</Text>
-</Box>
-```
-
-### `backgroundColor`
-
-```tsx
-<Box backgroundColor={BoxBackgroundColor.BackgroundAlternative}>
-  <Text>Colored background</Text>
+// Center items on main axis
+<Box justifyContent={BoxJustifyContent.Center}>
+  <Text>Centered</Text>
 </Box>
 ```
 
 ### `twClassName`
 
 ```tsx
-<Box twClassName="rounded-xl bg-yellow-200 p-4">
-  <Text>Custom tailwind style</Text>
+// Custom styling with Tailwind classes
+<Box twClassName="p-4 bg-primary-muted border-2 border-primary-default rounded-lg">
+  <Text>Custom styled box</Text>
+</Box>
+
+// Size and positioning with Tailwind
+<Box twClassName="w-1/2 h-32 bg-warning-muted">
+  <Text>Half width, fixed height</Text>
 </Box>
 ```
 
 ### `style`
 
 ```tsx
-<Box style={{ shadowColor: 'black', shadowOpacity: 0.3 }}>
-  <Text>Custom style</Text>
+<Box style={{ shadowColor: 'black', shadowOpacity: 0.3, elevation: 5 }}>
+  <Text>Box with shadow</Text>
 </Box>
 ```
 
 ---
 
-## BoxBlockSize Values
-
-The `width`, `height`, `minWidth`, and `minHeight` props accept `BoxBlockSize` enum values that map to Tailwind CSS sizing classes:
-
-- `BoxBlockSize.Half` - 50% (1/2)
-- `BoxBlockSize.OneThird` - 33.33% (1/3)
-- `BoxBlockSize.TwoThirds` - 66.67% (2/3)
-- `BoxBlockSize.OneFourth` - 25% (1/4)
-- `BoxBlockSize.ThreeFourths` - 75% (3/4)
-- `BoxBlockSize.OneFifth` - 20% (1/5)
-- `BoxBlockSize.TwoFifths` - 40% (2/5)
-- `BoxBlockSize.ThreeFifths` - 60% (3/5)
-- `BoxBlockSize.FourFifths` - 80% (4/5)
-- `BoxBlockSize.OneSixth` - 16.67% (1/6)
-- `BoxBlockSize.FiveSixths` - 83.33% (5/6)
-
-**Twelfths (12-column grid):**
-
-- `BoxBlockSize.OneTwelfth` to `BoxBlockSize.ElevenTwelfths` - 8.33% to 91.67% (1/12 to 11/12)
-
-**Utility Sizes:**
-
-- `BoxBlockSize.Zero` - 0
-- `BoxBlockSize.Full` - 100%
-- `BoxBlockSize.Screen` - 100vh/100vw
-- `BoxBlockSize.Auto` - auto
-- `BoxBlockSize.Min` - min-content
-- `BoxBlockSize.Max` - max-content
-
----
-
 ## BoxSpacing Values
 
-The spacing props (`gap`, `margin`, `padding`, and their directional variants) use the `BoxSpacing` numeric system for consistent spacing scales:
+The `gap` prop uses the `BoxSpacing` numeric system for consistent spacing scales:
 
 **Available Values:** 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
 
 **Pixel Mapping:**
 
-- `0` - 0px
-- `1` - 4px
-- `2` - 8px
-- `3` - 12px
-- `4` - 16px
-- `5` - 20px
-- `6` - 24px
-- `7` - 28px
-- `8` - 32px
-- `9` - 36px
-- `10` - 40px
-- `11` - 44px
-- `12` - 48px
+- `0` - 0px (no gap)
+- `1` - 4px (extra small)
+- `2` - 8px (small)
+- `3` - 12px (small-medium)
+- `4` - 16px (medium)
+- `5` - 20px (medium-large)
+- `6` - 24px (large)
+- `7` - 28px (extra large)
+- `8` - 32px (2x large)
+- `9` - 36px (3x large)
+- `10` - 40px (4x large)
+- `11` - 44px (5x large)
+- `12` - 48px (6x large)
+
+---
+
+## Usage Patterns
+
+### Basic Horizontal Layout
+
+```tsx
+<Box flexDirection={BoxFlexDirection.Row} gap={3} alignItems={BoxAlignItems.Center}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+  <Text>Item 3</Text>
+</Box>
+```
+
+### Vertical Stack
+
+```tsx
+<Box flexDirection={BoxFlexDirection.Column} gap={2}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+  <Text>Item 3</Text>
+</Box>
+```
+
+### Space Between Layout
+
+```tsx
+<Box
+  flexDirection={BoxFlexDirection.Row}
+  justifyContent={BoxJustifyContent.Between}
+  alignItems={BoxAlignItems.Center}
+>
+  <Text>Left</Text>
+  <Text>Right</Text>
+</Box>
+```
+
+### Responsive Grid with Wrapping
+
+```tsx
+<Box
+  flexDirection={BoxFlexDirection.Row}
+  flexWrap={BoxFlexWrap.Wrap}
+  gap={4}
+  twClassName="w-full"
+>
+  <View style={{ width: '48%' }}>
+    <Text>Item 1</Text>
+  </View>
+  <View style={{ width: '48%' }}>
+    <Text>Item 2</Text>
+  </View>
+  <View style={{ width: '48%' }}>
+    <Text>Item 3</Text>
+  </View>
+</Box>
+```
 
 ---
 
 ## Notes
 
-- `Box` provides a lightweight way to apply common spacing and layout patterns.
-- The `width`, `height`, `minWidth`, and `minHeight` props use the `BoxBlockSize` enum for better semantic sizing based on Tailwind CSS standards.
-- Spacing properties (`margin`, `padding`, `gap`) use the numeric BoxSpacing system (0-12) for consistent spacing scales.
-- Use `twClassName` or `style` for further customization when needed.
+- `Box` provides a lightweight way to apply flexbox layout patterns in React Native.
+- Use `twClassName` for styling properties like padding, margin, background colors, borders, and dimensions.
+- The component always applies `flex` display behavior.
+- Spacing properties use the numeric BoxSpacing system (0-12) for consistent spacing scales.
+- Use `style` for React Native-specific properties like shadows, elevation, and transforms.
 
 ---
 
