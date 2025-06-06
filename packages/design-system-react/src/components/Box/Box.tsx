@@ -17,7 +17,7 @@ export const Box = ({
   ...props
 }: BoxProps) => {
   const mergedClassName = twMerge(
-    'flex',
+    flexDirection ? 'flex' : '',
     flexDirection,
     flexWrap,
     gap !== undefined ? TWCLASSMAP_BOX_GAP[gap] : '',
