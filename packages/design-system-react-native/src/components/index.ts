@@ -52,6 +52,9 @@ export type {
 export { Blockies } from './temp-components/Blockies';
 export type { BlockiesProps } from './temp-components/Blockies';
 
+export { Box } from './Box';
+export type { BoxProps } from './Box';
+
 export { ButtonAnimated } from './temp-components/ButtonAnimated';
 export type { ButtonAnimatedProps } from './temp-components/ButtonAnimated';
 

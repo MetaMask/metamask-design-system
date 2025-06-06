@@ -3339,11 +3339,11 @@ __metadata:
     metro-react-native-babel-preset: "npm:^0.77.0"
     react-test-renderer: "npm:^18.3.1"
     ts-jest: "npm:^29.2.5"
+    twrnc: "npm:^4.5.1"
     typescript: "npm:~5.2.2"
   peerDependencies:
     react: ^18.2.0
     react-native: 0.72.15
-    twrnc: ^4.5.1
   languageName: unknown
   linkType: soft
 

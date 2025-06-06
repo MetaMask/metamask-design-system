@@ -46,7 +46,8 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "dependencies": {
-    "@metamask/design-tokens": "workspace:^"
+    "@metamask/design-tokens": "workspace:^",
+    "twrnc": "^4.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
@@ -68,8 +69,7 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-native": "0.72.15",
-    "twrnc": "^4.5.1"
+    "react-native": "0.72.15"
   },
   "engines": {
     "node": "^18.18 || >=20"
