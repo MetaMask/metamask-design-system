@@ -20,7 +20,7 @@
     "expo-status-bar": "~1.6.0",
     "expo-system-ui": "~2.4.0",
     "react-native-gesture-handler": "^1.10.3",
-    "react-native-reanimated": "3.3.0",
+    "react-native-reanimated": "^3.17.0",
     "uuid": "^3.0.0"
   },
   "devDependencies": {
