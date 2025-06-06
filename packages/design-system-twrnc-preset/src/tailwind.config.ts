@@ -1,9 +1,8 @@
 import type { TwConfig } from 'twrnc';
 
 import { themeColors } from './colors';
+import type { Theme } from './Theme.types';
 import { typographyTailwindConfig } from './typography';
-
-import type { ThemeType } from './theme';
 
 /**
  * Generates a Tailwind CSS configuration object based on the specified theme.
@@ -13,7 +12,7 @@ import type { ThemeType } from './theme';
  * @param theme - The theme ('light' or 'dark'). Specifies whether to use light or dark mode styles.
  * @returns A Tailwind CSS configuration object with extended theme properties and plugins.
  */
-export const generateTailwindConfig = (theme: ThemeType): TwConfig => {
+export const generateTailwindConfig = (theme: Theme): TwConfig => {
   const colors = themeColors[theme];
 
   if (!colors) {

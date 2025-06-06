@@ -1,6 +1,6 @@
 import { lightTheme, darkTheme } from '@metamask/design-tokens';
 
-import { Theme } from './theme';
+import { Theme } from './Theme.types';
 
 /**
  * Helper function to convert a camelCase / PascalCase string to kebab-case.
@@ -24,65 +24,53 @@ const toKebab = (str: string): string =>
     .toLowerCase();
 
 /**
- * Recursively flattens a nested colour definition object into a single-level map
- * whose keys are fully kebab-cased, dash-delimited paths.
+ * Recursively flattens a nested object of colors into a flat object with kebab-case keys.
  *
- * Each segment of the path (including camelCase properties) is converted to
- * kebab-case. The resulting keys are built by concatenating the segments with
- * "-" and prepending any parent prefix supplied during recursion.
+ * This function is specifically designed to handle MetaMask design token color objects,
+ * which can be deeply nested. It converts the structure into a flat object suitable
+ * for Tailwind CSS configuration.
  *
- * @param colors - A nested object representing colour values.
- * @param prefix - (For internal use) The current path prefix accumulated during
- * recursion. Leave blank when calling directly.
- * @returns A flat object whose keys are kebab-cased paths and whose values are
- * the corresponding colour strings.
+ * @param obj - The nested color object to flatten.
+ * @param prefix - The current prefix for the keys (used during recursion).
+ * @returns A flattened object with kebab-case keys and color values.
  *
  * @example
  * const colors = {
- *   primary: {
- *     default: '#4459ff',
- *     defaultHover: '#384df5',
- *     muted: '#4459ff1a',
- *   },
- *   secondary: '#2c3dc5',
+ *   background: {
+ *     default: '#FFFFFF',
+ *     alternative: '#F2F4F6'
+ *   }
  * };
  *
  * flattenColors(colors);
- * Returns:
- * {
- *   'primary-default': '#4459ff',
- *   'primary-default-hover': '#384df5',
- *   'primary-muted': '#4459ff1a',
- *   'secondary': '#2c3dc5'
- * }
+ * // Returns: {
+ * //   'background-default': '#FFFFFF',
+ * //   'background-alternative': '#F2F4F6'
+ * // }
  */
-export const flattenColors = (
-  colors: Record<string, any>,
+const flattenColors = (
+  obj: Record<string, unknown>,
   prefix = '',
 ): Record<string, string> => {
-  let result: Record<string, string> = {};
+  const result: Record<string, string> = {};
 
-  for (const [rawKey, value] of Object.entries(colors)) {
-    const key = toKebab(rawKey);
+  for (const [key, value] of Object.entries(obj)) {
+    const newKey = prefix ? `${prefix}-${toKebab(key)}` : toKebab(key);
 
-    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      // Recurse into nested objects and merge their flattened results
-      result = { ...result, ...flattenColors(value, `${prefix}${key}-`) };
-    } else if (typeof value === 'string') {
-      // Leaf node: add the fully-qualified kebab-case key
-      result[`${prefix}${key}`] = value;
-    } else {
-      console.warn(`Invalid colour value for ${prefix}${key}:`, value);
+    if (typeof value === 'string') {
+      result[newKey] = value;
+    } else if (typeof value === 'object' && value !== null) {
+      Object.assign(
+        result,
+        flattenColors(value as Record<string, unknown>, newKey),
+      );
     }
   }
 
   return result;
 };
 
-export const themeColors: {
-  [Theme.Light]: Record<string, string>;
-  [Theme.Dark]: Record<string, string>;
-} = {
+export const themeColors: Record<Theme, Record<string, string>> = {
   [Theme.Light]: flattenColors(lightTheme.colors),
   [Theme.Dark]: flattenColors(darkTheme.colors),
 };
