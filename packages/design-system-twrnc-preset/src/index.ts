@@ -1,9 +1,11 @@
+// Core theme components and types
 export {
-  useTailwind,
-  useTheme,
   ThemeContext,
   ThemeProvider,
   Theme,
-} from './ThemeProvider';
-export { themeColors } from './colors';
-export { generateTailwindConfig } from './tailwindConfig';
+  type ThemeContextProps,
+  type ThemeProviderProps,
+} from './theme';
+
+// Hooks
+export { useTailwind, useTheme } from './hooks';

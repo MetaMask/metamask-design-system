@@ -1,23 +1,30 @@
 import React, { createContext, useMemo } from 'react';
 import { create } from 'twrnc';
 
-import { generateTailwindConfig } from './tailwindConfig';
+import { generateTailwindConfig } from './tailwind-config';
 
+/**
+ * Theme enum for light and dark mode support
+ */
 export enum Theme {
   Light = 'light',
   Dark = 'dark',
 }
 
-export type ThemeType = Theme.Light | Theme.Dark;
-
+/**
+ * Theme context properties
+ */
 export type ThemeContextProps = {
   tw: ReturnType<typeof create>;
-  theme: ThemeType;
+  theme: Theme;
 };
 
+/**
+ * Theme provider component props
+ */
 export type ThemeProviderProps = {
   children: React.ReactNode;
-  theme: ThemeType;
+  theme: Theme;
 };
 
 export const defaultThemeContextValue: ThemeContextProps = {
@@ -29,6 +36,9 @@ export const ThemeContext = createContext<ThemeContextProps>(
   defaultThemeContextValue,
 );
 
+/**
+ * Theme provider component that provides theme context and tailwind configuration
+ */
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
   theme,

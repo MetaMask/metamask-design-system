@@ -3,7 +3,7 @@ import type { TwConfig } from 'twrnc';
 import { themeColors } from './colors';
 import { typographyTailwindConfig } from './typography';
 
-import type { ThemeType } from './ThemeProvider';
+import type { ThemeType } from './theme';
 
 /**
  * Generates a Tailwind CSS configuration object based on the specified theme.

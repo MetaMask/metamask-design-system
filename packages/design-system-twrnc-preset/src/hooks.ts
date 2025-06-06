@@ -1,15 +1,15 @@
 import { useContext } from 'react';
 
-import { ThemeContext } from './ThemeProvider';
+import { ThemeContext, type Theme } from './theme';
 
 /**
- * Hook that provides access to both the theme context and tailwind utility.
- * Use this when you need access to both styling and theme information.
+ * Hook that provides access to the current theme.
+ * Use this when you need to conditionally render content based on theme.
  *
- * @returns Object containing tw and theme
+ * @returns The current theme ('light' or 'dark')
  *
  * @example
- * const { theme } = useTheme();
+ * const theme = useTheme();
  * const inverseTheme = theme === Theme.Light ? Theme.Dark : Theme.Light;
  * return (
  *   <ThemeProvider theme={inverseTheme}>
@@ -19,16 +19,16 @@ import { ThemeContext } from './ThemeProvider';
  *   </ThemeProvider>
  * );
  */
-export const useTheme = () => {
+export const useTheme = (): Theme => {
   const { theme } = useContext(ThemeContext);
   return theme;
 };
 
 /**
- * Hook that provides access to just the tailwind utility function.
+ * Hook that provides access to the tailwind utility function.
  * Use this when you only need styling capabilities.
  *
- @returns Tailwind utility function for styling
+ * @returns Tailwind utility function for styling
  *
  * @example
  * const tw = useTailwind();

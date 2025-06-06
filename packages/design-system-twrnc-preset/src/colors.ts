@@ -1,12 +1,11 @@
 import { lightTheme, darkTheme } from '@metamask/design-tokens';
 
-import { Theme } from './ThemeProvider';
-import type { ThemeColorProps } from './ThemeProvider';
+import { Theme } from './theme';
 
 /**
  * Helper function to convert a camelCase / PascalCase string to kebab-case.
  *
- * It inserts a hyphen (“-”) before every capital letter (while also handling
+ * It inserts a hyphen ("-") before every capital letter (while also handling
  * consecutive capitals), then lower-cases the entire result.
  *
  * @param str - The original camelCase or PascalCase string.
@@ -30,7 +29,7 @@ const toKebab = (str: string): string =>
  *
  * Each segment of the path (including camelCase properties) is converted to
  * kebab-case. The resulting keys are built by concatenating the segments with
- * “-” and prepending any parent prefix supplied during recursion.
+ * "-" and prepending any parent prefix supplied during recursion.
  *
  * @param colors - A nested object representing colour values.
  * @param prefix - (For internal use) The current path prefix accumulated during
