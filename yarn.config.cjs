@@ -93,14 +93,9 @@ module.exports = defineConfig({
         // All non-root packages must have a license, defaulting to MIT.
         await expectWorkspaceLicense(workspace);
 
-        if (
-          workspace.ident !== '@metamask/design-system-react-native' &&
-          workspace.ident !== '@metamask/design-system-twrnc-preset'
-        ) {
-          // All non-root packages must set up ESM- and CommonJS-compatible
-          // exports correctly.
-          expectCorrectWorkspaceExports(workspace);
-        }
+        // All non-root packages must set up ESM- and CommonJS-compatible
+        // exports correctly.
+        expectCorrectWorkspaceExports(workspace);
 
         if (isPrivate) {
           // All private, non-root packages must not have a "publish:preview"
@@ -130,14 +125,12 @@ module.exports = defineConfig({
           '../../scripts/since-latest-release.sh',
         );
 
-        if (workspace.ident !== '@metamask/design-system-twrnc-preset') {
-          // All non-root packages must have the same "test" script.
-          expectWorkspaceField(
-            workspace,
-            'scripts.test',
-            'NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter',
-          );
-        }
+        // All non-root packages must have the same "test" script.
+        expectWorkspaceField(
+          workspace,
+          'scripts.test',
+          'NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter',
+        );
 
         // All non-root packages must have the same "test:clean" script.
         expectWorkspaceField(
