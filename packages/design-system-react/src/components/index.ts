@@ -52,15 +52,14 @@ export type { BadgeWrapperCustomPosition } from './BadgeWrapper';
 export { Blockies } from './temp-components/Blockies';
 export type { BlockiesProps } from './temp-components/Blockies';
 
-export type {
+export {
   BoxFlexDirection,
   BoxFlexWrap,
-  BoxSpacing,
   BoxAlignItems,
   BoxJustifyContent,
-  BoxProps,
+  Box,
 } from './Box';
-export { Box } from './Box';
+export type { BoxSpacing, BoxProps } from './Box';
 
 export { Button, ButtonSize, ButtonVariant } from './Button';
 export type { ButtonProps } from './Button';
