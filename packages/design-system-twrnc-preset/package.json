@@ -67,7 +67,7 @@
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
-    "@metamask/design-tokens": "workspace:^",
+    "@metamask/design-tokens": "^7.1.0",
     "react": "^18.2.0"
   },
   "engines": {
