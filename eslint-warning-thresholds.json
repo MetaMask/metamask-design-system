@@ -47,9 +47,6 @@
   "packages/design-system-tailwind-preset/src/typography.test.ts": {
     "jest/no-conditional-in-test": 1
   },
-  "packages/design-system-twrnc-preset/src/Theme/Theme.providers.tsx": {
-    "no-empty-function": 2
-  },
   "packages/design-tokens/src/js/brandColor/brandColor.test.ts": {
     "jest/no-conditional-in-test": 2
   },

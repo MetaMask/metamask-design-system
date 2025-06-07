@@ -5,7 +5,7 @@ import type { TypographyTailwindConfigProps } from './typography.types';
 export const typographyTailwindConfig: TypographyTailwindConfigProps = {
   fontSize: {
     'display-lg': [
-      typography.sDisplayLG.fontSize,
+      typography.sDisplayLG.fontSize.toString(),
       {
         lineHeight: `${typography.sDisplayLG.lineHeight as number}px`,
         letterSpacing: `${typography.sDisplayLG.letterSpacing as number}`,
@@ -13,7 +13,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       },
     ],
     'display-md': [
-      typography.sDisplayMD.fontSize,
+      typography.sDisplayMD.fontSize.toString(),
       {
         lineHeight: `${typography.sDisplayMD.lineHeight as number}px`,
         letterSpacing: `${typography.sDisplayMD.letterSpacing as number}`,
@@ -21,7 +21,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       },
     ],
     'heading-lg': [
-      typography.sHeadingLG.fontSize,
+      typography.sHeadingLG.fontSize.toString(),
       {
         lineHeight: `${typography.sHeadingLG.lineHeight as number}px`,
         letterSpacing: `${typography.sHeadingLG.letterSpacing as number}`,
@@ -29,7 +29,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       },
     ],
     'heading-md': [
-      typography.sHeadingMD.fontSize,
+      typography.sHeadingMD.fontSize.toString(),
       {
         lineHeight: `${typography.sHeadingMD.lineHeight as number}px`,
         letterSpacing: `${typography.sHeadingMD.letterSpacing as number}`,
@@ -37,7 +37,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       },
     ],
     'heading-sm': [
-      typography.sHeadingSM.fontSize,
+      typography.sHeadingSM.fontSize.toString(),
       {
         lineHeight: `${typography.sHeadingSM.lineHeight as number}px`,
         letterSpacing: `${typography.sHeadingSM.letterSpacing as number}`,
@@ -45,7 +45,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       },
     ],
     'body-lg': [
-      typography.sBodyLGMedium.fontSize,
+      typography.sBodyLGMedium.fontSize.toString(),
       {
         lineHeight: `${typography.sBodyLGMedium.lineHeight as number}px`,
         letterSpacing: `${typography.sBodyLGMedium.letterSpacing as number}`,
@@ -53,7 +53,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       },
     ],
     'body-md': [
-      typography.sBodyMD.fontSize,
+      typography.sBodyMD.fontSize.toString(),
       {
         lineHeight: `${typography.sBodyMD.lineHeight as number}px`,
         letterSpacing: `${typography.sBodyMD.letterSpacing as number}`,
@@ -61,7 +61,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       },
     ],
     'body-sm': [
-      typography.sBodySM.fontSize,
+      typography.sBodySM.fontSize.toString(),
       {
         lineHeight: `${typography.sBodySM.lineHeight as number}px`,
         letterSpacing: `${typography.sBodySM.letterSpacing as number}`,
@@ -69,7 +69,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       },
     ],
     'body-xs': [
-      typography.sBodyXS.fontSize,
+      typography.sBodyXS.fontSize.toString(),
       {
         lineHeight: `${typography.sBodyXS.lineHeight as number}px`,
         letterSpacing: `${typography.sBodyXS.letterSpacing as number}`,

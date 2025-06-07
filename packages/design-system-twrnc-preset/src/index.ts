@@ -1,4 +1,6 @@
-export type { ThemeContextProps, ThemeProviderProps } from './Theme';
-export { useTailwind, ThemeContext, ThemeProvider, Theme } from './Theme';
+// Provider and type
+export { ThemeProvider } from './ThemeProvider';
+export { Theme } from './Theme.types';
 
-export { ColorSet } from './twrnc-settings';
+// Hooks
+export { useTailwind, useTheme } from './hooks';
