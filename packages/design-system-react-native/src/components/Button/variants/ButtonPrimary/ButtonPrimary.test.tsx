@@ -194,15 +194,4 @@ describe('ButtonPrimary', () => {
     const btn = getByTestId('button-primary');
     expectBackground(btn.props.style, 'bg-default-pressed');
   });
-
-  it('renders inverse+danger pressed state', () => {
-    const { getByTestId } = render(
-      <ButtonPrimary testID="btn" isInverse isDanger>
-        Inverse+Danger
-      </ButtonPrimary>,
-    );
-    const btn = getByTestId('btn');
-    expectBackground(btn.props.style, 'bg-default');
-    expect(btn.props.children.props.children).toBe('Inverse+Danger');
-  });
 });

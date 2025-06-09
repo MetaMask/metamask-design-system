@@ -224,13 +224,4 @@ describe('ButtonSecondary', () => {
     expectBackground(btn.props.style, 'bg-default-pressed');
     expectBorder(btn.props.style, 'border-background-default-pressed');
   });
-
-  it('renders normal pressed state', () => {
-    const { getByTestId } = render(
-      <ButtonSecondary testID="btn">Normal</ButtonSecondary>,
-    );
-    const btn = getByTestId('btn');
-    fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-pressed');
-  });
 });

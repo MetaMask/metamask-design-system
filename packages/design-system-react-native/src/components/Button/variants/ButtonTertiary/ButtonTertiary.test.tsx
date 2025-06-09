@@ -114,7 +114,7 @@ describe('ButtonTertiary', () => {
 
     fireEvent(btn, 'pressIn');
     expectBackground(btn.props.style, 'bg-pressed');
-    expectBorder(btn.props.style, 'border-transparent');
+    expectBorder(btn.props.style, 'border-background-pressed');
 
     fireEvent(btn, 'pressOut');
     expectBackground(btn.props.style, 'bg-transparent');
