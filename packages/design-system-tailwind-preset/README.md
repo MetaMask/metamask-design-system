@@ -26,7 +26,7 @@ module.exports = {
 ```
 
 ```html
-<div class="bg-background-default text-text-default">
+<div class="bg-default text-default">
   <h1 class="font-s-heading-lg sm:font-l-heading-lg">Welcome to MetaMask</h1>
   <p class="font-s-body-md sm:font-l-body">
     Enjoy our consistent design across projects!

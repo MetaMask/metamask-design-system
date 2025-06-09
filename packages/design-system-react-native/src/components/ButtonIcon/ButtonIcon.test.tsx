@@ -50,7 +50,7 @@ describe('ButtonIcon', () => {
   it('applies isFloating state', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
-    const expected = tw`items-center justify-center ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md]} bg-icon-default rounded-full opacity-100`;
+    const expected = tw`items-center justify-center ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md]} rounded-full bg-icon-default opacity-100`;
 
     const { getByTestId } = render(
       <ButtonIcon iconName={IconName.Close} isFloating testID="button-icon" />,

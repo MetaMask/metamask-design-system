@@ -92,7 +92,7 @@ describe('Checkbox', () => {
     expect(styles).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining(
-          tw`bg-background-default border-error-default flex h-[22px] w-[22px] items-center justify-center rounded border-2`,
+          tw`flex h-[22px] w-[22px] items-center justify-center rounded border-2 border-error-default bg-default`,
         ),
       ]),
     );
@@ -112,7 +112,7 @@ describe('Checkbox', () => {
     expect(styles).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining(
-          tw`bg-primary-default border-primary-default flex h-[22px] w-[22px] items-center justify-center rounded border-2`,
+          tw`flex h-[22px] w-[22px] items-center justify-center rounded border-2 border-primary-default bg-primary-default`,
         ),
       ]),
     );
@@ -200,7 +200,7 @@ describe('Checkbox', () => {
     expect(styles).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining(
-          tw`bg-background-default-pressed border-border-default flex h-[22px] w-[22px] items-center justify-center rounded border-2`,
+          tw`flex h-[22px] w-[22px] items-center justify-center rounded border-2 border-default bg-default-pressed`,
         ),
       ]),
     );

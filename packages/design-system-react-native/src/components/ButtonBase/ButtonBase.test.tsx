@@ -15,7 +15,7 @@ describe('ButtonBase', () => {
   it('applies correct height for size Sm', () => {
     const tw = getTw();
     const classes = `
-      flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+      flex-row items-center justify-center rounded-full bg-muted px-4 min-w-[80px] overflow-hidden
       h-[${ButtonBaseSize.Sm}px]
       opacity-100 self-start
     `;
@@ -32,7 +32,7 @@ describe('ButtonBase', () => {
   it('applies correct height for size Md', () => {
     const tw = getTw();
     const classes = `
-      flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+      flex-row items-center justify-center rounded-full bg-muted px-4 min-w-[80px] overflow-hidden
       h-[${ButtonBaseSize.Md}px]
       opacity-100 self-start
     `;
@@ -49,7 +49,7 @@ describe('ButtonBase', () => {
   it('applies correct height for size Lg (default)', () => {
     const tw = getTw();
     const classes = `
-      flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+      flex-row items-center justify-center rounded-full bg-muted px-4 min-w-[80px] overflow-hidden
       h-[${ButtonBaseSize.Lg}px]
       opacity-100 self-start
     `;
@@ -62,7 +62,7 @@ describe('ButtonBase', () => {
   it('applies disabled state via opacity-50', () => {
     const tw = getTw();
     const classes = `
-      flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+      flex-row items-center justify-center rounded-full bg-muted px-4 min-w-[80px] overflow-hidden
       h-[${ButtonBaseSize.Lg}px]
       opacity-50 self-start
     `;
@@ -81,7 +81,7 @@ describe('ButtonBase', () => {
   it('applies full-width state via self-stretch', () => {
     const tw = getTw();
     const classes = `
-      flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+      flex-row items-center justify-center rounded-full bg-muted px-4 min-w-[80px] overflow-hidden
       h-[${ButtonBaseSize.Lg}px]
       opacity-100 self-stretch
     `;

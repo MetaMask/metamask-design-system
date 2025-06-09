@@ -36,7 +36,7 @@ module.exports = {
       ],
       options: {
         tailwindConfig:
-          './packages/design-system-twrnc-preset/tailwind.config.js',
+          './apps/storybook-react-native/tailwind-intellisense.config.js',
       },
     },
   ],

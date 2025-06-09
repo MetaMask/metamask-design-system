@@ -52,6 +52,15 @@ export type {
 export { Blockies } from './temp-components/Blockies';
 export type { BlockiesProps } from './temp-components/Blockies';
 
+export {
+  Box,
+  BoxFlexDirection,
+  BoxFlexWrap,
+  BoxAlignItems,
+  BoxJustifyContent,
+} from './Box';
+export type { BoxProps, BoxSpacing } from './Box';
+
 export { ButtonAnimated } from './temp-components/ButtonAnimated';
 export type { ButtonAnimatedProps } from './temp-components/ButtonAnimated';
 

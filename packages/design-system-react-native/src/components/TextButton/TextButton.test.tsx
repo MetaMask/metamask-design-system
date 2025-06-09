@@ -147,7 +147,7 @@ describe('TextButton', () => {
     expect(getByTestId('bar')).toBeTruthy();
   });
 
-  it('applies bg-background-pressed when pressed, and reverts when released', () => {
+  it('applies bg-pressed when pressed, and reverts when released', () => {
     const rtr = require('react-test-renderer');
     const RN = require('react-native');
     const tree = rtr.create(<TextButton>Press</TextButton>);
@@ -167,7 +167,7 @@ describe('TextButton', () => {
     expect(pressedStyles).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          backgroundColor: tw`bg-background-pressed`.backgroundColor,
+          backgroundColor: tw`bg-pressed`.backgroundColor,
         }),
       ]),
     );

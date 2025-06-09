@@ -17,7 +17,7 @@ describe('BadgeStatus', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const finalSize = BadgeStatusSize.Md;
-      expectedOuter = tw`border-background-default self-start rounded-full border-2`;
+      expectedOuter = tw`self-start rounded-full border-2 border-background-default`;
       expectedInner = tw`rounded-full border-2 ${TWCLASSMAP_BADGESTATUS_SIZE[finalSize]} ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Active]} `;
       return <BadgeStatus status={BadgeStatusStatus.Active} testID="badge" />;
     };
@@ -108,7 +108,7 @@ describe('BadgeStatus', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const defaultSize = BadgeStatusSize.Md;
-      expectedOuter = tw`border-background-default self-start rounded-full border-2`;
+      expectedOuter = tw`self-start rounded-full border-2 border-background-default`;
       expectedInner = tw`rounded-full border-2 ${TWCLASSMAP_BADGESTATUS_SIZE[defaultSize]} ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Active]} `;
       return <BadgeStatus status={BadgeStatusStatus.Active} testID="badge" />;
     };

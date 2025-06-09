@@ -7,6 +7,11 @@ import {
   BadgeCount,
   BadgeWrapper,
   BadgeNetwork,
+  Box,
+  BoxAlignItems,
+  BoxFlexDirection,
+  BoxFlexWrap,
+  BoxJustifyContent,
   Button,
   ButtonBase,
   ButtonIcon,
@@ -28,7 +33,7 @@ import {
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { View, ScrollView, Pressable } from 'react-native';
+import { ScrollView, Pressable } from 'react-native';
 
 const meta: Meta = {
   title: 'Examples/Wallet Home',
@@ -42,29 +47,41 @@ const WalletHome: React.FC = () => {
   const tw = useTailwind();
 
   return (
-    <ScrollView style={tw`bg-background-default flex-1`}>
+    <ScrollView style={tw`flex-1 bg-default`}>
       {/* Container */}
-      <View style={tw`bg-background-default w-full py-4`}>
+      <Box twClassName="w-full bg-default py-4">
         {/* Header */}
-        <View style={tw`border-border-muted border-b px-4 py-4`}>
-          <View style={tw`flex-row items-center justify-between`}>
-            <View style={tw`flex-1 flex-row items-center overflow-hidden`}>
+        <Box twClassName="border-b border-muted px-4 py-4">
+          <Box
+            flexDirection={BoxFlexDirection.Row}
+            alignItems={BoxAlignItems.Center}
+            justifyContent={BoxJustifyContent.Between}
+          >
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+              twClassName="flex-1 overflow-hidden"
+            >
               <AvatarAccount
                 shape={AvatarBaseShape.Square}
                 variant={AvatarAccountVariant.Maskicon}
                 address="0x1234567890123456789012345678901234567890"
               />
-              <View style={tw`ml-2 flex-1`}>
+              <Box twClassName="ml-2 flex-1">
                 <Text variant={TextVariant.HeadingMd} numberOfLines={1}>
                   DeFi Account
                 </Text>
-              </View>
+              </Box>
               <ButtonIcon
                 iconName={IconName.ArrowDown}
                 accessibilityLabel="Switch Account"
               />
-            </View>
-            <View style={tw`ml-2 flex-row items-center`}>
+            </Box>
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+              twClassName="ml-2"
+            >
               <ButtonIcon iconName={IconName.Copy} accessibilityLabel="Copy" />
               <ButtonIcon
                 iconName={IconName.Global}
@@ -79,52 +96,75 @@ const WalletHome: React.FC = () => {
                   accessibilityLabel="Menu"
                 />
               </BadgeWrapper>
-            </View>
-          </View>
-        </View>
+            </Box>
+          </Box>
+        </Box>
 
         {/* Balance */}
-        <View style={tw`px-4 py-4`}>
+        <Box twClassName="px-4 py-4">
           <Text variant={TextVariant.DisplayMd}>$10,528.46</Text>
-          <View style={tw`flex-row items-center`}>
+          <Box
+            flexDirection={BoxFlexDirection.Row}
+            alignItems={BoxAlignItems.Center}
+          >
             <Icon name={IconName.Arrow2Up} color={IconColor.SuccessDefault} />
             <Text color={TextColor.TextAlternative}>$367.00 (+0.66%)</Text>
-          </View>
-        </View>
+          </Box>
+        </Box>
 
         {/* Actions */}
-        <View style={tw`flex-row gap-3 px-4 py-4`}>
-          <ButtonBase twClassName="bg-background-muted h-20 flex-1 rounded-lg px-0 py-4">
-            <View style={tw`flex-col items-center justify-center`}>
+        <Box
+          flexDirection={BoxFlexDirection.Row}
+          gap={3}
+          twClassName="px-4 py-4"
+        >
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
+            <Box
+              flexDirection={BoxFlexDirection.Column}
+              alignItems={BoxAlignItems.Center}
+              justifyContent={BoxJustifyContent.Center}
+            >
               <Icon name={IconName.Bank} />
               <Text fontWeight={FontWeight.Medium}>Buy/Sell</Text>
-            </View>
+            </Box>
           </ButtonBase>
-          <ButtonBase twClassName="bg-background-muted h-20 flex-1 rounded-lg px-0 py-4">
-            <View style={tw`flex-col items-center justify-center`}>
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
+            <Box
+              flexDirection={BoxFlexDirection.Column}
+              alignItems={BoxAlignItems.Center}
+              justifyContent={BoxJustifyContent.Center}
+            >
               <Icon name={IconName.SwapHorizontal} />
               <Text fontWeight={FontWeight.Medium}>Swap</Text>
-            </View>
+            </Box>
           </ButtonBase>
-          <ButtonBase twClassName="bg-background-muted h-20 flex-1 rounded-lg px-0 py-4">
-            <View style={tw`flex-col items-center justify-center`}>
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
+            <Box
+              flexDirection={BoxFlexDirection.Column}
+              alignItems={BoxAlignItems.Center}
+              justifyContent={BoxJustifyContent.Center}
+            >
               <Icon name={IconName.Receive} />
               <Text fontWeight={FontWeight.Medium}>Receive</Text>
-            </View>
+            </Box>
           </ButtonBase>
-          <ButtonBase twClassName="bg-background-muted h-20 flex-1 rounded-lg px-0 py-4">
-            <View style={tw`flex-col items-center justify-center`}>
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
+            <Box
+              flexDirection={BoxFlexDirection.Column}
+              alignItems={BoxAlignItems.Center}
+              justifyContent={BoxJustifyContent.Center}
+            >
               <Icon name={IconName.Send} />
               <Text fontWeight={FontWeight.Medium}>Send</Text>
-            </View>
+            </Box>
           </ButtonBase>
-        </View>
+        </Box>
 
         {/* Tabs */}
-        <View style={tw`border-border-muted border-b px-4`}>
-          <View style={tw`flex-row`}>
+        <Box twClassName="border-b border-muted px-4">
+          <Box flexDirection={BoxFlexDirection.Row}>
             <Pressable
-              style={tw`border-border-default flex-1 items-center justify-center border-b-2 pb-2 pt-1`}
+              style={tw`flex-1 items-center justify-center border-b-2 border-default pb-2 pt-1`}
             >
               <Text fontWeight={FontWeight.Medium}>Tokens</Text>
             </Pressable>
@@ -137,9 +177,9 @@ const WalletHome: React.FC = () => {
               >
                 DeFi
               </Text>
-              <View style={tw`ml-1`}>
+              <Box twClassName="ml-1">
                 <BadgeStatus status={BadgeStatusStatus.New} />
-              </View>
+              </Box>
             </Pressable>
             <Pressable style={tw`flex-1 items-center justify-center pb-2 pt-1`}>
               <Text
@@ -157,13 +197,21 @@ const WalletHome: React.FC = () => {
                 Activity
               </Text>
             </Pressable>
-          </View>
-        </View>
+          </Box>
+        </Box>
 
         {/* Token List */}
-        <View>
-          <View style={tw`flex-row items-center justify-between px-4 py-4`}>
-            <View style={tw`flex-row items-center`}>
+        <Box>
+          <Box
+            flexDirection={BoxFlexDirection.Row}
+            alignItems={BoxAlignItems.Center}
+            justifyContent={BoxJustifyContent.Between}
+            twClassName="px-4 py-4"
+          >
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+            >
               <Button
                 size={ButtonSize.Sm}
                 variant={ButtonVariant.Secondary}
@@ -171,8 +219,8 @@ const WalletHome: React.FC = () => {
               >
                 Popular networks
               </Button>
-            </View>
-            <View style={tw`flex-row gap-2`}>
+            </Box>
+            <Box flexDirection={BoxFlexDirection.Row} gap={2}>
               <ButtonIcon
                 iconName={IconName.Filter}
                 accessibilityLabel="Filter"
@@ -181,14 +229,18 @@ const WalletHome: React.FC = () => {
                 iconName={IconName.MoreVertical}
                 accessibilityLabel="More"
               />
-            </View>
-          </View>
+            </Box>
+          </Box>
 
           {/* Ethereum */}
           <Pressable
             style={tw`w-full flex-row items-center justify-between bg-transparent px-4 py-2`}
           >
-            <View style={tw`flex-1 flex-row items-center overflow-hidden`}>
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+              twClassName="flex-1 overflow-hidden"
+            >
               <BadgeWrapper
                 badge={
                   <BadgeNetwork
@@ -207,8 +259,15 @@ const WalletHome: React.FC = () => {
                   size={AvatarTokenSize.Md}
                 />
               </BadgeWrapper>
-              <View style={tw`ml-4 flex-1 overflow-hidden`}>
-                <View style={tw`flex-row flex-wrap items-center`}>
+              <Box
+                flexDirection={BoxFlexDirection.Column}
+                twClassName="ml-4 flex-1 overflow-hidden"
+              >
+                <Box
+                  flexDirection={BoxFlexDirection.Row}
+                  flexWrap={BoxFlexWrap.Wrap}
+                  alignItems={BoxAlignItems.Center}
+                >
                   <Text
                     fontWeight={FontWeight.Medium}
                     numberOfLines={1}
@@ -217,8 +276,11 @@ const WalletHome: React.FC = () => {
                     Ethereum •
                   </Text>
                   <TextButton>Earn</TextButton>
-                </View>
-                <View style={tw`flex-row items-center`}>
+                </Box>
+                <Box
+                  flexDirection={BoxFlexDirection.Row}
+                  alignItems={BoxAlignItems.Center}
+                >
                   <Icon
                     name={IconName.Arrow2Up}
                     color={IconColor.SuccessDefault}
@@ -230,10 +292,10 @@ const WalletHome: React.FC = () => {
                   >
                     +85.88%
                   </Text>
-                </View>
-              </View>
-            </View>
-            <View style={tw`items-end`}>
+                </Box>
+              </Box>
+            </Box>
+            <Box twClassName="items-end">
               <Text>$8,509.44</Text>
               <Text
                 color={TextColor.TextAlternative}
@@ -241,14 +303,18 @@ const WalletHome: React.FC = () => {
               >
                 0.7107 ETH
               </Text>
-            </View>
+            </Box>
           </Pressable>
 
           {/* Unibright */}
           <Pressable
             style={tw`w-full flex-row items-center justify-between bg-transparent px-4 py-2`}
           >
-            <View style={tw`flex-1 flex-row items-center overflow-hidden`}>
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+              twClassName="flex-1 overflow-hidden"
+            >
               <BadgeWrapper
                 badge={
                   <BadgeNetwork
@@ -267,11 +333,17 @@ const WalletHome: React.FC = () => {
                   size={AvatarTokenSize.Md}
                 />
               </BadgeWrapper>
-              <View style={tw`ml-4 flex-1 overflow-hidden`}>
+              <Box
+                flexDirection={BoxFlexDirection.Column}
+                twClassName="ml-4 flex-1 overflow-hidden"
+              >
                 <Text fontWeight={FontWeight.Medium} numberOfLines={1}>
                   Unibright
                 </Text>
-                <View style={tw`flex-row items-center`}>
+                <Box
+                  flexDirection={BoxFlexDirection.Row}
+                  alignItems={BoxAlignItems.Center}
+                >
                   <Icon
                     name={IconName.Arrow2Up}
                     color={IconColor.SuccessDefault}
@@ -283,10 +355,10 @@ const WalletHome: React.FC = () => {
                   >
                     +85.88%
                   </Text>
-                </View>
-              </View>
-            </View>
-            <View style={tw`items-end`}>
+                </Box>
+              </Box>
+            </Box>
+            <Box twClassName="items-end">
               <Text>$1,293.50</Text>
               <Text
                 color={TextColor.TextAlternative}
@@ -294,14 +366,18 @@ const WalletHome: React.FC = () => {
               >
                 0.058 UBT
               </Text>
-            </View>
+            </Box>
           </Pressable>
 
           {/* Hopr */}
           <Pressable
             style={tw`w-full flex-row items-center justify-between bg-transparent px-4 py-2`}
           >
-            <View style={tw`flex-1 flex-row items-center overflow-hidden`}>
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+              twClassName="flex-1 overflow-hidden"
+            >
               <BadgeWrapper
                 badge={
                   <BadgeNetwork
@@ -320,11 +396,17 @@ const WalletHome: React.FC = () => {
                   size={AvatarTokenSize.Md}
                 />
               </BadgeWrapper>
-              <View style={tw`ml-4 flex-1 overflow-hidden`}>
+              <Box
+                flexDirection={BoxFlexDirection.Column}
+                twClassName="ml-4 flex-1 overflow-hidden"
+              >
                 <Text fontWeight={FontWeight.Medium} numberOfLines={1}>
                   Hopr
                 </Text>
-                <View style={tw`flex-row items-center`}>
+                <Box
+                  flexDirection={BoxFlexDirection.Row}
+                  alignItems={BoxAlignItems.Center}
+                >
                   <Icon
                     name={IconName.Arrow2Up}
                     color={IconColor.SuccessDefault}
@@ -336,10 +418,10 @@ const WalletHome: React.FC = () => {
                   >
                     +85.88%
                   </Text>
-                </View>
-              </View>
-            </View>
-            <View style={tw`items-end`}>
+                </Box>
+              </Box>
+            </Box>
+            <Box twClassName="items-end">
               <Text>$550.00</Text>
               <Text
                 color={TextColor.TextAlternative}
@@ -347,14 +429,18 @@ const WalletHome: React.FC = () => {
               >
                 12.44 HOPR
               </Text>
-            </View>
+            </Box>
           </Pressable>
 
           {/* USDC */}
           <Pressable
             style={tw`w-full flex-row items-center justify-between bg-transparent px-4 py-2`}
           >
-            <View style={tw`flex-1 flex-row items-center overflow-hidden`}>
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+              twClassName="flex-1 overflow-hidden"
+            >
               <BadgeWrapper
                 badge={
                   <BadgeNetwork
@@ -373,11 +459,17 @@ const WalletHome: React.FC = () => {
                   size={AvatarTokenSize.Md}
                 />
               </BadgeWrapper>
-              <View style={tw`ml-4 flex-1 overflow-hidden`}>
+              <Box
+                flexDirection={BoxFlexDirection.Column}
+                twClassName="ml-4 flex-1 overflow-hidden"
+              >
                 <Text fontWeight={FontWeight.Medium} numberOfLines={1}>
                   USDC Coin
                 </Text>
-                <View style={tw`flex-row items-center`}>
+                <Box
+                  flexDirection={BoxFlexDirection.Row}
+                  alignItems={BoxAlignItems.Center}
+                >
                   <Icon
                     name={IconName.Arrow2Down}
                     color={IconColor.ErrorDefault}
@@ -389,10 +481,10 @@ const WalletHome: React.FC = () => {
                   >
                     -7.80%
                   </Text>
-                </View>
-              </View>
-            </View>
-            <View style={tw`items-end`}>
+                </Box>
+              </Box>
+            </Box>
+            <Box twClassName="items-end">
               <Text>$110.20</Text>
               <Text
                 color={TextColor.TextAlternative}
@@ -400,10 +492,10 @@ const WalletHome: React.FC = () => {
               >
                 0.7107 USDC
               </Text>
-            </View>
+            </Box>
           </Pressable>
-        </View>
-      </View>
+        </Box>
+      </Box>
     </ScrollView>
   );
 };

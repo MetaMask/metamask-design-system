@@ -143,6 +143,53 @@ export type BadgeWrapperCustomPosition = {
 };
 
 /**
+ * Box - all spacing-related props
+ */
+export type BoxSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+
+/**
+ * Box - flexDirection
+ */
+export enum BoxFlexDirection {
+  Row = 'flex-row',
+  RowReverse = 'flex-row-reverse',
+  Column = 'flex-col',
+  ColumnReverse = 'flex-col-reverse',
+}
+
+/**
+ * Box - flexWrap
+ */
+export enum BoxFlexWrap {
+  NoWrap = 'flex-nowrap',
+  Wrap = 'flex-wrap',
+  WrapReverse = 'flex-wrap-reverse',
+}
+
+/**
+ * Box - alignItems
+ */
+export enum BoxAlignItems {
+  Start = 'items-start',
+  Center = 'items-center',
+  End = 'items-end',
+  Stretch = 'items-stretch',
+  Baseline = 'items-baseline',
+}
+
+/**
+ * Box - justifyContent
+ */
+export enum BoxJustifyContent {
+  Start = 'justify-start',
+  Center = 'justify-center',
+  End = 'justify-end',
+  Between = 'justify-between',
+  Around = 'justify-around',
+  Evenly = 'justify-evenly',
+}
+
+/**
  * ButtonBase - size
  */
 export enum ButtonBaseSize {
@@ -216,11 +263,11 @@ export enum TextVariant {
  */
 export enum TextColor {
   /** For default neutral text. */
-  TextDefault = 'text-text-default',
+  TextDefault = 'text-default',
   /** For softer contrast neutral text */
-  TextAlternative = 'text-text-alternative',
+  TextAlternative = 'text-alternative',
   /** For the softest contrast neutral text (not accessible) */
-  TextMuted = 'text-text-muted',
+  TextMuted = 'text-muted',
   /** For elements used on top of overlay/alternative. */
   OverlayInverse = 'text-overlay-inverse',
   /** For interactive, active, and selected semantics. */

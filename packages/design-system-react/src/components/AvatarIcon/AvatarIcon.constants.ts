@@ -13,7 +13,7 @@ export const TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR: Record<
   AvatarIconSeverity,
   string
 > = {
-  [AvatarIconSeverity.Neutral]: 'bg-background-muted',
+  [AvatarIconSeverity.Neutral]: 'bg-muted',
   [AvatarIconSeverity.Info]: 'bg-info-muted',
   [AvatarIconSeverity.Success]: 'bg-success-muted',
   [AvatarIconSeverity.Error]: 'bg-error-muted',

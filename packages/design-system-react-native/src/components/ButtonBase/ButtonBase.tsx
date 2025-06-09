@@ -33,7 +33,7 @@ export const ButtonBase = ({
 }: ButtonBaseProps) => {
   const tw = useTailwind();
   const twContainerClassNames = `
-    flex-row items-center justify-center rounded-full bg-background-muted px-4 min-w-[80px] overflow-hidden
+    flex-row items-center justify-center rounded-full bg-muted px-4 min-w-[80px] overflow-hidden
     h-[${size}px]
     ${isDisabled ? 'opacity-50' : 'opacity-100'}
     ${isFullWidth ? 'self-stretch' : 'self-start'}

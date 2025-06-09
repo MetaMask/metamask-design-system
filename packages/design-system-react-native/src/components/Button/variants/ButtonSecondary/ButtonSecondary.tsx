@@ -30,14 +30,14 @@ export const ButtonSecondary = ({
     ${
       isInverse && isDanger
         ? isPressed || isLoading
-          ? 'bg-background-default-pressed'
-          : 'bg-background-default'
+          ? 'bg-default-pressed'
+          : 'bg-default'
         : isDanger
           ? isPressed || isLoading
             ? 'bg-error-muted-pressed'
             : 'bg-transparent'
           : isPressed || isLoading
-            ? 'bg-background-pressed'
+            ? 'bg-pressed'
             : 'bg-transparent'
     }
     border-[1.5px]
@@ -63,7 +63,7 @@ export const ButtonSecondary = ({
       : 'text-error-default'
     : isInverse
       ? 'text-primary-inverse'
-      : 'text-text-default';
+      : 'text-default';
 
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);

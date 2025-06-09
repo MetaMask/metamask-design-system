@@ -49,11 +49,7 @@ const TextButtonStory: React.FC<TextButtonProps> = ({
 }) => {
   const tw = useTailwind();
   return (
-    <View
-      style={[
-        tw`${isInverse ? `bg-primary-default` : 'bg-background-default'}`,
-      ]}
-    >
+    <View style={[tw`${isInverse ? `bg-primary-default` : 'bg-default'}`]}>
       <TextButton isInverse={isInverse} {...props} />
     </View>
   );

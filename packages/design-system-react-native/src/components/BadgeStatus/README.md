@@ -24,13 +24,13 @@ Available statuses:
 
 Each status maps to a different background and border color:
 
-| Status         | Background Color        | Border Color             |
-| -------------- | ----------------------- | ------------------------ |
-| `Active`       | `bg-success-default`    | `border-success-default` |
-| `Inactive`     | `bg-background-default` | `border-success-default` |
-| `Disconnected` | `bg-icon-muted`         | `border-icon-muted`      |
-| `New`          | `bg-primary-default`    | `border-primary-default` |
-| `Attention`    | `bg-error-default`      | `border-error-default`   |
+| Status         | Background Color     | Border Color             |
+| -------------- | -------------------- | ------------------------ |
+| `Active`       | `bg-success-default` | `border-success-default` |
+| `Inactive`     | `bg-default`         | `border-success-default` |
+| `Disconnected` | `bg-icon-muted`      | `border-icon-muted`      |
+| `New`          | `bg-primary-default` | `border-primary-default` |
+| `Attention`    | `bg-error-default`   | `border-error-default`   |
 
 ---
 
