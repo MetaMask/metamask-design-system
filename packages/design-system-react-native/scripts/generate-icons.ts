@@ -138,7 +138,7 @@ export async function main(): Promise<void> {
 
   await fs.promises.writeFile(typesFilePath, typesContentToWrite);
 
-  console.log(`✅ Finished generating icons! 🎉🎉`);
+  console.log(`Finished generating icons!`);
 }
 
 if (require.main === module) {
