@@ -36,7 +36,7 @@ const SpinnerStory: React.FC<SpinnerProps> = ({ color, ...props }) => {
         tw`p-4 ${
           color?.endsWith('-inverse')
             ? color.replace('inverse', 'default').replace('text', 'bg')
-            : 'bg-background-default'
+            : 'bg-default'
         }`,
       ]}
     >

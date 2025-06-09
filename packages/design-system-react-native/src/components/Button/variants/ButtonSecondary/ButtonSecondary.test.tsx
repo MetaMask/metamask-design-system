@@ -107,7 +107,7 @@ describe('ButtonSecondary', () => {
       </ButtonSecondary>,
     );
     const btn = getByTestId('button-secondary');
-    expectBackground(btn.props.style, 'bg-background-default');
+    expectBackground(btn.props.style, 'bg-default');
     expectBorder(btn.props.style, 'border-background-default');
   });
 
@@ -118,7 +118,7 @@ describe('ButtonSecondary', () => {
     const btn = getByTestId('button-secondary');
 
     fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-background-pressed');
+    expectBackground(btn.props.style, 'bg-pressed');
     expectBorder(btn.props.style, 'border-icon-default');
 
     fireEvent(btn, 'pressOut');
@@ -152,7 +152,7 @@ describe('ButtonSecondary', () => {
     const btn = getByTestId('button-secondary');
 
     fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-background-pressed');
+    expectBackground(btn.props.style, 'bg-pressed');
     expectBorder(btn.props.style, 'border-primary-inverse');
 
     fireEvent(btn, 'pressOut');
@@ -210,7 +210,7 @@ describe('ButtonSecondary', () => {
       </ButtonSecondary>,
     );
     const btn = getByTestId('button-secondary');
-    expectBackground(btn.props.style, 'bg-background-pressed');
+    expectBackground(btn.props.style, 'bg-pressed');
     expectBorder(btn.props.style, 'border-primary-inverse');
   });
 
@@ -221,7 +221,16 @@ describe('ButtonSecondary', () => {
       </ButtonSecondary>,
     );
     const btn = getByTestId('button-secondary');
-    expectBackground(btn.props.style, 'bg-background-default-pressed');
+    expectBackground(btn.props.style, 'bg-default-pressed');
     expectBorder(btn.props.style, 'border-background-default-pressed');
+  });
+
+  it('renders normal pressed state', () => {
+    const { getByTestId } = render(
+      <ButtonSecondary testID="btn">Normal</ButtonSecondary>,
+    );
+    const btn = getByTestId('btn');
+    fireEvent(btn, 'pressIn');
+    expectBackground(btn.props.style, 'bg-pressed');
   });
 });

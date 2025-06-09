@@ -95,14 +95,14 @@ describe('ButtonTertiary', () => {
     expectBorder(btn.props.style, 'border-primary-inverse');
   });
 
-  it('renders inverse+danger (bg-background-default + border-background-default)', () => {
+  it('renders inverse+danger (bg-default + border-background-default)', () => {
     const { getByTestId } = render(
       <ButtonTertiary isInverse isDanger testID="button-tertiary">
         Both
       </ButtonTertiary>,
     );
     const btn = getByTestId('button-tertiary');
-    expectBackground(btn.props.style, 'bg-background-default');
+    expectBackground(btn.props.style, 'bg-default');
     expectBorder(btn.props.style, 'border-background-default');
   });
 
@@ -113,8 +113,8 @@ describe('ButtonTertiary', () => {
     const btn = getByTestId('button-tertiary');
 
     fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-background-pressed');
-    expectBorder(btn.props.style, 'border-background-pressed');
+    expectBackground(btn.props.style, 'bg-pressed');
+    expectBorder(btn.props.style, 'border-transparent');
 
     fireEvent(btn, 'pressOut');
     expectBackground(btn.props.style, 'bg-transparent');
@@ -147,7 +147,7 @@ describe('ButtonTertiary', () => {
     const btn = getByTestId('button-tertiary');
 
     fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-background-pressed');
+    expectBackground(btn.props.style, 'bg-pressed');
     expectBorder(btn.props.style, 'border-primary-inverse');
 
     fireEvent(btn, 'pressOut');
@@ -205,7 +205,7 @@ describe('ButtonTertiary', () => {
       </ButtonTertiary>,
     );
     const btn = getByTestId('button-tertiary');
-    expectBackground(btn.props.style, 'bg-background-pressed');
+    expectBackground(btn.props.style, 'bg-pressed');
     expectBorder(btn.props.style, 'border-primary-inverse');
   });
 
@@ -216,7 +216,7 @@ describe('ButtonTertiary', () => {
       </ButtonTertiary>,
     );
     const btn = getByTestId('button-tertiary');
-    expectBackground(btn.props.style, 'bg-background-default-pressed');
+    expectBackground(btn.props.style, 'bg-default-pressed');
     expectBorder(btn.props.style, 'border-background-default-pressed');
   });
 });

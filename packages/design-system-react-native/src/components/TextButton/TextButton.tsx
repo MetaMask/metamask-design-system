@@ -64,7 +64,7 @@ export const TextButton: React.FC<TextButtonProps> = ({
         disabled={isDisabled}
         style={({ pressed }) => [
           { transform: [{ translateY: baselineOffset }] },
-          tw`flex-row items-center ${pressed ? 'bg-background-pressed' : 'bg-transparent'} ${isDisabled ? 'opacity-50' : 'opacity-100'} ${twClassName}`,
+          tw`flex-row items-center ${pressed ? 'bg-pressed' : 'bg-transparent'} ${isDisabled ? 'opacity-50' : 'opacity-100'} ${twClassName}`,
           style,
         ]}
         {...props}

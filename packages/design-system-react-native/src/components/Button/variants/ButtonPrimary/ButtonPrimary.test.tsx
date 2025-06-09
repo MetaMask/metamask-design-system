@@ -77,7 +77,7 @@ describe('ButtonPrimary', () => {
       </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
-    expectBackground(btn.props.style, 'bg-background-default');
+    expectBackground(btn.props.style, 'bg-default');
   });
 
   it('renders inverse+danger fallback background', () => {
@@ -87,7 +87,7 @@ describe('ButtonPrimary', () => {
       </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
-    expectBackground(btn.props.style, 'bg-background-default');
+    expectBackground(btn.props.style, 'bg-default');
   });
 
   it('toggles pressed styles (default)', () => {
@@ -127,10 +127,10 @@ describe('ButtonPrimary', () => {
     const btn = getByTestId('button-primary');
 
     fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-background-default-pressed');
+    expectBackground(btn.props.style, 'bg-default-pressed');
 
     fireEvent(btn, 'pressOut');
-    expectBackground(btn.props.style, 'bg-background-default');
+    expectBackground(btn.props.style, 'bg-default');
   });
 
   it('shows spinner + hides content when loading', () => {
@@ -182,7 +182,7 @@ describe('ButtonPrimary', () => {
       </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
-    expectBackground(btn.props.style, 'bg-background-default-pressed');
+    expectBackground(btn.props.style, 'bg-default-pressed');
   });
 
   it('renders inverse+danger+loading background', () => {
@@ -192,6 +192,17 @@ describe('ButtonPrimary', () => {
       </ButtonPrimary>,
     );
     const btn = getByTestId('button-primary');
-    expectBackground(btn.props.style, 'bg-background-default-pressed');
+    expectBackground(btn.props.style, 'bg-default-pressed');
+  });
+
+  it('renders inverse+danger pressed state', () => {
+    const { getByTestId } = render(
+      <ButtonPrimary testID="btn" isInverse isDanger>
+        Inverse+Danger
+      </ButtonPrimary>,
+    );
+    const btn = getByTestId('btn');
+    expectBackground(btn.props.style, 'bg-default');
+    expect(btn.props.children.props.children).toBe('Inverse+Danger');
   });
 });

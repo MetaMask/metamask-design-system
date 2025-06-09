@@ -35,16 +35,16 @@ const ButtonPrimaryBase = ({
     ${
       isInverse && isDanger
         ? isPressed || isLoading
-          ? 'bg-background-default-pressed'
-          : 'bg-background-default'
+          ? 'bg-default-pressed'
+          : 'bg-default'
         : isDanger
           ? isPressed || isLoading
             ? 'bg-error-default-pressed'
             : 'bg-error-default'
           : isInverse
             ? isPressed || isLoading
-              ? 'bg-background-default-pressed'
-              : 'bg-background-default'
+              ? 'bg-default-pressed'
+              : 'bg-default'
             : isPressed || isLoading
               ? 'bg-primary-default-pressed'
               : 'bg-primary-default'
@@ -60,7 +60,7 @@ const ButtonPrimaryBase = ({
       : isDanger
         ? 'text-primary-inverse'
         : isInverse
-          ? 'text-text-default'
+          ? 'text-default'
           : 'text-primary-inverse';
 
   const onPressInHandler = (event: GestureResponderEvent) => {

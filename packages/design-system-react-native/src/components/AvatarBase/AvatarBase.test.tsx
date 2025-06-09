@@ -67,7 +67,7 @@ describe('AvatarBase', () => {
           'items-center',
           'justify-center',
           'overflow-hidden',
-          'bg-background-section',
+          'bg-section',
           shapeClass,
           dimensionClass,
         ]
@@ -105,7 +105,7 @@ describe('AvatarBase', () => {
           'items-center',
           'justify-center',
           'overflow-hidden',
-          'bg-background-section',
+          'bg-section',
           shapeClass,
           dimensionClass,
           borderClass,
@@ -132,7 +132,7 @@ describe('AvatarBase', () => {
       'items-center',
       'justify-center',
       'overflow-hidden',
-      'bg-background-section',
+      'bg-section',
       'rounded-full',
       TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[AvatarBaseSize.Md],
     ].join(' ');

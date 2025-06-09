@@ -44,11 +44,7 @@ const ButtonIconStory: React.FC<ButtonIconProps> = ({
 }) => {
   const tw = useTailwind();
   return (
-    <View
-      style={[
-        tw`${isInverse ? `bg-primary-default` : 'bg-background-default'}`,
-      ]}
-    >
+    <View style={[tw`${isInverse ? `bg-primary-default` : 'bg-default'}`]}>
       <ButtonIcon isInverse={isInverse} {...props} />
     </View>
   );
