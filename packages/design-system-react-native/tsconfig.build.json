@@ -5,8 +5,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "jsx": "react-native",
-    "types": ["react-native", "jest", "node"],
-    "emitDeclarationOnly": false,
+    "types": ["react-native", "jest"],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "moduleResolution": "Node16"
