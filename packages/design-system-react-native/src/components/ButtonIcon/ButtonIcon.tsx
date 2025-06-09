@@ -32,7 +32,7 @@ export const ButtonIcon = ({
     items-center justify-center
     ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size]}
     ${isFloating ? 'rounded-full' : 'rounded-sm'}
-    ${isFloating ? 'bg-icon-default' : isPressed ? 'bg-background-pressed' : 'bg-transparent'}
+    ${isFloating ? 'bg-icon-default' : isPressed ? 'bg-pressed' : 'bg-transparent'}
     ${isDisabled ? 'opacity-50' : 'opacity-100'}
     ${twClassName}`;
 

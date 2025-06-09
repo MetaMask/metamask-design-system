@@ -60,11 +60,7 @@ const ButtonSecondaryStory: React.FC<ButtonSecondaryProps> = ({
 }) => {
   const tw = useTailwind();
   return (
-    <View
-      style={[
-        tw`${isInverse ? `bg-primary-default p-4` : 'bg-background-default'}`,
-      ]}
-    >
+    <View style={[tw`${isInverse ? `bg-primary-default p-4` : 'bg-default'}`]}>
       <ButtonSecondary isInverse={isInverse} {...props} />
     </View>
   );

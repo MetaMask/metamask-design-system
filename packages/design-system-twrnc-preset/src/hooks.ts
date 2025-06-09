@@ -14,7 +14,7 @@ import { ThemeContext } from './ThemeContext';
  * const inverseTheme = theme === Theme.Light ? Theme.Dark : Theme.Light;
  * return (
  *   <ThemeProvider theme={inverseTheme}>
- *     <View style={tw`bg-background-default`}>
+ *     <View style={tw`bg-default`}>
  *       <Text style={tw`text-default`}>Toast message</Text>
  *     </View>
  *   </ThemeProvider>

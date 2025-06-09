@@ -30,18 +30,18 @@ export const ButtonTertiary = ({
     ${
       isInverse && isDanger
         ? isPressed || isLoading
-          ? 'bg-background-default-pressed'
-          : 'bg-background-default'
+          ? 'bg-default-pressed'
+          : 'bg-default'
         : isDanger
           ? isPressed || isLoading
             ? 'bg-error-muted-pressed'
             : 'bg-transparent'
           : isInverse
             ? isPressed || isLoading
-              ? 'bg-background-pressed'
+              ? 'bg-pressed'
               : 'bg-transparent'
             : isPressed || isLoading
-              ? 'bg-background-pressed'
+              ? 'bg-pressed'
               : 'bg-transparent'
     }
     ${isInverse && !isDanger ? 'border-[1.5px]' : 'border-0'}

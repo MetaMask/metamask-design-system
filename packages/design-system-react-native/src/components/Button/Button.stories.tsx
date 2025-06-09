@@ -62,11 +62,7 @@ type Story = StoryObj<ButtonProps>;
 const ButtonStory: React.FC<ButtonProps> = ({ isInverse, ...props }) => {
   const tw = useTailwind();
   return (
-    <View
-      style={[
-        tw`${isInverse ? `bg-primary-default p-4` : 'bg-background-default'}`,
-      ]}
-    >
+    <View style={[tw`${isInverse ? `bg-primary-default p-4` : 'bg-default'}`]}>
       <Button isInverse={isInverse} {...props} />
     </View>
   );
