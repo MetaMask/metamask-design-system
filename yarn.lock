@@ -3256,8 +3256,15 @@ __metadata:
     ts-node: "npm:^10.9.1"
     typescript: "npm:~5.2.2"
   peerDependencies:
+    "@metamask/design-system-twrnc-preset": ^0.0.0
+    "@metamask/design-tokens": ^7.0.0
+    "@metamask/utils": ^11.4.0
+    "@solana/addresses": ^2.1.0
+    bitcoin-address-validation: ^3.0.0
     react: ">=18.2.0"
     react-native: ">=0.72.0"
+    react-native-gesture-handler: ^1.10.3
+    react-native-reanimated: 3.3.0
   languageName: unknown
   linkType: soft
 
@@ -3295,6 +3302,9 @@ __metadata:
     typescript: "npm:~5.2.2"
   peerDependencies:
     "@metamask/design-tokens": ^7.1.0
+    "@metamask/utils": ^11.4.0
+    "@solana/addresses": ^2.1.0
+    bitcoin-address-validation: ^3.0.0
     react: ^16.0.0
     react-dom: ^16.0.0
     tailwindcss: ^3.0.0
@@ -3339,6 +3349,7 @@ __metadata:
     deepmerge: "npm:^4.2.2"
     jest: "npm:^29.7.0"
     metro-react-native-babel-preset: "npm:^0.77.0"
+    react: "npm:^18.2.0"
     react-test-renderer: "npm:^18.3.1"
     ts-jest: "npm:^29.2.5"
     twrnc: "npm:^4.5.1"
@@ -3502,9 +3513,11 @@ __metadata:
     "@metamask/design-system-react-native": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
+    "@metamask/utils": "npm:^11.4.0"
     "@react-native-async-storage/async-storage": "npm:^2.0.0"
     "@react-native-community/datetimepicker": "npm:^8.2.0"
     "@react-native-community/slider": "npm:^4.5.5"
+    "@solana/addresses": "npm:^2.1.0"
     "@storybook/addon-actions": "npm:6.5"
     "@storybook/addon-controls": "npm:6.5"
     "@storybook/addon-ondevice-actions": "npm:6.5"
@@ -3513,6 +3526,7 @@ __metadata:
     "@types/react": "npm:^18.2.0"
     "@types/react-dom": "npm:^18.2.0"
     "@types/react-native-get-random-values": "npm:^1"
+    bitcoin-address-validation: "npm:^3.0.0"
     expo: "npm:~49.0.23"
     expo-status-bar: "npm:~1.6.0"
     expo-system-ui: "npm:~2.4.0"
@@ -3537,6 +3551,8 @@ __metadata:
     "@metamask/design-system-react": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
+    "@metamask/utils": "npm:^11.4.0"
+    "@solana/addresses": "npm:^2.1.0"
     "@storybook/addon-a11y": "npm:^8.6.12"
     "@storybook/addon-essentials": "npm:^8.6.12"
     "@storybook/addon-interactions": "npm:^8.6.12"
@@ -3553,6 +3569,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^4.3.3"
     autoprefixer: "npm:^10.4.20"
     axe-playwright: "npm:^2.1.0"
+    bitcoin-address-validation: "npm:^3.0.0"
     playwright: "npm:^1.52.0"
     prop-types: "npm:^15.8.1"
     react: "npm:^18.2.0"
