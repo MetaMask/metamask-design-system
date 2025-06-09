@@ -3240,7 +3240,7 @@ __metadata:
     "@types/react": "npm:^18.2.0"
     "@types/react-test-renderer": "npm:^18"
     babel-jest: "npm:^29.7.0"
-    bitcoin-address-validation: "npm:^3.0.0"
+    bitcoin-address-validation: "npm:2.0.0 || 3.0.0"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^29.7.0"
     metro-react-native-babel-preset: "npm:^0.77.0"
@@ -3276,9 +3276,9 @@ __metadata:
     "@metamask/auto-changelog": "npm:^5.0.2"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/jazzicon": "npm:^2.0.0"
-    "@metamask/utils": "npm:^11.4.0"
+    "@metamask/utils": "npm:^11.0.0"
     "@radix-ui/react-slot": "npm:^1.1.0"
-    "@solana/addresses": "npm:^2.1.0"
+    "@solana/addresses": "npm:^2.0.0"
     "@storybook/react": "npm:^8.6.12"
     "@storybook/test": "npm:^8.6.12"
     "@svgr/cli": "npm:^8.1.0"
@@ -3289,7 +3289,7 @@ __metadata:
     "@types/node": "npm:^16.18.54"
     "@types/react": "npm:^18.2.0"
     "@types/react-dom": "npm:^18.2.0"
-    bitcoin-address-validation: "npm:^3.0.0"
+    bitcoin-address-validation: "npm:2.0.0 || 3.0.0"
     blo: "npm:^2.0.0"
     deepmerge: "npm:^4.2.2"
     dompurify: "npm:^3.2.5"
@@ -3302,9 +3302,9 @@ __metadata:
     typescript: "npm:~5.2.2"
   peerDependencies:
     "@metamask/design-tokens": ^7.1.0
-    "@metamask/utils": ^11.4.0
-    "@solana/addresses": ^2.1.0
-    bitcoin-address-validation: ^3.0.0
+    "@metamask/utils": ^11.0.0
+    "@solana/addresses": ^2.0.0
+    bitcoin-address-validation: 2.0.0 || 3.0.0
     react: ^16.0.0
     react-dom: ^16.0.0
     tailwindcss: ^3.0.0
@@ -3526,7 +3526,7 @@ __metadata:
     "@types/react": "npm:^18.2.0"
     "@types/react-dom": "npm:^18.2.0"
     "@types/react-native-get-random-values": "npm:^1"
-    bitcoin-address-validation: "npm:^3.0.0"
+    bitcoin-address-validation: "npm:2.0.0 || 3.0.0"
     expo: "npm:~49.0.23"
     expo-status-bar: "npm:~1.6.0"
     expo-system-ui: "npm:~2.4.0"
@@ -3569,7 +3569,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^4.3.3"
     autoprefixer: "npm:^10.4.20"
     axe-playwright: "npm:^2.1.0"
-    bitcoin-address-validation: "npm:^3.0.0"
+    bitcoin-address-validation: "npm:2.0.0 || 3.0.0"
     playwright: "npm:^1.52.0"
     prop-types: "npm:^15.8.1"
     react: "npm:^18.2.0"
@@ -3588,7 +3588,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/utils@npm:^11.0.0, @metamask/utils@npm:^11.4.0":
+"@metamask/utils@npm:^11.0.0":
   version: 11.4.0
   resolution: "@metamask/utils@npm:11.4.0"
   dependencies:
@@ -4393,31 +4393,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solana/addresses@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@solana/addresses@npm:2.1.0"
-  dependencies:
-    "@solana/assertions": "npm:2.1.0"
-    "@solana/codecs-core": "npm:2.1.0"
-    "@solana/codecs-strings": "npm:2.1.0"
-    "@solana/errors": "npm:2.1.0"
-  peerDependencies:
-    typescript: ">=5"
-  checksum: 10/b562c8328503052b54c7cdf22062daafbaa3a570cbf97d8b7248d20d76528bb80a8b44de9a1ed411e25c592efa92256844267b86c07e3ee42fe7f45f3e0db67c
-  languageName: node
-  linkType: hard
-
-"@solana/assertions@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@solana/assertions@npm:2.1.0"
-  dependencies:
-    "@solana/errors": "npm:2.1.0"
-  peerDependencies:
-    typescript: ">=5"
-  checksum: 10/4a634475effb25a94e687b6a4a548f0bcc7dfb63dea82c7bf460d794258c6e4dfac7abe4235318b86f22c672a76a7a4028bb44bad64f0cf935ea49d49ab540a1
-  languageName: node
-  linkType: hard
-
 "@solana/assertions@npm:2.1.1":
   version: 2.1.1
   resolution: "@solana/assertions@npm:2.1.1"
@@ -4429,17 +4404,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solana/codecs-core@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@solana/codecs-core@npm:2.1.0"
-  dependencies:
-    "@solana/errors": "npm:2.1.0"
-  peerDependencies:
-    typescript: ">=5"
-  checksum: 10/aa746022c24cbbbaf4f8e268e1228b60b71fbafec8d337d947c3c97b459fcbd5756df7c206e3e2dc7e3e3633b39d2102d794c369b55b5641dd7153713f794e14
-  languageName: node
-  linkType: hard
-
 "@solana/codecs-core@npm:2.1.1":
   version: 2.1.1
   resolution: "@solana/codecs-core@npm:2.1.1"
@@ -4448,18 +4412,6 @@ __metadata:
   peerDependencies:
     typescript: ">=5.3.3"
   checksum: 10/b0c426b5028cdfc9a71d55d61ca1b9815c951cdf3557142512a89418fd5cde75b4e1214f548f0e4fd5b8d3431bd51cd5da0ddfeb1afc40742cbc041cc4a04412
-  languageName: node
-  linkType: hard
-
-"@solana/codecs-numbers@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@solana/codecs-numbers@npm:2.1.0"
-  dependencies:
-    "@solana/codecs-core": "npm:2.1.0"
-    "@solana/errors": "npm:2.1.0"
-  peerDependencies:
-    typescript: ">=5"
-  checksum: 10/2ce9aaaa14869612c45e996a9fe64d27745374616f74f4a704e51b00fb3d7c19db7a5826e94fb0d957ee2cbd37c72b1fb4157f4a515e9d69afc161a72d9b647d
   languageName: node
   linkType: hard
 
@@ -4475,20 +4427,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solana/codecs-strings@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@solana/codecs-strings@npm:2.1.0"
-  dependencies:
-    "@solana/codecs-core": "npm:2.1.0"
-    "@solana/codecs-numbers": "npm:2.1.0"
-    "@solana/errors": "npm:2.1.0"
-  peerDependencies:
-    fastestsmallesttextencoderdecoder: ^1.0.22
-    typescript: ">=5"
-  checksum: 10/82b483bc1eb4c4e10bfa9554aee7dfa5c38cca594d94093376b7a6afd7c2c3cbc5cebb62061a00612c1eb7052b0adfb28d673bc22ae1a5b27d8a6d61dab289b8
-  languageName: node
-  linkType: hard
-
 "@solana/codecs-strings@npm:2.1.1":
   version: 2.1.1
   resolution: "@solana/codecs-strings@npm:2.1.1"
@@ -4500,20 +4438,6 @@ __metadata:
     fastestsmallesttextencoderdecoder: ^1.0.22
     typescript: ">=5.3.3"
   checksum: 10/7ade3b9342f7adeb28263cced496c24228d81165da14ed4f35923a6452308bb836de154665340931614fc5e842e6d196d05afc59921beb151e56c952d93657ed
-  languageName: node
-  linkType: hard
-
-"@solana/errors@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@solana/errors@npm:2.1.0"
-  dependencies:
-    chalk: "npm:^5.3.0"
-    commander: "npm:^13.1.0"
-  peerDependencies:
-    typescript: ">=5"
-  bin:
-    errors: bin/cli.mjs
-  checksum: 10/c9ab73ddfd019ae359d4d5ae36ffa3b10d5df22a72c685f07b4131ebe0da2fcacb4f4ae402ab4783c7a47c672803fb9ab1cb015f9482a03162a1ecd344760c57
   languageName: node
   linkType: hard
 
@@ -7973,7 +7897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bitcoin-address-validation@npm:^3.0.0":
+"bitcoin-address-validation@npm:2.0.0 || 3.0.0":
   version: 3.0.0
   resolution: "bitcoin-address-validation@npm:3.0.0"
   dependencies:
