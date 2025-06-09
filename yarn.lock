@@ -3240,7 +3240,7 @@ __metadata:
     "@types/react": "npm:^18.2.0"
     "@types/react-test-renderer": "npm:^18"
     babel-jest: "npm:^29.7.0"
-    bitcoin-address-validation: "npm:2.0.0 || 3.0.0"
+    bitcoin-address-validation: "npm:2.0.0"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^29.7.0"
     metro-react-native-babel-preset: "npm:^0.77.0"
@@ -3260,7 +3260,7 @@ __metadata:
     "@metamask/design-tokens": ^7.0.0
     "@metamask/utils": ^11.0.0
     "@solana/addresses": ^2.0.0
-    bitcoin-address-validation: 2.0.0 || 3.0.0
+    bitcoin-address-validation: 2.0.0
     react: ">=18.2.0"
     react-native: ">=0.72.0"
     react-native-gesture-handler: ^1.10.3
@@ -3289,7 +3289,7 @@ __metadata:
     "@types/node": "npm:^16.18.54"
     "@types/react": "npm:^18.2.0"
     "@types/react-dom": "npm:^18.2.0"
-    bitcoin-address-validation: "npm:2.0.0 || 3.0.0"
+    bitcoin-address-validation: "npm:2.0.0"
     blo: "npm:^2.0.0"
     deepmerge: "npm:^4.2.2"
     dompurify: "npm:^3.2.5"
@@ -3304,7 +3304,7 @@ __metadata:
     "@metamask/design-tokens": ^7.1.0
     "@metamask/utils": ^11.0.0
     "@solana/addresses": ^2.0.0
-    bitcoin-address-validation: 2.0.0 || 3.0.0
+    bitcoin-address-validation: 2.0.0
     react: ^16.0.0
     react-dom: ^16.0.0
     tailwindcss: ^3.0.0
@@ -3526,7 +3526,7 @@ __metadata:
     "@types/react": "npm:^18.2.0"
     "@types/react-dom": "npm:^18.2.0"
     "@types/react-native-get-random-values": "npm:^1"
-    bitcoin-address-validation: "npm:2.0.0 || 3.0.0"
+    bitcoin-address-validation: "npm:2.0.0"
     expo: "npm:~49.0.23"
     expo-status-bar: "npm:~1.6.0"
     expo-system-ui: "npm:~2.4.0"
@@ -3569,7 +3569,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^4.3.3"
     autoprefixer: "npm:^10.4.20"
     axe-playwright: "npm:^2.1.0"
-    bitcoin-address-validation: "npm:2.0.0 || 3.0.0"
+    bitcoin-address-validation: "npm:2.0.0"
     playwright: "npm:^1.52.0"
     prop-types: "npm:^15.8.1"
     react: "npm:^18.2.0"
@@ -7803,10 +7803,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"base58-js@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "base58-js@npm:3.0.2"
-  checksum: 10/2a1e734889b39b26b5415d7ecea072ec22d91467db4558d43be25f6ffee8a195096dc947e9b7fe453b7bf2d0280ca1398c3ffc6c7b6b383329e8a95cec2e6c85
+"base-x@npm:^3.0.8":
+  version: 3.0.11
+  resolution: "base-x@npm:3.0.11"
+  dependencies:
+    safe-buffer: "npm:^5.0.1"
+  checksum: 10/c2e3c443fd07cb9b9d3e179a9e9c581daa31881005841fe8d6a834e534505890fedf03465ccf14512da60e3f7be00fe66167806b159ba076d2c03952ae7460c4
   languageName: node
   linkType: hard
 
@@ -7897,14 +7899,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bitcoin-address-validation@npm:2.0.0 || 3.0.0":
-  version: 3.0.0
-  resolution: "bitcoin-address-validation@npm:3.0.0"
+"bitcoin-address-validation@npm:2.0.0":
+  version: 2.0.0
+  resolution: "bitcoin-address-validation@npm:2.0.0"
   dependencies:
-    base58-js: "npm:^3.0.2"
+    base-x: "npm:^3.0.8"
     bech32: "npm:^2.0.0"
-    sha256-uint8array: "npm:^0.10.3"
-  checksum: 10/3703f27501ea9c3bebad2c5a0448850a5c13f4d2df419ae72bfc458ff658283d29cc24e4cb34b99d5c6b5dec4bb58b3897456934213efd7b6f758bc87c81293b
+    sha.js: "npm:^2.4.11"
+  checksum: 10/61eeadba17a3540ddf2c32e18712564f69d07343431d8f71eeb33f0670478f21f7cc9805f465345ffd83508939f96cda997990a3eedf86728471cd87629de88d
   languageName: node
   linkType: hard
 
@@ -19585,7 +19587,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sha.js@npm:^2.4.0, sha.js@npm:^2.4.8":
+"sha.js@npm:^2.4.0, sha.js@npm:^2.4.11, sha.js@npm:^2.4.8":
   version: 2.4.11
   resolution: "sha.js@npm:2.4.11"
   dependencies:
@@ -19594,13 +19596,6 @@ __metadata:
   bin:
     sha.js: ./bin.js
   checksum: 10/d833bfa3e0a67579a6ce6e1bc95571f05246e0a441dd8c76e3057972f2a3e098465687a4369b07e83a0375a88703577f71b5b2e966809e67ebc340dbedb478c7
-  languageName: node
-  linkType: hard
-
-"sha256-uint8array@npm:^0.10.3":
-  version: 0.10.7
-  resolution: "sha256-uint8array@npm:0.10.7"
-  checksum: 10/e427f9d2f9c521dea552f033d3f0c3bd641ab214d214dd41bde3c805edde393519cf982b3eee7d683b32e5f28fa23b2278d25935940e13fbe831b216a37832be
   languageName: node
   linkType: hard
 
