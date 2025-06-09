@@ -131,7 +131,7 @@ const WalletHome: React.FC = () => {
           </ButtonBase>
         </Box>
         {/* Tabs */}
-        <Box className="border-b border-border-muted px-4 md:px-8">
+        <Box className="border-b border-muted px-4 md:px-8">
           <Box flexDirection={BoxFlexDirection.Row}>
             <Text
               asChild

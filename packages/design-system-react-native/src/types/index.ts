@@ -263,11 +263,11 @@ export enum TextVariant {
  */
 export enum TextColor {
   /** For default neutral text. */
-  TextDefault = 'text-text-default',
+  TextDefault = 'text-default',
   /** For softer contrast neutral text */
-  TextAlternative = 'text-text-alternative',
+  TextAlternative = 'text-alternative',
   /** For the softest contrast neutral text (not accessible) */
-  TextMuted = 'text-text-muted',
+  TextMuted = 'text-muted',
   /** For elements used on top of overlay/alternative. */
   OverlayInverse = 'text-overlay-inverse',
   /** For interactive, active, and selected semantics. */

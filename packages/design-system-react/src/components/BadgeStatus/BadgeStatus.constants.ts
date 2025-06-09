@@ -6,7 +6,7 @@ export const CLASSMAP_BADGESTATUS_STATUS_CIRCLE: Record<
   string
 > = {
   [BadgeStatusStatus.Active]: 'bg-success-default border-success-default',
-  [BadgeStatusStatus.Inactive]: 'bg-background-default border-success-default',
+  [BadgeStatusStatus.Inactive]: 'bg-default border-success-default',
   [BadgeStatusStatus.Disconnected]: 'bg-icon-muted border-icon-muted',
   [BadgeStatusStatus.New]: 'bg-primary-default border-primary-default',
   [BadgeStatusStatus.Attention]: 'bg-error-default border-error-default',

@@ -47,11 +47,11 @@ const WalletHome: React.FC = () => {
   const tw = useTailwind();
 
   return (
-    <ScrollView style={tw`flex-1 bg-background-default`}>
+    <ScrollView style={tw`flex-1 bg-default`}>
       {/* Container */}
-      <Box twClassName="w-full bg-background-default py-4">
+      <Box twClassName="w-full bg-default py-4">
         {/* Header */}
-        <Box twClassName="border-b border-border-muted px-4 py-4">
+        <Box twClassName="border-b border-muted px-4 py-4">
           <Box
             flexDirection={BoxFlexDirection.Row}
             alignItems={BoxAlignItems.Center}
@@ -118,7 +118,7 @@ const WalletHome: React.FC = () => {
           gap={3}
           twClassName="px-4 py-4"
         >
-          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-background-muted px-0 py-4">
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
             <Box
               flexDirection={BoxFlexDirection.Column}
               alignItems={BoxAlignItems.Center}
@@ -128,7 +128,7 @@ const WalletHome: React.FC = () => {
               <Text fontWeight={FontWeight.Medium}>Buy/Sell</Text>
             </Box>
           </ButtonBase>
-          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-background-muted px-0 py-4">
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
             <Box
               flexDirection={BoxFlexDirection.Column}
               alignItems={BoxAlignItems.Center}
@@ -138,7 +138,7 @@ const WalletHome: React.FC = () => {
               <Text fontWeight={FontWeight.Medium}>Swap</Text>
             </Box>
           </ButtonBase>
-          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-background-muted px-0 py-4">
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
             <Box
               flexDirection={BoxFlexDirection.Column}
               alignItems={BoxAlignItems.Center}
@@ -148,7 +148,7 @@ const WalletHome: React.FC = () => {
               <Text fontWeight={FontWeight.Medium}>Receive</Text>
             </Box>
           </ButtonBase>
-          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-background-muted px-0 py-4">
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
             <Box
               flexDirection={BoxFlexDirection.Column}
               alignItems={BoxAlignItems.Center}
@@ -161,10 +161,10 @@ const WalletHome: React.FC = () => {
         </Box>
 
         {/* Tabs */}
-        <Box twClassName="border-b border-border-muted px-4">
+        <Box twClassName="border-b border-muted px-4">
           <Box flexDirection={BoxFlexDirection.Row}>
             <Pressable
-              style={tw`flex-1 items-center justify-center border-b-2 border-border-default pb-2 pt-1`}
+              style={tw`flex-1 items-center justify-center border-b-2 border-default pb-2 pt-1`}
             >
               <Text fontWeight={FontWeight.Medium}>Tokens</Text>
             </Pressable>
