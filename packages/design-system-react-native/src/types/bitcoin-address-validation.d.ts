@@ -10,9 +10,18 @@
  */
 declare module 'bitcoin-address-validation' {
   export enum Network {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     mainnet = 'mainnet',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     testnet = 'testnet',
   }
 
+  /**
+   * Validates a Bitcoin address.
+   *
+   * @param address - The Bitcoin address to validate
+   * @param network - The network to validate against (optional)
+   * @returns True if the address is valid, false otherwise
+   */
   export function validate(address: string, network?: Network): boolean;
 }
