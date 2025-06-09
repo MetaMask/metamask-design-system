@@ -3228,8 +3228,8 @@ __metadata:
     "@metamask/auto-changelog": "npm:^5.0.2"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.4.0"
-    "@solana/addresses": "npm:^2.1.0"
+    "@metamask/utils": "npm:^11.0.0"
+    "@solana/addresses": "npm:^2.0.0"
     "@storybook/react-native": "npm:6.5"
     "@testing-library/react-hooks": "npm:^8.0.1"
     "@testing-library/react-native": "npm:^12.8.1"
@@ -3258,9 +3258,9 @@ __metadata:
   peerDependencies:
     "@metamask/design-system-twrnc-preset": ^0.0.0
     "@metamask/design-tokens": ^7.0.0
-    "@metamask/utils": ^11.4.0
-    "@solana/addresses": ^2.1.0
-    bitcoin-address-validation: ^3.0.0
+    "@metamask/utils": ^11.0.0
+    "@solana/addresses": ^2.0.0
+    bitcoin-address-validation: 2.0.0 || 3.0.0
     react: ">=18.2.0"
     react-native: ">=0.72.0"
     react-native-gesture-handler: ^1.10.3
@@ -3465,7 +3465,7 @@ __metadata:
     "@metamask/eslint-config-jest": "npm:^14.0.0"
     "@metamask/eslint-config-nodejs": "npm:^14.0.0"
     "@metamask/eslint-config-typescript": "npm:^14.0.0"
-    "@metamask/utils": "npm:^11.4.0"
+    "@metamask/utils": "npm:^11.0.0"
     "@types/jest": "npm:^27.4.1"
     "@types/lodash": "npm:^4.14.191"
     "@types/node": "npm:^16.18.54"
@@ -3513,11 +3513,11 @@ __metadata:
     "@metamask/design-system-react-native": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.4.0"
+    "@metamask/utils": "npm:^11.0.0"
     "@react-native-async-storage/async-storage": "npm:^2.0.0"
     "@react-native-community/datetimepicker": "npm:^8.2.0"
     "@react-native-community/slider": "npm:^4.5.5"
-    "@solana/addresses": "npm:^2.1.0"
+    "@solana/addresses": "npm:^2.0.0"
     "@storybook/addon-actions": "npm:6.5"
     "@storybook/addon-controls": "npm:6.5"
     "@storybook/addon-ondevice-actions": "npm:6.5"
@@ -3551,8 +3551,8 @@ __metadata:
     "@metamask/design-system-react": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.4.0"
-    "@solana/addresses": "npm:^2.1.0"
+    "@metamask/utils": "npm:^11.0.0"
+    "@solana/addresses": "npm:^2.0.0"
     "@storybook/addon-a11y": "npm:^8.6.12"
     "@storybook/addon-essentials": "npm:^8.6.12"
     "@storybook/addon-interactions": "npm:^8.6.12"
@@ -3588,7 +3588,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/utils@npm:^11.4.0":
+"@metamask/utils@npm:^11.0.0, @metamask/utils@npm:^11.4.0":
   version: 11.4.0
   resolution: "@metamask/utils@npm:11.4.0"
   dependencies:
@@ -4378,6 +4378,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solana/addresses@npm:^2.0.0":
+  version: 2.1.1
+  resolution: "@solana/addresses@npm:2.1.1"
+  dependencies:
+    "@solana/assertions": "npm:2.1.1"
+    "@solana/codecs-core": "npm:2.1.1"
+    "@solana/codecs-strings": "npm:2.1.1"
+    "@solana/errors": "npm:2.1.1"
+    "@solana/nominal-types": "npm:2.1.1"
+  peerDependencies:
+    typescript: ">=5.3.3"
+  checksum: 10/0350aa5c96c9862701e5414ca14007fafe7b9c4dfd2623bc041ff7efe6a63afac37d9bf01f860c26ae0f252e5bca7af9059a20f944fe3dc273d0558f2da69d34
+  languageName: node
+  linkType: hard
+
 "@solana/addresses@npm:^2.1.0":
   version: 2.1.0
   resolution: "@solana/addresses@npm:2.1.0"
@@ -4403,6 +4418,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solana/assertions@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@solana/assertions@npm:2.1.1"
+  dependencies:
+    "@solana/errors": "npm:2.1.1"
+  peerDependencies:
+    typescript: ">=5.3.3"
+  checksum: 10/3424d6e5066b4abfa07a606e9ab95c4c856cf91d57bc812df2815fdd30ec84b8a85d611baa79a78021cfcc6501cac7d46a22364c7f33768f243750329e6459f6
+  languageName: node
+  linkType: hard
+
 "@solana/codecs-core@npm:2.1.0":
   version: 2.1.0
   resolution: "@solana/codecs-core@npm:2.1.0"
@@ -4411,6 +4437,17 @@ __metadata:
   peerDependencies:
     typescript: ">=5"
   checksum: 10/aa746022c24cbbbaf4f8e268e1228b60b71fbafec8d337d947c3c97b459fcbd5756df7c206e3e2dc7e3e3633b39d2102d794c369b55b5641dd7153713f794e14
+  languageName: node
+  linkType: hard
+
+"@solana/codecs-core@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@solana/codecs-core@npm:2.1.1"
+  dependencies:
+    "@solana/errors": "npm:2.1.1"
+  peerDependencies:
+    typescript: ">=5.3.3"
+  checksum: 10/b0c426b5028cdfc9a71d55d61ca1b9815c951cdf3557142512a89418fd5cde75b4e1214f548f0e4fd5b8d3431bd51cd5da0ddfeb1afc40742cbc041cc4a04412
   languageName: node
   linkType: hard
 
@@ -4423,6 +4460,18 @@ __metadata:
   peerDependencies:
     typescript: ">=5"
   checksum: 10/2ce9aaaa14869612c45e996a9fe64d27745374616f74f4a704e51b00fb3d7c19db7a5826e94fb0d957ee2cbd37c72b1fb4157f4a515e9d69afc161a72d9b647d
+  languageName: node
+  linkType: hard
+
+"@solana/codecs-numbers@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@solana/codecs-numbers@npm:2.1.1"
+  dependencies:
+    "@solana/codecs-core": "npm:2.1.1"
+    "@solana/errors": "npm:2.1.1"
+  peerDependencies:
+    typescript: ">=5.3.3"
+  checksum: 10/eb28724fee926a5b2416527d452f1a5d73b4db776319f629662320452edd4e457f4b7cf4b022bc8a45de7cf9730f650698026b56e894c5cf21bf16682b7d35fe
   languageName: node
   linkType: hard
 
@@ -4440,6 +4489,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solana/codecs-strings@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@solana/codecs-strings@npm:2.1.1"
+  dependencies:
+    "@solana/codecs-core": "npm:2.1.1"
+    "@solana/codecs-numbers": "npm:2.1.1"
+    "@solana/errors": "npm:2.1.1"
+  peerDependencies:
+    fastestsmallesttextencoderdecoder: ^1.0.22
+    typescript: ">=5.3.3"
+  checksum: 10/7ade3b9342f7adeb28263cced496c24228d81165da14ed4f35923a6452308bb836de154665340931614fc5e842e6d196d05afc59921beb151e56c952d93657ed
+  languageName: node
+  linkType: hard
+
 "@solana/errors@npm:2.1.0":
   version: 2.1.0
   resolution: "@solana/errors@npm:2.1.0"
@@ -4451,6 +4514,29 @@ __metadata:
   bin:
     errors: bin/cli.mjs
   checksum: 10/c9ab73ddfd019ae359d4d5ae36ffa3b10d5df22a72c685f07b4131ebe0da2fcacb4f4ae402ab4783c7a47c672803fb9ab1cb015f9482a03162a1ecd344760c57
+  languageName: node
+  linkType: hard
+
+"@solana/errors@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@solana/errors@npm:2.1.1"
+  dependencies:
+    chalk: "npm:^5.4.1"
+    commander: "npm:^13.1.0"
+  peerDependencies:
+    typescript: ">=5.3.3"
+  bin:
+    errors: bin/cli.mjs
+  checksum: 10/afd9290e5e924c68dd98f5d6dd3490b28dc03d94b4063146f33eec83967686c5895d7560bc8b829ee781dfd9221ae732f2ac0cb41551f33d3baffb58efc5f645
+  languageName: node
+  linkType: hard
+
+"@solana/nominal-types@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@solana/nominal-types@npm:2.1.1"
+  peerDependencies:
+    typescript: ">=5.3.3"
+  checksum: 10/e114329abca077ae896bad26c82fd248fdd63034912021ccc17327bacfe7639e063c743c0becdba326e95fd4fd73e99f3e8b91e1a411e37b478ca72c5efae93b
   languageName: node
   linkType: hard
 
@@ -8497,7 +8583,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.2.0, chalk@npm:^5.3.0":
+"chalk@npm:^5.2.0, chalk@npm:^5.3.0, chalk@npm:^5.4.1":
   version: 5.4.1
   resolution: "chalk@npm:5.4.1"
   checksum: 10/29df3ffcdf25656fed6e95962e2ef86d14dfe03cd50e7074b06bad9ffbbf6089adbb40f75c00744d843685c8d008adaf3aed31476780312553caf07fa86e5bc7
