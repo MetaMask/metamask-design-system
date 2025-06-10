@@ -110,10 +110,10 @@ export type ButtonBaseProps = {
    * Optional accessibility actions for custom interactions.
    * Use sparingly and only when default button behavior is insufficient.
    */
-  accessibilityActions?: Array<{
+  accessibilityActions?: {
     name: string;
     label?: string;
-  }>;
+  }[];
   /**
    * Optional callback for handling accessibility action events.
    */

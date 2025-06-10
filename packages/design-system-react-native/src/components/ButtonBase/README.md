@@ -238,9 +238,7 @@ Optional accessibility label to describe the button for screen readers.
 | `string` | No       | Auto-generated from `children` or loading state |
 
 ```tsx
-<ButtonBase accessibilityLabel="Save your changes">
-  Save
-</ButtonBase>
+<ButtonBase accessibilityLabel="Save your changes">Save</ButtonBase>
 ```
 
 ##### `accessibilityHint`
@@ -269,9 +267,7 @@ Optional accessibility role. Defaults to 'button' but can be overridden for spec
 | `'button' \| 'link' \| 'menuitem' \| 'tab' \| 'none'` | No       | `'button'` |
 
 ```tsx
-<ButtonBase accessibilityRole="link">
-  View Details
-</ButtonBase>
+<ButtonBase accessibilityRole="link">View Details</ButtonBase>
 ```
 
 ##### `accessibilityActions`
@@ -285,7 +281,7 @@ Optional accessibility actions for custom interactions. Use sparingly and only w
 ```tsx
 <ButtonBase
   accessibilityActions={[
-    { name: 'longpress', label: 'Long press for options' }
+    { name: 'longpress', label: 'Long press for options' },
   ]}
   onAccessibilityAction={(event) => {
     if (event.nativeEvent.actionName === 'longpress') {

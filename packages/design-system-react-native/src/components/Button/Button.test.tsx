@@ -36,7 +36,7 @@ describe('Button', () => {
   it('throws an error for an invalid variant', () => {
     const consoleErrorMock = jest
       .spyOn(console, 'error')
-      .mockImplementation(() => {}); // Suppress error logs
+      .mockImplementation(jest.fn()); // Use jest.fn() instead of empty arrow function
 
     expect(() =>
       render(
@@ -58,9 +58,9 @@ describe('Button', () => {
       </>,
     );
 
-    expect(getByText('Primary')).toBeTruthy();
-    expect(getByText('Secondary')).toBeTruthy();
-    expect(getByText('Tertiary')).toBeTruthy();
+    expect(getByText('Primary')).toBeDefined();
+    expect(getByText('Secondary')).toBeDefined();
+    expect(getByText('Tertiary')).toBeDefined();
   });
 
   it('passes accessibility props to button variants', () => {

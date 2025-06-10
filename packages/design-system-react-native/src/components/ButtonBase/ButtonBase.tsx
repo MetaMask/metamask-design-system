@@ -1,6 +1,7 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { ButtonBaseSize } from '../../types';
 import { Icon } from '../Icon';
@@ -45,7 +46,7 @@ export const ButtonBase = ({
   const finalEndIconName = endIconName ?? endIconProps?.name;
 
   // Generate accessibility label if not provided
-  const finalAccessibilityLabel = React.useMemo(() => {
+  const finalAccessibilityLabel = useMemo(() => {
     if (accessibilityLabel) {
       return accessibilityLabel;
     }
@@ -64,7 +65,7 @@ export const ButtonBase = ({
   }, [accessibilityLabel, children, isLoading, loadingText]);
 
   // Generate accessibility hint for loading state if not provided
-  const finalAccessibilityHint = React.useMemo(() => {
+  const finalAccessibilityHint = useMemo(() => {
     if (accessibilityHint) {
       return accessibilityHint;
     }
@@ -77,7 +78,7 @@ export const ButtonBase = ({
   }, [accessibilityHint, isLoading]);
 
   // Create accessibilityState object with only truthy values
-  const accessibilityState = React.useMemo(() => {
+  const accessibilityState = useMemo(() => {
     const state: { disabled?: boolean; busy?: boolean } = {};
 
     if (isDisabled || isLoading) {
@@ -115,7 +116,9 @@ export const ButtonBase = ({
           ${containerClassName}
         `;
 
-        const computedStyle: any[] = [tw`${baseContainerClassNames}`];
+        const computedStyle: StyleProp<ViewStyle>[] = [
+          tw`${baseContainerClassNames}`,
+        ];
         if (typeof style === 'function') {
           const additionalStyle = style({ pressed });
           if (additionalStyle) {
