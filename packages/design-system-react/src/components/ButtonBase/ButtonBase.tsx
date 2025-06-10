@@ -44,6 +44,14 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const Component = asChild ? Slot : 'button';
     const isInteractive = !(isDisabled ?? isLoading);
 
+    // Calculate tabIndex based on asChild and disabled state
+    const getTabIndex = () => {
+      if (asChild) {
+        return undefined;
+      }
+      return isDisabled ? -1 : 0;
+    };
+
     const renderLoadingState = () => (
       <>
         <span className="absolute inline-flex items-center" aria-hidden="true">
@@ -182,7 +190,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
         aria-controls={ariaControls}
         aria-haspopup={ariaHaspopup}
         role={asChild ? undefined : 'button'}
-        tabIndex={asChild ? undefined : isDisabled ? -1 : 0}
+        tabIndex={getTabIndex()}
         style={style}
         {...props}
       >
