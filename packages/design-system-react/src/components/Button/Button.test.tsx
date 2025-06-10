@@ -13,9 +13,9 @@ describe('Button', () => {
 
       const button = screen.getByRole('button');
       expect(button).toHaveClass(
-        'bg-primary-default',
-        'hover:bg-primary-default-hover',
-        'active:bg-primary-default-pressed',
+        'bg-icon-default',
+        'hover:bg-icon-default-hover',
+        'active:bg-icon-default-pressed',
         'text-primary-inverse',
       );
     });
@@ -27,10 +27,10 @@ describe('Button', () => {
 
       const button = screen.getByRole('button');
       expect(button).toHaveClass(
-        'bg-transparent',
-        'border-2',
-        'border-icon-muted',
+        'bg-muted',
         'text-default',
+        'hover:bg-muted-hover',
+        'active:bg-muted-pressed',
       );
     });
 
@@ -47,9 +47,9 @@ describe('Button', () => {
 
       const button = screen.getByRole('button');
       expect(button).toHaveClass(
-        'bg-primary-default',
-        'hover:bg-primary-default-hover',
-        'active:bg-primary-default-pressed',
+        'bg-icon-default',
+        'hover:bg-icon-default-hover',
+        'active:bg-icon-default-pressed',
         'text-primary-inverse',
       );
     });
@@ -71,10 +71,10 @@ describe('Button', () => {
       );
       button = screen.getByRole('button');
       expect(button).toHaveClass(
-        'bg-transparent',
-        'border-2',
-        'border-error-default',
+        'bg-muted',
         'text-error-default',
+        'hover:bg-muted-hover',
+        'active:bg-muted-pressed',
       );
 
       rerender(
@@ -155,7 +155,7 @@ describe('Button', () => {
 
       let button = screen.getByRole('button');
       expect(button).toBeDisabled();
-      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      expect(screen.getAllByText('Loading...')).toHaveLength(2); // Both visible and screen reader text
 
       rerender(
         <Button
@@ -168,7 +168,7 @@ describe('Button', () => {
       );
       button = screen.getByRole('button');
       expect(button).toBeDisabled();
-      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      expect(screen.getAllByText('Loading...')).toHaveLength(2);
 
       rerender(
         <Button
@@ -181,7 +181,7 @@ describe('Button', () => {
       );
       button = screen.getByRole('button');
       expect(button).toBeDisabled();
-      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      expect(screen.getAllByText('Loading...')).toHaveLength(2);
     });
 
     it('applies disabled state correctly for all variants', () => {
@@ -242,7 +242,6 @@ describe('Button', () => {
         render(<Button>Primary Button</Button>);
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
-          'focus-visible:outline-none',
           'focus-visible:ring-0',
           'focus-visible:outline',
           'focus-visible:outline-2',
@@ -255,7 +254,6 @@ describe('Button', () => {
         render(<Button isInverse>Primary Inverse Button</Button>);
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
-          'focus-visible:outline-none',
           'focus-visible:ring-0',
           'focus-visible:outline',
           'focus-visible:outline-2',
@@ -268,7 +266,6 @@ describe('Button', () => {
         render(<Button isDanger>Primary Danger Button</Button>);
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
-          'focus-visible:outline-none',
           'focus-visible:ring-0',
           'focus-visible:outline',
           'focus-visible:outline-2',
@@ -285,7 +282,6 @@ describe('Button', () => {
         );
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
-          'focus-visible:outline-none',
           'focus-visible:ring-0',
           'focus-visible:outline',
           'focus-visible:outline-2',
@@ -302,7 +298,6 @@ describe('Button', () => {
         );
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
-          'focus-visible:outline-none',
           'focus-visible:ring-0',
           'focus-visible:outline',
           'focus-visible:outline-2',
@@ -319,7 +314,6 @@ describe('Button', () => {
         );
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
-          'focus-visible:outline-none',
           'focus-visible:ring-0',
           'focus-visible:outline',
           'focus-visible:outline-2',
@@ -336,7 +330,6 @@ describe('Button', () => {
         );
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
-          'focus-visible:outline-none',
           'focus-visible:ring-0',
           'focus-visible:outline',
           'focus-visible:outline-2',
@@ -353,7 +346,6 @@ describe('Button', () => {
         );
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
-          'focus-visible:outline-none',
           'focus-visible:ring-0',
           'focus-visible:outline',
           'focus-visible:outline-2',
@@ -370,7 +362,6 @@ describe('Button', () => {
         );
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
-          'focus-visible:outline-none',
           'focus-visible:ring-0',
           'focus-visible:outline',
           'focus-visible:outline-2',

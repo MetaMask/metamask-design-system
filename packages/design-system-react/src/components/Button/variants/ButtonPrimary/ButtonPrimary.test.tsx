@@ -96,7 +96,7 @@ describe('ButtonPrimary', () => {
       'bg-icon-default-pressed',
       'cursor-not-allowed',
     );
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getAllByText('Loading...')).toHaveLength(2);
   });
 
   it('does not apply hover/active classes when disabled or loading', () => {
@@ -153,7 +153,7 @@ describe('ButtonPrimary', () => {
       </ButtonPrimary>,
     );
 
-    expect(screen.getByText('Please wait...')).toBeInTheDocument();
+    expect(screen.getAllByText('Please wait...')).toHaveLength(2);
     expect(screen.getByText('Submit')).toHaveClass('invisible');
   });
 
