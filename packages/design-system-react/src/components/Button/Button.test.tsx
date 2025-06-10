@@ -236,6 +236,151 @@ describe('Button', () => {
     });
   });
 
+  describe('Focus Styling', () => {
+    describe('Primary Button Focus', () => {
+      it('applies correct focus outline for non-inverse primary button', () => {
+        render(<Button>Primary Button</Button>);
+        const button = screen.getByRole('button');
+        expect(button).toHaveClass(
+          'focus-visible:outline-none',
+          'focus-visible:ring-0',
+          'focus-visible:outline',
+          'focus-visible:outline-2',
+          'focus-visible:outline-primary-default',
+          'focus-visible:outline-offset-2',
+        );
+      });
+
+      it('applies correct focus outline for inverse primary button', () => {
+        render(<Button isInverse>Primary Inverse Button</Button>);
+        const button = screen.getByRole('button');
+        expect(button).toHaveClass(
+          'focus-visible:outline-none',
+          'focus-visible:ring-0',
+          'focus-visible:outline',
+          'focus-visible:outline-2',
+          'focus-visible:outline-background-default',
+          'focus-visible:outline-offset-4',
+        );
+      });
+
+      it('applies correct focus outline for danger primary button', () => {
+        render(<Button isDanger>Primary Danger Button</Button>);
+        const button = screen.getByRole('button');
+        expect(button).toHaveClass(
+          'focus-visible:outline-none',
+          'focus-visible:ring-0',
+          'focus-visible:outline',
+          'focus-visible:outline-2',
+          'focus-visible:outline-primary-default',
+          'focus-visible:outline-offset-2',
+        );
+      });
+    });
+
+    describe('Secondary Button Focus', () => {
+      it('applies correct focus outline for non-inverse secondary button', () => {
+        render(
+          <Button variant={ButtonVariant.Secondary}>Secondary Button</Button>,
+        );
+        const button = screen.getByRole('button');
+        expect(button).toHaveClass(
+          'focus-visible:outline-none',
+          'focus-visible:ring-0',
+          'focus-visible:outline',
+          'focus-visible:outline-2',
+          'focus-visible:outline-primary-default',
+          'focus-visible:outline-offset-2',
+        );
+      });
+
+      it('applies correct focus outline for inverse secondary button', () => {
+        render(
+          <Button variant={ButtonVariant.Secondary} isInverse>
+            Secondary Inverse Button
+          </Button>,
+        );
+        const button = screen.getByRole('button');
+        expect(button).toHaveClass(
+          'focus-visible:outline-none',
+          'focus-visible:ring-0',
+          'focus-visible:outline',
+          'focus-visible:outline-2',
+          'focus-visible:outline-background-default',
+          'focus-visible:outline-offset-4',
+        );
+      });
+
+      it('applies correct focus outline for danger secondary button', () => {
+        render(
+          <Button variant={ButtonVariant.Secondary} isDanger>
+            Secondary Danger Button
+          </Button>,
+        );
+        const button = screen.getByRole('button');
+        expect(button).toHaveClass(
+          'focus-visible:outline-none',
+          'focus-visible:ring-0',
+          'focus-visible:outline',
+          'focus-visible:outline-2',
+          'focus-visible:outline-primary-default',
+          'focus-visible:outline-offset-2',
+        );
+      });
+    });
+
+    describe('Tertiary Button Focus', () => {
+      it('applies correct focus outline for non-inverse tertiary button', () => {
+        render(
+          <Button variant={ButtonVariant.Tertiary}>Tertiary Button</Button>,
+        );
+        const button = screen.getByRole('button');
+        expect(button).toHaveClass(
+          'focus-visible:outline-none',
+          'focus-visible:ring-0',
+          'focus-visible:outline',
+          'focus-visible:outline-2',
+          'focus-visible:outline-primary-default',
+          'focus-visible:outline-offset-2',
+        );
+      });
+
+      it('applies correct focus outline for inverse tertiary button', () => {
+        render(
+          <Button variant={ButtonVariant.Tertiary} isInverse>
+            Tertiary Inverse Button
+          </Button>,
+        );
+        const button = screen.getByRole('button');
+        expect(button).toHaveClass(
+          'focus-visible:outline-none',
+          'focus-visible:ring-0',
+          'focus-visible:outline',
+          'focus-visible:outline-2',
+          'focus-visible:outline-background-default',
+          'focus-visible:outline-offset-4',
+        );
+      });
+
+      it('applies correct focus outline for danger tertiary button', () => {
+        render(
+          <Button variant={ButtonVariant.Tertiary} isDanger>
+            Tertiary Danger Button
+          </Button>,
+        );
+        const button = screen.getByRole('button');
+        expect(button).toHaveClass(
+          'focus-visible:outline-none',
+          'focus-visible:ring-0',
+          'focus-visible:outline',
+          'focus-visible:outline-2',
+          'focus-visible:outline-primary-default',
+          'focus-visible:outline-offset-2',
+        );
+      });
+    });
+  });
+
   describe('Ref Forwarding', () => {
     it('forwards ref to the button element for all variants', () => {
       const { rerender } = render(<Button ref={createRef()}>Button</Button>);

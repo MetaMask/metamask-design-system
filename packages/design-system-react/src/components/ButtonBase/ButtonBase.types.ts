@@ -90,4 +90,49 @@ export type ButtonBaseProps = ComponentProps<'button'> & {
    * Should be used sparingly and only for dynamic styles that can't be achieved with className.
    */
   style?: React.CSSProperties;
+
+  // Accessibility props
+  /**
+   * Optional accessible label for the button. Use when the button text doesn't fully describe its purpose.
+   * This will be used as the aria-label attribute.
+   */
+  'aria-label'?: string;
+  /**
+   * Optional ID of an element that labels the button.
+   * This will be used as the aria-labelledby attribute.
+   */
+  'aria-labelledby'?: string;
+  /**
+   * Optional ID of an element that describes the button.
+   * This will be used as the aria-describedby attribute.
+   */
+  'aria-describedby'?: string;
+  /**
+   * Optional prop to indicate if the button is pressed (for toggle buttons).
+   * This will be used as the aria-pressed attribute.
+   */
+  'aria-pressed'?: boolean | 'mixed';
+  /**
+   * Optional prop to indicate if the button controls a collapsible element.
+   * This will be used as the aria-expanded attribute.
+   */
+  'aria-expanded'?: boolean;
+  /**
+   * Optional prop to indicate if the button controls another element.
+   * This will be used as the aria-controls attribute.
+   */
+  'aria-controls'?: string;
+  /**
+   * Optional prop to indicate if the button has a popup (menu, listbox, tree, grid, or dialog).
+   * This will be used as the aria-haspopup attribute.
+   */
+  'aria-haspopup'?:
+    | boolean
+    | 'false'
+    | 'true'
+    | 'menu'
+    | 'listbox'
+    | 'tree'
+    | 'grid'
+    | 'dialog';
 };
