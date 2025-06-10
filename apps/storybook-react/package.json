@@ -32,7 +32,7 @@
     "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
     "axe-playwright": "^2.1.0",
-    "bitcoin-address-validation": "2.0.0",
+    "bitcoin-address-validation": ">=2.0.0",
     "playwright": "^1.52.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
