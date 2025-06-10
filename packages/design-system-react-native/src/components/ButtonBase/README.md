@@ -218,8 +218,167 @@ import ButtonBase from '@metamask/design-system-react-native';
 
 ### Accessibility
 
-- Use the `accessibilityLabel` prop to provide meaningful labels for assistive technologies.
-- Ensure `children` describes the button's purpose or action.
+The `ButtonBase` component is designed to be fully accessible according to WCAG guidelines and React Native accessibility standards.
+
+#### Automatic Accessibility Features
+
+- **Default Role**: Automatically sets `accessibilityRole="button"`
+- **Auto-Generated Labels**: Uses string `children` as `accessibilityLabel` when no custom label is provided
+- **State Management**: Automatically manages `accessibilityState` for disabled and loading states
+- **Loading Announcements**: Provides automatic loading state announcements for screen readers
+
+#### Accessibility Props
+
+##### `accessibilityLabel`
+
+Optional accessibility label to describe the button for screen readers.
+
+| TYPE     | REQUIRED | DEFAULT                                         |
+| :------- | :------- | :---------------------------------------------- |
+| `string` | No       | Auto-generated from `children` or loading state |
+
+```tsx
+<ButtonBase accessibilityLabel="Save your changes">
+  Save
+</ButtonBase>
+```
+
+##### `accessibilityHint`
+
+Optional accessibility hint to provide additional context about the button's action.
+
+| TYPE     | REQUIRED | DEFAULT                          |
+| :------- | :------- | :------------------------------- |
+| `string` | No       | Auto-generated for loading state |
+
+```tsx
+<ButtonBase
+  accessibilityLabel="Submit form"
+  accessibilityHint="Submits the form and navigates to confirmation page"
+>
+  Submit
+</ButtonBase>
+```
+
+##### `accessibilityRole`
+
+Optional accessibility role. Defaults to 'button' but can be overridden for specific use cases.
+
+| TYPE                                                  | REQUIRED | DEFAULT    |
+| :---------------------------------------------------- | :------- | :--------- |
+| `'button' \| 'link' \| 'menuitem' \| 'tab' \| 'none'` | No       | `'button'` |
+
+```tsx
+<ButtonBase accessibilityRole="link">
+  View Details
+</ButtonBase>
+```
+
+##### `accessibilityActions`
+
+Optional accessibility actions for custom interactions. Use sparingly and only when default button behavior is insufficient.
+
+| TYPE                                       | REQUIRED | DEFAULT     |
+| :----------------------------------------- | :------- | :---------- |
+| `Array<{ name: string; label?: string; }>` | No       | `undefined` |
+
+```tsx
+<ButtonBase
+  accessibilityActions={[
+    { name: 'longpress', label: 'Long press for options' }
+  ]}
+  onAccessibilityAction={(event) => {
+    if (event.nativeEvent.actionName === 'longpress') {
+      showContextMenu();
+    }
+  }}
+>
+  Options
+</ButtonBase>
+```
+
+##### `onAccessibilityAction`
+
+Optional callback for handling accessibility action events.
+
+| TYPE                                                       | REQUIRED | DEFAULT     |
+| :--------------------------------------------------------- | :------- | :---------- |
+| `(event: { nativeEvent: { actionName: string } }) => void` | No       | `undefined` |
+
+#### Accessibility State Management
+
+The component automatically manages `accessibilityState` based on props:
+
+- **Disabled State**: Set when `isDisabled={true}` or `isLoading={true}`
+- **Busy State**: Set when `isLoading={true}` to indicate loading operations
+
+#### Loading State Accessibility
+
+When `isLoading={true}`:
+
+- Button becomes disabled and announces "busy" state
+- Accessibility label prioritizes `loadingText` if provided
+- Accessibility hint automatically explains loading state
+- Custom `accessibilityHint` overrides automatic loading hint
+
+```tsx
+// Automatic loading accessibility
+<ButtonBase isLoading loadingText="Saving...">
+  Save Changes
+</ButtonBase>
+// Screen reader announces: "Saving..., button, busy, Button is currently loading, please wait"
+
+// Custom loading accessibility
+<ButtonBase
+  isLoading
+  loadingText="Processing payment"
+  accessibilityHint="Please wait while we process your payment securely"
+>
+  Pay Now
+</ButtonBase>
+```
+
+#### Best Practices
+
+1. **Descriptive Labels**: Use clear, descriptive text for button content
+2. **Meaningful Hints**: Provide hints that explain the button's action or outcome
+3. **Loading States**: Always provide `loadingText` for better loading state communication
+4. **Icon-Only Buttons**: Always provide `accessibilityLabel` for buttons with only icons
+5. **Context-Specific Roles**: Use appropriate `accessibilityRole` (e.g., 'link' for navigation)
+
+#### Examples
+
+```tsx
+// Basic accessible button
+<ButtonBase>Save Changes</ButtonBase>
+
+// Icon-only button with accessibility
+<ButtonBase
+  startIconName={IconName.Plus}
+  accessibilityLabel="Add new item"
+  accessibilityHint="Opens dialog to create a new item"
+>
+  {/* No text content */}
+</ButtonBase>
+
+// Loading button with custom accessibility
+<ButtonBase
+  isLoading
+  loadingText="Creating account..."
+  accessibilityHint="Please wait while we set up your new account"
+>
+  Create Account
+</ButtonBase>
+
+// Navigation button
+<ButtonBase
+  accessibilityRole="link"
+  accessibilityHint="Opens user profile page"
+  onPress={() => navigation.navigate('Profile')}
+>
+  View Profile
+</ButtonBase>
+```
 
 ---
 

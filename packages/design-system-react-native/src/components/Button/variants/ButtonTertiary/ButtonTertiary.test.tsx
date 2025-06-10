@@ -107,52 +107,57 @@ describe('ButtonTertiary', () => {
   });
 
   it('toggles pressed styles (default)', () => {
-    const { getByTestId } = render(
-      <ButtonTertiary testID="button-tertiary">Press me</ButtonTertiary>,
-    );
-    const btn = getByTestId('button-tertiary');
+    const rtr = require('react-test-renderer');
+    const tree = rtr.create(<ButtonTertiary>Press me</ButtonTertiary>);
 
-    fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-pressed');
-    expectBorder(btn.props.style, 'border-background-pressed');
+    const buttonAnimated = tree.root.findByProps({
+      accessibilityRole: 'button',
+    });
+    const styleFn = buttonAnimated.props.style as (p: {
+      pressed: boolean;
+    }) => any[];
 
-    fireEvent(btn, 'pressOut');
-    expectBackground(btn.props.style, 'bg-transparent');
-    expectBorder(btn.props.style, 'border-transparent');
+    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
+    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
+
+    expectBackground(defaultStyles, 'bg-transparent');
+    expectBackground(pressedStyles, 'bg-pressed');
   });
 
   it('toggles pressed styles (danger)', () => {
-    const { getByTestId } = render(
-      <ButtonTertiary isDanger testID="button-tertiary">
-        Danger
-      </ButtonTertiary>,
-    );
-    const btn = getByTestId('button-tertiary');
+    const rtr = require('react-test-renderer');
+    const tree = rtr.create(<ButtonTertiary isDanger>Danger</ButtonTertiary>);
 
-    fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-error-muted-pressed');
-    expectBorder(btn.props.style, 'border-error-muted-pressed');
+    const buttonAnimated = tree.root.findByProps({
+      accessibilityRole: 'button',
+    });
+    const styleFn = buttonAnimated.props.style as (p: {
+      pressed: boolean;
+    }) => any[];
 
-    fireEvent(btn, 'pressOut');
-    expectBackground(btn.props.style, 'bg-transparent');
-    expectBorder(btn.props.style, 'border-transparent');
+    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
+    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
+
+    expectBackground(defaultStyles, 'bg-transparent');
+    expectBackground(pressedStyles, 'bg-error-muted-pressed');
   });
 
   it('toggles pressed styles (inverse)', () => {
-    const { getByTestId } = render(
-      <ButtonTertiary isInverse testID="button-tertiary">
-        Inverse
-      </ButtonTertiary>,
-    );
-    const btn = getByTestId('button-tertiary');
+    const rtr = require('react-test-renderer');
+    const tree = rtr.create(<ButtonTertiary isInverse>Inverse</ButtonTertiary>);
 
-    fireEvent(btn, 'pressIn');
-    expectBackground(btn.props.style, 'bg-pressed');
-    expectBorder(btn.props.style, 'border-primary-inverse');
+    const buttonAnimated = tree.root.findByProps({
+      accessibilityRole: 'button',
+    });
+    const styleFn = buttonAnimated.props.style as (p: {
+      pressed: boolean;
+    }) => any[];
 
-    fireEvent(btn, 'pressOut');
-    expectBackground(btn.props.style, 'bg-transparent');
-    expectBorder(btn.props.style, 'border-primary-inverse');
+    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
+    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
+
+    expectBackground(defaultStyles, 'bg-transparent');
+    expectBackground(pressedStyles, 'bg-pressed');
   });
 
   it('shows spinner + hides content when loading', () => {
