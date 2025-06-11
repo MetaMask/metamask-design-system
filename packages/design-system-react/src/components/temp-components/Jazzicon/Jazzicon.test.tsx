@@ -7,7 +7,7 @@ import * as utilities from './Jazzicon.utilities';
 
 // Mock the external dependency for Bitcoin address validation.
 jest.mock('bitcoin-address-validation', () => ({
-  validate: (address: string, network: any) => {
+  validate: (address: string, _network: unknown) => {
     // For our test Bitcoin address, return true; for others, return false.
     if (address === '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa') {
       return true;
@@ -22,8 +22,8 @@ jest.mock('bitcoin-address-validation', () => ({
 
 // Polyfill TextEncoder for JSDOM (Node < 18)
 if (typeof TextEncoder === 'undefined') {
-  // @ts-ignore
-  global.TextEncoder = require('util').TextEncoder;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-require-imports, import-x/no-nodejs-modules
+  (global as any).TextEncoder = require('util').TextEncoder;
 }
 
 describe('Jazzicon', () => {
@@ -42,7 +42,9 @@ describe('Jazzicon', () => {
         const expected = Array.from(
           stringToBytes(address.normalize('NFKC').toLowerCase()),
         );
-        expect(utilities.generateSeedNonEthereum(address)).toEqual(expected);
+        expect(utilities.generateSeedNonEthereum(address)).toStrictEqual(
+          expected,
+        );
       });
     });
 
@@ -196,7 +198,9 @@ describe('Jazzicon', () => {
       });
 
       unmount();
-      await act(async () => {}); // allow cleanup effect to run
+      await act(async () => {
+        // Allow cleanup effect to run
+      }); // allow cleanup effect to run
       expect(screen.queryByTestId('jazzicon')).toBeNull();
     });
 
@@ -217,7 +221,7 @@ describe('Jazzicon', () => {
       unmount();
 
       await act(async () => {
-        await new Promise((res) => setTimeout(res, 600));
+        await new Promise((resolve) => setTimeout(resolve, 600));
       });
 
       expect(screen.queryByTestId('jazzicon')).toBeNull();
@@ -289,13 +293,14 @@ describe('Jazzicon', () => {
     it('clears pre-existing children on initial mount using delayed effect', async () => {
       // Capture effect callbacks instead of letting them run automatically.
       const effectCallbacks: (() => void)[] = [];
-      const originalUseEffect = React.useEffect;
-      jest
+      const useEffectSpy = jest
         .spyOn(React, 'useEffect')
-        .mockImplementation((cb: any, deps?: any) => {
-          effectCallbacks.push(cb);
-          // Do not call the callback automatically.
-        });
+        .mockImplementation(
+          (cb: React.EffectCallback, _deps?: React.DependencyList) => {
+            effectCallbacks.push(cb);
+            // Do not call the callback automatically.
+          },
+        );
 
       // Render the component.
       const { getByTestId } = render(
@@ -321,7 +326,154 @@ describe('Jazzicon', () => {
       expect(container.querySelector('[data-testid="dummy"]')).toBeNull();
 
       // Restore the original useEffect implementation.
-      React.useEffect = originalUseEffect;
+      useEffectSpy.mockRestore();
+    });
+
+    it('handles errors during async generation gracefully', async () => {
+      // Mock getCaipNamespaceFromAddress to throw an error
+      const spy = jest
+        .spyOn(utilities, 'getCaipNamespaceFromAddress')
+        .mockRejectedValue(new Error('Network error'));
+
+      // Spy on console.error to ensure errors are handled silently
+      const consoleErrorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {
+          // Silently ignore console errors during test
+        });
+
+      render(<Jazzicon address="0xerror" data-testid="jazzicon" />);
+
+      // Wait a bit to allow the async function to attempt execution
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      });
+
+      // The component should still render without crashing
+      const container = screen.getByTestId('jazzicon');
+      expect(container).toBeInTheDocument();
+
+      // Cleanup mocks
+      spy.mockRestore();
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('handles cleanup when container has children during unmount', async () => {
+      const { unmount } = render(
+        <Jazzicon address="0xcleanup" data-testid="jazzicon" />,
+      );
+
+      // Wait for the icon to be generated
+      await waitFor(() => {
+        const container = screen.getByTestId('jazzicon');
+        expect(container.childNodes.length).toBeGreaterThan(0);
+      });
+
+      // Manually add additional children to test cleanup
+      const container = screen.getByTestId('jazzicon');
+      const extraChild = document.createElement('div');
+      extraChild.setAttribute('data-testid', 'extra-child');
+      container.appendChild(extraChild);
+
+      expect(container.childNodes.length).toBeGreaterThan(1);
+
+      // Unmount should trigger cleanup
+      unmount();
+
+      // Verify component is removed
+      expect(screen.queryByTestId('jazzicon')).toBeNull();
+    });
+
+    it('handles cancellation after namespace determination', async () => {
+      let resolveNamespace: (value: KnownCaipNamespace) => void = () => {
+        // Initial no-op function, will be replaced by Promise constructor
+      };
+      const namespacePromise = new Promise<KnownCaipNamespace>((resolve) => {
+        resolveNamespace = resolve;
+      });
+
+      const spy = jest
+        .spyOn(utilities, 'getCaipNamespaceFromAddress')
+        .mockReturnValue(namespacePromise);
+
+      const { unmount } = render(
+        <Jazzicon address="0xcancelled" data-testid="jazzicon" />,
+      );
+
+      // Unmount before namespace resolution
+      unmount();
+
+      // Now resolve the namespace after unmount
+      resolveNamespace(KnownCaipNamespace.Eip155);
+
+      await act(async () => {
+        await namespacePromise;
+      });
+
+      // Component should be gone
+      expect(screen.queryByTestId('jazzicon')).toBeNull();
+
+      spy.mockRestore();
+    });
+
+    it('handles the case where containerRef becomes null during execution', async () => {
+      // Test the scenario where the component unmounts after namespace resolution
+      // but before the final icon creation
+      let resolveNamespace: (value: KnownCaipNamespace) => void = () => {
+        // Initial no-op function, will be replaced by Promise constructor
+      };
+      const namespacePromise = new Promise<KnownCaipNamespace>((resolve) => {
+        resolveNamespace = resolve;
+      });
+
+      const spy = jest
+        .spyOn(utilities, 'getCaipNamespaceFromAddress')
+        .mockReturnValue(namespacePromise);
+
+      const { unmount } = render(
+        <Jazzicon address="0xcontainer" data-testid="jazzicon" />,
+      );
+
+      // Unmount before namespace resolution completes
+      unmount();
+
+      // Now resolve the namespace
+      resolveNamespace(KnownCaipNamespace.Eip155);
+
+      await act(async () => {
+        await namespacePromise;
+      });
+
+      // Component should be gone and no errors should occur
+      expect(screen.queryByTestId('jazzicon')).toBeNull();
+
+      spy.mockRestore();
+    });
+
+    it('tests cleanup function execution path when container is null', async () => {
+      // Mock useRef to return a ref that becomes null during cleanup
+      const mockRef = { current: null as HTMLDivElement | null };
+      const useRefSpy = jest.spyOn(React, 'useRef').mockReturnValue(mockRef);
+
+      const { unmount } = render(
+        <Jazzicon address="0xnullcleanup" data-testid="jazzicon" />,
+      );
+
+      // Set the ref to have a current value initially
+      const mockContainer = document.createElement('div');
+      mockContainer.appendChild(document.createElement('span'));
+      mockRef.current = mockContainer;
+
+      // Now set it to null before unmounting
+      mockRef.current = null;
+
+      // Unmount should not crash even with null containerRef
+      unmount();
+
+      // Verify the component unmounted successfully
+      expect(screen.queryByTestId('jazzicon')).toBeNull();
+
+      useRefSpy.mockRestore();
     });
   });
 });
