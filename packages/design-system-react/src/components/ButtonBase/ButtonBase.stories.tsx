@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { ButtonBaseSize } from '../../types';
+import { ButtonBaseSize, TextVariant, TextColor } from '../../types';
 import { Icon, IconName } from '../Icon';
 import { Text } from '../Text';
 
@@ -205,25 +205,25 @@ export const AccessibilityLabel: Story = {
   render: (args) => (
     <div className="flex flex-col gap-4 p-4">
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Using aria-label</h3>
-        <p className="text-gray-600 text-sm">
+        <Text variant={TextVariant.HeadingSm}>Using aria-label</Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Use aria-label when the button content doesn't fully describe its
           purpose
-        </p>
+        </Text>
         <ButtonBase {...args} aria-label="Close dialog">
           ✕
         </ButtonBase>
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Using aria-labelledby</h3>
-        <p className="text-gray-600 text-sm">
+        <Text variant={TextVariant.HeadingSm}>Using aria-labelledby</Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Reference an existing element that labels the button
-        </p>
+        </Text>
         <div>
-          <div id="save-label" className="mb-2 font-medium">
-            Save your progress
-          </div>
+          <Text variant={TextVariant.BodyMd} className="mb-2 block" asChild>
+            <label id="save-label">Save your progress</label>
+          </Text>
           <ButtonBase {...args} aria-labelledby="save-label">
             💾 Save
           </ButtonBase>
@@ -231,17 +231,24 @@ export const AccessibilityLabel: Story = {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Using aria-describedby</h3>
-        <p className="text-gray-600 text-sm">
+        <Text variant={TextVariant.HeadingSm}>Using aria-describedby</Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Reference an element that provides additional description
-        </p>
+        </Text>
         <div>
           <ButtonBase {...args} aria-describedby="submit-description">
             Submit Form
           </ButtonBase>
-          <div id="submit-description" className="text-gray-600 mt-1 text-sm">
-            This will submit your form and send you to the confirmation page
-          </div>
+          <Text
+            variant={TextVariant.BodySm}
+            color={TextColor.TextAlternative}
+            className="mt-1 block"
+            asChild
+          >
+            <label id="submit-description">
+              This will submit your form and send you to the confirmation page
+            </label>
+          </Text>
         </div>
       </div>
     </div>
@@ -253,10 +260,12 @@ export const AccessibilityStates: Story = {
   render: (args) => (
     <div className="flex flex-col gap-4 p-4">
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Toggle Button (aria-pressed)</h3>
-        <p className="text-gray-600 text-sm">
+        <Text variant={TextVariant.HeadingSm}>
+          Toggle Button (aria-pressed)
+        </Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Use aria-pressed for buttons that toggle between states
-        </p>
+        </Text>
         <div className="flex gap-2">
           <ButtonBase {...args} aria-pressed={false}>
             🔊 Unmuted
@@ -271,12 +280,12 @@ export const AccessibilityStates: Story = {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">
+        <Text variant={TextVariant.HeadingSm}>
           Expandable Button (aria-expanded)
-        </h3>
-        <p className="text-gray-600 text-sm">
+        </Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Use aria-expanded for buttons that control collapsible content
-        </p>
+        </Text>
         <div className="flex gap-2">
           <ButtonBase {...args} aria-expanded={false} aria-controls="menu-1">
             📁 Show Menu
@@ -288,10 +297,12 @@ export const AccessibilityStates: Story = {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Popup Button (aria-haspopup)</h3>
-        <p className="text-gray-600 text-sm">
+        <Text variant={TextVariant.HeadingSm}>
+          Popup Button (aria-haspopup)
+        </Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Use aria-haspopup to indicate the button triggers a popup
-        </p>
+        </Text>
         <div className="flex gap-2">
           <ButtonBase {...args} aria-haspopup="menu">
             Menu ▼
@@ -313,10 +324,10 @@ export const AccessibilityLoadingStates: Story = {
   render: (args) => (
     <div className="flex flex-col gap-4 p-4">
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Loading State Announcements</h3>
-        <p className="text-gray-600 text-sm">
+        <Text variant={TextVariant.HeadingSm}>Loading State Announcements</Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Screen readers will announce loading states to users
-        </p>
+        </Text>
         <div className="flex gap-2">
           <ButtonBase {...args} isLoading>
             Save Changes
@@ -331,10 +342,10 @@ export const AccessibilityLoadingStates: Story = {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Disabled vs Loading</h3>
-        <p className="text-gray-600 text-sm">
+        <Text variant={TextVariant.HeadingSm}>Disabled vs Loading</Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Both states are communicated to screen readers differently
-        </p>
+        </Text>
         <div className="flex gap-2">
           <ButtonBase {...args} isDisabled>
             Disabled Button
@@ -353,11 +364,11 @@ export const AccessibilityKeyboardNavigation: Story = {
   render: (args) => (
     <div className="flex flex-col gap-4 p-4">
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Focus Management</h3>
-        <p className="text-gray-600 text-sm">
+        <Text variant={TextVariant.HeadingSm}>Focus Management</Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Try navigating with Tab key and activating with Enter/Space. Focus
           indicators are clearly visible.
-        </p>
+        </Text>
         <div className="flex gap-2">
           <ButtonBase {...args}>First Button</ButtonBase>
           <ButtonBase {...args}>Second Button</ButtonBase>
@@ -369,10 +380,10 @@ export const AccessibilityKeyboardNavigation: Story = {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Custom Focus Order</h3>
-        <p className="text-gray-600 text-sm">
+        <Text variant={TextVariant.HeadingSm}>Custom Focus Order</Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Use asChild with custom elements while maintaining accessibility
-        </p>
+        </Text>
         <div className="flex gap-2">
           <ButtonBase {...args} asChild>
             <a href="#section1">Go to Section 1</a>

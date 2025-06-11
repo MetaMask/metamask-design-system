@@ -59,7 +59,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
             name={IconName.Loading}
             size={IconSize.Sm}
             className={twMerge(
-              'text-inherit mr-2 animate-spin',
+              'mr-2 animate-spin text-inherit',
               loadingIconProps?.className,
             )}
             {...loadingIconProps}
@@ -88,7 +88,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
             name={startIconName}
             size={IconSize.Sm}
             className={twMerge(
-              'text-inherit mr-2 flex-shrink-0',
+              'mr-2 flex-shrink-0 text-inherit',
               startIconProps?.className,
             )}
             aria-hidden="true"
@@ -113,7 +113,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
             name={endIconName}
             size={IconSize.Sm}
             className={twMerge(
-              'text-inherit ml-2 flex-shrink-0',
+              'ml-2 flex-shrink-0 text-inherit',
               endIconProps?.className,
             )}
             aria-hidden="true"
