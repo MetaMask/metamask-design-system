@@ -39,8 +39,6 @@ const config = createConfig([
       'packages/design-system-react-native/src/components/AvatarGroup/AvatarGroup.tsx',
       'packages/design-system-react-native/src/components/AvatarNetwork/AvatarNetwork.tsx',
       'packages/design-system-react-native/src/components/AvatarToken/AvatarToken.tsx',
-      'packages/design-system-react-native/src/components/BadgeNetwork/BadgeNetwork.test.tsx',
-      'packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.test.tsx',
       'packages/design-system-react-native/src/components/ButtonIcon/ButtonIcon.tsx',
       'packages/design-system-react-native/src/components/TextButton/TextButton.test.tsx',
       'packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.test.tsx',
