@@ -19,7 +19,7 @@ export const Button = (buttonProps: ButtonProps) => {
       return <ButtonSecondary {...restProps} />;
     default:
       throw new Error(
-        `Invalid Button Variant: ${variant}. Expected one of: ${Object.values(ButtonVariant).join(', ')}`,
+        `Invalid Button Variant: ${String(variant)}. Expected one of: ${Object.values(ButtonVariant).join(', ')}`,
       );
   }
 };

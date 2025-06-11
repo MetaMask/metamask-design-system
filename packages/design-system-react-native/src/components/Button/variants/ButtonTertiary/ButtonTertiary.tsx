@@ -1,8 +1,6 @@
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../../../ButtonBase';
-import type { IconColor } from '../../../Icon';
 import { IconSize } from '../../../Icon';
 import { TextVariant, FontWeight } from '../../../Text';
 
@@ -21,13 +19,14 @@ export const ButtonTertiary = ({
   style,
   ...props
 }: ButtonTertiaryProps) => {
-  const tw = useTailwind();
-
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
+      const classNameStr =
+        typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+
       const baseClasses = `
         ${isInverse && !isDanger ? 'border-[1.5px]' : 'border-0'}
-        ${twClassName}
+        ${classNameStr}
       `;
 
       let backgroundClass = '';
@@ -71,13 +70,13 @@ export const ButtonTertiary = ({
         return pressed || isLoading
           ? 'text-error-default-pressed'
           : 'text-error-default';
-      } else if (isInverse) {
-        return 'text-primary-inverse';
-      } else {
-        return pressed || isLoading
-          ? 'text-primary-default-pressed'
-          : 'text-primary-default';
       }
+      if (isInverse) {
+        return 'text-primary-inverse';
+      }
+      return pressed || isLoading
+        ? 'text-primary-default-pressed'
+        : 'text-primary-default';
     },
     [isDanger, isInverse, isLoading],
   );

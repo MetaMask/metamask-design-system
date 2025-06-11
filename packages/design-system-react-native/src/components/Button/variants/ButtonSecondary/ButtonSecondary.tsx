@@ -1,8 +1,6 @@
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../../../ButtonBase';
-import type { IconColor } from '../../../Icon';
 import { IconSize } from '../../../Icon';
 import { TextVariant, FontWeight } from '../../../Text';
 
@@ -21,13 +19,14 @@ export const ButtonSecondary = ({
   style,
   ...props
 }: ButtonSecondaryProps) => {
-  const tw = useTailwind();
-
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
+      const classNameStr =
+        typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+
       const baseClasses = `
-        border-[1.5px]
-        ${twClassName}
+        border
+        ${classNameStr}
       `;
 
       let backgroundClass = '';
@@ -44,17 +43,14 @@ export const ButtonSecondary = ({
         backgroundClass =
           pressed || isLoading ? 'bg-muted-pressed' : 'bg-muted';
         borderClass = 'border-transparent';
+      } else if (isInverse) {
+        backgroundClass =
+          pressed || isLoading ? 'bg-pressed' : 'bg-transparent';
+        borderClass = 'border-primary-inverse';
       } else {
-        backgroundClass = isInverse
-          ? pressed || isLoading
-            ? 'bg-pressed'
-            : 'bg-transparent'
-          : pressed || isLoading
-            ? 'bg-muted-pressed'
-            : 'bg-muted';
-        borderClass = isInverse
-          ? 'border-primary-inverse'
-          : 'border-transparent';
+        backgroundClass =
+          pressed || isLoading ? 'bg-muted-pressed' : 'bg-muted';
+        borderClass = 'border-transparent';
       }
 
       return `${backgroundClass} ${borderClass} ${baseClasses}`;
@@ -68,11 +64,11 @@ export const ButtonSecondary = ({
         return pressed || isLoading
           ? 'text-error-default-pressed'
           : 'text-error-default';
-      } else if (isInverse) {
-        return 'text-primary-inverse';
-      } else {
-        return 'text-default';
       }
+      if (isInverse) {
+        return 'text-primary-inverse';
+      }
+      return 'text-default';
     },
     [isDanger, isInverse, isLoading],
   );

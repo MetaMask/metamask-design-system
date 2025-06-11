@@ -1,8 +1,6 @@
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../../../ButtonBase';
-import type { IconColor } from '../../../Icon';
 import { IconSize } from '../../../Icon';
 import { TextVariant, FontWeight } from '../../../Text';
 
@@ -21,19 +19,21 @@ export const ButtonPrimary = ({
   style,
   ...props
 }: ButtonPrimaryProps) => {
-  const tw = useTailwind();
-
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
+      const classNameStr =
+        typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+
       if (isInverse && isDanger) {
-        return `${pressed || isLoading ? 'bg-default-pressed' : 'bg-default'} ${twClassName}`;
-      } else if (isDanger) {
-        return `${pressed || isLoading ? 'bg-error-default-pressed' : 'bg-error-default'} ${twClassName}`;
-      } else if (isInverse) {
-        return `${pressed || isLoading ? 'bg-default-pressed' : 'bg-default'} ${twClassName}`;
-      } else {
-        return `${pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default'} ${twClassName}`;
+        return `${pressed || isLoading ? 'bg-default-pressed' : 'bg-default'} ${classNameStr}`;
       }
+      if (isDanger) {
+        return `${pressed || isLoading ? 'bg-error-default-pressed' : 'bg-error-default'} ${classNameStr}`;
+      }
+      if (isInverse) {
+        return `${pressed || isLoading ? 'bg-default-pressed' : 'bg-default'} ${classNameStr}`;
+      }
+      return `${pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default'} ${classNameStr}`;
     },
     [isInverse, isDanger, isLoading, twClassName],
   );
@@ -44,13 +44,14 @@ export const ButtonPrimary = ({
         return pressed || isLoading
           ? 'text-error-default-pressed'
           : 'text-error-default';
-      } else if (isDanger) {
-        return 'text-primary-inverse';
-      } else if (isInverse) {
-        return 'text-default';
-      } else {
+      }
+      if (isDanger) {
         return 'text-primary-inverse';
       }
+      if (isInverse) {
+        return 'text-default';
+      }
+      return 'text-primary-inverse';
     },
     [isInverse, isDanger, isLoading],
   );
