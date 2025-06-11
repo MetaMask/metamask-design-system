@@ -12,10 +12,10 @@ describe('ButtonSecondary', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
-      'bg-transparent',
-      'border-2',
-      'border-icon-muted',
+      'bg-muted',
       'text-default',
+      'hover:bg-muted-hover',
+      'active:bg-muted-pressed',
     );
   });
 
@@ -24,10 +24,10 @@ describe('ButtonSecondary', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
-      'bg-transparent',
-      'border-2',
-      'border-error-default',
+      'bg-muted',
       'text-error-default',
+      'hover:bg-muted-hover',
+      'active:bg-muted-pressed',
     );
   });
 
@@ -60,9 +60,7 @@ describe('ButtonSecondary', () => {
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
-      'bg-transparent',
-      'border-2',
-      'border-icon-muted',
+      'bg-muted',
       'text-default',
       'opacity-50',
       'cursor-not-allowed',
@@ -74,10 +72,8 @@ describe('ButtonSecondary', () => {
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
-      'border-2',
-      'border-icon-muted',
       'text-default',
-      'bg-pressed',
+      'bg-muted-pressed',
       'cursor-not-allowed',
     );
   });
@@ -89,17 +85,15 @@ describe('ButtonSecondary', () => {
 
     let button = screen.getByRole('button');
     expect(button).not.toHaveClass(
-      'hover:bg-default-hover',
-      'hover:border-default',
-      'active:bg-default-pressed',
+      'hover:bg-muted-hover',
+      'active:bg-muted-pressed',
     );
 
     rerender(<ButtonSecondary isLoading>Loading</ButtonSecondary>);
     button = screen.getByRole('button');
     expect(button).not.toHaveClass(
-      'hover:bg-default-hover',
-      'hover:border-default',
-      'active:bg-default-pressed',
+      'hover:bg-muted-hover',
+      'active:bg-muted-pressed',
     );
   });
 
@@ -140,7 +134,7 @@ describe('ButtonSecondary', () => {
       </ButtonSecondary>,
     );
 
-    expect(screen.getByText('Please wait...')).toBeInTheDocument();
+    expect(screen.getAllByText('Please wait...')).toHaveLength(2); // Both visible and screen reader text
     expect(screen.getByText('Submit')).toHaveClass('invisible');
   });
 
@@ -168,11 +162,11 @@ describe('ButtonSecondary', () => {
       const button = screen.getByRole('button');
 
       // Should have loading background
-      expect(button).toHaveClass('bg-pressed');
+      expect(button).toHaveClass('bg-muted-pressed');
 
       // Should not have hover/active classes
-      expect(button).not.toHaveClass('hover:bg-hover');
-      expect(button).not.toHaveClass('active:bg-pressed');
+      expect(button).not.toHaveClass('hover:bg-muted-hover');
+      expect(button).not.toHaveClass('active:bg-muted-pressed');
 
       // Should be disabled and have loading cursor
       expect(button).toBeDisabled();
@@ -187,11 +181,8 @@ describe('ButtonSecondary', () => {
       );
 
       const button = screen.getByRole('button');
-      expect(button).toHaveClass(
-        'bg-error-muted-pressed',
-        'text-error-default-pressed',
-      );
-      expect(button).not.toHaveClass('hover:bg-hover');
+      expect(button).toHaveClass('bg-muted-pressed', 'text-error-default');
+      expect(button).not.toHaveClass('hover:bg-muted-hover');
     });
 
     it('applies correct loading styles for inverse variant', () => {
@@ -214,8 +205,7 @@ describe('ButtonSecondary', () => {
       );
 
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('bg-default-pressed');
-      expect(button).not.toHaveClass('hover:bg-default-hover');
+      expect(button).toHaveClass('bg-default-pressed', 'text-error-default');
     });
   });
 });

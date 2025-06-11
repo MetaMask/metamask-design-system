@@ -3,7 +3,7 @@ import React from 'react';
 import { IconSize, IconColor } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 
-import { ICON_SIZE_CLASS_MAP } from './Icon.constants';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
 import type { IconProps } from './Icon.types';
 import { Icons } from './icons';
 
@@ -29,7 +29,7 @@ export const Icon: React.FC<IconProps> = ({
 
   const mergedClassName = twMerge(
     'inline-block',
-    ICON_SIZE_CLASS_MAP[size],
+    TWCLASSMAP_ICON_SIZE_DIMENSION[size],
     color,
     className,
   );

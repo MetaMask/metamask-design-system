@@ -10,7 +10,15 @@ module.exports = {
     './stories/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    colors: {}, // This removes all default Tailwind colors. We want to rely on the colors provided by @metamask-previews/design-system-tailwind-preset
+    // Keep essential semantic colors, remove default palette colors. We want to rely on the colors provided by @metamask-previews/design-system-tailwind-preset
+    colors: {
+      inherit: 'inherit',
+      current: 'currentColor',
+      transparent: 'transparent',
+      black: '#000000',
+      white: '#ffffff',
+    },
+    fontSize: {}, // This removes all default Tailwind font sizes. We want to rely on the design system font sizes and enforce use of the Text component
     extend: {},
   },
   plugins: [],
