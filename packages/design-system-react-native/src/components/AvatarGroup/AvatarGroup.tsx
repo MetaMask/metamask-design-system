@@ -12,7 +12,7 @@ import type { AvatarNetworkProps } from '../AvatarNetwork';
 import { AvatarNetwork } from '../AvatarNetwork';
 import type { AvatarTokenProps } from '../AvatarToken';
 import { AvatarToken } from '../AvatarToken';
-import { Text, TextColor } from '../Text';
+import { TextColor } from '../Text';
 
 import {
   MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT,
@@ -81,11 +81,11 @@ export const AvatarGroup = ({
             );
           default:
             throw new Error(
-              `Invalid Avatar Variant: ${variant}. Expected one of: ${Object.values(AvatarGroupVariant).join(', ')}`,
+              `Invalid Avatar Variant: ${String(variant)}. Expected one of: ${Object.values(AvatarGroupVariant).join(', ')}`,
             );
         }
       }),
-    [avatarPropsArr, max, size, tw],
+    [avatarPropsArr, max, size, variant],
   );
 
   return (
