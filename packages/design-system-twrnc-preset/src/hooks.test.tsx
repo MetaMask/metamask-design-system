@@ -1,6 +1,6 @@
+import { render } from '@testing-library/react-native';
 import React from 'react';
 import { Text, View } from 'react-native';
-import { render } from '@testing-library/react-native';
 
 import { useTheme, useTailwind } from './hooks';
 import { Theme } from './Theme.types';
@@ -71,9 +71,8 @@ describe('hooks', () => {
 
       const view = getByTestId('tailwind-view');
       expect(view.props.style).toBeDefined();
-      expect(
-        Array.isArray(view.props.style) || typeof view.props.style === 'object',
-      ).toBe(true);
+      expect(view.props.style).not.toBeNull();
+      expect(typeof view.props.style).toBe('object');
     });
 
     it('generates different styles for different themes', () => {
@@ -94,7 +93,7 @@ describe('hooks', () => {
       const darkStyles = getByTestId('tailwind-view').props.style;
 
       // Styles should be different between light and dark themes
-      expect(lightStyles).not.toEqual(darkStyles);
+      expect(lightStyles).not.toStrictEqual(darkStyles);
     });
 
     it('returns default tailwind instance when used outside ThemeProvider', () => {
@@ -102,9 +101,8 @@ describe('hooks', () => {
 
       const view = getByTestId('tailwind-view');
       expect(view.props.style).toBeDefined();
-      expect(
-        Array.isArray(view.props.style) || typeof view.props.style === 'object',
-      ).toBe(true);
+      expect(view.props.style).not.toBeNull();
+      expect(typeof view.props.style).toBe('object');
     });
 
     it('default tailwind instance uses light theme', () => {

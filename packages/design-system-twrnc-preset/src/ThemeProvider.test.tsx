@@ -1,10 +1,10 @@
+import { render } from '@testing-library/react-native';
 import React from 'react';
 import { Text, View } from 'react-native';
-import { render } from '@testing-library/react-native';
 
+import { useTheme, useTailwind } from './hooks';
 import { Theme } from './Theme.types';
 import { ThemeProvider } from './ThemeProvider';
-import { useTheme, useTailwind } from './hooks';
 
 // Test component that uses both hooks to verify provider works
 const TestConsumerComponent = ({ testId }: { testId: string }) => {
@@ -92,7 +92,7 @@ describe('ThemeProvider', () => {
     // Both should have styles but they should be different
     expect(lightView.props.style).toBeDefined();
     expect(darkView.props.style).toBeDefined();
-    expect(lightView.props.style).not.toEqual(darkView.props.style);
+    expect(lightView.props.style).not.toStrictEqual(darkView.props.style);
   });
 
   it('supports nested providers with different themes', () => {
@@ -129,7 +129,7 @@ describe('ThemeProvider', () => {
     let renderCount = 0;
 
     const CountingComponent = () => {
-      renderCount++;
+      renderCount += 1;
       const theme = useTheme();
       return <Text>{theme}</Text>;
     };

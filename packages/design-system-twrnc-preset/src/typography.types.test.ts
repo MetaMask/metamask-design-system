@@ -20,11 +20,10 @@ describe('typography types', () => {
         'body-xs',
       ];
 
-      // Test that the type accepts all expected values
       const testVariants: TypographyVariant[] =
         expectedVariants as TypographyVariant[];
       expect(testVariants).toHaveLength(9);
-      expect(testVariants).toEqual(expectedVariants);
+      expect(testVariants).toStrictEqual(expectedVariants);
     });
 
     it('can be used as union type', () => {
@@ -39,6 +38,22 @@ describe('typography types', () => {
       expect(testFunction('body-md')).toBe('body-md');
       expect(testFunction('body-sm')).toBe('body-sm');
       expect(testFunction('body-xs')).toBe('body-xs');
+    });
+
+    it('can be used as object keys', () => {
+      const testObject: Record<TypographyVariant, string> = {
+        'display-lg': 'test',
+        'display-md': 'test',
+        'heading-lg': 'test',
+        'heading-md': 'test',
+        'heading-sm': 'test',
+        'body-lg': 'test',
+        'body-md': 'test',
+        'body-sm': 'test',
+        'body-xs': 'test',
+      };
+
+      expect(Object.keys(testObject)).toHaveLength(9);
     });
   });
 
@@ -80,7 +95,7 @@ describe('typography types', () => {
       const expectedStyles = ['normal', 'italic'];
       const testStyles: FontStyle[] = expectedStyles as FontStyle[];
       expect(testStyles).toHaveLength(2);
-      expect(testStyles).toEqual(expectedStyles);
+      expect(testStyles).toStrictEqual(expectedStyles);
     });
 
     it('can be used as union type', () => {
@@ -93,7 +108,6 @@ describe('typography types', () => {
 
   describe('TypographyTailwindConfigProps', () => {
     it('has correct structure for fontSize property', () => {
-      // This is a type-only test to ensure the interface is correctly defined
       const mockConfig: TypographyTailwindConfigProps = {
         fontSize: {
           'display-lg': [
@@ -177,7 +191,6 @@ describe('typography types', () => {
     });
 
     it('requires lineHeight to be string with units', () => {
-      // Type test to ensure lineHeight is string (not number)
       const validConfig: TypographyTailwindConfigProps['lineHeight'] = {
         'display-lg': '56px',
         'display-md': '40px',
@@ -191,11 +204,10 @@ describe('typography types', () => {
       };
 
       expect(typeof validConfig['display-lg']).toBe('string');
-      expect(validConfig['display-lg']).toMatch(/px$/);
+      expect(validConfig['display-lg']).toMatch(/px$/u);
     });
 
     it('requires fontSize to be tuple with string and style object', () => {
-      // Type test to ensure fontSize structure
       const validFontSize: TypographyTailwindConfigProps['fontSize']['display-lg'] =
         [
           '48',
@@ -226,12 +238,12 @@ describe('typography types', () => {
         'hero-regular',
       ];
 
-      // This validates the type includes all required keys
       type FontFamilyKeys = keyof TypographyTailwindConfigProps['fontFamily'];
       const testKeys: FontFamilyKeys[] =
         requiredFontFamilyKeys as FontFamilyKeys[];
 
       expect(testKeys).toHaveLength(10);
+      expect(testKeys).toStrictEqual(requiredFontFamilyKeys);
     });
   });
 });

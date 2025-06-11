@@ -1,7 +1,8 @@
-import * as DesignSystemTwrncPreset from './index';
-import { ThemeProvider } from './ThemeProvider';
-import { Theme } from './Theme.types';
 import { useTheme, useTailwind } from './hooks';
+import { Theme } from './Theme.types';
+import { ThemeProvider } from './ThemeProvider';
+
+import * as DesignSystemTwrncPreset from '.';
 
 describe('index exports', () => {
   it('exports ThemeProvider', () => {
@@ -49,23 +50,17 @@ describe('index exports', () => {
       'useTailwind',
     ];
 
-    // Should only export the expected members
-    expect(actualExports.sort()).toEqual(expectedExports.sort());
+    expect(actualExports.sort()).toStrictEqual(expectedExports.sort());
   });
 
   it('exports have correct types', () => {
-    // ThemeProvider should be a React component (function/object)
     expect(typeof DesignSystemTwrncPreset.ThemeProvider).toBe('function');
-
-    // Theme should be an object (enum)
     expect(typeof DesignSystemTwrncPreset.Theme).toBe('object');
-
-    // Hooks should be functions
     expect(typeof DesignSystemTwrncPreset.useTheme).toBe('function');
     expect(typeof DesignSystemTwrncPreset.useTailwind).toBe('function');
   });
 
-  it('Theme enum has correct values', () => {
+  it('theme enum has correct values', () => {
     expect(DesignSystemTwrncPreset.Theme.Light).toBe('light');
     expect(DesignSystemTwrncPreset.Theme.Dark).toBe('dark');
   });
@@ -85,7 +80,6 @@ describe('index exports', () => {
   });
 
   it('maintains referential equality for exports', () => {
-    // Multiple imports should reference the same objects
     const firstImport = DesignSystemTwrncPreset.ThemeProvider;
     const secondImport = DesignSystemTwrncPreset.ThemeProvider;
 

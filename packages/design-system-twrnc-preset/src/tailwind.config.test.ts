@@ -91,7 +91,7 @@ describe('generateTailwindConfig', () => {
     const lightConfig = generateTailwindConfig(Theme.Light);
     const darkConfig = generateTailwindConfig(Theme.Dark);
 
-    expect(lightConfig).not.toEqual(darkConfig);
+    expect(lightConfig).not.toStrictEqual(darkConfig);
     expect(lightConfig).toHaveProperty('theme');
     expect(darkConfig).toHaveProperty('theme');
   });
@@ -99,13 +99,14 @@ describe('generateTailwindConfig', () => {
   it('handles invalid theme gracefully', () => {
     const consoleErrorSpy = jest
       .spyOn(console, 'error')
-      .mockImplementation(() => {});
+      .mockImplementation(() => {
+        // Empty implementation
+      });
 
-    // @ts-expect-error - Testing invalid theme
-    const config = generateTailwindConfig('invalid-theme');
+    const config = generateTailwindConfig('invalid-theme' as Theme);
 
     expect(consoleErrorSpy).toHaveBeenCalledWith('Theme colors not found.');
-    expect(config).toEqual({});
+    expect(config).toStrictEqual({});
 
     consoleErrorSpy.mockRestore();
   });
@@ -114,23 +115,26 @@ describe('generateTailwindConfig', () => {
     const lightConfig = generateTailwindConfig(Theme.Light);
     const darkConfig = generateTailwindConfig(Theme.Dark);
 
-    // Both should have the same structure
     expect(lightConfig).toHaveProperty('theme.extend');
     expect(darkConfig).toHaveProperty('theme.extend');
 
-    // Get the extend objects
-    const lightExtend = (lightConfig as any).theme?.extend;
-    const darkExtend = (darkConfig as any).theme?.extend;
+    const lightExtend = (lightConfig as Record<string, unknown>)
+      .theme as Record<string, unknown>;
+    const darkExtend = (darkConfig as Record<string, unknown>).theme as Record<
+      string,
+      unknown
+    >;
 
-    if (lightExtend && darkExtend) {
-      expect(Object.keys(lightExtend)).toEqual(Object.keys(darkExtend));
-    }
+    expect(lightExtend).toBeDefined();
+    expect(darkExtend).toBeDefined();
+    expect(
+      Object.keys(lightExtend.extend as Record<string, unknown>),
+    ).toStrictEqual(Object.keys(darkExtend.extend as Record<string, unknown>));
   });
 
   it('generates valid twrnc config object', () => {
     const config = generateTailwindConfig(Theme.Light);
 
-    // Should be a valid object that twrnc can use
     expect(typeof config).toBe('object');
     expect(config).not.toBeNull();
     expect(Array.isArray(config)).toBe(false);
@@ -140,14 +144,20 @@ describe('generateTailwindConfig', () => {
     const lightConfig = generateTailwindConfig(Theme.Light);
     const darkConfig = generateTailwindConfig(Theme.Dark);
 
-    // Light theme should have light colors
-    const lightColors = (lightConfig as any).theme?.extend?.colors;
-    expect(lightColors?.['background-default']).toBe('#ffffff');
-    expect(lightColors?.['text-default']).toBe('#24272a');
+    const lightColors = (lightConfig as Record<string, unknown>)
+      .theme as Record<string, unknown>;
+    const lightExtendColors = (lightColors.extend as Record<string, unknown>)
+      .colors as Record<string, string>;
+    expect(lightExtendColors['background-default']).toBe('#ffffff');
+    expect(lightExtendColors['text-default']).toBe('#24272a');
 
-    // Dark theme should have dark colors
-    const darkColors = (darkConfig as any).theme?.extend?.colors;
-    expect(darkColors?.['background-default']).toBe('#24272a');
-    expect(darkColors?.['text-default']).toBe('#ffffff');
+    const darkColors = (darkConfig as Record<string, unknown>).theme as Record<
+      string,
+      unknown
+    >;
+    const darkExtendColors = (darkColors.extend as Record<string, unknown>)
+      .colors as Record<string, string>;
+    expect(darkExtendColors['background-default']).toBe('#24272a');
+    expect(darkExtendColors['text-default']).toBe('#ffffff');
   });
 });

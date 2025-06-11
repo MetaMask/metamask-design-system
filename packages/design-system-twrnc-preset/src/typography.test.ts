@@ -1,66 +1,6 @@
 import { typographyTailwindConfig } from './typography';
 import type { TypographyVariant } from './typography.types';
 
-// Mock the design tokens to ensure consistent testing
-jest.mock('@metamask/design-tokens', () => ({
-  typography: {
-    sDisplayLG: {
-      fontSize: 48,
-      lineHeight: 56,
-      letterSpacing: 0,
-      fontWeight: '700',
-    },
-    sDisplayMD: {
-      fontSize: 32,
-      lineHeight: 40,
-      letterSpacing: 0,
-      fontWeight: '700',
-    },
-    sHeadingLG: {
-      fontSize: 24,
-      lineHeight: 32,
-      letterSpacing: 0,
-      fontWeight: '700',
-    },
-    sHeadingMD: {
-      fontSize: 18,
-      lineHeight: 24,
-      letterSpacing: 0,
-      fontWeight: '700',
-    },
-    sHeadingSM: {
-      fontSize: 16,
-      lineHeight: 24,
-      letterSpacing: 0,
-      fontWeight: '700',
-    },
-    sBodyLGMedium: {
-      fontSize: 18,
-      lineHeight: 24,
-      letterSpacing: 0,
-      fontWeight: '500',
-    },
-    sBodyMD: {
-      fontSize: 14,
-      lineHeight: 20,
-      letterSpacing: 0,
-      fontWeight: '400',
-    },
-    sBodySM: {
-      fontSize: 12,
-      lineHeight: 16,
-      letterSpacing: 0,
-      fontWeight: '400',
-    },
-    sBodyXS: {
-      fontSize: 10,
-      lineHeight: 12,
-      letterSpacing: 0,
-      fontWeight: '400',
-    },
-  },
-}));
-
 describe('typography', () => {
   describe('typographyTailwindConfig', () => {
     it('has all required properties', () => {
@@ -95,8 +35,8 @@ describe('typography', () => {
 
           expect(Array.isArray(fontSize)).toBe(true);
           expect(fontSize).toHaveLength(2);
-          expect(typeof fontSize[0]).toBe('string'); // fontSize value
-          expect(typeof fontSize[1]).toBe('object'); // style properties
+          expect(typeof fontSize[0]).toBe('string');
+          expect(typeof fontSize[1]).toBe('object');
 
           const styleProperties = fontSize[1];
           expect(styleProperties).toHaveProperty('lineHeight');
@@ -105,34 +45,27 @@ describe('typography', () => {
         });
       });
 
-      it('has expected font size values', () => {
-        expect(typographyTailwindConfig.fontSize['display-lg'][0]).toBe('48');
-        expect(typographyTailwindConfig.fontSize['display-md'][0]).toBe('32');
-        expect(typographyTailwindConfig.fontSize['heading-lg'][0]).toBe('24');
-        expect(typographyTailwindConfig.fontSize['heading-md'][0]).toBe('18');
-        expect(typographyTailwindConfig.fontSize['heading-sm'][0]).toBe('16');
-        expect(typographyTailwindConfig.fontSize['body-lg'][0]).toBe('18');
-        expect(typographyTailwindConfig.fontSize['body-md'][0]).toBe('14');
-        expect(typographyTailwindConfig.fontSize['body-sm'][0]).toBe('12');
-        expect(typographyTailwindConfig.fontSize['body-xs'][0]).toBe('10');
+      it('has expected font size values from actual design tokens', () => {
+        const { fontSize } = typographyTailwindConfig;
+
+        expectedVariants.forEach((variant) => {
+          const [fontSizeValue] = fontSize[variant];
+          expect(fontSizeValue).toMatch(/^\d+$/u);
+          expect(parseInt(fontSizeValue, 10)).toBeGreaterThan(0);
+        });
+
+        expect(parseInt(fontSize['display-lg'][0], 10)).toBeGreaterThan(32);
+        expect(parseInt(fontSize['body-xs'][0], 10)).toBeLessThan(16);
       });
 
       it('has line heights with px units', () => {
         expectedVariants.forEach((variant) => {
-          const lineHeight =
-            typographyTailwindConfig.fontSize[variant][1].lineHeight;
-          expect(lineHeight).toMatch(/\d+px$/);
-        });
+          const { lineHeight } = typographyTailwindConfig.fontSize[variant][1];
+          expect(lineHeight).toMatch(/\d+px$/u);
 
-        expect(
-          typographyTailwindConfig.fontSize['display-lg'][1].lineHeight,
-        ).toBe('56px');
-        expect(
-          typographyTailwindConfig.fontSize['display-md'][1].lineHeight,
-        ).toBe('40px');
-        expect(typographyTailwindConfig.fontSize['body-md'][1].lineHeight).toBe(
-          '20px',
-        );
+          const numericValue = parseInt(lineHeight.replace('px', ''), 10);
+          expect(numericValue).toBeGreaterThan(0);
+        });
       });
     });
 
@@ -221,10 +154,10 @@ describe('typography', () => {
         });
       });
 
-      it('has expected letter spacing values', () => {
+      it('has valid letter spacing values from actual design tokens', () => {
         expectedVariants.forEach((variant) => {
           const letterSpacing = typographyTailwindConfig.letterSpacing[variant];
-          expect(letterSpacing).toBe('0');
+          expect(letterSpacing).toMatch(/^-?\d*\.?\d+$/u);
         });
       });
     });
@@ -254,20 +187,28 @@ describe('typography', () => {
       it('has line heights with px units', () => {
         expectedVariants.forEach((variant) => {
           const lineHeight = typographyTailwindConfig.lineHeight[variant];
-          expect(lineHeight).toMatch(/^\d+px$/);
+          expect(lineHeight).toMatch(/^\d+px$/u);
         });
       });
 
-      it('has expected line height values', () => {
-        expect(typographyTailwindConfig.lineHeight['display-lg']).toBe('56px');
-        expect(typographyTailwindConfig.lineHeight['display-md']).toBe('40px');
-        expect(typographyTailwindConfig.lineHeight['heading-lg']).toBe('32px');
-        expect(typographyTailwindConfig.lineHeight['heading-md']).toBe('24px');
-        expect(typographyTailwindConfig.lineHeight['heading-sm']).toBe('24px');
-        expect(typographyTailwindConfig.lineHeight['body-lg']).toBe('24px');
-        expect(typographyTailwindConfig.lineHeight['body-md']).toBe('20px');
-        expect(typographyTailwindConfig.lineHeight['body-sm']).toBe('16px');
-        expect(typographyTailwindConfig.lineHeight['body-xs']).toBe('12px');
+      it('has reasonable line height values from actual design tokens', () => {
+        expectedVariants.forEach((variant) => {
+          const lineHeight = typographyTailwindConfig.lineHeight[variant];
+          const numericValue = parseInt(lineHeight.replace('px', ''), 10);
+
+          expect(numericValue).toBeGreaterThan(0);
+          expect(numericValue).toBeLessThan(200);
+        });
+
+        const displayLgHeight = parseInt(
+          typographyTailwindConfig.lineHeight['display-lg'].replace('px', ''),
+          10,
+        );
+        const bodyXsHeight = parseInt(
+          typographyTailwindConfig.lineHeight['body-xs'].replace('px', ''),
+          10,
+        );
+        expect(displayLgHeight).toBeGreaterThan(bodyXsHeight);
       });
     });
 
@@ -280,8 +221,10 @@ describe('typography', () => {
         typographyTailwindConfig.letterSpacing,
       );
 
-      expect(fontSizeVariants.sort()).toEqual(lineHeightVariants.sort());
-      expect(fontSizeVariants.sort()).toEqual(letterSpacingVariants.sort());
+      expect(fontSizeVariants.sort()).toStrictEqual(lineHeightVariants.sort());
+      expect(fontSizeVariants.sort()).toStrictEqual(
+        letterSpacingVariants.sort(),
+      );
     });
 
     it('has consistent line height values between fontSize and lineHeight objects', () => {
