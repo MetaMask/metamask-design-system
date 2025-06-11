@@ -1,18 +1,18 @@
 # Tailwind CSS Best Practices
 
-A comprehensive guide for using Tailwind effectively and consistently across our design system monorepo.
+A comprehensive guide for using Tailwind effectively and consistently across our design system monorepo and engineering organization.
 
 ## 🎯 Core Principles
 
 ### 1. Component-First Approach
 
 - **Use Design System Components**: Always prefer our design system components over raw JSX elements with Tailwind classes
-- **Props Over Classes**: Utilize component props to control variants and styles instead of direct class manipulation
+- **Props Over Classes**: Prefer component props to control variants and styles, but use `className` when no equivalent prop exists
 - **Example**:
 
   ```tsx
   // ❌ Don't
-  <div className="rounded-lg bg-alternative p-4">
+  <div className="rounded-lg bg-alternative hover:bg-alternative-hover p-4">
     <span className="text-default text-s-body-md font-medium">Content</span>
   </div>
 
@@ -21,6 +21,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
     borderRadius={BoxBorderRadius.Lg}
     backgroundColor={BoxBackgroundColor.BackgroundAlternative}
     p={4}
+    className="hover:bg-alternative-hover"
   >
     <Text
       variant={TextVariant.BodyMd}
@@ -34,7 +35,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
 ### 2. Design Token Integration
 
 - **Use Design Token Generated Classes Only**: Always use design token based classes that are generated from our design system
-- **No Default Tailwind Values**: Never use Tailwind's default color palette or typography scale (these should be removed in the projects tailwind.config.js to prevent usage)
+- **No Default Tailwind Values**: Never use Tailwind's default color palette or typography scale (these should be removed in the projects `tailwind.config.js` to prevent usage)
 - **Typography**: Always use the `Text` component for text styling instead of Tailwind's typography classes
 - **Colors**: Use only design token generated color classes (e.g., `bg-default`, `text-error-default`)
 - **Example**:
@@ -92,7 +93,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
 
 ### 4. React Native Components
 
-- **TWRNC Usage**: Use `twrnc` for React Native styling
+- **Design System TWRNC Preset**: Use `useTailwind` hook from `@metamask/design-system-twrnc-preset`
 - **Consistent API**: Maintain consistent class names between web and native
 - **Example**:
 
@@ -100,13 +101,13 @@ A comprehensive guide for using Tailwind effectively and consistently across our
   // ❌ Don't
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: colors.neutral100,
+      backgroundColor: colors.background.default,
       padding: 16,
     },
   });
 
   // ✅ Do
-  const styles = tw`bg-neutral-100 p-4`;
+  const styles = tw`bg-default p-4`;
   ```
 
 ## 🛠️ Developer Tools & Configuration
@@ -125,60 +126,20 @@ A comprehensive guide for using Tailwind effectively and consistently across our
 - **Consistent Ordering**: Maintain consistent class ordering through prettier-plugin-tailwindcss
 - **Multiple Configs**: Respect the different Tailwind configs for React and React Native
 
-## 🎨 Style Guidelines
-
-### 7. Class Organization
-
-- **Logical Grouping**: Group related classes together
-- **Consistent Order**: Follow the order: layout → spacing → colors → other visual properties
-- **Typography**: Never include typography classes directly, use the Text component instead
-- **Example**:
-
-  ```tsx
-  // ❌ Don't
-  className =
-    'flex items-center gap-4 p-4 text-s-body-md font-medium text-default bg-default';
-
-  // ✅ Do
-  <Box
-    display={BoxDisplay.Flex}
-    alignItems={BoxAlignItems.Center}
-    gap={4}
-    backgroundColor={BoxBackgroundColor.BackgroundDefault}
-    padding={4}
-  >
-    <Text variant={TextVariant.BodyMd}>Content</Text>
-  </Box>;
-  ```
-
-### 8. Responsive Design
-
-- **Mobile First**: Start with mobile styles, then add responsive variants
-- **Breakpoint Usage**: Use our defined breakpoints consistently
-- **Example**:
-
-  ```tsx
-  // ❌ Don't - Mixing typography utilities with responsive classes
-  className = 'text-s-body-sm md:text-l-body-sm text-default';
-
-  // ✅ Do - Using Text component handles responsive sizes
-  <Text variant={TextVariant.BodySm} color={TextColor.TextDefault} />;
-  ```
-
 ## ⚠️ Common Pitfalls
 
 ### 9. Anti-patterns to Avoid
 
-- **No Arbitrary Values**: Don't use `[]` syntax for arbitrary values
+- **No Arbitrary Values**: Don't use `[]` syntax for arbitrary values unless absolutely necessary
 - **No Direct Styles**: Avoid inline `style` objects
 - **No @apply**: Don't use `@apply` in CSS files
-- **No Style Mixing**: Don't mix Tailwind with other styling approaches in the same component
+- **No Style Mixing**: Don't mix Tailwind with other styling approaches like inline styles in the same component. However, combining component props with Tailwind classes via `className`/`twClassName`/`tw` is acceptable when no equivalent prop exists
 - **No Default Colors**: Never use Tailwind's default color palette
 - **No Direct Typography**: Never use typography classes directly
 - **Example**:
 
   ```tsx
-  // ❌ Don't - Mixing different approaches
+  // ❌ Don't - Mixing inline styles with Tailwind classes
   <div
     style={{ padding: '16px' }}
     className={`
@@ -200,6 +161,15 @@ A comprehensive guide for using Tailwind effectively and consistently across our
       Content
     </Text>
   </Box>
+
+  // ✅ Also acceptable - Combining props with className when no prop exists
+  <Text
+    variant={TextVariant.BodyMd}
+    color={TextColor.Default}
+    className="mt-4"
+  >
+    Content with margin
+  </Text>
   ```
 
 ---
