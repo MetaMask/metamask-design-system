@@ -16,9 +16,9 @@ export const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
       // Default primary styles
       !isDanger &&
         !isInverse && [
-          'bg-primary-default text-primary-inverse',
+          'bg-icon-default text-primary-inverse',
           // Loading state uses pressed color
-          isLoading && 'bg-primary-default-pressed',
+          isLoading && 'bg-icon-default-pressed',
         ],
       // Danger styles
       isDanger &&
@@ -45,8 +45,8 @@ export const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
       isInteractive && [
         !isDanger &&
           !isInverse && [
-            'hover:bg-primary-default-hover',
-            'active:bg-primary-default-pressed',
+            'hover:bg-icon-default-hover',
+            'active:bg-icon-default-pressed',
           ],
         isDanger &&
           !isInverse && [
@@ -58,6 +58,10 @@ export const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
         isInverse &&
           isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
       ],
+      'focus-visible:outline-none focus-visible:ring-0',
+      isInverse
+        ? 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background-default'
+        : 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
       // Loading styles
       isLoading && 'cursor-not-allowed',
       // Disabled styles (but not loading)
@@ -71,7 +75,6 @@ export const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
         className={mergedClassName}
         isDisabled={isDisabled}
         isLoading={isLoading}
-        data-theme={!isInverse && 'light'} // Lock button primary to light theme
         {...props}
       />
     );
