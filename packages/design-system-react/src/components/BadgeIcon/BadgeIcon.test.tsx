@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { IconName, IconColor } from '../Icon';
-import { ICON_SIZE_CLASS_MAP } from '../Icon/Icon.constants';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
 import { BadgeIcon } from './BadgeIcon';
 
@@ -82,10 +82,13 @@ describe('BadgeIcon', () => {
     render(
       <BadgeIcon
         iconName={IconName.User}
-        iconProps={{ 'data-testid': 'icon', className: ICON_SIZE_CLASS_MAP.xs }}
+        iconProps={{
+          'data-testid': 'icon',
+          className: TWCLASSMAP_ICON_SIZE_DIMENSION.xs,
+        }}
       />,
     );
     const icon = screen.getByTestId('icon');
-    expect(icon).toHaveClass(ICON_SIZE_CLASS_MAP.xs);
+    expect(icon).toHaveClass(TWCLASSMAP_ICON_SIZE_DIMENSION.xs);
   });
 });

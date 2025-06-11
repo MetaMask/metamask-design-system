@@ -4,7 +4,7 @@ import React from 'react';
 import { IconName, IconSize, IconColor } from '../../types';
 
 import { Icon } from './Icon';
-import { ICON_SIZE_CLASS_MAP } from './Icon.constants';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
 import type { IconProps } from './Icon.types';
 
 describe('Icon', () => {
@@ -26,7 +26,7 @@ describe('Icon', () => {
       );
       const icon = container.firstChild;
       expect(icon).toHaveClass('inline-block');
-      expect(icon).toHaveClass(ICON_SIZE_CLASS_MAP[size]);
+      expect(icon).toHaveClass(TWCLASSMAP_ICON_SIZE_DIMENSION[size]);
     });
   });
 
@@ -105,7 +105,8 @@ describe('Icon', () => {
       expect(icon).toHaveClass('h-10');
 
       // Verify the default size classes are not present
-      const defaultSizeClasses = ICON_SIZE_CLASS_MAP[IconSize.Md].split(' ');
+      const defaultSizeClasses =
+        TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Md].split(' ');
       defaultSizeClasses.forEach((className) => {
         expect(icon).not.toHaveClass(className);
       });
@@ -130,7 +131,8 @@ describe('Icon', () => {
       // Verify default classes are not present
       expect(icon).not.toHaveClass(IconColor.IconDefault);
 
-      const defaultSizeClasses = ICON_SIZE_CLASS_MAP[IconSize.Md].split(' ');
+      const defaultSizeClasses =
+        TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Md].split(' ');
       defaultSizeClasses.forEach((className) => {
         expect(icon).not.toHaveClass(className);
       });

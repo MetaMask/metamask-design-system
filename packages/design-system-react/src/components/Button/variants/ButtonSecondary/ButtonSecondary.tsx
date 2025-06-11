@@ -19,16 +19,16 @@ export const ButtonSecondary = forwardRef<
       // Default secondary styles
       !isDanger &&
         !isInverse && [
-          'bg-transparent border-2 border-icon-muted text-default',
+          'bg-muted text-default',
           // Loading state uses pressed color
-          isLoading && 'bg-pressed',
+          isLoading && 'bg-muted-pressed',
         ],
       // Danger styles
       isDanger &&
         !isInverse && [
-          'bg-transparent border-2 border-error-default text-error-default',
-          // Loading state uses error muted pressed color
-          isLoading && 'bg-error-muted-pressed text-error-default-pressed',
+          'bg-muted text-error-default',
+          // Loading state uses pressed color
+          isLoading && 'bg-muted-pressed',
         ],
       // Inverse styles
       isInverse &&
@@ -46,16 +46,18 @@ export const ButtonSecondary = forwardRef<
         ],
       // Hover/Active states - only applied when interactive
       isInteractive && [
-        !isDanger && !isInverse && ['hover:bg-hover', 'active:bg-pressed'],
+        !isDanger &&
+          !isInverse && ['hover:bg-muted-hover', 'active:bg-muted-pressed'],
         isDanger &&
-          !isInverse && [
-            'hover:bg-error-muted-hover',
-            'active:bg-error-muted-pressed',
-          ],
+          !isInverse && ['hover:bg-muted-hover', 'active:bg-muted-pressed'],
         isInverse && !isDanger && ['hover:bg-hover', 'active:bg-pressed'],
         isInverse &&
           isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
       ],
+      'focus-visible:outline-none focus-visible:ring-0',
+      isInverse
+        ? 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background-default'
+        : 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
       // Loading styles
       isLoading && 'cursor-not-allowed',
       // Disabled styles (but not loading)
