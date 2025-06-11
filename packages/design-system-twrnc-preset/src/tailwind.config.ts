@@ -83,7 +83,9 @@ export const generateTailwindConfig = (theme: Theme): TwConfig => {
           ...colors, // Incorporate existing color utilities like border-primary-default
           ...borderColors, // e.g. border-default instead of border-border-default
         },
-        // fontSize removed to enforce use of Text component instead of arbitrary font size utilities
+        fontSize: {
+          ...typographyTailwindConfig.fontSize,
+        },
         fontFamily: {
           ...typographyTailwindConfig.fontFamily,
         },
