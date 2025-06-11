@@ -11,9 +11,6 @@
   "packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.tsx": {
     "@typescript-eslint/no-unused-vars": 1
   },
-  "packages/design-system-react-native/src/components/Button/Button.test.tsx": {
-    "no-empty-function": 1
-  },
   "packages/design-system-react-native/src/types/index.ts": {
     "@typescript-eslint/no-shadow": 4
   },

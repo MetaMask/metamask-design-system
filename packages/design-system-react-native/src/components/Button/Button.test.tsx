@@ -36,7 +36,7 @@ describe('Button', () => {
   it('throws an error for an invalid variant', () => {
     const consoleErrorMock = jest
       .spyOn(console, 'error')
-      .mockImplementation(() => {}); // Suppress error logs
+      .mockImplementation(jest.fn()); // Use jest.fn() instead of empty arrow function
 
     expect(() =>
       render(
@@ -47,5 +47,37 @@ describe('Button', () => {
     ).toThrow('Invalid Button Variant');
 
     consoleErrorMock.mockRestore(); // Restore console.error after the test
+  });
+
+  it('renders ButtonPrimary, ButtonSecondary, and ButtonTertiary', () => {
+    const { getByText } = render(
+      <>
+        <Button variant={ButtonVariant.Primary}>Primary</Button>
+        <Button variant={ButtonVariant.Secondary}>Secondary</Button>
+        <Button variant={ButtonVariant.Tertiary}>Tertiary</Button>
+      </>,
+    );
+
+    expect(getByText('Primary')).toBeDefined();
+    expect(getByText('Secondary')).toBeDefined();
+    expect(getByText('Tertiary')).toBeDefined();
+  });
+
+  it('passes accessibility props to button variants', () => {
+    const { getByTestId } = render(
+      <Button
+        variant={ButtonVariant.Primary}
+        testID="primary-btn"
+        accessibilityLabel="Primary action"
+        accessibilityHint="Performs the main action"
+      >
+        Primary
+      </Button>,
+    );
+
+    const btn = getByTestId('primary-btn');
+    expect(btn.props.accessibilityLabel).toBe('Primary action');
+    expect(btn.props.accessibilityHint).toBe('Performs the main action');
+    expect(btn.props.accessibilityRole).toBe('button');
   });
 });
