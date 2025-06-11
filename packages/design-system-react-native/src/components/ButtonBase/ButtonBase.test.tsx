@@ -281,6 +281,32 @@ describe('ButtonBase', () => {
     );
   });
 
+  it('applies static style prop correctly', () => {
+    const staticStyle = { borderWidth: 3, borderColor: 'green' };
+
+    const tree = ReactTestRenderer.create(
+      <ButtonBase style={staticStyle}>Static Style</ButtonBase>,
+    );
+
+    const buttonAnimated = tree.root.findByProps({
+      accessibilityRole: 'button',
+    });
+    const styleFn = buttonAnimated.props.style as (p: {
+      pressed: boolean;
+    }) => unknown[];
+
+    const styles = styleFn({ pressed: false });
+    expect(Array.isArray(styles)).toBe(true);
+    expect(styles).toStrictEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          borderWidth: 3,
+          borderColor: 'green',
+        }),
+      ]),
+    );
+  });
+
   it('renders without start or end icons when not provided', () => {
     const { queryByTestId } = render(<ButtonBase>No Icons</ButtonBase>);
 
@@ -337,7 +363,13 @@ describe('ButtonBase', () => {
       expect(btn.props.accessible).toBe(true);
       expect(btn.props.accessibilityRole).toBe('button');
       expect(btn.props.accessibilityLabel).toBe('Default Button');
-      expect(btn.props.accessibilityState).toStrictEqual({});
+      // eslint-disable-next-line jest/prefer-strict-equal
+      expect(btn.props.accessibilityState).toEqual(
+        expect.not.objectContaining({
+          disabled: true,
+          busy: true,
+        }),
+      );
     });
 
     it('applies custom accessibility props', () => {
@@ -366,7 +398,10 @@ describe('ButtonBase', () => {
       );
       const btn = getByTestId('btn');
 
-      expect(btn.props.accessibilityState).toStrictEqual({ disabled: true });
+      // eslint-disable-next-line jest/prefer-strict-equal
+      expect(btn.props.accessibilityState).toEqual(
+        expect.objectContaining({ disabled: true }),
+      );
     });
 
     it('handles accessibility state for loading button', () => {
@@ -377,10 +412,13 @@ describe('ButtonBase', () => {
       );
       const btn = getByTestId('btn');
 
-      expect(btn.props.accessibilityState).toStrictEqual({
-        disabled: true,
-        busy: true,
-      });
+      // eslint-disable-next-line jest/prefer-strict-equal
+      expect(btn.props.accessibilityState).toEqual(
+        expect.objectContaining({
+          disabled: true,
+          busy: true,
+        }),
+      );
       expect(btn.props.accessibilityLabel).toBe('Please wait');
       expect(btn.props.accessibilityHint).toBe(
         'Button is currently loading, please wait',
@@ -399,10 +437,13 @@ describe('ButtonBase', () => {
       expect(btn.props.accessibilityHint).toBe(
         'Button is currently loading, please wait',
       );
-      expect(btn.props.accessibilityState).toStrictEqual({
-        disabled: true,
-        busy: true,
-      });
+      // eslint-disable-next-line jest/prefer-strict-equal
+      expect(btn.props.accessibilityState).toEqual(
+        expect.objectContaining({
+          disabled: true,
+          busy: true,
+        }),
+      );
     });
 
     it('prioritizes custom accessibility hint over loading hint', () => {

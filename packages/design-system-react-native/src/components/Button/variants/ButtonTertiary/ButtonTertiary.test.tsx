@@ -54,6 +54,13 @@ describe('ButtonTertiary', () => {
     );
   }
 
+  const createDynamicClassName = () => (pressed: boolean) => {
+    if (pressed) {
+      return 'border-2 border-warning-default';
+    }
+    return 'border border-alternative';
+  };
+
   it('renders default background', () => {
     const { getByTestId } = render(
       <ButtonTertiary size={ButtonBaseSize.Lg} testID="button-tertiary">
@@ -169,6 +176,30 @@ describe('ButtonTertiary', () => {
     expect(pressedStyles).toBeDefined();
   });
 
+  it('toggles pressed styles (inverse+danger)', () => {
+    const tree = ReactTestRenderer.create(
+      <ButtonTertiary isInverse isDanger>
+        Inverse+Danger
+      </ButtonTertiary>,
+    );
+
+    const buttonAnimated = tree.root.findByProps({
+      accessibilityRole: 'button',
+    });
+    const styleFn = buttonAnimated.props.style as (p: {
+      pressed: boolean;
+    }) => unknown[];
+
+    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
+    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
+
+    expectBackground(defaultStyles, 'bg-default');
+    expectBackground(pressedStyles, 'bg-default-pressed');
+
+    expect(defaultStyles).toBeDefined();
+    expect(pressedStyles).toBeDefined();
+  });
+
   it('shows spinner + hides content when loading', () => {
     const spinnerTW =
       'absolute inset-0 flex items-center justify-center opacity-100';
@@ -234,6 +265,18 @@ describe('ButtonTertiary', () => {
     const btn = getByTestId('button-tertiary');
     expectBackground(btn.props.style, 'bg-default-pressed');
 
+    expect(btn).toBeDefined();
+  });
+
+  it('handles function-based twClassName', () => {
+    const dynamicClassName = createDynamicClassName();
+
+    const { getByTestId } = render(
+      <ButtonTertiary twClassName={dynamicClassName} testID="button-tertiary">
+        Dynamic Class
+      </ButtonTertiary>,
+    );
+    const btn = getByTestId('button-tertiary');
     expect(btn).toBeDefined();
   });
 });
