@@ -200,7 +200,7 @@ describe('Jazzicon', () => {
       unmount();
       await act(async () => {
         // Allow cleanup effect to run
-      }); // allow cleanup effect to run
+      });
       expect(screen.queryByTestId('jazzicon')).toBeNull();
     });
 
