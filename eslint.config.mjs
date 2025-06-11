@@ -33,8 +33,6 @@ const config = createConfig([
       'packages/design-system-react-native/src/components/Icon/Icon.assets.ts',
       'packages/design-system-react-native/src/components/BadgeNetwork/BadgeNetwork.test.tsx',
       'packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.test.tsx',
-      'packages/design-system-react-native/src/components/ButtonIcon/ButtonIcon.tsx',
-      'packages/design-system-react-native/src/components/TextButton/TextButton.test.tsx',
       'packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.test.tsx',
       'packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.tsx',
       'packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.tsx',

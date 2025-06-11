@@ -2,7 +2,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
 import React from 'react';
-import { View } from 'react-native';
+import RN, { View } from 'react-native';
+import type { ReactTestInstance } from 'react-test-renderer';
+import { create } from 'react-test-renderer';
 
 import { TextButtonSize } from '../../types';
 import { IconName, IconSize } from '../Icon';
@@ -13,22 +15,40 @@ import { MAP_TEXTBUTTON_SIZE_TEXTVARIANT } from './TextButton.constants';
 describe('TextButton', () => {
   const tw = renderHook(() => useTailwind()).result.current;
 
-  const flatten = (s: any): Record<string, any>[] =>
-    !s
-      ? []
-      : Array.isArray(s)
-        ? s.flatMap(flatten)
-        : typeof s === 'object'
-          ? [s]
-          : [];
+  const flatten = (s: unknown): Record<string, unknown>[] => {
+    if (!s) {
+      return [];
+    }
+    if (Array.isArray(s)) {
+      return s.flatMap(flatten);
+    }
+    if (typeof s === 'object') {
+      return [s as Record<string, unknown>];
+    }
+    return [];
+  };
 
-  const pressableStyles = (btn: any) => flatten(btn.props.style);
-  const innerText = (queries: any, txt: string) =>
-    queries.getAllByText(txt).find((n: any) => Array.isArray(n.props.style))!;
+  const pressableStyles = (btn: { props: Record<string, unknown> }) =>
+    flatten(btn.props.style);
+  const innerText = (
+    queries: {
+      getAllByText: (txt: string) => { props?: { style?: unknown } }[];
+    },
+    txt: string,
+  ) => {
+    const textElements = queries.getAllByText(txt);
+    const textElement = textElements.find(
+      (n: { props?: { style?: unknown } }) => Array.isArray(n.props?.style),
+    );
+    if (!textElement) {
+      throw new Error(`Could not find text element with text: ${txt}`);
+    }
+    return textElement;
+  };
 
   it('renders transparent bg & full opacity by default', () => {
     const { getByTestId } = render(<TextButton testID="btn">Hi</TextButton>);
-    expect(pressableStyles(getByTestId('btn'))).toEqual(
+    expect(pressableStyles(getByTestId('btn'))).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({ backgroundColor: 'transparent' }),
         expect.objectContaining({ opacity: 1 }),
@@ -43,7 +63,7 @@ describe('TextButton', () => {
       </TextButton>,
     );
     const btn = getByTestId('btn');
-    expect(pressableStyles(btn)).toEqual(
+    expect(pressableStyles(btn)).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({ opacity: tw`opacity-50`.opacity }),
       ]),
@@ -53,7 +73,11 @@ describe('TextButton', () => {
 
   it('computes baselineOffset correctly for BodyMd', () => {
     const variant = MAP_TEXTBUTTON_SIZE_TEXTVARIANT[TextButtonSize.BodyMd];
-    const { fontSize = 0, lineHeight = 0 } = tw`text-${variant}` as any;
+    const twStyles = tw`text-${variant}` as {
+      fontSize?: number;
+      lineHeight?: number;
+    };
+    const { fontSize = 0, lineHeight = 0 } = twStyles;
     const expectedOffset = (lineHeight - fontSize) / 2;
 
     const { getByTestId } = render(
@@ -61,7 +85,7 @@ describe('TextButton', () => {
         X
       </TextButton>,
     );
-    expect(pressableStyles(getByTestId('btn'))).toEqual(
+    expect(pressableStyles(getByTestId('btn'))).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({
           transform: [{ translateY: expectedOffset }],
@@ -77,9 +101,10 @@ describe('TextButton', () => {
       );
       const txt = innerText({ getAllByText }, sz);
       const variant = MAP_TEXTBUTTON_SIZE_TEXTVARIANT[sz as TextButtonSize];
-      const { fontSize = 0 } = tw`text-${variant}` as any;
+      const twStyles = tw`text-${variant}` as { fontSize?: number };
+      const { fontSize = 0 } = twStyles;
 
-      expect(flatten(txt.props.style)).toEqual(
+      expect(flatten(txt.props?.style)).toStrictEqual(
         expect.arrayContaining([expect.objectContaining({ fontSize })]),
       );
       unmount();
@@ -93,15 +118,15 @@ describe('TextButton', () => {
       </TextButton>,
     );
 
-    expect(pressableStyles(getByTestId('btn'))).toEqual(
+    expect(pressableStyles(getByTestId('btn'))).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({ backgroundColor: 'transparent' }),
       ]),
     );
 
     const txt = innerText({ getAllByText }, 'Inv');
-    const styles = flatten(txt.props.style);
-    expect(styles).toEqual(
+    const styles = flatten(txt.props?.style);
+    expect(styles).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({ color: tw`text-primary-inverse`.color }),
         expect.objectContaining({ textDecorationLine: 'underline' }),
@@ -119,7 +144,7 @@ describe('TextButton', () => {
     const checkIcon = (id: string) => {
       const node = getByTestId(id);
       const size = Number(IconSize.Sm); // 16
-      expect(flatten(node.props.style)).toEqual(
+      expect(flatten(node.props.style)).toStrictEqual(
         expect.arrayContaining([
           expect.objectContaining({
             width: size,
@@ -143,28 +168,28 @@ describe('TextButton', () => {
         Stuff
       </TextButton>,
     );
-    expect(getByTestId('foo')).toBeTruthy();
-    expect(getByTestId('bar')).toBeTruthy();
+    expect(getByTestId('foo')).toBeDefined();
+    expect(getByTestId('bar')).toBeDefined();
   });
 
   it('applies bg-pressed when pressed, and reverts when released', () => {
-    const rtr = require('react-test-renderer');
-    const RN = require('react-native');
-    const tree = rtr.create(<TextButton>Press</TextButton>);
+    const tree = create(<TextButton>Press</TextButton>);
 
     const pressable = tree.root.findByType(RN.Pressable);
-    const styleFn = pressable.props.style as (p: { pressed: boolean }) => any[];
+    const styleFn = pressable.props.style as (p: {
+      pressed: boolean;
+    }) => unknown[];
 
     const defaultStyles = flatten(styleFn({ pressed: false }));
     const pressedStyles = flatten(styleFn({ pressed: true }));
 
-    expect(defaultStyles).toEqual(
+    expect(defaultStyles).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({ backgroundColor: 'transparent' }),
       ]),
     );
 
-    expect(pressedStyles).toEqual(
+    expect(pressedStyles).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({
           backgroundColor: tw`bg-pressed`.backgroundColor,
@@ -174,10 +199,7 @@ describe('TextButton', () => {
   });
 
   it('applies pressed text-colour & underline to text and start-icon', () => {
-    const rtr = require('react-test-renderer');
-    const RN = require('react-native');
-
-    const tree = rtr.create(
+    const tree = create(
       <TextButton startIconName={IconName.Add}>Tap</TextButton>,
     );
 
@@ -186,17 +208,18 @@ describe('TextButton', () => {
       pressed: boolean;
     }) => React.ReactElement;
 
-    const renderedDefault = rtr.create(renderChildren({ pressed: false })).root;
-    const renderedPressed = rtr.create(renderChildren({ pressed: true })).root;
+    const renderedDefault = create(renderChildren({ pressed: false })).root;
+    const renderedPressed = create(renderChildren({ pressed: true })).root;
 
-    const findText = (root: any) =>
-      root.findAll(
-        (n: any) => n.type === RN.Text && n.props.children === 'Tap',
-      )[0];
+    const findText = (root: ReactTestInstance) => {
+      return root
+        .findAll((n: ReactTestInstance) => n.type === RN.Text)
+        .filter((n: ReactTestInstance) => n.props.children === 'Tap')[0];
+    };
 
     const txtDefault = findText(renderedDefault);
     const txtDefStyles = flatten(txtDefault.props.style);
-    expect(txtDefStyles).toEqual(
+    expect(txtDefStyles).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({ color: tw`text-primary-default`.color }),
         expect.objectContaining({ textDecorationLine: 'none' }),
@@ -205,7 +228,7 @@ describe('TextButton', () => {
 
     const txtPressed = findText(renderedPressed);
     const txtPrStyles = flatten(txtPressed.props.style);
-    expect(txtPrStyles).toEqual(
+    expect(txtPrStyles).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining({
           color: tw`text-primary-default-pressed`.color,
