@@ -234,7 +234,12 @@ const WalletHome: React.FC = () => {
 
           {/* Ethereum */}
           <Pressable
-            style={tw`w-full flex-row items-center justify-between px-4 py-2 active:bg-pressed`}
+            style={({ pressed }) =>
+              tw.style(
+                'w-full flex-row items-center justify-between px-4 py-2',
+                pressed && 'bg-pressed',
+              )
+            }
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
@@ -308,7 +313,12 @@ const WalletHome: React.FC = () => {
 
           {/* Unibright */}
           <Pressable
-            style={tw`w-full flex-row items-center justify-between px-4 py-2 active:bg-pressed`}
+            style={({ pressed }) =>
+              tw.style(
+                'w-full flex-row items-center justify-between px-4 py-2',
+                pressed && 'bg-pressed',
+              )
+            }
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
@@ -371,7 +381,12 @@ const WalletHome: React.FC = () => {
 
           {/* Hopr */}
           <Pressable
-            style={tw`w-full flex-row items-center justify-between px-4 py-2 active:bg-pressed`}
+            style={({ pressed }) =>
+              tw.style(
+                'w-full flex-row items-center justify-between px-4 py-2',
+                pressed && 'bg-pressed',
+              )
+            }
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
@@ -434,7 +449,12 @@ const WalletHome: React.FC = () => {
 
           {/* USDC */}
           <Pressable
-            style={tw`w-full flex-row items-center justify-between px-4 py-2 active:bg-pressed`}
+            style={({ pressed }) =>
+              tw.style(
+                'w-full flex-row items-center justify-between px-4 py-2',
+                pressed && 'bg-pressed',
+              )
+            }
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
