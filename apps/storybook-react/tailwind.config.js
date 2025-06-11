@@ -18,9 +18,7 @@ module.exports = {
       black: '#000000',
       white: '#ffffff',
     },
-    fontSize: {
-      inherit: 'inherit', // Keep semantic font-size utility
-    }, // This removes all default Tailwind font sizes. We want to rely on the design system font sizes and enforce use of the Text component
+    fontSize: {}, // This removes all default Tailwind font sizes. We want to rely on the design system font sizes and enforce use of the Text component
     extend: {},
   },
   plugins: [],
