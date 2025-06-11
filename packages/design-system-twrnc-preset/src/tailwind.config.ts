@@ -58,6 +58,15 @@ export const generateTailwindConfig = (theme: Theme): TwConfig => {
 
   const config = {
     theme: {
+      // Keep essential semantic colors, remove default palette colors to enforce use of design system components
+      colors: {
+        inherit: 'inherit',
+        current: 'currentColor',
+        transparent: 'transparent',
+        black: '#000000',
+        white: '#ffffff',
+      },
+      fontSize: {},
       extend: {
         colors: {
           ...colors,
@@ -74,9 +83,7 @@ export const generateTailwindConfig = (theme: Theme): TwConfig => {
           ...colors, // Incorporate existing color utilities like border-primary-default
           ...borderColors, // e.g. border-default instead of border-border-default
         },
-        fontSize: {
-          ...typographyTailwindConfig.fontSize,
-        },
+        // fontSize removed to enforce use of Text component instead of arbitrary font size utilities
         fontFamily: {
           ...typographyTailwindConfig.fontFamily,
         },
