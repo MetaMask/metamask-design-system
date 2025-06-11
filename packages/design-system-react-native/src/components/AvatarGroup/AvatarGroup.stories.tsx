@@ -77,6 +77,14 @@ const AvatarGroupStory: React.FC<Omit<AvatarGroupProps, 'avatarPropsArr'>> = ({
           avatarPropsArr={SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR}
         />
       );
+    default:
+      return (
+        <AvatarGroup
+          {...props}
+          variant={AvatarGroupVariant.Favicon}
+          avatarPropsArr={SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR}
+        />
+      );
   }
 };
 

@@ -27,7 +27,7 @@ export const AvatarToken = ({
     imageOrSvgProps?.onImageError?.(e);
   };
 
-  const onSvgErrorHandler = (e: any) => {
+  const onSvgErrorHandler = (e: Error) => {
     setFallbackText(backupFallbackText);
     imageOrSvgProps?.onSvgError?.(e);
   };

@@ -7,9 +7,11 @@ import { AvatarAccount } from './AvatarAccount';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
 
 jest.mock('react-native-svg', () => {
-  const React = require('react');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const ReactMock = require('react');
   return {
-    SvgXml: (props: any) => React.createElement('SvgXml', props, props.xml),
+    SvgXml: (props: { xml: string; testID?: string }) =>
+      ReactMock.createElement('SvgXml', props, props.xml),
   };
 });
 jest.mock('react-native-jazzicon', () => {
@@ -27,7 +29,7 @@ describe('AvatarAccount', () => {
       />,
     );
     const jazzicon = await findByTestId('jazzicon');
-    expect(jazzicon).toBeTruthy();
+    expect(jazzicon).toBeDefined();
   });
 
   it('renders Blockies when variant is blockies', () => {
@@ -41,7 +43,7 @@ describe('AvatarAccount', () => {
       />,
     );
 
-    expect(getByTestId('blockies')).toBeTruthy();
+    expect(getByTestId('blockies')).toBeDefined();
   });
 
   it('renders Maskicon when variant is maskicon', async () => {
@@ -56,7 +58,7 @@ describe('AvatarAccount', () => {
     );
 
     const maskicon = await findByTestId('maskicon');
-    expect(maskicon).toBeTruthy();
+    expect(maskicon).toBeDefined();
   });
 
   it('respects the default size and shape', () => {
@@ -86,7 +88,7 @@ describe('AvatarAccount', () => {
     );
 
     const jazzicon = await findByTestId('jazzicon');
-    expect(jazzicon).toBeTruthy();
+    expect(jazzicon).toBeDefined();
     const avatarAccount = getByTestId('avatar-account');
     expect(avatarAccount).toBeDefined();
     expect(avatarAccount.props.style[0].width).toStrictEqual(
