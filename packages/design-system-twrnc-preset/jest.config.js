@@ -14,10 +14,6 @@ module.exports = merge(baseConfig, {
   // The display name when running multiple projects
   displayName,
 
-  // TODO add tests to twrnc preset https://github.com/MetaMask/metamask-design-system/issues/90
-  // Pass with no tests if no test files are found
-  passWithNoTests: true,
-
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
@@ -38,4 +34,11 @@ module.exports = merge(baseConfig, {
   moduleNameMapper: {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
   },
+  // Exclude pure type files from coverage since they contain no executable code
+  // Also exclude enum files that Jest has difficulty tracking coverage for
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    'typography\\.types\\.ts$',
+    'Theme\\.types\\.ts$',
+  ],
 });
