@@ -221,7 +221,7 @@ export const AccessibilityLabel: Story = {
           Reference an existing element that labels the button
         </Text>
         <div>
-          <Text variant={TextVariant.BodyMd} className="mb-2" asChild>
+          <Text variant={TextVariant.BodyMd} className="mb-2 block" asChild>
             <label id="save-label">Save your progress</label>
           </Text>
           <ButtonBase {...args} aria-labelledby="save-label">
@@ -242,7 +242,7 @@ export const AccessibilityLabel: Story = {
           <Text
             variant={TextVariant.BodySm}
             color={TextColor.TextAlternative}
-            className="mt-1"
+            className="mt-1 block"
             asChild
           >
             <label id="submit-description">
