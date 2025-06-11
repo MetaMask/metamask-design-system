@@ -445,7 +445,7 @@ describe('ButtonBase', () => {
 
       rerender(<ButtonBase>Active Button</ButtonBase>);
       button = screen.getByRole('button');
-      expect(button).toHaveAttribute('tabindex', '0');
+      expect(button).not.toHaveAttribute('tabindex');
     });
 
     it('does not set role and tabindex when asChild is true', () => {

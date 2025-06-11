@@ -49,7 +49,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
       if (asChild) {
         return undefined;
       }
-      return isDisabled ? -1 : 0;
+      return isDisabled ? -1 : undefined;
     };
 
     const renderLoadingState = () => (
