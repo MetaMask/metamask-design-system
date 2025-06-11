@@ -3,7 +3,7 @@ import React, { createRef } from 'react';
 
 import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconName } from '../Icon';
-import { ICON_SIZE_CLASS_MAP } from '../Icon/Icon.constants';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
 import { AvatarIcon } from './AvatarIcon';
 import {
@@ -47,7 +47,7 @@ describe('AvatarIcon', () => {
           />,
         );
         const icon = screen.getByTestId('icon');
-        expect(icon).toHaveClass(ICON_SIZE_CLASS_MAP[size]);
+        expect(icon).toHaveClass(TWCLASSMAP_ICON_SIZE_DIMENSION[size]);
       });
     });
   });
