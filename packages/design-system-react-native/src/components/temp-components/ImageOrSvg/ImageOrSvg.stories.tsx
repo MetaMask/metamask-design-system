@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import SampleLocalSvg from './assets/ethereum-eth-logo.svg';
 import { ImageOrSvg } from './ImageOrSvg';

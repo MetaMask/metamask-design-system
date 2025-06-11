@@ -1,5 +1,5 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import type { Meta, StoryObj } from '@storybook/react-native';
+import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 

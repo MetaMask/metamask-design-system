@@ -54,7 +54,7 @@
     "jest": "^29.7.0",
     "postcss": "^8.4.47",
     "ts-jest": "^29.2.5",
-    "typescript": "~5.2.2"
+    "typescript": "~5.3.3"
   },
   "peerDependencies": {
     "@metamask/design-tokens": "^7.1.0",
