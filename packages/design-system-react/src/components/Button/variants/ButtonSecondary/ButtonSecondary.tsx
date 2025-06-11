@@ -33,7 +33,7 @@ export const ButtonSecondary = forwardRef<
       // Inverse styles
       isInverse &&
         !isDanger && [
-          'bg-transparent border-2 border-primary-inverse text-primary-inverse',
+          'border-2 border-primary-inverse bg-transparent text-primary-inverse',
           // Loading state uses pressed color
           isLoading && 'bg-pressed',
         ],

@@ -41,7 +41,7 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
       ],
       // Non-floating styles
       !isFloating && [
-        'bg-transparent rounded',
+        'rounded bg-transparent',
         // Only apply hover/active styles when interactive
         isInteractive && 'hover:bg-hover active:bg-pressed',
         !isInverse && 'text-icon-default',

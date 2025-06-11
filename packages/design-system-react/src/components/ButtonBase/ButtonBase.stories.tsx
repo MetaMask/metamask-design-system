@@ -239,7 +239,7 @@ export const AccessibilityLabel: Story = {
           <ButtonBase {...args} aria-describedby="submit-description">
             Submit Form
           </ButtonBase>
-          <div id="submit-description" className="text-gray-600 mt-1 text-sm">
+          <div id="submit-description" className="text-gray-600 text-sm mt-1">
             This will submit your form and send you to the confirmation page
           </div>
         </div>

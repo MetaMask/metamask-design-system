@@ -21,7 +21,7 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
   ) => {
     const mergedClassName = twMerge(
       // Reset padding, height and animations
-      'bg-transparent h-auto rounded-none px-0',
+      'h-auto rounded-none bg-transparent px-0',
       'transform-none transition-none active:scale-100',
       // Default text button styles
       !isInverse && 'text-primary-default',
