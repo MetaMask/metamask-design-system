@@ -16,7 +16,7 @@ describe('BadgeNetwork', () => {
       />,
     );
     const renderedComponent = getByTestId('badge-network');
-    expect(renderedComponent).toBeTruthy();
+    expect(renderedComponent).toBeDefined();
     expect(renderedComponent.props.style[0].height.toString()).toStrictEqual(
       (Number(AvatarNetworkSize.Xs) + 2).toString(),
     );

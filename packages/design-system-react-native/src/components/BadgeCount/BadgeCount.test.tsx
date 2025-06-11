@@ -157,7 +157,7 @@ describe('BadgeCount', () => {
     const { getByTestId } = render(<TestComponent />);
     const container = getByTestId('badge-count');
     // The container style is an array; customStyle should be included.
-    expect(container.props.style).toEqual(
+    expect(container.props.style).toStrictEqual(
       expect.arrayContaining([customStyle]),
     );
     expect(container.props.accessibilityLabel).toBe('badge');
