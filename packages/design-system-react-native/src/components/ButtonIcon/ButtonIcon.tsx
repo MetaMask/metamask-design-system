@@ -28,11 +28,20 @@ export const ButtonIcon = ({
 }: ButtonIconProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
+
+  // Determine background color based on state
+  let backgroundColor = 'bg-transparent';
+  if (isFloating) {
+    backgroundColor = 'bg-icon-default';
+  } else if (isPressed) {
+    backgroundColor = 'bg-pressed';
+  }
+
   const twContainerClassNames = `
     items-center justify-center
     ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size]}
     ${isFloating ? 'rounded-full' : 'rounded-sm'}
-    ${isFloating ? 'bg-icon-default' : isPressed ? 'bg-pressed' : 'bg-transparent'}
+    ${backgroundColor}
     ${isDisabled ? 'opacity-50' : 'opacity-100'}
     ${twClassName}`;
 
