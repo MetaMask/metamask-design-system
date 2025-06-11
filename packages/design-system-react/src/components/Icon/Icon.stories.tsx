@@ -1,7 +1,8 @@
 import type { StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { IconName, IconSize, IconColor } from '../../types';
+import { IconName, IconSize, IconColor, TextVariant } from '../../types';
+import { Text } from '../Text/Text';
 
 import { Icon } from './Icon';
 import README from './README.mdx';
@@ -90,7 +91,7 @@ export const Default: Story = {
                 {...args}
                 name={IconName[iconKey as keyof typeof IconName]}
               />
-              <div className="text-center text-xs">{iconKey}</div>
+              <Text variant={TextVariant.BodyXs}>{iconKey}</Text>
             </div>
           ))}
         </div>
