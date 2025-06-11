@@ -7,13 +7,17 @@ import * as BoxStories from './Box.stories';
 `Box` is a low level flexbox layout component. It provides a focused set of props that map to Tailwind flexbox utility classes for easy flex-based layout control.
 
 ```tsx
-import { Box, BoxFlexDirection, BoxAlignItems } from '@metamask/design-system-react';
+import {
+  Box,
+  BoxFlexDirection,
+  BoxAlignItems,
+} from '@metamask/design-system-react';
 
 <Box
   flexDirection={BoxFlexDirection.Row}
   alignItems={BoxAlignItems.Center}
   gap={4}
-  className="p-4 bg-alternative"
+  className="bg-alternative p-4"
 >
   Content
 </Box>;
@@ -128,7 +132,11 @@ The `BoxSpacing` type provides a numeric scale (0-12) for the gap property. Each
 ### Basic Horizontal Layout
 
 ```tsx
-<Box flexDirection={BoxFlexDirection.Row} gap={3} alignItems={BoxAlignItems.Center}>
+<Box
+  flexDirection={BoxFlexDirection.Row}
+  gap={3}
+  alignItems={BoxAlignItems.Center}
+>
   <Text>Item 1</Text>
   <Text>Item 2</Text>
   <Text>Item 3</Text>
