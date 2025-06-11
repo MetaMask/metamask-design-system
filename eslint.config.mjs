@@ -29,8 +29,6 @@ const config = createConfig([
       // design system react native
       'packages/design-system-react-native/metro.config.js',
       'packages/design-system-react-native/jest.setup.js',
-      'packages/design-system-react-native/src/components/Icon/**/*.tsx',
-      'packages/design-system-react-native/src/components/Icon/Icon.assets.ts',
       'packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.test.tsx',
       'packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.tsx',
       'packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.tsx',
