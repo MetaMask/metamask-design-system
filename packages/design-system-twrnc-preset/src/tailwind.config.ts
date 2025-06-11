@@ -66,7 +66,10 @@ export const generateTailwindConfig = (theme: Theme): TwConfig => {
         black: '#000000',
         white: '#ffffff',
       },
-      fontSize: {},
+      fontSize: {
+        // Empty to remove default Tailwind font sizes (text-sm, text-lg, etc.)
+        // Design system font sizes added via extend
+      },
       extend: {
         colors: {
           ...colors,
