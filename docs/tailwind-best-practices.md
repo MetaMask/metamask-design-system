@@ -7,7 +7,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
 ### 1. Component-First Approach
 
 - **Use Design System Components**: Always prefer our design system components over raw JSX elements with Tailwind classes
-- **Props Over Classes**: Prefer component props to control variants and styles, but use `className` when no equivalent prop exists
+- **Props Over Classes**: Prefer component props to control variants and styles, but use `className`/`twClassname`/`tw` when no equivalent prop exists
 - **Example**:
 
   **React Web:**
