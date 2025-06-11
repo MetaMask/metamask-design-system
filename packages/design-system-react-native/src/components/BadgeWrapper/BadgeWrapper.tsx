@@ -101,7 +101,7 @@ export const BadgeWrapper = ({
   ]);
 
   return (
-    <View style={[tw`relative self-start`, style]} {...props}>
+    <View style={[tw`relative self-start ${twClassName}`, style]} {...props}>
       <View onLayout={getAnchorSize} {...childrenContainerProps}>
         {children}
       </View>
