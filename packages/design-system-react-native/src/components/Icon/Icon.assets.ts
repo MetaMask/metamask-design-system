@@ -1,8 +1,9 @@
-/* eslint-disable import/prefer-default-export */
 // /////////////////////////////////////////////////////
 // This is a generated file
-// DO NOT EDIT - Use generate-assets.js
+// DO NOT EDIT - Use generate-icons.js
 // /////////////////////////////////////////////////////
+import { IconName } from '../../types';
+
 import AccessibilitySVG from './assets/accessibility.svg';
 import ActivitySVG from './assets/activity.svg';
 import AddCardSVG from './assets/add-card.svg';
@@ -273,7 +274,6 @@ import WidgetsSVG from './assets/widgets.svg';
 import WifiOffSVG from './assets/wifi-off.svg';
 import WifiSVG from './assets/wifi.svg';
 import XSVG from './assets/x.svg';
-import { IconName } from '../../types';
 import type { AssetByIconName } from './Icon.types';
 
 /**
