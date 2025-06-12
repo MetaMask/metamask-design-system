@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-twrnc-preset",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Design System twrnc Preset",
   "keywords": [
     "MetaMask",
@@ -70,7 +70,7 @@
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
-    "@metamask/design-tokens": "^7.1.0",
+    "@metamask/design-tokens": "^8.0.0",
     "react": "^18.2.0"
   },
   "engines": {

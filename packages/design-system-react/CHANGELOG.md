@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0]
+
 ### Uncategorized
 
 - chore: removing default font sizes and colors ([#739](https://github.com/MetaMask/metamask-design-system/pull/739))
@@ -47,4 +49,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - chore: Added DisplayLG ([#607](https://github.com/MetaMask/metamask-design-system/pull/607))
 - chore: upgrading storybook and fixing theme ([#608](https://github.com/MetaMask/metamask-design-system/pull/608))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.1.0...HEAD
+[0.1.0]: https://github.com/MetaMask/metamask-design-system/releases/tag/@metamask/design-system-react@0.1.0
