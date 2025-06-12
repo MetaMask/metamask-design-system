@@ -53,6 +53,6 @@ module.exports = merge(
   },
   {
     // Use array replacement for collectCoverageFrom to ensure it overrides base config
-    arrayMerge: (destinationArray, sourceArray, options) => sourceArray,
+    arrayMerge: (_destinationArray, sourceArray, _options) => sourceArray,
   },
 );
