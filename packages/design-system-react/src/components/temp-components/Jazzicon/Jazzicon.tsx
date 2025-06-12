@@ -28,7 +28,7 @@ export const Jazzicon = ({
   useEffect(() => {
     let isCancelled = false;
 
-    (async () => {
+    const generateJazzicon = async () => {
       if (!containerRef.current) {
         return;
       }
@@ -72,7 +72,11 @@ export const Jazzicon = ({
       if (!isCancelled && containerRef.current) {
         containerRef.current.appendChild(newIcon.cloneNode(true));
       }
-    })();
+    };
+
+    generateJazzicon().catch(() => {
+      // Silently ignore errors during async generation
+    });
 
     // Cleanup
     return () => {

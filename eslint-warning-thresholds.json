@@ -19,10 +19,6 @@
     "@typescript-eslint/no-base-to-string": 1,
     "jest/no-conditional-in-test": 1
   },
-  "packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.utilities.ts": {
-    "jsdoc/require-param-description": 3,
-    "jsdoc/require-returns": 3
-  },
   "packages/design-system-react/src/types/index.ts": {
     "@typescript-eslint/no-shadow": 7
   },
