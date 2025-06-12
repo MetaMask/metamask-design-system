@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: added aliases for twrnc text, background, and border colors ([#731](https://github.com/MetaMask/metamask-design-system/pull/731))
+- chore: updating react native build pipelines to use ts-bridge ([#704](https://github.com/MetaMask/metamask-design-system/pull/704))
+- feat: background color updates: section, subsection, muted ([#682](https://github.com/MetaMask/metamask-design-system/pull/682))
+- chore: removing deprecated typography tokens ([#699](https://github.com/MetaMask/metamask-design-system/pull/699))
+- chore: updates to tailwind prettier configuration ([#683](https://github.com/MetaMask/metamask-design-system/pull/683))
+- chore: fixing button base storybook docs page ([#656](https://github.com/MetaMask/metamask-design-system/pull/656))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.0.1 to 5.0.2 ([#618](https://github.com/MetaMask/metamask-design-system/pull/618))
+- chore: Added DisplayLG ([#607](https://github.com/MetaMask/metamask-design-system/pull/607))
+- chore: upgrading storybook and fixing theme ([#608](https://github.com/MetaMask/metamask-design-system/pull/608))
+
 ## [7.1.0]
 
 ### Added
