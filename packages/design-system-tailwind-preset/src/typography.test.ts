@@ -113,11 +113,11 @@ describe('Typography', () => {
     const usedSet = new Set(usedVariables);
     const ignoredSet = new Set(ignoreList);
 
-    // Identify design token variables that are neither used nor ignored
+    // Filter out variables that are either used or explicitly ignored
     const unusedVariables = Array.from(designTokens).filter(
-      (varName) => !usedSet.has(varName) && !ignoredSet.has(varName),
+      (varName) => !usedSet.has(varName) && !ignoredSet.has(varName), // eslint-disable-line jest/no-conditional-in-test -- Legitimate data processing for test setup
     );
-    console.log(unusedVariables);
+
     // Expect no unused variables
     expect(unusedVariables).toHaveLength(0);
   });
