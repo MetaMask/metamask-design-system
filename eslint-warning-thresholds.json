@@ -35,15 +35,6 @@
   "packages/design-system-react/src/types/index.ts": {
     "@typescript-eslint/no-shadow": 7
   },
-  "packages/design-system-tailwind-preset/src/colors.test.ts": {
-    "jest/no-conditional-in-test": 1
-  },
-  "packages/design-system-tailwind-preset/src/index.test.ts": {
-    "jest/no-conditional-in-test": 3
-  },
-  "packages/design-system-tailwind-preset/src/typography.test.ts": {
-    "jest/no-conditional-in-test": 1
-  },
   "packages/design-tokens/src/js/brandColor/brandColor.test.ts": {
     "jest/no-conditional-in-test": 2
   },
