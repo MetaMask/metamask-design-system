@@ -9,17 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.5.0]
 
-### Uncategorized
+### Changed
 
-- chore: added aliases for twrnc text, background, and border colors ([#731](https://github.com/MetaMask/metamask-design-system/pull/731))
-- chore: updating react native build pipelines to use ts-bridge ([#704](https://github.com/MetaMask/metamask-design-system/pull/704))
-- chore: refactor twrnc preset ([#722](https://github.com/MetaMask/metamask-design-system/pull/722))
-- feat: design token updates for monochromatic buttons ([#709](https://github.com/MetaMask/metamask-design-system/pull/709))
-- feat: background color updates: section, subsection, muted ([#682](https://github.com/MetaMask/metamask-design-system/pull/682))
-- chore: removing deprecated typography tokens ([#699](https://github.com/MetaMask/metamask-design-system/pull/699))
-- fix: ESlint config ([#630](https://github.com/MetaMask/metamask-design-system/pull/630))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.0.1 to 5.0.2 ([#618](https://github.com/MetaMask/metamask-design-system/pull/618))
-- chore: Added DisplayLG ([#607](https://github.com/MetaMask/metamask-design-system/pull/607))
+- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^8.0.0` which includes several breaking changes:
+  - Font family tokens now use base font families (`--font-family-default`, `--font-family-accent`, `--font-family-hero`) instead of individual typography variant font families ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
+  - Primary font changed from Euclid Circular B to CentraNo1 ([#499](https://github.com/MetaMask/metamask-design-system/pull/499))
+  - Typography font size updates for Body variants on small screens ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
+- Updated typography configuration to use new base font family tokens ([#699](https://github.com/MetaMask/metamask-design-system/pull/699))
+- Updated build pipeline to use ts-bridge ([#704](https://github.com/MetaMask/metamask-design-system/pull/704))
+
+### Added
+
+- Added support for monochromatic button design tokens ([#709](https://github.com/MetaMask/metamask-design-system/pull/709))
+- Added background color tokens: section, subsection, muted ([#682](https://github.com/MetaMask/metamask-design-system/pull/682))
+- Added DisplayLG typography token support ([#607](https://github.com/MetaMask/metamask-design-system/pull/607))
 
 ## [0.4.0]
 
