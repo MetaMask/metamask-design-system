@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0]
+
 ### Uncategorized
 
 - [DSRN] fix: Resolved lint errors for Icons ([#744](https://github.com/MetaMask/metamask-design-system/pull/744))
@@ -48,4 +50,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [DSRN] Aligned AvatarBase ([#614](https://github.com/MetaMask/metamask-design-system/pull/614))
 - chore: Added DisplayLG ([#607](https://github.com/MetaMask/metamask-design-system/pull/607))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.1.0...HEAD
+[0.1.0]: https://github.com/MetaMask/metamask-design-system/releases/tag/@metamask/design-system-react-native@0.1.0
