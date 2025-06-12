@@ -3257,7 +3257,7 @@ __metadata:
     typescript: "npm:~5.2.2"
   peerDependencies:
     "@metamask/design-system-twrnc-preset": ^0.0.0
-    "@metamask/design-tokens": ^7.0.0
+    "@metamask/design-tokens": ^8.0.0
     "@metamask/utils": ^11.0.0
     "@solana/addresses": ^2.0.0
     bitcoin-address-validation: ">=2.0.0"
@@ -3301,7 +3301,7 @@ __metadata:
     ts-node: "npm:^10.9.1"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-tokens": ^7.1.0
+    "@metamask/design-tokens": ^8.0.0
     "@metamask/utils": ^11.0.0
     "@solana/addresses": ^2.0.0
     bitcoin-address-validation: ">=2.0.0"
@@ -3325,7 +3325,7 @@ __metadata:
     ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-tokens": ^7.1.0
+    "@metamask/design-tokens": ^8.0.0
     tailwindcss: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -3355,7 +3355,7 @@ __metadata:
     twrnc: "npm:^4.5.1"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-tokens": ^7.1.0
+    "@metamask/design-tokens": ^8.0.0
     react: ^18.2.0
   languageName: unknown
   linkType: soft
