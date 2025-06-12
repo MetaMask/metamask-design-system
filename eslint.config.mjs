@@ -106,7 +106,6 @@ const config = createConfig([
     },
   },
   {
-    // Specific jest configuration for twrnc-preset typography test files
     files: [
       'packages/design-system-twrnc-preset/src/typography.test.ts',
       'packages/design-system-twrnc-preset/src/typography.types.test.ts',
