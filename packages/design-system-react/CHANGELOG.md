@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Typography Components**: Text
 - **Icon Component**: Icon with comprehensive icon set
 - **Utility Components**: Blockies, Jazzicon, Maskicon
+- **Utilities**: twMerge utility for proper Tailwind class conflict resolution
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
