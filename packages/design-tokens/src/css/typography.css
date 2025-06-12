@@ -3,8 +3,7 @@
  */
 :root {
   /* font family */
-  --font-family-default: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial,
-    sans-serif;
+  --font-family-default: 'Geist', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-family-accent: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-family-hero: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   /* font sizes */

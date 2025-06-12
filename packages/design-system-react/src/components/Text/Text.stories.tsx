@@ -55,7 +55,7 @@ const meta: Meta<typeof Text> = {
       options: Object.keys(FontFamily),
       mapping: FontFamily,
       description:
-        'Optional prop to adjust the font family. Default: CentraNo1, Accent: MMSans, Hero: MMPoly',
+        'Optional prop to adjust the font family. Default: Geist, Accent: MMSans, Hero: MMPoly',
     },
     fontStyle: {
       control: 'select',
@@ -219,7 +219,7 @@ export const FontWeightStory: Story = {
 export const FontFamilyStory: Story = {
   render: () => (
     <div className="space-y-4">
-      <Text fontFamily={FontFamily.Default}>Default (CentraNo1)</Text>
+      <Text fontFamily={FontFamily.Default}>Default (Geist)</Text>
       <Text fontFamily={FontFamily.Accent}>Accent (MMSans)</Text>
       <Text fontFamily={FontFamily.Hero}>Hero (MMPoly)</Text>
     </div>

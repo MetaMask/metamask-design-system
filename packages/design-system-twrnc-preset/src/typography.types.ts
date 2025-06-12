@@ -37,7 +37,7 @@ export type FontStyle = 'normal' | 'italic';
  * {
  *   fontSize: {
  *     'display-md': {
- *       fontFamily: 'CentraNo1-Bold',
+ *       fontFamily: 'Geist-Bold',
  *       fontSize: '32',
  *       fontWeight: '700',
  *       letterSpacing: '0',
@@ -46,13 +46,13 @@ export type FontStyle = 'normal' | 'italic';
  *   },
  *   fontFamily: {
  *     sans: [
- *       'CentraNo1',
+ *       'Geist',
  *       'Helvetica Neue',
  *       'Helvetica',
  *       'Arial',
  *       'sans-serif',
  *     ],
- *     'display-md': 'CentraNo1',
+ *     'display-md': 'Geist',
  *   },
  *   letterSpacing: {
  *     'display-md': '0',
