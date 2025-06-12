@@ -106,25 +106,6 @@ const config = createConfig([
     },
   },
   {
-    files: [
-      'packages/design-system-twrnc-preset/src/typography.test.ts',
-      'packages/design-system-twrnc-preset/src/typography.types.test.ts',
-    ],
-    extends: [jest],
-    rules: {
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-      'jest/no-conditional-in-test': 'warn',
-      'jest/prefer-lowercase-title': 'warn',
-      'jest/prefer-strict-equal': 'warn',
-    },
-    settings: {
-      node: {
-        version: `^${NODE_LTS_VERSION}`,
-      },
-    },
-  },
-  {
     files: ['**/*.test.{js,ts,tsx}'],
     extends: [jest],
     rules: {
