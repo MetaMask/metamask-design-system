@@ -9,17 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.0.0]
 
-### Uncategorized
+### Changed
 
-- chore: added aliases for twrnc text, background, and border colors ([#731](https://github.com/MetaMask/metamask-design-system/pull/731))
-- chore: updating react native build pipelines to use ts-bridge ([#704](https://github.com/MetaMask/metamask-design-system/pull/704))
-- feat: background color updates: section, subsection, muted ([#682](https://github.com/MetaMask/metamask-design-system/pull/682))
-- chore: removing deprecated typography tokens ([#699](https://github.com/MetaMask/metamask-design-system/pull/699))
-- chore: updates to tailwind prettier configuration ([#683](https://github.com/MetaMask/metamask-design-system/pull/683))
-- chore: fixing button base storybook docs page ([#656](https://github.com/MetaMask/metamask-design-system/pull/656))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.0.1 to 5.0.2 ([#618](https://github.com/MetaMask/metamask-design-system/pull/618))
-- chore: Added DisplayLG ([#607](https://github.com/MetaMask/metamask-design-system/pull/607))
-- chore: upgrading storybook and fixing theme ([#608](https://github.com/MetaMask/metamask-design-system/pull/608))
+- **BREAKING:** Updated `background.muted` from opaque colors to transparent colors and added new `background.section` and `background.subsection` tokens ([#682](https://github.com/MetaMask/metamask-design-system/pull/682)). This is a breaking change that affects components requiring opaque backgrounds like BadgeNetwork, avatar fallbacks, and non-action elements. Applications must swap `background.muted` with `background.section` for opaque backgrounds.
+- **BREAKING:** Removed deprecated typography tokens `sHeadingSMRegular` and `lHeadingSMRegular` ([#699](https://github.com/MetaMask/metamask-design-system/pull/699)). Choose an appropriate replacement typography token based on your design needs. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
+- **BREAKING:** Completed removal of deprecated typography font family tokens in favor of base font family tokens ([#699](https://github.com/MetaMask/metamask-design-system/pull/699)). See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
+- **BREAKING:** Updated build system to use ts-bridge for React Native compatibility ([#704](https://github.com/MetaMask/metamask-design-system/pull/704)). This changes the package structure and may affect direct imports.
+
+### Added
+
+- Added DisplayLG typography token for larger display text ([#607](https://github.com/MetaMask/metamask-design-system/pull/607))
 
 ## [7.1.0]
 
