@@ -101,17 +101,47 @@ The HeadingSMRegular tokens have been removed as they were deprecated. You shoul
 
 Consult with your design team to determine the most suitable replacement for each specific use case.
 
-#### Font Family Token Removal
+#### Font Family Change (Breaking Changes)
 
-All individual typography font family tokens have been completely removed. Use the base font family tokens instead:
+Version 8.0.0 changes the default font from CentraNo1 to Geist. This is a breaking change that affects all typography tokens and requires updating font imports and references.
 
-```css
-/* Use these base tokens instead */
---font-family-default: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial,
-  sans-serif;
---font-family-accent: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
---font-family-hero: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-```
+#### Key Changes
+
+**Default font family has changed:**
+
+- **Before**: `'CentraNo1', 'Helvetica Neue', Helvetica, Arial, sans-serif`
+- **After**: `'Geist', 'Helvetica Neue', Helvetica, Arial, sans-serif`
+
+#### Migration Steps
+
+1. **Update Font Imports**:
+
+   - Remove any imports of CentraNo1 font files
+   - Add imports for Geist font files
+   - Update any font-face declarations in your CSS
+
+2. **Update Font References**:
+
+   ```css
+   /* Update font family references */
+   --font-family-default: 'Geist', 'Helvetica Neue', Helvetica, Arial,
+     sans-serif;
+   ```
+
+3. **Test Typography**:
+
+   - Review all text components to ensure they render correctly with Geist
+   - Check for any layout shifts or spacing issues
+   - Verify font weights and styles are applied correctly
+
+4. **Update Custom Font Stacks**:
+
+   - If you have custom font stacks that include CentraNo1, update them to use Geist
+   - Ensure fallback fonts are appropriate for your use case
+
+5. **React Native Specific**:
+   - Update any React Native font configurations
+   - Test font rendering on both iOS and Android
 
 ### Migration Steps
 
@@ -199,6 +229,15 @@ In version 7.0.0, we've simplified the typography system by removing individual 
 --typography-l-body-sm-bold-font-family
 --typography-l-body-xs-font-family
 --typography-l-body-xs-medium-font-family
+```
+
+Use these base tokens instead:
+
+```css
+--font-family-default: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial,
+  sans-serif;
+--font-family-accent: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+--font-family-hero: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 ```
 
 ##### JS Tokens

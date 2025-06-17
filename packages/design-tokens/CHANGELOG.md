@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING:** Removed deprecated typography tokens `sHeadingSMRegular` and `lHeadingSMRegular` ([#699](https://github.com/MetaMask/metamask-design-system/pull/699)). Choose an appropriate replacement typography token based on your design needs. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
 - **BREAKING:** Completed removal of deprecated typography font family tokens in favor of base font family tokens ([#699](https://github.com/MetaMask/metamask-design-system/pull/699)). See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
 - **BREAKING:** Updated build system to use ts-bridge for React Native compatibility ([#704](https://github.com/MetaMask/metamask-design-system/pull/704)). This changes the package structure and may affect direct imports.
+- **BREAKING:** Changed default font from CentraNo1 to Geist ([#756](https://github.com/MetaMask/metamask-design-system/pull/756)). This affects all typography tokens and requires updating font imports and references. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
 
 ### Added
 
