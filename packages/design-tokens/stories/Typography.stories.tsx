@@ -48,7 +48,7 @@ export const FontFamily: StoryFn<typeof Text> = (...args) => {
   return (
     <>
       <Text style={styles.default} {...args}>
-        Centra No1
+        Geist
       </Text>
       <Text style={styles.accent} {...args}>
         MM Sans
