@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.0.0]
+
+### Added
+
+- Added DisplayLG typography token for larger display text ([#607](https://github.com/MetaMask/metamask-design-system/pull/607))
+
+### Changed
+
+- **BREAKING:** Updated `background.muted` from opaque colors to transparent colors and added new `background.section` and `background.subsection` tokens ([#682](https://github.com/MetaMask/metamask-design-system/pull/682)). This is a breaking change that affects components requiring opaque backgrounds like BadgeNetwork, avatar fallbacks, and non-action elements. Applications must swap `background.muted` with `background.section` for opaque backgrounds.
+- **BREAKING:** Removed deprecated typography tokens `sHeadingSMRegular` and `lHeadingSMRegular` ([#699](https://github.com/MetaMask/metamask-design-system/pull/699)). Choose an appropriate replacement typography token based on your design needs. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
+- **BREAKING:** Changed default font from CentraNo1 to Geist ([#756](https://github.com/MetaMask/metamask-design-system/pull/756)). This affects all typography tokens and requires updating font imports and references. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
+
 ## [7.1.0]
 
 ### Added
@@ -367,7 +379,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.1.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.0.0...HEAD
+[8.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.1.0...@metamask/design-tokens@8.0.0
 [7.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.0.0...@metamask/design-tokens@7.1.0
 [7.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.1.0...@metamask/design-tokens@7.0.0
 [6.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.0.1...@metamask/design-tokens@6.1.0
