@@ -18,11 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^8.0.0` which includes several breaking changes:
-  - Font family tokens now use base font families (`--font-family-default`, `--font-family-accent`, `--font-family-hero`) instead of individual typography variant font families ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
-  - Primary font changed from Euclid Circular B to CentraNo1 ([#499](https://github.com/MetaMask/metamask-design-system/pull/499))
-  - Typography font size updates for Body variants on small screens ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
-- Updated typography configuration to use new base font family tokens ([#699](https://github.com/MetaMask/metamask-design-system/pull/699))
-- Updated build pipeline to use ts-bridge ([#704](https://github.com/MetaMask/metamask-design-system/pull/704))
+  - Default font changed from CentraNo1 to Geist ([#699](https://github.com/MetaMask/metamask-design-system/pull/699))
 
 ## [0.4.0]
 
