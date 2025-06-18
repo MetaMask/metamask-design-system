@@ -1,7 +1,7 @@
 import type { FontFamilies } from './types';
 
 export const fontFamilies: FontFamilies = {
-  default: 'CentraNo1',
+  default: 'Geist',
   accent: 'MMSans',
   hero: 'MMPoly',
 };
