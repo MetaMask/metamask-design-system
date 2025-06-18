@@ -36,7 +36,7 @@ export type TextProps = {
   fontWeight?: FontWeight;
   /**
    * Optional prop to adjust the font family.
-   * Default: CentraNo1
+   * Default: Geist
    * Accent: MMSans
    * Hero: MMPoly
    */

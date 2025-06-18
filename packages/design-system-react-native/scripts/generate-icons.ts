@@ -63,15 +63,16 @@ export async function main(): Promise<void> {
 
   await fs.promises.appendFile(
     assetsModulePath,
-    `/* eslint-disable import/prefer-default-export */`,
+    `// /////////////////////////////////////////////////////\n// This is a generated file\n// DO NOT EDIT - Use generate-icons.js\n// /////////////////////////////////////////////////////`,
   );
 
   await fs.promises.appendFile(
     assetsModulePath,
-    `\n// /////////////////////////////////////////////////////\n// This is a generated file\n// DO NOT EDIT - Use generate-assets.js\n// /////////////////////////////////////////////////////`,
+    `\nimport { IconName } from '../../types';`,
   );
 
-  // Append the SVG imports first
+  await fs.promises.appendFile(assetsModulePath, '\n');
+
   for (const fileName of assetFileList) {
     const iconName = getIconNameInTitleCase(fileName);
     await fs.promises.appendFile(
@@ -80,11 +81,6 @@ export async function main(): Promise<void> {
     );
   }
 
-  // Separate IconName (runtime) and AssetByIconName (type-only) imports
-  await fs.promises.appendFile(
-    assetsModulePath,
-    `\nimport { IconName } from '../../types';`,
-  );
   await fs.promises.appendFile(
     assetsModulePath,
     `\nimport type { AssetByIconName } from './Icon.types';`,

@@ -2,15 +2,6 @@
   "packages/design-system-react-native/global.d.ts": {
     "@typescript-eslint/naming-convention": 1
   },
-  "packages/design-system-react-native/src/components/BadgeCount/BadgeCount.test.tsx": {
-    "jest/prefer-strict-equal": 1
-  },
-  "packages/design-system-react-native/src/components/BadgeIcon/BadgeIcon.test.tsx": {
-    "jest/prefer-strict-equal": 1
-  },
-  "packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.tsx": {
-    "@typescript-eslint/no-unused-vars": 1
-  },
   "packages/design-system-react-native/src/types/index.ts": {
     "@typescript-eslint/no-shadow": 4
   },
@@ -27,10 +18,6 @@
   "packages/design-system-react/src/components/Icon/template.test.ts": {
     "@typescript-eslint/no-base-to-string": 1,
     "jest/no-conditional-in-test": 1
-  },
-  "packages/design-system-react/src/components/temp-components/Jazzicon/Jazzicon.utilities.ts": {
-    "jsdoc/require-param-description": 3,
-    "jsdoc/require-returns": 3
   },
   "packages/design-system-react/src/types/index.ts": {
     "@typescript-eslint/no-shadow": 7

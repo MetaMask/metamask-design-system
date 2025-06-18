@@ -15,7 +15,7 @@ import { BadgeWrapper } from './BadgeWrapper';
 const roundPositions = (pos: {
   [key: string]: number;
 }): { [key: string]: number } => {
-  const result: any = {};
+  const result: { [key: string]: number } = {};
   Object.keys(pos).forEach((key) => {
     result[key] = Number(pos[key].toFixed(2));
   });

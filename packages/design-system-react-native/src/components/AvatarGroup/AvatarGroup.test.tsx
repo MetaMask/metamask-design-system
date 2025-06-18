@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { AvatarGroupVariant, AvatarGroupSize } from '../../types';
+import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
+import type { AvatarAccountProps } from '../AvatarAccount';
 
 import { AvatarGroup } from './AvatarGroup';
 import {
@@ -31,7 +32,7 @@ describe('AvatarGroup', () => {
       expect(getAllByTestId('avatar-account')).toHaveLength(4);
       expect(
         getByText(`+${sampleAvatarGroupAccountArr.length - 4}`),
-      ).toBeTruthy();
+      ).toBeDefined();
     });
 
     it(`respects custom max and size for Account variant`, () => {
@@ -49,7 +50,7 @@ describe('AvatarGroup', () => {
       expect(getAllByTestId('avatar-account')).toHaveLength(customMax);
       expect(
         getByText(`+${sampleAvatarGroupAccountArr.length - customMax}`),
-      ).toBeTruthy();
+      ).toBeDefined();
     });
   });
 
@@ -72,7 +73,7 @@ describe('AvatarGroup', () => {
       expect(getAllByTestId('avatar-favicon')).toHaveLength(4);
       expect(
         getByText(`+${sampleAvatarGroupFaviconArr.length - 4}`),
-      ).toBeTruthy();
+      ).toBeDefined();
     });
 
     it(`respects custom max and size for Favicon variant`, () => {
@@ -90,7 +91,7 @@ describe('AvatarGroup', () => {
       expect(getAllByTestId('avatar-favicon')).toHaveLength(customMax);
       expect(
         getByText(`+${sampleAvatarGroupFaviconArr.length - customMax}`),
-      ).toBeTruthy();
+      ).toBeDefined();
     });
   });
 
@@ -113,7 +114,7 @@ describe('AvatarGroup', () => {
       expect(getAllByTestId('avatar-network')).toHaveLength(4);
       expect(
         getByText(`+${sampleAvatarGroupNetworkArr.length - 4}`),
-      ).toBeTruthy();
+      ).toBeDefined();
     });
 
     it(`respects custom max and size for Network variant`, () => {
@@ -131,7 +132,7 @@ describe('AvatarGroup', () => {
       expect(getAllByTestId('avatar-network')).toHaveLength(customMax);
       expect(
         getByText(`+${sampleAvatarGroupNetworkArr.length - customMax}`),
-      ).toBeTruthy();
+      ).toBeDefined();
     });
   });
 
@@ -154,7 +155,7 @@ describe('AvatarGroup', () => {
       expect(getAllByTestId('avatar-token')).toHaveLength(4);
       expect(
         getByText(`+${sampleAvatarGroupTokenArr.length - 4}`),
-      ).toBeTruthy();
+      ).toBeDefined();
     });
 
     it(`respects custom max and size for Token variant`, () => {
@@ -172,7 +173,7 @@ describe('AvatarGroup', () => {
       expect(getAllByTestId('avatar-token')).toHaveLength(customMax);
       expect(
         getByText(`+${sampleAvatarGroupTokenArr.length - customMax}`),
-      ).toBeTruthy();
+      ).toBeDefined();
     });
   });
 
@@ -187,10 +188,8 @@ describe('AvatarGroup', () => {
     );
 
     const container = getByTestId('group');
-    const style = Array.isArray(container.props.style)
-      ? container.props.style[0]
-      : container.props.style;
-    expect(style.flexDirection).toBe('row-reverse');
+    const containerStyle = container.props.style[0];
+    expect(containerStyle.flexDirection).toBe('row-reverse');
   });
 
   it('forwards twClassName and style props to container', () => {
@@ -219,7 +218,7 @@ describe('AvatarGroup', () => {
         max={4}
       />,
     );
-    expect(queryByText(/\+\d+/)).toBeNull();
+    expect(queryByText(/\+\d+/u)).toBeNull();
   });
 
   it('throws an error for an invalid variant', () => {
@@ -229,7 +228,7 @@ describe('AvatarGroup', () => {
       render(
         <AvatarGroup
           variant={invalidVariant}
-          avatarPropsArr={[{} as any]}
+          avatarPropsArr={[{ testID: 'test' }] as AvatarAccountProps[]}
           testID="avatar-group"
         />,
       ),

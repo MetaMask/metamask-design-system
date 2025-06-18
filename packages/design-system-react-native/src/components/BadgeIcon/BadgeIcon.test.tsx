@@ -52,7 +52,7 @@ describe('BadgeIcon', () => {
     };
     const { getByTestId } = render(<TestComponent />);
     const badgeIcon = getByTestId('badge-icon');
-    expect(badgeIcon.props.style[1]).toEqual(customStyle);
+    expect(badgeIcon.props.style[1]).toStrictEqual(customStyle);
     expect(badgeIcon.props.accessibilityLabel).toBe('badge-icon');
   });
 });
