@@ -231,15 +231,6 @@ In version 7.0.0, we've simplified the typography system by removing individual 
 --typography-l-body-xs-medium-font-family
 ```
 
-Use these base tokens instead:
-
-```css
---font-family-default: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial,
-  sans-serif;
---font-family-accent: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
---font-family-hero: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-```
-
 ##### JS Tokens
 
 ```javascript
