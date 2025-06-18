@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0]
+
+### Added
+
+- Added support for monochromatic button design tokens ([#709](https://github.com/MetaMask/metamask-design-system/pull/709))
+- Added background color tokens: section, subsection, muted ([#682](https://github.com/MetaMask/metamask-design-system/pull/682))
+- Added DisplayLG typography token support ([#607](https://github.com/MetaMask/metamask-design-system/pull/607))
+
+### Changed
+
+- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^8.0.0` which includes several breaking changes:
+  - Changed default font from CentraNo1 to Geist ([#756](https://github.com/MetaMask/metamask-design-system/pull/756)). This affects all typography tokens and requires updating font imports and references. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
+
 ## [0.4.0]
 
 ### Added
@@ -37,7 +50,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.4.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.5.0...HEAD
+[0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.4.0...@metamask/design-system-tailwind-preset@0.5.0
 [0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.3.0...@metamask/design-system-tailwind-preset@0.4.0
 [0.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.2.0...@metamask/design-system-tailwind-preset@0.3.0
 [0.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.1.0...@metamask/design-system-tailwind-preset@0.2.0
