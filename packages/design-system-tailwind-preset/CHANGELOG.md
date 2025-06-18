@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^8.0.0` which includes several breaking changes:
-  - Default font changed from CentraNo1 to Geist ([#699](https://github.com/MetaMask/metamask-design-system/pull/699))
+  - Changed default font from CentraNo1 to Geist ([#756](https://github.com/MetaMask/metamask-design-system/pull/756)). This affects all typography tokens and requires updating font imports and references. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
 
 ## [0.4.0]
 
