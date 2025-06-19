@@ -17,20 +17,20 @@ In version 8.0.0, we've made significant changes to background color tokens that
 
 #### Key Changes
 
-**`background.muted` is now transparent:**
+**`background/muted` is now transparent:**
 
 - **Before**: `grey050 | grey800` (opaque colors)
 - **After**: `#3C4D9D 10% | E0E5FF 15%` (transparent colors)
 
 **New opaque tokens added:**
 
-- `background.section`: `grey050 | grey800` (replaces the old opaque `background.muted`)
-- `background.subsection`: `grey000 | grey700`
+- `background/section`: `grey050 | grey800` (replaces the old opaque `background/muted`)
+- `background/subsection`: `grey000 | grey700`
 
 **Updated transparent hover/pressed states:**
 
-- `background.muted-hover`: `#3C4D9D 15% | E0E5FF 20%`
-- `background.muted-pressed`: `#3C4D9D 20% | E0E5FF 25%`
+- `background/muted-hover`: `#3C4D9D 15% | E0E5FF 20%`
+- `background/muted-pressed`: `#3C4D9D 20% | E0E5FF 25%`
 
 #### Breaking Change Impact
 
