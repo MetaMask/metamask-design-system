@@ -5,14 +5,15 @@
     "jsx": "react-native",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node16"
+    "moduleResolution": "Node16",
+    "types": ["node", "jest", "@testing-library/react-native"]
   },
   "references": [
     {
       "path": "../design-system-twrnc-preset"
     }
   ],
-  "include": ["src/**/*", "global.d.ts"],
+  "include": ["src/**/*", "scripts/**/*", "global.d.ts"],
   "exclude": [
     "jest.config.js",
     ".eslintrc.js",
