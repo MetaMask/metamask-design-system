@@ -63,14 +63,14 @@ describe('AvatarBase', () => {
   it('merges custom className with default classes', () => {
     render(
       <AvatarBase
-        className="custom-class"
+        className="bg-default"
         fallbackText="A"
         data-testid="avatar"
       />,
     );
 
     const avatar = screen.getByTestId('avatar');
-    expect(avatar).toHaveClass('custom-class');
+    expect(avatar).toHaveClass('bg-default');
     expect(avatar).toHaveClass('rounded-full');
   });
 

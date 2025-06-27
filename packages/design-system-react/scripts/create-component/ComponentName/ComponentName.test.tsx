@@ -11,9 +11,9 @@ describe('ComponentName Component', () => {
 
   it('applies the correct classes', () => {
     render(
-      <ComponentName className="custom-class">Styled Content</ComponentName>,
+      <ComponentName className="bg-default">Styled Content</ComponentName>,
     );
-    expect(screen.getByText('Styled Content')).toHaveClass('custom-class');
+    expect(screen.getByText('Styled Content')).toHaveClass('bg-default');
     // Add more class-related tests as needed
   });
 

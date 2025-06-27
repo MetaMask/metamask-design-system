@@ -59,11 +59,9 @@ describe('BadgeCount', () => {
     expect(text).toHaveClass('text-primary-default');
   });
   it('merges custom className with default classes', () => {
-    render(
-      <BadgeCount count={9} className="custom-class" data-testid="badge" />,
-    );
+    render(<BadgeCount count={9} className="bg-default" data-testid="badge" />);
     const badge = screen.getByTestId('badge');
-    expect(badge).toHaveClass('custom-class');
+    expect(badge).toHaveClass('bg-default');
     expect(badge).toHaveClass('bg-error-default');
   });
 

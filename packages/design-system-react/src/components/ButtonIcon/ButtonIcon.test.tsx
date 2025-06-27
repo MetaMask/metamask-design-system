@@ -124,12 +124,12 @@ describe('ButtonIcon', () => {
       <ButtonIcon
         iconName={IconName.Close}
         ariaLabel="Custom"
-        className="my-btn"
+        className="bg-default"
         style={{ margin: 4 }}
       />,
     );
     const btn = screen.getByRole('button');
-    expect(btn).toHaveClass('my-btn');
+    expect(btn).toHaveClass('bg-default');
     expect(btn).toHaveStyle({ margin: '4px' });
   });
 

@@ -23,11 +23,11 @@ describe('ButtonTertiary', () => {
 
   it('merges custom className with default styles', () => {
     render(
-      <ButtonTertiary className="custom-class">Button Tertiary</ButtonTertiary>,
+      <ButtonTertiary className="bg-default">Button Tertiary</ButtonTertiary>,
     );
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('custom-class');
+    expect(button).toHaveClass('bg-default');
     expect(button).toHaveClass('bg-transparent');
   });
 

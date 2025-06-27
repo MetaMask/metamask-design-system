@@ -51,7 +51,7 @@ const WalletHome: React.FC = () => {
       {/* Container */}
       <Box twClassName="w-full bg-default py-4">
         {/* Header */}
-        <Box twClassName="border-b border-muted px-4 py-4">
+        <Box twClassName="border-b border-muted p-4">
           <Box
             flexDirection={BoxFlexDirection.Row}
             alignItems={BoxAlignItems.Center}
@@ -101,7 +101,7 @@ const WalletHome: React.FC = () => {
         </Box>
 
         {/* Balance */}
-        <Box twClassName="px-4 py-4">
+        <Box twClassName="p-4">
           <Text variant={TextVariant.DisplayMd}>$10,528.46</Text>
           <Box
             flexDirection={BoxFlexDirection.Row}
@@ -113,11 +113,7 @@ const WalletHome: React.FC = () => {
         </Box>
 
         {/* Actions */}
-        <Box
-          flexDirection={BoxFlexDirection.Row}
-          gap={3}
-          twClassName="px-4 py-4"
-        >
+        <Box flexDirection={BoxFlexDirection.Row} gap={3} twClassName="p-4">
           <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
             <Box
               flexDirection={BoxFlexDirection.Column}
@@ -206,7 +202,7 @@ const WalletHome: React.FC = () => {
             flexDirection={BoxFlexDirection.Row}
             alignItems={BoxAlignItems.Center}
             justifyContent={BoxJustifyContent.Between}
-            twClassName="px-4 py-4"
+            twClassName="p-4"
           >
             <Box
               flexDirection={BoxFlexDirection.Row}

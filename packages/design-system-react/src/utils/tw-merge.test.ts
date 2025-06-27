@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-contradicting-classname */
 import { twMerge } from './tw-merge';
 
 describe('twMerge utility', () => {
@@ -42,13 +43,14 @@ describe('twMerge utility', () => {
     });
 
     it('should handle custom typography font weight overrides', () => {
-      const result = twMerge('font-s-body-md font-l-heading-lg');
-      expect(result).toBe('font-l-heading-lg');
+      // eslint-disabled-next-line
+      const result = twMerge('text-l-heading-lg text-s-body-md');
+      expect(result).toBe('text-l-heading-lg');
     });
 
     it('should handle mixed standard and custom font weight overrides', () => {
-      const result = twMerge('font-s-body-md font-bold');
-      expect(result).toBe('font-bold');
+      const result = twMerge('font-bold font-regular');
+      expect(result).toBe('font-regular');
     });
   });
 

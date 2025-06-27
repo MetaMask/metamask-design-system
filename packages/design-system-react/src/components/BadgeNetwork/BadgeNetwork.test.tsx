@@ -25,13 +25,13 @@ describe('BadgeNetwork', () => {
       <BadgeNetwork
         name="StyleNet"
         src="s.png"
-        className="my-badge"
+        className="bg-default"
         style={{ backgroundColor: 'hotpink' }}
         data-testid="badge"
       />,
     );
     const wrapper = screen.getByTestId('badge');
-    expect(wrapper).toHaveClass('my-badge');
+    expect(wrapper).toHaveClass('bg-default');
     expect(wrapper).toHaveStyle({ backgroundColor: 'hotpink' });
   });
 });

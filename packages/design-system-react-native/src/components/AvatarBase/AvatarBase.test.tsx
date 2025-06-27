@@ -524,13 +524,13 @@ describe('AvatarBase', () => {
       'rounded-full',
       TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[AvatarBaseSize.Md],
     ].join(' ');
-    const customClasses = `${baseClasses} extra-class`;
+    const customClasses = `${baseClasses} bg-default`;
     const expectedStyle = tw`${customClasses}`;
 
     const customStyle = { margin: 42 };
     const { getByTestId } = render(
       <AvatarBase
-        twClassName="extra-class"
+        twClassName="bg-default"
         style={customStyle}
         accessibilityLabel="my-avatar"
         testID="avatar"
