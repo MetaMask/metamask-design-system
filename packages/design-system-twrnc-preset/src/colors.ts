@@ -59,7 +59,9 @@ const flattenColors = (
 
     if (typeof value === 'string') {
       result[newKey] = value;
-    } else if (typeof value === 'object' && value !== null) {
+    }
+
+    if (typeof value === 'object' && value !== null) {
       Object.assign(
         result,
         flattenColors(value as Record<string, unknown>, newKey),
