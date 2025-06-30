@@ -50,12 +50,12 @@ describe('BadgeIcon', () => {
     render(
       <BadgeIcon
         iconName={IconName.User}
-        className="custom-class"
+        className="bg-default"
         data-testid="badge-icon"
       />,
     );
     const badgeIcon = screen.getByTestId('badge-icon');
-    expect(badgeIcon).toHaveClass('custom-class');
+    expect(badgeIcon).toHaveClass('bg-default');
   });
 
   it('forwards ref to the root div', () => {

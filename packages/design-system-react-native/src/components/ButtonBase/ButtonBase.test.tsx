@@ -60,7 +60,7 @@ describe('ButtonBase', () => {
   });
 
   it('applies custom className when provided', () => {
-    const customClass = 'bg-red-500';
+    const customClass = 'bg-default';
     const { getByTestId } = render(
       <ButtonBase twClassName={customClass} testID="btn">
         Custom button

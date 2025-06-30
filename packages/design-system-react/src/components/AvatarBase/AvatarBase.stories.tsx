@@ -163,21 +163,21 @@ export const Children: Story = {
         <img
           src={SAMPLE_AVATARBASE_URIS[0]}
           alt="Eth"
-          className="h-full w-full object-contain"
+          className="size-full object-contain"
         />
       </AvatarBase>
       <AvatarBase>
         <img
           src={SAMPLE_AVATARBASE_URIS[0]}
           alt="Eth"
-          className="h-full w-full object-contain"
+          className="size-full object-contain"
         />
       </AvatarBase>
       <AvatarBase>
         <img
           src={SAMPLE_AVATARBASE_URIS[1]}
           alt="Eth"
-          className="h-full w-full object-contain"
+          className="size-full object-contain"
         />
       </AvatarBase>
       {/* Icon */}

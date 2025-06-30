@@ -45,11 +45,11 @@ describe('ButtonPrimary', () => {
 
   it('merges custom className with default styles', () => {
     render(
-      <ButtonPrimary className="custom-class">Primary Button</ButtonPrimary>,
+      <ButtonPrimary className="bg-default">Primary Button</ButtonPrimary>,
     );
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('custom-class');
+    expect(button).toHaveClass('bg-default');
     expect(button).toHaveClass('bg-icon-default');
   });
 

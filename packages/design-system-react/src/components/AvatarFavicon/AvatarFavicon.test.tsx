@@ -21,13 +21,13 @@ describe('AvatarFavicon', () => {
     render(
       <AvatarFavicon
         name="Demo"
-        className="foo-bar"
+        className="bg-default"
         style={{ margin: 4 }}
         data-testid="cont"
       />,
     );
     const cont = screen.getByTestId('cont');
-    expect(cont).toHaveClass('foo-bar');
+    expect(cont).toHaveClass('bg-default');
     expect(cont).toHaveStyle({ margin: '4px' });
   });
 
