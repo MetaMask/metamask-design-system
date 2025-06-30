@@ -128,14 +128,14 @@ describe('Jazzicon', () => {
           address="0xdef"
           size={48}
           data-testid="jazzicon"
-          className="test-class"
+          className="bg-default"
           style={{ backgroundColor: 'red' }}
         />,
       );
 
       await waitFor(() => {
         const container = screen.getByTestId('jazzicon');
-        expect(container).toHaveClass('test-class');
+        expect(container).toHaveClass('bg-default');
         expect(container).toHaveStyle('background-color: red');
         expect(container.childNodes.length).toBeGreaterThan(0);
       });

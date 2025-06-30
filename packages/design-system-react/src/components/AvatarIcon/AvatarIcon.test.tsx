@@ -77,12 +77,12 @@ describe('AvatarIcon', () => {
     render(
       <AvatarIcon
         iconName={IconName.AddSquare}
-        className="custom-class"
+        className="bg-default"
         data-testid="avatar-icon"
       />,
     );
     const avatarIcon = screen.getByTestId('avatar-icon');
-    expect(avatarIcon).toHaveClass('custom-class');
+    expect(avatarIcon).toHaveClass('bg-default');
   });
 
   it('applies custom icon props', () => {
