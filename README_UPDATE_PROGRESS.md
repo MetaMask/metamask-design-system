@@ -1,121 +1,70 @@
-# README.mdx Template Alignment Progress
+# README.mdx Standardization Progress
 
-## Template Structure
-All README.mdx files are being updated to follow the standardized template structure:
+## Overview
+This document tracks the progress of updating all README.mdx files in the `@metamask/design-system-react` package to align with the standardized template structure.
 
-1. **Import Structure**: Use `@storybook/blocks` for `Controls` and `Canvas`
-2. **Component Description**: Clear, concise description
-3. **Props Documentation**: Each prop with table format including TYPE, REQUIRED, DEFAULT
-4. **Story Integration**: Include relevant story examples
-5. **Component API**: Always include Controls block
-6. **Usage Example**: Include import statement and basic usage
-7. **References**: Link to MetaMask Design System Guides
+## Standardized Template Requirements
+- Import structure using `@storybook/blocks` for `Controls` and `Canvas`
+- Clear component descriptions
+- Props documentation with table format (TYPE, REQUIRED, DEFAULT columns)
+- Story integration with Canvas components
+- Component API section with Controls
+- Usage examples with import statements
+- References to MetaMask Design System Guides
 
-## Completed Files ✅
+## Status Summary
+**Total Files**: 26 README.mdx files  
+**Already Standardized**: 19 files (73%)  
+**Need Updates**: 7 files (27%)  
 
-1. **Button** - `packages/design-system-react/src/components/Button/README.mdx`
-   - Updated with proper table structure for all props
-   - All variants, size, loading states, icons documented
+## Files Already Following Standardized Template ✅
 
-2. **Text** - `packages/design-system-react/src/components/Text/README.mdx`
-   - Updated with comprehensive prop tables
-   - All variants, colors, font properties documented
+1. **Button/README.mdx** - Comprehensive button props with proper table structure
+2. **Text/README.mdx** - Complex typography component with detailed prop tables
+3. **Box/README.mdx** - Flexbox layout component with proper documentation
+4. **Icon/README.mdx** - Icon component with size, color, and name props
+5. **AvatarBase/README.mdx** - Base avatar component with shape, size, and border props
+6. **Checkbox/README.mdx** - Form control with comprehensive prop documentation
+7. **ButtonBase/README.mdx** - Base button component with detailed prop tables
+8. **TextButton/README.mdx** - Text-only button component with proper structure
+9. **AvatarAccount/README.mdx** - Account avatar with variant and size props
+10. **AvatarIcon/README.mdx** - Icon avatar with severity and size props
+11. **AvatarNetwork/README.mdx** - Network avatar with name, src, and fallback props
+12. **AvatarFavicon/README.mdx** - Favicon avatar with similar structure
+13. **AvatarToken/README.mdx** - Token avatar with consistent prop tables
+14. **AvatarGroup/README.mdx** - Avatar group component with variant and positioning props
+15. **BadgeCount/README.mdx** - Numeric badge with count, size, and max props
+16. **BadgeIcon/README.mdx** - Icon badge with proper table structure
+17. **BadgeStatus/README.mdx** - Status badge with status and size props
+18. **BadgeNetwork/README.mdx** - Network badge with name, src, and fallback props
+19. **BadgeWrapper/README.mdx** - Complex positioning component with comprehensive props
 
-3. **Box** - `packages/design-system-react/src/components/Box/README.mdx` 
-   - Updated with flexbox layout props tables
-   - All flex properties and spacing documented
+## Files Needing Updates ❌
 
-4. **Icon** - `packages/design-system-react/src/components/Icon/README.mdx`
-   - Updated with size, color, name prop tables
-   - All icon properties documented
+### Main Components (1 file)
+- **ButtonIcon/README.mdx** - Using ### headers instead of table format
 
-5. **AvatarBase** - `packages/design-system-react/src/components/AvatarBase/README.mdx`
-   - Updated with shape, size, border prop tables
-   - All avatar base properties documented
+### Button Variants (3 files)
+- **Button/variants/ButtonPrimary/README.mdx** - Using ### headers instead of table format
+- **Button/variants/ButtonSecondary/README.mdx** - Using ### headers instead of table format  
+- **Button/variants/ButtonTertiary/README.mdx** - Using ### headers instead of table format
 
-6. **Checkbox** - `packages/design-system-react/src/components/Checkbox/README.mdx`
-   - Updated with comprehensive prop tables
-   - All form control properties documented
+### Temp Components (3 files)
+- **temp-components/Blockies/README.mdx** - Using ### headers instead of table format
+- **temp-components/Jazzicon/README.mdx** - Using ### headers instead of table format
+- **temp-components/Maskicon/README.mdx** - Using ### headers instead of table format
 
-7. **ButtonBase** - `packages/design-system-react/src/components/ButtonBase/README.mdx`
-   - Updated with all button base props in table format
-   - Icons, loading, accessibility documented
-
-8. **TextButton** - `packages/design-system-react/src/components/TextButton/README.mdx`
-   - Updated with size variants and text-specific props
-   - All text button properties documented
-
-9. **AvatarAccount** - `packages/design-system-react/src/components/AvatarAccount/README.mdx`
-   - Updated with variant, size, and account-specific props
-   - All avatar account properties documented
-
-10. **AvatarIcon** - `packages/design-system-react/src/components/AvatarIcon/README.mdx`
-    - Updated with severity, size, and icon-specific props
-    - All avatar icon properties documented
-
-11. **AvatarNetwork** - `packages/design-system-react/src/components/AvatarNetwork/README.mdx`
-    - Updated with name, src, fallback text props
-    - All avatar network properties documented
-
-12. **AvatarFavicon** - `packages/design-system-react/src/components/AvatarFavicon/README.mdx`
-    - Updated with favicon-specific props and table structure
-    - All dapp/website favicon properties documented
-
-13. **AvatarToken** - `packages/design-system-react/src/components/AvatarToken/README.mdx`
-    - Updated with token-specific props and table structure
-    - All token logo properties documented
-
-14. **AvatarGroup** - `packages/design-system-react/src/components/AvatarGroup/README.mdx`
-    - Updated complex component with condensed table structure
-    - All avatar grouping and stacking properties documented
-
-## Remaining Files 🔄
-
-### Avatar Components
-- [x] AvatarAccount - ✅ COMPLETED
-- [x] AvatarBase - ✅ COMPLETED  
-- [x] AvatarFavicon - ✅ COMPLETED
-- [x] AvatarGroup - ✅ COMPLETED
-- [x] AvatarIcon - ✅ COMPLETED
-- [x] AvatarNetwork - ✅ COMPLETED
-- [x] AvatarToken - ✅ COMPLETED
-
-### Badge Components  
-- [ ] BadgeCount - `packages/design-system-react/src/components/BadgeCount/README.mdx`
-- [ ] BadgeIcon - `packages/design-system-react/src/components/BadgeIcon/README.mdx`
-- [ ] BadgeNetwork - `packages/design-system-react/src/components/BadgeNetwork/README.mdx`
-- [ ] BadgeStatus - `packages/design-system-react/src/components/BadgeStatus/README.mdx`
-- [ ] BadgeWrapper - `packages/design-system-react/src/components/BadgeWrapper/README.mdx`
-
-### Button Components
-- [x] Button - ✅ COMPLETED
-- [x] ButtonBase - ✅ COMPLETED
-- [ ] ButtonIcon - `packages/design-system-react/src/components/ButtonIcon/README.mdx`
-
-### Button Variants
-- [ ] ButtonPrimary - `packages/design-system-react/src/components/Button/variants/ButtonPrimary/README.mdx`
-- [ ] ButtonSecondary - `packages/design-system-react/src/components/Button/variants/ButtonSecondary/README.mdx`
-- [ ] ButtonTertiary - `packages/design-system-react/src/components/Button/variants/ButtonTertiary/README.mdx`
-
-### Temp Components
-- [ ] Blockies - `packages/design-system-react/src/components/temp-components/Blockies/README.mdx`
-- [ ] Jazzicon - `packages/design-system-react/src/components/temp-components/Jazzicon/README.mdx`
-- [ ] Maskicon - `packages/design-system-react/src/components/temp-components/Maskicon/README.mdx`
-
-## Total Progress
-- ✅ Completed: 14/26 files (54%)
-- 🔄 Remaining: 12/26 files (46%)
+## Update Progress
+- [ ] ButtonIcon/README.mdx
+- [ ] Button/variants/ButtonPrimary/README.mdx
+- [ ] Button/variants/ButtonSecondary/README.mdx
+- [ ] Button/variants/ButtonTertiary/README.mdx
+- [ ] temp-components/Blockies/README.mdx
+- [ ] temp-components/Jazzicon/README.mdx
+- [ ] temp-components/Maskicon/README.mdx
 
 ## Next Steps
-1. Continue with remaining Avatar components (AvatarFavicon, AvatarGroup, AvatarToken)
-2. Process all Badge components as a group
-3. Update ButtonIcon and Button variants
-4. Handle temp components last (as they may have different patterns)
-
-All updates follow the exact template structure with:
-- Proper import statements
-- Table-formatted prop documentation
-- Canvas story integration
-- Component API controls
-- Usage examples
-- Reference links
+1. Update ButtonIcon component to use proper table format
+2. Update Button variants to follow standardized structure
+3. Update temp-components to use consistent table format
+4. Verify all files follow the complete standardized template
