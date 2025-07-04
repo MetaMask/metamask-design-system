@@ -4,68 +4,259 @@ import * as AvatarAccountStories from './AvatarAccount.stories';
 
 # AvatarAccount
 
-Avatar reserved for representing accounts inside of an avatar
-
-```tsx
-import { AvatarAccount } from '@metamask/design-system-react';
-
-<AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />;
-```
+Avatar reserved for representing accounts inside of an avatar.
 
 <Canvas of={AvatarAccountStories.Default} />
 
 ## Props
 
-### Address (required)
+### `address`
 
 The `address` prop is required and is used as a unique identifier to generate the avatar art. Each address will produce a distinct visual representation.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarAccountStories.Address} />
 
-### Variant
+### `variant`
 
-The `variant` prop controls the type of avatar art rendered. It accepts two options:
+The `variant` prop controls the type of avatar art rendered.
 
-- `AvatarAccountVariant.Jazzicon` (default): Displays a Jazzicon.
-- `AvatarAccountVariant.Blockies`: Displays a Blockies avatar.
-- `AvatarAccountVariant.Maskicon`: Displays a Maskicon avatar.
+Available variants:
+- `AvatarAccountVariant.Jazzicon` - Displays a Jazzicon
+- `AvatarAccountVariant.Blockies` - Displays a Blockies avatar
+- `AvatarAccountVariant.Maskicon` - Displays a Maskicon avatar
 
-Access to the Jazzicon, Blockies, Maskicon children components is available through the `jazziconProps`, `blockiesProps`, and `maskiconProps` props respectively.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>AvatarAccountVariant</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>AvatarAccountVariant.Jazzicon</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={AvatarAccountStories.Variant} />
 
-### Size
+### `size`
 
-AvatarAccount supports five sizes:
+AvatarAccount supports five sizes.
 
+Available sizes:
 - `AvatarAccountSize.Xs` (16px)
 - `AvatarAccountSize.Sm` (24px)
-- `AvatarAccountSize.Md` (32px) - default
+- `AvatarAccountSize.Md` (32px)
 - `AvatarAccountSize.Lg` (40px)
 - `AvatarAccountSize.Xl` (48px)
 
-The avatar art scales according to the selected size.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>AvatarAccountSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>AvatarAccountSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={AvatarAccountStories.Size} />
 
-### Has Border
+### `hasBorder`
 
 The `hasBorder` prop enables a border around the AvatarAccount.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarAccountStories.HasBorder} />
 
-### Class Name
+### `jazziconProps`
 
-Use the `className` prop to apply custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to add new styles or override defaults as needed.
+Access to the Jazzicon children component properties when variant is set to Jazzicon.
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>JazziconProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-<AvatarAccount
-  address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-  className="mx-2 my-4"
-/>
-```
+### `blockiesProps`
+
+Access to the Blockies children component properties when variant is set to Blockies.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BlockiesProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `maskiconProps`
+
+Access to the Maskicon children component properties when variant is set to Maskicon.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>MaskiconProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 
@@ -74,3 +265,9 @@ Example:
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+```tsx
+import { AvatarAccount } from '@metamask/design-system-react';
+
+<AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />;
+```

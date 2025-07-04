@@ -1,68 +1,155 @@
 import { Controls, Canvas } from '@storybook/blocks';
+
 import * as IconStories from './Icon.stories';
 
 # Icon
 
 Icons are read-only symbols that represent ideas or objects, offered in standard sizes.
 
-```tsx
-import { Icon, IconName } from '@metamask/design-system-react';
-
-<Icon name={IconName.AddSquare} />;
-```
-
 <Canvas of={IconStories.Default} />
 
 ## Props
 
-### Name
+### `name`
 
 Use the `name` prop and the `IconName` enum to specify which icon to display.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={IconStories.Name} />
 
-### Size
+### `size`
 
 Use the `size` prop and the `IconSize` enum to change the size of the icon.
 
 Available sizes:
-
 - `IconSize.Xs` (12px)
 - `IconSize.Sm` (16px)
-- `IconSize.Md` (20px) - Default
+- `IconSize.Md` (20px)
 - `IconSize.Lg` (24px)
 - `IconSize.Xl` (32px)
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>IconSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={IconStories.Size} />
 
-### Color
+### `color`
 
 Use the `color` prop and the `IconColor` enum to change the color of the icon.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconColor</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>IconColor.IconDefault</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={IconStories.Color} />
 
-### Class Name
+### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Adding new styles
-<Icon className="my-4 mx-2" name={IconName.AddSquare} />
+### `style`
 
-// Overriding default styles
-<Icon className="text-inherit" name={IconName.AddSquare} />
-```
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
-Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
-
-### Style
-
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 
@@ -71,3 +158,9 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+```tsx
+import { Icon, IconName } from '@metamask/design-system-react';
+
+<Icon name={IconName.AddSquare} />;
+```

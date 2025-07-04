@@ -1,9 +1,10 @@
 import { Controls, Canvas } from '@storybook/blocks';
+
 import * as BadgeWrapperStories from './BadgeWrapper.stories';
 
 # BadgeWrapper
 
-The `BadgeWrapper` positions a badge on top of another element.
+BadgeWrapper positions a badge on top of another element.
 
 <Canvas of={BadgeWrapperStories.Default} />
 
@@ -11,11 +12,9 @@ The `BadgeWrapper` positions a badge on top of another element.
 
 ### `position`
 
-Optional prop to control the preset position of the badge.  
-This prop gets used along with `positionAnchorShape`, `positionXOffset`, and `positionYOffset` to determine the final position.
+Optional prop to control the preset position of the badge. This prop gets used along with `positionAnchorShape`, `positionXOffset`, and `positionYOffset` to determine the final position.
 
 Available positions:
-
 - `BadgeWrapperPosition.TopRight`
 - `BadgeWrapperPosition.TopLeft`
 - `BadgeWrapperPosition.BottomLeft`
@@ -31,11 +30,11 @@ Available positions:
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td align="left">
         <code>BadgeWrapperPosition</code>
       </td>
-      <td>No</td>
-      <td>
+      <td align="left">No</td>
+      <td align="left">
         <code>BadgeWrapperPosition.BottomRight</code>
       </td>
     </tr>
@@ -44,14 +43,11 @@ Available positions:
 
 <Canvas of={BadgeWrapperStories.Position} />
 
----
-
 ### `positionAnchorShape`
 
-Optional prop to determine the shape of the anchoring element.  
-This prop gets used along with `position`, `positionXOffset`, and `positionYOffset` to determine the final position.  
-Possible values:
+Optional prop to determine the shape of the anchoring element. This prop gets used along with `position`, `positionXOffset`, and `positionYOffset` to determine the final position.
 
+Available shapes:
 - `BadgeWrapperPositionAnchorShape.Circular`
 - `BadgeWrapperPositionAnchorShape.Rectangular`
 
@@ -65,11 +61,11 @@ Possible values:
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td align="left">
         <code>BadgeWrapperPositionAnchorShape</code>
       </td>
-      <td>No</td>
-      <td>
+      <td align="left">No</td>
+      <td align="left">
         <code>BadgeWrapperPositionAnchorShape.Circular</code>
       </td>
     </tr>
@@ -78,12 +74,9 @@ Possible values:
 
 <Canvas of={BadgeWrapperStories.PositionAnchorShape} />
 
----
-
 ### `positionXOffset`
 
-Optional prop to move the preset position horizontally.  
-This prop gets used along with `position`, `positionAnchorShape`, and `positionYOffset` to determine the final position.
+Optional prop to move the preset position horizontally. This prop gets used along with `position`, `positionAnchorShape`, and `positionYOffset` to determine the final position.
 
 <table>
   <thead>
@@ -95,11 +88,11 @@ This prop gets used along with `position`, `positionAnchorShape`, and `positionY
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td align="left">
         <code>number</code>
       </td>
-      <td>No</td>
-      <td>
+      <td align="left">No</td>
+      <td align="left">
         <code>0</code>
       </td>
     </tr>
@@ -108,12 +101,9 @@ This prop gets used along with `position`, `positionAnchorShape`, and `positionY
 
 <Canvas of={BadgeWrapperStories.PositionXOffset} />
 
----
-
 ### `positionYOffset`
 
-Optional prop to move the preset position vertically.  
-This prop gets used along with `position`, `positionAnchorShape`, and `positionXOffset` to determine the final position.
+Optional prop to move the preset position vertically. This prop gets used along with `position`, `positionAnchorShape`, and `positionXOffset` to determine the final position.
 
 <table>
   <thead>
@@ -125,11 +115,11 @@ This prop gets used along with `position`, `positionAnchorShape`, and `positionX
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td align="left">
         <code>number</code>
       </td>
-      <td>No</td>
-      <td>
+      <td align="left">No</td>
+      <td align="left">
         <code>0</code>
       </td>
     </tr>
@@ -138,13 +128,9 @@ This prop gets used along with `position`, `positionAnchorShape`, and `positionX
 
 <Canvas of={BadgeWrapperStories.PositionYOffset} />
 
----
-
 ### `customPosition`
 
-Optional prop to customize the position through a position object.  
-Shape of the object: `{ top?: number\|string; right?: number\|string; bottom?: number\|string; left?: number\|string }`.  
-If provided, this overrides the preset `position` + offsets.
+Optional prop to customize the position through a position object. Shape of the object: `{ top?: number|string; right?: number|string; bottom?: number|string; left?: number|string }`. If provided, this overrides the preset `position` + offsets.
 
 <table>
   <thead>
@@ -156,11 +142,11 @@ If provided, this overrides the preset `position` + offsets.
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td align="left">
         <code>BadgeWrapperCustomPosition</code>
       </td>
-      <td>No</td>
-      <td>
+      <td align="left">No</td>
+      <td align="left">
         <code>undefined</code>
       </td>
     </tr>
@@ -168,8 +154,6 @@ If provided, this overrides the preset `position` + offsets.
 </table>
 
 <Canvas of={BadgeWrapperStories.CustomPosition} />
-
----
 
 ### `children`
 
@@ -185,18 +169,16 @@ The element that the badge will attach itself to. Additional props can be passed
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td align="left">
         <code>ReactNode</code>
       </td>
-      <td>Yes</td>
-      <td>
-        <code>—</code>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
       </td>
     </tr>
   </tbody>
 </table>
-
----
 
 ### `badge`
 
@@ -212,12 +194,12 @@ Any element that will be placed in the position of the badge. Additional props c
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td align="left">
         <code>ReactNode</code>
       </td>
-      <td>Yes</td>
-      <td>
-        <code>—</code>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
       </td>
     </tr>
   </tbody>
@@ -225,12 +207,62 @@ Any element that will be placed in the position of the badge. Additional props c
 
 <Canvas of={BadgeWrapperStories.Badge} />
 
----
+### `childrenContainerProps`
+
+Additional props can be passed to the children container.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `badgeContainerProps`
+
+Additional props can be passed to the badge container.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### `className`
 
-Optional prop for additional CSS classes to be applied to the BadgeWrapper component.  
-These classes will be merged with the component’s default classes using `twMerge`.
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
 <table>
   <thead>
@@ -242,22 +274,20 @@ These classes will be merged with the component’s default classes using `twMer
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td align="left">
         <code>string</code>
       </td>
-      <td>No</td>
-      <td>
+      <td align="left">No</td>
+      <td align="left">
         <code>undefined</code>
       </td>
     </tr>
   </tbody>
 </table>
-
----
 
 ### `style`
 
-Optional prop to control the style of the outer wrapper.
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
 <table>
   <thead>
@@ -269,22 +299,20 @@ Optional prop to control the style of the outer wrapper.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <code>React.CSSProperties</code>
+      <td align="left">
+        <code>object</code>
       </td>
-      <td>No</td>
-      <td>
+      <td align="left">No</td>
+      <td align="left">
         <code>undefined</code>
       </td>
     </tr>
   </tbody>
 </table>
-
----
 
 ### `data-testid`
 
-Optional prop to add a test id to the outermost `<div>` for testing.
+Optional prop to add a test id to the outermost element for testing.
 
 <table>
   <thead>
@@ -296,18 +324,16 @@ Optional prop to add a test id to the outermost `<div>` for testing.
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td align="left">
         <code>string</code>
       </td>
-      <td>No</td>
-      <td>
+      <td align="left">No</td>
+      <td align="left">
         <code>undefined</code>
       </td>
     </tr>
   </tbody>
 </table>
-
----
 
 ## Component API
 
@@ -316,3 +342,13 @@ Optional prop to add a test id to the outermost `<div>` for testing.
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+```tsx
+import { BadgeWrapper, BadgeStatus, BadgeStatusStatus } from '@metamask/design-system-react';
+
+<BadgeWrapper
+  badge={<BadgeStatus status={BadgeStatusStatus.Active} />}
+>
+  <div>Content with badge</div>
+</BadgeWrapper>;
+```

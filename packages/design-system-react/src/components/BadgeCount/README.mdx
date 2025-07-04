@@ -4,58 +4,172 @@ import * as BadgeCountStories from './BadgeCount.stories';
 
 # BadgeCount
 
-`BadgeCount` is a numeric indicator of unread messages or notifications on an app or UI element.
-
-```tsx
-import { BadgeCount } from '@metamask/design-system-react';
-
-<BadgeCount count={5} />;
-```
+BadgeCount is a numeric indicator of unread messages or notifications on an app or UI element.
 
 <Canvas of={BadgeCountStories.Default} />
 
 ## Props
 
-### Size
+### `count`
 
-BadgeCount supports two sizes:
+Required numeric value displayed in the badge.
 
-- `BadgeCountSize.Md` (14px height) – default
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `size`
+
+BadgeCount supports two sizes.
+
+Available sizes:
+- `BadgeCountSize.Md` (14px height)
 - `BadgeCountSize.Lg` (20px height)
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BadgeCountSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BadgeCountSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={BadgeCountStories.Size} />
 
-### Count and Max
+### `max`
 
-- **count**: Required numeric value displayed in the badge.
-- **max**: Optional upper bound. If `count > max`, it displays as `"max+"`. Default is `99`.
+Optional upper bound. If `count > max`, it displays as `"max+"`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>99</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={BadgeCountStories.Max} />
 
-### Class Name
+### `textProps`
 
-Use the `className` prop to add custom CSS classes to the component. These classes are merged with the component's default classes using `twMerge`, allowing you to:
+Optional props for the text component displaying the count.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Adding new styles
-<BadgeCount count={3} className="my-2 mx-1" />
-
-// Overriding default styles
-<BadgeCount
-  count={5}
-  className="bg-primary-default"
-  textProps={{ color: TextColor.PrimaryInverse }}
-/>
-```
-
-### Style
+### `style`
 
 The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 
@@ -64,3 +178,9 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+```tsx
+import { BadgeCount } from '@metamask/design-system-react';
+
+<BadgeCount count={5} />;
+```

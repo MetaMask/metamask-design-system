@@ -4,7 +4,357 @@ import * as CheckboxStories from './Checkbox.stories';
 
 # Checkbox
 
-`Checkbox` allows users to select one or more options from a set of choices.
+Checkbox allows users to select one or more options from a set of choices.
+
+<Canvas of={CheckboxStories.Default} />
+
+## Props
+
+### `id`
+
+Required unique identifier for the checkbox input element. This is used for the input's id and the label's htmlFor attributes to ensure proper accessibility and form association.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `isSelected`
+
+Required prop to determine whether the checkbox is currently selected. This component is fully controlled, so you must manage this state in your parent component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={CheckboxStories.IsSelected} />
+
+### `onChange`
+
+Required callback for when the checked state changes. Use this to update your state.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>function</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `isDisabled`
+
+Optional prop that when true, disables the checkbox.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={CheckboxStories.IsDisabled} />
+
+### `isInvalid`
+
+Optional prop that when true, displays the invalid/error state of the checkbox.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={CheckboxStories.IsInvalid} />
+
+### `label`
+
+Optional label prop that renders text or a React node as a label beside the checkbox.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={CheckboxStories.Label} />
+
+### `labelProps`
+
+Optional props to be passed to the label's Text component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `inputProps`
+
+Optional props passed to the input element. This allows you to pass additional attributes like data-testid, aria-describedby, etc.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `checkboxContainerProps`
+
+Optional props passed to the container div wrapping the checkbox icon.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `checkedIconProps`
+
+Optional props to be passed to the check Icon component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `ref`
+
+The Checkbox component exposes an imperative API through refs that allows for programmatic control. The `toggle` method allows a parent component to programmatically toggle the checkbox state.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Ref</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={CheckboxStories.Ref} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={CheckboxStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
 
 ```tsx
 import { Checkbox } from '@metamask/design-system-react';
@@ -19,160 +369,3 @@ const [isSelected, setIsSelected] = useState(false);
   onChange={() => setIsSelected(!isSelected)}
 />;
 ```
-
-<Canvas of={CheckboxStories.Default} />
-
-## Props
-
-### `id`
-
-Required unique identifier for the checkbox input element. This is used for the input's id and the label's htmlFor attributes to ensure proper accessibility and form association.
-
-```tsx
-<Checkbox
-  id="accept-terms"
-  label="I accept the terms"
-  isSelected={false}
-  onChange={() => {}}
-/>
-```
-
----
-
-### `isSelected`
-
-Required prop to determine whether the checkbox is currently selected. This component is fully controlled, so you must manage this state in your parent component.
-
-<Canvas of={CheckboxStories.IsSelected} />
-
----
-
-### `isDisabled`
-
-Optional prop that when true, disables the checkbox.
-
-<Canvas of={CheckboxStories.IsDisabled} />
-
----
-
-### `isInvalid`
-
-Optional prop that when true, displays the invalid/error state of the checkbox.
-
-<Canvas of={CheckboxStories.IsInvalid} />
-
----
-
-### `label`
-
-Optional label prop that renders text or a React node as a label beside the checkbox.
-
-<Canvas of={CheckboxStories.Label} />
-
----
-
-### `labelProps`
-
-Optional props to be passed to the label's Text component.
-
-```tsx
-<Checkbox
-  id="styled-label"
-  label="Label"
-  labelProps={{ className: 'text-muted' }}
-/>
-```
-
----
-
-### `onChange`
-
-Required callback for when the checked state changes. Use this to update your state.
-
-```tsx
-import { useState } from 'react';
-
-const [isSelected, setIsSelected] = useState(false);
-
-<Checkbox
-  id="toggle-checkbox"
-  label="Check me"
-  isSelected={isSelected}
-  onChange={() => setIsSelected(!isSelected)}
-/>;
-```
-
----
-
-### `inputProps`
-
-Optional props passed to the input element. This allows you to pass additional attributes like data-testid, aria-describedby, etc.
-
-```tsx
-<Checkbox
-  id="accessible-checkbox"
-  inputProps={{
-    'data-testid': 'my-checkbox',
-    'aria-describedby': 'help-text',
-  }}
-/>
-```
-
----
-
-### `checkboxContainerProps`
-
-Optional props passed to the container div wrapping the checkbox icon.
-
-```tsx
-<Checkbox
-  id="styled-container"
-  checkboxContainerProps={{ className: 'bg-success-default' }}
-/>
-```
-
----
-
-### `checkedIconProps`
-
-Optional props to be passed to the check Icon component.
-
-```tsx
-<Checkbox id="custom-icon" checkedIconProps={{ className: 'mr-2' }} />
-```
-
----
-
-### `ref`
-
-The Checkbox component exposes an imperative API through refs that allows for programmatic control. The `toggle` method allows a parent component to programmatically toggle the checkbox state.
-
-<Canvas of={CheckboxStories.Ref} />
-
-This can be useful in scenarios where you need to trigger the checkbox programmatically, such as when implementing "Select All" functionality or resetting forms.
-
----
-
-### `className`
-
-Use the `className` prop to add Tailwind CSS classes to the outer container. These classes are merged with the default classes using `twMerge`.
-
-```tsx
-<Checkbox id="custom-styled" label="Custom" className="bg-primary-default" />
-```
-
-### `style`
-
-Custom styles for the outer label container.
-
-```tsx
-<Checkbox id="inline-styled" label="Styled" style={{ marginLeft: 10 }} />
-```
-
-## Component API
-
-<Controls of={CheckboxStories.Default} />
-
-## References
-
-[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
