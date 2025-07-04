@@ -62,4 +62,4 @@ web-build/
 yarn-error.*
 
 # local env files
-.env*.local
+.env
