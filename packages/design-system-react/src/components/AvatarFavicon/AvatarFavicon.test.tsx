@@ -21,13 +21,13 @@ describe('AvatarFavicon', () => {
     render(
       <AvatarFavicon
         name="Demo"
-        className="foo-bar"
+        className="bg-default"
         style={{ margin: 4 }}
         data-testid="cont"
       />,
     );
     const cont = screen.getByTestId('cont');
-    expect(cont).toHaveClass('foo-bar');
+    expect(cont).toHaveClass('bg-default');
     expect(cont).toHaveStyle({ margin: '4px' });
   });
 
@@ -72,7 +72,7 @@ describe('AvatarFavicon', () => {
       const img = screen.getByTestId('img') as HTMLImageElement;
       expect(img.src).toContain(src);
       expect(img.alt).toBe('ACME');
-      expect(img).toHaveClass('h-full', 'w-full', 'object-contain');
+      expect(img).toHaveClass('size-full', 'object-contain');
       expect(img).toHaveAttribute('id', 'img-id');
     });
 

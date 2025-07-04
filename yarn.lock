@@ -3467,6 +3467,7 @@ __metadata:
     "@metamask/eslint-config-nodejs": "npm:^14.0.0"
     "@metamask/eslint-config-typescript": "npm:^14.0.0"
     "@metamask/utils": "npm:^11.4.2"
+    "@types/eslint-plugin-tailwindcss": "npm:^3"
     "@types/jest": "npm:^27.4.1"
     "@types/lodash": "npm:^4.14.191"
     "@types/node": "npm:^16.18.54"
@@ -3486,13 +3487,13 @@ __metadata:
     eslint-plugin-n: "npm:^17.10.3"
     eslint-plugin-prettier: "npm:^5.2.1"
     eslint-plugin-promise: "npm:^7.1.0"
+    eslint-plugin-tailwindcss: "npm:^3.18.0"
     execa: "npm:^5.0.0"
     jest: "npm:^29.7.0"
     jest-silent-reporter: "npm:^0.5.0"
     lodash: "npm:^4.17.21"
     prettier: "npm:^3.3.3"
     prettier-plugin-packagejson: "npm:^2.4.5"
-    prettier-plugin-tailwindcss: "npm:^0.6.11"
     react: "npm:^18.2.0"
     react-native: "npm:^0.72.15"
     rimraf: "npm:^5.0.5"
@@ -6021,7 +6022,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/estree@npm:1.0.6, @types/estree@npm:^1.0.0, @types/estree@npm:^1.0.6":
+"@types/eslint-plugin-tailwindcss@npm:^3":
+  version: 3.17.0
+  resolution: "@types/eslint-plugin-tailwindcss@npm:3.17.0"
+  dependencies:
+    "@types/eslint": "npm:*"
+  checksum: 10/d1a0f3a9afadfd56e3d9a2d3443ef9008be35ac386971a5bcabb1fd508b9f57dfd7496eb56e84303d66fa054a7d11be3aba64028c28d7c0c159f212a5736637a
+  languageName: node
+  linkType: hard
+
+"@types/eslint@npm:*":
+  version: 9.6.1
+  resolution: "@types/eslint@npm:9.6.1"
+  dependencies:
+    "@types/estree": "npm:*"
+    "@types/json-schema": "npm:*"
+  checksum: 10/719fcd255760168a43d0e306ef87548e1e15bffe361d5f4022b0f266575637acc0ecb85604ac97879ee8ae83c6a6d0613b0ed31d0209ddf22a0fe6d608fc56fe
+  languageName: node
+  linkType: hard
+
+"@types/estree@npm:*, @types/estree@npm:^1.0.0, @types/estree@npm:^1.0.6":
+  version: 1.0.8
+  resolution: "@types/estree@npm:1.0.8"
+  checksum: 10/25a4c16a6752538ffde2826c2cc0c6491d90e69cd6187bef4a006dd2c3c45469f049e643d7e516c515f21484dc3d48fd5c870be158a5beb72f5baf3dc43e4099
+  languageName: node
+  linkType: hard
+
+"@types/estree@npm:1.0.6":
   version: 1.0.6
   resolution: "@types/estree@npm:1.0.6"
   checksum: 10/9d35d475095199c23e05b431bcdd1f6fec7380612aed068b14b2a08aa70494de8a9026765a5a91b1073f636fb0368f6d8973f518a31391d519e20c59388ed88d
@@ -6097,7 +6124,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:^7.0.15, @types/json-schema@npm:^7.0.4, @types/json-schema@npm:^7.0.5":
+"@types/json-schema@npm:*, @types/json-schema@npm:^7.0.15, @types/json-schema@npm:^7.0.4, @types/json-schema@npm:^7.0.5":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
   checksum: 10/1a3c3e06236e4c4aab89499c428d585527ce50c24fe8259e8b3926d3df4cfbbbcf306cfc73ddfb66cbafc973116efd15967020b0f738f63e09e64c7d260519e7
@@ -11005,6 +11032,18 @@ __metadata:
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
   checksum: 10/e7447159d52dbc0fdaacfad18571906bb783f9f41f497e73f9b0351e9cc79497f9a9053fbef8141d0c027c16c768a1ef7f8cd4709a4a5cbb14636e862a1ccb34
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-tailwindcss@npm:^3.18.0":
+  version: 3.18.0
+  resolution: "eslint-plugin-tailwindcss@npm:3.18.0"
+  dependencies:
+    fast-glob: "npm:^3.2.5"
+    postcss: "npm:^8.4.4"
+  peerDependencies:
+    tailwindcss: ^3.4.0
+  checksum: 10/5145aa8884e5a4c699305c9cc1546ef30904bd11b0ef2779cace23ed1676688c5956f5fb68bc70e7ac1b48b185d3239923813df2cf19c1df720caa4d0965b7a3
   languageName: node
   linkType: hard
 
@@ -16530,12 +16569,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.7":
-  version: 3.3.8
-  resolution: "nanoid@npm:3.3.8"
+"nanoid@npm:^3.3.11, nanoid@npm:^3.3.7":
+  version: 3.3.11
+  resolution: "nanoid@npm:3.3.11"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: 10/2d1766606cf0d6f47b6f0fdab91761bb81609b2e3d367027aff45e6ee7006f660fb7e7781f4a34799fe6734f1268eeed2e37a5fdee809ade0c2d4eb11b0f9c40
+  checksum: 10/73b5afe5975a307aaa3c95dfe3334c52cdf9ae71518176895229b8d65ab0d1c0417dd081426134eb7571c055720428ea5d57c645138161e7d10df80815527c48
   languageName: node
   linkType: hard
 
@@ -17857,7 +17896,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.43, postcss@npm:^8.4.47, postcss@npm:^8.4.48, postcss@npm:~8.4.21":
+"postcss@npm:^8.4.4, postcss@npm:^8.4.43, postcss@npm:^8.4.47, postcss@npm:^8.4.48":
+  version: 8.5.6
+  resolution: "postcss@npm:8.5.6"
+  dependencies:
+    nanoid: "npm:^3.3.11"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10/9e4fbe97574091e9736d0e82a591e29aa100a0bf60276a926308f8c57249698935f35c5d2f4e80de778d0cbb8dcffab4f383d85fd50c5649aca421c3df729b86
+  languageName: node
+  linkType: hard
+
+"postcss@npm:~8.4.21":
   version: 8.4.49
   resolution: "postcss@npm:8.4.49"
   dependencies:
@@ -17896,64 +17946,6 @@ __metadata:
     prettier:
       optional: true
   checksum: 10/f30cee986c8d03f6609ba783174d1def15e964232246e6f4e79f05fc37fb348dec2ccce6c1b4c71ff9f0118deaea3fb5b3e745018d888553ac7c9a14bbe1e1f8
-  languageName: node
-  linkType: hard
-
-"prettier-plugin-tailwindcss@npm:^0.6.11":
-  version: 0.6.11
-  resolution: "prettier-plugin-tailwindcss@npm:0.6.11"
-  peerDependencies:
-    "@ianvs/prettier-plugin-sort-imports": "*"
-    "@prettier/plugin-pug": "*"
-    "@shopify/prettier-plugin-liquid": "*"
-    "@trivago/prettier-plugin-sort-imports": "*"
-    "@zackad/prettier-plugin-twig": "*"
-    prettier: ^3.0
-    prettier-plugin-astro: "*"
-    prettier-plugin-css-order: "*"
-    prettier-plugin-import-sort: "*"
-    prettier-plugin-jsdoc: "*"
-    prettier-plugin-marko: "*"
-    prettier-plugin-multiline-arrays: "*"
-    prettier-plugin-organize-attributes: "*"
-    prettier-plugin-organize-imports: "*"
-    prettier-plugin-sort-imports: "*"
-    prettier-plugin-style-order: "*"
-    prettier-plugin-svelte: "*"
-  peerDependenciesMeta:
-    "@ianvs/prettier-plugin-sort-imports":
-      optional: true
-    "@prettier/plugin-pug":
-      optional: true
-    "@shopify/prettier-plugin-liquid":
-      optional: true
-    "@trivago/prettier-plugin-sort-imports":
-      optional: true
-    "@zackad/prettier-plugin-twig":
-      optional: true
-    prettier-plugin-astro:
-      optional: true
-    prettier-plugin-css-order:
-      optional: true
-    prettier-plugin-import-sort:
-      optional: true
-    prettier-plugin-jsdoc:
-      optional: true
-    prettier-plugin-marko:
-      optional: true
-    prettier-plugin-multiline-arrays:
-      optional: true
-    prettier-plugin-organize-attributes:
-      optional: true
-    prettier-plugin-organize-imports:
-      optional: true
-    prettier-plugin-sort-imports:
-      optional: true
-    prettier-plugin-style-order:
-      optional: true
-    prettier-plugin-svelte:
-      optional: true
-  checksum: 10/7c87d8b9c7fc6e8bd3722da5c0bd115cfc249baba339b28b56ed270f0bcb99e0196836cd7270c8ab6bc499186f41e2bac4adff7795cd523d8f63f43424a0a36d
   languageName: node
   linkType: hard
 

@@ -130,7 +130,7 @@ describe('Text Component', () => {
           textAlign={TextAlign.Center}
           overflowWrap={OverflowWrap.BreakWord}
           ellipsis
-          className="custom-class"
+          className="bg-default"
           asChild
         >
           <div>Test</div>
@@ -145,7 +145,7 @@ describe('Text Component', () => {
         TextAlign.Center,
         OverflowWrap.BreakWord,
         'truncate',
-        'custom-class',
+        'bg-default',
       );
       expect(container.firstChild?.nodeName).toBe('DIV');
     });
@@ -182,7 +182,7 @@ describe('Text Component', () => {
         variant={TextVariant.BodyMd}
         color={TextColor.SuccessDefault}
         ellipsis
-        className="custom-class"
+        className="bg-default"
         asChild
       >
         <div>Combined Props Text</div>
@@ -191,7 +191,7 @@ describe('Text Component', () => {
     expect(container.firstChild).toHaveClass(
       'text-success-default',
       'truncate',
-      'custom-class',
+      'bg-default',
     );
     expect(container.firstChild?.nodeName).toBe('DIV');
   });

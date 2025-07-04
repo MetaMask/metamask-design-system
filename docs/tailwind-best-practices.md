@@ -279,9 +279,9 @@ A comprehensive guide for using Tailwind effectively and consistently across our
 
 ### 7. Code Formatting
 
-- **Prettier Integration**: Use Prettier with tailwind plugin
-- **Consistent Ordering**: Maintain consistent class ordering through prettier-plugin-tailwindcss
-- **Multiple Configs**: Respect the different Tailwind configs for React and React Native
+- **ESLint Integration**: Use `eslint-plugin-tailwindcss` for Tailwind class validation and ordering
+- **Consistent Ordering**: Maintain consistent class ordering through ESLint rules
+- **Class Validation**: ESLint enforces proper class usage, prevents contradictory classes, and encourages shorthand utilities
 
 ## ⚠️ Common Pitfalls
 

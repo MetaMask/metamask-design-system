@@ -13,10 +13,12 @@ describe('BadgeIcon', () => {
     const badgeIcon = screen.getByTestId('badge-icon');
     expect(badgeIcon).toBeInTheDocument();
     expect(badgeIcon).toHaveClass(
-      'bg-icon-default',
+      'inline-flex',
+      'size-4',
+      'items-center',
+      'justify-center',
       'rounded-full',
-      'h-4',
-      'w-4',
+      'bg-icon-default',
     );
   });
 
@@ -50,12 +52,12 @@ describe('BadgeIcon', () => {
     render(
       <BadgeIcon
         iconName={IconName.User}
-        className="custom-class"
+        className="bg-default"
         data-testid="badge-icon"
       />,
     );
     const badgeIcon = screen.getByTestId('badge-icon');
-    expect(badgeIcon).toHaveClass('custom-class');
+    expect(badgeIcon).toHaveClass('bg-default');
   });
 
   it('forwards ref to the root div', () => {

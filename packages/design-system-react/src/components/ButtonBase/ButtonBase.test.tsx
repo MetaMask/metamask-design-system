@@ -138,7 +138,7 @@ describe('ButtonBase', () => {
       <ButtonBase
         isLoading
         loadingIconProps={{
-          className: 'custom-class',
+          className: 'bg-default',
           'data-testid': 'custom-loading-icon',
         }}
       >
@@ -148,7 +148,7 @@ describe('ButtonBase', () => {
 
     const loadingIcon = screen.getByTestId('custom-loading-icon');
     expect(loadingIcon).toBeInTheDocument();
-    expect(loadingIcon).toHaveClass('custom-class');
+    expect(loadingIcon).toHaveClass('bg-default');
   });
 
   it('merges loading icon classes correctly', () => {
@@ -156,7 +156,7 @@ describe('ButtonBase', () => {
       <ButtonBase
         isLoading
         loadingIconProps={{
-          className: 'custom-class',
+          className: 'bg-default',
           'data-testid': 'custom-loading-icon',
         }}
       >
@@ -165,7 +165,7 @@ describe('ButtonBase', () => {
     );
 
     const loadingIcon = screen.getByTestId('custom-loading-icon');
-    expect(loadingIcon).toHaveClass('custom-class');
+    expect(loadingIcon).toHaveClass('bg-default');
   });
 
   it('disables the button when isLoading is true', () => {

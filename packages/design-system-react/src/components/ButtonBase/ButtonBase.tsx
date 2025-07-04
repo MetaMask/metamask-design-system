@@ -88,7 +88,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
             name={startIconName}
             size={IconSize.Sm}
             className={twMerge(
-              'mr-2 flex-shrink-0 text-inherit',
+              'mr-2 shrink-0 text-inherit',
               startIconProps?.className,
             )}
             aria-hidden="true"
@@ -113,7 +113,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
             name={endIconName}
             size={IconSize.Sm}
             className={twMerge(
-              'ml-2 flex-shrink-0 text-inherit',
+              'ml-2 shrink-0 text-inherit',
               endIconProps?.className,
             )}
             aria-hidden="true"
@@ -153,7 +153,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
       'rounded-xl px-4',
       'font-medium text-default',
       'bg-muted',
-      'min-w-[80px] overflow-hidden',
+      'min-w-20 overflow-hidden',
       // Add relative positioning for loading state
       'relative',
       // Size
@@ -162,7 +162,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
       isFullWidth && 'w-full',
       // Animation classes - only applied when interactive
       isInteractive && [
-        'transition-[transform,colors,opacity]',
+        'transition-all',
         'duration-100',
         'ease-linear',
         'active:scale-[0.97]',

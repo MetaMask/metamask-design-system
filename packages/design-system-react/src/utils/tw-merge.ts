@@ -42,20 +42,16 @@ export const twMerge = extendTailwindMerge({
         },
       ],
       'font-weight': [
-        // Standard Tailwind font weights
         'font-thin',
         'font-extralight',
         'font-light',
         'font-normal',
+        'font-regular',
         'font-medium',
         'font-semibold',
         'font-bold',
         'font-extrabold',
         'font-black',
-        // Custom typography classes
-        {
-          font: variantClassGroups,
-        },
       ],
     },
     conflictingClassGroups: {
