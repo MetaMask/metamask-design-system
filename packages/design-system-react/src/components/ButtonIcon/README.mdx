@@ -6,6 +6,12 @@ import * as ButtonIconStories from './ButtonIcon.stories';
 
 A Button Icon is a compact, icon-only button that triggers an action, designed for quick, space-efficient interactions.
 
+```tsx
+import { ButtonIcon, IconName } from '@metamask/design-system-react';
+
+<ButtonIcon iconName={IconName.Close} ariaLabel="Close" onClick={() => {}} />;
+```
+
 <Canvas of={ButtonIconStories.Default} />
 
 ## Props
@@ -235,9 +241,3 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { ButtonIcon, IconName } from '@metamask/design-system-react';
-
-<ButtonIcon iconName={IconName.Close} ariaLabel="Close" onClick={() => {}} />;
-```
