@@ -421,6 +421,7 @@ export enum IconSize {
 /**
  * Icon - name
  */
+// eslint-disable-next-line @typescript-eslint/no-shadow
 export enum IconName {
   Accessibility = 'Accessibility',
   Activity = 'Activity',
