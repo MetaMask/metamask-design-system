@@ -47,13 +47,13 @@ export const FontFamily: StoryFn<typeof Text> = (...args) => {
   };
   return (
     <>
-      <Text style={styles.default} {...args}>
+      <Text style={styles.default}>
         Geist
       </Text>
-      <Text style={styles.accent} {...args}>
+      <Text style={styles.accent}>
         MM Sans
       </Text>
-      <Text style={styles.hero} {...args}>
+      <Text style={styles.hero}>
         MM Poly
       </Text>
     </>

@@ -8,6 +8,7 @@ describe('Brand Color', () => {
     const colorFamily = key.replace(/\d+.*$/u, ''); // Extracts 'grey' from 'grey000'
     const shadeMatch = key.match(/\d+/gu); // Extracts ['000'] from 'grey000'
     // if no numeric key is found, skip the test
+    // eslint-disable-next-line jest/no-conditional-in-test -- Legitimate data processing for test setup
     if (!shadeMatch?.[0]) {
       describe(`${colorFamily.toUpperCase()} `, () => {
         it(`js tokens for ${key} matches figma brandColor ${colorFamily}`, () => {

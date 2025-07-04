@@ -118,6 +118,13 @@ const config = createConfig([
     },
   },
   {
+    files: ['**/*.stories.{js,ts,tsx}'],
+    rules: {
+      // Story files often have unused args parameters for Storybook framework compatibility
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
+  {
     files: ['**/*.{js,cjs}'],
     languageOptions: {
       sourceType: 'script',

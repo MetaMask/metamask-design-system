@@ -21,7 +21,7 @@ const allPlaceholdersRegex = new RegExp(
 );
 
 // Our lint config really hates this, but it works.
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const prettierRc = require(
   path.join(REPO_ROOT, '.prettierrc.js'),
 ) as PrettierOptions;
@@ -198,7 +198,8 @@ function processTemplateContent(
   const { name, description, nodeVersions, currentYear } = packageData;
 
   return content.replace(allPlaceholdersRegex, (match) => {
-    switch (match) {
+    const placeholder = match as keyof typeof Placeholders;
+    switch (placeholder) {
       case Placeholders.CurrentYear:
         return currentYear;
       case Placeholders.NodeVersions:
