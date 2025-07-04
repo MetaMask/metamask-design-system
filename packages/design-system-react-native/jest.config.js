@@ -23,23 +23,17 @@ module.exports = merge(baseConfig, {
       statements: 100,
     },
   },
-  collectCoverageFrom: [
-    '!**/*.scripts.{js,ts}', // Exclude .scripts files
-    '!**/node_modules/**', // Exclude node_modules
-    '!**/dist/**', // Exclude build outputs
-    '!**/*.constants.{js,ts}', // Exclude .constants files
-    '!**/*.dev.{js,ts}', // Exclude .dev files
-    '!**/*.assets.{js,ts}', // Exclude .assets files
-    '!**/*.types.{js,ts}', // Exclude .types files
-    '!./src/components/temp-components/Blockies/Blockies.utilities.ts',
-  ],
+
   // Add coverage ignore patterns
   coveragePathIgnorePatterns: [
-    'index.ts', // Ignore all index.ts files
-    './src/index.ts', // Also keep the original pattern
-    '\\.stories\\.(ts|tsx)$',
-    '\\.d\\.ts$', // Ignore type declaration files
+    'index.ts',
+    '\\.d\\.ts$',
+    '\\.constants\\.ts$', // ignore all .constants.ts files
+    '\\.dev\\.ts$', // ignore all .dev.ts files
+    'Icon.assets.ts', // Exclude Icon.assets file
+    'Blockies.utilities.ts', // Exclude Blockies.utilities file
   ],
+
   preset: 'react-native',
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
