@@ -39,6 +39,7 @@ module.exports = merge(baseConfig, {
     './src/index.ts', // Also keep the original pattern
     '\\.stories\\.(ts|tsx)$',
     '\\.d\\.ts$', // Ignore type declaration files
+    '.figma.tsx', // Figma code connect files
   ],
   preset: 'react-native',
   transform: {

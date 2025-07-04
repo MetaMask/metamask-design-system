@@ -20,8 +20,9 @@ module.exports = merge(baseConfig, {
     '.d.ts',
     'src/components/Icon/icons/', // Auto-generated icons
     'scripts/create-component/ComponentName/', // component template
-    '\\.constants\\.(ts|js)$', // ignore all .constants.ts and .constants.js files
-    '\\.dev\\.(ts|js)$', // ignore all .constants.ts and .constants.js files
+    '.constants.(ts|js)$', // ignore all .constants.ts and .constants.js files
+    '.dev.(ts|js)$', // ignore all .constants.ts and .constants.js files
+    '.figma.tsx', // Figma code connect files
   ],
 
   // Add test match ignore patterns

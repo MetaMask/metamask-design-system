@@ -1,0 +1,12 @@
+{
+  "codeConnect": {
+    "include": ["packages/design-system-react/src/components/**/*.tsx"],
+    "exclude": ["**/temp-components/**/*"],
+    "parser": "react",
+    "label": "React",
+    "importPaths": {
+      "packages/design-system-react/src/components/*": "@metamask/design-system-react"
+    },
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?m=auto&node-id=1905-4770"
+  }
+}
