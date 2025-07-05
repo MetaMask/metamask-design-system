@@ -6,6 +6,16 @@ import * as BadgeWrapperStories from './BadgeWrapper.stories';
 
 BadgeWrapper positions a badge on top of another element.
 
+```tsx
+import { BadgeWrapper, BadgeStatus, BadgeStatusStatus } from '@metamask/design-system-react';
+
+<BadgeWrapper
+  badge={<BadgeStatus status={BadgeStatusStatus.Active} />}
+>
+  <div>Content with badge</div>
+</BadgeWrapper>;
+```
+
 <Canvas of={BadgeWrapperStories.Default} />
 
 ## Props
@@ -342,13 +352,3 @@ Optional prop to add a test id to the outermost element for testing.
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { BadgeWrapper, BadgeStatus, BadgeStatusStatus } from '@metamask/design-system-react';
-
-<BadgeWrapper
-  badge={<BadgeStatus status={BadgeStatusStatus.Active} />}
->
-  <div>Content with badge</div>
-</BadgeWrapper>;
-```

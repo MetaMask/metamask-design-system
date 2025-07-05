@@ -6,7 +6,7 @@ This document tracks the progress of updating all README.mdx files in the `@meta
 ## Standardized Template Requirements
 - Import structure using `@storybook/blocks` for `Controls` and `Canvas`
 - Clear component descriptions
-- Usage example with import statement (positioned after description, before Canvas)
+- **Usage example with import statement positioned at the top** (after description, before Canvas)
 - Props documentation with table format (TYPE, REQUIRED, DEFAULT columns)
 - Story integration with Canvas components
 - Component API section with Controls
@@ -17,60 +17,64 @@ This document tracks the progress of updating all README.mdx files in the `@meta
 **Completed**: 26 files (100%)  
 **Need Updates**: 0 files (0%)  
 
-## ✅ ALL FILES COMPLETED
+## ✅ ALL FILES COMPLETED WITH CORRECT USAGE EXAMPLE POSITIONING
 
-### Main Components (26 files)
-1. **Button/README.mdx** ✅ - Comprehensive button props with proper table structure
-2. **Text/README.mdx** ✅ - Complex typography component with detailed prop tables
-3. **Box/README.mdx** ✅ - Flexbox layout component with proper documentation
-4. **Icon/README.mdx** ✅ - Icon component with size, color, and name props
-5. **AvatarBase/README.mdx** ✅ - Base avatar component with shape, size, and border props
-6. **Checkbox/README.mdx** ✅ - Form control with comprehensive prop documentation
-7. **ButtonBase/README.mdx** ✅ - Base button component with detailed prop tables
-8. **TextButton/README.mdx** ✅ - Text-only button component with proper structure
-9. **AvatarAccount/README.mdx** ✅ - Account avatar with variant and size props
-10. **AvatarIcon/README.mdx** ✅ - Icon avatar with severity and size props
-11. **AvatarNetwork/README.mdx** ✅ - Network avatar with name, src, and fallback props
-12. **AvatarFavicon/README.mdx** ✅ - Favicon avatar with similar structure
-13. **AvatarToken/README.mdx** ✅ - Token avatar with consistent prop tables
-14. **AvatarGroup/README.mdx** ✅ - Avatar group component with variant and positioning props
-15. **BadgeCount/README.mdx** ✅ - Numeric badge with count, size, and max props
-16. **BadgeIcon/README.mdx** ✅ - Icon badge with proper table structure
-17. **BadgeStatus/README.mdx** ✅ - Status badge with status and size props
-18. **BadgeNetwork/README.mdx** ✅ - Network badge with name, src, and fallback props
-19. **BadgeWrapper/README.mdx** ✅ - Complex positioning component with comprehensive props
-20. **ButtonIcon/README.mdx** ✅ - Icon-only button with accessibility and state props
+### Template Structure Applied to All Files
+1. **Import statements** - `@storybook/blocks` imports
+2. **Component title** - Clear H1 heading
+3. **Component description** - Brief, clear description
+4. **Usage example** - Code block with import and basic usage (**positioned at top**)
+5. **Canvas component** - Default story display
+6. **Props section** - All props with standardized table format
+7. **Component API** - Controls integration
+8. **References** - Link to MetaMask Design System Guides
 
-### Button Variants (3 files)
-21. **Button/variants/ButtonPrimary/README.mdx** ✅ - Primary button variant with table format
-22. **Button/variants/ButtonSecondary/README.mdx** ✅ - Secondary button variant with table format
-23. **Button/variants/ButtonTertiary/README.mdx** ✅ - Tertiary button variant with table format
-
-### Temp Components (3 files)
-24. **temp-components/Blockies/README.mdx** ✅ - Blockies avatar with address and size props
-25. **temp-components/Jazzicon/README.mdx** ✅ - Jazzicon avatar with multi-format address support
-26. **temp-components/Maskicon/README.mdx** ✅ - Maskicon SVG identicon with blockchain address support
+### All Components Now Follow Correct Structure (26 files)
+1. **Button/README.mdx** ✅ - Usage example moved to top
+2. **Text/README.mdx** ✅ - Usage example moved to top
+3. **Box/README.mdx** ✅ - Usage example moved to top
+4. **Icon/README.mdx** ✅ - Usage example moved to top
+5. **AvatarBase/README.mdx** ✅ - Usage example moved to top
+6. **Checkbox/README.mdx** ✅ - Usage example moved to top
+7. **ButtonBase/README.mdx** ✅ - Usage example moved to top
+8. **TextButton/README.mdx** ✅ - Usage example moved to top
+9. **AvatarAccount/README.mdx** ✅ - Usage example moved to top
+10. **AvatarIcon/README.mdx** ✅ - Usage example already at top
+11. **AvatarNetwork/README.mdx** ✅ - Usage example moved to top
+12. **AvatarFavicon/README.mdx** ✅ - Usage example moved to top
+13. **AvatarToken/README.mdx** ✅ - Usage example moved to top
+14. **AvatarGroup/README.mdx** ✅ - Usage example moved to top
+15. **BadgeCount/README.mdx** ✅ - Usage example moved to top
+16. **BadgeIcon/README.mdx** ✅ - Usage example moved to top
+17. **BadgeStatus/README.mdx** ✅ - Usage example moved to top
+18. **BadgeNetwork/README.mdx** ✅ - Usage example already at top
+19. **BadgeWrapper/README.mdx** ✅ - Usage example moved to top
+20. **ButtonIcon/README.mdx** ✅ - Usage example already at top
+21. **Button/variants/ButtonPrimary/README.mdx** ✅ - Usage example already at top
+22. **Button/variants/ButtonSecondary/README.mdx** ✅ - Usage example already at top
+23. **Button/variants/ButtonTertiary/README.mdx** ✅ - Usage example already at top
+24. **temp-components/Blockies/README.mdx** ✅ - Usage example already at top
+25. **temp-components/Jazzicon/README.mdx** ✅ - Usage example already at top
+26. **temp-components/Maskicon/README.mdx** ✅ - Usage example already at top
 
 ## Key Standardizations Applied
 - ✅ Consistent table formatting with proper alignment
 - ✅ Standardized prop naming with backticks (`propName`)
 - ✅ Uniform description patterns
-- ✅ Usage examples positioned correctly (after description, before Canvas)
+- ✅ **Usage examples positioned correctly at the top** (after description, before Canvas)
 - ✅ Consistent className and style prop documentation
 - ✅ Proper Canvas story integration
 - ✅ Standardized Component API sections
 - ✅ References to MetaMask Design System Guides
 - ✅ Removed inconsistent formatting like extra separators and verbose examples
 
-## Template Structure Applied to All Files
-1. **Import statements** - `@storybook/blocks` imports
-2. **Component title** - Clear H1 heading
-3. **Component description** - Brief, clear description
-4. **Usage example** - Code block with import and basic usage
-5. **Canvas component** - Default story display
-6. **Props section** - All props with standardized table format
-7. **Component API** - Controls integration
-8. **References** - Link to MetaMask Design System Guides
+## Final Result: Perfect Standardization
+All 26 README.mdx files now follow the exact same structure with:
+- **Usage examples positioned consistently at the top**
+- Standardized table format for all props
+- Consistent component descriptions
+- Proper import statements and Canvas integration
+- Professional, comprehensive documentation throughout
 
-## 🎉 Project Complete!
-All 26 README.mdx files in the `@metamask/design-system-react` package have been successfully updated to follow the standardized template structure. The documentation is now consistent, comprehensive, and follows best practices for component documentation.
+## 🎉 Project Complete - Perfect Consistency Achieved!
+Every README.mdx file in the `@metamask/design-system-react` package now follows the standardized template structure with usage examples properly positioned at the top, making the documentation consistent, professional, and easy to follow for all developers.

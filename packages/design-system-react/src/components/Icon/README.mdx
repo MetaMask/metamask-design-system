@@ -6,6 +6,12 @@ import * as IconStories from './Icon.stories';
 
 Icons are read-only symbols that represent ideas or objects, offered in standard sizes.
 
+```tsx
+import { Icon, IconName } from '@metamask/design-system-react';
+
+<Icon name={IconName.AddSquare} />;
+```
+
 <Canvas of={IconStories.Default} />
 
 ## Props
@@ -158,9 +164,3 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { Icon, IconName } from '@metamask/design-system-react';
-
-<Icon name={IconName.AddSquare} />;
-```

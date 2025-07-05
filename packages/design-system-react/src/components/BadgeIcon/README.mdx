@@ -6,6 +6,12 @@ import * as BadgeIconStories from './BadgeIcon.stories';
 
 BadgeIcon is a circular indicator that contains an icon, used to provide quick context or visual tagging at a glance.
 
+```tsx
+import { BadgeIcon, IconName } from '@metamask/design-system-react';
+
+<BadgeIcon iconName={IconName.User} />;
+```
+
 <Canvas of={BadgeIconStories.Default} />
 
 ## Props
@@ -122,9 +128,3 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { BadgeIcon, IconName } from '@metamask/design-system-react';
-
-<BadgeIcon iconName={IconName.User} />;
-```

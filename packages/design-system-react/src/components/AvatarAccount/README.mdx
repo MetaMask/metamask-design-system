@@ -6,6 +6,12 @@ import * as AvatarAccountStories from './AvatarAccount.stories';
 
 Avatar reserved for representing accounts inside of an avatar.
 
+```tsx
+import { AvatarAccount } from '@metamask/design-system-react';
+
+<AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />;
+```
+
 <Canvas of={AvatarAccountStories.Default} />
 
 ## Props
@@ -265,9 +271,3 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { AvatarAccount } from '@metamask/design-system-react';
-
-<AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />;
-```

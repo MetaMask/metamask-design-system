@@ -6,6 +6,16 @@ import * as AvatarNetworkStories from './AvatarNetwork.stories';
 
 Avatar reserved for representing networks.
 
+```tsx
+import { AvatarNetwork } from '@metamask/design-system-react';
+
+<AvatarNetwork
+  name="Ethereum Network"
+  src="path/to/ethereum-logo.png"
+  fallbackText="ETH"
+/>;
+```
+
 <Canvas of={AvatarNetworkStories.Default} />
 
 ## Props
@@ -262,13 +272,3 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { AvatarNetwork } from '@metamask/design-system-react';
-
-<AvatarNetwork
-  name="Ethereum Network"
-  src="path/to/ethereum-logo.png"
-  fallbackText="ETH"
-/>;
-```

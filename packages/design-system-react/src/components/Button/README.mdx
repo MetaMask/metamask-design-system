@@ -6,6 +6,12 @@ import * as ButtonStories from './Button.stories';
 
 Button is a labeled element that a user can click or tap to initiate an action.
 
+```tsx
+import { Button } from '@metamask/design-system-react';
+
+<Button onClick={() => {}}>Button</Button>;
+```
+
 <Canvas of={ButtonStories.Default} />
 
 ## Props
@@ -373,9 +379,3 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { Button } from '@metamask/design-system-react';
-
-<Button onClick={() => {}}>Button</Button>;
-```

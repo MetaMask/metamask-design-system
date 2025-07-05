@@ -6,6 +6,32 @@ import * as AvatarGroupStories from './AvatarGroup.stories';
 
 AvatarGroup is a stacked avatars to represent a group of avatars.
 
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupVariant,
+  AvatarAccountVariant,
+} from '@metamask/design-system-react';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+/>;
+```
+
 <Canvas of={AvatarGroupStories.Default} />
 
 ## Props
@@ -218,29 +244,3 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import {
-  AvatarGroup,
-  AvatarGroupVariant,
-  AvatarAccountVariant,
-} from '@metamask/design-system-react';
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
-```

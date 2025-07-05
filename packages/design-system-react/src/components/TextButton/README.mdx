@@ -6,6 +6,12 @@ import * as TextButtonStories from './TextButton.stories';
 
 TextButton is used for text-only button actions or hyperlink without padding or background.
 
+```tsx
+import { TextButton } from '@metamask/design-system-react';
+
+<TextButton onClick={() => {}}>Text Button</TextButton>;
+```
+
 <Canvas of={TextButtonStories.Default} />
 
 ## Props
@@ -288,9 +294,3 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { TextButton } from '@metamask/design-system-react';
-
-<TextButton onClick={() => {}}>Text Button</TextButton>;
-```

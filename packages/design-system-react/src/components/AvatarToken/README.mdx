@@ -6,6 +6,16 @@ import * as AvatarTokenStories from './AvatarToken.stories';
 
 Avatar reserved for representing tokens.
 
+```tsx
+import { AvatarToken } from '@metamask/design-system-react';
+
+<AvatarToken
+  name="Ethereum"
+  src="path/to/ethereum-logo.png"
+  fallbackText="ETH"
+/>;
+```
+
 <Canvas of={AvatarTokenStories.Default} />
 
 ## Props
@@ -262,13 +272,3 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { AvatarToken } from '@metamask/design-system-react';
-
-<AvatarToken
-  name="Ethereum"
-  src="path/to/ethereum-logo.png"
-  fallbackText="ETH"
-/>;
-```

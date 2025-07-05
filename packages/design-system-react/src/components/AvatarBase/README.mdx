@@ -6,6 +6,12 @@ import * as AvatarBaseStories from './AvatarBase.stories';
 
 AvatarBase is the base component for avatars.
 
+```tsx
+import { AvatarBase } from '@metamask/design-system-react';
+
+<AvatarBase fallbackText="A" />;
+```
+
 <Canvas of={AvatarBaseStories.Default} />
 
 ## Props
@@ -243,9 +249,3 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
-
-```tsx
-import { AvatarBase } from '@metamask/design-system-react';
-
-<AvatarBase fallbackText="A" />;
-```
