@@ -6,6 +6,7 @@ import {
   BoxFlexDirection,
   BoxFlexWrap,
   BoxJustifyContent,
+  BoxBackgroundColor,
 } from '../../types';
 
 import { Box } from './Box';
@@ -282,5 +283,93 @@ describe('Box', () => {
     expect(box).toHaveAttribute('role', 'main');
     expect(box).toHaveAttribute('aria-label', 'Test box');
     expect(box.tagName).toBe('DIV');
+  });
+
+  it('applies backgroundColor prop without flex class when no flexDirection', () => {
+    render(
+      <Box
+        data-testid="box"
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+      />,
+    );
+    const box = screen.getByTestId('box');
+    expect(box).not.toHaveClass('flex');
+    expect(box).toHaveClass(BoxBackgroundColor.BackgroundAlternative);
+  });
+
+  it('applies backgroundColor prop with flex class when flexDirection is provided', () => {
+    render(
+      <Box
+        data-testid="box"
+        flexDirection={BoxFlexDirection.Row}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+      />,
+    );
+    const box = screen.getByTestId('box');
+    expect(box).toHaveClass('flex');
+    expect(box).toHaveClass(BoxBackgroundColor.PrimaryMuted);
+  });
+
+  it('applies backgroundColor prop with semantic colors', () => {
+    render(
+      <Box
+        data-testid="error-box"
+        backgroundColor={BoxBackgroundColor.ErrorMuted}
+      />,
+    );
+    const box = screen.getByTestId('error-box');
+    expect(box).toHaveClass(BoxBackgroundColor.ErrorMuted);
+  });
+
+  it('applies backgroundColor prop with transparent background', () => {
+    render(
+      <Box
+        data-testid="transparent-box"
+        backgroundColor={BoxBackgroundColor.Transparent}
+      />,
+    );
+    const box = screen.getByTestId('transparent-box');
+    expect(box).toHaveClass(BoxBackgroundColor.Transparent);
+  });
+
+  it('applies backgroundColor prop with all other props', () => {
+    render(
+      <Box
+        data-testid="box"
+        flexDirection={BoxFlexDirection.Row}
+        flexWrap={BoxFlexWrap.Wrap}
+        gap={2}
+        alignItems={BoxAlignItems.Center}
+        justifyContent={BoxJustifyContent.Between}
+        backgroundColor={BoxBackgroundColor.SuccessMuted}
+        className="extra-class"
+      />,
+    );
+
+    const box = screen.getByTestId('box');
+    const expectedClasses = [
+      'flex',
+      BoxFlexDirection.Row,
+      BoxFlexWrap.Wrap,
+      TWCLASSMAP_BOX_GAP[2],
+      BoxAlignItems.Center,
+      BoxJustifyContent.Between,
+      BoxBackgroundColor.SuccessMuted,
+      'extra-class',
+    ];
+
+    expectedClasses.forEach((className) => {
+      expect(box).toHaveClass(className);
+    });
+  });
+
+  it('does not apply backgroundColor class when backgroundColor is undefined', () => {
+    render(<Box data-testid="box" />);
+    const box = screen.getByTestId('box');
+    
+    // Check that no background color classes are applied
+    Object.values(BoxBackgroundColor).forEach((bgClass) => {
+      expect(box).not.toHaveClass(bgClass);
+    });
   });
 });

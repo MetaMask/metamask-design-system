@@ -6,6 +6,7 @@ import type {
   BoxSpacing,
   BoxAlignItems,
   BoxJustifyContent,
+  BoxBackgroundColor,
 } from '../../types';
 
 export type BoxProps = ComponentProps<'div'> & {
@@ -30,6 +31,11 @@ export type BoxProps = ComponentProps<'div'> & {
    * The justify-content style of the component.
    */
   justifyContent?: BoxJustifyContent;
+  /**
+   * The background color of the component.
+   * Uses design system background color tokens for consistency and backwards compatibility.
+   */
+  backgroundColor?: BoxBackgroundColor;
   /**
    * Optional prop for additional CSS classes to be applied to the Box component.
    */
