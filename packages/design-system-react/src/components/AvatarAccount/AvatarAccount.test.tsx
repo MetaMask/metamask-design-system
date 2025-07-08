@@ -53,12 +53,12 @@ describe('AvatarAccount', () => {
     render(
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-        className="custom-class"
+        className="bg-default"
         data-testid="avatar"
       />,
     );
     const avatar = screen.getByTestId('avatar');
-    expect(avatar).toHaveClass('custom-class');
+    expect(avatar).toHaveClass('bg-default');
   });
 
   it('applies size mapping correctly', () => {
