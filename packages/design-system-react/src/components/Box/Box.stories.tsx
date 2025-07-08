@@ -6,6 +6,7 @@ import {
   BoxFlexWrap,
   BoxAlignItems,
   BoxJustifyContent,
+  BoxBackgroundColor,
 } from '../../types';
 import { Text } from '../Text';
 
@@ -50,6 +51,12 @@ const meta: Meta<BoxProps> = {
       mapping: BoxJustifyContent,
       description: 'The justify-content style of the component.',
     },
+    backgroundColor: {
+      control: 'select',
+      options: Object.keys(BoxBackgroundColor),
+      mapping: BoxBackgroundColor,
+      description: 'The background color of the component using design system tokens.',
+    },
     className: {
       control: 'text',
       description:
@@ -73,6 +80,40 @@ const BoxStory: React.FC<BoxProps> = (args) => {
 
 export const Default: Story = {
   render: (args) => <BoxStory {...args} />,
+};
+
+export const BackgroundColor: Story = {
+  args: {
+    backgroundColor: BoxBackgroundColor.BackgroundAlternative,
+    gap: 2,
+    className: 'p-4',
+  },
+  render: (args) => <BoxStory {...args} />,
+};
+
+export const BackgroundColorSemantics: Story = {
+  render: () => (
+    <Box flexDirection={BoxFlexDirection.Column} gap={3}>
+      <Box backgroundColor={BoxBackgroundColor.BackgroundDefault} className="p-3 border border-border-default rounded">
+        <Text>Default Background</Text>
+      </Box>
+      <Box backgroundColor={BoxBackgroundColor.BackgroundAlternative} className="p-3 border border-border-default rounded">
+        <Text>Alternative Background</Text>
+      </Box>
+      <Box backgroundColor={BoxBackgroundColor.PrimaryMuted} className="p-3 border border-border-default rounded">
+        <Text>Primary Muted Background</Text>
+      </Box>
+      <Box backgroundColor={BoxBackgroundColor.ErrorMuted} className="p-3 border border-border-default rounded">
+        <Text>Error Muted Background</Text>
+      </Box>
+      <Box backgroundColor={BoxBackgroundColor.WarningMuted} className="p-3 border border-border-default rounded">
+        <Text>Warning Muted Background</Text>
+      </Box>
+      <Box backgroundColor={BoxBackgroundColor.SuccessMuted} className="p-3 border border-border-default rounded">
+        <Text>Success Muted Background</Text>
+      </Box>
+    </Box>
+  ),
 };
 
 export const FlexDirection: Story = {

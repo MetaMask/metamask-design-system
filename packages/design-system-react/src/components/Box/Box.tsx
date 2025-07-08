@@ -11,6 +11,7 @@ export const Box = ({
   gap,
   alignItems,
   justifyContent,
+  backgroundColor,
   className = '',
   style,
   children,
@@ -23,6 +24,7 @@ export const Box = ({
     gap !== undefined ? TWCLASSMAP_BOX_GAP[gap] : '',
     alignItems,
     justifyContent,
+    backgroundColor,
     className,
   );
 

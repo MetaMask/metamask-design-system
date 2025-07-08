@@ -75,6 +75,62 @@ Use the `justifyContent` prop to configure the `justify-content` style of the Bo
 
 <Canvas of={BoxStories.JustifyContent} />
 
+### BackgroundColor
+
+Use the `backgroundColor` prop to apply background colors using design system tokens. This ensures consistency and themability across the design system, with backwards compatibility to the extension's box component values.
+
+<Canvas of={BoxStories.BackgroundColor} />
+
+<Canvas of={BoxStories.BackgroundColorSemantics} />
+
+```tsx
+// Background color examples
+<Box backgroundColor={BoxBackgroundColor.BackgroundDefault}>
+  Default background
+</Box>
+
+<Box backgroundColor={BoxBackgroundColor.BackgroundAlternative}>
+  Alternative background (sunken)
+</Box>
+
+<Box backgroundColor={BoxBackgroundColor.PrimaryMuted}>
+  Primary muted background
+</Box>
+
+<Box backgroundColor={BoxBackgroundColor.ErrorMuted}>
+  Error semantic background
+</Box>
+
+<Box backgroundColor={BoxBackgroundColor.SuccessMuted}>
+  Success semantic background
+</Box>
+```
+
+#### Available Background Colors
+
+The `BoxBackgroundColor` enum provides comprehensive background color options:
+
+**Background Colors:**
+- `BackgroundDefault` - Default neutral background
+- `BackgroundAlternative` - Sunken background below default
+- `BackgroundSection` - Section background over default
+- `BackgroundSubsection` - Subsection background over section
+- `BackgroundMuted` - Muted neutral background
+- `BackgroundHover` - General hover state
+- `BackgroundPressed` - General pressed state
+
+**Semantic Colors:**
+- `PrimaryDefault`, `PrimaryMuted` - Primary semantic colors
+- `ErrorDefault`, `ErrorMuted` - Error/danger semantic colors  
+- `WarningDefault`, `WarningMuted` - Warning/caution semantic colors
+- `SuccessDefault`, `SuccessMuted` - Success/positive semantic colors
+- `InfoDefault`, `InfoMuted` - Info semantic colors
+
+**Utility Colors:**
+- `Transparent` - Transparent background
+- `FlaskDefault` - Flask accent color
+- `OverlayDefault`, `OverlayAlternative` - Overlay/scrim colors
+
 ### ClassName
 
 Use `className` to apply additional Tailwind CSS classes for styling beyond the flex layout properties.

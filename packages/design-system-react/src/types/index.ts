@@ -190,6 +190,108 @@ export enum BoxJustifyContent {
 }
 
 /**
+ * Box - backgroundColor
+ */
+export enum BoxBackgroundColor {
+  /** For default neutral background */
+  BackgroundDefault = 'bg-background-default',
+  /** For sunken neutral background below background/default */
+  BackgroundAlternative = 'bg-background-alternative',
+  /** For section background usually over background/default */
+  BackgroundSection = 'bg-background-section',
+  /** For subsection background usually over background/section */
+  BackgroundSubsection = 'bg-background-subsection',
+  /** For muted neutral background */
+  BackgroundMuted = 'bg-background-muted',
+  /** Hover state background for background/default */
+  BackgroundDefaultHover = 'bg-background-default-hover',
+  /** Pressed state background for background/default */
+  BackgroundDefaultPressed = 'bg-background-default-pressed',
+  /** Hover state background for background/alternative */
+  BackgroundAlternativeHover = 'bg-background-alternative-hover',
+  /** Pressed state background for background/alternative */
+  BackgroundAlternativePressed = 'bg-background-alternative-pressed',
+  /** Hover state background for background/muted */
+  BackgroundMutedHover = 'bg-background-muted-hover',
+  /** Pressed state background for background/muted */
+  BackgroundMutedPressed = 'bg-background-muted-pressed',
+  /** General purpose hover state tint */
+  BackgroundHover = 'bg-background-hover',
+  /** General purpose pressed state tint */
+  BackgroundPressed = 'bg-background-pressed',
+  /** For primary semantic elements: interactive, active, selected */
+  PrimaryDefault = 'bg-primary-default',
+  /** Stronger background for primary semantic elements */
+  PrimaryAlternative = 'bg-primary-alternative',
+  /** Muted background for primary semantic elements */
+  PrimaryMuted = 'bg-primary-muted',
+  /** Hover state background for primary/default */
+  PrimaryDefaultHover = 'bg-primary-default-hover',
+  /** Pressed state background for primary/default */
+  PrimaryDefaultPressed = 'bg-primary-default-pressed',
+  /** Hover state background for primary/muted */
+  PrimaryMutedHover = 'bg-primary-muted-hover',
+  /** Pressed state background for primary/muted */
+  PrimaryMutedPressed = 'bg-primary-muted-pressed',
+  /** For danger semantic elements: error, critical, destructive... */
+  ErrorDefault = 'bg-error-default',
+  /** Stronger background for danger semantic */
+  ErrorAlternative = 'bg-error-alternative',
+  /** Muted background for danger semantic */
+  ErrorMuted = 'bg-error-muted',
+  /** Hover state background for error/default */
+  ErrorDefaultHover = 'bg-error-default-hover',
+  /** Pressed state background for error/default */
+  ErrorDefaultPressed = 'bg-error-default-pressed',
+  /** Hover state background for error/muted */
+  ErrorMutedHover = 'bg-error-muted-hover',
+  /** Pressed state background for error/muted */
+  ErrorMutedPressed = 'bg-error-muted-pressed',
+  /** For warning semantic elements: caution, attention, precaution... */
+  WarningDefault = 'bg-warning-default',
+  /** Muted background option for warning semantic */
+  WarningMuted = 'bg-warning-muted',
+  /** Hover state background for warning/default */
+  WarningDefaultHover = 'bg-warning-default-hover',
+  /** Pressed state background for warning/default */
+  WarningDefaultPressed = 'bg-warning-default-pressed',
+  /** Hover state background for warning/muted */
+  WarningMutedHover = 'bg-warning-muted-hover',
+  /** Pressed state background for warning/muted */
+  WarningMutedPressed = 'bg-warning-muted-pressed',
+  /** For positive semantic elements: success, confirm, complete, safe... */
+  SuccessDefault = 'bg-success-default',
+  /** Muted background for positive semantic */
+  SuccessMuted = 'bg-success-muted',
+  /** Hover state background for success/default */
+  SuccessDefaultHover = 'bg-success-default-hover',
+  /** Pressed state background for success/default */
+  SuccessDefaultPressed = 'bg-success-default-pressed',
+  /** Hover state background for success/muted */
+  SuccessMutedHover = 'bg-success-muted-hover',
+  /** Pressed state background for success/muted */
+  SuccessMutedPressed = 'bg-success-muted-pressed',
+  /** For soft alert semantic elements: info, reminder, hint... */
+  InfoDefault = 'bg-info-default',
+  /** Muted background for soft alert semantic */
+  InfoMuted = 'bg-info-muted',
+  /** For overlays(scrim) */
+  OverlayDefault = 'bg-overlay-default',
+  /** Dimmer background for overlays(scrim) */
+  OverlayAlternative = 'bg-overlay-alternative',
+  /** For Flask primary accent background */
+  FlaskDefault = 'bg-flask-default',
+  /** For neutral drop shadow background */
+  ShadowDefault = 'bg-shadow-default',
+  /** For primary drop shadow background */
+  ShadowPrimary = 'bg-shadow-primary',
+  /** For critical/danger drop shadow background */
+  ShadowError = 'bg-shadow-error',
+  /** Make the background transparent */
+  Transparent = 'bg-transparent',
+}
+
+/**
  * ButtonBase - size
  */
 export enum ButtonBaseSize {
