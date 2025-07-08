@@ -20,8 +20,8 @@ const allPlaceholdersRegex = new RegExp(
   'gu',
 );
 
-// Our lint config really hates this, but it works.
-// eslint-disable-next-line
+// Dynamic require needed for loading prettier config at runtime - ESM import not supported for .js config files
+// eslint-disable-next-line @typescript-eslint/no-require-imports, import-x/no-named-as-default-member
 const prettierRc = require(
   path.join(REPO_ROOT, '.prettierrc.js'),
 ) as PrettierOptions;
