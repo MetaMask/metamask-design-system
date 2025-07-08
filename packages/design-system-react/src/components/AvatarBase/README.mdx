@@ -4,7 +4,7 @@ import * as AvatarBaseStories from './AvatarBase.stories';
 
 # AvatarBase
 
-The `AvatarBase` is the base component for avatars.
+AvatarBase is the base component for avatars.
 
 ```tsx
 import { AvatarBase } from '@metamask/design-system-react';
@@ -16,75 +16,231 @@ import { AvatarBase } from '@metamask/design-system-react';
 
 ## Props
 
-### Shape
+### `shape`
 
-AvatarBase supports two shapes:
+AvatarBase supports two shapes.
 
-- `AvatarBaseShape.Circle` (fully rounded) - default
-- `AvatarBaseShape.Square` (slightly rounded corners)
+Available shapes:
+- `AvatarBaseShape.Circle` - Fully rounded
+- `AvatarBaseShape.Square` - Slightly rounded corners
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>AvatarBaseShape</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>AvatarBaseShape.Circle</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={AvatarBaseStories.Shape} />
 
-### Size
+### `size`
 
-AvatarBase supports five sizes:
+AvatarBase supports five sizes.
 
+Available sizes:
 - `AvatarBaseSize.Xs` (16px)
 - `AvatarBaseSize.Sm` (24px)
-- `AvatarBaseSize.Md` (32px) - default
+- `AvatarBaseSize.Md` (32px)
 - `AvatarBaseSize.Lg` (40px)
 - `AvatarBaseSize.Xl` (48px)
 
-The fallback text uses `TextVariant.BodySm` for all sizes to maintain consistency.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>AvatarBaseSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>AvatarBaseSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={AvatarBaseStories.Size} />
 
-### Fallback Text
+### `fallbackText`
 
 The `fallbackText` prop provides a simple way to display text within the avatar. The text uses `TextVariant.BodySm` for consistent sizing across all avatar sizes.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarBaseStories.FallbackText} />
 
-You can customize the appearance of the fallback text using `fallbackTextProps`:
+### `fallbackTextProps`
+
+Additional props for the fallback text component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={AvatarBaseStories.FallbackTextWithProps} />
 
-### Children
+### `children`
 
-While `fallbackText` is the recommended way to display text, `AvatarBase` can also contain custom content like images and icons:
+While `fallbackText` is the recommended way to display text, `AvatarBase` can also contain custom content like images and icons.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={AvatarBaseStories.Children} />
 
-### Has Border
+### `hasBorder`
 
 The `hasBorder` prop enables a border around the AvatarBase.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarBaseStories.HasBorder} />
 
-### Class Name
+### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Adding new styles
-<AvatarBase fallbackText="A" className="my-4 mx-2" />
-
-// Overriding default styles
-<AvatarBase
-  fallbackText="A"
-  className="bg-success-default"
-  fallbackTextProps={{ color: TextColor.SuccessInverse }}
-/>
-```
-
-### Style
+### `style`
 
 The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 

@@ -4,10 +4,10 @@ import * as BadgeStatusStories from './BadgeStatus.stories';
 
 # BadgeStatus
 
-`BadgeStatus` indicates the state of an item through color.
+BadgeStatus indicates the state of an item through color.
 
 ```tsx
-import { BadgeStatus } from '@metamask/design-system-react';
+import { BadgeStatus, BadgeStatusStatus } from '@metamask/design-system-react';
 
 <BadgeStatus status={BadgeStatusStatus.Active} />;
 ```
@@ -16,51 +16,150 @@ import { BadgeStatus } from '@metamask/design-system-react';
 
 ## Props
 
-### Status
+### `status`
 
-Use the `status` prop to indicate the visual state of the badge. Supported values:
+Use the `status` prop to indicate the visual state of the badge.
 
-- `BadgeStatusStatus.Active` (Connected)
-- `BadgeStatusStatus.Inactive` (Connected)
+Available statuses:
+- `BadgeStatusStatus.Active` - Connected
+- `BadgeStatusStatus.Inactive` - Connected
 - `BadgeStatusStatus.Disconnected`
 - `BadgeStatusStatus.New`
 - `BadgeStatusStatus.Attention`
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BadgeStatusStatus</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={BadgeStatusStories.Status} />
 
-### Size
+### `size`
 
-BadgeStatus supports two size options:
+BadgeStatus supports two size options.
 
-- `BadgeStatusSize.Md` (8px) – default
+Available sizes:
+- `BadgeStatusSize.Md` (8px)
 - `BadgeStatusSize.Lg` (10px)
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BadgeStatusSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BadgeStatusSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={BadgeStatusStories.Size} />
 
-### Has Border
+### `hasBorder`
 
-The `hasBorder` prop adds an outer border to the badge, often used to separate the status from surrounding backgrounds. Default is `true`.
+The `hasBorder` prop adds an outer border to the badge, often used to separate the status from surrounding backgrounds.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>true</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={BadgeStatusStories.HasBorder} />
 
-### Class Name
+### `className`
 
-Use the `className` prop to add custom CSS classes to the BadgeStatus component. These classes are merged with the component's default styles using `twMerge`, allowing you to:
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-- Add new utility styles
-- Override default styles when needed
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
-```tsx
-// Custom border and spacing
-<BadgeStatus
-  status={BadgeStatusStatus.Active}
-  className="ml-2 border-warning-default"
-/>
-```
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-### Style
+### `style`
 
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with Tailwind or className alone. For static styles, prefer `className`.
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 

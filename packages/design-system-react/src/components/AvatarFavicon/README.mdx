@@ -4,7 +4,7 @@ import * as AvatarFaviconStories from './AvatarFavicon.stories';
 
 # AvatarFavicon
 
-Avatar reserved for representing websites and dapps
+Avatar reserved for representing websites and dapps.
 
 ```tsx
 import { AvatarFavicon } from '@metamask/design-system-react';
@@ -20,91 +20,250 @@ import { AvatarFavicon } from '@metamask/design-system-react';
 
 ## Props
 
-### Name
+### `name`
 
-The `name` prop is optional and serves two purposes:
+The `name` prop is optional and serves two purposes: used as alt text for the dapp logo and first letter is used as fallback display text when `fallbackText` is not provided.
 
-- Used as alt text for the dapp logo (unless overridden by `imageProps.alt`)
-- First letter is used as fallback display text when `fallbackText` is not provided
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={AvatarFaviconStories.Name} />
 
-### Src (image source)
+### `src`
 
 The `src` prop is optional and specifies the URL of the dapp's favicon or logo.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarFaviconStories.Src} />
 
-> Note: The `imageProps` prop allows you to customize the img element when `src` is provided. All standard HTML img attributes are supported and will be passed to the underlying img element when `src` is provided. This is useful for overriding the default alt text (which is the dapp name) when the AvatarFavicon is used as an accompaniment to an image.
-
-```tsx
-<AvatarFavicon
-  name="OpenSea"
-  src="path/to/opensea-favicon.ico"
-  fallbackText="OS"
-  imageProps={{ alt: 'OpenSea Logo', loading: 'lazy' }}
-/>
-```
-
-### Fallback Text
+### `fallbackText`
 
 The `fallbackText` prop is optional and is used for display text when no image is provided. If not provided, the first letter of `name` will be used.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarFaviconStories.FallbackText} />
 
-> Note: The `fallbackTextProps` prop allows you to customize the Text component used for the fallback display
+### `size`
 
-```tsx
-<AvatarFavicon
-  name="OpenSea"
-  fallbackText="OS"
-  fallbackTextProps={{ color: TextColor.PrimaryDefault }}
-/>
-```
+AvatarFavicon supports five sizes.
 
-### Size
-
-AvatarFavicon supports five sizes:
-
+Available sizes:
 - `AvatarFaviconSize.Xs` (16px)
 - `AvatarFaviconSize.Sm` (24px)
-- `AvatarFaviconSize.Md` (32px) - default
+- `AvatarFaviconSize.Md` (32px)
 - `AvatarFaviconSize.Lg` (40px)
 - `AvatarFaviconSize.Xl` (48px)
 
-The fallback text uses TextVariant.BodySm for all sizes to maintain consistency.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>AvatarFaviconSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>AvatarFaviconSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={AvatarFaviconStories.Size} />
 
-### Has Border
+### `hasBorder`
 
 The `hasBorder` prop enables a border around the AvatarFavicon.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarFaviconStories.HasBorder} />
 
-### Class Name
+### `imageProps`
 
-Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default
-classes using `twMerge`, allowing you to:
+The `imageProps` prop allows you to customize the img element when `src` is provided. All standard HTML img attributes are supported.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `fallbackTextProps`
+
+The `fallbackTextProps` prop allows you to customize the Text component used for the fallback display.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Adding new styles
-<AvatarFavicon
-  name="OpenSea"
-  src="path/to/opensea-favicon.ico"
-  fallbackText="OS"
-  className="mx-2 my-4"
-/>
-```
-
-### Style
+### `style`
 
 The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 

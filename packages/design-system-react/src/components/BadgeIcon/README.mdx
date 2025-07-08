@@ -4,10 +4,10 @@ import * as BadgeIconStories from './BadgeIcon.stories';
 
 # BadgeIcon
 
-`BadgeIcon` is a circular indicator that contains an icon, used to provide quick context or visual tagging at a glance.
+BadgeIcon is a circular indicator that contains an icon, used to provide quick context or visual tagging at a glance.
 
 ```tsx
-import { BadgeIcon } from '@metamask/design-system-react';
+import { BadgeIcon, IconName } from '@metamask/design-system-react';
 
 <BadgeIcon iconName={IconName.User} />;
 ```
@@ -16,38 +16,110 @@ import { BadgeIcon } from '@metamask/design-system-react';
 
 ## Props
 
-### Icon Name
+### `iconName`
 
-Use the `iconName` prop to define which icon should appear inside the badge. This prop is required.
+Use the `iconName` prop to define which icon should appear inside the badge.
 
-Note: The `Icon` component is a child of the `BadgeIcon` component. Use the `iconProps` prop to customize the internal `Icon` component, such as changing the icon color.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={BadgeIconStories.IconNameStory} />
 
-### Class Name
+### `iconProps`
 
-Use the `className` prop to add custom CSS classes to the BadgeIcon component. These classes are merged with the component's default styles using `twMerge`, allowing you to:
+The `iconProps` prop allows you to customize the internal `Icon` component, such as changing the icon color.
 
-- Add new utility styles
-- Override default styles when needed
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-Example:
+### `className`
 
-```tsx
-// Adding spacing utilities
-<BadgeIcon iconName={IconName.User} className="ml-2" />
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-// Overriding background color
-<BadgeIcon
-  iconName={IconName.User}
-  className="bg-success-default"
-  iconProps={{ color: IconColor.SuccessInverse }}
-/>
-```
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
-### Style
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with Tailwind or className alone. For static styles, prefer `className`.
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 

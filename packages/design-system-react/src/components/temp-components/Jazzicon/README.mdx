@@ -15,7 +15,7 @@ import { Jazzicon } from '@metamask/design-system-react';
 
 ## Props
 
-### Address
+### `address`
 
 The `address` prop is required and used as a unique identifier to generate the Jazzicon image. Each address will generate a unique, deterministic pattern. The component supports various address formats:
 
@@ -27,36 +27,108 @@ The `address` prop is required and used as a unique identifier to generate the J
   - Bitcoin (e.g. `bip122:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa`)
   - Solana (e.g. `solana:mainnet:4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7`)
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={JazziconStories.Address} />
 
-### Size
+### `size`
 
-The `size` prop controls the dimensions (both height and width) of the Jazzicon image in pixels. The default size is 32px.
+The `size` prop controls the dimensions (both height and width) of the Jazzicon image in pixels.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>32</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={JazziconStories.Size} />
 
-### Class Name
+### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
-- Override the component's default styles when needed (Jazzicon has no default styles)
+- Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Adding new styles
-<Jazzicon
-  address="0x1234567890abcdef1234567890abcdef12345678"
-  className="mx-2 my-4"
-/>
-```
+### `style`
 
-Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
-### Style
-
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 

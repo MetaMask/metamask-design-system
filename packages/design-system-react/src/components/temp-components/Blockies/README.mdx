@@ -15,68 +15,137 @@ import { Blockies } from '@metamask/design-system-react';
 
 ## Props
 
-### Address
+### `address`
 
 The `address` prop is required and used as a unique identifier to generate the Blockies image. Each address will generate a unique, deterministic pattern.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={BlockiesStories.Address} />
 
-### Size
+### `size`
 
-The `size` prop controls the dimensions (both height and width) of the Blockies image in pixels. The default size is 32px.
+The `size` prop controls the dimensions (both height and width) of the Blockies image in pixels.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>32</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={BlockiesStories.Size} />
 
-### Accessibility
+### `alt`
 
-The `alt` attribute provides alternative text for screen readers. By default, it includes the address for context (`Blockies for {address}`). You can override this with custom alt text:
+The `alt` attribute provides alternative text for screen readers. By default, it includes the address for context (`Blockies for {address}`). You can override this with custom alt text.
 
-#### Default alt text
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>Blockies for {address}</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Default alt text
-<Blockies address="0x1234567890abcdef" />
-```
-
-```html
-<!-- Renders: -->
-<img alt="Blockies for 0x1234567890abcdef" />
-```
-
-#### Custom alt text
-
-```tsx
-// Custom alt text
-<Blockies address="0x1234567890abcdef" alt="User avatar for John Doe" />
-```
-
-```html
-<!-- Renders: -->
-<img alt="User avatar for John Doe" />
-```
-
-### Class Name
+### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
-- Override the component's default styles when needed (Blockies has no default styles)
+- Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Adding new styles
-<Blockies
-  address="0x1234567890abcdef1234567890abcdef12345678"
-  className="mx-2 my-4"
-/>
-```
+### `style`
 
-Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
-### Style
-
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 
