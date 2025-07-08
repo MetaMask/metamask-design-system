@@ -115,12 +115,11 @@ describe('Box', () => {
   });
 
   it('applies className prop without flex class when no flexDirection', () => {
-    render(<Box data-testid="box" className="custom-class bg-red-500 p-4" />);
+    render(<Box data-testid="box" className="bg-default p-4" />);
     const box = screen.getByTestId('box');
     expect(box).not.toHaveClass('flex');
-    expect(box).toHaveClass('custom-class');
+    expect(box).toHaveClass('bg-default');
     expect(box).toHaveClass('p-4');
-    expect(box).toHaveClass('bg-red-500');
   });
 
   it('applies className prop with flex class when flexDirection is provided', () => {
@@ -128,14 +127,13 @@ describe('Box', () => {
       <Box
         data-testid="box"
         flexDirection={BoxFlexDirection.Row}
-        className="custom-class bg-red-500 p-4"
+        className="bg-default p-4"
       />,
     );
     const box = screen.getByTestId('box');
     expect(box).toHaveClass('flex');
-    expect(box).toHaveClass('custom-class');
+    expect(box).toHaveClass('bg-default');
     expect(box).toHaveClass('p-4');
-    expect(box).toHaveClass('bg-red-500');
   });
 
   it('applies all flex props together with flex class', () => {
@@ -147,7 +145,7 @@ describe('Box', () => {
         gap={2}
         alignItems={BoxAlignItems.Center}
         justifyContent={BoxJustifyContent.Between}
-        className="extra-class"
+        className="bg-default"
       />,
     );
 
@@ -159,7 +157,7 @@ describe('Box', () => {
       TWCLASSMAP_BOX_GAP[2],
       BoxAlignItems.Center,
       BoxJustifyContent.Between,
-      'extra-class',
+      'bg-default',
     ];
 
     expectedClasses.forEach((className) => {
@@ -175,7 +173,7 @@ describe('Box', () => {
         gap={2}
         alignItems={BoxAlignItems.Center}
         justifyContent={BoxJustifyContent.Between}
-        className="extra-class"
+        className="bg-default"
       />,
     );
 
@@ -185,7 +183,7 @@ describe('Box', () => {
       TWCLASSMAP_BOX_GAP[2],
       BoxAlignItems.Center,
       BoxJustifyContent.Between,
-      'extra-class',
+      'bg-default',
     ];
 
     expectedClasses.forEach((className) => {

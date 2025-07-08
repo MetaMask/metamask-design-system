@@ -2,6 +2,7 @@ import base, { createConfig } from '@metamask/eslint-config';
 import jest from '@metamask/eslint-config-jest';
 import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
+import tailwind from 'eslint-plugin-tailwindcss';
 
 const NODE_LTS_VERSION = 22;
 
@@ -257,6 +258,35 @@ const config = createConfig([
     files: ['**/*.mjs'],
     languageOptions: {
       sourceType: 'module',
+    },
+  },
+  // Tailwind ESLint
+  {
+    files: [
+      'packages/design-tokens/stories/**',
+      'packages/design-system-react-native/src/**',
+      'apps/storybook-react-native/stories/**',
+      'packages/design-system-react/src/**',
+      'apps/storybook-react/stories/**',
+    ],
+    plugins: {
+      tailwindcss: tailwind,
+    },
+    rules: {
+      'tailwindcss/classnames-order': 'error',
+      'tailwindcss/enforces-negative-arbitrary-values': 'error',
+      'tailwindcss/enforces-shorthand': 'error',
+      'tailwindcss/no-arbitrary-value': 'off', // There are legitimate reasons to use arbitrary values but we should specifically error on static colors
+      'tailwindcss/no-custom-classname': 'error',
+      'tailwindcss/no-contradicting-classname': 'error',
+      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
+    },
+    settings: {
+      tailwindcss: {
+        callees: ['twMerge', 'twClassName'],
+        config: 'apps/storybook-react/tailwind.config.js',
+        classRegex: ['^(class(Name)?|twClassName)$'],
+      },
     },
   },
 ]);

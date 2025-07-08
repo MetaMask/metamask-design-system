@@ -66,7 +66,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     }
 
     const checkboxClasses = twMerge(
-      'relative flex h-6 w-6 items-center justify-center rounded border-2 p-0 transition-transform active:scale-95',
+      'relative flex size-6 items-center justify-center rounded border-2 p-0 transition-transform active:scale-95',
       baseBg,
       baseBorder,
       checkboxContainerProps?.className,
@@ -89,7 +89,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
             aria-invalid={isInvalid}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
-            className="absolute inset-0 h-full w-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
+            className="absolute inset-0 size-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
             {...inputProps}
           />
           <div className={checkboxClasses} {...checkboxContainerProps}>
