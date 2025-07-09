@@ -273,13 +273,13 @@
   },
   "warning": {
     "default": {
-      "value": "{yellow.100}",
+      "value": "{yellow.200}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For warning semantic elements: caution, attention, precaution..."
     },
     "muted": {
-      "value": "#ffd95726",
+      "value": "#F0B03426",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color option for warning semantic."
@@ -291,25 +291,25 @@
       "description": "For elements placed on top of warning/default fill."
     },
     "default-hover": {
-      "value": "#ffde6b",
+      "value": "#F3BE59",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for warning/default."
     },
     "default-pressed": {
-      "value": "#ffe794",
+      "value": "#F6CD7F",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for warning/default."
     },
     "muted-hover": {
-      "value": "#ffd95733",
+      "value": "#F0B03433",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for warning/muted."
     },
     "muted-pressed": {
-      "value": "#ffd95740",
+      "value": "#F0B03440",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for warning/muted."
