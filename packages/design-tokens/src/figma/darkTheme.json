@@ -153,7 +153,7 @@
   },
   "overlay": {
     "default": {
-      "value": "#3f434a99",
+      "value": "#00000099",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Default color for overlays(scrim)."
