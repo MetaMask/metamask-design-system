@@ -93,7 +93,7 @@
       "description": "Softer color for text."
     },
     "muted": {
-      "value": "{grey.500}",
+      "value": "{grey.600}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color for text (Not accessible)."
@@ -125,7 +125,7 @@
       "description": "Softer color for icons, following text/alternative."
     },
     "muted": {
-      "value": "{grey.500}",
+      "value": "{grey.600}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color for icons (Not accessible), following text/muted."
