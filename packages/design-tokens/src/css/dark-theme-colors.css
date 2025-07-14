@@ -34,7 +34,7 @@
   /* Softer color for text (#858b9a) */
   --color-text-alternative: var(--brand-colors-grey-grey300);
   /* Muted color for text (Not accessible) (#686e7d) */
-  --color-text-muted: var(--brand-colors-grey-grey500);
+  --color-text-muted: var(--brand-colors-grey-grey600);
   /* Default color for icons (#ffffff) */
   --color-icon-default: var(--brand-colors-grey-grey000);
   /* Hover state surface for icon.default (#f0f0f0) */
@@ -44,15 +44,15 @@
   /* Softer color for icons (#858b9a) */
   --color-icon-alternative: var(--brand-colors-grey-grey300);
   /* Muted color for icons (Not accessible) (#686e7d) */
-  --color-icon-muted: var(--brand-colors-grey-grey500);
+  --color-icon-muted: var(--brand-colors-grey-grey600);
   /* For elements placed on top of icon.default fill (#121314) */
   --color-icon-inverse: var(--brand-colors-grey-grey900);
   /* Default color for borders (#9ca1af) */
   --color-border-default: var(--brand-colors-grey-grey400);
   /* Muted color for borders (#858b9a33) */
   --color-border-muted: #858b9a33;
-  /* Default color for overlays (scrim) (#3f434a99) */
-  --color-overlay-default: #3f434a99;
+  /* Default color for overlays (scrim) (#00000099) */
+  --color-overlay-default: #00000099;
   /* Dimmer color for overlays (scrim) (black-80%) */
   --color-overlay-alternative: #000000cc;
   /* For elements placed on top of overlay/alternative (#ffffff) */
