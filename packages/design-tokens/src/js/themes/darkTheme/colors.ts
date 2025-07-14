@@ -36,7 +36,7 @@ export const colors: ThemeColors = {
     /** Softer color for text (#858B9A) */
     alternative: brandColor.grey300,
     /** Muted color for text (Not accessible) (#686E7D) */
-    muted: brandColor.grey500,
+    muted: brandColor.grey600,
   },
   icon: {
     /** Default color for icons (#FFFFFF) */
@@ -48,7 +48,7 @@ export const colors: ThemeColors = {
     /** Softer color for icons (#858B9A) */
     alternative: brandColor.grey300,
     /** Muted color for icons (Not accessible) (#686E7D) */
-    muted: brandColor.grey500,
+    muted: brandColor.grey600,
     /** For elements placed on top of icon.default fill (#121314) */
     inverse: brandColor.grey900,
   },
@@ -59,8 +59,8 @@ export const colors: ThemeColors = {
     muted: '#858b9a33',
   },
   overlay: {
-    /** Default color for overlays (scrim) (#3f434a99) */
-    default: '#3f434a99',
+    /** Default color for overlays (scrim) (#00000099) */
+    default: '#00000099',
     /** Dimmer color for overlays (scrim) (#000000CC) */
     alternative: '#000000cc',
     /** For elements placed on top of overlay/alternative (#FFFFFF) */

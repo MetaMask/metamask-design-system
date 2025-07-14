@@ -36,7 +36,7 @@ export const colors: ThemeColors = {
     /** Softer color for text (#686E7D) */
     alternative: brandColor.grey500,
     /** Muted color for text (Not accessible) (#9CA1AF) */
-    muted: brandColor.grey300,
+    muted: brandColor.grey200,
   },
   icon: {
     /** Default color for icons (#121314) */
@@ -48,7 +48,7 @@ export const colors: ThemeColors = {
     defaultPressed: '#414243',
     alternative: brandColor.grey500,
     /** Muted color for icons (Not accessible) (#9CA1AF) */
-    muted: brandColor.grey300,
+    muted: brandColor.grey200,
     /** For elements placed on top of icon.default fill (#FFFFFF) */
     inverse: brandColor.grey000,
   },
