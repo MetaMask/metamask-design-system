@@ -51,7 +51,7 @@ describe('AvatarIcon', () => {
       TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[
         AvatarIconSeverity.Neutral
       ];
-    const expectedIconBgStyle = tw`${bgClass} custom-class`;
+    const expectedIconBgStyle = tw`${bgClass} bg-default`;
 
     const expectedIconColor =
       tw`${MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral]}`
@@ -62,7 +62,7 @@ describe('AvatarIcon', () => {
       <AvatarIcon
         iconName={IconName.Add}
         iconProps={{ testID: 'icon' }}
-        twClassName="custom-class"
+        twClassName="bg-default"
         style={customStyle}
         accessibilityLabel="avatar"
         testID="avatar-icon"

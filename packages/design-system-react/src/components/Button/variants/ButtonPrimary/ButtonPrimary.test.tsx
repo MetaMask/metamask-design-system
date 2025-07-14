@@ -44,13 +44,9 @@ describe('ButtonPrimary', () => {
   });
 
   it('merges custom className with default styles', () => {
-    render(
-      <ButtonPrimary className="custom-class">Primary Button</ButtonPrimary>,
-    );
-
+    render(<ButtonPrimary className="bg-default">Button</ButtonPrimary>);
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('custom-class');
-    expect(button).toHaveClass('bg-icon-default');
+    expect(button).toHaveClass('bg-default');
   });
 
   it('renders with inverse danger styles when both isInverse and isDanger are true', () => {

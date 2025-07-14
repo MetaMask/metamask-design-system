@@ -262,7 +262,7 @@ export const TextAlignStory: Story = {
 
 export const OverflowWrapStory: Story = {
   render: () => (
-    <div className="border-warning w-[200px] border">
+    <div className="w-48 border border-warning-default">
       <Text overflowWrap={OverflowWrap.Normal}>
         Normal: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
       </Text>
@@ -276,7 +276,7 @@ export const OverflowWrapStory: Story = {
 
 export const Ellipsis: Story = {
   render: () => (
-    <div className="border-primary w-1/3 border">
+    <div className="w-48 border border-primary-default">
       <Text ellipsis>Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d</Text>
       <Text>No Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d</Text>
     </div>

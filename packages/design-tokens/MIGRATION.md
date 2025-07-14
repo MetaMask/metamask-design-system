@@ -2,11 +2,191 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 7.0.0 to 8.0.0](#from-version-700-to-800)
 - [From version 6.0.0 to 7.0.0](#from-version-600-to-700)
 - [From version 5.1.0 to 6.0.0](#from-version-510-to-600)
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 7.0.0 to 8.0.0
+
+### Background Color Token Changes (Breaking Changes)
+
+In version 8.0.0, we've made significant changes to background color tokens that separate muted backgrounds into transparent and opaque variants. This is a breaking change that affects components requiring opaque backgrounds.
+
+#### Key Changes
+
+**`background/muted` is now transparent:**
+
+- **Before**: `grey050 | grey800` (opaque colors)
+- **After**: `#3C4D9D 10% | E0E5FF 15%` (transparent colors)
+
+**New opaque tokens added:**
+
+- `background/section`: `grey050 | grey800` (replaces the old opaque `background/muted`)
+- `background/subsection`: `grey000 | grey700`
+
+**Updated transparent hover/pressed states:**
+
+- `background/muted-hover`: `#3C4D9D 15% | E0E5FF 20%`
+- `background/muted-pressed`: `#3C4D9D 20% | E0E5FF 25%`
+
+#### Breaking Change Impact
+
+This change affects components that require opaque backgrounds, including:
+
+- **BadgeNetwork** and other badge components
+- **Avatar fallbacks**
+- **Non-action type elements** (read-only sections)
+- Any component where transparency would break the visual design
+
+#### Added Tokens
+
+##### CSS Variables
+
+```css
+/* New opaque background hierarchy tokens */
+--color-background-section: var(--brand-colors-grey-grey050); /* Light theme */
+--color-background-section: var(--brand-colors-grey-grey800); /* Dark theme */
+--color-background-subsection: var(
+  --brand-colors-grey-grey000
+); /* Light theme */
+--color-background-subsection: var(
+  --brand-colors-grey-grey700
+); /* Dark theme */
+```
+
+##### JS Tokens
+
+```javascript
+colors.background.section; // For opaque section backgrounds (replaces old muted)
+colors.background.subsection; // For opaque subsection backgrounds
+```
+
+### Typography Token Removal (Breaking Changes)
+
+Version 8.0.0 removes deprecated typography tokens that were scheduled for deletion.
+
+#### Removed Typography Tokens
+
+**HeadingSMRegular tokens have been completely removed:**
+
+##### CSS Variables
+
+```css
+/* REMOVED - No longer available */
+--typography-s-heading-sm-regular-font-family
+--typography-l-heading-sm-regular-font-family
+/* And all other HeadingSMRegular properties */
+```
+
+##### JS Tokens
+
+```javascript
+// REMOVED - No longer available
+typography.sHeadingSMRegular; // All properties
+typography.lHeadingSMRegular; // All properties
+```
+
+#### Replacement Strategy
+
+**Choose an appropriate typography token based on your design needs:**
+
+The HeadingSMRegular tokens have been removed as they were deprecated. You should evaluate your specific use case and select the most appropriate typography token from the available options such as:
+
+- Body variants (BodyXS, BodySM, BodyMD, BodyLG)
+- Heading variants (HeadingSM, HeadingMD, HeadingLG)
+- Display variants (DisplayMD)
+
+Consult with your design team to determine the most suitable replacement for each specific use case.
+
+#### Font Family Change (Breaking Changes)
+
+Version 8.0.0 changes the default font from CentraNo1 to Geist. This is a breaking change that affects all typography tokens and requires updating font imports and references.
+
+#### Key Changes
+
+**Default font family has changed:**
+
+- **Before**: `'CentraNo1', 'Helvetica Neue', Helvetica, Arial, sans-serif`
+- **After**: `'Geist', 'Helvetica Neue', Helvetica, Arial, sans-serif`
+
+#### Migration Steps
+
+1. **Update Font Imports**:
+
+   - Remove any imports of CentraNo1 font files
+   - Add imports for Geist font files
+   - Update any font-face declarations in your CSS
+
+2. **Update Font References**:
+
+   ```css
+   /* Update font family references */
+   --font-family-default: 'Geist', 'Helvetica Neue', Helvetica, Arial,
+     sans-serif;
+   ```
+
+3. **Test Typography**:
+
+   - Review all text components to ensure they render correctly with Geist
+   - Check for any layout shifts or spacing issues
+   - Verify font weights and styles are applied correctly
+
+4. **Update Custom Font Stacks**:
+
+   - If you have custom font stacks that include CentraNo1, update them to use Geist
+   - Ensure fallback fonts are appropriate for your use case
+
+5. **React Native Specific**:
+   - Update any React Native font configurations
+   - Test font rendering on both iOS and Android
+
+### Migration Steps
+
+1. **Critical: Replace `background.muted` for opaque use cases**:
+
+   - **Badges**: Replace `background.muted` with `background.section` for BadgeNetwork and other badge components
+   - **Avatar fallbacks**: Replace `background.muted` with `background.section` for avatar fallback backgrounds
+   - **Read-only sections**: Replace `background.muted` with `background.section` for any non-interactive background fills
+   - **Any opaque background**: If your component requires an opaque background, use `background.section` instead of `background.muted`
+
+2. **Keep `background.muted` for transparent use cases**:
+
+   - **Button backgrounds**: The new transparent `background.muted` is intended for button and interactive element backgrounds
+   - **Overlay backgrounds**: Use for backgrounds that should be semi-transparent
+
+3. **Update CSS Variables**:
+
+   ```css
+   /* Replace opaque muted usage */
+   background-color: var(--color-background-muted); /* OLD - now transparent */
+   background-color: var(
+     --color-background-section
+   ); /* NEW - for opaque backgrounds */
+   ```
+
+4. **Update JS Token Usage**:
+
+   ```javascript
+   // Replace opaque muted usage
+   backgroundColor: colors.background.muted, // OLD - now transparent
+   backgroundColor: colors.background.section, // NEW - for opaque backgrounds
+   ```
+
+5. **Test Visual Regression**: Carefully test all components that previously used `background.muted` to ensure they still appear correctly with the new transparent values
+
+6. **Replace HeadingSMRegular tokens**:
+
+   - Identify all usage of `sHeadingSMRegular` and `lHeadingSMRegular` tokens in your codebase
+   - Work with your design team to determine the appropriate replacement typography token for each use case
+   - Update your CSS variables and JS token references accordingly
+   - Test the visual changes to ensure the new typography meets your design requirements
+
+7. **Update Import Statements**: If you're importing directly from specific paths, update to use the main package exports
+8. **Remove Deprecated Font Family References**: Ensure all typography uses the base font family tokens (if not already updated from 7.0.0)
+9. **Test React Native Integration**: Verify TWRNC compatibility if using React Native
 
 ## From version 6.0.0 to 7.0.0
 

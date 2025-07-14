@@ -198,7 +198,7 @@ describe('AvatarGroup', () => {
       <AvatarGroup
         variant={AvatarGroupVariant.Account}
         avatarPropsArr={SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR}
-        twClassName="bg-red-500"
+        twClassName="bg-default"
         style={customStyle}
         testID="group"
       />,

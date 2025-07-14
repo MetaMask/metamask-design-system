@@ -4,7 +4,8 @@ import { isAddress as isSolanaAddress } from '@solana/addresses';
 /**
  * Generates a numeric seed for Ethereum (eip155) addresses.
  *
- * @param address
+ * @param address - The Ethereum address to generate a seed from
+ * @returns A numeric seed for jazzicon generation
  */
 export function generateSeedEthereum(address: string): number {
   // Example: parse the first 8 chars of the address after '0x'
@@ -15,7 +16,8 @@ export function generateSeedEthereum(address: string): number {
 /**
  * Generates a byte-array seed for non-Ethereum addresses (Solana, Bitcoin, etc.).
  *
- * @param address
+ * @param address - The address to generate a byte array seed from
+ * @returns An array of numbers representing the bytes of the address
  */
 export function generateSeedNonEthereum(address: string): number[] {
   return Array.from(stringToBytes(address.normalize('NFKC').toLowerCase()));
@@ -25,7 +27,8 @@ export function generateSeedNonEthereum(address: string): number[] {
  * Dynamically checks if the address is Bitcoin or Solana; otherwise default to Ethereum.
  * Returns a Promise that resolves to one of the known CAIP-2 namespaces.
  *
- * @param address
+ * @param address - The address to determine the CAIP namespace for
+ * @returns A Promise that resolves to a KnownCaipNamespace
  */
 export async function getCaipNamespaceFromAddress(
   address: string,
