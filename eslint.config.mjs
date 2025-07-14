@@ -38,7 +38,7 @@ const config = createConfig([
       'apps/storybook-react/.storybook/*.tsx',
       'apps/storybook-react/vite.config.ts',
       'apps/storybook-react/postcss.config.js',
-      'apps/storybook-react/tailwind.config.js',
+      'apps/storybook-react/tailwind.config.ts',
       // storybook react native
       'apps/storybook-react-native/.storybook/**/*.js',
       'apps/storybook-react-native/*.js',
@@ -284,7 +284,7 @@ const config = createConfig([
     settings: {
       tailwindcss: {
         callees: ['twMerge', 'twClassName'],
-        config: 'apps/storybook-react/tailwind.config.js',
+        config: 'apps/storybook-react/tailwind.config.ts',
         classRegex: ['^(class(Name)?|twClassName)$'],
       },
     },
