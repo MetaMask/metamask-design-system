@@ -121,18 +121,18 @@ export const colors: ThemeColors = {
   success: {
     /** For positive semantic elements: success, confirm, complete, safe (#457A39) */
     default: brandColor.lime500,
-    /** Muted color for positive semantic (#457A391A) */
-    muted: '#457A391A',
+    /** Muted color for positive semantic (#457a391a) */
+    muted: '#457a391a',
     /** For elements placed on top of success/default fill (#FFFFFF) */
     inverse: brandColor.grey000,
-    /** Hover state surface for success/default (#3D6C32) */
-    defaultHover: '#3D6C32',
-    /** Pressed state surface for success/default (#2D5025) */
-    defaultPressed: '#2D5025',
-    /** Hover state surface for success/muted (#457A3926) */
-    mutedHover: '#457A3926',
-    /** Pressed state surface for success/muted (#457A3933) */
-    mutedPressed: '#457A3933',
+    /** Hover state surface for success/default (#3d6c32) */
+    defaultHover: '#3d6c32',
+    /** Pressed state surface for success/default (#2d5025) */
+    defaultPressed: '#2d5025',
+    /** Hover state surface for success/muted (#457a3926) */
+    mutedHover: '#457a3926',
+    /** Pressed state surface for success/muted (#457a3933) */
+    mutedPressed: '#457a3933',
   },
   info: {
     /** For informational read-only elements: info, reminder, hint (#4459ff) */

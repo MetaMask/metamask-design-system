@@ -107,36 +107,36 @@ export const colors: ThemeColors = {
   warning: {
     /** For warning semantic elements: caution, attention, precaution (#F0B034) */
     default: brandColor.yellow200,
-    /** Muted color option for warning semantic (#F0B03426) */
-    muted: '#F0B03426',
+    /** Muted color option for warning semantic (#f0b03426) */
+    muted: '#f0b03426',
     /** For elements placed on top of warning/default fill (#121314) */
     inverse: brandColor.grey900,
-    /** Hover state surface for warning/default (#F3BE59) */
-    defaultHover: '#F3BE59',
-    /** Pressed state surface for warning/default (#F6CD7F) */
-    defaultPressed: '#F6CD7F',
+    /** Hover state surface for warning/default (#f3be59) */
+    defaultHover: '#f3be59',
+    /** Pressed state surface for warning/default (#f6cd7f) */
+    defaultPressed: '#f6cd7f',
 
-    /** Hover state surface for warning/muted (#F0B03433) */
-    mutedHover: '#F0B03433',
-    /** Pressed state surface for warning/muted (#F0B03440) */
-    mutedPressed: '#F0B03440',
+    /** Hover state surface for warning/muted (#f0b03433) */
+    mutedHover: '#f0b03433',
+    /** Pressed state surface for warning/muted (#f0b03440) */
+    mutedPressed: '#f0b03440',
   },
   success: {
     /** For positive semantic elements: success, confirm, complete, safe (#BAF24A) */
     default: brandColor.lime100,
-    /** Muted color for positive semantic (#BAF24A26) */
-    muted: '#BAF24A26',
+    /** Muted color for positive semantic (#baf24a26) */
+    muted: '#baf24a26',
     /** For elements placed on top of success/default fill (#121314) */
     inverse: brandColor.grey900,
-    /** Hover state surface for success/default (#C9F570) */
-    defaultHover: '#C9F570',
-    /** Pressed state surface for success/default (#D7F796) */
-    defaultPressed: '#D7F796',
+    /** Hover state surface for success/default (#c9f570) */
+    defaultHover: '#c9f570',
+    /** Pressed state surface for success/default (#d7f796) */
+    defaultPressed: '#d7f796',
 
-    /** Hover state surface for success/muted (#BAF24A33) */
-    mutedHover: '#BAF24A33',
-    /** Pressed state surface for success/muted (#BAF24A40) */
-    mutedPressed: '#BAF24A40',
+    /** Hover state surface for success/muted (#baf24a33) */
+    mutedHover: '#baf24a33',
+    /** Pressed state surface for success/muted (#baf24a40) */
+    mutedPressed: '#baf24a40',
   },
   info: {
     /** For informational read-only elements: info, reminder, hint (#8b99ff) */
