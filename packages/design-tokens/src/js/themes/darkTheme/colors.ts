@@ -105,38 +105,38 @@ export const colors: ThemeColors = {
     mutedPressed: '#ff758440',
   },
   warning: {
-    /** For warning semantic elements: caution, attention, precaution (#FFD957) */
-    default: brandColor.yellow100,
-    /** Muted color option for warning semantic (#FFD95726) */
-    muted: '#ffd95726',
+    /** For warning semantic elements: caution, attention, precaution (#F0B034) */
+    default: brandColor.yellow200,
+    /** Muted color option for warning semantic (#f0b03426) */
+    muted: '#f0b03426',
     /** For elements placed on top of warning/default fill (#121314) */
     inverse: brandColor.grey900,
-    /** Hover state surface for warning/default (#ffde6b) */
-    defaultHover: '#ffde6b',
-    /** Pressed state surface for warning/default (#ffe794) */
-    defaultPressed: '#ffe794',
+    /** Hover state surface for warning/default (#f3be59) */
+    defaultHover: '#f3be59',
+    /** Pressed state surface for warning/default (#f6cd7f) */
+    defaultPressed: '#f6cd7f',
 
-    /** Hover state surface for warning/muted (#FFD95733) */
-    mutedHover: '#ffd95733',
-    /** Pressed state surface for warning/muted (#FFD95740) */
-    mutedPressed: '#ffd95740',
+    /** Hover state surface for warning/muted (#f0b03433) */
+    mutedHover: '#f0b03433',
+    /** Pressed state surface for warning/muted (#f0b03440) */
+    mutedPressed: '#f0b03440',
   },
   success: {
-    /** For positive semantic elements: success, confirm, complete, safe (#4CB564) */
-    default: brandColor.green300,
-    /** Muted color for positive semantic (#4CB56426) */
-    muted: '#4cb56426',
+    /** For positive semantic elements: success, confirm, complete, safe (#BAF24A) */
+    default: brandColor.lime100,
+    /** Muted color for positive semantic (#baf24a26) */
+    muted: '#baf24a26',
     /** For elements placed on top of success/default fill (#121314) */
     inverse: brandColor.grey900,
-    /** Hover state surface for success/default (#59ba6f) */
-    defaultHover: '#59ba6f',
-    /** Pressed state surface for success/default (#76C688) */
-    defaultPressed: '#76c688',
+    /** Hover state surface for success/default (#c9f570) */
+    defaultHover: '#c9f570',
+    /** Pressed state surface for success/default (#d7f796) */
+    defaultPressed: '#d7f796',
 
-    /** Hover state surface for success/muted (#4CB56433) */
-    mutedHover: '#4cb56433',
-    /** Pressed state surface for success/muted (#4CB56440) */
-    mutedPressed: '#4cb56440',
+    /** Hover state surface for success/muted (#baf24a33) */
+    mutedHover: '#baf24a33',
+    /** Pressed state surface for success/muted (#baf24a40) */
+    mutedPressed: '#baf24a40',
   },
   info: {
     /** For informational read-only elements: info, reminder, hint (#8b99ff) */
