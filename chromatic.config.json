@@ -1,0 +1,13 @@
+{
+  "projectToken": "CHROMATIC_PROJECT_TOKEN",
+  "buildScriptName": "build-storybook",
+  "storybookBuildDir": "apps/storybook-react/storybook-static",
+  "onlyChanged": true,
+  "externals": ["public/**"],
+  "ignoreLastBuildOnBranch": "main",
+  "exitOnceUploaded": true,
+  "exitZeroOnChanges": true,
+  "skip": "dependabot/**",
+  "autoAcceptChanges": "main",
+  "traceChanged": "expanded"
+}

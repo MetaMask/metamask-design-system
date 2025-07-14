@@ -1,0 +1,48 @@
+name: Chromatic Visual Regression Testing
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  chromatic:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Required for Chromatic to work properly
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        
+      - name: Build Storybook
+        run: |
+          cd apps/storybook-react
+          yarn build-storybook
+        
+      - name: Run Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          buildScriptName: build-storybook
+          workingDir: apps/storybook-react
+          onlyChanged: true
+          externals: |
+            public/**
+          exitOnceUploaded: true
+          exitZeroOnChanges: true
+          skip: dependabot/**
+          autoAcceptChanges: main
+          traceChanged: expanded
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"

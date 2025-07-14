@@ -37,6 +37,8 @@
     "storybook": "yarn workspace @metamask/storybook-react storybook",
     "storybook:android": "yarn workspace @metamask/storybook-react-native android",
     "storybook:ios": "yarn workspace @metamask/storybook-react-native ios",
+    "chromatic": "yarn workspace @metamask/storybook-react chromatic",
+    "chromatic:ci": "yarn workspace @metamask/storybook-react chromatic:ci",
     "test": "yarn test:scripts --silent --collectCoverage=false --reporters=jest-silent-reporter && yarn test:packages",
     "test:clean": "yarn workspaces foreach --all --parallel --verbose run test:clean && yarn test",
     "test:packages": "yarn test:verbose --silent --collectCoverage=false --reporters=jest-silent-reporter",
