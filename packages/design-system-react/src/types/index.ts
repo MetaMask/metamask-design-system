@@ -190,6 +190,40 @@ export enum BoxJustifyContent {
 }
 
 /**
+ * Box - backgroundColor
+ */
+export enum BoxBackgroundColor {
+  Default = 'bg-default',
+  Alternative = 'bg-alternative',
+  Muted = 'bg-muted',
+  PrimaryDefault = 'bg-primary-default',
+  PrimaryMuted = 'bg-primary-muted',
+  ErrorDefault = 'bg-error-default',
+  ErrorMuted = 'bg-error-muted',
+  WarningDefault = 'bg-warning-default',
+  WarningMuted = 'bg-warning-muted',
+  SuccessDefault = 'bg-success-default',
+  SuccessMuted = 'bg-success-muted',
+  InfoDefault = 'bg-info-default',
+  InfoMuted = 'bg-info-muted',
+  Transparent = 'bg-transparent',
+}
+
+/**
+ * Box - borderColor
+ */
+export enum BoxBorderColor {
+  Default = 'border-default',
+  Muted = 'border-muted',
+  PrimaryDefault = 'border-primary-default',
+  ErrorDefault = 'border-error-default',
+  WarningDefault = 'border-warning-default',
+  SuccessDefault = 'border-success-default',
+  InfoDefault = 'border-info-default',
+  Transparent = 'border-transparent',
+}
+
+/**
  * ButtonBase - size
  */
 export enum ButtonBaseSize {

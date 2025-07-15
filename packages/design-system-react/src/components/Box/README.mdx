@@ -7,13 +7,16 @@ import * as BoxStories from './Box.stories';
 `Box` is a low level flexbox layout component. It provides a focused set of props that map to Tailwind flexbox utility classes for easy flex-based layout control.
 
 ```tsx
-import { Box, BoxFlexDirection, BoxAlignItems } from '@metamask/design-system-react';
+import { Box, BoxFlexDirection, BoxAlignItems, BoxBackgroundColor, BoxBorderColor } from '@metamask/design-system-react';
 
 <Box
   flexDirection={BoxFlexDirection.Row}
   alignItems={BoxAlignItems.Center}
   gap={4}
-  className="p-4 bg-alternative"
+  padding={4}
+  backgroundColor={BoxBackgroundColor.Alternative}
+  borderWidth={1}
+  borderColor={BoxBorderColor.Default}
 >
   Content
 </Box>;
@@ -22,6 +25,8 @@ import { Box, BoxFlexDirection, BoxAlignItems } from '@metamask/design-system-re
 <Canvas of={BoxStories.Default} />
 
 ## Props
+
+### Flexbox Properties
 
 ### FlexDirection
 
@@ -75,9 +80,111 @@ Use the `justifyContent` prop to configure the `justify-content` style of the Bo
 
 <Canvas of={BoxStories.JustifyContent} />
 
+### Margin Properties
+
+### Margin
+
+Use the `margin` prop with values from the `BoxSpacing` scale (0–12) to set margin on all sides. Each unit equals 4px.
+
+<Canvas of={BoxStories.Margin} />
+
+### Directional Margins
+
+Use directional margin props for fine-grained control:
+
+- `marginTop` - Top margin
+- `marginRight` - Right margin
+- `marginBottom` - Bottom margin
+- `marginLeft` - Left margin
+- `marginHorizontal` - Left and right margins
+- `marginVertical` - Top and bottom margins
+
+<Canvas of={BoxStories.MarginDirectional} />
+
+### Padding Properties
+
+### Padding
+
+Use the `padding` prop with values from the `BoxSpacing` scale (0–12) to set padding on all sides. Each unit equals 4px.
+
+<Canvas of={BoxStories.Padding} />
+
+### Directional Padding
+
+Use directional padding props for fine-grained control:
+
+- `paddingTop` - Top padding
+- `paddingRight` - Right padding
+- `paddingBottom` - Bottom padding
+- `paddingLeft` - Left padding
+- `paddingHorizontal` - Left and right padding
+- `paddingVertical` - Top and bottom padding
+
+<Canvas of={BoxStories.PaddingDirectional} />
+
+### Border Properties
+
+### Border
+
+Use the `borderWidth` prop with values from the `BoxSpacing` scale (0–12) to set border width, and `borderColor` to set the border color.
+
+<Canvas of={BoxStories.Border} />
+
+### Border Colors
+
+Use the `borderColor` prop with predefined color values:
+
+- `BoxBorderColor.Default` - Default border color
+- `BoxBorderColor.Muted` - Muted border color
+- `BoxBorderColor.PrimaryDefault` - Primary brand border
+- `BoxBorderColor.ErrorDefault` - Error state border
+- `BoxBorderColor.WarningDefault` - Warning state border
+- `BoxBorderColor.SuccessDefault` - Success state border
+- `BoxBorderColor.InfoDefault` - Info state border
+- `BoxBorderColor.Transparent` - Transparent border
+
+<Canvas of={BoxStories.BorderError} />
+
+### Background Properties
+
+### Background Colors
+
+Use the `backgroundColor` prop with predefined color values:
+
+- `BoxBackgroundColor.Default` - Default background color
+- `BoxBackgroundColor.Alternative` - Alternative background color
+- `BoxBackgroundColor.Muted` - Muted background color
+- `BoxBackgroundColor.PrimaryDefault` - Primary brand color
+- `BoxBackgroundColor.PrimaryMuted` - Muted primary color
+- `BoxBackgroundColor.ErrorDefault` - Error state color
+- `BoxBackgroundColor.ErrorMuted` - Muted error color
+- `BoxBackgroundColor.WarningDefault` - Warning state color
+- `BoxBackgroundColor.WarningMuted` - Muted warning color
+- `BoxBackgroundColor.SuccessDefault` - Success state color
+- `BoxBackgroundColor.SuccessMuted` - Muted success color
+- `BoxBackgroundColor.InfoDefault` - Info state color
+- `BoxBackgroundColor.InfoMuted` - Muted info color
+- `BoxBackgroundColor.Transparent` - Transparent background
+
+<Canvas of={BoxStories.BackgroundColor} />
+
+### Combined Usage
+
+### Complex Layout
+
+Combine multiple props for sophisticated layouts:
+
+<Canvas of={BoxStories.ComplexLayout} />
+
+### Card Example
+
+Create card-like components with padding, margins, background, and borders:
+
+<Canvas of={BoxStories.CardExample} />
+
 ### ClassName
 
-Use `className` to apply additional Tailwind CSS classes for styling beyond the flex layout properties.
+Use `className` to apply additional Tailwind CSS classes for styling beyond the component's built-in props.
 
 <Canvas of={BoxStories.ClassName} />
 
@@ -98,29 +205,30 @@ Use the `style` prop for dynamic inline styles when needed.
 
 ## BoxSpacing Values
 
-The `BoxSpacing` type provides a numeric scale (0-12) for the gap property. Each unit corresponds to 4px:
+The `BoxSpacing` type provides a numeric scale (0-12) for spacing properties. Each unit corresponds to 4px:
 
-- `0` → `0px` - No gap
-- `1` → `4px` - Extra small gap
-- `2` → `8px` - Small gap
-- `3` → `12px` - Small-medium gap
-- `4` → `16px` - Medium gap
-- `5` → `20px` - Medium-large gap
-- `6` → `24px` - Large gap
-- `7` → `28px` - Extra large gap
-- `8` → `32px` - 2X large gap
-- `9` → `36px` - 3X large gap
-- `10` → `40px` - 4X large gap
-- `11` → `44px` - 5X large gap
-- `12` → `48px` - 6X large gap
+- `0` → `0px` - No spacing
+- `1` → `4px` - Extra small spacing
+- `2` → `8px` - Small spacing
+- `3` → `12px` - Small-medium spacing
+- `4` → `16px` - Medium spacing
+- `5` → `20px` - Medium-large spacing
+- `6` → `24px` - Large spacing
+- `7` → `28px` - Extra large spacing
+- `8` → `32px` - 2X large spacing
+- `9` → `36px` - 3X large spacing
+- `10` → `40px` - 4X large spacing
+- `11` → `44px` - 5X large spacing
+- `12` → `48px` - 6X large spacing
+
+**Note:** For `borderWidth`, value `1` maps to the default `border` class (1px), and `0` maps to `border-0` (no border).
 
 ```tsx
 // Examples
 <Box gap={2}>Small gap between items (8px)</Box>
 <Box gap={6}>Large gap between items (24px)</Box>
-<Box flexDirection={BoxFlexDirection.Column} gap={4}>
-  Vertical layout with medium gap (16px)
-</Box>
+<Box margin={4} padding={2}>Medium margin (16px) and small padding (8px)</Box>
+<Box borderWidth={1} borderColor={BoxBorderColor.Default}>Default border (1px)</Box>
 ```
 
 ## Usage Patterns
@@ -155,6 +263,38 @@ The `BoxSpacing` type provides a numeric scale (0-12) for the gap property. Each
 >
   <Text>Left</Text>
   <Text>Right</Text>
+</Box>
+```
+
+### Card Component
+
+```tsx
+<Box
+  padding={4}
+  margin={2}
+  backgroundColor={BoxBackgroundColor.Default}
+  borderWidth={1}
+  borderColor={BoxBorderColor.Default}
+>
+  <Text>Card Title</Text>
+  <Box marginTop={2} gap={2}>
+    <Text>Card content goes here</Text>
+    <Text>More content</Text>
+  </Box>
+</Box>
+```
+
+### Alert Component
+
+```tsx
+<Box
+  padding={4}
+  margin={2}
+  backgroundColor={BoxBackgroundColor.WarningMuted}
+  borderWidth={1}
+  borderColor={BoxBorderColor.WarningDefault}
+>
+  <Text>Warning: This is an alert message</Text>
 </Box>
 ```
 
