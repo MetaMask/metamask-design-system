@@ -134,16 +134,49 @@ Use the `borderWidth` prop with values from the `BoxSpacing` scale (0–12) to s
 
 Use the `borderColor` prop with predefined color values:
 
+**Basic Colors:**
+
 - `BoxBorderColor.Default` - Default border color
 - `BoxBorderColor.Muted` - Muted border color
-- `BoxBorderColor.PrimaryDefault` - Primary brand border
-- `BoxBorderColor.ErrorDefault` - Error state border
-- `BoxBorderColor.WarningDefault` - Warning state border
-- `BoxBorderColor.SuccessDefault` - Success state border
-- `BoxBorderColor.InfoDefault` - Info state border
 - `BoxBorderColor.Transparent` - Transparent border
 
-<Canvas of={BoxStories.BorderError} />
+**Primary Colors:**
+
+- `BoxBorderColor.PrimaryDefault` - Primary brand border
+- `BoxBorderColor.PrimaryAlternative` - Primary alternative border
+- `BoxBorderColor.PrimaryMuted` - Primary muted border
+- `BoxBorderColor.PrimaryInverse` - Primary inverse border
+- `BoxBorderColor.PrimaryDefaultPressed` - Primary pressed border
+
+**Semantic Colors:**
+
+- `BoxBorderColor.ErrorDefault` - Error state border
+- `BoxBorderColor.ErrorAlternative` - Error alternative border
+- `BoxBorderColor.ErrorMuted` - Error muted border
+- `BoxBorderColor.ErrorInverse` - Error inverse border
+- `BoxBorderColor.ErrorDefaultPressed` - Error pressed border
+- `BoxBorderColor.WarningDefault` - Warning state border
+- `BoxBorderColor.WarningAlternative` - Warning alternative border
+- `BoxBorderColor.WarningMuted` - Warning muted border
+- `BoxBorderColor.WarningInverse` - Warning inverse border
+- `BoxBorderColor.WarningDefaultPressed` - Warning pressed border
+- `BoxBorderColor.SuccessDefault` - Success state border
+- `BoxBorderColor.SuccessAlternative` - Success alternative border
+- `BoxBorderColor.SuccessMuted` - Success muted border
+- `BoxBorderColor.SuccessInverse` - Success inverse border
+- `BoxBorderColor.SuccessDefaultPressed` - Success pressed border
+- `BoxBorderColor.InfoDefault` - Info state border
+- `BoxBorderColor.InfoAlternative` - Info alternative border
+- `BoxBorderColor.InfoMuted` - Info muted border
+- `BoxBorderColor.InfoInverse` - Info inverse border
+
+**Special Colors:**
+
+- `BoxBorderColor.FlaskDefault` - Flask default border
+- `BoxBorderColor.FlaskInverse` - Flask inverse border
+- `BoxBorderColor.OverlayAlternative` - Overlay alternative border
+- `BoxBorderColor.OverlayDefault` - Overlay default border
+- `BoxBorderColor.OverlayInverse` - Overlay inverse border
 
 ### Background Properties
 
@@ -151,36 +184,62 @@ Use the `borderColor` prop with predefined color values:
 
 Use the `backgroundColor` prop with predefined color values:
 
+**Basic Colors:**
+
 - `BoxBackgroundColor.Default` - Default background color
 - `BoxBackgroundColor.Alternative` - Alternative background color
+- `BoxBackgroundColor.DefaultAlternative` - Default alternative background color
 - `BoxBackgroundColor.Muted` - Muted background color
-- `BoxBackgroundColor.PrimaryDefault` - Primary brand color
-- `BoxBackgroundColor.PrimaryMuted` - Muted primary color
-- `BoxBackgroundColor.ErrorDefault` - Error state color
-- `BoxBackgroundColor.ErrorMuted` - Muted error color
-- `BoxBackgroundColor.WarningDefault` - Warning state color
-- `BoxBackgroundColor.WarningMuted` - Muted warning color
-- `BoxBackgroundColor.SuccessDefault` - Success state color
-- `BoxBackgroundColor.SuccessMuted` - Muted success color
-- `BoxBackgroundColor.InfoDefault` - Info state color
-- `BoxBackgroundColor.InfoMuted` - Muted info color
 - `BoxBackgroundColor.Transparent` - Transparent background
 
+**Interactive States:**
+
+- `BoxBackgroundColor.Hover` - Hover background color
+- `BoxBackgroundColor.Pressed` - Pressed background color
+- `BoxBackgroundColor.Selected` - Selected background color
+- `BoxBackgroundColor.Disabled` - Disabled background color
+- `BoxBackgroundColor.Shadow` - Shadow background color
+- `BoxBackgroundColor.Inverse` - Inverse background color
+
+**Primary Colors:**
+
+- `BoxBackgroundColor.PrimaryDefault` - Primary brand color
+- `BoxBackgroundColor.PrimaryAlternative` - Primary alternative color
+- `BoxBackgroundColor.PrimaryMuted` - Muted primary color
+- `BoxBackgroundColor.PrimaryInverse` - Primary inverse color
+- `BoxBackgroundColor.PrimaryDefaultPressed` - Primary pressed state color
+
+**Semantic Colors:**
+
+- `BoxBackgroundColor.ErrorDefault` - Error state color
+- `BoxBackgroundColor.ErrorAlternative` - Error alternative color
+- `BoxBackgroundColor.ErrorMuted` - Muted error color
+- `BoxBackgroundColor.ErrorInverse` - Error inverse color
+- `BoxBackgroundColor.ErrorDefaultPressed` - Error pressed state color
+- `BoxBackgroundColor.WarningDefault` - Warning state color
+- `BoxBackgroundColor.WarningAlternative` - Warning alternative color
+- `BoxBackgroundColor.WarningMuted` - Muted warning color
+- `BoxBackgroundColor.WarningInverse` - Warning inverse color
+- `BoxBackgroundColor.WarningDefaultPressed` - Warning pressed state color
+- `BoxBackgroundColor.SuccessDefault` - Success state color
+- `BoxBackgroundColor.SuccessAlternative` - Success alternative color
+- `BoxBackgroundColor.SuccessMuted` - Muted success color
+- `BoxBackgroundColor.SuccessInverse` - Success inverse color
+- `BoxBackgroundColor.SuccessDefaultPressed` - Success pressed state color
+- `BoxBackgroundColor.InfoDefault` - Info state color
+- `BoxBackgroundColor.InfoAlternative` - Info alternative color
+- `BoxBackgroundColor.InfoMuted` - Muted info color
+- `BoxBackgroundColor.InfoInverse` - Info inverse color
+
+**Special Colors:**
+
+- `BoxBackgroundColor.FlaskDefault` - Flask default color
+- `BoxBackgroundColor.FlaskInverse` - Flask inverse color
+- `BoxBackgroundColor.OverlayAlternative` - Overlay alternative color
+- `BoxBackgroundColor.OverlayDefault` - Overlay default color
+- `BoxBackgroundColor.OverlayInverse` - Overlay inverse color
+
 <Canvas of={BoxStories.BackgroundColor} />
-
-### Combined Usage
-
-### Complex Layout
-
-Combine multiple props for sophisticated layouts:
-
-<Canvas of={BoxStories.ComplexLayout} />
-
-### Card Example
-
-Create card-like components with padding, margins, background, and borders:
-
-<Canvas of={BoxStories.CardExample} />
 
 ### ClassName
 
@@ -263,24 +322,6 @@ The `BoxSpacing` type provides a numeric scale (0-12) for spacing properties. Ea
 >
   <Text>Left</Text>
   <Text>Right</Text>
-</Box>
-```
-
-### Card Component
-
-```tsx
-<Box
-  padding={4}
-  margin={2}
-  backgroundColor={BoxBackgroundColor.Default}
-  borderWidth={1}
-  borderColor={BoxBorderColor.Default}
->
-  <Text>Card Title</Text>
-  <Box marginTop={2} gap={2}>
-    <Text>Card content goes here</Text>
-    <Text>More content</Text>
-  </Box>
 </Box>
 ```
 

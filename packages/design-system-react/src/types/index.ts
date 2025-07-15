@@ -193,19 +193,85 @@ export enum BoxJustifyContent {
  * Box - backgroundColor
  */
 export enum BoxBackgroundColor {
+  /** Default background color */
   Default = 'bg-default',
+  /** Alternative background color */
   Alternative = 'bg-alternative',
+  /** Default alternative background color */
+  DefaultAlternative = 'bg-default-alternative',
+  /** Hover background color */
+  Hover = 'bg-hover',
+  /** Pressed background color */
+  Pressed = 'bg-pressed',
+  /** Selected background color */
+  Selected = 'bg-selected',
+  /** Disabled background color */
+  Disabled = 'bg-disabled',
+  /** Shadow background color */
+  Shadow = 'bg-shadow',
+  /** Inverse background color */
+  Inverse = 'bg-inverse',
+  /** Muted background color */
   Muted = 'bg-muted',
+  /** Primary default background color */
   PrimaryDefault = 'bg-primary-default',
+  /** Primary alternative background color */
+  PrimaryAlternative = 'bg-primary-alternative',
+  /** Primary muted background color */
   PrimaryMuted = 'bg-primary-muted',
+  /** Primary inverse background color */
+  PrimaryInverse = 'bg-primary-inverse',
+  /** Primary default pressed background color */
+  PrimaryDefaultPressed = 'bg-primary-default-pressed',
+  /** Error default background color */
   ErrorDefault = 'bg-error-default',
+  /** Error alternative background color */
+  ErrorAlternative = 'bg-error-alternative',
+  /** Error muted background color */
   ErrorMuted = 'bg-error-muted',
+  /** Error inverse background color */
+  ErrorInverse = 'bg-error-inverse',
+  /** Error default pressed background color */
+  ErrorDefaultPressed = 'bg-error-default-pressed',
+  /** Warning default background color */
   WarningDefault = 'bg-warning-default',
+  /** Warning alternative background color */
+  WarningAlternative = 'bg-warning-alternative',
+  /** Warning muted background color */
   WarningMuted = 'bg-warning-muted',
+  /** Warning inverse background color */
+  WarningInverse = 'bg-warning-inverse',
+  /** Warning default pressed background color */
+  WarningDefaultPressed = 'bg-warning-default-pressed',
+  /** Success default background color */
   SuccessDefault = 'bg-success-default',
+  /** Success alternative background color */
+  SuccessAlternative = 'bg-success-alternative',
+  /** Success muted background color */
   SuccessMuted = 'bg-success-muted',
+  /** Success inverse background color */
+  SuccessInverse = 'bg-success-inverse',
+  /** Success default pressed background color */
+  SuccessDefaultPressed = 'bg-success-default-pressed',
+  /** Info default background color */
   InfoDefault = 'bg-info-default',
+  /** Info alternative background color */
+  InfoAlternative = 'bg-info-alternative',
+  /** Info muted background color */
   InfoMuted = 'bg-info-muted',
+  /** Info inverse background color */
+  InfoInverse = 'bg-info-inverse',
+  /** Flask default background color */
+  FlaskDefault = 'bg-flask-default',
+  /** Flask inverse background color */
+  FlaskInverse = 'bg-flask-inverse',
+  /** Overlay alternative background color */
+  OverlayAlternative = 'bg-overlay-alternative',
+  /** Overlay default background color */
+  OverlayDefault = 'bg-overlay-default',
+  /** Overlay inverse background color */
+  OverlayInverse = 'bg-overlay-inverse',
+  /** Transparent background color */
   Transparent = 'bg-transparent',
 }
 
@@ -213,13 +279,69 @@ export enum BoxBackgroundColor {
  * Box - borderColor
  */
 export enum BoxBorderColor {
+  /** Default border color */
   Default = 'border-default',
+  /** Muted border color */
   Muted = 'border-muted',
+  /** Primary default border color */
   PrimaryDefault = 'border-primary-default',
+  /** Primary alternative border color */
+  PrimaryAlternative = 'border-primary-alternative',
+  /** Primary muted border color */
+  PrimaryMuted = 'border-primary-muted',
+  /** Primary inverse border color */
+  PrimaryInverse = 'border-primary-inverse',
+  /** Primary default pressed border color */
+  PrimaryDefaultPressed = 'border-primary-default-pressed',
+  /** Error default border color */
   ErrorDefault = 'border-error-default',
+  /** Error alternative border color */
+  ErrorAlternative = 'border-error-alternative',
+  /** Error muted border color */
+  ErrorMuted = 'border-error-muted',
+  /** Error inverse border color */
+  ErrorInverse = 'border-error-inverse',
+  /** Error default pressed border color */
+  ErrorDefaultPressed = 'border-error-default-pressed',
+  /** Warning default border color */
   WarningDefault = 'border-warning-default',
+  /** Warning alternative border color */
+  WarningAlternative = 'border-warning-alternative',
+  /** Warning muted border color */
+  WarningMuted = 'border-warning-muted',
+  /** Warning inverse border color */
+  WarningInverse = 'border-warning-inverse',
+  /** Warning default pressed border color */
+  WarningDefaultPressed = 'border-warning-default-pressed',
+  /** Success default border color */
   SuccessDefault = 'border-success-default',
+  /** Success alternative border color */
+  SuccessAlternative = 'border-success-alternative',
+  /** Success muted border color */
+  SuccessMuted = 'border-success-muted',
+  /** Success inverse border color */
+  SuccessInverse = 'border-success-inverse',
+  /** Success default pressed border color */
+  SuccessDefaultPressed = 'border-success-default-pressed',
+  /** Info default border color */
   InfoDefault = 'border-info-default',
+  /** Info alternative border color */
+  InfoAlternative = 'border-info-alternative',
+  /** Info muted border color */
+  InfoMuted = 'border-info-muted',
+  /** Info inverse border color */
+  InfoInverse = 'border-info-inverse',
+  /** Flask default border color */
+  FlaskDefault = 'border-flask-default',
+  /** Flask inverse border color */
+  FlaskInverse = 'border-flask-inverse',
+  /** Overlay alternative border color */
+  OverlayAlternative = 'border-overlay-alternative',
+  /** Overlay default border color */
+  OverlayDefault = 'border-overlay-default',
+  /** Overlay inverse border color */
+  OverlayInverse = 'border-overlay-inverse',
+  /** Transparent border color */
   Transparent = 'border-transparent',
 }
 

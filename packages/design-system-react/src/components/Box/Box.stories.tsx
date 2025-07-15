@@ -269,20 +269,6 @@ export const Border: Story = {
   ),
 };
 
-export const BorderError: Story = {
-  args: {
-    borderWidth: 1,
-    borderColor: BoxBorderColor.ErrorDefault,
-    backgroundColor: BoxBackgroundColor.ErrorMuted,
-    padding: 4,
-  },
-  render: (args: BoxProps) => (
-    <Box {...args}>
-      <Text>Error state box</Text>
-    </Box>
-  ),
-};
-
 export const BackgroundColor: Story = {
   args: {
     backgroundColor: BoxBackgroundColor.PrimaryDefault,
@@ -291,53 +277,6 @@ export const BackgroundColor: Story = {
   render: (args: BoxProps) => (
     <Box {...args}>
       <Text>Box with background color</Text>
-    </Box>
-  ),
-};
-
-export const ComplexLayout: Story = {
-  args: {
-    flexDirection: BoxFlexDirection.Column,
-    gap: 3,
-    margin: 4,
-    padding: 6,
-    borderWidth: 1,
-    borderColor: BoxBorderColor.Default,
-    backgroundColor: BoxBackgroundColor.Default,
-  },
-  render: (args: BoxProps) => (
-    <Box {...args}>
-      <Text>Complex layout with all props</Text>
-      <Box
-        flexDirection={BoxFlexDirection.Row}
-        gap={2}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.Alternative}
-        borderWidth={1}
-        borderColor={BoxBorderColor.Muted}
-      >
-        <Text>Child 1</Text>
-        <Text>Child 2</Text>
-      </Box>
-    </Box>
-  ),
-};
-
-export const CardExample: Story = {
-  args: {
-    padding: 4,
-    margin: 3,
-    backgroundColor: BoxBackgroundColor.Default,
-    borderWidth: 1,
-    borderColor: BoxBorderColor.Default,
-  },
-  render: (args: BoxProps) => (
-    <Box {...args}>
-      <Text>Card-like component</Text>
-      <Box marginTop={2} gap={2}>
-        <Text>Card content goes here</Text>
-        <Text>More content</Text>
-      </Box>
     </Box>
   ),
 };
