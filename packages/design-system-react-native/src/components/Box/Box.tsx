@@ -55,7 +55,7 @@ export const Box = ({
     flex
     ${flexDirection ?? ''} 
     ${flexWrap ?? ''} 
-    ${gap !== undefined ? TWCLASSMAP_BOX_GAP[gap] : ''}
+    ${gap !== undefined ? TWCLASSMAP_BOX_GAP[gap] : ''} 
     ${alignItems ?? ''} 
     ${justifyContent ?? ''}
     ${margin !== undefined ? TWCLASSMAP_BOX_MARGIN[margin] : ''}
