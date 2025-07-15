@@ -242,8 +242,6 @@ export enum BoxBackgroundColor {
   SuccessInverse = 'bg-success-inverse',
   /** Info default background color */
   InfoDefault = 'bg-info-default',
-  /** Info alternative background color */
-  InfoAlternative = 'bg-info-alternative',
   /** Info muted background color */
   InfoMuted = 'bg-info-muted',
   /** Info inverse background color */

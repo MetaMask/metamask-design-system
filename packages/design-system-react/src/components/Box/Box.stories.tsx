@@ -1182,7 +1182,6 @@ export const BorderColor: Story = {
       <Box
         {...args}
         padding={3}
-        backgroundColor={BoxBackgroundColor.Default}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={2}
       >
@@ -1191,7 +1190,6 @@ export const BorderColor: Story = {
       <Box
         {...args}
         padding={3}
-        backgroundColor={BoxBackgroundColor.Default}
         borderColor={BoxBorderColor.BorderMuted}
         borderWidth={2}
       >
@@ -1523,7 +1521,7 @@ export const BackgroundColor: Story = {
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
       >
-        <Text>Alternative</Text>
+        <Text>BackgroundAlternative</Text>
       </Box>
 
       <Box
@@ -1533,7 +1531,7 @@ export const BackgroundColor: Story = {
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
       >
-        <Text>Muted</Text>
+        <Text>BackgroundMuted</Text>
       </Box>
       <Box
         {...args}
@@ -1542,7 +1540,7 @@ export const BackgroundColor: Story = {
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
       >
-        <Text>Section</Text>
+        <Text>BackgroundSection</Text>
       </Box>
       <Box
         {...args}
@@ -1551,7 +1549,7 @@ export const BackgroundColor: Story = {
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
       >
-        <Text>Subsection</Text>
+        <Text>BackgroundSubsection</Text>
       </Box>
 
       {/* Primary Colors */}
@@ -1715,15 +1713,6 @@ export const BackgroundColor: Story = {
         borderWidth={1}
       >
         <Text>InfoDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.InfoAlternative}
-        borderColor={BoxBorderColor.InfoDefault}
-        borderWidth={1}
-      >
-        <Text>InfoAlternative</Text>
       </Box>
       <Box
         {...args}

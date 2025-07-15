@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
+import { ScrollView } from 'react-native';
 
 import {
   BoxFlexDirection,
@@ -654,8 +655,8 @@ export const Margin: Story = {
           {...args}
           margin={0}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 0</Text>
@@ -664,8 +665,8 @@ export const Margin: Story = {
           {...args}
           margin={1}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 1</Text>
@@ -674,8 +675,8 @@ export const Margin: Story = {
           {...args}
           margin={2}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 2</Text>
@@ -684,8 +685,8 @@ export const Margin: Story = {
           {...args}
           margin={3}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 3</Text>
@@ -694,8 +695,8 @@ export const Margin: Story = {
           {...args}
           margin={4}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 4</Text>
@@ -704,8 +705,8 @@ export const Margin: Story = {
           {...args}
           margin={5}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 5</Text>
@@ -714,8 +715,8 @@ export const Margin: Story = {
           {...args}
           margin={6}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 6</Text>
@@ -724,8 +725,8 @@ export const Margin: Story = {
           {...args}
           margin={7}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 7</Text>
@@ -734,8 +735,8 @@ export const Margin: Story = {
           {...args}
           margin={8}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 8</Text>
@@ -744,8 +745,8 @@ export const Margin: Story = {
           {...args}
           margin={9}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 9</Text>
@@ -754,8 +755,8 @@ export const Margin: Story = {
           {...args}
           margin={10}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 10</Text>
@@ -764,8 +765,8 @@ export const Margin: Story = {
           {...args}
           margin={11}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 11</Text>
@@ -774,8 +775,8 @@ export const Margin: Story = {
           {...args}
           margin={12}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
         >
           <Text>Margin 12</Text>
@@ -839,627 +840,602 @@ export const BorderWidth: Story = {
 
 export const BorderColor: Story = {
   render: (args: BoxProps) => (
-    <Box flexDirection={BoxFlexDirection.Column} gap={2}>
-      {/* Basic Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundDefault}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={2}
-      >
-        <Text>Default</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundDefault}
-        borderColor={BoxBorderColor.BorderMuted}
-        borderWidth={2}
-      >
-        <Text>Muted</Text>
-      </Box>
+    <ScrollView>
+      <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+        {/* Basic Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundDefault}
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={2}
+        >
+          <Text>Default</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundDefault}
+          borderColor={BoxBorderColor.BorderMuted}
+          borderWidth={2}
+        >
+          <Text>Muted</Text>
+        </Box>
 
-      {/* Primary Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.PrimaryMuted}
-        borderColor={BoxBorderColor.PrimaryDefault}
-        borderWidth={2}
-      >
-        <Text>PrimaryDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.PrimaryMuted}
-        borderColor={BoxBorderColor.BackgroundPrimaryAlternative}
-        borderWidth={2}
-      >
-        <Text>PrimaryAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.PrimaryMuted}
-        borderColor={BoxBorderColor.PrimaryMuted}
-        borderWidth={2}
-      >
-        <Text>PrimaryMuted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.PrimaryMuted}
-        borderColor={BoxBorderColor.BackgroundPrimaryInverse}
-        borderWidth={2}
-      >
-        <Text>PrimaryInverse</Text>
-      </Box>
+        {/* Primary Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          borderColor={BoxBorderColor.PrimaryDefault}
+          borderWidth={2}
+        >
+          <Text>PrimaryDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          borderColor={BoxBorderColor.PrimaryAlternative}
+          borderWidth={2}
+        >
+          <Text>PrimaryAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          borderColor={BoxBorderColor.PrimaryMuted}
+          borderWidth={2}
+        >
+          <Text>PrimaryMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          borderColor={BoxBorderColor.PrimaryInverse}
+          borderWidth={2}
+        >
+          <Text>PrimaryInverse</Text>
+        </Box>
 
-      {/* Error Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundErrorMuted}
-        borderColor={BoxBorderColor.BackgroundErrorDefault}
-        borderWidth={2}
-      >
-        <Text>ErrorDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundErrorMuted}
-        borderColor={BoxBorderColor.BackgroundErrorAlternative}
-        borderWidth={2}
-      >
-        <Text>ErrorAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundErrorMuted}
-        borderColor={BoxBorderColor.BackgroundErrorMuted}
-        borderWidth={2}
-      >
-        <Text>ErrorMuted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundErrorMuted}
-        borderColor={BoxBorderColor.BackgroundErrorInverse}
-        borderWidth={2}
-      >
-        <Text>ErrorInverse</Text>
-      </Box>
+        {/* Error Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.ErrorMuted}
+          borderColor={BoxBorderColor.ErrorDefault}
+          borderWidth={2}
+        >
+          <Text>ErrorDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.ErrorMuted}
+          borderColor={BoxBorderColor.ErrorAlternative}
+          borderWidth={2}
+        >
+          <Text>ErrorAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.ErrorMuted}
+          borderColor={BoxBorderColor.ErrorMuted}
+          borderWidth={2}
+        >
+          <Text>ErrorMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.ErrorMuted}
+          borderColor={BoxBorderColor.ErrorInverse}
+          borderWidth={2}
+        >
+          <Text>ErrorInverse</Text>
+        </Box>
 
-      {/* Warning Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundWarningMuted}
-        borderColor={BoxBorderColor.BackgroundWarningDefault}
-        borderWidth={2}
-      >
-        <Text>WarningDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundWarningMuted}
-        borderColor={BoxBorderColor.BackgroundWarningAlternative}
-        borderWidth={2}
-      >
-        <Text>WarningAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundWarningMuted}
-        borderColor={BoxBorderColor.BackgroundWarningMuted}
-        borderWidth={2}
-      >
-        <Text>WarningMuted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundWarningMuted}
-        borderColor={BoxBorderColor.BackgroundWarningInverse}
-        borderWidth={2}
-      >
-        <Text>WarningInverse</Text>
-      </Box>
+        {/* Warning Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.WarningMuted}
+          borderColor={BoxBorderColor.WarningDefault}
+          borderWidth={2}
+        >
+          <Text>WarningDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.WarningMuted}
+          borderColor={BoxBorderColor.WarningAlternative}
+          borderWidth={2}
+        >
+          <Text>WarningAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.WarningMuted}
+          borderColor={BoxBorderColor.WarningMuted}
+          borderWidth={2}
+        >
+          <Text>WarningMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.WarningMuted}
+          borderColor={BoxBorderColor.WarningInverse}
+          borderWidth={2}
+        >
+          <Text>WarningInverse</Text>
+        </Box>
 
-      {/* Success Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-        borderColor={BoxBorderColor.BackgroundSuccessDefault}
-        borderWidth={2}
-      >
-        <Text>SuccessDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-        borderColor={BoxBorderColor.BackgroundSuccessAlternative}
-        borderWidth={2}
-      >
-        <Text>SuccessAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-        borderColor={BoxBorderColor.BackgroundSuccessMuted}
-        borderWidth={2}
-      >
-        <Text>SuccessMuted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-        borderColor={BoxBorderColor.BackgroundSuccessInverse}
-        borderWidth={2}
-      >
-        <Text>SuccessInverse</Text>
-      </Box>
+        {/* Success Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={2}
+        >
+          <Text>SuccessDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessAlternative}
+          borderWidth={2}
+        >
+          <Text>SuccessAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessMuted}
+          borderWidth={2}
+        >
+          <Text>SuccessMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessInverse}
+          borderWidth={2}
+        >
+          <Text>SuccessInverse</Text>
+        </Box>
 
-      {/* Info Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundInfoMuted}
-        borderColor={BoxBorderColor.BackgroundInfoDefault}
-        borderWidth={2}
-      >
-        <Text>InfoDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundInfoMuted}
-        borderColor={BoxBorderColor.BackgroundInfoAlternative}
-        borderWidth={2}
-      >
-        <Text>InfoAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundInfoMuted}
-        borderColor={BoxBorderColor.BackgroundInfoMuted}
-        borderWidth={2}
-      >
-        <Text>InfoMuted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundInfoMuted}
-        borderColor={BoxBorderColor.BackgroundInfoInverse}
-        borderWidth={2}
-      >
-        <Text>InfoInverse</Text>
-      </Box>
+        {/* Info Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.InfoMuted}
+          borderColor={BoxBorderColor.InfoDefault}
+          borderWidth={2}
+        >
+          <Text>InfoDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.InfoMuted}
+          borderColor={BoxBorderColor.InfoAlternative}
+          borderWidth={2}
+        >
+          <Text>InfoAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.InfoMuted}
+          borderColor={BoxBorderColor.InfoMuted}
+          borderWidth={2}
+        >
+          <Text>InfoMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.InfoMuted}
+          borderColor={BoxBorderColor.InfoInverse}
+          borderWidth={2}
+        >
+          <Text>InfoInverse</Text>
+        </Box>
 
-      {/* Special Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.FlaskDefault}
-        borderColor={BoxBorderColor.FlaskDefault}
-        borderWidth={2}
-      >
-        <Text>FlaskDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.FlaskInverse}
-        borderColor={BoxBorderColor.FlaskInverse}
-        borderWidth={2}
-      >
-        <Text>FlaskInverse</Text>
-      </Box>
+        {/* Special Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.FlaskDefault}
+          borderColor={BoxBorderColor.FlaskDefault}
+          borderWidth={2}
+        >
+          <Text>FlaskDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.FlaskInverse}
+          borderColor={BoxBorderColor.FlaskInverse}
+          borderWidth={2}
+        >
+          <Text>FlaskInverse</Text>
+        </Box>
 
-      {/* Overlay Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundOverlayDefault}
-        borderColor={BoxBorderColor.BackgroundOverlayDefault}
-        borderWidth={2}
-      >
-        <Text>OverlayDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundOverlayAlternative}
-        borderColor={BoxBorderColor.BackgroundOverlayAlternative}
-        borderWidth={2}
-      >
-        <Text>OverlayAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundOverlayInverse}
-        borderColor={BoxBorderColor.BackgroundOverlayInverse}
-        borderWidth={2}
-      >
-        <Text>OverlayInverse</Text>
-      </Box>
+        {/* Overlay Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.OverlayDefault}
+          borderColor={BoxBorderColor.OverlayDefault}
+          borderWidth={2}
+        >
+          <Text>OverlayDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.OverlayAlternative}
+          borderColor={BoxBorderColor.OverlayAlternative}
+          borderWidth={2}
+        >
+          <Text>OverlayAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.OverlayInverse}
+          borderColor={BoxBorderColor.OverlayInverse}
+          borderWidth={2}
+        >
+          <Text>OverlayInverse</Text>
+        </Box>
 
-      {/* Utility Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundDefault}
-        borderColor={BoxBorderColor.Transparent}
-        borderWidth={2}
-      >
-        <Text>Transparent</Text>
+        {/* Utility Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundDefault}
+          borderColor={BoxBorderColor.Transparent}
+          borderWidth={2}
+        >
+          <Text>Transparent</Text>
+        </Box>
       </Box>
-    </Box>
+    </ScrollView>
   ),
 };
 
 export const BackgroundColor: Story = {
   render: (args: BoxProps) => (
-    <Box flexDirection={BoxFlexDirection.Column} gap={2}>
-      {/* Basic Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundDefault}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={1}
-      >
-        <Text>Default</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={1}
-      >
-        <Text>Alternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={1}
-      >
-        <Text>DefaultAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundMuted}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={1}
-      >
-        <Text>Muted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundSection}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={1}
-      >
-        <Text>Section</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundSubsection}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={1}
-      >
-        <Text>Subsection</Text>
-      </Box>
+    <ScrollView>
+      <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+        {/* Basic Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundDefault}
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+        >
+          <Text>BackgroundDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+        >
+          <Text>BackgroundAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+        >
+          <Text>BackgroundAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundMuted}
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+        >
+          <Text>BackgroundMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundSection}
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+        >
+          <Text>BackgroundSection</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundSubsection}
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+        >
+          <Text>BackgroundSubsection</Text>
+        </Box>
 
-      {/* Interactive States */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={1}
-      >
-        <Text>Selected</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundMuted}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={1}
-      >
-        <Text>Disabled</Text>
-      </Box>
+        {/* Primary Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.PrimaryDefault}
+          borderColor={BoxBorderColor.PrimaryDefault}
+          borderWidth={1}
+        >
+          <Text>PrimaryDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.PrimaryAlternative}
+          borderColor={BoxBorderColor.PrimaryDefault}
+          borderWidth={1}
+        >
+          <Text>PrimaryAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          borderColor={BoxBorderColor.PrimaryDefault}
+          borderWidth={1}
+        >
+          <Text>PrimaryMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.PrimaryInverse}
+          borderColor={BoxBorderColor.PrimaryDefault}
+          borderWidth={1}
+        >
+          <Text>PrimaryInverse</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.PrimaryDefault}
+          borderColor={BoxBorderColor.PrimaryDefault}
+          borderWidth={1}
+        >
+          <Text>PrimaryDefaultPressed</Text>
+        </Box>
 
-      {/* Primary Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.PrimaryDefault}
-        borderColor={BoxBorderColor.PrimaryDefault}
-        borderWidth={1}
-      >
-        <Text>PrimaryDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundPrimaryAlternative}
-        borderColor={BoxBorderColor.PrimaryDefault}
-        borderWidth={1}
-      >
-        <Text>PrimaryAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.PrimaryMuted}
-        borderColor={BoxBorderColor.PrimaryDefault}
-        borderWidth={1}
-      >
-        <Text>PrimaryMuted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundPrimaryInverse}
-        borderColor={BoxBorderColor.PrimaryDefault}
-        borderWidth={1}
-      >
-        <Text>PrimaryInverse</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.PrimaryDefault}
-        borderColor={BoxBorderColor.PrimaryDefault}
-        borderWidth={1}
-      >
-        <Text>PrimaryDefaultPressed</Text>
-      </Box>
+        {/* Error Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.ErrorDefault}
+          borderColor={BoxBorderColor.ErrorDefault}
+          borderWidth={1}
+        >
+          <Text>ErrorDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.ErrorAlternative}
+          borderColor={BoxBorderColor.ErrorDefault}
+          borderWidth={1}
+        >
+          <Text>ErrorAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.ErrorMuted}
+          borderColor={BoxBorderColor.ErrorDefault}
+          borderWidth={1}
+        >
+          <Text>ErrorMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.ErrorInverse}
+          borderColor={BoxBorderColor.ErrorDefault}
+          borderWidth={1}
+        >
+          <Text>ErrorInverse</Text>
+        </Box>
 
-      {/* Error Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundErrorDefault}
-        borderColor={BoxBorderColor.BackgroundErrorDefault}
-        borderWidth={1}
-      >
-        <Text>ErrorDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundErrorAlternative}
-        borderColor={BoxBorderColor.BackgroundErrorDefault}
-        borderWidth={1}
-      >
-        <Text>ErrorAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundErrorMuted}
-        borderColor={BoxBorderColor.BackgroundErrorDefault}
-        borderWidth={1}
-      >
-        <Text>ErrorMuted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundErrorInverse}
-        borderColor={BoxBorderColor.BackgroundErrorDefault}
-        borderWidth={1}
-      >
-        <Text>ErrorInverse</Text>
-      </Box>
+        {/* Warning Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.WarningDefault}
+          borderColor={BoxBorderColor.WarningDefault}
+          borderWidth={1}
+        >
+          <Text>WarningDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.WarningAlternative}
+          borderColor={BoxBorderColor.WarningDefault}
+          borderWidth={1}
+        >
+          <Text>WarningAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.WarningMuted}
+          borderColor={BoxBorderColor.WarningDefault}
+          borderWidth={1}
+        >
+          <Text>WarningMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.WarningInverse}
+          borderColor={BoxBorderColor.WarningDefault}
+          borderWidth={1}
+        >
+          <Text>WarningInverse</Text>
+        </Box>
 
-      {/* Warning Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundWarningDefault}
-        borderColor={BoxBorderColor.BackgroundWarningDefault}
-        borderWidth={1}
-      >
-        <Text>WarningDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundWarningAlternative}
-        borderColor={BoxBorderColor.BackgroundWarningDefault}
-        borderWidth={1}
-      >
-        <Text>WarningAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundWarningMuted}
-        borderColor={BoxBorderColor.BackgroundWarningDefault}
-        borderWidth={1}
-      >
-        <Text>WarningMuted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundWarningInverse}
-        borderColor={BoxBorderColor.BackgroundWarningDefault}
-        borderWidth={1}
-      >
-        <Text>WarningInverse</Text>
-      </Box>
+        {/* Success Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessDefault}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>SuccessDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessAlternative}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>SuccessAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>SuccessMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessInverse}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>SuccessInverse</Text>
+        </Box>
 
-      {/* Success Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundSuccessDefault}
-        borderColor={BoxBorderColor.BackgroundSuccessDefault}
-        borderWidth={1}
-      >
-        <Text>SuccessDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundSuccessAlternative}
-        borderColor={BoxBorderColor.BackgroundSuccessDefault}
-        borderWidth={1}
-      >
-        <Text>SuccessAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-        borderColor={BoxBorderColor.BackgroundSuccessDefault}
-        borderWidth={1}
-      >
-        <Text>SuccessMuted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundSuccessInverse}
-        borderColor={BoxBorderColor.BackgroundSuccessDefault}
-        borderWidth={1}
-      >
-        <Text>SuccessInverse</Text>
-      </Box>
+        {/* Info Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.InfoDefault}
+          borderColor={BoxBorderColor.InfoDefault}
+          borderWidth={1}
+        >
+          <Text>InfoDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.InfoMuted}
+          borderColor={BoxBorderColor.InfoDefault}
+          borderWidth={1}
+        >
+          <Text>InfoMuted</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.InfoInverse}
+          borderColor={BoxBorderColor.InfoDefault}
+          borderWidth={1}
+        >
+          <Text>InfoInverse</Text>
+        </Box>
 
-      {/* Info Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundInfoDefault}
-        borderColor={BoxBorderColor.BackgroundInfoDefault}
-        borderWidth={1}
-      >
-        <Text>InfoDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundInfoAlternative}
-        borderColor={BoxBorderColor.BackgroundInfoDefault}
-        borderWidth={1}
-      >
-        <Text>InfoAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundInfoMuted}
-        borderColor={BoxBorderColor.BackgroundInfoDefault}
-        borderWidth={1}
-      >
-        <Text>InfoMuted</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundInfoInverse}
-        borderColor={BoxBorderColor.BackgroundInfoDefault}
-        borderWidth={1}
-      >
-        <Text>InfoInverse</Text>
-      </Box>
+        {/* Special Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.FlaskDefault}
+          borderColor={BoxBorderColor.FlaskDefault}
+          borderWidth={1}
+        >
+          <Text>FlaskDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.FlaskInverse}
+          borderColor={BoxBorderColor.FlaskInverse}
+          borderWidth={1}
+        >
+          <Text>FlaskInverse</Text>
+        </Box>
 
-      {/* Special Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.FlaskDefault}
-        borderColor={BoxBorderColor.FlaskDefault}
-        borderWidth={1}
-      >
-        <Text>FlaskDefault</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.FlaskInverse}
-        borderColor={BoxBorderColor.FlaskInverse}
-        borderWidth={1}
-      >
-        <Text>FlaskInverse</Text>
-      </Box>
+        {/* Overlay Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.OverlayDefault}
+          borderColor={BoxBorderColor.OverlayDefault}
+          borderWidth={1}
+        >
+          <Text>OverlayDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.OverlayAlternative}
+          borderColor={BoxBorderColor.OverlayAlternative}
+          borderWidth={1}
+        >
+          <Text>OverlayAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.OverlayInverse}
+          borderColor={BoxBorderColor.OverlayInverse}
+          borderWidth={1}
+        >
+          <Text>OverlayInverse</Text>
+        </Box>
 
-      {/* Overlay Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundOverlayDefault}
-        borderColor={BoxBorderColor.BackgroundOverlayDefault}
-        borderWidth={1}
-      >
-        <Text>OverlayDefault</Text>
+        {/* Utility Colors */}
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+        >
+          <Text>Inverse</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.Transparent}
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+        >
+          <Text>Transparent</Text>
+        </Box>
       </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundOverlayAlternative}
-        borderColor={BoxBorderColor.BackgroundOverlayAlternative}
-        borderWidth={1}
-      >
-        <Text>OverlayAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundOverlayInverse}
-        borderColor={BoxBorderColor.BackgroundOverlayInverse}
-        borderWidth={1}
-      >
-        <Text>OverlayInverse</Text>
-      </Box>
-
-      {/* Utility Colors */}
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={1}
-      >
-        <Text>Inverse</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.Transparent}
-        borderColor={BoxBorderColor.BorderDefault}
-        borderWidth={1}
-      >
-        <Text>Transparent</Text>
-      </Box>
-    </Box>
+    </ScrollView>
   ),
 };
 
@@ -1496,8 +1472,8 @@ export const ResponsiveLayout: Story = {
           flexDirection={BoxFlexDirection.Column}
           gap={2}
           padding={4}
-          backgroundColor={BoxBackgroundColor.BackgroundSuccessMuted}
-          borderColor={BoxBorderColor.BackgroundSuccessDefault}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
           borderWidth={1}
           twClassName="min-w-64 flex-1"
         >
@@ -1511,8 +1487,8 @@ export const ResponsiveLayout: Story = {
           flexDirection={BoxFlexDirection.Column}
           gap={2}
           padding={4}
-          backgroundColor={BoxBackgroundColor.BackgroundErrorMuted}
-          borderColor={BoxBorderColor.BackgroundErrorDefault}
+          backgroundColor={BoxBackgroundColor.ErrorMuted}
+          borderColor={BoxBorderColor.ErrorDefault}
           borderWidth={1}
           twClassName="min-w-64 flex-1"
         >
@@ -1579,19 +1555,6 @@ export const ResponsiveLayout: Story = {
           </Box>
         </Box>
       </Box>
-    </Box>
-  ),
-};
-
-// Remove the old stories that are no longer needed
-export const TwClassName: Story = {
-  args: {
-    twClassName:
-      'border-2 border-dashed border-warning-default bg-warning-muted p-3',
-  },
-  render: (args) => (
-    <Box {...args}>
-      <Text>Custom twClassName styling</Text>
     </Box>
   ),
 };
