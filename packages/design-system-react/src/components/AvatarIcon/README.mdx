@@ -18,82 +18,205 @@ import { AvatarIcon, IconName } from '@metamask/design-system-react';
 
 ## Props
 
-### Icon Name (required)
+### `iconName`
 
 The `iconName` prop is required and specifies which icon to display from the design system's icon set.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarIconStories.IconNameStory} />
 
-> Note: The `iconProps` prop allows you to customize the icon's appearance. The size and color will be automatically mapped from the avatar's size and severity.
+### `size`
 
-```tsx
-import {
-  AvatarIcon,
-  IconName,
-  IconColor,
-  IconSize,
-} from '@metamask/design-system-react';
+AvatarIcon supports five sizes, each with a corresponding icon size.
 
-<AvatarIcon
-  iconName={IconName.User}
-  iconProps={{
-    color: IconColor.IconDefault,
-    size: IconSize.Md,
-  }}
-/>;
-```
-
-### Size
-
-AvatarIcon supports five sizes, each with a corresponding icon size:
-
+Available sizes:
 - `AvatarIconSize.Xs` (16px) - uses IconSize.Xs (12px)
 - `AvatarIconSize.Sm` (24px) - uses IconSize.Sm (16px)
-- `AvatarIconSize.Md` (32px) - uses IconSize.Md (20px) - default
+- `AvatarIconSize.Md` (32px) - uses IconSize.Md (20px)
 - `AvatarIconSize.Lg` (40px) - uses IconSize.Lg (24px)
 - `AvatarIconSize.Xl` (48px) - uses IconSize.Xl (32px)
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>AvatarIconSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>AvatarIconSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarIconStories.Size} />
 
-### Severity
+### `severity`
 
-The `severity` prop allows you to apply predefined color combinations to the avatar and icon. Each severity level uses appropriate background and icon colors:
+The `severity` prop allows you to apply predefined color combinations to the avatar and icon. Each severity level uses appropriate background and icon colors.
 
-- `AvatarIconSeverity.Neutral` - neutral styling for general use - default
+Available severities:
+- `AvatarIconSeverity.Neutral` - neutral styling for general use
 - `AvatarIconSeverity.Info` - info styling for informational content
 - `AvatarIconSeverity.Success` - success styling for positive actions/states
 - `AvatarIconSeverity.Warning` - warning styling for cautionary content
 - `AvatarIconSeverity.Error` - error styling for critical issues
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>AvatarIconSeverity</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>AvatarIconSeverity.Neutral</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarIconStories.Severity} />
 
-### Has Border
+### `hasBorder`
 
 The `hasBorder` prop enables a border around the AvatarIcon.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarIconStories.HasBorder} />
 
-### Class Name
+### `iconProps`
 
-Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default
-classes using `twMerge`, allowing you to:
+The `iconProps` prop allows you to customize the icon's appearance. The size and color will be automatically mapped from the avatar's size and severity.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-<AvatarIcon
-  iconName={IconName.User}
-  severity={AvatarIconSeverity.Neutral}
-  className="mx-2 my-4"
-/>
-```
-
-### Style
+### `style`
 
 The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 
