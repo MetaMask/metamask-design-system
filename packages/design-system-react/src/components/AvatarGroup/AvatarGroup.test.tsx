@@ -27,13 +27,13 @@ describe('AvatarGroup', () => {
       <AvatarGroup
         variant={AvatarGroupVariant.Account}
         avatarPropsArr={[]}
-        className="my-group"
+        className="bg-default"
         style={{ margin: 8 }}
         data-testid="avatar-group"
       />,
     );
     const avatarGroupElement = screen.getByTestId('avatar-group');
-    expect(avatarGroupElement).toHaveClass('my-group');
+    expect(avatarGroupElement).toHaveClass('bg-default');
     expect(avatarGroupElement).toHaveStyle({ margin: '8px' });
   });
 

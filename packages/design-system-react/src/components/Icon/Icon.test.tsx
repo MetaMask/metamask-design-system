@@ -47,11 +47,11 @@ describe('Icon', () => {
 
   it('should apply custom className', () => {
     const { container } = render(
-      <Icon name={IconName.AddSquare} className="custom-class" />,
+      <Icon name={IconName.AddSquare} className="bg-default" />,
     );
     const icon = container.firstChild;
     expect(icon).toHaveClass('inline-block');
-    expect(icon).toHaveClass('custom-class');
+    expect(icon).toHaveClass('bg-default');
   });
 
   it('should have correct SVG attributes', () => {
@@ -95,14 +95,13 @@ describe('Icon', () => {
         <Icon
           name={IconName.AddSquare}
           size={IconSize.Md}
-          className="h-10 w-10"
+          className="size-10"
         />,
       );
       const icon = container.firstChild;
 
       // Verify the custom size classes are present
-      expect(icon).toHaveClass('w-10');
-      expect(icon).toHaveClass('h-10');
+      expect(icon).toHaveClass('size-10');
 
       // Verify the default size classes are not present
       const defaultSizeClasses =
@@ -118,15 +117,14 @@ describe('Icon', () => {
           name={IconName.AddSquare}
           color={IconColor.IconDefault}
           size={IconSize.Md}
-          className="h-10 w-10 text-inherit"
+          className="size-10 text-inherit"
         />,
       );
       const icon = container.firstChild;
 
       // Verify custom classes are present
       expect(icon).toHaveClass('text-inherit');
-      expect(icon).toHaveClass('w-10');
-      expect(icon).toHaveClass('h-10');
+      expect(icon).toHaveClass('size-10');
 
       // Verify default classes are not present
       expect(icon).not.toHaveClass(IconColor.IconDefault);

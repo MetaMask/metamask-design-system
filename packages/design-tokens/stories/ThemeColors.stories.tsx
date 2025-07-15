@@ -147,7 +147,7 @@ export const JSDarkTheme = {
   render: () => {
     const colors = getJSColors(darkThemeJS.colors);
     return (
-      <div className={`grid grid-cols-[repeat(auto-fill,300px)] gap-4`}>
+      <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {colors.map(({ name, color }) => (
           <ColorSwatch
             key={name}

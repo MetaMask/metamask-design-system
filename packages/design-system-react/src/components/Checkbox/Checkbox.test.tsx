@@ -126,13 +126,13 @@ describe('Checkbox', () => {
         onChange={jest.fn()}
         isSelected={false}
         label="Test"
-        className="custom"
+        className="bg-default"
         style={{ marginLeft: 4 }}
         data-testid="chk-label"
       />,
     );
     const label = screen.getByTestId('chk-label');
-    expect(label).toHaveClass('custom');
+    expect(label).toHaveClass('bg-default');
     expect(label).toHaveStyle({ marginLeft: '4px' });
   });
 

@@ -1,8 +1,8 @@
 /* eslint-disable import-x/no-nodejs-modules */
-import fs from 'fs';
-import path from 'path';
+import { promises as fs } from 'fs';
+import * as path from 'path';
 /* eslint-enable import-x/no-nodejs-modules */
-import postcss from 'postcss';
+import { parse } from 'postcss';
 
 /**
  * Parses the design-tokens stylesheet and extracts CSS variable names based on provided prefixes.
@@ -37,8 +37,8 @@ export const getDesignTokenVariables = async (
   // Process each CSS file
   for (const file of cssFiles) {
     const cssPath = path.join(designTokensPath, file);
-    const cssContent = await fs.promises.readFile(cssPath, 'utf-8');
-    const parsedRoot = postcss.parse(cssContent);
+    const cssContent = await fs.readFile(cssPath, 'utf-8');
+    const parsedRoot = parse(cssContent);
 
     parsedRoot.walkDecls((decl) => {
       const { prop } = decl;

@@ -42,7 +42,7 @@ export const AvatarNetwork = forwardRef<HTMLDivElement, AvatarNetworkProps>(
           <img
             src={src}
             alt={altText}
-            className="h-full w-full object-contain"
+            className="size-full object-contain"
             {...imageProps}
             onError={onErrorHandler}
           />
