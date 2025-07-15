@@ -443,7 +443,7 @@ describe('Box', () => {
         borderWidth={1}
         borderColor={BoxBorderColor.Default}
         backgroundColor={BoxBackgroundColor.Alternative}
-        className="custom-class"
+        className="text-center"
       />,
     );
 
@@ -456,7 +456,7 @@ describe('Box', () => {
       TWCLASSMAP_BOX_BORDER_WIDTH[1],
       BoxBorderColor.Default,
       BoxBackgroundColor.Alternative,
-      'custom-class',
+      'text-center',
     ];
 
     expectedClasses.forEach((className) => {
