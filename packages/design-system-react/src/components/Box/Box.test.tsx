@@ -442,7 +442,7 @@ describe('Box', () => {
         paddingHorizontal={6}
         borderWidth={1}
         borderColor={BoxBorderColor.Default}
-        backgroundColor={BoxBackgroundColor.Alternative}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         className="text-center"
       />,
     );
@@ -455,7 +455,7 @@ describe('Box', () => {
       TWCLASSMAP_BOX_PADDING_HORIZONTAL[6],
       TWCLASSMAP_BOX_BORDER_WIDTH[1],
       BoxBorderColor.Default,
-      BoxBackgroundColor.Alternative,
+      BoxBackgroundColor.BackgroundAlternative,
       'text-center',
     ];
 

@@ -28,106 +28,31 @@ const meta: Meta<BoxProps> = {
       control: 'select',
       options: Object.keys(BoxFlexDirection),
       mapping: BoxFlexDirection,
-      description: 'The flex-direction style of the component.',
     },
     flexWrap: {
       control: 'select',
       options: Object.keys(BoxFlexWrap),
       mapping: BoxFlexWrap,
-      description: 'The flex-wrap style of the component.',
-    },
-    gap: {
-      control: 'number',
-      description: `The gap between the component's children.`,
     },
     alignItems: {
       control: 'select',
       options: Object.keys(BoxAlignItems),
       mapping: BoxAlignItems,
-      description: 'The align-items style of the component.',
     },
     justifyContent: {
       control: 'select',
       options: Object.keys(BoxJustifyContent),
       mapping: BoxJustifyContent,
-      description: 'The justify-content style of the component.',
-    },
-    margin: {
-      control: 'number',
-      description: 'The margin of the component on all sides.',
-    },
-    marginTop: {
-      control: 'number',
-      description: 'The top margin of the component.',
-    },
-    marginRight: {
-      control: 'number',
-      description: 'The right margin of the component.',
-    },
-    marginBottom: {
-      control: 'number',
-      description: 'The bottom margin of the component.',
-    },
-    marginLeft: {
-      control: 'number',
-      description: 'The left margin of the component.',
-    },
-    marginHorizontal: {
-      control: 'number',
-      description: 'The horizontal margin of the component.',
-    },
-    marginVertical: {
-      control: 'number',
-      description: 'The vertical margin of the component.',
-    },
-    padding: {
-      control: 'number',
-      description: 'The padding of the component on all sides.',
-    },
-    paddingTop: {
-      control: 'number',
-      description: 'The top padding of the component.',
-    },
-    paddingRight: {
-      control: 'number',
-      description: 'The right padding of the component.',
-    },
-    paddingBottom: {
-      control: 'number',
-      description: 'The bottom padding of the component.',
-    },
-    paddingLeft: {
-      control: 'number',
-      description: 'The left padding of the component.',
-    },
-    paddingHorizontal: {
-      control: 'number',
-      description: 'The horizontal padding of the component.',
-    },
-    paddingVertical: {
-      control: 'number',
-      description: 'The vertical padding of the component.',
-    },
-    borderWidth: {
-      control: 'number',
-      description: 'The border width of the component.',
-    },
-    borderColor: {
-      control: 'select',
-      options: Object.keys(BoxBorderColor),
-      mapping: BoxBorderColor,
-      description: 'The border color of the component.',
     },
     backgroundColor: {
       control: 'select',
       options: Object.keys(BoxBackgroundColor),
       mapping: BoxBackgroundColor,
-      description: 'The background color of the component.',
     },
-    className: {
-      control: 'text',
-      description:
-        'Optional prop for additional CSS classes to be applied to the Box component.',
+    borderColor: {
+      control: 'select',
+      options: Object.keys(BoxBorderColor),
+      mapping: BoxBorderColor,
     },
   },
 };
@@ -135,156 +60,1748 @@ const meta: Meta<BoxProps> = {
 export default meta;
 type Story = StoryObj<BoxProps>;
 
-const BoxStory: React.FC<BoxProps> = (args) => {
-  return (
-    <Box {...args}>
-      <Text>Text 1</Text>
-      <Text>Text 2</Text>
-      <Text>Text 3</Text>
-    </Box>
-  );
-};
-
 export const Default: Story = {
-  render: (args: BoxProps) => <BoxStory {...args} />,
-};
-
-export const FlexDirection: Story = {
   args: {
     flexDirection: BoxFlexDirection.Row,
     gap: 2,
-  },
-  render: (args: BoxProps) => <BoxStory {...args} />,
-};
-
-export const FlexWrap: Story = {
-  args: {
-    flexDirection: BoxFlexDirection.Row,
-    flexWrap: BoxFlexWrap.Wrap,
-    gap: 2,
-    className: 'w-1/2',
+    padding: 4,
   },
   render: (args: BoxProps) => (
     <Box {...args}>
-      <Text>Long text item 1</Text>
-      <Text>Long text item 2</Text>
-      <Text>Long text item 3</Text>
-      <Text>Long text item 4</Text>
+      <Text>Item 1</Text>
+      <Text>Item 2</Text>
+      <Text>Item 3</Text>
     </Box>
   ),
 };
 
-export const Gap: Story = {
-  args: {
-    gap: 4,
-  },
-  render: (args: BoxProps) => <BoxStory {...args} />,
-};
-
-export const AlignItems: Story = {
-  args: {
-    alignItems: BoxAlignItems.Center,
-    className: 'h-1/2',
-  },
-  render: (args: BoxProps) => <BoxStory {...args} />,
-};
-
-export const JustifyContent: Story = {
-  args: {
-    flexDirection: BoxFlexDirection.Row,
-    justifyContent: BoxJustifyContent.Between,
-  },
-  render: (args: BoxProps) => <BoxStory {...args} />,
-};
-
-export const Margin: Story = {
-  args: {
-    margin: 4,
-    backgroundColor: BoxBackgroundColor.PrimaryMuted,
-  },
+export const FlexDirection: Story = {
   render: (args: BoxProps) => (
-    <Box backgroundColor={BoxBackgroundColor.Alternative} padding={2}>
-      <Text>Outer container</Text>
-      <Box {...args}>
-        <Text>Inner box with margin</Text>
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={2}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundMuted}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Text>Row</Text>
+        <Text>Layout</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.RowReverse}
+        gap={2}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundMuted}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Text>Row</Text>
+        <Text>Reverse</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Column}
+        gap={2}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundMuted}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Text>Column</Text>
+        <Text>Layout</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.ColumnReverse}
+        gap={2}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundMuted}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Text>Column</Text>
+        <Text>Reverse</Text>
+        <Text>Items</Text>
       </Box>
     </Box>
   ),
 };
 
-export const MarginDirectional: Story = {
-  args: {
-    marginTop: 2,
-    marginBottom: 4,
-    marginLeft: 3,
-    marginRight: 1,
-    backgroundColor: BoxBackgroundColor.WarningMuted,
-  },
+export const AlignItems: Story = {
   render: (args: BoxProps) => (
-    <Box backgroundColor={BoxBackgroundColor.Alternative} padding={2}>
-      <Text>Outer container</Text>
-      <Box {...args}>
-        <Text>Box with directional margins</Text>
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Start}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="h-16"
+      >
+        <Text>Start</Text>
+        <Text>Aligned</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Center}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="h-16"
+      >
+        <Text>Center</Text>
+        <Text>Aligned</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.End}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="h-16"
+      >
+        <Text>End</Text>
+        <Text>Aligned</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Stretch}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="h-16"
+      >
+        <Text>Stretch</Text>
+        <Text>Aligned</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Baseline}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="h-16"
+      >
+        <Text>Baseline</Text>
+        <Text>Aligned</Text>
+        <Text>Items</Text>
+      </Box>
+    </Box>
+  ),
+};
+
+export const JustifyContent: Story = {
+  render: (args: BoxProps) => (
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        justifyContent={BoxJustifyContent.Start}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="w-80"
+      >
+        <Text>Start</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        justifyContent={BoxJustifyContent.Center}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="w-80"
+      >
+        <Text>Center</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        justifyContent={BoxJustifyContent.End}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="w-80"
+      >
+        <Text>End</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        justifyContent={BoxJustifyContent.Between}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="w-80"
+      >
+        <Text>Between</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        justifyContent={BoxJustifyContent.Around}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="w-80"
+      >
+        <Text>Around</Text>
+        <Text>Items</Text>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        justifyContent={BoxJustifyContent.Evenly}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="w-80"
+      >
+        <Text>Evenly</Text>
+        <Text>Items</Text>
+      </Box>
+    </Box>
+  ),
+};
+
+export const FlexWrap: Story = {
+  render: (args: BoxProps) => (
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        flexWrap={BoxFlexWrap.NoWrap}
+        gap={2}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="w-80"
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>NoWrap</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Items</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Stay</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>In</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Line</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        flexWrap={BoxFlexWrap.Wrap}
+        gap={2}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="w-80"
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Wrap</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Items</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>To</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>New</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Line</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        flexWrap={BoxFlexWrap.WrapReverse}
+        gap={2}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        className="w-80"
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>WrapReverse</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Items</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Reverse</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Order</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Wrap</Text>
+        </Box>
+      </Box>
+    </Box>
+  ),
+};
+
+export const Gap: Story = {
+  render: (args: BoxProps) => (
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={0}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 0</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>No</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={1}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 1</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Small</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={2}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 2</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Small</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={3}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 3</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Medium</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={4}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 4</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Medium</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={5}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 5</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Large</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={6}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 6</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Large</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={7}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 7</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>XL</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={8}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 8</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>XL</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={9}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 9</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>XXL</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={10}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 10</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>XXL</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={11}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 11</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>XXXL</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
+      </Box>
+      <Box
+        {...args}
+        flexDirection={BoxFlexDirection.Row}
+        gap={12}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={1}
+      >
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap 12</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>XXXL</Text>
+        </Box>
+        <Box
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          paddingHorizontal={2}
+          paddingVertical={1}
+          className="rounded"
+        >
+          <Text>Gap</Text>
+        </Box>
       </Box>
     </Box>
   ),
 };
 
 export const Padding: Story = {
-  args: {
-    padding: 6,
-    backgroundColor: BoxBackgroundColor.SuccessMuted,
-  },
   render: (args: BoxProps) => (
-    <Box {...args}>
-      <Text>Box with padding</Text>
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+      <Box
+        {...args}
+        padding={0}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 0</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={1}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 1</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={2}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 2</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 3</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={4}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 4</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={5}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 5</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={6}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 6</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={7}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 7</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={8}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 8</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={9}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 9</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={10}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 10</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={11}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 11</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={12}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Padding 12</Text>
+      </Box>
     </Box>
   ),
 };
 
-export const PaddingDirectional: Story = {
-  args: {
-    paddingTop: 2,
-    paddingBottom: 4,
-    paddingHorizontal: 6,
-    backgroundColor: BoxBackgroundColor.InfoMuted,
-  },
+export const Margin: Story = {
   render: (args: BoxProps) => (
-    <Box {...args}>
-      <Text>Box with directional padding</Text>
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+      <Box
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        padding={2}
+      >
+        <Text>Container with margin examples:</Text>
+        <Box
+          {...args}
+          margin={0}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 0</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={1}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 1</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={2}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 2</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={3}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 3</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={4}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 4</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={5}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 5</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={6}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 6</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={7}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 7</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={8}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 8</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={9}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 9</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={10}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 10</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={11}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 11</Text>
+        </Box>
+        <Box
+          {...args}
+          margin={12}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>Margin 12</Text>
+        </Box>
+      </Box>
     </Box>
   ),
 };
 
-export const Border: Story = {
-  args: {
-    borderWidth: 2,
-    borderColor: BoxBorderColor.PrimaryDefault,
-    padding: 4,
-  },
+export const BorderColor: Story = {
   render: (args: BoxProps) => (
-    <Box {...args}>
-      <Text>Box with border</Text>
+    <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+      {/* Basic Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.Default}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={2}
+      >
+        <Text>Default</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.Default}
+        borderColor={BoxBorderColor.BorderMuted}
+        borderWidth={2}
+      >
+        <Text>Muted</Text>
+      </Box>
+
+      {/* Primary Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+      >
+        <Text>PrimaryDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryAlternative}
+        borderWidth={2}
+      >
+        <Text>PrimaryAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryMuted}
+        borderWidth={2}
+      >
+        <Text>PrimaryMuted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryInverse}
+        borderWidth={2}
+      >
+        <Text>PrimaryInverse</Text>
+      </Box>
+
+      {/* Error Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.ErrorMuted}
+        borderColor={BoxBorderColor.ErrorDefault}
+        borderWidth={2}
+      >
+        <Text>ErrorDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.ErrorMuted}
+        borderColor={BoxBorderColor.ErrorAlternative}
+        borderWidth={2}
+      >
+        <Text>ErrorAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.ErrorMuted}
+        borderColor={BoxBorderColor.ErrorMuted}
+        borderWidth={2}
+      >
+        <Text>ErrorMuted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.ErrorMuted}
+        borderColor={BoxBorderColor.ErrorInverse}
+        borderWidth={2}
+      >
+        <Text>ErrorInverse</Text>
+      </Box>
+
+      {/* Warning Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.WarningMuted}
+        borderColor={BoxBorderColor.WarningDefault}
+        borderWidth={2}
+      >
+        <Text>WarningDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.WarningMuted}
+        borderColor={BoxBorderColor.WarningAlternative}
+        borderWidth={2}
+      >
+        <Text>WarningAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.WarningMuted}
+        borderColor={BoxBorderColor.WarningMuted}
+        borderWidth={2}
+      >
+        <Text>WarningMuted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.WarningMuted}
+        borderColor={BoxBorderColor.WarningInverse}
+        borderWidth={2}
+      >
+        <Text>WarningInverse</Text>
+      </Box>
+
+      {/* Success Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.SuccessMuted}
+        borderColor={BoxBorderColor.SuccessDefault}
+        borderWidth={2}
+      >
+        <Text>SuccessDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.SuccessMuted}
+        borderColor={BoxBorderColor.SuccessAlternative}
+        borderWidth={2}
+      >
+        <Text>SuccessAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.SuccessMuted}
+        borderColor={BoxBorderColor.SuccessMuted}
+        borderWidth={2}
+      >
+        <Text>SuccessMuted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.SuccessMuted}
+        borderColor={BoxBorderColor.SuccessInverse}
+        borderWidth={2}
+      >
+        <Text>SuccessInverse</Text>
+      </Box>
+
+      {/* Info Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.InfoMuted}
+        borderColor={BoxBorderColor.InfoDefault}
+        borderWidth={2}
+      >
+        <Text>InfoDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.InfoMuted}
+        borderColor={BoxBorderColor.InfoAlternative}
+        borderWidth={2}
+      >
+        <Text>InfoAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.InfoMuted}
+        borderColor={BoxBorderColor.InfoMuted}
+        borderWidth={2}
+      >
+        <Text>InfoMuted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.InfoMuted}
+        borderColor={BoxBorderColor.InfoInverse}
+        borderWidth={2}
+      >
+        <Text>InfoInverse</Text>
+      </Box>
+
+      {/* Special Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.FlaskDefault}
+        borderColor={BoxBorderColor.FlaskDefault}
+        borderWidth={2}
+      >
+        <Text>FlaskDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.FlaskDefault}
+        borderColor={BoxBorderColor.FlaskInverse}
+        borderWidth={2}
+      >
+        <Text>FlaskInverse</Text>
+      </Box>
+
+      {/* Overlay Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.OverlayDefault}
+        borderColor={BoxBorderColor.OverlayDefault}
+        borderWidth={2}
+      >
+        <Text>OverlayDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.OverlayAlternative}
+        borderColor={BoxBorderColor.OverlayAlternative}
+        borderWidth={2}
+      >
+        <Text>OverlayAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.OverlayInverse}
+        borderColor={BoxBorderColor.OverlayInverse}
+        borderWidth={2}
+      >
+        <Text>OverlayInverse</Text>
+      </Box>
+
+      {/* Utility Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundDefault}
+        borderColor={BoxBorderColor.Transparent}
+        borderWidth={2}
+      >
+        <Text>Transparent</Text>
+      </Box>
+    </Box>
+  ),
+};
+
+export const BorderWidth: Story = {
+  render: (args: BoxProps) => (
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={0}
+      >
+        <Text>Border width 0</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>Border width 1</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+      >
+        <Text>Border width 2</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={4}
+      >
+        <Text>Border width 4</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={8}
+      >
+        <Text>Border width 8</Text>
+      </Box>
     </Box>
   ),
 };
 
 export const BackgroundColor: Story = {
-  args: {
-    backgroundColor: BoxBackgroundColor.PrimaryDefault,
-    padding: 4,
-  },
   render: (args: BoxProps) => (
-    <Box {...args}>
-      <Text>Box with background color</Text>
+    <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+      {/* Basic Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundDefault}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+      >
+        <Text>BackgroundDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+      >
+        <Text>Alternative</Text>
+      </Box>
+
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundMuted}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+      >
+        <Text>Muted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundSection}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+      >
+        <Text>Section</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundSubsection}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+      >
+        <Text>Subsection</Text>
+      </Box>
+
+      {/* Primary Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.PrimaryDefault}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>PrimaryDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.PrimaryAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>PrimaryAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>PrimaryMuted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.PrimaryInverse}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={1}
+      >
+        <Text>PrimaryInverse</Text>
+      </Box>
+
+      {/* Error Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.ErrorDefault}
+        borderColor={BoxBorderColor.ErrorDefault}
+        borderWidth={1}
+      >
+        <Text>ErrorDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.ErrorAlternative}
+        borderColor={BoxBorderColor.ErrorDefault}
+        borderWidth={1}
+      >
+        <Text>ErrorAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.ErrorMuted}
+        borderColor={BoxBorderColor.ErrorDefault}
+        borderWidth={1}
+      >
+        <Text>ErrorMuted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.ErrorInverse}
+        borderColor={BoxBorderColor.ErrorDefault}
+        borderWidth={1}
+      >
+        <Text>ErrorInverse</Text>
+      </Box>
+
+      {/* Warning Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.WarningDefault}
+        borderColor={BoxBorderColor.WarningDefault}
+        borderWidth={1}
+      >
+        <Text>WarningDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.WarningAlternative}
+        borderColor={BoxBorderColor.WarningDefault}
+        borderWidth={1}
+      >
+        <Text>WarningAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.WarningMuted}
+        borderColor={BoxBorderColor.WarningDefault}
+        borderWidth={1}
+      >
+        <Text>WarningMuted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.WarningInverse}
+        borderColor={BoxBorderColor.WarningDefault}
+        borderWidth={1}
+      >
+        <Text>WarningInverse</Text>
+      </Box>
+
+      {/* Success Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.SuccessDefault}
+        borderColor={BoxBorderColor.SuccessDefault}
+        borderWidth={1}
+      >
+        <Text>SuccessDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.SuccessAlternative}
+        borderColor={BoxBorderColor.SuccessDefault}
+        borderWidth={1}
+      >
+        <Text>SuccessAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.SuccessMuted}
+        borderColor={BoxBorderColor.SuccessDefault}
+        borderWidth={1}
+      >
+        <Text>SuccessMuted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.SuccessInverse}
+        borderColor={BoxBorderColor.SuccessDefault}
+        borderWidth={1}
+      >
+        <Text>SuccessInverse</Text>
+      </Box>
+
+      {/* Info Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.InfoDefault}
+        borderColor={BoxBorderColor.InfoDefault}
+        borderWidth={1}
+      >
+        <Text>InfoDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.InfoAlternative}
+        borderColor={BoxBorderColor.InfoDefault}
+        borderWidth={1}
+      >
+        <Text>InfoAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.InfoMuted}
+        borderColor={BoxBorderColor.InfoDefault}
+        borderWidth={1}
+      >
+        <Text>InfoMuted</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.InfoInverse}
+        borderColor={BoxBorderColor.InfoDefault}
+        borderWidth={1}
+      >
+        <Text>InfoInverse</Text>
+      </Box>
+
+      {/* Special Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.FlaskDefault}
+        borderColor={BoxBorderColor.FlaskDefault}
+        borderWidth={1}
+      >
+        <Text>FlaskDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.FlaskInverse}
+        borderColor={BoxBorderColor.FlaskInverse}
+        borderWidth={1}
+      >
+        <Text>FlaskInverse</Text>
+      </Box>
+
+      {/* Overlay Colors */}
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.OverlayDefault}
+        borderColor={BoxBorderColor.OverlayDefault}
+        borderWidth={1}
+      >
+        <Text>OverlayDefault</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.OverlayAlternative}
+        borderColor={BoxBorderColor.OverlayAlternative}
+        borderWidth={1}
+      >
+        <Text>OverlayAlternative</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.OverlayInverse}
+        borderColor={BoxBorderColor.OverlayInverse}
+        borderWidth={1}
+      >
+        <Text>OverlayInverse</Text>
+      </Box>
+
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.Transparent}
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+      >
+        <Text>Transparent</Text>
+      </Box>
     </Box>
   ),
-};
-
-export const ClassName: Story = {
-  args: {
-    className:
-      'p-4 bg-primary-muted border-2 border-primary-default rounded-lg',
-  },
-  render: (args: BoxProps) => <BoxStory {...args} />,
 };
