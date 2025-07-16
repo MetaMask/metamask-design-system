@@ -264,7 +264,7 @@ export enum BoxBackgroundColor {
  * Box - borderColor
  */
 export enum BoxBorderColor {
-  /** Background default for cut out effect*/
+  /** Background default for cut out effect */
   BackgroundDefault = 'border-background-default',
   /** Default border color */
   BorderDefault = 'border-default',
