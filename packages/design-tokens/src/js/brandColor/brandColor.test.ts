@@ -14,13 +14,13 @@ describe('Brand Color', () => {
 
     if (!shadeMatch?.[0]) {
       // Base color without numeric shade
-      const expectedTokenValue = designTokens[colorFamily]?.value || '';
+      const expectedTokenValue = designTokens[colorFamily]?.value ?? '';
       baseColorTests.push([key, value, expectedTokenValue]);
     } else {
       // Color with numeric shade
       const shadeKey = shadeMatch[0];
       const expectedTokenValue =
-        designTokens[colorFamily]?.[shadeKey]?.value || '';
+        designTokens[colorFamily]?.[shadeKey]?.value ?? '';
       shadedColorTests.push([key, value, expectedTokenValue]);
     }
   });
