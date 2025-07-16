@@ -118,9 +118,63 @@ A comprehensive guide for using Tailwind effectively and consistently across our
   </Box>
   ```
 
+## 📝 Static Class Name Principle
+
+### 3. Static Class Name Principle
+
+**Always use complete, static Tailwind class names. Never construct class names using string interpolation, variables, or partial pieces.**
+
+This principle ensures:
+- **Linting Support**: ESLint can validate and order your classes
+- **IntelliSense**: IDE autocomplete and validation work properly  
+- **Build Reliability**: Classes work consistently across local and CI environments
+- **Debugging**: Easy to trace and search for class names
+- **Performance**: No runtime class construction overhead
+
+**Examples:**
+
+**React Web:**
+```tsx
+// ❌ Don't - Constructing class names with variables
+const variant = 'body-sm';
+const className = `text-${variant}`;
+const dynamicClasses = `bg-${bgColor} text-${textColor}`;
+
+// ❌ Don't - String interpolation in template literals
+const buttonClass = `px-4 py-2 bg-${isActive ? 'primary' : 'secondary'}`;
+
+// ✅ Do - Complete, static class names
+const className = "text-body-sm";
+const buttonClass = isActive ? "px-4 py-2 bg-primary" : "px-4 py-2 bg-secondary";
+
+// ✅ Do - Use component props for variants instead
+<Text variant={TextVariant.BodySm} />
+<Button variant={isActive ? ButtonVariant.Primary : ButtonVariant.Secondary} />
+```
+
+**React Native:**
+```tsx
+// ❌ Don't - Constructing class names with variables
+const size = 'md';
+const textClass = `text-body-${size}`;
+const style = tw`${textClass} text-default`;
+
+// ❌ Don't - Building classes from partial pieces
+const getTextStyle = (variant: string) => tw`text-${variant}`;
+
+// ✅ Do - Complete, static class names
+const style = tw`text-body-md text-default`;
+
+// ✅ Do - Use component props for variants instead
+<Text variant={TextVariant.BodyMd} color={TextColor.TextDefault} />
+
+// ✅ Do - If conditional classes needed, use complete class names
+const style = tw`${isLarge ? 'text-body-lg' : 'text-body-sm'} text-default`;
+```
+
 ## 💻 Platform-Specific Guidelines
 
-### 3. React Web Components
+### 4. React Web Components
 
 - **Use Tailwind Utilities**: Leverage Tailwind's utility classes for styling via `className`
 - **CVA Integration**: Coming soon - We are looking at implementing Class Variance Authority (CVA) for managing component variants. See [GitHub Issue #282](https://github.com/MetaMask/metamask-design-system/issues/282)
@@ -152,7 +206,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
   </Text>
   ```
 
-### 4. React Native Components
+### 5. React Native Components
 
 - **Design System TWRNC Preset**: Use `useTailwind` hook from `@metamask/design-system-twrnc-preset` instead of importing `twrnc` directly
 - **Theme Integration**: The preset automatically handles light/dark theme switching and design token integration
@@ -209,7 +263,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
 
 ## 🎨 Style Guidelines
 
-### 5. Platform-Specific Styling Patterns
+### 6. Platform-Specific Styling Patterns
 
 **React Web - className usage:**
 
@@ -269,30 +323,72 @@ A comprehensive guide for using Tailwind effectively and consistently across our
 
 ## 🛠️ Developer Tools & Configuration
 
-### 6. IDE Integration
+### 7. IDE Integration
 
+- **Static Class Names Only**: Always use complete, static class names (e.g., `text-body-sm`, `bg-primary-default`) to ensure proper IntelliSense, linting, and build reliability
 - **Enable Tailwind IntelliSense**: Use VSCode with Tailwind CSS IntelliSense plugin
 - **Configure Workspace**: Follow `.vscode/settings.json` configuration:
   - Use experimental config file setup for monorepo
   - Enable string suggestions
   - Support custom functions: `tw`, `twClassName`, `twMerge`
 
-### 7. Code Formatting
+### 8. Code Formatting
 
 - **ESLint Integration**: Use `eslint-plugin-tailwindcss` for Tailwind class validation and ordering
+- **Static Analysis**: ESLint can only validate complete, static class names - dynamic construction breaks linting rules and validation
 - **Consistent Ordering**: Maintain consistent class ordering through ESLint rules
 - **Class Validation**: ESLint enforces proper class usage, prevents contradictory classes, and encourages shorthand utilities
 
 ## ⚠️ Common Pitfalls
 
-### 8. Anti-patterns to Avoid
+### 9. Anti-patterns to Avoid
 
-- **No Arbitrary Values**: Don't use `[]` syntax for arbitrary values unless absolutely necessary
-- **No Direct Styles**: Avoid inline `style` objects
+#### ❌ Dynamic Class Construction
+The most critical anti-pattern is constructing Tailwind class names dynamically:
+
+```tsx
+// ❌ Never do this - String interpolation
+const textClass = `text-${variant}`;
+const colorClass = `bg-${color}-${shade}`;
+const sizeClass = `w-${width} h-${height}`;
+
+// ❌ Never do this - Template literals with variables
+const className = `px-4 py-2 text-${isActive ? 'primary' : 'secondary'}`;
+
+// ❌ Never do this - Function-based class generation
+const getButtonClass = (variant: string, size: string) => `btn-${variant}-${size}`;
+
+// ❌ Never do this - Array joining with variables
+const classes = ['text', variant, color].join('-');
+```
+
+#### ✅ Correct Alternatives
+
+```tsx
+// ✅ Use complete, static class names
+const textClass = "text-body-sm";
+const colorClass = "bg-primary-default";
+const sizeClass = "w-full h-10";
+
+// ✅ Use conditional logic with complete classes
+const className = isActive ? "px-4 py-2 text-primary" : "px-4 py-2 text-secondary";
+
+// ✅ Use mapping objects with complete class names
+const BUTTON_CLASSES = {
+  primary: "bg-primary-default text-primary-inverse",
+  secondary: "bg-secondary-default text-secondary-inverse",
+} as const;
+
+// ✅ Use component props instead of manual class construction
+<Button variant={ButtonVariant.Primary} size={ButtonSize.Medium} />
+```
+
+#### Other Anti-patterns:
+- **No Arbitrary Values**: Avoid `[]` syntax except for one-off cases
 - **No @apply**: Don't use `@apply` in CSS files
-- **No Style Mixing**: Don't mix Tailwind with other styling approaches like inline styles in the same component. However, combining component props with Tailwind classes via `className`/`twClassName`/`tw` is acceptable when no equivalent prop exists
+- **No Style Mixing**: Don't mix Tailwind with inline styles
 - **No Default Colors**: Never use Tailwind's default color palette
-- **No Direct Typography**: Never use typography classes directly
+- **No Direct Typography**: Always use the Text component
 
 **Platform-specific examples:**
 
