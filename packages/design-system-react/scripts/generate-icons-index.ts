@@ -66,8 +66,8 @@ export type IconsType = typeof Icons;
 
     const typesContent = await fs.readFile(TYPES_FILE, 'utf8');
     const updatedTypesContent = typesContent.replace(
-      /export enum IconName \{[\s\S]*?\}/u,
-      `export enum IconName {\n${enumContent}\n}`,
+      /(\/* eslint-disable @typescript-eslint\/no-shadow \*\/\n)?export enum IconName \{[\s\S]*?\}(\n\/\* eslint-enable @typescript-eslint\/no-shadow \*\/)?/u,
+      `/* eslint-disable @typescript-eslint/no-shadow */\nexport enum IconName {\n${enumContent}\n}\n/* eslint-enable @typescript-eslint/no-shadow */`,
     );
 
     await fs.writeFile(TYPES_FILE, updatedTypesContent);

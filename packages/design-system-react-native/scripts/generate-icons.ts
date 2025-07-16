@@ -116,7 +116,8 @@ export async function main(): Promise<void> {
     baseTypesFileContent + TYPES_CONTENT_TO_DETECT
   }\n// /////////////////////////////////////////////////////`;
 
-  typesContentToWrite += '\n\n/**\n * Icon - name\n */\nexport enum IconName {';
+  typesContentToWrite +=
+    '\n\n/**\n * Icon - name\n */\n/* eslint-disable @typescript-eslint/no-shadow */\nexport enum IconName {';
 
   for (const fileName of assetFileList) {
     const iconName = path
@@ -130,7 +131,8 @@ export async function main(): Promise<void> {
     typesContentToWrite += `\n  ${iconName} = '${iconName}',`;
   }
 
-  typesContentToWrite += '\n}\n';
+  typesContentToWrite +=
+    '\n}\n/* eslint-enable @typescript-eslint/no-shadow */\n';
 
   await fs.promises.writeFile(typesFilePath, typesContentToWrite);
 
