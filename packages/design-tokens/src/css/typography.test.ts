@@ -26,7 +26,14 @@ const resolveTokenValue = (value: string): string => {
 
 // Helper function to convert token name to CSS variable name
 const tokenNameToCSSVariable = (tokenName: string): string => {
-  return `--typography-${tokenName.toLowerCase().replace(/-/gu, '-')}`;
+  // Convert camelCase to kebab-case by inserting dashes before capital letters
+  // but only if there isn't already a dash before the capital letter
+  // and handle consecutive capital letters properly
+  const kebabCase = tokenName
+    .replace(/([^-])([A-Z][a-z])/gu, '$1-$2') // Insert dash before capital letters followed by lowercase
+    .replace(/([a-z])([A-Z])/gu, '$1-$2') // Insert dash between lowercase and capital letters
+    .toLowerCase();
+  return `--typography-${kebabCase}`;
 };
 
 describe('Typography CSS', () => {

@@ -51,6 +51,16 @@ const config: StorybookConfig = {
     // Add asset inclusion for font files so that Vite processes them correctly.
     config.assetsInclude = ['**/*.woff2', '**/*.woff', '**/*.ttf', '**/*.otf'];
 
+    // Add optimizeDeps configuration to handle workspace packages
+    config.optimizeDeps = {
+      ...config.optimizeDeps,
+      exclude: [
+        '@metamask/design-tokens',
+        '@metamask/design-system-react',
+        '@metamask/design-system-tailwind-preset',
+      ],
+    };
+
     return config;
   },
 };

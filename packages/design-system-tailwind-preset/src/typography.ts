@@ -10,6 +10,11 @@ export const typography = {
     's-body-md': 'var(--typography-s-body-md-font-size)',
     's-body-sm': 'var(--typography-s-body-sm-font-size)',
     's-body-xs': 'var(--typography-s-body-xs-font-size)',
+    's-page-heading': 'var(--typography-s-page-heading-font-size)',
+    's-section-heading': 'var(--typography-s-section-heading-font-size)',
+    's-button-label-md': 'var(--typography-s-button-label-md-font-size)',
+    's-button-label-lg': 'var(--typography-s-button-label-lg-font-size)',
+    's-amount-display-lg': 'var(--typography-s-amount-display-lg-font-size)',
     // large screen typography
     'l-display-lg': 'var(--typography-l-display-lg-font-size)',
     'l-display-md': 'var(--typography-l-display-md-font-size)',
@@ -20,6 +25,11 @@ export const typography = {
     'l-body-md': 'var(--typography-l-body-md-font-size)',
     'l-body-sm': 'var(--typography-l-body-sm-font-size)',
     'l-body-xs': 'var(--typography-l-body-xs-font-size)',
+    'l-page-heading': 'var(--typography-l-page-heading-font-size)',
+    'l-section-heading': 'var(--typography-l-section-heading-font-size)',
+    'l-button-label-md': 'var(--typography-l-button-label-md-font-size)',
+    'l-button-label-lg': 'var(--typography-l-button-label-lg-font-size)',
+    'l-amount-display-lg': 'var(--typography-l-amount-display-lg-font-size)',
   },
   fontFamily: {
     sans: 'var(--font-family-default)',
@@ -38,6 +48,12 @@ export const typography = {
     's-body-md': 'var(--typography-s-body-md-letter-spacing)',
     's-body-sm': 'var(--typography-s-body-sm-letter-spacing)',
     's-body-xs': 'var(--typography-s-body-xs-letter-spacing)',
+    's-page-heading': 'var(--typography-s-page-heading-letter-spacing)',
+    's-section-heading': 'var(--typography-s-section-heading-letter-spacing)',
+    's-button-label-md': 'var(--typography-s-button-label-md-letter-spacing)',
+    's-button-label-lg': 'var(--typography-s-button-label-lg-letter-spacing)',
+    's-amount-display-lg':
+      'var(--typography-s-amount-display-lg-letter-spacing)',
     // large screen typography
     'l-display-lg': 'var(--typography-l-display-lg-letter-spacing)',
     'l-display-md': 'var(--typography-l-display-md-letter-spacing)',
@@ -48,12 +64,30 @@ export const typography = {
     'l-body-md': 'var(--typography-l-body-md-letter-spacing)',
     'l-body-sm': 'var(--typography-l-body-sm-letter-spacing)',
     'l-body-xs': 'var(--typography-l-body-xs-letter-spacing)',
+    'l-page-heading': 'var(--typography-l-page-heading-letter-spacing)',
+    'l-section-heading': 'var(--typography-l-section-heading-letter-spacing)',
+    'l-button-label-md': 'var(--typography-l-button-label-md-letter-spacing)',
+    'l-button-label-lg': 'var(--typography-l-button-label-lg-letter-spacing)',
+    'l-amount-display-lg':
+      'var(--typography-l-amount-display-lg-letter-spacing)',
   },
   fontWeight: {
     // agnostic weights
     regular: 'var(--font-weight-regular)',
     medium: 'var(--font-weight-medium)',
     bold: 'var(--font-weight-bold)',
+    // small screen typography font weights
+    's-page-heading': 'var(--typography-s-page-heading-font-weight)',
+    's-section-heading': 'var(--typography-s-section-heading-font-weight)',
+    's-button-label-md': 'var(--typography-s-button-label-md-font-weight)',
+    's-button-label-lg': 'var(--typography-s-button-label-lg-font-weight)',
+    's-amount-display-lg': 'var(--typography-s-amount-display-lg-font-weight)',
+    // large screen typography font weights
+    'l-page-heading': 'var(--typography-l-page-heading-font-weight)',
+    'l-section-heading': 'var(--typography-l-section-heading-font-weight)',
+    'l-button-label-md': 'var(--typography-l-button-label-md-font-weight)',
+    'l-button-label-lg': 'var(--typography-l-button-label-lg-font-weight)',
+    'l-amount-display-lg': 'var(--typography-l-amount-display-lg-font-weight)',
   },
   lineHeight: {
     // small screen typography
@@ -66,6 +100,11 @@ export const typography = {
     's-body-md': 'var(--typography-s-body-md-line-height)',
     's-body-sm': 'var(--typography-s-body-sm-line-height)',
     's-body-xs': 'var(--typography-s-body-xs-line-height)',
+    's-page-heading': 'var(--typography-s-page-heading-line-height)',
+    's-section-heading': 'var(--typography-s-section-heading-line-height)',
+    's-button-label-md': 'var(--typography-s-button-label-md-line-height)',
+    's-button-label-lg': 'var(--typography-s-button-label-lg-line-height)',
+    's-amount-display-lg': 'var(--typography-s-amount-display-lg-line-height)',
     // large screen typography
     'l-display-lg': 'var(--typography-l-display-lg-line-height)',
     'l-display-md': 'var(--typography-l-display-md-line-height)',
@@ -76,5 +115,10 @@ export const typography = {
     'l-body-md': 'var(--typography-l-body-md-line-height)',
     'l-body-sm': 'var(--typography-l-body-sm-line-height)',
     'l-body-xs': 'var(--typography-l-body-xs-line-height)',
+    'l-page-heading': 'var(--typography-l-page-heading-line-height)',
+    'l-section-heading': 'var(--typography-l-section-heading-line-height)',
+    'l-button-label-md': 'var(--typography-l-button-label-md-line-height)',
+    'l-button-label-lg': 'var(--typography-l-button-label-lg-line-height)',
+    'l-amount-display-lg': 'var(--typography-l-amount-display-lg-line-height)',
   },
 };

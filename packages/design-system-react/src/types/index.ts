@@ -401,6 +401,13 @@ export enum TextVariant {
   BodyMd = 'body-md',
   BodySm = 'body-sm',
   BodyXs = 'body-xs',
+
+  // Special Typography Variants
+  PageHeading = 'page-heading',
+  SectionHeading = 'section-heading',
+  ButtonLabelMd = 'button-label-md',
+  ButtonLabelLg = 'button-label-lg',
+  AmountDisplayLg = 'amount-display-lg',
 }
 
 /**
