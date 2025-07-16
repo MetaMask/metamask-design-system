@@ -301,7 +301,7 @@ const config = createConfig([
       tailwindcss: {
         callees: ['twMerge', 'twClassName', 'tw'],
         config: 'apps/storybook-react-native/tailwind-intellisense.config.js',
-        classRegex: ['^(class(Name)?|twClassName)$'],
+        tags: ['tw'], // Enable template literal support for tw`classnames`
       },
     },
   },
