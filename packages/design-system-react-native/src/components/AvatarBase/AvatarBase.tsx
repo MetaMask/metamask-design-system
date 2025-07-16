@@ -25,27 +25,26 @@ export const AvatarBase = ({
   ...props
 }: AvatarBaseProps) => {
   const tw = useTailwind();
-  const twContainerClassNames = `
-    items-center justify-center overflow-hidden bg-section
-    ${
-      shape === AvatarBaseShape.Circle
-        ? 'rounded-full'
-        : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size]
-    }
-    ${hasBorder ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size] : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size]}
-    ${hasBorder ? TWCLASSMAP_AVATARBASE_SIZE_BORDER[size] : ''}
-    ${twClassName}
-  `;
 
   return (
-    <View style={[tw`${twContainerClassNames}`, style]} {...props}>
+    <View 
+      style={[
+        tw`items-center justify-center overflow-hidden bg-section ${
+          shape === AvatarBaseShape.Circle
+            ? 'rounded-full'
+            : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size]
+        } ${hasBorder ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size] : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size]} ${hasBorder ? TWCLASSMAP_AVATARBASE_SIZE_BORDER[size] : ''} ${twClassName}`,
+        style
+      ]} 
+      {...props}
+    >
       {fallbackText ? (
         <Text
           color={TextColor.TextMuted}
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
           {...fallbackTextProps}
-          twClassName={`uppercase ${fallbackTextProps?.twClassName ? ` ${fallbackTextProps.twClassName}` : ''}`.trim()}
+          twClassName={`uppercase ${fallbackTextProps?.twClassName ?? ''}`.trim()}
         >
           {fallbackText}
         </Text>

@@ -34,10 +34,6 @@ export const AvatarGroup = ({
   const tw = useTailwind();
   const overflowCounter = avatarPropsArr.length - max;
   const shouldRenderOverflowCounter = overflowCounter > 0;
-  const twContainerClassNames = `
-    ${isReverse ? 'flex-row-reverse' : 'flex-row'}
-    ${TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS[size]}
-  `;
 
   const renderAvatarList = useCallback(
     () =>
@@ -89,7 +85,13 @@ export const AvatarGroup = ({
   );
 
   return (
-    <View style={[tw`${twContainerClassNames}`, style]} {...props}>
+    <View 
+      style={[
+        tw`${isReverse ? 'flex-row-reverse' : 'flex-row'} ${TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS[size]} ${twClassName ?? ''}`,
+        style
+      ]} 
+      {...props}
+    >
       {renderAvatarList()}
       {shouldRenderOverflowCounter && (
         <AvatarBase
