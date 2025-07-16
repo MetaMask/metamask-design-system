@@ -128,7 +128,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
             <AnimatedView
               {...checkboxContainerProps}
               style={[
-                tw`${getCheckboxContainerStyle(pressed)} flex h-[22px] w-[22px] items-center justify-center rounded border-2`,
+                tw`${getCheckboxContainerStyle(pressed)} flex size-[22px] items-center justify-center rounded border-2`,
                 { transform: [{ scale: scaleAnim }] },
               ]}
             >

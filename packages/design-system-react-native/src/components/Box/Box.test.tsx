@@ -276,7 +276,7 @@ describe('Box', () => {
     );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw`bg-primary-default flex p-4`);
+    expect(styles[0]).toStrictEqual(tw`flex bg-primary-default p-4`);
   });
 
   it('applies all flex props together', () => {
