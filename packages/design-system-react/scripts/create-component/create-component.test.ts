@@ -171,6 +171,7 @@ import { ComponentName } from '@metamask/design-system-react';
       `;
 
       (fs.readFile as jest.Mock).mockImplementation(async (path: string) => {
+        // eslint-disable-next-line jest/no-conditional-in-test
         if (path.endsWith('README.mdx')) {
           return Promise.resolve(mockReadmeContent);
         }
@@ -230,6 +231,7 @@ import { ComponentName } from '@metamask/design-system-react';
       `;
 
       (fs.readFile as jest.Mock).mockImplementation(async (path: string) => {
+        // eslint-disable-next-line jest/no-conditional-in-test
         if (path.endsWith('README.mdx')) {
           return Promise.resolve(mockReadmeContent);
         }

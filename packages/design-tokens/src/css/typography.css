@@ -3,8 +3,7 @@
  */
 :root {
   /* font family */
-  --font-family-default: 'CentraNo1', 'Helvetica Neue', Helvetica, Arial,
-    sans-serif;
+  --font-family-default: 'Geist', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-family-accent: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-family-hero: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   /* font sizes */
@@ -92,11 +91,11 @@
   --typography-s-body-xs-medium-font-size: var(--font-size-2);
   --typography-s-body-xs-medium-line-height: var(--line-height-2);
   --typography-s-body-xs-medium-font-weight: var(--font-weight-medium);
-  --typography-s-body-xs-medium-letter-spacing: var(--letter-spacing-0);
+  --typography-s-body-xs-medium-letter-spacing: var(--letter-spacing-1);
   --typography-s-body-xs-font-size: var(--font-size-2);
   --typography-s-body-xs-line-height: var(--line-height-2);
   --typography-s-body-xs-font-weight: var(--font-weight-regular);
-  --typography-s-body-xs-letter-spacing: var(--letter-spacing-0);
+  --typography-s-body-xs-letter-spacing: var(--letter-spacing-1);
 
   /* typography scale large screen */
   --typography-l-display-lg-font-size: var(--font-size-10);
@@ -150,9 +149,9 @@
   --typography-l-body-xs-medium-font-size: var(--font-size-2);
   --typography-l-body-xs-medium-line-height: var(--line-height-2);
   --typography-l-body-xs-medium-font-weight: var(--font-weight-medium);
-  --typography-l-body-xs-medium-letter-spacing: var(--letter-spacing-0);
+  --typography-l-body-xs-medium-letter-spacing: var(--letter-spacing-1);
   --typography-l-body-xs-font-size: var(--font-size-2);
   --typography-l-body-xs-line-height: var(--line-height-2);
   --typography-l-body-xs-font-weight: var(--font-weight-regular);
-  --typography-l-body-xs-letter-spacing: var(--letter-spacing-0);
+  --typography-l-body-xs-letter-spacing: var(--letter-spacing-1);
 }

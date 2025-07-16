@@ -4,505 +4,238 @@ import * as AvatarGroupStories from './AvatarGroup.stories';
 
 # AvatarGroup
 
-`AvatarGroup` is a stacked avatars to represent a group of avatars.
+AvatarGroup is a stacked avatars to represent a group of avatars.
+
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupVariant,
+  AvatarAccountVariant,
+} from '@metamask/design-system-react';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x123...',
+    },
+    {
+      variant: AvatarAccountVariant.Blockies,
+      address: '0x456...',
+    },
+    {
+      variant: AvatarAccountVariant.Jazzicon,
+      address: '0x789...',
+    },
+  ]}
+/>;
+```
 
 <Canvas of={AvatarGroupStories.Default} />
 
-```tsx
-import {
-  AvatarGroup,
-  AvatarGroupVariant,
-  AvatarAccountVariant,
-} from '@metamask/design-system-react';
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Favicon}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/favicon1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/favicon2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/favicon3.png' },
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Network}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/net1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/net2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/net3.png' },
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Token}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/token1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token3.png' },
-    },
-  ]}
-/>;
-```
-
 ## Props
 
-### Variant (required)
+### `variant`
 
 The `variant` prop is required and determines the type of avatars used within the group.
 
+Available variants:
+- `AvatarGroupVariant.Account` - For account avatars
+- `AvatarGroupVariant.Favicon` - For website/dapp favicons  
+- `AvatarGroupVariant.Network` - For network logos
+- `AvatarGroupVariant.Token` - For token logos
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>AvatarGroupVariant</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarGroupStories.Variant} />
 
-```tsx
-import {
-  AvatarGroup,
-  AvatarGroupVariant,
-  AvatarAccountVariant,
-} from '@metamask/design-system-react';
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Favicon}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/favicon1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/favicon2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/favicon3.png' },
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Network}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/net1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/net2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/net3.png' },
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Token}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/token1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token3.png' },
-    },
-  ]}
-/>;
-```
-
-### Avatar Props Arr (required)
+### `avatarPropsArr`
 
 The `avatarPropsArr` prop is an array of props for each avatar within the group.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Array</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarGroupStories.AvatarPropsArr} />
 
-```tsx
-import {
-  AvatarGroup,
-  AvatarGroupVariant,
-  AvatarAccountVariant,
-} from '@metamask/design-system-react';
+### `size`
 
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
+AvatarGroup supports five sizes, which map to Avatar sizes.
 
-<AvatarGroup
-  variant={AvatarGroupVariant.Favicon}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/favicon1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/favicon2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/favicon3.png' },
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Network}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/net1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/net2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/net3.png' },
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Token}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/token1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token3.png' },
-    },
-  ]}
-/>;
-```
-
-### Size
-
-AvatarGroup supports five sizes, which map to Avatar sizes:
-
+Available sizes:
 - `AvatarGroupSize.Xs` (16px)
 - `AvatarGroupSize.Sm` (24px)
-- `AvatarGroupSize.Md` (32px) - default
+- `AvatarGroupSize.Md` (32px)
 - `AvatarGroupSize.Lg` (40px)
 - `AvatarGroupSize.Xl` (48px)
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>AvatarGroupSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>AvatarGroupSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarGroupStories.Size} />
 
-```tsx
-import {
-  AvatarGroup,
-  AvatarGroupSize,
-  AvatarGroupVariant,
-  AvatarAccountVariant,
-} from '@metamask/design-system-react';
+### `max`
 
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-  size={AvatarGroupSize.Xs}
-/>;
+The `max` prop determines the maximum number of avatars to display before showing an overflow indicator.
 
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-  size={AvatarGroupSize.Sm}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-  size={AvatarGroupSize.Md}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-  size={AvatarGroupSize.Lg}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-  size={AvatarGroupSize.Xl}
-/>;
-```
-
-### Max
-
-The `max` prop determines the maximum number of avatars to display before showing an overflow indicator. Default is `4`.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>4</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={AvatarGroupStories.Max} />
 
-```tsx
-import {
-  AvatarGroup,
-  AvatarGroupVariant,
-  AvatarAccountVariant,
-} from '@metamask/design-system-react';
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  max={1}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  max={10}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
-```
-
-### Is Reverse
+### `isReverse`
 
 The `isReverse` prop reverses the order of avatar stacking.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={AvatarGroupStories.IsReverse} />
 
-```tsx
-import {
-  AvatarGroup,
-  AvatarGroupVariant,
-  AvatarAccountVariant,
-} from '@metamask/design-system-react';
+### `className`
 
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  isReverse
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
-```
-
-### Class Name
-
-Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default
-classes using `twMerge`, allowing you to:
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-<AvatarGroup
-  variant={AvatarGroupVariant.Token}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/token1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token3.png' },
-    },
-  ]}
-  className="mx-2 my-4"
-/>
-```
-
-### Style
+### `style`
 
 The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 

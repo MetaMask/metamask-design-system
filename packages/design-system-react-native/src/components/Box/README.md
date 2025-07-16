@@ -1,10 +1,12 @@
 # Box
 
-`Box` is a low level flexbox layout component built on top of the React Native `View` element. It provides a focused set of props that map to Tailwind flexbox utility classes for easy flex-based layout control.
+`Box` is a low level flexbox layout component built on top of the React Native `View` element. It provides a comprehensive set of props for layout control including flexbox properties, spacing (margin and padding), borders, and background colors that map to Tailwind utility classes.
 
 ---
 
 ## Props
+
+### Flexbox Properties
 
 ### `flexDirection`
 
@@ -26,9 +28,9 @@ The flexWrap style of the component for controlling item wrapping behavior.
 
 The gap between the component's children. Use values from the BoxSpacing scale (0-12).
 
-| TYPE   | REQUIRED |
-| :----- | :------- |
-| number | No       |
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
 
 ### `alignItems`
 
@@ -46,9 +48,155 @@ The justifyContent style of the component for main-axis alignment.
 | :---------------------------------------- | :------- |
 | [BoxJustifyContent](../../types/index.ts) | No       |
 
+### Margin Properties
+
+### `margin`
+
+The margin of the component on all sides. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `marginTop`
+
+The top margin of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `marginRight`
+
+The right margin of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `marginBottom`
+
+The bottom margin of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `marginLeft`
+
+The left margin of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `marginHorizontal`
+
+The horizontal margin (left and right) of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `marginVertical`
+
+The vertical margin (top and bottom) of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### Padding Properties
+
+### `padding`
+
+The padding of the component on all sides. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `paddingTop`
+
+The top padding of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `paddingRight`
+
+The right padding of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `paddingBottom`
+
+The bottom padding of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `paddingLeft`
+
+The left padding of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `paddingHorizontal`
+
+The horizontal padding (left and right) of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### `paddingVertical`
+
+The vertical padding (top and bottom) of the component. Use values from the BoxSpacing scale (0-12).
+
+| TYPE                               | REQUIRED |
+| :--------------------------------- | :------- |
+| [BoxSpacing](../../types/index.ts) | No       |
+
+### Border Properties
+
+### `borderWidth`
+
+The border width of the component. Use only valid Tailwind CSS border width values (0, 1, 2, 4, 8).
+
+| TYPE                                   | REQUIRED |
+| :------------------------------------- | :------- |
+| [BoxBorderWidth](../../types/index.ts) | No       |
+
+### `borderColor`
+
+The border color of the component.
+
+| TYPE                                   | REQUIRED |
+| :------------------------------------- | :------- |
+| [BoxBorderColor](../../types/index.ts) | No       |
+
+### Background Properties
+
+### `backgroundColor`
+
+The background color of the component.
+
+| TYPE                                       | REQUIRED |
+| :----------------------------------------- | :------- |
+| [BoxBackgroundColor](../../types/index.ts) | No       |
+
+### General Properties
+
 ### `twClassName`
 
-Optional prop to add twrnc overriding classNames for styling beyond flex properties.
+Optional prop to add twrnc overriding classNames for styling beyond the component's built-in props.
 
 | TYPE     | REQUIRED | DEFAULT |
 | :------- | :------- | :------ |
@@ -70,7 +218,9 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 
 ## Usage
 
-### `flexDirection`
+### Flexbox Properties
+
+#### `flexDirection`
 
 ```tsx
 // Horizontal layout (default)
@@ -86,7 +236,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 </Box>
 ```
 
-### `flexWrap`
+#### `flexWrap`
 
 ```tsx
 <Box
@@ -101,7 +251,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 </Box>
 ```
 
-### `gap`
+#### `gap`
 
 ```tsx
 // Small gap (8px)
@@ -117,7 +267,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 </Box>
 ```
 
-### `alignItems`
+#### `alignItems`
 
 ```tsx
 // Center items on cross axis
@@ -131,7 +281,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 </Box>
 ```
 
-### `justifyContent`
+#### `justifyContent`
 
 ```tsx
 // Space between items
@@ -143,6 +293,188 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 // Center items on main axis
 <Box justifyContent={BoxJustifyContent.Center}>
   <Text>Centered</Text>
+</Box>
+```
+
+### Margin Properties
+
+#### `margin`
+
+```tsx
+// All sides margin (16px)
+<Box margin={4} backgroundColor={BoxBackgroundColor.PrimaryMuted}>
+  <Text>Box with margin</Text>
+</Box>
+
+// No margin
+<Box margin={0} backgroundColor={BoxBackgroundColor.BackgroundDefault}>
+  <Text>Box without margin</Text>
+</Box>
+```
+
+#### Directional Margins
+
+```tsx
+// Different margins on each side
+<Box
+  marginTop={2}
+  marginRight={4}
+  marginBottom={3}
+  marginLeft={1}
+  backgroundColor={BoxBackgroundColor.WarningMuted}
+>
+  <Text>Box with directional margins</Text>
+</Box>
+
+// Horizontal and vertical margins
+<Box
+  marginHorizontal={4}
+  marginVertical={2}
+  backgroundColor={BoxBackgroundColor.SuccessMuted}
+>
+  <Text>Box with horizontal and vertical margins</Text>
+</Box>
+```
+
+### Padding Properties
+
+#### `padding`
+
+```tsx
+// All sides padding (16px)
+<Box padding={4} backgroundColor={BoxBackgroundColor.InfoMuted}>
+  <Text>Box with padding</Text>
+</Box>
+
+// Large padding (24px)
+<Box padding={6} backgroundColor={BoxBackgroundColor.BackgroundDefault}>
+  <Text>Box with large padding</Text>
+</Box>
+```
+
+#### Directional Padding
+
+```tsx
+// Different padding on each side
+<Box
+  paddingTop={2}
+  paddingRight={4}
+  paddingBottom={3}
+  paddingLeft={1}
+  backgroundColor={BoxBackgroundColor.Alternative}
+>
+  <Text>Box with directional padding</Text>
+</Box>
+
+// Horizontal and vertical padding
+<Box
+  paddingHorizontal={6}
+  paddingVertical={3}
+  backgroundColor={BoxBackgroundColor.Muted}
+>
+  <Text>Box with horizontal and vertical padding</Text>
+</Box>
+```
+
+### Border Properties
+
+#### `borderWidth` and `borderColor`
+
+```tsx
+// Basic border
+<Box
+  borderWidth={1}
+  borderColor={BoxBorderColor.BorderDefault}
+  padding={4}
+>
+  <Text>Box with default border</Text>
+</Box>
+
+// Thick colored border
+<Box
+  borderWidth={2}
+  borderColor={BoxBorderColor.PrimaryDefault}
+  padding={4}
+>
+  <Text>Box with thick primary border</Text>
+</Box>
+
+// Error state border
+<Box
+  borderWidth={1}
+  borderColor={BoxBorderColor.ErrorDefault}
+  backgroundColor={BoxBackgroundColor.ErrorMuted}
+  padding={4}
+>
+  <Text>Error state box</Text>
+</Box>
+```
+
+### Background Properties
+
+#### `backgroundColor`
+
+```tsx
+// Primary background
+<Box backgroundColor={BoxBackgroundColor.PrimaryDefault} padding={4}>
+  <Text>Box with primary background</Text>
+</Box>
+
+// Muted background
+<Box backgroundColor={BoxBackgroundColor.Muted} padding={4}>
+  <Text>Box with muted background</Text>
+</Box>
+
+// Success background
+<Box backgroundColor={BoxBackgroundColor.SuccessMuted} padding={4}>
+  <Text>Box with success background</Text>
+</Box>
+```
+
+### Combined Usage
+
+#### Card-like Component
+
+```tsx
+<Box
+  padding={4}
+  margin={2}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
+  borderWidth={1}
+  borderColor={BoxBorderColor.BorderDefault}
+>
+  <Text>Card Title</Text>
+  <Box marginTop={2} gap={2}>
+    <Text>Card content goes here</Text>
+    <Text>More content</Text>
+  </Box>
+</Box>
+```
+
+#### Complex Layout
+
+```tsx
+<Box
+  flexDirection={BoxFlexDirection.Column}
+  gap={3}
+  margin={4}
+  padding={6}
+  borderWidth={1}
+  borderColor={BoxBorderColor.BorderDefault}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
+>
+  <Text>Main Container</Text>
+  <Box
+    flexDirection={BoxFlexDirection.Row}
+    gap={2}
+    padding={3}
+    backgroundColor={BoxBackgroundColor.Alternative}
+    borderWidth={1}
+    borderColor={BoxBorderColor.BorderMuted}
+  >
+    <Text>Child 1</Text>
+    <Text>Child 2</Text>
+  </Box>
 </Box>
 ```
 
@@ -172,13 +504,13 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 
 ## BoxSpacing Values
 
-The `gap` prop uses the `BoxSpacing` numeric system for consistent spacing scales:
+The `gap`, `margin`, and `padding` props use the `BoxSpacing` numeric system for consistent spacing scales:
 
 **Available Values:** 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
 
 **Pixel Mapping:**
 
-- `0` - 0px (no gap)
+- `0` - 0px (none)
 - `1` - 4px (extra small)
 - `2` - 8px (small)
 - `3` - 12px (small-medium)
@@ -192,6 +524,55 @@ The `gap` prop uses the `BoxSpacing` numeric system for consistent spacing scale
 - `11` - 44px (5x large)
 - `12` - 48px (6x large)
 
+## BoxBorderWidth Values
+
+The `borderWidth` prop uses the `BoxBorderWidth` type with only valid Tailwind CSS border width values:
+
+**Available Values:** 0, 1, 2, 4, 8
+
+**Pixel Mapping:**
+
+- `0` - 0px (no border, maps to `border-0`)
+- `1` - 1px (default border, maps to `border`)
+- `2` - 2px (maps to `border-2`)
+- `4` - 4px (maps to `border-4`)
+- `8` - 8px (maps to `border-8`)
+
+---
+
+## Color Options
+
+### BoxBackgroundColor
+
+Available background colors include:
+
+- `Default` - Default background color
+- `Alternative` - Alternative background color
+- `PrimaryDefault` - Primary brand color
+- `PrimaryMuted` - Muted primary color
+- `ErrorDefault` - Error state color
+- `ErrorMuted` - Muted error color
+- `WarningDefault` - Warning state color
+- `WarningMuted` - Muted warning color
+- `SuccessDefault` - Success state color
+- `SuccessMuted` - Muted success color
+- `InfoDefault` - Info state color
+- `InfoMuted` - Muted info color
+- `Transparent` - Transparent background
+
+### BoxBorderColor
+
+Available border colors include:
+
+- `Default` - Default border color
+- `Muted` - Muted border color
+- `PrimaryDefault` - Primary brand border
+- `ErrorDefault` - Error state border
+- `WarningDefault` - Warning state border
+- `SuccessDefault` - Success state border
+- `InfoDefault` - Info state border
+- `Transparent` - Transparent border
+
 ---
 
 ## Usage Patterns
@@ -203,6 +584,8 @@ The `gap` prop uses the `BoxSpacing` numeric system for consistent spacing scale
   flexDirection={BoxFlexDirection.Row}
   gap={3}
   alignItems={BoxAlignItems.Center}
+  padding={4}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
 >
   <Text>Item 1</Text>
   <Text>Item 2</Text>
@@ -213,7 +596,12 @@ The `gap` prop uses the `BoxSpacing` numeric system for consistent spacing scale
 ### Vertical Stack
 
 ```tsx
-<Box flexDirection={BoxFlexDirection.Column} gap={2}>
+<Box
+  flexDirection={BoxFlexDirection.Column}
+  gap={2}
+  padding={4}
+  backgroundColor={BoxBackgroundColor.Alternative}
+>
   <Text>Item 1</Text>
   <Text>Item 2</Text>
   <Text>Item 3</Text>
@@ -227,47 +615,38 @@ The `gap` prop uses the `BoxSpacing` numeric system for consistent spacing scale
   flexDirection={BoxFlexDirection.Row}
   justifyContent={BoxJustifyContent.Between}
   alignItems={BoxAlignItems.Center}
+  padding={4}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
 >
   <Text>Left</Text>
   <Text>Right</Text>
 </Box>
 ```
 
-### Responsive Grid with Wrapping
+### Alert/Notification Component
 
 ```tsx
 <Box
-  flexDirection={BoxFlexDirection.Row}
-  flexWrap={BoxFlexWrap.Wrap}
-  gap={4}
-  twClassName="w-full"
+  padding={4}
+  margin={2}
+  backgroundColor={BoxBackgroundColor.WarningMuted}
+  borderWidth={1}
+  borderColor={BoxBorderColor.WarningDefault}
 >
-  <View style={{ width: '48%' }}>
-    <Text>Item 1</Text>
-  </View>
-  <View style={{ width: '48%' }}>
-    <Text>Item 2</Text>
-  </View>
-  <View style={{ width: '48%' }}>
-    <Text>Item 3</Text>
-  </View>
+  <Text>Warning: This is an alert message</Text>
 </Box>
 ```
 
----
+### Button-like Component
 
-## Notes
-
-- `Box` provides a lightweight way to apply flexbox layout patterns in React Native.
-- Use `twClassName` for styling properties like padding, margin, background colors, borders, and dimensions.
-- The component always applies `flex` display behavior.
-- Spacing properties use the numeric BoxSpacing system (0-12) for consistent spacing scales.
-- Use `style` for React Native-specific properties like shadows, elevation, and transforms.
-
----
-
-## Contributing
-
-1. Add tests for new functionality.
-2. Document any new props in this README.
-3. Follow the design system coding guidelines.
+```tsx
+<Box
+  padding={3}
+  backgroundColor={BoxBackgroundColor.PrimaryDefault}
+  borderWidth={1}
+  borderColor={BoxBorderColor.PrimaryDefault}
+  alignItems={BoxAlignItems.Center}
+>
+  <Text>Button Text</Text>
+</Box>
+```

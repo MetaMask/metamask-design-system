@@ -43,11 +43,15 @@ describe('create-package/utils', () => {
     it('should read the expected monorepo files', async () => {
       (fs.promises.readFile as jest.Mock).mockImplementation(
         async (filePath: string) => {
+          // eslint-disable-next-line jest/no-conditional-in-test
           switch (path.basename(filePath)) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
             case MonorepoFiles.TsConfig:
               return tsConfig;
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
             case MonorepoFiles.TsConfigBuild:
               return tsConfigBuild;
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
             case MonorepoFiles.PackageJson:
               return packageJson;
             default:
@@ -97,6 +101,7 @@ describe('create-package/utils', () => {
         'mock3.file': 'PACKAGE_DESCRIPTION PACKAGE_DIRECTORY_NAME',
       });
 
+      // eslint-disable-next-line import-x/no-named-as-default-member
       (prettier.format as jest.Mock).mockImplementation((input) => input);
 
       await finalizeAndWriteData(packageData, monorepoFileData);
@@ -121,6 +126,7 @@ describe('create-package/utils', () => {
 
       // Writing monorepo files
       expect(fs.promises.writeFile).toHaveBeenCalledTimes(2);
+      // eslint-disable-next-line import-x/no-named-as-default-member
       expect(prettier.format).toHaveBeenCalledTimes(2);
       expect(fs.promises.writeFile).toHaveBeenCalledWith(
         expect.stringMatching(/tsconfig\.json$/u),

@@ -4,18 +4,15 @@ import * as BoxStories from './Box.stories';
 
 # Box
 
-`Box` is a low level flexbox layout component. It provides a focused set of props that map to Tailwind flexbox utility classes for easy flex-based layout control.
+Box is a low-level flexbox layout component that provides a focused set of props for building responsive layouts. It maps to Tailwind CSS flexbox utilities and supports the design system's spacing and color tokens.
 
 ```tsx
-import { Box, BoxFlexDirection, BoxAlignItems } from '@metamask/design-system-react';
+import { Box, BoxFlexDirection } from '@metamask/design-system-react';
 
-<Box
-  flexDirection={BoxFlexDirection.Row}
-  alignItems={BoxAlignItems.Center}
-  gap={4}
-  className="p-4 bg-alternative"
->
-  Content
+<Box flexDirection={BoxFlexDirection.Row} gap={2} padding={4}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+  <Text>Item 3</Text>
 </Box>;
 ```
 
@@ -23,36 +20,45 @@ import { Box, BoxFlexDirection, BoxAlignItems } from '@metamask/design-system-re
 
 ## Props
 
-### FlexDirection
+### `flexDirection`
 
-Use the `flexDirection` prop to configure the `flex-direction` style of the Box. Supported values:
+The flex-direction style of the component.
+
+Available directions:
 
 - `BoxFlexDirection.Row` - Horizontal layout (default)
 - `BoxFlexDirection.RowReverse` - Horizontal layout, reversed order
 - `BoxFlexDirection.Column` - Vertical layout
 - `BoxFlexDirection.ColumnReverse` - Vertical layout, reversed order
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxFlexDirection</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BoxFlexDirection.Row</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={BoxStories.FlexDirection} />
 
-### FlexWrap
+### `alignItems`
 
-Use the `flexWrap` prop to configure the `flex-wrap` style of the Box. Supported values:
+The align-items style of the component (cross-axis alignment).
 
-- `BoxFlexWrap.NoWrap` - Items stay on single line (default)
-- `BoxFlexWrap.Wrap` - Items wrap to new lines as needed
-- `BoxFlexWrap.WrapReverse` - Items wrap to new lines in reverse order
-
-<Canvas of={BoxStories.FlexWrap} />
-
-### Gap
-
-Use the `gap` prop with values from the `BoxSpacing` scale (0–12) to configure the gap between flex items. Each unit equals 4px.
-
-<Canvas of={BoxStories.Gap} />
-
-### AlignItems
-
-Use the `alignItems` prop to configure the `align-items` style of the Box (cross-axis alignment). Supported values:
+Available alignments:
 
 - `BoxAlignItems.Start` - Align items to start of cross axis
 - `BoxAlignItems.Center` - Center items on cross axis
@@ -60,11 +66,34 @@ Use the `alignItems` prop to configure the `align-items` style of the Box (cross
 - `BoxAlignItems.Stretch` - Stretch items to fill cross axis
 - `BoxAlignItems.Baseline` - Align items to baseline
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxAlignItems</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={BoxStories.AlignItems} />
 
-### JustifyContent
+### `justifyContent`
 
-Use the `justifyContent` prop to configure the `justify-content` style of the Box (main-axis alignment). Supported values:
+The justify-content style of the component (main-axis alignment).
+
+Available justifications:
 
 - `BoxJustifyContent.Start` - Pack items to start of main axis
 - `BoxJustifyContent.Center` - Center items on main axis
@@ -73,105 +102,276 @@ Use the `justifyContent` prop to configure the `justify-content` style of the Bo
 - `BoxJustifyContent.Around` - Distribute items with space around
 - `BoxJustifyContent.Evenly` - Distribute items with equal space
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxJustifyContent</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={BoxStories.JustifyContent} />
 
-### ClassName
+### `flexWrap`
 
-Use `className` to apply additional Tailwind CSS classes for styling beyond the flex layout properties.
+The flex-wrap style of the component.
 
-<Canvas of={BoxStories.ClassName} />
+Available wrap options:
 
-```tsx
-// Examples
-<Box className="p-4 bg-primary-muted border rounded-lg">
-  Custom styled box
-</Box>
+- `BoxFlexWrap.NoWrap` - Items stay on single line (default)
+- `BoxFlexWrap.Wrap` - Items wrap to new lines as needed
+- `BoxFlexWrap.WrapReverse` - Items wrap to new lines in reverse order
 
-<Box className="w-1/2 h-screen">
-  Half width, full height box
-</Box>
-```
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxFlexWrap</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BoxFlexWrap.NoWrap</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-### Style
+<Canvas of={BoxStories.FlexWrap} />
 
-Use the `style` prop for dynamic inline styles when needed.
+### `gap`
 
-## BoxSpacing Values
+The gap between the component's children. Uses the BoxSpacing scale (0-12) where each unit equals 4px.
 
-The `BoxSpacing` type provides a numeric scale (0-12) for the gap property. Each unit corresponds to 4px:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxSpacing</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-- `0` → `0px` - No gap
-- `1` → `4px` - Extra small gap
-- `2` → `8px` - Small gap
-- `3` → `12px` - Small-medium gap
-- `4` → `16px` - Medium gap
-- `5` → `20px` - Medium-large gap
-- `6` → `24px` - Large gap
-- `7` → `28px` - Extra large gap
-- `8` → `32px` - 2X large gap
-- `9` → `36px` - 3X large gap
-- `10` → `40px` - 4X large gap
-- `11` → `44px` - 5X large gap
-- `12` → `48px` - 6X large gap
+<Canvas of={BoxStories.Gap} />
 
-```tsx
-// Examples
-<Box gap={2}>Small gap between items (8px)</Box>
-<Box gap={6}>Large gap between items (24px)</Box>
-<Box flexDirection={BoxFlexDirection.Column} gap={4}>
-  Vertical layout with medium gap (16px)
-</Box>
-```
+### `padding`
 
-## Usage Patterns
+The padding of the component on all sides. Uses the BoxSpacing scale (0-12) where each unit equals 4px.
 
-### Basic Horizontal Layout
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxSpacing</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-<Box flexDirection={BoxFlexDirection.Row} gap={3} alignItems={BoxAlignItems.Center}>
-  <Text>Item 1</Text>
-  <Text>Item 2</Text>
-  <Text>Item 3</Text>
-</Box>
-```
+<Canvas of={BoxStories.Padding} />
 
-### Vertical Stack
+### `margin`
 
-```tsx
-<Box flexDirection={BoxFlexDirection.Column} gap={2}>
-  <Text>Item 1</Text>
-  <Text>Item 2</Text>
-  <Text>Item 3</Text>
-</Box>
-```
+The margin of the component on all sides. Uses the BoxSpacing scale (0-12) where each unit equals 4px.
 
-### Space Between Layout
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxSpacing</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-<Box
-  flexDirection={BoxFlexDirection.Row}
-  justifyContent={BoxJustifyContent.Between}
-  alignItems={BoxAlignItems.Center}
->
-  <Text>Left</Text>
-  <Text>Right</Text>
-</Box>
-```
+<Canvas of={BoxStories.Margin} />
 
-### Responsive Grid with Wrapping
+### `backgroundColor`
 
-```tsx
-<Box
-  flexDirection={BoxFlexDirection.Row}
-  flexWrap={BoxFlexWrap.Wrap}
-  gap={4}
-  className="w-full"
->
-  <div className="w-1/2 md:w-1/3">Item 1</div>
-  <div className="w-1/2 md:w-1/3">Item 2</div>
-  <div className="w-1/2 md:w-1/3">Item 3</div>
-</Box>
-```
+The background color of the component using design system color tokens.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBackgroundColor</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BoxStories.BackgroundColor} />
+
+### `borderColor`
+
+The border color of the component using design system color tokens.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBorderColor</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BoxStories.BorderColor} />
+
+### `borderWidth`
+
+The border width of the component. Uses only valid Tailwind CSS border width values (0, 1, 2, 4, 8).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBorderWidth</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BoxStories.BorderWidth} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 

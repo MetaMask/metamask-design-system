@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-shadow
 import { jest } from '@jest/globals';
 import type { Dirent } from 'fs';
 import * as fs from 'fs/promises';
@@ -115,6 +116,7 @@ export type IconsType = typeof Icons;
 
     const writeFileCalls = mockedFs.writeFile.mock.calls;
     const iconsIndexFileCall = writeFileCalls.find((call) =>
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       call[0].toString().includes('/src/components/Icon/icons/index.ts'),
     );
     const iconsIndexFileContent = iconsIndexFileCall?.[1] as string;

@@ -55,7 +55,7 @@ const meta: Meta<typeof Text> = {
       options: Object.keys(FontFamily),
       mapping: FontFamily,
       description:
-        'Optional prop to adjust the font family. Default: CentraNo1, Accent: MMSans, Hero: MMPoly',
+        'Optional prop to adjust the font family. Default: Geist, Accent: MMSans, Hero: MMPoly',
     },
     fontStyle: {
       control: 'select',
@@ -219,7 +219,7 @@ export const FontWeightStory: Story = {
 export const FontFamilyStory: Story = {
   render: () => (
     <div className="space-y-4">
-      <Text fontFamily={FontFamily.Default}>Default (CentraNo1)</Text>
+      <Text fontFamily={FontFamily.Default}>Default (Geist)</Text>
       <Text fontFamily={FontFamily.Accent}>Accent (MMSans)</Text>
       <Text fontFamily={FontFamily.Hero}>Hero (MMPoly)</Text>
     </div>
@@ -262,7 +262,7 @@ export const TextAlignStory: Story = {
 
 export const OverflowWrapStory: Story = {
   render: () => (
-    <div className="border-warning w-[200px] border">
+    <div className="w-48 border border-warning-default">
       <Text overflowWrap={OverflowWrap.Normal}>
         Normal: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
       </Text>
@@ -276,7 +276,7 @@ export const OverflowWrapStory: Story = {
 
 export const Ellipsis: Story = {
   render: () => (
-    <div className="border-primary w-1/3 border">
+    <div className="w-48 border border-primary-default">
       <Text ellipsis>Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d</Text>
       <Text>No Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d</Text>
     </div>

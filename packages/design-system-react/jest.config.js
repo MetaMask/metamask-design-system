@@ -14,19 +14,6 @@ module.exports = merge(baseConfig, {
   // The display name when running multiple projects
   displayName,
 
-  // Add coverage ignore patterns
-  coveragePathIgnorePatterns: [
-    'index.ts',
-    '.d.ts',
-    'src/components/Icon/icons/', // Auto-generated icons
-    'scripts/create-component/ComponentName/', // component template
-    '\\.constants\\.(ts|js)$', // ignore all .constants.ts and .constants.js files
-    '\\.dev\\.(ts|js)$', // ignore all .constants.ts and .constants.js files
-  ],
-
-  // Add test match ignore patterns
-  testPathIgnorePatterns: ['scripts/create-component/ComponentName/'],
-
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
@@ -36,6 +23,19 @@ module.exports = merge(baseConfig, {
       statements: 100,
     },
   },
+
+  // Add coverage ignore patterns
+  coveragePathIgnorePatterns: [
+    'index.ts',
+    '\\.d\\.ts$',
+    '\\.constants\\.ts$', // ignore all .constants.ts files
+    '\\.dev\\.ts$', // ignore all .dev.ts files
+    'src/components/Icon/icons/', // Auto-generated icons
+    'scripts/create-component/ComponentName/', // component template
+  ],
+
+  // Add test match ignore patterns
+  testPathIgnorePatterns: ['scripts/create-component/ComponentName/'],
 
   // Include setup file that configures testing utilities like @testing-library/react
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
