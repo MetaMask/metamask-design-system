@@ -85,7 +85,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
     </Text>
     <Text
       variant={TextVariant.BodySm}
-      color={TextColor.Alternative}
+      color={TextColor.TextAlternative}
     >
       Content
     </Text>
@@ -111,7 +111,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
     </Text>
     <Text
       variant={TextVariant.BodySm}
-      color={TextColor.Alternative}
+      color={TextColor.TextAlternative}
     >
       Content
     </Text>
