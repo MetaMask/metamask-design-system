@@ -4,6 +4,7 @@ import type {
   BoxFlexDirection,
   BoxFlexWrap,
   BoxSpacing,
+  BoxBorderWidth,
   BoxAlignItems,
   BoxJustifyContent,
   BoxBackgroundColor,
@@ -104,9 +105,9 @@ export type BoxProps = {
   paddingVertical?: BoxSpacing;
   /**
    * The border width of the component.
-   * Use 1-12 for border width of 1px-12px.
+   * Use 0, 1, 2, 4, or 8 for border width of 0px, 1px, 2px, 4px, or 8px.
    */
-  borderWidth?: BoxSpacing;
+  borderWidth?: BoxBorderWidth;
   /**
    * The border color of the component.
    */

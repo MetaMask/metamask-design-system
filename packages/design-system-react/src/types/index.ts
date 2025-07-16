@@ -149,6 +149,11 @@ export type BadgeWrapperCustomPosition = {
 export type BoxSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 /**
+ * Box - border width values (only valid Tailwind CSS border width utilities)
+ */
+export type BoxBorderWidth = 0 | 1 | 2 | 4 | 8;
+
+/**
  * Box - flexDirection
  */
 export enum BoxFlexDirection {
@@ -195,25 +200,15 @@ export enum BoxJustifyContent {
  */
 export enum BoxBackgroundColor {
   /** Default background color */
-  Default = 'bg-default',
+  BackgroundDefault = 'bg-default',
   /** Alternative background color */
-  Alternative = 'bg-alternative',
-  /** Default alternative background color */
-  DefaultAlternative = 'bg-default-alternative',
-  /** Hover background color */
-  Hover = 'bg-hover',
-  /** Pressed background color */
-  Pressed = 'bg-pressed',
-  /** Selected background color */
-  Selected = 'bg-selected',
-  /** Disabled background color */
-  Disabled = 'bg-disabled',
-  /** Shadow background color */
-  Shadow = 'bg-shadow',
-  /** Inverse background color */
-  Inverse = 'bg-inverse',
+  BackgroundAlternative = 'bg-alternative',
+  /** Section background color */
+  BackgroundSection = 'bg-section',
+  /** Subsection background color */
+  BackgroundSubsection = 'bg-subsection',
   /** Muted background color */
-  Muted = 'bg-muted',
+  BackgroundMuted = 'bg-muted',
   /** Primary default background color */
   PrimaryDefault = 'bg-primary-default',
   /** Primary alternative background color */
@@ -222,8 +217,6 @@ export enum BoxBackgroundColor {
   PrimaryMuted = 'bg-primary-muted',
   /** Primary inverse background color */
   PrimaryInverse = 'bg-primary-inverse',
-  /** Primary default pressed background color */
-  PrimaryDefaultPressed = 'bg-primary-default-pressed',
   /** Error default background color */
   ErrorDefault = 'bg-error-default',
   /** Error alternative background color */
@@ -232,8 +225,6 @@ export enum BoxBackgroundColor {
   ErrorMuted = 'bg-error-muted',
   /** Error inverse background color */
   ErrorInverse = 'bg-error-inverse',
-  /** Error default pressed background color */
-  ErrorDefaultPressed = 'bg-error-default-pressed',
   /** Warning default background color */
   WarningDefault = 'bg-warning-default',
   /** Warning alternative background color */
@@ -242,8 +233,6 @@ export enum BoxBackgroundColor {
   WarningMuted = 'bg-warning-muted',
   /** Warning inverse background color */
   WarningInverse = 'bg-warning-inverse',
-  /** Warning default pressed background color */
-  WarningDefaultPressed = 'bg-warning-default-pressed',
   /** Success default background color */
   SuccessDefault = 'bg-success-default',
   /** Success alternative background color */
@@ -252,12 +241,8 @@ export enum BoxBackgroundColor {
   SuccessMuted = 'bg-success-muted',
   /** Success inverse background color */
   SuccessInverse = 'bg-success-inverse',
-  /** Success default pressed background color */
-  SuccessDefaultPressed = 'bg-success-default-pressed',
   /** Info default background color */
   InfoDefault = 'bg-info-default',
-  /** Info alternative background color */
-  InfoAlternative = 'bg-info-alternative',
   /** Info muted background color */
   InfoMuted = 'bg-info-muted',
   /** Info inverse background color */
@@ -280,10 +265,12 @@ export enum BoxBackgroundColor {
  * Box - borderColor
  */
 export enum BoxBorderColor {
+  /** Background default for cut out effect */
+  BackgroundDefault = 'border-background-default',
   /** Default border color */
-  Default = 'border-default',
+  BorderDefault = 'border-default',
   /** Muted border color */
-  Muted = 'border-muted',
+  BorderMuted = 'border-muted',
   /** Primary default border color */
   PrimaryDefault = 'border-primary-default',
   /** Primary alternative border color */
@@ -292,8 +279,6 @@ export enum BoxBorderColor {
   PrimaryMuted = 'border-primary-muted',
   /** Primary inverse border color */
   PrimaryInverse = 'border-primary-inverse',
-  /** Primary default pressed border color */
-  PrimaryDefaultPressed = 'border-primary-default-pressed',
   /** Error default border color */
   ErrorDefault = 'border-error-default',
   /** Error alternative border color */
@@ -302,8 +287,6 @@ export enum BoxBorderColor {
   ErrorMuted = 'border-error-muted',
   /** Error inverse border color */
   ErrorInverse = 'border-error-inverse',
-  /** Error default pressed border color */
-  ErrorDefaultPressed = 'border-error-default-pressed',
   /** Warning default border color */
   WarningDefault = 'border-warning-default',
   /** Warning alternative border color */
@@ -312,8 +295,6 @@ export enum BoxBorderColor {
   WarningMuted = 'border-warning-muted',
   /** Warning inverse border color */
   WarningInverse = 'border-warning-inverse',
-  /** Warning default pressed border color */
-  WarningDefaultPressed = 'border-warning-default-pressed',
   /** Success default border color */
   SuccessDefault = 'border-success-default',
   /** Success alternative border color */
@@ -322,8 +303,6 @@ export enum BoxBorderColor {
   SuccessMuted = 'border-success-muted',
   /** Success inverse border color */
   SuccessInverse = 'border-success-inverse',
-  /** Success default pressed border color */
-  SuccessDefaultPressed = 'border-success-default-pressed',
   /** Info default border color */
   InfoDefault = 'border-info-default',
   /** Info alternative border color */

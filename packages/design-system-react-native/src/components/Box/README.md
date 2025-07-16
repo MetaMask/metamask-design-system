@@ -168,11 +168,11 @@ The vertical padding (top and bottom) of the component. Use values from the BoxS
 
 ### `borderWidth`
 
-The border width of the component. Use values from the BoxSpacing scale (0-12).
+The border width of the component. Use only valid Tailwind CSS border width values (0, 1, 2, 4, 8).
 
-| TYPE                               | REQUIRED |
-| :--------------------------------- | :------- |
-| [BoxSpacing](../../types/index.ts) | No       |
+| TYPE                                   | REQUIRED |
+| :------------------------------------- | :------- |
+| [BoxBorderWidth](../../types/index.ts) | No       |
 
 ### `borderColor`
 
@@ -307,7 +307,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 </Box>
 
 // No margin
-<Box margin={0} backgroundColor={BoxBackgroundColor.Default}>
+<Box margin={0} backgroundColor={BoxBackgroundColor.BackgroundDefault}>
   <Text>Box without margin</Text>
 </Box>
 ```
@@ -347,7 +347,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 </Box>
 
 // Large padding (24px)
-<Box padding={6} backgroundColor={BoxBackgroundColor.Default}>
+<Box padding={6} backgroundColor={BoxBackgroundColor.BackgroundDefault}>
   <Text>Box with large padding</Text>
 </Box>
 ```
@@ -384,7 +384,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 // Basic border
 <Box
   borderWidth={1}
-  borderColor={BoxBorderColor.Default}
+  borderColor={BoxBorderColor.BorderDefault}
   padding={4}
 >
   <Text>Box with default border</Text>
@@ -439,9 +439,9 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 <Box
   padding={4}
   margin={2}
-  backgroundColor={BoxBackgroundColor.Default}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
   borderWidth={1}
-  borderColor={BoxBorderColor.Default}
+  borderColor={BoxBorderColor.BorderDefault}
 >
   <Text>Card Title</Text>
   <Box marginTop={2} gap={2}>
@@ -460,8 +460,8 @@ All other `ViewProps` are passed directly to the underlying `View` component.
   margin={4}
   padding={6}
   borderWidth={1}
-  borderColor={BoxBorderColor.Default}
-  backgroundColor={BoxBackgroundColor.Default}
+  borderColor={BoxBorderColor.BorderDefault}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
 >
   <Text>Main Container</Text>
   <Box
@@ -470,7 +470,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
     padding={3}
     backgroundColor={BoxBackgroundColor.Alternative}
     borderWidth={1}
-    borderColor={BoxBorderColor.Muted}
+    borderColor={BoxBorderColor.BorderMuted}
   >
     <Text>Child 1</Text>
     <Text>Child 2</Text>
@@ -504,7 +504,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 
 ## BoxSpacing Values
 
-The `gap`, `margin`, `padding`, and `borderWidth` props use the `BoxSpacing` numeric system for consistent spacing scales:
+The `gap`, `margin`, and `padding` props use the `BoxSpacing` numeric system for consistent spacing scales:
 
 **Available Values:** 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
 
@@ -524,7 +524,19 @@ The `gap`, `margin`, `padding`, and `borderWidth` props use the `BoxSpacing` num
 - `11` - 44px (5x large)
 - `12` - 48px (6x large)
 
-**Note:** For `borderWidth`, value `1` maps to the default `border` class (1px), and `0` maps to `border-0` (no border).
+## BoxBorderWidth Values
+
+The `borderWidth` prop uses the `BoxBorderWidth` type with only valid Tailwind CSS border width values:
+
+**Available Values:** 0, 1, 2, 4, 8
+
+**Pixel Mapping:**
+
+- `0` - 0px (no border, maps to `border-0`)
+- `1` - 1px (default border, maps to `border`)
+- `2` - 2px (maps to `border-2`)
+- `4` - 4px (maps to `border-4`)
+- `8` - 8px (maps to `border-8`)
 
 ---
 
@@ -573,7 +585,7 @@ Available border colors include:
   gap={3}
   alignItems={BoxAlignItems.Center}
   padding={4}
-  backgroundColor={BoxBackgroundColor.Default}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
 >
   <Text>Item 1</Text>
   <Text>Item 2</Text>
@@ -604,7 +616,7 @@ Available border colors include:
   justifyContent={BoxJustifyContent.Between}
   alignItems={BoxAlignItems.Center}
   padding={4}
-  backgroundColor={BoxBackgroundColor.Default}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
 >
   <Text>Left</Text>
   <Text>Right</Text>

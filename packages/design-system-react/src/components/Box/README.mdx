@@ -4,21 +4,15 @@ import * as BoxStories from './Box.stories';
 
 # Box
 
-`Box` is a low level flexbox layout component. It provides a focused set of props that map to Tailwind flexbox utility classes for easy flex-based layout control.
+Box is a low-level flexbox layout component that provides a focused set of props for building responsive layouts. It maps to Tailwind CSS flexbox utilities and supports the design system's spacing and color tokens.
 
 ```tsx
-import { Box, BoxFlexDirection, BoxAlignItems, BoxBackgroundColor, BoxBorderColor } from '@metamask/design-system-react';
+import { Box, BoxFlexDirection } from '@metamask/design-system-react';
 
-<Box
-  flexDirection={BoxFlexDirection.Row}
-  alignItems={BoxAlignItems.Center}
-  gap={4}
-  padding={4}
-  backgroundColor={BoxBackgroundColor.Alternative}
-  borderWidth={1}
-  borderColor={BoxBorderColor.Default}
->
-  Content
+<Box flexDirection={BoxFlexDirection.Row} gap={2} padding={4}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+  <Text>Item 3</Text>
 </Box>;
 ```
 
@@ -26,38 +20,45 @@ import { Box, BoxFlexDirection, BoxAlignItems, BoxBackgroundColor, BoxBorderColo
 
 ## Props
 
-### Flexbox Properties
+### `flexDirection`
 
-### FlexDirection
+The flex-direction style of the component.
 
-Use the `flexDirection` prop to configure the `flex-direction` style of the Box. Supported values:
+Available directions:
 
 - `BoxFlexDirection.Row` - Horizontal layout (default)
 - `BoxFlexDirection.RowReverse` - Horizontal layout, reversed order
 - `BoxFlexDirection.Column` - Vertical layout
 - `BoxFlexDirection.ColumnReverse` - Vertical layout, reversed order
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxFlexDirection</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BoxFlexDirection.Row</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={BoxStories.FlexDirection} />
 
-### FlexWrap
+### `alignItems`
 
-Use the `flexWrap` prop to configure the `flex-wrap` style of the Box. Supported values:
+The align-items style of the component (cross-axis alignment).
 
-- `BoxFlexWrap.NoWrap` - Items stay on single line (default)
-- `BoxFlexWrap.Wrap` - Items wrap to new lines as needed
-- `BoxFlexWrap.WrapReverse` - Items wrap to new lines in reverse order
-
-<Canvas of={BoxStories.FlexWrap} />
-
-### Gap
-
-Use the `gap` prop with values from the `BoxSpacing` scale (0–12) to configure the gap between flex items. Each unit equals 4px.
-
-<Canvas of={BoxStories.Gap} />
-
-### AlignItems
-
-Use the `alignItems` prop to configure the `align-items` style of the Box (cross-axis alignment). Supported values:
+Available alignments:
 
 - `BoxAlignItems.Start` - Align items to start of cross axis
 - `BoxAlignItems.Center` - Center items on cross axis
@@ -65,11 +66,34 @@ Use the `alignItems` prop to configure the `align-items` style of the Box (cross
 - `BoxAlignItems.Stretch` - Stretch items to fill cross axis
 - `BoxAlignItems.Baseline` - Align items to baseline
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxAlignItems</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={BoxStories.AlignItems} />
 
-### JustifyContent
+### `justifyContent`
 
-Use the `justifyContent` prop to configure the `justify-content` style of the Box (main-axis alignment). Supported values:
+The justify-content style of the component (main-axis alignment).
+
+Available justifications:
 
 - `BoxJustifyContent.Start` - Pack items to start of main axis
 - `BoxJustifyContent.Center` - Center items on main axis
@@ -78,281 +102,276 @@ Use the `justifyContent` prop to configure the `justify-content` style of the Bo
 - `BoxJustifyContent.Around` - Distribute items with space around
 - `BoxJustifyContent.Evenly` - Distribute items with equal space
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxJustifyContent</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={BoxStories.JustifyContent} />
 
-### Margin Properties
+### `flexWrap`
 
-### Margin
+The flex-wrap style of the component.
 
-Use the `margin` prop with values from the `BoxSpacing` scale (0–12) to set margin on all sides. Each unit equals 4px.
+Available wrap options:
 
-<Canvas of={BoxStories.Margin} />
+- `BoxFlexWrap.NoWrap` - Items stay on single line (default)
+- `BoxFlexWrap.Wrap` - Items wrap to new lines as needed
+- `BoxFlexWrap.WrapReverse` - Items wrap to new lines in reverse order
 
-### Directional Margins
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxFlexWrap</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BoxFlexWrap.NoWrap</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-Use directional margin props for fine-grained control:
+<Canvas of={BoxStories.FlexWrap} />
 
-- `marginTop` - Top margin
-- `marginRight` - Right margin
-- `marginBottom` - Bottom margin
-- `marginLeft` - Left margin
-- `marginHorizontal` - Left and right margins
-- `marginVertical` - Top and bottom margins
+### `gap`
 
-<Canvas of={BoxStories.MarginDirectional} />
+The gap between the component's children. Uses the BoxSpacing scale (0-12) where each unit equals 4px.
 
-### Padding Properties
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxSpacing</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-### Padding
+<Canvas of={BoxStories.Gap} />
 
-Use the `padding` prop with values from the `BoxSpacing` scale (0–12) to set padding on all sides. Each unit equals 4px.
+### `padding`
+
+The padding of the component on all sides. Uses the BoxSpacing scale (0-12) where each unit equals 4px.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxSpacing</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={BoxStories.Padding} />
 
-### Directional Padding
+### `margin`
 
-Use directional padding props for fine-grained control:
+The margin of the component on all sides. Uses the BoxSpacing scale (0-12) where each unit equals 4px.
 
-- `paddingTop` - Top padding
-- `paddingRight` - Right padding
-- `paddingBottom` - Bottom padding
-- `paddingLeft` - Left padding
-- `paddingHorizontal` - Left and right padding
-- `paddingVertical` - Top and bottom padding
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxSpacing</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<Canvas of={BoxStories.PaddingDirectional} />
+<Canvas of={BoxStories.Margin} />
 
-### Border Properties
+### `backgroundColor`
 
-### Border
+The background color of the component using design system color tokens.
 
-Use the `borderWidth` prop with values from the `BoxSpacing` scale (0–12) to set border width, and `borderColor` to set the border color.
-
-<Canvas of={BoxStories.Border} />
-
-### Border Colors
-
-Use the `borderColor` prop with predefined color values:
-
-**Basic Colors:**
-
-- `BoxBorderColor.Default` - Default border color
-- `BoxBorderColor.Muted` - Muted border color
-- `BoxBorderColor.Transparent` - Transparent border
-
-**Primary Colors:**
-
-- `BoxBorderColor.PrimaryDefault` - Primary brand border
-- `BoxBorderColor.PrimaryAlternative` - Primary alternative border
-- `BoxBorderColor.PrimaryMuted` - Primary muted border
-- `BoxBorderColor.PrimaryInverse` - Primary inverse border
-- `BoxBorderColor.PrimaryDefaultPressed` - Primary pressed border
-
-**Semantic Colors:**
-
-- `BoxBorderColor.ErrorDefault` - Error state border
-- `BoxBorderColor.ErrorAlternative` - Error alternative border
-- `BoxBorderColor.ErrorMuted` - Error muted border
-- `BoxBorderColor.ErrorInverse` - Error inverse border
-- `BoxBorderColor.ErrorDefaultPressed` - Error pressed border
-- `BoxBorderColor.WarningDefault` - Warning state border
-- `BoxBorderColor.WarningAlternative` - Warning alternative border
-- `BoxBorderColor.WarningMuted` - Warning muted border
-- `BoxBorderColor.WarningInverse` - Warning inverse border
-- `BoxBorderColor.WarningDefaultPressed` - Warning pressed border
-- `BoxBorderColor.SuccessDefault` - Success state border
-- `BoxBorderColor.SuccessAlternative` - Success alternative border
-- `BoxBorderColor.SuccessMuted` - Success muted border
-- `BoxBorderColor.SuccessInverse` - Success inverse border
-- `BoxBorderColor.SuccessDefaultPressed` - Success pressed border
-- `BoxBorderColor.InfoDefault` - Info state border
-- `BoxBorderColor.InfoAlternative` - Info alternative border
-- `BoxBorderColor.InfoMuted` - Info muted border
-- `BoxBorderColor.InfoInverse` - Info inverse border
-
-**Special Colors:**
-
-- `BoxBorderColor.FlaskDefault` - Flask default border
-- `BoxBorderColor.FlaskInverse` - Flask inverse border
-- `BoxBorderColor.OverlayAlternative` - Overlay alternative border
-- `BoxBorderColor.OverlayDefault` - Overlay default border
-- `BoxBorderColor.OverlayInverse` - Overlay inverse border
-
-### Background Properties
-
-### Background Colors
-
-Use the `backgroundColor` prop with predefined color values:
-
-**Basic Colors:**
-
-- `BoxBackgroundColor.Default` - Default background color
-- `BoxBackgroundColor.Alternative` - Alternative background color
-- `BoxBackgroundColor.DefaultAlternative` - Default alternative background color
-- `BoxBackgroundColor.Muted` - Muted background color
-- `BoxBackgroundColor.Transparent` - Transparent background
-
-**Interactive States:**
-
-- `BoxBackgroundColor.Hover` - Hover background color
-- `BoxBackgroundColor.Pressed` - Pressed background color
-- `BoxBackgroundColor.Selected` - Selected background color
-- `BoxBackgroundColor.Disabled` - Disabled background color
-- `BoxBackgroundColor.Shadow` - Shadow background color
-- `BoxBackgroundColor.Inverse` - Inverse background color
-
-**Primary Colors:**
-
-- `BoxBackgroundColor.PrimaryDefault` - Primary brand color
-- `BoxBackgroundColor.PrimaryAlternative` - Primary alternative color
-- `BoxBackgroundColor.PrimaryMuted` - Muted primary color
-- `BoxBackgroundColor.PrimaryInverse` - Primary inverse color
-- `BoxBackgroundColor.PrimaryDefaultPressed` - Primary pressed state color
-
-**Semantic Colors:**
-
-- `BoxBackgroundColor.ErrorDefault` - Error state color
-- `BoxBackgroundColor.ErrorAlternative` - Error alternative color
-- `BoxBackgroundColor.ErrorMuted` - Muted error color
-- `BoxBackgroundColor.ErrorInverse` - Error inverse color
-- `BoxBackgroundColor.ErrorDefaultPressed` - Error pressed state color
-- `BoxBackgroundColor.WarningDefault` - Warning state color
-- `BoxBackgroundColor.WarningAlternative` - Warning alternative color
-- `BoxBackgroundColor.WarningMuted` - Muted warning color
-- `BoxBackgroundColor.WarningInverse` - Warning inverse color
-- `BoxBackgroundColor.WarningDefaultPressed` - Warning pressed state color
-- `BoxBackgroundColor.SuccessDefault` - Success state color
-- `BoxBackgroundColor.SuccessAlternative` - Success alternative color
-- `BoxBackgroundColor.SuccessMuted` - Muted success color
-- `BoxBackgroundColor.SuccessInverse` - Success inverse color
-- `BoxBackgroundColor.SuccessDefaultPressed` - Success pressed state color
-- `BoxBackgroundColor.InfoDefault` - Info state color
-- `BoxBackgroundColor.InfoAlternative` - Info alternative color
-- `BoxBackgroundColor.InfoMuted` - Muted info color
-- `BoxBackgroundColor.InfoInverse` - Info inverse color
-
-**Special Colors:**
-
-- `BoxBackgroundColor.FlaskDefault` - Flask default color
-- `BoxBackgroundColor.FlaskInverse` - Flask inverse color
-- `BoxBackgroundColor.OverlayAlternative` - Overlay alternative color
-- `BoxBackgroundColor.OverlayDefault` - Overlay default color
-- `BoxBackgroundColor.OverlayInverse` - Overlay inverse color
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBackgroundColor</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={BoxStories.BackgroundColor} />
 
-### ClassName
+### `borderColor`
 
-Use `className` to apply additional Tailwind CSS classes for styling beyond the component's built-in props.
+The border color of the component using design system color tokens.
 
-<Canvas of={BoxStories.ClassName} />
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBorderColor</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Examples
-<Box className="p-4 bg-primary-muted border rounded-lg">
-  Custom styled box
-</Box>
+<Canvas of={BoxStories.BorderColor} />
 
-<Box className="w-1/2 h-screen">
-  Half width, full height box
-</Box>
-```
+### `borderWidth`
 
-### Style
+The border width of the component. Uses only valid Tailwind CSS border width values (0, 1, 2, 4, 8).
 
-Use the `style` prop for dynamic inline styles when needed.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBorderWidth</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-## BoxSpacing Values
+<Canvas of={BoxStories.BorderWidth} />
 
-The `BoxSpacing` type provides a numeric scale (0-12) for spacing properties. Each unit corresponds to 4px:
+### `className`
 
-- `0` → `0px` - No spacing
-- `1` → `4px` - Extra small spacing
-- `2` → `8px` - Small spacing
-- `3` → `12px` - Small-medium spacing
-- `4` → `16px` - Medium spacing
-- `5` → `20px` - Medium-large spacing
-- `6` → `24px` - Large spacing
-- `7` → `28px` - Extra large spacing
-- `8` → `32px` - 2X large spacing
-- `9` → `36px` - 3X large spacing
-- `10` → `40px` - 4X large spacing
-- `11` → `44px` - 5X large spacing
-- `12` → `48px` - 6X large spacing
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-**Note:** For `borderWidth`, value `1` maps to the default `border` class (1px), and `0` maps to `border-0` (no border).
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
-```tsx
-// Examples
-<Box gap={2}>Small gap between items (8px)</Box>
-<Box gap={6}>Large gap between items (24px)</Box>
-<Box margin={4} padding={2}>Medium margin (16px) and small padding (8px)</Box>
-<Box borderWidth={1} borderColor={BoxBorderColor.Default}>Default border (1px)</Box>
-```
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-## Usage Patterns
+### `style`
 
-### Basic Horizontal Layout
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
-```tsx
-<Box flexDirection={BoxFlexDirection.Row} gap={3} alignItems={BoxAlignItems.Center}>
-  <Text>Item 1</Text>
-  <Text>Item 2</Text>
-  <Text>Item 3</Text>
-</Box>
-```
-
-### Vertical Stack
-
-```tsx
-<Box flexDirection={BoxFlexDirection.Column} gap={2}>
-  <Text>Item 1</Text>
-  <Text>Item 2</Text>
-  <Text>Item 3</Text>
-</Box>
-```
-
-### Space Between Layout
-
-```tsx
-<Box
-  flexDirection={BoxFlexDirection.Row}
-  justifyContent={BoxJustifyContent.Between}
-  alignItems={BoxAlignItems.Center}
->
-  <Text>Left</Text>
-  <Text>Right</Text>
-</Box>
-```
-
-### Alert Component
-
-```tsx
-<Box
-  padding={4}
-  margin={2}
-  backgroundColor={BoxBackgroundColor.WarningMuted}
-  borderWidth={1}
-  borderColor={BoxBorderColor.WarningDefault}
->
-  <Text>Warning: This is an alert message</Text>
-</Box>
-```
-
-### Responsive Grid with Wrapping
-
-```tsx
-<Box
-  flexDirection={BoxFlexDirection.Row}
-  flexWrap={BoxFlexWrap.Wrap}
-  gap={4}
-  className="w-full"
->
-  <div className="w-1/2 md:w-1/3">Item 1</div>
-  <div className="w-1/2 md:w-1/3">Item 2</div>
-  <div className="w-1/2 md:w-1/3">Item 3</div>
-</Box>
-```
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 
