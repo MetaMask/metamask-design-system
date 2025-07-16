@@ -72,36 +72,29 @@ export const generateTailwindConfig = (theme: Theme): TwConfig => {
       },
       // This removes all default Tailwind font sizes and weights.
       // We want to rely on the design system font sizes and enforce use of the Text component
-      fontSize: {},
-      fontWeight: {},
-      extend: {
-        colors: {
-          ...colors,
-        },
-        textColor: {
-          ...colors,
-          ...textColors, // e.g. text-default instead of text-text-default
-        },
-        backgroundColor: {
-          ...colors, // Incorporate existing color utilities like bg-primary-default
-          ...backgroundColors, // e.g. bg-default instead of bg-background-default
-        },
-        borderColor: {
-          ...colors, // Incorporate existing color utilities like border-primary-default
-          ...borderColors, // e.g. border-default instead of border-border-default
-        },
-        fontSize: {
-          ...typographyTailwindConfig.fontSize,
-        },
-        fontFamily: {
-          ...typographyTailwindConfig.fontFamily,
-        },
-        letterSpacing: {
-          ...typographyTailwindConfig.letterSpacing,
-        },
-        lineHeight: {
-          ...typographyTailwindConfig.lineHeight,
-        },
+      textColor: {
+        ...colors,
+        ...textColors, // e.g. text-default instead of text-text-default
+      },
+      backgroundColor: {
+        ...colors, // Incorporate existing color utilities like bg-primary-default
+        ...backgroundColors, // e.g. bg-default instead of bg-background-default
+      },
+      borderColor: {
+        ...colors, // Incorporate existing color utilities like border-primary-default
+        ...borderColors, // e.g. border-default instead of border-border-default
+      },
+      fontSize: {
+        ...typographyTailwindConfig.fontSize,
+      },
+      fontFamily: {
+        ...typographyTailwindConfig.fontFamily,
+      },
+      letterSpacing: {
+        ...typographyTailwindConfig.letterSpacing,
+      },
+      lineHeight: {
+        ...typographyTailwindConfig.lineHeight,
       },
     },
   };
