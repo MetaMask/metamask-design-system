@@ -60,13 +60,13 @@ const config = createConfig([
       'import-x/no-unassigned-import': 'off',
       'lines-around-comment': 'off',
       'no-async-promise-executor': 'off',
-      'no-case-declarations': 'off',
-      'no-invalid-this': 'off',
+      'no-case-declarations': 'error',
+      'no-invalid-this': 'error',
       'no-negated-condition': 'off',
-      'no-new': 'off',
+      'no-new': 'error',
       'no-param-reassign': 'off',
       'no-restricted-syntax': 'off',
-      radix: 'off',
+      radix: 'error',
       'require-atomic-updates': 'off',
       'jsdoc/match-description': [
         'off',
@@ -75,9 +75,9 @@ const config = createConfig([
 
       // TODO: These rules created more errors after the upgrade to ESLint 9.
       // Re-enable these rules and address any lint violations.
-      'import-x/no-named-as-default-member': 'warn',
+      'import-x/no-named-as-default-member': 'error',
       'prettier/prettier': 'warn',
-      'no-empty-function': 'warn',
+      'no-empty-function': 'error',
     },
     settings: {
       jsdoc: {
@@ -162,10 +162,10 @@ const config = createConfig([
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       '@typescript-eslint/unbound-method': 'off',
-      '@typescript-eslint/prefer-enum-initializers': 'off',
+      '@typescript-eslint/prefer-enum-initializers': 'error',
       '@typescript-eslint/prefer-nullish-coalescing': 'off',
-      '@typescript-eslint/prefer-optional-chain': 'off',
-      '@typescript-eslint/prefer-reduce-type-parameter': 'off',
+      '@typescript-eslint/prefer-optional-chain': 'error',
+      '@typescript-eslint/prefer-reduce-type-parameter': 'error',
       'no-restricted-syntax': 'off',
       'no-restricted-globals': 'off',
 
@@ -181,7 +181,7 @@ const config = createConfig([
       '@typescript-eslint/only-throw-error': 'warn',
       '@typescript-eslint/prefer-promise-reject-errors': 'warn',
       '@typescript-eslint/prefer-readonly': 'warn',
-      '@typescript-eslint/no-shadow': 'warn',
+      '@typescript-eslint/no-shadow': 'error',
       'import-x/namespace': 'warn',
       'import-x/no-named-as-default': 'warn',
       // Overrides eslint base config which isn't following outer most pattern. Can be removed once this issue is resolved and eslint config updated
