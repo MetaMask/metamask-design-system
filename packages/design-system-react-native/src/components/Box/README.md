@@ -307,7 +307,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 </Box>
 
 // No margin
-<Box margin={0} backgroundColor={BoxBackgroundColor.Default}>
+<Box margin={0} backgroundColor={BoxBackgroundColor.BackgroundDefault}>
   <Text>Box without margin</Text>
 </Box>
 ```
@@ -347,7 +347,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 </Box>
 
 // Large padding (24px)
-<Box padding={6} backgroundColor={BoxBackgroundColor.Default}>
+<Box padding={6} backgroundColor={BoxBackgroundColor.BackgroundDefault}>
   <Text>Box with large padding</Text>
 </Box>
 ```
@@ -439,7 +439,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
 <Box
   padding={4}
   margin={2}
-  backgroundColor={BoxBackgroundColor.Default}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
   borderWidth={1}
   borderColor={BoxBorderColor.BorderDefault}
 >
@@ -461,7 +461,7 @@ All other `ViewProps` are passed directly to the underlying `View` component.
   padding={6}
   borderWidth={1}
   borderColor={BoxBorderColor.BorderDefault}
-  backgroundColor={BoxBackgroundColor.Default}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
 >
   <Text>Main Container</Text>
   <Box
@@ -585,7 +585,7 @@ Available border colors include:
   gap={3}
   alignItems={BoxAlignItems.Center}
   padding={4}
-  backgroundColor={BoxBackgroundColor.Default}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
 >
   <Text>Item 1</Text>
   <Text>Item 2</Text>
@@ -616,7 +616,7 @@ Available border colors include:
   justifyContent={BoxJustifyContent.Between}
   alignItems={BoxAlignItems.Center}
   padding={4}
-  backgroundColor={BoxBackgroundColor.Default}
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
 >
   <Text>Left</Text>
   <Text>Right</Text>

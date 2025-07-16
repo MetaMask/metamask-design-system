@@ -79,7 +79,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
   <Box backgroundColor={BoxBackgroundColor.BackgroundDefault}>
     <Text
       variant={TextVariant.HeadingSm}
-      color={TextColor.Default}
+      color={TextColor.TextDefault}
     >
       Title
     </Text>
@@ -105,7 +105,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
   <Box backgroundColor={BoxBackgroundColor.BackgroundDefault}>
     <Text
       variant={TextVariant.HeadingSm}
-      color={TextColor.Default}
+      color={TextColor.TextDefault}
     >
       Title
     </Text>
@@ -145,7 +145,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
   // ✅ Also acceptable - Using className when no prop exists
   <Text
     variant={TextVariant.BodyMd}
-    color={TextColor.Default}
+    color={TextColor.TextDefault}
     className="mt-4"
   >
     Content with margin
@@ -315,7 +315,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
 // ✅ Also acceptable - Combining props with className when no prop exists
 <Text
   variant={TextVariant.BodyMd}
-  color={TextColor.Default}
+  color={TextColor.TextDefault}
   className="mt-4"
 >
   Content with margin
@@ -343,7 +343,7 @@ A comprehensive guide for using Tailwind effectively and consistently across our
 // ✅ Also acceptable - Combining props with twClassName when no prop exists
 <Text
   variant={TextVariant.BodyMd}
-  color={TextColor.Default}
+  color={TextColor.TextDefault}
   twClassName="mt-4"
 >
   Content with margin
