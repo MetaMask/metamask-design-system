@@ -27,16 +27,6 @@
         "default": "./dist/index.cjs"
       }
     },
-    "./tailwind.config": {
-      "import": {
-        "types": "./dist/tailwind.config.d.mts",
-        "default": "./dist/tailwind.config.mjs"
-      },
-      "require": {
-        "types": "./dist/tailwind.config.d.cts",
-        "default": "./dist/tailwind.config.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
