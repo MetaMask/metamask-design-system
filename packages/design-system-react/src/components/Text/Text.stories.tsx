@@ -131,6 +131,17 @@ export const Variant: Story = {
       <Text variant={TextVariant.BodyMd}>BodyMd</Text>
       <Text variant={TextVariant.BodySm}>BodySm</Text>
       <Text variant={TextVariant.BodyXs}>BodyXs</Text>
+      <Text variant={TextVariant.PageHeading}>PageHeading</Text>
+      <Text variant={TextVariant.SectionHeading}>SectionHeading</Text>
+      <Text variant={TextVariant.ButtonLabelMd} className="block">
+        ButtonLabelMd
+      </Text>
+      <Text variant={TextVariant.ButtonLabelLg} className="block">
+        ButtonLabelLg
+      </Text>
+      <Text variant={TextVariant.AmountDisplayLg} className="block">
+        AmountDisplayLg
+      </Text>
     </div>
   ),
 };

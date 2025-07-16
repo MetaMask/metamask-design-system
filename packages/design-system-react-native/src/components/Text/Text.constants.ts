@@ -23,4 +23,13 @@ export const MAP_TEXT_VARIANT_FONTWEIGHT: {
   [TextVariant.BodyMd]: typography.sBodyMD.fontWeight as FontWeight,
   [TextVariant.BodySm]: typography.sBodySM.fontWeight as FontWeight,
   [TextVariant.BodyXs]: typography.sBodyXS.fontWeight as FontWeight,
+  [TextVariant.PageHeading]: typography.sPageHeading.fontWeight as FontWeight,
+  [TextVariant.SectionHeading]: typography.sSectionHeading
+    .fontWeight as FontWeight,
+  [TextVariant.ButtonLabelMd]: typography.sButtonLabelMd
+    .fontWeight as FontWeight,
+  [TextVariant.ButtonLabelLg]: typography.sButtonLabelLg
+    .fontWeight as FontWeight,
+  [TextVariant.AmountDisplayLg]: typography.sAmountDisplayLg
+    .fontWeight as FontWeight,
 };

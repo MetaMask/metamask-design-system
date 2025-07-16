@@ -10,7 +10,12 @@ export type TypographyVariant =
   | 'body-lg'
   | 'body-md'
   | 'body-sm'
-  | 'body-xs';
+  | 'body-xs'
+  | 'page-heading'
+  | 'section-heading'
+  | 'button-label-md'
+  | 'button-label-lg'
+  | 'amount-display-lg';
 
 /**
  * Different FontWeight and FontStyle to be used to calculate the FontFamily

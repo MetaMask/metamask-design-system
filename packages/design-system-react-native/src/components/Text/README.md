@@ -14,6 +14,7 @@ Optional enum to select between typography variants.
 
 Available `TextVariant` options:
 
+- `TextVariant.DisplayLg`
 - `TextVariant.DisplayMd`
 - `TextVariant.HeadingLg`
 - `TextVariant.HeadingMd`
@@ -22,6 +23,11 @@ Available `TextVariant` options:
 - `TextVariant.BodyMd`
 - `TextVariant.BodySm`
 - `TextVariant.BodyXs`
+- `TextVariant.PageHeading`
+- `TextVariant.SectionHeading`
+- `TextVariant.ButtonLabelMd`
+- `TextVariant.ButtonLabelLg`
+- `TextVariant.AmountDisplayLg`
 
 ### `children`
 
