@@ -1,6 +1,6 @@
 {
   "tailwindCSS.experimental.configFile": {
-    "apps/storybook-react/tailwind.config.js": [
+    "apps/storybook-react/tailwind.config.ts": [
       "apps/storybook-react/**",
       "packages/design-system-react/src/**",
       "packages/design-tokens/stories/**"
