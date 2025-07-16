@@ -89,6 +89,36 @@ export const typography: ThemeTypography = {
     lineHeight: lineHeights.lineHeight2,
     letterSpacing: letterSpacing.letterSpacing1,
   },
+  sPageHeading: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.fontSize6,
+    lineHeight: lineHeights.lineHeight5,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
+  sSectionHeading: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.fontSize4,
+    lineHeight: lineHeights.lineHeight4,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
+  sButtonLabelMd: {
+    fontWeight: fontWeights.medium,
+    fontSize: fontSizes.fontSize4,
+    lineHeight: lineHeights.lineHeight4,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
+  sButtonLabelLg: {
+    fontWeight: fontWeights.medium,
+    fontSize: fontSizes.fontSize5,
+    lineHeight: lineHeights.lineHeight4,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
+  sAmountDisplayLg: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.fontSize8,
+    lineHeight: lineHeights.lineHeight7,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
   lDisplayLG: {
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.fontSize10,
@@ -172,5 +202,35 @@ export const typography: ThemeTypography = {
     fontSize: fontSizes.fontSize2,
     lineHeight: lineHeights.lineHeight2,
     letterSpacing: letterSpacing.letterSpacing1,
+  },
+  lPageHeading: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.fontSize7,
+    lineHeight: lineHeights.lineHeight6,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
+  lSectionHeading: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.fontSize5,
+    lineHeight: lineHeights.lineHeight4,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
+  lButtonLabelMd: {
+    fontWeight: fontWeights.medium,
+    fontSize: fontSizes.fontSize4,
+    lineHeight: lineHeights.lineHeight4,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
+  lButtonLabelLg: {
+    fontWeight: fontWeights.medium,
+    fontSize: fontSizes.fontSize5,
+    lineHeight: lineHeights.lineHeight4,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
+  lAmountDisplayLg: {
+    fontWeight: fontWeights.medium,
+    fontSize: fontSizes.fontSize10,
+    lineHeight: lineHeights.lineHeight9,
+    letterSpacing: letterSpacing.letterSpacing0,
   },
 };

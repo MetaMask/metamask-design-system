@@ -96,6 +96,26 @@
   --typography-s-body-xs-line-height: var(--line-height-2);
   --typography-s-body-xs-font-weight: var(--font-weight-regular);
   --typography-s-body-xs-letter-spacing: var(--letter-spacing-1);
+  --typography-s-page-heading-font-size: var(--font-size-6);
+  --typography-s-page-heading-line-height: var(--line-height-5);
+  --typography-s-page-heading-font-weight: var(--font-weight-bold);
+  --typography-s-page-heading-letter-spacing: var(--letter-spacing-0);
+  --typography-s-section-heading-font-size: var(--font-size-4);
+  --typography-s-section-heading-line-height: var(--line-height-4);
+  --typography-s-section-heading-font-weight: var(--font-weight-bold);
+  --typography-s-section-heading-letter-spacing: var(--letter-spacing-0);
+  --typography-s-button-label-md-font-size: var(--font-size-4);
+  --typography-s-button-label-md-line-height: var(--line-height-4);
+  --typography-s-button-label-md-font-weight: var(--font-weight-medium);
+  --typography-s-button-label-md-letter-spacing: var(--letter-spacing-0);
+  --typography-s-button-label-lg-font-size: var(--font-size-5);
+  --typography-s-button-label-lg-line-height: var(--line-height-4);
+  --typography-s-button-label-lg-font-weight: var(--font-weight-medium);
+  --typography-s-button-label-lg-letter-spacing: var(--letter-spacing-0);
+  --typography-s-amount-display-lg-font-size: var(--font-size-8);
+  --typography-s-amount-display-lg-line-height: var(--line-height-7);
+  --typography-s-amount-display-lg-font-weight: var(--font-weight-bold);
+  --typography-s-amount-display-lg-letter-spacing: var(--letter-spacing-0);
 
   /* typography scale large screen */
   --typography-l-display-lg-font-size: var(--font-size-10);
@@ -154,4 +174,24 @@
   --typography-l-body-xs-line-height: var(--line-height-2);
   --typography-l-body-xs-font-weight: var(--font-weight-regular);
   --typography-l-body-xs-letter-spacing: var(--letter-spacing-1);
+  --typography-l-page-heading-font-size: var(--font-size-7);
+  --typography-l-page-heading-line-height: var(--line-height-6);
+  --typography-l-page-heading-font-weight: var(--font-weight-bold);
+  --typography-l-page-heading-letter-spacing: var(--letter-spacing-0);
+  --typography-l-section-heading-font-size: var(--font-size-5);
+  --typography-l-section-heading-line-height: var(--line-height-4);
+  --typography-l-section-heading-font-weight: var(--font-weight-bold);
+  --typography-l-section-heading-letter-spacing: var(--letter-spacing-0);
+  --typography-l-button-label-md-font-size: var(--font-size-4);
+  --typography-l-button-label-md-line-height: var(--line-height-4);
+  --typography-l-button-label-md-font-weight: var(--font-weight-medium);
+  --typography-l-button-label-md-letter-spacing: var(--letter-spacing-0);
+  --typography-l-button-label-lg-font-size: var(--font-size-5);
+  --typography-l-button-label-lg-line-height: var(--line-height-4);
+  --typography-l-button-label-lg-font-weight: var(--font-weight-medium);
+  --typography-l-button-label-lg-letter-spacing: var(--letter-spacing-0);
+  --typography-l-amount-display-lg-font-size: var(--font-size-10);
+  --typography-l-amount-display-lg-line-height: var(--line-height-9);
+  --typography-l-amount-display-lg-font-weight: var(--font-weight-medium);
+  --typography-l-amount-display-lg-letter-spacing: var(--letter-spacing-0);
 }
