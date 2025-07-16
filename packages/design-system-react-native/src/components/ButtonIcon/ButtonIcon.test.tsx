@@ -80,7 +80,7 @@ describe('ButtonIcon', () => {
   it('forwards style and twClassName', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
-    const expected = tw`items-center justify-center ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md]} text-primary-default rounded-sm bg-transparent opacity-100`;
+    const expected = tw`items-center justify-center ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md]} rounded-sm bg-transparent text-primary-default opacity-100`;
 
     const { getByTestId } = render(
       <ButtonIcon
