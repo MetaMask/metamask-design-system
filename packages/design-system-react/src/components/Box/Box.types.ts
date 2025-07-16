@@ -9,6 +9,7 @@ import type {
   BoxJustifyContent,
   BoxBackgroundColor,
   BoxBorderColor,
+  BoxBorderRadius,
 } from '../../types';
 
 export type BoxProps = ComponentProps<'div'> & {
@@ -112,6 +113,10 @@ export type BoxProps = ComponentProps<'div'> & {
    * The border color of the component.
    */
   borderColor?: BoxBorderColor;
+  /**
+   * The border radius of the component.
+   */
+  borderRadius?: BoxBorderRadius;
   /**
    * The background color of the component.
    */

@@ -1,4 +1,4 @@
-import type { BoxSpacing, BoxBorderWidth } from '../../types';
+import type { BoxSpacing, BoxBorderWidth, BoxBorderRadius } from '../../types';
 
 export const TWCLASSMAP_BOX_GAP: Record<BoxSpacing, string> = {
   0: 'gap-0',
@@ -246,4 +246,15 @@ export const TWCLASSMAP_BOX_BORDER_WIDTH: Record<BoxBorderWidth, string> = {
   2: 'border-2',
   4: 'border-4',
   8: 'border-8',
+};
+
+export const TWCLASSMAP_BOX_BORDER_RADIUS: Record<BoxBorderRadius, string> = {
+  'rounded-none': 'rounded-none',
+  'rounded-sm': 'rounded-sm',
+  'rounded-md': 'rounded-md',
+  'rounded-lg': 'rounded-lg',
+  'rounded-xl': 'rounded-xl',
+  'rounded-2xl': 'rounded-2xl',
+  'rounded-3xl': 'rounded-3xl',
+  'rounded-full': 'rounded-full',
 };

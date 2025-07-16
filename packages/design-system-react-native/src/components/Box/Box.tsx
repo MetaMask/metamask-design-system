@@ -19,6 +19,7 @@ import {
   TWCLASSMAP_BOX_PADDING_HORIZONTAL,
   TWCLASSMAP_BOX_PADDING_VERTICAL,
   TWCLASSMAP_BOX_BORDER_WIDTH,
+  TWCLASSMAP_BOX_BORDER_RADIUS,
 } from './Box.constants';
 import type { BoxProps } from './Box.types';
 
@@ -44,6 +45,7 @@ export const Box = ({
   paddingVertical,
   borderWidth,
   borderColor,
+  borderRadius,
   backgroundColor,
   twClassName = '',
   style,
@@ -74,6 +76,7 @@ export const Box = ({
     ${paddingVertical !== undefined ? TWCLASSMAP_BOX_PADDING_VERTICAL[paddingVertical] : ''}
     ${borderWidth !== undefined ? TWCLASSMAP_BOX_BORDER_WIDTH[borderWidth] : ''}
     ${borderColor ?? ''}
+    ${borderRadius ? TWCLASSMAP_BOX_BORDER_RADIUS[borderRadius] : ''}
     ${backgroundColor ?? ''}
     ${twClassName}`.trim();
 

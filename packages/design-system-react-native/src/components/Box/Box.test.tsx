@@ -12,6 +12,7 @@ import {
   BoxJustifyContent,
   BoxBackgroundColor,
   BoxBorderColor,
+  BoxBorderRadius,
 } from '../../types';
 
 import { Box } from './Box';
@@ -32,6 +33,7 @@ import {
   TWCLASSMAP_BOX_PADDING_HORIZONTAL,
   TWCLASSMAP_BOX_PADDING_VERTICAL,
   TWCLASSMAP_BOX_BORDER_WIDTH,
+  TWCLASSMAP_BOX_BORDER_RADIUS,
 } from './Box.constants';
 
 /**
@@ -256,6 +258,31 @@ describe('Box', () => {
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(tw`flex ${BoxBorderColor.PrimaryDefault}`);
+  });
+
+  it('applies borderRadius', () => {
+    const { getByTestId } = render(
+      <Box testID="box" borderRadius={BoxBorderRadius.Lg} />,
+    );
+    const box = getByTestId('box');
+    const styles = flattenStyles(box.props.style);
+    expect(styles[0]).toStrictEqual(tw`flex ${TWCLASSMAP_BOX_BORDER_RADIUS[BoxBorderRadius.Lg]}`);
+  });
+
+  it('applies borderWidth, borderColor, and borderRadius together', () => {
+    const { getByTestId } = render(
+      <Box
+        testID="box"
+        borderWidth={2}
+        borderColor={BoxBorderColor.ErrorDefault}
+        borderRadius={BoxBorderRadius.Md}
+      />,
+    );
+    const box = getByTestId('box');
+    const styles = flattenStyles(box.props.style);
+    expect(styles[0]).toStrictEqual(
+      tw`flex ${TWCLASSMAP_BOX_BORDER_WIDTH[2]} ${BoxBorderColor.ErrorDefault} ${TWCLASSMAP_BOX_BORDER_RADIUS[BoxBorderRadius.Md]}`
+    );
   });
 
   // Background color tests

@@ -8,6 +8,7 @@ import {
   BoxJustifyContent,
   BoxBackgroundColor,
   BoxBorderColor,
+  BoxBorderRadius,
   TextColor,
 } from '../../types';
 import { Text } from '../Text';
@@ -54,6 +55,11 @@ const meta: Meta<BoxProps> = {
       control: 'select',
       options: Object.keys(BoxBorderColor),
       mapping: BoxBorderColor,
+    },
+    borderRadius: {
+      control: 'select',
+      options: Object.keys(BoxBorderRadius),
+      mapping: BoxBorderRadius,
     },
   },
 };
@@ -1497,6 +1503,93 @@ export const BorderWidth: Story = {
         borderWidth={8}
       >
         <Text>Border width 8</Text>
+      </Box>
+    </Box>
+  ),
+};
+
+export const BorderRadius: Story = {
+  render: (args: BoxProps) => (
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+        borderRadius={BoxBorderRadius.None}
+      >
+        <Text>Border radius None</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+        borderRadius={BoxBorderRadius.Sm}
+      >
+        <Text>Border radius Sm</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+        borderRadius={BoxBorderRadius.Md}
+      >
+        <Text>Border radius Md</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+        borderRadius={BoxBorderRadius.Lg}
+      >
+        <Text>Border radius Lg</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+        borderRadius={BoxBorderRadius.Xl}
+      >
+        <Text>Border radius Xl</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+        borderRadius={BoxBorderRadius.Xxl}
+      >
+        <Text>Border radius Xxl</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+        borderRadius={BoxBorderRadius.Xxxl}
+      >
+        <Text>Border radius Xxxl</Text>
+      </Box>
+      <Box
+        {...args}
+        padding={3}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        borderColor={BoxBorderColor.PrimaryDefault}
+        borderWidth={2}
+        borderRadius={BoxBorderRadius.Full}
+      >
+        <Text>Border radius Full</Text>
       </Box>
     </Box>
   ),

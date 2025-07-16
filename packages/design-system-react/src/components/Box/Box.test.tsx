@@ -8,6 +8,7 @@ import {
   BoxJustifyContent,
   BoxBackgroundColor,
   BoxBorderColor,
+  BoxBorderRadius,
 } from '../../types';
 
 import { Box } from './Box';
@@ -28,6 +29,7 @@ import {
   TWCLASSMAP_BOX_PADDING_HORIZONTAL,
   TWCLASSMAP_BOX_PADDING_VERTICAL,
   TWCLASSMAP_BOX_BORDER_WIDTH,
+  TWCLASSMAP_BOX_BORDER_RADIUS,
 } from './Box.constants';
 
 describe('Box', () => {
@@ -290,6 +292,14 @@ describe('Box', () => {
     expect(box).toHaveClass(BoxBorderColor.PrimaryDefault);
   });
 
+  it('applies borderRadius prop', () => {
+    render(
+      <Box data-testid="box" borderRadius={BoxBorderRadius.Lg} />,
+    );
+    const box = screen.getByTestId('box');
+    expect(box).toHaveClass(TWCLASSMAP_BOX_BORDER_RADIUS[BoxBorderRadius.Lg]);
+  });
+
   it('applies borderWidth and borderColor props together', () => {
     render(
       <Box
@@ -301,6 +311,21 @@ describe('Box', () => {
     const box = screen.getByTestId('box');
     expect(box).toHaveClass(TWCLASSMAP_BOX_BORDER_WIDTH[2]);
     expect(box).toHaveClass(BoxBorderColor.ErrorDefault);
+  });
+
+  it('applies borderWidth, borderColor, and borderRadius props together', () => {
+    render(
+      <Box
+        data-testid="box"
+        borderWidth={2}
+        borderColor={BoxBorderColor.ErrorDefault}
+        borderRadius={BoxBorderRadius.Md}
+      />,
+    );
+    const box = screen.getByTestId('box');
+    expect(box).toHaveClass(TWCLASSMAP_BOX_BORDER_WIDTH[2]);
+    expect(box).toHaveClass(BoxBorderColor.ErrorDefault);
+    expect(box).toHaveClass(TWCLASSMAP_BOX_BORDER_RADIUS[BoxBorderRadius.Md]);
   });
 
   // Background tests

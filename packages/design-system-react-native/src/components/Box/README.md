@@ -174,6 +174,25 @@ The border width of the component. Use only valid Tailwind CSS border width valu
 | :------------------------------------- | :------- |
 | [BoxBorderWidth](../../types/index.ts) | No       |
 
+### `borderRadius`
+
+The border radius of the component using design system border radius tokens.
+
+Available border radius values:
+
+- `BoxBorderRadius.None` - No border radius
+- `BoxBorderRadius.Sm` - Small border radius (2px)
+- `BoxBorderRadius.Md` - Medium border radius (6px)
+- `BoxBorderRadius.Lg` - Large border radius (8px)
+- `BoxBorderRadius.Xl` - Extra large border radius (12px)
+- `BoxBorderRadius.Xxl` - 2x large border radius (16px)
+- `BoxBorderRadius.Xxxl` - 3x large border radius (24px)
+- `BoxBorderRadius.Full` - Full border radius (9999px)
+
+| TYPE                                     | REQUIRED |
+| :--------------------------------------- | :------- |
+| [BoxBorderRadius](../../types/index.ts) | No       |
+
 ### `borderColor`
 
 The border color of the component.
@@ -407,6 +426,57 @@ All other `ViewProps` are passed directly to the underlying `View` component.
   padding={4}
 >
   <Text>Error state box</Text>
+</Box>
+```
+
+#### `borderRadius`
+
+```tsx
+// Small border radius
+<Box
+  borderRadius={BoxBorderRadius.Sm}
+  backgroundColor={BoxBackgroundColor.PrimaryMuted}
+  padding={4}
+>
+  <Text>Small border radius</Text>
+</Box>
+
+// Medium border radius
+<Box
+  borderRadius={BoxBorderRadius.Md}
+  backgroundColor={BoxBackgroundColor.PrimaryMuted}
+  padding={4}
+>
+  <Text>Medium border radius</Text>
+</Box>
+
+// Large border radius
+<Box
+  borderRadius={BoxBorderRadius.Lg}
+  backgroundColor={BoxBackgroundColor.PrimaryMuted}
+  padding={4}
+>
+  <Text>Large border radius</Text>
+</Box>
+
+// Full border radius (circular)
+<Box
+  borderRadius={BoxBorderRadius.Full}
+  backgroundColor={BoxBackgroundColor.PrimaryMuted}
+  padding={4}
+>
+  <Text>Full border radius</Text>
+</Box>
+
+// Combined border properties
+<Box
+  borderWidth={2}
+  borderColor={BoxBorderColor.PrimaryDefault}
+  borderRadius={BoxBorderRadius.Lg}
+  backgroundColor={BoxBackgroundColor.PrimaryMuted}
+  padding={4}
+>
+  <Text>Combined border properties</Text>
 </Box>
 ```
 

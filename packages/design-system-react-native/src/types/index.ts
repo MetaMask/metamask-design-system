@@ -153,6 +153,28 @@ export type BoxSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type BoxBorderWidth = 0 | 1 | 2 | 4 | 8;
 
 /**
+ * Box - borderRadius
+ */
+export enum BoxBorderRadius {
+  /** No border radius */
+  None = 'rounded-none',
+  /** Small border radius (2px) */
+  Sm = 'rounded-sm',
+  /** Medium border radius (6px) */
+  Md = 'rounded-md',
+  /** Large border radius (8px) */
+  Lg = 'rounded-lg',
+  /** Extra large border radius (12px) */
+  Xl = 'rounded-xl',
+  /** 2x large border radius (16px) */
+  Xxl = 'rounded-2xl',
+  /** 3x large border radius (24px) */
+  Xxxl = 'rounded-3xl',
+  /** Full border radius (9999px) */
+  Full = 'rounded-full',
+}
+
+/**
  * Box - flexDirection
  */
 export enum BoxFlexDirection {

@@ -320,6 +320,44 @@ The border width of the component. Uses only valid Tailwind CSS border width val
 
 <Canvas of={BoxStories.BorderWidth} />
 
+### `borderRadius`
+
+The border radius of the component using design system border radius tokens.
+
+Available border radius values:
+
+- `BoxBorderRadius.None` - No border radius
+- `BoxBorderRadius.Sm` - Small border radius (2px)
+- `BoxBorderRadius.Md` - Medium border radius (6px)
+- `BoxBorderRadius.Lg` - Large border radius (8px)
+- `BoxBorderRadius.Xl` - Extra large border radius (12px)
+- `BoxBorderRadius.Xxl` - 2x large border radius (16px)
+- `BoxBorderRadius.Xxxl` - 3x large border radius (24px)
+- `BoxBorderRadius.Full` - Full border radius (9999px)
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBorderRadius</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BoxStories.BorderRadius} />
+
 ### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
