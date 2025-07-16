@@ -72,6 +72,7 @@ export enum AvatarIconSeverity {
   Neutral = 'neutral',
   Info = 'info',
   Success = 'success',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   Error = 'error',
   Warning = 'warning',
 }
@@ -577,7 +578,7 @@ export enum IconSize {
 /**
  * Icon - name
  */
-// eslint-disable-next-line @typescript-eslint/no-shadow
+
 export enum IconName {
   Accessibility = 'Accessibility',
   Activity = 'Activity',
@@ -662,6 +663,7 @@ export enum IconName {
   Edit = 'Edit',
   EncryptedAdd = 'EncryptedAdd',
   Eraser = 'Eraser',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   Error = 'Error',
   Ethereum = 'Ethereum',
   Exchange = 'Exchange',
@@ -675,6 +677,7 @@ export enum IconName {
   Eye = 'Eye',
   FaceId = 'FaceId',
   Feedback = 'Feedback',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   File = 'File',
   Filter = 'Filter',
   Fingerprint = 'Fingerprint',
@@ -719,6 +722,7 @@ export enum IconName {
   Login = 'Login',
   Logout = 'Logout',
   Mail = 'Mail',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   Map = 'Map',
   Menu = 'Menu',
   MessageQuestion = 'MessageQuestion',

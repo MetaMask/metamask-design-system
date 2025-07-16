@@ -21,7 +21,7 @@ const allPlaceholdersRegex = new RegExp(
 );
 
 // Dynamic require needed for loading prettier config at runtime - ESM import not supported for .js config files
-// eslint-disable-next-line @typescript-eslint/no-require-imports, import-x/no-named-as-default-member
+// eslint-disable-next-line @typescript-eslint/no-require-imports, import-x/no-dynamic-require, n/global-require
 const prettierRc = require(
   path.join(REPO_ROOT, '.prettierrc.js'),
 ) as PrettierOptions;
@@ -199,14 +199,19 @@ function processTemplateContent(
 
   return content.replace(allPlaceholdersRegex, (match) => {
     switch (match) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       case Placeholders.CurrentYear:
         return currentYear;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       case Placeholders.NodeVersions:
         return nodeVersions;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       case Placeholders.PackageName:
         return name;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       case Placeholders.PackageDescription:
         return description;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       case Placeholders.PackageDirectoryName:
         return packageData.directoryName;
       /* istanbul ignore next: should be impossible */
