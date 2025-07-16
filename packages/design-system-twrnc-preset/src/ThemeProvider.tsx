@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { create } from 'twrnc';
 
-import { generateTailwindConfig } from './tailwind.config';
+import { generateTailwindConfig } from './generateTailwindConfig';
 import type { Theme } from './Theme.types';
 import type { ThemeContextProps } from './ThemeContext';
 import { ThemeContext } from './ThemeContext';

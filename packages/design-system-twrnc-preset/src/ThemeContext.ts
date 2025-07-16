@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { create } from 'twrnc';
 
-import { generateTailwindConfig } from './tailwind.config';
+import { generateTailwindConfig } from './generateTailwindConfig';
 import { Theme } from './Theme.types';
 
 /**
