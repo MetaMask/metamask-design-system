@@ -252,12 +252,10 @@ const config = createConfig([
       sourceType: 'module',
     },
   },
-  // Tailwind ESLint
+  // Tailwind ESLint for React Web
   {
     files: [
       'packages/design-tokens/stories/**',
-      'packages/design-system-react-native/src/**',
-      'apps/storybook-react-native/stories/**',
       'packages/design-system-react/src/**',
       'apps/storybook-react/stories/**',
     ],
@@ -275,9 +273,35 @@ const config = createConfig([
     },
     settings: {
       tailwindcss: {
-        callees: ['twMerge', 'twClassName'],
+        callees: ['twMerge'],
         config: 'apps/storybook-react/tailwind.config.js',
         classRegex: ['^(class(Name)?|twClassName)$'],
+      },
+    },
+  },
+  // Tailwind ESLint for React Native
+  {
+    files: [
+      'packages/design-system-react-native/src/**',
+      'apps/storybook-react-native/stories/**',
+    ],
+    plugins: {
+      tailwindcss: tailwind,
+    },
+    rules: {
+      'tailwindcss/classnames-order': 'error',
+      'tailwindcss/enforces-negative-arbitrary-values': 'error',
+      'tailwindcss/enforces-shorthand': 'error',
+      'tailwindcss/no-arbitrary-value': 'off', // There are legitimate reasons to use arbitrary values but we should specifically error on static colors
+      'tailwindcss/no-custom-classname': 'error',
+      'tailwindcss/no-contradicting-classname': 'error',
+      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
+    },
+    settings: {
+      tailwindcss: {
+        callees: ['twMerge', 'twClassName', 'tw'],
+        config: 'apps/storybook-react-native/tailwind-intellisense.config.js',
+        tags: ['tw'], // Enable template literal support for tw`classnames`
       },
     },
   },

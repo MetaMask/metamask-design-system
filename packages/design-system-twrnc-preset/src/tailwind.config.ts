@@ -1,3 +1,4 @@
+import { brandColor } from '@metamask/design-tokens';
 import type { TwConfig } from 'twrnc';
 
 import { themeColors } from './colors';
@@ -63,8 +64,8 @@ export const generateTailwindConfig = (theme: Theme): TwConfig => {
         inherit: 'inherit',
         current: 'currentColor',
         transparent: 'transparent',
-        black: '#000000',
-        white: '#ffffff',
+        black: brandColor.black,
+        white: brandColor.white,
       },
       fontSize: {
         // Empty to remove default Tailwind font sizes (text-sm, text-lg, etc.)
@@ -104,3 +105,6 @@ export const generateTailwindConfig = (theme: Theme): TwConfig => {
 
   return config;
 };
+
+// Export Theme enum for consumers
+export { Theme } from './Theme.types';

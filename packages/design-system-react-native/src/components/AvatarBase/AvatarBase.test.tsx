@@ -4,7 +4,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { AvatarBaseSize, AvatarBaseShape } from '../../types';
-import { Text, TextColor, TextVariant } from '../Text';
+import { Text } from '../Text';
 
 import { AvatarBase } from './AvatarBase';
 import {
@@ -41,8 +41,8 @@ describe('AvatarBase', () => {
     );
     const fallbackText = getByTestId('fb');
     expect(fallbackText.props.children).toBe(fallback);
-    const expectedTextColor = tw`${TextColor.TextMuted}`.color;
-    const expectedFontSize = tw`text-${TextVariant.BodySm}`.fontSize;
+    const expectedTextColor = tw`text-muted`.color;
+    const expectedFontSize = tw`text-body-sm`.fontSize;
     const expectedMargin = tw`mt-1`.marginTop;
     expect(fallbackText.props.style[0].color).toBe(expectedTextColor);
     expect(fallbackText.props.style[0].fontSize).toBe(expectedFontSize);
