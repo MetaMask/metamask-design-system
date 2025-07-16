@@ -72,6 +72,7 @@ export enum AvatarIconSeverity {
   Neutral = 'neutral',
   Info = 'info',
   Success = 'success',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   Error = 'error',
   Warning = 'warning',
 }
@@ -556,6 +557,7 @@ export enum IconSize {
 /**
  * Icon - name
  */
+/* eslint-disable @typescript-eslint/no-shadow */
 export enum IconName {
   Accessibility = 'Accessibility',
   Activity = 'Activity',
@@ -828,3 +830,4 @@ export enum IconName {
   Wifi = 'Wifi',
   X = 'X',
 }
+/* eslint-enable @typescript-eslint/no-shadow */

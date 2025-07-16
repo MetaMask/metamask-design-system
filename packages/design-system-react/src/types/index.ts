@@ -62,6 +62,7 @@ export enum AvatarIconSeverity {
   Neutral = 'neutral',
   Info = 'info',
   Success = 'success',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   Error = 'error',
   Warning = 'warning',
 }
@@ -507,8 +508,11 @@ export enum FontStyle {
  * Text - textTransform
  */
 export enum TextTransform {
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   Uppercase = 'uppercase',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   Lowercase = 'lowercase',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   Capitalize = 'capitalize',
   Normal = 'normal-case',
 }
@@ -589,6 +593,7 @@ export enum IconColor {
 /**
  * Icon - name
  */
+/* eslint-disable @typescript-eslint/no-shadow */
 export enum IconName {
   Accessibility = 'Accessibility',
   Activity = 'Activity',
@@ -861,3 +866,4 @@ export enum IconName {
   WifiOff = 'WifiOff',
   X = 'X',
 }
+/* eslint-enable @typescript-eslint/no-shadow */

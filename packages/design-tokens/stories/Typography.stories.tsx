@@ -21,7 +21,7 @@ const meta: Meta<typeof Text> = {
 };
 
 export default meta;
-export const FontFamily: StoryFn<typeof Text> = (...args) => {
+export const FontFamily: StoryFn<typeof Text> = () => {
   const styles = {
     default: {
       fontFamily: fontFamilies.default,
@@ -47,20 +47,14 @@ export const FontFamily: StoryFn<typeof Text> = (...args) => {
   };
   return (
     <>
-      <Text style={styles.default} {...args}>
-        Geist
-      </Text>
-      <Text style={styles.accent} {...args}>
-        MM Sans
-      </Text>
-      <Text style={styles.hero} {...args}>
-        MM Poly
-      </Text>
+      <Text style={styles.default}>Geist</Text>
+      <Text style={styles.accent}>MM Sans</Text>
+      <Text style={styles.hero}>MM Poly</Text>
     </>
   );
 };
 
-export const SmallScreen: StoryFn<typeof Text> = (...args) => {
+export const SmallScreen: StoryFn<typeof Text> = () => {
   const smallScreenFontSizeBase = 16;
   const styles = {
     displayLG: {
@@ -152,72 +146,72 @@ export const SmallScreen: StoryFn<typeof Text> = (...args) => {
   };
   return (
     <>
-      <Text style={styles.displayLG} {...args}>
+      <Text style={styles.displayLG}>
         {`S DisplayLG ${styles.displayLG.fontSize}px/${
           styles.displayLG.lineHeight
         } ${styles.displayLG.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.displayMD} {...args}>
+      <Text style={styles.displayMD}>
         {`S DisplayMD ${styles.displayMD.fontSize}px/${
           styles.displayMD.lineHeight
         } ${styles.displayMD.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.headingLG} {...args}>
+      <Text style={styles.headingLG}>
         {`S HeadingLG ${styles.headingLG.fontSize}px/${
           styles.headingLG.lineHeight
         } ${styles.headingLG.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.headingMD} {...args}>
+      <Text style={styles.headingMD}>
         {`S HeadingMD ${styles.headingMD.fontSize}px/${
           styles.headingMD.lineHeight
         } ${styles.headingMD.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.headingSM} {...args}>
+      <Text style={styles.headingSM}>
         {`S HeadingSM ${styles.headingSM.fontSize}px/${
           styles.headingSM.lineHeight
         } ${styles.headingSM.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodyLGMedium} {...args}>
+      <Text style={styles.bodyLGMedium}>
         {`S BodyLG Medium ${styles.bodyLGMedium.fontSize}px/${
           styles.bodyLGMedium.lineHeight
         } ${styles.bodyLGMedium.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodyMDBold} {...args}>
+      <Text style={styles.bodyMDBold}>
         {`S BodyMD Bold ${styles.bodyMDBold.fontSize}px/${
           styles.bodyMDBold.lineHeight
         } ${styles.bodyMDBold.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodyMDMedium} {...args}>
+      <Text style={styles.bodyMDMedium}>
         {`S BodyMD Medium ${styles.bodyMDMedium.fontSize}px/${
           styles.bodyMDMedium.lineHeight
         } ${styles.bodyMDMedium.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodyMD} {...args}>
+      <Text style={styles.bodyMD}>
         {`S BodyMD ${styles.bodyMD.fontSize}px/${styles.bodyMD.lineHeight} ${
           styles.bodyMD.fontSize / smallScreenFontSizeBase
         }rem`}
       </Text>
-      <Text style={styles.bodySMBold} {...args}>
+      <Text style={styles.bodySMBold}>
         {`S BodySM Bold ${styles.bodySMBold.fontSize}px/${
           styles.bodySMBold.lineHeight
         } ${styles.bodySMBold.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodySMMedium} {...args}>
+      <Text style={styles.bodySMMedium}>
         {`S BodySM Medium ${styles.bodySMMedium.fontSize}px/${
           styles.bodySMMedium.lineHeight
         } ${styles.bodySMMedium.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodySM} {...args}>
+      <Text style={styles.bodySM}>
         {`S BodySM ${styles.bodySM.fontSize}px/${styles.bodySM.lineHeight} ${
           styles.bodySM.fontSize / smallScreenFontSizeBase
         }rem`}
       </Text>
-      <Text style={styles.bodyXSMedium} {...args}>
+      <Text style={styles.bodyXSMedium}>
         {`S BodyXS Medium ${styles.bodyXSMedium.fontSize}px/${
           styles.bodyXSMedium.lineHeight
         } ${styles.bodyXSMedium.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodyXS} {...args}>
+      <Text style={styles.bodyXS}>
         {`S BodyXS ${styles.bodyXS.fontSize}px/${styles.bodyXS.lineHeight} ${
           styles.bodyXS.fontSize / smallScreenFontSizeBase
         }rem`}
@@ -226,7 +220,7 @@ export const SmallScreen: StoryFn<typeof Text> = (...args) => {
   );
 };
 
-export const LargeScreen: StoryFn<typeof Text> = (...args) => {
+export const LargeScreen: StoryFn<typeof Text> = () => {
   const largeScreenFontSizeBase = 16;
   const styles = {
     displayLG: {
@@ -318,72 +312,72 @@ export const LargeScreen: StoryFn<typeof Text> = (...args) => {
   };
   return (
     <>
-      <Text style={styles.displayLG} {...args}>
+      <Text style={styles.displayLG}>
         {`L DisplayLG ${styles.displayLG.fontSize}px/${
           styles.displayLG.lineHeight
         } ${styles.displayLG.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.displayMD} {...args}>
+      <Text style={styles.displayMD}>
         {`L DisplayMD ${styles.displayMD.fontSize}px/${
           styles.displayMD.lineHeight
         } ${styles.displayMD.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.headingLG} {...args}>
+      <Text style={styles.headingLG}>
         {`L HeadingLG ${styles.headingLG.fontSize}px/${
           styles.headingLG.lineHeight
         } ${styles.headingLG.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.headingMD} {...args}>
+      <Text style={styles.headingMD}>
         {`L HeadingMD ${styles.headingMD.fontSize}px/${
           styles.headingMD.lineHeight
         } ${styles.headingMD.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.headingSM} {...args}>
+      <Text style={styles.headingSM}>
         {`L HeadingSM ${styles.headingSM.fontSize}px/${
           styles.headingSM.lineHeight
         } ${styles.headingSM.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodyLGMedium} {...args}>
+      <Text style={styles.bodyLGMedium}>
         {`L BodyLG Medium ${styles.bodyLGMedium.fontSize}px/${
           styles.bodyLGMedium.lineHeight
         } ${styles.bodyLGMedium.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodyMDBold} {...args}>
+      <Text style={styles.bodyMDBold}>
         {`L BodyMD Bold ${styles.bodyMDBold.fontSize}px/${
           styles.bodyMDBold.lineHeight
         } ${styles.bodyMDBold.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodyMDMedium} {...args}>
+      <Text style={styles.bodyMDMedium}>
         {`L BodyMD Medium ${styles.bodyMDMedium.fontSize}px/${
           styles.bodyMDMedium.lineHeight
         } ${styles.bodyMDMedium.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodyMD} {...args}>
+      <Text style={styles.bodyMD}>
         {`L BodyMD ${styles.bodyMD.fontSize}px/${styles.bodyMD.lineHeight} ${
           styles.bodyMD.fontSize / largeScreenFontSizeBase
         }rem`}
       </Text>
-      <Text style={styles.bodySMBold} {...args}>
+      <Text style={styles.bodySMBold}>
         {`L BodySM Bold ${styles.bodySMBold.fontSize}px/${
           styles.bodySMBold.lineHeight
         } ${styles.bodySMBold.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodySMMedium} {...args}>
+      <Text style={styles.bodySMMedium}>
         {`L BodySM Medium ${styles.bodySMMedium.fontSize}px/${
           styles.bodySMMedium.lineHeight
         } ${styles.bodySMMedium.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodySM} {...args}>
+      <Text style={styles.bodySM}>
         {`L BodySM ${styles.bodySM.fontSize}px/${styles.bodySM.lineHeight} ${
           styles.bodySM.fontSize / largeScreenFontSizeBase
         }rem`}
       </Text>
-      <Text style={styles.bodyXSMedium} {...args}>
+      <Text style={styles.bodyXSMedium}>
         {`L BodyXS Medium ${styles.bodyXSMedium.fontSize}px/${
           styles.bodyXSMedium.lineHeight
         } ${styles.bodyXSMedium.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
-      <Text style={styles.bodyXS} {...args}>
+      <Text style={styles.bodyXS}>
         {`L BodyXS ${styles.bodyXS.fontSize}px/${styles.bodyXS.lineHeight} ${
           styles.bodyXS.fontSize / largeScreenFontSizeBase
         }rem`}
@@ -392,7 +386,7 @@ export const LargeScreen: StoryFn<typeof Text> = (...args) => {
   );
 };
 
-export const FontWeight: StoryFn<typeof Text> = (...args) => {
+export const FontWeight: StoryFn<typeof Text> = () => {
   const styles = {
     regular: {
       fontFamily: fontFamilies.default,
@@ -415,20 +409,14 @@ export const FontWeight: StoryFn<typeof Text> = (...args) => {
   };
   return (
     <>
-      <Text style={styles.regular} {...args}>
-        Regular 400
-      </Text>
-      <Text style={styles.medium} {...args}>
-        Medium 500
-      </Text>
-      <Text style={styles.bold} {...args}>
-        Bold 700
-      </Text>
+      <Text style={styles.regular}>Regular 400</Text>
+      <Text style={styles.medium}>Medium 500</Text>
+      <Text style={styles.bold}>Bold 700</Text>
     </>
   );
 };
 
-export const SmallScreenCSS: StoryFn<typeof Text> = (...args) => {
+export const SmallScreenCSS: StoryFn<typeof Text> = () => {
   const fontBase = 16;
   const styles = {
     DisplayLG: {
@@ -532,12 +520,8 @@ export const SmallScreenCSS: StoryFn<typeof Text> = (...args) => {
     <>
       {Object.values(styles).map((value, i) => {
         const title = Object.getOwnPropertyNames(styles)[i];
-        let tag = 'p';
-        if (i <= 4) {
-          tag = `h${i + 1}`;
-        }
         return (
-          <Text style={value} {...args} key={i}>
+          <Text style={value} key={i}>
             {`S ${title} ${getCssVar(value.fontSize) * fontBase}px/${
               getCssVar(value.lineHeight) * fontBase
             }px ${getCssVar(value.fontSize)}rem/${getCssVar(
@@ -553,7 +537,7 @@ export const SmallScreenCSS: StoryFn<typeof Text> = (...args) => {
   );
 };
 
-export const LargeScreenCSS: StoryFn<typeof Text> = (...args) => {
+export const LargeScreenCSS: StoryFn<typeof Text> = () => {
   const fontBase = 16;
 
   const styles = {
@@ -658,12 +642,8 @@ export const LargeScreenCSS: StoryFn<typeof Text> = (...args) => {
     <>
       {Object.values(styles).map((value, i) => {
         const title = Object.getOwnPropertyNames(styles)[i];
-        let tag = 'p';
-        if (i <= 4) {
-          tag = `h${i + 1}`;
-        }
         return (
-          <Text style={value} {...args} key={i}>
+          <Text style={value} key={i}>
             {`S ${title} ${getCssVar(value.fontSize) * fontBase}px/${
               getCssVar(value.lineHeight) * fontBase
             }px ${getCssVar(value.fontSize)}rem/${getCssVar(

@@ -53,17 +53,9 @@ const config = createConfig([
       'id-length': 'off',
 
       // TODO: re-enble most of these rules
-      'function-paren-newline': 'off',
       'id-denylist': 'off',
-      'implicit-arrow-linebreak': 'off',
-      'import-x/no-anonymous-default-export': 'off',
       'import-x/no-unassigned-import': 'off',
-      'lines-around-comment': 'off',
-      'no-async-promise-executor': 'off',
-      'no-case-declarations': 'off',
-      'no-invalid-this': 'off',
       'no-negated-condition': 'off',
-      'no-new': 'off',
       'no-param-reassign': 'off',
       'no-restricted-syntax': 'off',
       radix: 'off',
