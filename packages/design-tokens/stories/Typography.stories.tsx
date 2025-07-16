@@ -143,6 +143,41 @@ export const SmallScreen: StoryFn<typeof Text> = () => {
       fontWeight: typography.sBodyXSMedium.fontWeight,
       letterSpacing: typography.sBodyXSMedium.letterSpacing,
     },
+    pageHeading: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.sPageHeading.fontSize,
+      lineHeight: `${typography.sPageHeading.lineHeight}px`,
+      fontWeight: typography.sPageHeading.fontWeight,
+      letterSpacing: typography.sPageHeading.letterSpacing,
+    },
+    sectionHeading: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.sSectionHeading.fontSize,
+      lineHeight: `${typography.sSectionHeading.lineHeight}px`,
+      fontWeight: typography.sSectionHeading.fontWeight,
+      letterSpacing: typography.sSectionHeading.letterSpacing,
+    },
+    buttonLabelMd: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.sButtonLabelMd.fontSize,
+      lineHeight: `${typography.sButtonLabelMd.lineHeight}px`,
+      fontWeight: typography.sButtonLabelMd.fontWeight,
+      letterSpacing: typography.sButtonLabelMd.letterSpacing,
+    },
+    buttonLabelLg: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.sButtonLabelLg.fontSize,
+      lineHeight: `${typography.sButtonLabelLg.lineHeight}px`,
+      fontWeight: typography.sButtonLabelLg.fontWeight,
+      letterSpacing: typography.sButtonLabelLg.letterSpacing,
+    },
+    amountDisplayLg: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.sAmountDisplayLg.fontSize,
+      lineHeight: `${typography.sAmountDisplayLg.lineHeight}px`,
+      fontWeight: typography.sAmountDisplayLg.fontWeight,
+      letterSpacing: typography.sAmountDisplayLg.letterSpacing,
+    },
   };
   return (
     <>
@@ -215,6 +250,31 @@ export const SmallScreen: StoryFn<typeof Text> = () => {
         {`S BodyXS ${styles.bodyXS.fontSize}px/${styles.bodyXS.lineHeight} ${
           styles.bodyXS.fontSize / smallScreenFontSizeBase
         }rem`}
+      </Text>
+      <Text style={styles.pageHeading}>
+        {`S PageHeading ${styles.pageHeading.fontSize}px/${
+          styles.pageHeading.lineHeight
+        } ${styles.pageHeading.fontSize / smallScreenFontSizeBase}rem`}
+      </Text>
+      <Text style={styles.sectionHeading}>
+        {`S SectionHeading ${styles.sectionHeading.fontSize}px/${
+          styles.sectionHeading.lineHeight
+        } ${styles.sectionHeading.fontSize / smallScreenFontSizeBase}rem`}
+      </Text>
+      <Text style={styles.buttonLabelMd}>
+        {`S ButtonLabelMd ${styles.buttonLabelMd.fontSize}px/${
+          styles.buttonLabelMd.lineHeight
+        } ${styles.buttonLabelMd.fontSize / smallScreenFontSizeBase}rem`}
+      </Text>
+      <Text style={styles.buttonLabelLg}>
+        {`S ButtonLabelLg ${styles.buttonLabelLg.fontSize}px/${
+          styles.buttonLabelLg.lineHeight
+        } ${styles.buttonLabelLg.fontSize / smallScreenFontSizeBase}rem`}
+      </Text>
+      <Text style={styles.amountDisplayLg}>
+        {`S AmountDisplayLg ${styles.amountDisplayLg.fontSize}px/${
+          styles.amountDisplayLg.lineHeight
+        } ${styles.amountDisplayLg.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
     </>
   );
@@ -309,6 +369,41 @@ export const LargeScreen: StoryFn<typeof Text> = () => {
       fontWeight: typography.lBodyXS.fontWeight,
       letterSpacing: typography.lBodyXS.letterSpacing,
     },
+    pageHeading: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.lPageHeading.fontSize,
+      lineHeight: `${typography.lPageHeading.lineHeight}px`,
+      fontWeight: typography.lPageHeading.fontWeight,
+      letterSpacing: typography.lPageHeading.letterSpacing,
+    },
+    sectionHeading: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.lSectionHeading.fontSize,
+      lineHeight: `${typography.lSectionHeading.lineHeight}px`,
+      fontWeight: typography.lSectionHeading.fontWeight,
+      letterSpacing: typography.lSectionHeading.letterSpacing,
+    },
+    buttonLabelMd: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.lButtonLabelMd.fontSize,
+      lineHeight: `${typography.lButtonLabelMd.lineHeight}px`,
+      fontWeight: typography.lButtonLabelMd.fontWeight,
+      letterSpacing: typography.lButtonLabelMd.letterSpacing,
+    },
+    buttonLabelLg: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.lButtonLabelLg.fontSize,
+      lineHeight: `${typography.lButtonLabelLg.lineHeight}px`,
+      fontWeight: typography.lButtonLabelLg.fontWeight,
+      letterSpacing: typography.lButtonLabelLg.letterSpacing,
+    },
+    amountDisplayLg: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.lAmountDisplayLg.fontSize,
+      lineHeight: `${typography.lAmountDisplayLg.lineHeight}px`,
+      fontWeight: typography.lAmountDisplayLg.fontWeight,
+      letterSpacing: typography.lAmountDisplayLg.letterSpacing,
+    },
   };
   return (
     <>
@@ -381,6 +476,31 @@ export const LargeScreen: StoryFn<typeof Text> = () => {
         {`L BodyXS ${styles.bodyXS.fontSize}px/${styles.bodyXS.lineHeight} ${
           styles.bodyXS.fontSize / largeScreenFontSizeBase
         }rem`}
+      </Text>
+      <Text style={styles.pageHeading}>
+        {`L PageHeading ${styles.pageHeading.fontSize}px/${
+          styles.pageHeading.lineHeight
+        } ${styles.pageHeading.fontSize / largeScreenFontSizeBase}rem`}
+      </Text>
+      <Text style={styles.sectionHeading}>
+        {`L SectionHeading ${styles.sectionHeading.fontSize}px/${
+          styles.sectionHeading.lineHeight
+        } ${styles.sectionHeading.fontSize / largeScreenFontSizeBase}rem`}
+      </Text>
+      <Text style={styles.buttonLabelMd}>
+        {`L ButtonLabelMd ${styles.buttonLabelMd.fontSize}px/${
+          styles.buttonLabelMd.lineHeight
+        } ${styles.buttonLabelMd.fontSize / largeScreenFontSizeBase}rem`}
+      </Text>
+      <Text style={styles.buttonLabelLg}>
+        {`L ButtonLabelLg ${styles.buttonLabelLg.fontSize}px/${
+          styles.buttonLabelLg.lineHeight
+        } ${styles.buttonLabelLg.fontSize / largeScreenFontSizeBase}rem`}
+      </Text>
+      <Text style={styles.amountDisplayLg}>
+        {`L AmountDisplayLg ${styles.amountDisplayLg.fontSize}px/${
+          styles.amountDisplayLg.lineHeight
+        } ${styles.amountDisplayLg.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
     </>
   );
@@ -505,6 +625,41 @@ export const SmallScreenCSS: StoryFn<typeof Text> = () => {
       fontWeight: 'var(--typography-s-body-xs-medium-font-weight)',
       letterSpacing: 'var(--typography-s-body-xs-medium-letter-spacing)',
     },
+    PageHeading: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-s-page-heading-font-size)',
+      lineHeight: 'var(--typography-s-page-heading-line-height)',
+      fontWeight: 'var(--typography-s-page-heading-font-weight)',
+      letterSpacing: 'var(--typography-s-page-heading-letter-spacing)',
+    },
+    SectionHeading: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-s-section-heading-font-size)',
+      lineHeight: 'var(--typography-s-section-heading-line-height)',
+      fontWeight: 'var(--typography-s-section-heading-font-weight)',
+      letterSpacing: 'var(--typography-s-section-heading-letter-spacing)',
+    },
+    ButtonLabelMd: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-s-button-label-md-font-size)',
+      lineHeight: 'var(--typography-s-button-label-md-line-height)',
+      fontWeight: 'var(--typography-s-button-label-md-font-weight)',
+      letterSpacing: 'var(--typography-s-button-label-md-letter-spacing)',
+    },
+    ButtonLabelLg: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-s-button-label-lg-font-size)',
+      lineHeight: 'var(--typography-s-button-label-lg-line-height)',
+      fontWeight: 'var(--typography-s-button-label-lg-font-weight)',
+      letterSpacing: 'var(--typography-s-button-label-lg-letter-spacing)',
+    },
+    AmountDisplayLg: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-s-amount-display-lg-font-size)',
+      lineHeight: 'var(--typography-s-amount-display-lg-line-height)',
+      fontWeight: 'var(--typography-s-amount-display-lg-font-weight)',
+      letterSpacing: 'var(--typography-s-amount-display-lg-letter-spacing)',
+    },
   };
 
   const getCssVar = (variable: string): number => {
@@ -627,6 +782,41 @@ export const LargeScreenCSS: StoryFn<typeof Text> = () => {
       fontWeight: 'var(--typography-l-body-xs-medium-font-weight)',
       letterSpacing: 'var(--typography-l-body-xs-medium-letter-spacing)',
     },
+    PageHeading: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-l-page-heading-font-size)',
+      lineHeight: 'var(--typography-l-page-heading-line-height)',
+      fontWeight: 'var(--typography-l-page-heading-font-weight)',
+      letterSpacing: 'var(--typography-l-page-heading-letter-spacing)',
+    },
+    SectionHeading: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-l-section-heading-font-size)',
+      lineHeight: 'var(--typography-l-section-heading-line-height)',
+      fontWeight: 'var(--typography-l-section-heading-font-weight)',
+      letterSpacing: 'var(--typography-l-section-heading-letter-spacing)',
+    },
+    ButtonLabelMd: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-l-button-label-md-font-size)',
+      lineHeight: 'var(--typography-l-button-label-md-line-height)',
+      fontWeight: 'var(--typography-l-button-label-md-font-weight)',
+      letterSpacing: 'var(--typography-l-button-label-md-letter-spacing)',
+    },
+    ButtonLabelLg: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-l-button-label-lg-font-size)',
+      lineHeight: 'var(--typography-l-button-label-lg-line-height)',
+      fontWeight: 'var(--typography-l-button-label-lg-font-weight)',
+      letterSpacing: 'var(--typography-l-button-label-lg-letter-spacing)',
+    },
+    AmountDisplayLg: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-l-amount-display-lg-font-size)',
+      lineHeight: 'var(--typography-l-amount-display-lg-line-height)',
+      fontWeight: 'var(--typography-l-amount-display-lg-font-weight)',
+      letterSpacing: 'var(--typography-l-amount-display-lg-letter-spacing)',
+    },
   };
 
   const getCssVar = (variable: string): number => {
@@ -644,7 +834,7 @@ export const LargeScreenCSS: StoryFn<typeof Text> = () => {
         const title = Object.getOwnPropertyNames(styles)[i];
         return (
           <Text style={value} key={i}>
-            {`S ${title} ${getCssVar(value.fontSize) * fontBase}px/${
+            {`L ${title} ${getCssVar(value.fontSize) * fontBase}px/${
               getCssVar(value.lineHeight) * fontBase
             }px ${getCssVar(value.fontSize)}rem/${getCssVar(
               value.lineHeight,
