@@ -8,6 +8,7 @@ import {
   BoxJustifyContent,
   BoxBackgroundColor,
   BoxBorderColor,
+  TextColor,
 } from '../../types';
 import { Text } from '../Text';
 
@@ -1414,7 +1415,7 @@ export const BorderColor: Story = {
         borderColor={BoxBorderColor.OverlayDefault}
         borderWidth={2}
       >
-        <Text>OverlayDefault</Text>
+        <Text color={TextColor.OverlayInverse}>OverlayDefault</Text>
       </Box>
       <Box
         {...args}
@@ -1423,7 +1424,7 @@ export const BorderColor: Story = {
         borderColor={BoxBorderColor.OverlayAlternative}
         borderWidth={2}
       >
-        <Text>OverlayAlternative</Text>
+        <Text color={TextColor.OverlayInverse}>OverlayAlternative</Text>
       </Box>
       <Box
         {...args}
@@ -1761,7 +1762,7 @@ export const BackgroundColor: Story = {
         borderColor={BoxBorderColor.OverlayDefault}
         borderWidth={1}
       >
-        <Text>OverlayDefault</Text>
+        <Text color={TextColor.OverlayInverse}>OverlayDefault</Text>
       </Box>
       <Box
         {...args}
@@ -1770,7 +1771,7 @@ export const BackgroundColor: Story = {
         borderColor={BoxBorderColor.OverlayAlternative}
         borderWidth={1}
       >
-        <Text>OverlayAlternative</Text>
+        <Text color={TextColor.OverlayInverse}>OverlayAlternative</Text>
       </Box>
       <Box
         {...args}

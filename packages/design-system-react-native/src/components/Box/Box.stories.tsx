@@ -9,6 +9,7 @@ import {
   BoxJustifyContent,
   BoxBackgroundColor,
   BoxBorderColor,
+  TextColor,
 } from '../../types';
 import { Text } from '../Text';
 
@@ -1142,15 +1143,6 @@ export const BackgroundColor: Story = {
         <Box
           {...args}
           padding={3}
-          backgroundColor={BoxBackgroundColor.BackgroundAlternative}
-          borderColor={BoxBorderColor.BorderDefault}
-          borderWidth={1}
-        >
-          <Text>BackgroundAlternative</Text>
-        </Box>
-        <Box
-          {...args}
-          padding={3}
           backgroundColor={BoxBackgroundColor.BackgroundMuted}
           borderColor={BoxBorderColor.BorderDefault}
           borderWidth={1}
@@ -1412,7 +1404,7 @@ export const BackgroundColor: Story = {
           borderColor={BoxBorderColor.OverlayInverse}
           borderWidth={1}
         >
-          <Text>OverlayInverse</Text>
+          <Text color={TextColor.OverlayInverse}>OverlayInverse</Text>
         </Box>
 
         {/* Utility Colors */}
