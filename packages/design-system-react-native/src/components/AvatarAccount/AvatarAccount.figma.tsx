@@ -26,13 +26,6 @@ codeConnect.connect(
         Lg: AvatarAccountSize.Lg,
         Xl: AvatarAccountSize.Xl,
       }),
-      // Note: Badge mapping is not implemented yet as AvatarAccount doesn't have a badge prop
-      // This might be handled by a separate BadgeWrapper component
-      // "badge": figma.enum('Badge', {
-      //   "none": "none",
-      //   "Network": "network",
-      //   "Connection": "connection"
-      // })
     },
     example: (props) => (
       <AvatarAccount
