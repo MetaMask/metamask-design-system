@@ -59,18 +59,21 @@ export const generateTailwindConfig = (theme: Theme): TwConfig => {
 
   const config = {
     theme: {
-      // Keep essential semantic colors, remove default palette colors to enforce use of design system components
+      // Keep essential semantic colors, remove default palette colors.
+      // We want to rely on the colors provided by the design system preset
       colors: {
         inherit: 'inherit',
         current: 'currentColor',
         transparent: 'transparent',
         black: brandColor.black,
         white: brandColor.white,
+        // Include all design system colors in base theme for IntelliSense
+        ...colors,
       },
-      fontSize: {
-        // Empty to remove default Tailwind font sizes (text-sm, text-lg, etc.)
-        // Design system font sizes added via extend
-      },
+      // This removes all default Tailwind font sizes and weights.
+      // We want to rely on the design system font sizes and enforce use of the Text component
+      fontSize: {},
+      fontWeight: {},
       extend: {
         colors: {
           ...colors,
