@@ -11,8 +11,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added 5 new Text component variants: page heading, section heading, button labels, and amount display ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
-- Added new utility props to Box component for margin, padding, border, border color and background color ([#779](https://github.com/MetaMask/metamask-design-system/pull/779)) and fixes ([#781](https://github.com/MetaMask/metamask-design-system/pull/781))
+- Added 5 new Text component variants with responsive typography support ([#777](https://github.com/MetaMask/metamask-design-system/pull/777)):
+  - `TextVariant.PageHeading` - For main page titles (renders as `<h1>` by default)
+  - `TextVariant.SectionHeading` - For section titles (renders as `<h2>` by default)
+  - `TextVariant.ButtonLabelMd` - For medium-sized button labels (renders as `<span>` by default)
+  - `TextVariant.ButtonLabelLg` - For large-sized button labels (renders as `<span>` by default)
+  - `TextVariant.AmountDisplayLg` - For large amount/value displays (renders as `<span>` by default)
+- Added comprehensive utility props to Box component for enhanced layout control ([#779](https://github.com/MetaMask/metamask-design-system/pull/779)) and fixes ([#781](https://github.com/MetaMask/metamask-design-system/pull/781)):
+  - **Margin props:** `margin`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft`, `marginHorizontal`, `marginVertical`
+  - **Padding props:** `padding`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft`, `paddingHorizontal`, `paddingVertical`
+  - **Border props:** `borderWidth`, `borderColor`
+  - **Background props:** `backgroundColor`
+  - All spacing props use the `BoxSpacing` scale (0-12) where each unit equals 4px
+  - Border width uses `BoxBorderWidth` type (0, 1, 2, 4, 8) for valid Tailwind CSS values
+  - Color props use design system color tokens for consistent theming
 
 ## [0.1.0]
 
