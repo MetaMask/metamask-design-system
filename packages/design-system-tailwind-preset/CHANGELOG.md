@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- [Design Token] Added 5 new text styles for trade-app alignment ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
+- chore: implement tailwind eslint ([#760](https://github.com/MetaMask/metamask-design-system/pull/760))
+- chore: addressing tailwind preset linting violations ([#749](https://github.com/MetaMask/metamask-design-system/pull/749))
+
 ## [0.5.0]
 
 ### Added
