@@ -3263,7 +3263,7 @@ __metadata:
     ts-node: "npm:^10.9.1"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-system-twrnc-preset": ^0.1.0
+    "@metamask/design-system-twrnc-preset": ^0.0.0
     "@metamask/design-tokens": ^8.0.0
     "@metamask/utils": ^11.4.2
     "@solana/addresses": ^2.0.0
@@ -3308,7 +3308,7 @@ __metadata:
     ts-node: "npm:^10.9.1"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-system-tailwind-preset": ^0.5.0
+    "@metamask/design-system-tailwind-preset": ^0.0.0
     "@metamask/design-tokens": ^8.0.0
     "@metamask/utils": ^11.4.2
     "@solana/addresses": ^2.0.0

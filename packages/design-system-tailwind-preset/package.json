@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-tailwind-preset",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Design System Tailwind CSS preset for MetaMask projects",
   "keywords": [
     "MetaMask",

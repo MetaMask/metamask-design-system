@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0]
+
 ### Uncategorized
 
 - [Design Token] Added 5 new text styles for trade-app alignment ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
@@ -23,5 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.1.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.0...HEAD
+[0.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.1.0...@metamask/design-system-twrnc-preset@0.2.0
 [0.1.0]: https://github.com/MetaMask/metamask-design-system/releases/tag/@metamask/design-system-twrnc-preset@0.1.0
