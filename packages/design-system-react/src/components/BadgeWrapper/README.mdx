@@ -1,5 +1,4 @@
-import { Controls, Canvas } from '@storybook/blocks';
-
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
 import * as BadgeWrapperStories from './BadgeWrapper.stories';
 
 # BadgeWrapper
@@ -7,11 +6,13 @@ import * as BadgeWrapperStories from './BadgeWrapper.stories';
 BadgeWrapper positions a badge on top of another element.
 
 ```tsx
-import { BadgeWrapper, BadgeStatus, BadgeStatusStatus } from '@metamask/design-system-react';
+import {
+  BadgeWrapper,
+  BadgeStatus,
+  BadgeStatusStatus,
+} from '@metamask/design-system-react';
 
-<BadgeWrapper
-  badge={<BadgeStatus status={BadgeStatusStatus.Active} />}
->
+<BadgeWrapper badge={<BadgeStatus status={BadgeStatusStatus.Active} />}>
   <div>Content with badge</div>
 </BadgeWrapper>;
 ```
@@ -25,6 +26,7 @@ import { BadgeWrapper, BadgeStatus, BadgeStatusStatus } from '@metamask/design-s
 Optional prop to control the preset position of the badge. This prop gets used along with `positionAnchorShape`, `positionXOffset`, and `positionYOffset` to determine the final position.
 
 Available positions:
+
 - `BadgeWrapperPosition.TopRight`
 - `BadgeWrapperPosition.TopLeft`
 - `BadgeWrapperPosition.BottomLeft`
@@ -58,6 +60,7 @@ Available positions:
 Optional prop to determine the shape of the anchoring element. This prop gets used along with `position`, `positionXOffset`, and `positionYOffset` to determine the final position.
 
 Available shapes:
+
 - `BadgeWrapperPositionAnchorShape.Circular`
 - `BadgeWrapperPositionAnchorShape.Rectangular`
 
