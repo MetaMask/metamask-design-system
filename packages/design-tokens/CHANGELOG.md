@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.1.0]
+
+### Added
+
+- Added design tokens for 5 new text styles: page heading, section heading, button labels, and amount display ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
+
+### Changed
+
+- Updating semantic design token color values ([#775](https://github.com/MetaMask/metamask-design-system/pull/775))
+- Updating neutral design token color values ([#774](https://github.com/MetaMask/metamask-design-system/pull/774))
+
 ## [8.0.0]
 
 ### Added
@@ -381,7 +392,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.0.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.0...HEAD
+[8.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.0.0...@metamask/design-tokens@8.1.0
 [8.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.1.0...@metamask/design-tokens@8.0.0
 [7.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.0.0...@metamask/design-tokens@7.1.0
 [7.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.1.0...@metamask/design-tokens@7.0.0

@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Design system react ui components",
   "keywords": [
     "MetaMask",
@@ -81,8 +81,8 @@
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
-    "@metamask/design-system-tailwind-preset": "^0.5.0",
-    "@metamask/design-tokens": "^8.0.0",
+    "@metamask/design-system-tailwind-preset": "^0.6.0",
+    "@metamask/design-tokens": "^8.1.0",
     "@metamask/utils": "^11.4.2",
     "@solana/addresses": "^2.0.0",
     "bitcoin-address-validation": ">=2.0.0",
