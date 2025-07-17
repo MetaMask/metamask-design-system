@@ -1,4 +1,4 @@
-import { Controls, Canvas } from '@storybook/blocks';
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
 
 import * as BoxStories from './Box.stories';
 
@@ -7,7 +7,11 @@ import * as BoxStories from './Box.stories';
 Box is a low-level flexbox layout component that provides a focused set of props for building responsive layouts. It maps to Tailwind CSS flexbox utilities and supports the design system's spacing and color tokens.
 
 ```tsx
-import { Box, BoxFlexDirection } from '@metamask/design-system-react';
+import {
+  Box,
+  BoxFlexDirection,
+  BoxAlignItems,
+} from '@metamask/design-system-react';
 
 <Box flexDirection={BoxFlexDirection.Row} gap={2} padding={4}>
   <Text>Item 1</Text>
@@ -210,7 +214,17 @@ The padding of the component on all sides. Uses the BoxSpacing scale (0-12) wher
   </tbody>
 </table>
 
-<Canvas of={BoxStories.Padding} />
+```tsx
+<Box
+  flexDirection={BoxFlexDirection.Row}
+  gap={3}
+  alignItems={BoxAlignItems.Center}
+>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+  <Text>Item 3</Text>
+</Box>
+```
 
 ### `margin`
 
