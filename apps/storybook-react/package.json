@@ -7,40 +7,41 @@
   "scripts": {
     "build-storybook": "storybook build",
     "storybook": "storybook dev -p 6006",
-    "test-storybook": "test-storybook --maxWorkers=2"
+    "test-storybook": "vitest --run"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^1.9.0",
+    "@chromatic-com/storybook": "^4.0.1",
     "@metamask/design-system-react": "workspace:^",
     "@metamask/design-system-tailwind-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.4.2",
+    "@playwright/test": "^1.52.0",
     "@solana/addresses": "^2.0.0",
-    "@storybook/addon-a11y": "^8.6.12",
-    "@storybook/addon-essentials": "^8.6.12",
-    "@storybook/addon-interactions": "^8.6.12",
-    "@storybook/addon-links": "^8.6.12",
-    "@storybook/addon-onboarding": "^8.6.12",
-    "@storybook/blocks": "^8.6.12",
-    "@storybook/react": "^8.6.12",
-    "@storybook/react-vite": "^8.6.12",
-    "@storybook/test": "^8.6.12",
-    "@storybook/test-runner": "^0.22.0",
+    "@storybook/addon-a11y": "^9.0.17",
+    "@storybook/addon-docs": "^9.0.17",
+    "@storybook/addon-vitest": "^9.0.17",
+    "@storybook/react": "^9.0.17",
+    "@storybook/react-vite": "^9.0.17",
+    "@testing-library/dom": "^9.0.0",
+    "@testing-library/react": "^16.0.1",
     "@types/prop-types": "^15",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@vitejs/plugin-react": "^4.3.3",
-    "autoprefixer": "^10.4.20",
+    "@vitejs/plugin-react": "^4.5.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "autoprefixer": "^10.0.0",
     "axe-playwright": "^2.1.0",
     "bitcoin-address-validation": ">=2.0.0",
     "playwright": "^1.52.0",
+    "postcss": "^8.4.47",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook": "^8.6.12",
+    "storybook": "^9.0.17",
     "tailwindcss": "^3.0.0",
     "typescript": "~5.2.2",
-    "vite": "^5.4.19"
+    "vite": "^5.4.19",
+    "vitest": "^3.2.0"
   },
   "engines": {
     "node": "^18.18 || >=20"
@@ -50,5 +51,8 @@
       "storybook>@storybook/core>esbuild": false,
       "vite>esbuild": false
     }
+  },
+  "dependencies": {
+    "@vitest/browser": "^3.2.0"
   }
 }

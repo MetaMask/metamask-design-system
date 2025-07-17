@@ -11,22 +11,28 @@ function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, 'package.json')));
 }
 
+// Check if we're running in test mode (Vitest)
+const isTestMode = process.env.VITEST === 'true';
+
 const config: StorybookConfig = {
   stories: [
     '../stories/',
-    '../../../packages/design-tokens/stories/Introduction.mdx',
-    '../../../packages/design-tokens/stories/IntroductionColor.mdx',
-    '../../../packages/design-system-react/src/components/Introduction.mdx',
+    // Only include MDX documentation files when not in test mode
+    ...(isTestMode
+      ? []
+      : [
+          '../../../packages/design-tokens/stories/Introduction.mdx',
+          '../../../packages/design-tokens/stories/IntroductionColor.mdx',
+          '../../../packages/design-system-react/src/components/Introduction.mdx',
+        ]),
     '../../../packages/design-system-react/src/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/design-tokens/stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
-    getAbsolutePath('@storybook/addon-onboarding'),
-    getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-essentials'),
     getAbsolutePath('@chromatic-com/storybook'),
-    getAbsolutePath('@storybook/addon-interactions'),
     getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-vitest'),
   ],
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
@@ -37,6 +43,12 @@ const config: StorybookConfig = {
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
+        // Map the styles.css to the built version for consistency
+        '@metamask/design-tokens/styles.css': path.resolve(
+          __dirname,
+          '../../../packages/design-tokens/dist/styles.css',
+        ),
+        // Map the package to the source for immediate updates
         '@metamask/design-tokens': path.resolve(
           __dirname,
           '../../../packages/design-tokens',

@@ -1,5 +1,5 @@
 import React from 'react';
-import '@metamask/design-tokens/src/css/index.css';
+import '../../../packages/design-tokens/dist/styles.css';
 import '../tailwind.css';
 
 import { Preview } from '@storybook/react';
@@ -91,6 +91,10 @@ const preview: Preview = {
       },
     },
     layout: 'fullscreen', // removes default padding around stories
+    // Enable accessibility testing
+    a11y: {
+      test: 'error', // Fail tests when accessibility violations are found
+    },
   },
 };
 
