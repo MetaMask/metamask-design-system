@@ -9,15 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.1.0]
 
-### Uncategorized
+### Added
 
-- [Design Token] Added 5 new text styles for trade-app alignment ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
-- chore: fix or appropriately disable all eslint warnings ([#772](https://github.com/MetaMask/metamask-design-system/pull/772))
-- [Design Token] Semantic color updates for trade-app alignment ([#775](https://github.com/MetaMask/metamask-design-system/pull/775))
-- [Design Token] Neutral color updates for trade-app alignment ([#774](https://github.com/MetaMask/metamask-design-system/pull/774))
-- chore: implement tailwind eslint ([#760](https://github.com/MetaMask/metamask-design-system/pull/760))
-- chore: adding missing PR to design tokens changelog for icon colors ([#757](https://github.com/MetaMask/metamask-design-system/pull/757))
-- chore: css typography token unit tests ([#697](https://github.com/MetaMask/metamask-design-system/pull/697))
+- Added design tokens for 5 new text styles: page heading, section heading, button labels, and amount display ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
+
+### Changed
+
+- Updating semantic design token color values ([#775](https://github.com/MetaMask/metamask-design-system/pull/775))
+- Updating neutral design token color values ([#774](https://github.com/MetaMask/metamask-design-system/pull/774))
 
 ## [8.0.0]
 

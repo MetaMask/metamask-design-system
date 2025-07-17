@@ -9,18 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0]
 
-### Uncategorized
+### Added
 
-- [Design Token] Added 5 new text styles for trade-app alignment ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
-- chore: fix or appropriately disable all eslint warnings ([#772](https://github.com/MetaMask/metamask-design-system/pull/772))
-- chore: updates to box component ([#781](https://github.com/MetaMask/metamask-design-system/pull/781))
-- chore: aligning badge docs ([#780](https://github.com/MetaMask/metamask-design-system/pull/780))
-- chore: updating avatar readmes DSR ([#776](https://github.com/MetaMask/metamask-design-system/pull/776))
-- chore: Updated Box components ([#779](https://github.com/MetaMask/metamask-design-system/pull/779))
-- chore: aligining jest config files ([#767](https://github.com/MetaMask/metamask-design-system/pull/767))
-- chore: implement tailwind eslint ([#760](https://github.com/MetaMask/metamask-design-system/pull/760))
-- chore(deps): bump @metamask/utils from 11.4.0 to 11.4.2 ([#765](https://github.com/MetaMask/metamask-design-system/pull/765))
-- chore: fixing jazzicon eslint violations ([#748](https://github.com/MetaMask/metamask-design-system/pull/748))
+- Added 5 new Text component variants: page heading, section heading, button labels, and amount display ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
+- Added new utility props to Box component for margin, padding, border, border color and background color ([#779](https://github.com/MetaMask/metamask-design-system/pull/779)) and fixes ([#781](https://github.com/MetaMask/metamask-design-system/pull/781))
 
 ## [0.1.0]
 
