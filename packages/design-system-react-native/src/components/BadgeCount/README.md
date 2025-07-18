@@ -1,141 +1,103 @@
 # BadgeCount
 
-`BadgeCount` is a numeric indicator of unread messages or notifications on an app or UI element.
-
----
-
-## Props
-
-### `count` (Required)
-
-The number to be displayed in the badge.
-
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `number` | Yes      | `N/A`   |
-
-If `count` exceeds `max`, it will display as `max+`.
-
----
-
-### `max`
-
-Optional prop to set the maximum count before displaying `max+`.
-
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `number` | No       | `99`    |
-
----
-
-### `size`
-
-Optional prop to control the size of the badge.
-
-| TYPE             | REQUIRED | DEFAULT             |
-| :--------------- | :------- | :------------------ |
-| `BadgeCountSize` | No       | `BadgeCountSize.Md` |
-
-Available sizes:
-
-- `Md` (14px height)
-- `Lg` (20px height)
-
----
-
-### `textProps`
-
-Optional props to be passed to the `Text` component inside the badge.
-
-| TYPE                 | REQUIRED | DEFAULT |
-| :------------------- | :------- | :------ |
-| `Partial<TextProps>` | No       | `{}`    |
-
----
-
-### `twClassName`
-
-Optional prop to add `twrnc` overriding class names.
-
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
-
----
-
-### `style`
-
-Optional prop to control the style of the badge container.
-
-| TYPE                   | REQUIRED | DEFAULT |
-| :--------------------- | :------- | :------ |
-| `StyleProp<ViewStyle>` | No       | `null`  |
-
----
-
-## Usage
-
-### Basic Usage
+BadgeCount is used to render count badges within an interface.
 
 ```tsx
-import React from 'react';
-import BadgeCount from '@metamask/design-system-react-native';
+import { BadgeCount } from '@metamask/design-system-react-native';
 
 <BadgeCount count={5} />;
 ```
 
----
+## Props
 
-### Setting a Maximum Count
+### `count`
 
-```tsx
-<BadgeCount count={120} max={99} />
-```
+The count value to display in the badge.
 
-This will display `99+` instead of `120`.
-
----
-
-### Changing Badge Size
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `number` | Yes | `undefined` |
 
 ```tsx
-import { BadgeCountSize } from '@metamask/design-system-react-native';
-
-<BadgeCount count={8} size={BadgeCountSize.Lg} />;
+<BadgeCount count={5} />
 ```
 
----
+### `maxCount`
 
-### Customizing Text Props
+Maximum count to display before showing overflow indicator (e.g., "99+").
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `number` | No | `99` |
 
 ```tsx
-<BadgeCount count={3} textProps={{ color: 'white', fontWeight: 'bold' }} />
+<BadgeCount count={150} maxCount={99} />
 ```
 
----
+### `showZero`
 
-### Applying Tailwind Custom Styles
+Whether to show the badge when count is zero.
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `boolean` | No | `false` |
 
 ```tsx
-<BadgeCount count={10} twClassName="bg-blue-500" />
+<BadgeCount count={0} showZero />
 ```
 
----
+### `twClassName`
 
-## Notes
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-- `BadgeCount` is useful for indicating unread notifications, message counts, or status indicators.
-- The text color and weight are customizable via `textProps`.
-- The component ensures that excessively large numbers are represented concisely with `max+`.
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string` | No | `undefined` |
 
-## Contributing
+```tsx
+import { BadgeCount } from '@metamask/design-system-react-native';
 
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
+// Add additional styles
+<BadgeCount 
+  count={5}
+  twClassName="bg-primary-100"
+>
+  Custom Background
+</BadgeCount>
 
----
+// Override default styles
+<BadgeCount 
+  count={5}
+  twClassName="!bg-error-100"
+>
+  Override Background
+</BadgeCount>
+```
 
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+### `style`
+
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `StyleProp<ViewStyle>` | No | `undefined` |
+
+```tsx
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
+
+export const StyleExample = () => (
+  <BadgeCount count={5} style={styles.custom} />
+);
+```
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

@@ -1,29 +1,32 @@
 # Icon
 
-The `Icon` component is a customizable SVG icon component for React Native applications, integrating with Tailwind CSS classes via `twrnc`. It allows you to display various icons by name, with optional size and color customizations.
+Icon is used to render icon elements within an interface.
+
+```tsx
+import { Icon } from '@metamask/design-system-react-native';
+
+<Icon name="CheckBold" />;
+```
 
 ## Props
 
 ### `name`
 
-**Required**. Specifies which icon to render from the icon set.
+The icon name to display.
 
-| TYPE                             | REQUIRED |
-| :------------------------------- | :------- |
-| [IconName](./Icon.types.ts#L---) | Yes      |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `IconName` | Yes | `undefined` |
 
-You can find the full list of available icons in `Icon.types.ts`, under the `IconName` enum.
+```tsx
+<Icon name="CheckBold" />
+```
 
 ### `size`
 
-Optional prop that controls the size of the icon in pixels.  
-All sizes map to numeric pixel values.
+The size of the icon.
 
-| TYPE                             | REQUIRED | DEFAULT       |
-| :------------------------------- | :------- | :------------ |
-| [IconSize](./Icon.types.ts#L---) | No       | `IconSize.Md` |
-
-Available `IconSize` options:
+Available sizes:
 
 - `IconSize.Xs` (12px)
 - `IconSize.Sm` (16px)
@@ -31,119 +34,92 @@ Available `IconSize` options:
 - `IconSize.Lg` (24px)
 - `IconSize.Xl` (32px)
 
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `IconSize` | No | `IconSize.Md` |
+
+```tsx
+<Icon name="CheckBold" size={IconSize.Sm} />
+<Icon name="CheckBold" />
+<Icon name="CheckBold" size={IconSize.Lg} />
+```
+
 ### `color`
 
-Optional prop to set the icon color using predefined theme classes.
+The color of the icon.
 
-| TYPE                              | REQUIRED | DEFAULT                 |
-| :-------------------------------- | :------- | :---------------------- |
-| [IconColor](./Icon.types.ts#L---) | No       | `IconColor.IconDefault` |
+Available colors:
 
-Available `IconColor` options include:
+- `IconColor.IconDefault`
+- `IconColor.IconAlternative`
+- `IconColor.IconMuted`
+- `IconColor.IconPrimary`
+- `IconColor.IconSuccess`
+- `IconColor.IconError`
+- `IconColor.IconWarning`
+- `IconColor.IconInfo`
 
-- `IconDefault` (text-icon-default)
-- `IconAlternative` (text-icon-alternative)
-- `IconMuted` (text-icon-muted)
-- `OverlayInverse` (text-overlay-inverse)
-- `PrimaryDefault` (text-primary-default)
-- `PrimaryInverse` (text-primary-inverse)
-- `ErrorDefault` (text-error-default)
-- `ErrorInverse` (text-error-inverse)
-- `SuccessDefault` (text-success-default)
-- `SuccessInverse` (text-success-inverse)
-- `WarningDefault` (text-warning-default)
-- `WarningInverse` (text-warning-inverse)
-- `InfoDefault` (text-info-default)
-- `InfoInverse` (text-info-inverse)
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `IconColor` | No | `IconColor.IconDefault` |
+
+```tsx
+<Icon name="CheckBold" color={IconColor.IconSuccess} />
+<Icon name="Warning" color={IconColor.IconError} />
+```
 
 ### `twClassName`
 
-Optional prop to add custom `twrnc` class names for additional styling overrides.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
-### Additional ViewProps
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string` | No | `undefined` |
 
-All additional `ViewProps` are spread onto the underlying SVG component for further customization and accessibility.
+```tsx
+import { Icon } from '@metamask/design-system-react-native';
 
-## Usage
+// Add additional styles
+<Icon 
+  name="CheckBold"
+  twClassName="opacity-70"
+>
+  Semi-transparent Icon
+</Icon>
 
-```javascript
-import React from 'react';
-import Icon from '@metamask/design-system-react-native/lib/components/Icon';
-import {
-  IconName,
-  IconSize,
-  IconColor,
-} from '@metamask/design-system-react-native/lib/components/Icon/Icon.types';
-
-// Basic usage
-<Icon name={IconName.Home} />;
-
-// Specify size
-<Icon name={IconName.Home} size={IconSize.Lg} />;
-
-// Change color
-<Icon name={IconName.Home} color={IconColor.PrimaryDefault} />;
-
-// Add custom Tailwind class names
-<Icon name={IconName.Home} twClassName="text-yellow-500" />;
-
-// Combine multiple props
-<Icon
-  name={IconName.Warning}
-  size={IconSize.Xl}
-  color={IconColor.WarningDefault}
-  twClassName="mr-2"
-/>;
+// Override default styles
+<Icon 
+  name="CheckBold"
+  twClassName="!text-error-100"
+>
+  Override Color
+</Icon>
 ```
 
-## Example with All Props
+### `style`
 
-```javascript
-<Icon
-  name={IconName.Info}
-  size={IconSize.Sm}
-  color={IconColor.InfoInverse}
-  twClassName="mr-1"
-  accessibilityLabel="Info icon"
-/>
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `StyleProp<ViewStyle>` | No | `undefined` |
+
+```tsx
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
+
+export const StyleExample = () => (
+  <Icon name="CheckBold" style={styles.custom} />
+);
 ```
 
-## Notes
+## References
 
-- The `Icon` component is designed to be flexible and works seamlessly with `twrnc` for styling.
-- When using `twClassName`, ensure the class names are compatible with your Tailwind configuration.
-- Custom styles can be applied via the `style` prop, which merges with the styles generated from `twClassName` and other props.
-
-## Importing Types
-
-If you need to use the enums for `name`, `color`, or `size`, you can import them as follows:
-
-```javascript
-import {
-  IconSize,
-  IconName,
-  IconColor,
-} from '@metamask/design-system-react-native';
-```
-
-## Accessibility
-
-- Consider using `accessibilityLabel` and other accessibility props to provide a text equivalent for users of assistive technologies.
-- Ensure icons that convey information have accessible labels.
-
-## Contributing
-
-When contributing to the `Icon` component, please ensure:
-
-- All new icons are flatten, exported, and optimized properly.
-- Make sure to remove colors from new icons.
-- Add new icons to the assets folder.
-- Run `yarn workspace @metamask/design-system-react-native ts-node scripts/generate-icons.ts` from root.
-
----
-
-For questions or further assistance, refer to the React Native SVG documentation or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

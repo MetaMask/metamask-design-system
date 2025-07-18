@@ -1,116 +1,239 @@
-# [Button](https://metamask-consensys.notion.site/Button-88af1ddc075b40e3bb38a6d0c098d9b6)
+# Button
 
-![Button](./Button.png)
+Button is used to render interactive button elements within an interface.
 
-`Button` is a labeled element that a user can click or tap to initiate an action.
+```tsx
+import { Button } from '@metamask/design-system-react-native';
 
-_Developer Note: This component is a union component, which consists of [ButtonTertiary](./variants/ButtonTertiary/ButtonTertiary.tsx), [ButtonPrimary](./variants/ButtonPrimary/ButtonPrimary.tsx), and [ButtonSecondary](./variants/ButtonSecondary/ButtonSecondary.tsx)._
+<Button label="Click me" onPress={() => console.log('Pressed')} />;
+```
 
-## ButtonTertiary Props
-
-### `textVariant`
-
-Optional props to configure text component variants.
-
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| [TextVariant](../../../../Texts/Text/Text.types.ts) | No                                                      |
-
-## Common Props
+## Props
 
 ### `label`
 
-ButtonBase text.
+The text label displayed on the button.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| string                                              | Yes                                                     |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string` | Yes | `undefined` |
 
-### `size`
-
-Optional prop for the size of the button.
-
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| [ButtonSize](../../Button.types.ts)                 | Yes                                                     | Md                                                     |
+```tsx
+<Button label="Submit" onPress={() => {}} />
+```
 
 ### `onPress`
 
 Function to trigger when pressing the button.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| Function                                            | Yes                                                     |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `() => void` | Yes | `undefined` |
+
+```tsx
+<Button 
+  label="Press me" 
+  onPress={() => console.log('Button pressed')}
+/>
+```
+
+### `variant`
+
+The visual variant of the button.
+
+Available variants:
+
+- `ButtonVariant.Primary`
+- `ButtonVariant.Secondary`
+- `ButtonVariant.Tertiary`
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `ButtonVariant` | No | `ButtonVariant.Primary` |
+
+```tsx
+<Button 
+  label="Primary" 
+  variant={ButtonVariant.Primary}
+  onPress={() => {}}
+/>
+<Button 
+  label="Secondary" 
+  variant={ButtonVariant.Secondary}
+  onPress={() => {}}
+/>
+```
+
+### `size`
+
+The size of the button.
+
+Available sizes:
+
+- `ButtonSize.Sm` (32px height)
+- `ButtonSize.Md` (40px height)
+- `ButtonSize.Lg` (48px height)
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `ButtonSize` | No | `ButtonSize.Md` |
+
+```tsx
+<Button 
+  label="Small Button" 
+  size={ButtonSize.Sm}
+  onPress={() => {}}
+/>
+<Button 
+  label="Large Button" 
+  size={ButtonSize.Lg}
+  onPress={() => {}}
+/>
+```
 
 ### `startIconName`
 
-Optional prop for the icon name of the icon that will be displayed before the label.
+Optional icon name to display before the label.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| [IconName](../Icons/Icon.types.ts)                  | No                                                      |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `IconName` | No | `undefined` |
+
+```tsx
+<Button 
+  label="Save" 
+  startIconName="CheckBold"
+  onPress={() => {}}
+/>
+```
 
 ### `endIconName`
 
-Optional prop for the icon name of the icon that will be displayed after the label.
+Optional icon name to display after the label.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| [IconName](../Icons/Icon.types.ts)                  | No                                                      |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `IconName` | No | `undefined` |
+
+```tsx
+<Button 
+  label="Continue" 
+  endIconName="ArrowRight"
+  onPress={() => {}}
+/>
+```
 
 ### `isDanger`
 
-Optional boolean to show the danger state of the button.
+Whether to show the button in danger state.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| boolean                                             | No                                                      | false                                                  |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `boolean` | No | `false` |
+
+```tsx
+<Button 
+  label="Delete" 
+  isDanger
+  onPress={() => {}}
+/>
+```
+
+### `isDisabled`
+
+Whether the button is disabled.
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `boolean` | No | `false` |
+
+```tsx
+<Button 
+  label="Disabled" 
+  isDisabled
+  onPress={() => {}}
+/>
+```
 
 ### `width`
 
-Optional param to control the width of the button.
+The width behavior of the button.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| [ButtonWidthTypes](../../Button.types.ts) or number | No                                                      | ButtonWidthTypes.Auto                                  |
+Available width types:
 
-## Usage
+- `ButtonWidthTypes.Auto` - Fits content
+- `ButtonWidthTypes.Full` - Full width
 
-```javascript
-// ButtonTertiary
-<Button
-  variant={ButtonVariants.Tertiary}
-  label={SAMPLE_LABEL}
-  startIconName={IconName.Bank}
-  endIconName={IconName.Bank}
-  size={ButtonSize.Md}
-  onPress={SAMPLE_ONPRESS_HANDLER}
-  isDanger
-  width={ButtonWidthTypes.Auto}
-  labelTextVariant={TextVariant.DisplayMD}
-/>;
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `ButtonWidthTypes \| number` | No | `ButtonWidthTypes.Auto` |
 
-// ButtonPrimary
-<Button
-  variant={ButtonVariants.Primary}
-  label={SAMPLE_LABEL}
-  startIconName={IconName.Bank}
-  endIconName={IconName.Bank}
-  size={ButtonSize.Md}
-  onPress={SAMPLE_ONPRESS_HANDLER}
-  isDanger
-  width={ButtonWidthTypes.Auto}
-/>;
-
-// ButtonSecondary
-<Button
-  variant={ButtonVariants.Secondary}
-  label={SAMPLE_LABEL}
-  startIconName={IconName.Bank}
-  endIconName={IconName.Bank}
-  size={ButtonSize.Md}
-  onPress={SAMPLE_ONPRESS_HANDLER}
-  isDanger
-  width={ButtonWidthTypes.Auto}
-/>;
+```tsx
+<Button 
+  label="Full Width" 
+  width={ButtonWidthTypes.Full}
+  onPress={() => {}}
+/>
 ```
+
+### `twClassName`
+
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string` | No | `undefined` |
+
+```tsx
+import { Button } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<Button 
+  label="Custom Button"
+  onPress={() => {}}
+  twClassName="shadow-lg"
+>
+  Custom Shadow
+</Button>
+
+// Override default styles
+<Button 
+  label="Override Button"
+  onPress={() => {}}
+  twClassName="!bg-error-100"
+>
+  Override Background
+</Button>
+```
+
+### `style`
+
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `StyleProp<ViewStyle>` | No | `undefined` |
+
+```tsx
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
+
+export const StyleExample = () => (
+  <Button 
+    label="Custom Button"
+    onPress={() => {}}
+    style={styles.custom}
+  />
+);
+```
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

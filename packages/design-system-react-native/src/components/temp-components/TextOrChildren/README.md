@@ -1,87 +1,102 @@
 # TextOrChildren
 
-The `TextOrChildren` component is a utility component that provides flexibility to render either a `Text` component when the `children` prop is a string or render the provided child components directly.
+TextOrChildren is used to render either text or child components flexibly within an interface.
+
+```tsx
+import { TextOrChildren } from '@metamask/design-system-react-native';
+
+<TextOrChildren>String Content</TextOrChildren>;
+```
 
 ## Props
 
 ### `children`
 
-**Required**. Specifies the content to render. If the `children` is a string, it will render as a `Text` component with optional `textProps`. Otherwise, the child components are rendered directly.
+The content to render. If a string, renders as Text component; otherwise renders child components directly.
 
-| TYPE              | REQUIRED |
-| :---------------- | :------- |
-| `React.ReactNode` | Yes      |
-
-### `textProps`
-
-Optional props to configure the `Text` component when `children` is a string. This prop is ignored if `children` is not a string.
-
-| TYPE                                   | REQUIRED | DEFAULT |
-| :------------------------------------- | :------- | :------ |
-| `Partial<Omit<TextProps, 'children'>>` | No       | `{}`    |
-
----
-
-## Usage
-
-### Basic Usage
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `ReactNode` | Yes | `undefined` |
 
 ```tsx
-import React from 'react';
-import TextOrChildren from '@metamask/design-system-react-native/lib/components/TextOrChildren';
+import { TextOrChildren } from '@metamask/design-system-react-native';
 
 // Render string as Text component
-<TextOrChildren>String Content</TextOrChildren>;
+<TextOrChildren>String Content</TextOrChildren>
 
 // Render nested children directly
 <TextOrChildren>
   <CustomComponent>Nested Content</CustomComponent>
-</TextOrChildren>;
+</TextOrChildren>
 ```
 
-### With `textProps`
+### `textProps`
+
+Optional props to configure the Text component when children is a string.
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `Partial<Omit<TextProps, 'children'>>` | No | `undefined` |
 
 ```tsx
 <TextOrChildren
-  textProps={{ variant: TextVariant.BodyMd, color: TextColor.PrimaryDefault }}
+  textProps={{ 
+    variant: TextVariant.BodyMd, 
+    color: TextColor.PrimaryDefault 
+  }}
 >
   Styled Text
 </TextOrChildren>
 ```
 
-### Handling Conditional Rendering
+### `twClassName`
+
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string` | No | `undefined` |
 
 ```tsx
-<TextOrChildren>
-  {condition ? 'This is a string' : <CustomComponent />}
+import { TextOrChildren } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<TextOrChildren twClassName="text-center">
+  Centered Content
+</TextOrChildren>
+
+// Override default styles
+<TextOrChildren twClassName="!text-error-100">
+  Override Text Color
 </TextOrChildren>
 ```
 
----
+### `style`
 
-## Notes
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-- The `TextOrChildren` component ensures that string content adheres to consistent typography by wrapping it in the `Text` component.
-- When using `textProps`, ensure the props are valid for the `Text` component.
-- If `children` is not a string, all other props are ignored, and the child components are rendered as-is.
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `StyleProp<ViewStyle>` | No | `undefined` |
 
----
+```tsx
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-## Accessibility
+export const StyleExample = () => (
+  <TextOrChildren style={styles.custom}>
+    Custom styled content
+  </TextOrChildren>
+);
+```
 
-- The `Text` component renders with appropriate accessibility props (e.g., `accessibilityRole="text"`) for string content.
-- Ensure any custom child components used with `TextOrChildren` have appropriate accessibility attributes.
+## References
 
----
-
-## Contributing
-
-When contributing to the `TextOrChildren` component:
-
-1. Add tests for any new functionality or props.
-2. Update the README file to reflect changes.
-3. Maintain consistency with the design system's guidelines.
-
----
-
-For questions or further assistance, refer to the [React Native Text documentation](https://reactnative.dev/docs/text) or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

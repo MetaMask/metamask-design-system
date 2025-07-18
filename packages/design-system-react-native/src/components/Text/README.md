@@ -1,18 +1,34 @@
 # Text
 
-Text is the used to render text and paragraphs within an interface
+Text is used to render text and paragraphs within an interface.
+
+```tsx
+import { Text } from '@metamask/design-system-react-native';
+
+<Text>Default Text</Text>;
+```
 
 ## Props
+
+### `children`
+
+Text content to be displayed.
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string \| ReactNode` | Yes | `undefined` |
+
+```tsx
+import { Text } from '@metamask/design-system-react-native';
+
+<Text>Sample text content</Text>;
+```
 
 ### `variant`
 
 Optional enum to select between typography variants.
 
-| TYPE                           | REQUIRED | DEFAULT              |
-| :----------------------------- | :------- | :------------------- |
-| [TextVariant](./Text.types.ts) | No       | `TextVariant.BodyMd` |
-
-Available `TextVariant` options:
+Available variants:
 
 - `TextVariant.DisplayLg`
 - `TextVariant.DisplayMd`
@@ -23,187 +39,122 @@ Available `TextVariant` options:
 - `TextVariant.BodyMd`
 - `TextVariant.BodySm`
 - `TextVariant.BodyXs`
-- `TextVariant.PageHeading`
-- `TextVariant.SectionHeading`
-- `TextVariant.ButtonLabelMd`
-- `TextVariant.ButtonLabelLg`
-- `TextVariant.AmountDisplayLg`
 
-### `children`
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `TextVariant` | No | `TextVariant.BodyMd` |
 
-Text content to be displayed.
-
-| TYPE                    | REQUIRED |
-| :---------------------- | :------- |
-| `string` or `ReactNode` | Yes      |
+```tsx
+<Text variant={TextVariant.HeadingLg}>Large Heading</Text>
+<Text variant={TextVariant.BodySm}>Small body text</Text>
+```
 
 ### `color`
 
 Optional prop to set the text color.
 
-| TYPE                         | REQUIRED | DEFAULT                 |
-| :--------------------------- | :------- | :---------------------- |
-| [TextColor](./Text.types.ts) | No       | `TextColor.TextDefault` |
-
-Available `TextColor` options:
+Available colors:
 
 - `TextColor.TextDefault`
 - `TextColor.TextAlternative`
 - `TextColor.TextMuted`
-- `TextColor.OverlayInverse`
 - `TextColor.PrimaryDefault`
-- `TextColor.PrimaryInverse`
 - `TextColor.ErrorDefault`
-- `TextColor.ErrorAlternative`
-- `TextColor.ErrorInverse`
 - `TextColor.SuccessDefault`
-- `TextColor.SuccessInverse`
 - `TextColor.WarningDefault`
-- `TextColor.WarningInverse`
 - `TextColor.InfoDefault`
-- `TextColor.InfoInverse`
-- `TextColor.Transparent`
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `TextColor` | No | `TextColor.TextDefault` |
+
+```tsx
+<Text color={TextColor.PrimaryDefault}>Primary colored text</Text>
+<Text color={TextColor.ErrorDefault}>Error text</Text>
+```
 
 ### `fontWeight`
 
 Optional prop to adjust the font weight.
 
-| TYPE                          | REQUIRED | DEFAULT              |
-| :---------------------------- | :------- | :------------------- |
-| [FontWeight](./Text.types.ts) | No       | `FontWeight.Regular` |
+Available font weights:
 
-Available `FontWeight` options:
+- `FontWeight.Regular` (Weight 400)
+- `FontWeight.Medium` (Weight 500)
+- `FontWeight.Bold` (Weight 700)
 
-- `FontWeight.Regular` (Weight `400`)
-- `FontWeight.Medium` (Weight `500`)
-- `FontWeight.Bold` (Weight `700`)
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `FontWeight` | No | `FontWeight.Regular` |
+
+```tsx
+<Text fontWeight={FontWeight.Bold}>Bold text</Text>
+<Text fontWeight={FontWeight.Medium}>Medium weight text</Text>
+```
 
 ### `fontStyle`
 
 Optional prop to adjust the font style.
 
-| TYPE                         | REQUIRED | DEFAULT            |
-| :--------------------------- | :------- | :----------------- |
-| [FontStyle](./Text.types.ts) | No       | `FontStyle.Normal` |
-
-Available `FontStyle` options:
+Available font styles:
 
 - `FontStyle.Normal`
 - `FontStyle.Italic`
 
-### `twClassName`
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `FontStyle` | No | `FontStyle.Normal` |
 
-Optional prop to add custom `twrnc` class names for additional styling.
-
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
-
-## Usage
-
-```javascript
-import React from 'react';
-import { Text } from '@metamask/design-system-react-native';
-import {
-  TextVariant,
-  TextColor,
-  FontWeight,
-  FontStyle,
-} from '@metamask/design-system-react-native/lib/components/Text/Text.types';
-
-// Basic usage with default props
-<Text>Sample Text</Text>;
-
-// Using a specific variant
-<Text variant={TextVariant.HeadingLg}>Heading Large Text</Text>;
-
-// Applying a text color
-<Text color={TextColor.PrimaryDefault}>Primary Colored Text</Text>;
-
-// Setting font weight to bold
-<Text fontWeight={FontWeight.Bold}>Bold Text</Text>;
-
-// Setting font style to italic
-<Text fontStyle={FontStyle.Italic}>Italic Text</Text>;
-
-// Combining multiple styling props
-<Text
-  variant={TextVariant.BodyMd}
-  color={TextColor.SuccessDefault}
-  fontWeight={FontWeight.Bold}
-  fontStyle={FontStyle.Italic}
->
-  Bold Italic Success Text
-</Text>;
-
-// Adding custom Tailwind class names
-<Text twClassName="underline">Underlined Text</Text>;
-
-// Passing additional props to the underlying Text component
-<Text numberOfLines={1} ellipsizeMode="tail">
-  This is a very long text that will be truncated at the end.
-</Text>;
-
-// Using custom styles alongside twClassName
-<Text style={{ marginVertical: 10 }} twClassName="tracking-wide">
-  Custom Styled Text
-</Text>;
-
-// Nested Text components
-<Text>
-  This is a <Text fontWeight={FontWeight.Bold}>nested</Text> text example.
-</Text>;
+```tsx
+<Text fontStyle={FontStyle.Italic}>Italic text</Text>
 ```
 
-## Example with All Props
+### `twClassName`
 
-```javascript
-<Text
-  variant={TextVariant.DisplayMd}
-  color={TextColor.ErrorDefault}
-  fontWeight={FontWeight.Bold}
-  fontStyle={FontStyle.Italic}
-  twClassName="text-center underline"
-  numberOfLines={2}
-  ellipsizeMode="tail"
->
-  This is a bold, italic, underlined, centered text with error color.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string` | No | `undefined` |
+
+```tsx
+import { Text } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<Text twClassName="underline text-center">
+  Underlined centered text
+</Text>
+
+// Override default styles
+<Text twClassName="!text-error-100">
+  Override Text Color
 </Text>
 ```
 
-## Notes
+### `style`
 
-- The `Text` component is designed to be flexible and works seamlessly with `twrnc` for styling.
-- When using `twClassName`, ensure the class names are compatible with your Tailwind configuration.
-- The `variant` prop controls the overall typography, including font size and line height.
-- Custom styles can be applied via the `style` prop, which merges with the styles generated from `twClassName` and other props.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-## Importing Types
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `StyleProp<TextStyle>` | No | `undefined` |
 
-If you need to use the enums for `variant`, `color`, `fontWeight`, or `fontStyle`, you can import them as follows:
+```tsx
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-```javascript
-import {
-  TextVariant,
-  TextColor,
-  FontWeight,
-  FontStyle,
-} from '@metamask/design-system-react-native/';
+export const StyleExample = () => (
+  <Text style={styles.custom}>Custom styled text</Text>
+);
 ```
 
-## Accessibility
+## References
 
-- The `Text` component sets `accessibilityRole` to `"text"` by default to enhance accessibility support.
-- Ensure that any interactive text elements are wrapped appropriately (e.g., within a `TouchableOpacity`) and have the correct accessibility roles and labels.
-
-## Contributing
-
-When contributing to the `Text` component, please ensure:
-
-- All new variants, colors, font weights, or styles are added to the respective enums in `Text.types.ts`.
-- Updates to the component maintain consistency with the design system guidelines.
-- All changes are accompanied by appropriate tests and documentation updates.
-
----
-
-For any questions or further assistance, please refer to the [React Native Text documentation](https://reactnative.dev/docs/text) or reach out to the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

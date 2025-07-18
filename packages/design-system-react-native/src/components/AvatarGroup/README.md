@@ -1,262 +1,117 @@
 # AvatarGroup
 
-`AvatarGroup` is a stacked avatars to represent a group of avatars.
+AvatarGroup is used to render a group of avatars within an interface.
 
----
+```tsx
+import { AvatarGroup } from '@metamask/design-system-react-native';
+
+<AvatarGroup>
+  <AvatarAccount address="0x123..." />
+  <AvatarAccount address="0x456..." />
+</AvatarGroup>;
+```
 
 ## Props
 
-### `variant` (Required)
+### `children`
 
-Determines the type of avatars used within the group.
+The avatar components to display in the group.
 
-| TYPE                 | REQUIRED | DEFAULT |
-| :------------------- | :------- | :------ |
-| `AvatarGroupVariant` | Yes      | `N/A`   |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `ReactNode` | Yes | `undefined` |
 
-Available variants:
+```tsx
+import { AvatarGroup, AvatarAccount } from '@metamask/design-system-react-native';
 
-- `Account`
-- `Favicon`
-- `Network`
-- `Token`
+<AvatarGroup>
+  <AvatarAccount address="0x1234567890abcdef1234567890abcdef12345678" />
+  <AvatarAccount address="0xabcdef1234567890abcdef1234567890abcdef12" />
+  <AvatarAccount address="0x567890abcdef1234567890abcdef1234567890ab" />
+</AvatarGroup>
+```
 
----
+### `maxAvatars`
 
-### `avatarPropsArr` (Required)
+Maximum number of avatars to display before showing overflow indicator.
 
-An array of props for each avatar within the group.
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `number` | No | `4` |
 
-| TYPE                 | REQUIRED | DEFAULT |
-| :------------------- | :------- | :------ |
-| `Array<AvatarProps>` | Yes      | `N/A`   |
+```tsx
+<AvatarGroup maxAvatars={3}>
+  <AvatarAccount address="0x123..." />
+  <AvatarAccount address="0x456..." />
+  <AvatarAccount address="0x789..." />
+  <AvatarAccount address="0xabc..." />
+</AvatarGroup>
+```
 
-Each avatar follows the prop structure of the corresponding variant component (`AvatarAccount`, `AvatarFavicon`, `AvatarNetwork`, `AvatarToken`).
+### `spacing`
 
----
+Spacing between avatars in the group.
 
-### `size`
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `number` | No | `-8` |
 
-Optional prop to control the size of the avatars in the group.
-
-| TYPE         | REQUIRED | DEFAULT         |
-| :----------- | :------- | :-------------- |
-| `AvatarSize` | No       | `AvatarSize.Md` |
-
-Available sizes:
-
-- `AvatarSize.Xs`
-- `AvatarSize.Sm`
-- `AvatarSize.Md`
-- `AvatarSize.Lg`
-- `AvatarSize.Xl`
-
----
-
-### `max`
-
-Determines the maximum number of avatars to display before showing an overflow indicator.
-
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `number` | No       | `4`     |
-
----
-
-### `isReverse`
-
-Optional prop to reverse the order of avatar stacking.
-
-| TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
-| `boolean` | No       | `false` |
-
----
+```tsx
+<AvatarGroup spacing={-12}>
+  <AvatarAccount address="0x123..." />
+  <AvatarAccount address="0x456..." />
+</AvatarGroup>
+```
 
 ### `twClassName`
 
-Optional prop to add `twrnc` overriding class names.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string` | No | `undefined` |
+
+```tsx
+import { AvatarGroup } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<AvatarGroup twClassName="bg-primary-100">
+  Custom Background
+</AvatarGroup>
+
+// Override default styles
+<AvatarGroup twClassName="!flex-col">
+  Override Layout
+</AvatarGroup>
+```
 
 ### `style`
 
-Optional prop to control the style of the avatar group container.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE                   | REQUIRED | DEFAULT |
-| :--------------------- | :------- | :------ |
-| `StyleProp<ViewStyle>` | No       | `null`  |
-
----
-
-## Usage
-
-Below are examples illustrating how to structure the `avatarPropsArr` based on each avatar variant. Note that the data shown is purely illustrative.
-
-### Account Avatars
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `StyleProp<ViewStyle>` | No | `undefined` |
 
 ```tsx
-import React from 'react';
-import AvatarGroup, {
-  AvatarGroupVariant,
-} from '@metamask/design-system-react-native';
-import { AvatarAccountVariant } from '@metamask/design-system-react-native';
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-<AvatarGroup
-  variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
+export const StyleExample = () => (
+  <AvatarGroup style={styles.custom}>
+    <AvatarAccount address="0x123..." />
+    <AvatarAccount address="0x456..." />
+  </AvatarGroup>
+);
 ```
 
----
+## References
 
-### Favicon Avatars
-
-```tsx
-import React from 'react';
-import AvatarGroup, {
-  AvatarGroupVariant,
-} from '@metamask/design-system-react-native';
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Favicon}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/favicon1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/favicon2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/favicon3.png' },
-    },
-  ]}
-/>;
-```
-
----
-
-### Network Avatars
-
-```tsx
-import React from 'react';
-import AvatarGroup, {
-  AvatarGroupVariant,
-} from '@metamask/design-system-react-native';
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Network}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/net1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/net2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/net3.png' },
-    },
-  ]}
-/>;
-```
-
----
-
-### Token Avatars
-
-```tsx
-import React from 'react';
-import AvatarGroup, {
-  AvatarGroupVariant,
-} from '@metamask/design-system-react-native';
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Token}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/token1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token3.png' },
-    },
-  ]}
-/>;
-```
-
----
-
-### Displaying More Avatars with Overflow
-
-```tsx
-<AvatarGroup
-  variant={AvatarGroupVariant.Token}
-  max={3}
-  avatarPropsArr={[
-    { src: { uri: 'https://example.com/token1.png' } },
-    { src: { uri: 'https://example.com/token2.png' } },
-    { src: { uri: 'https://example.com/token3.png' } },
-    { src: { uri: 'https://example.com/token4.png' } },
-  ]}
-/>
-```
-
-If more than `max` avatars are provided, an overflow counter (e.g., `+1`) will be displayed.
-
----
-
-### Changing Avatar Size
-
-```tsx
-import AvatarGroup, {
-  AvatarGroupVariant,
-  AvatarGroupSize,
-} from '@metamask/design-system-react-native';
-<AvatarGroup
-  variant={AvatarGroupVariant.Network}
-  size={AvatarGroupSize.Lg}
-  avatarPropsArr={[
-    { src: { uri: 'https://example.com/net1.png' } },
-    { src: { uri: 'https://example.com/net2.png' } },
-  ]}
-/>;
-```
-
----
-
-## Notes
-
-- `AvatarGroup` ensures consistent avatar alignment and spacing.
-- Overflow avatars are indicated with a counter.
-- It supports different avatar types based on the selected variant.
-
----
-
-## Contributing
-
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
-
----
-
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

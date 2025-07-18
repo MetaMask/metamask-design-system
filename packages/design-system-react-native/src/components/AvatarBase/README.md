@@ -1,163 +1,125 @@
 # AvatarBase
 
-The `AvatarBase` is the base component for avatars.
+AvatarBase is used to render base avatar elements within an interface.
 
----
+```tsx
+import { AvatarBase } from '@metamask/design-system-react-native';
+
+<AvatarBase>AB</AvatarBase>;
+```
 
 ## Props
 
-### `children`
-
-Optional prop for the content to be rendered within the `AvatarBase`.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `ReactNode` | No       | `null`  |
-
----
-
 ### `size`
 
-Optional prop to control the size of the `AvatarBase`.
-
-| TYPE             | REQUIRED | DEFAULT             |
-| :--------------- | :------- | :------------------ |
-| `AvatarBaseSize` | No       | `AvatarBaseSize.Md` |
+The size of the AvatarBase.
 
 Available sizes:
 
-- `AvatarBaseSize.Xs` (16px)
-- `AvatarBaseSize.Sm` (24px)
-- `AvatarBaseSize.Md` (32px)
-- `AvatarBaseSize.Lg` (40px)
-- `AvatarBaseSize.Xl` (48px)
+- `AvatarSize.Xs` (16px)
+- `AvatarSize.Sm` (24px)
+- `AvatarSize.Md` (32px)
+- `AvatarSize.Lg` (40px)
+- `AvatarSize.Xl` (48px)
 
----
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `AvatarSize` | No | `AvatarSize.Md` |
 
-### `shape`
+```tsx
+<AvatarBase size={AvatarSize.Sm}>Small Avatar</AvatarBase>
+<AvatarBase>Medium Avatar (default)</AvatarBase>
+<AvatarBase size={AvatarSize.Lg}>Large Avatar</AvatarBase>
+```
 
-Optional prop to control the shape of the `AvatarBase`.
+### `children`
 
-| TYPE              | REQUIRED | DEFAULT                  |
-| :---------------- | :------- | :----------------------- |
-| `AvatarBaseShape` | No       | `AvatarBaseShape.Circle` |
+The content of the AvatarBase component.
 
-Available shapes:
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `ReactNode` | No | `undefined` |
 
-- `AvatarBaseShape.Circle`
-- `AvatarBaseShape.Square`
+```tsx
+import { AvatarBase } from '@metamask/design-system-react-native';
 
----
+<AvatarBase>Custom avatar content</AvatarBase>;
+```
 
-### `fallbackText`
+### `backgroundColor`
 
-Optional text to be displayed when the avatar content fails to render.
+Background color of the avatar.
 
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `null`  |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `BackgroundColor` | No | `BackgroundColor.BackgroundAlternative` |
 
----
+```tsx
+<AvatarBase backgroundColor={BackgroundColor.BackgroundDefault}>
+  Avatar with custom background
+</AvatarBase>
+```
 
-### `fallbackTextProps`
+### `borderColor`
 
-Optional props to customize the fallback text.
+Border color of the avatar.
 
-| TYPE                          | REQUIRED | DEFAULT |
-| :---------------------------- | :------- | :------ |
-| `Omit<TextProps, 'children'>` | No       | `{}`    |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `BorderColor` | No | `BorderColor.BorderDefault` |
 
----
+```tsx
+<AvatarBase borderColor={BorderColor.BorderMuted}>
+  Avatar with custom border
+</AvatarBase>
+```
 
 ### `twClassName`
 
-Optional prop to add `twrnc` overriding class names.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string` | No | `undefined` |
+
+```tsx
+import { AvatarBase } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<AvatarBase twClassName="border-2 border-primary-100">
+  Custom Border
+</AvatarBase>
+
+// Override default styles
+<AvatarBase twClassName="!bg-error-100">
+  Override Background
+</AvatarBase>
+```
 
 ### `style`
 
-Optional prop to control the style.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE                   | REQUIRED | DEFAULT |
-| :--------------------- | :------- | :------ |
-| `StyleProp<ViewStyle>` | No       | `null`  |
-
----
-
-## Usage
-
-### Basic Usage
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `StyleProp<ViewStyle>` | No | `undefined` |
 
 ```tsx
-import React from 'react';
-import AvatarBase from '@metamask/design-system-react-native';
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-<AvatarBase>👤</AvatarBase>;
+export const StyleExample = () => (
+  <AvatarBase style={styles.custom}>Custom styled avatar</AvatarBase>
+);
 ```
 
----
+## References
 
-### Avatar with Fallback Text
-
-```tsx
-<AvatarBase fallbackText="JD" />
-```
-
----
-
-### Customizing the Fallback Text
-
-```tsx
-<AvatarBase
-  fallbackText="AB"
-  fallbackTextProps={{ color: 'red', fontWeight: 'bold' }}
-/>
-```
-
----
-
-### Changing Avatar Size
-
-```tsx
-<AvatarBase size={AvatarBaseSize.Lg}>👤</AvatarBase>
-```
-
----
-
-### Changing Avatar Shape
-
-```tsx
-<AvatarBase shape={AvatarBaseShape.Square}>👤</AvatarBase>
-```
-
----
-
-### Accessibility
-
-- Ensure `fallbackText` provides meaningful information when the avatar content is unavailable.
-- Use `fallbackTextProps` to style text for better visibility and contrast.
-
----
-
-### Notes
-
-- `AvatarBase` is optimized for handling different avatar states.
-- The fallback text ensures a meaningful representation when no image or content is available.
-- Custom styling can be applied using `twClassName` and `style` props.
-
----
-
-## Contributing
-
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
-
----
-
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

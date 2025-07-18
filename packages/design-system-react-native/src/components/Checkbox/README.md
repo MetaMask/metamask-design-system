@@ -1,241 +1,171 @@
 # Checkbox
 
-`Checkbox` allows users to select one or more options from a set of choices.
-
-_Developer Note: This is a fully controlled component, requiring you to manage the state with `isSelected` and `onChange` props._
+Checkbox is used to render interactive checkbox elements within an interface.
 
 ```tsx
 import { Checkbox } from '@metamask/design-system-react-native';
-import { useState } from 'react';
 
-function MyComponent() {
-  const [isEnabled, setIsEnabled] = useState(false);
-
-  return (
-    <Checkbox
-      label="Enable notifications"
-      isSelected={isEnabled}
-      onChange={() => setIsEnabled(!isEnabled)}
-    />
-  );
-}
+<Checkbox 
+  isChecked={true} 
+  onValueChange={(value) => console.log(value)} 
+/>;
 ```
 
 ## Props
 
-### `isSelected`
+### `isChecked`
 
-Required prop to determine whether the checkbox is currently selected. This component is fully controlled, so you must manage this state in your parent component.
+Whether the checkbox is checked.
 
-| TYPE      | REQUIRED | DEFAULT     |
-| --------- | -------- | ----------- |
-| `boolean` | Yes      | `undefined` |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `boolean` | Yes | `undefined` |
 
 ```tsx
-const [isSelected, setIsSelected] = useState(true);
-
-<Checkbox
-  isSelected={isSelected}
-  onChange={() => setIsEnabled(!isSelected)}
-  label="Selected by default"
-/>;
+<Checkbox isChecked={true} onValueChange={() => {}} />
 ```
 
----
+### `onValueChange`
+
+Function called when the checkbox value changes.
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `(value: boolean) => void` | Yes | `undefined` |
+
+```tsx
+<Checkbox 
+  isChecked={false} 
+  onValueChange={(checked) => console.log('Checked:', checked)}
+/>
+```
 
 ### `isDisabled`
 
-Optional prop that when true, disables the checkbox.
+Whether the checkbox is disabled.
 
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `false` |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `boolean` | No | `false` |
 
 ```tsx
-const [isSelected, setIsSelected] = useState(false);
-
-<Checkbox
-  isSelected={isSelected}
-  onChange={() => setIsEnabled(!isSelected)}}
+<Checkbox 
+  isChecked={true} 
   isDisabled
-  label="Disabled checkbox"
-/>;
+  onValueChange={() => {}}
+/>
 ```
 
----
+### `isIndeterminate`
 
-### `isInvalid`
+Whether the checkbox is in an indeterminate state.
 
-Optional prop that when true, displays the invalid/error state of the checkbox.
-
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `false` |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `boolean` | No | `false` |
 
 ```tsx
-const [isSelected, setIsSelected] = useState(false);
-
-<Checkbox
-  isSelected={isSelected}
-  onChange={() => setIsEnabled(!isSelected)}}
-  isInvalid
-  label="Invalid checkbox"
-/>;
+<Checkbox 
+  isChecked={false} 
+  isIndeterminate
+  onValueChange={() => {}}
+/>
 ```
-
----
-
-### `onChange`
-
-Required callback function triggered when the checked state changes. Use this to update your state.
-
-| TYPE                            | REQUIRED | DEFAULT     |
-| ------------------------------- | -------- | ----------- |
-| `(isSelected: boolean) => void` | Yes      | `undefined` |
-
-```tsx
-const [isSelected, setIsSelected] = useState(false);
-
-<Checkbox isSelected={isSelected} onChange={() => setIsEnabled(!isSelected)}} label="Check me" />;
-```
-
----
 
 ### `label`
 
-Optional label prop that renders text or a React node as a label beside the checkbox.
+Label text for the checkbox.
 
-| TYPE                  | REQUIRED | DEFAULT     |
-| --------------------- | -------- | ----------- |
-| `string \| ReactNode` | No       | `undefined` |
-
-```tsx
-const [isSelected, setIsSelected] = useState(false);
-
-<Checkbox
-  isSelected={isSelected}
-  onChange={() => setIsEnabled(!isSelected)}}
-  label="Agree to terms"
-/>;
-```
-
----
-
-### `labelProps`
-
-Optional props to be passed to the label's Text component.
-
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<TextProps>` | No       | `undefined` |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string` | No | `undefined` |
 
 ```tsx
-const [isSelected, setIsSelected] = useState(false);
-
-<Checkbox
-  isSelected={isSelected}
-  onChange={() => setIsEnabled(!isSelected)}}
-  label="Label"
-  labelProps={{ variant: 'BodySm', color: 'text-muted' }}
-/>;
+<Checkbox 
+  isChecked={false} 
+  label="Accept terms and conditions"
+  onValueChange={() => {}}
+/>
 ```
 
----
+### `size`
 
-### `checkboxContainerProps`
+The size of the checkbox.
 
-Optional props passed to the container view wrapping the checkbox icon.
+Available sizes:
 
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<ViewProps>` | No       | `undefined` |
+- `CheckboxSize.Sm` (16px)
+- `CheckboxSize.Md` (20px)
 
----
-
-### `checkedIconProps`
-
-Optional props to be passed to the check Icon component.
-
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<IconProps>` | No       | `undefined` |
-
----
-
-### `ref`
-
-The Checkbox component exposes an imperative API through refs that allows for programmatic control. The `toggle` method allows a parent component to programmatically toggle the checkbox state.
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `CheckboxSize` | No | `CheckboxSize.Md` |
 
 ```tsx
-// Example of using the ref to toggle a checkbox
-const [isSelected, setIsSelected] = useState(false);
-const checkboxRef = useRef<{ toggle: () => void }>(null);
-
-// Inside your component render
-<>
-  <Checkbox
-    ref={checkboxRef}
-    isSelected={isSelected}
-    onChange={() => setIsEnabled(!isSelected)}}
-    label="Toggle me via ref"
-  />
-  <Button
-    variant={ButtonVariant.Primary}
-    onPress={() => checkboxRef.current?.toggle()}
-  >
-    Toggle checkbox
-  </Button>
-</>;
+<Checkbox 
+  isChecked={false} 
+  size={CheckboxSize.Sm}
+  onValueChange={() => {}}
+/>
 ```
-
-This can be useful in scenarios where you need to trigger the checkbox programmatically, such as when implementing "Select All" functionality or resetting forms.
-
----
 
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the checkbox container. These classes are merged with the default classes.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `string` | No | `undefined` |
 
 ```tsx
-const [isSelected, setIsSelected] = useState(false);
+import { Checkbox } from '@metamask/design-system-react-native';
 
-<Checkbox
-  isSelected={isSelected}
-  onChange={() => setIsEnabled(!isSelected)}}
-  label="Custom BG"
-  twClassName="bg-primary-100"
-/>;
+// Add additional styles
+<Checkbox 
+  isChecked={false}
+  onValueChange={() => {}}
+  twClassName="p-2"
+>
+  Custom Padding
+</Checkbox>
+
+// Override default styles
+<Checkbox 
+  isChecked={false}
+  onValueChange={() => {}}
+  twClassName="!border-error-100"
+>
+  Override Border
+</Checkbox>
 ```
-
----
 
 ### `style`
 
-Custom styles for the outer `Pressable` container.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE                   | REQUIRED | DEFAULT     |
-| ---------------------- | -------- | ----------- |
-| `StyleProp<ViewStyle>` | No       | `undefined` |
+| TYPE | REQUIRED | DEFAULT |
+|------|----------|---------|
+| `StyleProp<ViewStyle>` | No | `undefined` |
 
 ```tsx
-const [isSelected, setIsSelected] = useState(false);
-const customStyles = {
-  marginVertical: 10,
-};
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-<Checkbox
-  isSelected={isSelected}
-  onChange={() => setIsEnabled(!isSelected)}}
-  label="Styled"
-  style={customStyles}
-/>;
+export const StyleExample = () => (
+  <Checkbox 
+    isChecked={false}
+    onValueChange={() => {}}
+    style={styles.custom}
+  />
+);
 ```
-
----
 
 ## References
 
