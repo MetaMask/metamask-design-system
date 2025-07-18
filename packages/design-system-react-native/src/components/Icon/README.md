@@ -14,9 +14,9 @@ import { Icon } from '@metamask/design-system-react-native';
 
 The icon name to display.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconName` | Yes | `undefined` |
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | Yes      | `undefined` |
 
 ```tsx
 <Icon name="CheckBold" />
@@ -34,9 +34,9 @@ Available sizes:
 - `IconSize.Lg` (24px)
 - `IconSize.Xl` (32px)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconSize` | No | `IconSize.Md` |
+| TYPE       | REQUIRED | DEFAULT       |
+| ---------- | -------- | ------------- |
+| `IconSize` | No       | `IconSize.Md` |
 
 ```tsx
 <Icon name="CheckBold" size={IconSize.Sm} />
@@ -59,9 +59,9 @@ Available colors:
 - `IconColor.IconWarning`
 - `IconColor.IconInfo`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconColor` | No | `IconColor.IconDefault` |
+| TYPE        | REQUIRED | DEFAULT                 |
+| ----------- | -------- | ----------------------- |
+| `IconColor` | No       | `IconColor.IconDefault` |
 
 ```tsx
 <Icon name="CheckBold" color={IconColor.IconSuccess} />
@@ -75,15 +75,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { Icon } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<Icon 
+<Icon
   name="CheckBold"
   twClassName="opacity-70"
 >
@@ -91,7 +91,7 @@ import { Icon } from '@metamask/design-system-react-native';
 </Icon>
 
 // Override default styles
-<Icon 
+<Icon
   name="CheckBold"
   twClassName="!text-error-100"
 >
@@ -103,9 +103,9 @@ import { Icon } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({

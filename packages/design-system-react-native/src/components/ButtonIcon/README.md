@@ -14,9 +14,9 @@ import { ButtonIcon } from '@metamask/design-system-react-native';
 
 The icon name to display in the button.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconName` | Yes | `undefined` |
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | Yes      | `undefined` |
 
 ```tsx
 <ButtonIcon name="Edit" onPress={() => {}} />
@@ -26,15 +26,12 @@ The icon name to display in the button.
 
 Function to trigger when pressing the button.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `() => void` | Yes | `undefined` |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | Yes      | `undefined` |
 
 ```tsx
-<ButtonIcon 
-  name="Settings" 
-  onPress={() => console.log('Settings pressed')}
-/>
+<ButtonIcon name="Settings" onPress={() => console.log('Settings pressed')} />
 ```
 
 ### `variant`
@@ -47,18 +44,18 @@ Available variants:
 - `ButtonIconVariant.Secondary`
 - `ButtonIconVariant.Tertiary`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ButtonIconVariant` | No | `ButtonIconVariant.Primary` |
+| TYPE                | REQUIRED | DEFAULT                     |
+| ------------------- | -------- | --------------------------- |
+| `ButtonIconVariant` | No       | `ButtonIconVariant.Primary` |
 
 ```tsx
-<ButtonIcon 
-  name="Edit" 
+<ButtonIcon
+  name="Edit"
   variant={ButtonIconVariant.Primary}
   onPress={() => {}}
 />
-<ButtonIcon 
-  name="Edit" 
+<ButtonIcon
+  name="Edit"
   variant={ButtonIconVariant.Secondary}
   onPress={() => {}}
 />
@@ -74,18 +71,18 @@ Available sizes:
 - `ButtonIconSize.Md` (40px)
 - `ButtonIconSize.Lg` (48px)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ButtonIconSize` | No | `ButtonIconSize.Md` |
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `ButtonIconSize` | No       | `ButtonIconSize.Md` |
 
 ```tsx
-<ButtonIcon 
-  name="Edit" 
+<ButtonIcon
+  name="Edit"
   size={ButtonIconSize.Sm}
   onPress={() => {}}
 />
-<ButtonIcon 
-  name="Edit" 
+<ButtonIcon
+  name="Edit"
   size={ButtonIconSize.Lg}
   onPress={() => {}}
 />
@@ -95,32 +92,24 @@ Available sizes:
 
 Whether to show the button in danger state.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
-<ButtonIcon 
-  name="Delete" 
-  isDanger
-  onPress={() => {}}
-/>
+<ButtonIcon name="Delete" isDanger onPress={() => {}} />
 ```
 
 ### `isDisabled`
 
 Whether the button is disabled.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
-<ButtonIcon 
-  name="Edit" 
-  isDisabled
-  onPress={() => {}}
-/>
+<ButtonIcon name="Edit" isDisabled onPress={() => {}} />
 ```
 
 ### `twClassName`
@@ -130,15 +119,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { ButtonIcon } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<ButtonIcon 
+<ButtonIcon
   name="Edit"
   onPress={() => {}}
   twClassName="shadow-lg"
@@ -147,7 +136,7 @@ import { ButtonIcon } from '@metamask/design-system-react-native';
 </ButtonIcon>
 
 // Override default styles
-<ButtonIcon 
+<ButtonIcon
   name="Edit"
   onPress={() => {}}
   twClassName="!bg-error-100"
@@ -160,9 +149,9 @@ import { ButtonIcon } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -173,11 +162,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <ButtonIcon 
-    name="Edit"
-    onPress={() => {}}
-    style={styles.custom}
-  />
+  <ButtonIcon name="Edit" onPress={() => {}} style={styles.custom} />
 );
 ```
 

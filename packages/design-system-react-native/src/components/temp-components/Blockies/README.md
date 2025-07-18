@@ -14,9 +14,9 @@ import { Blockies } from '@metamask/design-system-react-native';
 
 A string address used as a unique identifier to generate the Blockies avatar.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | Yes | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | Yes      | `undefined` |
 
 ```tsx
 <Blockies address="0x123456789abcdef" />
@@ -26,9 +26,9 @@ A string address used as a unique identifier to generate the Blockies avatar.
 
 The size of the Blockies avatar in pixels.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `32` |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `32`    |
 
 ```tsx
 <Blockies address="0x123456789abcdef" size={64} />
@@ -38,15 +38,12 @@ The size of the Blockies avatar in pixels.
 
 The scale factor for the blocky pattern.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `3` |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `3`     |
 
 ```tsx
-<Blockies 
-  address="0x123456789abcdef" 
-  scale={4}
-/>
+<Blockies address="0x123456789abcdef" scale={4} />
 ```
 
 ### `twClassName`
@@ -56,15 +53,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { Blockies } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<Blockies 
+<Blockies
   address="0x123456789abcdef"
   twClassName="border-2 border-primary-100"
 >
@@ -72,7 +69,7 @@ import { Blockies } from '@metamask/design-system-react-native';
 </Blockies>
 
 // Override default styles
-<Blockies 
+<Blockies
   address="0x123456789abcdef"
   twClassName="!rounded-lg"
 >
@@ -84,9 +81,9 @@ import { Blockies } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -98,10 +95,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <Blockies 
-    address="0x123456789abcdef" 
-    style={styles.custom}
-  />
+  <Blockies address="0x123456789abcdef" style={styles.custom} />
 );
 ```
 

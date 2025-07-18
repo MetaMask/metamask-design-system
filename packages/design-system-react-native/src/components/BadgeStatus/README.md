@@ -21,9 +21,9 @@ Available variants:
 - `BadgeStatusVariant.Warning`
 - `BadgeStatusVariant.Info`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BadgeStatusVariant` | Yes | `undefined` |
+| TYPE                 | REQUIRED | DEFAULT     |
+| -------------------- | -------- | ----------- |
+| `BadgeStatusVariant` | Yes      | `undefined` |
 
 ```tsx
 <BadgeStatus variant={BadgeStatusVariant.Success} />
@@ -41,14 +41,14 @@ Available sizes:
 - `BadgeStatusSize.Sm` (8px)
 - `BadgeStatusSize.Md` (12px)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BadgeStatusSize` | No | `BadgeStatusSize.Md` |
+| TYPE              | REQUIRED | DEFAULT              |
+| ----------------- | -------- | -------------------- |
+| `BadgeStatusSize` | No       | `BadgeStatusSize.Md` |
 
 ```tsx
-<BadgeStatus 
-  variant={BadgeStatusVariant.Success} 
-  size={BadgeStatusSize.Sm} 
+<BadgeStatus
+  variant={BadgeStatusVariant.Success}
+  size={BadgeStatusSize.Sm}
 />
 <BadgeStatus variant={BadgeStatusVariant.Success} />
 ```
@@ -60,15 +60,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { BadgeStatus } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<BadgeStatus 
+<BadgeStatus
   variant={BadgeStatusVariant.Success}
   twClassName="border-2 border-primary-100"
 >
@@ -76,7 +76,7 @@ import { BadgeStatus } from '@metamask/design-system-react-native';
 </BadgeStatus>
 
 // Override default styles
-<BadgeStatus 
+<BadgeStatus
   variant={BadgeStatusVariant.Success}
   twClassName="!bg-error-100"
 >
@@ -88,9 +88,9 @@ import { BadgeStatus } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -101,10 +101,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <BadgeStatus 
-    variant={BadgeStatusVariant.Success} 
-    style={styles.custom} 
-  />
+  <BadgeStatus variant={BadgeStatusVariant.Success} style={styles.custom} />
 );
 ```
 

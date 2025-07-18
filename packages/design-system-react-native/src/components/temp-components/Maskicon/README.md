@@ -14,9 +14,9 @@ import { Maskicon } from '@metamask/design-system-react-native';
 
 The blockchain address used as the seed to generate the Maskicon.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | Yes | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | Yes      | `undefined` |
 
 ```tsx
 <Maskicon address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
@@ -26,30 +26,24 @@ The blockchain address used as the seed to generate the Maskicon.
 
 The size (width and height) of the Maskicon.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `32` |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `32`    |
 
 ```tsx
-<Maskicon 
-  address="0x360507dfEC4Bf0c03495f91154A78C672599F308" 
-  size={48} 
-/>
+<Maskicon address="0x360507dfEC4Bf0c03495f91154A78C672599F308" size={48} />
 ```
 
 ### `showBorder`
 
 Whether to show a border around the Maskicon.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
-<Maskicon 
-  address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-  showBorder
-/>
+<Maskicon address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" showBorder />
 ```
 
 ### `twClassName`
@@ -59,15 +53,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { Maskicon } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<Maskicon 
+<Maskicon
   address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
   twClassName="border-2 border-primary-100"
 >
@@ -75,7 +69,7 @@ import { Maskicon } from '@metamask/design-system-react-native';
 </Maskicon>
 
 // Override default styles
-<Maskicon 
+<Maskicon
   address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
   twClassName="!rounded-lg"
 >
@@ -87,9 +81,9 @@ import { Maskicon } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -100,7 +94,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <Maskicon 
+  <Maskicon
     address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
     style={styles.custom}
   />

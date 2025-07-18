@@ -22,9 +22,9 @@ Available colors:
 - `IconColor.IconError`
 - `IconColor.IconWarning`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconColor` | No | `IconColor.IconDefault` |
+| TYPE        | REQUIRED | DEFAULT                 |
+| ----------- | -------- | ----------------------- |
+| `IconColor` | No       | `IconColor.IconDefault` |
 
 ```tsx
 <Spinner color={IconColor.IconPrimary} />
@@ -40,9 +40,9 @@ Available sizes:
 - `SpinnerSize.Md`
 - `SpinnerSize.Lg`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `SpinnerSize` | No | `SpinnerSize.Md` |
+| TYPE          | REQUIRED | DEFAULT          |
+| ------------- | -------- | ---------------- |
+| `SpinnerSize` | No       | `SpinnerSize.Md` |
 
 ```tsx
 <Spinner size={SpinnerSize.Lg} />
@@ -52,9 +52,9 @@ Available sizes:
 
 Optional text to display next to the spinner.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 <Spinner loadingText="Loading data..." />
@@ -64,12 +64,12 @@ Optional text to display next to the spinner.
 
 Optional props to customize the loading text appearance.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `Partial<TextProps>` | No | `undefined` |
+| TYPE                 | REQUIRED | DEFAULT     |
+| -------------------- | -------- | ----------- |
+| `Partial<TextProps>` | No       | `undefined` |
 
 ```tsx
-<Spinner 
+<Spinner
   loadingText="Loading..."
   loadingTextProps={{
     variant: TextVariant.BodyMd,
@@ -85,9 +85,9 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { Spinner } from '@metamask/design-system-react-native';
@@ -107,9 +107,9 @@ import { Spinner } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -119,9 +119,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const StyleExample = () => (
-  <Spinner style={styles.custom} />
-);
+export const StyleExample = () => <Spinner style={styles.custom} />;
 ```
 
 ## References

@@ -14,9 +14,9 @@ import { AvatarIcon } from '@metamask/design-system-react-native';
 
 The icon name to display in the avatar.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconName` | Yes | `undefined` |
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | Yes      | `undefined` |
 
 ```tsx
 <AvatarIcon name="Bank" />
@@ -34,9 +34,9 @@ Available sizes:
 - `AvatarSize.Lg` (40px)
 - `AvatarSize.Xl` (48px)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `AvatarSize` | No | `AvatarSize.Md` |
+| TYPE         | REQUIRED | DEFAULT         |
+| ------------ | -------- | --------------- |
+| `AvatarSize` | No       | `AvatarSize.Md` |
 
 ```tsx
 <AvatarIcon name="Bank" size={AvatarSize.Sm} />
@@ -48,9 +48,9 @@ Available sizes:
 
 Color of the icon within the avatar.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconColor` | No | `IconColor.IconDefault` |
+| TYPE        | REQUIRED | DEFAULT                 |
+| ----------- | -------- | ----------------------- |
+| `IconColor` | No       | `IconColor.IconDefault` |
 
 ```tsx
 <AvatarIcon name="Bank" iconColor={IconColor.IconPrimary} />
@@ -60,15 +60,12 @@ Color of the icon within the avatar.
 
 Background color of the avatar.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BackgroundColor` | No | `BackgroundColor.BackgroundAlternative` |
+| TYPE              | REQUIRED | DEFAULT                                 |
+| ----------------- | -------- | --------------------------------------- |
+| `BackgroundColor` | No       | `BackgroundColor.BackgroundAlternative` |
 
 ```tsx
-<AvatarIcon 
-  name="Bank" 
-  backgroundColor={BackgroundColor.BackgroundDefault}
-/>
+<AvatarIcon name="Bank" backgroundColor={BackgroundColor.BackgroundDefault} />
 ```
 
 ### `twClassName`
@@ -78,15 +75,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { AvatarIcon } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<AvatarIcon 
+<AvatarIcon
   name="Bank"
   twClassName="border-2 border-primary-100"
 >
@@ -94,7 +91,7 @@ import { AvatarIcon } from '@metamask/design-system-react-native';
 </AvatarIcon>
 
 // Override default styles
-<AvatarIcon 
+<AvatarIcon
   name="Bank"
   twClassName="!bg-error-100"
 >
@@ -106,9 +103,9 @@ import { AvatarIcon } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({

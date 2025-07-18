@@ -5,10 +5,7 @@ Checkbox is used to render interactive checkbox elements within an interface.
 ```tsx
 import { Checkbox } from '@metamask/design-system-react-native';
 
-<Checkbox 
-  isChecked={true} 
-  onValueChange={(value) => console.log(value)} 
-/>;
+<Checkbox isChecked={true} onValueChange={(value) => console.log(value)} />;
 ```
 
 ## Props
@@ -17,9 +14,9 @@ import { Checkbox } from '@metamask/design-system-react-native';
 
 Whether the checkbox is checked.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | Yes | `undefined` |
+| TYPE      | REQUIRED | DEFAULT     |
+| --------- | -------- | ----------- |
+| `boolean` | Yes      | `undefined` |
 
 ```tsx
 <Checkbox isChecked={true} onValueChange={() => {}} />
@@ -29,13 +26,13 @@ Whether the checkbox is checked.
 
 Function called when the checkbox value changes.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `(value: boolean) => void` | Yes | `undefined` |
+| TYPE                       | REQUIRED | DEFAULT     |
+| -------------------------- | -------- | ----------- |
+| `(value: boolean) => void` | Yes      | `undefined` |
 
 ```tsx
-<Checkbox 
-  isChecked={false} 
+<Checkbox
+  isChecked={false}
   onValueChange={(checked) => console.log('Checked:', checked)}
 />
 ```
@@ -44,45 +41,37 @@ Function called when the checkbox value changes.
 
 Whether the checkbox is disabled.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
-<Checkbox 
-  isChecked={true} 
-  isDisabled
-  onValueChange={() => {}}
-/>
+<Checkbox isChecked={true} isDisabled onValueChange={() => {}} />
 ```
 
 ### `isIndeterminate`
 
 Whether the checkbox is in an indeterminate state.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
-<Checkbox 
-  isChecked={false} 
-  isIndeterminate
-  onValueChange={() => {}}
-/>
+<Checkbox isChecked={false} isIndeterminate onValueChange={() => {}} />
 ```
 
 ### `label`
 
 Label text for the checkbox.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
-<Checkbox 
-  isChecked={false} 
+<Checkbox
+  isChecked={false}
   label="Accept terms and conditions"
   onValueChange={() => {}}
 />
@@ -97,16 +86,12 @@ Available sizes:
 - `CheckboxSize.Sm` (16px)
 - `CheckboxSize.Md` (20px)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `CheckboxSize` | No | `CheckboxSize.Md` |
+| TYPE           | REQUIRED | DEFAULT           |
+| -------------- | -------- | ----------------- |
+| `CheckboxSize` | No       | `CheckboxSize.Md` |
 
 ```tsx
-<Checkbox 
-  isChecked={false} 
-  size={CheckboxSize.Sm}
-  onValueChange={() => {}}
-/>
+<Checkbox isChecked={false} size={CheckboxSize.Sm} onValueChange={() => {}} />
 ```
 
 ### `twClassName`
@@ -116,15 +101,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { Checkbox } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<Checkbox 
+<Checkbox
   isChecked={false}
   onValueChange={() => {}}
   twClassName="p-2"
@@ -133,7 +118,7 @@ import { Checkbox } from '@metamask/design-system-react-native';
 </Checkbox>
 
 // Override default styles
-<Checkbox 
+<Checkbox
   isChecked={false}
   onValueChange={() => {}}
   twClassName="!border-error-100"
@@ -146,9 +131,9 @@ import { Checkbox } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -159,11 +144,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <Checkbox 
-    isChecked={false}
-    onValueChange={() => {}}
-    style={styles.custom}
-  />
+  <Checkbox isChecked={false} onValueChange={() => {}} style={styles.custom} />
 );
 ```
 

@@ -14,9 +14,9 @@ import { AvatarFavicon } from '@metamask/design-system-react-native';
 
 The image source for the favicon.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ImageSourcePropType` | Yes | `undefined` |
+| TYPE                  | REQUIRED | DEFAULT     |
+| --------------------- | -------- | ----------- |
+| `ImageSourcePropType` | Yes      | `undefined` |
 
 ```tsx
 <AvatarFavicon imageSource={{ uri: 'https://example.com/favicon.ico' }} />
@@ -34,12 +34,12 @@ Available sizes:
 - `AvatarSize.Lg` (40px)
 - `AvatarSize.Xl` (48px)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `AvatarSize` | No | `AvatarSize.Md` |
+| TYPE         | REQUIRED | DEFAULT         |
+| ------------ | -------- | --------------- |
+| `AvatarSize` | No       | `AvatarSize.Md` |
 
 ```tsx
-<AvatarFavicon 
+<AvatarFavicon
   imageSource={{ uri: 'https://example.com/favicon.ico' }}
   size={AvatarSize.Sm}
 />
@@ -49,12 +49,12 @@ Available sizes:
 
 Text to display when the image fails to load.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
-<AvatarFavicon 
+<AvatarFavicon
   imageSource={{ uri: 'https://example.com/favicon.ico' }}
   fallbackText="FB"
 />
@@ -67,15 +67,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { AvatarFavicon } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<AvatarFavicon 
+<AvatarFavicon
   imageSource={{ uri: 'https://example.com/favicon.ico' }}
   twClassName="border-2 border-primary-100"
 >
@@ -83,7 +83,7 @@ import { AvatarFavicon } from '@metamask/design-system-react-native';
 </AvatarFavicon>
 
 // Override default styles
-<AvatarFavicon 
+<AvatarFavicon
   imageSource={{ uri: 'https://example.com/favicon.ico' }}
   twClassName="!bg-error-100"
 >
@@ -95,9 +95,9 @@ import { AvatarFavicon } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <AvatarFavicon 
+  <AvatarFavicon
     imageSource={{ uri: 'https://example.com/favicon.ico' }}
     style={styles.custom}
   />

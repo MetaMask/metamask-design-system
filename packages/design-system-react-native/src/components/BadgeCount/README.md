@@ -14,9 +14,9 @@ import { BadgeCount } from '@metamask/design-system-react-native';
 
 The count value to display in the badge.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | Yes | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `number` | Yes      | `undefined` |
 
 ```tsx
 <BadgeCount count={5} />
@@ -26,9 +26,9 @@ The count value to display in the badge.
 
 Maximum count to display before showing overflow indicator (e.g., "99+").
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `99` |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `99`    |
 
 ```tsx
 <BadgeCount count={150} maxCount={99} />
@@ -38,9 +38,9 @@ Maximum count to display before showing overflow indicator (e.g., "99+").
 
 Whether to show the badge when count is zero.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
 <BadgeCount count={0} showZero />
@@ -53,15 +53,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { BadgeCount } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<BadgeCount 
+<BadgeCount
   count={5}
   twClassName="bg-primary-100"
 >
@@ -69,7 +69,7 @@ import { BadgeCount } from '@metamask/design-system-react-native';
 </BadgeCount>
 
 // Override default styles
-<BadgeCount 
+<BadgeCount
   count={5}
   twClassName="!bg-error-100"
 >
@@ -81,9 +81,9 @@ import { BadgeCount } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({

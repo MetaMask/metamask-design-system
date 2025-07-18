@@ -14,9 +14,9 @@ import { Box } from '@metamask/design-system-react-native';
 
 The content of the Box component.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ReactNode` | No | `undefined` |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
 
 ```tsx
 import { Box } from '@metamask/design-system-react-native';
@@ -28,9 +28,9 @@ import { Box } from '@metamask/design-system-react-native';
 
 Background color of the box.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BackgroundColor` | No | `BackgroundColor.Transparent` |
+| TYPE              | REQUIRED | DEFAULT                       |
+| ----------------- | -------- | ----------------------------- |
+| `BackgroundColor` | No       | `BackgroundColor.Transparent` |
 
 ```tsx
 <Box backgroundColor={BackgroundColor.BackgroundDefault}>
@@ -42,56 +42,48 @@ Background color of the box.
 
 Border color of the box.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BorderColor` | No | `BorderColor.Transparent` |
+| TYPE          | REQUIRED | DEFAULT                   |
+| ------------- | -------- | ------------------------- |
+| `BorderColor` | No       | `BorderColor.Transparent` |
 
 ```tsx
-<Box borderColor={BorderColor.BorderDefault}>
-  Box with border
-</Box>
+<Box borderColor={BorderColor.BorderDefault}>Box with border</Box>
 ```
 
 ### `borderRadius`
 
 Border radius of the box.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BorderRadius` | No | `BorderRadius.None` |
+| TYPE           | REQUIRED | DEFAULT             |
+| -------------- | -------- | ------------------- |
+| `BorderRadius` | No       | `BorderRadius.None` |
 
 ```tsx
-<Box borderRadius={BorderRadius.MD}>
-  Box with rounded corners
-</Box>
+<Box borderRadius={BorderRadius.MD}>Box with rounded corners</Box>
 ```
 
 ### `padding`
 
 Padding inside the box.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `0` |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `0`     |
 
 ```tsx
-<Box padding={16}>
-  Box with padding
-</Box>
+<Box padding={16}>Box with padding</Box>
 ```
 
 ### `margin`
 
 Margin outside the box.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `0` |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `0`     |
 
 ```tsx
-<Box margin={16}>
-  Box with margin
-</Box>
+<Box margin={16}>Box with margin</Box>
 ```
 
 ### `twClassName`
@@ -101,9 +93,9 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { Box } from '@metamask/design-system-react-native';
@@ -123,9 +115,9 @@ import { Box } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({

@@ -16,25 +16,23 @@ import { ButtonAnimated } from '@metamask/design-system-react-native';
 
 The content of the ButtonAnimated component.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ReactNode` | Yes | `undefined` |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | Yes      | `undefined` |
 
 ```tsx
 import { ButtonAnimated } from '@metamask/design-system-react-native';
 
-<ButtonAnimated onPress={() => {}}>
-  Animated Button Content
-</ButtonAnimated>;
+<ButtonAnimated onPress={() => {}}>Animated Button Content</ButtonAnimated>;
 ```
 
 ### `onPress`
 
 Function to trigger when pressing the button.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `() => void` | Yes | `undefined` |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | Yes      | `undefined` |
 
 ```tsx
 <ButtonAnimated onPress={() => console.log('Button pressed')}>
@@ -46,15 +44,12 @@ Function to trigger when pressing the button.
 
 Callback function triggered when the button is pressed in.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `() => void` | No | `undefined` |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | No       | `undefined` |
 
 ```tsx
-<ButtonAnimated 
-  onPress={() => {}}
-  onPressIn={() => console.log('Pressed in')}
->
+<ButtonAnimated onPress={() => {}} onPressIn={() => console.log('Pressed in')}>
   Button with Press In
 </ButtonAnimated>
 ```
@@ -63,12 +58,12 @@ Callback function triggered when the button is pressed in.
 
 Callback function triggered when the button is released.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `() => void` | No | `undefined` |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | No       | `undefined` |
 
 ```tsx
-<ButtonAnimated 
+<ButtonAnimated
   onPress={() => {}}
   onPressOut={() => console.log('Pressed out')}
 >
@@ -80,15 +75,12 @@ Callback function triggered when the button is released.
 
 Whether the button is disabled.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
-<ButtonAnimated 
-  onPress={() => {}}
-  disabled
->
+<ButtonAnimated onPress={() => {}} disabled>
   Disabled Button
 </ButtonAnimated>
 ```
@@ -100,15 +92,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { ButtonAnimated } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<ButtonAnimated 
+<ButtonAnimated
   onPress={() => {}}
   twClassName="bg-primary-100"
 >
@@ -116,7 +108,7 @@ import { ButtonAnimated } from '@metamask/design-system-react-native';
 </ButtonAnimated>
 
 // Override default styles
-<ButtonAnimated 
+<ButtonAnimated
   onPress={() => {}}
   twClassName="!bg-error-100"
 >
@@ -128,9 +120,9 @@ import { ButtonAnimated } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({

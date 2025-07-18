@@ -17,27 +17,30 @@ import { AvatarGroup } from '@metamask/design-system-react-native';
 
 The avatar components to display in the group.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ReactNode` | Yes | `undefined` |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | Yes      | `undefined` |
 
 ```tsx
-import { AvatarGroup, AvatarAccount } from '@metamask/design-system-react-native';
+import {
+  AvatarGroup,
+  AvatarAccount,
+} from '@metamask/design-system-react-native';
 
 <AvatarGroup>
   <AvatarAccount address="0x1234567890abcdef1234567890abcdef12345678" />
   <AvatarAccount address="0xabcdef1234567890abcdef1234567890abcdef12" />
   <AvatarAccount address="0x567890abcdef1234567890abcdef1234567890ab" />
-</AvatarGroup>
+</AvatarGroup>;
 ```
 
 ### `maxAvatars`
 
 Maximum number of avatars to display before showing overflow indicator.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `4` |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `4`     |
 
 ```tsx
 <AvatarGroup maxAvatars={3}>
@@ -52,9 +55,9 @@ Maximum number of avatars to display before showing overflow indicator.
 
 Spacing between avatars in the group.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `-8` |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `-8`    |
 
 ```tsx
 <AvatarGroup spacing={-12}>
@@ -70,9 +73,9 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { AvatarGroup } from '@metamask/design-system-react-native';
@@ -92,9 +95,9 @@ import { AvatarGroup } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({

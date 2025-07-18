@@ -5,9 +5,7 @@ TextButton is used to render text-based button elements within an interface.
 ```tsx
 import { TextButton } from '@metamask/design-system-react-native';
 
-<TextButton onPress={() => console.log('Pressed')}>
-  Click me
-</TextButton>;
+<TextButton onPress={() => console.log('Pressed')}>Click me</TextButton>;
 ```
 
 ## Props
@@ -16,25 +14,23 @@ import { TextButton } from '@metamask/design-system-react-native';
 
 The text content of the TextButton component.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string \| ReactNode` | Yes | `undefined` |
+| TYPE                  | REQUIRED | DEFAULT     |
+| --------------------- | -------- | ----------- |
+| `string \| ReactNode` | Yes      | `undefined` |
 
 ```tsx
 import { TextButton } from '@metamask/design-system-react-native';
 
-<TextButton onPress={() => {}}>
-  Custom button text
-</TextButton>;
+<TextButton onPress={() => {}}>Custom button text</TextButton>;
 ```
 
 ### `onPress`
 
 Function to trigger when pressing the button.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `() => void` | Yes | `undefined` |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | Yes      | `undefined` |
 
 ```tsx
 <TextButton onPress={() => console.log('Text button pressed')}>
@@ -52,18 +48,18 @@ Available variants:
 - `TextButtonVariant.Secondary`
 - `TextButtonVariant.Link`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `TextButtonVariant` | No | `TextButtonVariant.Primary` |
+| TYPE                | REQUIRED | DEFAULT                     |
+| ------------------- | -------- | --------------------------- |
+| `TextButtonVariant` | No       | `TextButtonVariant.Primary` |
 
 ```tsx
-<TextButton 
+<TextButton
   variant={TextButtonVariant.Primary}
   onPress={() => {}}
 >
   Primary Text Button
 </TextButton>
-<TextButton 
+<TextButton
   variant={TextButtonVariant.Link}
   onPress={() => {}}
 >
@@ -81,18 +77,18 @@ Available sizes:
 - `TextButtonSize.Md`
 - `TextButtonSize.Lg`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `TextButtonSize` | No | `TextButtonSize.Md` |
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `TextButtonSize` | No       | `TextButtonSize.Md` |
 
 ```tsx
-<TextButton 
+<TextButton
   size={TextButtonSize.Sm}
   onPress={() => {}}
 >
   Small Text Button
 </TextButton>
-<TextButton 
+<TextButton
   size={TextButtonSize.Lg}
   onPress={() => {}}
 >
@@ -104,15 +100,12 @@ Available sizes:
 
 Whether the text button is disabled.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
-<TextButton 
-  isDisabled
-  onPress={() => {}}
->
+<TextButton isDisabled onPress={() => {}}>
   Disabled Text Button
 </TextButton>
 ```
@@ -121,15 +114,12 @@ Whether the text button is disabled.
 
 Optional icon name to display before the text.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconName` | No | `undefined` |
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | No       | `undefined` |
 
 ```tsx
-<TextButton 
-  startIconName="ArrowLeft"
-  onPress={() => {}}
->
+<TextButton startIconName="ArrowLeft" onPress={() => {}}>
   Back
 </TextButton>
 ```
@@ -138,15 +128,12 @@ Optional icon name to display before the text.
 
 Optional icon name to display after the text.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconName` | No | `undefined` |
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | No       | `undefined` |
 
 ```tsx
-<TextButton 
-  endIconName="ArrowRight"
-  onPress={() => {}}
->
+<TextButton endIconName="ArrowRight" onPress={() => {}}>
   Continue
 </TextButton>
 ```
@@ -158,15 +145,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { TextButton } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<TextButton 
+<TextButton
   onPress={() => {}}
   twClassName="underline"
 >
@@ -174,7 +161,7 @@ import { TextButton } from '@metamask/design-system-react-native';
 </TextButton>
 
 // Override default styles
-<TextButton 
+<TextButton
   onPress={() => {}}
   twClassName="!text-error-100"
 >
@@ -186,9 +173,9 @@ import { TextButton } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.Create({

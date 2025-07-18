@@ -14,9 +14,9 @@ import { Button } from '@metamask/design-system-react-native';
 
 The text label displayed on the button.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | Yes | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | Yes      | `undefined` |
 
 ```tsx
 <Button label="Submit" onPress={() => {}} />
@@ -26,15 +26,12 @@ The text label displayed on the button.
 
 Function to trigger when pressing the button.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `() => void` | Yes | `undefined` |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | Yes      | `undefined` |
 
 ```tsx
-<Button 
-  label="Press me" 
-  onPress={() => console.log('Button pressed')}
-/>
+<Button label="Press me" onPress={() => console.log('Button pressed')} />
 ```
 
 ### `variant`
@@ -47,18 +44,18 @@ Available variants:
 - `ButtonVariant.Secondary`
 - `ButtonVariant.Tertiary`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ButtonVariant` | No | `ButtonVariant.Primary` |
+| TYPE            | REQUIRED | DEFAULT                 |
+| --------------- | -------- | ----------------------- |
+| `ButtonVariant` | No       | `ButtonVariant.Primary` |
 
 ```tsx
-<Button 
-  label="Primary" 
+<Button
+  label="Primary"
   variant={ButtonVariant.Primary}
   onPress={() => {}}
 />
-<Button 
-  label="Secondary" 
+<Button
+  label="Secondary"
   variant={ButtonVariant.Secondary}
   onPress={() => {}}
 />
@@ -74,18 +71,18 @@ Available sizes:
 - `ButtonSize.Md` (40px height)
 - `ButtonSize.Lg` (48px height)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ButtonSize` | No | `ButtonSize.Md` |
+| TYPE         | REQUIRED | DEFAULT         |
+| ------------ | -------- | --------------- |
+| `ButtonSize` | No       | `ButtonSize.Md` |
 
 ```tsx
-<Button 
-  label="Small Button" 
+<Button
+  label="Small Button"
   size={ButtonSize.Sm}
   onPress={() => {}}
 />
-<Button 
-  label="Large Button" 
+<Button
+  label="Large Button"
   size={ButtonSize.Lg}
   onPress={() => {}}
 />
@@ -95,64 +92,48 @@ Available sizes:
 
 Optional icon name to display before the label.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconName` | No | `undefined` |
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | No       | `undefined` |
 
 ```tsx
-<Button 
-  label="Save" 
-  startIconName="CheckBold"
-  onPress={() => {}}
-/>
+<Button label="Save" startIconName="CheckBold" onPress={() => {}} />
 ```
 
 ### `endIconName`
 
 Optional icon name to display after the label.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconName` | No | `undefined` |
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | No       | `undefined` |
 
 ```tsx
-<Button 
-  label="Continue" 
-  endIconName="ArrowRight"
-  onPress={() => {}}
-/>
+<Button label="Continue" endIconName="ArrowRight" onPress={() => {}} />
 ```
 
 ### `isDanger`
 
 Whether to show the button in danger state.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
-<Button 
-  label="Delete" 
-  isDanger
-  onPress={() => {}}
-/>
+<Button label="Delete" isDanger onPress={() => {}} />
 ```
 
 ### `isDisabled`
 
 Whether the button is disabled.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
-<Button 
-  label="Disabled" 
-  isDisabled
-  onPress={() => {}}
-/>
+<Button label="Disabled" isDisabled onPress={() => {}} />
 ```
 
 ### `width`
@@ -164,16 +145,12 @@ Available width types:
 - `ButtonWidthTypes.Auto` - Fits content
 - `ButtonWidthTypes.Full` - Full width
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ButtonWidthTypes \| number` | No | `ButtonWidthTypes.Auto` |
+| TYPE                         | REQUIRED | DEFAULT                 |
+| ---------------------------- | -------- | ----------------------- |
+| `ButtonWidthTypes \| number` | No       | `ButtonWidthTypes.Auto` |
 
 ```tsx
-<Button 
-  label="Full Width" 
-  width={ButtonWidthTypes.Full}
-  onPress={() => {}}
-/>
+<Button label="Full Width" width={ButtonWidthTypes.Full} onPress={() => {}} />
 ```
 
 ### `twClassName`
@@ -183,15 +160,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { Button } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<Button 
+<Button
   label="Custom Button"
   onPress={() => {}}
   twClassName="shadow-lg"
@@ -200,7 +177,7 @@ import { Button } from '@metamask/design-system-react-native';
 </Button>
 
 // Override default styles
-<Button 
+<Button
   label="Override Button"
   onPress={() => {}}
   twClassName="!bg-error-100"
@@ -213,9 +190,9 @@ import { Button } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -226,11 +203,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <Button 
-    label="Custom Button"
-    onPress={() => {}}
-    style={styles.custom}
-  />
+  <Button label="Custom Button" onPress={() => {}} style={styles.custom} />
 );
 ```
 

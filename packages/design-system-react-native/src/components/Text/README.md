@@ -14,9 +14,9 @@ import { Text } from '@metamask/design-system-react-native';
 
 Text content to be displayed.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string \| ReactNode` | Yes | `undefined` |
+| TYPE                  | REQUIRED | DEFAULT     |
+| --------------------- | -------- | ----------- |
+| `string \| ReactNode` | Yes      | `undefined` |
 
 ```tsx
 import { Text } from '@metamask/design-system-react-native';
@@ -40,9 +40,9 @@ Available variants:
 - `TextVariant.BodySm`
 - `TextVariant.BodyXs`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `TextVariant` | No | `TextVariant.BodyMd` |
+| TYPE          | REQUIRED | DEFAULT              |
+| ------------- | -------- | -------------------- |
+| `TextVariant` | No       | `TextVariant.BodyMd` |
 
 ```tsx
 <Text variant={TextVariant.HeadingLg}>Large Heading</Text>
@@ -64,9 +64,9 @@ Available colors:
 - `TextColor.WarningDefault`
 - `TextColor.InfoDefault`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `TextColor` | No | `TextColor.TextDefault` |
+| TYPE        | REQUIRED | DEFAULT                 |
+| ----------- | -------- | ----------------------- |
+| `TextColor` | No       | `TextColor.TextDefault` |
 
 ```tsx
 <Text color={TextColor.PrimaryDefault}>Primary colored text</Text>
@@ -83,9 +83,9 @@ Available font weights:
 - `FontWeight.Medium` (Weight 500)
 - `FontWeight.Bold` (Weight 700)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `FontWeight` | No | `FontWeight.Regular` |
+| TYPE         | REQUIRED | DEFAULT              |
+| ------------ | -------- | -------------------- |
+| `FontWeight` | No       | `FontWeight.Regular` |
 
 ```tsx
 <Text fontWeight={FontWeight.Bold}>Bold text</Text>
@@ -101,9 +101,9 @@ Available font styles:
 - `FontStyle.Normal`
 - `FontStyle.Italic`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `FontStyle` | No | `FontStyle.Normal` |
+| TYPE        | REQUIRED | DEFAULT            |
+| ----------- | -------- | ------------------ |
+| `FontStyle` | No       | `FontStyle.Normal` |
 
 ```tsx
 <Text fontStyle={FontStyle.Italic}>Italic text</Text>
@@ -116,9 +116,9 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { Text } from '@metamask/design-system-react-native';
@@ -138,9 +138,9 @@ import { Text } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<TextStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<TextStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({

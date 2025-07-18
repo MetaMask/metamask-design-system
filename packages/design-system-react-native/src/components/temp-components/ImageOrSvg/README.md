@@ -14,9 +14,9 @@ import { ImageOrSvg } from '@metamask/design-system-react-native';
 
 The source of the image or SVG to render.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number \| ComponentType<SvgProps> \| { uri?: string }` | Yes | `undefined` |
+| TYPE                                                    | REQUIRED | DEFAULT     |
+| ------------------------------------------------------- | -------- | ----------- |
+| `number \| ComponentType<SvgProps> \| { uri?: string }` | Yes      | `undefined` |
 
 ```tsx
 <ImageOrSvg src={{ uri: 'https://example.com/image.png' }} />
@@ -27,42 +27,36 @@ The source of the image or SVG to render.
 
 The width of the image or SVG.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number \| string` | No | `undefined` |
+| TYPE               | REQUIRED | DEFAULT     |
+| ------------------ | -------- | ----------- |
+| `number \| string` | No       | `undefined` |
 
 ```tsx
-<ImageOrSvg 
-  src={{ uri: 'https://example.com/image.png' }}
-  width={100}
-/>
+<ImageOrSvg src={{ uri: 'https://example.com/image.png' }} width={100} />
 ```
 
 ### `height`
 
 The height of the image or SVG.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number \| string` | No | `undefined` |
+| TYPE               | REQUIRED | DEFAULT     |
+| ------------------ | -------- | ----------- |
+| `number \| string` | No       | `undefined` |
 
 ```tsx
-<ImageOrSvg 
-  src={{ uri: 'https://example.com/image.png' }}
-  height={100}
-/>
+<ImageOrSvg src={{ uri: 'https://example.com/image.png' }} height={100} />
 ```
 
 ### `onImageLoad`
 
 Callback triggered when the image has loaded successfully.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `(event: NativeSyntheticEvent<ImageLoadEventData>) => void` | No | `undefined` |
+| TYPE                                                        | REQUIRED | DEFAULT     |
+| ----------------------------------------------------------- | -------- | ----------- |
+| `(event: NativeSyntheticEvent<ImageLoadEventData>) => void` | No       | `undefined` |
 
 ```tsx
-<ImageOrSvg 
+<ImageOrSvg
   src={{ uri: 'https://example.com/image.png' }}
   onImageLoad={() => console.log('Image loaded')}
 />
@@ -72,12 +66,12 @@ Callback triggered when the image has loaded successfully.
 
 Callback triggered when there is an error loading the image.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `(errorEvent: NativeSyntheticEvent<ImageErrorEventData>) => void` | No | `undefined` |
+| TYPE                                                              | REQUIRED | DEFAULT     |
+| ----------------------------------------------------------------- | -------- | ----------- |
+| `(errorEvent: NativeSyntheticEvent<ImageErrorEventData>) => void` | No       | `undefined` |
 
 ```tsx
-<ImageOrSvg 
+<ImageOrSvg
   src={{ uri: 'https://example.com/image.png' }}
   onImageError={() => console.log('Image error')}
 />
@@ -87,12 +81,12 @@ Callback triggered when there is an error loading the image.
 
 Callback triggered when there is an error loading the SVG.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `(error: Error) => void` | No | `undefined` |
+| TYPE                     | REQUIRED | DEFAULT     |
+| ------------------------ | -------- | ----------- |
+| `(error: Error) => void` | No       | `undefined` |
 
 ```tsx
-<ImageOrSvg 
+<ImageOrSvg
   src={{ uri: 'https://example.com/image.svg' }}
   onSvgError={() => console.log('SVG error')}
 />
@@ -105,15 +99,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { ImageOrSvg } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<ImageOrSvg 
+<ImageOrSvg
   src={{ uri: 'https://example.com/image.png' }}
   twClassName="border-2 border-primary-100"
 >
@@ -121,7 +115,7 @@ import { ImageOrSvg } from '@metamask/design-system-react-native';
 </ImageOrSvg>
 
 // Override default styles
-<ImageOrSvg 
+<ImageOrSvg
   src={{ uri: 'https://example.com/image.png' }}
   twClassName="!rounded-lg"
 >
@@ -133,9 +127,9 @@ import { ImageOrSvg } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -146,7 +140,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <ImageOrSvg 
+  <ImageOrSvg
     src={{ uri: 'https://example.com/image.png' }}
     style={styles.custom}
   />

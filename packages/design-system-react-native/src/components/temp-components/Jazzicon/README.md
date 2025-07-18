@@ -14,9 +14,9 @@ import { Jazzicon } from '@metamask/design-system-react-native';
 
 The size of the Jazzicon in pixels.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `40` |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `40`    |
 
 ```tsx
 <Jazzicon seed={123} size={50} />
@@ -26,9 +26,9 @@ The size of the Jazzicon in pixels.
 
 A string address used as a unique identifier to generate the Jazzicon.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 <Jazzicon address="0x123456789abcdef" size={40} />
@@ -38,9 +38,9 @@ A string address used as a unique identifier to generate the Jazzicon.
 
 A unique numeric value used to generate a consistent and unique icon.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `number` | No       | `undefined` |
 
 ```tsx
 <Jazzicon seed={789} size={60} />
@@ -50,9 +50,9 @@ A unique numeric value used to generate a consistent and unique icon.
 
 Alternative prop for size (for compatibility with react-native-jazzicon).
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `number` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `number` | No       | `undefined` |
 
 ```tsx
 <Jazzicon seed={123} diameter={50} />
@@ -65,15 +65,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { Jazzicon } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<Jazzicon 
+<Jazzicon
   seed={123}
   twClassName="border-2 border-primary-100"
 >
@@ -81,7 +81,7 @@ import { Jazzicon } from '@metamask/design-system-react-native';
 </Jazzicon>
 
 // Override default styles
-<Jazzicon 
+<Jazzicon
   seed={123}
   twClassName="!rounded-lg"
 >
@@ -93,9 +93,9 @@ import { Jazzicon } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -106,9 +106,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const StyleExample = () => (
-  <Jazzicon seed={789} style={styles.custom} />
-);
+export const StyleExample = () => <Jazzicon seed={789} style={styles.custom} />;
 ```
 
 ## References

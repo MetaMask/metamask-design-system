@@ -14,9 +14,9 @@ import { AvatarToken } from '@metamask/design-system-react-native';
 
 The token name for the avatar.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | Yes | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | Yes      | `undefined` |
 
 ```tsx
 <AvatarToken name="ethereum" />
@@ -34,9 +34,9 @@ Available sizes:
 - `AvatarSize.Lg` (40px)
 - `AvatarSize.Xl` (48px)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `AvatarSize` | No | `AvatarSize.Md` |
+| TYPE         | REQUIRED | DEFAULT         |
+| ------------ | -------- | --------------- |
+| `AvatarSize` | No       | `AvatarSize.Md` |
 
 ```tsx
 <AvatarToken name="ethereum" size={AvatarSize.Sm} />
@@ -48,12 +48,12 @@ Available sizes:
 
 Custom image source for the token avatar.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ImageSourcePropType` | No | `undefined` |
+| TYPE                  | REQUIRED | DEFAULT     |
+| --------------------- | -------- | ----------- |
+| `ImageSourcePropType` | No       | `undefined` |
 
 ```tsx
-<AvatarToken 
+<AvatarToken
   name="custom-token"
   imageSource={{ uri: 'https://example.com/token-icon.png' }}
 />
@@ -63,15 +63,12 @@ Custom image source for the token avatar.
 
 Text to display when the token image fails to load.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
-<AvatarToken 
-  name="ethereum"
-  fallbackText="ETH"
-/>
+<AvatarToken name="ethereum" fallbackText="ETH" />
 ```
 
 ### `twClassName`
@@ -81,15 +78,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { AvatarToken } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<AvatarToken 
+<AvatarToken
   name="ethereum"
   twClassName="border-2 border-primary-100"
 >
@@ -97,7 +94,7 @@ import { AvatarToken } from '@metamask/design-system-react-native';
 </AvatarToken>
 
 // Override default styles
-<AvatarToken 
+<AvatarToken
   name="ethereum"
   twClassName="!bg-error-100"
 >
@@ -109,9 +106,9 @@ import { AvatarToken } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({

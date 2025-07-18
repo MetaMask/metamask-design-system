@@ -22,9 +22,9 @@ Available sizes:
 - `AvatarSize.Lg` (40px)
 - `AvatarSize.Xl` (48px)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `AvatarSize` | No | `AvatarSize.Md` |
+| TYPE         | REQUIRED | DEFAULT         |
+| ------------ | -------- | --------------- |
+| `AvatarSize` | No       | `AvatarSize.Md` |
 
 ```tsx
 <AvatarBase size={AvatarSize.Sm}>Small Avatar</AvatarBase>
@@ -36,9 +36,9 @@ Available sizes:
 
 The content of the AvatarBase component.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ReactNode` | No | `undefined` |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
 
 ```tsx
 import { AvatarBase } from '@metamask/design-system-react-native';
@@ -50,9 +50,9 @@ import { AvatarBase } from '@metamask/design-system-react-native';
 
 Background color of the avatar.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BackgroundColor` | No | `BackgroundColor.BackgroundAlternative` |
+| TYPE              | REQUIRED | DEFAULT                                 |
+| ----------------- | -------- | --------------------------------------- |
+| `BackgroundColor` | No       | `BackgroundColor.BackgroundAlternative` |
 
 ```tsx
 <AvatarBase backgroundColor={BackgroundColor.BackgroundDefault}>
@@ -64,9 +64,9 @@ Background color of the avatar.
 
 Border color of the avatar.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BorderColor` | No | `BorderColor.BorderDefault` |
+| TYPE          | REQUIRED | DEFAULT                     |
+| ------------- | -------- | --------------------------- |
+| `BorderColor` | No       | `BorderColor.BorderDefault` |
 
 ```tsx
 <AvatarBase borderColor={BorderColor.BorderMuted}>
@@ -81,9 +81,9 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { AvatarBase } from '@metamask/design-system-react-native';
@@ -103,9 +103,9 @@ import { AvatarBase } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({

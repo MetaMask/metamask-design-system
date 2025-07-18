@@ -16,25 +16,25 @@ import { BadgeWrapper } from '@metamask/design-system-react-native';
 
 The content to wrap with a badge.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ReactNode` | Yes | `undefined` |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | Yes      | `undefined` |
 
 ```tsx
 import { BadgeWrapper, BadgeCount } from '@metamask/design-system-react-native';
 
 <BadgeWrapper badge={<BadgeCount count={3} />}>
   <Text>Wrapped content</Text>
-</BadgeWrapper>
+</BadgeWrapper>;
 ```
 
 ### `badge`
 
 The badge component to display.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ReactNode` | Yes | `undefined` |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | Yes      | `undefined` |
 
 ```tsx
 <BadgeWrapper badge={<BadgeCount count={5} />}>
@@ -53,12 +53,12 @@ Available positions:
 - `BadgeWrapperPosition.BottomRight`
 - `BadgeWrapperPosition.BottomLeft`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BadgeWrapperPosition` | No | `BadgeWrapperPosition.TopRight` |
+| TYPE                   | REQUIRED | DEFAULT                         |
+| ---------------------- | -------- | ------------------------------- |
+| `BadgeWrapperPosition` | No       | `BadgeWrapperPosition.TopRight` |
 
 ```tsx
-<BadgeWrapper 
+<BadgeWrapper
   badge={<BadgeCount count={5} />}
   position={BadgeWrapperPosition.BottomRight}
 >
@@ -73,15 +73,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { BadgeWrapper } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<BadgeWrapper 
+<BadgeWrapper
   badge={<BadgeCount count={5} />}
   twClassName="bg-primary-100"
 >
@@ -89,7 +89,7 @@ import { BadgeWrapper } from '@metamask/design-system-react-native';
 </BadgeWrapper>
 
 // Override default styles
-<BadgeWrapper 
+<BadgeWrapper
   badge={<BadgeCount count={5} />}
   twClassName="!relative"
 >
@@ -101,9 +101,9 @@ import { BadgeWrapper } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -114,10 +114,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <BadgeWrapper 
-    badge={<BadgeCount count={5} />}
-    style={styles.custom}
-  >
+  <BadgeWrapper badge={<BadgeCount count={5} />} style={styles.custom}>
     <Text>Custom styled content</Text>
   </BadgeWrapper>
 );

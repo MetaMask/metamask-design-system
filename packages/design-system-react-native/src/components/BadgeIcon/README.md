@@ -14,9 +14,9 @@ import { BadgeIcon } from '@metamask/design-system-react-native';
 
 The icon name to display in the badge.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `IconName` | Yes | `undefined` |
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | Yes      | `undefined` |
 
 ```tsx
 <BadgeIcon name="CheckBold" />
@@ -33,9 +33,9 @@ Available variants:
 - `BadgeIconVariant.Warning`
 - `BadgeIconVariant.Info`
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BadgeIconVariant` | No | `BadgeIconVariant.Success` |
+| TYPE               | REQUIRED | DEFAULT                    |
+| ------------------ | -------- | -------------------------- |
+| `BadgeIconVariant` | No       | `BadgeIconVariant.Success` |
 
 ```tsx
 <BadgeIcon name="CheckBold" variant={BadgeIconVariant.Success} />
@@ -51,9 +51,9 @@ Available sizes:
 - `BadgeIconSize.Sm` (16px)
 - `BadgeIconSize.Md` (20px)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BadgeIconSize` | No | `BadgeIconSize.Md` |
+| TYPE            | REQUIRED | DEFAULT            |
+| --------------- | -------- | ------------------ |
+| `BadgeIconSize` | No       | `BadgeIconSize.Md` |
 
 ```tsx
 <BadgeIcon name="CheckBold" size={BadgeIconSize.Sm} />
@@ -67,15 +67,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { BadgeIcon } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<BadgeIcon 
+<BadgeIcon
   name="CheckBold"
   twClassName="border-2 border-primary-100"
 >
@@ -83,7 +83,7 @@ import { BadgeIcon } from '@metamask/design-system-react-native';
 </BadgeIcon>
 
 // Override default styles
-<BadgeIcon 
+<BadgeIcon
   name="CheckBold"
   twClassName="!bg-error-100"
 >
@@ -95,9 +95,9 @@ import { BadgeIcon } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({

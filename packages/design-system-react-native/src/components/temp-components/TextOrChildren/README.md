@@ -14,9 +14,9 @@ import { TextOrChildren } from '@metamask/design-system-react-native';
 
 The content to render. If a string, renders as Text component; otherwise renders child components directly.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ReactNode` | Yes | `undefined` |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | Yes      | `undefined` |
 
 ```tsx
 import { TextOrChildren } from '@metamask/design-system-react-native';
@@ -34,15 +34,15 @@ import { TextOrChildren } from '@metamask/design-system-react-native';
 
 Optional props to configure the Text component when children is a string.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `Partial<Omit<TextProps, 'children'>>` | No | `undefined` |
+| TYPE                                   | REQUIRED | DEFAULT     |
+| -------------------------------------- | -------- | ----------- |
+| `Partial<Omit<TextProps, 'children'>>` | No       | `undefined` |
 
 ```tsx
 <TextOrChildren
-  textProps={{ 
-    variant: TextVariant.BodyMd, 
-    color: TextColor.PrimaryDefault 
+  textProps={{
+    variant: TextVariant.BodyMd,
+    color: TextColor.PrimaryDefault,
   }}
 >
   Styled Text
@@ -56,9 +56,9 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { TextOrChildren } from '@metamask/design-system-react-native';
@@ -78,9 +78,9 @@ import { TextOrChildren } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
@@ -91,9 +91,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <TextOrChildren style={styles.custom}>
-    Custom styled content
-  </TextOrChildren>
+  <TextOrChildren style={styles.custom}>Custom styled content</TextOrChildren>
 );
 ```
 

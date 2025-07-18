@@ -5,9 +5,7 @@ ButtonBase is used to render base button elements within an interface.
 ```tsx
 import { ButtonBase } from '@metamask/design-system-react-native';
 
-<ButtonBase onPress={() => console.log('Pressed')}>
-  Button Content
-</ButtonBase>;
+<ButtonBase onPress={() => console.log('Pressed')}>Button Content</ButtonBase>;
 ```
 
 ## Props
@@ -16,9 +14,9 @@ import { ButtonBase } from '@metamask/design-system-react-native';
 
 The content of the ButtonBase component.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ReactNode` | No | `undefined` |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
 
 ```tsx
 import { ButtonBase } from '@metamask/design-system-react-native';
@@ -32,23 +30,21 @@ import { ButtonBase } from '@metamask/design-system-react-native';
 
 Function to trigger when pressing the button.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `() => void` | Yes | `undefined` |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | Yes      | `undefined` |
 
 ```tsx
-<ButtonBase onPress={() => console.log('Button pressed')}>
-  Press me
-</ButtonBase>
+<ButtonBase onPress={() => console.log('Button pressed')}>Press me</ButtonBase>
 ```
 
 ### `isDisabled`
 
 Whether the button is disabled.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `boolean` | No | `false` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
 <ButtonBase isDisabled onPress={() => {}}>
@@ -63,12 +59,12 @@ The size of the button.
 Available sizes:
 
 - `ButtonBaseSize.Sm` (32px height)
-- `ButtonBaseSize.Md` (40px height)  
+- `ButtonBaseSize.Md` (40px height)
 - `ButtonBaseSize.Lg` (48px height)
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `ButtonBaseSize` | No | `ButtonBaseSize.Md` |
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `ButtonBaseSize` | No       | `ButtonBaseSize.Md` |
 
 ```tsx
 <ButtonBase size={ButtonBaseSize.Sm} onPress={() => {}}>
@@ -83,9 +79,9 @@ Available sizes:
 
 Border radius of the button.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `BorderRadius` | No | `BorderRadius.MD` |
+| TYPE           | REQUIRED | DEFAULT           |
+| -------------- | -------- | ----------------- |
+| `BorderRadius` | No       | `BorderRadius.MD` |
 
 ```tsx
 <ButtonBase borderRadius={BorderRadius.LG} onPress={() => {}}>
@@ -100,15 +96,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `string` | No | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { ButtonBase } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<ButtonBase 
+<ButtonBase
   onPress={() => {}}
   twClassName="border-2 border-primary-100"
 >
@@ -116,7 +112,7 @@ import { ButtonBase } from '@metamask/design-system-react-native';
 </ButtonBase>
 
 // Override default styles
-<ButtonBase 
+<ButtonBase
   onPress={() => {}}
   twClassName="!bg-error-100"
 >
@@ -128,9 +124,9 @@ import { ButtonBase } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE | REQUIRED | DEFAULT |
-|------|----------|---------|
-| `StyleProp<ViewStyle>` | No | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 const styles = StyleSheet.create({
