@@ -1,0 +1,12 @@
+{
+  "codeConnect": {
+    "include": ["packages/design-system-react-native/src/components/**/*.tsx"],
+    "exclude": ["**/temp-components/**/*"],
+    "parser": "react",
+    "label": "React Native",
+    "importPaths": {
+      "packages/design-system-react-native/src/components/*": "@metamask/design-system-react-native"
+    },
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?m=auto&node-id=1905-4770"
+  }
+}

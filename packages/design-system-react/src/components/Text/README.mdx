@@ -4,21 +4,42 @@ import * as TextStories from './Text.stories';
 
 # Text
 
-Text is the used to render text and paragraphs within an interface
+Text is used to render text and paragraphs within an interface.
 
 ```tsx
 import { Text } from '@metamask/design-system-react';
 
-<Text>Text component</Text>;
+<Text>Hello World</Text>;
 ```
 
 <Canvas of={TextStories.Default} />
 
 ## Props
 
-### Variant
+### `variant`
 
 Use the `variant` prop and the `TextVariant` enum from `@metamask/design-system-react` to change the font size of the component. The `Text` component uses responsive font sizes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextVariant</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextVariant.BodyMd</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <table>
   <thead>
@@ -147,15 +168,57 @@ Use the `variant` prop and the `TextVariant` enum from `@metamask/design-system-
 
 <Canvas of={TextStories.Variant} />
 
-### Color
+### `color`
 
 Use the `color` prop and the `TextColor` enum from `@metamask/design-system-react` to change the color of the `Text` component.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextColor</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextColor.TextDefault</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={TextStories.Color} />
 
-### Font Weight
+### `fontWeight`
 
 Use the `fontWeight` prop and the `FontWeight` enum from `@metamask/design-system-react` to change the font weight of the `Text` component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>FontWeight</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>FontWeight.Regular</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <table>
   <thead>
@@ -198,9 +261,30 @@ Use the `fontWeight` prop and the `FontWeight` enum from `@metamask/design-syste
 
 <Canvas of={TextStories.FontWeightStory} />
 
-### Font Family
+### `fontFamily`
 
 Use the `fontFamily` prop and the `FontFamily` enum from `@metamask/design-system-react` to change the font family of the `Text` component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>FontFamily</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>FontFamily.Default</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <table>
   <thead>
@@ -243,100 +327,245 @@ Use the `fontFamily` prop and the `FontFamily` enum from `@metamask/design-syste
 
 <Canvas of={TextStories.FontFamilyStory} />
 
-### Font Style
+### `fontStyle`
 
-Use the `fontStyle` prop and the `FontStyle` enum from `@metamask/design-system-react` to change the font style of the `Text` component. There are 2 font styles:
+Use the `fontStyle` prop and the `FontStyle` enum from `@metamask/design-system-react` to change the font style of the `Text` component.
 
-- `FontStyle.Normal`
-- `FontStyle.Italic`
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>FontStyle</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>FontStyle.Normal</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={TextStories.FontStyleStory} />
 
-### Text Transform
+### `textTransform`
 
 Use the `textTransform` prop and the `TextTransform` enum from `@metamask/design-system-react` to change the text transformation of the `Text` component.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextTransform</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextTransform.None</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={TextStories.TextTransformStory} />
 
-### Text Align
+### `textAlign`
 
 Use the `textAlign` prop and the `TextAlign` enum from `@metamask/design-system-react` to change the text alignment of the `Text` component.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextAlign</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextAlign.Auto</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={TextStories.TextAlignStory} />
 
-### Overflow Wrap
+### `overflowWrap`
 
 Use the `overflowWrap` prop and the `OverflowWrap` enum from `@metamask/design-system-react` to change the overflow wrap of the `Text` component.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>OverflowWrap</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>OverflowWrap.Normal</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={TextStories.OverflowWrapStory} />
 
-### Ellipsis
+### `ellipsis`
 
 Use the boolean `ellipsis` prop to make the `Text` component have an ellipsis.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={TextStories.Ellipsis} />
 
-### AsChild
+### `asChild`
 
 Use the `asChild` prop to compose the Text component with other components while maintaining the Text's styles. This allows you to merge the Text component's styles onto its child component instead of rendering an additional DOM element.
 
-When using `asChild`, you must provide exactly one child element that can accept a className prop. This works with both interactive elements like buttons and inputs, as well as standard HTML elements.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={TextStories.AsChild} />
 
-Examples:
+### `children`
 
-```jsx
-// Span example
-<Text asChild className="block">
-  <span>Text rendered as span</span>
-</Text>
+The text content of the `Text` component.
 
-// Button example with click handler
-<Text asChild className="block">
-  <button type="button" onClick={() => console.log('button clicked')}>
-    Text rendered as button
-  </button>
-</Text>
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-// Input example with styling
-<Text asChild className="bg-default border border-default">
-  <input
-    type="text"
-    placeholder="Rendered as input"
-    defaultValue="Text component as input"
-  />
-</Text>
-```
-
-Note: When using `asChild` with form elements like inputs, the Text component's styles will be applied while maintaining the element's native functionality. You can also add additional className props to further customize the styling of the rendered element.
-
-### Class Name
+### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Adding new styles
-<Text className="my-4 mx-2">Text content</Text>
+### `style`
 
-// Overriding default styles
-<Text className="text-inherit">Text content</Text>
-```
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
-Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
-
-### Style
-
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
-
-### Children
-
-The text content of the `Text` component.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 

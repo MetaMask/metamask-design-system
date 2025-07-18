@@ -4,7 +4,7 @@ import * as ButtonIconStories from './ButtonIcon.stories';
 
 # ButtonIcon
 
-A Button Icon is a compact, icon-only button that triggers an action, designed for quick, space-efficient interactions
+A Button Icon is a compact, icon-only button that triggers an action, designed for quick, space-efficient interactions.
 
 ```tsx
 import { ButtonIcon, IconName } from '@metamask/design-system-react';
@@ -16,74 +16,224 @@ import { ButtonIcon, IconName } from '@metamask/design-system-react';
 
 ## Props
 
-### Accessibility
+### `iconName`
 
-ButtonIcon requires an `ariaLabel` prop to ensure accessibility for screen readers. This label should clearly describe the button's action.
+Use the `iconName` prop to specify which icon to display from the design system's icon set.
 
-```tsx
-<ButtonIcon
-  iconName={IconName.Close}
-  ariaLabel="Close dialog"
-  onClick={() => closeDialog()}
-/>
-```
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `ariaLabel`
+
+Required prop for accessibility. This label should clearly describe the button's action for screen readers.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ButtonIconStories.AriaLabel} />
 
-The `ariaLabel` should:
+### `size`
 
-- Be clear and concise
-- Describe the action (e.g., "Close dialog" rather than just "Close")
-- Be unique if multiple ButtonIcons are present
-- Reflect the current state if applicable
+ButtonIcon supports three sizes.
 
-### Size
-
-ButtonIcon supports three sizes:
+Available sizes:
 
 - `ButtonIconSize.Sm` (24px)
-- `ButtonIconSize.Md` (32px) - default
+- `ButtonIconSize.Md` (32px)
 - `ButtonIconSize.Lg` (40px)
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ButtonIconSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>ButtonIconSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ButtonIconStories.Size} />
 
-### IsFloating
+### `isFloating`
 
 Use `isFloating` to apply a contained, floating button style.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonIconStories.IsFloating} />
 
-### IsInverse
+### `isInverse`
 
 Use `isInverse` when the button needs to be displayed on a dark background.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonIconStories.IsInverse} />
 
-### IsDisabled
+### `isDisabled`
 
 ButtonIcon can be disabled.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonIconStories.IsDisabled} />
 
-### Class Name
+### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Adding new styles
-<ButtonIcon className="mx-2 my-4" iconName={IconName.Close} />
-```
+### `style`
 
-Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
-### Style
-
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 
