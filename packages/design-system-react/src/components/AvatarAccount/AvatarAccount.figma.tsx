@@ -1,5 +1,5 @@
 // import figma needs to remain as figma otherwise it breaks code connect
-/* eslint-disable import-x/no-named-as-default */
+// eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
 import React from 'react';
 
