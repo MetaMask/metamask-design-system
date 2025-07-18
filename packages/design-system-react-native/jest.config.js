@@ -30,6 +30,7 @@ module.exports = merge(baseConfig, {
     '\\.d\\.ts$',
     '\\.constants\\.ts$', // ignore all .constants.ts files
     '\\.dev\\.ts$', // ignore all .dev.ts files
+    '\\.figma\\.tsx', // Figma code connect files
     'Icon.assets.ts', // Exclude Icon.assets file
     'Blockies.utilities.ts', // Exclude Blockies.utilities file
   ],
