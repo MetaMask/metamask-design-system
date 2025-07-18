@@ -141,19 +141,9 @@ const config = createConfig([
 
       // TODO: These rules created more errors after the upgrade to ESLint 9.
       // Re-enable these rules and address any lint violations.
-      '@typescript-eslint/consistent-type-exports': 'warn',
+
       '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/no-base-to-string': 'warn',
-      '@typescript-eslint/no-duplicate-enum-values': 'warn',
-      '@typescript-eslint/no-misused-promises': 'warn',
-      '@typescript-eslint/no-unsafe-enum-comparison': 'warn',
-      '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/only-throw-error': 'warn',
-      '@typescript-eslint/prefer-promise-reject-errors': 'warn',
-      '@typescript-eslint/prefer-readonly': 'warn',
-      '@typescript-eslint/no-shadow': 'warn',
-      'import-x/namespace': 'warn',
-      'import-x/no-named-as-default': 'warn',
+
       // Overrides eslint base config which isn't following outer most pattern. Can be removed once this issue is resolved and eslint config updated
       // issue: https://github.com/MetaMask/eslint-config/issues/403
       'import-x/order': [
@@ -179,15 +169,6 @@ const config = createConfig([
           },
         },
       ],
-      'jsdoc/check-tag-names': 'warn',
-      'jsdoc/require-returns': 'warn',
-      'jsdoc/require-param-description': 'warn',
-      'jsdoc/require-returns-description': 'warn',
-      'jsdoc/tag-lines': 'warn',
-      'no-unused-private-class-members': 'warn',
-      'promise/always-return': 'warn',
-      'promise/catch-or-return': 'warn',
-      'promise/param-names': 'warn',
     },
   },
   {
@@ -216,12 +197,6 @@ const config = createConfig([
     rules: {
       // These files run under Node, and thus `require(...)` is expected.
       'n/global-require': 'off',
-
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-      'n/prefer-global/text-encoder': 'warn',
-      'n/prefer-global/text-decoder': 'warn',
-      'no-shadow': 'warn',
     },
   },
   {
