@@ -4,8 +4,7 @@ import { View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { ButtonBaseSize } from '../../types';
-import { Icon } from '../Icon';
-import { IconColor, IconSize } from '../Icon';
+import { Icon, IconColor, IconSize } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import { Spinner } from '../temp-components/Spinner';
 import { TextOrChildren } from '../temp-components/TextOrChildren/TextOrChildren';

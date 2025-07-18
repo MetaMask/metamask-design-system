@@ -46,30 +46,18 @@ const config = createConfig([
   },
   {
     rules: {
-      // Left disabled because various properties throughough this repo are snake_case because the
-      // names come from external sources or must comply with standards
-      // e.g. `txreceipt_status`, `signTypedData_v4`, `token_id`
-      camelcase: 'off',
-      'id-length': 'off',
-
       // TODO: re-enble most of these rules
+      'id-length': 'off',
       'id-denylist': 'off',
       'import-x/no-unassigned-import': 'off',
       'no-negated-condition': 'off',
       'no-param-reassign': 'off',
       'no-restricted-syntax': 'off',
-      radix: 'off',
       'require-atomic-updates': 'off',
       'jsdoc/match-description': [
         'off',
         { matchDescription: '^[A-Z`\\d_][\\s\\S]*[.?!`>)}]$' },
       ],
-
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-      'import-x/no-named-as-default-member': 'warn',
-      'prettier/prettier': 'warn',
-      'no-empty-function': 'warn',
     },
     settings: {
       jsdoc: {
@@ -89,21 +77,11 @@ const config = createConfig([
     rules: {
       // TODO: Re-enable this
       'n/no-sync': 'off',
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-      'n/no-unsupported-features/node-builtins': 'warn',
     },
   },
   {
     files: ['**/*.test.{js,ts,tsx}'],
     extends: [jest],
-    rules: {
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-      'jest/no-conditional-in-test': 'warn',
-      'jest/prefer-lowercase-title': 'warn',
-      'jest/prefer-strict-equal': 'warn',
-    },
     settings: {
       node: {
         version: `^${NODE_LTS_VERSION}`,
@@ -142,7 +120,7 @@ const config = createConfig([
       // This rule does not detect multiple imports of the same file where types
       // are being imported in one case and runtime values are being imported in
       // another
-      'import-x/no-duplicates': 'off',
+      // 'import-x/no-duplicates': 'off',
 
       // Enable rules that are disabled in `@metamask/eslint-config-typescript`
       '@typescript-eslint/no-explicit-any': 'error',
