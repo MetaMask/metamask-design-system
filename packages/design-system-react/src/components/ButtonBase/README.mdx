@@ -4,7 +4,7 @@ import * as ButtonBaseStories from './ButtonBase.stories';
 
 # ButtonBase
 
-`ButtonBase` is a labeled element that a user can click or tap to initiate an action.
+ButtonBase is a labeled element that a user can click or tap to initiate an action.
 
 ```tsx
 import { ButtonBase } from '@metamask/design-system-react';
@@ -14,140 +14,439 @@ import { ButtonBase } from '@metamask/design-system-react';
 
 <Canvas of={ButtonBaseStories.Default} />
 
-### Children
+## Props
+
+### `children`
 
 ButtonBase accepts both string and non-string children, with different rendering behavior:
 
 - **String children:** Automatically wrapped in a Text component for consistent typography
 - **Non-string children:** Rendered as-is without the Text wrapper
 
-This means:
-
-- When passing a string, you can customize its appearance with the `textProps` prop
-- When passing a custom component or HTML, you're responsible for styling it yourself
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ButtonBaseStories.Children} />
 
-### Size
+### `size`
 
-ButtonBase supports three sizes:
+ButtonBase supports three sizes.
+
+Available sizes:
 
 - `ButtonBaseSize.Sm` (32px)
 - `ButtonBaseSize.Md` (40px)
-- `ButtonBaseSize.Lg` (48px) - default
+- `ButtonBaseSize.Lg` (48px)
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ButtonBaseSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>ButtonBaseSize.Lg</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ButtonBaseStories.Size} />
 
-```tsx
-import { ButtonBase, ButtonBaseSize } from '@metamask/design-system-react';
-
-<ButtonBase size={ButtonBaseSize.Sm}>Small</ButtonBase>
-<ButtonBase size={ButtonBaseSize.Md}>Medium</ButtonBase>
-<ButtonBase size={ButtonBaseSize.Lg}>Large</ButtonBase>
-```
-
-### IsFullWidth
+### `isFullWidth`
 
 ButtonBase can be set to take up the full width of its container.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonBaseStories.IsFullWidth} />
 
-### StartIconName and EndIconName
+### `startIconName`
 
-ButtonBase can display icons at the start and/or end of the content.
+ButtonBase can display an icon at the start of the content.
 
-#### StartIconName
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ButtonBaseStories.StartIconName} />
 
-```tsx
-import { ButtonBase, IconName } from '@metamask/design-system-react';
+### `endIconName`
 
-<ButtonBase startIconName={IconName.AddSquare}>With Start Icon</ButtonBase>;
-```
+ButtonBase can display an icon at the end of the content.
 
-#### EndIconName
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ButtonBaseStories.EndIconName} />
 
-```tsx
-import { ButtonBase, IconName } from '@metamask/design-system-react';
+### `startAccessory`
 
-<ButtonBase endIconName={IconName.AddSquare}>With End Icon</ButtonBase>;
-```
+ButtonBase can display custom accessories at the start of the content.
 
-### StartAccessory and EndAccessory
-
-ButtonBase can display custom accessories at the start and/or end of the content.
-
-#### StartAccessory
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ButtonBaseStories.StartAccessory} />
 
-#### EndAccessory
+### `endAccessory`
+
+ButtonBase can display custom accessories at the end of the content.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ButtonBaseStories.EndAccessory} />
 
-### IsLoading
+### `isLoading`
 
 ButtonBase can show a loading state with optional loading text. You can customize the loading icon using `loadingIconProps` and the loading text using `loadingTextProps`.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonBaseStories.IsLoading} />
 
-```tsx
-import { ButtonBase } from '@metamask/design-system-react';
+### `loadingText`
 
-// Default loading state
-<ButtonBase isLoading loadingText="Submitting...">
-  Submit
-</ButtonBase>
+Optional loading text displayed when the button is in loading state.
 
-// Custom loading icon
-<ButtonBase
-  isLoading
-  loadingText="Submitting..."
-  loadingIconProps={{
-    'data-testid': 'loading-icon'
-  }}
->
-  Submit
-</ButtonBase>
-```
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-### IsDisabled
+### `loadingIconProps`
+
+Optional props for the loading icon component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `loadingTextProps`
+
+Optional props for the loading text component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `isDisabled`
 
 ButtonBase can be disabled.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonBaseStories.IsDisabled} />
 
-### AsChild
+### `asChild`
 
 ButtonBase can render as different elements using the `asChild` prop.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonBaseStories.AsChild} />
 
-### Class Name
+### `textProps`
+
+Optional props for the text component when children are strings.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Adding new styles
-<ButtonBase className="my-4 mx-2">Button content</ButtonBase>
+### `style`
 
-// Overriding default styles
-<ButtonBase className="bg-primary-default text-primary-inverse">Custom styled button</ButtonBase>
-```
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
-Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
-
-### Style
-
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 
