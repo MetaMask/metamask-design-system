@@ -1,7 +1,6 @@
 import type { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import type { AvatarBaseProps } from '../AvatarBase';
-import type { IconName } from '../Icon';
-import type { IconProps } from '../Icon';
+import type { IconName, IconProps } from '../Icon';
 
 export type AvatarIconProps = Omit<AvatarBaseProps, 'children' | 'size'> & {
   /**
