@@ -4,7 +4,7 @@ import * as ButtonStories from './Button.stories';
 
 # Button
 
-`Button` is a labeled element that a user can click or tap to initiate an action.
+Button is a labeled element that a user can click or tap to initiate an action.
 
 ```tsx
 import { Button } from '@metamask/design-system-react';
@@ -16,89 +16,363 @@ import { Button } from '@metamask/design-system-react';
 
 ## Props
 
-### Variant
+### `variant`
 
-The Button component supports three variants:
+The visual variant of the Button.
 
-- `ButtonVariant.Primary` (default) - High emphasis, used for primary actions
+Available variants:
+
+- `ButtonVariant.Primary` - High emphasis, used for primary actions
 - `ButtonVariant.Secondary` - Medium emphasis, used for secondary actions
 - `ButtonVariant.Tertiary` - Low emphasis, used for tertiary actions
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ButtonVariant</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>ButtonVariant.Primary</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonStories.Variant} />
 
-### Size
+### `size`
 
-Buttons support three sizes:
+The size of the Button.
 
-- `Sm` (32px)
-- `Md` (40px)
-- `Lg` (48px) - default
+Available sizes:
+
+- `ButtonSize.Sm` (32px)
+- `ButtonSize.Md` (40px)
+- `ButtonSize.Lg` (48px)
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ButtonSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>ButtonSize.Lg</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ButtonStories.Size} />
 
-### IsDanger
+### `children`
+
+The content of the Button component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `isDanger`
 
 Use `isDanger` for destructive actions.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonStories.IsDanger} />
 
-### IsInverse
+### `isInverse`
 
 Use `isInverse` when the button needs to be displayed on a dark background.
 
-> NOTE: When both `isInverse` and `isDanger` are set to `true`, all button variants (Primary, Secondary, and Tertiary) will have the same inverse danger styling.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ButtonStories.IsInverse} />
 
-### StartIconName
+### `startIconName`
 
 Buttons can display an icon at the start of the content.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonStories.StartIconName} />
 
-### EndIconName
+### `endIconName`
 
 Buttons can display an icon at the end of the content.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonStories.EndIconName} />
 
-### IsLoading
+### `isLoading`
 
 Buttons can show a loading state with optional loading text.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonStories.IsLoading} />
 
-### IsDisabled
+### `loadingText`
+
+Text to display when button is in loading state.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `isDisabled`
 
 Buttons can be disabled.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonStories.IsDisabled} />
 
-### IsFullWidth
+### `isFullWidth`
 
 Buttons can be set to take up the full width of their container.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={ButtonStories.IsFullWidth} />
 
-### Class Name
+### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Example:
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-```tsx
-// Adding new styles
-<Button className="mx-2 my-4">Button content</Button>
-```
+### `style`
 
-Note: When using `className` to override default styles, the custom classes will take precedence over the component's default classes.
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
 
-### Style
-
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with className alone. For static styles, prefer using className with Tailwind classes.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Component API
 
