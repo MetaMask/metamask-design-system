@@ -116,12 +116,6 @@ const config = createConfig([
           considerDefaultExhaustiveForUnions: true,
         },
       ],
-
-      // This rule does not detect multiple imports of the same file where types
-      // are being imported in one case and runtime values are being imported in
-      // another
-      // 'import-x/no-duplicates': 'off',
-
       // Enable rules that are disabled in `@metamask/eslint-config-typescript`
       '@typescript-eslint/no-explicit-any': 'error',
 
@@ -138,10 +132,6 @@ const config = createConfig([
       '@typescript-eslint/prefer-reduce-type-parameter': 'off',
       'no-restricted-syntax': 'off',
       'no-restricted-globals': 'off',
-
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-
       '@typescript-eslint/explicit-function-return-type': 'off',
 
       // Overrides eslint base config which isn't following outer most pattern. Can be removed once this issue is resolved and eslint config updated
