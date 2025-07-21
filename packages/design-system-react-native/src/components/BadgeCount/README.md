@@ -22,7 +22,7 @@ The count value to display in the badge.
 <BadgeCount count={5} />
 ```
 
-### `maxCount`
+### `max`
 
 Maximum count to display before showing overflow indicator (e.g., "99+").
 
@@ -31,19 +31,20 @@ Maximum count to display before showing overflow indicator (e.g., "99+").
 | `number` | No       | `99`    |
 
 ```tsx
-<BadgeCount count={150} maxCount={99} />
+<BadgeCount count={150} max={99} />
 ```
 
-### `showZero`
+### `size`
 
-Whether to show the badge when count is zero.
+The size of the BadgeCount.
 
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `false` |
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `BadgeCountSize` | No       | `BadgeCountSize.Md` |
 
 ```tsx
-<BadgeCount count={0} showZero />
+<BadgeCount count={5} size={BadgeCountSize.Sm} />
+<BadgeCount count={10} size={BadgeCountSize.Lg} />
 ```
 
 ### `twClassName`

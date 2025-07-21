@@ -14,9 +14,9 @@ import { ButtonBase } from '@metamask/design-system-react-native';
 
 The content of the ButtonBase component.
 
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
+| TYPE                        | REQUIRED | DEFAULT     |
+| --------------------------- | -------- | ----------- |
+| `React.ReactNode \| string` | Yes      | `undefined` |
 
 ```tsx
 import { ButtonBase } from '@metamask/design-system-react-native';

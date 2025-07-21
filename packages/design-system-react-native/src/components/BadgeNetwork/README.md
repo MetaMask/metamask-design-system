@@ -22,18 +22,18 @@ The network name for the badge.
 <BadgeNetwork name="ethereum" />
 ```
 
-### `imageSource`
+### `src`
 
 Custom image source for the network badge.
 
-| TYPE                  | REQUIRED | DEFAULT     |
-| --------------------- | -------- | ----------- |
-| `ImageSourcePropType` | No       | `undefined` |
+| TYPE            | REQUIRED | DEFAULT     |
+| --------------- | -------- | ----------- |
+| `ImageOrSvgSrc` | No       | `undefined` |
 
 ```tsx
 <BadgeNetwork
   name="custom-network"
-  imageSource={{ uri: 'https://example.com/network-icon.png' }}
+  src={{ uri: 'https://example.com/network-icon.png' }}
 />
 ```
 

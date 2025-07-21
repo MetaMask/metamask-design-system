@@ -16,7 +16,7 @@ The network name for the avatar.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
-| `string` | Yes      | `undefined` |
+| `string` | No       | `undefined` |
 
 ```tsx
 <AvatarNetwork name="ethereum" />
@@ -28,34 +28,34 @@ The size of the AvatarNetwork.
 
 Available sizes:
 
-- `AvatarSize.Xs` (16px)
-- `AvatarSize.Sm` (24px)
-- `AvatarSize.Md` (32px)
-- `AvatarSize.Lg` (40px)
-- `AvatarSize.Xl` (48px)
+- `AvatarBaseSize.Xs` (16px)
+- `AvatarBaseSize.Sm` (24px)
+- `AvatarBaseSize.Md` (32px)
+- `AvatarBaseSize.Lg` (40px)
+- `AvatarBaseSize.Xl` (48px)
 
-| TYPE         | REQUIRED | DEFAULT         |
-| ------------ | -------- | --------------- |
-| `AvatarSize` | No       | `AvatarSize.Md` |
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `AvatarBaseSize` | No       | `AvatarBaseSize.Md` |
 
 ```tsx
-<AvatarNetwork name="ethereum" size={AvatarSize.Sm} />
+<AvatarNetwork name="ethereum" size={AvatarBaseSize.Sm} />
 <AvatarNetwork name="ethereum" />
-<AvatarNetwork name="ethereum" size={AvatarSize.Lg} />
+<AvatarNetwork name="ethereum" size={AvatarBaseSize.Lg} />
 ```
 
-### `imageSource`
+### `src`
 
 Custom image source for the network avatar.
 
-| TYPE                  | REQUIRED | DEFAULT     |
-| --------------------- | -------- | ----------- |
-| `ImageSourcePropType` | No       | `undefined` |
+| TYPE            | REQUIRED | DEFAULT     |
+| --------------- | -------- | ----------- |
+| `ImageOrSvgSrc` | No       | `undefined` |
 
 ```tsx
 <AvatarNetwork
   name="custom-network"
-  imageSource={{ uri: 'https://example.com/network-icon.png' }}
+  src={{ uri: 'https://example.com/network-icon.png' }}
 />
 ```
 

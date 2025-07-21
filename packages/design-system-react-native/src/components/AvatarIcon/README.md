@@ -28,20 +28,20 @@ The size of the AvatarIcon.
 
 Available sizes:
 
-- `AvatarSize.Xs` (16px)
-- `AvatarSize.Sm` (24px)
-- `AvatarSize.Md` (32px)
-- `AvatarSize.Lg` (40px)
-- `AvatarSize.Xl` (48px)
+- `AvatarBaseSize.Xs` (16px)
+- `AvatarBaseSize.Sm` (24px)
+- `AvatarBaseSize.Md` (32px)
+- `AvatarBaseSize.Lg` (40px)
+- `AvatarBaseSize.Xl` (48px)
 
-| TYPE         | REQUIRED | DEFAULT         |
-| ------------ | -------- | --------------- |
-| `AvatarSize` | No       | `AvatarSize.Md` |
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `AvatarBaseSize` | No       | `AvatarBaseSize.Md` |
 
 ```tsx
-<AvatarIcon name="Bank" size={AvatarSize.Sm} />
+<AvatarIcon name="Bank" size={AvatarBaseSize.Sm} />
 <AvatarIcon name="Bank" />
-<AvatarIcon name="Bank" size={AvatarSize.Lg} />
+<AvatarIcon name="Bank" size={AvatarBaseSize.Lg} />
 ```
 
 ### `iconColor`
