@@ -5,35 +5,35 @@ Checkbox allows users to select one or more options from a set of choices.
 ```tsx
 import { Checkbox } from '@metamask/design-system-react-native';
 
-<Checkbox isChecked={true} onValueChange={(value) => console.log(value)} />;
+<Checkbox isSelected={true} onChange={(value) => console.log(value)} />;
 ```
 
 ## Props
 
-### `isChecked`
+### `isSelected`
 
-Whether the checkbox is checked.
+Whether the checkbox is currently selected.
 
 | TYPE      | REQUIRED | DEFAULT     |
 | --------- | -------- | ----------- |
 | `boolean` | Yes      | `undefined` |
 
 ```tsx
-<Checkbox isChecked={true} onValueChange={() => {}} />
+<Checkbox isSelected={true} onChange={() => {}} />
 ```
 
-### `onValueChange`
+### `onChange`
 
-Function called when the checkbox value changes.
+Function called when the checkbox selection changes.
 
-| TYPE                       | REQUIRED | DEFAULT     |
-| -------------------------- | -------- | ----------- |
-| `(value: boolean) => void` | Yes      | `undefined` |
+| TYPE                            | REQUIRED | DEFAULT     |
+| ------------------------------- | -------- | ----------- |
+| `(isSelected: boolean) => void` | Yes      | `undefined` |
 
 ```tsx
 <Checkbox
-  isChecked={false}
-  onValueChange={(checked) => console.log('Checked:', checked)}
+  isSelected={false}
+  onChange={(selected) => console.log('Selected:', selected)}
 />
 ```
 
@@ -46,52 +46,68 @@ Whether the checkbox is disabled.
 | `boolean` | No       | `false` |
 
 ```tsx
-<Checkbox isChecked={true} isDisabled onValueChange={() => {}} />
+<Checkbox isSelected={true} isDisabled onChange={() => {}} />
 ```
 
-### `isIndeterminate`
+### `isInvalid`
 
-Whether the checkbox is in an indeterminate state.
+Whether the checkbox is in an invalid/error state.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
 ```tsx
-<Checkbox isChecked={false} isIndeterminate onValueChange={() => {}} />
+<Checkbox isSelected={false} isInvalid onChange={() => {}} />
 ```
 
 ### `label`
 
-Label text for the checkbox.
+Label text or React node for the checkbox.
 
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
+| TYPE                        | REQUIRED | DEFAULT     |
+| --------------------------- | -------- | ----------- |
+| `React.ReactNode \| string` | No       | `undefined` |
 
 ```tsx
 <Checkbox
-  isChecked={false}
+  isSelected={false}
   label="Accept terms and conditions"
-  onValueChange={() => {}}
+  onChange={() => {}}
 />
 ```
 
-### `size`
+### `labelProps`
 
-The size of the checkbox.
+Optional props to be passed to the label's Text component.
 
-Available sizes:
-
-- `CheckboxSize.Sm` (16px)
-- `CheckboxSize.Md` (20px)
-
-| TYPE           | REQUIRED | DEFAULT           |
-| -------------- | -------- | ----------------- |
-| `CheckboxSize` | No       | `CheckboxSize.Md` |
+| TYPE                                   | REQUIRED | DEFAULT     |
+| -------------------------------------- | -------- | ----------- |
+| `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
-<Checkbox isChecked={false} size={CheckboxSize.Sm} onValueChange={() => {}} />
+<Checkbox
+  isSelected={false}
+  label="Custom label"
+  labelProps={{ variant: TextVariant.BodySm, color: TextColor.TextMuted }}
+  onChange={() => {}}
+/>
+```
+
+### `checkedIconProps`
+
+Optional props to be passed to the check Icon component.
+
+| TYPE                 | REQUIRED | DEFAULT     |
+| -------------------- | -------- | ----------- |
+| `Partial<IconProps>` | No       | `undefined` |
+
+```tsx
+<Checkbox
+  isSelected={true}
+  checkedIconProps={{ color: IconColor.IconSuccess }}
+  onChange={() => {}}
+/>
 ```
 
 ### `twClassName`
@@ -110,21 +126,17 @@ import { Checkbox } from '@metamask/design-system-react-native';
 
 // Add additional styles
 <Checkbox
-  isChecked={false}
-  onValueChange={() => {}}
+  isSelected={false}
+  onChange={() => {}}
   twClassName="p-2"
->
-  Custom Padding
-</Checkbox>
+/>
 
 // Override default styles
 <Checkbox
-  isChecked={false}
-  onValueChange={() => {}}
+  isSelected={false}
+  onChange={() => {}}
   twClassName="!border-error-100"
->
-  Override Border
-</Checkbox>
+/>
 ```
 
 ### `style`
@@ -144,7 +156,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <Checkbox isChecked={false} onValueChange={() => {}} style={styles.custom} />
+  <Checkbox isSelected={false} onChange={() => {}} style={styles.custom} />
 );
 ```
 

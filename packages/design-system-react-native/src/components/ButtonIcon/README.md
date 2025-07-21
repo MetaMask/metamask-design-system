@@ -5,12 +5,12 @@ A Button Icon is a compact, icon-only button that triggers an action, designed f
 ```tsx
 import { ButtonIcon } from '@metamask/design-system-react-native';
 
-<ButtonIcon name="Edit" onPress={() => console.log('Pressed')} />;
+<ButtonIcon iconName="Edit" onPress={() => console.log('Pressed')} />;
 ```
 
 ## Props
 
-### `name`
+### `iconName`
 
 The icon name to display in the button.
 
@@ -19,7 +19,7 @@ The icon name to display in the button.
 | `IconName` | Yes      | `undefined` |
 
 ```tsx
-<ButtonIcon name="Edit" onPress={() => {}} />
+<ButtonIcon iconName="Edit" onPress={() => {}} />
 ```
 
 ### `onPress`
@@ -31,33 +31,9 @@ Function to trigger when pressing the button.
 | `() => void` | Yes      | `undefined` |
 
 ```tsx
-<ButtonIcon name="Settings" onPress={() => console.log('Settings pressed')} />
-```
-
-### `variant`
-
-The visual variant of the button.
-
-Available variants:
-
-- `ButtonIconVariant.Primary`
-- `ButtonIconVariant.Secondary`
-- `ButtonIconVariant.Tertiary`
-
-| TYPE                | REQUIRED | DEFAULT                     |
-| ------------------- | -------- | --------------------------- |
-| `ButtonIconVariant` | No       | `ButtonIconVariant.Primary` |
-
-```tsx
 <ButtonIcon
-  name="Edit"
-  variant={ButtonIconVariant.Primary}
-  onPress={() => {}}
-/>
-<ButtonIcon
-  name="Edit"
-  variant={ButtonIconVariant.Secondary}
-  onPress={() => {}}
+  iconName="Settings"
+  onPress={() => console.log('Settings pressed')}
 />
 ```
 
@@ -77,27 +53,15 @@ Available sizes:
 
 ```tsx
 <ButtonIcon
-  name="Edit"
+  iconName="Edit"
   size={ButtonIconSize.Sm}
   onPress={() => {}}
 />
 <ButtonIcon
-  name="Edit"
+  iconName="Edit"
   size={ButtonIconSize.Lg}
   onPress={() => {}}
 />
-```
-
-### `isDanger`
-
-Whether to show the button in danger state.
-
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `false` |
-
-```tsx
-<ButtonIcon name="Delete" isDanger onPress={() => {}} />
 ```
 
 ### `isDisabled`
@@ -109,7 +73,47 @@ Whether the button is disabled.
 | `boolean` | No       | `false` |
 
 ```tsx
-<ButtonIcon name="Edit" isDisabled onPress={() => {}} />
+<ButtonIcon iconName="Edit" isDisabled onPress={() => {}} />
+```
+
+### `isInverse`
+
+Whether to show the button with inverted colors for use on colored backgrounds.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<ButtonIcon iconName="Edit" isInverse onPress={() => {}} />
+```
+
+### `isFloating`
+
+Whether to show the button in floating/contained state for floating buttons.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<ButtonIcon iconName="Add" isFloating onPress={() => {}} />
+```
+
+### `iconProps`
+
+Optional props to pass to the Icon component.
+
+| TYPE                 | REQUIRED | DEFAULT     |
+| -------------------- | -------- | ----------- |
+| `Partial<IconProps>` | No       | `undefined` |
+
+```tsx
+<ButtonIcon
+  iconName="Edit"
+  iconProps={{ color: IconColor.IconPrimary }}
+  onPress={() => {}}
+/>
 ```
 
 ### `twClassName`
@@ -128,21 +132,17 @@ import { ButtonIcon } from '@metamask/design-system-react-native';
 
 // Add additional styles
 <ButtonIcon
-  name="Edit"
+  iconName="Edit"
   onPress={() => {}}
   twClassName="shadow-lg"
->
-  Custom Shadow
-</ButtonIcon>
+/>
 
 // Override default styles
 <ButtonIcon
-  name="Edit"
+  iconName="Edit"
   onPress={() => {}}
   twClassName="!bg-error-100"
->
-  Override Background
-</ButtonIcon>
+/>
 ```
 
 ### `style`
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <ButtonIcon name="Edit" onPress={() => {}} style={styles.custom} />
+  <ButtonIcon iconName="Edit" onPress={() => {}} style={styles.custom} />
 );
 ```
 

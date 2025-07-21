@@ -14,9 +14,9 @@ import { TextButton } from '@metamask/design-system-react-native';
 
 The text content of the TextButton component.
 
-| TYPE                  | REQUIRED | DEFAULT     |
-| --------------------- | -------- | ----------- |
-| `string \| ReactNode` | Yes      | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | Yes      | `undefined` |
 
 ```tsx
 import { TextButton } from '@metamask/design-system-react-native';
@@ -38,35 +38,6 @@ Function to trigger when pressing the button.
 </TextButton>
 ```
 
-### `variant`
-
-The visual variant of the text button.
-
-Available variants:
-
-- `TextButtonVariant.Primary`
-- `TextButtonVariant.Secondary`
-- `TextButtonVariant.Link`
-
-| TYPE                | REQUIRED | DEFAULT                     |
-| ------------------- | -------- | --------------------------- |
-| `TextButtonVariant` | No       | `TextButtonVariant.Primary` |
-
-```tsx
-<TextButton
-  variant={TextButtonVariant.Primary}
-  onPress={() => {}}
->
-  Primary Text Button
-</TextButton>
-<TextButton
-  variant={TextButtonVariant.Link}
-  onPress={() => {}}
->
-  Link Text Button
-</TextButton>
-```
-
 ### `size`
 
 The size of the text button.
@@ -77,21 +48,15 @@ Available sizes:
 - `TextButtonSize.Md`
 - `TextButtonSize.Lg`
 
-| TYPE             | REQUIRED | DEFAULT             |
-| ---------------- | -------- | ------------------- |
-| `TextButtonSize` | No       | `TextButtonSize.Md` |
+| TYPE             | REQUIRED | DEFAULT                 |
+| ---------------- | -------- | ----------------------- |
+| `TextButtonSize` | No       | `TextButtonSize.BodyMd` |
 
 ```tsx
-<TextButton
-  size={TextButtonSize.Sm}
-  onPress={() => {}}
->
+<TextButton size={TextButtonSize.Sm} onPress={() => {}}>
   Small Text Button
 </TextButton>
-<TextButton
-  size={TextButtonSize.Lg}
-  onPress={() => {}}
->
+<TextButton size={TextButtonSize.Lg} onPress={() => {}}>
   Large Text Button
 </TextButton>
 ```
@@ -107,6 +72,20 @@ Whether the text button is disabled.
 ```tsx
 <TextButton isDisabled onPress={() => {}}>
   Disabled Text Button
+</TextButton>
+```
+
+### `isInverse`
+
+Whether to show the button with inverted colors for use on colored backgrounds.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<TextButton isInverse onPress={() => {}}>
+  Inverse Text Button
 </TextButton>
 ```
 
@@ -135,6 +114,51 @@ Optional icon name to display after the text.
 ```tsx
 <TextButton endIconName="ArrowRight" onPress={() => {}}>
   Continue
+</TextButton>
+```
+
+### `startAccessory`
+
+Optional custom element to show at the start of the button.
+
+| TYPE              | REQUIRED | DEFAULT     |
+| ----------------- | -------- | ----------- |
+| `React.ReactNode` | No       | `undefined` |
+
+```tsx
+<TextButton startAccessory={<CustomIcon />} onPress={() => {}}>
+  Custom Start
+</TextButton>
+```
+
+### `endAccessory`
+
+Optional custom element to show at the end of the button.
+
+| TYPE              | REQUIRED | DEFAULT     |
+| ----------------- | -------- | ----------- |
+| `React.ReactNode` | No       | `undefined` |
+
+```tsx
+<TextButton endAccessory={<CustomIcon />} onPress={() => {}}>
+  Custom End
+</TextButton>
+```
+
+### `textProps`
+
+Optional props to be passed to the Text component.
+
+| TYPE                                   | REQUIRED | DEFAULT     |
+| -------------------------------------- | -------- | ----------- |
+| `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
+
+```tsx
+<TextButton
+  textProps={{ variant: TextVariant.BodySm, color: TextColor.TextMuted }}
+  onPress={() => {}}
+>
+  Custom Text Styling
 </TextButton>
 ```
 
@@ -178,7 +202,7 @@ Use the `style` prop to customize the component's appearance with React Native s
 | `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-const styles = StyleSheet.Create({
+const styles = StyleSheet.create({
   custom: {
     marginVertical: 8,
     marginHorizontal: 16,
@@ -187,7 +211,7 @@ const styles = StyleSheet.Create({
 
 export const StyleExample = () => (
   <TextButton onPress={() => {}} style={styles.custom}>
-    Custom styled text button
+    Custom Text Button
   </TextButton>
 );
 ```
