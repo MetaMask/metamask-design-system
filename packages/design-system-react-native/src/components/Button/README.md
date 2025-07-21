@@ -5,21 +5,24 @@ Button is a labeled element that a user can click or tap to initiate an action.
 ```tsx
 import { Button } from '@metamask/design-system-react-native';
 
-<Button label="Click me" onPress={() => console.log('Pressed')} />;
+<Button onPress={() => console.log('Pressed')}>Click me</Button>;
 ```
 
 ## Props
 
-### `label`
+### `children`
 
-The text label displayed on the button.
+Required prop for the content to be rendered within the Button.
 
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | Yes      | `undefined` |
+| TYPE                        | REQUIRED | DEFAULT     |
+| --------------------------- | -------- | ----------- |
+| `React.ReactNode \| string` | Yes      | `undefined` |
 
 ```tsx
-<Button label="Submit" onPress={() => {}} />
+<Button onPress={() => {}}>Submit</Button>
+<Button onPress={() => {}}>
+  <Text>Custom content</Text>
+</Button>
 ```
 
 ### `onPress`
@@ -31,7 +34,7 @@ Function to trigger when pressing the button.
 | `() => void` | Yes      | `undefined` |
 
 ```tsx
-<Button label="Press me" onPress={() => console.log('Button pressed')} />
+<Button onPress={() => console.log('Button pressed')}>Press me</Button>
 ```
 
 ### `variant`
@@ -44,21 +47,17 @@ Available variants:
 - `ButtonVariant.Secondary`
 - `ButtonVariant.Tertiary`
 
-| TYPE            | REQUIRED | DEFAULT                 |
-| --------------- | -------- | ----------------------- |
-| `ButtonVariant` | No       | `ButtonVariant.Primary` |
+| TYPE            | REQUIRED | DEFAULT     |
+| --------------- | -------- | ----------- |
+| `ButtonVariant` | Yes      | `undefined` |
 
 ```tsx
-<Button
-  label="Primary"
-  variant={ButtonVariant.Primary}
-  onPress={() => {}}
-/>
-<Button
-  label="Secondary"
-  variant={ButtonVariant.Secondary}
-  onPress={() => {}}
-/>
+<Button variant={ButtonVariant.Primary} onPress={() => {}}>
+  Primary
+</Button>
+<Button variant={ButtonVariant.Secondary} onPress={() => {}}>
+  Secondary
+</Button>
 ```
 
 ### `size`
@@ -67,61 +66,85 @@ The size of the button.
 
 Available sizes:
 
-- `ButtonSize.Sm` (32px height)
-- `ButtonSize.Md` (40px height)
-- `ButtonSize.Lg` (48px height)
+- `ButtonBaseSize.Sm` (32px height)
+- `ButtonBaseSize.Md` (40px height)
+- `ButtonBaseSize.Lg` (48px height)
 
-| TYPE         | REQUIRED | DEFAULT         |
-| ------------ | -------- | --------------- |
-| `ButtonSize` | No       | `ButtonSize.Md` |
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `ButtonBaseSize` | No       | `ButtonBaseSize.Lg` |
 
 ```tsx
-<Button
-  label="Small Button"
-  size={ButtonSize.Sm}
-  onPress={() => {}}
-/>
-<Button
-  label="Large Button"
-  size={ButtonSize.Lg}
-  onPress={() => {}}
-/>
+<Button variant={ButtonVariant.Primary} size={ButtonBaseSize.Sm} onPress={() => {}}>
+  Small Button
+</Button>
+<Button variant={ButtonVariant.Primary} size={ButtonBaseSize.Lg} onPress={() => {}}>
+  Large Button
+</Button>
 ```
 
 ### `startIconName`
 
-Optional icon name to display before the label.
+Optional icon name to display before the content.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
 | `IconName` | No       | `undefined` |
 
 ```tsx
-<Button label="Save" startIconName="CheckBold" onPress={() => {}} />
+<Button
+  variant={ButtonVariant.Primary}
+  startIconName="CheckBold"
+  onPress={() => {}}
+>
+  Save
+</Button>
 ```
 
 ### `endIconName`
 
-Optional icon name to display after the label.
+Optional icon name to display after the content.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
 | `IconName` | No       | `undefined` |
 
 ```tsx
-<Button label="Continue" endIconName="ArrowRight" onPress={() => {}} />
+<Button
+  variant={ButtonVariant.Primary}
+  endIconName="ArrowRight"
+  onPress={() => {}}
+>
+  Continue
+</Button>
 ```
 
 ### `isDanger`
 
-Whether to show the button in danger state.
+Whether to show the button in danger state (only available for Primary variant).
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
 ```tsx
-<Button label="Delete" isDanger onPress={() => {}} />
+<Button variant={ButtonVariant.Primary} isDanger onPress={() => {}}>
+  Delete
+</Button>
+```
+
+### `isInverse`
+
+Whether to show the button with inverted colors for use on colored backgrounds (only available for Primary variant).
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<Button variant={ButtonVariant.Primary} isInverse onPress={() => {}}>
+  Inverse Button
+</Button>
 ```
 
 ### `isDisabled`
@@ -133,24 +156,56 @@ Whether the button is disabled.
 | `boolean` | No       | `false` |
 
 ```tsx
-<Button label="Disabled" isDisabled onPress={() => {}} />
+<Button variant={ButtonVariant.Primary} isDisabled onPress={() => {}}>
+  Disabled
+</Button>
 ```
 
-### `width`
+### `isFullWidth`
 
-The width behavior of the button.
+Whether the button should take up the full width of its container.
 
-Available width types:
-
-- `ButtonWidthTypes.Auto` - Fits content
-- `ButtonWidthTypes.Full` - Full width
-
-| TYPE                         | REQUIRED | DEFAULT                 |
-| ---------------------------- | -------- | ----------------------- |
-| `ButtonWidthTypes \| number` | No       | `ButtonWidthTypes.Auto` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
-<Button label="Full Width" width={ButtonWidthTypes.Full} onPress={() => {}} />
+<Button variant={ButtonVariant.Primary} isFullWidth onPress={() => {}}>
+  Full Width Button
+</Button>
+```
+
+### `isLoading`
+
+Whether the button is in a loading state, showing a spinner.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<Button variant={ButtonVariant.Primary} isLoading onPress={() => {}}>
+  Loading Button
+</Button>
+```
+
+### `loadingText`
+
+Text to display when the button is in loading state.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+<Button
+  variant={ButtonVariant.Primary}
+  isLoading
+  loadingText="Please wait..."
+  onPress={() => {}}
+>
+  Submit
+</Button>
 ```
 
 ### `twClassName`
@@ -169,7 +224,7 @@ import { Button } from '@metamask/design-system-react-native';
 
 // Add additional styles
 <Button
-  label="Custom Button"
+  variant={ButtonVariant.Primary}
   onPress={() => {}}
   twClassName="shadow-lg"
 >
@@ -178,7 +233,7 @@ import { Button } from '@metamask/design-system-react-native';
 
 // Override default styles
 <Button
-  label="Override Button"
+  variant={ButtonVariant.Primary}
   onPress={() => {}}
   twClassName="!bg-error-100"
 >
@@ -203,7 +258,13 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <Button label="Custom Button" onPress={() => {}} style={styles.custom} />
+  <Button
+    variant={ButtonVariant.Primary}
+    onPress={() => {}}
+    style={styles.custom}
+  >
+    Custom Button
+  </Button>
 );
 ```
 
