@@ -1,6 +1,6 @@
 # BadgeWrapper
 
-BadgeWrapper is used to wrap components with a badge indicator within an interface.
+BadgeWrapper positions a badge on top of another element.
 
 ```tsx
 import { BadgeWrapper } from '@metamask/design-system-react-native';

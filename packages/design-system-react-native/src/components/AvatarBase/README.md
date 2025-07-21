@@ -1,6 +1,6 @@
 # AvatarBase
 
-AvatarBase is used to render base avatar elements within an interface.
+AvatarBase is the base component for avatars.
 
 ```tsx
 import { AvatarBase } from '@metamask/design-system-react-native';

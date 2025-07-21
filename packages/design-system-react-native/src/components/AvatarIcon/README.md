@@ -1,6 +1,6 @@
 # AvatarIcon
 
-AvatarIcon is used to render icon avatars within an interface.
+Avatar reserved for representing static icons inside of an avatar.
 
 ```tsx
 import { AvatarIcon } from '@metamask/design-system-react-native';

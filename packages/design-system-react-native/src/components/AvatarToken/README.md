@@ -1,6 +1,6 @@
 # AvatarToken
 
-AvatarToken is used to render token avatars within an interface.
+Avatar reserved for representing tokens.
 
 ```tsx
 import { AvatarToken } from '@metamask/design-system-react-native';

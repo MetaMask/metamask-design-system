@@ -1,6 +1,6 @@
 # BadgeCount
 
-BadgeCount is used to render count badges within an interface.
+BadgeCount is a numeric indicator of unread messages or notifications on an app or UI element.
 
 ```tsx
 import { BadgeCount } from '@metamask/design-system-react-native';

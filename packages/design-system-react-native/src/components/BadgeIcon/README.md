@@ -1,6 +1,6 @@
 # BadgeIcon
 
-BadgeIcon is used to render icon badges within an interface.
+BadgeIcon is a circular indicator that contains an icon, used to provide quick context or visual tagging at a glance.
 
 ```tsx
 import { BadgeIcon } from '@metamask/design-system-react-native';

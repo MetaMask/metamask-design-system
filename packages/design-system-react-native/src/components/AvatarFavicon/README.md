@@ -1,6 +1,6 @@
 # AvatarFavicon
 
-AvatarFavicon is used to render favicon avatars within an interface.
+Avatar reserved for representing websites and dapps.
 
 ```tsx
 import { AvatarFavicon } from '@metamask/design-system-react-native';

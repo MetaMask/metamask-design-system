@@ -1,6 +1,6 @@
 # BadgeStatus
 
-BadgeStatus is used to render status badges within an interface.
+BadgeStatus indicates the state of an item through color.
 
 ```tsx
 import { BadgeStatus } from '@metamask/design-system-react-native';

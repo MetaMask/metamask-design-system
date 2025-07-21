@@ -1,6 +1,6 @@
 # AvatarAccount
 
-AvatarAccount is used to render account avatars within an interface.
+Avatar reserved for representing accounts inside of an avatar.
 
 ```tsx
 import { AvatarAccount } from '@metamask/design-system-react-native';

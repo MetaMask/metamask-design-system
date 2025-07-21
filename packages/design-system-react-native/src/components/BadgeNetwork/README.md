@@ -1,6 +1,6 @@
 # BadgeNetwork
 
-BadgeNetwork is used to render network badges within an interface.
+BadgeNetwork indicates the network an entity is connected to.
 
 ```tsx
 import { BadgeNetwork } from '@metamask/design-system-react-native';

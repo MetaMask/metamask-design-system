@@ -1,6 +1,6 @@
 # AvatarGroup
 
-AvatarGroup is used to render a group of avatars within an interface.
+AvatarGroup is a stacked avatars to represent a group of avatars.
 
 ```tsx
 import { AvatarGroup } from '@metamask/design-system-react-native';

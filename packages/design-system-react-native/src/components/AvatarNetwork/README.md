@@ -1,6 +1,6 @@
 # AvatarNetwork
 
-AvatarNetwork is used to render network avatars within an interface.
+Avatar reserved for representing networks.
 
 ```tsx
 import { AvatarNetwork } from '@metamask/design-system-react-native';

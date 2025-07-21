@@ -1,6 +1,6 @@
 # Box
 
-Box is used to render flexible container elements within an interface.
+Box is a low-level flexbox layout component that provides a focused set of props for building responsive layouts. It maps to Tailwind CSS flexbox utilities and supports the design system's spacing and color tokens.
 
 ```tsx
 import { Box } from '@metamask/design-system-react-native';
