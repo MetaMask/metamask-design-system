@@ -1,6 +1,6 @@
 # Icon
 
-Icon is used to render icon elements within an interface.
+Icons are read-only symbols that represent ideas or objects, offered in standard sizes.
 
 ```tsx
 import { Icon } from '@metamask/design-system-react-native';

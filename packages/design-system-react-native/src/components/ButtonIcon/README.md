@@ -1,6 +1,6 @@
 # ButtonIcon
 
-ButtonIcon is used to render icon-only button elements within an interface.
+A Button Icon is a compact, icon-only button that triggers an action, designed for quick, space-efficient interactions.
 
 ```tsx
 import { ButtonIcon } from '@metamask/design-system-react-native';

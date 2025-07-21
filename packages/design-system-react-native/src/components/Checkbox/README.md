@@ -1,6 +1,6 @@
 # Checkbox
 
-Checkbox is used to render interactive checkbox elements within an interface.
+Checkbox allows users to select one or more options from a set of choices.
 
 ```tsx
 import { Checkbox } from '@metamask/design-system-react-native';

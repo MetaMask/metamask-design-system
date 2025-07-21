@@ -1,6 +1,6 @@
 # ButtonBase
 
-ButtonBase is used to render base button elements within an interface.
+ButtonBase is a labeled element that a user can click or tap to initiate an action.
 
 ```tsx
 import { ButtonBase } from '@metamask/design-system-react-native';

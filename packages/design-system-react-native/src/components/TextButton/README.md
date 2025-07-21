@@ -1,6 +1,6 @@
 # TextButton
 
-TextButton is used to render text-based button elements within an interface.
+TextButton is used for text-only button actions or hyperlink without padding or background.
 
 ```tsx
 import { TextButton } from '@metamask/design-system-react-native';

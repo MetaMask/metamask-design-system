@@ -1,6 +1,6 @@
 # Button
 
-Button is used to render interactive button elements within an interface.
+Button is a labeled element that a user can click or tap to initiate an action.
 
 ```tsx
 import { Button } from '@metamask/design-system-react-native';
