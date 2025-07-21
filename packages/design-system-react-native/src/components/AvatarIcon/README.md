@@ -3,9 +3,13 @@
 Avatar reserved for representing static icons inside of an avatar.
 
 ```tsx
-import { AvatarIcon } from '@metamask/design-system-react-native';
+import {
+  AvatarIcon,
+  AvatarIconSeverity,
+  IconName,
+} from '@metamask/design-system-react-native';
 
-<AvatarIcon name="Bank" />;
+<AvatarIcon name={IconName.Bank} />;
 ```
 
 ## Props
@@ -19,7 +23,29 @@ The icon name to display in the avatar.
 | `IconName` | Yes      | `undefined` |
 
 ```tsx
-<AvatarIcon name="Bank" />
+<AvatarIcon name={IconName.Bank} />
+```
+
+### `severity`
+
+Optional prop to control the severity of the avatar.
+
+| TYPE                 | REQUIRED | DEFAULT                      |
+| :------------------- | :------- | :--------------------------- |
+| `AvatarIconSeverity` | No       | `AvatarIconSeverity.Neutral` |
+
+Available severities:
+
+- `AvatarIconSeverity.Neutral`
+- `AvatarIconSeverity.Info`
+- `AvatarIconSeverity.Success`
+- `AvatarIconSeverity.Error`
+- `AvatarIconSeverity.Warning`
+
+```tsx
+<AvatarIcon name={IconName.Warning} severity={AvatarIconSeverity.Warning} />
+<AvatarIcon name={IconName.CheckCircle} severity={AvatarIconSeverity.Success} />
+<AvatarIcon name={IconName.Info} severity={AvatarIconSeverity.Info} />
 ```
 
 ### `size`
@@ -39,9 +65,9 @@ Available sizes:
 | `AvatarBaseSize` | No       | `AvatarBaseSize.Md` |
 
 ```tsx
-<AvatarIcon name="Bank" size={AvatarBaseSize.Sm} />
-<AvatarIcon name="Bank" />
-<AvatarIcon name="Bank" size={AvatarBaseSize.Lg} />
+<AvatarIcon name={IconName.Bank} size={AvatarBaseSize.Sm} />
+<AvatarIcon name={IconName.Bank} />
+<AvatarIcon name={IconName.Bank} size={AvatarBaseSize.Lg} />
 ```
 
 ### `iconColor`
@@ -53,7 +79,7 @@ Color of the icon within the avatar.
 | `IconColor` | No       | `IconColor.IconDefault` |
 
 ```tsx
-<AvatarIcon name="Bank" iconColor={IconColor.IconPrimary} />
+<AvatarIcon name={IconName.Bank} iconColor={IconColor.IconPrimary} />
 ```
 
 ### `backgroundColor`
@@ -65,7 +91,10 @@ Background color of the avatar.
 | `BackgroundColor` | No       | `BackgroundColor.BackgroundAlternative` |
 
 ```tsx
-<AvatarIcon name="Bank" backgroundColor={BackgroundColor.BackgroundDefault} />
+<AvatarIcon
+  name={IconName.Bank}
+  backgroundColor={BackgroundColor.BackgroundDefault}
+/>
 ```
 
 ### `twClassName`
@@ -84,19 +113,15 @@ import { AvatarIcon } from '@metamask/design-system-react-native';
 
 // Add additional styles
 <AvatarIcon
-  name="Bank"
+  name={IconName.Bank}
   twClassName="border-2 border-primary-100"
->
-  Custom Border
-</AvatarIcon>
+/>
 
 // Override default styles
 <AvatarIcon
-  name="Bank"
+  name={IconName.Bank}
   twClassName="!bg-error-100"
->
-  Override Background
-</AvatarIcon>
+/>
 ```
 
 ### `style`
@@ -116,7 +141,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <AvatarIcon name="Bank" style={styles.custom} />
+  <AvatarIcon name={IconName.Bank} style={styles.custom} />
 );
 ```
 

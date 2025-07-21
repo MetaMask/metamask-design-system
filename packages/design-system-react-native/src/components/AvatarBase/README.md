@@ -32,6 +32,24 @@ Available sizes:
 <AvatarBase size={AvatarBaseSize.Lg}>Large Avatar</AvatarBase>
 ```
 
+### `shape`
+
+Optional prop to control the shape of the `AvatarBase`.
+
+| TYPE              | REQUIRED | DEFAULT                  |
+| :---------------- | :------- | :----------------------- |
+| `AvatarBaseShape` | No       | `AvatarBaseShape.Circle` |
+
+Available shapes:
+
+- `AvatarBaseShape.Circle`
+- `AvatarBaseShape.Square`
+
+```tsx
+<AvatarBase shape={AvatarBaseShape.Circle}>AB</AvatarBase>
+<AvatarBase shape={AvatarBaseShape.Square}>CD</AvatarBase>
+```
+
 ### `children`
 
 The content of the AvatarBase component.
@@ -44,6 +62,40 @@ The content of the AvatarBase component.
 import { AvatarBase } from '@metamask/design-system-react-native';
 
 <AvatarBase>Custom avatar content</AvatarBase>;
+```
+
+### `fallbackText`
+
+Optional text to be displayed when the avatar content fails to render.
+
+| TYPE     | REQUIRED | DEFAULT |
+| :------- | :------- | :------ |
+| `string` | No       | `null`  |
+
+```tsx
+<AvatarBase fallbackText="FB">
+  {/* Content that might fail to render */}
+</AvatarBase>
+```
+
+### `fallbackTextProps`
+
+Optional props to customize the fallback text.
+
+| TYPE                          | REQUIRED | DEFAULT |
+| :---------------------------- | :------- | :------ |
+| `Omit<TextProps, 'children'>` | No       | `{}`    |
+
+```tsx
+<AvatarBase
+  fallbackText="FB"
+  fallbackTextProps={{
+    variant: TextVariant.BodySm,
+    color: TextColor.TextMuted,
+  }}
+>
+  {/* Content that might fail to render */}
+</AvatarBase>
 ```
 
 ### `backgroundColor`
