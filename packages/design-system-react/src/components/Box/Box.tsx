@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 
@@ -22,7 +22,7 @@ import {
 } from './Box.constants';
 import type { BoxProps } from './Box.types';
 
-export const Box = ({
+export const Box = forwardRef<HTMLDivElement, BoxProps>(({
   flexDirection,
   flexWrap,
   gap,
@@ -49,7 +49,7 @@ export const Box = ({
   style,
   children,
   ...props
-}: BoxProps) => {
+}: BoxProps, ref) => {
   const mergedClassName = twMerge(
     flexDirection ? 'flex' : '',
     flexDirection,
@@ -92,8 +92,10 @@ export const Box = ({
   );
 
   return (
-    <div className={mergedClassName} style={style} {...props}>
+    <div ref={ref} className={mergedClassName} style={style} {...props}>
       {children}
     </div>
   );
-};
+});
+
+Box.displayName = 'Box';
