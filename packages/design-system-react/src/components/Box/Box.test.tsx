@@ -41,6 +41,15 @@ describe('Box', () => {
     expect(screen.getByTestId('box')).toHaveStyle({ margin: '4px' });
   });
 
+  it('forwards ref to the underlying div element', () => {
+    const ref = React.createRef<HTMLDivElement>();
+    render(<Box data-testid="box" ref={ref} />);
+
+    const box = screen.getByTestId('box');
+    expect(ref.current).toBe(box);
+    expect(ref.current?.tagName).toBe('DIV');
+  });
+
   it('does not apply flex class by default', () => {
     render(<Box data-testid="box" />);
     const box = screen.getByTestId('box');
