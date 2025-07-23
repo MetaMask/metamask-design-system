@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import {
   BoxAlignItems,
@@ -39,6 +39,15 @@ describe('Box', () => {
     );
     expect(screen.getByText('Hello')).toBeInTheDocument();
     expect(screen.getByTestId('box')).toHaveStyle({ margin: '4px' });
+  });
+
+  it('forwards ref to the underlying div element', () => {
+    const ref = createRef<HTMLDivElement>();
+    render(<Box data-testid="box" ref={ref} />);
+
+    const box = screen.getByTestId('box');
+    expect(ref.current).toBe(box);
+    expect(ref.current?.tagName).toBe('DIV');
   });
 
   it('does not apply flex class by default', () => {
