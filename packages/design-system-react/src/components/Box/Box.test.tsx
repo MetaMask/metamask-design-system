@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import {
   BoxAlignItems,
@@ -42,7 +42,7 @@ describe('Box', () => {
   });
 
   it('forwards ref to the underlying div element', () => {
-    const ref = React.createRef<HTMLDivElement>();
+    const ref = createRef<HTMLDivElement>();
     render(<Box data-testid="box" ref={ref} />);
 
     const box = screen.getByTestId('box');
