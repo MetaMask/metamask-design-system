@@ -1,0 +1,57 @@
+{
+  "name": "@metamask/design-system-shared-types",
+  "version": "0.0.0",
+  "description": "Shared type definitions for MetaMask Design System components across React and React Native packages",
+  "keywords": [
+    "MetaMask",
+    "Ethereum"
+  ],
+  "homepage": "https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-system-shared-types#readme",
+  "bugs": {
+    "url": "https://github.com/MetaMask/metamask-design-system/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/metamask-design-system.git"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-shared-types",
+    "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-shared-types",
+    "publish:preview": "yarn npm publish --tag preview",
+    "test": "jest --reporters=jest-silent-reporter",
+    "test:clean": "jest --clearCache",
+    "test:verbose": "jest --verbose",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@metamask/auto-changelog": "^3.4.4",
+    "@types/jest": "^27.4.1",
+    "deepmerge": "^4.2.2",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "~5.2.2"
+  },
+  "engines": {
+    "node": "^18.18 || >=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
