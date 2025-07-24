@@ -1,6 +1,6 @@
 ---
 description: Generate a comprehensive PR description using the pull request template and current branch diff
-globs:
+globs: ['**/*']
 alwaysApply: false
 ---
 
@@ -40,13 +40,14 @@ When the user types `@pr`, automatically generate a comprehensive pull request d
 5. **Create the PR using GitHub CLI**:
 
    - Generate a concise PR title based on the changes (e.g., "feat: add Avatar Figma Code Connect integration")
-   - Create a temporary file in `.cursor/temp/` with a unique name (e.g., `pr-description-[timestamp].md`)
+   - Create a secure temporary file with a unique name using a UUID or random string (e.g., `pr-description-[uuid].md`)
    - Ensure the `.cursor/temp/` directory exists, create it if needed
    - Save the generated description to the temporary file
    - Execute: `gh pr create --title "[generated-title]" --body-file .cursor/temp/pr-description-[unique-id].md --draft`
    - If successful, display: "✅ Draft PR created successfully: [PR-URL]"
    - Provide next steps: "Review the description and run `gh pr ready` when ready for review"
    - Clean up temporary file after successful PR creation
+   - If PR creation fails, ensure the temporary file is deleted to prevent accumulation
 
 6. **Display the generated description and PR creation status**:
 
@@ -96,10 +97,12 @@ When the user types `@pr`, automatically generate a comprehensive pull request d
 
 - Always create PR as draft initially using `--draft` flag
 - Use semantic PR titles following conventional commits (feat:, fix:, chore:, etc.)
+- Generate unique temporary filenames using UUIDs or random strings to avoid conflicts
 - Show the GitHub CLI command being executed: `gh pr create --title "..." --body-file .cursor/temp/pr-description-[unique-id].md --draft`
 - After successful creation, display: "✅ Draft PR created successfully: [PR-URL]"
 - Provide next steps: "Review the description and run `gh pr ready` when ready for review"
 - If `gh` command fails, display the generated description and provide manual instructions
+- Always clean up temporary files regardless of success or failure to prevent accumulation
 
 **Error Handling**:
 
