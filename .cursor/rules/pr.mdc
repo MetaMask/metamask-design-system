@@ -40,11 +40,12 @@ When the user types `@pr`, automatically generate a comprehensive pull request d
 5. **Create the PR using GitHub CLI**:
 
    - Generate a concise PR title based on the changes (e.g., "feat: add Avatar Figma Code Connect integration")
-   - Save the generated description to a temporary file (e.g., `/tmp/pr_description.md`)
-   - Execute: `gh pr create --title "[generated-title]" --body-file /tmp/pr_description.md --draft`
+   - Save the generated description to a dynamically created temporary file
+   - Use a secure method to create the temporary file and pass its path to the `gh pr create` command
+   - Execute: `gh pr create --title "[generated-title]" --body-file [temp-file-path] --draft`
    - If successful, display: "✅ Draft PR created successfully: [PR-URL]"
    - Provide next steps: "Review the description and run `gh pr ready` when ready for review"
-   - Clean up temporary file
+   - Ensure the temporary file is deleted after use
 
 6. **Display the generated description and PR creation status**:
 
