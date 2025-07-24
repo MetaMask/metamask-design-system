@@ -22,8 +22,8 @@ figma.connect(
   {
     props: {
       size: figma.enum('size', {
-        Sm: BadgeCountSize.Md,
-        Md: BadgeCountSize.Lg,
+        Md: BadgeCountSize.Md,
+        Lg: BadgeCountSize.Lg,
       }),
     },
     example: (props) => <BadgeCount count={8} {...props} />,
