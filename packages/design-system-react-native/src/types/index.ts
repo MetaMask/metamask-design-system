@@ -1,3 +1,10 @@
+// Import shared types
+import {
+  AvatarAccountSize as SharedAvatarAccountSize,
+  AvatarAccountVariant as SharedAvatarAccountVariant,
+  AvatarShape as SharedAvatarShape,
+} from '@metamask/design-system-shared';
+
 /**
  * AvatarBase - size
  */
@@ -5,25 +12,27 @@ export enum AvatarBaseSize {
   /**
    * Represents an extra small avatar size (16px).
    */
-  Xs = '16',
+  Xs = 'xs',
   /**
    * Represents a small avatar size (24px).
    */
-  Sm = '24',
+  Sm = 'sm',
   /**
    * Represents a medium avatar size (32px).
    */
-  Md = '32',
+  Md = 'md',
   /**
    * Represents a large avatar size (40px).
    */
-  Lg = '40',
+  Lg = 'lg',
   /**
    * Represents an extra large avatar size (48px).
    */
-  Xl = '48',
+  Xl = 'xl',
 }
-export { AvatarBaseSize as AvatarAccountSize };
+
+// Use shared types for avatar components
+export { SharedAvatarAccountSize as AvatarAccountSize };
 export { AvatarBaseSize as AvatarFaviconSize };
 export { AvatarBaseSize as AvatarGroupSize };
 export { AvatarBaseSize as AvatarIconSize };
@@ -31,29 +40,12 @@ export { AvatarBaseSize as AvatarNetworkSize };
 export { AvatarBaseSize as AvatarTokenSize };
 export { AvatarBaseSize as AvatarSize };
 
-/**
- * Avatar - shape
- */
-export enum AvatarShape {
-  /**
-   * Represents a circular Avatar.
-   */
-  Circle = 'circle',
-  /**
-   * Represents a squared Avatar
-   */
-  Square = 'square',
-}
-export { AvatarShape as AvatarBaseShape };
+// Use shared shape enum
+export { SharedAvatarShape as AvatarShape };
+export { SharedAvatarShape as AvatarBaseShape };
 
-/**
- * AvatarAccount - variant
- */
-export enum AvatarAccountVariant {
-  Blockies = 'blockies',
-  Jazzicon = 'jazzicon',
-  Maskicon = 'maskicon',
-}
+// Use shared AvatarAccount variant
+export { SharedAvatarAccountVariant as AvatarAccountVariant };
 
 /**
  * AvatarGroup - variant

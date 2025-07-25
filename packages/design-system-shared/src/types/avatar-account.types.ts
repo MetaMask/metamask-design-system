@@ -14,24 +14,37 @@ export enum AvatarAccountVariant {
 }
 
 /**
- * AvatarAccount - size keys
+ * AvatarAccount - size
  * 
- * This enum defines the size keys that are consistent across platforms.
- * The actual pixel values differ between React ('xs', 'sm', etc.) and React Native ('16', '24', etc.),
- * but the semantic size names remain the same.
+ * This enum defines the unified size values used across both React and React Native.
+ * Both platforms now use the same string values ('xs', 'sm', 'md', 'lg', 'xl').
  */
-export enum AvatarAccountSizeKey {
-  /** Extra small avatar size */
-  Xs = 'Xs',
-  /** Small avatar size */
-  Sm = 'Sm', 
-  /** Medium avatar size (default) */
-  Md = 'Md',
-  /** Large avatar size */
-  Lg = 'Lg',
-  /** Extra large avatar size */
-  Xl = 'Xl',
+export enum AvatarAccountSize {
+  /** Extra small avatar size (16px) */
+  Xs = 'xs',
+  /** Small avatar size (24px) */
+  Sm = 'sm',
+  /** Medium avatar size (32px) - default */
+  Md = 'md',
+  /** Large avatar size (40px) */
+  Lg = 'lg',
+  /** Extra large avatar size (48px) */
+  Xl = 'xl',
 }
+
+/**
+ * Avatar - shape
+ * 
+ * This enum defines the shape options available for avatar components.
+ */
+export enum AvatarShape {
+  /** Circular avatar */
+  Circle = 'circle',
+  /** Square avatar */
+  Square = 'square',
+}
+
+
 
 /**
  * Base props that are common to AvatarAccount components across platforms
@@ -47,4 +60,10 @@ export interface BaseAvatarAccountProps {
    * @default AvatarAccountVariant.Jazzicon
    */
   variant?: AvatarAccountVariant;
+  /**
+   * Optional prop to control the size of the avatar
+   *
+   * @default AvatarAccountSize.Md
+   */
+  size?: AvatarAccountSize;
 }

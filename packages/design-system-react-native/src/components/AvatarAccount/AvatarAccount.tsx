@@ -1,4 +1,5 @@
 import React from 'react';
+import { AVATAR_ACCOUNT_SIZE_TO_PIXELS } from '@metamask/design-system-shared';
 
 import {
   AvatarAccountSize,
@@ -26,18 +27,30 @@ export const AvatarAccount = ({
   switch (variant) {
     case AvatarAccountVariant.Blockies:
       AvatarArtComponent = (
-        <Blockies address={address} size={Number(size)} {...blockiesProps} />
+        <Blockies 
+          address={address} 
+          size={AVATAR_ACCOUNT_SIZE_TO_PIXELS[size]} 
+          {...blockiesProps} 
+        />
       );
       break;
     case AvatarAccountVariant.Maskicon:
       AvatarArtComponent = (
-        <Maskicon address={address} size={Number(size)} {...maskiconProps} />
+        <Maskicon 
+          address={address} 
+          size={AVATAR_ACCOUNT_SIZE_TO_PIXELS[size]} 
+          {...maskiconProps} 
+        />
       );
       break;
     case AvatarAccountVariant.Jazzicon:
     default:
       AvatarArtComponent = (
-        <Jazzicon address={address} size={Number(size)} {...jazziconProps} />
+        <Jazzicon 
+          address={address} 
+          size={AVATAR_ACCOUNT_SIZE_TO_PIXELS[size]} 
+          {...jazziconProps} 
+        />
       );
       break;
   }

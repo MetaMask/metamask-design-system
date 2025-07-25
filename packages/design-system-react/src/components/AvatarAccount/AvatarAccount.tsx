@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { AVATAR_ACCOUNT_SIZE_TO_PIXELS } from '@metamask/design-system-shared';
 
 import {
   AvatarAccountVariant,
@@ -10,7 +11,6 @@ import { Blockies } from '../temp-components/Blockies';
 import { Jazzicon } from '../temp-components/Jazzicon';
 import { Maskicon } from '../temp-components/Maskicon';
 
-import { MAP_AVATARACCOUNT_SIZE_SIZENUMBER } from './AvatarAccount.constants';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 
 export const AvatarAccount = forwardRef<HTMLDivElement, AvatarAccountProps>(
@@ -33,7 +33,7 @@ export const AvatarAccount = forwardRef<HTMLDivElement, AvatarAccountProps>(
         AvatarArtComponent = (
           <Blockies
             address={address}
-            size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
+            size={AVATAR_ACCOUNT_SIZE_TO_PIXELS[size]}
             {...blockiesProps}
           />
         );
@@ -42,7 +42,7 @@ export const AvatarAccount = forwardRef<HTMLDivElement, AvatarAccountProps>(
         AvatarArtComponent = (
           <Maskicon
             address={address}
-            size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
+            size={AVATAR_ACCOUNT_SIZE_TO_PIXELS[size]}
             {...maskiconProps}
           />
         );
@@ -52,7 +52,7 @@ export const AvatarAccount = forwardRef<HTMLDivElement, AvatarAccountProps>(
         AvatarArtComponent = (
           <Jazzicon
             address={address}
-            size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
+            size={AVATAR_ACCOUNT_SIZE_TO_PIXELS[size]}
             {...jazziconProps}
           />
         );
