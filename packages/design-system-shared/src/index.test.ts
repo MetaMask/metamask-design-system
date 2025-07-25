@@ -4,7 +4,7 @@ import {
   type BaseAvatarAccountProps,
 } from './index';
 
-describe('@metamask/design-system-shared-types', () => {
+describe('@metamask/design-system-shared', () => {
   describe('AvatarAccountVariant', () => {
     it('should export the correct variant values', () => {
       expect(AvatarAccountVariant.Blockies).toBe('blockies');

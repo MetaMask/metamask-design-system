@@ -3,7 +3,7 @@
     { "path": "./packages/design-tokens/tsconfig.build.json" },
     { "path": "./packages/design-system-twrnc-preset/tsconfig.build.json" },
     { "path": "./packages/design-system-tailwind-preset/tsconfig.build.json" },
-    { "path": "./packages/design-system-shared-types/tsconfig.build.json" },
+    { "path": "./packages/design-system-shared/tsconfig.build.json" },
     { "path": "./packages/design-system-react-native/tsconfig.build.json" },
     { "path": "./packages/design-system-react/tsconfig.build.json" }
   ],

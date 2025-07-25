@@ -1,12 +1,12 @@
 {
-  "name": "@metamask/design-system-shared-types",
+  "name": "@metamask/design-system-shared",
   "version": "0.0.0",
-  "description": "Shared type definitions for MetaMask Design System components across React and React Native packages",
+  "description": "Shared code for MetaMask Design System components across React and React Native packages",
   "keywords": [
     "MetaMask",
     "Ethereum"
   ],
-  "homepage": "https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-system-shared-types#readme",
+  "homepage": "https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-system-shared#readme",
   "bugs": {
     "url": "https://github.com/MetaMask/metamask-design-system/issues"
   },
@@ -31,8 +31,8 @@
   ],
   "scripts": {
     "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
-    "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-shared-types",
-    "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-shared-types",
+    "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-shared",
+    "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-shared",
     "publish:preview": "yarn npm publish --tag preview",
     "test": "jest --reporters=jest-silent-reporter",
     "test:clean": "jest --clearCache",
