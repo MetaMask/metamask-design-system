@@ -12,6 +12,7 @@ import AddSquareSVG from './assets/add-square.svg';
 import AddSVG from './assets/add.svg';
 import AiSVG from './assets/ai.svg';
 import AlternateEmailSVG from './assets/alternate-email.svg';
+import AppleLogoSVG from './assets/apple-logo.svg';
 import AppsSVG from './assets/apps.svg';
 import Arrow2DownSVG from './assets/arrow-2-down.svg';
 import Arrow2LeftSVG from './assets/arrow-2-left.svg';
@@ -28,6 +29,7 @@ import ArrowLeftSVG from './assets/arrow-left.svg';
 import ArrowRightSVG from './assets/arrow-right.svg';
 import ArrowUpSVG from './assets/arrow-up.svg';
 import AttachmentSVG from './assets/attachment.svg';
+import BackspaceSVG from './assets/backspace.svg';
 import BanSVG from './assets/ban.svg';
 import BankAssuredSVG from './assets/bank-assured.svg';
 import BankSVG from './assets/bank.svg';
@@ -44,6 +46,7 @@ import CalendarSVG from './assets/calendar.svg';
 import CallSVG from './assets/call.svg';
 import CameraSVG from './assets/camera.svg';
 import CampaignSVG from './assets/campaign.svg';
+import CandlestickSVG from './assets/candlestick.svg';
 import CardPosSVG from './assets/card-pos.svg';
 import CardSVG from './assets/card.svg';
 import CashSVG from './assets/cash.svg';
@@ -52,6 +55,7 @@ import ChartSVG from './assets/chart.svg';
 import CheckBoldSVG from './assets/check-bold.svg';
 import CheckSVG from './assets/check.svg';
 import CircleXSVG from './assets/circle-x.svg';
+import ClearSVG from './assets/clear.svg';
 import ClockFilledSVG from './assets/clock-filled.svg';
 import ClockSVG from './assets/clock.svg';
 import CloseSVG from './assets/close.svg';
@@ -288,6 +292,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.Add]: AddSVG,
   [IconName.Ai]: AiSVG,
   [IconName.AlternateEmail]: AlternateEmailSVG,
+  [IconName.AppleLogo]: AppleLogoSVG,
   [IconName.Apps]: AppsSVG,
   [IconName.Arrow2Down]: Arrow2DownSVG,
   [IconName.Arrow2Left]: Arrow2LeftSVG,
@@ -304,6 +309,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.ArrowRight]: ArrowRightSVG,
   [IconName.ArrowUp]: ArrowUpSVG,
   [IconName.Attachment]: AttachmentSVG,
+  [IconName.Backspace]: BackspaceSVG,
   [IconName.Ban]: BanSVG,
   [IconName.BankAssured]: BankAssuredSVG,
   [IconName.Bank]: BankSVG,
@@ -320,6 +326,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.Call]: CallSVG,
   [IconName.Camera]: CameraSVG,
   [IconName.Campaign]: CampaignSVG,
+  [IconName.Candlestick]: CandlestickSVG,
   [IconName.CardPos]: CardPosSVG,
   [IconName.Card]: CardSVG,
   [IconName.Cash]: CashSVG,
@@ -328,6 +335,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.CheckBold]: CheckBoldSVG,
   [IconName.Check]: CheckSVG,
   [IconName.CircleX]: CircleXSVG,
+  [IconName.Clear]: ClearSVG,
   [IconName.ClockFilled]: ClockFilledSVG,
   [IconName.Clock]: ClockSVG,
   [IconName.Close]: CloseSVG,

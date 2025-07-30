@@ -1,0 +1,6 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+import { Ref, forwardRef } from "react";
+const SvgAppleLogo = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" ref={ref} {...props}><path d="M319 111c14-18 24-43 22-68-22 1-48 14-63 32-14 16-26 42-23 66 24 2 48-12 64-30m21 35c-35-2-65 20-81 20-17 0-43-19-70-19-37 1-70 21-88 54-38 65-10 161 26 214 18 27 40 55 68 54 27-1 37-17 69-17 33 0 42 17 71 17 29-1 47-26 65-53 20-30 29-58 29-60 0 0-56-22-57-87 0-54 44-79 46-81-25-37-64-41-78-42" /></svg>;
+const ForwardRef = forwardRef(SvgAppleLogo);
+export default ForwardRef;
