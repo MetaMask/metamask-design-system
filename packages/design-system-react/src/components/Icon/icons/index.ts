@@ -9,6 +9,7 @@ import AddCircle from './AddCircle';
 import AddSquare from './AddSquare';
 import Ai from './Ai';
 import AlternateEmail from './AlternateEmail';
+import AppleLogo from './AppleLogo';
 import Apps from './Apps';
 import Arrow2Down from './Arrow2Down';
 import Arrow2Left from './Arrow2Left';
@@ -25,6 +26,7 @@ import ArrowLeft from './ArrowLeft';
 import ArrowRight from './ArrowRight';
 import ArrowUp from './ArrowUp';
 import Attachment from './Attachment';
+import Backspace from './Backspace';
 import Ban from './Ban';
 import Bank from './Bank';
 import BankAssured from './BankAssured';
@@ -41,6 +43,7 @@ import Calendar from './Calendar';
 import Call from './Call';
 import Camera from './Camera';
 import Campaign from './Campaign';
+import Candlestick from './Candlestick';
 import Card from './Card';
 import CardPos from './CardPos';
 import Cash from './Cash';
@@ -49,6 +52,7 @@ import Chart from './Chart';
 import Check from './Check';
 import CheckBold from './CheckBold';
 import CircleX from './CircleX';
+import Clear from './Clear';
 import Clock from './Clock';
 import ClockFilled from './ClockFilled';
 import Close from './Close';
@@ -145,6 +149,7 @@ import Map from './Map';
 import Menu from './Menu';
 import MessageQuestion from './MessageQuestion';
 import Messages from './Messages';
+import MetamaskFoxOutline from './MetamaskFoxOutline';
 import Mic from './Mic';
 import Minus from './Minus';
 import MinusBold from './MinusBold';
@@ -281,6 +286,7 @@ export const Icons = {
   AddSquare,
   Ai,
   AlternateEmail,
+  AppleLogo,
   Apps,
   Arrow2Down,
   Arrow2Left,
@@ -297,6 +303,7 @@ export const Icons = {
   ArrowRight,
   ArrowUp,
   Attachment,
+  Backspace,
   Ban,
   Bank,
   BankAssured,
@@ -313,6 +320,7 @@ export const Icons = {
   Call,
   Camera,
   Campaign,
+  Candlestick,
   Card,
   CardPos,
   Cash,
@@ -321,6 +329,7 @@ export const Icons = {
   Check,
   CheckBold,
   CircleX,
+  Clear,
   Clock,
   ClockFilled,
   Close,
@@ -417,6 +426,7 @@ export const Icons = {
   Menu,
   MessageQuestion,
   Messages,
+  MetamaskFoxOutline,
   Mic,
   Minus,
   MinusBold,
