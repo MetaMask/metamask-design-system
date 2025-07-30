@@ -149,6 +149,7 @@ import Map from './Map';
 import Menu from './Menu';
 import MessageQuestion from './MessageQuestion';
 import Messages from './Messages';
+import MetamaskFoxOutline from './MetamaskFoxOutline';
 import Mic from './Mic';
 import Minus from './Minus';
 import MinusBold from './MinusBold';
@@ -425,6 +426,7 @@ export const Icons = {
   Menu,
   MessageQuestion,
   Messages,
+  MetamaskFoxOutline,
   Mic,
   Minus,
   MinusBold,
