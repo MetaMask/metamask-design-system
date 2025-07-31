@@ -36,12 +36,13 @@ export const Text: React.FC<TextProps> = ({
     CLASSMAP_TEXT_VARIANT_FONTSTYLE[variant],
     fontWeight || CLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
     fontStyle,
+    fontFamily,
     textTransform,
     textAlign,
     overflowWrap,
     ellipsis && 'truncate',
     className,
-  )} ${fontFamily}`.trim();
+  )}`;
 
   return (
     <Component className={mergedClassName} style={style} {...props}>
