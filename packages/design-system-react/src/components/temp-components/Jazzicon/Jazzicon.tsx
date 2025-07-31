@@ -90,7 +90,11 @@ export const Jazzicon = ({
   }, [address, size]);
 
   return (
-    <div ref={containerRef} className={twMerge('flex', className)} {...props} />
+    <div
+      ref={containerRef}
+      className={twMerge('flex [&>div]:!rounded-none', className)}
+      {...props}
+    />
   );
 };
 
