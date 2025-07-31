@@ -37,8 +37,8 @@ export type TextProps = {
   /**
    * Optional prop to adjust the font family.
    * Default: Geist
-   * Accent: MMSans
-   * Hero: MMPoly
+   * Accent: MM Sans
+   * Hero: MM Poly
    */
   fontFamily?: FontFamily;
   /**
