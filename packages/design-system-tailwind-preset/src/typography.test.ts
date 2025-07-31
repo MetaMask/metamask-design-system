@@ -85,6 +85,8 @@ describe('Typography', () => {
     '--typography-l-button-label-md-font-weight',
     '--typography-s-button-label-lg-font-weight',
     '--typography-l-button-label-lg-font-weight',
+    '--typography-s-amount-display-lg-font-weight',
+    '--typography-l-amount-display-lg-font-weight',
   ];
 
   /**
