@@ -45,7 +45,7 @@ export const AvatarAccount = ({
   return (
     <AvatarBase
       size={size}
-      shape={AvatarBaseShape.Circle}
+      shape={AvatarBaseShape.Square}
       accessibilityRole="image"
       {...props}
     >

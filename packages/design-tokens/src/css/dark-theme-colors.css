@@ -11,8 +11,8 @@
   --color-background-section: var(--brand-colors-grey-grey800);
   /* For subsection bg usually over background/section (#2A2C32) */
   --color-background-subsection: var(--brand-colors-grey-grey700);
-  /* For muted neutral surface (#E0E5FF26) */
-  --color-background-muted: #e0e5ff26;
+  /* For muted neutral surface (#E0E5FF14) */
+  --color-background-muted: #e0e5ff14;
   /* Hover state surface for background/default (#1a1b1c) */
   --color-background-default-hover: #1a1b1c;
   /* Pressed state surface for background/default (#222424) */
@@ -21,10 +21,10 @@
   --color-background-alternative-hover: #0d0d0e;
   /* Pressed state surface for background/alternative (#161617) */
   --color-background-alternative-pressed: #161617;
-  /* Hover state surface for background/muted (#E0E5FF33) */
-  --color-background-muted-hover: #e0e5ff33;
-  /* Pressed state surface for background/muted (#E0E5FF40) */
-  --color-background-muted-pressed: #e0e5ff40;
+  /* Hover state surface for background/muted (#E0E5FF26) */
+  --color-background-muted-hover: #e0e5ff26;
+  /* Pressed state surface for background/muted (#E0E5FF33) */
+  --color-background-muted-pressed: #e0e5ff33;
   /* General purpose hover state tint (#dadce50a) */
   --color-background-hover: #dadce50a;
   /* General purpose pressed state tint (#dadce514) */

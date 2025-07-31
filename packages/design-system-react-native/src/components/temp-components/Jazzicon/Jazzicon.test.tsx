@@ -44,7 +44,14 @@ describe('Jazzicon Component', () => {
     render(<Jazzicon {...testProps} testID="jazzicon-container" />);
 
     expect(RNJazzicon).toHaveBeenCalledWith(
-      expect.objectContaining(testProps),
+      expect.objectContaining({
+        ...testProps,
+        containerStyle: {
+          borderRadius: 0, // Component adds this by default
+          backgroundColor: 'red',
+          padding: 5,
+        },
+      }),
       expect.any(Object),
     );
   });
