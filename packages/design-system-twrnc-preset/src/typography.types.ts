@@ -42,7 +42,7 @@ export type FontStyle = 'normal' | 'italic';
  * {
  *   fontSize: {
  *     'display-md': {
- *       fontFamily: 'Geist-Bold',
+ *       fontFamily: 'Geist Bold',
  *       fontSize: '32',
  *       fontWeight: '700',
  *       letterSpacing: '0',
