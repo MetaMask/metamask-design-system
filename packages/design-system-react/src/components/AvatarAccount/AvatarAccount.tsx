@@ -62,7 +62,7 @@ export const AvatarAccount = forwardRef<HTMLDivElement, AvatarAccountProps>(
     return (
       <AvatarBase
         ref={ref}
-        shape={AvatarBaseShape.Circle}
+        shape={AvatarBaseShape.Square}
         size={size}
         className={className}
         {...props}
