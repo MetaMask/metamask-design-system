@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.1.1]
+
+### Fixed
+
+- Updated `background/muted`, `background/muted-hover` and `background/muted-pressed` colors to align with trade ([#788](https://github.com/MetaMask/metamask-design-system/pull/788))
+
 ## [8.1.0]
 
 ### Added
@@ -392,7 +398,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.1...HEAD
+[8.1.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.0...@metamask/design-tokens@8.1.1
 [8.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.0.0...@metamask/design-tokens@8.1.0
 [8.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.1.0...@metamask/design-tokens@8.0.0
 [7.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.0.0...@metamask/design-tokens@7.1.0
