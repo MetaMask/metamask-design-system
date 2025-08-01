@@ -9,23 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0]
 
-### Uncategorized
+### Fixed
 
-- chore: adding new text classnames to twmerge to avoid conflicts ([#802](https://github.com/MetaMask/metamask-design-system/pull/802))
-- fix: Updated font file across apps and packages ([#801](https://github.com/MetaMask/metamask-design-system/pull/801))
-- chore: update AvatarAccount shape from circle to square ([#800](https://github.com/MetaMask/metamask-design-system/pull/800))
-- chore: optimize icon SVGs and remove hardcoded colors ([#799](https://github.com/MetaMask/metamask-design-system/pull/799))
-- feat: add new icons (AppleLogo, Backspace, Candlestick, Clear, MetamaskFoxOutline) ([#798](https://github.com/MetaMask/metamask-design-system/pull/798))
-- chore: code connect for checkbox ([#791](https://github.com/MetaMask/metamask-design-system/pull/791))
-- chore: adding code connect to buttons ([#795](https://github.com/MetaMask/metamask-design-system/pull/795))
-- chore: adding figma connect for icon and button icon ([#796](https://github.com/MetaMask/metamask-design-system/pull/796))
-- feat: add Badge Figma Code Connect integration ([#794](https://github.com/MetaMask/metamask-design-system/pull/794))
-- feat: add Avatar Figma Code Connect integration and refactor Box component ([#792](https://github.com/MetaMask/metamask-design-system/pull/792))
-- chore: add ref support to Box component using forwardRef ([#790](https://github.com/MetaMask/metamask-design-system/pull/790))
-- fix: remove figma.json and fix lint rules ([#786](https://github.com/MetaMask/metamask-design-system/pull/786))
-- chore: more eslint refinements ([#785](https://github.com/MetaMask/metamask-design-system/pull/785))
+- Adding new text classnames to twmerge to avoid conflicts ([#802](https://github.com/MetaMask/metamask-design-system/pull/802))
+- Optimize icon SVGs and remove hardcoded colors ([#799](https://github.com/MetaMask/metamask-design-system/pull/799))
+- Add ref support to Box component using forwardRef ([#790](https://github.com/MetaMask/metamask-design-system/pull/790))
+
+### Changed
+
+- Update AvatarAccount shape from circle to square ([#800](https://github.com/MetaMask/metamask-design-system/pull/800))
 - Update README.mdx files for template alignment ([#771](https://github.com/MetaMask/metamask-design-system/pull/771))
-- feat: figma code connect, docs and avatar account ([#766](https://github.com/MetaMask/metamask-design-system/pull/766))
+
+### Added
+
+- New icons (AppleLogo, Backspace, Candlestick, Clear, MetamaskFoxOutline) ([#798](https://github.com/MetaMask/metamask-design-system/pull/798))
+
+- Figma code connect files for all components ([#766](https://github.com/MetaMask/metamask-design-system/pull/766)), ([#791](https://github.com/MetaMask/metamask-design-system/pull/791)), ([#795](https://github.com/MetaMask/metamask-design-system/pull/795)), ([#796](https://github.com/MetaMask/metamask-design-system/pull/796)), ([#794](https://github.com/MetaMask/metamask-design-system/pull/794)), ([#792](https://github.com/MetaMask/metamask-design-system/pull/792))
 
 ## [0.2.0]
 
