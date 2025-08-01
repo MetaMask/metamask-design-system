@@ -76,18 +76,6 @@ export const typography = {
     regular: 'var(--font-weight-regular)',
     medium: 'var(--font-weight-medium)',
     bold: 'var(--font-weight-bold)',
-    // small screen typography font weights
-    's-page-heading': 'var(--typography-s-page-heading-font-weight)',
-    's-section-heading': 'var(--typography-s-section-heading-font-weight)',
-    's-button-label-md': 'var(--typography-s-button-label-md-font-weight)',
-    's-button-label-lg': 'var(--typography-s-button-label-lg-font-weight)',
-    's-amount-display-lg': 'var(--typography-s-amount-display-lg-font-weight)',
-    // large screen typography font weights
-    'l-page-heading': 'var(--typography-l-page-heading-font-weight)',
-    'l-section-heading': 'var(--typography-l-section-heading-font-weight)',
-    'l-button-label-md': 'var(--typography-l-button-label-md-font-weight)',
-    'l-button-label-lg': 'var(--typography-l-button-label-lg-font-weight)',
-    'l-amount-display-lg': 'var(--typography-l-amount-display-lg-font-weight)',
   },
   lineHeight: {
     // small screen typography

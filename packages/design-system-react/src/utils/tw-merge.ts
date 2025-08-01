@@ -19,6 +19,16 @@ const variantClassGroups = [
   'l-body-md',
   'l-body-sm',
   'l-body-xs',
+  's-page-heading',
+  's-section-heading',
+  's-button-label-md',
+  's-button-label-lg',
+  's-amount-display-lg',
+  'l-page-heading',
+  'l-section-heading',
+  'l-button-label-md',
+  'l-button-label-lg',
+  'l-amount-display-lg',
 ];
 
 /**
@@ -41,6 +51,7 @@ export const twMerge = extendTailwindMerge({
           text: variantClassGroups,
         },
       ],
+      'font-family': ['font-default', 'font-accent', 'font-hero'],
       'font-weight': [
         'font-thin',
         'font-extralight',
@@ -57,6 +68,7 @@ export const twMerge = extendTailwindMerge({
     conflictingClassGroups: {
       'text-color': ['text-color'],
       'font-size': ['font-size'],
+      'font-family': ['font-family'],
       'font-weight': ['font-weight'],
     },
   },

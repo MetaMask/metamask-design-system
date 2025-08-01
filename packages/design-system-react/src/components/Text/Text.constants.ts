@@ -41,15 +41,11 @@ export const CLASSMAP_TEXT_VARIANT_FONTWEIGHT: Record<TextVariant, string> = {
   [TextVariant.BodyMd]: 'font-regular',
   [TextVariant.BodySm]: 'font-regular',
   [TextVariant.BodyXs]: 'font-regular',
-  [TextVariant.PageHeading]: 'font-s-page-heading md:font-l-page-heading',
-  [TextVariant.SectionHeading]:
-    'font-s-section-heading md:font-l-section-heading',
-  [TextVariant.ButtonLabelMd]:
-    'font-s-button-label-md md:font-l-button-label-md',
-  [TextVariant.ButtonLabelLg]:
-    'font-s-button-label-lg md:font-l-button-label-lg',
-  [TextVariant.AmountDisplayLg]:
-    'font-s-amount-display-lg md:font-l-amount-display-lg',
+  [TextVariant.PageHeading]: 'font-bold',
+  [TextVariant.SectionHeading]: 'font-bold',
+  [TextVariant.ButtonLabelMd]: 'font-medium',
+  [TextVariant.ButtonLabelLg]: 'font-medium',
+  [TextVariant.AmountDisplayLg]: 'font-bold md:font-medium',
 };
 
 export const MAP_TEXT_VARIANT_TAG: Record<

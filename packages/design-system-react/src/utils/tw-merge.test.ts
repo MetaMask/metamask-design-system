@@ -71,10 +71,15 @@ describe('twMerge utility', () => {
         'text-s-body-md',
         'text-s-body-sm',
         'text-s-body-xs',
+        'text-s-page-heading',
+        'text-s-section-heading',
+        'text-s-button-label-md',
+        'text-s-button-label-lg',
+        'text-s-amount-display-lg',
       ];
 
       const result = twMerge(smallVariants.join(' '));
-      expect(result).toBe('text-s-body-xs'); // Should keep last one
+      expect(result).toBe('text-s-amount-display-lg'); // Should keep last one
     });
 
     it('should handle all large variant classes', () => {
@@ -87,10 +92,15 @@ describe('twMerge utility', () => {
         'text-l-body-md',
         'text-l-body-sm',
         'text-l-body-xs',
+        'text-l-page-heading',
+        'text-l-section-heading',
+        'text-l-button-label-md',
+        'text-l-button-label-lg',
+        'text-l-amount-display-lg',
       ];
 
       const result = twMerge(largeVariants.join(' '));
-      expect(result).toBe('text-l-body-xs'); // Should keep last one
+      expect(result).toBe('text-l-amount-display-lg'); // Should keep last one
     });
   });
 });

@@ -77,6 +77,16 @@ describe('Typography', () => {
     '--typography-l-body-md-font-weight',
     '--typography-l-body-sm-font-weight',
     '--typography-l-body-xs-font-weight',
+    '--typography-s-page-heading-font-weight',
+    '--typography-l-page-heading-font-weight',
+    '--typography-s-section-heading-font-weight',
+    '--typography-l-section-heading-font-weight',
+    '--typography-s-button-label-md-font-weight',
+    '--typography-l-button-label-md-font-weight',
+    '--typography-s-button-label-lg-font-weight',
+    '--typography-l-button-label-lg-font-weight',
+    '--typography-s-amount-display-lg-font-weight',
+    '--typography-l-amount-display-lg-font-weight',
   ];
 
   /**
