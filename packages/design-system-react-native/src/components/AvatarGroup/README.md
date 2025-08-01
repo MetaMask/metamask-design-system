@@ -1,67 +1,137 @@
 # AvatarGroup
 
-`AvatarGroup` is a stacked avatars to represent a group of avatars.
+AvatarGroup is a stacked avatars component to represent a group of avatars.
 
----
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupVariant,
+} from '@metamask/design-system-react-native';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    { address: '0x1234567890abcdef1234567890abcdef12345678' },
+    { address: '0xabcdef1234567890abcdef1234567890abcdef12' },
+    { address: '0x567890abcdef1234567890abcdef1234567890ab' },
+  ]}
+/>;
+```
 
 ## Props
 
-### `variant` (Required)
+### `variant`
 
-Determines the type of avatars used within the group.
+The type of avatars to display in the group.
 
-| TYPE                 | REQUIRED | DEFAULT |
-| :------------------- | :------- | :------ |
-| `AvatarGroupVariant` | Yes      | `N/A`   |
+| TYPE                 | REQUIRED | DEFAULT     |
+| -------------------- | -------- | ----------- |
+| `AvatarGroupVariant` | Yes      | `undefined` |
 
 Available variants:
 
-- `Account`
-- `Favicon`
-- `Network`
-- `Token`
+- `AvatarGroupVariant.Account`
+- `AvatarGroupVariant.Favicon`
+- `AvatarGroupVariant.Network`
+- `AvatarGroupVariant.Token`
 
----
+```tsx
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[{ address: '0x1234...' }, { address: '0x5678...' }]}
+/>
+```
 
-### `avatarPropsArr` (Required)
+### `avatarPropsArr`
 
-An array of props for each avatar within the group.
+Array of props for the individual avatar components. The type depends on the variant.
 
-| TYPE                 | REQUIRED | DEFAULT |
-| :------------------- | :------- | :------ |
-| `Array<AvatarProps>` | Yes      | `N/A`   |
+| TYPE                                                                                               | REQUIRED | DEFAULT     |
+| -------------------------------------------------------------------------------------------------- | -------- | ----------- |
+| `AvatarAccountProps[]` \| `AvatarFaviconProps[]` \| `AvatarNetworkProps[]` \| `AvatarTokenProps[]` | Yes      | `undefined` |
 
-Each avatar follows the prop structure of the corresponding variant component (`AvatarAccount`, `AvatarFavicon`, `AvatarNetwork`, `AvatarToken`).
+```tsx
+// Account variant
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    { address: '0x1234567890abcdef1234567890abcdef12345678' },
+    { address: '0xabcdef1234567890abcdef1234567890abcdef12' },
+  ]}
+/>
 
----
+// Favicon variant
+<AvatarGroup
+  variant={AvatarGroupVariant.Favicon}
+  avatarPropsArr={[
+    { src: { uri: 'https://metamask.io/favicon.ico' } },
+    { src: { uri: 'https://uniswap.org/favicon.ico' } },
+  ]}
+/>
+
+// Network variant
+<AvatarGroup
+  variant={AvatarGroupVariant.Network}
+  avatarPropsArr={[
+    { src: { uri: 'https://example.com/ethereum.png' }, name: 'Ethereum' },
+    { src: { uri: 'https://example.com/polygon.png' }, name: 'Polygon' },
+  ]}
+/>
+
+// Token variant
+<AvatarGroup
+  variant={AvatarGroupVariant.Token}
+  avatarPropsArr={[
+    { src: { uri: 'https://example.com/eth.png' }, name: 'ETH' },
+    { src: { uri: 'https://example.com/usdc.png' }, name: 'USDC' },
+  ]}
+/>
+```
 
 ### `size`
 
-Optional prop to control the size of the avatars in the group.
+The size of the avatars in the group.
 
-| TYPE         | REQUIRED | DEFAULT         |
-| :----------- | :------- | :-------------- |
-| `AvatarSize` | No       | `AvatarSize.Md` |
+| TYPE              | REQUIRED | DEFAULT              |
+| ----------------- | -------- | -------------------- |
+| `AvatarGroupSize` | No       | `AvatarGroupSize.Md` |
 
 Available sizes:
 
-- `AvatarSize.Xs`
-- `AvatarSize.Sm`
-- `AvatarSize.Md`
-- `AvatarSize.Lg`
-- `AvatarSize.Xl`
+- `AvatarGroupSize.Xs` (16px)
+- `AvatarGroupSize.Sm` (24px)
+- `AvatarGroupSize.Md` (32px)
+- `AvatarGroupSize.Lg` (40px)
+- `AvatarGroupSize.Xl` (48px)
 
----
+```tsx
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  size={AvatarGroupSize.Lg}
+  avatarPropsArr={[{ address: '0x1234...' }, { address: '0x5678...' }]}
+/>
+```
 
 ### `max`
 
-Determines the maximum number of avatars to display before showing an overflow indicator.
+Maximum number of avatars to display before showing overflow indicator.
 
 | TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
+| -------- | -------- | ------- |
 | `number` | No       | `4`     |
 
----
+```tsx
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  max={3}
+  avatarPropsArr={[
+    { address: '0x1234...' },
+    { address: '0x5678...' },
+    { address: '0x9abc...' },
+    { address: '0xdef0...' }, // This will show as "+1" overflow
+  ]}
+/>
+```
 
 ### `isReverse`
 
@@ -71,192 +141,92 @@ Optional prop to reverse the order of avatar stacking.
 | :-------- | :------- | :------ |
 | `boolean` | No       | `false` |
 
----
-
-### `twClassName`
-
-Optional prop to add `twrnc` overriding class names.
-
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
-
----
-
-### `style`
-
-Optional prop to control the style of the avatar group container.
-
-| TYPE                   | REQUIRED | DEFAULT |
-| :--------------------- | :------- | :------ |
-| `StyleProp<ViewStyle>` | No       | `null`  |
-
----
-
-## Usage
-
-Below are examples illustrating how to structure the `avatarPropsArr` based on each avatar variant. Note that the data shown is purely illustrative.
-
-### Account Avatars
-
 ```tsx
-import React from 'react';
-import AvatarGroup, {
-  AvatarGroupVariant,
-} from '@metamask/design-system-react-native';
-import { AvatarAccountVariant } from '@metamask/design-system-react-native';
-
 <AvatarGroup
   variant={AvatarGroupVariant.Account}
-  avatarPropsArr={[
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x123...',
-    },
-    {
-      variant: AvatarAccountVariant.Blockies,
-      address: '0x456...',
-    },
-    {
-      variant: AvatarAccountVariant.Jazzicon,
-      address: '0x789...',
-    },
-  ]}
-/>;
+  isReverse
+  avatarPropsArr={[{ address: '0x1234...' }, { address: '0x5678...' }]}
+/>
 ```
 
----
+### `overflowTextProps`
 
-### Favicon Avatars
+Additional AvatarBase props to pass to the overflow text element.
 
-```tsx
-import React from 'react';
-import AvatarGroup, {
-  AvatarGroupVariant,
-} from '@metamask/design-system-react-native';
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Favicon}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/favicon1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/favicon2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/favicon3.png' },
-    },
-  ]}
-/>;
-```
-
----
-
-### Network Avatars
-
-```tsx
-import React from 'react';
-import AvatarGroup, {
-  AvatarGroupVariant,
-} from '@metamask/design-system-react-native';
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Network}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/net1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/net2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/net3.png' },
-    },
-  ]}
-/>;
-```
-
----
-
-### Token Avatars
-
-```tsx
-import React from 'react';
-import AvatarGroup, {
-  AvatarGroupVariant,
-} from '@metamask/design-system-react-native';
-
-<AvatarGroup
-  variant={AvatarGroupVariant.Token}
-  avatarPropsArr={[
-    {
-      src: { uri: 'https://example.com/token1.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token2.png' },
-    },
-    {
-      src: { uri: 'https://example.com/token3.png' },
-    },
-  ]}
-/>;
-```
-
----
-
-### Displaying More Avatars with Overflow
+| TYPE              | REQUIRED | DEFAULT     |
+| ----------------- | -------- | ----------- |
+| `AvatarBaseProps` | No       | `undefined` |
 
 ```tsx
 <AvatarGroup
-  variant={AvatarGroupVariant.Token}
-  max={3}
+  variant={AvatarGroupVariant.Account}
+  max={2}
+  overflowTextProps={{
+    backgroundColor: BackgroundColor.BackgroundError,
+    textProps: { color: TextColor.TextDefault },
+  }}
   avatarPropsArr={[
-    { src: { uri: 'https://example.com/token1.png' } },
-    { src: { uri: 'https://example.com/token2.png' } },
-    { src: { uri: 'https://example.com/token3.png' } },
-    { src: { uri: 'https://example.com/token4.png' } },
+    { address: '0x1234...' },
+    { address: '0x5678...' },
+    { address: '0x9abc...' }, // "+1" will use custom styling
   ]}
 />
 ```
 
-If more than `max` avatars are provided, an overflow counter (e.g., `+1`) will be displayed.
+### `twClassName`
 
----
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-### Changing Avatar Size
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
-import AvatarGroup, {
-  AvatarGroupVariant,
-  AvatarGroupSize,
-} from '@metamask/design-system-react-native';
+import { AvatarGroup } from '@metamask/design-system-react-native';
+
+// Add additional styles
 <AvatarGroup
-  variant={AvatarGroupVariant.Network}
-  size={AvatarGroupSize.Lg}
-  avatarPropsArr={[
-    { src: { uri: 'https://example.com/net1.png' } },
-    { src: { uri: 'https://example.com/net2.png' } },
-  ]}
-/>;
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[{ address: '0x1234...' }]}
+  twClassName="bg-primary-100"
+/>
+
+// Override default styles
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[{ address: '0x1234...' }]}
+  twClassName="!flex-col"
+/>
 ```
 
----
+### `style`
 
-## Notes
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-- `AvatarGroup` ensures consistent avatar alignment and spacing.
-- Overflow avatars are indicated with a counter.
-- It supports different avatar types based on the selected variant.
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
----
+```tsx
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-## Contributing
+export const StyleExample = () => (
+  <AvatarGroup
+    variant={AvatarGroupVariant.Account}
+    avatarPropsArr={[{ address: '0x1234...' }, { address: '0x5678...' }]}
+    style={styles.custom}
+  />
+);
+```
 
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
+## References
 
----
-
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
