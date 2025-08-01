@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: Updated font file across apps and packages ([#801](https://github.com/MetaMask/metamask-design-system/pull/801))
+
 ## [0.2.0]
 
 ### Added

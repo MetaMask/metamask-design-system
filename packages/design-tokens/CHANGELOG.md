@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- [Design Tokens] Updated bg-muted colors to align with trade ([#788](https://github.com/MetaMask/metamask-design-system/pull/788))
+
 ## [8.1.0]
 
 ### Added
