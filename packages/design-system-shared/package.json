@@ -1,6 +1,7 @@
 {
   "name": "@metamask/design-system-shared",
   "version": "0.0.0",
+  "private": true,
   "description": "Shared types for design system libraries",
   "keywords": [
     "MetaMask",
