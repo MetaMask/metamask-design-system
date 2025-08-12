@@ -15,5 +15,5 @@ export type ButtonProps = (
   /**
    * Variant of Button.
    */
-  variant: ButtonVariant;
+  variant?: ButtonVariant;
 };
