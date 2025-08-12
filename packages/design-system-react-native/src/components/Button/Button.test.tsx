@@ -6,6 +6,13 @@ import { ButtonVariant } from '../../types';
 import { Button } from './Button';
 
 describe('Button', () => {
+  it('renders primary variant by default when no variant is provided', () => {
+    const { getByTestId } = render(
+      <Button testID="button-default">Default Button</Button>,
+    );
+    expect(getByTestId('button-default')).not.toBeNull();
+  });
+
   it('renders the correct primary variant', () => {
     const { getByTestId } = render(
       <Button variant={ButtonVariant.Primary} testID="button-primary">
