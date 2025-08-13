@@ -3419,6 +3419,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@metamask/design-system-shared@workspace:packages/design-system-shared":
+  version: 0.0.0-use.local
+  resolution: "@metamask/design-system-shared@workspace:packages/design-system-shared"
+  dependencies:
+    "@metamask/auto-changelog": "npm:^5.0.2"
+    "@ts-bridge/cli": "npm:^0.6.3"
+    "@types/jest": "npm:^27.4.1"
+    deepmerge: "npm:^4.2.2"
+    jest: "npm:^29.7.0"
+    ts-jest: "npm:^29.2.5"
+    typescript: "npm:~5.2.2"
+  languageName: unknown
+  linkType: soft
+
 "@metamask/design-system-tailwind-preset@workspace:^, @metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset":
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
