@@ -8,7 +8,7 @@ import { ButtonSecondary } from './variants/ButtonSecondary';
 import { ButtonTertiary } from './variants/ButtonTertiary';
 
 export const Button = (buttonProps: ButtonProps) => {
-  const { variant, ...restProps } = buttonProps;
+  const { variant = ButtonVariant.Primary, ...restProps } = buttonProps;
 
   switch (variant) {
     case ButtonVariant.Tertiary:
