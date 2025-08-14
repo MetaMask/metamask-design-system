@@ -58,6 +58,8 @@ export {
   BoxFlexWrap,
   BoxAlignItems,
   BoxJustifyContent,
+  BoxBackgroundColor,
+  BoxBorderColor,
 } from './Box';
 export type { BoxProps, BoxSpacing } from './Box';
 
