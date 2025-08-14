@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.1]
 
-### Uncategorized
+### Fixed
 
-- fix: export missing Box component color enums for React Native ([#807](https://github.com/MetaMask/metamask-design-system/pull/807))
-- fix: make Button variant prop optional with Primary as default ([#806](https://github.com/MetaMask/metamask-design-system/pull/806))
+- fix: export missing Box component color enums: `BoxBackgroundColor` and `BoxBorderColor` for React Native ([#807](https://github.com/MetaMask/metamask-design-system/pull/807))
+- fix: make Button `variant` prop optional(`ButtonVariant.Primary` as default) ([#806](https://github.com/MetaMask/metamask-design-system/pull/806))
 
 ## [0.3.0]
 
