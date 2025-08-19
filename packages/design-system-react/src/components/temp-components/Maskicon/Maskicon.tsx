@@ -1,10 +1,7 @@
-import * as dompurify from 'dompurify';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import type { MaskiconProps } from './Maskicon.types';
 import { getMaskiconSVG } from './Maskicon.utilities';
-
-const DOMPurify = dompurify.default;
 
 export const Maskicon = ({
   address,
@@ -28,14 +25,28 @@ export const Maskicon = ({
     };
   }, [address, size]);
 
-  if (!svgString) {
+  const dataUri = useMemo(() => {
+    if (!svgString) {
+      return '';
+    }
+    // Encode the SVG for safe data URI usage
+    const encoded = encodeURIComponent(svgString)
+      .replace(/%0A/g, '')
+      .replace(/%20/g, ' ');
+    return `data:image/svg+xml,${encoded}`;
+  }, [svgString]);
+
+  if (!dataUri) {
     return <div style={{ width: size, height: size, ...style }} {...props} />;
   }
 
   return (
-    <div
+    <img
+      alt="maskicon"
+      width={size}
+      height={size}
       style={{ width: size, height: size, ...style }}
-      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(svgString) }}
+      src={dataUri}
       {...props}
     />
   );

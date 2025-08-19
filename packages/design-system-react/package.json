@@ -53,7 +53,6 @@
     "@metamask/jazzicon": "^2.0.0",
     "@radix-ui/react-slot": "^1.1.0",
     "blo": "^2.0.0",
-    "dompurify": "^3.2.5",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
