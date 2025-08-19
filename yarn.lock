@@ -3413,8 +3413,8 @@ __metadata:
     "@metamask/utils": ^11.4.2
     "@solana/addresses": ^2.0.0
     bitcoin-address-validation: ">=2.0.0"
-    react: ^16.0.0
-    react-dom: ^16.0.0
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
     tailwindcss: ^3.0.0
   languageName: unknown
   linkType: soft
