@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 /**
  * Maskicon component props.
  */
-export type MaskiconProps = ComponentProps<'div'> & {
+export type MaskiconProps = ComponentProps<'img'> & {
   /**
    * Required address used as a unique identifier to generate the Maskicon.
    */
