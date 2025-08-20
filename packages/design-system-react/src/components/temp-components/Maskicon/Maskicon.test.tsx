@@ -219,7 +219,8 @@ describe('Maskicon', () => {
       'img[data-testid="maskicon"]',
     ) as HTMLImageElement;
     expect(updatedImg).toBeInTheDocument();
-    expect(updatedImg).toHaveStyle({ width: '32px', height: '32px' });
+    expect(updatedImg.getAttribute('width')).toBe('32');
+    expect(updatedImg.getAttribute('height')).toBe('32');
 
     getSvgSpy.mockRestore();
   });
@@ -243,7 +244,8 @@ describe('Maskicon', () => {
       expect(img.getAttribute('src')).toContain('data:image/svg+xml,');
     });
     const imgEl = container.querySelector('img') as HTMLImageElement;
-    expect(imgEl).toHaveStyle({ width: '32px', height: '32px' });
+    expect(imgEl.getAttribute('width')).toBe('32');
+    expect(imgEl.getAttribute('height')).toBe('32');
     getSvgSpy.mockRestore();
   });
 

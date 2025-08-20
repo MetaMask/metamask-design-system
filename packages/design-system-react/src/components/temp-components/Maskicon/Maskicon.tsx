@@ -6,7 +6,7 @@ import { getMaskiconSVG } from './Maskicon.utilities';
 export const Maskicon = ({
   address,
   size = 32,
-  style,
+  className,
   ...props
 }: MaskiconProps) => {
   const [svgString, setSvgString] = useState('');
@@ -30,14 +30,22 @@ export const Maskicon = ({
       return '';
     }
     // Encode the SVG for safe data URI usage
-    const encoded = encodeURIComponent(svgString)
-      .replace(/%0A/gu, '') // Removes all encoded newline characters
-      .replace(/%20/gu, ' '); // Converts encoded spaces back to regular spaces.
+    const encoded = encodeURIComponent(svgString).replace(/%0A/gu, ''); // Removes all encoded newline characters
     return `data:image/svg+xml,${encoded}`;
   }, [svgString]);
 
   if (!dataUri) {
-    return <div style={{ width: size, height: size, ...style }} {...props} />;
+    // Return an img element with transparent placeholder to maintain consistent typing
+    return (
+      <img
+        alt="maskicon"
+        width={size}
+        height={size}
+        className={className}
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
+        {...props}
+      />
+    );
   }
 
   return (
@@ -45,7 +53,7 @@ export const Maskicon = ({
       alt="maskicon"
       width={size}
       height={size}
-      style={{ width: size, height: size, ...style }}
+      className={className}
       src={dataUri}
       {...props}
     />
