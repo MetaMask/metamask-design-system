@@ -29,8 +29,9 @@ export const Maskicon = ({
     if (!svgString) {
       return '';
     }
-    // Encode the SVG for safe data URI usage
-    const encoded = encodeURIComponent(svgString).replace(/%0A/gu, ''); // Removes all encoded newline characters
+    // Normalize whitespace and encode the SVG for safe data URI usage
+    const cleanedSvg = svgString.replace(/\s+/gu, ' ').trim();
+    const encoded = encodeURIComponent(cleanedSvg);
     return `data:image/svg+xml,${encoded}`;
   }, [svgString]);
 
