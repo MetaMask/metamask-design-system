@@ -11,8 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- fix: remove DOMPurify dependency from Maskicon component ([#812](https://github.com/MetaMask/metamask-design-system/pull/812))
-- fix: align React peer dependencies with MetaMask extension React 17 ([#809](https://github.com/MetaMask/metamask-design-system/pull/809))
+- Removed DOMPurify dependency from Maskicon component ([#812](https://github.com/MetaMask/metamask-design-system/pull/812))
+- Aligned React peer dependencies with MetaMask extension React 17 ([#809](https://github.com/MetaMask/metamask-design-system/pull/809))
 
 ## [0.3.0]
 
