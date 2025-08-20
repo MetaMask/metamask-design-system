@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import { AvatarAccountVariant, AvatarAccountSize } from '../../types';
@@ -34,7 +34,7 @@ describe('AvatarAccount', () => {
     expect(blockies).toHaveAttribute('width', '32'); // Default size
   });
 
-  it('renders Maskicon variant when specified', () => {
+  it('renders Maskicon variant when specified', async () => {
     const address = '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8';
     render(
       <AvatarAccount
@@ -46,7 +46,12 @@ describe('AvatarAccount', () => {
 
     const maskicon = screen.getByTestId('maskicon');
     expect(maskicon).toBeInTheDocument();
-    expect(maskicon.tagName.toLowerCase()).toBe('div');
+    expect(maskicon.tagName.toLowerCase()).toBe('img');
+
+    // Wait for async updates to complete
+    await waitFor(() => {
+      expect(maskicon.getAttribute('src')).toBeTruthy();
+    });
   });
 
   it('applies custom className to root element', () => {
@@ -154,7 +159,7 @@ describe('AvatarAccount', () => {
     expect(blockies).toHaveClass('custom-blockies-class');
   });
 
-  it('passes custom props to Maskicon', () => {
+  it('passes custom props to Maskicon', async () => {
     render(
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
@@ -168,5 +173,10 @@ describe('AvatarAccount', () => {
     const maskicon = screen.getByTestId('maskicon');
     expect(maskicon).toBeInTheDocument();
     expect(maskicon).toHaveClass('custom-maskicon-class');
+
+    // Wait for async updates to complete
+    await waitFor(() => {
+      expect(maskicon.getAttribute('src')).toBeTruthy();
+    });
   });
 });
