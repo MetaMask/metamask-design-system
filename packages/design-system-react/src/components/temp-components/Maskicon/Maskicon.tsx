@@ -31,8 +31,8 @@ export const Maskicon = ({
     }
     // Encode the SVG for safe data URI usage
     const encoded = encodeURIComponent(svgString)
-      .replace(/%0A/gu, '')
-      .replace(/%20/gu, ' ');
+      .replace(/%0A/gu, '') // Removes all encoded newline characters
+      .replace(/%20/gu, ' '); // Converts encoded spaces back to regular spaces.
     return `data:image/svg+xml,${encoded}`;
   }, [svgString]);
 
