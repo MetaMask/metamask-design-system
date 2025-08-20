@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react';
 /**
  * Maskicon component props.
  */
-export type MaskiconProps = Omit<ComponentProps<'img'>, 'width' | 'height' | 'style'> & {
+export type MaskiconProps = Omit<
+  ComponentProps<'img'>,
+  'width' | 'height' | 'style'
+> & {
   /**
    * Required address used as a unique identifier to generate the Maskicon.
    */
