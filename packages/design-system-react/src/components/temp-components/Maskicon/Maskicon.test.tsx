@@ -190,7 +190,7 @@ describe('Maskicon Utilities', () => {
 describe('Maskicon', () => {
   afterEach(cleanup);
 
-  it('renders a placeholder div initially, then updates when SVG is ready', async () => {
+  it('renders a placeholder div initially, then updates to an <img> with data URI when SVG is ready', async () => {
     // Spy on getMaskiconSVG to resolve immediately.
     const resolvedSvg = '<svg><rect width="100" height="100"/></svg>';
     const getSvgSpy = jest
@@ -209,16 +209,18 @@ describe('Maskicon', () => {
     expect(initialDiv).toBeInTheDocument();
     expect(initialDiv.innerHTML).toBe('');
 
-    // Wait for the async effect to update the div.
+    // Wait for the async effect to render an <img> with a data URI
     await waitFor(() => {
-      expect((container.firstChild as HTMLElement).innerHTML).toContain('<svg');
+      const img = container.querySelector('img') as HTMLImageElement;
+      expect(img).toBeInTheDocument();
+      expect(img.getAttribute('src')).toContain('data:image/svg+xml,');
     });
-    // Now that the SVG is rendered, the div should have the test id.
-    const updatedDiv = container.querySelector(
-      '[data-testid="maskicon"]',
-    ) as HTMLElement;
-    expect(updatedDiv).toBeInTheDocument();
-    expect(updatedDiv).toHaveStyle({ width: '32px', height: '32px' });
+    const updatedImg = container.querySelector(
+      'img[data-testid="maskicon"]',
+    ) as HTMLImageElement;
+    expect(updatedImg).toBeInTheDocument();
+    expect(updatedImg.getAttribute('width')).toBe('32');
+    expect(updatedImg.getAttribute('height')).toBe('32');
 
     getSvgSpy.mockRestore();
   });
@@ -237,15 +239,17 @@ describe('Maskicon', () => {
     );
 
     await waitFor(() => {
-      expect((container.firstChild as HTMLElement).innerHTML).toStrictEqual(
-        expect.stringContaining('<svg'),
-      );
+      const img = container.querySelector('img') as HTMLImageElement;
+      expect(img).toBeInTheDocument();
+      expect(img.getAttribute('src')).toContain('data:image/svg+xml,');
     });
-    expect(container.firstChild).toHaveStyle({ width: '32px', height: '32px' });
+    const imgEl = container.querySelector('img') as HTMLImageElement;
+    expect(imgEl.getAttribute('width')).toBe('32');
+    expect(imgEl.getAttribute('height')).toBe('32');
     getSvgSpy.mockRestore();
   });
 
-  it('forwards additional props to the div container', async () => {
+  it('forwards additional props to the <img> element', async () => {
     const resolvedSvg = '<svg><rect width="100" height="100"/></svg>';
     const getSvgSpy = jest
       .spyOn(MaskiconUtilities, 'getMaskiconSVG')
@@ -260,15 +264,14 @@ describe('Maskicon', () => {
     );
 
     await waitFor(() => {
-      expect((container.firstChild as HTMLElement).innerHTML).toStrictEqual(
-        expect.stringContaining('<svg'),
-      );
+      const img = container.querySelector('img') as HTMLImageElement;
+      expect(img).toBeInTheDocument();
     });
-    const updatedDiv = container.querySelector(
-      '[data-testid="maskicon-forward"]',
-    ) as HTMLElement;
-    expect(updatedDiv).toBeInTheDocument();
-    expect(updatedDiv.getAttribute('data-custom')).toBe('hello');
+    const updatedImg = container.querySelector(
+      'img[data-testid="maskicon-forward"]',
+    ) as HTMLImageElement;
+    expect(updatedImg).toBeInTheDocument();
+    expect(updatedImg.getAttribute('data-custom')).toBe('hello');
     getSvgSpy.mockRestore();
   });
 
