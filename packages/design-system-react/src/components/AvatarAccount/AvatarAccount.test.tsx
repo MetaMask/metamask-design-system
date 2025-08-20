@@ -50,7 +50,7 @@ describe('AvatarAccount', () => {
 
     // Wait for async updates to complete
     await waitFor(() => {
-      expect(maskicon.getAttribute('src')).toBeTruthy();
+      expect(maskicon.getAttribute('src')).toContain('data:image/svg+xml');
     });
   });
 
@@ -176,7 +176,7 @@ describe('AvatarAccount', () => {
 
     // Wait for async updates to complete
     await waitFor(() => {
-      expect(maskicon.getAttribute('src')).toBeTruthy();
+      expect(maskicon.getAttribute('src')).toContain('data:image/svg+xml');
     });
   });
 });
