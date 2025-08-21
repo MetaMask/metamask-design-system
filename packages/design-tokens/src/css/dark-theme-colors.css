@@ -161,7 +161,7 @@
 
 /* Dark theme based on system preference */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
+  :root:not([data-theme]):not(.dark):not(.light) {
     /* For default neutral surface (#121314) */
     --color-background-default: var(--brand-colors-grey-grey900);
     /* For sunken neutral surface below background/default (#000000) */

@@ -163,7 +163,7 @@
 
 /* Light theme based on system preference */
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
+  :root:not([data-theme]):not(.dark):not(.light) {
     /* For default neutral surface (#ffffff) */
     --color-background-default: var(--brand-colors-grey-grey000);
     /* For sunken neutral surface below background/default (#f3f5f9) */
@@ -323,7 +323,7 @@
 
 /* Fallback light theme when no system preference is available */
 @media (prefers-color-scheme: no-preference) {
-  :root:not([data-theme]) {
+  :root:not([data-theme]):not(.dark):not(.light) {
     /* For default neutral surface (#ffffff) */
     --color-background-default: var(--brand-colors-grey-grey000);
     /* For sunken neutral surface below background/default (#f3f5f9) */
