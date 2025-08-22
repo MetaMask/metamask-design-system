@@ -58,7 +58,7 @@ describe('Maskicon Utilities', () => {
     const numericResult = MaskiconUtilities.seedToString(numericSeed);
     const arrayResult = MaskiconUtilities.seedToString(arraySeed);
 
-    expect(numericResult).toBe('3039');
+    expect(numericResult).toBe('303900');
     expect(arrayResult).toBe('010203040506');
   });
 

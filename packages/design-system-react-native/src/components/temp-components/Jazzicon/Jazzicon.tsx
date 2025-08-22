@@ -7,7 +7,7 @@ import type { JazziconProps } from './Jazzicon.types';
 
 export const Jazzicon = ({ testID, address, ...props }: JazziconProps) => {
   // Extract the account address from CAIP-10 format if needed
-  const accountAddress = extractAccountAddress(address);
+  const accountAddress = address ? extractAccountAddress(address) : '';
 
   return (
     <View testID={testID}>
