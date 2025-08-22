@@ -7,3 +7,5 @@
 export default function greeter(name: string): string {
   return `Hello, ${name}!`;
 }
+
+export { extractAccountAddress } from './utils/caip-address';

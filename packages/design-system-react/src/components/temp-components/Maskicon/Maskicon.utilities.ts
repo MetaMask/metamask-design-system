@@ -1,3 +1,4 @@
+import { extractAccountAddress } from '@metamask/design-system-shared';
 import { stringToBytes, KnownCaipNamespace } from '@metamask/utils';
 import { isAddress as isSolanaAddress } from '@solana/addresses';
 
@@ -292,13 +293,16 @@ export async function getMaskiconSVG(
     return svgCache[cacheKey];
   }
 
+  // Extract the account address from CAIP-10 format if needed
+  const accountAddress = extractAccountAddress(address);
+
   const namespace = await getCaipNamespaceFromAddress(address);
   let seed: number | number[];
 
   if (namespace === KnownCaipNamespace.Eip155) {
-    seed = generateSeedEthereum(address);
+    seed = generateSeedEthereum(accountAddress);
   } else {
-    seed = generateSeedNonEthereum(address);
+    seed = generateSeedNonEthereum(accountAddress);
   }
 
   const svgString = createMaskiconSVG(seed, size);
