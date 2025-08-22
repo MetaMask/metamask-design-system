@@ -6,6 +6,18 @@ import { Blockies } from './Blockies';
 // @ts-ignore
 import { toDataUrl } from './Blockies.utilities';
 
+// Mock the extractAccountAddress utility
+jest.mock('@metamask/design-system-shared', () => ({
+  extractAccountAddress: (address: string) => {
+    // Mock implementation that handles CAIP-10 format
+    if (address && address.includes(':')) {
+      const parts = address.split(':');
+      return parts[parts.length - 1]; // Return the address part
+    }
+    return address; // Return as-is for non-CAIP addresses
+  },
+}));
+
 // Mock the toDataUrl utility
 jest.mock('./Blockies.utilities', () => ({
   toDataUrl: jest.fn(() => 'data:image/png;base64,mockedBlockyImage'),
@@ -55,5 +67,31 @@ describe('Blockies Component', () => {
   it('calls toDataUrl with the correct address', () => {
     render(<Blockies address="0xabc" testID="blockies" />);
     expect(toDataUrl).toHaveBeenCalledWith('0xabc');
+  });
+
+  it('extracts account address from CAIP-10 format before calling toDataUrl', () => {
+    render(
+      <Blockies
+        address="eip155:1:0x1234567890abcdef1234567890abcdef12345678"
+        testID="blockies"
+      />,
+    );
+    // Should call toDataUrl with extracted address, not the full CAIP-10 string
+    expect(toDataUrl).toHaveBeenCalledWith(
+      '0x1234567890abcdef1234567890abcdef12345678',
+    );
+  });
+
+  it('handles legacy addresses without CAIP-10 format', () => {
+    render(
+      <Blockies
+        address="0x9876543210fedcba9876543210fedcba98765432"
+        testID="blockies"
+      />,
+    );
+    // Should call toDataUrl with the address as-is
+    expect(toDataUrl).toHaveBeenCalledWith(
+      '0x9876543210fedcba9876543210fedcba98765432',
+    );
   });
 });
