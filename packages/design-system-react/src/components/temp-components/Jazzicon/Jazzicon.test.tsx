@@ -3,9 +3,6 @@ import React from 'react';
 
 import { Jazzicon } from './Jazzicon';
 
-
-
-
 describe('Jazzicon', () => {
   describe('Jazzicon component', () => {
     beforeEach(() => {
@@ -26,7 +23,6 @@ describe('Jazzicon', () => {
         // The component asynchronously appends a child (the generated icon)
         expect(container.childNodes.length).toBeGreaterThan(0);
       });
-
     });
 
     it('accepts a custom size, className, and style', async () => {
@@ -46,7 +42,6 @@ describe('Jazzicon', () => {
         expect(container).toHaveStyle('background-color: red');
         expect(container.childNodes.length).toBeGreaterThan(0);
       });
-
     });
 
     it('caches icons for same address and size', async () => {

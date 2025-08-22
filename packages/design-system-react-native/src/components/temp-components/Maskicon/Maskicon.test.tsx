@@ -1,23 +1,21 @@
-import '@testing-library/jest-dom';
-import { render, waitFor, cleanup } from '@testing-library/react-native';
-import React from 'react';
 import {
   generateSeedEthereum,
-  generateSeedNonEthereum,
-  isEthereumAddress
+  isEthereumAddress,
 } from '@metamask/design-system-shared';
+import { render, cleanup } from '@testing-library/react-native';
+import React from 'react';
 
 import { Maskicon } from './Maskicon';
 import * as MaskiconUtilities from './Maskicon.utilities';
 
-afterEach(cleanup);
-
 describe('Maskicon Component (React Native)', () => {
+  afterEach(cleanup);
+
   it('renders successfully with address prop', () => {
     const address = '0x1234567890abcdef1234567890abcdef12345678';
     const component = render(<Maskicon address={address} />);
-    
-    expect(component).toBeTruthy();
+
+    expect(component.root).toBeDefined();
   });
 });
 
@@ -29,8 +27,12 @@ describe('Shared Utilities Integration', () => {
   });
 
   it('isEthereumAddress correctly identifies address types', () => {
-    expect(isEthereumAddress('0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8')).toBe(true);
-    expect(isEthereumAddress('4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7')).toBe(false);
+    expect(
+      isEthereumAddress('0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8'),
+    ).toBe(true);
+    expect(
+      isEthereumAddress('4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7'),
+    ).toBe(false);
   });
 });
 
@@ -53,7 +55,7 @@ describe('Maskicon Utilities', () => {
   });
 
   it('seedToString returns fallback for invalid seed types', () => {
-    const invalidSeed = 'invalid' as any;
+    const invalidSeed = 'invalid' as unknown as number;
     const result = MaskiconUtilities.seedToString(invalidSeed);
     expect(result).toBe('seed000');
   });

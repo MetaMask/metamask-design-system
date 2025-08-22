@@ -1,22 +1,20 @@
 import '@testing-library/jest-dom';
-import { render, waitFor, cleanup } from '@testing-library/react';
-import React from 'react';
 import {
   generateSeedEthereum,
-  generateSeedNonEthereum,
-  isEthereumAddress
+  isEthereumAddress,
 } from '@metamask/design-system-shared';
+import { render, waitFor, cleanup } from '@testing-library/react';
+import React from 'react';
 
 import { Maskicon } from './Maskicon';
 import * as MaskiconUtilities from './Maskicon.utilities';
 
-afterEach(cleanup);
-
 describe('Maskicon Component', () => {
+  afterEach(cleanup);
   it('renders successfully with address prop', async () => {
     const address = '0x1234567890abcdef1234567890abcdef12345678';
     const { container } = render(<Maskicon address={address} />);
-    
+
     await waitFor(() => {
       const img = container.querySelector('img');
       expect(img).toBeInTheDocument();
@@ -28,7 +26,7 @@ describe('Maskicon Component', () => {
     const address = '0x1234567890abcdef1234567890abcdef12345678';
     const size = 64;
     const { container } = render(<Maskicon address={address} size={size} />);
-    
+
     await waitFor(() => {
       const img = container.querySelector('img');
       expect(img?.getAttribute('width')).toBe(size.toString());
@@ -45,8 +43,12 @@ describe('Shared Utilities Integration', () => {
   });
 
   it('isEthereumAddress correctly identifies address types', () => {
-    expect(isEthereumAddress('0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8')).toBe(true);
-    expect(isEthereumAddress('4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7')).toBe(false);
+    expect(
+      isEthereumAddress('0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8'),
+    ).toBe(true);
+    expect(
+      isEthereumAddress('4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7'),
+    ).toBe(false);
   });
 });
 
