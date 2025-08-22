@@ -50,6 +50,7 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "dependencies": {
+    "@metamask/design-system-shared": "workspace:^",
     "@metamask/jazzicon": "^2.0.0",
     "@radix-ui/react-slot": "^1.1.0",
     "blo": "^2.0.0",
