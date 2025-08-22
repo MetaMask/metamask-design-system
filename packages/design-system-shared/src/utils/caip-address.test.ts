@@ -30,14 +30,16 @@ describe('extractAccountAddress', () => {
     });
 
     it('should extract Solana address from solana CAIP-10 format', () => {
-      const caipAddress = 'solana:mainnet:4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7';
+      const caipAddress =
+        'solana:mainnet:4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7';
       const expectedAddress = '4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7';
       const result = extractAccountAddress(caipAddress);
       expect(result).toBe(expectedAddress);
     });
 
     it('should extract Bitcoin address from bip122 CAIP-10 format', () => {
-      const caipAddress = 'bip122:000000000019d6689c085ae165831e93:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
+      const caipAddress =
+        'bip122:000000000019d6689c085ae165831e93:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
       const expectedAddress = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
       const result = extractAccountAddress(caipAddress);
       expect(result).toBe(expectedAddress);
@@ -46,7 +48,7 @@ describe('extractAccountAddress', () => {
 
   describe('Network consistency', () => {
     const expectedAddress = '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8';
-    
+
     it('should extract same address from different Ethereum networks', () => {
       const mainnet = 'eip155:1:0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8';
       const base = 'eip155:8453:0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8';
@@ -99,7 +101,7 @@ describe('extractAccountAddress', () => {
 
   describe('Icon generation consistency (integration)', () => {
     it('should ensure CAIP-10 and legacy addresses produce same seeds', () => {
-      // This test verifies the core issue reported: 
+      // This test verifies the core issue reported:
       // identical icons should be generated for these addresses
       const testCases = [
         {
@@ -114,7 +116,7 @@ describe('extractAccountAddress', () => {
 
       testCases.forEach(({ legacy, caip10 }) => {
         const legacyResult = extractAccountAddress(legacy);
-        
+
         caip10.forEach((caipAddress) => {
           const caipResult = extractAccountAddress(caipAddress);
           expect(caipResult).toBe(legacyResult);

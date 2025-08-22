@@ -1,16 +1,13 @@
-import { extractAccountAddress } from '@metamask/design-system-shared';
+import {
+  extractAccountAddress,
+  generateIconSeed,
+} from '@metamask/design-system-shared';
 import jazzicon from '@metamask/jazzicon';
-import { KnownCaipNamespace } from '@metamask/utils';
 import React, { useEffect, useRef } from 'react';
 
 import { twMerge } from '../../../utils/tw-merge';
 
 import type { JazziconProps } from './Jazzicon.types';
-import {
-  generateSeedEthereum,
-  generateSeedNonEthereum,
-  getCaipNamespaceFromAddress,
-} from './Jazzicon.utilities';
 
 /**
  * Cache for storing generated SVG elements by `address:diameter` so
@@ -52,18 +49,11 @@ export const Jazzicon = ({
       // Extract the account address from CAIP-10 format if needed
       const accountAddress = extractAccountAddress(address);
 
-      // Determine the CAIP namespace
-      const namespace = await getCaipNamespaceFromAddress(address);
+      // Generate appropriate seed based on address format
+      const seed = generateIconSeed(accountAddress);
+
       if (isCancelled) {
         return;
-      }
-
-      // Pick seeding strategy based on namespace
-      let seed: number | number[];
-      if (namespace === KnownCaipNamespace.Eip155) {
-        seed = generateSeedEthereum(accountAddress);
-      } else {
-        seed = generateSeedNonEthereum(accountAddress);
       }
 
       // Create Jazzicon

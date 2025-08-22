@@ -8,4 +8,10 @@ export default function greeter(name: string): string {
   return `Hello, ${name}!`;
 }
 
-export { extractAccountAddress } from './utils/caip-address';
+export {
+  extractAccountAddress,
+  generateSeedEthereum,
+  generateSeedNonEthereum,
+  isEthereumAddress,
+  generateIconSeed,
+} from './utils/caip-address';
