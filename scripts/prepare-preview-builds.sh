@@ -45,6 +45,18 @@ yarn install --no-immutable
 
 echo "Updating TypeScript imports for specific packages..."
 
+# Update imports in design-system-react
+if [ -d "packages/design-system-react/src" ]; then
+  echo "- design-system-react source files"
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    # Update design-system-shared import
+    find "packages/design-system-react/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-system-shared|@metamask-previews/design-system-shared|g' {} +
+  else
+    # Update design-system-shared import
+    find "packages/design-system-react/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-system-shared|@metamask-previews/design-system-shared|g' {} +
+  fi
+fi
+
 # Update imports in design-system-react-native
 if [ -d "packages/design-system-react-native/src" ]; then
   echo "- design-system-react-native source files"
@@ -53,11 +65,15 @@ if [ -d "packages/design-system-react-native/src" ]; then
     find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-tokens|@metamask-previews/design-tokens|g' {} +
     # Update design-system-twrnc-preset import
     find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-system-twrnc-preset|@metamask-previews/design-system-twrnc-preset|g' {} +
+    # Update design-system-shared import
+    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-system-shared|@metamask-previews/design-system-shared|g' {} +
   else
     # Update design-tokens import
     find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-tokens|@metamask-previews/design-tokens|g' {} +
     # Update design-system-twrnc-preset import
     find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-system-twrnc-preset|@metamask-previews/design-system-twrnc-preset|g' {} +
+    # Update design-system-shared import
+    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-system-shared|@metamask-previews/design-system-shared|g' {} +
   fi
 fi
 
