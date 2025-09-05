@@ -5,6 +5,7 @@ jest.mock('react-native-svg', () => {
 
   return {
     Svg: MockedSvg,
+    SvgXml: MockedSvg,
     Circle: MockedSvg,
     Path: MockedSvg,
     Rect: MockedSvg,

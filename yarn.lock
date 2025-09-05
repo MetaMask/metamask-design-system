@@ -3333,6 +3333,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.3"
     "@figma/code-connect": "npm:^1.0.0"
     "@metamask/auto-changelog": "npm:^5.0.2"
+    "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
     "@metamask/utils": "npm:^11.7.0"
@@ -3342,6 +3343,7 @@ __metadata:
     "@testing-library/react-native": "npm:^12.8.1"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/babel__preset-env": "npm:^7"
+    "@types/fast-text-encoding": "npm:^1"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
     "@types/react": "npm:^18.2.0"
@@ -3349,6 +3351,7 @@ __metadata:
     babel-jest: "npm:^29.7.0"
     bitcoin-address-validation: "npm:>=2.0.0"
     deepmerge: "npm:^4.2.2"
+    fast-text-encoding: "npm:^1.0.6"
     jest: "npm:^29.7.0"
     metro-react-native-babel-preset: "npm:^0.77.0"
     react: "npm:^18.2.0"
@@ -3382,6 +3385,7 @@ __metadata:
     "@figma/code-connect": "npm:^1.0.0"
     "@jest/globals": "npm:^29.7.0"
     "@metamask/auto-changelog": "npm:^5.0.2"
+    "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/jazzicon": "npm:^2.0.0"
     "@metamask/utils": "npm:^11.7.0"
@@ -3418,7 +3422,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/design-system-shared@workspace:packages/design-system-shared":
+"@metamask/design-system-shared@workspace:^, @metamask/design-system-shared@workspace:packages/design-system-shared":
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-shared@workspace:packages/design-system-shared"
   dependencies:
@@ -5799,6 +5803,13 @@ __metadata:
   version: 1.0.8
   resolution: "@types/estree@npm:1.0.8"
   checksum: 10/25a4c16a6752538ffde2826c2cc0c6491d90e69cd6187bef4a006dd2c3c45469f049e643d7e516c515f21484dc3d48fd5c870be158a5beb72f5baf3dc43e4099
+  languageName: node
+  linkType: hard
+
+"@types/fast-text-encoding@npm:^1":
+  version: 1.0.3
+  resolution: "@types/fast-text-encoding@npm:1.0.3"
+  checksum: 10/34ec2bbaf3e3ee36b7b74375293becc735378f77e9cd93b810ad988b42991ee80d30fb942e6ba03adfc1f0cb0e2024a0aeee84475847563ed6782e21c4c0f5f0
   languageName: node
   linkType: hard
 
@@ -11406,6 +11417,13 @@ __metadata:
   version: 2.0.6
   resolution: "fast-levenshtein@npm:2.0.6"
   checksum: 10/eb7e220ecf2bab5159d157350b81d01f75726a4382f5a9266f42b9150c4523b9795f7f5d9fbbbeaeac09a441b2369f05ee02db48ea938584205530fe5693cfe1
+  languageName: node
+  linkType: hard
+
+"fast-text-encoding@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "fast-text-encoding@npm:1.0.6"
+  checksum: 10/f7b9e2e7a21e4ae5f4b8d3729850be83fb45052b28c9c38c09b8366463a291d6dc5448359238bdaf87f6a9e907d5895a94319a2c5e0e9f0786859ad6312d1d06
   languageName: node
   linkType: hard
 
