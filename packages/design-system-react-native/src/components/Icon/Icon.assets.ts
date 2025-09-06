@@ -28,6 +28,7 @@ import ArrowDropDownCircleSVG from './assets/arrow-drop-down-circle.svg';
 import ArrowLeftSVG from './assets/arrow-left.svg';
 import ArrowRightSVG from './assets/arrow-right.svg';
 import ArrowUpSVG from './assets/arrow-up.svg';
+import AttachMoneySVG from './assets/attach-money.svg';
 import AttachmentSVG from './assets/attachment.svg';
 import BackspaceSVG from './assets/backspace.svg';
 import BanSVG from './assets/ban.svg';
@@ -309,6 +310,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.ArrowLeft]: ArrowLeftSVG,
   [IconName.ArrowRight]: ArrowRightSVG,
   [IconName.ArrowUp]: ArrowUpSVG,
+  [IconName.AttachMoney]: AttachMoneySVG,
   [IconName.Attachment]: AttachmentSVG,
   [IconName.Backspace]: BackspaceSVG,
   [IconName.Ban]: BanSVG,

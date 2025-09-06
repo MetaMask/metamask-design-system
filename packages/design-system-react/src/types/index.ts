@@ -626,6 +626,7 @@ export enum IconName {
   ArrowLeft = 'ArrowLeft',
   ArrowRight = 'ArrowRight',
   ArrowUp = 'ArrowUp',
+  AttachMoney = 'AttachMoney',
   Attachment = 'Attachment',
   Backspace = 'Backspace',
   Ban = 'Ban',

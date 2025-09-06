@@ -25,6 +25,7 @@ import ArrowDropDownCircle from './ArrowDropDownCircle';
 import ArrowLeft from './ArrowLeft';
 import ArrowRight from './ArrowRight';
 import ArrowUp from './ArrowUp';
+import AttachMoney from './AttachMoney';
 import Attachment from './Attachment';
 import Backspace from './Backspace';
 import Ban from './Ban';
@@ -302,6 +303,7 @@ export const Icons = {
   ArrowLeft,
   ArrowRight,
   ArrowUp,
+  AttachMoney,
   Attachment,
   Backspace,
   Ban,
