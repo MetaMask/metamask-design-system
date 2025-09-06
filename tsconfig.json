@@ -3,12 +3,12 @@
   "references": [
     { "path": "./apps/storybook-react" },
     { "path": "./apps/storybook-react-native" },
-    { "path": "./packages/design-system-react" },
-    { "path": "./packages/design-system-react-native" },
     { "path": "./packages/design-system-shared" },
+    { "path": "./packages/design-tokens" },
     { "path": "./packages/design-system-tailwind-preset" },
     { "path": "./packages/design-system-twrnc-preset" },
-    { "path": "./packages/design-tokens" }
+    { "path": "./packages/design-system-react" },
+    { "path": "./packages/design-system-react-native" }
   ],
   "files": []
 }
