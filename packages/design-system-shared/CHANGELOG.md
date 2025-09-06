@@ -7,4 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add CAIP-10 address utilities to design-system-shared ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
+
 [Unreleased]: https://github.com/MetaMask/metamask-design-system/

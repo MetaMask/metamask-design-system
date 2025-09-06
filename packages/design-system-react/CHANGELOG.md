@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: icon generation for CAIP-10 addresses ([#816](https://github.com/MetaMask/metamask-design-system/pull/816))
+- chore: added attach money icon ([#823](https://github.com/MetaMask/metamask-design-system/pull/823))
+- feat: enhance icon component stories with comprehensive address format testing ([#820](https://github.com/MetaMask/metamask-design-system/pull/820))
+- chore(deps): bump @metamask/utils from 11.4.2 to 11.7.0 ([#819](https://github.com/MetaMask/metamask-design-system/pull/819))
+
 ## [0.3.1]
 
 ### Fixed
