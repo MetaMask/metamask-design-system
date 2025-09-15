@@ -3333,15 +3333,17 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.3"
     "@figma/code-connect": "npm:^1.0.0"
     "@metamask/auto-changelog": "npm:^5.0.2"
+    "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.4.2"
+    "@metamask/utils": "npm:^11.7.0"
     "@solana/addresses": "npm:^2.0.0"
     "@storybook/react-native": "npm:6.5"
     "@testing-library/react-hooks": "npm:^8.0.1"
     "@testing-library/react-native": "npm:^12.8.1"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/babel__preset-env": "npm:^7"
+    "@types/fast-text-encoding": "npm:^1"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
     "@types/react": "npm:^18.2.0"
@@ -3349,6 +3351,7 @@ __metadata:
     babel-jest: "npm:^29.7.0"
     bitcoin-address-validation: "npm:>=2.0.0"
     deepmerge: "npm:^4.2.2"
+    fast-text-encoding: "npm:^1.0.6"
     jest: "npm:^29.7.0"
     metro-react-native-babel-preset: "npm:^0.77.0"
     react: "npm:^18.2.0"
@@ -3365,7 +3368,7 @@ __metadata:
   peerDependencies:
     "@metamask/design-system-twrnc-preset": ^0.2.0
     "@metamask/design-tokens": ^8.1.0
-    "@metamask/utils": ^11.4.2
+    "@metamask/utils": ^11.7.0
     "@solana/addresses": ^2.0.0
     bitcoin-address-validation: ">=2.0.0"
     react: ">=18.2.0"
@@ -3382,9 +3385,10 @@ __metadata:
     "@figma/code-connect": "npm:^1.0.0"
     "@jest/globals": "npm:^29.7.0"
     "@metamask/auto-changelog": "npm:^5.0.2"
+    "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/jazzicon": "npm:^2.0.0"
-    "@metamask/utils": "npm:^11.4.2"
+    "@metamask/utils": "npm:^11.7.0"
     "@radix-ui/react-slot": "npm:^1.1.0"
     "@solana/addresses": "npm:^2.0.0"
     "@storybook/react": "npm:^9.0.17"
@@ -3409,7 +3413,7 @@ __metadata:
   peerDependencies:
     "@metamask/design-system-tailwind-preset": ^0.6.0
     "@metamask/design-tokens": ^8.1.0
-    "@metamask/utils": ^11.4.2
+    "@metamask/utils": ^11.7.0
     "@solana/addresses": ^2.0.0
     bitcoin-address-validation: ">=2.0.0"
     react: ^17.0.0 || ^18.0.0
@@ -3418,11 +3422,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/design-system-shared@workspace:packages/design-system-shared":
+"@metamask/design-system-shared@workspace:^, @metamask/design-system-shared@workspace:packages/design-system-shared":
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-shared@workspace:packages/design-system-shared"
   dependencies:
     "@metamask/auto-changelog": "npm:^5.0.2"
+    "@metamask/utils": "npm:^11.7.0"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
     deepmerge: "npm:^4.2.2"
@@ -3587,7 +3592,7 @@ __metadata:
     "@metamask/eslint-config-jest": "npm:^14.0.0"
     "@metamask/eslint-config-nodejs": "npm:^14.0.0"
     "@metamask/eslint-config-typescript": "npm:^14.0.0"
-    "@metamask/utils": "npm:^11.4.2"
+    "@metamask/utils": "npm:^11.7.0"
     "@types/eslint-plugin-tailwindcss": "npm:^3"
     "@types/jest": "npm:^27.4.1"
     "@types/lodash": "npm:^4.14.191"
@@ -3636,7 +3641,7 @@ __metadata:
     "@metamask/design-system-react-native": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.4.2"
+    "@metamask/utils": "npm:^11.7.0"
     "@react-native-async-storage/async-storage": "npm:^2.0.0"
     "@react-native-community/datetimepicker": "npm:^8.2.0"
     "@react-native-community/slider": "npm:^4.5.5"
@@ -3674,7 +3679,7 @@ __metadata:
     "@metamask/design-system-react": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.4.2"
+    "@metamask/utils": "npm:^11.7.0"
     "@playwright/test": "npm:^1.52.0"
     "@solana/addresses": "npm:^2.0.0"
     "@storybook/addon-a11y": "npm:^9.0.17"
@@ -3701,7 +3706,7 @@ __metadata:
     storybook: "npm:^9.0.17"
     tailwindcss: "npm:^3.0.0"
     typescript: "npm:~5.2.2"
-    vite: "npm:^5.4.19"
+    vite: "npm:^5.4.20"
     vitest: "npm:^3.2.0"
   languageName: unknown
   linkType: soft
@@ -3713,21 +3718,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/utils@npm:^11.4.2":
-  version: 11.4.2
-  resolution: "@metamask/utils@npm:11.4.2"
+"@metamask/utils@npm:^11.7.0":
+  version: 11.7.0
+  resolution: "@metamask/utils@npm:11.7.0"
   dependencies:
     "@ethereumjs/tx": "npm:^4.2.0"
     "@metamask/superstruct": "npm:^3.1.0"
     "@noble/hashes": "npm:^1.3.1"
     "@scure/base": "npm:^1.1.3"
     "@types/debug": "npm:^4.1.7"
+    "@types/lodash": "npm:^4.17.20"
     debug: "npm:^4.3.4"
-    lodash.memoize: "npm:^4.1.2"
+    lodash: "npm:^4.17.21"
     pony-cause: "npm:^2.1.10"
     semver: "npm:^7.5.4"
     uuid: "npm:^9.0.1"
-  checksum: 10/63415da3479f7022bc98e63d0f68a53ef31b2ef3d459eb3f81d62140f510ebba937c7034dd63cde6b2d5faf74250081903cc8009a174a9984d2fec1d0be04b8d
+  checksum: 10/0f31783f357d1043d0e83af3a7af1e686f56c821e9acc650d71c02f5ea8ee7d5868aa09d240b179305893be05d5a406ccfdd9a8c534d265d6b821c383f51ace1
   languageName: node
   linkType: hard
 
@@ -5800,6 +5806,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/fast-text-encoding@npm:^1":
+  version: 1.0.3
+  resolution: "@types/fast-text-encoding@npm:1.0.3"
+  checksum: 10/34ec2bbaf3e3ee36b7b74375293becc735378f77e9cd93b810ad988b42991ee80d30fb942e6ba03adfc1f0cb0e2024a0aeee84475847563ed6782e21c4c0f5f0
+  languageName: node
+  linkType: hard
+
 "@types/graceful-fs@npm:^4.1.3":
   version: 4.1.9
   resolution: "@types/graceful-fs@npm:4.1.9"
@@ -5883,10 +5896,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.191":
-  version: 4.17.13
-  resolution: "@types/lodash@npm:4.17.13"
-  checksum: 10/ddb34e20810c71be2d9445bcc4b64ec25b83976738454de709854b79c7f655b03704b76235445699956d65012987720e0e429a35489de65495cdb5420202d905
+"@types/lodash@npm:^4.14.191, @types/lodash@npm:^4.17.20":
+  version: 4.17.20
+  resolution: "@types/lodash@npm:4.17.20"
+  checksum: 10/8cd8ad3bd78d2e06a93ae8d6c9907981d5673655fec7cb274a4d9a59549aab5bb5b3017361280773b8990ddfccf363e14d1b37c97af8a9fe363de677f9a61524
   languageName: node
   linkType: hard
 
@@ -11404,6 +11417,13 @@ __metadata:
   version: 2.0.6
   resolution: "fast-levenshtein@npm:2.0.6"
   checksum: 10/eb7e220ecf2bab5159d157350b81d01f75726a4382f5a9266f42b9150c4523b9795f7f5d9fbbbeaeac09a441b2369f05ee02db48ea938584205530fe5693cfe1
+  languageName: node
+  linkType: hard
+
+"fast-text-encoding@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "fast-text-encoding@npm:1.0.6"
+  checksum: 10/f7b9e2e7a21e4ae5f4b8d3729850be83fb45052b28c9c38c09b8366463a291d6dc5448359238bdaf87f6a9e907d5895a94319a2c5e0e9f0786859ad6312d1d06
   languageName: node
   linkType: hard
 
@@ -19171,14 +19191,15 @@ __metadata:
   linkType: hard
 
 "sha.js@npm:^2.4.0, sha.js@npm:^2.4.11, sha.js@npm:^2.4.8":
-  version: 2.4.11
-  resolution: "sha.js@npm:2.4.11"
+  version: 2.4.12
+  resolution: "sha.js@npm:2.4.12"
   dependencies:
-    inherits: "npm:^2.0.1"
-    safe-buffer: "npm:^5.0.1"
+    inherits: "npm:^2.0.4"
+    safe-buffer: "npm:^5.2.1"
+    to-buffer: "npm:^1.2.0"
   bin:
-    sha.js: ./bin.js
-  checksum: 10/d833bfa3e0a67579a6ce6e1bc95571f05246e0a441dd8c76e3057972f2a3e098465687a4369b07e83a0375a88703577f71b5b2e966809e67ebc340dbedb478c7
+    sha.js: bin.js
+  checksum: 10/39c0993592c2ab34eb2daae2199a2a1d502713765aecb611fd97c0c4ab7cd53e902d628e1962aaf384bafd28f55951fef46dcc78799069ce41d74b03aa13b5a7
   languageName: node
   linkType: hard
 
@@ -21566,9 +21587,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.19":
-  version: 5.4.19
-  resolution: "vite@npm:5.4.19"
+"vite@npm:^5.4.20":
+  version: 5.4.20
+  resolution: "vite@npm:5.4.20"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -21605,7 +21626,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/27900c87ec6f84967ba12bd4a24c2b9182c3ddad278a13a1c7736ccc4ac7e325f3fbdc11836e2906857140cc89c55121cb0746d4100046e797e21e1e7570d9c4
+  checksum: 10/ed7b939074d4a54af2858811170999f127755c18325e27355b19857b0d68b84536d0983355204abd9adf9b5f42e52cf2df7b7d77c8b1c9e5f06b1b96921d203f
   languageName: node
   linkType: hard
 

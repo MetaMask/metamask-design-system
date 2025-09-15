@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-react-native",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Design System React Native",
   "keywords": [
     "MetaMask",
@@ -47,6 +47,8 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "dependencies": {
+    "@metamask/design-system-shared": "workspace:^",
+    "fast-text-encoding": "^1.0.6",
     "react-native-jazzicon": "^0.1.2"
   },
   "devDependencies": {
@@ -58,13 +60,14 @@
     "@metamask/auto-changelog": "^5.0.2",
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
-    "@metamask/utils": "^11.4.2",
+    "@metamask/utils": "^11.7.0",
     "@solana/addresses": "^2.0.0",
     "@storybook/react-native": "6.5",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/react-native": "^12.8.1",
     "@ts-bridge/cli": "^0.6.3",
     "@types/babel__preset-env": "^7",
+    "@types/fast-text-encoding": "^1",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
     "@types/react": "^18.2.0",
@@ -88,7 +91,7 @@
   "peerDependencies": {
     "@metamask/design-system-twrnc-preset": "^0.2.0",
     "@metamask/design-tokens": "^8.1.0",
-    "@metamask/utils": "^11.4.2",
+    "@metamask/utils": "^11.7.0",
     "@solana/addresses": "^2.0.0",
     "bitcoin-address-validation": ">=2.0.0",
     "react": ">=18.2.0",

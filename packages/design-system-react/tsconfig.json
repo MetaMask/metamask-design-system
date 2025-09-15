@@ -12,7 +12,11 @@
     ],
     "lib": ["ES2020", "DOM"]
   },
-  "references": [],
+  "references": [
+    {
+      "path": "../design-system-shared"
+    }
+  ],
   "include": [
     "./src",
     "./src/**/*.d.ts",

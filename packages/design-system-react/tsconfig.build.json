@@ -8,6 +8,10 @@
     "types": ["react"],
     "lib": ["ES2020", "DOM"]
   },
-  "references": [],
+  "references": [
+    {
+      "path": "../design-system-shared/tsconfig.build.json"
+    }
+  ],
   "include": ["./src", "global.d.ts"]
 }

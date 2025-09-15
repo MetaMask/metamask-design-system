@@ -1,7 +1,6 @@
 {
   "name": "@metamask/design-system-shared",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
   "description": "Shared types for design system libraries",
   "keywords": [
     "MetaMask",
@@ -43,7 +42,11 @@
     "test:clean": "NODE_OPTIONS=--experimental-vm-modules jest --clearCache",
     "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
-    "since-latest-release": "../../scripts/since-latest-release.sh"
+    "since-latest-release": "../../scripts/since-latest-release.sh",
+    "publish:preview": "yarn npm publish --tag preview"
+  },
+  "dependencies": {
+    "@metamask/utils": "^11.7.0"
   },
   "devDependencies": {
     "@metamask/auto-changelog": "^5.0.2",
@@ -56,5 +59,9 @@
   },
   "engines": {
     "node": "^18.18 || >=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
