@@ -17,8 +17,6 @@
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.8.0",
-    "@solana/addresses": "^2.0.0",
-    "bitcoin-address-validation": ">=2.0.0",
     "expo": "~49.0.23",
     "expo-status-bar": "~1.6.0",
     "expo-system-ui": "~2.4.0",
