@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1]
+
+### Fixed
+
+- Fixed Avatar components shrinking in flex layouts ([#825](https://github.com/MetaMask/metamask-design-system/pull/825))
+- Removed unnecessary peer dependencies ([#828](https://github.com/MetaMask/metamask-design-system/pull/828))
+- Bump @metamask/utils from 11.7.0 to 11.8.0 ([#827](https://github.com/MetaMask/metamask-design-system/pull/827))
+
 ## [0.4.0]
 
 ### Added
@@ -79,7 +87,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.4.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.4.1...HEAD
+[0.4.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.4.0...@metamask/design-system-react@0.4.1
 [0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.3.1...@metamask/design-system-react@0.4.0
 [0.3.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.3.0...@metamask/design-system-react@0.3.1
 [0.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.2.0...@metamask/design-system-react@0.3.0
