@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: remove unnecessary peer dependencies ([#828](https://github.com/MetaMask/metamask-design-system/pull/828))
+- chore(deps): bump @metamask/utils from 11.7.0 to 11.8.0 ([#827](https://github.com/MetaMask/metamask-design-system/pull/827))
+
 ## [0.4.0]
 
 ### Added
