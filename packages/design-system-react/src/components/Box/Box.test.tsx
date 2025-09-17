@@ -562,7 +562,6 @@ describe('Box', () => {
     expect(box.tagName).toBe('DIV');
   });
 
-  // asChild tests
   it('renders as div by default when asChild is false', () => {
     render(
       <Box data-testid="box" asChild={false}>
