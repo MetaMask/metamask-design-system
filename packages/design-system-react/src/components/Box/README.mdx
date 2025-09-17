@@ -362,21 +362,13 @@ The `asChild` prop leverages Radix UI's Slot component to ensure proper prop mer
 </table>
 
 ```tsx
-// Regular Box (renders as div)
-<Box padding={3} backgroundColor={BoxBackgroundColor.PrimaryMuted}>
-  <Text>This is a div element</Text>
-</Box>
-
 // Box as button (renders as button with Box styling)
-<Box asChild padding={3} backgroundColor={BoxBackgroundColor.SuccessMuted}>
-  <button type="button" onClick={() => alert('Clicked!')}>
-    Click me - I'm a button with Box styling!
+<Box asChild backgroundColor={BoxBackgroundColor.PrimaryMuted}>
+  <button>
+    <Text asChild>
+      <span>Box rendered as button</span>
+    </Text>
   </button>
-</Box>
-
-// Box as link (renders as anchor with Box styling)
-<Box asChild padding={2} backgroundColor={BoxBackgroundColor.InfoMuted}>
-  <a href="#link">I'm a link with Box styling!</a>
 </Box>
 ```
 
