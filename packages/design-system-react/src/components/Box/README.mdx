@@ -334,6 +334,46 @@ The border width of the component. Uses only valid Tailwind CSS border width val
 
 <Canvas of={BoxStories.BorderWidth} />
 
+### `asChild`
+
+When `true`, the Box component merges its props onto its immediate child element instead of rendering a `div`. This allows you to apply Box styling and layout properties to any HTML element or React component.
+
+The `asChild` prop leverages Radix UI's Slot component to ensure proper prop merging and ref forwarding.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+// Box as button (renders as button with Box styling)
+<Box asChild backgroundColor={BoxBackgroundColor.PrimaryMuted}>
+  <button>
+    <Text asChild>
+      <span>Box rendered as button</span>
+    </Text>
+  </button>
+</Box>
+```
+
+<Canvas of={BoxStories.AsChild} />
+
 ### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:

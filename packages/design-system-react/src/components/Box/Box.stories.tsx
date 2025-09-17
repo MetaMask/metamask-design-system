@@ -1795,3 +1795,15 @@ export const BackgroundColor: Story = {
     </Box>
   ),
 };
+
+export const AsChild: Story = {
+  render: (args) => (
+    <Box {...args} asChild backgroundColor={BoxBackgroundColor.PrimaryMuted}>
+      <button>
+        <Text asChild>
+          <span>Box rendered as button</span>
+        </Text>
+      </button>
+    </Box>
+  ),
+};
