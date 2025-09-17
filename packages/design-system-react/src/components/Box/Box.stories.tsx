@@ -1795,3 +1795,133 @@ export const BackgroundColor: Story = {
     </Box>
   ),
 };
+
+export const AsChild: Story = {
+  render: (args: BoxProps) => (
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+      <Box
+        padding={4}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+      >
+        <Text>Regular Box (renders as div):</Text>
+        <Box
+          {...args}
+          padding={3}
+          margin={2}
+          backgroundColor={BoxBackgroundColor.PrimaryMuted}
+          borderColor={BoxBorderColor.PrimaryDefault}
+          borderWidth={1}
+        >
+          <Text>This is a div element</Text>
+        </Box>
+      </Box>
+
+      <Box
+        padding={4}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+      >
+        <Text>Box as Button (asChild=true):</Text>
+        <Box
+          {...args}
+          asChild
+          padding={3}
+          margin={2}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+          className="cursor-pointer"
+        >
+          <button type="button" onClick={() => console.log('Button clicked!')}>
+            Click me - I&apos;m a button with Box styling!
+          </button>
+        </Box>
+      </Box>
+
+      <Box
+        padding={4}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+      >
+        <Text>Box as Link (asChild=true):</Text>
+        <Box
+          {...args}
+          asChild
+          padding={3}
+          margin={2}
+          backgroundColor={BoxBackgroundColor.InfoMuted}
+          borderColor={BoxBorderColor.InfoDefault}
+          borderWidth={1}
+          className="no-underline"
+        >
+          <a href="#" onClick={(e) => e.preventDefault()}>
+            I&apos;m a link with Box styling!
+          </a>
+        </Box>
+      </Box>
+
+      <Box
+        padding={4}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+      >
+        <Text>Box as Article with Flex Layout (asChild=true):</Text>
+        <Box
+          {...args}
+          asChild
+          flexDirection={BoxFlexDirection.Row}
+          gap={3}
+          padding={4}
+          backgroundColor={BoxBackgroundColor.WarningMuted}
+          borderColor={BoxBorderColor.WarningDefault}
+          borderWidth={2}
+          alignItems={BoxAlignItems.Center}
+        >
+          <article>
+            <Text>Article</Text>
+            <Text>with</Text>
+            <Text>flex layout</Text>
+          </article>
+        </Box>
+      </Box>
+
+      <Box
+        padding={4}
+        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+      >
+        <Text>Nested Box Components:</Text>
+        <Box
+          {...args}
+          flexDirection={BoxFlexDirection.Column}
+          gap={2}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.BackgroundDefault}
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+        >
+          <Box
+            asChild
+            padding={2}
+            backgroundColor={BoxBackgroundColor.PrimaryMuted}
+            className="rounded"
+          >
+            <span>Span with Box padding</span>
+          </Box>
+          <Box
+            asChild
+            padding={2}
+            backgroundColor={BoxBackgroundColor.ErrorMuted}
+            className="rounded"
+          >
+            <div>Div with Box padding</div>
+          </Box>
+          <Box
+            asChild
+            padding={2}
+            backgroundColor={BoxBackgroundColor.SuccessMuted}
+            className="rounded"
+          >
+            <p>Paragraph with Box padding</p>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  ),
+};

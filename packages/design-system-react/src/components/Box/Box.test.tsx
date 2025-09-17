@@ -561,4 +561,86 @@ describe('Box', () => {
     expect(box).toHaveAttribute('aria-label', 'Test box');
     expect(box.tagName).toBe('DIV');
   });
+
+  // asChild tests
+  it('renders as div by default when asChild is false', () => {
+    render(
+      <Box data-testid="box" asChild={false}>
+        <span>Content</span>
+      </Box>,
+    );
+    const box = screen.getByTestId('box');
+    expect(box.tagName).toBe('DIV');
+  });
+
+  it('renders as child element when asChild is true', () => {
+    render(
+      <Box data-testid="box" asChild padding={4} className="bg-primary-muted">
+        <button type="button">Click me</button>
+      </Box>,
+    );
+    const button = screen.getByTestId('box');
+    expect(button.tagName).toBe('BUTTON');
+    expect(button).toHaveAttribute('type', 'button');
+    expect(button).toHaveClass('bg-primary-muted');
+    expect(button).toHaveClass(TWCLASSMAP_BOX_PADDING[4]);
+    expect(button).toHaveTextContent('Click me');
+  });
+
+  it('forwards ref to child element when asChild is true', () => {
+    const ref = createRef<HTMLDivElement>();
+    render(
+      <Box asChild ref={ref}>
+        <button data-testid="button" type="button">
+          Click me
+        </button>
+      </Box>,
+    );
+
+    const button = screen.getByTestId('button');
+    expect(ref.current).toBe(button);
+    expect(ref.current?.tagName).toBe('BUTTON');
+  });
+
+  it('merges Box props with child element props when asChild is true', () => {
+    render(
+      <Box
+        asChild
+        data-testid="merged-element"
+        padding={2}
+        className="bg-primary-muted"
+        style={{ color: 'red' }}
+      >
+        <div className="bg-error-muted" style={{ backgroundColor: 'blue' }}>
+          Merged content
+        </div>
+      </Box>,
+    );
+
+    const element = screen.getByTestId('merged-element');
+    expect(element.tagName).toBe('DIV');
+    expect(element).toHaveClass('bg-primary-muted');
+    expect(element).toHaveClass('bg-error-muted');
+    expect(element).toHaveClass(TWCLASSMAP_BOX_PADDING[2]);
+    expect(element).toHaveStyle({ color: 'red', backgroundColor: 'blue' });
+  });
+
+  it('applies flex classes to child element when asChild is true and flexDirection is provided', () => {
+    render(
+      <Box
+        asChild
+        data-testid="flex-child"
+        flexDirection={BoxFlexDirection.Column}
+        gap={3}
+      >
+        <section>Flex content</section>
+      </Box>,
+    );
+
+    const section = screen.getByTestId('flex-child');
+    expect(section.tagName).toBe('SECTION');
+    expect(section).toHaveClass('flex');
+    expect(section).toHaveClass(BoxFlexDirection.Column);
+    expect(section).toHaveClass(TWCLASSMAP_BOX_GAP[3]);
+  });
 });

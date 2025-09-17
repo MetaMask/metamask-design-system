@@ -1,3 +1,4 @@
+import { Slot } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
@@ -49,11 +50,14 @@ export const Box = forwardRef<HTMLDivElement, BoxProps>(
       backgroundColor,
       className = '',
       style,
+      asChild,
       children,
       ...props
     }: BoxProps,
     ref,
   ) => {
+    const Component = asChild ? Slot : 'div';
+
     const mergedClassName = twMerge(
       flexDirection ? 'flex' : '',
       flexDirection,
@@ -96,9 +100,9 @@ export const Box = forwardRef<HTMLDivElement, BoxProps>(
     );
 
     return (
-      <div ref={ref} className={mergedClassName} style={style} {...props}>
+      <Component ref={ref} className={mergedClassName} style={style} {...props}>
         {children}
-      </div>
+      </Component>
     );
   },
 );
