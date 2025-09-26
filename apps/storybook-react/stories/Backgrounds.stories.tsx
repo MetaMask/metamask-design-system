@@ -16,14 +16,6 @@ import React from 'react';
 const meta: Meta = {
   title: 'Examples/Backgrounds',
   component: () => null,
-  // Remove default padding
-  decorators: [
-    (Story) => (
-      <Box className="-m-4">
-        <Story />
-      </Box>
-    ),
-  ],
 };
 
 export default meta;
@@ -65,42 +57,37 @@ const TextComponents = () => (
 
 const Backgrounds: React.FC = () => {
   return (
-    <Box
-      backgroundColor={BoxBackgroundColor.BackgroundDefault}
-      padding={8}
-      className="min-h-screen"
-    >
-      <Box className="space-y-6">
-        {/* Background Default */}
+    <Box backgroundColor={BoxBackgroundColor.BackgroundDefault}>
+      {/* Background Default */}
+      <Box
+        flexDirection={BoxFlexDirection.Column}
+        gap={4}
+        className="rounded-2xl"
+      >
+        <Text variant={TextVariant.HeadingMd}>Background Default</Text>
+        <TextComponents />
+
+        {/* Background Section */}
         <Box
-          padding={6}
+          backgroundColor={BoxBackgroundColor.BackgroundSection}
+          padding={4}
           flexDirection={BoxFlexDirection.Column}
           gap={4}
           className="rounded-2xl"
         >
-          <Text variant={TextVariant.HeadingMd}>Background Default</Text>
-
+          <Text variant={TextVariant.HeadingMd}>Background Section</Text>
           <TextComponents />
+
+          {/* Background Subsection */}
           <Box
-            backgroundColor={BoxBackgroundColor.BackgroundSection}
+            backgroundColor={BoxBackgroundColor.BackgroundSubsection}
             padding={4}
             flexDirection={BoxFlexDirection.Column}
             gap={4}
             className="rounded-2xl"
           >
-            <Text variant={TextVariant.HeadingMd}>Background Section</Text>
+            <Text variant={TextVariant.HeadingMd}>Background Subsection</Text>
             <TextComponents />
-            <Box
-              backgroundColor={BoxBackgroundColor.BackgroundSubsection}
-              padding={4}
-              flexDirection={BoxFlexDirection.Column}
-              gap={4}
-              className="rounded-2xl"
-            >
-              <Text variant={TextVariant.HeadingMd}>Background Subsection</Text>
-
-              <TextComponents />
-            </Box>
           </Box>
         </Box>
       </Box>
