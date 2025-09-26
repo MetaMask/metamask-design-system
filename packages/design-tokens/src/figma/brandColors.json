@@ -13,7 +13,7 @@
       "description": ""
     },
     "300": {
-      "value": "#9ca1af",
+      "value": "#9b9b9b",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
@@ -31,25 +31,25 @@
       "description": ""
     },
     "600": {
-      "value": "#4b505c",
+      "value": "#48484e",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "700": {
-      "value": "#2a2c32",
+      "value": "#252628",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "800": {
-      "value": "#232426",
+      "value": "#1c1d1f",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "900": {
-      "value": "#121314",
+      "value": "#131416",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
