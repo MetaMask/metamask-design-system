@@ -51,6 +51,12 @@ const TextComponents = () => (
         <Icon name={IconName.Info} color={IconColor.IconMuted} />
         <Text color={TextColor.TextMuted}>Text Muted and Icon Muted</Text>
       </Box>
+      <Text
+        asChild
+        className="bg-muted hover:bg-muted-hover active:bg-muted-pressed w-full p-4 rounded-2xl"
+      >
+        <button>Background Muted/Hover/Pressed</button>
+      </Text>
     </Box>
   </>
 );
