@@ -53,7 +53,7 @@ const TextComponents = () => (
       </Box>
       <Text
         asChild
-        className="bg-muted hover:bg-muted-hover active:bg-muted-pressed w-full p-4 rounded-2xl"
+        className="w-full rounded-2xl bg-muted p-4 hover:bg-muted-hover active:bg-muted-pressed"
       >
         <button>Background Muted/Hover/Pressed</button>
       </Text>
