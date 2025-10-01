@@ -1,5 +1,5 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import type { Meta, StoryObj } from '@storybook/react-native';
+import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
 
 import { TextButtonSize } from '../../types';
