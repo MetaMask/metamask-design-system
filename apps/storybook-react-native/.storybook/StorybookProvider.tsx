@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Platform, useColorScheme } from 'react-native';
 import { ThemeProvider, Theme } from '@metamask/design-system-twrnc-preset';
-import { FontLoader } from './FontLoader';
+import FontLoader from './FontLoader';
 
 interface StorybookProviderProps {
   children: React.ReactNode;
