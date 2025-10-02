@@ -1,11 +1,14 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { view } from './storybook.requires';
 
 const StorybookUIRoot = view.getStorybookUI({
+  // Disable AsyncStorage to avoid persistence issues
   storage: {
-    getItem: AsyncStorage.getItem,
-    setItem: AsyncStorage.setItem,
+    getItem: async () => null,
+    setItem: async () => {},
   },
+  // Reset initial selection
+  initialSelection: undefined,
+  shouldPersistSelection: false,
 });
 
 export default StorybookUIRoot;
