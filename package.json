@@ -46,8 +46,8 @@
     "publish-previews": "yarn workspaces foreach --all --no-private --parallel --verbose run publish:preview",
     "setup": "yarn install && yarn build",
     "storybook": "yarn workspace @metamask/storybook-react storybook",
-    "storybook:android": "yarn workspace @metamask/storybook-react-native android",
-    "storybook:ios": "yarn workspace @metamask/storybook-react-native ios",
+    "storybook:ios": "yarn workspace @metamask/storybook-react-native storybook",
+    "storybook:react-native-web": "yarn workspace @metamask/storybook-react-native storybook:web",
     "test": "yarn test:scripts --silent --collectCoverage=false --reporters=jest-silent-reporter && yarn test:packages",
     "test:clean": "yarn workspaces foreach --all --parallel --verbose run test:clean && yarn test",
     "test:packages": "yarn test:verbose --silent --collectCoverage=false --reporters=jest-silent-reporter",
@@ -76,10 +76,11 @@
     "elliptic@6.5.4": "^6.5.7",
     "fast-xml-parser@^4.3.4": "^4.4.1",
     "send": "^0.19.0",
-    "ws@7.4.6": "^7.5.10"
+    "ws@7.4.6": "^7.5.10",
+    "react-docgen-typescript": "2.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.5",
+    "@babel/core": "^7.26.0",
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@figma/code-connect": "^1.0.0",
@@ -117,14 +118,14 @@
     "lodash": "^4.17.21",
     "prettier": "^3.3.3",
     "prettier-plugin-packagejson": "^2.4.5",
-    "react": "^18.2.0",
-    "react-native": "^0.72.15",
+    "react": "^18.3.1",
+    "react-native": "^0.76.9",
     "rimraf": "^5.0.5",
     "semver": "^7.7.1",
     "simple-git-hooks": "^2.8.0",
     "ts-node": "^10.9.1",
     "twrnc": "^4.5.1",
-    "typescript": "~5.2.2",
+    "typescript": "~5.3.3",
     "typescript-eslint": "^8.7.0",
     "yargs": "^17.7.2"
   },
@@ -138,7 +139,8 @@
       "@keystonehq/bc-ur-registry-eth>hdkey>secp256k1": true,
       "babel-runtime>core-js": false,
       "simple-git-hooks": false,
-      "ts-node>@swc/core": false
+      "ts-node>@swc/core": false,
+      "eslint-plugin-import-x>unrs-resolver": false
     }
   }
 }

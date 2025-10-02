@@ -1,21 +1,40 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "jsx": "react-native",
-    "lib": ["esnext"],
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "noEmit": true
+    "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "@metamask/design-system-react-native": [
+        "../../packages/design-system-react-native/src"
+      ],
+      "@metamask/design-system-twrnc-preset": [
+        "../../packages/design-system-twrnc-preset/src"
+      ],
+      "@metamask/design-tokens": ["../../packages/design-tokens/src"]
+    }
   },
+  "include": [
+    "App.tsx",
+    ".storybook/**/*",
+    ".rnstorybook/**/*",
+    "stories/**/*",
+    "vite.config.ts",
+    "../../packages/design-system-react-native/src/**/*"
+  ],
   "exclude": [
     "node_modules",
-    "babel.config.js",
-    "metro.config.js",
-    "jest.config.js",
-    ".eslintrc.js",
-    "react-native.config.js"
-  ],
-  "extends": "expo/tsconfig.base"
+    "../../scripts/**/*",
+    "../../apps/storybook-react/**/*"
+  ]
 }
