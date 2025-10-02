@@ -26,13 +26,9 @@ const main: StorybookConfig = {
     },
   },
 
-  // Add core options to prevent conflicts
-  core: {
-    disableTelemetry: true,
-  },
 
   async viteFinal(config) {
-    // Disable the problematic vite-tsconfig-paths plugin for this project
+    // Filter out vite-tsconfig-paths plugin to prevent conflicts
     const filteredPlugins = config.plugins?.filter((plugin) => {
       const pluginName = plugin?.name || '';
       return pluginName !== 'vite:tsconfig-paths';
@@ -42,10 +38,9 @@ const main: StorybookConfig = {
       config.plugins = filteredPlugins;
     }
 
-    // Ensure resolve object exists
     config.resolve = config.resolve || {};
 
-    // Force the react-native alias and design system packages to use source files
+    // Configure aliases for monorepo packages
     config.resolve.alias = {
       ...config.resolve.alias,
       'react-native': require.resolve('react-native-web'),
