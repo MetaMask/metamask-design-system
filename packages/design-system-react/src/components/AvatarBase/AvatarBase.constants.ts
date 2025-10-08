@@ -26,7 +26,7 @@ export const TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE: Record<
   AvatarBaseSize,
   string
 > = {
-  [AvatarBaseSize.Xs]: 'rounded-sm', // 4px
+  [AvatarBaseSize.Xs]: 'rounded-md', // 6px
   [AvatarBaseSize.Sm]: 'rounded-md', // 6px
   [AvatarBaseSize.Md]: 'rounded-lg', // 8px
   [AvatarBaseSize.Lg]: 'rounded-[10px]', // 10px (No tailwind class for this)
