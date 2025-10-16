@@ -1,18 +1,8 @@
 @import 'tailwindcss';
-@import '../../packages/design-tokens/src/css/index.css';
 @import '../../packages/design-system-tailwind-preset/src/theme.css';
 
 /* Scan the design system component library for utility classes */
 @source "../../packages/design-system-react";
-
-@theme {
-  --color-*: initial;
-  --color-inherit: inherit;
-  --color-current: currentColor;
-  --color-transparent: transparent;
-  --color-black: #000000;
-  --color-white: #ffffff;
-}
 
 /* Geist */
 @font-face {
