@@ -1,4 +1,6 @@
-import plugin from 'tailwindcss/plugin';
+// Note: Using require for compatibility with current build system
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const plugin = require('tailwindcss/plugin');
 
 /**
  * We want to allow for the combination of shadow size and color utilities.
@@ -12,16 +14,16 @@ import plugin from 'tailwindcss/plugin';
  */
 
 export const shadows = {
-  xs: 'var(--shadow-size-xs) var(--shadow-color, var(--color-shadow-default))',
-  sm: 'var(--shadow-size-sm) var(--shadow-color, var(--color-shadow-default))',
-  md: 'var(--shadow-size-md) var(--shadow-color, var(--color-shadow-default))',
-  lg: 'var(--shadow-size-lg) var(--shadow-color, var(--color-shadow-default))',
+  xs: 'var(--shadow-size-xs) var(--shadow-color, var(--mm-color-shadow-default))',
+  sm: 'var(--shadow-size-sm) var(--shadow-color, var(--mm-color-shadow-default))',
+  md: 'var(--shadow-size-md) var(--shadow-color, var(--mm-color-shadow-default))',
+  lg: 'var(--shadow-size-lg) var(--shadow-color, var(--mm-color-shadow-default))',
 };
 
 export const shadowColors = {
-  default: 'var(--color-shadow-default)',
-  primary: 'var(--color-shadow-primary)',
-  error: 'var(--color-shadow-error)',
+  default: 'var(--mm-color-shadow-default)',
+  primary: 'var(--mm-color-shadow-primary)',
+  error: 'var(--mm-color-shadow-error)',
 };
 
 /**

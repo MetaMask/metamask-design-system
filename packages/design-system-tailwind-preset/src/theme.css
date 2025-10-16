@@ -1,0 +1,529 @@
+@import '../../design-tokens/src/css/index.css';
+
+@theme {
+  /* Bridge mappings from Tailwind-expected --color-* to MetaMask --mm-color-* */
+  /* Background colors */
+  --color-background-default: var(--mm-color-background-default);
+  --color-background-alternative: var(--mm-color-background-alternative);
+  --color-background-section: var(--mm-color-background-section);
+  --color-background-subsection: var(--mm-color-background-subsection);
+  --color-background-muted: var(--mm-color-background-muted);
+  --color-background-default-hover: var(--mm-color-background-default-hover);
+  --color-background-default-pressed: var(
+    --mm-color-background-default-pressed
+  );
+  --color-background-alternative-hover: var(
+    --mm-color-background-alternative-hover
+  );
+  --color-background-alternative-pressed: var(
+    --mm-color-background-alternative-pressed
+  );
+  --color-background-muted-hover: var(--mm-color-background-muted-hover);
+  --color-background-muted-pressed: var(--mm-color-background-muted-pressed);
+  --color-background-hover: var(--mm-color-background-hover);
+  --color-background-pressed: var(--mm-color-background-pressed);
+
+  /* Text colors */
+  --color-text-default: var(--mm-color-text-default);
+  --color-text-alternative: var(--mm-color-text-alternative);
+  --color-text-muted: var(--mm-color-text-muted);
+
+  /* Icon colors */
+  --color-icon-default: var(--mm-color-icon-default);
+  --color-icon-default-hover: var(--mm-color-icon-default-hover);
+  --color-icon-default-pressed: var(--mm-color-icon-default-pressed);
+  --color-icon-alternative: var(--mm-color-icon-alternative);
+  --color-icon-muted: var(--mm-color-icon-muted);
+  --color-icon-inverse: var(--mm-color-icon-inverse);
+
+  /* Border colors */
+  --color-border-default: var(--mm-color-border-default);
+  --color-border-muted: var(--mm-color-border-muted);
+
+  /* Overlay colors */
+  --color-overlay-default: var(--mm-color-overlay-default);
+  --color-overlay-alternative: var(--mm-color-overlay-alternative);
+  --color-overlay-inverse: var(--mm-color-overlay-inverse);
+
+  /* Primary semantic colors */
+  --color-primary-default: var(--mm-color-primary-default);
+  --color-primary-alternative: var(--mm-color-primary-alternative);
+  --color-primary-muted: var(--mm-color-primary-muted);
+  --color-primary-inverse: var(--mm-color-primary-inverse);
+  --color-primary-default-hover: var(--mm-color-primary-default-hover);
+  --color-primary-default-pressed: var(--mm-color-primary-default-pressed);
+  --color-primary-muted-hover: var(--mm-color-primary-muted-hover);
+  --color-primary-muted-pressed: var(--mm-color-primary-muted-pressed);
+
+  /* Error semantic colors */
+  --color-error-default: var(--mm-color-error-default);
+  --color-error-alternative: var(--mm-color-error-alternative);
+  --color-error-muted: var(--mm-color-error-muted);
+  --color-error-inverse: var(--mm-color-error-inverse);
+  --color-error-default-hover: var(--mm-color-error-default-hover);
+  --color-error-default-pressed: var(--mm-color-error-default-pressed);
+  --color-error-muted-hover: var(--mm-color-error-muted-hover);
+  --color-error-muted-pressed: var(--mm-color-error-muted-pressed);
+
+  /* Warning semantic colors */
+  --color-warning-default: var(--mm-color-warning-default);
+  --color-warning-muted: var(--mm-color-warning-muted);
+  --color-warning-inverse: var(--mm-color-warning-inverse);
+  --color-warning-default-hover: var(--mm-color-warning-default-hover);
+  --color-warning-default-pressed: var(--mm-color-warning-default-pressed);
+  --color-warning-muted-hover: var(--mm-color-warning-muted-hover);
+  --color-warning-muted-pressed: var(--mm-color-warning-muted-pressed);
+
+  /* Success semantic colors */
+  --color-success-default: var(--mm-color-success-default);
+  --color-success-muted: var(--mm-color-success-muted);
+  --color-success-inverse: var(--mm-color-success-inverse);
+  --color-success-default-hover: var(--mm-color-success-default-hover);
+  --color-success-default-pressed: var(--mm-color-success-default-pressed);
+  --color-success-muted-hover: var(--mm-color-success-muted-hover);
+  --color-success-muted-pressed: var(--mm-color-success-muted-pressed);
+
+  /* Info semantic colors */
+  --color-info-default: var(--mm-color-info-default);
+  --color-info-muted: var(--mm-color-info-muted);
+  --color-info-inverse: var(--mm-color-info-inverse);
+
+  /* Accent colors */
+  --color-accent01-light: var(--mm-color-accent01-light);
+  --color-accent01-normal: var(--mm-color-accent01-normal);
+  --color-accent01-dark: var(--mm-color-accent01-dark);
+  --color-accent02-light: var(--mm-color-accent02-light);
+  --color-accent02-normal: var(--mm-color-accent02-normal);
+  --color-accent02-dark: var(--mm-color-accent02-dark);
+  --color-accent03-light: var(--mm-color-accent03-light);
+  --color-accent03-normal: var(--mm-color-accent03-normal);
+  --color-accent03-dark: var(--mm-color-accent03-dark);
+  --color-accent04-light: var(--mm-color-accent04-light);
+  --color-accent04-normal: var(--mm-color-accent04-normal);
+  --color-accent04-dark: var(--mm-color-accent04-dark);
+
+  /* Flask colors */
+  --color-flask-default: var(--mm-color-flask-default);
+  --color-flask-inverse: var(--mm-color-flask-inverse);
+
+  /* Shadow colors */
+  --color-shadow-default: var(--mm-color-shadow-default);
+  --color-shadow-primary: var(--mm-color-shadow-primary);
+  --color-shadow-error: var(--mm-color-shadow-error);
+
+  /* Custom typography properties - these won't auto-generate, so we define them */
+  /* Font Sizes - Small Screen Typography */
+  --font-size-s-display-lg: var(--typography-s-display-lg-font-size);
+  --font-size-s-display-md: var(--typography-s-display-md-font-size);
+  --font-size-s-heading-lg: var(--typography-s-heading-lg-font-size);
+  --font-size-s-heading-md: var(--typography-s-heading-md-font-size);
+  --font-size-s-heading-sm: var(--typography-s-heading-sm-font-size);
+  --font-size-s-body-lg: var(--typography-s-body-lg-regular-font-size);
+  --font-size-s-body-md: var(--typography-s-body-md-font-size);
+  --font-size-s-body-sm: var(--typography-s-body-sm-font-size);
+  --font-size-s-body-xs: var(--typography-s-body-xs-font-size);
+  --font-size-s-page-heading: var(--typography-s-page-heading-font-size);
+  --font-size-s-section-heading: var(--typography-s-section-heading-font-size);
+  --font-size-s-button-label-md: var(--typography-s-button-label-md-font-size);
+  --font-size-s-button-label-lg: var(--typography-s-button-label-lg-font-size);
+  --font-size-s-amount-display-lg: var(
+    --typography-s-amount-display-lg-font-size
+  );
+
+  /* Font Sizes - Large Screen Typography */
+  --font-size-l-display-lg: var(--typography-l-display-lg-font-size);
+  --font-size-l-display-md: var(--typography-l-display-md-font-size);
+  --font-size-l-heading-lg: var(--typography-l-heading-lg-font-size);
+  --font-size-l-heading-md: var(--typography-l-heading-md-font-size);
+  --font-size-l-heading-sm: var(--typography-l-heading-sm-font-size);
+  --font-size-l-body-lg: var(--typography-l-body-lg-medium-font-size);
+  --font-size-l-body-md: var(--typography-l-body-md-font-size);
+  --font-size-l-body-sm: var(--typography-l-body-sm-font-size);
+  --font-size-l-body-xs: var(--typography-l-body-xs-font-size);
+  --font-size-l-page-heading: var(--typography-l-page-heading-font-size);
+  --font-size-l-section-heading: var(--typography-l-section-heading-font-size);
+  --font-size-l-button-label-md: var(--typography-l-button-label-md-font-size);
+  --font-size-l-button-label-lg: var(--typography-l-button-label-lg-font-size);
+  --font-size-l-amount-display-lg: var(
+    --typography-l-amount-display-lg-font-size
+  );
+
+  /* Line Heights - Small Screen Typography */
+  --line-height-s-display-lg: var(--typography-s-display-lg-line-height);
+  --line-height-s-display-md: var(--typography-s-display-md-line-height);
+  --line-height-s-heading-lg: var(--typography-s-heading-lg-line-height);
+  --line-height-s-heading-md: var(--typography-s-heading-md-line-height);
+  --line-height-s-heading-sm: var(--typography-s-heading-sm-line-height);
+  --line-height-s-body-lg: var(--typography-s-body-lg-regular-line-height);
+  --line-height-s-body-md: var(--typography-s-body-md-line-height);
+  --line-height-s-body-sm: var(--typography-s-body-sm-line-height);
+  --line-height-s-body-xs: var(--typography-s-body-xs-line-height);
+  --line-height-s-page-heading: var(--typography-s-page-heading-line-height);
+  --line-height-s-section-heading: var(
+    --typography-s-section-heading-line-height
+  );
+  --line-height-s-button-label-md: var(
+    --typography-s-button-label-md-line-height
+  );
+  --line-height-s-button-label-lg: var(
+    --typography-s-button-label-lg-line-height
+  );
+  --line-height-s-amount-display-lg: var(
+    --typography-s-amount-display-lg-line-height
+  );
+
+  /* Line Heights - Large Screen Typography */
+  --line-height-l-display-lg: var(--typography-l-display-lg-line-height);
+  --line-height-l-display-md: var(--typography-l-display-md-line-height);
+  --line-height-l-heading-lg: var(--typography-l-heading-lg-line-height);
+  --line-height-l-heading-md: var(--typography-l-heading-md-line-height);
+  --line-height-l-heading-sm: var(--typography-l-heading-sm-line-height);
+  --line-height-l-body-lg: var(--typography-l-body-lg-medium-line-height);
+  --line-height-l-body-md: var(--typography-l-body-md-line-height);
+  --line-height-l-body-sm: var(--typography-l-body-sm-line-height);
+  --line-height-l-body-xs: var(--typography-l-body-xs-line-height);
+  --line-height-l-page-heading: var(--typography-l-page-heading-line-height);
+  --line-height-l-section-heading: var(
+    --typography-l-section-heading-line-height
+  );
+  --line-height-l-button-label-md: var(
+    --typography-l-button-label-md-line-height
+  );
+  --line-height-l-button-label-lg: var(
+    --typography-l-button-label-lg-line-height
+  );
+  --line-height-l-amount-display-lg: var(
+    --typography-l-amount-display-lg-line-height
+  );
+
+  /* Letter Spacing - Small Screen Typography */
+  --letter-spacing-s-display-lg: var(--typography-s-display-lg-letter-spacing);
+  --letter-spacing-s-display-md: var(--typography-s-display-md-letter-spacing);
+  --letter-spacing-s-heading-lg: var(--typography-s-heading-lg-letter-spacing);
+  --letter-spacing-s-heading-md: var(--typography-s-heading-md-letter-spacing);
+  --letter-spacing-s-heading-sm: var(--typography-s-heading-sm-letter-spacing);
+  --letter-spacing-s-body-lg: var(
+    --typography-s-body-lg-regular-letter-spacing
+  );
+  --letter-spacing-s-body-md: var(--typography-s-body-md-letter-spacing);
+  --letter-spacing-s-body-sm: var(--typography-s-body-sm-letter-spacing);
+  --letter-spacing-s-body-xs: var(--typography-s-body-xs-letter-spacing);
+  --letter-spacing-s-page-heading: var(
+    --typography-s-page-heading-letter-spacing
+  );
+  --letter-spacing-s-section-heading: var(
+    --typography-s-section-heading-letter-spacing
+  );
+  --letter-spacing-s-button-label-md: var(
+    --typography-s-button-label-md-letter-spacing
+  );
+  --letter-spacing-s-button-label-lg: var(
+    --typography-s-button-label-lg-letter-spacing
+  );
+  --letter-spacing-s-amount-display-lg: var(
+    --typography-s-amount-display-lg-letter-spacing
+  );
+
+  /* Letter Spacing - Large Screen Typography */
+  --letter-spacing-l-display-lg: var(--typography-l-display-lg-letter-spacing);
+  --letter-spacing-l-display-md: var(--typography-l-display-md-letter-spacing);
+  --letter-spacing-l-heading-lg: var(--typography-l-heading-lg-letter-spacing);
+  --letter-spacing-l-heading-md: var(--typography-l-heading-md-letter-spacing);
+  --letter-spacing-l-heading-sm: var(--typography-l-heading-sm-letter-spacing);
+  --letter-spacing-l-body-lg: var(--typography-l-body-lg-medium-letter-spacing);
+  --letter-spacing-l-body-md: var(--typography-l-body-md-letter-spacing);
+  --letter-spacing-l-body-sm: var(--typography-l-body-sm-letter-spacing);
+  --letter-spacing-l-body-xs: var(--typography-l-body-xs-letter-spacing);
+  --letter-spacing-l-page-heading: var(
+    --typography-l-page-heading-letter-spacing
+  );
+  --letter-spacing-l-section-heading: var(
+    --typography-l-section-heading-letter-spacing
+  );
+  --letter-spacing-l-button-label-md: var(
+    --typography-l-button-label-md-letter-spacing
+  );
+  --letter-spacing-l-button-label-lg: var(
+    --typography-l-button-label-lg-letter-spacing
+  );
+  --letter-spacing-l-amount-display-lg: var(
+    --typography-l-amount-display-lg-letter-spacing
+  );
+
+  /* Box Shadows */
+  --box-shadow-xs: var(--shadow-size-xs)
+    var(--shadow-color, var(--color-shadow-default));
+  --box-shadow-sm: var(--shadow-size-sm)
+    var(--shadow-color, var(--color-shadow-default));
+  --box-shadow-md: var(--shadow-size-md)
+    var(--shadow-color, var(--color-shadow-default));
+  --box-shadow-lg: var(--shadow-size-lg)
+    var(--shadow-color, var(--color-shadow-default));
+}
+
+/* Custom Typography Utilities - These won't auto-generate from --font-size-s-* properties */
+/* Font Size Utilities - Small Screen */
+@utility text-s-display-lg {
+  font-size: var(--font-size-s-display-lg);
+}
+@utility text-s-display-md {
+  font-size: var(--font-size-s-display-md);
+}
+@utility text-s-heading-lg {
+  font-size: var(--font-size-s-heading-lg);
+}
+@utility text-s-heading-md {
+  font-size: var(--font-size-s-heading-md);
+}
+@utility text-s-heading-sm {
+  font-size: var(--font-size-s-heading-sm);
+}
+@utility text-s-body-lg {
+  font-size: var(--font-size-s-body-lg);
+}
+@utility text-s-body-md {
+  font-size: var(--font-size-s-body-md);
+}
+@utility text-s-body-sm {
+  font-size: var(--font-size-s-body-sm);
+}
+@utility text-s-body-xs {
+  font-size: var(--font-size-s-body-xs);
+}
+@utility text-s-page-heading {
+  font-size: var(--font-size-s-page-heading);
+}
+@utility text-s-section-heading {
+  font-size: var(--font-size-s-section-heading);
+}
+@utility text-s-button-label-md {
+  font-size: var(--font-size-s-button-label-md);
+}
+@utility text-s-button-label-lg {
+  font-size: var(--font-size-s-button-label-lg);
+}
+@utility text-s-amount-display-lg {
+  font-size: var(--font-size-s-amount-display-lg);
+}
+
+/* Font Size Utilities - Large Screen */
+@utility text-l-display-lg {
+  font-size: var(--font-size-l-display-lg);
+}
+@utility text-l-display-md {
+  font-size: var(--font-size-l-display-md);
+}
+@utility text-l-heading-lg {
+  font-size: var(--font-size-l-heading-lg);
+}
+@utility text-l-heading-md {
+  font-size: var(--font-size-l-heading-md);
+}
+@utility text-l-heading-sm {
+  font-size: var(--font-size-l-heading-sm);
+}
+@utility text-l-body-lg {
+  font-size: var(--font-size-l-body-lg);
+}
+@utility text-l-body-md {
+  font-size: var(--font-size-l-body-md);
+}
+@utility text-l-body-sm {
+  font-size: var(--font-size-l-body-sm);
+}
+@utility text-l-body-xs {
+  font-size: var(--font-size-l-body-xs);
+}
+@utility text-l-page-heading {
+  font-size: var(--font-size-l-page-heading);
+}
+@utility text-l-section-heading {
+  font-size: var(--font-size-l-section-heading);
+}
+@utility text-l-button-label-md {
+  font-size: var(--font-size-l-button-label-md);
+}
+@utility text-l-button-label-lg {
+  font-size: var(--font-size-l-button-label-lg);
+}
+@utility text-l-amount-display-lg {
+  font-size: var(--font-size-l-amount-display-lg);
+}
+
+/* Line Height Utilities - Small Screen */
+@utility leading-s-display-lg {
+  line-height: var(--line-height-s-display-lg);
+}
+@utility leading-s-display-md {
+  line-height: var(--line-height-s-display-md);
+}
+@utility leading-s-heading-lg {
+  line-height: var(--line-height-s-heading-lg);
+}
+@utility leading-s-heading-md {
+  line-height: var(--line-height-s-heading-md);
+}
+@utility leading-s-heading-sm {
+  line-height: var(--line-height-s-heading-sm);
+}
+@utility leading-s-body-lg {
+  line-height: var(--line-height-s-body-lg);
+}
+@utility leading-s-body-md {
+  line-height: var(--line-height-s-body-md);
+}
+@utility leading-s-body-sm {
+  line-height: var(--line-height-s-body-sm);
+}
+@utility leading-s-body-xs {
+  line-height: var(--line-height-s-body-xs);
+}
+@utility leading-s-page-heading {
+  line-height: var(--line-height-s-page-heading);
+}
+@utility leading-s-section-heading {
+  line-height: var(--line-height-s-section-heading);
+}
+@utility leading-s-button-label-md {
+  line-height: var(--line-height-s-button-label-md);
+}
+@utility leading-s-button-label-lg {
+  line-height: var(--line-height-s-button-label-lg);
+}
+@utility leading-s-amount-display-lg {
+  line-height: var(--line-height-s-amount-display-lg);
+}
+
+/* Line Height Utilities - Large Screen */
+@utility leading-l-display-lg {
+  line-height: var(--line-height-l-display-lg);
+}
+@utility leading-l-display-md {
+  line-height: var(--line-height-l-display-md);
+}
+@utility leading-l-heading-lg {
+  line-height: var(--line-height-l-heading-lg);
+}
+@utility leading-l-heading-md {
+  line-height: var(--line-height-l-heading-md);
+}
+@utility leading-l-heading-sm {
+  line-height: var(--line-height-l-heading-sm);
+}
+@utility leading-l-body-lg {
+  line-height: var(--line-height-l-body-lg);
+}
+@utility leading-l-body-md {
+  line-height: var(--line-height-l-body-md);
+}
+@utility leading-l-body-sm {
+  line-height: var(--line-height-l-body-sm);
+}
+@utility leading-l-body-xs {
+  line-height: var(--line-height-l-body-xs);
+}
+@utility leading-l-page-heading {
+  line-height: var(--line-height-l-page-heading);
+}
+@utility leading-l-section-heading {
+  line-height: var(--line-height-l-section-heading);
+}
+@utility leading-l-button-label-md {
+  line-height: var(--line-height-l-button-label-md);
+}
+@utility leading-l-button-label-lg {
+  line-height: var(--line-height-l-button-label-lg);
+}
+@utility leading-l-amount-display-lg {
+  line-height: var(--line-height-l-amount-display-lg);
+}
+
+/* Letter Spacing Utilities - Small Screen */
+@utility tracking-s-display-lg {
+  letter-spacing: var(--letter-spacing-s-display-lg);
+}
+@utility tracking-s-display-md {
+  letter-spacing: var(--letter-spacing-s-display-md);
+}
+@utility tracking-s-heading-lg {
+  letter-spacing: var(--letter-spacing-s-heading-lg);
+}
+@utility tracking-s-heading-md {
+  letter-spacing: var(--letter-spacing-s-heading-md);
+}
+@utility tracking-s-heading-sm {
+  letter-spacing: var(--letter-spacing-s-heading-sm);
+}
+@utility tracking-s-body-lg {
+  letter-spacing: var(--letter-spacing-s-body-lg);
+}
+@utility tracking-s-body-md {
+  letter-spacing: var(--letter-spacing-s-body-md);
+}
+@utility tracking-s-body-sm {
+  letter-spacing: var(--letter-spacing-s-body-sm);
+}
+@utility tracking-s-body-xs {
+  letter-spacing: var(--letter-spacing-s-body-xs);
+}
+@utility tracking-s-page-heading {
+  letter-spacing: var(--letter-spacing-s-page-heading);
+}
+@utility tracking-s-section-heading {
+  letter-spacing: var(--letter-spacing-s-section-heading);
+}
+@utility tracking-s-button-label-md {
+  letter-spacing: var(--letter-spacing-s-button-label-md);
+}
+@utility tracking-s-button-label-lg {
+  letter-spacing: var(--letter-spacing-s-button-label-lg);
+}
+@utility tracking-s-amount-display-lg {
+  letter-spacing: var(--letter-spacing-s-amount-display-lg);
+}
+
+/* Letter Spacing Utilities - Large Screen */
+@utility tracking-l-display-lg {
+  letter-spacing: var(--letter-spacing-l-display-lg);
+}
+@utility tracking-l-display-md {
+  letter-spacing: var(--letter-spacing-l-display-md);
+}
+@utility tracking-l-heading-lg {
+  letter-spacing: var(--letter-spacing-l-heading-lg);
+}
+@utility tracking-l-heading-md {
+  letter-spacing: var(--letter-spacing-l-heading-md);
+}
+@utility tracking-l-heading-sm {
+  letter-spacing: var(--letter-spacing-l-heading-sm);
+}
+@utility tracking-l-body-lg {
+  letter-spacing: var(--letter-spacing-l-body-lg);
+}
+@utility tracking-l-body-md {
+  letter-spacing: var(--letter-spacing-l-body-md);
+}
+@utility tracking-l-body-sm {
+  letter-spacing: var(--letter-spacing-l-body-sm);
+}
+@utility tracking-l-body-xs {
+  letter-spacing: var(--letter-spacing-l-body-xs);
+}
+@utility tracking-l-page-heading {
+  letter-spacing: var(--letter-spacing-l-page-heading);
+}
+@utility tracking-l-section-heading {
+  letter-spacing: var(--letter-spacing-l-section-heading);
+}
+@utility tracking-l-button-label-md {
+  letter-spacing: var(--letter-spacing-l-button-label-md);
+}
+@utility tracking-l-button-label-lg {
+  letter-spacing: var(--letter-spacing-l-button-label-lg);
+}
+@utility tracking-l-amount-display-lg {
+  letter-spacing: var(--letter-spacing-l-amount-display-lg);
+}
+
+/* Note: Shadow utilities with colors like shadow-primary, shadow-error will be auto-generated by Tailwind v4 */

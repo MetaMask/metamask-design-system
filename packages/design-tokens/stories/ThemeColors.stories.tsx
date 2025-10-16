@@ -63,7 +63,7 @@ export const FigmaDarkTheme = {
 
 export const CSSLightTheme = {
   render: () => {
-    const lightThemeColors = getCSSVariablesFromStylesheet('--color-');
+    const lightThemeColors = getCSSVariablesFromStylesheet('--mm-color-');
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {Object.entries(lightThemeColors).map(
@@ -91,7 +91,7 @@ export const CSSLightTheme = {
 
 export const CSSDarkTheme = {
   render: () => {
-    const darkThemeColors = getCSSVariablesFromStylesheet('--color-', 'dark');
+    const darkThemeColors = getCSSVariablesFromStylesheet('--mm-color-', 'dark');
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {Object.entries(darkThemeColors).map(
@@ -101,7 +101,7 @@ export const CSSDarkTheme = {
               color={color}
               name={colorName}
               backgroundColor={colorName}
-              borderColor="var(--color-border-muted)"
+              borderColor="var(--mm-color-border-muted)"
               textBackgroundColor="transparent"
               textColor={getContrastYIQ(
                 color,
