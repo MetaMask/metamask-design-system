@@ -1,0 +1,48 @@
+{
+  "body": "I took another pass on this with the migration path in mind, especially current mobile and extension usage. The overall direction looks good, and a few of the earlier behavior questions now seem intentionally documented. The remaining feedback is mostly about tightening the public API shape and making the new contracts around accessibility, refs, and test targeting a little clearer before this settles into the shared surface.",
+  "event": "COMMENT",
+  "comments": [
+    {
+      "path": "packages/design-system-react-native/src/components/TextField/index.ts",
+      "line": 2,
+      "side": "RIGHT",
+      "body": "suggestion: Do we want to export `TextFieldInputProps` as part of the public API? It seems mainly useful as the internal shape of `inputProps`, and exporting it expands the public surface for a fairly niche nested prop bag. Consumers can already derive the same shape from `TextFieldProps['inputProps']`, while a named export makes this lower-level split harder to change later without a breaking type change."
+    },
+    {
+      "path": "packages/design-system-react-native/src/components/TextField/TextField.types.ts",
+      "line": 46,
+      "side": "RIGHT",
+      "body": "suggestion: I think the required-field guidance needs another pass here. React Native's `TextInput` surface already gives us the native input props (https://reactnative.dev/docs/textinput), but `accessibilityState` there does not appear to include `required`, so `inputProps.accessibilityState={{ required: true }}` looks like it will point consumers toward something that does not typecheck. Since this PR is trying to clarify where input-level props belong, it would be good to switch this example to an accessibility pattern that matches the RN API."
+    },
+    {
+      "path": "packages/design-system-react-native/src/components/TextField/README.md",
+      "line": 226,
+      "side": "RIGHT",
+      "body": "suggestion: I think the accessibility docs are still a little inconsistent with the implementation. React Native describes `accessibilityHint` in the context of accessible elements (https://reactnative.dev/docs/accessibility), but `TextField` currently renders the root `Box` with `accessible={false}`, so the root does not appear to be the accessible surface in the current implementation. Since the intended API now seems to be 'outer container plus inner input', could the docs steer consumers toward `inputProps` for input accessibility unless we intend to support root accessibility here as well?"
+    },
+    {
+      "path": "packages/design-system-shared/src/types/TextField/TextField.types.ts",
+      "line": 21,
+      "side": "RIGHT",
+      "body": "non-blocking: Should this be `isReadOnly` rather than `isReadonly`? React Native's native prop is `readOnly` (https://reactnative.dev/docs/textinput), so if we want the design-system boolean form with an `is` prefix, `isReadOnly` feels more consistent with the platform spelling and a little easier to scan across platforms."
+    },
+    {
+      "path": "packages/design-system-react-native/src/components/TextField/TextField.tsx",
+      "line": 37,
+      "side": "RIGHT",
+      "body": "non-blocking: Could we keep the spread name as `...props` instead of `...restProps` here? This component only peels off a relatively small owned set, and the older mobile/extension `TextField` implementations both use the simpler `props` naming. Keeping that here would make the component read a little more like the surrounding codebase and reduce naming noise in a public component."
+    },
+    {
+      "path": "packages/design-system-react-native/MIGRATION.md",
+      "line": 109,
+      "side": "RIGHT",
+      "body": "suggestion: Since this API change is intentional, could we make the migration guidance more explicit about the new test ID contract? In the legacy mobile `TextField`, `testID` effectively targeted the inner input (https://github.com/MetaMask/metamask-mobile/blob/main/app/component-library/components/Form/TextField/TextField.tsx), while in this version `testID` targets the wrapper and `inputProps.testID` targets the actual `TextInput`. That split seems reasonable, but it is important enough for E2E and automation that it would be good to call out directly here and in the README."
+    },
+    {
+      "path": "packages/design-system-react-native/src/components/TextField/TextField.tsx",
+      "line": 50,
+      "side": "RIGHT",
+      "body": "suggestion: Since `TextField` is a composite wrapper rather than a bare input, should we consider making the wrapper/input ref contract more explicit here by reserving the main ref for the wrapper and exposing a separate `inputRef` for the inner `TextInput`? React Native's `TextInput` does expose imperative methods like `.focus()` and `.blur()` (https://reactnative.dev/docs/textinput), so forwarding the main ref to the input is convenient today, but it also means we currently have no clean way to access the wrapper ref at all if we later need the container for measurement, layout, animation, or position/size reads. The extension `TextField` keeps that split explicit with `ref` + `inputRef` (https://github.com/MetaMask/metamask-extension/blob/main/ui/components/component-library/text-field/text-field.tsx), and that feels like a clearer contract for a composite component because it gives consumers access to both surfaces instead of spending the public ref on the internal input."
+    }
+  ]
+}
