@@ -15,6 +15,7 @@
     "url": "https://github.com/MetaMask/metamask-design-system.git"
   },
   "license": "MIT",
+  "type": "module",
   "sideEffects": false,
   "exports": {
     ".": {
