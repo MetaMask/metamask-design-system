@@ -1,8 +1,8 @@
 import type { Config } from 'tailwindcss';
 
-import { colors } from './colors.js';
-import { shadows, shadowPlugin } from './shadows.js';
-import { typography } from './typography.js';
+import { colors } from './colors';
+import { shadows, shadowPlugin } from './shadows';
+import { typography } from './typography';
 
 const tailwindConfig: Config = {
   content: [],

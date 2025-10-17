@@ -211,11 +211,9 @@ describe('ButtonBase', () => {
     expect(textElement.tagName).toBe('SPAN');
     expect(textElement).toHaveClass(
       'text-inherit',
-      'text-s-body-md',
-      'leading-s-body-md',
-      'tracking-s-body-md',
-      'md:text-l-body-md',
+      'text-body-md',
       'font-medium',
+      'font-default',
     );
 
     // Test custom text props
@@ -235,11 +233,8 @@ describe('ButtonBase', () => {
     const customChild = screen.getByTestId('custom-child');
     expect(customChild.parentElement).not.toHaveClass(
       'text-inherit',
-      'text-s-body-md',
-      'font-s-body-md',
-      'leading-s-body-md',
-      'tracking-s-body-md',
-      'md:text-l-body-md',
+      'text-body-md',
+      'font-medium',
     );
   });
 
