@@ -1,8 +1,9 @@
 @import 'tailwindcss';
 @import '../../packages/design-system-tailwind-preset/src/theme.css';
 
-/* Scan the design system component library for utility classes */
+/* Scan the other packages with stories for tailwind class names */
 @source "../../packages/design-system-react";
+@source "../../packages/design-tokens";
 
 /* Geist */
 @font-face {

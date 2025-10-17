@@ -35,9 +35,7 @@ describe('TextButton', () => {
 
     const text = screen.getByText('Custom Text Variant');
     expect(text).toHaveClass(
-      'text-s-body-lg',
-      'leading-s-body-lg',
-      'tracking-s-body-lg',
+      'text-body-lg',
     );
   });
 
