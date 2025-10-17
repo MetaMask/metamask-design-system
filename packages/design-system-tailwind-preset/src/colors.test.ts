@@ -11,11 +11,11 @@ describe('Color Preset', () => {
 
   // Define CSS variables to ignore in the unused variables check
   const ignoreList: string[] = [
-    '--color-shadow-default', // used in shadow.ts
-    '--color-shadow-primary', // used in shadow.ts
-    '--color-shadow-error', // used in shadow.ts
-    '--color-flask-default', // not needed for tailwind
-    '--color-flask-inverse', // not needed for tailwind
+    '--mm-color-shadow-default', // used in shadow.ts
+    '--mm-color-shadow-primary', // used in shadow.ts
+    '--mm-color-shadow-error', // used in shadow.ts
+    '--mm-color-flask-default', // not needed for tailwind
+    '--mm-color-flask-inverse', // not needed for tailwind
   ];
 
   /**
@@ -23,8 +23,8 @@ describe('Color Preset', () => {
    * are defined in the @metamask/design-tokens package.
    */
   it('should use only CSS variables that exist in @metamask/design-tokens', async () => {
-    // Retrieve all design token variables that start with '--color'
-    const designTokens = await getDesignTokenVariables(['--color']);
+    // Retrieve all design token variables that start with '--mm-color'
+    const designTokens = await getDesignTokenVariables(['--mm-color']);
 
     // Identify any used variables that are missing from the design tokens
     const missingVariables = usedVariables.filter(
@@ -41,8 +41,8 @@ describe('Color Preset', () => {
    * excluding those in the ignore list.
    */
   it('should not have unused CSS variables in @metamask/design-tokens', async () => {
-    // Retrieve all design token variables that start with '--color'
-    const designTokens = await getDesignTokenVariables(['--color']);
+    // Retrieve all design token variables that start with '--mm-color'
+    const designTokens = await getDesignTokenVariables(['--mm-color']);
 
     // Create sets for used variables and ignored variables for efficient lookup
     const usedSet = new Set(usedVariables);

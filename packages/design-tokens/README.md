@@ -29,9 +29,9 @@ Currently the metamask design tokens repo supports 2 formats, CSS-in-JS and CSS 
 ```css
 /* In CSS/SCSS */
 .card {
-  --card-color-text: var(--color-text-default);
-  --card-color-background: var(--color-background-default);
-  --card-color-border: var(--color-border-muted);
+  --card-color-text: var(--mm-color-text-default);
+  --card-color-background: var(--mm-color-background-default);
+  --card-color-border: var(--mm-color-border-muted);
 
   background-color: var(--card-color-background);
   color: var(--card-color-text);
@@ -41,7 +41,9 @@ Currently the metamask design tokens repo supports 2 formats, CSS-in-JS and CSS 
 
 ```js
 // They also work for inline styles in javascript
-<div style={{ color: 'var(--color-error-default)' }}>This was is an error</div>
+<div style={{ color: 'var(--mm-color-error-default)' }}>
+  This was is an error
+</div>
 ```
 
 ### CSS-in-JS
