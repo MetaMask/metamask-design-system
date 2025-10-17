@@ -20,19 +20,19 @@ describe('twMerge utility', () => {
   });
 
   describe('typography variant conflicts', () => {
-    it('should handle small variant overrides', () => {
-      const result = twMerge('text-s-body-md text-s-heading-lg');
-      expect(result).toBe('text-s-heading-lg');
+    it('should handle typography variant overrides', () => {
+      const result = twMerge('text-body-md text-heading-lg');
+      expect(result).toBe('text-heading-lg');
     });
 
-    it('should handle large variant overrides', () => {
-      const result = twMerge('text-l-body-md text-l-heading-lg');
-      expect(result).toBe('text-l-heading-lg');
+    it('should handle mixed typography variant overrides', () => {
+      const result = twMerge('text-display-lg text-body-sm');
+      expect(result).toBe('text-body-sm');
     });
 
-    it('should handle mixed size variant overrides', () => {
-      const result = twMerge('text-l-heading-lg text-s-body-md');
-      expect(result).toBe('text-s-body-md');
+    it('should handle page heading override', () => {
+      const result = twMerge('text-section-heading text-page-heading');
+      expect(result).toBe('text-page-heading');
     });
   });
 
@@ -50,57 +50,47 @@ describe('twMerge utility', () => {
 
   describe('complex class combinations', () => {
     it('should handle multiple property conflicts simultaneously', () => {
-      const result = twMerge('text-l-heading-lg font-bold text-alternative');
-      expect(result).toBe('text-l-heading-lg font-bold text-alternative');
+      const result = twMerge('text-heading-lg font-bold text-alternative');
+      expect(result).toBe('text-heading-lg font-bold text-alternative');
     });
 
     it('should preserve non-conflicting classes', () => {
       const result = twMerge('px-4 py-2 font-bold text-alternative');
       expect(result).toBe('px-4 py-2 font-bold text-alternative');
     });
+
+    it('should handle text color and typography together', () => {
+      const result = twMerge('text-default text-body-md font-medium');
+      expect(result).toBe('text-default text-body-md font-medium');
+    });
   });
 
-  describe('variant class validation', () => {
-    it('should handle all small variant classes', () => {
-      const smallVariants = [
-        'text-s-display-md',
-        'text-s-heading-lg',
-        'text-s-heading-md',
-        'text-s-heading-sm',
-        'text-s-body-lg',
-        'text-s-body-md',
-        'text-s-body-sm',
-        'text-s-body-xs',
-        'text-s-page-heading',
-        'text-s-section-heading',
-        'text-s-button-label-md',
-        'text-s-button-label-lg',
-        'text-s-amount-display-lg',
+  describe('responsive typography validation', () => {
+    it('should handle all typography variant classes', () => {
+      const typographyVariants = [
+        'text-display-lg',
+        'text-display-md',
+        'text-heading-lg',
+        'text-heading-md',
+        'text-heading-sm',
+        'text-body-lg',
+        'text-body-md',
+        'text-body-sm',
+        'text-body-xs',
+        'text-page-heading',
+        'text-section-heading',
+        'text-button-label-md',
+        'text-button-label-lg',
+        'text-amount-display-lg',
       ];
 
-      const result = twMerge(smallVariants.join(' '));
-      expect(result).toBe('text-s-amount-display-lg'); // Should keep last one
+      const result = twMerge(typographyVariants.join(' '));
+      expect(result).toBe('text-amount-display-lg'); // Should keep last one
     });
 
-    it('should handle all large variant classes', () => {
-      const largeVariants = [
-        'text-l-display-md',
-        'text-l-heading-lg',
-        'text-l-heading-md',
-        'text-l-heading-sm',
-        'text-l-body-lg',
-        'text-l-body-md',
-        'text-l-body-sm',
-        'text-l-body-xs',
-        'text-l-page-heading',
-        'text-l-section-heading',
-        'text-l-button-label-md',
-        'text-l-button-label-lg',
-        'text-l-amount-display-lg',
-      ];
-
-      const result = twMerge(largeVariants.join(' '));
-      expect(result).toBe('text-l-amount-display-lg'); // Should keep last one
+    it('should handle typography conflicts with color', () => {
+      const result = twMerge('text-body-md text-muted text-heading-lg text-default');
+      expect(result).toBe('text-heading-lg text-default');
     });
   });
 });
