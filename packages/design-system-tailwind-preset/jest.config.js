@@ -3,13 +3,15 @@
  * https://jestjs.io/docs/configuration
  */
 
-const path = require('path');
+import path from 'path';
+import { createRequire } from 'module';
 
+const require = createRequire(import.meta.url);
 const baseConfig = require('../../jest.config.packages');
 
-const displayName = path.basename(__dirname);
+const displayName = path.basename(new URL('.', import.meta.url).pathname);
 
-module.exports = {
+export default {
   // Spread the base configuration to inherit all default settings
   ...baseConfig,
 
