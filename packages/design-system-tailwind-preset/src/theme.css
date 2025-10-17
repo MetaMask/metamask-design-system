@@ -1,6 +1,6 @@
 @import '../../design-tokens/src/css/index.css';
 
-@theme {
+@theme inline {
   /* Essential Tailwind colors required for basic utilities */
   --color-inherit: inherit;
   --color-current: currentColor;
@@ -118,148 +118,6 @@
   --color-shadow-primary: var(--mm-color-shadow-primary);
   --color-shadow-error: var(--mm-color-shadow-error);
 
-  /* Shortcut color mappings for shorter class names */
-  /* Note: In v4, we need to define these as @utility declarations */
-
-  /* Custom typography properties - these won't auto-generate, so we define them */
-  /* Font Sizes - Small Screen Typography */
-  --font-size-s-display-lg: var(--typography-s-display-lg-font-size);
-  --font-size-s-display-md: var(--typography-s-display-md-font-size);
-  --font-size-s-heading-lg: var(--typography-s-heading-lg-font-size);
-  --font-size-s-heading-md: var(--typography-s-heading-md-font-size);
-  --font-size-s-heading-sm: var(--typography-s-heading-sm-font-size);
-  --font-size-s-body-lg: var(--typography-s-body-lg-regular-font-size);
-  --font-size-s-body-md: var(--typography-s-body-md-font-size);
-  --font-size-s-body-sm: var(--typography-s-body-sm-font-size);
-  --font-size-s-body-xs: var(--typography-s-body-xs-font-size);
-  --font-size-s-page-heading: var(--typography-s-page-heading-font-size);
-  --font-size-s-section-heading: var(--typography-s-section-heading-font-size);
-  --font-size-s-button-label-md: var(--typography-s-button-label-md-font-size);
-  --font-size-s-button-label-lg: var(--typography-s-button-label-lg-font-size);
-  --font-size-s-amount-display-lg: var(
-    --typography-s-amount-display-lg-font-size
-  );
-
-  /* Font Sizes - Large Screen Typography */
-  --font-size-l-display-lg: var(--typography-l-display-lg-font-size);
-  --font-size-l-display-md: var(--typography-l-display-md-font-size);
-  --font-size-l-heading-lg: var(--typography-l-heading-lg-font-size);
-  --font-size-l-heading-md: var(--typography-l-heading-md-font-size);
-  --font-size-l-heading-sm: var(--typography-l-heading-sm-font-size);
-  --font-size-l-body-lg: var(--typography-l-body-lg-medium-font-size);
-  --font-size-l-body-md: var(--typography-l-body-md-font-size);
-  --font-size-l-body-sm: var(--typography-l-body-sm-font-size);
-  --font-size-l-body-xs: var(--typography-l-body-xs-font-size);
-  --font-size-l-page-heading: var(--typography-l-page-heading-font-size);
-  --font-size-l-section-heading: var(--typography-l-section-heading-font-size);
-  --font-size-l-button-label-md: var(--typography-l-button-label-md-font-size);
-  --font-size-l-button-label-lg: var(--typography-l-button-label-lg-font-size);
-  --font-size-l-amount-display-lg: var(
-    --typography-l-amount-display-lg-font-size
-  );
-
-  /* Line Heights - Small Screen Typography */
-  --line-height-s-display-lg: var(--typography-s-display-lg-line-height);
-  --line-height-s-display-md: var(--typography-s-display-md-line-height);
-  --line-height-s-heading-lg: var(--typography-s-heading-lg-line-height);
-  --line-height-s-heading-md: var(--typography-s-heading-md-line-height);
-  --line-height-s-heading-sm: var(--typography-s-heading-sm-line-height);
-  --line-height-s-body-lg: var(--typography-s-body-lg-regular-line-height);
-  --line-height-s-body-md: var(--typography-s-body-md-line-height);
-  --line-height-s-body-sm: var(--typography-s-body-sm-line-height);
-  --line-height-s-body-xs: var(--typography-s-body-xs-line-height);
-  --line-height-s-page-heading: var(--typography-s-page-heading-line-height);
-  --line-height-s-section-heading: var(
-    --typography-s-section-heading-line-height
-  );
-  --line-height-s-button-label-md: var(
-    --typography-s-button-label-md-line-height
-  );
-  --line-height-s-button-label-lg: var(
-    --typography-s-button-label-lg-line-height
-  );
-  --line-height-s-amount-display-lg: var(
-    --typography-s-amount-display-lg-line-height
-  );
-
-  /* Line Heights - Large Screen Typography */
-  --line-height-l-display-lg: var(--typography-l-display-lg-line-height);
-  --line-height-l-display-md: var(--typography-l-display-md-line-height);
-  --line-height-l-heading-lg: var(--typography-l-heading-lg-line-height);
-  --line-height-l-heading-md: var(--typography-l-heading-md-line-height);
-  --line-height-l-heading-sm: var(--typography-l-heading-sm-line-height);
-  --line-height-l-body-lg: var(--typography-l-body-lg-medium-line-height);
-  --line-height-l-body-md: var(--typography-l-body-md-line-height);
-  --line-height-l-body-sm: var(--typography-l-body-sm-line-height);
-  --line-height-l-body-xs: var(--typography-l-body-xs-line-height);
-  --line-height-l-page-heading: var(--typography-l-page-heading-line-height);
-  --line-height-l-section-heading: var(
-    --typography-l-section-heading-line-height
-  );
-  --line-height-l-button-label-md: var(
-    --typography-l-button-label-md-line-height
-  );
-  --line-height-l-button-label-lg: var(
-    --typography-l-button-label-lg-line-height
-  );
-  --line-height-l-amount-display-lg: var(
-    --typography-l-amount-display-lg-line-height
-  );
-
-  /* Letter Spacing - Small Screen Typography */
-  --letter-spacing-s-display-lg: var(--typography-s-display-lg-letter-spacing);
-  --letter-spacing-s-display-md: var(--typography-s-display-md-letter-spacing);
-  --letter-spacing-s-heading-lg: var(--typography-s-heading-lg-letter-spacing);
-  --letter-spacing-s-heading-md: var(--typography-s-heading-md-letter-spacing);
-  --letter-spacing-s-heading-sm: var(--typography-s-heading-sm-letter-spacing);
-  --letter-spacing-s-body-lg: var(
-    --typography-s-body-lg-regular-letter-spacing
-  );
-  --letter-spacing-s-body-md: var(--typography-s-body-md-letter-spacing);
-  --letter-spacing-s-body-sm: var(--typography-s-body-sm-letter-spacing);
-  --letter-spacing-s-body-xs: var(--typography-s-body-xs-letter-spacing);
-  --letter-spacing-s-page-heading: var(
-    --typography-s-page-heading-letter-spacing
-  );
-  --letter-spacing-s-section-heading: var(
-    --typography-s-section-heading-letter-spacing
-  );
-  --letter-spacing-s-button-label-md: var(
-    --typography-s-button-label-md-letter-spacing
-  );
-  --letter-spacing-s-button-label-lg: var(
-    --typography-s-button-label-lg-letter-spacing
-  );
-  --letter-spacing-s-amount-display-lg: var(
-    --typography-s-amount-display-lg-letter-spacing
-  );
-
-  /* Letter Spacing - Large Screen Typography */
-  --letter-spacing-l-display-lg: var(--typography-l-display-lg-letter-spacing);
-  --letter-spacing-l-display-md: var(--typography-l-display-md-letter-spacing);
-  --letter-spacing-l-heading-lg: var(--typography-l-heading-lg-letter-spacing);
-  --letter-spacing-l-heading-md: var(--typography-l-heading-md-letter-spacing);
-  --letter-spacing-l-heading-sm: var(--typography-l-heading-sm-letter-spacing);
-  --letter-spacing-l-body-lg: var(--typography-l-body-lg-medium-letter-spacing);
-  --letter-spacing-l-body-md: var(--typography-l-body-md-letter-spacing);
-  --letter-spacing-l-body-sm: var(--typography-l-body-sm-letter-spacing);
-  --letter-spacing-l-body-xs: var(--typography-l-body-xs-letter-spacing);
-  --letter-spacing-l-page-heading: var(
-    --typography-l-page-heading-letter-spacing
-  );
-  --letter-spacing-l-section-heading: var(
-    --typography-l-section-heading-letter-spacing
-  );
-  --letter-spacing-l-button-label-md: var(
-    --typography-l-button-label-md-letter-spacing
-  );
-  --letter-spacing-l-button-label-lg: var(
-    --typography-l-button-label-lg-letter-spacing
-  );
-  --letter-spacing-l-amount-display-lg: var(
-    --typography-l-amount-display-lg-letter-spacing
-  );
-
   /* Box Shadows */
   --box-shadow-xs: var(--shadow-size-xs)
     var(--shadow-color, var(--mm-color-shadow-default));
@@ -269,271 +127,6 @@
     var(--shadow-color, var(--mm-color-shadow-default));
   --box-shadow-lg: var(--shadow-size-lg)
     var(--shadow-color, var(--mm-color-shadow-default));
-}
-
-/* Custom Typography Utilities - These won't auto-generate from --font-size-s-* properties */
-/* Font Size Utilities - Small Screen */
-@utility text-s-display-lg {
-  font-size: var(--font-size-s-display-lg);
-}
-@utility text-s-display-md {
-  font-size: var(--font-size-s-display-md);
-}
-@utility text-s-heading-lg {
-  font-size: var(--font-size-s-heading-lg);
-}
-@utility text-s-heading-md {
-  font-size: var(--font-size-s-heading-md);
-}
-@utility text-s-heading-sm {
-  font-size: var(--font-size-s-heading-sm);
-}
-@utility text-s-body-lg {
-  font-size: var(--font-size-s-body-lg);
-}
-@utility text-s-body-md {
-  font-size: var(--font-size-s-body-md);
-}
-@utility text-s-body-sm {
-  font-size: var(--font-size-s-body-sm);
-}
-@utility text-s-body-xs {
-  font-size: var(--font-size-s-body-xs);
-}
-@utility text-s-page-heading {
-  font-size: var(--font-size-s-page-heading);
-}
-@utility text-s-section-heading {
-  font-size: var(--font-size-s-section-heading);
-}
-@utility text-s-button-label-md {
-  font-size: var(--font-size-s-button-label-md);
-}
-@utility text-s-button-label-lg {
-  font-size: var(--font-size-s-button-label-lg);
-}
-@utility text-s-amount-display-lg {
-  font-size: var(--font-size-s-amount-display-lg);
-}
-
-/* Font Size Utilities - Large Screen */
-@utility text-l-display-lg {
-  font-size: var(--font-size-l-display-lg);
-}
-@utility text-l-display-md {
-  font-size: var(--font-size-l-display-md);
-}
-@utility text-l-heading-lg {
-  font-size: var(--font-size-l-heading-lg);
-}
-@utility text-l-heading-md {
-  font-size: var(--font-size-l-heading-md);
-}
-@utility text-l-heading-sm {
-  font-size: var(--font-size-l-heading-sm);
-}
-@utility text-l-body-lg {
-  font-size: var(--font-size-l-body-lg);
-}
-@utility text-l-body-md {
-  font-size: var(--font-size-l-body-md);
-}
-@utility text-l-body-sm {
-  font-size: var(--font-size-l-body-sm);
-}
-@utility text-l-body-xs {
-  font-size: var(--font-size-l-body-xs);
-}
-@utility text-l-page-heading {
-  font-size: var(--font-size-l-page-heading);
-}
-@utility text-l-section-heading {
-  font-size: var(--font-size-l-section-heading);
-}
-@utility text-l-button-label-md {
-  font-size: var(--font-size-l-button-label-md);
-}
-@utility text-l-button-label-lg {
-  font-size: var(--font-size-l-button-label-lg);
-}
-@utility text-l-amount-display-lg {
-  font-size: var(--font-size-l-amount-display-lg);
-}
-
-/* Line Height Utilities - Small Screen */
-@utility leading-s-display-lg {
-  line-height: var(--line-height-s-display-lg);
-}
-@utility leading-s-display-md {
-  line-height: var(--line-height-s-display-md);
-}
-@utility leading-s-heading-lg {
-  line-height: var(--line-height-s-heading-lg);
-}
-@utility leading-s-heading-md {
-  line-height: var(--line-height-s-heading-md);
-}
-@utility leading-s-heading-sm {
-  line-height: var(--line-height-s-heading-sm);
-}
-@utility leading-s-body-lg {
-  line-height: var(--line-height-s-body-lg);
-}
-@utility leading-s-body-md {
-  line-height: var(--line-height-s-body-md);
-}
-@utility leading-s-body-sm {
-  line-height: var(--line-height-s-body-sm);
-}
-@utility leading-s-body-xs {
-  line-height: var(--line-height-s-body-xs);
-}
-@utility leading-s-page-heading {
-  line-height: var(--line-height-s-page-heading);
-}
-@utility leading-s-section-heading {
-  line-height: var(--line-height-s-section-heading);
-}
-@utility leading-s-button-label-md {
-  line-height: var(--line-height-s-button-label-md);
-}
-@utility leading-s-button-label-lg {
-  line-height: var(--line-height-s-button-label-lg);
-}
-@utility leading-s-amount-display-lg {
-  line-height: var(--line-height-s-amount-display-lg);
-}
-
-/* Line Height Utilities - Large Screen */
-@utility leading-l-display-lg {
-  line-height: var(--line-height-l-display-lg);
-}
-@utility leading-l-display-md {
-  line-height: var(--line-height-l-display-md);
-}
-@utility leading-l-heading-lg {
-  line-height: var(--line-height-l-heading-lg);
-}
-@utility leading-l-heading-md {
-  line-height: var(--line-height-l-heading-md);
-}
-@utility leading-l-heading-sm {
-  line-height: var(--line-height-l-heading-sm);
-}
-@utility leading-l-body-lg {
-  line-height: var(--line-height-l-body-lg);
-}
-@utility leading-l-body-md {
-  line-height: var(--line-height-l-body-md);
-}
-@utility leading-l-body-sm {
-  line-height: var(--line-height-l-body-sm);
-}
-@utility leading-l-body-xs {
-  line-height: var(--line-height-l-body-xs);
-}
-@utility leading-l-page-heading {
-  line-height: var(--line-height-l-page-heading);
-}
-@utility leading-l-section-heading {
-  line-height: var(--line-height-l-section-heading);
-}
-@utility leading-l-button-label-md {
-  line-height: var(--line-height-l-button-label-md);
-}
-@utility leading-l-button-label-lg {
-  line-height: var(--line-height-l-button-label-lg);
-}
-@utility leading-l-amount-display-lg {
-  line-height: var(--line-height-l-amount-display-lg);
-}
-
-/* Letter Spacing Utilities - Small Screen */
-@utility tracking-s-display-lg {
-  letter-spacing: var(--letter-spacing-s-display-lg);
-}
-@utility tracking-s-display-md {
-  letter-spacing: var(--letter-spacing-s-display-md);
-}
-@utility tracking-s-heading-lg {
-  letter-spacing: var(--letter-spacing-s-heading-lg);
-}
-@utility tracking-s-heading-md {
-  letter-spacing: var(--letter-spacing-s-heading-md);
-}
-@utility tracking-s-heading-sm {
-  letter-spacing: var(--letter-spacing-s-heading-sm);
-}
-@utility tracking-s-body-lg {
-  letter-spacing: var(--letter-spacing-s-body-lg);
-}
-@utility tracking-s-body-md {
-  letter-spacing: var(--letter-spacing-s-body-md);
-}
-@utility tracking-s-body-sm {
-  letter-spacing: var(--letter-spacing-s-body-sm);
-}
-@utility tracking-s-body-xs {
-  letter-spacing: var(--letter-spacing-s-body-xs);
-}
-@utility tracking-s-page-heading {
-  letter-spacing: var(--letter-spacing-s-page-heading);
-}
-@utility tracking-s-section-heading {
-  letter-spacing: var(--letter-spacing-s-section-heading);
-}
-@utility tracking-s-button-label-md {
-  letter-spacing: var(--letter-spacing-s-button-label-md);
-}
-@utility tracking-s-button-label-lg {
-  letter-spacing: var(--letter-spacing-s-button-label-lg);
-}
-@utility tracking-s-amount-display-lg {
-  letter-spacing: var(--letter-spacing-s-amount-display-lg);
-}
-
-/* Letter Spacing Utilities - Large Screen */
-@utility tracking-l-display-lg {
-  letter-spacing: var(--letter-spacing-l-display-lg);
-}
-@utility tracking-l-display-md {
-  letter-spacing: var(--letter-spacing-l-display-md);
-}
-@utility tracking-l-heading-lg {
-  letter-spacing: var(--letter-spacing-l-heading-lg);
-}
-@utility tracking-l-heading-md {
-  letter-spacing: var(--letter-spacing-l-heading-md);
-}
-@utility tracking-l-heading-sm {
-  letter-spacing: var(--letter-spacing-l-heading-sm);
-}
-@utility tracking-l-body-lg {
-  letter-spacing: var(--letter-spacing-l-body-lg);
-}
-@utility tracking-l-body-md {
-  letter-spacing: var(--letter-spacing-l-body-md);
-}
-@utility tracking-l-body-sm {
-  letter-spacing: var(--letter-spacing-l-body-sm);
-}
-@utility tracking-l-body-xs {
-  letter-spacing: var(--letter-spacing-l-body-xs);
-}
-@utility tracking-l-page-heading {
-  letter-spacing: var(--letter-spacing-l-page-heading);
-}
-@utility tracking-l-section-heading {
-  letter-spacing: var(--letter-spacing-l-section-heading);
-}
-@utility tracking-l-button-label-md {
-  letter-spacing: var(--letter-spacing-l-button-label-md);
-}
-@utility tracking-l-button-label-lg {
-  letter-spacing: var(--letter-spacing-l-button-label-lg);
-}
-@utility tracking-l-amount-display-lg {
-  letter-spacing: var(--letter-spacing-l-amount-display-lg);
 }
 
 /* Color Shortcut Utilities - Enable shorter class names */
@@ -597,4 +190,255 @@
   border-color: var(--mm-color-border-muted);
 }
 
+/* Responsive Typography Utilities - For Text Component Use Only */
+/* These utilities are automatically responsive and include font-size, line-height, and letter-spacing */
+@utility text-display-lg {
+  font-size: var(--typography-s-display-lg-font-size);
+  line-height: var(--typography-s-display-lg-line-height);
+  letter-spacing: var(--typography-s-display-lg-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-display-lg-font-size);
+    line-height: var(--typography-l-display-lg-line-height);
+    letter-spacing: var(--typography-l-display-lg-letter-spacing);
+  }
+}
+
+@utility text-display-md {
+  font-size: var(--typography-s-display-md-font-size);
+  line-height: var(--typography-s-display-md-line-height);
+  letter-spacing: var(--typography-s-display-md-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-display-md-font-size);
+    line-height: var(--typography-l-display-md-line-height);
+    letter-spacing: var(--typography-l-display-md-letter-spacing);
+  }
+}
+
+@utility text-heading-lg {
+  font-size: var(--typography-s-heading-lg-font-size);
+  line-height: var(--typography-s-heading-lg-line-height);
+  letter-spacing: var(--typography-s-heading-lg-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-heading-lg-font-size);
+    line-height: var(--typography-l-heading-lg-line-height);
+    letter-spacing: var(--typography-l-heading-lg-letter-spacing);
+  }
+}
+@utility text-heading-md {
+  font-size: var(--typography-s-heading-md-font-size);
+  line-height: var(--typography-s-heading-md-line-height);
+  letter-spacing: var(--typography-s-heading-md-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-heading-md-font-size);
+    line-height: var(--typography-l-heading-md-line-height);
+    letter-spacing: var(--typography-l-heading-md-letter-spacing);
+  }
+}
+@utility text-heading-sm {
+  font-size: var(--typography-s-heading-sm-font-size);
+  line-height: var(--typography-s-heading-sm-line-height);
+  letter-spacing: var(--typography-s-heading-sm-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-heading-sm-font-size);
+    line-height: var(--typography-l-heading-sm-line-height);
+    letter-spacing: var(--typography-l-heading-sm-letter-spacing);
+  }
+}
+
+@utility text-body-lg {
+  font-size: var(--typography-s-body-lg-regular-font-size);
+  line-height: var(--typography-s-body-lg-regular-line-height);
+  letter-spacing: var(--typography-s-body-lg-regular-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-body-lg-medium-font-size);
+    line-height: var(--typography-l-body-lg-medium-line-height);
+    letter-spacing: var(--typography-l-body-lg-medium-letter-spacing);
+  }
+}
+
+@utility text-body-md {
+  font-size: var(--typography-s-body-md-font-size);
+  line-height: var(--typography-s-body-md-line-height);
+  letter-spacing: var(--typography-s-body-md-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-body-md-font-size);
+    line-height: var(--typography-l-body-md-line-height);
+    letter-spacing: var(--typography-l-body-md-letter-spacing);
+  }
+}
+
+@utility text-body-sm {
+  font-size: var(--typography-s-body-sm-font-size);
+  line-height: var(--typography-s-body-sm-line-height);
+  letter-spacing: var(--typography-s-body-sm-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-body-sm-font-size);
+    line-height: var(--typography-l-body-sm-line-height);
+    letter-spacing: var(--typography-l-body-sm-letter-spacing);
+  }
+}
+
+@utility text-body-xs {
+  font-size: var(--typography-s-body-xs-font-size);
+  line-height: var(--typography-s-body-xs-line-height);
+  letter-spacing: var(--typography-s-body-xs-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-body-xs-font-size);
+    line-height: var(--typography-l-body-xs-line-height);
+    letter-spacing: var(--typography-l-body-xs-letter-spacing);
+  }
+}
+
+@utility text-page-heading {
+  font-size: var(--typography-s-page-heading-font-size);
+  line-height: var(--typography-s-page-heading-line-height);
+  letter-spacing: var(--typography-s-page-heading-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-page-heading-font-size);
+    line-height: var(--typography-l-page-heading-line-height);
+    letter-spacing: var(--typography-l-page-heading-letter-spacing);
+  }
+}
+
+@utility text-section-heading {
+  font-size: var(--typography-s-section-heading-font-size);
+  line-height: var(--typography-s-section-heading-line-height);
+  letter-spacing: var(--typography-s-section-heading-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-section-heading-font-size);
+    line-height: var(--typography-l-section-heading-line-height);
+    letter-spacing: var(--typography-l-section-heading-letter-spacing);
+  }
+}
+
+@utility text-button-label-md {
+  font-size: var(--typography-s-button-label-md-font-size);
+  line-height: var(--typography-s-button-label-md-line-height);
+  letter-spacing: var(--typography-s-button-label-md-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-button-label-md-font-size);
+    line-height: var(--typography-l-button-label-md-line-height);
+    letter-spacing: var(--typography-l-button-label-md-letter-spacing);
+  }
+}
+
+@utility text-button-label-lg {
+  font-size: var(--typography-s-button-label-lg-font-size);
+  line-height: var(--typography-s-button-label-lg-line-height);
+  letter-spacing: var(--typography-s-button-label-lg-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-button-label-lg-font-size);
+    line-height: var(--typography-l-button-label-lg-line-height);
+    letter-spacing: var(--typography-l-button-label-lg-letter-spacing);
+  }
+}
+
+@utility text-amount-display-lg {
+  font-size: var(--typography-s-amount-display-lg-font-size);
+  line-height: var(--typography-s-amount-display-lg-line-height);
+  letter-spacing: var(--typography-s-amount-display-lg-letter-spacing);
+
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: var(--typography-l-amount-display-lg-font-size);
+    line-height: var(--typography-l-amount-display-lg-line-height);
+    letter-spacing: var(--typography-l-amount-display-lg-letter-spacing);
+  }
+}
+
 /* Note: Shadow utilities with colors like shadow-primary, shadow-error will be auto-generated by Tailwind v4 */
+
+/* Text Component First Architecture - Disable Standard Tailwind Typography */
+/* These utilities are intentionally disabled to enforce usage of the Text component */
+/* This ensures cross-platform consistency between React and React Native */
+@utility text-xs {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-sm {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-base {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-lg {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-xl {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-2xl {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-3xl {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-4xl {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-5xl {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-6xl {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-7xl {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-8xl {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility text-9xl {
+  font-size: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+
+/* Disable leading (line-height) utilities - included in Text component variants */
+@utility leading-none {
+  line-height: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility leading-tight {
+  line-height: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility leading-snug {
+  line-height: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility leading-normal {
+  line-height: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility leading-relaxed {
+  line-height: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility leading-loose {
+  line-height: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+
+/* Disable tracking (letter-spacing) utilities - included in Text component variants */
+@utility tracking-tighter {
+  letter-spacing: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility tracking-tight {
+  letter-spacing: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility tracking-normal {
+  letter-spacing: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility tracking-wide {
+  letter-spacing: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility tracking-wider {
+  letter-spacing: unset !important; /* DISABLED: Use Text component with variant instead */
+}
+@utility tracking-widest {
+  letter-spacing: unset !important; /* DISABLED: Use Text component with variant instead */
+}
