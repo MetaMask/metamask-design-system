@@ -2,7 +2,7 @@ import base, { createConfig } from '@metamask/eslint-config';
 import jest from '@metamask/eslint-config-jest';
 import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
-import tailwind from 'eslint-plugin-tailwindcss';
+import tailwind from 'eslint-plugin-better-tailwindcss';
 
 const NODE_LTS_VERSION = 22;
 
@@ -216,23 +216,10 @@ const config = createConfig([
       'apps/storybook-react/stories/**',
     ],
     plugins: {
-      tailwindcss: tailwind,
+      'better-tailwindcss': tailwind,
     },
     rules: {
-      'tailwindcss/classnames-order': 'error',
-      'tailwindcss/enforces-negative-arbitrary-values': 'error',
-      'tailwindcss/enforces-shorthand': 'error',
-      'tailwindcss/no-arbitrary-value': 'off', // There are legitimate reasons to use arbitrary values but we should specifically error on static colors
-      'tailwindcss/no-custom-classname': 'error',
-      'tailwindcss/no-contradicting-classname': 'error',
-      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
-    },
-    settings: {
-      tailwindcss: {
-        callees: ['twMerge'],
-        config: 'apps/storybook-react/tailwind.config.js',
-        classRegex: ['^(class(Name)?|twClassName)$'],
-      },
+      'better-tailwindcss/sort-classes': 'error',
     },
   },
   // Tailwind ESLint for React Native
@@ -242,23 +229,10 @@ const config = createConfig([
       'apps/storybook-react-native/stories/**',
     ],
     plugins: {
-      tailwindcss: tailwind,
+      'better-tailwindcss': tailwind,
     },
     rules: {
-      'tailwindcss/classnames-order': 'error',
-      'tailwindcss/enforces-negative-arbitrary-values': 'error',
-      'tailwindcss/enforces-shorthand': 'error',
-      'tailwindcss/no-arbitrary-value': 'off', // There are legitimate reasons to use arbitrary values but we should specifically error on static colors
-      'tailwindcss/no-custom-classname': 'error',
-      'tailwindcss/no-contradicting-classname': 'error',
-      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
-    },
-    settings: {
-      tailwindcss: {
-        callees: ['twClassName', 'tw'],
-        config: 'apps/storybook-react-native/tailwind-intellisense.config.js',
-        tags: ['tw'], // Enable template literal support for tw`classnames`
-      },
+      'better-tailwindcss/sort-classes': 'error',
     },
   },
 ]);
