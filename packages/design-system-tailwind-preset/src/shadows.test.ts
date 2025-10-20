@@ -22,9 +22,9 @@ describe('Shadows', () => {
    * are defined in the @metamask/design-tokens package.
    */
   it('should use only shadow color and size CSS variables that exist in @metamask/design-tokens', async () => {
-    // Retrieve all design token variables that start with '--color-shadow' and '--shadow-size'
+    // Retrieve all design token variables that start with '--mm-color-shadow' and '--shadow-size'
     const designTokens = await getDesignTokenVariables([
-      '--color-shadow',
+      '--mm-color-shadow',
       '--shadow-size',
     ]);
 
@@ -42,9 +42,9 @@ describe('Shadows', () => {
    * design-tokens package that are not used in the 'shadows' object.
    */
   it('should not have unused shadow color and size CSS variables in @metamask/design-tokens', async () => {
-    // Retrieve all design token variables that start with '--color-shadow' and '--shadow-size'
+    // Retrieve all design token variables that start with '--mm-color-shadow' and '--shadow-size'
     const designTokens = await getDesignTokenVariables([
-      '--color-shadow',
+      '--mm-color-shadow',
       '--shadow-size',
     ]);
 

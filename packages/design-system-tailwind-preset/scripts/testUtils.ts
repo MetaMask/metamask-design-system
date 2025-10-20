@@ -11,7 +11,7 @@ import { parse } from 'postcss';
  * parses its content using PostCSS, and collects all CSS variables that match any of the specified prefixes.
  *
  * @param prefixes - (Optional) An array of prefixes to filter CSS variables. Defaults to ['--'].
- * For example, ['--color'] will only collect variables that start with '--color'.
+ * For example, ['--mm-color'] will only collect variables that start with '--mm-color'.
  * @returns A Promise that resolves to a Set containing the filtered CSS variable names.
  */
 export const getDesignTokenVariables = async (

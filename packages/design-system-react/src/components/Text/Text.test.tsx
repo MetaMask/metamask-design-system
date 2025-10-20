@@ -200,10 +200,7 @@ describe('Text Component', () => {
     const { container } = render(<Text>Default Variant Text</Text>);
     expect(container.firstChild).toHaveClass(
       'text-default',
-      'text-s-body-md',
-      'leading-s-body-md',
-      'tracking-s-body-md',
-      'md:text-l-body-md',
+      'text-body-md',
       'font-regular',
       'font-default',
     );

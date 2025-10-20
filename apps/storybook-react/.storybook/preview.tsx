@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../packages/design-tokens/dist/styles.css';
 import '../tailwind.css';
 
 import { Preview } from '@storybook/react';
@@ -38,7 +37,7 @@ function withColorScheme(Story: StoryFn, context: StoryContext) {
         {...props}
         style={{
           padding: '1rem',
-          backgroundColor: 'var(--color-background-default)',
+          backgroundColor: 'var(--mm-color-background-default)',
         }}
       >
         {children}
