@@ -10,7 +10,13 @@ module.exports = {
             runtime: 'automatic',
           },
         ],
-        '@babel/preset-typescript',
+        [
+          '@babel/preset-typescript',
+          {
+            allowNamespaces: true,
+            allowDeclareFields: true,
+          },
+        ],
       ],
       plugins: [
         ['@babel/plugin-transform-class-properties', { loose: true }],
