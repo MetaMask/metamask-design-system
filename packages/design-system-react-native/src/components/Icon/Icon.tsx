@@ -13,6 +13,7 @@ export const Icon = ({
   color = IconColor.IconDefault,
   twClassName,
   style,
+  hitSlop,
   ...props
 }: IconProps) => {
   const tw = useTailwind();
