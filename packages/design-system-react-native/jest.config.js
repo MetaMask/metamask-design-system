@@ -40,12 +40,17 @@ module.exports = merge(baseConfig, {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!react-native|@react-native|react-native-reanimated|@react-navigation)',
+    'node_modules/(?!(react-native|@react-native|react-native-reanimated|@react-navigation|react-native-jazzicon)/)',
   ],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
     '\\.svg$': '<rootDir>/__mocks__/svgMock.js',
+    // Mock React Native 0.76 internal modules that use advanced TypeScript syntax
+    '^react-native/Libraries/vendor/emitter/EventEmitter$':
+      '<rootDir>/jest.setup.js',
+    '^react-native/Libraries/EventEmitter/RCTDeviceEventEmitter$':
+      '<rootDir>/jest.setup.js',
   },
   setupFilesAfterEnv: ['./jest.setup.js'],
 });
