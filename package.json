@@ -19,7 +19,7 @@
     "changelog:update": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:update",
     "changelog:validate": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:validate",
     "create-component:react": "yarn workspace @metamask/design-system-react create-component",
-    "create-package": "ts-node scripts/create-package",
+    "create-package": "tsx scripts/create-package",
     "figma:connect:react": "figma connect --config packages/design-system-react/figma.config.json",
     "figma:connect:react-native": "figma connect --config packages/design-system-react-native/figma.config.json",
     "figma:connect:publish": "yarn figma:connect:publish:react && yarn figma:connect:publish:react-native",
@@ -38,7 +38,7 @@
     "lint:clear-cache": "rimraf .eslintcache",
     "lint:dependencies": "depcheck && yarn dedupe --check",
     "lint:dependencies:fix": "depcheck && yarn dedupe",
-    "lint:eslint": "yarn ts-node ./scripts/run-eslint.ts --cache",
+    "lint:eslint": "yarn tsx ./scripts/run-eslint.ts --cache",
     "lint:fix": "yarn lint:clear-cache && yarn lint:eslint --fix && yarn lint:misc --write && yarn constraints --fix && yarn lint:dependencies:fix",
     "lint:misc": "prettier --no-error-on-unmatched-pattern '**/*.json' '**/*.md' '**/*.yml' '!.yarnrc.yml' '!merged-packages/**' --ignore-path .prettierignore",
     "prepack": "./scripts/prepack.sh",
@@ -54,7 +54,7 @@
     "test:scripts": "NODE_OPTIONS=--experimental-vm-modules yarn jest --config ./jest.config.scripts.js --silent",
     "test:storybook": "yarn workspace @metamask/storybook-react test-storybook",
     "test:verbose": "yarn workspaces foreach --all --parallel --verbose run test:verbose",
-    "update-readme-content": "ts-node scripts/update-readme-content.ts",
+    "update-readme-content": "tsx scripts/update-readme-content.ts",
     "workspaces:list-versions": "./scripts/list-workspace-versions.sh"
   },
   "simple-git-hooks": {
@@ -122,7 +122,7 @@
     "rimraf": "^5.0.5",
     "semver": "^7.7.1",
     "simple-git-hooks": "^2.8.0",
-    "ts-node": "^10.9.1",
+    "tsx": "^4.20.6",
     "twrnc": "^4.5.1",
     "typescript": "~5.2.2",
     "typescript-eslint": "^8.7.0",
@@ -138,7 +138,7 @@
       "@keystonehq/bc-ur-registry-eth>hdkey>secp256k1": true,
       "babel-runtime>core-js": false,
       "simple-git-hooks": false,
-      "ts-node>@swc/core": false
+      "tsx>esbuild": false
     }
   }
 }
