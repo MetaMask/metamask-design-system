@@ -34,14 +34,14 @@
 @font-face {
   font-family: 'Geist';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   src: url('fonts/Geist/Geist Bold.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Geist';
   font-style: italic;
-  font-weight: 700;
+  font-weight: 600;
   src: url('fonts/Geist/Geist Bold Italic.woff2') format('woff2');
 }
 
