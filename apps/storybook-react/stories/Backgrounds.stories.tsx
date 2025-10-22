@@ -9,6 +9,9 @@ import {
   Text,
   TextColor,
   TextVariant,
+  Button,
+  ButtonVariant,
+  TextButton,
 } from '@metamask/design-system-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
@@ -20,6 +23,15 @@ const meta: Meta = {
 
 export default meta;
 type Story = StoryObj;
+
+const ButtonComponents = () => (
+  <Box flexDirection={BoxFlexDirection.Row} gap={2}>
+    <Button variant={ButtonVariant.Primary}>Primary Button</Button>
+    <Button variant={ButtonVariant.Secondary}>Secondary Button</Button>
+    <Button variant={ButtonVariant.Tertiary}>Tertiary Button</Button>
+    <TextButton>Text Button</TextButton>
+  </Box>
+);
 
 const TextComponents = () => (
   <>
@@ -51,12 +63,6 @@ const TextComponents = () => (
         <Icon name={IconName.Info} color={IconColor.IconMuted} />
         <Text color={TextColor.TextMuted}>Text Muted and Icon Muted</Text>
       </Box>
-      <Text
-        asChild
-        className="w-full rounded-2xl bg-muted p-4 hover:bg-muted-hover active:bg-muted-pressed"
-      >
-        <button>Background Muted/Hover/Pressed</button>
-      </Text>
     </Box>
   </>
 );
@@ -72,6 +78,7 @@ const Backgrounds: React.FC = () => {
       >
         <Text variant={TextVariant.HeadingMd}>Background Default</Text>
         <TextComponents />
+        <ButtonComponents />
 
         {/* Background Section */}
         <Box
@@ -83,7 +90,7 @@ const Backgrounds: React.FC = () => {
         >
           <Text variant={TextVariant.HeadingMd}>Background Section</Text>
           <TextComponents />
-
+          <ButtonComponents />
           {/* Background Subsection */}
           <Box
             backgroundColor={BoxBackgroundColor.BackgroundSubsection}
@@ -94,6 +101,7 @@ const Backgrounds: React.FC = () => {
           >
             <Text variant={TextVariant.HeadingMd}>Background Subsection</Text>
             <TextComponents />
+            <ButtonComponents />
           </Box>
         </Box>
       </Box>
