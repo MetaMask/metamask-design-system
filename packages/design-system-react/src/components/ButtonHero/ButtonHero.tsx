@@ -7,7 +7,7 @@ import type { ButtonHeroProps } from './ButtonHero.types';
 
 export const ButtonHero = forwardRef<HTMLButtonElement, ButtonHeroProps>(
   ({ className, isDisabled, isLoading, ...props }, ref) => {
-    const isInteractive = !(isDisabled ?? isLoading);
+    const isInteractive = !(isDisabled || isLoading);
 
     const mergedClassName = twMerge(
       // Base hero styles - locked to light theme primary colors
