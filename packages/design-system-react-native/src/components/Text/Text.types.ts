@@ -31,7 +31,7 @@ export type TextProps = {
    * Optional prop to control the font weight of the text.
    * Normal: 400
    * Medium: 500
-   * Bold: 700
+   * Bold: 600
    */
   fontWeight?: FontWeight;
   /**

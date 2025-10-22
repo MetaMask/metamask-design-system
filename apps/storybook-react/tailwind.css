@@ -63,7 +63,7 @@
 @font-face {
   font-family: 'MMSans';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   src: url('fonts/MMSans/MM Sans Bold.woff2') format('woff2');
 }
 
@@ -85,6 +85,6 @@
 @font-face {
   font-family: 'MMPoly';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   src: url('fonts/MMPoly/MM Poly Regular.woff2') format('woff2');
 }
