@@ -39,9 +39,9 @@
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
     "clean:icons": "rimraf src/components/Icon/icons",
-    "create-component": "ts-node scripts/create-component",
+    "create-component": "tsx scripts/create-component",
     "generate-icons": "yarn clean:icons && svgr --config-file src/components/Icon/.svgrrc.js -d src/components/Icon/icons src/components/Icon/assets/*.svg && yarn generate-icons:index",
-    "generate-icons:index": "ts-node scripts/generate-icons-index.ts",
+    "generate-icons:index": "tsx scripts/generate-icons-index.ts",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
@@ -76,7 +76,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "rimraf": "^5.0.5",
     "ts-jest": "^29.2.5",
-    "ts-node": "^10.9.1",
+    "tsx": "^4.20.6",
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
