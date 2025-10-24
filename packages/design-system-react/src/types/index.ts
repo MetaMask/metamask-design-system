@@ -345,6 +345,7 @@ export enum ButtonBaseSize {
 export { ButtonBaseSize as ButtonPrimarySize };
 export { ButtonBaseSize as ButtonSecondarySize };
 export { ButtonBaseSize as ButtonTertiarySize };
+export { ButtonBaseSize as ButtonHeroSize };
 export { ButtonBaseSize as ButtonSize };
 
 /**
