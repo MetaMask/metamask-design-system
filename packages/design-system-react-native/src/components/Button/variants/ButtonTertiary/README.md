@@ -2,6 +2,12 @@
 
 `ButtonTertiary` is a button for optional and lowest attention.
 
+```tsx
+import { ButtonTertiary } from '@metamask/design-system-react-native';
+
+<ButtonTertiary onPress={() => {}}>Click Me</ButtonTertiary>;
+```
+
 ## Props
 
 ### `children`
@@ -12,6 +18,24 @@ The content to display inside the button.
 | ----------------- | ------------ | ----------- |
 | `React.ReactNode` | Yes          | `undefined` |
 
+```tsx
+<ButtonTertiary onPress={() => {}}>Button Content</ButtonTertiary>
+```
+
+### `onPress`
+
+Function to trigger when the button is pressed.
+
+| **Type**     | **Required** | **Default** |
+| ------------ | ------------ | ----------- |
+| `() => void` | Yes          | `undefined` |
+
+```tsx
+<ButtonTertiary onPress={() => console.log('Tertiary button pressed!')}>
+  Click Me
+</ButtonTertiary>
+```
+
 ### `size`
 
 Defines the size of the button.
@@ -19,6 +43,11 @@ Defines the size of the button.
 | **Type**     | **Required** | **Default**     |
 | ------------ | ------------ | --------------- |
 | `ButtonSize` | No           | `ButtonSize.Lg` |
+
+```tsx
+<ButtonTertiary size={ButtonSize.Sm} onPress={() => {}}>Small Button</ButtonTertiary>
+<ButtonTertiary size={ButtonSize.Lg} onPress={() => {}}>Large Button</ButtonTertiary>
+```
 
 ### `isLoading`
 
@@ -28,6 +57,12 @@ Indicates whether the button is in a loading state. If `true`, a spinner is disp
 | --------- | ------------ | ----------- |
 | `boolean` | No           | `false`     |
 
+```tsx
+<ButtonTertiary isLoading onPress={() => {}}>
+  Loading Button
+</ButtonTertiary>
+```
+
 ### `loadingText`
 
 Text to display alongside the spinner when the button is loading.
@@ -35,6 +70,12 @@ Text to display alongside the spinner when the button is loading.
 | **Type** | **Required** | **Default** |
 | -------- | ------------ | ----------- |
 | `string` | No           | `undefined` |
+
+```tsx
+<ButtonTertiary isLoading loadingText="Loading..." onPress={() => {}}>
+  Button with Loading Text
+</ButtonTertiary>
+```
 
 ### `isDisabled`
 
@@ -44,6 +85,12 @@ Disables the button, preventing interaction.
 | --------- | ------------ | ----------- |
 | `boolean` | No           | `false`     |
 
+```tsx
+<ButtonTertiary isDisabled onPress={() => {}}>
+  Disabled Button
+</ButtonTertiary>
+```
+
 ### `isDanger`
 
 Renders the button in a danger style to indicate destructive actions.
@@ -51,6 +98,12 @@ Renders the button in a danger style to indicate destructive actions.
 | **Type**  | **Required** | **Default** |
 | --------- | ------------ | ----------- |
 | `boolean` | No           | `false`     |
+
+```tsx
+<ButtonTertiary isDanger onPress={() => {}}>
+  Danger Button
+</ButtonTertiary>
+```
 
 ### `isInverse`
 
@@ -60,6 +113,12 @@ Renders the button with inverted colors for use on dark backgrounds.
 | --------- | ------------ | ----------- |
 | `boolean` | No           | `false`     |
 
+```tsx
+<ButtonTertiary isInverse onPress={() => {}}>
+  Inverse Button
+</ButtonTertiary>
+```
+
 ### `startIconName`
 
 Name of the icon to display at the start of the button.
@@ -67,6 +126,12 @@ Name of the icon to display at the start of the button.
 | **Type** | **Required** | **Default** |
 | -------- | ------------ | ----------- |
 | `string` | No           | `undefined` |
+
+```tsx
+<ButtonTertiary startIconName="add" onPress={() => {}}>
+  Button with Start Icon
+</ButtonTertiary>
+```
 
 ### `endIconName`
 
@@ -76,6 +141,12 @@ Name of the icon to display at the end of the button.
 | -------- | ------------ | ----------- |
 | `string` | No           | `undefined` |
 
+```tsx
+<ButtonTertiary endIconName="check" onPress={() => {}}>
+  Button with End Icon
+</ButtonTertiary>
+```
+
 ### `twClassName`
 
 TailwindCSS class names to apply custom styling.
@@ -83,6 +154,12 @@ TailwindCSS class names to apply custom styling.
 | **Type** | **Required** | **Default** |
 | -------- | ------------ | ----------- |
 | `string` | No           | `undefined` |
+
+```tsx
+<ButtonTertiary twClassName="shadow-lg" onPress={() => {}}>
+  Custom Styled Button
+</ButtonTertiary>
+```
 
 ### `style`
 
@@ -92,30 +169,19 @@ Custom styles to apply to the button.
 | ---------------------- | ------------ | ----------- |
 | `StyleProp<ViewStyle>` | No           | `undefined` |
 
-## Usage
-
 ```tsx
-import React from 'react';
-import ButtonTertiary from './ButtonTertiary';
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-const App = () => {
-  return (
-    <ButtonTertiary
-      size="lg"
-      isLoading={false}
-      loadingText="Loading..."
-      startIconName="add"
-      endIconName="check"
-      isDanger={false}
-      isInverse={false}
-      onPress={() => console.log('Primary button pressed!')}
-    >
-      Click Me
-    </ButtonTertiary>
-  );
-};
-
-export default App;
+export const StyleExample = () => (
+  <ButtonTertiary style={styles.custom} onPress={() => {}}>
+    Custom Styled Button
+  </ButtonTertiary>
+);
 ```
 
 ## Notes
