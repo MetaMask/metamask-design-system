@@ -25,19 +25,19 @@
       "description": "For subsection bg usually over background/section."
     },
     "muted": {
-      "value": "#3c4d9d0f",
+      "value": "#b4b4b528",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "For muted neutral surface."
     },
     "default-hover": {
-      "value": "#f6f6f7",
+      "value": "{grey.050}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for background/default."
     },
     "default-pressed": {
-      "value": "#ebecef",
+      "value": "{grey.100}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for background/default."
@@ -55,25 +55,25 @@
       "description": "Pressed state surface for background/alternative."
     },
     "muted-hover": {
-      "value": "#3c4d9d1a",
+      "value": "#b4b4b53d",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for background/muted."
     },
     "muted-pressed": {
-      "value": "#3c4d9d26",
+      "value": "#b4b4b552",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for background/muted."
     },
     "hover": {
-      "value": "#858b9a14",
+      "value": "#b4b4b528",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "General purpose hover state tint."
     },
     "pressed": {
-      "value": "#858b9a29",
+      "value": "#b4b4b53d",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "General purpose pressed state tint."
@@ -139,13 +139,13 @@
   },
   "border": {
     "default": {
-      "value": "{grey.200}",
+      "value": "{grey.400}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Default color for borders."
     },
     "muted": {
-      "value": "#b7bbc866",
+      "value": "#b4b4b566",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Muted color for borders."
@@ -153,13 +153,13 @@
   },
   "overlay": {
     "default": {
-      "value": "#3f434a66",
+      "value": "#0a0d135c",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Default color for overlays(scrim)."
     },
     "alternative": {
-      "value": "#000000cc",
+      "value": "#0a0d138f",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Dimmer color for overlays(scrim)."

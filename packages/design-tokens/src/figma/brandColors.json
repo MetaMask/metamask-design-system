@@ -1,37 +1,37 @@
 {
   "grey": {
     "100": {
-      "value": "#dadce5",
+      "value": "#ededed",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "200": {
-      "value": "#b7bbc8",
+      "value": "#babbbe",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "300": {
-      "value": "#9b9b9b",
+      "value": "#a3a4a7",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "400": {
-      "value": "#858b9a",
+      "value": "#949596",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "500": {
-      "value": "#686e7d",
+      "value": "#66676a",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
     },
     "600": {
-      "value": "#48484e",
+      "value": "#47484a",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
@@ -61,7 +61,7 @@
       "description": ""
     },
     "050": {
-      "value": "#f3f5f9",
+      "value": "#f3f3f4",
       "type": "color",
       "parent": "Brand Colors/v2- brand evo (preview)",
       "description": ""
