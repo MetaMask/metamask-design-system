@@ -48,7 +48,7 @@ const meta: Meta<typeof Text> = {
       options: Object.keys(FontWeight),
       mapping: FontWeight,
       description:
-        'Optional prop to control the font weight of the text. Normal: 400, Medium: 500, Bold: 700',
+        'Optional prop to control the font weight of the text. Normal: 400, Medium: 500, Bold: 600',
     },
     fontFamily: {
       control: 'select',
@@ -221,7 +221,7 @@ export const FontWeightStory: Story = {
     <div className="space-y-4">
       <Text fontWeight={FontWeight.Regular}>Regular (400)</Text>
       <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
-      <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
+      <Text fontWeight={FontWeight.Bold}>Bold (600)</Text>
     </div>
   ),
   name: 'Font Weight',

@@ -345,6 +345,7 @@ export enum ButtonBaseSize {
 export { ButtonBaseSize as ButtonPrimarySize };
 export { ButtonBaseSize as ButtonSecondarySize };
 export { ButtonBaseSize as ButtonTertiarySize };
+export { ButtonBaseSize as ButtonHeroSize };
 export { ButtonBaseSize as ButtonSize };
 
 /**
@@ -481,7 +482,7 @@ export enum TextAlign {
  */
 export enum FontWeight {
   /**
-   * Weight - 700
+   * Weight - 600
    */
   Bold = 'font-bold',
   /**
