@@ -16,7 +16,7 @@ export const colors: ThemeColors = {
     /** Hover state surface for background/default */
     defaultHover: '#1c1d1f',
     /** Pressed state surface for background/default */
-    defaultPressed: '252628',
+    defaultPressed: '#252628',
     /** Hover state surface for background/alternative (#0d0d0e) */
     alternativeHover: '#0d0d0e',
     /** Pressed state surface for background/alternative (#161617) */
