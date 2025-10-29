@@ -31,13 +31,13 @@
       "description": "For muted neutral surface."
     },
     "default-hover": {
-      "value": "{grey.800}",
+      "value": "#1c1d1f",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for background/default."
     },
     "default-pressed": {
-      "value": "{grey.700}",
+      "value": "#252628",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for background/default."

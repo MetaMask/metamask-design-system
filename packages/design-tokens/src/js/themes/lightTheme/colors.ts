@@ -14,9 +14,9 @@ export const colors: ThemeColors = {
     /** For muted neutral surface (#b4b4b528) */
     muted: '#b4b4b528',
     /** Hover state surface for background/default */
-    defaultHover: brandColor.grey050,
+    defaultHover: '#f3f3f4',
     /** Pressed state surface for background/default */
-    defaultPressed: brandColor.grey100,
+    defaultPressed: '#ededed',
     /** Hover state surface for background/alternative (#ebedf1) */
     alternativeHover: '#ebedf1',
     /** Pressed state surface for background/alternative (#e1e4ea) */
@@ -50,7 +50,7 @@ export const colors: ThemeColors = {
     /** Muted color for icons (Not accessible) (#9CA1AF) */
     muted: brandColor.grey200,
     /** For elements placed on top of icon.default fill (#FFFFFF) */
-    inverse: brandColor.grey000,
+    inverse: brandColor.grey900,
   },
   border: {
     /** Default color for borders */

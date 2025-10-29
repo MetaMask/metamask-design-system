@@ -14,9 +14,9 @@ export const colors: ThemeColors = {
     /** For muted neutral surface (#ffffff0a) */
     muted: '#ffffff0a',
     /** Hover state surface for background/default */
-    defaultHover: brandColor.grey800,
+    defaultHover: '#1c1d1f',
     /** Pressed state surface for background/default */
-    defaultPressed: brandColor.grey700,
+    defaultPressed: '252628',
     /** Hover state surface for background/alternative (#0d0d0e) */
     alternativeHover: '#0d0d0e',
     /** Pressed state surface for background/alternative (#161617) */
