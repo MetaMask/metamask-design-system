@@ -27,7 +27,7 @@
   --color-background-alternative-pressed: #161617;
 
   /* These have opacities of pure white for general usage. 
-  We set 8% for hover and 14% for pressed so these tokens pick up
+  We set 8% for hover and 12% for pressed so these tokens pick up
   background hues and are consistent with +1 and +2 elevations.*/
   --color-background-hover: #ffffff0a;
   --color-background-pressed: #ffffff1f;
