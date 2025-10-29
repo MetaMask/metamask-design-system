@@ -7,17 +7,17 @@
 
 :root {
   /* Grey */
-  --brand-colors-grey-grey100: #dadce5;
-  --brand-colors-grey-grey200: #b7bbc8;
-  --brand-colors-grey-grey300: #9b9b9b;
-  --brand-colors-grey-grey400: #858b9a;
-  --brand-colors-grey-grey500: #686e7d;
-  --brand-colors-grey-grey600: #48484e;
+  --brand-colors-grey-grey100: #ededed;
+  --brand-colors-grey-grey200: #babbbe;
+  --brand-colors-grey-grey300: #a3a4a7;
+  --brand-colors-grey-grey400: #949596;
+  --brand-colors-grey-grey500: #66676a;
+  --brand-colors-grey-grey600: #47484a;
   --brand-colors-grey-grey700: #252628;
   --brand-colors-grey-grey800: #1c1d1f;
   --brand-colors-grey-grey900: #131416;
   --brand-colors-grey-grey1000: #000000;
-  --brand-colors-grey-grey050: #f3f5f9;
+  --brand-colors-grey-grey050: #f3f3f4;
   --brand-colors-grey-grey000: #ffffff;
   --brand-colors-grey-grey025: #f7f9fc;
   /* Blue */
