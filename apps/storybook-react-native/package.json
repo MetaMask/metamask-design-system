@@ -18,6 +18,8 @@
     "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.9.0",
     "expo": "~52.0.0",
+    "expo-font": "^14.0.9",
+    "expo-splash-screen": "^31.0.10",
     "expo-status-bar": "~2.0.0",
     "expo-system-ui": "~3.0.0",
     "react-native-gesture-handler": "~2.16.0",
