@@ -27,4 +27,19 @@ export default ({ config }) => ({
   web: {
     favicon: './assets/favicon.png',
   },
+  plugins: [
+    [
+      'expo-font',
+      {
+        fonts: [
+          './assets/fonts/Geist/Geist-Regular.otf',
+          './assets/fonts/Geist/Geist-Medium.otf',
+          './assets/fonts/Geist/Geist-Bold.otf',
+          './assets/fonts/MMSans/MMSans-Regular.otf',
+          './assets/fonts/MMSans/MMSans-Medium.otf',
+          './assets/fonts/MMSans/MMSans-Bold.otf',
+        ],
+      },
+    ],
+  ],
 });
