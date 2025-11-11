@@ -12,10 +12,7 @@
     "prestorybook": "yarn storybook-generate",
     "storybook:web": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "storybook-generate": "sb-rn-get-stories --config-path .rnstorybook",
-    "storybook": "cross-env EXPO_PUBLIC_STORYBOOK_ENABLED='true' expo start",
-    "storybook:ios": "cross-env EXPO_PUBLIC_STORYBOOK_ENABLED='true' expo start --ios",
-    "storybook:android": "cross-env EXPO_PUBLIC_STORYBOOK_ENABLED='true' expo start --android"
+    "storybook-generate": "sb-rn-get-stories --config-path .rnstorybook"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.1.1",
