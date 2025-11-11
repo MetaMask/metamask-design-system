@@ -12,14 +12,4 @@ jest.mock('react-native-svg', () => {
   };
 });
 
-jest.mock('react-native-reanimated', () => {
-  const Reanimated = require('react-native-reanimated/mock');
-
-  // Overriding the `call` method to avoid issues with animations
-  Reanimated.default.call = () => {};
-
-  return Reanimated;
-});
-
-// Silence warnings related to the Animated API
-jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+// React Native Reanimated mock removed - version 3.17.2 should handle React Native 0.76 compatibility better
