@@ -61,7 +61,7 @@
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.8.1",
-    "@storybook/react-native": "^9.1.0",
+    "@storybook/react-native": "^9.1.4",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/react-native": "^12.8.1",
     "@ts-bridge/cli": "^0.6.3",
