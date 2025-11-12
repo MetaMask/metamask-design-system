@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
+import type { Meta, StoryObj } from '@storybook/react';
 import { ScrollView, View } from 'react-native';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
