@@ -1,5 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import path, { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -7,8 +8,8 @@ import path, { join, dirname } from 'path';
  *
  * @param value
  */
-function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, 'package.json')));
+function getAbsolutePath(value: string): string {
+  return value;
 }
 
 // Check if we're running in test mode (Vitest)
