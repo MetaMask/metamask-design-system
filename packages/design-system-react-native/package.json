@@ -57,7 +57,7 @@
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.23.3",
     "@figma/code-connect": "^1.0.0",
-    "@metamask/auto-changelog": "^5.1.0",
+    "@metamask/auto-changelog": "^5.2.0",
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.8.1",
