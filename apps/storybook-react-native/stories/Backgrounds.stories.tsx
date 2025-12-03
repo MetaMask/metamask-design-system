@@ -3,6 +3,7 @@ import {
   BoxAlignItems,
   BoxBackgroundColor,
   BoxFlexDirection,
+  BoxJustifyContent,
   Icon,
   IconColor,
   IconName,
@@ -27,18 +28,23 @@ export default meta;
 type Story = StoryObj;
 
 const ButtonComponents = () => (
-  <Box flexDirection={BoxFlexDirection.Row} gap={2}>
-    <Button variant={ButtonVariant.Primary}>Primary Button</Button>
-    <Button variant={ButtonVariant.Secondary}>Secondary Button</Button>
-    <Button variant={ButtonVariant.Tertiary}>Tertiary Button</Button>
-    <TextButton>Text Button</TextButton>
+  <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+    <Button isFullWidth variant={ButtonVariant.Primary}>
+      Primary Button
+    </Button>
+    <Button isFullWidth variant={ButtonVariant.Secondary}>
+      Secondary Button
+    </Button>
+    <Button isFullWidth variant={ButtonVariant.Tertiary}>
+      Tertiary Button
+    </Button>
   </Box>
 );
 
 const TextComponents = () => (
   <>
     <Text variant={TextVariant.HeadingSm}>Text & Icon Colors</Text>
-    <Box twClassName="space-y-2">
+    <Box flexDirection={BoxFlexDirection.Column} gap={2}>
       <Box
         flexDirection={BoxFlexDirection.Row}
         alignItems={BoxAlignItems.Center}
@@ -65,6 +71,7 @@ const TextComponents = () => (
         <Icon name={IconName.Info} color={IconColor.IconMuted} />
         <Text color={TextColor.TextMuted}>Text Muted and Icon Muted</Text>
       </Box>
+      <TextButton>Text Button</TextButton>
     </Box>
   </>
 );
@@ -72,11 +79,8 @@ const TextComponents = () => (
 const Backgrounds: React.FC = () => {
   const tw = useTailwind();
   return (
-    <ScrollView style={tw`flex-1 bg-default`}>
-      <Box
-        twClassName="w-full"
-        backgroundColor={BoxBackgroundColor.BackgroundDefault}
-      >
+    <ScrollView style={tw`flex-1`}>
+      <Box twClassName="w-full">
         {/* Background Default */}
         <Box
           flexDirection={BoxFlexDirection.Column}
@@ -88,7 +92,8 @@ const Backgrounds: React.FC = () => {
           <ButtonComponents />
           {/* Background Section */}
           <Box
-            twClassName="p-4 rounded-2xl"
+            twClassName="rounded-2xl"
+            padding={4}
             backgroundColor={BoxBackgroundColor.BackgroundSection}
             flexDirection={BoxFlexDirection.Column}
             gap={4}
@@ -99,7 +104,8 @@ const Backgrounds: React.FC = () => {
 
             {/* Background Subsection */}
             <Box
-              twClassName="p-4 rounded-2xl"
+              twClassName="rounded-2xl"
+              padding={4}
               backgroundColor={BoxBackgroundColor.BackgroundSubsection}
               flexDirection={BoxFlexDirection.Column}
               gap={4}
