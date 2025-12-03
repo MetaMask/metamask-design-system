@@ -3,7 +3,8 @@ import {
   generateIconSeed,
 } from '@metamask/design-system-shared';
 import React from 'react';
-import { View, type ViewStyle } from 'react-native';
+import { View } from 'react-native';
+import type { ViewStyle } from 'react-native';
 import RNJazzicon from 'react-native-jazzicon';
 
 import type { JazziconProps } from './Jazzicon.types';
