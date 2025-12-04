@@ -31,19 +31,23 @@ import {
   IconSize,
 } from '@metamask/design-system-react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 import React from 'react';
 import { ScrollView, Pressable } from 'react-native';
 
 const meta: Meta = {
   title: 'Examples/Wallet Home',
   component: () => null,
+  parameters: {
+    docs: { disable: true },
+  },
 };
 
 export default meta;
-type Story = StoryObj;
 
-const WalletHome: React.FC = () => {
+// Temporarily disabled WalletHome component due to length error
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _WalletHome: React.FC = () => {
   const tw = useTailwind();
 
   return (
@@ -516,6 +520,7 @@ const WalletHome: React.FC = () => {
   );
 };
 
-export const Default: Story = {
-  render: () => <WalletHome />,
-};
+// Temporarily disabled due to length error
+// export const Default: Story = {
+//   render: () => <WalletHome />,
+// };
