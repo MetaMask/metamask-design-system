@@ -76,7 +76,7 @@ Available `FontWeight` options:
 
 - `FontWeight.Regular` (Weight `400`)
 - `FontWeight.Medium` (Weight `500`)
-- `FontWeight.Bold` (Weight `600`)
+- `FontWeight.Bold` (Weight `700`)
 
 ### `fontStyle`
 

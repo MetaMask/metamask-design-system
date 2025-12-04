@@ -482,7 +482,7 @@ export enum TextAlign {
  */
 export enum FontWeight {
   /**
-   * Weight - 600
+   * Weight - 700
    */
   Bold = 'font-bold',
   /**

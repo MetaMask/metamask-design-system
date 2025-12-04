@@ -55,7 +55,7 @@ function createNewFigmaTokenObject(str: string, obj: any) {
 describe('Typography', () => {
   describe('Typography Small Screen', () => {
     it('js tokens for sDisplayMD matches figma tokens sDisplayMD', () => {
-      expect(typography.sDisplayMD.fontWeight).toBe('600');
+      expect(typography.sDisplayMD.fontWeight).toBe('700');
 
       expect(typography.sDisplayMD.fontSize).toStrictEqual(
         Number(
@@ -86,7 +86,7 @@ describe('Typography', () => {
     });
 
     it('js tokens for sHeadingLG matches figma tokens sHeadingLG', () => {
-      expect(typography.sHeadingLG.fontWeight).toBe('600');
+      expect(typography.sHeadingLG.fontWeight).toBe('700');
 
       expect(typography.sHeadingLG.fontSize).toStrictEqual(
         Number(
@@ -117,7 +117,7 @@ describe('Typography', () => {
     });
 
     it('js tokens for sHeadingMD matches figma tokens sHeadingMD', () => {
-      expect(typography.sHeadingMD.fontWeight).toBe('600');
+      expect(typography.sHeadingMD.fontWeight).toBe('700');
 
       expect(typography.sHeadingMD.fontSize).toStrictEqual(
         Number(
@@ -148,7 +148,7 @@ describe('Typography', () => {
     });
 
     it('js tokens for sHeadingSM matches figma tokens sHeadingSM', () => {
-      expect(typography.sHeadingSM.fontWeight).toBe('600');
+      expect(typography.sHeadingSM.fontWeight).toBe('700');
 
       expect(typography.sHeadingSM.fontSize).toStrictEqual(
         Number(
@@ -210,7 +210,7 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodyMDBold matches figma tokens sBodyMDBold', () => {
-      expect(typography.sBodyMDBold.fontWeight).toBe('600');
+      expect(typography.sBodyMDBold.fontWeight).toBe('700');
 
       expect(typography.sBodyMDBold.fontSize).toStrictEqual(
         Number(
@@ -303,7 +303,7 @@ describe('Typography', () => {
     });
 
     it('js tokens for sBodySMBold matches figma tokens sBodySMBold', () => {
-      expect(typography.sBodySMBold.fontWeight).toBe('600');
+      expect(typography.sBodySMBold.fontWeight).toBe('700');
 
       expect(typography.sBodySMBold.fontSize).toStrictEqual(
         Number(
@@ -491,7 +491,7 @@ describe('Typography', () => {
     });
 
     it('js tokens for lHeadingLG matches figma tokens lHeadingLG', () => {
-      expect(typography.lHeadingLG.fontWeight).toBe('600');
+      expect(typography.lHeadingLG.fontWeight).toBe('700');
 
       expect(typography.lHeadingLG.fontSize).toStrictEqual(
         Number(
@@ -522,7 +522,7 @@ describe('Typography', () => {
     });
 
     it('js tokens for lHeadingMD matches figma tokens lHeadingMD', () => {
-      expect(typography.lHeadingMD.fontWeight).toBe('600');
+      expect(typography.lHeadingMD.fontWeight).toBe('700');
 
       expect(typography.lHeadingMD.fontSize).toStrictEqual(
         Number(
@@ -553,7 +553,7 @@ describe('Typography', () => {
     });
 
     it('js tokens for lHeadingSM matches figma tokens lHeadingSM', () => {
-      expect(typography.lHeadingSM.fontWeight).toBe('600');
+      expect(typography.lHeadingSM.fontWeight).toBe('700');
 
       expect(typography.lHeadingSM.fontSize).toStrictEqual(
         Number(
@@ -615,7 +615,7 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodyMDBold matches figma tokens lBodyMDBold', () => {
-      expect(typography.lBodyMDBold.fontWeight).toBe('600');
+      expect(typography.lBodyMDBold.fontWeight).toBe('700');
 
       expect(typography.lBodyMDBold.fontSize).toStrictEqual(
         Number(
@@ -708,7 +708,7 @@ describe('Typography', () => {
     });
 
     it('js tokens for lBodySMBold matches figma tokens lBodySMBold', () => {
-      expect(typography.lBodySMBold.fontWeight).toBe('600');
+      expect(typography.lBodySMBold.fontWeight).toBe('700');
 
       expect(typography.lBodySMBold.fontSize).toStrictEqual(
         Number(

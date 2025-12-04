@@ -115,7 +115,7 @@ export const FontWeightStory: Story = {
     <View>
       <Text fontWeight={FontWeight.Regular}>Regular (400)</Text>
       <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
-      <Text fontWeight={FontWeight.Bold}>Bold (600)</Text>
+      <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
     </View>
   ),
   name: 'Font Weight',

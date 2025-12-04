@@ -454,9 +454,9 @@ export enum TextColor {
  */
 export enum FontWeight {
   /**
-   * Weight - 600
+   * Weight - 700
    */
-  Bold = '600',
+  Bold = '700',
   /**
    * Weight - 500
    */
