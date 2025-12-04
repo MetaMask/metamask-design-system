@@ -3,7 +3,6 @@ import {
   BoxAlignItems,
   BoxBackgroundColor,
   BoxFlexDirection,
-  BoxJustifyContent,
   Icon,
   IconColor,
   IconName,
