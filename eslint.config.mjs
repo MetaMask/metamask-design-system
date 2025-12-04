@@ -77,6 +77,11 @@ const config = createConfig([
     rules: {
       // TODO: Re-enable this
       'n/no-sync': 'off',
+      // TODO: Re-enable these rules. Enabling them with error suppression
+      // breaks `--fix`, because the autofixer for these rules do not work very
+      // well.
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/check-tag-names': 'off',
     },
   },
   {
@@ -133,6 +138,12 @@ const config = createConfig([
       'no-restricted-syntax': 'off',
       'no-restricted-globals': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
+
+      // TODO: Re-enable these rules. Enabling them with error suppression
+      // breaks `--fix`, because the autofixer for these rules do not work very
+      // well.
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/check-tag-names': 'off',
 
       // Overrides eslint base config which isn't following outer most pattern. Can be removed once this issue is resolved and eslint config updated
       // issue: https://github.com/MetaMask/eslint-config/issues/403
