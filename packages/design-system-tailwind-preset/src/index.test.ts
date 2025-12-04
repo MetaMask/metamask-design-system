@@ -34,7 +34,6 @@ describe('Tailwind Preset', () => {
     }) => Record<string, string>;
 
     const result = textColorFn({
-      // eslint-disable-next-line jest/no-conditional-in-test -- Mocking Tailwind's theme function behavior
       theme: (path: string) => (path === 'colors' ? colors : {}),
     });
     expect(result).toStrictEqual(
@@ -52,7 +51,6 @@ describe('Tailwind Preset', () => {
     }) => Record<string, string>;
 
     const result = bgColorFn({
-      // eslint-disable-next-line jest/no-conditional-in-test -- Mocking Tailwind's theme function behavior
       theme: (path: string) => (path === 'colors' ? colors : {}),
     });
     expect(result).toStrictEqual(
@@ -70,7 +68,6 @@ describe('Tailwind Preset', () => {
     }) => Record<string, string>;
 
     const result = borderColorFn({
-      // eslint-disable-next-line jest/no-conditional-in-test -- Mocking Tailwind's theme function behavior
       theme: (path: string) => (path === 'colors' ? colors : {}),
     });
     expect(result).toStrictEqual(

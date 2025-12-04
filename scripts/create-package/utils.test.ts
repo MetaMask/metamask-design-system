@@ -43,15 +43,13 @@ describe('create-package/utils', () => {
     it('should read the expected monorepo files', async () => {
       (fs.promises.readFile as jest.Mock).mockImplementation(
         async (filePath: string) => {
-          // eslint-disable-next-line jest/no-conditional-in-test
           switch (path.basename(filePath)) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
             case MonorepoFiles.TsConfig:
               return tsConfig;
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+
             case MonorepoFiles.TsConfigBuild:
               return tsConfigBuild;
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+
             case MonorepoFiles.PackageJson:
               return packageJson;
             default:
