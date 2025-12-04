@@ -13,7 +13,7 @@ describe('template', () => {
 
     const mockTpl = (strings: TemplateStringsArray, ...values: unknown[]) => {
       return strings.reduce((result, str, i) => {
-        // eslint-disable-next-line @typescript-eslint/no-base-to-string, jest/no-conditional-in-test
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
         return result + str + String(values[i] || '');
       }, '');
     };
