@@ -11,10 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **BREAKING:** Update font file names from space-separated to hyphenated PostScript format for iOS Metro bundler compatibility ([#862](https://github.com/MetaMask/metamask-design-system/pull/862))
+  - Font file names changed: "Geist Regular.otf" → "Geist-Regular.otf", "Geist Medium.otf" → "Geist-Medium.otf", "Geist Bold.otf" → "Geist-Bold.otf"
+  - Fixes Metro bundler asset resolution issues on iOS that prevented fonts from loading correctly
+  - If using `@metamask/design-system-react-native` components as intended, fonts automatically load correctly with no migration needed
+  - If manually referencing font file paths in custom code, update all references to use hyphenated file names instead of space-separated names
+  - Android is unaffected by this change
 - Updated `@metamask/utils` peer dependency from 11.8.0 to 11.8.1 ([#838](https://github.com/MetaMask/metamask-design-system/pull/838))
-  - No breaking changes; safe to upgrade
 - Updated `@metamask/eslint-config-typescript` dev dependency from 14.1.0 to 15.0.0 ([#856](https://github.com/MetaMask/metamask-design-system/pull/856))
-  - No consumer impact; internal tooling only
 
 ### Fixed
 
@@ -22,12 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - The `TextButtonSize` enum is now properly exported and accessible for imports
   - Developers can now use typed enums instead of string literals: `import { TextButton, TextButtonSize } from '@metamask/design-system-react-native'` and `<TextButton size={TextButtonSize.Medium} />`
   - This is a non-breaking, additive change that improves type safety
-- Align font file naming with PostScript convention for iOS Metro bundler compatibility ([#862](https://github.com/MetaMask/metamask-design-system/pull/862))
-  - Updated font file names from space-separated to hyphenated format (e.g., "Geist Regular.otf" → "Geist-Regular.otf")
-  - Resolves Metro bundler asset resolution issues on iOS that prevented fonts from loading correctly
-  - Critical fix for iOS React Native applications; Android is unaffected
-  - If using components as intended, fonts automatically load correctly. If manually referencing font files, update paths to use hyphens instead of spaces
-  - Potentially breaking if directly referencing font file paths in custom code
 
 ## [0.4.1]
 

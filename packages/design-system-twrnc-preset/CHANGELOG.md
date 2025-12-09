@@ -9,14 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0]
 
-### Fixed
+### Changed
 
-- Align font family names with PostScript convention for iOS Metro bundler and expo-font compatibility ([#862](https://github.com/MetaMask/metamask-design-system/pull/862))
-  - Updated all font family names in TWRNC preset to use hyphenated format: `"Geist Regular"` → `"Geist-Regular"`, `"Geist Medium"` → `"Geist-Medium"`, `"Geist SemiBold"` → `"Geist-SemiBold"`, `"Geist Bold"` → `"Geist-Bold"`
-  - Fixes critical font loading issues on iOS when using Metro bundler with expo-font; Android is unaffected
+- **BREAKING:** Update font family names from space-separated to hyphenated PostScript format for iOS Metro bundler and expo-font compatibility ([#862](https://github.com/MetaMask/metamask-design-system/pull/862))
+  - Font family names changed: `"Geist Regular"` → `"Geist-Regular"`, `"Geist Medium"` → `"Geist-Medium"`, `"Geist Bold"` → `"Geist-Bold"`
+  - Fixes critical font loading issues on iOS when using Metro bundler with expo-font
   - If using TWRNC preset via `@metamask/design-system-react-native` components, fonts automatically use correct names with no migration needed
   - If directly referencing font families in custom TWRNC styles (e.g., `tw\`font-['Geist_Regular']\``), update to hyphenated names (e.g., `tw\`font-['Geist-Regular']\``)
-  - Potentially breaking if custom code directly references old font family names; update all references to use hyphens instead of spaces
+  - Android is unaffected by this change
   - Aligns with MetaMask Mobile's font configuration and expo-font requirements
 
 ## [0.2.1]
