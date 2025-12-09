@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Font family names changed: `"Geist Regular"` → `"Geist-Regular"`, `"Geist Medium"` → `"Geist-Medium"`, `"Geist Bold"` → `"Geist-Bold"`
   - Fixes critical font loading issues on iOS when using Metro bundler with expo-font
   - If using TWRNC preset via `@metamask/design-system-react-native` components, fonts automatically use correct names with no migration needed
-  - If directly referencing font families in custom TWRNC styles (e.g., `tw\`font-['Geist_Regular']\``), update to hyphenated names (e.g., `tw\`font-['Geist-Regular']\``)
+  - If directly referencing font families in custom TWRNC styles, update to hyphenated names (e.g., tw`font-['Geist-Regular']` instead of tw`font-['Geist_Regular']`)
   - Android is unaffected by this change
   - Aligns with MetaMask Mobile's font configuration and expo-font requirements
 

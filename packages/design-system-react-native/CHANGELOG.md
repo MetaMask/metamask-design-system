@@ -18,7 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - If manually referencing font file paths in custom code, update all references to use hyphenated file names instead of space-separated names
   - Android is unaffected by this change
 - Updated `@metamask/utils` peer dependency from 11.8.0 to 11.8.1 ([#838](https://github.com/MetaMask/metamask-design-system/pull/838))
-- Updated `@metamask/eslint-config-typescript` dev dependency from 14.1.0 to 15.0.0 ([#856](https://github.com/MetaMask/metamask-design-system/pull/856))
 
 ### Fixed
 
