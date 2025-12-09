@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore(deps-dev): bump @metamask/auto-changelog from 5.2.0 to 5.3.0 ([#858](https://github.com/MetaMask/metamask-design-system/pull/858))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.1.0 to 5.2.0 ([#853](https://github.com/MetaMask/metamask-design-system/pull/853))
+- chore(deps): bump @metamask/utils from 11.8.0 to 11.8.1 ([#838](https://github.com/MetaMask/metamask-design-system/pull/838))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.0.2 to 5.1.0 ([#837](https://github.com/MetaMask/metamask-design-system/pull/837))
+
 ## [0.1.1]
 
 ### Fixed

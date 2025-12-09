@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- Revert font weight changes from PR #847 ([#864](https://github.com/MetaMask/metamask-design-system/pull/864))
+- chore(deps-dev): bump @metamask/eslint-config-typescript from 14.1.0 to 15.0.0 ([#856](https://github.com/MetaMask/metamask-design-system/pull/856))
+- chore: remove unused eslint-disable comments after eslint upgrades ([#861](https://github.com/MetaMask/metamask-design-system/pull/861))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.2.0 to 5.3.0 ([#858](https://github.com/MetaMask/metamask-design-system/pull/858))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.1.0 to 5.2.0 ([#853](https://github.com/MetaMask/metamask-design-system/pull/853))
+- fix: export TextButtonSize enum from design-system-react-native ([#848](https://github.com/MetaMask/metamask-design-system/pull/848))
+- chore: update font weight from bold to semi-bold for Geist font alignment ([#847](https://github.com/MetaMask/metamask-design-system/pull/847))
+- chore: replace ts-node with tsx to resolve yarn lint hanging issue ([#845](https://github.com/MetaMask/metamask-design-system/pull/845))
+- chore(deps): bump @metamask/utils from 11.8.0 to 11.8.1 ([#838](https://github.com/MetaMask/metamask-design-system/pull/838))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.0.2 to 5.1.0 ([#837](https://github.com/MetaMask/metamask-design-system/pull/837))
+
 ## [0.4.1]
 
 ### Fixed

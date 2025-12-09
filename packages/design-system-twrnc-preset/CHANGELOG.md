@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: align font naming with PostScript convention for mobile compatibility ([#862](https://github.com/MetaMask/metamask-design-system/pull/862))
+- Revert font weight changes from PR #847 ([#864](https://github.com/MetaMask/metamask-design-system/pull/864))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.2.0 to 5.3.0 ([#858](https://github.com/MetaMask/metamask-design-system/pull/858))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.1.0 to 5.2.0 ([#853](https://github.com/MetaMask/metamask-design-system/pull/853))
+- chore: update font weight from bold to semi-bold for Geist font alignment ([#847](https://github.com/MetaMask/metamask-design-system/pull/847))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.0.2 to 5.1.0 ([#837](https://github.com/MetaMask/metamask-design-system/pull/837))
+
 ## [0.2.1]
 
 ### Fixed
