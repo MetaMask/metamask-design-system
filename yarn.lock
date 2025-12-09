@@ -3185,7 +3185,7 @@ __metadata:
     tsx: "npm:^4.20.6"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-system-twrnc-preset": ^0.2.0
+    "@metamask/design-system-twrnc-preset": ^0.3.0
     "@metamask/design-tokens": ^8.1.0
     "@metamask/utils": ^11.8.1
     react: ">=18.2.0"
