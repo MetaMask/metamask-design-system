@@ -9,18 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.5.0]
 
-### Uncategorized
+### Changed
 
-- Revert font weight changes from PR #847 ([#864](https://github.com/MetaMask/metamask-design-system/pull/864))
-- chore(deps-dev): bump @metamask/eslint-config-typescript from 14.1.0 to 15.0.0 ([#856](https://github.com/MetaMask/metamask-design-system/pull/856))
-- chore: remove unused eslint-disable comments after eslint upgrades ([#861](https://github.com/MetaMask/metamask-design-system/pull/861))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.2.0 to 5.3.0 ([#858](https://github.com/MetaMask/metamask-design-system/pull/858))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.1.0 to 5.2.0 ([#853](https://github.com/MetaMask/metamask-design-system/pull/853))
-- fix: export TextButtonSize enum from design-system-react-native ([#848](https://github.com/MetaMask/metamask-design-system/pull/848))
-- chore: update font weight from bold to semi-bold for Geist font alignment ([#847](https://github.com/MetaMask/metamask-design-system/pull/847))
-- chore: replace ts-node with tsx to resolve yarn lint hanging issue ([#845](https://github.com/MetaMask/metamask-design-system/pull/845))
-- chore(deps): bump @metamask/utils from 11.8.0 to 11.8.1 ([#838](https://github.com/MetaMask/metamask-design-system/pull/838))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.0.2 to 5.1.0 ([#837](https://github.com/MetaMask/metamask-design-system/pull/837))
+- Updated `@metamask/utils` peer dependency from 11.8.0 to 11.8.1 ([#838](https://github.com/MetaMask/metamask-design-system/pull/838))
+  - No breaking changes; safe to upgrade
+- Updated `@metamask/eslint-config-typescript` dev dependency from 14.1.0 to 15.0.0 ([#856](https://github.com/MetaMask/metamask-design-system/pull/856))
+  - No consumer impact; internal tooling only
+
+### Fixed
+
+- Export missing `TextButtonSize` enum from package entry point for TypeScript type safety ([#848](https://github.com/MetaMask/metamask-design-system/pull/848))
+  - The `TextButtonSize` enum is now properly exported and accessible for imports
+  - Developers can now use typed enums instead of string literals: `import { TextButton, TextButtonSize } from '@metamask/design-system-react-native'` and `<TextButton size={TextButtonSize.Medium} />`
+  - This is a non-breaking, additive change that improves type safety
+- Align font file naming with PostScript convention for iOS Metro bundler compatibility ([#862](https://github.com/MetaMask/metamask-design-system/pull/862))
+  - Updated font file names from space-separated to hyphenated format (e.g., "Geist Regular.otf" → "Geist-Regular.otf")
+  - Resolves Metro bundler asset resolution issues on iOS that prevented fonts from loading correctly
+  - Critical fix for iOS React Native applications; Android is unaffected
+  - If using components as intended, fonts automatically load correctly. If manually referencing font files, update paths to use hyphens instead of spaces
+  - Potentially breaking if directly referencing font file paths in custom code
 
 ## [0.4.1]
 
