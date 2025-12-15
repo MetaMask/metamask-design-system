@@ -6,10 +6,8 @@ const designTokens = require('../../../figma/tokens.json');
 
 describe('dark Theme', () => {
   it('color tokens are exported from darkTheme by checking a random color token', () => {
-    expect(
-      darkTheme.colors.background.defaultHover.toLowerCase(),
-    ).toStrictEqual(
-      jsonDarkThemeTokens.background['default-hover'].value.toLowerCase(),
+    expect(darkTheme.colors.background.muted.toLowerCase()).toStrictEqual(
+      jsonDarkThemeTokens.background.muted.value.toLowerCase(),
     );
   });
 
