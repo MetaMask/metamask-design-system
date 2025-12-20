@@ -1,203 +1,125 @@
 # BadgeWrapper
 
-The `BadgeWrapper` positions a badge on top of another element.
+BadgeWrapper positions a badge on top of another element.
 
----
+```tsx
+import { BadgeWrapper } from '@metamask/design-system-react-native';
+
+<BadgeWrapper badge={<BadgeCount count={5} />}>
+  <Text>Content with badge</Text>
+</BadgeWrapper>;
+```
 
 ## Props
 
-### `children` (Required)
+### `children`
 
-The main element that the badge will be anchored to. Additional props can be passed to the children container using the `childrenContainerProps` prop.
+The content to wrap with a badge.
 
-| TYPE              | REQUIRED | DESCRIPTION                            |
-| ----------------- | -------- | -------------------------------------- |
-| `React.ReactNode` | Yes      | Anchor element to attach the badge to. |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | Yes      | `undefined` |
 
----
+```tsx
+import { BadgeWrapper, BadgeCount } from '@metamask/design-system-react-native';
 
-### `badge` (Required)
+<BadgeWrapper badge={<BadgeCount count={3} />}>
+  <Text>Wrapped content</Text>
+</BadgeWrapper>;
+```
 
-The badge element that is positioned relative to the `children`. Additional props can be passed to the badge container using the `badgeContainerProps` prop.
+### `badge`
 
-| TYPE              | REQUIRED | DESCRIPTION              |
-| ----------------- | -------- | ------------------------ |
-| `React.ReactNode` | Yes      | Badge element to render. |
+The badge component to display.
 
----
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | Yes      | `undefined` |
+
+```tsx
+<BadgeWrapper badge={<BadgeCount count={5} />}>
+  <View>Content</View>
+</BadgeWrapper>
+```
 
 ### `position`
 
-Optional preset to determine badge placement.
+The position of the badge relative to the wrapped content.
 
-| TYPE                   | REQUIRED | DEFAULT                            |
-| ---------------------- | -------- | ---------------------------------- |
-| `BadgeWrapperPosition` | No       | `BadgeWrapperPosition.BottomRight` |
+Available positions:
 
-Options:
+- `BadgeWrapperPosition.TopRight`
+- `BadgeWrapperPosition.TopLeft`
+- `BadgeWrapperPosition.BottomRight`
+- `BadgeWrapperPosition.BottomLeft`
 
-- `TopRight`
-- `BottomRight`
-- `BottomLeft`
-- `TopLeft`
+| TYPE                   | REQUIRED | DEFAULT                         |
+| ---------------------- | -------- | ------------------------------- |
+| `BadgeWrapperPosition` | No       | `BadgeWrapperPosition.TopRight` |
 
----
-
-### `positionAnchorShape`
-
-Specifies the shape of the anchor to adjust badge alignment.
-
-| TYPE                              | REQUIRED | DEFAULT                                    |
-| --------------------------------- | -------- | ------------------------------------------ |
-| `BadgeWrapperPositionAnchorShape` | No       | `BadgeWrapperPositionAnchorShape.Circular` |
-
-Options:
-
-- `Circular`
-- `Rectangular`
-
----
-
-### `positionXOffset`
-
-Horizontal adjustment for the badge position.
-
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `number` | No       | `0`     |
-
----
-
-### `positionYOffset`
-
-Vertical adjustment for the badge position.
-
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `number` | No       | `0`     |
-
----
-
-### `customPosition`
-
-Allows complete control over badge positioning using style values.
-
-| TYPE                         | REQUIRED | DEFAULT     |
-| ---------------------------- | -------- | ----------- |
-| `BadgeWrapperCustomPosition` | No       | `undefined` |
-
-Example:
-
-```ts
-{
-  top: 5,
-  right: 10,
-}
+```tsx
+<BadgeWrapper
+  badge={<BadgeCount count={5} />}
+  position={BadgeWrapperPosition.BottomRight}
+>
+  <Text>Content</Text>
+</BadgeWrapper>
 ```
-
----
 
 ### `twClassName`
 
-Tailwind class names to apply to the outermost wrapper.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `string` | No       | `''`    |
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+import { BadgeWrapper } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<BadgeWrapper
+  badge={<BadgeCount count={5} />}
+  twClassName="bg-primary-100"
+>
+  Custom Background
+</BadgeWrapper>
+
+// Override default styles
+<BadgeWrapper
+  badge={<BadgeCount count={5} />}
+  twClassName="!relative"
+>
+  Override Position
+</BadgeWrapper>
+```
 
 ### `style`
 
-Optional style override for the outermost wrapper.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE                   | REQUIRED | DEFAULT |
-| ---------------------- | -------- | ------- |
-| `StyleProp<ViewStyle>` | No       | `null`  |
-
----
-
-## Usage
-
-### Basic Usage
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-<BadgeWrapper badge={<BadgeStatus status={BadgeStatusStatus.Active} />}>
-  <AvatarAccount address="0x..." />
-</BadgeWrapper>
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
+
+export const StyleExample = () => (
+  <BadgeWrapper badge={<BadgeCount count={5} />} style={styles.custom}>
+    <Text>Custom styled content</Text>
+  </BadgeWrapper>
+);
 ```
 
----
+## References
 
-### Preset Positions
-
-```tsx
-<BadgeWrapper
-  position={BadgeWrapperPosition.TopRight}
-  badge={<BadgeCount count={8} />}
->
-  <AvatarAccount address="0x..." />
-</BadgeWrapper>
-```
-
----
-
-### Custom Position
-
-```tsx
-<BadgeWrapper
-  customPosition={{ top: 4, right: 10 }}
-  badge={<BadgeIcon variant={BadgeIconVariant.Send} />}
->
-  <AvatarNetwork name="ETH" src={{ uri: 'https://...' }} />
-</BadgeWrapper>
-```
-
----
-
-### Anchor Shape Adjustment
-
-```tsx
-<BadgeWrapper
-  positionAnchorShape={BadgeWrapperPositionAnchorShape.Rectangular}
-  badge={<BadgeNetwork name="ETH" src={{ uri: 'https://...' }} />}
->
-  <AvatarNetwork name="ETH" src={{ uri: 'https://...' }} />
-</BadgeWrapper>
-```
-
----
-
-### Offset Adjustments
-
-```tsx
-<BadgeWrapper
-  position={BadgeWrapperPosition.TopRight}
-  positionAnchorShape={BadgeWrapperPositionAnchorShape.Rectangular}
-  positionXOffset={5} // moving 5 pixel right from the TopRight corner
-  positionYOffset={10} // moving 10 pixel down from the TopRight corner
-  badge={<BadgeNetwork name="ETH" src={{ uri: 'https://...' }} />}
->
-  <AvatarNetwork name="ETH" src={{ uri: 'https://...' }} />
-</BadgeWrapper>
-```
-
----
-
-## Notes
-
-- You must wrap both `children` and `badge` elements using this component to ensure proper positioning.
-- Positioning logic adjusts based on anchor shape to better align on circular vs. rectangular anchors.
-- Offset props are additive and can help nudge badges pixel-perfect into place.
-
----
-
-## Contributing
-
-1. Add tests for new props or layout logic.
-2. Document new functionality in this README.
-3. Follow the design system's coding guidelines.
-
----
-
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or reach out to the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
