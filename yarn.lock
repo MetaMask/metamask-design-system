@@ -3207,7 +3207,7 @@ __metadata:
     "@metamask/jazzicon": "npm:^2.0.0"
     "@metamask/utils": "npm:^11.9.0"
     "@radix-ui/react-slot": "npm:^1.1.0"
-    "@storybook/react": "npm:^9.0.17"
+    "@storybook/react": "npm:^9.1.17"
     "@svgr/cli": "npm:^8.1.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.0.1"
@@ -3305,7 +3305,7 @@ __metadata:
   dependencies:
     "@metamask/auto-changelog": "npm:^5.3.0"
     "@metamask/design-system-react": "workspace:^"
-    "@storybook/react": "npm:^9.0.17"
+    "@storybook/react": "npm:^9.1.17"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
@@ -4995,17 +4995,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-dom-shim@npm:9.0.17":
-  version: 9.0.17
-  resolution: "@storybook/react-dom-shim@npm:9.0.17"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^9.0.17
-  checksum: 10/93ba82f329973363566e86da30f148cb460cce54335098174f550c70dfc589ca1c7c4bf52c4f9914a5b52877f821c2162f20247436814f53be542f0b959ea508
-  languageName: node
-  linkType: hard
-
 "@storybook/react-dom-shim@npm:9.1.17":
   version: 9.1.17
   resolution: "@storybook/react-dom-shim@npm:9.1.17"
@@ -5098,24 +5087,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 10/8b6be8cc93c53ce2ccc942a54ae76f4f3652060887f46649f8ea1311fe271753435d675ac3aae76ec2f41a8f8bb0c6a88389d2bbb9a2e6875f2a0b2e655df63a
-  languageName: node
-  linkType: hard
-
-"@storybook/react@npm:^9.0.17":
-  version: 9.0.17
-  resolution: "@storybook/react@npm:9.0.17"
-  dependencies:
-    "@storybook/global": "npm:^5.0.0"
-    "@storybook/react-dom-shim": "npm:9.0.17"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^9.0.17
-    typescript: ">= 4.9.x"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 10/15fffea18e5728558409e44c9e7f844e246764967b6a29b86cbfc83be912ea18766e6f476520a18d50d296dcb1c62d5cc6be677a9a35bb74a6effe99551238a2
   languageName: node
   linkType: hard
 
