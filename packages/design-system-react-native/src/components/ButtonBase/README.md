@@ -150,6 +150,8 @@ Optional prop that, when `true`, makes the button take up the full width of its 
 | :-------- | :------- | :------ |
 | `boolean` | No       | `false` |
 
+**Note**: When `isFullWidth` is `false`, the button does not set a width constraint, allowing it to work with flex layouts. You can use Tailwind flex utilities (e.g., `flex-1`) via the `twClassName` prop to control button sizing in flex containers.
+
 ---
 
 ### `twClassName`
@@ -212,6 +214,30 @@ import ButtonBase from '@metamask/design-system-react-native';
 >
   Please wait
 </ButtonBase>
+```
+
+---
+
+### Using Buttons in Flex Layouts
+
+When placing buttons in a flex container, you can use Tailwind flex utilities to control sizing:
+
+```tsx
+import { Box, BoxFlexDirection } from '@metamask/design-system-react-native';
+
+// Two buttons that equally fill a flex row
+<Box flexDirection={BoxFlexDirection.Row} twClassName="w-full gap-3">
+  <Box twClassName="flex-1">
+    <ButtonBase isFullWidth onPress={handleYes}>
+      Yes
+    </ButtonBase>
+  </Box>
+  <Box twClassName="flex-1">
+    <ButtonBase isFullWidth onPress={handleNo}>
+      No
+    </ButtonBase>
+  </Box>
+</Box>
 ```
 
 ---

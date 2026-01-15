@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 import { Pressable } from 'react-native';
 import Animated, {
@@ -10,20 +10,28 @@ import Animated, {
 
 import type { ButtonAnimatedProps } from './ButtonAnimated.types';
 
+// Create an animated version of Pressable
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
 export const ButtonAnimated = ({
   onPressIn,
   onPressOut,
   disabled,
+  style,
+  children,
   ...props
 }: ButtonAnimatedProps) => {
+  const [isPressed, setIsPressed] = useState(false);
   const animation = useSharedValue(1);
-  const scaleStyle = useAnimatedStyle(() => {
+
+  const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ scale: animation.value }],
     };
   });
 
   const onPressInHandler = (event: GestureResponderEvent) => {
+    setIsPressed(true);
     animation.value = withTiming(0.97, {
       duration: 100,
       easing: Easing.bezier(0.3, 0.8, 0.3, 1),
@@ -32,6 +40,7 @@ export const ButtonAnimated = ({
   };
 
   const onPressOutHandler = (event: GestureResponderEvent) => {
+    setIsPressed(false);
     animation.value = withTiming(1, {
       duration: 100,
       easing: Easing.bezier(0.3, 0.8, 0.3, 1),
@@ -39,16 +48,21 @@ export const ButtonAnimated = ({
     onPressOut?.(event);
   };
 
+  // Evaluate style function if needed
+  const evaluatedStyle =
+    typeof style === 'function' ? style({ pressed: isPressed }) : style;
+
   return (
-    <Animated.View
-      style={[scaleStyle, { alignItems: 'center', justifyContent: 'center' }]}
+    <AnimatedPressable
+      onPressIn={onPressInHandler}
+      onPressOut={onPressOutHandler}
+      disabled={disabled}
+      style={[evaluatedStyle, animatedStyle]}
+      {...props}
     >
-      <Pressable
-        onPressIn={onPressInHandler}
-        onPressOut={onPressOutHandler}
-        disabled={disabled}
-        {...props}
-      />
-    </Animated.View>
+      {typeof children === 'function'
+        ? children({ pressed: isPressed })
+        : children}
+    </AnimatedPressable>
   );
 };

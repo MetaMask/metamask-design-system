@@ -102,11 +102,13 @@ export const ButtonBase = ({
       accessibilityState={accessibilityState}
       accessible
       style={({ pressed }) => {
-        const containerClassName =
+        // Evaluate custom className if it's a function
+        const customClassName =
           typeof twClassName === 'function'
             ? twClassName(pressed)
             : twClassName;
 
+<<<<<<< HEAD
         const computedStyle: StyleProp<ViewStyle>[] = [
           tw.style(
             'flex-row items-center justify-center rounded-xl bg-muted px-4 min-w-[80px] overflow-hidden',
@@ -123,6 +125,32 @@ export const ButtonBase = ({
           }
         } else if (style) {
           computedStyle.push(style);
+=======
+        // Build button container styles
+        const buttonStyles = tw.style(
+          // Base layout - flex container for button content
+          'flex-row items-center justify-center gap-x-2',
+          // Visual styling
+          'rounded-xl bg-muted px-4 min-w-[80px] overflow-hidden',
+          // Size
+          TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],
+          // State-based opacity
+          isDisabled ? 'opacity-50' : 'opacity-100',
+          // Width - use self-start to prevent stretching when not full width
+          isFullWidth ? 'w-full' : 'self-start',
+          // Custom classes
+          customClassName,
+        );
+
+        // Merge with additional styles if provided
+        const computedStyle: StyleProp<ViewStyle>[] = [buttonStyles];
+
+        const additionalStyle =
+          typeof style === 'function' ? style({ pressed }) : style;
+
+        if (additionalStyle) {
+          computedStyle.push(additionalStyle);
+>>>>>>> 1a6e5c28 (fix: button base in flex row layouts and refactoring button animated)
         }
 
         return computedStyle;
@@ -131,65 +159,71 @@ export const ButtonBase = ({
     >
       {({ pressed }) => (
         <>
-          <View
-            style={tw`absolute inset-0 flex items-center justify-center ${
-              isLoading ? 'opacity-100' : 'opacity-0'
-            }`}
-            testID="spinner-container"
-          >
-            <Spinner
-              color={
-                textClassName
-                  ? (textClassName(pressed) as IconColor)
-                  : IconColor.IconDefault
-              }
-              loadingText={loadingText}
-              loadingTextProps={{
-                numberOfLines: 1,
-                twClassName: textClassName ? textClassName(pressed) : '',
-                ...spinnerProps?.loadingTextProps,
-              }}
-              {...spinnerProps}
-            />
-          </View>
-          <View
-            style={tw`flex-row items-center justify-center gap-x-2 ${
-              isLoading ? 'opacity-0' : 'opacity-100'
-            }`}
-            testID="content-container"
-          >
-            {finalStartIconName ? (
-              <Icon
-                name={finalStartIconName}
-                size={IconSize.Sm}
-                twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
-                {...startIconProps}
-              />
-            ) : (
-              startAccessory
-            )}
-            <TextOrChildren
-              textProps={{
-                variant: TextVariant.BodyMd,
-                fontWeight: FontWeight.Medium,
-                color: TextColor.TextDefault,
-                twClassName: `shrink grow-0 flex-wrap text-center ${textClassName ? textClassName(pressed) : ''}`,
-                ...textProps,
-              }}
+          {/* Loading spinner overlay */}
+          {isLoading && (
+            <View
+              style={tw.style('absolute inset-0 flex items-center justify-center')}
+              testID="spinner-container"
             >
-              {children}
-            </TextOrChildren>
-            {finalEndIconName ? (
-              <Icon
-                name={finalEndIconName}
-                size={IconSize.Sm}
-                twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
-                {...endIconProps}
+              <Spinner
+                color={
+                  textClassName
+                    ? (textClassName(pressed) as IconColor)
+                    : IconColor.IconDefault
+                }
+                loadingText={loadingText}
+                loadingTextProps={{
+                  numberOfLines: 1,
+                  twClassName: textClassName ? textClassName(pressed) : '',
+                  ...spinnerProps?.loadingTextProps,
+                }}
+                {...spinnerProps}
               />
-            ) : (
-              endAccessory
-            )}
-          </View>
+            </View>
+          )}
+
+          {/* Button content - opacity controlled by wrapper, no extra View needed */}
+          {finalStartIconName ? (
+            <Icon
+              name={finalStartIconName}
+              size={IconSize.Sm}
+              twClassName={`shrink-0 ${isLoading ? 'opacity-0' : ''} ${iconClassName ? iconClassName(pressed) : ''}`}
+              {...startIconProps}
+            />
+          ) : (
+            startAccessory && (
+              <View style={tw.style(isLoading && 'opacity-0')}>
+                {startAccessory}
+              </View>
+            )
+          )}
+
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.BodyMd,
+              fontWeight: FontWeight.Medium,
+              color: TextColor.TextDefault,
+              twClassName: `shrink grow-0 flex-wrap text-center ${isLoading ? 'opacity-0' : ''} ${textClassName ? textClassName(pressed) : ''}`,
+              ...textProps,
+            }}
+          >
+            {children}
+          </TextOrChildren>
+
+          {finalEndIconName ? (
+            <Icon
+              name={finalEndIconName}
+              size={IconSize.Sm}
+              twClassName={`shrink-0 ${isLoading ? 'opacity-0' : ''} ${iconClassName ? iconClassName(pressed) : ''}`}
+              {...endIconProps}
+            />
+          ) : (
+            endAccessory && (
+              <View style={tw.style(isLoading && 'opacity-0')}>
+                {endAccessory}
+              </View>
+            )
+          )}
         </>
       )}
     </ButtonAnimated>

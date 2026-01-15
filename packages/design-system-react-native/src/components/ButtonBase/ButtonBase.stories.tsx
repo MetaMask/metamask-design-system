@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
-import { View } from 'react-native';
 
-import { ButtonBaseSize } from '../../types';
+import {
+  BoxBackgroundColor,
+  BoxFlexDirection,
+  ButtonBaseSize,
+} from '../../types';
 import { IconName } from '../Icon';
 
 import { ButtonBase } from './ButtonBase';
 import type { ButtonBaseProps } from './ButtonBase.types';
+import { Box } from '../Box';
+import { Text } from '../Text';
 
 const meta: Meta<ButtonBaseProps> = {
   title: 'Components/ButtonBase',
@@ -63,24 +68,24 @@ export const Default: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
+    <Box gap={4}>
       <ButtonBase size={ButtonBaseSize.Sm}>ButtonBaseSize Sm</ButtonBase>
       <ButtonBase size={ButtonBaseSize.Md}>ButtonBaseSize Md</ButtonBase>
       <ButtonBase size={ButtonBaseSize.Lg}>
         ButtonBaseSize Lg (Default)
       </ButtonBase>
-    </View>
+    </Box>
   ),
 };
 
 export const IsLoading: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
+    <Box gap={4}>
       <ButtonBase isLoading>ButtonBase</ButtonBase>
       <ButtonBase isLoading loadingText="With Loading Text">
         ButtonBase
       </ButtonBase>
-    </View>
+    </Box>
   ),
 };
 
@@ -108,16 +113,16 @@ export const isDisabled: Story = {
 
 export const isFullWidth: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
+    <Box gap={4}>
       <ButtonBase>ButtonBase</ButtonBase>
       <ButtonBase isFullWidth>ButtonBase</ButtonBase>
-    </View>
+    </Box>
   ),
 };
 
 export const WithLongText: Story = {
   render: () => (
-    <View style={{ paddingHorizontal: 32 }}>
+    <Box padding={4}>
       <ButtonBase
         startIconName={IconName.Add}
         endIconName={IconName.ArrowRight}
@@ -130,6 +135,19 @@ export const WithLongText: Story = {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </ButtonBase>
-    </View>
+    </Box>
+  ),
+};
+
+export const FlexLayout: Story = {
+  render: () => (
+    <Box flexDirection={BoxFlexDirection.Row} gap={4}>
+      <ButtonBase twClassName="flex-1" isFullWidth>
+        Lorem ipsum
+      </ButtonBase>
+      <ButtonBase twClassName="flex-1" isFullWidth>
+        Lorem ipsum
+      </ButtonBase>
+    </Box>
   ),
 };
