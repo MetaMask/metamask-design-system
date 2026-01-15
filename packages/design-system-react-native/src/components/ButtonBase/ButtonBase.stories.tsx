@@ -1,16 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 
-import {
-  BoxBackgroundColor,
-  BoxFlexDirection,
-  ButtonBaseSize,
-} from '../../types';
+import { BoxFlexDirection, ButtonBaseSize } from '../../types';
+import { Box } from '../Box';
 import { IconName } from '../Icon';
 
 import { ButtonBase } from './ButtonBase';
 import type { ButtonBaseProps } from './ButtonBase.types';
-import { Box } from '../Box';
-import { Text } from '../Text';
 
 const meta: Meta<ButtonBaseProps> = {
   title: 'Components/ButtonBase',
