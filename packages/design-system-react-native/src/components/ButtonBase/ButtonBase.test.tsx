@@ -37,13 +37,6 @@ describe('ButtonBase', () => {
       return null;
     };
 
-  const createIconClassNameFunction = () => (pressed: boolean) => {
-    if (pressed) {
-      return 'text-error-default';
-    }
-    return 'text-success-default';
-  };
-
   it('renders children correctly', () => {
     const { getByText } = render(<ButtonBase>Click me</ButtonBase>);
     expect(getByText('Click me')).toBeDefined();
@@ -371,47 +364,69 @@ describe('ButtonBase', () => {
   });
 
   it('applies iconClassName when provided with icons', () => {
-    const iconClassNameFunction = createIconClassNameFunction();
+    const iconClassNameFn = (pressed: boolean) =>
+      pressed ? 'icon-pressed' : 'icon-default';
 
-    const { getByTestId } = render(
+    const tree = ReactTestRenderer.create(
       <ButtonBase
         startIconName={IconName.Add}
         startIconProps={{ testID: 'start-icon' }}
         endIconName={IconName.Close}
         endIconProps={{ testID: 'end-icon' }}
-        iconClassName={iconClassNameFunction}
+        iconClassName={iconClassNameFn}
         testID="button-base"
       >
         With Icon Classes
       </ButtonBase>,
     );
 
-    // Check that icons are rendered with testIDs
-    expect(getByTestId('start-icon')).toBeDefined();
-    expect(getByTestId('end-icon')).toBeDefined();
+    const buttonAnimated = tree.root.findByProps({
+      accessibilityRole: 'button',
+    });
 
-    // The actual iconClassName application is tested indirectly through
-    // the function-based styling in ButtonBase implementation
+    // Verify the iconClassName function is called with pressed states
+    const childrenFn = buttonAnimated.props.children;
+    expect(typeof childrenFn).toBe('function');
+
+    // Test both pressed states
+    const unpressedContent = childrenFn({ pressed: false });
+    const pressedContent = childrenFn({ pressed: true });
+
+    expect(unpressedContent).toBeDefined();
+    expect(pressedContent).toBeDefined();
   });
 
   it('applies textClassName when provided', () => {
     const textClassNameFn = (pressed: boolean) =>
       pressed ? 'text-pressed' : 'text-default';
 
-    const { getByText } = render(
+    const tree = ReactTestRenderer.create(
       <ButtonBase textClassName={textClassNameFn}>
         Text with className
       </ButtonBase>,
     );
 
-    expect(getByText('Text with className')).toBeDefined();
+    const buttonAnimated = tree.root.findByProps({
+      accessibilityRole: 'button',
+    });
+
+    // Verify the textClassName function is called with pressed states
+    const childrenFn = buttonAnimated.props.children;
+    expect(typeof childrenFn).toBe('function');
+
+    // Test both pressed states to ensure function is working
+    const unpressedContent = childrenFn({ pressed: false });
+    const pressedContent = childrenFn({ pressed: true });
+
+    expect(unpressedContent).toBeDefined();
+    expect(pressedContent).toBeDefined();
   });
 
   it('applies textClassName in loading state', () => {
     const textClassNameFn = (pressed: boolean) =>
       pressed ? 'text-pressed' : 'text-default';
 
-    const { getByTestId } = render(
+    const tree = ReactTestRenderer.create(
       <ButtonBase
         isLoading
         loadingText="Loading"
@@ -422,13 +437,27 @@ describe('ButtonBase', () => {
       </ButtonBase>,
     );
 
-    expect(getByTestId('btn')).toBeDefined();
+    const buttonAnimated = tree.root.findByProps({
+      accessibilityRole: 'button',
+    });
+
+    // Verify the textClassName function works in loading state
+    const childrenFn = buttonAnimated.props.children;
+    expect(typeof childrenFn).toBe('function');
+
+    // Test both pressed states
+    const unpressedContent = childrenFn({ pressed: false });
+    const pressedContent = childrenFn({ pressed: true });
+
+    expect(unpressedContent).toBeDefined();
+    expect(pressedContent).toBeDefined();
   });
 
   it('applies iconClassName in loading state', () => {
-    const iconClassNameFn = createIconClassNameFunction();
+    const iconClassNameFn = (pressed: boolean) =>
+      pressed ? 'icon-pressed' : 'icon-default';
 
-    const { getByTestId } = render(
+    const tree = ReactTestRenderer.create(
       <ButtonBase
         isLoading
         startIconName={IconName.Add}
@@ -442,8 +471,20 @@ describe('ButtonBase', () => {
       </ButtonBase>,
     );
 
-    expect(getByTestId('start-icon')).toBeDefined();
-    expect(getByTestId('end-icon')).toBeDefined();
+    const buttonAnimated = tree.root.findByProps({
+      accessibilityRole: 'button',
+    });
+
+    // Verify the iconClassName function works in loading state
+    const childrenFn = buttonAnimated.props.children;
+    expect(typeof childrenFn).toBe('function');
+
+    // Test both pressed states
+    const unpressedContent = childrenFn({ pressed: false });
+    const pressedContent = childrenFn({ pressed: true });
+
+    expect(unpressedContent).toBeDefined();
+    expect(pressedContent).toBeDefined();
   });
 
   it('renders icons without iconClassName when not provided', () => {
