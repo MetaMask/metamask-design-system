@@ -142,12 +142,8 @@ export const WithLongText: Story = {
 export const FlexLayout: Story = {
   render: () => (
     <Box flexDirection={BoxFlexDirection.Row} gap={4}>
-      <ButtonBase twClassName="flex-1" isFullWidth>
-        Lorem ipsum
-      </ButtonBase>
-      <ButtonBase twClassName="flex-1" isFullWidth>
-        Lorem ipsum
-      </ButtonBase>
+      <ButtonBase twClassName="flex-1">Lorem ipsum</ButtonBase>
+      <ButtonBase twClassName="flex-1">Lorem ipsum</ButtonBase>
     </Box>
   ),
 };
