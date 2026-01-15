@@ -150,6 +150,10 @@ Optional prop that, when `true`, makes the button take up the full width of its 
 | :-------- | :------- | :------ |
 | `boolean` | No       | `false` |
 
+**Note**: The `isFullWidth` prop is designed for **vertical layouts** (flex columns) where you want a button to span the container's full width. When `isFullWidth` is `false`, the button uses `alignSelf: 'flex-start'` to size to its content width.
+
+For **horizontal layouts** (flex rows) where buttons should share space, use `twClassName="flex-1"` instead of `isFullWidth`. Using `isFullWidth` in a flex row causes semantic conflicts as multiple buttons cannot each take 100% width.
+
 ---
 
 ### `twClassName`
@@ -212,6 +216,44 @@ import ButtonBase from '@metamask/design-system-react-native';
 >
   Please wait
 </ButtonBase>
+```
+
+---
+
+### Using Buttons in Flex Layouts
+
+#### Horizontal Layouts (Flex Row)
+
+When placing buttons side-by-side in a horizontal layout, use `twClassName="flex-1"` to share space equally:
+
+```tsx
+import { Box, BoxFlexDirection } from '@metamask/design-system-react-native';
+
+// Two buttons that equally share space in a row
+<Box flexDirection={BoxFlexDirection.Row} gap={4}>
+  <ButtonBase twClassName="flex-1" onPress={handleYes}>
+    Yes
+  </ButtonBase>
+  <ButtonBase twClassName="flex-1" onPress={handleNo}>
+    No
+  </ButtonBase>
+</Box>;
+```
+
+**Note**: Do not use `isFullWidth` in horizontal layouts, as it causes both buttons to attempt 100% width, resulting in overflow.
+
+#### Vertical Layouts (Flex Column)
+
+For vertical stacking, use `isFullWidth` to make buttons span the full width:
+
+```tsx
+// Full-width button in a column layout
+<Box gap={4}>
+  <ButtonBase isFullWidth onPress={handleSave}>
+    Save Changes
+  </ButtonBase>
+  <ButtonBase onPress={handleCancel}>Cancel</ButtonBase>
+</Box>
 ```
 
 ---
