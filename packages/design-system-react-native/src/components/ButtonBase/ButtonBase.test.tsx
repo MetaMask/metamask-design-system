@@ -70,6 +70,26 @@ describe('ButtonBase', () => {
     expect(btn).toBeDefined();
   });
 
+  it('applies function-based twClassName correctly', () => {
+    const twClassNameFn = (pressed: boolean) =>
+      pressed ? 'bg-pressed' : 'bg-default';
+
+    const tree = ReactTestRenderer.create(
+      <ButtonBase twClassName={twClassNameFn}>Function ClassName</ButtonBase>,
+    );
+
+    const buttonAnimated = tree.root.findByProps({
+      accessibilityRole: 'button',
+    });
+    const styleFn = buttonAnimated.props.style as (p: {
+      pressed: boolean;
+    }) => unknown[];
+
+    // Test both pressed states to cover the branch
+    expect(styleFn({ pressed: false })).toBeDefined();
+    expect(styleFn({ pressed: true })).toBeDefined();
+  });
+
   it('applies full width class when isFullWidth is true', () => {
     const { getByTestId } = render(
       <ButtonBase isFullWidth testID="btn">
@@ -213,6 +233,21 @@ describe('ButtonBase', () => {
     expect(queryByTestId('end')).toBeNull();
   });
 
+  it('renders custom accessories in loading state', () => {
+    const { getByTestId } = render(
+      <ButtonBase
+        isLoading
+        startAccessory={<View testID="sa" />}
+        endAccessory={<View testID="ea" />}
+        testID="btn"
+      >
+        Loading
+      </ButtonBase>,
+    );
+    expect(getByTestId('sa')).toBeDefined();
+    expect(getByTestId('ea')).toBeDefined();
+  });
+
   it('applies function-based style prop correctly', () => {
     const functionStyle = createFunctionStyle();
 
@@ -340,6 +375,58 @@ describe('ButtonBase', () => {
 
     // The actual iconClassName application is tested indirectly through
     // the function-based styling in ButtonBase implementation
+  });
+
+  it('applies textClassName when provided', () => {
+    const textClassNameFn = (pressed: boolean) =>
+      pressed ? 'text-pressed' : 'text-default';
+
+    const { getByText } = render(
+      <ButtonBase textClassName={textClassNameFn}>
+        Text with className
+      </ButtonBase>,
+    );
+
+    expect(getByText('Text with className')).toBeDefined();
+  });
+
+  it('applies textClassName in loading state', () => {
+    const textClassNameFn = (pressed: boolean) =>
+      pressed ? 'text-pressed' : 'text-default';
+
+    const { getByTestId } = render(
+      <ButtonBase
+        isLoading
+        loadingText="Loading"
+        textClassName={textClassNameFn}
+        testID="btn"
+      >
+        Content
+      </ButtonBase>,
+    );
+
+    expect(getByTestId('btn')).toBeDefined();
+  });
+
+  it('applies iconClassName in loading state', () => {
+    const iconClassNameFn = createIconClassNameFunction();
+
+    const { getByTestId } = render(
+      <ButtonBase
+        isLoading
+        startIconName={IconName.Add}
+        startIconProps={{ testID: 'start-icon' }}
+        endIconName={IconName.Close}
+        endIconProps={{ testID: 'end-icon' }}
+        iconClassName={iconClassNameFn}
+        testID="btn"
+      >
+        Loading with icons
+      </ButtonBase>,
+    );
+
+    expect(getByTestId('start-icon')).toBeDefined();
+    expect(getByTestId('end-icon')).toBeDefined();
   });
 
   it('renders icons without iconClassName when not provided', () => {

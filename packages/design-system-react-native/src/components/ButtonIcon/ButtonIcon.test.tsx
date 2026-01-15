@@ -27,7 +27,7 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn.props.style[0][0]).toStrictEqual(expected);
 
     const icon = getByTestId('icon');
     expect(icon.props.name).toStrictEqual(IconName.Close);
@@ -51,7 +51,7 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn.props.style[0][0]).toStrictEqual(expected);
     expect(btn.props.accessibilityState.disabled).toBe(true);
   });
 
@@ -68,7 +68,7 @@ describe('ButtonIcon', () => {
       <ButtonIcon iconName={IconName.Close} isFloating testID="button-icon" />,
     );
     const btn = getByTestId('button-icon');
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn.props.style[0][0]).toStrictEqual(expected);
   });
 
   it('applies isInverse state', () => {
@@ -90,7 +90,7 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn.props.style[0][0]).toStrictEqual(expected);
   });
 
   it('forwards style and twClassName', () => {
@@ -113,8 +113,8 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    expect(btn.props.style[0]).toStrictEqual(expected);
-    expect(btn.props.style[1]).toStrictEqual({ margin: 5 });
+    expect(btn.props.style[0][0]).toStrictEqual(expected);
+    expect(btn.props.style[0][1]).toStrictEqual({ margin: 5 });
   });
 
   it('calls onPressIn and onPressOut handlers', () => {
