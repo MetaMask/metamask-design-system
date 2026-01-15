@@ -10,7 +10,6 @@ import Animated, {
 
 import type { ButtonAnimatedProps } from './ButtonAnimated.types';
 
-// Create an animated version of Pressable
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export const ButtonAnimated = ({

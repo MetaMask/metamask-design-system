@@ -162,7 +162,9 @@ export const ButtonBase = ({
           {/* Loading spinner overlay */}
           {isLoading && (
             <View
-              style={tw.style('absolute inset-0 flex items-center justify-center')}
+              style={tw.style(
+                'absolute inset-0 flex items-center justify-center',
+              )}
               testID="spinner-container"
             >
               <Spinner
