@@ -237,7 +237,7 @@ import { Box, BoxFlexDirection } from '@metamask/design-system-react-native';
   <ButtonBase twClassName="flex-1" onPress={handleNo}>
     No
   </ButtonBase>
-</Box>
+</Box>;
 ```
 
 **Note**: Do not use `isFullWidth` in horizontal layouts, as it causes both buttons to attempt 100% width, resulting in overflow.
@@ -252,9 +252,7 @@ For vertical stacking, use `isFullWidth` to make buttons span the full width:
   <ButtonBase isFullWidth onPress={handleSave}>
     Save Changes
   </ButtonBase>
-  <ButtonBase onPress={handleCancel}>
-    Cancel
-  </ButtonBase>
+  <ButtonBase onPress={handleCancel}>Cancel</ButtonBase>
 </Box>
 ```
 
