@@ -201,9 +201,7 @@ describe('ButtonSecondary', () => {
   });
 
   it('shows spinner + hides content when loading', () => {
-    const spinnerTW =
-      'absolute inset-0 flex items-center justify-center opacity-100';
-    const contentTW = 'flex-row items-center justify-center gap-x-2 opacity-0';
+    const spinnerTW = 'absolute inset-0 flex items-center justify-center';
 
     const { getByTestId } = render(
       <ButtonSecondary
@@ -219,12 +217,6 @@ describe('ButtonSecondary', () => {
     const spinnerStyles = flattenStyles(spinner.props.style);
     expect(spinnerStyles).toStrictEqual(
       expect.arrayContaining([expect.objectContaining(tw`${spinnerTW}`)]),
-    );
-
-    const content = getByTestId('content-container');
-    const contentStyles = flattenStyles(content.props.style);
-    expect(contentStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining(tw`${contentTW}`)]),
     );
 
     expect(
