@@ -56,7 +56,10 @@ export const ButtonAnimated = ({
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
       disabled={disabled}
-      style={[evaluatedStyle, animatedStyle]}
+      style={[
+        ...(Array.isArray(evaluatedStyle) ? evaluatedStyle : [evaluatedStyle]),
+        animatedStyle,
+      ]}
       {...props}
     >
       {typeof children === 'function'
