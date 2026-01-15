@@ -234,7 +234,7 @@ describe('ButtonBase', () => {
   });
 
   it('renders custom accessories in loading state', () => {
-    const { getByTestId } = render(
+    const tree = ReactTestRenderer.create(
       <ButtonBase
         isLoading
         startAccessory={<View testID="sa" />}
@@ -244,8 +244,25 @@ describe('ButtonBase', () => {
         Loading
       </ButtonBase>,
     );
-    expect(getByTestId('sa')).toBeDefined();
-    expect(getByTestId('ea')).toBeDefined();
+
+    // Find the accessory views
+    const startAccessory = tree.root.findByProps({ testID: 'sa' });
+    const endAccessory = tree.root.findByProps({ testID: 'ea' });
+
+    expect(startAccessory).toBeDefined();
+    expect(endAccessory).toBeDefined();
+
+    // Verify the wrapper Views have opacity-0 when loading
+    // The accessories are wrapped in View with tw.style(isLoading && 'opacity-0')
+    const startWrapper = startAccessory.parent;
+    const endWrapper = endAccessory.parent;
+
+    expect(startWrapper?.props.style).toStrictEqual(
+      expect.objectContaining({ opacity: 0 }),
+    );
+    expect(endWrapper?.props.style).toStrictEqual(
+      expect.objectContaining({ opacity: 0 }),
+    );
   });
 
   it('applies function-based style prop correctly', () => {
