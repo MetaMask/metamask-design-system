@@ -1,179 +1,152 @@
 # ImageOrSvg
 
-The `ImageOrSvg` component is a flexible image component that supports local and remote images, as well as local and remote SVGs, ensuring proper rendering in React Native applications.
+ImageOrSvg is used to render flexible image and SVG elements within an interface.
 
----
+```tsx
+import { ImageOrSvg } from '@metamask/design-system-react-native';
+
+<ImageOrSvg src={{ uri: 'https://example.com/image.png' }} />;
+```
 
 ## Props
 
-### `src` (Required)
+### `src`
 
-The source of the image or SVG. It determines whether a local image, a local SVG component, or a remote image/SVG (via URI) is rendered.
+The source of the image or SVG to render.
 
-| TYPE                                                    | REQUIRED | DEFAULT |
-| :------------------------------------------------------ | :------- | :------ |
-| `number \| ComponentType<SvgProps> \| { uri?: string }` | Yes      | `N/A`   |
+| TYPE                                                    | REQUIRED | DEFAULT     |
+| ------------------------------------------------------- | -------- | ----------- |
+| `number \| ComponentType<SvgProps> \| { uri?: string }` | Yes      | `undefined` |
 
----
+```tsx
+<ImageOrSvg src={{ uri: 'https://example.com/image.png' }} />
+<ImageOrSvg src={require('./local-image.png')} />
+```
 
 ### `width`
 
-Optional prop to set the width of the image/SVG.
-Accepts numbers (pixels) or string values (like percentages).
+The width of the image or SVG.
 
-| TYPE               | REQUIRED | DEFAULT |
-| :----------------- | :------- | :------ |
-| `number \| string` | No       | `N/A`   |
+| TYPE               | REQUIRED | DEFAULT     |
+| ------------------ | -------- | ----------- |
+| `number \| string` | No       | `undefined` |
 
----
+```tsx
+<ImageOrSvg src={{ uri: 'https://example.com/image.png' }} width={100} />
+```
 
 ### `height`
 
-Optional prop to set the height of the image/SVG.
-Accepts numbers (pixels) or string values (like percentages).
+The height of the image or SVG.
 
-| TYPE               | REQUIRED | DEFAULT |
-| :----------------- | :------- | :------ |
-| `number \| string` | No       | `N/A`   |
+| TYPE               | REQUIRED | DEFAULT     |
+| ------------------ | -------- | ----------- |
+| `number \| string` | No       | `undefined` |
 
----
+```tsx
+<ImageOrSvg src={{ uri: 'https://example.com/image.png' }} height={100} />
+```
 
 ### `onImageLoad`
 
-Optional callback triggered when the image has loaded successfully.
+Callback triggered when the image has loaded successfully.
 
-| TYPE                                                        | REQUIRED | DEFAULT |
-| :---------------------------------------------------------- | :------- | :------ |
-| `(event: NativeSyntheticEvent<ImageLoadEventData>) => void` | No       | `N/A`   |
+| TYPE                                                        | REQUIRED | DEFAULT     |
+| ----------------------------------------------------------- | -------- | ----------- |
+| `(event: NativeSyntheticEvent<ImageLoadEventData>) => void` | No       | `undefined` |
 
----
+```tsx
+<ImageOrSvg
+  src={{ uri: 'https://example.com/image.png' }}
+  onImageLoad={() => console.log('Image loaded')}
+/>
+```
 
 ### `onImageError`
 
-Optional callback triggered when there is an error rendering the image.
+Callback triggered when there is an error loading the image.
 
-| TYPE                                                              | REQUIRED | DEFAULT |
-| :---------------------------------------------------------------- | :------- | :------ |
-| `(errorEvent: NativeSyntheticEvent<ImageErrorEventData>) => void` | No       | `N/A`   |
+| TYPE                                                              | REQUIRED | DEFAULT     |
+| ----------------------------------------------------------------- | -------- | ----------- |
+| `(errorEvent: NativeSyntheticEvent<ImageErrorEventData>) => void` | No       | `undefined` |
 
----
+```tsx
+<ImageOrSvg
+  src={{ uri: 'https://example.com/image.png' }}
+  onImageError={() => console.log('Image error')}
+/>
+```
 
 ### `onSvgError`
 
-Optional callback triggered when there is an error rendering the SVG.
+Callback triggered when there is an error loading the SVG.
 
-| TYPE                     | REQUIRED | DEFAULT |
-| :----------------------- | :------- | :------ |
-| `(error: Error) => void` | No       | `N/A`   |
-
----
-
-### `style`
-
-Optional prop for style overrides for the image/SVG container.
-
-| TYPE                    | REQUIRED | DEFAULT |
-| :---------------------- | :------- | :------ |
-| `StyleProp<ImageStyle>` | No       | `null`  |
-
----
-
-### `imageProps`
-
-Additional props to pass to the `Image` component, excluding the `source` prop (which is handled separately).
-
-| TYPE                         | REQUIRED | DEFAULT |
-| :--------------------------- | :------- | :------ |
-| `Omit<ImageProps, 'source'>` | No       | `{}`    |
-
----
-
-### `svgProps`
-
-Additional props to pass to the `Svg` component, excluding the `uri` prop (which is handled separately).
-
-| TYPE                    | REQUIRED | DEFAULT |
-| :---------------------- | :------- | :------ |
-| `Omit<SvgProps, 'uri'>` | No       | `{}`    |
-
----
-
-## Usage
-
-### Basic Usage
-
-```tsx
-import React from 'react';
-import ImageOrSvg from '@metamask/design-system-react-native';
-
-<ImageOrSvg
-  src={{ uri: 'https://example.com/image.png' }}
-  width={100}
-  height={100}
-/>;
-```
-
----
-
-### Local Image
-
-```tsx
-import React from 'react';
-import { ImageOrSvg } from '@metamask/design-system-react-native';
-import localImage from '../assets/image.png';
-
-<ImageOrSvg src={localImage} width={100} height={100} />;
-```
-
----
-
-### Local SVG
-
-```tsx
-import React from 'react';
-import { ImageOrSvg } from '@metamask/design-system-react-native';
-import LocalSvg from '../assets/icon.svg';
-
-<ImageOrSvg src={LocalSvg} width={50} height={50} />;
-```
-
----
-
-### Handling Errors
+| TYPE                     | REQUIRED | DEFAULT     |
+| ------------------------ | -------- | ----------- |
+| `(error: Error) => void` | No       | `undefined` |
 
 ```tsx
 <ImageOrSvg
   src={{ uri: 'https://example.com/image.svg' }}
-  width={100}
-  height={100}
-  onImageError={() => console.log('Image failed to load')}
-  onSvgError={() => console.log('SVG failed to load')}
+  onSvgError={() => console.log('SVG error')}
 />
 ```
 
----
+### `twClassName`
 
-### Accessibility
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-- Use meaningful `alt` descriptions for SVGs and images when possible.
-- Ensure proper fallback strategies for failed image/SVG loads.
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
-### Notes
+```tsx
+import { ImageOrSvg } from '@metamask/design-system-react-native';
 
-- `ImageOrSvg` detects content type dynamically for remote sources.
-- Local and remote images and SVGs are supported without additional dependencies.
-- Uses `fetch` to determine if a URI corresponds to an SVG when necessary.
+// Add additional styles
+<ImageOrSvg
+  src={{ uri: 'https://example.com/image.png' }}
+  twClassName="border-2 border-primary-100"
+>
+  Custom Border
+</ImageOrSvg>
 
----
+// Override default styles
+<ImageOrSvg
+  src={{ uri: 'https://example.com/image.png' }}
+  twClassName="!rounded-lg"
+>
+  Rounded Image
+</ImageOrSvg>
+```
 
-## Contributing
+### `style`
 
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
----
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+```tsx
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
+
+export const StyleExample = () => (
+  <ImageOrSvg
+    src={{ uri: 'https://example.com/image.png' }}
+    style={styles.custom}
+  />
+);
+```
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

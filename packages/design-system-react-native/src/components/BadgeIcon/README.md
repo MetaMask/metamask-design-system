@@ -1,103 +1,117 @@
 # BadgeIcon
 
-`BadgeIcon` is a circular indicator that contains an icon, used to provide quick context or visual tagging at a glance.
+BadgeIcon is a circular indicator that contains an icon, used to provide quick context or visual tagging at a glance.
 
----
+```tsx
+import { BadgeIcon } from '@metamask/design-system-react-native';
+
+<BadgeIcon name="CheckBold" />;
+```
 
 ## Props
 
-### `iconName` (Required)
+### `name`
 
-The name of the icon to be displayed.
+The icon name to display in the badge.
 
-| TYPE       | REQUIRED | DEFAULT |
-| :--------- | :------- | :------ |
-| `IconName` | Yes      | `N/A`   |
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | Yes      | `undefined` |
 
----
+```tsx
+<BadgeIcon name="CheckBold" />
+```
 
-### `iconProps`
+### `variant`
 
-Optional props to customize the appearance of the icon inside the badge.
+The visual variant of the badge.
 
-| TYPE                 | REQUIRED | DEFAULT                                                  |
-| :------------------- | :------- | :------------------------------------------------------- |
-| `Partial<IconProps>` | No       | `{ size: IconSize.Xs, color: IconColor.PrimaryInverse }` |
+Available variants:
 
----
+- `BadgeIconVariant.Success`
+- `BadgeIconVariant.Error`
+- `BadgeIconVariant.Warning`
+- `BadgeIconVariant.Info`
+
+| TYPE               | REQUIRED | DEFAULT                    |
+| ------------------ | -------- | -------------------------- |
+| `BadgeIconVariant` | No       | `BadgeIconVariant.Success` |
+
+```tsx
+<BadgeIcon name="CheckBold" variant={BadgeIconVariant.Success} />
+<BadgeIcon name="WarningFilled" variant={BadgeIconVariant.Warning} />
+```
+
+### `size`
+
+The size of the BadgeIcon.
+
+Available sizes:
+
+- `BadgeIconSize.Sm` (16px)
+- `BadgeIconSize.Md` (20px)
+
+| TYPE            | REQUIRED | DEFAULT            |
+| --------------- | -------- | ------------------ |
+| `BadgeIconSize` | No       | `BadgeIconSize.Md` |
+
+```tsx
+<BadgeIcon name="CheckBold" size={BadgeIconSize.Sm} />
+<BadgeIcon name="CheckBold" />
+```
 
 ### `twClassName`
 
-Optional prop to add `twrnc` overriding class names.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+import { BadgeIcon } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<BadgeIcon
+  name="CheckBold"
+  twClassName="border-2 border-primary-100"
+>
+  Custom Border
+</BadgeIcon>
+
+// Override default styles
+<BadgeIcon
+  name="CheckBold"
+  twClassName="!bg-error-100"
+>
+  Override Background
+</BadgeIcon>
+```
 
 ### `style`
 
-Optional prop to control the style of the badge container.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE                   | REQUIRED | DEFAULT |
-| :--------------------- | :------- | :------ |
-| `StyleProp<ViewStyle>` | No       | `null`  |
-
----
-
-## Usage
-
-### Basic Usage
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-import React from 'react';
-import BadgeIcon, { IconName } from '@metamask/design-system-react-native';
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-<BadgeIcon iconName={IconName.Send} />;
+export const StyleExample = () => (
+  <BadgeIcon name="CheckBold" style={styles.custom} />
+);
 ```
 
----
+## References
 
-### Adjusting Icon Properties
-
-```tsx
-import {
-  IconColor,
-  IconSize,
-  IconName,
-} from '@metamask/design-system-react-native';
-
-<BadgeIcon
-  iconName={IconName.Send}
-  iconProps={{ color: IconColor.SuccessDefault, size: IconSize.Sm }}
-/>;
-```
-
----
-
-### Applying Tailwind Custom Styles
-
-```tsx
-<BadgeIcon iconName={IconName.Send} twClassName="bg-blue-500" />
-```
-
----
-
-## Notes
-
-- `BadgeIcon` provides a quick visual indication for different actions in the UI.
-- You can override the default icon properties using `iconProps`.
-- Tailwind classes and custom styles can be applied for further customization.
-
----
-
-## Contributing
-
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
-
----
-
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
