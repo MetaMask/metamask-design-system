@@ -16,9 +16,9 @@ export const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
       // Default primary styles
       !isDanger &&
         !isInverse && [
-          'bg-icon-default text-primary-inverse',
+          'bg-primary-default text-primary-inverse',
           // Loading state uses pressed color
-          isLoading && 'bg-icon-default-pressed',
+          isLoading && 'bg-primary-default-pressed',
         ],
       // Danger styles
       isDanger &&
@@ -45,8 +45,8 @@ export const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
       isInteractive && [
         !isDanger &&
           !isInverse && [
-            'hover:bg-icon-default-hover',
-            'active:bg-icon-default-pressed',
+            'hover:bg-primary-default-hover',
+            'active:bg-primary-default-pressed',
           ],
         isDanger &&
           !isInverse && [
