@@ -8,7 +8,7 @@ export const TWCLASSMAP_BUTTONICON_SIZE_DIMENSION = {
 } as const;
 
 export const MAP_BUTTONICON_SIZE_ICONSIZE = {
-  [ButtonIconSize.Sm]: IconSize.Sm,
-  [ButtonIconSize.Md]: IconSize.Md,
-  [ButtonIconSize.Lg]: IconSize.Lg,
+  [ButtonIconSize.Sm]: IconSize.Md,
+  [ButtonIconSize.Md]: IconSize.Lg,
+  [ButtonIconSize.Lg]: IconSize.Xl,
 } as const;
