@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: align ButtonIcon icon sizes and border radius with Figma design ([#873](https://github.com/MetaMask/metamask-design-system/pull/873))
+- chore(deps): bump @metamask/utils from 11.8.1 to 11.9.0 ([#867](https://github.com/MetaMask/metamask-design-system/pull/867))
+
 ## [0.5.0]
 
 ### Changed
