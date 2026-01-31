@@ -182,7 +182,7 @@ const config = createConfig([
   {
     files: ['**/*.d.ts'],
     rules: {
-      '@typescript-eslint/naming-convention': 'warn',
+      '@typescript-eslint/naming-convention': 'error',
       'import-x/unambiguous': 'off',
     },
   },
