@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.1]
+
+### Changed
+
+- Updated `@metamask/utils` peer dependency from 11.8.1 to 11.9.0 ([#867](https://github.com/MetaMask/metamask-design-system/pull/867))
+
+### Fixed
+
+- Updated `ButtonIcon` component icon sizes and border radius to match Figma design specifications ([#873](https://github.com/MetaMask/metamask-design-system/pull/873))
+  - `ButtonIcon.Sm` now uses 20px icon (previously 16px)
+  - `ButtonIcon.Md` now uses 24px icon (previously 20px)
+  - `ButtonIcon.Lg` now uses 32px icon (previously 24px)
+  - Non-floating border radius now uses 8px for improved visual consistency
+
 ## [0.6.0]
 
 ### Added
@@ -109,7 +123,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.6.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.6.1...HEAD
+[0.6.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.6.0...@metamask/design-system-react@0.6.1
 [0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.5.0...@metamask/design-system-react@0.6.0
 [0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.4.1...@metamask/design-system-react@0.5.0
 [0.4.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.4.0...@metamask/design-system-react@0.4.1
