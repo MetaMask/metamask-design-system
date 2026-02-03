@@ -10,6 +10,7 @@ const config = createConfig([
   ...base,
   {
     ignores: [
+      '**/node_modules/**',
       '**/dist/**',
       '**/docs/**',
       '**/coverage/**',
