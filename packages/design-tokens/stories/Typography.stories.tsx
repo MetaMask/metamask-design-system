@@ -1,5 +1,5 @@
 import { Text } from '@metamask/design-system-react';
-import type { StoryFn, Meta } from '@storybook/react';
+import type { StoryFn, Meta } from '@storybook/react-vite';
 import React from 'react';
 
 import { typography } from '../src/js/typography';
