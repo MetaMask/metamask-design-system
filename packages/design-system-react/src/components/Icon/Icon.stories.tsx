@@ -17,7 +17,7 @@ const meta = {
   },
   args: {
     name: IconName.AddSquare,
-    size: IconSize.Md,
+    size: IconSize.Xl,
   },
   argTypes: {
     name: {
