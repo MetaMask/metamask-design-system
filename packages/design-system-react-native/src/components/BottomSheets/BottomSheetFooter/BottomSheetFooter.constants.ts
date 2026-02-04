@@ -1,7 +1,5 @@
-/* eslint-disable no-console */
-/* eslint-disable import/prefer-default-export */
 // External dependencies.
-import { ButtonVariants } from '../../Buttons/Button';
+import { ButtonVariant } from '../../Button';
 
 // Internal dependencies.
 import {
@@ -21,18 +19,19 @@ export const DEFAULT_BOTTOMSHEETFOOTER_BUTTONSALIGNMENT =
 
 // Sample consts
 export const SAMPLE_BOTTOMSHEETFOOTER_PROPS: BottomSheetFooterProps = {
-  buttonsAlignment: DEFAULT_BOTTOMSHEETFOOTER_BUTTONSALIGNMENT,
+  // for mobile use `Vertical` to see buttons on the screen
+  buttonsAlignment: ButtonsAlignment.Vertical,
   buttonPropsArray: [
     {
-      variant: ButtonVariants.Secondary,
-      label: 'Cancel',
+      variant: ButtonVariant.Secondary,
+      children: 'Cancel',
       onPress: () => {
         console.log('Cancel button clicked');
       },
     },
     {
-      variant: ButtonVariants.Primary,
-      label: 'Submit',
+      variant: ButtonVariant.Primary,
+      children: 'Submit',
       onPress: () => {
         console.log('Submit button clicked');
       },

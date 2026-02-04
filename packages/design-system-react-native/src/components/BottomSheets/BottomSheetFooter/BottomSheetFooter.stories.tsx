@@ -1,9 +1,8 @@
-/* eslint-disable react/display-name */
 // Third party dependencies.
 import React from 'react';
 
 // Internal dependencies.
-import { default as BottomSheetFooter } from './BottomSheetFooter';
+import BottomSheetFooter from './BottomSheetFooter';
 import { SAMPLE_BOTTOMSHEETFOOTER_PROPS } from './BottomSheetFooter.constants';
 import { ButtonsAlignment } from './BottomSheetFooter.types';
 
