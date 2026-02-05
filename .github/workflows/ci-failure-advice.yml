@@ -2,7 +2,7 @@ name: CI Failure Advice
 
 on:
   workflow_run:
-    workflows: ["Main"]
+    workflows: ['Main']
     types:
       - completed
 

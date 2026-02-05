@@ -30,4 +30,4 @@ jobs:
             test
           requireScope: false
           subjectPattern: ^(?!.*\\.$).+$
-          subjectPatternError: "Subject must not end with a period."
+          subjectPatternError: 'Subject must not end with a period.'
