@@ -12,10 +12,9 @@ This repository uses a lightweight, checklist-based documentation approach optim
 .
 ├── CLAUDE.md                   # Layer 1: Entry point (40-120 lines)
 ├── .cursor/rules/              # Layer 2: Focused rules (200-400 lines each)
-│   └── README.md              # Index and quick reference
+│   └── *.md                   # Individual rule files
 └── docs/                       # Layer 3: High-level guides
-    ├── ai-agents.md           # This file - strategy explanation
-    └── metamask-standards-links.md  # MetaMask contributor-docs references
+    └── ai-agents.md           # This file - strategy explanation
 ```
 
 ## Layer 1: CLAUDE.md (Entry Point)
@@ -37,7 +36,7 @@ This repository uses a lightweight, checklist-based documentation approach optim
 
 - Claude Code best practices recommend keeping CLAUDE.md concise
 - Agents can miss key rules in verbose files
-- Use explicit `@.cursor/rules/README.md` reference for detailed rules
+- Use explicit `@.cursor/rules/` references for detailed rules
 
 ## Layer 2: .cursor/rules/ (Focused Rules)
 
@@ -122,14 +121,14 @@ This:
 
 1. Open Cursor in this repo
 2. Start coding - rules apply automatically
-3. Check `.cursor/rules/README.md` to find specific rules
+3. All `.cursor/rules/*.md` files are loaded automatically
 
 ### Claude Code
 
 **Session start:**
 
 - Claude reads `CLAUDE.md` automatically
-- `CLAUDE.md` explicitly references: `@.cursor/rules/README.md`
+- `CLAUDE.md` explicitly references individual rule files in `@.cursor/rules/`
 - Rules persist throughout conversation
 
 **Usage:**
@@ -197,7 +196,7 @@ Add rules when observing AI agents make repeated mistakes:
 
 ## Critical Invariants
 
-These rules appear in CLAUDE.md and `.cursor/rules/README.md` because AI agents repeatedly get them wrong:
+These rules appear in CLAUDE.md because AI agents repeatedly get them wrong:
 
 **TypeScript:**
 
@@ -224,10 +223,9 @@ These rules appear in CLAUDE.md and `.cursor/rules/README.md` because AI agents 
 
 **Files in this PR:**
 
-- `CLAUDE.md` - Thin entry point
-- `.cursor/rules/README.md` - Index and philosophy
+- `CLAUDE.md` - Thin entry point with explicit rule file references
+- `.cursor/rules/metamask-organization-standards.md` - MetaMask contributor-docs references
 - `docs/ai-agents.md` - This file
-- `docs/metamask-standards-links.md` - MetaMask standards
 - `CLAUDE.local.md.example` - Personal overrides template
 - `.gitignore` - Ignore CLAUDE.local.md
 
@@ -354,15 +352,15 @@ cp CLAUDE.local.md.example CLAUDE.local.md
 ### This Repository
 
 - **Entry Point:** [CLAUDE.md](../CLAUDE.md)
-- **Rule Index:** [.cursor/rules/README.md](../.cursor/rules/README.md)
+- **Rules Directory:** [.cursor/rules/](../.cursor/rules/)
 - **Contributing:** [docs/contributing.md](./contributing.md)
-- **MetaMask Standards:** [docs/metamask-standards-links.md](./metamask-standards-links.md)
+- **MetaMask Standards:** [.cursor/rules/metamask-organization-standards.md](../.cursor/rules/metamask-organization-standards.md)
 
 ## Questions?
 
 If you have questions about the documentation strategy:
 
 - Review this file for the overall approach
-- Check `CLAUDE.md` for critical invariants
-- See `.cursor/rules/README.md` for rule index
+- Check `CLAUDE.md` for critical invariants and rule references
+- Browse `.cursor/rules/` for specific rules
 - Open an issue for suggestions or improvements

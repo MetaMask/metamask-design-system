@@ -97,8 +97,8 @@ For comprehensive MetaMask organization guidelines:
 
 For design system specific rules and patterns:
 
-**Primary:** [.cursor/rules/README.md](../.cursor/rules/README.md)
+**Rules Directory:** [.cursor/rules/](../cursor/rules/)
 
-**Strategy:** [docs/ai-agents.md](./ai-agents.md)
+**Strategy:** [docs/ai-agents.md](../../docs/ai-agents.md)
 
-**High-level:** [docs/contributing.md](./contributing.md)
+**High-level:** [docs/contributing.md](../../docs/contributing.md)

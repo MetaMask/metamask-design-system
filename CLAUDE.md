@@ -2,9 +2,21 @@
 
 Design tokens and components for MetaMask extension (React) and mobile (React Native).
 
-## Development Documentation
+## Documentation for AI Agents
 
-Primary documentation: @.cursor/rules/README.md
+Focused rules for repository-specific conventions:
+
+- @.cursor/rules/metamask-organization-standards.md - MetaMask contributor-docs references
+- Future rules (separate PRs):
+  - styling.md - Design tokens, Tailwind, component-first
+  - component-creation.md - Using create-component scripts
+  - component-documentation.md - README standards
+  - testing.md - Jest, Testing Library, accessibility
+  - monorepo-workflow.md - Workspace commands
+  - typescript-patterns.md - Enums, types, discriminated unions
+  - figma-integration.md - Code Connect (optional)
+
+See @docs/ai-agents.md for comprehensive strategy explanation.
 
 ## Critical Invariants (Never Break These)
 
@@ -109,10 +121,6 @@ import { Button } from '../../../packages/design-system-react';
 - Package: `@metamask/design-system-react-native`
 - Styling: `twClassName` prop + `useTailwind()` hook
 - Documentation: `README.md` with code examples
-
-## MetaMask Standards
-
-Organization-wide guidelines: https://github.com/MetaMask/contributor-docs/
 
 ## Personal Overrides
 
