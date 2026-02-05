@@ -1,0 +1,29 @@
+name: Chromatic Visual Regression
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  chromatic:
+    name: Publish to Chromatic
+    if: ${{ secrets.CHROMATIC_PROJECT_TOKEN != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v1
+        with:
+          is-high-risk-environment: false
+          skip-allow-scripts: true
+      - name: Build required packages
+        run: yarn build
+      - name: Run Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: apps/storybook-react
+          exitZeroOnChanges: true
+          autoAcceptChanges: false
