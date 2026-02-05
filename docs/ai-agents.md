@@ -223,9 +223,8 @@ These rules appear in CLAUDE.md because AI agents repeatedly get them wrong:
 
 **Files in this PR:**
 
-- `CLAUDE.md` - Thin entry point with explicit rule file references
-- `.cursor/rules/metamask-organization-standards.md` - MetaMask contributor-docs references
-- `docs/ai-agents.md` - This file
+- `CLAUDE.md` - Thin entry point listing future rule files
+- `docs/ai-agents.md` - This file (strategy explanation)
 - `CLAUDE.local.md.example` - Personal overrides template
 - `.gitignore` - Ignore CLAUDE.local.md
 
@@ -352,9 +351,9 @@ cp CLAUDE.local.md.example CLAUDE.local.md
 ### This Repository
 
 - **Entry Point:** [CLAUDE.md](../CLAUDE.md)
-- **Rules Directory:** [.cursor/rules/](../.cursor/rules/)
+- **Rules Directory:** [.cursor/rules/](../.cursor/rules/) (rule files added in Phase 2)
 - **Contributing:** [docs/contributing.md](./contributing.md)
-- **MetaMask Standards:** [.cursor/rules/metamask-organization-standards.md](../.cursor/rules/metamask-organization-standards.md)
+- **MetaMask Standards:** [MetaMask Contributor Docs](https://github.com/MetaMask/contributor-docs/)
 
 ## Questions?
 

@@ -4,17 +4,15 @@ Design tokens and components for MetaMask extension (React) and mobile (React Na
 
 ## Documentation for AI Agents
 
-Focused rules for repository-specific conventions:
+Focused rules for repository-specific conventions will be added in Phase 2 (separate PRs):
 
-- @.cursor/rules/metamask-organization-standards.md - MetaMask contributor-docs references
-- Future rules (separate PRs):
-  - styling.md - Design tokens, Tailwind, component-first
-  - component-creation.md - Using create-component scripts
-  - component-documentation.md - README standards
-  - testing.md - Jest, Testing Library, accessibility
-  - monorepo-workflow.md - Workspace commands
-  - typescript-patterns.md - Enums, types, discriminated unions
-  - figma-integration.md - Code Connect (optional)
+- styling.md - Design tokens, Tailwind, component-first
+- component-creation.md - Using create-component scripts
+- component-documentation.md - README standards
+- testing.md - Jest, Testing Library, accessibility
+- monorepo-workflow.md - Workspace commands
+- typescript-patterns.md - Enums, types, discriminated unions
+- figma-integration.md - Code Connect (optional)
 
 See @docs/ai-agents.md for comprehensive strategy explanation.
 
