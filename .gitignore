@@ -64,6 +64,3 @@ yarn-error.*
 # local env files
 .env
 .cursor/temp/
-
-# Personal AI agent overrides
-CLAUDE.local.md
