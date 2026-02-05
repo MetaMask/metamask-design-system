@@ -11,6 +11,8 @@ jobs:
   chromatic:
     name: Publish to Chromatic
     runs-on: ubuntu-latest
+    env:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
     steps:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@v1
@@ -18,10 +20,10 @@ jobs:
           is-high-risk-environment: false
           skip-allow-scripts: true
       - name: Build required packages
-        if: ${{ secrets.CHROMATIC_PROJECT_TOKEN != '' }}
+        if: ${{ env.CHROMATIC_PROJECT_TOKEN != '' }}
         run: yarn build
       - name: Run Chromatic
-        if: ${{ secrets.CHROMATIC_PROJECT_TOKEN != '' }}
+        if: ${{ env.CHROMATIC_PROJECT_TOKEN != '' }}
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
