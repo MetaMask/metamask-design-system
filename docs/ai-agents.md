@@ -261,7 +261,7 @@ After rule files are working:
 
 ## Personal Customization
 
-Developers can create `CLAUDE.local.md` for personal preferences:
+As per [Claude Code best practices](https://code.claude.com/docs/en/best-practices), developers can create `CLAUDE.local.md` for personal preferences (gitignored).
 
 ```bash
 cp CLAUDE.local.md.example CLAUDE.local.md
