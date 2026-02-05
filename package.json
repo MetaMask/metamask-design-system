@@ -50,6 +50,7 @@
     "storybook:ios": "yarn workspace @metamask/storybook-react-native ios",
     "test": "yarn test:scripts --silent --collectCoverage=false --reporters=jest-silent-reporter && yarn test:packages",
     "test:clean": "yarn workspaces foreach --all --parallel --verbose run test:clean && yarn test",
+    "test:update": "yarn test:scripts -- -u && yarn workspaces foreach --all --parallel --verbose run test:update || true",
     "test:packages": "yarn test:verbose --silent --collectCoverage=false --reporters=jest-silent-reporter",
     "test:scripts": "NODE_OPTIONS=--experimental-vm-modules yarn jest --config ./jest.config.scripts.js --silent",
     "test:storybook": "yarn workspace @metamask/storybook-react test-storybook",
