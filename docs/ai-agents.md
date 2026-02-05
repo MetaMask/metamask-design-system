@@ -26,7 +26,7 @@ This repository uses a lightweight, checklist-based documentation approach optim
 - Critical invariants (never break these)
 - Essential commands
 - Monorepo structure overview
-- Reference to `.cursor/rules/README.md`
+- Reference to cursor rules using @ file imports notation `@.cursor/rules/*.md`
 
 **Size:** 40-120 lines (keeps context efficient)
 
@@ -53,15 +53,16 @@ This repository uses a lightweight, checklist-based documentation approach optim
 
 **Size:** 200-400 lines per file (checklists, not novels)
 
-**Planned Rule Files** (separate PRs):
+**Planned Rule Files**
 
 - `styling.md` - Design tokens, Tailwind, component-first
 - `component-creation.md` - Using create-component scripts
-- `component-documentation.md` - README standards
+- `cross-platform.md` - Cross platform consistency and shared types
+- `component-documentation.md` - Storybook and README standards
 - `testing.md` - Jest, Testing Library, accessibility
 - `monorepo-workflow.md` - Workspace commands
-- `typescript-patterns.md` - Enums (critical!), types
-- `figma-integration.md` - Code Connect (optional)
+- `typescript-patterns.md` - Enums, shared types
+- `figma-integration.md` - Code Connect
 
 **Why this format?**
 
@@ -98,7 +99,7 @@ This:
 - `ai-agents.md` - This file, strategy explanation
 - `metamask-standards-links.md` - Links to MetaMask contributor-docs
 - `reviewing-release-prs.md` - Release process
-- `package-migration-process-guide.md` - Infrequent migrations
+- `package-migration-process-guide.md` - Infrequent package migrations
 
 **What moved to .cursor/rules/:**
 
@@ -147,7 +148,7 @@ Rules **reference** existing comprehensive docs rather than duplicating:
 ```markdown
 ## References
 
-- https://github.com/MetaMask/contributor-docs/blob/main/docs/react-guidelines.md
+- https://github.com/MetaMask/contributor-docs/blob/main/docs/react.md
 - See `packages/design-system-react/src/components/Button/` for pattern
 ```
 
@@ -204,13 +205,12 @@ These rules appear in CLAUDE.md because AI agents repeatedly get them wrong:
 
 **Styling:**
 
-- NEVER use arbitrary Tailwind values → ONLY design tokens
-- NEVER use default colors → ONLY semantic tokens
+- NEVER use arbitrary Tailwind values → ONLY design token generated tailwind classnames
+- NEVER use default colors → ONLY theme tokens from tailwind config
 
 **Testing:**
 
 - ALWAYS write tests when creating/modifying components
-- ALWAYS include accessibility tests
 
 **Component Creation:**
 
