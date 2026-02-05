@@ -572,6 +572,7 @@ export enum IconName {
   AddCircle = 'AddCircle',
   AddSquare = 'AddSquare',
   Add = 'Add',
+  AfterHours = 'AfterHours',
   Ai = 'Ai',
   AlternateEmail = 'AlternateEmail',
   AppleLogo = 'AppleLogo',

@@ -7,6 +7,7 @@ import Add from './Add';
 import AddCard from './AddCard';
 import AddCircle from './AddCircle';
 import AddSquare from './AddSquare';
+import AfterHours from './AfterHours';
 import Ai from './Ai';
 import AlternateEmail from './AlternateEmail';
 import AppleLogo from './AppleLogo';
@@ -285,6 +286,7 @@ export const Icons = {
   AddCard,
   AddCircle,
   AddSquare,
+  AfterHours,
   Ai,
   AlternateEmail,
   AppleLogo,
