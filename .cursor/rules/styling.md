@@ -210,6 +210,22 @@ const MyComponent = () => {
 </Pressable>
 ```
 
+**NEVER store classes in variables:**
+
+```tsx
+// ❌ Wrong - Breaks VSCode Tailwind IntelliSense and linting
+const twContainerClassNames = 'flex-1 bg-default p-4';
+<View style={tw`${twContainerClassNames}`} />
+
+// ✅ Correct - Use tw.style() for conditionals/props
+<View
+  style={tw.style(
+    'flex-1 bg-default p-4',
+    isActive && 'bg-pressed',
+  )}
+/>
+```
+
 **NEVER import twrnc directly:**
 
 ```tsx
@@ -237,27 +253,24 @@ yarn lint:fix
 - @apps/storybook-react/stories/WalletHome.stories.tsx (React Web)
 - @apps/storybook-react-native/stories/WalletHome.stories.tsx (React Native)
 
-**Component implementations with props + className/twClassName:**
+These examples show:
 
-- @packages/design-system-react/src/components/Box/Box.tsx
-- @packages/design-system-react/src/components/Button/Button.tsx
-- @packages/design-system-react-native/src/components/Box/Box.tsx
-- @packages/design-system-react-native/src/components/Button/Button.tsx
+- Component-first approach (Box props over className/twClassName)
+- Design token enum usage (BoxBackgroundColor, BoxBorderColor, etc.)
+- className/twClassName only for unsupported features (media queries, hover, flex-1)
+- React Native `tw.style()` with conditionals (Pressable pressed state)
+- Text component for all typography
 
-**React Native useTailwind hook:**
+**Design token reference:**
 
-- @packages/design-system-react-native/src/components/Button/
-- @packages/design-system-twrnc-preset/src/useTailwind.ts
+- @packages/design-system-tailwind-preset/ (React Web token classes)
+- @packages/design-system-twrnc-preset/ (React Native token classes)
 
-**Design token generated classes:**
+**Implementation reference:**
 
-- @packages/design-system-tailwind-preset/ (React Web)
-- @packages/design-system-twrnc-preset/ (React Native)
-
-**Text component typography:**
-
-- @packages/design-system-react/src/components/Text/Text.tsx
-- @packages/design-system-react-native/src/components/Text/Text.tsx
+- @packages/design-system-twrnc-preset/src/useTailwind.ts (useTailwind hook)
+- @packages/design-system-react/src/components/Text/Text.tsx (Text component)
+- @packages/design-system-react-native/src/components/Text/Text.tsx (Text component)
 
 ## Verification
 
