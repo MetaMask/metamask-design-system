@@ -232,13 +232,15 @@ yarn lint:fix
 
 ## Golden Path Examples
 
-**React Web Box with props + className:**
+**Complete examples demonstrating best practices:**
+
+- @apps/storybook-react/stories/WalletHome.stories.tsx (React Web)
+- @apps/storybook-react-native/stories/WalletHome.stories.tsx (React Native)
+
+**Component implementations with props + className/twClassName:**
 
 - @packages/design-system-react/src/components/Box/Box.tsx
 - @packages/design-system-react/src/components/Button/Button.tsx
-
-**React Native Box with props + twClassName:**
-
 - @packages/design-system-react-native/src/components/Box/Box.tsx
 - @packages/design-system-react-native/src/components/Button/Button.tsx
 
