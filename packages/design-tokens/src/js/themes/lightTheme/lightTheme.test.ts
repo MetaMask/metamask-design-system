@@ -6,10 +6,8 @@ const designTokens = require('../../../figma/tokens.json');
 
 describe('Light Theme', () => {
   it('color tokens are exported from lightTheme by checking a random color token', () => {
-    expect(
-      lightTheme.colors.background.defaultHover.toLowerCase(),
-    ).toStrictEqual(
-      jsonLightThemeTokens.background['default-hover'].value.toLowerCase(),
+    expect(lightTheme.colors.background.muted.toLowerCase()).toStrictEqual(
+      jsonLightThemeTokens.background.muted.value.toLowerCase(),
     );
   });
 
