@@ -469,6 +469,15 @@ yarn test:storybook           # Run Storybook accessibility tests
 - @apps/storybook-react/stories/WalletHome.stories.tsx (complex React Web story)
 - @apps/storybook-react-native/stories/WalletHome.stories.tsx (complex React Native story)
 
+## README Templates
+
+Reference templates for creating new component documentation:
+
+- @docs/component-readme-examples/react-readme-example.mdx (React Web template)
+- @docs/component-readme-examples/react-native-readme-example.md (React Native template)
+
+Use these as starting points when documenting new components. Templates include standard sections, prop documentation patterns, and proper formatting.
+
 ## Verification
 
 After adding/updating component documentation, verify:
