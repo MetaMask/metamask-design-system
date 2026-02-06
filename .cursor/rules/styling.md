@@ -145,8 +145,10 @@ Component styling using design tokens, Tailwind CSS (web), and TWRNC (React Nati
 **Interactive states (hover/active):**
 
 ```tsx
-<Box width={BoxWidth.Full} className="hover:bg-hover active:bg-pressed">
-  <Text>Clickable content</Text>
+<Box width={BoxWidth.Full} className="hover:bg-hover active:bg-pressed" asChild>
+  <button onClick={handleOnClick}>
+    Clickable content
+  <button>
 </Box>
 ```
 
@@ -265,12 +267,6 @@ These examples show:
 
 - @packages/design-system-tailwind-preset/ (React Web token classes)
 - @packages/design-system-twrnc-preset/ (React Native token classes)
-
-**Implementation reference:**
-
-- @packages/design-system-twrnc-preset/src/useTailwind.ts (useTailwind hook)
-- @packages/design-system-react/src/components/Text/Text.tsx (Text component)
-- @packages/design-system-react-native/src/components/Text/Text.tsx (Text component)
 
 ## Verification
 
