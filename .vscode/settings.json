@@ -16,7 +16,13 @@
   "editor.quickSuggestions": {
     "strings": true
   },
-  "tailwindCSS.classFunctions": ["tw", "tw`", "twClassName", "twMerge"],
+  "tailwindCSS.classFunctions": [
+    "tw",
+    "tw`",
+    "twClassName",
+    "twMerge",
+    "tw.style"
+  ],
   "tailwindCSS.validate": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
