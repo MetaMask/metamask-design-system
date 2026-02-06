@@ -8,215 +8,84 @@ Documentation standards for Storybook stories and README files for React and Rea
 
 - **React Web**: Use `.mdx` format with Storybook Canvas integration
 - **React Native**: Use `.md` format with comprehensive static examples
-- **ALWAYS** include: component description, basic usage, props documentation
+- **ALWAYS** follow templates exactly: @docs/component-readme-examples/
+- **Cross-platform**: Keep documentation identical across web/native (same sections, descriptions, examples)
 - **NEVER** duplicate prop type definitions (reference types file instead)
 
-**React Web (.mdx):**
+### Component Descriptions
 
-````mdx
-import { Controls, Canvas } from '@storybook/addon-docs/blocks';
-import * as ComponentStories from './Component.stories';
+**ALWAYS** include MetaMask-specific context in component descriptions:
 
-# Component
+- **What it's for**: Specific use cases in MetaMask products
+- **When to use**: Product context (Extension, Mobile, Trade, etc.)
+- **Constraints**: When NOT to use (e.g., "Use sparingly for key actions")
 
-Brief one-line description of component purpose.
+**Example (ButtonHero):**
 
-## Usage
+```md
+A branded, high-impact button reserved for the most important actions in Trade.
+Use sparingly for key user actions that require emphasis and visual prominence.
 
-\```tsx
-import { Component, ComponentVariant } from '@metamask/design-system-react';
+Use for:
 
-<Component variant={ComponentVariant.Primary}>Content</Component>
-\```
+- Swapping tokens
+- Claiming winnings (e.g., Polymarket bets)
+- Claiming rewards
+- Other critical, high-value actions
+```
 
-<Canvas of={ComponentStories.Default} />
+**Avoid generic descriptions:**
 
-## Props
-
-### variant
-
-Description of the variant prop.
-
-Available values:
-
-- `ComponentVariant.Primary` - Primary styling
-- `ComponentVariant.Secondary` - Secondary styling
-
-| TYPE             | REQUIRED | DEFAULT                  |
-| ---------------- | -------- | ------------------------ |
-| ComponentVariant | No       | ComponentVariant.Primary |
-
-<Canvas of={ComponentStories.Variant} />
-
-## Component API
-
-<Controls />
-````
-
-**React Native (.md):**
-
-````md
-# [Component](https://www.figma.com/design/link)
-
-![Component](./Component.png)
-
-Brief description of component purpose and platform.
-
-## Props
-
-### variant
-
-Description of the variant prop.
-
-**Type:** `ComponentVariant`
-**Required:** No
-**Default:** `ComponentVariant.Primary`
-
-**Available values:**
-
-- `ComponentVariant.Primary` - Primary styling
-- `ComponentVariant.Secondary` - Secondary styling
-
-## Usage
-
-### Basic Usage
-
-\```tsx
-import { Component, ComponentVariant } from '@metamask/design-system-react-native';
-
-<Component variant={ComponentVariant.Primary}>Content</Component>
-\```
-
-### With Multiple Props
-
-\```tsx
-<Component
-variant={ComponentVariant.Primary}
-size={ComponentSize.Md}
-onPress={handlePress}
-
-> Content
-> </Component> > \```
-
-## Accessibility
-
-- Component supports screen readers via accessibilityLabel
-- Uses semantic role for proper announcement
-````
+- ❌ "ButtonHero is a button component"
+- ✅ "A branded button reserved for the most important actions in Trade"
 
 ### Storybook Stories
+
+**Story Structure:**
+
+1. **Default story** - ALWAYS first, minimal args, ALL controls wired up in argTypes
+2. **Story per prop** - Each major prop gets its own story showcasing usage
+3. **Canvas reference** - Each prop section in README references its story Canvas
+
+**Story naming conventions:**
+
+- `Default` - Minimal example with all controls
+- `Size` - Size variations showcase
+- `Variant` - Variant showcase
+- `IsFullWidth` - Boolean prop example
+- `StartIconName` / `EndIconName` - Specific prop examples
+- `Disabled` / `Loading` - State examples
+
+**Prop descriptions (aspirational):**
+
+Currently most props use generic descriptions ("The size of the component"). Future standard: MetaMask-specific WHEN/WHY guidance.
+
+**Current (generic):**
+
+```tsx
+size: {
+  control: 'select',
+  description: 'Optional prop to control the size of the ButtonHero',
+}
+```
+
+**Aspirational (MetaMask-specific):**
+
+```tsx
+size: {
+  control: 'select',
+  description: 'Size of the button. Use Sm in compact spaces like mobile navigation, Md for standard actions, Lg for hero sections above the fold',
+}
+```
+
+**Core requirements:**
 
 - **ALWAYS** create meta with title, component, parameters, argTypes
 - **ALWAYS** include Default story with minimal args
 - **ALWAYS** create showcase stories for major props (Variant, Size, etc.)
 - **NEVER** use string literals in stories (use enums)
 
-**React Web:**
-
-```tsx
-// ❌ Wrong - No meta configuration
-export const Primary = () => <Button>Click me</Button>;
-
-// ✅ Correct - Proper meta with argTypes
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import README from './Button.README.mdx';
-import { Button, ButtonVariant, ButtonSize } from './Button';
-
-const meta: Meta<typeof Button> = {
-  title: 'React Components/Button',
-  component: Button,
-  parameters: {
-    docs: {
-      page: README,
-    },
-  },
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: Object.keys(ButtonVariant),
-      mapping: ButtonVariant,
-      description: 'Defines the visual style of the button',
-    },
-    children: {
-      control: 'text',
-      description: 'Button content',
-    },
-  },
-};
-
-export default meta;
-type Story = StoryObj<typeof Button>;
-
-export const Default: Story = {
-  args: {
-    children: 'Button',
-  },
-};
-
-export const Variant: Story = {
-  render: () => (
-    <div className="flex gap-2">
-      <Button variant={ButtonVariant.Primary}>Primary</Button>
-      <Button variant={ButtonVariant.Secondary}>Secondary</Button>
-    </div>
-  ),
-};
-```
-
-**React Native:**
-
-```tsx
-// ❌ Wrong - String literals in controls
-argTypes: {
-  variant: {
-    options: ['primary', 'secondary'],
-    control: { type: 'select' },
-  },
-}
-
-// ✅ Correct - Enum values in controls
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button, ButtonVariant, ButtonSize } from './Button';
-
-const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
-  component: Button,
-  argTypes: {
-    variant: {
-      options: ButtonVariant,
-      control: { type: 'select' },
-    },
-  },
-};
-
-export default meta;
-type Story = StoryObj<typeof Button>;
-
-export const Default: Story = {
-  args: {
-    children: 'Button',
-  },
-};
-
-// Helper for platform-specific rendering
-const ButtonStory: React.FC<ButtonProps> = (props) => {
-  const tw = useTailwind();
-  return (
-    <View style={tw`bg-default p-4`}>
-      <Button {...props} />
-    </View>
-  );
-};
-
-export const Variant: Story = {
-  render: (args) => (
-    <View style={tw`flex-col gap-4`}>
-      <ButtonStory {...args} variant={ButtonVariant.Primary} />
-      <ButtonStory {...args} variant={ButtonVariant.Secondary} />
-    </View>
-  ),
-};
-```
+See golden path examples for story implementation patterns.
 
 ### Cross-Platform Consistency
 
@@ -225,213 +94,6 @@ export const Variant: Story = {
 - **ALWAYS** use same enum names and values across platforms
 - **Web**: Interactive Canvas examples, minimal written examples
 - **Native**: Comprehensive written examples, multiple usage patterns
-
-## Platform Patterns
-
-### React Web README (.mdx)
-
-**Structure:**
-
-1. Imports (Storybook blocks + stories)
-2. Title and description
-3. Basic usage code block
-4. Canvas of Default story
-5. Props section (one subsection per prop)
-6. Component API (Controls block)
-
-**Canvas Integration:**
-
-```mdx
-<Canvas of={ComponentStories.Default} />
-<Canvas of={ComponentStories.Variant} />
-```
-
-**Props Documentation:**
-
-```mdx
-### propName
-
-Description of prop purpose and behavior.
-
-Available values:
-
-- `EnumName.Value1` - Description
-- `EnumName.Value2` - Description
-
-| TYPE     | REQUIRED | DEFAULT         |
-| -------- | -------- | --------------- |
-| EnumName | No       | EnumName.Value1 |
-
-<Canvas of={ComponentStories.PropName} />
-```
-
-### React Native README (.md)
-
-**Structure:**
-
-1. Title with Figma link
-2. Image reference
-3. Description
-4. Props sections (organized by category if many props)
-5. Usage section (Basic + Advanced patterns)
-6. Value reference tables (if applicable)
-7. Accessibility notes
-8. Contributing guidelines (optional)
-
-**Usage Examples:**
-
-````md
-## Usage
-
-### Basic Usage
-
-\```tsx
-import { Component } from '@metamask/design-system-react-native';
-
-<Component>Content</Component>
-\```
-
-### With Props
-
-\```tsx
-<Component
-variant={ComponentVariant.Primary}
-onPress={handlePress}
-
-> Content
-> </Component> > \```
-
-### Complex Pattern
-
-\```tsx
-<Box flexDirection={BoxFlexDirection.Column} gap={4}>
-<Component variant={ComponentVariant.Primary}>
-Primary Content
-</Component>
-<Component variant={ComponentVariant.Secondary}>
-Secondary Content
-</Component>
-</Box>
-\```
-````
-
-**Value Tables:**
-
-```md
-## Color Options
-
-| Prop            | Values                                                                             |
-| --------------- | ---------------------------------------------------------------------------------- |
-| color           | `TextColor.TextDefault`, `TextColor.TextAlternative`, `TextColor.TextMuted`        |
-| backgroundColor | `BoxBackgroundColor.BackgroundDefault`, `BoxBackgroundColor.BackgroundAlternative` |
-```
-
-### React Web Stories
-
-**Meta Configuration:**
-
-```tsx
-const meta: Meta<typeof Component> = {
-  title: 'React Components/ComponentName',
-  component: Component,
-  parameters: {
-    docs: {
-      page: README,
-    },
-  },
-  argTypes: {
-    enumProp: {
-      control: 'select',
-      options: Object.keys(EnumName),
-      mapping: EnumName,
-      description: 'Prop description',
-    },
-    textProp: {
-      control: 'text',
-      description: 'Prop description',
-    },
-    booleanProp: {
-      control: 'boolean',
-      description: 'Prop description',
-    },
-  },
-};
-```
-
-**Story Patterns:**
-
-```tsx
-// Default - Minimal args
-export const Default: Story = {
-  args: {
-    children: 'Content',
-  },
-};
-
-// Showcase - Multiple variants side by side
-export const Variant: Story = {
-  render: () => (
-    <div className="space-y-4">
-      <Component variant={EnumName.Value1}>Value1</Component>
-      <Component variant={EnumName.Value2}>Value2</Component>
-    </div>
-  ),
-};
-
-// Feature - Complex usage
-export const WithIcon: Story = {
-  render: (args) => (
-    <Component {...args} startIcon={<Icon name={IconName.Add} />}>
-      With Icon
-    </Component>
-  ),
-};
-```
-
-### React Native Stories
-
-**Meta Configuration:**
-
-```tsx
-const meta: Meta<typeof Component> = {
-  title: 'Components/ComponentName',
-  component: Component,
-  argTypes: {
-    enumProp: {
-      options: EnumName,
-      control: { type: 'select' },
-    },
-    textProp: {
-      control: { type: 'text' },
-    },
-    booleanProp: {
-      control: { type: 'boolean' },
-    },
-  },
-};
-```
-
-**Helper Pattern:**
-
-```tsx
-const ComponentStory: React.FC<ComponentProps> = ({ isInverse, ...props }) => {
-  const tw = useTailwind();
-  return (
-    <View style={tw`${isInverse ? 'bg-primary-default p-4' : 'bg-default'}`}>
-      <Component isInverse={isInverse} {...props} />
-    </View>
-  );
-};
-
-export const Variant: Story = {
-  render: (args) => (
-    <ScrollView style={tw`p-4`}>
-      <ComponentStory {...args} variant={EnumName.Value1} />
-      <ComponentStory {...args} variant={EnumName.Value2} />
-    </ScrollView>
-  ),
-};
-```
 
 ## Commands
 
@@ -454,6 +116,7 @@ yarn test:storybook           # Run Storybook accessibility tests
 
 **React Web:**
 
+- @packages/design-system-react/src/components/ButtonHero/ (MetaMask-specific component description + story structure)
 - @packages/design-system-react/src/components/Button/ (README.mdx + stories)
 - @packages/design-system-react/src/components/Box/ (comprehensive props documentation)
 - @packages/design-system-react/src/components/Text/ (typography examples)
@@ -483,12 +146,17 @@ Use these as starting points when documenting new components. Templates include 
 After adding/updating component documentation, verify:
 
 - [ ] README exists in component directory (.mdx for web, .md for native)
+- [ ] README follows templates exactly: @docs/component-readme-examples/
+- [ ] Component description includes MetaMask-specific use cases and context
+- [ ] Component description explains when/when not to use (not just what it is)
 - [ ] README includes: description, usage, props documentation
 - [ ] Web README uses Canvas blocks for interactive examples
 - [ ] Native README includes comprehensive usage patterns
+- [ ] Cross-platform: documentation is identical across web/native
 - [ ] Stories file exports meta with proper argTypes
-- [ ] Default story exists with minimal args
-- [ ] Showcase stories exist for major props (Variant, Size, etc.)
+- [ ] Default story is first with minimal args and all controls wired up
+- [ ] Story exists for each major prop
+- [ ] Each prop section in README references its story Canvas
 - [ ] No string literals used (all enums)
 - [ ] Web meta includes README in parameters.docs.page
 - [ ] Native stories use helper pattern for platform-specific rendering (if needed)
