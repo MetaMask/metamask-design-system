@@ -10,46 +10,32 @@ Repository-specific conventions and patterns:
 
 See @docs/ai-agents.md for comprehensive strategy explanation.
 
-## Critical Invariants (Never Break These)
+## Monorepo Structure
 
-### TypeScript
+**This is a yarn workspaces monorepo.** Run all commands from the repository root.
 
-- **NEVER** use string literals for component props (variants, sizes, colors)
-- **ALWAYS** use enums - import and use enum values
-- Example:
-  ```tsx
-  // ❌ Wrong
-  <Button variant="primary" size="md" />;
-  // ✅ Correct
-  import {
-    Button,
-    ButtonVariant,
-    ButtonSize,
-  } from '@metamask/design-system-react';
-  <Button variant={ButtonVariant.Primary} size={ButtonSize.Md} />;
-  ```
+### Command Patterns
 
-### Styling
+Two ways to run commands:
 
-- **NEVER** use arbitrary Tailwind values (`bg-[#037DD6]`, `p-[16px]`)
-- **NEVER** use default Tailwind colors (`bg-blue-500`, `text-gray-700`)
-- **ALWAYS** use design tokens only (`bg-primary-default`, `text-error-default`)
-- **ALWAYS** prefer component props over className/twClassName
-- Typography **ALWAYS** via Text component (never `text-sm font-bold` classes)
+1. **Root scripts** (preferred for common tasks)
 
-### Testing
+   ```bash
+   yarn build                 # Builds all packages
+   yarn test                  # Runs all tests
+   yarn lint                  # Lints entire monorepo
+   ```
 
-- **ALWAYS** write tests when creating/modifying components
-- **ALWAYS** include accessibility tests (axe-core via Storybook)
-- Use Testing Library queries (`getByRole` preferred)
+2. **Workspace-specific commands** (for targeting single packages)
+   ```bash
+   yarn workspace @metamask/design-system-react run test
+   yarn workspace @metamask/design-system-react run build
+   yarn workspace @metamask/design-system-react run lint
+   ```
 
-### Component Creation
+**Never** use `cd packages/*/` - always run commands from root using one of the patterns above.
 
-- **ALWAYS** use: `yarn create-component:react --name ComponentName --description "..."`
-- **NEVER** manually create component files
-- Script auto-generates: Component, types, tests, stories, README
-
-## Essential Commands
+### Essential Commands
 
 ```bash
 # Build
@@ -59,7 +45,7 @@ yarn build:types              # TypeScript only
 # Test
 yarn test                     # All tests
 yarn test:storybook           # Accessibility tests
-yarn workspace @metamask/design-system-react run test              # Package-specific
+yarn workspace @metamask/design-system-react run test              # Single package
 
 # Lint
 yarn lint                     # Check all
@@ -73,14 +59,12 @@ yarn storybook                # React web (port 6006)
 yarn storybook:ios            # React Native iOS
 yarn storybook:android        # React Native Android
 
-# Monorepo
+# Dependencies
 yarn constraints --fix        # Fix dependency constraints
-yarn && yarn dedupe           # After adding dependencies
+yarn dedupe                   # Deduplicate dependencies
 ```
 
-## Monorepo Structure
-
-Packages:
+### Packages
 
 - `@metamask/design-tokens` - Foundation tokens
 - `@metamask/design-system-shared` - Shared utilities
@@ -89,30 +73,24 @@ Packages:
 - `@metamask/design-system-tailwind-preset` - Web Tailwind preset
 - `@metamask/design-system-twrnc-preset` - Mobile twrnc preset
 
-**Import pattern:** Use package names, never file paths
+### Apps (Consumer Platforms)
+
+Storybook apps in `apps/` consume packages for development and testing:
+
+- `@metamask/storybook-react` - Web component development (`yarn storybook`)
+- `@metamask/storybook-react-native` - Mobile development (`yarn storybook:ios|android`)
+
+These platforms are for manual testing and component showcase. Visual regression testing is planned but not yet implemented.
+
+**Import using package names, never file paths:**
 
 ```tsx
 // ✅ Correct
 import { Button } from '@metamask/design-system-react';
-import { tokens } from '@metamask/design-tokens';
 
 // ❌ Wrong
 import { Button } from '../../../packages/design-system-react';
 ```
-
-## Platform-Specific
-
-### React (Web)
-
-- Package: `@metamask/design-system-react`
-- Styling: `className` prop with Tailwind utilities
-- Documentation: `README.mdx` with interactive examples
-
-### React Native (Mobile)
-
-- Package: `@metamask/design-system-react-native`
-- Styling: `twClassName` prop + `useTailwind()` hook
-- Documentation: `README.md` with code examples
 
 ## Personal Overrides
 
