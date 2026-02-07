@@ -49,12 +49,21 @@ Use for:
 
 **Story naming conventions:**
 
-- `Default` - Minimal example with all controls
-- `Size` - Size variations showcase
-- `Variant` - Variant showcase
-- `IsFullWidth` - Boolean prop example
-- `StartIconName` / `EndIconName` - Specific prop examples
-- `Disabled` / `Loading` - State examples
+Stories are named after props in PascalCase:
+
+1. `Default` - First story with minimal args and all controls
+2. `{PropName}` - Story named after prop in PascalCase
+
+**Examples from ButtonHero:**
+
+- `size` prop → `Size` story
+- `isFullWidth` prop → `IsFullWidth` story
+- `startIconName` prop → `StartIconName` story
+- `endIconName` prop → `EndIconName` story
+- `isDisabled` prop → `Disabled` story (boolean prefix sometimes shortened)
+- `isLoading` prop → `Loading` story (boolean prefix sometimes shortened)
+
+Each story showcases that specific prop's usage and variations.
 
 **Prop descriptions (aspirational):**
 
