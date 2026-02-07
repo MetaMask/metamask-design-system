@@ -60,32 +60,10 @@ Stories are named after props in PascalCase:
 - `isFullWidth` prop → `IsFullWidth` story
 - `startIconName` prop → `StartIconName` story
 - `endIconName` prop → `EndIconName` story
-- `isDisabled` prop → `Disabled` story (boolean prefix sometimes shortened)
-- `isLoading` prop → `Loading` story (boolean prefix sometimes shortened)
+- `isDisabled` prop → `IsDisabled` story
+- `isLoading` prop → `IsLoading` story
 
 Each story showcases that specific prop's usage and variations.
-
-**Prop descriptions (aspirational):**
-
-Currently most props use generic descriptions ("The size of the component"). Future standard: MetaMask-specific WHEN/WHY guidance.
-
-**Current (generic):**
-
-```tsx
-size: {
-  control: 'select',
-  description: 'Optional prop to control the size of the ButtonHero',
-}
-```
-
-**Aspirational (MetaMask-specific):**
-
-```tsx
-size: {
-  control: 'select',
-  description: 'Size of the button. Use Sm in compact spaces like mobile navigation, Md for standard actions, Lg for hero sections above the fold',
-}
-```
 
 **Core requirements:**
 
