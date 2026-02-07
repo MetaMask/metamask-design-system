@@ -12,33 +12,6 @@ Documentation standards for Storybook stories and README files for React and Rea
 - **Cross-platform**: Keep documentation identical across web/native (same sections, descriptions, examples)
 - **NEVER** duplicate prop type definitions (reference types file instead)
 
-### Component Descriptions
-
-**ALWAYS** include MetaMask-specific context in component descriptions:
-
-- **What it's for**: Specific use cases in MetaMask products
-- **When to use**: Product context (Extension, Mobile, Trade, etc.)
-- **Constraints**: When NOT to use (e.g., "Use sparingly for key actions")
-
-**Example (ButtonHero):**
-
-```md
-A branded, high-impact button reserved for the most important actions in Trade.
-Use sparingly for key user actions that require emphasis and visual prominence.
-
-Use for:
-
-- Swapping tokens
-- Claiming winnings (e.g., Polymarket bets)
-- Claiming rewards
-- Other critical, high-value actions
-```
-
-**Avoid generic descriptions:**
-
-- ❌ "ButtonHero is a button component"
-- ✅ "A branded button reserved for the most important actions in Trade"
-
 ### Storybook Stories
 
 **Story Structure:**
@@ -103,7 +76,7 @@ yarn test:storybook           # Run Storybook accessibility tests
 
 **React Web:**
 
-- @packages/design-system-react/src/components/ButtonHero/ (MetaMask-specific component description + story structure)
+- @packages/design-system-react/src/components/ButtonHero/ (story structure + story naming conventions)
 - @packages/design-system-react/src/components/Button/ (README.mdx + stories)
 - @packages/design-system-react/src/components/Box/ (comprehensive props documentation)
 - @packages/design-system-react/src/components/Text/ (typography examples)
@@ -134,8 +107,6 @@ After adding/updating component documentation, verify:
 
 - [ ] README exists in component directory (.mdx for web, .md for native)
 - [ ] README follows templates exactly: @docs/component-readme-examples/
-- [ ] Component description includes MetaMask-specific use cases and context
-- [ ] Component description explains when/when not to use (not just what it is)
 - [ ] README includes: description, usage, props documentation
 - [ ] Web README uses Canvas blocks for interactive examples
 - [ ] Native README includes comprehensive usage patterns
