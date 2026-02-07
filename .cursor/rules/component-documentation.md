@@ -43,7 +43,6 @@ Each story showcases that specific prop's usage and variations.
 - **ALWAYS** create meta with title, component, parameters, argTypes
 - **ALWAYS** include Default story with minimal args
 - **ALWAYS** create showcase stories for major props (Variant, Size, etc.)
-- **NEVER** use string literals in stories (use enums)
 
 See golden path examples for story implementation patterns.
 
@@ -115,7 +114,6 @@ After adding/updating component documentation, verify:
 - [ ] Default story is first with minimal args and all controls wired up
 - [ ] Story exists for each major prop
 - [ ] Each prop section in README references its story Canvas
-- [ ] No string literals used (all enums)
 - [ ] Web meta includes README in parameters.docs.page
 - [ ] Native stories use helper pattern for platform-specific rendering (if needed)
 - [ ] Cross-platform: same prop names and enum values
