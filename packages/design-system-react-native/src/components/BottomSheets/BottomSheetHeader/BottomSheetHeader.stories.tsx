@@ -1,14 +1,13 @@
-/* eslint-disable react/display-name */
 /* eslint-disable no-console */
 // Third party dependencies.
 import React from 'react';
 
 // Internal dependencies.
-import { default as BottomSheetHeader } from './BottomSheetHeader';
+import BottomSheetHeader from './BottomSheetHeader';
 import { BottomSheetHeaderVariant } from './BottomSheetHeader.types';
 
 const BottomSheetHeaderMeta = {
-  title: 'Component Library / BottomSheets / BottomSheetHeader',
+  title: 'Components/BottomSheets/BottomSheetHeader',
   component: BottomSheetHeader,
 };
 export default BottomSheetHeaderMeta;
@@ -26,7 +25,7 @@ export const Default = {
 };
 
 export const Variant = {
-  render: function Render() {
+  render: () => {
     return (
       <>
         <BottomSheetHeader variant={BottomSheetHeaderVariant.Compact}>

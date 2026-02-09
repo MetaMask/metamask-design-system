@@ -9,7 +9,7 @@ import HeaderBase from './HeaderBase';
 import { HeaderBaseVariant } from './HeaderBase.types';
 
 const HeaderBaseMeta = {
-  title: 'Component Library / HeaderBase',
+  title: 'Components/HeaderBase',
   component: HeaderBase,
   argTypes: {
     children: {

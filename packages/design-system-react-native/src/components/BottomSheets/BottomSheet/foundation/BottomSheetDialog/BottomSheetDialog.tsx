@@ -1,6 +1,12 @@
 /* eslint-disable react/prop-types */
 
 // Third party dependencies.
+import {
+  Theme,
+  useTailwind,
+  useTheme,
+} from '@metamask/design-system-twrnc-preset';
+import { lightTheme, darkTheme } from '@metamask/design-tokens';
 import React, {
   forwardRef,
   useCallback,
@@ -32,16 +38,12 @@ import {
 } from 'react-native-safe-area-context';
 import { debounce } from 'lodash';
 
-// External dependencies.
-import { useStyles } from '../../../../../hooks';
-
 // Internal dependencies.
 import {
   DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
   DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD,
   DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION,
 } from './BottomSheetDialog.constants';
-import styleSheet from './BottomSheetDialog.styles';
 import {
   BottomSheetDialogRef,
   BottomSheetDialogProps,
@@ -64,17 +66,18 @@ const BottomSheetDialog = forwardRef<
     },
     ref,
   ) => {
+    const tw = useTailwind();
+    const currentTheme = useTheme();
+    const shadowLg =
+      currentTheme === Theme.Light
+        ? lightTheme.shadows.size.lg
+        : darkTheme.shadows.size.lg;
+
     const { top: screenTopPadding, bottom: screenBottomPadding } =
       useSafeAreaInsets();
     const { y: frameY, height: screenHeight } = useSafeAreaFrame();
 
     const maxSheetHeight = screenHeight - screenTopPadding;
-    const { styles } = useStyles(styleSheet, {
-      maxSheetHeight,
-      screenBottomPadding,
-      style,
-      isFullscreen,
-    });
     // X and Y values start on top left of the DIALOG
     // currentYOffset will be used to animate the Y position of the Dialog
     const currentYOffset = useSharedValue(screenHeight);
@@ -215,10 +218,29 @@ const BottomSheetDialog = forwardRef<
       ],
     }));
 
-    const combinedSheetStyle = useMemo(
-      () => [styles.sheet, animatedSheetStyle],
+    const sheetStyle = useMemo(
+      () => [
+        tw`bg-default rounded-t-3xl overflow-hidden border border-muted`,
+        {
+          maxHeight: maxSheetHeight,
+          paddingBottom: Platform.select({
+            ios: screenBottomPadding,
+            macos: screenBottomPadding,
+            default: screenBottomPadding + 16,
+          }),
+          ...(isFullscreen && { height: maxSheetHeight }),
+          ...shadowLg,
+        },
+        style,
+      ],
       // eslint-disable-next-line
-      [styles.sheet],
+      [tw, maxSheetHeight, screenBottomPadding, isFullscreen, shadowLg, style],
+    );
+
+    const combinedSheetStyle = useMemo(
+      () => [...sheetStyle, animatedSheetStyle],
+      // eslint-disable-next-line
+      [sheetStyle],
     );
 
     useImperativeHandle(ref, () => ({
@@ -228,7 +250,7 @@ const BottomSheetDialog = forwardRef<
 
     return (
       <KeyboardAvoidingView
-        style={styles.base}
+        style={tw`absolute bottom-0 inset-x-0`}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         keyboardVerticalOffset={
           Platform.OS === 'ios' ? -screenBottomPadding : frameY
@@ -245,8 +267,8 @@ const BottomSheetDialog = forwardRef<
             style={combinedSheetStyle}
           >
             {isInteractable && (
-              <View style={styles.notchWrapper}>
-                <View style={styles.notch} />
+              <View style={tw`self-stretch items-center p-1`}>
+                <View style={tw`h-1 w-10 rounded-sm bg-border-muted`} />
               </View>
             )}
             {children}

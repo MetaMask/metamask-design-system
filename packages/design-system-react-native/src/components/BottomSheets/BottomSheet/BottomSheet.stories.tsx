@@ -2,25 +2,19 @@
 import React, { useState } from 'react';
 
 // External dependencies.
-import {
-  Box,
-  BoxAlignItems,
-  BoxJustifyContent,
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  Text,
-  Button,
-  ButtonVariant,
-} from '../..';
 
 // Internal dependencies.
-import { default as BottomSheet } from './BottomSheet';
-import { BottomSheetProps, BottomSheetRef } from './BottomSheet.types';
-import BottomSheetHeader from '../BottomSheetHeader';
+import { Box, BoxAlignItems, BoxJustifyContent } from '../../Box';
+import { Button, ButtonVariant } from '../../Button';
+import { Text } from '../../Text';
 import BottomSheetFooter from '../BottomSheetFooter';
-import { ButtonVariants } from '../../Buttons/Button';
+import BottomSheetHeader from '../BottomSheetHeader';
+
+import BottomSheet from './BottomSheet';
+import { BottomSheetProps, BottomSheetRef } from './BottomSheet.types';
 
 const BottomSheetMeta = {
-  title: 'Component Library / BottomSheets / BottomSheet',
+  title: 'Components/BottomSheets/BottomSheet',
   component: BottomSheet,
   argTypes: {
     isInteractable: {
@@ -32,11 +26,11 @@ const BottomSheetMeta = {
 export default BottomSheetMeta;
 
 export const Default = {
-  render: function Render(
+  render: (
     args: JSX.IntrinsicAttributes &
       BottomSheetProps &
       React.RefAttributes<BottomSheetRef>,
-  ) {
+  ) => {
     const [isVisible, setIsVisible] = useState(false);
 
     const openBottomSheet = () => setIsVisible(true);
@@ -75,13 +69,13 @@ export const Default = {
             <BottomSheetFooter
               buttonPropsArray={[
                 {
-                  label: 'Cancel',
-                  variant: ButtonVariants.Secondary,
+                  children: 'Cancel',
+                  variant: ButtonVariant.Secondary,
                   onPress: closeBottomSheet,
                 },
                 {
-                  label: 'Confirm',
-                  variant: ButtonVariants.Primary,
+                  children: 'Confirm',
+                  variant: ButtonVariant.Primary,
                   onPress: closeBottomSheet,
                 },
               ]}

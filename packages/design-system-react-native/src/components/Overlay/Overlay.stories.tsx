@@ -8,7 +8,7 @@ import { BoxBackgroundColor } from '../../types';
 import OverlayComponent from './Overlay';
 
 const OverlayMeta = {
-  title: 'Component Library / Overlay',
+  title: 'Components/Overlay',
   component: OverlayComponent,
   argTypes: {
     color: {

@@ -7,7 +7,7 @@ import { SAMPLE_BOTTOMSHEETFOOTER_PROPS } from './BottomSheetFooter.constants';
 import { ButtonsAlignment } from './BottomSheetFooter.types';
 
 const BottomSheetFooterMeta = {
-  title: 'Component Library / BottomSheets / BottomSheetFooter',
+  title: 'Components/BottomSheets/BottomSheetFooter',
   component: BottomSheetFooter,
   argTypes: {
     buttonsAlignment: {

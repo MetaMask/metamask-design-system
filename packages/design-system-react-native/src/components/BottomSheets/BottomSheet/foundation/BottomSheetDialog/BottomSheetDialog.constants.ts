@@ -1,7 +1,5 @@
-/* eslint-disable import/prefer-default-export */
-
 // External dependencies.
-import { AnimationDuration } from '../../../../../constants/animation.constants';
+import { AnimationDuration } from '@metamask/design-tokens';
 
 // Defaults
 /**
