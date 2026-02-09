@@ -3178,7 +3178,6 @@ __metadata:
     react-native-gesture-handler: "npm:~2.12.0"
     react-native-jazzicon: "npm:^0.1.2"
     react-native-reanimated: "npm:~3.3.0"
-    react-native-safe-area-context: "npm:~5.6.2"
     react-native-svg: "npm:^15.10.1"
     react-native-svg-transformer: "npm:^1.5.0"
     react-test-renderer: "npm:^18.3.1"
@@ -3475,7 +3474,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     react-native-gesture-handler: "npm:~2.12.0"
     react-native-reanimated: "npm:~3.3.0"
-    react-native-safe-area-context: "npm:^4.14.0"
+    react-native-safe-area-context: "npm:4.6.3"
     react-native-svg-transformer: "npm:^1.5.0"
     typescript: "npm:~5.2.2"
     uuid: "npm:^3.0.0"
@@ -17846,23 +17845,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^4.14.0":
-  version: 4.14.1
-  resolution: "react-native-safe-area-context@npm:4.14.1"
+"react-native-safe-area-context@npm:4.6.3":
+  version: 4.6.3
+  resolution: "react-native-safe-area-context@npm:4.6.3"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/20f744176b22b67b08b061ac8ea4d56c11539da672e80f766e48a8304a0a19c9ba0c9a903d92b94631888dd827701785b5ac49cec61c2994262708a479701a8d
-  languageName: node
-  linkType: hard
-
-"react-native-safe-area-context@npm:~5.6.2":
-  version: 5.6.2
-  resolution: "react-native-safe-area-context@npm:5.6.2"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10/880d87ee60119321b366eef2c151ecefe14f5bc0d39cf5cfbfb167684e571d3dae2600ee19b9bc8521f5726eb285abecaa7aafb1a3b213529dafbac24703d302
+  checksum: 10/a37d169e5ebee93c67a42a10580ca1180a6fea6c5705be82bc1d5af22eec086245a19f417e86b46e1daf5950ef5779e7daa8b3ca106d441f11d60cf5142b3ab2
   languageName: node
   linkType: hard
 
