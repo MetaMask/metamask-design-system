@@ -10,7 +10,6 @@ Documentation standards for Storybook stories and README files for React and Rea
 - **React Native**: Use `.md` format with comprehensive static examples
 - **ALWAYS** follow templates exactly: @docs/component-readme-examples/
 - **Cross-platform**: Keep documentation identical across web/native (same sections, descriptions, examples)
-- **NEVER** duplicate prop type definitions (reference types file instead)
 
 ### Storybook Stories
 
