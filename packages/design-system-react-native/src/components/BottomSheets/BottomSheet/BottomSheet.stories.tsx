@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/display-name */
 // Third party dependencies.
 import React, { useState } from 'react';
 
@@ -12,7 +10,7 @@ import {
   Text,
   Button,
   ButtonVariant,
-} from '@metamask/design-system-react-native';
+} from '../..';
 
 // Internal dependencies.
 import { default as BottomSheet } from './BottomSheet';

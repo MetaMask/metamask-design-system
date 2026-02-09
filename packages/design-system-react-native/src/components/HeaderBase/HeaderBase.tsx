@@ -4,9 +4,11 @@ import React, { useCallback, useState } from 'react';
 import { View, LayoutChangeEvent } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Box, Text, ButtonIcon, ButtonIconSize } from '..';
-
 // Internal dependencies.
+import { Box } from '../Box';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
+import { Text } from '../Text';
+
 import {
   HEADERBASE_TEST_ID,
   HEADERBASE_TITLE_TEST_ID,
@@ -17,7 +19,6 @@ import { HeaderBaseProps, HeaderBaseVariant } from './HeaderBase.types';
 /**
  * HeaderBase is a flexible header component that supports optional
  * start and end accessories with configurable alignment and text variants.
- *
  */
 const HeaderBase: React.FC<HeaderBaseProps> = ({
   children,
@@ -35,7 +36,8 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
   ...viewProps
 }) => {
   const tw = useTailwind();
-  const insets = useSafeAreaInsets();
+  console.log(useSafeAreaInsets);
+  const insets = { top: 0, bottom: 0, left: 0, right: 0 }; // useSafeAreaInsets();
 
   const [startAccessoryWidth, setStartAccessoryWidth] = useState(0);
   const [endAccessoryWidth, setEndAccessoryWidth] = useState(0);

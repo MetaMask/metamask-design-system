@@ -1,4 +1,7 @@
+// External dependencies.
 import { HeaderBaseVariant } from '../../HeaderBase/HeaderBase.types';
+
+// Internal dependencies.
 import { BottomSheetHeaderVariant } from './BottomSheetHeader.types';
 
 // Mapping between BottomSheetHeaderVariant and HeaderBaseVariant

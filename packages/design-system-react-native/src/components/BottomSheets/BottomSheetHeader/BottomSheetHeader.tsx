@@ -1,18 +1,13 @@
-/* eslint-disable react/prop-types */
-
 // Third party dependencies.
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
 // External dependencies.
-import { useStyles } from '../../../hooks';
+import { ButtonIcon, ButtonIconSize } from '../../ButtonIcon';
 import HeaderBase from '../../HeaderBase';
-
-import ButtonIcon, { ButtonIconSizes } from '../../Buttons/ButtonIcon';
-import { IconName, IconColor } from '../../Icons/Icon';
+import { IconName } from '../../Icon';
 
 // Internal dependencies.
-import styleSheet from './BottomSheetHeader.styles';
-
 import { BOTTOM_SHEET_HEADER_VARIANT_MAP } from './BottomSheetHeader.constants';
 import {
   BottomSheetHeaderProps,
@@ -29,13 +24,13 @@ const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   variant = BottomSheetHeaderVariant.Compact,
   ...props
 }) => {
-  const { styles } = useStyles(styleSheet, { style });
+  const tw = useTailwind();
+
   const startAccessory = onBack && (
     <ButtonIcon
       iconName={IconName.ArrowLeft}
-      iconColor={IconColor.Default}
       onPress={onBack}
-      size={ButtonIconSizes.Lg}
+      size={ButtonIconSize.Lg}
       {...backButtonProps}
     />
   );
@@ -43,9 +38,8 @@ const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   const endAccessory = onClose && (
     <ButtonIcon
       iconName={IconName.Close}
-      iconColor={IconColor.Default}
       onPress={onClose}
-      size={ButtonIconSizes.Lg}
+      size={ButtonIconSize.Lg}
       {...closeButtonProps}
     />
   );
@@ -54,7 +48,7 @@ const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
 
   return (
     <HeaderBase
-      style={styles.base}
+      style={[tw`px-4`, style]}
       startAccessory={startAccessory}
       endAccessory={endAccessory}
       variant={headerBaseVariant}

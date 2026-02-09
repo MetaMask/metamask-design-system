@@ -49,7 +49,7 @@ export type {
   BadgeWrapperCustomPosition,
 } from './BadgeWrapper';
 
-export {} from './BottomSheets';
+// export {} from './BottomSheets';
 
 export { Blockies } from './temp-components/Blockies';
 export type { BlockiesProps } from './temp-components/Blockies';
