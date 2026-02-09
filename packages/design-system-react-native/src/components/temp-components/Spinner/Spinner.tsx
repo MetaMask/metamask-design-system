@@ -23,6 +23,7 @@ export const Spinner = ({
   loadingTextProps,
   twClassName = '',
   style,
+  testID = 'spinner',
   ...props
 }: SpinnerProps) => {
   const tw = useTailwind();
@@ -66,7 +67,7 @@ export const Spinner = ({
     <View
       {...props}
       style={[tw`${twContainerClassNames}`, style]}
-      testID="spinner"
+      testID={testID}
     >
       <Animated.View style={[animatedStyle]} testID="spinner-animated-view">
         <Icon {...finalSpinnerIconProps} />
