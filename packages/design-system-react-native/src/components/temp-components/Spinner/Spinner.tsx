@@ -23,7 +23,6 @@ export const Spinner = ({
   loadingTextProps,
   twClassName = '',
   style,
-  testID,
   ...props
 }: SpinnerProps) => {
   const tw = useTailwind();
@@ -64,11 +63,7 @@ export const Spinner = ({
     `flex-row items-center gap-x-2 ${twClassName}`.trim();
 
   return (
-    <View
-      {...props}
-      style={[tw`${twContainerClassNames}`, style]}
-      testID={testID}
-    >
+    <View {...props} style={[tw`${twContainerClassNames}`, style]}>
       <Animated.View style={[animatedStyle]} testID="spinner-animated-view">
         <Icon {...finalSpinnerIconProps} />
       </Animated.View>
