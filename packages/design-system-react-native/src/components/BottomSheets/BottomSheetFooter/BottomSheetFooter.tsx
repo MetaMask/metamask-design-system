@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 // Third party dependencies.
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';

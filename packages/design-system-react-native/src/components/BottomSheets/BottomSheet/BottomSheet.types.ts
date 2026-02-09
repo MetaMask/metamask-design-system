@@ -13,6 +13,11 @@ export type BottomSheetProps = {
   shouldNavigateBack?: boolean;
 
   /**
+   * Optional callback that get's called `shouldNavigateBack` is true and sheet gets closed.
+   */
+  goBack: () => void;
+
+  /**
    * Optional boolean that indicates if the KeyboardAvoidingView is enabled.
    *
    * @default true

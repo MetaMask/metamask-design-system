@@ -1,8 +1,5 @@
-/* eslint-disable react/prop-types */
-
 // Third party dependencies.
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { useNavigation } from '@react-navigation/native';
 import React, {
   forwardRef,
   useCallback,
@@ -36,6 +33,7 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
       children,
       onClose,
       onOpen,
+      goBack,
       style,
       isInteractable = true,
       shouldNavigateBack = true,
@@ -50,7 +48,6 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     const bottomSheetDialogRef = useRef<BottomSheetDialogRef>(null);
     const { bottom: screenBottomPadding } = useSafeAreaInsets();
     const { y: frameY } = useSafeAreaFrame();
-    const navigation = useNavigation();
 
     const onOpenCB = useCallback(() => {
       onOpen?.(Boolean(postCallback.current));
@@ -58,10 +55,10 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     }, [onOpen]);
 
     const onCloseCB = useCallback(() => {
-      shouldNavigateBack && navigation.goBack();
+      shouldNavigateBack && goBack();
       onClose?.(Boolean(postCallback.current));
       postCallback.current?.();
-    }, [navigation, onClose, shouldNavigateBack]);
+    }, [onClose, shouldNavigateBack]);
 
     // Dismiss the sheet when Android back button is pressed.
     useEffect(() => {
