@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import type { AvatarGroupSize, AvatarGroupVariant } from '../../types';
+import type { AvatarGroupSize } from '../../types';
 import type { AvatarAccountProps } from '../AvatarAccount';
 import type { AvatarBaseProps } from '../AvatarBase';
 import type { AvatarFaviconProps } from '../AvatarFavicon';
@@ -47,7 +47,7 @@ type BaseAvatarGroupProps = {
 export type AvatarGroupProps = BaseAvatarGroupProps &
   (
     | {
-        variant: AvatarGroupVariant.Account;
+        variant: 'Account';
         /**
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
@@ -55,7 +55,7 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
         avatarPropsArr: AvatarAccountProps[];
       }
     | {
-        variant: AvatarGroupVariant.Favicon;
+        variant: 'Favicon';
         /**
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
@@ -63,7 +63,7 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
         avatarPropsArr: AvatarFaviconProps[];
       }
     | {
-        variant: AvatarGroupVariant.Network;
+        variant: 'Network';
         /**
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
@@ -71,7 +71,7 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
         avatarPropsArr: AvatarNetworkProps[];
       }
     | {
-        variant: AvatarGroupVariant.Token;
+        variant: 'Token';
         /**
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
