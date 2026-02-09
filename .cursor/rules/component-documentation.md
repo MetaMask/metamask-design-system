@@ -109,7 +109,6 @@ After adding/updating component documentation, verify:
 - [ ] Story exists for each major prop
 - [ ] Each prop section in README references its story Canvas
 - [ ] Web meta includes README in parameters.docs.page
-- [ ] Native stories use helper pattern for platform-specific rendering (if needed)
-- [ ] Cross-platform: same prop names and enum values
+- [ ] Cross-platform: same prop names and types
 - [ ] Storybook builds without errors: `yarn build-storybook`
 - [ ] Accessibility tests pass: `yarn test:storybook`
