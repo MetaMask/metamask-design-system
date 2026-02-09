@@ -66,9 +66,8 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/BadgeNetwork/BadgeNetwork.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeNetwork/BadgeNetwork.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.stories.tsx"),
-    "./../../packages/design-system-react-native/src/components/BottomSheets/BottomSheet/BottomSheet.stories.tsx": require("../../../packages/design-system-react-native/src/components/BottomSheets/BottomSheet/BottomSheet.stories.tsx"),
-    "./../../packages/design-system-react-native/src/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.stories.tsx": require("../../../packages/design-system-react-native/src/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BottomSheets/BottomSheetHeader/BottomSheetHeader.stories.tsx": require("../../../packages/design-system-react-native/src/components/BottomSheets/BottomSheetHeader/BottomSheetHeader.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.stories.tsx": require("../../../packages/design-system-react-native/src/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Box/Box.stories.tsx": require("../../../packages/design-system-react-native/src/components/Box/Box.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/Button.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/Button.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx"),
@@ -89,8 +88,8 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
-    "./stories/Backgrounds.stories.tsx": require("../stories/Backgrounds.stories.tsx"),
-    "./stories/WalletHome.stories.tsx": require("../stories/WalletHome.stories.tsx"),
+    // "./stories/Backgrounds.stories.tsx": require("../stories/Backgrounds.stories.tsx"),
+    // "./stories/WalletHome.stories.tsx": require("../stories/WalletHome.stories.tsx"),
   };
 };
 

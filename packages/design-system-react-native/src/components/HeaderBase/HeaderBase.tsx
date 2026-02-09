@@ -36,8 +36,7 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
   ...viewProps
 }) => {
   const tw = useTailwind();
-  console.log(useSafeAreaInsets);
-  const insets = { top: 0, bottom: 0, left: 0, right: 0 }; // useSafeAreaInsets();
+  const insets = useSafeAreaInsets();
 
   const [startAccessoryWidth, setStartAccessoryWidth] = useState(0);
   const [endAccessoryWidth, setEndAccessoryWidth] = useState(0);
