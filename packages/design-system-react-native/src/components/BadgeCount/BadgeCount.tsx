@@ -29,10 +29,10 @@ export const BadgeCount = ({
     justify-center
     self-start
     ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[size]}
-    ${twClassName}`;
+    ${twClassName}`.trim();
 
   return (
-    <View style={[tw`${twContainerClassNames}`, style]} {...props}>
+    <View {...props} style={[tw`${twContainerClassNames}`, style]}>
       <Text
         variant={MAP_BADGECOUNT_SIZE_TEXTVARIANT[size as BadgeCountSize]}
         color={TextColor.ErrorInverse}

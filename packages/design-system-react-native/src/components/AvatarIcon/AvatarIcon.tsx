@@ -30,15 +30,15 @@ export const AvatarIcon = ({
   const twContainerClassNames = `
     ${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity]}
     ${twClassName}
-  `;
+  `.trim();
 
   return (
     <AvatarBase
       size={size}
       shape={shape}
-      style={[tw`${twContainerClassNames}`, style]}
       accessibilityRole="image"
       {...props}
+      style={[tw`${twContainerClassNames}`, style]}
     >
       <Icon
         name={iconName}

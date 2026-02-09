@@ -100,8 +100,10 @@ export const BadgeWrapper = ({
     customPosition,
   ]);
 
+  const twContainerClassNames = `relative self-start ${twClassName}`.trim();
+
   return (
-    <View style={[tw`relative self-start ${twClassName}`, style]} {...props}>
+    <View {...props} style={[tw`${twContainerClassNames}`, style]}>
       <View onLayout={getAnchorSize} {...childrenContainerProps}>
         {children}
       </View>

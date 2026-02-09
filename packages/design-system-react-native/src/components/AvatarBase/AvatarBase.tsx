@@ -35,10 +35,10 @@ export const AvatarBase = ({
     ${hasBorder ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size] : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size]}
     ${hasBorder ? TWCLASSMAP_AVATARBASE_SIZE_BORDER[size] : ''}
     ${twClassName}
-  `;
+  `.trim();
 
   return (
-    <View style={[tw`${twContainerClassNames}`, style]} {...props}>
+    <View {...props} style={[tw`${twContainerClassNames}`, style]}>
       {fallbackText ? (
         <Text
           color={TextColor.TextMuted}

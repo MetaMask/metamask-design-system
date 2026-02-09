@@ -25,9 +25,9 @@ export const BadgeIcon = ({
 
   return (
     <View
-      style={[tw`${twContainerClassNames}`, style]}
       accessibilityRole="image"
       {...props}
+      style={[tw`${twContainerClassNames}`, style]}
     >
       <Icon
         color={IconColor.PrimaryInverse}

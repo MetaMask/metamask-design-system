@@ -51,7 +51,7 @@ export const Box = ({
   ...props
 }: BoxProps) => {
   const tw = useTailwind();
-  const twContainerClassNames = tw`
+  const twContainerClassNamesStr = `
     flex
     ${flexDirection ?? ''} 
     ${flexWrap ?? ''} 
@@ -78,7 +78,7 @@ export const Box = ({
     ${twClassName}`;
 
   return (
-    <View style={[twContainerClassNames, style]} {...props}>
+    <View style={[tw`${twContainerClassNamesStr.trim()}`, style]} {...props}>
       {children}
     </View>
   );

@@ -43,7 +43,7 @@ export const ButtonIcon = ({
     ${isFloating ? 'rounded-full' : 'rounded-lg'}
     ${backgroundColor}
     ${isDisabled ? 'opacity-50' : 'opacity-100'}
-    ${twClassName}`;
+    ${twClassName}`.trim();
 
   const twIconColorClassNames =
     isInverse || isFloating ? 'text-primary-inverse' : 'text-icon-default';
@@ -64,9 +64,9 @@ export const ButtonIcon = ({
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
       accessible
-      style={[tw`${twContainerClassNames}`, style]}
       testID="button-icon"
       {...props}
+      style={[tw`${twContainerClassNames}`, style]}
     >
       <Icon
         name={iconName}

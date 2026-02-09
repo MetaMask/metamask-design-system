@@ -28,6 +28,7 @@ export const generateIconClassNames = ({
   size = IconSize.Md,
   twClassName = '',
 }: Partial<IconProps>): string => {
-  const mergedClassnames = `${color} w-[${size}px] h-[${size}px] ${twClassName}`;
+  const mergedClassnames =
+    `${color} w-[${size}px] h-[${size}px] ${twClassName}`.trim();
   return mergedClassnames;
 };
