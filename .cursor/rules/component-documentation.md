@@ -24,16 +24,7 @@ Documentation standards for Storybook stories and README files for React and Rea
 Stories are named after props in PascalCase:
 
 1. `Default` - First story with minimal args and all controls
-2. `{PropName}` - Story named after prop in PascalCase
-
-**Examples from ButtonHero:**
-
-- `size` prop → `Size` story
-- `isFullWidth` prop → `IsFullWidth` story
-- `startIconName` prop → `StartIconName` story
-- `endIconName` prop → `EndIconName` story
-- `isDisabled` prop → `IsDisabled` story
-- `isLoading` prop → `IsLoading` story
+2. `{PropName}` - Story named after prop in PascalCase (e.g., `size` → `Size`, `isDisabled` → `IsDisabled`)
 
 Each story showcases that specific prop's usage and variations.
 
