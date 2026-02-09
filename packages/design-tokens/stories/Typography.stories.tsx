@@ -1,5 +1,5 @@
 import { Text } from '@metamask/design-system-react';
-import type { StoryFn, Meta } from '@storybook/react';
+import type { StoryFn, Meta } from '@storybook/react-vite';
 import React from 'react';
 
 import { typography } from '../src/js/typography';
@@ -531,7 +531,7 @@ export const FontWeight: StoryFn<typeof Text> = () => {
     <>
       <Text style={styles.regular}>Regular 400</Text>
       <Text style={styles.medium}>Medium 500</Text>
-      <Text style={styles.bold}>Bold 600</Text>
+      <Text style={styles.bold}>Bold 700</Text>
     </>
   );
 };

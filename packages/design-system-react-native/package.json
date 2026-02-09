@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-react-native",
-  "version": "0.4.1",
+  "version": "0.5.1",
   "description": "Design System React Native",
   "keywords": [
     "MetaMask",
@@ -57,10 +57,10 @@
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.23.3",
     "@figma/code-connect": "^1.0.0",
-    "@metamask/auto-changelog": "^5.1.0",
+    "@metamask/auto-changelog": "^5.3.1",
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
-    "@metamask/utils": "^11.8.1",
+    "@metamask/utils": "^11.9.0",
     "@storybook/react-native": "6.5",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/react-native": "^12.8.1",
@@ -87,9 +87,9 @@
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
-    "@metamask/design-system-twrnc-preset": "^0.2.0",
+    "@metamask/design-system-twrnc-preset": "^0.3.0",
     "@metamask/design-tokens": "^8.1.0",
-    "@metamask/utils": "^11.8.1",
+    "@metamask/utils": "^11.9.0",
     "react": ">=18.2.0",
     "react-native": ">=0.72.0",
     "react-native-gesture-handler": ">=1.10.3",

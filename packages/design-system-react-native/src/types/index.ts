@@ -454,9 +454,9 @@ export enum TextColor {
  */
 export enum FontWeight {
   /**
-   * Weight - 600
+   * Weight - 700
    */
-  Bold = '600',
+  Bold = '700',
   /**
    * Weight - 500
    */
@@ -572,6 +572,7 @@ export enum IconName {
   AddCircle = 'AddCircle',
   AddSquare = 'AddSquare',
   Add = 'Add',
+  AfterHours = 'AfterHours',
   Ai = 'Ai',
   AlternateEmail = 'AlternateEmail',
   AppleLogo = 'AppleLogo',

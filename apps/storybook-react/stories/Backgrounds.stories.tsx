@@ -13,7 +13,7 @@ import {
   ButtonVariant,
   TextButton,
 } from '@metamask/design-system-react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 const meta: Meta = {
@@ -29,7 +29,6 @@ const ButtonComponents = () => (
     <Button variant={ButtonVariant.Primary}>Primary Button</Button>
     <Button variant={ButtonVariant.Secondary}>Secondary Button</Button>
     <Button variant={ButtonVariant.Tertiary}>Tertiary Button</Button>
-    <TextButton>Text Button</TextButton>
   </Box>
 );
 
@@ -63,6 +62,7 @@ const TextComponents = () => (
         <Icon name={IconName.Info} color={IconColor.IconMuted} />
         <Text color={TextColor.TextMuted}>Text Muted and Icon Muted</Text>
       </Box>
+      <TextButton>Text Button</TextButton>
     </Box>
   </>
 );

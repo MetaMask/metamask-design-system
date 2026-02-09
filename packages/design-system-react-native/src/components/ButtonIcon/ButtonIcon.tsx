@@ -40,7 +40,7 @@ export const ButtonIcon = ({
   const twContainerClassNames = `
     items-center justify-center
     ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size]}
-    ${isFloating ? 'rounded-full' : 'rounded-sm'}
+    ${isFloating ? 'rounded-full' : 'rounded-lg'}
     ${backgroundColor}
     ${isDisabled ? 'opacity-50' : 'opacity-100'}
     ${twClassName}`;
