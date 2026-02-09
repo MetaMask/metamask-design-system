@@ -41,10 +41,6 @@ export type ImageOrSvgBaseProps = {
    */
   style?: StyleProp<ImageStyle>;
   /**
-   * Optional prop to add twrnc overriding classNames.
-   */
-  twClassName?: string;
-  /**
    * Additional props to pass to the Image component, excluding
    * the 'source' prop (which is handled separately).
    */
