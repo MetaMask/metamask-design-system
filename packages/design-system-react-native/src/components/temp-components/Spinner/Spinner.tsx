@@ -23,7 +23,7 @@ export const Spinner = ({
   loadingTextProps,
   twClassName = '',
   style,
-  testID = 'spinner',
+  testID,
   ...props
 }: SpinnerProps) => {
   const tw = useTailwind();
