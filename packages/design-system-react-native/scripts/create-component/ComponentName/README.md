@@ -41,12 +41,12 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { ComponentName } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<ComponentName twClassName="bg-primary-100">
+<ComponentName twClassName="mt-4">
   <Text>Custom Background</Text>
 </ComponentName>
 
 // Override default styles
-<ComponentName twClassName="!bg-error-100">
+<ComponentName twClassName="!bg-error-default">
   <Text>Override Background</Text>
 </ComponentName>
 ```
