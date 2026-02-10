@@ -22,10 +22,10 @@ describe('AvatarIcon', () => {
       TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[
         AvatarIconSeverity.Neutral
       ];
-    const expectedIconBgStyle = tw`${bgClass}`;
+    const expectedIconBgStyle = tw.style(bgClass);
 
     const expectedIconColor =
-      tw`${MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral]}`
+      tw.style(MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral])
         .color;
 
     const { getByTestId } = render(
@@ -51,10 +51,10 @@ describe('AvatarIcon', () => {
       TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[
         AvatarIconSeverity.Neutral
       ];
-    const expectedIconBgStyle = tw`${bgClass} bg-default`;
+    const expectedIconBgStyle = tw.style(bgClass, 'bg-default');
 
     const expectedIconColor =
-      tw`${MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral]}`
+      tw.style(MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral])
         .color;
     const customStyle = { margin: 10 };
 
@@ -84,10 +84,10 @@ describe('AvatarIcon', () => {
       const tw = result.current;
 
       const bgClass = TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity];
-      const expectedIconBgStyle = tw`${bgClass}`;
+      const expectedIconBgStyle = tw.style(bgClass);
 
       const expectedIconColor =
-        tw`${MAP_AVATARICON_SEVERITY_ICONCOLOR[severity]}`.color;
+        tw.style(MAP_AVATARICON_SEVERITY_ICONCOLOR[severity]).color;
 
       const { getByTestId } = render(
         <AvatarIcon

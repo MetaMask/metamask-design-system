@@ -4,9 +4,11 @@ import { Text as RNText } from 'react-native';
 
 import { FontFamily, FontStyle, TextVariant, TextColor } from '../../types';
 
-import { MAP_TEXT_VARIANT_FONTWEIGHT } from './Text.constants';
+import {
+  MAP_TEXT_VARIANT_FONTWEIGHT,
+  TWCLASSMAP_TEXT_FONTWEIGHT,
+} from './Text.constants';
 import type { TextProps } from './Text.types';
-import { generateTextClassNames } from './Text.utilities';
 
 export const Text: React.FC<TextProps> = ({
   variant = TextVariant.BodyMd,
@@ -16,28 +18,34 @@ export const Text: React.FC<TextProps> = ({
   fontWeight,
   fontFamily = FontFamily.Default,
   fontStyle = FontStyle.Normal,
-  twClassName = '',
+  twClassName,
   ...props
 }) => {
   const tw = useTailwind();
-  const finalFontWeight = fontWeight || MAP_TEXT_VARIANT_FONTWEIGHT[variant];
+  const finalFontWeight = fontWeight ?? MAP_TEXT_VARIANT_FONTWEIGHT[variant];
 
-  const mergedClassnames = useMemo(() => {
-    return generateTextClassNames({
-      variant,
-      color,
-      fontWeight: finalFontWeight,
-      fontFamily,
-      fontStyle,
-      twClassName,
-    });
-  }, [variant, color, finalFontWeight, fontFamily, fontStyle, twClassName]);
+  const textStyle = useMemo(() => {
+    const isItalic = fontStyle === FontStyle.Italic;
+    const fontSuffix = `${TWCLASSMAP_TEXT_FONTWEIGHT[finalFontWeight]}${
+      isItalic && fontFamily === FontFamily.Default ? '-italic' : ''
+    }`;
+    const fontClass = `font-${fontFamily}${fontSuffix}`;
+    return tw.style(`text-${variant}`, fontClass, color, twClassName);
+  }, [
+    variant,
+    color,
+    finalFontWeight,
+    fontFamily,
+    fontStyle,
+    twClassName,
+    tw,
+  ]);
 
   return (
     <RNText
       accessibilityRole="text"
       {...props}
-      style={[tw`${mergedClassnames}`, style]}
+      style={[textStyle, style]}
     >
       {children}
     </RNText>

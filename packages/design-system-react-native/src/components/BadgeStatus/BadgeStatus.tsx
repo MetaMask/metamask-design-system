@@ -14,20 +14,31 @@ export const BadgeStatus = ({
   status,
   size = BadgeStatusSize.Md,
   hasBorder = true,
-  twClassName = '',
+  twClassName,
   style,
   ...props
 }: BadgeStatusProps) => {
   const tw = useTailwind();
 
-  const twContainerClassNames =
-    `self-start rounded-full ${hasBorder ? 'border-2 border-background-default' : ''} ${twClassName}`.trim();
-
   return (
-    <View {...props} style={[tw`${twContainerClassNames}`, style]}>
+    <View
+      {...props}
+      style={[
+        tw.style(
+          'self-start rounded-full',
+          hasBorder && 'border-2 border-background-default',
+          twClassName,
+        ),
+        style,
+      ]}
+    >
       <View
         style={[
-          tw`rounded-full border-2 ${TWCLASSMAP_BADGESTATUS_SIZE[size]} ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[status]} `,
+          tw.style(
+            'rounded-full border-2',
+            TWCLASSMAP_BADGESTATUS_SIZE[size],
+            TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[status],
+          ),
         ]}
       />
     </View>

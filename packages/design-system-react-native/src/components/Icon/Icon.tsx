@@ -1,11 +1,10 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { IconColor, IconSize } from '../../types';
 
 import { assetByIconName } from './Icon.assets';
 import type { IconProps } from './Icon.types';
-import { generateIconClassNames } from './Icon.utilities';
 
 export const Icon = ({
   size = IconSize.Md,
@@ -17,14 +16,7 @@ export const Icon = ({
 }: IconProps) => {
   const tw = useTailwind();
   const SVG = assetByIconName[name];
-  const twStyle = useMemo(() => {
-    const mergedClassnames = generateIconClassNames({
-      color,
-      size,
-      twClassName,
-    });
-    return tw`${mergedClassnames}`;
-  }, [color, size, tw, twClassName]);
+  const twStyle = tw.style(color, `w-[${size}px]`, `h-[${size}px]`, twClassName);
 
   return (
     <SVG name={name} fill="currentColor" style={[twStyle, style]} {...props} />

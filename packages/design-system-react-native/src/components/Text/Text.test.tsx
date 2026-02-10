@@ -15,66 +15,37 @@ import {
   TWCLASSMAP_TEXT_FONTWEIGHT,
   MAP_TEXT_VARIANT_FONTWEIGHT,
 } from './Text.constants';
-import { generateTextClassNames } from './Text.utilities';
+
+function buildTextStyleArgs({
+  variant = TextVariant.BodyMd,
+  color = TextColor.TextDefault,
+  fontWeight,
+  fontFamily = FontFamily.Default,
+  fontStyle = FontStyle.Normal,
+  twClassName,
+}: Partial<{
+  variant: TextVariant;
+  color: TextColor;
+  fontWeight: FontWeight;
+  fontFamily: FontFamily;
+  fontStyle: FontStyle;
+  twClassName: string;
+}> = {}) {
+  const fw = fontWeight ?? MAP_TEXT_VARIANT_FONTWEIGHT[variant];
+  const isItalic = fontStyle === FontStyle.Italic;
+  const fontSuffix = `${TWCLASSMAP_TEXT_FONTWEIGHT[fw]}${
+    isItalic && fontFamily === FontFamily.Default ? '-italic' : ''
+  }`;
+  const fontClass = `font-${fontFamily}${fontSuffix}`;
+  return [
+    `text-${variant}`,
+    fontClass,
+    color,
+    ...(twClassName ? [twClassName] : []),
+  ].filter(Boolean);
+}
 
 describe('Text', () => {
-  describe('generateTextClassNames', () => {
-    it('returns correct default class names when no props are provided', () => {
-      const classNames = generateTextClassNames({});
-      expect(classNames).toContain(`text-${TextVariant.BodyMd}`);
-      expect(classNames).toContain(
-        `font-${FontFamily.Default}${TWCLASSMAP_TEXT_FONTWEIGHT[FontWeight.Regular]}`,
-      );
-      expect(classNames).toContain(TextColor.TextDefault);
-    });
-
-    it('generates class names correctly for each variant', () => {
-      Object.values(TextVariant).forEach((variant) => {
-        const classNames = generateTextClassNames({ variant });
-        expect(classNames).toContain(`text-${variant}`);
-      });
-    });
-
-    it('generates class names correctly for each color', () => {
-      Object.values(TextColor).forEach((color) => {
-        const classNames = generateTextClassNames({ color });
-        expect(classNames).toContain(`${color}`);
-      });
-    });
-
-    it('includes bold in class names when fontWeight is Bold', () => {
-      const classNames = generateTextClassNames({
-        fontWeight: FontWeight.Bold,
-        variant: TextVariant.BodyMd,
-      });
-      expect(classNames).toContain(`font-default-bold`);
-    });
-
-    it('includes italic in class names when fontStyle is Italic', () => {
-      const classNames = generateTextClassNames({
-        fontStyle: FontStyle.Italic,
-        variant: TextVariant.BodyMd,
-      });
-      expect(classNames).toContain(`font-default-regular-italic`);
-    });
-
-    it('combines bold and italic correctly', () => {
-      const classNames = generateTextClassNames({
-        fontWeight: FontWeight.Bold,
-        fontStyle: FontStyle.Italic,
-        variant: TextVariant.BodyMd,
-      });
-      expect(classNames).toContain(`font-default-bold-italic`);
-    });
-
-    it('includes twClassName', () => {
-      const classNames = generateTextClassNames({
-        twClassName: 'text-primary-default',
-      });
-      expect(classNames).toContain('text-primary-default');
-    });
-  });
-
   describe('Text Component', () => {
     it('renders children correctly', () => {
       const { getByText } = render(<Text>Hello, World!</Text>);
@@ -86,8 +57,9 @@ describe('Text', () => {
 
       const TestComponent = () => {
         const tw = useTailwind();
-        const expectedClassNames = generateTextClassNames({});
-        expectedStyles = tw`${expectedClassNames}`;
+        expectedStyles = tw.style(
+          ...buildTextStyleArgs({}),
+        );
         return <Text testID="text">Hello, World!</Text>;
       };
 
@@ -110,8 +82,7 @@ describe('Text', () => {
 
       const TestComponent = () => {
         const tw = useTailwind();
-        const expectedClassNames = generateTextClassNames(props);
-        expectedStyles = tw`${expectedClassNames}`;
+        expectedStyles = tw.style(...buildTextStyleArgs(props));
         return (
           <Text testID="text" {...props}>
             Styled Text
@@ -132,11 +103,12 @@ describe('Text', () => {
 
         const TestComponent = () => {
           const tw = useTailwind();
-          const expectedClassNames = generateTextClassNames({
-            variant,
-            fontWeight: MAP_TEXT_VARIANT_FONTWEIGHT[variant],
-          });
-          expectedStyles = tw`${expectedClassNames}`;
+          expectedStyles = tw.style(
+            ...buildTextStyleArgs({
+              variant,
+              fontWeight: MAP_TEXT_VARIANT_FONTWEIGHT[variant],
+            }),
+          );
           return (
             <Text testID="text" variant={variant}>
               Test
@@ -158,8 +130,7 @@ describe('Text', () => {
 
         const TestComponent = () => {
           const tw = useTailwind();
-          const expectedClassNames = generateTextClassNames({ color });
-          expectedStyles = tw`${expectedClassNames}`;
+          expectedStyles = tw.style(...buildTextStyleArgs({ color }));
           return (
             <Text testID="text" color={color}>
               Test
@@ -181,10 +152,7 @@ describe('Text', () => {
 
         const TestComponent = () => {
           const tw = useTailwind();
-          const expectedClassNames = generateTextClassNames({
-            fontWeight: weight,
-          });
-          expectedStyles = tw`${expectedClassNames}`;
+          expectedStyles = tw.style(...buildTextStyleArgs({ fontWeight: weight }));
           return (
             <Text testID="text" fontWeight={weight}>
               Test
@@ -206,8 +174,9 @@ describe('Text', () => {
 
         const TestComponent = () => {
           const tw = useTailwind();
-          const expectedClassNames = generateTextClassNames({ fontStyle });
-          expectedStyles = tw`${expectedClassNames}`;
+          expectedStyles = tw.style(
+            ...buildTextStyleArgs({ fontStyle }),
+          );
           return (
             <Text testID="text" fontStyle={fontStyle}>
               Test
@@ -224,13 +193,9 @@ describe('Text', () => {
     });
 
     it('combines custom style prop with generated styles', () => {
-      let expectedStyles;
       const customStyle = { margin: 10 };
 
       const TestComponent = () => {
-        const tw = useTailwind();
-        const expectedClassNames = generateTextClassNames({});
-        expectedStyles = tw`${expectedClassNames}`;
         return (
           <Text testID="text" style={customStyle}>
             Styled Text
@@ -241,7 +206,6 @@ describe('Text', () => {
       const { getByTestId } = render(<TestComponent />);
       const textElement = getByTestId('text');
 
-      expect(expectedStyles).toBeDefined();
       expect(textElement.props.style).toContainEqual(customStyle);
     });
 

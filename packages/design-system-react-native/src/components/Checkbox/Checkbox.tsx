@@ -27,7 +27,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       onChange,
       checkboxContainerProps,
       checkedIconProps,
-      twClassName = '',
+      twClassName,
       style,
       ...props
     },
@@ -77,10 +77,11 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     useImperativeHandle(ref, () => ({ toggle: handlePress }), [handlePress]);
 
     const tw = useTailwind();
-    const twContainerClassNamesStr = `flex-row items-center ${
-      isDisabled ? 'opacity-50' : 'opacity-100'
-    } ${twClassName}`.trim();
-    const twContainerClassNames = tw`${twContainerClassNamesStr}`;
+    const twContainerClassNames = tw.style(
+      'flex-row items-center',
+      isDisabled ? 'opacity-50' : 'opacity-100',
+      twClassName,
+    );
 
     const getCheckboxContainerStyle = useCallback(
       (pressed: boolean): string => {

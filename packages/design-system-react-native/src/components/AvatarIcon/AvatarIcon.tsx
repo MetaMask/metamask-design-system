@@ -22,15 +22,11 @@ export const AvatarIcon = ({
   severity = AvatarIconSeverity.Neutral,
   iconName,
   iconProps,
-  twClassName = '',
+  twClassName,
   style,
   ...props
 }: AvatarIconProps) => {
   const tw = useTailwind();
-  const twContainerClassNames = `
-    ${TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity]}
-    ${twClassName}
-  `.trim();
 
   return (
     <AvatarBase
@@ -38,7 +34,13 @@ export const AvatarIcon = ({
       shape={shape}
       accessibilityRole="image"
       {...props}
-      style={[tw`${twContainerClassNames}`, style]}
+      style={[
+        tw.style(
+          TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity],
+          twClassName,
+        ),
+        style,
+      ]}
     >
       <Icon
         name={iconName}

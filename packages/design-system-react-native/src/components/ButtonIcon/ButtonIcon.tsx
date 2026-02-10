@@ -22,28 +22,19 @@ export const ButtonIcon = ({
   isFloating = false,
   onPressIn,
   onPressOut,
-  twClassName = '',
+  twClassName,
   style,
   ...props
 }: ButtonIconProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
 
-  // Determine background color based on state
   let backgroundColor = 'bg-transparent';
   if (isFloating) {
     backgroundColor = 'bg-icon-default';
   } else if (isPressed) {
     backgroundColor = 'bg-pressed';
   }
-
-  const twContainerClassNames = `
-    items-center justify-center
-    ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size]}
-    ${isFloating ? 'rounded-full' : 'rounded-lg'}
-    ${backgroundColor}
-    ${isDisabled ? 'opacity-50' : 'opacity-100'}
-    ${twClassName}`.trim();
 
   const twIconColorClassNames =
     isInverse || isFloating ? 'text-primary-inverse' : 'text-icon-default';
@@ -66,7 +57,17 @@ export const ButtonIcon = ({
       accessible
       testID="button-icon"
       {...props}
-      style={[tw`${twContainerClassNames}`, style]}
+      style={[
+        tw.style(
+          'items-center justify-center',
+          TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size],
+          isFloating ? 'rounded-full' : 'rounded-lg',
+          backgroundColor,
+          isDisabled ? 'opacity-50' : 'opacity-100',
+          twClassName,
+        ),
+        style,
+      ]}
     >
       <Icon
         name={iconName}

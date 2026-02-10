@@ -17,22 +17,24 @@ export const BadgeCount = ({
   count,
   max = 99,
   textProps,
-  twClassName = '',
+  twClassName,
   style,
   ...props
 }: BadgeCountProps) => {
   const tw = useTailwind();
-  const twContainerClassNames = `
-    bg-error-default
-    rounded-lg
-    items-center
-    justify-center
-    self-start
-    ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[size]}
-    ${twClassName}`.trim();
 
   return (
-    <View {...props} style={[tw`${twContainerClassNames}`, style]}>
+    <View
+      {...props}
+      style={[
+        tw.style(
+          'bg-error-default rounded-lg items-center justify-center self-start',
+          TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[size],
+          twClassName,
+        ),
+        style,
+      ]}
+    >
       <Text
         variant={MAP_BADGECOUNT_SIZE_TEXTVARIANT[size as BadgeCountSize]}
         color={TextColor.ErrorInverse}
