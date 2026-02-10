@@ -61,15 +61,12 @@ yarn test:storybook           # Run Storybook accessibility tests
 
 ## Golden Path Examples
 
-**Complete examples demonstrating best practices:**
+**Cross-platform component demonstrating best practices:**
 
-**React Web:**
+- @packages/design-system-react/src/components/Box/ (React Web)
+- @packages/design-system-react-native/src/components/Box/ (React Native)
 
-- @packages/design-system-react/src/components/Button/ (README.mdx structure + PascalCase story naming)
-
-**React Native:**
-
-- @packages/design-system-react-native/src/components/Box/ (README.md structure + value reference tables)
+Box demonstrates excellent cross-platform consistency: same props, same story names, same documentation structure across both platforms.
 
 **Real-world examples:**
 
