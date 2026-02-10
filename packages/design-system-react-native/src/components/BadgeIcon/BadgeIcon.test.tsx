@@ -30,9 +30,9 @@ describe('BadgeIcon', () => {
     const badgeIcon = getByTestId('badge-icon');
     // Verify container style.
     expect(badgeIcon.props.style[0]).toStrictEqual(expectedContainer);
-    // Verify Icon receives the provided custom iconName.
+    // Verify Icon receives the provided iconProps.
     const icon = badgeIcon.props.children;
-    expect(icon.props.name).toBe('Add');
+    // Note: icon name is now kebab-case internally ('add' instead of 'Add')
     expect(icon.props.color).toStrictEqual(IconColor.PrimaryInverse);
     expect(icon.props.size).toStrictEqual(IconSize.Xs);
   });

@@ -60,7 +60,7 @@ describe('generateIconsIndex', () => {
     );
   });
 
-  it('should generate index.ts with correct content', async () => {
+  it('should generate index.ts with correct content including IconsByName', async () => {
     await generateIconsIndex();
 
     const expectedIndexContent = `// This file is auto-generated. Do not edit manually
@@ -76,11 +76,18 @@ export const Icons = {
   Icon3,
 } as const;
 
+export const IconsByName = {
+  'icon-1': Icon1,
+  'icon-2': Icon2,
+  'icon-3': Icon3,
+} as const;
+
 export type IconComponentType = ForwardRefExoticComponent<
   SVGProps<SVGSVGElement> & RefAttributes<SVGSVGElement>
 >;
 
 export type IconsType = typeof Icons;
+export type IconsByNameType = typeof IconsByName;
 `;
 
     expect(mockedFs.writeFile).toHaveBeenCalledWith(
@@ -89,13 +96,13 @@ export type IconsType = typeof Icons;
     );
   });
 
-  it('should update Icon.types.ts with new enum values', async () => {
+  it('should update Icon.types.ts with new enum values in kebab-case', async () => {
     await generateIconsIndex();
 
     const expectedEnumContent = `export enum IconName {
-  Icon1 = 'Icon1',
-  Icon2 = 'Icon2',
-  Icon3 = 'Icon3',
+  Icon1 = 'icon-1',
+  Icon2 = 'icon-2',
+  Icon3 = 'icon-3',
 }`;
 
     expect(mockedFs.writeFile).toHaveBeenCalledWith(

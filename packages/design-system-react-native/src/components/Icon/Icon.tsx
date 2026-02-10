@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 import { IconColor, IconSize } from '../../types';
 
-import { assetByIconName } from './Icon.assets';
+import { assetByIconNameKebab } from './Icon.assets';
 import type { IconProps } from './Icon.types';
 import { generateIconClassNames } from './Icon.utilities';
 
@@ -16,7 +16,7 @@ export const Icon = ({
   ...props
 }: IconProps) => {
   const tw = useTailwind();
-  const SVG = assetByIconName[name];
+  const SVG = assetByIconNameKebab[name];
   const twStyle = useMemo(() => {
     const mergedClassnames = generateIconClassNames({
       color,
@@ -26,7 +26,5 @@ export const Icon = ({
     return tw`${mergedClassnames}`;
   }, [color, size, tw, twClassName]);
 
-  return (
-    <SVG name={name} fill="currentColor" style={[twStyle, style]} {...props} />
-  );
+  return <SVG fill="currentColor" style={[twStyle, style]} {...props} />;
 };
