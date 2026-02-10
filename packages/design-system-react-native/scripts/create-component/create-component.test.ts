@@ -193,7 +193,7 @@ import { ComponentName } from '@metamask/design-system-react-native';
         call[0].endsWith('README.md'),
       );
 
-      expect(readmeWriteCall).not.toBeNull();
+      expect(readmeWriteCall).toBeDefined();
       const updatedContent = readmeWriteCall[1];
 
       // Verify the import statement was updated
@@ -252,7 +252,7 @@ The content of the \`ComponentName\` component.
         call[0].endsWith('README.md'),
       );
 
-      expect(readmeWriteCall).not.toBeNull();
+      expect(readmeWriteCall).toBeDefined();
       const updatedContent = readmeWriteCall[1];
 
       // Verify the structure is preserved
