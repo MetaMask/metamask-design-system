@@ -1,17 +1,17 @@
 // Third party dependencies.
+import { ReactElement } from 'react';
 import { ImageSourcePropType } from 'react-native';
 
 // External Dependencies.
-import { AvatarAccountType } from '../Avatars/Avatar/variants/AvatarAccount';
-import { ButtonProps } from '../Buttons/Button/Button.types';
-import { ButtonIconProps } from '../Buttons/ButtonIcon/ButtonIcon.types';
-import { IconName } from '../Icons/Icon';
-import { ReactElement } from 'react';
+import { AvatarAccountVariant } from '../AvatarAccount';
+import { ButtonProps } from '../Button';
+import { ButtonIconProps } from '../ButtonIcon';
+import { IconName } from '../Icon';
 
 /**
  * Toast variants.
  */
-export enum ToastVariants {
+export enum ToastVariant {
   Plain = 'Plain',
   Account = 'Account',
   Network = 'Network',
@@ -52,7 +52,7 @@ interface BaseToastVariants {
   linkButtonOptions?: ToastLinkButtonOptions;
   closeButtonOptions?: ToastCloseButtonOptions;
   startAccessory?: ReactElement;
-  customBottomOffset?: number;
+  bottomOffset?: number;
 }
 
 export type ToastCloseButtonOptions =
@@ -67,23 +67,23 @@ export enum ButtonIconVariant {
  * Plain toast option.
  */
 interface PlainToastOption extends BaseToastVariants {
-  variant: ToastVariants.Plain;
+  variant: ToastVariant.Plain;
 }
 
 /**
  * Account toast option.
  */
 interface AccountToastOption extends BaseToastVariants {
-  variant: ToastVariants.Account;
+  variant: ToastVariant.Account;
   accountAddress: string;
-  accountAvatarType: AvatarAccountType;
+  accountAvatarType: AvatarAccountVariant;
 }
 
 /**
  * Network toast option.
  */
 interface NetworkToastOption extends BaseToastVariants {
-  variant: ToastVariants.Network;
+  variant: ToastVariant.Network;
   networkName?: string;
   networkImageSource: ImageSourcePropType;
 }
@@ -92,12 +92,12 @@ interface NetworkToastOption extends BaseToastVariants {
  * App toast option.
  */
 interface AppToastOption extends BaseToastVariants {
-  variant: ToastVariants.App;
+  variant: ToastVariant.App;
   appIconSource: ImageSourcePropType;
 }
 
 interface IconToastOption extends BaseToastVariants {
-  variant: ToastVariants.Icon;
+  variant: ToastVariant.Icon;
   iconName: IconName;
   iconColor?: string;
   backgroundColor?: string;
