@@ -258,7 +258,9 @@ The content of the \`ComponentName\` component.
       // Verify the structure is preserved
       expect(updatedContent).toContain('## Props');
       expect(updatedContent).toContain('### `children`');
-      expect(updatedContent).toContain('The content of the `Button` component.');
+      expect(updatedContent).toContain(
+        'The content of the `Button` component.',
+      );
       expect(updatedContent).not.toContain('ComponentName');
     });
   });

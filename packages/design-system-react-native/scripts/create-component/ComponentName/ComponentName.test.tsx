@@ -11,7 +11,7 @@ describe('ComponentName Component', () => {
         <Text>Hello, World!</Text>
       </ComponentName>,
     );
-    expect(getByText('Hello, World!')).toBeTruthy();
+    expect(getByText('Hello, World!')).toBeDefined();
   });
 
   it('applies custom twClassName', () => {
@@ -21,7 +21,7 @@ describe('ComponentName Component', () => {
       </ComponentName>,
     );
     const component = getByTestId('component-name');
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
     // Add more style-related tests as needed
   });
 

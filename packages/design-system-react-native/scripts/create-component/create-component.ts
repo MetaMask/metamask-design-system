@@ -54,7 +54,10 @@ function updateReadmeCodeExample(
       /import \{ ComponentName \} from '@metamask\/design-system-react-native';/gu,
       importStatement,
     )
-    .replace(/<ComponentName>Default Example<\/ComponentName>;/gu, componentUsage);
+    .replace(
+      /<ComponentName>Default Example<\/ComponentName>;/gu,
+      componentUsage,
+    );
 }
 
 /**
