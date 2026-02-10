@@ -45,7 +45,7 @@
 
   --color-icon-alternative: var(--brand-colors-grey-grey500);
   --color-icon-muted: var(--brand-colors-grey-grey200);
-  --color-icon-inverse: var(--brand-colors-grey-grey900);
+  --color-icon-inverse: var(--brand-colors-grey-grey000);
 
   /* Border default has a 3:3 ratio when applied on bg-default
   and 3.0 on section. We use opacity for border-muted so it

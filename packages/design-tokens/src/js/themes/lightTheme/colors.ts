@@ -50,7 +50,7 @@ export const colors: ThemeColors = {
     /** Muted color for icons (Not accessible) (#9CA1AF) */
     muted: brandColor.grey200,
     /** For elements placed on top of icon.default fill (#FFFFFF) */
-    inverse: brandColor.grey900,
+    inverse: brandColor.grey000,
   },
   border: {
     /** Default color for borders */
