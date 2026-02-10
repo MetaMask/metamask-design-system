@@ -15,12 +15,12 @@ describe('ComponentName Component', () => {
   });
 
   it('applies custom twClassName', () => {
-    const { getByTestID } = render(
+    const { getByTestId } = render(
       <ComponentName testID="component-name" twClassName="bg-default">
         <Text>Styled Content</Text>
       </ComponentName>,
     );
-    const component = getByTestID('component-name');
+    const component = getByTestId('component-name');
     expect(component).toBeTruthy();
     // Add more style-related tests as needed
   });

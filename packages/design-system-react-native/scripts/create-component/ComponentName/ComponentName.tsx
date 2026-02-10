@@ -11,12 +11,9 @@ export const ComponentName: React.FC<ComponentNameProps> = ({
   ...props
 }) => {
   const tw = useTailwind();
-  const twContainerClassNames = tw`
-    ${twClassName}
-  `;
 
   return (
-    <View style={[twContainerClassNames, style]} {...props}>
+    <View style={[tw`${twClassName}`, style]} {...props}>
       {children}
     </View>
   );
