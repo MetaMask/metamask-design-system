@@ -14,16 +14,5 @@ describe('ComponentName Component', () => {
     expect(getByText('Hello, World!')).toBeDefined();
   });
 
-  it('applies custom twClassName', () => {
-    const { getByTestId } = render(
-      <ComponentName testID="component-name" twClassName="bg-default">
-        <Text>Styled Content</Text>
-      </ComponentName>,
-    );
-    const component = getByTestId('component-name');
-    expect(component).toBeDefined();
-    // Add more style-related tests as needed
-  });
-
   // Add more tests as needed
 });

@@ -71,23 +71,26 @@ import { ComponentName } from '@metamask/design-system-react-native';
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
 | `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-const styles = StyleSheet.create({
-  custom: {
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-});
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
-export const StyleExample = () => (
-  <ComponentName style={styles.custom}>Custom styled content</ComponentName>
-);
+export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
+  const tw = useTailwind();
+
+  return (
+    <ComponentName
+      style={tw.style('base-class', isActive && 'bg-success-default')}
+    >
+      Conditional styling
+    </ComponentName>
+  );
+};
 ```
 
 ## References

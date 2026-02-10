@@ -6,7 +6,7 @@ import type { ComponentNameProps } from './ComponentName.types';
 
 export const ComponentName: React.FC<ComponentNameProps> = ({
   children,
-  twClassName,
+  twClassName = '',
   style,
   ...props
 }) => {
