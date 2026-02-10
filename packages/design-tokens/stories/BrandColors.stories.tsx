@@ -18,6 +18,16 @@ const meta: Meta<typeof ColorSwatchGroup> = {
     docs: {
       page: README,
     },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Design token color showcase, not user-facing UI patterns
+          },
+        ],
+      },
+    },
   },
 };
 
