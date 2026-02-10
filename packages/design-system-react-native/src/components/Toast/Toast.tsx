@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-
 // Third party dependencies.
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, {
   forwardRef,
   useImperativeHandle,
@@ -25,11 +24,22 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
-import Avatar, { AvatarSize, AvatarVariant } from '../Avatars/Avatar';
-import Text, { TextColor, TextVariant } from '../Texts/Text';
-import Button, { ButtonVariants } from '../Buttons/Button';
+import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
+import { AvatarFavicon, AvatarFaviconSize } from '../AvatarFavicon';
+import { AvatarIcon, AvatarIconSize } from '../AvatarIcon';
+import { AvatarNetwork, AvatarNetworkSize } from '../AvatarNetwork';
+import { Button, ButtonVariant } from '../Button';
+import { ButtonIcon } from '../ButtonIcon';
+import { Text, TextVariant, TextColor, FontWeight } from '../Text';
 
 // Internal dependencies.
+import {
+  TOAST_TEST_ID,
+  TOAST_LABELS_CONTAINER_TEST_ID,
+  TOAST_VISIBILITY_DURATION,
+  TOAST_ANIMATION_DURATION,
+  TOAST_BOTTOM_PADDING,
+} from './Toast.constants';
 import {
   ButtonIconVariant,
   ToastCloseButtonOptions,
@@ -38,35 +48,32 @@ import {
   ToastLinkButtonOptions,
   ToastOptions,
   ToastRef,
-  ToastVariants,
+  ToastVariant,
 } from './Toast.types';
-import styleSheet from './Toast.styles';
-import { ToastSelectorsIDs } from './ToastModal.testIds';
-import { TAB_BAR_HEIGHT } from '../Navigation/TabBar/TabBar.constants';
-import { useStyles } from '../../hooks';
-import ButtonIcon from '../Buttons/ButtonIcon';
 
-const visibilityDuration = 2750;
-const animationDuration = 250;
-const bottomPadding = 36;
 const screenHeight = Dimensions.get('window').height;
 
 const Toast = forwardRef((_, ref: React.ForwardedRef<ToastRef>) => {
-  const { styles } = useStyles(styleSheet, {});
+  const tw = useTailwind();
   const [toastOptions, setToastOptions] = useState<ToastOptions | undefined>(
     undefined,
   );
   const { bottom: bottomNotchSpacing } = useSafeAreaInsets();
   const translateYProgress = useSharedValue(screenHeight);
-  const customOffset = toastOptions?.customBottomOffset ?? 0;
+  const bottomOffset = toastOptions?.bottomOffset ?? 0;
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateY: translateYProgress.value - TAB_BAR_HEIGHT - customOffset },
+      { translateY: translateYProgress.value - bottomOffset },
     ],
   }));
   const baseStyle: StyleProp<ViewStyle> = useMemo(
-    () => [styles.base, animatedStyle],
-    [styles.base, animatedStyle],
+    () => [
+      tw.style(
+        'absolute left-4 right-4 bottom-0 bg-background-section border border-border-muted rounded-xl p-3 flex-row items-center',
+      ),
+      animatedStyle,
+    ],
+    [tw, animatedStyle],
   );
 
   const resetState = () => setToastOptions(undefined);
@@ -89,7 +96,7 @@ const Toast = forwardRef((_, ref: React.ForwardedRef<ToastRef>) => {
   const closeToast = () => {
     translateYProgress.value = withTiming(
       screenHeight,
-      { duration: animationDuration },
+      { duration: TOAST_ANIMATION_DURATION },
       () => {
         runOnJS(resetState)();
       },
@@ -104,24 +111,24 @@ const Toast = forwardRef((_, ref: React.ForwardedRef<ToastRef>) => {
   const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
     if (toastOptions) {
       const { height } = e.nativeEvent.layout;
-      const translateYToValue = -(bottomPadding + bottomNotchSpacing);
+      const translateYToValue = -(TOAST_BOTTOM_PADDING + bottomNotchSpacing);
 
       translateYProgress.value = height;
 
       if (toastOptions.hasNoTimeout) {
         translateYProgress.value = withTiming(translateYToValue, {
-          duration: animationDuration,
+          duration: TOAST_ANIMATION_DURATION,
         });
       } else {
         translateYProgress.value = withTiming(
           translateYToValue,
-          { duration: animationDuration },
+          { duration: TOAST_ANIMATION_DURATION },
           () => {
             translateYProgress.value = withDelay(
-              visibilityDuration,
+              TOAST_VISIBILITY_DURATION,
               withTiming(
                 height,
-                { duration: animationDuration },
+                { duration: TOAST_ANIMATION_DURATION },
                 runOnJS(resetState),
               ),
             );
@@ -132,12 +139,13 @@ const Toast = forwardRef((_, ref: React.ForwardedRef<ToastRef>) => {
   };
 
   const renderLabel = (labelOptions: ToastLabelOptions) => (
-    <Text variant={TextVariant.BodyMD}>
+    <Text variant={TextVariant.BodyMd}>
       {labelOptions.map(({ label, isBold }, index) => (
         <Text
           key={`toast-label-${index}`}
-          variant={isBold ? TextVariant.BodyMDBold : TextVariant.BodyMD}
-          style={styles.label}
+          variant={TextVariant.BodyMd}
+          fontWeight={isBold ? FontWeight.Bold : undefined}
+          color={TextColor.TextDefault}
         >
           {label}
         </Text>
@@ -148,9 +156,9 @@ const Toast = forwardRef((_, ref: React.ForwardedRef<ToastRef>) => {
   const renderDescription = (descriptionOptions?: ToastDescriptionOptions) =>
     descriptionOptions && (
       <Text
-        variant={TextVariant.BodySM}
-        color={TextColor.Alternative}
-        style={styles.description}
+        variant={TextVariant.BodySm}
+        color={TextColor.TextAlternative}
+        style={tw.style('mt-1')}
       >
         {descriptionOptions.description}
       </Text>
@@ -159,12 +167,12 @@ const Toast = forwardRef((_, ref: React.ForwardedRef<ToastRef>) => {
   const renderActionButton = (linkButtonOptions?: ToastLinkButtonOptions) =>
     linkButtonOptions && (
       <Button
-        variant={ButtonVariants.Secondary}
+        variant={ButtonVariant.Secondary}
         onPress={linkButtonOptions.onPress}
-        labelTextVariant={TextVariant.BodyMD}
-        label={linkButtonOptions.label}
-        style={styles.actionButton}
-      />
+        style={tw.style('mt-2')}
+      >
+        {linkButtonOptions.label}
+      </Button>
     );
 
   const renderCloseButton = (closeButtonOptions?: ToastCloseButtonOptions) => {
@@ -178,66 +186,60 @@ const Toast = forwardRef((_, ref: React.ForwardedRef<ToastRef>) => {
     }
     return (
       <Button
-        variant={ButtonVariants.Primary}
+        variant={ButtonVariant.Primary}
         onPress={() => closeButtonOptions?.onPress()}
-        label={closeButtonOptions?.label}
+        startIconName={closeButtonOptions?.startIconName}
         endIconName={closeButtonOptions?.endIconName}
         style={closeButtonOptions?.style}
-      />
+      >
+        {closeButtonOptions?.children}
+      </Button>
     );
   };
 
   const renderAvatar = () => {
     switch (toastOptions?.variant) {
-      case ToastVariants.Plain:
+      case ToastVariant.Plain:
         return null;
-      case ToastVariants.Account: {
-        const { accountAddress } = toastOptions;
-        const { accountAvatarType } = toastOptions;
+      case ToastVariant.Account: {
+        const { accountAddress, accountAvatarType } = toastOptions;
         return (
-          <Avatar
-            variant={AvatarVariant.Account}
-            accountAddress={accountAddress}
-            // TODO PS: respect avatar global configs
-            // should receive avatar type as props
-            type={accountAvatarType}
-            size={AvatarSize.Md}
-            style={styles.avatar}
+          <AvatarAccount
+            address={accountAddress}
+            variant={accountAvatarType}
+            size={AvatarAccountSize.Md}
+            style={tw.style('mr-4')}
           />
         );
       }
-      case ToastVariants.Network: {
+      case ToastVariant.Network: {
         const { networkImageSource, networkName } = toastOptions;
         return (
-          <Avatar
-            variant={AvatarVariant.Network}
+          <AvatarNetwork
             name={networkName}
-            imageSource={networkImageSource}
-            size={AvatarSize.Md}
-            style={styles.avatar}
+            src={networkImageSource}
+            size={AvatarNetworkSize.Md}
+            style={tw.style('mr-4')}
           />
         );
       }
-      case ToastVariants.App: {
+      case ToastVariant.App: {
         const { appIconSource } = toastOptions;
         return (
-          <Avatar
-            variant={AvatarVariant.Favicon}
-            imageSource={appIconSource}
-            size={AvatarSize.Md}
-            style={styles.avatar}
+          <AvatarFavicon
+            src={appIconSource}
+            size={AvatarFaviconSize.Md}
+            style={tw.style('mr-4')}
           />
         );
       }
-      case ToastVariants.Icon: {
-        const { iconName, iconColor, backgroundColor } = toastOptions;
+      case ToastVariant.Icon: {
+        const { iconName } = toastOptions;
         return (
-          <Avatar
-            variant={AvatarVariant.Icon}
-            name={iconName}
-            iconColor={iconColor}
-            backgroundColor={backgroundColor}
-            style={styles.avatar}
+          <AvatarIcon
+            iconName={iconName}
+            size={AvatarIconSize.Md}
+            style={tw.style('mr-4')}
           />
         );
       }
@@ -260,8 +262,8 @@ const Toast = forwardRef((_, ref: React.ForwardedRef<ToastRef>) => {
       <>
         {isStartAccessoryValid ? startAccessory : renderAvatar()}
         <View
-          style={styles.labelsContainer}
-          testID={ToastSelectorsIDs.CONTAINER}
+          style={tw.style('flex-1 justify-center')}
+          testID={TOAST_LABELS_CONTAINER_TEST_ID}
         >
           {renderLabel(labelOptions)}
           {renderDescription(descriptionOptions)}
@@ -277,7 +279,11 @@ const Toast = forwardRef((_, ref: React.ForwardedRef<ToastRef>) => {
   }
 
   return (
-    <Animated.View onLayout={onAnimatedViewLayout} style={baseStyle}>
+    <Animated.View
+      onLayout={onAnimatedViewLayout}
+      style={baseStyle}
+      testID={TOAST_TEST_ID}
+    >
       {renderToastContent(toastOptions)}
     </Animated.View>
   );

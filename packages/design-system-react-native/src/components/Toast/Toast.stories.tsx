@@ -1,17 +1,17 @@
 // Third party dependencies.
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useContext } from 'react';
 import { Alert, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import type { Meta } from '@storybook/react-native';
 
 // External dependencies.
-import Button, { ButtonVariants } from '../Buttons/Button';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { Button, ButtonVariant } from '../Button';
 
 // Internal dependencies.
 import { default as ToastComponent } from './Toast';
 import { ToastContext, ToastContextWrapper } from './Toast.context';
-import { ToastOptions, ToastVariants } from './Toast.types';
+import { ToastOptions, ToastVariant } from './Toast.types';
 import {
   TEST_ACCOUNT_ADDRESS,
   TEST_AVATAR_TYPE,
@@ -19,11 +19,11 @@ import {
 } from './Toast.constants';
 
 interface ToastStoryArgs {
-  variant: ToastVariants;
+  variant: ToastVariant;
 }
 
 export default {
-  title: 'Component Library / Toast',
+  title: 'Components/Toast',
   component: ToastComponent,
   decorators: [
     (StoryComponent) => (
@@ -36,18 +36,18 @@ export default {
   ],
   argTypes: {
     variant: {
-      options: ToastVariants,
+      options: ToastVariant,
       control: {
         type: 'select',
       },
-      defaultValue: ToastVariants.Plain,
+      defaultValue: ToastVariant.Plain,
     },
   },
 } as Meta;
 
 export const Default = {
   args: {
-    variant: ToastVariants.Plain,
+    variant: ToastVariant.Plain,
   },
   render: function Render(args: ToastStoryArgs) {
     const { toastRef } = useContext(ToastContext);
@@ -56,16 +56,16 @@ export const Default = {
     let toastOptions: ToastOptions;
 
     switch (args.variant) {
-      case ToastVariants.Plain:
+      case ToastVariant.Plain:
         toastOptions = {
-          variant: ToastVariants.Plain,
+          variant: ToastVariant.Plain,
           hasNoTimeout: false,
           labelOptions: [{ label: 'This is a Toast message.' }],
         };
         break;
-      case ToastVariants.Account:
+      case ToastVariant.Account:
         toastOptions = {
-          variant: ToastVariants.Account,
+          variant: ToastVariant.Account,
           hasNoTimeout: false,
           labelOptions: [
             { label: 'Switching to' },
@@ -75,9 +75,9 @@ export const Default = {
           accountAvatarType: TEST_AVATAR_TYPE,
         };
         break;
-      case ToastVariants.Network:
+      case ToastVariant.Network:
         toastOptions = {
-          variant: ToastVariants.Network,
+          variant: ToastVariant.Network,
           hasNoTimeout: false,
           labelOptions: [
             { label: 'Added' },
@@ -98,7 +98,7 @@ export const Default = {
         break;
       default:
         toastOptions = {
-          variant: ToastVariants.Plain,
+          variant: ToastVariant.Plain,
           hasNoTimeout: false,
           labelOptions: [{ label: 'This is a Toast message.' }],
         };
@@ -107,12 +107,13 @@ export const Default = {
     return (
       <View style={tw.style('min-h-[300px] relative')}>
         <Button
-          variant={ButtonVariants.Secondary}
-          label={`Show ${args.variant} Toast`}
+          variant={ButtonVariant.Secondary}
           onPress={() => {
             toastRef?.current?.showToast(toastOptions);
           }}
-        />
+        >
+          {`Show ${args.variant} Toast`}
+        </Button>
         <ToastComponent ref={toastRef} />
       </View>
     );
