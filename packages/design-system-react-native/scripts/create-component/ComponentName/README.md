@@ -46,7 +46,7 @@ import { ComponentName } from '@metamask/design-system-react-native';
 </ComponentName>
 
 // Override default styles
-<ComponentName twClassName="!bg-error-default">
+<ComponentName twClassName="bg-error-default">
   <Text>Override Background</Text>
 </ComponentName>
 ```
