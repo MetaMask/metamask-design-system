@@ -9,21 +9,6 @@ const ICONS_DIR = path.join(__dirname, '../src/components/Icon/icons');
 const TYPES_FILE = path.join(__dirname, '../src/types/index.ts');
 
 /**
- * Converts PascalCase to kebab-case.
- * Examples: ArrowDown -> arrow-down, Arrow2Up -> arrow-2-up
- *
- * @param str - The PascalCase string to convert
- * @returns The kebab-case string
- */
-const toKebabCase = (str: string): string => {
-  return str
-    .replace(/([A-Z])/gu, '-$1')
-    .replace(/^-/u, '')
-    .replace(/([a-z])(\d)/gu, '$1-$2')
-    .toLowerCase();
-};
-
-/**
  * Generates the index file for icon components and updates the IconName enum.
  *
  * This script:
@@ -65,23 +50,18 @@ export const Icons = {
 ${files.map((name) => `  ${name},`).join('\n')}
 } as const;
 
-export const IconsByName = {
-${files.map((name) => `  '${toKebabCase(name)}': ${name},`).join('\n')}
-} as const;
-
 export type IconComponentType = ForwardRefExoticComponent<
   SVGProps<SVGSVGElement> & RefAttributes<SVGSVGElement>
 >;
 
 export type IconsType = typeof Icons;
-export type IconsByNameType = typeof IconsByName;
 `;
 
     await fs.writeFile(path.join(ICONS_DIR, 'index.ts'), indexContent);
 
-    // Update IconName enum with trailing commas and kebab-case values
+    // Update IconName enum with trailing commas
     const enumContent = files
-      .map((name: string) => `  ${name} = '${toKebabCase(name)}',`)
+      .map((name: string) => `  ${name} = '${name}',`)
       .join('\n');
 
     const typesContent = await fs.readFile(TYPES_FILE, 'utf8');

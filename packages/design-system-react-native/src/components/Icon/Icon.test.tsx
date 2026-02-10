@@ -49,8 +49,7 @@ describe('Icon', () => {
         <Icon name={IconName.Add} testID="icon" />,
       );
       const iconElement = getByTestId('icon');
-      // Icon component renders the SVG, name is used internally for asset lookup
-      expect(iconElement).toBeDefined();
+      expect(iconElement.props.name).toBe(IconName.Add);
     });
 
     it('applies default size and color', () => {

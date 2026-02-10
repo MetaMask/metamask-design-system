@@ -26,16 +26,6 @@ function getIconNameInTitleCase(fileName: string): string {
 }
 
 /**
- * Gets the kebab-case icon name from the file name.
- *
- * @param fileName - The name of the file (including extension) to process.
- * @returns The icon name in kebab-case.
- */
-function getIconNameInKebabCase(fileName: string): string {
-  return path.basename(fileName, ASSET_EXT);
-}
-
-/**
  * Main entry point for the script.
  * Reads SVG files, transforms them, generates asset and type files.
  * Throws an error if anything goes wrong.
@@ -116,27 +106,6 @@ export async function main(): Promise<void> {
 
   await fs.promises.appendFile(assetsModulePath, '\n};\n');
 
-  await fs.promises.appendFile(
-    assetsModulePath,
-    `\n/**\n * Asset stored by kebab-case icon name\n */`,
-  );
-
-  await fs.promises.appendFile(
-    assetsModulePath,
-    `\nexport const assetByIconNameKebab = {`,
-  );
-
-  for (const fileName of assetFileList) {
-    const iconNamePascal = getIconNameInTitleCase(fileName);
-    const iconNameKebab = getIconNameInKebabCase(fileName);
-    await fs.promises.appendFile(
-      assetsModulePath,
-      `\n  '${iconNameKebab}': ${iconNamePascal}SVG,`,
-    );
-  }
-
-  await fs.promises.appendFile(assetsModulePath, '\n} as const;\n');
-
   const typesFileContent = await fs.promises.readFile(typesFilePath, {
     encoding: 'utf8',
   });
@@ -151,9 +120,15 @@ export async function main(): Promise<void> {
     '\n\n/**\n * Icon - name\n */\n/* eslint-disable @typescript-eslint/no-shadow */\nexport enum IconName {';
 
   for (const fileName of assetFileList) {
-    const iconNamePascal = getIconNameInTitleCase(fileName);
-    const iconNameKebab = getIconNameInKebabCase(fileName);
-    typesContentToWrite += `\n  ${iconNamePascal} = '${iconNameKebab}',`;
+    const iconName = path
+      .basename(fileName, ASSET_EXT)
+      .split('-')
+      .map(
+        (section: string) =>
+          `${section[0].toUpperCase()}${section.substring(1, section.length)}`,
+      )
+      .join('');
+    typesContentToWrite += `\n  ${iconName} = '${iconName}',`;
   }
 
   typesContentToWrite +=

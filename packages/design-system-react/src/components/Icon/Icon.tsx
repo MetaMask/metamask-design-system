@@ -5,7 +5,7 @@ import { twMerge } from '../../utils/tw-merge';
 
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
 import type { IconProps } from './Icon.types';
-import { IconsByName } from './icons';
+import { Icons } from './icons';
 
 export const Icon: React.FC<IconProps> = ({
   name,
@@ -20,7 +20,7 @@ export const Icon: React.FC<IconProps> = ({
     return null;
   }
 
-  const IconComponent = IconsByName[name];
+  const IconComponent = Icons[name];
 
   if (!IconComponent) {
     console.warn(`Icon "${name}" not found`);

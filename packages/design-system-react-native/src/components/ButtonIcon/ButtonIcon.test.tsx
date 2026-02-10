@@ -25,9 +25,8 @@ describe('ButtonIcon', () => {
     const btn = getByTestId('button-icon');
     expect(btn.props.style[0]).toStrictEqual(expected);
 
-    // Verify icon is rendered
     const icon = getByTestId('icon');
-    expect(icon).toBeDefined();
+    expect(icon.props.name).toStrictEqual(IconName.Close);
   });
 
   it('applies isDisabled state', () => {
