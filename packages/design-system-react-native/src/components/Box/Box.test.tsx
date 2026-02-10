@@ -124,7 +124,9 @@ describe('Box', () => {
     );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', BoxJustifyContent.Between));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', BoxJustifyContent.Between),
+    );
   });
 
   // Margin tests
@@ -139,14 +141,18 @@ describe('Box', () => {
     const { getByTestId } = render(<Box testID="box" marginTop={3} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_MARGIN_TOP[3]));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', TWCLASSMAP_BOX_MARGIN_TOP[3]),
+    );
   });
 
   it('applies marginRight', () => {
     const { getByTestId } = render(<Box testID="box" marginRight={2} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_MARGIN_RIGHT[2]));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', TWCLASSMAP_BOX_MARGIN_RIGHT[2]),
+    );
   });
 
   it('applies marginBottom', () => {
@@ -162,7 +168,9 @@ describe('Box', () => {
     const { getByTestId } = render(<Box testID="box" marginLeft={1} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_MARGIN_LEFT[1]));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', TWCLASSMAP_BOX_MARGIN_LEFT[1]),
+    );
   });
 
   it('applies marginHorizontal', () => {
@@ -188,14 +196,18 @@ describe('Box', () => {
     const { getByTestId } = render(<Box testID="box" padding={4} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_PADDING[4]));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', TWCLASSMAP_BOX_PADDING[4]),
+    );
   });
 
   it('applies paddingTop', () => {
     const { getByTestId } = render(<Box testID="box" paddingTop={3} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_PADDING_TOP[3]));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', TWCLASSMAP_BOX_PADDING_TOP[3]),
+    );
   });
 
   it('applies paddingRight', () => {
@@ -220,7 +232,9 @@ describe('Box', () => {
     const { getByTestId } = render(<Box testID="box" paddingLeft={1} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_PADDING_LEFT[1]));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', TWCLASSMAP_BOX_PADDING_LEFT[1]),
+    );
   });
 
   it('applies paddingHorizontal', () => {
@@ -246,7 +260,9 @@ describe('Box', () => {
     const { getByTestId } = render(<Box testID="box" borderWidth={2} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_BORDER_WIDTH[2]));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', TWCLASSMAP_BOX_BORDER_WIDTH[2]),
+    );
   });
 
   it('applies borderColor', () => {
@@ -255,7 +271,9 @@ describe('Box', () => {
     );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', BoxBorderColor.PrimaryDefault));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', BoxBorderColor.PrimaryDefault),
+    );
   });
 
   // Background color tests
@@ -381,14 +399,18 @@ describe('Box', () => {
     const { getByTestId } = render(<Box testID="box" padding={0} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_PADDING[0]));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', TWCLASSMAP_BOX_PADDING[0]),
+    );
   });
 
   it('handles zero borderWidth', () => {
     const { getByTestId } = render(<Box testID="box" borderWidth={0} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_BORDER_WIDTH[0]));
+    expect(styles[0]).toStrictEqual(
+      tw.style('flex', TWCLASSMAP_BOX_BORDER_WIDTH[0]),
+    );
   });
 
   it('passes through additional ViewProps', () => {

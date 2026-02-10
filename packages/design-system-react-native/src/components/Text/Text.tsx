@@ -31,22 +31,10 @@ export const Text: React.FC<TextProps> = ({
     }`;
     const fontClass = `font-${fontFamily}${fontSuffix}`;
     return tw.style(`text-${variant}`, fontClass, color, twClassName);
-  }, [
-    variant,
-    color,
-    finalFontWeight,
-    fontFamily,
-    fontStyle,
-    twClassName,
-    tw,
-  ]);
+  }, [variant, color, finalFontWeight, fontFamily, fontStyle, twClassName, tw]);
 
   return (
-    <RNText
-      accessibilityRole="text"
-      {...props}
-      style={[textStyle, style]}
-    >
+    <RNText accessibilityRole="text" {...props} style={[textStyle, style]}>
       {children}
     </RNText>
   );

@@ -41,7 +41,10 @@ describe('BadgeWrapper', () => {
       //   finalYOffset = 7.32 - 10 + 0 = -2.68
       // For TopRight Circular, expected positions: { top: -2.68, right: 4.64 }.
       const expectedPositions = { top: -2.68, right: 4.64 };
-      const computedExpectedBadgeStyle = [tw.style('absolute'), expectedPositions];
+      const computedExpectedBadgeStyle = [
+        tw.style('absolute'),
+        expectedPositions,
+      ];
       return (
         <>
           <BadgeWrapper
@@ -112,7 +115,10 @@ describe('BadgeWrapper', () => {
       //   finalYOffset = 0 - 10 + 0 = -10
       // For TopRight Rectangular, expected positions: { top: -10, right: -10 }.
       const expectedPositions = { top: -10, right: -10 };
-      const computedExpectedBadgeStyle = [tw.style('absolute'), expectedPositions];
+      const computedExpectedBadgeStyle = [
+        tw.style('absolute'),
+        expectedPositions,
+      ];
       return (
         <>
           <BadgeWrapper
@@ -184,7 +190,10 @@ describe('BadgeWrapper', () => {
       //   finalYOffset = 7.32 - 10 + 0 = -2.68
       // For BottomRight Circular, expected positions: { bottom: -2.68, right: 4.64 }.
       const expectedPositions = { bottom: -2.68, right: 4.64 };
-      const computedExpectedBadgeStyle = [tw.style('absolute'), expectedPositions];
+      const computedExpectedBadgeStyle = [
+        tw.style('absolute'),
+        expectedPositions,
+      ];
       return (
         <>
           <BadgeWrapper
@@ -255,7 +264,10 @@ describe('BadgeWrapper', () => {
       //   finalYOffset = 0 - 10 + 0 = -10
       // For BottomRight Rectangular, expected positions: { bottom: -10, right: -10 }.
       const expectedPositions = { bottom: -10, right: -10 };
-      const computedExpectedBadgeStyle = [tw.style('absolute'), expectedPositions];
+      const computedExpectedBadgeStyle = [
+        tw.style('absolute'),
+        expectedPositions,
+      ];
       return (
         <>
           <BadgeWrapper
@@ -327,7 +339,10 @@ describe('BadgeWrapper', () => {
       //   finalYOffset = 7.32 - 10 + 0 = -2.68
       // For BottomLeft Circular, expected positions: { bottom: -2.68, left: 4.64 }.
       const expectedPositions = { bottom: -2.68, left: 4.64 };
-      const computedExpectedBadgeStyle = [tw.style('absolute'), expectedPositions];
+      const computedExpectedBadgeStyle = [
+        tw.style('absolute'),
+        expectedPositions,
+      ];
       return (
         <>
           <BadgeWrapper
@@ -398,7 +413,10 @@ describe('BadgeWrapper', () => {
       //   finalYOffset = 0 - 10 + 0 = -10
       // For BottomLeft Rectangular, expected positions: { bottom: -10, left: -10 }.
       const expectedPositions = { bottom: -10, left: -10 };
-      const computedExpectedBadgeStyle = [tw.style('absolute'), expectedPositions];
+      const computedExpectedBadgeStyle = [
+        tw.style('absolute'),
+        expectedPositions,
+      ];
       return (
         <>
           <BadgeWrapper
@@ -470,7 +488,10 @@ describe('BadgeWrapper', () => {
       //   finalYOffset = 7.32 - 10 + 0 = -2.68
       // For TopLeft Circular, expected positions: { top: -2.68, left: 4.64 }.
       const expectedPositions = { top: -2.68, left: 4.64 };
-      const computedExpectedBadgeStyle = [tw.style('absolute'), expectedPositions];
+      const computedExpectedBadgeStyle = [
+        tw.style('absolute'),
+        expectedPositions,
+      ];
       return (
         <>
           <BadgeWrapper
@@ -541,7 +562,10 @@ describe('BadgeWrapper', () => {
       //   finalYOffset = 0 - 10 + 0 = -10
       // For TopLeft Rectangular, expected positions: { top: -10, left: -10 }.
       const expectedPositions = { top: -10, left: -10 };
-      const computedExpectedBadgeStyle = [tw.style('absolute'), expectedPositions];
+      const computedExpectedBadgeStyle = [
+        tw.style('absolute'),
+        expectedPositions,
+      ];
       return (
         <>
           <BadgeWrapper

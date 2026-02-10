@@ -16,7 +16,12 @@ export const Icon = ({
 }: IconProps) => {
   const tw = useTailwind();
   const SVG = assetByIconName[name];
-  const twStyle = tw.style(color, `w-[${size}px]`, `h-[${size}px]`, twClassName);
+  const twStyle = tw.style(
+    color,
+    `w-[${size}px]`,
+    `h-[${size}px]`,
+    twClassName,
+  );
 
   return (
     <SVG name={name} fill="currentColor" style={[twStyle, style]} {...props} />

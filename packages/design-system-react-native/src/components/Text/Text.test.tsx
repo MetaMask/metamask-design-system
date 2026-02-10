@@ -57,9 +57,7 @@ describe('Text', () => {
 
       const TestComponent = () => {
         const tw = useTailwind();
-        expectedStyles = tw.style(
-          ...buildTextStyleArgs({}),
-        );
+        expectedStyles = tw.style(...buildTextStyleArgs({}));
         return <Text testID="text">Hello, World!</Text>;
       };
 
@@ -152,7 +150,9 @@ describe('Text', () => {
 
         const TestComponent = () => {
           const tw = useTailwind();
-          expectedStyles = tw.style(...buildTextStyleArgs({ fontWeight: weight }));
+          expectedStyles = tw.style(
+            ...buildTextStyleArgs({ fontWeight: weight }),
+          );
           return (
             <Text testID="text" fontWeight={weight}>
               Test
@@ -174,9 +174,7 @@ describe('Text', () => {
 
         const TestComponent = () => {
           const tw = useTailwind();
-          expectedStyles = tw.style(
-            ...buildTextStyleArgs({ fontStyle }),
-          );
+          expectedStyles = tw.style(...buildTextStyleArgs({ fontStyle }));
           return (
             <Text testID="text" fontStyle={fontStyle}>
               Test

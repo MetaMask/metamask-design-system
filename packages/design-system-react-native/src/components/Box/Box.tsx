@@ -74,20 +74,17 @@ export const Box = ({
           marginVertical !== undefined &&
             TWCLASSMAP_BOX_MARGIN_VERTICAL[marginVertical],
           padding !== undefined && TWCLASSMAP_BOX_PADDING[padding],
-          paddingTop !== undefined &&
-            TWCLASSMAP_BOX_PADDING_TOP[paddingTop],
+          paddingTop !== undefined && TWCLASSMAP_BOX_PADDING_TOP[paddingTop],
           paddingRight !== undefined &&
             TWCLASSMAP_BOX_PADDING_RIGHT[paddingRight],
           paddingBottom !== undefined &&
             TWCLASSMAP_BOX_PADDING_BOTTOM[paddingBottom],
-          paddingLeft !== undefined &&
-            TWCLASSMAP_BOX_PADDING_LEFT[paddingLeft],
+          paddingLeft !== undefined && TWCLASSMAP_BOX_PADDING_LEFT[paddingLeft],
           paddingHorizontal !== undefined &&
             TWCLASSMAP_BOX_PADDING_HORIZONTAL[paddingHorizontal],
           paddingVertical !== undefined &&
             TWCLASSMAP_BOX_PADDING_VERTICAL[paddingVertical],
-          borderWidth !== undefined &&
-            TWCLASSMAP_BOX_BORDER_WIDTH[borderWidth],
+          borderWidth !== undefined && TWCLASSMAP_BOX_BORDER_WIDTH[borderWidth],
           borderColor,
           backgroundColor,
           twClassName,
