@@ -1,28 +1,29 @@
 /**
  * AvatarBase - size
  */
-export enum AvatarBaseSize {
+export type AvatarBaseSize = '16' | '24' | '32' | '40' | '48';
+export const AvatarBaseSize = {
   /**
    * Represents an extra small avatar size (16px).
    */
-  Xs = '16',
+  Xs: '16',
   /**
    * Represents a small avatar size (24px).
    */
-  Sm = '24',
+  Sm: '24',
   /**
    * Represents a medium avatar size (32px).
    */
-  Md = '32',
+  Md: '32',
   /**
    * Represents a large avatar size (40px).
    */
-  Lg = '40',
+  Lg: '40',
   /**
    * Represents an extra large avatar size (48px).
    */
-  Xl = '48',
-}
+  Xl: '48',
+} as const;
 export { AvatarBaseSize as AvatarAccountSize };
 export { AvatarBaseSize as AvatarFaviconSize };
 export { AvatarBaseSize as AvatarGroupSize };
@@ -34,104 +35,127 @@ export { AvatarBaseSize as AvatarSize };
 /**
  * Avatar - shape
  */
-export enum AvatarShape {
+export type AvatarShape = 'circle' | 'square';
+export const AvatarShape = {
   /**
    * Represents a circular Avatar.
    */
-  Circle = 'circle',
+  Circle: 'circle',
   /**
    * Represents a squared Avatar
    */
-  Square = 'square',
-}
+  Square: 'square',
+} as const;
 export { AvatarShape as AvatarBaseShape };
 
 /**
  * AvatarAccount - variant
  */
-export enum AvatarAccountVariant {
-  Blockies = 'blockies',
-  Jazzicon = 'jazzicon',
-  Maskicon = 'maskicon',
-}
+export type AvatarAccountVariant = 'blockies' | 'jazzicon' | 'maskicon';
+export const AvatarAccountVariant = {
+  Blockies: 'blockies',
+  Jazzicon: 'jazzicon',
+  Maskicon: 'maskicon',
+} as const;
 
 /**
  * AvatarGroup - variant
  */
-export enum AvatarGroupVariant {
-  Account = 'Account',
-  Favicon = 'Favicon',
-  Network = 'Network',
-  Token = 'Token',
-}
+export type AvatarGroupVariant = 'Account' | 'Favicon' | 'Network' | 'Token';
+export const AvatarGroupVariant = {
+  Account: 'Account',
+  Favicon: 'Favicon',
+  Network: 'Network',
+  Token: 'Token',
+} as const;
 
 /**
  * AvatarIcon - severity
  */
-export enum AvatarIconSeverity {
-  Neutral = 'neutral',
-  Info = 'info',
-  Success = 'success',
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  Error = 'error',
-  Warning = 'warning',
-}
+export type AvatarIconSeverity =
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'error'
+  | 'warning';
+export const AvatarIconSeverity = {
+  Neutral: 'neutral',
+  Info: 'info',
+  Success: 'success',
+
+  Error: 'error',
+  Warning: 'warning',
+} as const;
 
 /**
  * BadgeCount - size
  */
-export enum BadgeCountSize {
+export type BadgeCountSize = 'Md' | 'Lg';
+export const BadgeCountSize = {
   /**
    * Represents a medium badge count (14px height).
    */
-  Md = 'Md',
+  Md: 'Md',
   /**
    * Represents a large badge count (20px height).
    */
-  Lg = 'Lg',
-}
+  Lg: 'Lg',
+} as const;
 
 /**
  * BadgeStatus - status
  */
-export enum BadgeStatusStatus {
-  Active = 'active', // Connected
-  Inactive = 'inactive', // Connected
-  Disconnected = 'disconnected',
-  New = 'new',
-  Attention = 'attention',
-}
+export type BadgeStatusStatus =
+  | 'active'
+  | 'inactive'
+  | 'disconnected'
+  | 'new'
+  | 'attention';
+export const BadgeStatusStatus = {
+  Active: 'active', // Connected
+  Inactive: 'inactive', // Connected
+  Disconnected: 'disconnected',
+  New: 'new',
+  Attention: 'attention',
+} as const;
 /**
  * BadgeStatus - size
  */
-export enum BadgeStatusSize {
+export type BadgeStatusSize = 'Md' | 'Lg';
+export const BadgeStatusSize = {
   /**
    * Represents a medium badge status size (8px).
    */
-  Md = 'Md',
+  Md: 'Md',
   /**
    * Represents a large avatar size (10px).
    */
-  Lg = 'Lg',
-}
+  Lg: 'Lg',
+} as const;
 
 /**
  * BadgeWrapper - positionAnchorShape
  */
-export enum BadgeWrapperPositionAnchorShape {
-  Rectangular = 'Rectangular',
-  Circular = 'Circular',
-}
+export type BadgeWrapperPositionAnchorShape = 'Rectangular' | 'Circular';
+export const BadgeWrapperPositionAnchorShape = {
+  Rectangular: 'Rectangular',
+  Circular: 'Circular',
+} as const;
 
 /**
  * BadgeWrapper - position.
  */
-export enum BadgeWrapperPosition {
-  TopRight = 'TopRight',
-  BottomRight = 'BottomRight',
-  BottomLeft = 'BottomLeft',
-  TopLeft = 'TopLeft',
-}
+export type BadgeWrapperPosition =
+  | 'TopRight'
+  | 'BottomRight'
+  | 'BottomLeft'
+  | 'TopLeft';
+export const BadgeWrapperPosition = {
+  TopRight: 'TopRight',
+  BottomRight: 'BottomRight',
+  BottomLeft: 'BottomLeft',
+  TopLeft: 'TopLeft',
+} as const;
 
 /**
  * BadgeWrapper - customPosition
@@ -156,192 +180,273 @@ export type BoxBorderWidth = 0 | 1 | 2 | 4 | 8;
 /**
  * Box - flexDirection
  */
-export enum BoxFlexDirection {
-  Row = 'flex-row',
-  RowReverse = 'flex-row-reverse',
-  Column = 'flex-col',
-  ColumnReverse = 'flex-col-reverse',
-}
+export type BoxFlexDirection =
+  | 'flex-row'
+  | 'flex-row-reverse'
+  | 'flex-col'
+  | 'flex-col-reverse';
+export const BoxFlexDirection = {
+  Row: 'flex-row',
+  RowReverse: 'flex-row-reverse',
+  Column: 'flex-col',
+  ColumnReverse: 'flex-col-reverse',
+} as const;
 
 /**
  * Box - flexWrap
  */
-export enum BoxFlexWrap {
-  NoWrap = 'flex-nowrap',
-  Wrap = 'flex-wrap',
-  WrapReverse = 'flex-wrap-reverse',
-}
+export type BoxFlexWrap = 'flex-nowrap' | 'flex-wrap' | 'flex-wrap-reverse';
+export const BoxFlexWrap = {
+  NoWrap: 'flex-nowrap',
+  Wrap: 'flex-wrap',
+  WrapReverse: 'flex-wrap-reverse',
+} as const;
 
 /**
  * Box - alignItems
  */
-export enum BoxAlignItems {
-  Start = 'items-start',
-  Center = 'items-center',
-  End = 'items-end',
-  Stretch = 'items-stretch',
-  Baseline = 'items-baseline',
-}
+export type BoxAlignItems =
+  | 'items-start'
+  | 'items-center'
+  | 'items-end'
+  | 'items-stretch'
+  | 'items-baseline';
+export const BoxAlignItems = {
+  Start: 'items-start',
+  Center: 'items-center',
+  End: 'items-end',
+  Stretch: 'items-stretch',
+  Baseline: 'items-baseline',
+} as const;
 
 /**
  * Box - justifyContent
  */
-export enum BoxJustifyContent {
-  Start = 'justify-start',
-  Center = 'justify-center',
-  End = 'justify-end',
-  Between = 'justify-between',
-  Around = 'justify-around',
-  Evenly = 'justify-evenly',
-}
+export type BoxJustifyContent =
+  | 'justify-start'
+  | 'justify-center'
+  | 'justify-end'
+  | 'justify-between'
+  | 'justify-around'
+  | 'justify-evenly';
+export const BoxJustifyContent = {
+  Start: 'justify-start',
+  Center: 'justify-center',
+  End: 'justify-end',
+  Between: 'justify-between',
+  Around: 'justify-around',
+  Evenly: 'justify-evenly',
+} as const;
 
 /**
  * Box - backgroundColor
  */
-export enum BoxBackgroundColor {
+export type BoxBackgroundColor =
+  | 'bg-default'
+  | 'bg-alternative'
+  | 'bg-section'
+  | 'bg-subsection'
+  | 'bg-muted'
+  | 'bg-primary-default'
+  | 'bg-primary-alternative'
+  | 'bg-primary-muted'
+  | 'bg-primary-inverse'
+  | 'bg-error-default'
+  | 'bg-error-alternative'
+  | 'bg-error-muted'
+  | 'bg-error-inverse'
+  | 'bg-warning-default'
+  | 'bg-warning-alternative'
+  | 'bg-warning-muted'
+  | 'bg-warning-inverse'
+  | 'bg-success-default'
+  | 'bg-success-alternative'
+  | 'bg-success-muted'
+  | 'bg-success-inverse'
+  | 'bg-info-default'
+  | 'bg-info-muted'
+  | 'bg-info-inverse'
+  | 'bg-flask-default'
+  | 'bg-flask-inverse'
+  | 'bg-overlay-alternative'
+  | 'bg-overlay-default'
+  | 'bg-overlay-inverse'
+  | 'bg-transparent';
+export const BoxBackgroundColor = {
   /** Default background color */
-  BackgroundDefault = 'bg-default',
+  BackgroundDefault: 'bg-default',
   /** Alternative background color */
-  BackgroundAlternative = 'bg-alternative',
+  BackgroundAlternative: 'bg-alternative',
   /** Section background color */
-  BackgroundSection = 'bg-section',
+  BackgroundSection: 'bg-section',
   /** Subsection background color */
-  BackgroundSubsection = 'bg-subsection',
+  BackgroundSubsection: 'bg-subsection',
   /** Muted background color */
-  BackgroundMuted = 'bg-muted',
+  BackgroundMuted: 'bg-muted',
   /** Primary default background color */
-  PrimaryDefault = 'bg-primary-default',
+  PrimaryDefault: 'bg-primary-default',
   /** Primary alternative background color */
-  PrimaryAlternative = 'bg-primary-alternative',
+  PrimaryAlternative: 'bg-primary-alternative',
   /** Primary muted background color */
-  PrimaryMuted = 'bg-primary-muted',
+  PrimaryMuted: 'bg-primary-muted',
   /** Primary inverse background color */
-  PrimaryInverse = 'bg-primary-inverse',
+  PrimaryInverse: 'bg-primary-inverse',
   /** Error default background color */
-  ErrorDefault = 'bg-error-default',
+  ErrorDefault: 'bg-error-default',
   /** Error alternative background color */
-  ErrorAlternative = 'bg-error-alternative',
+  ErrorAlternative: 'bg-error-alternative',
   /** Error muted background color */
-  ErrorMuted = 'bg-error-muted',
+  ErrorMuted: 'bg-error-muted',
   /** Error inverse background color */
-  ErrorInverse = 'bg-error-inverse',
+  ErrorInverse: 'bg-error-inverse',
   /** Warning default background color */
-  WarningDefault = 'bg-warning-default',
+  WarningDefault: 'bg-warning-default',
   /** Warning alternative background color */
-  WarningAlternative = 'bg-warning-alternative',
+  WarningAlternative: 'bg-warning-alternative',
   /** Warning muted background color */
-  WarningMuted = 'bg-warning-muted',
+  WarningMuted: 'bg-warning-muted',
   /** Warning inverse background color */
-  WarningInverse = 'bg-warning-inverse',
+  WarningInverse: 'bg-warning-inverse',
   /** Success default background color */
-  SuccessDefault = 'bg-success-default',
+  SuccessDefault: 'bg-success-default',
   /** Success alternative background color */
-  SuccessAlternative = 'bg-success-alternative',
+  SuccessAlternative: 'bg-success-alternative',
   /** Success muted background color */
-  SuccessMuted = 'bg-success-muted',
+  SuccessMuted: 'bg-success-muted',
   /** Success inverse background color */
-  SuccessInverse = 'bg-success-inverse',
+  SuccessInverse: 'bg-success-inverse',
   /** Info default background color */
-  InfoDefault = 'bg-info-default',
+  InfoDefault: 'bg-info-default',
   /** Info muted background color */
-  InfoMuted = 'bg-info-muted',
+  InfoMuted: 'bg-info-muted',
   /** Info inverse background color */
-  InfoInverse = 'bg-info-inverse',
+  InfoInverse: 'bg-info-inverse',
   /** Flask default background color */
-  FlaskDefault = 'bg-flask-default',
+  FlaskDefault: 'bg-flask-default',
   /** Flask inverse background color */
-  FlaskInverse = 'bg-flask-inverse',
+  FlaskInverse: 'bg-flask-inverse',
   /** Overlay alternative background color */
-  OverlayAlternative = 'bg-overlay-alternative',
+  OverlayAlternative: 'bg-overlay-alternative',
   /** Overlay default background color */
-  OverlayDefault = 'bg-overlay-default',
+  OverlayDefault: 'bg-overlay-default',
   /** Overlay inverse background color */
-  OverlayInverse = 'bg-overlay-inverse',
+  OverlayInverse: 'bg-overlay-inverse',
   /** Transparent background color */
-  Transparent = 'bg-transparent',
-}
+  Transparent: 'bg-transparent',
+} as const;
 
 /**
  * Box - borderColor
  */
-export enum BoxBorderColor {
+export type BoxBorderColor =
+  | 'border-background-default'
+  | 'border-default'
+  | 'border-muted'
+  | 'border-primary-default'
+  | 'border-primary-alternative'
+  | 'border-primary-muted'
+  | 'border-primary-inverse'
+  | 'border-error-default'
+  | 'border-error-alternative'
+  | 'border-error-muted'
+  | 'border-error-inverse'
+  | 'border-warning-default'
+  | 'border-warning-alternative'
+  | 'border-warning-muted'
+  | 'border-warning-inverse'
+  | 'border-success-default'
+  | 'border-success-alternative'
+  | 'border-success-muted'
+  | 'border-success-inverse'
+  | 'border-info-default'
+  | 'border-info-alternative'
+  | 'border-info-muted'
+  | 'border-info-inverse'
+  | 'border-flask-default'
+  | 'border-flask-inverse'
+  | 'border-overlay-alternative'
+  | 'border-overlay-default'
+  | 'border-overlay-inverse'
+  | 'border-transparent';
+export const BoxBorderColor = {
   /** Background default for cut out effect*/
-  BackgroundDefault = 'border-background-default',
+  BackgroundDefault: 'border-background-default',
   /** Default border color */
-  BorderDefault = 'border-default',
+  BorderDefault: 'border-default',
   /** Muted border color */
-  BorderMuted = 'border-muted',
+  BorderMuted: 'border-muted',
   /** Primary default border color */
-  PrimaryDefault = 'border-primary-default',
+  PrimaryDefault: 'border-primary-default',
   /** Primary alternative border color */
-  PrimaryAlternative = 'border-primary-alternative',
+  PrimaryAlternative: 'border-primary-alternative',
   /** Primary muted border color */
-  PrimaryMuted = 'border-primary-muted',
+  PrimaryMuted: 'border-primary-muted',
   /** Primary inverse border color */
-  PrimaryInverse = 'border-primary-inverse',
+  PrimaryInverse: 'border-primary-inverse',
   /** Error default border color */
-  ErrorDefault = 'border-error-default',
+  ErrorDefault: 'border-error-default',
   /** Error alternative border color */
-  ErrorAlternative = 'border-error-alternative',
+  ErrorAlternative: 'border-error-alternative',
   /** Error muted border color */
-  ErrorMuted = 'border-error-muted',
+  ErrorMuted: 'border-error-muted',
   /** Error inverse border color */
-  ErrorInverse = 'border-error-inverse',
+  ErrorInverse: 'border-error-inverse',
   /** Warning default border color */
-  WarningDefault = 'border-warning-default',
+  WarningDefault: 'border-warning-default',
   /** Warning alternative border color */
-  WarningAlternative = 'border-warning-alternative',
+  WarningAlternative: 'border-warning-alternative',
   /** Warning muted border color */
-  WarningMuted = 'border-warning-muted',
+  WarningMuted: 'border-warning-muted',
   /** Warning inverse border color */
-  WarningInverse = 'border-warning-inverse',
+  WarningInverse: 'border-warning-inverse',
   /** Success default border color */
-  SuccessDefault = 'border-success-default',
+  SuccessDefault: 'border-success-default',
   /** Success alternative border color */
-  SuccessAlternative = 'border-success-alternative',
+  SuccessAlternative: 'border-success-alternative',
   /** Success muted border color */
-  SuccessMuted = 'border-success-muted',
+  SuccessMuted: 'border-success-muted',
   /** Success inverse border color */
-  SuccessInverse = 'border-success-inverse',
+  SuccessInverse: 'border-success-inverse',
   /** Info default border color */
-  InfoDefault = 'border-info-default',
+  InfoDefault: 'border-info-default',
   /** Info alternative border color */
-  InfoAlternative = 'border-info-alternative',
+  InfoAlternative: 'border-info-alternative',
   /** Info muted border color */
-  InfoMuted = 'border-info-muted',
+  InfoMuted: 'border-info-muted',
   /** Info inverse border color */
-  InfoInverse = 'border-info-inverse',
+  InfoInverse: 'border-info-inverse',
   /** Flask default border color */
-  FlaskDefault = 'border-flask-default',
+  FlaskDefault: 'border-flask-default',
   /** Flask inverse border color */
-  FlaskInverse = 'border-flask-inverse',
+  FlaskInverse: 'border-flask-inverse',
   /** Overlay alternative border color */
-  OverlayAlternative = 'border-overlay-alternative',
+  OverlayAlternative: 'border-overlay-alternative',
   /** Overlay default border color */
-  OverlayDefault = 'border-overlay-default',
+  OverlayDefault: 'border-overlay-default',
   /** Overlay inverse border color */
-  OverlayInverse = 'border-overlay-inverse',
+  OverlayInverse: 'border-overlay-inverse',
   /** Transparent border color */
-  Transparent = 'border-transparent',
-}
+  Transparent: 'border-transparent',
+} as const;
 
 /**
  * ButtonBase - size
  */
-export enum ButtonBaseSize {
+export type ButtonBaseSize = 'sm' | 'md' | 'lg';
+export const ButtonBaseSize = {
   /**
    * Represents a small button size (32px).
    */
-  Sm = 'sm',
+  Sm: 'sm',
   /**
    * Represents a medium button size (40px).
    */
-  Md = 'md',
+  Md: 'md',
   /**
    * Represents a large button size (48px).
    */
-  Lg = 'lg',
-}
+  Lg: 'lg',
+} as const;
 export { ButtonBaseSize as ButtonSize };
 export { ButtonBaseSize as ButtonPrimarySize };
 export { ButtonBaseSize as ButtonSecondarySize };
@@ -350,211 +455,276 @@ export { ButtonBaseSize as ButtonTertiarySize };
 /**
  * Button - variant
  */
-export enum ButtonVariant {
-  Primary = 'Primary',
-  Secondary = 'Secondary',
-  Tertiary = 'Tertiary',
-}
+export type ButtonVariant = 'Primary' | 'Secondary' | 'Tertiary';
+export const ButtonVariant = {
+  Primary: 'Primary',
+  Secondary: 'Secondary',
+  Tertiary: 'Tertiary',
+} as const;
 
 /**
  * ButtonIcon - size
  */
-export enum ButtonIconSize {
+export type ButtonIconSize = 'sm' | 'md' | 'lg';
+export const ButtonIconSize = {
   /**
    * Represents a small button size (24px).
    */
-  Sm = 'sm',
+  Sm: 'sm',
   /**
    * Represents a medium button size (32px).
    */
-  Md = 'md',
+  Md: 'md',
   /**
    * Represents a large button size (40px).
    */
-  Lg = 'lg',
-}
+  Lg: 'lg',
+} as const;
 
 /**
  * Text - variant
  */
-export enum TextVariant {
+export type TextVariant =
+  | 'display-lg'
+  | 'display-md'
+  | 'heading-lg'
+  | 'heading-md'
+  | 'heading-sm'
+  | 'body-lg'
+  | 'body-md'
+  | 'body-sm'
+  | 'body-xs'
+  | 'page-heading'
+  | 'section-heading'
+  | 'button-label-md'
+  | 'button-label-lg'
+  | 'amount-display-lg';
+export const TextVariant = {
   // Display Sizes
-  DisplayLg = 'display-lg',
-  DisplayMd = 'display-md',
+  DisplayLg: 'display-lg',
+  DisplayMd: 'display-md',
 
   // Heading Sizes
-  HeadingLg = 'heading-lg',
-  HeadingMd = 'heading-md',
-  HeadingSm = 'heading-sm',
+  HeadingLg: 'heading-lg',
+  HeadingMd: 'heading-md',
+  HeadingSm: 'heading-sm',
 
   // Body Sizes
-  BodyLg = 'body-lg',
-  BodyMd = 'body-md',
-  BodySm = 'body-sm',
-  BodyXs = 'body-xs',
+  BodyLg: 'body-lg',
+  BodyMd: 'body-md',
+  BodySm: 'body-sm',
+  BodyXs: 'body-xs',
 
   // Special Typography Variants
-  PageHeading = 'page-heading',
-  SectionHeading = 'section-heading',
-  ButtonLabelMd = 'button-label-md',
-  ButtonLabelLg = 'button-label-lg',
-  AmountDisplayLg = 'amount-display-lg',
-}
+  PageHeading: 'page-heading',
+  SectionHeading: 'section-heading',
+  ButtonLabelMd: 'button-label-md',
+  ButtonLabelLg: 'button-label-lg',
+  AmountDisplayLg: 'amount-display-lg',
+} as const;
 
 /**
  * Text - color
  */
-export enum TextColor {
+export type TextColor =
+  | 'text-default'
+  | 'text-alternative'
+  | 'text-muted'
+  | 'text-overlay-inverse'
+  | 'text-primary-default'
+  | 'text-primary-alternative'
+  | 'text-primary-inverse'
+  | 'text-primary-default-pressed'
+  | 'text-error-default'
+  | 'text-error-alternative'
+  | 'text-error-inverse'
+  | 'text-error-default-pressed'
+  | 'text-warning-default'
+  | 'text-warning-inverse'
+  | 'text-warning-default-pressed'
+  | 'text-success-default'
+  | 'text-success-inverse'
+  | 'text-success-default-pressed'
+  | 'text-info-default'
+  | 'text-info-inverse'
+  | 'text-transparent';
+export const TextColor = {
   /** For default neutral text. */
-  TextDefault = 'text-default',
+  TextDefault: 'text-default',
   /** For softer contrast neutral text */
-  TextAlternative = 'text-alternative',
+  TextAlternative: 'text-alternative',
   /** For the softest contrast neutral text (not accessible) */
-  TextMuted = 'text-muted',
+  TextMuted: 'text-muted',
   /** For elements used on top of overlay/alternative. */
-  OverlayInverse = 'text-overlay-inverse',
+  OverlayInverse: 'text-overlay-inverse',
   /** For interactive, active, and selected semantics. */
-  PrimaryDefault = 'text-primary-default',
+  PrimaryDefault: 'text-primary-default',
   /** For softer variants of primary text. */
-  PrimaryAlternative = 'text-primary-alternative',
+  PrimaryAlternative: 'text-primary-alternative',
   /** For elements used on top of primary/default. */
-  PrimaryInverse = 'text-primary-inverse',
+  PrimaryInverse: 'text-primary-inverse',
   /** For primary text in a pressed state. */
-  PrimaryDefaultPressed = 'text-primary-default-pressed',
+  PrimaryDefaultPressed: 'text-primary-default-pressed',
   /** For critical alert text. */
-  ErrorDefault = 'text-error-default',
+  ErrorDefault: 'text-error-default',
   /** For stronger contrast error text. */
-  ErrorAlternative = 'text-error-alternative',
+  ErrorAlternative: 'text-error-alternative',
   /** For elements used on top of error/default. */
-  ErrorInverse = 'text-error-inverse',
+  ErrorInverse: 'text-error-inverse',
   /** For critical alert text in a pressed state. */
-  ErrorDefaultPressed = 'text-error-default-pressed',
+  ErrorDefaultPressed: 'text-error-default-pressed',
   /** For caution alert text. */
-  WarningDefault = 'text-warning-default',
+  WarningDefault: 'text-warning-default',
   /** For elements used on top of warning/default. */
-  WarningInverse = 'text-warning-inverse',
+  WarningInverse: 'text-warning-inverse',
   /** For caution text in a pressed state. */
-  WarningDefaultPressed = 'text-warning-default-pressed',
+  WarningDefaultPressed: 'text-warning-default-pressed',
   /** For positive semantic text. */
-  SuccessDefault = 'text-success-default',
+  SuccessDefault: 'text-success-default',
   /** For elements used on top of success/default. */
-  SuccessInverse = 'text-success-inverse',
+  SuccessInverse: 'text-success-inverse',
   /** For positive text in a pressed state. */
-  SuccessDefaultPressed = 'text-success-default-pressed',
+  SuccessDefaultPressed: 'text-success-default-pressed',
   /** For informational read-only text. */
-  InfoDefault = 'text-info-default',
+  InfoDefault: 'text-info-default',
   /** For elements used on top of info/default. */
-  InfoInverse = 'text-info-inverse',
+  InfoInverse: 'text-info-inverse',
   /** Make the text color transparent. */
-  Transparent = 'text-transparent',
-}
+  Transparent: 'text-transparent',
+} as const;
 
 /**
  * Text - fontWeight
  */
-export enum FontWeight {
+export type FontWeight = '700' | '500' | '400';
+export const FontWeight = {
   /**
    * Weight - 700
    */
-  Bold = '700',
+  Bold: '700',
   /**
    * Weight - 500
    */
-  Medium = '500',
+  Medium: '500',
   /**
    * Weight - 400
    */
-  Regular = '400',
-}
+  Regular: '400',
+} as const;
 
 /**
  * Text - fontStyle
  */
-export enum FontStyle {
-  Italic = 'italic',
-  Normal = 'normal',
-}
+export type FontStyle = 'italic' | 'normal';
+export const FontStyle = {
+  Italic: 'italic',
+  Normal: 'normal',
+} as const;
 
 /**
  * Text - fontFamily
  */
-export enum FontFamily {
-  Default = 'default',
-  Accent = 'accent',
-  Hero = 'hero',
-}
+export type FontFamily = 'default' | 'accent' | 'hero';
+export const FontFamily = {
+  Default: 'default',
+  Accent: 'accent',
+  Hero: 'hero',
+} as const;
 
 /**
  * TextButton - Size
  */
-export enum TextButtonSize {
-  BodyLg = 'body-lg',
-  BodyMd = 'body-md',
-  BodySm = 'body-sm',
-  BodyXs = 'body-xs',
-}
+export type TextButtonSize = 'body-lg' | 'body-md' | 'body-sm' | 'body-xs';
+export const TextButtonSize = {
+  BodyLg: 'body-lg',
+  BodyMd: 'body-md',
+  BodySm: 'body-sm',
+  BodyXs: 'body-xs',
+} as const;
 
 /**
  * Icon - color
  */
-export enum IconColor {
+export type IconColor =
+  | 'text-icon-default'
+  | 'text-icon-alternative'
+  | 'text-icon-muted'
+  | 'text-overlay-inverse'
+  | 'text-primary-default'
+  | 'text-primary-alternative'
+  | 'text-primary-inverse'
+  | 'text-primary-default-pressed'
+  | 'text-error-default'
+  | 'text-error-alternative'
+  | 'text-error-inverse'
+  | 'text-error-default-pressed'
+  | 'text-warning-default'
+  | 'text-warning-inverse'
+  | 'text-warning-default-pressed'
+  | 'text-success-default'
+  | 'text-success-inverse'
+  | 'text-success-default-pressed'
+  | 'text-info-default'
+  | 'text-info-inverse';
+export const IconColor = {
   /** For default neutral icons */
-  IconDefault = 'text-icon-default',
+  IconDefault: 'text-icon-default',
   /** For softer neutral icons */
-  IconAlternative = 'text-icon-alternative',
+  IconAlternative: 'text-icon-alternative',
   /** For the weakest contrast neutral icons (not accessible) */
-  IconMuted = 'text-icon-muted',
+  IconMuted: 'text-icon-muted',
   /** For elements used on top of overlay/alternative. Used for text, icon, or border */
-  OverlayInverse = 'text-overlay-inverse',
+  OverlayInverse: 'text-overlay-inverse',
   /** For interactive, active, and selected semantics. Used for text, background, icon, or border */
-  PrimaryDefault = 'text-primary-default',
+  PrimaryDefault: 'text-primary-default',
   /** For softer variants of primary interactive elements */
-  PrimaryAlternative = 'text-primary-alternative',
+  PrimaryAlternative: 'text-primary-alternative',
   /** For elements used on top of primary/default. Used for text, icon, or border */
-  PrimaryInverse = 'text-primary-inverse',
+  PrimaryInverse: 'text-primary-inverse',
   /** For primary interactive elements in a pressed state */
-  PrimaryDefaultPressed = 'text-primary-default-pressed',
+  PrimaryDefaultPressed: 'text-primary-default-pressed',
   /** For critical alert semantic elements. Used for text, background, icon, or border */
-  ErrorDefault = 'text-error-default',
+  ErrorDefault: 'text-error-default',
   /** For softer variants of error elements */
-  ErrorAlternative = 'text-error-alternative',
+  ErrorAlternative: 'text-error-alternative',
   /** For elements used on top of error/default. Used for text, icon, or border */
-  ErrorInverse = 'text-error-inverse',
+  ErrorInverse: 'text-error-inverse',
   /** For critical alert semantic elements in a pressed state */
-  ErrorDefaultPressed = 'text-error-default-pressed',
+  ErrorDefaultPressed: 'text-error-default-pressed',
   /** For caution alert semantic elements. Used for text, background, icon, or border */
-  WarningDefault = 'text-warning-default',
+  WarningDefault: 'text-warning-default',
   /** For elements used on top of warning/default. Used for text, icon, or border */
-  WarningInverse = 'text-warning-inverse',
+  WarningInverse: 'text-warning-inverse',
   /** For caution alert semantic elements in a pressed state */
-  WarningDefaultPressed = 'text-warning-default-pressed',
+  WarningDefaultPressed: 'text-warning-default-pressed',
   /** For positive semantic elements. Used for text, background, icon, or border */
-  SuccessDefault = 'text-success-default',
+  SuccessDefault: 'text-success-default',
   /** For elements used on top of success/default. Used for text, icon, or border */
-  SuccessInverse = 'text-success-inverse',
+  SuccessInverse: 'text-success-inverse',
   /** For positive semantic elements in a pressed state */
-  SuccessDefaultPressed = 'text-success-default-pressed',
+  SuccessDefaultPressed: 'text-success-default-pressed',
   /** For informational read-only elements. Used for text, background, icon, or border */
-  InfoDefault = 'text-info-default',
+  InfoDefault: 'text-info-default',
   /** For elements used on top of info/default. Used for text, icon, or border */
-  InfoInverse = 'text-info-inverse',
-}
+  InfoInverse: 'text-info-inverse',
+} as const;
 
 /**
  * Icon - size
  */
-export enum IconSize {
+export type IconSize = '12' | '16' | '20' | '24' | '32';
+export const IconSize = {
   /** Extra small - 12px */
-  Xs = '12',
+  Xs: '12',
   /** Small - 16px */
-  Sm = '16',
+  Sm: '16',
   /** Medium - 20px (Default) */
-  Md = '20',
+  Md: '20',
   /** Large - 24px */
-  Lg = '24',
+  Lg: '24',
   /** Extra large - 32px */
-  Xl = '32',
-}
+  Xl: '32',
+} as const;
 
 // /////////////////////////////////////////////////////
 // This is generated code - Manually add types above

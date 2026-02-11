@@ -13,12 +13,12 @@ export type ButtonProps = {
   variant?: ButtonVariant;
 } & (
   | (Omit<ButtonPrimaryProps, 'ref'> & {
-      variant?: ButtonVariant.Primary;
+      variant?: 'primary';
     })
   | (Omit<ButtonSecondaryProps, 'ref'> & {
-      variant?: ButtonVariant.Secondary;
+      variant?: 'secondary';
     })
   | (Omit<ButtonTertiaryProps, 'ref'> & {
-      variant?: ButtonVariant.Tertiary;
+      variant?: 'tertiary';
     })
 );
