@@ -9,10 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.6.0]
 
-### Uncategorized
+### Added
 
-- chore(deps-dev): bump @metamask/auto-changelog from 5.3.0 to 5.3.1 ([#878](https://github.com/MetaMask/metamask-design-system/pull/878))
-- feat: add AfterHours icon for React and React Native ([#879](https://github.com/MetaMask/metamask-design-system/pull/879))
+- Added `AfterHours` icon ([#879](https://github.com/MetaMask/metamask-design-system/pull/879))
 
 ## [0.5.1]
 
