@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
+    "main": ".storybook/index.js",
     "plugins": [
       [
         "expo-font",
