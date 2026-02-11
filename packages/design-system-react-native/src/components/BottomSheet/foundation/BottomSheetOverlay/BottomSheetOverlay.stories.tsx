@@ -1,4 +1,5 @@
 // Third party dependencies.
+import { StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 // External dependencies.
@@ -7,7 +8,6 @@ import { BoxBackgroundColor } from '../../../../types';
 // Internal dependencies.
 import { BottomSheetOverlay } from './BottomSheetOverlay';
 import { BottomSheetOverlayProps } from './BottomSheetOverlay.types';
-import { StoryObj } from '@storybook/react-native';
 
 const OverlayMeta = {
   title: 'Components/BottomSheets/BottomSheetOverlay',

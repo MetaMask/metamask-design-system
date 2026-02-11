@@ -1,1 +1,1 @@
-export { default } from './Overlay';
+export { BottomSheetOverlay } from './BottomSheetOverlay';
