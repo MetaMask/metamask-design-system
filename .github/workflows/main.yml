@@ -36,6 +36,11 @@ jobs:
     needs: check-workflows
     uses: ./.github/workflows/lint-build-test.yml
 
+  test-storybook:
+    name: Test Storybook
+    needs: check-workflows
+    uses: ./.github/workflows/test-storybook.yml
+
   is-release:
     name: Determine whether this is a release merge commit
     needs: lint-build-test
@@ -66,6 +71,7 @@ jobs:
     needs:
       - analyse-code
       - lint-build-test
+      - test-storybook
     outputs:
       passed: ${{ steps.set-output.outputs.passed }}
     steps:
