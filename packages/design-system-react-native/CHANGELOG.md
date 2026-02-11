@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0]
+
 ### Uncategorized
 
 - chore(deps-dev): bump @metamask/auto-changelog from 5.3.0 to 5.3.1 ([#878](https://github.com/MetaMask/metamask-design-system/pull/878))
@@ -121,7 +123,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.5.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.6.0...HEAD
+[0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.5.1...@metamask/design-system-react-native@0.6.0
 [0.5.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.5.0...@metamask/design-system-react-native@0.5.1
 [0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.4.1...@metamask/design-system-react-native@0.5.0
 [0.4.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.4.0...@metamask/design-system-react-native@0.4.1
