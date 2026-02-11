@@ -3,8 +3,8 @@ import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { Animated, Easing } from 'react-native';
 
-import { DEFAULT_OVERLAY_ANIMATION_DURATION } from './BottomSheetOverlay.constants';
 import { BottomSheetOverlay } from './BottomSheetOverlay';
+import { DEFAULT_OVERLAY_ANIMATION_DURATION } from './BottomSheetOverlay.constants';
 
 describe('BottomSheetOverlay', () => {
   beforeEach(() => {
@@ -64,7 +64,7 @@ describe('BottomSheetOverlay', () => {
 });
 
 describe('BottomSheetOverlay Constants', () => {
-  it('DEFAULT_OVERLAY_ANIMATION_DURATION equals AnimationDuration.Fast', () => {
+  it('the DEFAULT_OVERLAY_ANIMATION_DURATION equals AnimationDuration.Fast', () => {
     expect(DEFAULT_OVERLAY_ANIMATION_DURATION).toBe(AnimationDuration.Fast);
   });
 });
