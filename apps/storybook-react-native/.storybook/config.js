@@ -1,6 +1,7 @@
 import { addDecorator } from '@storybook/react-native';
 import { addons } from '@storybook/addons';
 import { useColorScheme } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { ThemeProvider, Theme } from '@metamask/design-system-twrnc-preset';
 
@@ -17,9 +18,11 @@ const ThemeDecorator = ({ children }) => {
   const theme = colorScheme === 'dark' ? Theme.Dark : Theme.Light;
 
   return (
-    <ThemeProvider theme={theme}>
-      <FontLoader>{children}</FontLoader>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider theme={theme}>
+        <FontLoader>{children}</FontLoader>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 };
 
