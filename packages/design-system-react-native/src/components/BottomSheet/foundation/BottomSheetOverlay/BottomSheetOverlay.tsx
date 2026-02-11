@@ -37,7 +37,13 @@ export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
         { opacity: opacityVal, backgroundColor: color },
       ]}
     >
-      {onPress && <TouchableOpacity onPress={onPress} style={tw`flex-1`} />}
+      {onPress && (
+        <TouchableOpacity
+          onPress={onPress}
+          style={tw`flex-1`}
+          testID="overlay.button"
+        />
+      )}
     </Animated.View>
   );
 };
