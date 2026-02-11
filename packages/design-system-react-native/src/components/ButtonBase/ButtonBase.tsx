@@ -28,7 +28,7 @@ export const ButtonBase = ({
   endAccessory,
   isDisabled,
   isFullWidth,
-  twClassName = '',
+  twClassName,
   textClassName,
   iconClassName,
   style,
@@ -107,16 +107,14 @@ export const ButtonBase = ({
             ? twClassName(pressed)
             : twClassName;
 
-        const baseContainerClassNames = `
-          flex-row items-center justify-center rounded-xl bg-muted px-4 min-w-[80px] overflow-hidden
-          ${TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size]}
-          ${isDisabled ? 'opacity-50' : 'opacity-100'}
-          ${isFullWidth ? 'w-full' : 'w-auto'}
-          ${containerClassName}
-        `;
-
         const computedStyle: StyleProp<ViewStyle>[] = [
-          tw`${baseContainerClassNames}`,
+          tw.style(
+            'flex-row items-center justify-center rounded-xl bg-muted px-4 min-w-[80px] overflow-hidden',
+            TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],
+            isDisabled ? 'opacity-50' : 'opacity-100',
+            isFullWidth ? 'w-full' : 'w-auto',
+            containerClassName,
+          ),
         ];
         if (typeof style === 'function') {
           const additionalStyle = style({ pressed });

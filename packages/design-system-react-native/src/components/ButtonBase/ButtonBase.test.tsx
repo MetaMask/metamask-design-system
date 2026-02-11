@@ -136,13 +136,16 @@ describe('ButtonBase', () => {
     const tw = getTw();
     const spinnerClasses =
       'flex-row items-center gap-x-2 absolute inset-0 flex items-center justify-center opacity-100';
-    const expectedSpinner = tw`${spinnerClasses}`;
+    const expectedSpinner = tw.style(
+      'flex-row items-center gap-x-2',
+      spinnerClasses,
+    );
 
     const { getByTestId } = render(
       <ButtonBase
         testID="btn"
         isLoading
-        spinnerProps={{ twClassName: spinnerClasses }}
+        spinnerProps={{ twClassName: spinnerClasses, testID: 'spinner' }}
       >
         Loading
       </ButtonBase>,

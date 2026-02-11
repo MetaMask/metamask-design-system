@@ -20,25 +20,30 @@ export const AvatarBase = ({
   fallbackText,
   fallbackTextProps,
   hasBorder = false,
-  twClassName = '',
+  twClassName,
   style,
   ...props
 }: AvatarBaseProps) => {
   const tw = useTailwind();
-  const twContainerClassNames = `
-    items-center justify-center overflow-hidden bg-section
-    ${
-      shape === AvatarBaseShape.Circle
-        ? 'rounded-full'
-        : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size]
-    }
-    ${hasBorder ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size] : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size]}
-    ${hasBorder ? TWCLASSMAP_AVATARBASE_SIZE_BORDER[size] : ''}
-    ${twClassName}
-  `;
 
   return (
-    <View style={[tw`${twContainerClassNames}`, style]} {...props}>
+    <View
+      {...props}
+      style={[
+        tw.style(
+          'items-center justify-center overflow-hidden bg-section',
+          shape === AvatarBaseShape.Circle
+            ? 'rounded-full'
+            : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size],
+          hasBorder
+            ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size]
+            : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size],
+          hasBorder && TWCLASSMAP_AVATARBASE_SIZE_BORDER[size],
+          twClassName,
+        ),
+        style,
+      ]}
+    >
       {fallbackText ? (
         <Text
           color={TextColor.TextMuted}

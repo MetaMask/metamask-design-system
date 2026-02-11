@@ -17,8 +17,15 @@ describe('BadgeStatus', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const finalSize = BadgeStatusSize.Md;
-      expectedOuter = tw`self-start rounded-full border-2 border-background-default`;
-      expectedInner = tw`rounded-full border-2 ${TWCLASSMAP_BADGESTATUS_SIZE[finalSize]} ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Active]} `;
+      expectedOuter = tw.style(
+        'self-start rounded-full',
+        'border-2 border-background-default',
+      );
+      expectedInner = tw.style(
+        'rounded-full border-2',
+        TWCLASSMAP_BADGESTATUS_SIZE[finalSize],
+        TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Active],
+      );
       return <BadgeStatus status={BadgeStatusStatus.Active} testID="badge" />;
     };
 
@@ -32,7 +39,7 @@ describe('BadgeStatus', () => {
     let expectedOuter;
     const TestComponent = () => {
       const tw = useTailwind();
-      expectedOuter = tw`self-start rounded-full`;
+      expectedOuter = tw.style('self-start rounded-full');
       return (
         <BadgeStatus
           status={BadgeStatusStatus.New}
@@ -87,7 +94,11 @@ describe('BadgeStatus', () => {
     const customSize = BadgeStatusSize.Lg; // For example, '10'
     const TestComponent = () => {
       const tw = useTailwind();
-      expectedInner = tw`rounded-full border-2 ${TWCLASSMAP_BADGESTATUS_SIZE[customSize]} ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Inactive]} `;
+      expectedInner = tw.style(
+        'rounded-full border-2',
+        TWCLASSMAP_BADGESTATUS_SIZE[customSize],
+        TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Inactive],
+      );
       return (
         <BadgeStatus
           status={BadgeStatusStatus.Inactive}
@@ -108,8 +119,15 @@ describe('BadgeStatus', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const defaultSize = BadgeStatusSize.Md;
-      expectedOuter = tw`self-start rounded-full border-2 border-background-default`;
-      expectedInner = tw`rounded-full border-2 ${TWCLASSMAP_BADGESTATUS_SIZE[defaultSize]} ${TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Active]} `;
+      expectedOuter = tw.style(
+        'self-start rounded-full',
+        'border-2 border-background-default',
+      );
+      expectedInner = tw.style(
+        'rounded-full border-2',
+        TWCLASSMAP_BADGESTATUS_SIZE[defaultSize],
+        TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE[BadgeStatusStatus.Active],
+      );
       return <BadgeStatus status={BadgeStatusStatus.Active} testID="badge" />;
     };
 

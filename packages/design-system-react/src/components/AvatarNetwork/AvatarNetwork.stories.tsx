@@ -115,6 +115,18 @@ export const FallbackText: Story = {
       <AvatarNetwork name="Polygon" fallbackText="POL" />
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const Size: Story = {
@@ -147,6 +159,18 @@ export const Size: Story = {
       />
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const HasBorder: Story = {

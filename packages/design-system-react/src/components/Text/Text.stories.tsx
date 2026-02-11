@@ -214,6 +214,18 @@ export const Color: Story = {
       </Text>
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Showcasing all text colors including muted variant
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const FontWeightStory: Story = {
