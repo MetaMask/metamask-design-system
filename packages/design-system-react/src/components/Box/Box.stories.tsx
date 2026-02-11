@@ -1448,6 +1448,18 @@ export const BorderColor: Story = {
       </Box>
     </Box>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Showcasing all border colors including muted variants
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const BorderWidth: Story = {
@@ -1794,6 +1806,18 @@ export const BackgroundColor: Story = {
       </Box>
     </Box>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Showcasing all background colors including muted variants
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const AsChild: Story = {
