@@ -62,15 +62,14 @@ describe('AvatarBase', () => {
       const size = AvatarBaseSize.Xs;
       const shapeClass = 'rounded-full';
       const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
         'bg-section',
         shapeClass,
         dimensionClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
@@ -83,15 +82,14 @@ describe('AvatarBase', () => {
       const size = AvatarBaseSize.Sm;
       const shapeClass = 'rounded-full';
       const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
         'bg-section',
         shapeClass,
         dimensionClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
@@ -104,15 +102,14 @@ describe('AvatarBase', () => {
       const size = AvatarBaseSize.Md;
       const shapeClass = 'rounded-full';
       const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
         'bg-section',
         shapeClass,
         dimensionClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
@@ -125,15 +122,14 @@ describe('AvatarBase', () => {
       const size = AvatarBaseSize.Lg;
       const shapeClass = 'rounded-full';
       const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
         'bg-section',
         shapeClass,
         dimensionClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
@@ -146,15 +142,14 @@ describe('AvatarBase', () => {
       const size = AvatarBaseSize.Xl;
       const shapeClass = 'rounded-full';
       const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
         'bg-section',
         shapeClass,
         dimensionClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
@@ -167,15 +162,14 @@ describe('AvatarBase', () => {
       const size = AvatarBaseSize.Xs;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
       const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
         'bg-section',
         shapeClass,
         dimensionClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
@@ -188,15 +182,14 @@ describe('AvatarBase', () => {
       const size = AvatarBaseSize.Sm;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
       const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
         'bg-section',
         shapeClass,
         dimensionClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
@@ -209,15 +202,14 @@ describe('AvatarBase', () => {
       const size = AvatarBaseSize.Md;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
       const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
         'bg-section',
         shapeClass,
         dimensionClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
@@ -230,15 +222,14 @@ describe('AvatarBase', () => {
       const size = AvatarBaseSize.Lg;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
       const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
         'bg-section',
         shapeClass,
         dimensionClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
@@ -251,15 +242,14 @@ describe('AvatarBase', () => {
       const size = AvatarBaseSize.Xl;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
       const dimensionClass = TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
         'bg-section',
         shapeClass,
         dimensionClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
@@ -279,7 +269,7 @@ describe('AvatarBase', () => {
       const dimensionClass =
         TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
       const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
@@ -287,8 +277,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
         borderClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
@@ -303,7 +292,7 @@ describe('AvatarBase', () => {
       const dimensionClass =
         TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
       const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
@@ -311,8 +300,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
         borderClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
@@ -327,7 +315,7 @@ describe('AvatarBase', () => {
       const dimensionClass =
         TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
       const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
@@ -335,8 +323,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
         borderClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
@@ -351,7 +338,7 @@ describe('AvatarBase', () => {
       const dimensionClass =
         TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
       const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
@@ -359,8 +346,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
         borderClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
@@ -375,7 +361,7 @@ describe('AvatarBase', () => {
       const dimensionClass =
         TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
       const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
@@ -383,8 +369,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
         borderClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
@@ -399,7 +384,7 @@ describe('AvatarBase', () => {
       const dimensionClass =
         TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
       const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
@@ -407,8 +392,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
         borderClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
@@ -423,7 +407,7 @@ describe('AvatarBase', () => {
       const dimensionClass =
         TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
       const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
@@ -431,8 +415,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
         borderClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
@@ -447,7 +430,7 @@ describe('AvatarBase', () => {
       const dimensionClass =
         TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
       const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
@@ -455,8 +438,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
         borderClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
@@ -471,7 +453,7 @@ describe('AvatarBase', () => {
       const dimensionClass =
         TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
       const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
@@ -479,8 +461,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
         borderClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
@@ -495,7 +476,7 @@ describe('AvatarBase', () => {
       const dimensionClass =
         TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size];
       const borderClass = TWCLASSMAP_AVATARBASE_SIZE_BORDER[size];
-      const classString = [
+      const expectedStyle = tw.style(
         'items-center',
         'justify-center',
         'overflow-hidden',
@@ -503,8 +484,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
         borderClass,
-      ].join(' ');
-      const expectedStyle = tw`${classString}`;
+      );
       const { getByTestId } = render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
@@ -517,16 +497,15 @@ describe('AvatarBase', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
 
-    const baseClasses = [
+    const expectedStyle = tw.style(
       'items-center',
       'justify-center',
       'overflow-hidden',
       'bg-section',
       'rounded-full',
       TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[AvatarBaseSize.Md],
-    ].join(' ');
-    const customClasses = `${baseClasses} bg-default`;
-    const expectedStyle = tw`${customClasses}`;
+      'bg-default',
+    );
 
     const customStyle = { margin: 42 };
     const { getByTestId } = render(
