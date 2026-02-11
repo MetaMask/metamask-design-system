@@ -13,7 +13,6 @@ export const AvatarNetwork = ({
   name,
   fallbackText,
   fallbackTextProps,
-  twClassName,
   imageOrSvgProps,
   ...props
 }: AvatarNetworkProps) => {
@@ -38,7 +37,6 @@ export const AvatarNetwork = ({
       shape={AvatarBaseShape.Square}
       fallbackText={finalFallbackText}
       fallbackTextProps={fallbackTextProps}
-      twClassName={twClassName}
       {...props}
     >
       {src && (
