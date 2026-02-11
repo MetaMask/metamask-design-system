@@ -114,7 +114,7 @@ describe('BottomSheetFooter', () => {
       expect.objectContaining(tw`flex-1`),
     );
     expect(subsequentButton.props.style).toContainEqual(
-      expect.objectContaining(tw`flex-1 ml-4`),
+      expect.objectContaining(tw`ml-4 flex-1`),
     );
   });
 
@@ -133,7 +133,7 @@ describe('BottomSheetFooter', () => {
       expect.objectContaining(tw`self-stretch`),
     );
     expect(subsequentButton.props.style).toContainEqual(
-      expect.objectContaining(tw`self-stretch mt-4`),
+      expect.objectContaining(tw`mt-4 self-stretch`),
     );
   });
 
