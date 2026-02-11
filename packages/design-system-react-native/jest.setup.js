@@ -11,5 +11,3 @@ jest.mock('react-native-svg', () => {
     Rect: MockedSvg,
   };
 });
-
-// React Native Reanimated mock removed - version 3.17.2 should handle React Native 0.76 compatibility better
