@@ -1,20 +1,22 @@
 // Third party dependencies.
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback, useState } from 'react';
-import { View, LayoutChangeEvent } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-// Internal dependencies.
+// External dependencies.
 import { Box } from '../Box';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { Text } from '../Text';
 
+// Internal dependencies.
 import {
-  HEADERBASE_TEST_ID,
   HEADERBASE_TITLE_TEST_ID,
   HEADERBASE_VARIANT_TEXT_VARIANTS,
 } from './HeaderBase.constants';
-import { HeaderBaseProps, HeaderBaseVariant } from './HeaderBase.types';
+import type { HeaderBaseProps } from './HeaderBase.types';
+import { HeaderBaseVariant } from './HeaderBase.types';
 
 const HeaderBase: React.FC<HeaderBaseProps> = ({
   children,
@@ -27,9 +29,9 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
   variant = HeaderBaseVariant.Compact,
   startAccessoryWrapperProps,
   endAccessoryWrapperProps,
-  testID = HEADERBASE_TEST_ID,
+  titleTestID = HEADERBASE_TITLE_TEST_ID,
   twClassName,
-  ...viewProps
+  ...props
 }) => {
   const tw = useTailwind();
   const insets = useSafeAreaInsets();
@@ -91,13 +93,16 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
       // Reverse the array so first item appears rightmost
       // Use original index (before reversal) for stable React keys
       const reversedProps = endButtonIconProps
-        .map((props, originalIndex) => ({ props, originalIndex }))
+        .map((iconProps, originalIndex) => ({
+          iconProps,
+          originalIndex,
+        }))
         .reverse();
-      return reversedProps.map(({ props, originalIndex }) => (
+      return reversedProps.map(({ iconProps, originalIndex }) => (
         <ButtonIcon
           key={`end-button-icon-${originalIndex}`}
           size={ButtonIconSize.Md}
-          {...props}
+          {...iconProps}
         />
       ));
     }
@@ -129,8 +134,7 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
         includesTopInset && { marginTop: insets.top },
         style,
       ]}
-      testID={testID}
-      {...viewProps}
+      {...props}
     >
       {/* Start accessory */}
       {shouldRenderStartWrapper && (
@@ -153,7 +157,7 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
         {typeof children === 'string' ? (
           <Text
             variant={textVariant}
-            testID={HEADERBASE_TITLE_TEST_ID}
+            testID={titleTestID}
             style={isLeftAligned ? undefined : tw.style('text-center')}
           >
             {children}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 
 import { Box } from '../Box';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
@@ -11,6 +12,16 @@ import { HeaderBaseVariant } from './HeaderBase.types';
 const HeaderBaseMeta = {
   title: 'Components/HeaderBase',
   component: HeaderBase,
+  decorators: [
+    (Story: React.ComponentType) => (
+      <View>
+        <Story />
+        <Box twClassName="p-4">
+          <Text variant={TextVariant.BodyMd}>Content below header</Text>
+        </Box>
+      </View>
+    ),
+  ],
   argTypes: {
     children: {
       control: 'text',
@@ -21,6 +32,9 @@ const HeaderBaseMeta = {
     },
     twClassName: {
       control: 'text',
+    },
+    includesTopInset: {
+      control: 'boolean',
     },
   },
 };
@@ -39,39 +53,31 @@ export const Variant = {
     <>
       <HeaderBase
         variant={HeaderBaseVariant.Compact}
-        startAccessory={
-          <ButtonIcon
-            iconName={IconName.ArrowLeft}
-            size={ButtonIconSize.Md}
-            onPress={() => console.log('Back pressed')}
-          />
-        }
-        endAccessory={
-          <ButtonIcon
-            iconName={IconName.Close}
-            size={ButtonIconSize.Md}
-            onPress={() => console.log('Close pressed')}
-          />
-        }
+        startButtonIconProps={{
+          iconName: IconName.ArrowLeft,
+          onPress: () => console.log('Back pressed'),
+        }}
+        endButtonIconProps={[
+          {
+            iconName: IconName.Close,
+            onPress: () => console.log('Close pressed'),
+          },
+        ]}
       >
         Compact Variant
       </HeaderBase>
       <HeaderBase
         variant={HeaderBaseVariant.Display}
-        startAccessory={
-          <ButtonIcon
-            iconName={IconName.ArrowLeft}
-            size={ButtonIconSize.Md}
-            onPress={() => console.log('Back pressed')}
-          />
-        }
-        endAccessory={
-          <ButtonIcon
-            iconName={IconName.Close}
-            size={ButtonIconSize.Md}
-            onPress={() => console.log('Close pressed')}
-          />
-        }
+        startButtonIconProps={{
+          iconName: IconName.ArrowLeft,
+          onPress: () => console.log('Back pressed'),
+        }}
+        endButtonIconProps={[
+          {
+            iconName: IconName.Close,
+            onPress: () => console.log('Close pressed'),
+          },
+        ]}
       >
         Display Variant
       </HeaderBase>

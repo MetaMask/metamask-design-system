@@ -16,7 +16,6 @@ export const HEADERBASE_VARIANT_TEXT_VARIANTS: Record<
 };
 
 /**
- * Default test IDs for HeaderBase component.
+ * Default test ID for the title Text element.
  */
-export const HEADERBASE_TEST_ID = 'header';
 export const HEADERBASE_TITLE_TEST_ID = 'header-title';

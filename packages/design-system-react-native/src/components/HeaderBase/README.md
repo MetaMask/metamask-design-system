@@ -1,129 +1,187 @@
-# [HeaderBase](https://metamask-consensys.notion.site/Header-Base-2e96e1ac4c2b4816bb7bd3c594c72538)
+# HeaderBase
 
-![HeaderBase](./HeaderBase.png)
+HeaderBase is a reusable header component with optional start/end accessories and a centered or left-aligned title. It supports both compact and display variants for different header styles.
 
-The HeaderBase component is a reusable UI component for displaying a header with optional startAccessory, children (title) and endAccessory content areas. It is designed to be flexible and customizable for various use cases to keep a visually balanced appearance.
+```tsx
+import { HeaderBase } from '@metamask/design-system-react-native';
+
+<HeaderBase>Page Title</HeaderBase>;
+```
 
 ## Props
 
-This component extends React Native's [ViewProps](https://reactnative.dev/docs/view) component.
+This component extends React Native's [ViewProps](https://reactnative.dev/docs/view) to inherit standard props such as `testID` and `accessibilityLabel`.
 
 ### `children`
 
-Content to wrap to display.
+The title of the header. Pass a string for automatic Text rendering with the correct variant, or a ReactNode for custom content.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| string \| ReactNode                                 | No                                                      |
+| TYPE                  | REQUIRED | DEFAULT     |
+| --------------------- | -------- | ----------- |
+| `string \| ReactNode` | No       | `undefined` |
+
+```tsx
+// String title (auto-renders as Text with correct variant)
+<HeaderBase>Page Title</HeaderBase>
+
+// Custom ReactNode title
+<HeaderBase>
+  <Box twClassName="items-center">
+    <Text variant={TextVariant.HeadingSm}>Custom Title</Text>
+    <Text variant={TextVariant.BodySm}>Subtitle</Text>
+  </Box>
+</HeaderBase>
+```
 
 ### `variant`
 
-Optional variant to control alignment and text size.
+Controls the alignment and text size of the header.
 
-- `Compact`: center-aligned with HeadingSm text (default)
-- `Display`: left-aligned with HeadingLg text
+Available variants:
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| HeaderBaseVariant                                   | No                                                      | HeaderBaseVariant.Compact                              |
+- `HeaderBaseVariant.Compact` — center-aligned with HeadingSm text (default)
+- `HeaderBaseVariant.Display` — left-aligned with HeadingLg text
+
+| TYPE                | REQUIRED | DEFAULT                     |
+| ------------------- | -------- | --------------------------- |
+| `HeaderBaseVariant` | No       | `HeaderBaseVariant.Compact` |
+
+```tsx
+<HeaderBase variant={HeaderBaseVariant.Compact}>Compact Header</HeaderBase>
+<HeaderBase variant={HeaderBaseVariant.Display}>Display Header</HeaderBase>
+```
 
 ### `startAccessory`
 
-Optional prop to include content to be displayed before the title. Takes priority over `startButtonIconProps` if both are provided.
+Content displayed before the title. Takes priority over `startButtonIconProps` if both are provided.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| ReactNode                                           | No                                                      |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+<HeaderBase
+  startAccessory={
+    <ButtonIcon
+      iconName={IconName.ArrowLeft}
+      size={ButtonIconSize.Md}
+      onPress={handleBack}
+    />
+  }
+>
+  Page Title
+</HeaderBase>
+```
 
 ### `endAccessory`
 
-Optional prop to include content to be displayed after the title. Takes priority over `endButtonIconProps` if both are provided.
+Content displayed after the title. Takes priority over `endButtonIconProps` if both are provided.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| ReactNode                                           | No                                                      |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+<HeaderBase
+  endAccessory={
+    <ButtonIcon
+      iconName={IconName.Close}
+      size={ButtonIconSize.Md}
+      onPress={handleClose}
+    />
+  }
+>
+  Page Title
+</HeaderBase>
+```
 
 ### `startButtonIconProps`
 
-Optional ButtonIcon props to render a ButtonIcon as the start accessory. Only used if `startAccessory` is not provided.
+ButtonIcon props to render a ButtonIcon as the start accessory. Only used if `startAccessory` is not provided. Defaults to `ButtonIconSize.Md`.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| ButtonIconProps                                     | No                                                      | size: ButtonIconSize.Md                                |
+| TYPE              | REQUIRED | DEFAULT     |
+| ----------------- | -------- | ----------- |
+| `ButtonIconProps` | No       | `undefined` |
+
+```tsx
+<HeaderBase
+  startButtonIconProps={{
+    iconName: IconName.ArrowLeft,
+    onPress: handleBack,
+  }}
+>
+  Page Title
+</HeaderBase>
+```
 
 ### `endButtonIconProps`
 
-Optional array of ButtonIcon props to render multiple ButtonIcons as end accessories. Rendered in reverse order (first item appears rightmost). Only used if `endAccessory` is not provided.
+Array of ButtonIcon props to render multiple ButtonIcons as end accessories. Rendered in reverse order (first item appears rightmost). Only used if `endAccessory` is not provided. Defaults to `ButtonIconSize.Md` for each.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| ButtonIconProps[]                                   | No                                                      | size: ButtonIconSize.Md for each                       |
+| TYPE                | REQUIRED | DEFAULT     |
+| ------------------- | -------- | ----------- |
+| `ButtonIconProps[]` | No       | `undefined` |
 
-### `includesTopInset`
-
-Optional prop to include the top inset to make sure the header is visible below device's notch.
-
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| boolean                                             | No                                                      | false                                                  |
-
-### `twClassName`
-
-Optional Tailwind class names for the header container.
-
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| string                                              | No                                                      |
-
-### `style`
-
-Optional style for the header container.
-
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| StyleProp\<ViewStyle\>                              | No                                                      |
-
-## Usage
-
-```javascript
-// HeaderBase with String title and ButtonIcon props
+```tsx
 <HeaderBase
-  startButtonIconProps={{ iconName: IconName.ArrowLeft, onPress: handleBack }}
-  endButtonIconProps={[{ iconName: IconName.Close, onPress: handleClose }]}
->
-  Page Title
-</HeaderBase>;
-
-// HeaderBase with multiple end icons (first item appears rightmost)
-<HeaderBase
-  startButtonIconProps={{ iconName: IconName.ArrowLeft, onPress: handleBack }}
   endButtonIconProps={[
     { iconName: IconName.Search, onPress: handleSearch },
     { iconName: IconName.Setting, onPress: handleSettings },
     { iconName: IconName.Close, onPress: handleClose },
   ]}
 >
-  Header with Multiple Icons
-</HeaderBase>;
-
-// HeaderBase with custom accessories (legacy pattern)
-<HeaderBase
-  startAccessory={<CustomBackButton />}
-  endAccessory={<CustomCloseButton />}
->
-  {SAMPLE_TITLE_STRING}
-</HeaderBase>;
-
-// HeaderBase with custom title content
-<HeaderBase
-  startAccessory={SAMPLE_STARTACCESSORY}
-  endAccessory={SAMPLE_ENDACCESSORY}
->
-  {CUSTOM_TITLE_NODE}
-</HeaderBase>;
-
-// HeaderBase with Display variant (left-aligned, larger text)
-<HeaderBase variant={HeaderBaseVariant.Display}>
-  Large Left-Aligned Title
-</HeaderBase>;
+  Page Title
+</HeaderBase>
 ```
+
+### `includesTopInset`
+
+Adds the device's safe area top inset as margin to ensure the header is visible below the notch.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<HeaderBase includesTopInset>Page Title</HeaderBase>
+```
+
+### `twClassName`
+
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+<HeaderBase twClassName="bg-info-default px-4">Styled Header</HeaderBase>
+```
+
+### `style`
+
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
+
+```tsx
+<HeaderBase style={{ marginHorizontal: 16 }}>Styled Header</HeaderBase>
+```
+
+### `titleTestID`
+
+Test ID for the title Text element. Only used when `children` is a string.
+
+| TYPE     | REQUIRED | DEFAULT          |
+| -------- | -------- | ---------------- |
+| `string` | No       | `'header-title'` |
+
+```tsx
+<HeaderBase titleTestID="my-header-title">Page Title</HeaderBase>
+```
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
