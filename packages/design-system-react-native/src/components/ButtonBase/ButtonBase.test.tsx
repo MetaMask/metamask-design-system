@@ -258,6 +258,27 @@ describe('ButtonBase', () => {
     );
   });
 
+  it('hides non-string React element children during loading', () => {
+    const tree = ReactTestRenderer.create(
+      <ButtonBase isLoading testID="btn">
+        <View testID="custom-child">
+          <View testID="nested-content" />
+        </View>
+      </ButtonBase>,
+    );
+
+    // Find the custom child element
+    const customChild = tree.root.findByProps({ testID: 'custom-child' });
+    expect(customChild).toBeDefined();
+
+    // Verify the wrapper View has opacity-0 when loading
+    // Non-string children are wrapped in View with tw.style(isLoading && 'opacity-0')
+    const wrapper = customChild.parent;
+    expect(wrapper?.props.style).toStrictEqual(
+      expect.objectContaining({ opacity: 0 }),
+    );
+  });
+
   it('applies function-based style prop correctly', () => {
     const functionStyle = createFunctionStyle();
 

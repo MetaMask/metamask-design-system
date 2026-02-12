@@ -184,7 +184,7 @@ export const ButtonBase = ({
             </View>
           )}
 
-          {/* Button content - opacity controlled by wrapper, no extra View needed */}
+          {/* Button content - opacity controlled individually on each child */}
           {finalStartIconName ? (
             <Icon
               name={finalStartIconName}
@@ -200,17 +200,21 @@ export const ButtonBase = ({
             )
           )}
 
-          <TextOrChildren
-            textProps={{
-              variant: TextVariant.BodyMd,
-              fontWeight: FontWeight.Medium,
-              color: TextColor.TextDefault,
-              twClassName: `shrink grow-0 flex-wrap text-center ${isLoading ? 'opacity-0' : ''} ${textClassName ? textClassName(pressed) : ''}`,
-              ...textProps,
-            }}
-          >
-            {children}
-          </TextOrChildren>
+          {typeof children === 'string' ? (
+            <TextOrChildren
+              textProps={{
+                variant: TextVariant.BodyMd,
+                fontWeight: FontWeight.Medium,
+                color: TextColor.TextDefault,
+                twClassName: `shrink grow-0 flex-wrap text-center ${isLoading ? 'opacity-0' : ''} ${textClassName ? textClassName(pressed) : ''}`,
+                ...textProps,
+              }}
+            >
+              {children}
+            </TextOrChildren>
+          ) : (
+            <View style={tw.style(isLoading && 'opacity-0')}>{children}</View>
+          )}
 
           {finalEndIconName ? (
             <Icon
