@@ -110,11 +110,12 @@ export async function createComponent(
       }
 
       // Replace placeholders in content
-      content = content.replace(/ComponentName/gu, componentName);
+      // Replace more specific patterns first to avoid partial matches
       content = content.replace(
         /ComponentNameProps/gu,
         `${componentName}Props`,
       );
+      content = content.replace(/ComponentName/gu, componentName);
       content = content.replace(/the component description/gu, description);
       content = content.replace(
         /COMPONENT_NAME_CLASSMAP/gu,
