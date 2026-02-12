@@ -1,12 +1,25 @@
-import { render } from '@testing-library/react-native';
+import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
 import { BottomSheetOverlay } from './BottomSheetOverlay';
 
 describe('BottomSheetOverlay', () => {
-  it('renders with testID when onPress is provided', () => {
+  it('renders correctly', () => {
+    const { getByTestId } = render(<BottomSheetOverlay testID="overlay" />);
+    expect(getByTestId('overlay')).toBeDefined();
+  });
+
+  it('calls onPress when pressed', () => {
     const onPress = jest.fn();
-    const { getByTestId } = render(<BottomSheetOverlay onPress={onPress} />);
-    expect(getByTestId('overlay.button')).toBeDefined();
+    const testID = 'overlay-touchable';
+    const { getByTestId } = render(
+      <BottomSheetOverlay
+        onPress={onPress}
+        touchableOpacityProps={{ testID }}
+      />,
+    );
+
+    fireEvent.press(getByTestId(testID));
+    expect(onPress).toHaveBeenCalledTimes(1);
   });
 });

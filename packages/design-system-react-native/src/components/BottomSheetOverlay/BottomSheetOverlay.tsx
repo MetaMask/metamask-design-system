@@ -13,8 +13,10 @@ import { BottomSheetOverlayProps } from './BottomSheetOverlay.types';
 
 export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
   style,
+  twClassName,
   onPress,
-  ...props
+  touchableOpacityProps,
+  ...viewProps
 }) => {
   const tw = useTailwind();
   const opacityVal = useAnimatedValue(0);
@@ -31,17 +33,17 @@ export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
   return (
     <Animated.View
       style={[
-        tw`absolute inset-0 bg-overlay-default`,
+        tw.style('absolute inset-0 bg-overlay-default', twClassName),
         style,
         { opacity: opacityVal },
       ]}
-      {...props}
+      {...viewProps}
     >
       {onPress && (
         <TouchableOpacity
           onPress={onPress}
-          style={tw`flex-1`}
-          testID="overlay.button"
+          {...touchableOpacityProps}
+          style={tw.style('flex-1')}
         />
       )}
     </Animated.View>

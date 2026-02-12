@@ -12,11 +12,9 @@ import { BottomSheetOverlay } from '@metamask/design-system-react-native';
 
 ## Props
 
-This component extends React Native's [TouchableOpacityProps](https://reactnative.dev/docs/touchableopacity).
-
 ### `onPress`
 
-Optional callback function triggered when the overlay is pressed. When provided, the overlay becomes interactive.
+Callback function triggered when the overlay is pressed. When provided, the overlay becomes interactive.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -30,6 +28,42 @@ import { BottomSheetOverlay } from '@metamask/design-system-react-native';
 
 // Non-interactive overlay
 <BottomSheetOverlay />
+```
+
+### `touchableOpacityProps`
+
+Props spread to the TouchableOpacity component for additional properties like `testID` or `accessibilityLabel`. Note: `onPress` should be passed as a top-level prop, not through this object.
+
+| TYPE                                                | REQUIRED | DEFAULT     |
+| --------------------------------------------------- | -------- | ----------- |
+| `Omit<TouchableOpacityProps, 'onPress' \| 'style'>` | No       | `undefined` |
+
+```tsx
+import { BottomSheetOverlay } from '@metamask/design-system-react-native';
+
+// With testID for testing
+<BottomSheetOverlay
+  onPress={() => console.log('Dismissed')}
+  touchableOpacityProps={{ testID: 'overlay-button' }}
+/>;
+```
+
+### `twClassName`
+
+Use the `twClassName` prop to add Tailwind CSS classes to the overlay container. These classes will be merged with the component's default classes, allowing you to customize the overlay appearance.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+import { BottomSheetOverlay } from '@metamask/design-system-react-native';
+
+// Custom background with higher opacity
+<BottomSheetOverlay twClassName="bg-black/80" />
+
+// Custom z-index
+<BottomSheetOverlay twClassName="z-50" />
 ```
 
 ### `style`
@@ -50,7 +84,10 @@ const styles = StyleSheet.create({
   },
 });
 
-<BottomSheetOverlay style={styles.customOverlay} onPress={() => {}} />;
+<BottomSheetOverlay
+  style={styles.customOverlay}
+  onPress={() => console.log('Pressed')}
+/>;
 ```
 
 ## Usage
