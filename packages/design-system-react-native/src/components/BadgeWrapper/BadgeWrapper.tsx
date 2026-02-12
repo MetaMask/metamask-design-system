@@ -20,7 +20,7 @@ export const BadgeWrapper = ({
   positionXOffset = 0,
   positionYOffset = 0,
   customPosition,
-  twClassName = '',
+  twClassName,
   style,
   ...props
 }: BadgeWrapperProps) => {
@@ -101,13 +101,16 @@ export const BadgeWrapper = ({
   ]);
 
   return (
-    <View style={[tw`relative self-start ${twClassName}`, style]} {...props}>
+    <View
+      {...props}
+      style={[tw.style('relative self-start', twClassName), style]}
+    >
       <View onLayout={getAnchorSize} {...childrenContainerProps}>
         {children}
       </View>
       <View
         onLayout={getBadgeSize}
-        style={[tw`absolute`, { ...finalPositions }]}
+        style={[tw.style('absolute'), { ...finalPositions }]}
         {...badgeContainerProps}
       >
         {badge}

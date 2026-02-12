@@ -1,6 +1,6 @@
 {
   "name": "@metamask/metamask-design-system",
-  "version": "17.0.0",
+  "version": "19.0.0",
   "private": true,
   "description": "The MetaMask Design System monorepo",
   "repository": {
@@ -38,7 +38,7 @@
     "lint:clear-cache": "rimraf .eslintcache",
     "lint:dependencies": "depcheck && yarn dedupe --check",
     "lint:dependencies:fix": "depcheck && yarn dedupe",
-    "lint:eslint": "yarn tsx ./scripts/run-eslint.ts --cache",
+    "lint:eslint": "eslint . --cache",
     "lint:fix": "yarn lint:clear-cache && yarn lint:eslint --fix && yarn lint:misc --write && yarn constraints --fix && yarn lint:dependencies:fix",
     "lint:misc": "prettier --no-error-on-unmatched-pattern '**/*.json' '**/*.md' '**/*.yml' '!.yarnrc.yml' '!merged-packages/**' --ignore-path .prettierignore",
     "prepack": "./scripts/prepack.sh",
@@ -99,9 +99,8 @@
     "@typescript-eslint/parser": "^8.7.0",
     "@yarnpkg/types": "^4.0.0",
     "babel-jest": "^29.7.0",
-    "chalk": "^4.1.2",
     "depcheck": "^1.4.7",
-    "eslint": "^9.11.0",
+    "eslint": "^9.39.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import-x": "^4.3.0",

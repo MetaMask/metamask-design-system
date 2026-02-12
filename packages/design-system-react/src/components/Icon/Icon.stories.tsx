@@ -1,4 +1,4 @@
-import type { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
 import { IconName, IconSize, IconColor, TextVariant } from '../../types';
@@ -17,7 +17,7 @@ const meta = {
   },
   args: {
     name: IconName.AddSquare,
-    size: IconSize.Md,
+    size: IconSize.Xl,
   },
   argTypes: {
     name: {

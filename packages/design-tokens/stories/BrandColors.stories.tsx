@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { brandColor as brandColorJS } from '../src/js';
@@ -17,6 +17,16 @@ const meta: Meta<typeof ColorSwatchGroup> = {
   parameters: {
     docs: {
       page: README,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Design token color showcase, not user-facing UI patterns
+          },
+        ],
+      },
     },
   },
 };

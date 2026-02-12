@@ -10,9 +10,11 @@ const config = createConfig([
   ...base,
   {
     ignores: [
+      '**/node_modules/**',
       '**/dist/**',
       '**/docs/**',
       '**/coverage/**',
+      '**/storybook-static/**',
       'merged-packages/**',
       '.yarn/**',
       'scripts/create-package/package-template/**',
@@ -182,7 +184,7 @@ const config = createConfig([
   {
     files: ['**/*.d.ts'],
     rules: {
-      '@typescript-eslint/naming-convention': 'warn',
+      '@typescript-eslint/naming-convention': 'error',
       'import-x/unambiguous': 'off',
     },
   },

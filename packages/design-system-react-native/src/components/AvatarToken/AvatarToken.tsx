@@ -13,7 +13,6 @@ export const AvatarToken = ({
   name,
   fallbackText,
   fallbackTextProps,
-  twClassName,
   imageOrSvgProps,
   ...props
 }: AvatarTokenProps) => {
@@ -38,7 +37,6 @@ export const AvatarToken = ({
       shape={AvatarBaseShape.Circle}
       fallbackText={finalFallbackText}
       fallbackTextProps={fallbackTextProps}
-      twClassName={twClassName}
       {...props}
     >
       {src && (

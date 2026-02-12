@@ -201,11 +201,9 @@ describe('ButtonTertiary', () => {
   });
 
   it('shows spinner + hides content when loading', () => {
-    const spinnerTW =
-      'absolute inset-0 flex items-center justify-center opacity-100';
-    const contentTW = 'flex-row items-center justify-center gap-x-2 opacity-0';
+    const spinnerTW = 'absolute inset-0 flex items-center justify-center';
 
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <ButtonTertiary
         isLoading
         spinnerProps={{ twClassName: spinnerTW }}
@@ -215,16 +213,18 @@ describe('ButtonTertiary', () => {
       </ButtonTertiary>,
     );
 
+    // Verify spinner is present
     const spinner = getByTestId('spinner-container');
     const spinnerStyles = flattenStyles(spinner.props.style);
     expect(spinnerStyles).toStrictEqual(
       expect.arrayContaining([expect.objectContaining(tw`${spinnerTW}`)]),
     );
 
-    const content = getByTestId('content-container');
-    const contentStyles = flattenStyles(content.props.style);
-    expect(contentStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining(tw`${contentTW}`)]),
+    // Verify content is hidden with opacity-0
+    const text = getByText('Loading');
+    const textStyles = flattenStyles(text.props.style);
+    expect(textStyles).toStrictEqual(
+      expect.arrayContaining([expect.objectContaining({ opacity: 0 })]),
     );
 
     expect(

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { ButtonBaseSize, TextVariant, TextColor } from '../../types';
@@ -287,10 +287,10 @@ export const AccessibilityStates: Story = {
           Use aria-expanded for buttons that control collapsible content
         </Text>
         <div className="flex gap-2">
-          <ButtonBase {...args} aria-expanded={false} aria-controls="menu-1">
+          <ButtonBase {...args} aria-expanded={false}>
             📁 Show Menu
           </ButtonBase>
-          <ButtonBase {...args} aria-expanded={true} aria-controls="menu-2">
+          <ButtonBase {...args} aria-expanded={true}>
             📂 Hide Menu
           </ButtonBase>
         </div>

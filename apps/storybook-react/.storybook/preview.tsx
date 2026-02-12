@@ -2,8 +2,8 @@ import React from 'react';
 import '../../../packages/design-tokens/dist/styles.css';
 import '../tailwind.css';
 
-import { Preview } from '@storybook/react';
-import { StoryContext, StoryFn } from '@storybook/react';
+import { Preview } from '@storybook/react-vite';
+import { StoryContext, StoryFn } from '@storybook/react-vite';
 
 export const globalTypes = {
   colorScheme: {
