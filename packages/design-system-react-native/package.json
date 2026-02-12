@@ -60,7 +60,7 @@
     "@metamask/auto-changelog": "^5.3.1",
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
-    "@metamask/utils": "^11.9.0",
+    "@metamask/utils": "^11.10.0",
     "@storybook/react-native": "6.5",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/react-native": "^12.8.1",
@@ -90,7 +90,7 @@
   "peerDependencies": {
     "@metamask/design-system-twrnc-preset": "^0.3.0",
     "@metamask/design-tokens": "^8.1.0",
-    "@metamask/utils": "^11.9.0",
+    "@metamask/utils": "^11.10.0",
     "lodash": "^4.17.23",
     "react": ">=18.2.0",
     "react-native": ">=0.72.0",
