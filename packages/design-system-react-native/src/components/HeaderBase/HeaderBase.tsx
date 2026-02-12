@@ -16,10 +16,6 @@ import {
 } from './HeaderBase.constants';
 import { HeaderBaseProps, HeaderBaseVariant } from './HeaderBase.types';
 
-/**
- * HeaderBase is a flexible header component that supports optional
- * start and end accessories with configurable alignment and text variants.
- */
 const HeaderBase: React.FC<HeaderBaseProps> = ({
   children,
   style,
