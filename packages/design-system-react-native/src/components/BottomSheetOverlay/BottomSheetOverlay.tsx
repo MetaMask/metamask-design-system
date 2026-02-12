@@ -7,7 +7,6 @@ import {
   useAnimatedValue,
 } from 'react-native';
 
-// Internal dependencies.
 import { DEFAULT_OVERLAY_ANIMATION_DURATION } from './BottomSheetOverlay.constants';
 import { BottomSheetOverlayProps } from './BottomSheetOverlay.types';
 
