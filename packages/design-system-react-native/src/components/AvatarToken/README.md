@@ -1,158 +1,128 @@
 # AvatarToken
 
-`AvatarToken` is reserved for representing tokens.
+Avatar reserved for representing tokens.
 
----
+```tsx
+import { AvatarToken } from '@metamask/design-system-react-native';
+
+<AvatarToken name="ethereum" />;
+```
 
 ## Props
 
-### `src`
-
-Optional prop specifying the source of the token image or SVG.
-
-| TYPE            | REQUIRED | DEFAULT | DESCRIPTION                               |
-| --------------- | -------- | ------- | ----------------------------------------- |
-| `ImageOrSvgSrc` | No       | `null`  | URI, local asset, or inline SVG component |
-
----
-
 ### `name`
 
-Optional string used to derive the fallback text (first character).
+The token name for the avatar.
 
-| TYPE     | REQUIRED | DEFAULT | DESCRIPTION                            |
-| -------- | -------- | ------- | -------------------------------------- |
-| `string` | No       | `null`  | Used to create fallback if image fails |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | Yes      | `undefined` |
 
----
-
-### `imageOrSvgProps`
-
-Optional props forwarded to the `ImageOrSvg` component.
-
-| TYPE              | REQUIRED | DEFAULT | DESCRIPTION                                        |
-| ----------------- | -------- | ------- | -------------------------------------------------- |
-| `ImageOrSvgProps` | No       | `null`  | Customize image handling, test IDs, alt text, etc. |
-
----
+```tsx
+<AvatarToken name="ethereum" />
+```
 
 ### `size`
 
-Controls the size of the avatar. Inherits from `AvatarBaseSize`.
-
-| TYPE              | REQUIRED | DEFAULT              |
-| ----------------- | -------- | -------------------- |
-| `AvatarTokenSize` | No       | `AvatarTokenSize.Md` |
+The size of the AvatarToken.
 
 Available sizes:
 
-- `Xs` – 16px
-- `Sm` – 24px
-- `Md` – 32px
-- `Lg` – 40px
-- `Xl` – 48px
+- `AvatarBaseSize.Xs` (16px)
+- `AvatarBaseSize.Sm` (24px)
+- `AvatarBaseSize.Md` (32px)
+- `AvatarBaseSize.Lg` (40px)
+- `AvatarBaseSize.Xl` (48px)
 
----
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `AvatarBaseSize` | No       | `AvatarBaseSize.Md` |
+
+```tsx
+<AvatarToken name="ethereum" size={AvatarBaseSize.Sm} />
+<AvatarToken name="ethereum" />
+<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />
+```
+
+### `src`
+
+Custom image source for the token avatar.
+
+| TYPE            | REQUIRED | DEFAULT     |
+| --------------- | -------- | ----------- |
+| `ImageOrSvgSrc` | No       | `undefined` |
+
+```tsx
+<AvatarToken
+  name="custom-token"
+  src={{ uri: 'https://example.com/token-icon.png' }}
+/>
+```
 
 ### `fallbackText`
 
-Optional custom fallback text shown when image fails to load.
+Text to display when the token image fails to load.
 
-| TYPE     | REQUIRED | DEFAULT                                   | DESCRIPTION           |
-| -------- | -------- | ----------------------------------------- | --------------------- |
-| `string` | No       | First character of `name` or empty string | Used when image fails |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
----
-
-### `fallbackTextProps`
-
-Optional props to customize the fallback text appearance.
-
-| TYPE                 | REQUIRED | DEFAULT |
-| -------------------- | -------- | ------- |
-| `Partial<TextProps>` | No       | `{}`    |
-
----
+```tsx
+<AvatarToken name="ethereum" fallbackText="ETH" />
+```
 
 ### `twClassName`
 
-Optional Tailwind-style utility classes.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `string` | No       | `''`    |
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
-
-### Additional Props
-
-All other props supported by `AvatarBase`, excluding `children`, are also accepted (e.g., `style`, `testID`).
-
----
-
-## Usage
-
-### Basic
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
-<AvatarToken src={{ uri: 'https://example.com/token.svg' }} name="Uniswap" />
-```
+import { AvatarToken } from '@metamask/design-system-react-native';
 
-### Custom Size and Fallback
-
-```tsx
+// Add additional styles
 <AvatarToken
-  size={AvatarTokenSize.Xl}
-  src={{ uri: 'https://bad-link.com/image.png' }}
-  name="Degen App"
-  fallbackText="DA"
-  fallbackTextProps={{ color: 'text-error-default' }}
-/>
+  name="ethereum"
+  twClassName="border-2 border-primary-100"
+>
+  Custom Border
+</AvatarToken>
+
+// Override default styles
+<AvatarToken
+  name="ethereum"
+  twClassName="!bg-error-100"
+>
+  Override Background
+</AvatarToken>
 ```
 
-### Forwarding props to ImageOrSvg
+### `style`
+
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-<AvatarToken
-  src={{ uri: 'https://example.com/token.svg' }}
-  imageOrSvgProps={{
-    testID: 'token-image',
-    imageProps: { accessibilityLabel: 'token icon' },
-  }}
-/>
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
+
+export const StyleExample = () => (
+  <AvatarToken name="ethereum" style={styles.custom} />
+);
 ```
 
----
+## References
 
-## Behavior
-
-- Falls back to the first character of `name` if image fails to load.
-- Defaults to `Md` (32px) size.
-- Always uses a circular shape.
-
----
-
-## Accessibility
-
-- Use `imageOrSvgProps.imageProps.accessibilityLabel` to describe the Token for screen readers.
-- The fallback text is rendered using the `Text` component and can be customized via `fallbackTextProps`.
-
----
-
-## Notes
-
-- This component uses `AvatarBase` and `ImageOrSvg` under the hood.
-- SVGs and raster images are both supported.
-- For custom shapes or behaviors, extend `AvatarBase` directly.
-
----
-
-## Contributing
-
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
-
----
-
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs), the [AvatarFavicon documentation](#), or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

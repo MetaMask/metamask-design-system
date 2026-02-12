@@ -2,6 +2,12 @@
 
 `ButtonPrimary` is a button for most important and desired action to guide the user.
 
+```tsx
+import { ButtonPrimary } from '@metamask/design-system-react-native';
+
+<ButtonPrimary onPress={() => {}}>Click Me</ButtonPrimary>;
+```
+
 ## Props
 
 ### `children`
@@ -12,6 +18,24 @@ The content to display inside the button.
 | ----------------- | ------------ | ----------- |
 | `React.ReactNode` | Yes          | `undefined` |
 
+```tsx
+<ButtonPrimary onPress={() => {}}>Button Content</ButtonPrimary>
+```
+
+### `onPress`
+
+Function to trigger when the button is pressed.
+
+| **Type**     | **Required** | **Default** |
+| ------------ | ------------ | ----------- |
+| `() => void` | Yes          | `undefined` |
+
+```tsx
+<ButtonPrimary onPress={() => console.log('Primary button pressed!')}>
+  Click Me
+</ButtonPrimary>
+```
+
 ### `size`
 
 Defines the size of the button.
@@ -19,6 +43,11 @@ Defines the size of the button.
 | **Type**     | **Required** | **Default**     |
 | ------------ | ------------ | --------------- |
 | `ButtonSize` | No           | `ButtonSize.Lg` |
+
+```tsx
+<ButtonPrimary size={ButtonSize.Sm} onPress={() => {}}>Small Button</ButtonPrimary>
+<ButtonPrimary size={ButtonSize.Lg} onPress={() => {}}>Large Button</ButtonPrimary>
+```
 
 ### `isLoading`
 
@@ -28,6 +57,12 @@ Indicates whether the button is in a loading state. If `true`, a spinner is disp
 | --------- | ------------ | ----------- |
 | `boolean` | No           | `false`     |
 
+```tsx
+<ButtonPrimary isLoading onPress={() => {}}>
+  Loading Button
+</ButtonPrimary>
+```
+
 ### `loadingText`
 
 Text to display alongside the spinner when the button is loading.
@@ -35,6 +70,12 @@ Text to display alongside the spinner when the button is loading.
 | **Type** | **Required** | **Default** |
 | -------- | ------------ | ----------- |
 | `string` | No           | `undefined` |
+
+```tsx
+<ButtonPrimary isLoading loadingText="Loading..." onPress={() => {}}>
+  Button with Loading Text
+</ButtonPrimary>
+```
 
 ### `isDisabled`
 
@@ -44,6 +85,12 @@ Disables the button, preventing interaction.
 | --------- | ------------ | ----------- |
 | `boolean` | No           | `false`     |
 
+```tsx
+<ButtonPrimary isDisabled onPress={() => {}}>
+  Disabled Button
+</ButtonPrimary>
+```
+
 ### `isDanger`
 
 Renders the button in a danger style to indicate destructive actions.
@@ -51,6 +98,12 @@ Renders the button in a danger style to indicate destructive actions.
 | **Type**  | **Required** | **Default** |
 | --------- | ------------ | ----------- |
 | `boolean` | No           | `false`     |
+
+```tsx
+<ButtonPrimary isDanger onPress={() => {}}>
+  Danger Button
+</ButtonPrimary>
+```
 
 ### `isInverse`
 
@@ -60,6 +113,12 @@ Renders the button with inverted colors for use on dark backgrounds.
 | --------- | ------------ | ----------- |
 | `boolean` | No           | `false`     |
 
+```tsx
+<ButtonPrimary isInverse onPress={() => {}}>
+  Inverse Button
+</ButtonPrimary>
+```
+
 ### `startIconName`
 
 Name of the icon to display at the start of the button.
@@ -67,6 +126,12 @@ Name of the icon to display at the start of the button.
 | **Type** | **Required** | **Default** |
 | -------- | ------------ | ----------- |
 | `string` | No           | `undefined` |
+
+```tsx
+<ButtonPrimary startIconName="add" onPress={() => {}}>
+  Button with Start Icon
+</ButtonPrimary>
+```
 
 ### `endIconName`
 
@@ -76,6 +141,12 @@ Name of the icon to display at the end of the button.
 | -------- | ------------ | ----------- |
 | `string` | No           | `undefined` |
 
+```tsx
+<ButtonPrimary endIconName="check" onPress={() => {}}>
+  Button with End Icon
+</ButtonPrimary>
+```
+
 ### `twClassName`
 
 TailwindCSS class names to apply custom styling.
@@ -83,6 +154,12 @@ TailwindCSS class names to apply custom styling.
 | **Type** | **Required** | **Default** |
 | -------- | ------------ | ----------- |
 | `string` | No           | `undefined` |
+
+```tsx
+<ButtonPrimary twClassName="shadow-lg" onPress={() => {}}>
+  Custom Styled Button
+</ButtonPrimary>
+```
 
 ### `style`
 
@@ -92,30 +169,19 @@ Custom styles to apply to the button.
 | ---------------------- | ------------ | ----------- |
 | `StyleProp<ViewStyle>` | No           | `undefined` |
 
-## Usage
-
 ```tsx
-import React from 'react';
-import ButtonPrimary from './ButtonPrimary';
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-const App = () => {
-  return (
-    <ButtonPrimary
-      size="lg"
-      isLoading={false}
-      loadingText="Loading..."
-      startIconName="add"
-      endIconName="check"
-      isDanger={false}
-      isInverse={false}
-      onPress={() => console.log('Primary button pressed!')}
-    >
-      Click Me
-    </ButtonPrimary>
-  );
-};
-
-export default App;
+export const StyleExample = () => (
+  <ButtonPrimary style={styles.custom} onPress={() => {}}>
+    Custom Styled Button
+  </ButtonPrimary>
+);
 ```
 
 ## Notes

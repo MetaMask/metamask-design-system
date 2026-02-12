@@ -1,72 +1,76 @@
 # Spinner
 
-The `Spinner` component is a loading indicator designed for React Native applications. It displays a spinning icon, optionally accompanied by text, to indicate a loading state.
+Spinner is used to render loading indicators within an interface.
+
+```tsx
+import { Spinner } from '@metamask/design-system-react-native';
+
+<Spinner />;
+```
 
 ## Props
 
 ### `color`
 
-Optional prop that sets the color of the spinner icon using predefined theme colors.
+The color of the spinner icon.
+
+Available colors:
+
+- `IconColor.IconDefault`
+- `IconColor.IconPrimary`
+- `IconColor.IconSuccess`
+- `IconColor.IconError`
+- `IconColor.IconWarning`
 
 | TYPE        | REQUIRED | DEFAULT                 |
-| :---------- | :------- | :---------------------- |
+| ----------- | -------- | ----------------------- |
 | `IconColor` | No       | `IconColor.IconDefault` |
 
-Available `IconColor` options include:
+```tsx
+<Spinner color={IconColor.IconPrimary} />
+```
 
-- `IconDefault`
-- `PrimaryDefault`
-- `SuccessDefault`
-- `ErrorDefault`
-- ...and more, as defined in the `IconColor` enum.
+### `size`
+
+The size of the spinner.
+
+Available sizes:
+
+- `SpinnerSize.Sm`
+- `SpinnerSize.Md`
+- `SpinnerSize.Lg`
+
+| TYPE          | REQUIRED | DEFAULT          |
+| ------------- | -------- | ---------------- |
+| `SpinnerSize` | No       | `SpinnerSize.Md` |
+
+```tsx
+<Spinner size={SpinnerSize.Lg} />
+```
 
 ### `loadingText`
 
-Optional text to display to the right of the spinner, providing additional context or information about the loading state.
+Optional text to display next to the spinner.
 
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `null`  |
-
-### `loadingTextProps`
-
-Optional props to customize the appearance of the `loadingText`. These are passed directly to the `Text` component.
-
-| TYPE                 | REQUIRED | DEFAULT |
-| :------------------- | :------- | :------ |
-| `Partial<TextProps>` | No       | `{}`    |
-
----
-
-## Usage
-
-### Basic Usage
-
-```tsx
-import React from 'react';
-import Spinner from '@metamask/design-system-react-native';
-
-// Render a spinner with default settings
-<Spinner />;
-```
-
-### Customizing the Spinner Color
-
-```tsx
-<Spinner color={IconColor.PrimaryDefault} />
-```
-
-### Adding Loading Text
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 <Spinner loadingText="Loading data..." />
 ```
 
-### Customizing the Loading Text
+### `loadingTextProps`
+
+Optional props to customize the loading text appearance.
+
+| TYPE                 | REQUIRED | DEFAULT     |
+| -------------------- | -------- | ----------- |
+| `Partial<TextProps>` | No       | `undefined` |
 
 ```tsx
 <Spinner
-  loadingText="Loading data..."
+  loadingText="Loading..."
   loadingTextProps={{
     variant: TextVariant.BodyMd,
     color: TextColor.PrimaryDefault,
@@ -74,44 +78,50 @@ import Spinner from '@metamask/design-system-react-native';
 />
 ```
 
-### Combining Props
+### `twClassName`
+
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
-<Spinner
-  color="SuccessDefault"
-  loadingText="Success!"
-  loadingTextProps={{
-    variant: TextVariant.BodyMd,
-    color: TextColor.PrimaryDefault,
-  }}
-/>
+import { Spinner } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<Spinner twClassName="opacity-70">
+  Semi-transparent Spinner
+</Spinner>
+
+// Override default styles
+<Spinner twClassName="!text-error-100">
+  Override Color
+</Spinner>
 ```
 
----
+### `style`
 
-## Accessibility
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-- Ensure the `loadingText` prop provides meaningful information about the loading state for users of assistive technologies.
-- Use the `loadingTextProps` to set accessibility roles or labels if needed.
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
----
+```tsx
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-## Notes
+export const StyleExample = () => <Spinner style={styles.custom} />;
+```
 
-- The `Spinner` component uses `react-native-reanimated` for smooth animations.
-- The spinning icon animation is implemented using `useSharedValue` and `useAnimatedStyle`.
-- For custom styling of the spinner, use the `Icon` component directly if necessary.
+## References
 
----
-
-## Contributing
-
-When contributing to the `Spinner` component:
-
-1. Ensure any new features or props are accompanied by tests.
-2. Update this README file to document the changes.
-3. Maintain consistency with the design system's guidelines.
-
----
-
-For questions or further assistance, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

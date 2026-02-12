@@ -1,161 +1,110 @@
 # BadgeStatus
 
-`BadgeStatus` indicates the state of an item through color
+BadgeStatus indicates the state of an item through color.
 
----
+```tsx
+import { BadgeStatus } from '@metamask/design-system-react-native';
+
+<BadgeStatus variant={BadgeStatusVariant.Success} />;
+```
 
 ## Props
 
-### `status` (Required)
+### `variant`
 
-Controls the status of the badge.
+The status variant of the badge.
 
-| TYPE                | REQUIRED | DEFAULT |
-| :------------------ | :------- | :------ |
-| `BadgeStatusStatus` | Yes      | `N/A`   |
+Available variants:
 
-Available statuses:
+- `BadgeStatusVariant.Success`
+- `BadgeStatusVariant.Error`
+- `BadgeStatusVariant.Warning`
+- `BadgeStatusVariant.Info`
 
-- `Active` (Connected)
-- `Inactive` (Connected)
-- `Disconnected`
-- `New`
-- `Attention`
+| TYPE                 | REQUIRED | DEFAULT     |
+| -------------------- | -------- | ----------- |
+| `BadgeStatusVariant` | Yes      | `undefined` |
 
-Each status maps to a different background and border color:
-
-| Status         | Background Color     | Border Color             |
-| -------------- | -------------------- | ------------------------ |
-| `Active`       | `bg-success-default` | `border-success-default` |
-| `Inactive`     | `bg-default`         | `border-success-default` |
-| `Disconnected` | `bg-icon-muted`      | `border-icon-muted`      |
-| `New`          | `bg-primary-default` | `border-primary-default` |
-| `Attention`    | `bg-error-default`   | `border-error-default`   |
-
----
+```tsx
+<BadgeStatus variant={BadgeStatusVariant.Success} />
+<BadgeStatus variant={BadgeStatusVariant.Error} />
+<BadgeStatus variant={BadgeStatusVariant.Warning} />
+<BadgeStatus variant={BadgeStatusVariant.Info} />
+```
 
 ### `size`
 
-Optional prop to control the size of the badge.
-
-| TYPE              | REQUIRED | DEFAULT              |
-| :---------------- | :------- | :------------------- |
-| `BadgeStatusSize` | No       | `BadgeStatusSize.Md` |
+The size of the BadgeStatus.
 
 Available sizes:
 
-- `Md` (8px)
-- `Lg` (10px)
+- `BadgeStatusSize.Sm` (8px)
+- `BadgeStatusSize.Md` (12px)
 
----
+| TYPE              | REQUIRED | DEFAULT              |
+| ----------------- | -------- | -------------------- |
+| `BadgeStatusSize` | No       | `BadgeStatusSize.Md` |
 
-### `hasBorder`
-
-Determines whether the badge has an outer border.
-
-| TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
-| `boolean` | No       | `true`  |
-
----
+```tsx
+<BadgeStatus
+  variant={BadgeStatusVariant.Success}
+  size={BadgeStatusSize.Sm}
+/>
+<BadgeStatus variant={BadgeStatusVariant.Success} />
+```
 
 ### `twClassName`
 
-Optional prop to add `twrnc` overriding class names.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+import { BadgeStatus } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<BadgeStatus
+  variant={BadgeStatusVariant.Success}
+  twClassName="border-2 border-primary-100"
+>
+  Custom Border
+</BadgeStatus>
+
+// Override default styles
+<BadgeStatus
+  variant={BadgeStatusVariant.Success}
+  twClassName="!bg-error-100"
+>
+  Override Background
+</BadgeStatus>
+```
 
 ### `style`
 
-Optional prop to control the style of the badge container.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE                   | REQUIRED | DEFAULT |
-| :--------------------- | :------- | :------ |
-| `StyleProp<ViewStyle>` | No       | `null`  |
-
----
-
-## Usage
-
-### Basic Usage
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-import React from 'react';
-import BadgeStatus, {
-  BadgeStatusStatus,
-} from '@metamask/design-system-react-native';
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-<BadgeStatus status={BadgeStatusStatus.Active} />;
+export const StyleExample = () => (
+  <BadgeStatus variant={BadgeStatusVariant.Success} style={styles.custom} />
+);
 ```
 
----
+## References
 
-### Changing Status
-
-```tsx
-<BadgeStatus status={BadgeStatusStatus.Attention} />
-```
-
----
-
-### Adjusting Size
-
-```tsx
-import { BadgeStatusSize } from '@metamask/design-system-react-native';
-
-<BadgeStatus status={BadgeStatusStatus.New} size={BadgeStatusSize.Lg} />;
-```
-
----
-
-### Adding a Border
-
-```tsx
-<BadgeStatus status={BadgeStatusStatus.PartiallyActive} hasBorder />
-```
-
----
-
-### Customizing with Tailwind
-
-```tsx
-<BadgeStatus status={BadgeStatusStatus.Inactive} twClassName="border-red-500" />
-```
-
----
-
-## Accessibility
-
-The `BadgeStatus` component supports accessibility through the optional `accessibilityLabel` prop. This allows developers to provide context-specific descriptions for screen readers.
-
-```tsx
-// Example with custom accessibility label
-<BadgeStatus
-  status={BadgeStatusStatus.Active}
-  accessibilityLabel="Connected to Uniswap"
-/>
-```
-
----
-
-## Notes
-
-- `BadgeStatus` is useful for indicating statuses such as online/offline states, alerts, or new updates.
-- The border color dynamically adjusts based on the `status` value.
-- You can override styles using `twClassName` or `style` props.
-
----
-
-## Contributing
-
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
-
----
-
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

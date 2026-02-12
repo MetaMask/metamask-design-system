@@ -1,163 +1,112 @@
 # BadgeNetwork
 
-`BadgeNetwork` indicates the network an entity is connected to.
+BadgeNetwork indicates the network an entity is connected to.
 
----
+```tsx
+import { BadgeNetwork } from '@metamask/design-system-react-native';
+
+<BadgeNetwork name="ethereum" />;
+```
 
 ## Props
 
-The `BadgeNetwork` component accepts the following props:
+### `name`
 
-### `src` (Required)
-
-The source of the image or SVG. It determines whether a local image, a local SVG component, or a remote image/SVG (via URI) is rendered.
-
-| TYPE                                                    | REQUIRED | DEFAULT |
-| :------------------------------------------------------ | :------- | :------ |
-| `number \| ComponentType<SvgProps> \| { uri?: string }` | Yes      | `N/A`   |
-
----
-
-### `name` (Optional)
-
-Used to generate fallback text when the image or SVG fails to load.
+The network name for the badge.
 
 | TYPE     | REQUIRED | DEFAULT     |
-| :------- | :------- | :---------- |
+| -------- | -------- | ----------- |
+| `string` | Yes      | `undefined` |
+
+```tsx
+<BadgeNetwork name="ethereum" />
+```
+
+### `src`
+
+Custom image source for the network badge.
+
+| TYPE            | REQUIRED | DEFAULT     |
+| --------------- | -------- | ----------- |
+| `ImageOrSvgSrc` | No       | `undefined` |
+
+```tsx
+<BadgeNetwork
+  name="custom-network"
+  src={{ uri: 'https://example.com/network-icon.png' }}
+/>
+```
+
+### `variant`
+
+The visual variant of the badge.
+
+Available variants:
+
+- `BadgeNetworkVariant.Primary`
+- `BadgeNetworkVariant.Secondary`
+
+| TYPE                  | REQUIRED | DEFAULT                       |
+| --------------------- | -------- | ----------------------------- |
+| `BadgeNetworkVariant` | No       | `BadgeNetworkVariant.Primary` |
+
+```tsx
+<BadgeNetwork name="ethereum" variant={BadgeNetworkVariant.Primary} />
+<BadgeNetwork name="ethereum" variant={BadgeNetworkVariant.Secondary} />
+```
+
+### `twClassName`
+
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
----
-
-### `fallbackText` (Optional)
-
-Custom fallback text displayed when the image fails to load.
-
-| TYPE     | REQUIRED | DEFAULT     |
-| :------- | :------- | :---------- |
-| `string` | No       | `name?.[0]` |
-
----
-
-### `fallbackTextProps` (Optional)
-
-Additional props for customizing the fallback text.
-
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `object` | No       | `{}`    |
-
----
-
-### `imageProps` (Optional)
-
-Additional properties for the image component.
-
-| TYPE         | REQUIRED | DEFAULT                     |
-| :----------- | :------- | :-------------------------- |
-| `ImageProps` | No       | `{ resizeMode: 'contain' }` |
-
----
-
-### `onImageError` (Optional)
-
-Callback function triggered when the image fails to load.
-
-| TYPE                                                     | REQUIRED | DEFAULT     |
-| :------------------------------------------------------- | :------- | :---------- |
-| `(e: NativeSyntheticEvent<ImageErrorEventData>) => void` | No       | `undefined` |
-
----
-
-### `onSvgError` (Optional)
-
-Callback function triggered when the SVG fails to load.
-
-| TYPE               | REQUIRED | DEFAULT     |
-| :----------------- | :------- | :---------- |
-| `(e: any) => void` | No       | `undefined` |
-
----
-
-### Other Props
-
-`BadgeNetwork` supports all other props from [`AvatarNetwork`](#) and [`ImageOrSvg`](#), such as:
-
-- **`twClassName`** – Tailwind class names for styling.
-- **`testID`** – Identifier used for testing purposes.
-- **`style`** – Custom styles for the Badge container.
-
----
-
-## Accessibility
-
-To ensure proper accessibility, the following React Native accessibility props can be passed:
-
-- **`accessibilityLabel`**: Describes the Badge for screen readers.
-- **`accessible`**: Set to `true` if the Badge represents meaningful content.
-
----
-
-## Usage
-
-### Basic Usage
-
 ```tsx
-import React from 'react';
-import BadgeNetwork from '@metamask/design-system-react-native/badge-network';
+import { BadgeNetwork } from '@metamask/design-system-react-native';
 
-const App = () => (
-  <BadgeNetwork
-    name="MetaMask"
-    source={{ uri: 'https://example.com/network.png' }}
-  />
-);
+// Add additional styles
+<BadgeNetwork
+  name="ethereum"
+  twClassName="border-2 border-primary-100"
+>
+  Custom Border
+</BadgeNetwork>
 
-export default App;
+// Override default styles
+<BadgeNetwork
+  name="ethereum"
+  twClassName="!bg-error-100"
+>
+  Override Background
+</BadgeNetwork>
 ```
 
----
+### `style`
 
-### Handling Image Errors
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-import React from 'react';
-import BadgeNetwork from '@metamask/design-system-react-native/badge-network';
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-const handleError = () => {
-  console.log('Image failed to load');
-};
-
-const App = () => (
-  <BadgeNetwork
-    name="ETH"
-    source={{ uri: 'https://invalid-url.com' }}
-    onImageError={handleError}
-  />
+export const StyleExample = () => (
+  <BadgeNetwork name="ethereum" style={styles.custom} />
 );
-
-export default App;
 ```
 
----
+## References
 
-## Notes
-
-- **Fallback Mechanism:**  
-  If an image or SVG fails to load, the component falls back to displaying text derived from the `name` prop.
-- **Customization:**  
-  Supports various props for shape, size, and additional styling.
-
-- **Extensibility:**  
-  Any additional `ImageOrSvg` props are forwarded for greater flexibility.
-
----
-
-## Contributing
-
-1. Add tests for any new features or modifications.
-2. Update this README to reflect any changes in the API.
-3. Follow the project's coding guidelines and best practices.
-
----
-
-For further details, refer to the [React Native documentation](https://reactnative.dev/docs/image).
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
