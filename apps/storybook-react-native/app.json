@@ -6,6 +6,16 @@
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "main": ".storybook/index.js",
+    "ios": {
+      "bundleIdentifier": "com.metamask.storybook",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.metamask.storybook",
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      }
+    },
     "plugins": [
       [
         "expo-font",

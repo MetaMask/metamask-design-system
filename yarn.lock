@@ -3468,7 +3468,7 @@ __metadata:
     react: ">=18.2.0"
     react-native: ">=0.76.0"
     react-native-gesture-handler: ">=2.16.0"
-    react-native-reanimated: ">=3.17.0"
+    react-native-reanimated: ">=3.16.0"
   languageName: unknown
   linkType: soft
 
@@ -3747,9 +3747,11 @@ __metadata:
     expo-splash-screen: "npm:^31.0.10"
     expo-status-bar: "npm:~2.0.0"
     expo-system-ui: "npm:~3.0.0"
+    react: "npm:18.3.1"
     react-dom: "npm:^18.2.0"
+    react-native: "npm:0.76.9"
     react-native-gesture-handler: "npm:~2.16.0"
-    react-native-reanimated: "npm:^3.17.2"
+    react-native-reanimated: "npm:3.17.2"
     react-native-safe-area-context: "npm:^4.14.0"
     react-native-svg-transformer: "npm:^1.5.0"
     typescript: "npm:~5.2.2"
@@ -17588,6 +17590,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-is-edge-to-edge@npm:1.1.6":
+  version: 1.1.6
+  resolution: "react-native-is-edge-to-edge@npm:1.1.6"
+  peerDependencies:
+    react: ">=18.2.0"
+    react-native: ">=0.73.0"
+  checksum: 10/4e07c1e34c01c8d50fd7c1d0460db06f6f0515197405230386a8ffb950cb724b10743af032310d1384df0a90059bfb8992ba2d93344ce86315315f0493feccc2
+  languageName: node
+  linkType: hard
+
 "react-native-is-edge-to-edge@npm:1.1.7":
   version: 1.1.7
   resolution: "react-native-is-edge-to-edge@npm:1.1.7"
@@ -17630,6 +17642,30 @@ __metadata:
   dependencies:
     prop-types: "npm:^15.5.10"
   checksum: 10/6c42fb381c5fab4cd17a6b574cbcca256deeebd202545456eea86d05a76c430cc11192564299c8cb1be8348dd9cc2d1decd642341b517294bb1959545262f603
+  languageName: node
+  linkType: hard
+
+"react-native-reanimated@npm:3.17.2":
+  version: 3.17.2
+  resolution: "react-native-reanimated@npm:3.17.2"
+  dependencies:
+    "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
+    "@babel/plugin-transform-class-properties": "npm:^7.0.0-0"
+    "@babel/plugin-transform-classes": "npm:^7.0.0-0"
+    "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.0.0-0"
+    "@babel/plugin-transform-optional-chaining": "npm:^7.0.0-0"
+    "@babel/plugin-transform-shorthand-properties": "npm:^7.0.0-0"
+    "@babel/plugin-transform-template-literals": "npm:^7.0.0-0"
+    "@babel/plugin-transform-unicode-regex": "npm:^7.0.0-0"
+    "@babel/preset-typescript": "npm:^7.16.7"
+    convert-source-map: "npm:^2.0.0"
+    invariant: "npm:^2.2.4"
+    react-native-is-edge-to-edge: "npm:1.1.6"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+    react: "*"
+    react-native: "*"
+  checksum: 10/496b86ccf85e9b91263103e5c16db46622f87eb00c5b9f4d00e9a3e730676cdef7754fecf4d6075633bca547a8a94177baf855211202f648734ca3a79a531fcd
   languageName: node
   linkType: hard
 
@@ -17703,7 +17739,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native@npm:^0.76.9":
+"react-native@npm:0.76.9, react-native@npm:^0.76.9":
   version: 0.76.9
   resolution: "react-native@npm:0.76.9"
   dependencies:
@@ -17803,19 +17839,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0":
-  version: 19.1.0
-  resolution: "react@npm:19.1.0"
-  checksum: 10/d0180689826fd9de87e839c365f6f361c561daea397d61d724687cae88f432a307d1c0f53a0ee95ddbe3352c10dac41d7ff1ad85530fb24951b27a39e5398db4
-  languageName: node
-  linkType: hard
-
-"react@npm:^18.2.0":
+"react@npm:18.3.1, react@npm:^18.2.0":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:
     loose-envify: "npm:^1.1.0"
   checksum: 10/261137d3f3993eaa2368a83110466fc0e558bc2c7f7ae7ca52d94f03aac945f45146bd85e5f481044db1758a1dbb57879e2fcdd33924e2dde1bdc550ce73f7bf
+  languageName: node
+  linkType: hard
+
+"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0":
+  version: 19.1.0
+  resolution: "react@npm:19.1.0"
+  checksum: 10/d0180689826fd9de87e839c365f6f361c561daea397d61d724687cae88f432a307d1c0f53a0ee95ddbe3352c10dac41d7ff1ad85530fb24951b27a39e5398db4
   languageName: node
   linkType: hard
 

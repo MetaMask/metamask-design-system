@@ -12,9 +12,9 @@ global.STORIES = [
   {
     titlePrefix: "",
     directory: "../../packages/design-system-react-native/src",
-    files: "**/!(temp-components)/*.stories.@(js|jsx|ts|tsx)",
+    files: "**/*.stories.@(js|jsx|ts|tsx)",
     importPathMatcher:
-      "^(?:\\.\\.\\/\\.\\.\\/packages\\/design-system-react-native\\/src(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?:(?!(?:temp-components))[^/]*?)\\/(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$",
+      "^(?:\\.\\.\\/\\.\\.\\/packages\\/design-system-react-native\\/src(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$",
   },
   {
     titlePrefix: "",

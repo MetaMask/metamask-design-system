@@ -6,8 +6,8 @@
   "main": ".storybook/index.js",
   "files": [],
   "scripts": {
-    "android": "yarn prestorybook && expo start --android",
-    "ios": "yarn prestorybook && expo start --ios",
+    "android": "yarn prestorybook && expo run:android",
+    "ios": "yarn prestorybook && expo run:ios",
     "prestorybook": "sb-rn-get-stories",
     "start": "expo start",
     "web": "expo start --web"
@@ -23,8 +23,10 @@
     "expo-splash-screen": "^31.0.10",
     "expo-status-bar": "~2.0.0",
     "expo-system-ui": "~3.0.0",
+    "react": "18.3.1",
+    "react-native": "0.76.9",
     "react-native-gesture-handler": "~2.16.0",
-    "react-native-reanimated": "^3.17.2",
+    "react-native-reanimated": "3.17.2",
     "uuid": "^3.0.0"
   },
   "devDependencies": {
