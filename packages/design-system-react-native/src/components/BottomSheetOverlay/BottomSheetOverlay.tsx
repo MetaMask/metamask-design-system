@@ -16,7 +16,7 @@ export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
   twClassName,
   onPress,
   touchableOpacityProps,
-  ...viewProps
+  ...props
 }) => {
   const tw = useTailwind();
   const opacityVal = useAnimatedValue(0);
@@ -37,7 +37,7 @@ export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
         style,
         { opacity: opacityVal },
       ]}
-      {...viewProps}
+      {...props}
     >
       {onPress && (
         <TouchableOpacity
