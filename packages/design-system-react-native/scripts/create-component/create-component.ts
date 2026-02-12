@@ -36,31 +36,6 @@ export function parseArgs(args: string[]): CreateComponentArgs {
 }
 
 /**
- * Updates the README.md code example with the correct import statement and component usage.
- *
- * @param content - The README content to update
- * @param componentName - The name of the component
- * @returns The updated README content
- */
-function updateReadmeCodeExample(
-  content: string,
-  componentName: string,
-): string {
-  const importStatement = `import { ${componentName} } from '@metamask/design-system-react-native';`;
-  const componentUsage = `<${componentName}>Default Example</${componentName}>;`;
-
-  return content
-    .replace(
-      /import \{ ComponentName \} from '@metamask\/design-system-react-native';/gu,
-      importStatement,
-    )
-    .replace(
-      /<ComponentName>Default Example<\/ComponentName>;/gu,
-      componentUsage,
-    );
-}
-
-/**
  * Creates a new React Native component based on the provided name and description.
  *
  * @param args - The component creation arguments
@@ -103,11 +78,6 @@ export async function createComponent(
     for (const file of files) {
       const templateFilePath = path.join(templateDir, file);
       let content = await fs.readFile(templateFilePath, 'utf8');
-
-      // Special handling for README.md
-      if (file === 'README.md') {
-        content = updateReadmeCodeExample(content, componentName);
-      }
 
       // Replace placeholders in content
       // Replace more specific patterns first to avoid partial matches
