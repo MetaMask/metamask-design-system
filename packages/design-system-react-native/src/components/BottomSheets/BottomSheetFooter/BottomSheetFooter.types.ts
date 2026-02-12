@@ -1,11 +1,11 @@
 // Third party dependencies.
-import { ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 
-// External Dependencies.
-import { ButtonProps } from '../../Button/Button.types';
+// External dependencies.
+import type { ButtonProps } from '../../Button/Button.types';
 
 /**
- * Buttons Alignment options.
+ * Buttons alignment options for the BottomSheetFooter.
  */
 export enum ButtonsAlignment {
   Horizontal = 'Horizontal',
@@ -23,7 +23,11 @@ export type BottomSheetFooterProps = {
    */
   buttonsAlignment?: ButtonsAlignment;
   /**
-   * Array of buttons that will be displayed in the footer
+   * Array of button props that will be rendered as buttons in the footer.
    */
   buttonPropsArray: ButtonProps[];
+  /**
+   * Tailwind CSS classes for the footer container.
+   */
+  twClassName?: string;
 } & ViewProps;

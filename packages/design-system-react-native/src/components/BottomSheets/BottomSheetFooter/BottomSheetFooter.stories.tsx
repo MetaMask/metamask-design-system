@@ -1,33 +1,44 @@
-// Third party dependencies.
+import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-// Internal dependencies.
-import BottomSheetFooter from './BottomSheetFooter';
+import { Box } from '../../Box';
+import { Text } from '../../Text';
+
+import { BottomSheetFooter } from './BottomSheetFooter';
 import { SAMPLE_BOTTOMSHEETFOOTER_PROPS } from './BottomSheetFooter.constants';
+import type { BottomSheetFooterProps } from './BottomSheetFooter.types';
 import { ButtonsAlignment } from './BottomSheetFooter.types';
 
-const BottomSheetFooterMeta = {
+const meta: Meta<BottomSheetFooterProps> = {
   title: 'Components/BottomSheets/BottomSheetFooter',
   component: BottomSheetFooter,
   argTypes: {
     buttonsAlignment: {
-      options: ButtonsAlignment,
+      options: Object.values(ButtonsAlignment),
       control: {
         type: 'select',
       },
-      defaultValue: SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonsAlignment,
     },
+    twClassName: { control: 'text' },
+    style: { control: 'object' },
   },
+  decorators: [
+    (Story) => (
+      <Box twClassName="w-full p-4">
+        <Box twClassName="mb-4 items-center">
+          <Text>Content above footer</Text>
+        </Box>
+        <Story />
+      </Box>
+    ),
+  ],
 };
-export default BottomSheetFooterMeta;
 
-export const Default = {
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any) => (
-    <BottomSheetFooter
-      {...args}
-      buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
-    />
-  ),
+export default meta;
+type Story = StoryObj<BottomSheetFooterProps>;
+
+export const Default: Story = {
+  args: {
+    ...SAMPLE_BOTTOMSHEETFOOTER_PROPS,
+  },
 };

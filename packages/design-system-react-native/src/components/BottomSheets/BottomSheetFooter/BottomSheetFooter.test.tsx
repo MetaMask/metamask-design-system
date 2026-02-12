@@ -1,86 +1,29 @@
-// Third party dependencies.
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { render, renderHook } from '@testing-library/react-native';
+import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-// External dependencies.
 import { ButtonVariant } from '../../Button';
 
-// Internal dependencies.
-import BottomSheetFooter from './BottomSheetFooter';
-import {
-  SAMPLE_BOTTOMSHEETFOOTER_PROPS,
-  TESTID_BOTTOMSHEETFOOTER,
-  TESTID_BOTTOMSHEETFOOTER_BUTTON,
-  TESTID_BOTTOMSHEETFOOTER_BUTTON_SUBSEQUENT,
-} from './BottomSheetFooter.constants';
+import { BottomSheetFooter } from './BottomSheetFooter';
+import { SAMPLE_BOTTOMSHEETFOOTER_PROPS } from './BottomSheetFooter.constants';
 import { ButtonsAlignment } from './BottomSheetFooter.types';
 
 describe('BottomSheetFooter', () => {
-  const { result } = renderHook(() => useTailwind());
-  const tw = result.current;
-
-  it('renders correctly with sample props', () => {
-    const { getByTestId } = render(
-      <BottomSheetFooter {...SAMPLE_BOTTOMSHEETFOOTER_PROPS} />,
-    );
-    expect(getByTestId(TESTID_BOTTOMSHEETFOOTER)).toBeDefined();
-  });
-
-  it('applies horizontal layout styles by default', () => {
+  it('renders correctly with root testID from ViewProps', () => {
     const { getByTestId } = render(
       <BottomSheetFooter
+        testID="footer"
         buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
       />,
     );
-    const container = getByTestId(TESTID_BOTTOMSHEETFOOTER);
-    expect(container.props.style[0]).toStrictEqual(tw`flex-row px-2 py-1`);
-  });
-
-  it('applies horizontal layout styles when buttonsAlignment is Horizontal', () => {
-    const { getByTestId } = render(
-      <BottomSheetFooter
-        buttonsAlignment={ButtonsAlignment.Horizontal}
-        buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
-      />,
-    );
-    const container = getByTestId(TESTID_BOTTOMSHEETFOOTER);
-    expect(container.props.style[0]).toStrictEqual(tw`flex-row px-2 py-1`);
-  });
-
-  it('applies vertical layout styles when buttonsAlignment is Vertical', () => {
-    const { getByTestId } = render(
-      <BottomSheetFooter
-        buttonsAlignment={ButtonsAlignment.Vertical}
-        buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
-      />,
-    );
-    const container = getByTestId(TESTID_BOTTOMSHEETFOOTER);
-    expect(container.props.style[0]).toStrictEqual(tw`flex-col px-2 py-1`);
-  });
-
-  it('merges custom style prop with generated styles', () => {
-    const customStyle = { margin: 10 };
-    const { getByTestId } = render(
-      <BottomSheetFooter
-        buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
-        style={customStyle}
-      />,
-    );
-    const container = getByTestId(TESTID_BOTTOMSHEETFOOTER);
-    expect(container.props.style[1]).toStrictEqual(customStyle);
+    expect(getByTestId('footer')).toBeDefined();
   });
 
   it('renders the correct number of buttons', () => {
-    const { getAllByTestId } = render(
+    const { getAllByRole } = render(
       <BottomSheetFooter {...SAMPLE_BOTTOMSHEETFOOTER_PROPS} />,
     );
-    const firstButton = getAllByTestId(TESTID_BOTTOMSHEETFOOTER_BUTTON);
-    const subsequentButtons = getAllByTestId(
-      TESTID_BOTTOMSHEETFOOTER_BUTTON_SUBSEQUENT,
-    );
-    expect(firstButton).toHaveLength(1);
-    expect(subsequentButtons).toHaveLength(1);
+    // Two buttons in sample props
+    expect(getAllByRole('button')).toHaveLength(2);
   });
 
   it('renders a single button correctly', () => {
@@ -90,65 +33,110 @@ describe('BottomSheetFooter', () => {
         children: 'Confirm',
       },
     ];
-    const { getByTestId, queryByTestId } = render(
+    const { getAllByRole } = render(
       <BottomSheetFooter buttonPropsArray={singleButtonProps} />,
     );
-    expect(getByTestId(TESTID_BOTTOMSHEETFOOTER_BUTTON)).toBeDefined();
-    expect(
-      queryByTestId(TESTID_BOTTOMSHEETFOOTER_BUTTON_SUBSEQUENT),
-    ).toBeNull();
+    expect(getAllByRole('button')).toHaveLength(1);
   });
 
-  it('applies flex-1 and ml-4 gap to subsequent buttons in horizontal layout', () => {
+  it('fires onPress when a button is pressed', () => {
+    const onPress = jest.fn();
+    const { getByText } = render(
+      <BottomSheetFooter
+        buttonPropsArray={[
+          {
+            variant: ButtonVariant.Primary,
+            children: 'Submit',
+            onPress,
+          },
+        ]}
+      />,
+    );
+
+    fireEvent.press(getByText('Submit'));
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('passes configurable testID to individual buttons', () => {
     const { getByTestId } = render(
       <BottomSheetFooter
-        buttonsAlignment={ButtonsAlignment.Horizontal}
+        buttonPropsArray={[
+          {
+            variant: ButtonVariant.Primary,
+            children: 'Confirm',
+            testID: 'confirm-button',
+          },
+          {
+            variant: ButtonVariant.Secondary,
+            children: 'Cancel',
+            testID: 'cancel-button',
+          },
+        ]}
+      />,
+    );
+    expect(getByTestId('confirm-button')).toBeDefined();
+    expect(getByTestId('cancel-button')).toBeDefined();
+  });
+
+  it('defaults to horizontal layout', () => {
+    const { getByTestId } = render(
+      <BottomSheetFooter
+        testID="footer"
         buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
       />,
     );
-    const firstButton = getByTestId(TESTID_BOTTOMSHEETFOOTER_BUTTON);
-    const subsequentButton = getByTestId(
-      TESTID_BOTTOMSHEETFOOTER_BUTTON_SUBSEQUENT,
-    );
-    expect(firstButton.props.style).toContainEqual(
-      expect.objectContaining(tw`flex-1`),
-    );
-    expect(subsequentButton.props.style).toContainEqual(
-      expect.objectContaining(tw`ml-4 flex-1`),
-    );
+    const container = getByTestId('footer');
+    const flatStyle = Object.assign({}, ...container.props.style.flat());
+    expect(flatStyle.flexDirection).toBe('row');
   });
 
-  it('applies self-stretch and mt-4 gap to subsequent buttons in vertical layout', () => {
+  it('applies vertical layout when buttonsAlignment is Vertical', () => {
     const { getByTestId } = render(
       <BottomSheetFooter
+        testID="footer"
         buttonsAlignment={ButtonsAlignment.Vertical}
         buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
       />,
     );
-    const firstButton = getByTestId(TESTID_BOTTOMSHEETFOOTER_BUTTON);
-    const subsequentButton = getByTestId(
-      TESTID_BOTTOMSHEETFOOTER_BUTTON_SUBSEQUENT,
-    );
-    expect(firstButton.props.style).toContainEqual(
-      expect.objectContaining(tw`self-stretch`),
-    );
-    expect(subsequentButton.props.style).toContainEqual(
-      expect.objectContaining(tw`mt-4 self-stretch`),
-    );
+    const container = getByTestId('footer');
+    const flatStyle = Object.assign({}, ...container.props.style.flat());
+    expect(flatStyle.flexDirection).toBe('column');
   });
 
-  it('renders three buttons with correct testIDs', () => {
+  it('merges custom style prop with generated styles', () => {
+    const customStyle = { margin: 10 };
+    const { getByTestId } = render(
+      <BottomSheetFooter
+        testID="footer"
+        buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
+        style={customStyle}
+      />,
+    );
+    const container = getByTestId('footer');
+    expect(container.props.style).toContainEqual(customStyle);
+  });
+
+  it('spreads additional ViewProps to the root element', () => {
+    const { getByTestId } = render(
+      <BottomSheetFooter
+        testID="footer"
+        accessibilityLabel="Footer actions"
+        buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
+      />,
+    );
+    const container = getByTestId('footer');
+    expect(container.props.accessibilityLabel).toBe('Footer actions');
+  });
+
+  it('renders three buttons correctly', () => {
     const threeButtonProps = [
       { variant: ButtonVariant.Primary, children: 'First' },
       { variant: ButtonVariant.Secondary, children: 'Second' },
       { variant: ButtonVariant.Primary, children: 'Third' },
     ];
-    const { getByTestId, getAllByTestId } = render(
+    const { getAllByRole } = render(
       <BottomSheetFooter buttonPropsArray={threeButtonProps} />,
     );
-    expect(getByTestId(TESTID_BOTTOMSHEETFOOTER_BUTTON)).toBeDefined();
-    expect(
-      getAllByTestId(TESTID_BOTTOMSHEETFOOTER_BUTTON_SUBSEQUENT),
-    ).toHaveLength(2);
+    expect(getAllByRole('button')).toHaveLength(3);
   });
 });

@@ -2,16 +2,8 @@
 import { ButtonVariant } from '../../Button';
 
 // Internal dependencies.
-import {
-  ButtonsAlignment,
-  BottomSheetFooterProps,
-} from './BottomSheetFooter.types';
-
-// Test IDs
-export const TESTID_BOTTOMSHEETFOOTER = 'bottomsheetfooter';
-export const TESTID_BOTTOMSHEETFOOTER_BUTTON = 'bottomsheetfooter-button';
-export const TESTID_BOTTOMSHEETFOOTER_BUTTON_SUBSEQUENT =
-  'bottomsheetfooter-button-subsequent';
+import type { BottomSheetFooterProps } from './BottomSheetFooter.types';
+import { ButtonsAlignment } from './BottomSheetFooter.types';
 
 // Defaults
 export const DEFAULT_BOTTOMSHEETFOOTER_BUTTONSALIGNMENT =

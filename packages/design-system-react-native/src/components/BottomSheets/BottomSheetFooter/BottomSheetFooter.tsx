@@ -7,21 +7,16 @@ import { View } from 'react-native';
 import { Button } from '../../Button';
 
 // Internal dependencies.
-import {
-  DEFAULT_BOTTOMSHEETFOOTER_BUTTONSALIGNMENT,
-  TESTID_BOTTOMSHEETFOOTER,
-  TESTID_BOTTOMSHEETFOOTER_BUTTON,
-  TESTID_BOTTOMSHEETFOOTER_BUTTON_SUBSEQUENT,
-} from './BottomSheetFooter.constants';
-import {
-  BottomSheetFooterProps,
-  ButtonsAlignment,
-} from './BottomSheetFooter.types';
+import { DEFAULT_BOTTOMSHEETFOOTER_BUTTONSALIGNMENT } from './BottomSheetFooter.constants';
+import type { BottomSheetFooterProps } from './BottomSheetFooter.types';
+import { ButtonsAlignment } from './BottomSheetFooter.types';
 
-const BottomSheetFooter: React.FC<BottomSheetFooterProps> = ({
+export const BottomSheetFooter: React.FC<BottomSheetFooterProps> = ({
   style,
+  twClassName,
   buttonsAlignment = DEFAULT_BOTTOMSHEETFOOTER_BUTTONSALIGNMENT,
   buttonPropsArray,
+  ...props
 }) => {
   const tw = useTailwind();
   const isHorizontal = buttonsAlignment === ButtonsAlignment.Horizontal;
@@ -30,23 +25,23 @@ const BottomSheetFooter: React.FC<BottomSheetFooterProps> = ({
 
   return (
     <View
-      style={[tw`${isHorizontal ? 'flex-row' : 'flex-col'} px-2 py-1`, style]}
-      testID={TESTID_BOTTOMSHEETFOOTER}
+      style={[
+        tw.style(
+          isHorizontal ? 'flex-row' : 'flex-col',
+          'px-2 py-1',
+          twClassName,
+        ),
+        style,
+      ]}
+      {...props}
     >
       {buttonPropsArray.map((buttonProp, index) => (
         <Button
           key={index}
-          style={tw`${buttonBaseClass}${index > 0 ? ` ${gapClass}` : ''}`}
-          testID={
-            index > 0
-              ? TESTID_BOTTOMSHEETFOOTER_BUTTON_SUBSEQUENT
-              : TESTID_BOTTOMSHEETFOOTER_BUTTON
-          }
+          style={tw.style(buttonBaseClass, index > 0 && gapClass)}
           {...buttonProp}
         />
       ))}
     </View>
   );
 };
-
-export default BottomSheetFooter;
