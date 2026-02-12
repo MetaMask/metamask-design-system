@@ -14,8 +14,7 @@ import { BottomSheetOverlayProps } from './BottomSheetOverlay.types';
 export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
   style,
   onPress,
-  color,
-  duration,
+  ...props
 }) => {
   const tw = useTailwind();
   const opacityVal = useAnimatedValue(0);
@@ -23,19 +22,20 @@ export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
   useEffect(() => {
     Animated.timing(opacityVal, {
       toValue: 1,
-      duration: duration ?? DEFAULT_OVERLAY_ANIMATION_DURATION,
+      duration: DEFAULT_OVERLAY_ANIMATION_DURATION,
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }, [opacityVal, duration]);
+  }, [opacityVal]);
 
   return (
     <Animated.View
       style={[
         tw`absolute inset-0 bg-overlay-default`,
         style,
-        { opacity: opacityVal, backgroundColor: color },
+        { opacity: opacityVal },
       ]}
+      {...props}
     >
       {onPress && (
         <TouchableOpacity
