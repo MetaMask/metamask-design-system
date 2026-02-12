@@ -108,24 +108,6 @@ export const ButtonBase = ({
             ? twClassName(pressed)
             : twClassName;
 
-<<<<<<< HEAD
-        const computedStyle: StyleProp<ViewStyle>[] = [
-          tw.style(
-            'flex-row items-center justify-center rounded-xl bg-muted px-4 min-w-[80px] overflow-hidden',
-            TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],
-            isDisabled ? 'opacity-50' : 'opacity-100',
-            isFullWidth ? 'w-full' : 'w-auto',
-            containerClassName,
-          ),
-        ];
-        if (typeof style === 'function') {
-          const additionalStyle = style({ pressed });
-          if (additionalStyle) {
-            computedStyle.push(additionalStyle);
-          }
-        } else if (style) {
-          computedStyle.push(style);
-=======
         // Build button container styles
         const buttonStyles = tw.style(
           // Base layout - flex container for button content
@@ -150,7 +132,6 @@ export const ButtonBase = ({
 
         if (additionalStyle) {
           computedStyle.push(additionalStyle);
->>>>>>> 1a6e5c28 (fix: button base in flex row layouts and refactoring button animated)
         }
 
         return computedStyle;
