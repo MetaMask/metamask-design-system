@@ -3,7 +3,7 @@ import { StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 // External dependencies.
-import { BoxBackgroundColor } from '../../types';
+import { Box } from '../Box';
 
 // Internal dependencies.
 import { BottomSheetOverlay } from './BottomSheetOverlay';
@@ -15,9 +15,15 @@ const OverlayMeta = {
   argTypes: {
     color: {
       control: { type: 'color' },
-      defaultValue: BoxBackgroundColor.OverlayDefault,
     },
   },
+  decorators: [
+    (Story) => (
+      <Box twClassName="w-full h-96 relative">
+        <Story />
+      </Box>
+    ),
+  ],
 };
 export default OverlayMeta;
 
