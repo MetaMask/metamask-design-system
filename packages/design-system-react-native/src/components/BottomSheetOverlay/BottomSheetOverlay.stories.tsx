@@ -3,7 +3,7 @@ import { StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 // External dependencies.
-import { BoxBackgroundColor } from '../../../../types';
+import { BoxBackgroundColor } from '../../types';
 
 // Internal dependencies.
 import { BottomSheetOverlay } from './BottomSheetOverlay';

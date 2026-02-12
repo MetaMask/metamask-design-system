@@ -49,6 +49,12 @@ export type {
   BadgeWrapperCustomPosition,
 } from './BadgeWrapper';
 
+export {
+  BottomSheetOverlay,
+  DEFAULT_OVERLAY_ANIMATION_DURATION,
+} from './BottomSheetOverlay';
+export type { BottomSheetOverlayProps } from './BottomSheetOverlay';
+
 export { Blockies } from './temp-components/Blockies';
 export type { BlockiesProps } from './temp-components/Blockies';
 
