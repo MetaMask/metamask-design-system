@@ -5,6 +5,7 @@ import { useColorScheme } from 'react-native';
 import { ThemeProvider, Theme } from '@metamask/design-system-twrnc-preset';
 
 import FontLoader from './FontLoader';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 addons.setConfig({
   options: {
@@ -17,9 +18,11 @@ const ThemeDecorator = ({ children }) => {
   const theme = colorScheme === 'dark' ? Theme.Dark : Theme.Light;
 
   return (
-    <ThemeProvider theme={theme}>
-      <FontLoader>{children}</FontLoader>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider theme={theme}>
+        <FontLoader>{children}</FontLoader>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 };
 

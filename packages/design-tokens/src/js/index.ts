@@ -12,3 +12,6 @@ export type { Theme, ThemeColors, ThemeShadows } from './themes/types';
 // Typography
 export { typography, fontFamilies } from './typography';
 export type { ThemeTypography } from './typography';
+
+// Animations
+export { AnimationDuration } from './animations';

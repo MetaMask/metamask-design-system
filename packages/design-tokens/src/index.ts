@@ -5,6 +5,7 @@ export {
   darkTheme,
   typography,
   fontFamilies,
+  AnimationDuration,
 } from './js';
 export type {
   BrandColor,
