@@ -71,10 +71,10 @@ export enum AvatarIconSeverity {
  * AvatarGroup - variant
  */
 export enum AvatarGroupVariant {
-  Account = 'Account',
-  Favicon = 'Favicon',
-  Network = 'Network',
-  Token = 'Token',
+  Account = 'account',
+  Favicon = 'favicon',
+  Network = 'network',
+  Token = 'token',
 }
 
 /**
@@ -119,18 +119,18 @@ export enum BadgeStatusSize {
  * BadgeWrapper - positionAnchorShape
  */
 export enum BadgeWrapperPositionAnchorShape {
-  Rectangular = 'Rectangular',
-  Circular = 'Circular',
+  Rectangular = 'rectangular',
+  Circular = 'circular',
 }
 
 /**
  * BadgeWrapper - position.
  */
 export enum BadgeWrapperPosition {
-  TopRight = 'TopRight',
-  BottomRight = 'BottomRight',
-  BottomLeft = 'BottomLeft',
-  TopLeft = 'TopLeft',
+  TopRight = 'top-right',
+  BottomRight = 'bottom-right',
+  BottomLeft = 'bottom-left',
+  TopLeft = 'top-left',
 }
 
 /**
