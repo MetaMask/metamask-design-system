@@ -17,11 +17,13 @@
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.9.0",
-    "expo": "~49.0.23",
-    "expo-status-bar": "~1.6.0",
-    "expo-system-ui": "~2.4.0",
-    "react-native-gesture-handler": "~2.12.0",
-    "react-native-reanimated": "~3.3.0",
+    "expo": "~52.0.0",
+    "expo-font": "^14.0.9",
+    "expo-splash-screen": "^31.0.10",
+    "expo-status-bar": "~2.0.0",
+    "expo-system-ui": "~3.0.0",
+    "react-native-gesture-handler": "~2.16.0",
+    "react-native-reanimated": "^3.17.2",
     "uuid": "^3.0.0"
   },
   "devDependencies": {
@@ -47,7 +49,7 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-native": "0.72.15"
+    "react-native": "0.76.9"
   },
   "engines": {
     "node": "^18.18 || >=20"

@@ -4,8 +4,6 @@ import { useColorScheme } from 'react-native';
 
 import { ThemeProvider, Theme } from '@metamask/design-system-twrnc-preset';
 
-import FontLoader from './FontLoader';
-
 addons.setConfig({
   options: {
     storySort: null, // Disables default sorting
@@ -18,7 +16,7 @@ const ThemeDecorator = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <FontLoader>{children}</FontLoader>
+      {children}
     </ThemeProvider>
   );
 };
