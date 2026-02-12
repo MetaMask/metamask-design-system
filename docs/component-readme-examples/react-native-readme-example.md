@@ -85,7 +85,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 
   return (
     <ComponentName
-      style={tw.style('base-class', isActive && 'bg-success-default')}
+      style={tw.style('bg-default', isActive && 'bg-success-default')}
     >
       Conditional styling
     </ComponentName>
