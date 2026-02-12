@@ -14,7 +14,7 @@
     "@metamask/design-system-react": "workspace:^",
     "@metamask/design-system-tailwind-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
-    "@metamask/utils": "^11.9.0",
+    "@metamask/utils": "^11.10.0",
     "@playwright/test": "^1.52.0",
     "@storybook/addon-a11y": "^10.2.3",
     "@storybook/addon-docs": "^10.2.3",

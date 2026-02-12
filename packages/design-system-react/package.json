@@ -61,7 +61,7 @@
     "@jest/globals": "^29.7.0",
     "@metamask/auto-changelog": "^5.3.1",
     "@metamask/design-system-tailwind-preset": "workspace:^",
-    "@metamask/utils": "^11.9.0",
+    "@metamask/utils": "^11.10.0",
     "@svgr/cli": "^8.1.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
@@ -82,7 +82,7 @@
   "peerDependencies": {
     "@metamask/design-system-tailwind-preset": "^0.6.0",
     "@metamask/design-tokens": "^8.1.0",
-    "@metamask/utils": "^11.9.0",
+    "@metamask/utils": "^11.10.0",
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
   },

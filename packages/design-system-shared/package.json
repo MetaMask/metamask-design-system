@@ -46,7 +46,7 @@
     "publish:preview": "yarn npm publish --tag preview"
   },
   "dependencies": {
-    "@metamask/utils": "^11.9.0"
+    "@metamask/utils": "^11.10.0"
   },
   "devDependencies": {
     "@metamask/auto-changelog": "^5.3.1",
