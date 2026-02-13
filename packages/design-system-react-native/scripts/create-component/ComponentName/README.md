@@ -1,6 +1,6 @@
 # ComponentName
 
-ComponentName is used to render standardized elements within an interface.
+the component description
 
 ```tsx
 import { ComponentName } from '@metamask/design-system-react-native';
@@ -9,26 +9,6 @@ import { ComponentName } from '@metamask/design-system-react-native';
 ```
 
 ## Props
-
-### `size`
-
-The size of the ComponentName.
-
-Available sizes:
-
-- `ComponentNameSize.Sm` (24px)
-- `ComponentNameSize.Md` (32px)
-- `ComponentNameSize.Lg` (40px)
-
-| TYPE                | REQUIRED | DEFAULT                |
-| ------------------- | -------- | ---------------------- |
-| `ComponentNameSize` | No       | `ComponentNameSize.Md` |
-
-```tsx
-<ComponentName size={ComponentNameSize.Sm}>Small Size</ComponentName>
-<ComponentName>Medium Size (default</ComponentName>
-<ComponentName size={ComponentNameSize.Lg}>Large Size</ComponentName>
-```
 
 ### `children`
 
@@ -41,7 +21,9 @@ The content of the `ComponentName` component.
 ```tsx
 import { ComponentName } from '@metamask/design-system-react-native';
 
-<ComponentName>Custom children content</ComponentName>;
+<ComponentName>
+  <Text>Custom children content</Text>
+</ComponentName>;
 ```
 
 ### `twClassName`
@@ -60,12 +42,12 @@ import { ComponentName } from '@metamask/design-system-react-native';
 
 // Add additional styles
 <ComponentName twClassName="mt-4">
-  Custom Background
+  <Text>Custom Background</Text>
 </ComponentName>
 
 // Override default styles
 <ComponentName twClassName="bg-error-default">
-  Override Background
+  <Text>Override Background</Text>
 </ComponentName>
 ```
 
@@ -87,7 +69,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
     <ComponentName
       style={tw.style('bg-default', isActive && 'bg-success-default')}
     >
-      Conditional styling
+      <Text>Conditional styling</Text>
     </ComponentName>
   );
 };
