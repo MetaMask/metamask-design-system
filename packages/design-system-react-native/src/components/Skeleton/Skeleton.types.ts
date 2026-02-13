@@ -1,49 +1,52 @@
 // Third party dependencies.
-import React from 'react';
-import { ViewProps, StyleProp, ViewStyle, Animated } from 'react-native';
+import type { ReactNode } from 'react';
+import type { ViewProps } from 'react-native';
 
 /**
  * Skeleton component props.
+ *
+ * Extends ViewProps to inherit standard React Native props
+ * such as testID and accessibilityLabel.
  */
-export interface SkeletonProps extends ViewProps {
+export type SkeletonProps = {
   /**
-   * Optional prop to set the height of the Skeleton
+   * Optional prop to set the height of the Skeleton.
    */
   height?: number | string;
   /**
-   * Optional prop to set the width of the Skeleton
+   * Optional prop to set the width of the Skeleton.
    */
   width?: number | string;
   /**
-   * Optional prop to set the children of the Skeleton
+   * Optional content to display within the skeleton.
+   * When provided without `hideChildren`, children are rendered directly.
+   * When provided with `hideChildren`, children are rendered invisibly
+   * to preserve layout dimensions.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /**
-   * Optional prop to hide the children of the Skeleton
+   * When true, children are rendered invisibly while the skeleton
+   * animation plays, preserving layout dimensions.
+   *
+   * @default false
    */
   hideChildren?: boolean;
   /**
-   * Optional prop to set the style of the Skeleton component
-   */
-  style?: StyleProp<ViewStyle>;
-  /**
-   * Optional props to pass to the children wrapper View
+   * Props spread to the children wrapper View (e.g., testID, accessibilityLabel).
    */
   childrenWrapperProps?: ViewProps;
   /**
-   * Optional props to pass to the animated background View
+   * Props spread to the animated background View (e.g., testID, accessibilityLabel).
    */
-  animatedViewProps?: Partial<React.ComponentProps<typeof Animated.View>>;
+  animatedViewProps?: ViewProps;
   /**
-   * Optional Tailwind class names for the skeleton container.
+   * Tailwind CSS classes for the skeleton container.
    */
   twClassName?: string;
   /**
    * Whether to automatically start the shimmer animation.
-   * When true, the opacity animation starts automatically when the skeleton
-   * is visible (no children or children are hidden).
    *
    * @default true
    */
   autoPlay?: boolean;
-}
+} & ViewProps;

@@ -1,15 +1,8 @@
-// Third party dependencies.
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useEffect, useRef } from 'react';
 import { Animated, View } from 'react-native';
 
-// Internal dependencies.
-import {
-  SKELETON_TEST_ID,
-  SKELETON_ANIMATED_BACKGROUND_TEST_ID,
-  SKELETON_CHILDREN_WRAPPER_TEST_ID,
-} from './Skeleton.constants';
-import { SkeletonProps } from './Skeleton.types';
+import type { SkeletonProps } from './Skeleton.types';
 
 const Skeleton: React.FC<SkeletonProps> = ({
   height,
@@ -17,9 +10,8 @@ const Skeleton: React.FC<SkeletonProps> = ({
   children,
   hideChildren = false,
   style,
-  childrenWrapperProps = {},
-  animatedViewProps = {},
-  testID = SKELETON_TEST_ID,
+  childrenWrapperProps,
+  animatedViewProps,
   twClassName,
   autoPlay = true,
   ...props
@@ -41,7 +33,8 @@ const Skeleton: React.FC<SkeletonProps> = ({
         useNativeDriver: true,
         isInteraction: false,
       }),
-    ]).start((finished) => {
+    ]).start(({ finished }) => {
+      /* istanbul ignore next - animation interruption is not testable in Jest */
       if (finished) {
         startAnimation();
       }
@@ -56,46 +49,34 @@ const Skeleton: React.FC<SkeletonProps> = ({
     return () => {
       opacityAnim.stopAnimation();
     };
-  }, [children, hideChildren, autoPlay]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [children, hideChildren, autoPlay]);
 
   if (!hideChildren && children) {
     return <>{children}</>;
   }
 
-  const baseStyles = 'rounded overflow-hidden';
-  const resolvedTwClassName = twClassName
-    ? `${baseStyles} ${twClassName}`
-    : baseStyles;
-
   return (
     <View
       style={[
-        tw.style(resolvedTwClassName),
+        tw.style('rounded overflow-hidden', twClassName),
         height !== undefined && { height },
         width !== undefined && { width },
         style,
       ]}
-      testID={testID}
       {...props}
     >
-      {/* Animated background always present */}
       <Animated.View
         style={[
           tw.style('absolute inset-0 rounded bg-icon-alternative'),
           { opacity: opacityAnim },
         ]}
         pointerEvents="none"
-        testID={SKELETON_ANIMATED_BACKGROUND_TEST_ID}
         {...animatedViewProps}
       />
 
       {children && (
         <View
-          style={[
-            tw.style('relative z-10'),
-            hideChildren ? tw.style('opacity-0') : undefined,
-          ]}
-          testID={SKELETON_CHILDREN_WRAPPER_TEST_ID}
+          style={tw.style('relative z-10', hideChildren && 'opacity-0')}
           {...childrenWrapperProps}
         >
           {children}
