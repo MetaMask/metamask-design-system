@@ -1,17 +1,17 @@
-// Third party dependencies.
+import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-// External dependencies.
-import { Text } from '../Text';
+import { Box } from '../Box';
 import { Button, ButtonVariant } from '../Button';
+import { Text } from '../Text';
 
-// Internal dependencies.
-import { default as SkeletonComponent } from './Skeleton';
+import Skeleton from './Skeleton';
+import type { SkeletonProps } from './Skeleton.types';
 
-const SkeletonMeta = {
+const meta: Meta<SkeletonProps> = {
   title: 'Components/Skeleton',
-  component: SkeletonComponent,
+  component: Skeleton,
   argTypes: {
     height: {
       control: { type: 'number' },
@@ -29,28 +29,36 @@ const SkeletonMeta = {
       control: 'text',
     },
   },
+  decorators: [
+    (Story) => (
+      <Box twClassName="p-4">
+        <Story />
+      </Box>
+    ),
+  ],
 };
 
-export default SkeletonMeta;
+export default meta;
+type Story = StoryObj<SkeletonProps>;
 
-export const Default = {
+export const Default: Story = {
   args: {
     width: 300,
     height: 32,
   },
 };
 
-export const WidthHeight = {
+export const WidthHeight: Story = {
   render: () => (
     <View style={{ gap: 8 }}>
-      <SkeletonComponent height={32} width={300} />
-      <SkeletonComponent height={16} width={250} />
-      <SkeletonComponent height={16} width={250} />
+      <Skeleton height={32} width={300} />
+      <Skeleton height={16} width={250} />
+      <Skeleton height={16} width={250} />
     </View>
   ),
 };
 
-export const HideChildren = {
+export const HideChildren: Story = {
   render: () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -66,23 +74,19 @@ export const HideChildren = {
         {isLoaded ? (
           <Text>Content to load</Text>
         ) : (
-          <SkeletonComponent hideChildren style={{ alignSelf: 'flex-start' }}>
+          <Skeleton hideChildren style={{ alignSelf: 'flex-start' }}>
             <Text>Content to load</Text>
-          </SkeletonComponent>
+          </Skeleton>
         )}
       </View>
     );
   },
 };
 
-export const TwClassName = {
-  render: () => (
-    <SkeletonComponent height={32} width={300} twClassName="rounded-lg" />
-  ),
+export const TwClassName: Story = {
+  render: () => <Skeleton height={32} width={300} twClassName="rounded-lg" />,
 };
 
-export const AutoPlayDisabled = {
-  render: () => (
-    <SkeletonComponent height={32} width={300} autoPlay={false} />
-  ),
+export const AutoPlayDisabled: Story = {
+  render: () => <Skeleton height={32} width={300} autoPlay={false} />,
 };

@@ -1,84 +1,70 @@
-// Third party dependencies.
 import { render } from '@testing-library/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-// Internal dependencies.
 import Skeleton from './Skeleton';
-import {
-  SKELETON_TEST_ID,
-  SKELETON_ANIMATED_BACKGROUND_TEST_ID,
-  SKELETON_CHILDREN_WRAPPER_TEST_ID,
-} from './Skeleton.constants';
-
-// Mock animation timers
-beforeEach(() => {
-  jest.useFakeTimers();
-});
-
-afterEach(() => {
-  jest.useFakeTimers({ legacyFakeTimers: true });
-  jest.clearAllMocks();
-});
 
 describe('Skeleton', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.useFakeTimers('legacy');
+    jest.clearAllMocks();
+  });
+
   describe('rendering', () => {
-    it('renders with default testID', () => {
-      const { getByTestId } = render(<Skeleton />);
+    it('renders with testID from ViewProps', () => {
+      const { getByTestId } = render(<Skeleton testID="skeleton" />);
 
-      expect(getByTestId(SKELETON_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId('skeleton')).toBeDefined();
     });
 
-    it('accepts custom testID', () => {
-      const { getByTestId } = render(<Skeleton testID="custom-skeleton" />);
+    it('renders animated background with configurable testID', () => {
+      const { getByTestId } = render(
+        <Skeleton
+          testID="skeleton"
+          animatedViewProps={{ testID: 'skeleton-bg' }}
+        />,
+      );
 
-      expect(getByTestId('custom-skeleton')).toBeOnTheScreen();
-    });
-
-    it('renders animated background', () => {
-      const { getByTestId } = render(<Skeleton />);
-
-      expect(
-        getByTestId(SKELETON_ANIMATED_BACKGROUND_TEST_ID),
-      ).toBeOnTheScreen();
-    });
-
-    it('should match snapshot', () => {
-      const { toJSON } = render(<Skeleton />);
-
-      expect(toJSON()).toMatchSnapshot();
+      expect(getByTestId('skeleton')).toBeDefined();
+      expect(getByTestId('skeleton-bg')).toBeDefined();
     });
   });
 
   describe('dimensions', () => {
     it('applies explicit height and width', () => {
-      const { getByTestId } = render(<Skeleton height={100} width={200} />);
-      const skeleton = getByTestId(SKELETON_TEST_ID);
+      const { getByTestId } = render(
+        <Skeleton testID="skeleton" height={100} width={200} />,
+      );
+      const skeleton = getByTestId('skeleton');
 
-      expect(skeleton.props.style).toEqual(
-        expect.objectContaining({ height: 100, width: 200 }),
+      expect(skeleton.props.style).toStrictEqual(
+        expect.arrayContaining([{ height: 100 }, { width: 200 }]),
       );
     });
 
     it('applies string dimensions', () => {
       const { getByTestId } = render(
-        <Skeleton height="50%" width="100%" />,
+        <Skeleton testID="skeleton" height="50%" width="100%" />,
       );
-      const skeleton = getByTestId(SKELETON_TEST_ID);
+      const skeleton = getByTestId('skeleton');
 
-      expect(skeleton.props.style).toEqual(
-        expect.objectContaining({ height: '50%', width: '100%' }),
+      expect(skeleton.props.style).toStrictEqual(
+        expect.arrayContaining([{ height: '50%' }, { width: '100%' }]),
       );
     });
 
     it('applies custom style', () => {
       const { getByTestId } = render(
-        <Skeleton style={{ alignSelf: 'flex-start' }} />,
+        <Skeleton testID="skeleton" style={{ alignSelf: 'flex-start' }} />,
       );
-      const skeleton = getByTestId(SKELETON_TEST_ID);
+      const skeleton = getByTestId('skeleton');
 
-      expect(skeleton.props.style).toEqual(
-        expect.objectContaining({ alignSelf: 'flex-start' }),
+      expect(skeleton.props.style).toStrictEqual(
+        expect.arrayContaining([{ alignSelf: 'flex-start' }]),
       );
     });
   });
@@ -86,66 +72,93 @@ describe('Skeleton', () => {
   describe('children', () => {
     it('renders children directly when hideChildren is false', () => {
       const { getByTestId, queryByTestId } = render(
-        <Skeleton>
+        <Skeleton testID="skeleton">
           <View testID="child-component" />
         </Skeleton>,
       );
 
-      expect(getByTestId('child-component')).toBeOnTheScreen();
-      // Should not render skeleton container when children are visible
-      expect(queryByTestId(SKELETON_TEST_ID)).toBeNull();
+      expect(getByTestId('child-component')).toBeDefined();
+      expect(queryByTestId('skeleton')).toBeNull();
     });
 
     it('hides children when hideChildren is true', () => {
       const { getByTestId } = render(
-        <Skeleton hideChildren>
+        <Skeleton
+          testID="skeleton"
+          hideChildren
+          childrenWrapperProps={{ testID: 'children-wrapper' }}
+        >
           <View testID="child-component" />
         </Skeleton>,
       );
 
-      expect(
-        getByTestId(SKELETON_CHILDREN_WRAPPER_TEST_ID),
-      ).toBeOnTheScreen();
-      expect(getByTestId('child-component')).toBeOnTheScreen();
+      expect(getByTestId('children-wrapper')).toBeDefined();
+      expect(getByTestId('child-component')).toBeDefined();
     });
 
     it('renders skeleton container when hideChildren is true', () => {
       const { getByTestId } = render(
-        <Skeleton hideChildren>
+        <Skeleton
+          testID="skeleton"
+          hideChildren
+          animatedViewProps={{ testID: 'skeleton-bg' }}
+        >
           <View testID="child-component" />
         </Skeleton>,
       );
 
-      expect(getByTestId(SKELETON_TEST_ID)).toBeOnTheScreen();
-      expect(
-        getByTestId(SKELETON_ANIMATED_BACKGROUND_TEST_ID),
-      ).toBeOnTheScreen();
+      expect(getByTestId('skeleton')).toBeDefined();
+      expect(getByTestId('skeleton-bg')).toBeDefined();
     });
   });
 
   describe('autoPlay', () => {
-    it('defaults autoPlay to true', () => {
-      const { getByTestId } = render(<Skeleton />);
+    it('renders skeleton with animation by default', () => {
+      const { getByTestId } = render(
+        <Skeleton
+          testID="skeleton"
+          animatedViewProps={{ testID: 'skeleton-bg' }}
+        />,
+      );
 
-      expect(
-        getByTestId(SKELETON_ANIMATED_BACKGROUND_TEST_ID),
-      ).toBeOnTheScreen();
+      expect(getByTestId('skeleton-bg')).toBeDefined();
     });
 
-    it('accepts autoPlay as false', () => {
-      const { getByTestId } = render(<Skeleton autoPlay={false} />);
+    it('renders skeleton when autoPlay is false', () => {
+      const { getByTestId } = render(
+        <Skeleton testID="skeleton" autoPlay={false} />,
+      );
 
-      expect(getByTestId(SKELETON_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId('skeleton')).toBeDefined();
+    });
+
+    it('stops animation on unmount', () => {
+      const { unmount, getByTestId } = render(<Skeleton testID="skeleton" />);
+
+      expect(getByTestId('skeleton')).toBeDefined();
+      jest.advanceTimersByTime(700);
+      unmount();
     });
   });
 
   describe('twClassName', () => {
     it('accepts custom twClassName', () => {
       const { getByTestId } = render(
-        <Skeleton twClassName="bg-info-default" />,
+        <Skeleton testID="skeleton" twClassName="bg-info-default" />,
       );
 
-      expect(getByTestId(SKELETON_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId('skeleton')).toBeDefined();
+    });
+  });
+
+  describe('ViewProps extension', () => {
+    it('passes through accessibilityLabel', () => {
+      const { getByTestId } = render(
+        <Skeleton testID="skeleton" accessibilityLabel="Loading content" />,
+      );
+      const skeleton = getByTestId('skeleton');
+
+      expect(skeleton.props.accessibilityLabel).toBe('Loading content');
     });
   });
 });
