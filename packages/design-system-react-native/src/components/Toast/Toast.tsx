@@ -177,7 +177,7 @@ const Toast = forwardRef<ToastRef, ToastProps>(
       if (closeButtonOptions?.variant === ButtonIconVariant.Icon) {
         return (
           <ButtonIcon
-            onPress={() => closeButtonOptions?.onPress?.()}
+            onPress={(e) => closeButtonOptions?.onPress?.(e)}
             iconName={closeButtonOptions?.iconName}
           />
         );
@@ -185,7 +185,7 @@ const Toast = forwardRef<ToastRef, ToastProps>(
       return (
         <Button
           variant={ButtonVariant.Primary}
-          onPress={() => closeButtonOptions?.onPress()}
+          onPress={(e) => closeButtonOptions?.onPress?.(e)}
           startIconName={closeButtonOptions?.startIconName}
           endIconName={closeButtonOptions?.endIconName}
           style={closeButtonOptions?.style}

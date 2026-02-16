@@ -1,12 +1,13 @@
 // Third party dependencies.
 import type { ReactElement } from 'react';
-import type { ImageSourcePropType, ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 // External Dependencies.
 import type { AvatarAccountVariant } from '../AvatarAccount';
 import type { ButtonProps } from '../Button';
 import type { ButtonIconProps } from '../ButtonIcon';
 import type { IconName } from '../Icon';
+import type { ImageOrSvgSrc } from '../temp-components/ImageOrSvg';
 
 /**
  * Toast variants.
@@ -85,7 +86,7 @@ type AccountToastOption = {
 type NetworkToastOption = {
   variant: ToastVariant.Network;
   networkName?: string;
-  networkImageSource: ImageSourcePropType;
+  networkImageSource: ImageOrSvgSrc;
 } & BaseToastVariants;
 
 /**
@@ -93,7 +94,7 @@ type NetworkToastOption = {
  */
 type AppToastOption = {
   variant: ToastVariant.App;
-  appIconSource: ImageSourcePropType;
+  appIconSource: ImageOrSvgSrc;
 } & BaseToastVariants;
 
 type IconToastOption = {
