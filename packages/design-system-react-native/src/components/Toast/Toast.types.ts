@@ -1,12 +1,12 @@
 // Third party dependencies.
-import { ReactElement } from 'react';
-import { ImageSourcePropType } from 'react-native';
+import type { ReactElement } from 'react';
+import type { ImageSourcePropType, ViewProps } from 'react-native';
 
 // External Dependencies.
-import { AvatarAccountVariant } from '../AvatarAccount';
-import { ButtonProps } from '../Button';
-import { ButtonIconProps } from '../ButtonIcon';
-import { IconName } from '../Icon';
+import type { AvatarAccountVariant } from '../AvatarAccount';
+import type { ButtonProps } from '../Button';
+import type { ButtonIconProps } from '../ButtonIcon';
+import type { IconName } from '../Icon';
 
 /**
  * Toast variants.
@@ -30,22 +30,22 @@ export type ToastLabelOptions = {
 /**
  * Options for the description text in the toast.
  */
-export interface ToastDescriptionOptions {
+export type ToastDescriptionOptions = {
   description: string;
-}
+};
 
 /**
  * Options for displaying a Link in the toast.
  */
-export interface ToastLinkButtonOptions {
+export type ToastLinkButtonOptions = {
   label: string;
   onPress: () => void;
-}
+};
 
 /**
  * Common toast option shared between all other options.
  */
-interface BaseToastVariants {
+type BaseToastVariants = {
   hasNoTimeout: boolean;
   labelOptions: ToastLabelOptions;
   descriptionOptions?: ToastDescriptionOptions;
@@ -53,7 +53,7 @@ interface BaseToastVariants {
   closeButtonOptions?: ToastCloseButtonOptions;
   startAccessory?: ReactElement;
   bottomOffset?: number;
-}
+};
 
 export type ToastCloseButtonOptions =
   | ButtonProps
@@ -66,42 +66,42 @@ export enum ButtonIconVariant {
 /**
  * Plain toast option.
  */
-interface PlainToastOption extends BaseToastVariants {
+type PlainToastOption = {
   variant: ToastVariant.Plain;
-}
+} & BaseToastVariants;
 
 /**
  * Account toast option.
  */
-interface AccountToastOption extends BaseToastVariants {
+type AccountToastOption = {
   variant: ToastVariant.Account;
   accountAddress: string;
   accountAvatarType: AvatarAccountVariant;
-}
+} & BaseToastVariants;
 
 /**
  * Network toast option.
  */
-interface NetworkToastOption extends BaseToastVariants {
+type NetworkToastOption = {
   variant: ToastVariant.Network;
   networkName?: string;
   networkImageSource: ImageSourcePropType;
-}
+} & BaseToastVariants;
 
 /**
  * App toast option.
  */
-interface AppToastOption extends BaseToastVariants {
+type AppToastOption = {
   variant: ToastVariant.App;
   appIconSource: ImageSourcePropType;
-}
+} & BaseToastVariants;
 
-interface IconToastOption extends BaseToastVariants {
+type IconToastOption = {
   variant: ToastVariant.Icon;
   iconName: IconName;
   iconColor?: string;
   backgroundColor?: string;
-}
+} & BaseToastVariants;
 
 /**
  * Different toast options combined in a union type.
@@ -116,14 +116,29 @@ export type ToastOptions =
 /**
  * Toast component reference.
  */
-export interface ToastRef {
+export type ToastRef = {
   showToast: (toastOptions: ToastOptions) => void;
   closeToast: () => void;
-}
+};
+
+/**
+ * Toast component props.
+ * Extends ViewProps to inherit standard React Native props such as testID and accessibilityLabel.
+ */
+export type ToastProps = {
+  /**
+   * Optional Tailwind CSS classes for the toast container.
+   */
+  twClassName?: string;
+  /**
+   * Props spread to the labels container View (e.g., testID for testing).
+   */
+  labelsContainerProps?: Omit<ViewProps, 'children' | 'style'>;
+} & Omit<ViewProps, 'style'>;
 
 /**
  * Toast context parameters.
  */
-export interface ToastContextParams {
+export type ToastContextParams = {
   toastRef: React.RefObject<ToastRef> | undefined;
-}
+};

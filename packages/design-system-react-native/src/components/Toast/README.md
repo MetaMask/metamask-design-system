@@ -1,81 +1,138 @@
-# [Toast](https://metamask-consensys.notion.site/Toast-0c8412d624174c47a20fb654f3001c26)
+# Toast
 
-![Toast](./Toast.png)
+Toast is a component that slides up from the bottom of the screen. It is typically used to show post-confirmation information such as account switches, network changes, or transaction confirmations.
 
-Toast is a component that slides up from the bottom. It is typically used to show post confirmation information.
-
-## Methods
-
-### `showToast()`
-
-```javascript
-showToast(toastOptions: ToastOptions)
+```tsx
+import {
+  Toast,
+  ToastContext,
+  ToastContextWrapper,
+} from '@metamask/design-system-react-native';
 ```
 
-| <span style="color:gray;font-size:14px">PARAMETERS</span> | <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">DESCRIPTION</span> |
-| :-------------------------------------------------------- | :-------------------------------------------------- | :--------------------------------------------------------- |
-| toastOptions                                              | [ToastOptions](./Toast.types.ts#L36)                | Toast options to show.                                     |
+## Setup
 
-## Use Case
+Using Toast requires a three-step process:
 
-Using this component requires a three step process:
+### 1. Wrap root with ToastContextWrapper
 
-1. Wrap a root element with `ToastContextWrapper`.
-
-```javascript
-// Replace import with relative path.
-import { ToastContextWrapper } from 'app/component-library/components/Toast';
+```tsx
+import { ToastContextWrapper } from '@metamask/design-system-react-native';
 
 const App = () => (
   <ToastContextWrapper>
-    <SampleRootComponent />
+    <RootComponent />
   </ToastContextWrapper>
 );
 ```
 
-2. Implement `Toast` component within a child of the root element and apply `toastRef` from `ToastContext`.
+### 2. Render Toast with ref from context
 
-```javascript
-// Replace import with relative path.
-import Toast, { ToastContext } from 'app/component-library/components/Toast';
+```tsx
+import { useContext } from 'react';
+import { Toast, ToastContext } from '@metamask/design-system-react-native';
 
-const SampleRootComponent = () => {
+const RootComponent = () => {
   const { toastRef } = useContext(ToastContext);
 
   return (
     <>
-      <SampleContent />
+      <Content />
       <Toast ref={toastRef} />
     </>
   );
 };
 ```
 
-3. Reference `toastRef` and call `toastRef.current?.showToast(...)` to show toast.
+### 3. Call showToast from any child
 
-```javascript
-// Replace import with relative path.
+```tsx
+import { useContext } from 'react';
 import {
   ToastContext,
-  ToastVariants,
-} from 'app/component-library/components/Toast';
+  ToastVariant,
+} from '@metamask/design-system-react-native';
 
-const { toastRef } = useContext(ToastContext);
+const Content = () => {
+  const { toastRef } = useContext(ToastContext);
 
-const showToast = () => {
-  // Example of showing toast with Account variant.
-  toastRef.current?.showToast({
-    variant: ToastVariants.Account,
-    labelOptions: [
-      { label: LABEL_CHUNK_1 },
-      { label: LABEL_CHUNK_2, isBold: true },
-    ],
-    accountAddress: ACCOUNT_ADDRESS,
-    accountAvatarType: ACCOUNT_AVATAR_TYPE,
-    linkButtonOptions: {
-      label: LINK_LABEL,
-      onPress: ONPRESS_HANDLER,
-    },
-  });
+  const handlePress = () => {
+    toastRef.current?.showToast({
+      variant: ToastVariant.Account,
+      hasNoTimeout: false,
+      labelOptions: [
+        { label: 'Switching to' },
+        { label: ' Account 2.', isBold: true },
+      ],
+      accountAddress: '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8',
+      accountAvatarType: AvatarAccountVariant.Jazzicon,
+    });
+  };
+
+  return <Button onPress={handlePress}>Show Toast</Button>;
 };
 ```
+
+## Props
+
+### `twClassName`
+
+Optional Tailwind CSS classes for the toast container.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+<Toast ref={toastRef} twClassName="mx-2" />
+```
+
+### `labelsContainerProps`
+
+Props spread to the labels container View (e.g., `testID` for testing).
+
+| TYPE                                     | REQUIRED | DEFAULT     |
+| ---------------------------------------- | -------- | ----------- |
+| `Omit<ViewProps, 'children' \| 'style'>` | No       | `undefined` |
+
+```tsx
+<Toast ref={toastRef} labelsContainerProps={{ testID: 'toast-labels' }} />
+```
+
+### `testID`
+
+Test identifier for the root element, inherited from `ViewProps`.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+<Toast ref={toastRef} testID="my-toast" />
+```
+
+## Methods
+
+### `showToast(options: ToastOptions)`
+
+Triggers the toast to slide up with the provided options.
+
+| PARAMETER | TYPE           | DESCRIPTION         |
+| --------- | -------------- | ------------------- |
+| options   | `ToastOptions` | Toast configuration |
+
+### `closeToast()`
+
+Dismisses the toast with a slide-down animation.
+
+## Toast Variants
+
+- `ToastVariant.Plain` - Simple text toast
+- `ToastVariant.Account` - Toast with account avatar
+- `ToastVariant.Network` - Toast with network avatar
+- `ToastVariant.App` - Toast with app favicon
+- `ToastVariant.Icon` - Toast with icon avatar
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

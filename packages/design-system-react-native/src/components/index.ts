@@ -106,11 +106,7 @@ export type { TextProps } from './Text';
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 
-export {
-  Toast,
-  ToastVariant,
-  ToastContext,
-} from './Toast';
+export { Toast, ToastVariant, ToastContext } from './Toast';
 export type {
   ToastOptions,
   ToastRef,

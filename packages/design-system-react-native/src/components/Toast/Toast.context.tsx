@@ -1,10 +1,10 @@
 // Third party dependencies.
-import React, { useRef } from 'react';
+import React, { createContext, useRef } from 'react';
 
 // Internal dependencies.
-import { ToastRef, ToastContextParams } from './Toast.types';
+import type { ToastRef, ToastContextParams } from './Toast.types';
 
-export const ToastContext = React.createContext<ToastContextParams>({
+export const ToastContext = createContext<ToastContextParams>({
   toastRef: undefined,
 });
 
