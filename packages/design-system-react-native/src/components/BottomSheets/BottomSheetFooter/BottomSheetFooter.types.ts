@@ -13,6 +13,11 @@ export enum ButtonsAlignment {
 }
 
 /**
+ * Button props for BottomSheetFooter with variant enforced by the component.
+ */
+export type BottomSheetFooterButtonProps = Omit<ButtonProps, 'variant'>;
+
+/**
  * BottomSheetFooter component props.
  */
 export type BottomSheetFooterProps = {
@@ -23,9 +28,17 @@ export type BottomSheetFooterProps = {
    */
   buttonsAlignment?: ButtonsAlignment;
   /**
-   * Array of button props that will be rendered as buttons in the footer.
+   * Optional props for the primary action button.
+   * Renders with ButtonVariant.Primary automatically.
+   * Appears second (rightmost in horizontal layout, bottom in vertical layout).
    */
-  buttonPropsArray: ButtonProps[];
+  primaryButtonProps?: BottomSheetFooterButtonProps;
+  /**
+   * Optional props for the secondary action button.
+   * Renders with ButtonVariant.Secondary automatically.
+   * Appears first (leftmost in horizontal layout, top in vertical layout).
+   */
+  secondaryButtonProps?: BottomSheetFooterButtonProps;
   /**
    * Tailwind CSS classes for the footer container.
    */

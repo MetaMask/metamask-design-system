@@ -42,3 +42,28 @@ export const Default: Story = {
     ...SAMPLE_BOTTOMSHEETFOOTER_PROPS,
   },
 };
+
+export const PrimaryOnly: Story = {
+  args: {
+    primaryButtonProps: {
+      children: 'Confirm',
+      onPress: () => console.log('Confirm pressed'),
+    },
+  },
+};
+
+export const SecondaryOnly: Story = {
+  args: {
+    secondaryButtonProps: {
+      children: 'Cancel',
+      onPress: () => console.log('Cancel pressed'),
+    },
+  },
+};
+
+export const Horizontal: Story = {
+  args: {
+    ...SAMPLE_BOTTOMSHEETFOOTER_PROPS,
+    buttonsAlignment: ButtonsAlignment.Horizontal,
+  },
+};

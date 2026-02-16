@@ -1,40 +1,51 @@
 # BottomSheetFooter
 
-BottomSheetFooter is a footer component specifically used for BottomSheets. It renders an array of buttons in either a horizontal or vertical layout.
+BottomSheetFooter is a footer component specifically used for BottomSheets. It renders a primary and/or secondary button in either a horizontal or vertical layout, with enforced button variants and consistent ordering.
 
 ```tsx
 import {
   BottomSheetFooter,
   ButtonsAlignment,
 } from '@metamask/design-system-react-native';
-import { ButtonVariant } from '@metamask/design-system-react-native';
 
 <BottomSheetFooter
-  buttonPropsArray={[
-    { variant: ButtonVariant.Secondary, children: 'Cancel', onPress: () => {} },
-    { variant: ButtonVariant.Primary, children: 'Submit', onPress: () => {} },
-  ]}
+  secondaryButtonProps={{ children: 'Cancel', onPress: () => {} }}
+  primaryButtonProps={{ children: 'Submit', onPress: () => {} }}
 />;
 ```
 
 ## Props
 
-### `buttonPropsArray`
+### `primaryButtonProps`
 
-Array of button props that will be rendered as buttons in the footer. Each item in the array is spread to a `Button` component.
+Optional props for the primary action button. The button automatically renders with `ButtonVariant.Primary`. Appears second (rightmost in horizontal layout, bottom in vertical layout).
 
-| TYPE            | REQUIRED | DEFAULT     |
-| --------------- | -------- | ----------- |
-| `ButtonProps[]` | Yes      | `undefined` |
+| TYPE                           | REQUIRED | DEFAULT     |
+| ------------------------------ | -------- | ----------- |
+| `Omit<ButtonProps, 'variant'>` | No       | `undefined` |
 
 ```tsx
 import { BottomSheetFooter } from '@metamask/design-system-react-native';
-import { ButtonVariant } from '@metamask/design-system-react-native';
 
 <BottomSheetFooter
-  buttonPropsArray={[
-    { variant: ButtonVariant.Primary, children: 'Confirm', onPress: () => {} },
-  ]}
+  primaryButtonProps={{ children: 'Confirm', onPress: () => {} }}
+/>;
+```
+
+### `secondaryButtonProps`
+
+Optional props for the secondary action button. The button automatically renders with `ButtonVariant.Secondary`. Appears first (leftmost in horizontal layout, top in vertical layout).
+
+| TYPE                           | REQUIRED | DEFAULT     |
+| ------------------------------ | -------- | ----------- |
+| `Omit<ButtonProps, 'variant'>` | No       | `undefined` |
+
+```tsx
+import { BottomSheetFooter } from '@metamask/design-system-react-native';
+
+<BottomSheetFooter
+  secondaryButtonProps={{ children: 'Cancel', onPress: () => {} }}
+  primaryButtonProps={{ children: 'Submit', onPress: () => {} }}
 />;
 ```
 
@@ -57,13 +68,15 @@ import { BottomSheetFooter, ButtonsAlignment } from '@metamask/design-system-rea
 // Horizontal layout (default)
 <BottomSheetFooter
   buttonsAlignment={ButtonsAlignment.Horizontal}
-  buttonPropsArray={[...]}
+  secondaryButtonProps={{ children: 'Cancel', onPress: () => {} }}
+  primaryButtonProps={{ children: 'Submit', onPress: () => {} }}
 />
 
 // Vertical layout
 <BottomSheetFooter
   buttonsAlignment={ButtonsAlignment.Vertical}
-  buttonPropsArray={[...]}
+  secondaryButtonProps={{ children: 'Cancel', onPress: () => {} }}
+  primaryButtonProps={{ children: 'Submit', onPress: () => {} }}
 />
 ```
 
@@ -79,7 +92,10 @@ Use the `twClassName` prop to add Tailwind CSS classes to the footer container. 
 import { BottomSheetFooter } from '@metamask/design-system-react-native';
 
 // Add additional padding
-<BottomSheetFooter twClassName="px-4 py-2" buttonPropsArray={[...]} />
+<BottomSheetFooter
+  twClassName="px-4 py-2"
+  primaryButtonProps={{ children: 'Submit', onPress: () => {} }}
+/>;
 ```
 
 ### `style`
@@ -100,7 +116,10 @@ const styles = StyleSheet.create({
   },
 });
 
-<BottomSheetFooter style={styles.footer} buttonPropsArray={[...]} />;
+<BottomSheetFooter
+  style={styles.footer}
+  primaryButtonProps={{ children: 'Submit', onPress: () => {} }}
+/>;
 ```
 
 ## References

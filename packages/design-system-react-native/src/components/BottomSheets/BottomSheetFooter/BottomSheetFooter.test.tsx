@@ -1,8 +1,6 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-import { ButtonVariant } from '../../Button';
-
 import { BottomSheetFooter } from './BottomSheetFooter';
 import { SAMPLE_BOTTOMSHEETFOOTER_PROPS } from './BottomSheetFooter.constants';
 import { ButtonsAlignment } from './BottomSheetFooter.types';
@@ -12,44 +10,45 @@ describe('BottomSheetFooter', () => {
     const { getByTestId } = render(
       <BottomSheetFooter
         testID="footer"
-        buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
+        primaryButtonProps={{ children: 'Submit' }}
       />,
     );
     expect(getByTestId('footer')).toBeDefined();
   });
 
-  it('renders the correct number of buttons', () => {
+  it('renders both buttons when both props are provided', () => {
     const { getAllByRole } = render(
       <BottomSheetFooter {...SAMPLE_BOTTOMSHEETFOOTER_PROPS} />,
     );
-    // Two buttons in sample props
     expect(getAllByRole('button')).toHaveLength(2);
   });
 
-  it('renders a single button correctly', () => {
-    const singleButtonProps = [
-      {
-        variant: ButtonVariant.Primary,
-        children: 'Confirm',
-      },
-    ];
-    const { getAllByRole } = render(
-      <BottomSheetFooter buttonPropsArray={singleButtonProps} />,
+  it('renders only primary button when only primaryButtonProps is provided', () => {
+    const { getAllByRole, getByText } = render(
+      <BottomSheetFooter primaryButtonProps={{ children: 'Confirm' }} />,
     );
     expect(getAllByRole('button')).toHaveLength(1);
+    expect(getByText('Confirm')).toBeDefined();
   });
 
-  it('fires onPress when a button is pressed', () => {
+  it('renders only secondary button when only secondaryButtonProps is provided', () => {
+    const { getAllByRole, getByText } = render(
+      <BottomSheetFooter secondaryButtonProps={{ children: 'Cancel' }} />,
+    );
+    expect(getAllByRole('button')).toHaveLength(1);
+    expect(getByText('Cancel')).toBeDefined();
+  });
+
+  it('returns null when neither button prop is provided', () => {
+    const { toJSON } = render(<BottomSheetFooter />);
+    expect(toJSON()).toBeNull();
+  });
+
+  it('fires onPress when primary button is pressed', () => {
     const onPress = jest.fn();
     const { getByText } = render(
       <BottomSheetFooter
-        buttonPropsArray={[
-          {
-            variant: ButtonVariant.Primary,
-            children: 'Submit',
-            onPress,
-          },
-        ]}
+        primaryButtonProps={{ children: 'Submit', onPress }}
       />,
     );
 
@@ -57,24 +56,26 @@ describe('BottomSheetFooter', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it('fires onPress when secondary button is pressed', () => {
+    const onPress = jest.fn();
+    const { getByText } = render(
+      <BottomSheetFooter
+        secondaryButtonProps={{ children: 'Cancel', onPress }}
+      />,
+    );
+
+    fireEvent.press(getByText('Cancel'));
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
   it('passes configurable testID to individual buttons', () => {
     const { getByTestId } = render(
       <BottomSheetFooter
-        buttonPropsArray={[
-          {
-            variant: ButtonVariant.Primary,
-            children: 'Confirm',
-            testID: 'confirm-button',
-          },
-          {
-            variant: ButtonVariant.Secondary,
-            children: 'Cancel',
-            testID: 'cancel-button',
-          },
-        ]}
+        primaryButtonProps={{ children: 'Submit', testID: 'submit-button' }}
+        secondaryButtonProps={{ children: 'Cancel', testID: 'cancel-button' }}
       />,
     );
-    expect(getByTestId('confirm-button')).toBeDefined();
+    expect(getByTestId('submit-button')).toBeDefined();
     expect(getByTestId('cancel-button')).toBeDefined();
   });
 
@@ -82,7 +83,7 @@ describe('BottomSheetFooter', () => {
     const { getByTestId } = render(
       <BottomSheetFooter
         testID="footer"
-        buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
+        primaryButtonProps={{ children: 'Submit' }}
       />,
     );
     const container = getByTestId('footer');
@@ -95,7 +96,7 @@ describe('BottomSheetFooter', () => {
       <BottomSheetFooter
         testID="footer"
         buttonsAlignment={ButtonsAlignment.Vertical}
-        buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
+        primaryButtonProps={{ children: 'Submit' }}
       />,
     );
     const container = getByTestId('footer');
@@ -108,7 +109,7 @@ describe('BottomSheetFooter', () => {
     const { getByTestId } = render(
       <BottomSheetFooter
         testID="footer"
-        buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
+        primaryButtonProps={{ children: 'Submit' }}
         style={customStyle}
       />,
     );
@@ -121,22 +122,10 @@ describe('BottomSheetFooter', () => {
       <BottomSheetFooter
         testID="footer"
         accessibilityLabel="Footer actions"
-        buttonPropsArray={SAMPLE_BOTTOMSHEETFOOTER_PROPS.buttonPropsArray}
+        primaryButtonProps={{ children: 'Submit' }}
       />,
     );
     const container = getByTestId('footer');
     expect(container.props.accessibilityLabel).toBe('Footer actions');
-  });
-
-  it('renders three buttons correctly', () => {
-    const threeButtonProps = [
-      { variant: ButtonVariant.Primary, children: 'First' },
-      { variant: ButtonVariant.Secondary, children: 'Second' },
-      { variant: ButtonVariant.Primary, children: 'Third' },
-    ];
-    const { getAllByRole } = render(
-      <BottomSheetFooter buttonPropsArray={threeButtonProps} />,
-    );
-    expect(getAllByRole('button')).toHaveLength(3);
   });
 });
