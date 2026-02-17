@@ -12,6 +12,7 @@ import {
   MAP_TEXT_VARIANT_FONTWEIGHT,
   TWCLASSMAP_TEXT_FONTWEIGHT,
 } from '../Text/Text.constants';
+
 import { INPUT_TEST_ID } from './Input.constants';
 import type { InputProps } from './Input.types';
 

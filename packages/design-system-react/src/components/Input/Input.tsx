@@ -2,11 +2,11 @@ import React, { forwardRef } from 'react';
 
 import { TextVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
-
 import {
   CLASSMAP_TEXT_VARIANT_FONTSTYLE,
   CLASSMAP_TEXT_VARIANT_FONTWEIGHT,
 } from '../Text/Text.constants';
+
 import { INPUT_TEST_ID } from './Input.constants';
 import type { InputProps } from './Input.types';
 
