@@ -323,6 +323,7 @@ describe('HeaderBase', () => {
     it('hasEndContent is true when endButtonIconProps has items and no endAccessory', () => {
       const { getByTestId } = render(
         <HeaderBase
+          endAccessory={undefined}
           endButtonIconProps={[
             { iconName: IconName.Close, onPress: jest.fn() },
           ]}
@@ -335,12 +336,42 @@ describe('HeaderBase', () => {
       expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
     });
 
+    it('hasEndContent uses hasEndButtons when endAccessory is falsy', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          endAccessory={undefined}
+          endButtonIconProps={[{ iconName: IconName.Add, onPress: jest.fn() }]}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(BUTTON_ICON_TEST_ID)).toBeOnTheScreen();
+    });
+
     it('does not render ButtonIcons when endButtonIconProps is empty array', () => {
       const { queryByTestId } = render(
         <HeaderBase endButtonIconProps={[]}>Title</HeaderBase>,
       );
 
       expect(queryByTestId(BUTTON_ICON_TEST_ID)).toBeNull();
+    });
+
+    it('hasEndContent is false when endAccessory and endButtonIconProps are both falsy', () => {
+      const { getByTestId, queryByTestId } = render(
+        <HeaderBase
+          endAccessory={undefined}
+          endButtonIconProps={[]}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(HEADERBASE_TEST_ID)).toBeOnTheScreen();
+      expect(queryByTestId(END_ACCESSORY_TEST_ID)).toBeNull();
     });
 
     it('prioritizes endAccessory over endButtonIconProps', () => {
