@@ -4,11 +4,11 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 import * as ReactTestRenderer from 'react-test-renderer';
 
-import { ButtonBaseSize } from '../../../../types';
 import {
   expectStyleIncludes,
   getStyleList,
 } from '../../../../test-utils/styles';
+import { ButtonBaseSize } from '../../../../types';
 
 import { ButtonPrimary } from './ButtonPrimary';
 
