@@ -1,99 +1,194 @@
-# [TextField](https://metamask-consensys.notion.site/Text-Field-73e2b9b748404901ab2c9fba13eb7785)
+# TextField
 
-![TextField](./TextField.png)
+TextField is an input component that allows users to enter text data into a boxed field. It supports accessories, error states, and size variants.
 
-TextField is an input component that lets user enter a text data into a boxed field. It can sometimes contain related information or controls.
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField
+  placeholder="Enter text..."
+  onChangeText={(text) => console.log(text)}
+/>;
+```
 
 ## Props
 
-This component extends [Input](./foundation/Input/Input.tsx) component.
-
 ### `size`
 
-Optional prop for size of the TextField.
+The size of the TextField.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| [TextFieldSize](./TextField.types.ts)               | No                                                      | TextFieldSize.Md                                       |
+Available sizes:
 
-### `startAccessory`
+- `TextFieldSize.Sm` (32px)
+- `TextFieldSize.Md` (40px)
+- `TextFieldSize.Lg` (48px)
 
-Optional content to display before the Input.
+| TYPE            | REQUIRED | DEFAULT            |
+| --------------- | -------- | ------------------ |
+| `TextFieldSize` | No       | `TextFieldSize.Md` |
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| React.ReactNode                                     | No                                                      |
+```tsx
+import { TextField, TextFieldSize } from '@metamask/design-system-react-native';
 
-### `endAccessory`
+<TextField size={TextFieldSize.Sm} placeholder="Small" />
+<TextField placeholder="Medium (default)" />
+<TextField size={TextFieldSize.Lg} placeholder="Large" />
+```
 
-Optional content to display after the Input.
+### `isError`
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| React.ReactNode                                     | No                                                      |
+Whether to show the error state. When true, the border color changes to the error color.
 
-### `error`
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
-Optional boolean to show the error state.
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| boolean                                             | No                                                      | false                                                  |
-
-### `inputElement`
-
-Optional prop to replace defaulted input with custom Input.
-
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ |
-| React.ReactNode                                     | No                                                      |
-
-## Input Props
-
-### `textVariant`
-
-Optional enum to select between Typography variants.
-
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| [TextVariant](../../../../Texts/Text/Text.types.ts) | No                                                      | TextVariant.BodyMd                                     |
+<TextField isError placeholder="Invalid input" />;
+```
 
 ### `isDisabled`
 
-Optional boolean to disable Input.
+Whether the input is disabled. When true, the input is not editable and the container opacity is reduced.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| boolean                                             | No                                                      | false                                                  |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField isDisabled placeholder="Disabled input" />;
+```
 
 ### `isReadonly`
 
-Optional boolean to show readonly input.
+Whether the input is read-only. The input is not editable but retains full opacity.
 
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| boolean                                             | No                                                      | false                                                  |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
-### `isStateStylesDisabled`
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
 
-Optional boolean to disable state styles.
-
-| <span style="color:gray;font-size:14px">TYPE</span> | <span style="color:gray;font-size:14px">REQUIRED</span> | <span style="color:gray;font-size:14px">DEFAULT</span> |
-| :-------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------- |
-| boolean                                             | No                                                      | false                                                  |
-
-## Usage
-
-```javascript
-<TextField
-  startAccessory={SAMPLE_COMPONENT}
-  endAccessory={SAMPLE_COMPONENT}
-  size={TextFieldSize.Md}
-  isError={false}
-  labelTextVariant={TextVariant.BodyMD}
-  isReadonly
-  isDisabled
-  isStateStylesDisabled
-  placeholder={SAMPLE_PLACEHOLDER}
-  value={SAMPLE_VALUE}
+<TextField isReadonly value="Read-only value" />;
 ```
+
+### `startAccessory`
+
+Content to display before the input. Commonly used for icons.
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+import {
+  TextField,
+  Icon,
+  IconName,
+  IconSize,
+} from '@metamask/design-system-react-native';
+
+<TextField
+  startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
+  placeholder="Search..."
+/>;
+```
+
+### `endAccessory`
+
+Content to display after the input. Commonly used for action buttons or labels.
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+import { TextField, Text } from '@metamask/design-system-react-native';
+
+<TextField endAccessory={<Text>ETH</Text>} placeholder="Enter amount" />;
+```
+
+### `inputElement`
+
+Custom input element to replace the default TextInput. Use this when you need a specialized input component.
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField inputElement={<MyCustomInput />} />;
+```
+
+### `textInputProps`
+
+Props spread to the internal TextInput component for additional properties like `testID`, `keyboardType`, or `returnKeyType`.
+
+**Note:** Common props (`placeholder`, `value`, `onChangeText`, `onBlur`, `onFocus`, `autoFocus`) should be passed as top-level props, not through this object.
+
+| TYPE                                                               | REQUIRED | DEFAULT     |
+| ------------------------------------------------------------------ | -------- | ----------- |
+| `Omit<TextInputProps, 'editable' \| 'onBlur' \| 'onFocus' \| ...>` | No       | `undefined` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField
+  placeholder="Enter text..."
+  textInputProps={{
+    testID: 'my-input',
+    keyboardType: 'email-address',
+    returnKeyType: 'done',
+  }}
+/>;
+```
+
+### `twClassName`
+
+Use the `twClassName` prop to add Tailwind CSS classes to the container. These classes will be merged with the component's default classes, allowing you to customize the container appearance.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<TextField twClassName="mt-4" placeholder="With margin" />;
+```
+
+### `style`
+
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` for dynamic values or styles not available in Tailwind.
+
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
+
+```tsx
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { TextField } from '@metamask/design-system-react-native';
+
+export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
+  const tw = useTailwind();
+
+  return (
+    <TextField
+      style={tw.style('bg-default', isActive && 'bg-alternative')}
+      placeholder="Conditional styling"
+    />
+  );
+};
+```
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

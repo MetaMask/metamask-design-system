@@ -16,6 +16,7 @@ export enum TextFieldSize {
 export type TextFieldProps = {
   /**
    * Size of the TextField.
+   *
    * @default TextFieldSize.Md
    */
   size?: TextFieldSize;
@@ -29,16 +30,19 @@ export type TextFieldProps = {
   endAccessory?: React.ReactNode;
   /**
    * Whether to show the error state.
+   *
    * @default false
    */
   isError?: boolean;
   /**
    * Whether the input is disabled.
+   *
    * @default false
    */
   isDisabled?: boolean;
   /**
    * Whether the input is read-only.
+   *
    * @default false
    */
   isReadonly?: boolean;
@@ -68,6 +72,7 @@ export type TextFieldProps = {
   onFocus?: TextInputProps['onFocus'];
   /**
    * Whether to auto-focus the input on mount.
+   *
    * @default false
    */
   autoFocus?: boolean;

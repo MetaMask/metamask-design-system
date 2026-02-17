@@ -1,87 +1,70 @@
-/* eslint-disable react/prop-types */
-
-// Third party dependencies.
-import React, {
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import {
+  forwardRef,
   useCallback,
-  useState,
-  useRef,
   useImperativeHandle,
+  useRef,
+  useState,
 } from 'react';
 import { Pressable, TextInput, View } from 'react-native';
+import type {
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from 'react-native';
 
-// External dependencies.
-import { useStyles } from '../../../hooks';
-import Input from './foundation/Input';
-
-// Internal dependencies.
-import styleSheet from './TextField.styles';
-import { TextFieldProps } from './TextField.types';
 import {
   DEFAULT_TEXTFIELD_SIZE,
-  TOKEN_TEXTFIELD_INPUT_TEXT_VARIANT,
-  TEXTFIELD_TEST_ID,
-  TEXTFIELD_STARTACCESSORY_TEST_ID,
-  TEXTFIELD_ENDACCESSORY_TEST_ID,
+  TEXTFIELD_SIZE_TO_TW,
 } from './TextField.constants';
+import type { TextFieldProps } from './TextField.types';
 
-const TextField = React.forwardRef<TextInput | null, TextFieldProps>(
+export const TextField = forwardRef<TextInput, TextFieldProps>(
   (
     {
       style,
+      twClassName,
       size = DEFAULT_TEXTFIELD_SIZE,
       startAccessory,
       endAccessory,
       isError = false,
-      inputElement,
       isDisabled = false,
+      isReadonly = false,
       autoFocus = false,
+      placeholder,
+      value,
+      onChangeText,
       onBlur,
       onFocus,
-      testID,
+      inputElement,
+      textInputProps,
       ...props
     },
     ref,
   ) => {
+    const tw = useTailwind();
     const [isFocused, setIsFocused] = useState(autoFocus);
     const inputRef = useRef<TextInput>(null);
 
-    // Expose the input methods to parent components
-    useImperativeHandle<TextInput | null, TextInput | null>(
-      ref,
-      () => inputRef.current,
-      [],
-    );
-
-    const { styles } = useStyles(styleSheet, {
-      style,
-      size,
-      isError,
-      isDisabled,
-      isFocused,
-    });
+    useImperativeHandle(ref, () => inputRef.current as TextInput, []);
 
     const onBlurHandler = useCallback(
-      // TODO: Replace "any" with type
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (e: any) => {
+      (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
         if (!isDisabled) {
           setIsFocused(false);
           onBlur?.(e);
         }
       },
-      [isDisabled, setIsFocused, onBlur],
+      [isDisabled, onBlur],
     );
 
     const onFocusHandler = useCallback(
-      // TODO: Replace "any" with type
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (e: any) => {
+      (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
         if (!isDisabled) {
           setIsFocused(true);
           onFocus?.(e);
         }
       },
-      [isDisabled, setIsFocused, onFocus],
+      [isDisabled, onFocus],
     );
 
     const onPressHandler = useCallback(() => {
@@ -90,47 +73,54 @@ const TextField = React.forwardRef<TextInput | null, TextFieldProps>(
       }
     }, [isDisabled]);
 
+    const getBorderColorClass = () => {
+      if (isError) {
+        return 'border-error-default';
+      }
+      if (isFocused) {
+        return 'border-primary-default';
+      }
+      return 'border-default';
+    };
+
     return (
       <Pressable
-        style={styles.base}
-        testID={TEXTFIELD_TEST_ID}
+        style={[
+          tw.style(
+            'flex-row items-center rounded-lg border px-4 bg-default',
+            TEXTFIELD_SIZE_TO_TW[size],
+            getBorderColorClass(),
+            isDisabled && 'opacity-50',
+            twClassName,
+          ),
+          style,
+        ]}
         onPress={onPressHandler}
+        {...props}
       >
         {startAccessory && (
-          <View
-            style={styles.startAccessory}
-            testID={TEXTFIELD_STARTACCESSORY_TEST_ID}
-          >
-            {startAccessory}
-          </View>
+          <View style={tw.style('mr-2')}>{startAccessory}</View>
         )}
-        <View style={styles.inputContainer}>
+        <View style={tw.style('flex-1')}>
           {inputElement ?? (
-            <Input
-              textVariant={TOKEN_TEXTFIELD_INPUT_TEXT_VARIANT}
-              isDisabled={isDisabled}
+            <TextInput
+              ref={inputRef}
+              editable={!isDisabled && !isReadonly}
               autoFocus={autoFocus}
+              placeholder={placeholder}
+              value={value}
+              onChangeText={onChangeText}
               onBlur={onBlurHandler}
               onFocus={onFocusHandler}
-              testID={testID}
-              style={styles.input}
-              {...props}
-              ref={inputRef}
-              isStateStylesDisabled
+              style={tw.style(
+                'text-body-md font-default-regular text-default p-0',
+              )}
+              {...textInputProps}
             />
           )}
         </View>
-        {endAccessory && (
-          <View
-            style={styles.endAccessory}
-            testID={TEXTFIELD_ENDACCESSORY_TEST_ID}
-          >
-            {endAccessory}
-          </View>
-        )}
+        {endAccessory && <View style={tw.style('ml-2')}>{endAccessory}</View>}
       </Pressable>
     );
   },
 );
-
-export default TextField;

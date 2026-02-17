@@ -1,51 +1,80 @@
-/* eslint-disable react/display-name */
+import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-// Internal dependencies.
-import { default as TextFieldComponent } from './TextField';
-import { SAMPLE_TEXTFIELD_PROPS } from './TextField.constants';
-import { TextFieldProps, TextFieldSize } from './TextField.types';
+import { Box } from '../Box';
+import { Icon, IconName, IconSize } from '../Icon';
+import { Text } from '../Text';
 
-const TextFieldMeta = {
-  title: 'Component Library / Form',
-  component: TextFieldComponent,
+import { TextField } from './TextField';
+import type { TextFieldProps } from './TextField.types';
+import { TextFieldSize } from './TextField.types';
+
+const meta: Meta<TextFieldProps> = {
+  title: 'Components/TextField',
+  component: TextField,
   argTypes: {
     size: {
-      options: TextFieldSize,
-      control: {
-        type: 'select',
-      },
-      defaultValue: SAMPLE_TEXTFIELD_PROPS.size,
+      options: Object.values(TextFieldSize),
+      control: { type: 'select' },
     },
-    isError: {
-      control: { type: 'boolean' },
-      defaultValue: SAMPLE_TEXTFIELD_PROPS.isError,
-    },
-    isDisabled: {
-      control: { type: 'boolean' },
-      defaultValue: SAMPLE_TEXTFIELD_PROPS.isDisabled,
-    },
-    isReadonly: {
-      control: { type: 'boolean' },
-      defaultValue: SAMPLE_TEXTFIELD_PROPS.isReadonly,
-    },
-    placeholder: {
-      control: { type: 'text' },
-      defaultValue: SAMPLE_TEXTFIELD_PROPS.placeholder,
-    },
+    isError: { control: 'boolean' },
+    isDisabled: { control: 'boolean' },
+    isReadonly: { control: 'boolean' },
+    placeholder: { control: 'text' },
+    twClassName: { control: 'text' },
+  },
+  decorators: [
+    (Story) => (
+      <Box twClassName="p-4 w-full">
+        <Story />
+      </Box>
+    ),
+  ],
+};
+
+export default meta;
+type Story = StoryObj<TextFieldProps>;
+
+export const Default: Story = {
+  args: {
+    placeholder: 'Enter text...',
   },
 };
-export default TextFieldMeta;
 
-export const TextField = {
-  render: (
-    args: JSX.IntrinsicAttributes &
-      TextFieldProps & { children?: React.ReactNode },
-  ) => (
-    <TextFieldComponent
-      {...args}
-      startAccessory={SAMPLE_TEXTFIELD_PROPS.startAccessory}
-      endAccessory={SAMPLE_TEXTFIELD_PROPS.endAccessory}
-    />
+export const Size: Story = {
+  render: () => (
+    <Box twClassName="gap-4 w-full">
+      <TextField size={TextFieldSize.Sm} placeholder="Small" />
+      <TextField size={TextFieldSize.Md} placeholder="Medium (default)" />
+      <TextField size={TextFieldSize.Lg} placeholder="Large" />
+    </Box>
   ),
+};
+
+export const IsError: Story = {
+  args: {
+    isError: true,
+    placeholder: 'Error state',
+  },
+};
+
+export const IsDisabled: Story = {
+  args: {
+    isDisabled: true,
+    placeholder: 'Disabled state',
+  },
+};
+
+export const StartAccessory: Story = {
+  args: {
+    placeholder: 'Search...',
+    startAccessory: <Icon name={IconName.Search} size={IconSize.Sm} />,
+  },
+};
+
+export const EndAccessory: Story = {
+  args: {
+    placeholder: 'Enter amount',
+    endAccessory: <Text>ETH</Text>,
+  },
 };
