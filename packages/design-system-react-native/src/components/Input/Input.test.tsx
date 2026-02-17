@@ -7,8 +7,8 @@ import { darkTheme } from '@metamask/design-tokens';
 import { renderHook } from '@testing-library/react-hooks';
 import { act, render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
-import { create } from 'react-test-renderer';
 import type { StyleProp, TextStyle } from 'react-native';
+import { create } from 'react-test-renderer';
 
 import { TextVariant } from '../../types';
 
@@ -20,7 +20,7 @@ function flattenStyle(style: StyleProp<TextStyle>): TextStyle[] {
     return [];
   }
   if (Array.isArray(style)) {
-    return style.flatMap(flattenStyle);
+    return style.flatMap((s) => flattenStyle(s as StyleProp<TextStyle>));
   }
   return [style as TextStyle];
 }
@@ -234,5 +234,7 @@ describe('Input', () => {
     act(() => {
       input.props.onFocus(event);
     });
+    expect(input.props.onBlur).toBeDefined();
+    expect(input.props.onFocus).toBeDefined();
   });
 });

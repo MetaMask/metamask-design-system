@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-
 import { TextVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 
@@ -35,12 +34,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <input
         ref={ref}
-        disabled={isDisabled}
-        readOnly={isReadonly}
         className={mergedClassName}
         style={style}
         data-testid={INPUT_TEST_ID}
         {...rest}
+        disabled={isDisabled}
+        readOnly={isReadonly}
       />
     );
   },
