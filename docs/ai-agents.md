@@ -62,17 +62,18 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 
 **Current Rule Files**
 
-- `component-creation.md` - Component scaffolding, ADR-0003/0004 patterns
+- `component-architecture.md` - Component architectural patterns (ADR-0003/0004, layered architecture, cross-platform)
+- `component-creation.md` - Component scaffolding HOW-TO guide
+- `component-migration.md` - Extension/mobile component migration (priority workflow)
+- `component-enum-union-migration.md` - Internal ADR-0003/0004 migration
 - `styling.md` - Design tokens, Tailwind, component-first
 - `component-documentation.md` - Storybook and README standards
 - `figma-integration.md` - Code Connect
 
 **Planned Rule Files**
 
-- `cross-platform.md` - Cross platform consistency and shared types
 - `testing.md` - Jest, Testing Library, accessibility
 - `monorepo-workflow.md` - Workspace commands
-- `typescript-patterns.md` - Enums, shared types
 
 **Why this format?**
 
