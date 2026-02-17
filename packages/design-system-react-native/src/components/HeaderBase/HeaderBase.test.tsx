@@ -1,7 +1,10 @@
 // Third party dependencies.
 import { render as rtlRender, fireEvent } from '@testing-library/react-native';
 import React, { act } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 // External dependencies.
 
@@ -85,8 +88,7 @@ describe('HeaderBase', () => {
     });
 
     it('applies top inset margin when includesTopInset is true', () => {
-      const safeAreaContext = require('react-native-safe-area-context');
-      safeAreaContext.useSafeAreaInsets.mockReturnValue({
+      jest.mocked(useSafeAreaInsets).mockReturnValue({
         top: 44,
         left: 0,
         right: 0,
