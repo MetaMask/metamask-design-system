@@ -96,25 +96,150 @@ export enum ButtonVariant {
 - Backwards compatible - consumers use string literals OR const values
 - Reference: [ADR-0003](https://github.com/MetaMask/decisions/pull/127)
 
+### Platform-Specific Props (Layered Architecture)
+
+**Use "Shared" suffix for shared types and layer platform-specific concerns separately.**
+
+#### What Goes Where: Decision Tree
+
+| Concern                  | Location | Example                                            |
+| ------------------------ | -------- | -------------------------------------------------- |
+| **Visual variants**      | Shared   | `BadgeStatusStatus`, `ButtonVariant`, `ButtonSize` |
+| **Design tokens**        | Shared   | Colors, spacing, borders, radii                    |
+| **Behavioral states**    | Shared   | `isDisabled`, `isLoading`, `isSelected`            |
+| **Component structure**  | Shared   | `children`, `label`, `description`                 |
+| **Platform interaction** | Platform | `onClick`/`onPress`, `onFocus`/`onBlur`            |
+| **Platform styling**     | Platform | `className`/`twClassName`                          |
+| **Platform base types**  | Platform | `ComponentProps<'div'>`/`ViewProps`                |
+| **Platform constraints** | Platform | `htmlFor`, `testID`, accessibility props           |
+
+#### Naming Convention
+
+- Shared interface: `ComponentNamePropsShared` (with "Shared" suffix)
+- Platform interface: `ComponentNameProps` (final exported type)
+
+```tsx
+// ✅ Correct - Shared package
+export interface BadgeStatusPropsShared {
+  status: BadgeStatusStatus;
+  size?: BadgeStatusSize;
+  hasBorder?: boolean;
+}
+
+// ✅ Correct - React package
+export type BadgeStatusProps = ComponentProps<'div'> &
+  BadgeStatusPropsShared & {
+    className?: string;
+    style?: React.CSSProperties;
+  };
+
+// ✅ Correct - React Native package
+export type BadgeStatusProps = BadgeStatusPropsShared &
+  Omit<ViewProps, 'children'> & {
+    twClassName?: string;
+  };
+
+// ❌ Wrong - No "Shared" suffix
+export interface BadgeStatusProps {
+  /* in shared package */
+}
+```
+
+#### Event Handlers: Use Idiomatic Platform Names
+
+- **DO NOT** create unified handler names in shared package
+- **DO** use idiomatic platform names (`onClick`/`onPress`)
+- **Platform handlers come from base type extension** (`ComponentProps`/`PressableProps`)
+
+```tsx
+// ✅ Correct - No event handlers in shared
+export interface CheckboxPropsShared {
+  isSelected: boolean;
+  isDisabled?: boolean;
+  label?: string;
+  // NO onClick or onPress here
+}
+
+// React adds onClick via ComponentProps
+export type CheckboxProps = Omit<ComponentProps<'label'>, 'style'> &
+  CheckboxPropsShared & {
+    className?: string;
+    // onClick comes from ComponentProps<'label'>
+  };
+
+// React Native adds onPress via PressableProps
+export type CheckboxProps = CheckboxPropsShared &
+  Omit<PressableProps, 'children'> & {
+    twClassName?: string;
+    // onPress comes from PressableProps
+  };
+
+// ❌ Wrong - Unified handler in shared package
+export interface CheckboxPropsShared {
+  onAction?: () => void; // Don't do this
+}
+```
+
+#### className vs twClassName
+
+- **React**: Use `className?: string` for Tailwind CSS
+- **React Native**: Use `twClassName?: string` for TWRNC
+- **NEVER** include either in shared package (platform-specific)
+
+```tsx
+// ✅ Correct - Platform packages add styling props
+// React
+export type BadgeStatusProps = ComponentProps<'div'> &
+  BadgeStatusPropsShared & {
+    className?: string; // React-specific
+  };
+
+// React Native
+export type BadgeStatusProps = BadgeStatusPropsShared &
+  ViewProps & {
+    twClassName?: string; // React Native-specific
+  };
+
+// ❌ Wrong - Styling prop in shared package
+export interface BadgeStatusPropsShared {
+  styleOverride?: string; // Don't do this
+}
+```
+
 ### Post-Generation Workflow
 
 **After running create-component scripts, you MUST:**
 
-1. **Move types to shared package** (ADR-0004):
+1. **Create shared types** (ADR-0004):
 
    - Create `packages/design-system-shared/src/types/ComponentName/ComponentName.types.ts`
-   - Define types using ADR-0003 pattern (const objects)
+   - Define const objects using ADR-0003 pattern (not enums)
+   - Define `ComponentNamePropsShared` interface (with "Shared" suffix)
    - Export from `packages/design-system-shared/src/index.ts`
 
-2. **Update platform type files** to re-export:
+2. **Update platform type files** to re-export and extend:
 
    ```tsx
    // ComponentName.types.ts in BOTH React and React Native
+
+   // Step 1: Re-export shared types
    export type {
-     ComponentNameProps,
+     ComponentNamePropsShared,
      ComponentNameVariant,
+     ComponentNameSize,
    } from '@metamask/design-system-shared';
-   export { ComponentNameVariant } from '@metamask/design-system-shared';
+   export {
+     ComponentNameVariant,
+     ComponentNameSize,
+   } from '@metamask/design-system-shared';
+
+   // Step 2: Extend with platform-specific props
+   import type { ComponentProps } from 'react'; // or ViewProps for RN
+
+   export type ComponentNameProps = ComponentProps<'div'> & // or ViewProps for RN
+     ComponentNamePropsShared & {
+       className?: string; // or twClassName for RN
+     };
    ```
 
 3. **Implement using Box/Text primitives** (not raw div/View):
@@ -125,10 +250,11 @@ export enum ButtonVariant {
    - Forward refs properly
 
 4. **Ensure cross-platform consistency**:
-   - Identical prop interfaces
+   - Identical `ComponentNamePropsShared` interface
    - Same type names and values
    - Same stories structure
    - Same documentation sections
+   - Platform differences ONLY in extension layer
 
 ### Component Implementation Patterns
 
@@ -221,59 +347,123 @@ yarn test
 yarn lint
 ```
 
-### Type Definition Example (ADR-0003 + ADR-0004)
+### Type Definition Example: BadgeStatus (ADR-0003 + ADR-0004)
+
+**This example shows converting existing enums to the new architecture.**
 
 ```tsx
-// packages/design-system-shared/src/types/Button/Button.types.ts
-// Step 1: Define variants using ADR-0003 pattern
-export const ButtonVariant = {
-  Primary: 'primary',
-  Secondary: 'secondary',
-  Tertiary: 'tertiary',
-} as const;
-export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant];
+// ==========================================
+// STEP 1: Create shared types
+// ==========================================
+// packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts
 
-export const ButtonSize = {
-  Sm: 'sm',
+// Convert enums to const objects (ADR-0003)
+export const BadgeStatusStatus = {
+  Active: 'active',
+  Inactive: 'inactive',
+  Disconnected: 'disconnected',
+  New: 'new',
+  Attention: 'attention',
+} as const;
+export type BadgeStatusStatus =
+  (typeof BadgeStatusStatus)[keyof typeof BadgeStatusStatus];
+
+export const BadgeStatusSize = {
   Md: 'md',
   Lg: 'lg',
 } as const;
-export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize];
+export type BadgeStatusSize =
+  (typeof BadgeStatusSize)[keyof typeof BadgeStatusSize];
 
-// Step 2: Define props interface
-export interface ButtonProps {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  isDisabled?: boolean;
-  children: React.ReactNode;
+// Define shared props interface with "Shared" suffix
+export interface BadgeStatusPropsShared {
+  status: BadgeStatusStatus;
+  size?: BadgeStatusSize;
+  hasBorder?: boolean;
 }
 
+// ==========================================
+// STEP 2: Export from shared package index
+// ==========================================
 // packages/design-system-shared/src/index.ts
-// Step 3: Export from shared package
-export { ButtonVariant, ButtonSize } from './types/Button/Button.types';
+export {
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from './types/BadgeStatus/BadgeStatus.types';
 export type {
-  ButtonVariant,
-  ButtonSize,
-  ButtonProps,
-} from './types/Button/Button.types';
+  BadgeStatusStatus,
+  BadgeStatusSize,
+  BadgeStatusPropsShared,
+} from './types/BadgeStatus/BadgeStatus.types';
 
-// packages/design-system-react/src/components/Button/Button.types.ts
-// Step 4: Re-export in React package (replace template content)
-export type {
-  ButtonProps,
-  ButtonVariant,
-  ButtonSize,
-} from '@metamask/design-system-shared';
-export { ButtonVariant, ButtonSize } from '@metamask/design-system-shared';
+// ==========================================
+// STEP 3: React package - re-export and extend
+// ==========================================
+// packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts
 
-// packages/design-system-react-native/src/components/Button/Button.types.ts
-// Step 5: Re-export in React Native package (replace template content)
+// Re-export shared types
 export type {
-  ButtonProps,
-  ButtonVariant,
-  ButtonSize,
+  BadgeStatusPropsShared,
+  BadgeStatusStatus,
+  BadgeStatusSize,
 } from '@metamask/design-system-shared';
-export { ButtonVariant, ButtonSize } from '@metamask/design-system-shared';
+export {
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from '@metamask/design-system-shared';
+
+import type { ComponentProps } from 'react';
+
+// Extend with platform-specific props
+export type BadgeStatusProps = ComponentProps<'div'> &
+  BadgeStatusPropsShared & {
+    className?: string;
+    style?: React.CSSProperties;
+  };
+
+// ==========================================
+// STEP 4: React Native package - re-export and extend
+// ==========================================
+// packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts
+
+// Re-export shared types
+export type {
+  BadgeStatusPropsShared,
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from '@metamask/design-system-shared';
+export {
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from '@metamask/design-system-shared';
+
+import type { ViewProps } from 'react-native';
+
+// Extend with platform-specific props
+export type BadgeStatusProps = BadgeStatusPropsShared &
+  Omit<ViewProps, 'children'> & {
+    twClassName?: string;
+  };
+
+// ==========================================
+// STEP 5: Remove old enums from platform packages
+// ==========================================
+// packages/design-system-react/src/types/index.ts
+// packages/design-system-react-native/src/types/index.ts
+
+// Remove old enum definitions:
+// export enum BadgeStatusStatus { ... }  ❌ Delete
+// export enum BadgeStatusSize { ... }    ❌ Delete
+
+// Re-export from shared package:
+export {
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from '@metamask/design-system-shared';
+export type {
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from '@metamask/design-system-shared';
 ```
 
 ## Commands
@@ -302,13 +492,15 @@ yarn storybook:ios            # React Native iOS
 
 **Completed components following ADR-0003/0004:**
 
-- @packages/design-system-react/src/components/Box/ (React)
-- @packages/design-system-react-native/src/components/Box/ (React Native)
-- @packages/design-system-react/src/components/Button/ (Complex example)
+- @packages/design-system-shared/src/types/BadgeStatus/ (Example migration)
+- @packages/design-system-react/src/components/BadgeStatus/ (React)
+- @packages/design-system-react-native/src/components/BadgeStatus/ (React Native)
+- @packages/design-system-react/src/components/Box/ (Foundational component)
+- @packages/design-system-react/src/components/Button/ (Complex interactive)
 
 **Shared types architecture:**
 
-- @packages/design-system-shared/src/types/ (Centralized types per ADR-0004)
+- @packages/design-system-shared/src/types/BadgeStatus/ (Layered architecture example)
 - @packages/design-system-shared/src/index.ts (Type exports)
 
 **Script documentation:**
@@ -319,21 +511,52 @@ yarn storybook:ios            # React Native iOS
 
 After creating a component, verify:
 
+**Setup & Structure:**
+
 - [ ] Used create-component script (not manual file creation)
 - [ ] Component exists in BOTH React and React Native
+
+**Shared Types (ADR-0003 + ADR-0004):**
+
 - [ ] Types defined in `@metamask/design-system-shared/src/types/ComponentName/`
-- [ ] Types use const objects + string unions (ADR-0003), not enums
-- [ ] Platform packages re-export types from shared (ADR-0004)
-- [ ] Generated template types replaced with re-exports
+- [ ] Const objects + string unions used (ADR-0003), NOT enums
+- [ ] Shared interface named `ComponentNamePropsShared` (with "Shared" suffix)
+- [ ] Exported from `@metamask/design-system-shared/src/index.ts`
+
+**Platform Types (Layered Architecture):**
+
+- [ ] Platform packages re-export shared types
+- [ ] Generated template types replaced with re-exports and extension
+- [ ] `ComponentNameProps` extends `ComponentNamePropsShared`
+- [ ] React: Extends `ComponentProps<'element'>`, adds `className?: string`
+- [ ] React Native: Extends `ViewProps` or `PressableProps`, adds `twClassName?: string`
+- [ ] Event handlers use idiomatic names (onClick/onPress from base types)
+- [ ] NO className/twClassName in shared package
+- [ ] NO unified event handlers in shared package (onAction, etc.)
+
+**Implementation:**
+
 - [ ] Template div/View replaced with Box primitive
-- [ ] Uses Text component for typography
+- [ ] Uses Text component for typography (not raw span/Text)
 - [ ] Design token const objects used (not arbitrary values)
-- [ ] Component forwards refs
-- [ ] Identical props across React and React Native
-- [ ] Cross-platform: same type names, values, documentation structure
+- [ ] Component forwards refs properly
+
+**Cross-Platform Consistency:**
+
+- [ ] Identical `ComponentNamePropsShared` interface
+- [ ] Same const object names and values
+- [ ] Same stories structure
+- [ ] Same documentation sections
+- [ ] Platform differences ONLY in extension layer
+
+**Documentation & Testing:**
+
 - [ ] Stories follow component-documentation.md (@.cursor/rules/)
-- [ ] Tests written
+- [ ] Tests written (Jest + Testing Library)
 - [ ] README follows templates (@docs/component-readme-examples/)
+
+**Build Verification:**
+
 - [ ] Build succeeds: `yarn build`
 - [ ] Tests pass: `yarn test`
 - [ ] Lint passes: `yarn lint`

@@ -92,28 +92,13 @@ export enum BadgeCountSize {
 }
 
 /**
- * BadgeStatus - status
+ * BadgeStatus - status and size
+ * Re-exported from shared package (ADR-0003 + ADR-0004)
  */
-export enum BadgeStatusStatus {
-  Active = 'active', // Connected
-  Inactive = 'inactive', // Connected
-  Disconnected = 'disconnected',
-  New = 'new',
-  Attention = 'attention',
-}
-/**
- * BadgeStatus - size
- */
-export enum BadgeStatusSize {
-  /**
-   * Represents a medium badge status size (8px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large avatar size (10px).
-   */
-  Lg = 'lg',
-}
+export {
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from '@metamask/design-system-shared';
 
 /**
  * BadgeWrapper - positionAnchorShape
