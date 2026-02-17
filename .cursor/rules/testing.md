@@ -74,7 +74,11 @@ const cases = [
 ];
 
 cases.forEach(({ props, expectedBg }) => {
-  const { getByTestId } = render(<ButtonPrimary {...props} testID="btn">X</ButtonPrimary>);
+  const { getByTestId } = render(
+    <ButtonPrimary {...props} testID="btn">
+      X
+    </ButtonPrimary>,
+  );
   expectBackground(getByTestId('btn').props.style, expectedBg);
 });
 ```
