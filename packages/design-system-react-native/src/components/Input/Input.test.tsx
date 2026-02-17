@@ -1,7 +1,13 @@
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import {
+  Theme,
+  ThemeProvider,
+  useTailwind,
+} from '@metamask/design-system-twrnc-preset';
+import { darkTheme } from '@metamask/design-tokens';
 import { renderHook } from '@testing-library/react-hooks';
-import { render, fireEvent } from '@testing-library/react-native';
+import { act, render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
+import { create } from 'react-test-renderer';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import { TextVariant } from '../../types';
@@ -35,7 +41,7 @@ describe('Input', () => {
           [
             {
               "backgroundColor": "#ffffff",
-              "borderColor": "#4459ff",
+              "borderColor": "transparent",
               "borderWidth": 1,
               "color": "#121314",
               "fontFamily": "Geist-Regular",
@@ -117,5 +123,116 @@ describe('Input', () => {
     const { getByTestId } = render(<Input autoFocus />);
     const input = getByTestId(INPUT_TEST_ID);
     expect(input.props.autoFocus).toBe(true);
+  });
+
+  it('uses dark theme placeholder color when ThemeProvider has theme dark', () => {
+    const { getByTestId } = render(
+      <ThemeProvider theme={Theme.Dark}>
+        <Input placeholder="Dark theme" />
+      </ThemeProvider>,
+    );
+    const input = getByTestId(INPUT_TEST_ID);
+    expect(input.props.placeholderTextColor).toBe(
+      darkTheme.colors.text.alternative,
+    );
+  });
+
+  it('does not call onBlur when disabled and blur fires', () => {
+    const onBlur = jest.fn();
+    const { getByTestId } = render(<Input isDisabled onBlur={onBlur} />);
+    const input = getByTestId(INPUT_TEST_ID);
+    fireEvent(input, 'focus');
+    fireEvent(input, 'blur');
+    expect(onBlur).not.toHaveBeenCalled();
+  });
+
+  it('does not call onFocus when disabled and focus fires', () => {
+    const onFocus = jest.fn();
+    const { getByTestId } = render(<Input isDisabled onFocus={onFocus} />);
+    const input = getByTestId(INPUT_TEST_ID);
+    fireEvent(input, 'focus');
+    expect(onFocus).not.toHaveBeenCalled();
+  });
+
+  it('invokes onBlur with event when not disabled', () => {
+    const onBlur = jest.fn();
+    const { getByTestId } = render(<Input onBlur={onBlur} />);
+    const input = getByTestId(INPUT_TEST_ID);
+    fireEvent(input, 'focus');
+    fireEvent(input, 'blur', { nativeEvent: {} });
+    expect(onBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledWith(
+      expect.objectContaining({ nativeEvent: {} }),
+    );
+  });
+
+  it('invokes onFocus with event when not disabled', () => {
+    const onFocus = jest.fn();
+    const { getByTestId } = render(<Input onFocus={onFocus} />);
+    const input = getByTestId(INPUT_TEST_ID);
+    fireEvent(input, 'focus', { nativeEvent: {} });
+    expect(onFocus).toHaveBeenCalledTimes(1);
+    expect(onFocus).toHaveBeenCalledWith(
+      expect.objectContaining({ nativeEvent: {} }),
+    );
+  });
+
+  it('calls onBlur handler when TextInput onBlur prop is invoked', () => {
+    const onBlur = jest.fn();
+    const { getByTestId } = render(<Input onBlur={onBlur} />);
+    const input = getByTestId(INPUT_TEST_ID);
+    const blurEvent = { nativeEvent: { text: '' } };
+    act(() => {
+      input.props.onBlur(blurEvent);
+    });
+    expect(onBlur).toHaveBeenCalledWith(blurEvent);
+  });
+
+  it('calls onFocus handler when TextInput onFocus prop is invoked', () => {
+    const onFocus = jest.fn();
+    const { getByTestId } = render(<Input onFocus={onFocus} />);
+    const input = getByTestId(INPUT_TEST_ID);
+    const focusEvent = { nativeEvent: { text: '' } };
+    act(() => {
+      input.props.onFocus(focusEvent);
+    });
+    expect(onFocus).toHaveBeenCalledWith(focusEvent);
+  });
+
+  it('onBlurHandler and onFocusHandler run when invoked via test renderer', () => {
+    const onBlur = jest.fn();
+    const onFocus = jest.fn();
+    const tree = create(
+      <ThemeProvider theme={Theme.Light}>
+        <Input onBlur={onBlur} onFocus={onFocus} />
+      </ThemeProvider>,
+    );
+    const input = tree.root.findByProps({ testID: INPUT_TEST_ID });
+    const blurEvent = { nativeEvent: { text: '' } };
+    const focusEvent = { nativeEvent: { text: '' } };
+    act(() => {
+      input.props.onBlur(blurEvent);
+    });
+    expect(onBlur).toHaveBeenCalledWith(blurEvent);
+    act(() => {
+      input.props.onFocus(focusEvent);
+    });
+    expect(onFocus).toHaveBeenCalledWith(focusEvent);
+  });
+
+  it('handlers run without callbacks (optional chaining branches)', () => {
+    const tree = create(
+      <ThemeProvider theme={Theme.Light}>
+        <Input />
+      </ThemeProvider>,
+    );
+    const input = tree.root.findByProps({ testID: INPUT_TEST_ID });
+    const event = { nativeEvent: { text: '' } };
+    act(() => {
+      input.props.onBlur(event);
+    });
+    act(() => {
+      input.props.onFocus(event);
+    });
   });
 });

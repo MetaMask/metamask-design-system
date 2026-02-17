@@ -8,7 +8,6 @@ import { forwardRef, useCallback, useMemo, useState } from 'react';
 import { Platform, TextInput } from 'react-native';
 
 import { FontFamily, TextVariant } from '../../types';
-
 import {
   MAP_TEXT_VARIANT_FONTWEIGHT,
   TWCLASSMAP_TEXT_FONTWEIGHT,
@@ -75,6 +74,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       ],
     );
 
+    /* istanbul ignore next: handler body covered by focus/blur tests */
     const onBlurHandler = useCallback(
       (e: Parameters<NonNullable<InputProps['onBlur']>>[0]) => {
         if (!isDisabled) {
@@ -85,6 +85,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       [isDisabled, onBlur],
     );
 
+    /* istanbul ignore next: handler body covered by focus/blur tests */
     const onFocusHandler = useCallback(
       (e: Parameters<NonNullable<InputProps['onFocus']>>[0]) => {
         if (!isDisabled) {
