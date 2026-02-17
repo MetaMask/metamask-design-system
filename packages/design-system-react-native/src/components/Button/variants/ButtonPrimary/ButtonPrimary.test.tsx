@@ -195,6 +195,7 @@ describe('ButtonPrimary', () => {
     // Verify content is hidden with opacity-0
     const text = getByText('Loading');
     expectStyleIncludes(text.props.style, { opacity: 0 });
+    expect(text.props.style).toResolveToStyle({ opacity: 0 });
 
     expect(
       getByTestId('button-primary').props.accessibilityState.disabled,
