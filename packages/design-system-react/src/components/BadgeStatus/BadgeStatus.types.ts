@@ -1,3 +1,5 @@
+// Import shared type for extension
+import type { BadgeStatusPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
 // Re-export shared types from centralized package (ADR-0004)
@@ -12,7 +14,7 @@ export {
  * Extends shared props with React-specific platform concerns
  */
 export type BadgeStatusProps = ComponentProps<'div'> &
-  import('@metamask/design-system-shared').BadgeStatusPropsShared & {
+  BadgeStatusPropsShared & {
     /**
      * Optional prop for additional CSS classes to be applied to the BadgeStatus component.
      * These classes will be merged with the component's default classes using twMerge.
