@@ -43,7 +43,7 @@ module.exports = merge(baseConfig, {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!react-native|@react-native|react-native-reanimated|@react-navigation)',
+    'node_modules/(?!react-native|@react-native|react-native-reanimated|@react-navigation|react-native-safe-area-context)',
   ],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
