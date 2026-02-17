@@ -75,6 +75,30 @@ describe('HeaderBase', () => {
 
       expect(getByTestId(customTestId)).toBeOnTheScreen();
     });
+
+    it('applies twClassName when provided', () => {
+      const { getByTestId } = render(
+        <HeaderBase twClassName="px-4 bg-info-default">Title</HeaderBase>,
+      );
+
+      expect(getByTestId(HEADERBASE_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('applies top inset margin when includesTopInset is true', () => {
+      const safeAreaContext = require('react-native-safe-area-context');
+      safeAreaContext.useSafeAreaInsets.mockReturnValue({
+        top: 44,
+        left: 0,
+        right: 0,
+        bottom: 0,
+      });
+
+      const { getByTestId } = render(
+        <HeaderBase includesTopInset>Title</HeaderBase>,
+      );
+
+      expect(getByTestId(HEADERBASE_TEST_ID)).toBeOnTheScreen();
+    });
   });
 
   describe('startAccessory', () => {
