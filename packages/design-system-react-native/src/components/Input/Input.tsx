@@ -4,19 +4,19 @@ import {
   useTheme,
 } from '@metamask/design-system-twrnc-preset';
 import { darkTheme, lightTheme } from '@metamask/design-tokens';
-import React, { useCallback, useMemo, useState } from 'react';
+import { forwardRef, useCallback, useMemo, useState } from 'react';
 import { Platform, TextInput } from 'react-native';
 
 import { FontFamily, TextVariant } from '../../types';
 
-import { INPUT_TEST_ID } from './Input.constants';
-import type { InputProps } from './Input.types';
 import {
   MAP_TEXT_VARIANT_FONTWEIGHT,
   TWCLASSMAP_TEXT_FONTWEIGHT,
 } from '../Text/Text.constants';
+import { INPUT_TEST_ID } from './Input.constants';
+import type { InputProps } from './Input.types';
 
-export const Input = React.forwardRef<TextInput, InputProps>(
+export const Input = forwardRef<TextInput, InputProps>(
   (
     {
       style,
@@ -27,7 +27,7 @@ export const Input = React.forwardRef<TextInput, InputProps>(
       twClassName,
       onBlur,
       onFocus,
-      autoFocus = true,
+      autoFocus = false,
       ...props
     },
     ref,

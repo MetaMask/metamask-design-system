@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 import { TextVariant } from '../../types';
 
 import type { InputProps } from './Input.types';

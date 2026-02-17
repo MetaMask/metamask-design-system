@@ -4,8 +4,8 @@ import { View } from 'react-native';
 import { TextVariant } from '../../types';
 
 import { Input } from './Input';
-import type { InputProps } from './Input.types';
 import { SAMPLE_INPUT_PROPS } from './Input.constants';
+import type { InputProps } from './Input.types';
 
 const meta: Meta<InputProps> = {
   title: 'Components/Input',

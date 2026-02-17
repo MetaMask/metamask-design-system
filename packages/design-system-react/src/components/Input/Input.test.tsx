@@ -31,9 +31,9 @@ describe('Input', () => {
   });
 
   it('merges className with default classes', () => {
-    render(<Input className="custom-class" data-testid={INPUT_TEST_ID} />);
+    render(<Input className="mt-4" data-testid={INPUT_TEST_ID} />);
     const input = screen.getByTestId(INPUT_TEST_ID);
-    expect(input).toHaveClass('custom-class');
+    expect(input).toHaveClass('mt-4');
   });
 
   it('forwards ref to the input element', () => {
