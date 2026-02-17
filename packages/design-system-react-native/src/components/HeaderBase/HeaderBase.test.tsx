@@ -6,13 +6,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // External dependencies.
 
 // Internal dependencies.
+import { IconName } from '../Icon';
+import { Text } from '../Text';
+
 import HeaderBase from './HeaderBase';
 import {
   HEADERBASE_TEST_ID,
   HEADERBASE_TITLE_TEST_ID,
 } from './HeaderBase.constants';
-
-import { Text, IconName } from '@metamask/design-system-react-native';
 
 function render(
   ui: React.ReactElement,

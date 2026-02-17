@@ -1,17 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
+import { Box } from '../Box';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
+import { IconName } from '../Icon';
+import { Text, TextVariant } from '../Text';
+
 import HeaderBase from './HeaderBase';
 import type { HeaderBaseProps } from './HeaderBase.types';
-
-import {
-  Box,
-  Text,
-  TextVariant,
-  ButtonIcon,
-  ButtonIconSize,
-  IconName,
-} from '@metamask/design-system-react-native';
 
 const meta: Meta<HeaderBaseProps> = {
   title: 'Components/HeaderBase',
