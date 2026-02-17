@@ -1,38 +1,22 @@
+// Import shared type for extension
+import type { BadgeStatusPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
-import type { BadgeStatusStatus, BadgeStatusSize } from '../../types';
+// Re-export shared types from centralized package (ADR-0004)
+export {
+  BadgeStatusStatus,
+  BadgeStatusSize,
+  type BadgeStatusPropsShared,
+} from '@metamask/design-system-shared';
 
 /**
- * BadgeStatus component props.
+ * BadgeStatus component props (React Native platform-specific)
+ * Extends shared props with React Native-specific platform concerns
  */
-export type BadgeStatusProps = {
-  /**
-   * Optional prop to control the status of the badge
-   * Possible values:
-   * - BadgeStatusStatus.Active. (Connected)
-   * - BadgeStatusStatus.Inactive. (Connected)
-   * - BadgeStatusStatus.Disconnected.
-   * - BadgeStatusStatus.New.
-   * - BadgeStatusStatus.Attention.
-   */
-  status: BadgeStatusStatus;
-  /**
-   * Optional prop to determine whether the badge should display a border
-   *
-   * @default true
-   */
-  hasBorder?: boolean;
-  /**
-   * Optional prop to control the size of the BadgeStatus
-   * Possible values:
-   * - BadgeStatusSize.Md (8px),
-   * - BadgeStatusSize.Lg (10px),
-   *
-   * @default AvatarBaseSize.Md
-   */
-  size?: BadgeStatusSize;
-  /**
-   * Optional prop to add twrnc overriding classNames.
-   */
-  twClassName?: string;
-} & Omit<ViewProps, 'children'>;
+export type BadgeStatusProps = BadgeStatusPropsShared &
+  Omit<ViewProps, 'children'> & {
+    /**
+     * Optional prop to add twrnc overriding classNames.
+     */
+    twClassName?: string;
+  };
