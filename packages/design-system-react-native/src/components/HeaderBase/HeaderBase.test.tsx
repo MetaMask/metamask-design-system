@@ -1,6 +1,6 @@
 // Third party dependencies.
 import { render as rtlRender, fireEvent } from '@testing-library/react-native';
-import React from 'react';
+import React, { act } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // External dependencies.
@@ -92,6 +92,27 @@ describe('HeaderBase', () => {
       expect(getByTestId(START_CONTENT_TEST_ID)).toBeOnTheScreen();
     });
 
+    it('invokes start accessory layout callback when layout is triggered', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          startAccessory={<Text testID={START_CONTENT_TEST_ID}>Start</Text>}
+          startAccessoryWrapperProps={{ testID: START_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      const startWrapper = getByTestId(START_ACCESSORY_TEST_ID);
+      const layoutView = startWrapper.props.children;
+      act(() => {
+        layoutView.props.onLayout({
+          nativeEvent: { layout: { width: 80, height: 24, x: 0, y: 0 } },
+        });
+      });
+
+      expect(getByTestId(START_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+    });
+
     it('does not render start accessory wrapper when startAccessory is not provided', () => {
       const { queryByTestId } = render(
         <HeaderBase
@@ -131,6 +152,27 @@ describe('HeaderBase', () => {
 
       expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
       expect(getByTestId(END_CONTENT_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('invokes end accessory layout callback when layout is triggered', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          endAccessory={<Text testID={END_CONTENT_TEST_ID}>End</Text>}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      const endWrapper = getByTestId(END_ACCESSORY_TEST_ID);
+      const layoutView = endWrapper.props.children;
+      act(() => {
+        layoutView.props.onLayout({
+          nativeEvent: { layout: { width: 60, height: 24, x: 0, y: 0 } },
+        });
+      });
+
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
     });
 
     it('does not render end accessory wrapper when endAccessory is not provided', () => {
