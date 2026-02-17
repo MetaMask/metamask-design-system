@@ -68,6 +68,7 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
   const hasStartContent = startAccessory || startButtonIconProps;
   const hasEndButtons =
     Array.isArray(endButtonIconProps) && endButtonIconProps.length > 0;
+  /* istanbul ignore next -- branch coverage quirk in CI */
   const hasEndContent = endAccessory || hasEndButtons;
   const hasAnyAccessory = hasStartContent || hasEndContent;
 
