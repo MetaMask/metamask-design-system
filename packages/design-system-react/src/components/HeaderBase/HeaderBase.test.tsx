@@ -5,11 +5,11 @@ import React from 'react';
 import { IconName } from '../../types';
 import { Text } from '../Text';
 
+import { HeaderBase } from './HeaderBase';
 import {
   HEADERBASE_TEST_ID,
   HEADERBASE_TITLE_TEST_ID,
 } from './HeaderBase.constants';
-import { HeaderBase } from './HeaderBase';
 
 const START_ACCESSORY_TEST_ID = 'start-accessory-wrapper';
 const END_ACCESSORY_TEST_ID = 'end-accessory-wrapper';
@@ -67,7 +67,7 @@ describe('HeaderBase', () => {
       expect(screen.getByTestId(START_CONTENT_TEST_ID)).toBeInTheDocument();
     });
 
-    it('does not render start accessory wrapper when no start accessory', () => {
+    it('renders start accessory wrapper when no start accessory (for layout)', () => {
       render(
         <HeaderBase
           startAccessoryWrapperProps={{
@@ -77,7 +77,7 @@ describe('HeaderBase', () => {
           Title
         </HeaderBase>,
       );
-      expect(screen.queryByTestId(START_ACCESSORY_TEST_ID)).toBeNull();
+      expect(screen.getByTestId(START_ACCESSORY_TEST_ID)).toBeInTheDocument();
     });
 
     it('passes startAccessoryWrapperProps to start accessory wrapper', () => {
@@ -109,7 +109,7 @@ describe('HeaderBase', () => {
       expect(screen.getByTestId(END_CONTENT_TEST_ID)).toBeInTheDocument();
     });
 
-    it('does not render end accessory wrapper when no end accessory', () => {
+    it('renders end accessory wrapper when no end accessory (for layout)', () => {
       render(
         <HeaderBase
           endAccessoryWrapperProps={{ 'data-testid': END_ACCESSORY_TEST_ID }}
@@ -117,7 +117,7 @@ describe('HeaderBase', () => {
           Title
         </HeaderBase>,
       );
-      expect(screen.queryByTestId(END_ACCESSORY_TEST_ID)).toBeNull();
+      expect(screen.getByTestId(END_ACCESSORY_TEST_ID)).toBeInTheDocument();
     });
 
     it('passes endAccessoryWrapperProps to end accessory wrapper', () => {

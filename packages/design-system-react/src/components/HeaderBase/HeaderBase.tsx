@@ -31,19 +31,13 @@ export const HeaderBase = forwardRef<HTMLDivElement, HeaderBaseProps>(
     },
     ref,
   ) => {
-    const hasStartContent = startAccessory || startButtonIconProps;
-    const hasEndContent =
-      endAccessory || (endButtonIconProps && endButtonIconProps.length > 0);
-    const hasAnyAccessory = hasStartContent || hasEndContent;
-
-    const shouldRenderStartWrapper = hasAnyAccessory;
-    const shouldRenderEndWrapper = hasAnyAccessory;
-
     const hasMultipleEndButtons =
       !endAccessory && endButtonIconProps && endButtonIconProps.length > 1;
 
     const renderStartContent = () => {
-      if (startAccessory) return startAccessory;
+      if (startAccessory) {
+        return startAccessory;
+      }
       if (startButtonIconProps) {
         return (
           <ButtonIcon size={ButtonIconSize.Md} {...startButtonIconProps} />
@@ -53,7 +47,9 @@ export const HeaderBase = forwardRef<HTMLDivElement, HeaderBaseProps>(
     };
 
     const renderEndContent = () => {
-      if (endAccessory) return endAccessory;
+      if (endAccessory) {
+        return endAccessory;
+      }
       if (endButtonIconProps && endButtonIconProps.length > 0) {
         const reversedProps = endButtonIconProps
           .map((p, i) => ({ props: p, index: i }))
@@ -70,7 +66,7 @@ export const HeaderBase = forwardRef<HTMLDivElement, HeaderBaseProps>(
     };
 
     const rootClassName = twMerge(
-      'grid grid-cols-[1fr_auto_1fr] items-center gap-4 min-h-14',
+      'grid min-h-14 grid-cols-[1fr_auto_1fr] items-center gap-4',
       includesTopInset && 'pt-[env(safe-area-inset-top)]',
       className,
     );
@@ -83,13 +79,11 @@ export const HeaderBase = forwardRef<HTMLDivElement, HeaderBaseProps>(
         data-testid={testID ?? HEADERBASE_TEST_ID}
         {...props}
       >
-        {shouldRenderStartWrapper && (
-          <div className="flex justify-start" {...startAccessoryWrapperProps}>
-            {renderStartContent()}
-          </div>
-        )}
+        <div className="flex justify-start" {...startAccessoryWrapperProps}>
+          {renderStartContent()}
+        </div>
 
-        <Box className="flex-1 min-w-0 flex items-center justify-center">
+        <Box className="flex min-w-0 flex-1 items-center justify-center">
           {typeof children === 'string' ? (
             <Text
               variant={HEADERBASE_TITLE_TEXT_VARIANT}
@@ -103,13 +97,11 @@ export const HeaderBase = forwardRef<HTMLDivElement, HeaderBaseProps>(
           )}
         </Box>
 
-        {shouldRenderEndWrapper && (
-          <div className="flex justify-end" {...endAccessoryWrapperProps}>
-            <div className={hasMultipleEndButtons ? 'flex gap-2' : undefined}>
-              {renderEndContent()}
-            </div>
+        <div className="flex justify-end" {...endAccessoryWrapperProps}>
+          <div className={hasMultipleEndButtons ? 'flex gap-2' : undefined}>
+            {renderEndContent()}
           </div>
-        )}
+        </div>
       </div>
     );
   },

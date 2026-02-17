@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
+import { HeaderBase } from './HeaderBase';
+import type { HeaderBaseProps } from './HeaderBase.types';
+import README from './README.mdx';
+
 import {
   Box,
   Text,
@@ -9,10 +13,6 @@ import {
   ButtonIconSize,
   IconName,
 } from '@metamask/design-system-react';
-
-import { HeaderBase } from './HeaderBase';
-import type { HeaderBaseProps } from './HeaderBase.types';
-import README from './README.mdx';
 
 const meta: Meta<HeaderBaseProps> = {
   title: 'React Components/HeaderBase',
@@ -39,7 +39,7 @@ export default meta;
 
 type Story = StoryObj<HeaderBaseProps>;
 
-const noop = () => {};
+const noop = (): void => undefined;
 
 export const Default: Story = {
   args: {

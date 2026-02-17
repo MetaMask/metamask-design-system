@@ -21,6 +21,7 @@ export type HeaderBaseProps = ComponentProps<'div'> & {
    * Optional ButtonIcon props to render a ButtonIcon as the start accessory.
    * Only used if startAccessory is not provided.
    * Requires ariaLabel for accessibility.
+   *
    * @default size: ButtonIconSize.Md
    */
   startButtonIconProps?: ButtonIconProps;
@@ -29,11 +30,13 @@ export type HeaderBaseProps = ComponentProps<'div'> & {
    * Rendered in reverse order (first item appears rightmost).
    * Only used if endAccessory is not provided.
    * Requires ariaLabel on each item for accessibility.
+   *
    * @default size: ButtonIconSize.Md for each
    */
   endButtonIconProps?: ButtonIconProps[];
   /**
    * Optional prop to include the top inset so the header is visible below the safe area.
+   *
    * @default false
    */
   includesTopInset?: boolean;

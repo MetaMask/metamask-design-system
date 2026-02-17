@@ -1,6 +1,6 @@
 // Third party dependencies.
-import { ViewProps, StyleProp, ViewStyle } from 'react-native';
 import { ReactNode } from 'react';
+import { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
 // External dependencies.
 import type { ButtonIconProps } from '../ButtonIcon';
@@ -8,7 +8,7 @@ import type { ButtonIconProps } from '../ButtonIcon';
 /**
  * HeaderBase component props.
  */
-export interface HeaderBaseProps extends ViewProps {
+export type HeaderBaseProps = {
   /**
    * Title of the HeaderBase.
    */
@@ -30,6 +30,7 @@ export interface HeaderBaseProps extends ViewProps {
   /**
    * Optional ButtonIcon props to render a ButtonIcon as the start accessory.
    * Only used if startAccessory is not provided.
+   *
    * @default size: ButtonIconSize.Md
    */
   startButtonIconProps?: ButtonIconProps;
@@ -37,12 +38,14 @@ export interface HeaderBaseProps extends ViewProps {
    * Optional array of ButtonIcon props to render multiple ButtonIcons as end accessories.
    * Rendered in reverse order (first item appears rightmost).
    * Only used if endAccessory is not provided.
+   *
    * @default size: ButtonIconSize.Md for each
    */
   endButtonIconProps?: ButtonIconProps[];
   /**
    * Optional prop to include the top inset to make sure the header is visible
    * below device's knob.
+   *
    * @default false
    */
   includesTopInset?: boolean;
@@ -62,4 +65,4 @@ export interface HeaderBaseProps extends ViewProps {
    * Optional Tailwind class names for the header container.
    */
   twClassName?: string;
-}
+} & ViewProps;

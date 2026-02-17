@@ -1,25 +1,41 @@
 // Third party dependencies.
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback, useState } from 'react';
 import { View, LayoutChangeEvent } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
 import { Box } from '../Box';
-import { Text } from '../Text';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Text } from '../Text';
 
 // Internal dependencies.
-import { HeaderBaseProps } from './HeaderBase.types';
 import {
   HEADERBASE_TEST_ID,
   HEADERBASE_TITLE_TEST_ID,
   HEADERBASE_TITLE_TEXT_VARIANT,
 } from './HeaderBase.constants';
+import { HeaderBaseProps } from './HeaderBase.types';
 
 /**
  * HeaderBase is a flexible header component that supports optional
  * start and end accessories with a center-aligned title.
+ * When includesTopInset is true, the app tree must include SafeAreaProvider
+ * from react-native-safe-area-context.
+ *
+ * @param options0 - Component props.
+ * @param options0.children - Title or custom content.
+ * @param options0.style - Optional container style.
+ * @param options0.startAccessory - Content before the title.
+ * @param options0.endAccessory - Content after the title.
+ * @param options0.startButtonIconProps - ButtonIcon props for start.
+ * @param options0.endButtonIconProps - ButtonIcon props for end.
+ * @param options0.includesTopInset - Whether to include top safe area inset.
+ * @param options0.startAccessoryWrapperProps - Props for start wrapper View.
+ * @param options0.endAccessoryWrapperProps - Props for end wrapper View.
+ * @param options0.testID - Test ID for the container.
+ * @param options0.twClassName - Tailwind class names for the container.
+ * @returns Header element.
  */
 const HeaderBase: React.FC<HeaderBaseProps> = ({
   children,
@@ -77,8 +93,6 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
       return endAccessory;
     }
     if (endButtonIconProps && endButtonIconProps.length > 0) {
-      // Reverse the array so first item appears rightmost
-      // Use original index (before reversal) for stable React keys
       const reversedProps = endButtonIconProps
         .map((props, originalIndex) => ({ props, originalIndex }))
         .reverse();
@@ -93,7 +107,6 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
     return null;
   };
 
-  // Check if we have multiple end buttons for layout styling
   const hasMultipleEndButtons =
     !endAccessory && endButtonIconProps && endButtonIconProps.length > 1;
 
@@ -112,7 +125,6 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
       testID={testID}
       {...viewProps}
     >
-      {/* Start accessory */}
       {shouldRenderStartWrapper && (
         <View
           style={
@@ -128,7 +140,6 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
         </View>
       )}
 
-      {/* Title */}
       <Box twClassName="flex-1 items-center">
         {typeof children === 'string' ? (
           <Text
@@ -143,7 +154,6 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
         )}
       </Box>
 
-      {/* End accessory */}
       {shouldRenderEndWrapper && (
         <View
           style={

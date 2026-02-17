@@ -1,9 +1,9 @@
 // Third party dependencies.
+import { render as rtlRender, fireEvent } from '@testing-library/react-native';
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // External dependencies.
-import { Text, IconName } from '@metamask/design-system-react-native';
 
 // Internal dependencies.
 import HeaderBase from './HeaderBase';
@@ -11,6 +11,18 @@ import {
   HEADERBASE_TEST_ID,
   HEADERBASE_TITLE_TEST_ID,
 } from './HeaderBase.constants';
+
+import { Text, IconName } from '@metamask/design-system-react-native';
+
+function render(
+  ui: React.ReactElement,
+  options?: Parameters<typeof rtlRender>[1],
+) {
+  return rtlRender(ui, {
+    wrapper: ({ children }) => <SafeAreaProvider>{children}</SafeAreaProvider>,
+    ...options,
+  });
+}
 
 const START_ACCESSORY_TEST_ID = 'start-accessory-wrapper';
 const END_ACCESSORY_TEST_ID = 'end-accessory-wrapper';
