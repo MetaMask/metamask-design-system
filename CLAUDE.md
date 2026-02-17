@@ -6,6 +6,7 @@ Design tokens and components for MetaMask extension (React) and mobile (React Na
 
 Repository-specific conventions and patterns:
 
+- @.cursor/rules/component-creation.md
 - @.cursor/rules/styling.md
 - @.cursor/rules/component-documentation.md
 - @.cursor/rules/figma-integration.md
@@ -55,6 +56,7 @@ yarn lint:fix                 # Auto-fix
 
 # Component Creation
 yarn create-component:react --name ComponentName --description "Brief description"
+yarn create-component:react-native --name ComponentName --description "Brief description"
 
 # Storybook
 yarn storybook                # React web (port 6006)
