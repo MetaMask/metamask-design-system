@@ -84,6 +84,13 @@ export type { CheckboxProps } from './Checkbox';
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
+export {
+  default as HeaderBase,
+  HEADERBASE_TEST_ID,
+  HEADERBASE_TITLE_TEST_ID,
+} from './HeaderBase';
+export type { HeaderBaseProps } from './HeaderBase';
+
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
 

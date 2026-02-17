@@ -1,0 +1,321 @@
+import { Canvas } from '@storybook/addon-docs/blocks';
+
+import * as HeaderBaseStories from './HeaderBase.stories';
+
+# HeaderBase
+
+HeaderBase is a flexible header component with optional start and end accessories and a center-aligned title. It keeps the title centered when only one side has content.
+
+```tsx
+import { HeaderBase } from '@metamask/design-system-react';
+
+<HeaderBase>Page Title</HeaderBase>;
+```
+
+<Canvas of={HeaderBaseStories.Default} />
+
+## Props
+
+This component extends native `div` props.
+
+### `children`
+
+The title or custom content of the header. When a string is passed, it is rendered with the heading text variant and centered.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string | ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `startAccessory`
+
+Optional content before the title. Takes priority over `startButtonIconProps` if both are provided.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `endAccessory`
+
+Optional content after the title. Takes priority over `endButtonIconProps` if both are provided.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `startButtonIconProps`
+
+Optional ButtonIcon props for the start accessory. Only used if `startAccessory` is not provided. **Requires `ariaLabel`** for accessibility.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ButtonIconProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>size: ButtonIconSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderBaseStories.StartButtonIconProps} />
+
+### `endButtonIconProps`
+
+Optional array of ButtonIcon props for end accessories. Rendered in reverse order (first item appears rightmost). Only used if `endAccessory` is not provided. **Each item requires `ariaLabel`** for accessibility.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ButtonIconProps[]</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>size: ButtonIconSize.Md for each</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderBaseStories.MultipleEndButtonIconProps} />
+
+### `includesTopInset`
+
+When true, adds top padding using the safe area inset so the header stays visible below notches or status bars.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `startAccessoryWrapperProps`
+
+Props spread onto the wrapper div around the start accessory.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>React.HTMLAttributes&lt;HTMLDivElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `endAccessoryWrapperProps`
+
+Props spread onto the wrapper div around the end accessory.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>React.HTMLAttributes&lt;HTMLDivElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Optional CSS classes for the header container.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `style`
+
+Optional inline styles for the header container.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>React.CSSProperties</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `testID`
+
+Optional test ID applied as `data-testid` on the root element (and on the title Text when children is a string).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>HEADERBASE_TEST_ID</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Usage
+
+```tsx
+import { HeaderBase, IconName } from '@metamask/design-system-react';
+
+<HeaderBase
+  startButtonIconProps={{
+    iconName: IconName.ArrowLeft,
+    ariaLabel: 'Go back',
+    onClick: handleBack,
+  }}
+  endButtonIconProps={[
+    {
+      iconName: IconName.Close,
+      ariaLabel: 'Close',
+      onClick: handleClose,
+    },
+  ]}
+>
+  Page Title
+</HeaderBase>;
+```
