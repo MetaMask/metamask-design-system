@@ -48,3 +48,47 @@ beforeEach(() => {
     width: 0,
   });
 });
+
+const {
+  expectStyleIncludes,
+  expectResolvedStyle,
+} = require('./src/test-utils/styles');
+
+expect.extend({
+  toIncludeStyle(receivedStyle, expectedStyle) {
+    try {
+      expectStyleIncludes(receivedStyle, expectedStyle);
+      return {
+        pass: true,
+        message: () =>
+          `Expected style not to include ${JSON.stringify(expectedStyle)}`,
+      };
+    } catch (error) {
+      return {
+        pass: false,
+        message: () =>
+          `Expected style to include ${JSON.stringify(expectedStyle)}.\n${
+            error instanceof Error ? error.message : String(error)
+          }`,
+      };
+    }
+  },
+  toResolveToStyle(receivedStyle, expectedStyle) {
+    try {
+      expectResolvedStyle(receivedStyle, expectedStyle);
+      return {
+        pass: true,
+        message: () =>
+          `Expected resolved style not to include ${JSON.stringify(expectedStyle)}`,
+      };
+    } catch (error) {
+      return {
+        pass: false,
+        message: () =>
+          `Expected resolved style to include ${JSON.stringify(expectedStyle)}.\n${
+            error instanceof Error ? error.message : String(error)
+          }`,
+      };
+    }
+  },
+});
