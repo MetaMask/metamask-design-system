@@ -84,6 +84,9 @@ export type { CheckboxProps } from './Checkbox';
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
+export { Input } from './Input';
+export type { InputProps } from './Input';
+
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
 

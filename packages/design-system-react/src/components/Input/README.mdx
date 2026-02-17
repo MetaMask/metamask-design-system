@@ -1,0 +1,133 @@
+import { Canvas, Controls } from '@storybook/addon-docs/blocks';
+
+import * as InputStories from './Input.stories';
+
+# Input
+
+Input is a light-weight borderless input component used inside of TextField.
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react';
+
+<Input placeholder="Enter text" textVariant={TextVariant.BodyMd} />;
+```
+
+<Canvas of={InputStories.Default} />
+
+## Props
+
+This component extends native HTML `input` attributes. The following are the main design-system props.
+
+### `textVariant`
+
+Optional enum to select between Typography variants.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextVariant</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextVariant.BodyMd</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={InputStories.Variant} />
+
+### `isDisabled`
+
+Optional boolean to disable the input.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={InputStories.IsDisabled} />
+
+### `isReadonly`
+
+Optional boolean to show a readonly input.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={InputStories.IsReadonly} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes. Classes are merged with the component defaults using `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={InputStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
