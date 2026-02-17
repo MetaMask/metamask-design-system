@@ -320,6 +320,21 @@ describe('HeaderBase', () => {
       expect(getAllByTestId(BUTTON_ICON_TEST_ID)).toHaveLength(2);
     });
 
+    it('hasEndContent is true when endButtonIconProps has items and no endAccessory', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          endButtonIconProps={[
+            { iconName: IconName.Close, onPress: jest.fn() },
+          ]}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+    });
+
     it('does not render ButtonIcons when endButtonIconProps is empty array', () => {
       const { queryByTestId } = render(
         <HeaderBase endButtonIconProps={[]}>Title</HeaderBase>,
