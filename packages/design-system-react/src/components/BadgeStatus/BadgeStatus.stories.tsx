@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { BadgeStatusSize, BadgeStatusStatus } from '../../types';
+import {
+  BadgeStatusSize,
+  BadgeStatusStatus,
+} from '@metamask/design-system-shared';
 
 import { BadgeStatus } from './BadgeStatus';
 import type { BadgeStatusProps } from './BadgeStatus.types';

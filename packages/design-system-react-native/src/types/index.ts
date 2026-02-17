@@ -92,15 +92,6 @@ export enum BadgeCountSize {
 }
 
 /**
- * BadgeStatus - status and size
- * Re-exported from shared package (ADR-0003 + ADR-0004)
- */
-export {
-  BadgeStatusStatus,
-  BadgeStatusSize,
-} from '@metamask/design-system-shared';
-
-/**
  * BadgeWrapper - positionAnchorShape
  */
 export enum BadgeWrapperPositionAnchorShape {
