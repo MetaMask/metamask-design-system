@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+
 import { TextVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 
