@@ -66,8 +66,9 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
   }, []);
 
   const hasStartContent = startAccessory || startButtonIconProps;
-  const hasEndContent =
-    endAccessory || (endButtonIconProps && endButtonIconProps.length > 0);
+  const hasEndButtons =
+    Array.isArray(endButtonIconProps) && endButtonIconProps.length > 0;
+  const hasEndContent = endAccessory || hasEndButtons;
   const hasAnyAccessory = hasStartContent || hasEndContent;
 
   const shouldRenderStartWrapper = hasAnyAccessory;
