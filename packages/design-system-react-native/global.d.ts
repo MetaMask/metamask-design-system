@@ -9,7 +9,6 @@ declare module '*.svg' {
 declare namespace jest {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Matchers<TResult> {
-    toIncludeStyle(expectedStyle: Record<string, unknown>): TResult;
     toResolveToStyle(expectedStyle: Record<string, unknown>): TResult;
   }
 }

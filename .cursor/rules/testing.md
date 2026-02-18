@@ -38,18 +38,17 @@ expect(getByTestId('button').props.onPress).toBeDefined();
 
 ### React Native Style Assertions
 
-- **ALWAYS** use shared style test utilities for flattening and assertions.
+- **ALWAYS** use resolved-style assertions for RN style contracts.
 - **NEVER** duplicate local `flattenStyles` helpers in component test files.
-- **PREFER** asserting key style tokens (`backgroundColor`, `opacity`, `borderColor`) over full style snapshots.
+- **PREFER** `toResolveToStyle` with key style tokens (`backgroundColor`, `opacity`, `borderColor`) over full style snapshots.
 - **AVOID** relying on brittle `style[0]` ordering unless explicitly required by the contract.
 
 ```tsx
 // ❌ Duplicated helper per test file
 function flattenStyles(styleProp: unknown): Record<string, unknown>[] { ... }
 
-// ✅ Shared helper (create if missing)
-import { getStyleList, expectStyleIncludes } from '../../test-utils/styles';
-expectStyleIncludes(button.props.style, { opacity: 0.5 });
+// ✅ Focused shared matcher
+expect(button.props.style).toResolveToStyle({ opacity: 0.5 });
 ```
 
 ### Isolation, Mocks, and Async
@@ -87,8 +86,8 @@ cases.forEach(({ props, expectedBg }) => {
 
 - **ALWAYS** centralize reusable RN style helpers under:
   `packages/design-system-react-native/src/test-utils/`
-- **PREFER** helper names that describe intent:
-  `getStyleList`, `getResolvedStyle`, `expectStyleIncludes`, `expectResolvedStyle`.
+- **PREFER** a focused API for final style contract checks:
+  `getResolvedStyle` + `toResolveToStyle`.
 - **OPTIONAL** expose custom matchers from `packages/design-system-react-native/jest.setup.js` when readability improves.
 
 ### Coverage Strategy (100% Thresholds)
