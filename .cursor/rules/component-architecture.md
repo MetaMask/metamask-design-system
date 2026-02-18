@@ -6,8 +6,8 @@ Foundation architectural patterns and decisions for MetaMask Design System compo
 
 This file defines the architectural patterns that ALL component workflows must follow:
 
-- ADR-0003: String unions with const objects (no enums)
-- ADR-0004: Centralized types in shared package
+- [String unions with const objects](https://github.com/MetaMask/decisions/pull/127) (no enums)
+- [Centralized types in shared package](https://github.com/MetaMask/decisions/pull/128)
 - Platform-Specific Props: Layered architecture pattern
 - Cross-platform consistency principles
 
@@ -15,13 +15,13 @@ This file defines the architectural patterns that ALL component workflows must f
 
 ## Critical Rules
 
-**ADR-0003: Const Objects (NOT Enums)**
+**Const Objects (NOT Enums)**
 
 - ✅ **ALWAYS** use `export const` with `as const` for variants/sizes
 - ✅ **ALWAYS** derive type using `typeof` and `keyof`
 - ❌ **NEVER** use TypeScript `enum`
 
-**ADR-0004: Centralized Types**
+**Centralized Types**
 
 - ✅ **ALWAYS** define shared types in `@metamask/design-system-shared`
 - ✅ **ALWAYS** use `ComponentNamePropsShared` suffix for shared interfaces
@@ -62,8 +62,8 @@ Once [PR #912](https://github.com/MetaMask/metamask-design-system/pull/912) is m
 **Shared Package (Source of Truth):**
 
 - `packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts`
-  - Const objects with `as const` (ADR-0003)
-  - Shared props interface with "Shared" suffix (ADR-0004)
+  - Const objects with `as const`
+  - Shared props interface with "Shared" suffix
   - No platform-specific props
 
 **React Package (Platform Extension):**
@@ -82,13 +82,13 @@ Once [PR #912](https://github.com/MetaMask/metamask-design-system/pull/912) is m
 
 **What BadgeStatus demonstrates:**
 
-- ✅ ADR-0003: Const objects with string unions
-- ✅ ADR-0004: Centralized types in shared package
+- ✅ Const objects with string unions
+- ✅ Centralized types in shared package
 - ✅ Platform-specific props (className/twClassName)
 - ✅ Export patterns with inline `type` keyword
 - ✅ Cross-platform consistency
 
-## ADR-0003: String Unions with Const Objects
+## String Unions with Const Objects
 
 **Decision:** Use const objects with derived string union types instead of TypeScript enums.
 
@@ -111,18 +111,11 @@ export enum ButtonVariant {
 **Reference BadgeStatus for complete example:**
 `packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts`
 
-### Benefits
+**Benefits:** CVA integration, better tree-shaking, backwards compatible, type-safe.
 
-- **CVA Integration**: Enables Class Variance Authority for modern styling patterns
-- **Better Tree-Shaking**: TypeScript tooling can optimize imports more effectively
-- **Backwards Compatible**: Consumers can use string literals OR const values
-- **Type Safety**: Maintains full type checking while allowing flexible usage
+**Reference:** [Enum to String Union Migration](https://github.com/MetaMask/decisions/pull/127)
 
-### Reference
-
-[ADR-0003: Enum to String Union Migration](https://github.com/MetaMask/decisions/pull/127)
-
-## ADR-0004: Centralized Types Architecture
+## Centralized Types Architecture
 
 **Decision:** Define shared types once in `@metamask/design-system-shared`, platform packages re-export and extend.
 
@@ -147,16 +140,9 @@ export enum ButtonVariant {
 - React: `packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts`
 - React Native: `packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts`
 
-### Benefits
+**Benefits:** Single source of truth, zero duplication (~1800 lines eliminated), backwards compatible, consistent APIs.
 
-- **Single Source of Truth**: Types defined once, consumed everywhere
-- **Zero Duplication**: Eliminates ~1800 lines of duplicate code
-- **Backwards Compatible**: Consumers import from platform packages as before
-- **Consistent APIs**: Impossible for platforms to drift apart
-
-### Reference
-
-[ADR-0004: Centralized Types Architecture](https://github.com/MetaMask/decisions/pull/128)
+**Reference:** [Centralized Types Architecture](https://github.com/MetaMask/decisions/pull/128)
 
 ## Platform-Specific Props: Layered Architecture
 
@@ -182,46 +168,13 @@ export enum ButtonVariant {
 | **Platform base types**  | Platform | `ComponentProps<'div'>`/`ViewProps`                    |
 | **Platform constraints** | Platform | `data-testid`/`testID`, `htmlFor`, accessibility props |
 
-### Quick Decision Rules
+**Quick rules:** Shared = visual appearance, behavioral states, design system logic. Platform = user interaction, styling, base types, platform-only props. See Decision Tree above for specifics.
 
-**Put in Shared package when:**
+**Event Handlers:** Use idiomatic platform names (onClick/onPress from base types), NOT unified names (onAction, onTap). Maintains platform conventions and leverages type system.
 
-- It affects visual appearance (variants, sizes, colors)
-- It's a behavioral state (isDisabled, isLoading)
-- Both platforms need it identically
-- It's design system logic (status, variant, size)
+**Styling Props:** Always platform-specific. React: `className?: string`. React Native: `twClassName?: string`. Never in shared package.
 
-**Put in Platform package when:**
-
-- It's how users interact (onClick vs onPress)
-- It's platform-specific styling (className vs twClassName)
-- It extends platform base types (ComponentProps vs ViewProps)
-- Only one platform needs it (data-testid, testID, htmlFor)
-
-### Event Handlers: Use Idiomatic Platform Names
-
-**DO NOT create unified handler names** - use idiomatic platform conventions instead.
-
-**Why idiomatic names:**
-
-- Maintains platform conventions and developer familiarity
-- onClick and onPress have different semantics (mouse vs touch)
-- Consumers expect platform-native APIs
-- Base types provide these handlers automatically
-
-**Reference BadgeStatus (non-interactive) or Button (interactive) for examples.**
-
-### className vs twClassName
-
-Styling props are **always platform-specific** - never in shared package.
-
-- React uses `className?: string` for Tailwind CSS
-- React Native uses `twClassName?: string` for TWRNC
-
-**Reference BadgeStatus platform type files for examples:**
-
-- React: `packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts`
-- React Native: `packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts`
+**Reference BadgeStatus platform type files for examples.**
 
 ## Export Pattern: Avoiding TypeScript Errors
 
@@ -244,21 +197,177 @@ export type { BadgeStatusStatus, BadgeStatusSize } from '...'; // Error!
 
 ## Cross-Platform Consistency
 
-Ensure identical shared APIs across platforms:
-
-### Required Consistency
-
 - ✅ **Same interface**: `ComponentNamePropsShared` must be identical
 - ✅ **Same const object names**: `ButtonVariant`, `ButtonSize`
 - ✅ **Same const object values**: `{ Primary: 'primary' }`
 - ✅ **Platform differences ONLY in extension**: className/twClassName, onClick/onPress
+
+## Anti-Patterns to Avoid
+
+### SAMPLE_PROPS Constants
+
+**DO NOT create separate constants for default prop values.**
+
+```tsx
+// ❌ Wrong - Separate SAMPLE_PROPS constant
+export const SAMPLE_INPUT_PROPS = {
+  placeholder: 'Enter text',
+  size: InputSize.Md,
+};
+
+export const Default: Story = {
+  args: { ...SAMPLE_INPUT_PROPS },
+};
+
+// ✅ Correct - Default parameters in component signature
+export const Input = ({
+  placeholder = 'Enter text',
+  size = InputSize.Md,
+  ...props
+}: InputProps) => {
+  // Component implementation
+};
+
+// Storybook automatically infers defaults
+export const Default: Story = {
+  args: {}, // No need to redefine defaults
+};
+```
+
+**Why avoid:**
+
+- React has built-in default parameters
+- Causes synchronization issues (constants drift from actual defaults)
+- Storybook infers defaults from component signatures
+- Violates single source of truth principle
+
+### Default Test IDs
+
+**DO NOT provide default values for test ID props.**
+
+```tsx
+// ❌ Wrong - Default test ID in component
+export const Header = ({
+  testID = HEADER_TEST_ID, // Don't default
+  ...props
+}: HeaderProps) => {
+  // ...
+};
+
+// ❌ Wrong - Using testID prop in React web
+interface HeaderProps {
+  testID?: string; // Should be data-testid
+}
+
+// ✅ Correct - No default, consumer provides when needed
+export const Header = ({
+  testID, // No default value
+  ...props
+}: HeaderProps) => {
+  // ...
+};
+
+// ✅ Correct - React web uses data-testid
+interface HeaderProps {
+  'data-testid'?: string; // HTML-compliant attribute
+}
+```
+
+**Why avoid:**
+
+- Multiple instances get identical test IDs (naming collisions)
+- Test IDs are consumer responsibility, not component defaults
+- React web should use `data-testid` (HTML standard), not `testID`
+
+**Acceptable pattern for test constants:**
+
+```tsx
+// ✅ Define in test file, not exported
+// In Header.test.tsx
+const HEADER_TEST_ID = 'header-test';
+
+it('should render', () => {
+  render(<Header testID={HEADER_TEST_ID} />);
+  expect(screen.getByTestId(HEADER_TEST_ID)).toBeDefined();
+});
+```
+
+### String Children Type Checking
+
+**DO NOT use runtime type checking to conditionally wrap children.**
+
+```tsx
+// ❌ Wrong - Runtime typeof checking
+export const Header = ({ children, ...props }: HeaderProps) => {
+  return (
+    <View>
+      {typeof children === 'string' ? (
+        <Text variant={TextVariant.HeadingSm}>{children}</Text>
+      ) : (
+        children
+      )}
+    </View>
+  );
+};
+
+// ✅ Correct - Explicit title prop
+interface HeaderProps {
+  title?: string;
+  children?: React.ReactNode;
+}
+
+export const Header = ({ title, children, ...props }: HeaderProps) => {
+  return (
+    <View>
+      {title && <Text variant={TextVariant.HeadingSm}>{title}</Text>}
+      {children}
+    </View>
+  );
+};
+
+// Usage is explicit and type-safe
+<Header title="Page Title" />
+<Header><CustomComponent /></Header>
+
+// ✅ Alternative - Require explicit Text composition
+export const Header = ({ children, ...props }: HeaderProps) => {
+  return <View>{children}</View>;
+};
+
+// Consumer must use Text explicitly
+<Header>
+  <Text variant={TextVariant.HeadingSm}>Page Title</Text>
+</Header>
+```
+
+**Why avoid:**
+
+- Violates explicit API principles (unclear what `children` accepts)
+- Breaks TypeScript type safety (`children?: string | ReactNode`)
+- Goes against React composition patterns
+- Creates magic behavior that's harder to test and document
+
+**Exception for accessibility:**
+
+```tsx
+// ✅ Acceptable - Using typeof for aria-label fallback
+const accessibilityLabel =
+  props['aria-label'] || (typeof children === 'string' ? children : undefined);
+```
+
+Using `typeof children === 'string'` for accessibility fallbacks (not rendering logic) is acceptable.
+
+### References
+
+- [PR #909 Review](https://github.com/MetaMask/metamask-design-system/pull/909#pullrequestreview-3816797194)
+- [PR #908 Discussion](https://github.com/MetaMask/metamask-design-system/pull/908#discussion_r2819577300)
 
 ## Verification
 
 After defining types, verify:
 
 - [ ] Shared types defined in `@metamask/design-system-shared/src/types/ComponentName/`
-- [ ] Const objects used (ADR-0003), NOT enums
+- [ ] Const objects used, NOT enums
 - [ ] Shared interface named `ComponentNamePropsShared` (with "Shared" suffix)
 - [ ] Platform packages import and re-export shared types
 - [ ] Platform packages extend with platform-specific props
@@ -275,8 +384,8 @@ After defining types, verify:
 
 ### Architecture Decision Records
 
-- [ADR-0003: Enum to String Union Migration](https://github.com/MetaMask/decisions/pull/127)
-- [ADR-0004: Centralized Types Architecture](https://github.com/MetaMask/decisions/pull/128)
+- [Enum to String Union Migration](https://github.com/MetaMask/decisions/pull/127)
+- [Centralized Types Architecture](https://github.com/MetaMask/decisions/pull/128)
 
 ### Related Cursor Rules
 
