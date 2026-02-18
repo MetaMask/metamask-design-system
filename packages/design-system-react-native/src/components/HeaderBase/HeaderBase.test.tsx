@@ -1,0 +1,443 @@
+// Third party dependencies.
+import { render as rtlRender, fireEvent } from '@testing-library/react-native';
+import React, { act } from 'react';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
+
+// External dependencies.
+
+// Internal dependencies.
+import { IconName } from '../Icon';
+import { Text } from '../Text';
+
+import HeaderBase from './HeaderBase';
+import {
+  HEADERBASE_TEST_ID,
+  HEADERBASE_TITLE_TEST_ID,
+} from './HeaderBase.constants';
+
+function render(
+  ui: React.ReactElement,
+  options?: Parameters<typeof rtlRender>[1],
+) {
+  return rtlRender(ui, {
+    wrapper: ({ children }) => <SafeAreaProvider>{children}</SafeAreaProvider>,
+    ...options,
+  });
+}
+
+const START_ACCESSORY_TEST_ID = 'start-accessory-wrapper';
+const END_ACCESSORY_TEST_ID = 'end-accessory-wrapper';
+const BUTTON_ICON_TEST_ID = 'button-icon';
+const CUSTOM_CONTENT_TEST_ID = 'custom-content';
+const START_CONTENT_TEST_ID = 'start-content';
+const END_CONTENT_TEST_ID = 'end-content';
+
+describe('HeaderBase', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  describe('rendering', () => {
+    it('renders string title as Text component', () => {
+      const { getByText } = render(<HeaderBase>Test Title</HeaderBase>);
+
+      expect(getByText('Test Title')).toBeOnTheScreen();
+    });
+
+    it('renders custom children when ReactNode is passed', () => {
+      const { getByTestId } = render(
+        <HeaderBase>
+          <Text testID={CUSTOM_CONTENT_TEST_ID}>Custom Content</Text>
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(CUSTOM_CONTENT_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('applies default testID to container', () => {
+      const { getByTestId } = render(<HeaderBase>Title</HeaderBase>);
+
+      expect(getByTestId(HEADERBASE_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('applies title testID when string children is passed', () => {
+      const { getByTestId } = render(<HeaderBase>Title</HeaderBase>);
+
+      expect(getByTestId(HEADERBASE_TITLE_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('accepts custom testID for container', () => {
+      const customTestId = 'custom-header';
+
+      const { getByTestId } = render(
+        <HeaderBase testID={customTestId}>Title</HeaderBase>,
+      );
+
+      expect(getByTestId(customTestId)).toBeOnTheScreen();
+    });
+
+    it('applies twClassName when provided', () => {
+      const { getByTestId } = render(
+        <HeaderBase twClassName="px-4 bg-info-default">Title</HeaderBase>,
+      );
+
+      expect(getByTestId(HEADERBASE_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('applies top inset margin when includesTopInset is true', () => {
+      jest.mocked(useSafeAreaInsets).mockReturnValue({
+        top: 44,
+        left: 0,
+        right: 0,
+        bottom: 0,
+      });
+
+      const { getByTestId } = render(
+        <HeaderBase includesTopInset>Title</HeaderBase>,
+      );
+
+      expect(getByTestId(HEADERBASE_TEST_ID)).toBeOnTheScreen();
+    });
+  });
+
+  describe('startAccessory', () => {
+    it('renders custom start accessory content', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          startAccessory={<Text testID={START_CONTENT_TEST_ID}>Start</Text>}
+          startAccessoryWrapperProps={{ testID: START_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(START_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(START_CONTENT_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('invokes start accessory layout callback when layout is triggered', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          startAccessory={<Text testID={START_CONTENT_TEST_ID}>Start</Text>}
+          startAccessoryWrapperProps={{ testID: START_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      const startWrapper = getByTestId(START_ACCESSORY_TEST_ID);
+      const layoutView = startWrapper.props.children;
+      act(() => {
+        layoutView.props.onLayout({
+          nativeEvent: { layout: { width: 80, height: 24, x: 0, y: 0 } },
+        });
+      });
+
+      expect(getByTestId(START_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('does not render start accessory wrapper when startAccessory is not provided', () => {
+      const { queryByTestId } = render(
+        <HeaderBase
+          startAccessoryWrapperProps={{ testID: START_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(queryByTestId(START_ACCESSORY_TEST_ID)).toBeNull();
+    });
+
+    it('passes startAccessoryWrapperProps to start accessory wrapper', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          startAccessory={<Text testID={START_CONTENT_TEST_ID}>Start</Text>}
+          startAccessoryWrapperProps={{ testID: 'custom-start-wrapper' }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId('custom-start-wrapper')).toBeOnTheScreen();
+    });
+  });
+
+  describe('endAccessory', () => {
+    it('renders custom end accessory content', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          endAccessory={<Text testID={END_CONTENT_TEST_ID}>End</Text>}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(END_CONTENT_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('invokes end accessory layout callback when layout is triggered', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          endAccessory={<Text testID={END_CONTENT_TEST_ID}>End</Text>}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      const endWrapper = getByTestId(END_ACCESSORY_TEST_ID);
+      const layoutView = endWrapper.props.children;
+      act(() => {
+        layoutView.props.onLayout({
+          nativeEvent: { layout: { width: 60, height: 24, x: 0, y: 0 } },
+        });
+      });
+
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('does not render end accessory wrapper when endAccessory is not provided', () => {
+      const { queryByTestId } = render(
+        <HeaderBase
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(queryByTestId(END_ACCESSORY_TEST_ID)).toBeNull();
+    });
+
+    it('passes endAccessoryWrapperProps to end accessory wrapper', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          endAccessory={<Text testID={END_CONTENT_TEST_ID}>End</Text>}
+          endAccessoryWrapperProps={{ testID: 'custom-end-wrapper' }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId('custom-end-wrapper')).toBeOnTheScreen();
+    });
+  });
+
+  describe('startButtonIconProps', () => {
+    it('renders ButtonIcon when startButtonIconProps is provided', () => {
+      const onPressMock = jest.fn();
+      const { getByTestId } = render(
+        <HeaderBase
+          startButtonIconProps={{
+            iconName: IconName.ArrowLeft,
+            onPress: onPressMock,
+          }}
+          startAccessoryWrapperProps={{ testID: START_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(START_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(BUTTON_ICON_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('calls onPress handler when start ButtonIcon is pressed', () => {
+      const onPressMock = jest.fn();
+      const { getByTestId } = render(
+        <HeaderBase
+          startButtonIconProps={{
+            iconName: IconName.ArrowLeft,
+            onPress: onPressMock,
+          }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      fireEvent.press(getByTestId(BUTTON_ICON_TEST_ID));
+
+      expect(onPressMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('prioritizes startAccessory over startButtonIconProps', () => {
+      const { getByTestId, queryByTestId } = render(
+        <HeaderBase
+          startAccessory={
+            <Text testID={START_CONTENT_TEST_ID}>Custom Start</Text>
+          }
+          startButtonIconProps={{
+            iconName: IconName.ArrowLeft,
+            onPress: jest.fn(),
+          }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(START_CONTENT_TEST_ID)).toBeOnTheScreen();
+      expect(queryByTestId(BUTTON_ICON_TEST_ID)).toBeNull();
+    });
+  });
+
+  describe('endButtonIconProps', () => {
+    it('renders single ButtonIcon when one item is provided in array', () => {
+      const onPressMock = jest.fn();
+      const { getByTestId } = render(
+        <HeaderBase
+          endButtonIconProps={[
+            {
+              iconName: IconName.Close,
+              onPress: onPressMock,
+            },
+          ]}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(BUTTON_ICON_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('renders multiple ButtonIcons when multiple items are provided', () => {
+      const { getAllByTestId } = render(
+        <HeaderBase
+          endButtonIconProps={[
+            { iconName: IconName.Search, onPress: jest.fn() },
+            { iconName: IconName.Close, onPress: jest.fn() },
+          ]}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getAllByTestId(BUTTON_ICON_TEST_ID)).toHaveLength(2);
+    });
+
+    it('hasEndContent is true when endButtonIconProps has items and no endAccessory', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          endAccessory={undefined}
+          endButtonIconProps={[
+            { iconName: IconName.Close, onPress: jest.fn() },
+          ]}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('hasEndContent uses hasEndButtons when endAccessory is falsy', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          endAccessory={undefined}
+          endButtonIconProps={[{ iconName: IconName.Add, onPress: jest.fn() }]}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(BUTTON_ICON_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('does not render ButtonIcons when endButtonIconProps is empty array', () => {
+      const { queryByTestId } = render(
+        <HeaderBase endButtonIconProps={[]}>Title</HeaderBase>,
+      );
+
+      expect(queryByTestId(BUTTON_ICON_TEST_ID)).toBeNull();
+    });
+
+    it('hasEndContent is false when endAccessory and endButtonIconProps are both falsy', () => {
+      const { getByTestId, queryByTestId } = render(
+        <HeaderBase
+          endAccessory={undefined}
+          endButtonIconProps={[]}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(HEADERBASE_TEST_ID)).toBeOnTheScreen();
+      expect(queryByTestId(END_ACCESSORY_TEST_ID)).toBeNull();
+    });
+
+    it('prioritizes endAccessory over endButtonIconProps', () => {
+      const { getByTestId, queryByTestId } = render(
+        <HeaderBase
+          endAccessory={<Text testID={END_CONTENT_TEST_ID}>Custom End</Text>}
+          endButtonIconProps={[
+            { iconName: IconName.Close, onPress: jest.fn() },
+          ]}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(END_CONTENT_TEST_ID)).toBeOnTheScreen();
+      expect(queryByTestId(BUTTON_ICON_TEST_ID)).toBeNull();
+    });
+  });
+
+  describe('accessory wrapper rendering for centering', () => {
+    it('renders both accessory wrappers when only start accessory is provided', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          startAccessory={<Text testID={START_CONTENT_TEST_ID}>Start</Text>}
+          startAccessoryWrapperProps={{ testID: START_ACCESSORY_TEST_ID }}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(START_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('renders both accessory wrappers when only end accessory is provided', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          endAccessory={<Text testID={END_CONTENT_TEST_ID}>End</Text>}
+          startAccessoryWrapperProps={{ testID: START_ACCESSORY_TEST_ID }}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(START_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('renders both accessory wrappers when both accessories are provided', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          startAccessory={<Text testID={START_CONTENT_TEST_ID}>Start</Text>}
+          endAccessory={<Text testID={END_CONTENT_TEST_ID}>End</Text>}
+          startAccessoryWrapperProps={{ testID: START_ACCESSORY_TEST_ID }}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        >
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId(START_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(START_CONTENT_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId(END_CONTENT_TEST_ID)).toBeOnTheScreen();
+    });
+  });
+});
