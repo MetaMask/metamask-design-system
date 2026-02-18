@@ -155,16 +155,16 @@ export type BadgeStatusProps = { ... } // in shared package
 
 ### Decision Tree: What Goes Where?
 
-| Concern                  | Location | Example                                            |
-| ------------------------ | -------- | -------------------------------------------------- |
-| **Visual variants**      | Shared   | `BadgeStatusStatus`, `ButtonVariant`, `ButtonSize` |
-| **Design tokens**        | Shared   | Colors, spacing, borders, radii                    |
-| **Behavioral states**    | Shared   | `isDisabled`, `isLoading`, `isSelected`            |
-| **Component structure**  | Shared   | `children`, `label`, `description`                 |
-| **Platform interaction** | Platform | `onClick`/`onPress`, `onFocus`/`onBlur`            |
-| **Platform styling**     | Platform | `className`/`twClassName`                          |
-| **Platform base types**  | Platform | `ComponentProps<'div'>`/`ViewProps`                |
-| **Platform constraints** | Platform | `htmlFor`, `testID`, accessibility props           |
+| Concern                  | Location | Example                                                |
+| ------------------------ | -------- | ------------------------------------------------------ |
+| **Visual variants**      | Shared   | `BadgeStatusStatus`, `ButtonVariant`, `ButtonSize`     |
+| **Design tokens**        | Shared   | Colors, spacing, borders, radii                        |
+| **Behavioral states**    | Shared   | `isDisabled`, `isLoading`, `isSelected`                |
+| **Component structure**  | Shared   | `children`, `label`, `description`                     |
+| **Platform interaction** | Platform | `onClick`/`onPress`, `onFocus`/`onBlur`                |
+| **Platform styling**     | Platform | `className`/`twClassName`                              |
+| **Platform base types**  | Platform | `ComponentProps<'div'>`/`ViewProps`                    |
+| **Platform constraints** | Platform | `data-testid`/`testID`, `htmlFor`, accessibility props |
 
 ### Quick Decision Rules
 
@@ -180,7 +180,7 @@ export type BadgeStatusProps = { ... } // in shared package
 - It's how users interact (onClick vs onPress)
 - It's platform-specific styling (className vs twClassName)
 - It extends platform base types (ComponentProps vs ViewProps)
-- Only one platform needs it (htmlFor, testID)
+- Only one platform needs it (data-testid, testID, htmlFor)
 
 ### Event Handlers: Use Idiomatic Platform Names
 
