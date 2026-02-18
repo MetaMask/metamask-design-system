@@ -1,6 +1,6 @@
 # HeaderBase
 
-HeaderBase is a reusable header component with optional start/end accessories and a centered or left-aligned title. It supports both compact and display variants for different header styles.
+HeaderBase is a reusable header component with optional start/end accessories and a centered title.
 
 ```tsx
 import { HeaderBase } from '@metamask/design-system-react-native';
@@ -31,24 +31,6 @@ The title of the header. Pass a string for automatic Text rendering with the cor
     <Text variant={TextVariant.BodySm}>Subtitle</Text>
   </Box>
 </HeaderBase>
-```
-
-### `variant`
-
-Controls the alignment and text size of the header.
-
-Available variants:
-
-- `HeaderBaseVariant.Compact` — center-aligned with HeadingSm text (default)
-- `HeaderBaseVariant.Display` — left-aligned with HeadingLg text
-
-| TYPE                | REQUIRED | DEFAULT                     |
-| ------------------- | -------- | --------------------------- |
-| `HeaderBaseVariant` | No       | `HeaderBaseVariant.Compact` |
-
-```tsx
-<HeaderBase variant={HeaderBaseVariant.Compact}>Compact Header</HeaderBase>
-<HeaderBase variant={HeaderBaseVariant.Display}>Display Header</HeaderBase>
 ```
 
 ### `startAccessory`

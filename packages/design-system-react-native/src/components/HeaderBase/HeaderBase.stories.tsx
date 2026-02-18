@@ -7,7 +7,6 @@ import { IconName } from '../Icon';
 import { Text, TextVariant } from '../Text';
 
 import HeaderBase from './HeaderBase';
-import { HeaderBaseVariant } from './HeaderBase.types';
 
 const HeaderBaseMeta = {
   title: 'Components/HeaderBase',
@@ -26,10 +25,6 @@ const HeaderBaseMeta = {
     children: {
       control: 'text',
     },
-    variant: {
-      control: 'select',
-      options: Object.values(HeaderBaseVariant),
-    },
     twClassName: {
       control: 'text',
     },
@@ -44,45 +39,7 @@ export default HeaderBaseMeta;
 export const Default = {
   args: {
     children: 'Header Title',
-    variant: HeaderBaseVariant.Compact,
   },
-};
-
-export const Variant = {
-  render: () => (
-    <>
-      <HeaderBase
-        variant={HeaderBaseVariant.Compact}
-        startButtonIconProps={{
-          iconName: IconName.ArrowLeft,
-          onPress: () => console.log('Back pressed'),
-        }}
-        endButtonIconProps={[
-          {
-            iconName: IconName.Close,
-            onPress: () => console.log('Close pressed'),
-          },
-        ]}
-      >
-        Compact Variant
-      </HeaderBase>
-      <HeaderBase
-        variant={HeaderBaseVariant.Display}
-        startButtonIconProps={{
-          iconName: IconName.ArrowLeft,
-          onPress: () => console.log('Back pressed'),
-        }}
-        endButtonIconProps={[
-          {
-            iconName: IconName.Close,
-            onPress: () => console.log('Close pressed'),
-          },
-        ]}
-      >
-        Display Variant
-      </HeaderBase>
-    </>
-  ),
 };
 
 export const TwClassName = {

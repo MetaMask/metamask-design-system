@@ -8,7 +8,6 @@ import { Text, IconName } from '..';
 // Internal dependencies.
 import HeaderBase from './HeaderBase';
 import { HEADERBASE_TITLE_TEST_ID } from './HeaderBase.constants';
-import { HeaderBaseVariant } from './HeaderBase.types';
 
 describe('HeaderBase', () => {
   beforeEach(() => {
@@ -63,22 +62,6 @@ describe('HeaderBase', () => {
       );
 
       expect(getByLabelText('Page header')).toBeDefined();
-    });
-  });
-
-  describe('variant', () => {
-    it('uses Compact variant by default', () => {
-      const { getByTestId } = render(<HeaderBase>Title</HeaderBase>);
-
-      expect(getByTestId(HEADERBASE_TITLE_TEST_ID)).toBeDefined();
-    });
-
-    it('renders with Display variant when specified', () => {
-      const { getByTestId } = render(
-        <HeaderBase variant={HeaderBaseVariant.Display}>Title</HeaderBase>,
-      );
-
-      expect(getByTestId(HEADERBASE_TITLE_TEST_ID)).toBeDefined();
     });
   });
 
@@ -316,7 +299,7 @@ describe('HeaderBase', () => {
   });
 
   describe('accessory wrapper rendering for centering', () => {
-    it('renders both accessory wrappers in Compact variant when only start accessory is provided', () => {
+    it('renders both accessory wrappers when only start accessory is provided', () => {
       const { getByTestId } = render(
         <HeaderBase
           startAccessory={<Text testID="start-content">Start</Text>}
@@ -331,7 +314,7 @@ describe('HeaderBase', () => {
       expect(getByTestId('end-wrapper')).toBeDefined();
     });
 
-    it('renders both accessory wrappers in Compact variant when only end accessory is provided', () => {
+    it('renders both accessory wrappers when only end accessory is provided', () => {
       const { getByTestId } = render(
         <HeaderBase
           endAccessory={<Text testID="end-content">End</Text>}
@@ -343,38 +326,6 @@ describe('HeaderBase', () => {
       );
 
       expect(getByTestId('start-wrapper')).toBeDefined();
-      expect(getByTestId('end-wrapper')).toBeDefined();
-    });
-
-    it('renders only start wrapper in Display variant when only start accessory is provided', () => {
-      const { getByTestId, queryByTestId } = render(
-        <HeaderBase
-          variant={HeaderBaseVariant.Display}
-          startAccessory={<Text testID="start-content">Start</Text>}
-          startAccessoryWrapperProps={{ testID: 'start-wrapper' }}
-          endAccessoryWrapperProps={{ testID: 'end-wrapper' }}
-        >
-          Title
-        </HeaderBase>,
-      );
-
-      expect(getByTestId('start-wrapper')).toBeDefined();
-      expect(queryByTestId('end-wrapper')).toBeNull();
-    });
-
-    it('renders only end wrapper in Display variant when only end accessory is provided', () => {
-      const { queryByTestId, getByTestId } = render(
-        <HeaderBase
-          variant={HeaderBaseVariant.Display}
-          endAccessory={<Text testID="end-content">End</Text>}
-          startAccessoryWrapperProps={{ testID: 'start-wrapper' }}
-          endAccessoryWrapperProps={{ testID: 'end-wrapper' }}
-        >
-          Title
-        </HeaderBase>,
-      );
-
-      expect(queryByTestId('start-wrapper')).toBeNull();
       expect(getByTestId('end-wrapper')).toBeDefined();
     });
 

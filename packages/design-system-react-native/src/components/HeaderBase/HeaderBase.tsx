@@ -8,15 +8,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // External dependencies.
 import { Box } from '../Box';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { Text } from '../Text';
+import { Text, TextVariant } from '../Text';
 
 // Internal dependencies.
-import {
-  HEADERBASE_TITLE_TEST_ID,
-  HEADERBASE_VARIANT_TEXT_VARIANTS,
-} from './HeaderBase.constants';
+import { HEADERBASE_TITLE_TEST_ID } from './HeaderBase.constants';
 import type { HeaderBaseProps } from './HeaderBase.types';
-import { HeaderBaseVariant } from './HeaderBase.types';
 
 const HeaderBase: React.FC<HeaderBaseProps> = ({
   children,
@@ -26,7 +22,6 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
   startButtonIconProps,
   endButtonIconProps,
   includesTopInset = false,
-  variant = HeaderBaseVariant.Compact,
   startAccessoryWrapperProps,
   endAccessoryWrapperProps,
   titleTestID = HEADERBASE_TITLE_TEST_ID,
@@ -47,31 +42,19 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
     setEndAccessoryWidth(e.nativeEvent.layout.width);
   }, []);
 
-  // Determine alignment and text variant based on variant prop
-  const isLeftAligned = variant === HeaderBaseVariant.Display;
-  const textVariant = HEADERBASE_VARIANT_TEXT_VARIANTS[variant];
-
   // Determine what to render for start/end
   const hasStartContent = startAccessory || startButtonIconProps;
   const hasEndContent =
     endAccessory || (endButtonIconProps && endButtonIconProps.length > 0);
   const hasAnyAccessory = hasStartContent || hasEndContent;
 
-  // For Compact: render both wrappers if any accessory exists (for centering)
-  // For Display: only render wrappers if their respective accessory exists
-  const shouldRenderStartWrapper = isLeftAligned
-    ? Boolean(hasStartContent)
-    : hasAnyAccessory;
-  const shouldRenderEndWrapper = isLeftAligned
-    ? Boolean(hasEndContent)
-    : hasAnyAccessory;
+  // Render both wrappers if any accessory exists (for centering)
+  const shouldRenderStartWrapper = Boolean(hasAnyAccessory);
+  const shouldRenderEndWrapper = Boolean(hasAnyAccessory);
 
   // Calculate equal width for both accessory wrappers to ensure title stays centered
-  // Only needed for Compact variant
   const accessoryWrapperWidth =
-    !isLeftAligned &&
-    hasAnyAccessory &&
-    (startAccessoryWidth || endAccessoryWidth)
+    hasAnyAccessory && (startAccessoryWidth || endAccessoryWidth)
       ? Math.max(startAccessoryWidth, endAccessoryWidth)
       : undefined;
 
@@ -114,18 +97,10 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
     !endAccessory && endButtonIconProps && endButtonIconProps.length > 1;
 
   // Merge default styles with passed-in twClassName
-  // Compact: fixed height, Display: content-based with no default styles
-  const baseStyles = isLeftAligned
-    ? 'flex-row items-center gap-4'
-    : 'flex-row items-center gap-4 h-14';
+  const baseStyles = 'flex-row items-center gap-4 h-14';
   const resolvedTwClassName = twClassName
     ? `${baseStyles} ${twClassName}`
     : baseStyles;
-
-  // Title classes based on variant
-  const titleWrapperClass = isLeftAligned
-    ? 'flex-1 items-start'
-    : 'flex-1 items-center';
 
   return (
     <View
@@ -153,12 +128,12 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
       )}
 
       {/* Title */}
-      <Box twClassName={titleWrapperClass}>
+      <Box twClassName="flex-1 items-center">
         {typeof children === 'string' ? (
           <Text
-            variant={textVariant}
+            variant={TextVariant.HeadingSm}
             testID={titleTestID}
-            style={isLeftAligned ? undefined : tw.style('text-center')}
+            style={tw.style('text-center')}
           >
             {children}
           </Text>
