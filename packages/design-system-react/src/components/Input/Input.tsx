@@ -6,8 +6,6 @@ import {
   CLASSMAP_TEXT_VARIANT_FONTSTYLE,
   CLASSMAP_TEXT_VARIANT_FONTWEIGHT,
 } from '../Text/Text.constants';
-
-import { INPUT_TEST_ID } from './Input.constants';
 import type { InputProps } from './Input.types';
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -37,7 +35,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         className={mergedClassName}
         style={style}
-        data-testid={INPUT_TEST_ID}
         {...rest}
         disabled={isDisabled}
         readOnly={isReadonly}

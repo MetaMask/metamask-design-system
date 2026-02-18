@@ -4,7 +4,6 @@ import React from 'react';
 import { TextVariant } from '../../types';
 
 import { Input } from './Input';
-import { SAMPLE_INPUT_PROPS } from './Input.constants';
 import type { InputProps } from './Input.types';
 import README from './README.mdx';
 
@@ -46,7 +45,7 @@ type Story = StoryObj<InputProps>;
 
 export const Default: Story = {
   args: {
-    ...SAMPLE_INPUT_PROPS,
+    placeholder: 'Sample placeholder',
   },
   render: (args) => <Input {...args} />,
 };
