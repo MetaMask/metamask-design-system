@@ -53,6 +53,41 @@ yarn test
 yarn lint
 ```
 
+## Golden Path Examples
+
+**BadgeStatus is the complete proof-of-concept demonstrating all patterns:**
+
+Once [PR #912](https://github.com/MetaMask/metamask-design-system/pull/912) is merged, reference these files for canonical examples:
+
+**Shared Package (Source of Truth):**
+
+- `packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts`
+  - Const objects with `as const` (ADR-0003)
+  - Shared props interface with "Shared" suffix (ADR-0004)
+  - No platform-specific props
+
+**React Package (Platform Extension):**
+
+- `packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts`
+  - Re-exports shared types with inline `type` keyword
+  - Extends `ComponentProps<'div'>`
+  - Adds `className?: string` and `style?: React.CSSProperties`
+
+**React Native Package (Platform Extension):**
+
+- `packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts`
+  - Re-exports shared types with inline `type` keyword
+  - Extends `ViewProps`
+  - Adds `twClassName?: string`
+
+**What BadgeStatus demonstrates:**
+
+- ✅ ADR-0003: Const objects with string unions
+- ✅ ADR-0004: Centralized types in shared package
+- ✅ Platform-specific props (className/twClassName)
+- ✅ Export patterns with inline `type` keyword
+- ✅ Cross-platform consistency
+
 ## ADR-0003: String Unions with Const Objects
 
 **Decision:** Use const objects with derived string union types instead of TypeScript enums.
@@ -72,6 +107,9 @@ export enum ButtonVariant {
   Primary = 'primary',
 }
 ```
+
+**Reference BadgeStatus for complete example:**
+`packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts`
 
 ### Benefits
 
@@ -99,30 +137,15 @@ export enum ButtonVariant {
 
 ### Pattern Summary
 
-```tsx
-// Shared Package - Design system concerns only
-export const BadgeStatusStatus = { Active: 'active', ... } as const;
-export type BadgeStatusStatus = (typeof BadgeStatusStatus)[keyof typeof BadgeStatusStatus];
+1. **Shared Package** - Define const objects and `ComponentNamePropsShared`
+2. **React Package** - Re-export shared, extend with `ComponentProps<'element'>` + `className`
+3. **React Native Package** - Re-export shared, extend with `ViewProps` + `twClassName`
 
-export type BadgeStatusPropsShared = {
-  status: BadgeStatusStatus;
-  hasBorder?: boolean;
-};
+**Reference BadgeStatus for complete three-layer example:**
 
-// React Package - Re-export + extend with platform props
-export { BadgeStatusStatus, type BadgeStatusPropsShared } from '@metamask/design-system-shared';
-export type BadgeStatusProps = ComponentProps<'div'> & BadgeStatusPropsShared & {
-  className?: string;
-};
-
-// React Native Package - Re-export + extend with platform props
-export { BadgeStatusStatus, type BadgeStatusPropsShared } from '@metamask/design-system-shared';
-export type BadgeStatusProps = BadgeStatusPropsShared & ViewProps & {
-  twClassName?: string;
-};
-```
-
-**See @packages/design-system-shared/src/types/BadgeStatus/ for complete example.**
+- Shared: `packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts`
+- React: `packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts`
+- React Native: `packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts`
 
 ### Benefits
 
@@ -144,21 +167,14 @@ export type BadgeStatusProps = BadgeStatusPropsShared & ViewProps & {
 - **Shared interface**: `ComponentNamePropsShared` (with "Shared" suffix)
 - **Platform interface**: `ComponentNameProps` (final exported type, no suffix)
 
-```tsx
-// ✅ Correct
-export type BadgeStatusPropsShared = { ... }
-export type BadgeStatusProps = BadgeStatusPropsShared & { ... }
-
-// ❌ Wrong - No "Shared" suffix
-export type BadgeStatusProps = { ... } // in shared package
-```
+**Reference BadgeStatus for naming convention example:**
+`packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts` (defines `BadgeStatusPropsShared`)
 
 ### Decision Tree: What Goes Where?
 
 | Concern                  | Location | Example                                                |
 | ------------------------ | -------- | ------------------------------------------------------ |
 | **Visual variants**      | Shared   | `BadgeStatusStatus`, `ButtonVariant`, `ButtonSize`     |
-| **Design tokens**        | Shared   | Colors, spacing, borders, radii                        |
 | **Behavioral states**    | Shared   | `isDisabled`, `isLoading`, `isSelected`                |
 | **Component structure**  | Shared   | `children`, `label`, `description`                     |
 | **Platform interaction** | Platform | `onClick`/`onPress`, `onFocus`/`onBlur`                |
@@ -186,34 +202,6 @@ export type BadgeStatusProps = { ... } // in shared package
 
 **DO NOT create unified handler names** - use idiomatic platform conventions instead.
 
-```tsx
-// ✅ Correct - No event handlers in shared package
-export type CheckboxPropsShared = {
-  isSelected: boolean;
-  isDisabled?: boolean;
-  // NO onClick, onPress, or unified "onAction" here
-};
-
-// React extends with onClick via ComponentProps
-export type CheckboxProps = ComponentProps<'label'> &
-  CheckboxPropsShared & {
-    className?: string;
-    // onClick comes from ComponentProps<'label'>
-  };
-
-// React Native extends with onPress via PressableProps
-export type CheckboxProps = CheckboxPropsShared &
-  Omit<PressableProps, 'children'> & {
-    twClassName?: string;
-    // onPress comes from PressableProps
-  };
-
-// ❌ Wrong - Unified handler in shared package
-export type CheckboxPropsShared = {
-  onAction?: () => void; // Don't abstract platform differences
-};
-```
-
 **Why idiomatic names:**
 
 - Maintains platform conventions and developer familiarity
@@ -221,31 +209,19 @@ export type CheckboxPropsShared = {
 - Consumers expect platform-native APIs
 - Base types provide these handlers automatically
 
+**Reference BadgeStatus (non-interactive) or Button (interactive) for examples.**
+
 ### className vs twClassName
 
 Styling props are **always platform-specific** - never in shared package.
 
-```tsx
-// ✅ Correct - Styling props in platform packages only
+- React uses `className?: string` for Tailwind CSS
+- React Native uses `twClassName?: string` for TWRNC
 
-// React package
-export type BadgeStatusProps = ComponentProps<'div'> &
-  BadgeStatusPropsShared & {
-    className?: string; // React-specific (Tailwind CSS)
-    style?: React.CSSProperties;
-  };
+**Reference BadgeStatus platform type files for examples:**
 
-// React Native package
-export type BadgeStatusProps = BadgeStatusPropsShared &
-  ViewProps & {
-    twClassName?: string; // React Native-specific (TWRNC)
-  };
-
-// ❌ Wrong - Styling prop in shared package
-export type BadgeStatusPropsShared = {
-  styleOverride?: string; // Don't do this
-};
-```
+- React: `packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts`
+- React Native: `packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts`
 
 ## Export Pattern: Avoiding TypeScript Errors
 
@@ -263,6 +239,8 @@ export {
 export { BadgeStatusStatus, BadgeStatusSize } from '...';
 export type { BadgeStatusStatus, BadgeStatusSize } from '...'; // Error!
 ```
+
+**Reference BadgeStatus platform type files for complete export pattern examples.**
 
 ## Cross-Platform Consistency
 
@@ -292,24 +270,6 @@ After defining types, verify:
 - [ ] Build succeeds: `yarn build`
 - [ ] Tests pass: `yarn test`
 - [ ] Lint passes: `yarn lint`
-
-## Golden Path Examples
-
-**BadgeStatus is the complete proof-of-concept demonstrating all patterns:**
-
-Once [PR #912](https://github.com/MetaMask/metamask-design-system/pull/912) is merged, BadgeStatus will be the golden path reference:
-
-- `packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts` - Shared types with ADR-0003 const objects
-- `packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts` - React extension with `className`
-- `packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts` - React Native extension with `twClassName`
-
-This demonstrates:
-
-- ✅ ADR-0003: Const objects with string unions
-- ✅ ADR-0004: Centralized types in shared package
-- ✅ Platform-specific props (className/twClassName)
-- ✅ Export patterns with inline `type` keyword
-- ✅ Cross-platform consistency
 
 ## References
 
