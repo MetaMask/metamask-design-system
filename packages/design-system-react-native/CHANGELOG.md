@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add corporate-fare icon ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.3.1 to 5.3.2 ([#906](https://github.com/MetaMask/metamask-design-system/pull/906))
+- feat: add create-component script for React Native ([#895](https://github.com/MetaMask/metamask-design-system/pull/895))
+- chore(deps): bump @metamask/utils from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
+- feat: add `BottomSheetOverlay` component ([#897](https://github.com/MetaMask/metamask-design-system/pull/897))
+- refactor: re-arrange peer deps ([#901](https://github.com/MetaMask/metamask-design-system/pull/901))
+- fix: ButtonBase for flex layouts ([#870](https://github.com/MetaMask/metamask-design-system/pull/870))
+- feat: standardize non-icon enum values to kebab-case ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
+- chore: Updated twClassnames to use tw.style in DSRN ([#889](https://github.com/MetaMask/metamask-design-system/pull/889))
+
 ## [0.6.0]
 
 ### Added
