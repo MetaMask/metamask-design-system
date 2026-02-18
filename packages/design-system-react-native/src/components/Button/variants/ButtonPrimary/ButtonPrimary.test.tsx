@@ -17,26 +17,6 @@ describe('ButtonPrimary', () => {
   });
 
   /**
-   * Flatten style objects recursively
-   *
-   * @param styleProp - The style prop to flatten
-   * @returns Flattened array of style objects
-   */
-  function flattenStyles(styleProp: unknown): Record<string, unknown>[] {
-    if (styleProp === null || styleProp === undefined) {
-      return [];
-    }
-    if (Array.isArray(styleProp)) {
-      // flatten one level deep
-      return styleProp.flatMap((item) => flattenStyles(item));
-    }
-    if (typeof styleProp === 'object') {
-      return [styleProp as Record<string, unknown>];
-    }
-    return [];
-  }
-
-  /**
    * Expect background color to match tailwind class
    *
    * @param styleProp - The style prop to check
@@ -44,14 +24,9 @@ describe('ButtonPrimary', () => {
    */
   function expectBackground(styleProp: unknown, tailwindClass: string) {
     const expected = tw`${tailwindClass}`;
-    const allStyles = flattenStyles(styleProp);
-    expect(allStyles).toStrictEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          backgroundColor: expected.backgroundColor,
-        }),
-      ]),
-    );
+    expect(styleProp).toResolveToStyle({
+      backgroundColor: expected.backgroundColor,
+    });
   }
 
   const createDynamicClassName = () => (pressed: boolean) => {
@@ -118,8 +93,8 @@ describe('ButtonPrimary', () => {
       pressed: boolean;
     }) => unknown[];
 
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
+    const defaultStyles = styleFn({ pressed: false });
+    const pressedStyles = styleFn({ pressed: true });
 
     expectBackground(defaultStyles, 'bg-icon-default');
     expectBackground(pressedStyles, 'bg-icon-default-pressed');
@@ -140,8 +115,8 @@ describe('ButtonPrimary', () => {
       pressed: boolean;
     }) => unknown[];
 
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
+    const defaultStyles = styleFn({ pressed: false });
+    const pressedStyles = styleFn({ pressed: true });
 
     expectBackground(defaultStyles, 'bg-error-default');
     expectBackground(pressedStyles, 'bg-error-default-pressed');
@@ -162,8 +137,8 @@ describe('ButtonPrimary', () => {
       pressed: boolean;
     }) => unknown[];
 
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
+    const defaultStyles = styleFn({ pressed: false });
+    const pressedStyles = styleFn({ pressed: true });
 
     expectBackground(defaultStyles, 'bg-default');
     expectBackground(pressedStyles, 'bg-default-pressed');
@@ -186,8 +161,8 @@ describe('ButtonPrimary', () => {
       pressed: boolean;
     }) => unknown[];
 
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
+    const defaultStyles = styleFn({ pressed: false });
+    const pressedStyles = styleFn({ pressed: true });
 
     expectBackground(defaultStyles, 'bg-default');
     expectBackground(pressedStyles, 'bg-default-pressed');
@@ -211,17 +186,11 @@ describe('ButtonPrimary', () => {
 
     // Verify spinner is present
     const spinner = getByTestId('spinner-container');
-    const spinnerStyles = flattenStyles(spinner.props.style);
-    expect(spinnerStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining(tw`${spinnerTW}`)]),
-    );
+    expect(spinner.props.style).toResolveToStyle(tw`${spinnerTW}`);
 
     // Verify content is hidden with opacity-0
     const text = getByText('Loading');
-    const textStyles = flattenStyles(text.props.style);
-    expect(textStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining({ opacity: 0 })]),
-    );
+    expect(text.props.style).toResolveToStyle({ opacity: 0 });
 
     expect(
       getByTestId('button-primary').props.accessibilityState.disabled,

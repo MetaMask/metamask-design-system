@@ -23,3 +23,24 @@ jest.mock('react-native-reanimated', () => {
 
 // Silence warnings related to the Animated API
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+
+const {
+  resolvedStyleIncludes,
+} = require('./src/test-utils/styles');
+
+expect.extend({
+  toResolveToStyle(receivedStyle, expectedStyle) {
+    const pass = resolvedStyleIncludes(receivedStyle, expectedStyle);
+    return {
+      pass,
+      message: () =>
+        pass
+          ? `Expected resolved style not to include ${JSON.stringify(
+              expectedStyle,
+            )}`
+          : `Expected resolved style to include ${JSON.stringify(
+              expectedStyle,
+            )}`,
+    };
+  },
+});

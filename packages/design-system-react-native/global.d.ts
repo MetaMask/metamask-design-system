@@ -5,3 +5,10 @@ declare module '*.svg' {
   const content: React.FC<SvgProps>;
   export default content;
 }
+
+declare namespace jest {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  interface Matchers<TResult> {
+    toResolveToStyle(expectedStyle: Record<string, unknown>): TResult;
+  }
+}
