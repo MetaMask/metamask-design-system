@@ -7,7 +7,8 @@ import { darkTheme } from '@metamask/design-tokens';
 import { renderHook } from '@testing-library/react-hooks';
 import { act, render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
-import { TextInput, type StyleProp, type TextStyle } from 'react-native';
+import { TextInput } from 'react-native';
+import type { StyleProp, TextStyle } from 'react-native';
 import { create } from 'react-test-renderer';
 
 import { TextVariant } from '../../types';
