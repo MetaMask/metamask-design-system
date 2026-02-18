@@ -295,16 +295,21 @@ After defining types, verify:
 
 ## Golden Path Examples
 
-**Complete BadgeStatus implementation demonstrating all patterns:**
+**BadgeStatus is the complete proof-of-concept demonstrating all patterns:**
 
-- @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts (Shared types)
-- @packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts (React extension)
-- @packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts (React Native extension)
+Once [PR #912](https://github.com/MetaMask/metamask-design-system/pull/912) is merged, BadgeStatus will be the golden path reference:
 
-**Other reference implementations:**
+- `packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts` - Shared types with ADR-0003 const objects
+- `packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts` - React extension with `className`
+- `packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts` - React Native extension with `twClassName`
 
-- @packages/design-system-react/src/components/Box/ (Foundational component)
-- @packages/design-system-react/src/components/Button/ (Complex interactive component)
+This demonstrates:
+
+- ✅ ADR-0003: Const objects with string unions
+- ✅ ADR-0004: Centralized types in shared package
+- ✅ Platform-specific props (className/twClassName)
+- ✅ Export patterns with inline `type` keyword
+- ✅ Cross-platform consistency
 
 ## References
 
