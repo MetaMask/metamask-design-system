@@ -4,10 +4,6 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 import * as ReactTestRenderer from 'react-test-renderer';
 
-import {
-  expectStyleIncludes,
-  getStyleList,
-} from '../../../../test-utils/styles';
 import { ButtonBaseSize } from '../../../../types';
 
 import { ButtonPrimary } from './ButtonPrimary';
@@ -28,7 +24,7 @@ describe('ButtonPrimary', () => {
    */
   function expectBackground(styleProp: unknown, tailwindClass: string) {
     const expected = tw`${tailwindClass}`;
-    expectStyleIncludes(styleProp, {
+    expect(styleProp).toResolveToStyle({
       backgroundColor: expected.backgroundColor,
     });
   }
@@ -97,8 +93,8 @@ describe('ButtonPrimary', () => {
       pressed: boolean;
     }) => unknown[];
 
-    const defaultStyles = getStyleList(styleFn({ pressed: false }));
-    const pressedStyles = getStyleList(styleFn({ pressed: true }));
+    const defaultStyles = styleFn({ pressed: false });
+    const pressedStyles = styleFn({ pressed: true });
 
     expectBackground(defaultStyles, 'bg-icon-default');
     expectBackground(pressedStyles, 'bg-icon-default-pressed');
@@ -119,8 +115,8 @@ describe('ButtonPrimary', () => {
       pressed: boolean;
     }) => unknown[];
 
-    const defaultStyles = getStyleList(styleFn({ pressed: false }));
-    const pressedStyles = getStyleList(styleFn({ pressed: true }));
+    const defaultStyles = styleFn({ pressed: false });
+    const pressedStyles = styleFn({ pressed: true });
 
     expectBackground(defaultStyles, 'bg-error-default');
     expectBackground(pressedStyles, 'bg-error-default-pressed');
@@ -141,8 +137,8 @@ describe('ButtonPrimary', () => {
       pressed: boolean;
     }) => unknown[];
 
-    const defaultStyles = getStyleList(styleFn({ pressed: false }));
-    const pressedStyles = getStyleList(styleFn({ pressed: true }));
+    const defaultStyles = styleFn({ pressed: false });
+    const pressedStyles = styleFn({ pressed: true });
 
     expectBackground(defaultStyles, 'bg-default');
     expectBackground(pressedStyles, 'bg-default-pressed');
@@ -165,8 +161,8 @@ describe('ButtonPrimary', () => {
       pressed: boolean;
     }) => unknown[];
 
-    const defaultStyles = getStyleList(styleFn({ pressed: false }));
-    const pressedStyles = getStyleList(styleFn({ pressed: true }));
+    const defaultStyles = styleFn({ pressed: false });
+    const pressedStyles = styleFn({ pressed: true });
 
     expectBackground(defaultStyles, 'bg-default');
     expectBackground(pressedStyles, 'bg-default-pressed');
@@ -190,11 +186,10 @@ describe('ButtonPrimary', () => {
 
     // Verify spinner is present
     const spinner = getByTestId('spinner-container');
-    expect(spinner.props.style).toIncludeStyle(tw`${spinnerTW}`);
+    expect(spinner.props.style).toResolveToStyle(tw`${spinnerTW}`);
 
     // Verify content is hidden with opacity-0
     const text = getByText('Loading');
-    expectStyleIncludes(text.props.style, { opacity: 0 });
     expect(text.props.style).toResolveToStyle({ opacity: 0 });
 
     expect(
