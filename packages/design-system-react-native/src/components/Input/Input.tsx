@@ -13,7 +13,6 @@ import {
   TWCLASSMAP_TEXT_FONTWEIGHT,
 } from '../Text/Text.constants';
 
-import { INPUT_TEST_ID } from './Input.constants';
 import type { InputProps } from './Input.types';
 
 export const Input = forwardRef<TextInput, InputProps>(
@@ -106,7 +105,6 @@ export const Input = forwardRef<TextInput, InputProps>(
     return (
       <TextInput
         ref={ref}
-        testID={INPUT_TEST_ID}
         placeholderTextColor={placeholderTextColor}
         {...props}
         style={resolvedStyle}

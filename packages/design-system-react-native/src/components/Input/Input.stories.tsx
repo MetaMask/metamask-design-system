@@ -4,7 +4,6 @@ import { View } from 'react-native';
 import { TextVariant } from '../../types';
 
 import { Input } from './Input';
-import { SAMPLE_INPUT_PROPS } from './Input.constants';
 import type { InputProps } from './Input.types';
 
 const meta: Meta<InputProps> = {
@@ -39,7 +38,7 @@ type Story = StoryObj<InputProps>;
 
 export const Default: Story = {
   args: {
-    ...SAMPLE_INPUT_PROPS,
+    placeholder: 'Sample Placeholder',
   },
   render: (args) => <Input {...args} />,
 };

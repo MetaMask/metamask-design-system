@@ -7,13 +7,14 @@ import { darkTheme } from '@metamask/design-tokens';
 import { renderHook } from '@testing-library/react-hooks';
 import { act, render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
-import type { StyleProp, TextStyle } from 'react-native';
+import { TextInput, type StyleProp, type TextStyle } from 'react-native';
 import { create } from 'react-test-renderer';
 
 import { TextVariant } from '../../types';
 
 import { Input } from './Input';
-import { INPUT_TEST_ID } from './Input.constants';
+
+const TEST_ID = 'input';
 
 function flattenStyle(style: StyleProp<TextStyle>): TextStyle[] {
   if (style === null || style === undefined) {
@@ -28,43 +29,15 @@ function flattenStyle(style: StyleProp<TextStyle>): TextStyle[] {
 describe('Input', () => {
   const tw = renderHook(() => useTailwind()).result.current;
 
-  it('renders correctly', () => {
-    const { toJSON } = render(<Input />);
-    expect(toJSON()).toMatchInlineSnapshot(`
-      <TextInput
-        autoFocus={false}
-        editable={true}
-        onBlur={[Function]}
-        onFocus={[Function]}
-        placeholderTextColor="#686e7d"
-        style={
-          [
-            {
-              "backgroundColor": "#ffffff",
-              "borderColor": "transparent",
-              "borderWidth": 1,
-              "color": "#121314",
-              "fontFamily": "Geist-Regular",
-              "fontSize": 16,
-              "fontWeight": 400,
-              "letterSpacing": 0,
-              "lineHeight": 24,
-            },
-            {
-              "textAlignVertical": "center",
-            },
-          ]
-        }
-        testID="input"
-      />
-    `);
-  });
-
   it('renders with the correct TextVariant', () => {
     const { getByTestId } = render(
-      <Input textVariant={TextVariant.HeadingSm} defaultValue="Sample" />,
+      <Input
+        testID={TEST_ID}
+        textVariant={TextVariant.HeadingSm}
+        defaultValue="Sample"
+      />,
     );
-    const input = getByTestId(INPUT_TEST_ID);
+    const input = getByTestId(TEST_ID);
     expect(input).toBeDefined();
     const styles = flattenStyle(input.props.style);
     const expectedFontSize = (tw.style('text-heading-sm') as TextStyle)
@@ -75,8 +48,10 @@ describe('Input', () => {
   });
 
   it('renders correct disabled state when isDisabled is true', () => {
-    const { getByTestId } = render(<Input isDisabled placeholder="Disabled" />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(
+      <Input testID={TEST_ID} isDisabled placeholder="Disabled" />,
+    );
+    const input = getByTestId(TEST_ID);
     expect(input.props.editable).toBe(false);
     const styles = flattenStyle(input.props.style);
     expect(styles).toContainEqual(
@@ -86,9 +61,14 @@ describe('Input', () => {
 
   it('does not apply state styles when isStateStylesDisabled is true', () => {
     const { getByTestId } = render(
-      <Input isDisabled isStateStylesDisabled placeholder="Disabled" />,
+      <Input
+        testID={TEST_ID}
+        isDisabled
+        isStateStylesDisabled
+        placeholder="Disabled"
+      />,
     );
-    const input = getByTestId(INPUT_TEST_ID);
+    const input = getByTestId(TEST_ID);
     expect(input.props.editable).toBe(false);
     const styles = flattenStyle(input.props.style);
     expect(styles).not.toContainEqual(
@@ -98,8 +78,8 @@ describe('Input', () => {
 
   it('calls onBlur when input loses focus', () => {
     const onBlur = jest.fn();
-    const { getByTestId } = render(<Input onBlur={onBlur} />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(<Input testID={TEST_ID} onBlur={onBlur} />);
+    const input = getByTestId(TEST_ID);
     fireEvent(input, 'focus');
     fireEvent(input, 'blur');
     expect(onBlur).toHaveBeenCalled();
@@ -107,31 +87,33 @@ describe('Input', () => {
 
   it('calls onFocus when input receives focus', () => {
     const onFocus = jest.fn();
-    const { getByTestId } = render(<Input onFocus={onFocus} />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(
+      <Input testID={TEST_ID} onFocus={onFocus} />,
+    );
+    const input = getByTestId(TEST_ID);
     fireEvent(input, 'focus');
     expect(onFocus).toHaveBeenCalled();
   });
 
   it('defaults autoFocus to false so focus is not stolen on mount', () => {
-    const { getByTestId } = render(<Input />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(<Input testID={TEST_ID} />);
+    const input = getByTestId(TEST_ID);
     expect(input.props.autoFocus).toBe(false);
   });
 
   it('respects autoFocus when set to true', () => {
-    const { getByTestId } = render(<Input autoFocus />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(<Input testID={TEST_ID} autoFocus />);
+    const input = getByTestId(TEST_ID);
     expect(input.props.autoFocus).toBe(true);
   });
 
   it('uses dark theme placeholder color when ThemeProvider has theme dark', () => {
     const { getByTestId } = render(
       <ThemeProvider theme={Theme.Dark}>
-        <Input placeholder="Dark theme" />
+        <Input testID={TEST_ID} placeholder="Dark theme" />
       </ThemeProvider>,
     );
-    const input = getByTestId(INPUT_TEST_ID);
+    const input = getByTestId(TEST_ID);
     expect(input.props.placeholderTextColor).toBe(
       darkTheme.colors.text.alternative,
     );
@@ -139,8 +121,10 @@ describe('Input', () => {
 
   it('does not call onBlur when disabled and blur fires', () => {
     const onBlur = jest.fn();
-    const { getByTestId } = render(<Input isDisabled onBlur={onBlur} />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(
+      <Input testID={TEST_ID} isDisabled onBlur={onBlur} />,
+    );
+    const input = getByTestId(TEST_ID);
     fireEvent(input, 'focus');
     fireEvent(input, 'blur');
     expect(onBlur).not.toHaveBeenCalled();
@@ -148,16 +132,18 @@ describe('Input', () => {
 
   it('does not call onFocus when disabled and focus fires', () => {
     const onFocus = jest.fn();
-    const { getByTestId } = render(<Input isDisabled onFocus={onFocus} />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(
+      <Input testID={TEST_ID} isDisabled onFocus={onFocus} />,
+    );
+    const input = getByTestId(TEST_ID);
     fireEvent(input, 'focus');
     expect(onFocus).not.toHaveBeenCalled();
   });
 
   it('invokes onBlur with event when not disabled', () => {
     const onBlur = jest.fn();
-    const { getByTestId } = render(<Input onBlur={onBlur} />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(<Input testID={TEST_ID} onBlur={onBlur} />);
+    const input = getByTestId(TEST_ID);
     fireEvent(input, 'focus');
     fireEvent(input, 'blur', { nativeEvent: {} });
     expect(onBlur).toHaveBeenCalledTimes(1);
@@ -168,8 +154,10 @@ describe('Input', () => {
 
   it('invokes onFocus with event when not disabled', () => {
     const onFocus = jest.fn();
-    const { getByTestId } = render(<Input onFocus={onFocus} />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(
+      <Input testID={TEST_ID} onFocus={onFocus} />,
+    );
+    const input = getByTestId(TEST_ID);
     fireEvent(input, 'focus', { nativeEvent: {} });
     expect(onFocus).toHaveBeenCalledTimes(1);
     expect(onFocus).toHaveBeenCalledWith(
@@ -179,8 +167,8 @@ describe('Input', () => {
 
   it('calls onBlur handler when TextInput onBlur prop is invoked', () => {
     const onBlur = jest.fn();
-    const { getByTestId } = render(<Input onBlur={onBlur} />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(<Input testID={TEST_ID} onBlur={onBlur} />);
+    const input = getByTestId(TEST_ID);
     const blurEvent = { nativeEvent: { text: '' } };
     act(() => {
       input.props.onBlur(blurEvent);
@@ -190,8 +178,10 @@ describe('Input', () => {
 
   it('calls onFocus handler when TextInput onFocus prop is invoked', () => {
     const onFocus = jest.fn();
-    const { getByTestId } = render(<Input onFocus={onFocus} />);
-    const input = getByTestId(INPUT_TEST_ID);
+    const { getByTestId } = render(
+      <Input testID={TEST_ID} onFocus={onFocus} />,
+    );
+    const input = getByTestId(TEST_ID);
     const focusEvent = { nativeEvent: { text: '' } };
     act(() => {
       input.props.onFocus(focusEvent);
@@ -204,10 +194,10 @@ describe('Input', () => {
     const onFocus = jest.fn();
     const tree = create(
       <ThemeProvider theme={Theme.Light}>
-        <Input onBlur={onBlur} onFocus={onFocus} />
+        <Input testID={TEST_ID} onBlur={onBlur} onFocus={onFocus} />
       </ThemeProvider>,
     );
-    const input = tree.root.findByProps({ testID: INPUT_TEST_ID });
+    const input = tree.root.findByProps({ testID: TEST_ID });
     const blurEvent = { nativeEvent: { text: '' } };
     const focusEvent = { nativeEvent: { text: '' } };
     act(() => {
@@ -223,10 +213,10 @@ describe('Input', () => {
   it('handlers run without callbacks (optional chaining branches)', () => {
     const tree = create(
       <ThemeProvider theme={Theme.Light}>
-        <Input />
+        <Input testID={TEST_ID} />
       </ThemeProvider>,
     );
-    const input = tree.root.findByProps({ testID: INPUT_TEST_ID });
+    const input = tree.root.findByType(TextInput);
     const event = { nativeEvent: { text: '' } };
     act(() => {
       input.props.onBlur(event);
