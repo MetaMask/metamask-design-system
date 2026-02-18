@@ -11,7 +11,6 @@ import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { Text, TextVariant } from '../Text';
 
 // Internal dependencies.
-import { HEADERBASE_TITLE_TEST_ID } from './HeaderBase.constants';
 import type { HeaderBaseProps } from './HeaderBase.types';
 
 const HeaderBase: React.FC<HeaderBaseProps> = ({
@@ -24,7 +23,7 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
   includesTopInset = false,
   startAccessoryWrapperProps,
   endAccessoryWrapperProps,
-  titleTestID = HEADERBASE_TITLE_TEST_ID,
+  titleTestID,
   twClassName,
   ...props
 }) => {

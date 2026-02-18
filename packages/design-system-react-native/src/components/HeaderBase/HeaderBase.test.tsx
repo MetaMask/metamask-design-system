@@ -7,7 +7,6 @@ import { Text, IconName } from '..';
 
 // Internal dependencies.
 import HeaderBase from './HeaderBase';
-import { HEADERBASE_TITLE_TEST_ID } from './HeaderBase.constants';
 
 describe('HeaderBase', () => {
   beforeEach(() => {
@@ -42,9 +41,11 @@ describe('HeaderBase', () => {
     });
 
     it('applies default titleTestID to the title Text element', () => {
-      const { getByTestId } = render(<HeaderBase>Title</HeaderBase>);
+      const { getByTestId } = render(
+        <HeaderBase titleTestID="header-title">Title</HeaderBase>,
+      );
 
-      expect(getByTestId(HEADERBASE_TITLE_TEST_ID)).toBeDefined();
+      expect(getByTestId('header-title')).toBeDefined();
     });
 
     it('accepts custom titleTestID for the title Text element', () => {
@@ -53,7 +54,7 @@ describe('HeaderBase', () => {
       );
 
       expect(getByTestId('custom-title')).toBeDefined();
-      expect(queryByTestId(HEADERBASE_TITLE_TEST_ID)).toBeNull();
+      expect(queryByTestId('header-title')).toBeNull();
     });
 
     it('passes through accessibilityLabel via ViewProps', () => {

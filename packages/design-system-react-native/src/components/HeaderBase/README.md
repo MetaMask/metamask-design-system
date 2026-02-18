@@ -156,9 +156,9 @@ Use the `style` prop to customize the component's appearance with React Native s
 
 Test ID for the title Text element. Only used when `children` is a string.
 
-| TYPE     | REQUIRED | DEFAULT          |
-| -------- | -------- | ---------------- |
-| `string` | No       | `'header-title'` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 <HeaderBase titleTestID="my-header-title">Page Title</HeaderBase>
