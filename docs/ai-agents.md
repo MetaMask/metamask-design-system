@@ -60,16 +60,20 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 
 **Size:** 200-400 lines per file (checklists, not novels)
 
+**Current Rule Files**
+
+- `component-architecture.md` - Component architectural patterns (ADR-0003/0004, layered architecture, cross-platform)
+- `styling.md` - Design tokens, Tailwind, component-first
+- `component-documentation.md` - Storybook and README standards
+- `figma-integration.md` - Code Connect
+
 **Planned Rule Files**
 
-- `styling.md` - Design tokens, Tailwind, component-first
 - `component-creation.md` - Using create-component scripts
-- `cross-platform.md` - Cross platform consistency and shared types
-- `component-documentation.md` - Storybook and README standards
+- `component-migration.md` - Extension/mobile component migration
+- `component-enum-union-migration.md` - Internal ADR-0003/0004 migration
 - `testing.md` - Jest, Testing Library, accessibility
 - `monorepo-workflow.md` - Workspace commands
-- `typescript-patterns.md` - Enums, shared types
-- `figma-integration.md` - Code Connect
 
 **Why this format?**
 
