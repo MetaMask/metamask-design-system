@@ -6,7 +6,7 @@ import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { IconName } from '../Icon';
 import { Text, TextVariant } from '../Text';
 
-import HeaderBase from './HeaderBase';
+import { HeaderBase } from './HeaderBase';
 
 const HeaderBaseMeta = {
   title: 'Components/HeaderBase',

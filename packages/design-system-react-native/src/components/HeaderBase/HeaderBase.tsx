@@ -13,7 +13,7 @@ import { Text, TextVariant } from '../Text';
 // Internal dependencies.
 import type { HeaderBaseProps } from './HeaderBase.types';
 
-const HeaderBase: React.FC<HeaderBaseProps> = ({
+export const HeaderBase: React.FC<HeaderBaseProps> = ({
   children,
   style,
   startAccessory,
@@ -164,5 +164,3 @@ const HeaderBase: React.FC<HeaderBaseProps> = ({
     </View>
   );
 };
-
-export default HeaderBase;

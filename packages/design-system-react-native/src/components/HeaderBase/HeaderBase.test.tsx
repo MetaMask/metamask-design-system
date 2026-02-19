@@ -6,7 +6,7 @@ import React from 'react';
 import { Text, IconName } from '..';
 
 // Internal dependencies.
-import HeaderBase from './HeaderBase';
+import { HeaderBase } from './HeaderBase';
 
 describe('HeaderBase', () => {
   beforeEach(() => {
