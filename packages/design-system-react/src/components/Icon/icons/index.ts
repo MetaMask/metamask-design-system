@@ -69,6 +69,7 @@ import Confirmation from './Confirmation';
 import Connect from './Connect';
 import Copy from './Copy';
 import CopySuccess from './CopySuccess';
+import CorporateFare from './CorporateFare';
 import CreditCheck from './CreditCheck';
 import CurrencyFranc from './CurrencyFranc';
 import CurrencyLira from './CurrencyLira';
@@ -350,6 +351,7 @@ export const Icons = {
   Connect,
   Copy,
   CopySuccess,
+  CorporateFare,
   CreditCheck,
   CurrencyFranc,
   CurrencyLira,
