@@ -5,6 +5,7 @@ import React, {
   isValidElement,
   useImperativeHandle,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { Dimensions, View } from 'react-native';
@@ -54,6 +55,9 @@ const Toast = forwardRef<ToastRef, ToastProps>(
     const [toastOptions, setToastOptions] = useState<ToastOptions | undefined>(
       undefined,
     );
+    const replacementTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+      null,
+    );
     const { bottom: bottomNotchSpacing } = useSafeAreaInsets();
     const translateYProgress = useSharedValue(screenHeight);
     const bottomOffset = toastOptions?.bottomOffset ?? 0;
@@ -76,19 +80,25 @@ const Toast = forwardRef<ToastRef, ToastProps>(
     const showToast = (options: ToastOptions) => {
       let timeoutDuration = 0;
       if (toastOptions) {
-        if (!options.hasNoTimeout) {
-          cancelAnimation(translateYProgress);
-        }
+        cancelAnimation(translateYProgress);
         timeoutDuration = 100;
         // Clear existing toast state to prevent animation conflicts when showing rapid successive toasts
         setToastOptions(undefined);
       }
-      setTimeout(() => {
+      if (replacementTimerRef.current !== null) {
+        clearTimeout(replacementTimerRef.current);
+      }
+      replacementTimerRef.current = setTimeout(() => {
+        replacementTimerRef.current = null;
         setToastOptions(options);
       }, timeoutDuration);
     };
 
     const closeToast = () => {
+      if (replacementTimerRef.current !== null) {
+        clearTimeout(replacementTimerRef.current);
+        replacementTimerRef.current = null;
+      }
       translateYProgress.value = withTiming(
         screenHeight,
         { duration: TOAST_ANIMATION_DURATION },
