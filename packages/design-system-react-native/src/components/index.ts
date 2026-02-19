@@ -66,6 +66,9 @@ export {
 } from './Box';
 export type { BoxProps, BoxSpacing } from './Box';
 
+export { Card } from './Card';
+export type { CardProps } from './Card';
+
 export { ButtonAnimated } from './temp-components/ButtonAnimated';
 export type { ButtonAnimatedProps } from './temp-components/ButtonAnimated';
 
