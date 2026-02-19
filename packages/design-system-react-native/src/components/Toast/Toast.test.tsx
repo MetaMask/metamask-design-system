@@ -459,6 +459,60 @@ describe('Toast', () => {
     expect(mockCancelAnimation).toHaveBeenCalled();
     expect(screen.getByText('Second')).toBeDefined();
   });
+
+  it('clears pending replacement timer when showToast is called again rapidly', async () => {
+    render(<Toast ref={toastRef} />);
+
+    // Show first toast.
+    await showToastAndWait(toastRef, {
+      variant: ToastVariant.Plain,
+      labelOptions: [{ label: 'First' }],
+      hasNoTimeout: true,
+    });
+
+    // Call showToast twice without letting the replacement timer fire.
+    await act(async () => {
+      toastRef.current?.showToast({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'Second' }],
+        hasNoTimeout: true,
+      });
+      // Don't run timers — call showToast again while the replacement timer is pending.
+      toastRef.current?.showToast({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'Third' }],
+        hasNoTimeout: true,
+      });
+      jest.runAllTimers();
+    });
+    expect(screen.getByText('Third')).toBeDefined();
+    expect(screen.queryByText('Second')).toBeNull();
+  });
+
+  it('clears pending replacement timer when closeToast is called', async () => {
+    render(<Toast ref={toastRef} />);
+
+    // Show first toast.
+    await showToastAndWait(toastRef, {
+      variant: ToastVariant.Plain,
+      labelOptions: [{ label: 'First' }],
+      hasNoTimeout: true,
+    });
+
+    // Call showToast to schedule a replacement, then closeToast before it fires.
+    await act(async () => {
+      toastRef.current?.showToast({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'Replacement' }],
+        hasNoTimeout: true,
+      });
+      // Close before the replacement timer fires.
+      toastRef.current?.closeToast();
+      jest.runAllTimers();
+    });
+    // The replacement toast should NOT appear after close.
+    expect(screen.queryByText('Replacement')).toBeNull();
+  });
 });
 
 describe('ToastContextWrapper', () => {
