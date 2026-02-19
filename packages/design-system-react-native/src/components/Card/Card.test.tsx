@@ -56,15 +56,15 @@ describe('Card', () => {
     expect(card.type).toBe('View');
   });
 
-  it('renders as a TouchableOpacity when onPress is provided', () => {
+  it('renders as accessible when onPress is provided', () => {
     const { getByTestId } = render(
-      <Card testID="card">
+      <Card testID="card" onPress={jest.fn()}>
         <Text>Content</Text>
       </Card>,
     );
     const card = getByTestId('card');
-    expect(card.type).toBe('View');
-    expect(card.parent).toBeDefined();
+    // TouchableOpacity sets accessible=true on its host View
+    expect(card.props.accessible).toBe(true);
   });
 
   it('fires onPress when pressed', () => {
