@@ -18,6 +18,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
 }) => {
   const tw = useTailwind();
   const opacityAnim = useRef(new Animated.Value(0.2)).current;
+  const hasChildren = children !== null && children !== undefined;
 
   const startAnimation = () => {
     Animated.sequence([
@@ -42,16 +43,16 @@ const Skeleton: React.FC<SkeletonProps> = ({
   };
 
   useEffect(() => {
-    if (autoPlay && (!children || hideChildren)) {
+    if (autoPlay && (!hasChildren || hideChildren)) {
       startAnimation();
     }
 
     return () => {
       opacityAnim.stopAnimation();
     };
-  }, [children, hideChildren, autoPlay]);
+  }, [hasChildren, hideChildren, autoPlay]);
 
-  if (!hideChildren && children) {
+  if (!hideChildren && hasChildren) {
     return <>{children}</>;
   }
 
@@ -66,18 +67,25 @@ const Skeleton: React.FC<SkeletonProps> = ({
       {...props}
     >
       <Animated.View
+        {...animatedViewProps}
         style={[
           tw.style('absolute inset-0 rounded bg-icon-alternative'),
           { opacity: opacityAnim },
+          animatedViewProps?.style,
         ]}
         pointerEvents="none"
-        {...animatedViewProps}
       />
 
-      {children && (
+      {hasChildren && (
         <View
-          style={tw.style('relative z-10', hideChildren && 'opacity-0')}
           {...childrenWrapperProps}
+          style={[
+            tw.style('relative z-10 opacity-0'),
+            childrenWrapperProps?.style,
+          ]}
+          pointerEvents="none"
+          accessibilityElementsHidden
+          importantForAccessibility="no-hide-descendants"
         >
           {children}
         </View>

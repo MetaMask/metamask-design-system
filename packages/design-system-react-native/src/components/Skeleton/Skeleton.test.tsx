@@ -91,9 +91,30 @@ describe('Skeleton', () => {
           <View testID="child-component" />
         </Skeleton>,
       );
+      const hidden = { includeHiddenElements: true };
 
-      expect(getByTestId('children-wrapper')).toBeDefined();
-      expect(getByTestId('child-component')).toBeDefined();
+      expect(getByTestId('children-wrapper', hidden)).toBeDefined();
+      expect(getByTestId('child-component', hidden)).toBeDefined();
+    });
+
+    it('disables interactions on hidden children', () => {
+      const { getByTestId } = render(
+        <Skeleton
+          testID="skeleton"
+          hideChildren
+          childrenWrapperProps={{ testID: 'children-wrapper' }}
+        >
+          <View testID="child-component" />
+        </Skeleton>,
+      );
+      const hidden = { includeHiddenElements: true };
+      const wrapper = getByTestId('children-wrapper', hidden);
+
+      expect(wrapper.props.pointerEvents).toBe('none');
+      expect(wrapper.props.accessibilityElementsHidden).toBe(true);
+      expect(wrapper.props.importantForAccessibility).toBe(
+        'no-hide-descendants',
+      );
     });
 
     it('renders skeleton container when hideChildren is true', () => {
@@ -109,6 +130,35 @@ describe('Skeleton', () => {
 
       expect(getByTestId('skeleton')).toBeDefined();
       expect(getByTestId('skeleton-bg')).toBeDefined();
+    });
+
+    it('preserves internal styles when wrapper props include style', () => {
+      const { getByTestId } = render(
+        <Skeleton
+          testID="skeleton"
+          hideChildren
+          childrenWrapperProps={{
+            testID: 'children-wrapper',
+            style: { marginTop: 8 },
+          }}
+          animatedViewProps={{
+            testID: 'skeleton-bg',
+            style: { borderRadius: 4 },
+          }}
+        >
+          <View testID="child-component" />
+        </Skeleton>,
+      );
+      const hidden = { includeHiddenElements: true };
+      const wrapper = getByTestId('children-wrapper', hidden);
+      const animatedBg = getByTestId('skeleton-bg');
+
+      expect(wrapper.props.style).toStrictEqual(
+        expect.arrayContaining([{ marginTop: 8 }]),
+      );
+      expect(animatedBg.props.style).toStrictEqual(
+        expect.objectContaining({ borderRadius: 4 }),
+      );
     });
   });
 
