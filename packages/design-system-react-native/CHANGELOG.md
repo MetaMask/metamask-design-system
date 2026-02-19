@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Migration needed** only if your app persists or transmits these enum values (localStorage, databases, APIs)
   - This prepares for migration from enums to string union types per ADR #127
 - Updated component styling to use `tw.style()` instead of string-based `twClassName` for better type safety and conditional styling ([#889](https://github.com/MetaMask/metamask-design-system/pull/889))
+- Updated `@metamask/design-tokens` peer dependency from ^8.1.0 to ^8.2.0 to support `AnimationDuration` enum used by `BottomSheetOverlay`
 - Updated `@metamask/utils` peer dependency from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
 - Reorganized peer dependencies for better dependency management ([#901](https://github.com/MetaMask/metamask-design-system/pull/901))
 
