@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import type { ViewProps } from 'react-native';
 
 // External Dependencies.
+import type { AvatarIconSeverity } from '../../types';
 import type { AvatarAccountVariant } from '../AvatarAccount';
 import type { ButtonProps } from '../Button';
 import type { ButtonIconProps } from '../ButtonIcon';
@@ -100,8 +101,7 @@ type AppToastOption = {
 type IconToastOption = {
   variant: ToastVariant.Icon;
   iconName: IconName;
-  iconColor?: string;
-  backgroundColor?: string;
+  severity?: AvatarIconSeverity;
 } & BaseToastVariants;
 
 /**

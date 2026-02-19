@@ -437,7 +437,7 @@ describe('Toast', () => {
     expect(mockCancelAnimation).toHaveBeenCalled();
   });
 
-  it('replaces toast without cancelling animation when hasNoTimeout is true', async () => {
+  it('cancels animation when replacing toast even with hasNoTimeout true', async () => {
     render(<Toast ref={toastRef} />);
 
     // Show first toast.
@@ -447,7 +447,7 @@ describe('Toast', () => {
       hasNoTimeout: true,
     });
 
-    // Replace with another hasNoTimeout=true toast (skips cancelAnimation).
+    // Replace with another hasNoTimeout=true toast (still cancels old animation).
     await act(async () => {
       toastRef.current?.showToast({
         variant: ToastVariant.Plain,
@@ -456,7 +456,7 @@ describe('Toast', () => {
       });
       jest.runAllTimers();
     });
-    expect(mockCancelAnimation).not.toHaveBeenCalled();
+    expect(mockCancelAnimation).toHaveBeenCalled();
     expect(screen.getByText('Second')).toBeDefined();
   });
 });

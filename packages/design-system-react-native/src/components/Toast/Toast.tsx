@@ -242,10 +242,11 @@ const Toast = forwardRef<ToastRef, ToastProps>(
           );
         }
         case ToastVariant.Icon: {
-          const { iconName } = toastOptions;
+          const { iconName, severity } = toastOptions;
           return (
             <AvatarIcon
               iconName={iconName}
+              severity={severity}
               size={AvatarIconSize.Md}
               style={tw.style('mr-4')}
             />
