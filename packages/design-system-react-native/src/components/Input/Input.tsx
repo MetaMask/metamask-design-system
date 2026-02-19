@@ -98,7 +98,7 @@ export const Input = forwardRef<TextInput, InputProps>(
 
     const resolvedStyle = [
       inputStyle,
-      Platform.OS === 'ios' && { textAlignVertical: 'center' as const },
+      Platform.OS === 'android' && { textAlignVertical: 'center' as const },
       style,
     ].filter(Boolean);
 
