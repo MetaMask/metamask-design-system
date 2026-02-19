@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added `CorporateFare` icon for corporate and business-related UI elements ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
+- Added `CorporateFare` icon to represent stocks ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
 
 ### Changed
 

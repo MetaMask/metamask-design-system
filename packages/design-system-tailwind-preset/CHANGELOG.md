@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Cleaned up obsolete ESLint disable comments following ESLint upgrades ([#861](https://github.com/MetaMask/metamask-design-system/pull/861))
+- Internal maintenance: Cleaned up obsolete ESLint disable comments in test files following ESLint upgrades ([#861](https://github.com/MetaMask/metamask-design-system/pull/861))
+  - No functional changes to the preset itself
 
 ## [0.6.1]
 

@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated development dependencies for improved tooling support ([#906](https://github.com/MetaMask/metamask-design-system/pull/906), [#878](https://github.com/MetaMask/metamask-design-system/pull/878))
+- Internal maintenance: Updated development dependencies ([#906](https://github.com/MetaMask/metamask-design-system/pull/906), [#878](https://github.com/MetaMask/metamask-design-system/pull/878))
+  - No functional changes to the preset itself
 
 ## [0.3.0]
 

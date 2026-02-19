@@ -9,10 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.2.0]
 
-### Changed
+### Added
 
-- Reverted font weight changes to restore previous typography appearance ([#864](https://github.com/MetaMask/metamask-design-system/pull/864))
-  - Font weight tokens have been reverted to their original values after temporary Geist font alignment changes
+- Exported `AnimationDuration` enum for standardized animation timing values ([#897](https://github.com/MetaMask/metamask-design-system/pull/897))
 
 ## [8.1.1]
 
