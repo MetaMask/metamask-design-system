@@ -33,8 +33,8 @@ jest.mock(
 beforeEach(() => {
   const { useSafeAreaInsets } = require('react-native-safe-area-context');
   useSafeAreaInsets.mockReturnValue({
-    top: 64,
-    bottom: 32,
+    top: 0,
+    bottom: 0,
     left: 0,
     right: 0,
   });
