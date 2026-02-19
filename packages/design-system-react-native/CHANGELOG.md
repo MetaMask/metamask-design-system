@@ -9,17 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.7.0]
 
-### Uncategorized
+### Added
 
-- feat: add corporate-fare icon ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.3.1 to 5.3.2 ([#906](https://github.com/MetaMask/metamask-design-system/pull/906))
-- feat: add create-component script for React Native ([#895](https://github.com/MetaMask/metamask-design-system/pull/895))
-- chore(deps): bump @metamask/utils from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
-- feat: add `BottomSheetOverlay` component ([#897](https://github.com/MetaMask/metamask-design-system/pull/897))
-- refactor: re-arrange peer deps ([#901](https://github.com/MetaMask/metamask-design-system/pull/901))
-- fix: ButtonBase for flex layouts ([#870](https://github.com/MetaMask/metamask-design-system/pull/870))
-- feat: standardize non-icon enum values to kebab-case ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
-- chore: Updated twClassnames to use tw.style in DSRN ([#889](https://github.com/MetaMask/metamask-design-system/pull/889))
+- Added `CorporateFare` icon for corporate and business-related UI elements ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
+- Added `BottomSheetOverlay` component for modal bottom sheet interactions ([#897](https://github.com/MetaMask/metamask-design-system/pull/897))
+  - Provides consistent overlay pattern for bottom sheet components
+  - Includes press-to-dismiss functionality and accessibility features
+
+### Changed
+
+- **BREAKING:** Standardized non-icon enum values to use kebab-case format for consistency ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
+  - All component enum values (except icon names) now use kebab-case (e.g., `button-variant-primary` instead of `ButtonVariantPrimary`)
+  - This improves consistency with design tokens and TWRNC class naming conventions
+  - Update all enum references in your code to use the new kebab-case format
+- Updated component styling to use `tw.style()` instead of string-based `twClassName` for better type safety and conditional styling ([#889](https://github.com/MetaMask/metamask-design-system/pull/889))
+- Updated `@metamask/utils` peer dependency from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
+- Reorganized peer dependencies for better dependency management ([#901](https://github.com/MetaMask/metamask-design-system/pull/901))
+
+### Fixed
+
+- Fixed `ButtonBase` component sizing issues in flex layouts to prevent unexpected shrinking ([#870](https://github.com/MetaMask/metamask-design-system/pull/870))
 
 ## [0.6.0]
 

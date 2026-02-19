@@ -9,12 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0]
 
-### Uncategorized
+### Added
 
-- feat: add corporate-fare icon ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.3.1 to 5.3.2 ([#906](https://github.com/MetaMask/metamask-design-system/pull/906))
-- chore(deps): bump @metamask/utils from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
-- feat: standardize non-icon enum values to kebab-case ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
+- Added `CorporateFare` icon for corporate and business-related UI elements ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
+
+### Changed
+
+- **BREAKING:** Standardized non-icon enum values to use kebab-case format for consistency ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
+  - All component enum values (except icon names) now use kebab-case (e.g., `button-variant-primary` instead of `ButtonVariantPrimary`)
+  - This improves consistency with design tokens and CSS class naming conventions
+  - Update all enum references in your code to use the new kebab-case format
+- Updated `@metamask/utils` peer dependency from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
 
 ## [0.7.0]
 
