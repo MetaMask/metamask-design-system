@@ -2,7 +2,6 @@ import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
 import { BottomSheetFooter } from './BottomSheetFooter';
-import { SAMPLE_BOTTOMSHEETFOOTER_PROPS } from './BottomSheetFooter.constants';
 import { ButtonsAlignment } from './BottomSheetFooter.types';
 
 describe('BottomSheetFooter', () => {
@@ -18,7 +17,10 @@ describe('BottomSheetFooter', () => {
 
   it('renders both buttons when both props are provided', () => {
     const { getAllByRole } = render(
-      <BottomSheetFooter {...SAMPLE_BOTTOMSHEETFOOTER_PROPS} />,
+      <BottomSheetFooter
+        primaryButtonProps={{ children: 'Submit' }}
+        secondaryButtonProps={{ children: 'Cancel' }}
+      />,
     );
     expect(getAllByRole('button')).toHaveLength(2);
   });

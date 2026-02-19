@@ -5,7 +5,6 @@ import { Box } from '../../Box';
 import { Text } from '../../Text';
 
 import { BottomSheetFooter } from './BottomSheetFooter';
-import { SAMPLE_BOTTOMSHEETFOOTER_PROPS } from './BottomSheetFooter.constants';
 import type { BottomSheetFooterProps } from './BottomSheetFooter.types';
 import { ButtonsAlignment } from './BottomSheetFooter.types';
 
@@ -39,7 +38,15 @@ type Story = StoryObj<BottomSheetFooterProps>;
 
 export const Default: Story = {
   args: {
-    ...SAMPLE_BOTTOMSHEETFOOTER_PROPS,
+    buttonsAlignment: ButtonsAlignment.Vertical,
+    secondaryButtonProps: {
+      children: 'Cancel',
+      onPress: () => console.log('Cancel pressed'),
+    },
+    primaryButtonProps: {
+      children: 'Submit',
+      onPress: () => console.log('Submit pressed'),
+    },
   },
 };
 
@@ -63,7 +70,14 @@ export const SecondaryOnly: Story = {
 
 export const Horizontal: Story = {
   args: {
-    ...SAMPLE_BOTTOMSHEETFOOTER_PROPS,
     buttonsAlignment: ButtonsAlignment.Horizontal,
+    secondaryButtonProps: {
+      children: 'Cancel',
+      onPress: () => console.log('Cancel pressed'),
+    },
+    primaryButtonProps: {
+      children: 'Submit',
+      onPress: () => console.log('Submit pressed'),
+    },
   },
 };

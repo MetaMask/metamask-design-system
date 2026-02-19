@@ -7,14 +7,13 @@ import { View } from 'react-native';
 import { Button, ButtonVariant } from '../../Button';
 
 // Internal dependencies.
-import { DEFAULT_BOTTOMSHEETFOOTER_BUTTONSALIGNMENT } from './BottomSheetFooter.constants';
 import type { BottomSheetFooterProps } from './BottomSheetFooter.types';
 import { ButtonsAlignment } from './BottomSheetFooter.types';
 
 export const BottomSheetFooter: React.FC<BottomSheetFooterProps> = ({
   style,
   twClassName,
-  buttonsAlignment = DEFAULT_BOTTOMSHEETFOOTER_BUTTONSALIGNMENT,
+  buttonsAlignment = ButtonsAlignment.Horizontal,
   primaryButtonProps,
   secondaryButtonProps,
   ...props
