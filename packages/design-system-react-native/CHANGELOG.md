@@ -18,10 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Standardized non-icon enum values to use kebab-case format for consistency ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
-  - All component enum values (except icon names) now use kebab-case (e.g., `button-variant-primary` instead of `ButtonVariantPrimary`)
-  - This improves consistency with design tokens and TWRNC class naming conventions
-  - Update all enum references in your code to use the new kebab-case format
+- **BREAKING:** Standardized non-icon enum runtime values to use kebab-case format ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
+  - Enum values now use lowercase/kebab-case (e.g., `'primary'` instead of `'Primary'`, `'top-right'` instead of `'TopRight'`)
+  - **Migration likely not needed** - continue using enum constants (e.g., `ButtonVariant.Primary`)
+  - **Migration needed** only if your app persists or transmits these enum values (localStorage, databases, APIs)
+  - This prepares for migration from enums to string union types per ADR #127
 - Updated component styling to use `tw.style()` instead of string-based `twClassName` for better type safety and conditional styling ([#889](https://github.com/MetaMask/metamask-design-system/pull/889))
 - Updated `@metamask/utils` peer dependency from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
 - Reorganized peer dependencies for better dependency management ([#901](https://github.com/MetaMask/metamask-design-system/pull/901))
