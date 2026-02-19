@@ -1,161 +1,157 @@
 # AvatarFavicon
 
-`AvatarFavicon` is a type of avatar reserved for representing dapps, sites, and other general entities.
+Avatar reserved for representing websites and dapps.
 
----
+```tsx
+import { AvatarFavicon } from '@metamask/design-system-react-native';
+
+<AvatarFavicon src={{ uri: 'https://example.com/favicon.ico' }} />;
+```
 
 ## Props
 
 ### `src`
 
-Optional prop specifying the source of the favicon image or SVG.
+Optional prop for the source of the image or SVG.
 
-| TYPE            | REQUIRED | DEFAULT | DESCRIPTION                               |
-| --------------- | -------- | ------- | ----------------------------------------- |
-| `ImageOrSvgSrc` | No       | `null`  | URI, local asset, or inline SVG component |
+| TYPE            | REQUIRED | DEFAULT     |
+| --------------- | -------- | ----------- |
+| `ImageOrSvgSrc` | No       | `undefined` |
 
----
+```tsx
+// Remote image
+<AvatarFavicon src={{ uri: 'https://example.com/favicon.ico' }} />
+
+// Local image
+<AvatarFavicon src={require('./favicon.png')} />
+
+// Local SVG component
+import FaviconSVG from './favicon.svg';
+<AvatarFavicon src={FaviconSVG} />
+```
 
 ### `name`
 
-Optional string used to derive the fallback text (first character).
+Optional prop for favicon name, used to calculate fallback text when image fails to load.
 
-| TYPE     | REQUIRED | DEFAULT | DESCRIPTION                            |
-| -------- | -------- | ------- | -------------------------------------- |
-| `string` | No       | `null`  | Used to create fallback if image fails |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
----
-
-### `imageOrSvgProps`
-
-Optional props forwarded to the `ImageOrSvg` component.
-
-| TYPE              | REQUIRED | DEFAULT | DESCRIPTION                                        |
-| ----------------- | -------- | ------- | -------------------------------------------------- |
-| `ImageOrSvgProps` | No       | `null`  | Customize image handling, test IDs, alt text, etc. |
-
----
+```tsx
+<AvatarFavicon
+  src={{ uri: 'https://example.com/favicon.ico' }}
+  name="Example Website"
+/>
+```
 
 ### `size`
 
-Controls the size of the avatar. Inherits from `AvatarBaseSize`.
+The size of the AvatarFavicon.
+
+Available sizes:
+
+- `AvatarFaviconSize.Xs` (16px)
+- `AvatarFaviconSize.Sm` (24px)
+- `AvatarFaviconSize.Md` (32px)
+- `AvatarFaviconSize.Lg` (40px)
+- `AvatarFaviconSize.Xl` (48px)
 
 | TYPE                | REQUIRED | DEFAULT                |
 | ------------------- | -------- | ---------------------- |
 | `AvatarFaviconSize` | No       | `AvatarFaviconSize.Md` |
 
-Available sizes:
-
-- `Xs` – 16px
-- `Sm` – 24px
-- `Md` – 32px
-- `Lg` – 40px
-- `Xl` – 48px
-
----
+```tsx
+<AvatarFavicon
+  src={{ uri: 'https://example.com/favicon.ico' }}
+  size={AvatarFaviconSize.Sm}
+/>
+```
 
 ### `fallbackText`
 
-Optional custom fallback text shown when image fails to load.
+Optional text to display when the image fails to load.
 
-| TYPE     | REQUIRED | DEFAULT                                   | DESCRIPTION           |
-| -------- | -------- | ----------------------------------------- | --------------------- |
-| `string` | No       | First character of `name` or empty string | Used when image fails |
-
----
-
-### `fallbackTextProps`
-
-Optional props to customize the fallback text appearance.
-
-| TYPE                 | REQUIRED | DEFAULT |
-| -------------------- | -------- | ------- |
-| `Partial<TextProps>` | No       | `{}`    |
-
----
-
-### `twClassName`
-
-Optional Tailwind-style utility classes.
-
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `string` | No       | `''`    |
-
----
-
-### Additional Props
-
-All other props supported by `AvatarBase`, excluding `children`, are also accepted (e.g., `style`, `testID`).
-
----
-
-## Usage
-
-### Basic
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 <AvatarFavicon
-  src={{ uri: 'https://example.com/favicon.svg' }}
-  name="Uniswap"
+  src={{ uri: 'https://example.com/favicon.ico' }}
+  fallbackText="EX"
 />
 ```
 
-### Custom Size and Fallback
+### `imageOrSvgProps`
+
+Optional props to pass to the underlying ImageOrSvg component.
+
+| TYPE                       | REQUIRED | DEFAULT     |
+| -------------------------- | -------- | ----------- |
+| `Partial<ImageOrSvgProps>` | No       | `undefined` |
 
 ```tsx
 <AvatarFavicon
-  size={AvatarFaviconSize.Xl}
-  src={{ uri: 'https://bad-link.com/image.png' }}
-  name="Degen App"
-  fallbackText="DA"
-  fallbackTextProps={{ color: 'text-error-default' }}
-/>
-```
-
-### Forwarding props to ImageOrSvg
-
-```tsx
-<AvatarFavicon
-  src={{ uri: 'https://example.com/favicon.svg' }}
+  src={{ uri: 'https://example.com/favicon.ico' }}
   imageOrSvgProps={{
-    testID: 'favicon-image',
-    imageProps: { accessibilityLabel: 'Dapp icon' },
+    onImageLoad: () => console.log('Image loaded'),
+    onImageError: () => console.log('Image failed to load'),
   }}
 />
 ```
 
----
+### `twClassName`
 
-## Behavior
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-- Falls back to the first character of `name` if image fails to load.
-- Defaults to `Md` (32px) size.
-- Always uses a circular shape.
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
-## Accessibility
+```tsx
+import { AvatarFavicon } from '@metamask/design-system-react-native';
 
-- Use `imageOrSvgProps.imageProps.accessibilityLabel` to describe the favicon for screen readers.
-- The fallback text is rendered using the `Text` component and can be customized via `fallbackTextProps`.
+// Add additional styles
+<AvatarFavicon
+  src={{ uri: 'https://example.com/favicon.ico' }}
+  twClassName="border-2 border-primary-100"
+/>
 
----
+// Override default styles
+<AvatarFavicon
+  src={{ uri: 'https://example.com/favicon.ico' }}
+  twClassName="!bg-error-100"
+/>
+```
 
-## Notes
+### `style`
 
-- This component uses `AvatarBase` and `ImageOrSvg` under the hood.
-- SVGs and raster images are both supported.
-- For custom shapes or behaviors, extend `AvatarBase` directly.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
----
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
-## Contributing
+```tsx
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
+export const StyleExample = () => (
+  <AvatarFavicon
+    src={{ uri: 'https://example.com/favicon.ico' }}
+    style={styles.custom}
+  />
+);
+```
 
----
+## References
 
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs), the [AvatarFavicon documentation](#), or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
