@@ -13,11 +13,6 @@ import { ToastContext, ToastContextWrapper } from './Toast.context';
 import type { ToastOptions, ToastRef } from './Toast.types';
 import { ButtonIconVariant, ToastVariant } from './Toast.types';
 
-// Mock safe area context.
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => ({ bottom: 0, top: 0, left: 0, right: 0 }),
-}));
-
 // Mock cancelAnimation as a jest.fn so we can assert on calls.
 const mockCancelAnimation = jest.fn();
 jest.mock('react-native-reanimated', () => {
