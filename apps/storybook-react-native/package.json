@@ -26,7 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.5",
     "@react-native-async-storage/async-storage": "^2.0.0",
-    "@react-native-community/datetimepicker": "^8.2.0",
+    "@react-native-community/datetimepicker": "7.2.0",
     "@react-native-community/slider": "^4.5.5",
     "@storybook/addon-actions": "6.5",
     "@storybook/addon-controls": "6.5",
