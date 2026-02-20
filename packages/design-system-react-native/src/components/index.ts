@@ -127,6 +127,9 @@ export {
 } from './Text';
 export type { TextProps } from './Text';
 
+export { TextField, TextFieldSize } from './TextField';
+export type { TextFieldProps } from './TextField';
+
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 
