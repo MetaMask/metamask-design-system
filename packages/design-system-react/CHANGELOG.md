@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- Revert Release 20.0.0 to redo properly ([#930](https://github.com/MetaMask/metamask-design-system/pull/930))
+- chore: Added Input component to DSR and DSRN ([#909](https://github.com/MetaMask/metamask-design-system/pull/909))
+- Release 20.0.0 ([#921](https://github.com/MetaMask/metamask-design-system/pull/921))
+- feat: add corporate-fare icon ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.3.1 to 5.3.2 ([#906](https://github.com/MetaMask/metamask-design-system/pull/906))
+- chore(deps): bump @metamask/utils from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
+- feat: standardize non-icon enum values to kebab-case ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
+
 ## [0.7.0]
 
 ### Added
