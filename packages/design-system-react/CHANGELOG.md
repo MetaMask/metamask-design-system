@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0]
+
+### Added
+
+- Added `CorporateFare` icon to represent stocks ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
+
+### Changed
+
+- **BREAKING:** Standardized non-icon enum runtime values to use kebab-case format ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
+  - Enum values now use lowercase/kebab-case (e.g., `'primary'` instead of `'Primary'`, `'top-right'` instead of `'TopRight'`)
+  - **Migration likely not needed** - continue using enum constants (e.g., `ButtonVariant.Primary`)
+  - **Migration needed** only if your app persists or transmits these enum values (localStorage, databases, APIs)
+  - This prepares for migration from enums to string union types per ADR #127
+- Updated `@metamask/utils` peer dependency from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
+
 ## [0.7.0]
 
 ### Added
@@ -129,7 +144,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.7.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.8.0...HEAD
+[0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.7.0...@metamask/design-system-react@0.8.0
 [0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.6.1...@metamask/design-system-react@0.7.0
 [0.6.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.6.0...@metamask/design-system-react@0.6.1
 [0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.5.0...@metamask/design-system-react@0.6.0

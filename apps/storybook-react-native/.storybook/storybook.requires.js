@@ -67,6 +67,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BottomSheetOverlay/BottomSheetOverlay.stories.tsx": require("../../../packages/design-system-react-native/src/components/BottomSheetOverlay/BottomSheetOverlay.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.stories.tsx": require("../../../packages/design-system-react-native/src/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Box/Box.stories.tsx": require("../../../packages/design-system-react-native/src/components/Box/Box.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/Button.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/Button.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.stories.tsx"),
@@ -77,6 +78,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/Checkbox/Checkbox.stories.tsx": require("../../../packages/design-system-react-native/src/components/Checkbox/Checkbox.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/HeaderBase/HeaderBase.stories.tsx": require("../../../packages/design-system-react-native/src/components/HeaderBase/HeaderBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/Input/Input.stories.tsx": require("../../../packages/design-system-react-native/src/components/Input/Input.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx"),
@@ -86,8 +88,9 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
-    "./stories/Backgrounds.stories.tsx": require("../stories/Backgrounds.stories.tsx"),
-    "./stories/WalletHome.stories.tsx": require("../stories/WalletHome.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/Toast/Toast.stories.tsx": require("../../../packages/design-system-react-native/src/components/Toast/Toast.stories.tsx"),
+    // "./stories/Backgrounds.stories.tsx": require("../stories/Backgrounds.stories.tsx"),
+    // "./stories/WalletHome.stories.tsx": require("../stories/WalletHome.stories.tsx"),
   };
 };
 

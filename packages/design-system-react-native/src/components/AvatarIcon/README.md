@@ -1,12 +1,30 @@
 # AvatarIcon
 
-The `AvatarIcon` component is reserved for representing static icons inside of an avatar.
+Avatar reserved for representing static icons inside of an avatar.
 
-_Developer Note: This components extends the functionality of [`AvatarBase`](../AvatarBase/) by incorporating an icon and severity levels, making it useful for visually representing statuses, alerts, or simply user avatars with icons._
+```tsx
+import {
+  AvatarIcon,
+  AvatarIconSeverity,
+  IconName,
+} from '@metamask/design-system-react-native';
 
----
+<AvatarIcon name={IconName.Bank} />;
+```
 
 ## Props
+
+### `name`
+
+The icon name to display in the avatar.
+
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | Yes      | `undefined` |
+
+```tsx
+<AvatarIcon name={IconName.Bank} />
+```
 
 ### `severity`
 
@@ -18,114 +36,115 @@ Optional prop to control the severity of the avatar.
 
 Available severities:
 
-- `Neutral`
-- `Info`
-- `Success`
-- `Error`
-- `Warning`
-
----
-
-### `iconName` (Required)
-
-The name of the icon to be displayed.
-
-| TYPE       | REQUIRED | DEFAULT |
-| :--------- | :------- | :------ |
-| `IconName` | Yes      | `N/A`   |
-
----
-
-### `iconProps`
-
-Optional props to pass additional properties to the icon.
-
-| TYPE                      | REQUIRED | DEFAULT |
-| :------------------------ | :------- | :------ |
-| `Omit<IconProps, 'name'>` | No       | `{}`    |
-
----
-
-### Other Props
-
-`AvatarIcon` supports all props from [`AvatarBase`](#) except `children`, `fallbackText`, and `fallbackTextProps`. This includes:
-
-- `size` – Controls the avatar size. See [AvatarBase documentation](#) for details.
-- `shape` – Controls the avatar shape. See [AvatarBase documentation](#) for details.
-- `twClassName` – Additional Tailwind class names.
-- `style` – Override or extend style properties.
-
----
-
-## Accessibility
-
-Since `AvatarIcon` typically represents an icon-based avatar, it is important to ensure the component is usable by screen readers and assistive technologies. The following `react-native` accessibility props can be passed:
-
-- **`accessibilityLabel`**: Use to describe the AvatarIcon. For example, "Sent"
-- **`accessibilityRole`**:
-  - If interactive (e.g., navigates to account details), set to `button` or another appropriate role.
-- **`accessibilityHint`**: Provide context if `AvatarIcon` triggers a navigation or action.
-- **`accessible`**: Set to `true` when the avatar is meaningful, so screen readers properly identify it. If the icon is strictly decorative or not essential, it can be set to `false`.
-
----
-
-## Usage
-
-### Basic Usage
+- `AvatarIconSeverity.Neutral`
+- `AvatarIconSeverity.Info`
+- `AvatarIconSeverity.Success`
+- `AvatarIconSeverity.Error`
+- `AvatarIconSeverity.Warning`
 
 ```tsx
-import React from 'react';
-import AvatarIcon, {
-  AvatarIconSeverity,
-} from '@metamask/design-system-react-native';
-
-<AvatarIcon iconName="User" />;
+<AvatarIcon name={IconName.Warning} severity={AvatarIconSeverity.Warning} />
+<AvatarIcon name={IconName.CheckCircle} severity={AvatarIconSeverity.Success} />
+<AvatarIcon name={IconName.Info} severity={AvatarIconSeverity.Info} />
 ```
 
----
+### `size`
 
-### Setting Severity
+The size of the AvatarIcon.
+
+Available sizes:
+
+- `AvatarBaseSize.Xs` (16px)
+- `AvatarBaseSize.Sm` (24px)
+- `AvatarBaseSize.Md` (32px)
+- `AvatarBaseSize.Lg` (40px)
+- `AvatarBaseSize.Xl` (48px)
+
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `AvatarBaseSize` | No       | `AvatarBaseSize.Md` |
 
 ```tsx
-<AvatarIcon iconName="Warning" severity={AvatarIconSeverity.Warning} />
+<AvatarIcon name={IconName.Bank} size={AvatarBaseSize.Sm} />
+<AvatarIcon name={IconName.Bank} />
+<AvatarIcon name={IconName.Bank} size={AvatarBaseSize.Lg} />
 ```
 
----
+### `iconColor`
 
-### Customizing Icon Props
+Color of the icon within the avatar.
+
+| TYPE        | REQUIRED | DEFAULT                 |
+| ----------- | -------- | ----------------------- |
+| `IconColor` | No       | `IconColor.IconDefault` |
 
 ```tsx
-<AvatarIcon iconName="Bell" iconProps={{ size: 20, color: 'red' }} />
+<AvatarIcon name={IconName.Bank} iconColor={IconColor.IconPrimary} />
 ```
 
----
+### `backgroundColor`
 
-### Changing Size and Shape
+Background color of the avatar.
+
+| TYPE              | REQUIRED | DEFAULT                                 |
+| ----------------- | -------- | --------------------------------------- |
+| `BackgroundColor` | No       | `BackgroundColor.BackgroundAlternative` |
 
 ```tsx
-import { AvatarSize, AvatarShape } from '@metamask/design-system-react-native';
-
-<AvatarIcon iconName="User" size={AvatarSize.Lg} shape={AvatarShape.Square} />;
+<AvatarIcon
+  name={IconName.Bank}
+  backgroundColor={BackgroundColor.BackgroundDefault}
+/>
 ```
 
-See the [AvatarBase README](#) for more details on `size` and `shape`.
+### `twClassName`
 
----
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-## Notes
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
-- `AvatarIcon` relies on [`AvatarBase`](#) for its foundational behavior.
-- The `severity` prop changes the icon color, making it easy to signal statuses.
-- You can override icon appearance via `iconProps`.
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
----
+```tsx
+import { AvatarIcon } from '@metamask/design-system-react-native';
 
-## Contributing
+// Add additional styles
+<AvatarIcon
+  name={IconName.Bank}
+  twClassName="border-2 border-primary-100"
+/>
 
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
+// Override default styles
+<AvatarIcon
+  name={IconName.Bank}
+  twClassName="!bg-error-100"
+/>
+```
 
----
+### `style`
 
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs), the [AvatarBase documentation](#), or contact the maintainers of the design system.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
+
+```tsx
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
+
+export const StyleExample = () => (
+  <AvatarIcon name={IconName.Bank} style={styles.custom} />
+);
+```
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

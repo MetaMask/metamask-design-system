@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-react-native",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Design System React Native",
   "keywords": [
     "MetaMask",
@@ -38,6 +38,7 @@
     "build": "yarn generate-icons && ts-bridge --project tsconfig.build.json --verbose --clean --no-references && cp -r src/components/Icon/assets dist/components/Icon/",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",
+    "create-component:react-native": "tsx scripts/create-component",
     "generate-icons": "tsx scripts/generate-icons.ts",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
@@ -57,7 +58,7 @@
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.23.3",
     "@figma/code-connect": "^1.0.0",
-    "@metamask/auto-changelog": "^5.3.1",
+    "@metamask/auto-changelog": "^5.3.2",
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.10.0",
@@ -89,7 +90,7 @@
   },
   "peerDependencies": {
     "@metamask/design-system-twrnc-preset": "^0.3.0",
-    "@metamask/design-tokens": "^8.1.0",
+    "@metamask/design-tokens": "^8.2.0",
     "@metamask/utils": "^11.10.0",
     "lodash": "^4.17.23",
     "react": ">=18.2.0",
