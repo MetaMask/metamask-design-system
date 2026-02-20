@@ -1,21 +1,20 @@
 # TextField
 
-TextField is an input component that allows users to enter text data into a boxed field. It supports accessories, error states, and size variants.
+TextField is an input component that lets users enter text data into a boxed field. It can contain related accessories before or after the input.
 
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
 
-<TextField
-  placeholder="Enter text..."
-  onChangeText={(text) => console.log(text)}
-/>;
+<TextField placeholder="Enter text..." />;
 ```
 
 ## Props
 
+This component extends [Input](../Input/Input.tsx) props (which extends React Native's [TextInput](https://reactnative.dev/docs/textinput)), excluding `textVariant` and `isStateStylesDisabled`.
+
 ### `size`
 
-The size of the TextField.
+Optional prop for the size of the TextField.
 
 Available sizes:
 
@@ -37,122 +36,76 @@ import { TextField, TextFieldSize } from '@metamask/design-system-react-native';
 
 ### `isError`
 
-Whether to show the error state. When true, the border color changes to the error color.
+Optional boolean to show the error state. Changes the border color to indicate an error.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
 ```tsx
-import { TextField } from '@metamask/design-system-react-native';
-
-<TextField isError placeholder="Invalid input" />;
+<TextField isError placeholder="Error state" />
 ```
 
 ### `isDisabled`
 
-Whether the input is disabled. When true, the input is not editable and the container opacity is reduced.
+Optional boolean to disable the TextField. Reduces opacity and prevents interaction.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
 ```tsx
-import { TextField } from '@metamask/design-system-react-native';
-
-<TextField isDisabled placeholder="Disabled input" />;
-```
-
-### `isReadonly`
-
-Whether the input is read-only. The input is not editable but retains full opacity.
-
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `false` |
-
-```tsx
-import { TextField } from '@metamask/design-system-react-native';
-
-<TextField isReadonly value="Read-only value" />;
+<TextField isDisabled placeholder="Disabled" />
 ```
 
 ### `startAccessory`
 
-Content to display before the input. Commonly used for icons.
+Optional content to display before the Input.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-import {
-  TextField,
-  Icon,
-  IconName,
-  IconSize,
-} from '@metamask/design-system-react-native';
+import { Text } from 'react-native';
 
-<TextField
-  startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
-  placeholder="Search..."
-/>;
+<TextField startAccessory={<Text>🔍</Text>} placeholder="Search..." />;
 ```
 
 ### `endAccessory`
 
-Content to display after the input. Commonly used for action buttons or labels.
+Optional content to display after the Input.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-import { TextField, Text } from '@metamask/design-system-react-native';
+import { Text } from 'react-native';
 
-<TextField endAccessory={<Text>ETH</Text>} placeholder="Enter amount" />;
+<TextField endAccessory={<Text>✕</Text>} placeholder="With clear button" />;
 ```
 
 ### `inputElement`
 
-Custom input element to replace the default TextInput. Use this when you need a specialized input component.
+Optional prop to replace the default Input with a custom element.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-import { TextField } from '@metamask/design-system-react-native';
+import { TextInput } from 'react-native';
 
-<TextField inputElement={<MyCustomInput />} />;
-```
-
-### `textInputProps`
-
-Props spread to the internal TextInput component for additional properties like `testID`, `keyboardType`, or `returnKeyType`.
-
-**Note:** Common props (`placeholder`, `value`, `onChangeText`, `onBlur`, `onFocus`, `autoFocus`) should be passed as top-level props, not through this object.
-
-| TYPE                                                               | REQUIRED | DEFAULT     |
-| ------------------------------------------------------------------ | -------- | ----------- |
-| `Omit<TextInputProps, 'editable' \| 'onBlur' \| 'onFocus' \| ...>` | No       | `undefined` |
-
-```tsx
-import { TextField } from '@metamask/design-system-react-native';
-
-<TextField
-  placeholder="Enter text..."
-  textInputProps={{
-    testID: 'my-input',
-    keyboardType: 'email-address',
-    returnKeyType: 'done',
-  }}
-/>;
+<TextField inputElement={<TextInput placeholder="Custom input" />} />;
 ```
 
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the container. These classes will be merged with the component's default classes, allowing you to customize the container appearance.
+Use the `twClassName` prop to add Tailwind CSS classes to the container. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -162,12 +115,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the container. These c
 import { TextField } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<TextField twClassName="mt-4" placeholder="With margin" />;
+<TextField twClassName="mt-4" placeholder="With margin" />
+
+// Override default styles
+<TextField twClassName="bg-error-default" placeholder="Override background" />
 ```
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the container's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
@@ -182,8 +138,8 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 
   return (
     <TextField
-      style={tw.style('bg-default', isActive && 'bg-alternative')}
       placeholder="Conditional styling"
+      style={tw.style('bg-default', isActive && 'bg-success-default')}
     />
   );
 };

@@ -1,99 +1,54 @@
-// Third party dependencies.
-import type { TextInputProps, ViewProps } from 'react-native';
+import type { ReactNode } from 'react';
+import type { StyleProp, ViewStyle } from 'react-native';
+
+import type { InputProps } from '../Input/Input.types';
 
 /**
- * TextField sizes.
+ * TextFieldSize enum.
  */
 export enum TextFieldSize {
-  Sm = '32',
-  Md = '40',
-  Lg = '48',
+  Sm = 'sm',
+  Md = 'md',
+  Lg = 'lg',
 }
 
 /**
  * TextField component props.
  */
-export type TextFieldProps = {
+export type TextFieldProps = Omit<
+  InputProps,
+  'textVariant' | 'isStateStylesDisabled' | 'style'
+> & {
   /**
-   * Size of the TextField.
+   * Optional prop for size of the TextField.
    *
    * @default TextFieldSize.Md
    */
   size?: TextFieldSize;
   /**
-   * Content to display before the input.
+   * Optional content to display before the Input.
    */
-  startAccessory?: React.ReactNode;
+  startAccessory?: ReactNode;
   /**
-   * Content to display after the input.
+   * Optional content to display after the Input.
    */
-  endAccessory?: React.ReactNode;
+  endAccessory?: ReactNode;
   /**
-   * Whether to show the error state.
+   * Optional boolean to show the error state.
    *
    * @default false
    */
   isError?: boolean;
   /**
-   * Whether the input is disabled.
-   *
-   * @default false
+   * Optional prop to replace the default Input with a custom element.
    */
-  isDisabled?: boolean;
+  inputElement?: ReactNode;
   /**
-   * Whether the input is read-only.
-   *
-   * @default false
-   */
-  isReadonly?: boolean;
-  /**
-   * Tailwind CSS classes for the container.
+   * Optional prop to add twrnc overriding classNames.
    */
   twClassName?: string;
   /**
-   * Placeholder text for the input.
+   * Optional prop to customize the container style.
    */
-  placeholder?: string;
-  /**
-   * Current value of the input.
-   */
-  value?: string;
-  /**
-   * Callback when the input text changes.
-   */
-  onChangeText?: (text: string) => void;
-  /**
-   * Callback when the input loses focus.
-   */
-  onBlur?: TextInputProps['onBlur'];
-  /**
-   * Callback when the input gains focus.
-   */
-  onFocus?: TextInputProps['onFocus'];
-  /**
-   * Whether to auto-focus the input on mount.
-   *
-   * @default false
-   */
-  autoFocus?: boolean;
-  /**
-   * Optional custom input element to replace the default TextInput.
-   */
-  inputElement?: React.ReactNode;
-  /**
-   * Props spread to the internal TextInput component (e.g., testID, keyboardType).
-   * Note: Common props (placeholder, value, onChangeText, onBlur, onFocus, autoFocus)
-   * should be passed as top-level props, not through this object.
-   */
-  textInputProps?: Omit<
-    TextInputProps,
-    | 'editable'
-    | 'onBlur'
-    | 'onFocus'
-    | 'autoFocus'
-    | 'placeholder'
-    | 'value'
-    | 'onChangeText'
-    | 'style'
-  >;
-} & ViewProps;
+  style?: StyleProp<ViewStyle>;
+};

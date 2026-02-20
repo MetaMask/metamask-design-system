@@ -3,52 +3,69 @@ import {
   forwardRef,
   useCallback,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from 'react';
 import { Pressable, TextInput, View } from 'react-native';
-import type {
-  NativeSyntheticEvent,
-  TextInputFocusEventData,
-} from 'react-native';
 
-import {
-  DEFAULT_TEXTFIELD_SIZE,
-  TEXTFIELD_SIZE_TO_TW,
-} from './TextField.constants';
+import { TextVariant } from '../../types';
+import { Input } from '../Input';
+
+import { TWCLASSMAP_TEXTFIELD_SIZE } from './TextField.constants';
+import { TextFieldSize } from './TextField.types';
 import type { TextFieldProps } from './TextField.types';
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(
   (
     {
       style,
-      twClassName,
-      size = DEFAULT_TEXTFIELD_SIZE,
+      size = TextFieldSize.Md,
       startAccessory,
       endAccessory,
       isError = false,
+      inputElement,
       isDisabled = false,
-      isReadonly = false,
       autoFocus = false,
-      placeholder,
-      value,
-      onChangeText,
+      twClassName,
       onBlur,
       onFocus,
-      inputElement,
-      textInputProps,
+      testID,
       ...props
     },
     ref,
   ) => {
-    const tw = useTailwind();
     const [isFocused, setIsFocused] = useState(autoFocus);
     const inputRef = useRef<TextInput>(null);
+    const tw = useTailwind();
 
-    useImperativeHandle(ref, () => inputRef.current as TextInput, []);
+    useImperativeHandle<TextInput | null, TextInput | null>(
+      ref,
+      () => inputRef.current,
+      [],
+    );
+
+    const containerStyle = useMemo(
+      () =>
+        tw.style(
+          'flex-row',
+          'items-center',
+          'rounded-lg',
+          TWCLASSMAP_TEXTFIELD_SIZE[size],
+          'border',
+          'px-4',
+          'bg-default',
+          'border-default',
+          isError && 'border-error-default',
+          isFocused && 'border-primary-default',
+          isDisabled && 'opacity-50',
+          twClassName,
+        ),
+      [size, isError, isFocused, isDisabled, twClassName, tw],
+    );
 
     const onBlurHandler = useCallback(
-      (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      (e: Parameters<NonNullable<TextFieldProps['onBlur']>>[0]) => {
         if (!isDisabled) {
           setIsFocused(false);
           onBlur?.(e);
@@ -58,7 +75,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
     );
 
     const onFocusHandler = useCallback(
-      (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      (e: Parameters<NonNullable<TextFieldProps['onFocus']>>[0]) => {
         if (!isDisabled) {
           setIsFocused(true);
           onFocus?.(e);
@@ -73,49 +90,28 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
       }
     }, [isDisabled]);
 
-    const getBorderColorClass = () => {
-      if (isError) {
-        return 'border-error-default';
-      }
-      if (isFocused) {
-        return 'border-primary-default';
-      }
-      return 'border-default';
-    };
-
     return (
       <Pressable
-        style={[
-          tw.style(
-            'flex-row items-center rounded-lg border px-4 bg-default',
-            TEXTFIELD_SIZE_TO_TW[size],
-            getBorderColorClass(),
-            isDisabled && 'opacity-50',
-            twClassName,
-          ),
-          style,
-        ]}
+        testID={testID}
+        style={[containerStyle, style]}
         onPress={onPressHandler}
-        {...props}
+        accessible={false}
       >
         {startAccessory && (
           <View style={tw.style('mr-2')}>{startAccessory}</View>
         )}
         <View style={tw.style('flex-1')}>
           {inputElement ?? (
-            <TextInput
+            <Input
               ref={inputRef}
-              editable={!isDisabled && !isReadonly}
+              textVariant={TextVariant.BodyMd}
+              isDisabled={isDisabled}
               autoFocus={autoFocus}
-              placeholder={placeholder}
-              value={value}
-              onChangeText={onChangeText}
               onBlur={onBlurHandler}
               onFocus={onFocusHandler}
-              style={tw.style(
-                'text-body-md font-default-regular text-default p-0',
-              )}
-              {...textInputProps}
+              isStateStylesDisabled
+              twClassName="bg-transparent border-0"
+              {...props}
             />
           )}
         </View>
