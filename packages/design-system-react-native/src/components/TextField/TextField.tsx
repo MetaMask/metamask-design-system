@@ -57,7 +57,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
           'bg-default',
           'border-default',
           isError && 'border-error-default',
-          isFocused && 'border-primary-default',
+          !isDisabled && isFocused && 'border-primary-default',
           isDisabled && 'opacity-50',
           twClassName,
         ),
@@ -103,6 +103,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
         <View style={tw.style('flex-1')}>
           {inputElement ?? (
             <Input
+              {...props}
               ref={inputRef}
               textVariant={TextVariant.BodyMd}
               isDisabled={isDisabled}
@@ -111,7 +112,6 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
               onFocus={onFocusHandler}
               isStateStylesDisabled
               twClassName="bg-transparent border-0"
-              {...props}
             />
           )}
         </View>

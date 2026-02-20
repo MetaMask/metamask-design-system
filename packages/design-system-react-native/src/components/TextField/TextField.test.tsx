@@ -153,6 +153,19 @@ describe('TextField', () => {
     expect(hasOpacity50).toBe(false);
   });
 
+  it('does not show focus border when disabled even if isFocused is true', () => {
+    const { getByTestId } = render(
+      <TextField testID={ROOT_TEST_ID} isDisabled autoFocus />,
+    );
+    const root = getByTestId(ROOT_TEST_ID);
+    const styles = flattenStyle(root.props.style);
+    const focusBorder = tw.style('border-primary-default') as ViewStyle;
+    const hasFocusBorder = styles.some(
+      (s) => s.borderColor === focusBorder.borderColor,
+    );
+    expect(hasFocusBorder).toBe(false);
+  });
+
   // ── Accessories ────────────────────────────────────────────────────
 
   it('renders startAccessory when provided', () => {
