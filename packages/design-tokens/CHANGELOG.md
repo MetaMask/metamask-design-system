@@ -7,12 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [8.2.0]
-
-### Added
-
-- Exported `AnimationDuration` enum for standardized animation timing values ([#897](https://github.com/MetaMask/metamask-design-system/pull/897))
-
 ## [8.1.1]
 
 ### Fixed
@@ -404,8 +398,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.0...HEAD
-[8.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.1...@metamask/design-tokens@8.2.0
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.1...HEAD
 [8.1.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.0...@metamask/design-tokens@8.1.1
 [8.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.0.0...@metamask/design-tokens@8.1.0
 [8.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.1.0...@metamask/design-tokens@8.0.0

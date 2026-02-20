@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-react-native",
-  "version": "0.7.0",
+  "version": "0.6.0",
   "description": "Design System React Native",
   "keywords": [
     "MetaMask",
@@ -90,7 +90,7 @@
   },
   "peerDependencies": {
     "@metamask/design-system-twrnc-preset": "^0.3.0",
-    "@metamask/design-tokens": "^8.2.0",
+    "@metamask/design-tokens": "^8.1.0",
     "@metamask/utils": "^11.10.0",
     "lodash": "^4.17.23",
     "react": ">=18.2.0",
