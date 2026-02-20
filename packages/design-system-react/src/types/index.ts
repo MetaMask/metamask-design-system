@@ -92,30 +92,6 @@ export enum BadgeCountSize {
 }
 
 /**
- * BadgeStatus - status
- */
-export enum BadgeStatusStatus {
-  Active = 'active', // Connected
-  Inactive = 'inactive', // Connected
-  Disconnected = 'disconnected',
-  New = 'new',
-  Attention = 'attention',
-}
-/**
- * BadgeStatus - size
- */
-export enum BadgeStatusSize {
-  /**
-   * Represents a medium badge status size (8px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large avatar size (10px).
-   */
-  Lg = 'lg',
-}
-
-/**
  * BadgeWrapper - positionAnchorShape
  */
 export enum BadgeWrapperPositionAnchorShape {

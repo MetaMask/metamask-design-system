@@ -1,8 +1,10 @@
+import {
+  BadgeStatusSize,
+  BadgeStatusStatus,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
-
-import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
 
 import { BadgeStatus } from './BadgeStatus';
 import {

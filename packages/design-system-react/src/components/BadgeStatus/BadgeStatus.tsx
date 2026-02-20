@@ -1,6 +1,6 @@
+import { BadgeStatusSize } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { BadgeStatusSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 
 import {
