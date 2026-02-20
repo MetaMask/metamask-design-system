@@ -80,6 +80,9 @@ export { Icon } from './Icon';
 export { IconName, IconSize, IconColor } from './Icon';
 export type { IconProps } from './Icon';
 
+export { Input } from './Input';
+export type { InputProps } from './Input';
+
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
 
