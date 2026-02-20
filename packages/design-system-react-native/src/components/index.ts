@@ -93,6 +93,9 @@ export type { CheckboxProps } from './Checkbox';
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
+export { Input } from './Input';
+export type { InputProps } from './Input';
+
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
 
@@ -114,3 +117,14 @@ export type { TextProps } from './Text';
 
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
+
+export { Toast, ToastVariant, ToastContext } from './Toast';
+export type {
+  ToastOptions,
+  ToastRef,
+  ToastContextParams,
+  ToastLabelOptions,
+  ToastDescriptionOptions,
+  ToastLinkButtonOptions,
+  ToastCloseButtonOptions,
+} from './Toast';
