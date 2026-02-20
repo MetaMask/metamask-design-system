@@ -79,6 +79,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/Checkbox/Checkbox.stories.tsx": require("../../../packages/design-system-react-native/src/components/Checkbox/Checkbox.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Input/Input.stories.tsx": require("../../../packages/design-system-react-native/src/components/Input/Input.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/Skeleton/Skeleton.stories.tsx": require("../../../packages/design-system-react-native/src/components/Skeleton/Skeleton.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx"),

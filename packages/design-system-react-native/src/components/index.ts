@@ -105,6 +105,9 @@ export type { JazziconProps } from './temp-components/Jazzicon';
 export { Maskicon } from './temp-components/Maskicon';
 export type { MaskiconProps } from './temp-components/Maskicon';
 
+export { Skeleton } from './Skeleton';
+export type { SkeletonProps } from './Skeleton';
+
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
