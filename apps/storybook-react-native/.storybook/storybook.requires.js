@@ -80,6 +80,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/HeaderBase/HeaderBase.stories.tsx": require("../../../packages/design-system-react-native/src/components/HeaderBase/HeaderBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Input/Input.stories.tsx": require("../../../packages/design-system-react-native/src/components/Input/Input.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/Label/Label.stories.tsx": require("../../../packages/design-system-react-native/src/components/Label/Label.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Skeleton/Skeleton.stories.tsx": require("../../../packages/design-system-react-native/src/components/Skeleton/Skeleton.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.stories.tsx"),
