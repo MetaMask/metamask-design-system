@@ -9,13 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.3]
 
-### Uncategorized
+### Changed
 
-- Revert Release 20.0.0 to redo properly ([#930](https://github.com/MetaMask/metamask-design-system/pull/930))
-- Release 20.0.0 ([#921](https://github.com/MetaMask/metamask-design-system/pull/921))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.3.1 to 5.3.2 ([#906](https://github.com/MetaMask/metamask-design-system/pull/906))
-- chore(deps): bump @metamask/utils from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.3.0 to 5.3.1 ([#878](https://github.com/MetaMask/metamask-design-system/pull/878))
+- Updated `@metamask/utils` dependency from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
 
 ## [0.1.2]
 

@@ -9,15 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0]
 
-### Uncategorized
+### Added
 
-- Revert Release 20.0.0 to redo properly ([#930](https://github.com/MetaMask/metamask-design-system/pull/930))
-- chore: Added Input component to DSR and DSRN ([#909](https://github.com/MetaMask/metamask-design-system/pull/909))
-- Release 20.0.0 ([#921](https://github.com/MetaMask/metamask-design-system/pull/921))
-- feat: add corporate-fare icon ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.3.1 to 5.3.2 ([#906](https://github.com/MetaMask/metamask-design-system/pull/906))
-- chore(deps): bump @metamask/utils from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
-- feat: standardize non-icon enum values to kebab-case ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
+- Added `CorporateFare` icon to represent stocks ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
+- Added `Input` component for text input fields ([#909](https://github.com/MetaMask/metamask-design-system/pull/909))
+
+### Changed
+
+- **BREAKING:** Standardized non-icon enum runtime values to use kebab-case format ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
+  - Enum values now use lowercase/kebab-case (e.g., `'primary'` instead of `'Primary'`, `'top-right'` instead of `'TopRight'`)
+  - **Migration likely not needed** - continue using enum constants (e.g., `ButtonVariant.Primary`)
+  - **Migration needed** only if your app persists or transmits these enum values (localStorage, databases, APIs)
+  - This prepares for migration from enums to string union types per ADR #127
+- Updated `@metamask/utils` peer dependency from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
 
 ## [0.7.0]
 
