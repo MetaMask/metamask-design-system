@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import { Box } from '../../Box';
+import { Text } from '../../Text';
 
 import { BottomSheetHeader } from './BottomSheetHeader';
 import type { BottomSheetHeaderProps } from './BottomSheetHeader.types';
@@ -25,6 +26,9 @@ const meta: Meta<BottomSheetHeaderProps> = {
   decorators: [
     (Story) => (
       <Box twClassName="w-full bg-background-default">
+        <Box twClassName="items-center py-4">
+          <Text>Content behind bottom sheet</Text>
+        </Box>
         <Story />
       </Box>
     ),

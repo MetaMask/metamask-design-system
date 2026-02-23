@@ -44,20 +44,16 @@ import { BottomSheetHeader, BottomSheetHeaderVariant } from '@metamask/design-sy
 
 Callback function triggered when the back button is pressed. When provided, a back arrow ButtonIcon is rendered as the start accessory.
 
-| TYPE       | REQUIRED | DEFAULT     |
-| ---------- | -------- | ----------- |
-| `function` | No       | `undefined` |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | No       | `undefined` |
 
 ```tsx
 import { BottomSheetHeader } from '@metamask/design-system-react-native';
 
-// With back button
 <BottomSheetHeader onBack={() => console.log('Back pressed')}>
   Title
-</BottomSheetHeader>
-
-// Without back button
-<BottomSheetHeader>Title</BottomSheetHeader>
+</BottomSheetHeader>;
 ```
 
 ### `backButtonProps`
@@ -66,8 +62,8 @@ Props spread to the back ButtonIcon component for additional properties like `te
 
 **Note:** `iconName` and `onPress` are managed internally and excluded from this object.
 
-| TYPE                                                       | REQUIRED | DEFAULT     |
-| ---------------------------------------------------------- | -------- | ----------- |
+| TYPE                                                      | REQUIRED | DEFAULT     |
+| --------------------------------------------------------- | -------- | ----------- |
 | `Partial<Omit<ButtonIconProps, 'iconName' \| 'onPress'>>` | No       | `undefined` |
 
 ```tsx
@@ -88,20 +84,16 @@ import { BottomSheetHeader } from '@metamask/design-system-react-native';
 
 Callback function triggered when the close button is pressed. When provided, a close ButtonIcon is rendered as the end accessory.
 
-| TYPE       | REQUIRED | DEFAULT     |
-| ---------- | -------- | ----------- |
-| `function` | No       | `undefined` |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | No       | `undefined` |
 
 ```tsx
 import { BottomSheetHeader } from '@metamask/design-system-react-native';
 
-// With close button
 <BottomSheetHeader onClose={() => console.log('Close pressed')}>
   Title
-</BottomSheetHeader>
-
-// Without close button
-<BottomSheetHeader>Title</BottomSheetHeader>
+</BottomSheetHeader>;
 ```
 
 ### `closeButtonProps`
@@ -110,8 +102,8 @@ Props spread to the close ButtonIcon component for additional properties like `t
 
 **Note:** `iconName` and `onPress` are managed internally and excluded from this object.
 
-| TYPE                                                       | REQUIRED | DEFAULT     |
-| ---------------------------------------------------------- | -------- | ----------- |
+| TYPE                                                      | REQUIRED | DEFAULT     |
+| --------------------------------------------------------- | -------- | ----------- |
 | `Partial<Omit<ButtonIconProps, 'iconName' \| 'onPress'>>` | No       | `undefined` |
 
 ```tsx
@@ -139,18 +131,15 @@ Title content for the header. Pass a string for automatic Text rendering, or a R
 ```tsx
 import { BottomSheetHeader } from '@metamask/design-system-react-native';
 
-// String title
-<BottomSheetHeader>Simple Title</BottomSheetHeader>
-
-// Custom title
-<BottomSheetHeader>
-  <CustomTitleComponent />
-</BottomSheetHeader>
+<BottomSheetHeader>Simple Title</BottomSheetHeader>;
 ```
 
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the header container. These classes will be merged with the component's default classes.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -159,30 +148,34 @@ Use the `twClassName` prop to add Tailwind CSS classes to the header container. 
 ```tsx
 import { BottomSheetHeader } from '@metamask/design-system-react-native';
 
+// Add additional styles
 <BottomSheetHeader twClassName="pb-2">
   Title with extra bottom padding
-</BottomSheetHeader>
+</BottomSheetHeader>;
 ```
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
 | `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-import { StyleSheet } from 'react-native';
-import { BottomSheetHeader } from '@metamask/design-system-react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
-const styles = StyleSheet.create({
-  header: {
-    marginBottom: 8,
-  },
-});
+export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
+  const tw = useTailwind();
 
-<BottomSheetHeader style={styles.header}>Title</BottomSheetHeader>;
+  return (
+    <BottomSheetHeader
+      style={tw.style('bg-default', isActive && 'bg-success-default')}
+    >
+      Conditional styling
+    </BottomSheetHeader>
+  );
+};
 ```
 
 ## References

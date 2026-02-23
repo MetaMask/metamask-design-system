@@ -55,6 +55,12 @@ export type {
   BottomSheetFooterButtonProps,
 } from './BottomSheetFooter';
 
+export {
+  BottomSheetHeader,
+  BottomSheetHeaderVariant,
+} from './BottomSheets/BottomSheetHeader';
+export type { BottomSheetHeaderProps } from './BottomSheets/BottomSheetHeader';
+
 export { BottomSheetOverlay } from './BottomSheetOverlay';
 export type { BottomSheetOverlayProps } from './BottomSheetOverlay';
 
@@ -90,7 +96,7 @@ export type { ButtonIconProps } from './ButtonIcon';
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
-export { HeaderBase } from './HeaderBase';
+export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
 export { Icon, IconColor, IconName, IconSize } from './Icon';

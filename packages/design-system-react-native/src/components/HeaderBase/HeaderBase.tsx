@@ -8,14 +8,17 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // External dependencies.
 import { Box } from '../Box';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { Text, TextVariant } from '../Text';
+import { Text } from '../Text';
 
 // Internal dependencies.
+import { HEADERBASE_VARIANT_TEXT_VARIANTS } from './HeaderBase.constants';
 import type { HeaderBaseProps } from './HeaderBase.types';
+import { HeaderBaseVariant } from './HeaderBase.types';
 
 export const HeaderBase: React.FC<HeaderBaseProps> = ({
   children,
   style,
+  variant = HeaderBaseVariant.Compact,
   startAccessory,
   endAccessory,
   startButtonIconProps,
@@ -130,7 +133,7 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
       <Box twClassName="flex-1 items-center">
         {typeof children === 'string' ? (
           <Text
-            variant={TextVariant.HeadingSm}
+            variant={HEADERBASE_VARIANT_TEXT_VARIANTS[variant]}
             testID={titleTestID}
             style={tw.style('text-center')}
           >
