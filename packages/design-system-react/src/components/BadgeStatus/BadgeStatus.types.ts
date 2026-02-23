@@ -1,10 +1,9 @@
-// Import shared type for extension
 import type { BadgeStatusPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
 /**
  * BadgeStatus component props (React platform-specific)
- * Extends shared props with React-specific platform concerns
+ * Extends shared props from @metamask/design-system-shared with React-specific platform concerns
  */
 export type BadgeStatusProps = ComponentProps<'div'> &
   BadgeStatusPropsShared & {

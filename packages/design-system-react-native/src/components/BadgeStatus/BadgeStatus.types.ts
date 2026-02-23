@@ -1,10 +1,9 @@
-// Import shared type for extension
 import type { BadgeStatusPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
 /**
  * BadgeStatus component props (React Native platform-specific)
- * Extends shared props with React Native-specific platform concerns
+ * Extends shared props from @metamask/design-system-shared with React Native specific platform concerns
  */
 export type BadgeStatusProps = BadgeStatusPropsShared &
   Omit<ViewProps, 'children'> & {
