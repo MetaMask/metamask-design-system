@@ -105,6 +105,9 @@ export type { InputProps } from './Input';
 export { Label } from './Label';
 export type { LabelProps } from './Label';
 
+export { RadioButton } from './RadioButton';
+export type { RadioButtonProps } from './RadioButton';
+
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
 
