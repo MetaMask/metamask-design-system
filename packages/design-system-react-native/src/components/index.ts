@@ -49,14 +49,11 @@ export type {
   BadgeWrapperCustomPosition,
 } from './BadgeWrapper';
 
-export {
-  BottomSheetFooter,
-  ButtonsAlignment,
-} from './BottomSheets/BottomSheetFooter';
+export { BottomSheetFooter, ButtonsAlignment } from './BottomSheetFooter';
 export type {
   BottomSheetFooterProps,
   BottomSheetFooterButtonProps,
-} from './BottomSheets/BottomSheetFooter';
+} from './BottomSheetFooter';
 
 export { BottomSheetOverlay } from './BottomSheetOverlay';
 export type { BottomSheetOverlayProps } from './BottomSheetOverlay';
