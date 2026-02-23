@@ -16,11 +16,13 @@ const meta: Meta<BadgeStatusProps> = {
   argTypes: {
     size: {
       control: 'select',
-      options: BadgeStatusSize,
+      options: Object.keys(BadgeStatusSize),
+      mapping: BadgeStatusSize,
     },
     status: {
       control: 'select',
-      options: BadgeStatusStatus,
+      options: Object.keys(BadgeStatusStatus),
+      mapping: BadgeStatusStatus,
     },
     hasBorder: {
       control: 'boolean',
