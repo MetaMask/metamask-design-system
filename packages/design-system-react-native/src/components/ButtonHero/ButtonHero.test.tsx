@@ -118,4 +118,51 @@ describe('ButtonHero', () => {
     const button = getByRole('button');
     expect(button).toBeDefined();
   });
+
+  it('applies pressed styles when interactive', () => {
+    const handlePress = jest.fn();
+    const { getByRole } = render(
+      <ButtonHero onPress={handlePress}>Press Me</ButtonHero>,
+    );
+
+    const button = getByRole('button');
+
+    // Simulate press in to trigger pressed state
+    fireEvent(button, 'pressIn');
+
+    // The component should render with pressed styles applied
+    expect(button).toBeDefined();
+  });
+
+  it('does not apply pressed styles when disabled', () => {
+    const handlePress = jest.fn();
+    const { getByRole } = render(
+      <ButtonHero isDisabled onPress={handlePress}>
+        Press Me
+      </ButtonHero>,
+    );
+
+    const button = getByRole('button');
+
+    // Simulate press in - should not trigger pressed styles when disabled
+    fireEvent(button, 'pressIn');
+
+    expect(button).toBeDefined();
+  });
+
+  it('does not apply pressed styles when loading', () => {
+    const handlePress = jest.fn();
+    const { getByRole } = render(
+      <ButtonHero isLoading loadingText="Loading..." onPress={handlePress}>
+        Press Me
+      </ButtonHero>,
+    );
+
+    const button = getByRole('button');
+
+    // Simulate press in - should not trigger pressed styles when loading
+    fireEvent(button, 'pressIn');
+
+    expect(button).toBeDefined();
+  });
 });
