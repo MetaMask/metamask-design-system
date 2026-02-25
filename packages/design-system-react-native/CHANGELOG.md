@@ -9,11 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0]
 
-### Uncategorized
+### Added
 
-- refactor: migrate BadgeStatus to ADR-0003 and ADR-0004 patterns ([#912](https://github.com/MetaMask/metamask-design-system/pull/912))
-- refactor: move BottomSheetFooter out of BottomSheets folder ([#933](https://github.com/MetaMask/metamask-design-system/pull/933))
-- feat: RadioButton ([#926](https://github.com/MetaMask/metamask-design-system/pull/926))
+- Added `RadioButton` component for radio button form controls ([#926](https://github.com/MetaMask/metamask-design-system/pull/926))
+  - Supports checked, disabled, read-only, and danger states
+  - Full accessibility support with `role="radio"` and `accessibilityState`
+  - Optional label rendering for improved usability
+
+### Changed
+
+- **BREAKING:** Migrated `BadgeStatus` component from TypeScript enums to string union types with const objects ([#912](https://github.com/MetaMask/metamask-design-system/pull/912))
+  - `BadgeStatusStatus` and `BadgeStatusSize` enums replaced with const objects and derived string union types
+  - Types and constants now imported from `@metamask/design-system-shared` package (centralized architecture per ADR-0004)
+  - **Migration required** if importing types/enums from `@metamask/design-system-react-native`:
+    - ✅ **Recommended**: Import from shared package: `import { BadgeStatusStatus } from '@metamask/design-system-shared'`
+    - ⚠️ **Still works** but deprecated: Importing from component package will re-export from shared
+    - The const object values remain the same (e.g., `BadgeStatusStatus.Active` still works)
+    - String literals now work directly thanks to structural typing (e.g., `'active'` accepted where `BadgeStatusStatus.Active` is expected)
+  - This migration implements ADR-0003 (enum to string union migration) and ADR-0004 (centralized types architecture)
+- Refactored `BottomSheetFooter` component location for better organization ([#933](https://github.com/MetaMask/metamask-design-system/pull/933))
+  - Moved from `BottomSheets/BottomSheetFooter/` to `BottomSheetFooter/`
+  - Updated import paths and Storybook title
+  - No breaking changes - all imports from package entry point continue to work
 
 ## [0.7.0]
 

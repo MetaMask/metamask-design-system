@@ -9,9 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0]
 
-### Uncategorized
+### Added
 
-- refactor: migrate BadgeStatus to ADR-0003 and ADR-0004 patterns ([#912](https://github.com/MetaMask/metamask-design-system/pull/912))
+- Added centralized `BadgeStatus` types and constants ([#912](https://github.com/MetaMask/metamask-design-system/pull/912))
+  - `BadgeStatusStatus` const object with derived string union type for status variants (`active`, `inactive`, `warning`, `danger`, `success`)
+  - `BadgeStatusSize` const object with derived string union type for size variants (`sm`, `md`, `lg`)
+  - `BadgeStatusPropsShared` type interface for shared component props
+  - Implements ADR-0003 (enum to string union migration) and ADR-0004 (centralized types architecture)
+  - Enables structural typing - both const object values (`BadgeStatusStatus.Active`) and string literals (`'active'`) are now accepted
 
 ## [0.1.3]
 
