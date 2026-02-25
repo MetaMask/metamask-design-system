@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Const object values remain the same (e.g., `BadgeStatusStatus.Active` still works)
   - String literals now also accepted thanks to structural typing (e.g., `'active'` works where `BadgeStatusStatus.Active` is expected)
   - We are still evaluating best practices for const objects vs string literals - use whichever approach works best for your codebase
+  - This change implements [ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md) and [ADR-0004](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md)
 - Refactored `BottomSheetFooter` component location for better organization ([#933](https://github.com/MetaMask/metamask-design-system/pull/933))
   - Moved from `BottomSheets/BottomSheetFooter/` to `BottomSheetFooter/`
   - Updated import paths and Storybook title
