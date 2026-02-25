@@ -11,24 +11,24 @@ export const colors: ThemeColors = {
     section: brandColor.grey050,
     /** For subsection bg usually over background/section (#FFFFFF) */
     subsection: brandColor.grey000,
-    /** For muted neutral surface (#3c4d9d0f) */
-    muted: '#3c4d9d0f',
-    /** Hover state surface for background/default (#f6f6f7) */
-    defaultHover: '#f6f6f7',
-    /** Pressed state surface for background/default (#ebecef) */
-    defaultPressed: '#ebecef',
+    /** For muted neutral surface (#b4b4b528) */
+    muted: '#b4b4b528',
+    /** Hover state surface for background/default */
+    defaultHover: '#f3f3f4',
+    /** Pressed state surface for background/default */
+    defaultPressed: '#ededed',
     /** Hover state surface for background/alternative (#ebedf1) */
     alternativeHover: '#ebedf1',
     /** Pressed state surface for background/alternative (#e1e4ea) */
     alternativePressed: '#e1e4ea',
-    /** Hover state surface for background/muted (#3c4d9d1a) */
-    mutedHover: '#3c4d9d1a',
-    /** Pressed state surface for background/muted (#3c4d9d26) */
-    mutedPressed: '#3c4d9d26',
-    /** General purpose hover state tint (#858b9a14) */
-    hover: '#858b9a14',
-    /** General purpose pressed state tint (#858b9a29) */
-    pressed: '#858b9a29',
+    /** Hover state surface for background/muted (#b4b4b53d) */
+    mutedHover: '#b4b4b53d',
+    /** Pressed state surface for background/muted (#b4b4b552) */
+    mutedPressed: '#b4b4b552',
+    /** General purpose hover state tint (#b4b4b528) */
+    hover: '#b4b4b528',
+    /** General purpose pressed state tint (#b4b4b53d) */
+    pressed: '#b4b4b53d',
   },
   text: {
     /** Default color for text (#121314) */
@@ -53,16 +53,16 @@ export const colors: ThemeColors = {
     inverse: brandColor.grey000,
   },
   border: {
-    /** Default color for borders (#B7BBC8) */
-    default: brandColor.grey200,
-    /** Muted color for borders (#B7BBC866) */
-    muted: '#b7bbc866',
+    /** Default color for borders */
+    default: brandColor.grey400,
+    /** Muted color for borders (#b4b4b566) */
+    muted: '#b4b4b566',
   },
   overlay: {
-    /** Default color for overlays (scrim) (#3f434a66) */
-    default: '#3f434a66',
-    /** Dimmer color for overlays (scrim) (#000000CC) */
-    alternative: '#000000cc',
+    /** Default color for overlays (scrim) (#0a0d135c) */
+    default: '#0a0d135c',
+    /** Dimmer color for overlays (scrim) (#0a0d1392) */
+    alternative: '#0a0d1392',
     /** For elements placed on top of overlay/alternative (#FFFFFF) */
     inverse: brandColor.grey000,
   },
