@@ -14,30 +14,22 @@ Connect design system components to Figma for automatic code snippet display in 
 
 ```
 // ✅ Correct file structure
-src/components/
-├── Button/
-│   ├── Button.tsx
-│   ├── Button.figma.tsx        ← React Code Connect
-│   └── ...
-
-packages/design-system-react/src/components/Button/Button.figma.tsx
-packages/design-system-react-native/src/components/Button/Button.figma.tsx
+src/components/Button/
+├── Button.tsx
+├── Button.figma.tsx        ← Code Connect
+└── ...
 ```
 
 ### Required File Structure
 
-- **ALWAYS** include eslint disable comment for 'figma' import (first line)
-- **ALWAYS** include auto-generated comment documenting purpose
-- **ALWAYS** import actual component and enums
-- **ALWAYS** use figma.connect() with component, URL, props mapping, and example
+**ALWAYS** include (in order):
+
+1. ESLint disable comment (first line)
+2. Auto-generated comment documenting purpose
+3. Imports (actual component and enums)
+4. figma.connect() call
 
 ```tsx
-// ❌ Wrong - Missing eslint disable comment
-import figma from '@figma/code-connect';
-import React from 'react';
-import { Button } from './Button';
-
-// ✅ Correct - All required elements
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
 import React from 'react';
@@ -55,51 +47,40 @@ figma.connect(
   'https://www.figma.com/design/[fileKey]/...?node-id=[nodeId]',
   {
     props: {
-      // Property mappings
+      /* Property mappings */
     },
     example: (props) => <Button {...props} />,
   },
 );
 ```
 
-### Prop Mapping - Use Enums, Not Strings
-
-- **ALWAYS** import and use actual enum values in figma.enum mappings
-- **NEVER** use string literals in enum mappings
-- **ALWAYS** match Figma property names (left side) to enum values (right side)
+### Critical: Use Enums, Not Strings
 
 ```tsx
-// ❌ Wrong - Using string literals
+// ❌ Wrong - String literals
 props: {
   variant: figma.enum('variant', {
     Primary: 'primary', // String literal
-    Secondary: 'secondary', // String literal
   });
 }
 
-// ✅ Correct - Using imported enums
+// ✅ Correct - Import and use enum values
 import { ButtonVariant } from '.';
 
 props: {
   variant: figma.enum('variant', {
     Primary: ButtonVariant.Primary,
-    Secondary: ButtonVariant.Secondary,
-    Tertiary: ButtonVariant.Tertiary,
   });
 }
 ```
 
-### Realistic Example Props
-
-- **ALWAYS** provide realistic, meaningful prop values in examples
-- **ALWAYS** include all required props
-- **NEVER** use placeholder values like "example", "test", or "foo"
+### Critical: Realistic Example Props
 
 ```tsx
 // ❌ Wrong - Placeholder values
 example: (props) => <AvatarAccount address="0x123" {...props} />;
 
-// ✅ Correct - Realistic address
+// ✅ Correct - Realistic values
 example: (props) => (
   <AvatarAccount
     address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
@@ -108,113 +89,34 @@ example: (props) => (
 );
 ```
 
-### Platform Consistency
+## Prop Mapping API Reference
 
-- **ALWAYS** create Code Connect files for BOTH platforms when adding/updating components
-- **ALWAYS** use similar examples across platforms
-- **ALWAYS** use platform-specific package imports
-
-```tsx
-// ✅ React Web
-import { Button } from './Button';
-import { ButtonVariant, ButtonSize } from '.';
-// Package: @metamask/design-system-react
-
-// ✅ React Native
-import { Button } from './Button';
-import { ButtonVariant, ButtonSize } from '.';
-// Package: @metamask/design-system-react-native
-```
-
-## Prop Mapping API
-
-### Enum Mapping (Most Common)
-
-Map Figma variants to TypeScript enum values:
+### Common Patterns
 
 ```tsx
 props: {
+  // Enum mapping (most common)
   variant: figma.enum('variant', {
     Primary: ButtonVariant.Primary,
     Secondary: ButtonVariant.Secondary,
-    Tertiary: ButtonVariant.Tertiary,
   }),
-  size: figma.enum('size', {
-    Sm: ButtonSize.Sm,
-    Md: ButtonSize.Md,
-    Lg: ButtonSize.Lg,
-  }),
-}
-```
 
-### Boolean Mapping
-
-Simple boolean properties:
-
-```tsx
-props: {
+  // Boolean mapping
   isDisabled: figma.boolean('isDisabled'),
-  isFullWidth: figma.boolean('isFullWidth'),
-  isLoading: figma.boolean('isLoading'),
-}
-```
 
-### String Mapping
-
-Text content properties:
-
-```tsx
-props: {
+  // String mapping
   label: figma.string('label'),
-  loadingText: figma.string('loadingText'),
-}
-```
 
-### Boolean with Values
-
-Conditional prop values based on boolean:
-
-```tsx
-props: {
+  // Boolean with conditional values
   startIconName: figma.boolean('startIcon (Figma Only)', {
     true: IconName.Add,
     false: undefined,
   }),
-}
-```
 
-### Nested Props
-
-Map properties from nested Figma components:
-
-```tsx
-props: {
+  // Nested props (for Figma component structures)
   buttonBase: figma.nestedProps('ButtonBase', {
-    size: figma.enum('size', {
-      Sm: ButtonSize.Sm,
-      Md: ButtonSize.Md,
-      Lg: ButtonSize.Lg,
-    }),
+    size: figma.enum('size', { Sm: ButtonSize.Sm }),
     label: figma.string('label'),
-    startIconName: figma.boolean('startIcon (Figma Only)', {
-      true: IconName.Add,
-      false: undefined,
-    }),
-  }),
-}
-```
-
-### Conditional Nested Props
-
-Nested props with conditional values:
-
-```tsx
-props: {
-  loadingText: figma.nestedProps('_Loading Label', {
-    text: figma.boolean('show loadingText', {
-      true: figma.string('loadingText'),
-      false: undefined,
-    }),
   }),
 }
 ```
@@ -242,23 +144,17 @@ For components with nested props or multiple variants:
 example: ({
   variant,
   buttonBase,
-  isFullWidth,
-  isLoading,
   isDisabled,
-  isDanger,
-  isInverse,
+  isLoading,
   loadingText,
   ...props
 }) => (
   <Button
     variant={variant}
     size={buttonBase.size}
-    isFullWidth={isFullWidth}
+    isDisabled={isDisabled}
     isLoading={isLoading}
     loadingText={loadingText.text}
-    isDisabled={isDisabled}
-    isDanger={isDanger}
-    isInverse={isInverse}
     startIconName={buttonBase.startIconName}
     endIconName={buttonBase.endIconName}
     {...props}
@@ -270,23 +166,20 @@ example: ({
 
 ### Stateful Example (React Hooks)
 
-For interactive components that need state:
+For interactive components needing state:
 
 ```tsx
 import { useState } from 'react';
 
-example: ({ isDisabled, isInvalid, label, ...props }) => {
+example: ({ isDisabled, label, ...props }) => {
   const [isSelected, setIsSelected] = useState(false);
   return (
     <Checkbox
       id="checkbox-example"
       isSelected={isSelected}
       isDisabled={isDisabled}
-      isInvalid={isInvalid}
       label={label.text}
-      onChange={(prevState) => {
-        setIsSelected(!prevState);
-      }}
+      onChange={(prevState) => setIsSelected(!prevState)}
       {...props}
     />
   );
@@ -297,22 +190,17 @@ example: ({ isDisabled, isInvalid, label, ...props }) => {
 
 ### Adding Code Connect to New Component
 
-After creating a new component, add Code Connect:
-
 ```bash
-# 1. Run interactive setup for the platform
-yarn figma:connect:react              # For React Web
-yarn figma:connect:react-native       # For React Native
+# 1. Run interactive setup
+yarn figma:connect:react              # React Web
+yarn figma:connect:react-native       # React Native
 
-# 2. Follow interactive wizard to:
-#    - Select/search for your component in Figma
-#    - Connect to the Figma node
-#    - Generate .figma.tsx file
+# 2. Follow wizard to select/search component in Figma
 
 # 3. Review generated file and update:
 #    - Replace string literals with enum values
 #    - Add realistic example props
-#    - Ensure all required props are included
+#    - Ensure all required props included
 
 # 4. Validate before publishing
 yarn figma:connect:publish:dry-run
@@ -323,15 +211,11 @@ yarn figma:connect:publish
 
 ### Updating Existing Code Connect
 
-When component props change:
-
 ```bash
-# 1. Update .figma.tsx file manually with new props/mappings
+# 1. Update .figma.tsx file manually
 
-# 2. Validate changes
+# 2. Validate and republish
 yarn figma:connect:publish:dry-run
-
-# 3. Republish
 yarn figma:connect:publish
 ```
 
@@ -339,29 +223,28 @@ yarn figma:connect:publish
 
 After successful publishing:
 
-- **Platform Dropdown**: Shows "React" and "React Native" options
-- **Correct Imports**: Displays platform-specific package imports
-- **Code Examples**: Shows component usage with realistic props and enum values
+- Platform dropdown shows "React" and "React Native"
+- Correct imports displayed (platform-specific packages)
+- Code examples show realistic props and enum values
 
 ## Commands
 
 ```bash
-# Interactive setup (add/update components)
-yarn figma:connect:react              # React interactive wizard
-yarn figma:connect:react-native       # React Native interactive wizard
+# Interactive setup
+yarn figma:connect:react              # React wizard
+yarn figma:connect:react-native       # React Native wizard
 
-# Publishing (automated)
-yarn figma:connect:publish            # Publish all (React + React Native)
-yarn figma:connect:publish:dry-run    # Validate all before publishing
+# Publishing
+yarn figma:connect:publish            # Publish all
+yarn figma:connect:publish:dry-run    # Validate all
 yarn figma:connect:unpublish          # Unpublish all
 
-# Platform-specific publishing
+# Platform-specific
 yarn figma:connect:publish:react                  # Publish React only
 yarn figma:connect:publish:react-native           # Publish React Native only
-yarn figma:connect:publish:react:dry-run          # Validate React only
-yarn figma:connect:publish:react-native:dry-run   # Validate React Native only
+yarn figma:connect:publish:react:dry-run          # Validate React
+yarn figma:connect:publish:react-native:dry-run   # Validate React Native
 
-# Platform-specific unpublishing
 yarn figma:connect:unpublish:react           # Unpublish React
 yarn figma:connect:unpublish:react-native    # Unpublish React Native
 ```
@@ -375,7 +258,7 @@ yarn figma:connect:unpublish:react-native    # Unpublish React Native
 - **Stateful component**: @packages/design-system-react/src/components/Checkbox/Checkbox.figma.tsx
 - **React Native example**: @packages/design-system-react-native/src/components/Button/Button.figma.tsx
 
-These examples show:
+These show:
 
 - Proper eslint disable comment
 - Auto-generated comment
@@ -386,8 +269,8 @@ These examples show:
 
 **Configuration files:**
 
-- @packages/design-system-react/figma.config.json (React Web config)
-- @packages/design-system-react-native/figma.config.json (React Native config)
+- @packages/design-system-react/figma.config.json (React Web)
+- @packages/design-system-react-native/figma.config.json (React Native)
 
 ## Build and Test Configuration
 
@@ -398,9 +281,9 @@ Code Connect files are automatically excluded from builds and tests:
 
 No additional configuration needed when adding new `.figma.tsx` files.
 
-## Verification
+## Verification Checklist
 
-After creating or updating Code Connect files, verify:
+After creating/updating Code Connect files:
 
 - [ ] `.figma.tsx` file colocated with component
 - [ ] Eslint disable comment present (first line)

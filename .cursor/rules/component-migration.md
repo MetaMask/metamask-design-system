@@ -36,71 +36,33 @@ Use this workflow when:
 
 ### Phase 1: Audit
 
-#### Step 1: Locate Component in Extension
+**For both Extension and Mobile component-library:**
 
-**Extension component-library location:**
-https://github.com/MetaMask/metamask-extension/tree/main/ui/components/component-library
+1. **Locate component** and document:
 
-```bash
-# Find the component
-# Example: ButtonPrimary
-# Location: ui/components/component-library/button-primary/
-```
+   - Component name and location
+   - File structure (index.tsx, types.ts, etc.)
+   - Current prop API with TypeScript types
+   - Dependencies and Storybook stories (if any)
 
-**Document:**
+2. **Create comparison table:**
 
-- Component name and location
-- File structure (index.tsx, types.ts, etc.)
-- Current prop API
-- TypeScript types used
-- Dependencies
-- Storybook stories
+| Concern        | Extension API | Mobile API   | Decision                  |
+| -------------- | ------------- | ------------ | ------------------------- |
+| Prop names     | Document      | Document     | Choose unified            |
+| Types          | Document      | Document     | Align or unify            |
+| Event handlers | `onClick`     | `onPress`    | Keep both (platform)      |
+| Styling        | `className`   | style object | Use className/twClassName |
 
-#### Step 2: Locate Component in Mobile
-
-**Mobile component-library location:**
-https://github.com/MetaMask/metamask-mobile/tree/main/app/component-library
-
-```bash
-# Find the component
-# Example: ButtonPrimary
-# Location: app/component-library/components/Buttons/ButtonPrimary/
-```
-
-**Document:**
-
-- Component name and location
-- File structure
-- Current prop API
-- TypeScript types used
-- Dependencies
-- Storybook stories (if any)
-
-#### Step 3: Compare APIs
-
-Create comparison table:
-
-| Concern        | Extension API        | Mobile API             | Decision                  |
-| -------------- | -------------------- | ---------------------- | ------------------------- |
-| Prop: variant  | `variant?: string`   | `type?: ButtonType`    | Use `variant`             |
-| Prop: size     | `size?: Size`        | Not present            | Add to both               |
-| Prop: disabled | `disabled?: boolean` | `isDisabled?: boolean` | Use `isDisabled`          |
-| Prop: onPress  | `onClick`            | `onPress`              | Keep both (platform)      |
-| Styling        | className            | style object           | Use className/twClassName |
-
-**Key questions to answer:**
-
-1. Which props are truly cross-platform? (status, variant, size, isDisabled)
-2. Which props are platform-specific? (onClick/onPress, className/twClassName)
-3. Are there naming conflicts? (disabled vs isDisabled)
-4. Are there behavioral differences? (document in comments)
-5. What's the unified API that serves both platforms?
+3. **Answer key questions:**
+   - Which props are cross-platform? (variant, size, isDisabled)
+   - Which props are platform-specific? (onClick/onPress, className/twClassName)
+   - Are there naming conflicts? (disabled vs isDisabled)
+   - What's the unified API that serves both platforms?
 
 ### Phase 2: API Alignment
 
-#### Step 1: Design Unified API
-
-Based on audit, design the shared API using @.cursor/rules/component-architecture.md decision tree.
+**Design unified API using @.cursor/rules/component-architecture.md decision tree.**
 
 **Reference the golden path:** See how BadgeStatus implements the layered architecture:
 
@@ -108,107 +70,78 @@ Based on audit, design the shared API using @.cursor/rules/component-architectur
 - @packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts (React extension)
 - @packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts (React Native extension)
 
-**Pattern structure:**
+**Shared package pattern:**
 
-**Shared package** (design system concerns only):
-
-- Const objects with derived union types (variant, size, status)
+- Const objects with derived union types (ADR-0003)
 - Shared props type with "Shared" suffix
 - Platform-independent properties only
 - Use `type` not `interface`
 
-**Platform packages** (platform-specific extensions):
+**Platform packages pattern:**
 
 - Re-export all shared types
 - Extend with `ComponentProps<'element'>` (React) or `ViewProps`/`PressableProps` (React Native)
 - Add `className?: string` (React) or `twClassName?: string` (React Native)
-- Event handlers come from base types (onClick/onPress)
+- Event handlers from base types (onClick/onPress)
 
-#### Step 2: Document Decisions
-
-Create alignment decisions document:
+**Document alignment decisions:**
 
 ```markdown
-## Button Migration Decisions
+## Migration Decisions
 
 ### Prop Naming
 
-- ✅ Use `isDisabled` (not `disabled`) - aligns with boolean prop conventions
-- ✅ Use `variant` (not `type`) - more semantic for visual variants
-- ✅ Use `children` for label - standard React pattern
+- ✅ Use `isDisabled` (not `disabled`) - boolean prop conventions
+- ✅ Use `variant` (not `type`) - semantic visual variants
+- ✅ Use `children` for label - standard React
 
 ### Platform Differences
 
-- React: onClick from ComponentProps<'button'>
-- React Native: onPress from PressableProps
-- Styling: className (React) vs twClassName (React Native)
-
-### New Features
-
-- Added `isLoading` state (not in extension/mobile)
-- Added `loadingText` for accessible loading state
-- Unified icon props: `startIconName` and `endIconName`
+- React: onClick from ComponentProps, className
+- React Native: onPress from PressableProps, twClassName
 
 ### Behavioral Alignment
 
-- Both platforms now support danger variant
-- Both platforms support disabled state
-- Loading state prevents interaction on both platforms
+- Document what both platforms will support identically
 ```
 
 ### Phase 3: Creation
 
-Use @.cursor/rules/component-creation.md to scaffold the component:
+Use @.cursor/rules/component-creation.md to scaffold:
 
 ```bash
 # Create component scaffolding for BOTH platforms
-yarn create-component:react --name Button --description "Interactive button component"
-yarn create-component:react-native --name Button --description "Interactive button component"
+yarn create-component:react --name ComponentName --description "Brief description"
+yarn create-component:react-native --name ComponentName --description "Brief description"
 ```
 
-**Then immediately apply ADR patterns:**
+**Then immediately:**
 
-1. **Create shared types** in `packages/design-system-shared/src/types/Button/`
-2. **Update platform type files** to re-export and extend shared types
-3. **Follow** @.cursor/rules/component-architecture.md for all type patterns
+1. Create shared types in `packages/design-system-shared/src/types/ComponentName/`
+2. Update platform type files to re-export and extend shared types
+3. Follow @.cursor/rules/component-architecture.md for all type patterns
 
 ### Phase 4: Implementation
 
-#### Step 1: Port Extension Logic
+**Use monorepo patterns from @.cursor/rules/component-creation.md:**
 
-Adapt extension component to use monorepo patterns:
+**Key adaptations for both platforms:**
 
-**Key adaptations:**
+- ✅ Replace raw elements (div/View/span/Text) with Box/Text primitives
+- ✅ Use design token enums (BoxBackgroundColor, TextVariant, etc.)
+- ✅ Follow component-first approach (Box props over className)
+- ✅ Use twClassName for React Native (not StyleSheet.create)
 
-- Replace raw HTML elements (div/span) with Box/Text primitives
-- Use design token enums (see @.cursor/rules/styling.md)
-- Follow component-first approach (Box props over className)
+**Styling reference:** @.cursor/rules/styling.md
 
-**Example patterns:** See complete implementations at:
+**Complete implementation examples:**
 
 - @apps/storybook-react/stories/WalletHome.stories.tsx (React Web)
-- @.cursor/rules/styling.md (Styling patterns and rules)
-
-#### Step 2: Port Mobile Logic
-
-Adapt mobile component to use monorepo patterns:
-
-**Key adaptations:**
-
-- Replace raw React Native elements (View/Text) with Box/Text primitives
-- Use design token enums
-- Use twClassName for unsupported props (not StyleSheet.create)
-
-**Example patterns:** See complete implementations at:
-
 - @apps/storybook-react-native/stories/WalletHome.stories.tsx (React Native)
-- @.cursor/rules/styling.md (Styling patterns and rules)
 
-#### Step 3: Ensure Cross-Platform Consistency
+**Verify cross-platform consistency:**
 
-Verify both implementations:
-
-- ✅ Use same shared types (`ButtonPropsShared`)
+- ✅ Same shared types (`ComponentPropsShared`)
 - ✅ Same variant/size/state behavior
 - ✅ Same design tokens applied
 - ✅ Same visual appearance (within platform constraints)
@@ -218,76 +151,51 @@ Verify both implementations:
 
 Follow @.cursor/rules/component-documentation.md:
 
-#### Step 1: Create Storybook Stories
-
 **Both platforms need:**
 
-1. Default story with all controls
-2. Story per major prop (Variant, Size, IsDisabled, IsLoading)
-3. Complex usage examples
+1. Default story with all controls wired up
+2. Story per major prop (Variant, Size, IsDisabled)
+3. Tests (props render, variants apply, interactive states work)
+4. Figma Code Connect (if applicable) - see @.cursor/rules/figma-integration.md
 
-**React** - Interactive Canvas blocks in README.mdx
-**React Native** - Comprehensive code examples in README.md
+**React:** README.mdx with Canvas blocks
+**React Native:** README.md with code examples
 
-#### Step 2: Write Tests
+## Migration Scenarios
 
-Create tests for both platforms:
-
-- Props render correctly
-- Variants apply correct styling
-- Interactive states work (disabled, loading)
-- Accessibility requirements met
-
-#### Step 3: Add Figma Code Connect (if applicable)
-
-Follow @.cursor/rules/figma-integration.md to link to Figma designs.
-
-## Common Migration Scenarios
-
-### Scenario 1: Component in Extension Only
-
-If component doesn't exist in mobile:
+### Component in Extension Only
 
 1. Audit extension component
 2. Design cross-platform API (think ahead for mobile use cases)
-3. Create shared types
-4. Implement React version from extension
-5. Implement React Native version (adapt for mobile patterns)
-6. Document both platforms
+3. Follow creation workflow for both platforms
+4. Implement React from extension
+5. Implement React Native (adapt for mobile patterns)
 
-### Scenario 2: Component in Mobile Only
-
-If component doesn't exist in extension:
+### Component in Mobile Only
 
 1. Audit mobile component
 2. Design cross-platform API (think ahead for web use cases)
-3. Create shared types
-4. Implement React Native version from mobile
-5. Implement React version (adapt for web patterns)
-6. Document both platforms
+3. Follow creation workflow for both platforms
+4. Implement React Native from mobile
+5. Implement React (adapt for web patterns)
 
-### Scenario 3: Different Names in Extension/Mobile
-
-Example: `ButtonPrimary` (extension) vs `Button` (mobile)
+### Different Names (e.g., ButtonPrimary vs Button)
 
 1. Choose unified name (usually simpler: `Button`)
 2. Use `variant` prop to represent differences (`variant="primary"`)
 3. Migrate both to unified API
-4. Update consumer codebases to use new unified component
+4. Update consumer codebases
 
-### Scenario 4: Significantly Different APIs
-
-If extension and mobile have very different APIs:
+### Significantly Different APIs
 
 1. Document both APIs thoroughly
-2. Identify which API better fits design system
-3. Design new unified API that serves both platforms
-4. May require breaking changes - document migration path
-5. Plan consumer codebase updates
+2. Identify which better fits design system
+3. Design new unified API serving both platforms
+4. Plan breaking changes and consumer updates
 
-## Anti-Patterns to Avoid
+## Anti-Patterns
 
-### ❌ Copying Extension Code Directly
+### ❌ Copying Code Directly Without Transformation
 
 ```tsx
 // ❌ Wrong - Direct copy from extension
@@ -296,52 +204,76 @@ export const Button = ({ className, children }) => (
     <span>{children}</span>
   </div>
 );
+
+// ✅ Correct - Use Box/Text primitives + design tokens
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, ...props }, ref) => (
+    <Box
+      ref={ref}
+      as="button"
+      backgroundColor={BoxBackgroundColor.BackgroundDefault}
+      {...props}
+    >
+      <Text variant={TextVariant.BodyMd}>{children}</Text>
+    </Box>
+  ),
+);
 ```
 
-**Why wrong:** Doesn't use monorepo patterns (Box/Text, design tokens)
-
-### ❌ Copying Mobile StyleSheet Directly
+### ❌ Hardcoded Values Instead of Design Tokens
 
 ```tsx
-// ❌ Wrong - Direct copy from mobile
+// ❌ Wrong - Hardcoded from mobile
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#037DD6',
     padding: 16,
   },
 });
+
+// ✅ Correct - Design token enums
+<Box
+  backgroundColor={BoxBackgroundColor.PrimaryDefault}
+  p={4}
+>
 ```
 
-**Why wrong:** Hardcoded values instead of design tokens
-
-### ❌ Platform-Specific Props in Shared
+### ❌ Platform-Specific Props in Shared Package
 
 ```tsx
-// ❌ Wrong - className in shared package
+// ❌ Wrong - className in shared (violates ADR-0004)
 export type ButtonPropsShared = {
   variant?: ButtonVariant;
   className?: string; // Platform-specific!
 };
-```
 
-**Why wrong:** Violates layered architecture
+// ✅ Correct - className only in platform package
+export type ButtonPropsShared = {
+  variant?: ButtonVariant;
+};
+
+export type ButtonProps = ComponentProps<'button'> &
+  ButtonPropsShared & {
+    className?: string; // Platform layer
+  };
+```
 
 ### ❌ Not Auditing Mobile Version
 
-**Why wrong:** May miss important mobile-specific requirements or APIs
+Always audit BOTH platforms to avoid missing mobile-specific requirements or APIs.
 
 ### ❌ Not Aligning APIs
 
 ```tsx
-// ❌ Wrong - Different prop names across platforms
+// ❌ Wrong - Different prop names break consistency
 // React
 export type ButtonProps = { disabled?: boolean };
-
 // React Native
 export type ButtonProps = { isDisabled?: boolean };
-```
 
-**Why wrong:** Breaks cross-platform consistency
+// ✅ Correct - Same shared props
+export type ButtonPropsShared = { isDisabled?: boolean };
+```
 
 ## Verification Checklist
 
@@ -363,7 +295,7 @@ export type ButtonProps = { isDisabled?: boolean };
 
 ### Implementation
 
-- [ ] Used `@.cursor/rules/component-creation.md` to scaffold
+- [ ] Used @.cursor/rules/component-creation.md to scaffold
 - [ ] Created shared types in `@metamask/design-system-shared`
 - [ ] Platform packages re-export and extend shared types
 - [ ] React implementation uses Box/Text primitives
@@ -385,36 +317,6 @@ export type ButtonProps = { isDisabled?: boolean };
 - [ ] Tests pass: `yarn test`
 - [ ] Lint passes: `yarn lint`
 - [ ] Storybook builds: `yarn build-storybook`
-
-## Example Migration: ButtonPrimary → Button
-
-**Audit findings:**
-
-- Extension: ButtonPrimary component with className prop
-- Mobile: Button component with type="primary" prop
-- Decision: Unify as Button with variant="primary"
-
-**API alignment pattern (see BadgeStatus for real implementation):**
-
-**Shared types** (@metamask/design-system-shared):
-
-- Const objects: `ButtonVariant`, `ButtonSize`
-- Shared props: `ButtonPropsShared` (with "Shared" suffix)
-- Platform-independent properties only
-
-**Platform extensions:**
-
-- React: Re-exports + `ComponentProps<'button'>` + `className?: string`
-- React Native: Re-exports + `PressableProps` + `twClassName?: string`
-
-See complete golden path: @packages/design-system-shared/src/types/BadgeStatus/
-
-**Implementation:**
-
-- Ported extension button styling to Box props
-- Ported mobile pressable behavior to React Native Button
-- Both use same design tokens
-- Both support same variants
 
 ## References
 

@@ -33,9 +33,17 @@ Before using this guide, understand:
 - @.cursor/rules/component-architecture.md - ADR-0003/0004 patterns, layered architecture
 - @.cursor/rules/styling.md - Box/Text primitives, design tokens
 
+## Quick Reference
+
+**Golden Path:** BadgeStatus is THE proof-of-concept. Always reference:
+
+- @packages/design-system-shared/src/types/BadgeStatus/ (Shared types - SOURCE OF TRUTH)
+- @packages/design-system-react/src/components/BadgeStatus/ (React implementation)
+- @packages/design-system-react-native/src/components/BadgeStatus/ (React Native implementation)
+
 ## Step-by-Step Creation Process
 
-### Step 1: Scaffold with create-component Scripts
+### Step 1: Scaffold with Scripts
 
 **ALWAYS use scripts** - never manually create files:
 
@@ -45,250 +53,79 @@ yarn create-component:react --name MyComponent --description "Brief description"
 yarn create-component:react-native --name MyComponent --description "Brief description"
 ```
 
-**What this generates:**
-
-- Component directory structure
-- Basic component file with template
-- Types file with template types
-- Test file
-- Index file for exports
-
-⚠️ **IMPORTANT:** Generated templates DO NOT include ADR-0003/0004 patterns - you MUST transform them.
-
-**Template locations (scaffolding only - NOT ADR-compliant):**
-
-- React: @packages/design-system-react/scripts/create-component/ComponentName/
-- React Native: @packages/design-system-react-native/scripts/create-component/ComponentName/
-
-Templates provide basic structure only. You must:
+⚠️ **CRITICAL:** Generated templates are NOT ADR-compliant. You MUST transform them:
 
 1. Create shared types in @metamask/design-system-shared
-2. Replace template types with shared type imports + platform extensions
+2. Replace template types with shared imports + platform extensions
 3. Replace raw elements (div/View) with Box/Text primitives
 4. Apply design token enums
 
 ### Step 2: Create Shared Types
 
-Apply @.cursor/rules/component-architecture.md patterns.
-
-**Golden Path Example:** See BadgeStatus for the complete implementation:
-
-- @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts
+Follow @.cursor/rules/component-architecture.md ADR-0003/0004 patterns:
 
 ```bash
-# Create types directory in shared package
 mkdir -p packages/design-system-shared/src/types/MyComponent
 ```
 
-**Pattern to follow (see BadgeStatus for real implementation):**
+**Pattern checklist:**
 
-- ✅ Use `const` with `as const` for variant/size enums (ADR-0003)
-- ✅ Derive type using `typeof` and `keyof`
+- ✅ Create in `packages/design-system-shared/src/types/ComponentName/`
+- ✅ Use const objects (ADR-0003): `export const MyComponentVariant = { Primary: 'primary' } as const;`
+- ✅ Derive types: `export type MyComponentVariant = (typeof MyComponentVariant)[keyof typeof MyComponentVariant];`
 - ✅ Use `type` not `interface` for props (ESLint rule)
-- ✅ Add "Shared" suffix to props type (`ComponentNamePropsShared`)
-- ✅ Use @.cursor/rules/component-architecture.md decision tree for what goes in shared
+- ✅ Add "Shared" suffix: `ComponentNamePropsShared`
 - ✅ Platform-independent properties only (no className/twClassName, no onClick/onPress)
+- ✅ Export from `packages/design-system-shared/src/index.ts` with inline `type` keyword
 
-Example structure (adapt based on your component's needs):
+**Reference:** See @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts for complete implementation.
 
-```tsx
-// Const objects with derived types
-export const MyComponentVariant = { Primary: 'primary', ... } as const;
-export type MyComponentVariant = (typeof MyComponentVariant)[keyof typeof MyComponentVariant];
+### Steps 3-4: Update Platform Types
 
-// Shared props type
-export type MyComponentPropsShared = {
-  variant?: MyComponentVariant;
-  // ... other shared props
-};
-```
-
-**Always reference the BadgeStatus implementation for complete, real-world patterns.**
+**Both platforms follow same pattern:**
 
 ```tsx
-// packages/design-system-shared/src/types/MyComponent/index.ts
-export {
-  MyComponentVariant,
-  MyComponentSize,
-  type MyComponentPropsShared,
-} from './MyComponent.types';
-
-// packages/design-system-shared/src/index.ts
-// MyComponent types (ADR-0003 + ADR-0004)
-export {
-  MyComponentVariant,
-  MyComponentSize,
-  type MyComponentPropsShared,
-} from './types/MyComponent';
-```
-
-### Step 3: Update React Package Types
-
-Replace generated template types with shared type imports and platform extension:
-
-```tsx
-// packages/design-system-react/src/components/MyComponent/MyComponent.types.ts
-
 // Import shared type for extension
 import type { MyComponentPropsShared } from '@metamask/design-system-shared';
-import type { ComponentProps } from 'react';
 
 // Re-export shared types (ADR-0004)
 export {
   MyComponentVariant,
-  MyComponentSize,
   type MyComponentPropsShared,
 } from '@metamask/design-system-shared';
 
-/**
- * MyComponent props (React platform-specific)
- * Extends shared props with React-specific platform concerns
- */
-export type MyComponentProps = ComponentProps<'div'> & // or 'button', 'label', etc.
-  MyComponentPropsShared & {
-    /**
-     * Optional CSS classes (Tailwind CSS)
-     */
-    className?: string;
-    /**
-     * Optional inline styles
-     * Should be used sparingly
-     */
-    style?: React.CSSProperties;
-    // onClick comes from ComponentProps<'div'> if needed
-  };
+// Extend with platform-specific props
+export type MyComponentProps = MyComponentPropsShared & ...platform extension
 ```
 
-**Key points:**
+**React-specific:**
 
-- ✅ Import shared type for local extension
-- ✅ Re-export all shared types for consumers
-- ✅ Extend appropriate `ComponentProps<'element'>`
-- ✅ Add `className?: string` (React-specific)
-- ✅ Import ordering: shared before react
+- Extend `ComponentProps<'element'>`
+- Add `className?: string`
+- Add `style?: React.CSSProperties`
 
-### Step 4: Update React Native Package Types
+**React Native-specific:**
 
-Same pattern as React, with React Native-specific extensions:
+- Extend `ViewProps` or `PressableProps`
+- Add `twClassName?: string`
 
-```tsx
-// packages/design-system-react-native/src/components/MyComponent/MyComponent.types.ts
+**Reference:** See BadgeStatus types in both packages for complete implementation.
 
-// Import shared type for extension
-import type { MyComponentPropsShared } from '@metamask/design-system-shared';
-import type { ViewProps } from 'react-native';
-// or: import type { PressableProps } from 'react-native'; for interactive
+### Steps 5-6: Implement Components
 
-// Re-export shared types (ADR-0004)
-export {
-  MyComponentVariant,
-  MyComponentSize,
-  type MyComponentPropsShared,
-} from '@metamask/design-system-shared';
+**Both platforms:**
 
-/**
- * MyComponent props (React Native platform-specific)
- * Extends shared props with React Native-specific platform concerns
- */
-export type MyComponentProps = MyComponentPropsShared &
-  Omit<ViewProps, 'children'> & {
-    // or PressableProps for interactive
-    /**
-     * Optional TWRNC classes
-     */
-    twClassName?: string;
-    // onPress comes from PressableProps if needed
-  };
-```
-
-**Key points:**
-
-- ✅ Import shared type for local extension
-- ✅ Re-export all shared types for consumers
-- ✅ Extend `ViewProps` (or `PressableProps` for interactive)
-- ✅ Add `twClassName?: string` (React Native-specific)
-- ✅ Import ordering: shared before react-native
-
-### Step 5: Implement Component (React)
-
-Replace template div with Box primitive and apply design tokens:
-
-```tsx
-// packages/design-system-react/src/components/MyComponent/MyComponent.tsx
-
-import { forwardRef } from 'react';
-import { Box, BoxBackgroundColor, BoxBorderRadius } from '../Box';
-import { Text, TextVariant } from '../Text';
-import type { MyComponentProps } from './MyComponent.types';
-import { MyComponentVariant } from './MyComponent.types';
-
-/**
- * MyComponent description
- */
-export const MyComponent = forwardRef<HTMLDivElement, MyComponentProps>(
-  (
-    {
-      variant = MyComponentVariant.Primary,
-      size,
-      isDisabled = false,
-      children,
-      ...props
-    },
-    ref,
-  ) => (
-    <Box
-      ref={ref}
-      as="div" // or "button", "label", etc.
-      backgroundColor={BoxBackgroundColor.BackgroundDefault}
-      borderRadius={BoxBorderRadius.Md}
-      {...props}
-    >
-      <Text variant={TextVariant.BodyMd}>{children}</Text>
-    </Box>
-  ),
-);
-
-MyComponent.displayName = 'MyComponent';
-```
-
-**Key points:**
-
-- ✅ Use Box primitive (not raw div from template)
-- ✅ Use Text component (not raw span)
-- ✅ Use design token enums (BoxBackgroundColor, BoxBorderRadius)
+- ✅ Replace template div/View with Box primitive
+- ✅ Use Text component (not raw span/Text)
+- ✅ Use design token enums (BoxBackgroundColor, BoxBorderRadius, TextVariant)
 - ✅ Forward refs using `forwardRef`
-- ✅ Set displayName for debugging
+- ✅ Set displayName: `MyComponent.displayName = 'MyComponent';`
 
-### Step 6: Implement Component (React Native)
-
-Same pattern as React, with React Native primitives:
+**Pattern:**
 
 ```tsx
-// packages/design-system-react-native/src/components/MyComponent/MyComponent.tsx
-
-import React, { forwardRef } from 'react';
-import { Box, BoxBackgroundColor, BoxBorderRadius } from '../Box';
-import { Text, TextVariant } from '../Text';
-import type { MyComponentProps } from './MyComponent.types';
-import { MyComponentVariant } from './MyComponent.types';
-
-/**
- * MyComponent description
- */
-export const MyComponent = forwardRef<
-  React.ElementRef<typeof Box>,
-  MyComponentProps
->(
-  (
-    {
-      variant = MyComponentVariant.Primary,
-      size,
-      isDisabled = false,
-      children,
-      ...props
-    },
-    ref,
-  ) => (
+export const MyComponent = forwardRef<RefType, MyComponentProps>(
+  ({ variant, children, ...props }, ref) => (
     <Box
       ref={ref}
       backgroundColor={BoxBackgroundColor.BackgroundDefault}
@@ -303,148 +140,67 @@ export const MyComponent = forwardRef<
 MyComponent.displayName = 'MyComponent';
 ```
 
-**Key points:**
-
-- ✅ Use Box primitive (not raw View from template)
-- ✅ Use Text component (not raw Text from react-native)
-- ✅ Use design token enums
-- ✅ Forward refs using `forwardRef`
-- ✅ Set displayName for debugging
+**Reference:** See @packages/design-system-react/src/components/BadgeStatus/BadgeStatus.tsx
 
 ### Step 7: Create Storybook Stories
 
-Follow @.cursor/rules/component-documentation.md patterns:
+Follow @.cursor/rules/component-documentation.md:
 
-**Both platforms need:**
-
-1. Default story with all controls wired up
-2. Story per major prop (Variant, Size, IsDisabled)
-3. Meta with proper argTypes
-
-**React** - Stories with interactive controls for README.mdx Canvas blocks
-**React Native** - Stories for manual testing
+- ✅ Default story with all controls wired up (FIRST)
+- ✅ Story per major prop (Variant, Size, IsDisabled)
+- ✅ Meta with proper argTypes
 
 ### Step 8: Write Tests
 
-Create tests for both platforms:
+Basic test pattern:
 
 ```tsx
-// MyComponent.test.tsx (both platforms)
 import { render } from '@testing-library/react'; // or react-native
 import { MyComponent } from './MyComponent';
-import { MyComponentVariant } from './MyComponent.types';
 
 describe('MyComponent', () => {
   it('renders children', () => {
     const { getByText } = render(<MyComponent>Test</MyComponent>);
     expect(getByText('Test')).toBeDefined();
   });
-
-  it('applies variant correctly', () => {
-    const { container } = render(
-      <MyComponent variant={MyComponentVariant.Primary}>Test</MyComponent>,
-    );
-    // Test variant styling is applied
-  });
-
-  it('respects disabled state', () => {
-    const { getByText } = render(<MyComponent isDisabled>Test</MyComponent>);
-    // Test disabled behavior
-  });
 });
 ```
 
 ### Step 9: Create Documentation
 
-**React** - README.mdx with Canvas blocks:
+**React:** README.mdx with Canvas blocks
+**React Native:** README.md with code examples
 
-```mdx
-import { Canvas, Meta } from '@storybook/blocks';
-import * as MyComponentStories from './MyComponent.stories';
-
-<Meta of={MyComponentStories} />
-
-# MyComponent
-
-Brief description.
-
-## Usage
-
-\`\`\`tsx
-import { MyComponent } from '@metamask/design-system-react';
-\`\`\`
-
-<Canvas of={MyComponentStories.Default} />
-
-## Props
-
-### Variant
-
-<Canvas of={MyComponentStories.Variant} />
-```
-
-**React Native** - README.md with code examples:
-
-```markdown
-# MyComponent
-
-Brief description.
-
-## Usage
-
-\`\`\`tsx
-import { MyComponent } from '@metamask/design-system-react-native';
-
-<MyComponent variant={MyComponentVariant.Primary}>
-  Content
-</MyComponent>
-\`\`\`
-
-## Props
-
-### variant
-
-...
-```
+See @.cursor/rules/component-documentation.md for templates.
 
 ### Step 10: Verify Build
 
-Test that everything works:
-
 ```bash
-# Build all packages
-yarn build
-
-# Run tests
-yarn test
-
-# Run linting
-yarn lint
-
-# Build Storybook
+yarn build    # All packages
+yarn test     # All tests
+yarn lint     # Linting
 yarn build-storybook
 ```
 
 All should pass without errors.
 
-## Critical Patterns
+## Critical Anti-Patterns
 
-### Always Use Box/Text Primitives
+### ❌ Leaving Template Code Unchanged
 
 ```tsx
 // ❌ Wrong - Using raw elements from template
-export const MyComponent = ({ children, className }) => (
+export const MyComponent = ({ className, children }) => (
   <div className={className}>
     <span>{children}</span>
   </div>
 );
 
-// ✅ Correct - Using Box/Text primitives
+// ✅ Correct - Box/Text primitives + design tokens
 export const MyComponent = forwardRef<HTMLDivElement, MyComponentProps>(
   ({ children, ...props }, ref) => (
     <Box
       ref={ref}
-      as="div"
       backgroundColor={BoxBackgroundColor.BackgroundDefault}
       {...props}
     >
@@ -452,73 +208,13 @@ export const MyComponent = forwardRef<HTMLDivElement, MyComponentProps>(
     </Box>
   ),
 );
-```
-
-### Always Use Design Token Enums
-
-```tsx
-// ❌ Wrong - Hardcoded values
-<Box style={{ backgroundColor: '#037DD6', borderRadius: 8 }}>
-
-// ✅ Correct - Design token enums
-<Box
-  backgroundColor={BoxBackgroundColor.PrimaryDefault}
-  borderRadius={BoxBorderRadius.Md}
->
-```
-
-### Always Forward Refs
-
-```tsx
-// ❌ Wrong - No ref forwarding
-export const MyComponent = (props: MyComponentProps) => { ... };
-
-// ✅ Correct - Forward refs
-export const MyComponent = forwardRef<HTMLDivElement, MyComponentProps>(
-  (props, ref) => <Box ref={ref} {...props} />
-);
-```
-
-### Always Set Display Name
-
-```tsx
-// ❌ Wrong - Missing displayName
-export const MyComponent = forwardRef(...);
-
-// ✅ Correct - Set displayName
-export const MyComponent = forwardRef(...);
 MyComponent.displayName = 'MyComponent';
-```
-
-## Common Mistakes
-
-### ❌ Leaving Template Code Unchanged
-
-Generated templates use basic patterns - you must transform them:
-
-- Replace div/View with Box
-- Replace span/Text with Text component
-- Add shared types to shared package
-- Apply ADR-0003/0004 patterns
-
-### ❌ Not Creating Shared Types
-
-Don't skip the shared package - it's required for ADR-0004:
-
-```tsx
-// ❌ Wrong - Types only in React package
-// packages/design-system-react/src/components/MyComponent/MyComponent.types.ts
-export type MyComponentProps = { ... }
-
-// ✅ Correct - Shared types + platform extension
-// packages/design-system-shared/src/types/MyComponent/
-export type MyComponentPropsShared = { ... }
 ```
 
 ### ❌ Using Enums Instead of Const Objects
 
 ```tsx
-// ❌ Wrong - Enum
+// ❌ Wrong - Enum (violates ADR-0003)
 export enum MyComponentVariant {
   Primary = 'primary',
 }
@@ -531,10 +227,22 @@ export type MyComponentVariant =
   (typeof MyComponentVariant)[keyof typeof MyComponentVariant];
 ```
 
+### ❌ Not Creating Shared Types
+
+```tsx
+// ❌ Wrong - Types only in React package (violates ADR-0004)
+// packages/design-system-react/src/components/MyComponent/MyComponent.types.ts
+export type MyComponentProps = { ... }
+
+// ✅ Correct - Shared types + platform extension (ADR-0004)
+// packages/design-system-shared/src/types/MyComponent/
+export type MyComponentPropsShared = { ... }
+```
+
 ### ❌ Including Platform Props in Shared
 
 ```tsx
-// ❌ Wrong - className in shared
+// ❌ Wrong - className in shared package
 export type MyComponentPropsShared = {
   variant?: MyComponentVariant;
   className?: string; // Platform-specific!
@@ -553,8 +261,6 @@ export type MyComponentProps = ComponentProps<'div'> &
 
 ## Verification Checklist
 
-After creating component, verify:
-
 ### Setup & Scaffolding
 
 - [ ] Used create-component scripts (not manual creation)
@@ -562,8 +268,8 @@ After creating component, verify:
 
 ### Shared Types (ADR-0003 + ADR-0004)
 
-- [ ] Types defined in `@metamask/design-system-shared/src/types/ComponentName/`
-- [ ] Const objects used (ADR-0003), NOT enums
+- [ ] Types in `@metamask/design-system-shared/src/types/ComponentName/`
+- [ ] Const objects used, NOT enums
 - [ ] Shared type named `ComponentNamePropsShared` (with "Shared" suffix)
 - [ ] Used `type` not `interface` for shared props
 - [ ] Exported from `@metamask/design-system-shared/src/index.ts`
@@ -583,7 +289,7 @@ After creating component, verify:
 
 - [ ] Template div/View replaced with Box primitive
 - [ ] Uses Text component (not raw span/Text)
-- [ ] Design token enums used (BoxBackgroundColor, BoxBorderRadius)
+- [ ] Design token enums used
 - [ ] Component forwards refs using `forwardRef`
 - [ ] Display name set
 
@@ -609,30 +315,20 @@ After creating component, verify:
 - [ ] Lint passes: `yarn lint`
 - [ ] Storybook builds: `yarn build-storybook`
 
-## Golden Path Examples
+## References
 
-⚠️ **Templates vs Completed Components:**
+### Golden Path Examples
 
-- **Templates** (scaffolding only - NOT ADR-compliant):
-
-  - @packages/design-system-react/scripts/create-component/ComponentName/
-  - @packages/design-system-react-native/scripts/create-component/ComponentName/
-  - Basic structure only - must be transformed
-
-- **Completed components** (following all ADR patterns - USE THESE AS REFERENCE):
-
-**Golden Path: BadgeStatus** (THE proof-of-concept - always reference this):
+**BadgeStatus** (THE proof-of-concept - always reference this):
 
 - @packages/design-system-shared/src/types/BadgeStatus/ (Shared types - SOURCE OF TRUTH)
-- @packages/design-system-react/src/components/BadgeStatus/ (React implementation)
-- @packages/design-system-react-native/src/components/BadgeStatus/ (React Native implementation)
+- @packages/design-system-react/src/components/BadgeStatus/ (React)
+- @packages/design-system-react-native/src/components/BadgeStatus/ (React Native)
 
 Other examples:
 
 - @packages/design-system-react/src/components/Box/ (Foundational primitive)
-- @packages/design-system-react/src/components/Button/ (Complex interactive component)
-
-## References
+- @packages/design-system-react/src/components/Button/ (Complex interactive)
 
 ### Required Reading
 
