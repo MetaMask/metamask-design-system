@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: migrate BadgeStatus to ADR-0003 and ADR-0004 patterns ([#912](https://github.com/MetaMask/metamask-design-system/pull/912))
+
 ## [0.1.3]
 
 ### Changed

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: migrate BadgeStatus to ADR-0003 and ADR-0004 patterns ([#912](https://github.com/MetaMask/metamask-design-system/pull/912))
+- refactor: move BottomSheetFooter out of BottomSheets folder ([#933](https://github.com/MetaMask/metamask-design-system/pull/933))
+- feat: RadioButton ([#926](https://github.com/MetaMask/metamask-design-system/pull/926))
+
 ## [0.7.0]
 
 ### Added
