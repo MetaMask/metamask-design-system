@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: Update neutral palette to ensure consistent elevations and interactions across themes ([#849](https://github.com/MetaMask/metamask-design-system/pull/849))
+
 ## [8.2.0]
 
 ### Added
