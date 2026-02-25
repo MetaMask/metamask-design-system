@@ -95,7 +95,7 @@ export const AllIcons: Story = {
             key={iconName}
             style={{ width: 60, alignItems: 'center', margin: 8 }}
           >
-            <Icon name={iconName} />
+            <Icon name={iconName} size={IconSize.Xl} />
           </View>
         ))}
       </View>

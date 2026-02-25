@@ -7,6 +7,77 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0]
+
+### Added
+
+- Added `Label` component for form labels and descriptive text ([#907](https://github.com/MetaMask/metamask-design-system/pull/907))
+- Added `HeaderBase` component for consistent header layouts ([#902](https://github.com/MetaMask/metamask-design-system/pull/902))
+- Added `Skeleton` component for loading states ([#891](https://github.com/MetaMask/metamask-design-system/pull/891))
+- Added `Card` component for grouped content sections ([#923](https://github.com/MetaMask/metamask-design-system/pull/923))
+- Added `BottomSheetFooter` component for bottom sheet actions ([#899](https://github.com/MetaMask/metamask-design-system/pull/899))
+- Added `Toast` component for temporary notification messages ([#892](https://github.com/MetaMask/metamask-design-system/pull/892))
+- Added `Input` component for text input fields ([#909](https://github.com/MetaMask/metamask-design-system/pull/909))
+- Added `CorporateFare` icon to represent stocks ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
+- Added `BottomSheetOverlay` component for modal bottom sheet interactions ([#897](https://github.com/MetaMask/metamask-design-system/pull/897))
+  - Provides consistent overlay pattern for bottom sheet components
+  - Includes press-to-dismiss functionality and accessibility features
+
+### Changed
+
+- **BREAKING:** Standardized non-icon enum runtime values to use kebab-case format ([#894](https://github.com/MetaMask/metamask-design-system/pull/894))
+  - Enum values now use lowercase/kebab-case (e.g., `'primary'` instead of `'Primary'`, `'top-right'` instead of `'TopRight'`)
+  - **Migration likely not needed** - continue using enum constants (e.g., `ButtonVariant.Primary`)
+  - **Migration needed** only if your app persists or transmits these enum values (localStorage, databases, APIs)
+  - This prepares for migration from enums to string union types per ADR #127
+- Updated component styling to use `tw.style()` instead of string-based `twClassName` for better type safety and conditional styling ([#889](https://github.com/MetaMask/metamask-design-system/pull/889))
+- Updated `@metamask/design-tokens` peer dependency from ^8.1.0 to ^8.2.0 to support `AnimationDuration` enum used by `BottomSheetOverlay`
+- Updated `@metamask/utils` peer dependency from 11.9.0 to 11.10.0 ([#903](https://github.com/MetaMask/metamask-design-system/pull/903))
+- Reorganized peer dependencies for better dependency management ([#901](https://github.com/MetaMask/metamask-design-system/pull/901))
+
+### Fixed
+
+- Fixed `ButtonBase` component sizing issues in flex layouts to prevent unexpected shrinking ([#870](https://github.com/MetaMask/metamask-design-system/pull/870))
+
+## [0.6.0]
+
+### Added
+
+- Added `AfterHours` icon ([#879](https://github.com/MetaMask/metamask-design-system/pull/879))
+
+## [0.5.1]
+
+### Changed
+
+- Updated `@metamask/utils` peer dependency from 11.8.1 to 11.9.0 ([#867](https://github.com/MetaMask/metamask-design-system/pull/867))
+
+### Fixed
+
+- Updated `ButtonIcon` component icon sizes and border radius to match Figma design specifications ([#873](https://github.com/MetaMask/metamask-design-system/pull/873))
+  - `ButtonIcon.Sm` now uses 20px icon (previously 16px)
+  - `ButtonIcon.Md` now uses 24px icon (previously 20px)
+  - `ButtonIcon.Lg` now uses 32px icon (previously 24px)
+  - Non-floating border radius corrected to 4px (previously 2px)
+
+## [0.5.0]
+
+### Changed
+
+- **BREAKING:** Update font file names from space-separated to hyphenated PostScript format for iOS Metro bundler compatibility ([#862](https://github.com/MetaMask/metamask-design-system/pull/862))
+  - Font file names changed: "Geist Regular.otf" → "Geist-Regular.otf", "Geist Medium.otf" → "Geist-Medium.otf", "Geist Bold.otf" → "Geist-Bold.otf"
+  - Fixes Metro bundler asset resolution issues on iOS that prevented fonts from loading correctly
+  - If using `@metamask/design-system-react-native` components as intended, fonts automatically load correctly with no migration needed
+  - If manually referencing font file paths in custom code, update all references to use hyphenated file names instead of space-separated names
+  - Android is unaffected by this change
+- Updated `@metamask/utils` peer dependency from 11.8.0 to 11.8.1 ([#838](https://github.com/MetaMask/metamask-design-system/pull/838))
+
+### Fixed
+
+- Export missing `TextButtonSize` enum from package entry point for TypeScript type safety ([#848](https://github.com/MetaMask/metamask-design-system/pull/848))
+  - The `TextButtonSize` enum is now properly exported and accessible for imports
+  - Developers can now use typed enums instead of string literals: `import { TextButton, TextButtonSize } from '@metamask/design-system-react-native'` and `<TextButton size={TextButtonSize.Medium} />`
+  - This is a non-breaking, additive change that improves type safety
+
 ## [0.4.1]
 
 ### Fixed
@@ -83,7 +154,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.4.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.7.0...HEAD
+[0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.6.0...@metamask/design-system-react-native@0.7.0
+[0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.5.1...@metamask/design-system-react-native@0.6.0
+[0.5.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.5.0...@metamask/design-system-react-native@0.5.1
+[0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.4.1...@metamask/design-system-react-native@0.5.0
 [0.4.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.4.0...@metamask/design-system-react-native@0.4.1
 [0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.3.1...@metamask/design-system-react-native@0.4.0
 [0.3.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.3.0...@metamask/design-system-react-native@0.3.1

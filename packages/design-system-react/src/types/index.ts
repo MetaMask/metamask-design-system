@@ -71,10 +71,10 @@ export enum AvatarIconSeverity {
  * AvatarGroup - variant
  */
 export enum AvatarGroupVariant {
-  Account = 'Account',
-  Favicon = 'Favicon',
-  Network = 'Network',
-  Token = 'Token',
+  Account = 'account',
+  Favicon = 'favicon',
+  Network = 'network',
+  Token = 'token',
 }
 
 /**
@@ -92,45 +92,21 @@ export enum BadgeCountSize {
 }
 
 /**
- * BadgeStatus - status
- */
-export enum BadgeStatusStatus {
-  Active = 'active', // Connected
-  Inactive = 'inactive', // Connected
-  Disconnected = 'disconnected',
-  New = 'new',
-  Attention = 'attention',
-}
-/**
- * BadgeStatus - size
- */
-export enum BadgeStatusSize {
-  /**
-   * Represents a medium badge status size (8px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large avatar size (10px).
-   */
-  Lg = 'lg',
-}
-
-/**
  * BadgeWrapper - positionAnchorShape
  */
 export enum BadgeWrapperPositionAnchorShape {
-  Rectangular = 'Rectangular',
-  Circular = 'Circular',
+  Rectangular = 'rectangular',
+  Circular = 'circular',
 }
 
 /**
  * BadgeWrapper - position.
  */
 export enum BadgeWrapperPosition {
-  TopRight = 'TopRight',
-  BottomRight = 'BottomRight',
-  BottomLeft = 'BottomLeft',
-  TopLeft = 'TopLeft',
+  TopRight = 'top-right',
+  BottomRight = 'bottom-right',
+  BottomLeft = 'bottom-left',
+  TopLeft = 'top-left',
 }
 
 /**
@@ -482,7 +458,7 @@ export enum TextAlign {
  */
 export enum FontWeight {
   /**
-   * Weight - 600
+   * Weight - 700
    */
   Bold = 'font-bold',
   /**
@@ -609,6 +585,7 @@ export enum IconName {
   AddCard = 'AddCard',
   AddCircle = 'AddCircle',
   AddSquare = 'AddSquare',
+  AfterHours = 'AfterHours',
   Ai = 'Ai',
   AlternateEmail = 'AlternateEmail',
   AppleLogo = 'AppleLogo',
@@ -670,6 +647,7 @@ export enum IconName {
   Connect = 'Connect',
   Copy = 'Copy',
   CopySuccess = 'CopySuccess',
+  CorporateFare = 'CorporateFare',
   CreditCheck = 'CreditCheck',
   CurrencyFranc = 'CurrencyFranc',
   CurrencyLira = 'CurrencyLira',
@@ -777,6 +755,7 @@ export enum IconName {
   Plug = 'Plug',
   PlusAndMinus = 'PlusAndMinus',
   PolicyAlert = 'PolicyAlert',
+  PopUp = 'PopUp',
   Print = 'Print',
   PriorityHigh = 'PriorityHigh',
   PrivacyTip = 'PrivacyTip',
@@ -817,6 +796,7 @@ export enum IconName {
   ShieldLock = 'ShieldLock',
   ShoppingBag = 'ShoppingBag',
   ShoppingCart = 'ShoppingCart',
+  SidePanel = 'SidePanel',
   SignalCellular = 'SignalCellular',
   Slash = 'Slash',
   Sms = 'Sms',

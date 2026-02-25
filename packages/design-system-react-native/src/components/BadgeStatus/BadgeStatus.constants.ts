@@ -1,4 +1,7 @@
-import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
+import {
+  BadgeStatusSize,
+  BadgeStatusStatus,
+} from '@metamask/design-system-shared';
 
 // Mappings
 export const TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE: Record<

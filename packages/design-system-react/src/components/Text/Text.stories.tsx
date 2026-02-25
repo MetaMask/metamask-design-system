@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import {
@@ -48,7 +48,7 @@ const meta: Meta<typeof Text> = {
       options: Object.keys(FontWeight),
       mapping: FontWeight,
       description:
-        'Optional prop to control the font weight of the text. Normal: 400, Medium: 500, Bold: 600',
+        'Optional prop to control the font weight of the text. Normal: 400, Medium: 500, Bold: 700',
     },
     fontFamily: {
       control: 'select',
@@ -214,6 +214,18 @@ export const Color: Story = {
       </Text>
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Showcasing all text colors including muted variant
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const FontWeightStory: Story = {
@@ -221,7 +233,7 @@ export const FontWeightStory: Story = {
     <div className="space-y-4">
       <Text fontWeight={FontWeight.Regular}>Regular (400)</Text>
       <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
-      <Text fontWeight={FontWeight.Bold}>Bold (600)</Text>
+      <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
     </div>
   ),
   name: 'Font Weight',

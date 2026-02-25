@@ -1,157 +1,171 @@
 # ButtonIcon
 
-A Button Icon is a compact, icon-only button that triggers an action, designed for quick, space-efficient interactions
+A Button Icon is a compact, icon-only button that triggers an action, designed for quick, space-efficient interactions.
 
----
+```tsx
+import { ButtonIcon } from '@metamask/design-system-react-native';
+
+<ButtonIcon iconName="Edit" onPress={() => console.log('Pressed')} />;
+```
 
 ## Props
 
+### `iconName`
+
+The icon name to display in the button.
+
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `IconName` | Yes      | `undefined` |
+
+```tsx
+<ButtonIcon iconName="Edit" onPress={() => {}} />
+```
+
+### `onPress`
+
+Function to trigger when pressing the button.
+
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | Yes      | `undefined` |
+
+```tsx
+<ButtonIcon
+  iconName="Settings"
+  onPress={() => console.log('Settings pressed')}
+/>
+```
+
 ### `size`
 
-Optional prop to control the size of the `ButtonIcon`.
-
-| TYPE             | REQUIRED | DEFAULT             |
-| :--------------- | :------- | :------------------ |
-| `ButtonIconSize` | No       | `ButtonIconSize.Md` |
+The size of the button.
 
 Available sizes:
 
-- `ButtonIconSize.Sm` (24px)
-- `ButtonIconSize.Md` (32px)
-- `ButtonIconSize.Lg` (40px)
+- `ButtonIconSize.Sm` (32px)
+- `ButtonIconSize.Md` (40px)
+- `ButtonIconSize.Lg` (48px)
 
----
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `ButtonIconSize` | No       | `ButtonIconSize.Md` |
 
-### `iconName` (Required)
-
-The name of the icon to be displayed.
-
-| TYPE       | REQUIRED | DEFAULT |
-| :--------- | :------- | :------ |
-| `IconName` | Yes      | `N/A`   |
-
----
-
-### `iconProps`
-
-Optional props to customize the icon.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `IconProps` | No       | `{}`    |
-
----
+```tsx
+<ButtonIcon
+  iconName="Edit"
+  size={ButtonIconSize.Sm}
+  onPress={() => {}}
+/>
+<ButtonIcon
+  iconName="Edit"
+  size={ButtonIconSize.Lg}
+  onPress={() => {}}
+/>
+```
 
 ### `isDisabled`
 
-Optional prop that, when `true`, disables the button.
+Whether the button is disabled.
 
 | TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
+| --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
----
+```tsx
+<ButtonIcon iconName="Edit" isDisabled onPress={() => {}} />
+```
 
 ### `isInverse`
 
-Optional prop to show the inverse state of the button, typically used for buttons on colored backgrounds.
+Whether to show the button with inverted colors for use on colored backgrounds.
 
 | TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
+| --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
----
+```tsx
+<ButtonIcon iconName="Edit" isInverse onPress={() => {}} />
+```
 
 ### `isFloating`
 
-Optional prop to apply floating button styling.
+Whether to show the button in floating/contained state for floating buttons.
 
 | TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
+| --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
-**Note:** This prop applies styling only. There is no positioning logic.
+```tsx
+<ButtonIcon iconName="Add" isFloating onPress={() => {}} />
+```
 
----
+### `iconProps`
+
+Optional props to pass to the Icon component.
+
+| TYPE                 | REQUIRED | DEFAULT     |
+| -------------------- | -------- | ----------- |
+| `Partial<IconProps>` | No       | `undefined` |
+
+```tsx
+<ButtonIcon
+  iconName="Edit"
+  iconProps={{ color: IconColor.IconPrimary }}
+  onPress={() => {}}
+/>
+```
 
 ### `twClassName`
 
-Optional prop to add `twrnc` overriding class names.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+import { ButtonIcon } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<ButtonIcon
+  iconName="Edit"
+  onPress={() => {}}
+  twClassName="shadow-lg"
+/>
+
+// Override default styles
+<ButtonIcon
+  iconName="Edit"
+  onPress={() => {}}
+  twClassName="!bg-error-100"
+/>
+```
 
 ### `style`
 
-Optional prop to control the style.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
-| TYPE                   | REQUIRED | DEFAULT |
-| :--------------------- | :------- | :------ |
-| `StyleProp<ViewStyle>` | No       | `null`  |
-
----
-
-## Usage
-
-### Basic Usage
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-import React from 'react';
-import ButtonIcon from '@metamask/design-system-react-native';
+const styles = StyleSheet.create({
+  custom: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+});
 
-<ButtonIcon iconName={IconName.Add} onPress={() => console.log('Pressed!')} />;
+export const StyleExample = () => (
+  <ButtonIcon iconName="Edit" onPress={() => {}} style={styles.custom} />
+);
 ```
 
----
+## References
 
-### Custom Icon Size
-
-```tsx
-<ButtonIcon size={ButtonIconSize.Lg} iconName={IconName.Add} />
-```
-
----
-
-### Disabled Icon Button
-
-```tsx
-<ButtonIcon iconName={IconName.Add} isDisabled />
-```
-
----
-
-### Floating Icon Button
-
-```tsx
-<ButtonIcon iconName={IconName.Add} isFloating />
-```
-
----
-
-### Accessibility
-
-- Use the `accessibilityLabel` prop to provide meaningful labels for assistive technologies.
-- Ensure `iconName` represents a clear visual meaning for users.
-
----
-
-### Notes
-
-- `ButtonIcon` is optimized for handling different button states (disabled, floating, inverse).
-- Use `isFloating` for styling but apply additional logic if floating positioning is required.
-- Icons are fully customizable through props.
-
----
-
-## Contributing
-
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
-
----
-
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

@@ -59,10 +59,10 @@ export enum AvatarAccountVariant {
  * AvatarGroup - variant
  */
 export enum AvatarGroupVariant {
-  Account = 'Account',
-  Favicon = 'Favicon',
-  Network = 'Network',
-  Token = 'Token',
+  Account = 'account',
+  Favicon = 'favicon',
+  Network = 'network',
+  Token = 'token',
 }
 
 /**
@@ -84,53 +84,29 @@ export enum BadgeCountSize {
   /**
    * Represents a medium badge count (14px height).
    */
-  Md = 'Md',
+  Md = 'md',
   /**
    * Represents a large badge count (20px height).
    */
-  Lg = 'Lg',
-}
-
-/**
- * BadgeStatus - status
- */
-export enum BadgeStatusStatus {
-  Active = 'active', // Connected
-  Inactive = 'inactive', // Connected
-  Disconnected = 'disconnected',
-  New = 'new',
-  Attention = 'attention',
-}
-/**
- * BadgeStatus - size
- */
-export enum BadgeStatusSize {
-  /**
-   * Represents a medium badge status size (8px).
-   */
-  Md = 'Md',
-  /**
-   * Represents a large avatar size (10px).
-   */
-  Lg = 'Lg',
+  Lg = 'lg',
 }
 
 /**
  * BadgeWrapper - positionAnchorShape
  */
 export enum BadgeWrapperPositionAnchorShape {
-  Rectangular = 'Rectangular',
-  Circular = 'Circular',
+  Rectangular = 'rectangular',
+  Circular = 'circular',
 }
 
 /**
  * BadgeWrapper - position.
  */
 export enum BadgeWrapperPosition {
-  TopRight = 'TopRight',
-  BottomRight = 'BottomRight',
-  BottomLeft = 'BottomLeft',
-  TopLeft = 'TopLeft',
+  TopRight = 'top-right',
+  BottomRight = 'bottom-right',
+  BottomLeft = 'bottom-left',
+  TopLeft = 'top-left',
 }
 
 /**
@@ -351,9 +327,9 @@ export { ButtonBaseSize as ButtonTertiarySize };
  * Button - variant
  */
 export enum ButtonVariant {
-  Primary = 'Primary',
-  Secondary = 'Secondary',
-  Tertiary = 'Tertiary',
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Tertiary = 'tertiary',
 }
 
 /**
@@ -454,9 +430,9 @@ export enum TextColor {
  */
 export enum FontWeight {
   /**
-   * Weight - 600
+   * Weight - 700
    */
-  Bold = '600',
+  Bold = '700',
   /**
    * Weight - 500
    */
@@ -572,6 +548,7 @@ export enum IconName {
   AddCircle = 'AddCircle',
   AddSquare = 'AddSquare',
   Add = 'Add',
+  AfterHours = 'AfterHours',
   Ai = 'Ai',
   AlternateEmail = 'AlternateEmail',
   AppleLogo = 'AppleLogo',
@@ -633,6 +610,7 @@ export enum IconName {
   Connect = 'Connect',
   CopySuccess = 'CopySuccess',
   Copy = 'Copy',
+  CorporateFare = 'CorporateFare',
   CreditCheck = 'CreditCheck',
   CurrencyFranc = 'CurrencyFranc',
   CurrencyLira = 'CurrencyLira',

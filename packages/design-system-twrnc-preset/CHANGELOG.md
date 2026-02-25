@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0]
+
+### Changed
+
+- **BREAKING:** Update font family names from space-separated to hyphenated PostScript format for iOS Metro bundler and expo-font compatibility ([#862](https://github.com/MetaMask/metamask-design-system/pull/862))
+  - Font family names changed: `"Geist Regular"` → `"Geist-Regular"`, `"Geist Medium"` → `"Geist-Medium"`, `"Geist Bold"` → `"Geist-Bold"`
+  - Fixes critical font loading issues on iOS when using Metro bundler with expo-font
+  - If using TWRNC preset via `@metamask/design-system-react-native` components, fonts automatically use correct names with no migration needed
+  - If directly referencing font families in custom TWRNC styles, update to hyphenated names (e.g., tw`font-['Geist-Regular']` instead of tw`font-['Geist_Regular']`)
+  - Android is unaffected by this change
+  - Aligns with MetaMask Mobile's font configuration and expo-font requirements
+
 ## [0.2.1]
 
 ### Fixed
@@ -31,7 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.3.0...HEAD
+[0.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.1...@metamask/design-system-twrnc-preset@0.3.0
 [0.2.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.0...@metamask/design-system-twrnc-preset@0.2.1
 [0.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.1.0...@metamask/design-system-twrnc-preset@0.2.0
 [0.1.0]: https://github.com/MetaMask/metamask-design-system/releases/tag/@metamask/design-system-twrnc-preset@0.1.0

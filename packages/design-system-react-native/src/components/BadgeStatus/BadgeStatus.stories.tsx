@@ -1,9 +1,11 @@
+import {
+  BadgeStatusSize,
+  BadgeStatusStatus,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
-
-import { BadgeStatusStatus, BadgeStatusSize } from '../../types';
 
 import { BadgeStatus } from './BadgeStatus';
 import type { BadgeStatusProps } from './BadgeStatus.types';
@@ -14,11 +16,13 @@ const meta: Meta<BadgeStatusProps> = {
   argTypes: {
     size: {
       control: 'select',
-      options: BadgeStatusSize,
+      options: Object.keys(BadgeStatusSize),
+      mapping: BadgeStatusSize,
     },
     status: {
       control: 'select',
-      options: BadgeStatusStatus,
+      options: Object.keys(BadgeStatusStatus),
+      mapping: BadgeStatusStatus,
     },
     hasBorder: {
       control: 'boolean',

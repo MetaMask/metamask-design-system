@@ -35,6 +35,9 @@ module.exports = merge(baseConfig, {
     'Blockies.utilities.ts', // Exclude Blockies.utilities file
   ],
 
+  // Ignore template files from test discovery
+  testPathIgnorePatterns: ['scripts/create-component/ComponentName/'],
+
   preset: 'react-native',
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',

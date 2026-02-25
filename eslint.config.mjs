@@ -10,9 +10,11 @@ const config = createConfig([
   ...base,
   {
     ignores: [
+      '**/node_modules/**',
       '**/dist/**',
       '**/docs/**',
       '**/coverage/**',
+      '**/storybook-static/**',
       'merged-packages/**',
       '.yarn/**',
       'scripts/create-package/package-template/**',
@@ -77,6 +79,11 @@ const config = createConfig([
     rules: {
       // TODO: Re-enable this
       'n/no-sync': 'off',
+      // TODO: Re-enable these rules. Enabling them with error suppression
+      // breaks `--fix`, because the autofixer for these rules do not work very
+      // well.
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/check-tag-names': 'off',
     },
   },
   {
@@ -134,6 +141,12 @@ const config = createConfig([
       'no-restricted-globals': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
 
+      // TODO: Re-enable these rules. Enabling them with error suppression
+      // breaks `--fix`, because the autofixer for these rules do not work very
+      // well.
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/check-tag-names': 'off',
+
       // Overrides eslint base config which isn't following outer most pattern. Can be removed once this issue is resolved and eslint config updated
       // issue: https://github.com/MetaMask/eslint-config/issues/403
       'import-x/order': [
@@ -171,7 +184,7 @@ const config = createConfig([
   {
     files: ['**/*.d.ts'],
     rules: {
-      '@typescript-eslint/naming-convention': 'warn',
+      '@typescript-eslint/naming-convention': 'error',
       'import-x/unambiguous': 'off',
     },
   },

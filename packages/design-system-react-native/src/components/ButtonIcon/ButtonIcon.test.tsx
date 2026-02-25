@@ -13,7 +13,11 @@ describe('ButtonIcon', () => {
   it('renders default state correctly', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
-    const expected = tw`items-center justify-center ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md]} rounded-sm bg-transparent opacity-100`;
+    const expected = tw.style(
+      'items-center justify-center',
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
+      'rounded-lg bg-transparent opacity-100',
+    );
 
     const { getByTestId } = render(
       <ButtonIcon
@@ -32,7 +36,11 @@ describe('ButtonIcon', () => {
   it('applies isDisabled state', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
-    const expected = tw`items-center justify-center ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md]} rounded-sm bg-transparent opacity-50`;
+    const expected = tw.style(
+      'items-center justify-center',
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
+      'rounded-lg bg-transparent opacity-50',
+    );
 
     const { getByTestId } = render(
       <ButtonIcon
@@ -50,7 +58,11 @@ describe('ButtonIcon', () => {
   it('applies isFloating state', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
-    const expected = tw`items-center justify-center ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md]} rounded-full bg-icon-default opacity-100`;
+    const expected = tw.style(
+      'items-center justify-center',
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
+      'rounded-full bg-icon-default opacity-100',
+    );
 
     const { getByTestId } = render(
       <ButtonIcon iconName={IconName.Close} isFloating testID="button-icon" />,
@@ -63,7 +75,11 @@ describe('ButtonIcon', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
     // isInverse does not change container styling beyond default
-    const expected = tw`items-center justify-center ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md]} rounded-sm bg-transparent opacity-100`;
+    const expected = tw.style(
+      'items-center justify-center',
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
+      'rounded-lg bg-transparent opacity-100',
+    );
 
     const { getByTestId } = render(
       <ButtonIcon
@@ -80,7 +96,12 @@ describe('ButtonIcon', () => {
   it('forwards style and twClassName', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
-    const expected = tw`items-center justify-center ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md]} rounded-sm bg-transparent text-primary-default opacity-100`;
+    const expected = tw.style(
+      'items-center justify-center',
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
+      'rounded-lg bg-transparent opacity-100',
+      'text-primary-default',
+    );
 
     const { getByTestId } = render(
       <ButtonIcon

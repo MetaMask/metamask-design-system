@@ -13,7 +13,7 @@ describe('ButtonIcon', () => {
     expect(button).toHaveClass(
       'h-8',
       'w-8',
-      'rounded',
+      'rounded-lg',
       'bg-transparent',
       'hover:bg-hover',
       'active:bg-pressed',

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useRef, useState } from 'react';
 
 import { Button, ButtonVariant } from '../Button';
@@ -108,7 +108,11 @@ export const IsInvalid: Story = {
 export const Label: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <CheckboxStory id="no-label-checkbox" isSelected={false} />
+      <CheckboxStory
+        id="no-label-checkbox"
+        isSelected={false}
+        aria-label="Checkbox without visible label"
+      />
       <CheckboxStory
         id="with-label-checkbox"
         isSelected={false}

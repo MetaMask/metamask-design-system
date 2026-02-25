@@ -50,7 +50,7 @@ describe('Color Preset', () => {
 
     // Filter out variables that are either used or explicitly ignored
     const unusedVariables = Array.from(designTokens).filter(
-      (varName) => !usedSet.has(varName) && !ignoredSet.has(varName), // eslint-disable-line jest/no-conditional-in-test -- Legitimate data processing for test setup
+      (varName) => !usedSet.has(varName) && !ignoredSet.has(varName),
     );
 
     // Expect no unused variables
