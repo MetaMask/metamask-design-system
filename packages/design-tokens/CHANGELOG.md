@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.2.1]
+
+### Changed
+
+- Updated neutral grey palette (grey050-grey1000) to ensure consistent elevations and interactions across themes ([#849](https://github.com/MetaMask/metamask-design-system/pull/849))
+  - Refined neutral color values for more perceptible uniform elevations
+  - Improved hue consistency across muted shades
+  - Updated `background.muted`, `background.defaultHover`, `background.defaultPressed` for better theme consistency
+  - Aligned border and overlay colors with theme-appropriate values
+  - Synchronized all design tokens (CSS, JS, Figma JSONs) with latest Figma specifications
+
 ## [8.2.0]
 
 ### Added
@@ -404,7 +415,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.1...HEAD
+[8.2.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.0...@metamask/design-tokens@8.2.1
 [8.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.1...@metamask/design-tokens@8.2.0
 [8.1.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.0...@metamask/design-tokens@8.1.1
 [8.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.0.0...@metamask/design-tokens@8.1.0
