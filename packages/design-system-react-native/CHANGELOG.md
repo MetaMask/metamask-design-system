@@ -20,13 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **BREAKING:** Migrated `BadgeStatus` component from TypeScript enums to string union types with const objects ([#912](https://github.com/MetaMask/metamask-design-system/pull/912))
   - `BadgeStatusStatus` and `BadgeStatusSize` enums replaced with const objects and derived string union types
-  - Types and constants now imported from `@metamask/design-system-shared` package (centralized architecture per ADR-0004)
-  - **Migration required** if importing types/enums from `@metamask/design-system-react-native`:
-    - ✅ **Recommended**: Import from shared package: `import { BadgeStatusStatus } from '@metamask/design-system-shared'`
-    - ⚠️ **Still works** but deprecated: Importing from component package will re-export from shared
-    - The const object values remain the same (e.g., `BadgeStatusStatus.Active` still works)
-    - String literals now work directly thanks to structural typing (e.g., `'active'` accepted where `BadgeStatusStatus.Active` is expected)
-  - This migration implements ADR-0003 (enum to string union migration) and ADR-0004 (centralized types architecture)
+  - **No migration required** - continue importing from `@metamask/design-system-react-native` as usual
+  - Const object values remain the same (e.g., `BadgeStatusStatus.Active` still works)
+  - String literals now also accepted thanks to structural typing (e.g., `'active'` works where `BadgeStatusStatus.Active` is expected)
+  - We are still evaluating best practices for const objects vs string literals - use whichever approach works best for your codebase
 - Refactored `BottomSheetFooter` component location for better organization ([#933](https://github.com/MetaMask/metamask-design-system/pull/933))
   - Moved from `BottomSheets/BottomSheetFooter/` to `BottomSheetFooter/`
   - Updated import paths and Storybook title
