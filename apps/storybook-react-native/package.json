@@ -16,18 +16,17 @@
     "@metamask/design-system-react-native": "workspace:^",
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
-    "@metamask/utils": "^11.9.0",
+    "@metamask/utils": "^11.10.0",
     "expo": "~49.0.23",
     "expo-status-bar": "~1.6.0",
     "expo-system-ui": "~2.4.0",
-    "react-native-gesture-handler": "~2.12.0",
     "react-native-reanimated": "~3.3.0",
     "uuid": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
     "@react-native-async-storage/async-storage": "^2.0.0",
-    "@react-native-community/datetimepicker": "^8.2.0",
+    "@react-native-community/datetimepicker": "7.2.0",
     "@react-native-community/slider": "^4.5.5",
     "@storybook/addon-actions": "6.5",
     "@storybook/addon-controls": "6.5",
@@ -38,7 +37,6 @@
     "@types/react-dom": "^18.2.0",
     "@types/react-native-get-random-values": "^1",
     "react-dom": "^18.2.0",
-    "react-native-safe-area-context": "^4.14.0",
     "react-native-svg-transformer": "^1.5.0",
     "typescript": "~5.2.2"
   },
@@ -47,7 +45,9 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-native": "0.72.15"
+    "react-native": "0.72.15",
+    "react-native-gesture-handler": "~2.12.0",
+    "react-native-safe-area-context": ">=4.0.0"
   },
   "engines": {
     "node": "^18.18 || >=20"

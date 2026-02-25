@@ -69,6 +69,7 @@ import Confirmation from './Confirmation';
 import Connect from './Connect';
 import Copy from './Copy';
 import CopySuccess from './CopySuccess';
+import CorporateFare from './CorporateFare';
 import CreditCheck from './CreditCheck';
 import CurrencyFranc from './CurrencyFranc';
 import CurrencyLira from './CurrencyLira';
@@ -176,6 +177,7 @@ import Plant from './Plant';
 import Plug from './Plug';
 import PlusAndMinus from './PlusAndMinus';
 import PolicyAlert from './PolicyAlert';
+import PopUp from './PopUp';
 import Print from './Print';
 import PriorityHigh from './PriorityHigh';
 import PrivacyTip from './PrivacyTip';
@@ -216,6 +218,7 @@ import Share from './Share';
 import ShieldLock from './ShieldLock';
 import ShoppingBag from './ShoppingBag';
 import ShoppingCart from './ShoppingCart';
+import SidePanel from './SidePanel';
 import SignalCellular from './SignalCellular';
 import Slash from './Slash';
 import Sms from './Sms';
@@ -348,6 +351,7 @@ export const Icons = {
   Connect,
   Copy,
   CopySuccess,
+  CorporateFare,
   CreditCheck,
   CurrencyFranc,
   CurrencyLira,
@@ -455,6 +459,7 @@ export const Icons = {
   Plug,
   PlusAndMinus,
   PolicyAlert,
+  PopUp,
   Print,
   PriorityHigh,
   PrivacyTip,
@@ -495,6 +500,7 @@ export const Icons = {
   ShieldLock,
   ShoppingBag,
   ShoppingCart,
+  SidePanel,
   SignalCellular,
   Slash,
   Sms,

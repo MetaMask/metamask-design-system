@@ -13,7 +13,6 @@ export const AvatarFavicon = ({
   name,
   fallbackText,
   fallbackTextProps,
-  twClassName,
   imageOrSvgProps,
   ...props
 }: AvatarFaviconProps) => {
@@ -38,7 +37,6 @@ export const AvatarFavicon = ({
       shape={AvatarBaseShape.Circle}
       fallbackText={finalFallbackText}
       fallbackTextProps={fallbackTextProps}
-      twClassName={twClassName}
       {...props}
     >
       {src && (

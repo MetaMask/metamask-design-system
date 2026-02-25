@@ -3326,9 +3326,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/auto-changelog@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "@metamask/auto-changelog@npm:5.3.1"
+"@metamask/auto-changelog@npm:^5.3.2":
+  version: 5.3.2
+  resolution: "@metamask/auto-changelog@npm:5.3.2"
   dependencies:
     "@octokit/rest": "npm:^20.0.0"
     diff: "npm:^5.0.0"
@@ -3339,7 +3339,7 @@ __metadata:
     prettier: ">=3.0.0"
   bin:
     auto-changelog: dist/cli.mjs
-  checksum: 10/a7cfd0901d56a3ce918793b6648e3b0f153d030616c0d1711e23bffb4ea353468a3d2b69f376a73595b760b4e7ed3d7422d4edc6512528678b30fb7e7a8f2a89
+  checksum: 10/21c993fae0af9bf4d219d52f1c28ab364e6844c4ab93f987a4db3a3df66f0e0c9a0c8a69c130bcb3ecd535e4a9b45a6e8059e95879ac652f9978dba198dd0ec1
   languageName: node
   linkType: hard
 
@@ -3377,11 +3377,11 @@ __metadata:
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
     "@figma/code-connect": "npm:^1.0.0"
-    "@metamask/auto-changelog": "npm:^5.3.1"
+    "@metamask/auto-changelog": "npm:^5.3.2"
     "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.9.0"
+    "@metamask/utils": "npm:^11.10.0"
     "@storybook/react-native": "npm:6.5"
     "@testing-library/react-hooks": "npm:^8.0.1"
     "@testing-library/react-native": "npm:^12.8.1"
@@ -3399,9 +3399,10 @@ __metadata:
     metro-react-native-babel-preset: "npm:^0.77.0"
     react: "npm:^18.2.0"
     react-native: "npm:^0.72.15"
-    react-native-gesture-handler: "npm:~2.12.0"
+    react-native-gesture-handler: "npm:2.12.0"
     react-native-jazzicon: "npm:^0.1.2"
     react-native-reanimated: "npm:~3.3.0"
+    react-native-safe-area-context: "npm:4.14.1"
     react-native-svg: "npm:^15.10.1"
     react-native-svg-transformer: "npm:^1.5.0"
     react-test-renderer: "npm:^18.3.1"
@@ -3410,12 +3411,14 @@ __metadata:
     typescript: "npm:~5.2.2"
   peerDependencies:
     "@metamask/design-system-twrnc-preset": ^0.3.0
-    "@metamask/design-tokens": ^8.1.0
-    "@metamask/utils": ^11.9.0
+    "@metamask/design-tokens": ^8.2.0
+    "@metamask/utils": ^11.10.0
+    lodash: ^4.17.23
     react: ">=18.2.0"
     react-native: ">=0.72.0"
     react-native-gesture-handler: ">=1.10.3"
     react-native-reanimated: ">=3.3.0"
+    react-native-safe-area-context: ">=4.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3425,11 +3428,11 @@ __metadata:
   dependencies:
     "@figma/code-connect": "npm:^1.0.0"
     "@jest/globals": "npm:^29.7.0"
-    "@metamask/auto-changelog": "npm:^5.3.1"
+    "@metamask/auto-changelog": "npm:^5.3.2"
     "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/jazzicon": "npm:^2.0.0"
-    "@metamask/utils": "npm:^11.9.0"
+    "@metamask/utils": "npm:^11.10.0"
     "@radix-ui/react-slot": "npm:^1.1.0"
     "@svgr/cli": "npm:^8.1.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
@@ -3452,7 +3455,7 @@ __metadata:
   peerDependencies:
     "@metamask/design-system-tailwind-preset": ^0.6.0
     "@metamask/design-tokens": ^8.1.0
-    "@metamask/utils": ^11.9.0
+    "@metamask/utils": ^11.10.0
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
   languageName: unknown
@@ -3462,8 +3465,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-shared@workspace:packages/design-system-shared"
   dependencies:
-    "@metamask/auto-changelog": "npm:^5.3.1"
-    "@metamask/utils": "npm:^11.9.0"
+    "@metamask/auto-changelog": "npm:^5.3.2"
+    "@metamask/utils": "npm:^11.10.0"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
     deepmerge: "npm:^4.2.2"
@@ -3477,7 +3480,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
-    "@metamask/auto-changelog": "npm:^5.3.1"
+    "@metamask/auto-changelog": "npm:^5.3.2"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
@@ -3500,7 +3503,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@metamask/auto-changelog": "npm:^5.3.1"
+    "@metamask/auto-changelog": "npm:^5.3.2"
     "@metamask/design-tokens": "workspace:^"
     "@testing-library/react-native": "npm:^12.8.1"
     "@ts-bridge/cli": "npm:^0.6.3"
@@ -3526,7 +3529,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-tokens@workspace:packages/design-tokens"
   dependencies:
-    "@metamask/auto-changelog": "npm:^5.3.1"
+    "@metamask/auto-changelog": "npm:^5.3.2"
     "@metamask/design-system-react": "workspace:^"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
@@ -3627,7 +3630,7 @@ __metadata:
     "@metamask/eslint-config-jest": "npm:^15.0.0"
     "@metamask/eslint-config-nodejs": "npm:^15.0.0"
     "@metamask/eslint-config-typescript": "npm:^15.0.0"
-    "@metamask/utils": "npm:^11.9.0"
+    "@metamask/utils": "npm:^11.10.0"
     "@types/eslint-plugin-tailwindcss": "npm:^3"
     "@types/jest": "npm:^27.4.1"
     "@types/lodash": "npm:^4.14.191"
@@ -3675,9 +3678,9 @@ __metadata:
     "@metamask/design-system-react-native": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.9.0"
+    "@metamask/utils": "npm:^11.10.0"
     "@react-native-async-storage/async-storage": "npm:^2.0.0"
-    "@react-native-community/datetimepicker": "npm:^8.2.0"
+    "@react-native-community/datetimepicker": "npm:7.2.0"
     "@react-native-community/slider": "npm:^4.5.5"
     "@storybook/addon-actions": "npm:6.5"
     "@storybook/addon-controls": "npm:6.5"
@@ -3691,15 +3694,15 @@ __metadata:
     expo-status-bar: "npm:~1.6.0"
     expo-system-ui: "npm:~2.4.0"
     react-dom: "npm:^18.2.0"
-    react-native-gesture-handler: "npm:~2.12.0"
     react-native-reanimated: "npm:~3.3.0"
-    react-native-safe-area-context: "npm:^4.14.0"
     react-native-svg-transformer: "npm:^1.5.0"
     typescript: "npm:~5.2.2"
     uuid: "npm:^3.0.0"
   peerDependencies:
     react: ^18.2.0
     react-native: 0.72.15
+    react-native-gesture-handler: ~2.12.0
+    react-native-safe-area-context: ">=4.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3711,7 +3714,7 @@ __metadata:
     "@metamask/design-system-react": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.9.0"
+    "@metamask/utils": "npm:^11.10.0"
     "@playwright/test": "npm:^1.52.0"
     "@storybook/addon-a11y": "npm:^10.2.3"
     "@storybook/addon-docs": "npm:^10.2.3"
@@ -3747,9 +3750,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/utils@npm:^11.9.0":
-  version: 11.9.0
-  resolution: "@metamask/utils@npm:11.9.0"
+"@metamask/utils@npm:^11.10.0":
+  version: 11.10.0
+  resolution: "@metamask/utils@npm:11.10.0"
   dependencies:
     "@ethereumjs/tx": "npm:^4.2.0"
     "@metamask/superstruct": "npm:^3.1.0"
@@ -3762,7 +3765,7 @@ __metadata:
     pony-cause: "npm:^2.1.10"
     semver: "npm:^7.5.4"
     uuid: "npm:^9.0.1"
-  checksum: 10/f8f5e99ba6c6de0395ed4e0acc82ee9c0dca26991ea6a8f10b3896e72745790966a8eded8c42be905d9f01fa99c1fd29a7f68541e2ef9854fc14984a0b514ad3
+  checksum: 10/691a268af66593b60e9807a069127993cea3cdc941f99d5d7ca4664868754f08945821f1787b2f3e99e4497df63ceb0af37a2419ad494da29a1fddffe94f5797
   languageName: node
   linkType: hard
 
@@ -4357,22 +4360,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/datetimepicker@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "@react-native-community/datetimepicker@npm:8.2.0"
+"@react-native-community/datetimepicker@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@react-native-community/datetimepicker@npm:7.2.0"
   dependencies:
     invariant: "npm:^2.2.4"
-  peerDependencies:
-    expo: ">=50.0.0"
-    react: "*"
-    react-native: "*"
-    react-native-windows: "*"
-  peerDependenciesMeta:
-    expo:
-      optional: true
-    react-native-windows:
-      optional: true
-  checksum: 10/57b51a9423d3ba49029e2d9905db040f7091285c51578eef5273baf3dd2e22bde6d1a17962a8dc5e0ac588dccff0ab36c9774f9da76363fca458ec42d30c4d66
+  checksum: 10/43b39ae13e3da0f4da37bf64b60132249b99500ca08e6f08889b7d2ef4211930359981f153a0a78c235956c2b0dae9d17af6fe40ce638ff074497edfe2f2eb1d
   languageName: node
   linkType: hard
 
@@ -18130,9 +18123,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:~2.12.0":
-  version: 2.12.1
-  resolution: "react-native-gesture-handler@npm:2.12.1"
+"react-native-gesture-handler@npm:2.12.0":
+  version: 2.12.0
+  resolution: "react-native-gesture-handler@npm:2.12.0"
   dependencies:
     "@egjs/hammerjs": "npm:^2.0.17"
     hoist-non-react-statics: "npm:^3.3.0"
@@ -18142,7 +18135,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/b83590b50a113fae6afcee580f5019c29b6a7da144dd8c11ea8676ec580a5dc5776d595d88745989da5918669279f577cd2cd8ae02d43ea04a0d34efc6a1553b
+  checksum: 10/d2c7d108cbeba4e2cf06b0eb40347bc8d4585c29ad2a5617e1102ad67be4950d936fcc1c39be2486ba8de45e856baa5e060c39a33fe26efd1c4ed205509794d6
   languageName: node
   linkType: hard
 
@@ -18202,7 +18195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^4.14.0":
+"react-native-safe-area-context@npm:4.14.1":
   version: 4.14.1
   resolution: "react-native-safe-area-context@npm:4.14.1"
   peerDependencies:
