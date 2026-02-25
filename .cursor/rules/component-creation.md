@@ -53,81 +53,57 @@ yarn create-component:react-native --name MyComponent --description "Brief descr
 - Test file
 - Index file for exports
 
-**Important:** Generated templates DO NOT include ADR-0003/0004 patterns yet - you must transform them.
+⚠️ **IMPORTANT:** Generated templates DO NOT include ADR-0003/0004 patterns - you MUST transform them.
 
-**Template locations:**
+**Template locations (scaffolding only - NOT ADR-compliant):**
 
 - React: @packages/design-system-react/scripts/create-component/ComponentName/
 - React Native: @packages/design-system-react-native/scripts/create-component/ComponentName/
 
+Templates provide basic structure only. You must:
+
+1. Create shared types in @metamask/design-system-shared
+2. Replace template types with shared type imports + platform extensions
+3. Replace raw elements (div/View) with Box/Text primitives
+4. Apply design token enums
+
 ### Step 2: Create Shared Types
 
-Apply @.cursor/rules/component-architecture.md patterns:
+Apply @.cursor/rules/component-architecture.md patterns.
+
+**Golden Path Example:** See BadgeStatus for the complete implementation:
+
+- @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts
 
 ```bash
 # Create types directory in shared package
 mkdir -p packages/design-system-shared/src/types/MyComponent
 ```
 
+**Pattern to follow (see BadgeStatus for real implementation):**
+
+- ✅ Use `const` with `as const` for variant/size enums (ADR-0003)
+- ✅ Derive type using `typeof` and `keyof`
+- ✅ Use `type` not `interface` for props (ESLint rule)
+- ✅ Add "Shared" suffix to props type (`ComponentNamePropsShared`)
+- ✅ Use @.cursor/rules/component-architecture.md decision tree for what goes in shared
+- ✅ Platform-independent properties only (no className/twClassName, no onClick/onPress)
+
+Example structure (adapt based on your component's needs):
+
 ```tsx
-// packages/design-system-shared/src/types/MyComponent/MyComponent.types.ts
+// Const objects with derived types
+export const MyComponentVariant = { Primary: 'primary', ... } as const;
+export type MyComponentVariant = (typeof MyComponentVariant)[keyof typeof MyComponentVariant];
 
-/**
- * MyComponent - variant
- * Use const object pattern (ADR-0003)
- */
-export const MyComponentVariant = {
-  Primary: 'primary',
-  Secondary: 'secondary',
-} as const;
-export type MyComponentVariant =
-  (typeof MyComponentVariant)[keyof typeof MyComponentVariant];
-
-/**
- * MyComponent - size
- * Use const object pattern (ADR-0003)
- */
-export const MyComponentSize = {
-  Sm: 'sm',
-  Md: 'md',
-  Lg: 'lg',
-} as const;
-export type MyComponentSize =
-  (typeof MyComponentSize)[keyof typeof MyComponentSize];
-
-/**
- * MyComponent shared props (ADR-0004)
- * Platform-independent properties shared across React and React Native
- *
- * Use "Shared" suffix
- */
+// Shared props type
 export type MyComponentPropsShared = {
-  /**
-   * Visual variant
-   */
   variant?: MyComponentVariant;
-  /**
-   * Size
-   */
-  size?: MyComponentSize;
-  /**
-   * Disabled state
-   */
-  isDisabled?: boolean;
-  /**
-   * Content
-   */
-  children: React.ReactNode;
+  // ... other shared props
 };
 ```
 
-**Key points:**
-
-- ✅ Use `const` with `as const` (ADR-0003)
-- ✅ Derive type using `typeof` and `keyof`
-- ✅ Use `type` not `interface` for props (ESLint rule)
-- ✅ Add "Shared" suffix to props type
-- ✅ Use @.cursor/rules/component-architecture.md decision tree for what goes in shared
+**Always reference the BadgeStatus implementation for complete, real-world patterns.**
 
 ```tsx
 // packages/design-system-shared/src/types/MyComponent/index.ts
@@ -635,18 +611,26 @@ After creating component, verify:
 
 ## Golden Path Examples
 
-**Component templates (scaffolding only):**
+⚠️ **Templates vs Completed Components:**
 
-- @packages/design-system-react/scripts/create-component/ComponentName/
-- @packages/design-system-react-native/scripts/create-component/ComponentName/
+- **Templates** (scaffolding only - NOT ADR-compliant):
 
-**Completed components following all patterns:**
+  - @packages/design-system-react/scripts/create-component/ComponentName/
+  - @packages/design-system-react-native/scripts/create-component/ComponentName/
+  - Basic structure only - must be transformed
 
-- @packages/design-system-shared/src/types/BadgeStatus/ (Shared types)
-- @packages/design-system-react/src/components/BadgeStatus/ (React)
-- @packages/design-system-react-native/src/components/BadgeStatus/ (React Native)
-- @packages/design-system-react/src/components/Box/ (Foundational)
-- @packages/design-system-react/src/components/Button/ (Complex interactive)
+- **Completed components** (following all ADR patterns - USE THESE AS REFERENCE):
+
+**Golden Path: BadgeStatus** (THE proof-of-concept - always reference this):
+
+- @packages/design-system-shared/src/types/BadgeStatus/ (Shared types - SOURCE OF TRUTH)
+- @packages/design-system-react/src/components/BadgeStatus/ (React implementation)
+- @packages/design-system-react-native/src/components/BadgeStatus/ (React Native implementation)
+
+Other examples:
+
+- @packages/design-system-react/src/components/Box/ (Foundational primitive)
+- @packages/design-system-react/src/components/Button/ (Complex interactive component)
 
 ## References
 

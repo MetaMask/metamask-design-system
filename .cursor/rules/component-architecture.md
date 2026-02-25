@@ -99,14 +99,14 @@ export const ButtonSize = {
 } as const;
 export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize];
 
-// Use "Shared" suffix for shared props interface
-export interface ButtonPropsShared {
+// Use "Shared" suffix for shared props type
+export type ButtonPropsShared = {
   variant?: ButtonVariant;
   size?: ButtonSize;
   isDisabled?: boolean;
   isLoading?: boolean;
   children: React.ReactNode;
-}
+};
 
 // ==========================================
 // LAYER 2: React Package (Re-export + Extend)
@@ -176,11 +176,11 @@ export type ButtonProps = ButtonPropsShared &
 
 ```tsx
 // ✅ Correct
-export interface BadgeStatusPropsShared { ... }
-export type BadgeStatusProps = ...PropsShared & { ... }
+export type BadgeStatusPropsShared = { ... };
+export type BadgeStatusProps = ...PropsShared & { ... };
 
 // ❌ Wrong - No "Shared" suffix
-export interface BadgeStatusProps { ... } // in shared package
+export type BadgeStatusProps = { ... }; // in shared package
 ```
 
 ### Decision Tree: What Goes Where?
@@ -218,12 +218,12 @@ export interface BadgeStatusProps { ... } // in shared package
 
 ```tsx
 // ✅ Correct - No event handlers in shared package
-export interface CheckboxPropsShared {
+export type CheckboxPropsShared = {
   isSelected: boolean;
   isDisabled?: boolean;
   label?: string;
   // NO onClick, onPress, or unified "onAction" here
-}
+};
 
 // React extends with onClick via ComponentProps
 export type CheckboxProps = ComponentProps<'label'> &
@@ -240,9 +240,9 @@ export type CheckboxProps = CheckboxPropsShared &
   };
 
 // ❌ Wrong - Unified handler in shared package
-export interface CheckboxPropsShared {
+export type CheckboxPropsShared = {
   onAction?: () => void; // Don't abstract platform differences
-}
+};
 ```
 
 **Why idiomatic names:**
@@ -273,90 +273,41 @@ export type BadgeStatusProps = BadgeStatusPropsShared &
   };
 
 // ❌ Wrong - Styling prop in shared package
-export interface BadgeStatusPropsShared {
+export type BadgeStatusPropsShared = {
   styleOverride?: string; // Don't do this
-}
+};
 ```
 
 ### Complete Example: BadgeStatus
 
-This example demonstrates the complete layered architecture:
+BadgeStatus is the proof-of-concept implementation demonstrating the complete layered architecture pattern. **Always reference BadgeStatus when in doubt.**
 
-```tsx
-// ==========================================
-// Shared Package: Design System Concerns
-// ==========================================
-// packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts
+See the actual implementation (SOURCE OF TRUTH):
 
-export const BadgeStatusStatus = {
-  Active: 'active',
-  Inactive: 'inactive',
-  Disconnected: 'disconnected',
-  New: 'new',
-  Attention: 'attention',
-} as const;
-export type BadgeStatusStatus =
-  (typeof BadgeStatusStatus)[keyof typeof BadgeStatusStatus];
+- **Shared types**: @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts
 
-export const BadgeStatusSize = {
-  Md: 'md',
-  Lg: 'lg',
-} as const;
-export type BadgeStatusSize =
-  (typeof BadgeStatusSize)[keyof typeof BadgeStatusSize];
+  - Const objects with derived union types (ADR-0003)
+  - `BadgeStatusPropsShared` type with "Shared" suffix (ADR-0004)
+  - Platform-independent properties only
 
-// Note the "Shared" suffix
-export interface BadgeStatusPropsShared {
-  status: BadgeStatusStatus;
-  size?: BadgeStatusSize;
-  hasBorder?: boolean;
-}
+- **React extension**: @packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts
 
-// ==========================================
-// React Package: Platform Extension
-// ==========================================
-// packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts
+  - Re-exports shared types
+  - Extends `ComponentProps<'div'>` with `BadgeStatusPropsShared`
+  - Adds `className?: string` (React-specific)
 
-// Import for type extension
-import type { BadgeStatusPropsShared } from '@metamask/design-system-shared';
-import type { ComponentProps } from 'react';
+- **React Native extension**: @packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts
+  - Re-exports shared types
+  - Extends `ViewProps` with `BadgeStatusPropsShared`
+  - Adds `twClassName?: string` (React Native-specific)
 
-// Re-export for consumers
-export {
-  BadgeStatusStatus,
-  BadgeStatusSize,
-  type BadgeStatusPropsShared,
-} from '@metamask/design-system-shared';
+This implementation demonstrates:
 
-// Extend with React-specific concerns
-export type BadgeStatusProps = ComponentProps<'div'> &
-  BadgeStatusPropsShared & {
-    className?: string;
-    style?: React.CSSProperties;
-  };
-
-// ==========================================
-// React Native Package: Platform Extension
-// ==========================================
-// packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts
-
-// Import for type extension
-import type { BadgeStatusPropsShared } from '@metamask/design-system-shared';
-import type { ViewProps } from 'react-native';
-
-// Re-export for consumers
-export {
-  BadgeStatusStatus,
-  BadgeStatusSize,
-  type BadgeStatusPropsShared,
-} from '@metamask/design-system-shared';
-
-// Extend with React Native-specific concerns
-export type BadgeStatusProps = BadgeStatusPropsShared &
-  Omit<ViewProps, 'children'> & {
-    twClassName?: string;
-  };
-```
+- ✅ Const objects instead of enums (ADR-0003)
+- ✅ Shared types in centralized package (ADR-0004)
+- ✅ Platform packages re-export and extend
+- ✅ "Shared" suffix on shared props type
+- ✅ Platform-specific concerns only in extension layer
 
 ## Export Pattern: Avoiding TypeScript Errors
 
@@ -403,20 +354,33 @@ After defining types, verify:
 - [ ] NO className/twClassName in shared package
 - [ ] NO unified event handlers in shared package
 
-## Golden Path Examples
+## Golden Path: BadgeStatus
 
-**Completed components following this architecture:**
+**BadgeStatus is THE proof-of-concept implementation of ADR-0003 and ADR-0004. Always reference BadgeStatus when in doubt.**
 
-- @packages/design-system-shared/src/types/BadgeStatus/ (Layered architecture example)
-- @packages/design-system-react/src/components/BadgeStatus/ (React implementation)
-- @packages/design-system-react-native/src/components/BadgeStatus/ (React Native implementation)
+**Complete implementation (SOURCE OF TRUTH):**
+
+- **Shared types**: @packages/design-system-shared/src/types/BadgeStatus/
+
+  - `BadgeStatus.types.ts` - Const objects, derived types, shared props
+  - `index.ts` - Local exports
+  - Re-exported from @packages/design-system-shared/src/index.ts
+
+- **React implementation**: @packages/design-system-react/src/components/BadgeStatus/
+
+  - `BadgeStatus.types.ts` - Re-exports shared types + React extension
+  - `BadgeStatus.tsx` - Component implementation with Box/Text primitives
+  - Re-exported from @packages/design-system-react/src/types/index.ts
+
+- **React Native implementation**: @packages/design-system-react-native/src/components/BadgeStatus/
+  - `BadgeStatus.types.ts` - Re-exports shared types + React Native extension
+  - `BadgeStatus.tsx` - Component implementation with Box/Text primitives
+  - Re-exported from @packages/design-system-react-native/src/types/index.ts
+
+**Other examples:**
+
 - @packages/design-system-react/src/components/Box/ (Foundational component)
 - @packages/design-system-react/src/components/Button/ (Complex interactive component)
-
-**Shared types architecture:**
-
-- @packages/design-system-shared/src/types/BadgeStatus/ (Complete example)
-- @packages/design-system-shared/src/index.ts (Export pattern)
 
 ## Future Patterns
 

@@ -100,55 +100,29 @@ Create comparison table:
 
 #### Step 1: Design Unified API
 
-Based on audit, design the shared API using @.cursor/rules/component-architecture.md decision tree:
+Based on audit, design the shared API using @.cursor/rules/component-architecture.md decision tree.
 
-**Shared package** (design system concerns):
+**Reference the golden path:** See how BadgeStatus implements the layered architecture:
 
-```tsx
-export const ButtonVariant = {
-  Primary: 'primary',
-  Secondary: 'secondary',
-  Link: 'link',
-} as const;
-export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant];
+- @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts (Shared types)
+- @packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts (React extension)
+- @packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts (React Native extension)
 
-export const ButtonSize = {
-  Sm: 'sm',
-  Md: 'md',
-  Lg: 'lg',
-} as const;
-export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize];
+**Pattern structure:**
 
-export type ButtonPropsShared = {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  isDisabled?: boolean;
-  isLoading?: boolean;
-  isDanger?: boolean;
-  children: React.ReactNode;
-  startIconName?: IconName;
-  endIconName?: IconName;
-  loadingText?: string;
-};
-```
+**Shared package** (design system concerns only):
+
+- Const objects with derived union types (variant, size, status)
+- Shared props type with "Shared" suffix
+- Platform-independent properties only
+- Use `type` not `interface`
 
 **Platform packages** (platform-specific extensions):
 
-```tsx
-// React
-export type ButtonProps = ComponentProps<'button'> &
-  ButtonPropsShared & {
-    className?: string;
-    // onClick comes from ComponentProps<'button'>
-  };
-
-// React Native
-export type ButtonProps = ButtonPropsShared &
-  Omit<PressableProps, 'children'> & {
-    twClassName?: string;
-    // onPress comes from PressableProps
-  };
-```
+- Re-export all shared types
+- Extend with `ComponentProps<'element'>` (React) or `ViewProps`/`PressableProps` (React Native)
+- Add `className?: string` (React) or `twClassName?: string` (React Native)
+- Event handlers come from base types (onClick/onPress)
 
 #### Step 2: Document Decisions
 
@@ -202,56 +176,33 @@ yarn create-component:react-native --name Button --description "Interactive butt
 
 #### Step 1: Port Extension Logic
 
-Adapt extension component implementation:
-
-```tsx
-// Extension uses:
-<div className={className}>
-  <span>{children}</span>
-</div>
-
-// Monorepo uses Box/Text primitives:
-<Box
-  as="button"
-  backgroundColor={BoxBackgroundColor.BackgroundDefault}
-  borderRadius={BoxBorderRadius.Md}
-  {...props}
->
-  <Text variant={TextVariant.BodyMd}>{children}</Text>
-</Box>
-```
+Adapt extension component to use monorepo patterns:
 
 **Key adaptations:**
 
-- Replace div/span with Box/Text primitives
-- Use design token enums (from @.cursor/rules/styling.md)
+- Replace raw HTML elements (div/span) with Box/Text primitives
+- Use design token enums (see @.cursor/rules/styling.md)
 - Follow component-first approach (Box props over className)
+
+**Example patterns:** See complete implementations at:
+
+- @apps/storybook-react/stories/WalletHome.stories.tsx (React Web)
+- @.cursor/rules/styling.md (Styling patterns and rules)
 
 #### Step 2: Port Mobile Logic
 
-Adapt mobile component implementation:
-
-```tsx
-// Mobile uses:
-<View style={styles.container}>
-  <Text style={styles.label}>{children}</Text>
-</View>
-
-// Monorepo uses Box/Text primitives:
-<Box
-  backgroundColor={BoxBackgroundColor.BackgroundDefault}
-  borderRadius={BoxBorderRadius.Md}
-  twClassName="px-4 py-2"
->
-  <Text variant={TextVariant.BodyMd}>{children}</Text>
-</Box>
-```
+Adapt mobile component to use monorepo patterns:
 
 **Key adaptations:**
 
-- Replace View/Text with Box/Text primitives
+- Replace raw React Native elements (View/Text) with Box/Text primitives
 - Use design token enums
-- Use twClassName for unsupported props (not StyleSheet)
+- Use twClassName for unsupported props (not StyleSheet.create)
+
+**Example patterns:** See complete implementations at:
+
+- @apps/storybook-react-native/stories/WalletHome.stories.tsx (React Native)
+- @.cursor/rules/styling.md (Styling patterns and rules)
 
 #### Step 3: Ensure Cross-Platform Consistency
 
@@ -443,27 +394,20 @@ export type ButtonProps = { isDisabled?: boolean };
 - Mobile: Button component with type="primary" prop
 - Decision: Unify as Button with variant="primary"
 
-**API alignment:**
+**API alignment pattern (see BadgeStatus for real implementation):**
 
-```tsx
-// Shared
-export const ButtonVariant = { Primary: 'primary', ... } as const;
-export type ButtonPropsShared = {
-  variant?: ButtonVariant;
-  isDisabled?: boolean;
-  children: React.ReactNode;
-};
+**Shared types** (@metamask/design-system-shared):
 
-// React extends
-export type ButtonProps = ComponentProps<'button'> & ButtonPropsShared & {
-  className?: string;
-};
+- Const objects: `ButtonVariant`, `ButtonSize`
+- Shared props: `ButtonPropsShared` (with "Shared" suffix)
+- Platform-independent properties only
 
-// React Native extends
-export type ButtonProps = ButtonPropsShared & Omit<PressableProps, 'children'> & {
-  twClassName?: string;
-};
-```
+**Platform extensions:**
+
+- React: Re-exports + `ComponentProps<'button'>` + `className?: string`
+- React Native: Re-exports + `PressableProps` + `twClassName?: string`
+
+See complete golden path: @packages/design-system-shared/src/types/BadgeStatus/
 
 **Implementation:**
 

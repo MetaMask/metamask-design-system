@@ -63,71 +63,25 @@ export enum BadgeStatusSize { // ❌ Duplicate!
 
 ### Step 2: Create Shared Types
 
-Create types in shared package using ADR-0003 pattern (const objects):
+Create types in shared package using ADR-0003 pattern (const objects).
+
+**Example:** See the complete BadgeStatus implementation (golden path):
+
+- @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts
 
 ```bash
 # Create types directory
-mkdir -p packages/design-system-shared/src/types/BadgeStatus
+mkdir -p packages/design-system-shared/src/types/ComponentName
 ```
 
-```tsx
-// packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts
-
-/**
- * BadgeStatus - status
- * Convert from enum to const object (ADR-0003)
- */
-export const BadgeStatusStatus = {
-  Active: 'active',
-  Inactive: 'inactive',
-  Disconnected: 'disconnected',
-  New: 'new',
-  Attention: 'attention',
-} as const;
-export type BadgeStatusStatus =
-  (typeof BadgeStatusStatus)[keyof typeof BadgeStatusStatus];
-
-/**
- * BadgeStatus - size
- * Convert from enum to const object (ADR-0003)
- */
-export const BadgeStatusSize = {
-  Md: 'md',
-  Lg: 'lg',
-} as const;
-export type BadgeStatusSize =
-  (typeof BadgeStatusSize)[keyof typeof BadgeStatusSize];
-
-/**
- * BadgeStatus component shared props (ADR-0004)
- * Platform-independent properties shared across React and React Native
- */
-export type BadgeStatusPropsShared = {
-  /**
-   * Required prop to control the status of the badge
-   */
-  status: BadgeStatusStatus;
-  /**
-   * Optional prop to determine whether the badge should display a border
-   *
-   * @default true
-   */
-  hasBorder?: boolean;
-  /**
-   * Optional prop to control the size of the BadgeStatus
-   *
-   * @default BadgeStatusSize.Md
-   */
-  size?: BadgeStatusSize;
-};
-```
-
-**Key points:**
+**Pattern to follow:**
 
 - ✅ Use `export const` with `as const` (ADR-0003)
 - ✅ Derive type from const object using `typeof` and `keyof`
 - ✅ Use `type` not `interface` for shared props (ESLint rule)
 - ✅ Add "Shared" suffix to props type
+
+See @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts for the complete, real implementation of this pattern.
 
 ### Step 3: Export from Shared Package Index
 
@@ -297,25 +251,28 @@ yarn lint
 
 All should pass with no errors.
 
-## Complete Example: BadgeStatus Migration
+## Golden Path: BadgeStatus Migration
 
-See the proof-of-concept BadgeStatus migration in this repository:
+BadgeStatus is the proof-of-concept migration demonstrating ADR-0003 and ADR-0004. **Always reference BadgeStatus when migrating components.**
 
-**Shared Package:**
+**Complete implementation (SOURCE OF TRUTH):**
 
-- @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts
-- @packages/design-system-shared/src/types/BadgeStatus/index.ts
-- @packages/design-system-shared/src/index.ts
+- **Shared types**: @packages/design-system-shared/src/types/BadgeStatus/
 
-**React Package:**
+  - `BadgeStatus.types.ts` - Const objects and shared props type
+  - `index.ts` - Local exports
+  - Re-exported from @packages/design-system-shared/src/index.ts
 
-- @packages/design-system-react/src/components/BadgeStatus/BadgeStatus.types.ts
-- @packages/design-system-react/src/types/index.ts
+- **React migration**: @packages/design-system-react/src/components/BadgeStatus/
 
-**React Native Package:**
+  - `BadgeStatus.types.ts` - Re-exports shared types + React extension
+  - Re-exported from @packages/design-system-react/src/types/index.ts
 
-- @packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.types.ts
-- @packages/design-system-react-native/src/types/index.ts
+- **React Native migration**: @packages/design-system-react-native/src/components/BadgeStatus/
+  - `BadgeStatus.types.ts` - Re-exports shared types + React Native extension
+  - Re-exported from @packages/design-system-react-native/src/types/index.ts
+
+**Related PR:** See https://github.com/MetaMask/metamask-design-system/pull/912 for the complete migration with all file changes.
 
 ## Common Mistakes
 
