@@ -656,6 +656,6 @@ Other examples:
 
 ### MetaMask Standards
 
-- [ADR-0003: Enum to String Union Migration](https://github.com/MetaMask/decisions/pull/127)
-- [ADR-0004: Centralized Types Architecture](https://github.com/MetaMask/decisions/pull/128)
+- [ADR-0003: Enum to String Union Migration](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)
+- [ADR-0004: Centralized Types Architecture](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md)
 - [MetaMask Contributor Docs](https://github.com/MetaMask/contributor-docs/)

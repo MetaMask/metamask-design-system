@@ -6,8 +6,8 @@ Foundation architectural patterns and decisions for MetaMask Design System compo
 
 This file defines the architectural patterns that ALL component workflows must follow:
 
-- ADR-0003: String unions with const objects (no enums)
-- ADR-0004: Centralized types in shared package
+- [ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md): String unions with const objects (no enums)
+- [ADR-0004](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md): Centralized types in shared package
 - Platform-Specific Props: Layered architecture pattern
 - Cross-platform consistency principles
 
@@ -55,7 +55,7 @@ export enum ButtonVariant {
 
 ### Reference
 
-[ADR-0003: Enum to String Union Migration](https://github.com/MetaMask/decisions/pull/127)
+[ADR-0003: Enum to String Union Migration](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)
 
 ## ADR-0004: Centralized Types Architecture
 
@@ -163,7 +163,7 @@ export type ButtonProps = ButtonPropsShared &
 
 ### Reference
 
-[ADR-0004: Centralized Types Architecture](https://github.com/MetaMask/decisions/pull/128)
+[ADR-0004: Centralized Types Architecture](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md)
 
 ## Platform-Specific Props: Layered Architecture
 
@@ -395,8 +395,8 @@ This file will expand to include:
 
 ### Architecture Decision Records
 
-- [ADR-0003: Enum to String Union Migration](https://github.com/MetaMask/decisions/pull/127)
-- [ADR-0004: Centralized Types Architecture](https://github.com/MetaMask/decisions/pull/128)
+- [ADR-0003: Enum to String Union Migration](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)
+- [ADR-0004: Centralized Types Architecture](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md)
 
 ### Related Cursor Rules
 
