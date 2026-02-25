@@ -54,12 +54,12 @@
   --color-border-muted: #b4b4b566;
 
   /* Derived from the background hue, 264.5, for consistency.
-  Opacity for default is 36%, alternative is 56%. Default is meant
+  Opacity for default is 36%, alternative is 57%. Default is meant
   to be the inverse of dark mode so the layering feels consistent
   across themes. Alternative is relatively darker in light mode for
   better contrast.*/
   --color-overlay-default: #0a0d135c;
-  --color-overlay-alternative: #0a0d138f;
+  --color-overlay-alternative: #0a0d1392;
   --color-overlay-inverse: var(--brand-colors-grey-grey000);
 
   /* For primary semantic elements: interactive, active, selected (#4459ff) */

@@ -61,8 +61,8 @@ export const colors: ThemeColors = {
   overlay: {
     /** Default color for overlays (scrim) (#0a0d135c) */
     default: '#0a0d135c',
-    /** Dimmer color for overlays (scrim) (#0a0d138f) */
-    alternative: '#0a0d138f',
+    /** Dimmer color for overlays (scrim) (#0a0d1392) */
+    alternative: '#0a0d1392',
     /** For elements placed on top of overlay/alternative (#FFFFFF) */
     inverse: brandColor.grey000,
   },
