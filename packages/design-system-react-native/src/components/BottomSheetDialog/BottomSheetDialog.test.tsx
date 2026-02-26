@@ -4,7 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import { Platform } from 'react-native';
 
 // External dependencies.
-import { Text } from '../../../../Text';
+import { Text } from '../Text';
 
 // Internal dependencies
 import BottomSheetDialog from './BottomSheetDialog';
