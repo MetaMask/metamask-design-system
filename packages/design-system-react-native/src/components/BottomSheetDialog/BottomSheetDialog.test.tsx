@@ -2,6 +2,7 @@
 import { render, act, fireEvent } from '@testing-library/react-native';
 import React, { useRef, useEffect } from 'react';
 import { Platform } from 'react-native';
+import type { ReactTestInstance } from 'react-test-renderer';
 
 // External dependencies.
 import { Text } from '../Text';
@@ -11,9 +12,6 @@ import BottomSheetDialog from './BottomSheetDialog';
 import type { BottomSheetDialogRef } from './BottomSheetDialog.types';
 
 const mockThemeRef = { current: 'light' };
-
-const mockInset = { top: 1, right: 2, bottom: 3, left: 4 };
-const mockFrame = { width: 5, height: 600, x: 7, y: 8 };
 
 type GestureCallback = (
   event: Record<string, number>,
@@ -37,17 +35,6 @@ jest.mock('@metamask/design-system-twrnc-preset', () => ({
     style: (...args: string[]) => args,
   }),
   useTheme: () => mockThemeRef.current,
-}));
-
-jest.mock('react-native-safe-area-context', () => ({
-  SafeAreaProvider: ({ children }: { children: React.ReactNode }) => children,
-  SafeAreaConsumer: ({
-    children,
-  }: {
-    children: (insets: typeof mockInset) => React.ReactNode;
-  }) => children(mockInset),
-  useSafeAreaInsets: () => mockInset,
-  useSafeAreaFrame: () => mockFrame,
 }));
 
 // Override useAnimatedGestureHandler to capture and execute the callbacks
@@ -340,12 +327,39 @@ describe('BottomSheetDialog', () => {
       gestureCallbacksRef.current = {};
     });
 
-    const renderAndCaptureGestures = () => {
-      render(
+    const findLayoutNode = (node: ReactTestInstance | null) => {
+      let current = node;
+      while (current) {
+        if (current.props.onLayout) {
+          return current;
+        }
+        current = current.parent;
+      }
+      return null;
+    };
+
+    const renderAndCaptureGestures = ({
+      triggerLayout,
+    }: { triggerLayout?: boolean } = {}) => {
+      const result = render(
         <BottomSheetDialog>
           <Text>Gesture Test</Text>
         </BottomSheetDialog>,
       );
+
+      if (triggerLayout) {
+        const layoutNode = findLayoutNode(result.getByText('Gesture Test'));
+        if (layoutNode) {
+          act(() => {
+            fireEvent(layoutNode, 'layout', {
+              nativeEvent: {
+                layout: { height: 400, width: 300, x: 0, y: 0 },
+              },
+            });
+          });
+        }
+      }
+
       return gestureCallbacksRef.current;
     };
 
@@ -366,7 +380,7 @@ describe('BottomSheetDialog', () => {
     });
 
     it('onActive clamps Y to top boundary', () => {
-      const handlers = renderAndCaptureGestures();
+      const handlers = renderAndCaptureGestures({ triggerLayout: true });
       const ctx: Record<string, number> = { startY: 0 };
       // Large negative translationY should be clamped to top
       handlers.onActive({ translationY: -99999 }, ctx);
@@ -374,8 +388,9 @@ describe('BottomSheetDialog', () => {
     });
 
     it('onActive tracks normal translation', () => {
-      const handlers = renderAndCaptureGestures();
+      const handlers = renderAndCaptureGestures({ triggerLayout: true });
       const ctx: Record<string, number> = { startY: 100 };
+      // Mid-range value (150) is between top (0) and bottom (400) — no clamping
       handlers.onActive({ translationY: 50 }, ctx);
       expect(handlers.onActive).toBeDefined();
     });
@@ -389,7 +404,7 @@ describe('BottomSheetDialog', () => {
     });
 
     it('onEnd snaps to top on quick upward swipe', () => {
-      const handlers = renderAndCaptureGestures();
+      const handlers = renderAndCaptureGestures({ triggerLayout: true });
       const ctx: Record<string, number> = { startY: 0 };
       // High negative velocityY = quick upward swipe = snap to top
       handlers.onEnd({ translationY: -100, velocityY: -1000 }, ctx);
@@ -405,9 +420,9 @@ describe('BottomSheetDialog', () => {
     });
 
     it('onEnd snaps back when below dismiss threshold', () => {
-      const handlers = renderAndCaptureGestures();
+      const handlers = renderAndCaptureGestures({ triggerLayout: true });
       const ctx: Record<string, number> = { startY: 0 };
-      // Small slow swipe, below threshold
+      // Small slow swipe, below threshold — snaps back to top
       handlers.onEnd({ translationY: 10, velocityY: 0 }, ctx);
       expect(handlers.onEnd).toBeDefined();
     });
