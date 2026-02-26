@@ -4,60 +4,64 @@
 :root,
 [data-theme='light'],
 .light {
-  /* For default neutral surface (#ffffff) */
+  /* Background default should be the darkest shade, 0 elevation.
+  Section is +1 elevation, subsection is +2 elevation.
+  Alternative should be deprecated. */
   --color-background-default: var(--brand-colors-grey-grey000);
-  /* For sunken neutral surface below background/default (#f3f5f9) */
-  --color-background-alternative: var(--brand-colors-grey-grey050);
-  /* For section bg usually over background/default (#f3f5f9) */
   --color-background-section: var(--brand-colors-grey-grey050);
-  /* For subsection bg usually over background/section (#ffffff) */
   --color-background-subsection: var(--brand-colors-grey-grey000);
-  /* For muted neutral surface (#3c4d9d0f) */
-  --color-background-muted: #3c4d9d0f;
-  /* Hover state surface for background/default (#f6f6f7) */
-  --color-background-default-hover: #f6f6f7;
-  /* Pressed state surface for background/default (#ebecef) */
-  --color-background-default-pressed: #ebecef;
-  /* Hover state surface for background/alternative (#ebedf1) */
+  --color-background-alternative: var(--brand-colors-grey-grey050);
+
+  /* Applied to interactive elements, such as buttons. 
+  For light mode, we use 8% increments of opacity to offer
+  sufficient affordance for usability. */
+  --color-background-muted: #b4b4b528;
+  --color-background-muted-hover: #b4b4b53d;
+  --color-background-muted-pressed: #b4b4b552;
+
+  /* Ensures visual consistency with section and subsection. */
+  --color-background-default-hover: var(--brand-colors-grey-grey050);
+  --color-background-default-pressed: var(--brand-colors-grey-grey100);
+
+  /* These colors should be deprecated eventuallly for simplicty */
   --color-background-alternative-hover: #ebedf1;
-  /* Pressed state surface for background/alternative (#e1e4ea) */
   --color-background-alternative-pressed: #e1e4ea;
-  /* Hover state surface for background/muted (#3c4d9d1a) */
-  --color-background-muted-hover: #3c4d9d1a;
-  /* Pressed state surface for background/muted (#3c4d9d26) */
-  --color-background-muted-pressed: #3c4d9d26;
-  /* General purpose hover state tint (#858b9a14) */
-  --color-background-hover: #858b9a14;
-  /* General purpose pressed state tint (#858b9a29) */
-  --color-background-pressed: #858b9a29;
-  /* Default color for text (#121314) */
+
+  /* These have opacities of pure white for general usage. 
+  Visually, they align with section and subsection.*/
+  --color-background-hover: #b4b4b528;
+  --color-background-pressed: #b4b4b53d;
+
+  /* These are our content colors. 
+  Contrast ratio of alternative: 5.7 on default, 5.1 on section. 
+  Contrast ratio of muted: 1.9 on default, 1.7 on section.*/
   --color-text-default: var(--brand-colors-grey-grey900);
-  /* Softer color for text (#686e7d) */
   --color-text-alternative: var(--brand-colors-grey-grey500);
-  /* Muted color for text (Not accessible) (#9ca1af) */
   --color-text-muted: var(--brand-colors-grey-grey200);
-  /* Default color for icons (#121314) */
+
   --color-icon-default: var(--brand-colors-grey-grey900);
-  /* Hover state surface for icon.default (#2a2b2c) */
   --color-icon-default-hover: #2a2b2c;
-  /* Pressed state surface for icon.default (#414243) */
   --color-icon-default-pressed: #414243;
-  /* Softer color for icons (#686e7d) */
+
   --color-icon-alternative: var(--brand-colors-grey-grey500);
-  /* Muted color for icons (Not accessible) (#9ca1af) */
   --color-icon-muted: var(--brand-colors-grey-grey200);
-  /* For elements placed on top of icon.default fill (#ffffff) */
   --color-icon-inverse: var(--brand-colors-grey-grey000);
-  /* Default color for borders (#b7bbc8) */
-  --color-border-default: var(--brand-colors-grey-grey200);
-  /* Muted color for borders (b7bbc8-40%) */
-  --color-border-muted: #b7bbc866;
-  /* Default color for overlays (scrim) (#3f434a66) */
-  --color-overlay-default: #3f434a66;
-  /* Dimmer color for overlays (scrim) (black-80%) */
-  --color-overlay-alternative: #000000cc;
-  /* For elements placed on top of overlay/alternative (#ffffff) */
+
+  /* Border default has a 3:3 ratio when applied on bg-default
+  and 3.0 on section. We use opacity for border-muted so it
+  maintains sufficient contrast on bg-default and bg-section.*/
+  --color-border-default: var(--brand-colors-grey-grey400);
+  --color-border-muted: #b4b4b566;
+
+  /* Derived from the background hue, 264.5, for consistency.
+  Opacity for default is 36%, alternative is 57%. Default is meant
+  to be the inverse of dark mode so the layering feels consistent
+  across themes. Alternative is relatively darker in light mode for
+  better contrast.*/
+  --color-overlay-default: #0a0d135c;
+  --color-overlay-alternative: #0a0d1392;
   --color-overlay-inverse: var(--brand-colors-grey-grey000);
+
   /* For primary semantic elements: interactive, active, selected (#4459ff) */
   --color-primary-default: var(--brand-colors-blue-blue500);
   /* Stronger color for primary semantic elements (#2c3dc5) */
