@@ -4,12 +4,6 @@ import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { TextProps } from '../Text';
 
-// Re-export shared types from centralized package (ADR-0004)
-export {
-  BadgeCountSize,
-  type BadgeCountPropsShared,
-} from '@metamask/design-system-shared';
-
 /**
  * BadgeCount component props (React Native platform-specific)
  * Extends shared props with React Native-specific platform concerns
