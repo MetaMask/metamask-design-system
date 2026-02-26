@@ -9,9 +9,6 @@ Repository-specific conventions and patterns:
 - @.cursor/rules/styling.md
 - @.cursor/rules/component-documentation.md
 - @.cursor/rules/component-architecture.md
-- @.cursor/rules/component-creation.md
-- @.cursor/rules/component-migration.md
-- @.cursor/rules/component-enum-union-migration.md
 - @.cursor/rules/figma-integration.md
 
 See @docs/ai-agents.md for comprehensive strategy explanation.
