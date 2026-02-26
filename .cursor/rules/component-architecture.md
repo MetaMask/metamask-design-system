@@ -190,11 +190,6 @@ export {
 - @packages/design-system-react/src/components/BadgeStatus/ (React implementation)
 - @packages/design-system-react-native/src/components/BadgeStatus/ (React Native implementation)
 
-**Other examples:**
-
-- @packages/design-system-react/src/components/Box/ (Foundational)
-- @packages/design-system-react/src/components/Button/ (Complex interactive)
-
 ## References
 
 ### Architecture Decision Records
