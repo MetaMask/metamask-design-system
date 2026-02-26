@@ -50,13 +50,20 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
     endAccessory || (endButtonIconProps && endButtonIconProps.length > 0);
   const hasAnyAccessory = hasStartContent || hasEndContent;
 
-  // Render both wrappers if any accessory exists (for centering)
-  const shouldRenderStartWrapper = Boolean(hasAnyAccessory);
-  const shouldRenderEndWrapper = Boolean(hasAnyAccessory);
+  const isCompact = variant === HeaderBaseVariant.Compact;
 
-  // Calculate equal width for both accessory wrappers to ensure title stays centered
+  // For Compact variant, render both wrappers if any accessory exists (for centering)
+  // For Display variant, only render wrappers when they have content
+  const shouldRenderStartWrapper = isCompact
+    ? Boolean(hasAnyAccessory)
+    : Boolean(hasStartContent);
+  const shouldRenderEndWrapper = isCompact
+    ? Boolean(hasAnyAccessory)
+    : Boolean(hasEndContent);
+
+  // Calculate equal width for both accessory wrappers to ensure title stays centered (Compact only)
   const accessoryWrapperWidth =
-    hasAnyAccessory && (startAccessoryWidth || endAccessoryWidth)
+    isCompact && hasAnyAccessory && (startAccessoryWidth || endAccessoryWidth)
       ? Math.max(startAccessoryWidth, endAccessoryWidth)
       : undefined;
 
@@ -130,12 +137,12 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
       )}
 
       {/* Title */}
-      <Box twClassName="flex-1 items-center">
+      <Box twClassName={isCompact ? 'flex-1 items-center' : 'flex-1'}>
         {typeof children === 'string' ? (
           <Text
             variant={HEADERBASE_VARIANT_TEXT_VARIANTS[variant]}
             testID={titleTestID}
-            style={tw.style('text-center')}
+            style={isCompact ? tw.style('text-center') : undefined}
           >
             {children}
           </Text>
