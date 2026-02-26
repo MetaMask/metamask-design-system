@@ -65,7 +65,9 @@ export const IsInteractable: Story = {
     isInteractable: false,
     children: (
       <Box twClassName="p-4">
-        <Text>Non-interactable dialog (no drag handle, no swipe to dismiss)</Text>
+        <Text>
+          Non-interactable dialog (no drag handle, no swipe to dismiss)
+        </Text>
       </Box>
     ),
   },
