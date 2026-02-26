@@ -3,9 +3,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
 // External dependencies.
-import { ButtonIcon, ButtonIconSize } from '../../ButtonIcon';
-import { HeaderBase } from '../../HeaderBase';
-import { IconName } from '../../Icon';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
+import { HeaderBase } from '../HeaderBase';
+import { IconName } from '../Icon';
 
 // Internal dependencies.
 import { BOTTOM_SHEET_HEADER_VARIANT_MAP } from './BottomSheetHeader.constants';

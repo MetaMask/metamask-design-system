@@ -1,5 +1,5 @@
-import type { ButtonIconProps } from '../../ButtonIcon/ButtonIcon.types';
-import type { HeaderBaseProps } from '../../HeaderBase/HeaderBase.types';
+import type { ButtonIconProps } from '../ButtonIcon/ButtonIcon.types';
+import type { HeaderBaseProps } from '../HeaderBase/HeaderBase.types';
 
 /**
  * Variant options for BottomSheetHeader component.

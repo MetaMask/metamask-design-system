@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../../Box';
-import { Text } from '../../Text';
+import { Box } from '../Box';
+import { Text } from '../Text';
 
 import { BottomSheetHeader } from './BottomSheetHeader';
 import type { BottomSheetHeaderProps } from './BottomSheetHeader.types';

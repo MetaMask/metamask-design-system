@@ -58,8 +58,8 @@ export type {
 export {
   BottomSheetHeader,
   BottomSheetHeaderVariant,
-} from './BottomSheets/BottomSheetHeader';
-export type { BottomSheetHeaderProps } from './BottomSheets/BottomSheetHeader';
+} from './BottomSheetHeader';
+export type { BottomSheetHeaderProps } from './BottomSheetHeader';
 
 export { BottomSheetOverlay } from './BottomSheetOverlay';
 export type { BottomSheetOverlayProps } from './BottomSheetOverlay';
