@@ -7,10 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0]
+
+### Added
+
+- Added `RadioButton` component for radio button form controls ([#926](https://github.com/MetaMask/metamask-design-system/pull/926))
+  - Supports checked, disabled, read-only, and danger states
+  - Full accessibility support with `role="radio"` and `accessibilityState`
+  - Optional label rendering for improved usability
+
+### Changed
+
+- **BREAKING:** Migrated `BadgeStatus` component from TypeScript enums to string union types with const objects ([#912](https://github.com/MetaMask/metamask-design-system/pull/912))
+  - `BadgeStatusStatus` and `BadgeStatusSize` enums replaced with const objects and derived string union types
+  - **No migration required** - continue importing from `@metamask/design-system-react-native` as usual
+  - Const object values remain the same (e.g., `BadgeStatusStatus.Active` still works)
+  - String literals now also accepted thanks to structural typing (e.g., `'active'` works where `BadgeStatusStatus.Active` is expected)
+  - We are still evaluating best practices for const objects vs string literals - use whichever approach works best for your codebase
+  - This change implements [ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md) and [ADR-0004](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md)
+- Refactored `BottomSheetFooter` component location for better organization ([#933](https://github.com/MetaMask/metamask-design-system/pull/933))
+  - Moved from `BottomSheets/BottomSheetFooter/` to `BottomSheetFooter/`
+  - Updated import paths and Storybook title
+  - No breaking changes - all imports from package entry point continue to work
+
 ## [0.7.0]
 
 ### Added
 
+- Added `Label` component for form labels and descriptive text ([#907](https://github.com/MetaMask/metamask-design-system/pull/907))
+- Added `HeaderBase` component for consistent header layouts ([#902](https://github.com/MetaMask/metamask-design-system/pull/902))
+- Added `Skeleton` component for loading states ([#891](https://github.com/MetaMask/metamask-design-system/pull/891))
+- Added `Card` component for grouped content sections ([#923](https://github.com/MetaMask/metamask-design-system/pull/923))
+- Added `BottomSheetFooter` component for bottom sheet actions ([#899](https://github.com/MetaMask/metamask-design-system/pull/899))
+- Added `Toast` component for temporary notification messages ([#892](https://github.com/MetaMask/metamask-design-system/pull/892))
+- Added `Input` component for text input fields ([#909](https://github.com/MetaMask/metamask-design-system/pull/909))
 - Added `CorporateFare` icon to represent stocks ([#920](https://github.com/MetaMask/metamask-design-system/pull/920))
 - Added `BottomSheetOverlay` component for modal bottom sheet interactions ([#897](https://github.com/MetaMask/metamask-design-system/pull/897))
   - Provides consistent overlay pattern for bottom sheet components
@@ -147,7 +177,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.7.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.8.0...HEAD
+[0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.7.0...@metamask/design-system-react-native@0.8.0
 [0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.6.0...@metamask/design-system-react-native@0.7.0
 [0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.5.1...@metamask/design-system-react-native@0.6.0
 [0.5.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.5.0...@metamask/design-system-react-native@0.5.1

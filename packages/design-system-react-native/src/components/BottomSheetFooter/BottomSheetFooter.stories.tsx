@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../../Box';
-import { Text } from '../../Text';
+import { Box } from '../Box';
+import { Text } from '../Text';
 
 import { BottomSheetFooter } from './BottomSheetFooter';
 import type { BottomSheetFooterProps } from './BottomSheetFooter.types';
 import { ButtonsAlignment } from './BottomSheetFooter.types';
 
 const meta: Meta<BottomSheetFooterProps> = {
-  title: 'Components/BottomSheets/BottomSheetFooter',
+  title: 'Components/BottomSheetFooter',
   component: BottomSheetFooter,
   argTypes: {
     buttonsAlignment: {

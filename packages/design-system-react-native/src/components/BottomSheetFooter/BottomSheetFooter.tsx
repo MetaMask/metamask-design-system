@@ -4,7 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 // External dependencies.
-import { Button, ButtonVariant } from '../../Button';
+import { Button, ButtonVariant } from '../Button';
 
 // Internal dependencies.
 import type { BottomSheetFooterProps } from './BottomSheetFooter.types';
