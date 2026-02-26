@@ -14,8 +14,3 @@ export const HEADERBASE_VARIANT_TEXT_VARIANTS: Record<
   [HeaderBaseVariant.Compact]: TextVariant.HeadingSm,
   [HeaderBaseVariant.Display]: TextVariant.HeadingLg,
 };
-
-/**
- * Default test ID for the title Text element.
- */
-export const HEADERBASE_TITLE_TEST_ID = 'header-title';
