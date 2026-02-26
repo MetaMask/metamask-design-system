@@ -58,7 +58,7 @@ yarn create-component:react-native --name MyComponent --description "Brief descr
 1. Create shared types in @metamask/design-system-shared
 2. Replace template types with shared imports + platform extensions
 3. Replace raw elements (div/View) with Box/Text primitives
-4. Apply design token enums
+4. Apply design token const objects
 
 ### Step 2: Create Shared Types
 
@@ -85,19 +85,19 @@ mkdir -p packages/design-system-shared/src/types/MyComponent
 
 **CRITICAL Pattern - Two-File Structure:**
 
-1. **`.types.ts`** - Import only, NO enum re-exports (prevents coverage loss)
-2. **`index.ts`** - ONLY location for enum exports (single source of truth)
+1. **`.types.ts`** - Import only, NO const object re-exports (prevents coverage loss)
+2. **`index.ts`** - ONLY location for const object exports (single source of truth)
 
 #### ComponentName.types.ts Pattern
 
-**Import shared types, extend with platform props, NO enum re-exports:**
+**Import shared types, extend with platform props, NO const object re-exports:**
 
 ```tsx
 // ✅ Correct - Import only
 import type { MyComponentPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-// NO enum re-exports! Enums exported from index.ts only
+// NO const object re-exports! Const objects exported from index.ts only
 
 export type MyComponentProps = ComponentProps<'div'> &
   MyComponentPropsShared & {
@@ -119,10 +119,10 @@ export type MyComponentProps = ComponentProps<'div'> &
 
 #### index.ts Pattern
 
-**Export enums from shared (single location):**
+**Export const objects from shared (single location):**
 
 ```tsx
-// ✅ Correct - Single export location for enums
+// ✅ Correct - Single export location for const objects
 export {
   MyComponentVariant,
   MyComponentSize,
@@ -134,7 +134,7 @@ export type { MyComponentProps } from './MyComponent.types';
 **Why this pattern?**
 
 - ✅ Prevents duplicate exports that reduce test coverage
-- ✅ Single source of truth for enum exports
+- ✅ Single source of truth for const object exports
 - ✅ Matches BadgeStatus proof-of-concept
 
 **Reference:** See @packages/design-system-react/src/components/BadgeStatus/ for complete implementation.
@@ -145,7 +145,7 @@ export type { MyComponentProps } from './MyComponent.types';
 
 - ✅ Replace template div/View with Box primitive
 - ✅ Use Text component (not raw span/Text)
-- ✅ Use design token enums (BoxBackgroundColor, BoxBorderRadius, TextVariant)
+- ✅ Use design token const objects (BoxBackgroundColor, BoxBorderRadius, TextVariant)
 - ✅ Forward refs using `forwardRef`
 - ✅ Set displayName: `MyComponent.displayName = 'MyComponent';`
 
@@ -287,7 +287,7 @@ export type MyComponentProps = ComponentProps<'div'> &
   };
 ```
 
-### ❌ Re-exporting Enums from .types.ts
+### ❌ Re-exporting Const Objects from .types.ts
 
 ```tsx
 // ❌ Wrong - Duplicate exports reduce test coverage
@@ -305,7 +305,7 @@ export type MyComponentProps = ComponentProps<'div'> &
 // ✅ Correct - Import only in .types.ts, export from index.ts
 // ComponentName.types.ts
 import type { MyComponentPropsShared } from '@metamask/design-system-shared';
-// NO enum re-exports
+// NO const object re-exports
 
 export type MyComponentProps = ComponentProps<'div'> &
   MyComponentPropsShared & { className?: string };
@@ -316,7 +316,7 @@ export { MyComponent } from './MyComponent';
 export type { MyComponentProps } from './MyComponent.types';
 ```
 
-**Why this matters:** Duplicate enum exports create uncovered code paths, failing Jest coverage thresholds (see BadgeCount PR).
+**Why this matters:** Duplicate const object exports create uncovered code paths, failing Jest coverage thresholds (see BadgeCount PR).
 
 ## Verification Checklist
 
@@ -338,8 +338,8 @@ export type { MyComponentProps } from './MyComponent.types';
 ### Platform Types (Layered Architecture)
 
 - [ ] Platform `.types.ts` files import shared type for extension
-- [ ] Platform `.types.ts` files DO NOT re-export enums (import only - prevents coverage loss)
-- [ ] Platform `index.ts` files export enums directly from shared (single location)
+- [ ] Platform `.types.ts` files DO NOT re-export const objects (import only - prevents coverage loss)
+- [ ] Platform `index.ts` files export const objects directly from shared (single location)
 - [ ] Template types replaced with shared imports
 - [ ] React: Extends `ComponentProps<'element'>`, adds `className?: string`
 - [ ] React Native: Extends `ViewProps`/`PressableProps`, adds `twClassName?: string`
@@ -350,7 +350,7 @@ export type { MyComponentProps } from './MyComponent.types';
 
 - [ ] Template div/View replaced with Box primitive
 - [ ] Uses Text component (not raw span/Text)
-- [ ] Design token enums used
+- [ ] Design token const objects used
 - [ ] Component forwards refs using `forwardRef`
 - [ ] Display name set
 

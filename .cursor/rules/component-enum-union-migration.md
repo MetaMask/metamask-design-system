@@ -6,7 +6,7 @@ Guide for refactoring existing monorepo components to ADR-0003 (string unions) a
 
 This workflow is for **internal cleanup** of existing monorepo components that currently have:
 
-- Duplicate enum definitions across React and React Native packages
+- Duplicate const object definitions across React and React Native packages
 - Types defined separately in each platform package
 - No shared type architecture
 
@@ -20,7 +20,7 @@ This workflow is for **internal cleanup** of existing monorepo components that c
 Migrate existing components when:
 
 - ✅ Component already exists in both React and React Native packages
-- ✅ Enums are duplicated across platform packages
+- ✅ Const objects are duplicated across platform packages
 - ✅ Types are defined separately in each platform (no shared source)
 - ✅ Component API needs to be unified/modernized
 
@@ -58,12 +58,12 @@ export enum BadgeStatusStatus { Active = 'active', ... } // Duplicate!
 2. **Update React package** `src/components/ComponentName/ComponentName.types.ts`:
 
    - Import shared type for extension
-   - **DO NOT re-export enums** (causes coverage loss - exports belong in index.ts)
+   - **DO NOT re-export const objects** (causes coverage loss - exports belong in index.ts)
    - Extend `ComponentProps<'element'>`, add `className?: string`
    - Import ordering: shared before react
 
    ```tsx
-   // ✅ Correct - Import only, no enum re-exports
+   // ✅ Correct - Import only, no const object re-exports
    import type { ComponentPropsShared } from '@metamask/design-system-shared';
    import type { ComponentProps } from 'react';
 
@@ -76,12 +76,12 @@ export enum BadgeStatusStatus { Active = 'active', ... } // Duplicate!
 3. **Update React Native package** `src/components/ComponentName/ComponentName.types.ts`:
 
    - Import shared type for extension
-   - **DO NOT re-export enums** (causes coverage loss - exports belong in index.ts)
+   - **DO NOT re-export const objects** (causes coverage loss - exports belong in index.ts)
    - Extend `ViewProps`/`PressableProps`, add `twClassName?: string`
    - Import ordering: shared before react-native
 
    ```tsx
-   // ✅ Correct - Import only, no enum re-exports
+   // ✅ Correct - Import only, no const object re-exports
    import type { ComponentPropsShared } from '@metamask/design-system-shared';
    import type { ViewProps } from 'react-native';
 
@@ -133,7 +133,7 @@ export enum BadgeStatusStatus { Active = 'active', ... } // Duplicate!
 
 ## Common Mistakes
 
-### ❌ Re-exporting Enums from .types.ts Files
+### ❌ Re-exporting Const Objects from .types.ts Files
 
 ```tsx
 // ❌ Wrong - Duplicate exports reduce test coverage
@@ -145,10 +145,10 @@ export {
 
 // ✅ Correct - Import only in .types.ts
 import type { ComponentPropsShared } from '@metamask/design-system-shared';
-// Enum exported from index.ts only
+// Const object exported from index.ts only
 ```
 
-**Why this matters:** Duplicate enum exports create uncovered code paths in Jest coverage reports, causing tests to fail coverage thresholds.
+**Why this matters:** Duplicate const object exports create uncovered code paths in Jest coverage reports, causing tests to fail coverage thresholds.
 
 ### ❌ Using `interface` instead of `type` for Shared Props
 
@@ -217,8 +217,8 @@ export type BadgeStatusProps = ComponentProps<'div'> &
 ### React Package
 
 - [ ] Component `.types.ts` file imports shared type for extension
-- [ ] Component `.types.ts` DOES NOT re-export enums (import only)
-- [ ] Component `index.ts` exports enums directly from shared package (single location)
+- [ ] Component `.types.ts` DOES NOT re-export const objects (import only)
+- [ ] Component `index.ts` exports const objects directly from shared package (single location)
 - [ ] Extends `ComponentProps<'element'>`
 - [ ] Adds `className?: string`
 - [ ] Import ordering correct (shared before react)
@@ -227,8 +227,8 @@ export type BadgeStatusProps = ComponentProps<'div'> &
 ### React Native Package
 
 - [ ] Component `.types.ts` file imports shared type for extension
-- [ ] Component `.types.ts` DOES NOT re-export enums (import only)
-- [ ] Component `index.ts` exports enums directly from shared package (single location)
+- [ ] Component `.types.ts` DOES NOT re-export const objects (import only)
+- [ ] Component `index.ts` exports const objects directly from shared package (single location)
 - [ ] Extends `ViewProps` or `PressableProps`
 - [ ] Adds `twClassName?: string`
 - [ ] Import ordering correct (shared before react-native)
