@@ -9,9 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.0]
 
-### Uncategorized
+### Added
 
-- feat: TextField migration ([#910](https://github.com/MetaMask/metamask-design-system/pull/910))
+- Added `TextField` component for text input fields ([#910](https://github.com/MetaMask/metamask-design-system/pull/910))
+  - Boxed, press-to-focus wrapper around `Input` component
+  - Supports configurable sizes, optional start/end accessories
+  - Includes error and disabled states with custom styling
+  - Full accessibility support and comprehensive test coverage
 
 ## [0.8.0]
 

@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.2.2]
 
-### Uncategorized
+### Changed
 
-- chore: Refine HeadingMd and SectionHeading sizes and related docs ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
+- Updated typography scale for improved text hierarchy ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
+  - `fontSize.5` increased from 18px to 20px, affecting `HeadingMd`, `SectionHeading`, `BodyLg`, and `ButtonLabelLg` typography tokens
+  - `SectionHeading` on large screens now uses 24px (up from 20px) to maintain consistent hierarchy with `HeadingMd`
+  - Typography documentation updated to reflect the refined sizes
 
 ## [8.2.1]
 

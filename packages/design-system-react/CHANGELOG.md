@@ -9,9 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.1]
 
-### Uncategorized
+### Changed
 
-- chore: Refine HeadingMd and SectionHeading sizes and related docs ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
+- Updated `Text` component typography sizes for improved text hierarchy ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
+  - `TextVariant.HeadingMd` and `TextVariant.SectionHeading` now use 20px on small screens (up from 18px)
+  - `TextVariant.SectionHeading` now uses 24px on large screens (up from 20px) for consistent hierarchy with `HeadingMd`
+  - `TextVariant.BodyLg` and `TextVariant.ButtonLabelLg` also updated to 20px
+  - Typography documentation updated for accuracy
 
 ## [0.9.0]
 
