@@ -98,6 +98,33 @@ describe('BottomSheetDialog', () => {
     expect(onOpenMock).toHaveBeenCalled();
   });
 
+  it('calls onOpen callback when onOpenDialog ref is called with callback', () => {
+    const onOpenMock = jest.fn();
+    const callbackMock = jest.fn();
+    const TestComponent = () => {
+      const ref = useRef<BottomSheetDialogRef>(null);
+
+      useEffect(() => {
+        if (ref.current) {
+          act(() => {
+            ref.current?.onOpenDialog(callbackMock);
+          });
+        }
+      }, []);
+
+      return (
+        <BottomSheetDialog ref={ref} onOpen={onOpenMock}>
+          <Text>Test Child</Text>
+        </BottomSheetDialog>
+      );
+    };
+
+    render(<TestComponent />);
+
+    expect(onOpenMock).toHaveBeenCalled();
+    expect(callbackMock).toHaveBeenCalled();
+  });
+
   it('calls onClose when onCloseDialog ref is called', () => {
     const onCloseMock = jest.fn();
     const TestComponent = () => {
@@ -121,6 +148,33 @@ describe('BottomSheetDialog', () => {
     render(<TestComponent />);
 
     expect(onCloseMock).toHaveBeenCalled();
+  });
+
+  it('calls onClose callback when onCloseDialog ref is called with callback', () => {
+    const onCloseMock = jest.fn();
+    const callbackMock = jest.fn();
+    const TestComponent = () => {
+      const ref = useRef<BottomSheetDialogRef>(null);
+
+      useEffect(() => {
+        if (ref.current) {
+          act(() => {
+            ref.current?.onCloseDialog(callbackMock);
+          });
+        }
+      }, []);
+
+      return (
+        <BottomSheetDialog ref={ref} onClose={onCloseMock}>
+          <Text>Test Child</Text>
+        </BottomSheetDialog>
+      );
+    };
+
+    render(<TestComponent />);
+
+    expect(onCloseMock).toHaveBeenCalled();
+    expect(callbackMock).toHaveBeenCalled();
   });
 
   it('renders drag handle indicator only when isInteractable is true', () => {

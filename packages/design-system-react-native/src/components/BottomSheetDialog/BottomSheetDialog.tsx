@@ -91,14 +91,22 @@ const BottomSheetDialog = forwardRef<
       onClose?.();
     }, [onClose]);
 
-    const onCloseDialog = useCallback(() => {
-      currentYOffset.value = withTiming(
-        bottomOfDialogYValue.value,
-        { duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION },
-        () => runOnJS(onCloseCB)(),
-      );
-      // Ref values do not affect deps.
-    }, [onCloseCB]);
+    const onCloseDialog = useCallback(
+      (callback?: () => void) => {
+        currentYOffset.value = withTiming(
+          bottomOfDialogYValue.value,
+          { duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION },
+          () => {
+            runOnJS(onCloseCB)();
+            if (callback) {
+              runOnJS(callback)();
+            }
+          },
+        );
+        // Ref values do not affect deps.
+      },
+      [onCloseCB],
+    );
 
     const gestureHandler = useAnimatedGestureHandler<
       PanGestureHandlerGestureEvent,
@@ -170,7 +178,7 @@ const BottomSheetDialog = forwardRef<
     });
 
     // Animate in sheet on initial render.
-    const onOpenDialog = () => {
+    const onOpenDialog = (callback?: () => void) => {
       // Starts setting the Y position of the dialog to the bottom of the dialog
       currentYOffset.value = bottomOfDialogYValue.value;
       // Animate the Y position to the top of the dialog, then call onOpenCB
@@ -179,7 +187,12 @@ const BottomSheetDialog = forwardRef<
         {
           duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
         },
-        () => runOnJS(onOpenCB)(),
+        () => {
+          runOnJS(onOpenCB)();
+          if (callback) {
+            runOnJS(callback)();
+          }
+        },
       );
     };
 
