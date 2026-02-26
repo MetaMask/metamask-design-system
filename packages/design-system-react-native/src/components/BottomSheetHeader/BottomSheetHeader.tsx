@@ -47,11 +47,11 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
 
   return (
     <HeaderBase
+      {...props}
       style={[tw.style('px-4', twClassName), style]}
       startAccessory={startAccessory}
       endAccessory={endAccessory}
       variant={headerBaseVariant}
-      {...props}
     >
       {children}
     </HeaderBase>
