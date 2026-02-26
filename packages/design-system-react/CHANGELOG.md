@@ -7,16 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.9.1]
-
-### Changed
-
-- Updated `Text` component typography sizes for improved text hierarchy ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
-  - `TextVariant.HeadingMd` and `TextVariant.SectionHeading` now use 20px on small screens (up from 18px)
-  - `TextVariant.SectionHeading` now uses 24px on large screens (up from 20px) for consistent hierarchy with `HeadingMd`
-  - `TextVariant.BodyLg` and `TextVariant.ButtonLabelLg` also updated to 20px
-  - Typography documentation updated for accuracy
-
 ## [0.9.0]
 
 ### Changed
@@ -167,8 +157,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.9.1...HEAD
-[0.9.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.9.0...@metamask/design-system-react@0.9.1
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.9.0...HEAD
 [0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.8.0...@metamask/design-system-react@0.9.0
 [0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.7.0...@metamask/design-system-react@0.8.0
 [0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.6.1...@metamask/design-system-react@0.7.0
