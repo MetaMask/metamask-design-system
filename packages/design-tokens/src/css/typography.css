@@ -100,7 +100,7 @@
   --typography-s-page-heading-line-height: var(--line-height-5);
   --typography-s-page-heading-font-weight: var(--font-weight-bold);
   --typography-s-page-heading-letter-spacing: var(--letter-spacing-0);
-  --typography-s-section-heading-font-size: var(--font-size-4);
+  --typography-s-section-heading-font-size: var(--font-size-5);
   --typography-s-section-heading-line-height: var(--line-height-4);
   --typography-s-section-heading-font-weight: var(--font-weight-bold);
   --typography-s-section-heading-letter-spacing: var(--letter-spacing-0);
@@ -178,8 +178,8 @@
   --typography-l-page-heading-line-height: var(--line-height-6);
   --typography-l-page-heading-font-weight: var(--font-weight-bold);
   --typography-l-page-heading-letter-spacing: var(--letter-spacing-0);
-  --typography-l-section-heading-font-size: var(--font-size-5);
-  --typography-l-section-heading-line-height: var(--line-height-4);
+  --typography-l-section-heading-font-size: var(--font-size-6);
+  --typography-l-section-heading-line-height: var(--line-height-5);
   --typography-l-section-heading-font-weight: var(--font-weight-bold);
   --typography-l-section-heading-letter-spacing: var(--letter-spacing-0);
   --typography-l-button-label-md-font-size: var(--font-size-4);
