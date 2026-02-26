@@ -79,17 +79,9 @@ export enum AvatarIconSeverity {
 
 /**
  * BadgeCount - size
+ * Re-exported from shared package (ADR-0003 + ADR-0004)
  */
-export enum BadgeCountSize {
-  /**
-   * Represents a medium badge count (14px height).
-   */
-  Md = 'md',
-  /**
-   * Represents a large badge count (20px height).
-   */
-  Lg = 'lg',
-}
+export { BadgeCountSize } from '@metamask/design-system-shared';
 
 /**
  * BadgeWrapper - positionAnchorShape
