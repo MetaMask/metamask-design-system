@@ -81,36 +81,63 @@ mkdir -p packages/design-system-shared/src/types/MyComponent
 
 **Reference:** See @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts for complete implementation.
 
-### Steps 3-4: Update Platform Types
+### Steps 3-4: Update Platform Types and Exports
 
-**Both platforms follow same pattern:**
+**CRITICAL Pattern - Two-File Structure:**
+
+1. **`.types.ts`** - Import only, NO enum re-exports (prevents coverage loss)
+2. **`index.ts`** - ONLY location for enum exports (single source of truth)
+
+#### ComponentName.types.ts Pattern
+
+**Import shared types, extend with platform props, NO enum re-exports:**
 
 ```tsx
-// Import shared type for extension
+// ✅ Correct - Import only
 import type { MyComponentPropsShared } from '@metamask/design-system-shared';
+import type { ComponentProps } from 'react';
 
-// Re-export shared types (ADR-0004)
-export {
-  MyComponentVariant,
-  type MyComponentPropsShared,
-} from '@metamask/design-system-shared';
+// NO enum re-exports! Enums exported from index.ts only
 
-// Extend with platform-specific props
-export type MyComponentProps = MyComponentPropsShared & ...platform extension
+export type MyComponentProps = ComponentProps<'div'> &
+  MyComponentPropsShared & {
+    className?: string;
+    style?: React.CSSProperties;
+  };
 ```
 
-**React-specific:**
+**React-specific extensions:**
 
 - Extend `ComponentProps<'element'>`
 - Add `className?: string`
 - Add `style?: React.CSSProperties`
 
-**React Native-specific:**
+**React Native-specific extensions:**
 
 - Extend `ViewProps` or `PressableProps`
 - Add `twClassName?: string`
 
-**Reference:** See BadgeStatus types in both packages for complete implementation.
+#### index.ts Pattern
+
+**Export enums from shared (single location):**
+
+```tsx
+// ✅ Correct - Single export location for enums
+export {
+  MyComponentVariant,
+  MyComponentSize,
+} from '@metamask/design-system-shared';
+export { MyComponent } from './MyComponent';
+export type { MyComponentProps } from './MyComponent.types';
+```
+
+**Why this pattern?**
+
+- ✅ Prevents duplicate exports that reduce test coverage
+- ✅ Single source of truth for enum exports
+- ✅ Matches BadgeStatus proof-of-concept
+
+**Reference:** See @packages/design-system-react/src/components/BadgeStatus/ for complete implementation.
 
 ### Steps 5-6: Implement Components
 
@@ -260,6 +287,37 @@ export type MyComponentProps = ComponentProps<'div'> &
   };
 ```
 
+### ❌ Re-exporting Enums from .types.ts
+
+```tsx
+// ❌ Wrong - Duplicate exports reduce test coverage
+// ComponentName.types.ts
+import type { MyComponentPropsShared } from '@metamask/design-system-shared';
+
+export {
+  MyComponentVariant, // Duplicate with index.ts export!
+  type MyComponentPropsShared,
+} from '@metamask/design-system-shared';
+
+export type MyComponentProps = ComponentProps<'div'> &
+  MyComponentPropsShared & { className?: string };
+
+// ✅ Correct - Import only in .types.ts, export from index.ts
+// ComponentName.types.ts
+import type { MyComponentPropsShared } from '@metamask/design-system-shared';
+// NO enum re-exports
+
+export type MyComponentProps = ComponentProps<'div'> &
+  MyComponentPropsShared & { className?: string };
+
+// ComponentName/index.ts
+export { MyComponentVariant } from '@metamask/design-system-shared';
+export { MyComponent } from './MyComponent';
+export type { MyComponentProps } from './MyComponent.types';
+```
+
+**Why this matters:** Duplicate enum exports create uncovered code paths, failing Jest coverage thresholds (see BadgeCount PR).
+
 ## Verification Checklist
 
 ### Setup & Scaffolding
@@ -279,8 +337,9 @@ export type MyComponentProps = ComponentProps<'div'> &
 
 ### Platform Types (Layered Architecture)
 
-- [ ] Platform packages import shared type for extension
-- [ ] Platform packages re-export all shared types
+- [ ] Platform `.types.ts` files import shared type for extension
+- [ ] Platform `.types.ts` files DO NOT re-export enums (import only - prevents coverage loss)
+- [ ] Platform `index.ts` files export enums directly from shared (single location)
 - [ ] Template types replaced with shared imports
 - [ ] React: Extends `ComponentProps<'element'>`, adds `className?: string`
 - [ ] React Native: Extends `ViewProps`/`PressableProps`, adds `twClassName?: string`

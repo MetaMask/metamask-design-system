@@ -58,16 +58,38 @@ export enum BadgeStatusStatus { Active = 'active', ... } // Duplicate!
 2. **Update React package** `src/components/ComponentName/ComponentName.types.ts`:
 
    - Import shared type for extension
-   - Re-export all shared types
+   - **DO NOT re-export enums** (causes coverage loss - exports belong in index.ts)
    - Extend `ComponentProps<'element'>`, add `className?: string`
    - Import ordering: shared before react
+
+   ```tsx
+   // ✅ Correct - Import only, no enum re-exports
+   import type { ComponentPropsShared } from '@metamask/design-system-shared';
+   import type { ComponentProps } from 'react';
+
+   export type ComponentProps = ComponentProps<'div'> &
+     ComponentPropsShared & {
+       className?: string;
+     };
+   ```
 
 3. **Update React Native package** `src/components/ComponentName/ComponentName.types.ts`:
 
    - Import shared type for extension
-   - Re-export all shared types
+   - **DO NOT re-export enums** (causes coverage loss - exports belong in index.ts)
    - Extend `ViewProps`/`PressableProps`, add `twClassName?: string`
    - Import ordering: shared before react-native
+
+   ```tsx
+   // ✅ Correct - Import only, no enum re-exports
+   import type { ComponentPropsShared } from '@metamask/design-system-shared';
+   import type { ViewProps } from 'react-native';
+
+   export type ComponentProps = ComponentPropsShared &
+     ViewProps & {
+       twClassName?: string;
+     };
+   ```
 
 4. **Remove old enums** from platform type indices:
 
@@ -96,7 +118,7 @@ export enum BadgeStatusStatus { Active = 'active', ... } // Duplicate!
    - Shared package imports before platform imports
    - Type imports before value imports
 
-6. **Verify build/test/lint:**
+7. **Verify build/test/lint:**
    ```bash
    yarn build && yarn test && yarn lint
    ```
@@ -110,6 +132,23 @@ export enum BadgeStatusStatus { Active = 'active', ... } // Duplicate!
 **Related PR:** https://github.com/MetaMask/metamask-design-system/pull/912 (complete migration with all file changes)
 
 ## Common Mistakes
+
+### ❌ Re-exporting Enums from .types.ts Files
+
+```tsx
+// ❌ Wrong - Duplicate exports reduce test coverage
+// ComponentName.types.ts
+export {
+  ComponentVariant, // Duplicate with index.ts export!
+  type ComponentPropsShared,
+} from '@metamask/design-system-shared';
+
+// ✅ Correct - Import only in .types.ts
+import type { ComponentPropsShared } from '@metamask/design-system-shared';
+// Enum exported from index.ts only
+```
+
+**Why this matters:** Duplicate enum exports create uncovered code paths in Jest coverage reports, causing tests to fail coverage thresholds.
 
 ### ❌ Using `interface` instead of `type` for Shared Props
 
@@ -177,23 +216,23 @@ export type BadgeStatusProps = ComponentProps<'div'> &
 
 ### React Package
 
-- [ ] Component types file imports shared type for extension
-- [ ] Re-exports all shared types (values and types)
+- [ ] Component `.types.ts` file imports shared type for extension
+- [ ] Component `.types.ts` DOES NOT re-export enums (import only)
+- [ ] Component `index.ts` exports enums directly from shared package (single location)
 - [ ] Extends `ComponentProps<'element'>`
 - [ ] Adds `className?: string`
 - [ ] Import ordering correct (shared before react)
 - [ ] Old enum removed from `src/types/index.ts`
-- [ ] Component `index.ts` exports directly from shared package
 
 ### React Native Package
 
-- [ ] Component types file imports shared type for extension
-- [ ] Re-exports all shared types (values and types)
+- [ ] Component `.types.ts` file imports shared type for extension
+- [ ] Component `.types.ts` DOES NOT re-export enums (import only)
+- [ ] Component `index.ts` exports enums directly from shared package (single location)
 - [ ] Extends `ViewProps` or `PressableProps`
 - [ ] Adds `twClassName?: string`
 - [ ] Import ordering correct (shared before react-native)
 - [ ] Old enum removed from `src/types/index.ts`
-- [ ] Component `index.ts` exports directly from shared package
 
 ### Cross-Platform Consistency
 

@@ -153,7 +153,10 @@ export type { BadgeStatusProps } from './BadgeStatus.types';
 
 // ❌ Wrong - Don't re-export shared types here
 // packages/design-system-react/src/types/index.ts
-export { BadgeStatusStatus, BadgeStatusSize } from '@metamask/design-system-shared';
+export {
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from '@metamask/design-system-shared';
 ```
 
 ## Cross-Platform Consistency
