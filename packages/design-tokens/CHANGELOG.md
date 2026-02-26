@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.2.2]
+
 ### Uncategorized
 
 - chore: Refine HeadingMd and SectionHeading sizes and related docs ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
@@ -419,7 +421,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.2...HEAD
+[8.2.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.1...@metamask/design-tokens@8.2.2
 [8.2.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.0...@metamask/design-tokens@8.2.1
 [8.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.1...@metamask/design-tokens@8.2.0
 [8.1.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.0...@metamask/design-tokens@8.1.1
