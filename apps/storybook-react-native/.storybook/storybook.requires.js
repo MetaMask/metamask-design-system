@@ -93,6 +93,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx": require("../../../packages/design-system-react-native/src/components/temp-components/TextOrChildren/TextOrChildren.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Text/Text.stories.tsx": require("../../../packages/design-system-react-native/src/components/Text/Text.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/TextField/TextField.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextField/TextField.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Toast/Toast.stories.tsx": require("../../../packages/design-system-react-native/src/components/Toast/Toast.stories.tsx"),
     "./stories/Backgrounds.stories.tsx": require("../stories/Backgrounds.stories.tsx"),
     "./stories/WalletHome.stories.tsx": require("../stories/WalletHome.stories.tsx"),
