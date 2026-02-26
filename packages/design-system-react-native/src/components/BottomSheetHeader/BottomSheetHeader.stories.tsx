@@ -9,7 +9,7 @@ import type { BottomSheetHeaderProps } from './BottomSheetHeader.types';
 import { BottomSheetHeaderVariant } from './BottomSheetHeader.types';
 
 const meta: Meta<BottomSheetHeaderProps> = {
-  title: 'Components/BottomSheets/BottomSheetHeader',
+  title: 'Components/BottomSheetHeader',
   component: BottomSheetHeader,
   argTypes: {
     variant: {
