@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: Refine HeadingMd and SectionHeading sizes and related docs ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
+
 ## [0.9.0]
 
 ### Changed

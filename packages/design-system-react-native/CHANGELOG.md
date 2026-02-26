@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: TextField migration ([#910](https://github.com/MetaMask/metamask-design-system/pull/910))
+
 ## [0.8.0]
 
 ### Added
