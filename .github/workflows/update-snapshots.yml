@@ -1,0 +1,39 @@
+name: Update Jest snapshots
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to update snapshots on (e.g. feature/my-branch)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    name: Update snapshots
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v1
+        with:
+          is-high-risk-environment: false
+          ref: ${{ inputs.branch }}
+      - name: Build packages
+        run: yarn build
+      - name: Update snapshots
+        run: yarn test:update
+      - name: Commit and push changes (if any)
+        shell: bash
+        run: |
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "test: update snapshots [skip ci]"
+            git push origin "HEAD:${{ inputs.branch }}"
+          else
+            echo "No snapshot changes to commit"
+          fi
