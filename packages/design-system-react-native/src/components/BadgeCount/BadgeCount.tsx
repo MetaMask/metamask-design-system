@@ -1,8 +1,8 @@
+import { BadgeCountSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import { BadgeCountSize } from '../../types';
 import { Text, TextColor, FontWeight } from '../Text';
 
 import {

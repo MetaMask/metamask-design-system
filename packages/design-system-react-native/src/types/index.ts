@@ -78,12 +78,6 @@ export enum AvatarIconSeverity {
 }
 
 /**
- * BadgeCount - size
- * Re-exported from shared package (ADR-0003 + ADR-0004)
- */
-export { BadgeCountSize } from '@metamask/design-system-shared';
-
-/**
  * BadgeWrapper - positionAnchorShape
  */
 export enum BadgeWrapperPositionAnchorShape {

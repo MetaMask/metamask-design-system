@@ -1,7 +1,6 @@
+import { BadgeCountSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
-
-import { BadgeCountSize } from '../../types';
 
 import { BadgeCount } from './BadgeCount';
 import type { BadgeCountProps } from './BadgeCount.types';
