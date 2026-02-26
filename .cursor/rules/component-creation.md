@@ -77,6 +77,7 @@ mkdir -p packages/design-system-shared/src/types/MyComponent
 - ✅ Add "Shared" suffix: `ComponentNamePropsShared`
 - ✅ Platform-independent properties only (no className/twClassName, no onClick/onPress)
 - ✅ Export from `packages/design-system-shared/src/index.ts` with inline `type` keyword
+- ✅ Component `index.ts` exports directly from shared (NOT through `src/types/index.ts`)
 
 **Reference:** See @packages/design-system-shared/src/types/BadgeStatus/BadgeStatus.types.ts for complete implementation.
 
@@ -274,6 +275,7 @@ export type MyComponentProps = ComponentProps<'div'> &
 - [ ] Used `type` not `interface` for shared props
 - [ ] Exported from `@metamask/design-system-shared/src/index.ts`
 - [ ] Inline `type` keyword used in exports
+- [ ] Component `index.ts` exports directly from shared (NOT through `src/types/index.ts`)
 
 ### Platform Types (Layered Architecture)
 

@@ -75,11 +75,23 @@ export enum BadgeStatusStatus { Active = 'active', ... } // Duplicate!
    // ❌ DELETE from src/types/index.ts:
    // export enum BadgeStatusStatus { ... }
 
-   // ✅ ADD re-export instead:
-   export { BadgeStatusStatus } from '@metamask/design-system-shared';
+   // ✅ Do NOT re-export in src/types/index.ts
+   // Component index.ts will export directly from shared
    ```
 
-5. **Fix import ordering** (ESLint will enforce):
+5. **Update component index.ts** to export directly from shared:
+
+   ```tsx
+   // src/components/ComponentName/index.ts
+   export {
+     ComponentVariant,
+     ComponentSize,
+   } from '@metamask/design-system-shared';
+   export { ComponentName } from './ComponentName';
+   export type { ComponentProps } from './ComponentName.types';
+   ```
+
+6. **Fix import ordering** (ESLint will enforce):
 
    - Shared package imports before platform imports
    - Type imports before value imports
@@ -171,7 +183,7 @@ export type BadgeStatusProps = ComponentProps<'div'> &
 - [ ] Adds `className?: string`
 - [ ] Import ordering correct (shared before react)
 - [ ] Old enum removed from `src/types/index.ts`
-- [ ] Re-exports shared types from `src/types/index.ts`
+- [ ] Component `index.ts` exports directly from shared package
 
 ### React Native Package
 
@@ -181,7 +193,7 @@ export type BadgeStatusProps = ComponentProps<'div'> &
 - [ ] Adds `twClassName?: string`
 - [ ] Import ordering correct (shared before react-native)
 - [ ] Old enum removed from `src/types/index.ts`
-- [ ] Re-exports shared types from `src/types/index.ts`
+- [ ] Component `index.ts` exports directly from shared package
 
 ### Cross-Platform Consistency
 

@@ -123,6 +123,39 @@ export { BadgeStatusStatus, BadgeStatusSize } from '...';
 export type { BadgeStatusStatus, BadgeStatusSize } from '...'; // Error!
 ```
 
+## Component Index Export Pattern
+
+**Component `index.ts` files export directly from shared package, NOT through `src/types/index.ts`:**
+
+```tsx
+// ✅ Correct - Component index.ts exports directly from shared
+// packages/design-system-react/src/components/BadgeStatus/index.ts
+export {
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from '@metamask/design-system-shared';
+export { BadgeStatus } from './BadgeStatus';
+export type { BadgeStatusProps } from './BadgeStatus.types';
+
+// ❌ Wrong - Don't re-export through src/types/index.ts
+// packages/design-system-react/src/components/BadgeStatus/index.ts
+export { BadgeStatusStatus, BadgeStatusSize } from '../../types';
+export { BadgeStatus } from './BadgeStatus';
+export type { BadgeStatusProps } from './BadgeStatus.types';
+```
+
+**Platform type indices (`src/types/index.ts`) should NOT re-export shared types:**
+
+```tsx
+// ✅ Correct - src/types/index.ts does NOT re-export shared types
+// packages/design-system-react/src/types/index.ts
+// (Remove old enum definitions, don't add re-exports)
+
+// ❌ Wrong - Don't re-export shared types here
+// packages/design-system-react/src/types/index.ts
+export { BadgeStatusStatus, BadgeStatusSize } from '@metamask/design-system-shared';
+```
+
 ## Cross-Platform Consistency
 
 **Required consistency:**
@@ -139,6 +172,8 @@ export type { BadgeStatusStatus, BadgeStatusSize } from '...'; // Error!
 - [ ] Platform packages re-export and extend shared types
 - [ ] React: Extends `ComponentProps<'element'>`, adds `className?: string`
 - [ ] React Native: Extends `ViewProps`/`PressableProps`, adds `twClassName?: string`
+- [ ] Component `index.ts` exports directly from `@metamask/design-system-shared`
+- [ ] Platform `src/types/index.ts` does NOT re-export shared types
 - [ ] NO className/twClassName in shared package
 - [ ] NO unified event handlers in shared package
 
