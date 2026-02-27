@@ -166,6 +166,7 @@ export type ButtonProps = ButtonPropsShared &
 Title: [Phase 2] Align Button disabled/isDisabled props
 
 Description:
+
 - Extension uses `disabled?: boolean`
 - Mobile uses `isDisabled?: boolean`
 - Standardize to `isDisabled` for consistency with other boolean props
@@ -252,12 +253,12 @@ Use this decision tree to determine whether to unify props or accept platform di
 
 **Summary:**
 
-| Scenario | Action | Example |
-|----------|--------|---------|
-| Identical props | Add to shared types | Both use `variant: ButtonVariant` |
-| Idiomatic platform difference | Accept, document as platform-specific | `onClick` (web) vs `onPress` (mobile) |
-| Naming inconsistency | Document gap, accept for now, Phase 2 issue | `disabled` vs `isDisabled` |
-| Platform-only feature | Accept, document as platform-specific | `tooltip` (web-only) |
+| Scenario                      | Action                                      | Example                               |
+| ----------------------------- | ------------------------------------------- | ------------------------------------- |
+| Identical props               | Add to shared types                         | Both use `variant: ButtonVariant`     |
+| Idiomatic platform difference | Accept, document as platform-specific       | `onClick` (web) vs `onPress` (mobile) |
+| Naming inconsistency          | Document gap, accept for now, Phase 2 issue | `disabled` vs `isDisabled`            |
+| Platform-only feature         | Accept, document as platform-specific       | `tooltip` (web-only)                  |
 
 ## Migration Scenarios
 
