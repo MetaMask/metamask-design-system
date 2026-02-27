@@ -6,13 +6,13 @@ import { ButtonHero } from './ButtonHero';
 describe('ButtonHero', () => {
   it('renders children correctly', () => {
     const { getByText } = render(<ButtonHero>Button Hero</ButtonHero>);
-    expect(getByText('Button Hero')).toBeDefined();
+    expect(getByText('Button Hero')).toBeOnScreen();
   });
 
   it('renders as a button with correct accessibility role', () => {
     const { getByRole } = render(<ButtonHero>Click me</ButtonHero>);
     const button = getByRole('button');
-    expect(button).toBeDefined();
+    expect(button).toBeOnScreen();
   });
 
   it('handles press events', () => {
@@ -52,7 +52,7 @@ describe('ButtonHero', () => {
       busy: true,
     });
     expect(button.props.accessibilityLabel).toBe('Loading...');
-    expect(getByTestId('spinner-container')).toBeDefined();
+    expect(getByTestId('spinner-container')).toBeOnScreen();
   });
 
   it('displays loading text when provided', () => {
@@ -62,13 +62,13 @@ describe('ButtonHero', () => {
       </ButtonHero>,
     );
 
-    expect(getByText('Please wait...')).toBeDefined();
+    expect(getByText('Please wait...')).toBeOnScreen();
   });
 
   it('uses light theme colors regardless of app theme', () => {
     const { getByRole } = render(<ButtonHero>Hero Button</ButtonHero>);
     const button = getByRole('button');
-    expect(button).toBeDefined();
+    expect(button).toBeOnScreen();
     // The ThemeProvider wraps the button with light theme
     // Actual color values are applied via Tailwind classes
   });
@@ -98,7 +98,7 @@ describe('ButtonHero', () => {
     );
 
     const button = getByRole('button');
-    expect(button).toBeDefined();
+    expect(button).toBeOnScreen();
   });
 
   it('supports startIconName prop', () => {
@@ -107,7 +107,7 @@ describe('ButtonHero', () => {
     );
 
     const button = getByRole('button');
-    expect(button).toBeDefined();
+    expect(button).toBeOnScreen();
   });
 
   it('supports endIconName prop', () => {
@@ -116,53 +116,6 @@ describe('ButtonHero', () => {
     );
 
     const button = getByRole('button');
-    expect(button).toBeDefined();
-  });
-
-  it('applies pressed styles when interactive', () => {
-    const handlePress = jest.fn();
-    const { getByRole } = render(
-      <ButtonHero onPress={handlePress}>Press Me</ButtonHero>,
-    );
-
-    const button = getByRole('button');
-
-    // Simulate press in to trigger pressed state
-    fireEvent(button, 'pressIn');
-
-    // The component should render with pressed styles applied
-    expect(button).toBeDefined();
-  });
-
-  it('does not apply pressed styles when disabled', () => {
-    const handlePress = jest.fn();
-    const { getByRole } = render(
-      <ButtonHero isDisabled onPress={handlePress}>
-        Press Me
-      </ButtonHero>,
-    );
-
-    const button = getByRole('button');
-
-    // Simulate press in - should not trigger pressed styles when disabled
-    fireEvent(button, 'pressIn');
-
-    expect(button).toBeDefined();
-  });
-
-  it('does not apply pressed styles when loading', () => {
-    const handlePress = jest.fn();
-    const { getByRole } = render(
-      <ButtonHero isLoading loadingText="Loading..." onPress={handlePress}>
-        Press Me
-      </ButtonHero>,
-    );
-
-    const button = getByRole('button');
-
-    // Simulate press in - should not trigger pressed styles when loading
-    fireEvent(button, 'pressIn');
-
-    expect(button).toBeDefined();
+    expect(button).toBeOnScreen();
   });
 });
