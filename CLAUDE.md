@@ -8,6 +8,7 @@ Repository-specific conventions and patterns:
 
 - @.cursor/rules/styling.md
 - @.cursor/rules/component-documentation.md
+- @.cursor/rules/component-architecture.md
 - @.cursor/rules/figma-integration.md
 
 See @docs/ai-agents.md for comprehensive strategy explanation.
@@ -55,6 +56,7 @@ yarn lint:fix                 # Auto-fix
 
 # Component Creation
 yarn create-component:react --name ComponentName --description "Brief description"
+yarn create-component:react-native --name ComponentName --description "Brief description"
 
 # Storybook
 yarn storybook                # React web (port 6006)
