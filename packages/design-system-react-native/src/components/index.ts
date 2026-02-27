@@ -114,6 +114,9 @@ export type { MaskiconProps } from './temp-components/Maskicon';
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
 
+export { TabEmptyState } from './TabEmptyState';
+export type { TabEmptyStateProps } from './TabEmptyState';
+
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
