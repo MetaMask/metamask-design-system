@@ -5,6 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [From Extension Component Library](#from-extension-component-library)
+  - [Box Component](#box-component)
   - [Text Component](#text-component)
 - [Version Updates](#version-updates)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
@@ -12,6 +13,108 @@ This guide provides detailed instructions for migrating your project from one ve
 ## From Extension Component Library
 
 This section covers migrating components from MetaMask Extension's `ui/components/component-library` to `@metamask/design-system-react`.
+
+### Box Component
+
+The Box component has breaking changes when migrating from the extension component-library, particularly around responsive spacing and certain margin/padding props.
+
+#### Breaking Changes
+
+##### Responsive Spacing
+
+The extension Box supported responsive arrays for margin and padding props. The design system Box does not support this pattern. Use Tailwind responsive classes via `className` instead.
+
+| Extension Pattern                          | Design System Migration                         |
+| ------------------------------------------ | ----------------------------------------------- |
+| `margin={[2, 4]}`                          | `margin={2} className="md:m-4"`                 |
+| `padding={[2, 4, 6]}`                      | `padding={2} className="md:p-4 lg:p-6"`         |
+| `marginTop={[1, 2]}`                       | `marginTop={1} className="md:mt-2"`             |
+| Responsive spacing at multiple breakpoints | Use Tailwind responsive prefixes in `className` |
+
+##### Margin Inline Props
+
+The extension Box had `marginInline`, `marginInlineStart`, and `marginInlineEnd` props. The design system Box uses `marginHorizontal` or Tailwind classes instead.
+
+| Extension Pattern       | Design System Migration                      |
+| ----------------------- | -------------------------------------------- |
+| `marginInline={4}`      | `marginHorizontal={4}` or `className="mx-4"` |
+| `marginInlineStart={2}` | `className="ms-2"`                           |
+| `marginInlineEnd={2}`   | `className="me-2"`                           |
+
+##### Padding Inline Props
+
+The extension Box had `paddingInline`, `paddingInlineStart`, and `paddingInlineEnd` props. The design system Box uses `paddingHorizontal` or Tailwind classes instead.
+
+| Extension Pattern        | Design System Migration                       |
+| ------------------------ | --------------------------------------------- |
+| `paddingInline={4}`      | `paddingHorizontal={4}` or `className="px-4"` |
+| `paddingInlineStart={2}` | `className="ps-2"`                            |
+| `paddingInlineEnd={2}`   | `className="pe-2"`                            |
+
+##### Margin Auto
+
+The extension Box supported `margin="auto"`. The design system Box does not support this value. Use Tailwind classes instead.
+
+| Extension Pattern | Design System Migration |
+| ----------------- | ----------------------- |
+| `margin="auto"`   | `className="m-auto"`    |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Box } from '../../component-library';
+
+// Responsive spacing
+<Box margin={[2, 4]} padding={[2, 4]}>
+  Responsive spacing
+</Box>
+
+// Inline props
+<Box marginInline={4} paddingInlineStart={2}>
+  Inline spacing
+</Box>
+
+// Auto margin
+<Box margin="auto">
+  Centered with auto margin
+</Box>
+```
+
+##### After (Design System)
+
+```tsx
+import { Box } from '@metamask/design-system-react';
+
+// Responsive spacing - use className for responsive values
+<Box margin={2} padding={2} className="md:m-4 md:p-4">
+  Responsive spacing
+</Box>
+
+// Inline props - use marginHorizontal or className
+<Box marginHorizontal={4} className="ps-2">
+  Inline spacing
+</Box>
+
+// Auto margin - use className
+<Box className="m-auto">
+  Centered with auto margin
+</Box>
+```
+
+#### Spacing Props Still Available
+
+Most extension Box margin/padding props work the same in the design system:
+
+- ✅ `margin`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft`
+- ✅ `marginHorizontal` (replaces `marginInline`)
+- ✅ `marginVertical`
+- ✅ `padding`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft`
+- ✅ `paddingHorizontal` (replaces `paddingInline`)
+- ✅ `paddingVertical`
+
+For simple, non-responsive spacing, continue using these props. Use `className` with Tailwind utilities for responsive spacing, auto values, or inline-start/end positioning.
 
 ### Text Component
 

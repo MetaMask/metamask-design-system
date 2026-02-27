@@ -5,6 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [From Mobile Component Library](#from-mobile-component-library)
+  - [Box Component](#box-component)
   - [Text Component](#text-component)
 - [Version Updates](#version-updates)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
@@ -12,6 +13,90 @@ This guide provides detailed instructions for migrating your project from one ve
 ## From Mobile Component Library
 
 This section covers migrating components from MetaMask Mobile's `app/component-library` to `@metamask/design-system-react-native`.
+
+### Box Component
+
+The Box component has breaking changes when migrating from the mobile component-library. For custom spacing patterns or values outside the BoxSpacing range, use Tailwind classes via `twClassName`.
+
+#### Breaking Changes
+
+##### Spacing Values
+
+The design system Box uses `BoxSpacing` values (0-12 for 0px-48px). For custom spacing values outside this range or responsive spacing patterns, use Tailwind classes via `twClassName`.
+
+| Mobile Pattern                   | Design System Migration                   |
+| -------------------------------- | ----------------------------------------- |
+| Custom margin/padding values     | Use `twClassName` with Tailwind utilities |
+| Responsive spacing               | Use `twClassName="m-2 md:m-4"`            |
+| Auto margins                     | Use `twClassName="m-auto"`                |
+| Custom margin/padding with style | Use `twClassName` instead of `style` prop |
+
+##### Margin Inline Props
+
+If the mobile Box had `marginInline`, `marginInlineStart`, or `marginInlineEnd` props, the design system Box uses `marginHorizontal` or Tailwind classes instead.
+
+| Mobile Pattern          | Design System Migration                        |
+| ----------------------- | ---------------------------------------------- |
+| `marginInline={4}`      | `marginHorizontal={4}` or `twClassName="mx-4"` |
+| `marginInlineStart={2}` | `twClassName="ms-2"`                           |
+| `marginInlineEnd={2}`   | `twClassName="me-2"`                           |
+
+##### Padding Inline Props
+
+If the mobile Box had `paddingInline`, `paddingInlineStart`, or `paddingInlineEnd` props, the design system Box uses `paddingHorizontal` or Tailwind classes instead.
+
+| Mobile Pattern           | Design System Migration                         |
+| ------------------------ | ----------------------------------------------- |
+| `paddingInline={4}`      | `paddingHorizontal={4}` or `twClassName="px-4"` |
+| `paddingInlineStart={2}` | `twClassName="ps-2"`                            |
+| `paddingInlineEnd={2}`   | `twClassName="pe-2"`                            |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import { Box } from '../../../component-library/components/Box';
+
+// Custom spacing with style prop
+<Box style={{ margin: 20, padding: 20 }}>
+  Custom spacing
+</Box>
+
+// Inline props (if they existed)
+<Box marginInline={4} paddingInlineStart={2}>
+  Inline spacing
+</Box>
+```
+
+##### After (Design System)
+
+```tsx
+import { Box } from '@metamask/design-system-react-native';
+
+// Custom spacing - use twClassName for values outside BoxSpacing range
+<Box twClassName="m-5 p-5">
+  Custom spacing
+</Box>
+
+// Inline props - use marginHorizontal or twClassName
+<Box marginHorizontal={4} twClassName="ps-2">
+  Inline spacing
+</Box>
+```
+
+#### Spacing Props Available
+
+The design system Box provides these margin/padding props:
+
+- ✅ `margin`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft`
+- ✅ `marginHorizontal`
+- ✅ `marginVertical`
+- ✅ `padding`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft`
+- ✅ `paddingHorizontal`
+- ✅ `paddingVertical`
+
+For spacing values 0-12 (0px-48px), use these props. For custom values, responsive spacing, or inline-start/end positioning, use `twClassName` with Tailwind utilities.
 
 ### Text Component
 
