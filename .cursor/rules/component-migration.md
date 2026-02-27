@@ -13,10 +13,13 @@ When components exist in:
 
 They need to be migrated into this monorepo with:
 
-- ✅ Unified cross-platform API
-- ✅ ADR-0003/0004 architectural patterns
-- ✅ Monorepo design token conventions
-- ✅ Storybook documentation for both platforms
+- ✅ **Shared types for matching props** (partial alignment acceptable)
+- ✅ **ADR-0003/0004 architectural patterns** (const objects, centralized types)
+- ✅ **Monorepo design token conventions** (Box/Text primitives, design tokens)
+- ✅ **Storybook documentation** for both platforms
+- ✅ **Documented alignment gaps** for Phase 2 cleanup (PR description + GitHub issues)
+
+**Key principle:** Always apply ADR patterns and code transformations. Full API unification is NOT required - partial alignment is acceptable when differences are documented.
 
 ## When to Use This Workflow
 
@@ -60,9 +63,55 @@ Use this workflow when:
    - Are there naming conflicts? (disabled vs isDisabled)
    - What's the unified API that serves both platforms?
 
-### Phase 2: API Alignment
+### Partial Alignment Strategy
 
-**Design unified API using @.cursor/rules/component-architecture.md decision tree.**
+**Key principle:** Create shared types for ANY matching props, even minimal overlap. Platform differences are acceptable when documented.
+
+**When to create shared types:**
+
+- ✅ **Any matching props** - Even if only `variant` and `size` match, create shared package types
+- ✅ **Semantic alignment** - Props with same meaning but different names (document for Phase 2)
+- ✅ **Future-proofing** - Props likely to align as platforms mature
+
+**When to accept platform differences:**
+
+- ✅ **Idiomatic platform patterns** - `onClick` (React) vs `onPress` (React Native)
+- ✅ **Platform-specific styling** - `className` (React) vs `twClassName` (React Native)
+- ✅ **Different use cases** - Extension needs `tooltip`, Mobile doesn't
+- ✅ **Documented gaps** - Props that should align but differ now (create GitHub issue)
+
+**Example - Partial Alignment:**
+
+```tsx
+// Extension has: variant, size, disabled, tooltip
+// Mobile has: variant, size, isDisabled
+
+// ✅ Shared package (matching + semantic alignment)
+export type ButtonPropsShared = {
+  variant?: ButtonVariant; // ✅ Matches
+  size?: ButtonSize; // ✅ Matches
+  // disabled vs isDisabled - document gap, unify in Phase 2
+};
+
+// React package (extension-specific)
+export type ButtonProps = ComponentProps<'button'> &
+  ButtonPropsShared & {
+    className?: string;
+    disabled?: boolean; // Extension API (gap documented)
+    tooltip?: string; // Extension-only feature
+  };
+
+// React Native package (mobile-specific)
+export type ButtonProps = ButtonPropsShared &
+  PressableProps & {
+    twClassName?: string;
+    isDisabled?: boolean; // Mobile API (gap documented)
+  };
+```
+
+### Phase 2: Shared Type Creation
+
+**Create shared types for matching props. Full API unification is NOT required - partial alignment is acceptable.**
 
 **Reference the golden path:** See how BadgeStatus implements the layered architecture:
 
@@ -84,25 +133,45 @@ Use this workflow when:
 - Add `className?: string` (React) or `twClassName?: string` (React Native)
 - Event handlers from base types (onClick/onPress)
 
-**Document alignment decisions:**
+### Phase 2.5: Document Alignment Gaps
+
+**Document known API differences for Phase 2 cleanup. Create GitHub issues to track alignment work.**
+
+**In migration PR description:**
 
 ```markdown
 ## Migration Decisions
 
-### Prop Naming
+### Shared Props (in @metamask/design-system-shared)
 
-- ✅ Use `isDisabled` (not `disabled`) - boolean prop conventions
-- ✅ Use `variant` (not `type`) - semantic visual variants
-- ✅ Use `children` for label - standard React
+- ✅ `variant` - Both platforms use ButtonVariant
+- ✅ `size` - Both platforms use ButtonSize
 
-### Platform Differences
+### Platform-Specific Props
 
-- React: onClick from ComponentProps, className
-- React Native: onPress from PressableProps, twClassName
+- React: `onClick`, `className`, `disabled`, `tooltip`
+- React Native: `onPress`, `twClassName`, `isDisabled`
 
-### Behavioral Alignment
+### Known Alignment Gaps (Phase 2)
 
-- Document what both platforms will support identically
+- ❌ **disabled vs isDisabled** - Extension uses `disabled`, Mobile uses `isDisabled`. Standardize to `isDisabled` in Phase 2 [#XXX]
+- ❌ **tooltip** - Extension-only feature. Evaluate Mobile tooltip support in Phase 2 [#XXX]
+
+[#XXX] = Link to GitHub issues created for Phase 2 tracking
+```
+
+**Create GitHub issues:**
+
+```markdown
+Title: [Phase 2] Align Button disabled/isDisabled props
+
+Description:
+- Extension uses `disabled?: boolean`
+- Mobile uses `isDisabled?: boolean`
+- Standardize to `isDisabled` for consistency with other boolean props
+- Update extension consumers in breaking change
+
+Labels: phase-2, alignment, breaking-change
 ```
 
 ### Phase 3: Creation
@@ -160,6 +229,35 @@ Follow @.cursor/rules/component-documentation.md:
 
 **React:** README.mdx with Canvas blocks
 **React Native:** README.md with code examples
+
+## Decision Tree: When to Unify vs Accept Differences
+
+Use this decision tree to determine whether to unify props or accept platform differences:
+
+**Question 1: Do the props have the same semantic purpose?**
+
+- ✅ **YES** → Go to Question 2
+- ❌ **NO** (e.g., `tooltip` web-only, `hapticFeedback` mobile-only) → **Accept difference**, document as platform-specific feature
+
+**Question 2: Are the prop names/types identical or near-identical?**
+
+- ✅ **Identical** (e.g., both use `variant: ButtonVariant`) → **Add to shared types**
+- ⚠️ **Near-identical** (e.g., `disabled` vs `isDisabled`, same boolean purpose) → Go to Question 3
+- ❌ **Very different** (e.g., `action` object vs `onPress` callback) → Go to Question 3
+
+**Question 3: Is this an idiomatic platform pattern?**
+
+- ✅ **YES** (e.g., `onClick` vs `onPress`, `className` vs `twClassName`) → **Accept difference**, document as idiomatic platform pattern
+- ❌ **NO** (e.g., `disabled` vs `isDisabled` - both are props, not event handlers) → **Document as gap**, create GitHub issue, accept difference for now, unify in Phase 2
+
+**Summary:**
+
+| Scenario | Action | Example |
+|----------|--------|---------|
+| Identical props | Add to shared types | Both use `variant: ButtonVariant` |
+| Idiomatic platform difference | Accept, document as platform-specific | `onClick` (web) vs `onPress` (mobile) |
+| Naming inconsistency | Document gap, accept for now, Phase 2 issue | `disabled` vs `isDisabled` |
+| Platform-only feature | Accept, document as platform-specific | `tooltip` (web-only) |
 
 ## Migration Scenarios
 
@@ -283,15 +381,18 @@ export type ButtonPropsShared = { isDisabled?: boolean };
 - [ ] Located component in mobile component-library (if exists)
 - [ ] Documented both APIs in comparison table
 - [ ] Identified shared vs platform-specific concerns
-- [ ] Documented alignment decisions
+- [ ] Used decision tree to determine what to unify vs accept
+- [ ] Documented alignment gaps in migration PR description
+- [ ] Created GitHub issues for Phase 2 alignment work
 
 ### API Design
 
-- [ ] Designed unified API using architecture decision tree
+- [ ] Created shared types for matching props (even minimal overlap)
 - [ ] Shared interface uses `ComponentNamePropsShared` suffix
 - [ ] Platform-specific props in extension layer only
 - [ ] Event handlers use idiomatic names (onClick/onPress)
 - [ ] No className/twClassName in shared package
+- [ ] Platform differences documented (idiomatic patterns vs alignment gaps)
 
 ### Implementation
 
@@ -315,6 +416,7 @@ export type ButtonPropsShared = { isDisabled?: boolean };
 
 - [ ] Build succeeds: `yarn build`
 - [ ] Tests pass: `yarn test`
+- [ ] Coverage meets thresholds: `yarn test --coverage` (100% all metrics)
 - [ ] Lint passes: `yarn lint`
 - [ ] Storybook builds: `yarn build-storybook`
 
@@ -326,6 +428,12 @@ export type ButtonPropsShared = { isDisabled?: boolean };
 - @.cursor/rules/component-creation.md - HOW-TO create components with proper conventions
 - @.cursor/rules/styling.md - Design tokens, Box/Text primitives
 - @.cursor/rules/component-documentation.md - Storybook and README requirements
+
+### Migration Strategy
+
+- @docs/component-migration-strategy.md - Two-phase migration approach (speed-first, then alignment)
+
+**Note:** This cursor rule describes the **pragmatic comprehensive approach** - we always apply ADR-0003/0004 patterns and code transformations, but accept partial API alignment. Document gaps in PR descriptions and create Phase 2 GitHub issues for alignment work.
 
 ### Source Repositories
 
