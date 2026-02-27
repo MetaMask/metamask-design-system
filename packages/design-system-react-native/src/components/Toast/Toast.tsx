@@ -37,6 +37,7 @@ import {
   TOAST_BOTTOM_PADDING,
 } from './Toast.constants';
 import type {
+  ToastCloseButtonIconOptions,
   ToastCloseButtonOptions,
   ToastDescriptionOptions,
   ToastLabelOptions,
@@ -45,7 +46,7 @@ import type {
   ToastProps,
   ToastRef,
 } from './Toast.types';
-import { ButtonIconVariant, ToastVariant } from './Toast.types';
+import { ToastVariant } from './Toast.types';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -184,11 +185,17 @@ const Toast = forwardRef<ToastRef, ToastProps>(
     const renderCloseButton = (
       closeButtonOptions?: ToastCloseButtonOptions,
     ) => {
-      if (closeButtonOptions?.variant === ButtonIconVariant.Icon) {
+      if (closeButtonOptions && 'iconName' in closeButtonOptions) {
+        const iconOptions = closeButtonOptions as ToastCloseButtonIconOptions;
         return (
           <ButtonIcon
-            onPress={(e) => closeButtonOptions?.onPress?.(e)}
-            iconName={closeButtonOptions?.iconName}
+            iconName={iconOptions.iconName}
+            onPress={(e) => iconOptions.onPress?.(e)}
+            size={iconOptions.size}
+            isDisabled={iconOptions.isDisabled}
+            twClassName={iconOptions.twClassName}
+            style={iconOptions.style}
+            iconProps={iconOptions.iconProps}
           />
         );
       }

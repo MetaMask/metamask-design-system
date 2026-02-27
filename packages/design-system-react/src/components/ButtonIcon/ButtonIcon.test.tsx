@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 
-import { ButtonIconSize, IconName } from '../../types';
+import { ButtonIconSize, ButtonIconVariant, IconName } from '../../types';
 
 import { ButtonIcon } from './ButtonIcon';
 
@@ -55,11 +55,11 @@ describe('ButtonIcon', () => {
     expect(screen.getByRole('button')).toHaveClass('h-10', 'w-10');
   });
 
-  it('applies floating styles correctly', () => {
+  it('applies Floating variant styles', () => {
     render(
       <ButtonIcon
         iconName={IconName.Close}
-        isFloating
+        variant={ButtonIconVariant.Floating}
         ariaLabel="Close floating"
       />,
     );
@@ -71,32 +71,21 @@ describe('ButtonIcon', () => {
     );
   });
 
-  it('applies inverse styles correctly', () => {
+  it('applies Filled variant styles', () => {
     render(
       <ButtonIcon
         iconName={IconName.Close}
-        isInverse
-        ariaLabel="Close inverse"
+        variant={ButtonIconVariant.Filled}
+        ariaLabel="Close filled"
       />,
     );
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('text-background-default');
-  });
-
-  it('combines floating + inverse styles', () => {
-    render(
-      <ButtonIcon
-        iconName={IconName.Close}
-        ariaLabel="FloatInverse"
-        isFloating
-        isInverse
-      />,
-    );
-    const btn = screen.getByRole('button');
-    expect(btn).toHaveClass(
+    expect(button).toHaveClass(
       'rounded-full',
-      'bg-icon-default',
-      'text-background-default',
+      'bg-muted',
+      'text-icon-default',
+      'hover:bg-muted-hover',
+      'active:bg-muted-pressed',
     );
   });
 

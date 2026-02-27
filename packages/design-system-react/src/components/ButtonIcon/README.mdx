@@ -101,36 +101,9 @@ Available sizes:
 
 <Canvas of={ButtonIconStories.Size} />
 
-### `isFloating`
+### `variant`
 
-Use `isFloating` to apply a contained, floating button style.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>boolean</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>false</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<Canvas of={ButtonIconStories.IsFloating} />
-
-### `isInverse`
-
-Use `isInverse` when the button needs to be displayed on a dark background.
+Use `variant` to control the visual style. `ButtonIconVariant.Default` is transparent with default icon color; `ButtonIconVariant.Filled` is muted background with rounded-full; `ButtonIconVariant.Floating` is the contained floating style.
 
 <table>
   <thead>
@@ -143,17 +116,18 @@ Use `isInverse` when the button needs to be displayed on a dark background.
   <tbody>
     <tr>
       <td align="left">
-        <code>boolean</code>
+        <code>ButtonIconVariant</code>
       </td>
       <td align="left">No</td>
       <td align="left">
-        <code>false</code>
+        <code>ButtonIconVariant.Default</code>
       </td>
     </tr>
   </tbody>
 </table>
 
-<Canvas of={ButtonIconStories.IsInverse} />
+<Canvas of={ButtonIconStories.Floating} />
+<Canvas of={ButtonIconStories.Filled} />
 
 ### `isDisabled`
 

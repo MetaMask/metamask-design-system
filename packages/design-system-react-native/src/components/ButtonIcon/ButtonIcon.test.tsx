@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-import { ButtonIconSize } from '../../types';
+import { ButtonIconSize, ButtonIconVariant } from '../../types';
 import { IconName } from '../Icon';
 
 import { ButtonIcon } from './ButtonIcon';
@@ -55,7 +55,7 @@ describe('ButtonIcon', () => {
     expect(btn.props.accessibilityState.disabled).toBe(true);
   });
 
-  it('applies isFloating state', () => {
+  it('applies Floating variant', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
     const expected = tw.style(
@@ -65,27 +65,29 @@ describe('ButtonIcon', () => {
     );
 
     const { getByTestId } = render(
-      <ButtonIcon iconName={IconName.Close} isFloating testID="button-icon" />,
+      <ButtonIcon
+        iconName={IconName.Close}
+        variant={ButtonIconVariant.Floating}
+        testID="button-icon"
+      />,
     );
     const btn = getByTestId('button-icon');
     expect(btn.props.style[0]).toStrictEqual(expected);
   });
 
-  it('applies isInverse state', () => {
+  it('applies Filled variant', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
-    // isInverse does not change container styling beyond default
     const expected = tw.style(
       'items-center justify-center',
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
-      'rounded-lg bg-transparent opacity-100',
+      'rounded-full bg-muted opacity-100',
     );
 
     const { getByTestId } = render(
       <ButtonIcon
         iconName={IconName.Close}
-        iconProps={{ testID: 'icon' }}
-        isInverse
+        variant={ButtonIconVariant.Filled}
         testID="button-icon"
       />,
     );

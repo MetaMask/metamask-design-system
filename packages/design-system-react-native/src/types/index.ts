@@ -351,6 +351,15 @@ export enum ButtonIconSize {
 }
 
 /**
+ * ButtonIcon - variant
+ */
+export enum ButtonIconVariant {
+  Default = 'default',
+  Filled = 'filled',
+  Floating = 'floating',
+}
+
+/**
  * Text - variant
  */
 export enum TextVariant {

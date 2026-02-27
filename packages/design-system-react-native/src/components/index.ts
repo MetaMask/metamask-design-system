@@ -84,7 +84,7 @@ export type { ButtonBaseProps } from './ButtonBase';
 export { Button, ButtonSize, ButtonVariant } from './Button';
 export type { ButtonProps } from './Button';
 
-export { ButtonIcon, ButtonIconSize } from './ButtonIcon';
+export { ButtonIcon, ButtonIconSize, ButtonIconVariant } from './ButtonIcon';
 export type { ButtonIconProps } from './ButtonIcon';
 
 export { Checkbox } from './Checkbox';

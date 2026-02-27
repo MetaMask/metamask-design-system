@@ -1,6 +1,6 @@
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import type { ButtonIconSize } from '../../types';
+import type { ButtonIconSize, ButtonIconVariant } from '../../types';
 import type { IconProps, IconName } from '../Icon';
 import type { ButtonAnimatedProps } from '../temp-components/ButtonAnimated';
 
@@ -30,18 +30,11 @@ export type ButtonIconProps = {
    */
   isDisabled?: boolean;
   /**
-   * Optional prop to show the inverse state of the button, which is reserved for buttons on colored backgrounds.
+   * Optional prop to control the visual variant of the button.
    *
-   * @default false
+   * @default ButtonIconVariant.Default
    */
-  isInverse?: boolean;
-  /**
-   * Optional prop to show the floating/contained state of the button, which is reserved for floating buttons.
-   * Note: This prop provides styling only. There is no positioning logic.
-   *
-   * @default false
-   */
-  isFloating?: boolean;
+  variant?: ButtonIconVariant;
   /**
    * Optional prop to add twrnc overriding classNames.
    */
