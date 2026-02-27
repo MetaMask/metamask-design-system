@@ -27,8 +27,6 @@ import { ButtonHero } from '@metamask/design-system-react-native';
 | ----------------- | -------- | ----------- |
 | `React.ReactNode` | Yes      | `undefined` |
 
-#### Example
-
 ```tsx
 <ButtonHero>Primary Action</ButtonHero>
 ```
@@ -47,8 +45,6 @@ Available sizes:
 | ---------------- | -------- | ------------------- |
 | `ButtonHeroSize` | No       | `ButtonHeroSize.Lg` |
 
-#### Example
-
 ```tsx
 import { ButtonHero, ButtonHeroSize } from '@metamask/design-system-react-native';
 
@@ -65,8 +61,6 @@ ButtonHero can be set to take up the full width of its container.
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
-#### Example
-
 ```tsx
 <ButtonHero isFullWidth>Full Width Button</ButtonHero>
 ```
@@ -78,8 +72,6 @@ ButtonHero can display an icon at the start of the button.
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
 | `IconName` | No       | `undefined` |
-
-#### Example
 
 ```tsx
 import { ButtonHero, IconName } from '@metamask/design-system-react-native';
@@ -95,8 +87,6 @@ ButtonHero can display an icon at the end of the button.
 | ---------- | -------- | ----------- |
 | `IconName` | No       | `undefined` |
 
-#### Example
-
 ```tsx
 import { ButtonHero, IconName } from '@metamask/design-system-react-native';
 
@@ -111,8 +101,6 @@ Whether the button is disabled.
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
-#### Example
-
 ```tsx
 <ButtonHero isDisabled>Disabled Button</ButtonHero>
 ```
@@ -124,8 +112,6 @@ Whether the button is in a loading state.
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
-
-#### Example
 
 ```tsx
 <ButtonHero isLoading loadingText="Loading...">
@@ -141,8 +127,6 @@ Optional text to display when button is in loading state.
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
-#### Example
-
 ```tsx
 <ButtonHero isLoading loadingText="Submitting...">
   Submit Form
@@ -157,8 +141,6 @@ Callback function invoked when the button is pressed.
 | ------------ | -------- | ----------- |
 | `() => void` | No       | `undefined` |
 
-#### Example
-
 ```tsx
 <ButtonHero onPress={() => console.log('Button pressed')}>Press Me</ButtonHero>
 ```
@@ -170,8 +152,6 @@ Use the `twClassName` prop to add custom Tailwind classes to the component.
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
-
-#### Example
 
 ```tsx
 <ButtonHero twClassName="mb-4">Custom Styled Button</ButtonHero>

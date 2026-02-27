@@ -32,8 +32,8 @@ const ButtonHeroInner: React.FC<ButtonHeroProps> = ({
         pressed && !isDisabled && !isLoading ? 'bg-primary-default-pressed' : ''
       }`
     }
-    textClassName={(pressed) => 'text-primary-inverse'}
-    iconClassName={(pressed) => 'text-primary-inverse'}
+    textClassName={(_pressed) => 'text-primary-inverse'}
+    iconClassName={(_pressed) => 'text-primary-inverse'}
     isDisabled={isDisabled}
     isLoading={isLoading}
     {...props}
