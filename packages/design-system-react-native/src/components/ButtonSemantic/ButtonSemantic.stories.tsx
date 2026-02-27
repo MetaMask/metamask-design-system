@@ -12,7 +12,7 @@ import { ButtonSemanticSeverity } from './ButtonSemantic.types';
 import { ButtonBaseSize } from '@metamask/design-system-react-native';
 
 const meta: Meta<ButtonSemanticProps> = {
-  title: 'ButtonSemantic',
+  title: 'Components/ButtonSemantic',
   component: ButtonSemantic,
   args: {
     children: 'Action',
