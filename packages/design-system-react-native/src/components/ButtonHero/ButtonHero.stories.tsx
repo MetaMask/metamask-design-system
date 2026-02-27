@@ -103,14 +103,14 @@ export const EndIconName: Story = {
   },
 };
 
-export const Disabled: Story = {
+export const IsDisabled: Story = {
   args: {
     children: 'Disabled Button',
     isDisabled: true,
   },
 };
 
-export const Loading: Story = {
+export const IsLoading: Story = {
   args: {
     children: 'Submit this form',
     isLoading: true,
