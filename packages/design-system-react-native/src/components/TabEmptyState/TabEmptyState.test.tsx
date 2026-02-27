@@ -65,9 +65,7 @@ describe('TabEmptyState', () => {
   });
 
   it('does not render action button when only onAction is provided', () => {
-    const { queryByText } = render(
-      <TabEmptyState onAction={mockOnAction} />,
-    );
+    const { queryByText } = render(<TabEmptyState onAction={mockOnAction} />);
 
     expect(queryByText('Add Item')).toBeNull();
   });
@@ -92,9 +90,7 @@ describe('TabEmptyState', () => {
   });
 
   it('passes testID to root element via ViewProps', () => {
-    const { getByTestId } = render(
-      <TabEmptyState testID="my-empty-state" />,
-    );
+    const { getByTestId } = render(<TabEmptyState testID="my-empty-state" />);
 
     expect(getByTestId('my-empty-state')).toBeDefined();
   });
