@@ -6,16 +6,24 @@ import { ButtonBase } from '../ButtonBase';
 import type { ButtonHeroProps } from './ButtonHero.types';
 
 /**
- * Inner component that uses the locked light theme from ThemeProvider
+ * Inner component that uses the locked light theme from ThemeProvider.
+ * Destructures and ignores twClassName, textClassName, and iconClassName to prevent
+ * overriding the hero-specific styling (light theme lock).
  *
- * @param options0 - Component props
- * @param options0.isDisabled - Whether the button is disabled
- * @param options0.isLoading - Whether the button is in a loading state
+ * @param props - Component props destructured below
+ * @param props.isDisabled - Whether the button is disabled
+ * @param props.isLoading - Whether the button is in a loading state
+ * @param props.twClassName - Ignored to prevent override of hero styling
+ * @param props.textClassName - Ignored to prevent override of hero styling
+ * @param props.iconClassName - Ignored to prevent override of hero styling
  * @returns ButtonBase component with locked light theme styles
  */
 const ButtonHeroInner: React.FC<ButtonHeroProps> = ({
   isDisabled,
   isLoading,
+  twClassName: _twClassName,
+  textClassName: _textClassName,
+  iconClassName: _iconClassName,
   ...props
 }) => (
   <ButtonBase
@@ -24,8 +32,8 @@ const ButtonHeroInner: React.FC<ButtonHeroProps> = ({
         pressed && !isDisabled && !isLoading ? 'bg-primary-default-pressed' : ''
       }`
     }
-    textClassName={() => 'text-primary-inverse'}
-    iconClassName={() => 'text-primary-inverse'}
+    textClassName={(pressed) => 'text-primary-inverse'}
+    iconClassName={(pressed) => 'text-primary-inverse'}
     isDisabled={isDisabled}
     isLoading={isLoading}
     {...props}
