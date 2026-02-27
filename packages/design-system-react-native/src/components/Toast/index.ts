@@ -1,5 +1,5 @@
 export { default as Toast } from './Toast';
-export { ToastVariant, ButtonIconVariant } from './Toast.types';
+export { ToastVariant, ToastCloseButtonVariant } from './Toast.types';
 export type {
   ToastOptions,
   ToastProps,

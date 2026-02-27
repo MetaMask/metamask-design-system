@@ -70,7 +70,7 @@ export { ButtonBase } from './ButtonBase';
 export type { ButtonBaseProps } from './ButtonBase';
 export { ButtonBaseSize } from './ButtonBase';
 
-export { ButtonIcon, ButtonIconSize } from './ButtonIcon';
+export { ButtonIcon, ButtonIconSize, ButtonIconVariant } from './ButtonIcon';
 export type { ButtonIconProps } from './ButtonIcon';
 
 export { Checkbox } from './Checkbox';

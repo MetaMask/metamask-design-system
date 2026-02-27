@@ -76,28 +76,17 @@ Whether the button is disabled.
 <ButtonIcon iconName="Edit" isDisabled onPress={() => {}} />
 ```
 
-### `isInverse`
+### `variant`
 
-Whether to show the button with inverted colors for use on colored backgrounds.
+The visual variant of the button. Use `ButtonIconVariant.Default` for transparent with default icon color, `ButtonIconVariant.Filled` for muted background with rounded-full, or `ButtonIconVariant.Floating` for the floating/contained style.
 
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `false` |
-
-```tsx
-<ButtonIcon iconName="Edit" isInverse onPress={() => {}} />
-```
-
-### `isFloating`
-
-Whether to show the button in floating/contained state for floating buttons.
-
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `false` |
+| TYPE                | REQUIRED | DEFAULT                     |
+| ------------------- | -------- | --------------------------- |
+| `ButtonIconVariant` | No       | `ButtonIconVariant.Default` |
 
 ```tsx
-<ButtonIcon iconName="Add" isFloating onPress={() => {}} />
+<ButtonIcon iconName="Add" variant={ButtonIconVariant.Floating} onPress={() => {}} />
+<ButtonIcon iconName="Edit" variant={ButtonIconVariant.Filled} onPress={() => {}} />
 ```
 
 ### `iconProps`
