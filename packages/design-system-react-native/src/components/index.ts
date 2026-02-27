@@ -87,6 +87,9 @@ export type { ButtonProps } from './Button';
 export { ButtonIcon, ButtonIconSize } from './ButtonIcon';
 export type { ButtonIconProps } from './ButtonIcon';
 
+export { ButtonSemantic, ButtonSemanticSeverity } from './ButtonSemantic';
+export type { ButtonSemanticProps } from './ButtonSemantic';
+
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
