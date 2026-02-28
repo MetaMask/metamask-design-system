@@ -322,6 +322,7 @@ export { ButtonBaseSize as ButtonSize };
 export { ButtonBaseSize as ButtonPrimarySize };
 export { ButtonBaseSize as ButtonSecondarySize };
 export { ButtonBaseSize as ButtonTertiarySize };
+export { ButtonBaseSize as ButtonHeroSize };
 
 /**
  * Button - variant
