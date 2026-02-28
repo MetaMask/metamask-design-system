@@ -78,20 +78,6 @@ export enum AvatarIconSeverity {
 }
 
 /**
- * BadgeCount - size
- */
-export enum BadgeCountSize {
-  /**
-   * Represents a medium badge count (14px height).
-   */
-  Md = 'md',
-  /**
-   * Represents a large badge count (20px height).
-   */
-  Lg = 'lg',
-}
-
-/**
  * BadgeWrapper - positionAnchorShape
  */
 export enum BadgeWrapperPositionAnchorShape {

@@ -1,7 +1,7 @@
+import { BadgeCountSize } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { BadgeCountSize } from '../../types';
 import { TextColor } from '../Text';
 
 import { BadgeCount } from './BadgeCount';
