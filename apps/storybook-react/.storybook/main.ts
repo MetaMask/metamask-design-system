@@ -3,6 +3,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'url';
 import type { StorybookConfig } from '@storybook/react-vite';
 import path, { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -13,8 +14,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
  *
  * @param value
  */
-function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, 'package.json')));
+function getAbsolutePath(value: string): string {
+  return value;
 }
 
 // Check if we're running in test mode (Vitest)
