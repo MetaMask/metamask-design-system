@@ -47,7 +47,9 @@ export const ActionListItem: React.FC<ActionListItemProps> = ({
   };
 
   const renderDescription = () => {
-    if (!description) return null;
+    if (!description) {
+      return null;
+    }
 
     if (typeof description === 'string') {
       return (
