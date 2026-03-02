@@ -3,13 +3,12 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { Box } from '../Box';
+import { ButtonBaseSize } from '../ButtonBase';
 import { Text, TextVariant, TextColor } from '../Text';
 
 import { ButtonSemantic } from './ButtonSemantic';
 import type { ButtonSemanticProps } from './ButtonSemantic.types';
 import { ButtonSemanticSeverity } from './ButtonSemantic.types';
-
-import { ButtonBaseSize } from '@metamask/design-system-react-native';
 
 const meta: Meta<ButtonSemanticProps> = {
   title: 'Components/ButtonSemantic',
