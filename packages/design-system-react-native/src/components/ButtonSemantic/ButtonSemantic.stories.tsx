@@ -16,7 +16,7 @@ const meta: Meta<ButtonSemanticProps> = {
   args: {
     children: 'Action',
     severity: ButtonSemanticSeverity.Success,
-    onPress: () => console.log('Button pressed'),
+    onPress: () => console.log('Button pressed!'),
   },
   argTypes: {
     severity: {
