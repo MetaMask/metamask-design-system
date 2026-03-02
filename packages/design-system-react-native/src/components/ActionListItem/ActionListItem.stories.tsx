@@ -14,7 +14,7 @@ const SAMPLE_ACTIONLISTITEM_PROPS: ActionListItemProps = {
 };
 
 const meta: Meta<ActionListItemProps> = {
-  title: 'Components Temp / ActionListItem',
+  title: 'Components/ActionListItem',
   component: ActionListItem,
   argTypes: {
     label: {
