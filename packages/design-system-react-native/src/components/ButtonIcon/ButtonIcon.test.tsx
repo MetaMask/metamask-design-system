@@ -95,6 +95,27 @@ describe('ButtonIcon', () => {
     expect(btn.props.style[0]).toStrictEqual(expected);
   });
 
+  it('applies Filled variant pressed state', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
+    const expected = tw.style(
+      'items-center justify-center',
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
+      'rounded-full bg-muted-pressed opacity-100',
+    );
+
+    const { getByTestId } = render(
+      <ButtonIcon
+        iconName={IconName.Close}
+        variant={ButtonIconVariant.Filled}
+        testID="button-icon"
+      />,
+    );
+    const btn = getByTestId('button-icon');
+    fireEvent(btn, 'pressIn');
+    expect(btn.props.style[0]).toStrictEqual(expected);
+  });
+
   it('forwards style and twClassName', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
