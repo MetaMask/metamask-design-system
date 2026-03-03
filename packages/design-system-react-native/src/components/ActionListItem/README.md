@@ -211,18 +211,26 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
 | `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-<ActionListItem
-  label="Settings"
-  style={{ marginTop: 8 }}
-  onPress={handlePress}
-/>
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+
+export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
+  const tw = useTailwind();
+
+  return (
+    <ActionListItem
+      label="Settings"
+      style={tw.style('mt-4', isActive && 'bg-success-default')}
+      onPress={handlePress}
+    />
+  );
+};
 ```
 
 ## References
