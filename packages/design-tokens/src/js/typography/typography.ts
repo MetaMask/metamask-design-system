@@ -97,7 +97,7 @@ export const typography: ThemeTypography = {
   },
   sSectionHeading: {
     fontWeight: fontWeights.bold,
-    fontSize: fontSizes.fontSize4,
+    fontSize: fontSizes.fontSize5,
     lineHeight: lineHeights.lineHeight4,
     letterSpacing: letterSpacing.letterSpacing0,
   },
@@ -211,8 +211,8 @@ export const typography: ThemeTypography = {
   },
   lSectionHeading: {
     fontWeight: fontWeights.bold,
-    fontSize: fontSizes.fontSize5,
-    lineHeight: lineHeights.lineHeight4,
+    fontSize: fontSizes.fontSize6,
+    lineHeight: lineHeights.lineHeight5,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   lButtonLabelMd: {
