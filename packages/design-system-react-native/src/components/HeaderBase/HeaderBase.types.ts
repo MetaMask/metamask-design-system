@@ -6,12 +6,29 @@ import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 import type { ButtonIconProps } from '../ButtonIcon';
 
 /**
+ * Variant options for HeaderBase component.
+ * Controls title text size and alignment.
+ */
+export enum HeaderBaseVariant {
+  /** Center-aligned title with HeadingSm text */
+  Compact = 'compact',
+  /** Left-aligned title with HeadingLg text */
+  Display = 'display',
+}
+
+/**
  * HeaderBase component props.
  *
  * Extends React Native's ViewProps to inherit standard props such as
  * `testID`, `accessibilityLabel`, and other View props.
  */
 export type HeaderBaseProps = ViewProps & {
+  /**
+   * Variant controlling header text size.
+   *
+   * @default HeaderBaseVariant.Compact
+   */
+  variant?: HeaderBaseVariant;
   /**
    * Title of the HeaderBase. Pass a string for automatic Text rendering,
    * or a ReactNode for custom content.
