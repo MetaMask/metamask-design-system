@@ -19,7 +19,7 @@
 
 ## Executive Summary
 
-We are migrating **~80 mobile components** and **~47 extension components** from consumer codebases into the MetaMask Design System (MMDS) monorepo. This document outlines our **two-phase strategy** prioritizing **speed over immediate alignment**, with a planned polish phase to restore cross-platform consistency.
+We are migrating **~40** components  from consumer codebases into the MetaMask Design System (MMDS) monorepo. This document outlines our **two-phase strategy** prioritizing **speed over immediate alignment**, with a planned polish phase to restore cross-platform consistency.
 
 ### Strategic Shift
 
