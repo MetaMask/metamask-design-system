@@ -55,7 +55,6 @@ export const ActionListItem: React.FC<ActionListItemProps> = ({
       return (
         <Text
           variant={TextVariant.BodySm}
-          fontWeight={FontWeight.Medium}
           color={TextColor.TextAlternative}
           {...descriptionTextProps}
         >
