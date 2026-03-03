@@ -60,7 +60,7 @@ export const IconStory: Story = {
   ),
 };
 
-export const ActionButton: Story = {
+export const OnAction: Story = {
   render: (args) => (
     <TabEmptyState
       {...args}
@@ -79,15 +79,5 @@ export const Children: Story = {
     <TabEmptyState {...args} description="Custom content below">
       <Text>Additional custom content</Text>
     </TabEmptyState>
-  ),
-};
-
-export const TwClassName: Story = {
-  render: (args) => (
-    <TabEmptyState
-      {...args}
-      description="With custom styles"
-      twClassName="p-8"
-    />
   ),
 };
