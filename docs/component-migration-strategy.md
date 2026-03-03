@@ -4,7 +4,7 @@
 **Epics:**
 
 - [DSYS-272](https://consensyssoftware.atlassian.net/browse/DSYS-272) - Migrate Legacy Mobile Components to MMDS Monorepo
-- - [DSYS-302](https://consensyssoftware.atlassian.net/browse/DSYS-302) - Migrate Legacy Extension Components to MMDS Monorepo
+- [DSYS-302](https://consensyssoftware.atlassian.net/browse/DSYS-302) - Migrate Legacy Extension Components to MMDS Monorepo
 
 **Last Updated:** 2026-03-03
 
@@ -17,7 +17,6 @@
 5. [Architectural Decisions](#architectural-decisions)
 6. [Migration Phases](#migration-phases)
 7. [Breaking Changes Strategy](#breaking-changes-strategy)
-8. [Success Metrics](#success-metrics)
 
 ---
 
@@ -506,7 +505,7 @@ export type { ButtonVariant as ButtonVariantType } from '@metamask/design-system
 
 ## Migration Phases
 
-### Phase 1: Rapid Migration (6 months)
+### Phase 1: Rapid Migration (1 month)
 
 **Objective:** Move all extension and mobile components into MMDS monorepo.
 
@@ -571,7 +570,7 @@ export type { ButtonVariant as ButtonVariantType } from '@metamask/design-system
 - **Month 4:** 50% of components migrated (~63 components)
 - **Month 6:** 100% of components migrated (~126 components)
 
-### Phase 2: Polish & Alignment (6-12 months)
+### Phase 2: Polish & Alignment (2-3 months)
 
 **Objective:** Restore cross-platform consistency and implement architectural improvements.
 
@@ -691,11 +690,11 @@ packages/design-system-react-native/src/types/index.ts  (export { ButtonVariant 
   import { Button } from '@metamask/design-system-react';
   ```
 
+- Minimal component API changes `disabled` => `isDisabled`
+
 **Unacceptable Changes (Deferred to Phase 2):**
 
-- Component API changes (prop renames, new required props)
-- Behavior changes (styling, functionality)
-- Type changes that break consumer code
+- Fully aligned component API maximizing breaking changes
 
 **Migration Support:**
 
@@ -705,7 +704,7 @@ packages/design-system-react-native/src/types/index.ts  (export { ButtonVariant 
 
 ### Phase 2: Consolidated Breaking Changes
 
-**Goal:** Align APIs, consolidate types, and restore consistency.
+**Goal:** Align APIs, consolidate types, and restore consistency across React, React Native and Figma
 
 **Breaking Change Categories:**
 
@@ -749,12 +748,13 @@ import { ButtonVariant } from '@metamask/design-system-react';
 
 ```tsx
 // React (before)
-<Button variant="primary" size="md" />
+<Button variant={ButtonVariant.Primary} size={ButtonSize.Md} />
 
 // React Native (before, different API)
 <Button variant={ButtonVariant.Primary} size={ButtonSize.Md} />
 
-// After Phase 2 alignment (unified API)
+// After Phase 2 alignment (unified API and both types work)
+<Button variant={ButtonVariant.Primary} size={ButtonSize.Md} />
 <Button variant="primary" size="md" /> // Both platforms
 ```
 
@@ -793,106 +793,24 @@ import { ButtonVariant } from '@metamask/design-system-react';
 
 **Example Deprecation:**
 
+In mobile or extension codebase
+
 ```tsx
 /**
- * @deprecated Use `variant` prop instead. Will be removed in v2.0.0.
- *
- * Migration guide: https://github.com/MetaMask/metamask-design-system/docs/migrations/button-variant.md
+ * @deprecated Please update your code to use `AvatarBase` from `@metamask/design-system-react-native`.
+ * The API may have changed — compare props before migrating.
+ * @see {@link https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/AvatarBase/README.md}
  */
-export type ButtonPrimaryProps = ButtonBaseProps & {
-  variant?: 'primary';
-};
+const AvatarBase: React.FC<AvatarBaseProps> = ({
 ```
-
-### Version Strategy
-
-**Phase 1 (Migration):**
-
-- Minor version bumps (e.g., 1.x.x → 1.y.x)
-- Each component migration is additive (no breaking changes)
-- Frequent releases (weekly or bi-weekly)
-
-**Phase 2 (Alignment):**
-
-- **Deprecations:** Minor version bumps (e.g., 1.y.x → 1.z.x)
-- **Removals:** Major version bumps (e.g., 1.z.x → 2.0.0)
-- Coordinate with extension/mobile release cycles
-
----
-
-## Success Metrics
-
-### Phase 1 Metrics (Migration)
-
-**Completion Metrics:**
-
-- ✅ **100% component migration** (~126 components in MMDS monorepo)
-- ✅ **0 legacy components** remaining in extension/mobile repos
-- ✅ **100% test coverage** maintained (all tests passing in new location)
-- ✅ **100% Storybook stories** migrated and functional
-
-**Quality Metrics:**
-
-- ✅ **Zero production bugs** introduced by migration
-- ✅ **Zero consumer breaking changes** (import paths only)
-- ✅ **<1 week** average time from MMDS migration to consumer update
-
-**Process Metrics:**
-
-- ✅ **<3 days** average time to merge component migration PR
-- ✅ **<1 week** average time to merge consumer import update PR
-- ✅ **100% CI/CD passing** for all migrated components
-
-### Phase 2 Metrics (Alignment)
-
-**Consistency Metrics:**
-
-- ✅ **100% shared types** moved to `design-system-shared`
-- ✅ **0 duplicated type definitions** across platform packages
-- ✅ **100% cross-platform components** have aligned APIs
-- ✅ **100% components** have Figma Code Connect
-
-**Breaking Change Metrics:**
-
-- ✅ **<10 breaking changes** per major version release
-- ✅ **100% migration guides** published before breaking change release
-- ✅ **>90% consumer adoption** of new APIs before deprecation removal
-
-**Adoption Metrics:**
-
-- ✅ **100% extension components** using MMDS packages
-- ✅ **100% mobile components** using MMDS packages
-- ✅ **Zero legacy design system code** in consumer repos
-
-### Long-Term Health Metrics
-
-**Maintenance Metrics:**
-
-- ✅ **<1 day** average bug fix time (across all components)
-- ✅ **<1 week** average feature request time (minor enhancements)
-- ✅ **>95% test coverage** across all MMDS packages
-
-**Developer Experience Metrics:**
-
-- ✅ **>4.0/5.0** developer satisfaction score (quarterly survey)
-- ✅ **<30 minutes** average time to find and use component (new developers)
-- ✅ **<5 minutes** average time to integrate component (experienced developers)
-
-**Governance Metrics:**
-
-- ✅ **100% components** follow MMDS documentation standards
-- ✅ **100% components** follow MMDS testing standards
-- ✅ **100% components** follow MMDS accessibility standards
-- ✅ **Weekly releases** with clear changelogs
-
----
 
 ## References
 
 ### Internal Documentation
 
 - [DSYS-272 Epic](https://consensyssoftware.atlassian.net/browse/DSYS-272) - Migrate Legacy Mobile Components
-- [Migration Tracker Spreadsheet](https://docs.google.com/spreadsheets/d/1obwyYd-F84gt6JkxtosE5YnNQ7bksWv7B56YC3CJLfE/edit?gid=1980142657#gid=1980142657)
+- [DSYS-302](https://consensyssoftware.atlassian.net/browse/DSYS-302) - Migrate Legacy Extension Components to MMDS
+- [Design System Metrics](https://georgewrmarshall.github.io/design-system-metrics/) - Migration Dashboard
 - [CLAUDE.md](../CLAUDE.md) - Monorepo structure and commands
 - [.cursor/rules/styling.md](../.cursor/rules/styling.md) - Component styling patterns
 - [.cursor/rules/component-documentation.md](../.cursor/rules/component-documentation.md) - Documentation standards
