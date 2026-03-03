@@ -56,11 +56,10 @@ The MMDS core principle is **"Consistent across libraries with as much code shar
 
 #### Component Inventory
 
-| Package                                | Components   | Temp Components | Total |
-| -------------------------------------- | ------------ | --------------- | ----- |
-| `@metamask/design-system-react`        | 22           | 3               | 25    |
-| `@metamask/design-system-react-native` | 23           | 7               | 30    |
-| `@metamask/design-system-shared`       | 0 components | -               | 0     |
+| Package                                | Components | Temp Components | Total |
+| -------------------------------------- | ---------- | --------------- | ----- |
+| `@metamask/design-system-react`        | 22         | 3               | 25    |
+| `@metamask/design-system-react-native` | 23         | 7               | 30    |
 
 **Cross-Platform Coverage:**
 
@@ -222,7 +221,7 @@ Figma Components → Update Code Connect → Align property names
 ```tsx
 // Extension continues using familiar API during migration
 import { Button } from '@metamask/design-system-react';
-<Button variant="primary" size="md" />; // No changes required
+<Button variant={ButtonVariant.Primary} size={ButtonSize.Md} />; // No changes required
 
 // Mobile continues using familiar API during migration
 import { Button } from '@metamask/design-system-react-native';
@@ -277,8 +276,8 @@ Phase 2c: Update consumers using codemod or manual migration
 
 **PR Size Comparison:**
 
-- **Speed-first:** 1 PR per component per platform (~200 PRs total)
-- **Alignment-first:** 1 PR per aligned component bundle (~80 PRs, but larger and more complex)
+- **Speed-first:** 1 PR per component per platform
+- **Alignment-first:** 1 PR per aligned component bundle
 
 ### Costs of Speed-First Approach
 
@@ -381,13 +380,14 @@ Two key architectural decisions enable this migration strategy:
 **Example Problem (MenuItem):**
 
 ```tsx
-// Extension code using enum
-import { MenuItem, MenuItemVariant } from 'legacy-location';
-<MenuItem variant={MenuItemVariant.Primary} />;
+// Extension code using enum internally
+import { MenuItem, IconName } from 'legacy-location';
+<MenuItem iconName={IconName.Refresh} />;
 
 // After migration, this breaks:
-import { MenuItem, MenuItemVariant } from '@metamask/design-system-react';
-<MenuItem variant={MenuItemVariant.Primary} />; // MenuItemVariant is incompatible type
+import { MenuItem } from 'legacy-location';
+import { IconName } from '@metamask/design-system-react';
+<MenuItem iconName={IconName.Refresh} />; // IconName is incompatible type
 ```
 
 **Solution:** Migrate enums to string unions with const objects (Option 3).
