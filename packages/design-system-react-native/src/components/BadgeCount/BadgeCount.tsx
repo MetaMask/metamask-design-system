@@ -38,8 +38,8 @@ export const BadgeCount = ({
         variant={MAP_BADGECOUNT_SIZE_TEXTVARIANT[size]}
         color={TextColor.ErrorInverse}
         fontWeight={FontWeight.Medium}
-        twClassName="leading-0"
         {...textProps}
+        twClassName={`leading-0 ${textProps?.twClassName || ''}`}
       >
         {count > max ? `${max}+` : `${count}`}
       </Text>
