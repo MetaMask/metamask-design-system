@@ -76,6 +76,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx": require("../../../packages/design-system-react-native/src/components/Button/variants/ButtonTertiary/ButtonTertiary.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/ButtonBase/ButtonBase.stories.tsx": require("../../../packages/design-system-react-native/src/components/ButtonBase/ButtonBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/ButtonIcon/ButtonIcon.stories.tsx": require("../../../packages/design-system-react-native/src/components/ButtonIcon/ButtonIcon.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/ButtonSemantic/ButtonSemantic.stories.tsx": require("../../../packages/design-system-react-native/src/components/ButtonSemantic/ButtonSemantic.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Card/Card.stories.tsx": require("../../../packages/design-system-react-native/src/components/Card/Card.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Checkbox/Checkbox.stories.tsx": require("../../../packages/design-system-react-native/src/components/Checkbox/Checkbox.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/HeaderBase/HeaderBase.stories.tsx": require("../../../packages/design-system-react-native/src/components/HeaderBase/HeaderBase.stories.tsx"),
