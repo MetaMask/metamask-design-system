@@ -54,6 +54,7 @@ try {
 
 const getStories = () => {
   return {
+    "./../../packages/design-system-react-native/src/components/ActionListItem/ActionListItem.stories.tsx": require("../../../packages/design-system-react-native/src/components/ActionListItem/ActionListItem.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/AvatarAccount/AvatarAccount.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarAccount/AvatarAccount.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/AvatarBase/AvatarBase.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarBase/AvatarBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/AvatarFavicon/AvatarFavicon.stories.tsx": require("../../../packages/design-system-react-native/src/components/AvatarFavicon/AvatarFavicon.stories.tsx"),
