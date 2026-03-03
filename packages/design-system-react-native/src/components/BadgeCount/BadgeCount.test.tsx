@@ -139,8 +139,8 @@ describe('BadgeCount', () => {
     expect(textElement.props.fontWeight).toStrictEqual(
       expectedTextProps.fontWeight,
     );
-    // Custom twClassName should be applied
-    expect(textElement.props.twClassName).toBe('custom');
+    // Custom twClassName should be applied with leading-0 prepended
+    expect(textElement.props.twClassName).toBe('leading-0 custom');
   });
 
   it('applies additional container style and forwards extra props', () => {
