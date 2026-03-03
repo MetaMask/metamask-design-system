@@ -149,3 +149,6 @@ export type {
   ToastLinkButtonOptions,
   ToastCloseButtonOptions,
 } from './Toast';
+
+export { ButtonHero, ButtonHeroSize } from './ButtonHero';
+export type { ButtonHeroProps } from './ButtonHero';

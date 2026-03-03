@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.2.2]
+
+### Changed
+
+- Updated typography scale for improved text hierarchy ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
+  - `fontSize.5` increased from 18px to 20px, affecting `HeadingMd`, `SectionHeading`, `BodyLg`, and `ButtonLabelLg` typography tokens
+  - `SectionHeading` on large screens now uses 24px (up from 20px) to maintain consistent hierarchy with `HeadingMd`
+  - These tokens map to `TextVariant.HeadingMd`, `TextVariant.SectionHeading`, `TextVariant.BodyLg`, and `TextVariant.ButtonLabelLg` used in the `Text` component from both `@metamask/design-system-react` and `@metamask/design-system-react-native` packages
+  - Typography documentation updated to reflect the refined sizes
+
 ## [8.2.1]
 
 ### Changed
@@ -415,7 +425,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.2...HEAD
+[8.2.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.1...@metamask/design-tokens@8.2.2
 [8.2.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.0...@metamask/design-tokens@8.2.1
 [8.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.1...@metamask/design-tokens@8.2.0
 [8.1.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.0...@metamask/design-tokens@8.1.1
