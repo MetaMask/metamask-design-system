@@ -50,15 +50,15 @@ We temporarily relax the core principle of strict cross-platform consistency dur
 
 Use this document for strategy and sequencing. Use the rules below for day-to-day implementation details.
 
-| Rule | Purpose |
-| ---- | ------- |
-| [`component-architecture.md`](../.cursor/rules/component-architecture.md) | ADR-0003/0004 architecture, shared-vs-platform boundaries, export patterns |
-| [`component-creation.md`](../.cursor/rules/component-creation.md) | Practical scaffolding and implementation flow when creating or porting components |
+| Rule                                                                                      | Purpose                                                                                       |
+| ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [`component-architecture.md`](../.cursor/rules/component-architecture.md)                 | ADR-0003/0004 architecture, shared-vs-platform boundaries, export patterns                    |
+| [`component-creation.md`](../.cursor/rules/component-creation.md)                         | Practical scaffolding and implementation flow when creating or porting components             |
 | [`component-enum-union-migration.md`](../.cursor/rules/component-enum-union-migration.md) | Internal refactors of existing components to const-object unions and centralized shared types |
-| [`component-documentation.md`](../.cursor/rules/component-documentation.md) | Storybook and README standards |
-| [`styling.md`](../.cursor/rules/styling.md) | Box/Text-first styling and token usage patterns |
-| [`figma-integration.md`](../.cursor/rules/figma-integration.md) | Figma Code Connect requirements |
-| [`pr.mdc`](../.cursor/rules/pr.mdc) | PR description and drafting workflow |
+| [`component-documentation.md`](../.cursor/rules/component-documentation.md)               | Storybook and README standards                                                                |
+| [`styling.md`](../.cursor/rules/styling.md)                                               | Box/Text-first styling and token usage patterns                                               |
+| [`figma-integration.md`](../.cursor/rules/figma-integration.md)                           | Figma Code Connect requirements                                                               |
+| [`pr.mdc`](../.cursor/rules/pr.mdc)                                                       | PR description and drafting workflow                                                          |
 
 > Note: Older references to `component-migration.md` are obsolete in this repo. Use the rules above.
 
