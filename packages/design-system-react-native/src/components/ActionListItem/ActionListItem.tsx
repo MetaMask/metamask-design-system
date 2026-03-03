@@ -9,7 +9,7 @@ import {
   BoxJustifyContent,
 } from '../Box';
 import { Icon, IconSize } from '../Icon';
-import { FontWeight, Text, TextColor, TextVariant } from '../Text';
+import { Text, TextColor, TextVariant } from '../Text';
 
 import type { ActionListItemProps } from './ActionListItem.types';
 
@@ -34,11 +34,7 @@ export const ActionListItem: React.FC<ActionListItemProps> = ({
   const renderLabel = () => {
     if (typeof label === 'string') {
       return (
-        <Text
-          variant={TextVariant.BodyMd}
-          fontWeight={FontWeight.Medium}
-          {...labelTextProps}
-        >
+        <Text variant={TextVariant.BodyMd} {...labelTextProps}>
           {label}
         </Text>
       );
