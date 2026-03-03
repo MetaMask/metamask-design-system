@@ -5,7 +5,10 @@ MainActionButton is a compact vertical action button that renders an icon above 
 ## Usage
 
 ```tsx
-import { MainActionButton, IconName } from '@metamask/design-system-react-native';
+import {
+  MainActionButton,
+  IconName,
+} from '@metamask/design-system-react-native';
 
 <MainActionButton
   iconName={IconName.Add}
@@ -52,14 +55,14 @@ Callback fired when pressed.
 
 Additional Tailwind classes for the button container.
 
-| TYPE                              | REQUIRED | DEFAULT |
-| --------------------------------- | -------- | ------- |
-| `string | (pressed) => string`    | No       | `''`    |
+| TYPE    | REQUIRED             | DEFAULT |
+| ------- | -------------------- | ------- | ---- |
+| `string | (pressed) => string` | No      | `''` |
 
 ### `style`
 
 React Native style object for the outer pressable.
 
-| TYPE                                                           | REQUIRED | DEFAULT     |
-| -------------------------------------------------------------- | -------- | ----------- |
+| TYPE                                                            | REQUIRED | DEFAULT     |
+| --------------------------------------------------------------- | -------- | ----------- |
 | `StyleProp<ViewStyle> \| ({ pressed }) => StyleProp<ViewStyle>` | No       | `undefined` |
