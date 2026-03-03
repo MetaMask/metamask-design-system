@@ -129,5 +129,3 @@ export const ActionListItem: React.FC<ActionListItemProps> = ({
     </Pressable>
   );
 };
-
-export default ActionListItem;
