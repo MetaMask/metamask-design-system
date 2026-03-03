@@ -1,15 +1,14 @@
+import { BadgeCountSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { BadgeCountSize } from '../../types';
 import { Text, TextColor, FontWeight } from '../Text';
 
 import { BadgeCount } from './BadgeCount';
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
-  MAP_BADGECOUNT_SIZE_LINEHEIGHT,
 } from './BadgeCount.constants';
 
 describe('BadgeCount', () => {
@@ -25,8 +24,6 @@ describe('BadgeCount', () => {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[sizeVal],
         color: TextColor.ErrorInverse,
         fontWeight: FontWeight.Medium,
-        // Note: trailing space comes from template literal if textProps.twClassName is undefined.
-        twClassName: `${MAP_BADGECOUNT_SIZE_LINEHEIGHT[sizeVal]} `,
       };
       return (
         <>
@@ -59,9 +56,6 @@ describe('BadgeCount', () => {
     expect(textElement.props.color).toStrictEqual(expectedTextProps.color);
     expect(textElement.props.fontWeight).toStrictEqual(
       expectedTextProps.fontWeight,
-    );
-    expect(textElement.props.twClassName).toContain(
-      MAP_BADGECOUNT_SIZE_LINEHEIGHT[BadgeCountSize.Md],
     );
   });
 
@@ -111,7 +105,6 @@ describe('BadgeCount', () => {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[sizeVal],
         color: customTextProps.color, // overridden
         fontWeight: customTextProps.fontWeight, // overridden
-        twClassName: `${MAP_BADGECOUNT_SIZE_LINEHEIGHT[sizeVal]} ${customTextProps.twClassName}`,
       };
       return (
         <>
@@ -146,10 +139,8 @@ describe('BadgeCount', () => {
     expect(textElement.props.fontWeight).toStrictEqual(
       expectedTextProps.fontWeight,
     );
-    expect(textElement.props.twClassName).toContain(
-      MAP_BADGECOUNT_SIZE_LINEHEIGHT[BadgeCountSize.Md],
-    );
-    expect(textElement.props.twClassName).toContain('custom');
+    // Custom twClassName should be applied
+    expect(textElement.props.twClassName).toBe('custom');
   });
 
   it('applies additional container style and forwards extra props', () => {
@@ -184,7 +175,6 @@ describe('BadgeCount', () => {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[customSize],
         color: TextColor.ErrorInverse,
         fontWeight: FontWeight.Medium,
-        twClassName: `${MAP_BADGECOUNT_SIZE_LINEHEIGHT[customSize]} `,
       };
       return (
         <>
@@ -210,8 +200,9 @@ describe('BadgeCount', () => {
     expect(container.props.style[0]).toStrictEqual(expectedOuter);
     const textElement = container.props.children;
     expect(textElement.props.variant).toStrictEqual(expectedTextProps.variant);
-    expect(textElement.props.twClassName).toContain(
-      MAP_BADGECOUNT_SIZE_LINEHEIGHT[customSize],
+    expect(textElement.props.color).toStrictEqual(expectedTextProps.color);
+    expect(textElement.props.fontWeight).toStrictEqual(
+      expectedTextProps.fontWeight,
     );
   });
 });

@@ -1,4 +1,5 @@
-import { BadgeCountSize } from '../../types';
+import { BadgeCountSize } from '@metamask/design-system-shared';
+
 import { TextVariant } from '../Text';
 
 // Mappings
@@ -8,10 +9,6 @@ export const MAP_BADGECOUNT_SIZE_TEXTVARIANT: Record<
 > = {
   [BadgeCountSize.Md]: TextVariant.BodyXs,
   [BadgeCountSize.Lg]: TextVariant.BodySm,
-};
-export const MAP_BADGECOUNT_SIZE_LINEHEIGHT: Record<BadgeCountSize, string> = {
-  [BadgeCountSize.Md]: 'leading-[14px]', // line-height 14px
-  [BadgeCountSize.Lg]: 'leading-4', // line-height 16px
 };
 
 export const TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER: Record<

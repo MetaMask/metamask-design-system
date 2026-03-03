@@ -1,4 +1,5 @@
-import { BadgeCountSize } from '../../types';
+import { BadgeCountSize } from '@metamask/design-system-shared';
+
 import { TextVariant } from '../Text';
 
 // Mappings
