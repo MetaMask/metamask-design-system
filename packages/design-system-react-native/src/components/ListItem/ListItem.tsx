@@ -5,7 +5,9 @@ import { DimensionValue, View } from 'react-native';
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 
 import {
+  DEFAULT_LISTITEM_BOTTOMACCESSORYGAP,
   DEFAULT_LISTITEM_GAP,
+  DEFAULT_LISTITEM_TOPACCESSORYGAP,
   DEFAULT_LISTITEM_VERTICALALIGNMENT,
   TESTID_LISTITEM_BOTTOM_ACCESSORY_WRAPPER,
   TESTID_LISTITEM_GAP,
@@ -25,8 +27,8 @@ export const ListItem: React.FC<ListItemProps> = ({
   children,
   topAccessory,
   bottomAccessory,
-  topAccessoryGap,
-  bottomAccessoryGap,
+  topAccessoryGap = DEFAULT_LISTITEM_TOPACCESSORYGAP,
+  bottomAccessoryGap = DEFAULT_LISTITEM_BOTTOMACCESSORYGAP,
   gap = DEFAULT_LISTITEM_GAP,
   verticalAlignment = DEFAULT_LISTITEM_VERTICALALIGNMENT,
   twClassName,
@@ -47,7 +49,7 @@ export const ListItem: React.FC<ListItemProps> = ({
       {topAccessory && (
         <View
           testID={TESTID_LISTITEM_TOP_ACCESSORY_WRAPPER}
-          style={{ marginBottom: topAccessoryGap ?? 0 }}
+          style={{ marginBottom: topAccessoryGap }}
         >
           {topAccessory}
         </View>
@@ -74,7 +76,7 @@ export const ListItem: React.FC<ListItemProps> = ({
       {bottomAccessory && (
         <View
           testID={TESTID_LISTITEM_BOTTOM_ACCESSORY_WRAPPER}
-          style={{ marginTop: bottomAccessoryGap ?? 0 }}
+          style={{ marginTop: bottomAccessoryGap }}
         >
           {bottomAccessory}
         </View>

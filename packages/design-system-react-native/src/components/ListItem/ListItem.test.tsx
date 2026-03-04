@@ -72,14 +72,25 @@ describe('ListItem', () => {
   });
 
   describe('Gap', () => {
-    it('renders a gap spacer between multiple children', () => {
-      const { getByTestId } = render(
+    it('renders one gap spacer for two children', () => {
+      const { getAllByTestId } = render(
         <ListItem>
           <View />
           <View />
         </ListItem>,
       );
-      expect(getByTestId(TESTID_LISTITEM_GAP)).toBeDefined();
+      expect(getAllByTestId(TESTID_LISTITEM_GAP)).toHaveLength(1);
+    });
+
+    it('renders N-1 gap spacers for N children', () => {
+      const { getAllByTestId } = render(
+        <ListItem>
+          <View />
+          <View />
+          <View />
+        </ListItem>,
+      );
+      expect(getAllByTestId(TESTID_LISTITEM_GAP)).toHaveLength(2);
     });
 
     it('does not render a gap spacer with a single child', () => {
@@ -91,27 +102,31 @@ describe('ListItem', () => {
       expect(queryByTestId(TESTID_LISTITEM_GAP)).toBeNull();
     });
 
-    it('applies the default gap of 16', () => {
-      const { getByTestId } = render(
+    it('applies the default gap of 16 to all spacers', () => {
+      const { getAllByTestId } = render(
         <ListItem>
           <View />
           <View />
+          <View />
         </ListItem>,
       );
-      expect(getByTestId(TESTID_LISTITEM_GAP).props.style.width).toBe(
-        DEFAULT_LISTITEM_GAP,
-      );
+      getAllByTestId(TESTID_LISTITEM_GAP).forEach((spacer) => {
+        expect(spacer.props.style.width).toBe(DEFAULT_LISTITEM_GAP);
+      });
     });
 
-    it('applies a custom gap', () => {
+    it('applies a custom gap to all spacers', () => {
       const givenGap = 20;
-      const { getByTestId } = render(
+      const { getAllByTestId } = render(
         <ListItem gap={givenGap}>
           <View />
           <View />
+          <View />
         </ListItem>,
       );
-      expect(getByTestId(TESTID_LISTITEM_GAP).props.style.width).toBe(givenGap);
+      getAllByTestId(TESTID_LISTITEM_GAP).forEach((spacer) => {
+        expect(spacer.props.style.width).toBe(givenGap);
+      });
     });
   });
 
