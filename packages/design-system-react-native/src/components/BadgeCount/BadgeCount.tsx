@@ -1,14 +1,13 @@
+import { BadgeCountSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import { BadgeCountSize } from '../../types';
 import { Text, TextColor, FontWeight } from '../Text';
 
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
-  MAP_BADGECOUNT_SIZE_LINEHEIGHT,
 } from './BadgeCount.constants';
 import type { BadgeCountProps } from './BadgeCount.types';
 
@@ -36,11 +35,11 @@ export const BadgeCount = ({
       ]}
     >
       <Text
-        variant={MAP_BADGECOUNT_SIZE_TEXTVARIANT[size as BadgeCountSize]}
+        variant={MAP_BADGECOUNT_SIZE_TEXTVARIANT[size]}
         color={TextColor.ErrorInverse}
         fontWeight={FontWeight.Medium}
         {...textProps}
-        twClassName={`${MAP_BADGECOUNT_SIZE_LINEHEIGHT[size]} ${textProps?.twClassName || ''}`}
+        twClassName={`leading-0 ${textProps?.twClassName || ''}`}
       >
         {count > max ? `${max}+` : `${count}`}
       </Text>

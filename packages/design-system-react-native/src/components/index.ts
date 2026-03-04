@@ -1,3 +1,6 @@
+export { ActionListItem } from './ActionListItem';
+export type { ActionListItemProps } from './ActionListItem';
+
 export {
   AvatarAccount,
   AvatarAccountVariant,
@@ -55,6 +58,12 @@ export type {
   BottomSheetFooterButtonProps,
 } from './BottomSheetFooter';
 
+export {
+  BottomSheetHeader,
+  BottomSheetHeaderVariant,
+} from './BottomSheetHeader';
+export type { BottomSheetHeaderProps } from './BottomSheetHeader';
+
 export { BottomSheetOverlay } from './BottomSheetOverlay';
 export type { BottomSheetOverlayProps } from './BottomSheetOverlay';
 
@@ -87,10 +96,13 @@ export type { ButtonProps } from './Button';
 export { ButtonIcon, ButtonIconSize } from './ButtonIcon';
 export type { ButtonIconProps } from './ButtonIcon';
 
+export { ButtonSemantic, ButtonSemanticSeverity } from './ButtonSemantic';
+export type { ButtonSemanticProps } from './ButtonSemantic';
+
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
-export { HeaderBase } from './HeaderBase';
+export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
 export { Icon, IconColor, IconName, IconSize } from './Icon';
@@ -146,3 +158,6 @@ export type {
   ToastLinkButtonOptions,
   ToastCloseButtonOptions,
 } from './Toast';
+
+export { ButtonHero, ButtonHeroSize } from './ButtonHero';
+export type { ButtonHeroProps } from './ButtonHero';
