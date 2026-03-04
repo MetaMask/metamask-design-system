@@ -9,22 +9,35 @@ import type { MainActionButtonProps } from './MainActionButton.types';
 const meta: Meta<MainActionButtonProps> = {
   title: 'Components/MainActionButton',
   component: MainActionButton,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'MainActionButton is a compact vertical action button. Core action props are iconName, label, onPress, and isDisabled.',
+      },
+    },
+  },
   argTypes: {
     iconName: {
       control: 'select',
       options: IconName,
+      description: 'Icon displayed above the action label.',
     },
     label: {
       control: 'text',
+      description: 'Single-line label displayed below the icon.',
     },
     isDisabled: {
       control: 'boolean',
+      description: 'Disables press interactions and applies disabled styles.',
     },
     twClassName: {
       control: 'text',
+      description: 'Optional Tailwind classes for container style overrides.',
     },
     onPress: {
       action: 'pressed',
+      description: 'Callback fired when the action button is pressed.',
     },
   },
 };
@@ -51,6 +64,14 @@ export const IsDisabled: Story = {
     actions: {
       disable: true,
     },
+  },
+};
+
+export const ActionButtonOnPress: Story = {
+  args: {
+    iconName: IconName.Add,
+    label: 'Tap me',
+    isDisabled: false,
   },
 };
 
