@@ -1,7 +1,7 @@
+import { BadgeCountSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
-import { View } from 'react-native';
 
-import { BadgeCountSize } from '../../types';
+import { Box, BoxFlexDirection } from '../Box';
 
 import { BadgeCount } from './BadgeCount';
 import type { BadgeCountProps } from './BadgeCount.types';
@@ -12,16 +12,27 @@ const meta: Meta<BadgeCountProps> = {
   argTypes: {
     size: {
       control: 'select',
-      options: BadgeCountSize,
+      options: Object.keys(BadgeCountSize),
+      mapping: BadgeCountSize,
+      description: 'Optional prop to control the size of the BadgeCount',
     },
     count: {
       control: 'number',
+      description: 'Required prop to show the count number',
     },
     max: {
       control: 'number',
+      description:
+        'Optional prop to determine the max the count can go up to. If count > max, the count will be shown as "max+"',
+    },
+    textProps: {
+      control: 'object',
+      description:
+        'Optional props to be passed to the Text component used by count',
     },
     twClassName: {
       control: 'text',
+      description: 'Optional prop to add twrnc overriding classNames',
     },
   },
 };
@@ -39,21 +50,20 @@ export const Default: Story = {
   },
 };
 
-export const Sizes: Story = {
+export const Size: Story = {
   render: () => (
-    <View style={{ gap: 8 }}>
-      {Object.values(BadgeCountSize).map((size) => (
-        <BadgeCount key={size} size={size} count={100} />
-      ))}
-    </View>
+    <Box flexDirection={BoxFlexDirection.Row} gap={2}>
+      <BadgeCount size={BadgeCountSize.Md} count={100} />
+      <BadgeCount size={BadgeCountSize.Lg} count={100} />
+    </Box>
   ),
 };
 
 export const Max: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
+    <Box flexDirection={BoxFlexDirection.Row} gap={2}>
       <BadgeCount count={10} />
       <BadgeCount count={100} />
-    </View>
+    </Box>
   ),
 };
