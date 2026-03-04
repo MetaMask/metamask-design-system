@@ -9,9 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0]
 
-### Uncategorized
+### Added
 
-- refactor: migrate BadgeCount to union and shared types ([#942](https://github.com/MetaMask/metamask-design-system/pull/942))
+- Added shared `BadgeCount` types and constants for cross-package reuse ([#942](https://github.com/MetaMask/metamask-design-system/pull/942))
+  - Added `BadgeCountSize` const object and derived `BadgeCountSize` string union type
+  - Added `BadgeCountPropsShared` as the shared base props contract used by React and React Native implementations
 
 ## [0.2.0]
 

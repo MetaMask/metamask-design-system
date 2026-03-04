@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.10.0]
 
-### Uncategorized
+### Changed
 
-- refactor: migrate BadgeCount to union and shared types ([#942](https://github.com/MetaMask/metamask-design-system/pull/942))
-- chore: Refine HeadingMd and SectionHeading sizes and related docs ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
+- **BREAKING:** Updated `BadgeCount` type exports to use the ADR-0003/ADR-0004 const-object + string-union pattern instead of TypeScript enums ([#942](https://github.com/MetaMask/metamask-design-system/pull/942))
+  - `BadgeCountSize` is now provided as a const object with a derived union type rather than an enum
+  - `BadgeCount` shared prop types are now sourced from `@metamask/design-system-shared`
+  - Migration: update any enum-specific usage to const-object/union usage, while continuing to import from `@metamask/design-system-react`
+- Refined `HeadingMd` and `SectionHeading` sizes and updated related documentation for clearer typography guidance ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
 
 ## [0.9.0]
 
