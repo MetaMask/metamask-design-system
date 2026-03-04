@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: migrate BadgeCount to union and shared types ([#942](https://github.com/MetaMask/metamask-design-system/pull/942))
+- feat: add `ActionListItem` ([#951](https://github.com/MetaMask/metamask-design-system/pull/951))
+- feat: SensitiveText ([#922](https://github.com/MetaMask/metamask-design-system/pull/922))
+- feat: add `ButtonSemantic` ([#950](https://github.com/MetaMask/metamask-design-system/pull/950))
+- feat: `BottomSheetHeader` ([#927](https://github.com/MetaMask/metamask-design-system/pull/927))
+- feat: migrate ButtonHero to design-system-react-native ([#934](https://github.com/MetaMask/metamask-design-system/pull/934))
+
 ## [0.9.0]
 
 ### Added

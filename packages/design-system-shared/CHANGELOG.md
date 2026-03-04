@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: migrate BadgeCount to union and shared types ([#942](https://github.com/MetaMask/metamask-design-system/pull/942))
+
 ## [0.2.0]
 
 ### Added
