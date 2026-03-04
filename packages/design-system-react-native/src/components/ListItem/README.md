@@ -3,11 +3,14 @@
 ListItem is a wrapper component used to display an individual item within a list. It provides configurable spacing, vertical alignment, and optional accessory slots above and below the row.
 
 ```tsx
-import { ListItem, ListItemVerticalAlignment } from '@metamask/design-system-react-native';
+import {
+  ListItem,
+  ListItemVerticalAlignment,
+} from '@metamask/design-system-react-native';
 
 <ListItem gap={16} verticalAlignment={ListItemVerticalAlignment.Center}>
   {children}
-</ListItem>
+</ListItem>;
 ```
 
 ## Props
@@ -47,9 +50,9 @@ Horizontal spacing in pixels between each child inside the row.
 
 Vertical alignment of children inside the row.
 
-| TYPE                         | REQUIRED | DEFAULT                          |
-| ---------------------------- | -------- | -------------------------------- |
-| `ListItemVerticalAlignment`  | No       | `ListItemVerticalAlignment.Center` |
+| TYPE                        | REQUIRED | DEFAULT                            |
+| --------------------------- | -------- | ---------------------------------- |
+| `ListItemVerticalAlignment` | No       | `ListItemVerticalAlignment.Center` |
 
 ```tsx
 <ListItem verticalAlignment={ListItemVerticalAlignment.Top}>
@@ -64,11 +67,11 @@ Vertical alignment of children inside the row.
 
 Available values:
 
-| Value                              | Description                        |
-| ---------------------------------- | ---------------------------------- |
-| `ListItemVerticalAlignment.Top`    | Aligns children to the top         |
-| `ListItemVerticalAlignment.Center` | Aligns children to the center      |
-| `ListItemVerticalAlignment.Bottom` | Aligns children to the bottom      |
+| Value                              | Description                   |
+| ---------------------------------- | ----------------------------- |
+| `ListItemVerticalAlignment.Top`    | Aligns children to the top    |
+| `ListItemVerticalAlignment.Center` | Aligns children to the center |
+| `ListItemVerticalAlignment.Bottom` | Aligns children to the bottom |
 
 ### `topAccessory`
 
@@ -79,7 +82,9 @@ Optional content rendered above the list item row.
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-<ListItem topAccessory={<Text variant={TextVariant.BodySm}>Section Header</Text>}>
+<ListItem
+  topAccessory={<Text variant={TextVariant.BodySm}>Section Header</Text>}
+>
   <Avatar />
   <Text variant={TextVariant.BodyMd}>Label</Text>
 </ListItem>
@@ -94,7 +99,9 @@ Optional content rendered below the list item row.
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-<ListItem bottomAccessory={<Text variant={TextVariant.BodySm}>Section Footer</Text>}>
+<ListItem
+  bottomAccessory={<Text variant={TextVariant.BodySm}>Section Footer</Text>}
+>
   <Avatar />
   <Text variant={TextVariant.BodyMd}>Label</Text>
 </ListItem>
