@@ -23,6 +23,9 @@ const meta: Meta<MainActionButtonProps> = {
     twClassName: {
       control: 'text',
     },
+    onPress: {
+      action: 'pressed',
+    },
   },
 };
 
@@ -44,9 +47,19 @@ export const IsDisabled: Story = {
     label: 'Add',
     isDisabled: true,
   },
+  parameters: {
+    actions: {
+      disable: true,
+    },
+  },
 };
 
 export const RowLayout: Story = {
+  parameters: {
+    actions: {
+      disable: true,
+    },
+  },
   render: () => (
     <View style={{ flexDirection: 'row', gap: 16 }}>
       <MainActionButton iconName={IconName.BuySell} label="Buy/Sell" />

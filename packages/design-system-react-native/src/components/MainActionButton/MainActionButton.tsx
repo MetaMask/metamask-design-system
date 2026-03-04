@@ -1,5 +1,6 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { Box } from '../Box';
 import { Icon, IconColor, IconSize } from '../Icon';
@@ -46,23 +47,17 @@ export const MainActionButton = ({
             ? twClassName(pressed)
             : twClassName;
 
-        const computedStyle = [
-          tw.style(
-            TWCLASS_MAINACTIONBUTTON_BASE,
-            pressed && !isDisabled ? 'bg-muted-pressed' : 'bg-muted',
-            isDisabled ? 'opacity-50' : 'opacity-100',
-            classNameStr,
-          ),
-        ];
+        const baseStyle = tw.style(
+          TWCLASS_MAINACTIONBUTTON_BASE,
+          pressed && !isDisabled ? 'bg-muted-pressed' : 'bg-muted',
+          isDisabled ? 'opacity-50' : 'opacity-100',
+          classNameStr,
+        ) as StyleProp<ViewStyle>;
 
         const additionalStyle =
           typeof style === 'function' ? style({ pressed }) : style;
 
-        if (additionalStyle) {
-          computedStyle.push(additionalStyle);
-        }
-
-        return computedStyle;
+        return additionalStyle ? [baseStyle, additionalStyle] : [baseStyle];
       }}
       {...props}
     >
