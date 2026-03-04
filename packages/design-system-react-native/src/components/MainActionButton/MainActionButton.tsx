@@ -6,12 +6,6 @@ import { Box } from '../Box';
 import { Icon, IconColor, IconSize } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import { Text, FontWeight, TextColor, TextVariant } from '../Text';
-
-import {
-  MAINACTIONBUTTON_ICON_TEST_ID,
-  MAINACTIONBUTTON_LABEL_TEST_ID,
-  MAINACTIONBUTTON_TEST_ID,
-} from './MainActionButton.constants';
 import {
   TWCLASS_MAINACTIONBUTTON_BASE,
   TWCLASS_MAINACTIONBUTTON_CONTAINER,
@@ -28,14 +22,12 @@ export const MainActionButton = ({
   style,
   isDisabled = false,
   twClassName = '',
-  testID = MAINACTIONBUTTON_TEST_ID,
   ...props
 }: MainActionButtonProps) => {
   const tw = useTailwind();
 
   return (
     <ButtonAnimated
-      testID={testID}
       disabled={isDisabled}
       accessible
       onPress={!isDisabled ? onPress : undefined}
@@ -63,13 +55,11 @@ export const MainActionButton = ({
     >
       <Box twClassName={TWCLASS_MAINACTIONBUTTON_CONTAINER}>
         <Icon
-          testID={MAINACTIONBUTTON_ICON_TEST_ID}
           name={iconName}
           size={IconSize.Lg}
           color={IconColor.IconAlternative}
         />
         <Text
-          testID={MAINACTIONBUTTON_LABEL_TEST_ID}
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
           color={TextColor.TextDefault}

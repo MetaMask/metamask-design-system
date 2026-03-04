@@ -6,20 +6,22 @@ import React from 'react';
 import { IconName } from '../Icon';
 
 import { MainActionButton } from './MainActionButton';
-import {
-  MAINACTIONBUTTON_LABEL_TEST_ID,
-  MAINACTIONBUTTON_TEST_ID,
-} from './MainActionButton.constants';
 import { TWCLASS_MAINACTIONBUTTON_BASE } from './MainActionButton.styles';
+
+const TEST_ID = 'main-action-button-test';
 
 describe('MainActionButton', () => {
   it('renders label and icon', () => {
     const { getByText, getByTestId } = render(
-      <MainActionButton iconName={IconName.Add} label="Test Button" />,
+      <MainActionButton
+        iconName={IconName.Add}
+        label="Test Button"
+        testID={TEST_ID}
+      />,
     );
 
     expect(getByText('Test Button')).toBeDefined();
-    expect(getByTestId(MAINACTIONBUTTON_TEST_ID)).toBeDefined();
+    expect(getByTestId(TEST_ID)).toBeDefined();
   });
 
   it('applies default styles', () => {
@@ -33,10 +35,10 @@ describe('MainActionButton', () => {
     );
 
     const { getByTestId } = render(
-      <MainActionButton iconName={IconName.Add} label="Styled" />,
+      <MainActionButton iconName={IconName.Add} label="Styled" testID={TEST_ID} />,
     );
 
-    expect(getByTestId(MAINACTIONBUTTON_TEST_ID).props.style[0]).toStrictEqual(
+    expect(getByTestId(TEST_ID).props.style[0]).toStrictEqual(
       expected,
     );
   });
@@ -47,11 +49,11 @@ describe('MainActionButton', () => {
         iconName={IconName.Add}
         label="Disabled"
         isDisabled
-        testID={MAINACTIONBUTTON_TEST_ID}
+        testID={TEST_ID}
       />,
     );
 
-    const button = getByTestId(MAINACTIONBUTTON_TEST_ID);
+    const button = getByTestId(TEST_ID);
     expect(button.props.accessibilityState.disabled).toBe(true);
   });
 
@@ -62,11 +64,11 @@ describe('MainActionButton', () => {
         iconName={IconName.Add}
         label="Press"
         onPress={onPress}
-        testID={MAINACTIONBUTTON_TEST_ID}
+        testID={TEST_ID}
       />,
     );
 
-    fireEvent.press(getByTestId(MAINACTIONBUTTON_TEST_ID));
+    fireEvent.press(getByTestId(TEST_ID));
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
@@ -83,11 +85,11 @@ describe('MainActionButton', () => {
         onPress={onPress}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
-        testID={MAINACTIONBUTTON_TEST_ID}
+        testID={TEST_ID}
       />,
     );
 
-    const button = getByTestId(MAINACTIONBUTTON_TEST_ID);
+    const button = getByTestId(TEST_ID);
     fireEvent.press(button);
     fireEvent(button, 'pressIn');
     fireEvent(button, 'pressOut');
@@ -99,13 +101,11 @@ describe('MainActionButton', () => {
 
   it('renders custom label text', () => {
     const customLabel = 'Custom Label';
-    const { getByTestId } = render(
+    const { getByText } = render(
       <MainActionButton iconName={IconName.Add} label={customLabel} />,
     );
 
-    expect(getByTestId(MAINACTIONBUTTON_LABEL_TEST_ID).props.children).toBe(
-      customLabel,
-    );
+    expect(getByText(customLabel)).toBeDefined();
   });
 
   it('merges custom style', () => {
@@ -115,10 +115,11 @@ describe('MainActionButton', () => {
         iconName={IconName.Add}
         label="Custom Style"
         style={customStyle}
+        testID={TEST_ID}
       />,
     );
 
-    expect(getByTestId(MAINACTIONBUTTON_TEST_ID).props.style[1]).toStrictEqual(
+    expect(getByTestId(TEST_ID).props.style[1]).toStrictEqual(
       customStyle,
     );
   });
@@ -139,10 +140,11 @@ describe('MainActionButton', () => {
         label="Pressed state"
         twClassName={twClassName}
         style={style}
+        testID={TEST_ID}
       />,
     );
 
-    const button = getByTestId(MAINACTIONBUTTON_TEST_ID);
+    const button = getByTestId(TEST_ID);
 
     expect(twClassName).toHaveBeenCalledWith(false);
     expect(style).toHaveBeenCalledWith({ pressed: false });
