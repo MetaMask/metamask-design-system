@@ -100,9 +100,7 @@ export const Gap: Story = {
 
 export const TopAccessory: Story = {
   args: {
-    topAccessory: (
-      <Text variant={TextVariant.BodySm}>Section Header</Text>
-    ),
+    topAccessory: <Text variant={TextVariant.BodySm}>Section Header</Text>,
     topAccessoryGap: 8,
   },
   render: (args) => (
@@ -114,21 +112,8 @@ export const TopAccessory: Story = {
 
 export const BottomAccessory: Story = {
   args: {
-    bottomAccessory: (
-      <Text variant={TextVariant.BodySm}>Section Footer</Text>
-    ),
+    bottomAccessory: <Text variant={TextVariant.BodySm}>Section Footer</Text>,
     bottomAccessoryGap: 8,
-  },
-  render: (args) => (
-    <ListItem {...args}>
-      <SampleChildren />
-    </ListItem>
-  ),
-};
-
-export const TwClassName: Story = {
-  args: {
-    twClassName: 'rounded-lg border border-muted',
   },
   render: (args) => (
     <ListItem {...args}>
