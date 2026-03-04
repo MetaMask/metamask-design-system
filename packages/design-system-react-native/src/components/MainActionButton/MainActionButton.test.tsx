@@ -35,12 +35,14 @@ describe('MainActionButton', () => {
     );
 
     const { getByTestId } = render(
-      <MainActionButton iconName={IconName.Add} label="Styled" testID={TEST_ID} />,
+      <MainActionButton
+        iconName={IconName.Add}
+        label="Styled"
+        testID={TEST_ID}
+      />,
     );
 
-    expect(getByTestId(TEST_ID).props.style[0]).toStrictEqual(
-      expected,
-    );
+    expect(getByTestId(TEST_ID).props.style[0]).toStrictEqual(expected);
   });
 
   it('is disabled when isDisabled is true', () => {
@@ -119,9 +121,7 @@ describe('MainActionButton', () => {
       />,
     );
 
-    expect(getByTestId(TEST_ID).props.style[1]).toStrictEqual(
-      customStyle,
-    );
+    expect(getByTestId(TEST_ID).props.style[1]).toStrictEqual(customStyle);
   });
 
   it('evaluates function style and twClassName with pressed state', () => {
