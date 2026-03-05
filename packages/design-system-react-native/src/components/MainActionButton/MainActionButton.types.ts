@@ -5,7 +5,8 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import type { IconName } from '../Icon';
+import type { IconName, IconProps } from '../Icon';
+import type { TextProps } from '../Text';
 
 /**
  * MainActionButton component props.
@@ -19,6 +20,19 @@ export type MainActionButtonProps = {
    * Label text rendered below the icon.
    */
   label: string;
+  /**
+   * Optional props forwarded to the internal Icon component.
+   * Useful for test IDs and accessibility metadata.
+   */
+  iconProps?: Omit<Partial<IconProps>, 'name' | 'size' | 'color'>;
+  /**
+   * Optional props forwarded to the internal Text component.
+   * Useful for test IDs and accessibility metadata.
+   */
+  labelProps?: Omit<
+    Partial<TextProps>,
+    'children' | 'variant' | 'fontWeight' | 'color' | 'twClassName'
+  >;
   /**
    * Disables the button interaction and applies disabled styling.
    *

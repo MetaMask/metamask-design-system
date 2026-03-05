@@ -13,6 +13,8 @@ import {
 <MainActionButton
   iconName={IconName.Add}
   label="Add"
+  iconProps={{ testID: 'main-action-button-icon' }}
+  labelProps={{ testID: 'main-action-button-label' }}
   onPress={() => console.log('Pressed')}
 />;
 ```
@@ -35,6 +37,38 @@ Text rendered below the icon.
 | -------- | -------- | ----------- |
 | `string` | Yes      | `undefined` |
 
+### `iconProps`
+
+Optional props passed to the internal `Icon` component. Use this for test IDs and accessibility metadata without exposing a default internal test ID.
+
+| TYPE                                             | REQUIRED | DEFAULT     |
+| ------------------------------------------------ | -------- | ----------- |
+| `Omit<Partial<IconProps>, 'name' \| 'size' \| 'color'>` | No       | `undefined` |
+
+```tsx
+<MainActionButton
+  iconName={IconName.Add}
+  label="Add"
+  iconProps={{ testID: 'main-action-button-icon' }}
+/>
+```
+
+### `labelProps`
+
+Optional props passed to the internal `Text` component. Use this for test IDs and accessibility metadata without overriding the component typography defaults.
+
+| TYPE                                                                                        | REQUIRED | DEFAULT     |
+| ------------------------------------------------------------------------------------------- | -------- | ----------- |
+| `Omit<Partial<TextProps>, 'children' \| 'variant' \| 'fontWeight' \| 'color' \| 'twClassName'>` | No       | `undefined` |
+
+```tsx
+<MainActionButton
+  iconName={IconName.Add}
+  label="Add"
+  labelProps={{ testID: 'main-action-button-label' }}
+/>
+```
+
 ### `isDisabled`
 
 Disables user interaction and applies disabled styling.
@@ -56,7 +90,7 @@ Callback fired when pressed.
 Additional Tailwind classes for the button container.
 
 | TYPE    | REQUIRED             | DEFAULT |
-| ------- | -------------------- | ------- | ---- |
+| ------- | -------------------- | ------- |
 | `string | (pressed) => string` | No      | `''` |
 
 ### `style`

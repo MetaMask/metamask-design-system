@@ -3,7 +3,8 @@ import { renderHook } from '@testing-library/react-hooks';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconName } from '../Icon';
+import { IconColor, IconName, IconSize } from '../Icon';
+import { FontWeight, TextColor, TextVariant } from '../Text';
 
 import { MainActionButton } from './MainActionButton';
 
@@ -109,6 +110,50 @@ describe('MainActionButton', () => {
     );
 
     expect(getByText(customLabel)).toBeDefined();
+  });
+
+  it('forwards iconProps and labelProps to child components', () => {
+    const { getByTestId } = render(
+      <MainActionButton
+        iconName={IconName.Add}
+        label="Child Props"
+        iconProps={{ testID: 'main-action-button-icon' }}
+        labelProps={{ testID: 'main-action-button-label' }}
+      />,
+    );
+
+    expect(getByTestId('main-action-button-icon')).toBeDefined();
+    expect(getByTestId('main-action-button-label')).toBeDefined();
+  });
+
+  it('keeps internal icon and label visual defaults when prop objects are provided', () => {
+    const { getByTestId } = render(
+      <MainActionButton
+        iconName={IconName.Add}
+        label="Visual Defaults"
+        iconProps={{
+          testID: 'main-action-button-icon-override',
+          color: IconColor.ErrorDefault,
+          size: IconSize.Xl,
+        }}
+        labelProps={{
+          testID: 'main-action-button-label-override',
+          color: TextColor.ErrorDefault,
+          variant: TextVariant.DisplayMd,
+          fontWeight: FontWeight.Bold,
+        }}
+      />,
+    );
+
+    const icon = getByTestId('main-action-button-icon-override');
+    const label = getByTestId('main-action-button-label-override');
+
+    expect(icon.props.name).toBe(IconName.Add);
+    expect(icon.props.size).toBe(IconSize.Lg);
+    expect(icon.props.color).toBe(IconColor.IconAlternative);
+    expect(label.props.variant).toBe(TextVariant.BodySm);
+    expect(label.props.fontWeight).toBe(FontWeight.Medium);
+    expect(label.props.color).toBe(TextColor.TextDefault);
   });
 
   it('merges custom style', () => {
