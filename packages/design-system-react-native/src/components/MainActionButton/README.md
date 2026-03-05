@@ -87,15 +87,15 @@ Callback fired when pressed.
 
 ### `twClassName`
 
-Additional Tailwind classes for the button container.
+Additional static Tailwind classes for the button container. For pressed-state or other interactive styling, use `style` as a callback.
 
-| TYPE    | REQUIRED             | DEFAULT |
-| ------- | -------------------- | ------- | ---- |
-| `string | (pressed) => string` | No      | `''` |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `string` | No       | `''`    |
 
 ### `style`
 
-React Native style object for the outer pressable.
+React Native style object for the outer pressable. Use the callback form (`({ pressed }) => ...`) for pressed-state styling.
 
 | TYPE                                                            | REQUIRED | DEFAULT     |
 | --------------------------------------------------------------- | -------- | ----------- |

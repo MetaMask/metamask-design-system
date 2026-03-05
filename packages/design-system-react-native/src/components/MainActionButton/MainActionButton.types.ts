@@ -42,7 +42,7 @@ export type MainActionButtonProps = {
   /**
    * Optional Tailwind classes to extend or override container styles.
    */
-  twClassName?: string | ((pressed: boolean) => string);
+  twClassName?: string;
   /**
    * Optional React Native style for the button container.
    */

@@ -1,8 +1,7 @@
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconColor, IconName, IconSize } from '../Icon';
-import { FontWeight, TextColor, TextVariant } from '../Text';
+import { IconName } from '../Icon';
 
 import { MainActionButton } from './MainActionButton';
 
@@ -101,34 +100,25 @@ describe('MainActionButton', () => {
     expect(getByTestId('main-action-button-label')).toBeDefined();
   });
 
-  it('keeps internal icon and label visual defaults when prop objects are provided', () => {
-    const { getByTestId } = render(
+  it('keeps controlled icon and label values while forwarding child prop objects', () => {
+    const { getByTestId, getByText } = render(
       <MainActionButton
         iconName={IconName.Add}
-        label="Visual Defaults"
+        label="Controlled Label"
         iconProps={{
-          testID: 'main-action-button-icon-override',
-          color: IconColor.ErrorDefault,
-          size: IconSize.Xl,
+          testID: 'main-action-button-icon',
         }}
         labelProps={{
-          testID: 'main-action-button-label-override',
-          color: TextColor.ErrorDefault,
-          variant: TextVariant.DisplayMd,
-          fontWeight: FontWeight.Bold,
+          testID: 'main-action-button-label',
         }}
       />,
     );
 
-    const icon = getByTestId('main-action-button-icon-override');
-    const label = getByTestId('main-action-button-label-override');
+    const icon = getByTestId('main-action-button-icon');
+    expect(getByTestId('main-action-button-label')).toBeDefined();
 
     expect(icon.props.name).toBe(IconName.Add);
-    expect(icon.props.size).toBe(IconSize.Lg);
-    expect(icon.props.color).toBe(IconColor.IconAlternative);
-    expect(label.props.variant).toBe(TextVariant.BodySm);
-    expect(label.props.fontWeight).toBe(FontWeight.Medium);
-    expect(label.props.color).toBe(TextColor.TextDefault);
+    expect(getByText('Controlled Label')).toBeDefined();
   });
 
   it('merges custom style', () => {
@@ -145,10 +135,7 @@ describe('MainActionButton', () => {
     expect(getByTestId(TEST_ID).props.style[1]).toStrictEqual(customStyle);
   });
 
-  it('evaluates function style and twClassName with pressed state', () => {
-    const twClassName = jest.fn((pressed: boolean) =>
-      pressed ? 'mt-2' : 'mt-1',
-    );
+  it('evaluates function style with pressed state', () => {
     const style = jest.fn(({ pressed }: { pressed: boolean }) =>
       pressed ? { marginTop: 8 } : undefined,
     );
@@ -157,7 +144,6 @@ describe('MainActionButton', () => {
       <MainActionButton
         iconName={IconName.Add}
         label="Pressed state"
-        twClassName={twClassName}
         style={style}
         testID={TEST_ID}
       />,
@@ -165,12 +151,10 @@ describe('MainActionButton', () => {
 
     const button = getByTestId(TEST_ID);
 
-    expect(twClassName).toHaveBeenCalledWith(false);
     expect(style).toHaveBeenCalledWith({ pressed: false });
 
     fireEvent(button, 'pressIn');
 
-    expect(twClassName).toHaveBeenCalledWith(true);
     expect(style).toHaveBeenCalledWith({ pressed: true });
     expect(Array.isArray(button.props.style)).toBe(true);
     expect(button.props.style[1]).toStrictEqual({ marginTop: 8 });

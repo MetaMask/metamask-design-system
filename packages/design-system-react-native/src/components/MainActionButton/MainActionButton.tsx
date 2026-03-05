@@ -31,16 +31,11 @@ export const MainActionButton = ({
       onPressIn={!isDisabled ? onPressIn : undefined}
       onPressOut={!isDisabled ? onPressOut : undefined}
       style={({ pressed }) => {
-        const classNameStr =
-          typeof twClassName === 'function'
-            ? twClassName(pressed)
-            : twClassName;
-
         const baseStyle = tw.style(
           'items-center justify-center rounded-xl px-1 py-4 min-w-[68px]',
           pressed && !isDisabled ? 'bg-muted-pressed' : 'bg-muted',
           isDisabled ? 'opacity-50' : 'opacity-100',
-          classNameStr,
+          twClassName,
         ) as StyleProp<ViewStyle>;
 
         const additionalStyle =
