@@ -1,12 +1,13 @@
-import { useStyles } from '../../../hooks';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
-import { KeyValueRowRootProps } from '../KeyValueRow.types';
-import styleSheet from './KeyValueRoot.styles';
+
+import type { KeyValueRowRootProps } from '../KeyValueRow.types';
 
 /**
  * The main container for the KeyValueRow component.
- * When creating custom KeyValueRow components, this must be the outermost component wrapping the two <KeyValueSection/> components.
+ * When creating custom KeyValueRow components, this must be the outermost component
+ * wrapping the two <KeyValueSection/> components.
  *
  * e.g.
  * ```
@@ -16,22 +17,34 @@ import styleSheet from './KeyValueRoot.styles';
  * </KeyValueRowRoot>
  * ```
  *
- * @component
- * @param {Object} props - Component props.
- * @param {Array<ReactNode>} props.children - The two <KeyValueSection> children.
- * @param {ViewProps} [props.style] - Optional styling
+ * @param {KeyValueRowRootProps} props - Component props.
+ * @param {[ReactNode, ReactNode]} props.children - The two <KeyValueSection> children.
+ * @param {string} [props.twClassName] - Optional Tailwind class names to override root styles.
  *
  * @returns {JSX.Element} The rendered Root component.
  */
-const KeyValueRowRoot = ({
+const KeyValueRowRoot: React.FC<KeyValueRowRootProps> = ({
   children,
-  style: customStyles,
-}: KeyValueRowRootProps) => {
-  const { styles: defaultStyles } = useStyles(styleSheet, {});
+  twClassName,
+  style,
+  ...props
+}) => {
+  const tw = useTailwind();
 
-  const styles = [defaultStyles.rootContainer, customStyles];
-
-  return <View style={styles}>{children}</View>;
+  return (
+    <View
+      style={[
+        tw.style(
+          'flex-row justify-between items-center overflow-hidden',
+          twClassName,
+        ),
+        style,
+      ]}
+      {...props}
+    >
+      {children}
+    </View>
+  );
 };
 
 export default KeyValueRowRoot;

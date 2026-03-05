@@ -4,5 +4,11 @@ export {
   KeyValueRowFieldIconSides,
   TooltipSizes,
   IconSizes,
+  type KeyValueRowTooltip,
+  type KeyValueRowField,
+  type PreDefinedKeyValueRowLabel,
+  type KeyValueRowLabelProps,
+  type KeyValueRowRootProps,
+  type KeyValueSectionProps,
+  type KeyValueRowProps,
 } from './KeyValueRow.types';
-export type * from './KeyValueRow.types';

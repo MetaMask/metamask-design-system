@@ -1,74 +1,91 @@
-import { useStyles } from '../../hooks';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
-import stylesheet from './KeyValueRow.styles';
+import { View } from 'react-native';
+
+import { Icon } from '../Icon';
+import type { IconProps } from '../Icon';
+
 import {
-  KeyValueRowProps,
+  TESTID_KEYVALUEROW_FIELD_ICON,
+  TESTID_KEYVALUEROW_VALUE_ICON,
+} from './KeyValueRow.constants';
+import type { KeyValueRowProps } from './KeyValueRow.types';
+import {
   KeyValueRowFieldIconSides,
   KeyValueRowSectionAlignments,
 } from './KeyValueRow.types';
-import Icon from '../../components/Icons/Icon';
-import { View } from 'react-native';
-import KeyValueSection from './KeyValueSection/KeyValueSection';
 import KeyValueRowLabel from './KeyValueLabel/KeyValueLabel';
 import KeyValueRowRoot from './KeyValueRoot/KeyValueRoot';
+import KeyValueSection from './KeyValueSection/KeyValueSection';
+
+type IconWithSide = IconProps & { side?: KeyValueRowFieldIconSides };
+
+const renderIcon = (icon: IconWithSide, testID: string) => {
+  const { side: _side, ...iconProps } = icon;
+  return <Icon testID={testID} {...iconProps} />;
+};
 
 /**
- * Prebuilt convenience component to format and render a key/value KeyValueRowLabel pair.
+ * Prebuilt convenience component to format and render a key/value label pair.
  * The KeyValueRowLabel component has props to display a tooltip and icon.
  *
- * Examples are in the Storybook: [StorybookLink](./KeyValueRow.stories.tsx)
- *
- * @param {Object} props - Component props
+ * @param {KeyValueRowProps} props - Component props
  * @param {KeyValueRowField} props.field - Represents the left side of the key value row pair
  * @param {KeyValueRowField} props.value - Represents the right side of the key value row pair
- * @param {ViewProps} [props.style] - Optional styling
+ * @param {string} [props.twClassName] - Optional Tailwind class names for the root element
  *
  * @returns {JSX.Element} The rendered KeyValueRow component.
  */
-const KeyValueRow = React.memo(({ field, value, style }: KeyValueRowProps) => {
-  const { styles } = useStyles(stylesheet, {});
+const KeyValueRow: React.FC<KeyValueRowProps> = ({
+  field,
+  value,
+  twClassName,
+  style,
+  ...props
+}) => {
+  const tw = useTailwind();
 
-  // Field (left side)
   const fieldIcon = field?.icon;
-  const shouldShowFieldIcon = fieldIcon?.name;
+  const shouldShowFieldIcon = Boolean(fieldIcon?.name);
 
-  // Value (right side)
   const valueIcon = value?.icon;
-  const shouldShowValueIcon = valueIcon?.name;
+  const shouldShowValueIcon = Boolean(valueIcon?.name);
 
   return (
-    <KeyValueRowRoot style={[style]}>
+    <KeyValueRowRoot twClassName={twClassName} style={style} {...props}>
       <KeyValueSection>
-        <View style={styles.flexRow}>
+        <View style={tw.style('flex-row items-center gap-2')}>
           {shouldShowFieldIcon &&
-            (fieldIcon.side === KeyValueRowFieldIconSides.LEFT ||
-              fieldIcon.side === KeyValueRowFieldIconSides.BOTH ||
-              !fieldIcon?.side) && <Icon {...fieldIcon} />}
+            (fieldIcon.side === KeyValueRowFieldIconSides.Left ||
+              fieldIcon.side === KeyValueRowFieldIconSides.Both ||
+              !fieldIcon?.side) &&
+            renderIcon(fieldIcon, TESTID_KEYVALUEROW_FIELD_ICON)}
           <KeyValueRowLabel label={field.label} tooltip={field.tooltip} />
           {shouldShowFieldIcon &&
-            (fieldIcon?.side === KeyValueRowFieldIconSides.RIGHT ||
-              fieldIcon?.side === KeyValueRowFieldIconSides.BOTH) && (
-              <Icon {...fieldIcon} />
-            )}
+            (fieldIcon?.side === KeyValueRowFieldIconSides.Right ||
+              fieldIcon?.side === KeyValueRowFieldIconSides.Both) &&
+            renderIcon(fieldIcon, TESTID_KEYVALUEROW_FIELD_ICON)}
         </View>
       </KeyValueSection>
-      <KeyValueSection align={KeyValueRowSectionAlignments.RIGHT}>
-        <View style={styles.flexRow}>
+      <KeyValueSection align={KeyValueRowSectionAlignments.Right}>
+        <View style={tw.style('flex-row items-center gap-2')}>
           {shouldShowValueIcon &&
-            (valueIcon?.side === KeyValueRowFieldIconSides.LEFT ||
-              valueIcon?.side === KeyValueRowFieldIconSides.BOTH ||
-              !valueIcon?.side) && <Icon {...valueIcon} />}
+            (valueIcon?.side === KeyValueRowFieldIconSides.Left ||
+              valueIcon?.side === KeyValueRowFieldIconSides.Both ||
+              !valueIcon?.side) &&
+            renderIcon(valueIcon, TESTID_KEYVALUEROW_VALUE_ICON)}
           <KeyValueRowLabel label={value.label} tooltip={value.tooltip} />
           {shouldShowValueIcon &&
-            (valueIcon?.side === KeyValueRowFieldIconSides.RIGHT ||
-              valueIcon?.side === KeyValueRowFieldIconSides.BOTH) && (
-              <Icon {...valueIcon} />
-            )}
+            (valueIcon?.side === KeyValueRowFieldIconSides.Right ||
+              valueIcon?.side === KeyValueRowFieldIconSides.Both) &&
+            renderIcon(valueIcon, TESTID_KEYVALUEROW_VALUE_ICON)}
         </View>
       </KeyValueSection>
     </KeyValueRowRoot>
   );
-});
+};
+
+KeyValueRow.displayName = 'KeyValueRow';
 
 /**
  * Exported sub-components to provide a base for new KeyValueRow variants.

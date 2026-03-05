@@ -1,20 +1,15 @@
-import {
-  IconProps,
-  IconSize,
-  IconName,
-} from '../../../component-library/components/Icons/Icon';
-import { ButtonIconSizes } from '../../components/Buttons/ButtonIcon';
-import { ReactNode } from 'react';
-import { TextProps } from '../../components/Texts/Text/Text.types';
-import { ViewProps } from 'react-native';
+import type { ReactNode } from 'react';
+import type { ViewProps } from 'react-native';
+
+import { ButtonIconSize } from '../ButtonIcon';
+import { IconName, IconSize } from '../Icon';
+import type { IconProps } from '../Icon';
+import type { TextProps } from '../Text';
 
 /**
- * The optional tooltip tha can be displayed within a KeyValueRowField or KeyValueRowLabel.
- *
- * @see KeyValueRowField
- * @see KeyValueRowLabel
+ * The optional tooltip that can be displayed within a KeyValueRowField.
  */
-interface KeyValueRowTooltip {
+export type KeyValueRowTooltip = {
   /**
    * The title displayed at the top of the tooltip.
    */
@@ -24,42 +19,41 @@ interface KeyValueRowTooltip {
    */
   content: string | ReactNode;
   /**
-   * Optional size of the tooltip icon.
-   * @default TooltipSizes.Md
+   * Optional size of the tooltip icon button.
+   * @default ButtonIconSize.Md
    */
-  size?: ButtonIconSizes;
+  size?: ButtonIconSize;
   /**
    * Optional icon name for the tooltip icon.
    * @default IconName.Question
    */
   iconName?: IconName;
   /**
-   * Optional onPress handler
+   * Optional onPress handler called when the tooltip icon is pressed.
    */
   onPress?: (...args: unknown[]) => unknown;
   /**
    * Optional bottom padding for the tooltip modal.
    */
   bottomPadding?: number;
-}
+};
 
 /**
- * Used to position icon in KeyValueRowField
- *
- * @see KeyValueRowField
+ * Used to position an icon in a KeyValueRowField.
  */
-export enum KeyValueRowFieldIconSides {
-  LEFT = 'LEFT',
-  RIGHT = 'RIGHT',
-  BOTH = 'BOTH',
-}
+export const KeyValueRowFieldIconSides = {
+  Left: 'left',
+  Right: 'right',
+  Both: 'both',
+} as const;
+
+export type KeyValueRowFieldIconSides =
+  (typeof KeyValueRowFieldIconSides)[keyof typeof KeyValueRowFieldIconSides];
 
 /**
  * Represents a field displayed within KeyValueRowProps.
- *
- * @see KeyValueRowProps
  */
-interface KeyValueRowField {
+export type KeyValueRowField = {
   /**
    * The label content displayed.
    */
@@ -72,35 +66,42 @@ interface KeyValueRowField {
    * Optional tooltip to display. If undefined, no tooltip is displayed.
    */
   tooltip?: KeyValueRowTooltip;
-}
+};
 
+/**
+ * Re-exported for backwards compatibility.
+ */
 export const IconSizes = IconSize;
 
-export const TooltipSizes = ButtonIconSizes;
+/**
+ * Re-exported for backwards compatibility.
+ */
+export const TooltipSizes = ButtonIconSize;
 
-export interface PreDefinedKeyValueRowLabel {
+/**
+ * A predefined label object with text, variant, and color.
+ */
+export type PreDefinedKeyValueRowLabel = {
   /**
    * Text to display.
    */
   text: string;
   /**
    * Optional text variant.
-   * @default TextVariant.BodyMDMedium
+   * @default TextVariant.BodyMd
    */
   variant?: TextProps['variant'];
   /**
    * Optional text color.
-   * @default TextColor.Default
+   * @default TextColor.TextDefault
    */
   color?: TextProps['color'];
-}
+};
 
 /**
- * The KeyValueRowLabel prop interface.
- *
- * @see KeyValueRowLabel in ./KeyValueRow.tsx
+ * The KeyValueRowLabel component props.
  */
-export interface KeyValueRowLabelProps {
+export type KeyValueRowLabelProps = {
   /**
    * The label content displayed.
    */
@@ -109,49 +110,65 @@ export interface KeyValueRowLabelProps {
    * Optional tooltip. If undefined, the tooltip won't be displayed.
    */
   tooltip?: KeyValueRowTooltip;
-}
+};
+
+/**
+ * Represents the valid KeyValueSection alignments.
+ */
+export const KeyValueRowSectionAlignments = {
+  Left: 'items-start',
+  Right: 'items-end',
+} as const;
+
+export type KeyValueRowSectionAlignments =
+  (typeof KeyValueRowSectionAlignments)[keyof typeof KeyValueRowSectionAlignments];
 
 /**
  * Represents the main container for the KeyValueRow component.
+ *
+ * Extends `ViewProps` so the root View inherits standard React Native
+ * props such as `testID` and `accessibilityLabel`.
  */
-export interface KeyValueRowRootProps {
+export type KeyValueRowRootProps = {
   /**
    * Must have exactly two children. Adding more will lead to an undesired outcome.
    */
   children: [ReactNode, ReactNode];
   /**
-   * Optional styles. Useful for controlling padding and margins.
+   * Optional Tailwind class names to override default styles on the root element.
    */
-  style?: ViewProps['style'];
-}
-
-/**
- * Represents the valid KeyValueSection alignments.
- */
-export enum KeyValueRowSectionAlignments {
-  LEFT = 'flex-start',
-  RIGHT = 'flex-end',
-}
+  twClassName?: string;
+} & ViewProps;
 
 /**
  * The KeyValueSection component props.
+ *
+ * Extends `ViewProps` so the root View inherits standard React Native
+ * props such as `testID` and `accessibilityLabel`.
  */
-export interface KeyValueSectionProps {
+export type KeyValueSectionProps = {
   /**
    * Child components.
    */
   children: ReactNode;
   /**
    * Optional content alignment.
-   * @default KeyValueRowSectionAlignments.RIGHT
+   * @default KeyValueRowSectionAlignments.Left
    */
   align?: KeyValueRowSectionAlignments;
-}
+  /**
+   * Optional Tailwind class names to override default styles on the root element.
+   */
+  twClassName?: string;
+} & ViewProps;
 
 /**
  * The KeyValueRow component props.
+ *
+ * Extends `ViewProps` so the root View inherits standard React Native
+ * props such as `testID` and `accessibilityLabel`.
  */
-export interface KeyValueRowProps {
+export type KeyValueRowProps = {
   /**
    * The "key" portion of the KeyValueRow (left side).
    * Using the variable name field because key is reserved.
@@ -162,7 +179,7 @@ export interface KeyValueRowProps {
    */
   value: KeyValueRowField;
   /**
-   * Optional styles. E.g. specifying padding or margins.
+   * Optional Tailwind class names to override default styles on the root element.
    */
-  style?: ViewProps['style'];
-}
+  twClassName?: string;
+} & ViewProps;

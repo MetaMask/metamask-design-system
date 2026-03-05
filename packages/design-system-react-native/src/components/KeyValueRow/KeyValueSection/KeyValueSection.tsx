@@ -1,31 +1,32 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
-import { useStyles } from '../../../hooks';
 import { View } from 'react-native';
-import {
-  KeyValueRowSectionAlignments,
-  KeyValueSectionProps,
-} from '../KeyValueRow.types';
-import stylesSheet from './KeyValueSection.styles';
+
+import { KeyValueRowSectionAlignments } from '../KeyValueRow.types';
+import type { KeyValueSectionProps } from '../KeyValueRow.types';
 
 /**
  * A container representing either the left or right side of the KeyValueRow.
  * For desired results, use only two <KeyValueSection> components within the <KeyValueRowRoot>.
  *
- * @component
- * @param {Object} props - Component props.
+ * @param {KeyValueSectionProps} props - Component props.
  * @param {ReactNode} props.children - The child components.
- * @param {KeyValueRowSectionAlignments} [props.align] - The alignment of the KeyValueSection. Defaults to KeyValueRowSectionAlignments.RIGHT
+ * @param {KeyValueRowSectionAlignments} [props.align] - The alignment of the section.
+ * @param {string} [props.twClassName] - Optional Tailwind class names to override root styles.
  *
  * @returns {JSX.Element} The rendered KeyValueSection component.
  */
-const KeyValueSection = ({
+const KeyValueSection: React.FC<KeyValueSectionProps> = ({
   children,
-  align = KeyValueRowSectionAlignments.LEFT,
-}: KeyValueSectionProps) => {
-  const { styles } = useStyles(stylesSheet, {});
+  align = KeyValueRowSectionAlignments.Left,
+  twClassName,
+  style,
+  ...props
+}) => {
+  const tw = useTailwind();
 
   return (
-    <View style={{ ...styles.keyValueSectionContainer, alignItems: align }}>
+    <View style={[tw.style('flex-1', align, twClassName), style]} {...props}>
       {children}
     </View>
   );

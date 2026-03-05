@@ -1,65 +1,48 @@
-import ButtonIcon from '../../../../component-library/components/Buttons/ButtonIcon';
-import Label from '../../../../component-library/components/Form/Label';
-import {
-  IconColor,
-  IconName,
-} from '../../../../component-library/components/Icons/Icon';
-import {
-  TextVariant,
-  TextColor,
-} from '../../../../component-library/components/Texts/Text';
-import { useStyles } from '../../../../component-library/hooks';
-import useTooltipModal from '../../../../components/hooks/useTooltipModal';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
-import { KeyValueRowLabelProps, TooltipSizes } from '../KeyValueRow.types';
-import styleSheet from './KeyValueLabel.styles';
+
+import { ButtonIcon, ButtonIconSize } from '../../ButtonIcon';
+import { IconName } from '../../Icon';
+import { Text, TextColor, TextVariant } from '../../Text';
+import type { KeyValueRowLabelProps } from '../KeyValueRow.types';
 import { isPreDefinedKeyValueRowLabel } from '../KeyValueRow.utils';
 
 /**
- * A label and tooltip component.
+ * A label and optional tooltip button component.
  *
- * @param {Object} props - Component props.
- * @param {PreDefinedKeyValueRowLabel | ReactNode} props.label - The label content to display.
- * @param {KeyValueRowTooltip} [props.tooltip] - Optional tooltip to render to the right of the label.
+ * @param props - Component props.
+ * @param props.label - The label content to display.
+ * @param props.tooltip - Optional tooltip to render to the right of the label.
  *
- * @returns {JSX.Element} The rendered KeyValueRowLabel component.
+ * @returns The rendered KeyValueRowLabel component.
  */
-const KeyValueRowLabel = ({ label, tooltip }: KeyValueRowLabelProps) => {
-  const { styles } = useStyles(styleSheet, {});
+const KeyValueRowLabel: React.FC<KeyValueRowLabelProps> = ({
+  label,
+  tooltip,
+}) => {
+  const tw = useTailwind();
 
-  const { openTooltipModal } = useTooltipModal();
-
-  const hasTooltip = tooltip?.title && tooltip?.content;
-
-  const onNavigateToTooltipModal = () => {
-    if (!hasTooltip) return;
-    openTooltipModal(tooltip.title, tooltip.content, undefined, undefined, {
-      bottomPadding: tooltip.bottomPadding,
-    });
-    tooltip?.onPress?.();
-  };
+  const hasTooltip = Boolean(tooltip?.title && tooltip?.content);
 
   return (
-    <View style={styles.labelContainer}>
+    <View style={tw.style('flex-row items-center')}>
       {isPreDefinedKeyValueRowLabel(label) ? (
-        <Label
-          variant={label?.variant ?? TextVariant.BodyMDMedium}
-          color={label?.color ?? TextColor.Default}
+        <Text
+          variant={label.variant ?? TextVariant.BodyMd}
+          color={label.color ?? TextColor.TextDefault}
         >
           {label.text}
-        </Label>
+        </Text>
       ) : (
         label
       )}
-      {hasTooltip && (
+      {hasTooltip && tooltip && (
         <ButtonIcon
-          size={tooltip.size ?? TooltipSizes.Md}
-          iconColor={IconColor.Alternative}
+          size={tooltip.size ?? ButtonIconSize.Md}
           iconName={tooltip.iconName ?? IconName.Question}
-          accessibilityRole="button"
           accessibilityLabel={`${tooltip.title} tooltip`}
-          onPress={onNavigateToTooltipModal}
+          onPress={() => tooltip?.onPress?.()}
         />
       )}
     </View>
