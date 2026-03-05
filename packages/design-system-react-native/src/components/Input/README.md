@@ -96,7 +96,8 @@ export const ConditionalExample = ({ isFocused }: { isFocused: boolean }) => {
   const tw = useTailwind();
 
   return (
-    <Input value=""
+    <Input
+      value=""
       placeholder="Conditional styling"
       style={tw.style('text-default', isFocused && 'border-primary-default')}
     />

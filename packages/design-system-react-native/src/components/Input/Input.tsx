@@ -49,9 +49,9 @@ export const Input = forwardRef<TextInput, InputProps>(
     const fontSuffix = TWCLASSMAP_TEXT_FONTWEIGHT[finalFontWeight];
     const fontClass = `font-${FontFamily.Default}${fontSuffix}`;
     const hasPlaceholder = placeholder !== null && placeholder !== '';
-    // Treat empty controlled values as placeholder-visible so the iOS
-    // placeholder alignment workaround applies during placeholder-to-text
-    // transitions.
+    // Only apply placeholder-mode styling when a placeholder is present and
+    // the controlled value is empty. This keeps the iOS lineHeight workaround
+    // scoped to the placeholder-visible state without affecting typed text.
     const isPlaceholderVisible = hasPlaceholder && value === '';
 
     const inputStyle = useMemo(

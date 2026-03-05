@@ -91,7 +91,11 @@ Optional content to display after the Input.
 ```tsx
 import { Text } from 'react-native';
 
-<TextField value="" endAccessory={<Text>✕</Text>} placeholder="With clear button" />;
+<TextField
+  value=""
+  endAccessory={<Text>✕</Text>}
+  placeholder="With clear button"
+/>;
 ```
 
 ### `inputElement`
@@ -145,7 +149,8 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   const tw = useTailwind();
 
   return (
-    <TextField value=""
+    <TextField
+      value=""
       placeholder="Conditional styling"
       style={tw.style('bg-default', isActive && 'bg-success-default')}
     />
