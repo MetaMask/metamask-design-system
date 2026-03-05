@@ -8,10 +8,6 @@ import { Text, FontWeight, TextColor, TextVariant } from '../Text';
 
 import type { MainActionButtonProps } from './MainActionButton.types';
 
-const MAIN_ACTION_BUTTON_BASE_TW_CLASS =
-  'items-center justify-center rounded-xl px-1 py-4 min-w-[68px]';
-const MAIN_ACTION_BUTTON_LABEL_TW_CLASS = 'mt-0.5 w-full text-center shrink';
-
 export const MainActionButton = ({
   iconName,
   label,
@@ -41,7 +37,7 @@ export const MainActionButton = ({
             : twClassName;
 
         const baseStyle = tw.style(
-          MAIN_ACTION_BUTTON_BASE_TW_CLASS,
+          'items-center justify-center rounded-xl px-1 py-4 min-w-[68px]',
           pressed && !isDisabled ? 'bg-muted-pressed' : 'bg-muted',
           isDisabled ? 'opacity-50' : 'opacity-100',
           classNameStr,
@@ -66,7 +62,7 @@ export const MainActionButton = ({
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
           color={TextColor.TextDefault}
-          twClassName={MAIN_ACTION_BUTTON_LABEL_TW_CLASS}
+          twClassName="mt-0.5 w-full text-center shrink"
           numberOfLines={1}
           ellipsizeMode="tail"
         >
