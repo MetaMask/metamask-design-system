@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 
 import { BoxFlexDirection } from '../../types';
-import { Box } from '../Box/Box';
+import { Box } from '../Box';
 import { IconName } from '../Icon';
 
 import { MainActionButton } from './MainActionButton';
