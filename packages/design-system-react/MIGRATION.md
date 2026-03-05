@@ -152,12 +152,11 @@ Variant names now use PascalCase instead of camelCase:
 | `TextVariant.bodyMd`    | `TextVariant.BodyMd`    |
 | `TextVariant.bodySm`    | `TextVariant.BodySm`    |
 | `TextVariant.bodyXs`    | `TextVariant.BodyXs`    |
-| `TextVariant.bodyLg`    | `TextVariant.BodyLg`    |
+| `TextVariant.bodyLgMedium` | `TextVariant.BodyLg` + `FontWeight.Medium` |
 | `TextVariant.headingSm` | `TextVariant.HeadingSm` |
 | `TextVariant.headingMd` | `TextVariant.HeadingMd` |
 | `TextVariant.headingLg` | `TextVariant.HeadingLg` |
 | `TextVariant.displayMd` | `TextVariant.DisplayMd` |
-| `TextVariant.displayLg` | `TextVariant.DisplayLg` |
 
 ##### Color Prop Changes
 
@@ -187,7 +186,7 @@ Color enum values now use `TextColor` prefix:
 ##### Before (Extension)
 
 ```tsx
-import { Text, TextVariant } from '../../component-library';
+import { Text, TextVariant, Color } from '../../component-library';
 
 // Regular body text
 <Text variant={TextVariant.bodyMd}>Regular text</Text>
@@ -228,16 +227,14 @@ import { Text, TextVariant, FontWeight, TextColor } from '@metamask/design-syste
 </Text>
 ```
 
-#### New Features
+#### API Differences
 
-The design system Text component adds several new props not available in the extension:
+Both extension and design-system Text components support `fontFamily`, `textTransform`, `textAlign`, `overflowWrap`, and `ellipsis`.
 
-- `fontFamily` - Control font family (Default, Accent, Hero)
-- `textTransform` - Text transformation (Uppercase, Lowercase, Capitalize)
-- `textAlign` - Text alignment (Left, Center, Right, Justify)
-- `overflowWrap` - Control text wrapping behavior
-- `ellipsis` - Add ellipsis for overflowing text
-- `asChild` - Compose with other components while maintaining Text styles
+Notable differences in the design system Text component:
+
+- `asChild` - compose styles onto a child element via Radix `Slot`
+- New semantic variants are available in addition to migrated variants (`PageHeading`, `SectionHeading`, `ButtonLabelMd`, `ButtonLabelLg`, `AmountDisplayLg`)
 
 ## Version Updates
 

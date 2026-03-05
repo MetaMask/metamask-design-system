@@ -151,7 +151,7 @@ Color enum values are now prefixed with their semantic category:
 | `TextColor.Alternative`        | `TextColor.TextAlternative`  |
 | `TextColor.Muted`              | `TextColor.TextMuted`        |
 | `TextColor.Primary`            | `TextColor.PrimaryDefault`   |
-| `TextColor.PrimaryAlternative` | `TextColor.PrimaryDefault`   |
+| `TextColor.PrimaryAlternative` | `TextColor.PrimaryAlternative` |
 | `TextColor.Success`            | `TextColor.SuccessDefault`   |
 | `TextColor.Error`              | `TextColor.ErrorDefault`     |
 | `TextColor.ErrorAlternative`   | `TextColor.ErrorAlternative` |
@@ -205,23 +205,14 @@ import { Text, TextVariant, FontWeight, TextColor } from '@metamask/design-syste
 </Text>
 ```
 
-#### Removed Features
+#### API Differences
 
-The following mobile-specific features are **not available** in the design system Text component:
+The mobile and design-system Text components both extend `react-native` `TextProps`. In addition to matching the base React Native props, the design system Text component adds:
 
-- `textTransform` prop - Not yet implemented for React Native
-- `textAlign` prop - Not yet implemented for React Native
-- `overflowWrap` prop - Not yet implemented for React Native
-- `ellipsis` prop - Not yet implemented for React Native
-
-Use `twClassName` or `style` prop for these features if needed.
-
-#### New Features
-
-The design system Text component adds the `fontStyle` prop:
-
-- `FontStyle.Normal` - Normal text style
-- `FontStyle.Italic` - Italic text style
+- `fontWeight` - separate weight control instead of weight-specific variants
+- `fontFamily` - select default/accent/hero fonts
+- `fontStyle` - normal or italic text style
+- `twClassName` - Tailwind utility classes merged with component defaults
 
 ## Version Updates
 
@@ -267,8 +258,8 @@ All new variants have specific font sizes optimized for their use case:
 
 | Variant                       | Font Size | Use Case                    |
 | ----------------------------- | --------- | --------------------------- |
-| `TextVariant.PageHeading`     | 32px      | Main page titles            |
-| `TextVariant.SectionHeading`  | 24px      | Section titles              |
+| `TextVariant.PageHeading`     | 24px      | Main page titles            |
+| `TextVariant.SectionHeading`  | 20px      | Section titles              |
 | `TextVariant.ButtonLabelMd`   | 16px      | Medium button labels        |
 | `TextVariant.ButtonLabelLg`   | 20px      | Large button labels         |
-| `TextVariant.AmountDisplayLg` | 60px      | Large amount/value displays |
+| `TextVariant.AmountDisplayLg` | 40px      | Large amount/value displays |
