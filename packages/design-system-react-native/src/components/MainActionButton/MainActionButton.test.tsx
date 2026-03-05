@@ -6,9 +6,10 @@ import React from 'react';
 import { IconName } from '../Icon';
 
 import { MainActionButton } from './MainActionButton';
-import { TWCLASS_MAINACTIONBUTTON_BASE } from './MainActionButton.styles';
 
 const TEST_ID = 'main-action-button-test';
+const MAIN_ACTION_BUTTON_BASE_TW_CLASS =
+  'items-center justify-center rounded-xl px-1 py-4 min-w-[68px]';
 
 describe('MainActionButton', () => {
   it('renders label and icon', () => {
@@ -29,7 +30,7 @@ describe('MainActionButton', () => {
     const tw = result.current;
 
     const expected = tw.style(
-      TWCLASS_MAINACTIONBUTTON_BASE,
+      MAIN_ACTION_BUTTON_BASE_TW_CLASS,
       'bg-muted',
       'opacity-100',
     );
@@ -152,7 +153,7 @@ describe('MainActionButton', () => {
     fireEvent(button, 'pressIn');
 
     const expectedPressedStyle = tw.style(
-      TWCLASS_MAINACTIONBUTTON_BASE,
+      MAIN_ACTION_BUTTON_BASE_TW_CLASS,
       'bg-muted-pressed',
       'opacity-100',
       'mt-2',

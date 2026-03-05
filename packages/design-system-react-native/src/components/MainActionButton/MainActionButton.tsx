@@ -7,12 +7,13 @@ import { Icon, IconColor, IconSize } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import { Text, FontWeight, TextColor, TextVariant } from '../Text';
 
-import {
-  TWCLASS_MAINACTIONBUTTON_BASE,
-  TWCLASS_MAINACTIONBUTTON_CONTAINER,
-  TWCLASS_MAINACTIONBUTTON_LABEL,
-} from './MainActionButton.styles';
 import type { MainActionButtonProps } from './MainActionButton.types';
+
+const MAIN_ACTION_BUTTON_BASE_TW_CLASS =
+  'items-center justify-center rounded-xl px-1 py-4 min-w-[68px]';
+const MAIN_ACTION_BUTTON_CONTAINER_TW_CLASS =
+  'items-center justify-center w-full';
+const MAIN_ACTION_BUTTON_LABEL_TW_CLASS = 'mt-0.5 w-full text-center shrink';
 
 export const MainActionButton = ({
   iconName,
@@ -41,7 +42,7 @@ export const MainActionButton = ({
             : twClassName;
 
         const baseStyle = tw.style(
-          TWCLASS_MAINACTIONBUTTON_BASE,
+          MAIN_ACTION_BUTTON_BASE_TW_CLASS,
           pressed && !isDisabled ? 'bg-muted-pressed' : 'bg-muted',
           isDisabled ? 'opacity-50' : 'opacity-100',
           classNameStr,
@@ -54,7 +55,7 @@ export const MainActionButton = ({
       }}
       {...props}
     >
-      <Box twClassName={TWCLASS_MAINACTIONBUTTON_CONTAINER}>
+      <Box twClassName={MAIN_ACTION_BUTTON_CONTAINER_TW_CLASS}>
         <Icon
           name={iconName}
           size={IconSize.Lg}
@@ -64,7 +65,7 @@ export const MainActionButton = ({
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
           color={TextColor.TextDefault}
-          twClassName={TWCLASS_MAINACTIONBUTTON_LABEL}
+          twClassName={MAIN_ACTION_BUTTON_LABEL_TW_CLASS}
           numberOfLines={1}
           ellipsizeMode="tail"
         >

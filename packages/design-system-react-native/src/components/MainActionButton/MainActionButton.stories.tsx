@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
-import { View } from 'react-native';
 
+import { BoxFlexDirection } from '../../types';
+import { Box } from '../Box/Box';
 import { IconName } from '../Icon';
 
 import { MainActionButton } from './MainActionButton';
@@ -30,10 +31,6 @@ const meta: Meta<MainActionButtonProps> = {
     isDisabled: {
       control: 'boolean',
       description: 'Disables press interactions and applies disabled styles.',
-    },
-    twClassName: {
-      control: 'text',
-      description: 'Optional Tailwind classes for container style overrides.',
     },
     onPress: {
       action: 'pressed',
@@ -67,14 +64,6 @@ export const IsDisabled: Story = {
   },
 };
 
-export const ActionButtonOnPress: Story = {
-  args: {
-    iconName: IconName.Add,
-    label: 'Tap me',
-    isDisabled: false,
-  },
-};
-
 export const RowLayout: Story = {
   parameters: {
     actions: {
@@ -82,11 +71,27 @@ export const RowLayout: Story = {
     },
   },
   render: () => (
-    <View style={{ flexDirection: 'row', gap: 16 }}>
-      <MainActionButton iconName={IconName.BuySell} label="Buy/Sell" />
-      <MainActionButton iconName={IconName.SwapHorizontal} label="Swap" />
-      <MainActionButton iconName={IconName.Receive} label="Receive" />
-      <MainActionButton iconName={IconName.Send} label="Send" />
-    </View>
+    <Box flexDirection={BoxFlexDirection.Row} gap={4} paddingHorizontal={4}>
+      <MainActionButton
+        iconName={IconName.BuySell}
+        label="Buy/Sell"
+        twClassName="flex-1"
+      />
+      <MainActionButton
+        iconName={IconName.SwapHorizontal}
+        label="Swap"
+        twClassName="flex-1"
+      />
+      <MainActionButton
+        iconName={IconName.Receive}
+        label="Receive"
+        twClassName="flex-1"
+      />
+      <MainActionButton
+        iconName={IconName.Send}
+        label="Send"
+        twClassName="flex-1"
+      />
+    </Box>
   ),
 };
