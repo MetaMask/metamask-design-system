@@ -64,7 +64,8 @@ export const IsDisabled: Story = {
   },
 };
 
-export const RowLayout: Story = {
+export const IconNameStory: Story = {
+  name: 'IconName',
   parameters: {
     actions: {
       disable: true,
