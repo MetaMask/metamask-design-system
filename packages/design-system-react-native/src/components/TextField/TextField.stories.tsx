@@ -25,6 +25,9 @@ const meta: Meta<TextFieldProps> = {
     placeholder: {
       control: 'text',
     },
+    value: {
+      control: 'text',
+    },
     twClassName: {
       control: 'text',
     },
@@ -37,6 +40,7 @@ type Story = StoryObj<TextFieldProps>;
 
 export const Default: Story = {
   args: {
+    value: '',
     placeholder: 'Enter text...',
   },
   render: (args) => <TextField {...args} />,
@@ -45,9 +49,13 @@ export const Default: Story = {
 export const Size: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <TextField placeholder="Small (32px)" size={TextFieldSize.Sm} />
-      <TextField placeholder="Medium (40px, default)" size={TextFieldSize.Md} />
-      <TextField placeholder="Large (48px)" size={TextFieldSize.Lg} />
+      <TextField value="" placeholder="Small (32px)" size={TextFieldSize.Sm} />
+      <TextField
+        value=""
+        placeholder="Medium (40px, default)"
+        size={TextFieldSize.Md}
+      />
+      <TextField value="" placeholder="Large (48px)" size={TextFieldSize.Lg} />
     </View>
   ),
 };
@@ -55,8 +63,8 @@ export const Size: Story = {
 export const IsError: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <TextField placeholder="Default" />
-      <TextField placeholder="Error state" isError />
+      <TextField value="" placeholder="Default" />
+      <TextField value="" placeholder="Error state" isError />
     </View>
   ),
 };
@@ -64,12 +72,8 @@ export const IsError: Story = {
 export const IsDisabled: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <TextField placeholder="Enabled" defaultValue="Editable" />
-      <TextField
-        placeholder="Disabled"
-        defaultValue="Not editable"
-        isDisabled
-      />
+      <TextField value="Editable" placeholder="Enabled" />
+      <TextField value="Not editable" placeholder="Disabled" isDisabled />
     </View>
   ),
 };
@@ -77,6 +81,7 @@ export const IsDisabled: Story = {
 export const StartAccessory: Story = {
   render: () => (
     <TextField
+      value=""
       placeholder="With start accessory"
       startAccessory={<Text>🔍</Text>}
     />
@@ -85,6 +90,10 @@ export const StartAccessory: Story = {
 
 export const EndAccessory: Story = {
   render: () => (
-    <TextField placeholder="With end accessory" endAccessory={<Text>✕</Text>} />
+    <TextField
+      value=""
+      placeholder="With end accessory"
+      endAccessory={<Text>✕</Text>}
+    />
   ),
 };

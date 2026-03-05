@@ -23,6 +23,8 @@ export const Input = forwardRef<TextInput, InputProps>(
       isStateStylesDisabled,
       isDisabled = false,
       isReadonly = false,
+      value,
+      placeholder,
       twClassName,
       onBlur,
       onFocus,
@@ -46,6 +48,11 @@ export const Input = forwardRef<TextInput, InputProps>(
     const finalFontWeight = MAP_TEXT_VARIANT_FONTWEIGHT[textVariant];
     const fontSuffix = TWCLASSMAP_TEXT_FONTWEIGHT[finalFontWeight];
     const fontClass = `font-${FontFamily.Default}${fontSuffix}`;
+    const hasPlaceholder = placeholder !== null && placeholder !== '';
+    // Treat empty controlled values as placeholder-visible so the iOS
+    // placeholder alignment workaround applies during placeholder-to-text
+    // transitions.
+    const isPlaceholderVisible = hasPlaceholder && value === '';
 
     const inputStyle = useMemo(
       () =>
@@ -98,6 +105,11 @@ export const Input = forwardRef<TextInput, InputProps>(
 
     const resolvedStyle = [
       inputStyle,
+      // iOS-only workaround: when a placeholder is visible, native iOS
+      // TextInput can render placeholder text vertically offset.
+      // Keep this iOS-only because lineHeight: 0 can collapse text on Android.
+      Platform.OS === 'ios' &&
+        isPlaceholderVisible && { lineHeight: 0 as const },
       Platform.OS === 'ios' && { textAlignVertical: 'center' as const },
       style,
     ].filter(Boolean);
@@ -107,6 +119,8 @@ export const Input = forwardRef<TextInput, InputProps>(
         ref={ref}
         placeholderTextColor={placeholderTextColor}
         {...props}
+        placeholder={placeholder}
+        value={value}
         style={resolvedStyle}
         editable={!isDisabled && !isReadonly}
         autoFocus={autoFocus}

@@ -5,12 +5,20 @@ TextField is an input component that lets users enter text data into a boxed fie
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
 
-<TextField placeholder="Enter text..." />;
+<TextField value="" placeholder="Enter text..." />;
 ```
 
 ## Props
 
 This component extends [Input](../Input/Input.tsx) props (which extends React Native's [TextInput](https://reactnative.dev/docs/textinput)), excluding `textVariant` and `isStateStylesDisabled`.
+
+### `value`
+
+Required controlled value for the TextField.
+
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `string` | Yes      | N/A     |
 
 ### `size`
 
@@ -29,9 +37,9 @@ Available sizes:
 ```tsx
 import { TextField, TextFieldSize } from '@metamask/design-system-react-native';
 
-<TextField size={TextFieldSize.Sm} placeholder="Small" />
-<TextField placeholder="Medium (default)" />
-<TextField size={TextFieldSize.Lg} placeholder="Large" />
+<TextField value="" size={TextFieldSize.Sm} placeholder="Small" />
+<TextField value="" placeholder="Medium (default)" />
+<TextField value="" size={TextFieldSize.Lg} placeholder="Large" />
 ```
 
 ### `isError`
@@ -43,7 +51,7 @@ Optional boolean to show the error state. Changes the border color to indicate a
 | `boolean` | No       | `false` |
 
 ```tsx
-<TextField isError placeholder="Error state" />
+<TextField value="" isError placeholder="Error state" />
 ```
 
 ### `isDisabled`
@@ -55,7 +63,7 @@ Optional boolean to disable the TextField. Reduces opacity and prevents interact
 | `boolean` | No       | `false` |
 
 ```tsx
-<TextField isDisabled placeholder="Disabled" />
+<TextField value="" isDisabled placeholder="Disabled" />
 ```
 
 ### `startAccessory`
@@ -69,7 +77,7 @@ Optional content to display before the Input.
 ```tsx
 import { Text } from 'react-native';
 
-<TextField startAccessory={<Text>🔍</Text>} placeholder="Search..." />;
+<TextField value="" startAccessory={<Text>🔍</Text>} placeholder="Search..." />;
 ```
 
 ### `endAccessory`
@@ -83,7 +91,7 @@ Optional content to display after the Input.
 ```tsx
 import { Text } from 'react-native';
 
-<TextField endAccessory={<Text>✕</Text>} placeholder="With clear button" />;
+<TextField value="" endAccessory={<Text>✕</Text>} placeholder="With clear button" />;
 ```
 
 ### `inputElement`
@@ -97,7 +105,7 @@ Optional prop to replace the default Input with a custom element.
 ```tsx
 import { TextInput } from 'react-native';
 
-<TextField inputElement={<TextInput placeholder="Custom input" />} />;
+<TextField value="" inputElement={<TextInput placeholder="Custom input" />} />;
 ```
 
 ### `twClassName`
@@ -115,10 +123,10 @@ Use the `twClassName` prop to add Tailwind CSS classes to the container. These c
 import { TextField } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<TextField twClassName="mt-4" placeholder="With margin" />
+<TextField value="" twClassName="mt-4" placeholder="With margin" />
 
 // Override default styles
-<TextField twClassName="bg-error-default" placeholder="Override background" />
+<TextField value="" twClassName="bg-error-default" placeholder="Override background" />
 ```
 
 ### `style`
@@ -137,7 +145,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   const tw = useTailwind();
 
   return (
-    <TextField
+    <TextField value=""
       placeholder="Conditional styling"
       style={tw.style('bg-default', isActive && 'bg-success-default')}
     />

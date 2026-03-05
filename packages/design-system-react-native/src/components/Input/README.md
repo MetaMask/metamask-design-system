@@ -5,12 +5,20 @@ Input is a light-weight borderless input component used inside of TextField.
 ```tsx
 import { Input, TextVariant } from '@metamask/design-system-react-native';
 
-<Input placeholder="Enter text" textVariant={TextVariant.BodyMd} />;
+<Input value="" placeholder="Enter text" textVariant={TextVariant.BodyMd} />;
 ```
 
 ## Props
 
 This component extends React Native's [TextInput](https://reactnative.dev/docs/textinput) component.
+
+### `value`
+
+Required controlled value for the Input.
+
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `string` | Yes      | N/A     |
 
 ### `textVariant`
 
@@ -23,8 +31,8 @@ Optional enum to select between Typography variants.
 ```tsx
 import { Input, TextVariant } from '@metamask/design-system-react-native';
 
-<Input placeholder="BodyMd (default)" textVariant={TextVariant.BodyMd} />
-<Input placeholder="BodySm" textVariant={TextVariant.BodySm} />
+<Input value="" placeholder="BodyMd (default)" textVariant={TextVariant.BodyMd} />
+<Input value="" placeholder="BodySm" textVariant={TextVariant.BodySm} />
 ```
 
 ### `isDisabled`
@@ -66,10 +74,10 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { Input } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<Input twClassName="mt-4" placeholder="With margin" />
+<Input value="" twClassName="mt-4" placeholder="With margin" />
 
 // Override default styles
-<Input twClassName="bg-error-default" placeholder="Override background" />
+<Input value="" twClassName="bg-error-default" placeholder="Override background" />
 ```
 
 ### `style`
@@ -88,7 +96,7 @@ export const ConditionalExample = ({ isFocused }: { isFocused: boolean }) => {
   const tw = useTailwind();
 
   return (
-    <Input
+    <Input value=""
       placeholder="Conditional styling"
       style={tw.style('text-default', isFocused && 'border-primary-default')}
     />
