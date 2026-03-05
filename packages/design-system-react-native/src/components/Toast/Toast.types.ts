@@ -57,11 +57,13 @@ type BaseToastVariants = {
   bottomOffset?: number;
 };
 
-export type ToastCloseButtonOptions =
-  | ButtonProps
-  | (ButtonIconProps & { variant: ButtonIconVariant });
+export type ToastCloseButtonIconOptions = Omit<ButtonIconProps, 'variant'> & {
+  variant: ToastCloseButtonVariant;
+};
 
-export enum ButtonIconVariant {
+export type ToastCloseButtonOptions = ButtonProps | ToastCloseButtonIconOptions;
+
+export enum ToastCloseButtonVariant {
   Icon = 'Icon',
 }
 

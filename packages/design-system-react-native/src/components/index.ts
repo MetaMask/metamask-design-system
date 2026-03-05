@@ -93,7 +93,7 @@ export type { ButtonBaseProps } from './ButtonBase';
 export { Button, ButtonSize, ButtonVariant } from './Button';
 export type { ButtonProps } from './Button';
 
-export { ButtonIcon, ButtonIconSize } from './ButtonIcon';
+export { ButtonIcon, ButtonIconSize, ButtonIconVariant } from './ButtonIcon';
 export type { ButtonIconProps } from './ButtonIcon';
 
 export { ButtonSemantic, ButtonSemanticSeverity } from './ButtonSemantic';
@@ -128,6 +128,9 @@ export type { MaskiconProps } from './temp-components/Maskicon';
 
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
+
+export { TabEmptyState } from './TabEmptyState';
+export type { TabEmptyStateProps } from './TabEmptyState';
 
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';

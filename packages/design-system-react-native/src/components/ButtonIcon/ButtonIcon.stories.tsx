@@ -1,8 +1,7 @@
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { ButtonIconSize } from '../../types';
+import { ButtonIconSize, ButtonIconVariant } from '../../types';
 import { IconName } from '../Icon';
 
 import { ButtonIcon } from './ButtonIcon';
@@ -23,11 +22,9 @@ const meta: Meta<ButtonIconProps> = {
     isDisabled: {
       control: 'boolean',
     },
-    isInverse: {
-      control: 'boolean',
-    },
-    isFloating: {
-      control: 'boolean',
+    variant: {
+      control: 'select',
+      options: ButtonIconVariant,
     },
     twClassName: {
       control: 'text',
@@ -38,25 +35,16 @@ const meta: Meta<ButtonIconProps> = {
 export default meta;
 
 type Story = StoryObj<ButtonIconProps>;
-const ButtonIconStory: React.FC<ButtonIconProps> = ({
-  isInverse,
-  ...props
-}) => {
-  const tw = useTailwind();
-  return (
-    <View style={[tw`${isInverse ? `bg-primary-default` : 'bg-default'}`]}>
-      <ButtonIcon isInverse={isInverse} {...props} />
-    </View>
-  );
-};
+const ButtonIconStory: React.FC<ButtonIconProps> = (props) => (
+  <ButtonIcon {...props} />
+);
 
 export const Default: Story = {
   args: {
     size: ButtonIconSize.Md,
     iconName: IconName.Close,
     isDisabled: false,
-    isInverse: false,
-    isFloating: false,
+    variant: ButtonIconVariant.Default,
   },
   render: (args) => <ButtonIconStory {...args} />,
 };
@@ -77,10 +65,20 @@ export const isDisabled: Story = {
   render: () => <ButtonIconStory iconName={IconName.Close} isDisabled />,
 };
 
-export const isInverse: Story = {
-  render: () => <ButtonIconStory iconName={IconName.Close} isInverse />,
+export const Floating: Story = {
+  render: () => (
+    <ButtonIconStory
+      iconName={IconName.Close}
+      variant={ButtonIconVariant.Floating}
+    />
+  ),
 };
 
-export const isFloating: Story = {
-  render: () => <ButtonIconStory iconName={IconName.Close} isFloating />,
+export const Filled: Story = {
+  render: () => (
+    <ButtonIconStory
+      iconName={IconName.Close}
+      variant={ButtonIconVariant.Filled}
+    />
+  ),
 };
