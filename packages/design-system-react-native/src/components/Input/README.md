@@ -1,6 +1,6 @@
 # Input
 
-Input is a light-weight borderless input component used inside of TextField.
+Input is a light-weight, controlled-only borderless input used inside of TextField.
 
 ```tsx
 import { Input, TextVariant } from '@metamask/design-system-react-native';

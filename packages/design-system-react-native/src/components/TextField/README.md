@@ -1,6 +1,6 @@
 # TextField
 
-TextField is an input component that lets users enter text data into a boxed field. It can contain related accessories before or after the input.
+TextField is a controlled-only boxed input that can include accessories before or after the input.
 
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
