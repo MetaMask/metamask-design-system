@@ -41,6 +41,7 @@ Each story showcases that specific prop's usage and variations.
 - **ALWAYS** create meta with title, component, parameters, argTypes
 - **ALWAYS** include Default story with minimal args
 - **ALWAYS** create showcase stories for major props (Variant, Size, etc.)
+- **NEVER** create stories for `className` (React) or `twClassName` (React Native); document these only in README/template guidance.
 
 See golden path examples for story implementation patterns.
 
