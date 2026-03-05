@@ -147,16 +147,16 @@ The most significant change is that font weight is now a **separate prop** inste
 
 Variant names now use PascalCase instead of camelCase:
 
-| Extension               | Design System           |
-| ----------------------- | ----------------------- |
-| `TextVariant.bodyMd`    | `TextVariant.BodyMd`    |
-| `TextVariant.bodySm`    | `TextVariant.BodySm`    |
-| `TextVariant.bodyXs`    | `TextVariant.BodyXs`    |
+| Extension                  | Design System                              |
+| -------------------------- | ------------------------------------------ |
+| `TextVariant.bodyMd`       | `TextVariant.BodyMd`                       |
+| `TextVariant.bodySm`       | `TextVariant.BodySm`                       |
+| `TextVariant.bodyXs`       | `TextVariant.BodyXs`                       |
 | `TextVariant.bodyLgMedium` | `TextVariant.BodyLg` + `FontWeight.Medium` |
-| `TextVariant.headingSm` | `TextVariant.HeadingSm` |
-| `TextVariant.headingMd` | `TextVariant.HeadingMd` |
-| `TextVariant.headingLg` | `TextVariant.HeadingLg` |
-| `TextVariant.displayMd` | `TextVariant.DisplayMd` |
+| `TextVariant.headingSm`    | `TextVariant.HeadingSm`                    |
+| `TextVariant.headingMd`    | `TextVariant.HeadingMd`                    |
+| `TextVariant.headingLg`    | `TextVariant.HeadingLg`                    |
+| `TextVariant.displayMd`    | `TextVariant.DisplayMd`                    |
 
 ##### Color Prop Changes
 

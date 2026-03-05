@@ -145,19 +145,19 @@ Variant names now use consistent mixed case (e.g., `BodyMd` instead of `BodyMD`)
 
 Color enum values are now prefixed with their semantic category:
 
-| Mobile                         | Design System                |
-| ------------------------------ | ---------------------------- |
-| `TextColor.Default`            | `TextColor.TextDefault`      |
-| `TextColor.Alternative`        | `TextColor.TextAlternative`  |
-| `TextColor.Muted`              | `TextColor.TextMuted`        |
-| `TextColor.Primary`            | `TextColor.PrimaryDefault`   |
+| Mobile                         | Design System                  |
+| ------------------------------ | ------------------------------ |
+| `TextColor.Default`            | `TextColor.TextDefault`        |
+| `TextColor.Alternative`        | `TextColor.TextAlternative`    |
+| `TextColor.Muted`              | `TextColor.TextMuted`          |
+| `TextColor.Primary`            | `TextColor.PrimaryDefault`     |
 | `TextColor.PrimaryAlternative` | `TextColor.PrimaryAlternative` |
-| `TextColor.Success`            | `TextColor.SuccessDefault`   |
-| `TextColor.Error`              | `TextColor.ErrorDefault`     |
-| `TextColor.ErrorAlternative`   | `TextColor.ErrorAlternative` |
-| `TextColor.Warning`            | `TextColor.WarningDefault`   |
-| `TextColor.Info`               | `TextColor.InfoDefault`      |
-| `TextColor.Inverse`            | `TextColor.OverlayInverse`   |
+| `TextColor.Success`            | `TextColor.SuccessDefault`     |
+| `TextColor.Error`              | `TextColor.ErrorDefault`       |
+| `TextColor.ErrorAlternative`   | `TextColor.ErrorAlternative`   |
+| `TextColor.Warning`            | `TextColor.WarningDefault`     |
+| `TextColor.Info`               | `TextColor.InfoDefault`        |
+| `TextColor.Inverse`            | `TextColor.OverlayInverse`     |
 
 #### Migration Examples
 
