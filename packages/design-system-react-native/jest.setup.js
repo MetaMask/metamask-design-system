@@ -31,11 +31,20 @@ jest.mock(
 
 // something is re-mocking RNSAC, so we override it for each test
 beforeEach(() => {
-  const { useSafeAreaInsets } = require('react-native-safe-area-context');
+  const {
+    useSafeAreaInsets,
+    useSafeAreaFrame,
+  } = require('react-native-safe-area-context');
   useSafeAreaInsets.mockReturnValue({
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
+  });
+  useSafeAreaFrame.mockReturnValue({
+    y: 0,
+    x: 0,
+    height: 0,
+    width: 0,
   });
 });

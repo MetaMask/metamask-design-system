@@ -1,6 +1,6 @@
+import { BadgeCountSize } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { BadgeCountSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Text, TextColor, FontWeight } from '../Text';
 
