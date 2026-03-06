@@ -6,6 +6,7 @@
   "files": [],
   "scripts": {
     "build-storybook": "storybook build",
+    "check:tailwind-theme-parity": "node scripts/check-tailwind-theme-parity.mjs",
     "storybook": "storybook dev -p 6006",
     "test-storybook": "vitest --run"
   },
