@@ -52,6 +52,9 @@ export type {
   BadgeWrapperCustomPosition,
 } from './BadgeWrapper';
 
+export { BannerBase } from './BannerBase';
+export type { BannerBaseProps } from './BannerBase';
+
 export { BottomSheetFooter, ButtonsAlignment } from './BottomSheetFooter';
 export type {
   BottomSheetFooterProps,
@@ -113,6 +116,9 @@ export type { InputProps } from './Input';
 
 export { Label } from './Label';
 export type { LabelProps } from './Label';
+
+export { ListItem, ListItemVerticalAlignment } from './ListItem';
+export type { ListItemProps } from './ListItem';
 
 export { RadioButton } from './RadioButton';
 export type { RadioButtonProps } from './RadioButton';

@@ -15,3 +15,6 @@ export {
   BadgeStatusSize,
   type BadgeStatusPropsShared,
 } from './types/BadgeStatus';
+
+// BannerBase types (ADR-0004)
+export { type BannerBasePropsShared } from './types/BannerBase';
