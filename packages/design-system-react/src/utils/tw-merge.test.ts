@@ -91,7 +91,7 @@ describe('twMerge utility', () => {
       const result = twMerge(
         'text-body-md text-heading-lg text-default text-muted',
       );
-      expect(result).toBe('text-heading-lg text-default');
+      expect(result).toBe('text-heading-lg text-muted');
     });
   });
 });
