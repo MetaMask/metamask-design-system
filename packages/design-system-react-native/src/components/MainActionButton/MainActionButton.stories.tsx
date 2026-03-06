@@ -10,6 +10,10 @@ import type { MainActionButtonProps } from './MainActionButton.types';
 const meta: Meta<MainActionButtonProps> = {
   title: 'Components/MainActionButton',
   component: MainActionButton,
+  args: {
+    iconName: IconName.Add,
+    label: 'Add',
+  },
   parameters: {
     docs: {
       description: {
@@ -36,6 +40,33 @@ const meta: Meta<MainActionButtonProps> = {
       action: 'pressed',
       description: 'Callback fired when the action button is pressed.',
     },
+    onPressIn: {
+      action: 'pressIn',
+      description: 'Callback fired when a press gesture starts.',
+    },
+    onPressOut: {
+      action: 'pressOut',
+      description: 'Callback fired when a press gesture ends.',
+    },
+    iconProps: {
+      control: 'object',
+      description:
+        'Optional props forwarded to the internal Icon component (excluding name, size, and color).',
+    },
+    labelProps: {
+      control: 'object',
+      description:
+        'Optional props forwarded to the internal Text component (excluding controlled text styles).',
+    },
+    twClassName: {
+      control: 'text',
+      description: 'Additional static Tailwind classes for the button.',
+    },
+    style: {
+      control: false,
+      description:
+        'Optional React Native style object or pressed-state style callback.',
+    },
   },
 };
 
@@ -44,17 +75,11 @@ export default meta;
 type Story = StoryObj<MainActionButtonProps>;
 
 export const Default: Story = {
-  args: {
-    iconName: IconName.Add,
-    label: 'Add',
-    isDisabled: false,
-  },
+  args: {},
 };
 
 export const IsDisabled: Story = {
   args: {
-    iconName: IconName.Add,
-    label: 'Add',
     isDisabled: true,
   },
   parameters: {
@@ -64,7 +89,7 @@ export const IsDisabled: Story = {
   },
 };
 
-export const IconNameAndLabel: Story = {
+export const IconName: Story = {
   parameters: {
     actions: {
       disable: true,
@@ -90,6 +115,33 @@ export const IconNameAndLabel: Story = {
       <MainActionButton
         iconName={IconName.Send}
         label="Send"
+        twClassName="flex-1"
+      />
+    </Box>
+  ),
+};
+
+export const Label: Story = {
+  parameters: {
+    actions: {
+      disable: true,
+    },
+  },
+  render: () => (
+    <Box flexDirection={BoxFlexDirection.Row} gap={4} paddingHorizontal={4}>
+      <MainActionButton
+        iconName={IconName.Add}
+        label="Add"
+        twClassName="flex-1"
+      />
+      <MainActionButton
+        iconName={IconName.Add}
+        label="Receive assets"
+        twClassName="flex-1"
+      />
+      <MainActionButton
+        iconName={IconName.Add}
+        label="Buy and Sell"
         twClassName="flex-1"
       />
     </Box>

@@ -50,6 +50,31 @@ describe('MainActionButton', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it('calls press handlers when enabled', () => {
+    const onPress = jest.fn();
+    const onPressIn = jest.fn();
+    const onPressOut = jest.fn();
+    const { getByTestId } = render(
+      <MainActionButton
+        iconName={IconName.Add}
+        label="Enabled"
+        onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        testID={TEST_ID}
+      />,
+    );
+
+    const button = getByTestId(TEST_ID);
+    fireEvent(button, 'pressIn');
+    fireEvent.press(button);
+    fireEvent(button, 'pressOut');
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(onPressIn).toHaveBeenCalledTimes(1);
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+  });
+
   it('does not call press handlers when disabled', () => {
     const onPress = jest.fn();
     const onPressIn = jest.fn();

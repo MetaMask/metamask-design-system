@@ -21,6 +21,8 @@ import {
 
 ## Props
 
+This component extends React Native's `PressableProps` (excluding `children`, `disabled`, and `style`) to inherit standard props such as `testID`, `accessibilityLabel`, and accessibility state props.
+
 ### `iconName`
 
 Icon rendered above the label. Use `iconProps` to pass props to the internal `Icon` component for test IDs and accessibility metadata.
@@ -67,9 +69,25 @@ Disables user interaction and applies disabled styling.
 
 Callback fired when pressed.
 
-| TYPE         | REQUIRED | DEFAULT     |
-| ------------ | -------- | ----------- |
-| `() => void` | No       | `undefined` |
+| TYPE                        | REQUIRED | DEFAULT     |
+| --------------------------- | -------- | ----------- |
+| `PressableProps['onPress']` | No       | `undefined` |
+
+### `onPressIn`
+
+Callback fired when a press gesture starts.
+
+| TYPE                          | REQUIRED | DEFAULT     |
+| ----------------------------- | -------- | ----------- |
+| `PressableProps['onPressIn']` | No       | `undefined` |
+
+### `onPressOut`
+
+Callback fired when a press gesture ends.
+
+| TYPE                           | REQUIRED | DEFAULT     |
+| ------------------------------ | -------- | ----------- |
+| `PressableProps['onPressOut']` | No       | `undefined` |
 
 ### `twClassName`
 
@@ -86,3 +104,7 @@ React Native style object for the outer pressable. Use the callback form (`({ pr
 | TYPE                                                            | REQUIRED | DEFAULT     |
 | --------------------------------------------------------------- | -------- | ----------- |
 | `StyleProp<ViewStyle> \| ({ pressed }) => StyleProp<ViewStyle>` | No       | `undefined` |
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
