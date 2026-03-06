@@ -7,6 +7,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From Extension Component Library](#from-extension-component-library)
   - [Box Component](#box-component)
   - [Text Component](#text-component)
+  - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
@@ -235,6 +236,93 @@ Notable differences in the design system Text component:
 
 - `asChild` - compose styles onto a child element via Radix `Slot`
 - New semantic variants are available in addition to migrated variants (`PageHeading`, `SectionHeading`, `ButtonLabelMd`, `ButtonLabelLg`, `AmountDisplayLg`)
+
+### Icon Component
+
+The Icon component has enum and prop-surface differences when migrating from the extension component-library.
+
+#### Breaking Changes
+
+##### Size Enum Changes
+
+The extension `IconSize.Inherit` value is not supported in the design system.
+
+| Extension Size     | Design System Migration          |
+| ------------------ | -------------------------------- |
+| `IconSize.Xs`      | `IconSize.Xs`                    |
+| `IconSize.Sm`      | `IconSize.Sm`                    |
+| `IconSize.Md`      | `IconSize.Md`                    |
+| `IconSize.Lg`      | `IconSize.Lg`                    |
+| `IconSize.Xl`      | `IconSize.Xl`                    |
+| `IconSize.Inherit` | Use `className` sizing utilities |
+
+##### Color Enum Changes
+
+Icon colors now use PascalCase names with a design-system-specific enum.
+
+| Extension Color             | Design System               |
+| --------------------------- | --------------------------- |
+| `IconColor.iconDefault`     | `IconColor.IconDefault`     |
+| `IconColor.iconAlternative` | `IconColor.IconAlternative` |
+| `IconColor.iconMuted`       | `IconColor.IconMuted`       |
+| `IconColor.overlayInverse`  | `IconColor.OverlayInverse`  |
+| `IconColor.primaryDefault`  | `IconColor.PrimaryDefault`  |
+| `IconColor.primaryInverse`  | `IconColor.PrimaryInverse`  |
+| `IconColor.errorDefault`    | `IconColor.ErrorDefault`    |
+| `IconColor.errorInverse`    | `IconColor.ErrorInverse`    |
+| `IconColor.warningDefault`  | `IconColor.WarningDefault`  |
+| `IconColor.warningInverse`  | `IconColor.WarningInverse`  |
+| `IconColor.successDefault`  | `IconColor.SuccessDefault`  |
+| `IconColor.successInverse`  | `IconColor.SuccessInverse`  |
+| `IconColor.infoDefault`     | `IconColor.InfoDefault`     |
+| `IconColor.infoInverse`     | `IconColor.InfoInverse`     |
+
+##### Prop Surface Changes
+
+The extension Icon is polymorphic (`as` pattern), while the design system Icon is an SVG-first component with standard SVG props.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Icon } from '../../component-library';
+import {
+  IconName,
+  IconSize,
+  IconColor,
+} from '../../../helpers/constants/design-system';
+
+<Icon
+  name={IconName.Check}
+  size={IconSize.Inherit}
+  color={IconColor.iconDefault}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  Icon,
+  IconName,
+  IconSize,
+  IconColor,
+} from '@metamask/design-system-react';
+
+<Icon
+  name={IconName.Check}
+  size={IconSize.Md}
+  color={IconColor.IconDefault}
+  className="h-5 w-5"
+/>;
+```
+
+#### API Differences
+
+- `className` and `style` are still supported
+- Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
+- Use SVG props directly for accessibility and rendering behavior
 
 ## Version Updates
 
