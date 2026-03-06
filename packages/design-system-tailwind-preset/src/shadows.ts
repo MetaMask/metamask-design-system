@@ -1,8 +1,10 @@
-import plugin from 'tailwindcss/plugin';
+// Note: Using require for compatibility with current build system
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const plugin = require('tailwindcss/plugin');
 
 /**
  * We want to allow for the combination of shadow size and color utilities.
- * Shadow size should default to --color-shadow-default.
+ * Shadow size should default to --shadow-md.
  * e.g. className="shadow-md" (size medium / color default)
  * We also want to allow for the combination of shadow size and color utilities.
  * e.g. className="shadow-md shadow-primary" (size medium / color primary)

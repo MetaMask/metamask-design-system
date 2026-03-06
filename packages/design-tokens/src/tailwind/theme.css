@@ -1,0 +1,504 @@
+@import '../css/brand-colors.css';
+@import '../css/typography.css';
+@import '../css/shadow.css';
+
+@theme inline {
+  /* Essential Tailwind colors required for basic utilities */
+  --color-inherit: inherit;
+  --color-current: currentColor;
+  --color-transparent: transparent;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  /* Background default should be the darkest shade, 0 elevation.
+  Section is +1 elevation, subsection is +2 elevation.
+  Alternative should be deprecated. */
+  --color-background-default: var(--brand-colors-grey-grey000);
+  --color-background-section: var(--brand-colors-grey-grey050);
+  --color-background-subsection: var(--brand-colors-grey-grey000);
+  --color-background-alternative: var(--brand-colors-grey-grey050);
+
+  /* Applied to interactive elements, such as buttons. 
+  For light mode, we use 8% increments of opacity to offer
+  sufficient affordance for usability. */
+  --color-background-muted: #b4b4b528;
+  --color-background-muted-hover: #b4b4b53d;
+  --color-background-muted-pressed: #b4b4b552;
+
+  /* Ensures visual consistency with section and subsection. */
+  --color-background-default-hover: var(--brand-colors-grey-grey050);
+  --color-background-default-pressed: var(--brand-colors-grey-grey100);
+
+  /* These colors should be deprecated eventually for simplicity */
+  --color-background-alternative-hover: #ebedf1;
+  --color-background-alternative-pressed: #e1e4ea;
+
+  /* These have opacities of pure white for general usage. 
+  Visually, they align with section and subsection.*/
+  --color-background-hover: #b4b4b528;
+  --color-background-pressed: #b4b4b53d;
+
+  /* These are our content colors. 
+  Contrast ratio of alternative: 5.7 on default, 5.1 on section. 
+  Contrast ratio of muted: 1.9 on default, 1.7 on section.*/
+  --color-text-default: var(--brand-colors-grey-grey900);
+  --color-text-alternative: var(--brand-colors-grey-grey500);
+  --color-text-muted: var(--brand-colors-grey-grey200);
+
+  --color-icon-default: var(--brand-colors-grey-grey900);
+  --color-icon-default-hover: #2a2b2c;
+  --color-icon-default-pressed: #414243;
+
+  --color-icon-alternative: var(--brand-colors-grey-grey500);
+  --color-icon-muted: var(--brand-colors-grey-grey200);
+  --color-icon-inverse: var(--brand-colors-grey-grey000);
+
+  /* Border default has a 3:3 ratio when applied on bg-default
+  and 3.0 on section. We use opacity for border-muted so it
+  maintains sufficient contrast on bg-default and bg-section.*/
+  --color-border-default: var(--brand-colors-grey-grey400);
+  --color-border-muted: #b4b4b566;
+
+  /* Derived from the background hue, 264.5, for consistency.
+  Opacity for default is 36%, alternative is 57%. Default is meant
+  to be the inverse of dark mode so the layering feels consistent
+  across themes. Alternative is relatively darker in light mode for
+  better contrast.*/
+  --color-overlay-default: #0a0d135c;
+  --color-overlay-alternative: #0a0d1392;
+  --color-overlay-inverse: var(--brand-colors-grey-grey000);
+
+  /* For primary semantic elements: interactive, active, selected (#4459ff) */
+  --color-primary-default: var(--brand-colors-blue-blue500);
+  /* Stronger color for primary semantic elements (#2c3dc5) */
+  --color-primary-alternative: var(--brand-colors-blue-blue600);
+  /* Muted color for primary semantic elements (#4459ff1a) */
+  --color-primary-muted: #4459ff1a;
+  /* For elements placed on top of primary/default (#ffffff) */
+  --color-primary-inverse: var(--brand-colors-grey-grey000);
+  /* Hover state surface for primary/default (#384df5) */
+  --color-primary-default-hover: #384df5;
+  /* Pressed state surface for primary/default (#2b3eda) */
+  --color-primary-default-pressed: #2b3eda;
+  /* Hover state surface for primary/muted (#4459ff26) */
+  --color-primary-muted-hover: #4459ff26;
+  /* Pressed state surface for primary/muted (#4459ff33) */
+  --color-primary-muted-pressed: #4459ff33;
+  /* For danger semantic elements: error, critical, destructive (#ca3542) */
+  --color-error-default: var(--brand-colors-red-red500);
+  /* Stronger color for error semantic (#952731) */
+  --color-error-alternative: var(--brand-colors-red-red600);
+  /* Muted color for error semantic (#ca35421a) */
+  --color-error-muted: #ca35421a;
+  /* For elements placed on top of error/default (#ffffff) */
+  --color-error-inverse: var(--brand-colors-grey-grey000);
+  /* Hover state surface for error/default (#ba313d) */
+  --color-error-default-hover: #ba313d;
+  /* Pressed state surface for error/default (#9a2832) */
+  --color-error-default-pressed: #9a2832;
+  /* Hover state surface for error/muted (#ca354226) */
+  --color-error-muted-hover: #ca354226;
+  /* Pressed state surface for error/muted (#ca354233) */
+  --color-error-muted-pressed: #ca354233;
+  /* For warning semantic elements: caution, attention, precaution (#9a6300) */
+  --color-warning-default: var(--brand-colors-yellow-yellow500);
+  /* Muted color option for warning semantic (#9a63001a) */
+  --color-warning-muted: #9a63001a;
+  /* For elements placed on top of warning/default (#ffffff) */
+  --color-warning-inverse: var(--brand-colors-grey-grey000);
+  /* Hover state surface for warning/default (#855500) */
+  --color-warning-default-hover: #855500;
+  /* Pressed state surface for warning/default (#5c3b00) */
+  --color-warning-default-pressed: #5c3b00;
+  /* Hover state surface for warning/muted (#9a630026) */
+  --color-warning-muted-hover: #9a630026;
+  /* Pressed state surface for warning/muted (#9a630033) */
+  --color-warning-muted-pressed: #9a630033;
+  /* For positive semantic elements: success, confirm, complete, safe (#457A39) */
+  --color-success-default: var(--brand-colors-lime-lime500);
+  /* Muted color for positive semantic (#457a391a) */
+  --color-success-muted: #457a391a;
+  /* For elements placed on top of success/default (#ffffff) */
+  --color-success-inverse: var(--brand-colors-grey-grey000);
+  /* Hover state surface for success/default (#3d6c32) */
+  --color-success-default-hover: #3d6c32;
+  /* Pressed state surface for success/default (#2d5025) */
+  --color-success-default-pressed: #2d5025;
+  /* Hover state surface for success/muted (#457a3926) */
+  --color-success-muted-hover: #457a3926;
+  /* Pressed state surface for success/muted (#457a3933) */
+  --color-success-muted-pressed: #457a3933;
+  /* For informational read-only elements: info, reminder, hint (#4459ff) */
+  --color-info-default: var(--brand-colors-blue-blue500);
+  /* Muted color for informational semantic (#4459ff1a) */
+  --color-info-muted: #4459ff1a;
+  /* For elements placed on top of info/default (#ffffff) */
+  --color-info-inverse: var(--brand-colors-grey-grey000);
+  /* Expressive color in light orange (#ffa680) */
+  --color-accent01-light: var(--brand-colors-orange-orange200);
+  /* Expressive color in orange (#ff5c16) */
+  --color-accent01-normal: var(--brand-colors-orange-orange400);
+  /* Expressive color in dark orange (#661800) */
+  --color-accent01-dark: var(--brand-colors-orange-orange700);
+  /* Expressive color in light purple (#eac2ff) */
+  --color-accent02-light: var(--brand-colors-purple-purple100);
+  /* Expressive color in purple (#d075ff) */
+  --color-accent02-normal: var(--brand-colors-purple-purple300);
+  /* Expressive color in dark purple (#3d065f) */
+  --color-accent02-dark: var(--brand-colors-purple-purple800);
+  /* Expressive color in light lime (#e5ffc3) */
+  --color-accent03-light: var(--brand-colors-lime-lime050);
+  /* Expressive color in lime (#baf24a) */
+  --color-accent03-normal: var(--brand-colors-lime-lime100);
+  /* Expressive color in dark lime (#013330) */
+  --color-accent03-dark: var(--brand-colors-lime-lime700);
+  /* Expressive color in light indigo (#) */
+  --color-accent04-light: var(--brand-colors-indigo-indigo100);
+  /* Expressive color in indigo (#) */
+  --color-accent04-normal: var(--brand-colors-indigo-indigo200);
+  /* Expressive color in dark indigo (#) */
+  --color-accent04-dark: var(--brand-colors-indigo-indigo800);
+  /* For Flask primary accent color (#8f44e4) */
+  --color-flask-default: var(--brand-colors-purple-purple500);
+  /* For elements placed on top of flask/default (#ffffff) */
+  --color-flask-inverse: var(--brand-colors-grey-grey000);
+  /* For neutral drop shadow color (black-10% | black-40%) */
+  --color-shadow-default: #0000001a;
+  /* For primary drop shadow color (blue500-20% | blue300-20%) */
+  --color-shadow-primary: #4459ff33;
+  /* For critical/danger drop shadow color (red50-20% | red300-20%) */
+  --color-shadow-error: #ca354266;
+
+  /* Box Shadows */
+  --box-shadow-xs: var(--shadow-size-xs)
+    var(--shadow-color, var(--color-shadow-default));
+  --box-shadow-sm: var(--shadow-size-sm)
+    var(--shadow-color, var(--color-shadow-default));
+  --box-shadow-md: var(--shadow-size-md)
+    var(--shadow-color, var(--color-shadow-default));
+  --box-shadow-lg: var(--shadow-size-lg)
+    var(--shadow-color, var(--color-shadow-default));
+}
+
+/**
+ * Dark Theme Colors
+ */
+[data-theme='dark'],
+.dark {
+  /* Background default should be the darkest shade, 0 elevation.
+  Section is +1 elevation, subsection is +2 elevation.
+  Alternative should be deprecated. */
+  --color-background-default: var(--brand-colors-grey-grey900);
+  --color-background-section: var(--brand-colors-grey-grey800);
+  --color-background-subsection: var(--brand-colors-grey-grey700);
+  --color-background-alternative: var(--brand-colors-grey-grey1000);
+
+  /* Applied to interactive elements, such as buttons.
+  For dark mode, we apply pure white with 4% opacity so these
+  tokens inherit the background hue of 264.5. */
+  --color-background-muted: #ffffff0a;
+  --color-background-muted-hover: #ffffff14;
+  --color-background-muted-pressed: #ffffff1f;
+
+  /* Ensures visual consistency with section and subsection. */
+  --color-background-default-hover: var(--brand-colors-grey-grey800);
+  --color-background-default-pressed: var(--brand-colors-grey-grey700);
+
+  /* Hover state surface for background/alternative (#0d0d0e) */
+  --color-background-alternative-hover: #0d0d0e;
+  --color-background-alternative-pressed: #161617;
+
+  /* These have opacities of pure white for general usage. 
+  We set 8% for hover and 12% for pressed so these tokens pick up
+  background hues and are consistent with +1 and +2 elevations.*/
+  --color-background-hover: #ffffff0a;
+  --color-background-pressed: #ffffff1f;
+
+  /* These are our content colors. 
+  Contrast ratio of alternative: 7.4 on default, 8.5 on section. 
+  Contrast ratio of muted: 2.0 on default, 1.8 on section.*/
+  --color-text-default: var(--brand-colors-grey-grey000);
+  --color-text-alternative: var(--brand-colors-grey-grey300);
+  --color-text-muted: var(--brand-colors-grey-grey600);
+
+  --color-icon-default: var(--brand-colors-grey-grey000);
+  --color-icon-default-hover: #f0f0f0;
+  --color-icon-default-pressed: #d0d0d0;
+
+  --color-icon-alternative: var(--brand-colors-grey-grey300);
+  --color-icon-muted: var(--brand-colors-grey-grey600);
+  --color-icon-inverse: var(--brand-colors-grey-grey900);
+
+  /* Contrast of border-default: 3:3 on bg-default, 3.0 on section.
+  We use 8% opacify of pure white for border-muted so it maintains
+  sufficient contrast on bg-default and bg-section.*/
+  --color-border-default: var(--brand-colors-grey-grey500);
+  --color-border-muted: #ffffff14;
+
+  /* Derived from the same hue as bg-default, 264.5, for visual
+  consistency. Ensures we don't have too much "red".
+  Opacities are 72% and 84% for default and alternative. */
+  --color-overlay-default: #030304b8;
+  --color-overlay-alternative: #030304d6;
+  --color-overlay-inverse: var(--brand-colors-grey-grey000);
+
+  /* For primary semantic elements: interactive, active, selected (#8b99ff) */
+  --color-primary-default: var(--brand-colors-blue-blue300);
+  /* Stronger color for primary semantic elements (#adb6fe) */
+  --color-primary-alternative: var(--brand-colors-blue-blue200);
+  /* Muted color for primary semantic elements (#8b99ff26) */
+  --color-primary-muted: #8b99ff26;
+  /* For elements placed on top of primary/default (#121314) */
+  --color-primary-inverse: var(--brand-colors-grey-grey900);
+  /* Hover state surface for primary/default (#9eaaff) */
+  --color-primary-default-hover: #9eaaff;
+  /* Pressed state surface for primary/default (#c7ceff) */
+  --color-primary-default-pressed: #c7ceff;
+  /* Hover state surface for primary/muted (#8b99ff33) */
+  --color-primary-muted-hover: #8b99ff33;
+  /* Pressed state surface for primary/muted (#8b99ff40) */
+  --color-primary-muted-pressed: #8b99ff40;
+  /* For danger semantic elements: error, critical, destructive (#ff7584) */
+  --color-error-default: var(--brand-colors-red-red300);
+  /* Stronger color for error semantic (#ffa1aa) */
+  --color-error-alternative: var(--brand-colors-red-red200);
+  /* Muted color for error semantic (#ff758426) */
+  --color-error-muted: #ff758426;
+  /* For elements placed on top of error/default (#121314) */
+  --color-error-inverse: var(--brand-colors-grey-grey900);
+  /* Hover state surface for error/default (#ff8a96) */
+  --color-error-default-hover: #ff8a96;
+  /* Pressed state surface for error/default (#ffb2bb) */
+  --color-error-default-pressed: #ffb2bb;
+  /* Hover state surface for error/muted (#ff758433) */
+  --color-error-muted-hover: #ff758433;
+  /* Pressed state surface for error/muted (#ff758440) */
+  --color-error-muted-pressed: #ff758440;
+  /* For warning semantic elements: caution, attention, precaution (#f0b034) */
+  --color-warning-default: var(--brand-colors-yellow-yellow200);
+  /* Muted color option for warning semantic (#f0b03426) */
+  --color-warning-muted: #f0b03426;
+  /* For elements placed on top of warning/default (#121314) */
+  --color-warning-inverse: var(--brand-colors-grey-grey900);
+  /* Hover state surface for warning/default (#f3be59) */
+  --color-warning-default-hover: #f3be59;
+  /* Pressed state surface for warning/default (#f6cd7f) */
+  --color-warning-default-pressed: #f6cd7f;
+  /* Hover state surface for warning/muted (#f0b03433) */
+  --color-warning-muted-hover: #f0b03433;
+  /* Pressed state surface for warning/muted (#f0b03440) */
+  --color-warning-muted-pressed: #f0b03440;
+  /* For positive semantic elements: success, confirm, complete, safe (#baf24a) */
+  --color-success-default: var(--brand-colors-lime-lime100);
+  /* Muted color for positive semantic (#baf24a26) */
+  --color-success-muted: #baf24a26;
+  /* For elements placed on top of success/default (#121314) */
+  --color-success-inverse: var(--brand-colors-grey-grey900);
+  /* Hover state surface for success/default (#c9f570) */
+  --color-success-default-hover: #c9f570;
+  /* Pressed state surface for success/default (#d7f796) */
+  --color-success-default-pressed: #d7f796;
+  /* Hover state surface for success/muted (#baf24a33) */
+  --color-success-muted-hover: #baf24a33;
+  /* Pressed state surface for success/muted (#baf24a40) */
+  --color-success-muted-pressed: #baf24a40;
+  /* For informational read-only elements: info, reminder, hint (#8b99ff) */
+  --color-info-default: var(--brand-colors-blue-blue300);
+  /* Muted color for informational semantic (#8b99ff26) */
+  --color-info-muted: #8b99ff26;
+  /* For elements placed on top of info/default (#121314) */
+  --color-info-inverse: var(--brand-colors-grey-grey900);
+  /* Expressive color in light orange (#ffa680) */
+  --color-accent01-light: var(--brand-colors-orange-orange200);
+  /* Expressive color in orange (#ff5c16) */
+  --color-accent01-normal: var(--brand-colors-orange-orange400);
+  /* Expressive color in dark orange (#661800) */
+  --color-accent01-dark: var(--brand-colors-orange-orange700);
+  /* Expressive color in light purple (#eac2ff) */
+  --color-accent02-light: var(--brand-colors-purple-purple100);
+  /* Expressive color in purple (#d075ff) */
+  --color-accent02-normal: var(--brand-colors-purple-purple300);
+  /* Expressive color in dark purple (#3d065f) */
+  --color-accent02-dark: var(--brand-colors-purple-purple800);
+  /* Expressive color in light lime (#e5ffc3) */
+  --color-accent03-light: var(--brand-colors-lime-lime050);
+  /* Expressive color in lime (#baf24a) */
+  --color-accent03-normal: var(--brand-colors-lime-lime100);
+  /* Expressive color in dark lime (#013330) */
+  --color-accent03-dark: var(--brand-colors-lime-lime700);
+  /* Expressive color in light indigo (#cce7ff) */
+  --color-accent04-light: var(--brand-colors-indigo-indigo100);
+  /* Expressive color in indigo (#89b0ff) */
+  --color-accent04-normal: var(--brand-colors-indigo-indigo200);
+  /* Expressive color in dark indigo (#190066) */
+  --color-accent04-dark: var(--brand-colors-indigo-indigo800);
+  /* For Flask primary accent color (#d27dff) */
+  --color-flask-default: var(--brand-colors-purple-purple300);
+  /* For elements placed on top of flask/default (#121314) */
+  --color-flask-inverse: var(--brand-colors-grey-grey900);
+  /* For neutral drop shadow color (black-40%) */
+  --color-shadow-default: #00000066;
+  /* For primary drop shadow color (#8b99ff33) */
+  --color-shadow-primary: #8b99ff33;
+  /* For critical/danger drop shadow color (#ff758433) */
+  --color-shadow-error: #ff758433;
+}
+
+/* Color Shortcut Utilities - Enable shorter class names */
+/* Text shortcuts: text-default instead of text-text-default */
+@utility text-default {
+  color: var(--color-text-default);
+}
+@utility text-alternative {
+  color: var(--color-text-alternative);
+}
+@utility text-muted {
+  color: var(--color-text-muted);
+}
+
+/* Background shortcuts: bg-default instead of bg-background-default */
+@utility bg-default {
+  background-color: var(--color-background-default);
+}
+@utility bg-default-hover {
+  background-color: var(--color-background-default-hover);
+}
+@utility bg-default-pressed {
+  background-color: var(--color-background-default-pressed);
+}
+@utility bg-alternative {
+  background-color: var(--color-background-alternative);
+}
+@utility bg-alternative-hover {
+  background-color: var(--color-background-alternative-hover);
+}
+@utility bg-alternative-pressed {
+  background-color: var(--color-background-alternative-pressed);
+}
+@utility bg-section {
+  background-color: var(--color-background-section);
+}
+@utility bg-subsection {
+  background-color: var(--color-background-subsection);
+}
+@utility bg-muted {
+  background-color: var(--color-background-muted);
+}
+@utility bg-muted-hover {
+  background-color: var(--color-background-muted-hover);
+}
+@utility bg-muted-pressed {
+  background-color: var(--color-background-muted-pressed);
+}
+@utility bg-hover {
+  background-color: var(--color-background-hover);
+}
+@utility bg-pressed {
+  background-color: var(--color-background-pressed);
+}
+
+/* Border shortcuts: border-default instead of border-border-default */
+@utility border-default {
+  border-color: var(--color-border-default);
+}
+@utility border-muted {
+  border-color: var(--color-border-muted);
+}
+
+/* Legacy typography classnames parity with the old preset */
+@utility text-s-display-lg { font-size: var(--typography-s-display-lg-font-size); }
+@utility text-s-display-md { font-size: var(--typography-s-display-md-font-size); }
+@utility text-s-heading-lg { font-size: var(--typography-s-heading-lg-font-size); }
+@utility text-s-heading-md { font-size: var(--typography-s-heading-md-font-size); }
+@utility text-s-heading-sm { font-size: var(--typography-s-heading-sm-font-size); }
+@utility text-s-body-lg { font-size: var(--typography-s-body-lg-regular-font-size); }
+@utility text-s-body-md { font-size: var(--typography-s-body-md-font-size); }
+@utility text-s-body-sm { font-size: var(--typography-s-body-sm-font-size); }
+@utility text-s-body-xs { font-size: var(--typography-s-body-xs-font-size); }
+@utility text-s-page-heading { font-size: var(--typography-s-page-heading-font-size); }
+@utility text-s-section-heading { font-size: var(--typography-s-section-heading-font-size); }
+@utility text-s-button-label-md { font-size: var(--typography-s-button-label-md-font-size); }
+@utility text-s-button-label-lg { font-size: var(--typography-s-button-label-lg-font-size); }
+@utility text-s-amount-display-lg { font-size: var(--typography-s-amount-display-lg-font-size); }
+@utility text-l-display-lg { font-size: var(--typography-l-display-lg-font-size); }
+@utility text-l-display-md { font-size: var(--typography-l-display-md-font-size); }
+@utility text-l-heading-lg { font-size: var(--typography-l-heading-lg-font-size); }
+@utility text-l-heading-md { font-size: var(--typography-l-heading-md-font-size); }
+@utility text-l-heading-sm { font-size: var(--typography-l-heading-sm-font-size); }
+@utility text-l-body-lg { font-size: var(--typography-l-body-lg-medium-font-size); }
+@utility text-l-body-md { font-size: var(--typography-l-body-md-font-size); }
+@utility text-l-body-sm { font-size: var(--typography-l-body-sm-font-size); }
+@utility text-l-body-xs { font-size: var(--typography-l-body-xs-font-size); }
+@utility text-l-page-heading { font-size: var(--typography-l-page-heading-font-size); }
+@utility text-l-section-heading { font-size: var(--typography-l-section-heading-font-size); }
+@utility text-l-button-label-md { font-size: var(--typography-l-button-label-md-font-size); }
+@utility text-l-button-label-lg { font-size: var(--typography-l-button-label-lg-font-size); }
+@utility text-l-amount-display-lg { font-size: var(--typography-l-amount-display-lg-font-size); }
+
+@utility leading-s-display-lg { line-height: var(--typography-s-display-lg-line-height); }
+@utility leading-s-display-md { line-height: var(--typography-s-display-md-line-height); }
+@utility leading-s-heading-lg { line-height: var(--typography-s-heading-lg-line-height); }
+@utility leading-s-heading-md { line-height: var(--typography-s-heading-md-line-height); }
+@utility leading-s-heading-sm { line-height: var(--typography-s-heading-sm-line-height); }
+@utility leading-s-body-lg { line-height: var(--typography-s-body-lg-regular-line-height); }
+@utility leading-s-body-md { line-height: var(--typography-s-body-md-line-height); }
+@utility leading-s-body-sm { line-height: var(--typography-s-body-sm-line-height); }
+@utility leading-s-body-xs { line-height: var(--typography-s-body-xs-line-height); }
+@utility leading-s-page-heading { line-height: var(--typography-s-page-heading-line-height); }
+@utility leading-s-section-heading { line-height: var(--typography-s-section-heading-line-height); }
+@utility leading-s-button-label-md { line-height: var(--typography-s-button-label-md-line-height); }
+@utility leading-s-button-label-lg { line-height: var(--typography-s-button-label-lg-line-height); }
+@utility leading-s-amount-display-lg { line-height: var(--typography-s-amount-display-lg-line-height); }
+@utility leading-l-display-lg { line-height: var(--typography-l-display-lg-line-height); }
+@utility leading-l-display-md { line-height: var(--typography-l-display-md-line-height); }
+@utility leading-l-heading-lg { line-height: var(--typography-l-heading-lg-line-height); }
+@utility leading-l-heading-md { line-height: var(--typography-l-heading-md-line-height); }
+@utility leading-l-heading-sm { line-height: var(--typography-l-heading-sm-line-height); }
+@utility leading-l-body-lg { line-height: var(--typography-l-body-lg-medium-line-height); }
+@utility leading-l-body-md { line-height: var(--typography-l-body-md-line-height); }
+@utility leading-l-body-sm { line-height: var(--typography-l-body-sm-line-height); }
+@utility leading-l-body-xs { line-height: var(--typography-l-body-xs-line-height); }
+@utility leading-l-page-heading { line-height: var(--typography-l-page-heading-line-height); }
+@utility leading-l-section-heading { line-height: var(--typography-l-section-heading-line-height); }
+@utility leading-l-button-label-md { line-height: var(--typography-l-button-label-md-line-height); }
+@utility leading-l-button-label-lg { line-height: var(--typography-l-button-label-lg-line-height); }
+@utility leading-l-amount-display-lg { line-height: var(--typography-l-amount-display-lg-line-height); }
+
+@utility tracking-s-display-lg { letter-spacing: var(--typography-s-display-lg-letter-spacing); }
+@utility tracking-s-display-md { letter-spacing: var(--typography-s-display-md-letter-spacing); }
+@utility tracking-s-heading-lg { letter-spacing: var(--typography-s-heading-lg-letter-spacing); }
+@utility tracking-s-heading-md { letter-spacing: var(--typography-s-heading-md-letter-spacing); }
+@utility tracking-s-heading-sm { letter-spacing: var(--typography-s-heading-sm-letter-spacing); }
+@utility tracking-s-body-lg { letter-spacing: var(--typography-s-body-lg-regular-letter-spacing); }
+@utility tracking-s-body-md { letter-spacing: var(--typography-s-body-md-letter-spacing); }
+@utility tracking-s-body-sm { letter-spacing: var(--typography-s-body-sm-letter-spacing); }
+@utility tracking-s-body-xs { letter-spacing: var(--typography-s-body-xs-letter-spacing); }
+@utility tracking-s-page-heading { letter-spacing: var(--typography-s-page-heading-letter-spacing); }
+@utility tracking-s-section-heading { letter-spacing: var(--typography-s-section-heading-letter-spacing); }
+@utility tracking-s-button-label-md { letter-spacing: var(--typography-s-button-label-md-letter-spacing); }
+@utility tracking-s-button-label-lg { letter-spacing: var(--typography-s-button-label-lg-letter-spacing); }
+@utility tracking-s-amount-display-lg { letter-spacing: var(--typography-s-amount-display-lg-letter-spacing); }
+@utility tracking-l-display-lg { letter-spacing: var(--typography-l-display-lg-letter-spacing); }
+@utility tracking-l-display-md { letter-spacing: var(--typography-l-display-md-letter-spacing); }
+@utility tracking-l-heading-lg { letter-spacing: var(--typography-l-heading-lg-letter-spacing); }
+@utility tracking-l-heading-md { letter-spacing: var(--typography-l-heading-md-letter-spacing); }
+@utility tracking-l-heading-sm { letter-spacing: var(--typography-l-heading-sm-letter-spacing); }
+@utility tracking-l-body-lg { letter-spacing: var(--typography-l-body-lg-medium-letter-spacing); }
+@utility tracking-l-body-md { letter-spacing: var(--typography-l-body-md-letter-spacing); }
+@utility tracking-l-body-sm { letter-spacing: var(--typography-l-body-sm-letter-spacing); }
+@utility tracking-l-body-xs { letter-spacing: var(--typography-l-body-xs-letter-spacing); }
+@utility tracking-l-page-heading { letter-spacing: var(--typography-l-page-heading-letter-spacing); }
+@utility tracking-l-section-heading { letter-spacing: var(--typography-l-section-heading-letter-spacing); }
+@utility tracking-l-button-label-md { letter-spacing: var(--typography-l-button-label-md-letter-spacing); }
+@utility tracking-l-button-label-lg { letter-spacing: var(--typography-l-button-label-lg-letter-spacing); }
+@utility tracking-l-amount-display-lg { letter-spacing: var(--typography-l-amount-display-lg-letter-spacing); }
+
+@utility font-default { font-family: var(--font-family-default); }
+@utility font-accent { font-family: var(--font-family-accent); }
+@utility font-hero { font-family: var(--font-family-hero); }
+@utility font-regular { font-weight: var(--font-weight-regular); }
+
+/* Legacy shadow color utilities parity with old shadow plugin */
+@utility shadow-default { --shadow-color: var(--color-shadow-default) !important; }
+@utility shadow-primary { --shadow-color: var(--color-shadow-primary) !important; }
+@utility shadow-error { --shadow-color: var(--color-shadow-error) !important; }
