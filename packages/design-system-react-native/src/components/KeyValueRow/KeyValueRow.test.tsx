@@ -5,10 +5,6 @@ import { View } from 'react-native';
 import { IconName } from '../Icon';
 
 import KeyValueRow from './KeyValueRow';
-import {
-  TESTID_KEYVALUEROW_FIELD_ICON,
-  TESTID_KEYVALUEROW_VALUE_ICON,
-} from './KeyValueRow.constants';
 import { KeyValueRowFieldIconSides } from './KeyValueRow.types';
 
 const fieldLabel = { text: 'Sample Key' };
@@ -55,7 +51,7 @@ describe('KeyValueRow', () => {
           value={{ label: valueLabel }}
         />,
       );
-      expect(queryAllByTestId(TESTID_KEYVALUEROW_FIELD_ICON)).toHaveLength(0);
+      expect(queryAllByTestId('keyvaluerow-field-icon')).toHaveLength(0);
     });
 
     it('does not render value icon when icon prop is not provided', () => {
@@ -65,17 +61,20 @@ describe('KeyValueRow', () => {
           value={{ label: valueLabel }}
         />,
       );
-      expect(queryAllByTestId(TESTID_KEYVALUEROW_VALUE_ICON)).toHaveLength(0);
+      expect(queryAllByTestId('keyvaluerow-value-icon')).toHaveLength(0);
     });
 
     it('renders field icon on the left by default (no side specified)', () => {
       const { getAllByTestId } = render(
         <KeyValueRow
-          field={{ label: fieldLabel, icon: { name: IconName.Wifi } }}
+          field={{
+            label: fieldLabel,
+            icon: { name: IconName.Wifi, testID: 'keyvaluerow-field-icon' },
+          }}
           value={{ label: valueLabel }}
         />,
       );
-      expect(getAllByTestId(TESTID_KEYVALUEROW_FIELD_ICON)).toHaveLength(1);
+      expect(getAllByTestId('keyvaluerow-field-icon')).toHaveLength(1);
     });
 
     it('renders field icon on the left when side is Left', () => {
@@ -83,12 +82,16 @@ describe('KeyValueRow', () => {
         <KeyValueRow
           field={{
             label: fieldLabel,
-            icon: { name: IconName.Wifi, side: KeyValueRowFieldIconSides.Left },
+            icon: {
+              name: IconName.Wifi,
+              side: KeyValueRowFieldIconSides.Left,
+              testID: 'keyvaluerow-field-icon',
+            },
           }}
           value={{ label: valueLabel }}
         />,
       );
-      expect(getAllByTestId(TESTID_KEYVALUEROW_FIELD_ICON)).toHaveLength(1);
+      expect(getAllByTestId('keyvaluerow-field-icon')).toHaveLength(1);
     });
 
     it('renders field icon on the right when side is Right', () => {
@@ -99,12 +102,13 @@ describe('KeyValueRow', () => {
             icon: {
               name: IconName.Wifi,
               side: KeyValueRowFieldIconSides.Right,
+              testID: 'keyvaluerow-field-icon',
             },
           }}
           value={{ label: valueLabel }}
         />,
       );
-      expect(getAllByTestId(TESTID_KEYVALUEROW_FIELD_ICON)).toHaveLength(1);
+      expect(getAllByTestId('keyvaluerow-field-icon')).toHaveLength(1);
     });
 
     it('renders field icon on both sides when side is Both', () => {
@@ -112,22 +116,29 @@ describe('KeyValueRow', () => {
         <KeyValueRow
           field={{
             label: fieldLabel,
-            icon: { name: IconName.Wifi, side: KeyValueRowFieldIconSides.Both },
+            icon: {
+              name: IconName.Wifi,
+              side: KeyValueRowFieldIconSides.Both,
+              testID: 'keyvaluerow-field-icon',
+            },
           }}
           value={{ label: valueLabel }}
         />,
       );
-      expect(getAllByTestId(TESTID_KEYVALUEROW_FIELD_ICON)).toHaveLength(2);
+      expect(getAllByTestId('keyvaluerow-field-icon')).toHaveLength(2);
     });
 
     it('renders value icon when value icon prop is provided', () => {
       const { getAllByTestId } = render(
         <KeyValueRow
           field={{ label: fieldLabel }}
-          value={{ label: valueLabel, icon: { name: IconName.Wifi } }}
+          value={{
+            label: valueLabel,
+            icon: { name: IconName.Wifi, testID: 'keyvaluerow-value-icon' },
+          }}
         />,
       );
-      expect(getAllByTestId(TESTID_KEYVALUEROW_VALUE_ICON)).toHaveLength(1);
+      expect(getAllByTestId('keyvaluerow-value-icon')).toHaveLength(1);
     });
 
     it('renders value icon on both sides when side is Both', () => {
@@ -136,11 +147,15 @@ describe('KeyValueRow', () => {
           field={{ label: fieldLabel }}
           value={{
             label: valueLabel,
-            icon: { name: IconName.Wifi, side: KeyValueRowFieldIconSides.Both },
+            icon: {
+              name: IconName.Wifi,
+              side: KeyValueRowFieldIconSides.Both,
+              testID: 'keyvaluerow-value-icon',
+            },
           }}
         />,
       );
-      expect(getAllByTestId(TESTID_KEYVALUEROW_VALUE_ICON)).toHaveLength(2);
+      expect(getAllByTestId('keyvaluerow-value-icon')).toHaveLength(2);
     });
   });
 
