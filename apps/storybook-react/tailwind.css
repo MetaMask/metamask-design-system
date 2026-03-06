@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import '../../packages/design-system-tailwind-preset/src/theme.css';
+@import '../../packages/design-tokens/src/tailwind/theme.css';
 
 /* Scan the other packages with stories for tailwind class names */
 @source "../../packages/design-system-react";
