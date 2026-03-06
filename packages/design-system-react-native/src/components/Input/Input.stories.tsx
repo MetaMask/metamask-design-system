@@ -26,6 +26,9 @@ const meta: Meta<InputProps> = {
     placeholder: {
       control: 'text',
     },
+    value: {
+      control: 'text',
+    },
     twClassName: {
       control: 'text',
     },
@@ -38,6 +41,7 @@ type Story = StoryObj<InputProps>;
 
 export const Default: Story = {
   args: {
+    value: '',
     placeholder: 'Sample Placeholder',
   },
   render: (args) => <Input {...args} />,
@@ -49,17 +53,17 @@ export const Variant: Story = {
       <Input
         placeholder="BodyMd (default)"
         textVariant={TextVariant.BodyMd}
-        defaultValue="Sample text"
+        value="Sample text"
       />
       <Input
         placeholder="BodySm"
         textVariant={TextVariant.BodySm}
-        defaultValue="Sample text"
+        value="Sample text"
       />
       <Input
         placeholder="HeadingSm"
         textVariant={TextVariant.HeadingSm}
-        defaultValue="Sample text"
+        value="Sample text"
       />
     </View>
   ),
@@ -68,8 +72,8 @@ export const Variant: Story = {
 export const IsDisabled: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <Input placeholder="Enabled" defaultValue="Editable" />
-      <Input placeholder="Disabled" defaultValue="Not editable" isDisabled />
+      <Input placeholder="Enabled" value="Editable" />
+      <Input placeholder="Disabled" value="Not editable" isDisabled />
     </View>
   ),
 };
@@ -77,8 +81,8 @@ export const IsDisabled: Story = {
 export const IsReadonly: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <Input placeholder="Editable" defaultValue="" />
-      <Input placeholder="Readonly" defaultValue="Read-only value" isReadonly />
+      <Input placeholder="Editable" value="" />
+      <Input placeholder="Readonly" value="Read-only value" isReadonly />
     </View>
   ),
 };
@@ -88,12 +92,12 @@ export const IsStateStylesDisabled: Story = {
     <View style={{ gap: 16 }}>
       <Input
         placeholder="With state styles (default)"
-        defaultValue="Disabled with opacity"
+        value="Disabled with opacity"
         isDisabled
       />
       <Input
         placeholder="State styles disabled"
-        defaultValue="Disabled, full opacity"
+        value="Disabled, full opacity"
         isDisabled
         isStateStylesDisabled
       />

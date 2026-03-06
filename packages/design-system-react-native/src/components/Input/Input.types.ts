@@ -2,7 +2,14 @@ import type { TextInputProps } from 'react-native';
 
 import type { TextVariant } from '../../types';
 
-export type InputProps = Omit<TextInputProps, 'editable'> & {
+export type InputProps = Omit<
+  TextInputProps,
+  'editable' | 'value' | 'defaultValue'
+> & {
+  /**
+   * Controlled value for Input.
+   */
+  value: string;
   /**
    * Optional enum to select between Typography variants.
    *
