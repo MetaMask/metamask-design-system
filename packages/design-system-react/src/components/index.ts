@@ -49,6 +49,9 @@ export {
 } from './BadgeWrapper';
 export type { BadgeWrapperCustomPosition } from './BadgeWrapper';
 
+export { BannerBase } from './BannerBase';
+export type { BannerBaseProps } from './BannerBase';
+
 export { Blockies } from './temp-components/Blockies';
 export type { BlockiesProps } from './temp-components/Blockies';
 

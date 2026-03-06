@@ -1,0 +1,336 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as BannerBaseStories from './BannerBase.stories';
+
+# BannerBase
+
+BannerBase is a foundational banner container with optional title, description, action button, start accessory, and close affordance.
+
+<Canvas of={BannerBaseStories.Default} />
+
+## Props
+
+### `title`
+
+Optional title rendered at the top of the banner body. Use `titleProps` to pass props to the `Text` component when `title` is a string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>title</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>titleProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerBaseStories.Title} />
+
+### `description`
+
+Optional description rendered below the title. Use `descriptionProps` to pass props to the `Text` component when `description` is a string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>description</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>descriptionProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerBaseStories.Description} />
+
+### `children`
+
+Optional content rendered below the description. If a string is passed, BannerBase wraps it in `Text`. Use `childrenWrapperProps` to pass props to the `Text` wrapper when `children` is a string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>children</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>childrenWrapperProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerBaseStories.Children} />
+
+### `actionButtonOnClick`
+
+Optional click handler for the action button.
+When provided, `actionButtonLabel` is required. Use `actionButtonProps` to pass additional props to the action `Button`; `variant` is not supported and defaults to primary.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>actionButtonOnClick</code>
+      </td>
+      <td align="left">
+        <code>MouseEventHandler&lt;HTMLButtonElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>actionButtonLabel</code>
+      </td>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Conditionally (required when <code>actionButtonOnClick</code> is provided)</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>actionButtonProps</code>
+      </td>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;ButtonProps&gt;, 'children' | 'onClick' | 'variant'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerBaseStories.ActionButtonOnClick} />
+
+### `onClose`
+
+Optional close callback. If passed, a close button is shown. Use `closeButtonProps` to pass additional props to the close `ButtonIcon`, including `data-testid` when needed for testing.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>onClose</code>
+      </td>
+      <td align="left">
+        <code>MouseEventHandler&lt;HTMLButtonElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>closeButtonProps</code>
+      </td>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;ButtonIconProps&gt;, 'iconName' | 'onClick'&gt; &amp; {'{'} onClick?: MouseEventHandler&lt;HTMLButtonElement&gt; {'}'}</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerBaseStories.OnClose} />
+
+### `startAccessory`
+
+Optional node rendered at the start of the banner.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>startAccessory</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerBaseStories.StartAccessory} />
+
+### `className`
+
+Optional Tailwind classes merged onto the root container.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>className</code>
+      </td>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `style`
+
+Use `style` for dynamic values or styles not available through Box props and `className`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>style</code>
+      </td>
+      <td align="left">
+        <code>CSSProperties</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={BannerBaseStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
