@@ -58,7 +58,7 @@ export const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
         isInverse &&
           isDanger && ['hover:bg-default-hover', 'active:bg-default-pressed'],
       ],
-      'focus-visible:outline-none focus-visible:ring-0',
+      'focus-visible:ring-0 focus-visible:outline-none',
       isInverse
         ? 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background-default'
         : 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
