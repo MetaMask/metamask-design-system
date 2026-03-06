@@ -226,6 +226,11 @@ const config = createConfig([
       'packages/design-system-react/src/**',
       'apps/storybook-react/stories/**',
     ],
+    settings: {
+      'better-tailwindcss': {
+        entryPoint: 'apps/storybook-react/tailwind.css',
+      },
+    },
     plugins: {
       'better-tailwindcss': tailwind,
     },
@@ -239,6 +244,12 @@ const config = createConfig([
       'packages/design-system-react-native/src/**',
       'apps/storybook-react-native/stories/**',
     ],
+    settings: {
+      'better-tailwindcss': {
+        tailwindConfig:
+          'apps/storybook-react-native/tailwind-intellisense.config.js',
+      },
+    },
     plugins: {
       'better-tailwindcss': tailwind,
     },
