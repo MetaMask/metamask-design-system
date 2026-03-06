@@ -167,3 +167,6 @@ export type {
 
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';
 export type { ButtonHeroProps } from './ButtonHero';
+
+export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
+export type { BannerAlertProps } from './BannerAlert';

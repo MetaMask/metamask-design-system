@@ -18,3 +18,9 @@ export {
 
 // BannerBase types (ADR-0004)
 export { type BannerBasePropsShared } from './types/BannerBase';
+
+// BannerAlert types (ADR-0003 + ADR-0004)
+export {
+  BannerAlertSeverity,
+  type BannerAlertPropsShared,
+} from './types/BannerAlert';
