@@ -87,6 +87,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Input/Input.stories.tsx": require("../../../packages/design-system-react-native/src/components/Input/Input.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Label/Label.stories.tsx": require("../../../packages/design-system-react-native/src/components/Label/Label.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/ListItem/ListItem.stories.tsx": require("../../../packages/design-system-react-native/src/components/ListItem/ListItem.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/RadioButton/RadioButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/RadioButton/RadioButton.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/SensitiveText/SensitiveText.stories.tsx": require("../../../packages/design-system-react-native/src/components/SensitiveText/SensitiveText.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Skeleton/Skeleton.stories.tsx": require("../../../packages/design-system-react-native/src/components/Skeleton/Skeleton.stories.tsx"),
