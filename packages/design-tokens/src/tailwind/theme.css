@@ -2,13 +2,8 @@
 @import '../css/typography.css';
 @import '../css/shadow.css';
 
-@theme {
-  --font-size-*: initial;
-  --font-weight-*: initial;
-  --font-sans: var(--font-family-default);
-  --color-*: initial;
-  --shadow-*: initial;
-
+@theme inline {
+  /* Essential Tailwind colors required for basic utilities */
   --color-inherit: inherit;
   --color-current: currentColor;
   --color-transparent: transparent;
@@ -174,97 +169,15 @@
   /* For critical/danger drop shadow color (red50-20% | red300-20%) */
   --color-shadow-error: #ca354266;
 
-  --shadow-xs: 0 2px 4px 0 #0000001a;
-  --shadow-sm: 0 2px 8px 0 #0000001a;
-  --shadow-md: 0 2px 16px 0 #0000001a;
-  --shadow-lg: 0 2px 40px 0 #0000001a;
-}
-
-/**
- * Light Theme Colors
- * Explicitly scoped so .light resets variables when nested inside .dark.
- * The :root values come from @theme above — this block only needs
- * the class/attribute selectors for runtime theme switching.
- */
-[data-theme='light'],
-.light {
-  --color-background-default: var(--brand-colors-grey-grey000);
-  --color-background-section: var(--brand-colors-grey-grey050);
-  --color-background-subsection: var(--brand-colors-grey-grey000);
-  --color-background-alternative: var(--brand-colors-grey-grey050);
-  --color-background-muted: #b4b4b528;
-  --color-background-muted-hover: #b4b4b53d;
-  --color-background-muted-pressed: #b4b4b552;
-  --color-background-default-hover: var(--brand-colors-grey-grey050);
-  --color-background-default-pressed: var(--brand-colors-grey-grey100);
-  --color-background-alternative-hover: #ebedf1;
-  --color-background-alternative-pressed: #e1e4ea;
-  --color-background-hover: #b4b4b528;
-  --color-background-pressed: #b4b4b53d;
-  --color-text-default: var(--brand-colors-grey-grey900);
-  --color-text-alternative: var(--brand-colors-grey-grey500);
-  --color-text-muted: var(--brand-colors-grey-grey200);
-  --color-icon-default: var(--brand-colors-grey-grey900);
-  --color-icon-default-hover: #2a2b2c;
-  --color-icon-default-pressed: #414243;
-  --color-icon-alternative: var(--brand-colors-grey-grey500);
-  --color-icon-muted: var(--brand-colors-grey-grey200);
-  --color-icon-inverse: var(--brand-colors-grey-grey000);
-  --color-border-default: var(--brand-colors-grey-grey400);
-  --color-border-muted: #b4b4b566;
-  --color-overlay-default: #0a0d135c;
-  --color-overlay-alternative: #0a0d1392;
-  --color-overlay-inverse: var(--brand-colors-grey-grey000);
-  --color-primary-default: var(--brand-colors-blue-blue500);
-  --color-primary-alternative: var(--brand-colors-blue-blue600);
-  --color-primary-muted: #4459ff1a;
-  --color-primary-inverse: var(--brand-colors-grey-grey000);
-  --color-primary-default-hover: #384df5;
-  --color-primary-default-pressed: #2b3eda;
-  --color-primary-muted-hover: #4459ff26;
-  --color-primary-muted-pressed: #4459ff33;
-  --color-error-default: var(--brand-colors-red-red500);
-  --color-error-alternative: var(--brand-colors-red-red600);
-  --color-error-muted: #ca35421a;
-  --color-error-inverse: var(--brand-colors-grey-grey000);
-  --color-error-default-hover: #ba313d;
-  --color-error-default-pressed: #9a2832;
-  --color-error-muted-hover: #ca354226;
-  --color-error-muted-pressed: #ca354233;
-  --color-warning-default: var(--brand-colors-yellow-yellow500);
-  --color-warning-muted: #9a63001a;
-  --color-warning-inverse: var(--brand-colors-grey-grey000);
-  --color-warning-default-hover: #855500;
-  --color-warning-default-pressed: #5c3b00;
-  --color-warning-muted-hover: #9a630026;
-  --color-warning-muted-pressed: #9a630033;
-  --color-success-default: var(--brand-colors-lime-lime500);
-  --color-success-muted: #457a391a;
-  --color-success-inverse: var(--brand-colors-grey-grey000);
-  --color-success-default-hover: #3d6c32;
-  --color-success-default-pressed: #2d5025;
-  --color-success-muted-hover: #457a3926;
-  --color-success-muted-pressed: #457a3933;
-  --color-info-default: var(--brand-colors-blue-blue500);
-  --color-info-muted: #4459ff1a;
-  --color-info-inverse: var(--brand-colors-grey-grey000);
-  --color-accent01-light: var(--brand-colors-orange-orange200);
-  --color-accent01-normal: var(--brand-colors-orange-orange400);
-  --color-accent01-dark: var(--brand-colors-orange-orange700);
-  --color-accent02-light: var(--brand-colors-purple-purple100);
-  --color-accent02-normal: var(--brand-colors-purple-purple300);
-  --color-accent02-dark: var(--brand-colors-purple-purple800);
-  --color-accent03-light: var(--brand-colors-lime-lime050);
-  --color-accent03-normal: var(--brand-colors-lime-lime100);
-  --color-accent03-dark: var(--brand-colors-lime-lime700);
-  --color-accent04-light: var(--brand-colors-indigo-indigo100);
-  --color-accent04-normal: var(--brand-colors-indigo-indigo200);
-  --color-accent04-dark: var(--brand-colors-indigo-indigo800);
-  --color-flask-default: var(--brand-colors-purple-purple500);
-  --color-flask-inverse: var(--brand-colors-grey-grey000);
-  --color-shadow-default: #0000001a;
-  --color-shadow-primary: #4459ff33;
-  --color-shadow-error: #ca354266;
+  /* Box Shadows */
+  --box-shadow-xs: var(--shadow-size-xs)
+    var(--shadow-color, var(--color-shadow-default));
+  --box-shadow-sm: var(--shadow-size-sm)
+    var(--shadow-color, var(--color-shadow-default));
+  --box-shadow-md: var(--shadow-size-md)
+    var(--shadow-color, var(--color-shadow-default));
+  --box-shadow-lg: var(--shadow-size-lg)
+    var(--shadow-color, var(--color-shadow-default));
 }
 
 /**
@@ -493,276 +406,99 @@
 }
 
 /* Legacy typography classnames parity with the old preset */
-@utility text-s-display-lg {
-  font-size: var(--typography-s-display-lg-font-size);
-}
-@utility text-s-display-md {
-  font-size: var(--typography-s-display-md-font-size);
-}
-@utility text-s-heading-lg {
-  font-size: var(--typography-s-heading-lg-font-size);
-}
-@utility text-s-heading-md {
-  font-size: var(--typography-s-heading-md-font-size);
-}
-@utility text-s-heading-sm {
-  font-size: var(--typography-s-heading-sm-font-size);
-}
-@utility text-s-body-lg {
-  font-size: var(--typography-s-body-lg-regular-font-size);
-}
-@utility text-s-body-md {
-  font-size: var(--typography-s-body-md-font-size);
-}
-@utility text-s-body-sm {
-  font-size: var(--typography-s-body-sm-font-size);
-}
-@utility text-s-body-xs {
-  font-size: var(--typography-s-body-xs-font-size);
-}
-@utility text-s-page-heading {
-  font-size: var(--typography-s-page-heading-font-size);
-}
-@utility text-s-section-heading {
-  font-size: var(--typography-s-section-heading-font-size);
-}
-@utility text-s-button-label-md {
-  font-size: var(--typography-s-button-label-md-font-size);
-}
-@utility text-s-button-label-lg {
-  font-size: var(--typography-s-button-label-lg-font-size);
-}
-@utility text-s-amount-display-lg {
-  font-size: var(--typography-s-amount-display-lg-font-size);
-}
-@utility text-l-display-lg {
-  font-size: var(--typography-l-display-lg-font-size);
-}
-@utility text-l-display-md {
-  font-size: var(--typography-l-display-md-font-size);
-}
-@utility text-l-heading-lg {
-  font-size: var(--typography-l-heading-lg-font-size);
-}
-@utility text-l-heading-md {
-  font-size: var(--typography-l-heading-md-font-size);
-}
-@utility text-l-heading-sm {
-  font-size: var(--typography-l-heading-sm-font-size);
-}
-@utility text-l-body-lg {
-  font-size: var(--typography-l-body-lg-medium-font-size);
-}
-@utility text-l-body-md {
-  font-size: var(--typography-l-body-md-font-size);
-}
-@utility text-l-body-sm {
-  font-size: var(--typography-l-body-sm-font-size);
-}
-@utility text-l-body-xs {
-  font-size: var(--typography-l-body-xs-font-size);
-}
-@utility text-l-page-heading {
-  font-size: var(--typography-l-page-heading-font-size);
-}
-@utility text-l-section-heading {
-  font-size: var(--typography-l-section-heading-font-size);
-}
-@utility text-l-button-label-md {
-  font-size: var(--typography-l-button-label-md-font-size);
-}
-@utility text-l-button-label-lg {
-  font-size: var(--typography-l-button-label-lg-font-size);
-}
-@utility text-l-amount-display-lg {
-  font-size: var(--typography-l-amount-display-lg-font-size);
-}
+@utility text-s-display-lg { font-size: var(--typography-s-display-lg-font-size); }
+@utility text-s-display-md { font-size: var(--typography-s-display-md-font-size); }
+@utility text-s-heading-lg { font-size: var(--typography-s-heading-lg-font-size); }
+@utility text-s-heading-md { font-size: var(--typography-s-heading-md-font-size); }
+@utility text-s-heading-sm { font-size: var(--typography-s-heading-sm-font-size); }
+@utility text-s-body-lg { font-size: var(--typography-s-body-lg-regular-font-size); }
+@utility text-s-body-md { font-size: var(--typography-s-body-md-font-size); }
+@utility text-s-body-sm { font-size: var(--typography-s-body-sm-font-size); }
+@utility text-s-body-xs { font-size: var(--typography-s-body-xs-font-size); }
+@utility text-s-page-heading { font-size: var(--typography-s-page-heading-font-size); }
+@utility text-s-section-heading { font-size: var(--typography-s-section-heading-font-size); }
+@utility text-s-button-label-md { font-size: var(--typography-s-button-label-md-font-size); }
+@utility text-s-button-label-lg { font-size: var(--typography-s-button-label-lg-font-size); }
+@utility text-s-amount-display-lg { font-size: var(--typography-s-amount-display-lg-font-size); }
+@utility text-l-display-lg { font-size: var(--typography-l-display-lg-font-size); }
+@utility text-l-display-md { font-size: var(--typography-l-display-md-font-size); }
+@utility text-l-heading-lg { font-size: var(--typography-l-heading-lg-font-size); }
+@utility text-l-heading-md { font-size: var(--typography-l-heading-md-font-size); }
+@utility text-l-heading-sm { font-size: var(--typography-l-heading-sm-font-size); }
+@utility text-l-body-lg { font-size: var(--typography-l-body-lg-medium-font-size); }
+@utility text-l-body-md { font-size: var(--typography-l-body-md-font-size); }
+@utility text-l-body-sm { font-size: var(--typography-l-body-sm-font-size); }
+@utility text-l-body-xs { font-size: var(--typography-l-body-xs-font-size); }
+@utility text-l-page-heading { font-size: var(--typography-l-page-heading-font-size); }
+@utility text-l-section-heading { font-size: var(--typography-l-section-heading-font-size); }
+@utility text-l-button-label-md { font-size: var(--typography-l-button-label-md-font-size); }
+@utility text-l-button-label-lg { font-size: var(--typography-l-button-label-lg-font-size); }
+@utility text-l-amount-display-lg { font-size: var(--typography-l-amount-display-lg-font-size); }
 
-@utility leading-s-display-lg {
-  line-height: var(--typography-s-display-lg-line-height);
-}
-@utility leading-s-display-md {
-  line-height: var(--typography-s-display-md-line-height);
-}
-@utility leading-s-heading-lg {
-  line-height: var(--typography-s-heading-lg-line-height);
-}
-@utility leading-s-heading-md {
-  line-height: var(--typography-s-heading-md-line-height);
-}
-@utility leading-s-heading-sm {
-  line-height: var(--typography-s-heading-sm-line-height);
-}
-@utility leading-s-body-lg {
-  line-height: var(--typography-s-body-lg-regular-line-height);
-}
-@utility leading-s-body-md {
-  line-height: var(--typography-s-body-md-line-height);
-}
-@utility leading-s-body-sm {
-  line-height: var(--typography-s-body-sm-line-height);
-}
-@utility leading-s-body-xs {
-  line-height: var(--typography-s-body-xs-line-height);
-}
-@utility leading-s-page-heading {
-  line-height: var(--typography-s-page-heading-line-height);
-}
-@utility leading-s-section-heading {
-  line-height: var(--typography-s-section-heading-line-height);
-}
-@utility leading-s-button-label-md {
-  line-height: var(--typography-s-button-label-md-line-height);
-}
-@utility leading-s-button-label-lg {
-  line-height: var(--typography-s-button-label-lg-line-height);
-}
-@utility leading-s-amount-display-lg {
-  line-height: var(--typography-s-amount-display-lg-line-height);
-}
-@utility leading-l-display-lg {
-  line-height: var(--typography-l-display-lg-line-height);
-}
-@utility leading-l-display-md {
-  line-height: var(--typography-l-display-md-line-height);
-}
-@utility leading-l-heading-lg {
-  line-height: var(--typography-l-heading-lg-line-height);
-}
-@utility leading-l-heading-md {
-  line-height: var(--typography-l-heading-md-line-height);
-}
-@utility leading-l-heading-sm {
-  line-height: var(--typography-l-heading-sm-line-height);
-}
-@utility leading-l-body-lg {
-  line-height: var(--typography-l-body-lg-medium-line-height);
-}
-@utility leading-l-body-md {
-  line-height: var(--typography-l-body-md-line-height);
-}
-@utility leading-l-body-sm {
-  line-height: var(--typography-l-body-sm-line-height);
-}
-@utility leading-l-body-xs {
-  line-height: var(--typography-l-body-xs-line-height);
-}
-@utility leading-l-page-heading {
-  line-height: var(--typography-l-page-heading-line-height);
-}
-@utility leading-l-section-heading {
-  line-height: var(--typography-l-section-heading-line-height);
-}
-@utility leading-l-button-label-md {
-  line-height: var(--typography-l-button-label-md-line-height);
-}
-@utility leading-l-button-label-lg {
-  line-height: var(--typography-l-button-label-lg-line-height);
-}
-@utility leading-l-amount-display-lg {
-  line-height: var(--typography-l-amount-display-lg-line-height);
-}
+@utility leading-s-display-lg { line-height: var(--typography-s-display-lg-line-height); }
+@utility leading-s-display-md { line-height: var(--typography-s-display-md-line-height); }
+@utility leading-s-heading-lg { line-height: var(--typography-s-heading-lg-line-height); }
+@utility leading-s-heading-md { line-height: var(--typography-s-heading-md-line-height); }
+@utility leading-s-heading-sm { line-height: var(--typography-s-heading-sm-line-height); }
+@utility leading-s-body-lg { line-height: var(--typography-s-body-lg-regular-line-height); }
+@utility leading-s-body-md { line-height: var(--typography-s-body-md-line-height); }
+@utility leading-s-body-sm { line-height: var(--typography-s-body-sm-line-height); }
+@utility leading-s-body-xs { line-height: var(--typography-s-body-xs-line-height); }
+@utility leading-s-page-heading { line-height: var(--typography-s-page-heading-line-height); }
+@utility leading-s-section-heading { line-height: var(--typography-s-section-heading-line-height); }
+@utility leading-s-button-label-md { line-height: var(--typography-s-button-label-md-line-height); }
+@utility leading-s-button-label-lg { line-height: var(--typography-s-button-label-lg-line-height); }
+@utility leading-s-amount-display-lg { line-height: var(--typography-s-amount-display-lg-line-height); }
+@utility leading-l-display-lg { line-height: var(--typography-l-display-lg-line-height); }
+@utility leading-l-display-md { line-height: var(--typography-l-display-md-line-height); }
+@utility leading-l-heading-lg { line-height: var(--typography-l-heading-lg-line-height); }
+@utility leading-l-heading-md { line-height: var(--typography-l-heading-md-line-height); }
+@utility leading-l-heading-sm { line-height: var(--typography-l-heading-sm-line-height); }
+@utility leading-l-body-lg { line-height: var(--typography-l-body-lg-medium-line-height); }
+@utility leading-l-body-md { line-height: var(--typography-l-body-md-line-height); }
+@utility leading-l-body-sm { line-height: var(--typography-l-body-sm-line-height); }
+@utility leading-l-body-xs { line-height: var(--typography-l-body-xs-line-height); }
+@utility leading-l-page-heading { line-height: var(--typography-l-page-heading-line-height); }
+@utility leading-l-section-heading { line-height: var(--typography-l-section-heading-line-height); }
+@utility leading-l-button-label-md { line-height: var(--typography-l-button-label-md-line-height); }
+@utility leading-l-button-label-lg { line-height: var(--typography-l-button-label-lg-line-height); }
+@utility leading-l-amount-display-lg { line-height: var(--typography-l-amount-display-lg-line-height); }
 
-@utility tracking-s-display-lg {
-  letter-spacing: var(--typography-s-display-lg-letter-spacing);
-}
-@utility tracking-s-display-md {
-  letter-spacing: var(--typography-s-display-md-letter-spacing);
-}
-@utility tracking-s-heading-lg {
-  letter-spacing: var(--typography-s-heading-lg-letter-spacing);
-}
-@utility tracking-s-heading-md {
-  letter-spacing: var(--typography-s-heading-md-letter-spacing);
-}
-@utility tracking-s-heading-sm {
-  letter-spacing: var(--typography-s-heading-sm-letter-spacing);
-}
-@utility tracking-s-body-lg {
-  letter-spacing: var(--typography-s-body-lg-regular-letter-spacing);
-}
-@utility tracking-s-body-md {
-  letter-spacing: var(--typography-s-body-md-letter-spacing);
-}
-@utility tracking-s-body-sm {
-  letter-spacing: var(--typography-s-body-sm-letter-spacing);
-}
-@utility tracking-s-body-xs {
-  letter-spacing: var(--typography-s-body-xs-letter-spacing);
-}
-@utility tracking-s-page-heading {
-  letter-spacing: var(--typography-s-page-heading-letter-spacing);
-}
-@utility tracking-s-section-heading {
-  letter-spacing: var(--typography-s-section-heading-letter-spacing);
-}
-@utility tracking-s-button-label-md {
-  letter-spacing: var(--typography-s-button-label-md-letter-spacing);
-}
-@utility tracking-s-button-label-lg {
-  letter-spacing: var(--typography-s-button-label-lg-letter-spacing);
-}
-@utility tracking-s-amount-display-lg {
-  letter-spacing: var(--typography-s-amount-display-lg-letter-spacing);
-}
-@utility tracking-l-display-lg {
-  letter-spacing: var(--typography-l-display-lg-letter-spacing);
-}
-@utility tracking-l-display-md {
-  letter-spacing: var(--typography-l-display-md-letter-spacing);
-}
-@utility tracking-l-heading-lg {
-  letter-spacing: var(--typography-l-heading-lg-letter-spacing);
-}
-@utility tracking-l-heading-md {
-  letter-spacing: var(--typography-l-heading-md-letter-spacing);
-}
-@utility tracking-l-heading-sm {
-  letter-spacing: var(--typography-l-heading-sm-letter-spacing);
-}
-@utility tracking-l-body-lg {
-  letter-spacing: var(--typography-l-body-lg-medium-letter-spacing);
-}
-@utility tracking-l-body-md {
-  letter-spacing: var(--typography-l-body-md-letter-spacing);
-}
-@utility tracking-l-body-sm {
-  letter-spacing: var(--typography-l-body-sm-letter-spacing);
-}
-@utility tracking-l-body-xs {
-  letter-spacing: var(--typography-l-body-xs-letter-spacing);
-}
-@utility tracking-l-page-heading {
-  letter-spacing: var(--typography-l-page-heading-letter-spacing);
-}
-@utility tracking-l-section-heading {
-  letter-spacing: var(--typography-l-section-heading-letter-spacing);
-}
-@utility tracking-l-button-label-md {
-  letter-spacing: var(--typography-l-button-label-md-letter-spacing);
-}
-@utility tracking-l-button-label-lg {
-  letter-spacing: var(--typography-l-button-label-lg-letter-spacing);
-}
-@utility tracking-l-amount-display-lg {
-  letter-spacing: var(--typography-l-amount-display-lg-letter-spacing);
-}
+@utility tracking-s-display-lg { letter-spacing: var(--typography-s-display-lg-letter-spacing); }
+@utility tracking-s-display-md { letter-spacing: var(--typography-s-display-md-letter-spacing); }
+@utility tracking-s-heading-lg { letter-spacing: var(--typography-s-heading-lg-letter-spacing); }
+@utility tracking-s-heading-md { letter-spacing: var(--typography-s-heading-md-letter-spacing); }
+@utility tracking-s-heading-sm { letter-spacing: var(--typography-s-heading-sm-letter-spacing); }
+@utility tracking-s-body-lg { letter-spacing: var(--typography-s-body-lg-regular-letter-spacing); }
+@utility tracking-s-body-md { letter-spacing: var(--typography-s-body-md-letter-spacing); }
+@utility tracking-s-body-sm { letter-spacing: var(--typography-s-body-sm-letter-spacing); }
+@utility tracking-s-body-xs { letter-spacing: var(--typography-s-body-xs-letter-spacing); }
+@utility tracking-s-page-heading { letter-spacing: var(--typography-s-page-heading-letter-spacing); }
+@utility tracking-s-section-heading { letter-spacing: var(--typography-s-section-heading-letter-spacing); }
+@utility tracking-s-button-label-md { letter-spacing: var(--typography-s-button-label-md-letter-spacing); }
+@utility tracking-s-button-label-lg { letter-spacing: var(--typography-s-button-label-lg-letter-spacing); }
+@utility tracking-s-amount-display-lg { letter-spacing: var(--typography-s-amount-display-lg-letter-spacing); }
+@utility tracking-l-display-lg { letter-spacing: var(--typography-l-display-lg-letter-spacing); }
+@utility tracking-l-display-md { letter-spacing: var(--typography-l-display-md-letter-spacing); }
+@utility tracking-l-heading-lg { letter-spacing: var(--typography-l-heading-lg-letter-spacing); }
+@utility tracking-l-heading-md { letter-spacing: var(--typography-l-heading-md-letter-spacing); }
+@utility tracking-l-heading-sm { letter-spacing: var(--typography-l-heading-sm-letter-spacing); }
+@utility tracking-l-body-lg { letter-spacing: var(--typography-l-body-lg-medium-letter-spacing); }
+@utility tracking-l-body-md { letter-spacing: var(--typography-l-body-md-letter-spacing); }
+@utility tracking-l-body-sm { letter-spacing: var(--typography-l-body-sm-letter-spacing); }
+@utility tracking-l-body-xs { letter-spacing: var(--typography-l-body-xs-letter-spacing); }
+@utility tracking-l-page-heading { letter-spacing: var(--typography-l-page-heading-letter-spacing); }
+@utility tracking-l-section-heading { letter-spacing: var(--typography-l-section-heading-letter-spacing); }
+@utility tracking-l-button-label-md { letter-spacing: var(--typography-l-button-label-md-letter-spacing); }
+@utility tracking-l-button-label-lg { letter-spacing: var(--typography-l-button-label-lg-letter-spacing); }
+@utility tracking-l-amount-display-lg { letter-spacing: var(--typography-l-amount-display-lg-letter-spacing); }
 
-@utility font-default {
-  font-family: var(--font-family-default);
-}
-@utility font-accent {
-  font-family: var(--font-family-accent);
-}
-@utility font-hero {
-  font-family: var(--font-family-hero);
-}
-@utility font-regular {
-  font-weight: var(--font-weight-regular);
-}
-@utility font-medium {
-  font-weight: var(--font-weight-medium);
-}
-@utility font-bold {
-  font-weight: var(--font-weight-bold);
-}
+@utility font-default { font-family: var(--font-family-default); }
+@utility font-accent { font-family: var(--font-family-accent); }
+@utility font-hero { font-family: var(--font-family-hero); }
+@utility font-regular { font-weight: var(--font-weight-regular); }
+
+/* Legacy shadow color utilities parity with old shadow plugin */
+@utility shadow-default { --shadow-color: var(--color-shadow-default) !important; }
+@utility shadow-primary { --shadow-color: var(--color-shadow-primary) !important; }
+@utility shadow-error { --shadow-color: var(--color-shadow-error) !important; }
