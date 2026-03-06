@@ -23,27 +23,12 @@ import {
 
 ### `iconName`
 
-Icon to render above the label.
+Icon rendered above the label. Use `iconProps` to pass props to the internal `Icon` component for test IDs and accessibility metadata.
 
-| TYPE       | REQUIRED | DEFAULT     |
-| ---------- | -------- | ----------- |
-| `IconName` | Yes      | `undefined` |
-
-### `label`
-
-Text rendered below the icon.
-
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | Yes      | `undefined` |
-
-### `iconProps`
-
-Optional props passed to the internal `Icon` component. Use this for test IDs and accessibility metadata without exposing a default internal test ID.
-
-| TYPE                                                    | REQUIRED | DEFAULT     |
-| ------------------------------------------------------- | -------- | ----------- |
-| `Omit<Partial<IconProps>, 'name' \| 'size' \| 'color'>` | No       | `undefined` |
+| PROP        | TYPE                                                     | REQUIRED | DEFAULT     |
+| ----------- | -------------------------------------------------------- | -------- | ----------- |
+| `iconName`  | `IconName`                                               | Yes      | `undefined` |
+| `iconProps` | `Omit<Partial<IconProps>, 'name' \| 'size' \| 'color'>` | No       | `undefined` |
 
 ```tsx
 <MainActionButton
@@ -53,13 +38,14 @@ Optional props passed to the internal `Icon` component. Use this for test IDs an
 />
 ```
 
-### `labelProps`
+### `label`
 
-Optional props passed to the internal `Text` component. Use this for test IDs and accessibility metadata without overriding the component typography defaults.
+Text rendered below the icon. Use `labelProps` to pass props to the internal `Text` component for test IDs and accessibility metadata without overriding typography defaults.
 
-| TYPE                                                                                            | REQUIRED | DEFAULT     |
-| ----------------------------------------------------------------------------------------------- | -------- | ----------- |
-| `Omit<Partial<TextProps>, 'children' \| 'variant' \| 'fontWeight' \| 'color' \| 'twClassName'>` | No       | `undefined` |
+| PROP         | TYPE                                                                                                  | REQUIRED | DEFAULT     |
+| ------------ | ----------------------------------------------------------------------------------------------------- | -------- | ----------- |
+| `label`      | `string`                                                                                              | Yes      | `undefined` |
+| `labelProps` | `Omit<Partial<TextProps>, 'children' \| 'variant' \| 'fontWeight' \| 'color' \| 'twClassName'>`    | No       | `undefined` |
 
 ```tsx
 <MainActionButton
