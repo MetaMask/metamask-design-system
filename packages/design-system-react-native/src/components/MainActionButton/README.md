@@ -25,9 +25,9 @@ import {
 
 Icon rendered above the label. Use `iconProps` to pass props to the internal `Icon` component for test IDs and accessibility metadata.
 
-| PROP        | TYPE                                                     | REQUIRED | DEFAULT     |
-| ----------- | -------------------------------------------------------- | -------- | ----------- |
-| `iconName`  | `IconName`                                               | Yes      | `undefined` |
+| PROP        | TYPE                                                    | REQUIRED | DEFAULT     |
+| ----------- | ------------------------------------------------------- | -------- | ----------- |
+| `iconName`  | `IconName`                                              | Yes      | `undefined` |
 | `iconProps` | `Omit<Partial<IconProps>, 'name' \| 'size' \| 'color'>` | No       | `undefined` |
 
 ```tsx
@@ -42,10 +42,10 @@ Icon rendered above the label. Use `iconProps` to pass props to the internal `Ic
 
 Text rendered below the icon. Use `labelProps` to pass props to the internal `Text` component for test IDs and accessibility metadata without overriding typography defaults.
 
-| PROP         | TYPE                                                                                                  | REQUIRED | DEFAULT     |
-| ------------ | ----------------------------------------------------------------------------------------------------- | -------- | ----------- |
-| `label`      | `string`                                                                                              | Yes      | `undefined` |
-| `labelProps` | `Omit<Partial<TextProps>, 'children' \| 'variant' \| 'fontWeight' \| 'color' \| 'twClassName'>`    | No       | `undefined` |
+| PROP         | TYPE                                                                                            | REQUIRED | DEFAULT     |
+| ------------ | ----------------------------------------------------------------------------------------------- | -------- | ----------- |
+| `label`      | `string`                                                                                        | Yes      | `undefined` |
+| `labelProps` | `Omit<Partial<TextProps>, 'children' \| 'variant' \| 'fontWeight' \| 'color' \| 'twClassName'>` | No       | `undefined` |
 
 ```tsx
 <MainActionButton
