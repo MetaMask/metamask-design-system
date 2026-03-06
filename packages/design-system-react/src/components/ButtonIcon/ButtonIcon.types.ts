@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import type { ButtonIconSize } from '../../types';
+import type { ButtonIconSize, ButtonIconVariant } from '../../types';
 import type { IconName, IconProps } from '../Icon';
 
 export type ButtonIconProps = ComponentProps<'button'> & {
@@ -23,17 +23,11 @@ export type ButtonIconProps = ComponentProps<'button'> & {
    */
   isDisabled?: boolean;
   /**
-   * Optional prop that when true, applies inverse styling to the button
+   * Optional prop to control the visual variant of the button.
    *
-   * @default false
+   * @default ButtonIconVariant.Default
    */
-  isInverse?: boolean;
-  /**
-   * Optional prop that when true, applies floating/contained styling to the button
-   *
-   * @default false
-   */
-  isFloating?: boolean;
+  variant?: ButtonIconVariant;
   /**
    * Optional prop to control the size of the button
    *

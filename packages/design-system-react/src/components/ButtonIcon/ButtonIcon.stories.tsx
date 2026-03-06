@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { ButtonIconSize } from '../../types';
+import { ButtonIconSize, ButtonIconVariant } from '../../types';
 import { IconName } from '../Icon';
 
 import { ButtonIcon } from './ButtonIcon';
@@ -32,15 +32,11 @@ const meta: Meta<typeof ButtonIcon> = {
       control: 'boolean',
       description: 'Optional prop that when true, disables the button',
     },
-    isInverse: {
-      control: 'boolean',
-      description:
-        'Optional prop that when true, applies inverse styling to the button',
-    },
-    isFloating: {
-      control: 'boolean',
-      description:
-        'Optional prop that when true, applies floating/contained styling to the button',
+    variant: {
+      control: 'select',
+      options: Object.keys(ButtonIconVariant),
+      mapping: ButtonIconVariant,
+      description: 'Optional prop to control the visual variant of the button',
     },
     className: {
       control: 'text',
@@ -87,18 +83,26 @@ export const Size: Story = {
   ),
 };
 
-export const IsFloating: Story = {
+export const Floating: Story = {
   render: () => (
     <div className="flex gap-2">
-      <ButtonIcon iconName={IconName.Close} isFloating ariaLabel="Close" />
+      <ButtonIcon
+        iconName={IconName.Close}
+        variant={ButtonIconVariant.Floating}
+        ariaLabel="Close"
+      />
     </div>
   ),
 };
 
-export const IsInverse: Story = {
+export const Filled: Story = {
   render: () => (
-    <div className="bg-primary-default p-4">
-      <ButtonIcon iconName={IconName.Close} isInverse ariaLabel="Close" />
+    <div className="flex gap-2">
+      <ButtonIcon
+        iconName={IconName.Close}
+        variant={ButtonIconVariant.Filled}
+        ariaLabel="Close"
+      />
     </div>
   ),
 };

@@ -31,19 +31,22 @@ describe('TextField', () => {
 
   it('renders with default props', () => {
     const { getByTestId } = render(
-      <TextField testID={ROOT_TEST_ID} placeholder="Enter text" />,
+      <TextField value="" testID={ROOT_TEST_ID} placeholder="Enter text" />,
     );
     expect(getByTestId(ROOT_TEST_ID)).toBeDefined();
   });
 
   it('passes testID to the root element', () => {
-    const { getByTestId } = render(<TextField testID="custom-test-id" />);
+    const { getByTestId } = render(
+      <TextField value="" testID="custom-test-id" />,
+    );
     expect(getByTestId('custom-test-id')).toBeDefined();
   });
 
   it('renders custom inputElement when provided', () => {
     const { getByTestId } = render(
       <TextField
+        value=""
         testID={ROOT_TEST_ID}
         inputElement={<View testID="custom-input" />}
       />,
@@ -53,7 +56,7 @@ describe('TextField', () => {
 
   it('forwards props to the inner Input', () => {
     const { getByPlaceholderText } = render(
-      <TextField placeholder="forwarded-placeholder" />,
+      <TextField value="" placeholder="forwarded-placeholder" />,
     );
     expect(getByPlaceholderText('forwarded-placeholder')).toBeDefined();
   });
@@ -62,14 +65,14 @@ describe('TextField', () => {
 
   it('exposes TextInput ref via forwardRef', () => {
     const ref = createRef<TextInput>();
-    render(<TextField ref={ref} placeholder="ref-test" />);
+    render(<TextField value="" ref={ref} placeholder="ref-test" />);
     expect(ref.current).toBeDefined();
     expect(ref.current).toBeInstanceOf(TextInput);
   });
 
   it('allows calling focus() via the forwarded ref', () => {
     const ref = createRef<TextInput>();
-    render(<TextField ref={ref} placeholder="ref-focus" />);
+    render(<TextField value="" ref={ref} placeholder="ref-focus" />);
     // Should not throw
     expect(() => ref.current?.focus()).not.toThrow();
   });
@@ -79,7 +82,7 @@ describe('TextField', () => {
   it('applies the correct size class for each TextFieldSize', () => {
     for (const size of Object.values(TextFieldSize)) {
       const { getByTestId, unmount } = render(
-        <TextField testID={ROOT_TEST_ID} size={size} />,
+        <TextField value="" testID={ROOT_TEST_ID} size={size} />,
       );
       const root = getByTestId(ROOT_TEST_ID);
       const styles = flattenStyle(root.props.style);
@@ -94,7 +97,9 @@ describe('TextField', () => {
   });
 
   it('defaults to TextFieldSize.Md when no size is provided', () => {
-    const { getByTestId } = render(<TextField testID={ROOT_TEST_ID} />);
+    const { getByTestId } = render(
+      <TextField value="" testID={ROOT_TEST_ID} />,
+    );
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
     const expectedHeight = (
@@ -108,7 +113,9 @@ describe('TextField', () => {
   // ── Error state ────────────────────────────────────────────────────
 
   it('shows error border when isError is true', () => {
-    const { getByTestId } = render(<TextField testID={ROOT_TEST_ID} isError />);
+    const { getByTestId } = render(
+      <TextField value="" testID={ROOT_TEST_ID} isError />,
+    );
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
     const errorBorder = tw.style('border-error-default') as ViewStyle;
@@ -119,7 +126,12 @@ describe('TextField', () => {
 
   it('shows focus border over error border when focused and isError', () => {
     const { getByTestId, getByPlaceholderText } = render(
-      <TextField testID={ROOT_TEST_ID} isError placeholder="error-focus" />,
+      <TextField
+        value=""
+        testID={ROOT_TEST_ID}
+        isError
+        placeholder="error-focus"
+      />,
     );
     fireEvent(getByPlaceholderText('error-focus'), 'focus');
     const root = getByTestId(ROOT_TEST_ID);
@@ -134,7 +146,7 @@ describe('TextField', () => {
 
   it('applies opacity when isDisabled is true', () => {
     const { getByTestId } = render(
-      <TextField testID={ROOT_TEST_ID} isDisabled />,
+      <TextField value="" testID={ROOT_TEST_ID} isDisabled />,
     );
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
@@ -144,7 +156,9 @@ describe('TextField', () => {
   });
 
   it('does not apply opacity when isDisabled is false', () => {
-    const { getByTestId } = render(<TextField testID={ROOT_TEST_ID} />);
+    const { getByTestId } = render(
+      <TextField value="" testID={ROOT_TEST_ID} />,
+    );
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
     const hasOpacity50 = styles.some(
@@ -155,7 +169,7 @@ describe('TextField', () => {
 
   it('does not show focus border when disabled even if isFocused is true', () => {
     const { getByTestId } = render(
-      <TextField testID={ROOT_TEST_ID} isDisabled autoFocus />,
+      <TextField value="" testID={ROOT_TEST_ID} isDisabled autoFocus />,
     );
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
@@ -171,6 +185,7 @@ describe('TextField', () => {
   it('renders startAccessory when provided', () => {
     const { getByTestId } = render(
       <TextField
+        value=""
         testID={ROOT_TEST_ID}
         startAccessory={<View testID="start-accessory" />}
       />,
@@ -181,6 +196,7 @@ describe('TextField', () => {
   it('renders endAccessory when provided', () => {
     const { getByTestId } = render(
       <TextField
+        value=""
         testID={ROOT_TEST_ID}
         endAccessory={<View testID="end-accessory" />}
       />,
@@ -189,7 +205,9 @@ describe('TextField', () => {
   });
 
   it('does not render accessories when not provided', () => {
-    const { queryByTestId } = render(<TextField testID={ROOT_TEST_ID} />);
+    const { queryByTestId } = render(
+      <TextField value="" testID={ROOT_TEST_ID} />,
+    );
     expect(queryByTestId('start-accessory')).toBeNull();
     expect(queryByTestId('end-accessory')).toBeNull();
   });
@@ -199,7 +217,7 @@ describe('TextField', () => {
   it('calls onFocus when input receives focus', () => {
     const onFocus = jest.fn();
     const { getByPlaceholderText } = render(
-      <TextField placeholder="focus-test" onFocus={onFocus} />,
+      <TextField value="" placeholder="focus-test" onFocus={onFocus} />,
     );
     fireEvent(getByPlaceholderText('focus-test'), 'focus');
     expect(onFocus).toHaveBeenCalledTimes(1);
@@ -208,7 +226,7 @@ describe('TextField', () => {
   it('calls onBlur when input loses focus', () => {
     const onBlur = jest.fn();
     const { getByPlaceholderText } = render(
-      <TextField placeholder="blur-test" onBlur={onBlur} />,
+      <TextField value="" placeholder="blur-test" onBlur={onBlur} />,
     );
     fireEvent(getByPlaceholderText('blur-test'), 'focus');
     fireEvent(getByPlaceholderText('blur-test'), 'blur');
@@ -218,7 +236,12 @@ describe('TextField', () => {
   it('does not call onFocus when disabled', () => {
     const onFocus = jest.fn();
     const { getByPlaceholderText } = render(
-      <TextField placeholder="disabled-focus" isDisabled onFocus={onFocus} />,
+      <TextField
+        value=""
+        placeholder="disabled-focus"
+        isDisabled
+        onFocus={onFocus}
+      />,
     );
     fireEvent(getByPlaceholderText('disabled-focus'), 'focus');
     expect(onFocus).not.toHaveBeenCalled();
@@ -227,7 +250,12 @@ describe('TextField', () => {
   it('does not call onBlur when disabled', () => {
     const onBlur = jest.fn();
     const { getByPlaceholderText } = render(
-      <TextField placeholder="disabled-blur" isDisabled onBlur={onBlur} />,
+      <TextField
+        value=""
+        placeholder="disabled-blur"
+        isDisabled
+        onBlur={onBlur}
+      />,
     );
     fireEvent(getByPlaceholderText('disabled-blur'), 'focus');
     fireEvent(getByPlaceholderText('disabled-blur'), 'blur');
@@ -237,7 +265,7 @@ describe('TextField', () => {
   it('passes event argument to onFocus callback', () => {
     const onFocus = jest.fn();
     const { getByPlaceholderText } = render(
-      <TextField placeholder="event-focus" onFocus={onFocus} />,
+      <TextField value="" placeholder="event-focus" onFocus={onFocus} />,
     );
     fireEvent(getByPlaceholderText('event-focus'), 'focus', {
       nativeEvent: {},
@@ -250,7 +278,7 @@ describe('TextField', () => {
   it('passes event argument to onBlur callback', () => {
     const onBlur = jest.fn();
     const { getByPlaceholderText } = render(
-      <TextField placeholder="event-blur" onBlur={onBlur} />,
+      <TextField value="" placeholder="event-blur" onBlur={onBlur} />,
     );
     fireEvent(getByPlaceholderText('event-blur'), 'focus');
     fireEvent(getByPlaceholderText('event-blur'), 'blur', {
@@ -263,7 +291,7 @@ describe('TextField', () => {
 
   it('handles focus without onFocus callback (optional chaining)', () => {
     const { getByPlaceholderText } = render(
-      <TextField placeholder="no-focus-cb" />,
+      <TextField value="" placeholder="no-focus-cb" />,
     );
     // Should not throw when no onFocus is provided
     expect(() => {
@@ -273,7 +301,7 @@ describe('TextField', () => {
 
   it('handles blur without onBlur callback (optional chaining)', () => {
     const { getByPlaceholderText } = render(
-      <TextField placeholder="no-blur-cb" />,
+      <TextField value="" placeholder="no-blur-cb" />,
     );
     // Should not throw when no onBlur is provided
     expect(() => {
@@ -288,6 +316,7 @@ describe('TextField', () => {
     const onBlur = jest.fn();
     const tree = create(
       <TextField
+        value=""
         isDisabled
         onBlur={onBlur}
         placeholder="disabled-blur-direct"
@@ -305,6 +334,7 @@ describe('TextField', () => {
     const onFocus = jest.fn();
     const tree = create(
       <TextField
+        value=""
         isDisabled
         onFocus={onFocus}
         placeholder="disabled-focus-direct"
@@ -322,7 +352,7 @@ describe('TextField', () => {
 
   it('applies focus border when focused', () => {
     const { getByTestId, getByPlaceholderText } = render(
-      <TextField testID={ROOT_TEST_ID} placeholder="focus-border" />,
+      <TextField value="" testID={ROOT_TEST_ID} placeholder="focus-border" />,
     );
     fireEvent(getByPlaceholderText('focus-border'), 'focus');
     const root = getByTestId(ROOT_TEST_ID);
@@ -335,7 +365,7 @@ describe('TextField', () => {
 
   it('reverts to default border after blur', () => {
     const { getByTestId, getByPlaceholderText } = render(
-      <TextField testID={ROOT_TEST_ID} placeholder="blur-border" />,
+      <TextField value="" testID={ROOT_TEST_ID} placeholder="blur-border" />,
     );
     fireEvent(getByPlaceholderText('blur-border'), 'focus');
     fireEvent(getByPlaceholderText('blur-border'), 'blur');
@@ -351,7 +381,7 @@ describe('TextField', () => {
 
   it('starts with focus border when autoFocus is true', () => {
     const { getByTestId } = render(
-      <TextField testID={ROOT_TEST_ID} autoFocus />,
+      <TextField value="" testID={ROOT_TEST_ID} autoFocus />,
     );
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
@@ -368,6 +398,7 @@ describe('TextField', () => {
     const onFocus = jest.fn();
     const { getByTestId } = render(
       <TextField
+        value=""
         ref={ref}
         testID={ROOT_TEST_ID}
         placeholder="press-test"
@@ -385,6 +416,7 @@ describe('TextField', () => {
     const ref = createRef<TextInput>();
     const { getByTestId } = render(
       <TextField
+        value=""
         ref={ref}
         testID={ROOT_TEST_ID}
         placeholder="disabled-press"
@@ -401,6 +433,7 @@ describe('TextField', () => {
   it('does not crash when pressed with custom inputElement (no inputRef)', () => {
     const { getByTestId } = render(
       <TextField
+        value=""
         testID={ROOT_TEST_ID}
         inputElement={<View testID="custom-input" />}
       />,
@@ -415,7 +448,7 @@ describe('TextField', () => {
 
   it('applies twClassName to the container', () => {
     const { getByTestId } = render(
-      <TextField testID={ROOT_TEST_ID} twClassName="mt-4" />,
+      <TextField value="" testID={ROOT_TEST_ID} twClassName="mt-4" />,
     );
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
@@ -430,7 +463,7 @@ describe('TextField', () => {
   it('merges custom style prop with container styles', () => {
     const customStyle = { marginBottom: 20 };
     const { getByTestId } = render(
-      <TextField testID={ROOT_TEST_ID} style={customStyle} />,
+      <TextField value="" testID={ROOT_TEST_ID} style={customStyle} />,
     );
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
@@ -443,7 +476,7 @@ describe('TextField', () => {
 
   it('forwards isReadonly to the inner Input', () => {
     const { getByPlaceholderText } = render(
-      <TextField placeholder="readonly-test" isReadonly />,
+      <TextField value="" placeholder="readonly-test" isReadonly />,
     );
     const input = getByPlaceholderText('readonly-test');
     expect(input.props.editable).toBe(false);

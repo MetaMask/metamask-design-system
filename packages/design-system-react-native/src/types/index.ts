@@ -78,20 +78,6 @@ export enum AvatarIconSeverity {
 }
 
 /**
- * BadgeCount - size
- */
-export enum BadgeCountSize {
-  /**
-   * Represents a medium badge count (14px height).
-   */
-  Md = 'md',
-  /**
-   * Represents a large badge count (20px height).
-   */
-  Lg = 'lg',
-}
-
-/**
  * BadgeWrapper - positionAnchorShape
  */
 export enum BadgeWrapperPositionAnchorShape {
@@ -322,6 +308,7 @@ export { ButtonBaseSize as ButtonSize };
 export { ButtonBaseSize as ButtonPrimarySize };
 export { ButtonBaseSize as ButtonSecondarySize };
 export { ButtonBaseSize as ButtonTertiarySize };
+export { ButtonBaseSize as ButtonHeroSize };
 
 /**
  * Button - variant
@@ -348,6 +335,15 @@ export enum ButtonIconSize {
    * Represents a large button size (40px).
    */
   Lg = 'lg',
+}
+
+/**
+ * ButtonIcon - variant
+ */
+export enum ButtonIconVariant {
+  Default = 'default',
+  Filled = 'filled',
+  Floating = 'floating',
 }
 
 /**
