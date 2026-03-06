@@ -1,13 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import { Button, ButtonVariant } from '../Button';
+import { IconColor, IconName, IconSize } from '../Icon';
+import { Text, TextColor, TextVariant } from '../Text';
+
 import KeyValueRowComponent, {
   KeyValueRowFieldIconSides,
   TooltipSizes,
-} from './index';
-import Text, { TextColor, TextVariant } from '../../components/Texts/Text';
-import Title from '../../../components/Base/Title';
-import { IconColor, IconName, IconSize } from '../../components/Icons/Icon';
-import Button, { ButtonVariants } from '../../components/Buttons/Button';
+} from '.';
 
 const KeyValueRowMeta = {
   title: 'Components Temp / KeyValueRow',
@@ -29,8 +30,8 @@ const styles = StyleSheet.create({
 export const KeyValueRow = {
   render: () => (
     <View style={styles.container}>
-      <Title>KeyValueRow Component</Title>
-      <Text variant={TextVariant.BodySM}>
+      <Text variant={TextVariant.HeadingMd}>KeyValueRow Component</Text>
+      <Text variant={TextVariant.BodySm}>
         Prebuilt component displayed below but KeyValueRow stubs are available
         to create new KeyValueRow variants.
       </Text>
@@ -47,15 +48,15 @@ export const KeyValueRow = {
           field={{
             label: {
               text: 'Sample Key Text',
-              variant: TextVariant.BodySM,
-              color: TextColor.Alternative,
+              variant: TextVariant.BodySm,
+              color: TextColor.TextAlternative,
             },
           }}
           value={{
             label: {
               text: 'Sample Value Text',
-              variant: TextVariant.BodySMBold,
-              color: TextColor.Success,
+              variant: TextVariant.BodySm,
+              color: TextColor.SuccessDefault,
             },
             tooltip: {
               title: 'Sample Title',
@@ -89,9 +90,9 @@ export const KeyValueRow = {
             },
             icon: {
               name: IconName.Wifi,
-              color: IconColor.Primary,
+              color: IconColor.PrimaryDefault,
               size: IconSize.Sm,
-              side: KeyValueRowFieldIconSides.BOTH,
+              side: KeyValueRowFieldIconSides.Both,
             },
           }}
           value={{
@@ -100,9 +101,9 @@ export const KeyValueRow = {
             },
             icon: {
               name: IconName.Wifi,
-              color: IconColor.Primary,
+              color: IconColor.PrimaryDefault,
               size: IconSize.Sm,
-              side: KeyValueRowFieldIconSides.BOTH,
+              side: KeyValueRowFieldIconSides.Both,
             },
           }}
         />
@@ -110,7 +111,10 @@ export const KeyValueRow = {
         <KeyValueRowComponent
           field={{
             label: { text: 'Sample Key' },
-            icon: { name: IconName.UserCircleAdd, color: IconColor.Primary },
+            icon: {
+              name: IconName.UserCircleAdd,
+              color: IconColor.PrimaryDefault,
+            },
             tooltip: {
               title: 'Sample Tooltip',
               content:
@@ -120,7 +124,7 @@ export const KeyValueRow = {
           value={{
             label: (
               <Button
-                variant={ButtonVariants.Link}
+                variant={ButtonVariant.Primary}
                 label="Sample button"
                 // eslint-disable-next-line no-alert
                 onPress={() => alert('test')}

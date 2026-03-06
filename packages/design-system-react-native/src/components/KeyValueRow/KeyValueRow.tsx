@@ -5,6 +5,8 @@ import { View } from 'react-native';
 import { Icon } from '../Icon';
 import type { IconProps } from '../Icon';
 
+import KeyValueRowLabel from './KeyValueLabel/KeyValueLabel';
+import KeyValueRowRoot from './KeyValueRoot/KeyValueRoot';
 import {
   TESTID_KEYVALUEROW_FIELD_ICON,
   TESTID_KEYVALUEROW_VALUE_ICON,
@@ -14,8 +16,6 @@ import {
   KeyValueRowFieldIconSides,
   KeyValueRowSectionAlignments,
 } from './KeyValueRow.types';
-import KeyValueRowLabel from './KeyValueLabel/KeyValueLabel';
-import KeyValueRowRoot from './KeyValueRoot/KeyValueRoot';
 import KeyValueSection from './KeyValueSection/KeyValueSection';
 
 type IconWithSide = IconProps & { side?: KeyValueRowFieldIconSides };
@@ -29,12 +29,13 @@ const renderIcon = (icon: IconWithSide, testID: string) => {
  * Prebuilt convenience component to format and render a key/value label pair.
  * The KeyValueRowLabel component has props to display a tooltip and icon.
  *
- * @param {KeyValueRowProps} props - Component props
- * @param {KeyValueRowField} props.field - Represents the left side of the key value row pair
- * @param {KeyValueRowField} props.value - Represents the right side of the key value row pair
- * @param {string} [props.twClassName] - Optional Tailwind class names for the root element
+ * @param props - Component props
+ * @param props.field - Represents the left side of the key value row pair
+ * @param props.value - Represents the right side of the key value row pair
+ * @param props.twClassName - Optional Tailwind class names for the root element
+ * @param props.style - Optional additional styles for the root element
  *
- * @returns {JSX.Element} The rendered KeyValueRow component.
+ * @returns The rendered KeyValueRow component.
  */
 const KeyValueRow: React.FC<KeyValueRowProps> = ({
   field,

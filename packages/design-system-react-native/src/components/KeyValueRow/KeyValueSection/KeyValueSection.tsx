@@ -9,12 +9,13 @@ import type { KeyValueSectionProps } from '../KeyValueRow.types';
  * A container representing either the left or right side of the KeyValueRow.
  * For desired results, use only two <KeyValueSection> components within the <KeyValueRowRoot>.
  *
- * @param {KeyValueSectionProps} props - Component props.
- * @param {ReactNode} props.children - The child components.
- * @param {KeyValueRowSectionAlignments} [props.align] - The alignment of the section.
- * @param {string} [props.twClassName] - Optional Tailwind class names to override root styles.
+ * @param props - Component props.
+ * @param props.children - The child components.
+ * @param props.align - The alignment of the section.
+ * @param props.twClassName - Optional Tailwind class names to override root styles.
+ * @param props.style - Optional additional styles for the root element.
  *
- * @returns {JSX.Element} The rendered KeyValueSection component.
+ * @returns The rendered KeyValueSection component.
  */
 const KeyValueSection: React.FC<KeyValueSectionProps> = ({
   children,

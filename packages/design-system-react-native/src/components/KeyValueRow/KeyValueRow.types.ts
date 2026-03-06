@@ -20,11 +20,13 @@ export type KeyValueRowTooltip = {
   content: string | ReactNode;
   /**
    * Optional size of the tooltip icon button.
+   *
    * @default ButtonIconSize.Md
    */
   size?: ButtonIconSize;
   /**
    * Optional icon name for the tooltip icon.
+   *
    * @default IconName.Question
    */
   iconName?: IconName;
@@ -88,11 +90,13 @@ export type PreDefinedKeyValueRowLabel = {
   text: string;
   /**
    * Optional text variant.
+   *
    * @default TextVariant.BodyMd
    */
   variant?: TextProps['variant'];
   /**
    * Optional text color.
+   *
    * @default TextColor.TextDefault
    */
   color?: TextProps['color'];
@@ -153,6 +157,7 @@ export type KeyValueSectionProps = {
   children: ReactNode;
   /**
    * Optional content alignment.
+   *
    * @default KeyValueRowSectionAlignments.Left
    */
   align?: KeyValueRowSectionAlignments;

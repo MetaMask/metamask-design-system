@@ -17,11 +17,12 @@ import type { KeyValueRowRootProps } from '../KeyValueRow.types';
  * </KeyValueRowRoot>
  * ```
  *
- * @param {KeyValueRowRootProps} props - Component props.
- * @param {[ReactNode, ReactNode]} props.children - The two <KeyValueSection> children.
- * @param {string} [props.twClassName] - Optional Tailwind class names to override root styles.
+ * @param props - Component props.
+ * @param props.children - The two <KeyValueSection> children.
+ * @param props.twClassName - Optional Tailwind class names to override root styles.
+ * @param props.style - Optional additional styles for the root element.
  *
- * @returns {JSX.Element} The rendered Root component.
+ * @returns The rendered Root component.
  */
 const KeyValueRowRoot: React.FC<KeyValueRowRootProps> = ({
   children,
