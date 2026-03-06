@@ -1,11 +1,10 @@
-#!/usr/bin/env node
-
+// eslint-disable-next-line import-x/no-unresolved
+import tailwindPostcss from '@tailwindcss/postcss';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
-import { createRequire } from 'node:module';
 import postcss from 'postcss';
-import tailwindPostcss from '@tailwindcss/postcss';
 
 const repoRoot = path.resolve(import.meta.dirname, '../../..');
 const oldPresetDistPath = path.join(
@@ -105,8 +104,8 @@ async function compileTailwind({ inputCss, cwd }) {
 }
 
 function hasClass(css, className) {
-  const escaped = className.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`\\.${escaped}\\s*\\{`).test(css);
+  const escaped = className.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+  return new RegExp(`\\.${escaped}\\s*\\{`, 'u').test(css);
 }
 
 function printList(title, values, maxItems = 500) {
@@ -136,20 +135,20 @@ async function main() {
     await writeFile(contentPath, contentHtml, 'utf8');
     await writeFile(
       oldConfigPath,
-      `module.exports = require('${oldPresetDistPath.replace(/\\/g, '/')}');\n`,
+      `module.exports = require('${oldPresetDistPath.replace(/\\/gu, '/')}');\n`,
       'utf8',
     );
 
     const oldInputCss = [
       "@import 'tailwindcss';",
-      `@config '${oldConfigPath.replace(/\\/g, '/')}';`,
-      `@source '${relativeContent.replace(/\\/g, '/')}';`,
+      `@config '${oldConfigPath.replace(/\\/gu, '/')}';`,
+      `@source '${relativeContent.replace(/\\/gu, '/')}';`,
     ].join('\n');
 
     const newInputCss = [
       "@import 'tailwindcss';",
-      `@import '${newThemePath.replace(/\\/g, '/')}';`,
-      `@source '${relativeContent.replace(/\\/g, '/')}';`,
+      `@import '${newThemePath.replace(/\\/gu, '/')}';`,
+      `@source '${relativeContent.replace(/\\/gu, '/')}';`,
     ].join('\n');
 
     const [oldCss, newCss] = await Promise.all([
