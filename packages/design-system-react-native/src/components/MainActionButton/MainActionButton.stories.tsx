@@ -48,25 +48,6 @@ const meta: Meta<MainActionButtonProps> = {
       action: 'pressOut',
       description: 'Callback fired when a press gesture ends.',
     },
-    iconProps: {
-      control: 'object',
-      description:
-        'Optional props forwarded to the internal Icon component (excluding name, size, and color).',
-    },
-    labelProps: {
-      control: 'object',
-      description:
-        'Optional props forwarded to the internal Text component (excluding controlled text styles).',
-    },
-    twClassName: {
-      control: 'text',
-      description: 'Additional static Tailwind classes for the button.',
-    },
-    style: {
-      control: false,
-      description:
-        'Optional React Native style object or pressed-state style callback.',
-    },
   },
 };
 
@@ -74,9 +55,7 @@ export default meta;
 
 type Story = StoryObj<MainActionButtonProps>;
 
-export const Default: Story = {
-  args: {},
-};
+export const Default: Story = {};
 
 export const IsDisabled: Story = {
   args: {
@@ -89,7 +68,7 @@ export const IsDisabled: Story = {
   },
 };
 
-export const IconName: Story = {
+export const IconNameAndLabel: Story = {
   parameters: {
     actions: {
       disable: true,
@@ -115,33 +94,6 @@ export const IconName: Story = {
       <MainActionButton
         iconName={IconName.Send}
         label="Send"
-        twClassName="flex-1"
-      />
-    </Box>
-  ),
-};
-
-export const Label: Story = {
-  parameters: {
-    actions: {
-      disable: true,
-    },
-  },
-  render: () => (
-    <Box flexDirection={BoxFlexDirection.Row} gap={4} paddingHorizontal={4}>
-      <MainActionButton
-        iconName={IconName.Add}
-        label="Add"
-        twClassName="flex-1"
-      />
-      <MainActionButton
-        iconName={IconName.Add}
-        label="Receive assets"
-        twClassName="flex-1"
-      />
-      <MainActionButton
-        iconName={IconName.Add}
-        label="Buy and Sell"
         twClassName="flex-1"
       />
     </Box>
