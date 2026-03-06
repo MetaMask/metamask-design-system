@@ -167,3 +167,6 @@ export type {
 
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';
 export type { ButtonHeroProps } from './ButtonHero';
+
+export { ButtonFilter } from './ButtonFilter';
+export type { ButtonFilterProps } from './ButtonFilter';

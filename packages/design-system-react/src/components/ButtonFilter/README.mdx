@@ -1,0 +1,64 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as ButtonFilterStories from './ButtonFilter.stories';
+
+# ButtonFilter
+
+`ButtonFilter` is a reusable filter button component that displays active and inactive states. It wraps `ButtonBase` and is commonly used for filtering lists or toggling views.
+
+```tsx
+import { ButtonFilter } from '@metamask/design-system-react';
+
+<ButtonFilter isActive onClick={() => {}}>
+  All
+</ButtonFilter>;
+```
+
+<Canvas of={ButtonFilterStories.Default} />
+
+## Props
+
+This component extends `ButtonBaseProps`, so all `ButtonBase` props are supported.
+
+### `isActive`
+
+Controls the active visual state.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ButtonFilterStories.IsActive} />
+
+### Visual States
+
+- `isActive=true`: `bg-icon-default` + `text-icon-inverse`
+- `isActive=false`: `bg-background-muted` + `text-default`
+
+```tsx
+<ButtonFilter isActive>All</ButtonFilter>
+<ButtonFilter>Purchased</ButtonFilter>
+```
+
+<Canvas of={ButtonFilterStories.FilterGroup} />
+
+## Component API
+
+<Controls of={ButtonFilterStories.Default} />
