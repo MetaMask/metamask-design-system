@@ -11,7 +11,7 @@ import KeyValueRowComponent, {
 } from '.';
 
 const KeyValueRowMeta = {
-  title: 'Components Temp / KeyValueRow',
+  title: 'Components/KeyValueRow',
   component: KeyValueRowComponent,
 };
 
