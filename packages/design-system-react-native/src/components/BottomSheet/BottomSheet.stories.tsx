@@ -101,8 +101,6 @@ export const IsFullscreen: Story = {
 
 const ImperativeControlTemplate = (args: BottomSheetProps) => {
   const sheetRef = useRef<BottomSheetRef>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const goBack = () => setIsVisible(false);
 
   return (
     <View style={{ flex: 1, width: '100%' }}>
@@ -114,20 +112,16 @@ const ImperativeControlTemplate = (args: BottomSheetProps) => {
           <Text>Close via ref</Text>
         </Pressable>
       </Box>
-      {isVisible && (
-        <BottomSheet
-          ref={sheetRef}
-          {...args}
-          goBack={goBack}
-          shouldNavigateBack={false}
-          onClose={goBack}
-          onOpen={() => setIsVisible(true)}
-        >
-          <Box twClassName="p-4">
-            <Text>Controlled imperatively via ref</Text>
-          </Box>
-        </BottomSheet>
-      )}
+      <BottomSheet
+        ref={sheetRef}
+        {...args}
+        goBack={() => sheetRef.current?.onCloseBottomSheet()}
+        shouldNavigateBack={false}
+      >
+        <Box twClassName="p-4">
+          <Text>Controlled imperatively via ref</Text>
+        </Box>
+      </BottomSheet>
     </View>
   );
 };
