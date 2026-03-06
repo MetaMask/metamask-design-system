@@ -2,8 +2,6 @@
 
 MainActionButton is a compact vertical action button that renders an icon above a single-line label.
 
-## Usage
-
 ```tsx
 import {
   MainActionButton,
