@@ -6,4 +6,4 @@ import {
 export const isPreDefinedKeyValueRowLabel = (
   label: KeyValueRowLabelProps['label'],
 ): label is PreDefinedKeyValueRowLabel =>
-  Boolean(label) && typeof label === 'object' && 'text' in label;
+  label !== null && typeof label === 'object' && 'text' in label;
