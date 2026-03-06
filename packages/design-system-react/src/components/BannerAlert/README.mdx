@@ -1,0 +1,64 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as BannerAlertStories from './BannerAlert.stories';
+
+# BannerAlert
+
+BannerAlert is a semantic alert banner that composes BannerBase and applies severity-driven icon and background styles.
+
+<Canvas of={BannerAlertStories.Default} />
+
+## Props
+
+### `severity`
+
+Optional semantic severity used to choose icon and background styles.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>severity</code>
+      </td>
+      <td align="left">
+        <code>BannerAlertSeverity</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BannerAlertSeverity.Info</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+Supported values:
+
+- `BannerAlertSeverity.Info`
+- `BannerAlertSeverity.Success`
+- `BannerAlertSeverity.Warning`
+- `BannerAlertSeverity.Danger`
+
+<Canvas of={BannerAlertStories.Severity} />
+
+### Inherited BannerBase Props
+
+BannerAlert forwards BannerBase props so title/content/actions/close affordance work the same way.
+
+- `title`, `description`, `children`
+- `actionButtonLabel`, `actionButtonOnClick`, `actionButtonProps`
+- `onClose`, `closeButtonProps`
+
+<Canvas of={BannerAlertStories.ActionButtonOnClick} />
+<Canvas of={BannerAlertStories.OnClose} />
+
+## Component API
+
+<Controls of={BannerAlertStories.Default} />
