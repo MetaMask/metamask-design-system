@@ -6,6 +6,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 - [From Extension Component Library](#from-extension-component-library)
   - [Box Component](#box-component)
+  - [BannerAlert Component](#banneralert-component)
   - [Text Component](#text-component)
 - [Version Updates](#version-updates)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
@@ -115,6 +116,59 @@ Most extension Box margin/padding props work the same in the design system:
 - ✅ `paddingVertical`
 
 For simple, non-responsive spacing, continue using these props. Use `className` with Tailwind utilities for responsive spacing, auto values, or inline-start/end positioning.
+
+### BannerAlert Component
+
+The extension `banner-alert` maps directly to `BannerAlert` in the design system, but severity values are now provided via the shared `BannerAlertSeverity` const object (ADR-0003/0004) instead of extension enums.
+
+#### Breaking Changes
+
+##### Imports and Enum Source
+
+| Extension Pattern                                 | Design System Migration                                    |
+| ------------------------------------------------- | ---------------------------------------------------------- |
+| `BannerAlertSeverity` from `./banner-alert.types` | `BannerAlertSeverity` from `@metamask/design-system-react` |
+
+##### Severity Values
+
+| Extension Value                             | Design System Value           |
+| ------------------------------------------- | ----------------------------- |
+| `BannerAlertSeverity.Info` (`'info'`)       | `BannerAlertSeverity.Info`    |
+| `BannerAlertSeverity.Success` (`'success'`) | `BannerAlertSeverity.Success` |
+| `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` |
+| `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { BannerAlert } from '../../component-library/banner-alert';
+import { BannerAlertSeverity } from '../../component-library/banner-alert/banner-alert.types';
+
+<BannerAlert
+  severity={BannerAlertSeverity.Warning}
+  title="Warning"
+  actionButtonLabel="Action"
+  actionButtonOnClick={() => undefined}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  BannerAlert,
+  BannerAlertSeverity,
+} from '@metamask/design-system-react';
+
+<BannerAlert
+  severity={BannerAlertSeverity.Warning}
+  title="Warning"
+  actionButtonLabel="Action"
+  actionButtonOnClick={() => undefined}
+/>;
+```
 
 ### Text Component
 
