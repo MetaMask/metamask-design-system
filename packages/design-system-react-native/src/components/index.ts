@@ -52,6 +52,9 @@ export type {
   BadgeWrapperCustomPosition,
 } from './BadgeWrapper';
 
+export { BannerBase } from './BannerBase';
+export type { BannerBaseProps } from './BannerBase';
+
 export { BottomSheetFooter, ButtonsAlignment } from './BottomSheetFooter';
 export type {
   BottomSheetFooterProps,
