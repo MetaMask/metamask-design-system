@@ -4,12 +4,23 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [General Extension Migration Guidance](#general-extension-migration-guidance)
 - [From Extension Component Library](#from-extension-component-library)
   - [Box Component](#box-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
+
+## General Extension Migration Guidance
+
+This guidance applies to all extension `component-library` to `@metamask/design-system-react` migrations.
+
+- Legacy extension components were built on top of Box patterns, so they often accepted broad style utility props.
+- Design system components prefer explicit component APIs for design-system semantics (for example `variant`, `size`, `color`).
+- For styling utilities and one-off layout/styling needs, use Tailwind `className` rather than relying on broad style-utility prop surfaces.
+
+When migrating any extension component, apply this guidance first, then use the component-specific mappings below.
 
 ## From Extension Component Library
 
@@ -120,6 +131,8 @@ For simple, non-responsive spacing, continue using these props. Use `className` 
 ### Text Component
 
 The Text component has significant breaking changes when migrating from the extension component-library.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for the shared Box/style-utility migration approach used across all components.
 
 #### Breaking Changes
 
@@ -240,6 +253,8 @@ Notable differences in the design system Text component:
 ### Icon Component
 
 The Icon component has enum and prop-surface differences when migrating from the extension component-library.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for the shared Box/style-utility migration approach used across all components.
 
 #### Breaking Changes
 
