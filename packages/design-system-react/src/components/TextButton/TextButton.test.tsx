@@ -34,9 +34,7 @@ describe('TextButton', () => {
     );
 
     const text = screen.getByText('Custom Text Variant');
-    expect(text).toHaveClass(
-      'text-body-lg',
-    );
+    expect(text).toHaveClass('text-body-lg');
   });
 
   it('applies disabled styles while preserving variant-specific classes', () => {

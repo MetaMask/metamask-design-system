@@ -1,4 +1,3 @@
-/* eslint-disable tailwindcss/no-contradicting-classname */
 import { twMerge } from './tw-merge';
 
 describe('twMerge utility', () => {
@@ -60,7 +59,7 @@ describe('twMerge utility', () => {
     });
 
     it('should handle text color and typography together', () => {
-      const result = twMerge('text-default text-body-md font-medium');
+      const result = twMerge('text-body-md font-medium text-default');
       expect(result).toBe('text-default text-body-md font-medium');
     });
   });
@@ -89,7 +88,9 @@ describe('twMerge utility', () => {
     });
 
     it('should handle typography conflicts with color', () => {
-      const result = twMerge('text-body-md text-muted text-heading-lg text-default');
+      const result = twMerge(
+        'text-body-md text-heading-lg text-default text-muted',
+      );
       expect(result).toBe('text-heading-lg text-default');
     });
   });
