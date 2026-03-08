@@ -129,6 +129,9 @@ export type { JazziconProps } from './temp-components/Jazzicon';
 export { Maskicon } from './temp-components/Maskicon';
 export type { MaskiconProps } from './temp-components/Maskicon';
 
+export { MainActionButton } from './MainActionButton';
+export type { MainActionButtonProps } from './MainActionButton';
+
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
 

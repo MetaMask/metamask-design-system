@@ -67,7 +67,6 @@ export const OnAction: Story = {
       description="No results found"
       actionButtonText="Try Again"
       onAction={() => {
-        // eslint-disable-next-line no-console
         console.log('Action pressed');
       }}
     />
