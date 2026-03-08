@@ -117,12 +117,12 @@ describe('ButtonFilter', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('supports function-based twClassName and textClassName overrides', () => {
+  it('supports twClassName and textProps overrides', () => {
     const { getByRole, getByText } = render(
       <ButtonFilter
         {...defaultProps}
-        twClassName={() => 'bg-error-default'}
-        textClassName={() => 'text-error-default'}
+        twClassName="bg-error-default"
+        textProps={{ twClassName: 'text-error-default' }}
       />,
     );
 

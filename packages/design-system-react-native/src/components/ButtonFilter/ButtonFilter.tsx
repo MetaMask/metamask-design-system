@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import React from 'react';
 
 import { ButtonBase } from '../ButtonBase';
 
@@ -7,37 +8,28 @@ import type { ButtonFilterProps } from './ButtonFilter.types';
 export const ButtonFilter: React.FC<ButtonFilterProps> = ({
   isActive = false,
   twClassName,
-  textClassName,
+  textProps,
+  style,
   ...props
 }) => {
-  const getTextClassName = useCallback(
-    (pressed: boolean) => {
-      const baseTextClassName = isActive ? 'text-icon-inverse' : 'text-default';
-      const customTextClassName = textClassName?.(pressed);
+  const tw = useTailwind();
 
-      return [baseTextClassName, customTextClassName].filter(Boolean).join(' ');
-    },
-    [isActive, textClassName],
-  );
+  const mergedStyle = [
+    tw.style(isActive ? 'bg-icon-default' : 'bg-background-muted', twClassName),
+    style,
+  ];
 
-  const getTwClassName = useCallback(
-    (pressed: boolean) => {
-      const baseTwClassName = isActive
-        ? 'bg-icon-default'
-        : 'bg-background-muted';
-      const customTwClassName =
-        typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
-
-      return [baseTwClassName, customTwClassName].filter(Boolean).join(' ');
-    },
-    [isActive, twClassName],
-  );
+  const mergedTextProps = {
+    ...textProps,
+    twClassName: [
+      isActive ? 'text-icon-inverse' : 'text-default',
+      textProps?.twClassName,
+    ]
+      .filter(Boolean)
+      .join(' '),
+  };
 
   return (
-    <ButtonBase
-      textClassName={getTextClassName}
-      twClassName={getTwClassName}
-      {...props}
-    />
+    <ButtonBase textProps={mergedTextProps} style={mergedStyle} {...props} />
   );
 };
