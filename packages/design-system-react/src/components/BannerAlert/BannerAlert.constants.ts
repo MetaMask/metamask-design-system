@@ -1,4 +1,10 @@
-import { BoxBackgroundColor, IconColor, IconName, IconSize } from '../../types';
+import {
+  BoxBackgroundColor,
+  BoxBorderColor,
+  IconColor,
+  IconName,
+  IconSize,
+} from '../../types';
 
 type BannerAlertSeverityType = 'info' | 'success' | 'warning' | 'danger';
 
@@ -32,6 +38,16 @@ export const MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR: Record<
   success: BoxBackgroundColor.SuccessMuted,
   warning: BoxBackgroundColor.WarningMuted,
   danger: BoxBackgroundColor.ErrorMuted,
+};
+
+export const MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR: Record<
+  BannerAlertSeverityType,
+  BoxBorderColor
+> = {
+  info: BoxBorderColor.PrimaryDefault,
+  success: BoxBorderColor.SuccessDefault,
+  warning: BoxBorderColor.WarningDefault,
+  danger: BoxBorderColor.ErrorDefault,
 };
 
 export const BANNER_ALERT_ICON_SIZE = IconSize.Lg;
