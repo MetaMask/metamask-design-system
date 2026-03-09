@@ -27,18 +27,17 @@ export const BannerAlert = forwardRef<HTMLDivElement, BannerAlertProps>(
       MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR[severity] ??
       BoxBorderColor.BorderDefault;
     const mergedClassName = twMerge('border-l-4', borderColorClass, className);
-    const resolvedIconProps = iconProps ?? {};
 
     return (
       <BannerBase
         ref={ref}
         startAccessory={
-            <Icon
-              {...resolvedIconProps}
-              name={iconName}
-              color={iconColor}
-              size={IconSize.Lg}
-            />
+          <Icon
+            name={iconName}
+            color={iconColor}
+            size={IconSize.Lg}
+            {...iconProps}
+          />
         }
         backgroundColor={backgroundColor}
         paddingLeft={2}

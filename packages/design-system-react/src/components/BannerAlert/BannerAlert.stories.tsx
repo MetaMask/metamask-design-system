@@ -65,13 +65,11 @@ export const Default: Story = {
     title: 'Title is sentence case no period',
     description: "Description shouldn't repeat title. 1-3 lines.",
     actionButtonLabel: 'Action',
-    actionButtonOnClick: () => undefined,
-    onClose: () => undefined,
   },
 };
 
 export const Severity: Story = {
-  render: (args) => (
+  render: (args: BannerAlertProps) => (
     <div className="space-y-2">
       <BannerAlert {...args} severity={BannerAlertSeverity.Info} title="Info">
         This is an info banner.
@@ -130,7 +128,7 @@ export const Children: Story = {
     actionButtonLabel: undefined,
     actionButtonOnClick: undefined,
   },
-  render: (args) => (
+  render: (args: BannerAlertProps) => (
     <BannerAlert {...args}>
       <Text>
         Children can include richer content and can be any React node.
@@ -143,7 +141,6 @@ export const ActionButtonOnClick: Story = {
   args: {
     title: 'Action prop demo',
     actionButtonLabel: 'Learn more',
-    actionButtonOnClick: () => undefined,
     actionButtonProps: {
       endIconName: IconName.Arrow2Right,
     },
@@ -156,7 +153,6 @@ export const OnClose: Story = {
   args: {
     title: 'onClose demo',
     children: 'Click the close icon to trigger onClose.',
-    onClose: () => undefined,
     actionButtonLabel: undefined,
     actionButtonOnClick: undefined,
   },

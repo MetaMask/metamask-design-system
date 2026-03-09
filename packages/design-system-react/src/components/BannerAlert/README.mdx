@@ -52,15 +52,231 @@ Optional props that are spread onto the icon rendered in the start accessory. Us
 
 <Canvas of={BannerAlertStories.Severity} />
 
-### Inherited BannerBase Props
+### `title`
 
-BannerAlert forwards BannerBase props so title/content/actions/close affordance work the same way.
+Optional title rendered at the top of the banner body. Use `titleProps` to pass props to the `Text` component when `title` is a string.
 
-- `title`, `description`, `children`
-- `actionButtonLabel`, `actionButtonOnClick`, `actionButtonProps`
-- `onClose`, `closeButtonProps`
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>title</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>titleProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerAlertStories.Title} />
+
+### `description`
+
+Optional description rendered below the title. Use `descriptionProps` to pass props to the `Text` component when `description` is a string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>description</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>descriptionProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerAlertStories.Description} />
+
+### `children`
+
+Optional content rendered below the description. When `children` is a string BannerAlert wraps it in `Text`; use `childrenWrapperProps` to configure that wrapper.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>children</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>childrenWrapperProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerAlertStories.Children} />
+
+### `actionButtonOnClick`
+
+Optional click handler for the action button. When provided, `actionButtonLabel` is required and `actionButtonProps` can customize the `Button` (the `variant` prop is not supported and defaults to primary).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>actionButtonLabel</code>
+      </td>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Conditionally (when actionButtonOnClick)</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>actionButtonOnClick</code>
+      </td>
+      <td align="left">
+        <code>() => void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>actionButtonProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;ButtonProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={BannerAlertStories.ActionButtonOnClick} />
+
+### `onClose`
+
+Optional callback that when provided renders a close icon in the top-right corner; `closeButtonProps` lets you adjust the icon’s accessibility label or classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>onClose</code>
+      </td>
+      <td align="left">
+        <code>() => void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>closeButtonProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;ButtonIconProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={BannerAlertStories.OnClose} />
 
 ## Component API
