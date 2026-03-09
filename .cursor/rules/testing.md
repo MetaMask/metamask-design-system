@@ -65,15 +65,11 @@ expect(onPress).toHaveBeenCalledTimes(1);
 ### React Web Style Assertions
 
 - **ALWAYS** use `toHaveClass()` for Tailwind class assertions
-- **USE** `toHaveStyle()` ONLY for inline style prop validation (not Tailwind classes)
 - **NEVER** check computed styles - test the contract (classes applied), not browser rendering
 
 ```tsx
 // ✅ Correct - Check Tailwind classes
 expect(button).toHaveClass('bg-icon-default', 'hover:bg-icon-default-hover');
-
-// ✅ Correct - Check inline styles when style prop used
-expect(badge).toHaveStyle({ backgroundColor: 'red' });
 
 // ❌ Wrong - Don't use toHaveStyle for Tailwind classes
 expect(button).toHaveStyle({ backgroundColor: '#037DD6' });
