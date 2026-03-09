@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { BoxBorderColor } from '../../types';
 import { BannerBase } from '../BannerBase';
 import { Icon } from '../Icon';
 
@@ -10,11 +11,13 @@ import {
   MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR,
   MAP_BANNER_ALERT_SEVERITY_ICON_COLOR,
   MAP_BANNER_ALERT_SEVERITY_ICON_NAME,
+  MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR,
 } from './BannerAlert.constants';
 import type { BannerAlertProps } from './BannerAlert.types';
 
 export const BannerAlert: React.FC<BannerAlertProps> = ({
   severity = DEFAULT_BANNER_ALERT_SEVERITY,
+  twClassName,
   ...props
 }) => {
   const resolvedSeverity = severity as
@@ -26,6 +29,12 @@ export const BannerAlert: React.FC<BannerAlertProps> = ({
   const iconColor = MAP_BANNER_ALERT_SEVERITY_ICON_COLOR[resolvedSeverity];
   const backgroundColor =
     MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR[resolvedSeverity];
+  const borderColorClass =
+    MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR[resolvedSeverity] ??
+    BoxBorderColor.BorderDefault;
+  const mergedTwClassName = `border-l-4 ${borderColorClass}${
+    twClassName ? ` ${twClassName}` : ''
+  }`;
 
   return (
     <BannerBase
@@ -39,6 +48,7 @@ export const BannerAlert: React.FC<BannerAlertProps> = ({
       }
       backgroundColor={backgroundColor}
       paddingLeft={2}
+      twClassName={mergedTwClassName}
       {...props}
     />
   );
