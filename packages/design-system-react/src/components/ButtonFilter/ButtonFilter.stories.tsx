@@ -1,5 +1,6 @@
+import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import {
   Box,
@@ -62,7 +63,7 @@ const ButtonFilterGroupStory = ({
   children: _children,
   onClick: _onClick,
   ...args
-}: React.ComponentProps<typeof ButtonFilter>) => {
+}: ComponentProps<typeof ButtonFilter>) => {
   const [activeFilter, setActiveFilter] = useState<FilterOption>('All');
 
   return (
