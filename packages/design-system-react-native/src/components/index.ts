@@ -148,7 +148,7 @@ export type { MainActionButtonProps } from './MainActionButton';
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
 
-export { SensitiveText } from './SensitiveText';
+export { SensitiveText, SensitiveTextLength } from './SensitiveText';
 export type { SensitiveTextProps } from './SensitiveText';
 
 export { TabEmptyState } from './TabEmptyState';
