@@ -105,7 +105,6 @@ export type { ButtonAnimatedProps } from './temp-components/ButtonAnimated';
 
 export { ButtonBase, ButtonBaseSize } from './ButtonBase';
 export type { ButtonBaseProps } from './ButtonBase';
-export { TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION } from './ButtonBase';
 
 export { Button, ButtonSize, ButtonVariant } from './Button';
 export type { ButtonProps } from './Button';
@@ -149,7 +148,7 @@ export type { MainActionButtonProps } from './MainActionButton';
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
 
-export { SensitiveText, SensitiveTextLength } from './SensitiveText';
+export { SensitiveText } from './SensitiveText';
 export type { SensitiveTextProps } from './SensitiveText';
 
 export { TabEmptyState } from './TabEmptyState';
@@ -180,9 +179,6 @@ export {
   ToastCloseButtonVariant,
   ToastContext,
   ToastContextWrapper,
-  TOAST_VISIBILITY_DURATION,
-  TOAST_ANIMATION_DURATION,
-  TOAST_BOTTOM_PADDING,
 } from './Toast';
 export type {
   ToastOptions,
