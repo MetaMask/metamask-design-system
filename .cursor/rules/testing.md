@@ -22,12 +22,21 @@ Testing standards for React and React Native components with emphasis on API con
 - **NEVER** add tests that only assert existence when a stronger assertion is possible.
 
 ```tsx
-// ❌ Weak
+// ❌ Weak - Only checks existence
 expect(getByTestId('button')).toBeDefined();
 
-// ✅ Contract-based
+// ❌ Implementation details - Checking props directly
 expect(getByTestId('button').props.accessibilityState.disabled).toBe(true);
 expect(getByTestId('button').props.onPress).toBeDefined();
+
+// ✅ Contract-based - Use built-in matchers
+expect(getByTestId('button')).toBeDisabled();
+
+// ✅ Contract-based - Test behavior with mock
+const onPress = jest.fn();
+render(<Button onPress={onPress} />);
+fireEvent.press(getByTestId('button'));
+expect(onPress).toHaveBeenCalledTimes(1);
 ```
 
 ### Query and Assertion Conventions
