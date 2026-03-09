@@ -45,17 +45,9 @@ const meta: Meta<BannerAlertProps> = {
       action: 'actionButtonOnClick',
       description: 'Optional click handler for the action button',
     },
-    actionButtonProps: {
-      control: 'object',
-      description: 'Optional props for the action button',
-    },
     onClose: {
       action: 'onClose',
       description: 'Optional callback to show and trigger the close button',
-    },
-    closeButtonProps: {
-      control: 'object',
-      description: 'Optional props for the close button',
     },
     className: {
       control: 'text',

@@ -39,21 +39,9 @@ const meta: Meta<BannerAlertProps> = {
       action: 'actionButtonOnPress',
       description: 'Optional press handler for the action button',
     },
-    actionButtonProps: {
-      control: 'object',
-      description: 'Optional props for the action button',
-    },
     onClose: {
       action: 'onClose',
       description: 'Optional callback to show and trigger the close button',
-    },
-    closeButtonProps: {
-      control: 'object',
-      description: 'Optional props for the close button',
-    },
-    twClassName: {
-      control: 'text',
-      description: 'Optional classes for the root container',
     },
   },
 };
