@@ -2,6 +2,14 @@
 
 Testing standards for React and React Native components with emphasis on API contract coverage, accessibility, and stable style assertions.
 
+## Purpose
+
+This rule defines testing patterns for design system components to ensure:
+- Component API contracts are verified (not implementation details)
+- 100% coverage thresholds are met consistently
+- Style assertions use built-in matchers (not duplicated helpers)
+- Tests remain maintainable as components evolve
+
 ## Critical Rules
 
 ### Test Naming and Structure
@@ -85,12 +93,15 @@ const cases = [
 ];
 
 cases.forEach(({ props, expectedBg }) => {
-  const { getByTestId } = render(
-    <ButtonPrimary {...props} testID="btn">
-      X
-    </ButtonPrimary>,
-  );
-  expectBackground(getByTestId('btn').props.style, expectedBg);
+  it(`renders ${expectedBg} background`, () => {
+    const { getByTestId } = render(
+      <ButtonPrimary {...props} testID="btn">
+        X
+      </ButtonPrimary>,
+    );
+
+    expect(getByTestId('btn')).toHaveStyle(tw`${expectedBg}`);
+  });
 });
 ```
 
@@ -107,7 +118,7 @@ cases.forEach(({ props, expectedBg }) => {
 
 - **ALWAYS** test each branch/state transition that maps to public API behavior.
 - **PREFER** one high-signal assertion per branch over many broad snapshots.
-- **ALWAYS** include accessibility assertions (`accessibilityRole`, `accessibilityState`, labels/hints where applicable).
+- **ALWAYS** include accessibility assertions using built-in matchers (`toBeDisabled()`, `toHaveAccessibilityValue()`) not direct prop checks.
 
 ## Commands
 
@@ -126,11 +137,13 @@ yarn workspace @metamask/design-system-react-native test:clean
 
 Use these files as references when adding or refactoring RN tests:
 
-- `packages/design-system-react-native/src/components/RadioButton/RadioButton.test.tsx` - Clean `toHaveStyle` usage (migrated)
-- `packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.test.tsx` - Design token assertions with `toHaveStyle`
-- `packages/design-system-react-native/src/components/ButtonBase/ButtonBase.test.tsx` - Comprehensive accessibility tests
-- `packages/design-system-react-native/src/components/Box/Box.test.tsx` - Box primitives and layout
-- `packages/design-system-react-native/src/components/Checkbox/Checkbox.test.tsx` - Interactive state testing
+**Migrated to built-in matchers (reference these):**
+- @packages/design-system-react-native/src/components/RadioButton/RadioButton.test.tsx - Clean `toHaveStyle` usage, interaction testing with mocks
+- @packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.test.tsx - Design token assertions with `toHaveStyle(tw\`\`)`, loading state, accessibility
+
+**Comprehensive coverage patterns:**
+- @packages/design-system-react-native/src/components/ButtonBase/ButtonBase.test.tsx - Accessibility tests (note: still uses old style patterns, reference for accessibility only)
+- @packages/design-system-react-native/src/components/Checkbox/Checkbox.test.tsx - Interactive state testing (note: still uses old style patterns, reference for interaction only)
 
 If duplication is detected across multiple suites (for example button variants), extract shared test utilities or table-driven harnesses.
 

@@ -180,6 +180,8 @@ Follow @.cursor/rules/component-documentation.md:
 
 ### Step 8: Write Tests
 
+Follow @.cursor/rules/testing.md for complete testing standards.
+
 Basic test pattern:
 
 ```tsx
@@ -189,7 +191,16 @@ import { MyComponent } from './MyComponent';
 describe('MyComponent', () => {
   it('renders children', () => {
     const { getByText } = render(<MyComponent>Test</MyComponent>);
-    expect(getByText('Test')).toBeDefined();
+    expect(getByText('Test')).toBeOnTheScreen();
+  });
+
+  it('applies correct styles', () => {
+    const { getByTestId } = render(
+      <MyComponent variant="primary" testID="my-component">
+        Test
+      </MyComponent>,
+    );
+    expect(getByTestId('my-component')).toHaveStyle(tw`bg-primary-default`);
   });
 });
 ```
