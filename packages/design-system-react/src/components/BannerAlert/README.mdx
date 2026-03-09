@@ -279,6 +279,87 @@ Optional callback that when provided renders a close icon in the top-right corne
 
 <Canvas of={BannerAlertStories.OnClose} />
 
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that aren't part of the default BannerAlert
+- Override BannerAlert defaults when necessary
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>className</code>
+      </td>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<BannerAlert
+  className="shadow-lg ring-1 ring-primary-100"
+  title="Styled banner"
+  actionButtonLabel="Action"
+>
+  Content with shadow and border overrides.
+</BannerAlert>
+```
+
+### `style`
+
+Use the `style` prop when you need inline styles that can't be achieved with `className`. Prefer `className` for static Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>style</code>
+      </td>
+      <td align="left">
+        <code>CSSProperties</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<BannerAlert
+  style={{ borderLeftWidth: 6 }}
+  title="Custom inline border"
+  actionButtonLabel="Action"
+>
+  Inline style example.
+</BannerAlert>
+```
+
 ## Component API
 
 <Controls of={BannerAlertStories.Default} />

@@ -94,3 +94,50 @@ See the **OnClose** story for behavior.
 ### `iconProps`
 
 Optional props that are merged onto the severity icon in the start accessory. Use `iconProps` to attach identifiers (like `testID`) or add extra styling while preserving the severity-driven icon color and size.
+
+### `twClassName`
+
+Use the `twClassName` prop to add Tailwind CSS classes to the banner. These classes merge with the component’s default classes via `twMerge`, allowing you to:
+
+- Add spacing or layout helpers not part of the default banner
+- Override default colors or shadows when needed
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+<BannerAlert
+  twClassName="shadow-lg ring-1 ring-primary-100"
+  title="Custom banner"
+  actionButtonLabel="Action"
+>
+  Banner content with extra shadow and border.
+</BannerAlert>
+```
+
+### `style`
+
+Use the `style` prop to customize the BannerAlert with React Native styles. Prefer `twClassName` for static Tailwind needs and reserve `style` for dynamic or conditional inline values.
+
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
+
+```tsx
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+
+export const ConditionalBanner = ({ active }: { active: boolean }) => {
+  const tw = useTailwind();
+
+  return (
+    <BannerAlert
+      style={tw.style('bg-default', active && 'bg-success-default')}
+      title="Conditional background"
+      actionButtonLabel="Action"
+    >
+      Content with conditional background color.
+    </BannerAlert>
+  );
+};
+```
