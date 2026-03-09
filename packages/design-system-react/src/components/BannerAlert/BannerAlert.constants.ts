@@ -1,3 +1,5 @@
+import { BannerAlertSeverity } from '@metamask/design-system-shared';
+
 import {
   BoxBackgroundColor,
   BoxBorderColor,
@@ -6,9 +8,10 @@ import {
   IconSize,
 } from '../../types';
 
-type BannerAlertSeverityType = 'info' | 'success' | 'warning' | 'danger';
+type BannerAlertSeverityType =
+  (typeof BannerAlertSeverity)[keyof typeof BannerAlertSeverity];
 
-export const DEFAULT_BANNER_ALERT_SEVERITY: BannerAlertSeverityType = 'info';
+export const DEFAULT_BANNER_ALERT_SEVERITY = BannerAlertSeverity.Info;
 
 export const MAP_BANNER_ALERT_SEVERITY_ICON_NAME: Record<
   BannerAlertSeverityType,
