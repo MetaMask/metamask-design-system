@@ -5,6 +5,7 @@ Testing standards for React and React Native components with emphasis on API con
 ## Purpose
 
 This rule defines testing patterns for design system components to ensure:
+
 - Component API contracts are verified (not implementation details)
 - 100% coverage thresholds are met consistently
 - Style assertions use built-in matchers (not duplicated helpers)
@@ -51,7 +52,7 @@ expect(onPress).toHaveBeenCalledTimes(1);
 
 - **PREFER** `getByTestId` / `queryByTestId` for stable element selection.
 - **PREFER** `toBeOnTheScreen()` for presence checks over `toBeDefined()` / `toBeTruthy()`.
-- **PREFER** specific assertions (`toHaveTextContent`, accessibility state, style tokens) over generic existence checks.
+- **PREFER** specific assertions (`toHaveTextContent`, `toBeDisabled`, `toHaveStyle`) over generic existence checks.
 
 ### React Native Style Assertions
 
@@ -138,10 +139,12 @@ yarn workspace @metamask/design-system-react-native test:clean
 Use these files as references when adding or refactoring RN tests:
 
 **Migrated to built-in matchers (reference these):**
+
 - @packages/design-system-react-native/src/components/RadioButton/RadioButton.test.tsx - Clean `toHaveStyle` usage, interaction testing with mocks
 - @packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.test.tsx - Design token assertions with `toHaveStyle(tw\`\`)`, loading state, accessibility
 
 **Comprehensive coverage patterns:**
+
 - @packages/design-system-react-native/src/components/ButtonBase/ButtonBase.test.tsx - Accessibility tests (note: still uses old style patterns, reference for accessibility only)
 - @packages/design-system-react-native/src/components/Checkbox/Checkbox.test.tsx - Interactive state testing (note: still uses old style patterns, reference for interaction only)
 
