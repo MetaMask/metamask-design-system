@@ -52,4 +52,3 @@ export const MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR: Record<
 };
 
 export const BANNER_ALERT_ICON_SIZE = IconSize.Lg;
-export const BANNER_ALERT_ICON_TEST_ID = 'banner-alert-icon';

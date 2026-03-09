@@ -4,7 +4,6 @@ import React from 'react';
 import { BoxBackgroundColor, IconColor, IconName } from '../../types';
 
 import { BannerAlert } from './BannerAlert';
-import { BANNER_ALERT_ICON_TEST_ID } from './BannerAlert.constants';
 
 import { BannerAlertSeverity } from '.';
 
@@ -25,17 +24,22 @@ jest.mock('../Icon', () => {
   };
 });
 
+const ICON_TEST_ID = 'banner-alert-icon';
+
 describe('BannerAlert', () => {
   it('renders with info severity styles by default', () => {
     const { container, getByTestId } = render(
-      <BannerAlert title="Default info" />,
+      <BannerAlert
+        title="Default info"
+        iconProps={{ 'data-testid': ICON_TEST_ID }}
+      />,
     );
 
     expect(container.firstElementChild).toHaveClass(
       BoxBackgroundColor.PrimaryMuted,
     );
 
-    const icon = getByTestId(BANNER_ALERT_ICON_TEST_ID);
+    const icon = getByTestId(ICON_TEST_ID);
     expect(icon).toHaveClass(IconColor.PrimaryDefault);
     expect(icon).toHaveAttribute('data-name', IconName.Info);
   });
@@ -69,12 +73,16 @@ describe('BannerAlert', () => {
     'applies expected icon and background for $severity severity',
     ({ severity, iconName, iconColor, backgroundColor }) => {
       const { container, getByTestId } = render(
-        <BannerAlert severity={severity} title={`${severity} banner`} />,
+        <BannerAlert
+          severity={severity}
+          title={`${severity} banner`}
+          iconProps={{ 'data-testid': ICON_TEST_ID }}
+        />,
       );
 
       expect(container.firstElementChild).toHaveClass(backgroundColor);
 
-      const icon = getByTestId(BANNER_ALERT_ICON_TEST_ID);
+      const icon = getByTestId(ICON_TEST_ID);
       expect(icon).toHaveClass(iconColor);
       expect(icon).toHaveAttribute('data-name', iconName);
     },

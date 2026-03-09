@@ -8,7 +8,6 @@ import { Icon } from '../Icon';
 
 import {
   BANNER_ALERT_ICON_SIZE,
-  BANNER_ALERT_ICON_TEST_ID,
   MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR,
   MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR,
   MAP_BANNER_ALERT_SEVERITY_ICON_COLOR,
@@ -17,7 +16,10 @@ import {
 import type { BannerAlertProps } from './BannerAlert.types';
 
 export const BannerAlert = forwardRef<HTMLDivElement, BannerAlertProps>(
-  ({ severity = BannerAlertSeverity.Info, className, ...props }, ref) => {
+  (
+    { severity = BannerAlertSeverity.Info, iconProps, className, ...props },
+    ref,
+  ) => {
     const resolvedSeverity = severity as
       | 'info'
       | 'success'
@@ -31,13 +33,14 @@ export const BannerAlert = forwardRef<HTMLDivElement, BannerAlertProps>(
       MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR[resolvedSeverity] ??
       BoxBorderColor.BorderDefault;
     const mergedClassName = twMerge('border-l-4', borderColorClass, className);
+    const resolvedIconProps = iconProps ?? {};
 
     return (
       <BannerBase
         ref={ref}
         startAccessory={
           <Icon
-            data-testid={BANNER_ALERT_ICON_TEST_ID}
+            {...resolvedIconProps}
             name={iconName}
             color={iconColor}
             size={BANNER_ALERT_ICON_SIZE}

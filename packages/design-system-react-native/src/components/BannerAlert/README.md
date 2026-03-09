@@ -35,6 +35,10 @@ Supported values:
 - `BannerAlertSeverity.Warning`
 - `BannerAlertSeverity.Danger`
 
+### `iconProps`
+
+Optional props that are merged onto the severity icon in the start accessory. Use `iconProps` to attach identifiers (like `testID`) or add extra styling while preserving the severity-driven icon color and size.
+
 ### Inherited BannerBase Props
 
 BannerAlert forwards BannerBase props so title/content/actions/close affordance work the same way.

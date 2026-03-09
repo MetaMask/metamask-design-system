@@ -7,7 +7,6 @@ import { Icon } from '../Icon';
 
 import {
   BANNER_ALERT_ICON_SIZE,
-  BANNER_ALERT_ICON_TEST_ID,
   MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR,
   MAP_BANNER_ALERT_SEVERITY_ICON_COLOR,
   MAP_BANNER_ALERT_SEVERITY_ICON_NAME,
@@ -17,6 +16,7 @@ import type { BannerAlertProps } from './BannerAlert.types';
 
 export const BannerAlert: React.FC<BannerAlertProps> = ({
   severity = BannerAlertSeverity.Info,
+  iconProps,
   twClassName,
   ...props
 }) => {
@@ -35,12 +35,13 @@ export const BannerAlert: React.FC<BannerAlertProps> = ({
   const mergedTwClassName = `border-l-4 ${borderColorClass}${
     twClassName ? ` ${twClassName}` : ''
   }`;
+  const resolvedIconProps = iconProps ?? {};
 
   return (
     <BannerBase
       startAccessory={
         <Icon
-          testID={BANNER_ALERT_ICON_TEST_ID}
+          {...resolvedIconProps}
           name={iconName}
           color={iconColor}
           size={BANNER_ALERT_ICON_SIZE}

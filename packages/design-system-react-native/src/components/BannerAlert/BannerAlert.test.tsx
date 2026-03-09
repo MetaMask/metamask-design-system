@@ -5,13 +5,14 @@ import { BoxBackgroundColor, IconColor, IconName } from '../../types';
 import { BannerBase } from '../BannerBase';
 
 import { BannerAlert } from './BannerAlert';
-import { BANNER_ALERT_ICON_TEST_ID } from './BannerAlert.constants';
 
 import { BannerAlertSeverity } from '.';
 
 jest.mock('../BannerBase', () => ({
   BannerBase: jest.fn(() => null),
 }));
+
+const ICON_TEST_ID = 'banner-alert-icon';
 
 describe('BannerAlert', () => {
   const mockBannerBase = BannerBase as jest.Mock;
@@ -21,7 +22,9 @@ describe('BannerAlert', () => {
   });
 
   it('uses info severity styles by default', () => {
-    render(<BannerAlert title="Default info" />);
+    render(
+      <BannerAlert title="Default info" iconProps={{ testID: ICON_TEST_ID }} />,
+    );
 
     const props = mockBannerBase.mock.calls[0][0];
     expect(props.backgroundColor).toBe(BoxBackgroundColor.PrimaryMuted);
@@ -29,7 +32,7 @@ describe('BannerAlert', () => {
 
     expect(props.startAccessory.props.name).toBe(IconName.Info);
     expect(props.startAccessory.props.color).toBe(IconColor.PrimaryDefault);
-    expect(props.startAccessory.props.testID).toBe(BANNER_ALERT_ICON_TEST_ID);
+    expect(props.startAccessory.props.testID).toBe(ICON_TEST_ID);
   });
 
   it.each([
