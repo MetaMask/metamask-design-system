@@ -8,11 +8,8 @@ import {
   IconSize,
 } from '../../types';
 
-type BannerAlertSeverityType =
-  (typeof BannerAlertSeverity)[keyof typeof BannerAlertSeverity];
-
 export const MAP_BANNER_ALERT_SEVERITY_ICON_NAME: Record<
-  BannerAlertSeverityType,
+  (typeof BannerAlertSeverity)[keyof typeof BannerAlertSeverity],
   IconName
 > = {
   info: IconName.Info,
@@ -22,7 +19,7 @@ export const MAP_BANNER_ALERT_SEVERITY_ICON_NAME: Record<
 };
 
 export const MAP_BANNER_ALERT_SEVERITY_ICON_COLOR: Record<
-  BannerAlertSeverityType,
+  (typeof BannerAlertSeverity)[keyof typeof BannerAlertSeverity],
   IconColor
 > = {
   info: IconColor.PrimaryDefault,
@@ -32,7 +29,7 @@ export const MAP_BANNER_ALERT_SEVERITY_ICON_COLOR: Record<
 };
 
 export const MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR: Record<
-  BannerAlertSeverityType,
+  (typeof BannerAlertSeverity)[keyof typeof BannerAlertSeverity],
   BoxBackgroundColor
 > = {
   info: BoxBackgroundColor.PrimaryMuted,
@@ -42,7 +39,7 @@ export const MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR: Record<
 };
 
 export const MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR: Record<
-  BannerAlertSeverityType,
+  (typeof BannerAlertSeverity)[keyof typeof BannerAlertSeverity],
   BoxBorderColor
 > = {
   info: BoxBorderColor.PrimaryDefault,

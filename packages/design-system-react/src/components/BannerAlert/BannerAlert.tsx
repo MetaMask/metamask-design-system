@@ -20,17 +20,12 @@ export const BannerAlert = forwardRef<HTMLDivElement, BannerAlertProps>(
     { severity = BannerAlertSeverity.Info, iconProps, className, ...props },
     ref,
   ) => {
-    const resolvedSeverity = severity as
-      | 'info'
-      | 'success'
-      | 'warning'
-      | 'danger';
-    const iconName = MAP_BANNER_ALERT_SEVERITY_ICON_NAME[resolvedSeverity];
-    const iconColor = MAP_BANNER_ALERT_SEVERITY_ICON_COLOR[resolvedSeverity];
+    const iconName = MAP_BANNER_ALERT_SEVERITY_ICON_NAME[severity];
+    const iconColor = MAP_BANNER_ALERT_SEVERITY_ICON_COLOR[severity];
     const backgroundColor =
-      MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR[resolvedSeverity];
+      MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR[severity];
     const borderColorClass =
-      MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR[resolvedSeverity] ??
+      MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR[severity] ??
       BoxBorderColor.BorderDefault;
     const mergedClassName = twMerge('border-l-4', borderColorClass, className);
     const resolvedIconProps = iconProps ?? {};
