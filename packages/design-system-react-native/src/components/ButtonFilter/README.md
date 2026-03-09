@@ -22,12 +22,24 @@ Controls the active visual state.
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
-### Visual States
+### Button Filter Group
 
 - `isActive=true`: `bg-icon-default` + `text-icon-inverse`
 - `isActive=false`: `bg-background-muted` + `text-default`
 
 ```tsx
-<ButtonFilter isActive>All</ButtonFilter>
-<ButtonFilter>Purchased</ButtonFilter>
+const [activeFilter, setActiveFilter] = useState('All');
+
+<ButtonFilter isActive={activeFilter === 'All'} onPress={() => setActiveFilter('All')}>
+  All
+</ButtonFilter>
+<ButtonFilter
+  isActive={activeFilter === 'Purchased'}
+  onPress={() => setActiveFilter('Purchased')}
+>
+  Purchased
+</ButtonFilter>
+<ButtonFilter isActive={activeFilter === 'Sold'} onPress={() => setActiveFilter('Sold')}>
+  Sold
+</ButtonFilter>
 ```
