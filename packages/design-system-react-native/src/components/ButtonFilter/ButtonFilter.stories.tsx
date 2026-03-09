@@ -35,11 +35,7 @@ const meta: Meta<typeof ButtonFilter> = {
 export default meta;
 type Story = StoryObj<typeof ButtonFilter>;
 
-export const Default: Story = {
-  args: {
-    isActive: false,
-  },
-};
+export const Default: Story = {};
 
 export const IsActive: Story = {
   args: {
