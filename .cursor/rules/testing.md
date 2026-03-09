@@ -38,17 +38,20 @@ expect(getByTestId('button').props.onPress).toBeDefined();
 
 ### React Native Style Assertions
 
-- **ALWAYS** use resolved-style assertions for RN style contracts.
+- **ALWAYS** use built-in `toHaveStyle` matcher for RN style contracts.
 - **NEVER** duplicate local `flattenStyles` helpers in component test files.
-- **PREFER** `toResolveToStyle` with key style tokens (`backgroundColor`, `opacity`, `borderColor`) over full style snapshots.
+- **PREFER** `toHaveStyle` with Tailwind classes directly (`tw\`class-names\``) to match component code.
 - **AVOID** relying on brittle `style[0]` ordering unless explicitly required by the contract.
 
 ```tsx
 // ❌ Duplicated helper per test file
 function flattenStyles(styleProp: unknown): Record<string, unknown>[] { ... }
 
-// ✅ Focused shared matcher
-expect(button.props.style).toResolveToStyle({ opacity: 0.5 });
+// ✅ Direct Tailwind classes (preferred - matches component code)
+expect(button).toHaveStyle(tw`bg-primary-default rounded-lg p-4`);
+
+// ✅ Single property when needed
+expect(button).toHaveStyle({ opacity: 0.5 });
 ```
 
 ### Isolation, Mocks, and Async
@@ -82,13 +85,14 @@ cases.forEach(({ props, expectedBg }) => {
 });
 ```
 
-### Shared Test Utilities
+### Built-in Testing Library Matchers
 
-- **ALWAYS** centralize reusable RN style helpers under:
-  `packages/design-system-react-native/src/test-utils/`
-- **PREFER** a focused API for final style contract checks:
-  `getResolvedStyle` + `toResolveToStyle`.
-- **OPTIONAL** expose custom matchers from `packages/design-system-react-native/jest.setup.js` when readability improves.
+- **ALWAYS** use built-in matchers from `@testing-library/react-native`:
+  - `toHaveStyle()` - Style assertions
+  - `toBeOnTheScreen()` - Presence checks
+  - `toHaveTextContent()` - Text content
+  - `toBeDisabled()` / `toBeEnabled()` - Interaction state
+- **REFERENCE:** [Jest Matchers Documentation](https://callstack.github.io/react-native-testing-library/docs/api/jest-matchers)
 
 ### Coverage Strategy (100% Thresholds)
 
@@ -113,10 +117,11 @@ yarn workspace @metamask/design-system-react-native test:clean
 
 Use these files as references when adding or refactoring RN tests:
 
-- `packages/design-system-react-native/src/components/ButtonBase/ButtonBase.test.tsx`
-- `packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.test.tsx`
-- `packages/design-system-react-native/src/components/Box/Box.test.tsx`
-- `packages/design-system-react-native/src/components/Checkbox/Checkbox.test.tsx`
+- `packages/design-system-react-native/src/components/RadioButton/RadioButton.test.tsx` - Clean `toHaveStyle` usage (migrated)
+- `packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.test.tsx` - Design token assertions with `toHaveStyle`
+- `packages/design-system-react-native/src/components/ButtonBase/ButtonBase.test.tsx` - Comprehensive accessibility tests
+- `packages/design-system-react-native/src/components/Box/Box.test.tsx` - Box primitives and layout
+- `packages/design-system-react-native/src/components/Checkbox/Checkbox.test.tsx` - Interactive state testing
 
 If duplication is detected across multiple suites (for example button variants), extract shared test utilities or table-driven harnesses.
 
@@ -126,7 +131,7 @@ After adding or updating tests, verify:
 
 - [ ] Public props and states are covered by contract assertions
 - [ ] No new duplicated `flattenStyles` helpers were introduced
-- [ ] RN style assertions use shared helper(s) where applicable
+- [ ] RN style assertions use built-in `toHaveStyle` matcher
 - [ ] Accessibility assertions are present for interactive components
 - [ ] Table-driven tests are used for variant combinations when practical
 - [ ] `yarn workspace @metamask/design-system-react-native test` passes

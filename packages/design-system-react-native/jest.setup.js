@@ -1,3 +1,6 @@
+// Import built-in Jest matchers from React Native Testing Library
+import '@testing-library/react-native/extend-expect';
+
 jest.mock('react-native-svg', () => {
   const React = require('react');
   const { View } = require('react-native');
@@ -47,25 +50,4 @@ beforeEach(() => {
     height: 0,
     width: 0,
   });
-});
-
-const {
-  resolvedStyleIncludes,
-} = require('./src/test-utils/styles');
-
-expect.extend({
-  toResolveToStyle(receivedStyle, expectedStyle) {
-    const pass = resolvedStyleIncludes(receivedStyle, expectedStyle);
-    return {
-      pass,
-      message: () =>
-        pass
-          ? `Expected resolved style not to include ${JSON.stringify(
-              expectedStyle,
-            )}`
-          : `Expected resolved style to include ${JSON.stringify(
-              expectedStyle,
-            )}`,
-    };
-  },
 });
