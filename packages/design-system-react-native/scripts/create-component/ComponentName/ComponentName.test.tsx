@@ -32,7 +32,16 @@ describe('ComponentName', () => {
     );
 
     expect(getByTestId('component-name')).toHaveStyle(tw`bg-default`);
-    // Add more style-related tests as needed
+  });
+
+  it('accepts testID prop', () => {
+    const { getByTestId } = render(
+      <ComponentName testID="component-name">
+        <Text>Test Content</Text>
+      </ComponentName>,
+    );
+
+    expect(getByTestId('component-name')).toBeOnTheScreen();
   });
 
   // Add more tests as needed
