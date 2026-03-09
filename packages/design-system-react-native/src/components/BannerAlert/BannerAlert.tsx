@@ -1,3 +1,4 @@
+import { BannerAlertSeverity } from '@metamask/design-system-shared';
 import React from 'react';
 
 import { BoxBorderColor } from '../../types';
@@ -7,7 +8,6 @@ import { Icon } from '../Icon';
 import {
   BANNER_ALERT_ICON_SIZE,
   BANNER_ALERT_ICON_TEST_ID,
-  DEFAULT_BANNER_ALERT_SEVERITY,
   MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR,
   MAP_BANNER_ALERT_SEVERITY_ICON_COLOR,
   MAP_BANNER_ALERT_SEVERITY_ICON_NAME,
@@ -16,7 +16,7 @@ import {
 import type { BannerAlertProps } from './BannerAlert.types';
 
 export const BannerAlert: React.FC<BannerAlertProps> = ({
-  severity = DEFAULT_BANNER_ALERT_SEVERITY,
+  severity = BannerAlertSeverity.Info,
   twClassName,
   ...props
 }) => {

@@ -8,8 +8,6 @@ import {
   IconSize,
 } from '../../types';
 
-export const DEFAULT_BANNER_ALERT_SEVERITY = BannerAlertSeverity.Info;
-
 type BannerAlertSeverityType =
   (typeof BannerAlertSeverity)[keyof typeof BannerAlertSeverity];
 

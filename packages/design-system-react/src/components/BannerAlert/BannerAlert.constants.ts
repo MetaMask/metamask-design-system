@@ -11,8 +11,6 @@ import {
 type BannerAlertSeverityType =
   (typeof BannerAlertSeverity)[keyof typeof BannerAlertSeverity];
 
-export const DEFAULT_BANNER_ALERT_SEVERITY = BannerAlertSeverity.Info;
-
 export const MAP_BANNER_ALERT_SEVERITY_ICON_NAME: Record<
   BannerAlertSeverityType,
   IconName
