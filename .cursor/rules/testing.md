@@ -50,9 +50,34 @@ expect(onPress).toHaveBeenCalledTimes(1);
 
 ### Query and Assertion Conventions
 
-- **PREFER** `getByTestId` / `queryByTestId` for stable element selection.
-- **PREFER** `toBeOnTheScreen()` for presence checks over `toBeDefined()` / `toBeTruthy()`.
-- **PREFER** specific assertions (`toHaveTextContent`, `toBeDisabled`, `toHaveStyle`) over generic existence checks.
+**React Web:**
+
+- **PREFER** `getByRole` / `getByTestId` for element selection
+- **PREFER** `toBeInTheDocument()` for presence checks
+- **PREFER** specific assertions (`toHaveTextContent`, `toBeDisabled`, `toHaveClass`)
+
+**React Native:**
+
+- **PREFER** `getByTestId` / `queryByTestId` for stable element selection
+- **PREFER** `toBeOnTheScreen()` for presence checks over `toBeDefined()` / `toBeTruthy()`
+- **PREFER** specific assertions (`toHaveTextContent`, `toBeDisabled`, `toHaveStyle`)
+
+### React Web Style Assertions
+
+- **ALWAYS** use `toHaveClass()` for Tailwind class assertions
+- **USE** `toHaveStyle()` ONLY for inline style prop validation (not Tailwind classes)
+- **NEVER** check computed styles - test the contract (classes applied), not browser rendering
+
+```tsx
+// ✅ Correct - Check Tailwind classes
+expect(button).toHaveClass('bg-icon-default', 'hover:bg-icon-default-hover');
+
+// ✅ Correct - Check inline styles when style prop used
+expect(badge).toHaveStyle({ backgroundColor: 'red' });
+
+// ❌ Wrong - Don't use toHaveStyle for Tailwind classes
+expect(button).toHaveStyle({ backgroundColor: '#037DD6' });
+```
 
 ### React Native Style Assertions
 
@@ -81,7 +106,7 @@ expect(button).toHaveStyle({ opacity: 0.5 });
 - **ALWAYS** wrap async interactions that trigger React state updates in `act(async () => { ... })`.
 - **ALWAYS** cover both success and failure paths for async behavior.
 
-### twClassName and Tailwind Assertions
+### twClassName and Tailwind Assertions (React Native)
 
 - **ALWAYS** validate `twClassName` behavior by asserting resolved style outputs, not raw class strings.
 - **ALWAYS** cover class precedence and merge behavior when `twClassName` and `style` are both provided.
@@ -108,12 +133,23 @@ cases.forEach(({ props, expectedBg }) => {
 
 ### Built-in Testing Library Matchers
 
-- **ALWAYS** use built-in matchers from `@testing-library/react-native`:
-  - `toHaveStyle()` - Style assertions
-  - `toBeOnTheScreen()` - Presence checks
-  - `toHaveTextContent()` - Text content
-  - `toBeDisabled()` / `toBeEnabled()` - Interaction state
-- **REFERENCE:** [Jest Matchers Documentation](https://callstack.github.io/react-native-testing-library/docs/api/jest-matchers)
+**React Web** (`@testing-library/react` + `@testing-library/jest-dom`):
+
+- `toBeInTheDocument()` - Presence checks
+- `toHaveClass()` - Tailwind class assertions
+- `toHaveStyle()` - Inline style assertions only
+- `toHaveTextContent()` - Text content
+- `toBeDisabled()` / `toBeEnabled()` - Interaction state
+- `toHaveAttribute()` - Attribute checks
+- **REFERENCE:** [jest-dom Matchers](https://github.com/testing-library/jest-dom#custom-matchers)
+
+**React Native** (`@testing-library/react-native`):
+
+- `toBeOnTheScreen()` - Presence checks
+- `toHaveStyle()` - Style assertions (Tailwind or inline)
+- `toHaveTextContent()` - Text content
+- `toBeDisabled()` / `toBeEnabled()` - Interaction state
+- **REFERENCE:** [RN Jest Matchers](https://callstack.github.io/react-native-testing-library/docs/api/jest-matchers)
 
 ### Coverage Strategy (100% Thresholds)
 
@@ -121,32 +157,61 @@ cases.forEach(({ props, expectedBg }) => {
 - **PREFER** one high-signal assertion per branch over many broad snapshots.
 - **ALWAYS** include accessibility assertions using built-in matchers (`toBeDisabled()`, `toHaveAccessibilityValue()`) not direct prop checks.
 
+### Coverage Policy
+
+- **NEVER** use `/* istanbul ignore next */` to hide untested code
+- **ALWAYS** set explicit per-file thresholds for legitimately untestable code
+- **DOCUMENT** why code cannot be tested when setting reduced thresholds
+- **PREFER** removing code over ignoring coverage
+
+```tsx
+// ❌ Wrong - Hiding untested code
+/* istanbul ignore next - handler body covered by focus/blur tests */
+const onBlurHandler = useCallback(() => {
+  setIsFocused(false);
+}, []);
+
+// ✅ Correct - Explicit threshold with documentation in jest.config.js
+coverageThreshold: {
+  './src/components/Skeleton/Skeleton.tsx': {
+    branches: 98,  // Animation callback not testable in Jest
+  },
+}
+```
+
+**Legitimate exceptions ONLY:**
+
+- Animation callbacks (React Native Animated API limitations)
+- Exhaustive switch default cases (TypeScript ensures completeness)
+- Platform-specific code not executable in Jest environment
+
 ## Commands
 
 ```bash
-# Run RN package tests
+# React Web package tests
+yarn workspace @metamask/design-system-react test
+yarn workspace @metamask/design-system-react test:verbose
+
+# React Native package tests
 yarn workspace @metamask/design-system-react-native test
-
-# Verbose RN tests
 yarn workspace @metamask/design-system-react-native test:verbose
-
-# Clear RN test cache
 yarn workspace @metamask/design-system-react-native test:clean
 ```
 
 ## Golden Path Examples
 
-Use these files as references when adding or refactoring RN tests:
+Use these files as references when adding or refactoring tests:
 
-**Migrated to built-in matchers (reference these):**
+**React Web** (reference for `toHaveClass`, `toBeInTheDocument` patterns):
+
+- @packages/design-system-react/src/components/BadgeStatus/BadgeStatus.test.tsx - Clean `toHaveClass` usage, status/size variants
+- @packages/design-system-react/src/components/Button/Button.test.tsx - Variant testing, danger/inverse states
+
+**React Native** (reference for `toHaveStyle(tw\`\`)`, `toBeOnTheScreen` patterns):
 
 - @packages/design-system-react-native/src/components/RadioButton/RadioButton.test.tsx - Clean `toHaveStyle` usage, interaction testing with mocks
 - @packages/design-system-react-native/src/components/Button/variants/ButtonPrimary/ButtonPrimary.test.tsx - Design token assertions with `toHaveStyle(tw\`\`)`, loading state, accessibility
-
-**Comprehensive coverage patterns:**
-
-- @packages/design-system-react-native/src/components/ButtonBase/ButtonBase.test.tsx - Accessibility tests (note: still uses old style patterns, reference for accessibility only)
-- @packages/design-system-react-native/src/components/Checkbox/Checkbox.test.tsx - Interactive state testing (note: still uses old style patterns, reference for interaction only)
+- @packages/design-system-react-native/src/components/ButtonBase/ButtonBase.test.tsx - Comprehensive accessibility tests
 
 If duplication is detected across multiple suites (for example button variants), extract shared test utilities or table-driven harnesses.
 
