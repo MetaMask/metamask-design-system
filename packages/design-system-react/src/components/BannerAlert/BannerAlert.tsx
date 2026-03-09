@@ -1,13 +1,12 @@
 import { BannerAlertSeverity } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { BoxBorderColor } from '../../types';
+import { BoxBorderColor, IconSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { BannerBase } from '../BannerBase';
 import { Icon } from '../Icon';
 
 import {
-  BANNER_ALERT_ICON_SIZE,
   MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR,
   MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR,
   MAP_BANNER_ALERT_SEVERITY_ICON_COLOR,
@@ -34,12 +33,12 @@ export const BannerAlert = forwardRef<HTMLDivElement, BannerAlertProps>(
       <BannerBase
         ref={ref}
         startAccessory={
-          <Icon
-            {...resolvedIconProps}
-            name={iconName}
-            color={iconColor}
-            size={BANNER_ALERT_ICON_SIZE}
-          />
+            <Icon
+              {...resolvedIconProps}
+              name={iconName}
+              color={iconColor}
+              size={IconSize.Lg}
+            />
         }
         backgroundColor={backgroundColor}
         paddingLeft={2}

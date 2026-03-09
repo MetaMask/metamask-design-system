@@ -5,7 +5,6 @@ import {
   BoxBorderColor,
   IconColor,
   IconName,
-  IconSize,
 } from '../../types';
 
 export const MAP_BANNER_ALERT_SEVERITY_ICON_NAME: Record<
@@ -47,5 +46,3 @@ export const MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR: Record<
   warning: BoxBorderColor.WarningDefault,
   danger: BoxBorderColor.ErrorDefault,
 };
-
-export const BANNER_ALERT_ICON_SIZE = IconSize.Lg;
