@@ -7,23 +7,6 @@ import { BannerAlert } from './BannerAlert';
 
 import { BannerAlertSeverity } from '.';
 
-jest.mock('../Icon', () => {
-  const actual = jest.requireActual('../Icon');
-
-  return {
-    ...actual,
-    Icon: ({
-      name,
-      color,
-      'data-testid': dataTestId,
-    }: {
-      name: string;
-      color: string;
-      'data-testid'?: string;
-    }) => <div data-testid={dataTestId} data-name={name} className={color} />,
-  };
-});
-
 const ICON_TEST_ID = 'banner-alert-icon';
 
 describe('BannerAlert', () => {
