@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { ComponentProps } from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   Box,
