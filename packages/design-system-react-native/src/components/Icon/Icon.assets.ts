@@ -155,6 +155,7 @@ import MapSVG from './assets/map.svg';
 import MenuSVG from './assets/menu.svg';
 import MessageQuestionSVG from './assets/message-question.svg';
 import MessagesSVG from './assets/messages.svg';
+import MetamaskFoxFilledSVG from './assets/metamask-fox-filled.svg';
 import MetamaskFoxOutlineSVG from './assets/metamask-fox-outline.svg';
 import MicSVG from './assets/mic.svg';
 import MinusBoldSVG from './assets/minus-bold.svg';
@@ -199,6 +200,7 @@ import SavingSVG from './assets/saving.svg';
 import ScanBarcodeSVG from './assets/scan-barcode.svg';
 import ScanFocusSVG from './assets/scan-focus.svg';
 import ScanSVG from './assets/scan.svg';
+import SearchFilledSVG from './assets/search-filled.svg';
 import SearchSVG from './assets/search.svg';
 import SecurityAlertSVG from './assets/security-alert.svg';
 import SecurityCrossSVG from './assets/security-cross.svg';
@@ -439,6 +441,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.Menu]: MenuSVG,
   [IconName.MessageQuestion]: MessageQuestionSVG,
   [IconName.Messages]: MessagesSVG,
+  [IconName.MetamaskFoxFilled]: MetamaskFoxFilledSVG,
   [IconName.MetamaskFoxOutline]: MetamaskFoxOutlineSVG,
   [IconName.Mic]: MicSVG,
   [IconName.MinusBold]: MinusBoldSVG,
@@ -483,6 +486,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.ScanBarcode]: ScanBarcodeSVG,
   [IconName.ScanFocus]: ScanFocusSVG,
   [IconName.Scan]: ScanSVG,
+  [IconName.SearchFilled]: SearchFilledSVG,
   [IconName.Search]: SearchSVG,
   [IconName.SecurityAlert]: SecurityAlertSVG,
   [IconName.SecurityCross]: SecurityCrossSVG,
