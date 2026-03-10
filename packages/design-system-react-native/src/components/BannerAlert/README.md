@@ -35,7 +35,7 @@ Supported values:
 - `BannerAlertSeverity.Warning`
 - `BannerAlertSeverity.Danger`
 
-Optional props that are spread onto the icon rendered in the start accessory. Use `iconProps` when you need to attach identifiers (e.g., `testID`) or custom twrnc class names without replacing the built-in severity styles.
+Optional props that are merged onto the severity icon in the start accessory. Use `iconProps` to attach identifiers (like `testID`) or add extra styling while preserving the severity-driven icon color and size.
 
 ### `title`
 
@@ -92,10 +92,6 @@ Optional callback that renders the close icon; `closeButtonProps` customizes the
 | `closeButtonProps` | `Partial<ButtonIconProps>` | No       | `undefined` |
 
 See the **OnClose** story for behavior.
-
-### `iconProps`
-
-Optional props that are merged onto the severity icon in the start accessory. Use `iconProps` to attach identifiers (like `testID`) or add extra styling while preserving the severity-driven icon color and size.
 
 ### `twClassName`
 
