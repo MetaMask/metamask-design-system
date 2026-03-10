@@ -2,9 +2,19 @@ import base, { createConfig } from '@metamask/eslint-config';
 import jest from '@metamask/eslint-config-jest';
 import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
-import tailwind from 'eslint-plugin-better-tailwindcss';
+import betterTailwind from 'eslint-plugin-better-tailwindcss';
+import { createRequire } from 'node:module';
+import path from 'node:path';
 
 const NODE_LTS_VERSION = 22;
+const nativeRequire = createRequire(
+  new URL('./apps/storybook-react-native/package.json', import.meta.url),
+);
+const nativeTailwind = nativeRequire('eslint-plugin-tailwindcss');
+const NATIVE_TAILWIND_CONFIG_PATH = path.resolve(
+  import.meta.dirname,
+  'apps/storybook-react-native/tailwind-intellisense.config.js',
+);
 
 const config = createConfig([
   ...base,
@@ -232,7 +242,7 @@ const config = createConfig([
       },
     },
     plugins: {
-      'better-tailwindcss': tailwind,
+      'better-tailwindcss': betterTailwind,
     },
     rules: {
       'better-tailwindcss/sort-classes': 'error',
@@ -244,17 +254,24 @@ const config = createConfig([
       'packages/design-system-react-native/src/**',
       'apps/storybook-react-native/stories/**',
     ],
-    settings: {
-      'better-tailwindcss': {
-        tailwindConfig:
-          'apps/storybook-react-native/tailwind-intellisense.config.js',
-      },
-    },
     plugins: {
-      'better-tailwindcss': tailwind,
+      tailwindcss: nativeTailwind,
     },
     rules: {
-      'better-tailwindcss/sort-classes': 'error',
+      'tailwindcss/classnames-order': 'error',
+      'tailwindcss/enforces-negative-arbitrary-values': 'error',
+      'tailwindcss/enforces-shorthand': 'error',
+      'tailwindcss/no-arbitrary-value': 'off', // There are legitimate reasons to use arbitrary values but we should specifically error on static colors
+      'tailwindcss/no-custom-classname': 'off', // Native includes dynamic token-driven class segments (e.g. text-${...})
+      'tailwindcss/no-contradicting-classname': 'error',
+      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
+    },
+    settings: {
+      tailwindcss: {
+        callees: ['twClassName', 'tw'],
+        config: NATIVE_TAILWIND_CONFIG_PATH,
+        tags: ['tw'], // Enable template literal support for tw`classnames`
+      },
     },
   },
 ]);
