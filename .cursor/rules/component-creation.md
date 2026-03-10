@@ -180,19 +180,12 @@ Follow @.cursor/rules/component-documentation.md:
 
 ### Step 8: Write Tests
 
-Basic test pattern:
+Follow @.cursor/rules/testing.md for complete testing standards including:
 
-```tsx
-import { render } from '@testing-library/react'; // or react-native
-import { MyComponent } from './MyComponent';
-
-describe('MyComponent', () => {
-  it('renders children', () => {
-    const { getByText } = render(<MyComponent>Test</MyComponent>);
-    expect(getByText('Test')).toBeDefined();
-  });
-});
-```
+- Platform-specific patterns (React Web vs React Native)
+- Correct matchers (`toHaveClass` for web, `toHaveStyle(tw\`\`)` for native)
+- Query conventions (`toBeInTheDocument` vs `toBeOnTheScreen`)
+- Coverage requirements and policy
 
 ### Step 9: Create Documentation
 

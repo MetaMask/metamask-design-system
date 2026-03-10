@@ -69,10 +69,10 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 - `styling.md` - Design tokens, Tailwind, component-first
 - `component-documentation.md` - Storybook and README standards
 - `figma-integration.md` - Code Connect
+- `testing.md` - Jest, Testing Library, accessibility, style assertions
 
 **Planned Rule Files**
 
-- `testing.md` - Jest, Testing Library, accessibility
 - `monorepo-workflow.md` - Workspace commands
 
 **Why this format?**

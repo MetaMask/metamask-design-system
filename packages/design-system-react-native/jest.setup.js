@@ -1,3 +1,6 @@
+// Import built-in Jest matchers from React Native Testing Library
+import '@testing-library/react-native/extend-expect';
+
 jest.mock('react-native-svg', () => {
   const React = require('react');
   const { View } = require('react-native');
