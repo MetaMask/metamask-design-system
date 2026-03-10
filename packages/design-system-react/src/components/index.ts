@@ -108,6 +108,9 @@ export type { TextProps } from './Text';
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
+export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
+export type { BannerAlertProps } from './BannerAlert';
+
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';
 export type { ButtonHeroProps } from './ButtonHero';
 
