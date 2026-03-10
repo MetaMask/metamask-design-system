@@ -1,6 +1,27 @@
 // Import built-in Jest matchers from React Native Testing Library
 import '@testing-library/react-native/extend-expect';
 
+global.__fbBatchedBridgeConfig = {
+  remoteModuleConfig: [],
+};
+
+jest.mock(
+  'react-native/Libraries/Utilities/NativePlatformConstantsIOS',
+  () => ({
+    __esModule: true,
+    default: {
+      getConstants: () => ({
+        forceTouchAvailable: false,
+        interfaceIdiom: 'handset',
+        isTesting: true,
+        osVersion: '0.0.0',
+        reactNativeVersion: { major: 0, minor: 0, patch: 0, prerelease: null },
+        systemName: 'iOS',
+      }),
+    },
+  }),
+);
+
 jest.mock('react-native-svg', () => {
   const React = require('react');
   const { View } = require('react-native');
