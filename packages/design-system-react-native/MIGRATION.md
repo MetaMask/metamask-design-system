@@ -358,15 +358,11 @@ import { Input } from '@metamask/design-system-react-native';
   placeholder="Enter text"
   defaultValue="Initial value"
   onChange={(text) => console.log(text)}
-/>
+/>;
 
 // Controlled input (still works, but value is now required)
 const [text, setText] = useState('');
-<Input
-  placeholder="Enter text"
-  value={text}
-  onChange={setText}
-/>
+<Input placeholder="Enter text" value={text} onChange={setText} />;
 ```
 
 **After (0.11.0):**
@@ -377,19 +373,11 @@ import { useState } from 'react';
 
 // All inputs must now be controlled with value prop
 const [text, setText] = useState('Initial value');
-<Input
-  placeholder="Enter text"
-  value={text}
-  onChange={setText}
-/>
+<Input placeholder="Enter text" value={text} onChange={setText} />;
 
 // Empty initial value
 const [text, setText] = useState('');
-<Input
-  placeholder="Enter text"
-  value={text}
-  onChange={setText}
-/>
+<Input placeholder="Enter text" value={text} onChange={setText} />;
 ```
 
 #### Why This Change?
@@ -415,7 +403,7 @@ const [email, setEmail] = useState('');
   placeholder="Enter email"
   value={email}
   onChange={setEmail}
-/>
+/>;
 ```
 
 ## From version 0.1.0 to 0.2.0
