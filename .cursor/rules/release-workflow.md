@@ -4,174 +4,110 @@ Guide for creating and reviewing releases in the MetaMask Design System monorepo
 
 ## Purpose
 
-This rule provides AI-first guidance for:
+AI-first workflow for creating release PRs with proper version bumps, changelogs, and breaking change documentation.
 
-- Creating release PRs with proper version bumps and changelogs
-- Documenting breaking changes in MIGRATION.md files
-- Verifying release quality before merge
+**For detailed reviewer guidance:** @docs/reviewing-release-prs.md
 
-**For human reviewer guidance**, see @docs/reviewing-release-prs.md
+## Critical Rules
 
-## When to Create a Release
+### Release Creation
 
-Create a release when:
+- ✅ **Use `npx @metamask/create-release-branch`** - there is NO yarn script
+- ✅ **Run `yarn constraints --fix && yarn && yarn dedupe`** after release spec
+- ✅ **Follow Keep a Changelog format** - consumer-facing descriptions, not commit messages
+- ❌ **NO breaking changes without MIGRATION.md updates** - both platforms if applicable
+- ✅ **Use release PR template** - `?template=release.md` or copy from @.github/PULL_REQUEST_TEMPLATE/release.md
 
-- ✅ Unreleased changes have accumulated (10+ PRs or significant features)
-- ✅ Breaking changes need to be published
-- ✅ Security patches need distribution
-- ✅ Major features are complete and tested
+### Changelog Quality
 
-**Version bump criteria (Semantic Versioning):**
+- ❌ **NO commit message regurgitation** - "Fixed button bug" is insufficient
+- ✅ **Consumer-facing descriptions** - What API changed (props, methods, exports)
+- ✅ **Include PR references** - `([#123](https://github.com/...))`
+- ✅ **Breaking changes explain migration** - Link to MIGRATION.md
 
-- **Major (X.0.0)**: Breaking changes (post-1.0 only)
-- **Minor (0.X.0)**: New features, breaking changes (pre-1.0), or non-breaking API additions
-- **Patch (0.0.X)**: Bug fixes and internal improvements
+### MIGRATION.md Documentation (Critical Gap)
 
-**Pre-1.0 convention**: Minor versions MAY contain breaking changes. This monorepo follows pre-1.0 semver where minor bumps (0.X.0) can include breaking changes.
+- ✅ **Update for ANY breaking change** - prop renames, removals, type changes, behavior changes
+- ✅ **Update BOTH platforms** if change affects both
+- ✅ **Include realistic before/after examples** - not "foo", "example", or "test"
+- ✅ **Update table of contents** with new section link
+- ❌ **NO placeholder values** - use real addresses, actual prop values
 
-## Release Creation Workflow
+## Workflow Steps
 
 ### Step 1: Create Release Branch
 
-**CRITICAL:** Use `npx` directly - there is NO `yarn create-release-branch` script:
-
 ```bash
-# ✅ Correct - Use npx
+# ✅ Correct - Use npx (NO yarn script exists)
 npx @metamask/create-release-branch
 
-# ❌ Wrong - This script doesn't exist
+# ❌ Wrong - This doesn't exist
 yarn create-release-branch
 ```
 
-The tool will:
+The tool creates `release/<version>` branch and generates release spec YAML.
 
-1. Prompt for release type (ordinary/backport)
-2. Create `release/<version>` branch
-3. Generate release spec YAML for package selection
-4. Auto-update changelogs with unreleased entries
-5. Bump package versions
+### Step 2: Edit Release Spec & Update Dependencies
 
-### Step 2: Edit Release Spec
-
-Review and edit the generated release spec YAML:
-
-```yaml
-packages:
-  '@metamask/design-system-react':
-    newVersion: 0.11.0
-    changelog:
-      - Added new components
-      - Fixed accessibility issues
-  '@metamask/design-system-react-native':
-    newVersion: 0.11.0
-```
-
-Verify:
-
-- [ ] All packages that need updates are included
-- [ ] Version bumps follow semver (breaking = major/minor, additions = minor, fixes = patch)
-- [ ] No packages are accidentally included
-
-### Step 3: Update Dependencies
-
-After release spec, run dependency management:
+1. Review/edit release spec YAML for package versions
+2. Verify version bumps follow semver (pre-1.0: minor can include breaking changes)
+3. Run dependency updates:
 
 ```bash
 yarn constraints --fix && yarn && yarn dedupe
 ```
 
-This ensures workspace dependencies are correctly updated.
+### Step 3: Update Changelogs
 
-### Step 4: Update Changelogs
+Transform auto-generated entries into consumer-facing descriptions:
 
-Review and enhance auto-generated changelog entries. Follow Keep a Changelog format.
+**Categories:** Added, Changed, Fixed
 
-#### Changelog Quality Standards
-
-**Critical rules:**
-
-- ❌ **NO commit message regurgitation** - "Fixed button bug" is insufficient
-- ✅ **Consumer-facing descriptions** - What API changed, not how code changed
-- ✅ **Specific interface details** - List classes, methods, props, types affected
-- ✅ **Include PR references** - `([#123](https://github.com/MetaMask/metamask-design-system/pull/123))`
-- ✅ **Breaking changes explain migration** - How consumers adapt to changes
-
-**Categories:**
-
-```markdown
-## [0.11.0]
-
-### Added
-
-- New features, components, props, exports
-
-### Changed
-
-- **BREAKING:** API changes requiring consumer updates
-- Non-breaking behavior modifications
-
-### Fixed
-
-- Bug fixes and corrections
-```
-
-**Example of good changelog entry:**
+**Good changelog entry example:**
 
 ```markdown
 ### Changed
 
-- **BREAKING:** Updated `ButtonIcon` API to use `variant` prop instead of `isInverse` and `isFloating` boolean props ([#948](https://github.com/MetaMask/metamask-design-system/pull/948))
+- **BREAKING:** Updated `ButtonIcon` API to use `variant` prop instead of `isInverse` and `isFloating` boolean props ([#948](...))
   - Removed `isInverse` and `isFloating` props
-  - Added `variant` prop with three options: `ButtonIconVariant.Default` (default), `ButtonIconVariant.Filled` (new muted background with rounded corners), and `ButtonIconVariant.Floating` (replaces `isFloating` behavior)
-  - Migration: Replace `isFloating={true}` with `variant={ButtonIconVariant.Floating}`, and use `variant={ButtonIconVariant.Default}` for standard transparent background
-  - See [Migration Guide](./MIGRATION.md#from-version-0100-to-0110) for complete migration instructions
+  - Added `variant` prop with three options: `ButtonIconVariant.Default`, `ButtonIconVariant.Filled`, `ButtonIconVariant.Floating`
+  - See [Migration Guide](./MIGRATION.md#from-version-0100-to-0110)
 ```
 
-**Golden path reference:** @packages/design-system-react/CHANGELOG.md, @packages/design-system-react-native/CHANGELOG.md
+**Golden path:** @packages/design-system-react/CHANGELOG.md
 
-### Step 5: Update MIGRATION.md for Breaking Changes
+### Step 4: Update MIGRATION.md for Breaking Changes
 
-**CRITICAL:** Any breaking change MUST be documented in platform MIGRATION.md files.
+**When to update:**
 
-#### When to Update MIGRATION.md
+- Prop renamed, removed, or type changed
+- Required prop added
+- Function signature changed
+- Export removed/renamed
+- TypeScript types narrowed
+- Component behavior changes (surprising way)
 
-Update MIGRATION.md when:
-
-- ✅ Prop is renamed, removed, or type changes
-- ✅ Component behavior changes in surprising way
-- ✅ Required prop is added
-- ✅ Function signature changes
-- ✅ Export is removed or renamed
-- ✅ TypeScript types are narrowed or changed
-- ✅ Minimum Node version is bumped
-
-Update BOTH platforms if change affects both:
-
-- ✅ `packages/design-system-react/MIGRATION.md`
-- ✅ `packages/design-system-react-native/MIGRATION.md`
-
-#### MIGRATION.md Structure Pattern
-
-**Add new version section at the top:**
+**Structure pattern:**
 
 ```markdown
-## From version 0.10.0 to 0.11.0
+## From version 0.X.0 to 0.Y.0
 
 ### Component Name Breaking Change
 
 **What Changed:**
 
-- Describe the old behavior/API
-- Describe the new behavior/API
-- Why the change was made (rationale)
+- Old behavior/API description
+- New behavior/API description
+- Rationale (why the change)
 
 **Migration:**
 
 \`\`\`tsx
-// Before (0.10.0)
-<Component oldProp={value} deprecatedBehavior />
+// Before (0.X.0)
+import { Component } from '@metamask/design-system-react';
+<Component oldProp={value} />
 
-// After (0.11.0)
+// After (0.Y.0)
 import { Component, NewEnum } from '@metamask/design-system-react';
 <Component newProp={NewEnum.Value} />
 \`\`\`
@@ -191,276 +127,78 @@ import { Component, NewEnum } from '@metamask/design-system-react';
 - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 ```
 
-#### MIGRATION.md Critical Rules
+**Critical MIGRATION.md rules:**
 
-- ❌ **NO breaking changes without migration docs**
-- ✅ **Include realistic before/after code examples** (not "foo", "example", "test")
-- ✅ **Show exact imports needed** (component + enums)
-- ✅ **Update table of contents** with new section link
-- ✅ **Document WHY change was made** (helps adoption)
-- ✅ **Show all prop/API changes** in examples
-- ✅ **Use actual addresses/values** in examples (e.g., real Ethereum addresses for AvatarAccount)
+- ✅ Realistic examples (real Ethereum addresses for AvatarAccount, actual values)
+- ✅ Show exact imports needed (component + enums)
+- ✅ Document WHY change was made
+- ✅ Both platforms if change affects both
+- ❌ NO placeholders ("foo", "example", "0x123")
 
-#### MIGRATION.md Examples
+**Golden path:** @packages/design-system-react-native/MIGRATION.md (Input controlled-only example with rationale)
 
-**Good ButtonIcon migration example:**
+### Step 5: Create Pull Request
 
-```markdown
-## From version 0.10.0 to 0.11.0
-
-### ButtonIcon Variant Prop
-
-**What Changed:**
-
-- Removed `isInverse` and `isFloating` boolean props
-- Added `variant` prop with three options:
-  - `ButtonIconVariant.Default` (transparent background - default)
-  - `ButtonIconVariant.Filled` (muted background with rounded corners - new)
-  - `ButtonIconVariant.Floating` (colored background with inverse icon - replaces `isFloating`)
-
-**Migration:**
-
-\`\`\`tsx
-// Before (0.10.0)
-import { ButtonIcon, IconName } from '@metamask/design-system-react';
-
-<ButtonIcon name={IconName.Add} />
-<ButtonIcon name={IconName.Add} isFloating />
-
-// After (0.11.0)
-import { ButtonIcon, ButtonIconVariant, IconName } from '@metamask/design-system-react';
-
-<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Default} />
-// or omit variant prop as Default is the default value
-<ButtonIcon name={IconName.Add} />
-
-<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Floating} />
-
-// New filled variant option
-<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Filled} />
-\`\`\`
-
-**Impact:**
-
-- Affects all ButtonIcon usage with `isFloating` prop
-- Default behavior unchanged (no migration needed for basic usage)
-```
-
-**Good Input controlled-only migration example:**
-
-```markdown
-### Input Controlled-Only Requirement
-
-**What Changed:**
-
-- Removed `defaultValue` prop
-- `value` prop is now required
-- All Input instances must be controlled with state management
-
-**Migration:**
-
-\`\`\`tsx
-// Before (0.10.0)
-<Input placeholder="Enter text" defaultValue="Initial" onChange={handleChange} />
-
-// After (0.11.0)
-import { useState } from 'react';
-
-const [text, setText] = useState('Initial');
-<Input placeholder="Enter text" value={text} onChange={setText} />
-\`\`\`
-
-**Why This Change?**
-
-This change provides:
-
-- **Consistent behavior**: All Input instances now behave predictably as controlled components
-- **Better state management**: Forces explicit state management, reducing bugs from mixed controlled/uncontrolled usage
-- **iOS placeholder fix**: Enables proper iOS-specific placeholder alignment without affecting typed text rendering
-
-**Impact:**
-
-- Affects all Input and TextField usage
-- Requires adding state management (useState) for all inputs
-```
-
-**Golden path reference:** @packages/design-system-react/MIGRATION.md, @packages/design-system-react-native/MIGRATION.md
-
-### Step 6: Create Pull Request
-
-Create PR with title: `Release <version>`
-
-**Use the release PR template:**
-
-When creating the PR on GitHub, use the release template by appending `?template=release.md` to the compare URL:
+Use release PR template by appending `?template=release.md` to compare URL:
 
 ```
 https://github.com/MetaMask/metamask-design-system/compare/main...release/VERSION?template=release.md
 ```
 
-Or manually copy the template from @.github/PULL_REQUEST_TEMPLATE/release.md
+Or copy from @.github/PULL_REQUEST_TEMPLATE/release.md
 
-**PR description structure** (from template, based on PR #972):
+**Golden path:** PR #972 (complete release with breaking changes)
 
-```markdown
-## Release <version>
-
-This release includes [summary of major changes].
-
-### 📦 Package Versions
-
-- `@metamask/design-system-shared`: **X.Y.Z**
-- `@metamask/design-system-react`: **X.Y.Z**
-- `@metamask/design-system-react-native`: **X.Y.Z**
-
-### 🔄 Shared Type Updates (X.Y.Z)
-
-#### Component Type Additions (#PRs)
-
-**What Changed:**
-
-- [Detailed description]
-
-**Impact:**
-
-- [Consumer impact]
-
-### 🌐 React Web Updates (X.Y.Z)
-
-#### Added
-
-- [New features with PR links]
-
-#### Changed
-
-- [Changes with PR links]
-- **BREAKING:** [Breaking changes with migration snippets]
-
-#### Fixed
-
-- [Bug fixes with PR links]
-
-### 📱 React Native Updates (X.Y.Z)
-
-#### Added
-
-- [New features with PR links]
-
-#### Changed
-
-- [Changes with PR links]
-- **BREAKING:** [Breaking changes with migration snippets]
-
-#### Fixed
-
-- [Bug fixes with PR links]
-
-### ⚠️ Breaking Changes
-
-#### Breaking Change Name (Platform)
-
-**What Changed:**
-
-- [Description]
-
-**Migration:**
-\`\`\`tsx
-// Before
-<OldAPI />
-
-// After
-<NewAPI />
-\`\`\`
-
-See migration guides for complete instructions:
-
-- [React Migration Guide](./packages/design-system-react/MIGRATION.md#from-version-xyz-to-abc)
-- [React Native Migration Guide](./packages/design-system-react-native/MIGRATION.md#from-version-xyz-to-abc)
-
-### ✅ Checklist
-
-- [x] Changelogs updated with human-readable descriptions
-- [x] Changelog validation passed (`yarn changelog:validate`)
-- [x] Version bumps follow semantic versioning
-- [x] Breaking changes documented with migration guidance
-- [x] Migration guides updated with before/after examples
-- [x] PR references included in changelog entries
-```
-
-**Golden path reference:** PR #972
-
-### Step 7: Verify Release Quality
-
-Before requesting review, verify:
+### Step 6: Verify Release Quality
 
 ```bash
-# Validate changelog format
-yarn changelog:validate
-
-# Run all checks
-yarn build
-yarn test
-yarn lint
+yarn changelog:validate  # Changelog format
+yarn build              # Build succeeds
+yarn test               # Tests pass
+yarn lint               # Lint passes
 ```
-
-All must pass without errors.
 
 ## Verification Checklist
 
-Before requesting review, confirm:
-
 ### Version Bumps
 
-- [ ] All packages that need updates are included
-- [ ] Version bumps follow semver correctly
-- [ ] Pre-1.0 convention followed (minor = breaking allowed)
+- [ ] Version bumps follow semver (pre-1.0: minor = breaking allowed)
 - [ ] Root package.json version matches release
 
 ### Changelogs
 
-- [ ] Follow Keep a Changelog format (Added, Changed, Fixed)
-- [ ] Entries are consumer-facing (API changes, not implementation)
-- [ ] Breaking changes clearly marked with "**BREAKING:**"
-- [ ] All entries include PR references `([#123](...)`
-- [ ] No commit message regurgitation
+- [ ] Keep a Changelog format (Added, Changed, Fixed)
+- [ ] Consumer-facing descriptions (API changes, not implementation)
+- [ ] Breaking changes marked "**BREAKING:**"
+- [ ] All entries include PR references
 - [ ] `yarn changelog:validate` passes
 
 ### MIGRATION.md (if breaking changes)
 
-- [ ] Breaking changes documented in platform MIGRATION.md files
-- [ ] Table of contents updated with new section links
-- [ ] Migration examples are realistic (not placeholders)
-- [ ] Before/after code examples show exact imports and usage
+- [ ] Breaking changes documented in platform MIGRATION.md
+- [ ] Table of contents updated with new section
+- [ ] Realistic before/after examples (not placeholders)
+- [ ] Exact imports shown
 - [ ] Impact and rationale explained
-- [ ] Both platforms updated if change affects both
+- [ ] Both platforms updated if applicable
 
-### Pull Request
+### Build
 
-- [ ] PR title: "Release \<version>"
-- [ ] PR description follows template (package versions, categorized changes, breaking changes, checklist)
-- [ ] Breaking changes section includes migration snippets
-- [ ] Links to migration guides included
-
-### Build Quality
-
-- [ ] `yarn build` passes
-- [ ] `yarn test` passes
-- [ ] `yarn lint` passes
-- [ ] No TypeScript errors
+- [ ] `yarn build && yarn test && yarn lint` passes
 
 ## Anti-Patterns
 
 ### ❌ Using Non-Existent Yarn Script
 
 ```bash
-# ❌ Wrong - This script doesn't exist
+# ❌ Wrong
 yarn create-release-branch
 
 # ✅ Correct
 npx @metamask/create-release-branch
 ```
 
-### ❌ Commit Message Regurgitation in Changelogs
+### ❌ Commit Message Regurgitation
 
 ```markdown
 # ❌ Wrong - Not consumer-facing
@@ -469,36 +207,36 @@ npx @metamask/create-release-branch
 
 # ✅ Correct - API-specific
 
-- Fixed `Button` component `isDisabled` prop not applying `aria-disabled` attribute correctly ([#123](https://...))
+- Fixed `Button` `isDisabled` prop not applying `aria-disabled` attribute ([#123](...))
 ```
 
 ### ❌ Breaking Changes Without Migration Docs
 
 ```markdown
-# ❌ Wrong - Breaking change in changelog only
+# ❌ Wrong - Changelog only
 
 ### Changed
 
-- **BREAKING:** Renamed `disabled` prop to `isDisabled`
+- **BREAKING:** Renamed `disabled` to `isDisabled`
 
-# ✅ Correct - Also in MIGRATION.md with examples
+# ✅ Correct - Also in MIGRATION.md
 
 ### Changed
 
-- **BREAKING:** Renamed `disabled` prop to `isDisabled` ([#123](...))
+- **BREAKING:** Renamed `disabled` to `isDisabled` ([#123](...))
   - See [Migration Guide](./MIGRATION.md#from-version-010-to-020)
 ```
 
-### ❌ Placeholder Examples in Migration Docs
+### ❌ Placeholder Examples
 
 ```tsx
-// ❌ Wrong - Placeholder values
+// ❌ Wrong
 <AvatarAccount address="0x123" />
-<Button onClick={() => console.log('example')} />
+<Input placeholder="example" />
 
-// ✅ Correct - Realistic values
+// ✅ Correct
 <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
-<Button onClick={handleSubmit}>Submit</Button>
+<Input placeholder="Enter wallet name" />
 ```
 
 ### ❌ Forgetting Table of Contents
@@ -512,7 +250,7 @@ npx @metamask/create-release-branch
 
 ## From version 0.10.0 to 0.11.0
 
-[Breaking change docs...]
+...
 
 # ✅ Correct - TOC updated
 
@@ -525,71 +263,74 @@ npx @metamask/create-release-branch
 ### ❌ Skipping Dependency Updates
 
 ```bash
-# ❌ Wrong - Not updating workspace dependencies
+# ❌ Wrong
 npx @metamask/create-release-branch
-# ... edit release spec ...
 git commit && git push
 
-# ✅ Correct - Run constraints and dedupe
+# ✅ Correct
 npx @metamask/create-release-branch
-# ... edit release spec ...
 yarn constraints --fix && yarn && yarn dedupe
 git commit && git push
 ```
 
-## Commands Reference
+## Commands
 
 ```bash
-# Create release branch
+# Create release
 npx @metamask/create-release-branch
 
-# Update workspace dependencies
-yarn constraints --fix
-yarn
-yarn dedupe
+# Update dependencies
+yarn constraints --fix && yarn && yarn dedupe
 
-# Validate changelog format
+# Validate and verify
 yarn changelog:validate
-
-# Verify release quality
-yarn build
-yarn test
-yarn lint
-
-# View changes since last release (helpful for changelog review)
-./scripts/since-latest-release.sh @metamask/design-system-react
+yarn build && yarn test && yarn lint
 ```
+
+## Version Bump Guide
+
+**Semantic Versioning (Pre-1.0 convention):**
+
+- **Major (X.0.0)**: Breaking changes (post-1.0 only)
+- **Minor (0.X.0)**: New features, breaking changes (pre-1.0), API additions
+- **Patch (0.0.X)**: Bug fixes, internal improvements
+
+Pre-1.0 packages: Minor versions MAY contain breaking changes.
 
 ## Golden Path Examples
 
-**Complete release examples:**
+**Complete release:**
 
-- PR #972 - Release 25.0.0 (comprehensive release with breaking changes, migration docs, proper changelog format)
+- PR #972 - Release 25.0.0 (breaking changes, migration docs, proper changelog format)
 
-**Changelog examples:**
+**Changelogs:**
 
-- @packages/design-system-react/CHANGELOG.md - Keep a Changelog format, consumer-facing descriptions
+- @packages/design-system-react/CHANGELOG.md - Keep a Changelog format, consumer-facing
 - @packages/design-system-react-native/CHANGELOG.md - Breaking changes with migration links
 - @packages/design-system-shared/CHANGELOG.md - Shared type documentation
 
-**Migration documentation examples:**
+**Migration docs:**
 
 - @packages/design-system-react/MIGRATION.md - ButtonIcon variant prop migration
-- @packages/design-system-react-native/MIGRATION.md - Input controlled-only migration with rationale
+- @packages/design-system-react-native/MIGRATION.md - Input controlled-only with rationale
+
+**PR template:**
+
+- @.github/PULL_REQUEST_TEMPLATE/release.md - Standardized release PR structure
 
 ## References
 
 ### Documentation
 
-- @docs/reviewing-release-prs.md - Detailed reviewer guide (human-focused)
+- @docs/reviewing-release-prs.md - Detailed reviewer guide (human-focused, comprehensive)
 - @docs/contributing.md#releasing - High-level release process
 - [Keep a Changelog](https://keepachangelog.com/) - Changelog format specification
 - [Semantic Versioning](https://semver.org/) - Version bump rules
 
 ### Related Cursor Rules
 
-- @.cursor/rules/component-migration.md - Component migration from Extension/Mobile
-- @.cursor/rules/testing.md - Test requirements before release
+- @.cursor/rules/component-migration.md - Component migration patterns
+- @.cursor/rules/testing.md - Test requirements
 - @.cursor/rules/styling.md - Design token usage
 
 ### MetaMask Standards
