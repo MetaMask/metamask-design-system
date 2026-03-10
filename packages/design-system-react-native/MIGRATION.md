@@ -7,6 +7,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Box Component](#box-component)
   - [Text Component](#text-component)
+  - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
@@ -213,6 +214,70 @@ The mobile and design-system Text components both extend `react-native` `TextPro
 - `fontFamily` - select default/accent/hero fonts
 - `fontStyle` - normal or italic text style
 - `twClassName` - Tailwind utility classes merged with component defaults
+
+### Icon Component
+
+The Icon component has some API and enum changes when migrating from the mobile component-library.
+
+#### Breaking Changes
+
+##### Size Enum Changes
+
+`IconSize` no longer supports `Xss` or `XXL`.
+
+| Mobile Size    | Design System Migration |
+| -------------- | ----------------------- |
+| `IconSize.Xss` | Use `IconSize.Xs`       |
+| `IconSize.Xs`  | `IconSize.Xs`           |
+| `IconSize.Sm`  | `IconSize.Sm`           |
+| `IconSize.Md`  | `IconSize.Md`           |
+| `IconSize.Lg`  | `IconSize.Lg`           |
+| `IconSize.Xl`  | `IconSize.Xl`           |
+| `IconSize.XXL` | Use `IconSize.Xl`       |
+
+##### Color Prop Changes
+
+Mobile accepts `string | IconColor` for `color`, while the design system uses the `IconColor` enum.
+
+| Mobile Color                   | Design System                  |
+| ------------------------------ | ------------------------------ |
+| `IconColor.Default`            | `IconColor.IconDefault`        |
+| `IconColor.Alternative`        | `IconColor.IconAlternative`    |
+| `IconColor.Muted`              | `IconColor.IconMuted`          |
+| `IconColor.Primary`            | `IconColor.PrimaryDefault`     |
+| `IconColor.PrimaryAlternative` | `IconColor.PrimaryAlternative` |
+| `IconColor.Success`            | `IconColor.SuccessDefault`     |
+| `IconColor.Error`              | `IconColor.ErrorDefault`       |
+| `IconColor.ErrorAlternative`   | `IconColor.ErrorAlternative`   |
+| `IconColor.Warning`            | `IconColor.WarningDefault`     |
+| `IconColor.Info`               | `IconColor.InfoDefault`        |
+| `IconColor.Inverse`            | `IconColor.OverlayInverse`     |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import { Icon, IconName, IconSize, IconColor } from '../../../component-library/components/Icons/Icon';
+
+<Icon name={IconName.CheckBold} size={IconSize.XXL} color={IconColor.Default} />
+<Icon name={IconName.Warning} color="#f6851b" />
+```
+
+##### After (Design System)
+
+```tsx
+import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-react-native';
+
+<Icon name={IconName.CheckBold} size={IconSize.Xl} color={IconColor.IconDefault} />
+<Icon name={IconName.Warning} color={IconColor.WarningDefault} />
+```
+
+#### API Differences
+
+- `name` remains required and uses `IconName` in both implementations
+- `hitSlop` remains available via inherited `ViewProps`
+- `twClassName` is available for Tailwind utility overrides in the design system
 
 ## Version Updates
 
