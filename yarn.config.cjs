@@ -728,6 +728,11 @@ function expectCriticalDependenciesListedAsPeerDependencies(
  * @param {Yarn} Yarn - The Yarn "global".
  */
 function expectConsistentDependenciesAndDevDependencies(Yarn) {
+  const allowInconsistentRanges = new Set([
+    // Web uses Tailwind v4 while React Native remains on v3.
+    'tailwindcss',
+  ]);
+
   const nonPeerDependenciesByIdent = getNonPeerDependenciesByIdent(
     Yarn.dependencies(),
   );
@@ -736,6 +741,10 @@ function expectConsistentDependenciesAndDevDependencies(Yarn) {
     dependencyIdent,
     dependenciesByRange,
   ] of nonPeerDependenciesByIdent.entries()) {
+    if (allowInconsistentRanges.has(dependencyIdent)) {
+      continue;
+    }
+
     const dependencyRanges = [...dependenciesByRange.keys()].sort();
     if (dependenciesByRange.size > 1) {
       for (const dependencies of dependenciesByRange.values()) {
