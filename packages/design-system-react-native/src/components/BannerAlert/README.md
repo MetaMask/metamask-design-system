@@ -35,7 +35,7 @@ Supported values:
 - `BannerAlertSeverity.Warning`
 - `BannerAlertSeverity.Danger`
 
-Optional props that are spread onto the icon rendered in the start accessory. Use `iconProps` when you need to attach identifiers (e.g., `data-testid`) or custom class names without replacing the built-in severity styles.
+Optional props that are spread onto the icon rendered in the start accessory. Use `iconProps` when you need to attach identifiers (e.g., `testID`) or custom twrnc class names without replacing the built-in severity styles.
 
 ### `title`
 
