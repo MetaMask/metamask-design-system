@@ -1,7 +1,7 @@
 import { BannerAlertSeverity } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { BoxBorderColor, IconSize } from '../../types';
+import { IconSize } from '../../types';
 import { BannerBase } from '../BannerBase';
 import { Icon } from '../Icon';
 
@@ -22,9 +22,7 @@ export const BannerAlert: React.FC<BannerAlertProps> = ({
   const iconName = MAP_BANNER_ALERT_SEVERITY_ICON_NAME[severity];
   const iconColor = MAP_BANNER_ALERT_SEVERITY_ICON_COLOR[severity];
   const backgroundColor = MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR[severity];
-  const borderColorClass =
-    MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR[severity] ??
-    BoxBorderColor.BorderDefault;
+  const borderColorClass = MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR[severity];
   const mergedTwClassName = `border-l-4 ${borderColorClass}${
     twClassName ? ` ${twClassName}` : ''
   }`;

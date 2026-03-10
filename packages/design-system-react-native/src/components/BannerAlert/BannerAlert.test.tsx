@@ -71,4 +71,12 @@ describe('BannerAlert', () => {
       expect(props.startAccessory.props.color).toBe(iconColor);
     },
   );
+
+  it('merges custom twClassName with default styles', () => {
+    render(<BannerAlert title="Custom styling" twClassName="mt-4" />);
+
+    const props = mockBannerBase.mock.calls[0][0];
+    expect(props.twClassName).toContain('border-l-4');
+    expect(props.twClassName).toContain('mt-4');
+  });
 });

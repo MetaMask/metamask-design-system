@@ -46,8 +46,6 @@ Supported values:
 - `BannerAlertSeverity.Warning`
 - `BannerAlertSeverity.Danger`
 
-### `iconProps`
-
 Optional props that are spread onto the icon rendered in the start accessory. Use `iconProps` when you need to attach identifiers (e.g., `data-testid`) or custom class names without replacing the built-in severity styles.
 
 <Canvas of={BannerAlertStories.Severity} />
@@ -352,7 +350,7 @@ Use the `style` prop when you need inline styles that can't be achieved with `cl
 
 ```tsx
 <BannerAlert
-  style={{ borderLeftWidth: 6 }}
+  style={{ marginTop: { dynamicValue } }}
   title="Custom inline border"
   actionButtonLabel="Action"
 >

@@ -35,6 +35,8 @@ Supported values:
 - `BannerAlertSeverity.Warning`
 - `BannerAlertSeverity.Danger`
 
+Optional props that are spread onto the icon rendered in the start accessory. Use `iconProps` when you need to attach identifiers (e.g., `data-testid`) or custom class names without replacing the built-in severity styles.
+
 ### `title`
 
 Optional title rendered at the top of the banner body. Use `titleProps` when passing a string.
