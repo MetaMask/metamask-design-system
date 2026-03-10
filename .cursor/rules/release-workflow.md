@@ -234,6 +234,7 @@ Pre-1.0 packages: Minor versions MAY contain breaking changes.
 
 **Migration docs:**
 
+- @packages/design-tokens/MIGRATION.md
 - @packages/design-system-react/MIGRATION.md
 - @packages/design-system-react-native/MIGRATION.md
 
