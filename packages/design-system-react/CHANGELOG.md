@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- docs: add Icon migration docs for mobile and extension ([#962](https://github.com/MetaMask/metamask-design-system/pull/962))
+- refactor: Updated Ai icon to the filled version for both packages ([#970](https://github.com/MetaMask/metamask-design-system/pull/970))
+- test: add RN style test utilities and testing rule guidance ([#913](https://github.com/MetaMask/metamask-design-system/pull/913))
+- feat: migrate ButtonFilter component to MMDS ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
+- feat: migrate BannerBase to MMDS react ([#961](https://github.com/MetaMask/metamask-design-system/pull/961))
+- docs: add Text migration docs for mobile and extension ([#953](https://github.com/MetaMask/metamask-design-system/pull/953))
+- refactor: updated ButtonIcon to have variant prop ([#948](https://github.com/MetaMask/metamask-design-system/pull/948))
+
 ## [0.10.0]
 
 ### Changed

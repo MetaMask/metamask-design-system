@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- docs: add Icon migration docs for mobile and extension ([#962](https://github.com/MetaMask/metamask-design-system/pull/962))
+- refactor: Updated Ai icon to the filled version for both packages ([#970](https://github.com/MetaMask/metamask-design-system/pull/970))
+- test: add RN style test utilities and testing rule guidance ([#913](https://github.com/MetaMask/metamask-design-system/pull/913))
+- chore: add missing React Native component exports ([#967](https://github.com/MetaMask/metamask-design-system/pull/967))
+- feat: migrate ButtonFilter component to MMDS ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
+- feat: `BottomSheet` migration ([#963](https://github.com/MetaMask/metamask-design-system/pull/963))
+- feat: migrate MainActionButton to design-system-react-native ([#952](https://github.com/MetaMask/metamask-design-system/pull/952))
+- docs: add Text migration docs for mobile and extension ([#953](https://github.com/MetaMask/metamask-design-system/pull/953))
+- fix: line-height bug and make Input controlled-only and require value ([#960](https://github.com/MetaMask/metamask-design-system/pull/960))
+- feat: migrate BannerBase from mobile into MMDS ([#955](https://github.com/MetaMask/metamask-design-system/pull/955))
+- feat: add `ListItem` ([#958](https://github.com/MetaMask/metamask-design-system/pull/958))
+- refactor: updated ButtonIcon to have variant prop ([#948](https://github.com/MetaMask/metamask-design-system/pull/948))
+- feat: `TabEmptyState` component ([#949](https://github.com/MetaMask/metamask-design-system/pull/949))
+- feat: add `BottomSheetDialog` component ([#905](https://github.com/MetaMask/metamask-design-system/pull/905))
+
 ## [0.10.0]
 
 ### Added

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: migrate ButtonFilter component to MMDS ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
+- feat: migrate BannerBase from mobile into MMDS ([#955](https://github.com/MetaMask/metamask-design-system/pull/955))
+
 ## [0.3.0]
 
 ### Added
