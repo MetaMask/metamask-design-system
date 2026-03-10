@@ -4,8 +4,8 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "rootDir": "./src",
-    "jsx": "react-native",
-    "types": ["react-native", "jest"],
+    "jsx": "react",
+    "types": ["jest"],
     "emitDeclarationOnly": false
   },
   "references": [{ "path": "../design-tokens/tsconfig.build.json" }],
