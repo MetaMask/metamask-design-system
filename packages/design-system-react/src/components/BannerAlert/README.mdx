@@ -6,6 +6,22 @@ import * as BannerAlertStories from './BannerAlert.stories';
 
 BannerAlert is a semantic alert banner that composes BannerBase and applies severity-driven icon and background styles.
 
+```tsx
+import {
+  BannerAlert,
+  BannerAlertSeverity,
+} from '@metamask/design-system-react';
+
+<BannerAlert
+  severity={BannerAlertSeverity.Info}
+  title="Title is sentence case no period"
+  description="Description shouldn't repeat title. 1-3 lines."
+  actionButtonLabel="Action"
+  actionButtonOnPress={() => undefined}
+  onClose={() => undefined}
+/>;
+```
+
 <Canvas of={BannerAlertStories.Default} />
 
 ## Props
