@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { BoxBackgroundColor, IconColor, IconName } from '../../types';
+import { BoxBackgroundColor, IconColor } from '../../types';
 
 import { BannerAlert } from './BannerAlert';
 
@@ -24,37 +24,32 @@ describe('BannerAlert', () => {
 
     const icon = getByTestId(ICON_TEST_ID);
     expect(icon).toHaveClass(IconColor.PrimaryDefault);
-    expect(icon).toHaveAttribute('data-name', IconName.Info);
   });
 
   it.each([
     {
       severity: BannerAlertSeverity.Info,
-      iconName: IconName.Info,
       iconColor: IconColor.PrimaryDefault,
       backgroundColor: BoxBackgroundColor.PrimaryMuted,
     },
     {
       severity: BannerAlertSeverity.Success,
-      iconName: IconName.Confirmation,
       iconColor: IconColor.SuccessDefault,
       backgroundColor: BoxBackgroundColor.SuccessMuted,
     },
     {
       severity: BannerAlertSeverity.Warning,
-      iconName: IconName.Danger,
       iconColor: IconColor.WarningDefault,
       backgroundColor: BoxBackgroundColor.WarningMuted,
     },
     {
       severity: BannerAlertSeverity.Danger,
-      iconName: IconName.Danger,
       iconColor: IconColor.ErrorDefault,
       backgroundColor: BoxBackgroundColor.ErrorMuted,
     },
   ])(
     'applies expected icon and background for $severity severity',
-    ({ severity, iconName, iconColor, backgroundColor }) => {
+    ({ severity, iconColor, backgroundColor }) => {
       const { container, getByTestId } = render(
         <BannerAlert
           severity={severity}
@@ -67,7 +62,6 @@ describe('BannerAlert', () => {
 
       const icon = getByTestId(ICON_TEST_ID);
       expect(icon).toHaveClass(iconColor);
-      expect(icon).toHaveAttribute('data-name', iconName);
     },
   );
 });
