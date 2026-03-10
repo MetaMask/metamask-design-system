@@ -228,6 +228,45 @@ const twContainerClassNames = 'flex-1 bg-default p-4';
 />
 ```
 
+**Merging tw.style() with style prop (Array Pattern):**
+
+When a component needs to apply Tailwind classes AND accept a custom `style` prop, use the array pattern to ensure proper merge order:
+
+```tsx
+// ❌ Wrong - Passing style directly to tw.style() causes type errors
+style={tw.style('border-l-4 border-primary-default', style)}
+
+// ✅ Correct - Array pattern (matches Box component)
+style={[
+  tw.style('border-l-4 border-primary-default', twClassName),
+  style,
+]}
+```
+
+**Why array pattern:**
+
+- ✅ Type safety (tw.style only receives classes, not StyleProp types)
+- ✅ Explicit merge order (tw classes → twClassName → style prop)
+- ✅ Consistency with Box foundational pattern
+- ✅ Native-optimized style merging (React Native handles arrays)
+- ✅ `twClassName` passed through `{...props}` is handled by Box
+
+**Example from BannerAlert:**
+
+```tsx
+export const BannerAlert = ({ severity, style, ...props }) => {
+  const tw = useTailwind();
+  const borderColorClass = MAP_SEVERITY_BORDER[severity];
+
+  return (
+    <BannerBase
+      style={[tw.style(`border-l-4 ${borderColorClass}`), style]}
+      {...props} // twClassName passed through to Box
+    />
+  );
+};
+```
+
 **NEVER import twrnc directly:**
 
 ```tsx
