@@ -73,7 +73,6 @@ describe('TextButton', () => {
 
   it('computes baselineOffset correctly for BodyMd', () => {
     const variant = MAP_TEXTBUTTON_SIZE_TEXTVARIANT[TextButtonSize.BodyMd];
-    // eslint-disable-next-line tailwindcss/no-custom-classname
     const twStyles = tw`text-${variant}` as {
       fontSize?: number;
       lineHeight?: number;
@@ -102,7 +101,6 @@ describe('TextButton', () => {
       );
       const txt = innerText({ getAllByText }, sz);
       const variant = MAP_TEXTBUTTON_SIZE_TEXTVARIANT[sz as TextButtonSize];
-      // eslint-disable-next-line tailwindcss/no-custom-classname
       const twStyles = tw`text-${variant}` as { fontSize?: number };
       const { fontSize = 0 } = twStyles;
 
