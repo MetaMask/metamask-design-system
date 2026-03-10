@@ -6,6 +6,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Box Component](#box-component)
+  - [BannerAlert Component](#banneralert-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
@@ -99,6 +100,59 @@ The design system Box provides these margin/padding props:
 - ✅ `paddingVertical`
 
 For spacing values 0-12 (0px-48px), use these props. For custom values, responsive spacing, or inline-start/end positioning, use `twClassName` with Tailwind utilities.
+
+### BannerAlert Component
+
+Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with severity values standardized to MMDS shared types.
+
+#### Breaking Changes
+
+##### Imports and Type Source
+
+| Mobile Pattern                                 | Design System Migration                                           |
+| ---------------------------------------------- | ----------------------------------------------------------------- |
+| `BannerAlertSeverity` from `BannerAlert.types` | `BannerAlertSeverity` from `@metamask/design-system-react-native` |
+
+##### Severity Values
+
+| Mobile Value                                | Design System Value                         | Notes          |
+| ------------------------------------------- | ------------------------------------------- | -------------- |
+| `BannerAlertSeverity.Info` (`'Info'`)       | `BannerAlertSeverity.Info` (`'info'`)       | casing changed |
+| `BannerAlertSeverity.Success` (`'Success'`) | `BannerAlertSeverity.Success` (`'success'`) | casing changed |
+| `BannerAlertSeverity.Warning` (`'Warning'`) | `BannerAlertSeverity.Warning` (`'warning'`) | casing changed |
+| `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed        |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import BannerAlert from '../../../component-library/components/Banners/Banner/variants/BannerAlert';
+import { BannerAlertSeverity } from '../../../component-library/components/Banners/Banner/variants/BannerAlert/BannerAlert.types';
+
+<BannerAlert
+  severity={BannerAlertSeverity.Warning}
+  title="Warning"
+  actionButtonLabel="Action"
+  actionButtonOnPress={() => undefined}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  BannerAlert,
+  BannerAlertSeverity,
+} from '@metamask/design-system-react-native';
+
+<BannerAlert
+  severity={BannerAlertSeverity.Warning}
+  title="Warning"
+  actionButtonLabel="Action"
+  actionButtonOnPress={() => undefined}
+/>;
+```
 
 ### Text Component
 

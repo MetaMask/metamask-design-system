@@ -67,6 +67,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/BadgeNetwork/BadgeNetwork.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeNetwork/BadgeNetwork.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeStatus/BadgeStatus.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.stories.tsx": require("../../../packages/design-system-react-native/src/components/BadgeWrapper/BadgeWrapper.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/BannerAlert/BannerAlert.stories.tsx": require("../../../packages/design-system-react-native/src/components/BannerAlert/BannerAlert.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BannerBase/BannerBase.stories.tsx": require("../../../packages/design-system-react-native/src/components/BannerBase/BannerBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BottomSheet/BottomSheet.stories.tsx": require("../../../packages/design-system-react-native/src/components/BottomSheet/BottomSheet.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/BottomSheetDialog/BottomSheetDialog.stories.tsx": require("../../../packages/design-system-react-native/src/components/BottomSheetDialog/BottomSheetDialog.stories.tsx"),
