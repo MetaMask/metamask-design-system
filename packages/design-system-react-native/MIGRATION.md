@@ -283,6 +283,141 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react-native`.
 
+## From version 0.10.0 to 0.11.0
+
+### ButtonIcon Variant Prop
+
+Version 0.11.0 replaces `ButtonIcon`'s boolean props `isInverse` and `isFloating` with a single `variant` prop ([#948](https://github.com/MetaMask/metamask-design-system/pull/948)).
+
+#### Breaking Changes
+
+The `ButtonIcon` component now uses a `variant` prop instead of `isInverse` and `isFloating` boolean props.
+
+#### Migration Steps
+
+**Before (0.10.0):**
+
+```tsx
+import { ButtonIcon, IconName } from '@metamask/design-system-react-native';
+
+// Default button icon (transparent background)
+<ButtonIcon name={IconName.Add} />
+
+// Floating button icon
+<ButtonIcon name={IconName.Add} isFloating />
+
+// Inverse button icon (no longer supported)
+<ButtonIcon name={IconName.Add} isInverse />
+```
+
+**After (0.11.0):**
+
+```tsx
+import { ButtonIcon, ButtonIconVariant, IconName } from '@metamask/design-system-react-native';
+
+// Default button icon (transparent background)
+<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Default} />
+// or omit variant prop as Default is the default value
+<ButtonIcon name={IconName.Add} />
+
+// Floating button icon (rounded, colored background with inverse icon)
+<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Floating} />
+
+// Filled button icon (new - muted background with rounded corners)
+<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Filled} />
+```
+
+#### New Variants
+
+- `ButtonIconVariant.Default` - Transparent background with default icon color and pressed state (default)
+- `ButtonIconVariant.Filled` - Muted background (`bg-muted`) with rounded corners and pressed state (new)
+- `ButtonIconVariant.Floating` - Colored background with inverse icon color (replaces `isFloating`)
+
+#### Removed Props
+
+- `isInverse` - No longer supported
+- `isFloating` - Replaced by `variant={ButtonIconVariant.Floating}`
+
+### Input Controlled-Only Requirement
+
+Version 0.11.0 makes the `Input` component controlled-only by requiring the `value` prop and removing `defaultValue` support ([#960](https://github.com/MetaMask/metamask-design-system/pull/960)).
+
+#### Breaking Changes
+
+The `Input` component now requires a `value` prop and no longer supports uncontrolled usage via `defaultValue`.
+
+#### Migration Steps
+
+**Before (0.10.0):**
+
+```tsx
+import { Input } from '@metamask/design-system-react-native';
+
+// Uncontrolled input with defaultValue (no longer supported)
+<Input
+  placeholder="Enter text"
+  defaultValue="Initial value"
+  onChange={(text) => console.log(text)}
+/>
+
+// Controlled input (still works, but value is now required)
+const [text, setText] = useState('');
+<Input
+  placeholder="Enter text"
+  value={text}
+  onChange={setText}
+/>
+```
+
+**After (0.11.0):**
+
+```tsx
+import { Input } from '@metamask/design-system-react-native';
+import { useState } from 'react';
+
+// All inputs must now be controlled with value prop
+const [text, setText] = useState('Initial value');
+<Input
+  placeholder="Enter text"
+  value={text}
+  onChange={setText}
+/>
+
+// Empty initial value
+const [text, setText] = useState('');
+<Input
+  placeholder="Enter text"
+  value={text}
+  onChange={setText}
+/>
+```
+
+#### Why This Change?
+
+This change provides:
+
+- **Consistent behavior**: All `Input` instances now behave predictably as controlled components
+- **Better state management**: Forces explicit state management, reducing bugs from mixed controlled/uncontrolled usage
+- **iOS placeholder fix**: Enables proper iOS-specific placeholder alignment without affecting typed text rendering
+
+#### TextField Component
+
+This change also affects the `TextField` component, which wraps `Input`. All `TextField` usage must now provide `value` and manage state:
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+import { useState } from 'react';
+
+const [email, setEmail] = useState('');
+
+<TextField
+  label="Email"
+  placeholder="Enter email"
+  value={email}
+  onChange={setEmail}
+/>
+```
+
 ## From version 0.1.0 to 0.2.0
 
 ### Added Text Component Variants

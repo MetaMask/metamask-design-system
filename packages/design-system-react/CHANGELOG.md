@@ -9,15 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.11.0]
 
-### Uncategorized
+### Added
 
-- docs: add Icon migration docs for mobile and extension ([#962](https://github.com/MetaMask/metamask-design-system/pull/962))
-- refactor: Updated Ai icon to the filled version for both packages ([#970](https://github.com/MetaMask/metamask-design-system/pull/970))
-- test: add RN style test utilities and testing rule guidance ([#913](https://github.com/MetaMask/metamask-design-system/pull/913))
-- feat: migrate ButtonFilter component to MMDS ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
-- feat: migrate BannerBase to MMDS react ([#961](https://github.com/MetaMask/metamask-design-system/pull/961))
-- docs: add Text migration docs for mobile and extension ([#953](https://github.com/MetaMask/metamask-design-system/pull/953))
-- refactor: updated ButtonIcon to have variant prop ([#948](https://github.com/MetaMask/metamask-design-system/pull/948))
+- Added `ButtonFilter` component for filter button functionality ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
+- Added `BannerBase` component for creating custom banner notifications ([#961](https://github.com/MetaMask/metamask-design-system/pull/961))
+
+### Changed
+
+- **BREAKING:** Updated `ButtonIcon` API to use `variant` prop instead of `isInverse` and `isFloating` boolean props ([#948](https://github.com/MetaMask/metamask-design-system/pull/948))
+  - Removed `isInverse` and `isFloating` props
+  - Added `variant` prop with three options: `ButtonIconVariant.Default` (default), `ButtonIconVariant.Filled` (new muted background with rounded corners), and `ButtonIconVariant.Floating` (replaces `isFloating` behavior)
+  - Migration: Replace `isFloating={true}` with `variant={ButtonIconVariant.Floating}`, and use `variant={ButtonIconVariant.Default}` for standard transparent background
+  - See [Migration Guide](./MIGRATION.md#from-version-0100-to-0110) for complete migration instructions
+- Updated `Ai` icon to filled version for visual consistency ([#970](https://github.com/MetaMask/metamask-design-system/pull/970))
 
 ## [0.10.0]
 

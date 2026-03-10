@@ -9,10 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.0]
 
-### Uncategorized
+### Added
 
-- feat: migrate ButtonFilter component to MMDS ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
-- feat: migrate BannerBase from mobile into MMDS ([#955](https://github.com/MetaMask/metamask-design-system/pull/955))
+- Added shared `ButtonFilter` types and constants for cross-package reuse ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
+  - Added `ButtonFilterVariant` const object with derived string union type (`primary`, `secondary`)
+  - Added `ButtonFilterPropsShared` as the shared base props contract used by React and React Native implementations
+- Added shared `BannerBase` types and constants for cross-package reuse ([#955](https://github.com/MetaMask/metamask-design-system/pull/955))
+  - Added `BannerBaseSeverity` const object with derived string union type for severity variants
+  - Added `BannerBasePropsShared` as the shared base props contract used by React and React Native implementations
 
 ## [0.3.0]
 

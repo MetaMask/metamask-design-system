@@ -9,22 +9,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.11.0]
 
-### Uncategorized
+### Added
 
-- docs: add Icon migration docs for mobile and extension ([#962](https://github.com/MetaMask/metamask-design-system/pull/962))
-- refactor: Updated Ai icon to the filled version for both packages ([#970](https://github.com/MetaMask/metamask-design-system/pull/970))
-- test: add RN style test utilities and testing rule guidance ([#913](https://github.com/MetaMask/metamask-design-system/pull/913))
-- chore: add missing React Native component exports ([#967](https://github.com/MetaMask/metamask-design-system/pull/967))
-- feat: migrate ButtonFilter component to MMDS ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
-- feat: `BottomSheet` migration ([#963](https://github.com/MetaMask/metamask-design-system/pull/963))
-- feat: migrate MainActionButton to design-system-react-native ([#952](https://github.com/MetaMask/metamask-design-system/pull/952))
-- docs: add Text migration docs for mobile and extension ([#953](https://github.com/MetaMask/metamask-design-system/pull/953))
-- fix: line-height bug and make Input controlled-only and require value ([#960](https://github.com/MetaMask/metamask-design-system/pull/960))
-- feat: migrate BannerBase from mobile into MMDS ([#955](https://github.com/MetaMask/metamask-design-system/pull/955))
-- feat: add `ListItem` ([#958](https://github.com/MetaMask/metamask-design-system/pull/958))
-- refactor: updated ButtonIcon to have variant prop ([#948](https://github.com/MetaMask/metamask-design-system/pull/948))
-- feat: `TabEmptyState` component ([#949](https://github.com/MetaMask/metamask-design-system/pull/949))
-- feat: add `BottomSheetDialog` component ([#905](https://github.com/MetaMask/metamask-design-system/pull/905))
+- Added `ButtonFilter` component for filter button functionality ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
+- Added `BottomSheet` component for modal bottom sheet interactions ([#963](https://github.com/MetaMask/metamask-design-system/pull/963))
+- Added `MainActionButton` component for primary call-to-action buttons ([#952](https://github.com/MetaMask/metamask-design-system/pull/952))
+- Added `BannerBase` component for creating custom banner notifications ([#955](https://github.com/MetaMask/metamask-design-system/pull/955))
+- Added `ListItem` component for standardized list rows ([#958](https://github.com/MetaMask/metamask-design-system/pull/958))
+- Added `TabEmptyState` component for empty tab state displays ([#949](https://github.com/MetaMask/metamask-design-system/pull/949))
+- Added `BottomSheetDialog` component for bottom sheet dialog interactions ([#905](https://github.com/MetaMask/metamask-design-system/pull/905))
+
+### Changed
+
+- **BREAKING:** Updated `ButtonIcon` API to use `variant` prop instead of `isInverse` and `isFloating` boolean props ([#948](https://github.com/MetaMask/metamask-design-system/pull/948))
+  - Removed `isInverse` and `isFloating` props
+  - Added `variant` prop with three options: `ButtonIconVariant.Default` (default), `ButtonIconVariant.Filled` (new muted background with rounded corners), and `ButtonIconVariant.Floating` (replaces `isFloating` behavior)
+  - Migration: Replace `isFloating={true}` with `variant={ButtonIconVariant.Floating}`, and use `variant={ButtonIconVariant.Default}` for standard transparent background
+  - See [Migration Guide](./MIGRATION.md#from-version-0100-to-0110) for complete migration instructions
+- **BREAKING:** `Input` component now requires `value` prop and is controlled-only ([#960](https://github.com/MetaMask/metamask-design-system/pull/960))
+  - Removed `defaultValue` prop - all Input instances must now pass a `value` prop and manage state via `onChange`
+  - This change affects all components using `Input` directly, including `TextField`
+  - Migration: Convert uncontrolled inputs to controlled by adding state management with `value` and `onChange` props
+  - See [Migration Guide](./MIGRATION.md#from-version-0100-to-0110) for complete migration instructions
+- Updated `Ai` icon to filled version for visual consistency ([#970](https://github.com/MetaMask/metamask-design-system/pull/970))
+
+### Fixed
+
+- Fixed iOS placeholder alignment issue in `Input` component without affecting typed text rendering ([#960](https://github.com/MetaMask/metamask-design-system/pull/960))
+- Fixed missing component exports in package entry point ([#967](https://github.com/MetaMask/metamask-design-system/pull/967))
 
 ## [0.10.0]
 
