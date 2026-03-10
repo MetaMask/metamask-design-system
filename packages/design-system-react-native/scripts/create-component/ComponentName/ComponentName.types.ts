@@ -9,4 +9,8 @@ export type ComponentNameProps = {
    * Additional Tailwind classes to be applied to the ComponentName component.
    */
   twClassName?: string;
+  /**
+   * Test identifier for selecting the component in tests.
+   */
+  testID?: string;
 } & ViewProps;

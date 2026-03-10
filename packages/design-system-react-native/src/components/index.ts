@@ -55,6 +55,19 @@ export type {
 export { BannerBase } from './BannerBase';
 export type { BannerBaseProps } from './BannerBase';
 
+export { BottomSheet } from './BottomSheet';
+export type {
+  BottomSheetProps,
+  BottomSheetRef,
+  BottomSheetPostCallback,
+} from './BottomSheet';
+
+export { default as BottomSheetDialog } from './BottomSheetDialog';
+export type {
+  BottomSheetDialogProps,
+  BottomSheetDialogRef,
+} from './BottomSheetDialog';
+
 export { BottomSheetFooter, ButtonsAlignment } from './BottomSheetFooter';
 export type {
   BottomSheetFooterProps,
@@ -82,7 +95,7 @@ export {
   BoxBackgroundColor,
   BoxBorderColor,
 } from './Box';
-export type { BoxProps, BoxSpacing } from './Box';
+export type { BoxProps, BoxSpacing, BoxBorderWidth } from './Box';
 
 export { Card } from './Card';
 export type { CardProps } from './Card';
@@ -129,8 +142,14 @@ export type { JazziconProps } from './temp-components/Jazzicon';
 export { Maskicon } from './temp-components/Maskicon';
 export type { MaskiconProps } from './temp-components/Maskicon';
 
+export { MainActionButton } from './MainActionButton';
+export type { MainActionButtonProps } from './MainActionButton';
+
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
+
+export { SensitiveText, SensitiveTextLength } from './SensitiveText';
+export type { SensitiveTextProps } from './SensitiveText';
 
 export { TabEmptyState } from './TabEmptyState';
 export type { TabEmptyStateProps } from './TabEmptyState';
@@ -154,9 +173,16 @@ export type { TextFieldProps } from './TextField';
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 
-export { Toast, ToastVariant, ToastContext } from './Toast';
+export {
+  Toast,
+  ToastVariant,
+  ToastCloseButtonVariant,
+  ToastContext,
+  ToastContextWrapper,
+} from './Toast';
 export type {
   ToastOptions,
+  ToastProps,
   ToastRef,
   ToastContextParams,
   ToastLabelOptions,
@@ -167,3 +193,15 @@ export type {
 
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';
 export type { ButtonHeroProps } from './ButtonHero';
+
+export { ButtonFilter } from './ButtonFilter';
+export type { ButtonFilterProps } from './ButtonFilter';
+
+export { ImageOrSvg } from './temp-components/ImageOrSvg';
+export type {
+  ImageOrSvgProps,
+  ImageOrSvgSrc,
+} from './temp-components/ImageOrSvg';
+
+export { Spinner } from './temp-components/Spinner';
+export type { SpinnerProps } from './temp-components/Spinner';
