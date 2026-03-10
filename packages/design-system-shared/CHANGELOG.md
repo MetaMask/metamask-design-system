@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0]
+
 ### Uncategorized
 
 - feat: migrate ButtonFilter component to MMDS ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
@@ -56,7 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.3.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.4.0...HEAD
+[0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.3.0...@metamask/design-system-shared@0.4.0
 [0.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.2.0...@metamask/design-system-shared@0.3.0
 [0.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.1.3...@metamask/design-system-shared@0.2.0
 [0.1.3]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.1.2...@metamask/design-system-shared@0.1.3
