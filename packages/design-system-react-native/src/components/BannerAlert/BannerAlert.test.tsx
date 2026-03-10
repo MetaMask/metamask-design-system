@@ -1,3 +1,4 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
@@ -8,6 +9,7 @@ import { BannerAlert } from './BannerAlert';
 
 import { BannerAlertSeverity } from '.';
 
+jest.mock('@metamask/design-system-twrnc-preset');
 jest.mock('../BannerBase', () => ({
   BannerBase: jest.fn(() => null),
 }));
@@ -16,9 +18,14 @@ const ICON_TEST_ID = 'banner-alert-icon';
 
 describe('BannerAlert', () => {
   const mockBannerBase = BannerBase as jest.Mock;
+  const mockTwStyle = jest.fn((...args) => args.filter(Boolean));
 
   beforeEach(() => {
     mockBannerBase.mockClear();
+    mockTwStyle.mockClear();
+    (useTailwind as jest.Mock).mockReturnValue({
+      style: mockTwStyle,
+    });
   });
 
   it('uses info severity styles by default', () => {
@@ -72,11 +79,24 @@ describe('BannerAlert', () => {
     },
   );
 
-  it('merges custom twClassName with default styles', () => {
-    render(<BannerAlert title="Custom styling" twClassName="mt-4" />);
+  it('applies border styling and passes style prop', () => {
+    const customStyle = { marginTop: 8 };
+    render(
+      <BannerAlert
+        severity={BannerAlertSeverity.Info}
+        title="Custom styling"
+        style={customStyle}
+      />,
+    );
 
+    // Verify tw.style was called with correct border classes for info severity
+    expect(mockTwStyle).toHaveBeenCalledWith(
+      'border-l-4 border-primary-default',
+    );
+
+    // Verify style array was passed to BannerBase with tw.style result and custom style
     const props = mockBannerBase.mock.calls[0][0];
-    expect(props.twClassName).toContain('border-l-4');
-    expect(props.twClassName).toContain('mt-4');
+    expect(Array.isArray(props.style)).toBe(true);
+    expect(props.style[1]).toBe(customStyle);
   });
 });

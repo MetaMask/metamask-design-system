@@ -1,4 +1,5 @@
 import { BannerAlertSeverity } from '@metamask/design-system-shared';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
 import { IconSize } from '../../types';
@@ -16,17 +17,14 @@ import type { BannerAlertProps } from './BannerAlert.types';
 export const BannerAlert: React.FC<BannerAlertProps> = ({
   severity = BannerAlertSeverity.Info,
   iconProps,
-  twClassName,
+  style,
   ...props
 }) => {
+  const tw = useTailwind();
   const iconName = MAP_BANNER_ALERT_SEVERITY_ICON_NAME[severity];
   const iconColor = MAP_BANNER_ALERT_SEVERITY_ICON_COLOR[severity];
   const backgroundColor = MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR[severity];
   const borderColorClass = MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR[severity];
-  const mergedTwClassName = `border-l-4 ${borderColorClass}${
-    twClassName ? ` ${twClassName}` : ''
-  }`;
-
   return (
     <BannerBase
       startAccessory={
@@ -39,7 +37,7 @@ export const BannerAlert: React.FC<BannerAlertProps> = ({
       }
       backgroundColor={backgroundColor}
       paddingLeft={2}
-      twClassName={mergedTwClassName}
+      style={[tw.style(`border-l-4 ${borderColorClass}`), style]}
       {...props}
     />
   );
