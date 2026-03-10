@@ -7,8 +7,7 @@ import { ButtonBaseSize } from '../../types';
 import { Icon, IconColor, IconSize } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import { Spinner } from '../temp-components/Spinner';
-import { TextOrChildren } from '../temp-components/TextOrChildren/TextOrChildren';
-import { TextVariant, FontWeight, TextColor } from '../Text';
+import { Text, TextVariant, FontWeight, TextColor } from '../Text';
 
 import { TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
@@ -182,17 +181,15 @@ export const ButtonBase = ({
           )}
 
           {typeof children === 'string' ? (
-            <TextOrChildren
-              textProps={{
-                variant: TextVariant.BodyMd,
-                fontWeight: FontWeight.Medium,
-                color: TextColor.TextDefault,
-                twClassName: `shrink grow-0 flex-wrap text-center ${isLoading ? 'opacity-0' : ''} ${textClassName ? textClassName(pressed) : ''}`,
-                ...textProps,
-              }}
+            <Text
+              variant={TextVariant.BodyMd}
+              fontWeight={FontWeight.Medium}
+              color={TextColor.TextDefault}
+              {...textProps}
+              twClassName={`shrink grow-0 flex-wrap text-center ${isLoading ? 'opacity-0' : ''} ${textClassName ? textClassName(pressed) : ''} ${textProps?.twClassName ?? ''}`}
             >
               {children}
-            </TextOrChildren>
+            </Text>
           ) : (
             <View style={tw.style(isLoading && 'opacity-0')}>{children}</View>
           )}

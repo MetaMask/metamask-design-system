@@ -18,3 +18,6 @@ export {
 
 // BannerBase types (ADR-0004)
 export { type BannerBasePropsShared } from './types/BannerBase';
+
+// ButtonFilter types (ADR-0004)
+export { type ButtonFilterPropsShared } from './types/ButtonFilter';
