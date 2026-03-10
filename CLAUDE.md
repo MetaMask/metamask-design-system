@@ -7,6 +7,7 @@ Design tokens and components for MetaMask extension (React) and mobile (React Na
 Repository-specific conventions and patterns:
 
 - @.cursor/rules/styling.md
+- @.cursor/rules/testing.md
 - @.cursor/rules/component-documentation.md
 - @.cursor/rules/component-architecture.md
 - @.cursor/rules/component-creation.md

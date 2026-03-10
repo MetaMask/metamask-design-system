@@ -2,7 +2,6 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
-import type { StyleProp, ViewStyle } from 'react-native';
 
 import { RadioButton } from './RadioButton';
 
@@ -12,29 +11,6 @@ describe('RadioButton', () => {
   beforeAll(() => {
     tw = renderHook(() => useTailwind()).result.current;
   });
-
-  /**
-   * Flatten a style prop into an array of style objects.
-   *
-   * @param styleProp - The style prop to flatten.
-   * @returns A list of style objects.
-   */
-  function flattenStyles(
-    styleProp: StyleProp<ViewStyle> | undefined,
-  ): ViewStyle[] {
-    if (styleProp === null || styleProp === undefined) {
-      return [];
-    }
-    if (Array.isArray(styleProp)) {
-      return styleProp.flatMap((item) =>
-        flattenStyles(item as StyleProp<ViewStyle>),
-      );
-    }
-    if (typeof styleProp === 'object') {
-      return [styleProp as ViewStyle];
-    }
-    return [];
-  }
 
   it('renders label when provided', () => {
     const { getByText } = render(<RadioButton label="Option A" />);
@@ -124,12 +100,7 @@ describe('RadioButton', () => {
       <RadioButton isDisabled testID="radio-root" />,
     );
     const root = getByTestId('radio-root');
-    const styles = flattenStyles(root.props.style);
-    expect(styles).toStrictEqual(
-      expect.arrayContaining([
-        expect.objectContaining(tw`flex-row items-center opacity-50`),
-      ]),
-    );
+    expect(root).toHaveStyle(tw`flex-row items-center opacity-50`);
   });
 
   it('applies checked border styles', () => {
@@ -140,13 +111,8 @@ describe('RadioButton', () => {
       />,
     );
     const circle = getByTestId('radio-circle');
-    const styles = flattenStyles(circle.props.style);
-    expect(styles).toStrictEqual(
-      expect.arrayContaining([
-        expect.objectContaining(
-          tw`size-5 items-center justify-center rounded-full border-2 border-primary-default bg-default`,
-        ),
-      ]),
+    expect(circle).toHaveStyle(
+      tw`size-5 items-center justify-center rounded-full border-2 border-primary-default bg-default`,
     );
   });
 
@@ -159,13 +125,8 @@ describe('RadioButton', () => {
       />,
     );
     const circle = getByTestId('radio-circle');
-    const styles = flattenStyles(circle.props.style);
-    expect(styles).toStrictEqual(
-      expect.arrayContaining([
-        expect.objectContaining(
-          tw`size-5 items-center justify-center rounded-full border-2 border-background-default bg-default`,
-        ),
-      ]),
+    expect(circle).toHaveStyle(
+      tw`size-5 items-center justify-center rounded-full border-2 border-background-default bg-default`,
     );
   });
 
@@ -178,13 +139,8 @@ describe('RadioButton', () => {
       />,
     );
     const circle = getByTestId('radio-circle');
-    const styles = flattenStyles(circle.props.style);
-    expect(styles).toStrictEqual(
-      expect.arrayContaining([
-        expect.objectContaining(
-          tw`size-5 items-center justify-center rounded-full border-2 border-error-default bg-default`,
-        ),
-      ]),
+    expect(circle).toHaveStyle(
+      tw`size-5 items-center justify-center rounded-full border-2 border-error-default bg-default`,
     );
   });
 
@@ -210,9 +166,6 @@ describe('RadioButton', () => {
       <RadioButton testID="radio-root" style={{ margin: 8 }} />,
     );
     const root = getByTestId('radio-root');
-    const styles = flattenStyles(root.props.style);
-    expect(styles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining({ margin: 8 })]),
-    );
+    expect(root).toHaveStyle({ margin: 8 });
   });
 });
