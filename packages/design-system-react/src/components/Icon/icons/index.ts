@@ -152,6 +152,7 @@ import Map from './Map';
 import Menu from './Menu';
 import MessageQuestion from './MessageQuestion';
 import Messages from './Messages';
+import MetamaskFoxFilled from './MetamaskFoxFilled';
 import MetamaskFoxOutline from './MetamaskFoxOutline';
 import Mic from './Mic';
 import Minus from './Minus';
@@ -198,6 +199,7 @@ import Scan from './Scan';
 import ScanBarcode from './ScanBarcode';
 import ScanFocus from './ScanFocus';
 import Search from './Search';
+import SearchFilled from './SearchFilled';
 import Security from './Security';
 import SecurityAlert from './SecurityAlert';
 import SecurityCross from './SecurityCross';
@@ -434,6 +436,7 @@ export const Icons = {
   Menu,
   MessageQuestion,
   Messages,
+  MetamaskFoxFilled,
   MetamaskFoxOutline,
   Mic,
   Minus,
@@ -480,6 +483,7 @@ export const Icons = {
   ScanBarcode,
   ScanFocus,
   Search,
+  SearchFilled,
   Security,
   SecurityAlert,
   SecurityCross,
