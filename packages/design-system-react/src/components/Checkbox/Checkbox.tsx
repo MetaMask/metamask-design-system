@@ -78,19 +78,25 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       checkedIconProps?.className,
     );
 
+    const inputClassName = twMerge(
+      'absolute inset-0 size-full cursor-pointer opacity-0 disabled:cursor-not-allowed',
+      inputProps?.className,
+    );
+
     return (
       <label htmlFor={id} className={outerClassName} style={style} {...props}>
         <div className="relative">
           <input
+            {...inputProps}
             type="checkbox"
             id={id}
             checked={isSelected}
             disabled={isDisabled}
             aria-invalid={isInvalid}
+            aria-checked={isSelected}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
-            className="absolute inset-0 size-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
-            {...inputProps}
+            className={inputClassName}
           />
           <div className={checkboxClasses} {...checkboxContainerProps}>
             <Icon
