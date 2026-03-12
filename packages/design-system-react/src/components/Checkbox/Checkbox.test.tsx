@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { Checkbox } from './Checkbox';
+import type { CheckboxProps } from './Checkbox.types';
 
 describe('Checkbox', () => {
   it('renders label when provided', () => {
@@ -228,5 +229,57 @@ describe('Checkbox', () => {
     const input = screen.getByTestId('chk-input');
     fireEvent.keyDown(input, { key: 'Enter' });
     expect(onChange).toHaveBeenCalledWith(true);
+  });
+
+  it('reflects aria-checked and updates on prop change', () => {
+    const { rerender } = render(
+      <Checkbox
+        id="test-checkbox"
+        isSelected
+        onChange={jest.fn()}
+        inputProps={{ 'data-testid': 'chk-input' }}
+      />,
+    );
+    const input = screen.getByTestId('chk-input');
+    expect(input).toHaveAttribute('aria-checked', 'true');
+    expect(input).toBeChecked();
+
+    rerender(
+      <Checkbox
+        id="test-checkbox"
+        isSelected={false}
+        onChange={jest.fn()}
+        inputProps={{ 'data-testid': 'chk-input' }}
+      />,
+    );
+    expect(input).toHaveAttribute('aria-checked', 'false');
+    expect(input).not.toBeChecked();
+  });
+
+  it('does not allow inputProps to override controlled props', () => {
+    const onChange = jest.fn();
+    const inputPropsOnChange = jest.fn();
+    const unsafeInputProps = {
+      'data-testid': 'chk-input',
+      // Intentionally include disallowed props to verify they don't override controlled ones
+      checked: true,
+      onChange: inputPropsOnChange,
+    } as unknown as CheckboxProps['inputProps'];
+    render(
+      <Checkbox
+        id="test-checkbox"
+        isSelected={false}
+        onChange={onChange}
+        inputProps={unsafeInputProps}
+      />,
+    );
+    const input = screen.getByTestId('chk-input');
+    // Controlled prop wins over inputProps.checked
+    expect(input).not.toBeChecked();
+
+    fireEvent.click(input);
+    // Our onChange is used, not the one from inputProps
+    expect(onChange).toHaveBeenCalledWith(true);
+    expect(inputPropsOnChange).not.toHaveBeenCalled();
   });
 });
