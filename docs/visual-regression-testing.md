@@ -68,13 +68,13 @@ Future builds will only show actual visual differences.
 
 ### Test Status
 
-| Status         | Description                                                |
-| -------------- | ---------------------------------------------------------- |
-| **Unreviewed** | Changes detected, awaiting review                          |
-| **Accepted**   | Changes approved and baseline updated                      |
-| **Denied**     | Changes flagged as regressions                             |
-| **Passed**     | No visual changes detected                                 |
-| **New**        | First snapshot for this story (establishing baseline)      |
+| Status         | Description                                           |
+| -------------- | ----------------------------------------------------- |
+| **Unreviewed** | Changes detected, awaiting review                     |
+| **Accepted**   | Changes approved and baseline updated                 |
+| **Denied**     | Changes flagged as regressions                        |
+| **Passed**     | No visual changes detected                            |
+| **New**        | First snapshot for this story (establishing baseline) |
 
 ### Build Behavior
 
@@ -128,6 +128,7 @@ Chromatic is integrated into the main CI workflow as a required check:
 **Error**: "Build failed: Command exited with code 1"
 
 **Fix**: Check that:
+
 - Storybook builds successfully: `yarn workspace @metamask/storybook-react build-storybook`
 - All stories load without errors
 - Dependencies are installed: `yarn install`
@@ -137,6 +138,7 @@ Chromatic is integrated into the main CI workflow as a required check:
 **Error**: "CHROMATIC_PROJECT_TOKEN is required"
 
 **Fix**: Contact a maintainer to get the project token, then:
+
 ```bash
 export CHROMATIC_PROJECT_TOKEN=chpt_***
 ```
@@ -146,6 +148,7 @@ export CHROMATIC_PROJECT_TOKEN=chpt_***
 **Issue**: Every build shows all stories as changes
 
 **Fix**: Accept the baseline once:
+
 1. Open any Chromatic build
 2. Click "Batch" → "Accept all"
 3. Future builds will only show actual changes
@@ -155,6 +158,7 @@ export CHROMATIC_PROJECT_TOKEN=chpt_***
 **Error**: "The requested module 'node:module' does not provide an export named 'register'"
 
 **Fix**: Upgrade Node.js to >= 20.6.0:
+
 ```bash
 nvm install 20
 nvm use 20
@@ -170,12 +174,13 @@ nvm use 20
 
 ## Platform Support
 
-| Platform       | Visual Testing Support | Notes                                    |
-| -------------- | ---------------------- | ---------------------------------------- |
-| React Web      | ✅ Full support        | Via Chromatic with Storybook             |
-| React Native   | ❌ Not supported       | See React Native testing alternatives    |
+| Platform     | Visual Testing Support | Notes                                 |
+| ------------ | ---------------------- | ------------------------------------- |
+| React Web    | ✅ Full support        | Via Chromatic with Storybook          |
+| React Native | ❌ Not supported       | See React Native testing alternatives |
 
 **React Native alternatives:**
+
 - Loki.js (open source, device testing)
 - VisWiz.io (commercial, native mobile support)
 - Manual testing in Storybook iOS/Android apps
