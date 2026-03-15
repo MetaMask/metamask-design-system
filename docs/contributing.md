@@ -19,6 +19,11 @@
 >
 > `workspaceName` in these commands is the `name` field within a package's `package.json`, e.g., `@metamask/design-tokens`, not the directory where it is located, e.g., `packages/design-tokens`.
 
+### Additional Testing
+
+- **Accessibility Testing**: See [Accessibility Testing](./accessibility-testing.md) for automated WCAG compliance testing
+- **Visual Regression Testing**: See [Visual Regression Testing](./visual-regression-testing.md) for automated visual testing with Chromatic
+
 ## Linting
 
 [ESLint](https://eslint.org) v9 (via [MetaMask's shared ESLint configurations](https://github.com/MetaMask/eslint-config)) is used to check for code quality issues, and [Prettier](https://prettier.io/docs/en/) is used to format files.

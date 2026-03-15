@@ -46,37 +46,20 @@ yarn test:storybook "ComponentName"
 
 Visual regression testing is powered by [Chromatic](https://www.chromatic.com), which automatically detects visual changes in components across browsers.
 
-### How it Works
+See [Visual Regression Testing Documentation](../../docs/visual-regression-testing.md) for:
 
-- **Automatic**: Chromatic runs automatically on every pull request via GitHub Actions
-- **Cross-browser**: Tests visual consistency across Chrome, Firefox, Safari, and Edge
-- **Baseline Updates**: Changes on the `main` branch automatically update the visual baselines
-- **Review Process**: Visual changes are reviewed and approved in the Chromatic UI before merging
+- How automated visual testing works
+- Reviewing visual changes in pull requests
+- Running Chromatic locally
+- Troubleshooting common issues
+- Platform support and limitations
 
-### Local Testing
-
-To run Chromatic locally:
+Quick start:
 
 ```bash
-# From repository root
+# Chromatic runs automatically on PRs
+# To run locally:
 yarn chromatic
-
-# Or from storybook-react directory
-yarn workspace @metamask/storybook-react chromatic
 ```
 
-**Note**: The `CHROMATIC_PROJECT_TOKEN` environment variable must be set. Contact a maintainer for access.
-
-### Reviewing Changes
-
-1. When you open a PR, Chromatic will automatically run and comment on the PR with a link to the build
-2. Click the Chromatic link to review visual changes
-3. Accept or reject changes in the Chromatic UI
-4. Once approved, the PR check will pass
-
-### Resources
-
-- [Chromatic Dashboard](https://www.chromatic.com/builds?appId=673370f0d08a04f1)
-- [Chromatic Documentation](https://www.chromatic.com/docs/)
-
-**Platform Support**: Chromatic only supports React web components. For React Native visual testing, see [component testing documentation](../../docs/accessibility-testing.md).
+**Note**: Chromatic only supports React web components. React Native visual testing is not supported.
