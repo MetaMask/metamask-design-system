@@ -28,7 +28,7 @@ jobs:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
         run: |
           yarn chromatic \
-            --project-token=$CHROMATIC_PROJECT_TOKEN \
+            --project-token="${CHROMATIC_PROJECT_TOKEN}" \
             --build-script-name=build-storybook \
             --exit-zero-on-changes \
             --auto-accept-changes=main
