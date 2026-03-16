@@ -1,6 +1,30 @@
 import { typography } from '@metamask/design-tokens';
 
-import { FontWeight, TextVariant } from '../../types';
+import { FontFamily, FontWeight, TextVariant } from '../../types';
+
+/**
+ * Defines which font weights are actually available for each font family.
+ * This prevents font synthesis when unavailable weights are requested.
+ */
+export const FONT_FAMILY_AVAILABLE_WEIGHTS: Record<FontFamily, FontWeight[]> = {
+  [FontFamily.Default]: [
+    FontWeight.Regular,
+    FontWeight.Medium,
+    FontWeight.Bold,
+  ],
+  [FontFamily.Accent]: [FontWeight.Regular, FontWeight.Medium, FontWeight.Bold],
+  [FontFamily.Hero]: [FontWeight.Regular], // Only regular weight available for MMPoly
+};
+
+/**
+ * Maps font families to their constrained weight.
+ * Used to override weight when a font family doesn't support all weights.
+ */
+export const FONTFAMILY_WEIGHT_OVERRIDE: Partial<
+  Record<FontFamily, FontWeight>
+> = {
+  [FontFamily.Hero]: FontWeight.Regular, // Force regular weight for Hero (MMPoly)
+};
 
 // Mappings
 export const TWCLASSMAP_TEXT_FONTWEIGHT: {

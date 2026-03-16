@@ -1,4 +1,28 @@
-import { TextVariant } from '../../types';
+import { FontFamily, FontWeight, TextVariant } from '../../types';
+
+/**
+ * Defines which font weights are actually available for each font family.
+ * This prevents browser font synthesis when unavailable weights are requested.
+ */
+export const FONT_FAMILY_AVAILABLE_WEIGHTS: Record<FontFamily, FontWeight[]> = {
+  [FontFamily.Default]: [
+    FontWeight.Regular,
+    FontWeight.Medium,
+    FontWeight.Bold,
+  ],
+  [FontFamily.Accent]: [FontWeight.Regular, FontWeight.Medium, FontWeight.Bold],
+  [FontFamily.Hero]: [FontWeight.Regular], // Only regular weight available for MMPoly
+};
+
+/**
+ * Maps font families to their constrained weight class.
+ * Used to override weight when a font family doesn't support all weights.
+ */
+export const CLASSMAP_FONTFAMILY_WEIGHT_OVERRIDE: Partial<
+  Record<FontFamily, string>
+> = {
+  [FontFamily.Hero]: 'font-regular', // Force regular weight for Hero (MMPoly)
+};
 
 export const CLASSMAP_TEXT_VARIANT_FONTSTYLE: Record<TextVariant, string> = {
   [TextVariant.DisplayLg]:
