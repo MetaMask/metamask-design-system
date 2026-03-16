@@ -858,12 +858,19 @@
   font-weight: var(--font-weight-regular);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cee99715 (fix: add missing font-medium and font-bold @utility directives in theme.css)
 @utility font-medium {
   font-weight: var(--font-weight-medium);
 }
 @utility font-bold {
   font-weight: var(--font-weight-bold);
+<<<<<<< HEAD
 =======
+=======
+}
+>>>>>>> cee99715 (fix: add missing font-medium and font-bold @utility directives in theme.css)
 
 /* Legacy shadow color utilities parity with old shadow plugin */
 @utility shadow-default {
