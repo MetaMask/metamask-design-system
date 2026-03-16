@@ -241,7 +241,6 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
-          'focus-visible:outline',
           'focus-visible:outline-2',
           'focus-visible:outline-primary-default',
           'focus-visible:outline-offset-2',
@@ -253,7 +252,6 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
-          'focus-visible:outline',
           'focus-visible:outline-2',
           'focus-visible:outline-background-default',
           'focus-visible:outline-offset-4',
@@ -265,7 +263,6 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
-          'focus-visible:outline',
           'focus-visible:outline-2',
           'focus-visible:outline-primary-default',
           'focus-visible:outline-offset-2',
@@ -281,7 +278,6 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
-          'focus-visible:outline',
           'focus-visible:outline-2',
           'focus-visible:outline-primary-default',
           'focus-visible:outline-offset-2',
@@ -297,7 +293,6 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
-          'focus-visible:outline',
           'focus-visible:outline-2',
           'focus-visible:outline-background-default',
           'focus-visible:outline-offset-4',
@@ -313,7 +308,6 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
-          'focus-visible:outline',
           'focus-visible:outline-2',
           'focus-visible:outline-primary-default',
           'focus-visible:outline-offset-2',
@@ -329,7 +323,6 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
-          'focus-visible:outline',
           'focus-visible:outline-2',
           'focus-visible:outline-primary-default',
           'focus-visible:outline-offset-2',
@@ -345,7 +338,6 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
-          'focus-visible:outline',
           'focus-visible:outline-2',
           'focus-visible:outline-background-default',
           'focus-visible:outline-offset-4',
@@ -361,7 +353,6 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
-          'focus-visible:outline',
           'focus-visible:outline-2',
           'focus-visible:outline-primary-default',
           'focus-visible:outline-offset-2',
