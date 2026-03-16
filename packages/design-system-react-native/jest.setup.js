@@ -4,6 +4,13 @@ global.__fbBatchedBridgeConfig = {
   remoteModuleConfig: [],
 };
 
+// Mock Platform before any other imports
+jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+  OS: 'ios',
+  Version: '0.0.0',
+  select: (obj) => obj.ios || obj.default,
+}));
+
 jest.mock(
   'react-native/Libraries/Utilities/NativePlatformConstantsIOS',
   () => ({
