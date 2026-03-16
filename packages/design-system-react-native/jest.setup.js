@@ -5,6 +5,13 @@ global.__fbBatchedBridgeConfig = {
   remoteModuleConfig: [],
 };
 
+// Mock Platform before any other imports
+jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+  OS: 'ios',
+  Version: '0.0.0',
+  select: (obj) => obj.ios || obj.default,
+}));
+
 jest.mock(
   'react-native/Libraries/Utilities/NativePlatformConstantsIOS',
   () => ({
@@ -43,6 +50,20 @@ jest.mock('react-native-reanimated', () => {
   Reanimated.default.call = () => {};
 
   return Reanimated;
+});
+
+// Mock twrnc to avoid Platform initialization issues
+jest.mock('twrnc', () => {
+  const mockTw = (strings) => {
+    if (Array.isArray(strings)) {
+      return strings.join(' ');
+    }
+    return strings || '';
+  };
+  mockTw.style = (...args) => args.flat();
+  mockTw.color = (color) => color;
+  mockTw.prefixMatch = () => false;
+  return { create: () => mockTw };
 });
 
 // Silence warnings related to the Animated API
