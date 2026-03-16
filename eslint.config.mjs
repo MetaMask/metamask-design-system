@@ -10,7 +10,7 @@ const NODE_LTS_VERSION = 22;
 const nativeRequire = createRequire(
   new URL('./apps/storybook-react-native/package.json', import.meta.url),
 );
-const nativeTailwind = nativeRequire('eslint-plugin-tailwindcss');
+const tailwind = nativeRequire('eslint-plugin-tailwindcss');
 const NATIVE_TAILWIND_CONFIG_PATH = path.resolve(
   import.meta.dirname,
   'apps/storybook-react-native/tailwind-intellisense.config.js',
@@ -257,7 +257,7 @@ const config = createConfig([
       'apps/storybook-react-native/stories/**',
     ],
     plugins: {
-      tailwindcss: nativeTailwind,
+      tailwindcss: tailwind,
     },
     rules: {
       'tailwindcss/classnames-order': 'error',
