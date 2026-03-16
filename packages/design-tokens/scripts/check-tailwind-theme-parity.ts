@@ -1,12 +1,24 @@
-// eslint-disable-next-line import-x/no-unresolved
+/* eslint-disable import-x/no-nodejs-modules */
 import tailwindPostcss from '@tailwindcss/postcss';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import postcss from 'postcss';
+/* eslint-enable import-x/no-nodejs-modules */
 
-const repoRoot = path.resolve(import.meta.dirname, '../../..');
+/**
+ * Tailwind Theme Parity Check
+ *
+ * Validates that the v4 theme.css produces the same custom class names
+ * as the v3 tailwind-preset. This ensures consumers migrating from v3
+ * to v4 won't lose any design system utility classes.
+ *
+ * TODO: Extend parity validation to include twrnc (React Native) preset
+ * to ensure class name coverage across all three surfaces: v3, v4, and twrnc.
+ */
+
+const repoRoot = path.resolve(__dirname, '../../..');
 const oldPresetDistPath = path.join(
   repoRoot,
   'packages/design-system-tailwind-preset/dist/index.cjs',
@@ -29,27 +41,42 @@ const newThemePath = path.join(
 );
 const requireFromRepo = createRequire(path.join(repoRoot, 'package.json'));
 
-function uniq(values) {
+function uniq(values: string[]): string[] {
   return [...new Set(values)].sort();
 }
 
-function flattenNestedKeys(prefix, value) {
+function flattenNestedKeys(
+  prefix: string,
+  value: string | Record<string, unknown>,
+): string[] {
   if (typeof value === 'string') {
     return [prefix];
   }
-  const keys = [];
+  const keys: string[] = [];
   for (const [key, child] of Object.entries(value)) {
-    keys.push(...flattenNestedKeys(prefix ? `${prefix}-${key}` : key, child));
+    keys.push(
+      ...flattenNestedKeys(
+        prefix ? `${prefix}-${key}` : key,
+        child as string | Record<string, unknown>,
+      ),
+    );
   }
   return keys;
 }
 
-function buildExpectedClassesFromOldPreset() {
-  const { colors } = requireFromRepo(oldColorsPath);
-  const { typography } = requireFromRepo(oldTypographyPath);
-  const { shadows, shadowColors } = requireFromRepo(oldShadowsPath);
+function buildExpectedClassesFromOldPreset(): string[] {
+  const { colors } = requireFromRepo(oldColorsPath) as {
+    colors: Record<string, Record<string, unknown>>;
+  };
+  const { typography } = requireFromRepo(oldTypographyPath) as {
+    typography: Record<string, Record<string, unknown>>;
+  };
+  const { shadows, shadowColors } = requireFromRepo(oldShadowsPath) as {
+    shadows: Record<string, unknown>;
+    shadowColors: Record<string, unknown>;
+  };
 
-  const classes = [];
+  const classes: string[] = [];
 
   for (const [group, tokens] of Object.entries(colors)) {
     const flattened = flattenNestedKeys('', tokens);
@@ -60,13 +87,22 @@ function buildExpectedClassesFromOldPreset() {
     }
   }
 
-  for (const token of flattenNestedKeys('', colors.background)) {
+  for (const token of flattenNestedKeys(
+    '',
+    colors.background as Record<string, unknown>,
+  )) {
     classes.push(`bg-${token}`);
   }
-  for (const token of flattenNestedKeys('', colors.text)) {
+  for (const token of flattenNestedKeys(
+    '',
+    colors.text as Record<string, unknown>,
+  )) {
     classes.push(`text-${token}`);
   }
-  for (const token of flattenNestedKeys('', colors.border)) {
+  for (const token of flattenNestedKeys(
+    '',
+    colors.border as Record<string, unknown>,
+  )) {
     classes.push(`border-${token}`);
   }
 
@@ -96,19 +132,25 @@ function buildExpectedClassesFromOldPreset() {
   return uniq(classes);
 }
 
-async function compileTailwind({ inputCss, cwd }) {
+async function compileTailwind({
+  inputCss,
+  cwd,
+}: {
+  inputCss: string;
+  cwd: string;
+}): Promise<string> {
   const result = await postcss([tailwindPostcss()]).process(inputCss, {
     from: path.join(cwd, 'input.css'),
   });
   return result.css;
 }
 
-function hasClass(css, className) {
+function hasClass(css: string, className: string): boolean {
   const escaped = className.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
   return new RegExp(`\\.${escaped}\\s*\\{`, 'u').test(css);
 }
 
-function printList(title, values, maxItems = 500) {
+function printList(title: string, values: string[], maxItems = 500): void {
   console.log(`${title}: ${values.length}`);
   if (values.length === 0) {
     return;
@@ -121,8 +163,7 @@ function printList(title, values, maxItems = 500) {
   }
 }
 
-async function main() {
-  // Ensure the new theme file exists before running parity check.
+async function main(): Promise<void> {
   await readFile(newThemePath, 'utf8');
   const expectedClasses = buildExpectedClassesFromOldPreset();
   const contentHtml = `<div class="${expectedClasses.join(' ')}"></div>`;
@@ -178,7 +219,7 @@ async function main() {
   }
 }
 
-main().catch((error) => {
+main().catch((error: unknown) => {
   console.error(error);
   process.exitCode = 1;
 });
