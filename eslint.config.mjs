@@ -228,6 +228,10 @@ const config = createConfig([
     settings: {
       'better-tailwindcss': {
         entryPoint: 'apps/storybook-react/tailwind.css',
+        // Ensure Tailwind class linting runs inside twMerge() calls
+        callees: ['twMerge'],
+        // Keep standard React class props covered as well
+        classRegex: ['^(class(Name)?|twClassName)$'],
       },
     },
     plugins: {
