@@ -7,7 +7,7 @@
   "scripts": {
     "build-storybook": "storybook build",
     "chromatic": "chromatic --exit-zero-on-changes",
-    "check:tailwind-theme-parity": "node scripts/check-tailwind-theme-parity.mjs",
+    "check:tailwind-theme-parity": "yarn workspace @metamask/design-tokens check:tailwind-theme-parity",
     "storybook": "storybook dev -p 6006",
     "test-storybook": "vitest --run"
   },
