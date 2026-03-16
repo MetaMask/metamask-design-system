@@ -22,7 +22,7 @@
     "@storybook/addon-docs": "^10.2.3",
     "@storybook/addon-vitest": "^10.2.3",
     "@storybook/react-vite": "^10.2.3",
-    "@testing-library/dom": "^9.0.0",
+    "@testing-library/dom": "^10.0.0",
     "@testing-library/react": "^16.0.1",
     "@types/prop-types": "^15",
     "@types/react": "^18.2.0",

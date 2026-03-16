@@ -63,6 +63,7 @@
     "@metamask/design-system-tailwind-preset": "workspace:^",
     "@metamask/utils": "^11.10.0",
     "@svgr/cli": "^8.1.0",
+    "@testing-library/dom": "^10.0.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.6.1",
