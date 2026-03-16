@@ -233,6 +233,7 @@ const config = createConfig([
     plugins: {
       'better-tailwindcss': betterTailwind,
     },
+    extends: [betterTailwind.configs.correctness],
     rules: {
       'better-tailwindcss/sort-classes': 'error',
     },
