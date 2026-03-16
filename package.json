@@ -16,7 +16,7 @@
     "build": "yarn workspaces foreach --all --topological-dev run build",
     "build:clean": "rimraf 'packages/*/dist' '**/*.tsbuildinfo' && yarn build",
     "build:types": "tsc --build tsconfig.build.json --verbose",
-    "check:tailwind-theme-parity": "yarn workspace @metamask/storybook-react check:tailwind-theme-parity",
+    "check:tailwind-theme-parity": "yarn workspace @metamask/design-tokens check:tailwind-theme-parity",
     "changelog:update": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:update",
     "changelog:validate": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:validate",
     "chromatic": "yarn workspace @metamask/storybook-react chromatic",
