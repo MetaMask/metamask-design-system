@@ -246,6 +246,8 @@ const config = createConfig([
     },
     rules: {
       'better-tailwindcss/sort-classes': 'error',
+      'better-tailwindcss/no-conflicting-classes': 'warn',
+      'better-tailwindcss/no-unregistered-classes': 'error',
     },
   },
   // Tailwind ESLint for React Native
