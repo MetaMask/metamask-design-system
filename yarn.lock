@@ -3498,6 +3498,9 @@ __metadata:
     "@metamask/utils": ^11.10.0
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@metamask/design-system-tailwind-preset":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -3528,11 +3531,12 @@ __metadata:
     deepmerge: "npm:^4.2.2"
     jest: "npm:^29.7.0"
     postcss: "npm:^8.4.47"
+    tailwindcss: "npm:^3.0.0"
     ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.2.2"
   peerDependencies:
     "@metamask/design-tokens": ^8.0.0
-    tailwindcss: ^4.0.0
+    tailwindcss: ^3.0.0
   languageName: unknown
   linkType: soft
 
@@ -3574,6 +3578,7 @@ __metadata:
   dependencies:
     "@metamask/auto-changelog": "npm:^5.3.2"
     "@metamask/design-system-react": "workspace:^"
+    "@tailwindcss/postcss": "npm:^4.0.0"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
@@ -20702,7 +20707,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.4.0":
+"tailwindcss@npm:^3.0.0, tailwindcss@npm:^3.4.0":
   version: 3.4.19
   resolution: "tailwindcss@npm:3.4.19"
   dependencies:
