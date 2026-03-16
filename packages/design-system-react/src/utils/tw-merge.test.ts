@@ -1,3 +1,4 @@
+/* eslint-disable better-tailwindcss/no-conflicting-classes */
 import { twMerge } from './tw-merge';
 
 describe('twMerge utility', () => {
