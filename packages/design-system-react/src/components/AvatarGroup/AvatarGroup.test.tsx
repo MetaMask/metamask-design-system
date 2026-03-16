@@ -115,7 +115,7 @@ describe('AvatarGroup', () => {
       expect(screen.getByTestId('overflow')).toHaveStyle({ zIndex: 3 });
 
       const span = screen.getByText('+1');
-      expect(span).toHaveClass('text-body-md');
+      expect(span).toHaveClass('text-s-body-md');
       expect(span).toHaveClass(TextColor.PrimaryInverse.toLowerCase());
     });
 
@@ -324,7 +324,7 @@ describe('AvatarGroup', () => {
       expect(screen.getByTestId('overflow')).toHaveStyle({ zIndex: 3 });
 
       const span = screen.getByText('+2');
-      expect(span).toHaveClass('text-body-md');
+      expect(span).toHaveClass('text-s-body-md');
       expect(span).toHaveClass(TextColor.PrimaryInverse.toLowerCase());
     });
   });

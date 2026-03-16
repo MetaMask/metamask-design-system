@@ -43,6 +43,7 @@ describe('AvatarBase', () => {
     const fallbackText = getByTestId('fb');
     expect(fallbackText.props.children).toBe(fallback);
     const expectedTextColor = tw`text-muted`.color;
+    // eslint-disable-next-line tailwindcss/no-custom-classname
     const expectedFontSize = tw`text-${TextVariant.BodySm}`.fontSize;
     const expectedMargin = tw`mt-1`.marginTop;
     expect(fallbackText.props.style[0].color).toBe(expectedTextColor);

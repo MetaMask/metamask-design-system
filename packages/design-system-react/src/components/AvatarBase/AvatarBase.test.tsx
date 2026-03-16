@@ -195,7 +195,7 @@ describe('AvatarBase', () => {
 
     // Test XS size
     let fallbackText = screen.getByTestId('fallback-text');
-    expect(fallbackText).toHaveClass('text-body-sm');
+    expect(fallbackText).toHaveClass('text-s-body-sm');
 
     // Test MD size
     rerender(
@@ -206,7 +206,7 @@ describe('AvatarBase', () => {
       />,
     );
     fallbackText = screen.getByTestId('fallback-text');
-    expect(fallbackText).toHaveClass('text-body-sm');
+    expect(fallbackText).toHaveClass('text-s-body-sm');
 
     // Test XL size
     rerender(
@@ -217,6 +217,6 @@ describe('AvatarBase', () => {
       />,
     );
     fallbackText = screen.getByTestId('fallback-text');
-    expect(fallbackText).toHaveClass('text-body-sm');
+    expect(fallbackText).toHaveClass('text-s-body-sm');
   });
 });
