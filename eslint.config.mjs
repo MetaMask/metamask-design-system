@@ -235,7 +235,7 @@ const config = createConfig([
     },
     rules: {
       'better-tailwindcss/sort-classes': 'error',
-      'better-tailwindcss/no-conflicting-classes': 'warn',
+      'better-tailwindcss/no-conflicting-classes': 'error',
       'better-tailwindcss/no-unregistered-classes': 'error',
     },
   },

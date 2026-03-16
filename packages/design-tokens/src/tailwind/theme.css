@@ -3,6 +3,9 @@
 @import '../css/shadow.css';
 
 @theme {
+  /* Disable default Tailwind font sizes and weights */
+  --font-size-*: initial;
+  --font-weight-*: initial;
   /* Essential Tailwind colors required for basic utilities */
   --color-inherit: inherit;
   --color-current: currentColor;
