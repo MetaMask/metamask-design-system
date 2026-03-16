@@ -5,26 +5,17 @@ import typescript from '@metamask/eslint-config-typescript';
 import betterTailwind from 'eslint-plugin-better-tailwindcss';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-<<<<<<< HEAD
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
-=======
->>>>>>> 0f4d3868 (chore: configure Tailwind v3/v4 dual support across packages)
 
 const NODE_LTS_VERSION = 22;
 const nativeRequire = createRequire(
   new URL('./apps/storybook-react-native/package.json', import.meta.url),
 );
-<<<<<<< HEAD
-const tailwind = nativeRequire('eslint-plugin-tailwindcss');
-const NATIVE_TAILWIND_CONFIG_PATH = path.resolve(
-  projectRoot,
-=======
 const nativeTailwind = nativeRequire('eslint-plugin-tailwindcss');
 const NATIVE_TAILWIND_CONFIG_PATH = path.resolve(
-  import.meta.dirname,
->>>>>>> 0f4d3868 (chore: configure Tailwind v3/v4 dual support across packages)
+  projectRoot,
   'apps/storybook-react-native/tailwind-intellisense.config.js',
 );
 
@@ -269,22 +260,14 @@ const config = createConfig([
       'apps/storybook-react-native/stories/**',
     ],
     plugins: {
-<<<<<<< HEAD
-      tailwindcss: tailwind,
-=======
       tailwindcss: nativeTailwind,
->>>>>>> 0f4d3868 (chore: configure Tailwind v3/v4 dual support across packages)
     },
     rules: {
       'tailwindcss/classnames-order': 'error',
       'tailwindcss/enforces-negative-arbitrary-values': 'error',
       'tailwindcss/enforces-shorthand': 'error',
       'tailwindcss/no-arbitrary-value': 'off', // There are legitimate reasons to use arbitrary values but we should specifically error on static colors
-<<<<<<< HEAD
       'tailwindcss/no-custom-classname': 'error',
-=======
-      'tailwindcss/no-custom-classname': 'off', // Native includes dynamic token-driven class segments (e.g. text-${...})
->>>>>>> 0f4d3868 (chore: configure Tailwind v3/v4 dual support across packages)
       'tailwindcss/no-contradicting-classname': 'error',
       'tailwindcss/no-unnecessary-arbitrary-value': 'error',
     },
