@@ -1,10 +1,10 @@
+import type { Config } from 'tailwindcss';
+
 import { colors } from './colors';
 import { shadows, shadowPlugin } from './shadows';
 import { typography } from './typography';
 
-type ThemeLookup = (key: string) => Record<string, unknown>;
-
-const tailwindConfig = {
+const tailwindConfig: Config = {
   content: [],
   theme: {
     extend: {
@@ -12,15 +12,15 @@ const tailwindConfig = {
         ...colors,
       },
       // Reduces redundancy by enabling shorter Tailwind class names
-      textColor: ({ theme }: { theme: ThemeLookup }) => ({
+      textColor: ({ theme }) => ({
         ...theme('colors'), // Incorporate existing color utilities like text-primary-default
         ...colors.text, // e.g. text-default instead of text-text-default
       }),
-      backgroundColor: ({ theme }: { theme: ThemeLookup }) => ({
+      backgroundColor: ({ theme }) => ({
         ...theme('colors'), // Incorporate existing color utilities like bg-primary-default
         ...colors.background, // e.g. bg-default instead of bg-background-default
       }),
-      borderColor: ({ theme }: { theme: ThemeLookup }) => ({
+      borderColor: ({ theme }) => ({
         ...theme('colors'), // Incorporate existing color utilities like border-primary-default
         ...colors.border, // e.g. border-default instead of border-border-default
       }),
@@ -34,3 +34,4 @@ const tailwindConfig = {
 };
 
 export default tailwindConfig;
+module.exports = tailwindConfig;
