@@ -3,12 +3,16 @@
 @import '../css/shadow.css';
 
 @theme {
+<<<<<<< HEAD
   --font-size-*: initial;
   --font-weight-*: initial;
   --font-sans: var(--font-family-default);
   --color-*: initial;
   --shadow-*: initial;
 
+=======
+  /* Essential Tailwind colors required for basic utilities */
+>>>>>>> ff01569f (fix: use @theme instead of @theme inline to enable dark mode CSS variable overrides)
   --color-inherit: inherit;
   --color-current: currentColor;
   --color-transparent: transparent;
@@ -760,9 +764,22 @@
 @utility font-regular {
   font-weight: var(--font-weight-regular);
 }
+<<<<<<< HEAD
 @utility font-medium {
   font-weight: var(--font-weight-medium);
 }
 @utility font-bold {
   font-weight: var(--font-weight-bold);
+=======
+
+/* Legacy shadow color utilities parity with old shadow plugin */
+@utility shadow-default {
+  --shadow-color: var(--color-shadow-default) !important;
+}
+@utility shadow-primary {
+  --shadow-color: var(--color-shadow-primary) !important;
+}
+@utility shadow-error {
+  --shadow-color: var(--color-shadow-error) !important;
+>>>>>>> ff01569f (fix: use @theme instead of @theme inline to enable dark mode CSS variable overrides)
 }
