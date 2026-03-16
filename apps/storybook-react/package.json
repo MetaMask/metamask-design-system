@@ -6,7 +6,6 @@
   "files": [],
   "scripts": {
     "build-storybook": "storybook build",
-    "check:tailwind-theme-parity": "node scripts/check-tailwind-theme-parity.mjs",
     "storybook": "storybook dev -p 6006",
     "test-storybook": "vitest --run"
   },
@@ -21,6 +20,8 @@
     "@storybook/addon-docs": "^10.2.3",
     "@storybook/addon-vitest": "^10.2.3",
     "@storybook/react-vite": "^10.2.3",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@tailwindcss/vite": "^4.0.0",
     "@testing-library/dom": "^10.0.0",
     "@testing-library/react": "^16.0.1",
     "@types/prop-types": "^15",
@@ -50,8 +51,6 @@
     }
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.0.0",
-    "@tailwindcss/vite": "^4.0.0",
     "@vitest/browser": "^3.2.0"
   }
 }
