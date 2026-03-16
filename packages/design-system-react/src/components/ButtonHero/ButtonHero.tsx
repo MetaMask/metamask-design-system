@@ -19,8 +19,7 @@ export const ButtonHero = forwardRef<HTMLButtonElement, ButtonHeroProps>(
         'hover:bg-primary-default-hover',
         'active:bg-primary-default-pressed',
       ],
-      // TODO: Remove `focus-visible:outline` when dropping Tailwind v3 — v4's outline-2 implies outline-style: solid
-      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
+      'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
       className,
     );
 
