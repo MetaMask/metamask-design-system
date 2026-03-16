@@ -32,6 +32,7 @@ export const TextButton: React.FC<TextButtonProps> = ({
    * Calculating the baselineOffset. This baselineOffset is needed to make sure
    * the TextButton aligns perfectly when placed within Text elements
    */
+  // eslint-disable-next-line tailwindcss/no-custom-classname
   const { fontSize, lineHeight } = tw`text-${
     MAP_TEXTBUTTON_SIZE_TEXTVARIANT[size] as string
   }` as {
