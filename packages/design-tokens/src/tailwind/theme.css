@@ -763,6 +763,12 @@
 @utility font-regular {
   font-weight: var(--font-weight-regular);
 }
+@utility font-medium {
+  font-weight: var(--font-weight-medium);
+}
+@utility font-bold {
+  font-weight: var(--font-weight-bold);
+}
 
 /* Legacy shadow color utilities parity with old shadow plugin */
 @utility shadow-default {
