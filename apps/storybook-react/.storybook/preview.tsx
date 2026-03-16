@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../packages/design-tokens/dist/styles.css';
 import '../tailwind.css';
 
 import { Preview } from '@storybook/react-vite';
