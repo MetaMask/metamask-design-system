@@ -3469,7 +3469,6 @@ __metadata:
     "@jest/globals": "npm:^29.7.0"
     "@metamask/auto-changelog": "npm:^5.3.2"
     "@metamask/design-system-shared": "workspace:^"
-    "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/jazzicon": "npm:^2.0.0"
     "@metamask/utils": "npm:^11.10.0"
     "@radix-ui/react-slot": "npm:^1.1.0"
@@ -3493,14 +3492,10 @@ __metadata:
     tsx: "npm:^4.20.6"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-system-tailwind-preset": ^0.6.0
     "@metamask/design-tokens": ^8.1.0
     "@metamask/utils": ^11.10.0
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
-  peerDependenciesMeta:
-    "@metamask/design-system-tailwind-preset":
-      optional: true
   languageName: unknown
   linkType: soft
 
@@ -3520,7 +3515,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/design-system-tailwind-preset@workspace:^, @metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset":
+"@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset":
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
@@ -3764,7 +3759,6 @@ __metadata:
   dependencies:
     "@chromatic-com/storybook": "npm:^5.0.0"
     "@metamask/design-system-react": "workspace:^"
-    "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
     "@metamask/utils": "npm:^11.10.0"
     "@playwright/test": "npm:^1.52.0"
