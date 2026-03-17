@@ -14,7 +14,6 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.0",
     "@metamask/design-system-react": "workspace:^",
-    "@metamask/design-system-tailwind-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.11.0",
     "@playwright/test": "^1.52.0",
