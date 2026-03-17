@@ -230,26 +230,38 @@ const twContainerClassNames = 'flex-1 bg-default p-4';
 
 **Merging tw.style() with style prop (Array Pattern):**
 
-When a component needs to apply Tailwind classes AND accept a custom `style` prop, use the array pattern to ensure proper merge order:
+When a component needs to apply Tailwind classes AND accept a custom `style` prop, use the array pattern for the component's own styles and forward `twClassName` as a prop:
 
 ```tsx
 // ❌ Wrong - Passing style directly to tw.style() causes type errors
 style={tw.style('border-l-4 border-primary-default', style)}
 
-// ✅ Correct - Array pattern (matches Box component)
+// ❌ Wrong - Merging twClassName into style instead of forwarding as prop
 style={[
   tw.style('border-l-4 border-primary-default', twClassName),
   style,
 ]}
+
+// ✅ Correct - Own classes in style, twClassName forwarded as prop
+<Component
+  style={[tw.style('border-l-4 border-primary-default'), style]}
+  twClassName={twClassName}
+/>
+
+// ✅ Also correct - twClassName forwarded via props spread
+<Component
+  style={[tw.style('border-l-4 border-primary-default'), style]}
+  {...props} // twClassName passed through to child component
+/>
 ```
 
-**Why array pattern:**
+**Why this pattern:**
 
-- ✅ Type safety (tw.style only receives classes, not StyleProp types)
-- ✅ Explicit merge order (tw classes → twClassName → style prop)
+- ✅ Type safety (`tw.style` only receives the component's own classes)
+- ✅ Clear separation (component styles in `style`, consumer overrides in `twClassName` prop)
 - ✅ Consistency with Box foundational pattern
 - ✅ Native-optimized style merging (React Native handles arrays)
-- ✅ `twClassName` passed through `{...props}` is handled by Box
+- ✅ `twClassName` forwarded as a prop is handled by Box internally
 
 **Example from BannerAlert:**
 
@@ -261,7 +273,7 @@ export const BannerAlert = ({ severity, style, ...props }) => {
   return (
     <BannerBase
       style={[tw.style(`border-l-4 ${borderColorClass}`), style]}
-      {...props} // twClassName passed through to Box
+      {...props} // twClassName forwarded as prop to BannerBase → Box
     />
   );
 };
