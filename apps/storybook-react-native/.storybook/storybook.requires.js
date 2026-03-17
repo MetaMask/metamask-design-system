@@ -89,6 +89,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/HeaderBase/HeaderBase.stories.tsx": require("../../../packages/design-system-react-native/src/components/HeaderBase/HeaderBase.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Input/Input.stories.tsx": require("../../../packages/design-system-react-native/src/components/Input/Input.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/KeyValueRow/KeyValueRow.stories.tsx": require("../../../packages/design-system-react-native/src/components/KeyValueRow/KeyValueRow.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Label/Label.stories.tsx": require("../../../packages/design-system-react-native/src/components/Label/Label.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/ListItem/ListItem.stories.tsx": require("../../../packages/design-system-react-native/src/components/ListItem/ListItem.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/MainActionButton/MainActionButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/MainActionButton/MainActionButton.stories.tsx"),
