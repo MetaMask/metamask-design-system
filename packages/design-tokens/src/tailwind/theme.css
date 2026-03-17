@@ -6,6 +6,8 @@
   --font-size-*: initial;
   --font-weight-*: initial;
 
+  --color-*: initial;
+
   /* Essential Tailwind colors required for basic utilities */
   --color-inherit: inherit;
   --color-current: currentColor;

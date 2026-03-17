@@ -5,14 +5,16 @@ import typescript from '@metamask/eslint-config-typescript';
 import betterTailwind from 'eslint-plugin-better-tailwindcss';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const NODE_LTS_VERSION = 22;
 const nativeRequire = createRequire(
   new URL('./apps/storybook-react-native/package.json', import.meta.url),
 );
 const tailwind = nativeRequire('eslint-plugin-tailwindcss');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const NATIVE_TAILWIND_CONFIG_PATH = path.resolve(
-  import.meta.dirname,
+  __dirname,
   'apps/storybook-react-native/tailwind-intellisense.config.js',
 );
 
@@ -117,7 +119,7 @@ const config = createConfig([
     extends: [typescript],
     languageOptions: {
       parserOptions: {
-        tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: __dirname,
         project: './tsconfig.packages.json',
         // Disable `projectService` because we run into out-of-memory issues.
         // See this ticket for inspiration out how to solve this:
