@@ -24,6 +24,7 @@ figma.connect(
   {
     props: {
       size: figma.enum('size', {
+        Xs: ButtonIconSize.Xs,
         Sm: ButtonIconSize.Sm,
         Md: ButtonIconSize.Md,
         Lg: ButtonIconSize.Lg,

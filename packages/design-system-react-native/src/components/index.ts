@@ -124,6 +124,9 @@ export type { HeaderBaseProps } from './HeaderBase';
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
+export { KeyValuePair, KeyValuePairOrientation } from './KeyValuePair';
+export type { KeyValuePairProps } from './KeyValuePair';
+
 export { Input } from './Input';
 export type { InputProps } from './Input';
 
@@ -172,6 +175,9 @@ export type { TextFieldProps } from './TextField';
 
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
+
+export { TextWithAccessories } from './temp-components/TextWithAccessories';
+export type { TextWithAccessoriesProps } from './temp-components/TextWithAccessories';
 
 export {
   Toast,
