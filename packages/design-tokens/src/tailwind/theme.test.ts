@@ -55,7 +55,10 @@ function parseThemeCss(): ParsedTheme {
 
     if (node.type === 'atrule' && node.name === 'theme') {
       node.walkDecls((decl) => {
-        themeVars.set(decl.prop, decl.value);
+        // Skip wildcard resets like --color-*: initial
+        if (!decl.prop.endsWith('-*')) {
+          themeVars.set(decl.prop, decl.value);
+        }
       });
     }
 
