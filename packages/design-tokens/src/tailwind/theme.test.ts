@@ -28,6 +28,8 @@ const v3ShadowColors: Record<string, string> = {
 type ParsedTheme = {
   utilities: Map<string, Record<string, string>>;
   themeVars: Map<string, string>;
+  lightVars: Map<string, string>;
+  darkVars: Map<string, string>;
 };
 
 function parseThemeCss(): ParsedTheme {
@@ -37,6 +39,8 @@ function parseThemeCss(): ParsedTheme {
 
   const utilities = new Map<string, Record<string, string>>();
   const themeVars = new Map<string, string>();
+  const lightVars = new Map<string, string>();
+  const darkVars = new Map<string, string>();
 
   root.walk((node) => {
     if (node.type === 'atrule' && node.name === 'utility') {
@@ -54,9 +58,24 @@ function parseThemeCss(): ParsedTheme {
         themeVars.set(decl.prop, decl.value);
       });
     }
+
+    if (node.type === 'rule') {
+      const selector = node.selector ?? '';
+      const isLight =
+        selector.includes('.light') && !selector.includes('.dark');
+      const isDark = selector.includes('.dark');
+      if (isLight || isDark) {
+        const target = isLight ? lightVars : darkVars;
+        node.walkDecls((decl) => {
+          if (decl.prop.startsWith('--color-')) {
+            target.set(decl.prop, decl.value);
+          }
+        });
+      }
+    }
   });
 
-  return { utilities, themeVars };
+  return { utilities, themeVars, lightVars, darkVars };
 }
 
 function flattenColors(
@@ -75,8 +94,21 @@ function flattenColors(
   return result;
 }
 
+function parseSourceColorCss(filename: string): Map<string, string> {
+  const cssPath = path.resolve(__dirname, '..', 'css', filename);
+  const css = readFileSync(cssPath, 'utf-8');
+  const root = parse(css);
+  const vars = new Map<string, string>();
+  root.walkDecls((decl) => {
+    if (decl.prop.startsWith('--color-')) {
+      vars.set(decl.prop, decl.value);
+    }
+  });
+  return vars;
+}
+
 describe('Tailwind v4 theme.css parity with v3 preset', () => {
-  const { utilities, themeVars } = parseThemeCss();
+  const { utilities, themeVars, lightVars, darkVars } = parseThemeCss();
 
   describe('Typography: fontSize → text-* @utility', () => {
     it.each(Object.entries(typography.fontSize))(
@@ -267,6 +299,66 @@ describe('Tailwind v4 theme.css parity with v3 preset', () => {
         (name) => !v3ColorVarNames.has(name) && !v4OnlyColors.has(name),
       );
       expect(unaccounted).toStrictEqual([]);
+    });
+  });
+
+  describe('Theme-scope overrides: .light block matches light-theme-colors.css', () => {
+    const sourceLight = parseSourceColorCss('light-theme-colors.css');
+
+    it('every source light-theme variable exists in theme.css .light block', () => {
+      const missing = [...sourceLight.keys()].filter(
+        (name) => !lightVars.has(name),
+      );
+      expect(missing).toStrictEqual([]);
+    });
+
+    it('every theme.css .light variable exists in source light-theme-colors.css', () => {
+      const extra = [...lightVars.keys()].filter(
+        (name) => !sourceLight.has(name),
+      );
+      expect(extra).toStrictEqual([]);
+    });
+
+    it('.light values match source light-theme-colors.css values', () => {
+      const mismatched: string[] = [];
+      for (const [name, value] of lightVars) {
+        if (sourceLight.get(name) !== value) {
+          mismatched.push(
+            `${name}: expected "${sourceLight.get(name)}", got "${value}"`,
+          );
+        }
+      }
+      expect(mismatched).toStrictEqual([]);
+    });
+  });
+
+  describe('Theme-scope overrides: .dark block matches dark-theme-colors.css', () => {
+    const sourceDark = parseSourceColorCss('dark-theme-colors.css');
+
+    it('every source dark-theme variable exists in theme.css .dark block', () => {
+      const missing = [...sourceDark.keys()].filter(
+        (name) => !darkVars.has(name),
+      );
+      expect(missing).toStrictEqual([]);
+    });
+
+    it('every theme.css .dark variable exists in source dark-theme-colors.css', () => {
+      const extra = [...darkVars.keys()].filter(
+        (name) => !sourceDark.has(name),
+      );
+      expect(extra).toStrictEqual([]);
+    });
+
+    it('.dark values match source dark-theme-colors.css values', () => {
+      const mismatched: string[] = [];
+      for (const [name, value] of darkVars) {
+        if (sourceDark.get(name) !== value) {
+          mismatched.push(
+            `${name}: expected "${sourceDark.get(name)}", got "${value}"`,
+          );
+        }
+      }
+      expect(mismatched).toStrictEqual([]);
     });
   });
 });
