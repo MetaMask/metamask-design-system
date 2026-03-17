@@ -121,6 +121,32 @@ export type { CheckboxProps } from './Checkbox';
 export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
+export {
+  default as HeaderStandard,
+  getHeaderStandardNavbarOptions,
+} from './HeaderStandard';
+export type { HeaderStandardProps } from './HeaderStandard';
+
+export { default as HeaderRoot } from './HeaderRoot';
+export type { HeaderRootProps } from './HeaderRoot';
+
+export {
+  default as HeaderSearch,
+  HeaderSearchVariant,
+  type HeaderSearchProps,
+  type HeaderSearchScreenProps,
+  type HeaderSearchInlineProps,
+} from './HeaderSearch';
+
+export {
+  default as HeaderStandardAnimated,
+  useHeaderStandardAnimated,
+} from './HeaderStandardAnimated';
+export type {
+  HeaderStandardAnimatedProps,
+  UseHeaderStandardAnimatedReturn,
+} from './HeaderStandardAnimated';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
@@ -157,6 +183,12 @@ export type { SensitiveTextProps } from './SensitiveText';
 export { TabEmptyState } from './TabEmptyState';
 export type { TabEmptyStateProps } from './TabEmptyState';
 
+export { default as TitleStandard } from './TitleStandard';
+export type { TitleStandardProps } from './TitleStandard';
+
+export { default as TitleSubpage } from './TitleSubpage';
+export type { TitleSubpageProps } from './TitleSubpage';
+
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
@@ -172,6 +204,9 @@ export type { TextProps } from './Text';
 
 export { TextField, TextFieldSize } from './TextField';
 export type { TextFieldProps } from './TextField';
+
+export { default as TextFieldSearch } from './TextFieldSearch';
+export type { TextFieldSearchProps } from './TextFieldSearch';
 
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
