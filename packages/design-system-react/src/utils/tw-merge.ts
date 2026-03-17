@@ -46,6 +46,22 @@ export const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
       'text-color': ['text-default', 'text-alternative', 'text-muted'],
+      'bg-color': [
+        'bg-default',
+        'bg-default-hover',
+        'bg-default-pressed',
+        'bg-alternative',
+        'bg-alternative-hover',
+        'bg-alternative-pressed',
+        'bg-section',
+        'bg-subsection',
+        'bg-muted',
+        'bg-muted-hover',
+        'bg-muted-pressed',
+        'bg-hover',
+        'bg-pressed',
+      ],
+      'border-color': ['border-default', 'border-muted'],
       'font-size': [
         {
           text: variantClassGroups,
@@ -67,6 +83,8 @@ export const twMerge = extendTailwindMerge({
     },
     conflictingClassGroups: {
       'text-color': ['text-color'],
+      'bg-color': ['bg-color'],
+      'border-color': ['border-color'],
       'font-size': ['font-size'],
       'font-family': ['font-family'],
       'font-weight': ['font-weight'],
