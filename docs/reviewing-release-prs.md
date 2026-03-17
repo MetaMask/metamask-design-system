@@ -16,6 +16,7 @@ This document shows you how to do that.
   - [ ] Are there any changes since the package's previous release that are not reflected in the changelog?
   - [ ] Have there been any changes merged to `main` while the release PR has been open that have not been added to a changelog?
   - [ ] Are there any bumps to workspace dependencies made within the release PR that have not been captured in the changelog?
+  - [ ] For breaking changes: Are MIGRATION.md files updated with before/after examples, table of contents updated, and examples realistic (not placeholders)?
 
 ## 1. Review packages being published
 
@@ -181,6 +182,26 @@ Finally, look over the changelogs one more time to ensure that they aren't missi
 
 Therefore, review the [changes committed since the previous release](#review-changes) and look for changed versions of workspace dependencies. If any are missing from changelogs, notify the creator of the release PR so that they can add them, offering a suggestion as appropriate.
 
-## 7. Approve the release
+## 7. Review MIGRATION.md for breaking changes
+
+If the release contains breaking changes, verify that MIGRATION.md files have been updated appropriately.
+
+For each package with breaking changes documented in its CHANGELOG.md:
+
+1. **Locate the MIGRATION.md file** for that package (e.g., `packages/design-system-react/MIGRATION.md`)
+2. **Verify a new version section exists** with the format "From version X.Y.Z to A.B.C"
+3. **Check the table of contents** has been updated to link to the new section
+4. **Review the migration documentation** to ensure it includes:
+   - **What Changed**: Clear description of old vs new API
+   - **Migration**: Before/after code examples showing exact imports and usage
+   - **Impact**: Who is affected and what breaks without migration
+5. **Verify examples are realistic**, not placeholders like "foo", "example", or "0x123"
+6. **Check cross-platform consistency**: If a breaking change affects both React and React Native, both MIGRATION.md files should be updated
+
+If MIGRATION.md documentation is missing or incomplete for any breaking change, notify the creator of the release PR so that they can add proper migration guidance.
+
+**Note:** See `.cursor/rules/release-workflow.md` for detailed MIGRATION.md structure and examples.
+
+## 8. Approve the release
 
 That's it! You can now rest easy knowing that all of the changes in the new release are accounted for and that consumers will be sufficiently notified once it has been created.
