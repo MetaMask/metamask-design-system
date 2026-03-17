@@ -2,12 +2,137 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
 - [From version 7.0.0 to 8.0.0](#from-version-700-to-800)
 - [From version 6.0.0 to 7.0.0](#from-version-600-to-700)
 - [From version 5.1.0 to 6.0.0](#from-version-510-to-600)
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## Tailwind CSS v3 to v4
+
+This section covers migrating from Tailwind CSS v3 (using `@metamask/design-system-tailwind-preset`) to Tailwind CSS v4 (using the new `theme.css` export from this package).
+
+### Overview
+
+In Tailwind v3, design tokens were consumed through a combination of:
+
+- `@metamask/design-tokens/styles.css` (CSS custom properties)
+- `@metamask/design-system-tailwind-preset` (Tailwind v3 theme config)
+
+In Tailwind v4, a single CSS file replaces both:
+
+- `@metamask/design-tokens/tailwind/theme.css`
+
+This file provides all design token CSS variables, `@theme` color/shadow definitions, and `@utility` directives for typography, font weights, font families, and color shortcuts.
+
+### Step 1: Install Tailwind CSS v4
+
+```bash
+yarn add -D tailwindcss@^4.0.0 @tailwindcss/postcss@^4.0.0
+# If using Vite:
+yarn add -D @tailwindcss/vite@^4.0.0
+```
+
+### Step 2: Replace the Tailwind v3 configuration
+
+Remove `tailwind.config.js` (or `.ts`) and replace with a CSS entry point.
+
+**Before (Tailwind v3):**
+
+```js
+// tailwind.config.js
+const preset = require('@metamask/design-system-tailwind-preset');
+
+module.exports = {
+  presets: [preset],
+  content: ['./src/**/*.{ts,tsx}'],
+};
+```
+
+**After (Tailwind v4):**
+
+Create a CSS entry point (e.g. `tailwind.css`):
+
+```css
+@import 'tailwindcss';
+@import '@metamask/design-tokens/tailwind/theme.css';
+
+@source "./src/**/*.{ts,tsx}";
+```
+
+### Step 3: Update build tooling
+
+**PostCSS (`postcss.config.js`):**
+
+```js
+module.exports = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+};
+```
+
+**Vite (`vite.config.ts`):**
+
+```ts
+import tailwindcss from '@tailwindcss/vite';
+
+export default {
+  plugins: [tailwindcss()],
+};
+```
+
+### Step 4: Update CSS imports
+
+Replace the old CSS imports with the new entry point.
+
+**Before:**
+
+```ts
+import '@metamask/design-tokens/styles.css';
+import './tailwind.css'; // or wherever your Tailwind directives were
+```
+
+**After:**
+
+```ts
+import './tailwind.css'; // your new CSS entry point that imports theme.css
+```
+
+### Step 5: Remove the v3 preset dependency
+
+```bash
+yarn remove @metamask/design-system-tailwind-preset
+```
+
+The preset is no longer needed for Tailwind v4 consumers. It will eventually be deprecated.
+
+### What `theme.css` provides
+
+| Token category    | How it works in v4                                                                                       |
+| ----------------- | -------------------------------------------------------------------------------------------------------- |
+| Colors            | `@theme` variables (e.g. `--color-primary-default`) auto-generate `bg-*`, `text-*`, `border-*` utilities |
+| Color shortcuts   | `@utility` directives (e.g. `bg-default`, `text-default`, `border-default`)                              |
+| Typography        | `@utility` directives for `text-*`, `leading-*`, `tracking-*`                                            |
+| Font weights      | `@utility` directives for `font-regular`, `font-medium`, `font-bold`                                     |
+| Font families     | `@utility` directives for `font-default`, `font-accent`, `font-hero`                                     |
+| Box shadows       | `@theme` variables (`--box-shadow-xs/sm/md/lg`) auto-generate `shadow-*` utilities                       |
+| Shadow colors     | `@utility` directives for `shadow-default`, `shadow-primary`, `shadow-error`                             |
+| Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                        |
+
+### Class name changes
+
+Most utility class names remain the same between v3 and v4. Notable differences:
+
+| v3 class    | v4 class       | Notes                                                                        |
+| ----------- | -------------- | ---------------------------------------------------------------------------- |
+| `font-sans` | `font-default` | v4 uses `font-default` instead of overriding Tailwind's built-in `font-sans` |
+
+### React Native
+
+React Native packages (`@metamask/design-system-react-native`, `@metamask/design-system-twrnc-preset`) remain on Tailwind v3 via twrnc. This migration only applies to web consumers.
 
 ## From version 7.0.0 to 8.0.0
 
