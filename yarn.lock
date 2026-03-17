@@ -3488,7 +3488,7 @@ __metadata:
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
     rimraf: "npm:^5.0.5"
-    tailwind-merge: "npm:^3.0.0"
+    tailwind-merge: "npm:^2.0.0"
     ts-jest: "npm:^29.2.5"
     tsx: "npm:^4.20.6"
     typescript: "npm:~5.2.2"
@@ -20673,10 +20673,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:^3.0.0":
-  version: 3.5.0
-  resolution: "tailwind-merge@npm:3.5.0"
-  checksum: 10/888861e2fc685dc282e6c0d735a2ca7656c3f13da6947896401f50aea924e481ab6dc7629b6f6a28125505f1b06ee97381ad792849204f34ee1ede375b119e0c
+"tailwind-merge@npm:^2.0.0":
+  version: 2.6.1
+  resolution: "tailwind-merge@npm:2.6.1"
+  checksum: 10/b68e9e63f0d8e4f8e8b9801b978c2d6c78136a20e407586b3bf4c905759ccbfa4ba9d0b6af06b0241816578866cb3dce660078fc29847a8a1dfabb87d315b80b
   languageName: node
   linkType: hard
 
