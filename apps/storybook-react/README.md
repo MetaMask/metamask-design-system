@@ -41,3 +41,25 @@ yarn test:storybook
 # Run tests for a specific component
 yarn test:storybook "ComponentName"
 ```
+
+## Visual Regression Testing
+
+Visual regression testing is powered by [Chromatic](https://www.chromatic.com), which automatically detects visual changes in components across browsers.
+
+See [Visual Regression Testing Documentation](../../docs/visual-regression-testing.md) for:
+
+- How automated visual testing works
+- Reviewing visual changes in pull requests
+- Running Chromatic locally
+- Troubleshooting common issues
+- Platform support and limitations
+
+Quick start:
+
+```bash
+# Chromatic runs automatically on PRs
+# To run locally:
+yarn chromatic
+```
+
+**Note**: Chromatic only supports React web components. React Native visual testing is not supported.

@@ -41,6 +41,13 @@ jobs:
     needs: check-workflows
     uses: ./.github/workflows/test-storybook.yml
 
+  chromatic:
+    name: Chromatic
+    needs: check-workflows
+    uses: ./.github/workflows/chromatic.yml
+    secrets:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
   is-release:
     name: Determine whether this is a release merge commit
     needs: lint-build-test
@@ -72,6 +79,7 @@ jobs:
       - analyse-code
       - lint-build-test
       - test-storybook
+      - chromatic
     outputs:
       passed: ${{ steps.set-output.outputs.passed }}
     steps:
