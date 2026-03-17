@@ -55,7 +55,7 @@ export type CheckboxProps = Omit<
    */
   inputProps?: Omit<
     ComponentProps<'input'>,
-    'type' | 'checked' | 'onChange' | 'disabled'
+    'type' | 'checked' | 'onChange' | 'disabled' | 'onKeyDown' | 'id' | 'aria-invalid' | 'aria-checked'
   > & {
     [key: `data-${string}`]: string;
   };
