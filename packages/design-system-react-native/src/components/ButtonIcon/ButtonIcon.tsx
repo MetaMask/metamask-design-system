@@ -2,7 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import { ButtonIconSize } from '../../types';
+import { ButtonIconSize, ButtonIconVariant } from '../../types';
 import type { IconColor } from '../Icon';
 import { Icon } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
@@ -18,8 +18,7 @@ export const ButtonIcon = ({
   iconName,
   iconProps,
   isDisabled = false,
-  isInverse = false,
-  isFloating = false,
+  variant = ButtonIconVariant.Default,
   onPressIn,
   onPressOut,
   twClassName,
@@ -30,14 +29,21 @@ export const ButtonIcon = ({
   const tw = useTailwind();
 
   let backgroundColor = 'bg-transparent';
-  if (isFloating) {
+  if (variant === ButtonIconVariant.Floating) {
     backgroundColor = 'bg-icon-default';
+  } else if (variant === ButtonIconVariant.Filled) {
+    backgroundColor = isPressed ? 'bg-muted-pressed' : 'bg-muted';
   } else if (isPressed) {
     backgroundColor = 'bg-pressed';
   }
 
   const twIconColorClassNames =
-    isInverse || isFloating ? 'text-primary-inverse' : 'text-icon-default';
+    variant === ButtonIconVariant.Floating
+      ? 'text-primary-inverse'
+      : 'text-icon-default';
+
+  const borderRadiusClass =
+    variant === ButtonIconVariant.Default ? 'rounded-lg' : 'rounded-full';
 
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);
@@ -61,7 +67,7 @@ export const ButtonIcon = ({
         tw.style(
           'items-center justify-center',
           TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size],
-          isFloating ? 'rounded-full' : 'rounded-lg',
+          borderRadiusClass,
           backgroundColor,
           isDisabled ? 'opacity-50' : 'opacity-100',
           twClassName,

@@ -49,6 +49,9 @@ export {
 } from './BadgeWrapper';
 export type { BadgeWrapperCustomPosition } from './BadgeWrapper';
 
+export { BannerBase } from './BannerBase';
+export type { BannerBaseProps } from './BannerBase';
+
 export { Blockies } from './temp-components/Blockies';
 export type { BlockiesProps } from './temp-components/Blockies';
 
@@ -70,7 +73,7 @@ export { ButtonBase } from './ButtonBase';
 export type { ButtonBaseProps } from './ButtonBase';
 export { ButtonBaseSize } from './ButtonBase';
 
-export { ButtonIcon, ButtonIconSize } from './ButtonIcon';
+export { ButtonIcon, ButtonIconSize, ButtonIconVariant } from './ButtonIcon';
 export type { ButtonIconProps } from './ButtonIcon';
 
 export { Checkbox } from './Checkbox';
@@ -105,5 +108,11 @@ export type { TextProps } from './Text';
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
+export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
+export type { BannerAlertProps } from './BannerAlert';
+
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';
 export type { ButtonHeroProps } from './ButtonHero';
+
+export { ButtonFilter } from './ButtonFilter';
+export type { ButtonFilterProps } from './ButtonFilter';

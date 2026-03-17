@@ -1,0 +1,379 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as BannerAlertStories from './BannerAlert.stories';
+
+# BannerAlert
+
+BannerAlert is a semantic alert banner that composes BannerBase and applies severity-driven icon and background styles.
+
+```tsx
+import {
+  BannerAlert,
+  BannerAlertSeverity,
+} from '@metamask/design-system-react';
+
+<BannerAlert
+  severity={BannerAlertSeverity.Info}
+  title="Title is sentence case no period"
+  description="Description shouldn't repeat title. 1-3 lines."
+  actionButtonLabel="Action"
+  actionButtonOnPress={() => undefined}
+  onClose={() => undefined}
+/>;
+```
+
+<Canvas of={BannerAlertStories.Default} />
+
+## Props
+
+### `severity`
+
+Optional semantic severity used to choose icon and background styles.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>severity</code>
+      </td>
+      <td align="left">
+        <code>BannerAlertSeverity</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BannerAlertSeverity.Info</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+Supported values:
+
+- `BannerAlertSeverity.Info`
+- `BannerAlertSeverity.Success`
+- `BannerAlertSeverity.Warning`
+- `BannerAlertSeverity.Danger`
+
+Optional props that are spread onto the icon rendered in the start accessory. Use `iconProps` when you need to attach identifiers (e.g., `data-testid`) or custom class names without replacing the built-in severity styles.
+
+<Canvas of={BannerAlertStories.Severity} />
+
+### `title`
+
+Optional title rendered at the top of the banner body. Use `titleProps` to pass props to the `Text` component when `title` is a string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>title</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>titleProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerAlertStories.Title} />
+
+### `description`
+
+Optional description rendered below the title. Use `descriptionProps` to pass props to the `Text` component when `description` is a string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>description</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>descriptionProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerAlertStories.Description} />
+
+### `children`
+
+Optional content rendered below the description. When `children` is a string BannerAlert wraps it in `Text`; use `childrenWrapperProps` to configure that wrapper.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>children</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>childrenWrapperProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerAlertStories.Children} />
+
+### `actionButtonOnClick`
+
+Optional click handler for the action button. When provided, `actionButtonLabel` is required and `actionButtonProps` can customize the `Button` (the `variant` prop is not supported and defaults to primary).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>actionButtonLabel</code>
+      </td>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Conditionally (when actionButtonOnClick)</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>actionButtonOnClick</code>
+      </td>
+      <td align="left">
+        <code>() => void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>actionButtonProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;ButtonProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerAlertStories.ActionButtonOnClick} />
+
+### `onClose`
+
+Optional callback that when provided renders a close icon in the top-right corner; `closeButtonProps` lets you adjust the icon’s accessibility label or classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>onClose</code>
+      </td>
+      <td align="left">
+        <code>() => void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>closeButtonProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;ButtonIconProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerAlertStories.OnClose} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that aren't part of the default BannerAlert
+- Override BannerAlert defaults when necessary
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>className</code>
+      </td>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<BannerAlert
+  className="shadow-lg ring-1 ring-primary-100"
+  title="Styled banner"
+  actionButtonLabel="Action"
+>
+  Content with shadow and border overrides.
+</BannerAlert>
+```
+
+### `style`
+
+Use the `style` prop when you need inline styles that can't be achieved with `className`. Prefer `className` for static Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>style</code>
+      </td>
+      <td align="left">
+        <code>CSSProperties</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<BannerAlert
+  style={{ marginTop: { dynamicValue } }}
+  title="Custom inline border"
+  actionButtonLabel="Action"
+>
+  Inline style example.
+</BannerAlert>
+```
+
+## Component API
+
+<Controls of={BannerAlertStories.Default} />

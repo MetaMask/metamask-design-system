@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.0]
+
+### Added
+
+- Added `ButtonFilter` component for filter button functionality ([#964](https://github.com/MetaMask/metamask-design-system/pull/964))
+- Added `BottomSheet` component for modal bottom sheet interactions ([#963](https://github.com/MetaMask/metamask-design-system/pull/963))
+- Added `MainActionButton` component for primary call-to-action buttons ([#952](https://github.com/MetaMask/metamask-design-system/pull/952))
+- Added `BannerBase` component for creating custom banner notifications ([#955](https://github.com/MetaMask/metamask-design-system/pull/955))
+- Added `ListItem` component for standardized list rows ([#958](https://github.com/MetaMask/metamask-design-system/pull/958))
+- Added `TabEmptyState` component for empty tab state displays ([#949](https://github.com/MetaMask/metamask-design-system/pull/949))
+- Added `BottomSheetDialog` component for bottom sheet dialog interactions ([#905](https://github.com/MetaMask/metamask-design-system/pull/905))
+
+### Changed
+
+- **BREAKING:** Updated `ButtonIcon` API to use `variant` prop instead of `isInverse` and `isFloating` boolean props ([#948](https://github.com/MetaMask/metamask-design-system/pull/948))
+  - Removed `isInverse` and `isFloating` props
+  - Added `variant` prop with three options: `ButtonIconVariant.Default` (default), `ButtonIconVariant.Filled` (new muted background with rounded corners), and `ButtonIconVariant.Floating` (replaces `isFloating` behavior)
+  - Migration: Replace `isFloating={true}` with `variant={ButtonIconVariant.Floating}`, and use `variant={ButtonIconVariant.Default}` for standard transparent background
+  - See [Migration Guide](./MIGRATION.md#from-version-0100-to-0110) for complete migration instructions
+- **BREAKING:** `Input` component now requires `value` prop and is controlled-only ([#960](https://github.com/MetaMask/metamask-design-system/pull/960))
+  - Removed `defaultValue` prop - all Input instances must now pass a `value` prop and manage state via `onChange`
+  - This change affects all components using `Input` directly, including `TextField`
+  - Migration: Convert uncontrolled inputs to controlled by adding state management with `value` and `onChange` props
+  - See [Migration Guide](./MIGRATION.md#from-version-0100-to-0110) for complete migration instructions
+- Updated `Ai` icon to filled version for visual consistency ([#970](https://github.com/MetaMask/metamask-design-system/pull/970))
+
+### Fixed
+
+- Fixed iOS placeholder alignment issue in `Input` component without affecting typed text rendering ([#960](https://github.com/MetaMask/metamask-design-system/pull/960))
+- Fixed missing component exports in package entry point ([#967](https://github.com/MetaMask/metamask-design-system/pull/967))
+
+## [0.10.0]
+
+### Added
+
+- Added `ActionListItem` component for standardized list row actions ([#951](https://github.com/MetaMask/metamask-design-system/pull/951))
+- Added `SensitiveText` component for sensitive value display and reveal interactions ([#922](https://github.com/MetaMask/metamask-design-system/pull/922))
+- Added `ButtonSemantic` component for semantic intent button variants ([#950](https://github.com/MetaMask/metamask-design-system/pull/950))
+- Added `BottomSheetHeader` component for consistent bottom sheet header layouts ([#927](https://github.com/MetaMask/metamask-design-system/pull/927))
+- Added `ButtonHero` to `@metamask/design-system-react-native` ([#934](https://github.com/MetaMask/metamask-design-system/pull/934))
+
+### Changed
+
+- **BREAKING:** Updated `BadgeCount` type exports to use the ADR-0003/ADR-0004 const-object + string-union pattern instead of TypeScript enums ([#942](https://github.com/MetaMask/metamask-design-system/pull/942))
+  - `BadgeCountSize` is now provided as a const object with a derived union type rather than an enum
+  - `BadgeCount` shared prop types are now sourced from `@metamask/design-system-shared`
+  - Migration: update any enum-specific usage to const-object/union usage, while continuing to import from `@metamask/design-system-react-native`
+
 ## [0.9.0]
 
 ### Added
@@ -187,7 +235,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.9.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.11.0...HEAD
+[0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.10.0...@metamask/design-system-react-native@0.11.0
+[0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.9.0...@metamask/design-system-react-native@0.10.0
 [0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.8.0...@metamask/design-system-react-native@0.9.0
 [0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.7.0...@metamask/design-system-react-native@0.8.0
 [0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.6.0...@metamask/design-system-react-native@0.7.0

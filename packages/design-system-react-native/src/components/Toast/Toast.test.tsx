@@ -11,7 +11,7 @@ import { AvatarAccountVariant } from '../AvatarAccount';
 import Toast from './Toast';
 import { ToastContext, ToastContextWrapper } from './Toast.context';
 import type { ToastOptions, ToastRef } from './Toast.types';
-import { ButtonIconVariant, ToastVariant } from './Toast.types';
+import { ToastCloseButtonVariant, ToastVariant } from './Toast.types';
 
 // Mock cancelAnimation as a jest.fn so we can assert on calls.
 const mockCancelAnimation = jest.fn();
@@ -288,7 +288,7 @@ describe('Toast', () => {
       labelOptions: [{ label: 'With close icon' }],
       hasNoTimeout: true,
       closeButtonOptions: {
-        variant: ButtonIconVariant.Icon,
+        variant: ToastCloseButtonVariant.Icon,
         iconName: IconName.Close,
         onPress,
       },
@@ -379,7 +379,7 @@ describe('Toast', () => {
       labelOptions: [{ label: 'Close icon test' }],
       hasNoTimeout: true,
       closeButtonOptions: {
-        variant: ButtonIconVariant.Icon,
+        variant: ToastCloseButtonVariant.Icon,
         iconName: IconName.Close,
         onPress,
       },

@@ -15,3 +15,15 @@ export {
   BadgeStatusSize,
   type BadgeStatusPropsShared,
 } from './types/BadgeStatus';
+
+// BannerBase types (ADR-0004)
+export { type BannerBasePropsShared } from './types/BannerBase';
+
+// ButtonFilter types (ADR-0004)
+export { type ButtonFilterPropsShared } from './types/ButtonFilter';
+
+// BannerAlert types (ADR-0003 + ADR-0004)
+export {
+  BannerAlertSeverity,
+  type BannerAlertPropsShared,
+} from './types/BannerAlert';
