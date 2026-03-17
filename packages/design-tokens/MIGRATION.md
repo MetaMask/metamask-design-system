@@ -4,7 +4,6 @@ This guide provides detailed instructions for migrating your project from one ve
 
 - [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
 - [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
-- [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
 - [From version 7.0.0 to 8.0.0](#from-version-700-to-800)
 - [From version 6.0.0 to 7.0.0](#from-version-600-to-700)
 - [From version 5.1.0 to 6.0.0](#from-version-510-to-600)

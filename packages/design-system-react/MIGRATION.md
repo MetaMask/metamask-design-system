@@ -65,6 +65,12 @@ The v3 Tailwind preset has been removed as a peer dependency. Consumers should u
 
 If you use your own `tailwind-merge` instance alongside this package, ensure you upgrade to v3 for Tailwind v4 compatibility.
 
+#### Focus outline classes use v4 syntax
+
+Button components no longer emit `focus-visible:outline-none` or `focus-visible:outline`. In Tailwind v4, `outline-2` implies `outline-style: solid`, making both classes unnecessary.
+
+If you were overriding focus styles on Button components via `className`, verify your overrides still apply correctly.
+
 ## General Extension Migration Guidance
 
 This guidance applies to all extension `component-library` to `@metamask/design-system-react` migrations.
