@@ -2,11 +2,10 @@ module.exports = {
   env: {
     test: {
       presets: [
-        '@react-native/babel-preset',
         [
-          '@babel/preset-react',
+          '@react-native/babel-preset',
           {
-            runtime: 'automatic',
+            jsxRuntime: 'automatic',
           },
         ],
         [

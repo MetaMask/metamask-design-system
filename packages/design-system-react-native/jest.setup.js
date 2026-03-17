@@ -1,3 +1,5 @@
+require('react-native-reanimated').setUpTests();
+
 jest.mock('react-native-svg', () => {
   const React = require('react');
   const { View } = require('react-native');
