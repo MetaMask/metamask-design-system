@@ -6,6 +6,7 @@
   "files": [],
   "scripts": {
     "build-storybook": "storybook build",
+    "chromatic": "chromatic --exit-zero-on-changes",
     "storybook": "storybook dev -p 6006",
     "test-storybook": "vitest --run"
   },
@@ -29,6 +30,7 @@
     "@vitest/coverage-v8": "^3.2.4",
     "autoprefixer": "^10.0.0",
     "axe-playwright": "^2.1.0",
+    "chromatic": "^15.2.0",
     "playwright": "^1.52.0",
     "postcss": "^8.4.47",
     "prop-types": "^15.8.1",
