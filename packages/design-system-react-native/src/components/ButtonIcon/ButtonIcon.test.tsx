@@ -10,6 +10,27 @@ import { ButtonIcon } from './ButtonIcon';
 import { TWCLASSMAP_BUTTONICON_SIZE_DIMENSION } from './ButtonIcon.constants';
 
 describe('ButtonIcon', () => {
+  it('applies Xs size with correct dimension', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
+    const expected = tw.style(
+      'items-center justify-center',
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Xs],
+      'rounded-lg bg-transparent opacity-100',
+    );
+
+    const { getByTestId } = render(
+      <ButtonIcon
+        iconName={IconName.Close}
+        iconProps={{ testID: 'icon' }}
+        size={ButtonIconSize.Xs}
+        testID="button-icon"
+      />,
+    );
+    const btn = getByTestId('button-icon');
+    expect(btn.props.style[0]).toStrictEqual(expected);
+  });
+
   it('renders default state correctly', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
