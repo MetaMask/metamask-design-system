@@ -1,6 +1,9 @@
 export { ActionListItem } from './ActionListItem';
 export type { ActionListItemProps } from './ActionListItem';
 
+export { Attribution } from './Attribution';
+export type { AttributionProps } from './Attribution';
+
 export {
   AvatarAccount,
   AvatarAccountVariant,
