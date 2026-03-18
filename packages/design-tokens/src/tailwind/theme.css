@@ -6,7 +6,7 @@
   --font-size-*: initial;
   --font-weight-*: initial;
   --color-*: initial;
-  --box-shadow-*: initial;
+  --shadow-*: initial;
 
   --color-inherit: inherit;
   --color-current: currentColor;
@@ -173,15 +173,10 @@
   /* For critical/danger drop shadow color (red50-20% | red300-20%) */
   --color-shadow-error: #ca354266;
 
-  /* Box Shadows */
-  --box-shadow-xs: var(--shadow-size-xs)
-    var(--shadow-color, var(--color-shadow-default));
-  --box-shadow-sm: var(--shadow-size-sm)
-    var(--shadow-color, var(--color-shadow-default));
-  --box-shadow-md: var(--shadow-size-md)
-    var(--shadow-color, var(--color-shadow-default));
-  --box-shadow-lg: var(--shadow-size-lg)
-    var(--shadow-color, var(--color-shadow-default));
+  --shadow-xs: 0 2px 4px 0 var(--shadow-color, var(--color-shadow-default));
+  --shadow-sm: 0 2px 8px 0 var(--shadow-color, var(--color-shadow-default));
+  --shadow-md: 0 2px 16px 0 var(--shadow-color, var(--color-shadow-default));
+  --shadow-lg: 0 2px 40px 0 var(--shadow-color, var(--color-shadow-default));
 }
 
 /**
