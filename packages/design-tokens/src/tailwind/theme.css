@@ -5,6 +5,7 @@
 @theme {
   --font-size-*: initial;
   --font-weight-*: initial;
+  --font-sans: var(--font-family-default);
   --color-*: initial;
   --shadow-*: initial;
 
