@@ -10,19 +10,14 @@ const {
   typography,
 } = require('../../../design-system-tailwind-preset/src/typography');
 
-// Inlined to avoid importing tailwindcss/plugin from shadows.ts.
-// Keep in sync with design-system-tailwind-preset/src/shadows.ts
-const v3Shadows: Record<string, string> = {
-  xs: '0 2px 4px 0 var(--shadow-color, var(--color-shadow-default))',
-  sm: '0 2px 8px 0 var(--shadow-color, var(--color-shadow-default))',
-  md: '0 2px 16px 0 var(--shadow-color, var(--color-shadow-default))',
-  lg: '0 2px 40px 0 var(--shadow-color, var(--color-shadow-default))',
-};
-
-const v3ShadowColors: Record<string, string> = {
-  default: 'var(--color-shadow-default)',
-  primary: 'var(--color-shadow-primary)',
-  error: 'var(--color-shadow-error)',
+// Shadow sizes with baked-in default color (light mode).
+// Tailwind v4 needs parseable colors in shadow values for its
+// --tw-shadow-color composition to work.
+const v4Shadows: Record<string, string> = {
+  xs: '0 2px 4px 0 #0000001a',
+  sm: '0 2px 8px 0 #0000001a',
+  md: '0 2px 16px 0 #0000001a',
+  lg: '0 2px 40px 0 #0000001a',
 };
 
 type ParsedTheme = {
@@ -216,25 +211,14 @@ describe('Tailwind v4 theme.css parity with v3 preset', () => {
     );
   });
 
-  describe('Shadows: v3 sizes → @theme --shadow-* variables', () => {
-    it.each(Object.entries(v3Shadows))(
+  describe('Shadows: sizes → @theme --shadow-* variables', () => {
+    it.each(Object.entries(v4Shadows))(
       '--shadow-%s exists in @theme with correct value',
       (name, value) => {
         const varName = `--shadow-${name}`;
         expect(themeVars.has(varName)).toBe(true);
         const normalize = (s: string) => s.replace(/\s+/gu, ' ').trim();
         expect(normalize(themeVars.get(varName) ?? '')).toBe(normalize(value));
-      },
-    );
-  });
-
-  describe('Shadows: v3 shadow colors → shadow-* @utility', () => {
-    it.each(Object.entries(v3ShadowColors))(
-      'shadow-%s exists with correct --shadow-color value',
-      (name, value) => {
-        const util = utilities.get(`shadow-${name}`);
-        expect(util).toBeDefined();
-        expect(util?.['--shadow-color']).toBe(`${value} !important`);
       },
     );
   });
@@ -266,9 +250,6 @@ describe('Tailwind v4 theme.css parity with v3 preset', () => {
     for (const name of Object.keys(colors.border)) {
       expectedUtilityNames.add(`border-${name}`);
     }
-    for (const name of Object.keys(v3ShadowColors)) {
-      expectedUtilityNames.add(`shadow-${name}`);
-    }
 
     it('no unaccounted @utility directives in theme.css', () => {
       const unaccounted = [...utilities.keys()].filter(
@@ -291,7 +272,9 @@ describe('Tailwind v4 theme.css parity with v3 preset', () => {
       '--color-white',
       '--color-flask-default',
       '--color-flask-inverse',
-      ...Object.keys(v3ShadowColors).map((name) => `--color-shadow-${name}`),
+      '--color-shadow-default',
+      '--color-shadow-primary',
+      '--color-shadow-error',
     ]);
 
     it('no unaccounted --color-* variables in @theme', () => {
