@@ -195,6 +195,9 @@ export type {
 export { SectionStandard } from './SectionStandard';
 export type { SectionStandardProps } from './SectionStandard';
 
+export { SectionSocial } from './SectionSocial';
+export type { SectionSocialProps } from './SectionSocial';
+
 export { TabEmptyState } from './TabEmptyState';
 export type { TabEmptyStateProps } from './TabEmptyState';
 
