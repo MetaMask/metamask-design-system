@@ -1,6 +1,6 @@
 # Attribution
 
-Attribution is a text line built on TextWithAccessories with default styling for attribution or secondary labels: `TextVariant.BodySm`, `TextColor.TextAlternative`, and `gap-2` layout. Optional start and end accessories are supported.
+Attribution is a text line built on BoxHorizontal with default styling for attribution or secondary labels: `TextVariant.BodySm`, `TextColor.TextAlternative`, and `gap-2` layout. Optional start and end accessories are supported.
 
 ```tsx
 import { Attribution } from '@metamask/design-system-react-native';
@@ -10,7 +10,7 @@ import { Attribution } from '@metamask/design-system-react-native';
 
 ## Props
 
-Attribution extends TextWithAccessories props. The following defaults are applied; you can override them via the same props.
+Attribution extends BoxHorizontal props. The following defaults are applied; you can override them via the same props.
 
 ### `children`
 

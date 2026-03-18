@@ -3,17 +3,17 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { ButtonIcon } from '../../ButtonIcon';
 import { Box } from '../../Box';
+import { ButtonIcon } from '../../ButtonIcon';
 import { IconName } from '../../Icon';
 import { TextColor, TextVariant } from '../../Text';
 
-import { TextWithAccessories } from './TextWithAccessories';
-import type { TextWithAccessoriesProps } from './TextWithAccessories.types';
+import { BoxVertical } from './BoxVertical';
+import type { BoxVerticalProps } from './BoxVertical.types';
 
-const meta: Meta<TextWithAccessoriesProps> = {
-  title: 'Temp Components/TextWithAccessories',
-  component: TextWithAccessories,
+const meta: Meta<BoxVerticalProps> = {
+  title: 'Temp Components/BoxVertical',
+  component: BoxVertical,
   args: {
     children: 'Label with optional accessories',
     textProps: {
@@ -24,71 +24,71 @@ const meta: Meta<TextWithAccessoriesProps> = {
   argTypes: {
     children: { control: 'text' },
     textProps: { control: 'object' },
-    startAccessory: { control: false },
-    endAccessory: { control: false },
+    topAccessory: { control: false },
+    bottomAccessory: { control: false },
   },
 };
 
 export default meta;
-type Story = StoryObj<TextWithAccessoriesProps>;
+type Story = StoryObj<BoxVerticalProps>;
 
 export const Default: Story = {
   render: (args) => {
     const tw = useTailwind();
     return (
       <View style={tw`p-4`}>
-        <TextWithAccessories {...args} />
+        <BoxVertical {...args} />
       </View>
     );
   },
 };
 
-export const StartAccessory: Story = {
+export const TopAccessory: Story = {
   render: (args) => {
     const tw = useTailwind();
     return (
       <View style={tw`p-4`}>
-        <TextWithAccessories
+        <BoxVertical
           {...args}
-          startAccessory={
+          topAccessory={
             <Box twClassName="w-6 h-6 rounded-full bg-primary-default" />
           }
         >
           {args.children}
-        </TextWithAccessories>
+        </BoxVertical>
       </View>
     );
   },
 };
 
-export const EndAccessory: Story = {
+export const BottomAccessory: Story = {
   render: (args) => {
     const tw = useTailwind();
     return (
       <View style={tw`p-4`}>
-        <TextWithAccessories
+        <BoxVertical
           {...args}
-          endAccessory={<ButtonIcon iconName={IconName.Info} />}
+          bottomAccessory={<ButtonIcon iconName={IconName.Info} />}
         >
           {args.children}
-        </TextWithAccessories>
+        </BoxVertical>
       </View>
     );
   },
 };
 
-export const StartAndEndAccessories: Story = {
+export const TopAndBottomAccessories: Story = {
   render: (args) => {
     const tw = useTailwind();
     return (
       <View style={tw`p-4`}>
-        <TextWithAccessories
+        <BoxVertical
           {...args}
-          startAccessory={<Box twClassName="w-5 h-5 rounded bg-icon-default" />}
-          endAccessory={<ButtonIcon iconName={IconName.Info} />}
+          topAccessory={<Box twClassName="w-5 h-5 rounded bg-icon-default" />}
+          bottomAccessory={<ButtonIcon iconName={IconName.Info} />}
         >
           {args.children}
-        </TextWithAccessories>
+        </BoxVertical>
       </View>
     );
   },

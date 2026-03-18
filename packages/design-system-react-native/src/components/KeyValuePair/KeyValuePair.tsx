@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Box } from '../Box';
 import { ButtonIcon } from '../ButtonIcon';
-import { TextWithAccessories } from '../temp-components/TextWithAccessories';
+import { BoxHorizontal } from '../temp-components/BoxHorizontal';
 import {
   BoxAlignItems,
   BoxFlexDirection,
@@ -57,7 +57,7 @@ export const KeyValuePair = ({
     );
 
   const keyRow = (
-    <TextWithAccessories
+    <BoxHorizontal
       startAccessory={keyStartAccessory}
       endAccessory={keyEndAccessoryNode}
       textProps={{
@@ -69,11 +69,11 @@ export const KeyValuePair = ({
       twClassName={isHorizontal ? 'flex-1 min-w-0' : undefined}
     >
       {keyContent}
-    </TextWithAccessories>
+    </BoxHorizontal>
   );
 
   const valueRow = (
-    <TextWithAccessories
+    <BoxHorizontal
       startAccessory={valueStartAccessory}
       endAccessory={valueEndAccessoryNode}
       textProps={{
@@ -84,7 +84,7 @@ export const KeyValuePair = ({
       }}
     >
       {valueContent}
-    </TextWithAccessories>
+    </BoxHorizontal>
   );
 
   return (

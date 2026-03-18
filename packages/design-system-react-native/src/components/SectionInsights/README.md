@@ -1,6 +1,6 @@
 # SectionInsights
 
-SectionInsights is a section layout component for insight-style content. It composes SectionBase and renders an optional title (with optional start accessory) via TextWithAccessories with default HeadingSm and TextDefault, optional description, an optional Attribution row (with optional favicon AvatarGroup as startAccessory), and children. When `attribution` or `attributionFaviconAvatarGroupProps` is provided, an Attribution component is rendered in SectionBase's children; the favicon AvatarGroup is forced to size 16px (AvatarGroupSize.Xs).
+SectionInsights is a section layout component for insight-style content. It composes SectionBase and renders an optional title (with optional start accessory) via BoxHorizontal with default HeadingSm and TextDefault, optional description, an optional Attribution row (with optional favicon AvatarGroup as startAccessory), and children. When `attribution` or `attributionFaviconAvatarGroupProps` is provided, an Attribution component is rendered in SectionBase's children; the favicon AvatarGroup is forced to size 16px (AvatarGroupSize.Xs).
 
 ```tsx
 import {
@@ -22,7 +22,7 @@ import {
 
 ### `title`
 
-Optional title (string or node) rendered at the top. When a string, it is rendered with TextWithAccessories using default `TextVariant.HeadingSm` and `TextColor.TextDefault`; `titleProps` can override. When a node, it is passed through as children of TextWithAccessories (titleProps do not apply).
+Optional title (string or node) rendered at the top. When a string, it is rendered with BoxHorizontal using default `TextVariant.HeadingSm` and `TextColor.TextDefault`; `titleProps` can override. When a node, it is passed through as children of BoxHorizontal (titleProps do not apply).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -34,7 +34,7 @@ Optional title (string or node) rendered at the top. When a string, it is render
 
 ### `titleStartAccessory`
 
-Optional node rendered before the title (e.g. icon). Passed to TextWithAccessories as `startAccessory`. Only used when `title` is provided.
+Optional node rendered before the title (e.g. icon). Passed to BoxHorizontal as `startAccessory`. Only used when `title` is provided.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |

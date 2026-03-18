@@ -165,6 +165,9 @@ export type { LabelProps } from './Label';
 export { ListItem, ListItemVerticalAlignment } from './ListItem';
 export type { ListItemProps } from './ListItem';
 
+export { ListItemBase } from './ListItemBase';
+export type { ListItemBaseProps } from './ListItemBase';
+
 export { RadioButton } from './RadioButton';
 export type { RadioButtonProps } from './RadioButton';
 
@@ -229,8 +232,11 @@ export type { TextFieldSearchProps } from './TextFieldSearch';
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 
-export { TextWithAccessories } from './temp-components/TextWithAccessories';
-export type { TextWithAccessoriesProps } from './temp-components/TextWithAccessories';
+export { BoxHorizontal } from './temp-components/BoxHorizontal';
+export type { BoxHorizontalProps } from './temp-components/BoxHorizontal';
+
+export { BoxVertical } from './temp-components/BoxVertical';
+export type { BoxVerticalProps } from './temp-components/BoxVertical';
 
 export {
   Toast,

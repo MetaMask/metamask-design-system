@@ -4,16 +4,16 @@ import { Box } from '../../Box';
 import { TextOrChildren } from '../TextOrChildren';
 import { BoxAlignItems, BoxFlexDirection } from '../../../types';
 
-import type { TextWithAccessoriesProps } from './TextWithAccessories.types';
+import type { BoxHorizontalProps } from './BoxHorizontal.types';
 
-export const TextWithAccessories = ({
+export const BoxHorizontal = ({
   children,
   textProps,
   startAccessory,
   endAccessory,
   twClassName,
   ...rest
-}: TextWithAccessoriesProps) => (
+}: BoxHorizontalProps) => (
   <Box
     flexDirection={BoxFlexDirection.Row}
     alignItems={BoxAlignItems.Center}
@@ -27,4 +27,4 @@ export const TextWithAccessories = ({
   </Box>
 );
 
-TextWithAccessories.displayName = 'TextWithAccessories';
+BoxHorizontal.displayName = 'BoxHorizontal';

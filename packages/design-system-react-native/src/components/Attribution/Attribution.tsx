@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TextColor, TextVariant } from '../../types';
-import { TextWithAccessories } from '../temp-components/TextWithAccessories';
+import { BoxHorizontal } from '../temp-components/BoxHorizontal';
 
 import type { AttributionProps } from './Attribution.types';
 
@@ -10,7 +10,7 @@ export const Attribution = ({
   twClassName,
   ...rest
 }: AttributionProps) => (
-  <TextWithAccessories
+  <BoxHorizontal
     textProps={{
       ...textProps,
       variant: TextVariant.BodySm,

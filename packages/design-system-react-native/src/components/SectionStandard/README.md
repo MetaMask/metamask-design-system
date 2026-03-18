@@ -1,6 +1,6 @@
 # SectionStandard
 
-SectionStandard is a section layout component that renders an optional title (with optional start accessory and optional pressable row with arrow), optional description, and children. It composes SectionBase and renders the title via TextWithAccessories with default HeadingLg and TextDefault. When `onPressTitle` is provided, the title row is wrapped in a Pressable and an arrow icon is shown as the end accessory.
+SectionStandard is a section layout component that renders an optional title (with optional start accessory and optional pressable row with arrow), optional description, and children. It composes SectionBase and renders the title via BoxHorizontal with default HeadingLg and TextDefault. When `onPressTitle` is provided, the title row is wrapped in a Pressable and an arrow icon is shown as the end accessory.
 
 ```tsx
 import { SectionStandard, Text } from '@metamask/design-system-react-native';
@@ -14,7 +14,7 @@ import { SectionStandard, Text } from '@metamask/design-system-react-native';
 
 ### `title`
 
-Optional title (string or node) rendered at the top. When a string, it is rendered with TextWithAccessories using default `TextVariant.HeadingLg` and `TextColor.TextDefault`; `titleProps` can override. When a node, it is passed through as children of TextWithAccessories (titleProps do not apply).
+Optional title (string or node) rendered at the top. When a string, it is rendered with BoxHorizontal using default `TextVariant.HeadingLg` and `TextColor.TextDefault`; `titleProps` can override. When a node, it is passed through as children of BoxHorizontal (titleProps do not apply).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -26,7 +26,7 @@ Optional title (string or node) rendered at the top. When a string, it is render
 
 ### `titleStartAccessory`
 
-Optional node rendered before the title (e.g. icon). Passed to TextWithAccessories as `startAccessory`. Only used when `title` is provided.
+Optional node rendered before the title (e.g. icon). Passed to BoxHorizontal as `startAccessory`. Only used when `title` is provided.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |

@@ -4,7 +4,7 @@ import { Pressable } from 'react-native';
 import { TextColor, TextVariant } from '../../types';
 import { Icon, IconColor, IconName, IconSize } from '../Icon';
 import { SectionBase } from '../SectionBase';
-import { TextWithAccessories } from '../temp-components/TextWithAccessories';
+import { BoxHorizontal } from '../temp-components/BoxHorizontal';
 
 import type { SectionStandardProps } from './SectionStandard.types';
 
@@ -22,7 +22,7 @@ export const SectionStandard = ({
 
   if (hasContent(title)) {
     const titleContent = (
-      <TextWithAccessories
+      <BoxHorizontal
         textProps={{
           variant: TextVariant.HeadingLg,
           color: TextColor.TextDefault,
@@ -41,7 +41,7 @@ export const SectionStandard = ({
         }
       >
         {title}
-      </TextWithAccessories>
+      </BoxHorizontal>
     );
 
     computedTitle = onPressTitle ? (

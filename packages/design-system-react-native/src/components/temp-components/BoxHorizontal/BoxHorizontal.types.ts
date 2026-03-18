@@ -1,9 +1,9 @@
 import type { TextOrChildrenProps } from '../TextOrChildren/TextOrChildren.types';
 
 /**
- * TextWithAccessories component props.
+ * BoxHorizontal component props.
  */
-export type TextWithAccessoriesProps = TextOrChildrenProps & {
+export type BoxHorizontalProps = TextOrChildrenProps & {
   /**
    * Optional node rendered before the text/children (e.g. icon, avatar).
    */

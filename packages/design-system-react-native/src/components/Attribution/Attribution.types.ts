@@ -1,3 +1,3 @@
-import type { TextWithAccessoriesProps } from '../temp-components/TextWithAccessories/TextWithAccessories.types';
+import type { BoxHorizontalProps } from '../temp-components/BoxHorizontal/BoxHorizontal.types';
 
-export type AttributionProps = TextWithAccessoriesProps;
+export type AttributionProps = BoxHorizontalProps;

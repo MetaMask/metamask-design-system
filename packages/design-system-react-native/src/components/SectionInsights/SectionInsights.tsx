@@ -4,7 +4,7 @@ import { AvatarGroupSize, TextColor, TextVariant } from '../../types';
 import { Attribution } from '../Attribution';
 import { AvatarGroup } from '../AvatarGroup';
 import { SectionBase } from '../SectionBase';
-import { TextWithAccessories } from '../temp-components/TextWithAccessories';
+import { BoxHorizontal } from '../temp-components/BoxHorizontal';
 
 import type { SectionInsightsProps } from './SectionInsights.types';
 
@@ -24,7 +24,7 @@ export const SectionInsights = ({
 
   if (hasContent(title)) {
     computedTitle = (
-      <TextWithAccessories
+      <BoxHorizontal
         textProps={{
           variant: TextVariant.HeadingSm,
           color: TextColor.TextDefault,
@@ -33,7 +33,7 @@ export const SectionInsights = ({
         startAccessory={titleStartAccessory}
       >
         {title}
-      </TextWithAccessories>
+      </BoxHorizontal>
     );
   }
 

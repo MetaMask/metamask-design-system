@@ -1,6 +1,6 @@
 # KeyValuePair
 
-KeyValuePair displays a key–value pair with optional start/end accessories. When orientation is horizontal, the wrapper vertically centers children and uses a 16px gap between key and value. `keyStartAccessory` and `keyEndAccessory` are passed to the key’s TextWithAccessories; `valueStartAccessory` and `valueEndAccessory` to the value’s TextWithAccessories.
+KeyValuePair displays a key–value pair with optional start/end accessories. When orientation is horizontal, the wrapper vertically centers children and uses a 16px gap between key and value. `keyStartAccessory` and `keyEndAccessory` are passed to the key’s BoxHorizontal; `valueStartAccessory` and `valueEndAccessory` to the value’s BoxHorizontal.
 
 ```tsx
 import {
@@ -43,7 +43,7 @@ Layout direction: horizontal (key left, value right) or vertical (key above, val
 
 ### `keyStartAccessory` / `keyEndAccessory`
 
-Optional nodes rendered before and after the key. Passed to the key’s TextWithAccessories as `startAccessory` and `endAccessory`. **When `keyEndButtonIconProps` is set, it takes precedence over `keyEndAccessory`** (only the ButtonIcon is rendered as the key’s endAccessory).
+Optional nodes rendered before and after the key. Passed to the key’s BoxHorizontal as `startAccessory` and `endAccessory`. **When `keyEndButtonIconProps` is set, it takes precedence over `keyEndAccessory`** (only the ButtonIcon is rendered as the key’s endAccessory).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -51,7 +51,7 @@ Optional nodes rendered before and after the key. Passed to the key’s TextWith
 
 ### `valueStartAccessory` / `valueEndAccessory`
 
-Optional nodes rendered before and after the value. Passed to the value’s TextWithAccessories as `startAccessory` and `endAccessory`. **When `valueEndButtonIconProps` is set, it takes precedence over `valueEndAccessory`** (only the ButtonIcon is rendered as the value’s endAccessory).
+Optional nodes rendered before and after the value. Passed to the value’s BoxHorizontal as `startAccessory` and `endAccessory`. **When `valueEndButtonIconProps` is set, it takes precedence over `valueEndAccessory`** (only the ButtonIcon is rendered as the value’s endAccessory).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
