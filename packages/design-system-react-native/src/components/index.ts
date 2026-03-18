@@ -156,6 +156,9 @@ export type { IconProps } from './Icon';
 export { KeyValuePair, KeyValuePairOrientation } from './KeyValuePair';
 export type { KeyValuePairProps } from './KeyValuePair';
 
+export { InfoListItem } from './InfoListItem';
+export type { InfoListItemProps } from './InfoListItem';
+
 export { Input } from './Input';
 export type { InputProps } from './Input';
 
@@ -167,6 +170,9 @@ export type { ListItemProps } from './ListItem';
 
 export { ListItemBase } from './ListItemBase';
 export type { ListItemBaseProps } from './ListItemBase';
+
+export { TokenListItem } from './TokenListItem';
+export type { TokenListItemProps } from './TokenListItem';
 
 export { RadioButton } from './RadioButton';
 export type { RadioButtonProps } from './RadioButton';
