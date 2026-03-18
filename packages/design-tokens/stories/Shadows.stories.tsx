@@ -1,4 +1,4 @@
-import { Text, TextColor } from '@metamask/design-system-react';
+import { Text } from '@metamask/design-system-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
@@ -65,47 +65,21 @@ export const Size: StoryObj<typeof ShadowSwatch> = {
   ),
 };
 
-export const Color: StoryObj<typeof ShadowSwatch> = {
+export const ExampleUsage = {
   render: () => (
     <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
       <ShadowSwatch className="shadow-xs">
-        <Text>Default</Text>
+        <Text>Card</Text>
       </ShadowSwatch>
-      <ShadowSwatch className="bg-primary-default shadow-xs shadow-primary">
-        <Text color={TextColor.PrimaryInverse}>Primary</Text>
+      <ShadowSwatch className="shadow-sm">
+        <Text>Dropdown</Text>
       </ShadowSwatch>
-      <ShadowSwatch className="bg-error-default shadow-xs shadow-error">
-        <Text color={TextColor.ErrorInverse}>Error/Danger</Text>
+      <ShadowSwatch className="shadow-md">
+        <Text>Toast</Text>
       </ShadowSwatch>
-    </div>
-  ),
-};
-
-export const ExampleUsage = {
-  render: () => (
-    <div>
-      <div className="mb-16 grid grid-cols-[repeat(auto-fill,200px)] gap-8">
-        <ShadowSwatch className="shadow-xs">
-          <Text>Card</Text>
-        </ShadowSwatch>
-        <ShadowSwatch className="shadow-sm">
-          <Text>Dropdown</Text>
-        </ShadowSwatch>
-        <ShadowSwatch className="shadow-md">
-          <Text>Toast</Text>
-        </ShadowSwatch>
-        <ShadowSwatch className="shadow-lg">
-          <Text>Modal</Text>
-        </ShadowSwatch>
-      </div>
-      <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
-        <ShadowSwatch className="bg-primary-default shadow-xs shadow-primary">
-          <Text color={TextColor.PrimaryInverse}>Button Primary Hover</Text>
-        </ShadowSwatch>
-        <ShadowSwatch className="bg-error-default shadow-xs shadow-error">
-          <Text color={TextColor.ErrorInverse}>Button Error/Danger Hover</Text>
-        </ShadowSwatch>
-      </div>
+      <ShadowSwatch className="shadow-lg">
+        <Text>Modal</Text>
+      </ShadowSwatch>
     </div>
   ),
 };

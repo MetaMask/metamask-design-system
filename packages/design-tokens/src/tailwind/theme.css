@@ -173,10 +173,10 @@
   /* For critical/danger drop shadow color (red50-20% | red300-20%) */
   --color-shadow-error: #ca354266;
 
-  --shadow-xs: 0 2px 4px 0 var(--shadow-color, var(--color-shadow-default));
-  --shadow-sm: 0 2px 8px 0 var(--shadow-color, var(--color-shadow-default));
-  --shadow-md: 0 2px 16px 0 var(--shadow-color, var(--color-shadow-default));
-  --shadow-lg: 0 2px 40px 0 var(--shadow-color, var(--color-shadow-default));
+  --shadow-xs: 0 2px 4px 0 #0000001a;
+  --shadow-sm: 0 2px 8px 0 #0000001a;
+  --shadow-md: 0 2px 16px 0 #0000001a;
+  --shadow-lg: 0 2px 40px 0 #0000001a;
 }
 
 /**
@@ -764,15 +764,4 @@
 }
 @utility font-bold {
   font-weight: var(--font-weight-bold);
-}
-
-/* Legacy shadow color utilities parity with old shadow plugin */
-@utility shadow-default {
-  --shadow-color: var(--color-shadow-default) !important;
-}
-@utility shadow-primary {
-  --shadow-color: var(--color-shadow-primary) !important;
-}
-@utility shadow-error {
-  --shadow-color: var(--color-shadow-error) !important;
 }
