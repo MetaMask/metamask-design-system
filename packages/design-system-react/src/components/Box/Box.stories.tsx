@@ -1391,7 +1391,6 @@ export const BorderColor: Story = {
       <Box
         {...args}
         padding={3}
-        backgroundColor={BoxBackgroundColor.FlaskDefault}
         borderColor={BoxBorderColor.FlaskDefault}
         borderWidth={2}
       >
@@ -1400,7 +1399,6 @@ export const BorderColor: Story = {
       <Box
         {...args}
         padding={3}
-        backgroundColor={BoxBackgroundColor.FlaskDefault}
         borderColor={BoxBorderColor.FlaskInverse}
         borderWidth={2}
       >
@@ -1760,7 +1758,7 @@ export const BackgroundColor: Story = {
         {...args}
         padding={3}
         backgroundColor={BoxBackgroundColor.FlaskInverse}
-        borderColor={BoxBorderColor.FlaskInverse}
+        borderColor={BoxBorderColor.FlaskDefault}
         borderWidth={1}
       >
         <Text>FlaskInverse</Text>
@@ -1789,10 +1787,10 @@ export const BackgroundColor: Story = {
         {...args}
         padding={3}
         backgroundColor={BoxBackgroundColor.OverlayInverse}
-        borderColor={BoxBorderColor.OverlayInverse}
+        borderColor={BoxBorderColor.OverlayDefault}
         borderWidth={1}
       >
-        <Text>OverlayInverse</Text>
+        <Text data-theme="light">OverlayInverse</Text>
       </Box>
 
       <Box
