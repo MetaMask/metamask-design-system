@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import { Text } from 'react-native';
 
 // External dependencies.
-import { IconName } from '@metamask/design-system-react-native';
+import { IconName } from '../Icon';
 
 // Internal dependencies.
 import HeaderStandard from './HeaderStandard';

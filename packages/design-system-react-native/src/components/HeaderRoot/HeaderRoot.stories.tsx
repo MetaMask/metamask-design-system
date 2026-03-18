@@ -1,14 +1,9 @@
 /* eslint-disable no-console */
 import React from 'react';
 
-import {
-  Box,
-  Text,
-  TextVariant,
-  Icon,
-  IconName,
-  IconColor,
-} from '@metamask/design-system-react-native';
+import { Box } from '../Box';
+import { Icon, IconColor, IconName } from '../Icon';
+import { Text, TextVariant } from '../Text';
 
 import HeaderRoot from './HeaderRoot';
 

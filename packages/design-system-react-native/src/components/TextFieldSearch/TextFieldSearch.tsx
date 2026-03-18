@@ -2,15 +2,9 @@
 import React, { useCallback } from 'react';
 
 // External dependencies.
-import {
-  ButtonIcon,
-  ButtonIconSize,
-  Icon,
-  IconName,
-  IconSize,
-  IconColor,
-  TextField,
-} from '@metamask/design-system-react-native';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
+import { Icon, IconColor, IconName, IconSize } from '../Icon';
+import { TextField } from '../TextField';
 
 // Internal dependencies.
 import { TEXTFIELDSEARCH_TEST_ID } from './TextFieldSearch.constants';
@@ -28,7 +22,7 @@ const TextFieldSearch: React.FC<TextFieldSearchProps> = ({
     <Icon
       name={IconName.Search}
       size={IconSize.Md}
-      color={IconColor.Alternative}
+      color={IconColor.IconAlternative}
     />
   );
 
@@ -40,7 +34,7 @@ const TextFieldSearch: React.FC<TextFieldSearchProps> = ({
     <ButtonIcon
       size={ButtonIconSize.Md}
       iconName={IconName.CircleX}
-      iconColor={IconColor.Alternative}
+      iconProps={{ color: IconColor.IconAlternative }}
       onPress={clearButtonHandler}
       {...clearButtonProps}
     />

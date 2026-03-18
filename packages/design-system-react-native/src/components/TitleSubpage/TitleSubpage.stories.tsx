@@ -1,20 +1,11 @@
 import React from 'react';
 
-import {
-  AvatarToken,
-  AvatarTokenSize,
-  Box,
-  BoxFlexDirection,
-  BoxAlignItems,
-  Icon,
-  IconName,
-  IconSize,
-  IconColor,
-  Text,
-  TextVariant,
-} from '@metamask/design-system-react-native';
-
+import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
+import { Icon, IconColor, IconName, IconSize } from '../Icon';
+import { Text, TextVariant } from '../Text';
+
 import TitleSubpage from './TitleSubpage';
 
 const TitleSubpageMeta = {

@@ -1,16 +1,8 @@
 import React from 'react';
 
-import {
-  Box,
-  BoxFlexDirection,
-  BoxAlignItems,
-  Text,
-  TextVariant,
-  Icon,
-  IconName,
-  IconSize,
-  IconColor,
-} from '@metamask/design-system-react-native';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
+import { Icon, IconColor, IconName, IconSize } from '../Icon';
+import { Text, TextVariant } from '../Text';
 
 import TitleStandard from './TitleStandard';
 

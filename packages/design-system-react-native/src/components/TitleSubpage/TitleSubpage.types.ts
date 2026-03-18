@@ -2,7 +2,7 @@
 import { ReactNode } from 'react';
 
 // External dependencies.
-import { TextProps } from '@metamask/design-system-react-native';
+import type { TextProps } from '../Text';
 
 /**
  * TitleSubpage component props.

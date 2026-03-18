@@ -3,10 +3,8 @@ import { ViewProps, StyleProp, ViewStyle } from 'react-native';
 import { ReactNode } from 'react';
 
 // External dependencies.
-import {
-  ButtonIconProps,
-  TextProps,
-} from '@metamask/design-system-react-native';
+import type { ButtonIconProps } from '../ButtonIcon';
+import type { TextProps } from '../Text';
 
 /**
  * HeaderRoot component props.

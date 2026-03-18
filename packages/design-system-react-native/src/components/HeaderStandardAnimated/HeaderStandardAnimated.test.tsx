@@ -3,7 +3,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 
 // External dependencies.
-import { IconName } from '@metamask/design-system-react-native';
+import { IconName } from '../Icon';
 import type { SharedValue } from 'react-native-reanimated';
 
 // Internal dependencies.

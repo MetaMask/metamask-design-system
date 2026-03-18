@@ -2,14 +2,10 @@
 import React from 'react';
 
 // External dependencies.
-import {
-  Box,
-  ButtonIcon,
-  ButtonIconSize,
-  IconName,
-  Button,
-  ButtonVariant,
-} from '@metamask/design-system-react-native';
+import { Box } from '../Box';
+import { Button, ButtonVariant } from '../Button';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
+import { IconName } from '../Icon';
 
 // Internal dependencies.
 import TextFieldSearch from '../TextFieldSearch';

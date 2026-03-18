@@ -2,16 +2,10 @@
 import React, { useMemo } from 'react';
 
 // External dependencies.
-import {
-  Box,
-  BoxAlignItems,
-  Text,
-  TextVariant,
-  TextColor,
-  FontWeight,
-  IconName,
-  ButtonIconProps,
-} from '@metamask/design-system-react-native';
+import { Box, BoxAlignItems } from '../Box';
+import type { ButtonIconProps } from '../ButtonIcon';
+import { IconName } from '../Icon';
+import { FontWeight, Text, TextColor, TextVariant } from '../Text';
 
 // Internal dependencies.
 import { HeaderBase } from '../HeaderBase';

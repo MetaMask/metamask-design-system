@@ -33,3 +33,6 @@ export {
   KeyValuePairOrientation,
   type KeyValuePairPropsShared,
 } from './types/KeyValuePair';
+
+// SectionBase types (ADR-0004)
+export { type SectionBasePropsShared } from './types/SectionBase';

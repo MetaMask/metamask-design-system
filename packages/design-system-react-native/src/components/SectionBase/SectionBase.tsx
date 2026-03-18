@@ -1,0 +1,58 @@
+import React from 'react';
+
+import { BoxFlexDirection, TextColor, TextVariant } from '../../types';
+import { Box } from '../Box';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { TextWithAccessories } from '../temp-components/TextWithAccessories';
+
+import type { SectionBaseProps } from './SectionBase.types';
+
+const hasContent = (content: React.ReactNode) =>
+  content !== null && content !== undefined;
+
+export const SectionBase = ({
+  title,
+  titleStartAccessory,
+  titleEndAccessory,
+  titleProps,
+  description,
+  descriptionProps,
+  children,
+  twClassName,
+  ...boxProps
+}: SectionBaseProps) => (
+  <Box
+    flexDirection={BoxFlexDirection.Column}
+    gap={3}
+    twClassName={twClassName}
+    {...boxProps}
+  >
+    {hasContent(title) && (
+      <TextWithAccessories
+        startAccessory={titleStartAccessory}
+        endAccessory={titleEndAccessory}
+        textProps={{
+          variant: TextVariant.HeadingLg,
+          color: TextColor.TextDefault,
+          ...titleProps,
+        }}
+      >
+        {title}
+      </TextWithAccessories>
+    )}
+    {hasContent(description) && (
+      <TextOrChildren
+        textProps={{
+          variant: TextVariant.BodyMd,
+          color: TextColor.TextAlternative,
+          ...descriptionProps,
+        }}
+      >
+        {description}
+      </TextOrChildren>
+    )}
+    {hasContent(children) && children}
+  </Box>
+);
+
+SectionBase.displayName = 'SectionBase';

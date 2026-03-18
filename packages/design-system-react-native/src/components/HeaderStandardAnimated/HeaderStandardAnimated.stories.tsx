@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 import React from 'react';
-
-import { Box, Text, TextVariant } from '@metamask/design-system-react-native';
 import Animated from 'react-native-reanimated';
+
+import { Box } from '../Box';
+import { Text, TextVariant } from '../Text';
 
 import HeaderStandardAnimated from './HeaderStandardAnimated';
 import useHeaderStandardAnimated from './useHeaderStandardAnimated';

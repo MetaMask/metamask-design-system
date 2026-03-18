@@ -2,15 +2,8 @@
 import React from 'react';
 
 // External dependencies.
-import {
-  Box,
-  BoxFlexDirection,
-  BoxAlignItems,
-  Text,
-  TextVariant,
-  TextColor,
-  FontWeight,
-} from '@metamask/design-system-react-native';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
+import { FontWeight, Text, TextColor, TextVariant } from '../Text';
 
 // Internal dependencies.
 import { TitleStandardProps } from './TitleStandard.types';

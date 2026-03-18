@@ -1,9 +1,8 @@
 // External dependencies.
 import React from 'react';
-import {
-  ButtonIconProps,
-  TextProps,
-} from '@metamask/design-system-react-native';
+
+import type { ButtonIconProps } from '../ButtonIcon';
+import type { TextProps } from '../Text';
 
 // Internal dependencies.
 import type { HeaderBaseProps } from '../HeaderBase';

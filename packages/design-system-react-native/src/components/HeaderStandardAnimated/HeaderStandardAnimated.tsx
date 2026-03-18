@@ -2,14 +2,8 @@
 import React from 'react';
 
 // External dependencies.
-import {
-  Box,
-  BoxAlignItems,
-  Text,
-  TextVariant,
-  TextColor,
-  FontWeight,
-} from '@metamask/design-system-react-native';
+import { Box, BoxAlignItems } from '../Box';
+import { FontWeight, Text, TextColor, TextVariant } from '../Text';
 import Animated, {
   useAnimatedStyle,
   useDerivedValue,

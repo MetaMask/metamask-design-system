@@ -3,15 +3,9 @@ import React from 'react';
 import { View } from 'react-native';
 
 // External dependencies.
-import {
-  Box,
-  Text,
-  ButtonIcon,
-  ButtonIconSize,
-  TextVariant,
-  BoxFlexDirection,
-  BoxAlignItems,
-} from '@metamask/design-system-react-native';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
+import { Text, TextVariant } from '../Text';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 

@@ -1,9 +1,7 @@
 // External dependencies.
-import type {
-  BoxProps,
-  ButtonIconProps,
-  ButtonProps,
-} from '@metamask/design-system-react-native';
+import type { BoxProps } from '../Box';
+import type { ButtonIconProps } from '../ButtonIcon';
+import type { ButtonProps } from '../Button';
 
 // Internal dependencies.
 import type { TextFieldSearchProps } from '../TextFieldSearch/TextFieldSearch.types';
