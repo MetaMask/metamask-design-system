@@ -186,6 +186,12 @@ export type { SensitiveTextProps } from './SensitiveText';
 export { SectionBase } from './SectionBase';
 export type { SectionBaseProps } from './SectionBase';
 
+export { SectionInsights } from './SectionInsights';
+export type {
+  SectionInsightsProps,
+  SectionInsightsAttributionFaviconAvatarGroupProps,
+} from './SectionInsights';
+
 export { SectionStandard } from './SectionStandard';
 export type { SectionStandardProps } from './SectionStandard';
 
