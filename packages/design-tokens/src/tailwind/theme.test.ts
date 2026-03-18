@@ -13,10 +13,10 @@ const {
 // Inlined to avoid importing tailwindcss/plugin from shadows.ts.
 // Keep in sync with design-system-tailwind-preset/src/shadows.ts
 const v3Shadows: Record<string, string> = {
-  xs: 'var(--shadow-size-xs) var(--shadow-color, var(--color-shadow-default))',
-  sm: 'var(--shadow-size-sm) var(--shadow-color, var(--color-shadow-default))',
-  md: 'var(--shadow-size-md) var(--shadow-color, var(--color-shadow-default))',
-  lg: 'var(--shadow-size-lg) var(--shadow-color, var(--color-shadow-default))',
+  xs: '0 2px 4px 0 var(--shadow-color, var(--color-shadow-default))',
+  sm: '0 2px 8px 0 var(--shadow-color, var(--color-shadow-default))',
+  md: '0 2px 16px 0 var(--shadow-color, var(--color-shadow-default))',
+  lg: '0 2px 40px 0 var(--shadow-color, var(--color-shadow-default))',
 };
 
 const v3ShadowColors: Record<string, string> = {
@@ -216,11 +216,11 @@ describe('Tailwind v4 theme.css parity with v3 preset', () => {
     );
   });
 
-  describe('Shadows: v3 sizes → @theme --box-shadow-* variables', () => {
+  describe('Shadows: v3 sizes → @theme --shadow-* variables', () => {
     it.each(Object.entries(v3Shadows))(
-      '--box-shadow-%s exists in @theme with correct value',
+      '--shadow-%s exists in @theme with correct value',
       (name, value) => {
-        const varName = `--box-shadow-${name}`;
+        const varName = `--shadow-${name}`;
         expect(themeVars.has(varName)).toBe(true);
         const normalize = (s: string) => s.replace(/\s+/gu, ' ').trim();
         expect(normalize(themeVars.get(varName) ?? '')).toBe(normalize(value));
