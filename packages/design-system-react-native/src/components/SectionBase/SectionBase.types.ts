@@ -9,11 +9,6 @@ import type { TextProps } from '../Text';
 export type SectionBaseProps = SectionBasePropsShared &
   Omit<BoxProps, 'children'> & {
     /**
-     * Optional props for the title when title is a string.
-     * Default: TextVariant.HeadingLg, TextColor.TextDefault.
-     */
-    titleProps?: Omit<Partial<TextProps>, 'children'>;
-    /**
      * Optional props for the description when description is a string.
      * Default: TextVariant.BodyMd, TextColor.TextAlternative.
      */

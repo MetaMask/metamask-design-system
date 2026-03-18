@@ -1,6 +1,6 @@
 # SectionBase
 
-SectionBase is a layout component that renders an optional title (with start/end accessories), optional description, and children in a vertical column with 12px gap. It extends BoxProps for layout and spacing.
+SectionBase is a layout component that renders an optional title, optional description, and children in a vertical column with 12px gap. It extends BoxProps for layout and spacing.
 
 ```tsx
 import { SectionBase, Text } from '@metamask/design-system-react-native';
@@ -14,7 +14,7 @@ import { SectionBase, Text } from '@metamask/design-system-react-native';
 
 ### `title`
 
-Optional title (string or node) rendered at the top. When a string, it uses `TextVariant.HeadingLg` and `TextColor.TextDefault` by default; `titleProps` can override.
+Optional title (string or node) rendered at the top as-is. Pass a `Text` component or other node if you need specific typography.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -22,50 +22,6 @@ Optional title (string or node) rendered at the top. When a string, it uses `Tex
 
 ```tsx
 <SectionBase title="Section Title" />
-```
-
-### `titleStartAccessory`
-
-Optional node rendered before the title (e.g. icon).
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-import { Icon, IconName, IconSize } from '@metamask/design-system-react-native';
-
-<SectionBase
-  title="Title"
-  titleStartAccessory={<Icon name={IconName.Info} size={IconSize.Sm} />}
-/>;
-```
-
-### `titleEndAccessory`
-
-Optional node rendered after the title (e.g. badge, icon).
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-<SectionBase
-  title="Title"
-  titleEndAccessory={<Icon name={IconName.Add} size={IconSize.Sm} />}
-/>
-```
-
-### `titleProps`
-
-Optional props for the title when `title` is a string. Defaults: `TextVariant.HeadingLg`, `TextColor.TextDefault`.
-
-| TYPE                                   | REQUIRED | DEFAULT     |
-| -------------------------------------- | -------- | ----------- |
-| `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
-
-```tsx
-<SectionBase title="Custom title" titleProps={{ testID: 'section-title' }} />
 ```
 
 ### `description`

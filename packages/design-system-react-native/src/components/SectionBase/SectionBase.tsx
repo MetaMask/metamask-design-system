@@ -1,9 +1,13 @@
 import React from 'react';
 
-import { BoxFlexDirection, TextColor, TextVariant } from '../../types';
+import {
+  BoxFlexDirection,
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '../../types';
 import { Box } from '../Box';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
-import { TextWithAccessories } from '../temp-components/TextWithAccessories';
 
 import type { SectionBaseProps } from './SectionBase.types';
 
@@ -12,9 +16,6 @@ const hasContent = (content: React.ReactNode) =>
 
 export const SectionBase = ({
   title,
-  titleStartAccessory,
-  titleEndAccessory,
-  titleProps,
   description,
   descriptionProps,
   children,
@@ -28,17 +29,14 @@ export const SectionBase = ({
     {...boxProps}
   >
     {hasContent(title) && (
-      <TextWithAccessories
-        startAccessory={titleStartAccessory}
-        endAccessory={titleEndAccessory}
+      <TextOrChildren
         textProps={{
-          variant: TextVariant.HeadingLg,
-          color: TextColor.TextDefault,
-          ...titleProps,
+          variant: TextVariant.BodyMd,
+          fontWeight: FontWeight.Bold,
         }}
       >
         {title}
-      </TextWithAccessories>
+      </TextOrChildren>
     )}
     {hasContent(description) && (
       <TextOrChildren

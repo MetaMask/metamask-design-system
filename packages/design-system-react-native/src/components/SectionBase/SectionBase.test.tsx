@@ -2,8 +2,6 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { Icon, IconName, IconSize } from '../Icon';
-
 import { SectionBase } from './SectionBase';
 
 describe('SectionBase', () => {
@@ -37,24 +35,6 @@ describe('SectionBase', () => {
     expect(getByText('Child content')).toBeDefined();
   });
 
-  it('renders title with start and end accessories', () => {
-    const { getByText, getByTestId } = render(
-      <SectionBase
-        title="Title with accessories"
-        titleStartAccessory={
-          <Icon name={IconName.Info} size={IconSize.Sm} testID="start-icon" />
-        }
-        titleEndAccessory={
-          <Icon name={IconName.Add} size={IconSize.Sm} testID="end-icon" />
-        }
-      />,
-    );
-
-    expect(getByText('Title with accessories')).toBeDefined();
-    expect(getByTestId('start-icon')).toBeDefined();
-    expect(getByTestId('end-icon')).toBeDefined();
-  });
-
   it('does not render title row when title is not provided', () => {
     const { queryByText } = render(
       <SectionBase description="Only description" />,
@@ -78,17 +58,6 @@ describe('SectionBase', () => {
     );
 
     expect(getByTestId('section-root')).toBeDefined();
-  });
-
-  it('passes titleProps to title Text when title is string', () => {
-    const { getByTestId } = render(
-      <SectionBase
-        title="Custom title"
-        titleProps={{ testID: 'title-text' }}
-      />,
-    );
-
-    expect(getByTestId('title-text')).toBeDefined();
   });
 
   it('passes descriptionProps to description Text when description is string', () => {

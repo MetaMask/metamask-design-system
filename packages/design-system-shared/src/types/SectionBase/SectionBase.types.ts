@@ -10,14 +10,6 @@ export type SectionBasePropsShared = {
    */
   title?: ReactNode;
   /**
-   * Optional node rendered before the title (e.g. icon).
-   */
-  titleStartAccessory?: ReactNode;
-  /**
-   * Optional node rendered after the title (e.g. badge, icon).
-   */
-  titleEndAccessory?: ReactNode;
-  /**
    * Optional description (string or node) rendered below the title.
    */
   description?: ReactNode;

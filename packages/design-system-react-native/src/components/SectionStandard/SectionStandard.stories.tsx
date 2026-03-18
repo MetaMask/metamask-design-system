@@ -1,19 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { BoxBackgroundColor, FontWeight, TextVariant } from '../../types';
+import { BoxBackgroundColor, TextVariant } from '../../types';
 import { Box } from '../Box';
+import { Icon, IconName, IconSize } from '../Icon';
 import { Text } from '../Text';
 
-import { SectionBase } from './SectionBase';
-import type { SectionBaseProps } from './SectionBase.types';
+import { SectionStandard } from './SectionStandard';
+import type { SectionStandardProps } from './SectionStandard.types';
 
-const meta: Meta<SectionBaseProps> = {
-  title: 'Components/SectionBase',
-  component: SectionBase,
+const meta: Meta<SectionStandardProps> = {
+  title: 'Components/SectionStandard',
+  component: SectionStandard,
   argTypes: {
     title: { control: 'text' },
     description: { control: 'text' },
+    onPressTitle: { action: 'pressed' },
     twClassName: { control: 'text' },
   },
   decorators: [
@@ -29,7 +31,7 @@ const meta: Meta<SectionBaseProps> = {
 };
 
 export default meta;
-type Story = StoryObj<SectionBaseProps>;
+type Story = StoryObj<SectionStandardProps>;
 
 export const Default: Story = {
   args: {
@@ -45,9 +47,27 @@ export const Title: Story = {
   },
 };
 
-export const Description: Story = {
+export const TitleStartAccessory: Story = {
   args: {
-    description: 'Section with description only.',
+    title: 'Section with start accessory',
+    titleStartAccessory: <Icon name={IconName.Info} size={IconSize.Md} />,
+  },
+};
+
+export const TitleProps: Story = {
+  args: {
+    title: 'Custom title typography',
+    titleProps: {
+      variant: TextVariant.HeadingSm,
+      testID: 'section-title',
+    },
+  },
+};
+
+export const OnPressTitle: Story = {
+  args: {
+    title: 'Pressable title with arrow',
+    onPressTitle: () => {},
   },
 };
 
@@ -68,16 +88,5 @@ export const Children: Story = {
         <Text>Custom child content</Text>
       </Box>
     ),
-  },
-};
-
-export const CustomTitleNode: Story = {
-  args: {
-    title: (
-      <Text variant={TextVariant.BodyMd} fontWeight={FontWeight.Bold}>
-        Custom title node
-      </Text>
-    ),
-    description: 'When title is a node, it is rendered as-is.',
   },
 };

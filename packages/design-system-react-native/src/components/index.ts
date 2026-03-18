@@ -183,6 +183,9 @@ export type { SensitiveTextProps } from './SensitiveText';
 export { SectionBase } from './SectionBase';
 export type { SectionBaseProps } from './SectionBase';
 
+export { SectionStandard } from './SectionStandard';
+export type { SectionStandardProps } from './SectionStandard';
+
 export { TabEmptyState } from './TabEmptyState';
 export type { TabEmptyStateProps } from './TabEmptyState';
 

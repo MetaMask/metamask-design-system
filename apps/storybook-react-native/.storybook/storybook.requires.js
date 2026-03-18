@@ -100,6 +100,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/MainActionButton/MainActionButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/MainActionButton/MainActionButton.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/RadioButton/RadioButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/RadioButton/RadioButton.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/SectionBase/SectionBase.stories.tsx": require("../../../packages/design-system-react-native/src/components/SectionBase/SectionBase.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/SectionStandard/SectionStandard.stories.tsx": require("../../../packages/design-system-react-native/src/components/SectionStandard/SectionStandard.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/SensitiveText/SensitiveText.stories.tsx": require("../../../packages/design-system-react-native/src/components/SensitiveText/SensitiveText.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Skeleton/Skeleton.stories.tsx": require("../../../packages/design-system-react-native/src/components/Skeleton/Skeleton.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TabEmptyState/TabEmptyState.stories.tsx": require("../../../packages/design-system-react-native/src/components/TabEmptyState/TabEmptyState.stories.tsx"),
