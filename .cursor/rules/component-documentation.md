@@ -66,6 +66,10 @@ yarn build-storybook          # Build static site
 
 # Test accessibility
 yarn test:storybook           # Run Storybook accessibility tests
+
+# MCP-assisted Storybook workflows (requires Storybook running)
+# MCP endpoint: http://localhost:6006/mcp
+# Tools: preview-stories, run-story-tests
 ```
 
 ## Golden Path Examples
@@ -108,3 +112,5 @@ After adding/updating component documentation, verify:
 - [ ] Cross-platform: same prop names and types
 - [ ] Storybook builds without errors: `yarn build-storybook`
 - [ ] Accessibility tests pass: `yarn test:storybook`
+- [ ] If using Storybook MCP workflows, run `run-story-tests` after story/component changes and resolve failures
+- [ ] If using Storybook MCP previews, include `preview-stories` URLs when sharing visual verification
