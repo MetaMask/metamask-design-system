@@ -56,10 +56,13 @@ export const ButtonTertiary = forwardRef<
             'active:bg-error-muted-pressed',
           ],
       ],
-      'focus-visible:ring-0',
+      'focus-visible:ring-0 focus-visible:outline-none',
+      // TODO: Remove `focus-visible:outline` when dropping Tailwind v3 — v4's outline-2 implies outline-style: solid
+      /* eslint-disable better-tailwindcss/no-conflicting-classes -- Redundant outline+outline-2 for Chromatic baseline; remove in follow-up (a72c63ac) */
       isInverse
-        ? 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background-default'
-        : 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
+        ? 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background-default'
+        : 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
+      /* eslint-enable better-tailwindcss/no-conflicting-classes */
       // Loading styles
       isLoading && 'cursor-not-allowed',
       // Disabled styles (but not loading)
