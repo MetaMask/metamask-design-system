@@ -38,7 +38,8 @@ jobs:
           is-high-risk-environment: false
       - name: Setup
         # The Tailwind Prettier plugin requires the Tailwind preset to be built, as the plugin depends on the configuration provided by the preset for linting to function correctly.
-        run: yarn workspace @metamask/design-system-tailwind-preset build
+        # The twrnc preset must also be built so the RN ESLint tailwind-intellisense config can resolve custom class names.
+        run: yarn workspace @metamask/design-tokens build && yarn workspace @metamask/design-system-tailwind-preset build && yarn workspace @metamask/design-system-twrnc-preset build
       - run: yarn lint
       - name: Require clean working directory
         shell: bash

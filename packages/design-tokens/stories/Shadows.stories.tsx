@@ -68,13 +68,13 @@ export const Size: StoryObj<typeof ShadowSwatch> = {
 export const Color: StoryObj<typeof ShadowSwatch> = {
   render: () => (
     <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
-      <ShadowSwatch className="shadow-xs">
+      <ShadowSwatch className="shadow-[var(--shadow-size-xs)_var(--color-shadow-default)]">
         <Text>Default</Text>
       </ShadowSwatch>
-      <ShadowSwatch className="bg-primary-default shadow-xs shadow-primary">
+      <ShadowSwatch className="bg-primary-default shadow-[var(--shadow-size-xs)_var(--color-shadow-primary)]">
         <Text color={TextColor.PrimaryInverse}>Primary</Text>
       </ShadowSwatch>
-      <ShadowSwatch className="bg-error-default shadow-xs shadow-error">
+      <ShadowSwatch className="bg-error-default shadow-[var(--shadow-size-xs)_var(--color-shadow-error)]">
         <Text color={TextColor.ErrorInverse}>Error/Danger</Text>
       </ShadowSwatch>
     </div>
@@ -99,10 +99,10 @@ export const ExampleUsage = {
         </ShadowSwatch>
       </div>
       <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
-        <ShadowSwatch className="bg-primary-default shadow-xs shadow-primary">
+        <ShadowSwatch className="bg-primary-default shadow-[var(--shadow-size-sm)_var(--color-shadow-primary)]">
           <Text color={TextColor.PrimaryInverse}>Button Primary Hover</Text>
         </ShadowSwatch>
-        <ShadowSwatch className="bg-error-default shadow-xs shadow-error">
+        <ShadowSwatch className="bg-error-default shadow-[var(--shadow-size-sm)_var(--color-shadow-error)]">
           <Text color={TextColor.ErrorInverse}>Button Error/Danger Hover</Text>
         </ShadowSwatch>
       </div>

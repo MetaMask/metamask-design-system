@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
 - [General Extension Migration Guidance](#general-extension-migration-guidance)
 - [From Extension Component Library](#from-extension-component-library)
   - [Box Component](#box-component)
@@ -13,6 +14,49 @@ This guide provides detailed instructions for migrating your project from one ve
 - [Version Updates](#version-updates)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
+
+## Tailwind CSS v3 to v4
+
+`@metamask/design-system-react` now requires Tailwind CSS v4. For full setup instructions, see the [Tailwind v3 to v4 migration guide in `@metamask/design-tokens`](../design-tokens/MIGRATION.md#tailwind-css-v3-to-v4).
+
+### Breaking Changes
+
+#### `@metamask/design-system-tailwind-preset` is no longer a peer dependency
+
+The v3 Tailwind preset has been removed as a peer dependency. Consumers should use `@metamask/design-tokens/tailwind/theme.css` instead.
+
+**Before:**
+
+```json
+{
+  "dependencies": {
+    "@metamask/design-system-react": "^0.11.0",
+    "@metamask/design-system-tailwind-preset": "^0.6.0",
+    "@metamask/design-tokens": "^8.1.0"
+  }
+}
+```
+
+**After:**
+
+```json
+{
+  "dependencies": {
+    "@metamask/design-system-react": "^0.12.0",
+    "@metamask/design-tokens": "^8.1.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/postcss": "^4.0.0"
+  }
+}
+```
+
+#### `tailwind-merge` upgraded from v2 to v3
+
+`tailwind-merge` is a direct dependency (not a peer dependency), so this is handled internally. If you import `twMerge` from this package, no changes are needed — the `extendTailwindMerge` API is unchanged.
+
+If you use your own `tailwind-merge` instance alongside this package, ensure you upgrade to v3 for Tailwind v4 compatibility.
 
 ## General Extension Migration Guidance
 
