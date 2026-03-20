@@ -1,4 +1,4 @@
-import { Text } from '@metamask/design-system-react';
+import { Text, TextColor } from '@metamask/design-system-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
@@ -65,21 +65,47 @@ export const Size: StoryObj<typeof ShadowSwatch> = {
   ),
 };
 
-export const ExampleUsage = {
+export const Color: StoryObj<typeof ShadowSwatch> = {
   render: () => (
     <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
-      <ShadowSwatch className="shadow-xs">
-        <Text>Card</Text>
+      <ShadowSwatch className="shadow-[var(--shadow-size-xs)_var(--color-shadow-default)]">
+        <Text>Default</Text>
       </ShadowSwatch>
-      <ShadowSwatch className="shadow-sm">
-        <Text>Dropdown</Text>
+      <ShadowSwatch className="bg-primary-default shadow-[var(--shadow-size-xs)_var(--color-shadow-primary)]">
+        <Text color={TextColor.PrimaryInverse}>Primary</Text>
       </ShadowSwatch>
-      <ShadowSwatch className="shadow-md">
-        <Text>Toast</Text>
+      <ShadowSwatch className="bg-error-default shadow-[var(--shadow-size-xs)_var(--color-shadow-error)]">
+        <Text color={TextColor.ErrorInverse}>Error/Danger</Text>
       </ShadowSwatch>
-      <ShadowSwatch className="shadow-lg">
-        <Text>Modal</Text>
-      </ShadowSwatch>
+    </div>
+  ),
+};
+
+export const ExampleUsage = {
+  render: () => (
+    <div>
+      <div className="mb-16 grid grid-cols-[repeat(auto-fill,200px)] gap-8">
+        <ShadowSwatch className="shadow-xs">
+          <Text>Card</Text>
+        </ShadowSwatch>
+        <ShadowSwatch className="shadow-sm">
+          <Text>Dropdown</Text>
+        </ShadowSwatch>
+        <ShadowSwatch className="shadow-md">
+          <Text>Toast</Text>
+        </ShadowSwatch>
+        <ShadowSwatch className="shadow-lg">
+          <Text>Modal</Text>
+        </ShadowSwatch>
+      </div>
+      <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
+        <ShadowSwatch className="bg-primary-default shadow-[var(--shadow-size-sm)_var(--color-shadow-primary)]">
+          <Text color={TextColor.PrimaryInverse}>Button Primary Hover</Text>
+        </ShadowSwatch>
+        <ShadowSwatch className="bg-error-default shadow-[var(--shadow-size-sm)_var(--color-shadow-error)]">
+          <Text color={TextColor.ErrorInverse}>Button Error/Danger Hover</Text>
+        </ShadowSwatch>
+      </div>
     </div>
   ),
 };
