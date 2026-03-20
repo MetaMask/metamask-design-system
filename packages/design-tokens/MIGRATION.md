@@ -113,16 +113,16 @@ The preset is no longer needed for Tailwind v4 consumers. It will eventually be 
 
 ### What `theme.css` provides
 
-| Token category    | How it works in v4                                                                                       |
-| ----------------- | -------------------------------------------------------------------------------------------------------- |
-| Colors            | `@theme` variables (e.g. `--color-primary-default`) auto-generate `bg-*`, `text-*`, `border-*` utilities |
-| Color shortcuts   | `@utility` directives (e.g. `bg-default`, `text-default`, `border-default`)                              |
-| Typography        | `@utility` directives for `text-*`, `leading-*`, `tracking-*`                                            |
-| Font weights      | `@utility` directives for `font-regular`, `font-medium`, `font-bold`                                     |
-| Font families     | `@utility` directives for `font-default`, `font-accent`, `font-hero`                                     |
-| Box shadows       | `@theme` variables (`--box-shadow-xs/sm/md/lg`) auto-generate `shadow-*` utilities                       |
-| Shadow colors     | `@utility` directives for `shadow-default`, `shadow-primary`, `shadow-error`                             |
-| Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                        |
+| Token category    | How it works in v4                                                                                                                             |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Colors            | `@theme` variables (e.g. `--color-primary-default`) auto-generate `bg-*`, `text-*`, `border-*` utilities                                       |
+| Color shortcuts   | `@utility` directives (e.g. `bg-default`, `text-default`, `border-default`)                                                                    |
+| Typography        | `@utility` directives for `text-*`, `leading-*`, `tracking-*`                                                                                  |
+| Font weights      | `@utility` directives for `font-regular`, `font-medium`, `font-bold`                                                                           |
+| Font families     | `@utility` directives for `font-default`, `font-accent`, `font-hero`                                                                           |
+| Box shadows       | `@theme` variables (`--shadow-xs` / `sm` / `md` / `lg`) auto-generate `shadow-xs`–`shadow-lg` utilities                                        |
+| Shadow colors     | `--color-shadow-default` / `primary` / `error` in `@theme` only (no `shadow-default` etc. utilities; v3’s color-stack pattern had no adoption) |
+| Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                                                              |
 
 ### Class name changes
 

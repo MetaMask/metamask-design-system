@@ -11,8 +11,8 @@ import postcss from 'postcss';
  * Tailwind Theme Parity Check
  *
  * Validates that the v4 theme.css produces the same custom class names
- * as the v3 tailwind-preset. This ensures consumers migrating from v3
- * to v4 won't lose any design system utility classes.
+ * as the v3 tailwind-preset, except for a small documented allowlist
+ * (`V4_OMITTED_UTILITY_CLASSES`) where v4 intentionally drops unused v3 utilities.
  *
  * TODO: Extend parity validation to include twrnc (React Native) preset
  * to ensure class name coverage across all three surfaces: v3, v4, and twrnc.
@@ -44,6 +44,19 @@ const requireFromRepo = createRequire(path.join(repoRoot, 'package.json'));
 function uniq(values: string[]): string[] {
   return [...new Set(values)].sort();
 }
+
+/**
+ * v3 preset exposed `shadow-default`, `shadow-primary`, and `shadow-error` only
+ * to set `--shadow-color` when combined with `shadow-xs`–`lg`. The v4 theme does
+ * not ship matching `@utility` rules (no known product usage). Shadow sizes and
+ * `--color-shadow-*` theme tokens remain; consumers can use arbitrary values or
+ * custom CSS if they need colored shadows.
+ */
+const V4_OMITTED_UTILITY_CLASSES = new Set([
+  'shadow-default',
+  'shadow-primary',
+  'shadow-error',
+]);
 
 function flattenNestedKeys(
   prefix: string,
@@ -129,7 +142,9 @@ function buildExpectedClassesFromOldPreset(): string[] {
     classes.push(`shadow-${color}`);
   }
 
-  return uniq(classes);
+  return uniq(
+    classes.filter((className) => !V4_OMITTED_UTILITY_CLASSES.has(className)),
+  );
 }
 
 async function compileTailwind({
