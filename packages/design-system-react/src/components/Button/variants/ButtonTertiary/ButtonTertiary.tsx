@@ -56,9 +56,10 @@ export const ButtonTertiary = forwardRef<
             'active:bg-error-muted-pressed',
           ],
       ],
-      'focus-visible:ring-0 focus-visible:outline-none',
+      // eslint-disable-next-line better-tailwindcss/sort-classes -- outline-none before ring-0 to match prior class order (limit release diff)
+      'focus-visible:outline-none focus-visible:ring-0',
       // TODO: Remove `focus-visible:outline` when dropping Tailwind v3 — v4's outline-2 implies outline-style: solid
-      /* eslint-disable better-tailwindcss/no-conflicting-classes -- Redundant outline+outline-2 for Chromatic baseline; remove in follow-up (a72c63ac) */
+      /* eslint-disable better-tailwindcss/no-conflicting-classes -- Redundant outline+outline-2 kept to limit release diff; remove in follow-up (a72c63ac) */
       isInverse
         ? 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background-default'
         : 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
