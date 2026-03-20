@@ -115,6 +115,9 @@ The preset is no longer needed for Tailwind v4 consumers. It will eventually be 
 ### What `theme.css` provides
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0fc01bfa (chore(design-tokens): align parity check with v4 shadow utilities)
 | Token category    | How it works in v4                                                                                                                             |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | Colors            | `@theme` variables (e.g. `--color-primary-default`) auto-generate `bg-*`, `text-*`, `border-*` utilities                                       |
@@ -125,6 +128,7 @@ The preset is no longer needed for Tailwind v4 consumers. It will eventually be 
 | Box shadows       | `@theme` variables (`--shadow-xs` / `sm` / `md` / `lg`) auto-generate `shadow-xs`–`shadow-lg` utilities                                        |
 | Shadow colors     | `--color-shadow-default` / `primary` / `error` in `@theme` only (no `shadow-default` etc. utilities; v3’s color-stack pattern had no adoption) |
 | Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                                                              |
+<<<<<<< HEAD
 
 ### Shadow utility changes
 
@@ -172,6 +176,8 @@ box-shadow: var(--shadow-size-sm) var(--color-shadow-primary);
 | Shadow colors     | `@utility` directives for `shadow-default`, `shadow-primary`, `shadow-error`                             |
 | Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                        |
 >>>>>>> 3bbb40c4 (docs: add Tailwind v3 to v4 migration guides)
+=======
+>>>>>>> 0fc01bfa (chore(design-tokens): align parity check with v4 shadow utilities)
 
 ### Class name changes
 
