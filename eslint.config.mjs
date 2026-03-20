@@ -53,7 +53,6 @@ const config = createConfig([
       'apps/storybook-react/.storybook/*.tsx',
       'apps/storybook-react/vite.config.ts',
       'apps/storybook-react/postcss.config.js',
-      'apps/storybook-react/tailwind.config.js',
       // storybook react native
       'apps/storybook-react-native/.storybook/**/*.js',
       'apps/storybook-react-native/*.js',

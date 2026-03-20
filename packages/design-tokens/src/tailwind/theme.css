@@ -492,6 +492,17 @@
   border-color: var(--color-border-muted);
 }
 
+/* Shadow color shortcuts: parity with old preset */
+@utility shadow-default {
+  --shadow-color: var(--color-shadow-default);
+}
+@utility shadow-primary {
+  --shadow-color: var(--color-shadow-primary);
+}
+@utility shadow-error {
+  --shadow-color: var(--color-shadow-error);
+}
+
 /* Legacy typography classnames parity with the old preset */
 @utility text-s-display-lg {
   font-size: var(--typography-s-display-lg-font-size);
