@@ -6,9 +6,11 @@ This guide provides detailed instructions for migrating your project from one ve
 
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Box Component](#box-component)
+  - [BannerAlert Component](#banneralert-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
+  - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## From Mobile Component Library
@@ -98,6 +100,59 @@ The design system Box provides these margin/padding props:
 - ✅ `paddingVertical`
 
 For spacing values 0-12 (0px-48px), use these props. For custom values, responsive spacing, or inline-start/end positioning, use `twClassName` with Tailwind utilities.
+
+### BannerAlert Component
+
+Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with severity values standardized to MMDS shared types.
+
+#### Breaking Changes
+
+##### Imports and Type Source
+
+| Mobile Pattern                                 | Design System Migration                                           |
+| ---------------------------------------------- | ----------------------------------------------------------------- |
+| `BannerAlertSeverity` from `BannerAlert.types` | `BannerAlertSeverity` from `@metamask/design-system-react-native` |
+
+##### Severity Values
+
+| Mobile Value                                | Design System Value                         | Notes          |
+| ------------------------------------------- | ------------------------------------------- | -------------- |
+| `BannerAlertSeverity.Info` (`'Info'`)       | `BannerAlertSeverity.Info` (`'info'`)       | casing changed |
+| `BannerAlertSeverity.Success` (`'Success'`) | `BannerAlertSeverity.Success` (`'success'`) | casing changed |
+| `BannerAlertSeverity.Warning` (`'Warning'`) | `BannerAlertSeverity.Warning` (`'warning'`) | casing changed |
+| `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed        |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import BannerAlert from '../../../component-library/components/Banners/Banner/variants/BannerAlert';
+import { BannerAlertSeverity } from '../../../component-library/components/Banners/Banner/variants/BannerAlert/BannerAlert.types';
+
+<BannerAlert
+  severity={BannerAlertSeverity.Warning}
+  title="Warning"
+  actionButtonLabel="Action"
+  actionButtonOnPress={() => undefined}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  BannerAlert,
+  BannerAlertSeverity,
+} from '@metamask/design-system-react-native';
+
+<BannerAlert
+  severity={BannerAlertSeverity.Warning}
+  title="Warning"
+  actionButtonLabel="Action"
+  actionButtonOnPress={() => undefined}
+/>;
+```
 
 ### Text Component
 
@@ -282,6 +337,129 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 ## Version Updates
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react-native`.
+
+## From version 0.10.0 to 0.11.0
+
+### ButtonIcon Variant Prop
+
+Version 0.11.0 replaces `ButtonIcon`'s boolean props `isInverse` and `isFloating` with a single `variant` prop ([#948](https://github.com/MetaMask/metamask-design-system/pull/948)).
+
+#### Breaking Changes
+
+The `ButtonIcon` component now uses a `variant` prop instead of `isInverse` and `isFloating` boolean props.
+
+#### Migration Steps
+
+**Before (0.10.0):**
+
+```tsx
+import { ButtonIcon, IconName } from '@metamask/design-system-react-native';
+
+// Default button icon (transparent background)
+<ButtonIcon name={IconName.Add} />
+
+// Floating button icon
+<ButtonIcon name={IconName.Add} isFloating />
+
+// Inverse button icon (no longer supported)
+<ButtonIcon name={IconName.Add} isInverse />
+```
+
+**After (0.11.0):**
+
+```tsx
+import { ButtonIcon, ButtonIconVariant, IconName } from '@metamask/design-system-react-native';
+
+// Default button icon (transparent background)
+<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Default} />
+// or omit variant prop as Default is the default value
+<ButtonIcon name={IconName.Add} />
+
+// Floating button icon (rounded, colored background with inverse icon)
+<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Floating} />
+
+// Filled button icon (new - muted background with rounded corners)
+<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Filled} />
+```
+
+#### New Variants
+
+- `ButtonIconVariant.Default` - Transparent background with default icon color and pressed state (default)
+- `ButtonIconVariant.Filled` - Muted background (`bg-muted`) with rounded corners and pressed state (new)
+- `ButtonIconVariant.Floating` - Colored background with inverse icon color (replaces `isFloating`)
+
+#### Removed Props
+
+- `isInverse` - No longer supported
+- `isFloating` - Replaced by `variant={ButtonIconVariant.Floating}`
+
+### Input Controlled-Only Requirement
+
+Version 0.11.0 makes the `Input` component controlled-only by requiring the `value` prop and removing `defaultValue` support ([#960](https://github.com/MetaMask/metamask-design-system/pull/960)).
+
+#### Breaking Changes
+
+The `Input` component now requires a `value` prop and no longer supports uncontrolled usage via `defaultValue`.
+
+#### Migration Steps
+
+**Before (0.10.0):**
+
+```tsx
+import { Input } from '@metamask/design-system-react-native';
+
+// Uncontrolled input with defaultValue (no longer supported)
+<Input
+  placeholder="Enter text"
+  defaultValue="Initial value"
+  onChange={(text) => console.log(text)}
+/>;
+
+// Controlled input (still works, but value is now required)
+const [text, setText] = useState('');
+<Input placeholder="Enter text" value={text} onChange={setText} />;
+```
+
+**After (0.11.0):**
+
+```tsx
+import { Input } from '@metamask/design-system-react-native';
+import { useState } from 'react';
+
+// All inputs must now be controlled with value prop
+const [text, setText] = useState('Initial value');
+<Input placeholder="Enter text" value={text} onChange={setText} />;
+
+// Empty initial value
+const [text, setText] = useState('');
+<Input placeholder="Enter text" value={text} onChange={setText} />;
+```
+
+#### Why This Change?
+
+This change provides:
+
+- **Consistent behavior**: All `Input` instances now behave predictably as controlled components
+- **Better state management**: Forces explicit state management, reducing bugs from mixed controlled/uncontrolled usage
+- **iOS placeholder fix**: Enables proper iOS-specific placeholder alignment without affecting typed text rendering
+
+#### TextField Component
+
+This change also affects the `TextField` component, which wraps `Input`. All `TextField` usage must now provide `value` and manage state:
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+import { useState } from 'react';
+
+const [email, setEmail] = useState('');
+
+<TextField
+  label="Email"
+  placeholder="Enter email"
+  value={email}
+  onChange={setEmail}
+/>;
+```
 
 ## From version 0.1.0 to 0.2.0
 

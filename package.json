@@ -1,6 +1,6 @@
 {
   "name": "@metamask/metamask-design-system",
-  "version": "24.0.0",
+  "version": "25.0.0",
   "private": true,
   "description": "The MetaMask Design System monorepo",
   "repository": {
@@ -18,6 +18,7 @@
     "build:types": "tsc --build tsconfig.build.json --verbose",
     "changelog:update": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:update",
     "changelog:validate": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:validate",
+    "chromatic": "yarn workspace @metamask/storybook-react chromatic",
     "create-component:react": "yarn workspace @metamask/design-system-react create-component",
     "create-package": "tsx scripts/create-package",
     "figma:connect:react": "figma connect --config packages/design-system-react/figma.config.json",

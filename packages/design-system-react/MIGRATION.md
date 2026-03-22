@@ -7,9 +7,11 @@ This guide provides detailed instructions for migrating your project from one ve
 - [General Extension Migration Guidance](#general-extension-migration-guidance)
 - [From Extension Component Library](#from-extension-component-library)
   - [Box Component](#box-component)
+  - [BannerAlert Component](#banneralert-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
+  - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## General Extension Migration Guidance
@@ -127,6 +129,59 @@ Most extension Box margin/padding props work the same in the design system:
 - ✅ `paddingVertical`
 
 For simple, non-responsive spacing, continue using these props. Use `className` with Tailwind utilities for responsive spacing, auto values, or inline-start/end positioning.
+
+### BannerAlert Component
+
+The extension `banner-alert` maps directly to `BannerAlert` in the design system, but severity values are now provided via the shared `BannerAlertSeverity` const object (ADR-0003/0004) instead of extension enums.
+
+#### Breaking Changes
+
+##### Imports and Enum Source
+
+| Extension Pattern                                 | Design System Migration                                    |
+| ------------------------------------------------- | ---------------------------------------------------------- |
+| `BannerAlertSeverity` from `./banner-alert.types` | `BannerAlertSeverity` from `@metamask/design-system-react` |
+
+##### Severity Values
+
+| Extension Value                             | Design System Value           |
+| ------------------------------------------- | ----------------------------- |
+| `BannerAlertSeverity.Info` (`'info'`)       | `BannerAlertSeverity.Info`    |
+| `BannerAlertSeverity.Success` (`'success'`) | `BannerAlertSeverity.Success` |
+| `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` |
+| `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { BannerAlert } from '../../component-library/banner-alert';
+import { BannerAlertSeverity } from '../../component-library/banner-alert/banner-alert.types';
+
+<BannerAlert
+  severity={BannerAlertSeverity.Warning}
+  title="Warning"
+  actionButtonLabel="Action"
+  actionButtonOnClick={() => undefined}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  BannerAlert,
+  BannerAlertSeverity,
+} from '@metamask/design-system-react';
+
+<BannerAlert
+  severity={BannerAlertSeverity.Warning}
+  title="Warning"
+  actionButtonLabel="Action"
+  actionButtonOnClick={() => undefined}
+/>;
+```
 
 ### Text Component
 
@@ -342,6 +397,62 @@ import {
 ## Version Updates
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
+
+## From version 0.10.0 to 0.11.0
+
+### ButtonIcon Variant Prop
+
+Version 0.11.0 replaces `ButtonIcon`'s boolean props `isInverse` and `isFloating` with a single `variant` prop ([#948](https://github.com/MetaMask/metamask-design-system/pull/948)).
+
+#### Breaking Changes
+
+The `ButtonIcon` component now uses a `variant` prop instead of `isInverse` and `isFloating` boolean props.
+
+#### Migration Steps
+
+**Before (0.10.0):**
+
+```tsx
+import { ButtonIcon } from '@metamask/design-system-react';
+import { IconName } from '@metamask/design-system-react';
+
+// Default button icon (transparent background)
+<ButtonIcon name={IconName.Add} />
+
+// Floating button icon
+<ButtonIcon name={IconName.Add} isFloating />
+
+// Inverse button icon (no longer supported)
+<ButtonIcon name={IconName.Add} isInverse />
+```
+
+**After (0.11.0):**
+
+```tsx
+import { ButtonIcon, ButtonIconVariant, IconName } from '@metamask/design-system-react';
+
+// Default button icon (transparent background)
+<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Default} />
+// or omit variant prop as Default is the default value
+<ButtonIcon name={IconName.Add} />
+
+// Floating button icon (rounded, colored background with inverse icon)
+<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Floating} />
+
+// Filled button icon (new - muted background with rounded corners)
+<ButtonIcon name={IconName.Add} variant={ButtonIconVariant.Filled} />
+```
+
+#### New Variants
+
+- `ButtonIconVariant.Default` - Transparent background with default icon color and hover/active states (default)
+- `ButtonIconVariant.Filled` - Muted background (`bg-muted`) with rounded corners and hover/pressed states (new)
+- `ButtonIconVariant.Floating` - Colored background with inverse icon color (replaces `isFloating`)
+
+#### Removed Props
+
+- `isInverse` - No longer supported
+- `isFloating` - Replaced by `variant={ButtonIconVariant.Floating}`
 
 ## From version 0.1.0 to 0.2.0
 
