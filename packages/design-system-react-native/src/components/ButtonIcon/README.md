@@ -43,6 +43,7 @@ The size of the button.
 
 Available sizes:
 
+- `ButtonIconSize.Xs` (20px)
 - `ButtonIconSize.Sm` (32px)
 - `ButtonIconSize.Md` (40px)
 - `ButtonIconSize.Lg` (48px)
@@ -52,6 +53,11 @@ Available sizes:
 | `ButtonIconSize` | No       | `ButtonIconSize.Md` |
 
 ```tsx
+<ButtonIcon
+  iconName="Edit"
+  size={ButtonIconSize.Xs}
+  onPress={() => {}}
+/>
 <ButtonIcon
   iconName="Edit"
   size={ButtonIconSize.Sm}

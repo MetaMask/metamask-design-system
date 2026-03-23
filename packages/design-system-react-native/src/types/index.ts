@@ -324,6 +324,10 @@ export enum ButtonVariant {
  */
 export enum ButtonIconSize {
   /**
+   * Represents an extra-small button size (20px).
+   */
+  Xs = 'xs',
+  /**
    * Represents a small button size (24px).
    */
   Sm = 'sm',

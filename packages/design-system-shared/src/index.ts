@@ -27,3 +27,12 @@ export {
   BannerAlertSeverity,
   type BannerAlertPropsShared,
 } from './types/BannerAlert';
+
+// KeyValuePair types (ADR-0003 + ADR-0004)
+export {
+  KeyValuePairOrientation,
+  type KeyValuePairPropsShared,
+} from './types/KeyValuePair';
+
+// SectionBase types (ADR-0004)
+export { type SectionBasePropsShared } from './types/SectionBase';
