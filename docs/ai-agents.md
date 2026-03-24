@@ -100,7 +100,7 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 [Cursor Automations](https://cursor.com/docs/cloud-agent/automations) should follow the **same principles** as interactive agents in this repo (see [Key Principles](#key-principles) below):
 
 - **Reference over duplication** — Automation prompts should `@`-mention `@CLAUDE.md` and specific `@.cursor/rules/*.md` files instead of pasting long paraphrased workflows. Rules stay the single source of truth.
-- **Checklists over narratives** — Implementation steps live in the rules (Do/Don’t, verification); the prompt only sequences *which* rules apply and *when* (e.g. after Jira pickup).
+- **Checklists over narratives** — Implementation steps live in the rules (Do/Don’t, verification); the prompt only sequences _which_ rules apply and _when_ (e.g. after Jira pickup).
 - **Context efficiency** — Keep the scheduled prompt short; agents pull detail from rules and golden-path file paths inside those rules.
 - **Verification** — Always run commands from repo root as in `CLAUDE.md` (e.g. `yarn build`, `yarn test`, `yarn lint`).
 

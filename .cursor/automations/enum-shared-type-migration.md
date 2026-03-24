@@ -1,16 +1,16 @@
 # enum-shared-type-migration
 
-Daily Jira pickup for epic **DSYS-468** (*Component ADR Migration* / ADR-0003 & ADR-0004).
+Daily Jira pickup for epic **DSYS-468** (_Component ADR Migration_ / ADR-0003 & ADR-0004).
 
-**Strategy:** This file matches [docs/ai-agents.md](../../docs/ai-agents.md): *reference over duplication*, *checklists over narratives*, *context efficiency*. It only defines **orchestration** (Jira, triggers, PR identity). **Implementation guardrails and golden paths** live in `@.cursor/rules/` — agents must read those files, not improvise from this doc alone.
+**Strategy:** This file matches [docs/ai-agents.md](../../docs/ai-agents.md): _reference over duplication_, _checklists over narratives_, _context efficiency_. It only defines **orchestration** (Jira, triggers, PR identity). **Implementation guardrails and golden paths** live in `@.cursor/rules/` — agents must read those files, not improvise from this doc alone.
 
 **Invoke:** `@.cursor/automations/enum-shared-type-migration.md` or the companion rule **enum-shared-type-migration** (`.cursor/rules/enum-shared-type-migration.mdc`).
 
 ## Scope (edit if your epic or identity changes)
 
-| Setting | Value |
-|--------|--------|
-| Epic | **DSYS-468** — *Component ADR Migration: Align with ADR-0003 and ADR-0004* |
+| Setting           | Value                                                                                                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Epic              | **DSYS-468** — _Component ADR Migration: Align with ADR-0003 and ADR-0004_                                                                                         |
 | Board (reference) | [DSYS board — epic filter](https://consensyssoftware.atlassian.net/jira/software/c/projects/DSYS/boards/1888?assignee=6152e94cc7bea40069d6b9c3&issueParent=343549) |
 
 ## 1. Find candidates
@@ -70,12 +70,12 @@ Take the **first** result. If the list is empty, stop (no PR); optionally commen
 
 Create and manage automations at [cursor.com/automations](https://cursor.com/automations). Flow: pick a **trigger** (schedule, GitHub event, Slack, webhook, Linear, PagerDuty, etc.), write the **prompt**, enable **tools** (e.g. Open pull request, MCP).
 
-**Who opens the PR** (per Cursor docs — *Identity*):
+**Who opens the PR** (per Cursor docs — _Identity_):
 
-| Automation permission | Pull requests opened as |
-|----------------------|-------------------------|
-| **Private** or **Team Visible** | **Your** GitHub account |
-| **Team Owned** | The **`cursor`** service account (not your user) |
+| Automation permission           | Pull requests opened as                          |
+| ------------------------------- | ------------------------------------------------ |
+| **Private** or **Team Visible** | **Your** GitHub account                          |
+| **Team Owned**                  | The **`cursor`** service account (not your user) |
 
 GitHub **comments**, **review approvals**, and **reviewer requests** run as **`cursor`** regardless. **Slack** sends as the Cursor bot.
 
@@ -106,12 +106,12 @@ DSYS-468 tasks are **internal refactors** of components already in the monorepo 
 
 ### Layer 2 rules — read in order (do not duplicate their content here)
 
-| Order | Rule | Role |
-|------|------|------|
-| 1 | `@.cursor/rules/component-enum-union-migration.md` | Primary workflow, ❌/✅ examples, **Golden Path** file paths, PR #912 |
-| 2 | `@.cursor/rules/component-architecture.md` | ADR-0003/0004 layering, shared vs platform |
-| 3 | `@.cursor/rules/testing.md` | Jest, a11y, assertions |
-| 4 | `@.cursor/rules/component-documentation.md` | Storybook/README when stories or docs change |
+| Order | Rule                                               | Role                                                                  |
+| ----- | -------------------------------------------------- | --------------------------------------------------------------------- |
+| 1     | `@.cursor/rules/component-enum-union-migration.md` | Primary workflow, ❌/✅ examples, **Golden Path** file paths, PR #912 |
+| 2     | `@.cursor/rules/component-architecture.md`         | ADR-0003/0004 layering, shared vs platform                            |
+| 3     | `@.cursor/rules/testing.md`                        | Jest, a11y, assertions                                                |
+| 4     | `@.cursor/rules/component-documentation.md`        | Storybook/README when stories or docs change                          |
 
 **Golden path:** Defined inside `component-enum-union-migration.md` (e.g. **BadgeStatus** paths).
 
