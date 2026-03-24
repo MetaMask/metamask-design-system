@@ -1,6 +1,10 @@
 # enum-shared-type-migration
 
-Daily Jira pickup for epic **DSYS-468** (*Component ADR Migration* / ADR-0003 & ADR-0004). This file is the **source of truth**. In Chat, `@`-mention `.cursor/automations/enum-shared-type-migration.md` or the companion rule **enum-shared-type-migration** so the agent follows these steps.
+Daily Jira pickup for epic **DSYS-468** (*Component ADR Migration* / ADR-0003 & ADR-0004).
+
+**Strategy:** This file matches [docs/ai-agents.md](../../docs/ai-agents.md): *reference over duplication*, *checklists over narratives*, *context efficiency*. It only defines **orchestration** (Jira, triggers, PR identity). **Implementation guardrails and golden paths** live in `@.cursor/rules/` — agents must read those files, not improvise from this doc alone.
+
+**Invoke:** `@.cursor/automations/enum-shared-type-migration.md` or the companion rule **enum-shared-type-migration** (`.cursor/rules/enum-shared-type-migration.mdc`).
 
 ## Scope (edit if your epic or identity changes)
 
@@ -92,40 +96,59 @@ gh auth status
 
 ## 6. Implement the migration (ADR-0003 / ADR-0004)
 
-DSYS-468 tasks are **internal refactors** of components already in the monorepo (e.g. “Migrate **BadgeStatus** to ADR-0003/ADR-0004”). They are **not** extension/mobile imports.
+DSYS-468 tasks are **internal refactors** of components already in the monorepo (e.g. “Migrate **BadgeStatus** …”). They are **not** extension/mobile imports.
 
-**Primary workflow — follow in order:**
+### Guardrails (agent must not skip)
 
-1. `@.cursor/rules/component-enum-union-migration.md` — enum → const objects, shared types, platform `.types.ts` + `index.ts` exports, common mistakes (coverage / re-exports).
-2. `@.cursor/rules/component-architecture.md` — layout of shared vs platform props.
-3. `@.cursor/rules/testing.md` — tests when touching components.
-4. `@.cursor/rules/component-documentation.md` — Storybook if stories change.
+- ❌ Do **not** use `@.cursor/rules/component-migration.md` for this epic (extension/mobile → monorepo only).
+- ✅ Do use `@CLAUDE.md` for **monorepo commands** (always run from repo root: `yarn workspace …` patterns as documented).
+- ✅ Do follow each rule’s **Verification** / checklist sections literally — rules are Layer 2 in [docs/ai-agents.md](../../docs/ai-agents.md).
 
-**Golden reference in repo:** `BadgeStatus` (paths and PR #912 are listed in `component-enum-union-migration.md`).
+### Layer 2 rules — read in order (do not duplicate their content here)
 
-**Do not** use `@.cursor/rules/component-migration.md` for this epic — that rule is for bringing components **from** extension/mobile **into** the monorepo.
+| Order | Rule | Role |
+|------|------|------|
+| 1 | `@.cursor/rules/component-enum-union-migration.md` | Primary workflow, ❌/✅ examples, **Golden Path** file paths, PR #912 |
+| 2 | `@.cursor/rules/component-architecture.md` | ADR-0003/0004 layering, shared vs platform |
+| 3 | `@.cursor/rules/testing.md` | Jest, a11y, assertions |
+| 4 | `@.cursor/rules/component-documentation.md` | Storybook/README when stories or docs change |
 
-**After code changes:** `yarn build && yarn test && yarn lint` (from repo root). Open a PR with `.github/pull_request_template.md` / `@.cursor/rules/pr.mdc`; title/body should reference the Jira key (e.g. `DSYS-476`).
+**Golden path:** Defined inside `component-enum-union-migration.md` (e.g. **BadgeStatus** paths).
+
+### Verification (after edits)
+
+From repository root (per `CLAUDE.md`):
+
+```bash
+yarn build && yarn test && yarn lint
+```
+
+### PR
+
+`@.cursor/rules/pr.mdc` + `.github/pull_request_template.md`; include Jira key (e.g. `DSYS-476`).
 
 ## Cloud automation — example prompt (paste into cursor.com/automations)
 
-Adapt as needed; keep **Private** if the PR must be under your GitHub user.
+Keep the prompt **short**; implementation detail lives in `@.cursor/rules/` per [docs/ai-agents.md](../../docs/ai-agents.md). Use **Private** if the PR must be under your GitHub user.
 
 ```text
-Repository/branch: <this repo> @ <branch e.g. main or a long-lived automation branch>.
+Repository/branch: <this repo> @ <branch>.
 
-1) Jira (Consensys cloud): Run JQL — parent = DSYS-468 AND status = "To Do" AND assignee is EMPTY ORDER BY Rank ASC. Take the first issue. If none, exit successfully with a short message.
+You are in the MetaMask design-system monorepo. Follow docs/ai-agents.md: reference rules with @ — do not invent ADR patterns from memory.
 
-2) Assign the issue to the appropriate user if required by your workflow, transition from To Do to In Progress.
+1) Jira (Consensys): JQL parent = DSYS-468 AND status = "To Do" AND assignee is EMPTY ORDER BY Rank ASC → first issue, or exit with a one-line message if empty. Assign/transition to In Progress per workflow.
 
-3) Implement the ticket using the repo’s Cursor rules exactly:
-   - .cursor/rules/component-enum-union-migration.md (primary)
-   - .cursor/rules/component-architecture.md
-   - .cursor/rules/testing.md
-   - .cursor/rules/component-documentation.md when stories change
-   Use BadgeStatus in the codebase as the reference pattern. Do not use component-migration.md (that is for extension/mobile imports).
+2) Read and follow in order (full checklists inside each file):
+   @CLAUDE.md
+   @.cursor/rules/component-enum-union-migration.md
+   @.cursor/rules/component-architecture.md
+   @.cursor/rules/testing.md
+   @.cursor/rules/component-documentation.md (if stories/docs change)
+   Do NOT use @.cursor/rules/component-migration.md for this epic.
 
-4) Run yarn build, yarn test, yarn lint from the repo root; fix failures.
+3) Verify from repo root: yarn build && yarn test && yarn lint (per CLAUDE.md).
 
-5) Open a pull request: include the Jira key in the title/description, follow .github/pull_request_template.md.
+4) Open PR per @.cursor/rules/pr.mdc and .github/pull_request_template.md; put Jira key in title/body.
 ```
+
+Optional: `@`-mention `@.cursor/automations/enum-shared-type-migration.md` in the automation prompt so the agent loads JQL + PR-identity notes from this file.
