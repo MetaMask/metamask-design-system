@@ -1,0 +1,9 @@
+---
+description: enum-shared-type-migration — Jira pickup for DSYS-468, assign, transition, open PR as authenticated GitHub user
+globs: ['**/*']
+alwaysApply: false
+---
+
+When invoked (e.g. `@enum-shared-type-migration` or “run enum shared type migration pickup”), follow **every step** in `@.cursor/automations/enum-shared-type-migration.md` using Atlassian Jira for `consensyssoftware.atlassian.net`.
+
+That file is the canonical workflow (JQL, pickup order, Jira updates, PR authorship via `gh`, link to the PR template).

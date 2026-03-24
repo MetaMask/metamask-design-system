@@ -1,9 +1,0 @@
----
-description: Daily Jira pickup — select the next issue under epic DSYS-468, assign, transition, and open PR as the authenticated GitHub user
-globs: ['**/*']
-alwaysApply: false
----
-
-When invoked (e.g. `@jira-daily-epic-pickup` or “pick up today’s DSYS-468 ticket”), follow **every step** in `@.cursor/automations/jira-daily-epic-pickup.md` using Atlassian Jira for `consensyssoftware.atlassian.net`.
-
-That file is the canonical workflow (JQL, pickup order, Jira updates, PR authorship via `gh`, link to the PR template).

@@ -1,6 +1,6 @@
-# Daily Jira pickup — epic DSYS-468
+# enum-shared-type-migration
 
-Use this document as the **source of truth** for the workflow. In Chat, `@`-mention this file or the companion rule **Daily Jira pickup** so the agent follows these steps.
+Daily Jira pickup for epic **DSYS-468** (*Component ADR Migration* / ADR-0003 & ADR-0004). This file is the **source of truth**. In Chat, `@`-mention `.cursor/automations/enum-shared-type-migration.md` or the companion rule **enum-shared-type-migration** so the agent follows these steps.
 
 ## Scope (edit if your epic or identity changes)
 
