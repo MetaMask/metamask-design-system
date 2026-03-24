@@ -31,9 +31,23 @@ parent = DSYS-468 AND status = "To Do" AND assignee is EMPTY ORDER BY Rank ASC
 
 ## 2. Choose one issue
 
+### Interactive (IDE / manual run)
+
 - Prefer **In Progress** already assigned to you (continue that thread).
 - Else prefer **To Do** assigned to you.
 - Else take the **first** issue from the unassigned `To Do` query (top of backlog order).
+
+### Scheduled Cursor Cloud Automation (“always take backlog”)
+
+Use **only** unclaimed work so each run picks a new ticket:
+
+```jql
+parent = DSYS-468 AND status = "To Do" AND assignee is EMPTY ORDER BY Rank ASC
+```
+
+Take the **first** result. If the list is empty, stop (no PR); optionally comment in the run log or Slack.
+
+**Jira + cloud agent:** Enable your **Atlassian/Jira MCP** (or equivalent) on the automation so the agent can search JQL, assign, and transition. Without Jira tools, the automation cannot claim tickets by itself.
 
 ## 3. Pick up in Jira
 
@@ -76,6 +90,42 @@ gh auth status
 - **Fork workflow**: push to your fork’s `origin`, then `gh pr create` toward upstream — you remain the opener.
 - **PR body**: Follow `.github/pull_request_template.md` and `@pr` / `.cursor/rules/pr.mdc`.
 
-## Monorepo context
+## 6. Implement the migration (ADR-0003 / ADR-0004)
 
-Follow `CLAUDE.md` and `.cursor/rules/component-migration.md` (and related rules) when implementing work for the chosen ticket.
+DSYS-468 tasks are **internal refactors** of components already in the monorepo (e.g. “Migrate **BadgeStatus** to ADR-0003/ADR-0004”). They are **not** extension/mobile imports.
+
+**Primary workflow — follow in order:**
+
+1. `@.cursor/rules/component-enum-union-migration.md` — enum → const objects, shared types, platform `.types.ts` + `index.ts` exports, common mistakes (coverage / re-exports).
+2. `@.cursor/rules/component-architecture.md` — layout of shared vs platform props.
+3. `@.cursor/rules/testing.md` — tests when touching components.
+4. `@.cursor/rules/component-documentation.md` — Storybook if stories change.
+
+**Golden reference in repo:** `BadgeStatus` (paths and PR #912 are listed in `component-enum-union-migration.md`).
+
+**Do not** use `@.cursor/rules/component-migration.md` for this epic — that rule is for bringing components **from** extension/mobile **into** the monorepo.
+
+**After code changes:** `yarn build && yarn test && yarn lint` (from repo root). Open a PR with `.github/pull_request_template.md` / `@.cursor/rules/pr.mdc`; title/body should reference the Jira key (e.g. `DSYS-476`).
+
+## Cloud automation — example prompt (paste into cursor.com/automations)
+
+Adapt as needed; keep **Private** if the PR must be under your GitHub user.
+
+```text
+Repository/branch: <this repo> @ <branch e.g. main or a long-lived automation branch>.
+
+1) Jira (Consensys cloud): Run JQL — parent = DSYS-468 AND status = "To Do" AND assignee is EMPTY ORDER BY Rank ASC. Take the first issue. If none, exit successfully with a short message.
+
+2) Assign the issue to the appropriate user if required by your workflow, transition from To Do to In Progress.
+
+3) Implement the ticket using the repo’s Cursor rules exactly:
+   - .cursor/rules/component-enum-union-migration.md (primary)
+   - .cursor/rules/component-architecture.md
+   - .cursor/rules/testing.md
+   - .cursor/rules/component-documentation.md when stories change
+   Use BadgeStatus in the codebase as the reference pattern. Do not use component-migration.md (that is for extension/mobile imports).
+
+4) Run yarn build, yarn test, yarn lint from the repo root; fix failures.
+
+5) Open a pull request: include the Jira key in the title/description, follow .github/pull_request_template.md.
+```

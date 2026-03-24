@@ -6,4 +6,6 @@ alwaysApply: false
 
 When invoked (e.g. `@enum-shared-type-migration` or “run enum shared type migration pickup”), follow **every step** in `@.cursor/automations/enum-shared-type-migration.md` using Atlassian Jira for `consensyssoftware.atlassian.net`.
 
-That file is the canonical workflow (JQL, pickup order, Jira updates, PR authorship via `gh`, link to the PR template).
+After a ticket is chosen, **implement** it with `@.cursor/rules/component-enum-union-migration.md` (primary), `@.cursor/rules/component-architecture.md`, and `@.cursor/rules/testing.md` — not `component-migration.md` (that rule is for extension/mobile → monorepo only). Use **BadgeStatus** file paths in `component-enum-union-migration.md` as the golden reference.
+
+The automations file is canonical for JQL, pickup mode (interactive vs scheduled), Jira updates, PR identity (`gh` vs Cloud Automations), and the paste-ready cloud prompt.
