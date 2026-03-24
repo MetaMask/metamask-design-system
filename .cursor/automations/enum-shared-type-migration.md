@@ -2,9 +2,16 @@
 
 Daily Jira pickup for epic **DSYS-468** (_Component ADR Migration_ / ADR-0003 & ADR-0004).
 
-**Strategy:** This file matches [docs/ai-agents.md](../../docs/ai-agents.md): _reference over duplication_, _checklists over narratives_, _context efficiency_. It only defines **orchestration** (Jira, triggers, PR identity). **Implementation guardrails and golden paths** live in `@.cursor/rules/` — agents must read those files, not improvise from this doc alone.
+## Purpose (version control for Cursor Automations)
 
-**Invoke:** `@.cursor/automations/enum-shared-type-migration.md` or the companion rule **enum-shared-type-migration** (`.cursor/rules/enum-shared-type-migration.mdc`).
+[Cursor Automations](https://cursor.com/docs/cloud-agent/automations) prompts in the Cursor product are **not** stored in this git repo. This file **is** the **canonical, reviewable spec**: change it here (PRs, `main`, tags) and treat the UI as a **deployment target**.
+
+- **Stable link** — Use a GitHub URL to this path on `main` (or pin a **commit SHA** when you need a frozen prompt). Prefer having the automation run against a branch that **includes** this file, and tell the agent to read `.cursor/automations/enum-shared-type-migration.md` in the workspace; the URL is for humans, pinning, or tooling that fetches raw markdown.
+- **Copy-paste** — Paste sections (e.g. the cloud prompt block below) into **Private** or **Team Visible** automations. When the spec changes, merge the PR here, then update the pasted prompt or the link you use.
+
+**Invoke (IDE):** `@.cursor/automations/enum-shared-type-migration.md` or the companion rule **enum-shared-type-migration** (`.cursor/rules/enum-shared-type-migration.mdc`).
+
+**Strategy:** Matches [docs/ai-agents.md](../../docs/ai-agents.md): _reference over duplication_, _checklists over narratives_, _context efficiency_. This file only defines **orchestration** (Jira, triggers, PR identity). **Implementation guardrails and golden paths** live in `@.cursor/rules/` — agents must read those files, not improvise from this doc alone.
 
 ## Scope (edit if your epic or identity changes)
 

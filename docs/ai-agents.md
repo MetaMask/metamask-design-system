@@ -104,7 +104,7 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 - **Context efficiency** — Keep the scheduled prompt short; agents pull detail from rules and golden-path file paths inside those rules.
 - **Verification** — Always run commands from repo root as in `CLAUDE.md` (e.g. `yarn build`, `yarn test`, `yarn lint`).
 
-Repo-specific automation specs (Jira epic, JQL, PR identity notes) live under `.cursor/automations/` alongside opt-in `.cursor/rules/*.mdc` entry points.
+Repo-specific automation specs (Jira epic, JQL, PR identity notes) live under `.cursor/automations/` alongside opt-in `.cursor/rules/*.mdc` entry points. Keep specs **in git** on purpose: the Cursor Automations UI has **no native version control**—the repo is where you review, diff, and roll forward or back; the UI prompt is a **mirror** (link or copy-paste) of that spec.
 
 ### Cursor
 
