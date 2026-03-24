@@ -48,23 +48,33 @@ parent = DSYS-468 AND status = "To Do" AND assignee is EMPTY ORDER BY Rank ASC
 
 ## 5. Open the PR as your GitHub user
 
-Yes — automation (or the agent running **`gh pr create`**) opens the PR **as whoever is authenticated** with the GitHub CLI in that environment.
+### Cursor Cloud Automations ([docs](https://cursor.com/docs/cloud-agent/automations))
 
-1. **Verify identity** before relying on it:
+Create and manage automations at [cursor.com/automations](https://cursor.com/automations). Flow: pick a **trigger** (schedule, GitHub event, Slack, webhook, Linear, PagerDuty, etc.), write the **prompt**, enable **tools** (e.g. Open pull request, MCP).
 
-   ```bash
-   gh auth status
-   ```
+**Who opens the PR** (per Cursor docs — *Identity*):
 
-   The **logged-in account** is the one that will **create** the PR (you appear as the PR author in the UI).
+| Automation permission | Pull requests opened as |
+|----------------------|-------------------------|
+| **Private** or **Team Visible** | **Your** GitHub account |
+| **Team Owned** | The **`cursor`** service account (not your user) |
 
-2. **Where the branch lives** (fork vs upstream):
-   - If your workflow uses a **personal fork**, push the branch to **`origin`** on your fork (`your-username/metamask-design-system`), then run `gh pr create` with the base repo set to the upstream org repo. The PR still shows **you** as the opener; the head ref is your fork.
-   - If you push a branch **directly on the org repo** and have permission, `gh pr create` still attributes the PR to the authenticated user.
+GitHub **comments**, **review approvals**, and **reviewer requests** run as **`cursor`** regardless. **Slack** sends as the Cursor bot.
 
-3. **Cursor / automation**: Scheduled or agent runs use the **same machine’s** `gh` credentials (or whatever GitHub integration the agent uses). If that session is logged in as you, PRs are yours. If not, log in with `gh auth login` (or fix the token) for that environment.
+**Billing**: Automations use cloud agents; cost follows the automation’s permission scope (team pool for Team Owned, creator for Private / Team Visible). Enable **Open pull request** when the automation should commit and open a PR.
 
-4. **PR body**: Follow `.github/pull_request_template.md` and `@pr` / `.cursor/rules/pr.mdc` conventions when drafting the description.
+For **scheduled** (or Slack, etc.) triggers you choose **repository and branch** explicitly — Cursor does not infer them from a PR.
+
+### Local agent / `gh` on your machine
+
+When **you** run the agent in the IDE and it uses **`gh pr create`**, the PR author is whoever is logged into the GitHub CLI:
+
+```bash
+gh auth status
+```
+
+- **Fork workflow**: push to your fork’s `origin`, then `gh pr create` toward upstream — you remain the opener.
+- **PR body**: Follow `.github/pull_request_template.md` and `@pr` / `.cursor/rules/pr.mdc`.
 
 ## Monorepo context
 
