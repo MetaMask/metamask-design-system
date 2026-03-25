@@ -1,7 +1,8 @@
+import { AvatarIconSeverity } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarIconSize, AvatarIconSeverity } from '../../types';
+import { AvatarIconSize } from '../../types';
 import { IconName } from '../Icon';
 
 import { AvatarIcon } from './AvatarIcon';

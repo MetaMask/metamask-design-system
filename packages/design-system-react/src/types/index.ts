@@ -12,18 +12,6 @@ export { AvatarBaseSize as AvatarNetworkSize } from '@metamask/design-system-sha
 export { AvatarBaseSize as AvatarSize } from '@metamask/design-system-shared';
 
 /**
- * AvatarIcon - severity
- */
-export enum AvatarIconSeverity {
-  Neutral = 'neutral',
-  Info = 'info',
-  Success = 'success',
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  Error = 'error',
-  Warning = 'warning',
-}
-
-/**
  * AvatarGroup - variant
  */
 export enum AvatarGroupVariant {

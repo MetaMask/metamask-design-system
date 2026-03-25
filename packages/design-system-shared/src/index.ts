@@ -13,6 +13,12 @@ export {
   type AvatarBasePropsShared,
 } from './types/AvatarBase';
 
+// AvatarIcon types (ADR-0003 + ADR-0004)
+export {
+  AvatarIconSeverity,
+  type AvatarIconPropsShared,
+} from './types/AvatarIcon';
+
 // BadgeCount types (ADR-0003 + ADR-0004)
 export { BadgeCountSize, type BadgeCountPropsShared } from './types/BadgeCount';
 
