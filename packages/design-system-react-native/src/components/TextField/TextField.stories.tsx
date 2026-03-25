@@ -1,18 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 
 import { TextField } from './TextField';
-import { TextFieldSize } from './TextField.types';
 import type { TextFieldProps } from './TextField.types';
+
+function ControlledTextField(props: TextFieldProps) {
+  const [value, setValue] = useState(props.value ?? '');
+  useEffect(() => {
+    setValue(props.value ?? '');
+  }, [props.value]);
+
+  return <TextField {...props} value={value} onChangeText={setValue} />;
+}
 
 const meta: Meta<TextFieldProps> = {
   title: 'Components/TextField',
   component: TextField,
   argTypes: {
-    size: {
-      control: 'select',
-      options: Object.values(TextFieldSize),
-    },
     isError: {
       control: 'boolean',
     },
@@ -43,28 +48,14 @@ export const Default: Story = {
     value: '',
     placeholder: 'Enter text...',
   },
-  render: (args) => <TextField {...args} />,
-};
-
-export const Size: Story = {
-  render: () => (
-    <View style={{ gap: 16 }}>
-      <TextField value="" placeholder="Small (32px)" size={TextFieldSize.Sm} />
-      <TextField
-        value=""
-        placeholder="Medium (40px, default)"
-        size={TextFieldSize.Md}
-      />
-      <TextField value="" placeholder="Large (48px)" size={TextFieldSize.Lg} />
-    </View>
-  ),
+  render: (args) => <ControlledTextField {...args} />,
 };
 
 export const IsError: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <TextField value="" placeholder="Default" />
-      <TextField value="" placeholder="Error state" isError />
+      <ControlledTextField value="" placeholder="Default" />
+      <ControlledTextField value="" placeholder="Error state" isError />
     </View>
   ),
 };
@@ -72,7 +63,7 @@ export const IsError: Story = {
 export const IsDisabled: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <TextField value="Editable" placeholder="Enabled" />
+      <ControlledTextField value="Editable" placeholder="Enabled" />
       <TextField value="Not editable" placeholder="Disabled" isDisabled />
     </View>
   ),
@@ -80,7 +71,7 @@ export const IsDisabled: Story = {
 
 export const StartAccessory: Story = {
   render: () => (
-    <TextField
+    <ControlledTextField
       value=""
       placeholder="With start accessory"
       startAccessory={<Text>🔍</Text>}
@@ -90,7 +81,7 @@ export const StartAccessory: Story = {
 
 export const EndAccessory: Story = {
   render: () => (
-    <TextField
+    <ControlledTextField
       value=""
       placeholder="With end accessory"
       endAccessory={<Text>✕</Text>}

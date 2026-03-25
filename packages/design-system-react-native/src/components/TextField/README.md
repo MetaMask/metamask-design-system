@@ -20,27 +20,9 @@ Required controlled value for the TextField.
 | -------- | -------- | ------- |
 | `string` | Yes      | N/A     |
 
-### `size`
+### Layout
 
-Optional prop for the size of the TextField.
-
-Available sizes:
-
-- `TextFieldSize.Sm` (32px)
-- `TextFieldSize.Md` (40px)
-- `TextFieldSize.Lg` (48px)
-
-| TYPE            | REQUIRED | DEFAULT            |
-| --------------- | -------- | ------------------ |
-| `TextFieldSize` | No       | `TextFieldSize.Md` |
-
-```tsx
-import { TextField, TextFieldSize } from '@metamask/design-system-react-native';
-
-<TextField value="" size={TextFieldSize.Sm} placeholder="Small" />
-<TextField value="" placeholder="Medium (default)" />
-<TextField value="" size={TextFieldSize.Lg} placeholder="Large" />
-```
+The field uses a fixed **48px** row height with a single-line inner input. Use `twClassName` or `style` on the container if you need extra vertical spacing around the field (not a second built-in size variant).
 
 ### `isError`
 
@@ -97,6 +79,14 @@ import { Text } from 'react-native';
   placeholder="With clear button"
 />;
 ```
+
+### `startAccessoryTestID` / `endAccessoryTestID`
+
+Optional test IDs for the wrapper views around `startAccessory` and `endAccessory` (useful for E2E when you need stable queries).
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ### `inputElement`
 

@@ -9,8 +9,6 @@ import { act, create } from 'react-test-renderer';
 import { Input } from '../Input';
 
 import { TextField } from './TextField';
-import { TWCLASSMAP_TEXTFIELD_SIZE } from './TextField.constants';
-import { TextFieldSize } from './TextField.types';
 
 const ROOT_TEST_ID = 'textfield';
 
@@ -61,6 +59,27 @@ describe('TextField', () => {
     expect(getByPlaceholderText('forwarded-placeholder')).toBeDefined();
   });
 
+  it('defaults inner Input to single-line (numberOfLines and multiline)', () => {
+    const tree = create(
+      <TextField
+        value=""
+        placeholder="single-line"
+        multiline
+        numberOfLines={4}
+      />,
+    );
+    const inputNode = tree.root.findByType(Input);
+    expect(inputNode.props.numberOfLines).toBe(1);
+    expect(inputNode.props.multiline).toBe(false);
+  });
+
+  it('forwards secureTextEntry to the inner Input', () => {
+    const { getByPlaceholderText } = render(
+      <TextField value="" placeholder="secure" secureTextEntry />,
+    );
+    expect(getByPlaceholderText('secure').props.secureTextEntry).toBe(true);
+  });
+
   // ── Ref forwarding ────────────────────────────────────────────────
 
   it('exposes TextInput ref via forwardRef', () => {
@@ -77,34 +96,15 @@ describe('TextField', () => {
     expect(() => ref.current?.focus()).not.toThrow();
   });
 
-  // ── Size ───────────────────────────────────────────────────────────
+  // ── Height (48px spec) ─────────────────────────────────────────────
 
-  it('applies the correct size class for each TextFieldSize', () => {
-    for (const size of Object.values(TextFieldSize)) {
-      const { getByTestId, unmount } = render(
-        <TextField value="" testID={ROOT_TEST_ID} size={size} />,
-      );
-      const root = getByTestId(ROOT_TEST_ID);
-      const styles = flattenStyle(root.props.style);
-      const expectedHeight = (
-        tw.style(TWCLASSMAP_TEXTFIELD_SIZE[size]) as ViewStyle
-      ).height;
-      expect(styles).toContainEqual(
-        expect.objectContaining({ height: expectedHeight }),
-      );
-      unmount();
-    }
-  });
-
-  it('defaults to TextFieldSize.Md when no size is provided', () => {
+  it('applies fixed 48px row height', () => {
     const { getByTestId } = render(
       <TextField value="" testID={ROOT_TEST_ID} />,
     );
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
-    const expectedHeight = (
-      tw.style(TWCLASSMAP_TEXTFIELD_SIZE[TextFieldSize.Md]) as ViewStyle
-    ).height;
+    const expectedHeight = (tw.style('h-12') as ViewStyle).height;
     expect(styles).toContainEqual(
       expect.objectContaining({ height: expectedHeight }),
     );
@@ -202,6 +202,21 @@ describe('TextField', () => {
       />,
     );
     expect(getByTestId('end-accessory')).toBeDefined();
+  });
+
+  it('applies startAccessoryTestID and endAccessoryTestID to accessory wrappers', () => {
+    const { getByTestId } = render(
+      <TextField
+        value=""
+        testID={ROOT_TEST_ID}
+        startAccessory={<View />}
+        endAccessory={<View />}
+        startAccessoryTestID="start-wrap"
+        endAccessoryTestID="end-wrap"
+      />,
+    );
+    expect(getByTestId('start-wrap')).toBeDefined();
+    expect(getByTestId('end-wrap')).toBeDefined();
   });
 
   it('does not render accessories when not provided', () => {
@@ -357,13 +372,13 @@ describe('TextField', () => {
     fireEvent(getByPlaceholderText('focus-border'), 'focus');
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
-    const focusBorder = tw.style('border-primary-default') as ViewStyle;
+    const focusBorder = tw.style('border-default') as ViewStyle;
     expect(styles).toContainEqual(
       expect.objectContaining({ borderColor: focusBorder.borderColor }),
     );
   });
 
-  it('reverts to default border after blur', () => {
+  it('reverts to muted resting border after blur', () => {
     const { getByTestId, getByPlaceholderText } = render(
       <TextField value="" testID={ROOT_TEST_ID} placeholder="blur-border" />,
     );
@@ -371,9 +386,9 @@ describe('TextField', () => {
     fireEvent(getByPlaceholderText('blur-border'), 'blur');
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
-    const defaultBorder = tw.style('border-default') as ViewStyle;
+    const mutedBorder = tw.style('border-muted') as ViewStyle;
     expect(styles).toContainEqual(
-      expect.objectContaining({ borderColor: defaultBorder.borderColor }),
+      expect.objectContaining({ borderColor: mutedBorder.borderColor }),
     );
   });
 
@@ -385,7 +400,7 @@ describe('TextField', () => {
     );
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
-    const focusBorder = tw.style('border-primary-default') as ViewStyle;
+    const focusBorder = tw.style('border-default') as ViewStyle;
     expect(styles).toContainEqual(
       expect.objectContaining({ borderColor: focusBorder.borderColor }),
     );
