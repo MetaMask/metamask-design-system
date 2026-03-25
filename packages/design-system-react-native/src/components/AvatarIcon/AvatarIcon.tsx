@@ -2,10 +2,7 @@ import { AvatarIconSeverity } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import {
-  AvatarIconSize,
-  AvatarBaseShape,
-} from '../../types';
+import { AvatarIconSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 import { Icon } from '../Icon';
 
