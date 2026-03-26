@@ -108,7 +108,6 @@ The three-layer model provides static guidance (rules, conventions, and process)
 - **Maintainers (this repo):** Continue using `.cursor/rules/` as the source of truth for conventions. Storybook MCP is a workflow accelerator for story authoring and validation.
 - **Consumers (downstream repos):** Storybook MCP provides the highest value. Agents can discover components and props from a running or published Storybook without reading this repo's source.
 
-
 ## How AI Agents Use This
 
 ### Cursor
