@@ -1,9 +1,14 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
+import { Haptics } from 'react-native-nitro-haptics';
 
 import { ButtonAnimated } from './ButtonAnimated';
 
 describe('ButtonAnimated', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders correctly', () => {
     const { getByTestId } = render(<ButtonAnimated testID="button" />);
     expect(getByTestId('button')).not.toBeNull();
@@ -48,5 +53,27 @@ describe('ButtonAnimated', () => {
 
     fireEvent(getByTestId('button'), 'pressIn');
     expect(onPressInMock).not.toHaveBeenCalled();
+  });
+
+  it('triggers light haptic feedback by default on press', () => {
+    const { getByTestId } = render(<ButtonAnimated testID="button" />);
+    fireEvent(getByTestId('button'), 'pressIn');
+    expect(Haptics.impact).toHaveBeenCalledWith('light');
+  });
+
+  it('triggers custom haptic feedback style on press', () => {
+    const { getByTestId } = render(
+      <ButtonAnimated testID="button" hapticFeedback="heavy" />,
+    );
+    fireEvent(getByTestId('button'), 'pressIn');
+    expect(Haptics.impact).toHaveBeenCalledWith('heavy');
+  });
+
+  it('does not trigger haptic feedback when set to none', () => {
+    const { getByTestId } = render(
+      <ButtonAnimated testID="button" hapticFeedback="none" />,
+    );
+    fireEvent(getByTestId('button'), 'pressIn');
+    expect(Haptics.impact).not.toHaveBeenCalled();
   });
 });

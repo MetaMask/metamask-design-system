@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 import { Pressable } from 'react-native';
+import { Haptics } from 'react-native-nitro-haptics';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -18,6 +19,7 @@ export const ButtonAnimated = ({
   disabled,
   style,
   children,
+  hapticFeedback = 'light',
   ...props
 }: ButtonAnimatedProps) => {
   const [isPressed, setIsPressed] = useState(false);
@@ -31,6 +33,9 @@ export const ButtonAnimated = ({
 
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);
+    if (hapticFeedback !== 'none') {
+      Haptics.impact(hapticFeedback);
+    }
     animation.value = withTiming(0.97, {
       duration: 100,
       easing: Easing.bezier(0.3, 0.8, 0.3, 1),
