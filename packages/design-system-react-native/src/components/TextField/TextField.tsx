@@ -119,7 +119,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
         onPress={onPressHandler}
         accessible={false}
       >
-        {startAccessory ? startAccessory : null}
+        {startAccessory}
         <View style={tw.style('min-h-0 flex-1 justify-center')}>
           {inputElement ?? (
             <Input
@@ -139,7 +139,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
             />
           )}
         </View>
-        {endAccessory ? endAccessory : null}
+        {endAccessory}
       </Pressable>
     );
   },
