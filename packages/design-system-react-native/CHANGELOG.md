@@ -7,14 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- **BREAKING:** Simplified `TextButton` in `@metamask/design-system-react-native`
-  - Removed `size`, `TextButtonSize`, `isDisabled`, `isInverse`, start/end icons and accessories
-  - Implementation uses design system `Text` with `onPress` / `onPressIn` / `onPressOut` only (no `Pressable`)
-  - Typography is controlled with `Text` props such as `variant` (default `TextVariant.BodyMd`) and optional `textProps`
-  - `TextButtonSize` is no longer exported from this package; use `TextVariant` instead
-
 ## [0.11.0]
 
 ### Added

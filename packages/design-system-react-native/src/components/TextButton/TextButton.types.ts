@@ -1,11 +1,8 @@
 import type { TextProps } from '../Text';
 
 /**
- * TextButton component props.
- *
- * Extends {@link Text} with link defaults (medium weight, `TextColor.PrimaryDefault`).
- * While pressed (`onPressIn`–`onPressOut`), color becomes `TextColor.PrimaryDefaultPressed`.
- * Does not use `Pressable`; pass `onPress` for the primary interaction.
+ * Props for `TextButton`, a text-only control for links and inline actions.
+ * Extends {@link Text} props.
  */
 export type TextButtonProps = Omit<
   TextProps,

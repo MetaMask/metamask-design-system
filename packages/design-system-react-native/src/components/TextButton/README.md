@@ -1,8 +1,6 @@
 # TextButton
 
-Text-only control for links and inline actions. It wraps the design system [`Text`](../Text/README.md) with link defaults (medium weight, `TextColor.PrimaryDefault`). While pressed (`onPressIn` … `onPressOut`), the color switches to `TextColor.PrimaryDefaultPressed`. It does **not** use React Native `Pressable`; interaction uses [`onPress`](#onpress) on `Text`.
-
-By default, [`suppressHighlighting`](#suppresshighlighting) is `true` so React Native does not show the standard pressed highlight on the text (which can look like a background); pressed feedback is the color change above.
+Use `TextButton` for links and inline text actions. Pass [`onPress`](#onpress) (and other [`Text`](../Text/README.md) props as needed) to handle taps.
 
 The React web `TextButton` in `@metamask/design-system-react` may expose different props until the platforms are aligned.
 
@@ -52,7 +50,7 @@ Typography variant. Defaults to `TextVariant.BodyMd` (same as [`Text`](../Text/R
 
 ### `twClassName`
 
-Additional TWRNC classes merged into the inner `Text`.
+Additional TWRNC classes merged into the label.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -60,7 +58,7 @@ Additional TWRNC classes merged into the inner `Text`.
 
 ### `suppressHighlighting`
 
-Forwarded to React Native `Text`. When `true` (default), the OS default pressed highlight is not applied.
+When `true` (default), React Native does not apply its default text press highlight.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -68,7 +66,7 @@ Forwarded to React Native `Text`. When `true` (default), the OS default pressed 
 
 ### `style`
 
-React Native style for the root `Text`, merged after token styles. Prefer `twClassName` with design tokens when possible.
+Style for the label, merged after design-token styles. Prefer `twClassName` with design tokens when possible.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

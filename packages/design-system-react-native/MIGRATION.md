@@ -10,6 +10,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
+  - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
@@ -337,6 +338,52 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 ## Version Updates
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react-native`.
+
+## From version 0.11.0 to 0.12.0
+
+### TextButton API
+
+Version 0.12.0 simplifies `TextButton` to a text-only control for links and inline actions. Typography and interaction align with the [`Text`](./src/components/Text/README.md) component API.
+
+#### Breaking Changes
+
+- Removed `size` and `TextButtonSize` — use `variant` with `TextVariant` (default `TextVariant.BodyMd`).
+- Removed `isDisabled`, `isInverse`, `startIconName`, `startIconProps`, `startAccessory`, `endIconName`, `endIconProps`, `endAccessory`, and `textProps`.
+- `TextButtonSize` is no longer exported from this package; use `TextVariant` instead.
+- Interaction is through `Text` press props (for example `onPress`); you no longer spread `Pressable` props on `TextButton`.
+
+#### Migration Steps
+
+**Before (0.11.0):**
+
+```tsx
+import {
+  TextButton,
+  TextButtonSize,
+  IconName,
+} from '@metamask/design-system-react-native';
+
+<TextButton
+  size={TextButtonSize.BodySm}
+  startIconName={IconName.Add}
+  isDisabled={false}
+  onPress={() => {}}
+>
+  Link text
+</TextButton>;
+```
+
+**After (0.12.0):**
+
+```tsx
+import { TextButton, TextVariant } from '@metamask/design-system-react-native';
+
+<TextButton variant={TextVariant.BodySm} onPress={() => {}}>
+  Link text
+</TextButton>;
+```
+
+If you relied on start or end icons or accessories, compose them in your layout (for example a row with `Icon` and `TextButton`). For disabled or inverse patterns previously handled by `isDisabled` or `isInverse`, apply conditional styling or use [`Text`](./src/components/Text/README.md) directly when you need full control over color and press behavior.
 
 ## From version 0.10.0 to 0.11.0
 
