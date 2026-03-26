@@ -19,14 +19,6 @@ export type TextFieldProps = Omit<
    */
   endAccessory?: ReactNode;
   /**
-   * Optional test ID for the start accessory wrapper (when `startAccessory` is set).
-   */
-  startAccessoryTestID?: string;
-  /**
-   * Optional test ID for the end accessory wrapper (when `endAccessory` is set).
-   */
-  endAccessoryTestID?: string;
-  /**
    * Optional boolean to show the error state.
    *
    * @default false

@@ -40,8 +40,6 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
       style,
       startAccessory,
       endAccessory,
-      startAccessoryTestID,
-      endAccessoryTestID,
       isError = false,
       inputElement,
       isDisabled = false,
@@ -75,6 +73,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
         tw.style(
           'flex-row',
           'items-center',
+          'gap-3',
           'rounded-lg',
           'h-12',
           'border',
@@ -120,11 +119,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
         onPress={onPressHandler}
         accessible={false}
       >
-        {startAccessory && (
-          <View style={tw.style('mr-3')} testID={startAccessoryTestID}>
-            {startAccessory}
-          </View>
-        )}
+        {startAccessory ? startAccessory : null}
         <View style={tw.style('min-h-0 flex-1 justify-center')}>
           {inputElement ?? (
             <Input
@@ -144,11 +139,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
             />
           )}
         </View>
-        {endAccessory && (
-          <View style={tw.style('ml-3')} testID={endAccessoryTestID}>
-            {endAccessory}
-          </View>
-        )}
+        {endAccessory ? endAccessory : null}
       </Pressable>
     );
   },

@@ -204,21 +204,6 @@ describe('TextField', () => {
     expect(getByTestId('end-accessory')).toBeDefined();
   });
 
-  it('applies startAccessoryTestID and endAccessoryTestID to accessory wrappers', () => {
-    const { getByTestId } = render(
-      <TextField
-        value=""
-        testID={ROOT_TEST_ID}
-        startAccessory={<View />}
-        endAccessory={<View />}
-        startAccessoryTestID="start-wrap"
-        endAccessoryTestID="end-wrap"
-      />,
-    );
-    expect(getByTestId('start-wrap')).toBeDefined();
-    expect(getByTestId('end-wrap')).toBeDefined();
-  });
-
   it('does not render accessories when not provided', () => {
     const { queryByTestId } = render(
       <TextField value="" testID={ROOT_TEST_ID} />,

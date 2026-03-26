@@ -50,7 +50,7 @@ Optional boolean to disable the TextField. Reduces opacity and prevents interact
 
 ### `startAccessory`
 
-Optional content to display before the Input.
+Optional content to display before the Input. For E2E, set `testID` on the accessory (or wrap it in your own `View`).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -64,7 +64,7 @@ import { Text } from 'react-native';
 
 ### `endAccessory`
 
-Optional content to display after the Input.
+Optional content to display after the Input. For E2E, set `testID` on the accessory (or wrap it in your own `View`).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -79,14 +79,6 @@ import { Text } from 'react-native';
   placeholder="With clear button"
 />;
 ```
-
-### `startAccessoryTestID` / `endAccessoryTestID`
-
-Optional test IDs for the wrapper views around `startAccessory` and `endAccessory` (useful for E2E when you need stable queries).
-
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
 
 ### `inputElement`
 

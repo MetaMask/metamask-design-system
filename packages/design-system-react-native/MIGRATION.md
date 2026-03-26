@@ -527,16 +527,12 @@ import { TextField } from '@metamask/design-system-react-native';
 />
 ```
 
-#### New optional props
-
-- `startAccessoryTestID` / `endAccessoryTestID` — optional test IDs on the wrapper views around `startAccessory` and `endAccessory` for E2E queries.
-
 #### Styling and layout notes
 
 These are not separate props, but visuals changed compared to 0.11.0:
 
 - TextField container uses **`bg-muted`** and **state-based borders** (muted at rest and when disabled; default border when focused; error colors when `isError`, including primary border when focused and error).
-- Start/end accessories use slightly wider spacing from the input (`mr-3` / `ml-3`).
+- Start/end accessories are spaced from the input with **`gap-3`** on the row container (put `testID` on the accessory or your own wrapper for E2E).
 - Inner `Input` is forced **single-line** (`multiline={false}`).
 
 ## From version 0.1.0 to 0.2.0
