@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.12.0]
+
+### Added
+
+- Added `BannerAlert` component ([#975](https://github.com/MetaMask/metamask-design-system/pull/975))
+
+### Changed
+
+- Updated `TextButton` hover/pressed styles to be text-only (no background fill) ([#1001](https://github.com/MetaMask/metamask-design-system/pull/1001))
+- Updated `Candlestick` icon asset with smaller size variant ([#998](https://github.com/MetaMask/metamask-design-system/pull/998))
+
 ## [0.11.0]
 
 ### Added
@@ -182,7 +193,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.11.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.12.0...HEAD
+[0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.11.0...@metamask/design-system-react@0.12.0
 [0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.10.0...@metamask/design-system-react@0.11.0
 [0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.9.0...@metamask/design-system-react@0.10.0
 [0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.8.0...@metamask/design-system-react@0.9.0
