@@ -457,16 +457,6 @@ export enum FontFamily {
 }
 
 /**
- * TextButton - Size
- */
-export enum TextButtonSize {
-  BodyLg = 'body-lg',
-  BodyMd = 'body-md',
-  BodySm = 'body-sm',
-  BodyXs = 'body-xs',
-}
-
-/**
  * Icon - color
  */
 export enum IconColor {
