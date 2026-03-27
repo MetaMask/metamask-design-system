@@ -12,7 +12,6 @@ This guide provides detailed instructions for migrating your project from one ve
 - [Version Updates](#version-updates)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
-  - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## From Mobile Component Library
@@ -508,8 +507,6 @@ const [email, setEmail] = useState('');
   onChange={setEmail}
 />;
 ```
-
-## From version 0.11.0 to 0.12.0
 
 ### TextField
 

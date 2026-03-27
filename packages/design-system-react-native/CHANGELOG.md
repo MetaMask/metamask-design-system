@@ -9,14 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.12.0]
 
-### Uncategorized
+### Added
 
-- refactor: Simplified TextButton and removed start and end accessory ([#1001](https://github.com/MetaMask/metamask-design-system/pull/1001))
-- refactor: updated Input and TextField to align with mobile fixes ([#1000](https://github.com/MetaMask/metamask-design-system/pull/1000))
-- chore: Update candlestick icon with smaller size variant ([#998](https://github.com/MetaMask/metamask-design-system/pull/998))
-- refactor: migrate AvatarNetwork to ADR-0004 shared types (DSYS-477) ([#997](https://github.com/MetaMask/metamask-design-system/pull/997))
-- feat: `KeyValueRow` component ([#959](https://github.com/MetaMask/metamask-design-system/pull/959))
-- feat: add BannerAlert React Native and shared types ([#966](https://github.com/MetaMask/metamask-design-system/pull/966))
+- Added `BannerAlert` component ([#966](https://github.com/MetaMask/metamask-design-system/pull/966))
+- Added `KeyValueRow` component ([#959](https://github.com/MetaMask/metamask-design-system/pull/959))
+
+### Changed
+
+- **BREAKING:** Simplified `TextButton` to a text-only control and removed `size`/`TextButtonSize`, inverse/disabled props, and icon/accessory props ([#1001](https://github.com/MetaMask/metamask-design-system/pull/1001))
+  - See [Migration Guide](./MIGRATION.md#from-version-0110-to-0120)
+- **BREAKING:** Removed `TextFieldSize` and the `size` prop; `TextField` is now a single fixed-height (48px) row ([#1000](https://github.com/MetaMask/metamask-design-system/pull/1000))
+  - See [Migration Guide](./MIGRATION.md#from-version-0110-to-0120)
+- Updated `Candlestick` icon asset with smaller size variant ([#998](https://github.com/MetaMask/metamask-design-system/pull/998))
+
+### Fixed
+
+- Improved `Input` single-line typography alignment (including iOS placeholder behavior) ([#1000](https://github.com/MetaMask/metamask-design-system/pull/1000))
 
 ## [0.11.0]
 

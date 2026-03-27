@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.12.0]
 
-### Uncategorized
+### Added
 
-- refactor: Simplified TextButton and removed start and end accessory ([#1001](https://github.com/MetaMask/metamask-design-system/pull/1001))
-- chore: Update candlestick icon with smaller size variant ([#998](https://github.com/MetaMask/metamask-design-system/pull/998))
-- refactor: migrate AvatarNetwork to ADR-0004 shared types (DSYS-477) ([#997](https://github.com/MetaMask/metamask-design-system/pull/997))
-- feat: add BannerAlert React and shared types ([#975](https://github.com/MetaMask/metamask-design-system/pull/975))
+- Added `BannerAlert` component ([#975](https://github.com/MetaMask/metamask-design-system/pull/975))
+
+### Changed
+
+- Updated `TextButton` hover/pressed styles to be text-only (no background fill) ([#1001](https://github.com/MetaMask/metamask-design-system/pull/1001))
+- Updated `Candlestick` icon asset with smaller size variant ([#998](https://github.com/MetaMask/metamask-design-system/pull/998))
 
 ## [0.11.0]
 
