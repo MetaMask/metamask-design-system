@@ -20,27 +20,9 @@ Required controlled value for the TextField.
 | -------- | -------- | ------- |
 | `string` | Yes      | N/A     |
 
-### `size`
+### Layout
 
-Optional prop for the size of the TextField.
-
-Available sizes:
-
-- `TextFieldSize.Sm` (32px)
-- `TextFieldSize.Md` (40px)
-- `TextFieldSize.Lg` (48px)
-
-| TYPE            | REQUIRED | DEFAULT            |
-| --------------- | -------- | ------------------ |
-| `TextFieldSize` | No       | `TextFieldSize.Md` |
-
-```tsx
-import { TextField, TextFieldSize } from '@metamask/design-system-react-native';
-
-<TextField value="" size={TextFieldSize.Sm} placeholder="Small" />
-<TextField value="" placeholder="Medium (default)" />
-<TextField value="" size={TextFieldSize.Lg} placeholder="Large" />
-```
+The field uses a fixed **48px** row height with a single-line inner input.
 
 ### `isError`
 
@@ -68,7 +50,7 @@ Optional boolean to disable the TextField. Reduces opacity and prevents interact
 
 ### `startAccessory`
 
-Optional content to display before the Input.
+Optional content to display before the Input. For E2E, set `testID` on the accessory (or wrap it in your own `View`).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -82,7 +64,7 @@ import { Text } from 'react-native';
 
 ### `endAccessory`
 
-Optional content to display after the Input.
+Optional content to display after the Input. For E2E, set `testID` on the accessory (or wrap it in your own `View`).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -126,8 +108,8 @@ Use the `twClassName` prop to add Tailwind CSS classes to the container. These c
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
 
-// Add additional styles
-<TextField value="" twClassName="mt-4" placeholder="With margin" />
+// Add additional styles (avoid layout/height changes without design system review)
+<TextField value="" twClassName="rounded-lg" placeholder="With extra rounding" />
 
 // Override default styles
 <TextField value="" twClassName="bg-error-default" placeholder="Override background" />

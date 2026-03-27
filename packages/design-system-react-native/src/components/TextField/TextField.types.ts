@@ -4,27 +4,12 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import type { InputProps } from '../Input/Input.types';
 
 /**
- * TextFieldSize enum.
- */
-export enum TextFieldSize {
-  Sm = 'sm',
-  Md = 'md',
-  Lg = 'lg',
-}
-
-/**
  * TextField component props.
  */
 export type TextFieldProps = Omit<
   InputProps,
   'textVariant' | 'isStateStylesDisabled' | 'style'
 > & {
-  /**
-   * Optional prop for size of the TextField.
-   *
-   * @default TextFieldSize.Md
-   */
-  size?: TextFieldSize;
   /**
    * Optional content to display before the Input.
    */
