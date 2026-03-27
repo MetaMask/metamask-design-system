@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.12.0]
+
 ### Uncategorized
 
 - refactor: Simplified TextButton and removed start and end accessory ([#1001](https://github.com/MetaMask/metamask-design-system/pull/1001))
@@ -189,7 +191,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.11.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.12.0...HEAD
+[0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.11.0...@metamask/design-system-react@0.12.0
 [0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.10.0...@metamask/design-system-react@0.11.0
 [0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.9.0...@metamask/design-system-react@0.10.0
 [0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.8.0...@metamask/design-system-react@0.9.0
