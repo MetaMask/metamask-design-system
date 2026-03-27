@@ -1,50 +1,11 @@
-/**
- * AvatarBase - size
- */
-export enum AvatarBaseSize {
-  /**
-   * Represents an extra small avatar size (16px).
-   */
-  Xs = '16',
-  /**
-   * Represents a small avatar size (24px).
-   */
-  Sm = '24',
-  /**
-   * Represents a medium avatar size (32px).
-   */
-  Md = '32',
-  /**
-   * Represents a large avatar size (40px).
-   */
-  Lg = '40',
-  /**
-   * Represents an extra large avatar size (48px).
-   */
-  Xl = '48',
-}
-export { AvatarBaseSize as AvatarAccountSize };
-export { AvatarBaseSize as AvatarFaviconSize };
-export { AvatarBaseSize as AvatarGroupSize };
-export { AvatarBaseSize as AvatarIconSize };
-export { AvatarBaseSize as AvatarNetworkSize };
-export { AvatarBaseSize as AvatarTokenSize };
-export { AvatarBaseSize as AvatarSize };
-
-/**
- * Avatar - shape
- */
-export enum AvatarShape {
-  /**
-   * Represents a circular Avatar.
-   */
-  Circle = 'circle',
-  /**
-   * Represents a squared Avatar
-   */
-  Square = 'square',
-}
-export { AvatarShape as AvatarBaseShape };
+export { AvatarBaseSize, AvatarBaseShape } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarAccountSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarFaviconSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarGroupSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarIconSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarNetworkSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarTokenSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarSize } from '@metamask/design-system-shared';
 
 /**
  * AvatarAccount - variant
