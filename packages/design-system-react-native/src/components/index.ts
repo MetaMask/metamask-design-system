@@ -154,7 +154,7 @@ export type { SensitiveTextProps } from './SensitiveText';
 export { TabEmptyState } from './TabEmptyState';
 export type { TabEmptyStateProps } from './TabEmptyState';
 
-export { TextButton, TextButtonSize } from './TextButton';
+export { TextButton } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
 export {
