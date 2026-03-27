@@ -1,4 +1,7 @@
-export { AvatarBaseSize, AvatarBaseShape } from '@metamask/design-system-shared';
+export {
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarAccountSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarFaviconSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarGroupSize } from '@metamask/design-system-shared';

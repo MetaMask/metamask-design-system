@@ -8,17 +8,17 @@ import type { TextProps } from '../Text';
  */
 export type AvatarBaseProps = AvatarBasePropsShared &
   Omit<ViewProps, 'children'> & {
-  /**
-   * Optional props to be passed to the fallbackText when the content
-   * fails to render
-   */
-  fallbackTextProps?: Omit<TextProps, 'children'>;
-  /**
-   * Optional prop to add twrnc overriding classNames.
-   */
-  twClassName?: string;
-  /**
-   * Optional prop to control the style.
-   */
-  style?: StyleProp<ViewStyle>;
-};
+    /**
+     * Optional props to be passed to the fallbackText when the content
+     * fails to render
+     */
+    fallbackTextProps?: Omit<TextProps, 'children'>;
+    /**
+     * Optional prop to add twrnc overriding classNames.
+     */
+    twClassName?: string;
+    /**
+     * Optional prop to control the style.
+     */
+    style?: StyleProp<ViewStyle>;
+  };

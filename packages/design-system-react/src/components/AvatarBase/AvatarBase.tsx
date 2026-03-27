@@ -1,4 +1,7 @@
-import { AvatarBaseSize, AvatarBaseShape } from '@metamask/design-system-shared';
+import {
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-shared';
 import { Slot } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
