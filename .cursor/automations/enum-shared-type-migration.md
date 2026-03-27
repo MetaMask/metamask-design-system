@@ -159,3 +159,44 @@ You are in the MetaMask design-system monorepo. Follow docs/ai-agents.md: refere
 ```
 
 Optional: `@`-mention `@.cursor/automations/enum-shared-type-migration.md` in the automation prompt so the agent loads JQL + PR-identity notes from this file.
+
+## 7. Post-merge automation: close Jira ticket
+
+Use a second automation for completion/closure.
+
+### Trigger
+
+- **GitHub trigger:** **Pull request merged**
+- This runs only when a PR is merged.
+
+### Required tools
+
+- **MCP server** enabled in the automation.
+- **GitHub MCP** connected (to inspect the triggering PR).
+- **Atlassian/Jira MCP** connected (to transition the linked Jira issue).
+
+### Decision rules
+
+1. Read the triggering PR metadata (title/body/branch/labels).
+2. Continue only if it is an enum-to-union/shared-type migration PR for this stream.
+3. Extract Jira key (e.g. `DSYS-476`) from title/body.
+4. Fetch transitions and move the issue to the workflow’s done state (`Done` / equivalent).
+5. Add a Jira comment with the merged PR link and merge commit SHA.
+6. If no Jira key or no matching transition is available, leave a comment and exit without changing status.
+
+### Cloud automation — example prompt (PR merged -> Jira Done)
+
+```text
+Triggered by a GitHub "Pull request merged" event.
+
+Use MCP tools only:
+- GitHub MCP to read the triggering PR
+- Atlassian/Jira MCP to update Jira
+
+Workflow:
+1) Inspect triggering PR title/body/labels/branch. Only continue if this is an enum-union/shared-type migration PR in this repo flow.
+2) Extract Jira key from PR title/body (format DSYS-<number>). If none, stop and log why.
+3) In Jira, get available transitions for that issue and transition to Done (or closest done-category status in this workflow).
+4) Add Jira comment: include PR URL, PR number, merge commit SHA, and date.
+5) Output one concise summary line with issue key + final status.
+```
