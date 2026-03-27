@@ -13,6 +13,7 @@ import {
   TWCLASSMAP_TEXT_FONTWEIGHT,
 } from '../Text/Text.constants';
 
+import { MAP_TEXT_VARIANT_INPUT_METRICS } from './Input.constants';
 import type { InputProps } from './Input.types';
 
 export const Input = forwardRef<TextInput, InputProps>(
@@ -58,7 +59,6 @@ export const Input = forwardRef<TextInput, InputProps>(
     const inputStyle = useMemo(
       () =>
         tw.style(
-          `text-${textVariant}`,
           fontClass,
           'text-default',
           'bg-default',
@@ -72,7 +72,6 @@ export const Input = forwardRef<TextInput, InputProps>(
           twClassName,
         ),
       [
-        textVariant,
         fontClass,
         isStateStylesDisabled,
         isDisabled,
@@ -80,6 +79,11 @@ export const Input = forwardRef<TextInput, InputProps>(
         twClassName,
         tw,
       ],
+    );
+
+    const variantTextStyle = useMemo(
+      () => MAP_TEXT_VARIANT_INPUT_METRICS[textVariant],
+      [textVariant],
     );
 
     /* istanbul ignore next: handler body covered by focus/blur tests */
@@ -103,15 +107,14 @@ export const Input = forwardRef<TextInput, InputProps>(
       },
       [isDisabled, onFocus],
     );
-
     const resolvedStyle = [
       inputStyle,
+      variantTextStyle,
       // iOS-only workaround: when a placeholder is visible, native iOS
       // TextInput can render placeholder text vertically offset.
       // Keep this iOS-only because lineHeight: 0 can collapse text on Android.
       Platform.OS === 'ios' &&
         isPlaceholderVisible && { lineHeight: 0 as const },
-      Platform.OS === 'ios' && { textAlignVertical: 'center' as const },
       style,
     ].filter(Boolean);
 
