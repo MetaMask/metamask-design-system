@@ -22,14 +22,11 @@ function getContainerBorderColorClass(
   if (isDisabled) {
     return 'border-muted';
   }
-  if (isFocused && isError) {
-    return 'border-primary-default';
+  if (isError) {
+    return 'border-error-default';
   }
   if (isFocused) {
     return 'border-default';
-  }
-  if (isError) {
-    return 'border-error-default';
   }
   return 'border-muted';
 }

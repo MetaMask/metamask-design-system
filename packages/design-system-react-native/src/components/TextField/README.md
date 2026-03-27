@@ -22,7 +22,7 @@ Required controlled value for the TextField.
 
 ### Layout
 
-The field uses a fixed **48px** row height with a single-line inner input. Use `twClassName` or `style` on the container if you need extra vertical spacing around the field (not a second built-in size variant).
+The field uses a fixed **48px** row height with a single-line inner input.
 
 ### `isError`
 
@@ -108,8 +108,8 @@ Use the `twClassName` prop to add Tailwind CSS classes to the container. These c
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
 
-// Add additional styles
-<TextField value="" twClassName="mt-4" placeholder="With margin" />
+// Add additional styles (avoid layout/height changes without design system review)
+<TextField value="" twClassName="rounded-lg" placeholder="With extra rounding" />
 
 // Override default styles
 <TextField value="" twClassName="bg-error-default" placeholder="Override background" />

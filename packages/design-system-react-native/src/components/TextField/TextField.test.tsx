@@ -124,7 +124,7 @@ describe('TextField', () => {
     );
   });
 
-  it('shows focus border over error border when focused and isError', () => {
+  it('keeps error border when focused and isError', () => {
     const { getByTestId, getByPlaceholderText } = render(
       <TextField
         value=""
@@ -136,9 +136,9 @@ describe('TextField', () => {
     fireEvent(getByPlaceholderText('error-focus'), 'focus');
     const root = getByTestId(ROOT_TEST_ID);
     const styles = flattenStyle(root.props.style);
-    const focusBorder = tw.style('border-primary-default') as ViewStyle;
+    const errorBorder = tw.style('border-error-default') as ViewStyle;
     expect(styles).toContainEqual(
-      expect.objectContaining({ borderColor: focusBorder.borderColor }),
+      expect.objectContaining({ borderColor: errorBorder.borderColor }),
     );
   });
 
