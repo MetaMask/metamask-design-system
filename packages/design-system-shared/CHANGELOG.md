@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: migrate AvatarNetwork to ADR-0004 shared types (DSYS-477) ([#997](https://github.com/MetaMask/metamask-design-system/pull/997))
+- feat: add BannerAlert React and shared types ([#975](https://github.com/MetaMask/metamask-design-system/pull/975))
+
 ## [0.4.0]
 
 ### Added

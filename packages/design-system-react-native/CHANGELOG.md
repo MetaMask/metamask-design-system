@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: Simplified TextButton and removed start and end accessory ([#1001](https://github.com/MetaMask/metamask-design-system/pull/1001))
+- refactor: updated Input and TextField to align with mobile fixes ([#1000](https://github.com/MetaMask/metamask-design-system/pull/1000))
+- chore: Update candlestick icon with smaller size variant ([#998](https://github.com/MetaMask/metamask-design-system/pull/998))
+- refactor: migrate AvatarNetwork to ADR-0004 shared types (DSYS-477) ([#997](https://github.com/MetaMask/metamask-design-system/pull/997))
+- feat: `KeyValueRow` component ([#959](https://github.com/MetaMask/metamask-design-system/pull/959))
+- feat: add BannerAlert React Native and shared types ([#966](https://github.com/MetaMask/metamask-design-system/pull/966))
+
 ## [0.11.0]
 
 ### Added
