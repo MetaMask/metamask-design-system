@@ -1,6 +1,8 @@
 # TextButton
 
-Use `TextButton` for links and inline text actions. Pass [`onPress`](#onpress) (and other [`Text`](../Text/README.md) props as needed) to handle taps.
+Use `TextButton` for links placed **inline with text** (for example inside a sentence). It is text-only and is not meant to carry start or end icons. If you need icons with the label, use [`Button`](../Button/README.md) with `variant={ButtonVariant.Tertiary}` instead.
+
+Pass [`onPress`](#onpress) (and other [`Text`](../Text/README.md) props as needed) to handle taps.
 
 The React web `TextButton` in `@metamask/design-system-react` may expose different props until the platforms are aligned.
 
@@ -8,6 +10,16 @@ The React web `TextButton` in `@metamask/design-system-react` may expose differe
 import { TextButton } from '@metamask/design-system-react-native';
 
 <TextButton onPress={() => console.log('Pressed')}>Click me</TextButton>;
+```
+
+If you need start or end icons, use tertiary `Button` instead:
+
+```tsx
+import { Button, ButtonVariant } from '@metamask/design-system-react-native';
+
+<Button variant={ButtonVariant.Tertiary} onPress={() => console.log('Pressed')}>
+  Action
+</Button>;
 ```
 
 ## Props

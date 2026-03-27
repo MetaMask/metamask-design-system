@@ -343,7 +343,7 @@ This section covers version-to-version breaking changes within `@metamask/design
 
 ### TextButton API
 
-Version 0.12.0 simplifies `TextButton` to a text-only control for links and inline actions. Typography and interaction align with the [`Text`](./src/components/Text/README.md) component API.
+Version 0.12.0 simplifies `TextButton` to a text-only control for links placed inline with text. Typography and interaction align with the [`Text`](./src/components/Text/README.md) component API. If you need start or end icons, prefer [`Button`](./src/components/Button/README.md) with `variant={ButtonVariant.Tertiary}`.
 
 #### Breaking Changes
 
@@ -383,7 +383,7 @@ import { TextButton, TextVariant } from '@metamask/design-system-react-native';
 </TextButton>;
 ```
 
-If you relied on start or end icons or accessories, compose them in your layout (for example a row with `Icon` and `TextButton`). For disabled or inverse patterns previously handled by `isDisabled` or `isInverse`, apply conditional styling or use [`Text`](./src/components/Text/README.md) directly when you need full control over color and press behavior.
+`TextButton` is intended for inline links without icons. If you relied on start or end icons or accessories, migrate to [`Button`](./src/components/Button/README.md) with `variant={ButtonVariant.Tertiary}`, which supports those props. For disabled or inverse patterns previously handled by `isDisabled` or `isInverse`, use conditional styling, [`Text`](./src/components/Text/README.md) when you need full control over color and press behavior, or `Button` tertiary when that component’s props match your needs.
 
 ## From version 0.10.0 to 0.11.0
 
