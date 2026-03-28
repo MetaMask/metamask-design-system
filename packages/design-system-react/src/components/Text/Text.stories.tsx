@@ -250,6 +250,226 @@ export const FontFamilyStory: Story = {
   name: 'Font Family',
 };
 
+export const AllVariantsWithFontFamilies: Story = {
+  render: () => (
+    <div className="space-y-8">
+      <div>
+        <Text variant={TextVariant.HeadingSm} className="mb-4 block">
+          Default Font Family (Geist)
+        </Text>
+        <div className="space-y-2">
+          <Text
+            variant={TextVariant.DisplayLg}
+            fontFamily={FontFamily.Default}
+            className="block"
+          >
+            DisplayLg - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.DisplayMd}
+            fontFamily={FontFamily.Default}
+            className="block"
+          >
+            DisplayMd - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.HeadingLg}
+            fontFamily={FontFamily.Default}
+            className="block"
+          >
+            HeadingLg - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.HeadingMd}
+            fontFamily={FontFamily.Default}
+            className="block"
+          >
+            HeadingMd - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.HeadingSm}
+            fontFamily={FontFamily.Default}
+            className="block"
+          >
+            HeadingSm - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.BodyLg}
+            fontFamily={FontFamily.Default}
+            className="block"
+          >
+            BodyLg - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.BodyMd}
+            fontFamily={FontFamily.Default}
+            className="block"
+          >
+            BodyMd - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.BodySm}
+            fontFamily={FontFamily.Default}
+            className="block"
+          >
+            BodySm - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.BodyXs}
+            fontFamily={FontFamily.Default}
+            className="block"
+          >
+            BodyXs - The quick orange fox
+          </Text>
+        </div>
+      </div>
+
+      <div>
+        <Text variant={TextVariant.HeadingSm} className="mb-4 block">
+          Accent Font Family (MM Sans)
+        </Text>
+        <div className="space-y-2">
+          <Text
+            variant={TextVariant.DisplayLg}
+            fontFamily={FontFamily.Accent}
+            className="block"
+          >
+            DisplayLg - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.DisplayMd}
+            fontFamily={FontFamily.Accent}
+            className="block"
+          >
+            DisplayMd - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.HeadingLg}
+            fontFamily={FontFamily.Accent}
+            className="block"
+          >
+            HeadingLg - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.HeadingMd}
+            fontFamily={FontFamily.Accent}
+            className="block"
+          >
+            HeadingMd - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.HeadingSm}
+            fontFamily={FontFamily.Accent}
+            className="block"
+          >
+            HeadingSm - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.BodyLg}
+            fontFamily={FontFamily.Accent}
+            className="block"
+          >
+            BodyLg - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.BodyMd}
+            fontFamily={FontFamily.Accent}
+            className="block"
+          >
+            BodyMd - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.BodySm}
+            fontFamily={FontFamily.Accent}
+            className="block"
+          >
+            BodySm - The quick orange fox
+          </Text>
+          <Text
+            variant={TextVariant.BodyXs}
+            fontFamily={FontFamily.Accent}
+            className="block"
+          >
+            BodyXs - The quick orange fox
+          </Text>
+        </div>
+      </div>
+
+      <div>
+        <Text variant={TextVariant.HeadingSm} className="mb-4 block">
+          Hero Font Family (MM Poly) - Always renders with regular weight
+        </Text>
+        <div className="space-y-2">
+          <Text
+            variant={TextVariant.DisplayLg}
+            fontFamily={FontFamily.Hero}
+            className="block"
+          >
+            DisplayLg - THE QUICK ORANGE FOX
+          </Text>
+          <Text
+            variant={TextVariant.DisplayMd}
+            fontFamily={FontFamily.Hero}
+            className="block"
+          >
+            DisplayMd - THE QUICK ORANGE FOX
+          </Text>
+          <Text
+            variant={TextVariant.HeadingLg}
+            fontFamily={FontFamily.Hero}
+            className="block"
+          >
+            HeadingLg - THE QUICK ORANGE FOX
+          </Text>
+          <Text
+            variant={TextVariant.HeadingMd}
+            fontFamily={FontFamily.Hero}
+            className="block"
+          >
+            HeadingMd - THE QUICK ORANGE FOX
+          </Text>
+          <Text
+            variant={TextVariant.HeadingSm}
+            fontFamily={FontFamily.Hero}
+            className="block"
+          >
+            HeadingSm - THE QUICK ORANGE FOX
+          </Text>
+          <Text
+            variant={TextVariant.BodyLg}
+            fontFamily={FontFamily.Hero}
+            className="block"
+          >
+            BodyLg - THE QUICK ORANGE FOX
+          </Text>
+          <Text
+            variant={TextVariant.BodyMd}
+            fontFamily={FontFamily.Hero}
+            className="block"
+          >
+            BodyMd - THE QUICK ORANGE FOX
+          </Text>
+          <Text
+            variant={TextVariant.BodySm}
+            fontFamily={FontFamily.Hero}
+            className="block"
+          >
+            BodySm - THE QUICK ORANGE FOX
+          </Text>
+          <Text
+            variant={TextVariant.BodyXs}
+            fontFamily={FontFamily.Hero}
+            className="block"
+          >
+            BodyXs - THE QUICK ORANGE FOX
+          </Text>
+        </div>
+      </div>
+    </div>
+  ),
+  name: 'All Variants with Font Families',
+};
+
 export const FontStyleStory: Story = {
   render: () => (
     <div className="space-y-4">

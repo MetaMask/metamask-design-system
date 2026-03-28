@@ -5,6 +5,7 @@ import { Text as RNText } from 'react-native';
 import { FontFamily, FontStyle, TextVariant, TextColor } from '../../types';
 
 import {
+  FONTFAMILY_WEIGHT_OVERRIDE,
   MAP_TEXT_VARIANT_FONTWEIGHT,
   TWCLASSMAP_TEXT_FONTWEIGHT,
 } from './Text.constants';
@@ -26,7 +27,10 @@ export const Text: React.FC<TextProps> = ({
 
   const textStyle = useMemo(() => {
     const isItalic = fontStyle === FontStyle.Italic;
-    const fontSuffix = `${TWCLASSMAP_TEXT_FONTWEIGHT[finalFontWeight]}${
+    // Apply font family weight override if needed (e.g., Hero font only has regular weight)
+    const effectiveFontWeight =
+      FONTFAMILY_WEIGHT_OVERRIDE[fontFamily] ?? finalFontWeight;
+    const fontSuffix = `${TWCLASSMAP_TEXT_FONTWEIGHT[effectiveFontWeight]}${
       isItalic && fontFamily === FontFamily.Default ? '-italic' : ''
     }`;
     const fontClass = `font-${fontFamily}${fontSuffix}`;

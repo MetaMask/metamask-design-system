@@ -132,6 +132,151 @@ export const FontFamilyStory: Story = {
   name: 'Font Family',
 };
 
+export const AllVariantsWithFontFamilies: Story = {
+  render: () => {
+    const tw = useTailwind();
+    return (
+      <ScrollView style={tw`p-4`}>
+        <View style={tw`mb-8`}>
+          <Text variant={TextVariant.HeadingSm} twClassName="mb-4">
+            Default Font Family (Geist)
+          </Text>
+          <View style={tw`gap-2`}>
+            <Text
+              variant={TextVariant.DisplayLg}
+              fontFamily={FontFamily.Default}
+            >
+              DisplayLg - The quick orange fox
+            </Text>
+            <Text
+              variant={TextVariant.DisplayMd}
+              fontFamily={FontFamily.Default}
+            >
+              DisplayMd - The quick orange fox
+            </Text>
+            <Text
+              variant={TextVariant.HeadingLg}
+              fontFamily={FontFamily.Default}
+            >
+              HeadingLg - The quick orange fox
+            </Text>
+            <Text
+              variant={TextVariant.HeadingMd}
+              fontFamily={FontFamily.Default}
+            >
+              HeadingMd - The quick orange fox
+            </Text>
+            <Text
+              variant={TextVariant.HeadingSm}
+              fontFamily={FontFamily.Default}
+            >
+              HeadingSm - The quick orange fox
+            </Text>
+            <Text variant={TextVariant.BodyLg} fontFamily={FontFamily.Default}>
+              BodyLg - The quick orange fox
+            </Text>
+            <Text variant={TextVariant.BodyMd} fontFamily={FontFamily.Default}>
+              BodyMd - The quick orange fox
+            </Text>
+            <Text variant={TextVariant.BodySm} fontFamily={FontFamily.Default}>
+              BodySm - The quick orange fox
+            </Text>
+            <Text variant={TextVariant.BodyXs} fontFamily={FontFamily.Default}>
+              BodyXs - The quick orange fox
+            </Text>
+          </View>
+        </View>
+
+        <View style={tw`mb-8`}>
+          <Text variant={TextVariant.HeadingSm} twClassName="mb-4">
+            Accent Font Family (MM Sans)
+          </Text>
+          <View style={tw`gap-2`}>
+            <Text
+              variant={TextVariant.DisplayLg}
+              fontFamily={FontFamily.Accent}
+            >
+              DisplayLg - The quick orange fox
+            </Text>
+            <Text
+              variant={TextVariant.DisplayMd}
+              fontFamily={FontFamily.Accent}
+            >
+              DisplayMd - The quick orange fox
+            </Text>
+            <Text
+              variant={TextVariant.HeadingLg}
+              fontFamily={FontFamily.Accent}
+            >
+              HeadingLg - The quick orange fox
+            </Text>
+            <Text
+              variant={TextVariant.HeadingMd}
+              fontFamily={FontFamily.Accent}
+            >
+              HeadingMd - The quick orange fox
+            </Text>
+            <Text
+              variant={TextVariant.HeadingSm}
+              fontFamily={FontFamily.Accent}
+            >
+              HeadingSm - The quick orange fox
+            </Text>
+            <Text variant={TextVariant.BodyLg} fontFamily={FontFamily.Accent}>
+              BodyLg - The quick orange fox
+            </Text>
+            <Text variant={TextVariant.BodyMd} fontFamily={FontFamily.Accent}>
+              BodyMd - The quick orange fox
+            </Text>
+            <Text variant={TextVariant.BodySm} fontFamily={FontFamily.Accent}>
+              BodySm - The quick orange fox
+            </Text>
+            <Text variant={TextVariant.BodyXs} fontFamily={FontFamily.Accent}>
+              BodyXs - The quick orange fox
+            </Text>
+          </View>
+        </View>
+
+        <View style={tw`mb-8`}>
+          <Text variant={TextVariant.HeadingSm} twClassName="mb-4">
+            Hero Font Family (MM Poly) - Always renders with regular weight
+          </Text>
+          <View style={tw`gap-2`}>
+            <Text variant={TextVariant.DisplayLg} fontFamily={FontFamily.Hero}>
+              DisplayLg - THE QUICK ORANGE FOX
+            </Text>
+            <Text variant={TextVariant.DisplayMd} fontFamily={FontFamily.Hero}>
+              DisplayMd - THE QUICK ORANGE FOX
+            </Text>
+            <Text variant={TextVariant.HeadingLg} fontFamily={FontFamily.Hero}>
+              HeadingLg - THE QUICK ORANGE FOX
+            </Text>
+            <Text variant={TextVariant.HeadingMd} fontFamily={FontFamily.Hero}>
+              HeadingMd - THE QUICK ORANGE FOX
+            </Text>
+            <Text variant={TextVariant.HeadingSm} fontFamily={FontFamily.Hero}>
+              HeadingSm - THE QUICK ORANGE FOX
+            </Text>
+            <Text variant={TextVariant.BodyLg} fontFamily={FontFamily.Hero}>
+              BodyLg - THE QUICK ORANGE FOX
+            </Text>
+            <Text variant={TextVariant.BodyMd} fontFamily={FontFamily.Hero}>
+              BodyMd - THE QUICK ORANGE FOX
+            </Text>
+            <Text variant={TextVariant.BodySm} fontFamily={FontFamily.Hero}>
+              BodySm - THE QUICK ORANGE FOX
+            </Text>
+            <Text variant={TextVariant.BodyXs} fontFamily={FontFamily.Hero}>
+              BodyXs - THE QUICK ORANGE FOX
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
+    );
+  },
+  name: 'All Variants with Font Families',
+};
+
 export const FontStyleStory: Story = {
   render: () => (
     <View>
