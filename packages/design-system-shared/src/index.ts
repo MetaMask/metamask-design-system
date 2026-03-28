@@ -25,6 +25,9 @@ export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 // AvatarNetwork types (ADR-0004)
 export { type AvatarNetworkPropsShared } from './types/AvatarNetwork';
 
+// AvatarToken types (ADR-0004)
+export { type AvatarTokenPropsShared } from './types/AvatarToken';
+
 // BannerAlert types (ADR-0003 + ADR-0004)
 export {
   BannerAlertSeverity,
