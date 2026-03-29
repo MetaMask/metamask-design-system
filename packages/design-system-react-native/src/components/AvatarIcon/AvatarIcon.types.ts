@@ -1,17 +1,12 @@
-import type { AvatarIconSeverity } from '../../types';
+import type { AvatarIconPropsShared } from '@metamask/design-system-shared';
+
 import type { AvatarBaseProps } from '../AvatarBase';
 import type { IconName, IconProps } from '../Icon';
 
 /**
  * AvatarIcon component props.
  */
-export type AvatarIconProps = {
-  /**
-   * Optional prop to control the severity of the avatar
-   *
-   * @default AvatarIconSeverity.Neutral
-   */
-  severity?: AvatarIconSeverity;
+export type AvatarIconProps = AvatarIconPropsShared & {
   /**
    * Optional prop to specify an icon to show
    */
