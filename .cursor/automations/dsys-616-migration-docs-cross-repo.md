@@ -12,6 +12,43 @@ Automate Jira progress for DSYS-616 Stories only when required PRs are merged ac
 
 This avoids premature closure when only one repo merged.
 
+## Breaking-Change Quality Gate
+
+To ensure Cursor reliably identifies breaking changes between Extension/Mobile and MMDS React/RN, require this comparison workflow for every Story:
+
+1. Read legacy component API surfaces in both app repos (Extension + Mobile when in scope):
+   - prop types/interfaces,
+   - enum/union values,
+   - defaults and required props,
+   - event callback signatures.
+2. Read MMDS target APIs in both packages:
+   - `@metamask/design-system-react`
+   - `@metamask/design-system-react-native`
+3. Produce a structured diff table with exact categories:
+   - removed props,
+   - renamed props,
+   - type/value changes,
+   - default-value changes,
+   - behavioral differences (if documented in source/docs).
+4. Require migration docs to include:
+   - a breaking-changes section,
+   - API mapping table,
+   - before/after examples for Extension and Mobile.
+5. If comparison data is incomplete for either platform, stop and report the missing source files instead of guessing.
+
+## Golden Paths (Migration Docs)
+
+Use these merged PRs as canonical examples for doc quality and cross-platform mapping depth:
+
+- **Text + Box**: [PR #953](https://github.com/MetaMask/metamask-design-system/pull/953)
+  - commit: `2ec0c688` (`docs: add Text migration docs for mobile and extension`)
+  - includes `#text-component` and `#box-component` migration sections.
+- **Icon**: [PR #962](https://github.com/MetaMask/metamask-design-system/pull/962)
+  - commit: `899bd370` (`docs: add Icon migration docs for mobile and extension`)
+  - includes `#icon-component` migration sections.
+
+Automation should explicitly reference these PRs in its prompt as style/coverage benchmarks.
+
 ## Why Scheduled (not only GitHub trigger)
 
 A single GitHub trigger run is scoped to one merged PR event. DSYS-616 Stories often depend on multiple repos, so a reliable closer should evaluate aggregate merge state.
