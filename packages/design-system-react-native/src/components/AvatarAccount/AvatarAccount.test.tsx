@@ -18,6 +18,14 @@ jest.mock('react-native-jazzicon', () => {
   return jest.fn(() => null);
 });
 
+const AVATAR_SIZE_PX_MAP: Record<AvatarAccountSize, number> = {
+  [AvatarAccountSize.Xs]: 16,
+  [AvatarAccountSize.Sm]: 24,
+  [AvatarAccountSize.Md]: 32,
+  [AvatarAccountSize.Lg]: 40,
+  [AvatarAccountSize.Xl]: 48,
+};
+
 describe('AvatarAccount', () => {
   it('renders Jazzicon by default when no variant is provided', async () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
@@ -69,10 +77,10 @@ describe('AvatarAccount', () => {
     const avatarAccount = getByTestId('avatar-account');
     expect(avatarAccount).toBeDefined();
     expect(avatarAccount.props.style[0].width).toStrictEqual(
-      Number(AvatarAccountSize.Md),
+      AVATAR_SIZE_PX_MAP[AvatarAccountSize.Md],
     );
     expect(avatarAccount.props.style[0].height).toStrictEqual(
-      Number(AvatarAccountSize.Md),
+      AVATAR_SIZE_PX_MAP[AvatarAccountSize.Md],
     );
   });
 
@@ -92,10 +100,10 @@ describe('AvatarAccount', () => {
     const avatarAccount = getByTestId('avatar-account');
     expect(avatarAccount).toBeDefined();
     expect(avatarAccount.props.style[0].width).toStrictEqual(
-      Number(AvatarAccountSize.Xl),
+      AVATAR_SIZE_PX_MAP[AvatarAccountSize.Xl],
     );
     expect(avatarAccount.props.style[0].height).toStrictEqual(
-      Number(AvatarAccountSize.Xl),
+      AVATAR_SIZE_PX_MAP[AvatarAccountSize.Xl],
     );
   });
 
