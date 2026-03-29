@@ -26,10 +26,16 @@ Do not perform usage replacement inside `ui/components/component-library`.
 
 ## Required Tools
 
-- MCP server
-- GitHub MCP
+- GitHub built-in tools:
+  - Open pull request
+  - Comment on pull request
 - Atlassian/Jira MCP
-- Open pull request
+- MCP server connector configured for Atlassian
+
+## GitHub Author
+
+- Open PR as GitHub user `{githubusername}`.
+- If `{githubusername}` is not explicitly set in automation context, infer it from the signed-in Cursor account and use that value consistently for PR authoring.
 
 ## Trigger/Input
 
@@ -60,6 +66,8 @@ Only run when docs version is newer than the last processed version.
 
 ```text
 Goal: In extension, replace one legacy {ComponentName} usage and update @deprecated JSDoc using latest MMDS migration docs.
+
+0) Open PR as GitHub user {githubusername}. If not explicitly set, infer from signed-in Cursor account.
 
 1) Resolve DSYS story + component via Fixes key.
 2) Fetch latest MMDS migration docs and MIGRATION_DOCS_VERSION.

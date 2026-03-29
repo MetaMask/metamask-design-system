@@ -31,10 +31,16 @@ Folder structures may vary by component, but searches should start in these root
 
 ## Required Tools
 
-- MCP server
-- GitHub MCP
+- GitHub built-in tools:
+  - Open pull request
+  - Comment on pull request
 - Atlassian/Jira MCP
-- Open pull request
+- MCP server connector configured for Atlassian
+
+## GitHub Author
+
+- Open PR as GitHub user `{githubusername}`.
+- If `{githubusername}` is not explicitly set in automation context, infer it from the signed-in Cursor account and use that value consistently for PR authoring.
 
 ## Golden Paths
 
@@ -50,6 +56,17 @@ For every run, compare legacy vs MMDS APIs before editing docs:
 3. Produce a structured mapping in docs: removed, renamed, type/value changes, default changes, behavior notes.
 4. Include before/after examples for extension and mobile.
 5. If source comparison is incomplete, stop and report missing files.
+
+## Required Deliverables (Docs Story)
+
+For component docs stories (for example DSYS-632 style work), completion requires all of:
+
+1. React migration section in `packages/design-system-react/MIGRATION.md`.
+2. React Native migration section in `packages/design-system-react-native/MIGRATION.md`.
+3. React component README migration link in `packages/design-system-react/src/components/{ComponentName}/README.mdx`.
+4. React Native component README migration link in `packages/design-system-react-native/src/components/{ComponentName}/README.md`.
+
+Do not treat MIGRATION-only edits as complete when README files exist for the component.
 
 ## Audit Procedure (File-Based, Not Memory-Based)
 
@@ -84,14 +101,20 @@ Use `MIGRATION_DOCS_VERSION` in PR body/comments (for example commit SHA of docs
 ```text
 Goal: Create/update migration docs for one component and keep them accurate using client feedback.
 
+0) Open PR as GitHub user {githubusername}. If not explicitly set, infer from signed-in Cursor account.
+
 1) Pick DSYS-616 story + component from Jira.
 2) Enforce breaking-change quality gate by comparing extension/mobile legacy APIs with MMDS React/RN APIs.
-3) Update migration docs and examples.
-4) Open or update PR with:
+3) Update migration docs and examples in both React and React Native MIGRATION.md.
+4) Update component README migration links in both packages when README files exist:
+   - React: packages/design-system-react/src/components/{ComponentName}/README.mdx
+   - React Native: packages/design-system-react-native/src/components/{ComponentName}/README.md
+5) If README files exist but are not updated, stop and report incomplete deliverables.
+6) Open or update PR with:
    - title: chore: [DSYS-616] create/update {ComponentName} migration docs
    - body includes: Fixes: DSYS-<story-number>
    - include MIGRATION_DOCS_VERSION marker.
-5) Scan DSYS-616 client PRs in extension/mobile for "Migration doc discrepancies found".
-6) If discrepancies are present, patch docs, update the same PR, and comment back with the docs-fix link.
-7) Output summary: story key, component, docs version, discrepancy actions taken.
+7) Scan DSYS-616 client PRs in extension/mobile for "Migration doc discrepancies found".
+8) If discrepancies are present, patch docs, update the same PR, and comment back with the docs-fix link.
+9) Output summary: story key, component, docs version, files updated (including README links), discrepancy actions taken.
 ```
