@@ -12,7 +12,6 @@ This guide provides detailed instructions for migrating your project from one ve
 - [Version Updates](#version-updates)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
-  - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## From Mobile Component Library
@@ -386,6 +385,77 @@ import { TextButton, TextVariant } from '@metamask/design-system-react-native';
 
 `TextButton` is intended for inline links without icons. If you relied on start or end icons or accessories, migrate to [`Button`](./src/components/Button/README.md) with `variant={ButtonVariant.Tertiary}`, which supports those props. For disabled or inverse patterns previously handled by `isDisabled` or `isInverse`, use conditional styling, [`Text`](./src/components/Text/README.md) when you need full control over color and press behavior, or `Button` tertiary when that component’s props match your needs.
 
+### TextField
+
+`TextField` no longer exposes multiple row heights, and `Input` applies `textVariant` sizing without Tailwind `text-*` line heights so single-line text aligns consistently (especially on iOS).
+
+#### Breaking Changes
+
+##### `TextFieldSize` and `size` prop
+
+The `TextField` row is fixed at **48px** (`h-12`) with a single-line inner `Input`. The `size` prop and `TextFieldSize` enum are removed.
+
+| Previous (0.11.0)                         | Current (0.12.0+)                                                                                |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `size={TextFieldSize.Sm}` (32px)          | Remove `size`; use `twClassName` / `style` on the field if you need extra outer vertical spacing |
+| `size={TextFieldSize.Md}` (40px, default) | Remove `size`; default row is 48px                                                               |
+| `size={TextFieldSize.Lg}` (48px)          | Remove `size`; 48px is now the only built-in height                                              |
+| `import { TextFieldSize } from '…'`       | Drop the import; `TextFieldSize` is no longer exported                                           |
+
+##### Package exports
+
+| Previous (0.11.0)                       | Current (0.12.0+)             |
+| --------------------------------------- | ----------------------------- |
+| `export { TextField, TextFieldSize } …` | `export { TextField } …` only |
+
+#### Migration Examples
+
+##### Before (0.11.0)
+
+```tsx
+import { TextField, TextFieldSize } from '@metamask/design-system-react-native';
+
+<TextField
+  value={email}
+  onChangeText={setEmail}
+  placeholder="Email"
+  size={TextFieldSize.Sm}
+/>
+
+<TextField
+  value={name}
+  onChangeText={setName}
+  placeholder="Name"
+  size={TextFieldSize.Md}
+/>
+```
+
+##### After (0.12.0)
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField
+  value={email}
+  onChangeText={setEmail}
+  placeholder="Email"
+/>
+
+<TextField
+  value={name}
+  onChangeText={setName}
+  placeholder="Name"
+/>
+```
+
+#### Styling and layout notes
+
+These are not separate props, but visuals changed compared to 0.11.0:
+
+- TextField container uses **`bg-muted`** and **state-based borders** (muted at rest and when disabled; default border when focused; error colors when `isError`, including primary border when focused and error).
+- Start/end accessories are spaced from the input with **`gap-3`** on the row container (put `testID` on the accessory or your own wrapper for E2E).
+- Inner `Input` is forced **single-line** (`multiline={false}`).
+
 ## From version 0.10.0 to 0.11.0
 
 ### ButtonIcon Variant Prop
@@ -508,79 +578,6 @@ const [email, setEmail] = useState('');
   onChange={setEmail}
 />;
 ```
-
-## From version 0.11.0 to 0.12.0
-
-### TextField
-
-`TextField` no longer exposes multiple row heights, and `Input` applies `textVariant` sizing without Tailwind `text-*` line heights so single-line text aligns consistently (especially on iOS).
-
-#### Breaking Changes
-
-##### `TextFieldSize` and `size` prop
-
-The `TextField` row is fixed at **48px** (`h-12`) with a single-line inner `Input`. The `size` prop and `TextFieldSize` enum are removed.
-
-| Previous (0.11.0)                         | Current (0.12.0+)                                                                                |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `size={TextFieldSize.Sm}` (32px)          | Remove `size`; use `twClassName` / `style` on the field if you need extra outer vertical spacing |
-| `size={TextFieldSize.Md}` (40px, default) | Remove `size`; default row is 48px                                                               |
-| `size={TextFieldSize.Lg}` (48px)          | Remove `size`; 48px is now the only built-in height                                              |
-| `import { TextFieldSize } from '…'`       | Drop the import; `TextFieldSize` is no longer exported                                           |
-
-##### Package exports
-
-| Previous (0.11.0)                       | Current (0.12.0+)             |
-| --------------------------------------- | ----------------------------- |
-| `export { TextField, TextFieldSize } …` | `export { TextField } …` only |
-
-#### Migration Examples
-
-##### Before (0.11.0)
-
-```tsx
-import { TextField, TextFieldSize } from '@metamask/design-system-react-native';
-
-<TextField
-  value={email}
-  onChangeText={setEmail}
-  placeholder="Email"
-  size={TextFieldSize.Sm}
-/>
-
-<TextField
-  value={name}
-  onChangeText={setName}
-  placeholder="Name"
-  size={TextFieldSize.Md}
-/>
-```
-
-##### After (0.12.0)
-
-```tsx
-import { TextField } from '@metamask/design-system-react-native';
-
-<TextField
-  value={email}
-  onChangeText={setEmail}
-  placeholder="Email"
-/>
-
-<TextField
-  value={name}
-  onChangeText={setName}
-  placeholder="Name"
-/>
-```
-
-#### Styling and layout notes
-
-These are not separate props, but visuals changed compared to 0.11.0:
-
-- TextField container uses **`bg-muted`** and **state-based borders** (muted at rest and when disabled; default border when focused; error colors when `isError`, including primary border when focused and error).
-- Start/end accessories are spaced from the input with **`gap-3`** on the row container (put `testID` on the accessory or your own wrapper for E2E).
-- Inner `Input` is forced **single-line** (`multiline={false}`).
 
 ## From version 0.1.0 to 0.2.0
 
