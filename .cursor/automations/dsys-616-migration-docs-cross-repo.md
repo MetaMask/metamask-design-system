@@ -116,7 +116,7 @@ For each Story:
 After Story updates, evaluate epic:
 
 ```jql
-parent = DSYS-616 AND statusCategory != Done
+parent = DSYS-616 AND issuetype = Story AND statusCategory != Done
 ```
 
 - If zero remaining, transition **DSYS-616** to Done and comment summary.
@@ -167,7 +167,7 @@ Use MCP tools only (Atlassian + GitHub).
 
 3) After processing Stories:
    - Query remaining:
-     parent = DSYS-616 AND statusCategory != Done
+     parent = DSYS-616 AND issuetype = Story AND statusCategory != Done
    - If none remain, transition DSYS-616 to Done and comment with summary.
 
 4) Output concise run summary:
