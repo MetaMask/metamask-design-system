@@ -1,3 +1,7 @@
+import {
+  BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
+} from '@metamask/design-system-shared';
 import type { CSSProperties } from 'react';
 import React, {
   forwardRef,
@@ -7,10 +11,6 @@ import React, {
   useRef,
 } from 'react';
 
-import {
-  BadgeWrapperPosition,
-  BadgeWrapperPositionAnchorShape,
-} from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 
 import type { BadgeWrapperProps } from './BadgeWrapper.types';

@@ -30,3 +30,11 @@ export {
   BannerAlertSeverity,
   type BannerAlertPropsShared,
 } from './types/BannerAlert';
+
+// BadgeWrapper types (ADR-0003 + ADR-0004)
+export {
+  BadgeWrapperPositionAnchorShape,
+  BadgeWrapperPosition,
+  type BadgeWrapperCustomPosition,
+  type BadgeWrapperPropsShared,
+} from './types/BadgeWrapper';
