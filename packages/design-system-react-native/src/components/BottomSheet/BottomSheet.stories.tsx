@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useRef, useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import { BottomSheetFooter } from '../BottomSheetFooter';
 import { BottomSheetHeader } from '../BottomSheetHeader';
@@ -130,5 +131,64 @@ export const ImperativeControl: Story = {
   render: (args) => <ImperativeControlTemplate {...args} />,
   args: {
     isInteractable: true,
+  },
+};
+
+const ScrollableListTemplate = (args: BottomSheetProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const listGestureRef = useRef(null);
+  const goBack = () => setIsVisible(false);
+
+  return (
+    <View style={{ flex: 1, width: '100%' }}>
+      <Button
+        variant={ButtonVariant.Primary}
+        onPress={() => setIsVisible(true)}
+        twClassName="mb-4"
+      >
+        Open Scrollable BottomSheet
+      </Button>
+      {isVisible && (
+        <BottomSheet
+          {...args}
+          goBack={goBack}
+          shouldNavigateBack={false}
+          onClose={goBack}
+          panGestureHandlerProps={{
+            simultaneousHandlers:
+              Platform.OS === 'android' ? listGestureRef : undefined,
+          }}
+          isFullscreen
+        >
+          <BottomSheetHeader onClose={goBack}>
+            Scrollable BottomSheet
+          </BottomSheetHeader>
+          <ScrollView
+            ref={listGestureRef}
+            style={{ maxHeight: 420 }}
+            contentContainerStyle={{ paddingBottom: 24 }}
+          >
+            {Array.from({ length: 20 }).map((_, index) => (
+              <Box key={`bottom-sheet-item-${index}`} twClassName="px-4 py-3">
+                <Text>{`List item ${index + 1}`}</Text>
+              </Box>
+            ))}
+          </ScrollView>
+          <BottomSheetFooter
+            secondaryButtonProps={{ children: 'Cancel', onPress: goBack }}
+            primaryButtonProps={{ children: 'Done', onPress: goBack }}
+          />
+        </BottomSheet>
+      )}
+    </View>
+  );
+};
+
+export const ScrollableList: Story = {
+  render: (args) => <ScrollableListTemplate {...args} />,
+  args: {
+    isInteractable: true,
+    isFullscreen: true,
+    keyboardAvoidingViewEnabled: true,
   },
 };
