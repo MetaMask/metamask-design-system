@@ -1,6 +1,6 @@
 # BoxHorizontal
 
-BoxHorizontal lays out optional start and end accessories with a text or child region in a horizontal row. The public API combines [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.tsx) (`children`, `textProps` for the middle) with a root [Box](../Box/Box.tsx): `flexDirection` is always row; `alignItems` defaults to center and `gap` defaults to `1`, and both can be overridden. Other [Box](../Box.types.ts) layout and `View` props apply to that root.
+BoxHorizontal lays out optional start and end accessories with a text or child region in a horizontal row. The public API combines [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.tsx) (`children`, `textProps` for the middle) with a root [Box](../Box/Box.tsx): `flexDirection` is always row; `alignItems` defaults to center and `gap` defaults to `1`, and both can be overridden. Other [Box](../Box/Box.types.ts) layout and `View` props apply to that root.
 
 ```tsx
 import { BoxHorizontal } from '@metamask/design-system-react-native';
@@ -10,7 +10,7 @@ import { BoxHorizontal } from '@metamask/design-system-react-native';
 
 ## Props
 
-`BoxHorizontalProps` intersects [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.types.ts) with [Box](../Box/Box.types.ts) props, omitting Box `children` and `flexDirection` so the type matches the implementation: main content is always the `children` / `textProps` pair above, and the row direction is fixed. `alignItems` defaults to center but you can pass `alignItems` on the root to override alignment.
+Structural props (`children`, accessories) match `BoxHorizontalPropsShared` from `@metamask/design-system-shared` (ADR-0004); React Native intersects that with [Box](../Box/Box.types.ts) (omitting Box `children` and `flexDirection`) and adds `textProps` for [Text](../Text/Text.tsx). Main content is always the `children` / `textProps` pair above, and the row direction is fixed. `alignItems` defaults to center but you can pass `alignItems` on the root to override alignment.
 
 ### `children`
 

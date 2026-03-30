@@ -1,19 +1,15 @@
-import type { ReactNode } from 'react';
+import type { BoxVerticalPropsShared } from '@metamask/design-system-shared';
 
 import type { BoxProps } from '../Box/Box.types';
-import type { TextOrChildrenProps } from '../temp-components/TextOrChildren/TextOrChildren.types';
+import type { TextProps } from '../Text';
 
 /**
  * BoxVertical component props.
  */
-export type BoxVerticalProps = TextOrChildrenProps &
+export type BoxVerticalProps = BoxVerticalPropsShared &
   Omit<BoxProps, 'children' | 'flexDirection'> & {
     /**
-     * Optional node rendered above the text/children.
+     * Optional props passed to `Text` when `children` is a string.
      */
-    topAccessory?: ReactNode;
-    /**
-     * Optional node rendered below the text/children.
-     */
-    bottomAccessory?: ReactNode;
+    textProps?: Omit<Partial<TextProps>, 'children'>;
   };

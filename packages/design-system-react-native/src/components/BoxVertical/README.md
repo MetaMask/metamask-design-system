@@ -1,6 +1,6 @@
 # BoxVertical
 
-BoxVertical lays out optional top and bottom accessories with a text or child region in a vertical column. The public API combines [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.tsx) (`children`, `textProps` for the middle) with a root [Box](../Box/Box.tsx): `flexDirection` is always column. Other [Box](../Box.types.ts) layout and `View` props apply to that root.
+BoxVertical lays out optional top and bottom accessories with a text or child region in a vertical column. The public API combines [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.tsx) (`children`, `textProps` for the middle) with a root [Box](../Box/Box.tsx): `flexDirection` is always column. Other [Box](../Box/Box.types.ts) layout and `View` props apply to that root.
 
 ```tsx
 import { BoxVertical } from '@metamask/design-system-react-native';
@@ -10,7 +10,7 @@ import { BoxVertical } from '@metamask/design-system-react-native';
 
 ## Props
 
-`BoxVerticalProps` intersects [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.types.ts) with [Box](../Box/Box.types.ts) props, omitting Box `children` and `flexDirection` so the type matches the implementation: main content is always the `children` / `textProps` pair below, and the column direction is fixed.
+Structural props (`children`, accessories) match `BoxVerticalPropsShared` from `@metamask/design-system-shared` (ADR-0004); React Native intersects that with [Box](../Box/Box.types.ts) (omitting Box `children` and `flexDirection`) and adds `textProps` for [Text](../Text/Text.tsx). Main content is always the `children` / `textProps` pair below, and the column direction is fixed.
 
 ### `children`
 

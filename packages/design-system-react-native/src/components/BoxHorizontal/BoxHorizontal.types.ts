@@ -1,19 +1,15 @@
-import type { ReactNode } from 'react';
+import type { BoxHorizontalPropsShared } from '@metamask/design-system-shared';
 
 import type { BoxProps } from '../Box/Box.types';
-import type { TextOrChildrenProps } from '../temp-components/TextOrChildren/TextOrChildren.types';
+import type { TextProps } from '../Text';
 
 /**
  * BoxHorizontal component props.
  */
-export type BoxHorizontalProps = TextOrChildrenProps &
+export type BoxHorizontalProps = BoxHorizontalPropsShared &
   Omit<BoxProps, 'children' | 'flexDirection'> & {
     /**
-     * Optional node rendered before the text/children (e.g. icon, avatar).
+     * Optional props passed to `Text` when `children` is a string.
      */
-    startAccessory?: ReactNode;
-    /**
-     * Optional node rendered after the text/children (e.g. icon, badge).
-     */
-    endAccessory?: ReactNode;
+    textProps?: Omit<Partial<TextProps>, 'children'>;
   };
