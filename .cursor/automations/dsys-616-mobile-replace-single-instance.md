@@ -67,7 +67,9 @@ Use client PR body marker as the source of truth:
 ## Execution Rules
 
 1. Read latest MMDS migration docs for `{ComponentName}`.
-2. Update `@deprecated` JSDoc on legacy mobile component entry points with migration link.
+2. Update `@deprecated` JSDoc on legacy mobile component entry points using exactly two `@see` links:
+   - MMDS RN README: `https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/{ComponentName}/README.md`
+   - MMDS RN migration guide anchor: `https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#{component-anchor}`
 3. Replace exactly one production usage (not tests/stories) of legacy component with MMDS component under `app/components`.
 4. Record any doc discrepancy in PR body under section:
    - `Migration doc discrepancies found`
@@ -80,6 +82,7 @@ Use client PR body marker as the source of truth:
 - If zero safe candidates, stop and report.
 - If migration docs are ambiguous, report discrepancy instead of guessing.
 - If no valid MMDS docs PR candidate is found, exit silently (no PR comments).
+- If deprecated JSDoc does not contain exactly the two required `@see` links, stop and report.
 
 ## Cloud Automation Prompt
 
@@ -96,7 +99,9 @@ Goal: In mobile, replace one legacy {ComponentName} usage and update @deprecated
 1) Resolve DSYS story + component from selected MMDS docs PR.
 2) Fetch latest MMDS migration docs and MIGRATION_DOCS_VERSION.
 3) If docs version is not newer than last processed for this story, exit.
-4) Update @deprecated JSDoc links for legacy mobile entry points.
+4) Update @deprecated JSDoc links for legacy mobile entry points with exactly:
+   - @see {link https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/{ComponentName}/README.md | MMDS README}
+   - @see {link https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#{component-anchor} | Migration Guide}
 5) Replace exactly one production usage (exclude tests/stories).
 6) If docs are unclear or incorrect, add details to "Migration doc discrepancies found" in PR body.
 7) Open/update draft PR with:
