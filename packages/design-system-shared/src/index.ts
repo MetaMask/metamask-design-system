@@ -19,6 +19,15 @@ export {
 // BannerBase types (ADR-0004)
 export { type BannerBasePropsShared } from './types/BannerBase';
 
+// TextOrChildren types (ADR-0004)
+export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
+
+// BoxHorizontal types (ADR-0004)
+export { type BoxHorizontalPropsShared } from './types/BoxHorizontal';
+
+// BoxVertical types (ADR-0004)
+export { type BoxVerticalPropsShared } from './types/BoxVertical';
+
 // ButtonFilter types (ADR-0004)
 export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 
