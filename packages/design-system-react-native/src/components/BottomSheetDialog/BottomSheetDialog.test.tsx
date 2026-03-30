@@ -23,7 +23,16 @@ type GestureHandlers = Record<string, GestureCallback>;
 const gestureCallbacksRef: { current: GestureHandlers } = { current: {} };
 
 jest.mock('react-native-gesture-handler', () => ({
-  PanGestureHandler: ({ children }: { children: React.ReactNode }) => children,
+  PanGestureHandler: ({
+    children,
+    ...props
+  }: {
+    children: React.ReactNode;
+  }) => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { View } = require('react-native');
+    return <View {...props}>{children}</View>;
+  },
   GestureHandlerRootView: 'View',
   State: {},
   Directions: {},
@@ -244,6 +253,18 @@ describe('BottomSheetDialog', () => {
       </BottomSheetDialog>,
     );
     expect(getByText('Custom Style')).toBeDefined();
+  });
+
+  it('passes props to PanGestureHandler via panGestureHandlerProps', () => {
+    const { getByTestId } = render(
+      <BottomSheetDialog
+        panGestureHandlerProps={{ testID: 'pan-gesture-handler' }}
+      >
+        <Text>Test Child</Text>
+      </BottomSheetDialog>,
+    );
+
+    expect(getByTestId('pan-gesture-handler')).toBeDefined();
   });
 
   it('triggers onOpenDialog on first layout event', () => {
