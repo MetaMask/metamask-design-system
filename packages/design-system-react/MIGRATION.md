@@ -8,6 +8,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From Extension Component Library](#from-extension-component-library)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
+  - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
@@ -180,6 +181,83 @@ import {
   title="Warning"
   actionButtonLabel="Action"
   actionButtonOnClick={() => undefined}
+/>;
+```
+
+### BannerBase Component
+
+The extension `banner-base` maps to `BannerBase` in the design system, but action and close affordance APIs changed in ways that can break existing usage.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration behavior.
+
+#### Breaking Changes
+
+##### Removed / No Direct Equivalent
+
+| Legacy Extension API | MMDS Status | Migration |
+| -------------------- | ----------- | --------- |
+| `actionButtonLabel` used without `actionButtonOnClick` | No longer renders an action button | Provide both `actionButtonLabel` and `actionButtonOnClick` |
+| Link-like action through `ButtonLink` props such as `href`, `target`, `rel` in `actionButtonProps` | No direct equivalent on `BannerBase` action button | Move link behavior into banner content (for example, a link in `children`) or handle navigation in `actionButtonOnClick` |
+
+##### Renamed Props
+
+No direct prop renames were introduced for extension-to-MMDS `BannerBase`.
+
+##### Type and Callback Signature Changes
+
+| Legacy Extension API | MMDS API | Notes |
+| -------------------- | -------- | ----- |
+| `title?: string` | `title?: ReactNode` | MMDS now accepts full React node content |
+| `description?: string` | `description?: ReactNode` | MMDS now accepts full React node content |
+| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>` | MMDS action button is a `Button`, not a `ButtonLink` |
+| `onClose?: (e: React.MouseEvent<HTMLElement>) => void` | `onClose?: MouseEventHandler<HTMLButtonElement>` | Close callback target is now the close button element |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>` | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'> & { onClick?: MouseEventHandler<HTMLButtonElement> }` | `iconName` remains fixed to close icon |
+
+##### Default and Behavior Changes
+
+| Legacy Extension Behavior | MMDS Behavior |
+| ------------------------- | ------------- |
+| Action button defaults to `ButtonLink` semantics and `ButtonLinkSize.Auto` | Action button is `Button` with default `ButtonSize.Md` |
+| Close button renders only when `onClose` is provided | Close button renders when `onClose` **or** `closeButtonProps` is provided |
+| Close button `ariaLabel` defaults to translated `t('close')` | Close button `ariaLabel` defaults to `'Close banner'` (override with `closeButtonProps.ariaLabel`) |
+| String/number `children` are wrapped in extension `Text` defaults | String/number `children` are wrapped in MMDS `Text` with `TextVariant.BodyMd` |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { BannerBase } from '../../component-library/banner-base';
+
+<BannerBase
+  title="Your account needs attention"
+  description="Review the latest activity and confirm your settings."
+  actionButtonLabel="Review"
+  actionButtonOnClick={() => {
+    /* handle review */
+  }}
+  onClose={() => {
+    /* dismiss banner */
+  }}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { BannerBase } from '@metamask/design-system-react';
+
+<BannerBase
+  title="Your account needs attention"
+  description="Review the latest activity and confirm your settings."
+  actionButtonLabel="Review"
+  actionButtonOnClick={() => {
+    /* handle review */
+  }}
+  onClose={() => {
+    /* dismiss banner */
+  }}
+  closeButtonProps={{ 'data-testid': 'banner-base-close-button' }}
 />;
 ```
 
