@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: reapply semibold font weight updates with latest Expo font conventions ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017))
+
 ## [8.2.2]
 
 ### Changed

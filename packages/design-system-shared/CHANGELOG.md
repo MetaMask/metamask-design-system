@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: migrate BadgeWrapper to ADR-0003 and ADR-0004 shared types (DSYS-468) ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014))
+
 ## [0.5.0]
 
 ### Added

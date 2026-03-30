@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: reapply semibold font weight updates with latest Expo font conventions ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017))
+- chore: [DSYS-616] create/update Button migration docs ([#999](https://github.com/MetaMask/metamask-design-system/pull/999))
+- feat: migrate BadgeWrapper to ADR-0003 and ADR-0004 shared types (DSYS-468) ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014))
+
 ## [0.12.0]
 
 ### Added
