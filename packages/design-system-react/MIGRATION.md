@@ -7,6 +7,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
 - [General Extension Migration Guidance](#general-extension-migration-guidance)
 - [From Extension Component Library](#from-extension-component-library)
+  - [Button Component](#button-component)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [Text Component](#text-component)
@@ -71,6 +72,112 @@ When migrating any extension component, apply this guidance first, then use the 
 ## From Extension Component Library
 
 This section covers migrating components from MetaMask Extension's `ui/components/component-library` to `@metamask/design-system-react`.
+
+### Button Component
+
+The Button component has significant breaking changes when migrating from the extension component-library. The new design system `Button` replaces the old generic `Button` (for Primary and Secondary variants). The old `Link` variant should use `ButtonLink` or the `TextButton` component instead.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                         | Design System Migration                                         |
+| --------------------------------------------------------- | --------------------------------------------------------------- |
+| `import { Button } from '../../component-library'`        | `import { Button } from '@metamask/design-system-react'`        |
+| `import { ButtonVariant } from '../../component-library'` | `import { ButtonVariant } from '@metamask/design-system-react'` |
+| `import { ButtonSize } from '../../component-library'`    | `import { ButtonSize } from '@metamask/design-system-react'`    |
+
+##### Variant Enum
+
+The extension already uses `ButtonVariant` (singular) with lowercase values. The `Link` variant is removed from the design system `Button` — use `TextButton` instead.
+
+| Extension Value                           | Design System Value                       | Notes              |
+| ----------------------------------------- | ----------------------------------------- | ------------------ |
+| `ButtonVariant.Primary` (`'primary'`)     | `ButtonVariant.Primary` (`'primary'`)     | unchanged          |
+| `ButtonVariant.Secondary` (`'secondary'`) | `ButtonVariant.Secondary` (`'secondary'`) | unchanged          |
+| `ButtonVariant.Link` (`'link'`)           | Use `TextButton` component                | separate component |
+| —                                         | `ButtonVariant.Tertiary` (`'tertiary'`)   | new variant        |
+
+##### Size Enum
+
+| Extension Value                    | Design System Value      | Notes            |
+| ---------------------------------- | ------------------------ | ---------------- |
+| `ButtonSize.Sm` (`'sm'`)           | `ButtonSize.Sm` (`'sm'`) | unchanged        |
+| `ButtonSize.Md` (`'md'`)           | `ButtonSize.Md` (`'md'`) | unchanged        |
+| `ButtonSize.Lg` (`'lg'`)           | `ButtonSize.Lg` (`'lg'`) | unchanged        |
+| `ButtonSize.Inherit` (`'inherit'`) | Removed                  | use default size |
+| `ButtonSize.Auto` (`'auto'`)       | Removed                  | use default size |
+
+##### Content Model
+
+The extension Button uses `children` (same as design system) — no change needed.
+
+##### State Props
+
+| Extension Prop | Design System Prop | Notes   |
+| -------------- | ------------------ | ------- |
+| `disabled`     | `isDisabled`       | renamed |
+| `loading`      | `isLoading`        | renamed |
+| `block`        | `isFullWidth`      | renamed |
+| `danger`       | `isDanger`         | renamed |
+
+##### Removed Props
+
+| Extension Prop     | Design System Migration                         |
+| ------------------ | ----------------------------------------------- |
+| `as` (polymorphic) | Removed — Button is always a `<button>` element |
+| `href`             | Removed — use `<a>` wrapper or `ButtonLink`     |
+| `externalLink`     | Removed — use `<a target="_blank">` wrapper     |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Button, ButtonVariant, ButtonSize } from '../../component-library';
+
+<Button
+  variant={ButtonVariant.Primary}
+  size={ButtonSize.Lg}
+  block
+  onClick={handleSubmit}
+  disabled={!isValid}
+  loading={isSubmitting}
+>
+  Submit
+</Button>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  Button,
+  ButtonVariant,
+  ButtonSize,
+} from '@metamask/design-system-react';
+
+<Button
+  variant={ButtonVariant.Primary}
+  size={ButtonSize.Lg}
+  isFullWidth
+  onClick={handleSubmit}
+  isDisabled={!isValid}
+  isLoading={isSubmitting}
+>
+  Submit
+</Button>;
+```
+
+#### API Differences
+
+The design system Button adds these props:
+
+- `isDanger` — destructive action styling (replaces `danger`)
+- `isInverse` — inverted colors for colored backgrounds
+- `startIconName` / `endIconName` — icon names for leading/trailing icons
+- `loadingText` — custom text during loading state
+- `className` — Tailwind utility class overrides (merged via `twMerge`)
 
 ### Box Component
 

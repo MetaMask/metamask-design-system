@@ -5,6 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [From Mobile Component Library](#from-mobile-component-library)
+  - [Button Component](#button-component)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [Text Component](#text-component)
@@ -17,6 +18,230 @@ This guide provides detailed instructions for migrating your project from one ve
 ## From Mobile Component Library
 
 This section covers migrating components from MetaMask Mobile's `app/component-library` to `@metamask/design-system-react-native`.
+
+### Button Component
+
+The Button component has significant breaking changes when migrating from the mobile component-library. The new design system `Button` replaces both the old generic `Button` (for Primary and Secondary variants) and introduces a separate `TextButton` component for the old Link variant.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                       | Design System Migration                                                |
+| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `import Button from '.../component-library/components/Buttons/Button'`               | `import { Button } from '@metamask/design-system-react-native'`        |
+| `import { ButtonVariants } from '.../component-library/components/Buttons/Button'`   | `import { ButtonVariant } from '@metamask/design-system-react-native'` |
+| `import { ButtonSize } from '.../component-library/components/Buttons/Button'`       | `import { ButtonSize } from '@metamask/design-system-react-native'`    |
+| `import { ButtonWidthTypes } from '.../component-library/components/Buttons/Button'` | Use `isFullWidth` prop instead (no import needed)                      |
+
+##### Variant Enum
+
+The enum name changes from `ButtonVariants` (plural) to `ButtonVariant` (singular), and values change from PascalCase to lowercase. The `Link` variant is removed — use `TextButton` instead.
+
+| Mobile Value                               | Design System Value                       | Notes              |
+| ------------------------------------------ | ----------------------------------------- | ------------------ |
+| `ButtonVariants.Primary` (`'Primary'`)     | `ButtonVariant.Primary` (`'primary'`)     | casing changed     |
+| `ButtonVariants.Secondary` (`'Secondary'`) | `ButtonVariant.Secondary` (`'secondary'`) | casing changed     |
+| `ButtonVariants.Link` (`'Link'`)           | Use `TextButton` component                | separate component |
+
+##### Size Enum
+
+`ButtonSize` values change from pixel strings to lowercase identifiers. The `Auto` size is removed.
+
+| Mobile Value                 | Design System Value      | Notes            |
+| ---------------------------- | ------------------------ | ---------------- |
+| `ButtonSize.Sm` (`'32'`)     | `ButtonSize.Sm` (`'sm'`) | value changed    |
+| `ButtonSize.Md` (`'40'`)     | `ButtonSize.Md` (`'md'`) | value changed    |
+| `ButtonSize.Lg` (`'48'`)     | `ButtonSize.Lg` (`'lg'`) | value changed    |
+| `ButtonSize.Auto` (`'auto'`) | Removed                  | use default size |
+
+##### Content Model: `label` → `children`
+
+The old Button used a `label` prop (accepting `string | React.ReactNode`). The new Button uses `children`.
+
+| Mobile Pattern                           | Design System Migration                |
+| ---------------------------------------- | -------------------------------------- |
+| `<Button label="Submit" />`              | `<Button>Submit</Button>`              |
+| `<Button label={<Text>Custom</Text>} />` | `<Button><Text>Custom</Text></Button>` |
+| `<Button label={variable} />`            | `<Button>{variable}</Button>`          |
+
+##### Width: `width` → `isFullWidth`
+
+The `ButtonWidthTypes` enum is removed. Full-width is now a boolean prop.
+
+| Mobile Pattern                  | Design System Migration  |
+| ------------------------------- | ------------------------ |
+| `width={ButtonWidthTypes.Full}` | `isFullWidth`            |
+| `width={ButtonWidthTypes.Auto}` | Remove (auto is default) |
+
+##### State Props Renamed
+
+| Mobile Prop  | Design System Prop | Notes     |
+| ------------ | ------------------ | --------- |
+| `disabled`   | `isDisabled`       | renamed   |
+| `loading`    | `isLoading`        | renamed   |
+| `isDisabled` | `isDisabled`       | unchanged |
+
+##### Removed Props
+
+| Mobile Prop        | Design System Migration                           |
+| ------------------ | ------------------------------------------------- |
+| `labelTextVariant` | Removed — the button handles its own text variant |
+
+##### Link Variant → TextButton
+
+The `ButtonVariants.Link` variant does not exist in the new `Button`. Use the `TextButton` component instead.
+
+| Mobile Pattern                                                             | Design System Migration                                                             |
+| -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `import { ButtonVariants } from '.../Button'`                              | `import { TextButton, TextButtonSize } from '@metamask/design-system-react-native'` |
+| `<Button variant={ButtonVariants.Link} label="Learn more" onPress={fn} />` | `<TextButton onPress={fn}>Learn more</TextButton>`                                  |
+| `size={ButtonSize.Lg}` on Link                                             | `size={TextButtonSize.BodyLg}`                                                      |
+| `size={ButtonSize.Sm}` on Link                                             | `size={TextButtonSize.BodySm}`                                                      |
+| `size={ButtonSize.Auto}` on Link                                           | Omit (default)                                                                      |
+
+#### Migration Examples
+
+##### Primary Button
+
+Before (Mobile):
+
+```tsx
+import Button, {
+  ButtonSize,
+  ButtonVariants,
+  ButtonWidthTypes,
+} from '../../../component-library/components/Buttons/Button';
+
+<Button
+  variant={ButtonVariants.Primary}
+  size={ButtonSize.Lg}
+  width={ButtonWidthTypes.Full}
+  label={strings('button.continue')}
+  onPress={handleContinue}
+  loading={isLoading}
+  disabled={isSubmitting}
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  Button,
+  ButtonVariant,
+  ButtonSize,
+} from '@metamask/design-system-react-native';
+
+<Button
+  variant={ButtonVariant.Primary}
+  size={ButtonSize.Lg}
+  isFullWidth
+  onPress={handleContinue}
+  isLoading={isLoading}
+  isDisabled={isSubmitting}
+>
+  {strings('button.continue')}
+</Button>;
+```
+
+##### Secondary Button
+
+Before (Mobile):
+
+```tsx
+<Button
+  variant={ButtonVariants.Secondary}
+  size={ButtonSize.Lg}
+  width={ButtonWidthTypes.Full}
+  label={strings('button.cancel')}
+  onPress={handleCancel}
+/>
+```
+
+After (Design System):
+
+```tsx
+<Button
+  variant={ButtonVariant.Secondary}
+  size={ButtonSize.Lg}
+  isFullWidth
+  onPress={handleCancel}
+>
+  {strings('button.cancel')}
+</Button>
+```
+
+##### Link Button → TextButton
+
+Before (Mobile):
+
+```tsx
+import Button, {
+  ButtonVariants,
+  ButtonSize,
+} from '../../../component-library/components/Buttons/Button';
+
+<Button
+  variant={ButtonVariants.Link}
+  size={ButtonSize.Lg}
+  label={strings('button.learn_more')}
+  onPress={handleLearnMore}
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  TextButton,
+  TextButtonSize,
+} from '@metamask/design-system-react-native';
+
+<TextButton size={TextButtonSize.BodyLg} onPress={handleLearnMore}>
+  {strings('button.learn_more')}
+</TextButton>;
+```
+
+##### Danger Button
+
+Before (Mobile):
+
+```tsx
+<Button
+  variant={ButtonVariants.Primary}
+  label={strings('button.delete')}
+  onPress={handleDelete}
+  isDanger
+/>
+```
+
+After (Design System):
+
+```tsx
+<Button variant={ButtonVariant.Primary} onPress={handleDelete} isDanger>
+  {strings('button.delete')}
+</Button>
+```
+
+#### Blocked Patterns
+
+Some files pass `ButtonVariants` to wrapper components that internally render the old Button. These **cannot** be migrated until the wrapper components are updated:
+
+- `BottomSheetFooter.buttonPropsArray` — passes button config objects including `variant: ButtonVariants.Primary`
+- `Banner.actionButtonProps` — passes button config with `ButtonVariants.Link`
+
+Migrate only direct `<Button` JSX usages. Keep old imports for blocked patterns.
+
+#### API Differences
+
+The design system Button adds these props not available in the old mobile Button:
+
+- `isDanger` — show destructive styling (Primary variant only)
+- `isInverse` — inverted colors for colored backgrounds (Primary variant only)
+- `startIconName` / `endIconName` — icon names for leading/trailing icons
+- `loadingText` — custom text during loading state
+- `twClassName` — Tailwind utility class overrides
 
 ### Box Component
 
