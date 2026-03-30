@@ -17,9 +17,7 @@ describe('BoxHorizontal', () => {
 
   describe('when children is a string', () => {
     it('renders text content', () => {
-      const { getByText } = render(
-        <BoxHorizontal>Sample label</BoxHorizontal>,
-      );
+      const { getByText } = render(<BoxHorizontal>Sample label</BoxHorizontal>);
       expect(getByText('Sample label')).toBeOnTheScreen();
     });
   });
@@ -85,9 +83,7 @@ describe('BoxHorizontal', () => {
   describe('root layout', () => {
     it('applies default flex row, center align, and gap to root', () => {
       const { getByTestId } = render(
-        <BoxHorizontal testID={ROOT_TEST_ID}>
-          Content
-        </BoxHorizontal>,
+        <BoxHorizontal testID={ROOT_TEST_ID}>Content</BoxHorizontal>,
       );
       const root = getByTestId(ROOT_TEST_ID);
       expect(root).toHaveStyle(tw`flex-row items-center gap-1`);
@@ -109,9 +105,7 @@ describe('BoxHorizontal', () => {
   describe('ViewProps extension', () => {
     it('passes testID to root Box', () => {
       const { getByTestId } = render(
-        <BoxHorizontal testID={ROOT_TEST_ID}>
-          Content
-        </BoxHorizontal>,
+        <BoxHorizontal testID={ROOT_TEST_ID}>Content</BoxHorizontal>,
       );
       expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
     });

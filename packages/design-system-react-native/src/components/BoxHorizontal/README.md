@@ -1,6 +1,6 @@
 # BoxHorizontal
 
-BoxHorizontal lays out optional start and end accessories with a text or child region in a horizontal row. The root is a [Box](../Box/Box.tsx) with row direction, centered alignment, and a default gap; all other [Box](../Box/Box.tsx) props (except `flexDirection`, `alignItems`, and `children`) are forwarded.
+BoxHorizontal lays out optional start and end accessories with a text or child region in a horizontal row. The public API combines [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.tsx) (`children`, `textProps` for the middle) with a root [Box](../Box/Box.tsx): `flexDirection` is always row; `alignItems` defaults to center and `gap` defaults to `1`, and both can be overridden. Other [Box](../Box.types.ts) layout and `View` props apply to that root.
 
 ```tsx
 import { BoxHorizontal } from '@metamask/design-system-react-native';
@@ -10,7 +10,7 @@ import { BoxHorizontal } from '@metamask/design-system-react-native';
 
 ## Props
 
-The component composes [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.tsx) for the main content and accepts the same `children` and `textProps` behavior. It extends [Box](../Box/Box.types.ts) props except `children`, `flexDirection`, and `alignItems` (those are fixed by the component).
+`BoxHorizontalProps` intersects [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.types.ts) with [Box](../Box/Box.types.ts) props, omitting Box `children` and `flexDirection` so the type matches the implementation: main content is always the `children` / `textProps` pair above, and the row direction is fixed. `alignItems` defaults to center but you can pass `alignItems` on the root to override alignment.
 
 ### `children`
 
@@ -64,7 +64,13 @@ Optional node after the main content (e.g. icon or badge).
 
 ### Box layout and `View` props
 
-All [Box](../Box/Box.types.ts) props except `children`, `flexDirection`, and `alignItems` are supported (`gap`, `padding`, `testID`, `style`, etc.). Defaults include `flexDirection` row, `alignItems` center, and `gap` of `1`.
+Root [Box](../Box/Box.types.ts) props other than `flexDirection` are supported (`alignItems`, `gap`, `padding`, `testID`, `style`, etc.). Defaults when omitted: `alignItems` center and `gap` of `1`.
+
+```tsx
+import { BoxAlignItems } from '@metamask/design-system-react-native';
+
+<BoxHorizontal alignItems={BoxAlignItems.Start}>Top-aligned row</BoxHorizontal>;
+```
 
 ### `twClassName`
 
