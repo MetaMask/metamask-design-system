@@ -78,34 +78,6 @@ export enum AvatarIconSeverity {
 }
 
 /**
- * BadgeWrapper - positionAnchorShape
- */
-export enum BadgeWrapperPositionAnchorShape {
-  Rectangular = 'rectangular',
-  Circular = 'circular',
-}
-
-/**
- * BadgeWrapper - position.
- */
-export enum BadgeWrapperPosition {
-  TopRight = 'top-right',
-  BottomRight = 'bottom-right',
-  BottomLeft = 'bottom-left',
-  TopLeft = 'top-left',
-}
-
-/**
- * BadgeWrapper - customPosition
- */
-export type BadgeWrapperCustomPosition = {
-  top?: number | string | undefined;
-  right?: number | string | undefined;
-  bottom?: number | string | undefined;
-  left?: number | string | undefined;
-};
-
-/**
  * Box - all spacing-related props
  */
 export type BoxSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
@@ -426,9 +398,9 @@ export enum TextColor {
  */
 export enum FontWeight {
   /**
-   * Weight - 700
+   * Weight - 600
    */
-  Bold = '700',
+  Bold = '600',
   /**
    * Weight - 500
    */
