@@ -2,6 +2,7 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
 - [From version 7.0.0 to 8.0.0](#from-version-700-to-800)
 - [From version 6.0.0 to 7.0.0](#from-version-600-to-700)
 - [From version 5.1.0 to 6.0.0](#from-version-510-to-600)
@@ -187,6 +188,21 @@ Version 8.0.0 changes the default font from CentraNo1 to Geist. This is a breaki
 7. **Update Import Statements**: If you're importing directly from specific paths, update to use the main package exports
 8. **Remove Deprecated Font Family References**: Ensure all typography uses the base font family tokens (if not already updated from 7.0.0)
 9. **Test React Native Integration**: Verify TWRNC compatibility if using React Native
+
+## From version 8.2.2 to 8.3.0
+
+### Typography: bold weight is now 600 and uses semibold assets
+
+- The `fontWeights.bold` token and the `--font-weight-bold` CSS variable now return `600`; the Storybook font loaders switched from the former `Geist-Bold` binaries to the new `Geist-SemiBold` and `Geist-SemiBoldItalic` assets.
+- Update any static `font-weight: 700` references or CSS `@font-face` definitions to 600 and point at the semibold files. React and React Native packages now expect `Geist-SemiBold` for the semantic bold slot, so bundlers that previously inlined `Geist-Bold` should replace those files.
+- `@metamask/design-system-twrnc-preset` now maps `default-bold` and `default-bold-italic` to the semibold PostScript names, so confirm any custom Tailwind font classnames align with `Geist-SemiBold` if you override them.
+
+### Migration steps
+
+- Replace `@font-face` declarations, font imports, and any asset references from `Geist-Bold`/`Geist-BoldItalic` to `Geist-SemiBold`/`Geist-SemiBoldItalic`, and set `font-weight: 600`.
+- Update code or styles that assumed `fontWeights.bold === '700'` to read from `fontWeights.bold` directly so they automatically pick up the new value.
+- If you bundle fonts manually, include the semibold OTF/WOFF2 files from `apps/storybook-react-native/fonts/Geist` and `apps/storybook-react/fonts/Geist` and verify the new names load in development and production builds.
+- Run your Storybook or native font loader checks to confirm the Metro bundler now resolves `Geist-SemiBold`/`Geist-SemiBoldItalic` per the updated `FontLoader` and tailwind preset mappings.
 
 ## From version 6.0.0 to 7.0.0
 
