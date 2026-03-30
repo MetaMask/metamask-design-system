@@ -48,9 +48,10 @@ Do not perform usage replacement inside the legacy component-library root.
 Use scheduled cron trigger in `MetaMask/metamask-mobile`.
 
 On each run, discover candidate MMDS docs PRs in `MetaMask/metamask-design-system` and verify:
-   - title starts with `chore: [DSYS-616] create/update`
-   - body includes `DSYS_EPIC: DSYS-616`
-   - body includes `MIGRATION_DOCS_VERSION: <version>`
+
+- title starts with `chore: [DSYS-616] create/update`
+- body includes `DSYS_EPIC: DSYS-616`
+- body includes `MIGRATION_DOCS_VERSION: <version>`
 
 Only run when docs version is newer than the last processed version.
 
