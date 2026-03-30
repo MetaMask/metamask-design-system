@@ -514,10 +514,10 @@ This section covers version-to-version breaking changes within `@metamask/design
 - Update any hardcoded `font-weight: 700` values, `@font-face` definitions, or typography documentation to 600 if they refer to bold text (the exposed `'font-bold'` utility remains unchanged, so consuming code keeps using the same enums).
 - This change builds on `@metamask/design-tokens@8.3.0`, so consult the [design-tokens migration guide](../design-tokens/MIGRATION.md#from-version-822-to-830) for the matching token-level steps.
 
-### BadgeWrapper types now live in the shared package
+### BadgeWrapper types now use const-object + union definitions
 
-- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` are now defined once in `@metamask/design-system-shared` and re-exported from the platform-specific entry points.
-- Update any direct type-oriented imports to reference `@metamask/design-system-shared` (the platform bundles still re-export these values for backwards compatibility, but the shared package is now the canonical source after ADR-0004).
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, producing string union types instead of TypeScript enums; this follows ADR-0003 and ADR-0004 so the same canonical values power both React and React Native without duplicating the runtime constants (see https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md and https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md).
+- The exports remain available through `@metamask/design-system-react` (and the platform-specific bundles), so your import path stays the same; only the underlying type shape shifted to a const-object/union pattern so you gain string-literal widening while keeping the previously exported names.
 
 ## From version 0.10.0 to 0.11.0
 

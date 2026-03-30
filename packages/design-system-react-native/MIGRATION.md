@@ -573,10 +573,10 @@ This section covers version-to-version breaking changes within `@metamask/design
 - Update any custom `fontWeight` constants, native font registrations, or text styles that previously assumed 700 so they match the new semibold definition (the `FontWeight.Bold` member still exists but now documents 600).
 - This change is synchronized with `@metamask/design-tokens@8.3.0`, so follow the [design-tokens migration guide](../design-tokens/MIGRATION.md#from-version-822-to-830) for the token-level steps and to grab the new font files if you bundle them yourself.
 
-### BadgeWrapper types now live in the shared package
+### BadgeWrapper types now use const-object + union definitions
 
-- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now originate in `@metamask/design-system-shared` and are re-exported by both React and React Native entry points.
-- Update any direct type imports to use `@metamask/design-system-shared` (the platform index still re-exports them for compatibility, but the shared package is the canonical source post-ADR-0004).
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, which produce string union types rather than TypeScript enums (ADR-0003/ADR-0004). The shared package defines the canonical values and the platform entry points keep re-exporting those names so React Native consumers use the same import paths they already rely on.
+- The switch lets React, React Native, and shared code stay aligned on the string-literal surface without duplicating runtime enums; no import-path change is required.
 
 ## From version 0.11.0 to 0.12.0
 

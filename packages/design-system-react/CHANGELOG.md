@@ -11,12 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `FontWeight.Bold` and the `Text` component now treat the semantic bold slot as weight 600 (the Storybook font loader switched to `Geist-SemiBold`/`Geist-SemiBoldItalic` and the design tokens emit `--font-weight-bold: 600`). Update any hardcoded `font-weight: 700` references as described in the [migration guide](./MIGRATION.md#from-version-0120-to-0130) ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017)).
-- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now originate in `@metamask/design-system-shared`; the React entry re-exports those shared definitions so your existing imports keep working while the shared package serves as the canonical source for the ADR-0003/ADR-0004 types ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014); migration instructions also live in the [migration guide](./MIGRATION.md#from-version-0120-to-0130)), and we documented the new Button migration instructions in [MIGRATION.md#button-component](./MIGRATION.md#button-component) ([#999](https://github.com/MetaMask/metamask-design-system/pull/999)).
+- `FontWeight.Bold` and the `Text` component now treat the semantic bold slot as weight 600; Storybook moved to the `Geist-SemiBold` assets and the tokens now emit `--font-weight-bold: 600`, so update any hardcoded `font-weight: 700` references as outlined in MIGRATION.md#from-version-0120-to-0130 ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017)).
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now derive from const objects with `as const`/string-union typings per ADR-0003 and ADR-0004, so the same values are available to both React and React Native while your import statements continue to reference `@metamask/design-system-react` (or the platform-specific entry point) as before ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014); see https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md and MIGRATION.md#from-version-0120-to-0130).
+- Documented the Button migration path that walks through prop, variant, and size mappings for both web and mobile, linking directly to MIGRATION.md#button-component so the release note, changelog, and migration guide share the same reference ([#999](https://github.com/MetaMask/metamask-design-system/pull/999)).
 
 ### Fixed
 
-- Restored a visible keyboard focus outline for `Checkbox` keyboard users by making the hidden input a Tailwind `peer` and mirroring its `peer-focus-visible` state onto the visible container; new regression tests cover Tab focus ([#1008](https://github.com/MetaMask/metamask-design-system/pull/1008)).
+- Restored a visible keyboard focus outline for `Checkbox` keyboard users by making the hidden input a Tailwind `peer` and mirroring its `peer-focus-visible` state onto the visible container so Tab navigation shows a clear indicator ([#1008](https://github.com/MetaMask/metamask-design-system/pull/1008)).
 
 ## [0.12.0]
 
