@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.6.0]
 
-### Uncategorized
+### Changed
 
-- feat: migrate BadgeWrapper to ADR-0003 and ADR-0004 shared types (DSYS-468) ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014))
+- Added shared `BadgeWrapper` const objects and props (`BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, `BadgeWrapperPropsShared`) so React and React Native now consume a single source of truth for the ADR-0003/ADR-0004 types; both platform packages re-export the shared definitions so existing imports keep working even as the shared package remains the canonical source. See the [design-system-react migration guide](../design-system-react/MIGRATION.md#from-version-0120-to-0130) for additional guidance ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014)).
 
 ## [0.5.0]
 

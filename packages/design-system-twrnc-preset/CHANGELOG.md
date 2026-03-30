@@ -9,11 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.0]
 
-### Uncategorized
+### Changed
 
-- chore: reapply semibold font weight updates with latest Expo font conventions ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.3.1 to 5.3.2 ([#906](https://github.com/MetaMask/metamask-design-system/pull/906))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.3.0 to 5.3.1 ([#878](https://github.com/MetaMask/metamask-design-system/pull/878))
+- The `default-bold` and `default-bold-italic` font mappings now resolve to `Geist-SemiBold`/`Geist-SemiBoldItalic`, aligning the preset with the new semibold typography tokens and font assets introduced in this release ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017); see `@metamask/design-tokens` release notes for details). Update any custom `tw` classnames or font bundles that referenced the old `Geist-Bold`/`Geist-BoldItalic` names so Metro/Expo resolve the semibold files.
 
 ## [0.3.0]
 

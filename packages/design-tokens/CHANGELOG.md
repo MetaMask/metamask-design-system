@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.3.0]
 
-### Uncategorized
+### Changed
 
-- chore: reapply semibold font weight updates with latest Expo font conventions ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017))
+- `fontWeights.bold` and the `--font-weight-bold` CSS variable now return `600`, and the Storybook font loaders/`@font-face` declarations consume the new `Geist-SemiBold`/`Geist-SemiBoldItalic` assets instead of the retired bold files ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017)). The `design-system-twrnc-preset` mapping for `default-bold`/`default-bold-italic` now resolves to those semibold PostScript names, so custom Tailwind classnames should align with the new fonts. Update `@font-face` declarations, font bundles, and `font-weight: 700` styles to point at the semibold files, include the semibold assets from `apps/storybook-react-native/fonts/Geist` and `apps/storybook-react/fonts/Geist` when you bundle fonts manually, and run the [migration guide](./MIGRATION.md#from-version-822-to-830) to verify `fontWeights.bold` references propagate through CSS, JS, and Tailwind configurations.
 
 ## [8.2.2]
 

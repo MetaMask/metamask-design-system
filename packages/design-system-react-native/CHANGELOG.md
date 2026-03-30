@@ -9,11 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.13.0]
 
-### Uncategorized
+### Changed
 
-- chore: reapply semibold font weight updates with latest Expo font conventions ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017))
-- chore: [DSYS-616] create/update Button migration docs ([#999](https://github.com/MetaMask/metamask-design-system/pull/999))
-- feat: migrate BadgeWrapper to ADR-0003 and ADR-0004 shared types (DSYS-468) ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014))
+- `FontWeight.Bold` and the React Native `Text` component now describe bold as weight 600; the Storybook mobile `FontLoader` and `@metamask/design-system-twrnc-preset` now reference the `Geist-SemiBold`/`Geist-SemiBoldItalic` assets, so update any custom font registrations that previously assumed weight 700 as explained in the [migration guide](./MIGRATION.md#from-version-0120-to-0130) ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017)).
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now originate in `@metamask/design-system-shared`; the React Native entry point re-exports those shared definitions so your existing imports keep working while the shared package serves as the canonical source for the ADR-0003/ADR-0004 types, and we documented the new Button migration instructions in [MIGRATION.md#button-component](./MIGRATION.md#button-component) ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014), [#999](https://github.com/MetaMask/metamask-design-system/pull/999)).
 
 ## [0.12.0]
 

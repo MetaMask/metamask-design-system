@@ -12,6 +12,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
+  - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
@@ -504,6 +505,19 @@ import {
 ## Version Updates
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
+
+## From version 0.12.0 to 0.13.0
+
+### Typography: semantic bold is now semibold (600)
+
+- `FontWeight.Bold` and the `Text` component now treat bold as weight 600 across both CSS and Tailwind enums; the Storybook font loader swapped the retired `Geist-Bold` assets for the new `Geist-SemiBold` files, and the design tokens now export `--font-weight-bold: 600`.
+- Update any hardcoded `font-weight: 700` values, `@font-face` definitions, or typography documentation to 600 if they refer to bold text (the exposed `'font-bold'` utility remains unchanged, so consuming code keeps using the same enums).
+- This change builds on `@metamask/design-tokens@8.3.0`, so consult the [design-tokens migration guide](../design-tokens/MIGRATION.md#from-version-822-to-830) for the matching token-level steps.
+
+### BadgeWrapper types now live in the shared package
+
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` are now defined once in `@metamask/design-system-shared` and re-exported from the platform-specific entry points.
+- Update any direct type-oriented imports to reference `@metamask/design-system-shared` (the platform bundles still re-export these values for backwards compatibility, but the shared package is now the canonical source after ADR-0004).
 
 ## From version 0.10.0 to 0.11.0
 

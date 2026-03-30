@@ -11,6 +11,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
+  - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
@@ -563,6 +564,19 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 ## Version Updates
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react-native`.
+
+## From version 0.12.0 to 0.13.0
+
+### Typography: semantic bold is now semibold (600)
+
+- `FontWeight.Bold` and the `Text` component now describe bold as weight 600; the Storybook RN `FontLoader` loads the new `Geist-SemiBold` assets, and `@metamask/design-system-twrnc-preset` maps `default-bold` and `default-bold-italic` to those semibold PostScript names instead of the retired bold files.
+- Update any custom `fontWeight` constants, native font registrations, or text styles that previously assumed 700 so they match the new semibold definition (the `FontWeight.Bold` member still exists but now documents 600).
+- This change is synchronized with `@metamask/design-tokens@8.3.0`, so follow the [design-tokens migration guide](../design-tokens/MIGRATION.md#from-version-822-to-830) for the token-level steps and to grab the new font files if you bundle them yourself.
+
+### BadgeWrapper types now live in the shared package
+
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now originate in `@metamask/design-system-shared` and are re-exported by both React and React Native entry points.
+- Update any direct type imports to use `@metamask/design-system-shared` (the platform index still re-exports them for compatibility, but the shared package is the canonical source post-ADR-0004).
 
 ## From version 0.11.0 to 0.12.0
 

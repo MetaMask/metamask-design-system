@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.13.0]
 
-### Uncategorized
+### Changed
 
-- chore: reapply semibold font weight updates with latest Expo font conventions ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017))
-- chore: [DSYS-616] create/update Button migration docs ([#999](https://github.com/MetaMask/metamask-design-system/pull/999))
-- feat: migrate BadgeWrapper to ADR-0003 and ADR-0004 shared types (DSYS-468) ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014))
-- fix: checkbox keyboard focus visibility ([#1008](https://github.com/MetaMask/metamask-design-system/pull/1008))
+- `FontWeight.Bold` and the `Text` component now treat the semantic bold slot as weight 600 (the Storybook font loader switched to `Geist-SemiBold`/`Geist-SemiBoldItalic` and the design tokens emit `--font-weight-bold: 600`). Update any hardcoded `font-weight: 700` references as described in the [migration guide](./MIGRATION.md#from-version-0120-to-0130) ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017)).
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now originate in `@metamask/design-system-shared`; the React entry re-exports those shared definitions so your existing imports keep working while the shared package serves as the canonical source for the ADR-0003/ADR-0004 types ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014); migration instructions also live in the [migration guide](./MIGRATION.md#from-version-0120-to-0130)), and we documented the new Button migration instructions in [MIGRATION.md#button-component](./MIGRATION.md#button-component) ([#999](https://github.com/MetaMask/metamask-design-system/pull/999)).
+
+### Fixed
+
+- Restored a visible keyboard focus outline for `Checkbox` keyboard users by making the hidden input a Tailwind `peer` and mirroring its `peer-focus-visible` state onto the visible container; new regression tests cover Tab focus ([#1008](https://github.com/MetaMask/metamask-design-system/pull/1008)).
 
 ## [0.12.0]
 
