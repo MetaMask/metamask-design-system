@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0]
+
+### Changed
+
+- The `default-bold` and `default-bold-italic` font mappings now resolve to `Geist-SemiBold`/`Geist-SemiBoldItalic`, aligning the preset with the new semibold typography tokens and font assets introduced in this release ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017); see `@metamask/design-tokens` release notes for details). Update any custom `tw` classnames or font bundles that referenced the old `Geist-Bold`/`Geist-BoldItalic` names so Metro/Expo resolve the semibold files.
+
 ## [0.3.0]
 
 ### Changed
@@ -43,7 +49,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.3.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.0...HEAD
+[0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.3.0...@metamask/design-system-twrnc-preset@0.4.0
 [0.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.1...@metamask/design-system-twrnc-preset@0.3.0
 [0.2.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.0...@metamask/design-system-twrnc-preset@0.2.1
 [0.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.1.0...@metamask/design-system-twrnc-preset@0.2.0
