@@ -1,10 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import React, { createRef } from 'react';
-
 import {
   BadgeWrapperPosition,
   BadgeWrapperPositionAnchorShape,
-} from '../../types';
+} from '@metamask/design-system-shared';
+import { render, screen } from '@testing-library/react';
+import React, { createRef } from 'react';
 
 import { BadgeWrapper } from './BadgeWrapper';
 
