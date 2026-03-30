@@ -37,15 +37,15 @@
 @font-face {
   font-family: 'Geist';
   font-style: normal;
-  font-weight: 700;
-  src: url('fonts/Geist/Geist-Bold.woff2') format('woff2');
+  font-weight: 600;
+  src: url('fonts/Geist/Geist-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Geist';
   font-style: italic;
-  font-weight: 700;
-  src: url('fonts/Geist/Geist-BoldItalic.woff2') format('woff2');
+  font-weight: 600;
+  src: url('fonts/Geist/Geist-SemiBoldItalic.woff2') format('woff2');
 }
 
 /* MM Sans */
@@ -66,7 +66,7 @@
 @font-face {
   font-family: 'MMSans';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   src: url('fonts/MMSans/MMSans-Bold.woff2') format('woff2');
 }
 
@@ -88,6 +88,6 @@
 @font-face {
   font-family: 'MMPoly';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
 }
