@@ -4,7 +4,10 @@ import React from 'react';
 import { AvatarAccountSize, AvatarAccountVariant } from '../../types';
 
 import { AvatarAccount } from './AvatarAccount';
-import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
+import {
+  MAP_AVATARACCOUNT_SIZE_SIZENUMBER,
+  SAMPLE_AVATARACCOUNT_ADDRESSES,
+} from './AvatarAccount.constants';
 
 jest.mock('react-native-svg', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -17,14 +20,6 @@ jest.mock('react-native-svg', () => {
 jest.mock('react-native-jazzicon', () => {
   return jest.fn(() => null);
 });
-
-const AVATAR_SIZE_PX_MAP: Record<AvatarAccountSize, number> = {
-  [AvatarAccountSize.Xs]: 16,
-  [AvatarAccountSize.Sm]: 24,
-  [AvatarAccountSize.Md]: 32,
-  [AvatarAccountSize.Lg]: 40,
-  [AvatarAccountSize.Xl]: 48,
-};
 
 describe('AvatarAccount', () => {
   it('renders Jazzicon by default when no variant is provided', async () => {
@@ -77,10 +72,10 @@ describe('AvatarAccount', () => {
     const avatarAccount = getByTestId('avatar-account');
     expect(avatarAccount).toBeDefined();
     expect(avatarAccount.props.style[0].width).toStrictEqual(
-      AVATAR_SIZE_PX_MAP[AvatarAccountSize.Md],
+      MAP_AVATARACCOUNT_SIZE_SIZENUMBER[AvatarAccountSize.Md],
     );
     expect(avatarAccount.props.style[0].height).toStrictEqual(
-      AVATAR_SIZE_PX_MAP[AvatarAccountSize.Md],
+      MAP_AVATARACCOUNT_SIZE_SIZENUMBER[AvatarAccountSize.Md],
     );
   });
 
@@ -100,10 +95,10 @@ describe('AvatarAccount', () => {
     const avatarAccount = getByTestId('avatar-account');
     expect(avatarAccount).toBeDefined();
     expect(avatarAccount.props.style[0].width).toStrictEqual(
-      AVATAR_SIZE_PX_MAP[AvatarAccountSize.Xl],
+      MAP_AVATARACCOUNT_SIZE_SIZENUMBER[AvatarAccountSize.Xl],
     );
     expect(avatarAccount.props.style[0].height).toStrictEqual(
-      AVATAR_SIZE_PX_MAP[AvatarAccountSize.Xl],
+      MAP_AVATARACCOUNT_SIZE_SIZENUMBER[AvatarAccountSize.Xl],
     );
   });
 
