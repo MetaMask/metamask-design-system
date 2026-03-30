@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { AvatarAccountSize, AvatarAccountVariant } from '../../types';
-
 import { AvatarAccount } from './AvatarAccount';
 import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
+
+import { AvatarAccountSize, AvatarAccountVariant } from '.';
 
 jest.mock('react-native-svg', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports

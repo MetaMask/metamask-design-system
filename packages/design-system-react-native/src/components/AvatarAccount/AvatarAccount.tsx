@@ -1,10 +1,7 @@
+import { AvatarAccountVariant } from '@metamask/design-system-shared';
 import React from 'react';
 
-import {
-  AvatarAccountSize,
-  AvatarBaseShape,
-  AvatarAccountVariant,
-} from '../../types';
+import { AvatarAccountSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 import { Blockies } from '../temp-components/Blockies';
 import { Jazzicon } from '../temp-components/Jazzicon';

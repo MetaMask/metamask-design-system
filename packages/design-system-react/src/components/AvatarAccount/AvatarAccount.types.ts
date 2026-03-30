@@ -1,6 +1,7 @@
+import type { AvatarAccountPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { AvatarAccountVariant, AvatarAccountSize } from '../../types';
+import type { AvatarAccountSize } from '../../types';
 import type { AvatarBaseProps } from '../AvatarBase';
 import type { Blockies } from '../temp-components/Blockies';
 import type { Jazzicon } from '../temp-components/Jazzicon';
@@ -10,17 +11,8 @@ export type AvatarAccountProps = Omit<
   ComponentProps<'img'>,
   'children' | 'size'
 > &
-  Omit<AvatarBaseProps, 'children' | 'size'> & {
-    /**
-     * Required address used as a unique identifier to generate the AvatarAccount art.
-     */
-    address: string;
-    /**
-     * Optional prop to control the variant of the avatar account
-     *
-     * @default AvatarAccountVariant.Jazzicon
-     */
-    variant?: AvatarAccountVariant;
+  Omit<AvatarBaseProps, 'children' | 'size'> &
+  AvatarAccountPropsShared & {
     /**
      * Optional prop to control the size of the avatar
      *
