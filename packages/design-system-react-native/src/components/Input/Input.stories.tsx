@@ -1,10 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { TextVariant } from '../../types';
 
 import { Input } from './Input';
 import type { InputProps } from './Input.types';
+
+function ControlledInput(props: InputProps) {
+  const [value, setValue] = useState(props.value ?? '');
+  useEffect(() => {
+    setValue(props.value ?? '');
+  }, [props.value]);
+
+  return <Input {...props} value={value} onChangeText={setValue} />;
+}
 
 const meta: Meta<InputProps> = {
   title: 'Components/Input',
@@ -44,23 +54,23 @@ export const Default: Story = {
     value: '',
     placeholder: 'Sample Placeholder',
   },
-  render: (args) => <Input {...args} />,
+  render: (args) => <ControlledInput {...args} />,
 };
 
 export const Variant: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <Input
+      <ControlledInput
         placeholder="BodyMd (default)"
         textVariant={TextVariant.BodyMd}
         value="Sample text"
       />
-      <Input
+      <ControlledInput
         placeholder="BodySm"
         textVariant={TextVariant.BodySm}
         value="Sample text"
       />
-      <Input
+      <ControlledInput
         placeholder="HeadingSm"
         textVariant={TextVariant.HeadingSm}
         value="Sample text"
@@ -72,7 +82,7 @@ export const Variant: Story = {
 export const IsDisabled: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <Input placeholder="Enabled" value="Editable" />
+      <ControlledInput placeholder="Enabled" value="Editable" />
       <Input placeholder="Disabled" value="Not editable" isDisabled />
     </View>
   ),
@@ -81,7 +91,7 @@ export const IsDisabled: Story = {
 export const IsReadonly: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <Input placeholder="Editable" value="" />
+      <ControlledInput placeholder="Editable" value="" />
       <Input placeholder="Readonly" value="Read-only value" isReadonly />
     </View>
   ),

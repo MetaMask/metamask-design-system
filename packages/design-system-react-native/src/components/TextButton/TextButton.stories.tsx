@@ -1,9 +1,7 @@
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { TextButtonSize } from '../../types';
-import { IconName } from '../Icon';
+import { TextVariant } from '../../types';
 import { Text } from '../Text';
 
 import { TextButton } from './TextButton';
@@ -16,26 +14,13 @@ const meta: Meta<TextButtonProps> = {
     children: {
       control: 'text',
     },
-    size: {
+    variant: {
       control: 'select',
-      options: TextButtonSize,
+      options: Object.values(TextVariant),
     },
-    startIconName: {
-      control: 'select',
-      options: IconName,
-    },
-    endIconName: {
-      control: 'select',
-      options: IconName,
-    },
-    isDisabled: {
+    onPress: { action: 'pressed' },
+    suppressHighlighting: {
       control: 'boolean',
-    },
-    isInverse: {
-      control: 'boolean',
-    },
-    twClassName: {
-      control: 'text',
     },
   },
 };
@@ -43,97 +28,40 @@ const meta: Meta<TextButtonProps> = {
 export default meta;
 
 type Story = StoryObj<TextButtonProps>;
-const TextButtonStory: React.FC<TextButtonProps> = ({
-  isInverse,
-  ...props
-}) => {
-  const tw = useTailwind();
-  return (
-    <View style={[tw`${isInverse ? `bg-primary-default` : 'bg-default'}`]}>
-      <TextButton isInverse={isInverse} {...props} />
-    </View>
-  );
-};
 
 export const Default: Story = {
   args: {
-    children: 'Sample TextButton Text',
-    startIconName: IconName.Add,
-    endIconName: IconName.AddSquare,
-    isDisabled: false,
+    children: 'Sample TextButton',
+    onPress: () => undefined,
+    suppressHighlighting: true,
   },
-  render: (args) => <TextButtonStory {...args} />,
 };
 
-export const Size: Story = {
+export const Variant: Story = {
   render: () => (
     <View style={{ gap: 8 }}>
-      <TextButton
-        startIconName={IconName.Add}
-        endIconName={IconName.AddSquare}
-        size={TextButtonSize.BodyXs}
-      >
-        TextButton - size BodyXs
+      <TextButton variant={TextVariant.BodyXs} onPress={() => undefined}>
+        BodyXs
       </TextButton>
-      <TextButton
-        startIconName={IconName.Add}
-        endIconName={IconName.AddSquare}
-        size={TextButtonSize.BodySm}
-      >
-        TextButton - size BodySm
+      <TextButton variant={TextVariant.BodySm} onPress={() => undefined}>
+        BodySm
       </TextButton>
-      <TextButton
-        startIconName={IconName.Add}
-        endIconName={IconName.AddSquare}
-        size={TextButtonSize.BodyMd}
-      >
-        TextButton - size BodyMd
+      <TextButton variant={TextVariant.BodyMd} onPress={() => undefined}>
+        BodyMd
       </TextButton>
-      <TextButton
-        startIconName={IconName.Add}
-        endIconName={IconName.AddSquare}
-        size={TextButtonSize.BodyLg}
-      >
-        TextButton - size BodyLg
+      <TextButton variant={TextVariant.BodyLg} onPress={() => undefined}>
+        BodyLg
       </TextButton>
     </View>
   ),
-};
-
-export const WithoutAccessories: Story = {
-  render: () => <TextButton>TextButton</TextButton>,
-};
-
-export const WithStartAccessory: Story = {
-  render: () => (
-    <TextButton startIconName={IconName.Add}>TextButton</TextButton>
-  ),
-};
-
-export const WithEndAccessory: Story = {
-  render: () => <TextButton endIconName={IconName.Add}>TextButton</TextButton>,
-};
-
-export const WithStartAndEndAccessory: Story = {
-  render: () => (
-    <TextButton startIconName={IconName.Add} endIconName={IconName.AddSquare}>
-      TextButton
-    </TextButton>
-  ),
-};
-
-export const isDisabled: Story = {
-  render: () => <TextButton isDisabled>TextButton</TextButton>,
 };
 
 export const InlineWithText: Story = {
   render: () => (
     <Text>
-      Pre TextButton text
-      <TextButton startIconName={IconName.Add} endIconName={IconName.AddSquare}>
-        Text Button
-      </TextButton>
-      Post TextButton text
+      Pre TextButton text{' '}
+      <TextButton onPress={() => undefined}>Text Button</TextButton> Post
+      TextButton text
     </Text>
   ),
 };

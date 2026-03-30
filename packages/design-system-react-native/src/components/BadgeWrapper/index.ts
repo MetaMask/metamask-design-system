@@ -1,7 +1,7 @@
 export {
   BadgeWrapperPosition,
   BadgeWrapperPositionAnchorShape,
-} from '../../types';
-export type { BadgeWrapperCustomPosition } from '../../types';
+  type BadgeWrapperCustomPosition,
+} from '@metamask/design-system-shared';
 export { BadgeWrapper } from './BadgeWrapper';
 export type { BadgeWrapperProps } from './BadgeWrapper.types';

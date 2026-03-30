@@ -1,12 +1,11 @@
+import {
+  BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback, useState, useMemo } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
 import { View } from 'react-native';
-
-import {
-  BadgeWrapperPosition,
-  BadgeWrapperPositionAnchorShape,
-} from '../../types';
 
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
 

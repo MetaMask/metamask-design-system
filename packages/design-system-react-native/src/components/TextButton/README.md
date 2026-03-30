@@ -1,6 +1,10 @@
 # TextButton
 
-TextButton is used for text-only button actions or hyperlink without padding or background.
+Use `TextButton` for links placed **inline with text** (for example inside a sentence). It is text-only and is not meant to carry start or end icons. If you need icons with the label, use [`Button`](../Button/README.md) with `variant={ButtonVariant.Tertiary}` instead.
+
+Pass [`onPress`](#onpress) (and other [`Text`](../Text/README.md) props as needed) to handle taps.
+
+The React web `TextButton` in `@metamask/design-system-react` may expose different props until the platforms are aligned.
 
 ```tsx
 import { TextButton } from '@metamask/design-system-react-native';
@@ -8,213 +12,79 @@ import { TextButton } from '@metamask/design-system-react-native';
 <TextButton onPress={() => console.log('Pressed')}>Click me</TextButton>;
 ```
 
+If you need start or end icons, use tertiary `Button` instead:
+
+```tsx
+import { Button, ButtonVariant } from '@metamask/design-system-react-native';
+
+<Button variant={ButtonVariant.Tertiary} onPress={() => console.log('Pressed')}>
+  Action
+</Button>;
+```
+
 ## Props
 
 ### `children`
 
-The text content of the TextButton component.
+Content for the label.
 
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | Yes      | `undefined` |
-
-```tsx
-import { TextButton } from '@metamask/design-system-react-native';
-
-<TextButton onPress={() => {}}>Custom button text</TextButton>;
-```
+| TYPE              | REQUIRED | DEFAULT     |
+| ----------------- | -------- | ----------- |
+| `React.ReactNode` | Yes      | `undefined` |
 
 ### `onPress`
 
-Function to trigger when pressing the button.
+Called when the user presses the label. Primary interaction for this component.
 
-| TYPE         | REQUIRED | DEFAULT     |
-| ------------ | -------- | ----------- |
-| `() => void` | Yes      | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `TextProps['onPress']` | No       | `undefined` |
 
-```tsx
-<TextButton onPress={() => console.log('Text button pressed')}>
-  Press me
-</TextButton>
-```
+### `variant`
 
-### `size`
+Typography variant. Defaults to `TextVariant.BodyMd` (same as [`Text`](../Text/README.md)).
 
-The size of the text button.
+| TYPE          | REQUIRED | DEFAULT              |
+| ------------- | -------- | -------------------- |
+| `TextVariant` | No       | `TextVariant.BodyMd` |
 
-Available sizes:
+### `fontWeight`
 
-- `TextButtonSize.Sm`
-- `TextButtonSize.Md`
-- `TextButtonSize.Lg`
+| TYPE         | REQUIRED | DEFAULT             |
+| ------------ | -------- | ------------------- |
+| `FontWeight` | No       | `FontWeight.Medium` |
 
-| TYPE             | REQUIRED | DEFAULT                 |
-| ---------------- | -------- | ----------------------- |
-| `TextButtonSize` | No       | `TextButtonSize.BodyMd` |
+### `accessibilityRole`
 
-```tsx
-<TextButton size={TextButtonSize.Sm} onPress={() => {}}>
-  Small Text Button
-</TextButton>
-<TextButton size={TextButtonSize.Lg} onPress={() => {}}>
-  Large Text Button
-</TextButton>
-```
-
-### `isDisabled`
-
-Whether the text button is disabled.
-
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `false` |
-
-```tsx
-<TextButton isDisabled onPress={() => {}}>
-  Disabled Text Button
-</TextButton>
-```
-
-### `isInverse`
-
-Whether to show the button with inverted colors for use on colored backgrounds.
-
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `false` |
-
-```tsx
-<TextButton isInverse onPress={() => {}}>
-  Inverse Text Button
-</TextButton>
-```
-
-### `startIconName`
-
-Optional icon name to display before the text.
-
-| TYPE       | REQUIRED | DEFAULT     |
-| ---------- | -------- | ----------- |
-| `IconName` | No       | `undefined` |
-
-```tsx
-<TextButton startIconName="ArrowLeft" onPress={() => {}}>
-  Back
-</TextButton>
-```
-
-### `endIconName`
-
-Optional icon name to display after the text.
-
-| TYPE       | REQUIRED | DEFAULT     |
-| ---------- | -------- | ----------- |
-| `IconName` | No       | `undefined` |
-
-```tsx
-<TextButton endIconName="ArrowRight" onPress={() => {}}>
-  Continue
-</TextButton>
-```
-
-### `startAccessory`
-
-Optional custom element to show at the start of the button.
-
-| TYPE              | REQUIRED | DEFAULT     |
-| ----------------- | -------- | ----------- |
-| `React.ReactNode` | No       | `undefined` |
-
-```tsx
-<TextButton startAccessory={<CustomIcon />} onPress={() => {}}>
-  Custom Start
-</TextButton>
-```
-
-### `endAccessory`
-
-Optional custom element to show at the end of the button.
-
-| TYPE              | REQUIRED | DEFAULT     |
-| ----------------- | -------- | ----------- |
-| `React.ReactNode` | No       | `undefined` |
-
-```tsx
-<TextButton endAccessory={<CustomIcon />} onPress={() => {}}>
-  Custom End
-</TextButton>
-```
-
-### `textProps`
-
-Optional props to be passed to the Text component.
-
-| TYPE                                   | REQUIRED | DEFAULT     |
-| -------------------------------------- | -------- | ----------- |
-| `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
-
-```tsx
-<TextButton
-  textProps={{ variant: TextVariant.BodySm, color: TextColor.TextMuted }}
-  onPress={() => {}}
->
-  Custom Text Styling
-</TextButton>
-```
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `string` | No       | `link`  |
 
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
-
-- Add new styles that don't exist in the default component
-- Override the component's default styles when needed
+Additional TWRNC classes merged into the label.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
-```tsx
-import { TextButton } from '@metamask/design-system-react-native';
+### `suppressHighlighting`
 
-// Add additional styles
-<TextButton
-  onPress={() => {}}
-  twClassName="underline"
->
-  Underlined Text Button
-</TextButton>
+When `true` (default), React Native does not apply its default text press highlight.
 
-// Override default styles
-<TextButton
-  onPress={() => {}}
-  twClassName="!text-error-100"
->
-  Override Text Color
-</TextButton>
-```
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `true`  |
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Style for the label, merged after design-token styles. Prefer `twClassName` with design tokens when possible.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
-| `StyleProp<ViewStyle>` | No       | `undefined` |
+| `StyleProp<TextStyle>` | No       | `undefined` |
 
-```tsx
-const styles = StyleSheet.create({
-  custom: {
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-});
-
-export const StyleExample = () => (
-  <TextButton onPress={() => {}} style={styles.custom}>
-    Custom Text Button
-  </TextButton>
-);
-```
+Other `Text` / React Native `Text` props are supported via `TextButtonProps` (see [`TextProps`](../Text/Text.types.ts)).
 
 ## References
 
