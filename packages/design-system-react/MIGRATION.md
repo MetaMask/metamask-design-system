@@ -194,9 +194,9 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 
 ##### Removed / No Direct Equivalent
 
-| Legacy Extension API | MMDS Status | Migration |
-| -------------------- | ----------- | --------- |
-| `actionButtonLabel` used without `actionButtonOnClick` | No longer renders an action button | Provide both `actionButtonLabel` and `actionButtonOnClick` |
+| Legacy Extension API                                                                               | MMDS Status                                        | Migration                                                                                                                |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `actionButtonLabel` used without `actionButtonOnClick`                                             | No longer renders an action button                 | Provide both `actionButtonLabel` and `actionButtonOnClick`                                                               |
 | Link-like action through `ButtonLink` props such as `href`, `target`, `rel` in `actionButtonProps` | No direct equivalent on `BannerBase` action button | Move link behavior into banner content (for example, a link in `children`) or handle navigation in `actionButtonOnClick` |
 
 ##### Renamed Props
@@ -205,22 +205,22 @@ No direct prop renames were introduced for extension-to-MMDS `BannerBase`.
 
 ##### Type and Callback Signature Changes
 
-| Legacy Extension API | MMDS API | Notes |
-| -------------------- | -------- | ----- |
-| `title?: string` | `title?: ReactNode` | MMDS now accepts full React node content |
-| `description?: string` | `description?: ReactNode` | MMDS now accepts full React node content |
-| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>` | MMDS action button is a `Button`, not a `ButtonLink` |
-| `onClose?: (e: React.MouseEvent<HTMLElement>) => void` | `onClose?: MouseEventHandler<HTMLButtonElement>` | Close callback target is now the close button element |
-| `closeButtonProps?: Partial<ButtonIconProps<'button'>>` | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'> & { onClick?: MouseEventHandler<HTMLButtonElement> }` | `iconName` remains fixed to close icon |
+| Legacy Extension API                                     | MMDS API                                                                                                                          | Notes                                                 |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `title?: string`                                         | `title?: ReactNode`                                                                                                               | MMDS now accepts full React node content              |
+| `description?: string`                                   | `description?: ReactNode`                                                                                                         | MMDS now accepts full React node content              |
+| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>`                                            | MMDS action button is a `Button`, not a `ButtonLink`  |
+| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                                                                  | Close callback target is now the close button element |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'> & { onClick?: MouseEventHandler<HTMLButtonElement> }` | `iconName` remains fixed to close icon                |
 
 ##### Default and Behavior Changes
 
-| Legacy Extension Behavior | MMDS Behavior |
-| ------------------------- | ------------- |
-| Action button defaults to `ButtonLink` semantics and `ButtonLinkSize.Auto` | Action button is `Button` with default `ButtonSize.Md` |
-| Close button renders only when `onClose` is provided | Close button renders when `onClose` **or** `closeButtonProps` is provided |
-| Close button `ariaLabel` defaults to translated `t('close')` | Close button `ariaLabel` defaults to `'Close banner'` (override with `closeButtonProps.ariaLabel`) |
-| String/number `children` are wrapped in extension `Text` defaults | String/number `children` are wrapped in MMDS `Text` with `TextVariant.BodyMd` |
+| Legacy Extension Behavior                                                  | MMDS Behavior                                                                                      |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Action button defaults to `ButtonLink` semantics and `ButtonLinkSize.Auto` | Action button is `Button` with default `ButtonSize.Md`                                             |
+| Close button renders only when `onClose` is provided                       | Close button renders when `onClose` **or** `closeButtonProps` is provided                          |
+| Close button `ariaLabel` defaults to translated `t('close')`               | Close button `ariaLabel` defaults to `'Close banner'` (override with `closeButtonProps.ariaLabel`) |
+| String/number `children` are wrapped in extension `Text` defaults          | String/number `children` are wrapped in MMDS `Text` with `TextVariant.BodyMd`                      |
 
 #### Migration Examples
 
