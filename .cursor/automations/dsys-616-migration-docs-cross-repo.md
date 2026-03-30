@@ -14,12 +14,16 @@ All three specs share these contracts:
 - PR title format:
   - `chore: [DSYS-616] create/update {ComponentName} migration docs`
   - `chore: [DSYS-616] replace single {ComponentName} instance and update @deprecated JSDoc`
-- Jira linking in PR body:
+- Epic marker in PR body:
+  - `DSYS_EPIC: DSYS-616`
+- Jira issue linking in PR body (recommended, not primary matcher):
   - `Fixes: DSYS-<story-number>`
 - Jira workflow:
   - transition to `In Progress` on first qualifying PR open
   - no auto-close (manual close after all required PRs are merged)
-- Upstream orchestration label:
-  - `dsys-616-migration-docs` on qualifying MMDS docs PRs
+- MMDS docs version marker:
+  - `MIGRATION_DOCS_VERSION: <version>` in MMDS docs PR body
 - Client rerun determinism marker:
   - `Processed MIGRATION_DOCS_VERSION: <version>` in mobile/extension PR bodies
+- Client trigger model:
+  - scheduled cron in mobile/extension repos with MMDS PR discovery by title + body markers

@@ -27,7 +27,9 @@ Folder structures may vary by component, but searches should start in these root
 ## PR Contract
 
 - Title: `chore: [DSYS-616] create/update {ComponentName} migration docs`
-- PR body must include: `Fixes: DSYS-<story-number>`
+- PR body must include: `DSYS_EPIC: DSYS-616`
+- PR body should include: `Fixes: DSYS-<story-number>`
+- PR body must include: `MIGRATION_DOCS_VERSION: <version>`
 
 ## Jira Workflow Contract
 
@@ -42,8 +44,6 @@ Folder structures may vary by component, but searches should start in these root
   - Comment on pull request
 - Atlassian/Jira MCP
 - MCP server connector configured for Atlassian
-- Optional for automatic orchestration:
-  - GitHub label-write capability to apply `dsys-616-migration-docs` on qualifying MMDS docs PRs
 
 ## GitHub Author
 
@@ -101,7 +101,7 @@ If lint still fails, do not open/update the PR. Report the failing files/errors 
 
 Scan client PRs for DSYS-616 component work and feed findings back into docs:
 
-1. Find mobile/extension PRs with title containing `[DSYS-616]` and body containing `Fixes: DSYS-<story>`.
+1. Find mobile/extension PRs with title containing `[DSYS-616]` and body containing `DSYS_EPIC: DSYS-616`.
 2. Read `Migration doc discrepancies found` section in those PRs.
 3. If discrepancies exist, update MMDS migration docs and push/update MMDS PR.
 4. Add a comment linking the MMDS docs fix back to each client PR.
@@ -113,13 +113,14 @@ Use `MIGRATION_DOCS_VERSION` in PR body/comments (for example commit SHA of docs
 - Any docs version change should trigger another client replacement run.
 - Do not rerun clients if version is unchanged.
 
-## Label Handoff Contract
+## Downstream Discovery Contract
 
-Client automations (mobile/extension) are triggered from MMDS PR label changes.
+Client automations (mobile/extension) discover MMDS docs PRs on cron.
 
-- Required label: `dsys-616-migration-docs`
-- Apply this label only when required deliverables are complete and lint passes.
-- If the automation does not have label-write capability, report `label-required` in output so a human can add it.
+- Discovery signals:
+  - title starts with `chore: [DSYS-616] create/update`
+  - body contains `DSYS_EPIC: DSYS-616`
+  - body contains `MIGRATION_DOCS_VERSION: <version>`
 
 ## Cloud Automation Prompt
 
@@ -141,12 +142,11 @@ Goal: Create/update migration docs for one component and keep them accurate usin
    If lint fails, stop and report failures without opening/updating PR.
 7) Open or update PR with:
    - title: chore: [DSYS-616] create/update {ComponentName} migration docs
-   - body includes: Fixes: DSYS-<story-number>
-   - include MIGRATION_DOCS_VERSION marker.
+   - body includes: DSYS_EPIC: DSYS-616
+   - body should include: Fixes: DSYS-<story-number>
+   - body includes: MIGRATION_DOCS_VERSION: <version>
 8) On first qualifying PR open, transition Jira ticket to In Progress (if not already in progress/done). Do not auto-close Jira.
-9) Apply label dsys-616-migration-docs to the MMDS PR when deliverables are complete and lint passes.
-   - If label-write capability is unavailable, report label-required for manual action.
-10) Scan DSYS-616 client PRs in extension/mobile for "Migration doc discrepancies found".
-11) If discrepancies are present, patch docs, update the same PR, and comment back with the docs-fix link.
-12) Output summary: story key, component, docs version, files updated (including README links), lint status, jira transition status, label status, discrepancy actions taken.
+9) Scan DSYS-616 client PRs in extension/mobile for "Migration doc discrepancies found".
+10) If discrepancies are present, patch docs, update the same PR, and comment back with the docs-fix link.
+11) Output summary: story key, component, docs version, files updated (including README links), lint status, jira transition status, discrepancy actions taken.
 ```

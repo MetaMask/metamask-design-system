@@ -37,7 +37,7 @@ Treat the Cursor UI as a deployment target. Treat files in this directory as can
 
 - Keep one markdown spec per automation when possible.
 - Include explicit trigger and PR-title/body contracts.
-- Use deterministic identifiers (`Fixes: DSYS-<id>`, version markers).
+- Use deterministic identifiers (`DSYS_EPIC: DSYS-616`, `MIGRATION_DOCS_VERSION`, `Processed MIGRATION_DOCS_VERSION`).
 - Prefer file-based comparisons over memory-based reasoning in prompts.
 - Add safety constraints for search scope and write scope.
 
