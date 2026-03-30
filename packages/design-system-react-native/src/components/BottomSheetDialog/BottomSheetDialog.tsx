@@ -282,9 +282,9 @@ const BottomSheetDialog = forwardRef<
         {...props}
       >
         <PanGestureHandler
+          {...panGestureHandlerProps}
           enabled={isInteractable}
           onGestureEvent={gestureHandler}
-          {...panGestureHandlerProps}
         >
           <Animated.View
             onLayout={updateSheetHeight}

@@ -120,6 +120,7 @@ Optional callback that gets triggered when the sheet open animation completes.
 ### `panGestureHandlerProps`
 
 Optional props object forwarded to the child `PanGestureHandler`. Use this to configure gesture interoperability such as `simultaneousHandlers`, `waitFor`, and related handler options.
+`enabled` and `onGestureEvent` are controlled internally and cannot be overridden.
 
 | TYPE                     | REQUIRED | DEFAULT     |
 | ------------------------ | -------- | ----------- |

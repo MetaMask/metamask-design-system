@@ -2,6 +2,7 @@
 import { render, act, fireEvent } from '@testing-library/react-native';
 import React, { useRef, useEffect } from 'react';
 import { Platform } from 'react-native';
+import type { PanGestureHandlerProps } from 'react-native-gesture-handler';
 import type { ReactTestInstance } from 'react-test-renderer';
 
 // External dependencies.
@@ -21,6 +22,9 @@ type GestureHandlers = Record<string, GestureCallback>;
 
 // Store the last gesture handler callbacks so tests can invoke them directly
 const gestureCallbacksRef: { current: GestureHandlers } = { current: {} };
+const panGestureHandlerPropsRef: { current: Record<string, unknown> } = {
+  current: {},
+};
 
 jest.mock('react-native-gesture-handler', () => ({
   PanGestureHandler: ({
@@ -31,6 +35,7 @@ jest.mock('react-native-gesture-handler', () => ({
   }) => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { View } = require('react-native');
+    panGestureHandlerPropsRef.current = props;
     return <View {...props}>{children}</View>;
   },
   GestureHandlerRootView: 'View',
@@ -265,6 +270,29 @@ describe('BottomSheetDialog', () => {
     );
 
     expect(getByTestId('pan-gesture-handler')).toBeDefined();
+  });
+
+  it('does not allow panGestureHandlerProps to override internal gesture props', () => {
+    const externalOnGestureEvent = jest.fn();
+
+    render(
+      <BottomSheetDialog
+        isInteractable={false}
+        panGestureHandlerProps={
+          {
+            enabled: true,
+            onGestureEvent: externalOnGestureEvent,
+          } as unknown as PanGestureHandlerProps
+        }
+      >
+        <Text>Test Child</Text>
+      </BottomSheetDialog>,
+    );
+
+    expect(panGestureHandlerPropsRef.current.enabled).toBe(false);
+    expect(panGestureHandlerPropsRef.current.onGestureEvent).not.toBe(
+      externalOnGestureEvent,
+    );
   });
 
   it('triggers onOpenDialog on first layout event', () => {

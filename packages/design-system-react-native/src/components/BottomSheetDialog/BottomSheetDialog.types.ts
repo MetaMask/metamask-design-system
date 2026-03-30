@@ -2,6 +2,11 @@
 import type { ViewProps } from 'react-native';
 import type { PanGestureHandlerProps } from 'react-native-gesture-handler';
 
+type BottomSheetDialogPanGestureHandlerProps = Omit<
+  PanGestureHandlerProps,
+  'enabled' | 'onGestureEvent'
+>;
+
 /**
  * BottomSheetDialog component props.
  */
@@ -41,7 +46,7 @@ export type BottomSheetDialogProps = {
   /**
    * Optional props object passed directly to the child PanGestureHandler.
    */
-  panGestureHandlerProps?: PanGestureHandlerProps;
+  panGestureHandlerProps?: BottomSheetDialogPanGestureHandlerProps;
   /**
    * Tailwind CSS classes for the dialog container.
    */
