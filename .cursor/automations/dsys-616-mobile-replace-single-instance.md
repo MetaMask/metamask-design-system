@@ -22,12 +22,18 @@ Do not perform usage replacement inside the legacy component-library root.
 
 - Title: `chore: [DSYS-616] replace single {ComponentName} instance and update @deprecated JSDoc`
 - PR body must include: `Fixes: DSYS-<story-number>`
+- PR body must include: `Processed MIGRATION_DOCS_VERSION: <version>`
+
+## Jira Workflow Contract
+
+- On first qualifying PR open for the DSYS story, transition Jira to `In Progress` if not already in progress/done.
+- Never auto-close Jira issues from this automation.
+- Jira closure is manual after all required PRs are merged.
 
 ## Required Tools
 
 - GitHub built-in tools:
   - Open pull request
-  - Comment on pull request
 - Atlassian/Jira MCP
 - MCP server connector configured for Atlassian
 
@@ -38,12 +44,24 @@ Do not perform usage replacement inside the legacy component-library root.
 
 ## Trigger/Input
 
-Use one of these:
+Use MMDS upstream label-driven triggers:
 
-1. Scheduled run that checks latest MMDS docs PR for DSYS-616.
-2. GitHub PR trigger in this repo combined with a check for latest `MIGRATION_DOCS_VERSION` from MMDS docs PR.
+1. GitHub `Label change` trigger on `MetaMask/metamask-design-system` PRs.
+2. Process only when label `dsys-616-migration-docs` is present.
+3. Verify MMDS PR title/body contract:
+   - title starts with `chore: [DSYS-616] create/update`
+   - body includes `Fixes: DSYS-<story-number>`
 
 Only run when docs version is newer than the last processed version.
+
+## Rerun Determinism
+
+Use client PR body marker as the source of truth:
+
+- Marker format: `Processed MIGRATION_DOCS_VERSION: <version>`
+- Before making changes, search existing mobile PRs for same DSYS story + component.
+- If a PR already contains the same processed version marker, exit silently.
+- Only proceed when incoming docs version is newer than previously processed version for that story/component in mobile.
 
 ## Execution Rules
 
@@ -60,6 +78,7 @@ Only run when docs version is newer than the last processed version.
 - Exclude `app/component-library/components` from replacement target search.
 - If zero safe candidates, stop and report.
 - If migration docs are ambiguous, report discrepancy instead of guessing.
+- If trigger payload does not satisfy DSYS label/title/body contract, exit silently (no PR comments).
 
 ## Cloud Automation Prompt
 
@@ -67,6 +86,11 @@ Only run when docs version is newer than the last processed version.
 Goal: In mobile, replace one legacy {ComponentName} usage and update @deprecated JSDoc using latest MMDS migration docs.
 
 0) Open PR as GitHub user {githubusername}. If not explicitly set, infer from signed-in Cursor account.
+0.1) Validate upstream MMDS PR contract from trigger payload:
+     - label includes dsys-616-migration-docs
+     - title starts with chore: [DSYS-616] create/update
+     - body includes Fixes: DSYS-<story-number>
+     If any check fails, exit silently with no PR comments.
 
 1) Resolve DSYS story + component via Fixes key.
 2) Fetch latest MMDS migration docs and MIGRATION_DOCS_VERSION.
@@ -77,6 +101,7 @@ Goal: In mobile, replace one legacy {ComponentName} usage and update @deprecated
 7) Open/update draft PR with:
    - title: chore: [DSYS-616] replace single {ComponentName} instance and update @deprecated JSDoc
    - body includes: Fixes: DSYS-<story-number>
-   - include processed MIGRATION_DOCS_VERSION.
-8) Output summary: changed files, replaced callsite, discrepancies.
+   - include Processed MIGRATION_DOCS_VERSION: <version>.
+8) On first qualifying PR open, transition Jira ticket to In Progress (if not already in progress/done). Do not auto-close Jira.
+9) Output summary: changed files, replaced callsite, jira transition status, discrepancies.
 ```

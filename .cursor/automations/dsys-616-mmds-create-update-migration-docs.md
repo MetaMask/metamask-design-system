@@ -29,6 +29,12 @@ Folder structures may vary by component, but searches should start in these root
 - Title: `chore: [DSYS-616] create/update {ComponentName} migration docs`
 - PR body must include: `Fixes: DSYS-<story-number>`
 
+## Jira Workflow Contract
+
+- On first qualifying PR open for the DSYS story, transition Jira to `In Progress` if not already in progress/done.
+- Never auto-close Jira issues from this automation.
+- Jira closure is manual after all required PRs are merged.
+
 ## Required Tools
 
 - GitHub built-in tools:
@@ -36,6 +42,8 @@ Folder structures may vary by component, but searches should start in these root
   - Comment on pull request
 - Atlassian/Jira MCP
 - MCP server connector configured for Atlassian
+- Optional for automatic orchestration:
+  - GitHub label-write capability to apply `dsys-616-migration-docs` on qualifying MMDS docs PRs
 
 ## GitHub Author
 
@@ -68,6 +76,15 @@ For component docs stories (for example DSYS-632 style work), completion require
 
 Do not treat MIGRATION-only edits as complete when README files exist for the component.
 
+## Validation Gate
+
+Before opening or updating the PR, run lint autofix and validation:
+
+1. `yarn lint:fix`
+2. `yarn lint`
+
+If lint still fails, do not open/update the PR. Report the failing files/errors in the run summary.
+
 ## Audit Procedure (File-Based, Not Memory-Based)
 
 1. Locate component paths under extension/mobile legacy source roots.
@@ -96,6 +113,14 @@ Use `MIGRATION_DOCS_VERSION` in PR body/comments (for example commit SHA of docs
 - Any docs version change should trigger another client replacement run.
 - Do not rerun clients if version is unchanged.
 
+## Label Handoff Contract
+
+Client automations (mobile/extension) are triggered from MMDS PR label changes.
+
+- Required label: `dsys-616-migration-docs`
+- Apply this label only when required deliverables are complete and lint passes.
+- If the automation does not have label-write capability, report `label-required` in output so a human can add it.
+
 ## Cloud Automation Prompt
 
 ```text
@@ -110,11 +135,18 @@ Goal: Create/update migration docs for one component and keep them accurate usin
    - React: packages/design-system-react/src/components/{ComponentName}/README.mdx
    - React Native: packages/design-system-react-native/src/components/{ComponentName}/README.md
 5) If README files exist but are not updated, stop and report incomplete deliverables.
-6) Open or update PR with:
+6) Run validation gate:
+   - yarn lint:fix
+   - yarn lint
+   If lint fails, stop and report failures without opening/updating PR.
+7) Open or update PR with:
    - title: chore: [DSYS-616] create/update {ComponentName} migration docs
    - body includes: Fixes: DSYS-<story-number>
    - include MIGRATION_DOCS_VERSION marker.
-7) Scan DSYS-616 client PRs in extension/mobile for "Migration doc discrepancies found".
-8) If discrepancies are present, patch docs, update the same PR, and comment back with the docs-fix link.
-9) Output summary: story key, component, docs version, files updated (including README links), discrepancy actions taken.
+8) On first qualifying PR open, transition Jira ticket to In Progress (if not already in progress/done). Do not auto-close Jira.
+9) Apply label dsys-616-migration-docs to the MMDS PR when deliverables are complete and lint passes.
+   - If label-write capability is unavailable, report label-required for manual action.
+10) Scan DSYS-616 client PRs in extension/mobile for "Migration doc discrepancies found".
+11) If discrepancies are present, patch docs, update the same PR, and comment back with the docs-fix link.
+12) Output summary: story key, component, docs version, files updated (including README links), lint status, jira transition status, label status, discrepancy actions taken.
 ```
