@@ -158,7 +158,6 @@ const ScrollableListTemplate = (args: BottomSheetProps) => {
             simultaneousHandlers:
               Platform.OS === 'android' ? listGestureRef : undefined,
           }}
-          isFullscreen
         >
           <BottomSheetHeader onClose={goBack}>
             Scrollable BottomSheet
@@ -188,7 +187,7 @@ export const ScrollableList: Story = {
   render: (args) => <ScrollableListTemplate {...args} />,
   args: {
     isInteractable: true,
-    isFullscreen: true,
+    isFullscreen: false,
     keyboardAvoidingViewEnabled: true,
   },
 };
