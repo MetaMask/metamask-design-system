@@ -37,32 +37,32 @@ The Button component has significant breaking changes when migrating from the ex
 
 ##### Import Path
 
-| Extension Pattern | Design System Migration |
-| --- | --- |
-| `import { Button } from '../../component-library'` | `import { Button } from '@metamask/design-system-react'` |
+| Extension Pattern                                         | Design System Migration                                         |
+| --------------------------------------------------------- | --------------------------------------------------------------- |
+| `import { Button } from '../../component-library'`        | `import { Button } from '@metamask/design-system-react'`        |
 | `import { ButtonVariant } from '../../component-library'` | `import { ButtonVariant } from '@metamask/design-system-react'` |
-| `import { ButtonSize } from '../../component-library'` | `import { ButtonSize } from '@metamask/design-system-react'` |
+| `import { ButtonSize } from '../../component-library'`    | `import { ButtonSize } from '@metamask/design-system-react'`    |
 
 ##### Variant Enum
 
 The extension already uses `ButtonVariant` (singular) with lowercase values. The `Link` variant is removed from the design system `Button` — use `TextButton` instead.
 
-| Extension Value | Design System Value | Notes |
-| --- | --- | --- |
-| `ButtonVariant.Primary` (`'primary'`) | `ButtonVariant.Primary` (`'primary'`) | unchanged |
-| `ButtonVariant.Secondary` (`'secondary'`) | `ButtonVariant.Secondary` (`'secondary'`) | unchanged |
-| `ButtonVariant.Link` (`'link'`) | Use `TextButton` component | separate component |
-| — | `ButtonVariant.Tertiary` (`'tertiary'`) | new variant |
+| Extension Value                           | Design System Value                       | Notes              |
+| ----------------------------------------- | ----------------------------------------- | ------------------ |
+| `ButtonVariant.Primary` (`'primary'`)     | `ButtonVariant.Primary` (`'primary'`)     | unchanged          |
+| `ButtonVariant.Secondary` (`'secondary'`) | `ButtonVariant.Secondary` (`'secondary'`) | unchanged          |
+| `ButtonVariant.Link` (`'link'`)           | Use `TextButton` component                | separate component |
+| —                                         | `ButtonVariant.Tertiary` (`'tertiary'`)   | new variant        |
 
 ##### Size Enum
 
-| Extension Value | Design System Value | Notes |
-| --- | --- | --- |
-| `ButtonSize.Sm` (`'sm'`) | `ButtonSize.Sm` (`'sm'`) | unchanged |
-| `ButtonSize.Md` (`'md'`) | `ButtonSize.Md` (`'md'`) | unchanged |
-| `ButtonSize.Lg` (`'lg'`) | `ButtonSize.Lg` (`'lg'`) | unchanged |
-| `ButtonSize.Inherit` (`'inherit'`) | Removed | use default size |
-| `ButtonSize.Auto` (`'auto'`) | Removed | use default size |
+| Extension Value                    | Design System Value      | Notes            |
+| ---------------------------------- | ------------------------ | ---------------- |
+| `ButtonSize.Sm` (`'sm'`)           | `ButtonSize.Sm` (`'sm'`) | unchanged        |
+| `ButtonSize.Md` (`'md'`)           | `ButtonSize.Md` (`'md'`) | unchanged        |
+| `ButtonSize.Lg` (`'lg'`)           | `ButtonSize.Lg` (`'lg'`) | unchanged        |
+| `ButtonSize.Inherit` (`'inherit'`) | Removed                  | use default size |
+| `ButtonSize.Auto` (`'auto'`)       | Removed                  | use default size |
 
 ##### Content Model
 
@@ -70,20 +70,20 @@ The extension Button uses `children` (same as design system) — no change neede
 
 ##### State Props
 
-| Extension Prop | Design System Prop | Notes |
-| --- | --- | --- |
-| `disabled` | `isDisabled` | renamed |
-| `loading` | `isLoading` | renamed |
-| `block` | `isFullWidth` | renamed |
-| `danger` | `isDanger` | renamed |
+| Extension Prop | Design System Prop | Notes   |
+| -------------- | ------------------ | ------- |
+| `disabled`     | `isDisabled`       | renamed |
+| `loading`      | `isLoading`        | renamed |
+| `block`        | `isFullWidth`      | renamed |
+| `danger`       | `isDanger`         | renamed |
 
 ##### Removed Props
 
-| Extension Prop | Design System Migration |
-| --- | --- |
+| Extension Prop     | Design System Migration                         |
+| ------------------ | ----------------------------------------------- |
 | `as` (polymorphic) | Removed — Button is always a `<button>` element |
-| `href` | Removed — use `<a>` wrapper or `ButtonLink` |
-| `externalLink` | Removed — use `<a target="_blank">` wrapper |
+| `href`             | Removed — use `<a>` wrapper or `ButtonLink`     |
+| `externalLink`     | Removed — use `<a target="_blank">` wrapper     |
 
 #### Migration Examples
 
@@ -107,7 +107,11 @@ import { Button, ButtonVariant, ButtonSize } from '../../component-library';
 ##### After (Design System)
 
 ```tsx
-import { Button, ButtonVariant, ButtonSize } from '@metamask/design-system-react';
+import {
+  Button,
+  ButtonVariant,
+  ButtonSize,
+} from '@metamask/design-system-react';
 
 <Button
   variant={ButtonVariant.Primary}
