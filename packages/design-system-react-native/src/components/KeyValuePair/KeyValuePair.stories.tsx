@@ -16,17 +16,11 @@ const meta: Meta<KeyValuePairProps> = {
     value: { control: 'text' },
     orientation: {
       control: 'select',
-      options: Object.keys(KeyValuePairOrientation),
-      mapping: KeyValuePairOrientation,
+      options: [
+        KeyValuePairOrientation.Horizontal,
+        KeyValuePairOrientation.Vertical,
+      ],
     },
-    keyStartAccessory: { control: false },
-    keyEndAccessory: { control: false },
-    valueStartAccessory: { control: false },
-    valueEndAccessory: { control: false },
-    keyEndButtonIconProps: { control: false },
-    valueEndButtonIconProps: { control: false },
-    keyProps: { control: 'object' },
-    valueProps: { control: 'object' },
   },
 };
 
@@ -57,7 +51,7 @@ export const Orientation: Story = {
       <Box gap={6}>
         <KeyValuePair
           keyLabel="Horizontal"
-          value="Key and value in a row with 16px gap"
+          value="Key and value in a row"
           orientation={KeyValuePairOrientation.Horizontal}
           keyEndButtonIconProps={{
             iconName: IconName.Question,
@@ -121,22 +115,6 @@ export const EndButtonIcons: Story = {
           iconName: IconName.Info,
           onPress: () => {},
         }}
-      />
-    </StoryWrapper>
-  ),
-};
-
-export const CustomKeyValueReactNode: Story = {
-  render: () => (
-    <StoryWrapper>
-      <KeyValuePair
-        keyLabel={
-          <Fragment>
-            <Icon name={IconName.Key} size={IconSize.Xs} />
-            <Text> Custom key (ReactNode)</Text>
-          </Fragment>
-        }
-        value={<Text>Custom value (ReactNode)</Text>}
       />
     </StoryWrapper>
   ),
