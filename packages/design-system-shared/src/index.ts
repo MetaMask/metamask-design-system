@@ -47,3 +47,6 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
+// Switch types (ADR-0004)
+export { type SwitchPropsShared } from './types/Switch';
