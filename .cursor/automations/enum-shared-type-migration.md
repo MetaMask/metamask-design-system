@@ -18,7 +18,7 @@ Daily Jira pickup for epic **DSYS-468** (_Component ADR Migration_ / ADR-0003 & 
 | Setting           | Value                                                                                                                                                              |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Epic              | **DSYS-468** — _Component ADR Migration: Align with ADR-0003 and ADR-0004_                                                                                         |
-| Board (reference) | [DSYS board — epic filter](https://consensyssoftware.atlassian.net/jira/software/c/projects/DSYS/boards/1888?assignee=6152e94cc7bea40069d6b9c3&issueParent=343549) |
+| Board (reference) | [DSYS board — epic filter](https://consensyssoftware.atlassian.net/jira/software/c/projects/DSYS/boards/1888?issueParent=343549) |
 
 ## 1. Find candidates
 
