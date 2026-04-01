@@ -14,7 +14,7 @@ import { BottomSheet } from '@metamask/design-system-react-native';
 
 ### `goBack`
 
-Callback invoked to navigate back when `shouldNavigateBack` is `true` and the sheet finishes closing. Typically `navigation.goBack()` from React Navigation.
+Optional callback that will be invoked when sheet closes (used to navigate back). Typically `navigation.goBack()` from React Navigation.
 
 | TYPE       | REQUIRED |
 | ---------- | -------- |
@@ -103,21 +103,6 @@ Optional boolean to expand the sheet to the full screen height.
 ```tsx
 <BottomSheet goBack={goBack} isFullscreen>
   <Text>Full-screen sheet</Text>
-</BottomSheet>
-```
-
-### `shouldNavigateBack`
-
-Optional boolean indicating whether `goBack` is called automatically when the sheet closes.
-
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `true`  |
-
-```tsx
-// Prevent automatic navigation — manage it manually via onClose instead
-<BottomSheet goBack={goBack} shouldNavigateBack={false} onClose={goBack}>
-  <Text>Content</Text>
 </BottomSheet>
 ```
 

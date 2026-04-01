@@ -139,7 +139,7 @@ describe('BottomSheet', () => {
     expect(onOpen).toHaveBeenCalledTimes(1);
   });
 
-  it('calls goBack when shouldNavigateBack is true and dialog closes', () => {
+  it('calls goBack when dialog closes', () => {
     const goBack = jest.fn();
     render(
       <BottomSheet goBack={goBack}>
