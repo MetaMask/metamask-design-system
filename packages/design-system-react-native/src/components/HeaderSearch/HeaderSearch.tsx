@@ -11,11 +11,7 @@ import { IconName } from '../Icon';
 // Internal dependencies.
 import { TextFieldSearch } from '../TextFieldSearch';
 import type { TextFieldSearchProps } from '../TextFieldSearch';
-import type {
-  HeaderSearchInlineProps,
-  HeaderSearchProps,
-  HeaderSearchScreenProps,
-} from './HeaderSearch.types';
+import type { HeaderSearchProps } from './HeaderSearch.types';
 
 const CANCEL_LABEL = 'Cancel';
 
@@ -50,28 +46,17 @@ const CANCEL_LABEL = 'Cancel';
  * />
  */
 export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
-  const {
-    variant,
-    textFieldSearchProps,
-    twClassName = '',
-    ...boxProps
-  } = props;
-
   const baseTwClassName = 'h-14 flex-row items-center';
 
-  if (variant === HeaderSearchVariant.Screen) {
-    const { onPressBackButton, backButtonProps } =
-      props as HeaderSearchScreenProps;
-    const screenBoxProps = boxProps as Omit<
-      HeaderSearchScreenProps,
-      | 'variant'
-      | 'textFieldSearchProps'
-      | 'twClassName'
-      | 'onPressBackButton'
-      | 'backButtonProps'
-      | 'onPressCancelButton'
-      | 'cancelButtonProps'
-    >;
+  if (props.variant === HeaderSearchVariant.Screen) {
+    const {
+      variant: _variant,
+      textFieldSearchProps,
+      twClassName = '',
+      onPressBackButton,
+      backButtonProps,
+      ...screenBoxProps
+    } = props;
 
     return (
       <Box
@@ -93,19 +78,14 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     );
   }
 
-  // Inline variant
-  const { onPressCancelButton, cancelButtonProps } =
-    props as HeaderSearchInlineProps;
-  const inlineBoxProps = boxProps as Omit<
-    HeaderSearchInlineProps,
-    | 'variant'
-    | 'textFieldSearchProps'
-    | 'twClassName'
-    | 'onPressCancelButton'
-    | 'cancelButtonProps'
-    | 'onPressBackButton'
-    | 'backButtonProps'
-  >;
+  const {
+    variant: _variant,
+    textFieldSearchProps,
+    twClassName = '',
+    onPressCancelButton,
+    cancelButtonProps,
+    ...inlineBoxProps
+  } = props;
 
   return (
     <Box
