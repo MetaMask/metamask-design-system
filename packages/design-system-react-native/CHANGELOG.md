@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0]
+
+### Changed
+
+- `FontWeight.Bold` and the React Native `Text` component now describe bold as weight 600; the Storybook mobile `FontLoader` and `@metamask/design-system-twrnc-preset` now reference the `Geist-SemiBold`/`Geist-SemiBoldItalic` assets, so update any custom font registrations that previously assumed weight 700 as explained in the [migration guide](./MIGRATION.md#from-version-0120-to-0130) ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017)).
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now derive from const objects annotated `as const`, producing string-union typings per ADR-0003/ADR-0004; the React Native entry point still exports the same names, so your imports stay on `@metamask/design-system-react-native` while the shared package hosts the canonical definitions ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014); see https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md and https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md).
+- Documented the Button migration instructions (prop, variant, and size mappings) in [MIGRATION.md#button-component](./MIGRATION.md#button-component) so both web and native developers follow the same before/after story ([#999](https://github.com/MetaMask/metamask-design-system/pull/999)).
+
+## [0.12.0]
+
+### Added
+
+- Added `BannerAlert` component ([#966](https://github.com/MetaMask/metamask-design-system/pull/966))
+- Added `KeyValueRow` component ([#959](https://github.com/MetaMask/metamask-design-system/pull/959))
+
+### Changed
+
+- **BREAKING:** Simplified `TextButton` to a text-only control and removed `size`/`TextButtonSize`, inverse/disabled props, and icon/accessory props ([#1001](https://github.com/MetaMask/metamask-design-system/pull/1001))
+  - See [Migration Guide](./MIGRATION.md#from-version-0110-to-0120)
+- **BREAKING:** Removed `TextFieldSize` and the `size` prop; `TextField` is now a single fixed-height (48px) row ([#1000](https://github.com/MetaMask/metamask-design-system/pull/1000))
+  - See [Migration Guide](./MIGRATION.md#from-version-0110-to-0120)
+- Updated `Candlestick` icon asset with smaller size variant ([#998](https://github.com/MetaMask/metamask-design-system/pull/998))
+
+### Fixed
+
+- Improved `Input` single-line typography alignment (including iOS placeholder behavior) ([#1000](https://github.com/MetaMask/metamask-design-system/pull/1000))
+
 ## [0.11.0]
 
 ### Added
@@ -235,7 +262,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.11.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.13.0...HEAD
+[0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.12.0...@metamask/design-system-react-native@0.13.0
+[0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.11.0...@metamask/design-system-react-native@0.12.0
 [0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.10.0...@metamask/design-system-react-native@0.11.0
 [0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.9.0...@metamask/design-system-react-native@0.10.0
 [0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.8.0...@metamask/design-system-react-native@0.9.0

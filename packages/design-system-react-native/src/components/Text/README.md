@@ -81,7 +81,7 @@ Available font weights:
 
 - `FontWeight.Regular` (Weight 400)
 - `FontWeight.Medium` (Weight 500)
-- `FontWeight.Bold` (Weight 700)
+- `FontWeight.Bold` (Weight 600)
 
 | TYPE         | REQUIRED | DEFAULT              |
 | ------------ | -------- | -------------------- |

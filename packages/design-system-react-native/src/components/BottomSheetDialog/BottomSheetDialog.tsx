@@ -59,6 +59,7 @@ const BottomSheetDialog = forwardRef<
       keyboardAvoidingViewEnabled = true,
       onClose,
       onOpen,
+      panGestureHandlerProps,
       style,
       twClassName,
       ...props
@@ -281,6 +282,7 @@ const BottomSheetDialog = forwardRef<
         {...props}
       >
         <PanGestureHandler
+          {...panGestureHandlerProps}
           enabled={isInteractable}
           onGestureEvent={gestureHandler}
         >

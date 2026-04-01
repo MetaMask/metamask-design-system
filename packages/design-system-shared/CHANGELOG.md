@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0]
+
+### Changed
+
+- Added shared `BadgeWrapper` const objects and props (`BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, `BadgeWrapperPropsShared`) so React and React Native now consume a single source of truth for the ADR-0003/ADR-0004 types; both platform packages re-export the shared definitions so existing imports keep working even as the shared package remains the canonical source. See the [design-system-react migration guide](../design-system-react/MIGRATION.md#from-version-0120-to-0130) for additional guidance ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014)).
+
+## [0.5.0]
+
+### Added
+
+- Added shared `BannerAlertSeverity` and `BannerAlertPropsShared` types for cross-package reuse ([#975](https://github.com/MetaMask/metamask-design-system/pull/975))
+- Added shared `AvatarNetworkPropsShared` type (ADR-0004) for cross-package reuse ([#997](https://github.com/MetaMask/metamask-design-system/pull/997))
+
 ## [0.4.0]
 
 ### Added
@@ -62,7 +75,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.4.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.6.0...HEAD
+[0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.5.0...@metamask/design-system-shared@0.6.0
+[0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.4.0...@metamask/design-system-shared@0.5.0
 [0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.3.0...@metamask/design-system-shared@0.4.0
 [0.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.2.0...@metamask/design-system-shared@0.3.0
 [0.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.1.3...@metamask/design-system-shared@0.2.0

@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
-
 import {
   BadgeWrapperPositionAnchorShape,
   BadgeWrapperPosition,
-} from '../../types';
+} from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import React from 'react';
+
 import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
 import { AvatarNetwork } from '../AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';

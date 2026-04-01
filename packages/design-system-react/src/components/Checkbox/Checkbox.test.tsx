@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
 
 import { Checkbox } from './Checkbox';
@@ -228,5 +229,41 @@ describe('Checkbox', () => {
     const input = screen.getByTestId('chk-input');
     fireEvent.keyDown(input, { key: 'Enter' });
     expect(onChange).toHaveBeenCalledWith(true);
+  });
+
+  it('receives keyboard focus via Tab navigation', async () => {
+    const user = userEvent.setup();
+    render(
+      <Checkbox
+        id="test-checkbox"
+        isSelected={false}
+        onChange={jest.fn()}
+        inputProps={{ 'data-testid': 'chk-input' }}
+      />,
+    );
+
+    await user.tab();
+
+    expect(screen.getByTestId('chk-input')).toHaveFocus();
+  });
+
+  it('applies visible focus styles to the rendered checkbox when input is focused', () => {
+    render(
+      <Checkbox
+        id="test-checkbox"
+        isSelected={false}
+        onChange={jest.fn()}
+        inputProps={{ 'data-testid': 'chk-input' }}
+        checkboxContainerProps={{ 'data-testid': 'inner' }}
+      />,
+    );
+
+    expect(screen.getByTestId('chk-input')).toHaveClass('peer');
+    expect(screen.getByTestId('inner')).toHaveClass(
+      'peer-focus-visible:outline',
+      'peer-focus-visible:outline-2',
+      'peer-focus-visible:outline-offset-2',
+      'peer-focus-visible:outline-primary-default',
+    );
   });
 });
