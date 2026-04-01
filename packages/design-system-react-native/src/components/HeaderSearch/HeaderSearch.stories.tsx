@@ -1,0 +1,83 @@
+/* eslint-disable no-console */
+import React, { useState } from 'react';
+
+import { HeaderSearch, HeaderSearchVariant } from './index';
+
+const HeaderSearchMeta = {
+  title: 'Components/HeaderSearch',
+  component: HeaderSearch,
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: [HeaderSearchVariant.Screen, HeaderSearchVariant.Inline],
+    },
+    twClassName: {
+      control: 'text',
+    },
+  },
+};
+
+export default HeaderSearchMeta;
+
+const DefaultStory = (args: { placeholder: string }) => {
+  const [value, setValue] = useState('');
+  return (
+    <HeaderSearch
+      variant={HeaderSearchVariant.Screen}
+      onPressBackButton={() => console.log('Back pressed')}
+      textFieldSearchProps={{
+        value,
+        onChangeText: setValue,
+        onPressClearButton: () => setValue(''),
+        placeholder: args.placeholder,
+      }}
+    />
+  );
+};
+
+export const Default = {
+  args: {
+    placeholder: 'Search...',
+  },
+  render: (args: { placeholder: string }) => <DefaultStory {...args} />,
+};
+
+const ScreenStory = () => {
+  const [value, setValue] = useState('');
+  return (
+    <HeaderSearch
+      variant={HeaderSearchVariant.Screen}
+      onPressBackButton={() => console.log('Back pressed')}
+      textFieldSearchProps={{
+        value,
+        onChangeText: setValue,
+        onPressClearButton: () => setValue(''),
+        placeholder: 'Search tokens, sites, URLs',
+      }}
+    />
+  );
+};
+
+export const Screen = {
+  render: () => <ScreenStory />,
+};
+
+const InlineStory = () => {
+  const [value, setValue] = useState('');
+  return (
+    <HeaderSearch
+      variant={HeaderSearchVariant.Inline}
+      onPressCancelButton={() => console.log('Cancel pressed')}
+      textFieldSearchProps={{
+        value,
+        onChangeText: setValue,
+        onPressClearButton: () => setValue(''),
+        placeholder: 'Search tokens, sites, URLs',
+      }}
+    />
+  );
+};
+
+export const Inline = {
+  render: () => <InlineStory />,
+};

@@ -127,6 +127,13 @@ export type { CheckboxProps } from './Checkbox';
 export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
+export { HeaderSearch, HeaderSearchVariant } from './HeaderSearch';
+export type {
+  HeaderSearchProps,
+  HeaderSearchScreenProps,
+  HeaderSearchInlineProps,
+} from './HeaderSearch';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
