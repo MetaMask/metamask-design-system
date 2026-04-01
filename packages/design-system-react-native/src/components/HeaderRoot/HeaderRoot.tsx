@@ -37,11 +37,7 @@ export const HeaderRoot = ({
 
   const shouldRenderTitleRow = !hasRenderableChildren && hasTitleContent;
 
-  const hasEndSection =
-    Boolean(endAccessory) ||
-    Boolean(endButtonIconProps && endButtonIconProps.length > 0);
-
-  const renderEndSection = () => {
+  const endSectionContent = (() => {
     if (endAccessory) {
       return endAccessory;
     }
@@ -58,7 +54,9 @@ export const HeaderRoot = ({
       ));
     }
     return null;
-  };
+  })();
+
+  const hasEndSection = Boolean(endSectionContent);
 
   const renderLeftSection = () => {
     if (hasRenderableChildren) {
@@ -99,7 +97,7 @@ export const HeaderRoot = ({
       </Box>
       {hasEndSection ? (
         <Box flexDirection={BoxFlexDirection.Row} gap={2}>
-          {renderEndSection()}
+          {endSectionContent}
         </Box>
       ) : null}
     </Box>
