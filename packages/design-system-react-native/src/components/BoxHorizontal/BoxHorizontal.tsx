@@ -1,6 +1,9 @@
+import {
+  BoxAlignItems,
+  BoxFlexDirection,
+} from '@metamask/design-system-shared';
 import React from 'react';
 
-import { BoxAlignItems, BoxFlexDirection } from '../../types';
 import { Box } from '../Box';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
 
