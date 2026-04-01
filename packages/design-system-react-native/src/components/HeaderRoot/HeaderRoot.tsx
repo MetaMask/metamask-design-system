@@ -26,34 +26,47 @@ export const HeaderRoot = ({
 }: HeaderRootProps) => {
   const insets = useSafeAreaInsets();
 
-  let endSectionContent: React.ReactNode = null;
-  if (endAccessory) {
-    endSectionContent = endAccessory;
-  } else if (endButtonIconProps && endButtonIconProps.length > 0) {
-    const reversedProps = endButtonIconProps
-      .map((props, originalIndex) => ({ props, originalIndex }))
-      .reverse();
-    endSectionContent = reversedProps.map(({ props, originalIndex }) => (
-      <ButtonIcon
-        key={`end-button-icon-${originalIndex}`}
-        size={ButtonIconSize.Md}
-        {...props}
-      />
-    ));
-  }
+  const hasRenderableChildren =
+    children !== null &&
+    children !== undefined &&
+    typeof children !== 'boolean';
+
+  const hasTitleContent =
+    (title !== null && title !== undefined) ||
+    (titleAccessory !== null && titleAccessory !== undefined);
+
+  const shouldRenderTitleRow = !hasRenderableChildren && hasTitleContent;
+
+  const hasEndSection =
+    Boolean(endAccessory) ||
+    Boolean(endButtonIconProps && endButtonIconProps.length > 0);
+
+  const renderEndSection = () => {
+    if (endAccessory) {
+      return endAccessory;
+    }
+    if (endButtonIconProps && endButtonIconProps.length > 0) {
+      const reversedProps = endButtonIconProps
+        .map((props, originalIndex) => ({ props, originalIndex }))
+        .reverse();
+      return reversedProps.map(({ props, originalIndex }) => (
+        <ButtonIcon
+          key={`end-button-icon-${originalIndex}`}
+          size={ButtonIconSize.Md}
+          {...props}
+        />
+      ));
+    }
+    return null;
+  };
 
   const renderLeftSection = () => {
-    if (
-      children !== null &&
-      children !== undefined &&
-      typeof children !== 'boolean'
-    ) {
+    if (hasRenderableChildren) {
       return children;
     }
-    if (
-      (title !== null && title !== undefined) ||
-      (titleAccessory !== null && titleAccessory !== undefined)
-    ) {
+    if (shouldRenderTitleRow) {
+      const titleNode =
+        title !== null && title !== undefined && title !== '' ? title : null;
       return (
         <BoxHorizontal
           endAccessory={titleAccessory}
@@ -62,7 +75,7 @@ export const HeaderRoot = ({
             ...titleProps,
           }}
         >
-          {title !== null && title !== undefined && title !== '' ? title : null}
+          {titleNode}
         </BoxHorizontal>
       );
     }
@@ -81,10 +94,14 @@ export const HeaderRoot = ({
       testID={testID}
       {...viewProps}
     >
-      <Box twClassName="flex-1 items-start">{renderLeftSection()}</Box>
-      {endSectionContent !== null && endSectionContent !== undefined && (
-        <Box twClassName="flex-row gap-2">{endSectionContent}</Box>
-      )}
+      <Box alignItems={BoxAlignItems.Start} style={{ flex: 1 }}>
+        {renderLeftSection()}
+      </Box>
+      {hasEndSection ? (
+        <Box flexDirection={BoxFlexDirection.Row} gap={2}>
+          {renderEndSection()}
+        </Box>
+      ) : null}
     </Box>
   );
 };

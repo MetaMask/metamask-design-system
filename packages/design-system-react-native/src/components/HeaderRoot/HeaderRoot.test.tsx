@@ -1,7 +1,10 @@
 // Third party dependencies.
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
 import { IconName } from '../Icon';
@@ -15,6 +18,12 @@ const END_ACCESSORY_TEST_ID = 'header-root-end-accessory';
 const END_BUTTON_TEST_ID = 'header-root-end-button';
 
 describe('HeaderRoot', () => {
+  let tw: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    tw = renderHook(() => useTailwind()).result.current;
+  });
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -252,6 +261,15 @@ describe('HeaderRoot', () => {
   });
 
   describe('includesTopInset', () => {
+    beforeEach(() => {
+      jest.mocked(useSafeAreaInsets).mockReturnValue({
+        top: 50,
+        bottom: 0,
+        left: 0,
+        right: 0,
+      });
+    });
+
     it('applies marginTop style when includesTopInset is true', () => {
       const { getByTestId } = render(
         <HeaderRoot
@@ -261,14 +279,7 @@ describe('HeaderRoot', () => {
         />,
       );
 
-      const container = getByTestId(CONTAINER_TEST_ID);
-
-      expect(container.props.style).toStrictEqual(
-        expect.arrayContaining([
-          expect.anything(),
-          expect.arrayContaining([expect.objectContaining({ marginTop: 0 })]),
-        ]),
-      );
+      expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle({ marginTop: 50 });
     });
 
     it('does not apply marginTop when includesTopInset is false', () => {
@@ -276,17 +287,7 @@ describe('HeaderRoot', () => {
         <HeaderRoot title="Title" testID={CONTAINER_TEST_ID} />,
       );
 
-      const container = getByTestId(CONTAINER_TEST_ID);
-      const userStyleSlot = container.props.style?.[1] as unknown[] | undefined;
-      const marginTopStyle = userStyleSlot?.find(
-        (s: unknown) =>
-          s !== null &&
-          s !== undefined &&
-          typeof s === 'object' &&
-          'marginTop' in s,
-      );
-
-      expect(marginTopStyle).toBeUndefined();
+      expect(getByTestId(CONTAINER_TEST_ID)).not.toHaveStyle({ marginTop: 50 });
     });
   });
 
@@ -301,10 +302,7 @@ describe('HeaderRoot', () => {
         />,
       );
 
-      const container = getByTestId(CONTAINER_TEST_ID);
-      const userStyleSlot = container.props.style?.[1] as unknown[] | undefined;
-
-      expect(userStyleSlot).toContainEqual(customStyle);
+      expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle(customStyle);
     });
 
     it('merges twClassName with base styles', () => {
@@ -312,11 +310,14 @@ describe('HeaderRoot', () => {
         <HeaderRoot
           title="Title"
           testID={CONTAINER_TEST_ID}
-          twClassName="custom-class"
+          twClassName="bg-default"
         />,
       );
 
-      expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
+      const container = getByTestId(CONTAINER_TEST_ID);
+
+      expect(container).toHaveStyle(tw`min-h-14`);
+      expect(container).toHaveStyle(tw`bg-default`);
     });
   });
 

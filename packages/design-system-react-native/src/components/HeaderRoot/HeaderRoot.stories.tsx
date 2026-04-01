@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
 import React from 'react';
 
-import { Box } from '../Box';
+import { Box, BoxAlignItems } from '../Box';
 import { Icon, IconColor, IconName } from '../Icon';
 import { Text, TextVariant } from '../Text';
 
 import { HeaderRoot } from './HeaderRoot';
+import type { HeaderRootProps } from './HeaderRoot.types';
 
 const HeaderRootMeta = {
   title: 'Components/HeaderRoot',
@@ -23,8 +24,10 @@ const HeaderRootMeta = {
 export default HeaderRootMeta;
 
 export const Default = {
+  render: (args: HeaderRootProps) => <HeaderRoot {...args} />,
   args: {
     title: 'Header Title',
+    twClassName: undefined,
   },
 };
 
@@ -43,7 +46,7 @@ export const Title = {
   ),
 };
 
-export const WithTitleAccessory = {
+export const TitleAccessory = {
   render: () => (
     <HeaderRoot
       title="Settings"
@@ -58,7 +61,7 @@ export const WithTitleAccessory = {
   ),
 };
 
-export const WithChildren = {
+export const Children = {
   render: () => (
     <HeaderRoot
       endButtonIconProps={[
@@ -68,7 +71,7 @@ export const WithChildren = {
         },
       ]}
     >
-      <Box twClassName="items-start">
+      <Box alignItems={BoxAlignItems.Start}>
         <Text variant={TextVariant.HeadingSm}>Custom Title</Text>
         <Text variant={TextVariant.BodySm}>Subtitle text</Text>
       </Box>
@@ -76,7 +79,7 @@ export const WithChildren = {
   ),
 };
 
-export const WithEndAccessory = {
+export const EndAccessory = {
   render: () => (
     <HeaderRoot
       title="Page Title"
@@ -85,7 +88,7 @@ export const WithEndAccessory = {
   ),
 };
 
-export const WithEndButtonIconProps = {
+export const EndButtonIconProps = {
   render: () => (
     <HeaderRoot
       title="Search"
@@ -99,7 +102,7 @@ export const WithEndButtonIconProps = {
   ),
 };
 
-export const MultipleEndButtons = {
+export const EndButtonIconPropsMultiple = {
   render: () => (
     <HeaderRoot
       title="Search"
