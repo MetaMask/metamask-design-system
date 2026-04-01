@@ -11,6 +11,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerAlert Component](#banneralert-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
@@ -501,6 +502,90 @@ import {
 - `className` and `style` are still supported
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
+
+### Checkbox Component
+
+The extension `checkbox` component maps to `Checkbox` in `@metamask/design-system-react`, but the state model and callback signatures changed.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                              | Design System Migration                                         |
+| ---------------------------------------------- | --------------------------------------------------------------- |
+| `import { Checkbox } from '../../component-library'` | `import { Checkbox } from '@metamask/design-system-react'`      |
+
+##### Controlled API and Renamed Props
+
+`Checkbox` in the design system is fully controlled and requires `id`, `isSelected`, and `onChange`.
+
+| Extension Prop/Pattern               | Design System Prop/Pattern          | Notes                                        |
+| ------------------------------------ | ----------------------------------- | -------------------------------------------- |
+| `isChecked`                          | `isSelected`                        | renamed                                      |
+| `onChange(event)`                    | `onChange(isSelected: boolean)`     | callback signature changed                   |
+| `id?`                                | `id`                                | now required                                 |
+| `isDisabled`                         | `isDisabled`                        | unchanged                                    |
+| N/A                                  | `isInvalid`                         | new invalid/error visual state               |
+| `iconProps`                          | `checkedIconProps`                  | renamed                                      |
+| `className` / style utility props    | `className` + explicit component API | style-utility passthrough removed            |
+
+##### Removed Props
+
+| Extension Prop     | Design System Migration                                              |
+| ------------------ | -------------------------------------------------------------------- |
+| `isIndeterminate`  | Removed — use explicit selected/unselected states only               |
+| `isReadOnly`       | Removed — guard state updates in parent and keep `isDisabled` false  |
+| `isRequired`       | Removed from top-level API — pass via `inputProps.required`          |
+| `title`            | Removed — pass `inputProps.title` if needed                          |
+| `name`             | Removed from top-level API — pass via `inputProps.name`              |
+| `inputRef`         | Removed — use component `ref` with `{ toggle() }` only              |
+
+##### Defaults and Behavior
+
+| Category | Extension (`ui/components/component-library/checkbox`) | Design System (`@metamask/design-system-react`) |
+| -------- | ------------------------------------------------------ | ------------------------------------------------ |
+| Selected state default | Uncontrolled/optional (`isChecked?`) | Controlled and required (`isSelected`) |
+| Disabled handling | `isDisabled` prevents interaction | `isDisabled` prevents interaction |
+| Read-only handling | `isReadOnly` blocked changes | No direct prop; handle in parent state logic |
+| Visual states | checked + indeterminate | selected + invalid (error border) |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Checkbox } from '../../component-library';
+import { useState } from 'react';
+
+const [isChecked, setIsChecked] = useState(false);
+
+<Checkbox
+  id="terms-checkbox"
+  name="termsAccepted"
+  label="I agree to the terms"
+  isChecked={isChecked}
+  isReadOnly={isSubmitting}
+  onChange={(event) => setIsChecked(Boolean(event.target.checked))}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Checkbox } from '@metamask/design-system-react';
+import { useState } from 'react';
+
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox
+  id="terms-checkbox"
+  label="I agree to the terms"
+  isSelected={isSelected}
+  isDisabled={isSubmitting}
+  onChange={setIsSelected}
+  inputProps={{ name: 'termsAccepted' }}
+/>;
+```
 
 ## Version Updates
 

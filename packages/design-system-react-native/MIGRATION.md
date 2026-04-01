@@ -10,6 +10,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerAlert Component](#banneralert-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
@@ -560,6 +561,85 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+
+### Checkbox Component
+
+The mobile `Checkbox` component maps to `Checkbox` in `@metamask/design-system-react-native`, but state props and callback signatures changed.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                | Design System Migration                                                |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `import Checkbox from '.../component-library/components/Checkbox'` | `import { Checkbox } from '@metamask/design-system-react-native'`      |
+
+##### Controlled API and Renamed Props
+
+`Checkbox` in the design system is fully controlled and requires `isSelected` and `onChange`.
+
+| Mobile Prop/Pattern     | Design System Prop/Pattern      | Notes                                      |
+| ----------------------- | ------------------------------- | ------------------------------------------ |
+| `isChecked`             | `isSelected`                    | renamed                                    |
+| `onPress()`             | `onChange(isSelected: boolean)` | callback signature changed                 |
+| `isDisabled`            | `isDisabled`                    | unchanged                                  |
+| N/A                     | `isInvalid`                     | new invalid/error visual state             |
+| `style`                 | `style`                         | unchanged (`Pressable` style callback supported) |
+| `label`                 | `label`                         | unchanged                                  |
+
+##### Removed Props
+
+| Mobile Prop        | Design System Migration                                           |
+| ------------------ | ----------------------------------------------------------------- |
+| `isIndeterminate`  | Removed — use explicit selected/unselected states only            |
+| `isReadOnly`       | Removed — gate updates in parent and optionally disable press     |
+| `isDanger`         | Removed — use `isInvalid` for error state                         |
+| `checkboxStyle`    | Removed — use `checkboxContainerProps.style`                      |
+| `onPress`          | Removed — use `onChange`                                          |
+
+##### Defaults and Behavior
+
+| Category | Mobile (`app/component-library/components/Checkbox`) | Design System (`@metamask/design-system-react-native`) |
+| -------- | ---------------------------------------------------- | ------------------------------------------------------- |
+| Selected state default | Optional (`isChecked = false`) | Controlled and required (`isSelected`) |
+| Disabled handling | `isDisabled` blocks press | `isDisabled` blocks press |
+| Read-only handling | `isReadOnly` alters styles and interaction | No direct prop; handle in parent logic |
+| Visual states | checked + indeterminate + danger | selected + invalid |
+| Callback output | no args (`onPress`) | next state boolean (`onChange`) |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Checkbox from '../../../component-library/components/Checkbox';
+import { useState } from 'react';
+
+const [isChecked, setIsChecked] = useState(false);
+
+<Checkbox
+  label="Enable notifications"
+  isChecked={isChecked}
+  isReadOnly={isSubmitting}
+  onPress={() => setIsChecked(!isChecked)}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Checkbox } from '@metamask/design-system-react-native';
+import { useState } from 'react';
+
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox
+  label="Enable notifications"
+  isSelected={isSelected}
+  isDisabled={isSubmitting}
+  onChange={setIsSelected}
+/>;
+```
 
 ## Version Updates
 
