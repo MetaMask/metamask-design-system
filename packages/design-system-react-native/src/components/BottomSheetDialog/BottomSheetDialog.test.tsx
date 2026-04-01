@@ -9,7 +9,7 @@ import type { ReactTestInstance } from 'react-test-renderer';
 import { Text } from '../Text';
 
 // Internal dependencies
-import BottomSheetDialog from './BottomSheetDialog';
+import { BottomSheetDialog } from './BottomSheetDialog';
 import type { BottomSheetDialogRef } from './BottomSheetDialog.types';
 
 const mockThemeRef = { current: 'light' };
