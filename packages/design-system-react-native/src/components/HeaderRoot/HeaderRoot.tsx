@@ -43,7 +43,11 @@ export const HeaderRoot = ({
   }
 
   const renderLeftSection = () => {
-    if (children !== null && children !== undefined) {
+    if (
+      children !== null &&
+      children !== undefined &&
+      typeof children !== 'boolean'
+    ) {
       return children;
     }
     if (

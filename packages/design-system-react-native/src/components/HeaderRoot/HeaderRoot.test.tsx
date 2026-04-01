@@ -125,6 +125,14 @@ describe('HeaderRoot', () => {
       expect(getByText('Title When Children Null')).toBeOnTheScreen();
     });
 
+    it('renders title row when children is false from conditional rendering', () => {
+      const { getByText } = render(
+        <HeaderRoot title="Settings">{false}</HeaderRoot>,
+      );
+
+      expect(getByText('Settings')).toBeOnTheScreen();
+    });
+
     it('renders nothing in left section when no children and no title or titleAccessory', () => {
       const { getByTestId, queryByText } = render(
         <HeaderRoot testID={CONTAINER_TEST_ID} />,
