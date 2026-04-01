@@ -1,9 +1,9 @@
 // Third party dependencies.
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
+import React from 'react';
 
 // Internal dependencies.
-import { HeaderSearch, HeaderSearchVariant } from './index';
+import { HeaderSearch, HeaderSearchVariant } from '.';
 
 const mockTextFieldSearchProps = {
   value: '',

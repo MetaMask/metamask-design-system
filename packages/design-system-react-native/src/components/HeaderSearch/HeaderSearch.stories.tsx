@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 
-import { HeaderSearch, HeaderSearchVariant } from './index';
+import { HeaderSearch, HeaderSearchVariant } from '.';
 
 const HeaderSearchMeta = {
   title: 'Components/HeaderSearch',

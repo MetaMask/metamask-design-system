@@ -1,16 +1,13 @@
-// Third party dependencies.
+import { HeaderSearchVariant } from '@metamask/design-system-shared';
 import React from 'react';
 
-// External dependencies.
-import { HeaderSearchVariant } from '@metamask/design-system-shared';
 import { Box } from '../Box';
 import { Button, ButtonVariant } from '../Button';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { IconName } from '../Icon';
-
-// Internal dependencies.
 import { TextFieldSearch } from '../TextFieldSearch';
 import type { TextFieldSearchProps } from '../TextFieldSearch';
+
 import type { HeaderSearchProps } from './HeaderSearch.types';
 
 const CANCEL_LABEL = 'Cancel';
@@ -44,6 +41,9 @@ const CANCEL_LABEL = 'Cancel';
  *     placeholder: 'Search...',
  *   }}
  * />
+ *
+ * @param props - Header row props (discriminated by `variant`).
+ * @returns The header search UI for the active variant.
  */
 export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   const baseTwClassName = 'h-14 flex-row items-center';

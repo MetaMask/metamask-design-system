@@ -1,13 +1,11 @@
-// External dependencies.
 import type {
   HeaderSearchInlinePropsShared,
   HeaderSearchScreenPropsShared,
 } from '@metamask/design-system-shared';
-import type { BoxProps } from '../Box';
-import type { ButtonIconProps } from '../ButtonIcon';
-import type { ButtonProps } from '../Button';
 
-// Internal dependencies.
+import type { BoxProps } from '../Box';
+import type { ButtonProps } from '../Button';
+import type { ButtonIconProps } from '../ButtonIcon';
 import type { TextFieldSearchProps } from '../TextFieldSearch';
 
 type HeaderSearchBaseProps = Omit<BoxProps, 'children'> & {
