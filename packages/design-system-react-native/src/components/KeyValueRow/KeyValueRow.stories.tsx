@@ -5,14 +5,11 @@ import { Button, ButtonVariant } from '../Button';
 import { IconColor, IconName, IconSize } from '../Icon';
 import { Text, TextColor, TextVariant } from '../Text';
 
-import KeyValueRowComponent, {
-  KeyValueRowFieldIconSides,
-  TooltipSizes,
-} from '.';
+import { KeyValueRow, KeyValueRowFieldIconSides, TooltipSizes } from '.';
 
 const KeyValueRowMeta = {
   title: 'Components/KeyValueRow',
-  component: KeyValueRowComponent,
+  component: KeyValueRow,
 };
 
 export default KeyValueRowMeta;
@@ -27,7 +24,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const KeyValueRow = {
+export const Default = {
   render: () => (
     <View style={styles.container}>
       <Text variant={TextVariant.HeadingMd}>KeyValueRow Component</Text>
@@ -36,7 +33,7 @@ export const KeyValueRow = {
         to create new KeyValueRow variants.
       </Text>
       <View style={styles.listItem}>
-        <KeyValueRowComponent
+        <KeyValueRow
           field={{
             label: {
               text: 'Sample Key Text',
@@ -44,7 +41,7 @@ export const KeyValueRow = {
           }}
           value={{ label: { text: 'Sample Value Text' } }}
         />
-        <KeyValueRowComponent
+        <KeyValueRow
           field={{
             label: {
               text: 'Sample Key Text',
@@ -66,7 +63,7 @@ export const KeyValueRow = {
             },
           }}
         />
-        <KeyValueRowComponent
+        <KeyValueRow
           field={{
             label: {
               text: 'Sample Key Text',
@@ -83,7 +80,7 @@ export const KeyValueRow = {
             },
           }}
         />
-        <KeyValueRowComponent
+        <KeyValueRow
           field={{
             label: {
               text: 'Sample Key Text',
@@ -108,7 +105,7 @@ export const KeyValueRow = {
           }}
         />
         {/* Using Custom ReactNode */}
-        <KeyValueRowComponent
+        <KeyValueRow
           field={{
             label: { text: 'Sample Key' },
             icon: {
@@ -125,10 +122,10 @@ export const KeyValueRow = {
             label: (
               <Button
                 variant={ButtonVariant.Primary}
-                label="Sample button"
-                // eslint-disable-next-line no-alert
-                onPress={() => alert('test')}
-              />
+                onPress={() => console.log('Button Pressed')}
+              >
+                Sample button
+              </Button>
             ),
           }}
         />

@@ -33,7 +33,7 @@ const renderIcon = (icon: IconWithSide) => {
  *
  * @returns The rendered KeyValueRow component.
  */
-const KeyValueRow: React.FC<KeyValueRowProps> = ({
+export const KeyValueRow: React.FC<KeyValueRowProps> = ({
   field,
   value,
   twClassName,
@@ -89,5 +89,3 @@ export const KeyValueRowStubs = {
   Section: KeyValueSection,
   Label: KeyValueRowLabel,
 };
-
-export { KeyValueRow };

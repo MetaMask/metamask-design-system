@@ -4,7 +4,7 @@ import { Animated, View } from 'react-native';
 
 import type { SkeletonProps } from './Skeleton.types';
 
-const Skeleton: React.FC<SkeletonProps> = ({
+export const Skeleton: React.FC<SkeletonProps> = ({
   height,
   width,
   children,
@@ -93,5 +93,3 @@ const Skeleton: React.FC<SkeletonProps> = ({
     </View>
   );
 };
-
-export { Skeleton };

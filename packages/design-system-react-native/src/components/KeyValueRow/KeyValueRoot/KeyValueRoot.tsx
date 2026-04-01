@@ -24,7 +24,7 @@ import type { KeyValueRowRootProps } from '../KeyValueRow.types';
  *
  * @returns The rendered Root component.
  */
-const KeyValueRowRoot: React.FC<KeyValueRowRootProps> = ({
+export const KeyValueRowRoot: React.FC<KeyValueRowRootProps> = ({
   children,
   twClassName,
   style,
@@ -47,5 +47,3 @@ const KeyValueRowRoot: React.FC<KeyValueRowRootProps> = ({
     </View>
   );
 };
-
-export { KeyValueRowRoot };

@@ -17,7 +17,7 @@ import type { KeyValueSectionProps } from '../KeyValueRow.types';
  *
  * @returns The rendered KeyValueSection component.
  */
-const KeyValueSection: React.FC<KeyValueSectionProps> = ({
+export const KeyValueSection: React.FC<KeyValueSectionProps> = ({
   children,
   align = KeyValueRowSectionAlignments.Left,
   twClassName,
@@ -32,5 +32,3 @@ const KeyValueSection: React.FC<KeyValueSectionProps> = ({
     </View>
   );
 };
-
-export { KeyValueSection };

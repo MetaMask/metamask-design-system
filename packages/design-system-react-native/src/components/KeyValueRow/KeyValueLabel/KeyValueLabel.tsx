@@ -17,7 +17,7 @@ import { isPreDefinedKeyValueRowLabel } from '../KeyValueRow.utils';
  *
  * @returns The rendered KeyValueRowLabel component.
  */
-const KeyValueRowLabel: React.FC<KeyValueRowLabelProps> = ({
+export const KeyValueRowLabel: React.FC<KeyValueRowLabelProps> = ({
   label,
   tooltip,
 }) => {
@@ -48,5 +48,3 @@ const KeyValueRowLabel: React.FC<KeyValueRowLabelProps> = ({
     </View>
   );
 };
-
-export { KeyValueRowLabel };
