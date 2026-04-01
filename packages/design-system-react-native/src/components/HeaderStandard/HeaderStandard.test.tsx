@@ -1,6 +1,6 @@
 // Third party dependencies.
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
+import React from 'react';
 import { Text } from 'react-native';
 
 // External dependencies.
@@ -152,7 +152,7 @@ describe('HeaderStandard', () => {
       );
 
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
-      expect(queryAllByText(/.+/)).toHaveLength(0);
+      expect(queryAllByText(/.+/u)).toHaveLength(0);
     });
 
     it('does not render subtitle row when subtitle is an empty string', () => {

@@ -3,16 +3,16 @@ import React, { useMemo } from 'react';
 
 // External dependencies.
 import { Box, BoxAlignItems } from '../Box';
+import { BoxVertical } from '../BoxVertical';
 import type { ButtonIconProps } from '../ButtonIcon';
+import { HeaderBase } from '../HeaderBase';
 import { IconName } from '../Icon';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
 import { FontWeight, TextColor, TextVariant } from '../Text';
 
 // Internal dependencies.
-import { HeaderBase } from '../HeaderBase';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
 import type { HeaderStandardProps } from './HeaderStandard.types';
 
-/** Centered title and optional back/close actions; extends HeaderBase. */
 const HeaderStandard: React.FC<HeaderStandardProps> = ({
   title,
   titleProps,
@@ -67,30 +67,31 @@ const HeaderStandard: React.FC<HeaderStandardProps> = ({
     }
     if (title) {
       return (
-        <Box alignItems={BoxAlignItems.Center}>
-          <TextOrChildren
-            textProps={{
-              variant: TextVariant.BodyMd,
-              fontWeight: FontWeight.Bold,
-              ...titleProps,
-            }}
-          >
-            {title}
-          </TextOrChildren>
-          {subtitle && (
-            <Box twClassName="-mt-0.5">
-              <TextOrChildren
-                textProps={{
-                  variant: TextVariant.BodySm,
-                  color: TextColor.TextAlternative,
-                  ...subtitleProps,
-                }}
-              >
-                {subtitle}
-              </TextOrChildren>
-            </Box>
-          )}
-        </Box>
+        <BoxVertical
+          alignItems={BoxAlignItems.Center}
+          textProps={{
+            variant: TextVariant.BodyMd,
+            fontWeight: FontWeight.Bold,
+            ...titleProps,
+          }}
+          bottomAccessory={
+            subtitle ? (
+              <Box twClassName="-mt-0.5">
+                <TextOrChildren
+                  textProps={{
+                    variant: TextVariant.BodySm,
+                    color: TextColor.TextAlternative,
+                    ...subtitleProps,
+                  }}
+                >
+                  {subtitle}
+                </TextOrChildren>
+              </Box>
+            ) : undefined
+          }
+        >
+          {title}
+        </BoxVertical>
       );
     }
     return null;

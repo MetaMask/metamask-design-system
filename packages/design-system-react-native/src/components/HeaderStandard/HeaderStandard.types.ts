@@ -1,11 +1,10 @@
-// External dependencies.
+// Third party dependencies.
 import React from 'react';
 
+// External dependencies.
 import type { ButtonIconProps } from '../ButtonIcon';
-import type { TextProps } from '../Text';
-
-// Internal dependencies.
 import type { HeaderBaseProps } from '../HeaderBase';
+import type { TextProps } from '../Text';
 
 /**
  * HeaderStandard component props.
