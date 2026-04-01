@@ -3,9 +3,9 @@ import React from 'react';
 
 // External dependencies.
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
+import { BoxHorizontal } from '../BoxHorizontal';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { TextVariant } from '../Text';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Internal dependencies.
@@ -26,27 +26,21 @@ export const HeaderRoot = ({
 }: HeaderRootProps) => {
   const insets = useSafeAreaInsets();
 
-  const renderEndContent = () => {
-    if (endAccessory) {
-      return endAccessory;
-    }
-    if (endButtonIconProps && endButtonIconProps.length > 0) {
-      const reversedProps = endButtonIconProps
-        .map((props, originalIndex) => ({ props, originalIndex }))
-        .reverse();
-      return reversedProps.map(({ props, originalIndex }) => (
-        <ButtonIcon
-          key={`end-button-icon-${originalIndex}`}
-          size={ButtonIconSize.Md}
-          {...props}
-        />
-      ));
-    }
-    return null;
-  };
-
-  const hasEndContent =
-    endAccessory || (endButtonIconProps && endButtonIconProps.length > 0);
+  let endSectionContent: React.ReactNode = null;
+  if (endAccessory) {
+    endSectionContent = endAccessory;
+  } else if (endButtonIconProps && endButtonIconProps.length > 0) {
+    const reversedProps = endButtonIconProps
+      .map((props, originalIndex) => ({ props, originalIndex }))
+      .reverse();
+    endSectionContent = reversedProps.map(({ props, originalIndex }) => (
+      <ButtonIcon
+        key={`end-button-icon-${originalIndex}`}
+        size={ButtonIconSize.Md}
+        {...props}
+      />
+    ));
+  }
 
   const renderLeftSection = () => {
     if (children != null && children !== undefined) {
@@ -54,22 +48,15 @@ export const HeaderRoot = ({
     }
     if (title != null || titleAccessory != null) {
       return (
-        <Box
-          flexDirection={BoxFlexDirection.Row}
-          alignItems={BoxAlignItems.Center}
+        <BoxHorizontal
+          endAccessory={titleAccessory}
+          textProps={{
+            variant: TextVariant.HeadingLg,
+            ...titleProps,
+          }}
         >
-          {title != null && title !== '' && (
-            <TextOrChildren
-              textProps={{
-                variant: TextVariant.HeadingLg,
-                ...titleProps,
-              }}
-            >
-              {title}
-            </TextOrChildren>
-          )}
-          {titleAccessory}
-        </Box>
+          {title != null && title !== '' ? title : null}
+        </BoxHorizontal>
       );
     }
     return null;
@@ -88,8 +75,8 @@ export const HeaderRoot = ({
       {...viewProps}
     >
       <Box twClassName="flex-1 items-start">{renderLeftSection()}</Box>
-      {hasEndContent && (
-        <Box twClassName="flex-row gap-2">{renderEndContent()}</Box>
+      {endSectionContent != null && (
+        <Box twClassName="flex-row gap-2">{endSectionContent}</Box>
       )}
     </Box>
   );
