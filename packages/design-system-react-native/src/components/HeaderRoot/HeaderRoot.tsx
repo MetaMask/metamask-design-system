@@ -1,12 +1,12 @@
 // Third party dependencies.
 import React from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 import { BoxHorizontal } from '../BoxHorizontal';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { TextVariant } from '../Text';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Internal dependencies.
 import type { HeaderRootProps } from './HeaderRoot.types';
@@ -43,10 +43,13 @@ export const HeaderRoot = ({
   }
 
   const renderLeftSection = () => {
-    if (children != null && children !== undefined) {
+    if (children !== null && children !== undefined) {
       return children;
     }
-    if (title != null || titleAccessory != null) {
+    if (
+      (title !== null && title !== undefined) ||
+      (titleAccessory !== null && titleAccessory !== undefined)
+    ) {
       return (
         <BoxHorizontal
           endAccessory={titleAccessory}
@@ -55,7 +58,7 @@ export const HeaderRoot = ({
             ...titleProps,
           }}
         >
-          {title != null && title !== '' ? title : null}
+          {title !== null && title !== undefined && title !== '' ? title : null}
         </BoxHorizontal>
       );
     }
@@ -75,7 +78,7 @@ export const HeaderRoot = ({
       {...viewProps}
     >
       <Box twClassName="flex-1 items-start">{renderLeftSection()}</Box>
-      {endSectionContent != null && (
+      {endSectionContent !== null && endSectionContent !== undefined && (
         <Box twClassName="flex-row gap-2">{endSectionContent}</Box>
       )}
     </Box>

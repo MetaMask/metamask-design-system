@@ -1,6 +1,6 @@
 // Third party dependencies.
-import { ViewProps, StyleProp, ViewStyle } from 'react-native';
 import { ReactNode } from 'react';
+import { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
 // External dependencies.
 import type { ButtonIconProps } from '../ButtonIcon';

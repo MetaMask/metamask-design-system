@@ -1,7 +1,7 @@
 // Third party dependencies.
+import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
-import { render, fireEvent } from '@testing-library/react-native';
 
 // External dependencies.
 import { IconName } from '../Icon';
@@ -255,7 +255,7 @@ describe('HeaderRoot', () => {
 
       const container = getByTestId(CONTAINER_TEST_ID);
 
-      expect(container.props.style).toEqual(
+      expect(container.props.style).toStrictEqual(
         expect.arrayContaining([
           expect.anything(),
           expect.arrayContaining([expect.objectContaining({ marginTop: 0 })]),
@@ -271,7 +271,11 @@ describe('HeaderRoot', () => {
       const container = getByTestId(CONTAINER_TEST_ID);
       const userStyleSlot = container.props.style?.[1] as unknown[] | undefined;
       const marginTopStyle = userStyleSlot?.find(
-        (s: unknown) => s != null && typeof s === 'object' && 'marginTop' in s,
+        (s: unknown) =>
+          s !== null &&
+          s !== undefined &&
+          typeof s === 'object' &&
+          'marginTop' in s,
       );
 
       expect(marginTopStyle).toBeUndefined();
