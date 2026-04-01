@@ -1,13 +1,16 @@
-import { FontWeight, TextVariant } from '@metamask/design-system-shared';
+import {
+  BoxAlignItems,
+  BoxBackgroundColor,
+  BoxFlexDirection,
+  FontWeight,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import React from 'react';
 import { GestureResponderEvent } from 'react-native';
 
 import {
-  BoxAlignItems,
-  BoxBackgroundColor,
   ButtonIconSize,
   ButtonSize,
-  BoxFlexDirection,
   IconName,
 } from '../../types';
 import { Box } from '../Box';
