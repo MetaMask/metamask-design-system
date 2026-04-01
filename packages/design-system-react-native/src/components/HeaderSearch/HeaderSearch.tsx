@@ -52,7 +52,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     const {
       variant: _variant,
       textFieldSearchProps,
-      twClassName = '',
+      twClassName,
       onPressBackButton,
       backButtonProps,
       ...screenBoxProps
@@ -61,7 +61,11 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     return (
       <Box
         {...screenBoxProps}
-        twClassName={`${baseTwClassName} ml-1 mr-4 gap-2 ${twClassName}`.trim()}
+        twClassName={
+          twClassName
+            ? `${baseTwClassName} ml-1 mr-4 gap-2 ${twClassName}`
+            : `${baseTwClassName} ml-1 mr-4 gap-2`
+        }
       >
         <ButtonIcon
           iconName={IconName.ArrowLeft}
@@ -69,11 +73,14 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
           onPress={onPressBackButton}
           {...backButtonProps}
         />
-        <Box twClassName="flex-1">
-          <TextFieldSearch
-            {...(textFieldSearchProps as TextFieldSearchProps)}
-          />
-        </Box>
+        <TextFieldSearch
+          {...(textFieldSearchProps as TextFieldSearchProps)}
+          twClassName={
+            textFieldSearchProps.twClassName
+              ? `flex-1 ${textFieldSearchProps.twClassName}`
+              : 'flex-1'
+          }
+        />
       </Box>
     );
   }
@@ -81,7 +88,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   const {
     variant: _variant,
     textFieldSearchProps,
-    twClassName = '',
+    twClassName,
     onPressCancelButton,
     cancelButtonProps,
     ...inlineBoxProps
@@ -90,24 +97,29 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   return (
     <Box
       {...inlineBoxProps}
-      twClassName={`${baseTwClassName} ml-4 ${twClassName}`.trim()}
+      twClassName={
+        twClassName
+          ? `${baseTwClassName} ml-4 ${twClassName}`
+          : `${baseTwClassName} ml-4`
+      }
     >
-      <Box twClassName="flex-1">
-        <TextFieldSearch {...(textFieldSearchProps as TextFieldSearchProps)} />
-      </Box>
+      <TextFieldSearch
+        {...(textFieldSearchProps as TextFieldSearchProps)}
+        twClassName={
+          textFieldSearchProps.twClassName
+            ? `flex-1 ${textFieldSearchProps.twClassName}`
+            : 'flex-1'
+        }
+      />
       <Button
         variant={ButtonVariant.Tertiary}
         onPress={onPressCancelButton}
         {...cancelButtonProps}
         textProps={{
           ...cancelButtonProps?.textProps,
-          twClassName: [
-            'text-default',
-            cancelButtonProps?.textProps?.twClassName,
-          ]
-            .filter(Boolean)
-            .join(' ')
-            .trim(),
+          twClassName: cancelButtonProps?.textProps?.twClassName
+            ? `text-default ${cancelButtonProps.textProps.twClassName}`
+            : 'text-default',
         }}
       >
         {CANCEL_LABEL}

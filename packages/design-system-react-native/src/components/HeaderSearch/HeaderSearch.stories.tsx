@@ -1,82 +1,103 @@
+import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 
-import { HeaderSearch, HeaderSearchVariant } from '.';
+import { Box } from '../Box';
 
-const HeaderSearchMeta = {
+import { HeaderSearch, HeaderSearchVariant } from '.';
+import type { HeaderSearchProps } from './HeaderSearch.types';
+
+const noop = () => undefined;
+
+const meta: Meta<HeaderSearchProps> = {
   title: 'Components/HeaderSearch',
   component: HeaderSearch,
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: [HeaderSearchVariant.Screen, HeaderSearchVariant.Inline],
-    },
-    twClassName: {
-      control: 'text',
-    },
+  decorators: [
+    (Story) => (
+      <Box twClassName="w-full bg-background-default">
+        <Story />
+      </Box>
+    ),
+  ],
+};
+
+export default meta;
+
+type Story = StoryObj<HeaderSearchProps>;
+
+export const Default: Story = {
+  render: () => {
+    const [value, setValue] = useState('');
+
+    return (
+      <HeaderSearch
+        variant={HeaderSearchVariant.Screen}
+        onPressBackButton={noop}
+        textFieldSearchProps={{
+          value,
+          onChangeText: setValue,
+          onPressClearButton: () => setValue(''),
+          placeholder: 'Search...',
+        }}
+      />
+    );
   },
 };
 
-export default HeaderSearchMeta;
+export const Inline: Story = {
+  render: () => {
+    const [value, setValue] = useState('');
 
-const DefaultStory = (args: { placeholder: string }) => {
-  const [value, setValue] = useState('');
-  return (
-    <HeaderSearch
-      variant={HeaderSearchVariant.Screen}
-      onPressBackButton={() => console.log('Back pressed')}
-      textFieldSearchProps={{
-        value,
-        onChangeText: setValue,
-        onPressClearButton: () => setValue(''),
-        placeholder: args.placeholder,
-      }}
-    />
-  );
-};
-
-export const Default = {
-  args: {
-    placeholder: 'Search...',
+    return (
+      <HeaderSearch
+        variant={HeaderSearchVariant.Inline}
+        onPressCancelButton={noop}
+        textFieldSearchProps={{
+          value,
+          onChangeText: setValue,
+          onPressClearButton: () => setValue(''),
+          placeholder: 'Search tokens, sites, URLs',
+        }}
+      />
+    );
   },
-  render: (args: { placeholder: string }) => <DefaultStory {...args} />,
 };
 
-const ScreenStory = () => {
-  const [value, setValue] = useState('');
-  return (
-    <HeaderSearch
-      variant={HeaderSearchVariant.Screen}
-      onPressBackButton={() => console.log('Back pressed')}
-      textFieldSearchProps={{
-        value,
-        onChangeText: setValue,
-        onPressClearButton: () => setValue(''),
-        placeholder: 'Search tokens, sites, URLs',
-      }}
-    />
-  );
+export const BackButtonProps: Story = {
+  render: () => {
+    const [value, setValue] = useState('');
+
+    return (
+      <HeaderSearch
+        variant={HeaderSearchVariant.Screen}
+        onPressBackButton={noop}
+        backButtonProps={{ accessibilityLabel: 'Go back' }}
+        textFieldSearchProps={{
+          value,
+          onChangeText: setValue,
+          onPressClearButton: () => setValue(''),
+          placeholder: 'Search tokens, sites, URLs',
+        }}
+      />
+    );
+  },
 };
 
-export const Screen = {
-  render: () => <ScreenStory />,
-};
+export const CancelButtonProps: Story = {
+  render: () => {
+    const [value, setValue] = useState('');
 
-const InlineStory = () => {
-  const [value, setValue] = useState('');
-  return (
-    <HeaderSearch
-      variant={HeaderSearchVariant.Inline}
-      onPressCancelButton={() => console.log('Cancel pressed')}
-      textFieldSearchProps={{
-        value,
-        onChangeText: setValue,
-        onPressClearButton: () => setValue(''),
-        placeholder: 'Search tokens, sites, URLs',
-      }}
-    />
-  );
-};
-
-export const Inline = {
-  render: () => <InlineStory />,
+    return (
+      <HeaderSearch
+        variant={HeaderSearchVariant.Inline}
+        onPressCancelButton={noop}
+        cancelButtonProps={{ testID: 'header-search-cancel' }}
+        textFieldSearchProps={{
+          value,
+          onChangeText: setValue,
+          onPressClearButton: () => setValue(''),
+          placeholder: 'Search tokens, sites, URLs',
+        }}
+      />
+    );
+  },
 };
