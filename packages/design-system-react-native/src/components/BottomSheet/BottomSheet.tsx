@@ -12,7 +12,7 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import BottomSheetDialog from '../BottomSheetDialog';
+import { BottomSheetDialog } from '../BottomSheetDialog';
 import type { BottomSheetDialogRef } from '../BottomSheetDialog';
 import { BottomSheetOverlay } from '../BottomSheetOverlay/BottomSheetOverlay';
 
