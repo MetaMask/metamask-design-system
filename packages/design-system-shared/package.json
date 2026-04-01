@@ -57,6 +57,9 @@
     "ts-jest": "^29.2.5",
     "typescript": "~5.2.2"
   },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0"
+  },
   "engines": {
     "node": "^18.18 || >=20"
   },
