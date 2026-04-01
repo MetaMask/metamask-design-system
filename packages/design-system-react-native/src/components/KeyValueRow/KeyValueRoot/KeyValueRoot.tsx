@@ -48,4 +48,4 @@ const KeyValueRowRoot: React.FC<KeyValueRowRootProps> = ({
   );
 };
 
-export default KeyValueRowRoot;
+export { KeyValueRowRoot };

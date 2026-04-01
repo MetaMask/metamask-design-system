@@ -49,4 +49,4 @@ const KeyValueRowLabel: React.FC<KeyValueRowLabelProps> = ({
   );
 };
 
-export default KeyValueRowLabel;
+export { KeyValueRowLabel };

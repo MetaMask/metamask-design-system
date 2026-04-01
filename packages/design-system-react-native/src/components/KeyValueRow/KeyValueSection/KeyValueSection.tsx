@@ -33,4 +33,4 @@ const KeyValueSection: React.FC<KeyValueSectionProps> = ({
   );
 };
 
-export default KeyValueSection;
+export { KeyValueSection };

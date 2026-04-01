@@ -5,14 +5,14 @@ import { View } from 'react-native';
 import { Icon } from '../Icon';
 import type { IconProps } from '../Icon';
 
-import KeyValueRowLabel from './KeyValueLabel/KeyValueLabel';
-import KeyValueRowRoot from './KeyValueRoot/KeyValueRoot';
+import { KeyValueRowLabel } from './KeyValueLabel/KeyValueLabel';
+import { KeyValueRowRoot } from './KeyValueRoot/KeyValueRoot';
 import type { KeyValueRowProps } from './KeyValueRow.types';
 import {
   KeyValueRowFieldIconSides,
   KeyValueRowSectionAlignments,
 } from './KeyValueRow.types';
-import KeyValueSection from './KeyValueSection/KeyValueSection';
+import { KeyValueSection } from './KeyValueSection/KeyValueSection';
 
 type IconWithSide = IconProps & { side?: KeyValueRowFieldIconSides };
 
@@ -90,4 +90,4 @@ export const KeyValueRowStubs = {
   Label: KeyValueRowLabel,
 };
 
-export default KeyValueRow;
+export { KeyValueRow };

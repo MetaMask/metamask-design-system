@@ -303,4 +303,4 @@ const BottomSheetDialog = forwardRef<
   },
 );
 
-export default BottomSheetDialog;
+export { BottomSheetDialog };

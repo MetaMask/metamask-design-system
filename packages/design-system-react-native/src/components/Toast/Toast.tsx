@@ -311,4 +311,4 @@ const Toast = forwardRef<ToastRef, ToastProps>(
   },
 );
 
-export default Toast;
+export { Toast };

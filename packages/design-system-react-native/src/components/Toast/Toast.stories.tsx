@@ -12,7 +12,7 @@ import { Button, ButtonVariant } from '../Button';
 import { Text } from '../Text';
 
 // Internal dependencies.
-import ToastComponent from './Toast';
+import { Toast as ToastComponent } from './Toast';
 import { ToastContext, ToastContextWrapper } from './Toast.context';
 import type { ToastOptions } from './Toast.types';
 import { ToastVariant } from './Toast.types';
