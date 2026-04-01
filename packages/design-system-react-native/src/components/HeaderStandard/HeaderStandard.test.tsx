@@ -7,7 +7,7 @@ import { Text } from 'react-native';
 import { IconName } from '../Icon';
 
 // Internal dependencies.
-import HeaderStandard from './HeaderStandard';
+import { HeaderStandard } from './HeaderStandard';
 
 const CONTAINER_TEST_ID = 'header-standard-container';
 const TITLE_TEST_ID = 'header-standard-title';

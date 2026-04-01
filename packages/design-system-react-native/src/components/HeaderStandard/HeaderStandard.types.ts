@@ -26,7 +26,7 @@ export type HeaderStandardProps = HeaderBaseProps & {
   /**
    * Subtitle to display below the title. Can be a string or a React node.
    * When string: rendered with TextVariant.BodySm and TextColor.TextAlternative by default; subtitleProps apply.
-   * When node: rendered inside the same -mt-0.5 container; subtitleProps are not applied.
+   * When node: rendered as-is; subtitleProps are not applied (add spacing on your root if needed, e.g. twClassName).
    */
   subtitle?: string | React.ReactNode;
   /**
