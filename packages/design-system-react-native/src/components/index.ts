@@ -127,6 +127,9 @@ export type { CheckboxProps } from './Checkbox';
 export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
+export { default as HeaderStandard } from './HeaderStandard';
+export type { HeaderStandardProps } from './HeaderStandard';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
@@ -175,6 +178,9 @@ export type { TextProps } from './Text';
 
 export { TextField } from './TextField';
 export type { TextFieldProps } from './TextField';
+
+export { TextFieldSearch } from './TextFieldSearch';
+export type { TextFieldSearchProps } from './TextFieldSearch';
 
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
