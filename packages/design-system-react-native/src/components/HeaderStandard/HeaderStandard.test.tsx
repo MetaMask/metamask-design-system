@@ -15,6 +15,7 @@ const BACK_BUTTON_TEST_ID = 'header-standard-back-button';
 const CLOSE_BUTTON_TEST_ID = 'header-standard-close-button';
 const START_ACCESSORY_TEST_ID = 'start-accessory-wrapper';
 const END_ACCESSORY_TEST_ID = 'end-accessory-wrapper';
+const SUBTITLE_ROW_TEST_ID = 'header-standard-subtitle-row';
 
 describe('HeaderStandard', () => {
   beforeEach(() => {
@@ -144,6 +145,29 @@ describe('HeaderStandard', () => {
       expect(getByTestId(TITLE_NODE_TEST_ID)).toBeOnTheScreen();
       expect(getByTestId(SUBTITLE_NODE_TEST_ID)).toBeOnTheScreen();
     });
+
+    it('renders no title row when title and children are omitted', () => {
+      const { getByTestId, queryAllByText } = render(
+        <HeaderStandard testID={CONTAINER_TEST_ID} />,
+      );
+
+      expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
+      expect(queryAllByText(/.+/)).toHaveLength(0);
+    });
+
+    it('does not render subtitle row when subtitle is an empty string', () => {
+      const { getByTestId, queryByTestId } = render(
+        <HeaderStandard
+          title="Only Title"
+          titleProps={{ testID: TITLE_TEST_ID }}
+          subtitle=""
+          subtitleProps={{ testID: SUBTITLE_ROW_TEST_ID }}
+        />,
+      );
+
+      expect(getByTestId(TITLE_TEST_ID)).toBeOnTheScreen();
+      expect(queryByTestId(SUBTITLE_ROW_TEST_ID)).not.toBeOnTheScreen();
+    });
   });
 
   describe('back button', () => {
@@ -157,6 +181,25 @@ describe('HeaderStandard', () => {
       );
 
       expect(getByTestId(BACK_BUTTON_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('renders back button when only onBack is provided', () => {
+      const { getByTestId } = render(
+        <HeaderStandard title="Title" onBack={jest.fn()} />,
+      );
+
+      expect(getByTestId('button-icon')).toBeOnTheScreen();
+    });
+
+    it('calls onBack when only onBack is provided', () => {
+      const onBack = jest.fn();
+      const { getByTestId } = render(
+        <HeaderStandard title="Title" onBack={onBack} />,
+      );
+
+      fireEvent.press(getByTestId('button-icon'));
+
+      expect(onBack).toHaveBeenCalledTimes(1);
     });
 
     it('renders back button when backButtonProps provided', () => {
@@ -277,6 +320,25 @@ describe('HeaderStandard', () => {
       expect(getByTestId(CLOSE_BUTTON_TEST_ID)).toBeOnTheScreen();
     });
 
+    it('renders close button when only onClose is provided', () => {
+      const { getByTestId } = render(
+        <HeaderStandard title="Title" onClose={jest.fn()} />,
+      );
+
+      expect(getByTestId('button-icon')).toBeOnTheScreen();
+    });
+
+    it('calls onClose when only onClose is provided', () => {
+      const onClose = jest.fn();
+      const { getByTestId } = render(
+        <HeaderStandard title="Title" onClose={onClose} />,
+      );
+
+      fireEvent.press(getByTestId('button-icon'));
+
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
+
     it('renders close button when closeButtonProps provided', () => {
       const { getByTestId } = render(
         <HeaderStandard
@@ -347,6 +409,38 @@ describe('HeaderStandard', () => {
 
       expect(queryByTestId(END_ACCESSORY_TEST_ID)).not.toBeOnTheScreen();
     });
+
+    it('renders endButtonIconProps when onClose and closeButtonProps are omitted', () => {
+      const onPress = jest.fn();
+      const { getByTestId } = render(
+        <HeaderStandard
+          title="Title"
+          endButtonIconProps={[
+            {
+              iconName: IconName.Search,
+              onPress,
+              testID: 'header-end-search',
+            },
+          ]}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        />,
+      );
+
+      expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId('header-end-search')).toBeOnTheScreen();
+    });
+
+    it('does not render end accessory when endButtonIconProps is an empty array', () => {
+      const { queryByTestId } = render(
+        <HeaderStandard
+          title="Title"
+          endButtonIconProps={[]}
+          endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
+        />,
+      );
+
+      expect(queryByTestId(END_ACCESSORY_TEST_ID)).not.toBeOnTheScreen();
+    });
   });
 
   describe('props forwarding', () => {
@@ -386,6 +480,18 @@ describe('HeaderStandard', () => {
       );
 
       expect(getByTestId('custom-header')).toBeOnTheScreen();
+    });
+
+    it('applies default horizontal padding and custom twClassName on the root', () => {
+      const { getByTestId } = render(
+        <HeaderStandard
+          title="Title"
+          testID={CONTAINER_TEST_ID}
+          twClassName="  border-b border-muted  "
+        />,
+      );
+
+      expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
     });
   });
 });
