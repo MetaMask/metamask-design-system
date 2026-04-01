@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
 
+import { Text } from '../Text';
 import { TextFieldSearch } from './TextFieldSearch';
 
 describe('TextFieldSearch', () => {
@@ -41,6 +42,32 @@ describe('TextFieldSearch', () => {
       />,
     );
 
+    expect(screen.queryByTestId('clear-button')).toBeNull();
+  });
+
+  it('uses startAccessory when provided', () => {
+    render(
+      <TextFieldSearch
+        value=""
+        onPressClearButton={mockOnPressClearButton}
+        startAccessory={<Text testID="custom-start">S</Text>}
+      />,
+    );
+
+    expect(screen.getByTestId('custom-start')).toBeOnTheScreen();
+  });
+
+  it('uses endAccessory when provided instead of clear button', () => {
+    render(
+      <TextFieldSearch
+        value="search text"
+        onPressClearButton={mockOnPressClearButton}
+        clearButtonProps={{ testID: 'clear-button' }}
+        endAccessory={<Text testID="custom-end">E</Text>}
+      />,
+    );
+
+    expect(screen.getByTestId('custom-end')).toBeOnTheScreen();
     expect(screen.queryByTestId('clear-button')).toBeNull();
   });
 });

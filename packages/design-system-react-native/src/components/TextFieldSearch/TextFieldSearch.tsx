@@ -9,7 +9,18 @@ import { TextField } from '../TextField';
 import type { TextFieldSearchProps } from './TextFieldSearch.types';
 
 export const TextFieldSearch = forwardRef<TextInput, TextFieldSearchProps>(
-  ({ onPressClearButton, clearButtonProps, value, style, ...props }, ref) => {
+  (
+    {
+      onPressClearButton,
+      clearButtonProps,
+      value,
+      style,
+      startAccessory,
+      endAccessory,
+      ...props
+    },
+    ref,
+  ) => {
     const tw = useTailwind();
     const containerStyle = tw.style('rounded-full');
 
@@ -40,8 +51,14 @@ export const TextFieldSearch = forwardRef<TextInput, TextFieldSearchProps>(
         ref={ref}
         {...props}
         value={value}
-        startAccessory={searchIcon}
-        endAccessory={Boolean(value) && clearButton}
+        startAccessory={
+          startAccessory !== undefined ? startAccessory : searchIcon
+        }
+        endAccessory={
+          endAccessory !== undefined
+            ? endAccessory
+            : Boolean(value) && clearButton
+        }
         testID="textfieldsearch"
         style={[containerStyle, style]}
       />
