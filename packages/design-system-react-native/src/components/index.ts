@@ -134,6 +134,9 @@ export type {
   HeaderSearchInlineProps,
 } from './HeaderSearch';
 
+export { default as HeaderStandard } from './HeaderStandard';
+export type { HeaderStandardProps } from './HeaderStandard';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
