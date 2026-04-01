@@ -8,7 +8,8 @@ import type { ButtonIconProps } from '../ButtonIcon';
 import { HeaderBase } from '../HeaderBase';
 import { IconName } from '../Icon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
-import { FontWeight, TextColor, TextVariant, type TextProps } from '../Text';
+import type { TextProps } from '../Text';
+import { FontWeight, TextColor, TextVariant } from '../Text';
 
 // Internal dependencies.
 import type { HeaderStandardProps } from './HeaderStandard.types';
