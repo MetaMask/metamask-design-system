@@ -130,6 +130,9 @@ export type { HeaderBaseProps } from './HeaderBase';
 export { HeaderRoot } from './HeaderRoot';
 export type { HeaderRootProps } from './HeaderRoot';
 
+export { HeaderStandard } from './HeaderStandard';
+export type { HeaderStandardProps } from './HeaderStandard';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
