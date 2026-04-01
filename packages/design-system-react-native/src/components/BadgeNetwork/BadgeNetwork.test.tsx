@@ -1,36 +1,32 @@
-import { render } from '@testing-library/react-native';
 import React from 'react';
+import * as ReactTestRenderer from 'react-test-renderer';
 
-import { AvatarNetworkSize } from '../AvatarNetwork';
+import { AvatarNetwork } from '../AvatarNetwork';
 
 import { BadgeNetwork } from './BadgeNetwork';
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
-const AVATAR_NETWORK_SIZE_PX_MAP: Record<AvatarNetworkSize, number> = {
-  [AvatarNetworkSize.Xs]: 16,
-  [AvatarNetworkSize.Sm]: 24,
-  [AvatarNetworkSize.Md]: 32,
-  [AvatarNetworkSize.Lg]: 40,
-  [AvatarNetworkSize.Xl]: 48,
-};
 
 describe('BadgeNetwork', () => {
-  it('renders an AvatarNetwork with size forced to Xs and forwards additional props', () => {
-    const { getByTestId } = render(
+  it('forwards props and enforces BadgeNetwork-specific AvatarNetwork props', () => {
+    const tree = ReactTestRenderer.create(
       <BadgeNetwork
         src={remoteImageSrc}
-        testID="badge-network"
+        testID="badge-network-root"
+        name="Ethereum"
+        fallbackText="E"
         imageOrSvgProps={{ imageProps: { testID: 'image-or-svg' } }}
       />,
     );
-    const renderedComponent = getByTestId('badge-network');
-    expect(renderedComponent).toBeDefined();
-    expect(renderedComponent.props.style[0].height.toString()).toStrictEqual(
-      (AVATAR_NETWORK_SIZE_PX_MAP[AvatarNetworkSize.Xs] + 2).toString(),
-    );
 
-    expect(renderedComponent.props.children.props.src).toStrictEqual(
-      remoteImageSrc,
-    );
+    const avatarNetwork = tree.root.findByType(AvatarNetwork);
+    expect(avatarNetwork.props.src).toStrictEqual(remoteImageSrc);
+    expect(avatarNetwork.props.testID).toBe('badge-network-root');
+    expect(avatarNetwork.props.name).toBe('Ethereum');
+    expect(avatarNetwork.props.fallbackText).toBe('E');
+    expect(avatarNetwork.props.imageOrSvgProps).toStrictEqual({
+      imageProps: { testID: 'image-or-svg' },
+    });
+    expect(avatarNetwork.props.hasBorder).toBe(true);
   });
 });
