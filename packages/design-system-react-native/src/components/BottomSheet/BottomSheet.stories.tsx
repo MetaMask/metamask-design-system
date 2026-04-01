@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useRef, useState } from 'react';
 import { Platform, Pressable, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { BottomSheetFooter } from '../BottomSheetFooter';
 import { BottomSheetHeader } from '../BottomSheetHeader';
@@ -26,16 +25,6 @@ const meta: Meta<BottomSheetProps> = {
     twClassName: { control: 'text' },
     style: { control: 'object' },
   },
-  decorators: [
-    (Story) => (
-      <SafeAreaProvider>
-        <Box twClassName="w-full h-full relative bg-background-alternative justify-center items-center">
-          <Text>Content behind overlay</Text>
-          <Story />
-        </Box>
-      </SafeAreaProvider>
-    ),
-  ],
 };
 
 export default meta;
