@@ -117,6 +117,23 @@ Optional callback that gets triggered when the sheet open animation completes.
 </BottomSheetDialog>
 ```
 
+### `panGestureHandlerProps`
+
+Optional props object forwarded to the child `PanGestureHandler`. Use this to configure gesture interoperability such as `simultaneousHandlers`, `waitFor`, and related handler options.
+`enabled` and `onGestureEvent` are controlled internally and cannot be overridden.
+
+| TYPE                     | REQUIRED | DEFAULT     |
+| ------------------------ | -------- | ----------- |
+| `PanGestureHandlerProps` | No       | `undefined` |
+
+```tsx
+const scrollRef = useRef(null);
+
+<BottomSheetDialog panGestureHandlerProps={{ simultaneousHandlers: scrollRef }}>
+  <Text>Content</Text>
+</BottomSheetDialog>;
+```
+
 ### `twClassName`
 
 Use the `twClassName` prop to add Tailwind CSS classes to the dialog container. These classes will be merged with the component's default classes, allowing you to customize the dialog appearance.
