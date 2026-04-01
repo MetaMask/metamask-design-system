@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 
-import { Box, BoxAlignItems } from '../Box';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 import { Icon, IconColor, IconName } from '../Icon';
 import { Text, TextVariant } from '../Text';
 
@@ -26,7 +26,7 @@ export default HeaderRootMeta;
 export const Default = {
   render: (args: HeaderRootProps) => <HeaderRoot {...args} />,
   args: {
-    title: 'Header Title',
+    title: 'Explore',
     twClassName: undefined,
   },
 };
@@ -64,16 +64,35 @@ export const TitleAccessory = {
 export const Children = {
   render: () => (
     <HeaderRoot
+      twClassName="bg-default"
       endButtonIconProps={[
         {
-          iconName: IconName.Close,
-          onPress: () => console.log('Close pressed'),
+          iconName: IconName.Menu,
+          onPress: () => console.log('Menu pressed'),
+        },
+        {
+          iconName: IconName.Card,
+          onPress: () => console.log('Card pressed'),
+        },
+        {
+          iconName: IconName.Copy,
+          onPress: () => console.log('Copy pressed'),
         },
       ]}
     >
-      <Box alignItems={BoxAlignItems.Start}>
-        <Text variant={TextVariant.HeadingSm}>Custom Title</Text>
-        <Text variant={TextVariant.BodySm}>Subtitle text</Text>
+      <Box
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Center}
+        gap={1}
+      >
+        <Text variant={TextVariant.BodyMd} twClassName="text-default">
+          Imported Account 1
+        </Text>
+        <Icon
+          name={IconName.ArrowDown}
+          color={IconColor.IconDefault}
+          twClassName="text-default"
+        />
       </Box>
     </HeaderRoot>
   ),
@@ -91,11 +110,11 @@ export const EndAccessory = {
 export const EndButtonIconProps = {
   render: () => (
     <HeaderRoot
-      title="Search"
+      title="Rewards"
       endButtonIconProps={[
         {
-          iconName: IconName.Close,
-          onPress: () => console.log('Close pressed'),
+          iconName: IconName.Setting,
+          onPress: () => console.log('Settings pressed'),
         },
       ]}
     />
