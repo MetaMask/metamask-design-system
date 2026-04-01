@@ -127,6 +127,9 @@ export type { CheckboxProps } from './Checkbox';
 export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
+export { HeaderRoot } from './HeaderRoot';
+export type { HeaderRootProps } from './HeaderRoot';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
