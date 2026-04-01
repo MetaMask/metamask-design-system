@@ -32,7 +32,6 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
       style,
       twClassName,
       isInteractable = true,
-      shouldNavigateBack = true,
       isFullscreen = false,
       keyboardAvoidingViewEnabled = true,
       ...props
@@ -61,9 +60,9 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     }, [onOpen]);
 
     const onCloseCB = useCallback(() => {
-      if (shouldNavigateBack && !didNavigateBackRef.current) {
+      if (goBack && !didNavigateBackRef.current) {
         didNavigateBackRef.current = true;
-        goBack();
+        goBack?.();
       }
 
       const callback = postCallback.current;
@@ -76,7 +75,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
         postCallback.current = undefined;
         callback?.();
       }
-    }, [goBack, onClose, shouldNavigateBack]);
+    }, [goBack, onClose]);
 
     // Dismiss the sheet when Android back button is pressed.
     useEffect(() => {
