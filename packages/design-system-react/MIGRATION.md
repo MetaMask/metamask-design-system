@@ -513,36 +513,36 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 
 ##### Import Path
 
-| Extension Pattern                                  | Design System Migration                                           |
-| -------------------------------------------------- | ----------------------------------------------------------------- |
-| `import { Checkbox } from '../../component-library'` | `import { Checkbox } from '@metamask/design-system-react'`        |
+| Extension Pattern                                       | Design System Migration                                              |
+| ------------------------------------------------------- | -------------------------------------------------------------------- |
+| `import { Checkbox } from '../../component-library'`    | `import { Checkbox } from '@metamask/design-system-react'`           |
 | `import type { CheckboxProps } from './checkbox.types'` | `import type { CheckboxProps } from '@metamask/design-system-react'` |
 
 ##### Props and Callback Mapping
 
-| Extension API | Design System API | Change Type | Notes |
-| --- | --- | --- | --- |
-| `isChecked?: boolean` | `isSelected: boolean` | renamed + now required | controlled value must be explicitly passed |
+| Extension API                                               | Design System API                         | Change Type                      | Notes                                                         |
+| ----------------------------------------------------------- | ----------------------------------------- | -------------------------------- | ------------------------------------------------------------- |
+| `isChecked?: boolean`                                       | `isSelected: boolean`                     | renamed + now required           | controlled value must be explicitly passed                    |
 | `onChange?: (event: ChangeEvent<HTMLInputElement>) => void` | `onChange: (isSelected: boolean) => void` | signature changed + now required | callback receives the next boolean value instead of DOM event |
-| `id?: string` | `id: string` | now required | required for `input`/`label` association |
-| `iconProps?: IconProps<'span'>` | `checkedIconProps?: Partial<IconProps>` | renamed | use for checked icon customization |
-| `isIndeterminate?: boolean` | removed | removed | no built-in tri-state behavior |
-| `isReadOnly?: boolean` | removed | removed | handle read-only behavior in parent by no-oping `onChange` |
-| `isRequired?: boolean` | removed from top-level | moved | pass through `inputProps={{ required: true }}` |
-| `name?: string` | removed from top-level | moved | pass through `inputProps={{ name: 'fieldName' }}` |
-| `title?: string` | removed from top-level | moved | pass through `inputProps={{ title: '...' }}` |
-| `inputRef` | removed | removed | no dedicated input ref prop |
-| broad Box/Text style utility props | removed | removed | use `className`, `style`, and explicit props instead |
-| `isInvalid` | `isInvalid` | added in MMDS | use for error styling (`false` by default) |
+| `id?: string`                                               | `id: string`                              | now required                     | required for `input`/`label` association                      |
+| `iconProps?: IconProps<'span'>`                             | `checkedIconProps?: Partial<IconProps>`   | renamed                          | use for checked icon customization                            |
+| `isIndeterminate?: boolean`                                 | removed                                   | removed                          | no built-in tri-state behavior                                |
+| `isReadOnly?: boolean`                                      | removed                                   | removed                          | handle read-only behavior in parent by no-oping `onChange`    |
+| `isRequired?: boolean`                                      | removed from top-level                    | moved                            | pass through `inputProps={{ required: true }}`                |
+| `name?: string`                                             | removed from top-level                    | moved                            | pass through `inputProps={{ name: 'fieldName' }}`             |
+| `title?: string`                                            | removed from top-level                    | moved                            | pass through `inputProps={{ title: '...' }}`                  |
+| `inputRef`                                                  | removed                                   | removed                          | no dedicated input ref prop                                   |
+| broad Box/Text style utility props                          | removed                                   | removed                          | use `className`, `style`, and explicit props instead          |
+| `isInvalid`                                                 | `isInvalid`                               | added in MMDS                    | use for error styling (`false` by default)                    |
 
 ##### Default and Behavior Changes
 
-| Concern | Extension Behavior | Design System Behavior |
-| --- | --- | --- |
-| Controlled state defaults | `isChecked` optional (unchecked when omitted) | `isSelected` required |
-| Keyboard Enter handling | invokes `onChange(event)` | toggles and calls `onChange(nextValue)` |
-| Indeterminate visuals | built-in minus/check rendering via `isIndeterminate` | not built in; implement tri-state logic in parent |
-| Read-only mode | `isReadOnly` prevented updates | no explicit prop; enforce via parent callback logic |
+| Concern                   | Extension Behavior                                   | Design System Behavior                              |
+| ------------------------- | ---------------------------------------------------- | --------------------------------------------------- |
+| Controlled state defaults | `isChecked` optional (unchecked when omitted)        | `isSelected` required                               |
+| Keyboard Enter handling   | invokes `onChange(event)`                            | toggles and calls `onChange(nextValue)`             |
+| Indeterminate visuals     | built-in minus/check rendering via `isIndeterminate` | not built in; implement tri-state logic in parent   |
+| Read-only mode            | `isReadOnly` prevented updates                       | no explicit prop; enforce via parent callback logic |
 
 #### Migration Example
 

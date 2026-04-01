@@ -570,36 +570,36 @@ The mobile `Checkbox` maps to `Checkbox` in the design system, with controlled-s
 
 ##### Import Path
 
-| Mobile Pattern | Design System Migration |
-| --- | --- |
-| `import Checkbox from '.../component-library/components/Checkbox'` | `import { Checkbox } from '@metamask/design-system-react-native'` |
-| `import type { CheckboxProps } from '.../Checkbox.types'` | `import type { CheckboxProps } from '@metamask/design-system-react-native'` |
+| Mobile Pattern                                                     | Design System Migration                                                     |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| `import Checkbox from '.../component-library/components/Checkbox'` | `import { Checkbox } from '@metamask/design-system-react-native'`           |
+| `import type { CheckboxProps } from '.../Checkbox.types'`          | `import type { CheckboxProps } from '@metamask/design-system-react-native'` |
 
 ##### Props and Callback Mapping
 
-| Mobile API | Design System API | Change Type | Notes |
-| --- | --- | --- | --- |
-| `isChecked?: boolean` | `isSelected: boolean` | renamed + now required | controlled value must be explicitly passed |
-| `onPress?: () => void` | `onChange: (isSelected: boolean) => void` | callback renamed + signature changed + now required | callback receives next boolean value |
-| `checkboxStyle?: StyleProp<ViewStyle>` | removed top-level prop | removed | style the container with `style` / `twClassName` or customize via `checkboxContainerProps` |
-| `isIndeterminate?: boolean` | removed | removed | no built-in tri-state checkbox mode |
-| `isReadOnly?: boolean` | removed | removed | enforce read-only in parent by no-oping `onChange` |
-| `isDanger?: boolean` | removed | removed | no danger variant in MMDS checkbox |
-| `isDisabled?: boolean` | `isDisabled?: boolean` | unchanged | still defaults to `false` |
-| `label?: string \| ReactNode` | `label?: string \| ReactNode` | unchanged | still supported |
-| `labelProps` | `labelProps` | unchanged | still supported (Text props) |
-| `checkedIconProps` | `checkedIconProps` | added in MMDS | customize selected check icon |
-| `checkboxContainerProps` | `checkboxContainerProps` | added in MMDS | customize icon container view |
+| Mobile API                             | Design System API                         | Change Type                                         | Notes                                                                                      |
+| -------------------------------------- | ----------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `isChecked?: boolean`                  | `isSelected: boolean`                     | renamed + now required                              | controlled value must be explicitly passed                                                 |
+| `onPress?: () => void`                 | `onChange: (isSelected: boolean) => void` | callback renamed + signature changed + now required | callback receives next boolean value                                                       |
+| `checkboxStyle?: StyleProp<ViewStyle>` | removed top-level prop                    | removed                                             | style the container with `style` / `twClassName` or customize via `checkboxContainerProps` |
+| `isIndeterminate?: boolean`            | removed                                   | removed                                             | no built-in tri-state checkbox mode                                                        |
+| `isReadOnly?: boolean`                 | removed                                   | removed                                             | enforce read-only in parent by no-oping `onChange`                                         |
+| `isDanger?: boolean`                   | removed                                   | removed                                             | no danger variant in MMDS checkbox                                                         |
+| `isDisabled?: boolean`                 | `isDisabled?: boolean`                    | unchanged                                           | still defaults to `false`                                                                  |
+| `label?: string \| ReactNode`          | `label?: string \| ReactNode`             | unchanged                                           | still supported                                                                            |
+| `labelProps`                           | `labelProps`                              | unchanged                                           | still supported (Text props)                                                               |
+| `checkedIconProps`                     | `checkedIconProps`                        | added in MMDS                                       | customize selected check icon                                                              |
+| `checkboxContainerProps`               | `checkboxContainerProps`                  | added in MMDS                                       | customize icon container view                                                              |
 
 ##### Default and Behavior Changes
 
-| Concern | Mobile Behavior | Design System Behavior |
-| --- | --- | --- |
-| Controlled state defaults | `isChecked` optional (unchecked when omitted) | `isSelected` required |
-| Interaction callback | `onPress()` with no args | `onChange(nextIsSelected)` |
-| Press target | `TouchableOpacity` | `Pressable` with `accessibilityRole="checkbox"` |
-| Icon state handling | check/minus icon for checked/indeterminate | check icon only for selected state |
-| Disabled + readonly | component disabled when `isDisabled` or `isReadOnly` | disabled only through `isDisabled` |
+| Concern                   | Mobile Behavior                                      | Design System Behavior                          |
+| ------------------------- | ---------------------------------------------------- | ----------------------------------------------- |
+| Controlled state defaults | `isChecked` optional (unchecked when omitted)        | `isSelected` required                           |
+| Interaction callback      | `onPress()` with no args                             | `onChange(nextIsSelected)`                      |
+| Press target              | `TouchableOpacity`                                   | `Pressable` with `accessibilityRole="checkbox"` |
+| Icon state handling       | check/minus icon for checked/indeterminate           | check icon only for selected state              |
+| Disabled + readonly       | component disabled when `isDisabled` or `isReadOnly` | disabled only through `isDisabled`              |
 
 #### Migration Example
 
