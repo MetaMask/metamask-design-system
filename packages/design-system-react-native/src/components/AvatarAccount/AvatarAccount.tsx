@@ -10,6 +10,7 @@ import { Blockies } from '../temp-components/Blockies';
 import { Jazzicon } from '../temp-components/Jazzicon';
 import { Maskicon } from '../temp-components/Maskicon';
 
+import { MAP_AVATARACCOUNT_SIZE_SIZENUMBER } from './AvatarAccount.constants';
 import type { AvatarAccountProps } from './AvatarAccount.types';
 
 export const AvatarAccount = ({
@@ -26,18 +27,30 @@ export const AvatarAccount = ({
   switch (variant) {
     case AvatarAccountVariant.Blockies:
       AvatarArtComponent = (
-        <Blockies address={address} size={Number(size)} {...blockiesProps} />
+        <Blockies
+          address={address}
+          size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
+          {...blockiesProps}
+        />
       );
       break;
     case AvatarAccountVariant.Maskicon:
       AvatarArtComponent = (
-        <Maskicon address={address} size={Number(size)} {...maskiconProps} />
+        <Maskicon
+          address={address}
+          size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
+          {...maskiconProps}
+        />
       );
       break;
     case AvatarAccountVariant.Jazzicon:
     default:
       AvatarArtComponent = (
-        <Jazzicon address={address} size={Number(size)} {...jazziconProps} />
+        <Jazzicon
+          address={address}
+          size={MAP_AVATARACCOUNT_SIZE_SIZENUMBER[size]}
+          {...jazziconProps}
+        />
       );
       break;
   }
