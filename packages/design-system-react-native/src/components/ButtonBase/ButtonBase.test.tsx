@@ -5,7 +5,10 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import * as ReactTestRenderer from 'react-test-renderer';
 
-import { ButtonBaseSize, IconName } from '../../types';
+import {
+  ButtonBaseSize,
+  IconName,
+} from '@metamask/design-system-shared';
 
 import { ButtonBase } from './ButtonBase';
 

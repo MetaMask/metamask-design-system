@@ -2,8 +2,10 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { ButtonPrimarySize } from '../../../../types';
-import { IconName } from '../../../Icon';
+import {
+  ButtonBaseSize as ButtonPrimarySize,
+  IconName,
+} from '@metamask/design-system-shared';
 
 import { ButtonPrimary } from './ButtonPrimary';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';

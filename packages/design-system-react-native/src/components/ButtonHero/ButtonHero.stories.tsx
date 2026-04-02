@@ -2,8 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { ButtonHeroSize } from '../../types';
-import { IconName } from '../Icon';
+import {
+  ButtonBaseSize as ButtonHeroSize,
+  IconName,
+} from '@metamask/design-system-shared';
 
 import { ButtonHero } from './ButtonHero';
 

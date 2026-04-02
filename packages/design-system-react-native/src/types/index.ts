@@ -21,33 +21,13 @@ export enum AvatarGroupVariant {
 }
 
 /**
- * ButtonBase - size
+ * AvatarIcon - severity
  */
-export enum ButtonBaseSize {
-  /**
-   * Represents a small button size (32px).
-   */
-  Sm = 'sm',
-  /**
-   * Represents a medium button size (40px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large button size (48px).
-   */
-  Lg = 'lg',
-}
-export { ButtonBaseSize as ButtonSize };
-export { ButtonBaseSize as ButtonPrimarySize };
-export { ButtonBaseSize as ButtonSecondarySize };
-export { ButtonBaseSize as ButtonTertiarySize };
-export { ButtonBaseSize as ButtonHeroSize };
-
-/**
- * Button - variant
- */
-export enum ButtonVariant {
-  Primary = 'primary',
-  Secondary = 'secondary',
-  Tertiary = 'tertiary',
+export enum AvatarIconSeverity {
+  Neutral = 'neutral',
+  Info = 'info',
+  Success = 'success',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  Error = 'error',
+  Warning = 'warning',
 }

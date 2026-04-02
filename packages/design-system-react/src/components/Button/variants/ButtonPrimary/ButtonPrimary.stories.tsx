@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { ButtonPrimarySize } from '../../../../types';
-import { IconName } from '../../../Icon';
+import {
+  ButtonBaseSize as ButtonPrimarySize,
+  IconName,
+} from '@metamask/design-system-shared';
 
 import { ButtonPrimary } from './ButtonPrimary';
 import README from './README.mdx';

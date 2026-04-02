@@ -4,7 +4,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 import * as ReactTestRenderer from 'react-test-renderer';
 
-import { ButtonBaseSize } from '../../../../types';
+import { ButtonBaseSize } from '@metamask/design-system-shared';
 
 import { ButtonSecondary } from './ButtonSecondary';
 

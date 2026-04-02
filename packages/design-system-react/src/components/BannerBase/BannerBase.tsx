@@ -1,14 +1,14 @@
 import {
   BoxAlignItems,
   BoxBackgroundColor,
+  ButtonBaseSize as ButtonSize,
   BoxFlexDirection,
   ButtonIconSize,
   FontWeight,
+  IconName,
   TextVariant,
 } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
-
-import { ButtonSize, IconName } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Box } from '../Box';
 import { Button } from '../Button';
