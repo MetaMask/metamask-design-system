@@ -56,3 +56,6 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
+// Textarea types (ADR-0004)
+export { type TextareaPropsShared } from './types/Textarea';
