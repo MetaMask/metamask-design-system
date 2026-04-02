@@ -7,12 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.7.0]
-
-### Changed
-
-- Release-only compatibility bump for workspace alignment with `@metamask/design-system-react@0.14.0`; no runtime API or class token behavior changes in this package ([#1035](https://github.com/MetaMask/metamask-design-system/pull/1035)).
-
 ## [0.6.1]
 
 ### Fixed
@@ -68,8 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.7.0...HEAD
-[0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.1...@metamask/design-system-tailwind-preset@0.7.0
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.1...HEAD
 [0.6.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.0...@metamask/design-system-tailwind-preset@0.6.1
 [0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.5.0...@metamask/design-system-tailwind-preset@0.6.0
 [0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.4.0...@metamask/design-system-tailwind-preset@0.5.0

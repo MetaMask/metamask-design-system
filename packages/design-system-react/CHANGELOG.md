@@ -13,7 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated `AvatarBase` exports to consume shared ADR-0003/ADR-0004 const-object + string-union types instead of local enums ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005)).
 - Updated `@metamask/utils` peer dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033)).
-- Updated `@metamask/design-system-tailwind-preset` peer dependency to `^0.7.0` ([#1035](https://github.com/MetaMask/metamask-design-system/pull/1035)).
 - Expanded `BannerBase` migration documentation to improve upgrade guidance for consumers moving between recent releases ([#1011](https://github.com/MetaMask/metamask-design-system/pull/1011)).
 
 ## [0.13.0]

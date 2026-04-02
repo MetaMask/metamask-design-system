@@ -20,12 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **BREAKING:** Updated `BottomSheet` navigation callback API: `shouldNavigateBack` was replaced with optional `goBack` callback ([#1024](https://github.com/MetaMask/metamask-design-system/pull/1024)).
-  - Migration: rename `shouldNavigateBack` to `goBack`
+  - Migration: remove `shouldNavigateBack`; pass `goBack` only when close should navigate back
   - See [Migration Guide](./MIGRATION.md#from-version-0130-to-0140)
 - Updated `AvatarBase` exports to consume shared ADR-0003/ADR-0004 const-object + string-union types instead of local enums ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005)).
 - Updated package exports to named-export style across React Native component modules ([#1032](https://github.com/MetaMask/metamask-design-system/pull/1032)).
 - Updated `@metamask/utils` peer dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033)).
-- Updated `@metamask/design-system-twrnc-preset` peer dependency to `^0.5.0` ([#1035](https://github.com/MetaMask/metamask-design-system/pull/1035)).
 - Expanded `BannerBase` migration documentation to improve upgrade guidance for consumers moving between recent releases ([#1011](https://github.com/MetaMask/metamask-design-system/pull/1011)).
 
 ### Fixed

@@ -7,12 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.5.0]
-
-### Changed
-
-- Release-only compatibility bump for workspace alignment with `@metamask/design-system-react-native@0.14.0`; no runtime API or preset behavior changes in this package ([#1035](https://github.com/MetaMask/metamask-design-system/pull/1035)).
-
 ## [0.4.0]
 
 ### Changed
@@ -55,8 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.5.0...HEAD
-[0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.0...@metamask/design-system-twrnc-preset@0.5.0
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.0...HEAD
 [0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.3.0...@metamask/design-system-twrnc-preset@0.4.0
 [0.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.1...@metamask/design-system-twrnc-preset@0.3.0
 [0.2.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.0...@metamask/design-system-twrnc-preset@0.2.1

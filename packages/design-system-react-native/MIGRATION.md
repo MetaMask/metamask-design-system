@@ -657,31 +657,47 @@ This section covers version-to-version breaking changes within `@metamask/design
 
 #### Breaking Changes
 
-- Removed `shouldNavigateBack`.
-- Added `goBack?: () => void`.
+- Removed `shouldNavigateBack?: boolean`.
+- `goBack` is now optional (`goBack?: () => void`).
 
 #### Migration Example
 
-**Before (0.13.0):**
+**Before (0.13.0), navigate back on close:**
 
 ```tsx
 import { BottomSheet } from '@metamask/design-system-react-native';
 
-<BottomSheet shouldNavigateBack={onClose} />;
+<BottomSheet shouldNavigateBack goBack={navigation.goBack} />;
 ```
 
-**After (0.14.0):**
+**After (0.14.0), navigate back on close:**
 
 ```tsx
 import { BottomSheet } from '@metamask/design-system-react-native';
 
-<BottomSheet goBack={onClose} />;
+<BottomSheet goBack={navigation.goBack} />;
+```
+
+**Before (0.13.0), do not navigate back on close:**
+
+```tsx
+import { BottomSheet } from '@metamask/design-system-react-native';
+
+<BottomSheet shouldNavigateBack={false} goBack={navigation.goBack} />;
+```
+
+**After (0.14.0), do not navigate back on close:**
+
+```tsx
+import { BottomSheet } from '@metamask/design-system-react-native';
+
+<BottomSheet />;
 ```
 
 #### Impact
 
 - Affects any screen that passes `shouldNavigateBack` to `BottomSheet`.
-- TypeScript consumers will receive an error until they rename the prop.
+- TypeScript consumers will receive an error until they remove `shouldNavigateBack`.
 
 ## From version 0.12.0 to 0.13.0
 
