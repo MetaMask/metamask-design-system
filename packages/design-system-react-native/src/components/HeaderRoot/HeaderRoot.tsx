@@ -1,9 +1,9 @@
 // Third party dependencies.
+import { isReactNodeRenderable } from '@metamask/design-system-shared';
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
-import { isRenderableReactNode } from '@metamask/design-system-shared';
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 import { BoxHorizontal } from '../BoxHorizontal';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
@@ -27,11 +27,11 @@ export const HeaderRoot = ({
 }: HeaderRootProps) => {
   const insets = useSafeAreaInsets();
 
-  const hasRenderableChildren = isRenderableReactNode(children);
+  const hasRenderableChildren = isReactNodeRenderable(children);
 
   const hasTitleContent =
     title !== false &&
-    (isRenderableReactNode(title) || isRenderableReactNode(titleAccessory));
+    (isReactNodeRenderable(title) || isReactNodeRenderable(titleAccessory));
 
   const shouldRenderTitleRow = !hasRenderableChildren && hasTitleContent;
 
@@ -62,7 +62,7 @@ export const HeaderRoot = ({
     }
     if (shouldRenderTitleRow) {
       const titleNode =
-        isRenderableReactNode(title) && title !== '' ? title : null;
+        isReactNodeRenderable(title) && title !== '' ? title : null;
       return (
         <BoxHorizontal
           endAccessory={titleAccessory}

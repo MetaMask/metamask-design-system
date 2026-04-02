@@ -8,7 +8,10 @@ import type { ReactNode } from 'react';
  * `{condition && <Component />}` and `{condition && 'Label'}` do not leave a boolean
  * or spurious layout when the condition is false. React does not render `true` or
  * `false` as visible output.
+ *
+ * @param node - A React child value (for example `children` or an optional slot prop).
+ * @returns `true` when the value should be treated as renderable; otherwise `false`.
  */
-export function isRenderableReactNode(node: ReactNode): boolean {
+export function isReactNodeRenderable(node: ReactNode): boolean {
   return node !== null && node !== undefined && typeof node !== 'boolean';
 }

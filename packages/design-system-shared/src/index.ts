@@ -6,7 +6,7 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
-export { isRenderableReactNode } from './utils/isRenderableReactNode';
+export { isReactNodeRenderable } from './utils/isReactNodeRenderable';
 
 // AvatarBase types (ADR-0003 + ADR-0004)
 export {
