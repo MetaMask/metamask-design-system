@@ -58,11 +58,11 @@ export const Orientation: Story = {
           orientation={KeyValuePairOrientation.Horizontal}
           keyEndButtonIconProps={{
             iconName: IconName.Question,
-            onPress: () => {},
+            onPress: () => undefined,
           }}
           valueEndButtonIconProps={{
             iconName: IconName.Info,
-            onPress: () => {},
+            onPress: () => undefined,
           }}
         />
         <KeyValuePair
@@ -71,11 +71,11 @@ export const Orientation: Story = {
           orientation={KeyValuePairOrientation.Vertical}
           keyEndButtonIconProps={{
             iconName: IconName.Question,
-            onPress: () => {},
+            onPress: () => undefined,
           }}
           valueEndButtonIconProps={{
             iconName: IconName.Info,
-            onPress: () => {},
+            onPress: () => undefined,
           }}
         />
       </Box>
@@ -92,12 +92,12 @@ export const Accessories: Story = {
         keyStartAccessory={<Icon name={IconName.Info} size={IconSize.Sm} />}
         keyEndButtonIconProps={{
           iconName: IconName.Question,
-          onPress: () => {},
+          onPress: () => undefined,
         }}
         valueStartAccessory={<Icon name={IconName.Wallet} size={IconSize.Sm} />}
         valueEndButtonIconProps={{
           iconName: IconName.Check,
-          onPress: () => {},
+          onPress: () => undefined,
         }}
       />
     </StoryWrapper>
@@ -112,11 +112,11 @@ export const EndButtonIcons: Story = {
         value="Value"
         keyEndButtonIconProps={{
           iconName: IconName.Question,
-          onPress: () => {},
+          onPress: () => undefined,
         }}
         valueEndButtonIconProps={{
           iconName: IconName.Info,
-          onPress: () => {},
+          onPress: () => undefined,
         }}
       />
     </StoryWrapper>
@@ -156,7 +156,7 @@ export const HorizontalList: Story = {
           orientation={KeyValuePairOrientation.Horizontal}
           keyEndButtonIconProps={{
             iconName: IconName.Info,
-            onPress: () => {},
+            onPress: () => undefined,
           }}
         />
         <KeyValuePair
@@ -221,7 +221,7 @@ export const VerticalGrid: Story = {
             orientation={KeyValuePairOrientation.Vertical}
             valueEndButtonIconProps={{
               iconName: IconName.Copy,
-              onPress: () => {},
+              onPress: () => undefined,
             }}
           />
         </Box>

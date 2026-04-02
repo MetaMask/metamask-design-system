@@ -33,7 +33,8 @@ export const KeyValuePair = ({
   const isHorizontal = orientation === KeyValuePairOrientation.Horizontal;
 
   const keyEndAccessoryNode =
-    keyEndButtonIconProps?.iconName != null ? (
+    keyEndButtonIconProps?.iconName !== undefined &&
+    keyEndButtonIconProps.iconName !== null ? (
       <ButtonIcon
         size={ButtonIconSize.Sm}
         iconProps={{ color: IconColor.IconAlternative }}
@@ -45,7 +46,8 @@ export const KeyValuePair = ({
     );
 
   const valueEndAccessoryNode =
-    valueEndButtonIconProps?.iconName != null ? (
+    valueEndButtonIconProps?.iconName !== undefined &&
+    valueEndButtonIconProps.iconName !== null ? (
       <ButtonIcon
         size={ButtonIconSize.Sm}
         iconProps={{ color: IconColor.IconDefault }}

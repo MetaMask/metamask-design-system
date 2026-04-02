@@ -33,6 +33,7 @@ export type KeyValuePairPropsShared = {
   value: string | ReactNode;
   /**
    * Layout direction.
+   *
    * @default KeyValuePairOrientation.Horizontal
    */
   orientation?: KeyValuePairOrientation;

@@ -6,6 +6,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 import { IconName } from '../Icon';
+
 import { KeyValuePair } from './KeyValuePair';
 
 describe('KeyValuePair', () => {
@@ -267,7 +268,7 @@ describe('KeyValuePair', () => {
           keyEndAccessory={<Text testID="key-end-custom">Custom</Text>}
           keyEndButtonIconProps={{
             iconName: IconName.Info,
-            onPress: () => {},
+            onPress: () => undefined,
           }}
           testID="key-value-pair"
         />,
@@ -302,7 +303,7 @@ describe('KeyValuePair', () => {
           value="Value"
           valueEndButtonIconProps={{
             iconName: IconName.Info,
-            onPress: () => {},
+            onPress: () => undefined,
           }}
           testID="key-value-pair"
         />,
@@ -319,7 +320,7 @@ describe('KeyValuePair', () => {
           valueEndAccessory={<Text testID="value-end-custom">Custom</Text>}
           valueEndButtonIconProps={{
             iconName: IconName.Question,
-            onPress: () => {},
+            onPress: () => undefined,
           }}
           testID="key-value-pair"
         />,
