@@ -30,7 +30,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       'placeholder:text-alternative',
       isError
         ? 'border-error-default focus:border-error-default'
-        : 'border-default focus:border-primary-default',
+        : 'border-transparent focus:border-primary-default',
       CLASSMAP_TEXTAREA_RESIZE[resize],
       CLASSMAP_TEXT_VARIANT_FONTSTYLE[textVariant],
       CLASSMAP_TEXT_VARIANT_FONTWEIGHT[textVariant],
