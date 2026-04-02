@@ -11,6 +11,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
@@ -643,6 +644,81 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+
+### Checkbox Component
+
+Mobile `Checkbox` maps to `Checkbox` in `@metamask/design-system-react-native`, but prop names and callback payloads changed and some legacy states are no longer first-class.
+
+#### Breaking Changes
+
+##### Renamed Props
+
+| Legacy Mobile API | MMDS API          | Notes                                 |
+| ----------------- | ----------------- | ------------------------------------- |
+| `isChecked`       | `isSelected`      | controlled selected state             |
+| `onPress()`       | `onChange(boolean)` | callback now returns selected boolean |
+
+##### Removed / No Direct Equivalent
+
+| Legacy Mobile API | MMDS Status                 | Migration                                                                 |
+| ----------------- | --------------------------- | ------------------------------------------------------------------------- |
+| `isIndeterminate` | No first-class prop         | Use binary checked/unchecked state or compose custom visuals around `Checkbox`  |
+| `isReadOnly`      | Removed                     | Use `isDisabled` or guard updates in your `onChange` handler             |
+| `isDanger`        | Removed                     | Use `isInvalid` for error-state visuals                                  |
+| `checkboxStyle`   | Removed                     | Use `checkboxContainerProps` and `twClassName`                           |
+| `hitSlop` on root touchable | No direct equivalent on root | Apply touch target padding/wrappers around `Checkbox` if needed         |
+
+##### Type and Callback Signature Changes
+
+| Legacy Mobile API                             | MMDS API                                                           | Notes                                   |
+| --------------------------------------------- | ------------------------------------------------------------------ | --------------------------------------- |
+| `onPress?: () => void`                        | `onChange: (isSelected: boolean) => void`                          | now required and payload changed        |
+| `label?: string \| ReactNode`                 | `label?: string \| ReactNode`                                      | unchanged                               |
+| `isChecked?: boolean`                         | `isSelected: boolean`                                              | now required                            |
+| `isDisabled?: boolean`                        | `isDisabled?: boolean`                                             | unchanged                               |
+| `checkboxStyle?: StyleProp<ViewStyle>`        | `checkboxContainerProps?: Omit<Partial<ViewProps>, 'children'>`    | moved to container prop model           |
+| `TouchableOpacityProps` spread onto root      | `PressableProps` spread onto root                                  | root interaction model changed          |
+
+##### Default and Behavior Changes
+
+| Legacy Mobile Behavior                                              | MMDS Behavior                                                                        |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `label` uses Text defaults `TextVariant.BodyMD` and `TextColor.Default` | `label` uses `TextOrChildren` and accepts `labelProps` for explicit typography       |
+| Checkbox icon size defaults to `IconSize.Md`                        | Checkbox icon defaults to `IconSize.Sm`                                              |
+| Root control is `TouchableOpacity`                                  | Root control is `Pressable` with checkbox accessibility state and animated feedback  |
+| `isIndeterminate` shows minus icon                                  | No indeterminate rendering path in core API                                          |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Checkbox from '../../../component-library/components/Checkbox';
+
+const [isChecked, setIsChecked] = useState(false);
+
+<Checkbox
+  label="Enable notifications"
+  isChecked={isChecked}
+  onPress={() => setIsChecked(!isChecked)}
+  isDanger={!isChecked}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Checkbox } from '@metamask/design-system-react-native';
+
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox
+  label="Enable notifications"
+  isSelected={isSelected}
+  onChange={setIsSelected}
+  isInvalid={!isSelected}
+/>;
+```
 
 ## Version Updates
 

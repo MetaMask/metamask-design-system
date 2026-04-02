@@ -12,6 +12,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
@@ -579,6 +580,87 @@ import {
 - `className` and `style` are still supported
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
+
+### Checkbox Component
+
+The extension `checkbox` component maps to `Checkbox` in `@metamask/design-system-react`, but several APIs changed (including naming, callback payload, and support for indeterminate/read-only states).
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration behavior.
+
+#### Breaking Changes
+
+##### Renamed Props
+
+| Legacy Extension API | MMDS API          | Notes                                 |
+| -------------------- | ----------------- | ------------------------------------- |
+| `isChecked`          | `isSelected`      | controlled selected state             |
+| `onChange(event)`    | `onChange(boolean)` | callback now returns selected boolean |
+
+##### Removed / No Direct Equivalent
+
+| Legacy Extension API | MMDS Status          | Migration                                                                               |
+| -------------------- | -------------------- | --------------------------------------------------------------------------------------- |
+| `isIndeterminate`    | No first-class prop  | Use binary checked/unchecked state; if needed, render custom visuals around `Checkbox` |
+| `isReadOnly`         | Removed              | Use `inputProps={{ readOnly: true }}` and guard updates in your `onChange` handler     |
+| `iconProps`          | Removed              | Use `checkedIconProps`                                                                  |
+| `inputRef`           | Removed              | Use the component ref (`ref.current?.toggle()`) for imperative toggling                |
+
+##### Type and Callback Signature Changes
+
+| Legacy Extension API                      | MMDS API                                                                                   | Notes                                       |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| `id?: string`                             | `id: string`                                                                               | now required                                |
+| `name?: string`                           | `inputProps?.name?: string`                                                                | moved under `inputProps`                    |
+| `title?: string`                          | `inputProps?.title?: string`                                                               | moved under `inputProps`                    |
+| `isRequired?: boolean`                    | `inputProps?.required?: boolean`                                                           | moved under `inputProps`                    |
+| `onChange?: (event: ChangeEvent<HTMLInputElement>) => void` | `onChange: (isSelected: boolean) => void`                                                 | now required and payload changed            |
+| `label?: any`                             | `label?: ReactNode \| string`                                                              | narrowed type                               |
+| `inputProps?: any`                        | `inputProps?: Omit<ComponentProps<'input'>, 'type' \| 'checked' \| 'onChange' \| 'disabled'>` | typed input passthrough                     |
+| Style utility props on root               | `className` + `style` + label element props                                                | migrate broad style props to Tailwind classes |
+
+##### Default and Behavior Changes
+
+| Legacy Extension Behavior                                                            | MMDS Behavior                                                                                 |
+| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `isChecked` optional and can be omitted                                               | `isSelected` is required; component is explicitly controlled                                  |
+| `title` falls back to `label` string, then `id`                                       | No automatic title fallback; pass `inputProps.title` when needed                             |
+| Supports indeterminate icon (`MinusBold`) and data attribute (`data-indeterminate`) | No indeterminate rendering path in core API                                                   |
+| `isReadOnly` prevents updates while keeping custom behavior paths                     | Read-only must be implemented via input props/consumer state handling                         |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Checkbox } from '../../component-library';
+
+const [isChecked, setIsChecked] = useState(false);
+
+<Checkbox
+  id="terms"
+  name="terms"
+  label="I agree to the terms"
+  isChecked={isChecked}
+  onChange={(event) => setIsChecked(event.target.checked)}
+  isReadOnly={false}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Checkbox } from '@metamask/design-system-react';
+
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox
+  id="terms"
+  label="I agree to the terms"
+  isSelected={isSelected}
+  onChange={setIsSelected}
+  inputProps={{ name: 'terms' }}
+/>;
+```
 
 ## Version Updates
 
