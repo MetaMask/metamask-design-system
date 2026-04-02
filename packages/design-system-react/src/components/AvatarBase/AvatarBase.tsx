@@ -1,7 +1,10 @@
+import {
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-shared';
 import { Slot } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Text, FontWeight, TextVariant, TextColor } from '../Text';
 

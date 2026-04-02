@@ -1,3 +1,16 @@
+import { AvatarAccountSize } from '../../types';
+
+export const MAP_AVATARACCOUNT_SIZE_SIZENUMBER: Record<
+  AvatarAccountSize,
+  number
+> = {
+  [AvatarAccountSize.Xs]: 16,
+  [AvatarAccountSize.Sm]: 24,
+  [AvatarAccountSize.Md]: 32,
+  [AvatarAccountSize.Lg]: 40,
+  [AvatarAccountSize.Xl]: 48,
+};
+
 // Sample account addresses
 export const SAMPLE_AVATARACCOUNT_ADDRESSES = [
   '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8',
