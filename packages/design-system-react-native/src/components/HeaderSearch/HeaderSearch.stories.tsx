@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 
 import { Box } from '../Box';
 
-import { HeaderSearch, HeaderSearchVariant } from '.';
 import type { HeaderSearchProps } from './HeaderSearch.types';
+
+import { HeaderSearch, HeaderSearchVariant } from '.';
 
 const noop = () => undefined;
 
