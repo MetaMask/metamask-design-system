@@ -1,10 +1,6 @@
 import { KeyValuePairOrientation } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Box } from '../Box';
-import { ButtonIcon } from '../ButtonIcon';
-import { BoxHorizontal } from '../BoxHorizontal';
-import { BoxVertical } from '../BoxVertical';
 import {
   ButtonIconSize,
   FontWeight,
@@ -12,6 +8,10 @@ import {
   TextColor,
   TextVariant,
 } from '../../types';
+import { Box } from '../Box';
+import { BoxHorizontal } from '../BoxHorizontal';
+import { BoxVertical } from '../BoxVertical';
+import { ButtonIcon } from '../ButtonIcon';
 
 import type { KeyValuePairProps } from './KeyValuePair.types';
 
@@ -20,12 +20,12 @@ export const KeyValuePair = ({
   keyEndAccessory,
   keyEndButtonIconProps,
   keyLabel: keyContent,
-  keyProps,
+  keyTextProps,
   valueStartAccessory,
   valueEndAccessory,
   valueEndButtonIconProps,
   value: valueContent,
-  valueProps,
+  valueTextProps,
   orientation = KeyValuePairOrientation.Horizontal,
   twClassName,
   ...viewProps
@@ -56,7 +56,7 @@ export const KeyValuePair = ({
       valueEndAccessory
     );
 
-  const keyRow = (
+  const keyBox = (
     <BoxHorizontal
       startAccessory={keyStartAccessory}
       endAccessory={keyEndAccessoryNode}
@@ -64,15 +64,17 @@ export const KeyValuePair = ({
         variant: TextVariant.BodyMd,
         fontWeight: FontWeight.Medium,
         color: TextColor.TextAlternative,
-        ...keyProps,
+        numberOfLines: 1,
+        ellipsizeMode: 'tail',
+        ...keyTextProps,
       }}
-      twClassName={isHorizontal ? 'flex-1 min-w-0' : undefined}
+      twClassName={isHorizontal ? undefined : 'w-full min-w-0'}
     >
       {keyContent}
     </BoxHorizontal>
   );
 
-  const valueRow = (
+  const valueBox = (
     <BoxHorizontal
       startAccessory={valueStartAccessory}
       endAccessory={valueEndAccessoryNode}
@@ -80,8 +82,13 @@ export const KeyValuePair = ({
         variant: TextVariant.BodyMd,
         fontWeight: FontWeight.Medium,
         color: TextColor.TextDefault,
-        ...valueProps,
+        numberOfLines: 1,
+        ellipsizeMode: 'tail',
+        ...valueTextProps,
       }}
+      twClassName={
+        isHorizontal ? 'flex-1 min-w-0 justify-end' : 'w-full min-w-0'
+      }
     >
       {valueContent}
     </BoxHorizontal>
@@ -90,23 +97,23 @@ export const KeyValuePair = ({
   if (isHorizontal) {
     return (
       <BoxHorizontal
-        endAccessory={valueRow}
+        endAccessory={valueBox}
         gap={4}
-        twClassName={twClassName}
+        twClassName={twClassName ? `h-10 ${twClassName}` : 'h-10'}
         {...viewProps}
       >
-        <Box twClassName="flex-1 min-w-0">{keyRow}</Box>
+        <Box twClassName="shrink-0">{keyBox}</Box>
       </BoxHorizontal>
     );
   }
 
   return (
     <BoxVertical
-      bottomAccessory={valueRow}
+      bottomAccessory={valueBox}
       twClassName={twClassName}
       {...viewProps}
     >
-      {keyRow}
+      {keyBox}
     </BoxVertical>
   );
 };
