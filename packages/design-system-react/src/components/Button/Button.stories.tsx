@@ -1,7 +1,10 @@
+import {
+  ButtonVariant,
+  ButtonBaseSize as ButtonSize,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { ButtonVariant, ButtonBaseSize as ButtonSize } from '@metamask/design-system-shared';
 import { IconName } from '../Icon';
 
 import { Button } from './Button';
@@ -152,7 +155,7 @@ export const IsDanger: Story = {
 
 export const IsInverse: Story = {
   render: () => (
-    <div className="space-y-4 bg-primary-default p-4">
+    <div className="bg-primary-default space-y-4 p-4">
       <div className="flex gap-2">
         <Button isInverse>Primary Inverse</Button>
         <Button variant={ButtonVariant.Secondary} isInverse>

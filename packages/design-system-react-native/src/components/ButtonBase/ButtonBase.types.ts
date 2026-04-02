@@ -92,10 +92,10 @@ export type ButtonBaseProps = ButtonBasePropsShared & {
     nativeEvent: { actionName: string };
   }) => void;
 } & Omit<
-  PressableProps,
-  | 'accessibilityRole'
-  | 'accessibilityLabel'
-  | 'accessibilityHint'
-  | 'accessibilityActions'
-  | 'onAccessibilityAction'
->;
+    PressableProps,
+    | 'accessibilityRole'
+    | 'accessibilityLabel'
+    | 'accessibilityHint'
+    | 'accessibilityActions'
+    | 'onAccessibilityAction'
+  >;

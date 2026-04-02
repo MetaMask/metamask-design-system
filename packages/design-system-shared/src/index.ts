@@ -58,13 +58,7 @@ export {
 } from './types/BadgeWrapper';
 
 // ButtonBase types (ADR-0003 + ADR-0004)
-export {
-  ButtonBaseSize,
-  type ButtonBasePropsShared,
-} from './types/ButtonBase';
+export { ButtonBaseSize, type ButtonBasePropsShared } from './types/ButtonBase';
 
 // Button types (ADR-0003 + ADR-0004)
-export {
-  ButtonVariant,
-  type ButtonPropsShared,
-} from './types/Button';
+export { ButtonVariant, type ButtonPropsShared } from './types/Button';

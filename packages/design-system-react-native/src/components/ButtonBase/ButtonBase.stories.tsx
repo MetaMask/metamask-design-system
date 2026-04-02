@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
-
 import { ButtonBaseSize } from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-native';
 
 import { BoxFlexDirection } from '../../types';
 import { Box } from '../Box';

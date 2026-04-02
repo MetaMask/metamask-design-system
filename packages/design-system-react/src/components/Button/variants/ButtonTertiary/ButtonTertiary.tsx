@@ -19,21 +19,21 @@ export const ButtonTertiary = forwardRef<
       // Default tertiary styles
       !isDanger &&
         !isInverse && [
-          'bg-transparent text-primary-default',
+          'text-primary-default bg-transparent',
           // Loading state uses pressed color
           isLoading && 'bg-pressed',
         ],
       // Danger styles
       isDanger &&
         !isInverse && [
-          'bg-transparent text-error-default',
+          'text-error-default bg-transparent',
           // Loading state uses error muted pressed color
           isLoading && 'bg-error-muted-pressed text-error-default-pressed',
         ],
       // Inverse styles
       isInverse &&
         !isDanger && [
-          'bg-transparent text-primary-inverse',
+          'text-primary-inverse bg-transparent',
           // Loading state uses pressed color
           isLoading && 'bg-pressed',
         ],
@@ -58,8 +58,8 @@ export const ButtonTertiary = forwardRef<
       ],
       'focus-visible:outline-none focus-visible:ring-0',
       isInverse
-        ? 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background-default'
-        : 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
+        ? 'focus-visible:outline-background-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4'
+        : 'focus-visible:outline-primary-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
       // Loading styles
       isLoading && 'cursor-not-allowed',
       // Disabled styles (but not loading)

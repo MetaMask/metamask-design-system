@@ -1,4 +1,1 @@
-export {
-  ButtonBaseSize,
-  type ButtonBasePropsShared,
-} from './ButtonBase.types';
+export { ButtonBaseSize, type ButtonBasePropsShared } from './ButtonBase.types';

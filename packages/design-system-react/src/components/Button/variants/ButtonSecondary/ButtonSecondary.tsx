@@ -33,14 +33,14 @@ export const ButtonSecondary = forwardRef<
       // Inverse styles
       isInverse &&
         !isDanger && [
-          'border-2 border-primary-inverse bg-transparent text-primary-inverse',
+          'border-primary-inverse text-primary-inverse border-2 bg-transparent',
           // Loading state uses pressed color
           isLoading && 'bg-pressed',
         ],
       // Inverse danger styles
       isInverse &&
         isDanger && [
-          'border-0 bg-default text-error-default',
+          'bg-default text-error-default border-0',
           // Loading state uses pressed color
           isLoading && 'bg-default-pressed',
         ],
@@ -56,8 +56,8 @@ export const ButtonSecondary = forwardRef<
       ],
       'focus-visible:outline-none focus-visible:ring-0',
       isInverse
-        ? 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background-default'
-        : 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
+        ? 'focus-visible:outline-background-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4'
+        : 'focus-visible:outline-primary-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
       // Loading styles
       isLoading && 'cursor-not-allowed',
       // Disabled styles (but not loading)
