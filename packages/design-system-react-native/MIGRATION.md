@@ -12,6 +12,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
+  - [From version 0.13.0 to 0.14.0](#from-version-0130-to-0140)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
@@ -647,6 +648,40 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 ## Version Updates
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react-native`.
+
+## From version 0.13.0 to 0.14.0
+
+### BottomSheet navigation callback API
+
+`BottomSheet` no longer supports the `shouldNavigateBack` prop. Use `goBack` instead.
+
+#### Breaking Changes
+
+- Removed `shouldNavigateBack`.
+- Added `goBack?: () => void`.
+
+#### Migration Example
+
+**Before (0.13.0):**
+
+```tsx
+import { BottomSheet } from '@metamask/design-system-react-native';
+
+<BottomSheet shouldNavigateBack={onClose} />;
+```
+
+**After (0.14.0):**
+
+```tsx
+import { BottomSheet } from '@metamask/design-system-react-native';
+
+<BottomSheet goBack={onClose} />;
+```
+
+#### Impact
+
+- Affects any screen that passes `shouldNavigateBack` to `BottomSheet`.
+- TypeScript consumers will receive an error until they rename the prop.
 
 ## From version 0.12.0 to 0.13.0
 
