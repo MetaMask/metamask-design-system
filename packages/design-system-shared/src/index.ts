@@ -113,3 +113,6 @@ export {
 
 // Checkbox types (ADR-0004)
 export { type CheckboxPropsShared } from './types/Checkbox';
+
+// Textarea types (ADR-0004)
+export { type TextareaPropsShared } from './types/Textarea';

@@ -86,6 +86,9 @@ export type { IconProps } from './Icon';
 export { Input } from './Input';
 export type { InputProps } from './Input';
 
+export { Textarea, TextareaResize } from './Textarea';
+export type { TextareaProps } from './Textarea';
+
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
 
