@@ -120,6 +120,26 @@ Optional boolean to enable or disable the `KeyboardAvoidingView` that shifts the
 </BottomSheet>
 ```
 
+### `panGestureHandlerProps`
+
+Optional props object forwarded to the internal `PanGestureHandler` used by `BottomSheetDialog`. Use this when the sheet needs to coordinate with nested gestures (for example via `simultaneousHandlers`).
+`enabled` and `onGestureEvent` remain controlled internally by `BottomSheetDialog`.
+
+| TYPE                     | REQUIRED | DEFAULT     |
+| ------------------------ | -------- | ----------- |
+| `PanGestureHandlerProps` | No       | `undefined` |
+
+```tsx
+const listGestureRef = useRef(null);
+
+<BottomSheet
+  goBack={goBack}
+  panGestureHandlerProps={{ simultaneousHandlers: listGestureRef }}
+>
+  <Text>Content</Text>
+</BottomSheet>;
+```
+
 ### `twClassName`
 
 Use the `twClassName` prop to add Tailwind CSS classes to the `BottomSheetDialog` container.

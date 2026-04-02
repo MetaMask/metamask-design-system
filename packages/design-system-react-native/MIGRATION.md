@@ -8,6 +8,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Button Component](#button-component)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
+  - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
@@ -378,6 +379,88 @@ import {
   title="Warning"
   actionButtonLabel="Action"
   actionButtonOnPress={() => undefined}
+/>;
+```
+
+### BannerBase Component
+
+Mobile `BannerBase` maps to `BannerBase` in the design system, but the action-button and close-button APIs are different and can break existing usage.
+
+#### Breaking Changes
+
+##### Removed / No Direct Equivalent
+
+| Legacy Mobile API                                                                                          | MMDS Status                                       | Migration                                                                                                               |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `variant?: BannerVariant`                                                                                  | Removed from `BannerBase` API                     | Remove `variant` on `BannerBase`; apply presentation through `twClassName`, Box props, and explicit content/accessories |
+| `actionButtonProps` link-style behavior through unrestricted `ButtonProps` (`variant`, `onPress`, `label`) | No direct equivalent in `BannerBase` action props | Use `actionButtonLabel` + `actionButtonOnPress`, and keep advanced button behavior outside `BannerBase`                 |
+
+##### Renamed Props
+
+| Legacy Mobile API                            | MMDS API                                     |
+| -------------------------------------------- | -------------------------------------------- |
+| `actionButtonProps.onPress`                  | `actionButtonOnPress`                        |
+| `actionButtonProps.label`                    | `actionButtonLabel`                          |
+| `closeButtonProps.onPress` (still supported) | `closeButtonProps.onPress` (still supported) |
+
+##### Type and Callback Signature Changes
+
+| Legacy Mobile API                                       | MMDS API                                                                                                                            | Notes                                                                        |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `actionButtonProps?: ButtonProps`                       | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onPress' \| 'variant'>`                                              | MMDS prevents setting action handler and variant through `actionButtonProps` |
+| `actionButtonProps` controls rendering of action button | `actionButtonOnPress` controls rendering of action button                                                                           | Action button is shown only when `actionButtonOnPress` is provided           |
+| `title?: string \| React.ReactNode`                     | `title?: ReactNode`                                                                                                                 | Equivalent content support                                                   |
+| `description?: string \| React.ReactNode`               | `description?: ReactNode`                                                                                                           | Equivalent content support                                                   |
+| `closeButtonProps?: ButtonIconProps`                    | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onPress'> & { onPress?: (event: GestureResponderEvent) => void }` | `iconName` remains fixed to close icon                                       |
+
+##### Default and Behavior Changes
+
+| Legacy Mobile Behavior                                                   | MMDS Behavior                                                                                                      |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Action button shown when `actionButtonProps` exists                      | Action button shown when `actionButtonOnPress` exists                                                              |
+| Action button defaults to `size={ButtonSize.Auto}`                       | Action button defaults to `size={ButtonSize.Md}`                                                                   |
+| Close button press fallback uses `noop` when callbacks are missing       | Close button callback is omitted when callbacks are missing                                                        |
+| Close button icon default color is `IconColor.Default`                   | MMDS `BannerBase` delegates icon color to `ButtonIcon` defaults unless explicitly overridden in `closeButtonProps` |
+| Close button accessibility label had no explicit default in `BannerBase` | Default close label is `'Close banner'` (override with `closeButtonProps.accessibilityLabel`)                      |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import BannerBase from '../../../component-library/components/Banners/Banner/foundation/BannerBase';
+
+<BannerBase
+  title="Backup your Secret Recovery Phrase"
+  description="Keep it private and secure."
+  actionButtonProps={{
+    label: 'Review',
+    onPress: () => {
+      /* handle review */
+    },
+  }}
+  onClose={() => {
+    /* dismiss banner */
+  }}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { BannerBase } from '@metamask/design-system-react-native';
+
+<BannerBase
+  title="Backup your Secret Recovery Phrase"
+  description="Keep it private and secure."
+  actionButtonLabel="Review"
+  actionButtonOnPress={() => {
+    /* handle review */
+  }}
+  onClose={() => {
+    /* dismiss banner */
+  }}
+  closeButtonProps={{ testID: 'banner-base-close-button' }}
 />;
 ```
 

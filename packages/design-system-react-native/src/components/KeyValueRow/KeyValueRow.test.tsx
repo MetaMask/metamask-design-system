@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import { IconName } from '../Icon';
 
-import KeyValueRow from './KeyValueRow';
+import { KeyValueRow } from './KeyValueRow';
 import { KeyValueRowFieldIconSides } from './KeyValueRow.types';
 
 const fieldLabel = { text: 'Sample Key' };
