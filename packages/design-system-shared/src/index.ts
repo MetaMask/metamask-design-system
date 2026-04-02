@@ -6,6 +6,15 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
+export { isReactNodeRenderable } from './utils/isReactNodeRenderable';
+
+// AvatarBase types (ADR-0003 + ADR-0004)
+export {
+  AvatarBaseSize,
+  AvatarBaseShape,
+  type AvatarBasePropsShared,
+} from './types/AvatarBase';
+
 // BadgeCount types (ADR-0003 + ADR-0004)
 export { BadgeCountSize, type BadgeCountPropsShared } from './types/BadgeCount';
 
