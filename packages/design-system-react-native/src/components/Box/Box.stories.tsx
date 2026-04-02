@@ -1,7 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
-import React from 'react';
-import { ScrollView } from 'react-native';
-
 import {
   BoxFlexDirection,
   BoxFlexWrap,
@@ -9,8 +5,12 @@ import {
   BoxJustifyContent,
   BoxBackgroundColor,
   BoxBorderColor,
-  TextColor,
-} from '../../types';
+} from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-native';
+import React from 'react';
+import { ScrollView } from 'react-native';
+
+import { TextColor } from '../../types';
 import { Text } from '../Text';
 
 import { Box } from './Box';

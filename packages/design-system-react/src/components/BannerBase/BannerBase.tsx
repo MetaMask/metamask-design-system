@@ -1,12 +1,14 @@
-import React, { forwardRef } from 'react';
-
 import {
   BoxAlignItems,
   BoxBackgroundColor,
+  BoxFlexDirection,
+} from '@metamask/design-system-shared';
+import React, { forwardRef } from 'react';
+
+import {
   ButtonIconSize,
   ButtonSize,
   FontWeight,
-  BoxFlexDirection,
   IconName,
   TextVariant,
 } from '../../types';

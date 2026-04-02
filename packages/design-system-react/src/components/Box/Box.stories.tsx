@@ -1,6 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
-
 import {
   BoxFlexDirection,
   BoxFlexWrap,
@@ -8,8 +5,11 @@ import {
   BoxJustifyContent,
   BoxBackgroundColor,
   BoxBorderColor,
-  TextColor,
-} from '../../types';
+} from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import React from 'react';
+
+import { TextColor } from '../../types';
 import { Text } from '../Text';
 
 import { Box } from './Box';

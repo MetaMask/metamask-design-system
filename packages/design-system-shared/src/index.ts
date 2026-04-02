@@ -56,3 +56,16 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
+// Box types (ADR-0003 + ADR-0004)
+export {
+  BoxFlexDirection,
+  BoxFlexWrap,
+  BoxAlignItems,
+  BoxJustifyContent,
+  BoxBackgroundColor,
+  BoxBorderColor,
+  type BoxSpacing,
+  type BoxBorderWidth,
+  type BoxPropsShared,
+} from './types/Box';
