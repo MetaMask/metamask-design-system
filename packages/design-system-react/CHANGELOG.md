@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore(deps): bump @metamask/utils from 11.10.0 to 11.11.0 ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033))
+- chore: migrate AvatarBase enums to shared union types ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005))
+- chore: [DSYS-616] create/update BannerBase migration docs ([#1011](https://github.com/MetaMask/metamask-design-system/pull/1011))
+
 ## [0.13.0]
 
 ### Changed
