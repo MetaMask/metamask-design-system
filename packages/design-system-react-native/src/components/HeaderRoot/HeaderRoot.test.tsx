@@ -150,6 +150,34 @@ describe('HeaderRoot', () => {
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
       expect(queryByText('Title')).not.toBeOnTheScreen();
     });
+
+    it('does not render title row when title is false from conditional expression', () => {
+      const { getByTestId, queryByTestId } = render(
+        <HeaderRoot
+          testID={CONTAINER_TEST_ID}
+          title={false}
+          titleAccessory={
+            <Text testID={LEFT_CHILDREN_TEST_ID}>Should not show</Text>
+          }
+        />,
+      );
+
+      expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
+      expect(queryByTestId(LEFT_CHILDREN_TEST_ID)).toBeNull();
+    });
+
+    it('does not render title row when titleAccessory is false from conditional expression', () => {
+      const { getByText, queryByTestId } = render(
+        <HeaderRoot
+          title="Visible"
+          titleAccessory={false}
+          testID={CONTAINER_TEST_ID}
+        />,
+      );
+
+      expect(getByText('Visible')).toBeOnTheScreen();
+      expect(queryByTestId(LEFT_CHILDREN_TEST_ID)).toBeNull();
+    });
   });
 
   describe('end section', () => {

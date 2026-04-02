@@ -6,6 +6,8 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
+export { isRenderableReactNode } from './utils/isRenderableReactNode';
+
 // BadgeCount types (ADR-0003 + ADR-0004)
 export { BadgeCountSize, type BadgeCountPropsShared } from './types/BadgeCount';
 

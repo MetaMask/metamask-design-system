@@ -3,6 +3,7 @@ import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
+import { isRenderableReactNode } from '@metamask/design-system-shared';
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 import { BoxHorizontal } from '../BoxHorizontal';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
@@ -26,14 +27,11 @@ export const HeaderRoot = ({
 }: HeaderRootProps) => {
   const insets = useSafeAreaInsets();
 
-  const hasRenderableChildren =
-    children !== null &&
-    children !== undefined &&
-    typeof children !== 'boolean';
+  const hasRenderableChildren = isRenderableReactNode(children);
 
   const hasTitleContent =
-    (title !== null && title !== undefined) ||
-    (titleAccessory !== null && titleAccessory !== undefined);
+    title !== false &&
+    (isRenderableReactNode(title) || isRenderableReactNode(titleAccessory));
 
   const shouldRenderTitleRow = !hasRenderableChildren && hasTitleContent;
 
@@ -64,7 +62,7 @@ export const HeaderRoot = ({
     }
     if (shouldRenderTitleRow) {
       const titleNode =
-        title !== null && title !== undefined && title !== '' ? title : null;
+        isRenderableReactNode(title) && title !== '' ? title : null;
       return (
         <BoxHorizontal
           endAccessory={titleAccessory}

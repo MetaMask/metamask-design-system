@@ -3453,10 +3453,14 @@ __metadata:
     "@metamask/utils": "npm:^11.10.0"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
+    "@types/react": "npm:^18.2.0"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^29.7.0"
+    react: "npm:^18.2.0"
     ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.2.2"
+  peerDependencies:
+    react: ">=18.2.0"
   languageName: unknown
   linkType: soft
 
