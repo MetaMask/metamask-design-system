@@ -62,7 +62,7 @@ export type {
   BottomSheetPostCallback,
 } from './BottomSheet';
 
-export { default as BottomSheetDialog } from './BottomSheetDialog';
+export { BottomSheetDialog } from './BottomSheetDialog';
 export type {
   BottomSheetDialogProps,
   BottomSheetDialogRef,
