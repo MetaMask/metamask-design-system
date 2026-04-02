@@ -11,15 +11,6 @@ export { AvatarBaseSize as AvatarTokenSize } from '@metamask/design-system-share
 export { AvatarBaseSize as AvatarSize } from '@metamask/design-system-shared';
 
 /**
- * AvatarAccount - variant
- */
-export enum AvatarAccountVariant {
-  Blockies = 'blockies',
-  Jazzicon = 'jazzicon',
-  Maskicon = 'maskicon',
-}
-
-/**
  * AvatarIcon - severity
  */
 export enum AvatarIconSeverity {

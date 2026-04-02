@@ -56,3 +56,9 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
+// AvatarAccount types (ADR-0003 + ADR-0004)
+export {
+  AvatarAccountVariant,
+  type AvatarAccountPropsShared,
+} from './types/AvatarAccount';
