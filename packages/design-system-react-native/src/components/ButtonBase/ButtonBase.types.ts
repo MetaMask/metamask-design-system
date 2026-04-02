@@ -1,6 +1,6 @@
+import type { ButtonBasePropsShared } from '@metamask/design-system-shared';
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
-import type { ButtonBaseSize } from '../../types';
 import type { IconProps, IconName } from '../Icon';
 import type { SpinnerProps } from '../temp-components/Spinner';
 import type { TextProps } from '../Text';
@@ -8,7 +8,7 @@ import type { TextProps } from '../Text';
 /**
  * ButtonBase component props.
  */
-export type ButtonBaseProps = {
+export type ButtonBaseProps = ButtonBasePropsShared & {
   /**
    * Required prop for the content to be rendered within the ButtonBase
    */
@@ -17,23 +17,6 @@ export type ButtonBaseProps = {
    * Optional props to be passed to the Text component when children is a string
    */
   textProps?: Omit<Partial<TextProps>, 'children'>;
-  /**
-   * Optional prop to control the size of the ButtonBase
-   * Possible values: ButtonBaseSize.Sm (32px), ButtonBaseSize.Md (40px), ButtonBaseSize.Lg (48px)
-   *
-   * @default ButtonBaseSize.Lg
-   */
-  size?: ButtonBaseSize;
-  /**
-   * Optional prop that when true, shows a loading spinner
-   *
-   * @default false
-   */
-  isLoading?: boolean;
-  /**
-   * Optional prop for text to display when button is in loading state
-   */
-  loadingText?: string;
   /**
    * Optional prop to pass additional properties to the end icon
    */
@@ -62,18 +45,6 @@ export type ButtonBaseProps = {
    * Optional prop for a custom element to show at the end of the button
    */
   endAccessory?: React.ReactNode;
-  /**
-   * Optional prop that when true, disables the button
-   *
-   * @default false
-   */
-  isDisabled?: boolean;
-  /**
-   * Optional prop that when true, makes the button take up the full width of its container
-   *
-   * @default false
-   */
-  isFullWidth?: boolean;
   /**
    * Optional prop to add twrnc overriding classNames.
    * Can be a string or a function that receives pressed state and returns a string.

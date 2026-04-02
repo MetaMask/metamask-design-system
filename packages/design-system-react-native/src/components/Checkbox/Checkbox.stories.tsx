@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { useState, useRef } from 'react';
 import { View } from 'react-native';
 
-import { ButtonVariant } from '../../types';
+import { ButtonVariant } from '@metamask/design-system-shared';
 import { Button } from '../Button';
 
 import { Checkbox } from './Checkbox';

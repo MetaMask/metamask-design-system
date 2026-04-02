@@ -5,7 +5,9 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import * as ReactTestRenderer from 'react-test-renderer';
 
-import { ButtonBaseSize, IconName } from '../../types';
+import { ButtonBaseSize } from '@metamask/design-system-shared';
+
+import { IconName } from '../../types';
 
 import { ButtonBase } from './ButtonBase';
 
