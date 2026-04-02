@@ -9,12 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.7.0]
 
-### Uncategorized
+### Added
 
-- chore(deps): bump @metamask/utils from 11.10.0 to 11.11.0 ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033))
-- feat: [DSRN] Added HeaderRoot ([#1029](https://github.com/MetaMask/metamask-design-system/pull/1029))
-- chore: migrate AvatarBase enums to shared union types ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005))
-- feat: Added BoxHorizontal and BoxVertical utility component ([#1003](https://github.com/MetaMask/metamask-design-system/pull/1003))
+- Added shared type contracts used by the new React Native `HeaderRoot` component so platform packages can consume a single source of truth for header APIs ([#1029](https://github.com/MetaMask/metamask-design-system/pull/1029)).
+- Added shared type contracts used by React Native `BoxHorizontal` and `BoxVertical` utility components ([#1003](https://github.com/MetaMask/metamask-design-system/pull/1003)).
+
+### Changed
+
+- Updated `AvatarBase` shared enums to the ADR-0003/ADR-0004 const-object + string-union pattern for cross-platform type consistency ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005)).
+- Updated runtime dependency `@metamask/utils` to `11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033)).
 
 ## [0.6.0]
 

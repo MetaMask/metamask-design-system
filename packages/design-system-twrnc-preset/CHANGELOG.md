@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.5.0]
 
+### Changed
+
+- Release-only compatibility bump for workspace alignment with `@metamask/design-system-react-native@0.14.0`; no runtime API or preset behavior changes in this package ([#1035](https://github.com/MetaMask/metamask-design-system/pull/1035)).
+
 ## [0.4.0]
 
 ### Changed
