@@ -8,7 +8,7 @@ import { IconName } from '../../types';
 import { AvatarAccountVariant } from '../AvatarAccount';
 
 // Internal dependencies.
-import Toast from './Toast';
+import { Toast } from './Toast';
 import { ToastContext, ToastContextWrapper } from './Toast.context';
 import type { ToastOptions, ToastRef } from './Toast.types';
 import { ToastCloseButtonVariant, ToastVariant } from './Toast.types';

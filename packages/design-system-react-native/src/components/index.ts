@@ -62,7 +62,7 @@ export type {
   BottomSheetPostCallback,
 } from './BottomSheet';
 
-export { default as BottomSheetDialog } from './BottomSheetDialog';
+export { BottomSheetDialog } from './BottomSheetDialog';
 export type {
   BottomSheetDialogProps,
   BottomSheetDialogRef,
@@ -134,7 +134,7 @@ export type {
   HeaderSearchInlineProps,
 } from './HeaderSearch';
 
-export { default as HeaderStandard } from './HeaderStandard';
+export { HeaderStandard } from './HeaderStandard';
 export type { HeaderStandardProps } from './HeaderStandard';
 
 export { Icon, IconColor, IconName, IconSize } from './Icon';
