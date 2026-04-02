@@ -19,7 +19,6 @@ const meta: Meta<BottomSheetProps> = {
     isInteractable: { control: 'boolean' },
     isFullscreen: { control: 'boolean' },
     keyboardAvoidingViewEnabled: { control: 'boolean' },
-    shouldNavigateBack: { control: 'boolean' },
     onClose: { action: 'closed' },
     onOpen: { action: 'opened' },
     twClassName: { control: 'text' },
@@ -44,12 +43,7 @@ const DefaultTemplate = (args: BottomSheetProps) => {
         Open BottomSheet
       </Button>
       {isVisible && (
-        <BottomSheet
-          {...args}
-          goBack={goBack}
-          shouldNavigateBack={false}
-          onClose={goBack}
-        >
+        <BottomSheet {...args} onClose={goBack}>
           <BottomSheetHeader onClose={goBack}>BottomSheet</BottomSheetHeader>
           <Box twClassName="p-4">
             <Text>
@@ -105,12 +99,7 @@ const ImperativeControlTemplate = (args: BottomSheetProps) => {
           <Text>Close via ref</Text>
         </Pressable>
       </Box>
-      <BottomSheet
-        ref={sheetRef}
-        {...args}
-        goBack={() => sheetRef.current?.onCloseBottomSheet()}
-        shouldNavigateBack={false}
-      >
+      <BottomSheet ref={sheetRef} {...args}>
         <Box twClassName="p-4">
           <Text>Controlled imperatively via ref</Text>
         </Box>
