@@ -12,7 +12,7 @@ import { Button, ButtonVariant } from '../Button';
 import { Text } from '../Text';
 
 // Internal dependencies.
-import ToastComponent from './Toast';
+import { Toast } from './Toast';
 import { ToastContext, ToastContextWrapper } from './Toast.context';
 import type { ToastOptions } from './Toast.types';
 import { ToastVariant } from './Toast.types';
@@ -29,7 +29,7 @@ type ToastStoryArgs = {
 
 const meta: Meta<ToastStoryArgs> = {
   title: 'Components/Toast',
-  component: ToastComponent,
+  component: Toast,
   argTypes: {
     variant: {
       options: Object.values(ToastVariant),
@@ -122,7 +122,7 @@ const ToastStoryRender: React.FC<ToastStoryArgs> = ({ variant }) => {
       >
         {`Show ${variant} Toast`}
       </Button>
-      <ToastComponent ref={toastRef} />
+      <Toast ref={toastRef} />
     </View>
   );
 };

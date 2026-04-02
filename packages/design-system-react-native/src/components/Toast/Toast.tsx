@@ -50,7 +50,7 @@ import { ToastVariant } from './Toast.types';
 
 const screenHeight = Dimensions.get('window').height;
 
-const Toast = forwardRef<ToastRef, ToastProps>(
+export const Toast = forwardRef<ToastRef, ToastProps>(
   ({ twClassName, labelsContainerProps, ...props }, ref) => {
     const tw = useTailwind();
     const [toastOptions, setToastOptions] = useState<ToastOptions | undefined>(
@@ -310,5 +310,3 @@ const Toast = forwardRef<ToastRef, ToastProps>(
     );
   },
 );
-
-export default Toast;

@@ -208,6 +208,16 @@ const config = createConfig([
       sourceType: 'module',
     },
   },
+  {
+    files: [
+      'packages/design-system-react/src/components/**/*.{ts,tsx}',
+      'packages/design-system-react-native/src/components/**/*.{ts,tsx}',
+    ],
+    ignores: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.d.ts'],
+    rules: {
+      'import-x/no-default-export': 'error',
+    },
+  },
   // Tailwind ESLint for React Web
   {
     files: [

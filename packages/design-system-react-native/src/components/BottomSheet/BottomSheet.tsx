@@ -12,7 +12,7 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import BottomSheetDialog from '../BottomSheetDialog';
+import { BottomSheetDialog } from '../BottomSheetDialog';
 import type { BottomSheetDialogRef } from '../BottomSheetDialog';
 import { BottomSheetOverlay } from '../BottomSheetOverlay/BottomSheetOverlay';
 
@@ -35,6 +35,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
       shouldNavigateBack = true,
       isFullscreen = false,
       keyboardAvoidingViewEnabled = true,
+      panGestureHandlerProps,
       ...props
     },
     ref,
@@ -135,6 +136,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
           isFullscreen={isFullscreen}
           twClassName={twClassName}
           keyboardAvoidingViewEnabled={keyboardAvoidingViewEnabled}
+          panGestureHandlerProps={panGestureHandlerProps}
         >
           {children}
         </BottomSheetDialog>

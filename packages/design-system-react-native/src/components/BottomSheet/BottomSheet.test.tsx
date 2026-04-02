@@ -1,5 +1,5 @@
 import { act, fireEvent, render } from '@testing-library/react-native';
-import React, { useEffect, useRef } from 'react';
+import React, { createRef, useEffect, useRef } from 'react';
 import { BackHandler, Platform, TouchableOpacity, View } from 'react-native';
 
 import { BottomSheet } from './BottomSheet';
@@ -14,42 +14,48 @@ jest.mock('@metamask/design-system-twrnc-preset', () => ({
 // Capture callbacks wired by BottomSheet to BottomSheetDialog
 let capturedDialogOnClose: ((hasPendingAction?: boolean) => void) | undefined;
 let capturedDialogOnOpen: ((hasPendingAction?: boolean) => void) | undefined;
+let capturedPanGestureHandlerProps: unknown;
 const mockCloseDialog = jest.fn();
 const mockOpenDialog = jest.fn();
 
 jest.mock('../BottomSheetDialog', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { forwardRef, useImperativeHandle } = require('react');
-  return forwardRef(
-    (
-      {
-        children,
-        onClose,
-        onOpen,
-      }: {
-        children?: unknown;
-        onClose?: (hasPendingAction?: boolean) => void;
-        onOpen?: (hasPendingAction?: boolean) => void;
+  return {
+    BottomSheetDialog: forwardRef(
+      (
+        {
+          children,
+          onClose,
+          onOpen,
+          panGestureHandlerProps,
+        }: {
+          children?: unknown;
+          onClose?: (hasPendingAction?: boolean) => void;
+          onOpen?: (hasPendingAction?: boolean) => void;
+          panGestureHandlerProps?: unknown;
+        },
+        ref: unknown,
+      ) => {
+        capturedDialogOnClose = onClose;
+        capturedDialogOnOpen = onOpen;
+        capturedPanGestureHandlerProps = panGestureHandlerProps;
+        useImperativeHandle(ref, () => ({
+          onCloseDialog: (callback?: () => void) => {
+            mockCloseDialog();
+            onClose?.();
+            callback?.();
+          },
+          onOpenDialog: (callback?: () => void) => {
+            mockOpenDialog();
+            onOpen?.();
+            callback?.();
+          },
+        }));
+        return children;
       },
-      ref: unknown,
-    ) => {
-      capturedDialogOnClose = onClose;
-      capturedDialogOnOpen = onOpen;
-      useImperativeHandle(ref, () => ({
-        onCloseDialog: (callback?: () => void) => {
-          mockCloseDialog();
-          onClose?.();
-          callback?.();
-        },
-        onOpenDialog: (callback?: () => void) => {
-          mockOpenDialog();
-          onOpen?.();
-          callback?.();
-        },
-      }));
-      return children;
-    },
-  );
+    ),
+  };
 });
 
 const noop = () => undefined;
@@ -60,6 +66,7 @@ describe('BottomSheet', () => {
     mockOpenDialog.mockClear();
     capturedDialogOnClose = undefined;
     capturedDialogOnOpen = undefined;
+    capturedPanGestureHandlerProps = undefined;
   });
 
   it('renders with testID on root element', () => {
@@ -92,6 +99,25 @@ describe('BottomSheet', () => {
     expect(getByTestId('bottom-sheet')).toBeDefined();
 
     Platform.OS = originalOS;
+  });
+
+  it('passes panGestureHandlerProps through to BottomSheetDialog', () => {
+    const simultaneousHandlersRef = createRef<unknown>();
+
+    render(
+      <BottomSheet
+        goBack={noop}
+        panGestureHandlerProps={{
+          simultaneousHandlers: simultaneousHandlersRef,
+        }}
+      >
+        <View />
+      </BottomSheet>,
+    );
+
+    expect(capturedPanGestureHandlerProps).toStrictEqual({
+      simultaneousHandlers: simultaneousHandlersRef,
+    });
   });
 
   it('calls onClose when dialog signals close', () => {
