@@ -1,4 +1,1 @@
-export {
-  ButtonVariant,
-  type ButtonPropsShared,
-} from './Button.types';
+export { ButtonVariant, type ButtonPropsShared } from './Button.types';

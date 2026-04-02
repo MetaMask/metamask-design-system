@@ -16,7 +16,8 @@ export const ButtonBaseSize = {
    */
   Lg: 'lg',
 } as const;
-export type ButtonBaseSize = (typeof ButtonBaseSize)[keyof typeof ButtonBaseSize];
+export type ButtonBaseSize =
+  (typeof ButtonBaseSize)[keyof typeof ButtonBaseSize];
 
 /**
  * ButtonBase component shared props (ADR-0004)
