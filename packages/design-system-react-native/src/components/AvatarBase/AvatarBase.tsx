@@ -1,8 +1,11 @@
+import {
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { Text, TextColor, TextVariant, FontWeight } from '../Text';
 
 import {
