@@ -2,6 +2,7 @@ import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { ButtonBaseSize } from '../../types';
 import type { IconProps, IconName } from '../Icon';
+import type { HapticFeedbackStyle } from '../temp-components/ButtonAnimated';
 import type { SpinnerProps } from '../temp-components/Spinner';
 import type { TextProps } from '../Text';
 
@@ -120,6 +121,12 @@ export type ButtonBaseProps = {
   onAccessibilityAction?: (event: {
     nativeEvent: { actionName: string };
   }) => void;
+  /**
+   * Optional haptic feedback style triggered on press.
+   *
+   * @default 'light'
+   */
+  hapticFeedback?: HapticFeedbackStyle;
 } & Omit<
   PressableProps,
   | 'accessibilityRole'
