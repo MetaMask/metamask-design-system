@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.1]
 
-### Uncategorized
+### Fixed
 
-- fix(twrnc): avoid RN fontWeight conflicts with custom font families ([#1037](https://github.com/MetaMask/metamask-design-system/pull/1037))
+- Stopped typography class generation from combining custom font families with forced `fontWeight` values, preventing React Native apps from rendering incorrect or fallback fonts when custom font family mappings are used ([#1037](https://github.com/MetaMask/metamask-design-system/pull/1037)).
 
 ## [0.4.0]
 
