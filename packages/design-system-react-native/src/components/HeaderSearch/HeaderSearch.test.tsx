@@ -86,6 +86,27 @@ describe('HeaderSearch', () => {
       expect(getByTestId('custom-back-button')).toBeOnTheScreen();
     });
 
+    it('does not allow backButtonProps to override onPress', () => {
+      const onPressBackButton = jest.fn();
+      const rogueOnPress = jest.fn();
+
+      const { getByTestId } = render(
+        <HeaderSearch
+          variant={HeaderSearchVariant.Screen}
+          onPressBackButton={onPressBackButton}
+          textFieldSearchProps={mockTextFieldSearchProps}
+          backButtonProps={
+            { testID: 'back-button', onPress: rogueOnPress } as never
+          }
+        />,
+      );
+
+      fireEvent.press(getByTestId('back-button'));
+
+      expect(onPressBackButton).toHaveBeenCalledTimes(1);
+      expect(rogueOnPress).not.toHaveBeenCalled();
+    });
+
     it('passes textFieldSearchProps through to TextFieldSearch', () => {
       const onPressBackButton = jest.fn();
 
@@ -184,6 +205,27 @@ describe('HeaderSearch', () => {
       );
 
       expect(getByTestId('custom-cancel-button')).toBeOnTheScreen();
+    });
+
+    it('does not allow cancelButtonProps to override onPress', () => {
+      const onPressCancelButton = jest.fn();
+      const rogueOnPress = jest.fn();
+
+      const { getByTestId } = render(
+        <HeaderSearch
+          variant={HeaderSearchVariant.Inline}
+          onPressCancelButton={onPressCancelButton}
+          textFieldSearchProps={mockTextFieldSearchProps}
+          cancelButtonProps={
+            { testID: 'cancel-button', onPress: rogueOnPress } as never
+          }
+        />,
+      );
+
+      fireEvent.press(getByTestId('cancel-button'));
+
+      expect(onPressCancelButton).toHaveBeenCalledTimes(1);
+      expect(rogueOnPress).not.toHaveBeenCalled();
     });
 
     it('passes textFieldSearchProps through to TextFieldSearch', () => {

@@ -68,10 +68,10 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         }
       >
         <ButtonIcon
-          iconName={IconName.ArrowLeft}
           size={ButtonIconSize.Md}
-          onPress={onPressBackButton}
           {...backButtonProps}
+          iconName={IconName.ArrowLeft}
+          onPress={onPressBackButton}
         />
         <TextFieldSearch
           {...(textFieldSearchProps as TextFieldSearchProps)}
@@ -112,9 +112,9 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         }
       />
       <Button
+        {...cancelButtonProps}
         variant={ButtonVariant.Tertiary}
         onPress={onPressCancelButton}
-        {...cancelButtonProps}
         textProps={{
           ...cancelButtonProps?.textProps,
           twClassName: cancelButtonProps?.textProps?.twClassName

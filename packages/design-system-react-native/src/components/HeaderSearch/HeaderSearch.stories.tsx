@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 
-import { Box } from '../Box';
-
 import type { HeaderSearchProps } from './HeaderSearch.types';
 
 import { HeaderSearch, HeaderSearchVariant } from '.';
@@ -12,13 +10,22 @@ const noop = () => undefined;
 const meta: Meta<HeaderSearchProps> = {
   title: 'Components/HeaderSearch',
   component: HeaderSearch,
-  decorators: [
-    (Story) => (
-      <Box twClassName="w-full bg-background-default">
-        <Story />
-      </Box>
-    ),
-  ],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'HeaderSearch combines TextFieldSearch with a back button (Screen) or Cancel action (Inline). Props are discriminated by `variant`.',
+      },
+    },
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: Object.values(HeaderSearchVariant),
+      description:
+        'Screen shows a back icon; Inline shows a tertiary Cancel button.',
+    },
+  },
 };
 
 export default meta;
@@ -26,19 +33,33 @@ export default meta;
 type Story = StoryObj<HeaderSearchProps>;
 
 export const Default: Story = {
-  render: () => {
+  args: {
+    variant: HeaderSearchVariant.Screen,
+  },
+  render: (args) => {
     const [value, setValue] = useState('');
+    const textFieldSearchProps = {
+      value,
+      onChangeText: setValue,
+      onPressClearButton: () => setValue(''),
+      placeholder: 'Search...',
+    };
+
+    if (args.variant === HeaderSearchVariant.Screen) {
+      return (
+        <HeaderSearch
+          variant={HeaderSearchVariant.Screen}
+          onPressBackButton={noop}
+          textFieldSearchProps={textFieldSearchProps}
+        />
+      );
+    }
 
     return (
       <HeaderSearch
-        variant={HeaderSearchVariant.Screen}
-        onPressBackButton={noop}
-        textFieldSearchProps={{
-          value,
-          onChangeText: setValue,
-          onPressClearButton: () => setValue(''),
-          placeholder: 'Search...',
-        }}
+        variant={HeaderSearchVariant.Inline}
+        onPressCancelButton={noop}
+        textFieldSearchProps={textFieldSearchProps}
       />
     );
   },

@@ -21,6 +21,7 @@ type HeaderSearchBaseProps = Omit<BoxProps, 'children'> & {
  */
 export type HeaderSearchScreenProps = HeaderSearchScreenPropsShared &
   HeaderSearchBaseProps & {
+    onPressBackButton: () => void;
     backButtonProps?: Omit<ButtonIconProps, 'iconName' | 'onPress'>;
   };
 
@@ -30,6 +31,7 @@ export type HeaderSearchScreenProps = HeaderSearchScreenPropsShared &
  */
 export type HeaderSearchInlineProps = HeaderSearchInlinePropsShared &
   HeaderSearchBaseProps & {
+    onPressCancelButton: () => void;
     cancelButtonProps?: Omit<ButtonProps, 'variant' | 'onPress' | 'children'>;
   };
 

@@ -14,7 +14,6 @@ export type HeaderSearchVariant =
  */
 export type HeaderSearchScreenPropsShared = {
   variant: typeof HeaderSearchVariant.Screen;
-  onPressBackButton: () => void;
 };
 
 /**
@@ -22,7 +21,6 @@ export type HeaderSearchScreenPropsShared = {
  */
 export type HeaderSearchInlinePropsShared = {
   variant: typeof HeaderSearchVariant.Inline;
-  onPressCancelButton: () => void;
 };
 
 /**

@@ -204,28 +204,6 @@ Merged with the component’s built-in root row classes (`height`, `flex-row`, s
 />
 ```
 
-### `testID`
-
-Forwarded to the root `Box` for tests and automation.
-
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
-
-```tsx
-<HeaderSearch
-  variant={HeaderSearchVariant.Screen}
-  onPressBackButton={() => {}}
-  testID="asset-search-header"
-  textFieldSearchProps={{
-    value: '',
-    onChangeText: () => {},
-    onPressClearButton: () => {},
-    placeholder: 'Search',
-  }}
-/>
-```
-
 ### `style`
 
 Use the `style` prop to customize the root container with React Native styles. For token-aligned layout, prefer `twClassName`. Use `style` with `tw.style()` from the preset when you need conditionals or dynamic values.
