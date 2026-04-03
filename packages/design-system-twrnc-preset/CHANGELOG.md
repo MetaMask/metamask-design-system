@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Stopped typography class generation from combining custom font families with forced `fontWeight` values, preventing React Native apps from rendering incorrect or fallback fonts when custom font family mappings are used ([#1037](https://github.com/MetaMask/metamask-design-system/pull/1037)).
+- Fixed typography class generation so custom font family mappings are no longer combined with forced `fontWeight` values, preventing incorrect or fallback font rendering in React Native apps that supply custom font families ([#1037](https://github.com/MetaMask/metamask-design-system/pull/1037)).
 
 ## [0.4.0]
 
