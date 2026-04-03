@@ -1,10 +1,10 @@
+import { ButtonIconSize } from '@metamask/design-system-shared';
 import React from 'react';
 import { GestureResponderEvent } from 'react-native';
 
 import {
   BoxAlignItems,
   BoxBackgroundColor,
-  ButtonIconSize,
   ButtonSize,
   FontWeight,
   BoxFlexDirection,

@@ -1,4 +1,5 @@
-import { ButtonIconSize } from '../../types';
+import { ButtonIconSize } from '@metamask/design-system-shared';
+
 import { IconSize } from '../Icon';
 
 // Mappings
