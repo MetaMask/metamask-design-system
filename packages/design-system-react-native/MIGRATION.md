@@ -250,7 +250,10 @@ The design system Button adds these props not available in the old mobile Button
 
 ### BottomSheet Component
 
-The `BottomSheet` component has one key breaking change when migrating from the mobile component-library: navigation is no longer handled internally. The old component called `useNavigation()` itself when `shouldNavigateBack` was `true`; the new DS component requires an explicit `goBack` prop.
+The `BottomSheet` component has two key breaking changes when migrating from the mobile component-library:
+
+1. Navigation is no longer handled internally — the old component called `useNavigation()` itself when `shouldNavigateBack` was `true`.
+2. The `shouldNavigateBack` prop no longer exists — pass an optional `goBack` callback instead; if provided it is always called when the sheet closes.
 
 #### Breaking Changes
 
@@ -260,13 +263,15 @@ The `BottomSheet` component has one key breaking change when migrating from the 
 | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `import BottomSheet, { BottomSheetRef } from '.../component-library/components/BottomSheets/BottomSheet'` | `import { BottomSheet, type BottomSheetRef } from '@metamask/design-system-react-native'` |
 
-##### New Required Prop: `goBack`
+##### `shouldNavigateBack` + internal navigation → optional `goBack` prop
 
-The DS `BottomSheet` requires a `goBack: () => void` prop. It is called automatically when `shouldNavigateBack` is `true` (the default) and the sheet closes.
+The old mobile component accepted a `shouldNavigateBack` boolean and called `useNavigation().goBack()` itself. The DS component removes both `shouldNavigateBack` and the internal navigation call. Pass a `goBack` callback when you want navigation to happen on close.
 
-| Mobile Pattern                                         | Design System Migration                                         |
-| ------------------------------------------------------ | --------------------------------------------------------------- |
-| No `goBack` prop — `useNavigation()` called internally | `goBack={navigation.goBack}` — caller must provide the function |
+| Mobile Pattern                                         | Design System Migration                                              |
+| ------------------------------------------------------ | -------------------------------------------------------------------- |
+| `shouldNavigateBack` — controls whether to navigate    | Removed — pass `goBack` to navigate, omit it to skip navigation      |
+| No `goBack` prop — `useNavigation()` called internally | `goBack={navigation.goBack}` — caller provides the function          |
+| `shouldNavigateBack={false}` — no navigation on close  | Omit `goBack` prop                                                   |
 
 Obtain `navigation` via the `useNavigation()` hook from `@react-navigation/native`:
 
@@ -278,11 +283,11 @@ const navigation = useNavigation();
 
 ##### `onClose` Callback Signature Unchanged
 
-`onClose?: (hasPendingAction?: boolean) => void` works the same in both versions — it is called **after** the close animation completes, before `goBack` fires (when `shouldNavigateBack` is `true`).
+`onClose?: (hasPendingAction?: boolean) => void` works the same in both versions — it is called **after** the close animation completes, before `goBack` fires (when `goBack` is provided).
 
 #### Migration Examples
 
-##### Standard Modal (shouldNavigateBack = true, default)
+##### Standard Modal (navigate back on close)
 
 Before (Mobile):
 
@@ -316,11 +321,29 @@ function MyModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
 
   return (
-    <BottomSheet ref={sheetRef} shouldNavigateBack goBack={navigation.goBack}>
+    <BottomSheet ref={sheetRef} goBack={navigation.goBack}>
       {/* content */}
     </BottomSheet>
   );
 }
+```
+
+##### Modal without back navigation
+
+Before (Mobile):
+
+```tsx
+<BottomSheet ref={sheetRef} shouldNavigateBack={false}>
+  {/* content */}
+</BottomSheet>
+```
+
+After (Design System — omit `goBack`):
+
+```tsx
+<BottomSheet ref={sheetRef}>
+  {/* content */}
+</BottomSheet>
 ```
 
 ##### Modal with onClose Callback
@@ -336,12 +359,7 @@ Before (Mobile):
 After (Design System):
 
 ```tsx
-<BottomSheet
-  ref={sheetRef}
-  shouldNavigateBack
-  goBack={navigation.goBack}
-  onClose={handleDismiss}
->
+<BottomSheet ref={sheetRef} goBack={navigation.goBack} onClose={handleDismiss}>
   {/* content */}
 </BottomSheet>
 ```
@@ -375,7 +393,7 @@ import {
 
 #### API Differences
 
-The DS `BottomSheet` does **not** add new props beyond `goBack`. All other props (`shouldNavigateBack`, `keyboardAvoidingViewEnabled`, `isFullscreen`, `isInteractable`, `onClose`, `ref`) behave identically to the old mobile version.
+The DS `BottomSheet` exposes `goBack?: () => void` and `keyboardAvoidingViewEnabled?: boolean` alongside all `BottomSheetDialog` props (`isFullscreen`, `isInteractable`, `onClose`, `ref`). The `shouldNavigateBack` prop from the old mobile version does not exist in the DS component.
 
 ---
 
