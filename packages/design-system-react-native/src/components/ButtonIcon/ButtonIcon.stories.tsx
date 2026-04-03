@@ -1,8 +1,10 @@
+import {
+  ButtonIconSize,
+  IconName,
+  ButtonIconVariant,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
-
-import { ButtonIconSize, ButtonIconVariant } from '../../types';
-import { IconName } from '../Icon';
 
 import { ButtonIcon } from './ButtonIcon';
 import type { ButtonIconProps } from './ButtonIcon.types';
