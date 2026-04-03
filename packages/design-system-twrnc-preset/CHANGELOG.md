@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix(twrnc): avoid RN fontWeight conflicts with custom font families ([#1037](https://github.com/MetaMask/metamask-design-system/pull/1037))
+
 ## [0.4.0]
 
 ### Changed
