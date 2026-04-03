@@ -9,20 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.14.0]
 
-### Uncategorized
+### Added
 
-- [BottomSheet] feat: replace `shouldNavigateBack` with optional `goBack` callback ([#1024](https://github.com/MetaMask/metamask-design-system/pull/1024))
-- chore(deps): bump @metamask/utils from 11.10.0 to 11.11.0 ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033))
-- feat: [DSRN] Added HeaderRoot ([#1029](https://github.com/MetaMask/metamask-design-system/pull/1029))
-- chore: migrate AvatarBase enums to shared union types ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005))
-- chore: migrate RN component default exports to named exports ([#1032](https://github.com/MetaMask/metamask-design-system/pull/1032))
-- refactor: Updated HeaderStandard based on review ([#1030](https://github.com/MetaMask/metamask-design-system/pull/1030))
-- chore: [DSYS-616] create/update BannerBase migration docs ([#1011](https://github.com/MetaMask/metamask-design-system/pull/1011))
-- feat: [DSRN] Added HeaderStandard ([#1028](https://github.com/MetaMask/metamask-design-system/pull/1028))
-- [DSRN] Added TextFieldSearch ([#1027](https://github.com/MetaMask/metamask-design-system/pull/1027))
-- feat(react-native): add panGestureHandlerProps to BottomSheet ([#1016](https://github.com/MetaMask/metamask-design-system/pull/1016))
-- feat: Added BoxHorizontal and BoxVertical utility component ([#1003](https://github.com/MetaMask/metamask-design-system/pull/1003))
-- fix(react-native): set BottomSheetHeader button size to md ([#1012](https://github.com/MetaMask/metamask-design-system/pull/1012))
+- Added `HeaderRoot` as a new root primitive for React Native header composition ([#1029](https://github.com/MetaMask/metamask-design-system/pull/1029)).
+- Added `HeaderStandard` for standardized title + action header layouts in mobile screens ([#1028](https://github.com/MetaMask/metamask-design-system/pull/1028), [#1030](https://github.com/MetaMask/metamask-design-system/pull/1030)).
+- Added `TextFieldSearch` for search-style text input flows on mobile ([#1027](https://github.com/MetaMask/metamask-design-system/pull/1027)).
+- Added `BoxHorizontal` and `BoxVertical` utility components for common directional layout composition ([#1003](https://github.com/MetaMask/metamask-design-system/pull/1003)).
+
+### Changed
+
+- Replaced BottomSheet `shouldNavigateBack` with an optional `goBack` callback for explicit navigation handling in host apps ([#1024](https://github.com/MetaMask/metamask-design-system/pull/1024)).
+- Added `panGestureHandlerProps` support to `BottomSheet` so integrators can customize gesture-handler behavior ([#1016](https://github.com/MetaMask/metamask-design-system/pull/1016)).
+- Migrated React Native package exports from default exports to named exports for more consistent import ergonomics across the library ([#1032](https://github.com/MetaMask/metamask-design-system/pull/1032)).
+- Updated `AvatarBase` exports to use shared const-object + string-union types instead of local enums ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005)).
+- Updated `@metamask/utils` peer dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033)).
+- Expanded `BannerBase` migration documentation to improve upgrade guidance for consumers ([#1011](https://github.com/MetaMask/metamask-design-system/pull/1011)).
+
+### Fixed
+
+- Updated `BottomSheetHeader` action button size to `md` for consistent sizing and visual alignment ([#1012](https://github.com/MetaMask/metamask-design-system/pull/1012)).
 
 ## [0.13.0]
 
