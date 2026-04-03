@@ -12,6 +12,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
 - [Version Updates](#version-updates)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
@@ -579,6 +580,110 @@ import {
 - `className` and `style` are still supported
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
+
+### Input Component
+
+The extension `input` maps to `Input` in the design system, but there are important prop-surface and type-signature changes.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for the shared Box/style-utility migration approach used across all components.
+
+#### Breaking Changes
+
+##### Import Path and Type Source
+
+| Extension Pattern                                      | Design System Migration                                  |
+| ------------------------------------------------------ | -------------------------------------------------------- |
+| `import { Input } from '../../component-library/input'` | `import { Input } from '@metamask/design-system-react'` |
+| `import { InputType } from '../../component-library/input'` | Use native HTML input `type` strings (for example `'text'`, `'search'`) |
+
+##### Prop Mapping
+
+| Extension API                     | MMDS API                        | Notes                                                                                   |
+| --------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------- |
+| `disabled?: boolean`              | `isDisabled?: boolean`          | renamed                                                                                |
+| `readOnly?: boolean`              | `isReadonly?: boolean`          | renamed                                                                                |
+| `error?: boolean`                 | `aria-invalid?: boolean`        | `error` prop removed; use native accessibility attribute                               |
+| `disableStateStyles?: boolean`    | Removed                         | no direct equivalent; use `className`/`style` overrides for focus/disabled presentation |
+| `autoComplete?: boolean`          | `autoComplete?: string`         | changed from boolean to native HTML autocomplete values                                 |
+| `type?: InputType`                | `type?: HTMLInputTypeAttribute` | enum import removed; use native input type strings                                      |
+| `textVariant?: TextVariant.bodyMd` style casing | `textVariant?: TextVariant.BodyMd` style casing | variant enum casing changes from legacy helper constants                                |
+
+##### Removed Polymorphic/Style Utility Surface
+
+The extension `Input` accepted a polymorphic `as` pattern and broad Box style-utility props via `StyleUtilityProps`.
+
+| Extension API                                     | MMDS Status                    | Migration                                                                                   |
+| ------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------- |
+| `as` polymorphism (`InputProps<C>`)               | Removed                        | `Input` always renders an HTML `input`; wrap with layout components when needed            |
+| Box style utility props inherited via `StyleUtilityProps` | Removed from `Input` component API | move layout/styling concerns to wrapper components or Tailwind classes through `className` |
+
+##### Callback Signature Changes
+
+| Extension API Type | MMDS API Type | Notes |
+| ------------------ | ------------- | ----- |
+| `onBlur?: () => void` | `onBlur?: FocusEventHandler<HTMLInputElement>` | handlers now use native DOM event signatures |
+| `onFocus?: () => void` | `onFocus?: FocusEventHandler<HTMLInputElement>` | handlers now use native DOM event signatures |
+| `onChange?: () => void` | `onChange?: ChangeEventHandler<HTMLInputElement>` | use event-driven value updates (`event.target.value`) |
+
+##### Default and Behavior Changes
+
+| Extension Behavior | MMDS Behavior |
+| ------------------ | ------------- |
+| `autoComplete` boolean maps to `'on'/'off'` inside extension Input | MMDS expects native autocomplete tokens directly; set `autoComplete="off"` explicitly when needed |
+| `textVariant` defaults to `TextVariant.bodyMd` | `textVariant` defaults to `TextVariant.BodyMd` |
+| Disabled + `disableStateStyles` could suppress state visuals | no dedicated state-style suppression prop; disabled/readonly visuals follow MMDS defaults |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Input, InputType } from '../../component-library/input';
+import { TextVariant } from '../../../helpers/constants/design-system';
+
+<Input
+  id="search-input"
+  name="query"
+  type={InputType.Search}
+  autoComplete={false}
+  textVariant={TextVariant.bodyMd}
+  value={query}
+  onChange={() => {
+    // update state in parent
+  }}
+  error={hasError}
+  disabled={isDisabled}
+  readOnly={isReadonly}
+  disableStateStyles
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react';
+
+<Input
+  id="search-input"
+  name="query"
+  type="search"
+  autoComplete="off"
+  textVariant={TextVariant.BodyMd}
+  value={query}
+  onChange={(event) => {
+    setQuery(event.target.value);
+  }}
+  aria-invalid={hasError}
+  isDisabled={isDisabled}
+  isReadonly={isReadonly}
+/>;
+```
+
+#### API Differences
+
+- MMDS `Input` keeps native HTML input attributes and adds semantic flags (`isDisabled`, `isReadonly`, `textVariant`).
+- Use `className` and `style` for visual customization instead of legacy style-utility props.
+- Keep extension `TextField`/layout wrappers only where needed for composition; migrate the base input itself to MMDS `Input`.
 
 ## Version Updates
 

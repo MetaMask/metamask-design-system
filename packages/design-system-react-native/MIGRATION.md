@@ -11,6 +11,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
 - [Version Updates](#version-updates)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
@@ -643,6 +644,93 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+
+### Input Component
+
+The mobile component-library `TextField/foundation/Input` maps to `Input` in the design system, but there are prop and behavior differences that affect migration.
+
+#### Breaking Changes
+
+##### Import Path and Type Source
+
+| Mobile Pattern                                                                                         | Design System Migration                                         |
+| ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| `import Input from '.../component-library/components/Form/TextField/foundation/Input'`                | `import { Input } from '@metamask/design-system-react-native'` |
+| `import type { InputProps } from '.../foundation/Input/Input.types'`                                  | `import type { InputProps } from '@metamask/design-system-react-native'` |
+| Using wrapper `TextField` for boxed presentation with accessories                                     | Keep using `TextField` in MMDS when you need accessories/boxed container |
+
+##### Prop Mapping
+
+| Mobile API                      | MMDS API                     | Notes |
+| ------------------------------- | ---------------------------- | ----- |
+| `isDisabled?: boolean`          | `isDisabled?: boolean`       | unchanged |
+| `isReadonly?: boolean`          | `isReadonly?: boolean`       | unchanged |
+| `isStateStylesDisabled?: boolean` | `isStateStylesDisabled?: boolean` | unchanged |
+| `textVariant?: TextVariant`     | `textVariant?: TextVariant`  | same prop; use MMDS `TextVariant` import |
+| `onChangeText?: (text: string) => void` | `onChangeText?: (text: string) => void` | unchanged callback signature |
+| `value?: string`                | `value: string`              | now required (controlled-only) |
+| `defaultValue?: string`         | Removed                      | uncontrolled mode removed in MMDS `Input` |
+| `editable` (from `TextInputProps`) | Removed from `InputProps` surface | use `isDisabled` / `isReadonly` instead |
+
+##### Callback and Default Changes
+
+| Mobile Legacy Behavior | MMDS Behavior |
+| ---------------------- | ------------- |
+| `autoFocus` defaulted to `true` in legacy foundation Input | `autoFocus` follows React Native default (`false`) unless explicitly set |
+| `value` often omitted for uncontrolled usage via inherited `TextInputProps` | `value` is required and must be controlled by parent state |
+| Placeholder/value styling tied to style-sheet logic in legacy component | MMDS keeps placeholder visibility handling and applies an iOS-only line-height workaround internally |
+
+##### TextField Wrapper Alignment
+
+If you currently consume legacy `TextField`, the closest MMDS replacement is `TextField` (not raw `Input`) because both provide accessory slots and wrapper-level focus/error visuals.
+
+| Mobile Legacy TextField API | MMDS TextField API | Notes |
+| --------------------------- | ------------------ | ----- |
+| `startAccessory`, `endAccessory` | `startAccessory`, `endAccessory` | unchanged |
+| `isError` | `isError` | unchanged |
+| `value?: string` through inherited Input props | `value: string` required | controlled-only requirement applies |
+| `size` / `TextFieldSize` (older mobile patterns) | Removed in MMDS | row height is fixed; use `twClassName` / `style` for surrounding layout |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Input from '../../../component-library/components/Form/TextField/foundation/Input';
+import { TextVariant } from '../../../component-library/components/Texts/Text';
+
+const [query, setQuery] = useState('');
+
+<Input
+  textVariant={TextVariant.BodyMD}
+  placeholder="Search"
+  defaultValue="seed phrase"
+  onChangeText={setQuery}
+  isDisabled={isDisabled}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react-native';
+
+const [query, setQuery] = useState('');
+
+<Input
+  textVariant={TextVariant.BodyMd}
+  placeholder="Search"
+  value={query}
+  onChangeText={setQuery}
+  isDisabled={isDisabled}
+/>;
+```
+
+#### API Differences
+
+- MMDS `Input` is controlled-only (`value` required) and no longer supports `defaultValue`.
+- `editable` is intentionally not part of `InputProps`; use `isDisabled` and `isReadonly` for state control.
+- Use MMDS `TextField` when you need the boxed field container and accessories from legacy `TextField`.
 
 ## Version Updates
 
