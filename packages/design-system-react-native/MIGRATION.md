@@ -9,6 +9,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
+  - [Checkbox Component](#checkbox-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
@@ -461,6 +462,81 @@ import { BannerBase } from '@metamask/design-system-react-native';
     /* dismiss banner */
   }}
   closeButtonProps={{ testID: 'banner-base-close-button' }}
+/>;
+```
+
+### Checkbox Component
+
+The mobile legacy `Checkbox` maps to `Checkbox` in `@metamask/design-system-react-native`, but the MMDS API is fully controlled and removes several legacy states.
+
+#### Breaking Changes
+
+##### Removed / No Direct Equivalent
+
+| Legacy Mobile API | MMDS Status | Migration |
+| ----------------- | ----------- | --------- |
+| `isIndeterminate?: boolean` | Removed | Use explicit selected/unselected state only. If partial state is required, represent it outside `Checkbox` state. |
+| `isReadOnly?: boolean` | Removed | Use `isDisabled` to prevent interaction. |
+| `isDanger?: boolean` | Removed | Use `isInvalid` for error styling where applicable. |
+| `checkboxStyle?: StyleProp<ViewStyle>` | Removed | Use `style` and/or `twClassName` instead. |
+| `onPress?: () => void` | Removed | Use `onChange` with boolean state updates. |
+
+##### Renamed Props
+
+| Legacy Mobile API | MMDS API | Notes |
+| ----------------- | -------- | ----- |
+| `isChecked` | `isSelected` | renamed controlled-state prop |
+| `onPress` | `onChange` | callback model changed from press event to selected-state updates |
+
+##### Type and Callback Signature Changes
+
+| Legacy Mobile API | MMDS API | Notes |
+| ----------------- | -------- | ----- |
+| `isChecked?: boolean` | `isSelected: boolean` | now required and controlled |
+| `onPress?: () => void` | `onChange: (isSelected: boolean) => void` | callback receives next boolean |
+| `checkboxStyle?: StyleProp<ViewStyle>` | `style?: PressableProps['style']` | apply outer pressable styling via `style` |
+| `label?: string \| ReactNode` | `label?: string \| ReactNode` | unchanged type |
+
+##### Default and Behavior Changes
+
+| Legacy Mobile Behavior | MMDS Behavior |
+| ---------------------- | ------------- |
+| Component could be used without controlled state props | `isSelected` and `onChange` are required |
+| Read-only mode disabled interaction (`isReadOnly`) | No read-only mode; use `isDisabled` |
+| Indeterminate state displayed minus icon | Only selected (`Check`) or unselected visual states |
+| `TouchableOpacity` `onPress` was main interaction contract | `onChange(nextIsSelected)` is main interaction contract |
+| Styling split between `style` and `checkboxStyle` | `style` + `twClassName` + `checkboxContainerProps` cover styling |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Checkbox from '../../../component-library/components/Checkbox';
+import { useState } from 'react';
+
+const [isChecked, setIsChecked] = useState(false);
+
+<Checkbox
+  label="Enable notifications"
+  isChecked={isChecked}
+  onPress={() => setIsChecked(!isChecked)}
+  isReadOnly={false}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Checkbox } from '@metamask/design-system-react-native';
+import { useState } from 'react';
+
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox
+  label="Enable notifications"
+  isSelected={isSelected}
+  onChange={setIsSelected}
 />;
 ```
 

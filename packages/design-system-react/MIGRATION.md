@@ -10,6 +10,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
+  - [Checkbox Component](#checkbox-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
@@ -366,6 +367,89 @@ import { BannerBase } from '@metamask/design-system-react';
     /* dismiss banner */
   }}
   closeButtonProps={{ 'data-testid': 'banner-base-close-button' }}
+/>;
+```
+
+### Checkbox Component
+
+The extension `checkbox` maps to `Checkbox` in `@metamask/design-system-react`, but the new API is fully controlled and removes several legacy states.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared style-utility migration behavior.
+
+#### Breaking Changes
+
+##### Removed / No Direct Equivalent
+
+| Legacy Extension API | MMDS Status | Migration |
+| -------------------- | ----------- | --------- |
+| `isIndeterminate?: boolean` | Removed | Use explicit selected/unselected state only. If a visual partial state is still needed, render it with adjacent UI instead of `Checkbox` state. |
+| `isReadOnly?: boolean` | Removed | Use `isDisabled` to prevent interaction. |
+| `inputRef` for direct input element refs | No direct equivalent | Use the component ref (`toggle()`) for imperative toggling, or manage checkbox state in parent logic. |
+
+##### Renamed Props
+
+| Legacy Extension API | MMDS API | Notes |
+| -------------------- | -------- | ----- |
+| `isChecked` | `isSelected` | renamed controlled-state prop |
+| `onChange?: (event: ChangeEvent<HTMLInputElement>) => void` | `onChange: (isSelected: boolean) => void` | callback now returns the next boolean instead of the DOM event |
+
+##### Type and Callback Signature Changes
+
+| Legacy Extension API | MMDS API | Notes |
+| -------------------- | -------- | ----- |
+| `id?: string` | `id: string` | now required |
+| `isChecked?: boolean` | `isSelected: boolean` | now required and controlled |
+| `onChange?` optional | `onChange` required | provide state setter in all usages |
+| `label?: any` | `label?: ReactNode \| string` | explicit typing |
+| `inputProps?: any` | `inputProps?: Omit<ComponentProps<'input'>, ...>` | stricter input typing |
+
+##### Default and Behavior Changes
+
+| Legacy Extension Behavior | MMDS Behavior |
+| ------------------------- | ------------- |
+| Checkbox could be rendered without `isChecked`/`onChange` and still compile | `isSelected` and `onChange` are required |
+| `onChange` received full input event | `onChange` receives the next selected boolean |
+| Read-only mode prevented updates (`isReadOnly`) | No read-only mode; use disabled mode |
+| Indeterminate state icon (`MinusBold`) supported | Only selected (`Check`) or unselected visual states |
+| `isRequired`, `name`, and `title` were top-level props | Pass equivalent input attributes through `inputProps` |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Checkbox } from '../../component-library';
+import { useState } from 'react';
+
+const [isChecked, setIsChecked] = useState(false);
+
+<Checkbox
+  id="terms-checkbox"
+  label="I agree to the Terms"
+  isChecked={isChecked}
+  onChange={(event) => setIsChecked(event.target.checked)}
+  isRequired
+  name="termsAccepted"
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Checkbox } from '@metamask/design-system-react';
+import { useState } from 'react';
+
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox
+  id="terms-checkbox"
+  label="I agree to the Terms"
+  isSelected={isSelected}
+  onChange={setIsSelected}
+  inputProps={{
+    required: true,
+    name: 'termsAccepted',
+  }}
 />;
 ```
 
