@@ -56,3 +56,6 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
+// Checkbox types (ADR-0004)
+export { type CheckboxPropsShared } from './types/Checkbox';
