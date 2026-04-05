@@ -1,0 +1,247 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as TextareaStories from './Textarea.stories';
+
+# Textarea
+
+Textarea is a light-weight borderless multi-line text input component.
+
+```tsx
+import { Textarea } from '@metamask/design-system-react';
+
+<Textarea placeholder="Enter text" />;
+```
+
+<Canvas of={TextareaStories.Default} />
+
+## Props
+
+### `textVariant`
+
+Optional enum to select between Typography variants.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextVariant</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextVariant.BodyMd</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextareaStories.Variant} />
+
+### `resize`
+
+Controls the resize behavior of the textarea. Uses the CSS `resize` property.
+
+Available values:
+
+- `TextareaResize.Vertical` (default) — resizable vertically only
+- `TextareaResize.Horizontal` — resizable horizontally only
+- `TextareaResize.Both` — resizable in both directions
+- `TextareaResize.None` — not resizable
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextareaResize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextareaResize.Vertical</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextareaStories.Resize} />
+
+### `isDisabled`
+
+Optional boolean to disable the textarea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextareaStories.IsDisabled} />
+
+### `isReadOnly`
+
+Optional boolean to make the textarea read-only.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextareaStories.IsReadOnly} />
+
+### `isError`
+
+Optional boolean to indicate an error state. Applies error border styling and sets `aria-invalid`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextareaStories.IsError} />
+
+### `rows`
+
+Number of visible text lines. Controls the default height of the textarea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextareaStories.Rows} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={TextareaStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
