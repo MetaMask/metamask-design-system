@@ -12,6 +12,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
 - [Version Updates](#version-updates)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
@@ -579,6 +580,92 @@ import {
 - `className` and `style` are still supported
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
+
+### Input Component
+
+The Input component has breaking API changes when migrating from the extension component-library. The extension Input was polymorphic and inherited Box style-utility props, while the design system Input is a standard HTML `<input>` wrapper with an explicit API surface.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for the shared Box/style-utility migration approach used across all components.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                       | Design System Migration                                     |
+| ------------------------------------------------------- | ----------------------------------------------------------- |
+| `import { Input } from '../../component-library'`       | `import { Input } from '@metamask/design-system-react'`     |
+| `import { InputType } from './input.types'`             | Use native input `type` strings (for example `'text'`)      |
+| `import { TextVariant } from '../../../helpers/...`     | `import { TextVariant } from '@metamask/design-system-react'` |
+
+##### Structured API Mapping
+
+| Change Type | Extension API | Design System API | Notes |
+| ----------- | ------------- | ----------------- | ----- |
+| Renamed | `disabled?: boolean` | `isDisabled?: boolean` | Use `isDisabled` to set `disabled` on the underlying `<input>`. |
+| Renamed | `readOnly?: boolean` | `isReadonly?: boolean` | Use `isReadonly` to set `readOnly` on the underlying `<input>`. |
+| Removed | `disableStateStyles?: boolean` | Removed | Design system Input always applies its state styles; use `className` overrides when needed. |
+| Removed | `error?: boolean` | Removed | Pass `aria-invalid` directly when needed. |
+| Removed | Polymorphic `as` support via `PolymorphicComponentPropWithRef` | Removed | Design system Input always renders an `<input>`. |
+| Removed | Box `StyleUtilityProps` on Input (`margin`, `padding`, etc.) | Removed | Wrap with `Box`/layout primitives or use `className` for spacing/layout. |
+| Type/Value Change | `autoComplete?: boolean` | Native `autoComplete?: string` | Migrate `true`/`false` usage to valid HTML autocomplete tokens (`'on'`, `'off'`, `'email'`, etc.). |
+| Type/Value Change | `type?: InputType` (`text`, `number`, `password`, `search`) | Native input `type` strings | InputType enum is removed; use plain string values supported by HTML input. |
+| Callback Signature Change | `onBlur?: () => void` | `onBlur?: FocusEventHandler<HTMLInputElement>` | Event object is now provided. |
+| Callback Signature Change | `onFocus?: () => void` | `onFocus?: FocusEventHandler<HTMLInputElement>` | Event object is now provided. |
+| Callback Signature Change | `onChange?: () => void` | `onChange?: ChangeEventHandler<HTMLInputElement>` | Event object is now provided. |
+| Default Change | `textVariant = TextVariant.bodyMd` | `textVariant = TextVariant.BodyMd` | Enum member casing changed to PascalCase. |
+| Behavior Note | `type` explicitly defaulted to `InputType.Text` in component | Browser default `type="text"` when omitted | Behavior is effectively unchanged when `type` is omitted. |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Input } from '../../component-library';
+import {
+  TextVariant,
+} from '../../../helpers/constants/design-system';
+
+<Input
+  type="search"
+  textVariant={TextVariant.bodyMd}
+  autoComplete={false}
+  disabled={isLocked}
+  readOnly={isReadonly}
+  disableStateStyles
+  error={hasError}
+  onChange={() => {
+    // Legacy callback did not receive the event argument.
+  }}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  Input,
+  TextVariant,
+} from '@metamask/design-system-react';
+
+<Input
+  type="search"
+  textVariant={TextVariant.BodyMd}
+  autoComplete="off"
+  isDisabled={isLocked}
+  isReadonly={isReadonly}
+  aria-invalid={hasError}
+  onChange={(event) => {
+    const nextValue = event.currentTarget.value;
+    setSearch(nextValue);
+  }}
+/>;
+```
+
+#### API Differences
+
+- `className` and `style` remain available for customization.
+- `placeholder`, `name`, `id`, `required`, `maxLength`, `value`, and `defaultValue` continue to work via inherited native input props.
+- For layout concerns previously handled by Box style props on Input, prefer wrapping with `Box` and using layout props there.
 
 ## Version Updates
 
