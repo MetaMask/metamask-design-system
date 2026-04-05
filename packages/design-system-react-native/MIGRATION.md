@@ -11,6 +11,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
 - [Version Updates](#version-updates)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
@@ -643,6 +644,85 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+
+### Input Component
+
+The Input component has a mostly aligned API when migrating from the mobile component-library. The largest differences are around value control and default focus behavior.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                           | Design System Migration                                            |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `import Input from '.../Form/TextField/foundation/Input'`               | `import { Input } from '@metamask/design-system-react-native'`     |
+| `import { TextVariant } from '.../components/Texts/Text'`               | `import { TextVariant } from '@metamask/design-system-react-native'` |
+
+##### Structured API Mapping
+
+| Change Type | Mobile API | Design System API | Notes |
+| ----------- | ---------- | ----------------- | ----- |
+| Type/Behavior Change | `value?: string` from inherited `TextInputProps` | `value: string` (required) | Design system Input is controlled-only; provide a string value. |
+| Default Change | `autoFocus = true` | `autoFocus = false` | Inputs no longer focus by default on mount. |
+| Unchanged | `isDisabled?: boolean` | `isDisabled?: boolean` | Same meaning; maps to `editable={!isDisabled && !isReadonly}`. |
+| Unchanged | `isReadonly?: boolean` | `isReadonly?: boolean` | Same meaning; maps to `editable={!isDisabled && !isReadonly}`. |
+| Unchanged | `isStateStylesDisabled?: boolean` | `isStateStylesDisabled?: boolean` | Same behavior for focus/disabled state styling toggles. |
+| Unchanged | `textVariant?: TextVariant` | `textVariant?: TextVariant` | Same prop, with `TextVariant.BodyMd` default in both implementations. |
+| Added | — | `twClassName?: string` | Tailwind class overrides are now first-class via `twClassName`. |
+| Unchanged | `onBlur` / `onFocus` event callbacks | `onBlur` / `onFocus` event callbacks | Same signature; still receive native focus events. |
+| Unchanged | `onChangeText` | `onChangeText` | Same callback for text updates. |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import Input from '../../../component-library/components/Form/TextField/foundation/Input';
+import { TextVariant } from '../../../component-library/components/Texts/Text';
+
+<Input
+  value={searchText}
+  placeholder="Search"
+  textVariant={TextVariant.BodyMd}
+  autoFocus
+  isDisabled={isLoading}
+  isReadonly={isReadonly}
+  onChangeText={setSearchText}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  Input,
+  TextVariant,
+} from '@metamask/design-system-react-native';
+
+<Input
+  value={searchText}
+  placeholder="Search"
+  textVariant={TextVariant.BodyMd}
+  isDisabled={isLoading}
+  isReadonly={isReadonly}
+  twClassName="px-2"
+  onChangeText={setSearchText}
+/>;
+```
+
+##### Default Focus Behavior (If You Relied on Auto-Focus)
+
+```tsx
+import { Input } from '@metamask/design-system-react-native';
+
+<Input value={searchText} autoFocus onChangeText={setSearchText} />;
+```
+
+#### API Differences
+
+- `value` is now required, so initialize controlled state before rendering.
+- `twClassName` is supported for Tailwind utility overrides in addition to `style`.
+- Placeholder visibility and input metrics handling are preserved, including iOS placeholder line-height behavior.
 
 ## Version Updates
 
