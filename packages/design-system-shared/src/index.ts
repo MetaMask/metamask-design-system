@@ -56,3 +56,6 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
+// Icon types (ADR-0003 + ADR-0004)
+export { IconColor, IconName, type IconPropsShared } from './types/Icon';
