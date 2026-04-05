@@ -392,67 +392,73 @@ export enum FontFamily {
   Hero = 'hero',
 }
 
-/**
- * Icon - color
- */
-export enum IconColor {
-  /** For default neutral icons */
-  IconDefault = 'text-icon-default',
-  /** For softer neutral icons */
-  IconAlternative = 'text-icon-alternative',
-  /** For the weakest contrast neutral icons (not accessible) */
-  IconMuted = 'text-icon-muted',
-  /** For elements used on top of overlay/alternative. Used for text, icon, or border */
-  OverlayInverse = 'text-overlay-inverse',
-  /** For interactive, active, and selected semantics. Used for text, background, icon, or border */
-  PrimaryDefault = 'text-primary-default',
-  /** For softer variants of primary interactive elements */
-  PrimaryAlternative = 'text-primary-alternative',
-  /** For elements used on top of primary/default. Used for text, icon, or border */
-  PrimaryInverse = 'text-primary-inverse',
-  /** For primary interactive elements in a pressed state */
-  PrimaryDefaultPressed = 'text-primary-default-pressed',
-  /** For critical alert semantic elements. Used for text, background, icon, or border */
-  ErrorDefault = 'text-error-default',
-  /** For softer variants of error elements */
-  ErrorAlternative = 'text-error-alternative',
-  /** For elements used on top of error/default. Used for text, icon, or border */
-  ErrorInverse = 'text-error-inverse',
-  /** For critical alert semantic elements in a pressed state */
-  ErrorDefaultPressed = 'text-error-default-pressed',
-  /** For caution alert semantic elements. Used for text, background, icon, or border */
-  WarningDefault = 'text-warning-default',
-  /** For elements used on top of warning/default. Used for text, icon, or border */
-  WarningInverse = 'text-warning-inverse',
-  /** For caution alert semantic elements in a pressed state */
-  WarningDefaultPressed = 'text-warning-default-pressed',
-  /** For positive semantic elements. Used for text, background, icon, or border */
-  SuccessDefault = 'text-success-default',
-  /** For elements used on top of success/default. Used for text, icon, or border */
-  SuccessInverse = 'text-success-inverse',
-  /** For positive semantic elements in a pressed state */
-  SuccessDefaultPressed = 'text-success-default-pressed',
-  /** For informational read-only elements. Used for text, background, icon, or border */
-  InfoDefault = 'text-info-default',
-  /** For elements used on top of info/default. Used for text, icon, or border */
-  InfoInverse = 'text-info-inverse',
-}
+export { IconColor as IconColorBase } from '@metamask/design-system-shared';
 
 /**
- * Icon - size
+ * Icon - color (React Native extends shared with additional semantic colors)
  */
-export enum IconSize {
+export const IconColor = {
+  /** For default neutral icons */
+  IconDefault: 'text-icon-default',
+  /** For softer neutral icons */
+  IconAlternative: 'text-icon-alternative',
+  /** For the weakest contrast neutral icons (not accessible) */
+  IconMuted: 'text-icon-muted',
+  /** For elements used on top of overlay/alternative. Used for text, icon, or border */
+  OverlayInverse: 'text-overlay-inverse',
+  /** For interactive, active, and selected semantics. Used for text, background, icon, or border */
+  PrimaryDefault: 'text-primary-default',
+  /** For softer variants of primary interactive elements */
+  PrimaryAlternative: 'text-primary-alternative',
+  /** For elements used on top of primary/default. Used for text, icon, or border */
+  PrimaryInverse: 'text-primary-inverse',
+  /** For primary interactive elements in a pressed state */
+  PrimaryDefaultPressed: 'text-primary-default-pressed',
+  /** For critical alert semantic elements. Used for text, background, icon, or border */
+  ErrorDefault: 'text-error-default',
+  /** For softer variants of error elements */
+  ErrorAlternative: 'text-error-alternative',
+  /** For elements used on top of error/default. Used for text, icon, or border */
+  ErrorInverse: 'text-error-inverse',
+  /** For critical alert semantic elements in a pressed state */
+  ErrorDefaultPressed: 'text-error-default-pressed',
+  /** For caution alert semantic elements. Used for text, background, icon, or border */
+  WarningDefault: 'text-warning-default',
+  /** For elements used on top of warning/default. Used for text, icon, or border */
+  WarningInverse: 'text-warning-inverse',
+  /** For caution alert semantic elements in a pressed state */
+  WarningDefaultPressed: 'text-warning-default-pressed',
+  /** For positive semantic elements. Used for text, background, icon, or border */
+  SuccessDefault: 'text-success-default',
+  /** For elements used on top of success/default. Used for text, icon, or border */
+  SuccessInverse: 'text-success-inverse',
+  /** For positive semantic elements in a pressed state */
+  SuccessDefaultPressed: 'text-success-default-pressed',
+  /** For informational read-only elements. Used for text, background, icon, or border */
+  InfoDefault: 'text-info-default',
+  /** For elements used on top of info/default. Used for text, icon, or border */
+  InfoInverse: 'text-info-inverse',
+} as const;
+
+export type IconColor = (typeof IconColor)[keyof typeof IconColor];
+
+/**
+ * Icon - size (React Native-specific: uses pixel values)
+ */
+export const IconSize = {
   /** Extra small - 12px */
-  Xs = '12',
+  Xs: '12',
   /** Small - 16px */
-  Sm = '16',
+  Sm: '16',
   /** Medium - 20px (Default) */
-  Md = '20',
+  Md: '20',
   /** Large - 24px */
-  Lg = '24',
+  Lg: '24',
   /** Extra large - 32px */
-  Xl = '32',
-}
+  Xl: '32',
+} as const;
+
+export type IconSize = (typeof IconSize)[keyof typeof IconSize];
 
 // /////////////////////////////////////////////////////
 // This is generated code - Manually add types above
