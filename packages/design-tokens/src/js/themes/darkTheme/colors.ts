@@ -3,13 +3,13 @@ import type { ThemeColors } from '../types';
 
 export const colors: ThemeColors = {
   background: {
-    /** For default neutral surface (#222325) */
-    default: brandColor.grey900,
+    /** For default neutral surface (pure black #000000) */
+    default: brandColor.black,
     /** For sunken neutral surface below background/default. (#121314) */
     alternative: brandColor.grey1000,
     /** For section bg usually over background/default (#31333A) */
     section: brandColor.grey800,
-    /** For subsection bg usually over background/section (#222325) */
+    /** For subsection bg usually over background/section (#252628) */
     subsection: brandColor.grey700,
     /** For muted neutral surface (#ffffff0a) */
     muted: '#ffffff0a',

@@ -1,7 +1,7 @@
 {
   "background": {
     "default": {
-      "value": "{grey.900}",
+      "value": "#000000",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For default neutral surface."
