@@ -1,7 +1,6 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
-
-import { TextVariant } from '../../types';
 
 import { Input } from './Input';
 

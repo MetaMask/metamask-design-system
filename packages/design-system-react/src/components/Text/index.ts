@@ -1,10 +1,10 @@
+export { TextVariant } from '@metamask/design-system-shared';
 export {
   FontFamily,
   FontStyle,
   FontWeight,
   OverflowWrap,
   TextAlign,
-  TextVariant,
   TextTransform,
   TextColor,
 } from '../../types';

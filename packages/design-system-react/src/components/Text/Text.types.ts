@@ -1,10 +1,11 @@
+import type { TextVariant } from '@metamask/design-system-shared';
+
 import type {
   FontFamily,
   FontStyle,
   FontWeight,
   OverflowWrap,
   TextAlign,
-  TextVariant,
   TextTransform,
   TextColor,
 } from '../../types';
