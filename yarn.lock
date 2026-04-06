@@ -3365,7 +3365,7 @@ __metadata:
     "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.10.0"
+    "@metamask/utils": "npm:^11.11.0"
     "@storybook/react-native": "npm:6.5"
     "@testing-library/react-hooks": "npm:^8.0.1"
     "@testing-library/react-native": "npm:^12.8.1"
@@ -3396,7 +3396,7 @@ __metadata:
   peerDependencies:
     "@metamask/design-system-twrnc-preset": ^0.4.0
     "@metamask/design-tokens": ^8.2.0
-    "@metamask/utils": ^11.10.0
+    "@metamask/utils": ^11.11.0
     lodash: ^4.17.23
     react: ">=18.2.0"
     react-native: ">=0.72.0"
@@ -3416,7 +3416,7 @@ __metadata:
     "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/jazzicon": "npm:^2.0.0"
-    "@metamask/utils": "npm:^11.10.0"
+    "@metamask/utils": "npm:^11.11.0"
     "@radix-ui/react-slot": "npm:^1.1.0"
     "@svgr/cli": "npm:^8.1.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
@@ -3439,7 +3439,7 @@ __metadata:
   peerDependencies:
     "@metamask/design-system-tailwind-preset": ^0.6.0
     "@metamask/design-tokens": ^8.1.0
-    "@metamask/utils": ^11.10.0
+    "@metamask/utils": ^11.11.0
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
   languageName: unknown
@@ -3450,13 +3450,17 @@ __metadata:
   resolution: "@metamask/design-system-shared@workspace:packages/design-system-shared"
   dependencies:
     "@metamask/auto-changelog": "npm:^5.3.2"
-    "@metamask/utils": "npm:^11.10.0"
+    "@metamask/utils": "npm:^11.11.0"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
+    "@types/react": "npm:^18.2.0"
     deepmerge: "npm:^4.2.2"
     jest: "npm:^29.7.0"
+    react: "npm:^18.2.0"
     ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.2.2"
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0
   languageName: unknown
   linkType: soft
 
@@ -3614,7 +3618,7 @@ __metadata:
     "@metamask/eslint-config-jest": "npm:^15.0.0"
     "@metamask/eslint-config-nodejs": "npm:^15.0.0"
     "@metamask/eslint-config-typescript": "npm:^15.0.0"
-    "@metamask/utils": "npm:^11.10.0"
+    "@metamask/utils": "npm:^11.11.0"
     "@types/eslint-plugin-tailwindcss": "npm:^3"
     "@types/jest": "npm:^27.4.1"
     "@types/lodash": "npm:^4.14.191"
@@ -3662,7 +3666,7 @@ __metadata:
     "@metamask/design-system-react-native": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.10.0"
+    "@metamask/utils": "npm:^11.11.0"
     "@react-native-async-storage/async-storage": "npm:^2.0.0"
     "@react-native-community/datetimepicker": "npm:7.2.0"
     "@react-native-community/slider": "npm:^4.5.5"
@@ -3698,7 +3702,7 @@ __metadata:
     "@metamask/design-system-react": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.10.0"
+    "@metamask/utils": "npm:^11.11.0"
     "@playwright/test": "npm:^1.52.0"
     "@storybook/addon-a11y": "npm:^10.3.1"
     "@storybook/addon-docs": "npm:^10.3.1"
@@ -3736,9 +3740,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/utils@npm:^11.10.0":
-  version: 11.10.0
-  resolution: "@metamask/utils@npm:11.10.0"
+"@metamask/utils@npm:^11.11.0":
+  version: 11.11.0
+  resolution: "@metamask/utils@npm:11.11.0"
   dependencies:
     "@ethereumjs/tx": "npm:^4.2.0"
     "@metamask/superstruct": "npm:^3.1.0"
@@ -3751,7 +3755,7 @@ __metadata:
     pony-cause: "npm:^2.1.10"
     semver: "npm:^7.5.4"
     uuid: "npm:^9.0.1"
-  checksum: 10/691a268af66593b60e9807a069127993cea3cdc941f99d5d7ca4664868754f08945821f1787b2f3e99e4497df63ceb0af37a2419ad494da29a1fddffe94f5797
+  checksum: 10/c4381b9e451a9616bde84ac659bc0d1848ef06b6e605f877bfa065b78c8ed5015706683ea88a3387de5eaeb3a50d1af9af0994f04f9e06258d992598fe2be3bf
   languageName: node
   linkType: hard
 

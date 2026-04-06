@@ -3,7 +3,7 @@
 BottomSheetDialog is used to represent the animated content area within a BottomSheet. It provides swipe-to-dismiss gesture handling, keyboard avoidance, and smooth slide-in/slide-out animations. This is a foundation component and should be used within BottomSheet.
 
 ```tsx
-import BottomSheetDialog from './BottomSheetDialog';
+import { BottomSheetDialog } from './BottomSheetDialog';
 
 <BottomSheetDialog
   onOpen={() => console.log('Opened')}
@@ -115,6 +115,23 @@ Optional callback that gets triggered when the sheet open animation completes.
 <BottomSheetDialog onOpen={() => console.log('Sheet opened')}>
   <Text>Content</Text>
 </BottomSheetDialog>
+```
+
+### `panGestureHandlerProps`
+
+Optional props object forwarded to the child `PanGestureHandler`. Use this to configure gesture interoperability such as `simultaneousHandlers`, `waitFor`, and related handler options.
+`enabled` and `onGestureEvent` are controlled internally and cannot be overridden.
+
+| TYPE                     | REQUIRED | DEFAULT     |
+| ------------------------ | -------- | ----------- |
+| `PanGestureHandlerProps` | No       | `undefined` |
+
+```tsx
+const scrollRef = useRef(null);
+
+<BottomSheetDialog panGestureHandlerProps={{ simultaneousHandlers: scrollRef }}>
+  <Text>Content</Text>
+</BottomSheetDialog>;
 ```
 
 ### `twClassName`
