@@ -37,11 +37,7 @@ This guide provides detailed instructions for migrating your project from one ve
 Before (0.13.0):
 
 ```tsx
-<BottomSheet
-  isVisible={isVisible}
-  onClose={handleClose}
-  shouldNavigateBack
-/>
+<BottomSheet isVisible={isVisible} onClose={handleClose} shouldNavigateBack />
 ```
 
 After (0.14.0):
