@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Dark theme `background.default` updated to pure black `#000000` to support A/B testing and preview builds. CSS variables, JS theme tokens, and Figma JSON have been synchronized accordingly.
+
 ## [8.3.0]
 
 ### Changed
