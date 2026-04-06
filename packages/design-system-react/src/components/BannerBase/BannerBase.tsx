@@ -1,10 +1,10 @@
+import { ButtonBaseSize as ButtonSize } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
 import {
   BoxAlignItems,
   BoxBackgroundColor,
   ButtonIconSize,
-  ButtonSize,
   FontWeight,
   BoxFlexDirection,
   IconName,
