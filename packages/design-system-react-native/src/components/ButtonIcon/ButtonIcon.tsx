@@ -1,8 +1,11 @@
+import {
+  ButtonIconSize,
+  ButtonIconVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import { ButtonIconSize, ButtonIconVariant } from '../../types';
 import type { IconColor } from '../Icon';
 import { Icon } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
