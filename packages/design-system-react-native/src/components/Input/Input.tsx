@@ -1,3 +1,4 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import {
   Theme,
   useTailwind,
@@ -7,7 +8,7 @@ import { darkTheme, lightTheme } from '@metamask/design-tokens';
 import { forwardRef, useCallback, useMemo, useState } from 'react';
 import { Platform, TextInput } from 'react-native';
 
-import { FontFamily, TextVariant } from '../../types';
+import { FontFamily } from '../../types';
 import {
   MAP_TEXT_VARIANT_FONTWEIGHT,
   TWCLASSMAP_TEXT_FONTWEIGHT,

@@ -285,29 +285,7 @@ export enum ButtonIconVariant {
 /**
  * Text - variant
  */
-export enum TextVariant {
-  // Display Sizes
-  DisplayLg = 'display-lg',
-  DisplayMd = 'display-md',
-
-  // Heading Sizes
-  HeadingLg = 'heading-lg',
-  HeadingMd = 'heading-md',
-  HeadingSm = 'heading-sm',
-
-  // Body Sizes
-  BodyLg = 'body-lg',
-  BodyMd = 'body-md',
-  BodySm = 'body-sm',
-  BodyXs = 'body-xs',
-
-  // Special Typography Variants
-  PageHeading = 'page-heading',
-  SectionHeading = 'section-heading',
-  ButtonLabelMd = 'button-label-md',
-  ButtonLabelLg = 'button-label-lg',
-  AmountDisplayLg = 'amount-display-lg',
-}
+export { TextVariant } from '@metamask/design-system-shared';
 
 /**
  * Text - color

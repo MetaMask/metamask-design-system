@@ -1,6 +1,7 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import { typography } from '@metamask/design-tokens';
 
-import { FontWeight, TextVariant } from '../../types';
+import { FontWeight } from '../../types';
 
 // Mappings
 export const TWCLASSMAP_TEXT_FONTWEIGHT: {

@@ -1,13 +1,7 @@
-// Third party dependencies.
+import type { TextVariant } from '@metamask/design-system-shared';
 import type { TextProps as RNTextProps } from 'react-native';
 
-import type {
-  TextVariant,
-  TextColor,
-  FontWeight,
-  FontFamily,
-  FontStyle,
-} from '../../types';
+import type { TextColor, FontWeight, FontFamily, FontStyle } from '../../types';
 
 /**
  * Text component props.

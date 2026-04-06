@@ -1,3 +1,4 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import {
   Theme,
   ThemeProvider,
@@ -10,8 +11,6 @@ import React from 'react';
 import { Platform, TextInput } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 import { create } from 'react-test-renderer';
-
-import { TextVariant } from '../../types';
 
 import { Input } from './Input';
 

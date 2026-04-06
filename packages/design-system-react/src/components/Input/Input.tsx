@@ -1,6 +1,6 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { TextVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import {
   CLASSMAP_TEXT_VARIANT_FONTSTYLE,

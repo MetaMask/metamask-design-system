@@ -56,3 +56,9 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
+// Text types (ADR-0003)
+export { TextVariant } from './types/Text';
+
+// Input types (ADR-0004)
+export { type InputPropsShared } from './types/Input';
