@@ -1,4 +1,3 @@
-import { KeyValuePairOrientation } from '@metamask/design-system-shared';
 import React from 'react';
 
 import {
@@ -8,14 +7,13 @@ import {
   TextColor,
   TextVariant,
 } from '../../types';
-import { Box } from '../Box';
 import { BoxHorizontal } from '../BoxHorizontal';
 import { BoxVertical } from '../BoxVertical';
 import { ButtonIcon } from '../ButtonIcon';
 
-import type { KeyValuePairProps } from './KeyValuePair.types';
+import type { KeyValueColumnProps } from './KeyValueColumn.types';
 
-export const KeyValuePair = ({
+export const KeyValueColumn = ({
   keyStartAccessory,
   keyEndAccessory,
   keyEndButtonIconProps,
@@ -26,12 +24,9 @@ export const KeyValuePair = ({
   valueEndButtonIconProps,
   value: valueContent,
   valueTextProps,
-  orientation = KeyValuePairOrientation.Horizontal,
   twClassName,
   ...viewProps
-}: KeyValuePairProps) => {
-  const isHorizontal = orientation === KeyValuePairOrientation.Horizontal;
-
+}: KeyValueColumnProps) => {
   const keyEndAccessoryNode =
     keyEndButtonIconProps?.iconName !== undefined &&
     keyEndButtonIconProps.iconName !== null ? (
@@ -70,7 +65,7 @@ export const KeyValuePair = ({
         ellipsizeMode: 'tail',
         ...keyTextProps,
       }}
-      twClassName={isHorizontal ? undefined : 'w-full min-w-0'}
+      twClassName="w-full min-w-0"
     >
       {keyContent}
     </BoxHorizontal>
@@ -88,26 +83,11 @@ export const KeyValuePair = ({
         ellipsizeMode: 'tail',
         ...valueTextProps,
       }}
-      twClassName={
-        isHorizontal ? 'flex-1 min-w-0 justify-end' : 'w-full min-w-0'
-      }
+      twClassName="w-full min-w-0"
     >
       {valueContent}
     </BoxHorizontal>
   );
-
-  if (isHorizontal) {
-    return (
-      <BoxHorizontal
-        endAccessory={valueBox}
-        gap={4}
-        twClassName={twClassName ? `h-10 ${twClassName}` : 'h-10'}
-        {...viewProps}
-      >
-        <Box twClassName="shrink-0">{keyBox}</Box>
-      </BoxHorizontal>
-    );
-  }
 
   return (
     <BoxVertical
@@ -120,4 +100,4 @@ export const KeyValuePair = ({
   );
 };
 
-KeyValuePair.displayName = 'KeyValuePair';
+KeyValueColumn.displayName = 'KeyValueColumn';
