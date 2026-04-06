@@ -18,10 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Replaced BottomSheet `shouldNavigateBack` with an optional `goBack` callback for explicit navigation handling in host apps ([#1024](https://github.com/MetaMask/metamask-design-system/pull/1024)).
+- **BREAKING:** Replaced BottomSheet `shouldNavigateBack` with an optional `goBack` callback for explicit navigation handling in host apps ([#1024](https://github.com/MetaMask/metamask-design-system/pull/1024)).
+  - Remove `shouldNavigateBack` usage and pass `goBack` when you want the sheet close action to navigate back.
+  - See [Migration Guide](./MIGRATION.md#from-version-0130-to-0140).
 - Added `panGestureHandlerProps` support to `BottomSheet` so integrators can customize gesture-handler behavior ([#1016](https://github.com/MetaMask/metamask-design-system/pull/1016)).
 - Migrated React Native package exports from default exports to named exports for more consistent import ergonomics across the library ([#1032](https://github.com/MetaMask/metamask-design-system/pull/1032)).
-- Updated `AvatarBase` exports to use shared const-object + string-union types instead of local enums ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005)).
+- **BREAKING:** Updated `AvatarBase` exports to use shared const-object + string-union types instead of local enums ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005)).
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react-native` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
 - Updated `@metamask/utils` peer dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033)).
 - Expanded `BannerBase` migration documentation to improve upgrade guidance for consumers ([#1011](https://github.com/MetaMask/metamask-design-system/pull/1011)).
 

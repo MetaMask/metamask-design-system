@@ -15,10 +15,51 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
 - [Version Updates](#version-updates)
+  - [From version 0.13.0 to 0.14.0](#from-version-0130-to-0140)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
+
+## Version Updates
+
+### From version 0.13.0 to 0.14.0
+
+#### BottomSheet navigation callback change
+
+**What Changed:**
+
+- `BottomSheet` removed the `shouldNavigateBack` prop.
+- `BottomSheet` now accepts an optional `goBack` callback for explicit host-controlled navigation behavior.
+
+**Migration:**
+
+Before (0.13.0):
+
+```tsx
+<BottomSheet
+  isVisible={isVisible}
+  onClose={handleClose}
+  shouldNavigateBack
+/>
+```
+
+After (0.14.0):
+
+```tsx
+<BottomSheet
+  isVisible={isVisible}
+  onClose={handleClose}
+  goBack={() => navigation.goBack()}
+/>
+```
+
+If you do not want back navigation, omit `goBack`.
+
+**Impact:**
+
+- Affects BottomSheet usages that previously relied on `shouldNavigateBack`.
+- Navigation behavior is now explicit and controlled by the host app callback.
 
 ## From Mobile Component Library
 
