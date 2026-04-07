@@ -1,30 +1,20 @@
+import type { TextPropsShared } from '@metamask/design-system-shared';
+
 import type {
   FontFamily,
   FontStyle,
   FontWeight,
   OverflowWrap,
   TextAlign,
-  TextVariant,
-  TextTransform,
   TextColor,
+  TextTransform,
 } from '../../types';
 
-export type TextProps = {
+export type TextProps = TextPropsShared & {
   /**
    * Optional prop for inline styles
    */
   style?: React.CSSProperties;
-  /**
-   * Optional prop to change the font size of the component. The Text component uses responsive font sizes.
-   * Different variants map to specific HTML elements by default.
-   *
-   * @default TextVariant.BodyMd
-   */
-  variant?: TextVariant;
-  /**
-   * The text content or elements to be rendered within the component.
-   */
-  children: React.ReactNode;
   /**
    * Optional prop for additional CSS classes to be applied to the Text component.
    */
@@ -64,7 +54,7 @@ export type TextProps = {
    */
   overflowWrap?: OverflowWrap;
   /**
-   * Optional prop that when true, adds an ellipsis (...) when text overflows its container.
+   * Optional boolean that adds an ellipsis (...) when text overflows its container.
    *
    * @default false
    */

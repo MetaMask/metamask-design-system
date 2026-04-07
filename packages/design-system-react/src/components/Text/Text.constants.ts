@@ -1,4 +1,4 @@
-import { TextVariant } from '../../types';
+import { TextVariant } from '@metamask/design-system-shared';
 
 export const CLASSMAP_TEXT_VARIANT_FONTSTYLE: Record<TextVariant, string> = {
   [TextVariant.DisplayLg]:
