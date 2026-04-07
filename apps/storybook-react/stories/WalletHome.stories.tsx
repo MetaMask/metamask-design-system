@@ -32,15 +32,8 @@ import {
   BadgeStatusStatus,
   IconSize,
 } from '@metamask/design-system-react';
-import type { AvatarAccountSize } from '@metamask/design-system-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-
-type ComponentThingProps = {
-  size: AvatarAccountSize;
-};
-
-const ComponentThing = ({ size }: ComponentThingProps) => <div>{size}</div>;
 
 const meta: Meta = {
   title: 'Examples/Wallet Home',
@@ -62,7 +55,6 @@ const WalletHome: React.FC = () => {
   return (
     <Box className="min-h-screen md:flex md:items-center md:justify-center md:bg-alternative md:py-4">
       {/* Container Expanded View */}
-      <ComponentThing size="lg" />
       <Box
         backgroundColor={BoxBackgroundColor.BackgroundDefault}
         className="mx-auto w-full md:max-w-xl md:rounded-3xl md:py-4"
