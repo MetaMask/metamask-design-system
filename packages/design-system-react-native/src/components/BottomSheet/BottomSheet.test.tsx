@@ -165,10 +165,10 @@ describe('BottomSheet', () => {
     expect(onOpen).toHaveBeenCalledTimes(1);
   });
 
-  it('calls goBack when shouldNavigateBack is true and dialog closes', () => {
+  it('calls goBack when dialog closes', () => {
     const goBack = jest.fn();
     render(
-      <BottomSheet goBack={goBack} shouldNavigateBack>
+      <BottomSheet goBack={goBack}>
         <View />
       </BottomSheet>,
     );
@@ -180,25 +180,10 @@ describe('BottomSheet', () => {
     expect(goBack).toHaveBeenCalledTimes(1);
   });
 
-  it('does not call goBack when shouldNavigateBack is false', () => {
-    const goBack = jest.fn();
-    render(
-      <BottomSheet goBack={goBack} shouldNavigateBack={false}>
-        <View />
-      </BottomSheet>,
-    );
-
-    act(() => {
-      capturedDialogOnClose?.();
-    });
-
-    expect(goBack).not.toHaveBeenCalled();
-  });
-
   it('does not call goBack twice on duplicate close signals', () => {
     const goBack = jest.fn();
     render(
-      <BottomSheet goBack={goBack} shouldNavigateBack>
+      <BottomSheet goBack={goBack}>
         <View />
       </BottomSheet>,
     );
