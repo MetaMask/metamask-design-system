@@ -1,13 +1,19 @@
-import { TextColor, TextVariant } from '@metamask/design-system-shared';
+import {
+  FontFamily,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 
-import { FontFamily } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 
 import {
   CLASSMAP_TEXT_VARIANT_FONTSTYLE,
   CLASSMAP_TEXT_VARIANT_FONTWEIGHT,
+  MAP_FONTFAMILY_CLASS,
+  MAP_FONTSTYLE_CLASS,
+  MAP_FONTWEIGHT_CLASS,
   MAP_TEXT_VARIANT_TAG,
 } from './Text.constants';
 import type { TextProps } from './Text.types';
@@ -35,9 +41,11 @@ export const Text: React.FC<TextProps> = ({
   const mergedClassName = `${twMerge(
     color,
     CLASSMAP_TEXT_VARIANT_FONTSTYLE[variant],
-    fontWeight || CLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
-    fontStyle,
-    fontFamily,
+    fontWeight
+      ? MAP_FONTWEIGHT_CLASS[fontWeight]
+      : CLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
+    fontStyle ? MAP_FONTSTYLE_CLASS[fontStyle] : undefined,
+    MAP_FONTFAMILY_CLASS[fontFamily],
     textTransform,
     textAlign,
     overflowWrap,

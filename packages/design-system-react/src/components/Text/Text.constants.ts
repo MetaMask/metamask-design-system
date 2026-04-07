@@ -1,4 +1,26 @@
-import { TextVariant } from '@metamask/design-system-shared';
+import {
+  FontFamily,
+  FontStyle,
+  FontWeight,
+  TextVariant,
+} from '@metamask/design-system-shared';
+
+export const MAP_FONTWEIGHT_CLASS: Record<FontWeight, string> = {
+  [FontWeight.Bold]: 'font-bold',
+  [FontWeight.Medium]: 'font-medium',
+  [FontWeight.Regular]: 'font-regular',
+};
+
+export const MAP_FONTFAMILY_CLASS: Record<FontFamily, string> = {
+  [FontFamily.Default]: 'font-default',
+  [FontFamily.Accent]: 'font-accent',
+  [FontFamily.Hero]: 'font-hero',
+};
+
+export const MAP_FONTSTYLE_CLASS: Record<FontStyle, string> = {
+  [FontStyle.Italic]: 'italic',
+  [FontStyle.Normal]: 'not-italic',
+};
 
 export const CLASSMAP_TEXT_VARIANT_FONTSTYLE: Record<TextVariant, string> = {
   [TextVariant.DisplayLg]:

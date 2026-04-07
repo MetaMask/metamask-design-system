@@ -1,6 +1,47 @@
 import type { ReactNode } from 'react';
 
 /**
+ * Text - fontWeight (ADR-0003)
+ * Semantic values shared across React and React Native platforms.
+ */
+export const FontWeight = {
+  /** Weight - 600 */
+  Bold: 'bold',
+  /** Weight - 500 */
+  Medium: 'medium',
+  /** Weight - 400 */
+  Regular: 'regular',
+} as const;
+
+export type FontWeight = (typeof FontWeight)[keyof typeof FontWeight];
+
+/**
+ * Text - fontStyle (ADR-0003)
+ * Semantic values shared across React and React Native platforms.
+ */
+export const FontStyle = {
+  Italic: 'italic',
+  Normal: 'normal',
+} as const;
+
+export type FontStyle = (typeof FontStyle)[keyof typeof FontStyle];
+
+/**
+ * Text - fontFamily (ADR-0003)
+ * Semantic values shared across React and React Native platforms.
+ */
+export const FontFamily = {
+  /** Default: Geist */
+  Default: 'default',
+  /** Accent: MM Sans */
+  Accent: 'accent',
+  /** Hero: MM Poly */
+  Hero: 'hero',
+} as const;
+
+export type FontFamily = (typeof FontFamily)[keyof typeof FontFamily];
+
+/**
  * Text - variant (ADR-0003)
  * Identical values across React and React Native platforms.
  */

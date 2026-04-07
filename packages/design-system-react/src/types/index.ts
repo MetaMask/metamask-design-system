@@ -295,18 +295,7 @@ export const TextAlign = {
 } as const;
 export type TextAlign = (typeof TextAlign)[keyof typeof TextAlign];
 
-/**
- * Text - fontWeight
- */
-export const FontWeight = {
-  /** Weight - 600 */
-  Bold: 'font-bold',
-  /** Weight - 500 */
-  Medium: 'font-medium',
-  /** Weight - 400 */
-  Regular: 'font-regular',
-} as const;
-export type FontWeight = (typeof FontWeight)[keyof typeof FontWeight];
+export { FontWeight } from '@metamask/design-system-shared';
 
 /**
  * Text - overflowWrap
@@ -318,14 +307,7 @@ export const OverflowWrap = {
 } as const;
 export type OverflowWrap = (typeof OverflowWrap)[keyof typeof OverflowWrap];
 
-/**
- * Text - fontStyle
- */
-export const FontStyle = {
-  Italic: 'italic',
-  Normal: 'not-italic',
-} as const;
-export type FontStyle = (typeof FontStyle)[keyof typeof FontStyle];
+export { FontStyle } from '@metamask/design-system-shared';
 
 /**
  * Text - textTransform
@@ -338,15 +320,7 @@ export const TextTransform = {
 } as const;
 export type TextTransform = (typeof TextTransform)[keyof typeof TextTransform];
 
-/**
- * Text - fontFamily
- */
-export const FontFamily = {
-  Default: 'font-default',
-  Accent: 'font-accent',
-  Hero: 'font-hero',
-} as const;
-export type FontFamily = (typeof FontFamily)[keyof typeof FontFamily];
+export { FontFamily } from '@metamask/design-system-shared';
 
 /**
  * TextButton - size

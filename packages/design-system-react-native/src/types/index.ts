@@ -275,37 +275,9 @@ export { TextVariant } from '@metamask/design-system-shared';
 
 export { TextColor } from '@metamask/design-system-shared';
 
-/**
- * Text - fontWeight (React Native platform-specific values)
- */
-export const FontWeight = {
-  /** Weight - 600 */
-  Bold: '600',
-  /** Weight - 500 */
-  Medium: '500',
-  /** Weight - 400 */
-  Regular: '400',
-} as const;
-export type FontWeight = (typeof FontWeight)[keyof typeof FontWeight];
-
-/**
- * Text - fontStyle (React Native platform-specific values)
- */
-export const FontStyle = {
-  Italic: 'italic',
-  Normal: 'normal',
-} as const;
-export type FontStyle = (typeof FontStyle)[keyof typeof FontStyle];
-
-/**
- * Text - fontFamily (React Native platform-specific values)
- */
-export const FontFamily = {
-  Default: 'default',
-  Accent: 'accent',
-  Hero: 'hero',
-} as const;
-export type FontFamily = (typeof FontFamily)[keyof typeof FontFamily];
+export { FontWeight } from '@metamask/design-system-shared';
+export { FontStyle } from '@metamask/design-system-shared';
+export { FontFamily } from '@metamask/design-system-shared';
 
 /**
  * Icon - color

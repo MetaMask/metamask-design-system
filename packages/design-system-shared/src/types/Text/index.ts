@@ -1,1 +1,8 @@
-export { TextVariant, TextColor, type TextPropsShared } from './Text.types';
+export {
+  FontFamily,
+  FontStyle,
+  FontWeight,
+  TextColor,
+  TextVariant,
+  type TextPropsShared,
+} from './Text.types';
