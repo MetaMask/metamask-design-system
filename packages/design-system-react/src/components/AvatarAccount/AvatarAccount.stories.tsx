@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarAccountVariant, AvatarAccountSize } from '../../types';
-
 import { AvatarAccount } from './AvatarAccount';
 import README from './README.mdx';
+
+import { AvatarAccountVariant, AvatarAccountSize } from '.';
 
 const meta: Meta<typeof AvatarAccount> = {
   title: 'React Components/AvatarAccount',
