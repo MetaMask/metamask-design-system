@@ -66,7 +66,7 @@ describe('KeyValueRow', () => {
       render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
 
       expect(screen.getByTestId('key-value-row')).toHaveStyle(
-        tw`flex-row items-center gap-4 h-10`,
+        tw`h-10 flex-row items-center gap-4`,
       );
     });
 
