@@ -132,6 +132,10 @@ export const StyleExample = () => (
 );
 ```
 
+## Migration Guide
+
+Migrating from `app/components/UI/Box/Box.tsx` in MetaMask Mobile? See the [Box Migration Guide](../../MIGRATION.md#box-component) for prop mappings, before/after examples, and breaking changes.
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
