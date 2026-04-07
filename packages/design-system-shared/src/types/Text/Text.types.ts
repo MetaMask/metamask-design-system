@@ -90,7 +90,10 @@ export const TextColor = {
   PrimaryInverse: 'text-primary-inverse',
   /** For softer variants of primary text. */
   PrimaryAlternative: 'text-primary-alternative',
-  /** For primary text in a hover state. */
+  /**
+   * For primary text in a hover state.
+   * @note On React Native, hover as an interaction state does not exist — use `PrimaryDefaultPressed` instead.
+   */
   PrimaryDefaultHover: 'text-primary-default-hover',
   /** For primary text in a pressed state. */
   PrimaryDefaultPressed: 'text-primary-default-pressed',
@@ -100,7 +103,10 @@ export const TextColor = {
   ErrorAlternative: 'text-error-alternative',
   /** For elements used on top of error/default. Used for text, icon or border */
   ErrorInverse: 'text-error-inverse',
-  /** For critical alert text in a hover state. */
+  /**
+   * For critical alert text in a hover state.
+   * @note On React Native, hover as an interaction state does not exist — use `ErrorDefaultPressed` instead.
+   */
   ErrorDefaultHover: 'text-error-default-hover',
   /** For critical alert text in a pressed state. */
   ErrorDefaultPressed: 'text-error-default-pressed',
@@ -108,7 +114,10 @@ export const TextColor = {
   SuccessDefault: 'text-success-default',
   /** For elements used on top of success/default. Used for text, icon or border */
   SuccessInverse: 'text-success-inverse',
-  /** For positive text in a hover state. */
+  /**
+   * For positive text in a hover state.
+   * @note On React Native, hover as an interaction state does not exist — use `SuccessDefaultPressed` instead.
+   */
   SuccessDefaultHover: 'text-success-default-hover',
   /** For positive text in a pressed state. */
   SuccessDefaultPressed: 'text-success-default-pressed',
@@ -116,7 +125,10 @@ export const TextColor = {
   WarningDefault: 'text-warning-default',
   /** For elements used on top of warning/default. Used for text, icon or border */
   WarningInverse: 'text-warning-inverse',
-  /** For caution text in a hover state. */
+  /**
+   * For caution text in a hover state.
+   * @note On React Native, hover as an interaction state does not exist — use `WarningDefaultPressed` instead.
+   */
   WarningDefaultHover: 'text-warning-default-hover',
   /** For caution text in a pressed state. */
   WarningDefaultPressed: 'text-warning-default-pressed',
