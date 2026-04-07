@@ -295,12 +295,16 @@ describe('KeyValueColumn', () => {
         />,
       );
 
-      const { fontSize: bodySmFontSize } = tw`text-body-sm` as {
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const bodySmStyles = tw`text-${TextVariant.BodySm}` as {
         fontSize?: number;
       };
-      const { fontSize: bodyMdFontSize } = tw`text-body-md` as {
+      const { fontSize: bodySmFontSize = 0 } = bodySmStyles;
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const bodyMdStyles = tw`text-${TextVariant.BodyMd}` as {
         fontSize?: number;
       };
+      const { fontSize: bodyMdFontSize = 0 } = bodyMdStyles;
 
       expect(screen.getByText('Key label')).toHaveStyle({
         fontSize: bodySmFontSize,
@@ -320,12 +324,16 @@ describe('KeyValueColumn', () => {
         />,
       );
 
-      const { fontSize: bodySmFontSize } = tw`text-body-sm` as {
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const bodySmStyles = tw`text-${TextVariant.BodySm}` as {
         fontSize?: number;
       };
-      const { fontSize: bodyMdFontSize } = tw`text-body-md` as {
+      const { fontSize: bodySmFontSize = 0 } = bodySmStyles;
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const bodyMdStyles = tw`text-${TextVariant.BodyMd}` as {
         fontSize?: number;
       };
+      const { fontSize: bodyMdFontSize = 0 } = bodyMdStyles;
 
       expect(screen.getByText('Key label')).toHaveStyle({
         fontSize: bodyMdFontSize,
