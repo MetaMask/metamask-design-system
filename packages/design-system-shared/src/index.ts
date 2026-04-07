@@ -59,3 +59,9 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
+export {
+  AvatarAccountSize,
+  AvatarAccountVariant,
+  type AvatarAccountPropsShared,
+} from './types/AvatarAccount';
