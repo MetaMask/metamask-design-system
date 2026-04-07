@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 
+import { BoxFlexDirection, TextVariant } from '../../types';
+import { Box } from '../Box';
+import { Text } from '../Text';
+
 import type { HeaderSearchProps } from './HeaderSearch.types';
 
 import { HeaderSearch, HeaderSearchVariant } from '.';
@@ -65,21 +69,40 @@ export const Default: Story = {
   },
 };
 
-export const Inline: Story = {
+export const Variant: Story = {
   render: () => {
-    const [value, setValue] = useState('');
+    const [screenValue, setScreenValue] = useState('');
+    const [inlineValue, setInlineValue] = useState('');
 
     return (
-      <HeaderSearch
-        variant={HeaderSearchVariant.Inline}
-        onPressCancelButton={noop}
-        textFieldSearchProps={{
-          value,
-          onChangeText: setValue,
-          onPressClearButton: () => setValue(''),
-          placeholder: 'Search tokens, sites, URLs',
-        }}
-      />
+      <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+        <Text twClassName="px-4" variant={TextVariant.HeadingSm}>
+          HeaderSearchVariant.Screen
+        </Text>
+        <HeaderSearch
+          variant={HeaderSearchVariant.Screen}
+          onPressBackButton={noop}
+          textFieldSearchProps={{
+            value: screenValue,
+            onChangeText: setScreenValue,
+            onPressClearButton: () => setScreenValue(''),
+            placeholder: 'Search tokens, sites, URLs',
+          }}
+        />
+        <Text twClassName="px-4" variant={TextVariant.HeadingSm}>
+          HeaderSearchVariant.Inline
+        </Text>
+        <HeaderSearch
+          variant={HeaderSearchVariant.Inline}
+          onPressCancelButton={noop}
+          textFieldSearchProps={{
+            value: inlineValue,
+            onChangeText: setInlineValue,
+            onPressClearButton: () => setInlineValue(''),
+            placeholder: 'Search tokens, sites, URLs',
+          }}
+        />
+      </Box>
     );
   },
 };
