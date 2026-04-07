@@ -443,15 +443,15 @@ export enum IconColor {
  */
 export enum IconSize {
   /** Extra small - 12px */
-  Xs = '12',
+  Xs = 'xs',
   /** Small - 16px */
-  Sm = '16',
+  Sm = 'sm',
   /** Medium - 20px (Default) */
-  Md = '20',
+  Md = 'md',
   /** Large - 24px */
-  Lg = '24',
+  Lg = 'lg',
   /** Extra large - 32px */
-  Xl = '32',
+  Xl = 'xl',
 }
 
 // /////////////////////////////////////////////////////
