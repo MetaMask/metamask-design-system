@@ -4,16 +4,16 @@ import { BoxFlexDirection } from '../../types';
 import { Box } from '../Box';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
 
-import type { BoxVerticalProps } from './BoxVertical.types';
+import type { BoxColumnProps } from './BoxColumn.types';
 
-export const BoxVertical = ({
+export const BoxColumn = ({
   children,
   textProps,
   topAccessory,
   bottomAccessory,
   twClassName,
   ...rest
-}: BoxVerticalProps) => (
+}: BoxColumnProps) => (
   <Box
     flexDirection={BoxFlexDirection.Column}
     twClassName={twClassName}
@@ -25,4 +25,4 @@ export const BoxVertical = ({
   </Box>
 );
 
-BoxVertical.displayName = 'BoxVertical';
+BoxColumn.displayName = 'BoxColumn';

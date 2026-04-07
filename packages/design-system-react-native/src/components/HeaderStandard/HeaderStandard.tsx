@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 // External dependencies.
 import { Box, BoxAlignItems } from '../Box';
-import { BoxVertical } from '../BoxVertical';
+import { BoxColumn } from '../BoxColumn';
 import type { ButtonIconProps } from '../ButtonIcon';
 import { HeaderBase } from '../HeaderBase';
 import { IconName } from '../Icon';
@@ -67,7 +67,7 @@ const HeaderStandard: React.FC<HeaderStandardProps> = ({
     }
     if (title) {
       return (
-        <BoxVertical
+        <BoxColumn
           alignItems={BoxAlignItems.Center}
           textProps={{
             variant: TextVariant.BodyMd,
@@ -91,7 +91,7 @@ const HeaderStandard: React.FC<HeaderStandardProps> = ({
           }
         >
           {title}
-        </BoxVertical>
+        </BoxColumn>
       );
     }
     return null;
