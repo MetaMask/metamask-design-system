@@ -5,6 +5,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 import { IconName } from '../Icon';
+import { TextVariant } from '../Text';
 
 import { KeyValueColumn } from './KeyValueColumn';
 
@@ -280,6 +281,62 @@ describe('KeyValueColumn', () => {
 
       expect(screen.getByTestId('value-end-only')).toBeOnTheScreen();
       expect(screen.queryAllByTestId('button-icon')).toHaveLength(0);
+    });
+  });
+
+  describe('keyTextProps and valueTextProps', () => {
+    it('spreads keyTextProps onto the key string Text', () => {
+      render(
+        <KeyValueColumn
+          keyLabel="Key label"
+          value="Value text"
+          keyTextProps={{ variant: TextVariant.BodySm }}
+          testID="key-value-column"
+        />,
+      );
+
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const bodySmFontSize = (
+        tw`text-${TextVariant.BodySm}` as { fontSize?: number }
+      ).fontSize;
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const bodyMdFontSize = (
+        tw`text-${TextVariant.BodyMd}` as { fontSize?: number }
+      ).fontSize;
+
+      expect(screen.getByText('Key label')).toHaveStyle({
+        fontSize: bodySmFontSize,
+      });
+      expect(screen.getByText('Value text')).toHaveStyle({
+        fontSize: bodyMdFontSize,
+      });
+    });
+
+    it('spreads valueTextProps onto the value string Text', () => {
+      render(
+        <KeyValueColumn
+          keyLabel="Key label"
+          value="Value text"
+          valueTextProps={{ variant: TextVariant.BodySm }}
+          testID="key-value-column"
+        />,
+      );
+
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const bodySmFontSize = (
+        tw`text-${TextVariant.BodySm}` as { fontSize?: number }
+      ).fontSize;
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const bodyMdFontSize = (
+        tw`text-${TextVariant.BodyMd}` as { fontSize?: number }
+      ).fontSize;
+
+      expect(screen.getByText('Key label')).toHaveStyle({
+        fontSize: bodyMdFontSize,
+      });
+      expect(screen.getByText('Value text')).toHaveStyle({
+        fontSize: bodySmFontSize,
+      });
     });
   });
 
