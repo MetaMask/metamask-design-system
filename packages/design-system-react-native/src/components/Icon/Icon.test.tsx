@@ -46,9 +46,7 @@ describe('Icon', () => {
             IconColor.IconDefault,
             TWCLASSMAP_ICON_SIZE_DIMENSION[size],
           );
-          return (
-            <Icon name={IconName.Add} testID="icon" size={size} />
-          );
+          return <Icon name={IconName.Add} testID="icon" size={size} />;
         };
 
         const { getByTestId } = render(<TestComponent />);
