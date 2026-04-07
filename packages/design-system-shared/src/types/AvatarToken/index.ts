@@ -1,1 +1,4 @@
-export { type AvatarTokenPropsShared } from './AvatarToken.types';
+export {
+  AvatarTokenSize,
+  type AvatarTokenPropsShared,
+} from './AvatarToken.types';

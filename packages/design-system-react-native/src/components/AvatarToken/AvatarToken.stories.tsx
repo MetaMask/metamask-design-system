@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { AvatarTokenSize } from '../../types';
-
 import { AvatarToken } from './AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.dev';
 import type { AvatarTokenProps } from './AvatarToken.types';
+
+import { AvatarTokenSize } from '.';
 
 const meta: Meta<AvatarTokenProps> = {
   title: 'Components/AvatarToken',

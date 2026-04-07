@@ -1,8 +1,11 @@
+import { AvatarBaseSize } from '../AvatarBase/AvatarBase.types';
+
+export const AvatarTokenSize = AvatarBaseSize;
+export type AvatarTokenSize = AvatarBaseSize;
+
 /**
  * AvatarToken component shared props (ADR-0004)
  * Platform-independent properties shared across React and React Native.
- * Note: AvatarTokenSize is not included here because it inherits from
- * AvatarBaseSize which will be migrated separately (DSYS-473).
  */
 export type AvatarTokenPropsShared = {
   /**
@@ -16,4 +19,10 @@ export type AvatarTokenPropsShared = {
    * fails to load. If not provided, the first letter of name is used.
    */
   fallbackText?: string;
+  /**
+   * Optional prop to control the size of the avatar token.
+   *
+   * @default AvatarTokenSize.Md
+   */
+  size?: AvatarTokenSize;
 };
