@@ -47,38 +47,12 @@ export const Default: Story = {
   render: (args) => <KeyValueRow {...args} />,
 };
 
-export const VariantSummary: Story = {
-  render: () => (
-    <Box flexDirection={BoxFlexDirection.Column} twClassName="w-full">
-      <KeyValueRow
-        keyLabel="Transaction fees"
-        value="$2.59"
-        variant={KeyValueRowVariant.Summary}
-        keyEndButtonIconProps={{
-          iconName: IconName.Info,
-          onPress: () => undefined,
-        }}
-      />
-      <KeyValueRow
-        keyLabel="Est. time"
-        value="5 min"
-        variant={KeyValueRowVariant.Summary}
-      />
-      <KeyValueRow
-        keyLabel="Total"
-        value="$102.59"
-        variant={KeyValueRowVariant.Summary}
-      />
-    </Box>
-  ),
-};
-
 const selectRowChevron = <Icon name={IconName.ArrowDown} size={IconSize.Sm} />;
 
-export const VariantInput: Story = {
+export const Variant: Story = {
   render: () => (
-    <Box flexDirection={BoxFlexDirection.Column} twClassName="w-full">
-      <Box twClassName="border-b border-border-muted">
+    <Box gap={6} twClassName="w-full">
+      <Box>
         <KeyValueRow
           keyLabel="To"
           value="Account 1"
@@ -90,48 +64,37 @@ export const VariantInput: Story = {
             />
           }
           valueEndAccessory={selectRowChevron}
+          twClassName="border-b border-border-muted"
+        />
+        <KeyValueRow
+          keyLabel="Pay with"
+          value="Debit or credit"
+          variant={KeyValueRowVariant.Input}
+          valueStartAccessory={<Icon name={IconName.Card} size={IconSize.Sm} />}
+          valueEndAccessory={selectRowChevron}
         />
       </Box>
-      <KeyValueRow
-        keyLabel="Pay with"
-        value="Debit or credit"
-        variant={KeyValueRowVariant.Input}
-        valueStartAccessory={<Icon name={IconName.Card} size={IconSize.Sm} />}
-        valueEndAccessory={selectRowChevron}
-      />
-    </Box>
-  ),
-};
-
-export const Variant: Story = {
-  render: () => (
-    <Box gap={6}>
-      <KeyValueRow
-        keyLabel="Summary (40px)"
-        value="Compact row height"
-        variant={KeyValueRowVariant.Summary}
-        keyEndButtonIconProps={{
-          iconName: IconName.Question,
-          onPress: () => undefined,
-        }}
-        valueEndButtonIconProps={{
-          iconName: IconName.Info,
-          onPress: () => undefined,
-        }}
-      />
-      <KeyValueRow
-        keyLabel="Input (48px)"
-        value="Taller row for input contexts"
-        variant={KeyValueRowVariant.Input}
-        keyEndButtonIconProps={{
-          iconName: IconName.Question,
-          onPress: () => undefined,
-        }}
-        valueEndButtonIconProps={{
-          iconName: IconName.Info,
-          onPress: () => undefined,
-        }}
-      />
+      <Box>
+        <KeyValueRow
+          keyLabel="Transaction fees"
+          value="$2.59"
+          variant={KeyValueRowVariant.Summary}
+          keyEndButtonIconProps={{
+            iconName: IconName.Info,
+            onPress: () => undefined,
+          }}
+        />
+        <KeyValueRow
+          keyLabel="Est. time"
+          value="5 min"
+          variant={KeyValueRowVariant.Summary}
+        />
+        <KeyValueRow
+          keyLabel="Total"
+          value="$102.59"
+          variant={KeyValueRowVariant.Summary}
+        />
+      </Box>
     </Box>
   ),
 };

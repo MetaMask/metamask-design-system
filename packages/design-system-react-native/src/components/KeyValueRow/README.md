@@ -1,14 +1,12 @@
 # KeyValueRow
 
-KeyValueRow is used to show a key (label) on the left and a value on the right with optional start and end accessories on each row, for summaries, forms, and lists. The outer layout is a horizontal `BoxHorizontal` (key in `children`, value in `endAccessory`); each of the key and value rows uses `BoxHorizontal` with optional `startAccessory` / `endAccessory`. Row height is controlled by **`variant`** (`summary` → 40px / `h-10`, `input` → 48px / `h-12`).
+KeyValueRow is used to show a key (label) on the left and a value on the right with optional accessories, for summaries, forms, and lists.
 
 ```tsx
 import { KeyValueRow } from '@metamask/design-system-react-native';
 
 <KeyValueRow keyLabel="Network" value="Ethereum Mainnet" />;
 ```
-
-Each inner row (key and value) is a `BoxHorizontal`. The outer row uses a 16px gap (`gap-4`), vertically centers content (`items-center`), and places the key in **`children`** (wrapped in a `Box` with `shrink-0`) and the value in **`endAccessory`** with `flex-1 min-w-0 justify-end` for alignment and truncation.
 
 ## Props
 

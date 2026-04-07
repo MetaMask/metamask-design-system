@@ -1,4 +1,5 @@
 import { KeyValueRowVariant } from '@metamask/design-system-shared';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
 import {
@@ -27,18 +28,22 @@ export const KeyValueRow = ({
   valueTextProps,
   variant = KeyValueRowVariant.Summary,
   twClassName,
+  style,
   ...viewProps
 }: KeyValueRowProps) => {
-  const heightClass = variant === KeyValueRowVariant.Input ? 'h-12' : 'h-10';
+  const tw = useTailwind();
 
   const keyEndAccessoryNode =
     keyEndButtonIconProps?.iconName !== undefined &&
     keyEndButtonIconProps.iconName !== null ? (
       <ButtonIcon
         size={ButtonIconSize.Sm}
-        iconProps={{ color: IconColor.IconAlternative }}
         {...keyEndButtonIconProps}
         iconName={keyEndButtonIconProps.iconName}
+        iconProps={{
+          color: IconColor.IconAlternative,
+          ...keyEndButtonIconProps.iconProps,
+        }}
       />
     ) : (
       keyEndAccessory
@@ -49,9 +54,12 @@ export const KeyValueRow = ({
     valueEndButtonIconProps.iconName !== null ? (
       <ButtonIcon
         size={ButtonIconSize.Sm}
-        iconProps={{ color: IconColor.IconDefault }}
         {...valueEndButtonIconProps}
         iconName={valueEndButtonIconProps.iconName}
+        iconProps={{
+          color: IconColor.IconDefault,
+          ...valueEndButtonIconProps.iconProps,
+        }}
       />
     ) : (
       valueEndAccessory
@@ -96,7 +104,13 @@ export const KeyValueRow = ({
     <BoxHorizontal
       endAccessory={valueBox}
       gap={4}
-      twClassName={twClassName ? `${heightClass} ${twClassName}` : heightClass}
+      style={[
+        tw.style(
+          variant === KeyValueRowVariant.Input ? 'h-12' : 'h-10',
+          twClassName,
+        ),
+        style,
+      ]}
       {...viewProps}
     >
       <Box twClassName="shrink-0">{keyBox}</Box>
