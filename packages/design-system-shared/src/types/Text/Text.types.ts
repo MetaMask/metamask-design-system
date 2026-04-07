@@ -92,6 +92,7 @@ export const TextColor = {
   PrimaryAlternative: 'text-primary-alternative',
   /**
    * For primary text in a hover state.
+   *
    * @note On React Native, hover as an interaction state does not exist — use `PrimaryDefaultPressed` instead.
    */
   PrimaryDefaultHover: 'text-primary-default-hover',
@@ -105,6 +106,7 @@ export const TextColor = {
   ErrorInverse: 'text-error-inverse',
   /**
    * For critical alert text in a hover state.
+   *
    * @note On React Native, hover as an interaction state does not exist — use `ErrorDefaultPressed` instead.
    */
   ErrorDefaultHover: 'text-error-default-hover',
@@ -116,6 +118,7 @@ export const TextColor = {
   SuccessInverse: 'text-success-inverse',
   /**
    * For positive text in a hover state.
+   *
    * @note On React Native, hover as an interaction state does not exist — use `SuccessDefaultPressed` instead.
    */
   SuccessDefaultHover: 'text-success-default-hover',
@@ -127,6 +130,7 @@ export const TextColor = {
   WarningInverse: 'text-warning-inverse',
   /**
    * For caution text in a hover state.
+   *
    * @note On React Native, hover as an interaction state does not exist — use `WarningDefaultPressed` instead.
    */
   WarningDefaultHover: 'text-warning-default-hover',
@@ -140,6 +144,7 @@ export const TextColor = {
   Transparent: 'text-transparent',
   /**
    * Inherit the color of the parent element.
+   *
    * @platform web — CSS cascade has no equivalent in React Native; fails silently on mobile.
    */
   Inherit: 'text-inherit',
