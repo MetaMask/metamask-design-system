@@ -1,11 +1,13 @@
 import type { StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
-import { IconName, IconSize, IconColor, TextVariant } from '../../types';
+import { TextVariant } from '../../types';
 import { Text } from '../Text/Text';
 
 import { Icon } from './Icon';
 import README from './README.mdx';
+
+import { IconName, IconSize, IconColor } from '.';
 
 const meta = {
   title: 'React Components/Icon',

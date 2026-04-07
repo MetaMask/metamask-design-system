@@ -2,9 +2,10 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconColor, IconName, IconSize } from '../../types';
-
 import { Icon } from './Icon';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
+
+import { IconColor, IconName, IconSize } from '.';
 
 describe('Icon', () => {
   describe('Icon Component', () => {
@@ -23,8 +24,7 @@ describe('Icon', () => {
         const tw = useTailwind();
         expectedStyles = tw.style(
           IconColor.IconDefault,
-          `w-[${IconSize.Md}px]`,
-          `h-[${IconSize.Md}px]`,
+          TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Md],
         );
         return <Icon name={IconName.Add} testID="icon" />;
       };
@@ -39,18 +39,14 @@ describe('Icon', () => {
     Object.values(IconSize).forEach((size) => {
       it(`applies size ${size} correctly`, () => {
         let expectedStyles;
-        const sizeNum = size as IconSize;
 
         const TestComponent = () => {
           const tw = useTailwind();
           expectedStyles = tw.style(
             IconColor.IconDefault,
-            `w-[${sizeNum}px]`,
-            `h-[${sizeNum}px]`,
+            TWCLASSMAP_ICON_SIZE_DIMENSION[size],
           );
-          return (
-            <Icon name={IconName.Add} testID="icon" size={size as IconSize} />
-          );
+          return <Icon name={IconName.Add} testID="icon" size={size} />;
         };
 
         const { getByTestId } = render(<TestComponent />);
@@ -69,8 +65,7 @@ describe('Icon', () => {
           const tw = useTailwind();
           expectedStyles = tw.style(
             color,
-            `w-[${IconSize.Md}px]`,
-            `h-[${IconSize.Md}px]`,
+            TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Md],
           );
           return <Icon name={IconName.Add} testID="icon" color={color} />;
         };
@@ -94,8 +89,7 @@ describe('Icon', () => {
         const tw = useTailwind();
         expectedStyles = tw.style(
           props.color,
-          `w-[${props.size}px]`,
-          `h-[${props.size}px]`,
+          TWCLASSMAP_ICON_SIZE_DIMENSION[props.size],
         );
         return <Icon name={IconName.Add} testID="icon" {...props} />;
       };

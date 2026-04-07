@@ -1,13 +1,14 @@
+import type { IconPropsShared, IconSize } from '@metamask/design-system-shared';
 import type React from 'react';
 import type { ViewProps } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 
-import type { IconColor, IconName, IconSize } from '../../types';
+import type { IconColor, IconName } from '../../types';
 
 /**
  * Icon component props.
  */
-export type IconProps = {
+export type IconProps = IconPropsShared & {
   /**
    * Required prop to specify which icon to render from the icon set
    */

@@ -2,9 +2,8 @@ import { BannerAlertSeverity } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { IconSize } from '../../types';
 import { BannerBase } from '../BannerBase';
-import { Icon } from '../Icon';
+import { Icon, IconSize } from '../Icon';
 
 import {
   MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR,

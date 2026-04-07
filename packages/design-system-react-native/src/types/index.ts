@@ -438,22 +438,6 @@ export enum IconColor {
   InfoInverse = 'text-info-inverse',
 }
 
-/**
- * Icon - size
- */
-export enum IconSize {
-  /** Extra small - 12px */
-  Xs = '12',
-  /** Small - 16px */
-  Sm = '16',
-  /** Medium - 20px (Default) */
-  Md = '20',
-  /** Large - 24px */
-  Lg = '24',
-  /** Extra large - 32px */
-  Xl = '32',
-}
-
 // /////////////////////////////////////////////////////
 // This is generated code - Manually add types above
 // DO NOT EDIT - Use generate-assets.js

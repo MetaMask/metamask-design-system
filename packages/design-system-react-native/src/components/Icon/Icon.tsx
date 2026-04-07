@@ -1,9 +1,11 @@
+import { IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { IconColor, IconSize } from '../../types';
+import { IconColor } from '../../types';
 
 import { assetByIconName } from './Icon.assets';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
 import type { IconProps } from './Icon.types';
 
 export const Icon = ({
@@ -18,8 +20,7 @@ export const Icon = ({
   const SVG = assetByIconName[name];
   const twStyle = tw.style(
     color,
-    `w-[${size}px]`,
-    `h-[${size}px]`,
+    TWCLASSMAP_ICON_SIZE_DIMENSION[size],
     twClassName,
   );
 
