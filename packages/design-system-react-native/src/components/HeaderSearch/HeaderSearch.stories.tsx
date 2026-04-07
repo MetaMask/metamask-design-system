@@ -14,14 +14,6 @@ const noop = () => undefined;
 const meta: Meta<HeaderSearchProps> = {
   title: 'Components/HeaderSearch',
   component: HeaderSearch,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'HeaderSearch combines TextFieldSearch with a back button (Screen) or Cancel action (Inline). Props are discriminated by `variant`.',
-      },
-    },
-  },
   argTypes: {
     variant: {
       control: 'select',
