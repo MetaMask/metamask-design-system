@@ -139,8 +139,8 @@ export type { IconProps } from './Icon';
 export { Input } from './Input';
 export type { InputProps } from './Input';
 
-export { KeyValuePair, KeyValuePairOrientation } from './KeyValuePair';
-export type { KeyValuePairProps } from './KeyValuePair';
+export { KeyValueRow, KeyValueRowVariant } from './KeyValueRow';
+export type { KeyValueRowProps } from './KeyValueRow';
 
 export { Label } from './Label';
 export type { LabelProps } from './Label';

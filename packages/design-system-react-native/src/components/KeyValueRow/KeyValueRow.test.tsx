@@ -1,241 +1,392 @@
-import { fireEvent, render } from '@testing-library/react-native';
+import { KeyValueRowVariant } from '@metamask/design-system-shared';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { renderHook } from '@testing-library/react-hooks';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
 
 import { IconName } from '../Icon';
 
 import { KeyValueRow } from './KeyValueRow';
-import { KeyValueRowFieldIconSides } from './KeyValueRow.types';
-
-const fieldLabel = { text: 'Sample Key' };
-const valueLabel = { text: 'Sample Value' };
 
 describe('KeyValueRow', () => {
-  describe('Rendering', () => {
-    it('renders field label text', () => {
-      const { getByText } = render(
-        <KeyValueRow
-          field={{ label: fieldLabel }}
-          value={{ label: valueLabel }}
-        />,
-      );
-      expect(getByText('Sample Key')).toBeDefined();
-    });
+  let tw: ReturnType<typeof useTailwind>;
 
-    it('renders value label text', () => {
-      const { getByText } = render(
-        <KeyValueRow
-          field={{ label: fieldLabel }}
-          value={{ label: valueLabel }}
-        />,
-      );
-      expect(getByText('Sample Value')).toBeDefined();
-    });
+  beforeAll(() => {
+    tw = renderHook(() => useTailwind()).result.current;
+  });
 
-    it('renders a custom ReactNode label', () => {
-      const { getByTestId } = render(
+  describe('when keyLabel and value are strings', () => {
+    it('renders key and value text', () => {
+      render(
         <KeyValueRow
-          field={{ label: fieldLabel }}
-          value={{ label: <View testID="custom-node" /> }}
+          keyLabel="Label"
+          value="Value text"
+          testID="key-value-row"
         />,
       );
-      expect(getByTestId('custom-node')).toBeDefined();
+
+      expect(screen.getByText('Label')).toHaveTextContent('Label');
+      expect(screen.getByText('Value text')).toHaveTextContent('Value text');
     });
   });
 
-  describe('Icons', () => {
-    it('does not render field icon when icon prop is not provided', () => {
-      const { queryAllByTestId } = render(
+  describe('when keyLabel is a ReactNode', () => {
+    it('renders keyLabel', () => {
+      render(
         <KeyValueRow
-          field={{ label: fieldLabel }}
-          value={{ label: valueLabel }}
+          keyLabel={<Text>Custom key node</Text>}
+          value="Value"
+          testID="key-value-row"
         />,
       );
-      expect(queryAllByTestId('keyvaluerow-field-icon')).toHaveLength(0);
-    });
 
-    it('does not render value icon when icon prop is not provided', () => {
-      const { queryAllByTestId } = render(
-        <KeyValueRow
-          field={{ label: fieldLabel }}
-          value={{ label: valueLabel }}
-        />,
-      );
-      expect(queryAllByTestId('keyvaluerow-value-icon')).toHaveLength(0);
-    });
-
-    it('renders field icon on the left by default (no side specified)', () => {
-      const { getAllByTestId } = render(
-        <KeyValueRow
-          field={{
-            label: fieldLabel,
-            icon: { name: IconName.Wifi, testID: 'keyvaluerow-field-icon' },
-          }}
-          value={{ label: valueLabel }}
-        />,
-      );
-      expect(getAllByTestId('keyvaluerow-field-icon')).toHaveLength(1);
-    });
-
-    it('renders field icon on the left when side is Left', () => {
-      const { getAllByTestId } = render(
-        <KeyValueRow
-          field={{
-            label: fieldLabel,
-            icon: {
-              name: IconName.Wifi,
-              side: KeyValueRowFieldIconSides.Left,
-              testID: 'keyvaluerow-field-icon',
-            },
-          }}
-          value={{ label: valueLabel }}
-        />,
-      );
-      expect(getAllByTestId('keyvaluerow-field-icon')).toHaveLength(1);
-    });
-
-    it('renders field icon on the right when side is Right', () => {
-      const { getAllByTestId } = render(
-        <KeyValueRow
-          field={{
-            label: fieldLabel,
-            icon: {
-              name: IconName.Wifi,
-              side: KeyValueRowFieldIconSides.Right,
-              testID: 'keyvaluerow-field-icon',
-            },
-          }}
-          value={{ label: valueLabel }}
-        />,
-      );
-      expect(getAllByTestId('keyvaluerow-field-icon')).toHaveLength(1);
-    });
-
-    it('renders field icon on both sides when side is Both', () => {
-      const { getAllByTestId } = render(
-        <KeyValueRow
-          field={{
-            label: fieldLabel,
-            icon: {
-              name: IconName.Wifi,
-              side: KeyValueRowFieldIconSides.Both,
-              testID: 'keyvaluerow-field-icon',
-            },
-          }}
-          value={{ label: valueLabel }}
-        />,
-      );
-      expect(getAllByTestId('keyvaluerow-field-icon')).toHaveLength(2);
-    });
-
-    it('renders value icon when value icon prop is provided', () => {
-      const { getAllByTestId } = render(
-        <KeyValueRow
-          field={{ label: fieldLabel }}
-          value={{
-            label: valueLabel,
-            icon: { name: IconName.Wifi, testID: 'keyvaluerow-value-icon' },
-          }}
-        />,
-      );
-      expect(getAllByTestId('keyvaluerow-value-icon')).toHaveLength(1);
-    });
-
-    it('renders value icon on both sides when side is Both', () => {
-      const { getAllByTestId } = render(
-        <KeyValueRow
-          field={{ label: fieldLabel }}
-          value={{
-            label: valueLabel,
-            icon: {
-              name: IconName.Wifi,
-              side: KeyValueRowFieldIconSides.Both,
-              testID: 'keyvaluerow-value-icon',
-            },
-          }}
-        />,
-      );
-      expect(getAllByTestId('keyvaluerow-value-icon')).toHaveLength(2);
+      expect(screen.getByText('Custom key node')).toBeOnTheScreen();
+      expect(screen.getByText('Value')).toHaveTextContent('Value');
     });
   });
 
-  describe('Tooltip', () => {
-    it('does not render tooltip button when tooltip is not provided', () => {
-      const { queryByLabelText } = render(
+  describe('when value is a ReactNode', () => {
+    it('renders value', () => {
+      render(
         <KeyValueRow
-          field={{ label: fieldLabel }}
-          value={{ label: valueLabel }}
+          keyLabel="Key"
+          value={<Text>Custom value node</Text>}
+          testID="key-value-row"
         />,
       );
-      expect(queryByLabelText(/tooltip/iu)).toBeNull();
+
+      expect(screen.getByText('Key')).toHaveTextContent('Key');
+      expect(screen.getByText('Custom value node')).toBeOnTheScreen();
+    });
+  });
+
+  describe('when asserting root layout styles', () => {
+    it('applies default summary row layout on root', () => {
+      render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
+
+      expect(screen.getByTestId('key-value-row')).toHaveStyle(
+        tw`flex-row items-center gap-4 h-10`,
+      );
     });
 
-    it('renders field tooltip button when tooltip is provided', () => {
-      const { getByLabelText } = render(
+    it('applies resolved h-12 when variant is Input', () => {
+      render(
         <KeyValueRow
-          field={{
-            label: fieldLabel,
-            tooltip: { title: 'Info', content: 'Some details' },
-          }}
-          value={{ label: valueLabel }}
+          keyLabel="K"
+          value="V"
+          variant={KeyValueRowVariant.Input}
+          testID="key-value-row"
         />,
       );
-      expect(getByLabelText('Info tooltip')).toBeDefined();
+
+      expect(screen.getByTestId('key-value-row')).toHaveStyle(tw`h-12`);
     });
 
-    it('renders value tooltip button when tooltip is provided', () => {
-      const { getByLabelText } = render(
+    it('applies resolved h-10 when variant is Summary', () => {
+      render(
         <KeyValueRow
-          field={{ label: fieldLabel }}
-          value={{
-            label: valueLabel,
-            tooltip: { title: 'Amount', content: 'Fee details' },
-          }}
+          keyLabel="K"
+          value="V"
+          variant={KeyValueRowVariant.Summary}
+          testID="key-value-row"
         />,
       );
-      expect(getByLabelText('Amount tooltip')).toBeDefined();
+
+      expect(screen.getByTestId('key-value-row')).toHaveStyle(tw`h-10`);
+    });
+  });
+
+  describe('when key and value use default string text props', () => {
+    it('applies single-line defaults to key Text', () => {
+      render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
+
+      const keyText = screen.getByText('K');
+
+      expect(keyText.props).toMatchObject({
+        numberOfLines: 1,
+        ellipsizeMode: 'tail',
+      });
     });
 
-    it('calls tooltip onPress when tooltip button is pressed', () => {
+    it('applies single-line defaults to value Text', () => {
+      render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
+
+      const valueText = screen.getByText('V');
+
+      expect(valueText.props).toMatchObject({
+        numberOfLines: 1,
+        ellipsizeMode: 'tail',
+      });
+    });
+  });
+
+  describe('when keyStartAccessory is set', () => {
+    it('renders keyStartAccessory in key row', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          keyStartAccessory={<Text testID="key-start">KS</Text>}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.getByTestId('key-start')).toBeOnTheScreen();
+    });
+  });
+
+  describe('when keyEndAccessory is set', () => {
+    it('renders keyEndAccessory in key row', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          keyEndAccessory={<Text testID="key-end">KE</Text>}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.getByTestId('key-end')).toBeOnTheScreen();
+    });
+  });
+
+  describe('when valueStartAccessory is set', () => {
+    it('renders valueStartAccessory in value row', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          valueStartAccessory={<Text testID="value-start">VS</Text>}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.getByTestId('value-start')).toBeOnTheScreen();
+    });
+  });
+
+  describe('when valueEndAccessory is set', () => {
+    it('renders valueEndAccessory in value row', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          valueEndAccessory={<Text testID="value-end">VE</Text>}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.getByTestId('value-end')).toBeOnTheScreen();
+    });
+  });
+
+  describe('when keyEndButtonIconProps is provided without iconName', () => {
+    it('renders keyEndAccessory', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          keyEndAccessory={<Text testID="key-end-fallback">Fallback</Text>}
+          keyEndButtonIconProps={{}}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.getByTestId('key-end-fallback')).toBeOnTheScreen();
+    });
+
+    it('does not render ButtonIcon', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          keyEndAccessory={<Text testID="key-end-fallback">Fallback</Text>}
+          keyEndButtonIconProps={{}}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.queryAllByTestId('button-icon')).toHaveLength(0);
+    });
+  });
+
+  describe('when keyEndButtonIconProps has iconName', () => {
+    it('renders ButtonIcon and invokes onPress when pressed', () => {
       const onPress = jest.fn();
-      const { getByLabelText } = render(
+
+      render(
         <KeyValueRow
-          field={{
-            label: fieldLabel,
-            tooltip: { title: 'Info', content: 'Details', onPress },
+          keyLabel="Key"
+          value="Value"
+          keyEndButtonIconProps={{
+            iconName: IconName.Question,
+            onPress,
           }}
-          value={{ label: valueLabel }}
+          testID="key-value-row"
         />,
       );
-      fireEvent.press(getByLabelText('Info tooltip'));
+
+      const buttonIcon = screen.getByTestId('button-icon');
+
+      expect(buttonIcon).toBeOnTheScreen();
+
+      fireEvent.press(buttonIcon);
+
       expect(onPress).toHaveBeenCalledTimes(1);
     });
+
+    it('uses keyEndButtonIconProps instead of keyEndAccessory', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          keyEndAccessory={<Text testID="key-end-custom">Custom</Text>}
+          keyEndButtonIconProps={{
+            iconName: IconName.Info,
+            onPress: () => undefined,
+          }}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.queryByTestId('key-end-custom')).not.toBeOnTheScreen();
+      expect(screen.getAllByTestId('button-icon')).toHaveLength(1);
+    });
   });
 
-  describe('Props', () => {
-    it('passes testID to the root element via ViewProps', () => {
-      const { getByTestId } = render(
+  describe('when keyEndButtonIconProps is not provided', () => {
+    it('renders keyEndAccessory', () => {
+      render(
         <KeyValueRow
-          testID="keyvalue-root"
-          field={{ label: fieldLabel }}
-          value={{ label: valueLabel }}
+          keyLabel="Key"
+          value="Value"
+          keyEndAccessory={<Text testID="key-end-only">Only</Text>}
+          testID="key-value-row"
         />,
       );
-      expect(getByTestId('keyvalue-root')).toBeDefined();
+
+      expect(screen.getByTestId('key-end-only')).toBeOnTheScreen();
     });
 
-    it('passes accessibilityLabel to the root element via ViewProps', () => {
-      const { getByTestId } = render(
+    it('does not render ButtonIcon', () => {
+      render(
         <KeyValueRow
-          testID="keyvalue-root"
-          accessibilityLabel="Key value pair"
-          field={{ label: fieldLabel }}
-          value={{ label: valueLabel }}
+          keyLabel="Key"
+          value="Value"
+          keyEndAccessory={<Text testID="key-end-only">Only</Text>}
+          testID="key-value-row"
         />,
       );
-      expect(getByTestId('keyvalue-root').props.accessibilityLabel).toBe(
-        'Key value pair',
+
+      expect(screen.queryAllByTestId('button-icon')).toHaveLength(0);
+    });
+  });
+
+  describe('when valueEndButtonIconProps has iconName', () => {
+    it('renders ButtonIcon and invokes onPress when pressed', () => {
+      const onPress = jest.fn();
+
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          valueEndButtonIconProps={{
+            iconName: IconName.Info,
+            onPress,
+          }}
+          testID="key-value-row"
+        />,
       );
+
+      const buttonIcon = screen.getByTestId('button-icon');
+
+      expect(buttonIcon).toBeOnTheScreen();
+
+      fireEvent.press(buttonIcon);
+
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
+    it('uses valueEndButtonIconProps instead of valueEndAccessory', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          valueEndAccessory={<Text testID="value-end-custom">Custom</Text>}
+          valueEndButtonIconProps={{
+            iconName: IconName.Question,
+            onPress: () => undefined,
+          }}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.queryByTestId('value-end-custom')).not.toBeOnTheScreen();
+      expect(screen.getAllByTestId('button-icon')).toHaveLength(1);
+    });
+  });
+
+  describe('when valueEndButtonIconProps is not provided', () => {
+    it('renders valueEndAccessory', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          valueEndAccessory={<Text testID="value-end-only">Only</Text>}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.getByTestId('value-end-only')).toBeOnTheScreen();
+    });
+
+    it('does not render ButtonIcon', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Key"
+          value="Value"
+          valueEndAccessory={<Text testID="value-end-only">Only</Text>}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.queryAllByTestId('button-icon')).toHaveLength(0);
+    });
+  });
+
+  describe('when twClassName is provided', () => {
+    it('merges resolved styles for summary variant', () => {
+      render(
+        <KeyValueRow
+          keyLabel="K"
+          value="V"
+          twClassName="bg-background-default"
+          testID="key-value-row"
+        />,
+      );
+
+      const root = screen.getByTestId('key-value-row');
+
+      expect(root).toHaveStyle(tw`bg-background-default`);
+      expect(root).toHaveStyle(tw`h-10`);
+    });
+
+    it('merges resolved styles for input variant', () => {
+      render(
+        <KeyValueRow
+          keyLabel="K"
+          value="V"
+          variant={KeyValueRowVariant.Input}
+          twClassName="bg-background-default"
+          testID="key-value-row"
+        />,
+      );
+
+      const root = screen.getByTestId('key-value-row');
+
+      expect(root).toHaveStyle(tw`bg-background-default`);
+      expect(root).toHaveStyle(tw`h-12`);
     });
   });
 });

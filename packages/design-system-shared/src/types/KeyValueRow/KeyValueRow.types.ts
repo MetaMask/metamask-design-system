@@ -1,24 +1,24 @@
 import type { ReactNode } from 'react';
 
 /**
- * KeyValuePair orientation variants.
+ * KeyValueRow layout variant (height).
  * Uses const object with derived union type (ADR-0003).
  */
-export const KeyValuePairOrientation = {
-  /** Key and value in a row (key left, value right). */
-  Horizontal: 'horizontal',
-  /** Key and value stacked (key above, value below). */
-  Vertical: 'vertical',
+export const KeyValueRowVariant = {
+  /** Compact row height (40px, h-10). */
+  Summary: 'summary',
+  /** Taller row for input contexts (48px, h-12). */
+  Input: 'input',
 } as const;
 
-export type KeyValuePairOrientation =
-  (typeof KeyValuePairOrientation)[keyof typeof KeyValuePairOrientation];
+export type KeyValueRowVariant =
+  (typeof KeyValueRowVariant)[keyof typeof KeyValueRowVariant];
 
 /**
- * KeyValuePair shared props (ADR-0004).
+ * KeyValueRow shared props (ADR-0004).
  * Platform-independent properties shared across React and React Native.
  */
-export type KeyValuePairPropsShared = {
+export type KeyValueRowPropsShared = {
   /** Optional node rendered before the key (e.g. icon). */
   keyStartAccessory?: ReactNode;
   /** Optional node rendered after the key (e.g. icon, badge). */
@@ -32,9 +32,9 @@ export type KeyValuePairPropsShared = {
   /** Value content: string or custom ReactNode. */
   value: string | ReactNode;
   /**
-   * Layout direction.
+   * Row height variant.
    *
-   * @default KeyValuePairOrientation.Horizontal
+   * @default KeyValueRowVariant.Summary
    */
-  orientation?: KeyValuePairOrientation;
+  variant?: KeyValueRowVariant;
 };

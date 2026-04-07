@@ -37,11 +37,11 @@ export { type BoxHorizontalPropsShared } from './types/BoxHorizontal';
 // BoxVertical types (ADR-0004)
 export { type BoxVerticalPropsShared } from './types/BoxVertical';
 
-// KeyValuePair types (ADR-0003 + ADR-0004)
+// KeyValueRow types (ADR-0003 + ADR-0004)
 export {
-  KeyValuePairOrientation,
-  type KeyValuePairPropsShared,
-} from './types/KeyValuePair';
+  KeyValueRowVariant,
+  type KeyValueRowPropsShared,
+} from './types/KeyValueRow';
 
 // ButtonFilter types (ADR-0004)
 export { type ButtonFilterPropsShared } from './types/ButtonFilter';
