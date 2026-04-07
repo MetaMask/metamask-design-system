@@ -280,10 +280,6 @@ export enum ButtonIconVariant {
   Floating = 'floating',
 }
 
-export { TextVariant } from '@metamask/design-system-shared';
-
-export { TextColor } from '@metamask/design-system-shared';
-
 /**
  * Text - textAlign
  */
@@ -295,8 +291,6 @@ export const TextAlign = {
 } as const;
 export type TextAlign = (typeof TextAlign)[keyof typeof TextAlign];
 
-export { FontWeight } from '@metamask/design-system-shared';
-
 /**
  * Text - overflowWrap
  */
@@ -306,8 +300,6 @@ export const OverflowWrap = {
   Normal: 'break-normal',
 } as const;
 export type OverflowWrap = (typeof OverflowWrap)[keyof typeof OverflowWrap];
-
-export { FontStyle } from '@metamask/design-system-shared';
 
 /**
  * Text - textTransform
@@ -319,8 +311,6 @@ export const TextTransform = {
   Normal: 'normal-case',
 } as const;
 export type TextTransform = (typeof TextTransform)[keyof typeof TextTransform];
-
-export { FontFamily } from '@metamask/design-system-shared';
 
 /**
  * TextButton - size

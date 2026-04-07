@@ -1,14 +1,13 @@
+import {
+  FontFamily,
+  FontStyle,
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
-
-import {
-  TextVariant,
-  TextColor,
-  FontWeight,
-  FontFamily,
-  FontStyle,
-} from '../../types';
 
 import { Text } from './Text';
 import {

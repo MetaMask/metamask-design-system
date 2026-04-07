@@ -1,9 +1,12 @@
-import { TextColor, TextVariant } from '@metamask/design-system-shared';
+import {
+  FontFamily,
+  FontStyle,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { Text as RNText } from 'react-native';
-
-import { FontFamily, FontStyle } from '../../types';
 
 import {
   MAP_TEXT_VARIANT_FONTWEIGHT,

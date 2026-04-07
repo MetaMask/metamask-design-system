@@ -1,13 +1,11 @@
-import type { TextPropsShared } from '@metamask/design-system-shared';
-
 import type {
   FontFamily,
   FontStyle,
   FontWeight,
-  OverflowWrap,
-  TextAlign,
-  TextTransform,
-} from '../../types';
+  TextPropsShared,
+} from '@metamask/design-system-shared';
+
+import type { OverflowWrap, TextAlign, TextTransform } from '../../types';
 
 export type TextProps = TextPropsShared & {
   /**

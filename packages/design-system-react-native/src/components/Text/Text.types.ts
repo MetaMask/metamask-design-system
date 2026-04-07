@@ -1,7 +1,10 @@
-import type { TextPropsShared } from '@metamask/design-system-shared';
+import type {
+  FontFamily,
+  FontStyle,
+  FontWeight,
+  TextPropsShared,
+} from '@metamask/design-system-shared';
 import type { TextProps as RNTextProps } from 'react-native';
-
-import type { FontWeight, FontFamily, FontStyle } from '../../types';
 
 /**
  * Text component props.

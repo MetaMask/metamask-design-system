@@ -271,14 +271,6 @@ export enum ButtonIconVariant {
   Floating = 'floating',
 }
 
-export { TextVariant } from '@metamask/design-system-shared';
-
-export { TextColor } from '@metamask/design-system-shared';
-
-export { FontWeight } from '@metamask/design-system-shared';
-export { FontStyle } from '@metamask/design-system-shared';
-export { FontFamily } from '@metamask/design-system-shared';
-
 /**
  * Icon - color
  */

@@ -1,16 +1,14 @@
-import { render, screen } from '@testing-library/react';
-import React from 'react';
-
 import {
   FontFamily,
   FontStyle,
   FontWeight,
-  OverflowWrap,
-  TextAlign,
-  TextVariant,
-  TextTransform,
   TextColor,
-} from '../../types';
+  TextVariant,
+} from '@metamask/design-system-shared';
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+
+import { OverflowWrap, TextAlign, TextTransform } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 
 import {
