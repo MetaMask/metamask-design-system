@@ -2,22 +2,11 @@ export {
   AvatarBaseSize,
   AvatarBaseShape,
 } from '@metamask/design-system-shared';
-export { AvatarBaseSize as AvatarAccountSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarFaviconSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarGroupSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarIconSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarNetworkSize } from '@metamask/design-system-shared';
-export { AvatarBaseSize as AvatarTokenSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarSize } from '@metamask/design-system-shared';
-
-/**
- * AvatarAccount - variant
- */
-export enum AvatarAccountVariant {
-  Blockies = 'blockies',
-  Jazzicon = 'jazzicon',
-  Maskicon = 'maskicon',
-}
 
 /**
  * AvatarIcon - severity

@@ -43,6 +43,12 @@ export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 // AvatarNetwork types (ADR-0004)
 export { type AvatarNetworkPropsShared } from './types/AvatarNetwork';
 
+// AvatarToken types (ADR-0003 + ADR-0004)
+export {
+  AvatarTokenSize,
+  type AvatarTokenPropsShared,
+} from './types/AvatarToken';
+
 // BannerAlert types (ADR-0003 + ADR-0004)
 export {
   BannerAlertSeverity,
@@ -56,3 +62,9 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
+export {
+  AvatarAccountSize,
+  AvatarAccountVariant,
+  type AvatarAccountPropsShared,
+} from './types/AvatarAccount';
