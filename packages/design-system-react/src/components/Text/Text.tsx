@@ -1,8 +1,8 @@
-import { TextVariant } from '@metamask/design-system-shared';
+import { TextColor, TextVariant } from '@metamask/design-system-shared';
 import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 
-import { FontFamily, TextColor } from '../../types';
+import { FontFamily } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 
 import {
