@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
