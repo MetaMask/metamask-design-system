@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.0]
+
+### Changed
+
+- **BREAKING:** Updated `AvatarBase` exports to consume shared const-object + string-union types rather than local enums, aligning React with shared cross-platform type contracts ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005)).
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+- Updated `@metamask/utils` peer dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033)).
+- Expanded `BannerBase` migration documentation to improve upgrade guidance for consumers moving between recent releases ([#1011](https://github.com/MetaMask/metamask-design-system/pull/1011)).
+
+## [0.13.0]
+
+### Changed
+
+- `FontWeight.Bold` and the `Text` component now treat the semantic bold slot as weight 600; Storybook moved to the `Geist-SemiBold` assets and the tokens now emit `--font-weight-bold: 600`, so update any hardcoded `font-weight: 700` references as outlined in MIGRATION.md#from-version-0120-to-0130 ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017)).
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now derive from const objects with `as const`/string-union typings per ADR-0003 and ADR-0004, so the same values are available to both React and React Native while your import statements continue to reference `@metamask/design-system-react` (or the platform-specific entry point) as before ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014); see https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md and MIGRATION.md#from-version-0120-to-0130).
+- Documented the Button migration path that walks through prop, variant, and size mappings for both web and mobile, linking directly to MIGRATION.md#button-component so the release note, changelog, and migration guide share the same reference ([#999](https://github.com/MetaMask/metamask-design-system/pull/999)).
+
+### Fixed
+
+- Restored a visible keyboard focus outline for `Checkbox` keyboard users by making the hidden input a Tailwind `peer` and mirroring its `peer-focus-visible` state onto the visible container so Tab navigation shows a clear indicator ([#1008](https://github.com/MetaMask/metamask-design-system/pull/1008)).
+
+## [0.12.0]
+
+### Added
+
+- Added `BannerAlert` component ([#975](https://github.com/MetaMask/metamask-design-system/pull/975))
+
+### Changed
+
+- Updated `TextButton` hover/pressed styles to be text-only (no background fill) ([#1001](https://github.com/MetaMask/metamask-design-system/pull/1001))
+- Updated `Candlestick` icon asset with smaller size variant ([#998](https://github.com/MetaMask/metamask-design-system/pull/998))
+
 ## [0.11.0]
 
 ### Added
@@ -182,7 +215,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.11.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.14.0...HEAD
+[0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.13.0...@metamask/design-system-react@0.14.0
+[0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.12.0...@metamask/design-system-react@0.13.0
+[0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.11.0...@metamask/design-system-react@0.12.0
 [0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.10.0...@metamask/design-system-react@0.11.0
 [0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.9.0...@metamask/design-system-react@0.10.0
 [0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.8.0...@metamask/design-system-react@0.9.0

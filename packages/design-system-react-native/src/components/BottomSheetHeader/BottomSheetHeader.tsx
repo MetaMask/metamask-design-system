@@ -29,7 +29,7 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
     <ButtonIcon
       iconName={IconName.ArrowLeft}
       onPress={onBack}
-      size={ButtonIconSize.Lg}
+      size={ButtonIconSize.Md}
       {...backButtonProps}
     />
   ) : undefined;
@@ -38,7 +38,7 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
     <ButtonIcon
       iconName={IconName.Close}
       onPress={onClose}
-      size={ButtonIconSize.Lg}
+      size={ButtonIconSize.Md}
       {...closeButtonProps}
     />
   ) : undefined;

@@ -12,15 +12,29 @@ import { Pressable, TextInput, View } from 'react-native';
 import { TextVariant } from '../../types';
 import { Input } from '../Input';
 
-import { TWCLASSMAP_TEXTFIELD_SIZE } from './TextField.constants';
-import { TextFieldSize } from './TextField.types';
 import type { TextFieldProps } from './TextField.types';
+
+function getContainerBorderColorClass(
+  isDisabled: boolean,
+  isFocused: boolean,
+  isError: boolean,
+): string {
+  if (isDisabled) {
+    return 'border-muted';
+  }
+  if (isError) {
+    return 'border-error-default';
+  }
+  if (isFocused) {
+    return 'border-default';
+  }
+  return 'border-muted';
+}
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(
   (
     {
       style,
-      size = TextFieldSize.Md,
       startAccessory,
       endAccessory,
       isError = false,
@@ -45,23 +59,28 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
       [],
     );
 
+    const borderColorClass = getContainerBorderColorClass(
+      isDisabled,
+      isFocused,
+      isError,
+    );
+
     const containerStyle = useMemo(
       () =>
         tw.style(
           'flex-row',
           'items-center',
+          'gap-3',
           'rounded-lg',
-          TWCLASSMAP_TEXTFIELD_SIZE[size],
+          'h-12',
           'border',
+          borderColorClass,
           'px-4',
-          'bg-default',
-          'border-default',
-          isError && 'border-error-default',
-          !isDisabled && isFocused && 'border-primary-default',
+          'bg-muted',
           isDisabled && 'opacity-50',
           twClassName,
         ),
-      [size, isError, isFocused, isDisabled, twClassName, tw],
+      [borderColorClass, isDisabled, twClassName, tw],
     );
 
     const onBlurHandler = useCallback(
@@ -97,10 +116,8 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
         onPress={onPressHandler}
         accessible={false}
       >
-        {startAccessory && (
-          <View style={tw.style('mr-2')}>{startAccessory}</View>
-        )}
-        <View style={tw.style('flex-1')}>
+        {startAccessory}
+        <View style={tw.style('min-h-0 flex-1 justify-center')}>
           {inputElement ?? (
             <Input
               {...props}
@@ -111,11 +128,15 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
               onBlur={onBlurHandler}
               onFocus={onFocusHandler}
               isStateStylesDisabled
-              twClassName="bg-transparent border-0"
+              // Row is `h-12` (48px) with `border` on the Pressable (1px top + bottom). Inner TextInput
+              // uses 46px height so the field matches a 48px-tall control without vertical overflow.
+              twClassName="h-[46px] bg-transparent border-0"
+              numberOfLines={1}
+              multiline={false}
             />
           )}
         </View>
-        {endAccessory && <View style={tw.style('ml-2')}>{endAccessory}</View>}
+        {endAccessory}
       </Pressable>
     );
   },

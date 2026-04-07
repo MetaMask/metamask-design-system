@@ -6,6 +6,15 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
+export { isReactNodeRenderable } from './utils/isReactNodeRenderable';
+
+// AvatarBase types (ADR-0003 + ADR-0004)
+export {
+  AvatarBaseSize,
+  AvatarBaseShape,
+  type AvatarBasePropsShared,
+} from './types/AvatarBase';
+
 // BadgeCount types (ADR-0003 + ADR-0004)
 export { BadgeCountSize, type BadgeCountPropsShared } from './types/BadgeCount';
 
@@ -19,11 +28,37 @@ export {
 // BannerBase types (ADR-0004)
 export { type BannerBasePropsShared } from './types/BannerBase';
 
+// TextOrChildren types (ADR-0004)
+export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
+
+// BoxHorizontal types (ADR-0004)
+export { type BoxHorizontalPropsShared } from './types/BoxHorizontal';
+
+// BoxVertical types (ADR-0004)
+export { type BoxVerticalPropsShared } from './types/BoxVertical';
+
 // ButtonFilter types (ADR-0004)
 export { type ButtonFilterPropsShared } from './types/ButtonFilter';
+
+// AvatarNetwork types (ADR-0004)
+export { type AvatarNetworkPropsShared } from './types/AvatarNetwork';
 
 // BannerAlert types (ADR-0003 + ADR-0004)
 export {
   BannerAlertSeverity,
   type BannerAlertPropsShared,
 } from './types/BannerAlert';
+
+// BadgeWrapper types (ADR-0003 + ADR-0004)
+export {
+  BadgeWrapperPositionAnchorShape,
+  BadgeWrapperPosition,
+  type BadgeWrapperCustomPosition,
+  type BadgeWrapperPropsShared,
+} from './types/BadgeWrapper';
+
+export {
+  AvatarAccountSize,
+  AvatarAccountVariant,
+  type AvatarAccountPropsShared,
+} from './types/AvatarAccount';

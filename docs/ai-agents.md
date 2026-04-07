@@ -93,6 +93,21 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 - `reviewing-release-prs.md` - Release process
 - `package-migration-process-guide.md` - Infrequent migrations
 
+## Storybook MCP as Dynamic Context
+
+The three-layer model provides static guidance (rules, conventions, and process). Storybook MCP adds a dynamic context layer that agents can query at runtime.
+
+### What this adds
+
+- Live component and docs metadata from Storybook manifests
+- Story-level examples that reduce prop/API hallucination
+- Optional story test execution and preview tooling when addon toolsets are enabled
+
+### Maintainers vs consumers
+
+- **Maintainers (this repo):** Continue using `.cursor/rules/` as the source of truth for conventions. Storybook MCP is a workflow accelerator for story authoring and validation.
+- **Consumers (downstream repos):** Storybook MCP provides the highest value. Agents can discover components and props from a running or published Storybook without reading this repo's source.
+
 ## How AI Agents Use This
 
 ### Cursor Cloud Automations

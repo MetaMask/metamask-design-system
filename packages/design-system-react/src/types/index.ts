@@ -1,59 +1,13 @@
-/**
- * AvatarBase - size
- */
-export enum AvatarBaseSize {
-  /**
-   * Represents an extra small avatar size (16px).
-   */
-  Xs = 'xs',
-  /**
-   * Represents a small avatar size (24px).
-   */
-  Sm = 'sm',
-  /**
-   * Represents a medium avatar size (32px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large avatar size (40px).
-   */
-  Lg = 'lg',
-  /**
-   * Represents an extra large avatar size (48px).
-   */
-  Xl = 'xl',
-}
-export { AvatarBaseSize as AvatarAccountSize };
-export { AvatarBaseSize as AvatarFaviconSize };
-export { AvatarBaseSize as AvatarGroupSize };
-export { AvatarBaseSize as AvatarIconSize };
-export { AvatarBaseSize as AvatarNetworkSize };
-export { AvatarBaseSize as AvatarTokenSize };
-export { AvatarBaseSize as AvatarSize };
-
-/**
- * Avatar - shape
- */
-export enum AvatarShape {
-  /**
-   * Represents a circular Avatar.
-   */
-  Circle = 'circle',
-  /**
-   * Represents a squared Avatar
-   */
-  Square = 'square',
-}
-export { AvatarShape as AvatarBaseShape };
-
-/**
- * AvatarAccount - variant
- */
-export enum AvatarAccountVariant {
-  Blockies = 'blockies',
-  Jazzicon = 'jazzicon',
-  Maskicon = 'maskicon',
-}
+export {
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarFaviconSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarGroupSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarIconSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarNetworkSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarTokenSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarSize } from '@metamask/design-system-shared';
 
 /**
  * AvatarIcon - severity
@@ -76,34 +30,6 @@ export enum AvatarGroupVariant {
   Network = 'network',
   Token = 'token',
 }
-
-/**
- * BadgeWrapper - positionAnchorShape
- */
-export enum BadgeWrapperPositionAnchorShape {
-  Rectangular = 'rectangular',
-  Circular = 'circular',
-}
-
-/**
- * BadgeWrapper - position.
- */
-export enum BadgeWrapperPosition {
-  TopRight = 'top-right',
-  BottomRight = 'bottom-right',
-  BottomLeft = 'bottom-left',
-  TopLeft = 'top-left',
-}
-
-/**
- * BadgeWrapper - customPosition
- */
-export type BadgeWrapperCustomPosition = {
-  top?: number | string | undefined;
-  right?: number | string | undefined;
-  bottom?: number | string | undefined;
-  left?: number | string | undefined;
-};
 
 /**
  * Box - all spacing-related props
@@ -453,7 +379,7 @@ export enum TextAlign {
  */
 export enum FontWeight {
   /**
-   * Weight - 700
+   * Weight - 600
    */
   Bold = 'font-bold',
   /**

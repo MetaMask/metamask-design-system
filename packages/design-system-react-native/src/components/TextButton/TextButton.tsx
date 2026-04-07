@@ -1,112 +1,50 @@
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useCallback } from 'react';
-import { Pressable } from 'react-native';
+import React, { useState } from 'react';
 
-import { TextButtonSize } from '../../types';
-import { Icon, IconSize } from '../Icon';
+import { TextVariant, TextColor } from '../../types';
 import { Text, FontWeight } from '../Text';
 
-import { MAP_TEXTBUTTON_SIZE_TEXTVARIANT } from './TextButton.constants';
 import type { TextButtonProps } from './TextButton.types';
 
 export const TextButton: React.FC<TextButtonProps> = ({
   children,
-  size = TextButtonSize.BodyMd,
-  textProps,
-  startIconName,
-  startIconProps,
-  startAccessory,
-  endIconName,
-  endIconProps,
-  endAccessory,
-  isDisabled = false,
-  isInverse = false,
-  twClassName = '',
-  accessibilityRole,
-  accessibilityLabel,
-  style,
-  ...props
+  variant = TextVariant.BodyMd,
+  fontWeight = FontWeight.Medium,
+  twClassName,
+  accessibilityRole = 'link',
+  onPress,
+  onPressIn,
+  onPressOut,
+  suppressHighlighting = true,
+  ...rest
 }) => {
-  const tw = useTailwind();
-  /**
-   * Calculating the baselineOffset. This baselineOffset is needed to make sure
-   * the TextButton aligns perfectly when placed within Text elements
-   */
-  // eslint-disable-next-line tailwindcss/no-custom-classname
-  const { fontSize, lineHeight } = tw`text-${
-    MAP_TEXTBUTTON_SIZE_TEXTVARIANT[size] as string
-  }` as {
-    fontSize: number;
-    lineHeight: number;
+  const [pressed, setPressed] = useState(false);
+
+  const handlePressIn: NonNullable<TextButtonProps['onPressIn']> = (e) => {
+    setPressed(true);
+    onPressIn?.(e);
   };
-  const baselineOffset = (lineHeight - fontSize) / 2;
 
-  const getTextColor = useCallback(
-    (pressed: boolean): string => {
-      if (isInverse) {
-        return 'text-primary-inverse';
-      }
-      return pressed ? 'text-primary-default-pressed' : 'text-primary-default';
-    },
-    [isInverse],
-  );
-
-  const getTextDecoration = useCallback(
-    (pressed: boolean): string =>
-      isInverse || pressed ? 'underline' : 'no-underline',
-    [isInverse],
-  );
+  const handlePressOut: NonNullable<TextButtonProps['onPressOut']> = (e) => {
+    setPressed(false);
+    onPressOut?.(e);
+  };
 
   return (
-    <Text>
-      <Pressable
-        accessibilityRole={accessibilityRole ?? 'button'}
-        accessibilityLabel={accessibilityLabel}
-        disabled={isDisabled}
-        style={({ pressed }) => [
-          { transform: [{ translateY: baselineOffset }] },
-          tw`flex-row items-center ${pressed ? 'bg-pressed' : 'bg-transparent'} ${isDisabled ? 'opacity-50' : 'opacity-100'} ${twClassName}`,
-          style,
-        ]}
-        {...props}
-      >
-        {({ pressed }) => (
-          <>
-            {startIconName ? (
-              <Icon
-                name={startIconName}
-                size={IconSize.Sm}
-                testID="start-icon"
-                twClassName={`${getTextColor(pressed)} mr-1`}
-                {...startIconProps}
-              />
-            ) : (
-              startAccessory
-            )}
-
-            <Text
-              variant={MAP_TEXTBUTTON_SIZE_TEXTVARIANT[size]}
-              fontWeight={FontWeight.Medium}
-              {...textProps}
-              twClassName={` ${getTextColor(pressed)} ${getTextDecoration(pressed)} ${textProps?.twClassName ?? ''} `}
-            >
-              {children}
-            </Text>
-
-            {endIconName ? (
-              <Icon
-                name={endIconName}
-                size={IconSize.Sm}
-                testID="end-icon"
-                twClassName={`${getTextColor(pressed)} ml-1`}
-                {...endIconProps}
-              />
-            ) : (
-              endAccessory
-            )}
-          </>
-        )}
-      </Pressable>
+    <Text
+      {...rest}
+      accessibilityRole={accessibilityRole}
+      variant={variant}
+      fontWeight={fontWeight}
+      color={
+        pressed ? TextColor.PrimaryDefaultPressed : TextColor.PrimaryDefault
+      }
+      twClassName={twClassName}
+      onPress={onPress}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      suppressHighlighting={suppressHighlighting}
+    >
+      {children}
     </Text>
   );
 };

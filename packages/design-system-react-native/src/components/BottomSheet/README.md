@@ -14,7 +14,7 @@ import { BottomSheet } from '@metamask/design-system-react-native';
 
 ### `goBack`
 
-Callback invoked to navigate back when `shouldNavigateBack` is `true` and the sheet finishes closing. Typically `navigation.goBack()` from React Navigation.
+Optional callback that will be invoked when sheet closes (used to navigate back). Typically `navigation.goBack()` from React Navigation.
 
 | TYPE       | REQUIRED |
 | ---------- | -------- |
@@ -106,21 +106,6 @@ Optional boolean to expand the sheet to the full screen height.
 </BottomSheet>
 ```
 
-### `shouldNavigateBack`
-
-Optional boolean indicating whether `goBack` is called automatically when the sheet closes.
-
-| TYPE      | REQUIRED | DEFAULT |
-| --------- | -------- | ------- |
-| `boolean` | No       | `true`  |
-
-```tsx
-// Prevent automatic navigation — manage it manually via onClose instead
-<BottomSheet goBack={goBack} shouldNavigateBack={false} onClose={goBack}>
-  <Text>Content</Text>
-</BottomSheet>
-```
-
 ### `keyboardAvoidingViewEnabled`
 
 Optional boolean to enable or disable the `KeyboardAvoidingView` that shifts the sheet when the keyboard appears.
@@ -133,6 +118,26 @@ Optional boolean to enable or disable the `KeyboardAvoidingView` that shifts the
 <BottomSheet goBack={goBack} keyboardAvoidingViewEnabled={false}>
   <Text>No keyboard avoidance</Text>
 </BottomSheet>
+```
+
+### `panGestureHandlerProps`
+
+Optional props object forwarded to the internal `PanGestureHandler` used by `BottomSheetDialog`. Use this when the sheet needs to coordinate with nested gestures (for example via `simultaneousHandlers`).
+`enabled` and `onGestureEvent` remain controlled internally by `BottomSheetDialog`.
+
+| TYPE                     | REQUIRED | DEFAULT     |
+| ------------------------ | -------- | ----------- |
+| `PanGestureHandlerProps` | No       | `undefined` |
+
+```tsx
+const listGestureRef = useRef(null);
+
+<BottomSheet
+  goBack={goBack}
+  panGestureHandlerProps={{ simultaneousHandlers: listGestureRef }}
+>
+  <Text>Content</Text>
+</BottomSheet>;
 ```
 
 ### `twClassName`

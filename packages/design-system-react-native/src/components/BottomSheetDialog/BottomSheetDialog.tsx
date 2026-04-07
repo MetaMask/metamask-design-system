@@ -47,7 +47,7 @@ import type {
   BottomSheetDialogProps,
 } from './BottomSheetDialog.types';
 
-const BottomSheetDialog = forwardRef<
+export const BottomSheetDialog = forwardRef<
   BottomSheetDialogRef,
   BottomSheetDialogProps
 >(
@@ -59,6 +59,7 @@ const BottomSheetDialog = forwardRef<
       keyboardAvoidingViewEnabled = true,
       onClose,
       onOpen,
+      panGestureHandlerProps,
       style,
       twClassName,
       ...props
@@ -281,6 +282,7 @@ const BottomSheetDialog = forwardRef<
         {...props}
       >
         <PanGestureHandler
+          {...panGestureHandlerProps}
           enabled={isInteractable}
           onGestureEvent={gestureHandler}
         >
@@ -300,5 +302,3 @@ const BottomSheetDialog = forwardRef<
     );
   },
 );
-
-export default BottomSheetDialog;

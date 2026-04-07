@@ -62,7 +62,7 @@ export type {
   BottomSheetPostCallback,
 } from './BottomSheet';
 
-export { default as BottomSheetDialog } from './BottomSheetDialog';
+export { BottomSheetDialog } from './BottomSheetDialog';
 export type {
   BottomSheetDialogProps,
   BottomSheetDialogRef,
@@ -97,6 +97,12 @@ export {
 } from './Box';
 export type { BoxProps, BoxSpacing, BoxBorderWidth } from './Box';
 
+export { BoxHorizontal } from './BoxHorizontal';
+export type { BoxHorizontalProps } from './BoxHorizontal';
+
+export { BoxVertical } from './BoxVertical';
+export type { BoxVerticalProps } from './BoxVertical';
+
 export { Card } from './Card';
 export type { CardProps } from './Card';
 
@@ -120,6 +126,12 @@ export type { CheckboxProps } from './Checkbox';
 
 export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
+
+export { HeaderRoot } from './HeaderRoot';
+export type { HeaderRootProps } from './HeaderRoot';
+
+export { HeaderStandard } from './HeaderStandard';
+export type { HeaderStandardProps } from './HeaderStandard';
 
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
@@ -154,7 +166,7 @@ export type { SensitiveTextProps } from './SensitiveText';
 export { TabEmptyState } from './TabEmptyState';
 export type { TabEmptyStateProps } from './TabEmptyState';
 
-export { TextButton, TextButtonSize } from './TextButton';
+export { TextButton } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
 export {
@@ -167,8 +179,11 @@ export {
 } from './Text';
 export type { TextProps } from './Text';
 
-export { TextField, TextFieldSize } from './TextField';
+export { TextField } from './TextField';
 export type { TextFieldProps } from './TextField';
+
+export { TextFieldSearch } from './TextFieldSearch';
+export type { TextFieldSearchProps } from './TextFieldSearch';
 
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';

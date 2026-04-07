@@ -9,7 +9,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sDisplayLG.lineHeight as number}px`,
         letterSpacing: `${typography.sDisplayLG.letterSpacing as number}`,
-        fontWeight: typography.sDisplayLG.fontWeight,
       },
     ],
     'display-md': [
@@ -17,7 +16,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sDisplayMD.lineHeight as number}px`,
         letterSpacing: `${typography.sDisplayMD.letterSpacing as number}`,
-        fontWeight: typography.sDisplayMD.fontWeight,
       },
     ],
     'heading-lg': [
@@ -25,7 +23,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sHeadingLG.lineHeight as number}px`,
         letterSpacing: `${typography.sHeadingLG.letterSpacing as number}`,
-        fontWeight: typography.sHeadingLG.fontWeight,
       },
     ],
     'heading-md': [
@@ -33,7 +30,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sHeadingMD.lineHeight as number}px`,
         letterSpacing: `${typography.sHeadingMD.letterSpacing as number}`,
-        fontWeight: typography.sHeadingMD.fontWeight,
       },
     ],
     'heading-sm': [
@@ -41,7 +37,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sHeadingSM.lineHeight as number}px`,
         letterSpacing: `${typography.sHeadingSM.letterSpacing as number}`,
-        fontWeight: typography.sHeadingSM.fontWeight,
       },
     ],
     'body-lg': [
@@ -49,7 +44,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sBodyLGMedium.lineHeight as number}px`,
         letterSpacing: `${typography.sBodyLGMedium.letterSpacing as number}`,
-        fontWeight: typography.sBodyLGMedium.fontWeight,
       },
     ],
     'body-md': [
@@ -57,7 +51,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sBodyMD.lineHeight as number}px`,
         letterSpacing: `${typography.sBodyMD.letterSpacing as number}`,
-        fontWeight: typography.sBodyMD.fontWeight,
       },
     ],
     'body-sm': [
@@ -65,7 +58,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sBodySM.lineHeight as number}px`,
         letterSpacing: `${typography.sBodySM.letterSpacing as number}`,
-        fontWeight: typography.sBodySM.fontWeight,
       },
     ],
     'body-xs': [
@@ -73,7 +65,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sBodyXS.lineHeight as number}px`,
         letterSpacing: `${typography.sBodyXS.letterSpacing as number}`,
-        fontWeight: typography.sBodyXS.fontWeight,
       },
     ],
     'page-heading': [
@@ -81,7 +72,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sPageHeading.lineHeight as number}px`,
         letterSpacing: `${typography.sPageHeading.letterSpacing as number}`,
-        fontWeight: typography.sPageHeading.fontWeight,
       },
     ],
     'section-heading': [
@@ -89,7 +79,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sSectionHeading.lineHeight as number}px`,
         letterSpacing: `${typography.sSectionHeading.letterSpacing as number}`,
-        fontWeight: typography.sSectionHeading.fontWeight,
       },
     ],
     'button-label-md': [
@@ -97,7 +86,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sButtonLabelMd.lineHeight as number}px`,
         letterSpacing: `${typography.sButtonLabelMd.letterSpacing as number}`,
-        fontWeight: typography.sButtonLabelMd.fontWeight,
       },
     ],
     'button-label-lg': [
@@ -105,7 +93,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sButtonLabelLg.lineHeight as number}px`,
         letterSpacing: `${typography.sButtonLabelLg.letterSpacing as number}`,
-        fontWeight: typography.sButtonLabelLg.fontWeight,
       },
     ],
     'amount-display-lg': [
@@ -113,7 +100,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
       {
         lineHeight: `${typography.sAmountDisplayLg.lineHeight as number}px`,
         letterSpacing: `${typography.sAmountDisplayLg.letterSpacing as number}`,
-        fontWeight: typography.sAmountDisplayLg.fontWeight,
       },
     ],
   },
@@ -122,8 +108,8 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
     'default-regular-italic': 'Geist-RegularItalic',
     'default-medium': 'Geist-Medium',
     'default-medium-italic': 'Geist-MediumItalic',
-    'default-bold': 'Geist-Bold',
-    'default-bold-italic': 'Geist-BoldItalic',
+    'default-bold': 'Geist-SemiBold',
+    'default-bold-italic': 'Geist-SemiBoldItalic',
     'accent-regular': 'MMSans-Regular',
     'accent-medium': 'MMSans-Medium',
     'accent-bold': 'MMSans-Bold',
