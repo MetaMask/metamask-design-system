@@ -1,17 +1,13 @@
 import type { TextPropsShared } from '@metamask/design-system-shared';
 import type { TextProps as RNTextProps } from 'react-native';
 
-import type { TextColor, FontWeight, FontFamily, FontStyle } from '../../types';
+import type { FontWeight, FontFamily, FontStyle } from '../../types';
 
 /**
  * Text component props.
  */
 export type TextProps = TextPropsShared &
   RNTextProps & {
-    /**
-     * Optional prop to add color to text.
-     */
-    color?: TextColor;
     /**
      * Optional prop to control the font weight of the text.
      * Normal: 400

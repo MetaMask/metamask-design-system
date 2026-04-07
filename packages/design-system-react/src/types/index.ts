@@ -1,4 +1,3 @@
-import { TextColor as SharedTextColor } from '@metamask/design-system-shared';
 
 export {
   AvatarBaseSize,
@@ -284,24 +283,7 @@ export enum ButtonIconVariant {
 
 export { TextVariant } from '@metamask/design-system-shared';
 
-/**
- * Text - color
- * Extends shared TextColor with React web-specific hover/pressed states and Inherit.
- */
-export const TextColor = {
-  ...SharedTextColor,
-  /** For primary text in a hover state. */
-  PrimaryDefaultHover: 'text-primary-default-hover',
-  /** For critical alert text in a hover state. */
-  ErrorDefaultHover: 'text-error-default-hover',
-  /** For positive text in a hover state. */
-  SuccessDefaultHover: 'text-success-default-hover',
-  /** For caution text in a hover state. */
-  WarningDefaultHover: 'text-warning-default-hover',
-  /** Inherit the color of the parent element */
-  Inherit: 'text-inherit',
-} as const;
-export type TextColor = (typeof TextColor)[keyof typeof TextColor];
+export { TextColor } from '@metamask/design-system-shared';
 
 /**
  * Text - textAlign

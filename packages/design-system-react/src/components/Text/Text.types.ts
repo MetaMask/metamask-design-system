@@ -6,7 +6,6 @@ import type {
   FontWeight,
   OverflowWrap,
   TextAlign,
-  TextColor,
   TextTransform,
 } from '../../types';
 
@@ -66,12 +65,6 @@ export type TextProps = TextPropsShared & {
    * @default false
    */
   asChild?: boolean;
-  /**
-   * Optional prop that sets the color of the text using predefined theme colors.
-   *
-   * @default TextColor.TextDefault
-   */
-  color?: TextColor;
   /**
    * Optional prop for testing purposes
    */

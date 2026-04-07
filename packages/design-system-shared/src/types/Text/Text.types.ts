@@ -32,9 +32,7 @@ export type TextVariant = (typeof TextVariant)[keyof typeof TextVariant];
 
 /**
  * Text - color (ADR-0003)
- * Common values shared across React and React Native platforms.
- * React extends this with hover/pressed states and Inherit.
- * React Native extends this with PrimaryAlternative.
+ * All text color values shared across React and React Native platforms.
  */
 export const TextColor = {
   /** For default neutral text. */
@@ -49,6 +47,10 @@ export const TextColor = {
   PrimaryDefault: 'text-primary-default',
   /** For elements used on top of primary/default. Used for text, icon or border */
   PrimaryInverse: 'text-primary-inverse',
+  /** For softer variants of primary text. */
+  PrimaryAlternative: 'text-primary-alternative',
+  /** For primary text in a hover state. */
+  PrimaryDefaultHover: 'text-primary-default-hover',
   /** For primary text in a pressed state. */
   PrimaryDefaultPressed: 'text-primary-default-pressed',
   /** For the critical alert semantic elements. Used for text, background, icon or border */
@@ -57,18 +59,24 @@ export const TextColor = {
   ErrorAlternative: 'text-error-alternative',
   /** For elements used on top of error/default. Used for text, icon or border */
   ErrorInverse: 'text-error-inverse',
+  /** For critical alert text in a hover state. */
+  ErrorDefaultHover: 'text-error-default-hover',
   /** For critical alert text in a pressed state. */
   ErrorDefaultPressed: 'text-error-default-pressed',
   /** For the positive semantic elements. Used for text, background, icon or border */
   SuccessDefault: 'text-success-default',
   /** For elements used on top of success/default. Used for text, icon or border */
   SuccessInverse: 'text-success-inverse',
+  /** For positive text in a hover state. */
+  SuccessDefaultHover: 'text-success-default-hover',
   /** For positive text in a pressed state. */
   SuccessDefaultPressed: 'text-success-default-pressed',
   /** For the caution alert semantic elements. Used for text, background, icon or border */
   WarningDefault: 'text-warning-default',
   /** For elements used on top of warning/default. Used for text, icon or border */
   WarningInverse: 'text-warning-inverse',
+  /** For caution text in a hover state. */
+  WarningDefaultHover: 'text-warning-default-hover',
   /** For caution text in a pressed state. */
   WarningDefaultPressed: 'text-warning-default-pressed',
   /** For informational read-only elements. Used for text, background, icon or border */
@@ -77,6 +85,8 @@ export const TextColor = {
   InfoInverse: 'text-info-inverse',
   /** Make the text color transparent */
   Transparent: 'text-transparent',
+  /** Inherit the color of the parent element */
+  Inherit: 'text-inherit',
 } as const;
 
 export type TextColor = (typeof TextColor)[keyof typeof TextColor];
@@ -84,7 +94,6 @@ export type TextColor = (typeof TextColor)[keyof typeof TextColor];
 /**
  * Text component shared props (ADR-0004).
  * Platform-independent props shared across React and React Native.
- * Color uses string to allow platform-specific extensions.
  */
 export type TextPropsShared = {
   /**
@@ -103,5 +112,5 @@ export type TextPropsShared = {
    *
    * @default TextColor.TextDefault
    */
-  color?: string;
+  color?: TextColor;
 };

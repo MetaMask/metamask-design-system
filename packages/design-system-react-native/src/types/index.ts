@@ -1,4 +1,3 @@
-import { TextColor as SharedTextColor } from '@metamask/design-system-shared';
 
 export {
   AvatarBaseSize,
@@ -275,16 +274,7 @@ export enum ButtonIconVariant {
 
 export { TextVariant } from '@metamask/design-system-shared';
 
-/**
- * Text - color
- * Extends shared TextColor with React Native-specific PrimaryAlternative.
- */
-export const TextColor = {
-  ...SharedTextColor,
-  /** For softer variants of primary text. */
-  PrimaryAlternative: 'text-primary-alternative',
-} as const;
-export type TextColor = (typeof TextColor)[keyof typeof TextColor];
+export { TextColor } from '@metamask/design-system-shared';
 
 /**
  * Text - fontWeight (React Native platform-specific values)
