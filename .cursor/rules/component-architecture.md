@@ -173,7 +173,7 @@ import { TextVariant } from '../Text';
 
 **Why not `../Text`?**
 
-Both `Input` and `Text` are *consumers* of `TextVariant` — neither owns it. Importing through `../Text` creates:
+Both `Input` and `Text` are _consumers_ of `TextVariant` — neither owns it. Importing through `../Text` creates:
 
 1. **False semantic coupling** — implies `Input` is built on top of `Text`, which it isn't
 2. **Fragile circular-dep risk** — if `Text` ever renders an `Input` internally, you get `Input → Text → Input 💥`
@@ -181,12 +181,12 @@ Both `Input` and `Text` are *consumers* of `TextVariant` — neither owns it. Im
 
 **The rule:**
 
-| What you need | Import from |
-|---|---|
-| Shared const/type (`TextVariant`, `TextColor`, `FontWeight`, etc.) | `@metamask/design-system-shared` |
-| A sibling component to render it | `'../ComponentName'` |
-| A sibling component's platform-specific props type | `'../ComponentName'` |
-| A sibling component's mapping constants | `'../ComponentName/ComponentName.constants'` |
+| What you need                                                      | Import from                                  |
+| ------------------------------------------------------------------ | -------------------------------------------- |
+| Shared const/type (`TextVariant`, `TextColor`, `FontWeight`, etc.) | `@metamask/design-system-shared`             |
+| A sibling component to render it                                   | `'../ComponentName'`                         |
+| A sibling component's platform-specific props type                 | `'../ComponentName'`                         |
+| A sibling component's mapping constants                            | `'../ComponentName/ComponentName.constants'` |
 
 ## Cross-Platform Consistency
 
