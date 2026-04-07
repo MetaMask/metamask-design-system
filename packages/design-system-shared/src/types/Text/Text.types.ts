@@ -126,7 +126,10 @@ export const TextColor = {
   InfoInverse: 'text-info-inverse',
   /** Make the text color transparent */
   Transparent: 'text-transparent',
-  /** Inherit the color of the parent element */
+  /**
+   * Inherit the color of the parent element.
+   * @platform web — CSS cascade has no equivalent in React Native; fails silently on mobile.
+   */
   Inherit: 'text-inherit',
 } as const;
 
