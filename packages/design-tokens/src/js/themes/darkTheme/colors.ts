@@ -3,30 +3,30 @@ import type { ThemeColors } from '../types';
 
 export const colors: ThemeColors = {
   background: {
-    /** For default neutral surface (pure black #000000) */
-    default: brandColor.black,
-    /** For sunken neutral surface below background/default. (#121314) */
+    /** For default neutral surface (grey1000 / #000000) */
+    default: brandColor.grey1000,
+    /** For sunken neutral surface below background/default. (grey1000 / #000000) */
     alternative: brandColor.grey1000,
-    /** For section bg usually over background/default (#31333A) */
-    section: brandColor.grey800,
-    /** For subsection bg usually over background/section (#252628) */
-    subsection: brandColor.grey700,
-    /** For muted neutral surface (#ffffff0a) */
-    muted: '#ffffff0a',
-    /** Hover state surface for background/default */
-    defaultHover: '#1c1d1f',
-    /** Pressed state surface for background/default */
-    defaultPressed: '#252628',
+    /** For section bg usually over background/default (grey900 / #141414) */
+    section: brandColor.grey900,
+    /** For subsection bg usually over background/section (grey800 / #1f1f1f) */
+    subsection: brandColor.grey800,
+    /** For muted neutral surface (#ffffff14) */
+    muted: '#ffffff14',
+    /** Hover state surface for background/default (grey900 / #141414) */
+    defaultHover: brandColor.grey900,
+    /** Pressed state surface for background/default (grey800 / #1f1f1f) */
+    defaultPressed: brandColor.grey800,
     /** Hover state surface for background/alternative (#0d0d0e) */
     alternativeHover: '#0d0d0e',
     /** Pressed state surface for background/alternative (#161617) */
     alternativePressed: '#161617',
-    /** Hover state surface for background/muted (#ffffff14) */
-    mutedHover: '#ffffff14',
-    /** Pressed state surface for background/muted (#ffffff1f) */
-    mutedPressed: '#ffffff1f',
-    /** General purpose hover state tint (#ffffff0a) */
-    hover: '#ffffff0a',
+    /** Hover state surface for background/muted (#ffffff1f) */
+    mutedHover: '#ffffff1f',
+    /** Pressed state surface for background/muted (#ffffff29) */
+    mutedPressed: '#ffffff29',
+    /** General purpose hover state tint (#ffffff14) */
+    hover: '#ffffff14',
     /** General purpose pressed state tint (#ffffff1f) */
     pressed: '#ffffff1f',
   },
@@ -55,8 +55,8 @@ export const colors: ThemeColors = {
   border: {
     /** Default color for borders */
     default: brandColor.grey500,
-    /** Muted color for borders (#ffffff14) */
-    muted: '#ffffff14',
+    /** Muted color for borders (#ffffff1f) */
+    muted: '#ffffff1f',
   },
   overlay: {
     /** Default color for overlays (scrim) (#030304b8) */
