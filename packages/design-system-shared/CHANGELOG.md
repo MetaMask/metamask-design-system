@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0]
 
-### Uncategorized
+### Added
 
-- feat(DSYS-478): migrate AvatarToken to ADR-0003 and ADR-0004 ([#1009](https://github.com/MetaMask/metamask-design-system/pull/1009))
-- feat: migrate AvatarAccount to ADR-0003 and ADR-0004 shared types (DSYS-468) ([#1015](https://github.com/MetaMask/metamask-design-system/pull/1015))
+- Added `AvatarToken` shared types (`AvatarTokenSize`, `AvatarTokenPropsShared`) for cross-platform use ([#1009](https://github.com/MetaMask/metamask-design-system/pull/1009))
+- Added `AvatarAccount` shared types (`AvatarAccountPropsShared`) for cross-platform use ([#1015](https://github.com/MetaMask/metamask-design-system/pull/1015))
 
 ## [0.7.0]
 
