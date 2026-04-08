@@ -149,6 +149,9 @@ export type { InputProps } from './Input';
 export { KeyValueColumn } from './KeyValueColumn';
 export type { KeyValueColumnProps } from './KeyValueColumn';
 
+export { KeyValueRow, KeyValueRowVariant } from './KeyValueRow';
+export type { KeyValueRowProps } from './KeyValueRow';
+
 export { Label } from './Label';
 export type { LabelProps } from './Label';
 
