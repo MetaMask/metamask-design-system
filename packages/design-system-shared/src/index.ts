@@ -66,6 +66,9 @@ export {
   type BannerAlertPropsShared,
 } from './types/BannerAlert';
 
+// BadgeNetwork types (ADR-0004)
+export { type BadgeNetworkPropsShared } from './types/BadgeNetwork';
+
 // BadgeWrapper types (ADR-0003 + ADR-0004)
 export {
   BadgeWrapperPositionAnchorShape,
