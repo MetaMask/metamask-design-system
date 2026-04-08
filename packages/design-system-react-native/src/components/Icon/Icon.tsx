@@ -1,7 +1,8 @@
+import { IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { IconColor, IconSize } from '../../types';
+import { IconColor } from '../../types';
 
 import { assetByIconName } from './Icon.assets';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
