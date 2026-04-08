@@ -7,8 +7,8 @@ import {
   TextColor,
   TextVariant,
 } from '../../types';
-import { BoxHorizontal } from '../BoxHorizontal';
-import { BoxVertical } from '../BoxVertical';
+import { BoxRow } from '../BoxRow';
+import { BoxColumn } from '../BoxColumn';
 import { ButtonIcon } from '../ButtonIcon';
 
 import type { KeyValueColumnProps } from './KeyValueColumn.types';
@@ -54,7 +54,7 @@ export const KeyValueColumn = ({
     );
 
   const keyBox = (
-    <BoxHorizontal
+    <BoxRow
       startAccessory={keyStartAccessory}
       endAccessory={keyEndAccessoryNode}
       textProps={{
@@ -68,11 +68,11 @@ export const KeyValueColumn = ({
       twClassName="w-full min-w-0"
     >
       {keyContent}
-    </BoxHorizontal>
+    </BoxRow>
   );
 
   const valueBox = (
-    <BoxHorizontal
+    <BoxRow
       startAccessory={valueStartAccessory}
       endAccessory={valueEndAccessoryNode}
       textProps={{
@@ -86,17 +86,17 @@ export const KeyValueColumn = ({
       twClassName="w-full min-w-0"
     >
       {valueContent}
-    </BoxHorizontal>
+    </BoxRow>
   );
 
   return (
-    <BoxVertical
+    <BoxColumn
       bottomAccessory={valueBox}
       twClassName={twClassName}
       {...viewProps}
     >
       {keyBox}
-    </BoxVertical>
+    </BoxColumn>
   );
 };
 
