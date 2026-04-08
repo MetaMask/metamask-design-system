@@ -1,7 +1,7 @@
+import { TextButtonSize } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { TextButtonSize } from '../../types';
 import { IconName } from '../Icon';
 import { Text, TextVariant } from '../Text';
 
