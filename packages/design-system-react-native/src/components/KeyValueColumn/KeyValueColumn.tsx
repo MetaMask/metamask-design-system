@@ -7,8 +7,8 @@ import {
   TextColor,
   TextVariant,
 } from '../../types';
-import { BoxRow } from '../BoxRow';
 import { BoxColumn } from '../BoxColumn';
+import { BoxRow } from '../BoxRow';
 import { ButtonIcon } from '../ButtonIcon';
 
 import type { KeyValueColumnProps } from './KeyValueColumn.types';
