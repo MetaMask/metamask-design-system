@@ -15,6 +15,14 @@ jest.mock('react-native-svg', () => {
   };
 });
 
+jest.mock('react-native-nitro-haptics', () => ({
+  Haptics: {
+    impact: jest.fn(),
+    notification: jest.fn(),
+    selection: jest.fn(),
+  },
+}), { virtual: true });
+
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock');
 

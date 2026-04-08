@@ -3385,6 +3385,8 @@ __metadata:
     react-native: "npm:^0.72.15"
     react-native-gesture-handler: "npm:2.12.0"
     react-native-jazzicon: "npm:^0.1.2"
+    react-native-nitro-haptics: "npm:^0.2.3"
+    react-native-nitro-modules: "npm:^0.25.0"
     react-native-reanimated: "npm:~3.3.0"
     react-native-safe-area-context: "npm:4.14.1"
     react-native-svg: "npm:^15.10.1"
@@ -3401,6 +3403,8 @@ __metadata:
     react: ">=18.2.0"
     react-native: ">=0.72.0"
     react-native-gesture-handler: ">=1.10.3"
+    react-native-nitro-haptics: ">=0.3.0"
+    react-native-nitro-modules: ">=0.25.0"
     react-native-reanimated: ">=3.3.0"
     react-native-safe-area-context: ">=4.0.0"
   languageName: unknown
@@ -18280,6 +18284,27 @@ __metadata:
   dependencies:
     prop-types: "npm:^15.5.10"
   checksum: 10/6c42fb381c5fab4cd17a6b574cbcca256deeebd202545456eea86d05a76c430cc11192564299c8cb1be8348dd9cc2d1decd642341b517294bb1959545262f603
+  languageName: node
+  linkType: hard
+
+"react-native-nitro-haptics@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "react-native-nitro-haptics@npm:0.2.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-nitro-modules: "*"
+  checksum: 10/7f17b002cd2d28a7b6669a454cb4943b18331fd3b2fd4b10ea3daf6cd051a4fb90c69e80d637968d6b96e7c1ec2adb3e28ccf114b9f0d143c30d5a514eb53d6b
+  languageName: node
+  linkType: hard
+
+"react-native-nitro-modules@npm:^0.25.0":
+  version: 0.25.2
+  resolution: "react-native-nitro-modules@npm:0.25.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/45f0c639d21da55302e641cc6a36ffd388efb3233d12d804807f422a37387079bda713e59482ab5a5cf7c0b867a0d68bc6df729c15a2e6035c2b2cbb87a0e28a
   languageName: node
   linkType: hard
 

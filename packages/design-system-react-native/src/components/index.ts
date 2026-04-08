@@ -107,7 +107,10 @@ export { Card } from './Card';
 export type { CardProps } from './Card';
 
 export { ButtonAnimated } from './temp-components/ButtonAnimated';
-export type { ButtonAnimatedProps } from './temp-components/ButtonAnimated';
+export type {
+  ButtonAnimatedProps,
+  HapticFeedbackStyle,
+} from './temp-components/ButtonAnimated';
 
 export { ButtonBase, ButtonBaseSize } from './ButtonBase';
 export type { ButtonBaseProps } from './ButtonBase';

@@ -36,6 +36,7 @@ export const ButtonBase = ({
   accessibilityRole = 'button',
   accessibilityActions,
   onAccessibilityAction,
+  hapticFeedback,
   ...props
 }: ButtonBaseProps) => {
   const tw = useTailwind();
@@ -93,6 +94,7 @@ export const ButtonBase = ({
   return (
     <ButtonAnimated
       disabled={isDisabled || isLoading}
+      hapticFeedback={hapticFeedback}
       accessibilityRole={accessibilityRole}
       accessibilityLabel={finalAccessibilityLabel}
       accessibilityHint={finalAccessibilityHint}
