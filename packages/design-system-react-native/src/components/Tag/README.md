@@ -68,12 +68,9 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   const tw = useTailwind();
 
   return (
-    <Tag
-      style={tw.style('bg-default', isActive && 'bg-success-default')}
-    >
+    <Tag style={tw.style('bg-default', isActive && 'bg-success-default')}>
       <Text>Conditional styling</Text>
     </Tag>
   );
 };
 ```
-
