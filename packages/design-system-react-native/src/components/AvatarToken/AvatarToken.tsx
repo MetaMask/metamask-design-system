@@ -1,7 +1,10 @@
+import {
+  AvatarBaseShape,
+  AvatarTokenSize,
+} from '@metamask/design-system-shared';
 import React, { useState } from 'react';
 import type { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
 
-import { AvatarTokenSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 import { ImageOrSvg } from '../temp-components/ImageOrSvg';
 

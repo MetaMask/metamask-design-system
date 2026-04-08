@@ -6,7 +6,6 @@ export { AvatarBaseSize as AvatarFaviconSize } from '@metamask/design-system-sha
 export { AvatarBaseSize as AvatarGroupSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarIconSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarNetworkSize } from '@metamask/design-system-shared';
-export { AvatarBaseSize as AvatarTokenSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarSize } from '@metamask/design-system-shared';
 
 /**
@@ -433,15 +432,15 @@ export enum IconColor {
  */
 export enum IconSize {
   /** Extra small - 12px */
-  Xs = '12',
+  Xs = 'xs',
   /** Small - 16px */
-  Sm = '16',
+  Sm = 'sm',
   /** Medium - 20px (Default) */
-  Md = '20',
+  Md = 'md',
   /** Large - 24px */
-  Lg = '24',
+  Lg = 'lg',
   /** Extra large - 32px */
-  Xl = '32',
+  Xl = 'xl',
 }
 
 // /////////////////////////////////////////////////////
@@ -618,6 +617,7 @@ export enum IconName {
   MoreVertical = 'MoreVertical',
   MountainFlag = 'MountainFlag',
   MusicNote = 'MusicNote',
+  NoPhotography = 'NoPhotography',
   Notification = 'Notification',
   PageInfo = 'PageInfo',
   Palette = 'Palette',

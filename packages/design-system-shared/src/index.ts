@@ -45,11 +45,20 @@ export {
   type HeaderSearchScreenPropsShared,
 } from './types/HeaderSearch';
 
+// KeyValueColumn types (ADR-0004)
+export { type KeyValueColumnPropsShared } from './types/KeyValueColumn';
+
 // ButtonFilter types (ADR-0004)
 export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 
 // AvatarNetwork types (ADR-0004)
 export { type AvatarNetworkPropsShared } from './types/AvatarNetwork';
+
+// AvatarToken types (ADR-0003 + ADR-0004)
+export {
+  AvatarTokenSize,
+  type AvatarTokenPropsShared,
+} from './types/AvatarToken';
 
 // BannerAlert types (ADR-0003 + ADR-0004)
 export {
