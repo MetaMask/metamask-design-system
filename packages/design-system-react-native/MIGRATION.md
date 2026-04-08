@@ -67,7 +67,6 @@ If you do not want back navigation, omit `goBack`.
 
 - `BoxHorizontal` has been renamed to `BoxRow`
 - `BoxVertical` has been renamed to `BoxColumn`
-- Corresponding shared types `BoxHorizontalPropsShared` → `BoxRowPropsShared` and `BoxVerticalPropsShared` → `BoxColumnPropsShared`
 
 **Migration:**
 
@@ -99,26 +98,9 @@ import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
 </BoxColumn>
 ```
 
-Shared type users:
-
-```tsx
-// Before (0.15.0)
-import type {
-  BoxHorizontalPropsShared,
-  BoxVerticalPropsShared,
-} from '@metamask/design-system-shared';
-
-// After (0.16.0)
-import type {
-  BoxRowPropsShared,
-  BoxColumnPropsShared,
-} from '@metamask/design-system-shared';
-```
-
 **Impact:**
 
 - Any import of `BoxHorizontal` or `BoxVertical` must be renamed
-- Any TypeScript references to `BoxHorizontalPropsShared` or `BoxVerticalPropsShared` must be updated
 
 #### KeyValueRow API
 

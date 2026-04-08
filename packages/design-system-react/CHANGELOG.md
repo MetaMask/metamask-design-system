@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Migrated `BadgeNetwork` type exports to `@metamask/design-system-shared`; imports from `@metamask/design-system-react` are unchanged ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
+- Updated `BadgeNetwork` type internals; imports from `@metamask/design-system-react` are unchanged ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
 
 ## [0.15.0]
 

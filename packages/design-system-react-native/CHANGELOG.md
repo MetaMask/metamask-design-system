@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - See [Migration Guide](./MIGRATION.md#from-version-0150-to-0160)
 - **BREAKING:** Refactored `KeyValueRow` API — removed the legacy stub-based composition (`KeyValueRowStubs`, `field`/`value` objects); use `keyLabel`, `value`, `variant`, and accessory props directly ([#1023](https://github.com/MetaMask/metamask-design-system/pull/1023))
   - See [Migration Guide](./MIGRATION.md#from-version-0150-to-0160)
-- Migrated `BadgeNetwork` type exports to `@metamask/design-system-shared`; imports from `@metamask/design-system-react-native` are unchanged ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
+- Updated `BadgeNetwork` type internals; imports from `@metamask/design-system-react-native` are unchanged ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
 
 ## [0.15.0]
 
