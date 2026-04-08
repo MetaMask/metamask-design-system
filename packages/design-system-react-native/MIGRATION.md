@@ -16,7 +16,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
-  - [From version 0.14.0 to 0.15.0](#from-version-0140-to-0150)
+  - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
   - [From version 0.13.0 to 0.14.0](#from-version-0130-to-0140)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
@@ -59,14 +59,55 @@ If you do not want back navigation, omit `goBack`.
 - Affects BottomSheet usages that previously relied on `shouldNavigateBack`.
 - Navigation behavior is now explicit and controlled by the host app callback.
 
-### From version 0.14.0 to 0.15.0
+### From version 0.15.0 to 0.16.0
+
+#### BoxHorizontal and BoxVertical renamed to BoxRow and BoxColumn
+
+**What Changed:**
+
+- `BoxHorizontal` has been renamed to `BoxRow`
+- `BoxVertical` has been renamed to `BoxColumn`
+
+**Migration:**
+
+```tsx
+// Before (0.15.0)
+import { BoxHorizontal, BoxVertical } from '@metamask/design-system-react-native';
+
+<BoxHorizontal gap={2}>
+  <Text>Left</Text>
+  <Text>Right</Text>
+</BoxHorizontal>
+
+<BoxVertical gap={4}>
+  <Text>Top</Text>
+  <Text>Bottom</Text>
+</BoxVertical>
+
+// After (0.16.0)
+import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
+
+<BoxRow gap={2}>
+  <Text>Left</Text>
+  <Text>Right</Text>
+</BoxRow>
+
+<BoxColumn gap={4}>
+  <Text>Top</Text>
+  <Text>Bottom</Text>
+</BoxColumn>
+```
+
+**Impact:**
+
+- Any import of `BoxHorizontal` or `BoxVertical` must be renamed
 
 #### KeyValueRow API
 
 **What changed:**
 
 - `KeyValueRow` no longer accepts `field` and `value` configuration objects. Use flat props: `keyLabel`, `value`, optional `variant`, start/end accessories, optional `keyTextProps` / `valueTextProps`, and optional `keyEndButtonIconProps` / `valueEndButtonIconProps`.
-- Layout is handled inside the component (`BoxHorizontal` / `Box`). The old stub API used to compose custom rows is removed.
+- Layout is handled inside the component (`BoxRow` / `Box`). The old stub API used to compose custom rows is removed.
 - `KeyValueRowVariant` is defined in `@metamask/design-system-shared` (shared props follow ADR-0003 / ADR-0004); React Native–specific props remain on `KeyValueRowProps` in this package.
 
 **Removed from the public API:**
@@ -84,13 +125,13 @@ If you do not want back navigation, omit `goBack`.
 Simple labels:
 
 ```tsx
-// Before (0.14.0)
+// Before (0.15.0)
 <KeyValueRow
   field={{ label: { text: 'Network' } }}
   value={{ label: { text: 'Ethereum Mainnet' } }}
 />
 
-// After (0.15.0)
+// After (0.16.0)
 <KeyValueRow keyLabel="Network" value="Ethereum Mainnet" />
 ```
 
@@ -100,7 +141,7 @@ Typography via predefined label objects → `keyTextProps` / `valueTextProps`:
 import { KeyValueRow, KeyValueRowVariant } from '@metamask/design-system-react-native';
 import { TextColor, TextVariant } from '@metamask/design-system-react-native';
 
-// Before (0.14.0)
+// Before (0.15.0)
 <KeyValueRow
   field={{
     label: {
@@ -118,7 +159,7 @@ import { TextColor, TextVariant } from '@metamask/design-system-react-native';
   }}
 />
 
-// After (0.15.0)
+// After (0.16.0)
 <KeyValueRow
   keyLabel="Fee"
   value="$2.59"
@@ -132,7 +173,7 @@ Icons with `side` → accessories (use start and/or end nodes; “both sides” 
 ```tsx
 import { Icon, IconColor, IconName, IconSize } from '@metamask/design-system-react-native';
 
-// Before (0.14.0) — icon on the left of the key label
+// Before (0.15.0) — icon on the left of the key label
 <KeyValueRow
   field={{
     label: { text: 'Network' },
@@ -141,7 +182,7 @@ import { Icon, IconColor, IconName, IconSize } from '@metamask/design-system-rea
   value={{ label: { text: 'Mainnet' } }}
 />
 
-// After (0.15.0)
+// After (0.16.0)
 <KeyValueRow
   keyLabel="Network"
   value="Mainnet"
@@ -154,7 +195,7 @@ Info icon that previously used `tooltip` → `keyEndButtonIconProps` and host-co
 ```tsx
 import { IconName } from '@metamask/design-system-react-native';
 
-// Before (0.14.0)
+// Before (0.15.0)
 <KeyValueRow
   field={{ label: { text: 'Limit' } }}
   value={{
@@ -167,7 +208,7 @@ import { IconName } from '@metamask/design-system-react-native';
   }}
 />
 
-// After (0.15.0) — implement modal / sheet / tooltip in onPress
+// After (0.16.0) — implement modal / sheet / tooltip in onPress
 <KeyValueRow
   keyLabel="Limit"
   value="Unlimited"
