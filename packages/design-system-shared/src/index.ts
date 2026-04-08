@@ -48,6 +48,12 @@ export {
 // KeyValueColumn types (ADR-0004)
 export { type KeyValueColumnPropsShared } from './types/KeyValueColumn';
 
+// KeyValueRow types (ADR-0003 + ADR-0004)
+export {
+  KeyValueRowVariant,
+  type KeyValueRowPropsShared,
+} from './types/KeyValueRow';
+
 // ButtonFilter types (ADR-0004)
 export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 
