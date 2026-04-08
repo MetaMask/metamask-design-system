@@ -118,7 +118,7 @@ export const StyleExample = () => (
 
 ## Migration from Mobile Component Library
 
-For detailed migration instructions from the Mobile component-library, see the [Migration Guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#icon-component).
+For detailed API mappings, breaking changes, and before/after examples, see the [Migration Guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#icon-component).
 
 ## References
 

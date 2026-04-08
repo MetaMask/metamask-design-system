@@ -1000,9 +1000,16 @@ The mobile and design-system Text components both extend `react-native` `TextPro
 
 ### Icon Component
 
-The Icon component has some API and enum changes when migrating from the mobile component-library.
+The mobile and MMDS `Icon` components both render SVG assets, but there are important enum, type-safety, and styling-surface differences.
 
 #### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                           | Design System Migration                                                     |
+| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `import Icon, { IconName, IconSize, IconColor } from '../../../component-library/components/Icons/Icon'` | `import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-react-native'` |
+| `import type { IconProps } from '../../../component-library/components/Icons/Icon'`      | `import type { IconProps } from '@metamask/design-system-react-native'`     |
 
 ##### Size Enum Changes
 
@@ -1020,21 +1027,43 @@ The Icon component has some API and enum changes when migrating from the mobile 
 
 ##### Color Prop Changes
 
-Mobile accepts `string | IconColor` for `color`, while the design system uses the `IconColor` enum.
+Legacy mobile accepts `string | IconColor` for `color`, while MMDS only accepts `IconColor` enum members.
 
-| Mobile Color                   | Design System                  |
-| ------------------------------ | ------------------------------ |
-| `IconColor.Default`            | `IconColor.IconDefault`        |
-| `IconColor.Alternative`        | `IconColor.IconAlternative`    |
-| `IconColor.Muted`              | `IconColor.IconMuted`          |
-| `IconColor.Primary`            | `IconColor.PrimaryDefault`     |
-| `IconColor.PrimaryAlternative` | `IconColor.PrimaryAlternative` |
-| `IconColor.Success`            | `IconColor.SuccessDefault`     |
-| `IconColor.Error`              | `IconColor.ErrorDefault`       |
-| `IconColor.ErrorAlternative`   | `IconColor.ErrorAlternative`   |
-| `IconColor.Warning`            | `IconColor.WarningDefault`     |
-| `IconColor.Info`               | `IconColor.InfoDefault`        |
-| `IconColor.Inverse`            | `IconColor.OverlayInverse`     |
+| Mobile Color                   | Design System                  | Change Type               |
+| ------------------------------ | ------------------------------ | ------------------------- |
+| `IconColor.Default`            | `IconColor.IconDefault`        | renamed (semantic enum)   |
+| `IconColor.Alternative`        | `IconColor.IconAlternative`    | renamed (semantic enum)   |
+| `IconColor.Muted`              | `IconColor.IconMuted`          | renamed (semantic enum)   |
+| `IconColor.Primary`            | `IconColor.PrimaryDefault`     | renamed (semantic enum)   |
+| `IconColor.PrimaryAlternative` | `IconColor.PrimaryAlternative` | renamed (semantic enum)   |
+| `IconColor.Success`            | `IconColor.SuccessDefault`     | renamed (semantic enum)   |
+| `IconColor.Error`              | `IconColor.ErrorDefault`       | renamed (semantic enum)   |
+| `IconColor.ErrorAlternative`   | `IconColor.ErrorAlternative`   | renamed (semantic enum)   |
+| `IconColor.Warning`            | `IconColor.WarningDefault`     | renamed (semantic enum)   |
+| `IconColor.Info`               | `IconColor.InfoDefault`        | renamed (semantic enum)   |
+| `IconColor.Inverse`            | `IconColor.OverlayInverse`     | renamed (semantic intent) |
+| Hex/string values (e.g. `#f6851b`) | removed                     | type narrowed             |
+
+##### Prop Surface Changes
+
+| Mobile API / Behavior               | Design System API / Behavior         | Change Type                | Notes                                                                 |
+| ----------------------------------- | ------------------------------------ | -------------------------- | --------------------------------------------------------------------- |
+| `name: IconName`                    | `name: IconName`                     | unchanged                  | icon selection remains enum-based                                     |
+| `size?: IconSize`                   | `size?: IconSize`                    | partially changed          | `Xss` and `XXL` removed                                                |
+| `color?: string \| IconColor`       | `color?: IconColor`                  | type narrowed              | migrate custom strings to semantic tokens                              |
+| `hitSlop?: number \| Insets`        | inherited from `ViewProps`           | unchanged                  | still supported                                                        |
+| `style?: StyleProp<ViewStyle>`      | inherited from `ViewProps`           | unchanged                  | still supported                                                        |
+| no Tailwind class prop              | `twClassName?: string`               | added in MMDS              | use for utility-token overrides                                        |
+
+##### Default and Behavior Changes
+
+| Concern                   | Mobile Behavior                                            | Design System Behavior                                             |
+| ------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------ |
+| Default size              | `IconSize.Md`                                              | `IconSize.Md`                                                      |
+| Default color             | `IconColor.Default`                                        | `IconColor.IconDefault`                                            |
+| Non-enum color values     | accepted (`string`)                                        | not accepted                                                       |
+| Color resolution          | switch statement maps enum values to theme colors          | Tailwind token classes and `currentColor` fill                    |
+| Utility styling           | no `twClassName` prop                                      | `twClassName` merged with token-based defaults                     |
 
 #### Migration Examples
 
@@ -1061,6 +1090,7 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+- MMDS `color` no longer accepts arbitrary string values; use `IconColor` tokens
 
 ### Checkbox Component
 
