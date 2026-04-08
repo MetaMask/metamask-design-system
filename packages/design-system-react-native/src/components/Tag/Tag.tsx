@@ -55,12 +55,14 @@ export const Tag: React.FC<TagProps> = ({
     </Text>
   );
 
-  const content =
-    label !== undefined
-      ? renderLabelText(label)
-      : isTextContent(children)
-        ? renderLabelText(children)
-        : children;
+  let content: React.ReactNode;
+  if (label !== undefined) {
+    content = renderLabelText(label);
+  } else if (isTextContent(children)) {
+    content = renderLabelText(children);
+  } else {
+    content = children;
+  }
 
   const mergedTwClassName = [
     TAG_LAYOUT.twClassName,

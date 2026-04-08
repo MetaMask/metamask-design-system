@@ -39,15 +39,11 @@ export const NoIcon: Story = {
 };
 
 export const StartIcon: Story = {
-  render: () => (
-    <Tag startIconName={IconName.Warning} label="Tag" />
-  ),
+  render: () => <Tag startIconName={IconName.Warning} label="Tag" />,
 };
 
 export const EndIcon: Story = {
-  render: () => (
-    <Tag endIconName={IconName.ArrowRight} label="Tag" />
-  ),
+  render: () => <Tag endIconName={IconName.ArrowRight} label="Tag" />,
 };
 
 const renderStartAndEndIcons = () => (
