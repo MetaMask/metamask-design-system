@@ -16,6 +16,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.14.0 to 0.15.0](#from-version-0140-to-0150)
   - [From version 0.13.0 to 0.14.0](#from-version-0130-to-0140)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
@@ -23,6 +24,84 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.14.0 to 0.15.0
+
+#### TitleStandard API
+
+If you adopted `TitleStandard` from a prerelease or internal branch that used `topLabel` or an optional `title`, apply the following when upgrading to **0.15.0+** (the first stable release that includes this component with the API below).
+
+**What changed:**
+
+- `title` is **required**. Omitting it is a type error; if you only need a trailing inline control, pass an empty string or another minimal `ReactNode` and use `titleAccessory`.
+- **`topLabel`** and **`topLabelProps`** are removed. Use **`topAccessory`** with a [`Text`](./src/components/Text/README.md) node (or any `ReactNode`) for content above the title row.
+- **`title`** and **`bottomLabel`** are typed as **`ReactNode`** (strings still receive default typography via [`BoxHorizontal`](./src/components/BoxHorizontal/README.md) / `TextOrChildren`).
+- The bottom row shows **`bottomLabel` or `bottomAccessory`**, not both: if `bottomLabel` is renderable, it is the only bottom row; otherwise a renderable `bottomAccessory` is rendered on its own.
+
+**Migration:**
+
+Before (preview / earlier API):
+
+```tsx
+<TitleStandard topLabel="Send" title="$4.42" bottomLabel="0.002 ETH" />
+
+<TitleStandard topLabel="Send" topLabelProps={{ testID: 'top' }} title="$4.42" />
+
+<TitleStandard titleAccessory={<Icon name={IconName.Info} size={IconSize.Sm} />} />
+```
+
+After (0.15.0+):
+
+```tsx
+import {
+  TitleStandard,
+  Text,
+  TextVariant,
+  TextColor,
+  FontWeight,
+  Icon,
+  IconName,
+  IconSize,
+} from '@metamask/design-system-react-native';
+
+<TitleStandard
+  topAccessory={
+    <Text
+      variant={TextVariant.BodySm}
+      fontWeight={FontWeight.Medium}
+      color={TextColor.TextAlternative}
+    >
+      Send
+    </Text>
+  }
+  title="$4.42"
+  bottomLabel="0.002 ETH"
+/>
+
+<TitleStandard
+  topAccessory={
+    <Text
+      variant={TextVariant.BodySm}
+      fontWeight={FontWeight.Medium}
+      color={TextColor.TextAlternative}
+      testID="top"
+    >
+      Send
+    </Text>
+  }
+  title="$4.42"
+/>
+
+<TitleStandard
+  title=""
+  titleAccessory={<Icon name={IconName.Info} size={IconSize.Sm} />}
+/>
+```
+
+**Impact:**
+
+- Affects any screen using `TitleStandard` with `topLabel` / `topLabelProps` or without `title`.
+- Shared types: import `TitleStandardPropsShared` from `@metamask/design-system-shared` if you extend the layout contract across platforms.
 
 ### From version 0.13.0 to 0.14.0
 

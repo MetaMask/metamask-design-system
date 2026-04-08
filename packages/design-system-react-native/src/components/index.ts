@@ -188,6 +188,12 @@ export type { TextFieldSearchProps } from './TextFieldSearch';
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 
+export { TitleStandard } from './TitleStandard';
+export type {
+  TitleStandardProps,
+  TitleStandardPropsShared,
+} from './TitleStandard';
+
 export {
   Toast,
   ToastVariant,
