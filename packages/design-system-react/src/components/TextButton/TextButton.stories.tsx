@@ -1,7 +1,7 @@
+import { TextButtonSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { TextButtonSize } from '../../types';
 import { IconName } from '../Icon';
 import { Text, TextVariant } from '../Text';
 
@@ -114,7 +114,7 @@ export const AsChild: Story = {
 
 export const IsInverse: Story = {
   render: (args) => (
-    <div className="rounded bg-primary-default p-4">
+    <div className="bg-primary-default rounded p-4">
       <TextButton {...args} isInverse>
         Inverse Button
       </TextButton>

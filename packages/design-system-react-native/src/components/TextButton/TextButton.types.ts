@@ -1,3 +1,5 @@
+import type { TextButtonPropsShared } from '@metamask/design-system-shared';
+
 import type { TextProps } from '../Text';
 
 /**
@@ -7,13 +9,10 @@ import type { TextProps } from '../Text';
 export type TextButtonProps = Omit<
   TextProps,
   'children' | 'color' | 'onPress'
-> & {
-  /**
-   * Content shown as the label.
-   */
-  children: React.ReactNode;
-  /**
-   * Called when the user presses the label. Primary interaction for this control.
-   */
-  onPress?: TextProps['onPress'];
-};
+> &
+  TextButtonPropsShared & {
+    /**
+     * Called when the user presses the label. Primary interaction for this control.
+     */
+    onPress?: TextProps['onPress'];
+  };

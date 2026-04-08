@@ -68,3 +68,6 @@ export {
   AvatarAccountVariant,
   type AvatarAccountPropsShared,
 } from './types/AvatarAccount';
+
+// TextButton types (ADR-0003 + ADR-0004)
+export { TextButtonSize, type TextButtonPropsShared } from './types/TextButton';
