@@ -9,13 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.0]
 
-### Uncategorized
+### Added
 
-- refactor: Renamed BoxVertical to BoxColumn and BoxHorizontal to BoxRow ([#1050](https://github.com/MetaMask/metamask-design-system/pull/1050))
-- feat: [DSRN] Update KeyValueRow ([#1023](https://github.com/MetaMask/metamask-design-system/pull/1023))
-- feat: [DSRN] Added HeaderSearch ([#1031](https://github.com/MetaMask/metamask-design-system/pull/1031))
-- feat(shared): migrate BadgeNetwork to ADR-0004 shared types (DSYS-480) ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
-- feat: [DSRN] Add KeyValueColumn ([#1046](https://github.com/MetaMask/metamask-design-system/pull/1046))
+- Added `BadgeNetworkPropsShared` shared type for cross-platform use ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
+- Added `HeaderSearchVariant`, `HeaderSearchPropsShared`, `HeaderSearchInlinePropsShared`, and `HeaderSearchScreenPropsShared` shared types for cross-platform use ([#1031](https://github.com/MetaMask/metamask-design-system/pull/1031))
+- Added `KeyValueRowVariant` const object (`Summary`, `Input`) and `KeyValueRowPropsShared` shared type for cross-platform use ([#1023](https://github.com/MetaMask/metamask-design-system/pull/1023))
+- Added `KeyValueColumnPropsShared` shared type for cross-platform use ([#1046](https://github.com/MetaMask/metamask-design-system/pull/1046))
+
+### Changed
+
+- **BREAKING:** Renamed `BoxHorizontalPropsShared` to `BoxRowPropsShared` and `BoxVerticalPropsShared` to `BoxColumnPropsShared` ([#1050](https://github.com/MetaMask/metamask-design-system/pull/1050))
+  - See [Migration Guide](../design-system-react-native/MIGRATION.md#from-version-0150-to-0160)
 
 ## [0.8.0]
 
