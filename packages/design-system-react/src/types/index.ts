@@ -6,7 +6,6 @@ export { AvatarBaseSize as AvatarFaviconSize } from '@metamask/design-system-sha
 export { AvatarBaseSize as AvatarGroupSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarIconSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarNetworkSize } from '@metamask/design-system-shared';
-export { AvatarBaseSize as AvatarTokenSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarSize } from '@metamask/design-system-shared';
 
 /**
@@ -664,6 +663,7 @@ export enum IconName {
   MoreVertical = 'MoreVertical',
   MountainFlag = 'MountainFlag',
   MusicNote = 'MusicNote',
+  NoPhotography = 'NoPhotography',
   Notification = 'Notification',
   PageInfo = 'PageInfo',
   Palette = 'Palette',

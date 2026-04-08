@@ -1,6 +1,7 @@
+import { AvatarBaseShape } from '@metamask/design-system-shared';
 import React, { forwardRef, useState } from 'react';
 
-import { AvatarFaviconSize, AvatarBaseShape } from '../../types';
+import { AvatarFaviconSize } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
