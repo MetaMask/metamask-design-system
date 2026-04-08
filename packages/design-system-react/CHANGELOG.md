@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(shared): migrate BadgeNetwork to ADR-0004 shared types (DSYS-480) ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
+
 ## [0.15.0]
 
 ### Added

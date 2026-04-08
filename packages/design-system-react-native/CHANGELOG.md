@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: Renamed BoxVertical to BoxColumn and BoxHorizontal to BoxRow ([#1050](https://github.com/MetaMask/metamask-design-system/pull/1050))
+- feat: [DSRN] Update KeyValueRow ([#1023](https://github.com/MetaMask/metamask-design-system/pull/1023))
+- feat: [DSRN] Added HeaderSearch ([#1031](https://github.com/MetaMask/metamask-design-system/pull/1031))
+- feat(shared): migrate BadgeNetwork to ADR-0004 shared types (DSYS-480) ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
+- feat: [DSRN] Add KeyValueColumn ([#1046](https://github.com/MetaMask/metamask-design-system/pull/1046))
+
 ## [0.15.0]
 
 ### Added
