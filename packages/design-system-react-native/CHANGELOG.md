@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.0]
+
+### Added
+
+- Added `HeaderSearch` component for in-screen and inline search experiences ([#1031](https://github.com/MetaMask/metamask-design-system/pull/1031))
+- Added `KeyValueColumn` component for vertically-stacked key/value layouts ([#1046](https://github.com/MetaMask/metamask-design-system/pull/1046))
+
+### Changed
+
+- **BREAKING:** Renamed `BoxHorizontal` to `BoxRow` and `BoxVertical` to `BoxColumn` ([#1050](https://github.com/MetaMask/metamask-design-system/pull/1050))
+  - See [Migration Guide](./MIGRATION.md#from-version-0150-to-0160)
+- **BREAKING:** Refactored `KeyValueRow` API — removed the legacy stub-based composition (`KeyValueRowStubs`, `field`/`value` objects); use `keyLabel`, `value`, `variant`, and accessory props directly ([#1023](https://github.com/MetaMask/metamask-design-system/pull/1023))
+  - See [Migration Guide](./MIGRATION.md#from-version-0150-to-0160)
+- Updated `BadgeNetwork` type internals; imports from `@metamask/design-system-react-native` are unchanged ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
+
 ## [0.15.0]
 
 ### Added
@@ -299,7 +314,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.15.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.16.0...HEAD
+[0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.15.0...@metamask/design-system-react-native@0.16.0
 [0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.14.0...@metamask/design-system-react-native@0.15.0
 [0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.13.0...@metamask/design-system-react-native@0.14.0
 [0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.12.0...@metamask/design-system-react-native@0.13.0
