@@ -1,6 +1,9 @@
+import {
+  AvatarBaseShape,
+  AvatarTokenSize,
+} from '@metamask/design-system-shared';
 import React, { forwardRef, useState } from 'react';
 
-import { AvatarTokenSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 
 import type { AvatarTokenProps } from './AvatarToken.types';

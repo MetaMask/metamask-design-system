@@ -5,6 +5,7 @@ import React from 'react';
 
 import { AvatarIconSeverity, AvatarIconSize } from '../../types';
 import { IconName } from '../Icon';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
 import { AvatarIcon } from './AvatarIcon';
 import {
@@ -109,7 +110,12 @@ describe('AvatarIcon', () => {
   it.each(Object.values(AvatarIconSize))(
     'applies correct icon size for size %s',
     (size) => {
-      const expectedSize = MAP_AVATARICON_SIZE_ICONSIZE[size].toString();
+      const { result } = renderHook(() => useTailwind());
+      const tw = result.current;
+
+      const iconSize = MAP_AVATARICON_SIZE_ICONSIZE[size];
+      const expectedStyle = tw.style(TWCLASSMAP_ICON_SIZE_DIMENSION[iconSize]);
+
       const { getByTestId } = render(
         <AvatarIcon
           iconName={IconName.Add}
@@ -119,8 +125,8 @@ describe('AvatarIcon', () => {
         />,
       );
       const icon = getByTestId('icon');
-      expect(icon.props.style[0].width.toString()).toStrictEqual(expectedSize);
-      expect(icon.props.style[0].height.toString()).toStrictEqual(expectedSize);
+      expect(icon.props.style[0].width).toStrictEqual(expectedStyle.width);
+      expect(icon.props.style[0].height).toStrictEqual(expectedStyle.height);
     },
   );
 });

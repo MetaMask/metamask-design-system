@@ -1,17 +1,10 @@
-import type { AvatarNetworkProps } from '../AvatarNetwork';
-import type { ImageOrSvgSrc } from '../temp-components/ImageOrSvg';
+import type { BadgeNetworkPropsShared } from '@metamask/design-system-shared';
 
-export type BadgeNetworkProps = Omit<AvatarNetworkProps, 'size' | 'shape'> & {
-  /**
-   * Optional prop for the source of the image or SVG.
-   */
-  src?: ImageOrSvgSrc;
-  /**
-   * Optional props for network name, to be used to calculate the fallbackText.
-   */
-  name?: string;
-  /**
-   * Optional text to be rendered when the content fails to render
-   */
-  fallbackText?: string;
-};
+import type { AvatarNetworkProps } from '../AvatarNetwork';
+
+/**
+ * BadgeNetwork component props (React Native platform-specific)
+ * Extends shared props from @metamask/design-system-shared with React Native-specific platform concerns
+ */
+export type BadgeNetworkProps = Omit<AvatarNetworkProps, 'size' | 'shape'> &
+  BadgeNetworkPropsShared;

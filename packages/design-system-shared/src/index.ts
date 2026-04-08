@@ -37,6 +37,17 @@ export { type BoxHorizontalPropsShared } from './types/BoxHorizontal';
 // BoxVertical types (ADR-0004)
 export { type BoxVerticalPropsShared } from './types/BoxVertical';
 
+// HeaderSearch types (ADR-0003 + ADR-0004)
+export {
+  HeaderSearchVariant,
+  type HeaderSearchInlinePropsShared,
+  type HeaderSearchPropsShared,
+  type HeaderSearchScreenPropsShared,
+} from './types/HeaderSearch';
+
+// KeyValueColumn types (ADR-0004)
+export { type KeyValueColumnPropsShared } from './types/KeyValueColumn';
+
 // KeyValueRow types (ADR-0003 + ADR-0004)
 export {
   KeyValueRowVariant,
@@ -49,11 +60,20 @@ export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 // AvatarNetwork types (ADR-0004)
 export { type AvatarNetworkPropsShared } from './types/AvatarNetwork';
 
+// AvatarToken types (ADR-0003 + ADR-0004)
+export {
+  AvatarTokenSize,
+  type AvatarTokenPropsShared,
+} from './types/AvatarToken';
+
 // BannerAlert types (ADR-0003 + ADR-0004)
 export {
   BannerAlertSeverity,
   type BannerAlertPropsShared,
 } from './types/BannerAlert';
+
+// BadgeNetwork types (ADR-0004)
+export { type BadgeNetworkPropsShared } from './types/BadgeNetwork';
 
 // BadgeWrapper types (ADR-0003 + ADR-0004)
 export {
