@@ -1,16 +1,16 @@
-# BoxVertical
+# BoxColumn
 
-BoxVertical lays out optional top and bottom accessories with a text or child region in a vertical column. The public API combines [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.tsx) (`children`, `textProps` for the middle) with a root [Box](../Box/Box.tsx): `flexDirection` is always column. Other [Box](../Box/Box.types.ts) layout and `View` props apply to that root.
+BoxColumn lays out optional top and bottom accessories with a text or child region in a vertical column. The public API combines [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.tsx) (`children`, `textProps` for the middle) with a root [Box](../Box/Box.tsx): `flexDirection` is always column. Other [Box](../Box/Box.types.ts) layout and `View` props apply to that root.
 
 ```tsx
-import { BoxVertical } from '@metamask/design-system-react-native';
+import { BoxColumn } from '@metamask/design-system-react-native';
 
-<BoxVertical>Label</BoxVertical>;
+<BoxColumn>Label</BoxColumn>;
 ```
 
 ## Props
 
-Structural props (`children`, accessories) match `BoxVerticalPropsShared` from `@metamask/design-system-shared` (ADR-0004); React Native intersects that with [Box](../Box/Box.types.ts) (omitting Box `children` and `flexDirection`) and adds `textProps` for [Text](../Text/Text.tsx). Main content is always the `children` / `textProps` pair below, and the column direction is fixed.
+Structural props (`children`, accessories) match `BoxColumnPropsShared` from `@metamask/design-system-shared` (ADR-0004); React Native intersects that with [Box](../Box/Box.types.ts) (omitting Box `children` and `flexDirection`) and adds `textProps` for [Text](../Text/Text.tsx). Main content is always the `children` / `textProps` pair below, and the column direction is fixed.
 
 ### `children`
 
@@ -21,11 +21,11 @@ Main content: a string (rendered via `Text` using `textProps`) or any `ReactNode
 | `ReactNode \| string` | Yes      | N/A     |
 
 ```tsx
-<BoxVertical>Plain string label</BoxVertical>
+<BoxColumn>Plain string label</BoxColumn>
 
-<BoxVertical>
+<BoxColumn>
   <CustomNode />
-</BoxVertical>
+</BoxColumn>
 ```
 
 ### `textProps`
@@ -39,11 +39,11 @@ Optional props passed to `Text` when `children` is a string. Same as [TextOrChil
 ```tsx
 import { TextColor, TextVariant } from '@metamask/design-system-react-native';
 
-<BoxVertical
+<BoxColumn
   textProps={{ variant: TextVariant.BodyMd, color: TextColor.TextDefault }}
 >
   Styled label
-</BoxVertical>;
+</BoxColumn>;
 ```
 
 ### `topAccessory`
@@ -75,7 +75,7 @@ Tailwind classes merged onto the root `Box`.
 | `string` | No       | `undefined` |
 
 ```tsx
-<BoxVertical twClassName="gap-2 p-2">Label</BoxVertical>
+<BoxColumn twClassName="gap-2 p-2">Label</BoxColumn>
 ```
 
 ### `style`

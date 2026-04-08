@@ -10,7 +10,7 @@ import {
   TextVariant,
 } from '../../types';
 import { Box } from '../Box';
-import { BoxHorizontal } from '../BoxHorizontal';
+import { BoxRow } from '../BoxRow';
 import { ButtonIcon } from '../ButtonIcon';
 
 import type { KeyValueRowProps } from './KeyValueRow.types';
@@ -66,7 +66,7 @@ export const KeyValueRow = ({
     );
 
   const keyBox = (
-    <BoxHorizontal
+    <BoxRow
       startAccessory={keyStartAccessory}
       endAccessory={keyEndAccessoryNode}
       textProps={{
@@ -79,11 +79,11 @@ export const KeyValueRow = ({
       }}
     >
       {keyContent}
-    </BoxHorizontal>
+    </BoxRow>
   );
 
   const valueBox = (
-    <BoxHorizontal
+    <BoxRow
       startAccessory={valueStartAccessory}
       endAccessory={valueEndAccessoryNode}
       textProps={{
@@ -97,11 +97,11 @@ export const KeyValueRow = ({
       twClassName="flex-1 min-w-0 justify-end"
     >
       {valueContent}
-    </BoxHorizontal>
+    </BoxRow>
   );
 
   return (
-    <BoxHorizontal
+    <BoxRow
       endAccessory={valueBox}
       gap={4}
       style={[
@@ -114,7 +114,7 @@ export const KeyValueRow = ({
       {...viewProps}
     >
       <Box twClassName="shrink-0">{keyBox}</Box>
-    </BoxHorizontal>
+    </BoxRow>
   );
 };
 

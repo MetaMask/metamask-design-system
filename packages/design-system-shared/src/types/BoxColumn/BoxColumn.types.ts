@@ -3,10 +3,10 @@ import type { ReactNode } from 'react';
 import type { TextOrChildrenPropsShared } from '../TextOrChildren';
 
 /**
- * BoxVertical component shared props (ADR-0004)
+ * BoxColumn component shared props (ADR-0004)
  * Platform-independent properties shared across React and React Native.
  */
-export type BoxVerticalPropsShared = TextOrChildrenPropsShared & {
+export type BoxColumnPropsShared = TextOrChildrenPropsShared & {
   /**
    * Optional node rendered above the text/children.
    */

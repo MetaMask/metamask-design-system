@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
-import { BoxHorizontal } from '../BoxHorizontal';
+import { BoxRow } from '../BoxRow';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { TextVariant } from '../Text';
 
@@ -64,7 +64,7 @@ export const HeaderRoot = ({
       const titleNode =
         isReactNodeRenderable(title) && title !== '' ? title : null;
       return (
-        <BoxHorizontal
+        <BoxRow
           endAccessory={titleAccessory}
           textProps={{
             variant: TextVariant.HeadingLg,
@@ -72,7 +72,7 @@ export const HeaderRoot = ({
           }}
         >
           {titleNode}
-        </BoxHorizontal>
+        </BoxRow>
       );
     }
     return null;

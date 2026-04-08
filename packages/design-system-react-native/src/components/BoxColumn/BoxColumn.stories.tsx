@@ -8,12 +8,12 @@ import { ButtonIcon } from '../ButtonIcon';
 import { IconName } from '../Icon';
 import { TextColor, TextVariant } from '../Text';
 
-import { BoxVertical } from './BoxVertical';
-import type { BoxVerticalProps } from './BoxVertical.types';
+import { BoxColumn } from './BoxColumn';
+import type { BoxColumnProps } from './BoxColumn.types';
 
-const meta: Meta<BoxVerticalProps> = {
-  title: 'Components/BoxVertical',
-  component: BoxVertical,
+const meta: Meta<BoxColumnProps> = {
+  title: 'Components/BoxColumn',
+  component: BoxColumn,
   args: {
     children: 'Label with optional accessories',
     textProps: {
@@ -30,14 +30,14 @@ const meta: Meta<BoxVerticalProps> = {
 };
 
 export default meta;
-type Story = StoryObj<BoxVerticalProps>;
+type Story = StoryObj<BoxColumnProps>;
 
 export const Default: Story = {
   render: (args) => {
     const tw = useTailwind();
     return (
       <View style={tw`p-4`}>
-        <BoxVertical {...args} />
+        <BoxColumn {...args} />
       </View>
     );
   },
@@ -48,14 +48,14 @@ export const TopAccessory: Story = {
     const tw = useTailwind();
     return (
       <View style={tw`p-4`}>
-        <BoxVertical
+        <BoxColumn
           {...args}
           topAccessory={
             <Box twClassName="w-6 h-6 rounded-full bg-primary-default" />
           }
         >
           {args.children}
-        </BoxVertical>
+        </BoxColumn>
       </View>
     );
   },
@@ -66,12 +66,12 @@ export const BottomAccessory: Story = {
     const tw = useTailwind();
     return (
       <View style={tw`p-4`}>
-        <BoxVertical
+        <BoxColumn
           {...args}
           bottomAccessory={<ButtonIcon iconName={IconName.Info} />}
         >
           {args.children}
-        </BoxVertical>
+        </BoxColumn>
       </View>
     );
   },
@@ -82,13 +82,13 @@ export const TopAndBottomAccessories: Story = {
     const tw = useTailwind();
     return (
       <View style={tw`p-4`}>
-        <BoxVertical
+        <BoxColumn
           {...args}
           topAccessory={<Box twClassName="w-5 h-5 rounded bg-icon-default" />}
           bottomAccessory={<ButtonIcon iconName={IconName.Info} />}
         >
           {args.children}
-        </BoxVertical>
+        </BoxColumn>
       </View>
     );
   },

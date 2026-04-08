@@ -4,11 +4,11 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { BoxVertical } from './BoxVertical';
+import { BoxRow } from './BoxRow';
 
-const ROOT_TEST_ID = 'box-vertical-root';
+const ROOT_TEST_ID = 'text-with-accessories';
 
-describe('BoxVertical', () => {
+describe('BoxRow', () => {
   let tw: ReturnType<typeof useTailwind>;
 
   beforeAll(() => {
@@ -17,7 +17,7 @@ describe('BoxVertical', () => {
 
   describe('when children is a string', () => {
     it('renders text content', () => {
-      const { getByText } = render(<BoxVertical>Sample label</BoxVertical>);
+      const { getByText } = render(<BoxRow>Sample label</BoxRow>);
       expect(getByText('Sample label')).toBeOnTheScreen();
     });
   });
@@ -25,87 +25,87 @@ describe('BoxVertical', () => {
   describe('when children is not a string', () => {
     it('renders child components', () => {
       const { getByText } = render(
-        <BoxVertical>
+        <BoxRow>
           <Text>Nested content</Text>
-        </BoxVertical>,
+        </BoxRow>,
       );
       expect(getByText('Nested content')).toBeOnTheScreen();
     });
   });
 
-  describe('when topAccessory is provided', () => {
-    it('renders topAccessory before text', () => {
+  describe('when startAccessory is provided', () => {
+    it('renders startAccessory before text', () => {
       const { getByTestId, getByText } = render(
-        <BoxVertical
+        <BoxRow
           testID={ROOT_TEST_ID}
-          topAccessory={<Text testID="top-icon">T</Text>}
+          startAccessory={<Text testID="start-icon">S</Text>}
         >
           Label
-        </BoxVertical>,
+        </BoxRow>,
       );
-      expect(getByTestId('top-icon')).toBeOnTheScreen();
+      expect(getByTestId('start-icon')).toBeOnTheScreen();
       expect(getByText('Label')).toBeOnTheScreen();
     });
   });
 
-  describe('when bottomAccessory is provided', () => {
-    it('renders bottomAccessory after text', () => {
+  describe('when endAccessory is provided', () => {
+    it('renders endAccessory after text', () => {
       const { getByTestId, getByText } = render(
-        <BoxVertical
+        <BoxRow
           testID={ROOT_TEST_ID}
-          bottomAccessory={<Text testID="bottom-badge">Badge</Text>}
+          endAccessory={<Text testID="end-badge">Badge</Text>}
         >
           Label
-        </BoxVertical>,
+        </BoxRow>,
       );
       expect(getByText('Label')).toBeOnTheScreen();
-      expect(getByTestId('bottom-badge')).toBeOnTheScreen();
+      expect(getByTestId('end-badge')).toBeOnTheScreen();
     });
   });
 
   describe('when both accessories are provided', () => {
-    it('renders topAccessory, text, then bottomAccessory', () => {
+    it('renders startAccessory, text, then endAccessory', () => {
       const { getByTestId, getByText } = render(
-        <BoxVertical
+        <BoxRow
           testID={ROOT_TEST_ID}
-          topAccessory={<Text testID="top">T</Text>}
-          bottomAccessory={<Text testID="bottom">B</Text>}
+          startAccessory={<Text testID="start">S</Text>}
+          endAccessory={<Text testID="end">E</Text>}
         >
           Middle
-        </BoxVertical>,
+        </BoxRow>,
       );
-      expect(getByTestId('top')).toBeOnTheScreen();
+      expect(getByTestId('start')).toBeOnTheScreen();
       expect(getByText('Middle')).toBeOnTheScreen();
-      expect(getByTestId('bottom')).toBeOnTheScreen();
+      expect(getByTestId('end')).toBeOnTheScreen();
     });
   });
 
   describe('root layout', () => {
-    it('applies flex column to root', () => {
+    it('applies default flex row, center align, and gap to root', () => {
       const { getByTestId } = render(
-        <BoxVertical testID={ROOT_TEST_ID}>Content</BoxVertical>,
+        <BoxRow testID={ROOT_TEST_ID}>Content</BoxRow>,
       );
       const root = getByTestId(ROOT_TEST_ID);
-      expect(root).toHaveStyle(tw`flex-col`);
+      expect(root).toHaveStyle(tw`flex-row items-center gap-1`);
     });
   });
 
   describe('twClassName', () => {
     it('merges twClassName with root styles', () => {
       const { getByTestId } = render(
-        <BoxVertical testID={ROOT_TEST_ID} twClassName="p-2">
+        <BoxRow testID={ROOT_TEST_ID} twClassName="gap-0 p-2">
           Content
-        </BoxVertical>,
+        </BoxRow>,
       );
       const root = getByTestId(ROOT_TEST_ID);
-      expect(root).toHaveStyle(tw`p-2`);
+      expect(root).toHaveStyle(tw`gap-0 p-2`);
     });
   });
 
   describe('ViewProps extension', () => {
     it('passes testID to root Box', () => {
       const { getByTestId } = render(
-        <BoxVertical testID={ROOT_TEST_ID}>Content</BoxVertical>,
+        <BoxRow testID={ROOT_TEST_ID}>Content</BoxRow>,
       );
       expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
     });
