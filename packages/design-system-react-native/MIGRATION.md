@@ -6,6 +6,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
+  - [ButtonBase Component](#buttonbase-component)
   - [BottomSheet Component](#bottomsheet-component)
   - [BottomSheetHeader Component](#bottomsheetheader-component)
   - [BottomSheetFooter Component](#bottomsheetfooter-component)
@@ -285,6 +286,162 @@ The design system Button adds these props not available in the old mobile Button
 - `startIconName` / `endIconName` — icon names for leading/trailing icons
 - `loadingText` — custom text during loading state
 - `twClassName` — Tailwind utility class overrides
+
+### ButtonBase Component
+
+The `ButtonBase` component is a low-level building block for styled buttons. It has significant API changes from the mobile component-library version.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                   | Design System Migration                                                       |
+| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| `import ButtonBase from '.../component-library/components/Buttons/Button/foundation/ButtonBase'` | `import { ButtonBase } from '@metamask/design-system-react-native'`           |
+| `import { ButtonBaseProps } from '.../ButtonBase.types'`                                         | `import type { ButtonBaseProps } from '@metamask/design-system-react-native'` |
+| `import { ButtonSize } from '.../Buttons/Button'`                                                | `import { ButtonBaseSize } from '@metamask/design-system-react-native'`       |
+
+##### Content Model: `label` → `children`
+
+The old `ButtonBase` used a `label` prop. The new one uses `children`.
+
+| Mobile Pattern                            | Design System Migration                     |
+| ----------------------------------------- | ------------------------------------------- |
+| `<ButtonBase label="Submit" />`           | `<ButtonBase>Submit</ButtonBase>`           |
+| `<ButtonBase label={<View>...</View>} />` | `<ButtonBase><View>...</View></ButtonBase>` |
+| `<ButtonBase label={variable} />`         | `<ButtonBase>{variable}</ButtonBase>`       |
+
+##### Size Enum
+
+`ButtonSize` pixel-string values are replaced by `ButtonBaseSize` lowercase string identifiers.
+
+| Mobile Value                 | Design System Value          | Notes            |
+| ---------------------------- | ---------------------------- | ---------------- |
+| `ButtonSize.Sm` (`'32'`)     | `ButtonBaseSize.Sm` (`'sm'`) | value changed    |
+| `ButtonSize.Md` (`'40'`)     | `ButtonBaseSize.Md` (`'md'`) | value changed    |
+| `ButtonSize.Lg` (`'48'`)     | `ButtonBaseSize.Lg` (`'lg'`) | value changed    |
+| `ButtonSize.Auto` (`'auto'`) | Removed                      | use default size |
+
+##### Width: `width` → `isFullWidth`
+
+The `ButtonWidthTypes` enum is removed.
+
+| Mobile Pattern                  | Design System Migration  |
+| ------------------------------- | ------------------------ |
+| `width={ButtonWidthTypes.Full}` | `isFullWidth`            |
+| `width={ButtonWidthTypes.Auto}` | Remove (auto is default) |
+
+##### Label Styling Props Removed
+
+The old `ButtonBase` accepted `labelColor` and `labelTextVariant` to control the inner `Text`. The new API exposes a `textProps` pass-through instead.
+
+| Mobile Prop                                   | Design System Migration                                                                             |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `labelColor={TextColor.Default}`              | Removed — handled internally; override via `textProps={{ color: TextColor.TextDefault }}`           |
+| `labelTextVariant={TextVariant.BodyMDMedium}` | Removed — override via `textProps={{ variant: TextVariant.BodyMd, fontWeight: FontWeight.Medium }}` |
+
+##### `loading` → `isLoading`
+
+| Mobile Prop  | Design System Prop | Notes     |
+| ------------ | ------------------ | --------- |
+| `loading`    | `isLoading`        | renamed   |
+| `isDisabled` | `isDisabled`       | unchanged |
+
+##### New Props
+
+The design system `ButtonBase` adds these props not available in the mobile version:
+
+- `isLoading` — shows an animated spinner and hides button content
+- `loadingText` — optional text shown alongside the spinner
+- `startAccessory` / `endAccessory` — arbitrary `ReactNode` slots at start/end (in addition to `startIconName`/`endIconName`)
+- `textClassName` / `iconClassName` — pressed-state-aware Tailwind class functions
+- `twClassName` — string or `(pressed: boolean) => string` for container overrides
+
+#### Migration Examples
+
+##### Simple string label
+
+Before (Mobile):
+
+```tsx
+import ButtonBase from '../../../component-library/components/Buttons/Button/foundation/ButtonBase';
+import {
+  ButtonSize,
+  ButtonWidthTypes,
+} from '../../../component-library/components/Buttons/Button';
+
+<ButtonBase
+  label="Continue"
+  size={ButtonSize.Lg}
+  width={ButtonWidthTypes.Full}
+  onPress={handleContinue}
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonBase,
+  ButtonBaseSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonBase size={ButtonBaseSize.Lg} isFullWidth onPress={handleContinue}>
+  Continue
+</ButtonBase>;
+```
+
+##### With icons and label styling
+
+Before (Mobile):
+
+```tsx
+import ButtonBase from '../../../component-library/components/Buttons/Button/foundation/ButtonBase';
+import {
+  ButtonSize,
+  ButtonWidthTypes,
+} from '../../../component-library/components/Buttons/Button';
+import { IconName } from '../../../component-library/components/Icons/Icon';
+import {
+  TextColor,
+  TextVariant,
+} from '../../../component-library/components/Texts/Text';
+
+<ButtonBase
+  label={energyLabel}
+  startIconName={IconName.Flash}
+  size={ButtonSize.Md}
+  width={ButtonWidthTypes.Full}
+  labelTextVariant={TextVariant.BodyMDMedium}
+  labelColor={theme.colors.text.default}
+  style={styles.buttonBase}
+  testID="resource-toggle-energy"
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonBase,
+  ButtonBaseSize,
+  FontWeight,
+  TextVariant,
+} from '@metamask/design-system-react-native';
+import { IconName } from '@metamask/design-system-react-native';
+
+<ButtonBase
+  startIconName={IconName.Flash}
+  size={ButtonBaseSize.Md}
+  isFullWidth
+  textProps={{ variant: TextVariant.BodyMd, fontWeight: FontWeight.Medium }}
+  style={styles.buttonBase}
+  testID="resource-toggle-energy"
+  onPress={() => onChange('energy')}
+>
+  {energyLabel}
+</ButtonBase>;
+```
 
 ### BottomSheet Component
 
