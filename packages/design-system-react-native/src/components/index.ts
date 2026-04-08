@@ -130,6 +130,13 @@ export type { HeaderBaseProps } from './HeaderBase';
 export { HeaderRoot } from './HeaderRoot';
 export type { HeaderRootProps } from './HeaderRoot';
 
+export { HeaderSearch, HeaderSearchVariant } from './HeaderSearch';
+export type {
+  HeaderSearchProps,
+  HeaderSearchScreenProps,
+  HeaderSearchInlineProps,
+} from './HeaderSearch';
+
 export { HeaderStandard } from './HeaderStandard';
 export type { HeaderStandardProps } from './HeaderStandard';
 

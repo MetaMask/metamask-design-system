@@ -37,6 +37,14 @@ export { type BoxHorizontalPropsShared } from './types/BoxHorizontal';
 // BoxVertical types (ADR-0004)
 export { type BoxVerticalPropsShared } from './types/BoxVertical';
 
+// HeaderSearch types (ADR-0003 + ADR-0004)
+export {
+  HeaderSearchVariant,
+  type HeaderSearchInlinePropsShared,
+  type HeaderSearchPropsShared,
+  type HeaderSearchScreenPropsShared,
+} from './types/HeaderSearch';
+
 // KeyValueColumn types (ADR-0004)
 export { type KeyValueColumnPropsShared } from './types/KeyValueColumn';
 
