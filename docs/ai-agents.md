@@ -20,6 +20,9 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 ├── CLAUDE.md                   # Layer 1: Entry point (40-120 lines)
 ├── .cursor/rules/              # Layer 2: Focused rules (200-400 lines each)
 │   └── *.md                   # Individual rule files
+├── .cursor/automations/        # Layer 2.5: Version-controlled automation specs
+│   ├── README.md              # Automation operating model
+│   └── *.md                   # One spec per automation
 └── docs/                       # Layer 3: High-level guides
     └── ai-agents.md           # This file - strategy explanation
 ```
@@ -81,6 +84,26 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 - **Actionable:** Tell agents what to do, not theory
 - **Reference-based:** Rules point to canonical code examples in the codebase rather than duplicating them
 - **Maintainable:** Checklists easier to update than narratives
+
+## Layer 2.5: .cursor/automations/ (Automation Specs)
+
+**Purpose:** Keep Cursor Cloud Automation logic reviewable in git.
+
+**Why:** Automations are configured in Cursor UI, but UI state is not code-reviewed by default. Specs in `.cursor/automations/` provide auditable history and explicit trigger/PR contracts.
+
+**Operating Model:**
+
+1. Edit automation markdown specs in `.cursor/automations/`.
+2. Review and merge spec changes via PR.
+3. Sync merged spec changes into Cursor UI automation settings.
+4. Treat UI as deployment target, repo markdown as canonical source.
+
+**Conventions:**
+
+- One markdown file per automation where possible.
+- Include explicit trigger definitions and PR title/body contracts.
+- Use deterministic identifiers (`Fixes: DSYS-<id>`, version markers).
+- Prefer file-path-based comparison/audit instructions over vague prompts.
 
 ## Layer 3: docs/ (High-Level Guides)
 
