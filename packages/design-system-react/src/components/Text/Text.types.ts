@@ -1,9 +1,4 @@
-import type {
-  FontFamily,
-  FontStyle,
-  FontWeight,
-  TextPropsShared,
-} from '@metamask/design-system-shared';
+import type { TextPropsShared } from '@metamask/design-system-shared';
 
 import type { OverflowWrap, TextAlign, TextTransform } from '../../types';
 
@@ -16,25 +11,6 @@ export type TextProps = TextPropsShared & {
    * Optional prop for additional CSS classes to be applied to the Text component.
    */
   className?: string;
-  /**
-   * Optional prop to control the font weight of the text.
-   * Regular: 400
-   * Medium: 500
-   * Bold: 600
-   */
-  fontWeight?: FontWeight;
-  /**
-   * Optional prop to adjust the font family.
-   * Default: Geist
-   * Accent: MM Sans
-   * Hero: MM Poly
-   */
-  fontFamily?: FontFamily;
-  /**
-   * Optional prop to control the font style of the text.
-   * Options: Normal, Italic
-   */
-  fontStyle?: FontStyle;
   /**
    * Optional prop to apply text transformation to the content.
    * Options: Uppercase, Lowercase, Capitalize, Normal

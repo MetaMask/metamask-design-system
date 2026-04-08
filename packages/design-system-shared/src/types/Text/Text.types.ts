@@ -174,4 +174,23 @@ export type TextPropsShared = {
    * @default TextColor.TextDefault
    */
   color?: TextColor;
+  /**
+   * Optional prop to control the font weight of the text.
+   * Regular: 400
+   * Medium: 500
+   * Bold: 600
+   */
+  fontWeight?: FontWeight;
+  /**
+   * Optional prop to adjust the font family.
+   * Default: Geist
+   * Accent: MM Sans
+   * Hero: MM Poly
+   */
+  fontFamily?: FontFamily;
+  /**
+   * Optional prop to control the font style of the text.
+   * Options: Normal, Italic
+   */
+  fontStyle?: FontStyle;
 };
