@@ -1,12 +1,7 @@
+import { FontWeight, TextColor, TextVariant } from '@metamask/design-system-shared';
 import React from 'react';
 
-import {
-  ButtonIconSize,
-  FontWeight,
-  IconColor,
-  TextColor,
-  TextVariant,
-} from '../../types';
+import { ButtonIconSize, IconColor } from '../../types';
 import { BoxColumn } from '../BoxColumn';
 import { BoxRow } from '../BoxRow';
 import { ButtonIcon } from '../ButtonIcon';
