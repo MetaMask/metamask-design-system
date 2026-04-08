@@ -54,6 +54,18 @@ describe('Tag', () => {
     expect(getByText('From label')).toBeOnTheScreen();
   });
 
+  it('renders string children with tag text styling when label is omitted', () => {
+    const { getByText } = render(<Tag>String child</Tag>);
+
+    expect(getByText('String child')).toBeOnTheScreen();
+  });
+
+  it('renders number children with tag text styling when label is omitted', () => {
+    const { getByText } = render(<Tag>{42}</Tag>);
+
+    expect(getByText('42')).toBeOnTheScreen();
+  });
+
   it('prefers label over string children', () => {
     const { getByText, queryByText } = render(
       <Tag label="Label wins">Children lose</Tag>,
@@ -120,5 +132,16 @@ describe('Tag', () => {
     );
 
     expect(getByTestId('tag-start-accessory')).toBeOnTheScreen();
+  });
+
+  it('renders endAccessory when no end icon', () => {
+    const { getByTestId } = render(
+      <Tag
+        label="With end accessory"
+        endAccessory={<Text testID="tag-end-accessory">←</Text>}
+      />,
+    );
+
+    expect(getByTestId('tag-end-accessory')).toBeOnTheScreen();
   });
 });
