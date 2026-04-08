@@ -6,21 +6,21 @@
   /* Background default should be the darkest shade, 0 elevation.
   Section is +1 elevation, subsection is +2 elevation.
   Alternative should be deprecated. */
-  --color-background-default: #000000;
-  --color-background-section: var(--brand-colors-grey-grey800);
-  --color-background-subsection: var(--brand-colors-grey-grey700);
+  --color-background-default: var(--brand-colors-grey-grey1000);
+  --color-background-section: var(--brand-colors-grey-grey900);
+  --color-background-subsection: var(--brand-colors-grey-grey800);
   --color-background-alternative: var(--brand-colors-grey-grey1000);
 
   /* Applied to interactive elements, such as buttons.
   For dark mode, we apply pure white with 4% opacity so these
   tokens inherit the background hue of 264.5. */
-  --color-background-muted: #ffffff0a;
-  --color-background-muted-hover: #ffffff14;
-  --color-background-muted-pressed: #ffffff1f;
+  --color-background-muted: #ffffff14;
+  --color-background-muted-hover: #ffffff1f;
+  --color-background-muted-pressed: #ffffff29;
 
   /* Ensures visual consistency with section and subsection. */
-  --color-background-default-hover: var(--brand-colors-grey-grey800);
-  --color-background-default-pressed: var(--brand-colors-grey-grey700);
+  --color-background-default-hover: var(--brand-colors-grey-grey900);
+  --color-background-default-pressed: var(--brand-colors-grey-grey800);
 
   /* Hover state surface for background/alternative (#0d0d0e) */
   --color-background-alternative-hover: #0d0d0e;
@@ -29,7 +29,7 @@
   /* These have opacities of pure white for general usage. 
   We set 8% for hover and 12% for pressed so these tokens pick up
   background hues and are consistent with +1 and +2 elevations.*/
-  --color-background-hover: #ffffff0a;
+  --color-background-hover: #ffffff14;
   --color-background-pressed: #ffffff1f;
 
   /* These are our content colors. 
@@ -51,7 +51,7 @@
   We use 8% opacify of pure white for border-muted so it maintains
   sufficient contrast on bg-default and bg-section.*/
   --color-border-default: var(--brand-colors-grey-grey500);
-  --color-border-muted: #ffffff14;
+  --color-border-muted: #ffffff1f;
 
   /* Derived from the same hue as bg-default, 264.5, for visual
   consistency. Ensures we don't have too much "red".

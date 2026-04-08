@@ -14,13 +14,13 @@ export const brandColor: BrandColor = {
   // Grey
   grey600: '#47484a',
   // Grey
-  grey700: '#252628',
+  grey700: '#292929',
   // Grey
-  grey800: '#1c1d1f',
+  grey800: '#1f1f1f',
   // Grey
-  grey900: '#131416',
+  grey900: '#141414',
   // Grey
-  grey1000: '#0c0d0f',
+  grey1000: '#000000',
   // Grey
   grey050: '#f3f3f4',
   // Grey
