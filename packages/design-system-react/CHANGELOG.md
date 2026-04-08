@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add NoPhotography icon to design system ([#1056](https://github.com/MetaMask/metamask-design-system/pull/1056))
+- feat(DSYS-478): migrate AvatarToken to ADR-0003 and ADR-0004 ([#1009](https://github.com/MetaMask/metamask-design-system/pull/1009))
+- feat: migrate AvatarAccount to ADR-0003 and ADR-0004 shared types (DSYS-468) ([#1015](https://github.com/MetaMask/metamask-design-system/pull/1015))
+- chore: [DSYS-616] create/update Checkbox migration docs ([#1020](https://github.com/MetaMask/metamask-design-system/pull/1020))
+
 ## [0.14.0]
 
 ### Changed
