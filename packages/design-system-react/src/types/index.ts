@@ -1,59 +1,12 @@
-/**
- * AvatarBase - size
- */
-export enum AvatarBaseSize {
-  /**
-   * Represents an extra small avatar size (16px).
-   */
-  Xs = 'xs',
-  /**
-   * Represents a small avatar size (24px).
-   */
-  Sm = 'sm',
-  /**
-   * Represents a medium avatar size (32px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large avatar size (40px).
-   */
-  Lg = 'lg',
-  /**
-   * Represents an extra large avatar size (48px).
-   */
-  Xl = 'xl',
-}
-export { AvatarBaseSize as AvatarAccountSize };
-export { AvatarBaseSize as AvatarFaviconSize };
-export { AvatarBaseSize as AvatarGroupSize };
-export { AvatarBaseSize as AvatarIconSize };
-export { AvatarBaseSize as AvatarNetworkSize };
-export { AvatarBaseSize as AvatarTokenSize };
-export { AvatarBaseSize as AvatarSize };
-
-/**
- * Avatar - shape
- */
-export enum AvatarShape {
-  /**
-   * Represents a circular Avatar.
-   */
-  Circle = 'circle',
-  /**
-   * Represents a squared Avatar
-   */
-  Square = 'square',
-}
-export { AvatarShape as AvatarBaseShape };
-
-/**
- * AvatarAccount - variant
- */
-export enum AvatarAccountVariant {
-  Blockies = 'blockies',
-  Jazzicon = 'jazzicon',
-  Maskicon = 'maskicon',
-}
+export {
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarFaviconSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarGroupSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarIconSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarNetworkSize } from '@metamask/design-system-shared';
+export { AvatarBaseSize as AvatarSize } from '@metamask/design-system-shared';
 
 /**
  * AvatarIcon - severity
@@ -710,6 +663,7 @@ export enum IconName {
   MoreVertical = 'MoreVertical',
   MountainFlag = 'MountainFlag',
   MusicNote = 'MusicNote',
+  NoPhotography = 'NoPhotography',
   Notification = 'Notification',
   PageInfo = 'PageInfo',
   Palette = 'Palette',

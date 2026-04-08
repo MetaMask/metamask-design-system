@@ -21,39 +21,41 @@ const mockOpenDialog = jest.fn();
 jest.mock('../BottomSheetDialog', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { forwardRef, useImperativeHandle } = require('react');
-  return forwardRef(
-    (
-      {
-        children,
-        onClose,
-        onOpen,
-        panGestureHandlerProps,
-      }: {
-        children?: unknown;
-        onClose?: (hasPendingAction?: boolean) => void;
-        onOpen?: (hasPendingAction?: boolean) => void;
-        panGestureHandlerProps?: unknown;
+  return {
+    BottomSheetDialog: forwardRef(
+      (
+        {
+          children,
+          onClose,
+          onOpen,
+          panGestureHandlerProps,
+        }: {
+          children?: unknown;
+          onClose?: (hasPendingAction?: boolean) => void;
+          onOpen?: (hasPendingAction?: boolean) => void;
+          panGestureHandlerProps?: unknown;
+        },
+        ref: unknown,
+      ) => {
+        capturedDialogOnClose = onClose;
+        capturedDialogOnOpen = onOpen;
+        capturedPanGestureHandlerProps = panGestureHandlerProps;
+        useImperativeHandle(ref, () => ({
+          onCloseDialog: (callback?: () => void) => {
+            mockCloseDialog();
+            onClose?.();
+            callback?.();
+          },
+          onOpenDialog: (callback?: () => void) => {
+            mockOpenDialog();
+            onOpen?.();
+            callback?.();
+          },
+        }));
+        return children;
       },
-      ref: unknown,
-    ) => {
-      capturedDialogOnClose = onClose;
-      capturedDialogOnOpen = onOpen;
-      capturedPanGestureHandlerProps = panGestureHandlerProps;
-      useImperativeHandle(ref, () => ({
-        onCloseDialog: (callback?: () => void) => {
-          mockCloseDialog();
-          onClose?.();
-          callback?.();
-        },
-        onOpenDialog: (callback?: () => void) => {
-          mockOpenDialog();
-          onOpen?.();
-          callback?.();
-        },
-      }));
-      return children;
-    },
-  );
+    ),
+  };
 });
 
 const noop = () => undefined;
@@ -163,10 +165,10 @@ describe('BottomSheet', () => {
     expect(onOpen).toHaveBeenCalledTimes(1);
   });
 
-  it('calls goBack when shouldNavigateBack is true and dialog closes', () => {
+  it('calls goBack when dialog closes', () => {
     const goBack = jest.fn();
     render(
-      <BottomSheet goBack={goBack} shouldNavigateBack>
+      <BottomSheet goBack={goBack}>
         <View />
       </BottomSheet>,
     );
@@ -178,25 +180,10 @@ describe('BottomSheet', () => {
     expect(goBack).toHaveBeenCalledTimes(1);
   });
 
-  it('does not call goBack when shouldNavigateBack is false', () => {
-    const goBack = jest.fn();
-    render(
-      <BottomSheet goBack={goBack} shouldNavigateBack={false}>
-        <View />
-      </BottomSheet>,
-    );
-
-    act(() => {
-      capturedDialogOnClose?.();
-    });
-
-    expect(goBack).not.toHaveBeenCalled();
-  });
-
   it('does not call goBack twice on duplicate close signals', () => {
     const goBack = jest.fn();
     render(
-      <BottomSheet goBack={goBack} shouldNavigateBack>
+      <BottomSheet goBack={goBack}>
         <View />
       </BottomSheet>,
     );

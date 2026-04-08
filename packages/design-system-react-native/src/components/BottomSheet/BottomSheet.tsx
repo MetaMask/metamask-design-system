@@ -12,7 +12,7 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import BottomSheetDialog from '../BottomSheetDialog';
+import { BottomSheetDialog } from '../BottomSheetDialog';
 import type { BottomSheetDialogRef } from '../BottomSheetDialog';
 import { BottomSheetOverlay } from '../BottomSheetOverlay/BottomSheetOverlay';
 
@@ -32,7 +32,6 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
       style,
       twClassName,
       isInteractable = true,
-      shouldNavigateBack = true,
       isFullscreen = false,
       keyboardAvoidingViewEnabled = true,
       panGestureHandlerProps,
@@ -62,9 +61,9 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     }, [onOpen]);
 
     const onCloseCB = useCallback(() => {
-      if (shouldNavigateBack && !didNavigateBackRef.current) {
+      if (goBack && !didNavigateBackRef.current) {
         didNavigateBackRef.current = true;
-        goBack();
+        goBack?.();
       }
 
       const callback = postCallback.current;
@@ -77,7 +76,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
         postCallback.current = undefined;
         callback?.();
       }
-    }, [goBack, onClose, shouldNavigateBack]);
+    }, [goBack, onClose]);
 
     // Dismiss the sheet when Android back button is pressed.
     useEffect(() => {

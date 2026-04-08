@@ -1,10 +1,13 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { AvatarAccountSize, AvatarAccountVariant } from '../../types';
-
 import { AvatarAccount } from './AvatarAccount';
-import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
+import {
+  MAP_AVATARACCOUNT_SIZE_SIZENUMBER,
+  SAMPLE_AVATARACCOUNT_ADDRESSES,
+} from './AvatarAccount.constants';
+
+import { AvatarAccountSize, AvatarAccountVariant } from '.';
 
 jest.mock('react-native-svg', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -69,10 +72,10 @@ describe('AvatarAccount', () => {
     const avatarAccount = getByTestId('avatar-account');
     expect(avatarAccount).toBeDefined();
     expect(avatarAccount.props.style[0].width).toStrictEqual(
-      Number(AvatarAccountSize.Md),
+      MAP_AVATARACCOUNT_SIZE_SIZENUMBER[AvatarAccountSize.Md],
     );
     expect(avatarAccount.props.style[0].height).toStrictEqual(
-      Number(AvatarAccountSize.Md),
+      MAP_AVATARACCOUNT_SIZE_SIZENUMBER[AvatarAccountSize.Md],
     );
   });
 
@@ -92,10 +95,10 @@ describe('AvatarAccount', () => {
     const avatarAccount = getByTestId('avatar-account');
     expect(avatarAccount).toBeDefined();
     expect(avatarAccount.props.style[0].width).toStrictEqual(
-      Number(AvatarAccountSize.Xl),
+      MAP_AVATARACCOUNT_SIZE_SIZENUMBER[AvatarAccountSize.Xl],
     );
     expect(avatarAccount.props.style[0].height).toStrictEqual(
-      Number(AvatarAccountSize.Xl),
+      MAP_AVATARACCOUNT_SIZE_SIZENUMBER[AvatarAccountSize.Xl],
     );
   });
 

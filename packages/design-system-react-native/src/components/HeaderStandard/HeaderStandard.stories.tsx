@@ -5,7 +5,7 @@ import { Box } from '../Box';
 import { IconName } from '../Icon';
 import { Text, TextVariant } from '../Text';
 
-import HeaderStandard from './HeaderStandard';
+import { HeaderStandard } from './HeaderStandard';
 import type { HeaderStandardProps } from './HeaderStandard.types';
 
 const meta: Meta<HeaderStandardProps> = {

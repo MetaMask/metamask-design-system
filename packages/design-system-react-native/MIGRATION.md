@@ -6,15 +6,210 @@ This guide provides detailed instructions for migrating your project from one ve
 
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
+  - [BottomSheet Component](#bottomsheet-component)
+  - [BottomSheetHeader Component](#bottomsheetheader-component)
+  - [BottomSheetFooter Component](#bottomsheetfooter-component)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
+  - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.14.0 to 0.15.0](#from-version-0140-to-0150)
+  - [From version 0.13.0 to 0.14.0](#from-version-0130-to-0140)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
+
+## Version Updates
+
+### From version 0.13.0 to 0.14.0
+
+#### BottomSheet navigation callback change
+
+**What Changed:**
+
+- `BottomSheet` removed the `shouldNavigateBack` prop.
+- `BottomSheet` now accepts an optional `goBack` callback for explicit host-controlled navigation behavior.
+
+**Migration:**
+
+Before (0.13.0):
+
+```tsx
+<BottomSheet isVisible={isVisible} onClose={handleClose} shouldNavigateBack />
+```
+
+After (0.14.0):
+
+```tsx
+<BottomSheet
+  isVisible={isVisible}
+  onClose={handleClose}
+  goBack={() => navigation.goBack()}
+/>
+```
+
+If you do not want back navigation, omit `goBack`.
+
+**Impact:**
+
+- Affects BottomSheet usages that previously relied on `shouldNavigateBack`.
+- Navigation behavior is now explicit and controlled by the host app callback.
+
+### From version 0.14.0 to 0.15.0
+
+#### KeyValueRow API
+
+**What changed:**
+
+- `KeyValueRow` no longer accepts `field` and `value` configuration objects. Use flat props: `keyLabel`, `value`, optional `variant`, start/end accessories, optional `keyTextProps` / `valueTextProps`, and optional `keyEndButtonIconProps` / `valueEndButtonIconProps`.
+- Layout is handled inside the component (`BoxHorizontal` / `Box`). The old stub API used to compose custom rows is removed.
+- `KeyValueRowVariant` is defined in `@metamask/design-system-shared` (shared props follow ADR-0003 / ADR-0004); React Native–specific props remain on `KeyValueRowProps` in this package.
+
+**Removed from the public API:**
+
+- `KeyValueRowStubs` (and the underlying `Root` / `Section` / `Label` building blocks exported for custom rows)
+- Constants: `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes` (KeyValueRow-specific)
+- Types: `KeyValueRowTooltip`, `KeyValueRowField`, `PreDefinedKeyValueRowLabel`, `KeyValueRowLabelProps`, `KeyValueRowRootProps`, `KeyValueSectionProps`
+
+**Tooltip / info affordance:**
+
+- The previous `tooltip` object (`title`, `content`, etc.) on `field` or `value` is not supported. Use `keyEndButtonIconProps` or `valueEndButtonIconProps` with `iconName` and `onPress`. The row only renders a `ButtonIcon`; **title and body content are not rendered by `KeyValueRow`**. Open a modal, bottom sheet, or your own tooltip from `onPress`.
+
+**Migration (examples):**
+
+Simple labels:
+
+```tsx
+// Before (0.14.0)
+<KeyValueRow
+  field={{ label: { text: 'Network' } }}
+  value={{ label: { text: 'Ethereum Mainnet' } }}
+/>
+
+// After (0.15.0)
+<KeyValueRow keyLabel="Network" value="Ethereum Mainnet" />
+```
+
+Typography via predefined label objects → `keyTextProps` / `valueTextProps`:
+
+```tsx
+import { KeyValueRow, KeyValueRowVariant } from '@metamask/design-system-react-native';
+import { TextColor, TextVariant } from '@metamask/design-system-react-native';
+
+// Before (0.14.0)
+<KeyValueRow
+  field={{
+    label: {
+      text: 'Fee',
+      variant: TextVariant.BodySm,
+      color: TextColor.TextAlternative,
+    },
+  }}
+  value={{
+    label: {
+      text: '$2.59',
+      variant: TextVariant.BodySm,
+      color: TextColor.SuccessDefault,
+    },
+  }}
+/>
+
+// After (0.15.0)
+<KeyValueRow
+  keyLabel="Fee"
+  value="$2.59"
+  keyTextProps={{ variant: TextVariant.BodySm, color: TextColor.TextAlternative }}
+  valueTextProps={{ variant: TextVariant.BodySm, color: TextColor.SuccessDefault }}
+/>
+```
+
+Icons with `side` → accessories (use start and/or end nodes; “both sides” means passing both `*StartAccessory` and `*EndAccessory` when you need icons on each side):
+
+```tsx
+import { Icon, IconColor, IconName, IconSize } from '@metamask/design-system-react-native';
+
+// Before (0.14.0) — icon on the left of the key label
+<KeyValueRow
+  field={{
+    label: { text: 'Network' },
+    icon: { name: IconName.Wifi, color: IconColor.PrimaryDefault, size: IconSize.Sm },
+  }}
+  value={{ label: { text: 'Mainnet' } }}
+/>
+
+// After (0.15.0)
+<KeyValueRow
+  keyLabel="Network"
+  value="Mainnet"
+  keyStartAccessory={<Icon name={IconName.Wifi} color={IconColor.PrimaryDefault} size={IconSize.Sm} />}
+/>
+```
+
+Info icon that previously used `tooltip` → `keyEndButtonIconProps` and host-controlled UI:
+
+```tsx
+import { IconName } from '@metamask/design-system-react-native';
+
+// Before (0.14.0)
+<KeyValueRow
+  field={{ label: { text: 'Limit' } }}
+  value={{
+    label: { text: 'Unlimited' },
+    tooltip: {
+      title: 'About limits',
+      content: 'Explanation shown in a tooltip…',
+      onPress: () => showTooltip(),
+    },
+  }}
+/>
+
+// After (0.15.0) — implement modal / sheet / tooltip in onPress
+<KeyValueRow
+  keyLabel="Limit"
+  value="Unlimited"
+  valueEndButtonIconProps={{
+    iconName: IconName.Question,
+    onPress: () => showTooltip(),
+  }}
+/>
+```
+
+Taller row for input-style screens:
+
+```tsx
+import {
+  KeyValueRow,
+  KeyValueRowVariant,
+} from '@metamask/design-system-react-native';
+import { Icon, IconName, IconSize } from '@metamask/design-system-react-native';
+
+<KeyValueRow
+  keyLabel="Pay with"
+  value="Debit or credit"
+  variant={KeyValueRowVariant.Input}
+  valueStartAccessory={<Icon name={IconName.Card} size={IconSize.Sm} />}
+  valueEndAccessory={<Icon name={IconName.ArrowDown} size={IconSize.Sm} />}
+/>;
+```
+
+Custom React nodes for key or value remain supported:
+
+```tsx
+<KeyValueRow
+  keyLabel="Account"
+  value={<AvatarAccount address={address} size={AvatarAccountSize.Xs} />}
+/>
+```
+
+**Instructions for downstream consumers:**
+
+- In **MetaMask Mobile**, **MetaMask extension**, and any shared packages, search for `KeyValueRow` and migrate every usage away from `field` / `value` objects to the new props.
+- Remove imports of deleted symbols (`KeyValueRowStubs`, `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes`, and the removed types).
+- If your app defines **KeyValueColumn** or another wrapper that forwards the old `KeyValueRow` props, update that component’s API and all call sites to match the new shape.
 
 ## From Mobile Component Library
 
@@ -244,6 +439,383 @@ The design system Button adds these props not available in the old mobile Button
 - `loadingText` — custom text during loading state
 - `twClassName` — Tailwind utility class overrides
 
+### BottomSheet Component
+
+The `BottomSheet` component has two key breaking changes when migrating from the mobile component-library:
+
+1. Navigation is no longer handled internally — the old component called `useNavigation()` itself when `shouldNavigateBack` was `true`.
+2. The `shouldNavigateBack` prop no longer exists — pass an optional `goBack` callback instead; if provided it is always called when the sheet closes.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                            | Design System Migration                                                                   |
+| --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `import BottomSheet, { BottomSheetRef } from '.../component-library/components/BottomSheets/BottomSheet'` | `import { BottomSheet, type BottomSheetRef } from '@metamask/design-system-react-native'` |
+
+##### `shouldNavigateBack` + internal navigation → optional `goBack` prop
+
+The old mobile component accepted a `shouldNavigateBack` boolean and called `useNavigation().goBack()` itself. The DS component removes both `shouldNavigateBack` and the internal navigation call. Pass a `goBack` callback when you want navigation to happen on close.
+
+| Mobile Pattern                                         | Design System Migration                                         |
+| ------------------------------------------------------ | --------------------------------------------------------------- |
+| `shouldNavigateBack` — controls whether to navigate    | Removed — pass `goBack` to navigate, omit it to skip navigation |
+| No `goBack` prop — `useNavigation()` called internally | `goBack={navigation.goBack}` — caller provides the function     |
+| `shouldNavigateBack={false}` — no navigation on close  | Omit `goBack` prop                                              |
+
+Obtain `navigation` via the `useNavigation()` hook from `@react-navigation/native`:
+
+```tsx
+import { useNavigation } from '@react-navigation/native';
+
+const navigation = useNavigation();
+```
+
+##### `onClose` Callback Signature Unchanged
+
+`onClose?: (hasPendingAction?: boolean) => void` works the same in both versions — it is called **after** the close animation completes, before `goBack` fires (when `goBack` is provided).
+
+#### Migration Examples
+
+##### Standard Modal (navigate back on close)
+
+Before (Mobile):
+
+```tsx
+import BottomSheet, {
+  BottomSheetRef,
+} from '../../../component-library/components/BottomSheets/BottomSheet';
+
+function MyModal() {
+  const sheetRef = useRef<BottomSheetRef>(null);
+
+  return (
+    <BottomSheet ref={sheetRef} shouldNavigateBack>
+      {/* content */}
+    </BottomSheet>
+  );
+}
+```
+
+After (Design System):
+
+```tsx
+import { useNavigation } from '@react-navigation/native';
+import {
+  BottomSheet,
+  type BottomSheetRef,
+} from '@metamask/design-system-react-native';
+
+function MyModal() {
+  const navigation = useNavigation();
+  const sheetRef = useRef<BottomSheetRef>(null);
+
+  return (
+    <BottomSheet ref={sheetRef} goBack={navigation.goBack}>
+      {/* content */}
+    </BottomSheet>
+  );
+}
+```
+
+##### Modal without back navigation
+
+Before (Mobile):
+
+```tsx
+<BottomSheet ref={sheetRef} shouldNavigateBack={false}>
+  {/* content */}
+</BottomSheet>
+```
+
+After (Design System — omit `goBack`):
+
+```tsx
+<BottomSheet ref={sheetRef}>{/* content */}</BottomSheet>
+```
+
+##### Modal with onClose Callback
+
+Before (Mobile):
+
+```tsx
+<BottomSheet ref={sheetRef} shouldNavigateBack onClose={handleDismiss}>
+  {/* content */}
+</BottomSheet>
+```
+
+After (Design System):
+
+```tsx
+<BottomSheet ref={sheetRef} goBack={navigation.goBack} onClose={handleDismiss}>
+  {/* content */}
+</BottomSheet>
+```
+
+##### Adding to an Existing DS Import Block
+
+If the file already imports from `@metamask/design-system-react-native`, add `BottomSheet` and `BottomSheetRef` to the existing block rather than creating a second import:
+
+```tsx
+// Before
+import {
+  Button,
+  ButtonVariant,
+  Text,
+  TextVariant,
+} from '@metamask/design-system-react-native';
+import BottomSheet, {
+  BottomSheetRef,
+} from '.../component-library/.../BottomSheet';
+
+// After — single consolidated import
+import {
+  BottomSheet,
+  type BottomSheetRef,
+  Button,
+  ButtonVariant,
+  Text,
+  TextVariant,
+} from '@metamask/design-system-react-native';
+```
+
+#### API Differences
+
+The DS `BottomSheet` exposes `goBack?: () => void` and `keyboardAvoidingViewEnabled?: boolean` alongside all `BottomSheetDialog` props (`isFullscreen`, `isInteractable`, `onClose`, `ref`). The `shouldNavigateBack` prop from the old mobile version does not exist in the DS component.
+
+---
+
+### BottomSheetHeader Component
+
+The `BottomSheetHeader` component is nearly identical between the old mobile component-library and the DS version. Most files can be migrated by simply changing the import with no JSX changes required.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                    | Design System Migration                                                    |
+| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `import BottomSheetHeader from '.../component-library/components/BottomSheets/BottomSheetHeader'` | `import { BottomSheetHeader } from '@metamask/design-system-react-native'` |
+
+##### Removed Prop: `endAccessory`
+
+The old mobile `BottomSheetHeader` exposed an `endAccessory` slot for arbitrary JSX. The DS version does **not** have this prop — it only surfaces `onClose`/`closeButtonProps` and `onBack`/`backButtonProps`.
+
+If your `BottomSheetHeader` uses `endAccessory`, **keep the old CL import** until the DS component adds equivalent support. Do not migrate those files.
+
+```tsx
+// ❌ Cannot migrate — endAccessory not supported in DS BottomSheetHeader
+import BottomSheetHeader from '.../component-library/components/BottomSheets/BottomSheetHeader';
+
+<BottomSheetHeader
+  endAccessory={<ButtonIcon iconName={IconName.Close} onPress={handleClose} />}
+/>;
+```
+
+#### Migration Examples
+
+##### Header with Close Button
+
+Before (Mobile):
+
+```tsx
+import BottomSheetHeader from '../../../component-library/components/BottomSheets/BottomSheetHeader';
+
+<BottomSheetHeader onClose={handleClose}>
+  <Text variant={TextVariant.HeadingMD}>{title}</Text>
+</BottomSheetHeader>;
+```
+
+After (Design System — no JSX changes needed):
+
+```tsx
+import { BottomSheetHeader } from '@metamask/design-system-react-native';
+
+<BottomSheetHeader onClose={handleClose}>
+  <Text variant={TextVariant.HeadingMD}>{title}</Text>
+</BottomSheetHeader>;
+```
+
+##### Header with Back Button and testID on Close
+
+Before (Mobile):
+
+```tsx
+<BottomSheetHeader
+  onClose={handleClose}
+  closeButtonProps={{ testID: 'my-modal-close' }}
+  onBack={handleBack}
+>
+  <Text variant={TextVariant.HeadingMD}>{title}</Text>
+</BottomSheetHeader>
+```
+
+After (Design System — identical JSX):
+
+```tsx
+<BottomSheetHeader
+  onClose={handleClose}
+  closeButtonProps={{ testID: 'my-modal-close' }}
+  onBack={handleBack}
+>
+  <Text variant={TextVariant.HeadingMD}>{title}</Text>
+</BottomSheetHeader>
+```
+
+#### API Differences
+
+The DS `BottomSheetHeader` adds a `variant` prop (`BottomSheetHeaderVariant.Compact` | `BottomSheetHeaderVariant.Display`) that is also present in the old mobile version — no change needed. The only removal is `endAccessory` (see above).
+
+---
+
+### BottomSheetFooter Component
+
+The `BottomSheetFooter` component has significant breaking changes. The old mobile version accepted a generic `buttonPropsArray` (an array of full `ButtonProps` objects including `variant`). The DS version uses a structured `primaryButtonProps` / `secondaryButtonProps` API instead, where `variant` is set automatically.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                       | Design System Migration                                                    |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `import BottomSheetFooter from '.../component-library/components/BottomSheets/BottomSheetFooter'`    | `import { BottomSheetFooter } from '@metamask/design-system-react-native'` |
+| `import { ButtonsAlignment } from '.../component-library/components/BottomSheets/BottomSheetFooter'` | `import { ButtonsAlignment } from '@metamask/design-system-react-native'`  |
+
+##### `buttonPropsArray` → `primaryButtonProps` / `secondaryButtonProps`
+
+The old `buttonPropsArray: ButtonProps[]` is replaced by two named props. The `variant` field is no longer accepted — the DS footer always renders the primary button as `ButtonVariant.Primary` and the secondary button as `ButtonVariant.Secondary`.
+
+| Old `buttonPropsArray` field                | New prop location                                       |
+| ------------------------------------------- | ------------------------------------------------------- |
+| First element (secondary action)            | `secondaryButtonProps`                                  |
+| Last/only element (primary action)          | `primaryButtonProps`                                    |
+| `label: string`                             | `children: React.ReactNode`                             |
+| `variant: ButtonVariants.Primary/Secondary` | Removed — set automatically                             |
+| `size: ButtonSize.Lg`                       | `size: ButtonSize.Lg` (keep, explicit size recommended) |
+| `onPress`                                   | `onPress`                                               |
+
+##### `label` → `children`
+
+Button content was passed as a `label` string prop in old `ButtonProps`. The DS `Button` uses `children`:
+
+| Mobile Pattern              | Design System Migration        |
+| --------------------------- | ------------------------------ |
+| `label: strings('foo.bar')` | `children: strings('foo.bar')` |
+
+#### Migration Examples
+
+##### Single Primary Button
+
+Before (Mobile):
+
+```tsx
+import BottomSheetFooter from '../../../component-library/components/BottomSheets/BottomSheetFooter';
+import {
+  ButtonVariants,
+  ButtonSize,
+} from '../../../component-library/components/Buttons/Button';
+
+const footerButtonProps = [
+  {
+    label: strings('perps.deposit.quote_expired_modal.get_new_quote'),
+    variant: ButtonVariants.Primary,
+    size: ButtonSize.Lg,
+    onPress: handleGetNewQuote,
+  },
+];
+
+<BottomSheetFooter
+  buttonPropsArray={footerButtonProps}
+  style={styles.footer}
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  BottomSheetFooter,
+  ButtonSize,
+} from '@metamask/design-system-react-native';
+
+<BottomSheetFooter
+  primaryButtonProps={{
+    children: strings('perps.deposit.quote_expired_modal.get_new_quote'),
+    onPress: handleGetNewQuote,
+    size: ButtonSize.Lg,
+  }}
+  style={styles.footer}
+/>;
+```
+
+##### Two Buttons (Secondary + Primary)
+
+Before (Mobile):
+
+```tsx
+const footerButtons = [
+  {
+    label: strings('common.cancel'),
+    variant: ButtonVariants.Secondary,
+    size: ButtonSize.Lg,
+    onPress: handleCancel,
+  },
+  {
+    label: strings('common.confirm'),
+    variant: ButtonVariants.Primary,
+    size: ButtonSize.Lg,
+    onPress: handleConfirm,
+  },
+];
+
+<BottomSheetFooter buttonPropsArray={footerButtons} />;
+```
+
+After (Design System):
+
+```tsx
+<BottomSheetFooter
+  secondaryButtonProps={{
+    children: strings('common.cancel'),
+    onPress: handleCancel,
+    size: ButtonSize.Lg,
+  }}
+  primaryButtonProps={{
+    children: strings('common.confirm'),
+    onPress: handleConfirm,
+    size: ButtonSize.Lg,
+  }}
+/>
+```
+
+##### `ButtonsAlignment` — Unchanged
+
+`ButtonsAlignment.Horizontal` / `ButtonsAlignment.Vertical` values and import path are the same in both versions (only the package path changes):
+
+```tsx
+// Before
+import BottomSheetFooter, {
+  ButtonsAlignment,
+} from '.../component-library/.../BottomSheetFooter';
+
+// After
+import {
+  BottomSheetFooter,
+  ButtonsAlignment,
+} from '@metamask/design-system-react-native';
+```
+
+#### Blocked Patterns
+
+If the `buttonPropsArray` contains **more than two** button entries, or if buttons need variants other than Primary/Secondary (e.g. `ButtonVariants.Link`), the DS `BottomSheetFooter` cannot be used as a drop-in replacement. Keep the old CL import for those files until the DS component adds broader support.
+
+#### API Differences
+
+The DS `BottomSheetFooter` adds `twClassName` for Tailwind utility class overrides. The `style` prop (from `ViewProps`) is still supported and behaves the same.
+
+---
+
 ### Box Component
 
 The Box component has breaking changes when migrating from the mobile component-library. For custom spacing patterns or values outside the BoxSpacing range, use Tailwind classes via `twClassName`.
@@ -378,6 +950,88 @@ import {
   title="Warning"
   actionButtonLabel="Action"
   actionButtonOnPress={() => undefined}
+/>;
+```
+
+### BannerBase Component
+
+Mobile `BannerBase` maps to `BannerBase` in the design system, but the action-button and close-button APIs are different and can break existing usage.
+
+#### Breaking Changes
+
+##### Removed / No Direct Equivalent
+
+| Legacy Mobile API                                                                                          | MMDS Status                                       | Migration                                                                                                               |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `variant?: BannerVariant`                                                                                  | Removed from `BannerBase` API                     | Remove `variant` on `BannerBase`; apply presentation through `twClassName`, Box props, and explicit content/accessories |
+| `actionButtonProps` link-style behavior through unrestricted `ButtonProps` (`variant`, `onPress`, `label`) | No direct equivalent in `BannerBase` action props | Use `actionButtonLabel` + `actionButtonOnPress`, and keep advanced button behavior outside `BannerBase`                 |
+
+##### Renamed Props
+
+| Legacy Mobile API                            | MMDS API                                     |
+| -------------------------------------------- | -------------------------------------------- |
+| `actionButtonProps.onPress`                  | `actionButtonOnPress`                        |
+| `actionButtonProps.label`                    | `actionButtonLabel`                          |
+| `closeButtonProps.onPress` (still supported) | `closeButtonProps.onPress` (still supported) |
+
+##### Type and Callback Signature Changes
+
+| Legacy Mobile API                                       | MMDS API                                                                                                                            | Notes                                                                        |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `actionButtonProps?: ButtonProps`                       | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onPress' \| 'variant'>`                                              | MMDS prevents setting action handler and variant through `actionButtonProps` |
+| `actionButtonProps` controls rendering of action button | `actionButtonOnPress` controls rendering of action button                                                                           | Action button is shown only when `actionButtonOnPress` is provided           |
+| `title?: string \| React.ReactNode`                     | `title?: ReactNode`                                                                                                                 | Equivalent content support                                                   |
+| `description?: string \| React.ReactNode`               | `description?: ReactNode`                                                                                                           | Equivalent content support                                                   |
+| `closeButtonProps?: ButtonIconProps`                    | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onPress'> & { onPress?: (event: GestureResponderEvent) => void }` | `iconName` remains fixed to close icon                                       |
+
+##### Default and Behavior Changes
+
+| Legacy Mobile Behavior                                                   | MMDS Behavior                                                                                                      |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Action button shown when `actionButtonProps` exists                      | Action button shown when `actionButtonOnPress` exists                                                              |
+| Action button defaults to `size={ButtonSize.Auto}`                       | Action button defaults to `size={ButtonSize.Md}`                                                                   |
+| Close button press fallback uses `noop` when callbacks are missing       | Close button callback is omitted when callbacks are missing                                                        |
+| Close button icon default color is `IconColor.Default`                   | MMDS `BannerBase` delegates icon color to `ButtonIcon` defaults unless explicitly overridden in `closeButtonProps` |
+| Close button accessibility label had no explicit default in `BannerBase` | Default close label is `'Close banner'` (override with `closeButtonProps.accessibilityLabel`)                      |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import BannerBase from '../../../component-library/components/Banners/Banner/foundation/BannerBase';
+
+<BannerBase
+  title="Backup your Secret Recovery Phrase"
+  description="Keep it private and secure."
+  actionButtonProps={{
+    label: 'Review',
+    onPress: () => {
+      /* handle review */
+    },
+  }}
+  onClose={() => {
+    /* dismiss banner */
+  }}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { BannerBase } from '@metamask/design-system-react-native';
+
+<BannerBase
+  title="Backup your Secret Recovery Phrase"
+  description="Keep it private and secure."
+  actionButtonLabel="Review"
+  actionButtonOnPress={() => {
+    /* handle review */
+  }}
+  onClose={() => {
+    /* dismiss banner */
+  }}
+  closeButtonProps={{ testID: 'banner-base-close-button' }}
 />;
 ```
 
@@ -560,6 +1214,87 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+
+### Checkbox Component
+
+The mobile `Checkbox` maps to `Checkbox` in the design system, with controlled-state naming changes and removed indeterminate/read-only/danger paths.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                     | Design System Migration                                                     |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| `import Checkbox from '.../component-library/components/Checkbox'` | `import { Checkbox } from '@metamask/design-system-react-native'`           |
+| `import type { CheckboxProps } from '.../Checkbox.types'`          | `import type { CheckboxProps } from '@metamask/design-system-react-native'` |
+
+##### Props and Callback Mapping
+
+| Mobile API                             | Design System API                         | Change Type                                         | Notes                                                                                      |
+| -------------------------------------- | ----------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `isChecked?: boolean`                  | `isSelected: boolean`                     | renamed + now required                              | controlled value must be explicitly passed                                                 |
+| `onPress?: () => void`                 | `onChange: (isSelected: boolean) => void` | callback renamed + signature changed + now required | callback receives next boolean value                                                       |
+| `checkboxStyle?: StyleProp<ViewStyle>` | removed top-level prop                    | removed                                             | style the container with `style` / `twClassName` or customize via `checkboxContainerProps` |
+| `isIndeterminate?: boolean`            | removed                                   | removed                                             | no built-in tri-state checkbox mode                                                        |
+| `isReadOnly?: boolean`                 | removed                                   | removed                                             | enforce read-only in parent by no-oping `onChange`                                         |
+| `isDanger?: boolean`                   | removed                                   | removed                                             | no danger variant in MMDS checkbox                                                         |
+| `isDisabled?: boolean`                 | `isDisabled?: boolean`                    | unchanged                                           | still defaults to `false`                                                                  |
+| `label?: string \| ReactNode`          | `label?: string \| ReactNode`             | unchanged                                           | still supported                                                                            |
+| `labelProps`                           | `labelProps`                              | unchanged                                           | still supported (Text props)                                                               |
+| `checkedIconProps`                     | `checkedIconProps`                        | added in MMDS                                       | customize selected check icon                                                              |
+| `checkboxContainerProps`               | `checkboxContainerProps`                  | added in MMDS                                       | customize icon container view                                                              |
+
+##### Default and Behavior Changes
+
+| Concern                   | Mobile Behavior                                      | Design System Behavior                          |
+| ------------------------- | ---------------------------------------------------- | ----------------------------------------------- |
+| Controlled state defaults | `isChecked` optional (unchecked when omitted)        | `isSelected` required                           |
+| Interaction callback      | `onPress()` with no args                             | `onChange(nextIsSelected)`                      |
+| Press target              | `TouchableOpacity`                                   | `Pressable` with `accessibilityRole="checkbox"` |
+| Icon state handling       | check/minus icon for checked/indeterminate           | check icon only for selected state              |
+| Disabled + readonly       | component disabled when `isDisabled` or `isReadOnly` | disabled only through `isDisabled`              |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Checkbox from '../../../component-library/components/Checkbox';
+
+<Checkbox
+  isChecked={isChecked}
+  isIndeterminate={isPartiallySelected}
+  isReadOnly={isLocked}
+  isDanger={hasError}
+  onPress={() => setIsChecked((previous) => !previous)}
+  label="I agree to the terms"
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Checkbox } from '@metamask/design-system-react-native';
+
+<Checkbox
+  isSelected={isChecked}
+  isDisabled={isLocked}
+  isInvalid={hasError}
+  onChange={(nextIsSelected) => {
+    if (isLocked) {
+      return;
+    }
+    setIsChecked(nextIsSelected);
+  }}
+  label="I agree to the terms"
+/>;
+```
+
+#### API Differences
+
+- MMDS `Checkbox` adds `twClassName` and `style` on the outer `Pressable`, plus `checkboxContainerProps` and `checkedIconProps` for targeted customization.
+- Mobile legacy `Checkbox` forwarded `TouchableOpacityProps`; MMDS forwards `PressableProps`.
+- Imperative `ref.toggle()` remains available in MMDS.
 
 ## Version Updates
 

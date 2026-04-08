@@ -9,8 +9,10 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Button Component](#button-component)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
+  - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
@@ -291,6 +293,83 @@ import {
 />;
 ```
 
+### BannerBase Component
+
+The extension `banner-base` maps to `BannerBase` in the design system, but action and close affordance APIs changed in ways that can break existing usage.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration behavior.
+
+#### Breaking Changes
+
+##### Removed / No Direct Equivalent
+
+| Legacy Extension API                                                                               | MMDS Status                                        | Migration                                                                                                                |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `actionButtonLabel` used without `actionButtonOnClick`                                             | No longer renders an action button                 | Provide both `actionButtonLabel` and `actionButtonOnClick`                                                               |
+| Link-like action through `ButtonLink` props such as `href`, `target`, `rel` in `actionButtonProps` | No direct equivalent on `BannerBase` action button | Move link behavior into banner content (for example, a link in `children`) or handle navigation in `actionButtonOnClick` |
+
+##### Renamed Props
+
+No direct prop renames were introduced for extension-to-MMDS `BannerBase`.
+
+##### Type and Callback Signature Changes
+
+| Legacy Extension API                                     | MMDS API                                                                                                                          | Notes                                                 |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `title?: string`                                         | `title?: ReactNode`                                                                                                               | MMDS now accepts full React node content              |
+| `description?: string`                                   | `description?: ReactNode`                                                                                                         | MMDS now accepts full React node content              |
+| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>`                                            | MMDS action button is a `Button`, not a `ButtonLink`  |
+| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                                                                  | Close callback target is now the close button element |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'> & { onClick?: MouseEventHandler<HTMLButtonElement> }` | `iconName` remains fixed to close icon                |
+
+##### Default and Behavior Changes
+
+| Legacy Extension Behavior                                                  | MMDS Behavior                                                                                      |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Action button defaults to `ButtonLink` semantics and `ButtonLinkSize.Auto` | Action button is `Button` with default `ButtonSize.Md`                                             |
+| Close button renders only when `onClose` is provided                       | Close button renders when `onClose` **or** `closeButtonProps` is provided                          |
+| Close button `ariaLabel` defaults to translated `t('close')`               | Close button `ariaLabel` defaults to `'Close banner'` (override with `closeButtonProps.ariaLabel`) |
+| String/number `children` are wrapped in extension `Text` defaults          | String/number `children` are wrapped in MMDS `Text` with `TextVariant.BodyMd`                      |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { BannerBase } from '../../component-library/banner-base';
+
+<BannerBase
+  title="Your account needs attention"
+  description="Review the latest activity and confirm your settings."
+  actionButtonLabel="Review"
+  actionButtonOnClick={() => {
+    /* handle review */
+  }}
+  onClose={() => {
+    /* dismiss banner */
+  }}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { BannerBase } from '@metamask/design-system-react';
+
+<BannerBase
+  title="Your account needs attention"
+  description="Review the latest activity and confirm your settings."
+  actionButtonLabel="Review"
+  actionButtonOnClick={() => {
+    /* handle review */
+  }}
+  onClose={() => {
+    /* dismiss banner */
+  }}
+  closeButtonProps={{ 'data-testid': 'banner-base-close-button' }}
+/>;
+```
+
 ### Text Component
 
 The Text component has significant breaking changes when migrating from the extension component-library.
@@ -501,6 +580,90 @@ import {
 - `className` and `style` are still supported
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
+
+### Checkbox Component
+
+The extension `checkbox` component maps to `Checkbox` in the design system, with controlled-state naming and callback-signature changes.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                       | Design System Migration                                              |
+| ------------------------------------------------------- | -------------------------------------------------------------------- |
+| `import { Checkbox } from '../../component-library'`    | `import { Checkbox } from '@metamask/design-system-react'`           |
+| `import type { CheckboxProps } from './checkbox.types'` | `import type { CheckboxProps } from '@metamask/design-system-react'` |
+
+##### Props and Callback Mapping
+
+| Extension API                                               | Design System API                         | Change Type                      | Notes                                                         |
+| ----------------------------------------------------------- | ----------------------------------------- | -------------------------------- | ------------------------------------------------------------- |
+| `isChecked?: boolean`                                       | `isSelected: boolean`                     | renamed + now required           | controlled value must be explicitly passed                    |
+| `onChange?: (event: ChangeEvent<HTMLInputElement>) => void` | `onChange: (isSelected: boolean) => void` | signature changed + now required | callback receives the next boolean value instead of DOM event |
+| `id?: string`                                               | `id: string`                              | now required                     | required for `input`/`label` association                      |
+| `iconProps?: IconProps<'span'>`                             | `checkedIconProps?: Partial<IconProps>`   | renamed                          | use for checked icon customization                            |
+| `isIndeterminate?: boolean`                                 | removed                                   | removed                          | no built-in tri-state behavior                                |
+| `isReadOnly?: boolean`                                      | removed                                   | removed                          | handle read-only behavior in parent by no-oping `onChange`    |
+| `isRequired?: boolean`                                      | removed from top-level                    | moved                            | pass through `inputProps={{ required: true }}`                |
+| `name?: string`                                             | removed from top-level                    | moved                            | pass through `inputProps={{ name: 'fieldName' }}`             |
+| `title?: string`                                            | removed from top-level                    | moved                            | pass through `inputProps={{ title: '...' }}`                  |
+| `inputRef`                                                  | removed                                   | removed                          | no dedicated input ref prop                                   |
+| broad Box/Text style utility props                          | removed                                   | removed                          | use `className`, `style`, and explicit props instead          |
+| `isInvalid`                                                 | `isInvalid`                               | added in MMDS                    | use for error styling (`false` by default)                    |
+
+##### Default and Behavior Changes
+
+| Concern                   | Extension Behavior                                   | Design System Behavior                              |
+| ------------------------- | ---------------------------------------------------- | --------------------------------------------------- |
+| Controlled state defaults | `isChecked` optional (unchecked when omitted)        | `isSelected` required                               |
+| Keyboard Enter handling   | invokes `onChange(event)`                            | toggles and calls `onChange(nextValue)`             |
+| Indeterminate visuals     | built-in minus/check rendering via `isIndeterminate` | not built in; implement tri-state logic in parent   |
+| Read-only mode            | `isReadOnly` prevented updates                       | no explicit prop; enforce via parent callback logic |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Checkbox } from '../../component-library';
+
+<Checkbox
+  id="terms"
+  name="terms"
+  isChecked={isChecked}
+  isIndeterminate={isPartiallySelected}
+  isReadOnly={isLocked}
+  onChange={(event) => setIsChecked(event.target.checked)}
+  label="I agree to the terms"
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Checkbox } from '@metamask/design-system-react';
+
+<Checkbox
+  id="terms"
+  isSelected={isChecked}
+  onChange={(nextIsSelected) => {
+    if (isLocked) {
+      return;
+    }
+    setIsChecked(nextIsSelected);
+  }}
+  inputProps={{ name: 'terms' }}
+  label="I agree to the terms"
+/>;
+```
+
+#### API Differences
+
+- `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
+- `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
+- `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
 
 ## Version Updates
 

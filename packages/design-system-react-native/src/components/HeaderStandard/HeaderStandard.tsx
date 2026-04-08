@@ -2,18 +2,19 @@
 import React, { useMemo } from 'react';
 
 // External dependencies.
-import { Box, BoxAlignItems } from '../Box';
+import { BoxAlignItems } from '../Box';
 import { BoxColumn } from '../BoxColumn';
 import type { ButtonIconProps } from '../ButtonIcon';
 import { HeaderBase } from '../HeaderBase';
 import { IconName } from '../Icon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
+import type { TextProps } from '../Text';
 import { FontWeight, TextColor, TextVariant } from '../Text';
 
 // Internal dependencies.
 import type { HeaderStandardProps } from './HeaderStandard.types';
 
-const HeaderStandard: React.FC<HeaderStandardProps> = ({
+export const HeaderStandard: React.FC<HeaderStandardProps> = ({
   title,
   titleProps,
   subtitle,
@@ -34,11 +35,12 @@ const HeaderStandard: React.FC<HeaderStandardProps> = ({
       return startButtonIconProps;
     }
     if (onBack || backButtonProps) {
-      return {
+      const startProps: ButtonIconProps = {
         iconName: IconName.ArrowLeft,
-        ...(backButtonProps || {}),
+        ...(backButtonProps ?? {}),
         onPress: backButtonProps?.onPress ?? onBack,
-      } as ButtonIconProps;
+      };
+      return startProps;
     }
     return undefined;
   }, [onBack, backButtonProps, startButtonIconProps]);
@@ -66,6 +68,20 @@ const HeaderStandard: React.FC<HeaderStandardProps> = ({
       return children;
     }
     if (title) {
+      let subtitleTextProps: Omit<Partial<TextProps>, 'children'> | undefined;
+      if (subtitle && typeof subtitle === 'string') {
+        const { twClassName: subtitleTwClassName, ...subtitleTextRest } =
+          subtitleProps ?? {};
+        subtitleTextProps = {
+          variant: TextVariant.BodySm,
+          color: TextColor.TextAlternative,
+          ...subtitleTextRest,
+          twClassName: ['-mt-0.5', subtitleTwClassName]
+            .filter(Boolean)
+            .join(' '),
+        };
+      }
+
       return (
         <BoxColumn
           alignItems={BoxAlignItems.Center}
@@ -76,17 +92,9 @@ const HeaderStandard: React.FC<HeaderStandardProps> = ({
           }}
           bottomAccessory={
             subtitle ? (
-              <Box twClassName="-mt-0.5">
-                <TextOrChildren
-                  textProps={{
-                    variant: TextVariant.BodySm,
-                    color: TextColor.TextAlternative,
-                    ...subtitleProps,
-                  }}
-                >
-                  {subtitle}
-                </TextOrChildren>
-              </Box>
+              <TextOrChildren textProps={subtitleTextProps}>
+                {subtitle}
+              </TextOrChildren>
             ) : undefined
           }
         >
@@ -103,7 +111,7 @@ const HeaderStandard: React.FC<HeaderStandardProps> = ({
       startButtonIconProps={resolvedStartButtonIconProps}
       endButtonIconProps={resolvedEndButtonIconProps}
       {...headerBaseProps}
-      twClassName={`px-2 ${twClassName}`.trim()}
+      twClassName={`px-2 ${twClassName}`}
     >
       {renderContent()}
     </HeaderBase>
@@ -111,5 +119,3 @@ const HeaderStandard: React.FC<HeaderStandardProps> = ({
 };
 
 HeaderStandard.displayName = 'HeaderStandard';
-
-export default HeaderStandard;

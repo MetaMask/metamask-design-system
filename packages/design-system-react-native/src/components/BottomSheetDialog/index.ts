@@ -1,4 +1,4 @@
-export { default } from './BottomSheetDialog';
+export { BottomSheetDialog } from './BottomSheetDialog';
 export type {
   BottomSheetDialogProps,
   BottomSheetDialogRef,

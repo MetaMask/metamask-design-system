@@ -5,7 +5,7 @@ import { View, Pressable } from 'react-native';
 import { Box } from '../Box';
 import { Text } from '../Text';
 
-import BottomSheetDialog from './BottomSheetDialog';
+import { BottomSheetDialog } from './BottomSheetDialog';
 import type {
   BottomSheetDialogProps,
   BottomSheetDialogRef,

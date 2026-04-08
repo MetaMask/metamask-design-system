@@ -165,6 +165,7 @@ import MoreHorizontal from './MoreHorizontal';
 import MoreVertical from './MoreVertical';
 import MountainFlag from './MountainFlag';
 import MusicNote from './MusicNote';
+import NoPhotography from './NoPhotography';
 import Notification from './Notification';
 import PageInfo from './PageInfo';
 import Palette from './Palette';
@@ -447,6 +448,7 @@ export const Icons = {
   MoreVertical,
   MountainFlag,
   MusicNote,
+  NoPhotography,
   Notification,
   PageInfo,
   Palette,
