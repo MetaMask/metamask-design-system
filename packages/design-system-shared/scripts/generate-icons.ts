@@ -72,9 +72,9 @@ function svgrTemplate(
   { tpl }: { tpl: (...args: unknown[]) => string },
 ) {
   return tpl`
-import type { SVGProps, Ref } from "react";
 import * as React from "react";
-import { forwardRef } from "react";
+import type { SVGProps } from "react";
+import { Ref, forwardRef } from "react";
 
 const ${variables.componentName} = (
   props: SVGProps<SVGSVGElement>,
