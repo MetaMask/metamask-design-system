@@ -17,28 +17,20 @@ export const IconColor = {
   PrimaryAlternative: 'text-primary-alternative',
   /** For elements used on top of primary/default. Used for text, icon, or border */
   PrimaryInverse: 'text-primary-inverse',
-  /** For primary interactive elements in a pressed state */
-  PrimaryDefaultPressed: 'text-primary-default-pressed',
   /** For critical alert semantic elements. Used for text, background, icon, or border */
   ErrorDefault: 'text-error-default',
   /** For softer variants of error elements */
   ErrorAlternative: 'text-error-alternative',
   /** For elements used on top of error/default. Used for text, icon, or border */
   ErrorInverse: 'text-error-inverse',
-  /** For critical alert semantic elements in a pressed state */
-  ErrorDefaultPressed: 'text-error-default-pressed',
   /** For caution alert semantic elements. Used for text, background, icon, or border */
   WarningDefault: 'text-warning-default',
   /** For elements used on top of warning/default. Used for text, icon, or border */
   WarningInverse: 'text-warning-inverse',
-  /** For caution alert semantic elements in a pressed state */
-  WarningDefaultPressed: 'text-warning-default-pressed',
   /** For positive semantic elements. Used for text, background, icon, or border */
   SuccessDefault: 'text-success-default',
   /** For elements used on top of success/default. Used for text, icon, or border */
   SuccessInverse: 'text-success-inverse',
-  /** For positive semantic elements in a pressed state */
-  SuccessDefaultPressed: 'text-success-default-pressed',
   /** For informational read-only elements. Used for text, background, icon, or border */
   InfoDefault: 'text-info-default',
   /** For elements used on top of info/default. Used for text, icon, or border */
