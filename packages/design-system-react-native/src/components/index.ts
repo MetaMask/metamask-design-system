@@ -97,11 +97,11 @@ export {
 } from './Box';
 export type { BoxProps, BoxSpacing, BoxBorderWidth } from './Box';
 
-export { BoxHorizontal } from './BoxHorizontal';
-export type { BoxHorizontalProps } from './BoxHorizontal';
+export { BoxRow } from './BoxRow';
+export type { BoxRowProps } from './BoxRow';
 
-export { BoxVertical } from './BoxVertical';
-export type { BoxVerticalProps } from './BoxVertical';
+export { BoxColumn } from './BoxColumn';
+export type { BoxColumnProps } from './BoxColumn';
 
 export { Card } from './Card';
 export type { CardProps } from './Card';

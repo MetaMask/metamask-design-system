@@ -31,11 +31,11 @@ export { type BannerBasePropsShared } from './types/BannerBase';
 // TextOrChildren types (ADR-0004)
 export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
 
-// BoxHorizontal types (ADR-0004)
-export { type BoxHorizontalPropsShared } from './types/BoxHorizontal';
+// BoxRow types (ADR-0004)
+export { type BoxRowPropsShared } from './types/BoxRow';
 
-// BoxVertical types (ADR-0004)
-export { type BoxVerticalPropsShared } from './types/BoxVertical';
+// BoxColumn types (ADR-0004)
+export { type BoxColumnPropsShared } from './types/BoxColumn';
 
 // HeaderSearch types (ADR-0003 + ADR-0004)
 export {
