@@ -1,8 +1,8 @@
 // Third party dependencies.
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
-import React from 'react';
 import { render } from '@testing-library/react-native';
+import React from 'react';
 import { Text } from 'react-native';
 
 // Internal dependencies.

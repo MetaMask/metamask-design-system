@@ -1,8 +1,6 @@
 // Third party dependencies.
-import React from 'react';
-
-// External dependencies.
 import { isReactNodeRenderable } from '@metamask/design-system-shared';
+import React from 'react';
 
 // Internal dependencies.
 import { Box } from '../Box';
@@ -12,17 +10,20 @@ import { TextVariant, TextColor, FontWeight } from '../Text';
 import type { TitleStandardProps } from './TitleStandard.types';
 
 /**
- * TitleStandard is a component that displays a title with optional accessories
- * in a left-aligned layout.
+ * Displays a primary title with optional top, inline, and bottom rows in a left-aligned layout.
+ * Remaining `View` props are forwarded to the root `Box`.
  *
- * @example
- * ```tsx
- * <TitleStandard
- *   topAccessory={<Text variant={TextVariant.BodySm}>Send</Text>}
- *   title="$4.42"
- *   titleAccessory={<Icon name={IconName.Info} size={IconSize.Sm} />}
- * />
- * ```
+ * @param props - Component props
+ * @param props.title - Primary title content
+ * @param props.titleAccessory - Optional inline accessory to the right of the title
+ * @param props.topAccessory - Optional row above the title
+ * @param props.bottomAccessory - Optional custom bottom row when `bottomLabel` is not renderable
+ * @param props.bottomLabel - Optional secondary label below the title
+ * @param props.titleProps - Optional props merged into title `Text` when `title` is a string
+ * @param props.bottomLabelProps - Optional props merged into bottom label `Text` when `bottomLabel` is a string
+ * @param props.twClassName - Optional Tailwind classes on the root container
+ *
+ * @returns The rendered TitleStandard layout.
  */
 export const TitleStandard: React.FC<TitleStandardProps> = ({
   title,

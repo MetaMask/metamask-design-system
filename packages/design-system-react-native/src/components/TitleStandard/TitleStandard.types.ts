@@ -1,8 +1,6 @@
 // Third party dependencies.
-import type { ViewProps } from 'react-native';
-
-// External dependencies.
 import type { TitleStandardPropsShared } from '@metamask/design-system-shared';
+import type { ViewProps } from 'react-native';
 
 // Internal dependencies.
 import type { TextProps } from '../Text/Text.types';
