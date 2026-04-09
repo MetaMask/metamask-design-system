@@ -1,13 +1,10 @@
-// Third party dependencies.
+import { IconName } from '@metamask/design-system-shared';
 import { render, screen, act, fireEvent } from '@testing-library/react-native';
 import React, { createRef, useContext } from 'react';
 import { Text as RNText } from 'react-native';
 
-// External dependencies.
-import { IconName } from '@metamask/design-system-shared';
 import { AvatarAccountVariant } from '../AvatarAccount';
 
-// Internal dependencies.
 import { Toast } from './Toast';
 import { ToastContext, ToastContextWrapper } from './Toast.context';
 import type { ToastOptions, ToastRef } from './Toast.types';

@@ -3,11 +3,12 @@ import {
   KeyValueRowVariant,
   TextColor,
   TextVariant,
+  IconColor,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { ButtonIconSize, IconColor } from '../../types';
+import { ButtonIconSize } from '../../types';
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
 import { ButtonIcon } from '../ButtonIcon';

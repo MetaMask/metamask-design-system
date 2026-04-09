@@ -358,21 +358,23 @@ export type IconSize = (typeof IconSize)[keyof typeof IconSize];
 
 /**
  * Icon component shared props (ADR-0004).
- * name is typed as string to allow platform-specific narrowing to IconName.
- * color is typed as string to allow platform-specific narrowing to IconColor.
- * size is typed as string to allow platform-specific narrowing to IconSize.
  */
 export type IconPropsShared = {
   /**
-   * Required prop to specify which icon to render from the icon set
+   * Required prop to specify which icon to render from the icon set.
    */
-  name: string;
+  name: IconName;
   /**
-   * Optional prop that sets the color of the icon using predefined theme colors
+   * Optional prop that sets the color of the icon using predefined theme colors.
+   *
+   * @default IconColor.IconDefault
    */
-  color?: string;
+  color?: IconColor;
   /**
-   * Optional prop to control the size of the icon
+   * Optional prop to control the size of the icon.
+   * Different sizes map to specific pixel dimensions.
+   *
+   * @default IconSize.Md
    */
-  size?: string;
+  size?: IconSize;
 };

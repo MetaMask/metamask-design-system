@@ -3,7 +3,6 @@ import {
   TextVariant,
   IconName,
 } from '@metamask/design-system-shared';
-
 import React from 'react';
 import { GestureResponderEvent } from 'react-native';
 
