@@ -1,8 +1,9 @@
+import { IconName } from '@metamask/design-system-shared';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 
-import { ButtonIconSize, ButtonIconVariant, IconName } from '../../types';
+import { ButtonIconSize, ButtonIconVariant } from '../../types';
 
 import { ButtonIcon } from './ButtonIcon';
 

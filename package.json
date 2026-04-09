@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev run build",
+    "generate:icons": "yarn workspace @metamask/design-system-shared generate-icons",
     "build:clean": "rimraf 'packages/*/dist' '**/*.tsbuildinfo' && yarn build",
     "build:types": "tsc --build tsconfig.build.json --verbose",
     "changelog:update": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:update",
@@ -32,9 +33,6 @@
     "figma:connect:unpublish": "yarn figma:connect:unpublish:react && yarn figma:connect:unpublish:react-native",
     "figma:connect:unpublish:react": "figma connect unpublish --config packages/design-system-react/figma.config.json",
     "figma:connect:unpublish:react-native": "figma connect unpublish --config packages/design-system-react-native/figma.config.json",
-    "generate-icons": "yarn generate-icons:react && yarn generate-icons:react-native",
-    "generate-icons:react": "yarn workspace @metamask/design-system-react generate-icons",
-    "generate-icons:react-native": "yarn workspace @metamask/design-system-react-native generate-icons",
     "lint": "yarn lint:eslint && yarn lint:misc --check && yarn constraints && yarn lint:dependencies",
     "lint:clear-cache": "rimraf .eslintcache",
     "lint:dependencies": "depcheck && yarn dedupe --check",

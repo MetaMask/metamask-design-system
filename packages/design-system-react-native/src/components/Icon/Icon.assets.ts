@@ -1,8 +1,8 @@
 // /////////////////////////////////////////////////////
 // This is a generated file
-// DO NOT EDIT - Use generate-icons.js
+// DO NOT EDIT — run `yarn generate:icons` from the repo root
 // /////////////////////////////////////////////////////
-import { IconName } from '../../types';
+import { IconName } from '@metamask/design-system-shared';
 
 import AccessibilitySVG from './assets/accessibility.svg';
 import ActivitySVG from './assets/activity.svg';
@@ -181,6 +181,7 @@ import PlantSVG from './assets/plant.svg';
 import PlugSVG from './assets/plug.svg';
 import PlusAndMinusSVG from './assets/plus-and-minus.svg';
 import PolicyAlertSVG from './assets/policy-alert.svg';
+import PopUpSVG from './assets/pop-up.svg';
 import PrintSVG from './assets/print.svg';
 import PriorityHighSVG from './assets/priority-high.svg';
 import PrivacyTipSVG from './assets/privacy-tip.svg';
@@ -221,6 +222,7 @@ import ShareSVG from './assets/share.svg';
 import ShieldLockSVG from './assets/shield-lock.svg';
 import ShoppingBagSVG from './assets/shopping-bag.svg';
 import ShoppingCartSVG from './assets/shopping-cart.svg';
+import SidePanelSVG from './assets/side-panel.svg';
 import SignalCellularSVG from './assets/signal-cellular.svg';
 import SlashSVG from './assets/slash.svg';
 import SmsSVG from './assets/sms.svg';
@@ -466,6 +468,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.Plug]: PlugSVG,
   [IconName.PlusAndMinus]: PlusAndMinusSVG,
   [IconName.PolicyAlert]: PolicyAlertSVG,
+  [IconName.PopUp]: PopUpSVG,
   [IconName.Print]: PrintSVG,
   [IconName.PriorityHigh]: PriorityHighSVG,
   [IconName.PrivacyTip]: PrivacyTipSVG,
@@ -506,6 +509,7 @@ export const assetByIconName: AssetByIconName = {
   [IconName.ShieldLock]: ShieldLockSVG,
   [IconName.ShoppingBag]: ShoppingBagSVG,
   [IconName.ShoppingCart]: ShoppingCartSVG,
+  [IconName.SidePanel]: SidePanelSVG,
   [IconName.SignalCellular]: SignalCellularSVG,
   [IconName.Slash]: SlashSVG,
   [IconName.Sms]: SmsSVG,

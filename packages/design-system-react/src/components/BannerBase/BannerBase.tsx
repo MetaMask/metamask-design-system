@@ -1,4 +1,8 @@
-import { FontWeight, TextVariant } from '@metamask/design-system-shared';
+import {
+  FontWeight,
+  TextVariant,
+  IconName,
+} from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
 import {
@@ -7,7 +11,6 @@ import {
   ButtonIconSize,
   ButtonSize,
   BoxFlexDirection,
-  IconName,
 } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Box } from '../Box';
