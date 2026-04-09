@@ -7,10 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Uncategorized
-
-- feat(DSYS-489): Migrate Text to ADR-0003 and ADR-0004 ([#1047](https://github.com/MetaMask/metamask-design-system/pull/1047))
-
 ## [0.16.0]
 
 ### Changed
