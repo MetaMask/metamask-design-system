@@ -4,7 +4,7 @@ import React from 'react';
 
 // Internal dependencies.
 import { Box } from '../Box';
-import { BoxHorizontal } from '../BoxHorizontal';
+import { BoxRow } from '../BoxRow';
 import { TextVariant, TextColor, FontWeight } from '../Text';
 
 import type { TitleHubProps } from './TitleHub.types';
@@ -67,7 +67,7 @@ export const TitleHub: React.FC<TitleHubProps> = ({
     !renderBottomLabelRow && isReactNodeRenderable(bottomAccessory);
 
   const titleRow = (
-    <BoxHorizontal
+    <BoxRow
       endAccessory={titleEndAccessoryNode}
       textProps={{
         variant: TextVariant.HeadingMd,
@@ -76,11 +76,11 @@ export const TitleHub: React.FC<TitleHubProps> = ({
       }}
     >
       {title}
-    </BoxHorizontal>
+    </BoxRow>
   );
 
   const amountRow = (
-    <BoxHorizontal
+    <BoxRow
       endAccessory={amountEndAccessoryNode}
       textProps={{
         variant: TextVariant.DisplayLg,
@@ -88,11 +88,11 @@ export const TitleHub: React.FC<TitleHubProps> = ({
       }}
     >
       {amount}
-    </BoxHorizontal>
+    </BoxRow>
   );
 
   const bottomLabelRow = (
-    <BoxHorizontal
+    <BoxRow
       endAccessory={bottomLabelEndAccessoryNode}
       textProps={{
         variant: TextVariant.BodySm,
@@ -102,7 +102,7 @@ export const TitleHub: React.FC<TitleHubProps> = ({
       }}
     >
       {bottomLabel}
-    </BoxHorizontal>
+    </BoxRow>
   );
 
   return (

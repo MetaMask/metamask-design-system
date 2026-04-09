@@ -663,6 +663,7 @@ export enum IconName {
   MoreVertical = 'MoreVertical',
   MountainFlag = 'MountainFlag',
   MusicNote = 'MusicNote',
+  NoPhotography = 'NoPhotography',
   Notification = 'Notification',
   PageInfo = 'PageInfo',
   Palette = 'Palette',

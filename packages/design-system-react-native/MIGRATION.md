@@ -16,6 +16,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
   - [From version 0.13.0 to 0.14.0](#from-version-0130-to-0140)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
@@ -57,6 +58,199 @@ If you do not want back navigation, omit `goBack`.
 
 - Affects BottomSheet usages that previously relied on `shouldNavigateBack`.
 - Navigation behavior is now explicit and controlled by the host app callback.
+
+### From version 0.15.0 to 0.16.0
+
+#### BoxHorizontal and BoxVertical renamed to BoxRow and BoxColumn
+
+**What Changed:**
+
+- `BoxHorizontal` has been renamed to `BoxRow`
+- `BoxVertical` has been renamed to `BoxColumn`
+
+**Migration:**
+
+```tsx
+// Before (0.15.0)
+import { BoxHorizontal, BoxVertical } from '@metamask/design-system-react-native';
+
+<BoxHorizontal gap={2}>
+  <Text>Left</Text>
+  <Text>Right</Text>
+</BoxHorizontal>
+
+<BoxVertical gap={4}>
+  <Text>Top</Text>
+  <Text>Bottom</Text>
+</BoxVertical>
+
+// After (0.16.0)
+import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
+
+<BoxRow gap={2}>
+  <Text>Left</Text>
+  <Text>Right</Text>
+</BoxRow>
+
+<BoxColumn gap={4}>
+  <Text>Top</Text>
+  <Text>Bottom</Text>
+</BoxColumn>
+```
+
+**Impact:**
+
+- Any import of `BoxHorizontal` or `BoxVertical` must be renamed
+
+#### KeyValueRow API
+
+**What changed:**
+
+- `KeyValueRow` no longer accepts `field` and `value` configuration objects. Use flat props: `keyLabel`, `value`, optional `variant`, start/end accessories, optional `keyTextProps` / `valueTextProps`, and optional `keyEndButtonIconProps` / `valueEndButtonIconProps`.
+- Layout is handled inside the component (`BoxRow` / `Box`). The old stub API used to compose custom rows is removed.
+- `KeyValueRowVariant` is defined in `@metamask/design-system-shared` (shared props follow ADR-0003 / ADR-0004); React Native–specific props remain on `KeyValueRowProps` in this package.
+
+**Removed from the public API:**
+
+- `KeyValueRowStubs` (and the underlying `Root` / `Section` / `Label` building blocks exported for custom rows)
+- Constants: `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes` (KeyValueRow-specific)
+- Types: `KeyValueRowTooltip`, `KeyValueRowField`, `PreDefinedKeyValueRowLabel`, `KeyValueRowLabelProps`, `KeyValueRowRootProps`, `KeyValueSectionProps`
+
+**Tooltip / info affordance:**
+
+- The previous `tooltip` object (`title`, `content`, etc.) on `field` or `value` is not supported. Use `keyEndButtonIconProps` or `valueEndButtonIconProps` with `iconName` and `onPress`. The row only renders a `ButtonIcon`; **title and body content are not rendered by `KeyValueRow`**. Open a modal, bottom sheet, or your own tooltip from `onPress`.
+
+**Migration (examples):**
+
+Simple labels:
+
+```tsx
+// Before (0.15.0)
+<KeyValueRow
+  field={{ label: { text: 'Network' } }}
+  value={{ label: { text: 'Ethereum Mainnet' } }}
+/>
+
+// After (0.16.0)
+<KeyValueRow keyLabel="Network" value="Ethereum Mainnet" />
+```
+
+Typography via predefined label objects → `keyTextProps` / `valueTextProps`:
+
+```tsx
+import { KeyValueRow, KeyValueRowVariant } from '@metamask/design-system-react-native';
+import { TextColor, TextVariant } from '@metamask/design-system-react-native';
+
+// Before (0.15.0)
+<KeyValueRow
+  field={{
+    label: {
+      text: 'Fee',
+      variant: TextVariant.BodySm,
+      color: TextColor.TextAlternative,
+    },
+  }}
+  value={{
+    label: {
+      text: '$2.59',
+      variant: TextVariant.BodySm,
+      color: TextColor.SuccessDefault,
+    },
+  }}
+/>
+
+// After (0.16.0)
+<KeyValueRow
+  keyLabel="Fee"
+  value="$2.59"
+  keyTextProps={{ variant: TextVariant.BodySm, color: TextColor.TextAlternative }}
+  valueTextProps={{ variant: TextVariant.BodySm, color: TextColor.SuccessDefault }}
+/>
+```
+
+Icons with `side` → accessories (use start and/or end nodes; “both sides” means passing both `*StartAccessory` and `*EndAccessory` when you need icons on each side):
+
+```tsx
+import { Icon, IconColor, IconName, IconSize } from '@metamask/design-system-react-native';
+
+// Before (0.15.0) — icon on the left of the key label
+<KeyValueRow
+  field={{
+    label: { text: 'Network' },
+    icon: { name: IconName.Wifi, color: IconColor.PrimaryDefault, size: IconSize.Sm },
+  }}
+  value={{ label: { text: 'Mainnet' } }}
+/>
+
+// After (0.16.0)
+<KeyValueRow
+  keyLabel="Network"
+  value="Mainnet"
+  keyStartAccessory={<Icon name={IconName.Wifi} color={IconColor.PrimaryDefault} size={IconSize.Sm} />}
+/>
+```
+
+Info icon that previously used `tooltip` → `keyEndButtonIconProps` and host-controlled UI:
+
+```tsx
+import { IconName } from '@metamask/design-system-react-native';
+
+// Before (0.15.0)
+<KeyValueRow
+  field={{ label: { text: 'Limit' } }}
+  value={{
+    label: { text: 'Unlimited' },
+    tooltip: {
+      title: 'About limits',
+      content: 'Explanation shown in a tooltip…',
+      onPress: () => showTooltip(),
+    },
+  }}
+/>
+
+// After (0.16.0) — implement modal / sheet / tooltip in onPress
+<KeyValueRow
+  keyLabel="Limit"
+  value="Unlimited"
+  valueEndButtonIconProps={{
+    iconName: IconName.Question,
+    onPress: () => showTooltip(),
+  }}
+/>
+```
+
+Taller row for input-style screens:
+
+```tsx
+import {
+  KeyValueRow,
+  KeyValueRowVariant,
+} from '@metamask/design-system-react-native';
+import { Icon, IconName, IconSize } from '@metamask/design-system-react-native';
+
+<KeyValueRow
+  keyLabel="Pay with"
+  value="Debit or credit"
+  variant={KeyValueRowVariant.Input}
+  valueStartAccessory={<Icon name={IconName.Card} size={IconSize.Sm} />}
+  valueEndAccessory={<Icon name={IconName.ArrowDown} size={IconSize.Sm} />}
+/>;
+```
+
+Custom React nodes for key or value remain supported:
+
+```tsx
+<KeyValueRow
+  keyLabel="Account"
+  value={<AvatarAccount address={address} size={AvatarAccountSize.Xs} />}
+/>
+```
+
+**Instructions for downstream consumers:**
+
+- In **MetaMask Mobile**, **MetaMask extension**, and any shared packages, search for `KeyValueRow` and migrate every usage away from `field` / `value` objects to the new props.
+- Remove imports of deleted symbols (`KeyValueRowStubs`, `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes`, and the removed types).
+- If your app defines **KeyValueColumn** or another wrapper that forwards the old `KeyValueRow` props, update that component’s API and all call sites to match the new shape.
 
 ## From Mobile Component Library
 
