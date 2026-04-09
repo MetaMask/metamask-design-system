@@ -1271,19 +1271,20 @@ The mobile `Checkbox` maps to `Checkbox` in the design system, with controlled-s
 
 ##### Props and Callback Mapping
 
-| Mobile API                             | Design System API                         | Change Type                                         | Notes                                                                                      |
-| -------------------------------------- | ----------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `isChecked?: boolean`                  | `isSelected: boolean`                     | renamed + now required                              | controlled value must be explicitly passed                                                 |
-| `onPress?: () => void`                 | `onChange: (isSelected: boolean) => void` | callback renamed + signature changed + now required | callback receives next boolean value                                                       |
+| Mobile API                             | Design System API                         | Change Type                                         | Notes                                                                                        |
+| -------------------------------------- | ----------------------------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `isChecked?: boolean`                  | `isSelected: boolean`                     | renamed + now required                              | controlled value must be explicitly passed                                                   |
+| `onPress?: () => void`                 | `onChange: (isSelected: boolean) => void` | callback renamed + signature changed + now required | use `onChange` for selection updates; it receives the next boolean value                    |
 | `checkboxStyle?: StyleProp<ViewStyle>` | removed top-level prop                    | removed                                             | style the container with `style` / `twClassName` or customize via `checkboxContainerProps` |
-| `isIndeterminate?: boolean`            | removed                                   | removed                                             | no built-in tri-state checkbox mode                                                        |
-| `isReadOnly?: boolean`                 | removed                                   | removed                                             | enforce read-only in parent by no-oping `onChange`                                         |
-| `isDanger?: boolean`                   | removed                                   | removed                                             | no danger variant in MMDS checkbox                                                         |
-| `isDisabled?: boolean`                 | `isDisabled?: boolean`                    | unchanged                                           | still defaults to `false`                                                                  |
-| `label?: string \| ReactNode`          | `label?: string \| ReactNode`             | unchanged                                           | still supported                                                                            |
-| `labelProps`                           | `labelProps`                              | unchanged                                           | still supported (Text props)                                                               |
-| `checkedIconProps`                     | `checkedIconProps`                        | added in MMDS                                       | customize selected check icon                                                              |
-| `checkboxContainerProps`               | `checkboxContainerProps`                  | added in MMDS                                       | customize icon container view                                                              |
+| `isIndeterminate?: boolean`            | removed                                   | removed                                             | no built-in tri-state checkbox mode                                                          |
+| `isReadOnly?: boolean`                 | removed                                   | removed                                             | enforce read-only in parent by no-oping `onChange`                                           |
+| `isDanger?: boolean`                   | removed                                   | removed                                             | no danger variant in MMDS checkbox                                                           |
+| `isDisabled?: boolean`                 | `isDisabled?: boolean`                    | unchanged                                           | still defaults to `false`                                                                    |
+| `label?: string \| ReactNode`          | `label?: string \| ReactNode`             | unchanged                                           | still supported                                                                              |
+| `labelProps`                           | `labelProps`                              | added in MMDS                                       | pass Text props to the MMDS label                                                            |
+| `checkedIconProps`                     | `checkedIconProps`                        | added in MMDS                                       | customize selected check icon                                                                |
+| `checkboxContainerProps`               | `checkboxContainerProps`                  | added in MMDS                                       | customize icon container view                                                                |
+| inherited `TouchableOpacityProps`      | inherited `PressableProps`                | inherited base changed                              | migrate press/interaction/accessibility props to the Pressable API surface                  |
 
 ##### Default and Behavior Changes
 

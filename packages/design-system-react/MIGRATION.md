@@ -598,20 +598,22 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 
 ##### Props and Callback Mapping
 
-| Extension API                                               | Design System API                         | Change Type                      | Notes                                                         |
-| ----------------------------------------------------------- | ----------------------------------------- | -------------------------------- | ------------------------------------------------------------- |
-| `isChecked?: boolean`                                       | `isSelected: boolean`                     | renamed + now required           | controlled value must be explicitly passed                    |
-| `onChange?: (event: ChangeEvent<HTMLInputElement>) => void` | `onChange: (isSelected: boolean) => void` | signature changed + now required | callback receives the next boolean value instead of DOM event |
-| `id?: string`                                               | `id: string`                              | now required                     | required for `input`/`label` association                      |
-| `iconProps?: IconProps<'span'>`                             | `checkedIconProps?: Partial<IconProps>`   | renamed                          | use for checked icon customization                            |
-| `isIndeterminate?: boolean`                                 | removed                                   | removed                          | no built-in tri-state behavior                                |
-| `isReadOnly?: boolean`                                      | removed                                   | removed                          | handle read-only behavior in parent by no-oping `onChange`    |
-| `isRequired?: boolean`                                      | removed from top-level                    | moved                            | pass through `inputProps={{ required: true }}`                |
-| `name?: string`                                             | removed from top-level                    | moved                            | pass through `inputProps={{ name: 'fieldName' }}`             |
-| `title?: string`                                            | removed from top-level                    | moved                            | pass through `inputProps={{ title: '...' }}`                  |
-| `inputRef`                                                  | removed                                   | removed                          | no dedicated input ref prop                                   |
-| broad Box/Text style utility props                          | removed                                   | removed                          | use `className`, `style`, and explicit props instead          |
-| `isInvalid`                                                 | `isInvalid`                               | added in MMDS                    | use for error styling (`false` by default)                    |
+| Extension API                                               | Design System API                         | Change Type                      | Notes                                                           |
+| ----------------------------------------------------------- | ----------------------------------------- | -------------------------------- | --------------------------------------------------------------- |
+| `isChecked?: boolean`                                       | `isSelected: boolean`                     | renamed + now required           | controlled value must be explicitly passed                      |
+| `onChange?: (event: ChangeEvent<HTMLInputElement>) => void` | `onChange: (isSelected: boolean) => void` | signature changed + now required | callback receives the next boolean value instead of DOM event   |
+| `id?: string`                                               | `id: string`                              | now required                     | required for `input`/`label` association                        |
+| `label?: any`                                               | `label?: ReactNode \| string`             | type narrowed                    | MMDS documents a constrained label shape                         |
+| `inputProps?: any`                                          | `inputProps?: Omit<ComponentProps<'input'>, ...>` | typed in MMDS                    | MMDS narrows allowed input props while preserving data attributes |
+| `iconProps?: IconProps<'span'>`                             | `checkedIconProps?: Partial<IconProps>`   | renamed                          | use for checked icon customization                              |
+| `isIndeterminate?: boolean`                                 | removed                                   | removed                          | no built-in tri-state behavior                                  |
+| `isReadOnly?: boolean`                                      | removed                                   | removed                          | handle read-only behavior in parent by no-oping `onChange`      |
+| `isRequired?: boolean`                                      | removed from top-level                    | moved                            | pass through `inputProps={{ required: true }}`                  |
+| `name?: string`                                             | removed from top-level                    | moved                            | pass through `inputProps={{ name: 'fieldName' }}`               |
+| `title?: string`                                            | removed from top-level                    | moved                            | pass through `inputProps={{ title: '...' }}`                    |
+| `inputRef`                                                  | removed                                   | removed                          | no dedicated input ref prop                                     |
+| broad Box/Text style utility props                          | removed                                   | removed                          | use `className`, `style`, and explicit MMDS props               |
+| `isInvalid`                                                 | `isInvalid`                               | added in MMDS                    | use for error styling (`false` by default)                      |
 
 ##### Default and Behavior Changes
 
