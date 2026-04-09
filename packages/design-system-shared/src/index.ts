@@ -94,3 +94,13 @@ export {
   AvatarAccountVariant,
   type AvatarAccountPropsShared,
 } from './types/AvatarAccount';
+
+// Text types (ADR-0003 + ADR-0004)
+export {
+  FontFamily,
+  FontStyle,
+  FontWeight,
+  TextColor,
+  TextVariant,
+  type TextPropsShared,
+} from './types/Text';

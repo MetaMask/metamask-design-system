@@ -1,21 +1,22 @@
-import { render, screen } from '@testing-library/react';
-import React from 'react';
-
 import {
   FontFamily,
   FontStyle,
   FontWeight,
-  OverflowWrap,
-  TextAlign,
-  TextVariant,
-  TextTransform,
   TextColor,
-} from '../../types';
+  TextVariant,
+} from '@metamask/design-system-shared';
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+
+import { OverflowWrap, TextAlign, TextTransform } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 
 import {
-  CLASSMAP_TEXT_VARIANT_FONTSTYLE,
-  CLASSMAP_TEXT_VARIANT_FONTWEIGHT,
+  TWCLASSMAP_TEXT_VARIANT_FONTSTYLE,
+  TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT,
+  TWCLASSMAP_TEXT_FONTFAMILY,
+  TWCLASSMAP_TEXT_FONTSTYLE,
+  TWCLASSMAP_TEXT_FONTWEIGHT,
 } from './Text.constants';
 
 import { Text } from '.';
@@ -42,8 +43,8 @@ describe('Text Component', () => {
 
         const expectedClassNames = twMerge(
           TextColor.TextDefault,
-          CLASSMAP_TEXT_VARIANT_FONTSTYLE[variant],
-          CLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
+          TWCLASSMAP_TEXT_VARIANT_FONTSTYLE[variant],
+          TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
         );
 
         expectedClassNames.split(' ').forEach((className) => {
@@ -75,7 +76,9 @@ describe('Text Component', () => {
     Object.values(FontWeight).forEach((weight) => {
       it(`applies ${weight} font weight correctly`, () => {
         const { container } = render(<Text fontWeight={weight}>Test</Text>);
-        expect(container.firstChild).toHaveClass(weight);
+        expect(container.firstChild).toHaveClass(
+          TWCLASSMAP_TEXT_FONTWEIGHT[weight],
+        );
       });
     });
   });
@@ -84,7 +87,9 @@ describe('Text Component', () => {
     Object.values(FontFamily).forEach((family) => {
       it(`applies ${family} font family correctly`, () => {
         const { container } = render(<Text fontFamily={family}>Test</Text>);
-        expect(container.firstChild).toHaveClass(family);
+        expect(container.firstChild).toHaveClass(
+          TWCLASSMAP_TEXT_FONTFAMILY[family],
+        );
       });
     });
   });
@@ -93,7 +98,9 @@ describe('Text Component', () => {
     Object.values(FontStyle).forEach((style) => {
       it(`applies ${style} font style correctly`, () => {
         const { container } = render(<Text fontStyle={style}>Test</Text>);
-        expect(container.firstChild).toHaveClass(style);
+        expect(container.firstChild).toHaveClass(
+          TWCLASSMAP_TEXT_FONTSTYLE[style],
+        );
       });
     });
   });
@@ -139,8 +146,8 @@ describe('Text Component', () => {
 
       expect(container.firstChild).toHaveClass(
         TextColor.PrimaryDefault,
-        FontWeight.Bold,
-        FontStyle.Italic,
+        TWCLASSMAP_TEXT_FONTWEIGHT[FontWeight.Bold],
+        TWCLASSMAP_TEXT_FONTSTYLE[FontStyle.Italic],
         TextTransform.Uppercase,
         TextAlign.Center,
         OverflowWrap.BreakWord,

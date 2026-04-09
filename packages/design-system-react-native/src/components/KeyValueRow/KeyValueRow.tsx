@@ -1,14 +1,13 @@
-import { KeyValueRowVariant } from '@metamask/design-system-shared';
+import {
+  FontWeight,
+  KeyValueRowVariant,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import {
-  ButtonIconSize,
-  FontWeight,
-  IconColor,
-  TextColor,
-  TextVariant,
-} from '../../types';
+import { ButtonIconSize, IconColor } from '../../types';
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
 import { ButtonIcon } from '../ButtonIcon';
