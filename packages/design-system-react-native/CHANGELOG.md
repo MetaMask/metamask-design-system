@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0]
+
+### Changed
+
+- **BREAKING:** Migrated `Text` typography types (`TextVariant`, `TextColor`, `FontWeight`, `FontStyle`, `FontFamily`) to `@metamask/design-system-shared`; all imports through `@metamask/design-system-react-native` continue to work without change ([#1047](https://github.com/MetaMask/metamask-design-system/pull/1047))
+  - `FontWeight` underlying string values changed from numeric strings (`'600'`, `'500'`, `'400'`) to semantic identifiers (`'bold'`, `'medium'`, `'regular'`); idiomatic usage (e.g. `FontWeight.Bold`) is unaffected
+  - See [Migration Guide](./MIGRATION.md#from-version-0160-to-0170)
+
 ## [0.16.0]
 
 ### Added
@@ -314,7 +322,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.16.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.17.0...HEAD
+[0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.16.0...@metamask/design-system-react-native@0.17.0
 [0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.15.0...@metamask/design-system-react-native@0.16.0
 [0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.14.0...@metamask/design-system-react-native@0.15.0
 [0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.13.0...@metamask/design-system-react-native@0.14.0
