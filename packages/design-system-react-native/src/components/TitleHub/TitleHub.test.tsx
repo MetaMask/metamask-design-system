@@ -80,12 +80,12 @@ describe('TitleHub', () => {
       expect(getByText('$4.42')).toBeOnTheScreen();
     });
 
-    it('renders title and titleAccessory', () => {
+    it('renders title and titleEndAccessory', () => {
       const { getByText } = render(
         <TitleHub
           title="Step 1"
           amount="$4.42"
-          titleAccessory={<Text>Title extra</Text>}
+          titleEndAccessory={<Text>Title extra</Text>}
         />,
       );
 
@@ -123,10 +123,10 @@ describe('TitleHub', () => {
     });
   });
 
-  describe('when titleAccessory is false', () => {
+  describe('when titleEndAccessory is false', () => {
     it('renders title only', () => {
       const { getByText } = render(
-        <TitleHub title="Hi" amount="$4.42" titleAccessory={false} />,
+        <TitleHub title="Hi" amount="$4.42" titleEndAccessory={false} />,
       );
 
       expect(getByText('Hi')).toBeOnTheScreen();
@@ -160,13 +160,13 @@ describe('TitleHub', () => {
       expect(getByText('0.002 ETH')).toBeOnTheScreen();
     });
 
-    it('renders bottomLabel and bottomLabelAccessory', () => {
+    it('renders bottomLabel and bottomLabelEndAccessory', () => {
       const { getByText } = render(
         <TitleHub
           title="Send"
           amount="$4.42"
           bottomLabel="0.002 ETH"
-          bottomLabelAccessory={<Text>Fee info</Text>}
+          bottomLabelEndAccessory={<Text>Fee info</Text>}
         />,
       );
 
@@ -218,13 +218,13 @@ describe('TitleHub', () => {
     });
   });
 
-  describe('when only bottomLabelAccessory is provided', () => {
+  describe('when only bottomLabelEndAccessory is provided', () => {
     it('renders bottom label row with accessory and not bottomAccessory', () => {
       const { getByText, queryByText } = render(
         <TitleHub
           title="Send"
           amount="$4.42"
-          bottomLabelAccessory={<Text>Only accessory</Text>}
+          bottomLabelEndAccessory={<Text>Only accessory</Text>}
           bottomAccessory={<Text>Full row</Text>}
         />,
       );
@@ -234,13 +234,13 @@ describe('TitleHub', () => {
     });
   });
 
-  describe('when amountAccessory is provided', () => {
-    it('renders amount and amountAccessory', () => {
+  describe('when amountEndAccessory is provided', () => {
+    it('renders amount and amountEndAccessory', () => {
       const { getByText } = render(
         <TitleHub
           title="Send"
           amount="$4.42"
-          amountAccessory={<Text>Info</Text>}
+          amountEndAccessory={<Text>Info</Text>}
         />,
       );
 
@@ -248,12 +248,12 @@ describe('TitleHub', () => {
       expect(getByText('Info')).toBeOnTheScreen();
     });
 
-    it('renders amountAccessory when amount is an empty string', () => {
+    it('renders amountEndAccessory when amount is an empty string', () => {
       const { getByText } = render(
         <TitleHub
           title="Send"
           amount=""
-          amountAccessory={<Text>Accessory only</Text>}
+          amountEndAccessory={<Text>Accessory only</Text>}
         />,
       );
 
@@ -261,23 +261,23 @@ describe('TitleHub', () => {
     });
   });
 
-  describe('when amountAccessory is false', () => {
+  describe('when amountEndAccessory is false', () => {
     it('renders amount only', () => {
       const { getByText } = render(
-        <TitleHub title="Send" amount="$4.42" amountAccessory={false} />,
+        <TitleHub title="Send" amount="$4.42" amountEndAccessory={false} />,
       );
 
       expect(getByText('$4.42')).toBeOnTheScreen();
     });
   });
 
-  describe('when title, amountAccessory, and bottomLabel are provided', () => {
+  describe('when title, amountEndAccessory, and bottomLabel are provided', () => {
     it('renders all slots', () => {
       const { getByText } = render(
         <TitleHub
           title={<Text>Send</Text>}
           amount="$4.42"
-          amountAccessory={<Text>i</Text>}
+          amountEndAccessory={<Text>i</Text>}
           bottomLabel="0.002 ETH"
         />,
       );

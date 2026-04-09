@@ -8,7 +8,7 @@ import { Text, TextColor, FontWeight, TextVariant } from '../Text';
 import { TitleHub } from './TitleHub';
 import type { TitleHubProps } from './TitleHub.types';
 
-/** Pill badge: dot + label (e.g. network), for `titleAccessory`. */
+/** Pill badge: dot + label (e.g. network), for `titleEndAccessory`. */
 const TestnetBadge = () => (
   <Box
     flexDirection={BoxFlexDirection.Row}
@@ -62,7 +62,7 @@ export const Default: Story = {
     bottomLabel: '$336.21 available',
     twClassName: '',
   },
-  render: (args) => <TitleHub {...args} titleAccessory={<TestnetBadge />} />,
+  render: (args) => <TitleHub {...args} titleEndAccessory={<TestnetBadge />} />,
 };
 
 export const Amount: Story = {
@@ -74,7 +74,7 @@ export const AmountAccessory: Story = {
     <TitleHub
       title="Perps"
       amount="$336.21"
-      amountAccessory={
+      amountEndAccessory={
         <Box twClassName="ml-2">
           <Icon
             name={IconName.Info}
@@ -96,7 +96,7 @@ export const Title: Story = {
 };
 
 export const TitleAccessory: Story = {
-  render: () => <TitleHub title="Perps" titleAccessory={<TestnetBadge />} />,
+  render: () => <TitleHub title="Perps" titleEndAccessory={<TestnetBadge />} />,
 };
 
 export const BottomLabel: Story = {
@@ -114,7 +114,7 @@ export const BottomLabelAccessory: Story = {
       title="Perps"
       amount="$336.21"
       bottomLabel="$336.21 available"
-      bottomLabelAccessory={
+      bottomLabelEndAccessory={
         <Box twClassName="ml-2">
           <Icon name={IconName.Info} size={IconSize.Xs} />
         </Box>

@@ -12,7 +12,7 @@ import { TitleHub } from '@metamask/design-system-react-native';
 
 ### `title`
 
-Title row (required). When `title` is a string, it uses `TextVariant.HeadingMd` and `TextColor.TextDefault` (merged with `titleProps`). For custom layout, pass a `ReactNode`. The row also renders when only `titleAccessory` is renderable (for example `title={false}` with an end accessory).
+Title row (required). When `title` is a string, it uses `TextVariant.HeadingMd` and `TextColor.TextDefault` (merged with `titleProps`). For custom layout, pass a `ReactNode`. The row also renders when only `titleEndAccessory` is renderable (for example `title={false}` with an end accessory).
 
 Legacy **`TitleStandard`** **`topLabel`** maps to **`title`** on `TitleHub`. The old main-line value (large amount) maps to **`amount`**, not `title`.
 
@@ -26,9 +26,9 @@ import { TitleHub } from '@metamask/design-system-react-native';
 <TitleHub title="Send" amount="$4.42" bottomLabel="0.002 ETH" />;
 ```
 
-### `titleAccessory`
+### `titleEndAccessory`
 
-Optional node to the right of `title` in the title row (same pattern as `amountAccessory`).
+Optional node to the right of `title` in the title row (same pattern as `amountEndAccessory`).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -45,7 +45,7 @@ import {
 
 <TitleHub
   title="Send"
-  titleAccessory={
+  titleEndAccessory={
     <Box twClassName="ml-2">
       <Icon name={IconName.Info} size={IconSize.Sm} />
     </Box>
@@ -56,7 +56,7 @@ import {
 
 ### `amount`
 
-Optional primary amount line below the title. The amount row renders when `amount` or `amountAccessory` is renderable. When `amount` is a string, it is wrapped with display typography (`TextVariant.DisplayLg` and `amountProps`); other `ReactNode` values render as provided.
+Optional primary amount line below the title. The amount row renders when `amount` or `amountEndAccessory` is renderable. When `amount` is a string, it is wrapped with display typography (`TextVariant.DisplayLg` and `amountProps`); other `ReactNode` values render as provided.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -68,7 +68,7 @@ import { TitleHub } from '@metamask/design-system-react-native';
 <TitleHub title="Balance" amount="$1,234.56" />;
 ```
 
-### `amountAccessory`
+### `amountEndAccessory`
 
 Optional node rendered to the right of the amount (for example an info icon).
 
@@ -88,7 +88,7 @@ import {
 <TitleHub
   title="Send"
   amount="$4.42"
-  amountAccessory={
+  amountEndAccessory={
     <Box twClassName="ml-2">
       <Icon name={IconName.Info} size={IconSize.Sm} />
     </Box>
@@ -98,7 +98,7 @@ import {
 
 ### `bottomLabel`
 
-Optional bottom label row with secondary typography when the value is a string (`BodySm`, medium, `TextColor.TextAlternative`). If `bottomLabel` or `bottomLabelAccessory` is renderable, that row is shown and `bottomAccessory` is not used.
+Optional bottom label row with secondary typography when the value is a string (`BodySm`, medium, `TextColor.TextAlternative`). If `bottomLabel` or `bottomLabelEndAccessory` is renderable, that row is shown and `bottomAccessory` is not used.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -110,9 +110,9 @@ import { TitleHub } from '@metamask/design-system-react-native';
 <TitleHub title="Send" amount="$4.42" bottomLabel="0.002 ETH" />;
 ```
 
-### `bottomLabelAccessory`
+### `bottomLabelEndAccessory`
 
-Optional node to the right of `bottomLabel` in the bottom label row (same pattern as `amountAccessory`).
+Optional node to the right of `bottomLabel` in the bottom label row (same pattern as `amountEndAccessory`).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -131,7 +131,7 @@ import {
   title="Send"
   amount="$4.42"
   bottomLabel="0.002 ETH"
-  bottomLabelAccessory={
+  bottomLabelEndAccessory={
     <Box twClassName="ml-2">
       <Icon name={IconName.Gas} size={IconSize.Xs} />
     </Box>
@@ -141,7 +141,7 @@ import {
 
 ### `bottomAccessory`
 
-Optional custom bottom row when neither `bottomLabel` nor `bottomLabelAccessory` is renderable. Renders without default label typography; compose layout inside the node.
+Optional custom bottom row when neither `bottomLabel` nor `bottomLabelEndAccessory` is renderable. Renders without default label typography; compose layout inside the node.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |

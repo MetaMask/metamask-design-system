@@ -15,12 +15,12 @@ import type { TitleHubProps } from './TitleHub.types';
  *
  * @param props - Component props
  * @param props.title - Title row content (required)
- * @param props.titleAccessory - Optional inline accessory to the right of `title`
+ * @param props.titleEndAccessory - Optional inline accessory to the right of `title`
  * @param props.amount - Optional primary amount below the title
- * @param props.amountAccessory - Optional inline accessory to the right of the amount
+ * @param props.amountEndAccessory - Optional inline accessory to the right of the amount
  * @param props.bottomAccessory - Optional custom bottom row when the bottom label row is not shown
  * @param props.bottomLabel - Optional secondary label below the amount row
- * @param props.bottomLabelAccessory - Optional inline accessory to the right of `bottomLabel`
+ * @param props.bottomLabelEndAccessory - Optional inline accessory to the right of `bottomLabel`
  * @param props.titleProps - Optional props merged into title row `Text` when `title` is a string
  * @param props.amountProps - Optional props merged into amount `Text` when `amount` is a string
  * @param props.bottomLabelProps - Optional props merged into bottom label `Text` when `bottomLabel` is a string
@@ -30,39 +30,39 @@ import type { TitleHubProps } from './TitleHub.types';
  */
 export const TitleHub: React.FC<TitleHubProps> = ({
   amount,
-  amountAccessory,
+  amountEndAccessory,
   title,
-  titleAccessory,
+  titleEndAccessory,
   bottomAccessory,
   bottomLabel,
-  bottomLabelAccessory,
+  bottomLabelEndAccessory,
   amountProps,
   titleProps,
   bottomLabelProps,
   twClassName = '',
   ...props
 }) => {
-  const amountEndAccessoryNode = isReactNodeRenderable(amountAccessory)
-    ? amountAccessory
+  const amountEndAccessoryNode = isReactNodeRenderable(amountEndAccessory)
+    ? amountEndAccessory
     : undefined;
 
-  const titleEndAccessoryNode = isReactNodeRenderable(titleAccessory)
-    ? titleAccessory
+  const titleEndAccessoryNode = isReactNodeRenderable(titleEndAccessory)
+    ? titleEndAccessory
     : undefined;
 
   const bottomLabelEndAccessoryNode = isReactNodeRenderable(
-    bottomLabelAccessory,
+    bottomLabelEndAccessory,
   )
-    ? bottomLabelAccessory
+    ? bottomLabelEndAccessory
     : undefined;
 
   const renderTitleRow =
-    isReactNodeRenderable(title) || isReactNodeRenderable(titleAccessory);
+    isReactNodeRenderable(title) || isReactNodeRenderable(titleEndAccessory);
   const renderAmountRow =
-    isReactNodeRenderable(amount) || isReactNodeRenderable(amountAccessory);
+    isReactNodeRenderable(amount) || isReactNodeRenderable(amountEndAccessory);
   const renderBottomLabelRow =
     isReactNodeRenderable(bottomLabel) ||
-    isReactNodeRenderable(bottomLabelAccessory);
+    isReactNodeRenderable(bottomLabelEndAccessory);
   const renderBottomAccessory =
     !renderBottomLabelRow && isReactNodeRenderable(bottomAccessory);
 
