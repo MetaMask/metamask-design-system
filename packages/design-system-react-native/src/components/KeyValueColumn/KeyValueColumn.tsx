@@ -1,4 +1,8 @@
-import { FontWeight, TextColor, TextVariant } from '@metamask/design-system-shared';
+import {
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import React from 'react';
 
 import { ButtonIconSize, IconColor } from '../../types';
