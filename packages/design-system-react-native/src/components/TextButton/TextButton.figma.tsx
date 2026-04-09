@@ -1,9 +1,8 @@
 // import figma needs to remain as figma otherwise it breaks code connect
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
+import { TextVariant } from '@metamask/design-system-shared';
 import React from 'react';
-
-import { TextVariant } from '../../types';
 
 import { TextButton } from './TextButton';
 
