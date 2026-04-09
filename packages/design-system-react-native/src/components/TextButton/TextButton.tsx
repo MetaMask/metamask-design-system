@@ -1,6 +1,6 @@
+import { TextColor, TextVariant } from '@metamask/design-system-shared';
 import React, { useState } from 'react';
 
-import { TextVariant, TextColor } from '../../types';
 import { Text, FontWeight } from '../Text';
 
 import type { TextButtonProps } from './TextButton.types';

@@ -25,6 +25,12 @@ export {
   type BadgeStatusPropsShared,
 } from './types/BadgeStatus';
 
+// IconAlert types (ADR-0003 + ADR-0004)
+export {
+  IconAlertSeverity,
+  type IconAlertPropsShared,
+} from './types/IconAlert';
+
 // BannerBase types (ADR-0004)
 export { type BannerBasePropsShared } from './types/BannerBase';
 
@@ -91,3 +97,13 @@ export {
   AvatarAccountVariant,
   type AvatarAccountPropsShared,
 } from './types/AvatarAccount';
+
+// Text types (ADR-0003 + ADR-0004)
+export {
+  FontFamily,
+  FontStyle,
+  FontWeight,
+  TextColor,
+  TextVariant,
+  type TextPropsShared,
+} from './types/Text';

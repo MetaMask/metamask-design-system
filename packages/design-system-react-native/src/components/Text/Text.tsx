@@ -1,11 +1,15 @@
+import {
+  FontFamily,
+  FontStyle,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { Text as RNText } from 'react-native';
 
-import { FontFamily, FontStyle, TextVariant, TextColor } from '../../types';
-
 import {
-  MAP_TEXT_VARIANT_FONTWEIGHT,
+  TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT,
   TWCLASSMAP_TEXT_FONTWEIGHT,
 } from './Text.constants';
 import type { TextProps } from './Text.types';
@@ -22,7 +26,8 @@ export const Text: React.FC<TextProps> = ({
   ...props
 }) => {
   const tw = useTailwind();
-  const finalFontWeight = fontWeight ?? MAP_TEXT_VARIANT_FONTWEIGHT[variant];
+  const finalFontWeight =
+    fontWeight ?? TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant];
 
   const textStyle = useMemo(() => {
     const isItalic = fontStyle === FontStyle.Italic;

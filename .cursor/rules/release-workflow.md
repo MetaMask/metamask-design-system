@@ -85,6 +85,12 @@ Transform auto-generated entries into consumer-facing descriptions.
   - See [Migration Guide](./MIGRATION.md#from-version-0100-to-0110)
 ```
 
+After editing, validate format:
+
+```bash
+yarn changelog:validate
+```
+
 ### Step 4: Update MIGRATION.md (Breaking Changes Only)
 
 **When to update:**
