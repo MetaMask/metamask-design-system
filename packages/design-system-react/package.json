@@ -39,7 +39,6 @@
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
     "create-component": "tsx scripts/create-component",
-    "generate-icons": "yarn workspace @metamask/design-system-shared generate-icons",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
