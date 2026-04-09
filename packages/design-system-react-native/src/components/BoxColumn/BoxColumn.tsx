@@ -1,0 +1,28 @@
+import React from 'react';
+
+import { BoxFlexDirection } from '../../types';
+import { Box } from '../Box';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
+
+import type { BoxColumnProps } from './BoxColumn.types';
+
+export const BoxColumn = ({
+  children,
+  textProps,
+  topAccessory,
+  bottomAccessory,
+  twClassName,
+  ...rest
+}: BoxColumnProps) => (
+  <Box
+    flexDirection={BoxFlexDirection.Column}
+    twClassName={twClassName}
+    {...rest}
+  >
+    {topAccessory}
+    <TextOrChildren textProps={textProps}>{children}</TextOrChildren>
+    {bottomAccessory}
+  </Box>
+);
+
+BoxColumn.displayName = 'BoxColumn';

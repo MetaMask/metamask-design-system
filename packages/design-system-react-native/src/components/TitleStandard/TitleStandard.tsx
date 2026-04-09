@@ -4,7 +4,7 @@ import React from 'react';
 
 // Internal dependencies.
 import { Box } from '../Box';
-import { BoxHorizontal } from '../BoxHorizontal';
+import { BoxRow } from '../BoxRow';
 import { TextVariant, TextColor, FontWeight } from '../Text';
 
 import type { TitleStandardProps } from './TitleStandard.types';
@@ -41,7 +41,7 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
     : undefined;
 
   const titleRow = (
-    <BoxHorizontal
+    <BoxRow
       endAccessory={titleEndAccessoryNode}
       textProps={{
         variant: TextVariant.HeadingLg,
@@ -49,7 +49,7 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
       }}
     >
       {title}
-    </BoxHorizontal>
+    </BoxRow>
   );
 
   const renderBottomLabel = isReactNodeRenderable(bottomLabel);
@@ -57,7 +57,7 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
     !renderBottomLabel && isReactNodeRenderable(bottomAccessory);
 
   const bottomLabelRow = (
-    <BoxHorizontal
+    <BoxRow
       textProps={{
         variant: TextVariant.BodySm,
         fontWeight: FontWeight.Medium,
@@ -66,7 +66,7 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
       }}
     >
       {bottomLabel}
-    </BoxHorizontal>
+    </BoxRow>
   );
 
   return (
