@@ -15,6 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
@@ -712,6 +713,64 @@ import { Checkbox } from '@metamask/design-system-react';
 ## Version Updates
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
+
+## From version 0.16.0 to 0.17.0
+
+### Text: Typography const values moved to `@metamask/design-system-shared`
+
+`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react`. All existing import paths through `@metamask/design-system-react` continue to work without change.
+
+#### `FontWeight`, `FontStyle`, and `FontFamily` values changed
+
+**No migration likely needed.** These were TypeScript `enum` types before this release, so the underlying string values were inaccessible via the type system and would only have been relied upon in rare circumstances. Idiomatic usage (`fontWeight={FontWeight.Bold}`) continues to work without change — the components handle the mapping internally.
+
+The values did change to semantic identifiers for cross-platform sharing with React Native:
+
+| Const        | Key        | Before (0.16.0)  | After (0.17.0)         |
+| ------------ | ---------- | ---------------- | ---------------------- |
+| `FontWeight` | `.Bold`    | `'font-bold'`    | `'bold'`               |
+| `FontWeight` | `.Medium`  | `'font-medium'`  | `'medium'`             |
+| `FontWeight` | `.Regular` | `'font-regular'` | `'regular'`            |
+| `FontStyle`  | `.Normal`  | `'not-italic'`   | `'normal'`             |
+| `FontStyle`  | `.Italic`  | `'italic'`       | `'italic'` (unchanged) |
+| `FontFamily` | `.Default` | `'font-default'` | `'default'`            |
+| `FontFamily` | `.Accent`  | `'font-accent'`  | `'accent'`             |
+| `FontFamily` | `.Hero`    | `'font-hero'`    | `'hero'`               |
+
+If you were comparing against the raw string values directly, update to use the const member instead:
+
+```tsx
+// ❌ Rare: comparing against raw string value
+if (fontWeight === 'font-bold') { ... }
+
+// ✅ Use const member (works in both 0.16.0 and 0.17.0)
+if (fontWeight === FontWeight.Bold) { ... }
+```
+
+#### Breaking: Tailwind content scanning
+
+If your project scans `node_modules/@metamask/design-system-react` for Tailwind class names (e.g. to include `text-primary-default` from `TextColor`), you must also scan `@metamask/design-system-shared` because the class name strings now live in the shared package's compiled output.
+
+**Before (0.16.0):**
+
+```js
+// tailwind.config.js
+content: [
+  './node_modules/@metamask/design-system-react/**/*.{mjs,cjs}',
+],
+```
+
+**After (0.17.0):**
+
+```js
+// tailwind.config.js
+content: [
+  './node_modules/@metamask/design-system-react/**/*.{mjs,cjs}',
+  './node_modules/@metamask/design-system-shared/**/*.{mjs,cjs}',
+],
+```
+
+---
 
 ## From version 0.12.0 to 0.13.0
 

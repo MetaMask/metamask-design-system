@@ -1,3 +1,4 @@
+import { FontFamily, TextVariant } from '@metamask/design-system-shared';
 import {
   Theme,
   useTailwind,
@@ -7,9 +8,8 @@ import { darkTheme, lightTheme } from '@metamask/design-tokens';
 import { forwardRef, useCallback, useMemo, useState } from 'react';
 import { Platform, TextInput } from 'react-native';
 
-import { FontFamily, TextVariant } from '../../types';
 import {
-  MAP_TEXT_VARIANT_FONTWEIGHT,
+  TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT,
   TWCLASSMAP_TEXT_FONTWEIGHT,
 } from '../Text/Text.constants';
 
@@ -46,7 +46,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       [theme],
     );
 
-    const finalFontWeight = MAP_TEXT_VARIANT_FONTWEIGHT[textVariant];
+    const finalFontWeight = TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[textVariant];
     const fontSuffix = TWCLASSMAP_TEXT_FONTWEIGHT[finalFontWeight];
     const fontClass = `font-${FontFamily.Default}${fontSuffix}`;
     const hasPlaceholder =
