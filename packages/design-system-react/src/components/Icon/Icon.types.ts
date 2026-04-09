@@ -1,7 +1,5 @@
-import type { IconPropsShared, IconSize } from '@metamask/design-system-shared';
+import type { IconPropsShared, IconSize, IconName, IconColor } from '@metamask/design-system-shared';
 import type { SVGProps, ComponentPropsWithoutRef } from 'react';
-
-import type { IconName, IconColor } from '../../types';
 
 // Use ComponentPropsWithoutRef to get SVG element props without relying on global SVGElement
 type SVGElementProps = ComponentPropsWithoutRef<'svg'>;

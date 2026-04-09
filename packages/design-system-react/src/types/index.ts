@@ -321,5 +321,3 @@ export enum TextButtonSize {
   BodySm = 'body-sm',
   BodyXs = 'body-xs',
 }
-
-export { IconColor, IconName, IconSize } from '@metamask/design-system-shared';

@@ -381,5 +381,3 @@ export enum FontFamily {
   Accent = 'accent',
   Hero = 'hero',
 }
-
-export { IconColor, IconName, IconSize } from '@metamask/design-system-shared';

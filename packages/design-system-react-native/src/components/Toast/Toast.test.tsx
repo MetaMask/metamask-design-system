@@ -4,7 +4,7 @@ import React, { createRef, useContext } from 'react';
 import { Text as RNText } from 'react-native';
 
 // External dependencies.
-import { IconName } from '../../types';
+import { IconName } from '@metamask/design-system-shared';
 import { AvatarAccountVariant } from '../AvatarAccount';
 
 // Internal dependencies.
