@@ -5,24 +5,24 @@ import {
   TextVariant,
 } from '@metamask/design-system-shared';
 
-export const MAP_FONTWEIGHT_CLASS: Record<FontWeight, string> = {
+export const TWCLASSMAP_TEXT_FONTWEIGHT: Record<FontWeight, string> = {
   [FontWeight.Bold]: 'font-bold',
   [FontWeight.Medium]: 'font-medium',
   [FontWeight.Regular]: 'font-regular',
 };
 
-export const MAP_FONTFAMILY_CLASS: Record<FontFamily, string> = {
+export const TWCLASSMAP_TEXT_FONTFAMILY: Record<FontFamily, string> = {
   [FontFamily.Default]: 'font-default',
   [FontFamily.Accent]: 'font-accent',
   [FontFamily.Hero]: 'font-hero',
 };
 
-export const MAP_FONTSTYLE_CLASS: Record<FontStyle, string> = {
+export const TWCLASSMAP_TEXT_FONTSTYLE: Record<FontStyle, string> = {
   [FontStyle.Italic]: 'italic',
   [FontStyle.Normal]: 'not-italic',
 };
 
-export const CLASSMAP_TEXT_VARIANT_FONTSTYLE: Record<TextVariant, string> = {
+export const TWCLASSMAP_TEXT_VARIANT_FONTSTYLE: Record<TextVariant, string> = {
   [TextVariant.DisplayLg]:
     'text-s-display-lg leading-s-display-lg tracking-s-display-lg md:text-l-display-lg md:leading-l-display-lg md:tracking-l-display-lg',
   [TextVariant.DisplayMd]:
@@ -53,7 +53,7 @@ export const CLASSMAP_TEXT_VARIANT_FONTSTYLE: Record<TextVariant, string> = {
     'text-s-amount-display-lg leading-s-amount-display-lg tracking-s-amount-display-lg md:text-l-amount-display-lg md:leading-l-amount-display-lg md:tracking-l-amount-display-lg',
 };
 
-export const CLASSMAP_TEXT_VARIANT_FONTWEIGHT: Record<TextVariant, string> = {
+export const TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT: Record<TextVariant, string> = {
   [TextVariant.DisplayLg]: 'font-bold md:font-medium',
   [TextVariant.DisplayMd]: 'font-bold md:font-medium',
   [TextVariant.HeadingLg]: 'font-bold',

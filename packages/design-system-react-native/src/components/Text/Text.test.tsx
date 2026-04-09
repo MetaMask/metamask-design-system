@@ -12,7 +12,7 @@ import React from 'react';
 import { Text } from './Text';
 import {
   TWCLASSMAP_TEXT_FONTWEIGHT,
-  MAP_TEXT_VARIANT_FONTWEIGHT,
+  TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT,
 } from './Text.constants';
 
 function buildTextStyleArgs({
@@ -30,7 +30,7 @@ function buildTextStyleArgs({
   fontStyle: FontStyle;
   twClassName: string;
 }> = {}) {
-  const fw = fontWeight ?? MAP_TEXT_VARIANT_FONTWEIGHT[variant];
+  const fw = fontWeight ?? TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant];
   const isItalic = fontStyle === FontStyle.Italic;
   const fontSuffix = `${TWCLASSMAP_TEXT_FONTWEIGHT[fw]}${
     isItalic && fontFamily === FontFamily.Default ? '-italic' : ''
@@ -103,7 +103,7 @@ describe('Text', () => {
           expectedStyles = tw.style(
             ...buildTextStyleArgs({
               variant,
-              fontWeight: MAP_TEXT_VARIANT_FONTWEIGHT[variant],
+              fontWeight: TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
             }),
           );
           return (

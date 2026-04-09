@@ -9,7 +9,7 @@ export const TWCLASSMAP_TEXT_FONTWEIGHT: {
   [FontWeight.Bold]: '-bold',
 };
 
-export const MAP_TEXT_VARIANT_FONTWEIGHT: {
+export const TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT: {
   [key in TextVariant]: FontWeight;
 } = {
   [TextVariant.DisplayLg]: FontWeight.Bold,

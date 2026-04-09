@@ -3,8 +3,8 @@ import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 import {
-  CLASSMAP_TEXT_VARIANT_FONTSTYLE,
-  CLASSMAP_TEXT_VARIANT_FONTWEIGHT,
+  TWCLASSMAP_TEXT_VARIANT_FONTSTYLE,
+  TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT,
 } from '../Text/Text.constants';
 
 import type { InputProps } from './Input.types';
@@ -25,8 +25,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       'w-full rounded border bg-default text-default outline-none transition-colors',
       'border-transparent focus:border-primary-default focus:outline-none',
       'placeholder:text-alternative',
-      CLASSMAP_TEXT_VARIANT_FONTSTYLE[textVariant],
-      CLASSMAP_TEXT_VARIANT_FONTWEIGHT[textVariant],
+      TWCLASSMAP_TEXT_VARIANT_FONTSTYLE[textVariant],
+      TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[textVariant],
       isDisabled && 'cursor-not-allowed opacity-50',
       className,
     );
