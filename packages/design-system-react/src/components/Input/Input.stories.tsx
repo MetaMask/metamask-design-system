@@ -1,7 +1,6 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-
-import { TextVariant } from '../../types';
 
 import { Input } from './Input';
 import type { InputProps } from './Input.types';

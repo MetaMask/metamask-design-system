@@ -1,3 +1,4 @@
+import { FontWeight, TextVariant } from '@metamask/design-system-shared';
 import React from 'react';
 import { GestureResponderEvent } from 'react-native';
 
@@ -6,10 +7,8 @@ import {
   BoxBackgroundColor,
   ButtonIconSize,
   ButtonSize,
-  FontWeight,
   BoxFlexDirection,
   IconName,
-  TextVariant,
 } from '../../types';
 import { Box } from '../Box';
 import { Button } from '../Button';
