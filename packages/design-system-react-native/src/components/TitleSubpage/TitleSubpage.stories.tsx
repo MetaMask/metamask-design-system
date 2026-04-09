@@ -10,7 +10,11 @@ import { Text, TextColor, FontWeight, TextVariant } from '../Text';
 import { TitleSubpage } from './TitleSubpage';
 import type { TitleSubpageProps } from './TitleSubpage.types';
 
-/** Token avatar for stories using bundled USDC artwork. */
+/**
+ * Token avatar for stories using bundled USDC artwork.
+ *
+ * @returns The USDC `AvatarToken` for story defaults.
+ */
 const StoryTitleAvatar = () => (
   <AvatarToken src={UsdcSVG} size={AvatarTokenSize.Lg} name="USD Coin" />
 );
@@ -30,7 +34,12 @@ const TodayBottomLabelEndAccessory = () => (
   </Text>
 );
 
-/** Pill badge for `titleEndAccessory` demos (not in reference screenshot). */
+/**
+ * Pill badge: dot + label (e.g. network), for `titleEndAccessory`.
+ * TODO: Temporary until a Tag component exists.
+ *
+ * @returns Story-only testnet badge UI.
+ */
 const TestnetBadge = () => (
   <Box
     flexDirection={BoxFlexDirection.Row}
@@ -117,10 +126,10 @@ export const AmountAccessory: Story = {
       subtitle={USDC_SUBTITLE}
       amount={USDC_AMOUNT}
       amountEndAccessory={
-        <Box twClassName="ml-2">
+        <Box twClassName="ml-1">
           <Icon
             name={IconName.Info}
-            size={IconSize.Sm}
+            size={IconSize.Md}
             color={IconColor.IconAlternative}
           />
         </Box>
@@ -214,7 +223,7 @@ export const BottomAccessory: Story = {
           alignItems={BoxAlignItems.Center}
           gap={1}
         >
-          <Icon name={IconName.SecurityAlert} size={IconSize.Xs} />
+          <Icon name={IconName.SecurityAlert} size={IconSize.Sm} />
           <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
             Stablecoin prices can deviate from $1. Verify the asset and network
             before you trade.
