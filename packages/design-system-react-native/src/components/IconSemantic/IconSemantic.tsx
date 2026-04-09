@@ -10,5 +10,5 @@ export const IconSemantic: React.FC<IconSemanticProps> = ({
   ...props
 }) => {
   const { name, color } = ICON_SEMANTIC_MAP[semantic];
-  return <Icon color={color} name={name} {...props} />;
+  return <Icon {...props} color={color} name={name} />;
 };

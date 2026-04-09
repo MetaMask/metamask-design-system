@@ -5,11 +5,10 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 
 import { IconSize } from '../../types';
-
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
-import { ICON_SEMANTIC_MAP } from './IconSemantic.constants';
 import { IconSemantic } from './IconSemantic';
+import { ICON_SEMANTIC_MAP } from './IconSemantic.constants';
 
 type IconSemanticSemanticUnion =
   (typeof IconSemanticSemantic)[keyof typeof IconSemanticSemantic];

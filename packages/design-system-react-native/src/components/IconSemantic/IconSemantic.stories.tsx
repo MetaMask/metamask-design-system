@@ -1,8 +1,8 @@
 import { IconSemanticSemantic } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
-import type { ViewProps } from 'react-native';
 import React from 'react';
+import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
 
 import { IconSize } from '../../types';
