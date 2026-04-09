@@ -1,43 +1,40 @@
-# IconSemantic
+# IconAlert
 
-IconSemantic maps a semantic value to the correct alert [`Icon`](./../Icon/README.md) glyph and theme color for informational, success, warning, and error messaging.
+IconAlert maps a severity value to the correct alert [`Icon`](./../Icon/README.md) glyph and theme color for informational, success, warning, and error messaging.
 
 ```tsx
 import {
-  IconSemantic,
-  IconSemanticSemantic,
+  IconAlert,
+  IconAlertSeverity,
 } from '@metamask/design-system-react-native';
 
-<IconSemantic semantic={IconSemanticSemantic.Info} />;
+<IconAlert severity={IconAlertSeverity.Info} />;
 ```
 
 ## Props
 
-### `semantic`
+### `severity`
 
-The semantic variant to display. Each value uses a fixed icon name and `IconColor` (callers cannot override `name` or `color` on the underlying `Icon`).
+The severity variant to display. Each value uses a fixed icon name and `IconColor` (callers cannot override `name` or `color` on the underlying `Icon`).
 
-Available semantics:
+Available severities:
 
-- `IconSemanticSemantic.Info` — `IconName.Info`, `IconColor.PrimaryDefault`
-- `IconSemanticSemantic.Success` — `IconName.Confirmation`, `IconColor.SuccessDefault`
-- `IconSemanticSemantic.Warning` — `IconName.Danger`, `IconColor.WarningDefault`
-- `IconSemanticSemantic.Error` — `IconName.Error`, `IconColor.ErrorDefault`
+- `IconAlertSeverity.Info` — `IconName.Info`, `IconColor.PrimaryDefault`
+- `IconAlertSeverity.Success` — `IconName.Confirmation`, `IconColor.SuccessDefault`
+- `IconAlertSeverity.Warning` — `IconName.Danger`, `IconColor.WarningDefault`
+- `IconAlertSeverity.Error` — `IconName.Error`, `IconColor.ErrorDefault`
 
-| TYPE                   | REQUIRED | DEFAULT     |
-| ---------------------- | -------- | ----------- |
-| `IconSemanticSemantic` | Yes      | `undefined` |
+| TYPE                | REQUIRED | DEFAULT                  |
+| ------------------- | -------- | ------------------------ |
+| `IconAlertSeverity` | No       | `IconAlertSeverity.Info` |
 
 ```tsx
-import {
-  IconSemantic,
-  IconSemanticSemantic,
-} from '@metamask/design-system-react-native';
+import { IconAlert, IconAlertSeverity } from '@metamask/design-system-react-native';
 
-<IconSemantic semantic={IconSemanticSemantic.Info} />
-<IconSemantic semantic={IconSemanticSemantic.Success} />
-<IconSemantic semantic={IconSemanticSemantic.Warning} />
-<IconSemantic semantic={IconSemanticSemantic.Error} />
+<IconAlert severity={IconAlertSeverity.Info} />
+<IconAlert severity={IconAlertSeverity.Success} />
+<IconAlert severity={IconAlertSeverity.Warning} />
+<IconAlert severity={IconAlertSeverity.Error} />
 ```
 
 ### `size`
@@ -58,14 +55,14 @@ Available sizes:
 
 ```tsx
 import {
-  IconSemantic,
-  IconSemanticSemantic,
+  IconAlert,
+  IconAlertSeverity,
   IconSize,
 } from '@metamask/design-system-react-native';
 
-<IconSemantic semantic={IconSemanticSemantic.Warning} size={IconSize.Sm} />
-<IconSemantic semantic={IconSemanticSemantic.Warning} />
-<IconSemantic semantic={IconSemanticSemantic.Warning} size={IconSize.Lg} />
+<IconAlert severity={IconAlertSeverity.Warning} size={IconSize.Sm} />
+<IconAlert severity={IconAlertSeverity.Warning} />
+<IconAlert severity={IconAlertSeverity.Warning} size={IconSize.Lg} />
 ```
 
 ### `twClassName`
@@ -80,16 +77,13 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 | `string` | No       | `undefined` |
 
 ```tsx
-import {
-  IconSemantic,
-  IconSemanticSemantic,
-} from '@metamask/design-system-react-native';
+import { IconAlert, IconAlertSeverity } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<IconSemantic semantic={IconSemanticSemantic.Info} twClassName="opacity-70" />
+<IconAlert severity={IconAlertSeverity.Info} twClassName="opacity-70" />
 
 // Override default styles
-<IconSemantic semantic={IconSemanticSemantic.Info} twClassName="!text-error-100" />
+<IconAlert severity={IconAlertSeverity.Info} twClassName="!text-error-100" />
 ```
 
 ### `style`
@@ -106,16 +100,16 @@ Other `ViewProps` accepted by [`Icon`](./../Icon/README.md) (for example `testID
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
 import {
-  IconSemantic,
-  IconSemanticSemantic,
+  IconAlert,
+  IconAlertSeverity,
 } from '@metamask/design-system-react-native';
 
 export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   const tw = useTailwind();
 
   return (
-    <IconSemantic
-      semantic={IconSemanticSemantic.Info}
+    <IconAlert
+      severity={IconAlertSeverity.Info}
       style={tw.style('opacity-100', isActive && 'opacity-50')}
     />
   );

@@ -1,24 +1,24 @@
-import { IconSemanticSemantic } from '@metamask/design-system-shared';
+import { IconAlertSeverity } from '@metamask/design-system-shared';
 
 import { IconColor, IconName } from '../../types';
 
-export const ICON_SEMANTIC_MAP: Record<
-  IconSemanticSemantic,
+export const ICON_ALERT_SEVERITY_MAP: Record<
+  IconAlertSeverity,
   { name: IconName; color: IconColor }
 > = {
-  [IconSemanticSemantic.Info]: {
+  [IconAlertSeverity.Info]: {
     name: IconName.Info,
     color: IconColor.PrimaryDefault,
   },
-  [IconSemanticSemantic.Success]: {
+  [IconAlertSeverity.Success]: {
     name: IconName.Confirmation,
     color: IconColor.SuccessDefault,
   },
-  [IconSemanticSemantic.Warning]: {
+  [IconAlertSeverity.Warning]: {
     name: IconName.Danger,
     color: IconColor.WarningDefault,
   },
-  [IconSemanticSemantic.Error]: {
+  [IconAlertSeverity.Error]: {
     name: IconName.Error,
     color: IconColor.ErrorDefault,
   },
