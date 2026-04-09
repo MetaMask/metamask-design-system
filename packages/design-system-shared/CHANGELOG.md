@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added `TextVariant`, `TextColor`, and `TextPropsShared` shared types for cross-platform use ([#1047](https://github.com/MetaMask/metamask-design-system/pull/1047))
+- Added `TextVariant`, `TextColor`, `FontWeight`, `FontStyle`, `FontFamily`, and `TextPropsShared` shared types for cross-platform use ([#1047](https://github.com/MetaMask/metamask-design-system/pull/1047))
 
 ## [0.9.0]
 
