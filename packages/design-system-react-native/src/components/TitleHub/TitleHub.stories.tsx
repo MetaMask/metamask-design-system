@@ -8,7 +8,12 @@ import { Text, TextColor, FontWeight, TextVariant } from '../Text';
 import { TitleHub } from './TitleHub';
 import type { TitleHubProps } from './TitleHub.types';
 
-/** Pill badge: dot + label (e.g. network), for `titleEndAccessory`. */
+/**
+ * Pill badge: dot + label (e.g. network), for `titleEndAccessory`.
+ * TODO: Temporary until a Tag component exists.
+ *
+ * @returns Story-only testnet badge UI.
+ */
 const TestnetBadge = () => (
   <Box
     flexDirection={BoxFlexDirection.Row}
@@ -75,7 +80,7 @@ export const AmountAccessory: Story = {
       title="Perps"
       amount="$336.21"
       amountEndAccessory={
-        <Box twClassName="ml-2">
+        <Box twClassName="ml-1">
           <Icon
             name={IconName.Info}
             size={IconSize.Sm}
@@ -114,11 +119,7 @@ export const BottomLabelAccessory: Story = {
       title="Perps"
       amount="$336.21"
       bottomLabel="$336.21 available"
-      bottomLabelEndAccessory={
-        <Box twClassName="ml-2">
-          <Icon name={IconName.Info} size={IconSize.Xs} />
-        </Box>
-      }
+      bottomLabelEndAccessory={<Icon name={IconName.Info} size={IconSize.Xs} />}
     />
   ),
 };
