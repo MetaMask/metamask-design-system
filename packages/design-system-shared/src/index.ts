@@ -25,6 +25,12 @@ export {
   type BadgeStatusPropsShared,
 } from './types/BadgeStatus';
 
+// IconSemantic types (ADR-0003 + ADR-0004)
+export {
+  IconSemanticSemantic,
+  type IconSemanticPropsShared,
+} from './types/IconSemantic';
+
 // BannerBase types (ADR-0004)
 export { type BannerBasePropsShared } from './types/BannerBase';
 

@@ -143,6 +143,9 @@ export type { HeaderStandardProps } from './HeaderStandard';
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
+export { IconSemantic, IconSemanticSemantic } from './IconSemantic';
+export type { IconSemanticProps } from './IconSemantic';
+
 export { Input } from './Input';
 export type { InputProps } from './Input';
 

@@ -93,6 +93,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/HeaderSearch/HeaderSearch.stories.tsx": require("../../../packages/design-system-react-native/src/components/HeaderSearch/HeaderSearch.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/HeaderStandard/HeaderStandard.stories.tsx": require("../../../packages/design-system-react-native/src/components/HeaderStandard/HeaderStandard.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx": require("../../../packages/design-system-react-native/src/components/Icon/Icon.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/IconSemantic/IconSemantic.stories.tsx": require("../../../packages/design-system-react-native/src/components/IconSemantic/IconSemantic.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Input/Input.stories.tsx": require("../../../packages/design-system-react-native/src/components/Input/Input.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/KeyValueColumn/KeyValueColumn.stories.tsx": require("../../../packages/design-system-react-native/src/components/KeyValueColumn/KeyValueColumn.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/KeyValueRow/KeyValueRow.stories.tsx": require("../../../packages/design-system-react-native/src/components/KeyValueRow/KeyValueRow.stories.tsx"),

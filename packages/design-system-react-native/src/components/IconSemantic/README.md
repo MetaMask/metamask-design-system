@@ -1,0 +1,127 @@
+# IconSemantic
+
+IconSemantic maps a semantic value to the correct alert [`Icon`](./../Icon/README.md) glyph and theme color for informational, success, warning, and error messaging.
+
+```tsx
+import {
+  IconSemantic,
+  IconSemanticSemantic,
+} from '@metamask/design-system-react-native';
+
+<IconSemantic semantic={IconSemanticSemantic.Info} />;
+```
+
+## Props
+
+### `semantic`
+
+The semantic variant to display. Each value uses a fixed icon name and `IconColor` (callers cannot override `name` or `color` on the underlying `Icon`).
+
+Available semantics:
+
+- `IconSemanticSemantic.Info` — `IconName.Info`, `IconColor.PrimaryDefault`
+- `IconSemanticSemantic.Success` — `IconName.Confirmation`, `IconColor.SuccessDefault`
+- `IconSemanticSemantic.Warning` — `IconName.Danger`, `IconColor.WarningDefault`
+- `IconSemanticSemantic.Error` — `IconName.Error`, `IconColor.ErrorDefault`
+
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `IconSemanticSemantic` | Yes      | `undefined` |
+
+```tsx
+import {
+  IconSemantic,
+  IconSemanticSemantic,
+} from '@metamask/design-system-react-native';
+
+<IconSemantic semantic={IconSemanticSemantic.Info} />
+<IconSemantic semantic={IconSemanticSemantic.Success} />
+<IconSemantic semantic={IconSemanticSemantic.Warning} />
+<IconSemantic semantic={IconSemanticSemantic.Error} />
+```
+
+### `size`
+
+The size of the icon. Same behavior as [`Icon` `size`](./../Icon/README.md).
+
+Available sizes:
+
+- `IconSize.Xs` (12px)
+- `IconSize.Sm` (16px)
+- `IconSize.Md` (20px)
+- `IconSize.Lg` (24px)
+- `IconSize.Xl` (32px)
+
+| TYPE       | REQUIRED | DEFAULT       |
+| ---------- | -------- | ------------- |
+| `IconSize` | No       | `IconSize.Md` |
+
+```tsx
+import {
+  IconSemantic,
+  IconSemanticSemantic,
+  IconSize,
+} from '@metamask/design-system-react-native';
+
+<IconSemantic semantic={IconSemanticSemantic.Warning} size={IconSize.Sm} />
+<IconSemantic semantic={IconSemanticSemantic.Warning} />
+<IconSemantic semantic={IconSemanticSemantic.Warning} size={IconSize.Lg} />
+```
+
+### `twClassName`
+
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+import {
+  IconSemantic,
+  IconSemanticSemantic,
+} from '@metamask/design-system-react-native';
+
+// Add additional styles
+<IconSemantic semantic={IconSemanticSemantic.Info} twClassName="opacity-70" />
+
+// Override default styles
+<IconSemantic semantic={IconSemanticSemantic.Info} twClassName="!text-error-100" />
+```
+
+### `style`
+
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+
+Other `ViewProps` accepted by [`Icon`](./../Icon/README.md) (for example `testID`, `accessible`) are forwarded to the underlying icon.
+
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
+
+```tsx
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+
+import {
+  IconSemantic,
+  IconSemanticSemantic,
+} from '@metamask/design-system-react-native';
+
+export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
+  const tw = useTailwind();
+
+  return (
+    <IconSemantic
+      semantic={IconSemanticSemantic.Info}
+      style={tw.style('opacity-100', isActive && 'opacity-50')}
+    />
+  );
+};
+```
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
