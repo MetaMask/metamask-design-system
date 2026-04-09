@@ -45,7 +45,7 @@ import {
   title="$4.42"
   titleEndAccessory={
     <Box twClassName="ml-2">
-      <Icon name={IconName.Info} size={IconSize.Sm} />
+      <Icon name={IconName.Info} size={IconSize.Md} />
     </Box>
   }
 />;
