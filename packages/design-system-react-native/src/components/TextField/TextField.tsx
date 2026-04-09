@@ -1,3 +1,4 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import {
   forwardRef,
@@ -9,7 +10,6 @@ import {
 } from 'react';
 import { Pressable, TextInput, View } from 'react-native';
 
-import { TextVariant } from '../../types';
 import { Input } from '../Input';
 
 import type { TextFieldProps } from './TextField.types';

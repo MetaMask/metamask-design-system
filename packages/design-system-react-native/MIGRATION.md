@@ -17,6 +17,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
   - [From version 0.13.0 to 0.14.0](#from-version-0130-to-0140)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
@@ -25,6 +26,40 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.16.0 to 0.17.0
+
+#### Text: Typography const values moved to `@metamask/design-system-shared`
+
+`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react-native`. All existing import paths through `@metamask/design-system-react-native` continue to work without change.
+
+#### `FontWeight` values changed
+
+**No migration likely needed.** `FontWeight` was a TypeScript `enum` before this release, so the underlying string values were inaccessible via the type system. Idiomatic usage (`fontWeight={FontWeight.Bold}`) continues to work without change — the TWRNC classmap handles the mapping internally.
+
+The values did change to semantic identifiers for cross-platform sharing:
+
+| Key                  | Before (0.16.0) | After (0.17.0) |
+| -------------------- | --------------- | -------------- |
+| `FontWeight.Bold`    | `'600'`         | `'bold'`       |
+| `FontWeight.Medium`  | `'500'`         | `'medium'`     |
+| `FontWeight.Regular` | `'400'`         | `'regular'`    |
+
+If you were comparing against the raw numeric string values directly, update to use the const member instead:
+
+```tsx
+// ❌ Rare: comparing against raw numeric string
+if (fontWeight === '600') { ... }
+
+// ✅ Use const member (works in both 0.16.0 and 0.17.0)
+if (fontWeight === FontWeight.Bold) { ... }
+```
+
+#### `TextColor` additions
+
+`TextColor` gains four hover-state keys that were previously web-only (`PrimaryDefaultHover`, `ErrorDefaultHover`, `SuccessDefaultHover`, `WarningDefaultHover`). These are non-breaking additions. Their JSDoc notes that hover does not exist as an interaction state on React Native — use the corresponding `*Pressed` variant instead.
+
+---
 
 ### From version 0.13.0 to 0.14.0
 
