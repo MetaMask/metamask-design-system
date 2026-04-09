@@ -35,7 +35,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "tsx scripts/generate-icons.ts && ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-shared",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-shared",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
