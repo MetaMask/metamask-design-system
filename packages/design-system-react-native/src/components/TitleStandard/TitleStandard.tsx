@@ -15,10 +15,11 @@ import type { TitleStandardProps } from './TitleStandard.types';
  *
  * @param props - Component props
  * @param props.title - Primary title content
- * @param props.titleAccessory - Optional inline accessory to the right of the title
+ * @param props.titleEndAccessory - Optional inline accessory to the right of the title
  * @param props.topAccessory - Optional row above the title
  * @param props.bottomAccessory - Optional custom bottom row when `bottomLabel` is not renderable
  * @param props.bottomLabel - Optional secondary label below the title
+ * @param props.bottomLabelEndAccessory - Optional inline accessory to the right of the bottom label
  * @param props.titleProps - Optional props merged into title `Text` when `title` is a string
  * @param props.bottomLabelProps - Optional props merged into bottom label `Text` when `bottomLabel` is a string
  * @param props.twClassName - Optional Tailwind classes on the root container
@@ -27,18 +28,28 @@ import type { TitleStandardProps } from './TitleStandard.types';
  */
 export const TitleStandard: React.FC<TitleStandardProps> = ({
   title,
-  titleAccessory,
+  titleEndAccessory,
   topAccessory,
   bottomAccessory,
   bottomLabel,
+  bottomLabelEndAccessory,
   titleProps,
   bottomLabelProps,
   twClassName = '',
   ...props
 }) => {
-  const titleEndAccessoryNode = isReactNodeRenderable(titleAccessory)
-    ? titleAccessory
+  const titleEndAccessoryNode = isReactNodeRenderable(titleEndAccessory)
+    ? titleEndAccessory
     : undefined;
+  const bottomLabelEndAccessoryNode = isReactNodeRenderable(
+    bottomLabelEndAccessory,
+  )
+    ? bottomLabelEndAccessory
+    : undefined;
+
+  const renderBottomLabel = isReactNodeRenderable(bottomLabel);
+  const renderBottomAccessory =
+    !renderBottomLabel && isReactNodeRenderable(bottomAccessory);
 
   const titleRow = (
     <BoxRow
@@ -52,12 +63,9 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
     </BoxRow>
   );
 
-  const renderBottomLabel = isReactNodeRenderable(bottomLabel);
-  const renderBottomAccessory =
-    !renderBottomLabel && isReactNodeRenderable(bottomAccessory);
-
   const bottomLabelRow = (
     <BoxRow
+      endAccessory={bottomLabelEndAccessoryNode}
       textProps={{
         variant: TextVariant.BodySm,
         fontWeight: FontWeight.Medium,

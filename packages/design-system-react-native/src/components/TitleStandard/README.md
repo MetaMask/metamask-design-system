@@ -1,6 +1,6 @@
 # TitleStandard
 
-TitleStandard is used to display a required primary title with optional rows above and below the title, an optional inline accessory next to the title, and optional bottom label or custom bottom content.
+TitleStandard is used to display a required primary title with optional rows above and below the title, optional inline accessories next to the title and bottom label, and optional bottom label or custom bottom content.
 
 ```tsx
 import { TitleStandard } from '@metamask/design-system-react-native';
@@ -24,7 +24,7 @@ The primary title. The title row always renders. When `title` is a string, it is
 <TitleStandard title="$1,234.56" />
 ```
 
-### `titleAccessory`
+### `titleEndAccessory`
 
 Optional node rendered to the right of the title (for example an info icon).
 
@@ -43,7 +43,7 @@ import {
 
 <TitleStandard
   title="$4.42"
-  titleAccessory={
+  titleEndAccessory={
     <Box twClassName="ml-2">
       <Icon name={IconName.Info} size={IconSize.Sm} />
     </Box>
@@ -93,6 +93,39 @@ Optional bottom row with secondary label typography when the value is a string (
 
 ```tsx
 <TitleStandard title="$4.42" bottomLabel="0.002 ETH" />
+```
+
+### `bottomLabelEndAccessory`
+
+Optional node rendered to the right of the bottom label. Only used when `bottomLabel` is renderable (same row as the default bottom label typography).
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+import {
+  TitleStandard,
+  Box,
+  Icon,
+  IconName,
+  IconSize,
+  IconColor,
+} from '@metamask/design-system-react-native';
+
+<TitleStandard
+  title="$4.42"
+  bottomLabel="0.002 ETH"
+  bottomLabelEndAccessory={
+    <Box twClassName="ml-2">
+      <Icon
+        name={IconName.Info}
+        size={IconSize.Sm}
+        color={IconColor.IconAlternative}
+      />
+    </Box>
+  }
+/>;
 ```
 
 ### `bottomAccessory`

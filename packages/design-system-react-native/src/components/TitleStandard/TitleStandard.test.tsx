@@ -105,6 +105,31 @@ describe('TitleStandard', () => {
 
       expect(getByTestId(BOTTOM_LABEL_TEST_ID)).toBeOnTheScreen();
     });
+
+    it('renders bottomLabel and bottomLabelEndAccessory', () => {
+      const { getByText } = render(
+        <TitleStandard
+          title="$4.42"
+          bottomLabel="0.002 ETH"
+          bottomLabelEndAccessory={<Text>Extra</Text>}
+        />,
+      );
+
+      expect(getByText('0.002 ETH')).toBeOnTheScreen();
+      expect(getByText('Extra')).toBeOnTheScreen();
+    });
+
+    it('does not render bottomLabelEndAccessory when it is false', () => {
+      const { getByText } = render(
+        <TitleStandard
+          title="$4.42"
+          bottomLabel="0.002 ETH"
+          bottomLabelEndAccessory={false}
+        />,
+      );
+
+      expect(getByText('0.002 ETH')).toBeOnTheScreen();
+    });
   });
 
   describe('when bottomAccessory is provided', () => {
@@ -135,42 +160,62 @@ describe('TitleStandard', () => {
     });
   });
 
-  describe('when titleAccessory is provided', () => {
-    it('renders title and titleAccessory', () => {
+  describe('when bottomLabelEndAccessory is provided without bottomLabel', () => {
+    it('does not render bottomLabelEndAccessory', () => {
+      const { getByText, queryByTestId } = render(
+        <TitleStandard
+          title="$4.42"
+          bottomAccessory={<Text>Custom Bottom</Text>}
+          bottomLabelEndAccessory={
+            <Text testID="bottom-label-end-only">End</Text>
+          }
+        />,
+      );
+
+      expect(getByText('Custom Bottom')).toBeOnTheScreen();
+      expect(queryByTestId('bottom-label-end-only')).not.toBeOnTheScreen();
+    });
+  });
+
+  describe('when titleEndAccessory is provided', () => {
+    it('renders title and titleEndAccessory', () => {
       const { getByText } = render(
-        <TitleStandard title="$4.42" titleAccessory={<Text>Info</Text>} />,
+        <TitleStandard title="$4.42" titleEndAccessory={<Text>Info</Text>} />,
       );
 
       expect(getByText('$4.42')).toBeOnTheScreen();
       expect(getByText('Info')).toBeOnTheScreen();
     });
 
-    it('renders titleAccessory when title is an empty string', () => {
+    it('renders titleEndAccessory when title is an empty string', () => {
       const { getByText } = render(
-        <TitleStandard title="" titleAccessory={<Text>Accessory only</Text>} />,
+        <TitleStandard
+          title=""
+          titleEndAccessory={<Text>Accessory only</Text>}
+        />,
       );
 
       expect(getByText('Accessory only')).toBeOnTheScreen();
     });
   });
 
-  describe('when titleAccessory is false', () => {
+  describe('when titleEndAccessory is false', () => {
     it('renders title only', () => {
       const { getByText } = render(
-        <TitleStandard title="$4.42" titleAccessory={false} />,
+        <TitleStandard title="$4.42" titleEndAccessory={false} />,
       );
 
       expect(getByText('$4.42')).toBeOnTheScreen();
     });
   });
 
-  describe('when topAccessory, titleAccessory, and bottomLabel are provided', () => {
+  describe('when topAccessory, titleEndAccessory, and bottomLabel are provided', () => {
     it('renders all slots', () => {
       const { getByText } = render(
         <TitleStandard
           topAccessory={<Text>Send</Text>}
           title="$4.42"
-          titleAccessory={<Text>i</Text>}
+          titleEndAccessory={<Text>i</Text>}
           bottomLabel="0.002 ETH"
         />,
       );

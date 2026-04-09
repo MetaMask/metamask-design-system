@@ -13,7 +13,7 @@ export type TitleStandardPropsShared = {
   /**
    * Optional accessory rendered inline to the right of the title.
    */
-  titleAccessory?: ReactNode;
+  titleEndAccessory?: ReactNode;
   /**
    * Optional accessory rendered in its own row above the title.
    */
@@ -28,4 +28,9 @@ export type TitleStandardPropsShared = {
    * If renderable, it is shown instead of `bottomAccessory`.
    */
   bottomLabel?: ReactNode;
+  /**
+   * Optional accessory rendered inline to the right of the bottom label row.
+   * Only applies when `bottomLabel` is renderable.
+   */
+  bottomLabelEndAccessory?: ReactNode;
 };

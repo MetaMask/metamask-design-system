@@ -44,11 +44,11 @@ export const Title: Story = {
   render: () => <TitleStandard title="Import a wallet" />,
 };
 
-export const TitleAccessory: Story = {
+export const TitleEndAccessory: Story = {
   render: () => (
     <TitleStandard
       title="Import a wallet"
-      titleAccessory={
+      titleEndAccessory={
         <Box twClassName="ml-2">
           <Icon
             name={IconName.Info}
@@ -98,6 +98,24 @@ export const BottomLabel: Story = {
     title: 'Import a wallet',
     bottomLabel: 'Enter your Secret Recovery Phrase',
   },
+};
+
+export const BottomLabelEndAccessory: Story = {
+  render: () => (
+    <TitleStandard
+      title="Import a wallet"
+      bottomLabel="Enter your Secret Recovery Phrase"
+      bottomLabelEndAccessory={
+        <Box twClassName="ml-2">
+          <Icon
+            name={IconName.Info}
+            size={IconSize.Sm}
+            color={IconColor.IconAlternative}
+          />
+        </Box>
+      }
+    />
+  ),
 };
 
 export const BottomAccessory: Story = {

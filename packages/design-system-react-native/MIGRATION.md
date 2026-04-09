@@ -33,7 +33,7 @@ If you adopted `TitleStandard` from a prerelease or internal branch that used `t
 
 **What changed:**
 
-- `title` is **required**. Omitting it is a type error; if you only need a trailing inline control, pass an empty string or another minimal `ReactNode` and use `titleAccessory`.
+- `title` is **required**. Omitting it is a type error; if you only need a trailing inline control, pass an empty string or another minimal `ReactNode` and use `titleEndAccessory`.
 - **`topLabel`** and **`topLabelProps`** are removed. Use **`topAccessory`** with a [`Text`](./src/components/Text/README.md) node (or any `ReactNode`) for content above the title row.
 - **`title`** and **`bottomLabel`** are typed as **`ReactNode`** (strings still receive default typography via [`BoxHorizontal`](./src/components/BoxHorizontal/README.md) / `TextOrChildren`).
 - The bottom row shows **`bottomLabel` or `bottomAccessory`**, not both: if `bottomLabel` is renderable, it is the only bottom row; otherwise a renderable `bottomAccessory` is rendered on its own.
@@ -94,7 +94,7 @@ import {
 
 <TitleStandard
   title=""
-  titleAccessory={<Icon name={IconName.Info} size={IconSize.Sm} />}
+  titleEndAccessory={<Icon name={IconName.Info} size={IconSize.Sm} />}
 />
 ```
 
@@ -179,6 +179,26 @@ import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
 **Impact:**
 
 - Any import of `BoxHorizontal` or `BoxVertical` must be renamed
+
+#### TitleStandard `titleAccessory` renamed to `titleEndAccessory`
+
+**What changed:**
+
+- `TitleStandard` and `TitleStandardPropsShared` prop **`titleAccessory`** is now **`titleEndAccessory`**.
+
+**Migration:**
+
+```tsx
+// Before (0.15.0)
+<TitleStandard title="$4.42" titleAccessory={<Icon name={IconName.Info} size={IconSize.Sm} />} />
+
+// After (0.16.0)
+<TitleStandard title="$4.42" titleEndAccessory={<Icon name={IconName.Info} size={IconSize.Sm} />} />
+```
+
+**Impact:**
+
+- Any `TitleStandard` usage that passed `titleAccessory`
 
 #### KeyValueRow API
 

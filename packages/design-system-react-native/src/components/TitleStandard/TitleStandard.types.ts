@@ -11,11 +11,11 @@ import type { TextProps } from '../Text/Text.types';
  */
 export type TitleStandardProps = TitleStandardPropsShared & {
   /**
-   * Optional props merged into {@link BoxHorizontal} `textProps` when `title` is a string.
+   * Optional props merged into {@link BoxRow} `textProps` when `title` is a string.
    */
   titleProps?: Partial<TextProps>;
   /**
-   * Optional props merged into {@link BoxHorizontal} `textProps` when `bottomLabel` is a string.
+   * Optional props merged into {@link BoxRow} `textProps` when `bottomLabel` is a string.
    */
   bottomLabelProps?: Partial<TextProps>;
   /**
