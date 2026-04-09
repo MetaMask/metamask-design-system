@@ -24,9 +24,9 @@ Available severities:
 - `IconAlertSeverity.Warning` — `IconName.Danger`, `IconColor.WarningDefault`
 - `IconAlertSeverity.Error` — `IconName.Error`, `IconColor.ErrorDefault`
 
-| TYPE                | REQUIRED | DEFAULT                  |
-| ------------------- | -------- | ------------------------ |
-| `IconAlertSeverity` | No       | `IconAlertSeverity.Info` |
+| TYPE                | REQUIRED | DEFAULT |
+| ------------------- | -------- | ------- |
+| `IconAlertSeverity` | Yes      | -       |
 
 ```tsx
 import { IconAlert, IconAlertSeverity } from '@metamask/design-system-react-native';

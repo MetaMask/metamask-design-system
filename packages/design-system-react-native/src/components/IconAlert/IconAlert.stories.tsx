@@ -45,6 +45,9 @@ const IconAlertStoryWrapper: React.FC<BoxProps> = ({ children, ...props }) => (
 type Story = StoryObj<IconAlertProps>;
 
 export const Default: Story = {
+  args: {
+    severity: IconAlertSeverity.Info,
+  },
   render: (args) => (
     <IconAlertStoryWrapper>
       <IconAlert {...args} />

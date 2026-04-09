@@ -28,7 +28,6 @@ export type IconAlertSeverity =
 export type IconAlertPropsShared = {
   /**
    * Maps to a fixed icon and theme color for alerts and messaging.
-   * Defaults to `IconAlertSeverity.Info` when omitted.
    */
-  severity?: IconAlertSeverity;
+  severity: IconAlertSeverity;
 };
