@@ -721,8 +721,6 @@ import { IconName } from '@metamask/design-system-react-native';
 </ButtonBase>;
 ```
 
-# <<<<<<< Updated upstream
-
 ### ButtonHero Component
 
 The `ButtonHero` component is a branded, light-theme-locked button for high-impact actions (swaps, claims, rewards). The legacy version in `components-temp` already wraps `ButtonBase` from `@metamask/design-system-react-native`, so the migration is primarily an import change with a few behavioral differences.
@@ -829,8 +827,6 @@ import {
 ```
 
 `bg-primary-default` is the hero default and `w-full` maps to `isFullWidth`. Both `twClassName` overrides are no longer needed.
-
-> > > > > > > Stashed changes
 
 ### BottomSheet Component
 
