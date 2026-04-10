@@ -10,6 +10,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ButtonHero Component](#buttonhero-component)
   - [ButtonFilter Component](#buttonfilter-component)
   - [ButtonIcon Component](#buttonicon-component)
+  - [TextButton Component (ButtonLink)](#textbutton-component-buttonlink)
   - [BottomSheet Component](#bottomsheet-component)
   - [BottomSheetHeader Component](#bottomsheetheader-component)
   - [BottomSheetFooter Component](#bottomsheetfooter-component)
@@ -987,6 +988,125 @@ After (Design System):
   size={ButtonIconSize.Sm}
   onPress={handleClose}
 />
+```
+
+### TextButton Component (ButtonLink)
+
+The legacy `ButtonLink` component is replaced by **two** design system components depending on the use case:
+
+- **`TextButton`** — for inline links within text flows (the primary replacement)
+- **`Button` with `variant={ButtonVariant.Tertiary}`** — for standalone link-style buttons with icons, full width, or other button-like affordances
+
+`TextButton` is a `Text`-based component (not a `Pressable`/`TouchableOpacity`). It only renders text — no icons, no size variants, no width control.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                 | Design System Migration                                             |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `import ButtonLink from '.../component-library/components/Buttons/Button/variants/ButtonLink'` | `import { TextButton } from '@metamask/design-system-react-native'` |
+
+##### Content Model: `label` → `children`
+
+| Mobile Pattern                      | Design System Migration               |
+| ----------------------------------- | ------------------------------------- |
+| `<ButtonLink label="Learn more" />` | `<TextButton>Learn more</TextButton>` |
+| `<ButtonLink label={variable} />`   | `<TextButton>{variable}</TextButton>` |
+
+##### Size Removed
+
+The legacy `ButtonLink` inherited `ButtonSize` with a default of `ButtonSize.Auto`. The design system `TextButton` has no `size` prop — control typography via the `variant` prop instead.
+
+| Mobile Pattern           | Design System Migration                  |
+| ------------------------ | ---------------------------------------- |
+| `size={ButtonSize.Auto}` | Remove — default behavior                |
+| `size={ButtonSize.Lg}`   | `variant={TextVariant.BodyLg}`           |
+| `size={ButtonSize.Sm}`   | `variant={TextVariant.BodySm}`           |
+| `size={ButtonSize.Md}`   | `variant={TextVariant.BodyMd}` (default) |
+
+##### `isDanger` Removed
+
+The legacy `ButtonLink` supported `isDanger` for error-colored text. `TextButton` does not have this prop — it always uses primary color. For error-state links, use `Button` with `variant={ButtonVariant.Tertiary}` and `isDanger`.
+
+##### `labelTextVariant` → `variant`
+
+| Mobile Pattern                                | Design System Migration                                           |
+| --------------------------------------------- | ----------------------------------------------------------------- |
+| `labelTextVariant={TextVariant.BodyMDMedium}` | `variant={TextVariant.BodyMd}` + `fontWeight={FontWeight.Medium}` |
+
+##### `onPress` Signature
+
+The legacy `ButtonLink` with `size={ButtonSize.Auto}` used `Text.onPressIn`/`onPressOut`. The design system `TextButton` also uses `Text` press props, so the signature is the same for inline usage. For non-auto sizes, the legacy component wrapped `ButtonBase` (a `TouchableOpacity`), which passes `GestureResponderEvent`. `TextButton` always uses `Text` press events.
+
+##### Removed Props
+
+| Mobile Prop                     | Design System Migration                                           |
+| ------------------------------- | ----------------------------------------------------------------- |
+| `isDanger`                      | Use `Button` with `variant={ButtonVariant.Tertiary}` + `isDanger` |
+| `startIconName` / `endIconName` | Use `Button` with `variant={ButtonVariant.Tertiary}`              |
+| `width` / `isFullWidth`         | Use `Button` with `variant={ButtonVariant.Tertiary}`              |
+| `isDisabled`                    | Not available on `TextButton` — use `Button` if needed            |
+
+#### Migration Examples
+
+##### Inline "show more" link
+
+Before (Mobile):
+
+```tsx
+import ButtonLink from '../../../../component-library/components/Buttons/Button/variants/ButtonLink';
+
+<ButtonLink
+  onPress={toggleContent}
+  label={isExpanded ? 'Show less' : 'Show more'}
+/>;
+```
+
+After (Design System):
+
+```tsx
+import { TextButton } from '@metamask/design-system-react-native';
+
+<TextButton onPress={toggleContent}>
+  {isExpanded ? 'Show less' : 'Show more'}
+</TextButton>;
+```
+
+##### Link variant in a Button group → Tertiary Button
+
+Before (Mobile):
+
+```tsx
+import Button, {
+  ButtonVariants,
+  ButtonSize,
+} from '../../../../component-library/components/Buttons/Button';
+
+<Button
+  variant={ButtonVariants.Link}
+  size={ButtonSize.Lg}
+  label={strings('button.learn_more')}
+  onPress={handleLearnMore}
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  Button,
+  ButtonVariant,
+  ButtonSize,
+} from '@metamask/design-system-react-native';
+
+<Button
+  variant={ButtonVariant.Tertiary}
+  size={ButtonSize.Lg}
+  onPress={handleLearnMore}
+>
+  {strings('button.learn_more')}
+</Button>;
 ```
 
 ### BottomSheet Component
