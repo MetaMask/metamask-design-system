@@ -2,7 +2,10 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
 
-import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
+import {
+  AvatarGroupSize,
+  AvatarGroupVariant,
+} from '@metamask/design-system-shared';
 import type { AvatarAccountProps } from '../AvatarAccount';
 import { AvatarAccount } from '../AvatarAccount';
 import { AvatarBase, AvatarBaseShape } from '../AvatarBase';

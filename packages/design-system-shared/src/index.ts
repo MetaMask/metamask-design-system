@@ -110,3 +110,10 @@ export {
   AvatarFaviconSize,
   type AvatarFaviconPropsShared,
 } from './types/AvatarFavicon';
+
+// AvatarGroup types (ADR-0003 + ADR-0004)
+export {
+  AvatarGroupSize,
+  AvatarGroupVariant,
+  type AvatarGroupPropsShared,
+} from './types/AvatarGroup';

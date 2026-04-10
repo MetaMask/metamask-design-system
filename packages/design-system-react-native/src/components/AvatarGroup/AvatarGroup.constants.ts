@@ -1,4 +1,4 @@
-import { AvatarGroupSize } from '../../types';
+import { AvatarGroupSize } from '@metamask/design-system-shared';
 import { TextVariant } from '../Text';
 
 // Mappings
