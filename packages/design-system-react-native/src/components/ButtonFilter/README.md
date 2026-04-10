@@ -43,3 +43,7 @@ const [activeFilter, setActiveFilter] = useState('All');
   Sold
 </ButtonFilter>
 ```
+
+## Migration from MetaMask Mobile Component Library
+
+Migrating from the legacy `ButtonFilter` in `app/component-library/components-temp/ButtonFilter`? See the [ButtonFilter migration guide](../../MIGRATION.md#buttonfilter-component) for import changes and `textClassName` behavior differences.
