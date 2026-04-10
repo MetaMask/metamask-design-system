@@ -1,7 +1,7 @@
+import { AvatarFaviconSize } from '@metamask/design-system-shared';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { AvatarFaviconSize } from '../../types';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
