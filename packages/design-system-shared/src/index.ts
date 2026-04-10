@@ -107,3 +107,9 @@ export {
   TextVariant,
   type TextPropsShared,
 } from './types/Text';
+
+// AvatarFavicon types (ADR-0004)
+export {
+  AvatarFaviconSize,
+  type AvatarFaviconPropsShared,
+} from './types/AvatarFavicon';
