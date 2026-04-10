@@ -1473,7 +1473,7 @@ The mobile `Checkbox` maps to `Checkbox` in the design system, with controlled-s
 | `isDanger?: boolean`                   | removed                                   | removed                                             | no danger variant in MMDS checkbox                                                         |
 | `isDisabled?: boolean`                 | `isDisabled?: boolean`                    | unchanged                                           | still defaults to `false`                                                                  |
 | `label?: string \| ReactNode`          | `label?: string \| ReactNode`             | unchanged                                           | still supported                                                                            |
-| `labelProps`                           | `labelProps`                              | unchanged                                           | still supported (Text props)                                                               |
+| `labelProps`                           | `labelProps`                              | added in MMDS                                       | legacy mobile `Checkbox` had no `labelProps`; use this to customize label text props      |
 | `checkedIconProps`                     | `checkedIconProps`                        | added in MMDS                                       | customize selected check icon                                                              |
 | `checkboxContainerProps`               | `checkboxContainerProps`                  | added in MMDS                                       | customize icon container view                                                              |
 
