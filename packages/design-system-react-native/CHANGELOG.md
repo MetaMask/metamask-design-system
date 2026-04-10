@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.18.0]
 
-### Uncategorized
+### Added
 
-- feat: migrate AvatarFavicon to ADR-0003 and ADR-0004 (DSYS-474) ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
-- feat: [DSRN] Added IconAlert ([#1060](https://github.com/MetaMask/metamask-design-system/pull/1060))
+- Added `IconAlert` component for mapping a severity (`info`, `success`, `warning`, `error`) to a fixed icon glyph and theme color ([#1060](https://github.com/MetaMask/metamask-design-system/pull/1060))
+
+### Changed
+
+- Updated `AvatarFavicon` type internals to use ADR-0003/ADR-0004 shared types; imports from `@metamask/design-system-react-native` are unchanged ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
 
 ## [0.17.0]
 

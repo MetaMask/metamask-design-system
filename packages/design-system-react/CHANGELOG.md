@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.17.0]
 
-### Uncategorized
+### Changed
 
-- feat: migrate AvatarFavicon to ADR-0003 and ADR-0004 (DSYS-474) ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
-- feat(DSYS-489): Migrate Text to ADR-0003 and ADR-0004 ([#1047](https://github.com/MetaMask/metamask-design-system/pull/1047))
+- Updated `AvatarFavicon` type internals to use ADR-0003/ADR-0004 shared types; imports from `@metamask/design-system-react` are unchanged ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
+- **BREAKING:** Migrated `Text` typography types (`TextVariant`, `TextColor`, `FontWeight`, `FontStyle`, `FontFamily`) to `@metamask/design-system-shared`; all imports through `@metamask/design-system-react` continue to work without change ([#1047](https://github.com/MetaMask/metamask-design-system/pull/1047))
+  - `FontWeight`, `FontStyle`, and `FontFamily` underlying string values changed to semantic identifiers (e.g. `FontWeight.Bold` was `'font-bold'`, now `'bold'`); idiomatic usage is unaffected
+  - Projects scanning `node_modules` for Tailwind class names must also scan `@metamask/design-system-shared`
+  - See [Migration Guide](./MIGRATION.md#from-version-0160-to-0170)
 
 ## [0.16.0]
 

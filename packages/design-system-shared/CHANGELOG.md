@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.11.0]
 
-### Uncategorized
+### Added
 
-- feat: migrate AvatarFavicon to ADR-0003 and ADR-0004 (DSYS-474) ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
-- feat: [DSRN] Added IconAlert ([#1060](https://github.com/MetaMask/metamask-design-system/pull/1060))
+- Added `IconAlertSeverity` and `IconAlertPropsShared` shared types for cross-platform use ([#1060](https://github.com/MetaMask/metamask-design-system/pull/1060))
+- Added `AvatarFaviconSize` and `AvatarFaviconPropsShared` shared types for cross-platform use ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
 
 ## [0.10.0]
 
