@@ -127,6 +127,9 @@ export type { CheckboxProps } from './Checkbox';
 export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
+export { HeaderAlert } from './HeaderAlert';
+export type { HeaderAlertProps } from './HeaderAlert';
+
 export { HeaderRoot } from './HeaderRoot';
 export type { HeaderRootProps } from './HeaderRoot';
 

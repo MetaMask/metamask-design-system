@@ -31,6 +31,9 @@ export {
   type IconAlertPropsShared,
 } from './types/IconAlert';
 
+// HeaderAlert types (ADR-0004)
+export { type HeaderAlertPropsShared } from './types/HeaderAlert';
+
 // BannerBase types (ADR-0004)
 export { type BannerBasePropsShared } from './types/BannerBase';
 
