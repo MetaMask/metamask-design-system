@@ -37,11 +37,14 @@ export { type BannerBasePropsShared } from './types/BannerBase';
 // TextOrChildren types (ADR-0004)
 export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
 
-// BoxRow types (ADR-0004)
-export { type BoxRowPropsShared } from './types/BoxRow';
+// TitleSubpage types (ADR-0004)
+export { type TitleSubpagePropsShared } from './types/TitleSubpage';
 
 // BoxColumn types (ADR-0004)
 export { type BoxColumnPropsShared } from './types/BoxColumn';
+
+// BoxRow types (ADR-0004)
+export { type BoxRowPropsShared } from './types/BoxRow';
 
 // HeaderSearch types (ADR-0003 + ADR-0004)
 export {

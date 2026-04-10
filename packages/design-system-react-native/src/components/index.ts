@@ -204,6 +204,12 @@ export type { TextFieldSearchProps } from './TextFieldSearch';
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 
+export { TitleSubpage } from './TitleSubpage';
+export type {
+  TitleSubpageProps,
+  TitleSubpagePropsShared,
+} from './TitleSubpage';
+
 export {
   Toast,
   ToastVariant,
