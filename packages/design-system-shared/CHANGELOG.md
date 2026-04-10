@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.0]
+
+### Added
+
+- Added `IconAlertSeverity` and `IconAlertPropsShared` shared types for cross-platform use ([#1060](https://github.com/MetaMask/metamask-design-system/pull/1060))
+- Added `AvatarFaviconSize` and `AvatarFaviconPropsShared` shared types for cross-platform use ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
+
 ## [0.10.0]
 
 ### Added
@@ -114,7 +121,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.10.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.11.0...HEAD
+[0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.10.0...@metamask/design-system-shared@0.11.0
 [0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.9.0...@metamask/design-system-shared@0.10.0
 [0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.8.0...@metamask/design-system-shared@0.9.0
 [0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.7.0...@metamask/design-system-shared@0.8.0
