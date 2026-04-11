@@ -8,11 +8,7 @@ import {
 import React from 'react';
 import { GestureResponderEvent } from 'react-native';
 
-import {
-  ButtonIconSize,
-  ButtonSize,
-  IconName,
-} from '../../types';
+import { ButtonIconSize, ButtonSize, IconName } from '../../types';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { ButtonIcon } from '../ButtonIcon';
