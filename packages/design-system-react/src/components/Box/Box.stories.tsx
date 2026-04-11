@@ -1,15 +1,15 @@
-import { TextColor } from '@metamask/design-system-shared';
+import {
+  BoxAlignItems,
+  BoxBackgroundColor,
+  BoxBorderColor,
+  BoxFlexDirection,
+  BoxFlexWrap,
+  BoxJustifyContent,
+  TextColor,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import {
-  BoxFlexDirection,
-  BoxFlexWrap,
-  BoxAlignItems,
-  BoxJustifyContent,
-  BoxBackgroundColor,
-  BoxBorderColor,
-} from '../../types';
 import { Text } from '../Text';
 
 import { Box } from './Box';
