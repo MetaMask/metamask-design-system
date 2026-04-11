@@ -1,7 +1,7 @@
 {
   "background": {
     "default": {
-      "value": "{grey.900}",
+      "value": "{grey.1000}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For default neutral surface."
@@ -13,31 +13,31 @@
       "description": "For sunken neutral surface below background/default."
     },
     "section": {
-      "value": "{grey.800}",
+      "value": "{grey.900}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For section bg usually over background/default."
     },
     "subsection": {
-      "value": "{grey.700}",
+      "value": "{grey.800}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For subsection bg usually over background/section."
     },
     "muted": {
-      "value": "#ffffff0a",
+      "value": "#ffffff14",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For muted neutral surface."
     },
     "default-hover": {
-      "value": "{grey.800}",
+      "value": "{grey.900}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for background/default."
     },
     "default-pressed": {
-      "value": "{grey.700}",
+      "value": "{grey.800}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for background/default."
@@ -55,19 +55,19 @@
       "description": "Pressed state surface for background/alternative."
     },
     "muted-hover": {
-      "value": "#ffffff14",
+      "value": "#ffffff1f",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for background/muted."
     },
     "muted-pressed": {
-      "value": "#ffffff1f",
+      "value": "#ffffff29",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for background/muted."
     },
     "hover": {
-      "value": "#ffffff0a",
+      "value": "#ffffff14",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "General purpose hover state tint."
@@ -145,7 +145,7 @@
       "description": "Default color for borders."
     },
     "muted": {
-      "value": "#ffffff14",
+      "value": "#ffffff1f",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color for borders."
