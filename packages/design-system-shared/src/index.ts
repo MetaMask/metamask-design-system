@@ -89,7 +89,7 @@ export {
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
 
-<<<<<<< HEAD
+
 export {
   AvatarAccountSize,
   AvatarAccountVariant,
