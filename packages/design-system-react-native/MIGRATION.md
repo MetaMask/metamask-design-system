@@ -1051,87 +1051,88 @@ The DS `BottomSheetFooter` adds `twClassName` for Tailwind utility class overrid
 
 ### Box Component
 
-The Box component has breaking changes when migrating from the mobile component-library. For custom spacing patterns or values outside the BoxSpacing range, use Tailwind classes via `twClassName`.
+Legacy source audited:
+- `app/components/UI/Box/Box.tsx`
+- `app/components/UI/Box/box.types.ts`
 
-#### Breaking Changes
+MMDS source audited:
+- `packages/design-system-react-native/src/components/Box/Box.tsx`
+- `packages/design-system-react-native/src/components/Box/Box.types.ts`
 
-##### Spacing Values
+#### API Mapping
 
-The design system Box uses `BoxSpacing` values (0-12 for 0px-48px). For custom spacing values outside this range or responsive spacing patterns, use Tailwind classes via `twClassName`.
+##### Removed / No Direct Equivalent
 
-| Mobile Pattern                   | Design System Migration                   |
-| -------------------------------- | ----------------------------------------- |
-| Custom margin/padding values     | Use `twClassName` with Tailwind utilities |
-| Responsive spacing               | Use `twClassName="m-2 md:m-4"`            |
-| Auto margins                     | Use `twClassName="m-auto"`                |
-| Custom margin/padding with style | Use `twClassName` instead of `style` prop |
+| Legacy Mobile API                               | MMDS React Native Box Status                                  | Migration                                                                                                  |
+| ----------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `display`                                       | Not exposed as dedicated Box prop                             | Use `twClassName` (for example `hidden`/`flex`) or `style`                                                |
+| `textAlign`                                     | Not exposed as dedicated Box prop                             | Move text alignment to `Text` (preferred) or use `style` for container-level alignment                    |
+| `color`                                         | Not exposed as dedicated Box prop                             | Move text/icon color to `Text` / icon components                                                          |
+| Legacy value names from `app/components/UI/Box` | MMDS value names follow `Box*` enums from design-system types | Replace legacy enum/value imports with MMDS enums from `@metamask/design-system-react-native`             |
 
-##### Margin Inline Props
+##### Renamed
 
-If the mobile Box had `marginInline`, `marginInlineStart`, or `marginInlineEnd` props, the design system Box uses `marginHorizontal` or Tailwind classes instead.
+No direct prop renames were introduced for mobile legacy UI `Box` to MMDS `Box`.
 
-| Mobile Pattern          | Design System Migration                        |
-| ----------------------- | ---------------------------------------------- |
-| `marginInline={4}`      | `marginHorizontal={4}` or `twClassName="mx-4"` |
-| `marginInlineStart={2}` | `twClassName="ms-2"`                           |
-| `marginInlineEnd={2}`   | `twClassName="me-2"`                           |
+##### Type / Value Changes
 
-##### Padding Inline Props
+| Legacy Mobile API                                | MMDS React Native Box API                       | Migration                                                                 |
+| ------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------------------- |
+| `gap?: number`                                   | `gap?: BoxSpacing` (`0`-`12`)                   | Use `gap` for token spacing, otherwise use `twClassName`/`style`          |
+| `backgroundColor?: string`                       | `backgroundColor?: BoxBackgroundColor`          | Use MMDS `BoxBackgroundColor` enum values                                 |
+| `style` often handled spacing/layout             | MMDS adds dedicated spacing props (`margin*`, `padding*`) | Replace common spacing styles with Box props where possible     |
+| `flexDirection`, `justifyContent`, `alignItems` accepted raw RN values | MMDS expects enum-backed Tailwind utility values (`BoxFlexDirection`, `BoxJustifyContent`, `BoxAlignItems`) | Replace raw values with MMDS enums |
 
-If the mobile Box had `paddingInline`, `paddingInlineStart`, or `paddingInlineEnd` props, the design system Box uses `paddingHorizontal` or Tailwind classes instead.
+##### Default / Behavior Notes
 
-| Mobile Pattern           | Design System Migration                         |
-| ------------------------ | ----------------------------------------------- |
-| `paddingInline={4}`      | `paddingHorizontal={4}` or `twClassName="px-4"` |
-| `paddingInlineStart={2}` | `twClassName="ps-2"`                            |
-| `paddingInlineEnd={2}`   | `twClassName="pe-2"`                            |
+| Legacy Behavior                                                     | MMDS React Native Box Behavior                                                                  |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Spacing commonly passed via `style`                                 | Dedicated spacing props are available (`margin`, `padding`, `marginHorizontal`, etc.)         |
+| Only a small layout API was exposed (`display`, flex props, `gap`)  | MMDS supports expanded spacing + border APIs and `twClassName` token-based utility composition |
+| Raw color strings were accepted for `backgroundColor`               | MMDS expects tokenized `BoxBackgroundColor` enum values                                        |
 
 #### Migration Examples
 
 ##### Before (Mobile)
 
 ```tsx
-import { Box } from '../../../component-library/components/Box';
+import { Box } from '../../../components/UI/Box/Box';
 
-// Custom spacing with style prop
-<Box style={{ margin: 20, padding: 20 }}>
-  Custom spacing
-</Box>
-
-// Inline props (if they existed)
-<Box marginInline={4} paddingInlineStart={2}>
-  Inline spacing
+<Box
+  flexDirection="row"
+  justifyContent="space-between"
+  alignItems="center"
+  gap={8}
+  backgroundColor="#F2F4F6"
+  style={{ marginHorizontal: 16, paddingVertical: 8 }}
+>
+  Legacy mobile box
 </Box>
 ```
 
-##### After (Design System)
+##### After (Design System React Native)
 
 ```tsx
-import { Box } from '@metamask/design-system-react-native';
+import {
+  Box,
+  BoxAlignItems,
+  BoxBackgroundColor,
+  BoxFlexDirection,
+  BoxJustifyContent,
+} from '@metamask/design-system-react-native';
 
-// Custom spacing - use twClassName for values outside BoxSpacing range
-<Box twClassName="m-5 p-5">
-  Custom spacing
-</Box>
-
-// Inline props - use marginHorizontal or twClassName
-<Box marginHorizontal={4} twClassName="ps-2">
-  Inline spacing
+<Box
+  flexDirection={BoxFlexDirection.Row}
+  justifyContent={BoxJustifyContent.Between}
+  alignItems={BoxAlignItems.Center}
+  gap={2}
+  backgroundColor={BoxBackgroundColor.BackgroundMuted}
+  marginHorizontal={4}
+  paddingVertical={2}
+>
+  MMDS box
 </Box>
 ```
-
-#### Spacing Props Available
-
-The design system Box provides these margin/padding props:
-
-- ✅ `margin`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft`
-- ✅ `marginHorizontal`
-- ✅ `marginVertical`
-- ✅ `padding`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft`
-- ✅ `paddingHorizontal`
-- ✅ `paddingVertical`
-
-For spacing values 0-12 (0px-48px), use these props. For custom values, responsive spacing, or inline-start/end positioning, use `twClassName` with Tailwind utilities.
 
 ### BannerAlert Component
 
