@@ -7,11 +7,7 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import {
-  ButtonIconSize,
-  ButtonSize,
-  IconName,
-} from '../../types';
+import { ButtonIconSize, ButtonSize, IconName } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Box } from '../Box';
 import { Button } from '../Button';

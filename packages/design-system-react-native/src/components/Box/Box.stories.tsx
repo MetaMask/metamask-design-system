@@ -10,6 +10,7 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView } from 'react-native';
+
 import { Text } from '../Text';
 
 import { Box } from './Box';
