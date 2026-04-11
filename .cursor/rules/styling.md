@@ -319,6 +319,35 @@ These examples show:
 - @packages/design-system-tailwind-preset/ (React Web token classes)
 - @packages/design-system-twrnc-preset/ (React Native token classes)
 
+## Tailwind Preset Content Scanning
+
+Token-identity constants (e.g. `TextColor`, `BoxBackgroundColor`) live in `@metamask/design-system-shared` and their values are used directly as class strings. To ensure Tailwind's JIT finds these classes — regardless of how `node_modules` is hoisted — `design-system-tailwind-preset` adds the shared package's dist to its `content` array using `require.resolve` from within the preset's own dependency graph:
+
+```ts
+// packages/design-system-tailwind-preset/src/index.ts
+const sharedDistGlob = path.join(
+  path.dirname(
+    require.resolve('@metamask/design-system-shared/package.json'),
+  ),
+  'dist/**/*.{mjs,cjs}',
+);
+
+const tailwindConfig: Config = {
+  content: [sharedDistGlob],
+  // ...
+};
+```
+
+**Why `require.resolve` instead of a path string:**
+`@metamask/design-system-shared` is a direct dependency of the preset, so `require.resolve` finds it from the preset's own dep graph — not the consumer's. This is hoisting-safe: it works even in strict hoisting environments where transitive deps are not accessible from the consumer's root.
+
+**Consequences for contributors:**
+
+- ✅ Adding a new token-identity constant to shared → automatically picked up, no preset changes needed
+- ✅ Consumers never need to add `@metamask/design-system-shared` to their Tailwind `content` glob
+- ✅ Tailwind only emits classes that are actually referenced — no bundle bloat from over-emitting
+- ❌ Do NOT add a manual safelist as a workaround — the content scanning approach scales automatically as more types move to shared
+
 ## Verification
 
 After styling changes, verify:

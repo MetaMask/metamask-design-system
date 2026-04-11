@@ -1,11 +1,30 @@
+import path from 'path';
+
 import type { Config } from 'tailwindcss';
 
 import { colors } from './colors';
 import { shadows, shadowPlugin } from './shadows';
 import { typography } from './typography';
 
+/**
+ * Resolve the compiled output of @metamask/design-system-shared using this
+ * preset's own dependency graph, not the consumer's. This is hoisting-safe:
+ * shared is a direct dep of the preset so require.resolve always finds it
+ * regardless of how the consumer's node_modules is structured.
+ *
+ * As more token-identity constants (TextColor, BoxBackgroundColor, etc.) move
+ * into shared, they are automatically picked up here without any changes to
+ * this file.
+ */
+const sharedDistGlob = path.join(
+  path.dirname(
+    require.resolve('@metamask/design-system-shared/package.json'),
+  ),
+  'dist/**/*.{mjs,cjs}',
+);
+
 const tailwindConfig: Config = {
-  content: [],
+  content: [sharedDistGlob],
   theme: {
     extend: {
       colors: {
