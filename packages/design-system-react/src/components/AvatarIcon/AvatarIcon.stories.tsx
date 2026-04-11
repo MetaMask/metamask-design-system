@@ -1,7 +1,10 @@
+import {
+  AvatarIconSize,
+  AvatarIconSeverity,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconName } from '../Icon';
 
 import { AvatarIcon } from './AvatarIcon';
@@ -111,7 +114,7 @@ export const Severity: Story = {
 
 export const HasBorder: Story = {
   render: () => (
-    <div className="flex gap-2 bg-primary-muted p-2">
+    <div className="bg-primary-muted flex gap-2 p-2">
       <AvatarIcon
         iconName={IconName.User}
         severity={AvatarIconSeverity.Neutral}
