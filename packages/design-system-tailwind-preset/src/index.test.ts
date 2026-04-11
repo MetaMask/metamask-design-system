@@ -21,7 +21,9 @@ describe('Tailwind Preset', () => {
   it('content includes design-system-shared dist glob for hoisting-safe class scanning', () => {
     const content = tailwindConfig.content as string[];
     expect(content.length).toBeGreaterThan(0);
-    expect(content.some((entry) => entry.includes('design-system-shared'))).toBe(true);
+    expect(
+      content.some((entry) => entry.includes('design-system-shared')),
+    ).toBe(true);
     expect(content.some((entry) => entry.includes('dist'))).toBe(true);
   });
 
