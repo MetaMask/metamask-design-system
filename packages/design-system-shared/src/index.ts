@@ -89,7 +89,6 @@ export {
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
 
-
 export {
   AvatarAccountSize,
   AvatarAccountVariant,
@@ -114,4 +113,3 @@ export {
 
 // Checkbox types (ADR-0004)
 export { type CheckboxPropsShared } from './types/Checkbox';
-
