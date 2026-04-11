@@ -325,12 +325,7 @@ Token-identity constants (e.g. `TextColor`, `BoxBackgroundColor`) live in `@meta
 
 ```ts
 // packages/design-system-tailwind-preset/src/index.ts
-const sharedDistGlob = path.join(
-  path.dirname(
-    require.resolve('@metamask/design-system-shared/package.json'),
-  ),
-  'dist/**/*.{mjs,cjs}',
-);
+const sharedDistGlob = `${require.resolve('@metamask/design-system-shared/package.json').replace(/\/package\.json$/u, '')}/dist/**/*.{mjs,cjs}`;
 
 const tailwindConfig: Config = {
   content: [sharedDistGlob],

@@ -114,10 +114,10 @@ Both React (Tailwind) and React Native (TWRNC) share the same design token class
 
 **Two patterns:**
 
-| Pattern | Example | Value is… | Used as… |
-| ------- | ------- | --------- | -------- |
-| Token identity | `TextColor.TextDefault = 'text-default'` | The class string itself (same on both platforms) | `className={color}` / `twClassName={color}` directly |
-| Semantic value | `FontWeight.Bold = 'bold'` | Abstract identifier (platforms need different class strings) | Mapped in platform `.constants.ts` |
+| Pattern        | Example                                  | Value is…                                                    | Used as…                                             |
+| -------------- | ---------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
+| Token identity | `TextColor.TextDefault = 'text-default'` | The class string itself (same on both platforms)             | `className={color}` / `twClassName={color}` directly |
+| Semantic value | `FontWeight.Bold = 'bold'`               | Abstract identifier (platforms need different class strings) | Mapped in platform `.constants.ts`                   |
 
 ### Token identity constants (`TextColor`, `BoxBackgroundColor`, `BoxBorderColor`, etc.)
 
