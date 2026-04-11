@@ -14,7 +14,7 @@ import { typography } from './typography';
  * into shared, they are automatically picked up here without any changes to
  * this file.
  */
-const sharedDistGlob = `${require.resolve('@metamask/design-system-shared/package.json').replace(/\/package\.json$/, '')}/dist/**/*.{mjs,cjs}`;
+const sharedDistGlob = `${require.resolve('@metamask/design-system-shared/package.json').replace(/\/package\.json$/u, '')}/dist/**/*.{mjs,cjs}`;
 
 const tailwindConfig: Config = {
   content: [sharedDistGlob],
