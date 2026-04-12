@@ -211,37 +211,12 @@ export enum BoxBorderColor {
   Transparent = 'border-transparent',
 }
 
-/**
- * ButtonBase - size
- */
-export enum ButtonBaseSize {
-  /**
-   * Represents a small button size (32px).
-   */
-  Sm = 'sm',
-  /**
-   * Represents a medium button size (40px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large button size (48px).
-   */
-  Lg = 'lg',
-}
-export { ButtonBaseSize as ButtonSize };
-export { ButtonBaseSize as ButtonPrimarySize };
-export { ButtonBaseSize as ButtonSecondarySize };
-export { ButtonBaseSize as ButtonTertiarySize };
-export { ButtonBaseSize as ButtonHeroSize };
-
-/**
- * Button - variant
- */
-export enum ButtonVariant {
-  Primary = 'primary',
-  Secondary = 'secondary',
-  Tertiary = 'tertiary',
-}
+export { ButtonBaseSize, ButtonVariant } from '@metamask/design-system-shared';
+export { ButtonBaseSize as ButtonSize } from '@metamask/design-system-shared';
+export { ButtonBaseSize as ButtonPrimarySize } from '@metamask/design-system-shared';
+export { ButtonBaseSize as ButtonSecondarySize } from '@metamask/design-system-shared';
+export { ButtonBaseSize as ButtonTertiarySize } from '@metamask/design-system-shared';
+export { ButtonBaseSize as ButtonHeroSize } from '@metamask/design-system-shared';
 
 /**
  * ButtonIcon - size
