@@ -139,3 +139,9 @@ export const ConditionalBanner = ({ active }: { active: boolean }) => {
   );
 };
 ```
+
+---
+
+## Migration Guide
+
+Migrating from `app/component-library/components/Banners/Banner/variants/BannerAlert` in MetaMask Mobile? See the [BannerAlert Migration Guide](../../MIGRATION.md#banneralert-component) for prop mappings, before/after examples, and breaking changes.

@@ -243,24 +243,50 @@ For simple, non-responsive spacing, continue using these props. Use `className` 
 
 ### BannerAlert Component
 
-The extension `banner-alert` maps directly to `BannerAlert` in the design system, but severity values are now provided via the shared `BannerAlertSeverity` const object (ADR-0003/0004) instead of extension enums.
+The extension `banner-alert` maps directly to `BannerAlert` in MMDS React. Most breaking changes come from inherited `BannerBase` props, plus one BannerAlert-specific addition (`iconProps`).
 
 #### Breaking Changes
 
-##### Imports and Enum Source
+##### Removed / No Direct Equivalent
+
+No BannerAlert-only props were removed. For removed banner-base behaviors inherited by BannerAlert (for example link-style action props), see the [BannerBase Component](#bannerbase-component) section.
+
+##### Renamed Props
+
+No direct prop renames were introduced for extension-to-MMDS `BannerAlert`.
+
+##### Type and Callback Signature Changes
 
 | Extension Pattern                                 | Design System Migration                                    |
 | ------------------------------------------------- | ---------------------------------------------------------- |
 | `BannerAlertSeverity` from `./banner-alert.types` | `BannerAlertSeverity` from `@metamask/design-system-react` |
+| `title?: string` (via extension `BannerBase`)       | `title?: ReactNode`                                               |
+| `description?: string` (via extension `BannerBase`) | `description?: ReactNode`                                         |
+| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` (via extension `BannerBase`) | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>` |
+| `onClose?: (e: React.MouseEvent<HTMLElement>) => void` (via extension `BannerBase`) | `onClose?: MouseEventHandler<HTMLButtonElement>`                  |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>` (via extension `BannerBase`) | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'> & { onClick?: MouseEventHandler<HTMLButtonElement> }` |
+| _(new)_ no extension equivalent                     | `iconProps?: Omit<IconProps, 'name' \| 'size' \| 'color'>`        |
 
-##### Severity Values
+##### Type and Value Changes
 
-| Extension Value                             | Design System Value           |
-| ------------------------------------------- | ----------------------------- |
-| `BannerAlertSeverity.Info` (`'info'`)       | `BannerAlertSeverity.Info`    |
-| `BannerAlertSeverity.Success` (`'success'`) | `BannerAlertSeverity.Success` |
-| `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` |
-| `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  |
+| Extension Value                             | Design System Value           | Notes |
+| ------------------------------------------- | ----------------------------- | ----- |
+| `BannerAlertSeverity.Info` (`'info'`)       | `BannerAlertSeverity.Info`    | same runtime value |
+| `BannerAlertSeverity.Success` (`'success'`) | `BannerAlertSeverity.Success` | same runtime value |
+| `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` | same runtime value |
+| `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  | same runtime value |
+
+##### Default Changes
+
+| Legacy Extension Default              | MMDS React Default                    | Notes |
+| ------------------------------------- | ------------------------------------- | ----- |
+| `severity` defaults to `Info`         | `severity` defaults to `Info`         | unchanged |
+| Warning and Danger share danger icon  | Warning and Danger share danger icon  | unchanged |
+
+##### Behavior Notes
+
+- Severity-specific border styling now comes from MMDS token mappings and merged utility classes instead of `mm-banner-alert` CSS class modifiers.
+- Action button and close-button rendering semantics follow MMDS `BannerBase` behavior; review [BannerBase Component](#bannerbase-component) before migrating complex `actionButtonProps` and `closeButtonProps` usage.
 
 #### Migration Example
 

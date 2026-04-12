@@ -1135,24 +1135,51 @@ For spacing values 0-12 (0px-48px), use these props. For custom values, responsi
 
 ### BannerAlert Component
 
-Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with severity values standardized to MMDS shared types.
+Mobile `BannerAlert` maps directly to `BannerAlert` in MMDS React Native. The biggest differences are inherited from `BannerBase` (action/close APIs), plus a `variant` removal and severity value normalization.
 
 #### Breaking Changes
 
-##### Imports and Type Source
+##### Removed / No Direct Equivalent
+
+| Legacy Mobile API                 | MMDS Status                    | Migration                                                       |
+| --------------------------------- | ------------------------------ | --------------------------------------------------------------- |
+| `variant?: BannerVariant.Alert`   | Removed from `BannerAlert` API | Remove `variant`; MMDS `BannerAlert` is always alert semantics |
+
+##### Renamed Props
+
+No direct prop renames were introduced for mobile-to-MMDS `BannerAlert`.
+
+##### Type and Callback Signature Changes
 
 | Mobile Pattern                                 | Design System Migration                                           |
 | ---------------------------------------------- | ----------------------------------------------------------------- |
 | `BannerAlertSeverity` from `BannerAlert.types` | `BannerAlertSeverity` from `@metamask/design-system-react-native` |
+| `title?: string \| ReactNode` (via mobile `BannerBase`) | `title?: ReactNode` (via MMDS `BannerBase`) |
+| `description?: string \| ReactNode` (via mobile `BannerBase`) | `description?: ReactNode` (via MMDS `BannerBase`) |
+| `actionButtonProps?: ButtonProps` (via mobile `BannerBase`) | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onPress' \| 'variant'>` |
+| `closeButtonProps?: ButtonIconProps` (via mobile `BannerBase`) | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onPress'> & { onPress?: (event: GestureResponderEvent) => void }` |
+| _(new)_ no mobile equivalent                    | `iconProps?: Omit<IconProps, 'name' \| 'size' \| 'color'>`        |
 
-##### Severity Values
+##### Type and Value Changes
 
-| Mobile Value                                | Design System Value                         | Notes          |
-| ------------------------------------------- | ------------------------------------------- | -------------- |
+| Mobile Value                                | Design System Value                         | Notes |
+| ------------------------------------------- | ------------------------------------------- | ----- |
 | `BannerAlertSeverity.Info` (`'Info'`)       | `BannerAlertSeverity.Info` (`'info'`)       | casing changed |
 | `BannerAlertSeverity.Success` (`'Success'`) | `BannerAlertSeverity.Success` (`'success'`) | casing changed |
 | `BannerAlertSeverity.Warning` (`'Warning'`) | `BannerAlertSeverity.Warning` (`'warning'`) | casing changed |
-| `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed        |
+| `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed |
+
+##### Default Changes
+
+| Legacy Mobile Default                     | MMDS React Native Default               | Notes |
+| ----------------------------------------- | --------------------------------------- | ----- |
+| `severity` defaults to `Info`             | `severity` defaults to `Info`           | unchanged |
+| Warning and Error map to danger icon      | Warning and Danger map to danger icon   | equivalent icon behavior after enum rename |
+
+##### Behavior Notes
+
+- Severity background, border, and icon colors are now driven by MMDS token mappings instead of mobile `useStyles` variant styles.
+- Action button and close button behavior follow MMDS `BannerBase`; review [BannerBase Component](#bannerbase-component) when migrating `actionButtonProps` and `closeButtonProps`.
 
 #### Migration Example
 
@@ -1165,8 +1192,10 @@ import { BannerAlertSeverity } from '../../../component-library/components/Banne
 <BannerAlert
   severity={BannerAlertSeverity.Warning}
   title="Warning"
-  actionButtonLabel="Action"
-  actionButtonOnPress={() => undefined}
+  actionButtonProps={{
+    label: 'Action',
+    onPress: () => undefined,
+  }}
 />;
 ```
 
