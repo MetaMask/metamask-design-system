@@ -49,7 +49,7 @@ export const HeaderRoot = ({
     if (children) {
       return children;
     }
-    if (title || titleAccessory) {
+    if (title) {
       return (
         <BoxRow
           endAccessory={titleAccessory}
