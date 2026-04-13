@@ -1,5 +1,4 @@
 // Third party dependencies.
-import { isReactNodeRenderable } from '@metamask/design-system-shared';
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -27,14 +26,6 @@ export const HeaderRoot = ({
 }: HeaderRootProps) => {
   const insets = useSafeAreaInsets();
 
-  const hasRenderableChildren = isReactNodeRenderable(children);
-
-  const hasTitleContent =
-    title !== false &&
-    (isReactNodeRenderable(title) || isReactNodeRenderable(titleAccessory));
-
-  const shouldRenderTitleRow = !hasRenderableChildren && hasTitleContent;
-
   const endSectionContent = (() => {
     if (endAccessory) {
       return endAccessory;
@@ -54,15 +45,11 @@ export const HeaderRoot = ({
     return null;
   })();
 
-  const hasEndSection = Boolean(endSectionContent);
-
   const renderLeftSection = () => {
-    if (hasRenderableChildren) {
+    if (children) {
       return children;
     }
-    if (shouldRenderTitleRow) {
-      const titleNode =
-        isReactNodeRenderable(title) && title !== '' ? title : null;
+    if (title || titleAccessory) {
       return (
         <BoxRow
           endAccessory={titleAccessory}
@@ -71,7 +58,7 @@ export const HeaderRoot = ({
             ...titleProps,
           }}
         >
-          {titleNode}
+          {title || null}
         </BoxRow>
       );
     }
@@ -93,7 +80,7 @@ export const HeaderRoot = ({
       <Box alignItems={BoxAlignItems.Start} style={{ flex: 1 }}>
         {renderLeftSection()}
       </Box>
-      {hasEndSection ? (
+      {endSectionContent ? (
         <Box flexDirection={BoxFlexDirection.Row} gap={2}>
           {endSectionContent}
         </Box>
