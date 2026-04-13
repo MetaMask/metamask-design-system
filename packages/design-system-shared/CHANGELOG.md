@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- **BREAKING:** Removed `isReactNodeRenderable` utility ([#1076](https://github.com/MetaMask/metamask-design-system/pull/1076))
+  - This utility added shared package complexity for a problem React already solves natively. `null`, `undefined`, `false`, and `''` all render as nothing in JSX — `!!prop` or a plain `if (prop)` check is correct and sufficient for slot guard patterns.
+  - Replace any `isReactNodeRenderable(prop)` calls with `!!prop`.
+
 ## [0.11.0]
 
 ### Added
