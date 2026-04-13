@@ -15,6 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Avatar Components](#avatar-components)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -1447,6 +1448,143 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+
+### Avatar Components
+
+Avatar migrations in mobile map to MMDS React Native avatar primitives:
+
+- Mobile sources audited:
+  - `app/component-library/components/Avatars/Avatar`
+  - `app/component-library/components/Avatars/Avatar/foundation/AvatarBase`
+  - `app/component-library/components/Avatars/Avatar/variants/AvatarAccount`
+  - `app/component-library/components/Avatars/Avatar/variants/AvatarFavicon`
+  - `app/component-library/components/Avatars/Avatar/variants/AvatarIcon`
+  - `app/component-library/components/Avatars/Avatar/variants/AvatarNetwork`
+  - `app/component-library/components/Avatars/Avatar/variants/AvatarToken`
+  - `app/component-library/components/Avatars/AvatarGroup`
+- MMDS React Native sources audited:
+  - `packages/design-system-react-native/src/components/AvatarBase`
+  - `packages/design-system-react-native/src/components/AvatarAccount`
+  - `packages/design-system-react-native/src/components/AvatarFavicon`
+  - `packages/design-system-react-native/src/components/AvatarIcon`
+  - `packages/design-system-react-native/src/components/AvatarNetwork`
+  - `packages/design-system-react-native/src/components/AvatarToken`
+  - `packages/design-system-react-native/src/components/AvatarGroup`
+
+#### Breaking Changes
+
+##### Component and Import Mapping
+
+| Mobile Component Library | MMDS React Native | Change Type | Notes |
+| ------------------------ | ----------------- | ----------- | ----- |
+| `Avatar` wrapper + `AvatarVariant` switch | no wrapper; use direct components (`AvatarAccount`, `AvatarFavicon`, `AvatarIcon`, `AvatarNetwork`, `AvatarToken`) | removed + split | replace one wrapper with explicit component imports |
+| `AvatarBase` | `AvatarBase` | API reshaped | `includesBorder` renamed and shape support is explicit |
+| `AvatarAccount` | `AvatarAccount` | API reshaped | account key and variant names changed |
+| `AvatarFavicon` | `AvatarFavicon` | API reshaped | `imageSource` renamed |
+| `AvatarIcon` | `AvatarIcon` | API reshaped | `name` renamed; semantic severity introduced |
+| `AvatarNetwork` | `AvatarNetwork` | API reshaped | `imageSource` renamed |
+| `AvatarToken` | `AvatarToken` | API reshaped | `imageSource` renamed; halo/IPFS flags removed |
+| `AvatarGroup` | `AvatarGroup` | API reshaped | list/max prop names changed; spacing override removed |
+| `import ... from '.../component-library/components/Avatars/...'` | `import ... from '@metamask/design-system-react-native'` | import path changed | use package exports instead of local component-library paths |
+
+##### Props, Enum, and Callback Mapping
+
+| Mobile API | MMDS React Native API | Change Type | Notes |
+| ---------- | --------------------- | ----------- | ----- |
+| `AvatarSize` enum values `'16' \| '24' \| '32' \| '40' \| '48'` | `AvatarBaseSize`/`Avatar*Size` values `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | type/value changed | migrate enum members, not raw values |
+| `AvatarBase.includesBorder?: boolean` | `AvatarBase.hasBorder?: boolean` | renamed | same default (`false`) |
+| `AvatarAccount.accountAddress: string` | `AvatarAccount.address: string` | renamed | required in both |
+| `AvatarAccount.type?: AvatarAccountType` (`JazzIcon \| Blockies \| Maskicon`) | `AvatarAccount.variant?: AvatarAccountVariant` (`jazzicon \| blockies \| maskicon`) | renamed + value casing changed | also updates default variant |
+| `AvatarFavicon.imageSource: ImageSourcePropType` | `AvatarFavicon.src?: ImageOrSvgSrc` | renamed + now optional | supports image or SVG input |
+| `AvatarIcon.name: IconName` | `AvatarIcon.iconName: IconName` | renamed | required in both |
+| `AvatarIcon.iconColor?: string` + `backgroundColor?: string` | `AvatarIcon.severity?: AvatarIconSeverity` + `iconProps` | behavior changed | semantic severity controls mapped icon/background colors |
+| `AvatarNetwork.imageSource?: ImageSourcePropType` | `AvatarNetwork.src?: ImageOrSvgSrc` | renamed | optional in both |
+| `AvatarToken.imageSource?: ImageSourcePropType` | `AvatarToken.src?: ImageOrSvgSrc` | renamed | optional in both |
+| `AvatarToken.isHaloEnabled?: boolean` | removed | removed | halo blur effect is not part of MMDS API |
+| `AvatarToken.isIpfsGatewayCheckBypassed?: boolean` | removed | removed | perform IPFS sanitation before passing `src` |
+| `AvatarGroup.avatarPropsList` | `AvatarGroup.avatarPropsArr` | renamed | required array in both |
+| `AvatarGroup.maxStackedAvatars?: number` | `AvatarGroup.max?: number` | renamed | same default (`4`) |
+| `AvatarGroup.includesBorder?: boolean` | removed | removed | group items always render with `hasBorder` in MMDS |
+| `AvatarGroup.spaceBetweenAvatars?: number` | removed | removed | spacing is now controlled by size presets |
+
+##### Default and Behavior Changes
+
+| Concern | Mobile Behavior | MMDS React Native Behavior |
+| ------- | --------------- | -------------------------- |
+| Account avatar default variant | `AvatarAccountType.Maskicon` | `AvatarAccountVariant.Jazzicon` |
+| Group default size | `AvatarSize.Xs` | `AvatarGroupSize.Md` |
+| Group border override | `includesBorder` configurable (`true` default) | no public prop; stacked avatars render with `hasBorder` |
+| Group spacing override | `spaceBetweenAvatars` accepted custom values | spacing derived from `size` and `isReverse` only |
+| Wrapper composition | `Avatar` runtime switch by `AvatarVariant` | no wrapper; choose concrete component directly |
+| Token halo + IPFS bypass | optional `isHaloEnabled` and `isIpfsGatewayCheckBypassed` flags | no halo or IPFS bypass flags in MMDS API |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, {
+  AvatarSize,
+  AvatarVariant,
+} from '../../../component-library/components/Avatars/Avatar';
+import AvatarGroup from '../../../component-library/components/Avatars/AvatarGroup';
+import { IconName } from '../../../component-library/components/Icons/Icon';
+
+<Avatar
+  variant={AvatarVariant.Icon}
+  name={IconName.Bank}
+  size={AvatarSize.Md}
+  iconColor="#0376C9"
+  backgroundColor="#E6F0FA"
+/>;
+
+<AvatarGroup
+  avatarPropsList={[
+    { variant: AvatarVariant.Account, accountAddress: address1 },
+    { variant: AvatarVariant.Account, accountAddress: address2 },
+    { variant: AvatarVariant.Account, accountAddress: address3 },
+  ]}
+  maxStackedAvatars={2}
+  includesBorder
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarAccount,
+  AvatarAccountVariant,
+  AvatarGroup,
+  AvatarGroupVariant,
+  AvatarIcon,
+  AvatarIconSeverity,
+  AvatarIconSize,
+  IconName,
+} from '@metamask/design-system-react-native';
+
+<AvatarIcon
+  iconName={IconName.Bank}
+  size={AvatarIconSize.Md}
+  severity={AvatarIconSeverity.Info}
+/>;
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  avatarPropsArr={[
+    { address: address1, variant: AvatarAccountVariant.Jazzicon },
+    { address: address2, variant: AvatarAccountVariant.Blockies },
+    { address: address3, variant: AvatarAccountVariant.Maskicon },
+  ]}
+  max={2}
+/>;
+```
+
+#### API Differences
+
+- MMDS React Native does not expose the legacy `Avatar` wrapper component. Migrate to direct primitive imports.
+- `AvatarToken` no longer has built-in halo rendering or IPFS gateway-bypass behavior.
+- `AvatarGroup` no longer accepts custom spacing or border-toggle props; use the MMDS size/variant model and item-level props.
 
 ### Checkbox Component
 

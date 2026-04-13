@@ -12,6 +12,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Avatar Components](#avatar-components)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -581,6 +582,133 @@ import {
 - `className` and `style` are still supported
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
+
+### Avatar Components
+
+Avatar migrations in extension map to MMDS React avatar primitives:
+
+- Extension sources audited:
+  - `ui/components/component-library/avatar-base`
+  - `ui/components/component-library/avatar-favicon`
+  - `ui/components/component-library/avatar-icon`
+  - `ui/components/component-library/avatar-network`
+  - `ui/components/component-library/avatar-token`
+- MMDS React sources audited:
+  - `packages/design-system-react/src/components/AvatarBase`
+  - `packages/design-system-react/src/components/AvatarFavicon`
+  - `packages/design-system-react/src/components/AvatarIcon`
+  - `packages/design-system-react/src/components/AvatarNetwork`
+  - `packages/design-system-react/src/components/AvatarToken`
+  - `packages/design-system-react/src/components/AvatarAccount`
+  - `packages/design-system-react/src/components/AvatarGroup`
+
+No direct extension component-library equivalents were found for:
+
+- `ui/components/component-library/avatar-account`
+- `ui/components/component-library/avatar-group`
+
+#### Breaking Changes
+
+##### Component and Import Mapping
+
+| Extension Component Library                   | MMDS React                                | Change Type                         | Notes                                                       |
+| --------------------------------------------- | ----------------------------------------- | ----------------------------------- | ----------------------------------------------------------- |
+| `avatar-base/AvatarBase`                      | `AvatarBase`                              | API reshaped                        | style utility props removed in favor of explicit props      |
+| `avatar-favicon/AvatarFavicon`                | `AvatarFavicon`                           | API reshaped                        | `fallbackIconProps` removed                                 |
+| `avatar-icon/AvatarIcon`                      | `AvatarIcon`                              | API reshaped                        | severity model replaces manual icon/background color props  |
+| `avatar-network/AvatarNetwork`                | `AvatarNetwork`                           | API reshaped                        | halo mode removed                                           |
+| `avatar-token/AvatarToken`                    | `AvatarToken`                             | API reshaped                        | halo mode removed                                           |
+| not present in extension component-library    | `AvatarAccount`                           | new MMDS component                  | no direct extension migration path                          |
+| not present in extension component-library    | `AvatarGroup`                             | new MMDS component                  | no direct extension migration path                          |
+| `import { Avatar* } from '../../component-library'` | `import { Avatar* } from '@metamask/design-system-react'` | import path changed | use package exports instead of local component-library path |
+
+##### Props, Enum, and Callback Mapping
+
+| Extension API | MMDS React API | Change Type | Notes |
+| ------------- | -------------- | ----------- | ----- |
+| `AvatarBaseSize` TypeScript enum (`xs/sm/md/lg/xl`) | `AvatarBaseSize` const-object union (`xs/sm/md/lg/xl`) | type model changed | value semantics unchanged |
+| `AvatarBase` polymorphic `as` pattern and broad Text/Box utility props | `AvatarBase` with explicit `shape`, `size`, `fallbackText`, `hasBorder`, `className`, `style`, optional `asChild` | removed + replaced | move one-off styling to `className`/`style` |
+| `AvatarBase.backgroundColor`, `borderColor`, `color` token props | use `className`/`style` token classes | removed | component no longer accepts token color props directly |
+| `AvatarFavicon.name: string` | `AvatarFavicon.name?: string` | now optional | fallback text can come from `fallbackText` |
+| `AvatarFavicon.fallbackIconProps?: IconProps<'span'>` | removed | removed | use `fallbackText` / `fallbackTextProps` |
+| `AvatarFavicon.borderColor?: BorderColor` | removed | removed | use `hasBorder` and styling classes |
+| `AvatarFavicon.src?: string` | `AvatarFavicon.src?: string` | unchanged | optional in both |
+| `AvatarIcon.iconName: IconName` | `AvatarIcon.iconName: IconName` | unchanged | required in both |
+| `AvatarIcon.color?: TextColor \| IconColor` | `AvatarIcon.severity?: AvatarIconSeverity` | renamed + behavior changed | semantic severity now drives icon/background color pairing |
+| `AvatarIcon.backgroundColor?: BackgroundColor` | `AvatarIcon.severity?: AvatarIconSeverity` | removed + behavior changed | `severity` or `className` replaces direct background token prop |
+| `AvatarNetwork.name: string` | `AvatarNetwork.name?: string` | now optional | supports explicit `fallbackText` |
+| `AvatarNetwork.showHalo?: boolean` | removed | removed | halo/blur rendering is not part of MMDS API |
+| `AvatarToken.showHalo?: boolean` | removed | removed | halo/blur rendering is not part of MMDS API |
+| `AvatarNetwork.src?: string`, `AvatarToken.src?: string` | unchanged | unchanged | both still optional |
+
+##### Default and Behavior Changes
+
+| Concern | Extension Behavior | MMDS React Behavior |
+| ------- | ------------------ | ------------------- |
+| Network fallback text | `name?.[0] ?? '?'` | `fallbackText || name?.[0] || ''` |
+| Token fallback text | `name?.[0] ?? '?'` | `fallbackText || name?.[0] || ''` |
+| AvatarIcon default visuals | `color=TextColor.primaryDefault` + `backgroundColor=BackgroundColor.primaryMuted` | `severity=AvatarIconSeverity.Neutral` mapped to design-system semantic colors |
+| Favicon fallback rendering | default globe icon when `src` is missing | text fallback (`fallbackText` or first name letter) |
+| Network shape/border defaults | square corners + explicit border props in legacy component | square shape in MMDS, border only when `hasBorder` is set |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import {
+  AvatarIcon,
+  AvatarToken,
+} from '../../component-library';
+import {
+  AvatarIconSize,
+} from '../../component-library/avatar-icon/avatar-icon.types';
+import { IconName } from '../../../helpers/constants/design-system';
+
+<AvatarIcon
+  iconName={IconName.Arrow2Up}
+  size={AvatarIconSize.Md}
+  backgroundColor="var(--color-primary-muted)"
+  color="var(--color-primary-default)"
+/>;
+
+<AvatarToken
+  name="Wrapped Ether"
+  src={tokenLogo}
+  showHalo
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarIcon,
+  AvatarIconSeverity,
+  AvatarToken,
+  AvatarTokenSize,
+  IconName,
+} from '@metamask/design-system-react';
+
+<AvatarIcon
+  iconName={IconName.Arrow2Up}
+  size={AvatarTokenSize.Md}
+  severity={AvatarIconSeverity.Info}
+/>;
+
+<AvatarToken
+  name="Wrapped Ether"
+  src={tokenLogo}
+  fallbackText="W"
+  hasBorder
+/>;
+```
+
+#### API Differences
+
+- MMDS React avatars do not support legacy halo effects (`showHalo`) from extension `AvatarNetwork` and `AvatarToken`.
+- `AvatarAccount` and `AvatarGroup` are MMDS additions; there is no one-to-one extension component-library migration path for these APIs.
+- Favor semantic props (`severity`, `shape`, `hasBorder`, `fallbackText`) over legacy token-style utility props.
 
 ### Checkbox Component
 
