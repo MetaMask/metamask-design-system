@@ -59,7 +59,7 @@ export const HeaderRoot = ({
           }}
           twClassName="flex-1"
         >
-          {title || null}
+          {title}
         </BoxRow>
       );
     }
