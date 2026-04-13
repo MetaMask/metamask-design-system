@@ -57,6 +57,7 @@ export const HeaderRoot = ({
             variant: TextVariant.HeadingLg,
             ...titleProps,
           }}
+          twClassName="flex-1"
         >
           {title || null}
         </BoxRow>
@@ -77,11 +78,9 @@ export const HeaderRoot = ({
       testID={testID}
       {...viewProps}
     >
-      <Box alignItems={BoxAlignItems.Start} style={{ flex: 1 }}>
-        {renderLeftSection()}
-      </Box>
+      {renderLeftSection()}
       {endSectionContent ? (
-        <Box flexDirection={BoxFlexDirection.Row} gap={2}>
+        <Box flexDirection={BoxFlexDirection.Row} gap={2} twClassName="ml-auto">
           {endSectionContent}
         </Box>
       ) : null}
