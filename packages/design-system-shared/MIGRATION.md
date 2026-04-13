@@ -31,14 +31,18 @@ if (isReactNodeRenderable(title)) {
   // render title
 }
 
-const hasContent = isReactNodeRenderable(children);
+if (isReactNodeRenderable(children)) {
+  // render children
+}
 
 // After (0.12.0)
 if (title) {
   // render title
 }
 
-const hasContent = !!children;
+if (children) {
+  // render children
+}
 ```
 
 **Impact:**
