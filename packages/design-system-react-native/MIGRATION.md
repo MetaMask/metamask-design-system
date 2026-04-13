@@ -71,8 +71,7 @@ The intermediate `Box` wrapper around the `BoxRow` in the left section has been 
 
 **Impact:**
 
-- If you are targeting the inner `Box` via `testID` or native layout inspection, that node no longer exists.
-- No changes to visual appearance or API.
+No changes to visual appearance or API.
 
 ---
 
