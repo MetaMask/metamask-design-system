@@ -17,6 +17,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
   - [From version 0.13.0 to 0.14.0](#from-version-0130-to-0140)
@@ -26,6 +27,54 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.18.0 to 0.19.0
+
+#### HeaderRoot: `titleAccessory` no longer renders without `title`
+
+**What Changed:**
+
+`titleAccessory` is now only rendered as part of the title row — it requires `title` to be truthy. Previously, `titleAccessory` could render standalone when `title` was empty or undefined. This was an unintentional side effect of the guard logic that has been corrected.
+
+**Migration:**
+
+If you were relying on `titleAccessory` rendering without a `title`, pass a `title` or use `children` to compose a fully custom left section:
+
+```tsx
+// Before (0.18.0) — titleAccessory rendered even without title
+<HeaderRoot
+  titleAccessory={<Icon name={IconName.Info} color={IconColor.IconAlternative} />}
+/>
+
+// After (0.19.0) — titleAccessory requires title to be present
+<HeaderRoot
+  title="Settings"
+  titleAccessory={<Icon name={IconName.Info} color={IconColor.IconAlternative} />}
+/>
+
+// Alternative — use children for fully custom left section content
+<HeaderRoot>
+  <Icon name={IconName.Info} color={IconColor.IconAlternative} />
+</HeaderRoot>
+```
+
+**Impact:**
+
+- Affects `HeaderRoot` usages that passed `titleAccessory` without a `title`. The accessory will no longer render in those cases.
+- `titleAccessory` passed alongside a valid `title` continues to work unchanged.
+
+#### HeaderRoot: Left section wrapper `Box` removed
+
+**What Changed:**
+
+The intermediate `Box` wrapper around the `BoxRow` in the left section has been removed. The `BoxRow` (title + `titleAccessory`) is now rendered directly as a child of the outer container row. This is a structural change only — the visual output is identical.
+
+**Impact:**
+
+- If you are targeting the inner `Box` via `testID` or native layout inspection, that node no longer exists.
+- No changes to visual appearance or API.
+
+---
 
 ### From version 0.16.0 to 0.17.0
 
