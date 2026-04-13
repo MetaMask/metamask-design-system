@@ -84,14 +84,8 @@ export const Children = {
         alignItems={BoxAlignItems.Center}
         gap={1}
       >
-        <Text variant={TextVariant.BodyMd} twClassName="text-default">
-          Imported Account 1
-        </Text>
-        <Icon
-          name={IconName.ArrowDown}
-          color={IconColor.IconDefault}
-          twClassName="text-default"
-        />
+        <Text variant={TextVariant.BodyMd}>Imported Account 1</Text>
+        <Icon name={IconName.ArrowDown} color={IconColor.IconDefault} />
       </Box>
     </HeaderRoot>
   ),
