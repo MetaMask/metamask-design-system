@@ -1,6 +1,9 @@
 import React, { forwardRef, useCallback } from 'react';
 
-import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
+import {
+  AvatarGroupSize,
+  AvatarGroupVariant,
+} from '@metamask/design-system-shared';
 import { twMerge } from '../../utils/tw-merge';
 import type { AvatarAccountProps } from '../AvatarAccount';
 import { AvatarAccount } from '../AvatarAccount';
