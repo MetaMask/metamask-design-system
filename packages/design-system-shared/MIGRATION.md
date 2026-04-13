@@ -21,7 +21,7 @@ The utility also introduced a subtle inconsistency: `isReactNodeRenderable('')` 
 
 **Migration:**
 
-Replace any `isReactNodeRenderable(prop)` call with `!!prop`:
+Replace any `isReactNodeRenderable(prop)` call with a plain truthy check:
 
 ```tsx
 // Before (0.11.0)
@@ -48,4 +48,4 @@ if (children) {
 **Impact:**
 
 - Any import of `isReactNodeRenderable` from `@metamask/design-system-shared` will fail to resolve after upgrading.
-- `!!prop` is the correct replacement for all realistic slot prop inputs (`string`, `ReactNode`, `false` from `{condition && <Comp />}`, `null`, `undefined`).
+- A plain truthy check covers all realistic slot prop inputs — `string`, `ReactNode`, `null`, `undefined`, and `false` from `{condition && <Comp />}` patterns.
