@@ -1,5 +1,5 @@
 export {
-  ButtonBaseSize as ButtonSize,
+  ButtonSize,
   ButtonVariant,
 } from '@metamask/design-system-shared';
 export { Button } from './Button';

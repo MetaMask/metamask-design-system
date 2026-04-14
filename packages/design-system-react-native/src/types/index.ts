@@ -211,12 +211,6 @@ export enum BoxBorderColor {
   Transparent = 'border-transparent',
 }
 
-export { ButtonBaseSize, ButtonVariant } from '@metamask/design-system-shared';
-export { ButtonBaseSize as ButtonSize } from '@metamask/design-system-shared';
-export { ButtonBaseSize as ButtonPrimarySize } from '@metamask/design-system-shared';
-export { ButtonBaseSize as ButtonSecondarySize } from '@metamask/design-system-shared';
-export { ButtonBaseSize as ButtonTertiarySize } from '@metamask/design-system-shared';
-export { ButtonBaseSize as ButtonHeroSize } from '@metamask/design-system-shared';
 
 /**
  * ButtonIcon - size
