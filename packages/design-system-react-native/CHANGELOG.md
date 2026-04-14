@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.0]
+
+### Added
+
+- Added `IconAlert` component for mapping a severity (`info`, `success`, `warning`, `error`) to a fixed icon glyph and theme color ([#1060](https://github.com/MetaMask/metamask-design-system/pull/1060))
+
+### Changed
+
+- Updated `AvatarFavicon` type internals to use ADR-0003/ADR-0004 shared types; imports from `@metamask/design-system-react-native` are unchanged ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
+
 ## [0.17.0]
 
 ### Changed
@@ -322,7 +332,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.17.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.18.0...HEAD
+[0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.17.0...@metamask/design-system-react-native@0.18.0
 [0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.16.0...@metamask/design-system-react-native@0.17.0
 [0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.15.0...@metamask/design-system-react-native@0.16.0
 [0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.14.0...@metamask/design-system-react-native@0.15.0

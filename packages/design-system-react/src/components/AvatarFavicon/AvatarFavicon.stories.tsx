@@ -1,7 +1,6 @@
+import { AvatarFaviconSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-
-import { AvatarFaviconSize } from '../../types';
 
 import { AvatarFavicon } from './AvatarFavicon';
 import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.dev';
