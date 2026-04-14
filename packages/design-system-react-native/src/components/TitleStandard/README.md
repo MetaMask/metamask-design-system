@@ -8,7 +8,7 @@ import { TitleStandard } from '@metamask/design-system-react-native';
 <TitleStandard title="$4.42" />;
 ```
 
-Cross-platform layout props are defined as `TitleStandardPropsShared` in `@metamask/design-system-shared`. This package adds `twClassName`, React Native `View` props, and `titleProps` / `bottomLabelProps` for the platform `Text` component.
+Cross-platform layout props are defined as `TitleStandardPropsShared` in `@metamask/design-system-shared`. This package adds `twClassName`, React Native `View` props, `titleProps` / `bottomLabelProps` for the platform `Text` component, and `titleWrapperProps` / `bottomLabelWrapperProps` for each label row `BoxRow`.
 
 ## Props
 
@@ -176,6 +176,21 @@ Optional props merged into the heading `Text` when `title` is a string. Use for 
 <TitleStandard title="$4.42" titleProps={{ testID: 'title-standard-title' }} />
 ```
 
+### `titleWrapperProps`
+
+Optional props forwarded to the title row `BoxRow` (for example `testID`, layout, or `twClassName` on the row). `children`, `textProps`, and `endAccessory` are omitted from the type because this component controls them via `title`, `titleProps`, and `titleEndAccessory`.
+
+| TYPE                                                                      | REQUIRED | DEFAULT     |
+| ------------------------------------------------------------------------- | -------- | ----------- |
+| `Omit<Partial<BoxRowProps>, 'children' \| 'textProps' \| 'endAccessory'>` | No       | `undefined` |
+
+```tsx
+<TitleStandard
+  title="$4.42"
+  titleWrapperProps={{ testID: 'title-standard-title-row' }}
+/>
+```
+
 ### `bottomLabelProps`
 
 Optional props merged into the bottom label `Text` when `bottomLabel` is a string.
@@ -189,6 +204,22 @@ Optional props merged into the bottom label `Text` when `bottomLabel` is a strin
   title="$4.42"
   bottomLabel="0.002 ETH"
   bottomLabelProps={{ testID: 'title-standard-bottom' }}
+/>
+```
+
+### `bottomLabelWrapperProps`
+
+Optional props forwarded to the bottom label row `BoxRow` when `bottomLabel` is renderable. Same omissions as `titleWrapperProps`: `children`, `textProps`, and `endAccessory` are controlled by `bottomLabel`, `bottomLabelProps`, and `bottomLabelEndAccessory`.
+
+| TYPE                                                                      | REQUIRED | DEFAULT     |
+| ------------------------------------------------------------------------- | -------- | ----------- |
+| `Omit<Partial<BoxRowProps>, 'children' \| 'textProps' \| 'endAccessory'>` | No       | `undefined` |
+
+```tsx
+<TitleStandard
+  title="$4.42"
+  bottomLabel="0.002 ETH"
+  bottomLabelWrapperProps={{ testID: 'title-standard-bottom-label-row' }}
 />
 ```
 

@@ -10,7 +10,9 @@ import { TitleStandard } from './TitleStandard';
 
 const CONTAINER_TEST_ID = 'title-standard-container';
 const TITLE_TEST_ID = 'title-standard-title';
+const TITLE_ROW_WRAPPER_TEST_ID = 'title-standard-title-row';
 const BOTTOM_LABEL_TEST_ID = 'title-standard-bottom-label';
+const BOTTOM_LABEL_ROW_WRAPPER_TEST_ID = 'title-standard-bottom-label-row';
 
 describe('TitleStandard', () => {
   let tw: ReturnType<typeof useTailwind>;
@@ -54,6 +56,17 @@ describe('TitleStandard', () => {
       );
 
       expect(getByTestId(TITLE_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('forwards titleWrapperProps testID to the title BoxRow container', () => {
+      const { getByTestId } = render(
+        <TitleStandard
+          title="$4.42"
+          titleWrapperProps={{ testID: TITLE_ROW_WRAPPER_TEST_ID }}
+        />,
+      );
+
+      expect(getByTestId(TITLE_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
     });
   });
 
@@ -104,6 +117,20 @@ describe('TitleStandard', () => {
       );
 
       expect(getByTestId(BOTTOM_LABEL_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('forwards bottomLabelWrapperProps testID to the bottom label BoxRow container', () => {
+      const { getByTestId } = render(
+        <TitleStandard
+          title="$4.42"
+          bottomLabel="0.002 ETH"
+          bottomLabelWrapperProps={{
+            testID: BOTTOM_LABEL_ROW_WRAPPER_TEST_ID,
+          }}
+        />,
+      );
+
+      expect(getByTestId(BOTTOM_LABEL_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
     });
 
     it('renders bottomLabel and bottomLabelEndAccessory', () => {
