@@ -70,7 +70,7 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
         </BoxRow>
       )}
       {/* Bottom Accessory Slot */}
-      {!bottomLabel && bottomAccessory && bottomAccessory}
+      {!bottomLabel && bottomAccessory}
     </Box>
   );
 };

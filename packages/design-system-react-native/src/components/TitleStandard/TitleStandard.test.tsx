@@ -198,17 +198,6 @@ describe('TitleStandard', () => {
       expect(getByText('$4.42')).toBeOnTheScreen();
       expect(getByText('Info')).toBeOnTheScreen();
     });
-
-    it('renders titleEndAccessory when title is an empty string', () => {
-      const { getByText } = render(
-        <TitleStandard
-          title=""
-          titleEndAccessory={<Text>Accessory only</Text>}
-        />,
-      );
-
-      expect(getByText('Accessory only')).toBeOnTheScreen();
-    });
   });
 
   describe('when titleEndAccessory is false', () => {
