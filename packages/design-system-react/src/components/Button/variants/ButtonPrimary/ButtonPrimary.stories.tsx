@@ -1,7 +1,7 @@
+import { ButtonPrimarySize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { ButtonPrimarySize } from '@metamask/design-system-shared';
 import { IconName } from '../../../Icon';
 
 import { ButtonPrimary } from './ButtonPrimary';

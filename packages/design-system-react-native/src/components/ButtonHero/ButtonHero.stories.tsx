@@ -1,8 +1,8 @@
+import { ButtonHeroSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { ButtonHeroSize } from '@metamask/design-system-shared';
 import { IconName } from '../Icon';
 
 import { ButtonHero } from './ButtonHero';

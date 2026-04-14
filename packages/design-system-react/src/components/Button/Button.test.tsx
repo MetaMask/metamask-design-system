@@ -1,7 +1,7 @@
+import { ButtonVariant } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { ButtonVariant } from '@metamask/design-system-shared';
 import { IconName } from '../Icon';
 
 import { Button } from './Button';

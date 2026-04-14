@@ -1,7 +1,6 @@
+import { ButtonVariant } from '@metamask/design-system-shared';
 import { render } from '@testing-library/react-native';
 import React from 'react';
-
-import { ButtonVariant } from '@metamask/design-system-shared';
 
 import { Button } from './Button';
 
