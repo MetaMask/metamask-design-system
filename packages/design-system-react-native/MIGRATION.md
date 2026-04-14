@@ -15,6 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -1447,6 +1448,86 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+
+### Input Component
+
+The mobile `TextField` foundation `Input` maps to `Input` in the design system, with controlled-value requirements, stricter `TextVariant` values, and an explicit `onChangeText` API.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                | Design System Migration                                                  |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `import Input from '.../Form/TextField/foundation/Input'`                                    | `import { Input } from '@metamask/design-system-react-native'`          |
+| `import type { InputProps } from '.../foundation/Input/Input.types'`                         | `import type { InputProps } from '@metamask/design-system-react-native'` |
+| `import { TextVariant } from '.../component-library/components/Texts/Text'`                  | `import { TextVariant } from '@metamask/design-system-react-native'`    |
+
+##### Props and Callback Mapping
+
+| Mobile API                                                     | Design System API                                                     | Change Type              | Notes                                                                                      |
+| -------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------ |
+| `textVariant?: TextVariant` (legacy values such as `BodyMD`)  | `textVariant?: TextVariant` (MMDS values such as `BodyMd`)           | enum value changes       | update enum members to MMDS casing                                                         |
+| `isDisabled?: boolean`                                         | `isDisabled?: boolean`                                                | unchanged                | still defaults to `false`                                                                  |
+| `isReadonly?: boolean`                                         | `isReadonly?: boolean`                                                | unchanged                | still defaults to `false`                                                                  |
+| `isStateStylesDisabled?: boolean`                              | `isStateStylesDisabled?: boolean`                                     | unchanged                | still defaults to `false`                                                                  |
+| `value?: string`                                               | `value: string`                                                       | now required             | MMDS `Input` is controlled-only                                                            |
+| inherited `defaultValue?: string` via `TextInputProps`         | removed from `InputProps`                                             | removed                  | initialize state in parent and pass through `value`                                        |
+| `onChangeText?: (text: string) => void`                        | `onChangeText?: (text: string) => void`                               | unchanged                | continue using text callback for state updates                                              |
+| inherited `editable?: boolean`                                 | removed from `InputProps`                                             | removed                  | MMDS derives editability from `isDisabled` and `isReadonly`                                |
+| `twClassName` not available                                    | `twClassName?: string`                                                | added                    | use for Tailwind utility overrides                                                          |
+
+##### Default and Behavior Changes
+
+| Concern                    | Mobile Behavior                                                          | Design System Behavior                                                              |
+| -------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| Controlled state           | `value` optional; internal style logic treats missing value as `''`      | `value` required for every render                                                   |
+| Disabled/read-only mapping | `editable={!isDisabled && !isReadonly}`                                  | unchanged                                                                           |
+| Placeholder vertical align | legacy style system handles placeholder and value through stylesheet vars | iOS-only `lineHeight: 0` placeholder workaround when placeholder is visible         |
+| Class customization        | style-only customization path                                             | `twClassName` plus `style` are both available                                       |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Input from '../../../component-library/components/Form/TextField/foundation/Input';
+import { TextVariant } from '../../../component-library/components/Texts/Text';
+
+const [value, setValue] = useState<string | undefined>();
+
+<Input
+  value={value}
+  defaultValue="seed phrase"
+  onChangeText={setValue}
+  isDisabled={!canEdit}
+  isReadonly={isLocked}
+  textVariant={TextVariant.BodyMD}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react-native';
+
+const [value, setValue] = useState('');
+
+<Input
+  value={value}
+  onChangeText={setValue}
+  isDisabled={!canEdit}
+  isReadonly={isLocked}
+  textVariant={TextVariant.BodyMd}
+  twClassName="border-primary-default"
+/>;
+```
+
+#### API Differences
+
+- MMDS `Input` requires `value` and omits both `defaultValue` and direct `editable` control.
+- `twClassName` is available in MMDS for utility-class customization.
+- Focus/blur callback signatures remain compatible with `TextInputProps`.
 
 ### Checkbox Component
 

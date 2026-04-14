@@ -108,3 +108,7 @@ export const ConditionalExample = ({ isFocused }: { isFocused: boolean }) => {
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Migration Guide
+
+Migrating from `app/component-library/components/Form/TextField/foundation/Input` in MetaMask Mobile? See the [Input Migration Guide](../../MIGRATION.md#input-component) for prop mappings, before/after examples, and breaking changes.

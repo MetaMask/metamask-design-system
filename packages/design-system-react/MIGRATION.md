@@ -13,6 +13,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [Input Component](#input-component)
 - [Version Updates](#version-updates)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
@@ -665,6 +666,89 @@ import { Checkbox } from '@metamask/design-system-react';
 - `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
+
+### Input Component
+
+The extension `input` component maps to `Input` in the design system, with prop renames and stricter native-input typing.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                       | Design System Migration                                           |
+| ------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { Input } from '../../component-library'`       | `import { Input } from '@metamask/design-system-react'`           |
+| `import { InputType } from './input.types'`             | use native `type` strings (for example `'text'`, `'search'`)      |
+| `import type { InputProps } from './input.types'`       | `import type { InputProps } from '@metamask/design-system-react'` |
+| `import { TextVariant } from '../../../helpers/.../...'` | `import { TextVariant } from '@metamask/design-system-react'`     |
+
+##### Props and Callback Mapping
+
+| Extension API                                  | Design System API                                         | Change Type             | Notes                                                                                      |
+| ---------------------------------------------- | --------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------ |
+| `disabled?: boolean`                           | `isDisabled?: boolean`                                    | renamed                 | maps to native `disabled` internally                                                        |
+| `readOnly?: boolean`                           | `isReadonly?: boolean`                                    | renamed                 | maps to native `readOnly` internally                                                        |
+| `disableStateStyles?: boolean`                 | removed                                                   | removed                 | replace with `className` overrides when custom state styling is needed                      |
+| `autoComplete?: boolean`                       | `autoComplete?: string` (native HTML `autocomplete`)      | type/value changed      | migrate booleans to explicit values such as `'on'` / `'off'`                                |
+| `textVariant?: TextVariant` (`bodyMd`)         | `textVariant?: TextVariant` (`BodyMd`)                    | enum member casing      | import and use MMDS `TextVariant` members                                                   |
+| `type?: InputType`                             | `type?: HTMLInputTypeAttribute`                           | enum wrapper removed    | pass native input type strings directly                                                     |
+| `onChange?: () => void`                        | `onChange?: (event: ChangeEvent<HTMLInputElement>) => void` | callback signature typed | callback now receives the native event payload                                               |
+| broad Box/Text utility props via polymorphism  | removed                                                   | removed                 | use explicit `Input` props and `className`/`style`                                          |
+
+##### Default and Behavior Changes
+
+| Concern                  | Extension Behavior                                             | Design System Behavior                                                 |
+| ------------------------ | -------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `autoComplete` fallback  | boolean prop is converted to `autoComplete="on"`/`"off"`      | native input prop is forwarded as-is (no boolean coercion)            |
+| State-style toggle       | `disableStateStyles` can suppress visual state classes         | no direct prop; customize with `className` overrides                   |
+| Disabled/read-only names | `disabled` and `readOnly`                                      | `isDisabled` and `isReadonly`                                          |
+| Typography default       | `TextVariant.bodyMd`                                           | `TextVariant.BodyMd`                                                   |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Input } from '../../component-library';
+import { InputType } from './input.types';
+import { TextVariant } from '../../../helpers/constants/design-system';
+
+<Input
+  type={InputType.Search}
+  autoComplete
+  value={search}
+  onChange={(event) => setSearch(event.target.value)}
+  disabled={!canEdit}
+  readOnly={isLocked}
+  disableStateStyles
+  textVariant={TextVariant.bodyMd}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react';
+
+<Input
+  type="search"
+  autoComplete="on"
+  value={search}
+  onChange={(event) => setSearch(event.target.value)}
+  isDisabled={!canEdit}
+  isReadonly={isLocked}
+  textVariant={TextVariant.BodyMd}
+  className="focus:border-primary-default"
+/>;
+```
+
+#### API Differences
+
+- MMDS `Input` still supports both controlled and uncontrolled web usage (`value` and `defaultValue` are both available), but uses renamed state props (`isDisabled`, `isReadonly`).
+- The old `InputType` enum and polymorphic style-utility surface are not part of MMDS `Input`.
+- Native HTML input attributes remain available through inherited `ComponentPropsWithoutRef<'input'>`.
 
 ## Version Updates
 
