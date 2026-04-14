@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 /**
  * ButtonBase - size
  * Convert from enum to const object (ADR-0003)
@@ -27,7 +29,7 @@ export type ButtonBasePropsShared = {
   /**
    * Required prop for the content to be rendered within the ButtonBase
    */
-  children: React.ReactNode;
+  children: ReactNode;
   /**
    * Optional prop to control the size of the ButtonBase
    *
