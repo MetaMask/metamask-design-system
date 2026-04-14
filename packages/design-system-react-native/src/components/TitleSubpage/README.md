@@ -3,12 +3,14 @@
 TitleSubpage lays out a required identity block (leading `titleAvatar` beside a title stack), an optional subtitle, an optional amount row, optional bottom rows, and optional inline accessories per row. On React Native, `titleAvatar` is rendered in a 40×40 centered slot as the `startAccessory` of the identity `BoxRow`.
 
 ```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
 />;
 ```
@@ -24,12 +26,14 @@ Leading visual for the identity row (required). Rendered in a 40×40 box with co
 | `ReactNode` | Yes      | —       |
 
 ```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   amount="$4.42"
 />;
@@ -37,7 +41,7 @@ import { TitleSubpage, Box } from '@metamask/design-system-react-native';
 
 ### `title`
 
-Title row (required). When `title` is a string, it uses `TextVariant.HeadingSm` and `TextColor.TextDefault` (merged with `titleProps`). Pass a `ReactNode` for custom layout. The row also renders when only `titleEndAccessory` is renderable (for example `title={false}` with an end accessory).
+Title row (required). The row renders when `title` is truthy. When `title` is a string, it uses `TextVariant.HeadingSm` and `TextColor.TextDefault` (merged with `titleProps`). Pass a `ReactNode` for custom layout.
 
 Legacy `TitleStandard` `topLabel` maps to `title` on `TitleSubpage`. The old main-line value (large amount) maps to `amount`, not `title`.
 
@@ -46,12 +50,14 @@ Legacy `TitleStandard` `topLabel` maps to `title` on `TitleSubpage`. The old mai
 | `ReactNode` | Yes      | —       |
 
 ```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   amount="$4.42"
   bottomLabel="0.002 ETH"
@@ -60,7 +66,7 @@ import { TitleSubpage, Box } from '@metamask/design-system-react-native';
 
 ### `titleEndAccessory`
 
-Optional node to the right of `title` in the title row (same pattern as `amountEndAccessory`).
+Optional node to the right of `title` in the title row (same pattern as `amountEndAccessory`). Only renders when the title row is shown (truthy `title`).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -68,17 +74,17 @@ Optional node to the right of `title` in the title row (same pattern as `amountE
 
 ```tsx
 import {
-  TitleSubpage,
+  AvatarBaseSize,
+  AvatarToken,
   Box,
   Icon,
   IconName,
   IconSize,
+  TitleSubpage,
 } from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   titleEndAccessory={
     <Box twClassName="ml-2">
@@ -91,19 +97,21 @@ import {
 
 ### `subtitle`
 
-Optional subtitle row between the title and the amount. When `subtitle` is a string, it uses `TextVariant.BodySm`, medium weight, and `TextColor.TextAlternative` (merged with `subtitleProps`). Pass a `ReactNode` for custom layout. The row also renders when only `subtitleEndAccessory` is renderable (for example `subtitle={false}` with an end accessory).
+Optional subtitle row between the title and the amount. The row renders when `subtitle` is truthy. When `subtitle` is a string, it uses `TextVariant.BodySm`, medium weight, and `TextColor.TextAlternative` (merged with `subtitleProps`). Pass a `ReactNode` for custom layout.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   subtitle="Account 1"
   amount="$4.42"
@@ -112,7 +120,7 @@ import { TitleSubpage, Box } from '@metamask/design-system-react-native';
 
 ### `subtitleEndAccessory`
 
-Optional node to the right of `subtitle` in the subtitle row (same pattern as `titleEndAccessory`).
+Optional node to the right of `subtitle` in the subtitle row (same pattern as `titleEndAccessory`). Only renders when the subtitle row is shown (truthy `subtitle`).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -120,17 +128,17 @@ Optional node to the right of `subtitle` in the subtitle row (same pattern as `t
 
 ```tsx
 import {
-  TitleSubpage,
+  AvatarBaseSize,
+  AvatarToken,
   Box,
   Icon,
   IconName,
   IconSize,
+  TitleSubpage,
 } from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   subtitle="Account 1"
   subtitleEndAccessory={
@@ -144,27 +152,7 @@ import {
 
 ### `amount`
 
-Optional primary amount line below the title and optional subtitle. The amount row renders when `amount` or `amountEndAccessory` is renderable. When `amount` is a string, it is wrapped with display typography (`TextVariant.DisplayLg` and `amountProps`); other `ReactNode` values render as provided.
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
-
-<TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
-  title="Balance"
-  amount="$1,234.56"
-/>;
-```
-
-### `amountEndAccessory`
-
-Optional node rendered to the right of the amount (for example an info icon).
+Optional primary amount line below the title and optional subtitle. The amount row renders when `amount` is truthy (for example a non-empty string or a `ReactNode`). Falsy values such as `false`, `null`, `undefined`, or `''` hide the row and do not render `amountEndAccessory`. When `amount` is a string, it is wrapped with display typography (`TextVariant.DisplayLg` and `amountProps`); other `ReactNode` values render as provided.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -172,17 +160,39 @@ Optional node rendered to the right of the amount (for example an info icon).
 
 ```tsx
 import {
+  AvatarBaseSize,
+  AvatarToken,
   TitleSubpage,
+} from '@metamask/design-system-react-native';
+
+<TitleSubpage
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
+  title="Balance"
+  amount="$1,234.56"
+/>;
+```
+
+### `amountEndAccessory`
+
+Optional node rendered to the right of the amount (for example an info icon). Only renders when the amount row is shown (truthy `amount`).
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+import {
+  AvatarBaseSize,
+  AvatarToken,
   Box,
   Icon,
   IconName,
   IconSize,
+  TitleSubpage,
 } from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   amount="$4.42"
   amountEndAccessory={
@@ -195,19 +205,21 @@ import {
 
 ### `bottomLabel`
 
-Optional bottom label row. When `bottomLabel` is a string, it uses `TextVariant.BodySm`, medium weight, and `TextColor.TextAlternative` (merged with `bottomLabelProps`). If `bottomLabel` or `bottomLabelEndAccessory` is renderable, that row is shown instead of `bottomAccessory`.
+Optional bottom label row. The row renders when `bottomLabel` is truthy; `bottomLabelEndAccessory` only appears on that row when `bottomLabel` is truthy. When `bottomLabel` is a string, it uses `TextVariant.BodySm`, medium weight, and `TextColor.TextAlternative` (merged with `bottomLabelProps`). When this row is shown, `bottomAccessory` is not rendered.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   amount="$4.42"
   bottomLabel="0.002 ETH"
@@ -216,7 +228,7 @@ import { TitleSubpage, Box } from '@metamask/design-system-react-native';
 
 ### `bottomLabelEndAccessory`
 
-Optional node to the right of `bottomLabel` in the bottom label row (for example a `Text` label or an icon).
+Optional node to the right of `bottomLabel` in the bottom label row (for example a `Text` label or an icon). The bottom label row only renders when `bottomLabel` is truthy, so this accessory does not appear on its own without `bottomLabel`.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -224,18 +236,17 @@ Optional node to the right of `bottomLabel` in the bottom label row (for example
 
 ```tsx
 import {
-  TitleSubpage,
-  Box,
+  AvatarBaseSize,
+  AvatarToken,
+  FontWeight,
   Text,
   TextColor,
-  FontWeight,
   TextVariant,
+  TitleSubpage,
 } from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="USD Coin"
   subtitle="USDC"
   amount="$1.0001"
@@ -255,7 +266,7 @@ import {
 
 ### `bottomAccessory`
 
-Optional custom bottom row when neither `bottomLabel` nor `bottomLabelEndAccessory` is renderable. Renders without default label typography; compose layout inside the node.
+Optional custom bottom row when `bottomLabel` is omitted or not truthy (for example `false`, `null`, `undefined`, or `''`). Renders without default label typography; compose layout inside the node.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -263,21 +274,21 @@ Optional custom bottom row when neither `bottomLabel` nor `bottomLabelEndAccesso
 
 ```tsx
 import {
-  TitleSubpage,
+  AvatarBaseSize,
+  AvatarToken,
   Box,
-  BoxFlexDirection,
   BoxAlignItems,
+  BoxFlexDirection,
   Icon,
   IconName,
   IconSize,
   Text,
   TextVariant,
+  TitleSubpage,
 } from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   amount="$4.42"
   bottomAccessory={
@@ -302,12 +313,14 @@ Optional props merged into the amount `Text` when `amount` is a string. Use for 
 | `Partial<TextProps>` | No       | `undefined` |
 
 ```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   amount="$4.42"
   amountProps={{ testID: 'title-subpage-amount' }}
@@ -323,12 +336,14 @@ Optional props merged into the title row `Text` when `title` is a string.
 | `Partial<TextProps>` | No       | `undefined` |
 
 ```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   titleProps={{ testID: 'title-subpage-title' }}
   amount="$4.42"
@@ -344,12 +359,14 @@ Optional props merged into the subtitle row `Text` when `subtitle` is a string.
 | `Partial<TextProps>` | No       | `undefined` |
 
 ```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   subtitle="Account 1"
   subtitleProps={{ testID: 'title-subpage-subtitle' }}
@@ -366,12 +383,14 @@ Optional props merged into the bottom label `Text` when `bottomLabel` is a strin
 | `Partial<TextProps>` | No       | `undefined` |
 
 ```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 <TitleSubpage
-  titleAvatar={
-    <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-  }
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   title="Send"
   amount="$4.42"
   bottomLabel="0.002 ETH"
@@ -391,11 +410,15 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 | `string` | No       | `undefined` |
 
 ```tsx
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 // Add additional styles
 <TitleSubpage
-  titleAvatar={<Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />}
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   twClassName="mt-4"
   title="Send"
   amount="$4.42"
@@ -403,7 +426,7 @@ import { TitleSubpage, Box } from '@metamask/design-system-react-native';
 
 // Override default styles
 <TitleSubpage
-  titleAvatar={<Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />}
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
   twClassName="px-6"
   title="Send"
   amount="$4.42"
@@ -421,16 +444,18 @@ Use the `style` prop to customize the component's appearance with React Native s
 ```tsx
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
-import { TitleSubpage, Box } from '@metamask/design-system-react-native';
+import {
+  AvatarBaseSize,
+  AvatarToken,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
 
 export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   const tw = useTailwind();
 
   return (
     <TitleSubpage
-      titleAvatar={
-        <Box twClassName="h-8 w-8 shrink-0 rounded-full bg-primary-muted" />
-      }
+      titleAvatar={<AvatarToken name="ethereum" size={AvatarBaseSize.Lg} />}
       title="Send"
       amount="$4.42"
       style={tw.style('opacity-90', isActive && 'opacity-100')}

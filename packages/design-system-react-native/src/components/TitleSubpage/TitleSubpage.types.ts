@@ -11,19 +11,19 @@ import type { TextProps } from '../Text/Text.types';
  */
 export type TitleSubpageProps = TitleSubpagePropsShared & {
   /**
-   * Optional props merged into {@link BoxHorizontal} `textProps` when `amount` is a string.
+   * Optional props merged into {@link BoxRow} `textProps` when `amount` is a string.
    */
   amountProps?: Partial<TextProps>;
   /**
-   * Optional props merged into {@link BoxHorizontal} `textProps` when `title` is a string.
+   * Optional props merged into {@link BoxRow} `textProps` when `title` is a string.
    */
   titleProps?: Partial<TextProps>;
   /**
-   * Optional props merged into {@link BoxHorizontal} `textProps` when `subtitle` is a string.
+   * Optional props merged into {@link BoxRow} `textProps` when `subtitle` is a string.
    */
   subtitleProps?: Partial<TextProps>;
   /**
-   * Optional props merged into {@link BoxHorizontal} `textProps` when `bottomLabel` is a string.
+   * Optional props merged into {@link BoxRow} `textProps` when `bottomLabel` is a string.
    */
   bottomLabelProps?: Partial<TextProps>;
   /**

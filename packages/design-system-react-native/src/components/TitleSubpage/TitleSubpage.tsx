@@ -1,5 +1,4 @@
 // Third party dependencies.
-import { isReactNodeRenderable } from '@metamask/design-system-shared';
 import React from 'react';
 
 // Internal dependencies.
@@ -51,119 +50,81 @@ export const TitleSubpage: React.FC<TitleSubpageProps> = ({
   twClassName = '',
   ...props
 }) => {
-  const amountEndAccessoryNode = isReactNodeRenderable(amountEndAccessory)
-    ? amountEndAccessory
-    : undefined;
-
-  const titleEndAccessoryNode = isReactNodeRenderable(titleEndAccessory)
-    ? titleEndAccessory
-    : undefined;
-
-  const subtitleEndAccessoryNode = isReactNodeRenderable(subtitleEndAccessory)
-    ? subtitleEndAccessory
-    : undefined;
-
-  const bottomLabelEndAccessoryNode = isReactNodeRenderable(
-    bottomLabelEndAccessory,
-  )
-    ? bottomLabelEndAccessory
-    : undefined;
-
-  const renderTitleRow =
-    isReactNodeRenderable(title) || isReactNodeRenderable(titleEndAccessory);
-  const renderSubtitleRow =
-    isReactNodeRenderable(subtitle) ||
-    isReactNodeRenderable(subtitleEndAccessory);
-  const renderAmountRow =
-    isReactNodeRenderable(amount) || isReactNodeRenderable(amountEndAccessory);
-  const renderBottomLabelRow =
-    isReactNodeRenderable(bottomLabel) ||
-    isReactNodeRenderable(bottomLabelEndAccessory);
-  const renderBottomAccessory =
-    !renderBottomLabelRow && isReactNodeRenderable(bottomAccessory);
-
-  const titleRow = (
-    <BoxRow
-      endAccessory={titleEndAccessoryNode}
-      textProps={{
-        variant: TextVariant.HeadingSm,
-        color: TextColor.TextDefault,
-        ...titleProps,
-      }}
-    >
-      {title}
-    </BoxRow>
-  );
-
-  const subtitleRow = (
-    <BoxRow
-      endAccessory={subtitleEndAccessoryNode}
-      textProps={{
-        variant: TextVariant.BodySm,
-        fontWeight: FontWeight.Medium,
-        color: TextColor.TextAlternative,
-        ...subtitleProps,
-      }}
-    >
-      {subtitle}
-    </BoxRow>
-  );
-
-  const titleAvatarSlot = (
-    <Box
-      twClassName="h-10 w-10 shrink-0"
-      alignItems={BoxAlignItems.Center}
-      justifyContent={BoxJustifyContent.Center}
-    >
-      {titleAvatar}
-    </Box>
-  );
-
-  const identityRow = (
-    <BoxRow
-      gap={4}
-      twClassName="h-14 align-middle"
-      startAccessory={titleAvatarSlot}
-    >
-      <Box>
-        {renderTitleRow ? titleRow : null}
-        {renderSubtitleRow ? subtitleRow : null}
-      </Box>
-    </BoxRow>
-  );
-
-  const amountRow = (
-    <BoxRow
-      endAccessory={amountEndAccessoryNode}
-      textProps={{
-        variant: TextVariant.DisplayLg,
-        ...amountProps,
-      }}
-    >
-      {amount}
-    </BoxRow>
-  );
-
-  const bottomLabelRow = (
-    <BoxRow
-      endAccessory={bottomLabelEndAccessoryNode}
-      textProps={{
-        variant: TextVariant.BodySm,
-        fontWeight: FontWeight.Medium,
-        color: TextColor.TextAlternative,
-        ...bottomLabelProps,
-      }}
-    >
-      {bottomLabel}
-    </BoxRow>
-  );
-
   return (
     <Box twClassName={twClassName} {...props}>
-      {identityRow}
-      {renderAmountRow ? amountRow : null}
-      {renderBottomLabelRow ? bottomLabelRow : null}
-      {renderBottomAccessory ? bottomAccessory : null}
+      {/* Identity Row */}
+      <BoxRow
+        gap={4}
+        twClassName="h-14"
+        startAccessory={
+          // Title Avatar Slot
+          <Box
+            twClassName="h-10 w-10 shrink-0"
+            alignItems={BoxAlignItems.Center}
+            justifyContent={BoxJustifyContent.Center}
+          >
+            {titleAvatar}
+          </Box>
+        }
+      >
+        {/* Title and Subtitle Column */}
+        <Box>
+          {/* Title Row */}
+          {title && (
+            <BoxRow
+              endAccessory={titleEndAccessory}
+              textProps={{
+                variant: TextVariant.HeadingSm,
+                color: TextColor.TextDefault,
+                ...titleProps,
+              }}
+            >
+              {title}
+            </BoxRow>
+          )}
+          {/* Subtitle Row */}
+          {subtitle && (
+            <BoxRow
+              endAccessory={subtitleEndAccessory}
+              textProps={{
+                variant: TextVariant.BodySm,
+                fontWeight: FontWeight.Medium,
+                color: TextColor.TextAlternative,
+                ...subtitleProps,
+              }}
+            >
+              {subtitle}
+            </BoxRow>
+          )}
+        </Box>
+      </BoxRow>
+      {/* Amount Row */}
+      {amount && (
+        <BoxRow
+          endAccessory={amountEndAccessory}
+          textProps={{
+            variant: TextVariant.DisplayLg,
+            ...amountProps,
+          }}
+        >
+          {amount}
+        </BoxRow>
+      )}
+      {/* Bottom Label Row */}
+      {bottomLabel && (
+        <BoxRow
+          endAccessory={bottomLabelEndAccessory}
+          textProps={{
+            variant: TextVariant.BodySm,
+            fontWeight: FontWeight.Medium,
+            color: TextColor.TextAlternative,
+            ...bottomLabelProps,
+          }}
+        >
+          {bottomLabel}
+        </BoxRow>
+      )}
+      {!bottomLabel && bottomAccessory}
     </Box>
   );
 };

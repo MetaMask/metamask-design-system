@@ -31,7 +31,7 @@ export type TitleSubpagePropsShared = {
   titleEndAccessory?: ReactNode;
   /**
    * Optional subtitle row below the title and above the amount (via platform `textProps` when a string).
-   * The subtitle row renders when `subtitle` or `subtitleEndAccessory` is renderable.
+   * The subtitle row renders when `subtitle` is renderable.
    */
   subtitle?: ReactNode;
   /**

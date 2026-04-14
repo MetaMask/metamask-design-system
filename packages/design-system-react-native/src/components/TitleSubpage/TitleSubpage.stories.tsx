@@ -118,7 +118,7 @@ export const Amount: Story = {
   ),
 };
 
-export const AmountAccessory: Story = {
+export const AmountEndAccessory: Story = {
   render: () => (
     <TitleSubpage
       titleAvatar={<StoryTitleAvatar />}
@@ -144,7 +144,7 @@ export const Title: Story = {
   ),
 };
 
-export const TitleAccessory: Story = {
+export const TitleEndAccessory: Story = {
   render: () => (
     <TitleSubpage
       titleAvatar={<StoryTitleAvatar />}
@@ -164,7 +164,7 @@ export const Subtitle: Story = {
   ),
 };
 
-export const SubtitleAccessory: Story = {
+export const SubtitleEndAccessory: Story = {
   render: () => (
     <TitleSubpage
       titleAvatar={<StoryTitleAvatar />}
@@ -196,7 +196,7 @@ export const BottomLabel: Story = {
   ),
 };
 
-export const BottomLabelAccessory: Story = {
+export const BottomLabelEndAccessory: Story = {
   render: () => (
     <TitleSubpage
       titleAvatar={<StoryTitleAvatar />}

@@ -158,6 +158,28 @@ describe('TitleSubpage', () => {
       expect(getByText('$4.42')).toBeOnTheScreen();
       expect(queryByTestId('title-subpage-title-slot')).not.toBeOnTheScreen();
     });
+
+    it('does not render title row or titleEndAccessory', () => {
+      const showTitle = false;
+      const { getByText, queryByTestId, queryByText } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title={
+            showTitle ? (
+              <Text testID="title-subpage-title-slot">Top</Text>
+            ) : (
+              false
+            )
+          }
+          amount="$4.42"
+          titleEndAccessory={<Text>Only title accessory</Text>}
+        />,
+      );
+
+      expect(getByText('$4.42')).toBeOnTheScreen();
+      expect(queryByText('Only title accessory')).not.toBeOnTheScreen();
+      expect(queryByTestId('title-subpage-title-slot')).not.toBeOnTheScreen();
+    });
   });
 
   describe('when titleEndAccessory is false', () => {
@@ -223,9 +245,9 @@ describe('TitleSubpage', () => {
   });
 
   describe('when subtitle is false', () => {
-    it('does not render subtitle node but shows accessory when subtitleEndAccessory is provided', () => {
+    it('does not render subtitle row or subtitleEndAccessory', () => {
       const showSubtitle = false;
-      const { getByText, queryByTestId } = render(
+      const { getByText, queryByTestId, queryByText } = render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -243,7 +265,7 @@ describe('TitleSubpage', () => {
 
       expect(getByText('Send')).toBeOnTheScreen();
       expect(getByText('$4.42')).toBeOnTheScreen();
-      expect(getByText('Only sub accessory')).toBeOnTheScreen();
+      expect(queryByText('Only sub accessory')).not.toBeOnTheScreen();
       expect(
         queryByTestId('title-subpage-subtitle-slot'),
       ).not.toBeOnTheScreen();
@@ -348,9 +370,9 @@ describe('TitleSubpage', () => {
     });
   });
 
-  describe('when only bottomLabelEndAccessory is provided', () => {
-    it('renders bottom label row with accessory and not bottomAccessory', () => {
-      const { getByText, queryByText } = render(
+  describe('when bottomLabel is omitted and bottomLabelEndAccessory is provided', () => {
+    it('does not render bottomLabelEndAccessory without bottomLabel', () => {
+      const { queryByText } = render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -360,8 +382,21 @@ describe('TitleSubpage', () => {
         />,
       );
 
-      expect(getByText('Only accessory')).toBeOnTheScreen();
-      expect(queryByText('Full row')).not.toBeOnTheScreen();
+      expect(queryByText('Only accessory')).not.toBeOnTheScreen();
+    });
+
+    it('renders bottomAccessory', () => {
+      const { getByText } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Send"
+          amount="$4.42"
+          bottomLabelEndAccessory={<Text>Only accessory</Text>}
+          bottomAccessory={<Text>Full row</Text>}
+        />,
+      );
+
+      expect(getByText('Full row')).toBeOnTheScreen();
     });
   });
 
@@ -380,8 +415,8 @@ describe('TitleSubpage', () => {
       expect(getByText('Info')).toBeOnTheScreen();
     });
 
-    it('renders amountEndAccessory when amount is an empty string', () => {
-      const { getByText } = render(
+    it('does not render amount row when amount is an empty string', () => {
+      const { getByText, queryByText } = render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -390,7 +425,8 @@ describe('TitleSubpage', () => {
         />,
       );
 
-      expect(getByText('Accessory only')).toBeOnTheScreen();
+      expect(getByText('Send')).toBeOnTheScreen();
+      expect(queryByText('Accessory only')).not.toBeOnTheScreen();
     });
   });
 
