@@ -1,4 +1,8 @@
-import { ButtonSize, FontWeight, TextVariant } from '@metamask/design-system-shared';
+import {
+  ButtonSize,
+  FontWeight,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
 import {
