@@ -106,6 +106,37 @@ Separate shared design system concerns from platform-specific implementation con
 - ✅ React: `className?: string` (platform layer)
 - ✅ React Native: `twClassName?: string` (platform layer)
 
+## Const Object Value Patterns in Shared
+
+Not all constants in `design-system-shared` have the same kind of value. The rule is simple: **if the class string is identical across both platforms, put it in shared; if the platforms need different class strings, use an abstract value in shared and map per platform.**
+
+Both React (Tailwind) and React Native (TWRNC) share the same design token class naming from their respective presets — so most token-identity constants can live in shared and be used directly as class names on both platforms.
+
+**Two patterns:**
+
+| Pattern        | Example                                  | Value is…                                                    | Used as…                                             |
+| -------------- | ---------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
+| Token identity | `TextColor.TextDefault = 'text-default'` | The class string itself (same on both platforms)             | `className={color}` / `twClassName={color}` directly |
+| Semantic value | `FontWeight.Bold = 'bold'`               | Abstract identifier (platforms need different class strings) | Mapped in platform `.constants.ts`                   |
+
+### Token identity constants (`TextColor`, `BoxBackgroundColor`, `BoxBorderColor`, etc.)
+
+- Values ARE the Tailwind/TWRNC class strings — identical across both platforms
+- Used directly: `className={color}` (React) / `twClassName={color}` (React Native)
+- ✅ Values live in shared and are used as-is on both platforms
+
+### Semantic constants (`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`)
+
+- Platforms need different class strings for these — they cannot share a single value:
+  - React: `FontWeight.Bold → 'font-bold'`
+  - React Native: `FontWeight.Bold → '-bold'` (TWRNC suffix strategy)
+- ✅ Abstract values in shared, class mappings in each platform's `Component.constants.ts`
+- ❌ Do NOT use const values as inline `style={{}}` — Tailwind/TWRNC is the styling approach for both platforms
+
+### Tailwind scanning consequence
+
+Token identity constants in shared require Tailwind's JIT to find their string values. Because Tailwind CSS v3 does not merge `content` arrays from presets, consumers must add `@metamask/design-system-shared/dist/**/*.{mjs,cjs}` to their own Tailwind `content` glob. See `styling.md` for implementation details.
+
 ## Export Pattern: Avoiding TypeScript Errors
 
 When exporting both values and types with the same name, use inline `type` keyword to avoid "Duplicate identifier" errors:
