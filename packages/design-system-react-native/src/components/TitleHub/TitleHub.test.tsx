@@ -12,6 +12,9 @@ const CONTAINER_TEST_ID = 'title-hub-container';
 const AMOUNT_TEST_ID = 'title-hub-amount';
 const TITLE_ROW_TEST_ID = 'title-hub-title';
 const BOTTOM_LABEL_TEST_ID = 'title-hub-bottom-label';
+const TITLE_ROW_WRAPPER_TEST_ID = 'title-hub-title-row-wrapper';
+const AMOUNT_ROW_WRAPPER_TEST_ID = 'title-hub-amount-row-wrapper';
+const BOTTOM_LABEL_ROW_WRAPPER_TEST_ID = 'title-hub-bottom-label-row-wrapper';
 
 describe('TitleHub', () => {
   let tw: ReturnType<typeof useTailwind>;
@@ -218,8 +221,8 @@ describe('TitleHub', () => {
     });
   });
 
-  describe('when only bottomLabelEndAccessory is provided', () => {
-    it('renders bottom label row with accessory and not bottomAccessory', () => {
+  describe('when bottomLabel is missing but bottomLabelEndAccessory is set', () => {
+    it('does not render the bottom label row; bottomAccessory may render', () => {
       const { getByText, queryByText } = render(
         <TitleHub
           title="Send"
@@ -229,8 +232,8 @@ describe('TitleHub', () => {
         />,
       );
 
-      expect(getByText('Only accessory')).toBeOnTheScreen();
-      expect(queryByText('Full row')).not.toBeOnTheScreen();
+      expect(queryByText('Only accessory')).not.toBeOnTheScreen();
+      expect(getByText('Full row')).toBeOnTheScreen();
     });
   });
 
@@ -248,8 +251,8 @@ describe('TitleHub', () => {
       expect(getByText('Info')).toBeOnTheScreen();
     });
 
-    it('renders amountEndAccessory when amount is an empty string', () => {
-      const { getByText } = render(
+    it('does not render amount row when amount is an empty string', () => {
+      const { queryByText } = render(
         <TitleHub
           title="Send"
           amount=""
@@ -257,7 +260,7 @@ describe('TitleHub', () => {
         />,
       );
 
-      expect(getByText('Accessory only')).toBeOnTheScreen();
+      expect(queryByText('Accessory only')).not.toBeOnTheScreen();
     });
   });
 
@@ -286,6 +289,46 @@ describe('TitleHub', () => {
       expect(getByText('$4.42')).toBeOnTheScreen();
       expect(getByText('i')).toBeOnTheScreen();
       expect(getByText('0.002 ETH')).toBeOnTheScreen();
+    });
+  });
+
+  describe('row wrapper props', () => {
+    it('forwards titleWrapperProps to the title BoxRow', () => {
+      const { getByTestId } = render(
+        <TitleHub
+          title="Section"
+          titleWrapperProps={{ testID: TITLE_ROW_WRAPPER_TEST_ID }}
+        />,
+      );
+
+      expect(getByTestId(TITLE_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('forwards amountWrapperProps to the amount BoxRow', () => {
+      const { getByTestId } = render(
+        <TitleHub
+          title="Send"
+          amount="$4.42"
+          amountWrapperProps={{ testID: AMOUNT_ROW_WRAPPER_TEST_ID }}
+        />,
+      );
+
+      expect(getByTestId(AMOUNT_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('forwards bottomLabelWrapperProps to the bottom label BoxRow', () => {
+      const { getByTestId } = render(
+        <TitleHub
+          title="Send"
+          amount="$4.42"
+          bottomLabel="0.002 ETH"
+          bottomLabelWrapperProps={{
+            testID: BOTTOM_LABEL_ROW_WRAPPER_TEST_ID,
+          }}
+        />,
+      );
+
+      expect(getByTestId(BOTTOM_LABEL_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
     });
   });
 

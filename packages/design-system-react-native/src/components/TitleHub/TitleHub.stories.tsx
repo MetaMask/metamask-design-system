@@ -67,14 +67,14 @@ export const Default: Story = {
     bottomLabel: '$336.21 available',
     twClassName: '',
   },
-  render: (args) => <TitleHub {...args} titleEndAccessory={<TestnetBadge />} />,
+  render: (args) => <TitleHub {...args} />,
 };
 
 export const Amount: Story = {
   render: () => <TitleHub title="Perps" amount="$336.21" />,
 };
 
-export const AmountAccessory: Story = {
+export const AmountEndAccessory: Story = {
   render: () => (
     <TitleHub
       title="Perps"
@@ -100,7 +100,7 @@ export const Title: Story = {
   ),
 };
 
-export const TitleAccessory: Story = {
+export const TitleEndAccessory: Story = {
   render: () => <TitleHub title="Perps" titleEndAccessory={<TestnetBadge />} />,
 };
 
@@ -113,7 +113,7 @@ export const BottomLabel: Story = {
   },
 };
 
-export const BottomLabelAccessory: Story = {
+export const BottomLabelEndAccessory: Story = {
   render: () => (
     <TitleHub
       title="Perps"

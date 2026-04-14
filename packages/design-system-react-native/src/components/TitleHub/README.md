@@ -1,6 +1,6 @@
 # TitleHub
 
-TitleHub is used to display a **required** title row with an optional amount line below it, optional rows beneath that, optional inline accessories next to each row, and optional bottom label or custom bottom content.
+TitleHub renders a stacked header: a required title row, optional amount row, optional end accessories on each row, and optional bottom label or custom bottom content. Use it at the top of a **feature hub** or **home feed** when a **primary amount or balance** belongs under the feature name.
 
 ```tsx
 import { TitleHub } from '@metamask/design-system-react-native';
