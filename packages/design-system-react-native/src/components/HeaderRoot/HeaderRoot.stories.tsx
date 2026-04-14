@@ -100,7 +100,7 @@ export const Children = {
 export const EndAccessory = {
   render: () => (
     <HeaderRoot
-      title="Page Title"
+      title="Page title"
       endAccessory={<Text variant={TextVariant.BodyMd}>Custom end</Text>}
     />
   ),
