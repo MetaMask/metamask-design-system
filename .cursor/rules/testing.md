@@ -10,6 +10,7 @@ This rule defines testing patterns for design system components to ensure:
 - 100% coverage thresholds are met consistently
 - Style assertions use built-in matchers (not duplicated helpers)
 - Tests remain maintainable as components evolve
+- Optional slot tests stay proportional to the documented API (no speculative edge-case suites)
 
 ## Critical Rules
 
@@ -47,6 +48,15 @@ render(<Button onPress={onPress} />);
 fireEvent.press(getByTestId('button'));
 expect(onPress).toHaveBeenCalledTimes(1);
 ```
+
+### Optional `ReactNode` / slot props
+
+Optional slots (accessories, labels, custom rows) are usually **strings or elements**. Tests should lock in the **public contract**, not every theoretical `ReactNode` value.
+
+- **ALWAYS** cover documented usage: prop **omitted** or `undefined`, meaningful **string** or **element** content, and **`false`** when callers rely on it to hide a slot (common with React conditional patterns).
+- **NEVER** add tests for undocumented exotic values (for example numeric `0`, or empty-string edge cases) unless the component README/types explicitly support them or you are fixing a **documented** regression.
+- **NEVER** add test helpers or micro-test suites to debate conditional rendering mechanics (`&&`, ternaries, `{node}`) versus shared `ReactNode` guard utilities. Those helpers are not part of this design system. Assert **observable** outcomes only. Optional-slot patterns live in @.cursor/rules/component-architecture.md.
+- **PREFER** one high-signal test per branch for mutual exclusion or priority (for example label vs accessory) instead of permuting many falsy types.
 
 ### Query and Assertion Conventions
 
@@ -228,6 +238,7 @@ After adding or updating tests, verify:
 - https://github.com/MetaMask/contributor-docs/blob/main/docs/testing/unit-testing.md
 - https://github.com/MetaMask/metamask-extension/tree/main/.cursor/rules/unit-testing-guidelines
 - https://github.com/MetaMask/metamask-mobile/blob/main/.cursor/rules/unit-testing-guidelines.mdc
+- @.cursor/rules/component-architecture.md
 - @.cursor/rules/styling.md
 - @packages/design-system-react-native/jest.config.js
 - @packages/design-system-react-native/jest.setup.js
