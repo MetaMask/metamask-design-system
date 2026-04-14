@@ -1,11 +1,14 @@
 // Third party dependencies.
-import { isReactNodeRenderable } from '@metamask/design-system-shared';
+import {
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import React from 'react';
 
 // Internal dependencies.
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
-import { TextVariant, TextColor, FontWeight } from '../Text';
 
 import type { TitleStandardProps } from './TitleStandard.types';
 
@@ -38,51 +41,36 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
   twClassName = '',
   ...props
 }) => {
-  const titleEndAccessoryNode = isReactNodeRenderable(titleEndAccessory)
-    ? titleEndAccessory
-    : undefined;
-  const bottomLabelEndAccessoryNode = isReactNodeRenderable(
-    bottomLabelEndAccessory,
-  )
-    ? bottomLabelEndAccessory
-    : undefined;
-
-  const renderBottomLabel = isReactNodeRenderable(bottomLabel);
-  const renderBottomAccessory =
-    !renderBottomLabel && isReactNodeRenderable(bottomAccessory);
-
-  const titleRow = (
-    <BoxRow
-      endAccessory={titleEndAccessoryNode}
-      textProps={{
-        variant: TextVariant.HeadingLg,
-        ...titleProps,
-      }}
-    >
-      {title}
-    </BoxRow>
-  );
-
-  const bottomLabelRow = (
-    <BoxRow
-      endAccessory={bottomLabelEndAccessoryNode}
-      textProps={{
-        variant: TextVariant.BodySm,
-        fontWeight: FontWeight.Medium,
-        color: TextColor.TextAlternative,
-        ...bottomLabelProps,
-      }}
-    >
-      {bottomLabel}
-    </BoxRow>
-  );
-
   return (
     <Box twClassName={twClassName} gap={1} {...props}>
-      {isReactNodeRenderable(topAccessory) ? topAccessory : null}
-      {titleRow}
-      {renderBottomLabel ? bottomLabelRow : null}
-      {renderBottomAccessory ? bottomAccessory : null}
+      {/* Top Accessory Slot */}
+      {topAccessory}
+      {/* Title Row */}
+      <BoxRow
+        endAccessory={titleEndAccessory}
+        textProps={{
+          variant: TextVariant.HeadingLg,
+          ...titleProps,
+        }}
+      >
+        {title}
+      </BoxRow>
+      {/* Bottom Label Row */}
+      {bottomLabel && (
+        <BoxRow
+          endAccessory={bottomLabelEndAccessory}
+          textProps={{
+            variant: TextVariant.BodySm,
+            fontWeight: FontWeight.Medium,
+            color: TextColor.TextAlternative,
+            ...bottomLabelProps,
+          }}
+        >
+          {bottomLabel}
+        </BoxRow>
+      )}
+      {/* Bottom Accessory Slot */}
+      {!bottomLabel && bottomAccessory && bottomAccessory}
     </Box>
   );
 };

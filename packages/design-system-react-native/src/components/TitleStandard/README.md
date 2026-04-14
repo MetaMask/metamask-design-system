@@ -168,9 +168,9 @@ import {
 
 Optional props merged into the heading `Text` when `title` is a string. Use for `testID` or typography overrides.
 
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<TextProps>` | No       | `undefined` |
+| TYPE                                   | REQUIRED | DEFAULT     |
+| -------------------------------------- | -------- | ----------- |
+| `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
 <TitleStandard title="$4.42" titleProps={{ testID: 'title-standard-title' }} />
@@ -180,9 +180,9 @@ Optional props merged into the heading `Text` when `title` is a string. Use for 
 
 Optional props merged into the bottom label `Text` when `bottomLabel` is a string.
 
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<TextProps>` | No       | `undefined` |
+| TYPE                                   | REQUIRED | DEFAULT     |
+| -------------------------------------- | -------- | ----------- |
+| `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
 <TitleStandard

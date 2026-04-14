@@ -1,10 +1,14 @@
+import {
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-import { View } from 'react-native';
 
 import { Box, BoxFlexDirection, BoxAlignItems } from '../Box';
 import { Icon, IconName, IconSize, IconColor } from '../Icon';
-import { Text, TextVariant, TextColor, FontWeight } from '../Text';
+import { Text } from '../Text';
 
 import { TitleStandard } from './TitleStandard';
 import type { TitleStandardProps } from './TitleStandard.types';
@@ -36,7 +40,6 @@ type Story = StoryObj<TitleStandardProps>;
 export const Default: Story = {
   args: {
     title: 'Import a wallet',
-    bottomLabel: 'Enter your Secret Recovery Phrase',
   },
 };
 
@@ -63,7 +66,7 @@ export const TitleEndAccessory: Story = {
 
 export const TopAccessory: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
+    <Box gap={4}>
       <TitleStandard
         topAccessory={
           <Text
@@ -89,7 +92,7 @@ export const TopAccessory: Story = {
         }
         title="Enter your Secret Recovery Phrase"
       />
-    </View>
+    </Box>
   ),
 };
 

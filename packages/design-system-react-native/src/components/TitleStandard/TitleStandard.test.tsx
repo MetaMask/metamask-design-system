@@ -143,6 +143,18 @@ describe('TitleStandard', () => {
 
       expect(getByText('Custom Bottom')).toBeOnTheScreen();
     });
+
+    it('renders bottomAccessory when bottomLabel is false', () => {
+      const { getByText } = render(
+        <TitleStandard
+          title="$4.42"
+          bottomLabel={false}
+          bottomAccessory={<Text>Custom Bottom</Text>}
+        />,
+      );
+
+      expect(getByText('Custom Bottom')).toBeOnTheScreen();
+    });
   });
 
   describe('when bottomLabel and bottomAccessory are both provided', () => {

@@ -13,11 +13,11 @@ export type TitleStandardProps = TitleStandardPropsShared & {
   /**
    * Optional props merged into {@link BoxRow} `textProps` when `title` is a string.
    */
-  titleProps?: Partial<TextProps>;
+  titleProps?: Omit<Partial<TextProps>, 'children'>;
   /**
    * Optional props merged into {@link BoxRow} `textProps` when `bottomLabel` is a string.
    */
-  bottomLabelProps?: Partial<TextProps>;
+  bottomLabelProps?: Omit<Partial<TextProps>, 'children'>;
   /**
    * Optional Tailwind class name to apply to the container.
    */
