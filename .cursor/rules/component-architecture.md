@@ -240,6 +240,17 @@ Both `Input` and `Text` are _consumers_ of `TextVariant` — neither owns it. Im
 - [ ] NO className/twClassName in shared package
 - [ ] NO unified event handlers in shared package
 
+## Optional slot rendering (`ReactNode`)
+
+Optional layout slots (accessories, labels, end nodes) are usually **strings or elements**. Use **standard React conditional rendering** only (`{optionalSlot}`, `condition && <Subtree />`, ternaries). **Do not** add shared `ReactNode` guard helpers.
+
+- **PREFER** `{optionalSlot}` when `null`, `undefined`, and `false` are acceptable and you do not need to skip mounting a subtree.
+- **PREFER** `condition && <Subtree />` when the subtree should not mount unless `condition` is truthy.
+- **PREFER** avoiding redundant patterns such as `x && x` (same expression twice); use `x` or `condition && x` once.
+- **NOTE:** The left-hand side of `&&` must be chosen deliberately if numeric `0` could appear and you mean “hide”; for typical string/element slots, idiomatic React patterns are sufficient.
+
+**Related:** @.cursor/rules/testing.md — how to test optional slots without speculative edge-case suites.
+
 ## Golden Path: BadgeStatus
 
 **BadgeStatus is THE proof-of-concept for ADR-0003 and ADR-0004. Always reference when in doubt.**
@@ -263,6 +274,7 @@ Both `Input` and `Text` are _consumers_ of `TextVariant` — neither owns it. Im
 - @.cursor/rules/component-migration.md - Extension/mobile migration workflow
 - @.cursor/rules/component-enum-union-migration.md - Internal ADR migration
 - @.cursor/rules/styling.md - Design tokens and styling patterns
+- @.cursor/rules/testing.md - Optional `ReactNode` / slot testing conventions
 
 ### MetaMask Standards
 
