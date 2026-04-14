@@ -6,11 +6,6 @@ import type { ViewProps } from 'react-native';
 import type { BoxRowProps } from '../BoxRow/BoxRow.types';
 import type { TextProps } from '../Text/Text.types';
 
-type BoxRowWrapperProps = Omit<
-  Partial<BoxRowProps>,
-  'children' | 'textProps' | 'endAccessory'
->;
-
 /**
  * TitleStandard component props (React Native).
  * Extends {@link TitleStandardPropsShared} (requires `title`) with platform `Text` passthroughs, `twClassName`, and `View` props.
@@ -23,7 +18,10 @@ export type TitleStandardProps = TitleStandardPropsShared & {
   /**
    * Optional props forwarded to the title row {@link BoxRow} (excluding `children`, `textProps`, and `endAccessory`, which are controlled by this component).
    */
-  titleWrapperProps?: BoxRowWrapperProps;
+  titleWrapperProps?: Omit<
+    Partial<BoxRowProps>,
+    'children' | 'textProps' | 'endAccessory'
+  >;
   /**
    * Optional props merged into {@link BoxRow} `textProps` when `bottomLabel` is a string.
    */
@@ -31,7 +29,10 @@ export type TitleStandardProps = TitleStandardPropsShared & {
   /**
    * Optional props forwarded to the bottom label row {@link BoxRow} when `bottomLabel` is renderable (excluding `children`, `textProps`, and `endAccessory`, which are controlled by this component).
    */
-  bottomLabelWrapperProps?: BoxRowWrapperProps;
+  bottomLabelWrapperProps?: Omit<
+    Partial<BoxRowProps>,
+    'children' | 'textProps' | 'endAccessory'
+  >;
   /**
    * Optional Tailwind class name to apply to the container.
    */
