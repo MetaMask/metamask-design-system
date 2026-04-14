@@ -63,7 +63,6 @@ export const TitleAccessory = {
 export const Children = {
   render: () => (
     <HeaderRoot
-      twClassName="bg-default"
       endButtonIconProps={[
         {
           iconName: IconName.Menu,
@@ -83,8 +82,15 @@ export const Children = {
         flexDirection={BoxFlexDirection.Row}
         alignItems={BoxAlignItems.Center}
         gap={1}
+        twClassName="flex-1" // flex-1 ensures the text is truncated
       >
-        <Text>Imported Account 1</Text>
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          twClassName="flex-1" // flex-1 ensures the text is truncated
+        >
+          Imported Account 1 with a really long name
+        </Text>
         <Icon name={IconName.ArrowDown} />
       </Box>
     </HeaderRoot>
