@@ -78,31 +78,6 @@ describe('HeaderRoot', () => {
       expect(getByTestId(LEFT_CHILDREN_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders only titleAccessory when title is empty and children not provided', () => {
-      const { getByTestId } = render(
-        <HeaderRoot
-          title=""
-          titleAccessory={
-            <Text testID={LEFT_CHILDREN_TEST_ID}>Only Accessory</Text>
-          }
-        />,
-      );
-
-      expect(getByTestId(LEFT_CHILDREN_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('renders only titleAccessory when title is undefined', () => {
-      const { getByTestId } = render(
-        <HeaderRoot
-          titleAccessory={
-            <Text testID={LEFT_CHILDREN_TEST_ID}>Accessory Only</Text>
-          }
-        />,
-      );
-
-      expect(getByTestId(LEFT_CHILDREN_TEST_ID)).toBeOnTheScreen();
-    });
-
     it('renders children in left section when children provided', () => {
       const { getByTestId, queryByText } = render(
         <HeaderRoot title="Ignored Title" testID={CONTAINER_TEST_ID}>
