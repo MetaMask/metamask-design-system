@@ -1,10 +1,15 @@
 import type { ReactNode } from 'react';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { InputProps } from '../Input/Input.types';
 
 /**
  * TextField component props.
+ *
+ * Inherits [Input](../Input/Input.tsx) props for the inner text input, excluding
+ * `textVariant` and `isStateStylesDisabled`, which are owned by TextField. The
+ * outer container is a `Pressable` (tap-to-focus); use `pressableProps` for
+ * additional Pressable-specific attributes.
  */
 export type TextFieldProps = Omit<
   InputProps,
@@ -36,4 +41,11 @@ export type TextFieldProps = Omit<
    * Optional prop to customize the container style.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Optional props forwarded to the root `Pressable` wrapper.
+   */
+  pressableProps?: Omit<
+    PressableProps,
+    'onPress' | 'disabled' | 'style' | 'children'
+  >;
 };

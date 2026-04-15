@@ -1,6 +1,6 @@
 # TextField
 
-TextField is a controlled-only boxed input that can include accessories before or after the input.
+TextField is a controlled-only boxed input. The outer row is a fixed **48px** height with a single-line inner field, and optional content can appear before or after the input.
 
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
@@ -10,7 +10,7 @@ import { TextField } from '@metamask/design-system-react-native';
 
 ## Props
 
-This component extends [Input](../Input/Input.tsx) props (which extends React Native's [TextInput](https://reactnative.dev/docs/textinput)), excluding `textVariant` and `isStateStylesDisabled`.
+This component extends [Input](../Input/Input.tsx) props (which extends React Native’s [TextInput](https://reactnative.dev/docs/textinput)), excluding `textVariant` and `isStateStylesDisabled`, which TextField owns. The root is a `Pressable` (tap-to-focus); use `pressableProps` for extra `Pressable` attributes.
 
 ### `value`
 
@@ -20,43 +20,44 @@ Required controlled value for the TextField.
 | -------- | -------- | ------- |
 | `string` | Yes      | N/A     |
 
-### Layout
-
-The field uses a fixed **48px** row height with a single-line inner input.
-
 ### `isError`
 
-Optional boolean to show the error state. Changes the border color to indicate an error.
+Optional boolean to show the error state. Updates the container border color.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
 ```tsx
-<TextField value="" isError placeholder="Error state" />
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" isError placeholder="Error state" />;
 ```
 
 ### `isDisabled`
 
-Optional boolean to disable the TextField. Reduces opacity and prevents interaction.
+Optional boolean to disable the TextField. Applies reduced opacity, disables the root `Pressable`, and forwards disabled state to the inner `Input`.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
 ```tsx
-<TextField value="" isDisabled placeholder="Disabled" />
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" isDisabled placeholder="Disabled" />;
 ```
 
 ### `startAccessory`
 
-Optional content to display before the Input. For E2E, set `testID` on the accessory (or wrap it in your own `View`).
+Optional content rendered before the inner input. For E2E, set `testID` on the accessory or wrap it in your own `View`.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
+import { TextField } from '@metamask/design-system-react-native';
 import { Text } from 'react-native';
 
 <TextField value="" startAccessory={<Text>🔍</Text>} placeholder="Search..." />;
@@ -64,13 +65,14 @@ import { Text } from 'react-native';
 
 ### `endAccessory`
 
-Optional content to display after the Input. For E2E, set `testID` on the accessory (or wrap it in your own `View`).
+Optional content rendered after the inner input. For E2E, set `testID` on the accessory or wrap it in your own `View`.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
+import { TextField } from '@metamask/design-system-react-native';
 import { Text } from 'react-native';
 
 <TextField
@@ -82,21 +84,40 @@ import { Text } from 'react-native';
 
 ### `inputElement`
 
-Optional prop to replace the default Input with a custom element.
+Optional node that replaces the default `Input`. When you use this, the forwarded ref still targets the default `TextInput` type, but there may be no native input to focus when the container is pressed.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
+import { TextField } from '@metamask/design-system-react-native';
 import { TextInput } from 'react-native';
 
 <TextField value="" inputElement={<TextInput placeholder="Custom input" />} />;
 ```
 
+### `pressableProps`
+
+Optional props passed to the root `Pressable`. `onPress`, `disabled`, `style`, and `children` are reserved by TextField.
+
+| TYPE                                                                     | REQUIRED | DEFAULT     |
+| ------------------------------------------------------------------------ | -------- | ----------- |
+| `Omit<PressableProps, 'onPress' \| 'disabled' \| 'style' \| 'children'>` | No       | `undefined` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField
+  value=""
+  placeholder="Large tap target"
+  pressableProps={{ hitSlop: { top: 8, bottom: 8, left: 8, right: 8 } }}
+/>;
+```
+
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the container. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -117,15 +138,15 @@ import { TextField } from '@metamask/design-system-react-native';
 
 ### `style`
 
-Use the `style` prop to customize the container's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
 | `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { TextField } from '@metamask/design-system-react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
 export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   const tw = useTailwind();

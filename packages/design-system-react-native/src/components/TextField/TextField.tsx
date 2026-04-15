@@ -4,32 +4,15 @@ import {
   forwardRef,
   useCallback,
   useImperativeHandle,
-  useMemo,
   useRef,
   useState,
 } from 'react';
-import { Pressable, TextInput, View } from 'react-native';
+import { Pressable, TextInput } from 'react-native';
 
+import { Box } from '../Box';
 import { Input } from '../Input';
 
 import type { TextFieldProps } from './TextField.types';
-
-function getContainerBorderColorClass(
-  isDisabled: boolean,
-  isFocused: boolean,
-  isError: boolean,
-): string {
-  if (isDisabled) {
-    return 'border-muted';
-  }
-  if (isError) {
-    return 'border-error-default';
-  }
-  if (isFocused) {
-    return 'border-default';
-  }
-  return 'border-muted';
-}
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(
   (
@@ -45,6 +28,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
       onBlur,
       onFocus,
       testID,
+      pressableProps,
       ...props
     },
     ref,
@@ -57,30 +41,6 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
       ref,
       () => inputRef.current,
       [],
-    );
-
-    const borderColorClass = getContainerBorderColorClass(
-      isDisabled,
-      isFocused,
-      isError,
-    );
-
-    const containerStyle = useMemo(
-      () =>
-        tw.style(
-          'flex-row',
-          'items-center',
-          'gap-3',
-          'rounded-lg',
-          'h-12',
-          'border',
-          borderColorClass,
-          'px-4',
-          'bg-muted',
-          isDisabled && 'opacity-50',
-          twClassName,
-        ),
-      [borderColorClass, isDisabled, twClassName, tw],
     );
 
     const onBlurHandler = useCallback(
@@ -111,13 +71,33 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
 
     return (
       <Pressable
+        {...pressableProps}
+        disabled={isDisabled}
         testID={testID}
-        style={[containerStyle, style]}
+        style={[
+          tw.style(
+            'flex-row',
+            'items-center',
+            'gap-3',
+            'rounded-lg',
+            'h-12',
+            'border',
+            'px-4',
+            'bg-muted',
+            isDisabled && 'border-muted',
+            !isDisabled && isError && 'border-error-default',
+            !isDisabled && !isError && isFocused && 'border-default',
+            !isDisabled && !isError && !isFocused && 'border-muted',
+            isDisabled && 'opacity-50',
+            twClassName,
+          ),
+          style,
+        ]}
         onPress={onPressHandler}
         accessible={false}
       >
         {startAccessory}
-        <View style={tw.style('min-h-0 flex-1 justify-center')}>
+        <Box twClassName="min-h-0 flex-1 justify-center">
           {inputElement ?? (
             <Input
               {...props}
@@ -135,7 +115,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
               multiline={false}
             />
           )}
-        </View>
+        </Box>
         {endAccessory}
       </Pressable>
     );
