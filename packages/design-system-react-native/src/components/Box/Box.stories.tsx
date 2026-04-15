@@ -953,15 +953,6 @@ export const BorderColor: Story = {
           {...args}
           padding={3}
           backgroundColor={BoxBackgroundColor.WarningMuted}
-          borderColor={BoxBorderColor.WarningAlternative}
-          borderWidth={2}
-        >
-          <Text>WarningAlternative</Text>
-        </Box>
-        <Box
-          {...args}
-          padding={3}
-          backgroundColor={BoxBackgroundColor.WarningMuted}
           borderColor={BoxBorderColor.WarningMuted}
           borderWidth={2}
         >
@@ -986,15 +977,6 @@ export const BorderColor: Story = {
           borderWidth={2}
         >
           <Text>SuccessDefault</Text>
-        </Box>
-        <Box
-          {...args}
-          padding={3}
-          backgroundColor={BoxBackgroundColor.SuccessMuted}
-          borderColor={BoxBorderColor.SuccessAlternative}
-          borderWidth={2}
-        >
-          <Text>SuccessAlternative</Text>
         </Box>
         <Box
           {...args}
@@ -1257,15 +1239,6 @@ export const BackgroundColor: Story = {
         <Box
           {...args}
           padding={3}
-          backgroundColor={BoxBackgroundColor.WarningAlternative}
-          borderColor={BoxBorderColor.WarningDefault}
-          borderWidth={1}
-        >
-          <Text>WarningAlternative</Text>
-        </Box>
-        <Box
-          {...args}
-          padding={3}
           backgroundColor={BoxBackgroundColor.WarningMuted}
           borderColor={BoxBorderColor.WarningDefault}
           borderWidth={1}
@@ -1291,15 +1264,6 @@ export const BackgroundColor: Story = {
           borderWidth={1}
         >
           <Text>SuccessDefault</Text>
-        </Box>
-        <Box
-          {...args}
-          padding={3}
-          backgroundColor={BoxBackgroundColor.SuccessAlternative}
-          borderColor={BoxBorderColor.SuccessDefault}
-          borderWidth={1}
-        >
-          <Text>SuccessAlternative</Text>
         </Box>
         <Box
           {...args}

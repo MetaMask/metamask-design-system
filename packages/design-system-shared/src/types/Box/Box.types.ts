@@ -93,16 +93,12 @@ export const BoxBackgroundColor = {
   ErrorInverse: 'bg-error-inverse',
   /** Warning default background color */
   WarningDefault: 'bg-warning-default',
-  /** Warning alternative background color */
-  WarningAlternative: 'bg-warning-alternative',
   /** Warning muted background color */
   WarningMuted: 'bg-warning-muted',
   /** Warning inverse background color */
   WarningInverse: 'bg-warning-inverse',
   /** Success default background color */
   SuccessDefault: 'bg-success-default',
-  /** Success alternative background color */
-  SuccessAlternative: 'bg-success-alternative',
   /** Success muted background color */
   SuccessMuted: 'bg-success-muted',
   /** Success inverse background color */
@@ -158,16 +154,12 @@ export const BoxBorderColor = {
   ErrorInverse: 'border-error-inverse',
   /** Warning default border color */
   WarningDefault: 'border-warning-default',
-  /** Warning alternative border color */
-  WarningAlternative: 'border-warning-alternative',
   /** Warning muted border color */
   WarningMuted: 'border-warning-muted',
   /** Warning inverse border color */
   WarningInverse: 'border-warning-inverse',
   /** Success default border color */
   SuccessDefault: 'border-success-default',
-  /** Success alternative border color */
-  SuccessAlternative: 'border-success-alternative',
   /** Success muted border color */
   SuccessMuted: 'border-success-muted',
   /** Success inverse border color */
