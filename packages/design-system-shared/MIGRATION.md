@@ -11,6 +11,47 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ### From version 0.11.0 to 0.12.0
 
+#### Removed: Stale `BoxBackgroundColor` and `BoxBorderColor` `-alternative` tokens
+
+**What Changed:**
+
+The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
+
+| Removed Entry                            | Reason                                          |
+| ---------------------------------------- | ----------------------------------------------- |
+| `BoxBackgroundColor.WarningAlternative`  | `--color-warning-alternative` removed in v4.0.0 |
+| `BoxBackgroundColor.SuccessAlternative`  | `--color-success-alternative` removed in v4.0.0 |
+| `BoxBorderColor.WarningAlternative`      | `--color-warning-alternative` removed in v4.0.0 |
+| `BoxBorderColor.SuccessAlternative`      | `--color-success-alternative` removed in v4.0.0 |
+| `BoxBorderColor.InfoAlternative`         | `--color-info-alternative` removed in v4.0.0    |
+
+**Migration:**
+
+These tokens had no backing CSS custom property, so any usage was already producing no visible style. Remove references and use the corresponding `-default` or `-muted` token instead:
+
+```tsx
+// Before (0.11.0)
+<Box backgroundColor={BoxBackgroundColor.WarningAlternative} />
+<Box backgroundColor={BoxBackgroundColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.WarningAlternative} />
+<Box borderColor={BoxBorderColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.InfoAlternative} />
+
+// After (0.12.0) — use -default or -muted as appropriate
+<Box backgroundColor={BoxBackgroundColor.WarningDefault} />
+<Box backgroundColor={BoxBackgroundColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.WarningDefault} />
+<Box borderColor={BoxBorderColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.InfoDefault} />
+```
+
+**Impact:**
+
+- Any reference to the removed entries will produce a TypeScript error after upgrading.
+- No visual regression — the removed tokens had no backing design token since `@metamask/design-tokens` v4.0.0.
+
+---
+
 #### Removed: `isReactNodeRenderable` utility
 
 **What Changed:**
