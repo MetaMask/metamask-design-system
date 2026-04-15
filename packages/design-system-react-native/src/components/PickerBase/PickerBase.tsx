@@ -2,6 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { forwardRef, useCallback } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 import { Pressable } from 'react-native';
+
 import { Icon, IconSize } from '../Icon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
 

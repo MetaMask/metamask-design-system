@@ -7,7 +7,7 @@ import type { TextProps } from '../Text';
 /**
  * PickerBase component props.
  */
-export type PickerBaseProps = Omit<PressableProps, 'children'> &
+export type PickerBaseProps = Omit<PressableProps, 'children' | 'disabled'> &
   PickerBasePropsShared & {
     /**
      * Optional props passed to `Text` when `children` is a string.
