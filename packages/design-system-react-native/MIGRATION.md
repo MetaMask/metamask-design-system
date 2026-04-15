@@ -1586,26 +1586,26 @@ The TextField component in `@metamask/design-system-react-native` is a near-iden
 
 ##### Import Path
 
-| Mobile Pattern | Design System Migration |
-| --- | --- |
-| `import TextField from '.../component-library/components/Form/TextField'` | `import { TextField } from '@metamask/design-system-react-native'` |
-| `import TextField from '.../component-library/components/Form/TextField/TextField'` | `import { TextField } from '@metamask/design-system-react-native'` |
+| Mobile Pattern                                                                                     | Design System Migration                                                      |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `import TextField from '.../component-library/components/Form/TextField'`                          | `import { TextField } from '@metamask/design-system-react-native'`           |
+| `import TextField from '.../component-library/components/Form/TextField/TextField'`                | `import { TextField } from '@metamask/design-system-react-native'`           |
 | `import { TextFieldProps } from '.../component-library/components/Form/TextField/TextField.types'` | `import type { TextFieldProps } from '@metamask/design-system-react-native'` |
 
 The mobile component uses a **default export**; the design system uses a **named export**.
 
 ##### `testID` Target Changed
 
-| Mobile Behavior | Design System Behavior |
-| --- | --- |
+| Mobile Behavior                                              | Design System Behavior                                |
+| ------------------------------------------------------------ | ----------------------------------------------------- |
 | `testID` is forwarded to the inner `Input` (the `TextInput`) | `testID` is applied to the root `Pressable` container |
 
 If your tests rely on `testID` to query the native `TextInput` (e.g. for `fireEvent.changeText`), you may need to adjust your test selectors. The inner `Input` in the design system component does not receive a separate `testID` by default.
 
 ##### Accessory Wrapper Removed
 
-| Mobile Behavior | Design System Behavior |
-| --- | --- |
+| Mobile Behavior                                                                                                                                       | Design System Behavior                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `startAccessory` and `endAccessory` are each wrapped in a `<View>` with a dedicated `testID` (`textfield-startacccessory`, `textfield-endacccessory`) | Accessories are rendered directly as children of the `Pressable` — no wrapper `<View>`, no dedicated `testID` |
 
 If your tests query `textfield-startacccessory` or `textfield-endacccessory`, set `testID` on the accessory element itself:
@@ -1622,8 +1622,8 @@ If your tests query `textfield-startacccessory` or `textfield-endacccessory`, se
 
 ##### `style` Prop Type Changed
 
-| Mobile Behavior | Design System Behavior |
-| --- | --- |
+| Mobile Behavior                                                              | Design System Behavior                                                                                 |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | `style` is passed into `useStyles` and merged into the container style sheet | `style` is typed as `StyleProp<ViewStyle>` and applied as an array alongside the TWRNC container style |
 
 Most inline `style` overrides will continue to work. However, if you were relying on the old `useStyles` merge behavior (where `style` could influence border, background, or other sheet-level vars), verify that the override still applies correctly.
@@ -1636,45 +1636,45 @@ The design system TextField sets `accessible={false}` on the root `Pressable`. T
 
 These props work identically in both versions — no migration needed:
 
-| Prop | Type | Notes |
-| --- | --- | --- |
-| `value` | `string` | Controlled input value |
-| `placeholder` | `string` | Placeholder text |
-| `onChangeText` | `(text: string) => void` | Text change handler |
-| `onFocus` | `(e) => void` | Focus handler (skipped when disabled) |
-| `onBlur` | `(e) => void` | Blur handler (skipped when disabled) |
-| `isError` | `boolean` | Error border state |
-| `isDisabled` | `boolean` | Disabled state (opacity + no interaction) |
-| `isReadonly` | `boolean` | Read-only state |
-| `autoFocus` | `boolean` | Auto-focus on mount |
-| `startAccessory` | `ReactNode` | Content before the input |
-| `endAccessory` | `ReactNode` | Content after the input |
-| `inputElement` | `ReactNode` | Custom input replacement |
-| `ref` | `Ref<TextInput>` | Forwarded to inner TextInput |
-| `numberOfLines` | Forced to `1` | Single-line enforced |
-| `multiline` | Forced to `false` | Single-line enforced |
-| All `TextInputProps` | Various | Spread to inner Input |
+| Prop                 | Type                     | Notes                                     |
+| -------------------- | ------------------------ | ----------------------------------------- |
+| `value`              | `string`                 | Controlled input value                    |
+| `placeholder`        | `string`                 | Placeholder text                          |
+| `onChangeText`       | `(text: string) => void` | Text change handler                       |
+| `onFocus`            | `(e) => void`            | Focus handler (skipped when disabled)     |
+| `onBlur`             | `(e) => void`            | Blur handler (skipped when disabled)      |
+| `isError`            | `boolean`                | Error border state                        |
+| `isDisabled`         | `boolean`                | Disabled state (opacity + no interaction) |
+| `isReadonly`         | `boolean`                | Read-only state                           |
+| `autoFocus`          | `boolean`                | Auto-focus on mount                       |
+| `startAccessory`     | `ReactNode`              | Content before the input                  |
+| `endAccessory`       | `ReactNode`              | Content after the input                   |
+| `inputElement`       | `ReactNode`              | Custom input replacement                  |
+| `ref`                | `Ref<TextInput>`         | Forwarded to inner TextInput              |
+| `numberOfLines`      | Forced to `1`            | Single-line enforced                      |
+| `multiline`          | Forced to `false`        | Single-line enforced                      |
+| All `TextInputProps` | Various                  | Spread to inner Input                     |
 
 #### New Props (Design System Only)
 
-| Prop | Type | Description |
-| --- | --- | --- |
-| `twClassName` | `string` | TWRNC utility classes merged into the container style |
-| `style` | `StyleProp<ViewStyle>` | React Native style applied to the container (array-merged) |
+| Prop          | Type                   | Description                                                |
+| ------------- | ---------------------- | ---------------------------------------------------------- |
+| `twClassName` | `string`               | TWRNC utility classes merged into the container style      |
+| `style`       | `StyleProp<ViewStyle>` | React Native style applied to the container (array-merged) |
 
 #### Styling Differences
 
 The design system TextField uses TWRNC (Tailwind React Native CSS) instead of the `useStyles`/`StyleSheet` approach:
 
-| Concern | Mobile | Design System |
-| --- | --- | --- |
-| Styling system | `useStyles` hook + `StyleSheet.create` | `useTailwind()` + `tw.style()` |
-| Border radius | `12px` | `8px` (`rounded-lg`) |
-| Background | `theme.colors.background.muted` | `bg-muted` (equivalent token) |
-| Disabled opacity | `0.5` | `0.5` (identical) |
-| Height | `48px` | `48px` (identical) |
-| Horizontal padding | `16px` | `16px` (`px-4`, identical) |
-| Accessory gap | `marginRight/Left: 12` | `gap-3` (12px, identical) |
+| Concern            | Mobile                                 | Design System                  |
+| ------------------ | -------------------------------------- | ------------------------------ |
+| Styling system     | `useStyles` hook + `StyleSheet.create` | `useTailwind()` + `tw.style()` |
+| Border radius      | `12px`                                 | `8px` (`rounded-lg`)           |
+| Background         | `theme.colors.background.muted`        | `bg-muted` (equivalent token)  |
+| Disabled opacity   | `0.5`                                  | `0.5` (identical)              |
+| Height             | `48px`                                 | `48px` (identical)             |
+| Horizontal padding | `16px`                                 | `16px` (`px-4`, identical)     |
+| Accessory gap      | `marginRight/Left: 12`                 | `gap-3` (12px, identical)      |
 
 The `border-radius` change from `12px` to `8px` is the most visible visual difference.
 
