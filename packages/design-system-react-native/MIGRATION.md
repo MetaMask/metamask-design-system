@@ -1085,7 +1085,7 @@ The legacy `ButtonLink` supported `isDanger` for error-colored text. `TextButton
 
 ##### `onPress` Signature
 
-The legacy `ButtonLink` with `size={ButtonSize.Auto}` used `Text.onPressIn`/`onPressOut`. The design system `TextButton` also uses `Text` press props, so the signature is the same for inline usage. For non-auto sizes, the legacy component wrapped `ButtonBase` (a `TouchableOpacity`), which passes `GestureResponderEvent`. `TextButton` always uses `Text` press events.
+All press props (`onPress`, `onPressIn`, `onPressOut`) keep the same `GestureResponderEvent` type. The behavioral difference is that the legacy non-auto `ButtonBase` (`TouchableOpacity`) provided animated press feedback and handled `isDisabled`, whereas `TextButton` uses `Text` press handling throughout.
 
 ##### Removed Props
 
