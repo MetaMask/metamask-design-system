@@ -755,7 +755,7 @@ The `ButtonHero` accepts the same `ButtonBaseProps` as the legacy version. These
 
 ##### Size Enum
 
-Use `ButtonHeroSize` (or the `ButtonSize` alias) from `@metamask/design-system-react-native`. The values (`'sm'`, `'md'`, `'lg'`) are identical to the design system `ButtonSize` enum already used by the legacy component.
+Use `ButtonHeroSize` from `@metamask/design-system-react-native`. Its values (`'sm'`, `'md'`, `'lg'`) are identical to `ButtonSize` and `ButtonBaseSize`.
 
 #### Migration Examples
 
