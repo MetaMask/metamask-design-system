@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
+import { Icon, IconName, IconSize } from '../Icon';
 import { TextField } from './TextField';
 import type { TextFieldProps } from './TextField.types';
 
@@ -74,7 +75,7 @@ export const StartAccessory: Story = {
     <ControlledTextField
       value=""
       placeholder="With start accessory"
-      startAccessory={<Text>🔍</Text>}
+      startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
     />
   ),
 };
@@ -84,7 +85,7 @@ export const EndAccessory: Story = {
     <ControlledTextField
       value=""
       placeholder="With end accessory"
-      endAccessory={<Text>✕</Text>}
+      endAccessory={<Icon name={IconName.Close} size={IconSize.Sm} />}
     />
   ),
 };
