@@ -174,8 +174,6 @@ export const BoxBorderColor = {
   SuccessInverse: 'border-success-inverse',
   /** Info default border color */
   InfoDefault: 'border-info-default',
-  /** Info alternative border color */
-  InfoAlternative: 'border-info-alternative',
   /** Info muted border color */
   InfoMuted: 'border-info-muted',
   /** Info inverse border color */

@@ -1363,15 +1363,6 @@ export const BorderColor: Story = {
         {...args}
         padding={3}
         backgroundColor={BoxBackgroundColor.InfoMuted}
-        borderColor={BoxBorderColor.InfoAlternative}
-        borderWidth={2}
-      >
-        <Text>InfoAlternative</Text>
-      </Box>
-      <Box
-        {...args}
-        padding={3}
-        backgroundColor={BoxBackgroundColor.InfoMuted}
         borderColor={BoxBorderColor.InfoMuted}
         borderWidth={2}
       >
