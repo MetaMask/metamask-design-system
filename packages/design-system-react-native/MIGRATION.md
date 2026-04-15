@@ -7,6 +7,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
   - [ButtonBase Component](#buttonbase-component)
+  - [ButtonHero Component](#buttonhero-component)
   - [BottomSheet Component](#bottomsheet-component)
   - [BottomSheetHeader Component](#bottomsheetheader-component)
   - [BottomSheetFooter Component](#bottomsheetfooter-component)
@@ -719,6 +720,113 @@ import { IconName } from '@metamask/design-system-react-native';
   {energyLabel}
 </ButtonBase>;
 ```
+
+### ButtonHero Component
+
+The `ButtonHero` component is a branded, light-theme-locked button for high-impact actions (swaps, claims, rewards). The legacy version in `components-temp` already wraps `ButtonBase` from `@metamask/design-system-react-native`, so the migration is primarily an import change with a few behavioral differences.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                      | Design System Migration                                             |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `import ButtonHero from '.../component-library/components-temp/Buttons/ButtonHero'` | `import { ButtonHero } from '@metamask/design-system-react-native'` |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**.
+
+##### `twClassName`, `textClassName`, `iconClassName` Are Ignored
+
+The design system `ButtonHero` intentionally strips `twClassName`, `textClassName`, and `iconClassName` to prevent overriding the hero-specific light-theme styling. If you relied on these props:
+
+| Mobile Pattern                     | Design System Migration                                      |
+| ---------------------------------- | ------------------------------------------------------------ |
+| `twClassName="w-full"`             | `isFullWidth`                                                |
+| `twClassName="bg-primary-default"` | Remove — already the hero default                            |
+| `style={tw.style('w-full')}`       | `isFullWidth` (or keep `style` — it is still passed through) |
+
+##### Props (Unchanged)
+
+The `ButtonHero` accepts the same `ButtonBaseProps` as the legacy version. These props work identically:
+
+- `children`, `size`, `isFullWidth`, `isDisabled`, `isLoading`, `loadingText`
+- `startIconName`, `endIconName`, `onPress`, `style`, `testID`
+- `accessibilityLabel`, `accessibilityHint`
+
+##### Size Enum
+
+Use `ButtonHeroSize` from `@metamask/design-system-react-native`. Its values (`'sm'`, `'md'`, `'lg'`) are identical to `ButtonSize` and `ButtonBaseSize`.
+
+#### Migration Examples
+
+##### Simple hero button
+
+Before (Mobile):
+
+```tsx
+import ButtonHero from '../../../component-library/components-temp/Buttons/ButtonHero';
+import { ButtonSize } from '@metamask/design-system-react-native';
+
+<ButtonHero
+  size={ButtonSize.Lg}
+  onPress={handleClaim}
+  isDisabled={isLoading}
+  style={tw.style('w-full')}
+  testID="claim-button"
+>
+  Claim Winnings
+</ButtonHero>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonHero,
+  ButtonHeroSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonHero
+  size={ButtonHeroSize.Lg}
+  onPress={handleClaim}
+  isDisabled={isLoading}
+  isFullWidth
+  testID="claim-button"
+>
+  Claim Winnings
+</ButtonHero>;
+```
+
+##### Hero button with twClassName (stripped)
+
+Before (Mobile):
+
+```tsx
+import ButtonHero from '../../../component-library/components-temp/Buttons/ButtonHero';
+
+<ButtonHero
+  size={ButtonSize.Lg}
+  onPress={handleNext}
+  twClassName="w-full bg-primary-default"
+>
+  Continue
+</ButtonHero>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonHero,
+  ButtonHeroSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonHero size={ButtonHeroSize.Lg} onPress={handleNext} isFullWidth>
+  Continue
+</ButtonHero>;
+```
+
+`bg-primary-default` is the hero default and `w-full` maps to `isFullWidth`. Both `twClassName` overrides are no longer needed.
 
 ### BottomSheet Component
 
