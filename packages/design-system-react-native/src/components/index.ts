@@ -173,6 +173,9 @@ export type { MaskiconProps } from './temp-components/Maskicon';
 export { MainActionButton } from './MainActionButton';
 export type { MainActionButtonProps } from './MainActionButton';
 
+export { PickerBase, PickerBaseEndArrow } from './PickerBase';
+export type { PickerBaseProps } from './PickerBase';
+
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
 
