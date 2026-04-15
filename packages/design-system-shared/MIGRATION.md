@@ -17,13 +17,13 @@ This guide provides detailed instructions for migrating your project from one ve
 
 The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
 
-| Removed Entry                            | Reason                                          |
-| ---------------------------------------- | ----------------------------------------------- |
-| `BoxBackgroundColor.WarningAlternative`  | `--color-warning-alternative` removed in v4.0.0 |
-| `BoxBackgroundColor.SuccessAlternative`  | `--color-success-alternative` removed in v4.0.0 |
-| `BoxBorderColor.WarningAlternative`      | `--color-warning-alternative` removed in v4.0.0 |
-| `BoxBorderColor.SuccessAlternative`      | `--color-success-alternative` removed in v4.0.0 |
-| `BoxBorderColor.InfoAlternative`         | `--color-info-alternative` removed in v4.0.0    |
+| Removed Entry                           | Reason                                          |
+| --------------------------------------- | ----------------------------------------------- |
+| `BoxBackgroundColor.WarningAlternative` | `--color-warning-alternative` removed in v4.0.0 |
+| `BoxBackgroundColor.SuccessAlternative` | `--color-success-alternative` removed in v4.0.0 |
+| `BoxBorderColor.WarningAlternative`     | `--color-warning-alternative` removed in v4.0.0 |
+| `BoxBorderColor.SuccessAlternative`     | `--color-success-alternative` removed in v4.0.0 |
+| `BoxBorderColor.InfoAlternative`        | `--color-info-alternative` removed in v4.0.0    |
 
 **Migration:**
 

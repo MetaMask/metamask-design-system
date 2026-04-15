@@ -687,13 +687,13 @@ import { BoxBackgroundColor } from '@metamask/design-system-shared';
 
 The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
 
-| Removed Entry                           | Replacement                            |
-| --------------------------------------- | -------------------------------------- |
-| `BoxBackgroundColor.WarningAlternative` | `BoxBackgroundColor.WarningDefault`    |
-| `BoxBackgroundColor.SuccessAlternative` | `BoxBackgroundColor.SuccessDefault`    |
-| `BoxBorderColor.WarningAlternative`     | `BoxBorderColor.WarningDefault`        |
-| `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`        |
-| `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`           |
+| Removed Entry                           | Replacement                         |
+| --------------------------------------- | ----------------------------------- |
+| `BoxBackgroundColor.WarningAlternative` | `BoxBackgroundColor.WarningDefault` |
+| `BoxBackgroundColor.SuccessAlternative` | `BoxBackgroundColor.SuccessDefault` |
+| `BoxBorderColor.WarningAlternative`     | `BoxBorderColor.WarningDefault`     |
+| `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`     |
+| `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`        |
 
 These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate.
 
