@@ -46,6 +46,6 @@ export type TextFieldProps = Omit<
    */
   pressableProps?: Omit<
     PressableProps,
-    'onPress' | 'disabled' | 'style' | 'children'
+    'onPress' | 'disabled' | 'style' | 'children' | 'accessible'
   >;
 };

@@ -3,6 +3,9 @@ import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent } from '@testing-library/react-native';
 import React, { createRef } from 'react';
 import { TextInput, View } from 'react-native';
+import { act, create } from 'react-test-renderer';
+
+import { Input } from '../Input';
 
 import { TextField } from './TextField';
 
@@ -322,6 +325,40 @@ describe('TextField', () => {
       fireEvent(getByPlaceholderText('disabled-blur'), 'blur');
 
       expect(onBlur).not.toHaveBeenCalled();
+    });
+
+    it('no-ops TextField blur wiring when disabled if the handler is invoked directly', () => {
+      const onBlur = jest.fn();
+      const tree = create(
+        <TextField
+          value=""
+          isDisabled
+          onBlur={onBlur}
+          placeholder="disabled-blur-direct"
+        />,
+      );
+      const inputNode = tree.root.findByType(Input);
+      act(() => {
+        inputNode.props.onBlur({ nativeEvent: {} });
+      });
+      expect(onBlur).not.toHaveBeenCalled();
+    });
+
+    it('no-ops TextField focus wiring when disabled if the handler is invoked directly', () => {
+      const onFocus = jest.fn();
+      const tree = create(
+        <TextField
+          value=""
+          isDisabled
+          onFocus={onFocus}
+          placeholder="disabled-focus-direct"
+        />,
+      );
+      const inputNode = tree.root.findByType(Input);
+      act(() => {
+        inputNode.props.onFocus({ nativeEvent: {} });
+      });
+      expect(onFocus).not.toHaveBeenCalled();
     });
 
     it('passes event argument to onFocus callback', () => {

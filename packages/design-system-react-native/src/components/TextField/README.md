@@ -99,11 +99,11 @@ import { TextInput } from 'react-native';
 
 ### `pressableProps`
 
-Optional props passed to the root `Pressable`. `onPress`, `disabled`, `style`, and `children` are reserved by TextField.
+Optional props passed to the root `Pressable`. `onPress`, `disabled`, `style`, `children`, and `accessible` are reserved by TextField.
 
-| TYPE                                                                     | REQUIRED | DEFAULT     |
-| ------------------------------------------------------------------------ | -------- | ----------- |
-| `Omit<PressableProps, 'onPress' \| 'disabled' \| 'style' \| 'children'>` | No       | `undefined` |
+| TYPE                                                                                     | REQUIRED | DEFAULT     |
+| ---------------------------------------------------------------------------------------- | -------- | ----------- |
+| `Omit<PressableProps, 'onPress' \| 'disabled' \| 'style' \| 'children' \| 'accessible'>` | No       | `undefined` |
 
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
