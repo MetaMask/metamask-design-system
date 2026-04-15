@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { Icon, IconName, IconSize } from '../Icon';
+
 import { TextField } from './TextField';
 import type { TextFieldProps } from './TextField.types';
 
