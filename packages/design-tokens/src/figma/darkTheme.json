@@ -25,7 +25,7 @@
       "description": "For subsection bg usually over background/section."
     },
     "muted": {
-      "value": "#ffffff14",
+      "value": "#ffffff1a",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For muted neutral surface."
@@ -55,25 +55,25 @@
       "description": "Pressed state surface for background/alternative."
     },
     "muted-hover": {
-      "value": "#ffffff1f",
+      "value": "#ffffff26",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for background/muted."
     },
     "muted-pressed": {
-      "value": "#ffffff29",
+      "value": "#ffffff33",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for background/muted."
     },
     "hover": {
-      "value": "#ffffff14",
+      "value": "#ffffff1a",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "General purpose hover state tint."
     },
     "pressed": {
-      "value": "#ffffff1f",
+      "value": "#ffffff26",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "General purpose pressed state tint."
@@ -145,7 +145,7 @@
       "description": "Default color for borders."
     },
     "muted": {
-      "value": "#ffffff1f",
+      "value": "#ffffff1a",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color for borders."

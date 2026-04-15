@@ -12,11 +12,11 @@
   --color-background-alternative: var(--brand-colors-grey-grey1000);
 
   /* Applied to interactive elements, such as buttons.
-  For dark mode, we apply pure white with 4% opacity so these
-  tokens inherit the background hue of 264.5. */
-  --color-background-muted: #ffffff14;
-  --color-background-muted-hover: #ffffff1f;
-  --color-background-muted-pressed: #ffffff29;
+  For dark mode, we apply pure white with 10%, 15%, and 20% opacities
+  so these tokens inherit the background hue. */
+  --color-background-muted: #ffffff1a;
+  --color-background-muted-hover: #ffffff26;
+  --color-background-muted-pressed: #ffffff33;
 
   /* Ensures visual consistency with section and subsection. */
   --color-background-default-hover: var(--brand-colors-grey-grey900);
@@ -26,11 +26,11 @@
   --color-background-alternative-hover: #0d0d0e;
   --color-background-alternative-pressed: #161617;
 
-  /* These have opacities of pure white for general usage. 
-  We set 8% for hover and 12% for pressed so these tokens pick up
+  /* These have opacities of pure white for general usage.
+  We set 10% for hover and 15% for pressed so these tokens pick up
   background hues and are consistent with +1 and +2 elevations.*/
-  --color-background-hover: #ffffff14;
-  --color-background-pressed: #ffffff1f;
+  --color-background-hover: #ffffff1a;
+  --color-background-pressed: #ffffff26;
 
   /* These are our content colors. 
   Contrast ratio of alternative: 7.4 on default, 8.5 on section. 
@@ -48,10 +48,10 @@
   --color-icon-inverse: var(--brand-colors-grey-grey900);
 
   /* Contrast of border-default: 3:3 on bg-default, 3.0 on section.
-  We use 8% opacify of pure white for border-muted so it maintains
+  We use 10% opacity of pure white for border-muted so it maintains
   sufficient contrast on bg-default and bg-section.*/
   --color-border-default: var(--brand-colors-grey-grey500);
-  --color-border-muted: #ffffff1f;
+  --color-border-muted: #ffffff1a;
 
   /* Derived from the same hue as bg-default, 264.5, for visual
   consistency. Ensures we don't have too much "red".
