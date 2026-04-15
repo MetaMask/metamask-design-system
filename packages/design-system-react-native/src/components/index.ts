@@ -155,6 +155,9 @@ export type { KeyValueColumnProps } from './KeyValueColumn';
 export { KeyValueRow, KeyValueRowVariant } from './KeyValueRow';
 export type { KeyValueRowProps } from './KeyValueRow';
 
+export { Textarea } from './Textarea';
+export type { TextareaProps } from './Textarea';
+
 export { Label } from './Label';
 export type { LabelProps } from './Label';
 
