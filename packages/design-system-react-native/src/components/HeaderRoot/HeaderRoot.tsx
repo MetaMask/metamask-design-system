@@ -1,11 +1,10 @@
 // Third party dependencies.
-import { isReactNodeRenderable } from '@metamask/design-system-shared';
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
-import { BoxHorizontal } from '../BoxHorizontal';
+import { BoxRow } from '../BoxRow';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { TextVariant } from '../Text';
 
@@ -27,14 +26,6 @@ export const HeaderRoot = ({
 }: HeaderRootProps) => {
   const insets = useSafeAreaInsets();
 
-  const hasRenderableChildren = isReactNodeRenderable(children);
-
-  const hasTitleContent =
-    title !== false &&
-    (isReactNodeRenderable(title) || isReactNodeRenderable(titleAccessory));
-
-  const shouldRenderTitleRow = !hasRenderableChildren && hasTitleContent;
-
   const endSectionContent = (() => {
     if (endAccessory) {
       return endAccessory;
@@ -54,25 +45,22 @@ export const HeaderRoot = ({
     return null;
   })();
 
-  const hasEndSection = Boolean(endSectionContent);
-
   const renderLeftSection = () => {
-    if (hasRenderableChildren) {
+    if (children) {
       return children;
     }
-    if (shouldRenderTitleRow) {
-      const titleNode =
-        isReactNodeRenderable(title) && title !== '' ? title : null;
+    if (title) {
       return (
-        <BoxHorizontal
+        <BoxRow
           endAccessory={titleAccessory}
           textProps={{
             variant: TextVariant.HeadingLg,
             ...titleProps,
           }}
+          twClassName="flex-1"
         >
-          {titleNode}
-        </BoxHorizontal>
+          {title}
+        </BoxRow>
       );
     }
     return null;
@@ -90,11 +78,9 @@ export const HeaderRoot = ({
       testID={testID}
       {...viewProps}
     >
-      <Box alignItems={BoxAlignItems.Start} style={{ flex: 1 }}>
-        {renderLeftSection()}
-      </Box>
-      {hasEndSection ? (
-        <Box flexDirection={BoxFlexDirection.Row} gap={2}>
+      {renderLeftSection()}
+      {endSectionContent ? (
+        <Box flexDirection={BoxFlexDirection.Row} gap={2} twClassName="ml-auto">
           {endSectionContent}
         </Box>
       ) : null}

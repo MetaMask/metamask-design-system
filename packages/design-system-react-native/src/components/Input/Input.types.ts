@@ -1,6 +1,5 @@
+import type { TextVariant } from '@metamask/design-system-shared';
 import type { TextInputProps } from 'react-native';
-
-import type { TextVariant } from '../../types';
 
 export type InputProps = Omit<
   TextInputProps,

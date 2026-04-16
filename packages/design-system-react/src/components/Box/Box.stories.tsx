@@ -1,3 +1,4 @@
+import { TextColor } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
@@ -8,7 +9,6 @@ import {
   BoxJustifyContent,
   BoxBackgroundColor,
   BoxBorderColor,
-  TextColor,
 } from '../../types';
 import { Text } from '../Text';
 

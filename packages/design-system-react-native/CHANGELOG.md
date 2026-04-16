@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.0]
+
+### Added
+
+- Added `IconAlert` component for mapping a severity (`info`, `success`, `warning`, `error`) to a fixed icon glyph and theme color ([#1060](https://github.com/MetaMask/metamask-design-system/pull/1060))
+
+### Changed
+
+- Updated `AvatarFavicon` type internals to use ADR-0003/ADR-0004 shared types; imports from `@metamask/design-system-react-native` are unchanged ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
+
+## [0.17.0]
+
+### Changed
+
+- **BREAKING:** Migrated `Text` typography types (`TextVariant`, `TextColor`, `FontWeight`, `FontStyle`, `FontFamily`) to `@metamask/design-system-shared`; all imports through `@metamask/design-system-react-native` continue to work without change ([#1047](https://github.com/MetaMask/metamask-design-system/pull/1047))
+  - `FontWeight` underlying string values changed from numeric strings (`'600'`, `'500'`, `'400'`) to semantic identifiers (`'bold'`, `'medium'`, `'regular'`); idiomatic usage (e.g. `FontWeight.Bold`) is unaffected
+  - See [Migration Guide](./MIGRATION.md#from-version-0160-to-0170)
+
+## [0.16.0]
+
+### Added
+
+- Added `HeaderSearch` component for in-screen and inline search experiences ([#1031](https://github.com/MetaMask/metamask-design-system/pull/1031))
+- Added `KeyValueColumn` component for vertically-stacked key/value layouts ([#1046](https://github.com/MetaMask/metamask-design-system/pull/1046))
+
+### Changed
+
+- **BREAKING:** Renamed `BoxHorizontal` to `BoxRow` and `BoxVertical` to `BoxColumn` ([#1050](https://github.com/MetaMask/metamask-design-system/pull/1050))
+  - See [Migration Guide](./MIGRATION.md#from-version-0150-to-0160)
+- **BREAKING:** Refactored `KeyValueRow` API — removed the legacy stub-based composition (`KeyValueRowStubs`, `field`/`value` objects); use `keyLabel`, `value`, `variant`, and accessory props directly ([#1023](https://github.com/MetaMask/metamask-design-system/pull/1023))
+  - See [Migration Guide](./MIGRATION.md#from-version-0150-to-0160)
+- Updated `BadgeNetwork` type internals; imports from `@metamask/design-system-react-native` are unchanged ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
+
+## [0.15.0]
+
+### Added
+
+- Added `NoPhotography` icon ([#1056](https://github.com/MetaMask/metamask-design-system/pull/1056))
+
+### Changed
+
+- **BREAKING:** Updated `IconSize` underlying string values to semantic t-shirt size tokens; normal use is unaffected ([#1049](https://github.com/MetaMask/metamask-design-system/pull/1049))
+- **BREAKING:** Updated `AvatarToken` and `AvatarAccount` exports to use shared const-object + string-union types (ADR-0003/ADR-0004); normal use is unaffected ([#1009](https://github.com/MetaMask/metamask-design-system/pull/1009), [#1015](https://github.com/MetaMask/metamask-design-system/pull/1015))
+
 ## [0.14.0]
 
 ### Added
@@ -288,7 +332,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.14.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.18.0...HEAD
+[0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.17.0...@metamask/design-system-react-native@0.18.0
+[0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.16.0...@metamask/design-system-react-native@0.17.0
+[0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.15.0...@metamask/design-system-react-native@0.16.0
+[0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.14.0...@metamask/design-system-react-native@0.15.0
 [0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.13.0...@metamask/design-system-react-native@0.14.0
 [0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.12.0...@metamask/design-system-react-native@0.13.0
 [0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.11.0...@metamask/design-system-react-native@0.12.0

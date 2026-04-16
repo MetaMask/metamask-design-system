@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0]
+
+### Changed
+
+- Updated `AvatarFavicon` type internals to use ADR-0003/ADR-0004 shared types; imports from `@metamask/design-system-react` are unchanged ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
+- **BREAKING:** Migrated `Text` typography types (`TextVariant`, `TextColor`, `FontWeight`, `FontStyle`, `FontFamily`) to `@metamask/design-system-shared`; all imports through `@metamask/design-system-react` continue to work without change ([#1047](https://github.com/MetaMask/metamask-design-system/pull/1047))
+  - `FontWeight`, `FontStyle`, and `FontFamily` underlying string values changed to semantic identifiers (e.g. `FontWeight.Bold` was `'font-bold'`, now `'bold'`); idiomatic usage is unaffected
+  - Projects scanning `node_modules` for Tailwind class names must also scan `@metamask/design-system-shared`
+  - See [Migration Guide](./MIGRATION.md#from-version-0160-to-0170)
+
+## [0.16.0]
+
+### Changed
+
+- Updated `BadgeNetwork` type internals; imports from `@metamask/design-system-react` are unchanged ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
+
+## [0.15.0]
+
+### Added
+
+- Added `NoPhotography` icon ([#1056](https://github.com/MetaMask/metamask-design-system/pull/1056))
+
+### Changed
+
+- **BREAKING:** Updated `AvatarToken` and `AvatarAccount` exports to use shared const-object + string-union types (ADR-0003/ADR-0004); normal use is unaffected ([#1009](https://github.com/MetaMask/metamask-design-system/pull/1009), [#1015](https://github.com/MetaMask/metamask-design-system/pull/1015))
+
 ## [0.14.0]
 
 ### Changed
@@ -215,7 +241,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.14.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.17.0...HEAD
+[0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.16.0...@metamask/design-system-react@0.17.0
+[0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.15.0...@metamask/design-system-react@0.16.0
+[0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.14.0...@metamask/design-system-react@0.15.0
 [0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.13.0...@metamask/design-system-react@0.14.0
 [0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.12.0...@metamask/design-system-react@0.13.0
 [0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.11.0...@metamask/design-system-react@0.12.0

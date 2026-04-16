@@ -6,8 +6,6 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
-export { isReactNodeRenderable } from './utils/isReactNodeRenderable';
-
 // AvatarBase types (ADR-0003 + ADR-0004)
 export {
   AvatarBaseSize,
@@ -25,17 +23,40 @@ export {
   type BadgeStatusPropsShared,
 } from './types/BadgeStatus';
 
+// IconAlert types (ADR-0003 + ADR-0004)
+export {
+  IconAlertSeverity,
+  type IconAlertPropsShared,
+} from './types/IconAlert';
+
 // BannerBase types (ADR-0004)
 export { type BannerBasePropsShared } from './types/BannerBase';
 
 // TextOrChildren types (ADR-0004)
 export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
 
-// BoxHorizontal types (ADR-0004)
-export { type BoxHorizontalPropsShared } from './types/BoxHorizontal';
+// BoxRow types (ADR-0004)
+export { type BoxRowPropsShared } from './types/BoxRow';
 
-// BoxVertical types (ADR-0004)
-export { type BoxVerticalPropsShared } from './types/BoxVertical';
+// BoxColumn types (ADR-0004)
+export { type BoxColumnPropsShared } from './types/BoxColumn';
+
+// HeaderSearch types (ADR-0003 + ADR-0004)
+export {
+  HeaderSearchVariant,
+  type HeaderSearchInlinePropsShared,
+  type HeaderSearchPropsShared,
+  type HeaderSearchScreenPropsShared,
+} from './types/HeaderSearch';
+
+// KeyValueColumn types (ADR-0004)
+export { type KeyValueColumnPropsShared } from './types/KeyValueColumn';
+
+// KeyValueRow types (ADR-0003 + ADR-0004)
+export {
+  KeyValueRowVariant,
+  type KeyValueRowPropsShared,
+} from './types/KeyValueRow';
 
 // ButtonFilter types (ADR-0004)
 export { type ButtonFilterPropsShared } from './types/ButtonFilter';
@@ -55,6 +76,9 @@ export {
   type BannerAlertPropsShared,
 } from './types/BannerAlert';
 
+// BadgeNetwork types (ADR-0004)
+export { type BadgeNetworkPropsShared } from './types/BadgeNetwork';
+
 // BadgeWrapper types (ADR-0003 + ADR-0004)
 export {
   BadgeWrapperPositionAnchorShape,
@@ -68,3 +92,22 @@ export {
   AvatarAccountVariant,
   type AvatarAccountPropsShared,
 } from './types/AvatarAccount';
+
+// Text types (ADR-0003 + ADR-0004)
+export {
+  FontFamily,
+  FontStyle,
+  FontWeight,
+  TextColor,
+  TextVariant,
+  type TextPropsShared,
+} from './types/Text';
+
+// AvatarFavicon types (ADR-0004)
+export {
+  AvatarFaviconSize,
+  type AvatarFaviconPropsShared,
+} from './types/AvatarFavicon';
+
+// Checkbox types (ADR-0004)
+export { type CheckboxPropsShared } from './types/Checkbox';

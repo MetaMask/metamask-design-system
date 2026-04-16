@@ -6,6 +6,8 @@ This guide provides detailed instructions for migrating your project from one ve
 
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
+  - [ButtonBase Component](#buttonbase-component)
+  - [ButtonHero Component](#buttonhero-component)
   - [BottomSheet Component](#bottomsheet-component)
   - [BottomSheetHeader Component](#bottomsheetheader-component)
   - [BottomSheetFooter Component](#bottomsheetfooter-component)
@@ -16,6 +18,9 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
+  - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
+  - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
   - [From version 0.13.0 to 0.14.0](#from-version-0130-to-0140)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
@@ -23,6 +28,87 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.18.0 to 0.19.0
+
+#### HeaderRoot: `titleAccessory` no longer renders without `title`
+
+**What Changed:**
+
+`titleAccessory` is now only rendered as part of the title row — it requires `title` to be truthy. Previously, `titleAccessory` could render standalone when `title` was empty or undefined. This was an unintentional side effect of the guard logic that has been corrected.
+
+**Migration:**
+
+If you were relying on `titleAccessory` rendering without a `title`, pass a `title` or use `children` to compose a fully custom left section:
+
+```tsx
+// Before (0.18.0) — titleAccessory rendered even without title
+<HeaderRoot
+  titleAccessory={<Icon name={IconName.Info} color={IconColor.IconAlternative} />}
+/>
+
+// After (0.19.0) — titleAccessory requires title to be present
+<HeaderRoot
+  title="Settings"
+  titleAccessory={<Icon name={IconName.Info} color={IconColor.IconAlternative} />}
+/>
+
+// Alternative — use children for fully custom left section content
+<HeaderRoot>
+  <Icon name={IconName.Info} color={IconColor.IconAlternative} />
+</HeaderRoot>
+```
+
+**Impact:**
+
+- Affects `HeaderRoot` usages that passed `titleAccessory` without a `title`. The accessory will no longer render in those cases.
+- `titleAccessory` passed alongside a valid `title` continues to work unchanged.
+
+#### HeaderRoot: Left section wrapper `Box` removed
+
+**What Changed:**
+
+The intermediate `Box` wrapper around the `BoxRow` in the left section has been removed. The `BoxRow` (title + `titleAccessory`) is now rendered directly as a child of the outer container row. This is a structural change only — the visual output is identical.
+
+**Impact:**
+
+No changes to visual appearance or API.
+
+---
+
+### From version 0.16.0 to 0.17.0
+
+#### Text: Typography const values moved to `@metamask/design-system-shared`
+
+`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react-native`. All existing import paths through `@metamask/design-system-react-native` continue to work without change.
+
+#### `FontWeight` values changed
+
+**No migration likely needed.** `FontWeight` was a TypeScript `enum` before this release, so the underlying string values were inaccessible via the type system. Idiomatic usage (`fontWeight={FontWeight.Bold}`) continues to work without change — the TWRNC classmap handles the mapping internally.
+
+The values did change to semantic identifiers for cross-platform sharing:
+
+| Key                  | Before (0.16.0) | After (0.17.0) |
+| -------------------- | --------------- | -------------- |
+| `FontWeight.Bold`    | `'600'`         | `'bold'`       |
+| `FontWeight.Medium`  | `'500'`         | `'medium'`     |
+| `FontWeight.Regular` | `'400'`         | `'regular'`    |
+
+If you were comparing against the raw numeric string values directly, update to use the const member instead:
+
+```tsx
+// ❌ Rare: comparing against raw numeric string
+if (fontWeight === '600') { ... }
+
+// ✅ Use const member (works in both 0.16.0 and 0.17.0)
+if (fontWeight === FontWeight.Bold) { ... }
+```
+
+#### `TextColor` additions
+
+`TextColor` gains four hover-state keys that were previously web-only (`PrimaryDefaultHover`, `ErrorDefaultHover`, `SuccessDefaultHover`, `WarningDefaultHover`). These are non-breaking additions. Their JSDoc notes that hover does not exist as an interaction state on React Native — use the corresponding `*Pressed` variant instead.
+
+---
 
 ### From version 0.13.0 to 0.14.0
 
@@ -57,6 +143,199 @@ If you do not want back navigation, omit `goBack`.
 
 - Affects BottomSheet usages that previously relied on `shouldNavigateBack`.
 - Navigation behavior is now explicit and controlled by the host app callback.
+
+### From version 0.15.0 to 0.16.0
+
+#### BoxHorizontal and BoxVertical renamed to BoxRow and BoxColumn
+
+**What Changed:**
+
+- `BoxHorizontal` has been renamed to `BoxRow`
+- `BoxVertical` has been renamed to `BoxColumn`
+
+**Migration:**
+
+```tsx
+// Before (0.15.0)
+import { BoxHorizontal, BoxVertical } from '@metamask/design-system-react-native';
+
+<BoxHorizontal gap={2}>
+  <Text>Left</Text>
+  <Text>Right</Text>
+</BoxHorizontal>
+
+<BoxVertical gap={4}>
+  <Text>Top</Text>
+  <Text>Bottom</Text>
+</BoxVertical>
+
+// After (0.16.0)
+import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
+
+<BoxRow gap={2}>
+  <Text>Left</Text>
+  <Text>Right</Text>
+</BoxRow>
+
+<BoxColumn gap={4}>
+  <Text>Top</Text>
+  <Text>Bottom</Text>
+</BoxColumn>
+```
+
+**Impact:**
+
+- Any import of `BoxHorizontal` or `BoxVertical` must be renamed
+
+#### KeyValueRow API
+
+**What changed:**
+
+- `KeyValueRow` no longer accepts `field` and `value` configuration objects. Use flat props: `keyLabel`, `value`, optional `variant`, start/end accessories, optional `keyTextProps` / `valueTextProps`, and optional `keyEndButtonIconProps` / `valueEndButtonIconProps`.
+- Layout is handled inside the component (`BoxRow` / `Box`). The old stub API used to compose custom rows is removed.
+- `KeyValueRowVariant` is defined in `@metamask/design-system-shared` (shared props follow ADR-0003 / ADR-0004); React Native–specific props remain on `KeyValueRowProps` in this package.
+
+**Removed from the public API:**
+
+- `KeyValueRowStubs` (and the underlying `Root` / `Section` / `Label` building blocks exported for custom rows)
+- Constants: `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes` (KeyValueRow-specific)
+- Types: `KeyValueRowTooltip`, `KeyValueRowField`, `PreDefinedKeyValueRowLabel`, `KeyValueRowLabelProps`, `KeyValueRowRootProps`, `KeyValueSectionProps`
+
+**Tooltip / info affordance:**
+
+- The previous `tooltip` object (`title`, `content`, etc.) on `field` or `value` is not supported. Use `keyEndButtonIconProps` or `valueEndButtonIconProps` with `iconName` and `onPress`. The row only renders a `ButtonIcon`; **title and body content are not rendered by `KeyValueRow`**. Open a modal, bottom sheet, or your own tooltip from `onPress`.
+
+**Migration (examples):**
+
+Simple labels:
+
+```tsx
+// Before (0.15.0)
+<KeyValueRow
+  field={{ label: { text: 'Network' } }}
+  value={{ label: { text: 'Ethereum Mainnet' } }}
+/>
+
+// After (0.16.0)
+<KeyValueRow keyLabel="Network" value="Ethereum Mainnet" />
+```
+
+Typography via predefined label objects → `keyTextProps` / `valueTextProps`:
+
+```tsx
+import { KeyValueRow, KeyValueRowVariant } from '@metamask/design-system-react-native';
+import { TextColor, TextVariant } from '@metamask/design-system-react-native';
+
+// Before (0.15.0)
+<KeyValueRow
+  field={{
+    label: {
+      text: 'Fee',
+      variant: TextVariant.BodySm,
+      color: TextColor.TextAlternative,
+    },
+  }}
+  value={{
+    label: {
+      text: '$2.59',
+      variant: TextVariant.BodySm,
+      color: TextColor.SuccessDefault,
+    },
+  }}
+/>
+
+// After (0.16.0)
+<KeyValueRow
+  keyLabel="Fee"
+  value="$2.59"
+  keyTextProps={{ variant: TextVariant.BodySm, color: TextColor.TextAlternative }}
+  valueTextProps={{ variant: TextVariant.BodySm, color: TextColor.SuccessDefault }}
+/>
+```
+
+Icons with `side` → accessories (use start and/or end nodes; “both sides” means passing both `*StartAccessory` and `*EndAccessory` when you need icons on each side):
+
+```tsx
+import { Icon, IconColor, IconName, IconSize } from '@metamask/design-system-react-native';
+
+// Before (0.15.0) — icon on the left of the key label
+<KeyValueRow
+  field={{
+    label: { text: 'Network' },
+    icon: { name: IconName.Wifi, color: IconColor.PrimaryDefault, size: IconSize.Sm },
+  }}
+  value={{ label: { text: 'Mainnet' } }}
+/>
+
+// After (0.16.0)
+<KeyValueRow
+  keyLabel="Network"
+  value="Mainnet"
+  keyStartAccessory={<Icon name={IconName.Wifi} color={IconColor.PrimaryDefault} size={IconSize.Sm} />}
+/>
+```
+
+Info icon that previously used `tooltip` → `keyEndButtonIconProps` and host-controlled UI:
+
+```tsx
+import { IconName } from '@metamask/design-system-react-native';
+
+// Before (0.15.0)
+<KeyValueRow
+  field={{ label: { text: 'Limit' } }}
+  value={{
+    label: { text: 'Unlimited' },
+    tooltip: {
+      title: 'About limits',
+      content: 'Explanation shown in a tooltip…',
+      onPress: () => showTooltip(),
+    },
+  }}
+/>
+
+// After (0.16.0) — implement modal / sheet / tooltip in onPress
+<KeyValueRow
+  keyLabel="Limit"
+  value="Unlimited"
+  valueEndButtonIconProps={{
+    iconName: IconName.Question,
+    onPress: () => showTooltip(),
+  }}
+/>
+```
+
+Taller row for input-style screens:
+
+```tsx
+import {
+  KeyValueRow,
+  KeyValueRowVariant,
+} from '@metamask/design-system-react-native';
+import { Icon, IconName, IconSize } from '@metamask/design-system-react-native';
+
+<KeyValueRow
+  keyLabel="Pay with"
+  value="Debit or credit"
+  variant={KeyValueRowVariant.Input}
+  valueStartAccessory={<Icon name={IconName.Card} size={IconSize.Sm} />}
+  valueEndAccessory={<Icon name={IconName.ArrowDown} size={IconSize.Sm} />}
+/>;
+```
+
+Custom React nodes for key or value remain supported:
+
+```tsx
+<KeyValueRow
+  keyLabel="Account"
+  value={<AvatarAccount address={address} size={AvatarAccountSize.Xs} />}
+/>
+```
+
+**Instructions for downstream consumers:**
+
+- In **MetaMask Mobile**, **MetaMask extension**, and any shared packages, search for `KeyValueRow` and migrate every usage away from `field` / `value` objects to the new props.
+- Remove imports of deleted symbols (`KeyValueRowStubs`, `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes`, and the removed types).
+- If your app defines **KeyValueColumn** or another wrapper that forwards the old `KeyValueRow` props, update that component’s API and all call sites to match the new shape.
 
 ## From Mobile Component Library
 
@@ -285,6 +564,269 @@ The design system Button adds these props not available in the old mobile Button
 - `startIconName` / `endIconName` — icon names for leading/trailing icons
 - `loadingText` — custom text during loading state
 - `twClassName` — Tailwind utility class overrides
+
+### ButtonBase Component
+
+The `ButtonBase` component is a low-level building block for styled buttons. It has significant API changes from the mobile component-library version.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                   | Design System Migration                                                       |
+| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| `import ButtonBase from '.../component-library/components/Buttons/Button/foundation/ButtonBase'` | `import { ButtonBase } from '@metamask/design-system-react-native'`           |
+| `import { ButtonBaseProps } from '.../ButtonBase.types'`                                         | `import type { ButtonBaseProps } from '@metamask/design-system-react-native'` |
+| `import { ButtonSize } from '.../Buttons/Button'`                                                | `import { ButtonBaseSize } from '@metamask/design-system-react-native'`       |
+
+##### Content Model: `label` → `children`
+
+The old `ButtonBase` used a `label` prop. The new one uses `children`.
+
+| Mobile Pattern                            | Design System Migration                     |
+| ----------------------------------------- | ------------------------------------------- |
+| `<ButtonBase label="Submit" />`           | `<ButtonBase>Submit</ButtonBase>`           |
+| `<ButtonBase label={<View>...</View>} />` | `<ButtonBase><View>...</View></ButtonBase>` |
+| `<ButtonBase label={variable} />`         | `<ButtonBase>{variable}</ButtonBase>`       |
+
+##### Size Enum
+
+`ButtonSize` pixel-string values are replaced by `ButtonBaseSize` lowercase string identifiers.
+
+| Mobile Value                 | Design System Value          | Notes            |
+| ---------------------------- | ---------------------------- | ---------------- |
+| `ButtonSize.Sm` (`'32'`)     | `ButtonBaseSize.Sm` (`'sm'`) | value changed    |
+| `ButtonSize.Md` (`'40'`)     | `ButtonBaseSize.Md` (`'md'`) | value changed    |
+| `ButtonSize.Lg` (`'48'`)     | `ButtonBaseSize.Lg` (`'lg'`) | value changed    |
+| `ButtonSize.Auto` (`'auto'`) | Removed                      | use default size |
+
+##### Width: `width` → `isFullWidth`
+
+The `ButtonWidthTypes` enum is removed.
+
+| Mobile Pattern                  | Design System Migration  |
+| ------------------------------- | ------------------------ |
+| `width={ButtonWidthTypes.Full}` | `isFullWidth`            |
+| `width={ButtonWidthTypes.Auto}` | Remove (auto is default) |
+
+##### Label Styling Props Removed
+
+The old `ButtonBase` accepted `labelColor` and `labelTextVariant` to control the inner `Text`. The new API exposes a `textProps` pass-through instead.
+
+| Mobile Prop                                   | Design System Migration                                                                             |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `labelColor={TextColor.Default}`              | Removed — handled internally; override via `textProps={{ color: TextColor.TextDefault }}`           |
+| `labelTextVariant={TextVariant.BodyMDMedium}` | Removed — override via `textProps={{ variant: TextVariant.BodyMd, fontWeight: FontWeight.Medium }}` |
+
+##### `loading` → `isLoading`
+
+| Mobile Prop  | Design System Prop | Notes     |
+| ------------ | ------------------ | --------- |
+| `loading`    | `isLoading`        | renamed   |
+| `isDisabled` | `isDisabled`       | unchanged |
+
+##### New Props
+
+The design system `ButtonBase` adds these props not available in the mobile version:
+
+- `isLoading` — shows an animated spinner and hides button content
+- `loadingText` — optional text shown alongside the spinner
+- `startAccessory` / `endAccessory` — arbitrary `ReactNode` slots at start/end (in addition to `startIconName`/`endIconName`)
+- `textClassName` / `iconClassName` — pressed-state-aware Tailwind class functions
+- `twClassName` — string or `(pressed: boolean) => string` for container overrides
+
+#### Migration Examples
+
+##### Simple string label
+
+Before (Mobile):
+
+```tsx
+import ButtonBase from '../../../component-library/components/Buttons/Button/foundation/ButtonBase';
+import {
+  ButtonSize,
+  ButtonWidthTypes,
+} from '../../../component-library/components/Buttons/Button';
+
+<ButtonBase
+  label="Continue"
+  size={ButtonSize.Lg}
+  width={ButtonWidthTypes.Full}
+  onPress={handleContinue}
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonBase,
+  ButtonBaseSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonBase size={ButtonBaseSize.Lg} isFullWidth onPress={handleContinue}>
+  Continue
+</ButtonBase>;
+```
+
+##### With icons and label styling
+
+Before (Mobile):
+
+```tsx
+import ButtonBase from '../../../component-library/components/Buttons/Button/foundation/ButtonBase';
+import {
+  ButtonSize,
+  ButtonWidthTypes,
+} from '../../../component-library/components/Buttons/Button';
+import { IconName } from '../../../component-library/components/Icons/Icon';
+import {
+  TextColor,
+  TextVariant,
+} from '../../../component-library/components/Texts/Text';
+
+<ButtonBase
+  label={energyLabel}
+  startIconName={IconName.Flash}
+  size={ButtonSize.Md}
+  width={ButtonWidthTypes.Full}
+  labelTextVariant={TextVariant.BodyMDMedium}
+  labelColor={theme.colors.text.default}
+  style={styles.buttonBase}
+  testID="resource-toggle-energy"
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonBase,
+  ButtonBaseSize,
+  FontWeight,
+  TextVariant,
+} from '@metamask/design-system-react-native';
+import { IconName } from '@metamask/design-system-react-native';
+
+<ButtonBase
+  startIconName={IconName.Flash}
+  size={ButtonBaseSize.Md}
+  isFullWidth
+  textProps={{ variant: TextVariant.BodyMd, fontWeight: FontWeight.Medium }}
+  style={styles.buttonBase}
+  testID="resource-toggle-energy"
+  onPress={() => onChange('energy')}
+>
+  {energyLabel}
+</ButtonBase>;
+```
+
+### ButtonHero Component
+
+The `ButtonHero` component is a branded, light-theme-locked button for high-impact actions (swaps, claims, rewards). The legacy version in `components-temp` already wraps `ButtonBase` from `@metamask/design-system-react-native`, so the migration is primarily an import change with a few behavioral differences.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                      | Design System Migration                                             |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `import ButtonHero from '.../component-library/components-temp/Buttons/ButtonHero'` | `import { ButtonHero } from '@metamask/design-system-react-native'` |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**.
+
+##### `twClassName`, `textClassName`, `iconClassName` Are Ignored
+
+The design system `ButtonHero` intentionally strips `twClassName`, `textClassName`, and `iconClassName` to prevent overriding the hero-specific light-theme styling. If you relied on these props:
+
+| Mobile Pattern                     | Design System Migration                                      |
+| ---------------------------------- | ------------------------------------------------------------ |
+| `twClassName="w-full"`             | `isFullWidth`                                                |
+| `twClassName="bg-primary-default"` | Remove — already the hero default                            |
+| `style={tw.style('w-full')}`       | `isFullWidth` (or keep `style` — it is still passed through) |
+
+##### Props (Unchanged)
+
+The `ButtonHero` accepts the same `ButtonBaseProps` as the legacy version. These props work identically:
+
+- `children`, `size`, `isFullWidth`, `isDisabled`, `isLoading`, `loadingText`
+- `startIconName`, `endIconName`, `onPress`, `style`, `testID`
+- `accessibilityLabel`, `accessibilityHint`
+
+##### Size Enum
+
+Use `ButtonHeroSize` from `@metamask/design-system-react-native`. Its values (`'sm'`, `'md'`, `'lg'`) are identical to `ButtonSize` and `ButtonBaseSize`.
+
+#### Migration Examples
+
+##### Simple hero button
+
+Before (Mobile):
+
+```tsx
+import ButtonHero from '../../../component-library/components-temp/Buttons/ButtonHero';
+import { ButtonSize } from '@metamask/design-system-react-native';
+
+<ButtonHero
+  size={ButtonSize.Lg}
+  onPress={handleClaim}
+  isDisabled={isLoading}
+  style={tw.style('w-full')}
+  testID="claim-button"
+>
+  Claim Winnings
+</ButtonHero>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonHero,
+  ButtonHeroSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonHero
+  size={ButtonHeroSize.Lg}
+  onPress={handleClaim}
+  isDisabled={isLoading}
+  isFullWidth
+  testID="claim-button"
+>
+  Claim Winnings
+</ButtonHero>;
+```
+
+##### Hero button with twClassName (stripped)
+
+Before (Mobile):
+
+```tsx
+import ButtonHero from '../../../component-library/components-temp/Buttons/ButtonHero';
+
+<ButtonHero
+  size={ButtonSize.Lg}
+  onPress={handleNext}
+  twClassName="w-full bg-primary-default"
+>
+  Continue
+</ButtonHero>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonHero,
+  ButtonHeroSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonHero size={ButtonHeroSize.Lg} onPress={handleNext} isFullWidth>
+  Continue
+</ButtonHero>;
+```
+
+`bg-primary-default` is the hero default and `w-full` maps to `isFullWidth`. Both `twClassName` overrides are no longer needed.
 
 ### BottomSheet Component
 

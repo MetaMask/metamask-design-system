@@ -97,11 +97,11 @@ export {
 } from './Box';
 export type { BoxProps, BoxSpacing, BoxBorderWidth } from './Box';
 
-export { BoxHorizontal } from './BoxHorizontal';
-export type { BoxHorizontalProps } from './BoxHorizontal';
+export { BoxRow } from './BoxRow';
+export type { BoxRowProps } from './BoxRow';
 
-export { BoxVertical } from './BoxVertical';
-export type { BoxVerticalProps } from './BoxVertical';
+export { BoxColumn } from './BoxColumn';
+export type { BoxColumnProps } from './BoxColumn';
 
 export { Card } from './Card';
 export type { CardProps } from './Card';
@@ -130,14 +130,30 @@ export type { HeaderBaseProps } from './HeaderBase';
 export { HeaderRoot } from './HeaderRoot';
 export type { HeaderRootProps } from './HeaderRoot';
 
+export { HeaderSearch, HeaderSearchVariant } from './HeaderSearch';
+export type {
+  HeaderSearchProps,
+  HeaderSearchScreenProps,
+  HeaderSearchInlineProps,
+} from './HeaderSearch';
+
 export { HeaderStandard } from './HeaderStandard';
 export type { HeaderStandardProps } from './HeaderStandard';
 
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
+export { IconAlert, IconAlertSeverity } from './IconAlert';
+export type { IconAlertProps } from './IconAlert';
+
 export { Input } from './Input';
 export type { InputProps } from './Input';
+
+export { KeyValueColumn } from './KeyValueColumn';
+export type { KeyValueColumnProps } from './KeyValueColumn';
+
+export { KeyValueRow, KeyValueRowVariant } from './KeyValueRow';
+export type { KeyValueRowProps } from './KeyValueRow';
 
 export { Label } from './Label';
 export type { LabelProps } from './Label';
