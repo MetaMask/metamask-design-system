@@ -1,11 +1,14 @@
 // Third party dependencies.
+import {
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import React from 'react';
 
 // Internal dependencies.
-import { BoxAlignItems, BoxJustifyContent } from '../../types';
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
-import { TextVariant, TextColor, FontWeight } from '../Text';
 
 import type { TitleSubpageProps } from './TitleSubpage.types';
 
@@ -15,7 +18,10 @@ import type { TitleSubpageProps } from './TitleSubpage.types';
  *
  * @param props - Component props
  * @param props.title - Title row content (required)
- * @param props.titleAvatar - Leading visual for the identity row (required); rendered in a 40×40 centered slot
+ * @param props.titleAvatar - Leading visual for the identity row (required); passed as the identity `BoxRow` `startAccessory` (size the avatar appropriately, for example `AvatarToken` at `AvatarTokenSize.Lg`)
+ * @param props.identityRowProps - Optional props spread onto the identity `BoxRow` after defaults (`children`, `startAccessory`, and `textProps` are reserved)
+ * @param props.titleColumnProps - Optional props spread onto the title/subtitle column `Box` (`children` is reserved)
+ * @param props.bottomLabelWrapperProps - Optional props spread onto the bottom label `BoxRow` after defaults (`children`, `endAccessory`, and `textProps` are reserved)
  * @param props.titleEndAccessory - Optional inline accessory to the right of `title`
  * @param props.subtitle - Optional subtitle row below the title and above the amount
  * @param props.subtitleEndAccessory - Optional inline accessory to the right of `subtitle`
@@ -47,28 +53,23 @@ export const TitleSubpage: React.FC<TitleSubpageProps> = ({
   titleProps,
   subtitleProps,
   bottomLabelProps,
+  identityRowProps,
+  titleColumnProps,
+  bottomLabelWrapperProps,
   twClassName = '',
   ...props
 }) => {
   return (
-    <Box twClassName={twClassName} {...props}>
+    <Box twClassName={twClassName} gap={1} {...props}>
       {/* Identity Row */}
       <BoxRow
         gap={4}
         twClassName="h-14"
-        startAccessory={
-          // Title Avatar Slot
-          <Box
-            twClassName="h-10 w-10 shrink-0"
-            alignItems={BoxAlignItems.Center}
-            justifyContent={BoxJustifyContent.Center}
-          >
-            {titleAvatar}
-          </Box>
-        }
+        {...identityRowProps}
+        startAccessory={titleAvatar}
       >
         {/* Title and Subtitle Column */}
-        <Box>
+        <Box {...titleColumnProps}>
           {/* Title Row */}
           {title && (
             <BoxRow
@@ -113,6 +114,7 @@ export const TitleSubpage: React.FC<TitleSubpageProps> = ({
       {/* Bottom Label Row */}
       {bottomLabel && (
         <BoxRow
+          {...bottomLabelWrapperProps}
           endAccessory={bottomLabelEndAccessory}
           textProps={{
             variant: TextVariant.BodySm,

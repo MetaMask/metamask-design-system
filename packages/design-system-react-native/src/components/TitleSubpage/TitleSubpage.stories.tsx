@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
+import {
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import React from 'react';
 
 import UsdcSVG from '../../assets/token-icons/usdc.svg';
 import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 import { Icon, IconName, IconSize, IconColor } from '../Icon';
-import { Text, TextColor, FontWeight, TextVariant } from '../Text';
+import { Text } from '../Text';
 
 import { TitleSubpage } from './TitleSubpage';
 import type { TitleSubpageProps } from './TitleSubpage.types';
@@ -85,7 +90,7 @@ const meta: Meta<TitleSubpageProps> = {
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full bg-background-default p-4">
+      <Box twClassName="w-full">
         <Story />
       </Box>
     ),
@@ -126,13 +131,12 @@ export const AmountEndAccessory: Story = {
       subtitle={USDC_SUBTITLE}
       amount={USDC_AMOUNT}
       amountEndAccessory={
-        <Box twClassName="ml-1">
-          <Icon
-            name={IconName.Info}
-            size={IconSize.Md}
-            color={IconColor.IconAlternative}
-          />
-        </Box>
+        <Icon
+          name={IconName.Info}
+          size={IconSize.Md}
+          color={IconColor.IconAlternative}
+          twClassName="ml-1"
+        />
       }
     />
   ),
@@ -171,13 +175,12 @@ export const SubtitleEndAccessory: Story = {
       title={USDC_TITLE}
       subtitle={USDC_SUBTITLE}
       subtitleEndAccessory={
-        <Box twClassName="ml-2">
-          <Icon
-            name={IconName.Info}
-            size={IconSize.Xs}
-            color={IconColor.IconAlternative}
-          />
-        </Box>
+        <Icon
+          name={IconName.Info}
+          size={IconSize.Xs}
+          color={IconColor.IconAlternative}
+          twClassName="ml-2"
+        />
       }
     />
   ),

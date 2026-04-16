@@ -14,6 +14,7 @@ const TITLE_ROW_TEST_ID = 'title-subpage-title';
 const SUBTITLE_ROW_TEST_ID = 'title-subpage-subtitle';
 const BOTTOM_LABEL_TEST_ID = 'title-subpage-bottom-label';
 const TITLE_AVATAR_TEST_ID = 'title-subpage-title-avatar';
+const IDENTITY_ROW_TEST_ID = 'title-subpage-identity-row';
 
 const defaultTitleAvatar = <Text testID={TITLE_AVATAR_TEST_ID} />;
 
@@ -43,6 +44,18 @@ describe('TitleSubpage', () => {
       );
 
       expect(getByTestId(TITLE_AVATAR_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('forwards identityRowProps testID to identity BoxRow', () => {
+      const { getByTestId } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Section"
+          identityRowProps={{ testID: IDENTITY_ROW_TEST_ID }}
+        />,
+      );
+
+      expect(getByTestId(IDENTITY_ROW_TEST_ID)).toBeOnTheScreen();
     });
 
     it('renders string amount when provided', () => {
@@ -183,18 +196,28 @@ describe('TitleSubpage', () => {
   });
 
   describe('when titleEndAccessory is false', () => {
-    it('renders title only', () => {
-      const { getByText } = render(
+    it('does not render titleEndAccessory', () => {
+      const showTitleEndAccessory = false;
+      const { getByText, queryByTestId } = render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Hi"
           amount="$4.42"
-          titleEndAccessory={false}
+          titleEndAccessory={
+            showTitleEndAccessory ? (
+              <Text testID="title-subpage-title-end-accessory">Accessory</Text>
+            ) : (
+              false
+            )
+          }
         />,
       );
 
       expect(getByText('Hi')).toBeOnTheScreen();
       expect(getByText('$4.42')).toBeOnTheScreen();
+      expect(
+        queryByTestId('title-subpage-title-end-accessory'),
+      ).not.toBeOnTheScreen();
     });
   });
 
@@ -431,17 +454,28 @@ describe('TitleSubpage', () => {
   });
 
   describe('when amountEndAccessory is false', () => {
-    it('renders amount only', () => {
-      const { getByText } = render(
+    it('does not render amountEndAccessory', () => {
+      const showAmountEndAccessory = false;
+      const { getByText, queryByTestId } = render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
           amount="$4.42"
-          amountEndAccessory={false}
+          amountEndAccessory={
+            showAmountEndAccessory ? (
+              <Text testID="title-subpage-amount-end-accessory">Accessory</Text>
+            ) : (
+              false
+            )
+          }
         />,
       );
 
+      expect(getByText('Send')).toBeOnTheScreen();
       expect(getByText('$4.42')).toBeOnTheScreen();
+      expect(
+        queryByTestId('title-subpage-amount-end-accessory'),
+      ).not.toBeOnTheScreen();
     });
   });
 

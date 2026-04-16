@@ -9,7 +9,7 @@ export type TitleSubpagePropsShared = {
   /**
    * Optional primary amount line below the title and optional subtitle (for example a fiat or token value).
    * When a string, platforms typically wrap with large display styles via `textProps`.
-   * The amount row renders when `amount` or `amountEndAccessory` is renderable.
+   * The amount row renders when `amount` is truthy; `amountEndAccessory` only appears on that row and does not show the row without `amount`.
    */
   amount?: ReactNode;
   /**
@@ -21,8 +21,8 @@ export type TitleSubpagePropsShared = {
    */
   title: ReactNode;
   /**
-   * Leading visual for the identity row (for example an avatar). On React Native this is rendered
-   * in a 40×40 box, centered, as the `startAccessory` of the identity `BoxRow`.
+   * Leading visual for the identity row (for example an avatar). On React Native this is passed as
+   * the `startAccessory` of the identity `BoxRow` (typically size the avatar to the design-spec 40×40 slot).
    */
   titleAvatar: ReactNode;
   /**
@@ -39,13 +39,13 @@ export type TitleSubpagePropsShared = {
    */
   subtitleEndAccessory?: ReactNode;
   /**
-   * Optional custom bottom row when neither `bottomLabel` nor `bottomLabelEndAccessory` is renderable.
+   * Optional custom bottom row when `bottomLabel` is not truthy.
    * Mutually exclusive with the bottom label row: only one bottom row is shown.
    */
   bottomAccessory?: ReactNode;
   /**
    * Optional bottom row with secondary label styling when a string (via platform `textProps`).
-   * If `bottomLabel` or `bottomLabelEndAccessory` is renderable, that row is shown instead of `bottomAccessory`.
+   * When `bottomLabel` is truthy, that row is shown instead of `bottomAccessory`; `bottomLabelEndAccessory` only appears with a truthy `bottomLabel`.
    */
   bottomLabel?: ReactNode;
   /**
