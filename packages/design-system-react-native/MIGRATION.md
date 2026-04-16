@@ -7,6 +7,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
   - [ButtonBase Component](#buttonbase-component)
+  - [ButtonHero Component](#buttonhero-component)
   - [BottomSheet Component](#bottomsheet-component)
   - [BottomSheetHeader Component](#bottomsheetheader-component)
   - [BottomSheetFooter Component](#bottomsheetfooter-component)
@@ -17,6 +18,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
   - [From version 0.13.0 to 0.14.0](#from-version-0130-to-0140)
@@ -26,6 +28,53 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.18.0 to 0.19.0
+
+#### HeaderRoot: `titleAccessory` no longer renders without `title`
+
+**What Changed:**
+
+`titleAccessory` is now only rendered as part of the title row — it requires `title` to be truthy. Previously, `titleAccessory` could render standalone when `title` was empty or undefined. This was an unintentional side effect of the guard logic that has been corrected.
+
+**Migration:**
+
+If you were relying on `titleAccessory` rendering without a `title`, pass a `title` or use `children` to compose a fully custom left section:
+
+```tsx
+// Before (0.18.0) — titleAccessory rendered even without title
+<HeaderRoot
+  titleAccessory={<Icon name={IconName.Info} color={IconColor.IconAlternative} />}
+/>
+
+// After (0.19.0) — titleAccessory requires title to be present
+<HeaderRoot
+  title="Settings"
+  titleAccessory={<Icon name={IconName.Info} color={IconColor.IconAlternative} />}
+/>
+
+// Alternative — use children for fully custom left section content
+<HeaderRoot>
+  <Icon name={IconName.Info} color={IconColor.IconAlternative} />
+</HeaderRoot>
+```
+
+**Impact:**
+
+- Affects `HeaderRoot` usages that passed `titleAccessory` without a `title`. The accessory will no longer render in those cases.
+- `titleAccessory` passed alongside a valid `title` continues to work unchanged.
+
+#### HeaderRoot: Left section wrapper `Box` removed
+
+**What Changed:**
+
+The intermediate `Box` wrapper around the `BoxRow` in the left section has been removed. The `BoxRow` (title + `titleAccessory`) is now rendered directly as a child of the outer container row. This is a structural change only — the visual output is identical.
+
+**Impact:**
+
+No changes to visual appearance or API.
+
+---
 
 ### From version 0.16.0 to 0.17.0
 
@@ -671,6 +720,113 @@ import { IconName } from '@metamask/design-system-react-native';
   {energyLabel}
 </ButtonBase>;
 ```
+
+### ButtonHero Component
+
+The `ButtonHero` component is a branded, light-theme-locked button for high-impact actions (swaps, claims, rewards). The legacy version in `components-temp` already wraps `ButtonBase` from `@metamask/design-system-react-native`, so the migration is primarily an import change with a few behavioral differences.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                      | Design System Migration                                             |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `import ButtonHero from '.../component-library/components-temp/Buttons/ButtonHero'` | `import { ButtonHero } from '@metamask/design-system-react-native'` |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**.
+
+##### `twClassName`, `textClassName`, `iconClassName` Are Ignored
+
+The design system `ButtonHero` intentionally strips `twClassName`, `textClassName`, and `iconClassName` to prevent overriding the hero-specific light-theme styling. If you relied on these props:
+
+| Mobile Pattern                     | Design System Migration                                      |
+| ---------------------------------- | ------------------------------------------------------------ |
+| `twClassName="w-full"`             | `isFullWidth`                                                |
+| `twClassName="bg-primary-default"` | Remove — already the hero default                            |
+| `style={tw.style('w-full')}`       | `isFullWidth` (or keep `style` — it is still passed through) |
+
+##### Props (Unchanged)
+
+The `ButtonHero` accepts the same `ButtonBaseProps` as the legacy version. These props work identically:
+
+- `children`, `size`, `isFullWidth`, `isDisabled`, `isLoading`, `loadingText`
+- `startIconName`, `endIconName`, `onPress`, `style`, `testID`
+- `accessibilityLabel`, `accessibilityHint`
+
+##### Size Enum
+
+Use `ButtonHeroSize` from `@metamask/design-system-react-native`. Its values (`'sm'`, `'md'`, `'lg'`) are identical to `ButtonSize` and `ButtonBaseSize`.
+
+#### Migration Examples
+
+##### Simple hero button
+
+Before (Mobile):
+
+```tsx
+import ButtonHero from '../../../component-library/components-temp/Buttons/ButtonHero';
+import { ButtonSize } from '@metamask/design-system-react-native';
+
+<ButtonHero
+  size={ButtonSize.Lg}
+  onPress={handleClaim}
+  isDisabled={isLoading}
+  style={tw.style('w-full')}
+  testID="claim-button"
+>
+  Claim Winnings
+</ButtonHero>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonHero,
+  ButtonHeroSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonHero
+  size={ButtonHeroSize.Lg}
+  onPress={handleClaim}
+  isDisabled={isLoading}
+  isFullWidth
+  testID="claim-button"
+>
+  Claim Winnings
+</ButtonHero>;
+```
+
+##### Hero button with twClassName (stripped)
+
+Before (Mobile):
+
+```tsx
+import ButtonHero from '../../../component-library/components-temp/Buttons/ButtonHero';
+
+<ButtonHero
+  size={ButtonSize.Lg}
+  onPress={handleNext}
+  twClassName="w-full bg-primary-default"
+>
+  Continue
+</ButtonHero>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonHero,
+  ButtonHeroSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonHero size={ButtonHeroSize.Lg} onPress={handleNext} isFullWidth>
+  Continue
+</ButtonHero>;
+```
+
+`bg-primary-default` is the hero default and `w-full` maps to `isFullWidth`. Both `twClassName` overrides are no longer needed.
 
 ### BottomSheet Component
 
