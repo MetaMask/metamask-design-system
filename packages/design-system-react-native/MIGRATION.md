@@ -80,7 +80,6 @@ No changes to visual appearance or API.
 **What Changed:**
 
 - `IconProps` now extends `Omit<SvgProps, 'color' | 'name'>` instead of `ViewProps`.
-- The component now forwards `hitSlop` as `hitSlop ?? undefined` to satisfy strict SVG prop typing.
 
 **Migration:**
 

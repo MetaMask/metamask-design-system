@@ -17,7 +17,6 @@ export const Icon = ({
 }: IconProps) => {
   const tw = useTailwind();
   const SVG = assetByIconName[name];
-  const { hitSlop, ...svgProps } = props;
   const twStyle = tw.style(
     color,
     TWCLASSMAP_ICON_SIZE_DIMENSION[size],
@@ -25,12 +24,6 @@ export const Icon = ({
   );
 
   return (
-    <SVG
-      name={name}
-      fill="currentColor"
-      style={[twStyle, style]}
-      hitSlop={hitSlop ?? undefined}
-      {...svgProps}
-    />
+    <SVG name={name} fill="currentColor" style={[twStyle, style]} {...props} />
   );
 };
