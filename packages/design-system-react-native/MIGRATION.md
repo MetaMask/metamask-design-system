@@ -7,6 +7,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
   - [ButtonBase Component](#buttonbase-component)
+  - [ButtonFilter Component](#buttonfilter-component)
   - [ButtonHero Component](#buttonhero-component)
   - [BottomSheet Component](#bottomsheet-component)
   - [BottomSheetHeader Component](#bottomsheetheader-component)
@@ -742,6 +743,86 @@ import { IconName } from '@metamask/design-system-react-native';
   {energyLabel}
 </ButtonBase>;
 ```
+
+### ButtonFilter Component
+
+The `ButtonFilter` component is a filter-chip style button that toggles between active/inactive visual states. The legacy version in `components-temp` already wraps `ButtonBase` from `@metamask/design-system-react-native`, so the migration is primarily an import change.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                  | Design System Migration                                               |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `import ButtonFilter from '.../component-library/components-temp/ButtonFilter'` | `import { ButtonFilter } from '@metamask/design-system-react-native'` |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**.
+
+##### `textClassName` → `textProps.twClassName`
+
+The legacy `ButtonFilter` accepted `textClassName` as a pressed-state-aware function `(pressed: boolean) => string`. The design system version removes `textClassName` from the prop surface entirely and manages text styling internally based on `isActive`. If you need text overrides, use `textProps.twClassName` instead.
+
+| Mobile Pattern                                | Design System Migration                       |
+| --------------------------------------------- | --------------------------------------------- |
+| `textClassName={(pressed) => 'text-default'}` | Remove — handled automatically by `isActive`  |
+| Custom text class overrides                   | `textProps={{ twClassName: 'custom-class' }}` |
+
+##### `twClassName` Type Change
+
+The legacy version inherited `twClassName` as `string | ((pressed: boolean) => string)` from `ButtonBaseProps`. The design system `ButtonFilter` narrows `twClassName` to `string` only (no pressed-state function).
+
+| Mobile Pattern                                       | Design System Migration                  |
+| ---------------------------------------------------- | ---------------------------------------- |
+| `twClassName="mt-2"`                                 | `twClassName="mt-2"` (unchanged)         |
+| `twClassName={(pressed) => pressed ? '...' : '...'}` | Use `style` prop with a function instead |
+
+##### Props (Unchanged)
+
+These props work identically in both versions:
+
+- `isActive` — toggles between active (`bg-icon-default` + `text-icon-inverse`) and inactive (`bg-background-muted` + `text-default`) states
+- `children`, `size`, `isFullWidth`, `isDisabled`, `onPress`, `style`, `testID`
+- `accessibilityLabel`, `accessibilityRole`
+
+#### Migration Examples
+
+##### Filter button group
+
+Before (Mobile):
+
+```tsx
+import ButtonFilter from '../../../component-library/components-temp/ButtonFilter';
+import { ButtonSize } from '@metamask/design-system-react-native';
+
+<ButtonFilter
+  onPress={() => setFilter('ALL')}
+  isActive={filter === 'ALL'}
+  size={ButtonSize.Md}
+  accessibilityLabel="All"
+>
+  All
+</ButtonFilter>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonFilter,
+  ButtonBaseSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonFilter
+  onPress={() => setFilter('ALL')}
+  isActive={filter === 'ALL'}
+  size={ButtonBaseSize.Md}
+  accessibilityLabel="All"
+>
+  All
+</ButtonFilter>;
+```
+
+Note: `ButtonFilter` inherits its size prop from `ButtonBaseProps`. Use `ButtonBaseSize` (or the `ButtonSize` alias).
 
 ### ButtonHero Component
 
