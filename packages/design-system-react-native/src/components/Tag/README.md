@@ -14,11 +14,11 @@ import { Tag } from '@metamask/design-system-react-native';
 
 ### `severity`
 
-Semantic emphasis for background, string/number child text color, and icons. Values use `TagVariant` from `@metamask/design-system-shared` (same pattern as `BannerAlert` / `IconAlert`).
+Semantic emphasis for background, string/number child text color, and icons. Values use `TagSeverity` from `@metamask/design-system-shared` (same pattern as `BannerAlert` / `IconAlert`).
 
-| TYPE          | REQUIRED | DEFAULT              |
-| ------------- | -------- | -------------------- |
-| `TagVariant?` | No       | `TagVariant.Neutral` |
+| TYPE           | REQUIRED | DEFAULT               |
+| -------------- | -------- | --------------------- |
+| `TagSeverity?` | No       | `TagSeverity.Neutral` |
 
 ### `children`
 

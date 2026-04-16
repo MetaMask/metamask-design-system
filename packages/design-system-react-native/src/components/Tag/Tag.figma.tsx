@@ -7,7 +7,7 @@ import { IconName } from '../Icon';
 
 import { Tag } from './Tag';
 
-import { TagVariant } from '@metamask/design-system-shared';
+import { TagSeverity } from '@metamask/design-system-shared';
 
 /**
  * Code Connect for Tag (React Native).
@@ -21,11 +21,11 @@ figma.connect(
   {
     props: {
       severity: figma.enum('variant', {
-        Neutral: TagVariant.Neutral,
-        Success: TagVariant.Success,
-        Error: TagVariant.Error,
-        Warning: TagVariant.Warning,
-        Info: TagVariant.Info,
+        Neutral: TagSeverity.Neutral,
+        Success: TagSeverity.Success,
+        Error: TagSeverity.Error,
+        Warning: TagSeverity.Warning,
+        Info: TagSeverity.Info,
       }),
       label: figma.string('Label'),
       startIconName: figma.boolean('startIcon (Figma Only)', {

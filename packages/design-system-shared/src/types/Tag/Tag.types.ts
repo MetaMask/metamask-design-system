@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 
 /**
- * Tag semantic variant (ADR-0003).
+ * Tag severity values (ADR-0003).
  * Shared across platforms so Figma / React / React Native stay aligned.
  */
-export const TagVariant = {
+export const TagSeverity = {
   Neutral: 'neutral',
   Success: 'success',
   Error: 'error',
@@ -12,7 +12,7 @@ export const TagVariant = {
   Info: 'info',
 } as const;
 
-export type TagVariant = (typeof TagVariant)[keyof typeof TagVariant];
+export type TagSeverity = (typeof TagSeverity)[keyof typeof TagSeverity];
 
 /**
  * Tag component shared props (ADR-0004).
@@ -23,9 +23,9 @@ export type TagPropsShared = {
    * Semantic severity (background, default text color for string/number children, and icon tint).
    * Aligns with `BannerAlert` and `IconAlert`, which use `severity` for the same class of states.
    *
-   * @default TagVariant.Neutral
+   * @default TagSeverity.Neutral
    */
-  severity?: TagVariant;
+  severity?: TagSeverity;
   /**
    * Content inside the tag. String and number children are wrapped in design-system `Text` with tag typography; other nodes render unchanged.
    */

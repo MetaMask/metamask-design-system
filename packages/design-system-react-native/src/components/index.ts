@@ -241,4 +241,4 @@ export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
 
 export { Tag, type TagProps } from './Tag';
-export { TagVariant } from '@metamask/design-system-shared';
+export { TagSeverity } from '@metamask/design-system-shared';

@@ -1,30 +1,30 @@
-import { TagVariant, TextColor } from '@metamask/design-system-shared';
+import { TagSeverity, TextColor } from '@metamask/design-system-shared';
 
 import { BoxBackgroundColor, IconColor } from '../../types';
 
-export const MAP_TAG_VARIANT_BACKGROUND: Record<
-  TagVariant,
+export const MAP_TAG_SEVERITY_BACKGROUND: Record<
+  TagSeverity,
   BoxBackgroundColor
 > = {
-  [TagVariant.Neutral]: BoxBackgroundColor.BackgroundMuted,
-  [TagVariant.Success]: BoxBackgroundColor.SuccessMuted,
-  [TagVariant.Error]: BoxBackgroundColor.ErrorMuted,
-  [TagVariant.Warning]: BoxBackgroundColor.WarningMuted,
-  [TagVariant.Info]: BoxBackgroundColor.InfoMuted,
+  [TagSeverity.Neutral]: BoxBackgroundColor.BackgroundMuted,
+  [TagSeverity.Success]: BoxBackgroundColor.SuccessMuted,
+  [TagSeverity.Error]: BoxBackgroundColor.ErrorMuted,
+  [TagSeverity.Warning]: BoxBackgroundColor.WarningMuted,
+  [TagSeverity.Info]: BoxBackgroundColor.InfoMuted,
 };
 
-export const MAP_TAG_VARIANT_TEXT_COLOR: Record<TagVariant, TextColor> = {
-  [TagVariant.Neutral]: TextColor.TextDefault,
-  [TagVariant.Success]: TextColor.SuccessDefault,
-  [TagVariant.Error]: TextColor.ErrorDefault,
-  [TagVariant.Warning]: TextColor.WarningDefault,
-  [TagVariant.Info]: TextColor.InfoDefault,
+export const MAP_TAG_SEVERITY_TEXT_COLOR: Record<TagSeverity, TextColor> = {
+  [TagSeverity.Neutral]: TextColor.TextDefault,
+  [TagSeverity.Success]: TextColor.SuccessDefault,
+  [TagSeverity.Error]: TextColor.ErrorDefault,
+  [TagSeverity.Warning]: TextColor.WarningDefault,
+  [TagSeverity.Info]: TextColor.InfoDefault,
 };
 
-export const MAP_TAG_VARIANT_ICON_COLOR: Record<TagVariant, IconColor> = {
-  [TagVariant.Neutral]: IconColor.IconDefault,
-  [TagVariant.Success]: IconColor.SuccessDefault,
-  [TagVariant.Error]: IconColor.ErrorDefault,
-  [TagVariant.Warning]: IconColor.WarningDefault,
-  [TagVariant.Info]: IconColor.InfoDefault,
+export const MAP_TAG_SEVERITY_ICON_COLOR: Record<TagSeverity, IconColor> = {
+  [TagSeverity.Neutral]: IconColor.IconDefault,
+  [TagSeverity.Success]: IconColor.SuccessDefault,
+  [TagSeverity.Error]: IconColor.ErrorDefault,
+  [TagSeverity.Warning]: IconColor.WarningDefault,
+  [TagSeverity.Info]: IconColor.InfoDefault,
 };
