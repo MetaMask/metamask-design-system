@@ -6,12 +6,12 @@ import { FontWeight, Text, TextVariant } from '../Text';
 
 import { TagVariant } from '@metamask/design-system-shared';
 
+import { BoxAlignItems, BoxFlexDirection } from '../../types';
+
 import {
   MAP_TAG_VARIANT_BACKGROUND,
   MAP_TAG_VARIANT_ICON_COLOR,
   MAP_TAG_VARIANT_TEXT_COLOR,
-  TAG_LAYOUT,
-  TAG_PADDING_VERTICAL_TW,
 } from './Tag.constants';
 import type { TagProps } from './Tag.types';
 
@@ -40,11 +40,6 @@ export const Tag: React.FC<TagProps> = ({
   const finalStartIconName = startIconName ?? startIconProps?.name;
   const finalEndIconName = endIconName ?? endIconProps?.name;
 
-  const horizontalPaddingTw = [
-    finalStartIconName ? 'pl-1' : 'pl-1.5',
-    finalEndIconName ? 'pr-1' : 'pr-1.5',
-  ].join(' ');
-
   const renderLabelText = (value: string | number) => (
     <Text
       color={textColor}
@@ -64,15 +59,6 @@ export const Tag: React.FC<TagProps> = ({
   } else {
     content = children;
   }
-
-  const mergedTwClassName = [
-    TAG_LAYOUT.twClassName,
-    horizontalPaddingTw,
-    TAG_PADDING_VERTICAL_TW,
-    twClassName,
-  ]
-    .filter(Boolean)
-    .join(' ');
 
   const renderStartContent = () => {
     if (finalStartIconName) {
@@ -107,10 +93,17 @@ export const Tag: React.FC<TagProps> = ({
   return (
     <Box
       {...props}
-      flexDirection={TAG_LAYOUT.flexDirection}
-      alignItems={TAG_LAYOUT.alignItems}
+      flexDirection={BoxFlexDirection.Row}
+      alignItems={BoxAlignItems.Center}
       backgroundColor={backgroundColor}
-      twClassName={mergedTwClassName}
+      twClassName={[
+        'rounded-md self-start gap-0.5',
+        finalStartIconName ? 'pl-1' : 'pl-1.5',
+        finalEndIconName ? 'pr-1' : 'pr-1.5',
+        twClassName,
+      ]
+        .filter(Boolean)
+        .join(' ')}
       style={style}
     >
       {renderStartContent()}

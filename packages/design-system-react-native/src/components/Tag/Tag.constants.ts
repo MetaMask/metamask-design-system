@@ -1,11 +1,6 @@
 import { TagVariant, TextColor } from '@metamask/design-system-shared';
 
-import {
-  BoxAlignItems,
-  BoxBackgroundColor,
-  BoxFlexDirection,
-  IconColor,
-} from '../../types';
+import { BoxBackgroundColor, IconColor } from '../../types';
 
 export const MAP_TAG_VARIANT_BACKGROUND: Record<
   TagVariant,
@@ -33,12 +28,3 @@ export const MAP_TAG_VARIANT_ICON_COLOR: Record<TagVariant, IconColor> = {
   [TagVariant.Warning]: IconColor.WarningDefault,
   [TagVariant.Info]: IconColor.InfoDefault,
 };
-
-/** Vertical padding (Tailwind `py-*`) */
-export const TAG_PADDING_VERTICAL_TW = 'py-0';
-
-export const TAG_LAYOUT = {
-  flexDirection: BoxFlexDirection.Row,
-  alignItems: BoxAlignItems.Center,
-  twClassName: 'rounded-md self-start gap-0.5',
-} as const;
