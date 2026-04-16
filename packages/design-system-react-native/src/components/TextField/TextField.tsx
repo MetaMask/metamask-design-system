@@ -42,7 +42,10 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
     const inputRef = useRef<TextInput>(null);
     const tw = useTailwind();
 
-    const inputRest = inputProps ?? {};
+    const {
+      twClassName: inputTwClassNameFromProps,
+      ...inputRestWithoutTwClassName
+    } = inputProps ?? {};
 
     useImperativeHandle<TextInput | null, TextInput | null>(
       ref,
@@ -96,29 +99,29 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
         ]}
       >
         {startAccessory}
-        <Box twClassName="min-h-0 flex-1 justify-center">
-          {inputElement ?? (
-            <Input
-              {...inputRest}
-              ref={inputRef}
-              value={value}
-              onChangeText={onChangeText}
-              placeholder={placeholder}
-              isReadonly={isReadonly}
-              textVariant={TextVariant.BodyMd}
-              isDisabled={isDisabled}
-              autoFocus={autoFocus}
-              onBlur={onBlurHandler}
-              onFocus={onFocusHandler}
-              isStateStylesDisabled
-              // Row is `h-12` (48px) with `border` on the root Box (1px top + bottom). Inner TextInput
-              // uses 46px height so the field matches a 48px-tall control without vertical overflow.
-              twClassName="h-[46px] bg-transparent border-0"
-              numberOfLines={1}
-              multiline={false}
-            />
-          )}
-        </Box>
+        {inputElement ? (
+          inputElement
+        ) : (
+          <Input
+            {...inputRestWithoutTwClassName}
+            ref={inputRef}
+            value={value}
+            onChangeText={onChangeText}
+            placeholder={placeholder}
+            isReadonly={isReadonly}
+            textVariant={TextVariant.BodyMd}
+            isDisabled={isDisabled}
+            autoFocus={autoFocus}
+            onBlur={onBlurHandler}
+            onFocus={onFocusHandler}
+            isStateStylesDisabled
+            twClassName={`min-h-0 flex-1 justify-center h-[46px] bg-transparent border-0${
+              inputTwClassNameFromProps ? ` ${inputTwClassNameFromProps}` : ''
+            }`}
+            numberOfLines={1}
+            multiline={false}
+          />
+        )}
         {endAccessory}
       </Box>
     );

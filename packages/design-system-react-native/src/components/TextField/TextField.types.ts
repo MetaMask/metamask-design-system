@@ -8,8 +8,9 @@ import type { InputProps } from '../Input/Input.types';
  * Additional props merged onto the inner `Input` (`../Input/Input.tsx`).
  *
  * TextField owns `value`, `onChangeText`, `placeholder`, `isReadonly`, `onFocus`,
- * `onBlur`, `isDisabled`, `autoFocus`, typography, and inner layout.
- * `placeholderTextColor` is omitted (Input sets it from theme).
+ * `onBlur`, `isDisabled`, `autoFocus`, typography, and inner layout (merged with
+ * any `twClassName` you pass here). `placeholderTextColor` is omitted (Input sets
+ * it from theme).
  */
 export type TextFieldInputProps = Omit<
   InputProps,
@@ -24,7 +25,6 @@ export type TextFieldInputProps = Omit<
   | 'placeholderTextColor'
   | 'style'
   | 'textVariant'
-  | 'twClassName'
   | 'value'
 >;
 
