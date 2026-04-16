@@ -13,6 +13,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [Input Component](#input-component)
 - [Version Updates](#version-updates)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
@@ -665,6 +666,87 @@ import { Checkbox } from '@metamask/design-system-react';
 - `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
+
+### Input Component
+
+The extension `input` component maps to `Input` in the design system, but the polymorphic/style-utility surface and some prop names changed.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration behavior.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                  | Design System Migration                                           |
+| -------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { Input } from '../../component-library'`  | `import { Input } from '@metamask/design-system-react'`           |
+| `import { InputType } from './input.types'`        | use native `type` string values (`'text'`, `'password'`, etc.)   |
+| `import { TextVariant } from extension constants`  | `import { TextVariant } from '@metamask/design-system-react'`     |
+
+##### Props and Callback Mapping
+
+| Extension API                                              | Design System API                                                   | Change Type                              | Notes                                                                 |
+| ---------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------- | --------------------------------------------------------------------- |
+| `disabled?: boolean`                                       | `isDisabled?: boolean`                                              | renamed                                  | still defaults to `false`                                             |
+| `readOnly?: boolean`                                       | `isReadonly?: boolean`                                              | renamed                                  | still defaults to `false`                                             |
+| `disableStateStyles?: boolean`                             | removed                                                             | removed                                  | no direct equivalent                                                   |
+| `error?: boolean`                                          | removed                                                             | removed                                  | set native `aria-invalid` directly when needed                        |
+| `autoComplete?: boolean`                                   | native `autoComplete?: string`                                      | type changed                             | switch from boolean on/off to standard HTML autocomplete tokens       |
+| `textVariant?: TextVariant` (`TextVariant.bodyMd` default) | `textVariant?: TextVariant` (`TextVariant.BodyMd` default)          | value casing changed                     | enum members are now PascalCase                                       |
+| `type?: InputType` (`Text`, `Number`, `Password`, `Search`) | native `type?: HTMLInputTypeAttribute`                              | enum removed                             | continue using equivalent HTML `type` strings                         |
+| `onChange?: () => void` / `onBlur?: () => void` / `onFocus?: () => void` | native React event signatures (`ChangeEvent`, `FocusEvent`) | callback signature changed               | handlers now receive native event arguments                           |
+| Polymorphic + `StyleUtilityProps` (`as`, Box utility props) | removed                                                             | removed                                  | DS `Input` is a native `<input>` with `className` / `style` overrides |
+
+##### Default and Behavior Changes
+
+| Concern                       | Extension Behavior                                                            | Design System Behavior                                              |
+| ----------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Component primitive           | Polymorphic `Text`-based wrapper with Box utility prop surface               | Native `<input>` with fixed DS class baseline                       |
+| Disabled visual behavior      | `disableStateStyles` can suppress state visuals                              | no `disableStateStyles` prop; disabled state uses default DS styles |
+| Invalid semantics             | `error` prop sets `aria-invalid`                                              | pass `aria-invalid` directly as native input prop                   |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Input } from '../../component-library';
+import { TextVariant } from '../../../helpers/constants/design-system';
+
+<Input
+  type="password"
+  value={secret}
+  onChange={(event) => setSecret(event.target.value)}
+  disabled={isSubmitting}
+  readOnly={isReadonly}
+  error={!isValid}
+  autoComplete={false}
+  textVariant={TextVariant.bodyMd}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react';
+
+<Input
+  type="password"
+  value={secret}
+  onChange={(event) => setSecret(event.target.value)}
+  isDisabled={isSubmitting}
+  isReadonly={isReadonly}
+  aria-invalid={!isValid}
+  autoComplete="off"
+  textVariant={TextVariant.BodyMd}
+/>;
+```
+
+#### API Differences
+
+- DS `Input` still accepts `defaultValue` for uncontrolled usage on web.
+- `className` and `style` remain available for targeted styling overrides.
+- Extension-only polymorphic/Box utility patterns are not supported in DS `Input`.
 
 ## Version Updates
 

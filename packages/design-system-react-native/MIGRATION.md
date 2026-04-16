@@ -17,6 +17,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [Input Component](#input-component)
   - [TextField Component](#textfield-component)
 - [Version Updates](#version-updates)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
@@ -1685,6 +1686,84 @@ import { Checkbox } from '@metamask/design-system-react-native';
 - MMDS `Checkbox` adds `twClassName` and `style` on the outer `Pressable`, plus `checkboxContainerProps` and `checkedIconProps` for targeted customization.
 - Mobile legacy `Checkbox` forwarded `TouchableOpacityProps`; MMDS forwards `PressableProps`.
 - Imperative `ref.toggle()` remains available in MMDS.
+
+### Input Component
+
+The mobile `Form/TextField/foundation/Input` component maps to `Input` in the design system, with stricter controlled usage and some defaults/prop surfaces changed.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                              | Design System Migration                                                  |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `import Input from '.../component-library/components/Form/TextField/foundation/Input'`                     | `import { Input } from '@metamask/design-system-react-native'`           |
+| `import type { InputProps } from '.../Form/TextField/foundation/Input/Input.types'`                        | `import type { InputProps } from '@metamask/design-system-react-native'` |
+
+The mobile component uses a **default export**; the design system uses a **named export**.
+
+##### Props and Callback Mapping
+
+| Mobile API                                  | Design System API                                  | Change Type                              | Notes                                                           |
+| ------------------------------------------- | -------------------------------------------------- | ---------------------------------------- | --------------------------------------------------------------- |
+| `value?: string` (via `TextInputProps`)     | `value: string`                                    | now required                             | DS `Input` is controlled-only                                   |
+| `defaultValue?: string` (via `TextInputProps`) | removed                                          | removed                                  | initialize local state and pass controlled `value`              |
+| `textVariant?: TextVariant` (`BodyMD`)      | `textVariant?: TextVariant` (`BodyMd`)             | value casing changed                     | use PascalCase enum members                                     |
+| `isDisabled?: boolean`                      | `isDisabled?: boolean`                             | unchanged                                | still defaults to `false`                                       |
+| `isReadonly?: boolean`                      | `isReadonly?: boolean`                             | unchanged                                | still defaults to `false`                                       |
+| `isStateStylesDisabled?: boolean`           | `isStateStylesDisabled?: boolean`                  | unchanged                                | still defaults to `false`                                       |
+| `onChangeText?: (text: string) => void`     | `onChangeText?: (text: string) => void`            | unchanged                                | callback signature unchanged                                    |
+| `twClassName`                               | `twClassName`                                      | added in DS                              | Tailwind override prop does not exist in legacy mobile Input    |
+
+##### Default and Behavior Changes
+
+| Concern                     | Mobile Behavior                                       | Design System Behavior                                              |
+| --------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------- |
+| `autoFocus` default         | `true`                                                | `false`                                                             |
+| Controlled vs uncontrolled  | allows uncontrolled usage through `defaultValue`      | requires explicit controlled `value`                                |
+| Test ID behavior            | sets internal `testID` constant by default            | no built-in default `testID`; pass `testID` where needed            |
+| Styling system              | `useStyles` + `StyleSheet`                            | TWRNC classes via `useTailwind` + `twClassName`                     |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Input from '../../../component-library/components/Form/TextField/foundation/Input';
+import { TextVariant } from '../../../component-library/components/Texts/Text';
+
+<Input
+  defaultValue="Initial value"
+  placeholder="Enter amount"
+  textVariant={TextVariant.BodyMD}
+  autoFocus
+  isDisabled={isSubmitting}
+  onChangeText={setAmount}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react-native';
+import { useState } from 'react';
+
+const [amount, setAmount] = useState('Initial value');
+
+<Input
+  value={amount}
+  placeholder="Enter amount"
+  textVariant={TextVariant.BodyMd}
+  isDisabled={isSubmitting}
+  onChangeText={setAmount}
+/>;
+```
+
+#### API Differences
+
+- DS `Input` is controlled-only (`value` is required).
+- DS `Input` adds `twClassName` for Tailwind utility overrides.
+- `onBlur`, `onFocus`, `onChangeText`, `isDisabled`, `isReadonly`, and `isStateStylesDisabled` remain available.
 
 ### TextField Component
 

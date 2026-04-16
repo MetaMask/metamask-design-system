@@ -2,6 +2,10 @@
 
 Input is a light-weight, controlled-only borderless input used inside of TextField.
 
+## Migration Guide
+
+Migrating from `app/component-library/components/Form/TextField/foundation/Input` in MetaMask Mobile? See the [Input Migration Guide](../../MIGRATION.md#input-component) for prop mappings, before/after examples, and breaking changes.
+
 ```tsx
 import { Input, TextVariant } from '@metamask/design-system-react-native';
 
