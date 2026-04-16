@@ -11,8 +11,8 @@ import { TextInput } from 'react-native';
 
 import { Box } from '../Box';
 import { Input } from '../Input';
-
 import type { InputProps } from '../Input/Input.types';
+
 import type { TextFieldProps } from './TextField.types';
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(
@@ -99,9 +99,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
         ]}
       >
         {startAccessory}
-        {inputElement ? (
-          inputElement
-        ) : (
+        {inputElement || (
           <Input
             {...inputRestWithoutTwClassName}
             ref={inputRef}

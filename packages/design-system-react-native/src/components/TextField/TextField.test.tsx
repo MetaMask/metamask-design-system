@@ -61,6 +61,21 @@ describe('TextField', () => {
         'number-pad',
       );
     });
+
+    it('merges inputProps.twClassName with TextField inner Input layout classes', () => {
+      const tree = create(
+        <TextField
+          value=""
+          placeholder="tw-class-merge"
+          inputProps={{ twClassName: 'mt-2' }}
+        />,
+      );
+      const inputNode = tree.root.findByType(Input);
+
+      expect(inputNode.props.twClassName).toContain('mt-2');
+      expect(inputNode.props.twClassName).toContain('flex-1');
+      expect(inputNode.props.twClassName).toContain('min-h-0');
+    });
   });
 
   describe('single-line input', () => {
