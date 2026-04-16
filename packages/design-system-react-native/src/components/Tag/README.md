@@ -57,9 +57,9 @@ import { Text } from 'react-native';
 
 Optional `IconName` for small icons at the start or end of the tag (`IconSize.Xs` by default). Prefer these when using built-in icons; use `startIconProps` / `endIconProps` for overrides (including `name` instead of `startIconName` / `endIconName`).
 
-| TYPE         | REQUIRED | DEFAULT     |
-| ------------ | -------- | ----------- |
-| `IconName?`  | No       | `undefined` |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `IconName?` | No       | `undefined` |
 
 ```tsx
 import { IconName, Tag } from '@metamask/design-system-react-native';
@@ -72,9 +72,9 @@ import { IconName, Tag } from '@metamask/design-system-react-native';
 
 Optional partial `IconProps` passed through to the underlying `Icon`. You may set `name` here instead of `startIconName` / `endIconName`.
 
-| TYPE               | REQUIRED | DEFAULT     |
-| ------------------ | -------- | ----------- |
-| `Partial<IconProps>?` | No    | `undefined` |
+| TYPE                  | REQUIRED | DEFAULT     |
+| --------------------- | -------- | ----------- |
+| `Partial<IconProps>?` | No       | `undefined` |
 
 ### `startAccessory` / `endAccessory`
 
@@ -88,7 +88,7 @@ Optional React nodes shown when no start/end icon is resolved (e.g. custom glyph
 import { Tag } from '@metamask/design-system-react-native';
 import { Text } from 'react-native';
 
-<Tag startAccessory={<Text>→</Text>}>With accessory</Tag>
+<Tag startAccessory={<Text>→</Text>}>With accessory</Tag>;
 ```
 
 ### `testID`
