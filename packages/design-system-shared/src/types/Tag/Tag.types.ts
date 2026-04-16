@@ -20,11 +20,12 @@ export type TagVariant = (typeof TagVariant)[keyof typeof TagVariant];
  */
 export type TagPropsShared = {
   /**
-   * Visual emphasis (background and default text color for label / plain-text children).
+   * Semantic severity (background and default text color for label / plain-text children).
+   * Aligns with `BannerAlert` and `IconAlert`, which use `severity` for the same class of states.
    *
    * @default TagVariant.Neutral
    */
-  variant?: TagVariant;
+  severity?: TagVariant;
   /**
    * Label string; when set, shown instead of string/number `children`. Matches Figma `Label` in Code Connect.
    */

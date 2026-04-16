@@ -12,7 +12,7 @@ import { TagVariant } from '@metamask/design-system-shared';
 /**
  * Code Connect for Tag (React Native).
  * If Dev Mode shows different property names, change the first argument to
- * `figma.enum` / `figma.string` (e.g. `Type` instead of `variant`, `Text` instead of `Label`).
+ * `figma.enum` / `figma.string` (e.g. Figma `variant` vs code `severity`, `Text` instead of `Label`).
  */
 
 figma.connect(
@@ -20,7 +20,7 @@ figma.connect(
   'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=12339-6553',
   {
     props: {
-      variant: figma.enum('variant', {
+      severity: figma.enum('variant', {
         Neutral: TagVariant.Neutral,
         Success: TagVariant.Success,
         Error: TagVariant.Error,
@@ -37,9 +37,9 @@ figma.connect(
         false: undefined,
       }),
     },
-    example: ({ variant, label, startIconName, endIconName }) => (
+    example: ({ severity, label, startIconName, endIconName }) => (
       <Tag
-        variant={variant}
+        severity={severity}
         label={label}
         startIconName={startIconName}
         endIconName={endIconName}

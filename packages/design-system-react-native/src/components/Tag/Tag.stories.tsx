@@ -17,17 +17,17 @@ type Story = StoryObj<typeof Tag>;
 export const Variants: Story = {
   render: () => (
     <>
-      <Tag variant={TagVariant.Neutral}>Neutral</Tag>
-      <Tag variant={TagVariant.Success} twClassName="mt-2">
+      <Tag severity={TagVariant.Neutral}>Neutral</Tag>
+      <Tag severity={TagVariant.Success} twClassName="mt-2">
         Success
       </Tag>
-      <Tag variant={TagVariant.Error} twClassName="mt-2">
+      <Tag severity={TagVariant.Error} twClassName="mt-2">
         Error
       </Tag>
-      <Tag variant={TagVariant.Warning} twClassName="mt-2">
+      <Tag severity={TagVariant.Warning} twClassName="mt-2">
         Warning
       </Tag>
-      <Tag variant={TagVariant.Info} twClassName="mt-2">
+      <Tag severity={TagVariant.Info} twClassName="mt-2">
         Info
       </Tag>
     </>

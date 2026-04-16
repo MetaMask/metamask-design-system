@@ -21,7 +21,7 @@ const isTextContent = (content: React.ReactNode): content is string | number =>
 export const Tag: React.FC<TagProps> = ({
   children,
   label,
-  variant = TagVariant.Neutral,
+  severity = TagVariant.Neutral,
   textProps,
   startIconName,
   startIconProps,
@@ -33,9 +33,9 @@ export const Tag: React.FC<TagProps> = ({
   style,
   ...props
 }) => {
-  const backgroundColor = MAP_TAG_VARIANT_BACKGROUND[variant];
-  const textColor = MAP_TAG_VARIANT_TEXT_COLOR[variant];
-  const iconColor = MAP_TAG_VARIANT_ICON_COLOR[variant];
+  const backgroundColor = MAP_TAG_VARIANT_BACKGROUND[severity];
+  const textColor = MAP_TAG_VARIANT_TEXT_COLOR[severity];
+  const iconColor = MAP_TAG_VARIANT_ICON_COLOR[severity];
 
   const finalStartIconName = startIconName ?? startIconProps?.name;
   const finalEndIconName = endIconName ?? endIconProps?.name;

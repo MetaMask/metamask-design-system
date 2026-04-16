@@ -12,6 +12,14 @@ import { Tag } from '@metamask/design-system-react-native';
 
 ## Props
 
+### `severity`
+
+Semantic emphasis for background and default label / plain-text color. Values use `TagVariant` from `@metamask/design-system-shared` (same pattern as `BannerAlert` / `IconAlert`).
+
+| TYPE          | REQUIRED | DEFAULT              |
+| ------------- | -------- | -------------------- |
+| `TagVariant?` | No       | `TagVariant.Neutral` |
+
 ### `children`
 
 The content of the `Tag` component.
