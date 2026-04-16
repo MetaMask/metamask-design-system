@@ -52,13 +52,11 @@ export const TitleEndAccessory: Story = {
     <TitleStandard
       title="Import a wallet"
       titleEndAccessory={
-        <Box twClassName="ml-2">
-          <Icon
-            name={IconName.Info}
-            size={IconSize.Sm}
-            color={IconColor.IconAlternative}
-          />
-        </Box>
+        <Icon
+          name={IconName.Info}
+          size={IconSize.Sm}
+          color={IconColor.IconAlternative}
+        />
       }
     />
   ),
@@ -109,13 +107,11 @@ export const BottomLabelEndAccessory: Story = {
       title="Import a wallet"
       bottomLabel="Enter your Secret Recovery Phrase"
       bottomLabelEndAccessory={
-        <Box twClassName="ml-2">
-          <Icon
-            name={IconName.Info}
-            size={IconSize.Sm}
-            color={IconColor.IconAlternative}
-          />
-        </Box>
+        <Icon
+          name={IconName.Info}
+          size={IconSize.Sm}
+          color={IconColor.IconAlternative}
+        />
       }
     />
   ),

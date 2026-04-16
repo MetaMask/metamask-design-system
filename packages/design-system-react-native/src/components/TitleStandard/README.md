@@ -8,8 +8,6 @@ import { TitleStandard } from '@metamask/design-system-react-native';
 <TitleStandard title="$4.42" />;
 ```
 
-Cross-platform layout props are defined as `TitleStandardPropsShared` in `@metamask/design-system-shared`. This package adds `twClassName`, React Native `View` props, `titleProps` / `bottomLabelProps` for the platform `Text` component, and `titleWrapperProps` / `bottomLabelWrapperProps` for each label row `BoxRow`.
-
 ## Props
 
 ### `title`
@@ -35,7 +33,6 @@ Optional node rendered to the right of the title (for example an info icon).
 ```tsx
 import {
   TitleStandard,
-  Box,
   Icon,
   IconName,
   IconSize,
@@ -43,11 +40,7 @@ import {
 
 <TitleStandard
   title="$4.42"
-  titleEndAccessory={
-    <Box twClassName="ml-2">
-      <Icon name={IconName.Info} size={IconSize.Md} />
-    </Box>
-  }
+  titleEndAccessory={<Icon name={IconName.Info} size={IconSize.Md} />}
 />;
 ```
 
@@ -106,7 +99,6 @@ Optional node rendered to the right of the bottom label. Only used when `bottomL
 ```tsx
 import {
   TitleStandard,
-  Box,
   Icon,
   IconName,
   IconSize,
@@ -117,13 +109,11 @@ import {
   title="$4.42"
   bottomLabel="0.002 ETH"
   bottomLabelEndAccessory={
-    <Box twClassName="ml-2">
-      <Icon
-        name={IconName.Info}
-        size={IconSize.Sm}
-        color={IconColor.IconAlternative}
-      />
-    </Box>
+    <Icon
+      name={IconName.Info}
+      size={IconSize.Sm}
+      color={IconColor.IconAlternative}
+    />
   }
 />;
 ```

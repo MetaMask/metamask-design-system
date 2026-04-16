@@ -51,6 +51,7 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
       {topAccessory}
       {/* Title Row */}
       <BoxRow
+        gap={2}
         {...titleWrapperProps}
         endAccessory={titleEndAccessory}
         textProps={{
@@ -63,6 +64,7 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
       {/* Bottom Label Row */}
       {bottomLabel && (
         <BoxRow
+          gap={2}
           {...bottomLabelWrapperProps}
           endAccessory={bottomLabelEndAccessory}
           textProps={{
