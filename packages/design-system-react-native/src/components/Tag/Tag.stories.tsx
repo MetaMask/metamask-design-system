@@ -1,20 +1,46 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
+import { TagSeverity } from '@metamask/design-system-shared';
+
 import { IconName } from '../Icon';
 
 import { Tag } from './Tag';
-import { TagSeverity } from '@metamask/design-system-shared';
+import type { TagProps } from './Tag.types';
 
-const meta: Meta<typeof Tag> = {
+const meta: Meta<TagProps> = {
   title: 'Components/Tag',
   component: Tag,
+  argTypes: {
+    severity: {
+      control: 'select',
+      options: Object.values(TagSeverity),
+    },
+    children: {
+      control: 'text',
+    },
+    startIconName: {
+      control: 'select',
+      options: Object.values(IconName),
+    },
+    endIconName: {
+      control: 'select',
+      options: Object.values(IconName),
+    },
+  },
 };
 
 export default meta;
-type Story = StoryObj<typeof Tag>;
+type Story = StoryObj<TagProps>;
 
-export const Variants: Story = {
+export const Default: Story = {
+  args: {
+    children: 'Tag',
+    severity: TagSeverity.Neutral,
+  },
+};
+
+export const Severity: Story = {
   render: () => (
     <>
       <Tag severity={TagSeverity.Neutral}>Neutral</Tag>
@@ -34,28 +60,18 @@ export const Variants: Story = {
   ),
 };
 
-export const NoIcon: Story = {
-  render: () => <Tag>Tag</Tag>,
+export const StartIconName: Story = {
+  render: () => <Tag startIconName={IconName.Warning}>Tag</Tag>,
 };
 
-export const StartIcon: Story = {
+export const EndIconName: Story = {
+  render: () => <Tag endIconName={IconName.ArrowRight}>Tag</Tag>,
+};
+
+export const StartAndEndIconNames: Story = {
   render: () => (
-    <Tag startIconName={IconName.Warning}>Tag</Tag>
+    <Tag startIconName={IconName.Warning} endIconName={IconName.ArrowRight}>
+      Tag
+    </Tag>
   ),
-};
-
-export const EndIcon: Story = {
-  render: () => (
-    <Tag endIconName={IconName.ArrowRight}>Tag</Tag>
-  ),
-};
-
-const renderStartAndEndIcons = () => (
-  <Tag startIconName={IconName.Warning} endIconName={IconName.ArrowRight}>
-    Tag
-  </Tag>
-);
-
-export const StartAndEndIcons: Story = {
-  render: renderStartAndEndIcons,
 };
