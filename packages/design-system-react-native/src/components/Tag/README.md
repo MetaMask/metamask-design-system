@@ -14,7 +14,7 @@ import { Tag } from '@metamask/design-system-react-native';
 
 ### `severity`
 
-Semantic emphasis for background and default label / plain-text color. Values use `TagVariant` from `@metamask/design-system-shared` (same pattern as `BannerAlert` / `IconAlert`).
+Semantic emphasis for background, string/number child text color, and icons. Values use `TagVariant` from `@metamask/design-system-shared` (same pattern as `BannerAlert` / `IconAlert`).
 
 | TYPE          | REQUIRED | DEFAULT              |
 | ------------- | -------- | -------------------- |
@@ -22,7 +22,7 @@ Semantic emphasis for background and default label / plain-text color. Values us
 
 ### `children`
 
-The content of the `Tag` component.
+Main content. String and number children are rendered with design-system `Text` (`BodyXs`, medium weight, severity-based color). Other React nodes are rendered as-is (use your own `Text` or layout inside when needed).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |

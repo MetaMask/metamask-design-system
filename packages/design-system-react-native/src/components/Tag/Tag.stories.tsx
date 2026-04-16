@@ -35,23 +35,25 @@ export const Variants: Story = {
 };
 
 export const NoIcon: Story = {
-  render: () => <Tag label="Tag" />,
+  render: () => <Tag>Tag</Tag>,
 };
 
 export const StartIcon: Story = {
-  render: () => <Tag startIconName={IconName.Warning} label="Tag" />,
+  render: () => (
+    <Tag startIconName={IconName.Warning}>Tag</Tag>
+  ),
 };
 
 export const EndIcon: Story = {
-  render: () => <Tag endIconName={IconName.ArrowRight} label="Tag" />,
+  render: () => (
+    <Tag endIconName={IconName.ArrowRight}>Tag</Tag>
+  ),
 };
 
 const renderStartAndEndIcons = () => (
-  <Tag
-    startIconName={IconName.Warning}
-    endIconName={IconName.ArrowRight}
-    label="Tag"
-  />
+  <Tag startIconName={IconName.Warning} endIconName={IconName.ArrowRight}>
+    Tag
+  </Tag>
 );
 
 export const StartAndEndIcons: Story = {

@@ -3,17 +3,12 @@ import type { ReactNode } from 'react';
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { IconName, IconProps } from '../Icon';
-import type { TextProps } from '../Text';
 
 /**
  * Tag component props (React Native platform-specific).
  * Extends shared props from @metamask/design-system-shared with React Native specific platform concerns.
  */
 export type TagProps = TagPropsShared & {
-  /**
-   * Props passed to the `Text` wrapper when `children` is a string or number.
-   */
-  textProps?: Partial<TextProps>;
   /**
    * Optional prop to specify an icon to show at the start of the tag (`IconSize.Xs` unless overridden in `startIconProps`).
    */

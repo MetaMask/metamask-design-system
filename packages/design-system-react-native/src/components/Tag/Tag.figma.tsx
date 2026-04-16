@@ -40,10 +40,11 @@ figma.connect(
     example: ({ severity, label, startIconName, endIconName }) => (
       <Tag
         severity={severity}
-        label={label}
         startIconName={startIconName}
         endIconName={endIconName}
-      />
+      >
+        {label}
+      </Tag>
     ),
   },
 );

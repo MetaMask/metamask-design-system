@@ -20,18 +20,14 @@ export type TagVariant = (typeof TagVariant)[keyof typeof TagVariant];
  */
 export type TagPropsShared = {
   /**
-   * Semantic severity (background and default text color for label / plain-text children).
+   * Semantic severity (background, default text color for string/number children, and icon tint).
    * Aligns with `BannerAlert` and `IconAlert`, which use `severity` for the same class of states.
    *
    * @default TagVariant.Neutral
    */
   severity?: TagVariant;
   /**
-   * Label string; when set, shown instead of string/number `children`. Matches Figma `Label` in Code Connect.
-   */
-  label?: string;
-  /**
-   * Content inside the tag. String and number children use the Tag text styling; use `label` for a dedicated string prop.
+   * Content inside the tag. String and number children are wrapped in design-system `Text` with tag typography; other nodes render unchanged.
    */
   children?: ReactNode;
 };

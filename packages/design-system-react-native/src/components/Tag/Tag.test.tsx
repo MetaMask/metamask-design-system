@@ -46,42 +46,28 @@ describe('Tag', () => {
     expect(getByTestId('component-name')).toBeOnTheScreen();
   });
 
-  it('renders label prop as text', () => {
+  it('renders string children with tag text styling', () => {
     const { getByText } = render(
-      <Tag label="From label" testID="tag-with-label" />,
+      <Tag testID="tag-string-child">From string</Tag>,
     );
 
-    expect(getByText('From label')).toBeOnTheScreen();
+    expect(getByText('From string')).toBeOnTheScreen();
   });
 
-  it('renders string children with tag text styling when label is omitted', () => {
-    const { getByText } = render(<Tag>String child</Tag>);
-
-    expect(getByText('String child')).toBeOnTheScreen();
-  });
-
-  it('renders number children with tag text styling when label is omitted', () => {
+  it('renders number children with tag text styling', () => {
     const { getByText } = render(<Tag>{42}</Tag>);
 
     expect(getByText('42')).toBeOnTheScreen();
   });
 
-  it('prefers label over string children', () => {
-    const { getByText, queryByText } = render(
-      <Tag label="Label wins">Children lose</Tag>,
-    );
-
-    expect(getByText('Label wins')).toBeOnTheScreen();
-    expect(queryByText('Children lose')).not.toBeOnTheScreen();
-  });
-
   it('renders start icon when startIconName is provided', () => {
     const { getByTestId } = render(
       <Tag
-        label="Tagged"
         startIconName={IconName.Tag}
         startIconProps={{ testID: 'tag-start-icon' }}
-      />,
+      >
+        Tagged
+      </Tag>,
     );
 
     expect(getByTestId('tag-start-icon')).toBeOnTheScreen();
@@ -90,10 +76,11 @@ describe('Tag', () => {
   it('renders end icon when endIconName is provided', () => {
     const { getByTestId } = render(
       <Tag
-        label="Tagged"
         endIconName={IconName.Tag}
         endIconProps={{ testID: 'tag-end-icon' }}
-      />,
+      >
+        Tagged
+      </Tag>,
     );
 
     expect(getByTestId('tag-end-icon')).toBeOnTheScreen();
@@ -101,10 +88,9 @@ describe('Tag', () => {
 
   it('resolves icon from startIconProps.name when startIconName is omitted', () => {
     const { getByTestId } = render(
-      <Tag
-        label="From props"
-        startIconProps={{ name: IconName.Tag, testID: 'tag-start-icon' }}
-      />,
+      <Tag startIconProps={{ name: IconName.Tag, testID: 'tag-start-icon' }}>
+        From props
+      </Tag>,
     );
 
     expect(getByTestId('tag-start-icon')).toBeOnTheScreen();
@@ -113,10 +99,11 @@ describe('Tag', () => {
   it('does not render icons when no name is provided', () => {
     const { queryByTestId } = render(
       <Tag
-        label="No icons"
         startIconProps={{ testID: 'tag-start-icon' }}
         endIconProps={{ testID: 'tag-end-icon' }}
-      />,
+      >
+        No icons
+      </Tag>,
     );
 
     expect(queryByTestId('tag-start-icon')).not.toBeOnTheScreen();
@@ -125,10 +112,9 @@ describe('Tag', () => {
 
   it('renders startAccessory when no start icon', () => {
     const { getByTestId } = render(
-      <Tag
-        label="With accessory"
-        startAccessory={<Text testID="tag-start-accessory">→</Text>}
-      />,
+      <Tag startAccessory={<Text testID="tag-start-accessory">→</Text>}>
+        With accessory
+      </Tag>,
     );
 
     expect(getByTestId('tag-start-accessory')).toBeOnTheScreen();
@@ -136,10 +122,9 @@ describe('Tag', () => {
 
   it('renders endAccessory when no end icon', () => {
     const { getByTestId } = render(
-      <Tag
-        label="With end accessory"
-        endAccessory={<Text testID="tag-end-accessory">←</Text>}
-      />,
+      <Tag endAccessory={<Text testID="tag-end-accessory">←</Text>}>
+        With end accessory
+      </Tag>,
     );
 
     expect(getByTestId('tag-end-accessory')).toBeOnTheScreen();
