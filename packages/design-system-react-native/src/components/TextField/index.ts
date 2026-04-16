@@ -1,2 +1,3 @@
 export { TextField } from './TextField';
-export type { TextFieldProps } from './TextField.types';
+export { type TextFieldPropsShared } from '@metamask/design-system-shared';
+export type { TextFieldInputProps, TextFieldProps } from './TextField.types';

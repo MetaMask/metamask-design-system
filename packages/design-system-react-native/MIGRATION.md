@@ -17,6 +17,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
@@ -27,6 +28,78 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.19.0 to 0.20.0
+
+#### TextField and TextFieldSearch: layered props (`inputProps` and root `Pressable`)
+
+**What changed:**
+
+- **`TextField`** is a root **`Pressable`** with an inner **`Input`**. Props that belong on the native text control must be passed in **`inputProps`** (for example `keyboardType`, `secureTextEntry`, `returnKeyType`, `autoCapitalize`, `accessibilityLabel`, `accessibilityState`).
+- **`placeholder`**, **`isReadonly`**, **`onFocus`**, and **`onBlur`** are owned at the **`TextField` / `TextFieldSearch` top level** and forwarded to the inner `Input`. Do not pass them only through **`inputProps`**.
+- **`placeholderTextColor`** is not supported on the public **`TextField`** API; the inner **`Input`** sets placeholder color from the theme.
+- **`Pressable`**-compatible props (for example **`hitSlop`**, **`accessibilityHint`** on the container) are passed at the **top level** on **`TextField`**. There is no separate `pressableProps` bag.
+- Cross-platform field definitions live in **`TextFieldPropsShared`** in **`@metamask/design-system-shared`** (also re-exported from **`@metamask/design-system-react-native`**).
+- **`TextFieldSearchProps`** extends **`TextFieldProps`**; the same layering applies. **`onPressClearButton`**, **`clearButtonProps`**, **`startAccessory`**, **`endAccessory`**, and **`style`** behavior are unchanged.
+
+**Migration:**
+
+Move inner `TextInput` props from the root into **`inputProps`**. Keep **`placeholder`**, **`onFocus`**, and **`onBlur`** on the component root when you use them.
+
+```tsx
+// Before (0.19.0) — native TextInput props on TextField
+<TextField
+  value={query}
+  onChangeText={setQuery}
+  placeholder="Search"
+  keyboardType="default"
+  secureTextEntry
+  onFocus={handleFocus}
+/>
+
+// After (0.20.0)
+<TextField
+  value={query}
+  onChangeText={setQuery}
+  placeholder="Search"
+  onFocus={handleFocus}
+  inputProps={{
+    keyboardType: 'default',
+    secureTextEntry: true,
+  }}
+/>
+```
+
+Pass **`hitSlop`** (and other `Pressable` props) on **`TextField`** itself:
+
+```tsx
+// After (0.20.0)
+<TextField
+  value=""
+  placeholder="Large tap target"
+  hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+/>
+```
+
+Remove **`placeholderTextColor`** from **`TextField`** call sites; rely on theme behavior from **`Input`**.
+
+**Impact:**
+
+- Any **`TextField`** or **`TextFieldSearch`** usage that spread or passed **`TextInput`** props on the root must move those keys into **`inputProps`**, except for the props **`TextField`** owns (**`value`**, **`onChangeText`**, **`placeholder`**, **`isReadonly`**, **`onFocus`**, **`onBlur`**, **`isDisabled`**, **`autoFocus`**, **`isError`**, accessories, **`inputElement`**, **`testID`**, **`style`**, **`twClassName`**).
+- Type-only consumers can extend or intersect **`TextFieldPropsShared`** from **`@metamask/design-system-shared`** for shared forms code.
+
+#### Input: theme `placeholderTextColor` always wins
+
+**What changed:**
+
+**`Input`** used to pass **`placeholderTextColor`** on the native **`TextInput`** **before** **`{...props}`**, so a **`placeholderTextColor`** included in **`props`** could override the theme-derived color. **`Input`** now passes **`placeholderTextColor`** **after** **`{...props}`**, so the **theme token for placeholder text is always applied** and **is not overridden** by caller props.
+
+**Impact:**
+
+- Passing **`placeholderTextColor`** on **`Input`** has **no effect** on the rendered placeholder tint; remove dead props if you had any.
+- **`TextField`** already omits **`placeholderTextColor`** from its public API and forwards inner **`Input`** behavior only.
+
+---
 
 ### From version 0.18.0 to 0.19.0
 

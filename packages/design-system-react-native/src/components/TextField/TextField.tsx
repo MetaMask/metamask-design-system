@@ -12,30 +12,37 @@ import { Pressable, TextInput } from 'react-native';
 import { Box } from '../Box';
 import { Input } from '../Input';
 
+import type { InputProps } from '../Input/Input.types';
 import type { TextFieldProps } from './TextField.types';
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(
   (
     {
-      style,
-      startAccessory,
-      endAccessory,
-      isError = false,
-      inputElement,
-      isDisabled = false,
-      autoFocus = false,
-      twClassName,
+      value,
+      onChangeText,
+      placeholder,
+      isReadonly,
       onBlur,
       onFocus,
+      autoFocus = false,
+      inputProps,
+      isDisabled = false,
+      isError = false,
+      inputElement,
+      startAccessory,
+      endAccessory,
+      style,
+      twClassName,
       testID,
-      pressableProps,
-      ...props
+      ...restProps
     },
     ref,
   ) => {
     const [isFocused, setIsFocused] = useState(autoFocus);
     const inputRef = useRef<TextInput>(null);
     const tw = useTailwind();
+
+    const inputRest = inputProps ?? {};
 
     useImperativeHandle<TextInput | null, TextInput | null>(
       ref,
@@ -44,7 +51,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
     );
 
     const onBlurHandler = useCallback(
-      (e: Parameters<NonNullable<TextFieldProps['onBlur']>>[0]) => {
+      (e: Parameters<NonNullable<InputProps['onBlur']>>[0]) => {
         if (!isDisabled) {
           setIsFocused(false);
           onBlur?.(e);
@@ -54,7 +61,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
     );
 
     const onFocusHandler = useCallback(
-      (e: Parameters<NonNullable<TextFieldProps['onFocus']>>[0]) => {
+      (e: Parameters<NonNullable<InputProps['onFocus']>>[0]) => {
         if (!isDisabled) {
           setIsFocused(true);
           onFocus?.(e);
@@ -71,7 +78,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
 
     return (
       <Pressable
-        {...pressableProps}
+        {...restProps}
         disabled={isDisabled}
         testID={testID}
         style={[
@@ -100,8 +107,12 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
         <Box twClassName="min-h-0 flex-1 justify-center">
           {inputElement ?? (
             <Input
-              {...props}
+              {...inputRest}
               ref={inputRef}
+              value={value}
+              onChangeText={onChangeText}
+              placeholder={placeholder}
+              isReadonly={isReadonly}
               textVariant={TextVariant.BodyMd}
               isDisabled={isDisabled}
               autoFocus={autoFocus}
@@ -121,3 +132,5 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
     );
   },
 );
+
+TextField.displayName = 'TextField';

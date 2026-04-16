@@ -1,51 +1,77 @@
-import type { ReactNode } from 'react';
+import type { TextFieldPropsShared } from '@metamask/design-system-shared';
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { InputProps } from '../Input/Input.types';
 
 /**
- * TextField component props.
+ * Additional props merged onto the inner `Input` (`../Input/Input.tsx`).
  *
- * Inherits [Input](../Input/Input.tsx) props for the inner text input, excluding
- * `textVariant` and `isStateStylesDisabled`, which are owned by TextField. The
- * outer container is a `Pressable` (tap-to-focus); use `pressableProps` for
- * additional Pressable-specific attributes.
+ * TextField owns `value`, `onChangeText`, `placeholder`, `isReadonly`, `onFocus`,
+ * `onBlur`, `isDisabled`, `autoFocus`, typography, and inner layout.
+ * `placeholderTextColor` is omitted (Input sets it from theme).
  */
-export type TextFieldProps = Omit<
+export type TextFieldInputProps = Omit<
   InputProps,
-  'textVariant' | 'isStateStylesDisabled' | 'style'
-> & {
+  | 'autoFocus'
+  | 'isDisabled'
+  | 'isReadonly'
+  | 'isStateStylesDisabled'
+  | 'onBlur'
+  | 'onChangeText'
+  | 'onFocus'
+  | 'placeholder'
+  | 'placeholderTextColor'
+  | 'style'
+  | 'textVariant'
+  | 'twClassName'
+  | 'value'
+>;
+
+/**
+ * React Native `TextField` props between `TextFieldPropsShared` and the root
+ * `Pressable`: typed focus/blur handlers, `inputProps`, container styling, and
+ * `testID`.
+ */
+export type TextFieldBaseProps = TextFieldPropsShared & {
   /**
-   * Optional content to display before the Input.
+   * Called when the inner input receives focus (composed with TextField border state).
    */
-  startAccessory?: ReactNode;
+  onFocus?: InputProps['onFocus'];
   /**
-   * Optional content to display after the Input.
+   * Called when the inner input loses focus (composed with TextField border state).
    */
-  endAccessory?: ReactNode;
+  onBlur?: InputProps['onBlur'];
   /**
-   * Optional boolean to show the error state.
-   *
-   * @default false
+   * Additional props for the inner `Input`. Use `accessibilityState={{ required: true }}` when
+   * the field is required. Do not pass `placeholder`, `isReadonly`, `onFocus`, or `onBlur` here;
+   * use the TextField-level props above.
    */
-  isError?: boolean;
+  inputProps?: TextFieldInputProps;
   /**
-   * Optional prop to replace the default Input with a custom element.
-   */
-  inputElement?: ReactNode;
-  /**
-   * Optional prop to add twrnc overriding classNames.
+   * Optional twrnc classes for the container Pressable.
    */
   twClassName?: string;
   /**
-   * Optional prop to customize the container style.
+   * Optional style for the container Pressable.
    */
   style?: StyleProp<ViewStyle>;
   /**
-   * Optional props forwarded to the root `Pressable` wrapper.
+   * Optional test id for the root Pressable.
    */
-  pressableProps?: Omit<
-    PressableProps,
-    'onPress' | 'disabled' | 'style' | 'children' | 'accessible'
-  >;
+  testID?: string;
 };
+
+type TextFieldReservedPressableKeys =
+  | keyof TextFieldBaseProps
+  | 'accessible'
+  | 'children'
+  | 'disabled'
+  | 'onPress'
+  | 'style';
+
+/**
+ * TextField props: `TextFieldBaseProps` plus remaining `Pressable` props at the
+ * top level (tap-to-focus wrapper), excluding keys reserved by TextField.
+ */
+export type TextFieldProps = TextFieldBaseProps &
+  Omit<PressableProps, TextFieldReservedPressableKeys>;

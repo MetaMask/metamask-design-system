@@ -47,12 +47,19 @@ describe('TextField', () => {
       expect(getByTestId('custom-input')).toBeOnTheScreen();
     });
 
-    it('forwards props to the inner Input', () => {
+    it('forwards inputProps to the inner Input', () => {
       const { getByPlaceholderText } = render(
-        <TextField value="" placeholder="forwarded-placeholder" />,
+        <TextField
+          value=""
+          placeholder="forwarded-placeholder"
+          inputProps={{ keyboardType: 'number-pad' }}
+        />,
       );
 
-      expect(getByPlaceholderText('forwarded-placeholder')).toBeOnTheScreen();
+      expect(getByPlaceholderText('forwarded-placeholder')).toHaveProp(
+        'keyboardType',
+        'number-pad',
+      );
     });
   });
 
@@ -62,8 +69,10 @@ describe('TextField', () => {
         <TextField
           value=""
           placeholder="single-line"
-          multiline
-          numberOfLines={4}
+          inputProps={{
+            multiline: true,
+            numberOfLines: 4,
+          }}
         />,
       );
 
@@ -78,8 +87,10 @@ describe('TextField', () => {
         <TextField
           value=""
           placeholder="single-line"
-          multiline
-          numberOfLines={4}
+          inputProps={{
+            multiline: true,
+            numberOfLines: 4,
+          }}
         />,
       );
 
@@ -90,10 +101,32 @@ describe('TextField', () => {
     });
   });
 
+  describe('onChangeText', () => {
+    it('notifies when the text changes', () => {
+      const onChangeText = jest.fn();
+      const { getByPlaceholderText } = render(
+        <TextField
+          value="a"
+          onChangeText={onChangeText}
+          placeholder="change-me"
+        />,
+      );
+
+      fireEvent.changeText(getByPlaceholderText('change-me'), 'ab');
+
+      expect(onChangeText).toHaveBeenCalledTimes(1);
+      expect(onChangeText).toHaveBeenCalledWith('ab');
+    });
+  });
+
   describe('Input props', () => {
     it('forwards secureTextEntry to the inner Input', () => {
       const { getByPlaceholderText } = render(
-        <TextField value="" placeholder="secure" secureTextEntry />,
+        <TextField
+          value=""
+          placeholder="secure"
+          inputProps={{ secureTextEntry: true }}
+        />,
       );
 
       expect(getByPlaceholderText('secure')).toHaveProp(
@@ -300,8 +333,8 @@ describe('TextField', () => {
         <TextField
           value=""
           placeholder="disabled-focus"
-          isDisabled
           onFocus={onFocus}
+          isDisabled
         />,
       );
 
@@ -316,8 +349,8 @@ describe('TextField', () => {
         <TextField
           value=""
           placeholder="disabled-blur"
-          isDisabled
           onBlur={onBlur}
+          isDisabled
         />,
       );
 
@@ -333,8 +366,8 @@ describe('TextField', () => {
         <TextField
           value=""
           isDisabled
-          onBlur={onBlur}
           placeholder="disabled-blur-direct"
+          onBlur={onBlur}
         />,
       );
       const inputNode = tree.root.findByType(Input);
@@ -350,8 +383,8 @@ describe('TextField', () => {
         <TextField
           value=""
           isDisabled
-          onFocus={onFocus}
           placeholder="disabled-focus-direct"
+          onFocus={onFocus}
         />,
       );
       const inputNode = tree.root.findByType(Input);
@@ -423,14 +456,10 @@ describe('TextField', () => {
       expect(getByTestId(ROOT_TEST_ID)).toBeDisabled();
     });
 
-    it('forwards pressableProps to the root Pressable', () => {
+    it('forwards Pressable-compatible props from the root to the Pressable', () => {
       const hitSlop = { top: 4, bottom: 4, left: 4, right: 4 };
       const { getByTestId } = render(
-        <TextField
-          value=""
-          testID={ROOT_TEST_ID}
-          pressableProps={{ hitSlop }}
-        />,
+        <TextField value="" testID={ROOT_TEST_ID} hitSlop={hitSlop} />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveProp('hitSlop', hitSlop);
