@@ -1,10 +1,16 @@
 // Third party dependencies.
 import React from 'react';
 
+// Workspace dependencies.
+import {
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
+
 // Internal dependencies.
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
-import { TextVariant, TextColor, FontWeight } from '../Text';
 
 import type { TitleHubProps } from './TitleHub.types';
 
@@ -17,9 +23,9 @@ import type { TitleHubProps } from './TitleHub.types';
  * @param props.titleEndAccessory - Optional inline accessory to the right of `title`
  * @param props.amount - Optional primary amount below the title
  * @param props.amountEndAccessory - Optional inline accessory to the right of the amount
- * @param props.bottomAccessory - Optional custom bottom row when the bottom label row is not shown
- * @param props.bottomLabel - Optional secondary label below the amount row
- * @param props.bottomLabelEndAccessory - Optional inline accessory to the right of `bottomLabel`
+ * @param props.bottomAccessory - Optional custom bottom row when `bottomLabel` is not renderable
+ * @param props.bottomLabel - Optional secondary label below the amount row; when renderable, shows the bottom label row
+ * @param props.bottomLabelEndAccessory - Optional inline accessory to the right of `bottomLabel` (ignored without a renderable `bottomLabel`)
  * @param props.titleProps - Optional props merged into title row `Text` when `title` is a string
  * @param props.amountProps - Optional props merged into amount `Text` when `amount` is a string
  * @param props.bottomLabelProps - Optional props merged into bottom label `Text` when `bottomLabel` is a string
@@ -48,7 +54,7 @@ export const TitleHub: React.FC<TitleHubProps> = ({
   ...props
 }) => {
   return (
-    <Box twClassName={twClassName} {...props}>
+    <Box gap={1} twClassName={twClassName} {...props}>
       {/* Title Row */}
       {title && (
         <BoxRow
@@ -92,7 +98,7 @@ export const TitleHub: React.FC<TitleHubProps> = ({
         </BoxRow>
       )}
       {/* Bottom Accessory Slot */}
-      {!bottomLabel && bottomAccessory && bottomAccessory}
+      {!bottomLabel && bottomAccessory}
     </Box>
   );
 };

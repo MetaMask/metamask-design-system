@@ -262,6 +262,18 @@ describe('TitleHub', () => {
 
       expect(queryByText('Accessory only')).not.toBeOnTheScreen();
     });
+
+    it('does not render amount row when only amountEndAccessory is set', () => {
+      const { getByText, queryByText } = render(
+        <TitleHub
+          title="Send"
+          amountEndAccessory={<Text>Orphan accessory</Text>}
+        />,
+      );
+
+      expect(getByText('Send')).toBeOnTheScreen();
+      expect(queryByText('Orphan accessory')).not.toBeOnTheScreen();
+    });
   });
 
   describe('when amountEndAccessory is false', () => {

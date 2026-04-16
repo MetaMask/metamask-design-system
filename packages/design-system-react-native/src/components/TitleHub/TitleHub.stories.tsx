@@ -80,13 +80,11 @@ export const AmountEndAccessory: Story = {
       title="Perps"
       amount="$336.21"
       amountEndAccessory={
-        <Box twClassName="ml-1">
-          <Icon
-            name={IconName.Info}
-            size={IconSize.Sm}
-            color={IconColor.IconAlternative}
-          />
-        </Box>
+        <Icon
+          name={IconName.Info}
+          size={IconSize.Sm}
+          color={IconColor.IconAlternative}
+        />
       }
     />
   ),
