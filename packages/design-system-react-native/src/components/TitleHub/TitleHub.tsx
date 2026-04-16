@@ -1,14 +1,10 @@
-// Third party dependencies.
-import React from 'react';
-
-// Workspace dependencies.
 import {
   FontWeight,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
+import React from 'react';
 
-// Internal dependencies.
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
 
