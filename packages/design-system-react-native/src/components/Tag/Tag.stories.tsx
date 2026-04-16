@@ -4,7 +4,7 @@ import React from 'react';
 import { IconName } from '../Icon';
 
 import { Tag } from './Tag';
-import { TagVariant } from './Tag.constants';
+import { TagVariant } from '@metamask/design-system-shared';
 
 const meta: Meta<typeof Tag> = {
   title: 'Components/Tag',

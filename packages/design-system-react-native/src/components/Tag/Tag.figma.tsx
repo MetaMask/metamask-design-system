@@ -7,7 +7,7 @@ import { IconName } from '../Icon';
 
 import { Tag } from './Tag';
 
-import { TagVariant } from '.';
+import { TagVariant } from '@metamask/design-system-shared';
 
 /**
  * Code Connect for Tag (React Native).

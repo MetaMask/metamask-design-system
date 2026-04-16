@@ -4,13 +4,14 @@ import { Box } from '../Box';
 import { Icon, IconSize } from '../Icon';
 import { FontWeight, Text, TextVariant } from '../Text';
 
+import { TagVariant } from '@metamask/design-system-shared';
+
 import {
   MAP_TAG_VARIANT_BACKGROUND,
   MAP_TAG_VARIANT_ICON_COLOR,
   MAP_TAG_VARIANT_TEXT_COLOR,
   TAG_LAYOUT,
   TAG_PADDING_VERTICAL_TW,
-  TagVariant,
 } from './Tag.constants';
 import type { TagProps } from './Tag.types';
 

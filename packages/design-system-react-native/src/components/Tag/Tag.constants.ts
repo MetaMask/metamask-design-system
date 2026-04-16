@@ -1,19 +1,11 @@
+import { TagVariant, TextColor } from '@metamask/design-system-shared';
+
 import {
   BoxAlignItems,
   BoxBackgroundColor,
   BoxFlexDirection,
   IconColor,
-  TextColor,
 } from '../../types';
-
-export const TagVariant = {
-  Neutral: 'neutral',
-  Success: 'success',
-  Error: 'error',
-  Warning: 'warning',
-  Info: 'info',
-} as const;
-export type TagVariant = (typeof TagVariant)[keyof typeof TagVariant];
 
 export const MAP_TAG_VARIANT_BACKGROUND: Record<
   TagVariant,
