@@ -9,6 +9,13 @@ const TYPES_FILE = 'index.ts';
 const ASSET_EXT = '.svg';
 const TYPES_CONTENT_TO_DETECT = '// DO NOT EDIT - Use generate-assets.js';
 
+/** Single source of truth for SVG assets — shared across React and React Native */
+const REPO_ROOT = path.join(__dirname, '../../..');
+const SHARED_ASSETS_DIR = path.join(
+  REPO_ROOT,
+  'packages/design-system-shared/src/assets/icons',
+);
+
 /**
  * Gets an icon name in TitleCase from the given file name.
  *
@@ -31,7 +38,7 @@ function getIconNameInTitleCase(fileName: string): string {
  * Throws an error if anything goes wrong.
  */
 export async function main(): Promise<void> {
-  const assetsFolderPath = path.join(
+  const localAssetsFolderPath = path.join(
     __dirname,
     `../src/components/Icon/${ASSETS_FOLDER}`,
   );
@@ -41,22 +48,22 @@ export async function main(): Promise<void> {
   );
   const typesFilePath = path.join(__dirname, `../src/types/${TYPES_FILE}`);
 
-  const fileList = await fs.promises.readdir(assetsFolderPath);
-  const assetFileList = fileList.filter(
-    (fileName: string) => path.extname(fileName) === ASSET_EXT,
-  );
+  // Read SVGs from the shared source of truth
+  const fileList = await fs.promises.readdir(SHARED_ASSETS_DIR);
+  const assetFileList = fileList
+    .filter((fileName: string) => path.extname(fileName) === ASSET_EXT)
+    .sort();
 
-  // Replace the color black with currentColor (using 'gu' flag)
+  // Process SVGs: replace hardcoded black fill with currentColor so icons
+  // inherit color from context, then copy to the local RN assets folder.
   for (const fileName of assetFileList) {
-    const filePath = path.join(
-      __dirname,
-      `../src/components/Icon/${ASSETS_FOLDER}/${fileName}`,
-    );
-    const fileContent = await fs.promises.readFile(filePath, {
+    const srcPath = path.join(SHARED_ASSETS_DIR, fileName);
+    const destPath = path.join(localAssetsFolderPath, fileName);
+    const fileContent = await fs.promises.readFile(srcPath, {
       encoding: 'utf-8',
     });
     const formattedFileContent = fileContent.replace(/black/gu, 'currentColor');
-    await fs.promises.writeFile(filePath, formattedFileContent);
+    await fs.promises.writeFile(destPath, formattedFileContent);
   }
 
   await fs.promises.writeFile(assetsModulePath, '');
@@ -77,7 +84,7 @@ export async function main(): Promise<void> {
     const iconName = getIconNameInTitleCase(fileName);
     await fs.promises.appendFile(
       assetsModulePath,
-      `\nimport ${iconName}SVG from './assets/${fileName}';`,
+      `\nimport ${iconName}SVG from './${ASSETS_FOLDER}/${fileName}';`,
     );
   }
 
