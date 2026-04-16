@@ -1,6 +1,6 @@
 # TextField
 
-TextField is used to render a controlled, single-line text input inside a fixed-height row with optional leading and trailing content. The root is a `Pressable` (tap-to-focus); inner [TextInput](https://reactnative.dev/docs/textinput) behavior is exposed through **`inputProps`**, and remaining [Pressable](https://reactnative.dev/docs/pressable) props can be passed at the top level. Shared design fields are defined as **`TextFieldPropsShared`** in `@metamask/design-system-shared`.
+TextField is used to render a controlled, single-line text input inside a fixed-height row with optional leading and trailing content.
 
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
@@ -68,7 +68,7 @@ import { TextField } from '@metamask/design-system-react-native';
 
 ### `onFocus`
 
-Optional handler when the inner input receives focus. TextField composes this with its own focus border behavior. Do not pass `onFocus` through **`inputProps`**; use this prop instead.
+Optional handler when the inner input receives focus. TextField composes this with its own focus border behavior. Do not pass `onFocus` through `inputProps`; use this prop instead.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -82,7 +82,7 @@ import { TextField } from '@metamask/design-system-react-native';
 
 ### `onBlur`
 
-Optional handler when the inner input loses focus. TextField composes this with its own focus border behavior. Do not pass `onBlur` through **`inputProps`**; use this prop instead.
+Optional handler when the inner input loses focus. TextField composes this with its own focus border behavior. Do not pass `onBlur` through `inputProps`; use this prop instead.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -132,7 +132,7 @@ import { TextField } from '@metamask/design-system-react-native';
 
 ### `isDisabled`
 
-When true, the field applies reduced opacity, disables the root `Pressable`, and forwards disabled state to the inner `Input`.
+When true, the field applies reduced opacity and forwards disabled state to the inner `Input` (non-editable).
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -194,7 +194,7 @@ import { Text } from 'react-native';
 
 ### `inputElement`
 
-Optional node that replaces the default `Input`. The forwarded ref still targets `TextInput`, but there may be no native input to focus when the container is pressed.
+Optional node that replaces the default `Input`. The forwarded ref still targets `TextInput` when the default input is used; with a custom `inputElement`, ensure your control is focusable if users need keyboard entry.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -207,23 +207,9 @@ import { TextInput } from 'react-native';
 <TextField value="" inputElement={<TextInput placeholder="Custom input" />} />;
 ```
 
-### Top-level `Pressable` props
-
-Pass `Pressable`-compatible props at the top level (for example `hitSlop`). `onPress`, `disabled`, `style`, `children`, and `accessible` are controlled by TextField.
-
-```tsx
-import { TextField } from '@metamask/design-system-react-native';
-
-<TextField
-  value=""
-  placeholder="Large tap target"
-  hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-/>;
-```
-
 ### `testID`
 
-Optional test id for the root `Pressable`.
+Optional test id for the root `Box`.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -235,9 +221,23 @@ import { TextField } from '@metamask/design-system-react-native';
 <TextField value="" testID="my-text-field" placeholder="E2E" />;
 ```
 
+### Layout and accessibility (`Box` / `View`)
+
+Pass `BoxProps` and React Native `View` props at the top level for layout and accessibility on the root container (for example `accessibilityHint`, `pointerEvents`). Keys reserved by TextField (`style`, `twClassName`, `testID`, `children`, `accessible`, and all keys owned by `TextFieldBaseProps`) are not passed through from this intersection. Prefer either Tailwind via `twClassName` or explicit `Box` layout props, and avoid conflicting layout when mixing both.
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField
+  value=""
+  placeholder="Search"
+  accessibilityHint="Searches tokens by name or address"
+/>;
+```
+
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the root container. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -262,7 +262,7 @@ import { TextField } from '@metamask/design-system-react-native';
 
 ### `style`
 
-Use the `style` prop to customize the root `Pressable` with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
@@ -270,7 +270,6 @@ Use the `style` prop to customize the root `Pressable` with React Native styles.
 
 ```tsx
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-
 import { TextField } from '@metamask/design-system-react-native';
 
 export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {

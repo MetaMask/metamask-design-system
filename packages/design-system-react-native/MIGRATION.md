@@ -31,14 +31,14 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ### From version 0.19.0 to 0.20.0
 
-#### TextField and TextFieldSearch: layered props (`inputProps` and root `Pressable`)
+#### TextField and TextFieldSearch: layered props (`inputProps` and root `Box`)
 
 **What changed:**
 
-- **`TextField`** is a root **`Pressable`** with an inner **`Input`**. Props that belong on the native text control must be passed in **`inputProps`** (for example `keyboardType`, `secureTextEntry`, `returnKeyType`, `autoCapitalize`, `accessibilityLabel`, `accessibilityState`).
+- **`TextField`** is a root **`Box`** (a styled **`View`**) with an inner **`Input`**. Props that belong on the native text control must be passed in **`inputProps`** (for example `keyboardType`, `secureTextEntry`, `returnKeyType`, `autoCapitalize`, `accessibilityLabel`, `accessibilityState`).
 - **`placeholder`**, **`isReadonly`**, **`onFocus`**, and **`onBlur`** are owned at the **`TextField` / `TextFieldSearch` top level** and forwarded to the inner `Input`. Do not pass them only through **`inputProps`**.
 - **`placeholderTextColor`** is not supported on the public **`TextField`** API; the inner **`Input`** sets placeholder color from the theme.
-- **`Pressable`**-compatible props (for example **`hitSlop`**, **`accessibilityHint`** on the container) are passed at the **top level** on **`TextField`**. There is no separate `pressableProps` bag.
+- Remaining top-level props on **`TextField`** are **`BoxProps`** (layout and **`View`** props from React Native), except for keys reserved by **`TextField`** (see type **`TextFieldProps`**). **`hitSlop`**, **`onPress`**, and other **`Pressable`**-only APIs are not supported on the root; tap-to-focus on the chrome is removed—users focus by tapping the **`Input`** / **`TextInput`**.
 - Cross-platform field definitions live in **`TextFieldPropsShared`** in **`@metamask/design-system-shared`** (also re-exported from **`@metamask/design-system-react-native`**).
 - **`TextFieldSearchProps`** extends **`TextFieldProps`**; the same layering applies. **`onPressClearButton`**, **`clearButtonProps`**, **`startAccessory`**, **`endAccessory`**, and **`style`** behavior are unchanged.
 
@@ -70,22 +70,14 @@ Move inner `TextInput` props from the root into **`inputProps`**. Keep **`placeh
 />
 ```
 
-Pass **`hitSlop`** (and other `Pressable` props) on **`TextField`** itself:
-
-```tsx
-// After (0.20.0)
-<TextField
-  value=""
-  placeholder="Large tap target"
-  hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-/>
-```
+If you relied on **`hitSlop`** or a larger tap target on the field chrome, wrap **`TextField`** in your own **`Pressable`** (or enlarge the inner input via **`inputProps`**) at the app level.
 
 Remove **`placeholderTextColor`** from **`TextField`** call sites; rely on theme behavior from **`Input`**.
 
 **Impact:**
 
-- Any **`TextField`** or **`TextFieldSearch`** usage that spread or passed **`TextInput`** props on the root must move those keys into **`inputProps`**, except for the props **`TextField`** owns (**`value`**, **`onChangeText`**, **`placeholder`**, **`isReadonly`**, **`onFocus`**, **`onBlur`**, **`isDisabled`**, **`autoFocus`**, **`isError`**, accessories, **`inputElement`**, **`testID`**, **`style`**, **`twClassName`**).
+- Any **`TextField`** or **`TextFieldSearch`** usage that spread or passed **`TextInput`** props on the root must move those keys into **`inputProps`**, except for the props **`TextField`** owns (**`value`**, **`onChangeText`**, **`placeholder`**, **`isReadonly`**, **`onFocus`**, **`onBlur`**, **`isDisabled`**, **`autoFocus`**, **`isError`**, accessories, **`inputElement`**, **`testID`**, **`style`**, **`twClassName`**) and valid **`BoxProps`** / **`View`** props you pass at the top level.
+- Call sites that passed **`Pressable`**-only props (**`hitSlop`**, root **`onPress`**, root **`disabled`**) must be updated: the root is no longer a **`Pressable`**.
 - Type-only consumers can extend or intersect **`TextFieldPropsShared`** from **`@metamask/design-system-shared`** for shared forms code.
 
 #### Input: theme `placeholderTextColor` always wins

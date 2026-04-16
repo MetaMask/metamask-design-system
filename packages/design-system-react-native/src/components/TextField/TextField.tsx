@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Pressable, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 
 import { Box } from '../Box';
 import { Input } from '../Input';
@@ -70,17 +70,11 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
       [isDisabled, onFocus],
     );
 
-    const onPressHandler = useCallback(() => {
-      if (!isDisabled && inputRef.current) {
-        inputRef.current.focus();
-      }
-    }, [isDisabled]);
-
     return (
-      <Pressable
+      <Box
         {...restProps}
-        disabled={isDisabled}
         testID={testID}
+        accessible={false}
         style={[
           tw.style(
             'flex-row',
@@ -100,8 +94,6 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
           ),
           style,
         ]}
-        onPress={onPressHandler}
-        accessible={false}
       >
         {startAccessory}
         <Box twClassName="min-h-0 flex-1 justify-center">
@@ -119,7 +111,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
               onBlur={onBlurHandler}
               onFocus={onFocusHandler}
               isStateStylesDisabled
-              // Row is `h-12` (48px) with `border` on the Pressable (1px top + bottom). Inner TextInput
+              // Row is `h-12` (48px) with `border` on the root Box (1px top + bottom). Inner TextInput
               // uses 46px height so the field matches a 48px-tall control without vertical overflow.
               twClassName="h-[46px] bg-transparent border-0"
               numberOfLines={1}
@@ -128,7 +120,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
           )}
         </Box>
         {endAccessory}
-      </Pressable>
+      </Box>
     );
   },
 );

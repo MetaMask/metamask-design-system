@@ -1,6 +1,7 @@
 import type { TextFieldPropsShared } from '@metamask/design-system-shared';
-import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
+import type { BoxProps } from '../Box/Box.types';
 import type { InputProps } from '../Input/Input.types';
 
 /**
@@ -29,7 +30,7 @@ export type TextFieldInputProps = Omit<
 
 /**
  * React Native `TextField` props between `TextFieldPropsShared` and the root
- * `Pressable`: typed focus/blur handlers, `inputProps`, container styling, and
+ * `Box`: typed focus/blur handlers, `inputProps`, container styling, and
  * `testID`.
  */
 export type TextFieldBaseProps = TextFieldPropsShared & {
@@ -48,30 +49,28 @@ export type TextFieldBaseProps = TextFieldPropsShared & {
    */
   inputProps?: TextFieldInputProps;
   /**
-   * Optional twrnc classes for the container Pressable.
+   * Optional twrnc classes for the root `Box`.
    */
   twClassName?: string;
   /**
-   * Optional style for the container Pressable.
+   * Optional style for the root `Box`.
    */
   style?: StyleProp<ViewStyle>;
   /**
-   * Optional test id for the root Pressable.
+   * Optional test id for the root `Box`.
    */
   testID?: string;
 };
 
-type TextFieldReservedPressableKeys =
+type TextFieldReservedBoxKeys =
   | keyof TextFieldBaseProps
   | 'accessible'
   | 'children'
-  | 'disabled'
-  | 'onPress'
   | 'style';
 
 /**
- * TextField props: `TextFieldBaseProps` plus remaining `Pressable` props at the
- * top level (tap-to-focus wrapper), excluding keys reserved by TextField.
+ * TextField props: `TextFieldBaseProps` plus remaining `BoxProps` at the top
+ * level, excluding keys reserved by TextField.
  */
 export type TextFieldProps = TextFieldBaseProps &
-  Omit<PressableProps, TextFieldReservedPressableKeys>;
+  Omit<BoxProps, TextFieldReservedBoxKeys>;

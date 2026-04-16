@@ -447,79 +447,16 @@ describe('TextField', () => {
     });
   });
 
-  describe('pressable root', () => {
-    it('disables the root Pressable when isDisabled is true', () => {
-      const { getByTestId } = render(
-        <TextField value="" testID={ROOT_TEST_ID} isDisabled />,
+  describe('disabled state', () => {
+    it('disables the inner Input when isDisabled is true', () => {
+      const { getByPlaceholderText } = render(
+        <TextField value="" placeholder="disabled-input" isDisabled />,
       );
 
-      expect(getByTestId(ROOT_TEST_ID)).toBeDisabled();
-    });
-
-    it('forwards Pressable-compatible props from the root to the Pressable', () => {
-      const hitSlop = { top: 4, bottom: 4, left: 4, right: 4 };
-      const { getByTestId } = render(
-        <TextField value="" testID={ROOT_TEST_ID} hitSlop={hitSlop} />,
+      expect(getByPlaceholderText('disabled-input')).toHaveProp(
+        'editable',
+        false,
       );
-
-      expect(getByTestId(ROOT_TEST_ID)).toHaveProp('hitSlop', hitSlop);
-    });
-
-    it('focuses the input when the container is pressed', () => {
-      const ref = createRef<TextInput>();
-      const onFocus = jest.fn();
-      const { getByTestId } = render(
-        <TextField
-          value=""
-          ref={ref}
-          testID={ROOT_TEST_ID}
-          placeholder="press-test"
-          onFocus={onFocus}
-        />,
-      );
-
-      expect(ref.current).not.toBeNull();
-      const focusSpy = jest.spyOn(ref.current as TextInput, 'focus');
-
-      fireEvent.press(getByTestId(ROOT_TEST_ID));
-
-      expect(focusSpy).toHaveBeenCalled();
-      focusSpy.mockRestore();
-    });
-
-    it('does not focus the input when pressed while disabled', () => {
-      const ref = createRef<TextInput>();
-      const { getByTestId } = render(
-        <TextField
-          value=""
-          ref={ref}
-          testID={ROOT_TEST_ID}
-          placeholder="disabled-press"
-          isDisabled
-        />,
-      );
-
-      expect(ref.current).not.toBeNull();
-      const focusSpy = jest.spyOn(ref.current as TextInput, 'focus');
-
-      fireEvent.press(getByTestId(ROOT_TEST_ID));
-
-      expect(focusSpy).not.toHaveBeenCalled();
-      focusSpy.mockRestore();
-    });
-
-    it('handles press when inputElement replaces the default Input', () => {
-      const { getByTestId } = render(
-        <TextField
-          value=""
-          testID={ROOT_TEST_ID}
-          inputElement={<View testID="custom-input" />}
-        />,
-      );
-
-      expect(() => {
-        fireEvent.press(getByTestId(ROOT_TEST_ID));
-      }).not.toThrow();
     });
   });
 });
