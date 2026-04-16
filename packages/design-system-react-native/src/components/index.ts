@@ -240,5 +240,5 @@ export type { SpinnerProps } from './temp-components/Spinner';
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
 
-export { Tag, type TagProps } from './Tag';
-export { TagSeverity } from '@metamask/design-system-shared';
+export { Tag, TagSeverity } from './Tag';
+export type { TagProps } from './Tag';
