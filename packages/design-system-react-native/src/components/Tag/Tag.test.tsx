@@ -75,10 +75,7 @@ describe('Tag', () => {
 
   it('renders end icon when endIconName is provided', () => {
     const { getByTestId } = render(
-      <Tag
-        endIconName={IconName.Tag}
-        endIconProps={{ testID: 'tag-end-icon' }}
-      >
+      <Tag endIconName={IconName.Tag} endIconProps={{ testID: 'tag-end-icon' }}>
         Tagged
       </Tag>,
     );

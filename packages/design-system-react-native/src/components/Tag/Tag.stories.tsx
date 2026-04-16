@@ -1,7 +1,6 @@
+import { TagSeverity } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-
-import { TagSeverity } from '@metamask/design-system-shared';
 
 import { IconName } from '../Icon';
 
