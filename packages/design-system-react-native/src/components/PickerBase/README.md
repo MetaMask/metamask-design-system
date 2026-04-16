@@ -1,6 +1,8 @@
 # PickerBase
 
-PickerBase is a presentational row used as the tap target for picker-style controls. It supports an optional `startAccessory`, a label (`Text` when `children` is a string), and an end slot: pass `endArrow` to show a mapped arrow icon, or omit `endArrow` and pass `endAccessory` for custom trailing content. The root is a `Pressable` with `accessibilityRole="button"` and `accessibilityState.disabled` when `isDisabled` is true—use `accessibilityLabel` or `accessibilityLabelledBy` on the root when the visible label is not enough for assistive technologies.
+PickerBase is a thin wrapper around `ButtonBase`: same layout, press animation (`ButtonAnimated`), loading state, sizing, and styling as a button row. The only picker-specific behavior is **`endArrow`**, which maps to a trailing arrow `Icon`; omit it and use `endAccessory` for custom trailing content instead. For a different look (plain row, borders, typography), pass through the same props you would on `ButtonBase`—for example `twClassName`, `style`, `textProps`, or `size`.
+
+It supports an optional `startAccessory`, string or node `children`, and the end slot described above. The root matches `ButtonBase` (`accessibilityRole="button"`, `accessibilityState.disabled` when `isDisabled` is true)—use `accessibilityLabel` or `accessibilityLabelledBy` when the visible label is not enough for assistive technologies.
 
 ```tsx
 import {
@@ -15,7 +17,7 @@ import {
 
 ## Props
 
-Shared props live in `@metamask/design-system-shared` as `PickerBasePropsShared`. The React Native component extends the root `Pressable` (excluding `children`, which is the label slot). Other `Pressable` props—such as `hitSlop` or `accessibilityLabel`—are forwarded to that root.
+Shared props live in `@metamask/design-system-shared` as `PickerBasePropsShared`. The React Native props type is that contract plus all `ButtonBase` props except `endIconName`, `endIconProps`, and `disabled` (those are driven by `endArrow` / `endArrowIconProps` and `isDisabled`). See `ButtonBase` for `size`, `isLoading`, `isFullWidth`, `textClassName`, `iconClassName`, and other options.
 
 ### `children`
 
@@ -163,7 +165,7 @@ import {
 
 ### `isDisabled`
 
-When true, disables the `Pressable` and applies reduced opacity.
+When true, disables the root pressable and applies reduced opacity.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -182,14 +184,14 @@ import {
 
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the root `Pressable`. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `twClassName` prop to add Tailwind CSS classes to the root row. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
+| TYPE                                       | REQUIRED | DEFAULT     |
+| ------------------------------------------ | -------- | ----------- |
+| `string \| ((pressed: boolean) => string)` | No       | `undefined` |
 
 ```tsx
 import { PickerBase } from '@metamask/design-system-react-native';
@@ -207,7 +209,7 @@ import { PickerBase } from '@metamask/design-system-react-native';
 
 ### `style`
 
-Use the `style` prop to customize the root `Pressable` with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the root with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

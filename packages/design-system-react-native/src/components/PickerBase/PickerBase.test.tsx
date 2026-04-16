@@ -33,7 +33,7 @@ describe('PickerBase', () => {
       expect(getByText('Select')).toHaveTextContent('Select');
     });
 
-    it('exposes testID on the root Pressable', () => {
+    it('exposes testID on the root pressable', () => {
       const { getByTestId } = render(
         <PickerBase testID="custom-picker" onPress={noopPress}>
           Label
@@ -140,17 +140,17 @@ describe('PickerBase', () => {
     });
   });
 
-  describe('root Pressable styles', () => {
-    it('applies default row layout', () => {
+  describe('root pressable styles', () => {
+    it('inherits ButtonBase container presentation', () => {
       const { getByTestId } = render(
         <PickerBase testID={ROOT_TEST_ID} onPress={noopPress}>
           Label
         </PickerBase>,
       );
 
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw`flex-row items-center gap-1`,
-      );
+      const root = getByTestId(ROOT_TEST_ID);
+      expect(root).toHaveStyle(tw`rounded-xl`);
+      expect(root).toHaveStyle(tw`bg-muted`);
     });
 
     it('applies disabled opacity when isDisabled is true', () => {
@@ -257,7 +257,7 @@ describe('PickerBase', () => {
   });
 
   describe('when isDisabled is true', () => {
-    it('disables the root Pressable', () => {
+    it('disables the root pressable', () => {
       const { getByTestId } = render(
         <PickerBase testID={ROOT_TEST_ID} onPress={noopPress} isDisabled>
           Label
@@ -268,7 +268,7 @@ describe('PickerBase', () => {
     });
   });
 
-  describe('Pressable prop forwarding', () => {
+  describe('Pressable prop forwarding to root', () => {
     it('forwards hitSlop to the root', () => {
       const hitSlop = { top: 4, bottom: 4, left: 4, right: 4 };
 
