@@ -1,5 +1,4 @@
 import type { TagPropsShared } from '@metamask/design-system-shared';
-import type { ReactNode } from 'react';
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { IconName, IconProps } from '../Icon';
@@ -18,10 +17,6 @@ export type TagProps = TagPropsShared & {
    */
   startIconProps?: Partial<IconProps>;
   /**
-   * Optional prop for a custom element to show at the start of the tag when no start icon is shown.
-   */
-  startAccessory?: ReactNode;
-  /**
    * Optional prop to specify an icon to show at the end of the tag (`IconSize.Xs` unless overridden in `endIconProps`).
    */
   endIconName?: IconName;
@@ -29,10 +24,6 @@ export type TagProps = TagPropsShared & {
    * Optional prop to pass additional properties to the end icon. You may set `name` here instead of `endIconName`.
    */
   endIconProps?: Partial<IconProps>;
-  /**
-   * Optional prop for a custom element to show at the end of the tag when no end icon is shown.
-   */
-  endAccessory?: ReactNode;
   /**
    * Additional Tailwind classes to be applied to the Tag container.
    */

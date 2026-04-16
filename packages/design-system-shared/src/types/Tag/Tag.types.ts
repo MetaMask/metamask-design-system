@@ -30,4 +30,12 @@ export type TagPropsShared = {
    * Content inside the tag. String and number children are wrapped in design-system `Text` with tag typography; other nodes render unchanged.
    */
   children?: ReactNode;
+  /**
+   * Optional node at the start of the tag when no start icon is set (e.g. custom glyph or badge).
+   */
+  startAccessory?: ReactNode;
+  /**
+   * Optional node at the end of the tag when no end icon is set.
+   */
+  endAccessory?: ReactNode;
 };
