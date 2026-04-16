@@ -1,6 +1,7 @@
 import { TagSeverity } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
+import { Text } from 'react-native';
 
 import { IconName } from '../Icon';
 
@@ -10,6 +11,7 @@ import type { TagProps } from './Tag.types';
 const meta: Meta<TagProps> = {
   title: 'Components/Tag',
   component: Tag,
+  parameters: {},
   argTypes: {
     severity: {
       control: 'select',
@@ -65,6 +67,22 @@ export const StartIconName: Story = {
 
 export const EndIconName: Story = {
   render: () => <Tag endIconName={IconName.ArrowRight}>Tag</Tag>,
+};
+
+export const StartAccessory: Story = {
+  render: () => (
+    <Tag startAccessory={<Text testID="tag-story-start-accessory">→</Text>}>
+      Tag
+    </Tag>
+  ),
+};
+
+export const EndAccessory: Story = {
+  render: () => (
+    <Tag endAccessory={<Text testID="tag-story-end-accessory">←</Text>}>
+      Tag
+    </Tag>
+  ),
 };
 
 export const StartAndEndIconNames: Story = {
