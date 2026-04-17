@@ -40,7 +40,7 @@
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
     "clean:icons": "rimraf src/components/Icon/icons",
     "create-component": "tsx scripts/create-component",
-    "generate-icons": "yarn clean:icons && svgr --config-file src/components/Icon/.svgrrc.js -d src/components/Icon/icons src/components/Icon/assets/*.svg && yarn generate-icons:index",
+    "generate-icons": "yarn clean:icons && svgr --config-file src/components/Icon/.svgrrc.js -d src/components/Icon/icons ../design-system-shared/src/assets/icons/*.svg && yarn generate-icons:index",
     "generate-icons:index": "tsx scripts/generate-icons-index.ts",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
@@ -83,8 +83,8 @@
     "@metamask/design-system-tailwind-preset": "^0.6.0",
     "@metamask/design-tokens": "^8.1.0",
     "@metamask/utils": "^11.11.0",
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "engines": {
     "node": "^18.18 || >=20"

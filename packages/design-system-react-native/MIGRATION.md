@@ -76,6 +76,26 @@ The intermediate `Box` wrapper around the `BoxRow` in the left section has been 
 
 No changes to visual appearance or API.
 
+#### Icon: prop types now align with SVG usage
+
+**What Changed:**
+
+- `IconProps` now extends `Omit<SvgProps, 'color' | 'name'>` instead of `ViewProps`.
+
+**Migration:**
+
+If TypeScript now flags props you were previously passing to `Icon`, those props were `View`-specific and are no longer part of the `Icon` public type. Move those props to a wrapper `View` and keep SVG-compatible props on `Icon`.
+
+```tsx
+// Before
+<Icon name={IconName.Lock} onLayout={handleLayout} />
+
+// After
+<View onLayout={handleLayout}>
+  <Icon name={IconName.Lock} />
+</View>
+```
+
 ---
 
 ### From version 0.16.0 to 0.17.0
