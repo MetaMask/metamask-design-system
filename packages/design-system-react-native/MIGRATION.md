@@ -771,9 +771,9 @@ The legacy `ButtonFilter` accepted `textClassName` as a pressed-state-aware func
 
 The legacy version inherited `twClassName` as `string | ((pressed: boolean) => string)` from `ButtonBaseProps`. The design system `ButtonFilter` narrows `twClassName` to `string` only (no pressed-state function).
 
-| Mobile Pattern                                       | Design System Migration                  |
-| ---------------------------------------------------- | ---------------------------------------- |
-| `twClassName="mt-2"`                                 | `twClassName="mt-2"` (unchanged)         |
+| Mobile Pattern                                       | Design System Migration                                       |
+| ---------------------------------------------------- | ------------------------------------------------------------- |
+| `twClassName="mt-2"`                                 | `twClassName="mt-2"` (unchanged)                              |
 | `twClassName={(pressed) => pressed ? '...' : '...'}` | Remove — pressed styling is handled internally via `isActive` |
 
 ##### Props (Unchanged)
