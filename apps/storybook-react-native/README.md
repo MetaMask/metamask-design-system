@@ -1,75 +1,50 @@
 # `@metamask/storybook-react-native`
 
-Storybook setup for React Native components within the MetaMask design system monorepo. It allows developers to visualize and test components in isolation, ensuring consistency and reliability across the application.
+Storybook app for validating `@metamask/design-system-react-native` components in a runtime that stays aligned with MetaMask Mobile.
 
-## Installation
+## What this app is for
 
-`yarn install`
+- Test DSRN components in isolation on iOS and Android.
+- Keep dependency behavior close to Mobile (Expo + React Native alignment).
+- Validate Storybook v10 integration with native modules.
 
-## Running Storybook
+## Runtime policy
 
-Run one of these commands to start Storybook:
+| Mode                                                         | Status                     | Use case                                        |
+| ------------------------------------------------------------ | -------------------------- | ----------------------------------------------- |
+| Development build (`expo run:*` + `expo start --dev-client`) | Supported                  | Primary and required validation path            |
+| Expo Go (`expo start --ios` / `--android`)                   | Unsupported for validation | Smoke checks only; known native module failures |
 
-```bash
-# From repository root
-yarn storybook:ios        # Build + install iOS dev build
-yarn storybook:android    # Build + install Android dev build
-
-# OR from apps/storybook-react-native directory
-yarn ios        # Build + install iOS dev build
-yarn android    # Build + install Android dev build
-```
-
-### Stable startup flow (recommended and supported path)
-
-Use development builds when validating Storybook behavior with native modules:
+## Run Storybook (supported flow)
 
 ```bash
-# 1) Build/install native app
+# 1) Build and install the native clients
 yarn storybook:ios
 yarn storybook:android
 
-# 2) Start Metro in dev-client mode
+# 2) Start Metro for dev-client
 yarn workspace @metamask/storybook-react-native exec expo start --dev-client
 ```
 
-## Runtime support policy
-
-This app is intended to stay aligned with MetaMask Mobile runtime expectations. In practice:
-
-| Mode                                                         | Status      | Intended usage                                                   |
-| ------------------------------------------------------------ | ----------- | ---------------------------------------------------------------- |
-| Development build (`expo run:*` + `expo start --dev-client`) | Supported   | Primary path for component validation and native-module behavior |
-| Expo Go (`expo start --ios` / `--android`)                   | Unsupported | Not a validation target for this app                             |
-
-## DX workflow
-
-Use this workflow to reduce setup churn and avoid misleading failures:
-
-```bash
-# 1) Build/install dev clients
-yarn storybook:ios
-yarn storybook:android
-
-# 2) Start Storybook in dev-client mode
-yarn workspace @metamask/storybook-react-native exec expo start --dev-client
-```
-
-When switching frequently between Mobile and this app, prefer using different Metro ports to avoid collisions:
+If you are running Mobile and Storybook side-by-side, use a separate Metro port:
 
 ```bash
 yarn workspace @metamask/storybook-react-native exec expo start --dev-client --port 8088
 ```
 
+## Version alignment policy
+
+This app should remain aligned with Mobile versions (currently Expo 52 / RN 0.76.x) rather than tracking newer Storybook template stacks (for example Expo 55) ahead of Mobile.
+
+## Known Expo Go behavior (expected)
+
+- iOS Expo Go can throw repeated Reanimated Worklets initialization errors.
+- Android Expo Go can fail with missing DateTimePicker native module (`RNCMaterialDatePicker`).
+- These are dependency/runtime mismatches in Expo Go for our current alignment, not dev-build blockers.
+
 ## Troubleshooting
 
-- `No development build (com.metamask.storybook) is installed`: run `expo run:ios` or `expo run:android` once before `expo start --dev-client`.
-- `INSTALL_FAILED_INSUFFICIENT_STORAGE` on Android emulator: free emulator storage, uninstall old app builds, or wipe emulator data.
-- Repeated Watchman recrawl warnings: run the `watchman watch-del ... && watchman watch-project ...` command printed by Watchman.
-
-### Android dev-client missing build error
-
-If you see:
+### No development build is installed
 
 ```text
 › Opening on Android...
@@ -77,50 +52,36 @@ CommandError: No development build (com.metamask.storybook) for this project is 
 Please make and install a development build on the device first.
 ```
 
-Use this recovery flow:
-
 ```bash
-# 1) Build + install the Android development client
 yarn workspace @metamask/storybook-react-native exec expo run:android
-
-# 2) Start Metro for the dev client
 yarn workspace @metamask/storybook-react-native exec expo start --dev-client --android
 ```
 
-If it still fails:
+### Failed to locate Android application identifier
 
 ```bash
-# Remove stale app install from the emulator/device
-adb uninstall com.metamask.storybook
-
-# Reinstall development build
-yarn workspace @metamask/storybook-react-native exec expo run:android
+CommandError: Failed to locate the android application identifier in the "android/" folder.
 ```
 
-### `expo-doctor` false positive with Storybook Metro integration
-
-When running:
+This means the local `android/` folder is partial or malformed. Regenerate it cleanly:
 
 ```bash
-yarn workspace @metamask/storybook-react-native exec npx expo-doctor@latest --verbose
+yarn workspace @metamask/storybook-react-native exec expo prebuild --clean --platform android
+yarn storybook:android
 ```
 
-you may see a Metro check failure similar to:
+### Android install fails with insufficient storage
 
 ```text
-Check for issues with Metro config
-Error [ERR_REQUIRE_ESM]: require() of ES Module .../storybook/dist/common/index.js
-from .../@storybook/react-native/dist/metro/withStorybook.js not supported
+INSTALL_FAILED_INSUFFICIENT_STORAGE
 ```
 
-For this app, this is a known false positive from `expo-doctor` loading Storybook's Metro wrapper, not a runtime blocker by itself.
+Free emulator storage (or wipe emulator data), then reinstall.
 
-What to do:
+### Watchman recrawl warnings
 
-1. Treat the Metro check error above as non-blocking.
-2. Still act on other `expo-doctor` findings, especially SDK dependency mismatch output.
-3. Use `expo install --check` as the primary compatibility signal for Expo SDK dependency alignment.
+Run the `watchman watch-del ... && watchman watch-project ...` command printed in the warning output.
 
-## Contributing
+### `expo-doctor` Metro false positive with Storybook
 
-This package is part of a monorepo. Instructions for contributing can be found in the [monorepo README](https://github.com/MetaMask/metamask-design-system#readme).
+If `expo-doctor` reports an `ERR_REQUIRE_ESM` from Storybook Metro integration, treat that specific Metro check as non-blocking and focus on actual SDK/dependency mismatch findings (`expo install --check`).
