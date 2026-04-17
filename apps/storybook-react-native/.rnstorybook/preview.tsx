@@ -23,14 +23,6 @@ const preview: Preview = {
       </ThemeDecorator>
     ),
   ],
-  parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
-      },
-    },
-  },
 };
 
 export default preview;
