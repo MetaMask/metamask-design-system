@@ -10,7 +10,4 @@ defaultConfig.transformer.babelTransformerPath = require.resolve('react-native-s
 defaultConfig.resolver.assetExts = defaultConfig.resolver.assetExts.filter((ext) => ext !== 'svg');
 defaultConfig.resolver.sourceExts = [...defaultConfig.resolver.sourceExts, 'svg'];
 
-module.exports = withStorybook(defaultConfig, {
-  enabled: true,
-  useJs: false,
-});
+module.exports = withStorybook(defaultConfig);
