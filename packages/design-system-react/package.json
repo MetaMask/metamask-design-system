@@ -82,8 +82,8 @@
   "peerDependencies": {
     "@metamask/design-tokens": "^8.1.0",
     "@metamask/utils": "^11.11.0",
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "engines": {
     "node": "^18.18 || >=20"
