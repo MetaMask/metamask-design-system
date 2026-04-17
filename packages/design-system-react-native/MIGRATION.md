@@ -1652,8 +1652,11 @@ The mobile `Checkbox` maps to `Checkbox` in the design system, with controlled-s
 | `isDisabled?: boolean`                 | `isDisabled?: boolean`                    | unchanged                                           | still defaults to `false`                                                                  |
 | `label?: string \| ReactNode`          | `label?: string \| ReactNode`             | unchanged                                           | still supported                                                                            |
 | `labelProps`                           | `labelProps`                              | unchanged                                           | still supported (Text props)                                                               |
+| none                                   | `isInvalid?: boolean`                     | added in MMDS                                       | use for error styling (`false` by default)                                                 |
 | `checkedIconProps`                     | `checkedIconProps`                        | added in MMDS                                       | customize selected check icon                                                              |
 | `checkboxContainerProps`               | `checkboxContainerProps`                  | added in MMDS                                       | customize icon container view                                                              |
+| none                                   | `twClassName?: string`                    | added in MMDS                                       | tailwind utility overrides on outer `Pressable`                                            |
+| none                                   | `style?: PressableProps['style']`         | added in MMDS                                       | additional React Native style overrides on outer container                                 |
 
 ##### Default and Behavior Changes
 

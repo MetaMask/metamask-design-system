@@ -605,6 +605,7 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 | `onChange?: (event: ChangeEvent<HTMLInputElement>) => void` | `onChange: (isSelected: boolean) => void` | signature changed + now required | callback receives the next boolean value instead of DOM event |
 | `id?: string`                                               | `id: string`                              | now required                     | required for `input`/`label` association                      |
 | `iconProps?: IconProps<'span'>`                             | `checkedIconProps?: Partial<IconProps>`   | renamed                          | use for checked icon customization                            |
+| `inputProps?: any`                                          | `inputProps?: Omit<ComponentProps<'input'>, ...>` | type narrowed                     | MMDS blocks overriding `type`, `checked`, `onChange`, `disabled` |
 | `isIndeterminate?: boolean`                                 | removed                                   | removed                          | no built-in tri-state behavior                                |
 | `isReadOnly?: boolean`                                      | removed                                   | removed                          | handle read-only behavior in parent by no-oping `onChange`    |
 | `isRequired?: boolean`                                      | removed from top-level                    | moved                            | pass through `inputProps={{ required: true }}`                |
@@ -612,6 +613,7 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 | `title?: string`                                            | removed from top-level                    | moved                            | pass through `inputProps={{ title: '...' }}`                  |
 | `inputRef`                                                  | removed                                   | removed                          | no dedicated input ref prop                                   |
 | broad Box/Text style utility props                          | removed                                   | removed                          | use `className`, `style`, and explicit props instead          |
+| none                                                        | `checkboxContainerProps?: Omit<ComponentProps<'div'>, ...>` | added in MMDS                    | customize checkbox icon wrapper container                     |
 | `isInvalid`                                                 | `isInvalid`                               | added in MMDS                    | use for error styling (`false` by default)                    |
 
 ##### Default and Behavior Changes
@@ -664,6 +666,7 @@ import { Checkbox } from '@metamask/design-system-react';
 
 - `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
+- `checkboxContainerProps` can be used for test hooks/classes on the icon wrapper container.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
 
 ## Version Updates
