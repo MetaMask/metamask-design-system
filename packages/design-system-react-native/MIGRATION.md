@@ -879,15 +879,18 @@ The enum is renamed from `ButtonIconSizes` to `ButtonIconSize`, and values chang
 
 Review layouts when migrating Md/Lg sizes — the buttons will be slightly larger.
 
+> [!NOTE]
+> The default size (`Md`) grows from `28px` to `32px`, so even call sites that omit the `size` prop will render larger.
+
 ##### `iconColor` → `iconProps.color`
 
 The legacy `ButtonIcon` accepted a top-level `iconColor` prop. The design system version removes this and uses `iconProps` instead.
 
-| Mobile Pattern                  | Design System Migration                                            |
-| ------------------------------- | ------------------------------------------------------------------ |
-| `iconColor={IconColor.Default}` | Remove — default is handled automatically                          |
-| `iconColor={IconColor.Success}` | `iconProps={{ color: IconColor.SuccessDefault }}`                  |
-| `iconColor="string-color"`      | `iconProps={{ color: IconColor.SuccessDefault }}` (use typed enum) |
+| Mobile Pattern                  | Design System Migration                                                  |
+| ------------------------------- | ------------------------------------------------------------------------ |
+| `iconColor={IconColor.Default}` | Remove — default is handled automatically                                |
+| `iconColor={IconColor.Success}` | `iconProps={{ color: IconColor.SuccessDefault }}`                        |
+| `iconColor="string-color"`      | `iconProps={{ color: IconColor.* }}` (map to the closest semantic token) |
 
 ##### IconColor Enum Values Changed
 

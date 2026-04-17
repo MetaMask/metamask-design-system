@@ -157,7 +157,7 @@ export const StyleExample = () => (
 
 ## Migration from MetaMask Mobile Component Library
 
-Migrating from the legacy `ButtonIcon` in `app/component-library/components/Buttons/ButtonIcon`? See the [ButtonIcon migration guide](../../MIGRATION.md#buttonicon-component) for size enum changes, `iconColor` → `iconProps` mapping, and before/after examples.
+Migrating from the legacy `ButtonIcon` in `app/component-library/components/Buttons/ButtonIcon`? See the [ButtonIcon migration guide](../../../MIGRATION.md#buttonicon-component) for size enum changes, `iconColor` → `iconProps` mapping, and before/after examples.
 
 ## References
 
