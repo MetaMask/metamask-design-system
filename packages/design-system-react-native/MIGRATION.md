@@ -774,7 +774,7 @@ The legacy version inherited `twClassName` as `string | ((pressed: boolean) => s
 | Mobile Pattern                                       | Design System Migration                  |
 | ---------------------------------------------------- | ---------------------------------------- |
 | `twClassName="mt-2"`                                 | `twClassName="mt-2"` (unchanged)         |
-| `twClassName={(pressed) => pressed ? '...' : '...'}` | Use `style` prop with a function instead |
+| `twClassName={(pressed) => pressed ? '...' : '...'}` | Remove — pressed styling is handled internally via `isActive` |
 
 ##### Props (Unchanged)
 
