@@ -1909,7 +1909,7 @@ const MyInput: React.FC<TextFieldProps> = (props) => (
 
 ### ListItem Component
 
-The ListItem component in `@metamask/design-system-react-native` is a near-identical replacement for the mobile `component-library` ListItem. The props API is preserved; the main changes are the import path, enum naming (ADR-0003), styling system (TWRNC/Box instead of `useStyles`/`StyleSheet`), and a new `twClassName` prop.
+The ListItem component in `@metamask/design-system-react-native` is a near-identical replacement for the mobile `component-library` ListItem. The props API is largely preserved; the main changes are the import path, enum naming (ADR-0003), styling system (TWRNC/Box instead of `useStyles`/`StyleSheet`), and a new `twClassName` prop.
 
 > **Note:** The mobile `component-library` also provides `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` sub-components that build on `ListItem`. These sub-components do **not** yet have equivalents in `@metamask/design-system-react-native`. If your code uses them, you cannot fully migrate until they are added to the design system. See [Sub-components Not Yet Migrated](#sub-components-not-yet-migrated) for details.
 
@@ -1947,16 +1947,16 @@ If your tests or accessibility expectations rely on the root element having `acc
 
 These props work identically in both versions — no migration needed:
 
-| Prop                 | Type               | Notes                                              |
-| -------------------- | ------------------ | -------------------------------------------------- |
-| `children`           | `ReactNode`        | Content displayed in the horizontal row            |
-| `topAccessory`       | `ReactNode`        | Content above the row                              |
-| `bottomAccessory`    | `ReactNode`        | Content below the row                              |
-| `topAccessoryGap`    | `number`           | Gap between topAccessory and row (default: `0`)    |
-| `bottomAccessoryGap` | `number`           | Gap between row and bottomAccessory (default: `0`) |
-| `gap`                | `number \| string` | Gap between children in the row (default: `16`)    |
-| `style`              | `ViewStyle`        | Custom styles on the root element                  |
-| All `ViewProps`      | Various            | `testID`, `accessibilityLabel`, etc.               |
+| Prop                 | Type                   | Notes                                              |
+| -------------------- | ---------------------- | -------------------------------------------------- |
+| `children`           | `ReactNode`            | Content displayed in the horizontal row            |
+| `topAccessory`       | `ReactNode`            | Content above the row                              |
+| `bottomAccessory`    | `ReactNode`            | Content below the row                              |
+| `topAccessoryGap`    | `number`               | Gap between topAccessory and row (default: `0`)    |
+| `bottomAccessoryGap` | `number`               | Gap between row and bottomAccessory (default: `0`) |
+| `gap`                | `number \| string`     | Gap between children in the row (default: `16`)    |
+| `style`              | `StyleProp<ViewStyle>` | Custom styles on the root element                  |
+| All `ViewProps`      | Various                | `testID`, `accessibilityLabel`, etc.               |
 
 #### New Props (Design System Only)
 
