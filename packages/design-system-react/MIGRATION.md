@@ -141,105 +141,121 @@ The design system Button adds these props:
 
 ### Box Component
 
-The Box component has breaking changes when migrating from the extension component-library, particularly around responsive spacing and certain margin/padding props.
+The Box component has breaking changes when migrating from extension `ui/components/component-library/box` to `@metamask/design-system-react`.
 
 #### Breaking Changes
 
-##### Responsive Spacing
+##### Prop Surface Reduction (Removed Props)
 
-The extension Box supported responsive arrays for margin and padding props. The design system Box does not support this pattern. Use Tailwind responsive classes via `className` instead.
+The legacy extension Box exposed broad style utility props that are not on MMDS `Box`.
 
-| Extension Pattern                          | Design System Migration                         |
-| ------------------------------------------ | ----------------------------------------------- |
-| `margin={[2, 4]}`                          | `margin={2} className="md:m-4"`                 |
-| `padding={[2, 4, 6]}`                      | `padding={2} className="md:p-4 lg:p-6"`         |
-| `marginTop={[1, 2]}`                       | `marginTop={1} className="md:mt-2"`             |
-| Responsive spacing at multiple breakpoints | Use Tailwind responsive prefixes in `className` |
+| Legacy Extension Prop | MMDS Migration |
+| --------------------- | -------------- |
+| `as` (polymorphic element) | `asChild` plus explicit child element |
+| `display`             | `className`, for example `className="inline-flex"` |
+| `textAlign`           | `className`, for example `className="text-center"` |
+| `width`, `minWidth`, `height` | `className`, for example `className="w-1/2 min-w-40 h-10"` |
+| `color`               | Apply color on text/icon children (or utility classes on descendants), not on container `Box` |
+| `borderRadius`, `borderStyle` | `className`, for example `className="rounded-md border-dashed"` |
 
-##### Margin Inline Props
+##### Responsive Array Values Removed
 
-The extension Box had `marginInline`, `marginInlineStart`, and `marginInlineEnd` props. The design system Box uses `marginHorizontal` or Tailwind classes instead.
+Legacy extension `Box` accepted responsive arrays (for example `[base, sm, md, lg]`) for many props. MMDS `Box` does not.
 
-| Extension Pattern       | Design System Migration                      |
-| ----------------------- | -------------------------------------------- |
-| `marginInline={4}`      | `marginHorizontal={4}` or `className="mx-4"` |
-| `marginInlineStart={2}` | `className="ms-2"`                           |
-| `marginInlineEnd={2}`   | `className="me-2"`                           |
+| Legacy Pattern | MMDS Migration |
+| -------------- | -------------- |
+| `margin={[2, 4]}` | `margin={2} className="sm:m-4"` |
+| `padding={[2, 4, 6]}` | `padding={2} className="sm:p-4 md:p-6"` |
+| `alignItems={[AlignItems.flexStart, AlignItems.center]}` | `alignItems={BoxAlignItems.Start} className="sm:items-center"` |
+| `flexDirection={[FlexDirection.Row, FlexDirection.Column]}` | `flexDirection={BoxFlexDirection.Row} className="sm:flex-col"` |
 
-##### Padding Inline Props
+##### Renamed Inline Spacing Props
 
-The extension Box had `paddingInline`, `paddingInlineStart`, and `paddingInlineEnd` props. The design system Box uses `paddingHorizontal` or Tailwind classes instead.
+Legacy inline spacing props were removed/renamed in MMDS.
 
-| Extension Pattern        | Design System Migration                       |
-| ------------------------ | --------------------------------------------- |
-| `paddingInline={4}`      | `paddingHorizontal={4}` or `className="px-4"` |
-| `paddingInlineStart={2}` | `className="ps-2"`                            |
-| `paddingInlineEnd={2}`   | `className="pe-2"`                            |
+| Legacy Extension Prop | MMDS Migration |
+| --------------------- | -------------- |
+| `marginInline` | `marginHorizontal` or `className="mx-*"` |
+| `paddingInline` | `paddingHorizontal` or `className="px-*"` |
+| `marginInlineStart`, `marginInlineEnd` | `className="ms-*"` / `className="me-*"` |
+| `paddingInlineStart`, `paddingInlineEnd` | `className="ps-*"` / `className="pe-*"` |
 
-##### Margin Auto
+##### Spacing Type/Value Changes
 
-The extension Box supported `margin="auto"`. The design system Box does not support this value. Use Tailwind classes instead.
+Spacing value types changed in MMDS:
 
-| Extension Pattern | Design System Migration |
-| ----------------- | ----------------------- |
-| `margin="auto"`   | `className="m-auto"`    |
+| Legacy Type/Value | MMDS Type/Value | Migration |
+| ----------------- | --------------- | --------- |
+| `margin`, `marginTop`, etc. allow `'auto'` | `BoxSpacing` only (`0..12`) | Use `className="m-auto"`, `className="mt-auto"`, etc. |
+| spacing props allow `null` | `null` not supported | Remove `null` and omit the prop |
+| `borderWidth` supports `0..12` | `BoxBorderWidth` is `0 | 1 | 2 | 4 | 8` | Use nearest MMDS value or `className` for custom width |
+
+##### Border Behavior Change
+
+Legacy extension `Box` auto-added a visible border in some cases (`borderStyle` defaults and implicit width when only `borderColor` was set). MMDS `Box` does not infer this behavior.
+
+| Legacy Behavior | MMDS Behavior | Migration |
+| --------------- | ------------- | --------- |
+| `borderColor` alone could still render a border via helper logic | `borderColor` alone does not set border width | Set both, for example `borderColor={BoxBorderColor.BorderDefault}` and `borderWidth={1}` |
 
 #### Migration Examples
 
 ##### Before (Extension)
 
 ```tsx
-import { Box } from '../../component-library';
+import { Box, AlignItems, FlexDirection } from '../../component-library/box';
 
-// Responsive spacing
-<Box margin={[2, 4]} padding={[2, 4]}>
+<Box
+  as="section"
+  margin={[2, 4]}
+  paddingInline={3}
+  marginInlineStart={2}
+  width="1/2"
+  borderColor="border-muted"
+  borderWidth={3}
+  flexDirection={[FlexDirection.Row, FlexDirection.Column]}
+  alignItems={[AlignItems.flexStart, AlignItems.center]}
+>
   Responsive spacing
-</Box>
-
-// Inline props
-<Box marginInline={4} paddingInlineStart={2}>
-  Inline spacing
-</Box>
-
-// Auto margin
-<Box margin="auto">
-  Centered with auto margin
 </Box>
 ```
 
 ##### After (Design System)
 
 ```tsx
-import { Box } from '@metamask/design-system-react';
+import {
+  Box,
+  BoxAlignItems,
+  BoxBorderColor,
+  BoxFlexDirection,
+} from '@metamask/design-system-react';
 
-// Responsive spacing - use className for responsive values
-<Box margin={2} padding={2} className="md:m-4 md:p-4">
+<Box
+  asChild
+  margin={2}
+  paddingHorizontal={3}
+  className="sm:m-4 ms-2 w-1/2"
+  borderColor={BoxBorderColor.BorderMuted}
+  borderWidth={2}
+  flexDirection={BoxFlexDirection.Row}
+  alignItems={BoxAlignItems.Start}
+>
+  <section className="sm:flex-col sm:items-center">
   Responsive spacing
-</Box>
-
-// Inline props - use marginHorizontal or className
-<Box marginHorizontal={4} className="ps-2">
-  Inline spacing
-</Box>
-
-// Auto margin - use className
-<Box className="m-auto">
-  Centered with auto margin
+  </section>
 </Box>
 ```
 
-#### Spacing Props Still Available
+#### Quick Mapping Summary
 
-Most extension Box margin/padding props work the same in the design system:
+| Category | Legacy Extension | MMDS React |
+| -------- | ---------------- | ---------- |
+| Removed | `display`, `textAlign`, `width`, `minWidth`, `height`, `color`, `borderRadius`, `borderStyle` | Move to `className` / child styling |
+| Renamed | `marginInline`, `paddingInline` | `marginHorizontal`, `paddingHorizontal` |
+| Type changes | responsive arrays, `null`, `'auto'`, broader `borderWidth` range | scalar values only, no `null`/`'auto'`, `borderWidth` restricted |
+| Behavior change | implicit border behavior in legacy helper | explicit border width required |
 
-- ✅ `margin`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft`
-- ✅ `marginHorizontal` (replaces `marginInline`)
-- ✅ `marginVertical`
-- ✅ `padding`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft`
-- ✅ `paddingHorizontal` (replaces `paddingInline`)
-- ✅ `paddingVertical`
-
-For simple, non-responsive spacing, continue using these props. Use `className` with Tailwind utilities for responsive spacing, auto values, or inline-start/end positioning.
+For responsive values and one-off style parity, prefer `className` with Tailwind utilities in MMDS.
 
 ### BannerAlert Component
 
