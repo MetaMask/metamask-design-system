@@ -1,4 +1,4 @@
-import type { ButtonVariant } from '../../types';
+import type { ButtonVariant } from '@metamask/design-system-shared';
 
 import type { ButtonPrimaryProps } from './variants/ButtonPrimary';
 import type { ButtonSecondaryProps } from './variants/ButtonSecondary';

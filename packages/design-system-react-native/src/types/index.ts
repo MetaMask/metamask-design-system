@@ -212,38 +212,6 @@ export enum BoxBorderColor {
 }
 
 /**
- * ButtonBase - size
- */
-export enum ButtonBaseSize {
-  /**
-   * Represents a small button size (32px).
-   */
-  Sm = 'sm',
-  /**
-   * Represents a medium button size (40px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large button size (48px).
-   */
-  Lg = 'lg',
-}
-export { ButtonBaseSize as ButtonSize };
-export { ButtonBaseSize as ButtonPrimarySize };
-export { ButtonBaseSize as ButtonSecondarySize };
-export { ButtonBaseSize as ButtonTertiarySize };
-export { ButtonBaseSize as ButtonHeroSize };
-
-/**
- * Button - variant
- */
-export enum ButtonVariant {
-  Primary = 'primary',
-  Secondary = 'secondary',
-  Tertiary = 'tertiary',
-}
-
-/**
  * ButtonIcon - size
  */
 export enum ButtonIconSize {

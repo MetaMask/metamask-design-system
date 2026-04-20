@@ -114,3 +114,14 @@ export {
 
 // Checkbox types (ADR-0004)
 export { type CheckboxPropsShared } from './types/Checkbox';
+
+// ButtonBase types (ADR-0003 + ADR-0004)
+export { ButtonBaseSize, type ButtonBasePropsShared } from './types/ButtonBase';
+export { ButtonBaseSize as ButtonSize } from './types/ButtonBase';
+export { ButtonBaseSize as ButtonPrimarySize } from './types/ButtonBase';
+export { ButtonBaseSize as ButtonSecondarySize } from './types/ButtonBase';
+export { ButtonBaseSize as ButtonTertiarySize } from './types/ButtonBase';
+export { ButtonBaseSize as ButtonHeroSize } from './types/ButtonBase';
+
+// Button types (ADR-0003 + ADR-0004)
+export { ButtonVariant, type ButtonPropsShared } from './types/Button';

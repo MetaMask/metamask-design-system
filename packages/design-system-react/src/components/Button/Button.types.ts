@@ -1,4 +1,4 @@
-import type { ButtonVariant } from '../../types';
+import { ButtonVariant } from '@metamask/design-system-shared';
 
 import type { ButtonPrimaryProps } from './variants/ButtonPrimary';
 import type { ButtonSecondaryProps } from './variants/ButtonSecondary';
@@ -13,12 +13,12 @@ export type ButtonProps = {
   variant?: ButtonVariant;
 } & (
   | (Omit<ButtonPrimaryProps, 'ref'> & {
-      variant?: ButtonVariant.Primary;
+      variant?: typeof ButtonVariant.Primary;
     })
   | (Omit<ButtonSecondaryProps, 'ref'> & {
-      variant?: ButtonVariant.Secondary;
+      variant?: typeof ButtonVariant.Secondary;
     })
   | (Omit<ButtonTertiaryProps, 'ref'> & {
-      variant?: ButtonVariant.Tertiary;
+      variant?: typeof ButtonVariant.Tertiary;
     })
 );

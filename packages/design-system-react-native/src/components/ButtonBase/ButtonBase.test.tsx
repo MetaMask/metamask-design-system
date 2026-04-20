@@ -1,3 +1,4 @@
+import { ButtonBaseSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
@@ -5,7 +6,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import * as ReactTestRenderer from 'react-test-renderer';
 
-import { ButtonBaseSize, IconName } from '../../types';
+import { IconName } from '../../types';
 
 import { ButtonBase } from './ButtonBase';
 

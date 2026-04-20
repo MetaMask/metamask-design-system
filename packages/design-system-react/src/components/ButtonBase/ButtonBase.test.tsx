@@ -1,7 +1,7 @@
+import { ButtonBaseSize } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { ButtonBaseSize } from '../../types';
 import { IconName } from '../Icon';
 
 import { ButtonBase } from './ButtonBase';
