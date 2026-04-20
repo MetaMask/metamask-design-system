@@ -14,6 +14,7 @@ const TITLE_ROW_TEST_ID = 'title-subpage-title';
 const SUBTITLE_ROW_TEST_ID = 'title-subpage-subtitle';
 const BOTTOM_LABEL_TEST_ID = 'title-subpage-bottom-label';
 const TITLE_AVATAR_TEST_ID = 'title-subpage-title-avatar';
+const TITLE_AVATAR_SLOT_TEST_ID = 'title-subpage-title-avatar-slot';
 const IDENTITY_ROW_TEST_ID = 'title-subpage-identity-row';
 
 const defaultTitleAvatar = <Text testID={TITLE_AVATAR_TEST_ID} />;
@@ -44,6 +45,16 @@ describe('TitleSubpage', () => {
       );
 
       expect(getByTestId(TITLE_AVATAR_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('wraps titleAvatar in a 40 by 40 box with centered content and hidden overflow', () => {
+      const { getByTestId } = render(
+        <TitleSubpage titleAvatar={defaultTitleAvatar} title="Section" />,
+      );
+
+      expect(getByTestId(TITLE_AVATAR_SLOT_TEST_ID)).toHaveStyle(
+        tw`h-10 w-10 overflow-hidden items-center justify-center`,
+      );
     });
 
     it('forwards identityRowProps testID to identity BoxRow', () => {

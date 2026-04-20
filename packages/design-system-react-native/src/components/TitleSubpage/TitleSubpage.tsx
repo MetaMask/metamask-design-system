@@ -9,6 +9,7 @@ import React from 'react';
 // Internal dependencies.
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
+import { BoxAlignItems, BoxJustifyContent } from '../../types';
 
 import type { TitleSubpageProps } from './TitleSubpage.types';
 
@@ -18,7 +19,7 @@ import type { TitleSubpageProps } from './TitleSubpage.types';
  *
  * @param props - Component props
  * @param props.title - Title row content (required)
- * @param props.titleAvatar - Leading visual for the identity row (required); passed as the identity `BoxRow` `startAccessory` (size the avatar appropriately, for example `AvatarToken` at `AvatarTokenSize.Lg`)
+ * @param props.titleAvatar - Leading visual for the identity row (required); rendered inside a fixed 40×40 `Box` (centered children, `overflow: hidden`) used as the identity `BoxRow` `startAccessory`
  * @param props.identityRowProps - Optional props spread onto the identity `BoxRow` after defaults (`children`, `startAccessory`, and `textProps` are reserved)
  * @param props.titleColumnProps - Optional props spread onto the title/subtitle column `Box` (`children` is reserved)
  * @param props.bottomLabelWrapperProps - Optional props spread onto the bottom label `BoxRow` after defaults (`children`, `endAccessory`, and `textProps` are reserved)
@@ -66,7 +67,16 @@ export const TitleSubpage: React.FC<TitleSubpageProps> = ({
         gap={4}
         twClassName="h-14"
         {...identityRowProps}
-        startAccessory={titleAvatar}
+        startAccessory={
+          <Box
+            testID="title-subpage-title-avatar-slot"
+            alignItems={BoxAlignItems.Center}
+            justifyContent={BoxJustifyContent.Center}
+            twClassName="h-10 w-10 overflow-hidden"
+          >
+            {titleAvatar}
+          </Box>
+        }
       >
         {/* Title and Subtitle Column */}
         <Box {...titleColumnProps}>
