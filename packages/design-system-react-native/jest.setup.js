@@ -1,5 +1,4 @@
-// Import built-in Jest matchers from React Native Testing Library
-import '@testing-library/react-native/extend-expect';
+require('react-native-reanimated').setUpTests();
 
 jest.mock('react-native-svg', () => {
   const React = require('react');
@@ -14,18 +13,6 @@ jest.mock('react-native-svg', () => {
     Rect: MockedSvg,
   };
 });
-
-jest.mock('react-native-reanimated', () => {
-  const Reanimated = require('react-native-reanimated/mock');
-
-  // Overriding the `call` method to avoid issues with animations
-  Reanimated.default.call = () => {};
-
-  return Reanimated;
-});
-
-// Silence warnings related to the Animated API
-jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
 jest.mock(
   'react-native-safe-area-context',
