@@ -243,24 +243,35 @@ For simple, non-responsive spacing, continue using these props. Use `className` 
 
 ### BannerAlert Component
 
-The extension `banner-alert` maps directly to `BannerAlert` in the design system, but severity values are now provided via the shared `BannerAlertSeverity` const object (ADR-0003/0004) instead of extension enums.
+The extension `banner-alert` maps directly to `BannerAlert` in the design system. The migration should treat BannerAlert as a `BannerBase` composition and validate shared severity imports, icon customization, and close-button behavior during replacement.
 
 #### Breaking Changes
 
-##### Imports and Enum Source
+##### Removed / No Direct Equivalent
 
-| Extension Pattern                                 | Design System Migration                                    |
-| ------------------------------------------------- | ---------------------------------------------------------- |
-| `BannerAlertSeverity` from `./banner-alert.types` | `BannerAlertSeverity` from `@metamask/design-system-react` |
+No direct `banner-alert` props were removed. Existing extension `BannerAlert` props (`severity`, `title`, `description`, `children`, `actionButtonLabel`, `actionButtonOnClick`, `onClose`, and style utility props) map to MMDS `BannerAlert` through `BannerBaseProps`.
 
-##### Severity Values
+##### Renamed Props
 
-| Extension Value                             | Design System Value           |
-| ------------------------------------------- | ----------------------------- |
-| `BannerAlertSeverity.Info` (`'info'`)       | `BannerAlertSeverity.Info`    |
-| `BannerAlertSeverity.Success` (`'success'`) | `BannerAlertSeverity.Success` |
-| `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` |
-| `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  |
+No direct prop renames were introduced for extension-to-MMDS `BannerAlert`.
+
+##### Type and Value Changes
+
+| Extension API / Value                             | MMDS API / Value                                                  | Notes                                                                       |
+| ------------------------------------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `BannerAlertSeverity` from `./banner-alert.types` | `BannerAlertSeverity` from `@metamask/design-system-react`        | Import source moved to MMDS package exports                                 |
+| `severity?: BannerAlertSeverity`                  | `severity?: BannerAlertSeverity`                                  | Same semantic keys and string values (`info/success/warning/danger`)        |
+| Icon internals fixed by severity                  | `iconProps?: Omit<IconProps, 'name' \| 'size' \| 'color'>`         | MMDS allows limited icon customization without overriding severity mappings  |
+| `children` string wrapper only through `TextProps<'p'>` | `childrenWrapperProps?: Partial<TextProps>`                       | MMDS still wraps string children in `Text`, but wrapper props are MMDS `Text` props |
+
+##### Default and Behavior Changes
+
+| Extension Behavior                                         | MMDS Behavior                                                                   |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `severity` defaults to `BannerAlertSeverity.Info`          | `severity` defaults to `BannerAlertSeverity.Info`                                |
+| Uses left border + severity icon + muted background        | Same behavior, powered by shared `BannerAlert` mappings in MMDS constants        |
+| `actionButtonOnClick` controls rendering via `BannerBase`  | Same behavior: action button is shown when `actionButtonOnClick` is provided     |
+| Close button renders only when `onClose` is provided       | Close button renders when `onClose` **or** `closeButtonProps` is provided via MMDS `BannerBase` |
 
 #### Migration Example
 
@@ -291,6 +302,7 @@ import {
   title="Warning"
   actionButtonLabel="Action"
   actionButtonOnClick={() => undefined}
+  iconProps={{ 'data-testid': 'warning-icon' }}
 />;
 ```
 

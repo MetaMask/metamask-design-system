@@ -1313,24 +1313,40 @@ For spacing values 0-12 (0px-48px), use these props. For custom values, responsi
 
 ### BannerAlert Component
 
-Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with severity values standardized to MMDS shared types.
+Mobile `BannerAlert` maps directly to `BannerAlert` in the design system. The migration should treat BannerAlert as a `BannerBase` composition and validate severity mapping, action-button API changes, and optional icon overrides.
 
 #### Breaking Changes
 
-##### Imports and Type Source
+##### Removed / No Direct Equivalent
 
-| Mobile Pattern                                 | Design System Migration                                           |
-| ---------------------------------------------- | ----------------------------------------------------------------- |
-| `BannerAlertSeverity` from `BannerAlert.types` | `BannerAlertSeverity` from `@metamask/design-system-react-native` |
+| Legacy Mobile API              | MMDS Status                  | Migration                                                       |
+| ------------------------------ | ---------------------------- | --------------------------------------------------------------- |
+| `variant?: BannerVariant.Alert` | Removed from `BannerAlert` API | Remove `variant`; render `BannerAlert` directly without variant props |
 
-##### Severity Values
+##### Renamed Props
 
-| Mobile Value                                | Design System Value                         | Notes          |
-| ------------------------------------------- | ------------------------------------------- | -------------- |
-| `BannerAlertSeverity.Info` (`'Info'`)       | `BannerAlertSeverity.Info` (`'info'`)       | casing changed |
-| `BannerAlertSeverity.Success` (`'Success'`) | `BannerAlertSeverity.Success` (`'success'`) | casing changed |
-| `BannerAlertSeverity.Warning` (`'Warning'`) | `BannerAlertSeverity.Warning` (`'warning'`) | casing changed |
-| `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed        |
+No direct prop renames were introduced for mobile-to-MMDS `BannerAlert`.
+
+##### Type and Value Changes
+
+| Mobile API / Value                                | MMDS API / Value                                                    | Notes                                                                                   |
+| ------------------------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `BannerAlertSeverity` from `BannerAlert.types`    | `BannerAlertSeverity` from `@metamask/design-system-react-native`   | Import source moved to MMDS package exports                                             |
+| `BannerAlertSeverity.Info` (`'Info'`)             | `BannerAlertSeverity.Info` (`'info'`)                               | Value casing changed                                                                    |
+| `BannerAlertSeverity.Success` (`'Success'`)       | `BannerAlertSeverity.Success` (`'success'`)                         | Value casing changed                                                                    |
+| `BannerAlertSeverity.Warning` (`'Warning'`)       | `BannerAlertSeverity.Warning` (`'warning'`)                         | Value casing changed                                                                    |
+| `BannerAlertSeverity.Error` (`'Error'`)           | `BannerAlertSeverity.Danger` (`'danger'`)                           | Renamed severity key/value                                                              |
+| `actionButtonProps?: ButtonProps`                 | `actionButtonOnPress` + `actionButtonLabel` + restricted `actionButtonProps` | Action handler and label are top-level props in MMDS `BannerBase`                      |
+| No `iconProps` customization API                  | `iconProps?: Omit<IconProps, 'name' \| 'size' \| 'color'>`            | MMDS adds controlled icon customization while preserving severity icon name/color/size |
+
+##### Default and Behavior Changes
+
+| Legacy Mobile Behavior                                        | MMDS Behavior                                                                  |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `severity` defaults to `BannerAlertSeverity.Info` (`'Info'`) | `severity` defaults to `BannerAlertSeverity.Info` (`'info'`)                   |
+| Action button renders when `actionButtonProps` exists         | Action button renders when `actionButtonOnPress` exists                        |
+| Close button callback falls back to `noop` in `BannerBase`   | Close button callback is omitted when no callback is provided                  |
+| Severity styling is derived from theme color objects          | Severity styling is mapped from MMDS shared `BannerAlert` constants + tokens  |
 
 #### Migration Example
 
@@ -1343,8 +1359,10 @@ import { BannerAlertSeverity } from '../../../component-library/components/Banne
 <BannerAlert
   severity={BannerAlertSeverity.Warning}
   title="Warning"
-  actionButtonLabel="Action"
-  actionButtonOnPress={() => undefined}
+  actionButtonProps={{
+    label: 'Action',
+    onPress: () => undefined,
+  }}
 />;
 ```
 
@@ -1361,6 +1379,7 @@ import {
   title="Warning"
   actionButtonLabel="Action"
   actionButtonOnPress={() => undefined}
+  iconProps={{ testID: 'warning-icon' }}
 />;
 ```
 

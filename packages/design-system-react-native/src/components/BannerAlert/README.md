@@ -2,6 +2,13 @@
 
 BannerAlert is a semantic alert banner that composes BannerBase and applies severity-driven icon and background styles.
 
+## Migration Guide
+
+For migration from legacy extension/mobile component-library implementations, see:
+
+- [React migration: BannerAlert component](../../../MIGRATION.md#banneralert-component)
+- [React Native migration: BannerAlert component](../../../MIGRATION.md#banneralert-component)
+
 ```tsx
 import {
   BannerAlert,
