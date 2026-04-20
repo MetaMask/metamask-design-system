@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.2]
+
 ### Uncategorized
 
 - chore: upgrade React Native v76.9 and Storybook v10 and align deps with MetaMask Mobile ([#844](https://github.com/MetaMask/metamask-design-system/pull/844))
@@ -61,7 +63,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.2...HEAD
+[0.4.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.1...@metamask/design-system-twrnc-preset@0.4.2
 [0.4.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.0...@metamask/design-system-twrnc-preset@0.4.1
 [0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.3.0...@metamask/design-system-twrnc-preset@0.4.0
 [0.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.1...@metamask/design-system-twrnc-preset@0.3.0
