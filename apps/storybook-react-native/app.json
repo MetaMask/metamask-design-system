@@ -4,6 +4,36 @@
     "slug": "storybook-react-native",
     "version": "1.0.0",
     "orientation": "portrait",
-    "userInterfaceStyle": "automatic"
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "bundleIdentifier": "com.metamask.storybook",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.metamask.storybook",
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./fonts/Geist/Geist-Regular.otf",
+            "./fonts/Geist/Geist-RegularItalic.otf",
+            "./fonts/Geist/Geist-Medium.otf",
+            "./fonts/Geist/Geist-MediumItalic.otf",
+            "./fonts/Geist/Geist-SemiBold.otf",
+            "./fonts/Geist/Geist-SemiBoldItalic.otf",
+            "./fonts/MMPoly/MMPoly-Regular.otf",
+            "./fonts/MMSans/MMSans-Regular.otf",
+            "./fonts/MMSans/MMSans-Medium.otf",
+            "./fonts/MMSans/MMSans-Bold.otf"
+          ]
+        }
+      ]
+    ]
   }
 }
