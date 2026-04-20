@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: upgrade React Native v76.9 and Storybook v10 and align deps with MetaMask Mobile ([#844](https://github.com/MetaMask/metamask-design-system/pull/844))
+- feat: [DSRN] Added TitleHub ([#1052](https://github.com/MetaMask/metamask-design-system/pull/1052))
+- feat: add React 19 support to peer dependency ranges ([#1089](https://github.com/MetaMask/metamask-design-system/pull/1089))
+- chore: centralize SVG icon assets in design-system-shared (Phase 1) ([#1084](https://github.com/MetaMask/metamask-design-system/pull/1084))
+- chore(deps-dev): bump @metamask/auto-changelog from 6.0.0 to 6.1.0 ([#1079](https://github.com/MetaMask/metamask-design-system/pull/1079))
+- refactor: simplify HeaderRoot slot guards to direct conditionals ([#1076](https://github.com/MetaMask/metamask-design-system/pull/1076))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.3.2 to 6.0.0 ([#1077](https://github.com/MetaMask/metamask-design-system/pull/1077))
+- feat(DSYS-486): migrate Checkbox to ADR-0004 (CheckboxPropsShared) ([#1040](https://github.com/MetaMask/metamask-design-system/pull/1040))
+
 ## [0.11.0]
 
 ### Added
@@ -45,19 +56,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added shared types used by new React Native header components, including `HeaderRoot` contracts consumed by `@metamask/design-system-react-native` ([#1029](https://github.com/MetaMask/metamask-design-system/pull/1029)).
-- Added shared `BoxHorizontal` and `BoxVertical` utility component contracts for cross-platform layout primitives ([#1003](https://github.com/MetaMask/metamask-design-system/pull/1003)).
+- Added shared types used by new React Native header components, including `HeaderRoot` contracts consumed by `@metamask/design-system-react-native`. ([#1029](https://github.com/MetaMask/metamask-design-system/pull/1029))
+- Added shared `BoxHorizontal` and `BoxVertical` utility component contracts for cross-platform layout primitives. ([#1003](https://github.com/MetaMask/metamask-design-system/pull/1003))
 
 ### Changed
 
-- Migrated `AvatarBase` type exports from enum-based definitions to shared const-object + string-union types, keeping consumers aligned with the ADR-0003/ADR-0004 type model ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005)).
-- Updated `@metamask/utils` dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033)).
+- Migrated `AvatarBase` type exports from enum-based definitions to shared const-object + string-union types, keeping consumers aligned with the ADR-0003/ADR-0004 type model. ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005))
+- Updated `@metamask/utils` dependency to `^11.11.0`. ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033))
 
 ## [0.6.0]
 
 ### Changed
 
-- Added shared `BadgeWrapper` const objects and props (`BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, `BadgeWrapperPropsShared`) so React and React Native now consume a single source of truth for the ADR-0003/ADR-0004 types; both platform packages re-export the shared definitions so existing imports keep working even as the shared package remains the canonical source. See the [design-system-react migration guide](../design-system-react/MIGRATION.md#from-version-0120-to-0130) for additional guidance ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014)).
+- Added shared `BadgeWrapper` const objects and props (`BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, `BadgeWrapperPropsShared`) so React and React Native now consume a single source of truth for the ADR-0003/ADR-0004 types; both platform packages re-export the shared definitions so existing imports keep working even as the shared package remains the canonical source. See the [design-system-react migration guide](../design-system-react/MIGRATION.md#from-version-0120-to-0130) for additional guidance. ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014))
 
 ## [0.5.0]
 
