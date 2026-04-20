@@ -8,6 +8,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Button Component](#button-component)
   - [ButtonBase Component](#buttonbase-component)
   - [ButtonHero Component](#buttonhero-component)
+  - [ButtonIcon Component](#buttonicon-component)
   - [BottomSheet Component](#bottomsheet-component)
   - [BottomSheetHeader Component](#bottomsheetheader-component)
   - [BottomSheetFooter Component](#bottomsheetfooter-component)
@@ -849,6 +850,136 @@ import {
 ```
 
 `bg-primary-default` is the hero default and `w-full` maps to `isFullWidth`. Both `twClassName` overrides are no longer needed.
+
+### ButtonIcon Component
+
+The `ButtonIcon` component is a compact, icon-only button. The design system version has significant API differences from the mobile component-library version.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                 | Design System Migration                                                      |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| `import ButtonIcon from '.../component-library/components/Buttons/ButtonIcon'` | `import { ButtonIcon } from '@metamask/design-system-react-native'`          |
+| `import { ButtonIconSizes } from '.../ButtonIcon/ButtonIcon.types'`            | `import { ButtonIconSize } from '@metamask/design-system-react-native'`      |
+| `import { IconColor, IconName } from '.../Icons/Icon/Icon.types'`              | `import { IconColor, IconName } from '@metamask/design-system-react-native'` |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**.
+
+##### Size Enum
+
+The enum is renamed from `ButtonIconSizes` to `ButtonIconSize`, and values change from pixel strings to lowercase identifiers. **The pixel dimensions also differ for Md and Lg.**
+
+| Mobile Value                  | Mobile Pixels | Design System Value          | DS Pixels | Notes          |
+| ----------------------------- | ------------- | ---------------------------- | --------- | -------------- |
+| `ButtonIconSizes.Sm` (`'24'`) | 24px          | `ButtonIconSize.Sm` (`'sm'`) | 24px      | same dimension |
+| `ButtonIconSizes.Md` (`'28'`) | 28px          | `ButtonIconSize.Md` (`'md'`) | 32px      | larger in DS   |
+| `ButtonIconSizes.Lg` (`'32'`) | 32px          | `ButtonIconSize.Lg` (`'lg'`) | 40px      | larger in DS   |
+
+Review layouts when migrating Md/Lg sizes — the buttons will be slightly larger.
+
+> [!NOTE]
+> The default size (`Md`) grows from `28px` to `32px`, so even call sites that omit the `size` prop will render larger.
+
+##### `iconColor` → `iconProps.color`
+
+The legacy `ButtonIcon` accepted a top-level `iconColor` prop. The design system version removes this and uses `iconProps` instead.
+
+| Mobile Pattern                  | Design System Migration                                                  |
+| ------------------------------- | ------------------------------------------------------------------------ |
+| `iconColor={IconColor.Default}` | Remove — default is handled automatically                                |
+| `iconColor={IconColor.Success}` | `iconProps={{ color: IconColor.SuccessDefault }}`                        |
+| `iconColor="string-color"`      | `iconProps={{ color: IconColor.* }}` (map to the closest semantic token) |
+
+##### IconColor Enum Values Changed
+
+The legacy `IconColor` used PascalCase names (`Default`, `Success`). The design system uses semantic names:
+
+| Mobile Value        | Design System Value        |
+| ------------------- | -------------------------- |
+| `IconColor.Default` | `IconColor.IconDefault`    |
+| `IconColor.Success` | `IconColor.SuccessDefault` |
+| `IconColor.Primary` | `IconColor.PrimaryDefault` |
+| `IconColor.Error`   | `IconColor.ErrorDefault`   |
+
+##### New: `variant` Prop
+
+The design system `ButtonIcon` adds a `variant` prop for visual styles:
+
+- `ButtonIconVariant.Default` — transparent background, default icon color (default)
+- `ButtonIconVariant.Filled` — muted background with rounded corners and pressed state
+- `ButtonIconVariant.Floating` — colored background with inverse icon color
+
+##### Base Type Change
+
+The legacy component extends `TouchableOpacityProps`. The design system extends `ButtonAnimatedProps` (wraps `Pressable`). Most interaction props (`onPress`, `onPressIn`, `onPressOut`, `disabled`, `testID`, `accessibilityLabel`) carry over.
+
+#### Migration Examples
+
+##### Icon button with color override
+
+Before (Mobile):
+
+```tsx
+import ButtonIcon from '../../../component-library/components/Buttons/ButtonIcon';
+import { ButtonIconSizes } from '../../../component-library/components/Buttons/ButtonIcon/ButtonIcon.types';
+import {
+  IconColor,
+  IconName,
+} from '../../../component-library/components/Icons/Icon/Icon.types';
+
+<ButtonIcon
+  iconName={isCopied ? IconName.CopySuccess : IconName.Copy}
+  size={ButtonIconSizes.Md}
+  onPress={handleCopy}
+  isDisabled={!value}
+  iconColor={isCopied ? IconColor.Success : undefined}
+  testID="copy-button"
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonIcon,
+  ButtonIconSize,
+  IconColor,
+  IconName,
+} from '@metamask/design-system-react-native';
+
+<ButtonIcon
+  iconName={isCopied ? IconName.CopySuccess : IconName.Copy}
+  size={ButtonIconSize.Md}
+  onPress={handleCopy}
+  isDisabled={!value}
+  iconProps={isCopied ? { color: IconColor.SuccessDefault } : undefined}
+  testID="copy-button"
+/>;
+```
+
+##### Simple icon button (default color)
+
+Before (Mobile):
+
+```tsx
+<ButtonIcon
+  iconName={IconName.Close}
+  size={ButtonIconSizes.Sm}
+  onPress={handleClose}
+/>
+```
+
+After (Design System):
+
+```tsx
+<ButtonIcon
+  iconName={IconName.Close}
+  size={ButtonIconSize.Sm}
+  onPress={handleClose}
+/>
+```
 
 ### BottomSheet Component
 
