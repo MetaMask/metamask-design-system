@@ -1,5 +1,4 @@
 import type React from 'react';
-import type { ViewProps } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 
 import type { IconColor, IconName, IconSize } from '../../types';
@@ -29,7 +28,7 @@ export type IconProps = {
    * Optional prop to add twrnc overriding classNames.
    */
   twClassName?: string;
-} & ViewProps;
+} & Omit<SvgProps, 'color' | 'name'>;
 
 /**
  * Asset stored by icon name

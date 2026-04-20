@@ -18,6 +18,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
+  - [ListItem Component](#listitem-component)
 - [Version Updates](#version-updates)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -74,6 +75,26 @@ The intermediate `Box` wrapper around the `BoxRow` in the left section has been 
 **Impact:**
 
 No changes to visual appearance or API.
+
+#### Icon: prop types now align with SVG usage
+
+**What Changed:**
+
+- `IconProps` now extends `Omit<SvgProps, 'color' | 'name'>` instead of `ViewProps`.
+
+**Migration:**
+
+If TypeScript now flags props you were previously passing to `Icon`, those props were `View`-specific and are no longer part of the `Icon` public type. Move those props to a wrapper `View` and keep SVG-compatible props on `Icon`.
+
+```tsx
+// Before
+<Icon name={IconName.Lock} onLayout={handleLayout} />
+
+// After
+<View onLayout={handleLayout}>
+  <Icon name={IconName.Lock} />
+</View>
+```
 
 ---
 
@@ -1885,6 +1906,225 @@ const MyInput: React.FC<TextFieldProps> = (props) => (
 - The `testID` prop targets the root `Pressable` in MMDS vs. the inner `TextInput` in the mobile version.
 - MMDS sets `accessible={false}` on the root `Pressable`; the mobile version does not.
 - Border radius is `8px` in MMDS vs. `12px` in the mobile version.
+
+### ListItem Component
+
+The ListItem component in `@metamask/design-system-react-native` is a near-identical replacement for the mobile `component-library` ListItem. The props API is preserved; the main changes are the import path, enum naming (ADR-0003), styling system (TWRNC/Box instead of `useStyles`/`StyleSheet`), and a new `twClassName` prop.
+
+> **Note:** The mobile `component-library` also provides `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` sub-components that build on `ListItem`. These sub-components do **not** yet have equivalents in `@metamask/design-system-react-native`. If your code uses them, you cannot fully migrate until they are added to the design system. See [Sub-components Not Yet Migrated](#sub-components-not-yet-migrated) for details.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                  | Design System Migration                                                            |
+| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `import ListItem from '.../component-library/components/List/ListItem'`                         | `import { ListItem } from '@metamask/design-system-react-native'`                  |
+| `import { VerticalAlignment } from '.../component-library/components/List/ListItem'`            | `import { ListItemVerticalAlignment } from '@metamask/design-system-react-native'` |
+| `import { ListItemProps } from '.../component-library/components/List/ListItem/ListItem.types'` | `import type { ListItemProps } from '@metamask/design-system-react-native'`        |
+
+The mobile component uses a **default export**; the design system uses a **named export**.
+
+##### VerticalAlignment Enum Renamed
+
+The enum is renamed from `VerticalAlignment` to `ListItemVerticalAlignment` and converted from a TypeScript `enum` to a const object (ADR-0003). Values change from PascalCase to lowercase.
+
+| Mobile Value                            | Design System Value                             | Notes          |
+| --------------------------------------- | ----------------------------------------------- | -------------- |
+| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | casing changed |
+| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | casing changed |
+| `VerticalAlignment.Bottom` (`'Bottom'`) | `ListItemVerticalAlignment.Bottom` (`'bottom'`) | casing changed |
+
+##### Accessibility Attributes on Root
+
+| Mobile Behavior                                          | Design System Behavior                                          |
+| -------------------------------------------------------- | --------------------------------------------------------------- |
+| Root `<View>` sets `accessible accessibilityRole="none"` | Root `<Box>` does not set these — inherits `ViewProps` defaults |
+
+If your tests or accessibility expectations rely on the root element having `accessible={true}` and `accessibilityRole="none"`, add these explicitly via props.
+
+#### Unchanged Props
+
+These props work identically in both versions — no migration needed:
+
+| Prop                 | Type               | Notes                                              |
+| -------------------- | ------------------ | -------------------------------------------------- |
+| `children`           | `ReactNode`        | Content displayed in the horizontal row            |
+| `topAccessory`       | `ReactNode`        | Content above the row                              |
+| `bottomAccessory`    | `ReactNode`        | Content below the row                              |
+| `topAccessoryGap`    | `number`           | Gap between topAccessory and row (default: `0`)    |
+| `bottomAccessoryGap` | `number`           | Gap between row and bottomAccessory (default: `0`) |
+| `gap`                | `number \| string` | Gap between children in the row (default: `16`)    |
+| `style`              | `ViewStyle`        | Custom styles on the root element                  |
+| All `ViewProps`      | Various            | `testID`, `accessibilityLabel`, etc.               |
+
+#### New Props (Design System Only)
+
+| Prop          | Type     | Description                                             |
+| ------------- | -------- | ------------------------------------------------------- |
+| `twClassName` | `string` | Tailwind CSS classes merged into the root element style |
+
+#### Styling Differences
+
+| Concern        | Mobile                                 | Design System                                |
+| -------------- | -------------------------------------- | -------------------------------------------- |
+| Styling system | `useStyles` hook + `StyleSheet.create` | `useTailwind()` + `Box` component            |
+| Root element   | Raw `<View>`                           | `<Box>` with `p-4` Tailwind class            |
+| Inner row      | `<View style={styles.item}>`           | `<Box flexDirection="row" alignItems={...}>` |
+| Padding        | `16px` via StyleSheet                  | `p-4` (16px, identical)                      |
+
+The visual output is identical — the structural change from `View` to `Box` is transparent to consumers.
+
+#### Migration Examples
+
+##### Basic ListItem
+
+Before (Mobile):
+
+```tsx
+import ListItem from '../../../component-library/components/List/ListItem';
+
+<ListItem>
+  <AvatarFavicon />
+  <Text>Network Name</Text>
+</ListItem>;
+```
+
+After (Design System):
+
+```tsx
+import { ListItem } from '@metamask/design-system-react-native';
+
+<ListItem>
+  <AvatarFavicon />
+  <Text>Network Name</Text>
+</ListItem>;
+```
+
+##### ListItem with VerticalAlignment
+
+Before (Mobile):
+
+```tsx
+import ListItem, {
+  VerticalAlignment,
+} from '../../../component-library/components/List/ListItem';
+
+<ListItem verticalAlignment={VerticalAlignment.Top} gap={8}>
+  <AvatarFavicon />
+  <View>
+    <Text>Title</Text>
+    <Text>Description</Text>
+  </View>
+</ListItem>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ListItem,
+  ListItemVerticalAlignment,
+} from '@metamask/design-system-react-native';
+
+<ListItem verticalAlignment={ListItemVerticalAlignment.Top} gap={8}>
+  <AvatarFavicon />
+  <View>
+    <Text>Title</Text>
+    <Text>Description</Text>
+  </View>
+</ListItem>;
+```
+
+##### ListItem with Accessories
+
+Before (Mobile):
+
+```tsx
+import ListItem from '../../../component-library/components/List/ListItem';
+
+<ListItem
+  topAccessory={<Text>Section Header</Text>}
+  topAccessoryGap={8}
+  bottomAccessory={<Text>Section Footer</Text>}
+  bottomAccessoryGap={4}
+>
+  <AvatarFavicon />
+  <Text>Label</Text>
+</ListItem>;
+```
+
+After (Design System):
+
+```tsx
+import { ListItem } from '@metamask/design-system-react-native';
+
+<ListItem
+  topAccessory={<Text>Section Header</Text>}
+  topAccessoryGap={8}
+  bottomAccessory={<Text>Section Footer</Text>}
+  bottomAccessoryGap={4}
+>
+  <AvatarFavicon />
+  <Text>Label</Text>
+</ListItem>;
+```
+
+##### ListItem with Type Import
+
+Before (Mobile):
+
+```tsx
+import ListItem from '../../../component-library/components/List/ListItem';
+import { ListItemProps } from '../../../component-library/components/List/ListItem/ListItem.types';
+
+const MyListItem: React.FC<ListItemProps> = (props) => (
+  <ListItem {...props} gap={8} />
+);
+```
+
+After (Design System):
+
+```tsx
+import { ListItem } from '@metamask/design-system-react-native';
+import type { ListItemProps } from '@metamask/design-system-react-native';
+
+const MyListItem: React.FC<ListItemProps> = (props) => (
+  <ListItem {...props} gap={8} />
+);
+```
+
+#### Sub-components Not Yet Migrated
+
+The following mobile `component-library` sub-components build on `ListItem` but do **not** have equivalents in `@metamask/design-system-react-native` yet. Files using these components cannot be fully migrated until they are added.
+
+| Sub-component         | Description                                             | Usage Count                         |
+| --------------------- | ------------------------------------------------------- | ----------------------------------- |
+| `ListItemColumn`      | Column wrapper with `WidthType.Auto` / `WidthType.Fill` | Used internally by other components |
+| `ListItemSelect`      | Single-select list item with selection underlay         | ~27 files across the codebase       |
+| `ListItemMultiSelect` | Multi-select list item with checkbox                    | ~2 files across the codebase        |
+
+#### Migration Scope by Team
+
+| Team                              | Files   | Components Used                                                   |
+| --------------------------------- | ------- | ----------------------------------------------------------------- |
+| @MetaMask/design-system-engineers | 9       | ListItem, ListItemSelect, ListItemMultiSelect (internal wrappers) |
+| @MetaMask/money-movement          | 31      | ListItem (14), ListItemSelect (17)                                |
+| @MetaMask/card                    | 4       | ListItem (1), ListItemSelect (3)                                  |
+| @MetaMask/perps                   | 3       | ListItem (3)                                                      |
+| @MetaMask/metamask-assets         | 2       | ListItemSelect (1), ListItemMultiSelect (1)                       |
+| @MetaMask/mobile-core-ux          | 3       | ListItemSelect (1), legacy Base/ListItem (2)                      |
+| @MetaMask/rewards                 | 2       | ListItemSelect (2)                                                |
+| Unowned                           | 4       | ListItem (1), ListItemSelect (1), other (2)                       |
+| **Total**                         | **~58** |                                                                   |
+
+#### API Differences
+
+- MMDS `ListItem` adds `twClassName` for Tailwind-based style overrides.
+- The mobile `VerticalAlignment` enum is renamed to `ListItemVerticalAlignment` with lowercase values (`'top'`/`'center'`/`'bottom'` instead of `'Top'`/`'Center'`/`'Bottom'`).
+- The mobile version sets `accessible accessibilityRole="none"` on the root element; MMDS does not.
+- The mobile version uses a default export; MMDS uses a named export.
+- `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.
 
 ## Version Updates
 
