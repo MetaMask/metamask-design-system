@@ -9,17 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.2]
 
-### Uncategorized
+### Changed
 
-- chore: upgrade React Native v76.9 and Storybook v10 and align deps with MetaMask Mobile ([#844](https://github.com/MetaMask/metamask-design-system/pull/844))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.0.0 to 6.1.0 ([#1079](https://github.com/MetaMask/metamask-design-system/pull/1079))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.3.2 to 6.0.0 ([#1077](https://github.com/MetaMask/metamask-design-system/pull/1077))
+- Expanded the `react` peer dependency range to `>=18.2.0`, allowing the preset to install alongside newer React Native 0.76 and React 19 app stacks. ([#844](https://github.com/MetaMask/metamask-design-system/pull/844))
 
 ## [0.4.1]
 
 ### Fixed
 
-- Fixed typography class generation so custom font family mappings are no longer combined with forced `fontWeight` values, preventing incorrect or fallback font rendering in React Native apps that supply custom font families. ([#1037](https://github.com/MetaMask/metamask-design-system/pull/1037))
+- Fixed typography class generation so custom font family mappings are no longer combined with forced `fontWeight` values, preventing incorrect or fallback font rendering in React Native apps that supply custom font families ([#1037](https://github.com/MetaMask/metamask-design-system/pull/1037))
 
 ## [0.4.0]
 
