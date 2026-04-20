@@ -115,6 +115,7 @@ const getStories = () => {
     "./../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextButton/TextButton.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TextField/TextField.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextField/TextField.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TextFieldSearch/TextFieldSearch.stories.tsx": require("../../../packages/design-system-react-native/src/components/TextFieldSearch/TextFieldSearch.stories.tsx"),
+    "./../../packages/design-system-react-native/src/components/TitleHub/TitleHub.stories.tsx": require("../../../packages/design-system-react-native/src/components/TitleHub/TitleHub.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/TitleSubpage/TitleSubpage.stories.tsx": require("../../../packages/design-system-react-native/src/components/TitleSubpage/TitleSubpage.stories.tsx"),
     "./../../packages/design-system-react-native/src/components/Toast/Toast.stories.tsx": require("../../../packages/design-system-react-native/src/components/Toast/Toast.stories.tsx"),
     "./stories/Backgrounds.stories.tsx": require("../stories/Backgrounds.stories.tsx"),

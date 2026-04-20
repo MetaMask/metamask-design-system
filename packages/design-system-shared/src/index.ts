@@ -35,6 +35,9 @@ export { type BannerBasePropsShared } from './types/BannerBase';
 // TextOrChildren types (ADR-0004)
 export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
 
+// TitleHub types (ADR-0004)
+export { type TitleHubPropsShared } from './types/TitleHub';
+
 // TitleSubpage types (ADR-0004)
 export { type TitleSubpagePropsShared } from './types/TitleSubpage';
 

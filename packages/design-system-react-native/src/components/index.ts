@@ -204,6 +204,9 @@ export type { TextFieldSearchProps } from './TextFieldSearch';
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 
+export { TitleHub } from './TitleHub';
+export type { TitleHubProps, TitleHubPropsShared } from './TitleHub';
+
 export { TitleSubpage } from './TitleSubpage';
 export type { TitleSubpageProps } from './TitleSubpage';
 
