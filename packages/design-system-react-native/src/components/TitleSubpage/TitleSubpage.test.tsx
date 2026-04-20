@@ -53,7 +53,7 @@ describe('TitleSubpage', () => {
       );
 
       expect(getByTestId(TITLE_AVATAR_SLOT_TEST_ID)).toHaveStyle(
-        tw`h-10 w-10 overflow-hidden items-center justify-center`,
+        tw`size-10 items-center justify-center overflow-hidden`,
       );
     });
 

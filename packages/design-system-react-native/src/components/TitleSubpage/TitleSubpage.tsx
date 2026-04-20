@@ -7,9 +7,9 @@ import {
 import React from 'react';
 
 // Internal dependencies.
+import { BoxAlignItems, BoxJustifyContent } from '../../types';
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
-import { BoxAlignItems, BoxJustifyContent } from '../../types';
 
 import type { TitleSubpageProps } from './TitleSubpage.types';
 
@@ -72,7 +72,7 @@ export const TitleSubpage: React.FC<TitleSubpageProps> = ({
             testID="title-subpage-title-avatar-slot"
             alignItems={BoxAlignItems.Center}
             justifyContent={BoxJustifyContent.Center}
-            twClassName="h-10 w-10 overflow-hidden"
+            twClassName="size-10 overflow-hidden"
           >
             {titleAvatar}
           </Box>
