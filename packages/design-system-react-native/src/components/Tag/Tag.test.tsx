@@ -34,12 +34,6 @@ describe('Tag', () => {
 
       expect(getByText('From string')).toBeOnTheScreen();
     });
-
-    it('renders number children with tag text styling', () => {
-      const { getByText } = render(<Tag>{42}</Tag>);
-
-      expect(getByText('42')).toBeOnTheScreen();
-    });
   });
 
   describe('twClassName', () => {

@@ -77,7 +77,7 @@ export const Tag: React.FC<TagProps> = ({
           );
         })()}
       >
-        {typeof children === 'number' ? String(children) : children}
+        {children}
       </BoxRow>
     </Box>
   );

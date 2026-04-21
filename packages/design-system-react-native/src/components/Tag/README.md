@@ -14,7 +14,7 @@ import { Tag } from '@metamask/design-system-react-native';
 
 ### `severity`
 
-Semantic emphasis for background, string/number child text color, and icons. Values use `TagSeverity` from `@metamask/design-system-shared` (same pattern as `BannerAlert` / `IconAlert`).
+Semantic emphasis for background, string child text color, and icons. Values use `TagSeverity` from `@metamask/design-system-shared` (same pattern as `BannerAlert` / `IconAlert`).
 
 Available values:
 
@@ -38,7 +38,7 @@ import { TagSeverity } from '@metamask/design-system-shared';
 
 ### `children`
 
-Main content. String and number children are rendered with design-system `Text` (`BodyXs`, medium weight, severity-based color). Other React nodes are rendered as-is (use your own `Text` or layout inside when needed).
+Main content. String children are rendered with design-system `Text` (`BodyXs`, medium weight, severity-based color). Other React nodes are rendered as-is (use your own `Text` or layout inside when needed).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -151,7 +151,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 
 ## Accessibility
 
-- String and number `children` are rendered with design-system typography inside the layout row, so assistive technologies can treat visible label text like normal copy. Prefer clear, concise labels; do not rely on color or icons alone to convey meaning.
+- String `children` are rendered with design-system typography inside the layout row, so assistive technologies can treat visible label text like normal copy. Prefer clear, concise labels; do not rely on color or icons alone to convey meaning.
 - Icons are decorative unless your app assigns accessibility labels on the underlying `Icon` via `startIconProps` / `endIconProps` when needed.
 - `testID` is intended for automated tests only; it does not replace accessible names for users.
 

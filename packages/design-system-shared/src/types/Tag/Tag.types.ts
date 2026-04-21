@@ -20,14 +20,14 @@ export type TagSeverity = (typeof TagSeverity)[keyof typeof TagSeverity];
  */
 export type TagPropsShared = {
   /**
-   * Semantic severity (background, default text color for string/number children, and icon tint).
+   * Semantic severity (background, default text color for string children, and icon tint).
    * Aligns with `BannerAlert` and `IconAlert`, which use `severity` for the same class of states.
    *
    * @default TagSeverity.Neutral
    */
   severity?: TagSeverity;
   /**
-   * Content inside the tag. String and number children are wrapped in design-system `Text` with tag typography; other nodes render unchanged.
+   * Content inside the tag. String children are wrapped in design-system `Text` with tag typography; other nodes render unchanged.
    */
   children?: ReactNode;
   /**
