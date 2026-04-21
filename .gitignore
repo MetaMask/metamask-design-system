@@ -42,10 +42,17 @@ apps/*/*.tsbuildinfo
 # Storybook build output
 storybook-static
 
+# Auto-generated storybook requires
+apps/storybook-react-native/.rnstorybook/storybook.requires.*
+
 #Expo
 .expo
 dist/
 web-build/
+
+# Expo development builds
+apps/*/ios/
+apps/*/android/
 
 # Native
 *.orig.*

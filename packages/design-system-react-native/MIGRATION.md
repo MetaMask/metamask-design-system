@@ -7,7 +7,10 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
   - [ButtonBase Component](#buttonbase-component)
+  - [ButtonFilter Component](#buttonfilter-component)
   - [ButtonHero Component](#buttonhero-component)
+  - [ButtonIcon Component](#buttonicon-component)
+  - [TextButton Component (ButtonLink)](#textbutton-component-buttonlink)
   - [BottomSheet Component](#bottomsheet-component)
   - [BottomSheetHeader Component](#bottomsheetheader-component)
   - [BottomSheetFooter Component](#bottomsheetfooter-component)
@@ -17,6 +20,8 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [TextField Component](#textfield-component)
+  - [ListItem Component](#listitem-component)
 - [Version Updates](#version-updates)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -73,6 +78,26 @@ The intermediate `Box` wrapper around the `BoxRow` in the left section has been 
 **Impact:**
 
 No changes to visual appearance or API.
+
+#### Icon: prop types now align with SVG usage
+
+**What Changed:**
+
+- `IconProps` now extends `Omit<SvgProps, 'color' | 'name'>` instead of `ViewProps`.
+
+**Migration:**
+
+If TypeScript now flags props you were previously passing to `Icon`, those props were `View`-specific and are no longer part of the `Icon` public type. Move those props to a wrapper `View` and keep SVG-compatible props on `Icon`.
+
+```tsx
+// Before
+<Icon name={IconName.Lock} onLayout={handleLayout} />
+
+// After
+<View onLayout={handleLayout}>
+  <Icon name={IconName.Lock} />
+</View>
+```
 
 ---
 
@@ -721,6 +746,86 @@ import { IconName } from '@metamask/design-system-react-native';
 </ButtonBase>;
 ```
 
+### ButtonFilter Component
+
+The `ButtonFilter` component is a filter-chip style button that toggles between active/inactive visual states. The legacy version in `components-temp` already wraps `ButtonBase` from `@metamask/design-system-react-native`, so the migration is primarily an import change.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                  | Design System Migration                                               |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `import ButtonFilter from '.../component-library/components-temp/ButtonFilter'` | `import { ButtonFilter } from '@metamask/design-system-react-native'` |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**.
+
+##### `textClassName` → `textProps.twClassName`
+
+The legacy `ButtonFilter` accepted `textClassName` as a pressed-state-aware function `(pressed: boolean) => string`. The design system version removes `textClassName` from the prop surface entirely and manages text styling internally based on `isActive`. If you need text overrides, use `textProps.twClassName` instead.
+
+| Mobile Pattern                                | Design System Migration                       |
+| --------------------------------------------- | --------------------------------------------- |
+| `textClassName={(pressed) => 'text-default'}` | Remove — handled automatically by `isActive`  |
+| Custom text class overrides                   | `textProps={{ twClassName: 'custom-class' }}` |
+
+##### `twClassName` Type Change
+
+The legacy version inherited `twClassName` as `string | ((pressed: boolean) => string)` from `ButtonBaseProps`. The design system `ButtonFilter` narrows `twClassName` to `string` only (no pressed-state function).
+
+| Mobile Pattern                                       | Design System Migration                                       |
+| ---------------------------------------------------- | ------------------------------------------------------------- |
+| `twClassName="mt-2"`                                 | `twClassName="mt-2"` (unchanged)                              |
+| `twClassName={(pressed) => pressed ? '...' : '...'}` | Remove — pressed styling is handled internally via `isActive` |
+
+##### Props (Unchanged)
+
+These props work identically in both versions:
+
+- `isActive` — toggles between active (`bg-icon-default` + `text-icon-inverse`) and inactive (`bg-background-muted` + `text-default`) states
+- `children`, `size`, `isFullWidth`, `isDisabled`, `onPress`, `style`, `testID`
+- `accessibilityLabel`, `accessibilityRole`
+
+#### Migration Examples
+
+##### Filter button group
+
+Before (Mobile):
+
+```tsx
+import ButtonFilter from '../../../component-library/components-temp/ButtonFilter';
+import { ButtonSize } from '@metamask/design-system-react-native';
+
+<ButtonFilter
+  onPress={() => setFilter('ALL')}
+  isActive={filter === 'ALL'}
+  size={ButtonSize.Md}
+  accessibilityLabel="All"
+>
+  All
+</ButtonFilter>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonFilter,
+  ButtonBaseSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonFilter
+  onPress={() => setFilter('ALL')}
+  isActive={filter === 'ALL'}
+  size={ButtonBaseSize.Md}
+  accessibilityLabel="All"
+>
+  All
+</ButtonFilter>;
+```
+
+Note: `ButtonFilter` inherits its size prop from `ButtonBaseProps`. Use `ButtonBaseSize` (or the `ButtonSize` alias).
+
 ### ButtonHero Component
 
 The `ButtonHero` component is a branded, light-theme-locked button for high-impact actions (swaps, claims, rewards). The legacy version in `components-temp` already wraps `ButtonBase` from `@metamask/design-system-react-native`, so the migration is primarily an import change with a few behavioral differences.
@@ -827,6 +932,255 @@ import {
 ```
 
 `bg-primary-default` is the hero default and `w-full` maps to `isFullWidth`. Both `twClassName` overrides are no longer needed.
+
+### ButtonIcon Component
+
+The `ButtonIcon` component is a compact, icon-only button. The design system version has significant API differences from the mobile component-library version.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                 | Design System Migration                                                      |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| `import ButtonIcon from '.../component-library/components/Buttons/ButtonIcon'` | `import { ButtonIcon } from '@metamask/design-system-react-native'`          |
+| `import { ButtonIconSizes } from '.../ButtonIcon/ButtonIcon.types'`            | `import { ButtonIconSize } from '@metamask/design-system-react-native'`      |
+| `import { IconColor, IconName } from '.../Icons/Icon/Icon.types'`              | `import { IconColor, IconName } from '@metamask/design-system-react-native'` |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**.
+
+##### Size Enum
+
+The enum is renamed from `ButtonIconSizes` to `ButtonIconSize`, and values change from pixel strings to lowercase identifiers. **The pixel dimensions also differ for Md and Lg.**
+
+| Mobile Value                  | Mobile Pixels | Design System Value          | DS Pixels | Notes          |
+| ----------------------------- | ------------- | ---------------------------- | --------- | -------------- |
+| `ButtonIconSizes.Sm` (`'24'`) | 24px          | `ButtonIconSize.Sm` (`'sm'`) | 24px      | same dimension |
+| `ButtonIconSizes.Md` (`'28'`) | 28px          | `ButtonIconSize.Md` (`'md'`) | 32px      | larger in DS   |
+| `ButtonIconSizes.Lg` (`'32'`) | 32px          | `ButtonIconSize.Lg` (`'lg'`) | 40px      | larger in DS   |
+
+Review layouts when migrating Md/Lg sizes — the buttons will be slightly larger.
+
+> [!NOTE]
+> The default size (`Md`) grows from `28px` to `32px`, so even call sites that omit the `size` prop will render larger.
+
+##### `iconColor` → `iconProps.color`
+
+The legacy `ButtonIcon` accepted a top-level `iconColor` prop. The design system version removes this and uses `iconProps` instead.
+
+| Mobile Pattern                  | Design System Migration                                                  |
+| ------------------------------- | ------------------------------------------------------------------------ |
+| `iconColor={IconColor.Default}` | Remove — default is handled automatically                                |
+| `iconColor={IconColor.Success}` | `iconProps={{ color: IconColor.SuccessDefault }}`                        |
+| `iconColor="string-color"`      | `iconProps={{ color: IconColor.* }}` (map to the closest semantic token) |
+
+##### IconColor Enum Values Changed
+
+The legacy `IconColor` used PascalCase names (`Default`, `Success`). The design system uses semantic names:
+
+| Mobile Value        | Design System Value        |
+| ------------------- | -------------------------- |
+| `IconColor.Default` | `IconColor.IconDefault`    |
+| `IconColor.Success` | `IconColor.SuccessDefault` |
+| `IconColor.Primary` | `IconColor.PrimaryDefault` |
+| `IconColor.Error`   | `IconColor.ErrorDefault`   |
+
+##### New: `variant` Prop
+
+The design system `ButtonIcon` adds a `variant` prop for visual styles:
+
+- `ButtonIconVariant.Default` — transparent background, default icon color (default)
+- `ButtonIconVariant.Filled` — muted background with rounded corners and pressed state
+- `ButtonIconVariant.Floating` — colored background with inverse icon color
+
+##### Base Type Change
+
+The legacy component extends `TouchableOpacityProps`. The design system extends `ButtonAnimatedProps` (wraps `Pressable`). Most interaction props (`onPress`, `onPressIn`, `onPressOut`, `disabled`, `testID`, `accessibilityLabel`) carry over.
+
+#### Migration Examples
+
+##### Icon button with color override
+
+Before (Mobile):
+
+```tsx
+import ButtonIcon from '../../../component-library/components/Buttons/ButtonIcon';
+import { ButtonIconSizes } from '../../../component-library/components/Buttons/ButtonIcon/ButtonIcon.types';
+import {
+  IconColor,
+  IconName,
+} from '../../../component-library/components/Icons/Icon/Icon.types';
+
+<ButtonIcon
+  iconName={isCopied ? IconName.CopySuccess : IconName.Copy}
+  size={ButtonIconSizes.Md}
+  onPress={handleCopy}
+  isDisabled={!value}
+  iconColor={isCopied ? IconColor.Success : undefined}
+  testID="copy-button"
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonIcon,
+  ButtonIconSize,
+  IconColor,
+  IconName,
+} from '@metamask/design-system-react-native';
+
+<ButtonIcon
+  iconName={isCopied ? IconName.CopySuccess : IconName.Copy}
+  size={ButtonIconSize.Md}
+  onPress={handleCopy}
+  isDisabled={!value}
+  iconProps={isCopied ? { color: IconColor.SuccessDefault } : undefined}
+  testID="copy-button"
+/>;
+```
+
+##### Simple icon button (default color)
+
+Before (Mobile):
+
+```tsx
+<ButtonIcon
+  iconName={IconName.Close}
+  size={ButtonIconSizes.Sm}
+  onPress={handleClose}
+/>
+```
+
+After (Design System):
+
+```tsx
+<ButtonIcon
+  iconName={IconName.Close}
+  size={ButtonIconSize.Sm}
+  onPress={handleClose}
+/>
+```
+
+### TextButton Component (ButtonLink)
+
+The legacy `ButtonLink` component is replaced by **two** design system components depending on the use case:
+
+- **`TextButton`** — for inline links within text flows (the primary replacement)
+- **`Button` with `variant={ButtonVariant.Tertiary}`** — for standalone link-style buttons with icons, full width, or other button-like affordances
+
+`TextButton` is a `Text`-based component (not a `Pressable`/`TouchableOpacity`). It only renders text — no icons, no size variants, no width control.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                 | Design System Migration                                             |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `import ButtonLink from '.../component-library/components/Buttons/Button/variants/ButtonLink'` | `import { TextButton } from '@metamask/design-system-react-native'` |
+
+##### Content Model: `label` → `children`
+
+| Mobile Pattern                      | Design System Migration               |
+| ----------------------------------- | ------------------------------------- |
+| `<ButtonLink label="Learn more" />` | `<TextButton>Learn more</TextButton>` |
+| `<ButtonLink label={variable} />`   | `<TextButton>{variable}</TextButton>` |
+
+##### Size Removed
+
+The legacy `ButtonLink` inherited `ButtonSize` with a default of `ButtonSize.Auto`. The design system `TextButton` has no `size` prop — control typography via the `variant` prop instead.
+
+| Mobile Pattern           | Design System Migration                  |
+| ------------------------ | ---------------------------------------- |
+| `size={ButtonSize.Auto}` | Remove — default behavior                |
+| `size={ButtonSize.Lg}`   | `variant={TextVariant.BodyLg}`           |
+| `size={ButtonSize.Sm}`   | `variant={TextVariant.BodySm}`           |
+| `size={ButtonSize.Md}`   | `variant={TextVariant.BodyMd}` (default) |
+
+##### `isDanger` Removed
+
+The legacy `ButtonLink` supported `isDanger` for error-colored text. `TextButton` does not have this prop — it always uses primary color. For error-state links, use `Button` with `variant={ButtonVariant.Tertiary}` and `isDanger`.
+
+##### `labelTextVariant` → `variant`
+
+| Mobile Pattern                                | Design System Migration                                           |
+| --------------------------------------------- | ----------------------------------------------------------------- |
+| `labelTextVariant={TextVariant.BodyMDMedium}` | `variant={TextVariant.BodyMd}` + `fontWeight={FontWeight.Medium}` |
+
+##### `onPress` Signature
+
+All press props (`onPress`, `onPressIn`, `onPressOut`) keep the same `GestureResponderEvent` type. The behavioral difference is that the legacy non-auto `ButtonBase` (`TouchableOpacity`) provided animated press feedback and handled `isDisabled`, whereas `TextButton` uses `Text` press handling throughout.
+
+##### Removed Props
+
+| Mobile Prop                     | Design System Migration                                           |
+| ------------------------------- | ----------------------------------------------------------------- |
+| `isDanger`                      | Use `Button` with `variant={ButtonVariant.Tertiary}` + `isDanger` |
+| `startIconName` / `endIconName` | Use `Button` with `variant={ButtonVariant.Tertiary}`              |
+| `width` / `isFullWidth`         | Use `Button` with `variant={ButtonVariant.Tertiary}`              |
+| `isDisabled`                    | Not available on `TextButton` — use `Button` if needed            |
+
+#### Migration Examples
+
+##### Inline "show more" link
+
+Before (Mobile):
+
+```tsx
+import ButtonLink from '../../../../component-library/components/Buttons/Button/variants/ButtonLink';
+
+<ButtonLink
+  onPress={toggleContent}
+  label={isExpanded ? 'Show less' : 'Show more'}
+/>;
+```
+
+After (Design System):
+
+```tsx
+import { TextButton } from '@metamask/design-system-react-native';
+
+<TextButton onPress={toggleContent}>
+  {isExpanded ? 'Show less' : 'Show more'}
+</TextButton>;
+```
+
+##### Link variant in a Button group → Tertiary Button
+
+Before (Mobile):
+
+```tsx
+import Button, {
+  ButtonVariants,
+  ButtonSize,
+} from '../../../../component-library/components/Buttons/Button';
+
+<Button
+  variant={ButtonVariants.Link}
+  size={ButtonSize.Lg}
+  label={strings('button.learn_more')}
+  onPress={handleLearnMore}
+/>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  Button,
+  ButtonVariant,
+  ButtonSize,
+} from '@metamask/design-system-react-native';
+
+<Button
+  variant={ButtonVariant.Tertiary}
+  size={ButtonSize.Lg}
+  onPress={handleLearnMore}
+>
+  {strings('button.learn_more')}
+</Button>;
+```
 
 ### BottomSheet Component
 
@@ -1684,6 +2038,425 @@ import { Checkbox } from '@metamask/design-system-react-native';
 - MMDS `Checkbox` adds `twClassName` and `style` on the outer `Pressable`, plus `checkboxContainerProps` and `checkedIconProps` for targeted customization.
 - Mobile legacy `Checkbox` forwarded `TouchableOpacityProps`; MMDS forwards `PressableProps`.
 - Imperative `ref.toggle()` remains available in MMDS.
+
+### TextField Component
+
+The TextField component in `@metamask/design-system-react-native` is a near-identical replacement for the mobile `component-library` TextField. The core props API is preserved; the main changes are the import path, styling system (TWRNC instead of `useStyles`), and two new customization props.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                     | Design System Migration                                                      |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `import TextField from '.../component-library/components/Form/TextField'`                          | `import { TextField } from '@metamask/design-system-react-native'`           |
+| `import TextField from '.../component-library/components/Form/TextField/TextField'`                | `import { TextField } from '@metamask/design-system-react-native'`           |
+| `import { TextFieldProps } from '.../component-library/components/Form/TextField/TextField.types'` | `import type { TextFieldProps } from '@metamask/design-system-react-native'` |
+
+The mobile component uses a **default export**; the design system uses a **named export**.
+
+##### `testID` Target Changed
+
+| Mobile Behavior                                              | Design System Behavior                                |
+| ------------------------------------------------------------ | ----------------------------------------------------- |
+| `testID` is forwarded to the inner `Input` (the `TextInput`) | `testID` is applied to the root `Pressable` container |
+
+If your tests rely on `testID` to query the native `TextInput` (e.g. for `fireEvent.changeText`), you may need to adjust your test selectors. The inner `Input` in the design system component does not receive a separate `testID` by default.
+
+##### Accessory Wrapper Removed
+
+| Mobile Behavior                                                                                                                                       | Design System Behavior                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `startAccessory` and `endAccessory` are each wrapped in a `<View>` with a dedicated `testID` (`textfield-startacccessory`, `textfield-endacccessory`) | Accessories are rendered directly as children of the `Pressable` — no wrapper `<View>`, no dedicated `testID` |
+
+If your tests query `textfield-startacccessory` or `textfield-endacccessory`, set `testID` on the accessory element itself:
+
+```tsx
+// Before (Mobile)
+<TextField startAccessory={<Icon name={IconName.Search} />} />
+// Test: getByTestId('textfield-startacccessory')
+
+// After (Design System)
+<TextField startAccessory={<Icon name={IconName.Search} testID="search-icon" />} />
+// Test: getByTestId('search-icon')
+```
+
+##### `style` Prop Type Changed
+
+| Mobile Behavior                                                              | Design System Behavior                                                                                 |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `style` is passed into `useStyles` and merged into the container style sheet | `style` is typed as `StyleProp<ViewStyle>` and applied as an array alongside the TWRNC container style |
+
+Most inline `style` overrides will continue to work. However, if you were relying on the old `useStyles` merge behavior (where `style` could influence border, background, or other sheet-level vars), verify that the override still applies correctly.
+
+##### Accessibility: `accessible={false}` on Container
+
+The design system TextField sets `accessible={false}` on the root `Pressable`. The mobile version does not set this. This means the container itself is not announced as an accessible element — only the inner `TextInput` is. This is generally the correct behavior but may affect custom accessibility setups.
+
+#### Unchanged Props
+
+These props work identically in both versions — no migration needed:
+
+| Prop                 | Type                     | Notes                                     |
+| -------------------- | ------------------------ | ----------------------------------------- |
+| `value`              | `string`                 | Controlled input value                    |
+| `placeholder`        | `string`                 | Placeholder text                          |
+| `onChangeText`       | `(text: string) => void` | Text change handler                       |
+| `onFocus`            | `(e) => void`            | Focus handler (skipped when disabled)     |
+| `onBlur`             | `(e) => void`            | Blur handler (skipped when disabled)      |
+| `isError`            | `boolean`                | Error border state                        |
+| `isDisabled`         | `boolean`                | Disabled state (opacity + no interaction) |
+| `isReadonly`         | `boolean`                | Read-only state                           |
+| `autoFocus`          | `boolean`                | Auto-focus on mount                       |
+| `startAccessory`     | `ReactNode`              | Content before the input                  |
+| `endAccessory`       | `ReactNode`              | Content after the input                   |
+| `inputElement`       | `ReactNode`              | Custom input replacement                  |
+| `ref`                | `Ref<TextInput>`         | Forwarded to inner TextInput              |
+| `numberOfLines`      | Forced to `1`            | Single-line enforced                      |
+| `multiline`          | Forced to `false`        | Single-line enforced                      |
+| All `TextInputProps` | Various                  | Spread to inner Input                     |
+
+#### New Props (Design System Only)
+
+| Prop          | Type                   | Description                                                |
+| ------------- | ---------------------- | ---------------------------------------------------------- |
+| `twClassName` | `string`               | TWRNC utility classes merged into the container style      |
+| `style`       | `StyleProp<ViewStyle>` | React Native style applied to the container (array-merged) |
+
+#### Styling Differences
+
+The design system TextField uses TWRNC (Tailwind React Native CSS) instead of the `useStyles`/`StyleSheet` approach:
+
+| Concern            | Mobile                                 | Design System                  |
+| ------------------ | -------------------------------------- | ------------------------------ |
+| Styling system     | `useStyles` hook + `StyleSheet.create` | `useTailwind()` + `tw.style()` |
+| Border radius      | `12px`                                 | `8px` (`rounded-lg`)           |
+| Background         | `theme.colors.background.muted`        | `bg-muted` (equivalent token)  |
+| Disabled opacity   | `0.5`                                  | `0.5` (identical)              |
+| Height             | `48px`                                 | `48px` (identical)             |
+| Horizontal padding | `16px`                                 | `16px` (`px-4`, identical)     |
+| Accessory gap      | `marginRight/Left: 12`                 | `gap-3` (12px, identical)      |
+
+The `border-radius` change from `12px` to `8px` is the most visible visual difference.
+
+#### Migration Examples
+
+##### Basic TextField
+
+Before (Mobile):
+
+```tsx
+import TextField from '../../../component-library/components/Form/TextField';
+
+<TextField
+  value={name}
+  onChangeText={setName}
+  placeholder="Enter name"
+  testID="name-input"
+/>;
+```
+
+After (Design System):
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField
+  value={name}
+  onChangeText={setName}
+  placeholder="Enter name"
+  testID="name-input"
+/>;
+```
+
+##### TextField with Accessories and Error
+
+Before (Mobile):
+
+```tsx
+import TextField from '../../../component-library/components/Form/TextField';
+
+<TextField
+  ref={inputRef}
+  value={url}
+  onChangeText={setUrl}
+  placeholder="https://example.com"
+  isError={hasError}
+  autoCapitalize="none"
+  autoCorrect={false}
+  startAccessory={<Icon name={IconName.Link} />}
+  endAccessory={<Icon name={IconName.Close} onPress={handleClear} />}
+/>;
+```
+
+After (Design System):
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField
+  ref={inputRef}
+  value={url}
+  onChangeText={setUrl}
+  placeholder="https://example.com"
+  isError={hasError}
+  autoCapitalize="none"
+  autoCorrect={false}
+  startAccessory={<Icon name={IconName.Link} />}
+  endAccessory={<Icon name={IconName.Close} onPress={handleClear} />}
+/>;
+```
+
+##### TextField with Type Import
+
+Before (Mobile):
+
+```tsx
+import TextField from '../../../component-library/components/Form/TextField';
+import { TextFieldProps } from '../../../component-library/components/Form/TextField/TextField.types';
+
+const MyInput: React.FC<TextFieldProps> = (props) => (
+  <TextField {...props} autoCapitalize="none" autoCorrect={false} />
+);
+```
+
+After (Design System):
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+import type { TextFieldProps } from '@metamask/design-system-react-native';
+
+const MyInput: React.FC<TextFieldProps> = (props) => (
+  <TextField {...props} autoCapitalize="none" autoCorrect={false} />
+);
+```
+
+#### API Differences
+
+- MMDS `TextField` adds `twClassName` for Tailwind-based style overrides and a `style` prop typed as `StyleProp<ViewStyle>`.
+- Mobile legacy `TextField` wrapped accessories in `<View>` elements with hardcoded `testID`s; MMDS renders accessories directly.
+- The `testID` prop targets the root `Pressable` in MMDS vs. the inner `TextInput` in the mobile version.
+- MMDS sets `accessible={false}` on the root `Pressable`; the mobile version does not.
+- Border radius is `8px` in MMDS vs. `12px` in the mobile version.
+
+### ListItem Component
+
+The ListItem component in `@metamask/design-system-react-native` is a near-identical replacement for the mobile `component-library` ListItem. The props API is largely preserved; the main changes are the import path, enum naming (ADR-0003), styling system (TWRNC/Box instead of `useStyles`/`StyleSheet`), and a new `twClassName` prop.
+
+> **Note:** The mobile `component-library` also provides `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` sub-components that build on `ListItem`. These sub-components do **not** yet have equivalents in `@metamask/design-system-react-native`. If your code uses them, you cannot fully migrate until they are added to the design system. See [Sub-components Not Yet Migrated](#sub-components-not-yet-migrated) for details.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                  | Design System Migration                                                            |
+| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `import ListItem from '.../component-library/components/List/ListItem'`                         | `import { ListItem } from '@metamask/design-system-react-native'`                  |
+| `import { VerticalAlignment } from '.../component-library/components/List/ListItem'`            | `import { ListItemVerticalAlignment } from '@metamask/design-system-react-native'` |
+| `import { ListItemProps } from '.../component-library/components/List/ListItem/ListItem.types'` | `import type { ListItemProps } from '@metamask/design-system-react-native'`        |
+
+The mobile component uses a **default export**; the design system uses a **named export**.
+
+##### VerticalAlignment Enum Renamed
+
+The enum is renamed from `VerticalAlignment` to `ListItemVerticalAlignment` and converted from a TypeScript `enum` to a const object (ADR-0003). Values change from PascalCase to lowercase.
+
+| Mobile Value                            | Design System Value                             | Notes          |
+| --------------------------------------- | ----------------------------------------------- | -------------- |
+| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | casing changed |
+| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | casing changed |
+| `VerticalAlignment.Bottom` (`'Bottom'`) | `ListItemVerticalAlignment.Bottom` (`'bottom'`) | casing changed |
+
+##### Accessibility Attributes on Root
+
+| Mobile Behavior                                          | Design System Behavior                                          |
+| -------------------------------------------------------- | --------------------------------------------------------------- |
+| Root `<View>` sets `accessible accessibilityRole="none"` | Root `<Box>` does not set these — inherits `ViewProps` defaults |
+
+If your tests or accessibility expectations rely on the root element having `accessible={true}` and `accessibilityRole="none"`, add these explicitly via props.
+
+#### Unchanged Props
+
+These props work identically in both versions — no migration needed:
+
+| Prop                 | Type                   | Notes                                              |
+| -------------------- | ---------------------- | -------------------------------------------------- |
+| `children`           | `ReactNode`            | Content displayed in the horizontal row            |
+| `topAccessory`       | `ReactNode`            | Content above the row                              |
+| `bottomAccessory`    | `ReactNode`            | Content below the row                              |
+| `topAccessoryGap`    | `number`               | Gap between topAccessory and row (default: `0`)    |
+| `bottomAccessoryGap` | `number`               | Gap between row and bottomAccessory (default: `0`) |
+| `gap`                | `number \| string`     | Gap between children in the row (default: `16`)    |
+| `style`              | `StyleProp<ViewStyle>` | Custom styles on the root element                  |
+| All `ViewProps`      | Various                | `testID`, `accessibilityLabel`, etc.               |
+
+#### New Props (Design System Only)
+
+| Prop          | Type     | Description                                             |
+| ------------- | -------- | ------------------------------------------------------- |
+| `twClassName` | `string` | Tailwind CSS classes merged into the root element style |
+
+#### Styling Differences
+
+| Concern        | Mobile                                 | Design System                                |
+| -------------- | -------------------------------------- | -------------------------------------------- |
+| Styling system | `useStyles` hook + `StyleSheet.create` | `useTailwind()` + `Box` component            |
+| Root element   | Raw `<View>`                           | `<Box>` with `p-4` Tailwind class            |
+| Inner row      | `<View style={styles.item}>`           | `<Box flexDirection="row" alignItems={...}>` |
+| Padding        | `16px` via StyleSheet                  | `p-4` (16px, identical)                      |
+
+The visual output is identical — the structural change from `View` to `Box` is transparent to consumers.
+
+#### Migration Examples
+
+##### Basic ListItem
+
+Before (Mobile):
+
+```tsx
+import ListItem from '../../../component-library/components/List/ListItem';
+
+<ListItem>
+  <AvatarFavicon />
+  <Text>Network Name</Text>
+</ListItem>;
+```
+
+After (Design System):
+
+```tsx
+import { ListItem } from '@metamask/design-system-react-native';
+
+<ListItem>
+  <AvatarFavicon />
+  <Text>Network Name</Text>
+</ListItem>;
+```
+
+##### ListItem with VerticalAlignment
+
+Before (Mobile):
+
+```tsx
+import ListItem, {
+  VerticalAlignment,
+} from '../../../component-library/components/List/ListItem';
+
+<ListItem verticalAlignment={VerticalAlignment.Top} gap={8}>
+  <AvatarFavicon />
+  <View>
+    <Text>Title</Text>
+    <Text>Description</Text>
+  </View>
+</ListItem>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  ListItem,
+  ListItemVerticalAlignment,
+} from '@metamask/design-system-react-native';
+
+<ListItem verticalAlignment={ListItemVerticalAlignment.Top} gap={8}>
+  <AvatarFavicon />
+  <View>
+    <Text>Title</Text>
+    <Text>Description</Text>
+  </View>
+</ListItem>;
+```
+
+##### ListItem with Accessories
+
+Before (Mobile):
+
+```tsx
+import ListItem from '../../../component-library/components/List/ListItem';
+
+<ListItem
+  topAccessory={<Text>Section Header</Text>}
+  topAccessoryGap={8}
+  bottomAccessory={<Text>Section Footer</Text>}
+  bottomAccessoryGap={4}
+>
+  <AvatarFavicon />
+  <Text>Label</Text>
+</ListItem>;
+```
+
+After (Design System):
+
+```tsx
+import { ListItem } from '@metamask/design-system-react-native';
+
+<ListItem
+  topAccessory={<Text>Section Header</Text>}
+  topAccessoryGap={8}
+  bottomAccessory={<Text>Section Footer</Text>}
+  bottomAccessoryGap={4}
+>
+  <AvatarFavicon />
+  <Text>Label</Text>
+</ListItem>;
+```
+
+##### ListItem with Type Import
+
+Before (Mobile):
+
+```tsx
+import ListItem from '../../../component-library/components/List/ListItem';
+import { ListItemProps } from '../../../component-library/components/List/ListItem/ListItem.types';
+
+const MyListItem: React.FC<ListItemProps> = (props) => (
+  <ListItem {...props} gap={8} />
+);
+```
+
+After (Design System):
+
+```tsx
+import { ListItem } from '@metamask/design-system-react-native';
+import type { ListItemProps } from '@metamask/design-system-react-native';
+
+const MyListItem: React.FC<ListItemProps> = (props) => (
+  <ListItem {...props} gap={8} />
+);
+```
+
+#### Sub-components Not Yet Migrated
+
+The following mobile `component-library` sub-components build on `ListItem` but do **not** have equivalents in `@metamask/design-system-react-native` yet. Files using these components cannot be fully migrated until they are added.
+
+| Sub-component         | Description                                             | Usage Count                         |
+| --------------------- | ------------------------------------------------------- | ----------------------------------- |
+| `ListItemColumn`      | Column wrapper with `WidthType.Auto` / `WidthType.Fill` | Used internally by other components |
+| `ListItemSelect`      | Single-select list item with selection underlay         | ~27 files across the codebase       |
+| `ListItemMultiSelect` | Multi-select list item with checkbox                    | ~2 files across the codebase        |
+
+#### Migration Scope by Team
+
+| Team                              | Files   | Components Used                                                   |
+| --------------------------------- | ------- | ----------------------------------------------------------------- |
+| @MetaMask/design-system-engineers | 9       | ListItem, ListItemSelect, ListItemMultiSelect (internal wrappers) |
+| @MetaMask/money-movement          | 31      | ListItem (14), ListItemSelect (17)                                |
+| @MetaMask/card                    | 4       | ListItem (1), ListItemSelect (3)                                  |
+| @MetaMask/perps                   | 3       | ListItem (3)                                                      |
+| @MetaMask/metamask-assets         | 2       | ListItemSelect (1), ListItemMultiSelect (1)                       |
+| @MetaMask/mobile-core-ux          | 3       | ListItemSelect (1), legacy Base/ListItem (2)                      |
+| @MetaMask/rewards                 | 2       | ListItemSelect (2)                                                |
+| Unowned                           | 4       | ListItem (1), ListItemSelect (1), other (2)                       |
+| **Total**                         | **~58** |                                                                   |
+
+#### API Differences
+
+- MMDS `ListItem` adds `twClassName` for Tailwind-based style overrides.
+- The mobile `VerticalAlignment` enum is renamed to `ListItemVerticalAlignment` with lowercase values (`'top'`/`'center'`/`'bottom'` instead of `'Top'`/`'Center'`/`'Bottom'`).
+- The mobile version sets `accessible accessibilityRole="none"` on the root element; MMDS does not.
+- The mobile version uses a default export; MMDS uses a named export.
+- `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.
 
 ## Version Updates
 
