@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.12.0]
+
+### Added
+
+- Added `TitleHubPropsShared` and `CheckboxPropsShared` for shared cross-platform component contracts. ([#1052](https://github.com/MetaMask/metamask-design-system/pull/1052), [#1040](https://github.com/MetaMask/metamask-design-system/pull/1040))
+
+### Changed
+
+- Expanded the `react` peer dependency range to support React 19 consumers. ([#1089](https://github.com/MetaMask/metamask-design-system/pull/1089))
+
+### Removed
+
+- **BREAKING:** Removed `isReactNodeRenderable` from the public API; replace imports with plain truthy checks instead. See [Migration Guide](./MIGRATION.md#from-version-0110-to-0120). ([#1076](https://github.com/MetaMask/metamask-design-system/pull/1076))
+
 ## [0.11.0]
 
 ### Added
@@ -45,19 +59,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added shared types used by new React Native header components, including `HeaderRoot` contracts consumed by `@metamask/design-system-react-native` ([#1029](https://github.com/MetaMask/metamask-design-system/pull/1029)).
-- Added shared `BoxHorizontal` and `BoxVertical` utility component contracts for cross-platform layout primitives ([#1003](https://github.com/MetaMask/metamask-design-system/pull/1003)).
+- Added shared types used by new React Native header components, including `HeaderRoot` contracts consumed by `@metamask/design-system-react-native` ([#1029](https://github.com/MetaMask/metamask-design-system/pull/1029))
+- Added shared `BoxHorizontal` and `BoxVertical` utility component contracts for cross-platform layout primitives ([#1003](https://github.com/MetaMask/metamask-design-system/pull/1003))
 
 ### Changed
 
-- Migrated `AvatarBase` type exports from enum-based definitions to shared const-object + string-union types, keeping consumers aligned with the ADR-0003/ADR-0004 type model ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005)).
-- Updated `@metamask/utils` dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033)).
+- Migrated `AvatarBase` type exports from enum-based definitions to shared const-object + string-union types, keeping consumers aligned with the ADR-0003/ADR-0004 type model ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005))
+- Updated `@metamask/utils` dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033))
 
 ## [0.6.0]
 
 ### Changed
 
-- Added shared `BadgeWrapper` const objects and props (`BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, `BadgeWrapperPropsShared`) so React and React Native now consume a single source of truth for the ADR-0003/ADR-0004 types; both platform packages re-export the shared definitions so existing imports keep working even as the shared package remains the canonical source. See the [design-system-react migration guide](../design-system-react/MIGRATION.md#from-version-0120-to-0130) for additional guidance ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014)).
+- Added shared `BadgeWrapper` const objects and props (`BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, `BadgeWrapperPropsShared`) so React and React Native now consume a single source of truth for the ADR-0003/ADR-0004 types; both platform packages re-export the shared definitions so existing imports keep working even as the shared package remains the canonical source. See the [design-system-react migration guide](../design-system-react/MIGRATION.md#from-version-0120-to-0130) for additional guidance ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014))
 
 ## [0.5.0]
 
@@ -121,7 +135,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.11.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.12.0...HEAD
+[0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.11.0...@metamask/design-system-shared@0.12.0
 [0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.10.0...@metamask/design-system-shared@0.11.0
 [0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.9.0...@metamask/design-system-shared@0.10.0
 [0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.8.0...@metamask/design-system-shared@0.9.0
