@@ -7,6 +7,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [General Extension Migration Guidance](#general-extension-migration-guidance)
 - [From Extension Component Library](#from-extension-component-library)
   - [Button Component](#button-component)
+  - [ButtonFilter Component](#buttonfilter-component)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
@@ -138,6 +139,121 @@ The design system Button adds these props:
 - `startIconName` / `endIconName` — icon names for leading/trailing icons
 - `loadingText` — custom text during loading state
 - `className` — Tailwind utility class overrides (merged via `twMerge`)
+
+### ButtonFilter Component
+
+`ButtonFilter` is a filter-chip button that toggles between active and inactive visual states via a single `isActive` prop. **There is no `ButtonFilter` in the extension `component-library`** — this section covers adopting the component in extension surfaces and replacing ad-hoc filter chips built on `Button`, `Tag`, or custom-styled wrappers.
+
+`ButtonFilter` wraps `ButtonBase` and inherits its full prop surface (see [ButtonBase Component](#buttonbase-component)). It adds only the `isActive` prop for active/inactive styling — all other props (`children`, `size`, `isFullWidth`, `isDisabled`, `startIconName`, `endIconName`, `startAccessory`, `endAccessory`, `onClick`, `asChild`, `textProps`, ARIA props) behave identically to `ButtonBase`.
+
+#### Import Path
+
+| Extension Pattern                                  | Design System Migration                                                  |
+| -------------------------------------------------- | ------------------------------------------------------------------------ |
+| No equivalent in `ui/components/component-library` | `import { ButtonFilter } from '@metamask/design-system-react'`           |
+| —                                                  | `import type { ButtonFilterProps } from '@metamask/design-system-react'` |
+
+#### When to Use
+
+Use `ButtonFilter` for filter chips — toggle-style, pill-shaped buttons that represent a single filter option within a group (e.g., `All` / `Active` / `Sold`). Reach for it when:
+
+- The button represents a filter or category selection that visually toggles state
+- You need a chip that uses muted/neutral styling when inactive and inverse styling when active
+- The active state is managed externally and passed in via `isActive`
+
+For primary actions (submit, confirm), stick with `Button`. For segmented controls or radio-like groups with more than chip semantics, use a purpose-built component instead.
+
+#### Replacing Ad-hoc Filter Chips
+
+If your code renders filter-like chips using the extension `Button` with conditional `className` overrides, a `Tag`, or custom-styled wrappers, replace them with `ButtonFilter`:
+
+| Extension Pattern                                                                   | Design System Migration                                                         |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `<Button variant={ButtonVariant.Secondary} className={isActive ? '...' : '...'} />` | `<ButtonFilter isActive={isActive}>...</ButtonFilter>`                          |
+| `<Tag>` used as a clickable filter                                                  | `<ButtonFilter isActive={isActive} onClick={...}>...</ButtonFilter>`            |
+| Custom `div` / `button` with manual active/inactive styling                         | `<ButtonFilter isActive={isActive}>...</ButtonFilter>` (drop the custom styles) |
+
+Any pre-existing `className` used to achieve the active/inactive visuals should be removed — `ButtonFilter` manages the foreground/background color transition internally based on `isActive`. Layout-only classes (spacing, positioning) still work via `className` and merge through `twMerge`.
+
+#### Props
+
+`ButtonFilterProps` is `ButtonBaseProps & { isActive?: boolean }`. Refer to the [ButtonBase Component](#buttonbase-component) section for the inherited prop surface. ButtonFilter-specific:
+
+- `isActive` — toggles between active (`bg-icon-default` + `text-icon-inverse`) and inactive (`bg-background-muted` + `text-default`) styling (default `false`)
+
+Common inherited props most relevant to filter chips:
+
+- `children` — the chip label (string children are wrapped in `Text` automatically)
+- `size` — `ButtonBaseSize.Sm` (32px) / `Md` (40px) / `Lg` (48px, default)
+- `isFullWidth`, `isDisabled`
+- `startIconName` / `endIconName` — optional leading / trailing icons
+- `onClick` — standard React click handler
+
+#### Adoption Examples
+
+##### Filter-chip group
+
+```tsx
+import { useState } from 'react';
+import { ButtonFilter } from '@metamask/design-system-react';
+
+const FILTERS = ['All', 'Active', 'Sold'] as const;
+type Filter = (typeof FILTERS)[number];
+
+export function Filters() {
+  const [filter, setFilter] = useState<Filter>('All');
+
+  return (
+    <div className="flex gap-2">
+      {FILTERS.map((value) => (
+        <ButtonFilter
+          key={value}
+          isActive={filter === value}
+          onClick={() => setFilter(value)}
+        >
+          {value}
+        </ButtonFilter>
+      ))}
+    </div>
+  );
+}
+```
+
+##### Replacing a conditionally-styled extension `Button`
+
+Before (Extension):
+
+```tsx
+import classnames from 'classnames';
+import { Button, ButtonVariant } from '../../component-library';
+
+<Button
+  variant={ButtonVariant.Secondary}
+  className={classnames({
+    'filter-chip--active': isActive,
+    'filter-chip--inactive': !isActive,
+  })}
+  onClick={() => setFilter('sold')}
+>
+  Sold
+</Button>;
+```
+
+After (Design System):
+
+```tsx
+import { ButtonFilter } from '@metamask/design-system-react';
+
+<ButtonFilter isActive={isActive} onClick={() => setFilter('sold')}>
+  Sold
+</ButtonFilter>;
+```
+
+#### API Differences
+
+- Active/inactive styling is managed internally via `isActive` — do not pass color/background `className` overrides to switch state visuals
+- `className` is still accepted for layout-only utilities (spacing, positioning) and merges via `twMerge`, but any color/background utilities are overridden by the active/inactive styles
+- All other props match `ButtonBase` — there are no filter-specific variants beyond `isActive`
 
 ### Box Component
 
