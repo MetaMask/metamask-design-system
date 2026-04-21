@@ -243,7 +243,8 @@ For simple, non-responsive spacing, continue using these props. Use `className` 
 
 ### BannerAlert Component
 
-The extension `banner-alert` maps directly to `BannerAlert` in the design system, but severity values are now provided via the shared `BannerAlertSeverity` const object (ADR-0003/0004) instead of extension enums.
+The extension `banner-alert` maps directly to `BannerAlert` in the design system.
+`severity` keeps the same runtime values, but `BannerAlert` now inherits MMDS `BannerBase` APIs for action and close behavior.
 
 #### Breaking Changes
 
@@ -261,6 +262,27 @@ The extension `banner-alert` maps directly to `BannerAlert` in the design system
 | `BannerAlertSeverity.Success` (`'success'`) | `BannerAlertSeverity.Success` |
 | `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` |
 | `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  |
+
+##### Inherited BannerBase API Changes
+
+`BannerAlert` props include `BannerBase` props in both legacy extension and MMDS, so the `BannerBase` API differences apply during migration.
+
+| Legacy Extension API                                     | MMDS API                                                                                                                          | Notes                                                 |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `title?: string`                                         | `title?: ReactNode`                                                                                                               | MMDS supports string or custom React content          |
+| `description?: string`                                   | `description?: ReactNode`                                                                                                         | MMDS supports string or custom React content          |
+| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>`                                            | Action button is `Button`, not `ButtonLink`           |
+| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                                                                  | Callback target is close button element               |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'> & { onClick?: MouseEventHandler<HTMLButtonElement> }` | `iconName` is fixed to close icon                     |
+
+##### Default and Behavior Changes
+
+| Legacy Extension Behavior                                      | MMDS Behavior                                                                                      |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Action button renders when `actionButtonLabel` is provided     | Action button renders when `actionButtonOnClick` is provided                                      |
+| Action button defaults to `ButtonLink` with `ButtonLinkSize.Auto` | Action button is `Button` with default `ButtonSize.Md`                                             |
+| Close button renders only when `onClose` is provided           | Close button renders when `onClose` **or** `closeButtonProps` is provided                          |
+| Close button `ariaLabel` defaults to translated `t('close')`   | Close button `ariaLabel` defaults to `'Close banner'` (override with `closeButtonProps.ariaLabel`) |
 
 #### Migration Example
 

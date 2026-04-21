@@ -1645,7 +1645,8 @@ For spacing values 0-12 (0px-48px), use these props. For custom values, responsi
 
 ### BannerAlert Component
 
-Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with severity values standardized to MMDS shared types.
+Mobile `BannerAlert` maps directly to `BannerAlert` in the design system.
+`severity` values are standardized to MMDS shared types, and `BannerAlert` inherits MMDS `BannerBase` behavior for action and close handling.
 
 #### Breaking Changes
 
@@ -1663,6 +1664,31 @@ Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with s
 | `BannerAlertSeverity.Success` (`'Success'`) | `BannerAlertSeverity.Success` (`'success'`) | casing changed |
 | `BannerAlertSeverity.Warning` (`'Warning'`) | `BannerAlertSeverity.Warning` (`'warning'`) | casing changed |
 | `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed        |
+
+##### Inherited BannerBase API Changes
+
+`BannerAlert` props include `BannerBase` props in both legacy mobile and MMDS, so `BannerBase` API differences apply during migration.
+
+| Legacy Mobile API                                       | MMDS API                                                                                                                            | Notes                                                                        |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `variant?: BannerVariant.Alert`                         | Removed from `BannerAlert` API                                                                                                      | Remove `variant` from migrated usage                                         |
+| `actionButtonProps?: ButtonProps`                       | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onPress' \| 'variant'>`                                              | `actionButtonOnPress` and `actionButtonLabel` are first-class props in MMDS |
+| `actionButtonProps.onPress`                             | `actionButtonOnPress`                                                                                                               | Handler moved out of `actionButtonProps`                                     |
+| `actionButtonProps.label`                               | `actionButtonLabel`                                                                                                                 | Label moved out of `actionButtonProps`                                       |
+| `title?: string \| ReactNode`                           | `title?: ReactNode`                                                                                                                 | Equivalent content support                                                   |
+| `description?: string \| ReactNode`                     | `description?: ReactNode`                                                                                                           | Equivalent content support                                                   |
+| `closeButtonProps?: ButtonIconProps`                    | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onPress'> & { onPress?: (event: GestureResponderEvent) => void }` | `iconName` remains fixed to close icon                                       |
+| `onClose?: () => void`                                  | `onClose?: () => void`                                                                                                              | Signature unchanged                                                          |
+
+##### Default and Behavior Changes
+
+| Legacy Mobile Behavior                                                   | MMDS Behavior                                                                                                      |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Action button shown when `actionButtonProps` exists                      | Action button shown when `actionButtonOnPress` exists                                                              |
+| Action button defaults to `size={ButtonSize.Auto}`                       | Action button defaults to `size={ButtonSize.Md}`                                                                   |
+| Close button fallback uses `onClose \|\| closeButtonProps?.onPress \|\| noop` | Close button handler is undefined when both callbacks are missing (button still renders if `closeButtonProps` exists) |
+| `BannerAlert` sets `testID={BANNERALERT_TEST_ID}`                        | MMDS `BannerAlert` does not set a default test id                                                                  |
+| Severity defaults to `BannerAlertSeverity.Info` (`'Info'`)               | Severity defaults to `BannerAlertSeverity.Info` (`'info'`)                                                         |
 
 #### Migration Example
 
