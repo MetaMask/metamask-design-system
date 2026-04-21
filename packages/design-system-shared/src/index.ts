@@ -114,3 +114,6 @@ export {
 
 // Checkbox types (ADR-0004)
 export { type CheckboxPropsShared } from './types/Checkbox';
+
+// Tag types (ADR-0003 + ADR-0004)
+export { TagSeverity, type TagPropsShared } from './types/Tag';
