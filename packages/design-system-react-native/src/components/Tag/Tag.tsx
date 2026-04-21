@@ -39,12 +39,12 @@ export const Tag: React.FC<TagProps> = ({
     <Box
       {...props}
       backgroundColor={backgroundColor}
-      twClassName={twClassName}
       style={[
         tw.style(
           'rounded-md self-start',
           (startIconName ?? startIconProps?.name) ? 'pl-1' : 'pl-1.5',
           (endIconName ?? endIconProps?.name) ? 'pr-1' : 'pr-1.5',
+          twClassName,
         ),
         style,
       ]}
