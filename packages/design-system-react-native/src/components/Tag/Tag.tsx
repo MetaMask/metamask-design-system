@@ -3,6 +3,7 @@ import {
   TagSeverity,
   TextVariant,
 } from '@metamask/design-system-shared';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
 import { Box } from '../Box';
@@ -29,6 +30,7 @@ export const Tag: React.FC<TagProps> = ({
   style,
   ...props
 }) => {
+  const tw = useTailwind();
   const backgroundColor = MAP_TAG_SEVERITY_BACKGROUND[severity];
   const textColor = MAP_TAG_SEVERITY_TEXT_COLOR[severity];
   const iconColor = MAP_TAG_SEVERITY_ICON_COLOR[severity];
@@ -37,8 +39,15 @@ export const Tag: React.FC<TagProps> = ({
     <Box
       {...props}
       backgroundColor={backgroundColor}
-      twClassName={`rounded-md self-start ${(startIconName ?? startIconProps?.name) ? 'pl-1' : 'pl-1.5'} ${(endIconName ?? endIconProps?.name) ? 'pr-1' : 'pr-1.5'}${twClassName ? ` ${twClassName}` : ''}`.trim()}
-      style={style}
+      twClassName={twClassName}
+      style={[
+        tw.style(
+          'rounded-md self-start',
+          (startIconName ?? startIconProps?.name) ? 'pl-1' : 'pl-1.5',
+          (endIconName ?? endIconProps?.name) ? 'pr-1' : 'pr-1.5',
+        ),
+        style,
+      ]}
     >
       <BoxRow
         textProps={{
