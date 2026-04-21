@@ -7,6 +7,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [General Extension Migration Guidance](#general-extension-migration-guidance)
 - [From Extension Component Library](#from-extension-component-library)
   - [Button Component](#button-component)
+  - [ButtonHero Component](#buttonhero-component)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
@@ -138,6 +139,115 @@ The design system Button adds these props:
 - `startIconName` / `endIconName` — icon names for leading/trailing icons
 - `loadingText` — custom text during loading state
 - `className` — Tailwind utility class overrides (merged via `twMerge`)
+
+### ButtonHero Component
+
+`ButtonHero` is a branded, light-theme-locked button for the highest-impact actions (swaps, claims, rewards). **There is no `ButtonHero` in the extension `component-library`** — this section covers adopting the component in extension surfaces and replacing ad-hoc brand buttons built on top of legacy `Button` / `ButtonPrimary`.
+
+`ButtonHero` wraps `ButtonBase` and extends `ButtonBaseProps` as-is, so its API matches `ButtonBase` (see [ButtonBase Component](#buttonbase-component)). The hero styling is applied internally and cannot be themed via `className` — hero visuals are intentionally locked to the light-theme primary palette.
+
+#### Import Path
+
+| Extension Pattern                                  | Design System Migration                                                |
+| -------------------------------------------------- | ---------------------------------------------------------------------- |
+| No equivalent in `ui/components/component-library` | `import { ButtonHero } from '@metamask/design-system-react'`           |
+| —                                                  | `import type { ButtonHeroProps } from '@metamask/design-system-react'` |
+
+#### When to Use
+
+Reserve `ButtonHero` for the most critical, high-value actions in Trade-style surfaces:
+
+- Swapping tokens
+- Claiming winnings (e.g., Polymarket bets)
+- Claiming rewards
+- Other critical, high-value actions
+
+For all other primary actions, keep using `Button` with `variant={ButtonVariant.Primary}`.
+
+#### Replacing Ad-hoc "Hero" Buttons
+
+If your code renders a branded/emphasized button using the extension `Button` with custom styling (for example `className` overrides or wrapping in a branded container), you can replace it with `ButtonHero`. Any pre-existing `className`, `style`, or theming you applied to achieve the hero appearance should be removed — `ButtonHero` manages its own branded visuals and ignores theme overrides.
+
+| Extension Pattern                                                          | Design System Migration                                               |
+| -------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `<Button variant={ButtonVariant.Primary} className="..." />` for hero CTAs | `<ButtonHero>...</ButtonHero>`                                        |
+| Custom-themed branded button wrapper                                       | `<ButtonHero>...</ButtonHero>` (drop the wrapper and theme overrides) |
+| `block` / `className="w-full"`                                             | `isFullWidth`                                                         |
+
+#### Props
+
+`ButtonHeroProps` is `ButtonBaseProps` — refer to the [ButtonBase Component](#buttonbase-component) section for the full prop surface. The props most commonly used with `ButtonHero`:
+
+- `children` — the button label (string children are wrapped in `Text` automatically)
+- `size` — `ButtonBaseSize.Sm` (32px) / `ButtonBaseSize.Md` (40px) / `ButtonBaseSize.Lg` (48px, default)
+- `isFullWidth` — stretches to fill the container
+- `startIconName` / `endIconName` — leading / trailing icons
+- `isDisabled` / `isLoading` — state props (renamed from extension's `disabled` / `loading`)
+- `loadingText` — optional text shown alongside the spinner while loading
+- `onClick` — standard React click handler (extension's `Button` also used `onClick`)
+
+#### Adoption Examples
+
+##### Basic hero action
+
+```tsx
+import { ButtonHero } from '@metamask/design-system-react';
+
+<ButtonHero isFullWidth onClick={handleSwap}>
+  Swap
+</ButtonHero>;
+```
+
+##### With an icon and loading state
+
+```tsx
+import { ButtonHero, IconName } from '@metamask/design-system-react';
+
+<ButtonHero
+  isFullWidth
+  startIconName={IconName.SwapHorizontal}
+  isLoading={isSwapping}
+  loadingText="Swapping…"
+  onClick={handleSwap}
+>
+  Swap
+</ButtonHero>;
+```
+
+##### Replacing an extension `Button` used as a hero CTA
+
+Before (Extension):
+
+```tsx
+import { Button, ButtonVariant, ButtonSize } from '../../component-library';
+
+<Button
+  variant={ButtonVariant.Primary}
+  size={ButtonSize.Lg}
+  block
+  className="brand-hero-overrides"
+  onClick={handleClaim}
+>
+  Claim rewards
+</Button>;
+```
+
+After (Design System):
+
+```tsx
+import { ButtonHero } from '@metamask/design-system-react';
+
+<ButtonHero isFullWidth onClick={handleClaim}>
+  Claim rewards
+</ButtonHero>;
+```
+
+#### API Differences
+
+- Styling is locked to the light-theme primary palette — do not pass `className` to change colors; use a different button (e.g. `Button` with `ButtonVariant.Primary`) if you need themed visuals
+- `className` is still accepted for layout-only utilities (spacing, positioning) and is merged via `twMerge`, but any color / background utilities will be overridden by the hero styling
+- `ButtonHero` renders with `data-theme="light"` applied internally — it does not adapt to dark mode
+- All other props match `ButtonBase`; there are no hero-specific variant / color / size semantics
 
 ### Box Component
 
