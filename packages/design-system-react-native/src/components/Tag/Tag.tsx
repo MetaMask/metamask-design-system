@@ -1,10 +1,13 @@
-import { TagSeverity } from '@metamask/design-system-shared';
+import {
+  FontWeight,
+  TagSeverity,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import React from 'react';
 
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
 import { Icon, IconSize } from '../Icon';
-import { FontWeight, TextVariant } from '../Text';
 
 import {
   MAP_TAG_SEVERITY_BACKGROUND,
