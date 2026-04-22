@@ -245,3 +245,6 @@ export type { SpinnerProps } from './temp-components/Spinner';
 
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
+
+export { Tag, TagSeverity } from './Tag';
+export type { TagProps } from './Tag';

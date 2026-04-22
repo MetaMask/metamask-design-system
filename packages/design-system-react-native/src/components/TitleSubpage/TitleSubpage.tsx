@@ -1,5 +1,7 @@
 // Third party dependencies.
 import {
+  BoxAlignItems,
+  BoxJustifyContent,
   FontWeight,
   TextColor,
   TextVariant,
@@ -7,7 +9,6 @@ import {
 import React from 'react';
 
 // Internal dependencies.
-import { BoxAlignItems, BoxJustifyContent } from '../../types';
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
 
