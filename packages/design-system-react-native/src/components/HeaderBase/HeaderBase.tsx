@@ -8,7 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // External dependencies.
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
-import { TextVariant } from '../Text';
+import { TextVariant } from '@metamask/design-system-shared';
 
 import type { HeaderBaseProps } from './HeaderBase.types';
 
@@ -146,18 +146,20 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
       })}
 
       {/* Title */}
-      <TextOrChildren
-        textProps={{
-          variant: TextVariant.HeadingSm,
-          ...textProps,
-          style: [
-            tw.style('text-center flex-1 items-center'),
-            textProps?.style,
-          ],
-        }}
-      >
-        {children}
-      </TextOrChildren>
+      <View style={tw.style('flex-1 items-center')}>
+        <TextOrChildren
+          textProps={{
+            variant: TextVariant.HeadingSm,
+            ...textProps,
+            style: [
+              tw.style('text-center flex-1 items-center'),
+              textProps?.style,
+            ],
+          }}
+        >
+          {children}
+        </TextOrChildren>
+      </View>
 
       {/* End accessory */}
       {renderAccessoryWrapper({
