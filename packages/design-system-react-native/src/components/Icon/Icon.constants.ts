@@ -1,4 +1,4 @@
-import { IconSize } from '@metamask/design-system-shared';
+import { IconSize } from '../../types';
 
 export const TWCLASSMAP_ICON_SIZE_DIMENSION: Record<IconSize, string> = {
   [IconSize.Xs]: 'w-3 h-3', // 12px
