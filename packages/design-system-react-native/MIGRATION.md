@@ -1563,6 +1563,8 @@ The DS `BottomSheetFooter` adds `twClassName` for Tailwind utility class overrid
 
 The Box component has breaking changes when migrating from the mobile component-library. For custom spacing patterns or values outside the BoxSpacing range, use Tailwind classes via `twClassName`.
 
+Legacy source audit note: mobile Box usage and the primary legacy implementation are under `app/components/UI/Box/Box.tsx` (not only under `app/component-library/components`).
+
 #### Breaking Changes
 
 ##### Spacing Values
@@ -1601,7 +1603,7 @@ If the mobile Box had `paddingInline`, `paddingInlineStart`, or `paddingInlineEn
 ##### Before (Mobile)
 
 ```tsx
-import { Box } from '../../../component-library/components/Box';
+import Box from '../../../components/UI/Box/Box';
 
 // Custom spacing with style prop
 <Box style={{ margin: 20, padding: 20 }}>
