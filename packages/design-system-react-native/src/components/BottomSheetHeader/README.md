@@ -15,31 +15,6 @@ import { BottomSheetHeader } from '@metamask/design-system-react-native';
 
 ## Props
 
-### `variant`
-
-Controls the header alignment and text size.
-
-Available variants:
-
-- `BottomSheetHeaderVariant.Compact` - center-aligned with HeadingSm text
-- `BottomSheetHeaderVariant.Display` - left-aligned with HeadingLg text
-
-| TYPE                       | REQUIRED | DEFAULT                            |
-| -------------------------- | -------- | ---------------------------------- |
-| `BottomSheetHeaderVariant` | No       | `BottomSheetHeaderVariant.Compact` |
-
-```tsx
-import { BottomSheetHeader, BottomSheetHeaderVariant } from '@metamask/design-system-react-native';
-
-<BottomSheetHeader variant={BottomSheetHeaderVariant.Compact}>
-  Compact Title
-</BottomSheetHeader>
-
-<BottomSheetHeader variant={BottomSheetHeaderVariant.Display}>
-  Display Title
-</BottomSheetHeader>
-```
-
 ### `onBack`
 
 Callback function triggered when the back button is pressed. When provided, a back arrow ButtonIcon is rendered as the start accessory.
