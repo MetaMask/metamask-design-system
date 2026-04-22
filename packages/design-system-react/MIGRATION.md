@@ -185,14 +185,14 @@ The extension `ButtonIcon` accepted a top-level `color` prop (typed as `IconColo
 
 `IconColor` member names also change casing (camelCase → PascalCase). See [Icon Component](#icon-component) for the full mapping.
 
-##### Polymorphism Removed: `as` / `href`
+##### Polymorphism Removed: `as` / `href` — No Direct Equivalent for Anchor Usage
 
-The extension `ButtonIcon` is polymorphic — `as` toggles the root between `button` and `a`, and an `href` prop auto-switches to `a`. The design system `ButtonIcon` always renders a `<button>` and does not support `asChild`.
+The extension `ButtonIcon` is polymorphic — `as` toggles the root between `button` and `a`, and an `href` prop auto-switches to `a`. The design system `ButtonIcon` always renders a real `<button>` and does **not** support `asChild`, so there is no built-in way to render an icon-only link. Wrapping `ButtonIcon` in an `<a>` is not a valid migration path — it creates nested interactive elements (`<a>` containing `<button>`), which breaks HTML semantics and accessibility.
 
-| Extension Prop | Design System Migration                                                                |
-| -------------- | -------------------------------------------------------------------------------------- |
-| `as="a"`       | Removed — always `<button>`. Wrap in an `<a>` for link semantics, or use `TextButton`. |
-| `href="..."`   | Removed — wrap `ButtonIcon` in an `<a href="...">`, or use a link-styled alternative.  |
+| Extension Prop | Design System Migration                                                                                                                                                          |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `as="a"`       | No direct equivalent — the design system `ButtonIcon` is a `<button>` only. If you still need an icon-only link, reach out to the design system team to discuss adding support.  |
+| `href="..."`   | No direct equivalent — see above. Do not wrap `ButtonIcon` in an `<a>`: that produces invalid nested `<a><button>` interactive elements.                                         |
 
 ##### Removed Props
 
@@ -209,7 +209,6 @@ The design system `ButtonIcon` adds these props:
   - `ButtonIconVariant.Default` — transparent background (matches current extension behavior)
   - `ButtonIconVariant.Filled` — muted background with rounded corners and pressed state
   - `ButtonIconVariant.Floating` — colored background with inverse icon color
-- `style` — CSS `style` object for dynamic inline styling (use sparingly; prefer `className`)
 
 #### Migration Examples
 
@@ -302,7 +301,7 @@ import {
 #### API Differences
 
 - Default `size` identifier changes from `ButtonIconSize.Lg` to `ButtonIconSize.Md` (32px pixel default unchanged); `Md` and `Lg` map to larger pixel dimensions
-- Root element is always `<button>` — no `as="a"` / `href` polymorphism
+- Root element is always `<button>` — no `as="a"` / `href` polymorphism and no `asChild`; icon-only link usage has no direct equivalent (reach out to the design system team if needed)
 - Icon color is controlled via `iconProps.color` rather than a top-level `color` prop
 - Box style-utility props are no longer accepted — use Tailwind `className` for styling overrides
 - New `variant` prop (`Default`, `Filled`, `Floating`) for visual styles not available in the extension
