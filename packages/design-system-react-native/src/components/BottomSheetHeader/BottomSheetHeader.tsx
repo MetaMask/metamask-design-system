@@ -7,10 +7,7 @@ import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { HeaderBase } from '../HeaderBase';
 import { IconName } from '../Icon';
 
-// Internal dependencies.
-import { BOTTOM_SHEET_HEADER_VARIANT_MAP } from './BottomSheetHeader.constants';
 import type { BottomSheetHeaderProps } from './BottomSheetHeader.types';
-import { BottomSheetHeaderVariant } from './BottomSheetHeader.types';
 
 export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   style,
@@ -20,7 +17,6 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   backButtonProps,
   onClose,
   closeButtonProps,
-  variant = BottomSheetHeaderVariant.Compact,
   ...props
 }) => {
   const tw = useTailwind();
@@ -42,16 +38,12 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
       {...closeButtonProps}
     />
   ) : undefined;
-
-  const headerBaseVariant = BOTTOM_SHEET_HEADER_VARIANT_MAP[variant];
-
   return (
     <HeaderBase
       {...props}
       style={[tw.style('px-4', twClassName), style]}
       startAccessory={startAccessory}
       endAccessory={endAccessory}
-      variant={headerBaseVariant}
     >
       {children}
     </HeaderBase>

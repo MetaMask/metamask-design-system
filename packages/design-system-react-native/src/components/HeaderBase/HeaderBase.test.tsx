@@ -17,7 +17,7 @@ describe('HeaderBase', () => {
     it('renders string title as Text component', () => {
       const { getByText } = render(<HeaderBase>Test Title</HeaderBase>);
 
-      expect(getByText('Test Title')).toBeDefined();
+      expect(getByText('Test Title')).toBeOnTheScreen();
     });
 
     it('renders custom children when ReactNode is passed', () => {
@@ -27,34 +27,17 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('custom-content')).toBeDefined();
+      expect(getByTestId('custom-content')).toBeOnTheScreen();
     });
   });
 
-  describe('testID', () => {
+  describe('root props', () => {
     it('applies testID to the root container via ViewProps', () => {
       const { getByTestId } = render(
         <HeaderBase testID="my-header">Title</HeaderBase>,
       );
 
-      expect(getByTestId('my-header')).toBeDefined();
-    });
-
-    it('applies default titleTestID to the title Text element', () => {
-      const { getByTestId } = render(
-        <HeaderBase titleTestID="header-title">Title</HeaderBase>,
-      );
-
-      expect(getByTestId('header-title')).toBeDefined();
-    });
-
-    it('accepts custom titleTestID for the title Text element', () => {
-      const { getByTestId, queryByTestId } = render(
-        <HeaderBase titleTestID="custom-title">Title</HeaderBase>,
-      );
-
-      expect(getByTestId('custom-title')).toBeDefined();
-      expect(queryByTestId('header-title')).toBeNull();
+      expect(getByTestId('my-header')).toBeOnTheScreen();
     });
 
     it('passes through accessibilityLabel via ViewProps', () => {
@@ -62,7 +45,28 @@ describe('HeaderBase', () => {
         <HeaderBase accessibilityLabel="Page header">Title</HeaderBase>,
       );
 
-      expect(getByLabelText('Page header')).toBeDefined();
+      expect(getByLabelText('Page header')).toBeOnTheScreen();
+    });
+  });
+
+  describe('textProps', () => {
+    it('spreads textProps to the title Text when children is a string', () => {
+      const { getByTestId } = render(
+        <HeaderBase textProps={{ testID: 'header-title' }}>Title</HeaderBase>,
+      );
+
+      expect(getByTestId('header-title')).toBeOnTheScreen();
+    });
+
+    it('does not apply textProps when children is a ReactNode', () => {
+      const { getByTestId, queryByTestId } = render(
+        <HeaderBase textProps={{ testID: 'header-title' }}>
+          <Text testID="custom-content">Custom Content</Text>
+        </HeaderBase>,
+      );
+
+      expect(getByTestId('custom-content')).toBeOnTheScreen();
+      expect(queryByTestId('header-title')).toBeNull();
     });
   });
 
@@ -77,8 +81,8 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('start-wrapper')).toBeDefined();
-      expect(getByTestId('start-content')).toBeDefined();
+      expect(getByTestId('start-wrapper')).toBeOnTheScreen();
+      expect(getByTestId('start-content')).toBeOnTheScreen();
     });
 
     it('does not render start accessory wrapper when startAccessory is not provided', () => {
@@ -101,7 +105,7 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('custom-start-wrapper')).toBeDefined();
+      expect(getByTestId('custom-start-wrapper')).toBeOnTheScreen();
     });
   });
 
@@ -116,8 +120,8 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('end-wrapper')).toBeDefined();
-      expect(getByTestId('end-content')).toBeDefined();
+      expect(getByTestId('end-wrapper')).toBeOnTheScreen();
+      expect(getByTestId('end-content')).toBeOnTheScreen();
     });
 
     it('does not render end accessory wrapper when endAccessory is not provided', () => {
@@ -140,7 +144,7 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('custom-end-wrapper')).toBeDefined();
+      expect(getByTestId('custom-end-wrapper')).toBeOnTheScreen();
     });
   });
 
@@ -158,7 +162,7 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('start-wrapper')).toBeDefined();
+      expect(getByTestId('start-wrapper')).toBeOnTheScreen();
     });
 
     it('calls onPress handler when start ButtonIcon is pressed', () => {
@@ -194,7 +198,7 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('start-content')).toBeDefined();
+      expect(getByTestId('start-content')).toBeOnTheScreen();
       expect(queryByTestId('start-button')).toBeNull();
     });
   });
@@ -216,8 +220,8 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('end-wrapper')).toBeDefined();
-      expect(getByTestId('end-close-button')).toBeDefined();
+      expect(getByTestId('end-wrapper')).toBeOnTheScreen();
+      expect(getByTestId('end-close-button')).toBeOnTheScreen();
     });
 
     it('calls onPress handler when end ButtonIcon is pressed', () => {
@@ -261,8 +265,8 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('end-search-button')).toBeDefined();
-      expect(getByTestId('end-close-button')).toBeDefined();
+      expect(getByTestId('end-search-button')).toBeOnTheScreen();
+      expect(getByTestId('end-close-button')).toBeOnTheScreen();
     });
 
     it('does not render ButtonIcons when endButtonIconProps is empty array', () => {
@@ -294,7 +298,7 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('end-content')).toBeDefined();
+      expect(getByTestId('end-content')).toBeOnTheScreen();
       expect(queryByTestId('end-close-button')).toBeNull();
     });
   });
@@ -311,8 +315,8 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('start-wrapper')).toBeDefined();
-      expect(getByTestId('end-wrapper')).toBeDefined();
+      expect(getByTestId('start-wrapper')).toBeOnTheScreen();
+      expect(getByTestId('end-wrapper')).toBeOnTheScreen();
     });
 
     it('renders both accessory wrappers when only end accessory is provided', () => {
@@ -326,8 +330,8 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('start-wrapper')).toBeDefined();
-      expect(getByTestId('end-wrapper')).toBeDefined();
+      expect(getByTestId('start-wrapper')).toBeOnTheScreen();
+      expect(getByTestId('end-wrapper')).toBeOnTheScreen();
     });
 
     it('renders both accessory wrappers when both accessories are provided', () => {
@@ -342,10 +346,10 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('start-wrapper')).toBeDefined();
-      expect(getByTestId('end-wrapper')).toBeDefined();
-      expect(getByTestId('start-content')).toBeDefined();
-      expect(getByTestId('end-content')).toBeDefined();
+      expect(getByTestId('start-wrapper')).toBeOnTheScreen();
+      expect(getByTestId('end-wrapper')).toBeOnTheScreen();
+      expect(getByTestId('start-content')).toBeOnTheScreen();
+      expect(getByTestId('end-content')).toBeOnTheScreen();
     });
   });
 
@@ -357,7 +361,7 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('header')).toBeDefined();
+      expect(getByTestId('header')).toBeOnTheScreen();
     });
   });
 
@@ -369,7 +373,7 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      expect(getByTestId('header')).toBeDefined();
+      expect(getByTestId('header')).toBeOnTheScreen();
     });
   });
 
@@ -394,7 +398,7 @@ describe('HeaderBase', () => {
         });
       });
 
-      expect(getByTestId('start-wrapper')).toBeDefined();
+      expect(getByTestId('start-wrapper')).toBeOnTheScreen();
     });
 
     it('measures end accessory width via onLayout', () => {
@@ -417,7 +421,7 @@ describe('HeaderBase', () => {
         });
       });
 
-      expect(getByTestId('end-wrapper')).toBeDefined();
+      expect(getByTestId('end-wrapper')).toBeOnTheScreen();
     });
   });
 });
