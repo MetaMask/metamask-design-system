@@ -152,16 +152,16 @@ Use the `style` prop to customize the component's appearance with React Native s
 <HeaderBase style={{ marginHorizontal: 16 }}>Styled Header</HeaderBase>
 ```
 
-### `titleTestID`
+### `textProps`
 
-Test ID for the title Text element. Only used when `children` is a string.
+Props passed to the `Text` element when `children` is a string. This is the preferred way to provide a title `testID` or override text props.
 
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
+| TYPE                                   | REQUIRED | DEFAULT     |
+| -------------------------------------- | -------- | ----------- |
+| `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
-<HeaderBase titleTestID="my-header-title">Page Title</HeaderBase>
+<HeaderBase textProps={{ testID: 'my-header-title' }}>Page Title</HeaderBase>
 ```
 
 ## References

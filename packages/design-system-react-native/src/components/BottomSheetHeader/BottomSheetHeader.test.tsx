@@ -2,7 +2,6 @@ import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
 import { BottomSheetHeader } from './BottomSheetHeader';
-import { BottomSheetHeaderVariant } from './BottomSheetHeader.types';
 
 describe('BottomSheetHeader', () => {
   describe('rendering', () => {
@@ -10,7 +9,7 @@ describe('BottomSheetHeader', () => {
       const { getByTestId } = render(
         <BottomSheetHeader testID="header">Header Title</BottomSheetHeader>,
       );
-      expect(getByTestId('header')).toBeDefined();
+      expect(getByTestId('header')).toBeOnTheScreen();
     });
   });
 
@@ -19,7 +18,7 @@ describe('BottomSheetHeader', () => {
       const { getByTestId } = render(
         <BottomSheetHeader testID="my-header">Title</BottomSheetHeader>,
       );
-      expect(getByTestId('my-header')).toBeDefined();
+      expect(getByTestId('my-header')).toBeOnTheScreen();
     });
 
     it('passes through accessibilityLabel via ViewProps', () => {
@@ -28,28 +27,7 @@ describe('BottomSheetHeader', () => {
           Title
         </BottomSheetHeader>,
       );
-      expect(getByLabelText('Sheet header')).toBeDefined();
-    });
-  });
-
-  describe('variant', () => {
-    it('renders with Compact variant by default', () => {
-      const { getByTestId } = render(
-        <BottomSheetHeader testID="header">Title</BottomSheetHeader>,
-      );
-      expect(getByTestId('header')).toBeDefined();
-    });
-
-    it('renders with Display variant', () => {
-      const { getByTestId } = render(
-        <BottomSheetHeader
-          testID="header"
-          variant={BottomSheetHeaderVariant.Display}
-        >
-          Title
-        </BottomSheetHeader>,
-      );
-      expect(getByTestId('header')).toBeDefined();
+      expect(getByLabelText('Sheet header')).toBeOnTheScreen();
     });
   });
 
@@ -63,7 +41,7 @@ describe('BottomSheetHeader', () => {
           Header Title
         </BottomSheetHeader>,
       );
-      expect(getByTestId('back-button')).toBeDefined();
+      expect(getByTestId('back-button')).toBeOnTheScreen();
     });
 
     it('calls onBack when back button is pressed', () => {
@@ -101,7 +79,7 @@ describe('BottomSheetHeader', () => {
           Header Title
         </BottomSheetHeader>,
       );
-      expect(getByTestId('close-button')).toBeDefined();
+      expect(getByTestId('close-button')).toBeOnTheScreen();
     });
 
     it('calls onClose when close button is pressed', () => {
@@ -152,13 +130,13 @@ describe('BottomSheetHeader', () => {
       );
 
       // Root element testID from ViewProps
-      expect(getByTestId('header')).toBeDefined();
+      expect(getByTestId('header')).toBeOnTheScreen();
 
       // Interactive element testIDs from button props
       const backButton = getByTestId('custom-back');
       const closeButton = getByTestId('custom-close');
-      expect(backButton).toBeDefined();
-      expect(closeButton).toBeDefined();
+      expect(backButton).toBeOnTheScreen();
+      expect(closeButton).toBeOnTheScreen();
       expect(backButton.props.accessibilityLabel).toBe('Go back');
       expect(closeButton.props.accessibilityLabel).toBe('Close modal');
     });
@@ -171,7 +149,7 @@ describe('BottomSheetHeader', () => {
           Title
         </BottomSheetHeader>,
       );
-      expect(getByTestId('header')).toBeDefined();
+      expect(getByTestId('header')).toBeOnTheScreen();
     });
   });
 
@@ -182,7 +160,7 @@ describe('BottomSheetHeader', () => {
           Title
         </BottomSheetHeader>,
       );
-      expect(getByTestId('header')).toBeDefined();
+      expect(getByTestId('header')).toBeOnTheScreen();
     });
   });
 });
