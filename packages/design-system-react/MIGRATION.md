@@ -15,6 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
@@ -837,6 +838,34 @@ import { Checkbox } from '@metamask/design-system-react';
 ## Version Updates
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
+
+## From version 0.17.0 to 0.18.0
+
+### Box: Type imports moved to `@metamask/design-system-shared`
+
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react`. All existing import paths through `@metamask/design-system-react` continue to work without change.
+
+```tsx
+// Both of these work — shared is the source of truth
+import { BoxBackgroundColor } from '@metamask/design-system-react';
+import { BoxBackgroundColor } from '@metamask/design-system-shared';
+```
+
+### Box: Removed stale `-alternative` color tokens
+
+The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
+
+| Removed Entry                           | Replacement                         |
+| --------------------------------------- | ----------------------------------- |
+| `BoxBackgroundColor.WarningAlternative` | `BoxBackgroundColor.WarningDefault` |
+| `BoxBackgroundColor.SuccessAlternative` | `BoxBackgroundColor.SuccessDefault` |
+| `BoxBorderColor.WarningAlternative`     | `BoxBorderColor.WarningDefault`     |
+| `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`     |
+| `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`        |
+
+These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate.
+
+---
 
 ## From version 0.16.0 to 0.17.0
 

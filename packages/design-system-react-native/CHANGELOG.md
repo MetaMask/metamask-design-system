@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.0]
+
+### Added
+
+- Added `TitleHub` for stacked title, amount, and bottom-label layouts with optional accessory slots. ([#1052](https://github.com/MetaMask/metamask-design-system/pull/1052))
+
+### Changed
+
+- **BREAKING:** Raised the minimum supported peer dependency versions to React Native `>=0.76.0`, `react-native-gesture-handler >=2.25.0`, `react-native-reanimated >=3.17.0`, and `react-native-safe-area-context >=5.0.0` to align the package with the React Native 0.76 and Storybook 10 stack. ([#844](https://github.com/MetaMask/metamask-design-system/pull/844))
+- **BREAKING:** `HeaderRoot` now renders `titleAccessory` only when `title` is present; use `children` for fully custom accessory-only title rows. See [Migration Guide](./MIGRATION.md#from-version-0180-to-0190). ([#1076](https://github.com/MetaMask/metamask-design-system/pull/1076))
+- **BREAKING:** `IconProps` now align with the underlying SVG component props instead of `ViewProps`; move `View`-specific props to a wrapper view if TypeScript flags them after upgrading. See [Migration Guide](./MIGRATION.md#from-version-0180-to-0190). ([#1090](https://github.com/MetaMask/metamask-design-system/pull/1090))
+
 ## [0.18.0]
 
 ### Added
@@ -55,35 +67,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added `HeaderRoot` as a new root primitive for React Native header composition ([#1029](https://github.com/MetaMask/metamask-design-system/pull/1029)).
-- Added `HeaderStandard` for standardized title + action header layouts in mobile screens ([#1028](https://github.com/MetaMask/metamask-design-system/pull/1028), [#1030](https://github.com/MetaMask/metamask-design-system/pull/1030)).
-- Added `TextFieldSearch` for search-style text input flows on mobile ([#1027](https://github.com/MetaMask/metamask-design-system/pull/1027)).
-- Added `BoxHorizontal` and `BoxVertical` utility components for common directional layout composition ([#1003](https://github.com/MetaMask/metamask-design-system/pull/1003)).
+- Added `HeaderRoot` as a new root primitive for React Native header composition ([#1029](https://github.com/MetaMask/metamask-design-system/pull/1029))
+- Added `HeaderStandard` for standardized title + action header layouts in mobile screens ([#1028](https://github.com/MetaMask/metamask-design-system/pull/1028), [#1030](https://github.com/MetaMask/metamask-design-system/pull/1030))
+- Added `TextFieldSearch` for search-style text input flows on mobile ([#1027](https://github.com/MetaMask/metamask-design-system/pull/1027))
+- Added `BoxHorizontal` and `BoxVertical` utility components for common directional layout composition ([#1003](https://github.com/MetaMask/metamask-design-system/pull/1003))
 
 ### Changed
 
-- **BREAKING:** Replaced BottomSheet `shouldNavigateBack` with an optional `goBack` callback for explicit navigation handling in host apps ([#1024](https://github.com/MetaMask/metamask-design-system/pull/1024)).
+- **BREAKING:** Replaced BottomSheet `shouldNavigateBack` with an optional `goBack` callback for explicit navigation handling in host apps ([#1024](https://github.com/MetaMask/metamask-design-system/pull/1024))
   - Remove `shouldNavigateBack` usage and pass `goBack` when you want the sheet close action to navigate back.
   - See [Migration Guide](./MIGRATION.md#from-version-0130-to-0140).
-- Added `panGestureHandlerProps` support to `BottomSheet` so integrators can customize gesture-handler behavior ([#1016](https://github.com/MetaMask/metamask-design-system/pull/1016)).
-- Migrated React Native package exports from default exports to named exports for more consistent import ergonomics across the library ([#1032](https://github.com/MetaMask/metamask-design-system/pull/1032)).
-- **BREAKING:** Updated `AvatarBase` exports to use shared const-object + string-union types instead of local enums ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005)).
+- Added `panGestureHandlerProps` support to `BottomSheet` so integrators can customize gesture-handler behavior ([#1016](https://github.com/MetaMask/metamask-design-system/pull/1016))
+- Migrated React Native package exports from default exports to named exports for more consistent import ergonomics across the library ([#1032](https://github.com/MetaMask/metamask-design-system/pull/1032))
+- **BREAKING:** Updated `AvatarBase` exports to use shared const-object + string-union types instead of local enums ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005))
   - No migration required for typical usage; continue importing from `@metamask/design-system-react-native` as before.
   - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
-- Updated `@metamask/utils` peer dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033)).
-- Expanded `BannerBase` migration documentation to improve upgrade guidance for consumers ([#1011](https://github.com/MetaMask/metamask-design-system/pull/1011)).
+- Updated `@metamask/utils` peer dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033))
+- Expanded `BannerBase` migration documentation to improve upgrade guidance for consumers ([#1011](https://github.com/MetaMask/metamask-design-system/pull/1011))
 
 ### Fixed
 
-- Updated `BottomSheetHeader` action button size to `md` for consistent sizing and visual alignment ([#1012](https://github.com/MetaMask/metamask-design-system/pull/1012)).
+- Updated `BottomSheetHeader` action button size to `md` for consistent sizing and visual alignment ([#1012](https://github.com/MetaMask/metamask-design-system/pull/1012))
 
 ## [0.13.0]
 
 ### Changed
 
-- `FontWeight.Bold` and the React Native `Text` component now describe bold as weight 600; the Storybook mobile `FontLoader` and `@metamask/design-system-twrnc-preset` now reference the `Geist-SemiBold`/`Geist-SemiBoldItalic` assets, so update any custom font registrations that previously assumed weight 700 as explained in the [migration guide](./MIGRATION.md#from-version-0120-to-0130) ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017)).
+- `FontWeight.Bold` and the React Native `Text` component now describe bold as weight 600; the Storybook mobile `FontLoader` and `@metamask/design-system-twrnc-preset` now reference the `Geist-SemiBold`/`Geist-SemiBoldItalic` assets, so update any custom font registrations that previously assumed weight 700 as explained in the [migration guide](./MIGRATION.md#from-version-0120-to-0130) ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017))
 - `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now derive from const objects annotated `as const`, producing string-union typings per ADR-0003/ADR-0004; the React Native entry point still exports the same names, so your imports stay on `@metamask/design-system-react-native` while the shared package hosts the canonical definitions ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014); see https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md and https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md).
-- Documented the Button migration instructions (prop, variant, and size mappings) in [MIGRATION.md#button-component](./MIGRATION.md#button-component) so both web and native developers follow the same before/after story ([#999](https://github.com/MetaMask/metamask-design-system/pull/999)).
+- Documented the Button migration instructions (prop, variant, and size mappings) in [MIGRATION.md#button-component](./MIGRATION.md#button-component) so both web and native developers follow the same before/after story ([#999](https://github.com/MetaMask/metamask-design-system/pull/999))
 
 ## [0.12.0]
 
@@ -285,8 +297,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New icons (AppleLogo, Backspace, Candlestick, Clear, MetamaskFoxOutline) ([#798](https://github.com/MetaMask/metamask-design-system/pull/798))
-
-- Figma code connect files for all components ([#766](https://github.com/MetaMask/metamask-design-system/pull/766)), ([#791](https://github.com/MetaMask/metamask-design-system/pull/791)), ([#795](https://github.com/MetaMask/metamask-design-system/pull/795)), ([#796](https://github.com/MetaMask/metamask-design-system/pull/796)), ([#794](https://github.com/MetaMask/metamask-design-system/pull/794)), ([#792](https://github.com/MetaMask/metamask-design-system/pull/792))
+- Figma code connect files for all components ([#766](https://github.com/MetaMask/metamask-design-system/pull/766), [#791](https://github.com/MetaMask/metamask-design-system/pull/791), [#795](https://github.com/MetaMask/metamask-design-system/pull/795), [#796](https://github.com/MetaMask/metamask-design-system/pull/796), [#794](https://github.com/MetaMask/metamask-design-system/pull/794), [#792](https://github.com/MetaMask/metamask-design-system/pull/792))
 
 ### Changed
 
@@ -332,7 +343,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.18.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.19.0...HEAD
+[0.19.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.18.0...@metamask/design-system-react-native@0.19.0
 [0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.17.0...@metamask/design-system-react-native@0.18.0
 [0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.16.0...@metamask/design-system-react-native@0.17.0
 [0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.15.0...@metamask/design-system-react-native@0.16.0
