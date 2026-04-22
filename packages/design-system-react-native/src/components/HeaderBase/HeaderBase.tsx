@@ -6,19 +6,15 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
-import { Box } from '../Box';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { Text } from '../Text';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { TextVariant } from '../Text';
 
-// Internal dependencies.
-import { HEADERBASE_VARIANT_TEXT_VARIANTS } from './HeaderBase.constants';
 import type { HeaderBaseProps } from './HeaderBase.types';
-import { HeaderBaseVariant } from './HeaderBase.types';
 
 export const HeaderBase: React.FC<HeaderBaseProps> = ({
   children,
   style,
-  variant = HeaderBaseVariant.Compact,
   startAccessory,
   endAccessory,
   startButtonIconProps,
@@ -26,7 +22,7 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
   includesTopInset = false,
   startAccessoryWrapperProps,
   endAccessoryWrapperProps,
-  titleTestID,
+  textProps,
   twClassName,
   ...props
 }) => {
@@ -49,21 +45,12 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
   const hasEndContent =
     endAccessory || (endButtonIconProps && endButtonIconProps.length > 0);
   const hasAnyAccessory = hasStartContent || hasEndContent;
+  const shouldRenderStartWrapper = Boolean(hasAnyAccessory);
+  const shouldRenderEndWrapper = Boolean(hasAnyAccessory);
 
-  const isCompact = variant === HeaderBaseVariant.Compact;
-
-  // For Compact variant, render both wrappers if any accessory exists (for centering)
-  // For Display variant, only render wrappers when they have content
-  const shouldRenderStartWrapper = isCompact
-    ? Boolean(hasAnyAccessory)
-    : Boolean(hasStartContent);
-  const shouldRenderEndWrapper = isCompact
-    ? Boolean(hasAnyAccessory)
-    : Boolean(hasEndContent);
-
-  // Calculate equal width for both accessory wrappers to ensure title stays centered (Compact only)
+  // Calculate equal width for both accessory wrappers to ensure title stays centered.
   const accessoryWrapperWidth =
-    isCompact && hasAnyAccessory && (startAccessoryWidth || endAccessoryWidth)
+    hasAnyAccessory && (startAccessoryWidth || endAccessoryWidth)
       ? Math.max(startAccessoryWidth, endAccessoryWidth)
       : undefined;
 
@@ -105,72 +92,86 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
   const hasMultipleEndButtons =
     !endAccessory && endButtonIconProps && endButtonIconProps.length > 1;
 
-  // Merge default styles with passed-in twClassName
-  const baseStyles = 'flex-row items-center gap-4 h-14';
-  const resolvedTwClassName = twClassName
-    ? `${baseStyles} ${twClassName}`
-    : baseStyles;
+  const renderAccessoryWrapper = ({
+    shouldRender,
+    wrapperProps,
+    alignment,
+    onLayout,
+    content,
+    contentStyle,
+  }: {
+    shouldRender: boolean;
+    wrapperProps?: HeaderBaseProps['startAccessoryWrapperProps'];
+    alignment: 'items-start' | 'items-end';
+    onLayout: (e: LayoutChangeEvent) => void;
+    content: React.ReactNode;
+    contentStyle?: ReturnType<typeof tw.style>;
+  }) => {
+    if (!shouldRender) {
+      return null;
+    }
+
+    return (
+      <View
+        style={
+          accessoryWrapperWidth
+            ? tw.style(alignment, { width: accessoryWrapperWidth })
+            : undefined
+        }
+        {...wrapperProps}
+      >
+        <View onLayout={onLayout} style={contentStyle}>
+          {content}
+        </View>
+      </View>
+    );
+  };
 
   return (
     <View
       style={[
-        tw.style(resolvedTwClassName),
+        tw.style('flex-row items-center gap-4 h-14', twClassName),
         includesTopInset && { marginTop: insets.top },
         style,
       ]}
       {...props}
     >
       {/* Start accessory */}
-      {shouldRenderStartWrapper && (
-        <View
-          style={
-            accessoryWrapperWidth
-              ? tw.style('items-start', { width: accessoryWrapperWidth })
-              : undefined
-          }
-          {...startAccessoryWrapperProps}
-        >
-          <View onLayout={handleStartAccessoryLayout}>
-            {renderStartContent()}
-          </View>
-        </View>
-      )}
+      {renderAccessoryWrapper({
+        shouldRender: shouldRenderStartWrapper,
+        wrapperProps: startAccessoryWrapperProps,
+        alignment: 'items-start',
+        onLayout: handleStartAccessoryLayout,
+        content: renderStartContent(),
+      })}
 
       {/* Title */}
-      <Box twClassName={isCompact ? 'flex-1 items-center' : 'flex-1'}>
-        {typeof children === 'string' ? (
-          <Text
-            variant={HEADERBASE_VARIANT_TEXT_VARIANTS[variant]}
-            testID={titleTestID}
-            style={isCompact ? tw.style('text-center') : undefined}
-          >
-            {children}
-          </Text>
-        ) : (
-          children
-        )}
-      </Box>
+      <TextOrChildren
+        textProps={{
+          variant: TextVariant.HeadingSm,
+          ...textProps,
+          style: [
+            tw.style('text-center flex-1 items-center'),
+            textProps?.style,
+          ],
+        }}
+      >
+        {children}
+      </TextOrChildren>
 
       {/* End accessory */}
-      {shouldRenderEndWrapper && (
-        <View
-          style={
-            accessoryWrapperWidth
-              ? tw.style('items-end', { width: accessoryWrapperWidth })
-              : undefined
-          }
-          {...endAccessoryWrapperProps}
-        >
-          <View
-            onLayout={handleEndAccessoryLayout}
-            style={
-              hasMultipleEndButtons ? tw.style('flex-row gap-2') : undefined
-            }
-          >
-            {renderEndContent()}
-          </View>
-        </View>
-      )}
+      {renderAccessoryWrapper({
+        shouldRender: shouldRenderEndWrapper,
+        wrapperProps: endAccessoryWrapperProps,
+        alignment: 'items-end',
+        onLayout: handleEndAccessoryLayout,
+        content: renderEndContent(),
+        contentStyle: hasMultipleEndButtons
+          ? tw.style('flex-row gap-2')
+          : undefined,
+      })}
     </View>
   );
 };
+
+HeaderBase.displayName = 'HeaderBase';
