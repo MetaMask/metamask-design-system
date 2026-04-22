@@ -64,7 +64,7 @@ export {
   BoxBorderColor,
   Box,
 } from './Box';
-export type { BoxSpacing, BoxProps } from './Box';
+export type { BoxSpacing, BoxProps, BoxBorderWidth } from './Box';
 
 export { Button, ButtonSize, ButtonVariant } from './Button';
 export type { ButtonProps } from './Button';

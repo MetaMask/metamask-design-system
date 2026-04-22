@@ -191,7 +191,7 @@ This ensures consistent branding for high-impact actions across different theme 
 
 ## Migration from MetaMask Mobile Component Library
 
-Migrating from the legacy `ButtonHero` in `app/component-library/components-temp/Buttons/ButtonHero`? See the [ButtonHero migration guide](../../MIGRATION.md#buttonhero-component) for import changes and `twClassName` behavior differences.
+Migrating from the legacy `ButtonHero` in `app/component-library/components-temp/Buttons/ButtonHero`? See the [ButtonHero migration guide](../../../MIGRATION.md#buttonhero-component) for import changes and `twClassName` behavior differences.
 
 ## References
 

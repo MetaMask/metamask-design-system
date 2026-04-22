@@ -134,7 +134,7 @@ export const StyleExample = () => (
 
 ## Migration from MetaMask Mobile Component Library
 
-Migrating from the legacy `ButtonBase` in `app/component-library/components/Buttons/Button/foundation/ButtonBase`? See the [ButtonBase migration guide](../../MIGRATION.md#buttonbase-component) for a full prop mapping and before/after examples.
+Migrating from the legacy `ButtonBase` in `app/component-library/components/Buttons/Button/foundation/ButtonBase`? See the [ButtonBase migration guide](../../../MIGRATION.md#buttonbase-component) for a full prop mapping and before/after examples.
 
 ## References
 

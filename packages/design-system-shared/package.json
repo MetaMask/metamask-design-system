@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-shared",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "Shared types for design system libraries",
   "keywords": [
     "MetaMask",
@@ -55,7 +55,7 @@
     "@types/react": "^18.2.0",
     "deepmerge": "^4.2.2",
     "jest": "^29.7.0",
-    "react": "^18.2.0",
+    "react": "18.3.1",
     "ts-jest": "^29.2.5",
     "typescript": "~5.2.2"
   },
