@@ -495,49 +495,49 @@ Notable differences in the design system Text component:
 
 ### Icon Component
 
-The Icon component has enum and prop-surface differences when migrating from the extension component-library.
+The Icon component has enum casing/value differences and a narrower prop surface when migrating from the extension component-library.
 
 Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for the shared Box/style-utility migration approach used across all components.
 
 #### Breaking Changes
 
-##### Size Enum Changes
+##### Props, Enums, and Value Mapping
 
-The extension `IconSize.Inherit` value is not supported in the design system.
+| Extension API                                                                                                     | MMDS React API                             | Change Type                   | Notes                                                                                                                                                      |
+| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name: IconName` (`kebab-case` enum values, for example `IconName.Popup = 'popup'`)                             | `name: IconName` (`PascalCase` values)     | enum value/casing changed     | Most names align by semantic meaning but many values/cases changed.                                                                                        |
+| `size?: IconSize` (`Xs`, `Sm`, `Md`, `Lg`, `Xl`, `Inherit`)                                                     | `size?: IconSize` (`Xs`, `Sm`, `Md`, `Lg`, `Xl`) | enum value removed            | `IconSize.Inherit` is removed; use explicit size and/or `className` sizing utilities.                                                                     |
+| `color?: IconColor` (`iconDefault`, `iconAlternative`, `iconMuted`, `overlayInverse`, `inherit`, network values) | `color?: IconColor` (`IconDefault`, `IconAlternative`, `IconMuted`, semantic text tokens) | enum renamed + values removed | `inherit`, network-specific values (`goerli`, `sepolia`, `linea*`), and `iconInverse` are not in MMDS `IconColor`.                                      |
+| `className?: string`                                                                                             | `className?: string`                       | unchanged                     | Still supported.                                                                                                                                           |
+| `style?: React.CSSProperties`                                                                                    | `style?: React.CSSProperties`              | unchanged                     | Still supported.                                                                                                                                           |
+| Polymorphic `IconProps<C>` with `StyleUtilityProps` / Box-style utilities                                       | `IconProps` extends standard SVG props     | removed                       | MMDS Icon is SVG-first; Box style utility props (layout/spacing/flex, etc.) are not part of the API.                                                     |
+| no explicit `'data-testid'` prop in `IconStyleUtilityProps`                                                     | `'data-testid'?: string`                   | added                         | Use for test targeting when needed.                                                                                                                        |
 
-| Extension Size     | Design System Migration          |
-| ------------------ | -------------------------------- |
-| `IconSize.Xs`      | `IconSize.Xs`                    |
-| `IconSize.Sm`      | `IconSize.Sm`                    |
-| `IconSize.Md`      | `IconSize.Md`                    |
-| `IconSize.Lg`      | `IconSize.Lg`                    |
-| `IconSize.Xl`      | `IconSize.Xl`                    |
-| `IconSize.Inherit` | Use `className` sizing utilities |
+##### Icon Name Differences (Selected)
 
-##### Color Enum Changes
+| Extension `IconName` | MMDS `IconName`          | Notes                                      |
+| -------------------- | ------------------------ | ------------------------------------------ |
+| `Apple`              | `AppleLogo`              | renamed                                    |
+| `Popup`              | `PopUp`                  | renamed (casing)                           |
+| `Sidepanel`          | `SidePanel`              | renamed (casing)                           |
+| `Dollar`             | removed                  | use closest supported icon                 |
+| `TriangleUp`         | removed                  | use closest supported icon                 |
+| `TriangleDown`       | removed                  | use closest supported icon                 |
+| not available        | `AttachMoney`            | MMDS-only icon                             |
+| not available        | `Backspace`              | MMDS-only icon                             |
+| not available        | `Clear`                  | MMDS-only icon                             |
+| not available        | `CorporateFare`          | MMDS-only icon                             |
+| not available        | `MetamaskFoxOutline`     | MMDS-only icon                             |
+| not available        | `NoPhotography`          | MMDS-only icon                             |
 
-Icon colors now use PascalCase names with a design-system-specific enum.
+##### Default and Behavior Changes
 
-| Extension Color             | Design System               |
-| --------------------------- | --------------------------- |
-| `IconColor.iconDefault`     | `IconColor.IconDefault`     |
-| `IconColor.iconAlternative` | `IconColor.IconAlternative` |
-| `IconColor.iconMuted`       | `IconColor.IconMuted`       |
-| `IconColor.overlayInverse`  | `IconColor.OverlayInverse`  |
-| `IconColor.primaryDefault`  | `IconColor.PrimaryDefault`  |
-| `IconColor.primaryInverse`  | `IconColor.PrimaryInverse`  |
-| `IconColor.errorDefault`    | `IconColor.ErrorDefault`    |
-| `IconColor.errorInverse`    | `IconColor.ErrorInverse`    |
-| `IconColor.warningDefault`  | `IconColor.WarningDefault`  |
-| `IconColor.warningInverse`  | `IconColor.WarningInverse`  |
-| `IconColor.successDefault`  | `IconColor.SuccessDefault`  |
-| `IconColor.successInverse`  | `IconColor.SuccessInverse`  |
-| `IconColor.infoDefault`     | `IconColor.InfoDefault`     |
-| `IconColor.infoInverse`     | `IconColor.InfoInverse`     |
-
-##### Prop Surface Changes
-
-The extension Icon is polymorphic (`as` pattern), while the design system Icon is an SVG-first component with standard SVG props.
+| Concern               | Extension Behavior                                                                                | MMDS React Behavior                                                                             |
+| --------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Default color         | `IconColor.inherit`                                                                               | `IconColor.IconDefault`                                                                         |
+| Rendering strategy    | CSS `mask-image` + `Box` wrapper                                                                  | Direct inline SVG component rendering                                                           |
+| Name lookup failures  | broken mask URL if unsupported enum value leaks through                                           | warns and returns `null` if icon lookup fails                                                  |
+| Styling model         | Box style utility props + polymorphic `as` pattern                                                | SVG props + `className`/`style`; no Box utility prop surface                                   |
 
 #### Migration Examples
 
@@ -546,6 +546,7 @@ The extension Icon is polymorphic (`as` pattern), while the design system Icon i
 ```tsx
 import { Icon } from '../../component-library';
 import {
+  Display,
   IconName,
   IconSize,
   IconColor,
@@ -555,6 +556,8 @@ import {
   name={IconName.Check}
   size={IconSize.Inherit}
   color={IconColor.iconDefault}
+  padding={2}
+  display={Display.InlineBlock}
 />;
 ```
 
@@ -573,14 +576,17 @@ import {
   size={IconSize.Md}
   color={IconColor.IconDefault}
   className="h-5 w-5"
+  role="img"
+  aria-label="Check"
 />;
 ```
 
 #### API Differences
 
+- `name` is still required, but enum value formats differ and several legacy names were removed/renamed
 - `className` and `style` are still supported
-- Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
+- `IconColor` values should come from `@metamask/design-system-react` (no `inherit`/network-specific icon colors)
 
 ### Checkbox Component
 

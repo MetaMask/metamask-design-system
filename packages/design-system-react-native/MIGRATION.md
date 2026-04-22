@@ -1896,41 +1896,57 @@ The mobile and design-system Text components both extend `react-native` `TextPro
 
 ### Icon Component
 
-The Icon component has some API and enum changes when migrating from the mobile component-library.
+The Icon component has enum/name differences and a narrowed prop surface when migrating from the mobile component-library.
 
 #### Breaking Changes
 
-##### Size Enum Changes
+##### Props, Enums, and Value Mapping
 
-`IconSize` no longer supports `Xss` or `XXL`.
+| Mobile API                                                                                                                                  | MMDS React Native API                                                                                                 | Change Type                   | Notes                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `name: IconName`                                                                                                                            | `name: IconName`                                                                                                      | enum surface changed          | Most names align, but some legacy names were removed/renamed.                                                                |
+| `size?: IconSize` (`Xss`, `Xs`, `Sm`, `Md`, `Lg`, `Xl`, `XXL`)                                                                             | `size?: IconSize` (`Xs`, `Sm`, `Md`, `Lg`, `Xl`)                                                                     | enum values removed           | `Xss` and `XXL` are removed (`Xss -> Xs`, `XXL -> Xl` for closest visual parity).                                           |
+| `color?: string \| IconColor` (`Default`, `Inverse`, `Alternative`, `Muted`, `Primary`, `PrimaryAlternative`, `Success`, `Error`, etc.) | `color?: IconColor` (`IconDefault`, `OverlayInverse`, semantic text token values)                                    | type + enum changed           | Raw string colors are no longer accepted through the `color` prop; use MMDS `IconColor`, `twClassName`, or `style` instead. |
+| `hitSlop?: number \| Insets`                                                                                                                | not supported on `Icon`                                                                                                | removed                       | MMDS `Icon` is SVG-based and does not expose `ViewProps` interaction props.                                                  |
+| extends `ViewProps`                                                                                                                         | extends `Omit<SvgProps, 'color' \| 'name'>`                                                                           | base prop surface changed     | Treat MMDS `Icon` as SVG props + `twClassName` customization.                                                                |
+| `twClassName` not available                                                                                                                 | `twClassName?: string`                                                                                                 | added                         | Tailwind utility override hook in MMDS.                                                                                      |
 
-| Mobile Size    | Design System Migration |
-| -------------- | ----------------------- |
-| `IconSize.Xss` | Use `IconSize.Xs`       |
-| `IconSize.Xs`  | `IconSize.Xs`           |
-| `IconSize.Sm`  | `IconSize.Sm`           |
-| `IconSize.Md`  | `IconSize.Md`           |
-| `IconSize.Lg`  | `IconSize.Lg`           |
-| `IconSize.Xl`  | `IconSize.Xl`           |
-| `IconSize.XXL` | Use `IconSize.Xl`       |
+##### Icon Name Differences (Selected)
 
-##### Color Prop Changes
+| Mobile `IconName`     | MMDS `IconName`      | Notes                       |
+| --------------------- | -------------------- | --------------------------- |
+| `Apple`               | `AppleLogo`          | renamed                     |
+| `MetamaskFoxFilled`   | removed              | use closest supported icon  |
+| `SearchFilled`        | removed              | use closest supported icon  |
+| not available         | `Backspace`          | MMDS-only icon              |
+| not available         | `Clear`              | MMDS-only icon              |
+| not available         | `PopUp`              | MMDS-only icon              |
+| not available         | `SidePanel`          | MMDS-only icon              |
 
-Mobile accepts `string | IconColor` for `color`, while the design system uses the `IconColor` enum.
+##### Color Enum Mapping (Common)
 
-| Mobile Color                   | Design System                  |
-| ------------------------------ | ------------------------------ |
-| `IconColor.Default`            | `IconColor.IconDefault`        |
-| `IconColor.Alternative`        | `IconColor.IconAlternative`    |
-| `IconColor.Muted`              | `IconColor.IconMuted`          |
-| `IconColor.Primary`            | `IconColor.PrimaryDefault`     |
-| `IconColor.PrimaryAlternative` | `IconColor.PrimaryAlternative` |
-| `IconColor.Success`            | `IconColor.SuccessDefault`     |
-| `IconColor.Error`              | `IconColor.ErrorDefault`       |
-| `IconColor.ErrorAlternative`   | `IconColor.ErrorAlternative`   |
-| `IconColor.Warning`            | `IconColor.WarningDefault`     |
-| `IconColor.Info`               | `IconColor.InfoDefault`        |
-| `IconColor.Inverse`            | `IconColor.OverlayInverse`     |
+| Mobile Color                   | MMDS React Native Color      |
+| ------------------------------ | ---------------------------- |
+| `IconColor.Default`            | `IconColor.IconDefault`      |
+| `IconColor.Alternative`        | `IconColor.IconAlternative`  |
+| `IconColor.Muted`              | `IconColor.IconMuted`        |
+| `IconColor.Primary`            | `IconColor.PrimaryDefault`   |
+| `IconColor.PrimaryAlternative` | `IconColor.PrimaryDefault`   |
+| `IconColor.Success`            | `IconColor.SuccessDefault`   |
+| `IconColor.Error`              | `IconColor.ErrorDefault`     |
+| `IconColor.ErrorAlternative`   | `IconColor.ErrorAlternative` |
+| `IconColor.Warning`            | `IconColor.WarningDefault`   |
+| `IconColor.Info`               | `IconColor.InfoDefault`      |
+| `IconColor.Inverse`            | `IconColor.OverlayInverse`   |
+
+##### Default and Behavior Changes
+
+| Concern             | Mobile Behavior                                                                                             | MMDS React Native Behavior                                                                   |
+| ------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Default color       | `IconColor.Default`                                                                                         | `IconColor.IconDefault`                                                                       |
+| Color fallback      | accepts enum or arbitrary color string (`#hex`, `rgb`, etc.)                                                | `color` expects MMDS `IconColor`; use `twClassName`/`style` for non-token styling           |
+| Rendering strategy  | resolves icon color via theme switch, then renders SVG asset                                                | applies Tailwind token classes (`color`, size) and renders SVG with `fill="currentColor"`   |
+| Prop inheritance    | inherits `ViewProps` (`hitSlop`, accessibility/interaction view props)                                      | inherits SVG props only (`SvgProps`, excluding `color`/`name`)                               |
 
 #### Migration Examples
 
@@ -1948,15 +1964,24 @@ import { Icon, IconName, IconSize, IconColor } from '../../../component-library/
 ```tsx
 import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-react-native';
 
-<Icon name={IconName.CheckBold} size={IconSize.Xl} color={IconColor.IconDefault} />
-<Icon name={IconName.Warning} color={IconColor.WarningDefault} />
+<Icon
+  name={IconName.CheckBold}
+  size={IconSize.Xl}
+  color={IconColor.IconDefault}
+/>
+<Icon
+  name={IconName.Warning}
+  color={IconColor.WarningDefault}
+  twClassName="opacity-80"
+/>
 ```
 
 #### API Differences
 
-- `name` remains required and uses `IconName` in both implementations
-- `hitSlop` remains available via inherited `ViewProps`
+- `name` remains required, but enum membership differs (for example `Apple` -> `AppleLogo`)
+- `hitSlop` is removed because MMDS `Icon` no longer extends `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+- `color` should use MMDS `IconColor`; avoid passing raw color strings directly to the `color` prop
 
 ### Checkbox Component
 
