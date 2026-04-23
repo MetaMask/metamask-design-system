@@ -138,4 +138,3 @@ export type ToastProps = {
    */
   labelsContainerProps?: Omit<ViewProps, 'children' | 'style'>;
 } & Omit<ViewProps, 'style'>;
-

@@ -509,7 +509,7 @@ describe('Toast', () => {
   });
 });
 
-describe('Toast static API', () => {
+describe('specs for `Toast` static API', () => {
   beforeEach(() => {
     jest.useFakeTimers();
   });
@@ -518,7 +518,7 @@ describe('Toast static API', () => {
     jest.useRealTimers();
   });
 
-  it('Toast.show displays a toast once <Toast /> is mounted', async () => {
+  it('method `Toast.show` displays a toast once <Toast /> is mounted', async () => {
     render(<Toast />);
 
     await act(async () => {
@@ -533,7 +533,7 @@ describe('Toast static API', () => {
     expect(screen.getByText('Static show')).toBeDefined();
   });
 
-  it('Toast.hide dismisses the current toast', async () => {
+  it('method `Toast.hide` dismisses the current toast', async () => {
     render(<Toast />);
 
     await act(async () => {
@@ -552,7 +552,7 @@ describe('Toast static API', () => {
     expect(screen.queryByText('Will be hidden')).toBeNull();
   });
 
-  it('Toast.show throws a helpful error when <Toast /> is not mounted', () => {
+  it('method `Toast.show` throws a helpful error when <Toast /> is not mounted', () => {
     expect(() =>
       Toast.show({
         variant: ToastVariant.Plain,
@@ -562,7 +562,7 @@ describe('Toast static API', () => {
     ).toThrow(/Toast.show\(\) called before <Toast \/> mounted/u);
   });
 
-  it('Toast.hide throws a helpful error when <Toast /> is not mounted', () => {
+  it('method `Toast.hide` throws a helpful error when <Toast /> is not mounted', () => {
     expect(() => Toast.hide()).toThrow(
       /Toast.hide\(\) called before <Toast \/> mounted/u,
     );
@@ -581,7 +581,7 @@ describe('Toast static API', () => {
     ).toThrow(/Toast.show\(\) called before <Toast \/> mounted/u);
   });
 
-  it('Toast.show replaces the existing toast on rapid successive calls', async () => {
+  it('method `Toast.show` replaces the existing toast on rapid successive calls', async () => {
     render(<Toast />);
 
     await act(async () => {
@@ -623,9 +623,7 @@ describe('Toast static API', () => {
       jest.runAllTimers();
     });
 
-    expect(
-      screen.getByText('Second instance still registered'),
-    ).toBeDefined();
+    expect(screen.getByText('Second instance still registered')).toBeDefined();
   });
 
   it('forwarded ref and static API both drive the same instance', async () => {
