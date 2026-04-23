@@ -105,3 +105,5 @@ export const Box = forwardRef<View, BoxProps>(
     );
   },
 );
+
+Box.displayName = 'Box';
