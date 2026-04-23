@@ -41,6 +41,9 @@ export { type TitleHubPropsShared } from './types/TitleHub';
 // TitleStandard types (ADR-0004)
 export { type TitleStandardPropsShared } from './types/TitleStandard';
 
+// TitleSubpage types (ADR-0004)
+export { type TitleSubpagePropsShared } from './types/TitleSubpage';
+
 // BoxColumn types (ADR-0004)
 export { type BoxColumnPropsShared } from './types/BoxColumn';
 
