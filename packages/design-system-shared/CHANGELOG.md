@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: centralize Icon types and assets (ADR-0003/ADR-0004) ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
+- feat(shared): migrate Box to ADR-0003 and ADR-0004 shared types (DSYS-482) ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
+- feat: Add Tag component for React Native ([#1053](https://github.com/MetaMask/metamask-design-system/pull/1053))
+
 ## [0.12.0]
 
 ### Added
