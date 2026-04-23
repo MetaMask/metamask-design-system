@@ -47,14 +47,13 @@ describe('TitleSubpage', () => {
       expect(getByTestId(TITLE_AVATAR_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('wraps titleAvatar in a 40 by 40 box with centered content and hidden overflow', () => {
-      const { getByTestId } = render(
+    it('passes titleAvatar through as startAccessory without a fixed-size overflow wrapper', () => {
+      const { getByTestId, queryByTestId } = render(
         <TitleSubpage titleAvatar={defaultTitleAvatar} title="Section" />,
       );
 
-      expect(getByTestId(TITLE_AVATAR_SLOT_TEST_ID)).toHaveStyle(
-        tw`size-10 items-center justify-center overflow-hidden`,
-      );
+      expect(getByTestId(TITLE_AVATAR_TEST_ID)).toBeOnTheScreen();
+      expect(queryByTestId(TITLE_AVATAR_SLOT_TEST_ID)).not.toBeOnTheScreen();
     });
 
     it('forwards identityRowProps testID to identity BoxRow', () => {

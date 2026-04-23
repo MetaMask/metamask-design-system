@@ -1,6 +1,6 @@
 # TitleSubpage
 
-TitleSubpage lays out a required identity block (leading `titleAvatar` beside a title stack), an optional subtitle, an optional amount row, optional bottom rows, and optional inline accessories per row. On React Native, `titleAvatar` is passed as the `startAccessory` of the identity `BoxRow`; use `AvatarToken` at `AvatarTokenSize.Lg` for the design-spec 40×40 footprint.
+TitleSubpage lays out a required identity block (leading `titleAvatar` beside a title stack), an optional subtitle, an optional amount row, optional bottom rows, and optional inline accessories per row. On React Native, `titleAvatar` is passed straight through as the identity `BoxRow` `startAccessory` (no fixed-size or `overflow: hidden` wrapper), so network badges and other overlays can extend past the token without being clipped. For the default layout, use `AvatarToken` at `AvatarTokenSize.Lg` (40×40) so the token aligns with the row; the component stays agnostic—you own composition when you need badges or other chrome.
 
 ```tsx
 import {
@@ -19,7 +19,7 @@ import {
 
 ### `titleAvatar`
 
-Leading visual for the identity row (required). Passed as the `startAccessory` of the identity `BoxRow`. Typically pass an avatar or token component (for example `AvatarToken` at `AvatarTokenSize.Lg` for the default 40×40 spec).
+Leading visual for the identity row (required). Passed as the `startAccessory` of the identity `BoxRow` with no inner layout wrapper. Prefer `AvatarToken` at `AvatarTokenSize.Lg` for the standard 40×40 footprint; wrap in `BadgeWrapper` (or similar) when you need a network badge or other element that should sit outside the token bounds.
 
 | TYPE        | REQUIRED | DEFAULT |
 | ----------- | -------- | ------- |
@@ -36,6 +36,40 @@ import {
   titleAvatar={<AvatarToken name="ethereum" size={AvatarTokenSize.Lg} />}
   title="Send"
   amount="$4.42"
+/>;
+```
+
+```tsx
+import {
+  AvatarNetwork,
+  AvatarNetworkSize,
+  AvatarToken,
+  AvatarTokenSize,
+  BadgeWrapper,
+  BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
+  TitleSubpage,
+} from '@metamask/design-system-react-native';
+
+// Supply `src` (or equivalent) for your token and network artwork.
+
+<TitleSubpage
+  titleAvatar={
+    <BadgeWrapper
+      badge={
+        <AvatarNetwork
+          src={EthSvg}
+          size={AvatarNetworkSize.Xs}
+          name="Ethereum"
+        />
+      }
+      position={BadgeWrapperPosition.BottomRight}
+      positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+    >
+      <AvatarToken src={UsdcSvg} size={AvatarTokenSize.Lg} name="USD Coin" />
+    </BadgeWrapper>
+  }
+  title="USD Coin"
 />;
 ```
 
