@@ -845,11 +845,11 @@ This section covers version-to-version breaking changes within `@metamask/design
 
 **What Changed:**
 
-`IconName`, `IconColor`, and `IconSize` are still exported from `@metamask/design-system-react`, but they now follow the ADR-0003 const-object + string-union pattern instead of local enums. The runtime values stay the same.
+`IconName`, `IconColor`, and `IconSize` now follow the ADR-0003 const-object + string-union pattern instead of local enums. The runtime values stay the same.
 
 **Migration:**
 
-Typical usage does not need a code change. Keep importing the icon types from `@metamask/design-system-react` as before:
+Typical usage does not need a code change:
 
 ```tsx
 // Before (0.17.1)
@@ -872,7 +872,7 @@ import { IconColor, IconName, IconSize } from '@metamask/design-system-react';
 
 **What Changed:**
 
-`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` are still exported from `@metamask/design-system-react`, but now follow the ADR-0003 const-object + string-union pattern instead of local enums.
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` now follow the ADR-0003 const-object + string-union pattern instead of local enums.
 
 **Migration:**
 
@@ -921,7 +921,6 @@ These tokens had no backing CSS custom property, so any usage was already produc
 **Impact:**
 
 - Any reference to the removed entries will produce a TypeScript error after upgrading.
-- Existing imports from `@metamask/design-system-react` continue to work; no import-path change is required.
 
 ---
 
@@ -929,7 +928,7 @@ These tokens had no backing CSS custom property, so any usage was already produc
 
 ### Text: Typography enum exports now use const objects and string unions
 
-`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` are still exported from `@metamask/design-system-react`, but now follow the ADR-0003 const-object + string-union pattern instead of enums. All existing import paths through `@metamask/design-system-react` continue to work without change.
+`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` now follow the ADR-0003 const-object + string-union pattern instead of enums.
 
 #### `FontWeight`, `FontStyle`, and `FontFamily` values changed
 
