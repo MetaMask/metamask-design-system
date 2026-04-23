@@ -5,26 +5,9 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
-  - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
-
-### From version 0.12.0 to 0.13.0
-
-#### Icon: Shared exports are now the source of truth
-
-`IconName`, `IconSize`, and `IconColor` are now exported from `@metamask/design-system-shared` as the canonical cross-platform icon contract consumed by both platform packages.
-
-This is additive if you were not already importing icon contracts from `@metamask/design-system-shared`.
-
-#### Box: Shared contracts are now the source of truth
-
-`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, `BoxBorderWidth`, and `BoxPropsShared` now live in `@metamask/design-system-shared` as the canonical cross-platform Box contract.
-
-If you were previously importing duplicated Box contracts from platform-specific internal paths, update to import them from `@metamask/design-system-shared` instead.
-
----
 
 ### From version 0.11.0 to 0.12.0
 
