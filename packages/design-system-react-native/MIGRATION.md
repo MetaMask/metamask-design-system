@@ -37,43 +37,6 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ### From version 0.19.0 to 0.20.0
 
-#### Icon: Enum exports now use const objects and string unions
-
-**What Changed:**
-
-`IconName`, `IconColor`, and `IconSize` now follow the ADR-0003 const-object + string-union pattern instead of local enums. The runtime values stay the same.
-
-**Migration:**
-
-Typical usage does not need a code change:
-
-```tsx
-// Before (0.19.0)
-import {
-  Icon,
-  IconColor,
-  IconName,
-  IconSize,
-} from '@metamask/design-system-react-native';
-
-<Icon name={IconName.Add} color={IconColor.IconDefault} size={IconSize.Md} />;
-
-// After (0.20.0)
-import {
-  Icon,
-  IconColor,
-  IconName,
-  IconSize,
-} from '@metamask/design-system-react-native';
-
-<Icon name={IconName.Add} color={IconColor.IconDefault} size={IconSize.Md} />;
-```
-
-**Impact:**
-
-- Any code that depended on these exports being TypeScript `enum`s rather than const objects may need to update its typing assumptions.
-- Typical component usage with `IconName.Add`, `IconColor.IconDefault`, and `IconSize.Md` continues to work unchanged.
-
 #### Box: Enum exports now use const objects and string unions
 
 **What Changed:**
