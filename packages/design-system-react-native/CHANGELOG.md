@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.20.0]
+
+### Added
+
+- Added `TitleStandard` for mobile title layouts with optional top and bottom accessory rows ([#1051](https://github.com/MetaMask/metamask-design-system/pull/1051))
+- Added `TitleSubpage` for subpage headers with avatar, title, subtitle, amount, and bottom-label layouts ([#1059](https://github.com/MetaMask/metamask-design-system/pull/1059))
+- Added `Tag` for compact severity-based metadata labels with optional icons or custom accessories ([#1053](https://github.com/MetaMask/metamask-design-system/pull/1053))
+
+### Changed
+
+- `Box` now forwards refs to the underlying `View`, which makes imperative measurement and focus flows easier to integrate ([#1102](https://github.com/MetaMask/metamask-design-system/pull/1102))
+- Updated `ButtonTertiary` to use the default text color for more consistent contrast across states ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
+- **BREAKING:** Updated `IconName`, `IconColor`, and `IconSize` exports to use const-object + string-union types instead of local enums; existing imports from `@metamask/design-system-react-native` continue to work, but enum-specific type assumptions may need updating ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
+  - See [Migration Guide](./MIGRATION.md#from-version-0190-to-0200)
+- **BREAKING:** Updated `Box` type exports (`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, `BoxBorderWidth`) to use const-object + string-union types, and removed stale Box color entries that no longer map to design tokens ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
+  - Removed `BoxBackgroundColor.WarningAlternative`, `BoxBackgroundColor.SuccessAlternative`, `BoxBorderColor.WarningAlternative`, `BoxBorderColor.SuccessAlternative`, and `BoxBorderColor.InfoAlternative`
+  - See [Migration Guide](./MIGRATION.md#from-version-0190-to-0200)
+
 ## [0.19.0]
 
 ### Added
@@ -312,13 +330,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added 5 new Text component variants with responsive typography support ([#777](https://github.com/MetaMask/metamask-design-system/pull/777)):
+- Added 5 new Text component variants with responsive typography support: ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
   - `TextVariant.PageHeading` - For main page titles with large, bold styling
   - `TextVariant.SectionHeading` - For section titles with medium, bold styling
   - `TextVariant.ButtonLabelMd` - For medium-sized button labels with optimized button text styling
   - `TextVariant.ButtonLabelLg` - For large-sized button labels with optimized button text styling
   - `TextVariant.AmountDisplayLg` - For large amount/value displays with prominent numeric styling
-- Added comprehensive utility props to Box component for enhanced layout control ([#779](https://github.com/MetaMask/metamask-design-system/pull/779)) and fixes ([#781](https://github.com/MetaMask/metamask-design-system/pull/781)):
+- Added comprehensive utility props to Box component for enhanced layout control and fixes: ([#779](https://github.com/MetaMask/metamask-design-system/pull/779), [#781](https://github.com/MetaMask/metamask-design-system/pull/781))
   - **Margin props:** `margin`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft`, `marginHorizontal`, `marginVertical`
   - **Padding props:** `padding`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft`, `paddingHorizontal`, `paddingVertical`
   - **Border props:** `borderWidth`, `borderColor`
@@ -343,7 +361,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.19.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.20.0...HEAD
+[0.20.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.19.0...@metamask/design-system-react-native@0.20.0
 [0.19.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.18.0...@metamask/design-system-react-native@0.19.0
 [0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.17.0...@metamask/design-system-react-native@0.18.0
 [0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.16.0...@metamask/design-system-react-native@0.17.0
