@@ -56,11 +56,6 @@ type ToastWithStatics = typeof ToastComponent & {
    * Hide the currently visible toast, if any.
    */
   hide: () => void;
-  /**
-   * Clears the registered `<Toast />` ref. Intended for testing only.
-   * @internal
-   */
-  resetForTesting: () => void;
 };
 
 export const Toast = ToastComponent as ToastWithStatics;
@@ -71,8 +66,4 @@ Toast.show = (options) => {
 
 Toast.hide = () => {
   assertRegisteredRef('hide').closeToast();
-};
-
-Toast.resetForTesting = () => {
-  registeredRef = null;
 };

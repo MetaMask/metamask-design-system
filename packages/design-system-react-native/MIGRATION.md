@@ -2639,13 +2639,13 @@ There is no longer a distinction between "React component" and "service" call si
 
 ##### Method renames
 
-| Mobile (on ref / service)      | Design System (static)                                  |
-| ------------------------------ | ------------------------------------------------------- |
-| `toastRef.current.showToast`   | `Toast.show`                                            |
-| `toastRef.current.closeToast`  | `Toast.hide`                                            |
-| `ToastService.showToast`       | `Toast.show`                                            |
-| `ToastService.closeToast`      | `Toast.hide`                                            |
-| `ToastService.resetForTesting` | `Toast.resetForTesting` (same semantics — testing only) |
+| Mobile (on ref / service)      | Design System (static)                                                                   |
+| ------------------------------ | ---------------------------------------------------------------------------------------- |
+| `toastRef.current.showToast`   | `Toast.show`                                                                             |
+| `toastRef.current.closeToast`  | `Toast.hide`                                                                             |
+| `ToastService.showToast`       | `Toast.show`                                                                             |
+| `ToastService.closeToast`      | `Toast.hide`                                                                             |
+| `ToastService.resetForTesting` | _(removed — not needed; RTL auto-cleanup unregisters the ref when `<Toast />` unmounts)_ |
 
 The per-instance `showToast` / `closeToast` methods are still exposed on the forwarded ref for advanced cases (for example, isolated Storybook stories), but application code should use the static API.
 
