@@ -38,6 +38,9 @@ export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
 // TitleHub types (ADR-0004)
 export { type TitleHubPropsShared } from './types/TitleHub';
 
+// TitleStandard types (ADR-0004)
+export { type TitleStandardPropsShared } from './types/TitleStandard';
+
 // TitleSubpage types (ADR-0004)
 export { type TitleSubpagePropsShared } from './types/TitleSubpage';
 
@@ -133,3 +136,11 @@ export {
   type BoxBorderWidth,
   type BoxPropsShared,
 } from './types/Box';
+
+// Icon types (ADR-0003 + ADR-0004)
+export {
+  IconColor,
+  IconName,
+  IconSize,
+  type IconPropsShared,
+} from './types/Icon';
