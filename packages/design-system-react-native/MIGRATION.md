@@ -99,6 +99,30 @@ If TypeScript now flags props you were previously passing to `Icon`, those props
 </View>
 ```
 
+#### Box: Type imports moved to `@metamask/design-system-shared`
+
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react-native`. All existing import paths through `@metamask/design-system-react-native` continue to work without change.
+
+```tsx
+// Both of these work — shared is the source of truth
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
+import { BoxBackgroundColor } from '@metamask/design-system-shared';
+```
+
+#### Box: Removed stale `-alternative` color tokens
+
+The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
+
+| Removed Entry                           | Replacement                         |
+| --------------------------------------- | ----------------------------------- |
+| `BoxBackgroundColor.WarningAlternative` | `BoxBackgroundColor.WarningDefault` |
+| `BoxBackgroundColor.SuccessAlternative` | `BoxBackgroundColor.SuccessDefault` |
+| `BoxBorderColor.WarningAlternative`     | `BoxBorderColor.WarningDefault`     |
+| `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`     |
+| `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`        |
+
+These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate.
+
 ---
 
 ### From version 0.16.0 to 0.17.0

@@ -114,3 +114,27 @@ export {
 
 // Checkbox types (ADR-0004)
 export { type CheckboxPropsShared } from './types/Checkbox';
+
+// Tag types (ADR-0003 + ADR-0004)
+export { TagSeverity, type TagPropsShared } from './types/Tag';
+
+// Box types (ADR-0003 + ADR-0004)
+export {
+  BoxFlexDirection,
+  BoxFlexWrap,
+  BoxAlignItems,
+  BoxJustifyContent,
+  BoxBackgroundColor,
+  BoxBorderColor,
+  type BoxSpacing,
+  type BoxBorderWidth,
+  type BoxPropsShared,
+} from './types/Box';
+
+// Icon types (ADR-0003 + ADR-0004)
+export {
+  IconColor,
+  IconName,
+  IconSize,
+  type IconPropsShared,
+} from './types/Icon';

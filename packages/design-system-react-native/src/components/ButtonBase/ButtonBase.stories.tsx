@@ -1,6 +1,7 @@
+import { BoxFlexDirection } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
-import { BoxFlexDirection, ButtonBaseSize } from '../../types';
+import { ButtonBaseSize } from '../../types';
 import { Box } from '../Box';
 import { IconName } from '../Icon';
 
