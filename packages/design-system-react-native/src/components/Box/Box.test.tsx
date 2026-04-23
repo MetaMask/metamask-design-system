@@ -9,8 +9,8 @@ import {
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
-import React from 'react';
-import { Text } from 'react-native';
+import React, { createRef } from 'react';
+import { Text, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { Box } from './Box';
@@ -81,6 +81,14 @@ describe('Box', () => {
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(tw.style('flex'));
+  });
+
+  it('forwards ref to the underlying View', () => {
+    const ref = createRef<View>();
+
+    render(<Box ref={ref} testID="box" />);
+
+    expect(ref.current).toBeInstanceOf(View);
   });
 
   it('applies flexDirection', () => {
