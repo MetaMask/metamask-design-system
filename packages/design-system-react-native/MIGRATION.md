@@ -44,7 +44,11 @@ This guide provides detailed instructions for migrating your project from one ve
 If you import these types from `@metamask/design-system-react-native`, no change is required:
 
 ```tsx
-import { IconColor, IconName, IconSize } from '@metamask/design-system-react-native';
+import {
+  IconColor,
+  IconName,
+  IconSize,
+} from '@metamask/design-system-react-native';
 ```
 
 If you were importing icon types or generated assets from deep internal paths, update those imports to package-root exports instead. Also update any removed legacy icon aliases or icon color members that no longer exist in the shared contract.
