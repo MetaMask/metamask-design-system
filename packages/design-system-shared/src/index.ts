@@ -38,6 +38,9 @@ export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
 // TitleHub types (ADR-0004)
 export { type TitleHubPropsShared } from './types/TitleHub';
 
+// TitleStandard types (ADR-0004)
+export { type TitleStandardPropsShared } from './types/TitleStandard';
+
 // BoxColumn types (ADR-0004)
 export { type BoxColumnPropsShared } from './types/BoxColumn';
 

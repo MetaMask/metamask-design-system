@@ -207,6 +207,9 @@ export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 export { TitleHub } from './TitleHub';
 export type { TitleHubProps, TitleHubPropsShared } from './TitleHub';
 
+export { TitleStandard } from './TitleStandard';
+export type { TitleStandardProps } from './TitleStandard';
+
 export {
   Toast,
   ToastVariant,
