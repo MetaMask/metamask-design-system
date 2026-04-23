@@ -130,3 +130,11 @@ export {
   type BoxBorderWidth,
   type BoxPropsShared,
 } from './types/Box';
+
+// Icon types (ADR-0003 + ADR-0004)
+export {
+  IconColor,
+  IconName,
+  IconSize,
+  type IconPropsShared,
+} from './types/Icon';
