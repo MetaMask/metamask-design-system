@@ -1,6 +1,6 @@
 // Third party dependencies.
 import { render, screen, act, fireEvent } from '@testing-library/react-native';
-import React, { createRef, useContext } from 'react';
+import React, { createRef } from 'react';
 import { Text as RNText } from 'react-native';
 
 // External dependencies.
@@ -9,7 +9,6 @@ import { AvatarAccountVariant } from '../AvatarAccount';
 
 // Internal dependencies.
 import { Toast } from './Toast';
-import { ToastContext, ToastContextWrapper } from './Toast.context';
 import type { ToastOptions, ToastRef } from './Toast.types';
 import { ToastCloseButtonVariant, ToastVariant } from './Toast.types';
 
@@ -510,22 +509,97 @@ describe('Toast', () => {
   });
 });
 
-describe('ToastContextWrapper', () => {
-  it('renders children and provides toastRef via context', () => {
-    const Consumer: React.FC = () => {
-      const { toastRef } = useContext(ToastContext);
-      return (
-        <RNText testID="consumer">{toastRef ? 'has-ref' : 'no-ref'}</RNText>
-      );
-    };
+describe('Toast static API', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+    Toast.resetForTesting();
+  });
 
-    render(
-      <ToastContextWrapper>
-        <Consumer />
-      </ToastContextWrapper>,
+  afterEach(() => {
+    jest.useRealTimers();
+    Toast.resetForTesting();
+  });
+
+  it('Toast.show displays a toast once <Toast /> is mounted', async () => {
+    render(<Toast />);
+
+    await act(async () => {
+      Toast.show({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'Static show' }],
+        hasNoTimeout: true,
+      });
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByText('Static show')).toBeDefined();
+  });
+
+  it('Toast.hide dismisses the current toast', async () => {
+    render(<Toast />);
+
+    await act(async () => {
+      Toast.show({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'Will be hidden' }],
+        hasNoTimeout: true,
+      });
+      jest.runAllTimers();
+    });
+    expect(screen.getByText('Will be hidden')).toBeDefined();
+
+    await act(async () => {
+      Toast.hide();
+    });
+    expect(screen.queryByText('Will be hidden')).toBeNull();
+  });
+
+  it('Toast.show throws a helpful error when <Toast /> is not mounted', () => {
+    expect(() =>
+      Toast.show({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'No mount' }],
+        hasNoTimeout: true,
+      }),
+    ).toThrow(/Toast.show\(\) called before <Toast \/> mounted/u);
+  });
+
+  it('Toast.hide throws a helpful error when <Toast /> is not mounted', () => {
+    expect(() => Toast.hide()).toThrow(
+      /Toast.hide\(\) called before <Toast \/> mounted/u,
     );
+  });
 
-    expect(screen.getByTestId('consumer')).toBeDefined();
-    expect(screen.getByText('has-ref')).toBeDefined();
+  it('unregisters the global ref when <Toast /> unmounts', () => {
+    const { unmount } = render(<Toast />);
+    unmount();
+
+    expect(() =>
+      Toast.show({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'After unmount' }],
+        hasNoTimeout: true,
+      }),
+    ).toThrow(/Toast.show\(\) called before <Toast \/> mounted/u);
+  });
+
+  it('forwarded ref and static API both drive the same instance', async () => {
+    const ref = createRef<ToastRef>();
+    render(<Toast ref={ref} />);
+
+    await act(async () => {
+      Toast.show({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'From static' }],
+        hasNoTimeout: true,
+      });
+      jest.runAllTimers();
+    });
+    expect(screen.getByText('From static')).toBeDefined();
+
+    await act(async () => {
+      ref.current?.closeToast();
+    });
+    expect(screen.queryByText('From static')).toBeNull();
   });
 });
