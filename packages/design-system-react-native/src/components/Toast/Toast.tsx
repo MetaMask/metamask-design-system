@@ -1,14 +1,15 @@
 // Third party dependencies.
-import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import type { RefObject } from 'react';
 
 // Internal dependencies.
+import type { ToastOptions, ToastProps, ToastRef } from './Toast.types';
 import { ToastBase } from './ToastBase';
-import type {
-  ToastOptions,
-  ToastProps,
-  ToastRef,
-} from './Toast.types';
 
 let registeredRef: RefObject<ToastRef> | null = null;
 
