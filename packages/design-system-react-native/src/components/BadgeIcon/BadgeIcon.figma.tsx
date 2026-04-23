@@ -18,7 +18,7 @@ import { BadgeIcon } from './BadgeIcon';
 
 figma.connect(
   BadgeIcon,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=1973%3A2426',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=1973%3A2426',
   {
     props: {
       iconName: figma.enum('iconName', {

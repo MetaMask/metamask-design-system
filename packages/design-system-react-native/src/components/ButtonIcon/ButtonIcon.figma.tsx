@@ -20,7 +20,7 @@ import { ButtonIconSize, ButtonIconVariant } from '.';
 
 figma.connect(
   ButtonIcon,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=1%3A2860',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=1%3A2860',
   {
     props: {
       size: figma.enum('size', {
@@ -29,10 +29,12 @@ figma.connect(
         Lg: ButtonIconSize.Lg,
       }),
       isDisabled: figma.boolean('isDisabled'),
-      variant: figma.enum('variant', {
-        Default: ButtonIconVariant.Default,
-        Filled: ButtonIconVariant.Filled,
-        Floating: ButtonIconVariant.Floating,
+      variant: figma.boolean('isFloating', {
+        true: ButtonIconVariant.Floating,
+        false: figma.boolean('isInverse', {
+          true: ButtonIconVariant.Filled,
+          false: ButtonIconVariant.Default,
+        }),
       }),
     },
     example: ({ size, isDisabled, variant, ...props }) => (
