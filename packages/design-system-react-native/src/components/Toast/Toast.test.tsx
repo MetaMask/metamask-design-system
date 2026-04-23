@@ -512,12 +512,10 @@ describe('Toast', () => {
 describe('Toast static API', () => {
   beforeEach(() => {
     jest.useFakeTimers();
-    Toast.resetForTesting();
   });
 
   afterEach(() => {
     jest.useRealTimers();
-    Toast.resetForTesting();
   });
 
   it('Toast.show displays a toast once <Toast /> is mounted', async () => {
@@ -581,6 +579,53 @@ describe('Toast static API', () => {
         hasNoTimeout: true,
       }),
     ).toThrow(/Toast.show\(\) called before <Toast \/> mounted/u);
+  });
+
+  it('Toast.show replaces the existing toast on rapid successive calls', async () => {
+    render(<Toast />);
+
+    await act(async () => {
+      Toast.show({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'First static' }],
+        hasNoTimeout: true,
+      });
+      jest.runAllTimers();
+    });
+    expect(screen.getByText('First static')).toBeDefined();
+
+    await act(async () => {
+      Toast.show({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'Second static' }],
+        hasNoTimeout: true,
+      });
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByText('Second static')).toBeDefined();
+    expect(screen.queryByText('First static')).toBeNull();
+    expect(mockCancelAnimation).toHaveBeenCalled();
+  });
+
+  it('last mounted <Toast /> wins and earlier unmount does not clear it', async () => {
+    const first = render(<Toast />);
+    render(<Toast />);
+
+    first.unmount();
+
+    await act(async () => {
+      Toast.show({
+        variant: ToastVariant.Plain,
+        labelOptions: [{ label: 'Second instance still registered' }],
+        hasNoTimeout: true,
+      });
+      jest.runAllTimers();
+    });
+
+    expect(
+      screen.getByText('Second instance still registered'),
+    ).toBeDefined();
   });
 
   it('forwarded ref and static API both drive the same instance', async () => {
