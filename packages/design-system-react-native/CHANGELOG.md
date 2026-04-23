@@ -9,15 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20.0]
 
-### Uncategorized
+### Added
 
-- feat: [DSRN] Add TitleSubpage ([#1059](https://github.com/MetaMask/metamask-design-system/pull/1059))
-- chore: Forward refs for React Native Box ([#1102](https://github.com/MetaMask/metamask-design-system/pull/1102))
-- feat: [DSRN ]Added TitleStandard ([#1051](https://github.com/MetaMask/metamask-design-system/pull/1051))
-- chore(button): ButtonTertiary uses text-default (web + RN) ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
-- chore: centralize Icon types and assets (ADR-0003/ADR-0004) ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
-- feat(shared): migrate Box to ADR-0003 and ADR-0004 shared types (DSYS-482) ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
-- feat: Add Tag component for React Native ([#1053](https://github.com/MetaMask/metamask-design-system/pull/1053))
+- Added `TitleStandard` for mobile title layouts with optional top and bottom accessory rows ([#1051](https://github.com/MetaMask/metamask-design-system/pull/1051))
+- Added `TitleSubpage` for subpage headers with avatar, title, subtitle, amount, and bottom-label layouts ([#1059](https://github.com/MetaMask/metamask-design-system/pull/1059))
+- Added `Tag` for compact severity-based metadata labels with optional icons or custom accessories ([#1053](https://github.com/MetaMask/metamask-design-system/pull/1053))
+
+### Changed
+
+- `Box` now forwards refs to the underlying `View`, which makes imperative measurement and focus flows easier to integrate ([#1102](https://github.com/MetaMask/metamask-design-system/pull/1102))
+- Updated `ButtonTertiary` to use the default text color for more consistent contrast across states ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
+- **BREAKING:** Updated `IconName`, `IconColor`, and `IconSize` exports to use const-object + string-union types instead of local enums; existing imports from `@metamask/design-system-react-native` continue to work, but enum-specific type assumptions may need updating ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
+  - See [Migration Guide](./MIGRATION.md#from-version-0190-to-0200)
+- **BREAKING:** Updated `Box` type exports (`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, `BoxBorderWidth`) to use const-object + string-union types, and removed stale Box color entries that no longer map to design tokens ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
+  - Removed `BoxBackgroundColor.WarningAlternative`, `BoxBackgroundColor.SuccessAlternative`, `BoxBorderColor.WarningAlternative`, `BoxBorderColor.SuccessAlternative`, and `BoxBorderColor.InfoAlternative`
+  - See [Migration Guide](./MIGRATION.md#from-version-0190-to-0200)
 
 ## [0.19.0]
 

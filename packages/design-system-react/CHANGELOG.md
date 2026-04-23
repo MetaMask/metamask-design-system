@@ -9,13 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.18.0]
 
-### Uncategorized
+### Changed
 
-- chore(button): ButtonTertiary uses text-default (web + RN) ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
-- chore: centralize Icon types and assets (ADR-0003/ADR-0004) ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
-- docs: add `ButtonIcon` migration (extension) ([#1095](https://github.com/MetaMask/metamask-design-system/pull/1095))
-- chore: remove redundant icon assets from design-system-react ([#1101](https://github.com/MetaMask/metamask-design-system/pull/1101))
-- feat(shared): migrate Box to ADR-0003 and ADR-0004 shared types (DSYS-482) ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
+- **BREAKING:** Updated `IconName`, `IconColor`, and `IconSize` exports to use const-object + string-union types instead of local enums; existing imports from `@metamask/design-system-react` continue to work, but enum-specific type assumptions may need updating ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042), [#1101](https://github.com/MetaMask/metamask-design-system/pull/1101))
+  - See [Migration Guide](./MIGRATION.md#from-version-0170-to-0180)
+- **BREAKING:** Updated `Box` type exports (`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, `BoxBorderWidth`) to use const-object + string-union types, and removed stale Box color entries that no longer map to design tokens ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
+  - Removed `BoxBackgroundColor.WarningAlternative`, `BoxBackgroundColor.SuccessAlternative`, `BoxBorderColor.WarningAlternative`, `BoxBorderColor.SuccessAlternative`, and `BoxBorderColor.InfoAlternative`
+  - See [Migration Guide](./MIGRATION.md#from-version-0170-to-0180)
+- Updated `ButtonTertiary` to use the default text color for more consistent contrast across states ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
 
 ## [0.17.1]
 

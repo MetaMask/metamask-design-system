@@ -23,6 +23,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
 - [Version Updates](#version-updates)
+  - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
@@ -33,6 +34,108 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.19.0 to 0.20.0
+
+#### Icon: Enum exports now use const objects and string unions
+
+**What Changed:**
+
+`IconName`, `IconColor`, and `IconSize` are still exported from `@metamask/design-system-react-native`, but they now follow the ADR-0003 const-object + string-union pattern instead of local enums. The runtime values stay the same.
+
+**Migration:**
+
+Typical usage does not need a code change. Keep importing the icon types from `@metamask/design-system-react-native` as before:
+
+```tsx
+// Before (0.19.0)
+import {
+  Icon,
+  IconColor,
+  IconName,
+  IconSize,
+} from '@metamask/design-system-react-native';
+
+<Icon
+  name={IconName.Add}
+  color={IconColor.IconDefault}
+  size={IconSize.Md}
+/>
+
+// After (0.20.0)
+import {
+  Icon,
+  IconColor,
+  IconName,
+  IconSize,
+} from '@metamask/design-system-react-native';
+
+<Icon
+  name={IconName.Add}
+  color={IconColor.IconDefault}
+  size={IconSize.Md}
+/>
+```
+
+**Impact:**
+
+- Any code that depended on these exports being TypeScript `enum`s rather than const objects may need to update its typing assumptions.
+- Typical component usage with `IconName.Add`, `IconColor.IconDefault`, and `IconSize.Md` continues to work unchanged.
+
+#### Box: Enum exports now use const objects and string unions
+
+**What Changed:**
+
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` are still exported from `@metamask/design-system-react-native`, but now follow the ADR-0003 const-object + string-union pattern instead of local enums.
+
+**Migration:**
+
+```tsx
+// Before (0.19.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
+
+// After (0.20.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
+```
+
+#### Box: Removed stale `-alternative` color tokens
+
+**What Changed:**
+
+The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
+
+| Removed Entry                           | Replacement                         |
+| --------------------------------------- | ----------------------------------- |
+| `BoxBackgroundColor.WarningAlternative` | `BoxBackgroundColor.WarningDefault` |
+| `BoxBackgroundColor.SuccessAlternative` | `BoxBackgroundColor.SuccessDefault` |
+| `BoxBorderColor.WarningAlternative`     | `BoxBorderColor.WarningDefault`     |
+| `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`     |
+| `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`        |
+
+**Migration:**
+
+These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate:
+
+```tsx
+// Before (0.19.0)
+<Box backgroundColor={BoxBackgroundColor.WarningAlternative} />
+<Box backgroundColor={BoxBackgroundColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.WarningAlternative} />
+<Box borderColor={BoxBorderColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.InfoAlternative} />
+
+// After (0.20.0)
+<Box backgroundColor={BoxBackgroundColor.WarningDefault} />
+<Box backgroundColor={BoxBackgroundColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.WarningDefault} />
+<Box borderColor={BoxBorderColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.InfoDefault} />
+```
+
+**Impact:**
+
+- Any reference to the removed entries will produce a TypeScript error after upgrading.
+- Existing imports from `@metamask/design-system-react-native` continue to work; no import-path change is required.
 
 ### From version 0.18.0 to 0.19.0
 
@@ -99,14 +202,16 @@ If TypeScript now flags props you were previously passing to `Icon`, those props
 </View>
 ```
 
-#### Box: Type imports moved to `@metamask/design-system-shared`
+#### Box: Enum exports now use const objects and string unions
 
-`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react-native`. All existing import paths through `@metamask/design-system-react-native` continue to work without change.
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` continue to be exported from `@metamask/design-system-react-native`, but now use const-object + string-union types instead of enums. All existing import paths through `@metamask/design-system-react-native` continue to work without change.
 
 ```tsx
-// Both of these work — shared is the source of truth
+// Before (0.18.0)
 import { BoxBackgroundColor } from '@metamask/design-system-react-native';
-import { BoxBackgroundColor } from '@metamask/design-system-shared';
+
+// After (0.19.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
 ```
 
 #### Box: Removed stale `-alternative` color tokens
@@ -127,9 +232,9 @@ These tokens had no backing CSS custom property, so any usage was already produc
 
 ### From version 0.16.0 to 0.17.0
 
-#### Text: Typography const values moved to `@metamask/design-system-shared`
+#### Text: Typography enum exports now use const objects and string unions
 
-`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react-native`. All existing import paths through `@metamask/design-system-react-native` continue to work without change.
+`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` continue to be exported from `@metamask/design-system-react-native`, but now follow the ADR-0003 const-object + string-union pattern instead of enums. All existing import paths through `@metamask/design-system-react-native` continue to work without change.
 
 #### `FontWeight` values changed
 
@@ -242,7 +347,7 @@ import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
 
 - `KeyValueRow` no longer accepts `field` and `value` configuration objects. Use flat props: `keyLabel`, `value`, optional `variant`, start/end accessories, optional `keyTextProps` / `valueTextProps`, and optional `keyEndButtonIconProps` / `valueEndButtonIconProps`.
 - Layout is handled inside the component (`BoxRow` / `Box`). The old stub API used to compose custom rows is removed.
-- `KeyValueRowVariant` is defined in `@metamask/design-system-shared` (shared props follow ADR-0003 / ADR-0004); React Native–specific props remain on `KeyValueRowProps` in this package.
+- `KeyValueRowVariant` now follows the ADR-0003 / ADR-0004 const-object + string-union pattern; React Native–specific props remain on `KeyValueRowProps` in this package.
 
 **Removed from the public API:**
 
@@ -382,7 +487,7 @@ Custom React nodes for key or value remain supported:
 
 **Instructions for downstream consumers:**
 
-- In **MetaMask Mobile**, **MetaMask extension**, and any shared packages, search for `KeyValueRow` and migrate every usage away from `field` / `value` objects to the new props.
+- In **MetaMask Mobile**, **MetaMask extension**, and any other packages that consume `KeyValueRow`, search for usages and migrate every callsite away from `field` / `value` objects to the new props.
 - Remove imports of deleted symbols (`KeyValueRowStubs`, `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes`, and the removed types).
 - If your app defines **KeyValueColumn** or another wrapper that forwards the old `KeyValueRow` props, update that component’s API and all call sites to match the new shape.
 
@@ -2496,8 +2601,8 @@ This section covers version-to-version breaking changes within `@metamask/design
 
 ### BadgeWrapper types now use const-object + union definitions
 
-- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, which produce string union types rather than TypeScript enums (ADR-0003/ADR-0004). The shared package defines the canonical values and the platform entry points keep re-exporting those names so React Native consumers use the same import paths they already rely on.
-- The switch lets React, React Native, and shared code stay aligned on the string-literal surface without duplicating runtime enums; no import-path change is required.
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, which produce string union types rather than TypeScript enums (ADR-0003/ADR-0004).
+- The exported names and import paths stay the same, so no import-path change is required.
 
 ## From version 0.11.0 to 0.12.0
 

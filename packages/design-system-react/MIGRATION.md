@@ -841,17 +841,60 @@ This section covers version-to-version breaking changes within `@metamask/design
 
 ## From version 0.17.0 to 0.18.0
 
-### Box: Type imports moved to `@metamask/design-system-shared`
+### Icon: Enum exports now use const objects and string unions
 
-`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react`. All existing import paths through `@metamask/design-system-react` continue to work without change.
+**What Changed:**
+
+`IconName`, `IconColor`, and `IconSize` are still exported from `@metamask/design-system-react`, but they now follow the ADR-0003 const-object + string-union pattern instead of local enums. The runtime values stay the same.
+
+**Migration:**
+
+Typical usage does not need a code change. Keep importing the icon types from `@metamask/design-system-react` as before:
 
 ```tsx
-// Both of these work — shared is the source of truth
+// Before (0.17.1)
+import { IconColor, IconName, IconSize } from '@metamask/design-system-react';
+
+<Icon
+  name={IconName.Add}
+  color={IconColor.IconDefault}
+  size={IconSize.Md}
+/>
+
+// After (0.18.0)
+import { IconColor, IconName, IconSize } from '@metamask/design-system-react';
+
+<Icon
+  name={IconName.Add}
+  color={IconColor.IconDefault}
+  size={IconSize.Md}
+/>
+```
+
+**Impact:**
+
+- Any code that depended on these exports being TypeScript `enum`s rather than const objects may need to update its typing assumptions.
+- Typical component usage with `IconName.Add`, `IconColor.IconDefault`, and `IconSize.Md` continues to work unchanged.
+
+### Box: Enum exports now use const objects and string unions
+
+**What Changed:**
+
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` are still exported from `@metamask/design-system-react`, but now follow the ADR-0003 const-object + string-union pattern instead of local enums.
+
+**Migration:**
+
+```tsx
+// Before (0.17.1)
 import { BoxBackgroundColor } from '@metamask/design-system-react';
-import { BoxBackgroundColor } from '@metamask/design-system-shared';
+
+// After (0.18.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react';
 ```
 
 ### Box: Removed stale `-alternative` color tokens
+
+**What Changed:**
 
 The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
 
@@ -863,15 +906,38 @@ The following `BoxBackgroundColor` and `BoxBorderColor` entries have been remove
 | `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`     |
 | `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`        |
 
-These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate.
+**Migration:**
+
+These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate:
+
+```tsx
+// Before (0.17.1)
+<Box backgroundColor={BoxBackgroundColor.WarningAlternative} />
+<Box backgroundColor={BoxBackgroundColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.WarningAlternative} />
+<Box borderColor={BoxBorderColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.InfoAlternative} />
+
+// After (0.18.0)
+<Box backgroundColor={BoxBackgroundColor.WarningDefault} />
+<Box backgroundColor={BoxBackgroundColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.WarningDefault} />
+<Box borderColor={BoxBorderColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.InfoDefault} />
+```
+
+**Impact:**
+
+- Any reference to the removed entries will produce a TypeScript error after upgrading.
+- Existing imports from `@metamask/design-system-react` continue to work; no import-path change is required.
 
 ---
 
 ## From version 0.16.0 to 0.17.0
 
-### Text: Typography const values moved to `@metamask/design-system-shared`
+### Text: Typography enum exports now use const objects and string unions
 
-`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react`. All existing import paths through `@metamask/design-system-react` continue to work without change.
+`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` are still exported from `@metamask/design-system-react`, but now follow the ADR-0003 const-object + string-union pattern instead of enums. All existing import paths through `@metamask/design-system-react` continue to work without change.
 
 #### `FontWeight`, `FontStyle`, and `FontFamily` values changed
 
@@ -902,7 +968,7 @@ if (fontWeight === FontWeight.Bold) { ... }
 
 #### Breaking: Tailwind content scanning
 
-If your project scans `node_modules/@metamask/design-system-react` for Tailwind class names (e.g. to include `text-primary-default` from `TextColor`), you must also scan `@metamask/design-system-shared` because the class name strings now live in the shared package's compiled output.
+If your project scans `node_modules` for Tailwind class names (for example to include `text-primary-default` from `TextColor`), widen your MMDS content globs after upgrading so the generated class name strings are still discovered.
 
 **Before (0.16.0):**
 
@@ -918,8 +984,7 @@ content: [
 ```js
 // tailwind.config.js
 content: [
-  './node_modules/@metamask/design-system-react/**/*.{mjs,cjs}',
-  './node_modules/@metamask/design-system-shared/**/*.{mjs,cjs}',
+  './node_modules/@metamask/design-system-*/**/*.{mjs,cjs}',
 ],
 ```
 
@@ -935,7 +1000,7 @@ content: [
 
 ### BadgeWrapper types now use const-object + union definitions
 
-- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, producing string union types instead of TypeScript enums; this follows ADR-0003 and ADR-0004 so the same canonical values power both React and React Native without duplicating the runtime constants (see https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md and https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md).
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, producing string union types instead of TypeScript enums; this follows ADR-0003 and ADR-0004 (see https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md and https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md).
 - The exports remain available through `@metamask/design-system-react` (and the platform-specific bundles), so your import path stays the same; only the underlying type shape shifted to a const-object/union pattern so you gain string-literal widening while keeping the previously exported names.
 
 ## From version 0.10.0 to 0.11.0
