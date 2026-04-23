@@ -18,7 +18,7 @@ import { AvatarGroupSize, AvatarGroupVariant } from '.';
 
 figma.connect(
   AvatarGroup,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=310%3A2005',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=310%3A2005',
   {
     props: {
       size: figma.enum('size', {
@@ -34,9 +34,8 @@ figma.connect(
         Networks: AvatarGroupVariant.Network,
         Favicons: AvatarGroupVariant.Favicon,
       }),
-      isReverse: figma.boolean('isReverse'),
     },
-    example: ({ variant, isReverse, ...props }) => (
+    example: ({ variant, ...props }) => (
       <AvatarGroup
         variant={variant}
         avatarPropsArr={
@@ -44,7 +43,6 @@ figma.connect(
             /** Add avatar prop objects here */
           ]
         }
-        isReverse={isReverse}
         {...props}
       />
     ),

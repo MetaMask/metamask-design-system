@@ -7,7 +7,7 @@ import { ButtonHero } from './ButtonHero';
 
 figma.connect(
   ButtonHero,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=5416%3A15232',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=5416%3A15232',
   {
     props: {
       isDisabled: figma.boolean('isDisabled'),
