@@ -7,11 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: upgrade React Native v76.9 and Storybook v10 and align deps with MetaMask Mobile ([#844](https://github.com/MetaMask/metamask-design-system/pull/844))
+- chore(deps-dev): bump @metamask/auto-changelog from 6.0.0 to 6.1.0 ([#1079](https://github.com/MetaMask/metamask-design-system/pull/1079))
+- chore(deps-dev): bump @metamask/auto-changelog from 5.3.2 to 6.0.0 ([#1077](https://github.com/MetaMask/metamask-design-system/pull/1077))
+
 ## [8.3.0]
 
 ### Changed
 
-- `fontWeights.bold` and the `--font-weight-bold` CSS variable now return `600`, and the Storybook font loaders/`@font-face` declarations consume the new `Geist-SemiBold`/`Geist-SemiBoldItalic` assets instead of the retired bold files ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017)). The `design-system-twrnc-preset` mapping for `default-bold`/`default-bold-italic` now resolves to those semibold PostScript names, so custom Tailwind classnames should align with the new fonts. Update `@font-face` declarations, font bundles, and `font-weight: 700` styles to point at the semibold files, include the semibold assets from `apps/storybook-react-native/fonts/Geist` and `apps/storybook-react/fonts/Geist` when you bundle fonts manually, and run the [migration guide](./MIGRATION.md#from-version-822-to-830) to verify `fontWeights.bold` references propagate through CSS, JS, and Tailwind configurations.
+- `fontWeights.bold` and the `--font-weight-bold` CSS variable now return `600`, and the Storybook font loaders/`@font-face` declarations consume the new `Geist-SemiBold`/`Geist-SemiBoldItalic` assets instead of the retired bold files. The `design-system-twrnc-preset` mapping for `default-bold`/`default-bold-italic` now resolves to those semibold PostScript names, so custom Tailwind classnames should align with the new fonts. Update `@font-face` declarations, font bundles, and `font-weight: 700` styles to point at the semibold files, include the semibold assets from `apps/storybook-react-native/fonts/Geist` and `apps/storybook-react/fonts/Geist` when you bundle fonts manually, and run the [migration guide](./MIGRATION.md#from-version-822-to-830) to verify `fontWeights.bold` references propagate through CSS, JS, and Tailwind configurations. ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017))
 
 ## [8.2.2]
 
@@ -66,9 +72,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Updated `background/muted` from opaque colors to transparent colors and added new `background/section` and `background/subsection` tokens ([#682](https://github.com/MetaMask/metamask-design-system/pull/682)). This is a breaking change that affects components requiring opaque backgrounds like BadgeNetwork, avatar fallbacks, and non-action elements. Applications must swap `background/muted` with `background/section` for opaque backgrounds.
-- **BREAKING:** Removed deprecated typography tokens `sHeadingSMRegular` and `lHeadingSMRegular` ([#699](https://github.com/MetaMask/metamask-design-system/pull/699)). Choose an appropriate replacement typography token based on your design needs. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
-- **BREAKING:** Changed default font from CentraNo1 to Geist ([#756](https://github.com/MetaMask/metamask-design-system/pull/756)). This affects all typography tokens and requires updating font imports and references. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
+- **BREAKING:** Updated `background/muted` from opaque colors to transparent colors and added new `background/section` and `background/subsection` tokens. This is a breaking change that affects components requiring opaque backgrounds like BadgeNetwork, avatar fallbacks, and non-action elements. Applications must swap `background/muted` with `background/section` for opaque backgrounds. ([#682](https://github.com/MetaMask/metamask-design-system/pull/682))
+- **BREAKING:** Removed deprecated typography tokens `sHeadingSMRegular` and `lHeadingSMRegular`. Choose an appropriate replacement typography token based on your design needs. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details. ([#699](https://github.com/MetaMask/metamask-design-system/pull/699))
+- **BREAKING:** Changed default font from CentraNo1 to Geist. This affects all typography tokens and requires updating font imports and references. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details. ([#756](https://github.com/MetaMask/metamask-design-system/pull/756))
 - Fixed `text/alternative`, `text/muted`, `icon/alternative`, and `icon/muted` colors in dark mode to match design specifications ([#709](https://github.com/MetaMask/metamask-design-system/pull/709))
 
 ## [7.1.0]
@@ -82,7 +88,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **BREAKING:** Removed individual typography font family tokens in favor of base font family tokens. See the [migration guide](./MIGRATION.md#from-version-600-to-700) for details.
-- **BREAKING:** Updated Body variants(BodyXs, BodySm, BodyMd, BodyLg) font size for small screens ([#533](https://github.com/MetaMask/metamask-design-system/pull/533)). See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
+- **BREAKING:** Updated Body variants(BodyXs, BodySm, BodyMd, BodyLg) font size for small screens. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details. ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
 
 ## [6.1.0]
 
@@ -100,7 +106,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Replaced Euclid Circular B with CentraNo1 as the primary font family ([#499](https://github.com/MetaMask/metamask-design-system/pull/499)). See the [migration guide](./MIGRATION.md#from-version-510-to-600) for details.
+- **BREAKING:** Replaced Euclid Circular B with CentraNo1 as the primary font family. See the [migration guide](./MIGRATION.md#from-version-510-to-600) for details. ([#499](https://github.com/MetaMask/metamask-design-system/pull/499))
 
   - Removed `--font-family-euclid-circular-b` and `--font-family-roboto` CSS variables
   - Changed `--font-family-sans` to use CentraNo1 with updated fallback chain
@@ -118,16 +124,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **BREAKING:** Following the unintentional breaking change in `4.2.0` we are now exporting the types from root index instead of requiring deep imports ([#340](https://github.com/MetaMask/metamask-design-system/pull/340)). See the [migration guide](./MIGRATION.md#from-version-410-to-500) for details.
-
+- **BREAKING:** Following the unintentional breaking change in `4.2.0` we are now exporting the types from root index instead of requiring deep imports. See the [migration guide](./MIGRATION.md#from-version-410-to-500) for details. ([#340](https://github.com/MetaMask/metamask-design-system/pull/340))
 - Added 8 new colors (4 muted-hover & 4 muted-pressed) to design-tokens Figma Json. ([#325](https://github.com/MetaMask/metamask-design-system/pull/325))
 
 ## [4.2.0]
 
 ### Added
 
-- feat: color updates to the design tokens package ([#230](https://github.com/metamask/metamask-design-system/pull/230))
-
+- feat: color updates to the design tokens package ([#230](https://github.com/MetaMask/metamask-design-system/pull/230))
 - **BREAKING:** `@metamask/design-tokens` package migrated from standalone repository into the design system monorepo, which unintentionally broke type imports ([128](https://github.com/MetaMask/metamask-design-system/pull/128)). See the [migration guide](./MIGRATION.md#from-version-410-to-500) for details on the fix in 5.0.0.
 
 ## [4.1.0]

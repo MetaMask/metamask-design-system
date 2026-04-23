@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore(button): ButtonTertiary uses text-default (web + RN) ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
+- chore: centralize Icon types and assets (ADR-0003/ADR-0004) ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
+- docs: add `ButtonIcon` migration (extension) ([#1095](https://github.com/MetaMask/metamask-design-system/pull/1095))
+- chore: remove redundant icon assets from design-system-react ([#1101](https://github.com/MetaMask/metamask-design-system/pull/1101))
+- feat(shared): migrate Box to ADR-0003 and ADR-0004 shared types (DSYS-482) ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
+
 ## [0.17.1]
 
 ### Changed
@@ -214,13 +222,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added 5 new Text component variants with responsive typography support ([#777](https://github.com/MetaMask/metamask-design-system/pull/777)):
+- Added 5 new Text component variants with responsive typography support: ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
   - `TextVariant.PageHeading` - For main page titles (renders as `<h1>` by default)
   - `TextVariant.SectionHeading` - For section titles (renders as `<h2>` by default)
   - `TextVariant.ButtonLabelMd` - For medium-sized button labels (renders as `<span>` by default)
   - `TextVariant.ButtonLabelLg` - For large-sized button labels (renders as `<span>` by default)
   - `TextVariant.AmountDisplayLg` - For large amount/value displays (renders as `<span>` by default)
-- Added comprehensive utility props to Box component for enhanced layout control ([#779](https://github.com/MetaMask/metamask-design-system/pull/779)) and fixes ([#781](https://github.com/MetaMask/metamask-design-system/pull/781)):
+- Added comprehensive utility props to Box component for enhanced layout control and fixes: ([#779](https://github.com/MetaMask/metamask-design-system/pull/779), [#781](https://github.com/MetaMask/metamask-design-system/pull/781))
   - **Margin props:** `margin`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft`, `marginHorizontal`, `marginVertical`
   - **Padding props:** `padding`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft`, `paddingHorizontal`, `paddingVertical`
   - **Border props:** `borderWidth`, `borderColor`

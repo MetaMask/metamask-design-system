@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: [DSRN] Add TitleSubpage ([#1059](https://github.com/MetaMask/metamask-design-system/pull/1059))
+- chore: Forward refs for React Native Box ([#1102](https://github.com/MetaMask/metamask-design-system/pull/1102))
+- feat: [DSRN ]Added TitleStandard ([#1051](https://github.com/MetaMask/metamask-design-system/pull/1051))
+- chore(button): ButtonTertiary uses text-default (web + RN) ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
+- chore: centralize Icon types and assets (ADR-0003/ADR-0004) ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
+- feat(shared): migrate Box to ADR-0003 and ADR-0004 shared types (DSYS-482) ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
+- feat: Add Tag component for React Native ([#1053](https://github.com/MetaMask/metamask-design-system/pull/1053))
+
 ## [0.19.0]
 
 ### Added
@@ -312,13 +322,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added 5 new Text component variants with responsive typography support ([#777](https://github.com/MetaMask/metamask-design-system/pull/777)):
+- Added 5 new Text component variants with responsive typography support: ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
   - `TextVariant.PageHeading` - For main page titles with large, bold styling
   - `TextVariant.SectionHeading` - For section titles with medium, bold styling
   - `TextVariant.ButtonLabelMd` - For medium-sized button labels with optimized button text styling
   - `TextVariant.ButtonLabelLg` - For large-sized button labels with optimized button text styling
   - `TextVariant.AmountDisplayLg` - For large amount/value displays with prominent numeric styling
-- Added comprehensive utility props to Box component for enhanced layout control ([#779](https://github.com/MetaMask/metamask-design-system/pull/779)) and fixes ([#781](https://github.com/MetaMask/metamask-design-system/pull/781)):
+- Added comprehensive utility props to Box component for enhanced layout control and fixes: ([#779](https://github.com/MetaMask/metamask-design-system/pull/779), [#781](https://github.com/MetaMask/metamask-design-system/pull/781))
   - **Margin props:** `margin`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft`, `marginHorizontal`, `marginVertical`
   - **Padding props:** `padding`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft`, `paddingHorizontal`, `paddingVertical`
   - **Border props:** `borderWidth`, `borderColor`
