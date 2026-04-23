@@ -24,7 +24,14 @@ const assertRegisteredRef = (method: string): ToastRef => {
 const ToastComponent = forwardRef<ToastRef, ToastProps>((props, ref) => {
   const innerRef = useRef<ToastRef>(null);
 
-  useImperativeHandle(ref, () => innerRef.current as ToastRef);
+  useImperativeHandle(
+    ref,
+    () => ({
+      showToast: (options) => innerRef.current?.showToast(options),
+      closeToast: () => innerRef.current?.closeToast(),
+    }),
+    [],
+  );
 
   useEffect(() => {
     registeredRef = innerRef;
