@@ -855,20 +855,12 @@ Typical usage does not need a code change. Keep importing the icon types from `@
 // Before (0.17.1)
 import { IconColor, IconName, IconSize } from '@metamask/design-system-react';
 
-<Icon
-  name={IconName.Add}
-  color={IconColor.IconDefault}
-  size={IconSize.Md}
-/>
+<Icon name={IconName.Add} color={IconColor.IconDefault} size={IconSize.Md} />;
 
 // After (0.18.0)
 import { IconColor, IconName, IconSize } from '@metamask/design-system-react';
 
-<Icon
-  name={IconName.Add}
-  color={IconColor.IconDefault}
-  size={IconSize.Md}
-/>
+<Icon name={IconName.Add} color={IconColor.IconDefault} size={IconSize.Md} />;
 ```
 
 **Impact:**

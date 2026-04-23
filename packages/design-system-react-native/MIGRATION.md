@@ -56,11 +56,7 @@ import {
   IconSize,
 } from '@metamask/design-system-react-native';
 
-<Icon
-  name={IconName.Add}
-  color={IconColor.IconDefault}
-  size={IconSize.Md}
-/>
+<Icon name={IconName.Add} color={IconColor.IconDefault} size={IconSize.Md} />;
 
 // After (0.20.0)
 import {
@@ -70,11 +66,7 @@ import {
   IconSize,
 } from '@metamask/design-system-react-native';
 
-<Icon
-  name={IconName.Add}
-  color={IconColor.IconDefault}
-  size={IconSize.Md}
-/>
+<Icon name={IconName.Add} color={IconColor.IconDefault} size={IconSize.Md} />;
 ```
 
 **Impact:**
