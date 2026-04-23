@@ -9,12 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20.0]
 
-### Uncategorized
+### Added
 
-- chore(button): ButtonTertiary uses text-default (web + RN) ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
-- chore: centralize Icon types and assets (ADR-0003/ADR-0004) ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
-- feat(shared): migrate Box to ADR-0003 and ADR-0004 shared types (DSYS-482) ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
-- feat: Add Tag component for React Native ([#1053](https://github.com/MetaMask/metamask-design-system/pull/1053))
+- Added `Tag` for compact status and metadata labeling in React Native layouts, with severity styling and optional start/end icon support. ([#1053](https://github.com/MetaMask/metamask-design-system/pull/1053))
+
+### Changed
+
+- Updated `ButtonTertiary` to use `text-default` for its standard text treatment, reducing emphasis for tertiary actions. ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
+- **BREAKING:** Centralized `IconName`, `IconSize`, and `IconColor` in `@metamask/design-system-shared`, making the shared package the source of truth for React Native icon contracts and generated assets. Imports from `@metamask/design-system-react-native` continue to work, but deep imports and removed legacy icon type aliases/members must be updated. See [Migration Guide](./MIGRATION.md#from-version-0190-to-0200). ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
+- **BREAKING:** Centralized `Box` contracts in `@metamask/design-system-shared` and removed stale `BoxBackgroundColor` / `BoxBorderColor` `*-Alternative` members that no longer exist in the token set. Existing package-root imports continue to work, but any usage of the removed stale color members now fails typechecking. See [Migration Guide](./MIGRATION.md#from-version-0190-to-0200). ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
 
 ## [0.19.0]
 

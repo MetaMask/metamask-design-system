@@ -9,11 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.13.0]
 
-### Uncategorized
+### Added
 
-- chore: centralize Icon types and assets (ADR-0003/ADR-0004) ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
-- feat(shared): migrate Box to ADR-0003 and ADR-0004 shared types (DSYS-482) ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
-- feat: Add Tag component for React Native ([#1053](https://github.com/MetaMask/metamask-design-system/pull/1053))
+- Added `IconName`, `IconSize`, and `IconColor` as shared cross-platform icon contracts, and made `@metamask/design-system-shared` the canonical source for icon assets consumed by the platform packages. ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
+- Added `TagSeverity` and `TagPropsShared` for the React Native `Tag` component's shared contract. ([#1053](https://github.com/MetaMask/metamask-design-system/pull/1053))
+
+### Changed
+
+- **BREAKING:** Added shared `Box` contracts (`BoxPropsShared` and the Box const objects) as the canonical cross-platform source of truth, and removed stale `BoxBackgroundColor` / `BoxBorderColor` `*-Alternative` members that no longer exist in the token set. See [Migration Guide](./MIGRATION.md#from-version-0120-to-0130). ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
 
 ## [0.12.0]
 

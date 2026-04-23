@@ -9,13 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.18.0]
 
-### Uncategorized
+### Changed
 
-- chore(button): ButtonTertiary uses text-default (web + RN) ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
-- chore: centralize Icon types and assets (ADR-0003/ADR-0004) ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
-- docs: add `ButtonIcon` migration (extension) ([#1095](https://github.com/MetaMask/metamask-design-system/pull/1095))
-- chore: remove redundant icon assets from design-system-react ([#1101](https://github.com/MetaMask/metamask-design-system/pull/1101))
-- feat(shared): migrate Box to ADR-0003 and ADR-0004 shared types (DSYS-482) ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
+- Updated `ButtonTertiary` to use `text-default` for its standard text treatment, reducing emphasis for tertiary actions. ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
+- **BREAKING:** Centralized `IconName`, `IconSize`, and `IconColor` in `@metamask/design-system-shared`, making the shared package the source of truth for icon contracts and assets. Imports from `@metamask/design-system-react` continue to work, but deep imports and removed legacy icon type aliases/members must be updated. See [Migration Guide](./MIGRATION.md#from-version-0170-to-0180). ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
+- **BREAKING:** Centralized `Box` contracts in `@metamask/design-system-shared` and removed stale `BoxBackgroundColor` / `BoxBorderColor` `*-Alternative` members that no longer exist in the token set. Existing package-root imports continue to work, but any usage of the removed stale color members now fails typechecking. See [Migration Guide](./MIGRATION.md#from-version-0170-to-0180). ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
 
 ## [0.17.1]
 

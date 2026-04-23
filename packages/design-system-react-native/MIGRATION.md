@@ -23,6 +23,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
 - [Version Updates](#version-updates)
+  - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
@@ -33,6 +34,46 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.19.0 to 0.20.0
+
+#### Icon: Shared exports are now the source of truth
+
+`IconName`, `IconSize`, and `IconColor` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react-native`.
+
+If you import these types from `@metamask/design-system-react-native`, no change is required:
+
+```tsx
+import { IconColor, IconName, IconSize } from '@metamask/design-system-react-native';
+```
+
+If you were importing icon types or generated assets from deep internal paths, update those imports to package-root exports instead. Also update any removed legacy icon aliases or icon color members that no longer exist in the shared contract.
+
+#### Box: Type imports moved to `@metamask/design-system-shared`
+
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react-native`.
+
+```tsx
+// Both of these work — shared is the source of truth
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
+import { BoxBackgroundColor } from '@metamask/design-system-shared';
+```
+
+#### Box: Removed stale `-alternative` color tokens
+
+The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
+
+| Removed Entry                           | Replacement                         |
+| --------------------------------------- | ----------------------------------- |
+| `BoxBackgroundColor.WarningAlternative` | `BoxBackgroundColor.WarningDefault` |
+| `BoxBackgroundColor.SuccessAlternative` | `BoxBackgroundColor.SuccessDefault` |
+| `BoxBorderColor.WarningAlternative`     | `BoxBorderColor.WarningDefault`     |
+| `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`     |
+| `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`        |
+
+These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate.
+
+---
 
 ### From version 0.18.0 to 0.19.0
 

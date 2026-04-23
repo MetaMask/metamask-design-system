@@ -841,6 +841,18 @@ This section covers version-to-version breaking changes within `@metamask/design
 
 ## From version 0.17.0 to 0.18.0
 
+### Icon: Shared exports are now the source of truth
+
+`IconName`, `IconSize`, and `IconColor` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react`.
+
+If you import these types from `@metamask/design-system-react`, no change is required:
+
+```tsx
+import { IconColor, IconName, IconSize } from '@metamask/design-system-react';
+```
+
+If you were importing icon types or generated assets from deep internal paths, update those imports to package-root exports instead. Also update any removed legacy icon aliases or icon color members that no longer exist in the shared contract.
+
 ### Box: Type imports moved to `@metamask/design-system-shared`
 
 `BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react`. All existing import paths through `@metamask/design-system-react` continue to work without change.
