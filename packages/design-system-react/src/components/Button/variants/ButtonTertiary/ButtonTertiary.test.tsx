@@ -11,7 +11,7 @@ describe('ButtonTertiary', () => {
     render(<ButtonTertiary>Button Tertiary</ButtonTertiary>);
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-transparent', 'text-primary-default');
+    expect(button).toHaveClass('bg-transparent', 'text-default');
   });
 
   it('renders with danger styles when isDanger is true', () => {
@@ -36,7 +36,7 @@ describe('ButtonTertiary', () => {
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
       'bg-transparent',
-      'text-primary-default',
+      'text-default',
       'opacity-50',
       'cursor-not-allowed',
     );
@@ -47,7 +47,7 @@ describe('ButtonTertiary', () => {
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
-      'text-primary-default',
+      'text-default',
       'bg-pressed',
       'cursor-not-allowed',
     );
@@ -216,7 +216,7 @@ describe('ButtonTertiary', () => {
       const { rerender } = render(<ButtonTertiary>Button</ButtonTertiary>);
 
       // Default
-      expect(screen.getByRole('button')).toHaveClass('text-primary-default');
+      expect(screen.getByRole('button')).toHaveClass('text-default');
 
       // Danger
       rerender(<ButtonTertiary isDanger>Button</ButtonTertiary>);
@@ -289,7 +289,7 @@ describe('ButtonTertiary', () => {
       const { rerender } = render(<ButtonTertiary>Button</ButtonTertiary>);
 
       // Default state (both false)
-      expect(screen.getByRole('button')).toHaveClass('text-primary-default');
+      expect(screen.getByRole('button')).toHaveClass('text-default');
 
       // Only isDanger
       rerender(<ButtonTertiary isDanger>Button</ButtonTertiary>);
@@ -312,7 +312,7 @@ describe('ButtonTertiary', () => {
     it('handles all interactive state combinations', () => {
       render(<ButtonTertiary>Button</ButtonTertiary>);
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('text-primary-default');
+      expect(button).toHaveClass('text-default');
       // Check for transition classes
       expect(button).toHaveClass('transition-all');
       expect(button).toHaveClass('duration-100');
