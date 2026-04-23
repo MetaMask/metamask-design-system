@@ -7,12 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.6.2]
-
-### Changed
-
-- No consumer-facing API or behavior changes in this release; the patch release republishes the existing preset without requiring changes in consuming apps.
-
 ## [0.6.1]
 
 ### Fixed
@@ -48,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Removed variant-specific font family classnames in favor of base font families: ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
+- **BREAKING:** Removed variant-specific font family classnames in favor of base font families ([#533](https://github.com/MetaMask/metamask-design-system/pull/533)):
   - Removed all `s-*` and `l-*` typography font family classnames (e.g., `s-display-md`, `s-heading-lg`, etc.)
   - Now using three base font family classnames:
     - `font-default` for default text (Geist)
@@ -60,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated to use new font family configuration from @metamask/design-tokens@6.0.0. Note: This includes breaking changes in the design-tokens package - see the [@metamask/design-tokens migration guide](../design-tokens/MIGRATION.md#from-version-510-to-600) for details. ([#499](https://github.com/MetaMask/metamask-design-system/pull/499))
+- Updated to use new font family configuration from @metamask/design-tokens@6.0.0 ([#499](https://github.com/MetaMask/metamask-design-system/pull/499)). Note: This includes breaking changes in the design-tokens package - see the [@metamask/design-tokens migration guide](../design-tokens/MIGRATION.md#from-version-510-to-600) for details.
 
 ## [0.1.0]
 
@@ -68,8 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.2...HEAD
-[0.6.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.1...@metamask/design-system-tailwind-preset@0.6.2
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.1...HEAD
 [0.6.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.0...@metamask/design-system-tailwind-preset@0.6.1
 [0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.5.0...@metamask/design-system-tailwind-preset@0.6.0
 [0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.4.0...@metamask/design-system-tailwind-preset@0.5.0
