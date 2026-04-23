@@ -38,7 +38,7 @@ describe('Button', () => {
       render(<Button variant={ButtonVariant.Tertiary}>Tertiary Button</Button>);
 
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('bg-transparent', 'text-primary-default');
+      expect(button).toHaveClass('bg-transparent', 'text-default');
     });
 
     it('renders primary button when an invalid variant is provided', () => {
