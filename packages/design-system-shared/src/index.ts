@@ -15,6 +15,7 @@ export {
 
 // AvatarIcon types (ADR-0003 + ADR-0004)
 export {
+  AvatarIconSize,
   AvatarIconSeverity,
   type AvatarIconPropsShared,
 } from './types/AvatarIcon';

@@ -1,9 +1,11 @@
-import { AvatarIconSeverity } from '@metamask/design-system-shared';
+import {
+  AvatarIconSeverity,
+  AvatarIconSize,
+  IconName,
+} from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { AvatarIconSize } from '../../types';
-import { IconName } from '../Icon';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
 import { AvatarIcon } from './AvatarIcon';

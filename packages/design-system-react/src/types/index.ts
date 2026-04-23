@@ -7,7 +7,6 @@ export {
  */
 export { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarGroupSize } from '@metamask/design-system-shared';
-export { AvatarBaseSize as AvatarIconSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarNetworkSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarSize } from '@metamask/design-system-shared';
 

@@ -1,3 +1,7 @@
+import type { IconName } from '../Icon';
+
+export { AvatarBaseSize as AvatarIconSize } from '../AvatarBase';
+
 /**
  * AvatarIcon - severity
  * Convert from enum to const object (ADR-0003)
@@ -32,6 +36,10 @@ export type AvatarIconSeverity =
  * Platform-independent properties shared across React and React Native
  */
 export type AvatarIconPropsShared = {
+  /**
+   * Required icon name from the icon set
+   */
+  iconName: IconName;
   /**
    * Optional prop to control the severity of the avatar
    * Possible values:

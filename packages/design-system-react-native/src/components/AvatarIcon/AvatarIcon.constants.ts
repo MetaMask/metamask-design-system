@@ -1,6 +1,8 @@
-import { AvatarIconSeverity } from '@metamask/design-system-shared';
+import {
+  AvatarIconSeverity,
+  AvatarIconSize,
+} from '@metamask/design-system-shared';
 
-import { AvatarIconSize } from '../../types';
 import { IconSize, IconColor } from '../Icon';
 
 // Mappings
