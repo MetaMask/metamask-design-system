@@ -19,6 +19,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
@@ -2040,6 +2041,69 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+
+### Input Component
+
+The mobile `Input` (under `Form/TextField/foundation/Input`) maps to `Input` in the design system. The legacy component extends `Omit<TextInputProps, 'editable'>`; the design system enforces a controlled `value` and omits `value` and `defaultValue` from the spread to avoid uncontrolled usage.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                     | Design System Migration                                                     |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `import Input from '.../Form/TextField/foundation/Input'`                          | `import { Input, TextVariant } from '@metamask/design-system-react-native'` |
+| `import { TextVariant } from '.../components/Texts/Text'` (legacy casing `BodyMD`) | `import { TextVariant } from '@metamask/design-system-react-native'`        |
+
+##### Props and Typing
+
+| Mobile API                                          | Design System API                                                    | Change type                        | Notes                                                                                                                                      |
+| --------------------------------------------------- | -------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `value?: string` (optional in `TextInputProps`)     | `value: string`                                                      | now required on the component type | Input is **controlled-only**; omitting `value` is a type error (see [TextField Component](#textfield-component) for the surrounding field) |
+| `textVariant` default `BodyMD` (legacy enum)        | `TextVariant.BodyMd`                                                 | value rename                       | align with [Text Component](#text-component) variant naming                                                                                |
+| `isDisabled`, `isReadonly`, `isStateStylesDisabled` | same names                                                           | unchanged                          | `isStateStylesDisabled` still disables focus/disabled visual treatment                                                                     |
+| `autoFocus` default `true`                          | `autoFocus` default `false`                                          | default changed                    | MMDS matches React Native `TextInput` default; set `autoFocus` explicitly if you relied on the legacy default                              |
+| `style`                                             | `style` + `twClassName`                                              | MMDS adds `twClassName`            | use `twClassName` for Tailwind overrides; `style` still supported                                                                          |
+| Inherits `TextInputProps` except `editable`         | Inherits `TextInputProps` except `editable`, `value`, `defaultValue` | omissions                          | `defaultValue` is omitted so the component stays controlled; use `value` from parent state                                                 |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import Input from '.../component-library/components/Form/TextField/foundation/Input';
+import { TextVariant } from '.../component-library/components/Texts/Text';
+
+<Input
+  value={value}
+  onChangeText={onChangeText}
+  placeholder="Amount"
+  textVariant={TextVariant.BodyMD}
+  isDisabled={false}
+  autoFocus
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react-native';
+
+<Input
+  value={value}
+  onChangeText={onChangeText}
+  placeholder="Amount"
+  textVariant={TextVariant.BodyMd}
+  isDisabled={false}
+  autoFocus
+/>;
+```
+
+#### API Differences
+
+- **Controlled `value`:** the design system requires `value: string` as part of `InputProps`; the legacy `Input` type still allowed the full `TextInput` surface including uncontrolled usage.
+- **`autoFocus` default** is `false` in MMDS (`true` in the legacy `Input` implementation) — set explicitly when you need first-mount focus.
+- Styling: design system input uses the shared Tailwind + token pipeline (`twClassName`); single-line metrics use `MAP_TEXT_VARIANT_INPUT_METRICS` (font size/letter spacing without paragraph `lineHeight`) for consistent `TextInput` layout.
 
 ### Checkbox Component
 
