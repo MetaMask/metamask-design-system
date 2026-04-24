@@ -2508,10 +2508,6 @@ The mobile `TabEmptyStateProps` extended `Omit<BoxProps, 'children'>`, so design
 
 Current `metamask-mobile` call sites only pass `testID`, `style`, `twClassName`, `children`, and the explicit slot props — none of them pass `Box` shorthands at the root — so this narrowing is a no-op for every known consumer. If you were relying on root `Box` props, move them to `twClassName` or wrap the component in a `<Box>`.
 
-##### Action Button: `self-center` Removed
-
-The deprecated wrapper applied `twClassName="self-center"` on the internal action `Button`. The design-system version drops it. The outer root sets `alignItems={BoxAlignItems.Center}` so the button stays centered in practice — the removed class was redundant in every current call site. Only consumers that forced a non-center `alignItems` via `actionButtonProps` would see a visual change; pass `actionButtonProps={{ twClassName: 'self-center' }}` explicitly if you need the old behavior.
-
 #### Migration Examples
 
 ##### Basic usage
@@ -2609,7 +2605,6 @@ Only the import specifier changes.
 #### API Differences Summary
 
 - Root prop type narrows from `Omit<BoxProps, 'children'>` to `ViewProps`. Move any root-level `Box` shorthands to `twClassName` or a wrapper `<Box>`.
-- Internal action `Button` no longer receives `twClassName="self-center"`. Re-add via `actionButtonProps={{ twClassName: 'self-center' }}` if a consumer overrides the outer `alignItems`.
 - All other props (`icon`, `description`, `descriptionProps`, `actionButtonText`, `actionButtonProps`, `onAction`, `children`, `twClassName`, `style`, `ViewProps`) are unchanged.
 
 ## Version Updates
