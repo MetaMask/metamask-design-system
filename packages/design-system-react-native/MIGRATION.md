@@ -22,6 +22,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
+  - [KeyValueRow Component](#keyvaluerow-component)
 - [Version Updates](#version-updates)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -2481,6 +2482,218 @@ The following mobile `component-library` sub-components build on `ListItem` but 
 - The mobile version sets `accessible accessibilityRole="none"` on the root element; MMDS does not.
 - The mobile version uses a default export; MMDS uses a named export.
 - `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.
+
+### KeyValueRow Component
+
+The mobile `components-temp/KeyValueRow` is replaced by `KeyValueRow` from `@metamask/design-system-react-native`. The legacy API matches the pre-0.16.0 design system API, so **the prop-shape migration is fully documented in [From version 0.15.0 to 0.16.0 › KeyValueRow API](#keyvaluerow-api)** (nested `field`/`value` objects → flat `keyLabel` / `value` / `*TextProps` / `*StartAccessory` / `*EndAccessory` / `*EndButtonIconProps`). Read that section for the full prop-by-prop mapping; this section covers the mobile-specific concerns.
+
+#### Breaking Changes (Mobile)
+
+##### Import Path and Export Shape
+
+| Mobile Pattern                                                                               | Design System Migration                                                                  |
+| -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `import KeyValueRow from '.../component-library/components-temp/KeyValueRow'`                | `import { KeyValueRow } from '@metamask/design-system-react-native'`                     |
+| `import KeyValueRow from '.../component-library/components-temp/KeyValueRow/KeyValueRow'`    | `import { KeyValueRow } from '@metamask/design-system-react-native'`                     |
+| `import { TooltipSizes } from '.../components-temp/KeyValueRow'`                             | Removed — drop the import, or remap to `ButtonIconSize` from the design system if needed |
+| `import { KeyValueRowStubs } from '.../components-temp/KeyValueRow'`                         | Removed — no equivalent. See [Blocked Patterns](#blocked-patterns-1) below               |
+| `import KeyValueRowLabel from '.../components-temp/KeyValueRow/KeyValueLabel/KeyValueLabel'` | Removed — no equivalent                                                                  |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**. The legacy index also re-exports `TooltipSizes` — that re-export is gone, so imports like `import KeyValueRow, { TooltipSizes } from '.../components-temp/KeyValueRow'` must be split.
+
+##### Tooltip Behavior — Host Must Open the Modal
+
+The legacy `KeyValueRow` rendered the tooltip trigger **and** opened the modal internally via `useTooltipModal` (see `KeyValueLabel.tsx`). The design system renders **only** the `ButtonIcon` trigger — the host app is responsible for opening the modal/sheet.
+
+| Legacy Mobile Behavior                                                                                                     | Design System Behavior                                                                                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tooltip={{ title, content, onPress }}` — component calls `openTooltipModal(title, content, …)` and then invokes `onPress` | `keyEndButtonIconProps={{ iconName, onPress }}` / `valueEndButtonIconProps={{ … }}` — host must call `openTooltipModal(…)` inside `onPress`; `title` and `content` are **not rendered** by the component |
+| `tooltip.size`, `tooltip.iconName`                                                                                         | Use `keyEndButtonIconProps` / `valueEndButtonIconProps` fields (`size`, `iconName`, `iconProps`, etc.)                                                                                                   |
+| Default icon color `IconColor.Alternative` via `KeyValueRowLabel`                                                          | Key trigger defaults to `IconColor.IconAlternative`; value trigger defaults to `IconColor.IconDefault`; override via `iconProps.color`                                                                   |
+
+##### Removed Types and Enums
+
+The following are no longer available. Remove the imports and refactor any code that branches on them.
+
+| Removed                                                                                                                                         | Migration                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `KeyValueRowFieldIconSides` (`LEFT` / `RIGHT` / `BOTH`)                                                                                         | Pass a node on `keyStartAccessory` / `keyEndAccessory` / `valueStartAccessory` / `valueEndAccessory` (both = set start **and** end) |
+| `KeyValueRowSectionAlignments`                                                                                                                  | Alignment is handled internally (key shrinks, value row is `flex-1 min-w-0 justify-end`). Drop the import                           |
+| `TooltipSizes`, `IconSizes`                                                                                                                     | Use `ButtonIconSize` / `IconSize` from `@metamask/design-system-react-native` if sizing is needed                                   |
+| `PreDefinedKeyValueRowLabel`, `KeyValueRowLabelProps`, `KeyValueRowField`, `KeyValueRowTooltip`, `KeyValueRowRootProps`, `KeyValueSectionProps` | Use `KeyValueRowProps` from `@metamask/design-system-react-native` (flat props)                                                     |
+
+##### Default Typography Differences
+
+The legacy `KeyValueRowLabel` defaulted to `TextVariant.BodyMDMedium` + `TextColor.Default` for both sides. The design system applies different defaults per side:
+
+- Key: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextAlternative`, `numberOfLines: 1`, `ellipsizeMode: 'tail'`
+- Value: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextDefault`, `numberOfLines: 1`, `ellipsizeMode: 'tail'`
+
+If you relied on the legacy "both sides identical" styling, override via `keyTextProps` / `valueTextProps`.
+
+##### Row Height Now Fixed
+
+Legacy layout was driven by the intrinsic height of the inner `Label` plus section padding. The design system pins the row height:
+
+- `KeyValueRowVariant.Summary` (default) → 40px (`h-10`)
+- `KeyValueRowVariant.Input` → 48px (`h-12`)
+
+If a screen needs a taller row (e.g. input-style confirmation screens where the value is a chip or button), pass `variant={KeyValueRowVariant.Input}`.
+
+#### Migration Examples (Mobile-Specific)
+
+##### Simple label + tooltip with `useTooltipModal`
+
+Before (Mobile):
+
+```tsx
+import KeyValueRow, {
+  TooltipSizes,
+} from '../../../../../../component-library/components-temp/KeyValueRow';
+import { TextVariant } from '../../../../../../component-library/components/Texts/Text';
+
+<KeyValueRow
+  field={{
+    label: { text: strings('tooltip_modal.unstaking_time.title') },
+    tooltip: {
+      title: strings('tooltip_modal.unstaking_time.title'),
+      content: strings('tooltip_modal.unstaking_time.tooltip'),
+      size: TooltipSizes.Sm,
+      onPress: () => trackEvent(createTooltipOpenedEvent(...)),
+    },
+  }}
+  value={{
+    label: {
+      text: strings('stake.estimated_unstaking_time'),
+      variant: TextVariant.BodyMD,
+    },
+  }}
+/>;
+```
+
+After (Design System — host opens the modal):
+
+```tsx
+import {
+  ButtonIconSize,
+  IconName,
+  KeyValueRow,
+} from '@metamask/design-system-react-native';
+import useTooltipModal from '../../../../../../components/hooks/useTooltipModal';
+
+const { openTooltipModal } = useTooltipModal();
+
+<KeyValueRow
+  keyLabel={strings('tooltip_modal.unstaking_time.title')}
+  value={strings('stake.estimated_unstaking_time')}
+  keyEndButtonIconProps={{
+    size: ButtonIconSize.Sm,
+    iconName: IconName.Question,
+    accessibilityLabel: `${strings(
+      'tooltip_modal.unstaking_time.title',
+    )} tooltip`,
+    onPress: () => {
+      openTooltipModal(
+        strings('tooltip_modal.unstaking_time.title'),
+        strings('tooltip_modal.unstaking_time.tooltip'),
+      );
+      trackEvent(createTooltipOpenedEvent(...));
+    },
+  }}
+/>;
+```
+
+Key points: `keyEndButtonIconProps` renders the trigger; the host calls `openTooltipModal(title, content)` and then invokes any analytics side effect.
+
+##### Icon before the key label (legacy `icon.side: LEFT`)
+
+Before (Mobile):
+
+```tsx
+<KeyValueRow
+  field={{
+    label: { text: 'Network' },
+    icon: {
+      name: IconName.Wifi,
+      color: IconColor.PrimaryDefault,
+      size: IconSize.Sm,
+      side: KeyValueRowFieldIconSides.LEFT,
+    },
+  }}
+  value={{ label: { text: 'Mainnet' } }}
+/>
+```
+
+After (Design System):
+
+```tsx
+import {
+  Icon,
+  IconColor,
+  IconName,
+  IconSize,
+  KeyValueRow,
+} from '@metamask/design-system-react-native';
+
+<KeyValueRow
+  keyLabel="Network"
+  value="Mainnet"
+  keyStartAccessory={
+    <Icon
+      name={IconName.Wifi}
+      color={IconColor.PrimaryDefault}
+      size={IconSize.Sm}
+    />
+  }
+/>;
+```
+
+For `side: BOTH`, pass an accessory on both `keyStartAccessory` and `keyEndAccessory`.
+
+##### Taller input-style row
+
+Before (Mobile) — no explicit height control; callers wrapped `KeyValueRow` in `Card` or added `style` to force height.
+
+After (Design System):
+
+```tsx
+import {
+  Icon,
+  IconName,
+  IconSize,
+  KeyValueRow,
+  KeyValueRowVariant,
+} from '@metamask/design-system-react-native';
+
+<KeyValueRow
+  keyLabel="Pay with"
+  value="Debit or credit"
+  variant={KeyValueRowVariant.Input}
+  valueStartAccessory={<Icon name={IconName.Card} size={IconSize.Sm} />}
+  valueEndAccessory={<Icon name={IconName.ArrowDown} size={IconSize.Sm} />}
+/>;
+```
+
+#### Blocked Patterns
+
+These patterns have no drop-in replacement in `@metamask/design-system-react-native`. Keep the legacy import (or rebuild with `Box` / `BoxRow` + `Text`) until the caller is refactored:
+
+- **`KeyValueRowStubs` (`Root` / `Section` / `Label`)** — the legacy module exported sub-components for bespoke layouts. The design system does **not** expose these. Rebuild custom layouts using `Box`, `BoxRow`, and `Text` from `@metamask/design-system-react-native` directly.
+- **Three-or-more-column rows** — `KeyValueRow` renders exactly a key + value row. Compositions that previously nested multiple `KeyValueSection` instances must be rebuilt as plain `BoxRow` layouts.
+- **Using legacy `KeyValueRowLabel` standalone** — the `KeyValueLabel` default export (plus its `useTooltipModal` wiring) is not re-exported. Rebuild with `Text` + a host-owned tooltip handler, or migrate the whole row to `KeyValueRow`.
+
+Known mobile call sites using these blocked patterns (keep the legacy import until refactored):
+
+- `app/components/UI/Bridge/components/QuoteDetailsRecipientKeyValueRow/QuoteDetailsRecipientKeyValueRow.tsx` (owner: `@MetaMask/swaps-engineers`)
+- `app/components/UI/Rewards/components/Tabs/MusdCalculatorTab/MusdCalculatorTab.tsx` (owner: `@MetaMask/rewards`)
+
+#### API Differences
+
+- MMDS `KeyValueRow` uses flat props (`keyLabel`, `value`, `*TextProps`, `*StartAccessory`, `*EndAccessory`, `*EndButtonIconProps`) instead of nested `field` / `value` objects.
+- Row height is controlled by `variant` (`KeyValueRowVariant.Summary` / `KeyValueRowVariant.Input`), not by caller-controlled styles.
+- Tooltips render a `ButtonIcon` trigger only — the host opens the modal in `onPress`.
+- `twClassName` is supported on the outer `BoxRow` for Tailwind overrides.
+- `KeyValueRowStubs`, `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes`, and the matching types are removed.
 
 ## Version Updates
 
