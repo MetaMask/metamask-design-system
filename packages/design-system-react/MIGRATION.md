@@ -7,6 +7,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [General Extension Migration Guidance](#general-extension-migration-guidance)
 - [From Extension Component Library](#from-extension-component-library)
   - [Button Component](#button-component)
+  - [ButtonBase Component](#buttonbase-component)
   - [ButtonIcon Component](#buttonicon-component)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
@@ -140,6 +141,156 @@ The design system Button adds these props:
 - `startIconName` / `endIconName` — icon names for leading/trailing icons
 - `loadingText` — custom text during loading state
 - `className` — Tailwind utility class overrides (merged via `twMerge`)
+
+### ButtonBase Component
+
+`ButtonBase` is a low-level building block for styled buttons. It has significant API changes from the extension `component-library` version — most notably, polymorphism via `as`/`href` is replaced by the `asChild` composition pattern, and `Box`/`TextStyleUtilityProps` are no longer accepted.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                | Design System Migration                                                |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `import { ButtonBase } from '../../component-library'`           | `import { ButtonBase } from '@metamask/design-system-react'`           |
+| `import { ButtonBaseSize } from '../../component-library'`       | `import { ButtonBaseSize } from '@metamask/design-system-react'`       |
+| `import type { ButtonBaseProps } from '../../component-library'` | `import type { ButtonBaseProps } from '@metamask/design-system-react'` |
+
+##### Size Enum
+
+`ButtonBaseSize` keeps the same values, but the default changes from `Md` to `Lg`.
+
+| Extension Value              | Design System Value          | Notes                            |
+| ---------------------------- | ---------------------------- | -------------------------------- |
+| `ButtonBaseSize.Sm` (`'sm'`) | `ButtonBaseSize.Sm` (`'sm'`) | unchanged                        |
+| `ButtonBaseSize.Md` (`'md'`) | `ButtonBaseSize.Md` (`'md'`) | unchanged; no longer the default |
+| `ButtonBaseSize.Lg` (`'lg'`) | `ButtonBaseSize.Lg` (`'lg'`) | unchanged; **new default**       |
+
+##### State Props Renamed
+
+| Extension Prop     | Design System Prop | Notes   |
+| ------------------ | ------------------ | ------- |
+| `disabled`         | `isDisabled`       | renamed |
+| `loading`          | `isLoading`        | renamed |
+| `block`            | `isFullWidth`      | renamed |
+| `iconLoadingProps` | `loadingIconProps` | renamed |
+
+##### Content Model
+
+`ButtonBase` already uses `children` in the extension — no change. String children are wrapped in a `Text` component automatically; non-string children are rendered as-is.
+
+##### Polymorphism Removed: `as` / `href` → `asChild`
+
+The extension `ButtonBase` is polymorphic — `as` switches the root element between `button` and `a`, and an `href` prop auto-switches to `a`. The design system `ButtonBase` always renders a `<button>`. To render as an anchor, use the `asChild` composition prop and provide your own `<a>`.
+
+| Extension Prop           | Design System Migration                                                         |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| `as="a"` / `as="button"` | Removed — always renders a `<button>`. Use `asChild` with your own `<a>`.       |
+| `href="..."`             | Removed — wrap in `asChild` with `<a href="...">`.                              |
+| `externalLink`           | Removed — on your `<a>`, set `target="_blank"` and `rel="noopener noreferrer"`. |
+| `target` / `rel`         | Removed — set directly on your `<a>` inside `asChild`.                          |
+
+##### Removed Props
+
+| Extension Prop                                                                                      | Design System Migration                                                                                                                                                                                                                                  |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ellipsis`                                                                                          | Removed — for string children, pass `textProps={{ ellipsis: true }}` (forwarded to the inner `Text` wrapper, closest to legacy behavior). For non-string children, wrap them in a custom truncating element or add `className="truncate"` on the button. |
+| `iconColor`                                                                                         | Removed — only affected the loading spinner in the legacy component. Pass `loadingIconProps={{ color: ... }}` instead. (Start/end icon colors already came from `startIconProps.color` / `endIconProps.color` — unchanged.)                              |
+| `textDirection`                                                                                     | Removed — set the standard HTML `dir` attribute on the element.                                                                                                                                                                                          |
+| Box/Text style utility props (`padding*`, `margin*`, `backgroundColor`, `color`, `borderRadius`, …) | Removed — use Tailwind `className` instead.                                                                                                                                                                                                              |
+
+#### New Props
+
+The design system `ButtonBase` adds props not available in the extension version:
+
+- `asChild` — render the button styling onto a child element (Radix-style composition, replaces `as`/`href`)
+- `loadingText` — text displayed alongside the spinner while loading
+- `loadingTextProps` — customize the loading `Text` component
+- `startAccessory` / `endAccessory` — arbitrary `ReactNode` slots at start/end, alongside `startIconName` / `endIconName`
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ButtonBase, ButtonBaseSize } from '../../component-library';
+import { IconName } from '../../component-library';
+
+<ButtonBase
+  size={ButtonBaseSize.Lg}
+  block
+  startIconName={IconName.Add}
+  disabled={!isValid}
+  loading={isSubmitting}
+  onClick={handleSubmit}
+>
+  Submit
+</ButtonBase>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  ButtonBase,
+  ButtonBaseSize,
+  IconName,
+} from '@metamask/design-system-react';
+
+<ButtonBase
+  size={ButtonBaseSize.Lg}
+  isFullWidth
+  startIconName={IconName.Add}
+  isDisabled={!isValid}
+  isLoading={isSubmitting}
+  onClick={handleSubmit}
+>
+  Submit
+</ButtonBase>;
+```
+
+##### Rendering as an anchor (`as="a"` / `href` → `asChild`)
+
+Before (Extension):
+
+```tsx
+import { ButtonBase } from '../../component-library';
+
+<ButtonBase as="a" href="https://metamask.io" externalLink>
+  Open MetaMask
+</ButtonBase>;
+```
+
+After (Design System):
+
+```tsx
+import { ButtonBase } from '@metamask/design-system-react';
+
+<ButtonBase asChild>
+  <a href="https://metamask.io" target="_blank" rel="noopener noreferrer">
+    Open MetaMask
+  </a>
+</ButtonBase>;
+```
+
+##### Loading with custom text (new)
+
+The extension only renders a spinner during `loading`. The design system supports an optional loading label:
+
+```tsx
+import { ButtonBase } from '@metamask/design-system-react';
+
+<ButtonBase isLoading loadingText="Submitting…">
+  Submit
+</ButtonBase>;
+```
+
+#### API Differences
+
+- Default `size` changed from `ButtonBaseSize.Md` to `ButtonBaseSize.Lg`
+- Root element is always `<button>` unless `asChild` is used
+- Box/Text style-utility props are no longer accepted — use `className` (Tailwind) for styling overrides
+- Loading state supports an optional `loadingText` and `loadingTextProps`
 
 ### ButtonIcon Component
 
