@@ -23,7 +23,6 @@ import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
-// eslint-disable-next-line import-x/default
 import Animated, {
   runOnJS,
   useAnimatedGestureHandler,

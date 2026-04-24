@@ -74,9 +74,8 @@ export const ButtonTertiary = ({
       if (isInverse) {
         return 'text-primary-inverse';
       }
-      return pressed || isLoading
-        ? 'text-primary-default-pressed'
-        : 'text-primary-default';
+      // Use neutral text color for all states (default, pressed, loading)
+      return 'text-default';
     },
     [isDanger, isInverse, isLoading],
   );

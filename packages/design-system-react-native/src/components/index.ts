@@ -207,6 +207,15 @@ export type { TextFieldSearchProps } from './TextFieldSearch';
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 
+export { TitleHub } from './TitleHub';
+export type { TitleHubProps, TitleHubPropsShared } from './TitleHub';
+
+export { TitleStandard } from './TitleStandard';
+export type { TitleStandardProps } from './TitleStandard';
+
+export { TitleSubpage } from './TitleSubpage';
+export type { TitleSubpageProps } from './TitleSubpage';
+
 export {
   Toast,
   ToastVariant,
@@ -242,3 +251,6 @@ export type { SpinnerProps } from './temp-components/Spinner';
 
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
+
+export { Tag, TagSeverity } from './Tag';
+export type { TagProps } from './Tag';
