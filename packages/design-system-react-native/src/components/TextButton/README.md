@@ -86,6 +86,10 @@ Style for the label, merged after design-token styles. Prefer `twClassName` with
 
 Other `Text` / React Native `Text` props are supported via `TextButtonProps` (see [`TextProps`](../Text/Text.types.ts)).
 
+## Migration from MetaMask Mobile Component Library
+
+Migrating from the legacy `ButtonLink` in `app/component-library/components/Buttons/Button/variants/ButtonLink`? See the [TextButton (ButtonLink) migration guide](../../../MIGRATION.md#textbutton-component-buttonlink) for the full prop mapping, `label` → `children`, and when to use `Button` with `variant={ButtonVariant.Tertiary}` instead.
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

@@ -239,7 +239,7 @@ const customStyles = {
 
 ## Migration Guide
 
-Migrating from `app/component-library/components/Checkbox` in MetaMask Mobile? See the [Checkbox Migration Guide](../../MIGRATION.md#checkbox-component) for prop mappings, before/after examples, and breaking changes.
+Migrating from `app/component-library/components/Checkbox` in MetaMask Mobile? See the [Checkbox Migration Guide](../../../MIGRATION.md#checkbox-component) for prop mappings, before/after examples, and breaking changes.
 
 ---
 

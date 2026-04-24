@@ -7,6 +7,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [General Extension Migration Guidance](#general-extension-migration-guidance)
 - [From Extension Component Library](#from-extension-component-library)
   - [Button Component](#button-component)
+  - [ButtonIcon Component](#buttonicon-component)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
@@ -14,6 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
+  - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
@@ -138,6 +140,173 @@ The design system Button adds these props:
 - `startIconName` / `endIconName` — icon names for leading/trailing icons
 - `loadingText` — custom text during loading state
 - `className` — Tailwind utility class overrides (merged via `twMerge`)
+
+### ButtonIcon Component
+
+`ButtonIcon` is a compact, icon-only button. The design system version has significant API differences from the extension `component-library` version — pixel sizes shift, the icon color API moves under `iconProps`, polymorphism via `as`/`href` is removed, and a new `variant` prop is introduced.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                | Design System Migration                                                |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `import { ButtonIcon } from '../../component-library'`           | `import { ButtonIcon } from '@metamask/design-system-react'`           |
+| `import { ButtonIconSize } from '../../component-library'`       | `import { ButtonIconSize } from '@metamask/design-system-react'`       |
+| `import type { ButtonIconProps } from '../../component-library'` | `import type { ButtonIconProps } from '@metamask/design-system-react'` |
+
+##### Size Enum — Pixel Dimensions Changed
+
+The `ButtonIconSize` members (`Sm` / `Md` / `Lg`) keep the same string values, but the pixel dimensions shift and the **default identifier changes from `Lg` to `Md`**. The default rendered pixel size (32px) is unchanged.
+
+| Extension Value              | Extension Pixels | Design System Value          | DS Pixels | Notes                         |
+| ---------------------------- | ---------------- | ---------------------------- | --------- | ----------------------------- |
+| `ButtonIconSize.Sm` (`'sm'`) | 24px             | `ButtonIconSize.Sm` (`'sm'`) | 24px      | same dimension                |
+| `ButtonIconSize.Md` (`'md'`) | 28px             | `ButtonIconSize.Md` (`'md'`) | 32px      | larger in DS; **new default** |
+| `ButtonIconSize.Lg` (`'lg'`) | 32px             | `ButtonIconSize.Lg` (`'lg'`) | 40px      | larger in DS                  |
+
+> [!NOTE]
+> The extension's default (`ButtonIconSize.Lg` = 32px) now maps to `ButtonIconSize.Md` in the design system. Call sites that explicitly pass `ButtonIconSize.Md` or `ButtonIconSize.Lg` will render larger — review layouts when migrating.
+
+##### State Props Renamed
+
+| Extension Prop | Design System Prop | Notes   |
+| -------------- | ------------------ | ------- |
+| `disabled`     | `isDisabled`       | renamed |
+
+##### `color` → `iconProps.color`
+
+The extension `ButtonIcon` accepted a top-level `color` prop (typed as `IconColor`) that set the icon color. The design system removes it — customize the inner `Icon` via `iconProps` instead.
+
+| Extension Pattern                  | Design System Migration                              |
+| ---------------------------------- | ---------------------------------------------------- |
+| `color={IconColor.iconDefault}`    | Remove — default icon color is applied automatically |
+| `color={IconColor.errorDefault}`   | `iconProps={{ color: IconColor.ErrorDefault }}`      |
+| `color={IconColor.primaryDefault}` | `iconProps={{ color: IconColor.PrimaryDefault }}`    |
+
+`IconColor` member names also change casing (camelCase → PascalCase). See [Icon Component](#icon-component) for the full mapping.
+
+##### Polymorphism Removed: `as` / `href` — No Direct Equivalent for Anchor Usage
+
+The extension `ButtonIcon` is polymorphic — `as` toggles the root between `button` and `a`, and an `href` prop auto-switches to `a`. The design system `ButtonIcon` always renders a real `<button>` and does **not** support `asChild`, so there is no built-in way to render an icon-only link. Wrapping `ButtonIcon` in an `<a>` is not a valid migration path — it creates nested interactive elements (`<a>` containing `<button>`), which breaks HTML semantics and accessibility.
+
+| Extension Prop | Design System Migration                                                                                                                                                         |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `as="a"`       | No direct equivalent — the design system `ButtonIcon` is a `<button>` only. If you still need an icon-only link, reach out to the design system team to discuss adding support. |
+| `href="..."`   | No direct equivalent — see above. Do not wrap `ButtonIcon` in an `<a>`: that produces invalid nested `<a><button>` interactive elements.                                        |
+
+##### Removed Props
+
+| Extension Prop                                                                        | Design System Migration                     |
+| ------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `color`                                                                               | Removed — use `iconProps={{ color: ... }}`  |
+| Box `StyleUtilityProps` (`padding*`, `margin*`, `backgroundColor`, `borderRadius`, …) | Removed — use Tailwind `className` instead. |
+
+#### New Props
+
+The design system `ButtonIcon` adds these props:
+
+- `variant` — controls the visual style:
+  - `ButtonIconVariant.Default` — transparent background (matches current extension behavior)
+  - `ButtonIconVariant.Filled` — muted background with rounded corners and pressed state
+  - `ButtonIconVariant.Floating` — colored background with inverse icon color
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ButtonIcon, ButtonIconSize, IconName } from '../../component-library';
+import { IconColor } from '../../../helpers/constants/design-system';
+
+<ButtonIcon
+  iconName={IconName.Close}
+  ariaLabel="Close"
+  size={ButtonIconSize.Lg}
+  color={IconColor.iconDefault}
+  disabled={isClosing}
+  onClick={handleClose}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  ButtonIcon,
+  ButtonIconSize,
+  IconName,
+} from '@metamask/design-system-react';
+
+<ButtonIcon
+  iconName={IconName.Close}
+  ariaLabel="Close"
+  size={ButtonIconSize.Md}
+  isDisabled={isClosing}
+  onClick={handleClose}
+/>;
+```
+
+##### Colored icon (semantic color)
+
+Before (Extension):
+
+```tsx
+<ButtonIcon
+  iconName={IconName.Trash}
+  ariaLabel="Delete"
+  size={ButtonIconSize.Sm}
+  color={IconColor.errorDefault}
+  onClick={handleDelete}
+/>
+```
+
+After (Design System):
+
+```tsx
+import {
+  ButtonIcon,
+  ButtonIconSize,
+  IconColor,
+  IconName,
+} from '@metamask/design-system-react';
+
+<ButtonIcon
+  iconName={IconName.Trash}
+  ariaLabel="Delete"
+  size={ButtonIconSize.Sm}
+  iconProps={{ color: IconColor.ErrorDefault }}
+  onClick={handleDelete}
+/>;
+```
+
+##### Using the new `variant` prop
+
+```tsx
+import {
+  ButtonIcon,
+  ButtonIconSize,
+  ButtonIconVariant,
+  IconName,
+} from '@metamask/design-system-react';
+
+<ButtonIcon
+  iconName={IconName.MoreVertical}
+  ariaLabel="More options"
+  size={ButtonIconSize.Md}
+  variant={ButtonIconVariant.Filled}
+  onClick={openMenu}
+/>;
+```
+
+#### API Differences
+
+- Default `size` identifier changes from `ButtonIconSize.Lg` to `ButtonIconSize.Md` (32px pixel default unchanged); `Md` and `Lg` map to larger pixel dimensions
+- Root element is always `<button>` — no `as="a"` / `href` polymorphism and no `asChild`; icon-only link usage has no direct equivalent (reach out to the design system team if needed)
+- Icon color is controlled via `iconProps.color` rather than a top-level `color` prop
+- Box style-utility props are no longer accepted — use Tailwind `className` for styling overrides
+- New `variant` prop (`Default`, `Filled`, `Floating`) for visual styles not available in the extension
+- `IconColor` enum member names now use PascalCase (see [Icon Component](#icon-component))
 
 ### Box Component
 
@@ -670,11 +839,69 @@ import { Checkbox } from '@metamask/design-system-react';
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
 
+## From version 0.17.0 to 0.18.0
+
+### Box: Enum exports now use const objects and string unions
+
+**What Changed:**
+
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` now follow the ADR-0003 const-object + string-union pattern instead of local enums.
+
+**Migration:**
+
+```tsx
+// Before (0.17.1)
+import { BoxBackgroundColor } from '@metamask/design-system-react';
+
+// After (0.18.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react';
+```
+
+### Box: Removed stale `-alternative` color tokens
+
+**What Changed:**
+
+The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
+
+| Removed Entry                           | Replacement                         |
+| --------------------------------------- | ----------------------------------- |
+| `BoxBackgroundColor.WarningAlternative` | `BoxBackgroundColor.WarningDefault` |
+| `BoxBackgroundColor.SuccessAlternative` | `BoxBackgroundColor.SuccessDefault` |
+| `BoxBorderColor.WarningAlternative`     | `BoxBorderColor.WarningDefault`     |
+| `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`     |
+| `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`        |
+
+**Migration:**
+
+These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate:
+
+```tsx
+// Before (0.17.1)
+<Box backgroundColor={BoxBackgroundColor.WarningAlternative} />
+<Box backgroundColor={BoxBackgroundColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.WarningAlternative} />
+<Box borderColor={BoxBorderColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.InfoAlternative} />
+
+// After (0.18.0)
+<Box backgroundColor={BoxBackgroundColor.WarningDefault} />
+<Box backgroundColor={BoxBackgroundColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.WarningDefault} />
+<Box borderColor={BoxBorderColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.InfoDefault} />
+```
+
+**Impact:**
+
+- Any reference to the removed entries will produce a TypeScript error after upgrading.
+
+---
+
 ## From version 0.16.0 to 0.17.0
 
-### Text: Typography const values moved to `@metamask/design-system-shared`
+### Text: Typography enum exports now use const objects and string unions
 
-`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react`. All existing import paths through `@metamask/design-system-react` continue to work without change.
+`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` now follow the ADR-0003 const-object + string-union pattern instead of enums.
 
 #### `FontWeight`, `FontStyle`, and `FontFamily` values changed
 
@@ -705,7 +932,7 @@ if (fontWeight === FontWeight.Bold) { ... }
 
 #### Breaking: Tailwind content scanning
 
-If your project scans `node_modules/@metamask/design-system-react` for Tailwind class names (e.g. to include `text-primary-default` from `TextColor`), you must also scan `@metamask/design-system-shared` because the class name strings now live in the shared package's compiled output.
+If your project scans `node_modules` for Tailwind class names (for example to include `text-primary-default` from `TextColor`), widen your MMDS content globs after upgrading so the generated class name strings are still discovered.
 
 **Before (0.16.0):**
 
@@ -721,8 +948,7 @@ content: [
 ```js
 // tailwind.config.js
 content: [
-  './node_modules/@metamask/design-system-react/**/*.{mjs,cjs}',
-  './node_modules/@metamask/design-system-shared/**/*.{mjs,cjs}',
+  './node_modules/@metamask/design-system-*/**/*.{mjs,cjs}',
 ],
 ```
 
@@ -738,7 +964,7 @@ content: [
 
 ### BadgeWrapper types now use const-object + union definitions
 
-- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, producing string union types instead of TypeScript enums; this follows ADR-0003 and ADR-0004 so the same canonical values power both React and React Native without duplicating the runtime constants (see https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md and https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md).
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, producing string union types instead of TypeScript enums; this follows ADR-0003 and ADR-0004 (see https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md and https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md).
 - The exports remain available through `@metamask/design-system-react` (and the platform-specific bundles), so your import path stays the same; only the underlying type shape shifted to a const-object/union pattern so you gain string-literal widening while keeping the previously exported names.
 
 ## From version 0.10.0 to 0.11.0

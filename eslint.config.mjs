@@ -42,7 +42,7 @@ const config = createConfig([
       'apps/storybook-react/postcss.config.js',
       'apps/storybook-react/tailwind.config.js',
       // storybook react native
-      'apps/storybook-react-native/.storybook/**/*.js',
+      'apps/storybook-react-native/.rnstorybook/**',
       'apps/storybook-react-native/*.js',
     ],
   },
@@ -74,6 +74,7 @@ const config = createConfig([
       '**/tests/**/*.{js,ts}',
       'scripts/*.ts',
       'scripts/create-package/**/*.ts',
+      'packages/*/scripts/**/*.ts',
     ],
     extends: [nodejs],
     rules: {
@@ -189,7 +190,7 @@ const config = createConfig([
     },
   },
   {
-    files: ['scripts/*.ts'],
+    files: ['scripts/*.ts', 'packages/*/scripts/**/*.ts'],
     rules: {
       // Scripts may be self-executable and thus have hashbangs.
       'n/hashbang': 'off',

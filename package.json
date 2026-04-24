@@ -1,6 +1,6 @@
 {
   "name": "@metamask/metamask-design-system",
-  "version": "33.0.0",
+  "version": "35.0.0",
   "private": true,
   "description": "The MetaMask Design System monorepo",
   "repository": {
@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev run build",
+    "generate:icons": "yarn workspace @metamask/design-system-shared generate-icons",
     "build:clean": "rimraf 'packages/*/dist' '**/*.tsbuildinfo' && yarn build",
     "build:types": "tsc --build tsconfig.build.json --verbose",
     "changelog:update": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:update",
@@ -32,9 +33,6 @@
     "figma:connect:unpublish": "yarn figma:connect:unpublish:react && yarn figma:connect:unpublish:react-native",
     "figma:connect:unpublish:react": "figma connect unpublish --config packages/design-system-react/figma.config.json",
     "figma:connect:unpublish:react-native": "figma connect unpublish --config packages/design-system-react-native/figma.config.json",
-    "generate-icons": "yarn generate-icons:react && yarn generate-icons:react-native",
-    "generate-icons:react": "yarn workspace @metamask/design-system-react generate-icons",
-    "generate-icons:react-native": "yarn workspace @metamask/design-system-react-native generate-icons",
     "lint": "yarn lint:eslint && yarn lint:misc --check && yarn constraints && yarn lint:dependencies",
     "lint:clear-cache": "rimraf .eslintcache",
     "lint:dependencies": "depcheck && yarn dedupe --check",
@@ -80,7 +78,7 @@
     "ws@7.4.6": "^7.5.10"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.5",
+    "@babel/core": "^7.25.2",
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@figma/code-connect": "^1.0.0",
@@ -117,13 +115,10 @@
     "lodash": "^4.17.21",
     "prettier": "^3.3.3",
     "prettier-plugin-packagejson": "^2.4.5",
-    "react": "^18.2.0",
-    "react-native": "^0.72.15",
     "rimraf": "^5.0.5",
     "semver": "^7.7.1",
     "simple-git-hooks": "^2.8.0",
     "tsx": "^4.20.6",
-    "twrnc": "^4.5.1",
     "typescript": "~5.2.2",
     "typescript-eslint": "^8.7.0",
     "yargs": "^17.7.2"

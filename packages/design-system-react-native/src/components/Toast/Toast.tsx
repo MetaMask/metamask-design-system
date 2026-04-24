@@ -10,7 +10,6 @@ import React, {
 } from 'react';
 import { Dimensions, View } from 'react-native';
 import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
-// eslint-disable-next-line import-x/default
 import Animated, {
   cancelAnimation,
   runOnJS,
