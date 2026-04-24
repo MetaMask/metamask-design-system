@@ -41,7 +41,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - **`placeholder`**, **`isReadonly`**, **`onFocus`**, and **`onBlur`** are owned at the **`TextField` / `TextFieldSearch` top level** and forwarded to the inner `Input`. Do not pass them only through **`inputProps`**.
 - **`placeholderTextColor`** is not supported on the public **`TextField`** API; the inner **`Input`** sets placeholder color from the theme.
 - Remaining top-level props on **`TextField`** are **`BoxProps`** (layout and **`View`** props from React Native), except for keys reserved by **`TextField`** (see type **`TextFieldProps`**). **`hitSlop`**, **`onPress`**, and other **`Pressable`**-only APIs are not supported on the root; tap-to-focus on the chrome is removed—users focus by tapping the **`Input`** / **`TextInput`**.
-- Cross-platform field definitions live in **`TextFieldPropsShared`** in **`@metamask/design-system-shared`** (also re-exported from **`@metamask/design-system-react-native`**).
+- Cross-platform field definitions live in **`TextFieldPropsShared`** in **`@metamask/design-system-shared`**.
 - **`TextFieldSearchProps`** extends **`TextFieldProps`**; the same layering applies. **`onPressClearButton`**, **`clearButtonProps`**, **`startAccessory`**, **`endAccessory`**, and **`style`** behavior are unchanged.
 
 **Migration:**
