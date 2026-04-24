@@ -1,6 +1,6 @@
 # TextField
 
-TextField is a controlled-only boxed input that can include accessories before or after the input.
+TextField is used to render a controlled, single-line text input inside a fixed-height row with optional leading and trailing content.
 
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
@@ -10,8 +10,6 @@ import { TextField } from '@metamask/design-system-react-native';
 
 ## Props
 
-This component extends [Input](../Input/Input.tsx) props (which extends React Native's [TextInput](https://reactnative.dev/docs/textinput)), excluding `textVariant` and `isStateStylesDisabled`.
-
 ### `value`
 
 Required controlled value for the TextField.
@@ -20,43 +18,156 @@ Required controlled value for the TextField.
 | -------- | -------- | ------- |
 | `string` | Yes      | N/A     |
 
-### Layout
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
 
-The field uses a fixed **48px** row height with a single-line inner input.
+<TextField value="hello" placeholder="Value example" />;
+```
 
-### `isError`
+### `onChangeText`
 
-Optional boolean to show the error state. Changes the border color to indicate an error.
+Optional callback when the text changes.
+
+| TYPE                     | REQUIRED | DEFAULT     |
+| ------------------------ | -------- | ----------- |
+| `(text: string) => void` | No       | `undefined` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" onChangeText={(text) => {}} placeholder="Change handler" />;
+```
+
+### `placeholder`
+
+Optional placeholder string for the inner input.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" placeholder="Search" />;
+```
+
+### `isReadonly`
+
+When true, the inner input is not editable.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
 ```tsx
-<TextField value="" isError placeholder="Error state" />
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" isReadonly placeholder="Read-only" />;
+```
+
+### `onFocus`
+
+Optional handler when the inner input receives focus. TextField composes this with its own focus border behavior. Do not pass `onFocus` through `inputProps`; use this prop instead.
+
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `function` | No       | `undefined` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" placeholder="Focus" onFocus={() => {}} />;
+```
+
+### `onBlur`
+
+Optional handler when the inner input loses focus. TextField composes this with its own focus border behavior. Do not pass `onBlur` through `inputProps`; use this prop instead.
+
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `function` | No       | `undefined` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" placeholder="Blur" onBlur={() => {}} />;
+```
+
+### `inputProps`
+
+Additional props forwarded to the inner [Input](../Input/Input.tsx) / `TextInput`. Do not pass `placeholder`, `isReadonly`, `onFocus`, or `onBlur` here; use the TextField-level props above. `placeholderTextColor` is omitted from the type; the inner `Input` sets it from the theme. For a required field, use `inputProps.accessibilityState={{ required: true }}` (and related accessibility props as needed).
+
+| TYPE                                                    | REQUIRED | DEFAULT     |
+| ------------------------------------------------------- | -------- | ----------- |
+| `Omit<InputProps, …>` (see `TextFieldInputProps` types) | No       | `undefined` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField
+  value=""
+  onChangeText={(text) => {}}
+  placeholder="Search"
+  inputProps={{
+    autoCapitalize: 'none',
+    returnKeyType: 'search',
+  }}
+/>;
+```
+
+### `isError`
+
+When true, the field shows an error state (container border).
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" isError placeholder="Error state" />;
 ```
 
 ### `isDisabled`
 
-Optional boolean to disable the TextField. Reduces opacity and prevents interaction.
+When true, the field applies reduced opacity and forwards disabled state to the inner `Input` (non-editable).
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
 ```tsx
-<TextField value="" isDisabled placeholder="Disabled" />
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" isDisabled placeholder="Disabled" />;
+```
+
+### `autoFocus`
+
+When true, the inner input requests focus on mount.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" autoFocus placeholder="Focused on mount" />;
 ```
 
 ### `startAccessory`
 
-Optional content to display before the Input. For E2E, set `testID` on the accessory (or wrap it in your own `View`).
+Optional content rendered before the inner input. For E2E, set `testID` on the accessory or wrap it in your own `View`.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
+import { TextField } from '@metamask/design-system-react-native';
 import { Text } from 'react-native';
 
 <TextField value="" startAccessory={<Text>🔍</Text>} placeholder="Search..." />;
@@ -64,13 +175,14 @@ import { Text } from 'react-native';
 
 ### `endAccessory`
 
-Optional content to display after the Input. For E2E, set `testID` on the accessory (or wrap it in your own `View`).
+Optional content rendered after the inner input. For E2E, set `testID` on the accessory or wrap it in your own `View`.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
+import { TextField } from '@metamask/design-system-react-native';
 import { Text } from 'react-native';
 
 <TextField
@@ -82,21 +194,50 @@ import { Text } from 'react-native';
 
 ### `inputElement`
 
-Optional prop to replace the default Input with a custom element.
+Optional node that replaces the default `Input`. The forwarded ref still targets `TextInput` when the default input is used; with a custom `inputElement`, ensure your control is focusable if users need keyboard entry.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
+import { TextField } from '@metamask/design-system-react-native';
 import { TextInput } from 'react-native';
 
 <TextField value="" inputElement={<TextInput placeholder="Custom input" />} />;
 ```
 
+### `testID`
+
+Optional test id for the root `Box`.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField value="" testID="my-text-field" placeholder="E2E" />;
+```
+
+### Layout and accessibility (`Box` / `View`)
+
+Pass `BoxProps` and React Native `View` props at the top level for layout and accessibility on the root container (for example `accessibilityHint`, `pointerEvents`). Keys reserved by TextField (`style`, `twClassName`, `testID`, `children`, `accessible`, and all keys owned by `TextFieldBaseProps`) are not passed through from this intersection. Prefer either Tailwind via `twClassName` or explicit `Box` layout props, and avoid conflicting layout when mixing both.
+
+```tsx
+import { TextField } from '@metamask/design-system-react-native';
+
+<TextField
+  value=""
+  placeholder="Search"
+  accessibilityHint="Searches tokens by name or address"
+/>;
+```
+
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the container. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -108,16 +249,20 @@ Use the `twClassName` prop to add Tailwind CSS classes to the container. These c
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
 
-// Add additional styles (avoid layout/height changes without design system review)
+// Add additional styles
 <TextField value="" twClassName="rounded-lg" placeholder="With extra rounding" />
 
 // Override default styles
-<TextField value="" twClassName="bg-error-default" placeholder="Override background" />
+<TextField
+  value=""
+  twClassName="bg-error-default"
+  placeholder="Override background"
+/>
 ```
 
 ### `style`
 
-Use the `style` prop to customize the container's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

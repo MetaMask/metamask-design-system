@@ -196,7 +196,7 @@ export {
 export type { TextProps } from './Text';
 
 export { TextField } from './TextField';
-export type { TextFieldProps } from './TextField';
+export type { TextFieldInputProps, TextFieldProps } from './TextField';
 
 export { TextFieldSearch } from './TextFieldSearch';
 export type { TextFieldSearchProps } from './TextFieldSearch';

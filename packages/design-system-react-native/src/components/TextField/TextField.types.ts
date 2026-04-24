@@ -1,39 +1,76 @@
-import type { ReactNode } from 'react';
+import type { TextFieldPropsShared } from '@metamask/design-system-shared';
 import type { StyleProp, ViewStyle } from 'react-native';
 
+import type { BoxProps } from '../Box/Box.types';
 import type { InputProps } from '../Input/Input.types';
 
 /**
- * TextField component props.
+ * Additional props merged onto the inner `Input` (`../Input/Input.tsx`).
+ *
+ * TextField owns `value`, `onChangeText`, `placeholder`, `isReadonly`, `onFocus`,
+ * `onBlur`, `isDisabled`, `autoFocus`, typography, and inner layout (merged with
+ * any `twClassName` you pass here). `placeholderTextColor` is omitted (Input sets
+ * it from theme).
  */
-export type TextFieldProps = Omit<
+export type TextFieldInputProps = Omit<
   InputProps,
-  'textVariant' | 'isStateStylesDisabled' | 'style'
-> & {
+  | 'autoFocus'
+  | 'isDisabled'
+  | 'isReadonly'
+  | 'isStateStylesDisabled'
+  | 'onBlur'
+  | 'onChangeText'
+  | 'onFocus'
+  | 'placeholder'
+  | 'placeholderTextColor'
+  | 'style'
+  | 'textVariant'
+  | 'value'
+>;
+
+/**
+ * React Native `TextField` props between `TextFieldPropsShared` and the root
+ * `Box`: typed focus/blur handlers, `inputProps`, container styling, and
+ * `testID`.
+ */
+export type TextFieldBaseProps = TextFieldPropsShared & {
   /**
-   * Optional content to display before the Input.
+   * Called when the inner input receives focus (composed with TextField border state).
    */
-  startAccessory?: ReactNode;
+  onFocus?: InputProps['onFocus'];
   /**
-   * Optional content to display after the Input.
+   * Called when the inner input loses focus (composed with TextField border state).
    */
-  endAccessory?: ReactNode;
+  onBlur?: InputProps['onBlur'];
   /**
-   * Optional boolean to show the error state.
-   *
-   * @default false
+   * Additional props for the inner `Input`. Use `accessibilityState={{ required: true }}` when
+   * the field is required. Do not pass `placeholder`, `isReadonly`, `onFocus`, or `onBlur` here;
+   * use the TextField-level props above.
    */
-  isError?: boolean;
+  inputProps?: TextFieldInputProps;
   /**
-   * Optional prop to replace the default Input with a custom element.
-   */
-  inputElement?: ReactNode;
-  /**
-   * Optional prop to add twrnc overriding classNames.
+   * Optional twrnc classes for the root `Box`.
    */
   twClassName?: string;
   /**
-   * Optional prop to customize the container style.
+   * Optional style for the root `Box`.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Optional test id for the root `Box`.
+   */
+  testID?: string;
 };
+
+type TextFieldReservedBoxKeys =
+  | keyof TextFieldBaseProps
+  | 'accessible'
+  | 'children'
+  | 'style';
+
+/**
+ * TextField props: `TextFieldBaseProps` plus remaining `BoxProps` at the top
+ * level, excluding keys reserved by TextField.
+ */
+export type TextFieldProps = TextFieldBaseProps &
+  Omit<BoxProps, TextFieldReservedBoxKeys>;

@@ -91,6 +91,68 @@ These tokens had no backing CSS custom property, so any usage was already produc
 
 - Any reference to the removed entries will produce a TypeScript error after upgrading.
 
+---
+
+#### TextField and TextFieldSearch: layered props (`inputProps` and root `Box`)
+
+**What changed:**
+
+- **`TextField`** is a root **`Box`** (a styled **`View`**) with an inner **`Input`**. Props that belong on the native text control must be passed in **`inputProps`** (for example `keyboardType`, `secureTextEntry`, `returnKeyType`, `autoCapitalize`, `accessibilityLabel`, `accessibilityState`).
+- **`placeholder`**, **`isReadonly`**, **`onFocus`**, and **`onBlur`** are owned at the **`TextField` / `TextFieldSearch` top level** and forwarded to the inner `Input`. Do not pass them only through **`inputProps`**.
+- **`placeholderTextColor`** is not supported on the public **`TextField`** API; the inner **`Input`** sets placeholder color from the theme.
+- Remaining top-level props on **`TextField`** are **`BoxProps`** (layout and **`View`** props from React Native), except for keys reserved by **`TextField`** (see type **`TextFieldProps`**). **`hitSlop`**, **`onPress`**, and other **`Pressable`**-only APIs are not supported on the root; tap-to-focus on the chrome is removed—users focus by tapping the **`Input`** / **`TextInput`**.
+- Cross-platform field definitions live in **`TextFieldPropsShared`** in **`@metamask/design-system-shared`**.
+- **`TextFieldSearchProps`** extends **`TextFieldProps`**; the same layering applies. **`onPressClearButton`**, **`clearButtonProps`**, **`startAccessory`**, **`endAccessory`**, and **`style`** behavior are unchanged.
+
+**Migration:**
+
+Move inner `TextInput` props from the root into **`inputProps`**. Keep **`placeholder`**, **`onFocus`**, and **`onBlur`** on the component root when you use them.
+
+```tsx
+// Before (0.19.0) — native TextInput props on TextField
+<TextField
+  value={query}
+  onChangeText={setQuery}
+  placeholder="Search"
+  keyboardType="default"
+  secureTextEntry
+  onFocus={handleFocus}
+/>
+
+// After (0.20.0)
+<TextField
+  value={query}
+  onChangeText={setQuery}
+  placeholder="Search"
+  onFocus={handleFocus}
+  inputProps={{
+    keyboardType: 'default',
+    secureTextEntry: true,
+  }}
+/>
+```
+
+If you relied on **`hitSlop`** or a larger tap target on the field chrome, wrap **`TextField`** in your own **`Pressable`** (or enlarge the inner input via **`inputProps`**) at the app level.
+
+Remove **`placeholderTextColor`** from **`TextField`** call sites; rely on theme behavior from **`Input`**.
+
+**Impact:**
+
+- Any **`TextField`** or **`TextFieldSearch`** usage that spread or passed **`TextInput`** props on the root must move those keys into **`inputProps`**, except for the props **`TextField`** owns (**`value`**, **`onChangeText`**, **`placeholder`**, **`isReadonly`**, **`onFocus`**, **`onBlur`**, **`isDisabled`**, **`autoFocus`**, **`isError`**, accessories, **`inputElement`**, **`testID`**, **`style`**, **`twClassName`**) and valid **`BoxProps`** / **`View`** props you pass at the top level.
+- Call sites that passed **`Pressable`**-only props (**`hitSlop`**, root **`onPress`**, root **`disabled`**) must be updated: the root is no longer a **`Pressable`**.
+- Type-only consumers can extend or intersect **`TextFieldPropsShared`** from **`@metamask/design-system-shared`** for shared forms code.
+
+#### Input: theme `placeholderTextColor` always wins
+
+**What changed:**
+
+**`Input`** used to pass **`placeholderTextColor`** on the native **`TextInput`** **before** **`{...props}`**, so a **`placeholderTextColor`** included in **`props`** could override the theme-derived color. **`Input`** now passes **`placeholderTextColor`** **after** **`{...props}`**, so the **theme token for placeholder text is always applied** and **is not overridden** by caller props.
+
+**Impact:**
+
+- Passing **`placeholderTextColor`** on **`Input`** has **no effect** on the rendered placeholder tint; remove dead props if you had any.
+- **`TextField`** already omits **`placeholderTextColor`** from its public API and forwards inner **`Input`** behavior only.
+
 ### From version 0.18.0 to 0.19.0
 
 #### HeaderRoot: `titleAccessory` no longer renders without `title`

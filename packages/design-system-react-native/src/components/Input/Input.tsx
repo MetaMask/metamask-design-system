@@ -121,9 +121,9 @@ export const Input = forwardRef<TextInput, InputProps>(
     return (
       <TextInput
         ref={ref}
-        placeholderTextColor={placeholderTextColor}
         {...props}
         placeholder={placeholder}
+        placeholderTextColor={placeholderTextColor}
         value={value}
         style={resolvedStyle}
         editable={!isDisabled && !isReadonly}

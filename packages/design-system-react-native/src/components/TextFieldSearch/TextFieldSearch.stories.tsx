@@ -39,14 +39,17 @@ const meta: Meta<TextFieldSearchProps> = {
     isReadonly: {
       control: 'boolean',
     },
-    placeholder: {
+    value: {
       control: 'text',
     },
-    value: {
+    placeholder: {
       control: 'text',
     },
     twClassName: {
       control: 'text',
+    },
+    inputProps: {
+      control: 'object',
     },
   },
 };
