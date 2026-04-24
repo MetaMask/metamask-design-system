@@ -67,11 +67,12 @@ export {
   type KeyValueRowPropsShared,
 } from './types/KeyValueRow';
 
-// PickerBase types (ADR-0003 + ADR-0004)
+// SelectButton types (ADR-0003 + ADR-0004)
 export {
-  PickerBaseEndArrow,
-  type PickerBasePropsShared,
-} from './types/PickerBase';
+  SelectButtonEndArrow,
+  SelectButtonVariant,
+  type SelectButtonPropsShared,
+} from './types/SelectButton';
 
 // ButtonFilter types (ADR-0004)
 export { type ButtonFilterPropsShared } from './types/ButtonFilter';

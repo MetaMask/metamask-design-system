@@ -1,4 +1,8 @@
-import { PickerBaseEndArrow } from '@metamask/design-system-shared';
+import {
+  SelectButtonEndArrow,
+  SelectButtonVariant,
+  TextColor,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { fireEvent, render } from '@testing-library/react-native';
@@ -8,14 +12,14 @@ import { View } from 'react-native';
 import { IconColor, IconName, IconSize } from '../../types';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
-import { PickerBase } from './PickerBase';
-import { MAP_PICKERBASE_END_ARROW_TO_ICON_NAME } from './PickerBase.constants';
+import { SelectButton } from './SelectButton';
+import { MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME } from './SelectButton.constants';
 
-const ROOT_TEST_ID = 'picker-base';
+const ROOT_TEST_ID = 'select-button';
 
 const noopPress = () => undefined;
 
-describe('PickerBase', () => {
+describe('SelectButton', () => {
   let tw: ReturnType<typeof useTailwind>;
 
   beforeAll(() => {
@@ -25,9 +29,9 @@ describe('PickerBase', () => {
   describe('label slot', () => {
     it('renders string children', () => {
       const { getByText } = render(
-        <PickerBase testID={ROOT_TEST_ID} onPress={noopPress}>
+        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress}>
           Select
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByText('Select')).toHaveTextContent('Select');
@@ -35,52 +39,64 @@ describe('PickerBase', () => {
 
     it('exposes testID on the root pressable', () => {
       const { getByTestId } = render(
-        <PickerBase testID="custom-picker" onPress={noopPress}>
+        <SelectButton testID="custom-select-button" onPress={noopPress}>
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
-      expect(getByTestId('custom-picker')).toBeOnTheScreen();
+      expect(getByTestId('custom-select-button')).toBeOnTheScreen();
     });
 
     it('renders startAccessory before the label', () => {
       const { getByTestId } = render(
-        <PickerBase
+        <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           startAccessory={<View testID="start-accessory" />}
         >
           With accessory
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByTestId('start-accessory')).toBeOnTheScreen();
     });
   });
 
-  describe('when endArrow is set', () => {
+  describe('when endArrowDirection is set', () => {
     const cases: {
-      endArrow: (typeof PickerBaseEndArrow)[keyof typeof PickerBaseEndArrow];
+      endArrowDirection: (typeof SelectButtonEndArrow)[keyof typeof SelectButtonEndArrow];
       iconName: IconName;
     }[] = [
-      { endArrow: PickerBaseEndArrow.Up, iconName: IconName.ArrowUp },
-      { endArrow: PickerBaseEndArrow.Down, iconName: IconName.ArrowDown },
-      { endArrow: PickerBaseEndArrow.Left, iconName: IconName.ArrowLeft },
-      { endArrow: PickerBaseEndArrow.Right, iconName: IconName.ArrowRight },
+      {
+        endArrowDirection: SelectButtonEndArrow.Up,
+        iconName: IconName.ArrowUp,
+      },
+      {
+        endArrowDirection: SelectButtonEndArrow.Down,
+        iconName: IconName.ArrowDown,
+      },
+      {
+        endArrowDirection: SelectButtonEndArrow.Left,
+        iconName: IconName.ArrowLeft,
+      },
+      {
+        endArrowDirection: SelectButtonEndArrow.Right,
+        iconName: IconName.ArrowRight,
+      },
     ];
 
     it.each(cases)(
-      'maps endArrow $endArrow to trailing icon $iconName',
-      ({ endArrow, iconName }) => {
+      'maps endArrowDirection $endArrowDirection to trailing icon $iconName',
+      ({ endArrowDirection, iconName }) => {
         const { getByTestId } = render(
-          <PickerBase
+          <SelectButton
             testID={ROOT_TEST_ID}
             onPress={noopPress}
-            endArrow={endArrow}
-            endArrowIconProps={{ testID: 'end-arrow' }}
+            endArrowDirection={endArrowDirection}
+            endArrowDirectionIconProps={{ testID: 'end-arrow' }}
           >
             Label
-          </PickerBase>,
+          </SelectButton>,
         );
 
         expect(getByTestId('end-arrow')).toHaveProp('name', iconName);
@@ -88,16 +104,16 @@ describe('PickerBase', () => {
     );
   });
 
-  describe('when endArrow is omitted', () => {
+  describe('when endArrowDirection is omitted', () => {
     it('does not render a trailing icon', () => {
       const { queryByTestId } = render(
-        <PickerBase
+        <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          endArrowIconProps={{ testID: 'end-arrow' }}
+          endArrowDirectionIconProps={{ testID: 'end-arrow' }}
         >
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(queryByTestId('end-arrow')).toBeNull();
@@ -105,47 +121,130 @@ describe('PickerBase', () => {
   });
 
   describe('when endAccessory is used', () => {
-    it('renders when endArrow is omitted', () => {
+    it('renders when endArrowDirection is omitted', () => {
       const { getByTestId } = render(
-        <PickerBase
+        <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           endAccessory={<View testID="end-accessory" />}
         >
           With end accessory
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByTestId('end-accessory')).toBeOnTheScreen();
     });
 
-    it('is ignored when endArrow is set', () => {
+    it('is ignored when endArrowDirection is set', () => {
       const { getByTestId, queryByTestId } = render(
-        <PickerBase
+        <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          endArrow={PickerBaseEndArrow.Down}
+          endArrowDirection={SelectButtonEndArrow.Down}
           endAccessory={<View testID="end-accessory" />}
-          endArrowIconProps={{ testID: 'end-arrow' }}
+          endArrowDirectionIconProps={{ testID: 'end-arrow' }}
         >
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByTestId('end-arrow')).toHaveProp(
         'name',
-        MAP_PICKERBASE_END_ARROW_TO_ICON_NAME[PickerBaseEndArrow.Down],
+        MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME[
+          SelectButtonEndArrow.Down
+        ],
       );
       expect(queryByTestId('end-accessory')).toBeNull();
     });
   });
 
-  describe('root pressable styles', () => {
-    it('inherits ButtonBase container presentation', () => {
+  describe('variant', () => {
+    it('primary variant uses a muted container like ButtonSecondary', () => {
       const { getByTestId } = render(
-        <PickerBase testID={ROOT_TEST_ID} onPress={noopPress}>
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={SelectButtonVariant.Primary}
+        >
           Label
-        </PickerBase>,
+        </SelectButton>,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-muted`);
+    });
+
+    it('secondary variant uses a transparent container like ButtonTertiary', () => {
+      const { getByTestId } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={SelectButtonVariant.Secondary}
+        >
+          Label
+        </SelectButton>,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-transparent`);
+    });
+
+    it('tertiary variant uses a transparent container like ButtonTertiary', () => {
+      const { getByTestId } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={SelectButtonVariant.Tertiary}
+        >
+          Label
+        </SelectButton>,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-transparent`);
+    });
+
+    it('tertiary variant applies alternative color to string label text', () => {
+      const { getByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={SelectButtonVariant.Tertiary}
+        >
+          Label
+        </SelectButton>,
+      );
+
+      expect(getByText('Label')).toHaveStyle(
+        tw.style(TextColor.TextAlternative),
+      );
+    });
+
+    it('tertiary variant applies alternative color to trailing arrow icon', () => {
+      const { getByTestId } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={SelectButtonVariant.Tertiary}
+          endArrowDirection={SelectButtonEndArrow.Down}
+          endArrowDirectionIconProps={{ testID: 'end-arrow' }}
+        >
+          Label
+        </SelectButton>,
+      );
+
+      expect(getByTestId('end-arrow')).toHaveStyle(
+        tw.style(
+          IconColor.IconAlternative,
+          TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Sm],
+        ),
+      );
+    });
+  });
+
+  describe('root pressable styles', () => {
+    it('inherits ButtonBase container presentation for default primary variant', () => {
+      const { getByTestId } = render(
+        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress}>
+          Label
+        </SelectButton>,
       );
 
       const root = getByTestId(ROOT_TEST_ID);
@@ -155,9 +254,9 @@ describe('PickerBase', () => {
 
     it('applies disabled opacity when isDisabled is true', () => {
       const { getByTestId } = render(
-        <PickerBase testID={ROOT_TEST_ID} onPress={noopPress} isDisabled>
+        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress} isDisabled>
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`opacity-50`);
@@ -165,9 +264,9 @@ describe('PickerBase', () => {
 
     it('does not apply disabled opacity when isDisabled is false', () => {
       const { getByTestId } = render(
-        <PickerBase testID={ROOT_TEST_ID} onPress={noopPress}>
+        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress}>
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).not.toHaveStyle(tw`opacity-50`);
@@ -175,13 +274,13 @@ describe('PickerBase', () => {
 
     it('merges twClassName onto the root', () => {
       const { getByTestId } = render(
-        <PickerBase
+        <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           twClassName="mt-4"
         >
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
@@ -191,13 +290,13 @@ describe('PickerBase', () => {
       const customStyle = { marginBottom: 20 };
 
       const { getByTestId } = render(
-        <PickerBase
+        <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           style={customStyle}
         >
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ marginBottom: 20 });
@@ -209,9 +308,9 @@ describe('PickerBase', () => {
       const onPress = jest.fn();
 
       const { getByTestId } = render(
-        <PickerBase testID={ROOT_TEST_ID} onPress={onPress}>
+        <SelectButton testID={ROOT_TEST_ID} onPress={onPress}>
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       fireEvent.press(getByTestId(ROOT_TEST_ID));
@@ -221,7 +320,7 @@ describe('PickerBase', () => {
 
     it('does not throw when onPress is omitted', () => {
       const { getByTestId } = render(
-        <PickerBase testID={ROOT_TEST_ID}>Label</PickerBase>,
+        <SelectButton testID={ROOT_TEST_ID}>Label</SelectButton>,
       );
 
       expect(() => {
@@ -231,9 +330,9 @@ describe('PickerBase', () => {
 
     it('does not throw when isDisabled is true and onPress is omitted', () => {
       const { getByTestId } = render(
-        <PickerBase testID={ROOT_TEST_ID} isDisabled>
+        <SelectButton testID={ROOT_TEST_ID} isDisabled>
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(() => {
@@ -245,9 +344,9 @@ describe('PickerBase', () => {
       const onPress = jest.fn();
 
       const { getByTestId } = render(
-        <PickerBase testID={ROOT_TEST_ID} onPress={onPress} isDisabled>
+        <SelectButton testID={ROOT_TEST_ID} onPress={onPress} isDisabled>
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       fireEvent.press(getByTestId(ROOT_TEST_ID));
@@ -259,9 +358,9 @@ describe('PickerBase', () => {
   describe('when isDisabled is true', () => {
     it('disables the root pressable', () => {
       const { getByTestId } = render(
-        <PickerBase testID={ROOT_TEST_ID} onPress={noopPress} isDisabled>
+        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress} isDisabled>
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toBeDisabled();
@@ -273,26 +372,33 @@ describe('PickerBase', () => {
       const hitSlop = { top: 4, bottom: 4, left: 4, right: 4 };
 
       const { getByTestId } = render(
-        <PickerBase testID={ROOT_TEST_ID} onPress={noopPress} hitSlop={hitSlop}>
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          hitSlop={hitSlop}
+        >
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveProp('hitSlop', hitSlop);
     });
   });
 
-  describe('when endArrowIconProps is provided', () => {
+  describe('when endArrowDirectionIconProps is provided', () => {
     it('applies size to the trailing icon', () => {
       const { getByTestId } = render(
-        <PickerBase
+        <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          endArrow={PickerBaseEndArrow.Down}
-          endArrowIconProps={{ testID: 'end-arrow', size: IconSize.Sm }}
+          endArrowDirection={SelectButtonEndArrow.Down}
+          endArrowDirectionIconProps={{
+            testID: 'end-arrow',
+            size: IconSize.Sm,
+          }}
         >
           Label
-        </PickerBase>,
+        </SelectButton>,
       );
 
       expect(getByTestId('end-arrow')).toHaveStyle(
