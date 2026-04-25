@@ -18,6 +18,10 @@ import {
 />;
 ```
 
+## Migration from Mobile Component Library
+
+Migrating from `app/component-library/.../Banner/variants/BannerAlert`? **Severity strings, `variant` removal, and `iconProps`** are covered in the [BannerAlert migration section](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#banneralert-component). For **action and close** APIs, see [BannerBase](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#bannerbase-component) in the same guide.
+
 ## Props
 
 ### `severity`

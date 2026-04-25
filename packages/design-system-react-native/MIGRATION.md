@@ -1728,24 +1728,41 @@ For spacing values 0-12 (0px-48px), use these props. For custom values, responsi
 
 ### BannerAlert Component
 
-Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with severity values standardized to MMDS shared types.
+Mobile `BannerAlert` composes `BannerBase` and only adds **severity** styling (border, background, and start icon). **Title, description, children, action button, and close button** follow the same rules as [BannerBase Component](#bannerbase-component) in this guide.
 
 #### Breaking Changes
 
-##### Imports and Type Source
+##### Imports and `BannerAlertSeverity`
 
-| Mobile Pattern                                 | Design System Migration                                           |
-| ---------------------------------------------- | ----------------------------------------------------------------- |
-| `BannerAlertSeverity` from `BannerAlert.types` | `BannerAlertSeverity` from `@metamask/design-system-react-native` |
+| Mobile pattern | MMDS |
+| -------------- | ---- |
+| Default import from `…/Banners/Banner/variants/BannerAlert` and types from `BannerAlert.types` | `import { BannerAlert, BannerAlertSeverity } from '@metamask/design-system-react-native'` (named exports) |
+| `BannerAlertSeverity` is a string **enum** with **Pascal-case** string values (`'Info'`, …) | `BannerAlertSeverity` is a **const object** (ADR-0003) with **lowercase** MMDS strings (`'info'`, …) |
 
-##### Severity Values
+##### Severity value mapping (legacy string literals → MMDS)
 
-| Mobile Value                                | Design System Value                         | Notes          |
-| ------------------------------------------- | ------------------------------------------- | -------------- |
-| `BannerAlertSeverity.Info` (`'Info'`)       | `BannerAlertSeverity.Info` (`'info'`)       | casing changed |
-| `BannerAlertSeverity.Success` (`'Success'`) | `BannerAlertSeverity.Success` (`'success'`) | casing changed |
-| `BannerAlertSeverity.Warning` (`'Warning'`) | `BannerAlertSeverity.Warning` (`'warning'`) | casing changed |
-| `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed        |
+| Mobile enum member | Legacy runtime string | MMDS |
+| ------------------ | ---------------------- | ---- |
+| `BannerAlertSeverity.Info` | `'Info'` | `BannerAlertSeverity.Info` → `'info'` |
+| `BannerAlertSeverity.Success` | `'Success'` | `BannerAlertSeverity.Success` → `'success'` |
+| `BannerAlertSeverity.Warning` | `'Warning'` | `BannerAlertSeverity.Warning` → `'warning'` |
+| `BannerAlertSeverity.Error` | `'Error'` | Use **`BannerAlertSeverity.Danger`** → `'danger'` (same visual lane as error / destructive messaging) |
+
+**Default:** both default to the info severity when `severity` is omitted.
+
+##### Removed prop
+
+| Mobile API | MMDS |
+| ---------- | ---- |
+| `variant?: BannerVariant.Alert` on the legacy `BannerAlertProps` | **Remove.** MMDS `BannerAlert` is already the alert-style banner; there is no `variant` prop on the design-system component. |
+
+##### Added on `BannerAlert` (MMDS)
+
+| API | Notes |
+| --- | ----- |
+| `iconProps` | Optional. Merged into the severity `Icon` in the start accessory. Use for `testID` or `style` tweaks. **Cannot** override built-in `name`, `size`, or `color`. |
+
+**Inherited from `BannerBase`:** spacing, `twClassName`/`style`, `title`/`description`/`children`, `actionButtonLabel` + `actionButtonOnPress` + `actionButtonProps`, `onClose` + `closeButtonProps`, and the action/close API differences in [BannerBase](#bannerbase-component).
 
 #### Migration Example
 

@@ -412,28 +412,46 @@ For simple, non-responsive spacing, continue using these props. Use `className` 
 
 ### BannerAlert Component
 
-The extension `banner-alert` maps directly to `BannerAlert` in the design system, but severity values are now provided via the shared `BannerAlertSeverity` const object (ADR-0003/0004) instead of extension enums.
+The extension `banner-alert` composes `BannerBase` and only adds **severity** styling (left border, background, and start icon). **Title, description, children, action button, and close button** are inherited from [`BannerBase`](#bannerbase-component) with the same breaking changes as that migration.
 
 #### Breaking Changes
 
-##### Imports and Enum Source
+##### Imports and `BannerAlertSeverity`
 
-| Extension Pattern                                 | Design System Migration                                    |
-| ------------------------------------------------- | ---------------------------------------------------------- |
-| `BannerAlertSeverity` from `./banner-alert.types` | `BannerAlertSeverity` from `@metamask/design-system-react` |
+| Extension pattern | MMDS |
+| ----------------- | ---- |
+| `import { BannerAlert, BannerAlertSeverity } from '…/banner-alert'` and `…/banner-alert.types` | `import { BannerAlert, BannerAlertSeverity } from '@metamask/design-system-react'` |
+| `BannerAlertSeverity` is a string **enum** | `BannerAlertSeverity` is a **const object** with a derived union type (`'info' \| 'success' \| 'warning' \| 'danger'`) (ADR-0003). Prefer importing the object from the package, not hand-rolling string literals. |
 
-##### Severity Values
+##### Severity values (unchanged string literals, different TypeScript model)
 
-| Extension Value                             | Design System Value           |
-| ------------------------------------------- | ----------------------------- |
-| `BannerAlertSeverity.Info` (`'info'`)       | `BannerAlertSeverity.Info`    |
-| `BannerAlertSeverity.Success` (`'success'`) | `BannerAlertSeverity.Success` |
-| `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` |
-| `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  |
+| Extension | MMDS |
+| --------- | ---- |
+| `BannerAlertSeverity.Info` → `'info'` | `BannerAlertSeverity.Info` → `'info'` |
+| `BannerAlertSeverity.Success` → `'success'` | `BannerAlertSeverity.Success` → `'success'` |
+| `BannerAlertSeverity.Warning` → `'warning'` | `BannerAlertSeverity.Warning` → `'warning'` |
+| `BannerAlertSeverity.Danger` → `'danger'` | `BannerAlertSeverity.Danger` → `'danger'` |
+
+**Default:** both implementations default to the info severity when `severity` is omitted.
+
+##### Added on `BannerAlert` (MMDS)
+
+| API | Notes |
+| --- | ----- |
+| `iconProps` | Optional. Passed to the severity `Icon` in the start accessory. Use for `data-testid`, extra `className`, etc. **Cannot** override the built-in `name`, `size`, or `color` (those stay severity-driven). |
+
+##### Polymorphic / style surface
+
+| Extension API | MMDS |
+| ------------- | ---- |
+| `BannerAlertProps` is built on polymorphic / Box-style “style utility” patterns | MMDS `BannerAlert` is a fixed `forwardRef<HTMLDivElement, …>` wrapper over `BannerBase` + `Box` props. Treat `as` and other polymorphic entry points as **not supported** on the design-system component unless you reintroduce that behavior locally. |
+| Styling: `className` and Box-related props on the banner | Still supported on `BannerBase` / `Box` via the same [general extension guidance](#general-extension-migration-guidance) as other migrated components. |
+
+**Inherited from `BannerBase` (documented there):** `title`, `description`, `children`, `actionButtonLabel` + `actionButtonOnClick` + `actionButtonProps`, `onClose` + `closeButtonProps`, string wrapping via `Text`, etc. See [BannerBase Component](#bannerbase-component).
 
 #### Migration Example
 
-##### Before (Extension)
+##### Before (extension)
 
 ```tsx
 import { BannerAlert } from '../../component-library/banner-alert';
