@@ -173,6 +173,12 @@ export type { MaskiconProps } from './temp-components/Maskicon';
 export { MainActionButton } from './MainActionButton';
 export type { MainActionButtonProps } from './MainActionButton';
 
+export { SegmentButton, SegmentButtonVariant } from './SegmentButton';
+export type { SegmentButtonProps } from './SegmentButton';
+
+export { SegmentGroup } from './SegmentGroup';
+export type { SegmentGroupProps } from './SegmentGroup';
+
 export {
   SelectButton,
   SelectButtonEndArrow,

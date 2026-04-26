@@ -286,6 +286,57 @@ describe('SelectButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
     });
 
+    it('merges twClassName when it is a function for primary variant', () => {
+      const twClassName = jest.fn(() => 'mt-2');
+      const { getByTestId } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={SelectButtonVariant.Primary}
+          twClassName={twClassName}
+        >
+          Label
+        </SelectButton>,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-2`);
+      expect(twClassName).toHaveBeenCalled();
+    });
+
+    it('merges twClassName when it is a function for secondary variant', () => {
+      const twClassName = jest.fn(() => 'mt-3');
+      const { getByTestId } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={SelectButtonVariant.Secondary}
+          twClassName={twClassName}
+        >
+          Label
+        </SelectButton>,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-3`);
+      expect(twClassName).toHaveBeenCalled();
+    });
+
+    it('merges twClassName when it is a function for tertiary variant', () => {
+      const twClassName = jest.fn(() => 'mt-5');
+      const { getByTestId } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={SelectButtonVariant.Tertiary}
+          twClassName={twClassName}
+        >
+          Label
+        </SelectButton>,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-5`);
+      expect(twClassName).toHaveBeenCalled();
+    });
+
     it('merges the style prop after tailwind styles', () => {
       const customStyle = { marginBottom: 20 };
 
@@ -316,6 +367,34 @@ describe('SelectButton', () => {
       fireEvent.press(getByTestId(ROOT_TEST_ID));
 
       expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
+    it('applies secondary variant pressed background on pressIn', () => {
+      const { getByTestId } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={SelectButtonVariant.Secondary}
+        >
+          Label
+        </SelectButton>,
+      );
+
+      const root = getByTestId(ROOT_TEST_ID);
+      fireEvent(root, 'pressIn');
+      expect(root).toHaveStyle(tw`bg-pressed`);
+    });
+
+    it('applies primary variant pressed background on pressIn', () => {
+      const { getByTestId } = render(
+        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress}>
+          Label
+        </SelectButton>,
+      );
+
+      const root = getByTestId(ROOT_TEST_ID);
+      fireEvent(root, 'pressIn');
+      expect(root).toHaveStyle(tw`bg-muted-pressed`);
     });
 
     it('does not throw when onPress is omitted', () => {
