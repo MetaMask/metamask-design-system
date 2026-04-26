@@ -7,6 +7,10 @@ import React, { useState } from 'react';
 import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
 
+import { ChartSegmentButton } from '../ChartSegmentButton';
+import { ChartSelectButton } from '../ChartSelectButton';
+import { FilterSegmentButton } from '../FilterSegmentButton';
+import { FilterSelectButton } from '../FilterSelectButton';
 import { SegmentButton } from '../SegmentButton';
 import { SelectButton } from '../SelectButton';
 
@@ -86,6 +90,62 @@ export const Variant: Story = {
           <SegmentButton value="b" onPress={noopPress}>
             B
           </SegmentButton>
+        </SegmentGroup>
+      </SegmentGroupStoryWrapper>
+    );
+  },
+};
+
+export const WithFilterControls: Story = {
+  render: () => {
+    const [value, setValue] = useState('all');
+
+    return (
+      <SegmentGroupStoryWrapper>
+        <SegmentGroup value={value} onChange={setValue}>
+          <FilterSegmentButton value="all" onPress={noopPress}>
+            All
+          </FilterSegmentButton>
+          <FilterSegmentButton value="tokens" onPress={noopPress}>
+            Tokens
+          </FilterSegmentButton>
+          <FilterSegmentButton value="nfts" onPress={noopPress}>
+            NFTs
+          </FilterSegmentButton>
+          <FilterSelectButton
+            endArrowDirection={SelectButtonEndArrow.Down}
+            onPress={noopPress}
+          >
+            Filter
+          </FilterSelectButton>
+        </SegmentGroup>
+      </SegmentGroupStoryWrapper>
+    );
+  },
+};
+
+export const WithChartControls: Story = {
+  render: () => {
+    const [value, setValue] = useState('1d');
+
+    return (
+      <SegmentGroupStoryWrapper>
+        <SegmentGroup value={value} onChange={setValue}>
+          <ChartSegmentButton value="1d" onPress={noopPress}>
+            1D
+          </ChartSegmentButton>
+          <ChartSegmentButton value="1w" onPress={noopPress}>
+            1W
+          </ChartSegmentButton>
+          <ChartSegmentButton value="1m" onPress={noopPress}>
+            1M
+          </ChartSegmentButton>
+          <ChartSelectButton
+            endArrowDirection={SelectButtonEndArrow.Down}
+            onPress={noopPress}
+          >
+            Range
+          </ChartSelectButton>
         </SegmentGroup>
       </SegmentGroupStoryWrapper>
     );

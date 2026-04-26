@@ -173,6 +173,18 @@ export type { MaskiconProps } from './temp-components/Maskicon';
 export { MainActionButton } from './MainActionButton';
 export type { MainActionButtonProps } from './MainActionButton';
 
+export { ChartSegmentButton } from './ChartSegmentButton';
+export type { ChartSegmentButtonProps } from './ChartSegmentButton';
+
+export { ChartSelectButton } from './ChartSelectButton';
+export type { ChartSelectButtonProps } from './ChartSelectButton';
+
+export { FilterSegmentButton } from './FilterSegmentButton';
+export type { FilterSegmentButtonProps } from './FilterSegmentButton';
+
+export { FilterSelectButton } from './FilterSelectButton';
+export type { FilterSelectButtonProps } from './FilterSelectButton';
+
 export { SegmentButton, SegmentButtonVariant } from './SegmentButton';
 export type { SegmentButtonProps } from './SegmentButton';
 
