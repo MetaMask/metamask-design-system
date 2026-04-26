@@ -664,13 +664,21 @@ Notable differences in the design system Text component:
 
 ### Icon Component
 
-The Icon component has enum and prop-surface differences when migrating from the extension component-library.
+The Icon component has enum, default, and prop-surface differences when migrating from the extension component-library.
+
+**Sources audited:** Extension `ui/components/component-library/icon` (`icon.tsx`, `icon.types.ts`) and `@metamask/design-system-react` `Icon` (`Icon.tsx`, `Icon.types.ts` + shared `IconPropsShared` in `@metamask/design-system-shared`).
 
 Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for the shared Box/style-utility migration approach used across all components.
 
 #### Breaking Changes
 
-##### Size Enum Changes
+##### IconName values and imports
+
+- Legacy extension `IconName` is a string enum whose **values** are **kebab-case** file stems (for example `IconName.Check` → `'check'`), because icons are applied via `mask-image` to SVG assets under `images/icons/`.
+- MMDS `IconName` is a const object whose **values** are **PascalCase** strings aligned with the generated icon components (for example `IconName.Check` → `'Check'`).
+- **Migration:** import `IconName` from `@metamask/design-system-react` (or `@metamask/design-system-shared`) and use enum members; do not pass through raw legacy string literals.
+
+##### Size enum changes
 
 The extension `IconSize.Inherit` value is not supported in the design system.
 
@@ -683,15 +691,21 @@ The extension `IconSize.Inherit` value is not supported in the design system.
 | `IconSize.Xl`      | `IconSize.Xl`                    |
 | `IconSize.Inherit` | Use `className` sizing utilities |
 
-##### Color Enum Changes
+##### Color enum and default
 
-Icon colors now use PascalCase names with a design-system-specific enum.
+Extension icons use the extension design-system `IconColor` set (camelCase), often with default `color = IconColor.inherit` in the legacy component. MMDS uses the shared `IconColor` const object (PascalCase members) and defaults to `IconColor.IconDefault` when `color` is omitted.
+
+| Concern            | Extension (legacy)                    | MMDS                                                         |
+| ------------------ | ------------------------------------- | ------------------------------------------------------------ |
+| Default when omitted | `IconColor.inherit` (inherit context) | `IconColor.IconDefault`                                      |
+| Naming / mapping   | `IconColor.iconDefault`, etc.        | `IconColor.IconDefault`, `IconColor.PrimaryDefault`, etc.   |
 
 | Extension Color             | Design System               |
 | --------------------------- | --------------------------- |
 | `IconColor.iconDefault`     | `IconColor.IconDefault`     |
 | `IconColor.iconAlternative` | `IconColor.IconAlternative` |
 | `IconColor.iconMuted`       | `IconColor.IconMuted`       |
+| `IconColor.inherit` (default) | `IconColor.IconDefault` (or omit `color` for the same default intent) |
 | `IconColor.overlayInverse`  | `IconColor.OverlayInverse`  |
 | `IconColor.primaryDefault`  | `IconColor.PrimaryDefault`  |
 | `IconColor.primaryInverse`  | `IconColor.PrimaryInverse`  |
@@ -704,9 +718,14 @@ Icon colors now use PascalCase names with a design-system-specific enum.
 | `IconColor.infoDefault`     | `IconColor.InfoDefault`     |
 | `IconColor.infoInverse`     | `IconColor.InfoInverse`     |
 
-##### Prop Surface Changes
+Additional inverse/semantic colors exist only on the MMDS side (for example `IconColor.ErrorInverse`, `IconColor.WarningInverse`) for “on top of” semantics—see `IconColor` in `@metamask/design-system-shared` when you need a precise token.
 
-The extension Icon is polymorphic (`as` pattern), while the design system Icon is an SVG-first component with standard SVG props.
+##### Prop surface changes
+
+| Area | Extension API | MMDS API | Notes |
+| ---- | -------------- | -------- | ----- |
+| Polymorphic `Box` / style utilities | `Icon` wraps `Box` and may accept broad `StyleUtilityProps` and related Box props | `Icon` renders a concrete SVG; only `IconPropsShared` + `className` + `style` + standard SVG attributes | Move layout/typography from legacy Box surface to `className` / `style` or a wrapper. |
+| Rendering | CSS `mask-image` to `./images/icons/{name}.svg` | Inline SVG module per `name` | Different asset pipeline; same `IconName` member picks the right glyph. |
 
 #### Migration Examples
 
@@ -747,9 +766,9 @@ import {
 
 #### API Differences
 
-- `className` and `style` are still supported
-- Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
-- Use SVG props directly for accessibility and rendering behavior
+- `className` and `style` are still supported on the MMDS web `Icon`.
+- Prefer `IconColor` from `@metamask/design-system-react` for all semantic icon colors; the default is explicit (`IconColor.IconDefault`), not “inherit from parent text color” like legacy `IconColor.inherit`.
+- Use SVG attributes (`aria-hidden`, `aria-label`, `role`, etc.) on the MMDS `Icon` for accessibility; the underlying node is the SVG element.
 
 ### Checkbox Component
 

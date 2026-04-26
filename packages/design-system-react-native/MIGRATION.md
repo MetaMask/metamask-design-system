@@ -1999,7 +1999,7 @@ The Icon component has some API and enum changes when migrating from the mobile 
 
 ##### Color Prop Changes
 
-Mobile accepts `string | IconColor` for `color`, while the design system uses the `IconColor` enum.
+Mobile accepted `string | IconColor` for `color`, while the design system uses the shared `IconColor` const object. Raw color strings (for example hex) should be replaced with the closest semantic `IconColor` token.
 
 | Mobile Color                   | Design System                  |
 | ------------------------------ | ------------------------------ |
@@ -2014,6 +2014,8 @@ Mobile accepts `string | IconColor` for `color`, while the design system uses th
 | `IconColor.Warning`            | `IconColor.WarningDefault`     |
 | `IconColor.Info`               | `IconColor.InfoDefault`        |
 | `IconColor.Inverse`            | `IconColor.OverlayInverse`     |
+
+The shared palette also includes inverse/overlay pairs not present on legacy mobile `IconColor`, for example `IconColor.ErrorInverse`, `IconColor.WarningInverse`, and `IconColor.InfoInverse`—use these when the icon sits on a filled semantic background. See `IconColor` in `@metamask/design-system-shared` for the full set.
 
 #### Migration Examples
 
@@ -2037,9 +2039,9 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 
 #### API Differences
 
-- `name` remains required and uses `IconName` in both implementations
-- `hitSlop` remains available via inherited `ViewProps`
-- `twClassName` is available for Tailwind utility overrides in the design system
+- `name` remains required; both implementations use the shared `IconName` const object (MMDS re-exports it from `@metamask/design-system-react-native`).
+- **Prop surface:** Legacy mobile `IconProps` extended `ViewProps` (and accepted `hitSlop`, `onLayout`, and other `View`-only props). MMDS `IconProps` extends `Omit<SvgProps, 'color' | 'name'>`; **`hitSlop` and other `View` props are not part of the public `Icon` type**—apply them on a parent `View` (see [Icon: prop types now align with SVG usage](#icon-prop-types-now-align-with-svg-usage) in version notes above).
+- `twClassName` is available for Tailwind utility overrides in the design system; `className` is not used on React Native `Icon` (use `twClassName` / `style` instead).
 
 ### Checkbox Component
 

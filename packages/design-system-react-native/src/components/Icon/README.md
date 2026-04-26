@@ -5,9 +5,9 @@ Icons are read-only symbols that represent ideas or objects, offered in standard
 > **Note:** The `assets/` folder in this directory is auto-generated. The source of truth for all SVG assets is `packages/design-system-shared/src/assets/icons/`. Run `yarn generate:icons` from the repo root to regenerate.
 
 ```tsx
-import { Icon } from '@metamask/design-system-react-native';
+import { Icon, IconName } from '@metamask/design-system-react-native';
 
-<Icon name="CheckBold" />;
+<Icon name={IconName.CheckBold} />;
 ```
 
 ## Props
@@ -21,7 +21,7 @@ The icon name to display.
 | `IconName` | Yes      | `undefined` |
 
 ```tsx
-<Icon name="CheckBold" />
+<Icon name={IconName.CheckBold} />
 ```
 
 ### `size`
@@ -41,33 +41,28 @@ Available sizes:
 | `IconSize` | No       | `IconSize.Md` |
 
 ```tsx
-<Icon name="CheckBold" size={IconSize.Sm} />
-<Icon name="CheckBold" />
-<Icon name="CheckBold" size={IconSize.Lg} />
+<Icon name={IconName.CheckBold} size={IconSize.Sm} />
+<Icon name={IconName.CheckBold} />
+<Icon name={IconName.CheckBold} size={IconSize.Lg} />
 ```
 
 ### `color`
 
 The color of the icon.
 
-Available colors:
+`IconColor` values are shared with web (see `@metamask/design-system-shared`). Common tokens include:
 
-- `IconColor.IconDefault`
-- `IconColor.IconAlternative`
-- `IconColor.IconMuted`
-- `IconColor.IconPrimary`
-- `IconColor.IconSuccess`
-- `IconColor.IconError`
-- `IconColor.IconWarning`
-- `IconColor.IconInfo`
+- **Neutral:** `IconColor.IconDefault`, `IconColor.IconAlternative`, `IconColor.IconMuted`, `IconColor.OverlayInverse`
+- **Primary:** `IconColor.PrimaryDefault`, `IconColor.PrimaryAlternative`, `IconColor.PrimaryInverse`
+- **Semantic:** `IconColor.ErrorDefault`, `IconColor.ErrorAlternative`, `IconColor.ErrorInverse`, `IconColor.WarningDefault`, `IconColor.WarningInverse`, `IconColor.SuccessDefault`, `IconColor.SuccessInverse`, `IconColor.InfoDefault`, `IconColor.InfoInverse`
 
 | TYPE        | REQUIRED | DEFAULT                 |
 | ----------- | -------- | ----------------------- |
 | `IconColor` | No       | `IconColor.IconDefault` |
 
 ```tsx
-<Icon name="CheckBold" color={IconColor.IconSuccess} />
-<Icon name="Warning" color={IconColor.IconError} />
+<Icon name={IconName.CheckBold} color={IconColor.SuccessDefault} />
+<Icon name={IconName.Warning} color={IconColor.WarningDefault} />
 ```
 
 ### `twClassName`
@@ -82,17 +77,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 | `string` | No       | `undefined` |
 
 ```tsx
-import { Icon } from '@metamask/design-system-react-native';
+import { Icon, IconName } from '@metamask/design-system-react-native';
 
 // Add additional styles
 <Icon
-  name="CheckBold"
+  name={IconName.CheckBold}
   twClassName="opacity-70"
 />
 
 // Override default styles
 <Icon
-  name="CheckBold"
+  name={IconName.CheckBold}
   twClassName="!text-error-100"
 />
 ```
@@ -114,7 +109,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <Icon name="CheckBold" style={styles.custom} />
+  <Icon name={IconName.CheckBold} style={styles.custom} />
 );
 ```
 
