@@ -22,6 +22,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
+  - [TabEmptyState Component](#tabemptystate-component)
 - [Version Updates](#version-updates)
   - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
@@ -2540,6 +2541,130 @@ The following mobile `component-library` sub-components build on `ListItem` but 
 - The mobile version sets `accessible accessibilityRole="none"` on the root element; MMDS does not.
 - The mobile version uses a default export; MMDS uses a named export.
 - `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.
+
+### TabEmptyState Component
+
+`TabEmptyState` was previously incubated inside `metamask-mobile` at `app/component-library/components-temp/TabEmptyState` as a thin wrapper around `Box` / `Text` / `Button` from `@metamask/design-system-react-native`. It has graduated to the design system in `0.11.0` and the `components-temp` copy is now marked `@deprecated`. The public API (`icon`, `description`, `descriptionProps`, `actionButtonText`, `actionButtonProps`, `onAction`, `children`, `twClassName`, `style`) is preserved — the migration is essentially an import-path change.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                  | Design System Migration                                                          |
+| ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `import { TabEmptyState } from '.../component-library/components-temp/TabEmptyState'`           | `import { TabEmptyState } from '@metamask/design-system-react-native'`           |
+| `import type { TabEmptyStateProps } from '.../component-library/components-temp/TabEmptyState'` | `import type { TabEmptyStateProps } from '@metamask/design-system-react-native'` |
+
+##### Root Props Narrowed from `BoxProps` to `ViewProps`
+
+The mobile `TabEmptyStateProps` extended `Omit<BoxProps, 'children'>`, so design-system `Box` props (`backgroundColor`, `flexDirection`, `alignItems`, `gap`, `padding`/`margin` shorthands, etc.) could be passed at the root. The design-system version intersects `ViewProps` only — standard React Native `View` props (`style`, `testID`, `accessibilityLabel`, …) are accepted, but `Box`-specific props are not.
+
+| Concern                                                                             | Mobile                       | Design System                                       |
+| ----------------------------------------------------------------------------------- | ---------------------------- | --------------------------------------------------- |
+| Root type extension                                                                 | `Omit<BoxProps, 'children'>` | `ViewProps`                                         |
+| Root accepts `Box` shorthands at top level (`backgroundColor`, `gap`, `padding`, …) | ✅                           | ❌ — move these to `twClassName` or a wrapper `Box` |
+| Root accepts `ViewProps` (`style`, `testID`, …)                                     | ✅                           | ✅                                                  |
+
+Current `metamask-mobile` call sites only pass `testID`, `style`, `twClassName`, `children`, and the explicit slot props — none of them pass `Box` shorthands at the root — so this narrowing is a no-op for every known consumer. If you were relying on root `Box` props, move them to `twClassName` or wrap the component in a `<Box>`.
+
+#### Migration Examples
+
+##### Basic usage
+
+Before (Mobile):
+
+```tsx
+import { TabEmptyState } from '../../../component-library/components-temp/TabEmptyState';
+import { strings } from '../../../../locales/i18n';
+
+<TabEmptyState description={strings('wallet.no_transactions')} />;
+```
+
+After (Design System):
+
+```tsx
+import { TabEmptyState } from '@metamask/design-system-react-native';
+import { strings } from '../../../../locales/i18n';
+
+<TabEmptyState description={strings('wallet.no_transactions')} />;
+```
+
+##### With action button and custom children
+
+Before (Mobile):
+
+```tsx
+import {
+  TabEmptyState,
+  type TabEmptyStateProps,
+} from '../../../component-library/components-temp/TabEmptyState';
+import {
+  Text,
+  TextVariant,
+  TextColor,
+} from '@metamask/design-system-react-native';
+
+<TabEmptyState
+  testID="bridge-token-selector-empty-state"
+  icon={<NoSearchResultsIcon width={72} height={78} />}
+  description={strings('bridge.no_tokens_found')}
+  descriptionProps={{
+    variant: TextVariant.HeadingMd,
+    color: TextColor.TextDefault,
+    twClassName: 'text-center',
+  }}
+  style={styles.emptyStateContainer}
+  twClassName="self-center"
+>
+  <Text
+    variant={TextVariant.BodyMd}
+    color={TextColor.TextAlternative}
+    twClassName="text-center -mt-1"
+  >
+    {strings('bridge.no_tokens_found_description')}
+  </Text>
+</TabEmptyState>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  TabEmptyState,
+  type TabEmptyStateProps,
+  Text,
+  TextVariant,
+  TextColor,
+} from '@metamask/design-system-react-native';
+
+<TabEmptyState
+  testID="bridge-token-selector-empty-state"
+  icon={<NoSearchResultsIcon width={72} height={78} />}
+  description={strings('bridge.no_tokens_found')}
+  descriptionProps={{
+    variant: TextVariant.HeadingMd,
+    color: TextColor.TextDefault,
+    twClassName: 'text-center',
+  }}
+  style={styles.emptyStateContainer}
+  twClassName="self-center"
+>
+  <Text
+    variant={TextVariant.BodyMd}
+    color={TextColor.TextAlternative}
+    twClassName="text-center -mt-1"
+  >
+    {strings('bridge.no_tokens_found_description')}
+  </Text>
+</TabEmptyState>;
+```
+
+Only the import specifier changes.
+
+#### API Differences Summary
+
+- Root prop type narrows from `Omit<BoxProps, 'children'>` to `ViewProps`. Move any root-level `Box` shorthands to `twClassName` or a wrapper `<Box>`.
+- All other props (`icon`, `description`, `descriptionProps`, `actionButtonText`, `actionButtonProps`, `onAction`, `children`, `twClassName`, `style`, `ViewProps`) are unchanged.
 
 ## Version Updates
 
