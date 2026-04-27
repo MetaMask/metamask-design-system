@@ -1,17 +1,13 @@
 import type { BadgeIconPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
-import type { IconName, IconProps } from '../Icon';
+import type { IconProps } from '../Icon';
 
 /**
  * BadgeIcon component props (React Native platform-specific)
  * Extends shared props from @metamask/design-system-shared with React Native specific platform concerns
  */
-export type BadgeIconProps = Omit<BadgeIconPropsShared, 'iconName'> & {
-  /**
-   * Required prop to specify an icon to show
-   */
-  iconName: IconName;
+export type BadgeIconProps = BadgeIconPropsShared & {
   /**
    * Optional prop to pass additional properties to the icon
    */

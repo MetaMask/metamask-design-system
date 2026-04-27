@@ -1,18 +1,14 @@
 import type { BadgeIconPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { IconName, IconProps } from '../Icon';
+import type { IconProps } from '../Icon';
 
 /**
  * BadgeIcon component props (React platform-specific)
  * Extends shared props from @metamask/design-system-shared with React-specific platform concerns
  */
 export type BadgeIconProps = ComponentProps<'div'> &
-  Omit<BadgeIconPropsShared, 'iconName'> & {
-    /**
-     * Required prop to specify an icon to show
-     */
-    iconName: IconName;
+  BadgeIconPropsShared & {
     /**
      * Optional prop to pass additional properties to the icon
      */
