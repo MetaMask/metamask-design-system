@@ -60,8 +60,8 @@ export const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
       ],
       'focus-visible:ring-0 focus-visible:outline-none',
       isInverse
-        ? 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background-default'
-        : 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
+        ? 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background-default'
+        : 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
       // Loading styles
       isLoading && 'cursor-not-allowed',
       // Disabled styles (but not loading)
