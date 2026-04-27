@@ -2,9 +2,22 @@ import base, { createConfig } from '@metamask/eslint-config';
 import jest from '@metamask/eslint-config-jest';
 import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
-import tailwind from 'eslint-plugin-tailwindcss';
+import betterTailwind from 'eslint-plugin-better-tailwindcss';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const NODE_LTS_VERSION = 22;
+const nativeRequire = createRequire(
+  new URL('./apps/storybook-react-native/package.json', import.meta.url),
+);
+const tailwind = nativeRequire('eslint-plugin-tailwindcss');
+const NATIVE_TAILWIND_CONFIG_PATH = path.resolve(
+  projectRoot,
+  'apps/storybook-react-native/tailwind-intellisense.config.js',
+);
 
 const config = createConfig([
   ...base,
@@ -108,7 +121,7 @@ const config = createConfig([
     extends: [typescript],
     languageOptions: {
       parserOptions: {
-        tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: projectRoot,
         project: './tsconfig.packages.json',
         // Disable `projectService` because we run into out-of-memory issues.
         // See this ticket for inspiration out how to solve this:
@@ -226,24 +239,18 @@ const config = createConfig([
       'packages/design-system-react/src/**',
       'apps/storybook-react/stories/**',
     ],
+    settings: {
+      'better-tailwindcss': {
+        entryPoint: 'apps/storybook-react/tailwind.css',
+      },
+    },
     plugins: {
-      tailwindcss: tailwind,
+      'better-tailwindcss': betterTailwind,
     },
     rules: {
-      'tailwindcss/classnames-order': 'error',
-      'tailwindcss/enforces-negative-arbitrary-values': 'error',
-      'tailwindcss/enforces-shorthand': 'error',
-      'tailwindcss/no-arbitrary-value': 'off', // There are legitimate reasons to use arbitrary values but we should specifically error on static colors
-      'tailwindcss/no-custom-classname': 'error',
-      'tailwindcss/no-contradicting-classname': 'error',
-      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
-    },
-    settings: {
-      tailwindcss: {
-        callees: ['twMerge'],
-        config: 'apps/storybook-react/tailwind.config.js',
-        classRegex: ['^(class(Name)?|twClassName)$'],
-      },
+      'better-tailwindcss/sort-classes': 'error',
+      'better-tailwindcss/no-conflicting-classes': 'error',
+      'better-tailwindcss/no-unregistered-classes': 'error',
     },
   },
   // Tailwind ESLint for React Native
@@ -267,7 +274,7 @@ const config = createConfig([
     settings: {
       tailwindcss: {
         callees: ['twClassName', 'tw'],
-        config: 'apps/storybook-react-native/tailwind-intellisense.config.js',
+        config: NATIVE_TAILWIND_CONFIG_PATH,
         tags: ['tw'], // Enable template literal support for tw`classnames`
       },
     },
