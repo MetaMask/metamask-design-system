@@ -11,6 +11,13 @@ Shadows in design are used to create depth and hierarchy. They can be used to di
 
 Shadows come in four different sizes: XS, SM, MD, and LG. The size of the shadow can be used to indicate the relative importance or prominence of an element.
 
+For Tailwind web consumers, the default neutral shadows are available directly as utility classes:
+
+- `shadow-xs`
+- `shadow-sm`
+- `shadow-md`
+- `shadow-lg`
+
 <Canvas of={ShadowStories.Size} />
 
 <table>
@@ -73,6 +80,8 @@ Shadows come in four different sizes: XS, SM, MD, and LG. The size of the shadow
 
 Shadows can have three different colors: default (neutral), primary, and error/danger. The color of the shadow can be used to indicate the state or functionality of an element.
 
+Default neutral shadows are covered by the standard Tailwind shadow size utilities above. When you need a colored shadow on the web, compose the shadow size token with the shadow color token.
+
 <Canvas of={ShadowStories.Color} />
 
 <table>
@@ -100,10 +109,10 @@ Shadows can have three different colors: default (neutral), primary, and error/d
         <strong>primary</strong>
       </td>
       <td>
-        <code>colors.primary.shadow</code>
+        <code>colors.shadow.primary</code>
       </td>
       <td>
-        <code>var(--color-primary-shadow)</code>
+        <code>var(--color-shadow-primary)</code>
       </td>
     </tr>
     <tr>
@@ -111,10 +120,10 @@ Shadows can have three different colors: default (neutral), primary, and error/d
         <strong>danger</strong>
       </td>
       <td>
-        <code>colors.error.shadow</code>
+        <code>colors.shadow.error</code>
       </td>
       <td>
-        <code>var(--color-error-shadow)</code>
+        <code>var(--color-shadow-error)</code>
       </td>
     </tr>
   </tbody>
@@ -123,6 +132,9 @@ Shadows can have three different colors: default (neutral), primary, and error/d
 ## Usage
 
 Shadows can be applied to various components to create depth and hierarchy. Here are some examples of how shadows can be used in different components:
+
+- Use `shadow-xs|sm|md|lg` for standard neutral shadows in Tailwind.
+- Use CSS variables when you need an explicit colored shadow composition.
 
 <Canvas of={ShadowStories.ExampleUsage} />
 
@@ -143,9 +155,7 @@ Shadows can be applied to various components to create depth and hierarchy. Here
         <code>cardShadow: shadows.size.xs</code>
       </td>
       <td>
-        <code>
-          box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
-        </code>
+        <code>class="shadow-xs"</code>
       </td>
     </tr>
     <tr>
@@ -156,9 +166,7 @@ Shadows can be applied to various components to create depth and hierarchy. Here
         <code>dropdownShadow: shadows.size.sm</code>
       </td>
       <td>
-        <code>
-          box-shadow: var(--shadow-size-sm) var(--color-shadow-default);
-        </code>
+        <code>class="shadow-sm"</code>
       </td>
     </tr>
     <tr>
@@ -169,9 +177,7 @@ Shadows can be applied to various components to create depth and hierarchy. Here
         <code>toastShadow: shadows.size.md</code>
       </td>
       <td>
-        <code>
-          box-shadow: var(--shadow-size-md) var(--color-shadow-default);
-        </code>
+        <code>class="shadow-md"</code>
       </td>
     </tr>
     <tr>
@@ -182,9 +188,7 @@ Shadows can be applied to various components to create depth and hierarchy. Here
         <code>modalShadow: shadows.size.lg</code>
       </td>
       <td>
-        <code>
-          box-shadow: var(--shadow-size-lg) var(--color-shadow-default);
-        </code>
+        <code>class="shadow-lg"</code>
       </td>
     </tr>
     <tr>
@@ -196,7 +200,7 @@ Shadows can be applied to various components to create depth and hierarchy. Here
       </td>
       <td>
         <code>
-          box-shadow: var(--shadow-size-sm) var(--color-primary-shadow);
+          box-shadow: var(--shadow-size-sm) var(--color-shadow-primary);
         </code>
       </td>
     </tr>
@@ -209,7 +213,7 @@ Shadows can be applied to various components to create depth and hierarchy. Here
       </td>
       <td>
         <code>
-          box-shadow: var(--shadow-size-sm) var(--color-error-shadow);
+          box-shadow: var(--shadow-size-sm) var(--color-shadow-error);
         </code>
       </td>
     </tr>

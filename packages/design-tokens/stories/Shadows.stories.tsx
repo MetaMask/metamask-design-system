@@ -68,7 +68,7 @@ export const Size: StoryObj<typeof ShadowSwatch> = {
 export const Color: StoryObj<typeof ShadowSwatch> = {
   render: () => (
     <div className="grid grid-cols-[repeat(auto-fill,200px)] gap-8">
-      <ShadowSwatch className="shadow-[var(--shadow-size-xs)_var(--color-shadow-default)]">
+      <ShadowSwatch className="shadow-xs">
         <Text>Default</Text>
       </ShadowSwatch>
       <ShadowSwatch className="bg-primary-default shadow-[var(--shadow-size-xs)_var(--color-shadow-primary)]">

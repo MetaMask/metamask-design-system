@@ -3501,6 +3501,7 @@ __metadata:
     postcss-cli: "npm:^11.0.1"
     postcss-import: "npm:^16.1.1"
     react: "npm:18.3.1"
+    tailwindcss: "npm:^4.0.0"
     ts-jest: "npm:^29.2.5"
     tsx: "npm:^4.20.6"
     typescript: "npm:~5.2.2"
@@ -16671,7 +16672,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:4.2.4, tailwindcss@npm:>=2.0.0":
+"tailwindcss@npm:4.2.4, tailwindcss@npm:>=2.0.0, tailwindcss@npm:^4.0.0":
   version: 4.2.4
   resolution: "tailwindcss@npm:4.2.4"
   checksum: 10/54734efe725d1717fb9064940d705852448fb91a7fc78399a2d4263dc0fd4c260017baa13362f13f604bbfd4a0a882b83253c0cd6f14fe80454fd916966e8d72

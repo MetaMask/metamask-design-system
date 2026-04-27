@@ -2,7 +2,6 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
-- [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
 - [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
 - [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
 - [From version 7.0.0 to 8.0.0](#from-version-700-to-800)
@@ -123,6 +122,41 @@ The preset is no longer needed for Tailwind v4 consumers. It will eventually be 
 | Box shadows       | `@theme` variables (`--shadow-xs` / `sm` / `md` / `lg`) auto-generate `shadow-xs`–`shadow-lg` utilities                                        |
 | Shadow colors     | `--color-shadow-default` / `primary` / `error` in `@theme` only (no `shadow-default` etc. utilities; v3’s color-stack pattern had no adoption) |
 | Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                                                              |
+
+### Shadow utility changes
+
+Default neutral shadow sizes remain available as Tailwind utilities:
+
+- `shadow-xs`
+- `shadow-sm`
+- `shadow-md`
+- `shadow-lg`
+
+However, the old v3 color utility classes are no longer generated:
+
+- `shadow-default`
+- `shadow-primary`
+- `shadow-error`
+
+If you need a colored shadow in v4, compose the size token with the shadow color token explicitly.
+
+**Before (v3):**
+
+```html
+<div class="shadow-sm shadow-primary"></div>
+```
+
+**After (v4, Tailwind markup):**
+
+```html
+<div class="shadow-[var(--shadow-size-sm)_var(--color-shadow-primary)]"></div>
+```
+
+**After (v4, CSS):**
+
+```css
+box-shadow: var(--shadow-size-sm) var(--color-shadow-primary);
+```
 
 ### Class name changes
 

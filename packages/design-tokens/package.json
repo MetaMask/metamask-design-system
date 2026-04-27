@@ -45,9 +45,9 @@
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-tokens",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter && yarn check:tailwind-theme-parity",
     "test:clean": "NODE_OPTIONS=--experimental-vm-modules jest --clearCache",
-    "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
+    "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose && yarn check:tailwind-theme-parity",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "devDependencies": {
@@ -63,6 +63,7 @@
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.1",
     "react": "18.3.1",
+    "tailwindcss": "^4.0.0",
     "ts-jest": "^29.2.5",
     "tsx": "^4.20.6",
     "typescript": "~5.2.2"
