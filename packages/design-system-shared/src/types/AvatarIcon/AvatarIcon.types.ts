@@ -41,6 +41,12 @@ export type AvatarIconPropsShared = {
    */
   iconName: IconName;
   /**
+   * Optional prop to control the size of the avatar
+   *
+   * @default AvatarIconSize.Md
+   */
+  size?: AvatarIconSize;
+  /**
    * Optional prop to control the severity of the avatar
    * Possible values:
    * - AvatarIconSeverity.Neutral
