@@ -14,6 +14,13 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [AvatarBase Component](#avatarbase-component)
+  - [AvatarAccount Component](#avataraccount-component)
+  - [AvatarFavicon Component](#avatarfavicon-component)
+  - [AvatarIcon Component](#avataricon-component)
+  - [AvatarNetwork Component](#avatarenetwork-component)
+  - [AvatarToken Component](#avatartoken-component)
+  - [AvatarGroup Component](#avatargroup-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -834,6 +841,354 @@ import { Checkbox } from '@metamask/design-system-react';
 - `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
+
+### AvatarBase Component
+
+The extension `avatar-base` component maps to `AvatarBase` in the design system. MMDS adds a **shape** model and renames the border flag to `hasBorder` (shared with other avatar primitives). Broad style-utility props on the extension `AvatarBase` are not carried forward; use [General Extension Migration Guidance](#general-extension-migration-guidance).
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                                  | Design System Migration                                                                       |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `import { AvatarBase, AvatarBaseSize } from '../../component-library/avatar-base'` | `import { AvatarBase, AvatarBaseSize, AvatarBaseShape } from '@metamask/design-system-react'` |
+
+##### Props and Enum Mapping
+
+| Extension API                                                                  | MMDS API                                           | Change Type            | Notes                                                                                                  |
+| ------------------------------------------------------------------------------ | -------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------ |
+| `includesBorder` (naming in style props) / border behavior                     | `hasBorder`                                        | renamed                | default remains `false` in MMDS                                                                        |
+| `backgroundColor`, `borderColor`, `color` (design-system enums on style props) | `className` / `style` on root                      | removed as first-class | use Tailwind or explicit layout; token-backed `Box`-style color props are not re-exposed the same way  |
+| Polymorphic `as` / `ref` from Box                                              | `asChild` on `AvatarBase`                          | different pattern      | MMDS `AvatarBase` is `div` by default; `asChild` merges onto a single child when needed                |
+| `size` values `'xs'`, …, `'xl'`                                                | `AvatarBaseSize` const object (same string values) | value alignment        | e.g. `AvatarBaseSize.Md` is `'md'`                                                                     |
+| (no `shape` in extension)                                                      | `shape` + `AvatarBaseShape`                        | **new**                | `Circle` (default) or `Square` — child avatars set shape internally (e.g. `AvatarNetwork` uses square) |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import {
+  AvatarBase,
+  AvatarBaseSize,
+} from '../../component-library/avatar-base';
+
+<AvatarBase size={AvatarBaseSize.Md} className="custom-avatar" />;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarBase,
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-react';
+
+<AvatarBase
+  size={AvatarBaseSize.Md}
+  shape={AvatarBaseShape.Circle}
+  hasBorder={false}
+  className="custom-avatar"
+/>;
+```
+
+### AvatarAccount Component
+
+**`AvatarAccount` is not in the extension `component-library` index** (the extension exports `AvatarBase`, `AvatarFavicon`, `AvatarIcon`, `AvatarNetwork`, and `AvatarToken` only). Use this section when migrating from **MetaMask Mobile** or any local fork that still implements account avatars. MMDS `AvatarAccount` is imported from `@metamask/design-system-react` and uses the shared const object `AvatarAccountVariant` (lowercase string values) instead of mobile’s `AvatarAccountType` (PascalCase values).
+
+#### Breaking Changes (vs Mobile `AvatarAccount`)
+
+| Mobile API                                                           | MMDS API                                                                  | Change Type             | Notes                                                      |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------- |
+| `accountAddress: string`                                             | `address: string`                                                         | renamed                 | same data, new prop name                                   |
+| `type?: AvatarAccountType` (e.g. `JazzIcon`, `Blockies`, `Maskicon`) | `variant?: AvatarAccountVariant`                                          | renamed + value mapping | MMDS: `Jazzicon`, `Blockies`, `Maskicon` (see table below) |
+| `size?: AvatarSize` with values `'16'`, `'24'`, …                    | `size?: AvatarAccountSize` (alias of `AvatarBaseSize`: `'xs'`, `'sm'`, …) | value space changed     | map pixel-like enums to `AvatarBaseSize` (see size table)  |
+| `includesBorder` on `AvatarBaseProps`                                | `hasBorder`                                                               | renamed                 | on shared base props                                       |
+
+##### Variant value mapping (Mobile `AvatarAccountType` → MMDS `AvatarAccountVariant`)
+
+| Mobile                       | MMDS                            |
+| ---------------------------- | ------------------------------- |
+| `AvatarAccountType.JazzIcon` | `AvatarAccountVariant.Jazzicon` |
+| `AvatarAccountType.Blockies` | `AvatarAccountVariant.Blockies` |
+| `AvatarAccountType.Maskicon` | `AvatarAccountVariant.Maskicon` |
+
+##### Size value mapping (Mobile `AvatarSize` → MMDS `AvatarBaseSize` / `AvatarAccountSize`)
+
+| Mobile (`AvatarSize`)    | MMDS                                                  |
+| ------------------------ | ----------------------------------------------------- |
+| `AvatarSize.Xs` (`'16'`) | `AvatarAccountSize.Xs` / `AvatarBaseSize.Xs` (`'xs'`) |
+| `AvatarSize.Sm` (`'24'`) | `Sm`                                                  |
+| `AvatarSize.Md` (`'32'`) | `Md`                                                  |
+| `AvatarSize.Lg` (`'40'`) | `Lg`                                                  |
+| `AvatarSize.Xl` (`'48'`) | `Xl`                                                  |
+
+#### Migration Example (Mobile)
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar';
+import { AvatarAccountType, AvatarSize } from '.../Avatars/Avatar/Avatar.types';
+
+<Avatar
+  variant={AvatarVariant.Account}
+  accountAddress={address}
+  type={AvatarAccountType.JazzIcon}
+  size={AvatarSize.Md}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarAccount,
+  AvatarAccountVariant,
+  AvatarAccountSize,
+} from '@metamask/design-system-react';
+
+<AvatarAccount
+  address={address}
+  variant={AvatarAccountVariant.Jazzicon}
+  size={AvatarAccountSize.Md}
+/>;
+```
+
+### AvatarFavicon Component
+
+The extension `avatar-favicon` and MMDS `AvatarFavicon` both use a dapp name for alt/fallback, but the **image source and fallback mechanisms differ**.
+
+#### Breaking Changes (Extension)
+
+| Extension API                     | MMDS API                                              | Change Type     | Notes                                                                 |
+| --------------------------------- | ----------------------------------------------------- | --------------- | --------------------------------------------------------------------- |
+| `name: string` (required)         | `name?: string`                                       | now optional    | still used for alt text; defaults inside component when empty         |
+| `src?: string`                    | `src?: string`                                        | keep            | string URL for `<img>`                                                |
+| `fallbackIconProps`               | (no equivalent)                                       | removed         | MMDS uses `fallbackText` + optional `imageProps.onError` for recovery |
+| `size` / `AvatarFaviconSize` enum | `AvatarFaviconSize` (alias of `AvatarBaseSize` const) | values align    | same `xs`–`xl` labels                                                 |
+| `borderColor` on style props      | use `className` / `style` or token classes            | not carried 1:1 | prefer design tokens via Tailwind                                     |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { AvatarFavicon } from '../../component-library/avatar-favicon';
+
+<AvatarFavicon name="Uniswap" src={faviconUrl} size={AvatarFaviconSize.Md} />;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarFavicon,
+  AvatarFaviconSize,
+} from '@metamask/design-system-react';
+
+<AvatarFavicon name="Uniswap" src={faviconUrl} size={AvatarFaviconSize.Md} />;
+```
+
+### AvatarIcon Component
+
+The extension `avatar-icon` used a single `color` prop (text/icon colors). MMDS **`AvatarIcon` replaces `color` with `severity`**, which drives both **background (via container classes) and icon color** through `AvatarIconSeverity`.
+
+#### Breaking Changes (Extension)
+
+| Extension API                    | MMDS API                                     | Change Type       | Notes                                                                                 |
+| -------------------------------- | -------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------- |
+| `iconName: IconName`             | `iconName: IconName`                         | unchanged         | same icon set                                                                         |
+| `iconProps`                      | `iconProps` (omit `name` from `IconProps`)   | typing tightened  | pass `Icon` overrides without repeating `name`                                        |
+| `color?: TextColor \| IconColor` | `severity?: AvatarIconSeverity`              | **replaced**      | `Neutral`, `Info`, `Success`, `Error`, `Warning` — not a 1:1 list with legacy `Color` |
+| `size` labels `xs`–`xl`          | `AvatarIconSize` (alias of `AvatarBaseSize`) | same string union | default `Md`                                                                          |
+| (no `severity` in extension)     | `AvatarIconSeverity`                         | new               | use instead of ad-hoc `color`                                                         |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import {
+  AvatarIcon,
+  AvatarIconSize,
+} from '../../component-library/avatar-icon';
+import { IconName } from '../../component-library/icon';
+
+<AvatarIcon
+  iconName={IconName.Eye}
+  size={AvatarIconSize.Md}
+  color={TextColor.ErrorDefault}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarIcon,
+  AvatarIconSize,
+  AvatarIconSeverity,
+  IconName,
+} from '@metamask/design-system-react';
+
+<AvatarIcon
+  iconName={IconName.Eye}
+  size={AvatarIconSize.Md}
+  severity={AvatarIconSeverity.Error}
+/>;
+```
+
+### AvatarNetwork Component
+
+`AvatarNetwork` exists in the extension. MMDS does **not** support `showHalo`; the shared **`name` prop is optional** and is used for alt text and the letter fallback. Root shape is **square** in the MMDS implementation.
+
+#### Breaking Changes (Extension)
+
+| Extension API             | MMDS API                                                       | Change Type     | Notes                                                 |
+| ------------------------- | -------------------------------------------------------------- | --------------- | ----------------------------------------------------- |
+| `name: string` (required) | `name?: string`                                                | now optional    | letter fallback still derived when `name` is provided |
+| `src?: string`            | `src?: string`                                                 | unchanged       |                                                       |
+| `showHalo?: boolean`      | (removed)                                                      | not supported   | drop or reimplement in product UI if still required   |
+| `size`                    | `size` (defaults to `AvatarNetworkSize` → `AvatarBaseSize.Md`) | value alignment | same `xs`–`xl` strings as `AvatarBase`                |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import {
+  AvatarNetwork,
+  AvatarNetworkSize,
+} from '../../component-library/avatar-network';
+
+<AvatarNetwork
+  name="Mainnet"
+  src={networkIcon}
+  size={AvatarNetworkSize.Md}
+  showHalo
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { AvatarNetwork, AvatarNetworkSize } from '@metamask/design-system-react';
+
+<AvatarNetwork
+  name="Mainnet"
+  src={networkIcon}
+  size={AvatarNetworkSize.Md}
+  imageProps={{ onLoad: /* ... */ }}
+/>;
+```
+
+### AvatarToken Component
+
+`AvatarToken` exists in the extension. MMDS does **not** support `showHalo`. Optional `name` and `fallbackText` follow the same pattern as `AvatarNetwork`/`AvatarFavicon`.
+
+#### Breaking Changes (Extension)
+
+| Extension API        | MMDS API                                      | Change Type     | Notes                                         |
+| -------------------- | --------------------------------------------- | --------------- | --------------------------------------------- |
+| `showHalo?: boolean` | (removed)                                     | not supported   |                                               |
+| `name?: string`      | `name?`, `fallbackText?`                      | extended        | MMDS documents shared fallback rules in types |
+| `src?`               | `src?`                                        | unchanged       |                                               |
+| `size`               | `AvatarTokenSize` (alias of `AvatarBaseSize`) | value alignment |                                               |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import {
+  AvatarToken,
+  AvatarTokenSize,
+} from '../../component-library/avatar-token';
+
+<AvatarToken name="DAI" src={iconUrl} size={AvatarTokenSize.Md} showHalo />;
+```
+
+##### After (Design System)
+
+```tsx
+import { AvatarToken, AvatarTokenSize } from '@metamask/design-system-react';
+
+<AvatarToken name="DAI" src={iconUrl} size={AvatarTokenSize.Md} />;
+```
+
+### AvatarGroup Component
+
+`AvatarGroup` is **not exported** from the extension `component-library` (see [extension `index.ts`](https://github.com/MetaMask/metamask-extension/blob/main/ui/components/component-library/index.ts)). Use this section for **MetaMask Mobile** and any app that used the standalone `AvatarGroup` molecule.
+
+**MMDS** requires a **required `variant`** (const object + union `AvatarGroupVariant`) and **`avatarPropsArr`** (not `avatarPropsList`). The **`max` prop** defaults to 4, **`size`** to `AvatarGroupSize.Md`. **`isReverse`** and **`overflowTextProps`** are new. Mobile’s **`spaceBetweenAvatars`**, **`includesBorder` stack override**, and the **`+N` size default of `AvatarSize.Xs`** are not part of the MMDS `AvatarGroup` public API; recreate spacing and borders with layout/`twClassName` if needed.
+
+#### Breaking Changes (vs Mobile `AvatarGroup`)
+
+| Mobile API                                                          | MMDS API                                                                | Change Type              | Notes                                                           |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------- |
+| `avatarPropsList: AvatarProps[]` (discriminated by inner `variant`) | `variant` + `avatarPropsArr: Avatar*Props[]` (single variant per group) | restructured             | pick one of Account / Favicon / Network / Token for the group   |
+| `size?: AvatarSize` (default `Xs` in mobile types)                  | `size?: AvatarGroupSize` (alias of `AvatarBaseSize`, default `Md`)      | default and type changed | verify visual overlap                                           |
+| `maxStackedAvatars?`                                                | `max?`                                                                  | renamed                  | same intent (default `4`)                                       |
+| `includesBorder?`                                                   | (not on `AvatarGroup`)                                                  | removed                  | set `hasBorder` on children via props if the design requires it |
+| `spaceBetweenAvatars?`                                              | (no direct prop)                                                        | removed                  | use wrapper layout / utilities                                  |
+| (n/a)                                                               | `isReverse?`, `overflowTextProps?`                                      | new                      | stack direction and overflow label styling                      |
+
+#### Mobile variant → MMDS `AvatarGroupVariant` + item props
+
+| Mobile `Avatar` variant (on each item) | MMDS `variant` on `AvatarGroup` | `avatarPropsArr` item type                   |
+| -------------------------------------- | ------------------------------- | -------------------------------------------- |
+| `AvatarVariant.Account`                | `AvatarGroupVariant.Account`    | `AvatarAccountProps`                         |
+| `AvatarVariant.Favicon`                | `AvatarGroupVariant.Favicon`    | `AvatarFaviconProps`                         |
+| `AvatarVariant.Network`                | `AvatarGroupVariant.Network`    | `AvatarNetworkProps`                         |
+| `AvatarVariant.Token`                  | `AvatarGroupVariant.Token`      | `AvatarTokenProps`                           |
+| `AvatarVariant.Icon`                   | (no `AvatarGroup` branch)       | use separate layout or multiple `AvatarIcon` |
+
+#### Migration Example (Mobile)
+
+##### Before (Mobile)
+
+```tsx
+import AvatarGroup from '.../Avatars/AvatarGroup';
+import {
+  AvatarSize,
+  AvatarVariant,
+  AvatarAccountType,
+} from '.../Avatars/Avatar/Avatar.types';
+
+<AvatarGroup
+  size={AvatarSize.Md}
+  maxStackedAvatars={3}
+  avatarPropsList={addresses.map((accountAddress) => ({
+    variant: AvatarVariant.Account,
+    accountAddress,
+    type: AvatarAccountType.JazzIcon,
+  }))}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupVariant,
+  AvatarGroupSize,
+  AvatarAccountVariant,
+} from '@metamask/design-system-react';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  size={AvatarGroupSize.Md}
+  max={3}
+  avatarPropsArr={addresses.map((address) => ({
+    address,
+    variant: AvatarAccountVariant.Jazzicon,
+  }))}
+/>;
+```
 
 ## Version Updates
 
