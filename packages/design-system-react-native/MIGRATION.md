@@ -18,6 +18,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
+  - [Label Component](#label-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
@@ -1917,6 +1918,122 @@ The mobile and design-system Text components both extend `react-native` `TextPro
 - `fontFamily` - select default/accent/hero fonts
 - `fontStyle` - normal or italic text style
 - `twClassName` - Tailwind utility classes merged with component defaults
+
+### Label Component
+
+Label is a thin wrapper around `Text` that defaults the variant to `BodyMd` and is intended to describe form fields. Because it forwards every prop to `Text`, the [Text Component breaking changes](#text-component) (variant casing, font-weight separation, color renames) all apply to `Label` as well.
+
+#### Breaking Changes
+
+##### Import path
+
+The component is now published from the design system package; remove the relative import from `app/component-library/components/Form/Label`.
+
+| Mobile (Before)                                                                         | Design System (After)                                                     |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `import Label from 'app/component-library/components/Form/Label';`                      | `import { Label } from '@metamask/design-system-react-native';`           |
+| `import { LabelProps } from 'app/component-library/components/Form/Label/Label.types';` | `import type { LabelProps } from '@metamask/design-system-react-native';` |
+
+The mobile package exported `Label` as the **default** export. The design system package exports it as a **named** export.
+
+##### `testID` no longer defaults to `"label"`
+
+The mobile `Label` automatically applied `testID="label"` (`LABEL_TEST_ID`). The design system `Label` does **not** set a default `testID` — pass it explicitly when a stable test selector is required.
+
+```tsx
+// Before (Mobile) — implicit testID="label"
+<Label>Email Address</Label>
+
+// After (Design System) — pass testID explicitly
+<Label testID="label">Email Address</Label>
+```
+
+If you previously relied on `LABEL_TEST_ID` from `Label.constants`, replace that import with a string literal local to your test or component, since the constant is not re-exported from the design system.
+
+##### Removed mobile-only constants
+
+The following exports from `Label.constants.ts` are not part of the design system API:
+
+| Mobile Export                | Replacement                                                                 |
+| ---------------------------- | --------------------------------------------------------------------------- |
+| `DEFAULT_LABEL_TEXT_VARIANT` | Inline `TextVariant.BodyMd` (default behavior of `Label`).                  |
+| `LABEL_TEST_ID`              | Pass `testID` explicitly (see above).                                       |
+| `SAMPLE_LABEL_TEXT`          | Test fixture only — colocate any equivalent string with your tests/stories. |
+
+##### Variant, color, and font-weight props
+
+All `TextVariant`, `TextColor`, and font-weight changes from the [Text Component](#text-component) section apply directly. The most common mobile usage:
+
+| Mobile                                              | Design System                                                                |
+| --------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `<Label>Email</Label>`                              | `<Label>Email</Label>` _(default `BodyMd` is unchanged in behavior)_         |
+| `<Label variant={TextVariant.BodySM}>…</Label>`     | `<Label variant={TextVariant.BodySm}>…</Label>`                              |
+| `<Label variant={TextVariant.BodyMDBold}>…</Label>` | `<Label variant={TextVariant.BodyMd} fontWeight={FontWeight.Bold}>…</Label>` |
+| `<Label color={TextColor.Error}>…</Label>`          | `<Label color={TextColor.ErrorDefault}>…</Label>`                            |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import React from 'react';
+import Label from '../../../component-library/components/Form/Label';
+import {
+  TextVariant,
+  TextColor,
+} from '../../../component-library/components/Texts/Text';
+
+<Label>Email Address</Label>
+
+<Label variant={TextVariant.BodySM} color={TextColor.Muted}>
+  Optional
+</Label>
+
+<Label variant={TextVariant.BodyMDBold} color={TextColor.Error}>
+  Required field
+</Label>
+```
+
+##### After (Design System)
+
+```tsx
+import React from 'react';
+import {
+  Label,
+  TextVariant,
+  TextColor,
+  FontWeight,
+} from '@metamask/design-system-react-native';
+
+<Label>Email Address</Label>
+
+<Label variant={TextVariant.BodySm} color={TextColor.TextMuted}>
+  Optional
+</Label>
+
+<Label
+  variant={TextVariant.BodyMd}
+  fontWeight={FontWeight.Bold}
+  color={TextColor.ErrorDefault}
+>
+  Required field
+</Label>
+```
+
+#### API Differences
+
+`LabelProps` now equals `TextProps`, which on the design system side adds the following props on top of React Native's `TextProps` (none of these existed on the mobile `Label`):
+
+- `fontWeight` — separate weight control instead of weight-specific variants
+- `fontFamily` — select default/accent/hero fonts
+- `fontStyle` — normal or italic text style
+- `twClassName` — Tailwind utility classes merged with component defaults
+
+Behavior preserved across both implementations:
+
+- Defaults the rendered variant to body-medium (`BodyMD` → `BodyMd`).
+- Forwards every prop to the underlying `Text` (and therefore to React Native's `Text`).
+- Accepts string or `ReactNode` children.
 
 ### Icon Component
 
