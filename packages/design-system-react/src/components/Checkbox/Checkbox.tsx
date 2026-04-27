@@ -66,7 +66,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     }
 
     const checkboxClasses = twMerge(
-      'relative flex size-6 items-center justify-center rounded border-2 p-0 transition-transform active:scale-95 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary-default',
+      'relative flex size-6 items-center justify-center rounded border-2 p-0 transition-transform peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary-default active:scale-95',
       baseBg,
       baseBorder,
       checkboxContainerProps?.className,
