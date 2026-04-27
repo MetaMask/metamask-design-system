@@ -1,4 +1,7 @@
-import type { AvatarIconPropsShared } from '@metamask/design-system-shared';
+import type {
+  AvatarIconPropsShared,
+  AvatarIconSize,
+} from '@metamask/design-system-shared';
 
 import type { AvatarBaseProps } from '../AvatarBase';
 import type { IconProps } from '../Icon';
@@ -14,5 +17,5 @@ export type AvatarIconProps = Omit<AvatarBaseProps, 'children' | 'size'> &
      *
      * @default AvatarIconSize.Md
      */
-    size?: AvatarBaseProps['size'];
+    size?: AvatarIconSize;
   };
