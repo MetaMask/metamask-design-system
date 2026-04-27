@@ -1,10 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import React from 'react';
-
 import {
   ButtonBaseSize as ButtonSecondarySize,
   IconName,
 } from '@metamask/design-system-shared';
+import { render, screen } from '@testing-library/react';
+import React from 'react';
 
 import { ButtonSecondary } from './ButtonSecondary';
 

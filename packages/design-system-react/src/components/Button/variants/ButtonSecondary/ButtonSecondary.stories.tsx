@@ -1,10 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
-
 import {
   ButtonBaseSize as ButtonSecondarySize,
   IconName,
 } from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import React from 'react';
 
 import { ButtonSecondary } from './ButtonSecondary';
 import README from './README.mdx';

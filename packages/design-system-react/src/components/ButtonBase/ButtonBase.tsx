@@ -1,7 +1,4 @@
-import {
-  ButtonBaseSize,
-  IconName,
-} from '@metamask/design-system-shared';
+import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
@@ -154,7 +151,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
       // Base styles
       'inline-flex items-center justify-center',
       'rounded-xl px-4',
-      'text-default font-medium',
+      'font-medium text-default',
       'bg-muted',
       'min-w-20 overflow-hidden',
       // Add relative positioning for loading state
