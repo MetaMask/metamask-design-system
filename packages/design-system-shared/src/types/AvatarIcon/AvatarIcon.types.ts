@@ -1,3 +1,4 @@
+import type { AvatarBaseSize as AvatarIconSize } from '../AvatarBase';
 import type { IconName } from '../Icon/Icon.types';
 
 export { AvatarBaseSize as AvatarIconSize } from '../AvatarBase';
