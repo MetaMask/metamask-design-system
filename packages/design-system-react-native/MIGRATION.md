@@ -2682,10 +2682,13 @@ These patterns have no drop-in replacement in `@metamask/design-system-react-nat
 - **Three-or-more-column rows** — `KeyValueRow` renders exactly a key + value row. Compositions that previously nested multiple `KeyValueSection` instances must be rebuilt as plain `BoxRow` layouts.
 - **Using legacy `KeyValueRowLabel` standalone** — the `KeyValueLabel` default export (plus its `useTooltipModal` wiring) is not re-exported. Rebuild with `Text` + a host-owned tooltip handler, or migrate the whole row to `KeyValueRow`.
 
-Known mobile call sites using these blocked patterns (keep the legacy import until refactored):
+Examples of mobile call sites currently exercising these blocked patterns (illustrative — re-run a search before relying on this list, since the codebase moves fast):
 
-- `app/components/UI/Bridge/components/QuoteDetailsRecipientKeyValueRow/QuoteDetailsRecipientKeyValueRow.tsx` (owner: `@MetaMask/swaps-engineers`)
-- `app/components/UI/Rewards/components/Tabs/MusdCalculatorTab/MusdCalculatorTab.tsx` (owner: `@MetaMask/rewards`)
+- `app/components/UI/Bridge/components/QuoteDetailsRecipientKeyValueRow/QuoteDetailsRecipientKeyValueRow.tsx` — uses `KeyValueRowStubs` (owner: `@MetaMask/swaps-engineers`)
+- `app/components/UI/Bridge/components/QuoteDetailsCard/QuoteDetailsCard.tsx` — imports `KeyValueRowLabel` directly alongside `KeyValueRow` (owner: `@MetaMask/swaps-engineers`)
+- `app/components/UI/Rewards/components/Tabs/MusdCalculatorTab/MusdCalculatorTab.tsx` — uses `KeyValueRowStubs` (owner: `@MetaMask/rewards`)
+
+Separately, the deprecated `TooltipSizes` re-export is consumed across additional files in `Earn`, `Stake`, `Predict`, `Bridge`, and `Perps` even when `KeyValueRow` itself is not rendered. Those sites are not "blocked" — swap `TooltipSizes.<X>` for the value-equivalent `ButtonIconSizes.<X>` from the legacy `ButtonIcon` (or `ButtonIconSize` from the design system if the surrounding `ButtonIcon` is also being migrated). Grep `components-temp/KeyValueRow` to enumerate the current set before opening a migration PR.
 
 #### API Differences
 
