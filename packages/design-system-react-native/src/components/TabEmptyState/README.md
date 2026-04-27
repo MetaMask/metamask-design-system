@@ -165,7 +165,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 
 ## Migration from MetaMask Mobile Component Library
 
-Migrating from the legacy `TabEmptyState` in `app/component-library/components-temp/TabEmptyState`? See the [TabEmptyState migration guide](../../../MIGRATION.md#tabemptystate-component) for import changes, root prop narrowing (`BoxProps` → `ViewProps`), and the removal of `self-center` on the internal action `Button`.
+Migrating from the legacy `TabEmptyState` in `app/component-library/components-temp/TabEmptyState`? See the [TabEmptyState migration guide](../../../MIGRATION.md#tabemptystate-component) for the import change and the root prop narrowing from `BoxProps` to `ViewProps`.
 
 ## References
 
