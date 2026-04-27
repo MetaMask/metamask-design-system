@@ -1,11 +1,9 @@
-/* eslint-disable import-x/no-nodejs-modules */
 import tailwindPostcss from '@tailwindcss/postcss';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import postcss from 'postcss';
-/* eslint-enable import-x/no-nodejs-modules */
 
 /**
  * Tailwind Theme Parity Check
