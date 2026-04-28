@@ -22,7 +22,9 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
+  - [TabEmptyState Component](#tabemptystate-component)
 - [Version Updates](#version-updates)
+  - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
@@ -33,6 +35,62 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.19.0 to 0.20.0
+
+#### Box: Enum exports now use const objects and string unions
+
+**What Changed:**
+
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` now follow the ADR-0003 const-object + string-union pattern instead of local enums.
+
+**Migration:**
+
+```tsx
+// Before (0.19.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
+
+// After (0.20.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
+```
+
+#### Box: Removed stale `-alternative` color tokens
+
+**What Changed:**
+
+The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
+
+| Removed Entry                           | Replacement                         |
+| --------------------------------------- | ----------------------------------- |
+| `BoxBackgroundColor.WarningAlternative` | `BoxBackgroundColor.WarningDefault` |
+| `BoxBackgroundColor.SuccessAlternative` | `BoxBackgroundColor.SuccessDefault` |
+| `BoxBorderColor.WarningAlternative`     | `BoxBorderColor.WarningDefault`     |
+| `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`     |
+| `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`        |
+
+**Migration:**
+
+These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate:
+
+```tsx
+// Before (0.19.0)
+<Box backgroundColor={BoxBackgroundColor.WarningAlternative} />
+<Box backgroundColor={BoxBackgroundColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.WarningAlternative} />
+<Box borderColor={BoxBorderColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.InfoAlternative} />
+
+// After (0.20.0)
+<Box backgroundColor={BoxBackgroundColor.WarningDefault} />
+<Box backgroundColor={BoxBackgroundColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.WarningDefault} />
+<Box borderColor={BoxBorderColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.InfoDefault} />
+```
+
+**Impact:**
+
+- Any reference to the removed entries will produce a TypeScript error after upgrading.
 
 ### From version 0.18.0 to 0.19.0
 
@@ -99,14 +157,16 @@ If TypeScript now flags props you were previously passing to `Icon`, those props
 </View>
 ```
 
-#### Box: Type imports moved to `@metamask/design-system-shared`
+#### Box: Enum exports now use const objects and string unions
 
-`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react-native`. All existing import paths through `@metamask/design-system-react-native` continue to work without change.
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` now use const-object + string-union types instead of enums.
 
 ```tsx
-// Both of these work — shared is the source of truth
+// Before (0.18.0)
 import { BoxBackgroundColor } from '@metamask/design-system-react-native';
-import { BoxBackgroundColor } from '@metamask/design-system-shared';
+
+// After (0.19.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
 ```
 
 #### Box: Removed stale `-alternative` color tokens
@@ -127,9 +187,9 @@ These tokens had no backing CSS custom property, so any usage was already produc
 
 ### From version 0.16.0 to 0.17.0
 
-#### Text: Typography const values moved to `@metamask/design-system-shared`
+#### Text: Typography enum exports now use const objects and string unions
 
-`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react-native`. All existing import paths through `@metamask/design-system-react-native` continue to work without change.
+`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` now follow the ADR-0003 const-object + string-union pattern instead of enums.
 
 #### `FontWeight` values changed
 
@@ -242,7 +302,7 @@ import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
 
 - `KeyValueRow` no longer accepts `field` and `value` configuration objects. Use flat props: `keyLabel`, `value`, optional `variant`, start/end accessories, optional `keyTextProps` / `valueTextProps`, and optional `keyEndButtonIconProps` / `valueEndButtonIconProps`.
 - Layout is handled inside the component (`BoxRow` / `Box`). The old stub API used to compose custom rows is removed.
-- `KeyValueRowVariant` is defined in `@metamask/design-system-shared` (shared props follow ADR-0003 / ADR-0004); React Native–specific props remain on `KeyValueRowProps` in this package.
+- `KeyValueRowVariant` now follows the ADR-0003 / ADR-0004 const-object + string-union pattern; React Native–specific props remain on `KeyValueRowProps` in this package.
 
 **Removed from the public API:**
 
@@ -382,7 +442,7 @@ Custom React nodes for key or value remain supported:
 
 **Instructions for downstream consumers:**
 
-- In **MetaMask Mobile**, **MetaMask extension**, and any shared packages, search for `KeyValueRow` and migrate every usage away from `field` / `value` objects to the new props.
+- In **MetaMask Mobile**, **MetaMask extension**, and any other packages that consume `KeyValueRow`, search for usages and migrate every callsite away from `field` / `value` objects to the new props.
 - Remove imports of deleted symbols (`KeyValueRowStubs`, `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes`, and the removed types).
 - If your app defines **KeyValueColumn** or another wrapper that forwards the old `KeyValueRow` props, update that component’s API and all call sites to match the new shape.
 
@@ -2482,6 +2542,130 @@ The following mobile `component-library` sub-components build on `ListItem` but 
 - The mobile version uses a default export; MMDS uses a named export.
 - `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.
 
+### TabEmptyState Component
+
+`TabEmptyState` was previously incubated inside `metamask-mobile` at `app/component-library/components-temp/TabEmptyState` as a thin wrapper around `Box` / `Text` / `Button` from `@metamask/design-system-react-native`. It has graduated to the design system in `0.11.0` and the `components-temp` copy is now marked `@deprecated`. The public API (`icon`, `description`, `descriptionProps`, `actionButtonText`, `actionButtonProps`, `onAction`, `children`, `twClassName`, `style`) is preserved — the migration is essentially an import-path change.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                  | Design System Migration                                                          |
+| ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `import { TabEmptyState } from '.../component-library/components-temp/TabEmptyState'`           | `import { TabEmptyState } from '@metamask/design-system-react-native'`           |
+| `import type { TabEmptyStateProps } from '.../component-library/components-temp/TabEmptyState'` | `import type { TabEmptyStateProps } from '@metamask/design-system-react-native'` |
+
+##### Root Props Narrowed from `BoxProps` to `ViewProps`
+
+The mobile `TabEmptyStateProps` extended `Omit<BoxProps, 'children'>`, so design-system `Box` props (`backgroundColor`, `flexDirection`, `alignItems`, `gap`, `padding`/`margin` shorthands, etc.) could be passed at the root. The design-system version intersects `ViewProps` only — standard React Native `View` props (`style`, `testID`, `accessibilityLabel`, …) are accepted, but `Box`-specific props are not.
+
+| Concern                                                                             | Mobile                       | Design System                                       |
+| ----------------------------------------------------------------------------------- | ---------------------------- | --------------------------------------------------- |
+| Root type extension                                                                 | `Omit<BoxProps, 'children'>` | `ViewProps`                                         |
+| Root accepts `Box` shorthands at top level (`backgroundColor`, `gap`, `padding`, …) | ✅                           | ❌ — move these to `twClassName` or a wrapper `Box` |
+| Root accepts `ViewProps` (`style`, `testID`, …)                                     | ✅                           | ✅                                                  |
+
+Current `metamask-mobile` call sites only pass `testID`, `style`, `twClassName`, `children`, and the explicit slot props — none of them pass `Box` shorthands at the root — so this narrowing is a no-op for every known consumer. If you were relying on root `Box` props, move them to `twClassName` or wrap the component in a `<Box>`.
+
+#### Migration Examples
+
+##### Basic usage
+
+Before (Mobile):
+
+```tsx
+import { TabEmptyState } from '../../../component-library/components-temp/TabEmptyState';
+import { strings } from '../../../../locales/i18n';
+
+<TabEmptyState description={strings('wallet.no_transactions')} />;
+```
+
+After (Design System):
+
+```tsx
+import { TabEmptyState } from '@metamask/design-system-react-native';
+import { strings } from '../../../../locales/i18n';
+
+<TabEmptyState description={strings('wallet.no_transactions')} />;
+```
+
+##### With action button and custom children
+
+Before (Mobile):
+
+```tsx
+import {
+  TabEmptyState,
+  type TabEmptyStateProps,
+} from '../../../component-library/components-temp/TabEmptyState';
+import {
+  Text,
+  TextVariant,
+  TextColor,
+} from '@metamask/design-system-react-native';
+
+<TabEmptyState
+  testID="bridge-token-selector-empty-state"
+  icon={<NoSearchResultsIcon width={72} height={78} />}
+  description={strings('bridge.no_tokens_found')}
+  descriptionProps={{
+    variant: TextVariant.HeadingMd,
+    color: TextColor.TextDefault,
+    twClassName: 'text-center',
+  }}
+  style={styles.emptyStateContainer}
+  twClassName="self-center"
+>
+  <Text
+    variant={TextVariant.BodyMd}
+    color={TextColor.TextAlternative}
+    twClassName="text-center -mt-1"
+  >
+    {strings('bridge.no_tokens_found_description')}
+  </Text>
+</TabEmptyState>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  TabEmptyState,
+  type TabEmptyStateProps,
+  Text,
+  TextVariant,
+  TextColor,
+} from '@metamask/design-system-react-native';
+
+<TabEmptyState
+  testID="bridge-token-selector-empty-state"
+  icon={<NoSearchResultsIcon width={72} height={78} />}
+  description={strings('bridge.no_tokens_found')}
+  descriptionProps={{
+    variant: TextVariant.HeadingMd,
+    color: TextColor.TextDefault,
+    twClassName: 'text-center',
+  }}
+  style={styles.emptyStateContainer}
+  twClassName="self-center"
+>
+  <Text
+    variant={TextVariant.BodyMd}
+    color={TextColor.TextAlternative}
+    twClassName="text-center -mt-1"
+  >
+    {strings('bridge.no_tokens_found_description')}
+  </Text>
+</TabEmptyState>;
+```
+
+Only the import specifier changes.
+
+#### API Differences Summary
+
+- Root prop type narrows from `Omit<BoxProps, 'children'>` to `ViewProps`. Move any root-level `Box` shorthands to `twClassName` or a wrapper `<Box>`.
+- All other props (`icon`, `description`, `descriptionProps`, `actionButtonText`, `actionButtonProps`, `onAction`, `children`, `twClassName`, `style`, `ViewProps`) are unchanged.
+
 ## Version Updates
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react-native`.
@@ -2496,8 +2680,8 @@ This section covers version-to-version breaking changes within `@metamask/design
 
 ### BadgeWrapper types now use const-object + union definitions
 
-- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, which produce string union types rather than TypeScript enums (ADR-0003/ADR-0004). The shared package defines the canonical values and the platform entry points keep re-exporting those names so React Native consumers use the same import paths they already rely on.
-- The switch lets React, React Native, and shared code stay aligned on the string-literal surface without duplicating runtime enums; no import-path change is required.
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, which produce string union types rather than TypeScript enums (ADR-0003/ADR-0004).
+- The exported names and import paths stay the same, so no import-path change is required.
 
 ## From version 0.11.0 to 0.12.0
 

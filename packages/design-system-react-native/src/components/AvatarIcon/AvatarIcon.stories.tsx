@@ -1,8 +1,10 @@
+import {
+  AvatarIconSeverity,
+  AvatarIconSize,
+  IconName,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
-
-import { AvatarIconSize, AvatarIconSeverity } from '../../types';
-import { IconName } from '../Icon';
 
 import { AvatarIcon } from './AvatarIcon';
 import type { AvatarIconProps } from './AvatarIcon.types';

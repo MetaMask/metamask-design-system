@@ -11,6 +11,30 @@ Documentation standards for Storybook stories and README files for React and Rea
 - **ALWAYS** follow templates exactly: @docs/component-readme-examples/
 - **Cross-platform**: Keep documentation identical across web/native (same sections, descriptions, examples)
 
+### Consumer-Facing Descriptions
+
+- **ALWAYS** write component descriptions for consumers of the component, not for reviewers or implementers
+- Opening descriptions should explain:
+  - what the component is
+  - when to use it
+  - how to use it in the default/common case
+  - when not to use it, if there is a nearby alternative or a common misuse
+- **PREFER** stable usage guidance over internal reasoning. Document the recommended composition or default sizing, not why the implementation was changed during review.
+- **NEVER** include development-process or review-history context in component docs
+- **NEVER** explain implementation details unless they directly affect consumer usage or API behavior
+- **NEVER** add fluff, defensive narration, or “why we removed/changed X in this PR” language to README descriptions
+
+**Good examples:**
+
+- `AvatarIcon` displays an icon inside an avatar-shaped container. Use it when you need a static icon avatar rather than an image- or account-based avatar.
+- `TitleSubpage` lays out a leading avatar beside a title stack with optional supporting rows. For avatars passed to `titleAvatar`, use a large size such as `AvatarToken` at `AvatarTokenSize.Lg`.
+
+**Bad examples (avoid these):**
+
+- `On React Native, this is passed straight through with no fixed-size wrapper because we removed the old overflow-hidden container during review.`
+- `This implementation stays agnostic so you own composition when you need extra chrome.`
+- `We changed this in the latest review round so badges are no longer clipped.`
+
 ### Storybook Stories
 
 **Story Structure:**
@@ -102,6 +126,8 @@ After adding/updating component documentation, verify:
 - [ ] README exists in component directory (.mdx for web, .md for native)
 - [ ] README follows templates exactly: @docs/component-readme-examples/
 - [ ] README includes: description, usage, props documentation
+- [ ] README description is consumer-facing and explains what the component is, when to use it, and the default usage pattern
+- [ ] README avoids implementation-history, review-process context, and unnecessary internal details
 - [ ] Web README uses Canvas blocks for interactive examples
 - [ ] Cross-platform: documentation is identical across web/native
 - [ ] Stories file exports meta with proper argTypes
