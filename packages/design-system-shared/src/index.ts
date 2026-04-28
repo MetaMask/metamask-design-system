@@ -67,6 +67,22 @@ export {
   type KeyValueRowPropsShared,
 } from './types/KeyValueRow';
 
+// SelectButton types (ADR-0003 + ADR-0004)
+export {
+  SelectButtonEndArrow,
+  SelectButtonVariant,
+  type SelectButtonPropsShared,
+} from './types/SelectButton';
+
+// SegmentButton types (ADR-0003 + ADR-0004)
+export {
+  SegmentButtonVariant,
+  type SegmentButtonPropsShared,
+} from './types/SegmentButton';
+
+// SegmentGroup types (ADR-0004)
+export { type SegmentGroupPropsShared } from './types/SegmentGroup';
+
 // ButtonFilter types (ADR-0004)
 export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 

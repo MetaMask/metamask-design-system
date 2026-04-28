@@ -65,6 +65,7 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <Box gap={4}>
+      <ButtonBase size={ButtonBaseSize.Xs}>ButtonBaseSize Xs</ButtonBase>
       <ButtonBase size={ButtonBaseSize.Sm}>ButtonBaseSize Sm</ButtonBase>
       <ButtonBase size={ButtonBaseSize.Md}>ButtonBaseSize Md</ButtonBase>
       <ButtonBase size={ButtonBaseSize.Lg}>

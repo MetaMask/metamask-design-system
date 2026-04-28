@@ -27,6 +27,7 @@ figma.connect(
         Lg: ButtonBaseSize.Lg,
         Md: ButtonBaseSize.Md,
         Sm: ButtonBaseSize.Sm,
+        Xs: ButtonBaseSize.Xs,
       }),
       children: figma.string('label'),
       startIconName: figma.boolean('startIcon (Figma Only)', {

@@ -38,6 +38,10 @@ export enum AvatarIconSeverity {
  */
 export enum ButtonBaseSize {
   /**
+   * Extra-small height (Tailwind `h-5`, 1.25rem / 20px at default root font size).
+   */
+  Xs = 'xs',
+  /**
    * Represents a small button size (32px).
    */
   Sm = 'sm',

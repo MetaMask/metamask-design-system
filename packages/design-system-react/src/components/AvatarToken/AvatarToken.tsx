@@ -45,7 +45,7 @@ export const AvatarToken = forwardRef<HTMLDivElement, AvatarTokenProps>(
           <img
             src={src}
             alt={altText}
-            className="size-full object-contain"
+            className="size-full object-cover"
             onError={onErrorHandler}
             {...imageProps}
           />

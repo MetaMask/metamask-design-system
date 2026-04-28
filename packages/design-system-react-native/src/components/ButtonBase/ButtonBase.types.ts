@@ -19,7 +19,7 @@ export type ButtonBaseProps = {
   textProps?: Omit<Partial<TextProps>, 'children'>;
   /**
    * Optional prop to control the size of the ButtonBase
-   * Possible values: ButtonBaseSize.Sm (32px), ButtonBaseSize.Md (40px), ButtonBaseSize.Lg (48px)
+   * Possible values: ButtonBaseSize.Xs (~20px), ButtonBaseSize.Sm (32px), ButtonBaseSize.Md (40px), ButtonBaseSize.Lg (48px)
    *
    * @default ButtonBaseSize.Lg
    */
