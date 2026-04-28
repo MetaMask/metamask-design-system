@@ -6,11 +6,8 @@ import { TextVariant, FontWeight } from '../../../Text';
 
 import type { ButtonSecondaryProps } from './ButtonSecondary.types';
 
-// eslint-disable-next-line jsdoc/require-param, jsdoc/require-returns
-/**
- * Internal variant of `Button`.
- * Consumers should use `Button` with `variant`; this variant component is not part of the public package API.
- */
+// Internal Button variant.
+// Consumers should use `Button` with `variant`.
 export const ButtonSecondary = ({
   children,
   textProps,
