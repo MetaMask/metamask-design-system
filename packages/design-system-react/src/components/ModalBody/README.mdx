@@ -1,0 +1,86 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as ModalBodyStories from './ModalBody.stories';
+
+# ModalBody
+
+`ModalBody` is the scrollable content container of a modal. It applies the standard horizontal padding used across modal sections and handles vertical overflow with native scrolling so long content stays inside the modal frame.
+
+```tsx
+import { ModalBody } from '@metamask/design-system-react';
+
+<ModalBody>{content}</ModalBody>;
+```
+
+<Canvas of={ModalBodyStories.Default} />
+
+## Props
+
+### `children`
+
+Content rendered inside the body. `ModalBody` handles vertical scrolling when its content exceeds the available height of the modal.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalBodyStories.Children} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed (for example, removing the default `px-4` to let inner elements span the full width)
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalBodyStories.Padding} />
+
+## Component API
+
+<Controls of={ModalBodyStories.Default} />
+
+## Migration Guide
+
+Migrating from `ui/components/component-library/modal-body` in MetaMask Extension? See the [ModalBody Migration Guide](../../../MIGRATION.md#modalbody-component) for prop mappings, before/after examples, and breaking changes.
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
