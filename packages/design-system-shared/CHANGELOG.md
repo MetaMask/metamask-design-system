@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.14.0]
 
-### Uncategorized
+### Added
 
-- feat: add Telegram icon ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
-- feat: migrate BadgeIcon to ADR-0004 shared types (DSYS-479) ([#1010](https://github.com/MetaMask/metamask-design-system/pull/1010))
-- feat: DSYS-476 Migrate AvatarIcon to ADR-0003 and ADR-0004 ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
+- Added `Telegram` to the shared icon exports so both platform packages can consume it through their existing `IconName` APIs ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
+- Added shared `BadgeIconPropsShared` types so `BadgeIcon` now uses one cross-platform prop contract in React and React Native ([#1010](https://github.com/MetaMask/metamask-design-system/pull/1010))
+- Added shared `AvatarIcon` contracts, including `AvatarIconPropsShared`, `AvatarIconSize`, and `AvatarIconSeverity`, so both platform packages consume the same canonical type definitions ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
 
 ## [0.13.0]
 

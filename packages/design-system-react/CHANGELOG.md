@@ -9,13 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.19.0]
 
-### Uncategorized
+### Added
 
-- feat: add Telegram icon ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
-- docs: `ButtonBase` migration (extension) ([#1093](https://github.com/MetaMask/metamask-design-system/pull/1093))
-- feat: migrate BadgeIcon to ADR-0004 shared types (DSYS-479) ([#1010](https://github.com/MetaMask/metamask-design-system/pull/1010))
-- feat: DSYS-476 Migrate AvatarIcon to ADR-0003 and ADR-0004 ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
-- chore: remove unused eslint disable comments ([#1118](https://github.com/MetaMask/metamask-design-system/pull/1118))
+- Added `Telegram` to the `IconName` set for use anywhere the React package accepts design system icons ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
+
+### Changed
+
+- **BREAKING:** Updated `AvatarIcon` type exports to use the shared const-object + string-union model used by `Icon` and `Box`; normal component usage is unchanged, so you can continue importing from `@metamask/design-system-react` and using `AvatarIconSize.Md` / `AvatarIconSeverity.Warning` as usual ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
+  - `AvatarIconSize` now reuses the shared avatar size definitions
+  - `AvatarIconSeverity` now uses ADR-0003 const-object + string-union typing instead of a local enum
+  - See [Migration Guide](./MIGRATION.md#from-version-0180-to-0190)
+- **BREAKING:** Updated `BadgeIcon` to use shared cross-platform prop types from `@metamask/design-system-shared`; the public API and normal usage are unchanged, so existing `iconName={IconName.*}` usage should continue to work as before ([#1010](https://github.com/MetaMask/metamask-design-system/pull/1010))
+  - Continue importing `BadgeIcon` from `@metamask/design-system-react`
+  - See [Migration Guide](./MIGRATION.md#from-version-0180-to-0190)
 
 ## [0.18.0]
 
