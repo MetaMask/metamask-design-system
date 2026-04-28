@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.0]
+
 ### Uncategorized
 
 - feat: add Telegram icon ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
@@ -265,7 +267,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.18.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.19.0...HEAD
+[0.19.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.18.0...@metamask/design-system-react@0.19.0
 [0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.17.1...@metamask/design-system-react@0.18.0
 [0.17.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.17.0...@metamask/design-system-react@0.17.1
 [0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.16.0...@metamask/design-system-react@0.17.0

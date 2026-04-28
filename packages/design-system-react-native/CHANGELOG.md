@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.0]
+
 ### Uncategorized
 
 - feat: add Telegram icon ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
@@ -370,7 +372,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.20.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.21.0...HEAD
+[0.21.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.20.0...@metamask/design-system-react-native@0.21.0
 [0.20.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.19.0...@metamask/design-system-react-native@0.20.0
 [0.19.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.18.0...@metamask/design-system-react-native@0.19.0
 [0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.17.0...@metamask/design-system-react-native@0.18.0
