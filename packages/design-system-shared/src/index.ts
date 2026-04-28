@@ -171,3 +171,5 @@ export {
   IconSize,
   type IconPropsShared,
 } from './types/Icon';
+// Input types (ADR-0004)
+export { type InputPropsShared } from './types/Input';
