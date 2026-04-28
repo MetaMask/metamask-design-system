@@ -1,8 +1,10 @@
 # SelectButton
 
-SelectButton is a thin wrapper around `ButtonBase`: same layout, press animation (`ButtonAnimated`), loading state, sizing, and styling as a button row. Its distinguishing behavior is **`endArrowDirection`**, which maps to a trailing arrow `Icon`; omit it and use `endAccessory` for custom trailing content instead. For a different look (plain row, borders, typography), pass through the same props you would on `ButtonBase`—for example `twClassName`, `style`, `textProps`, or `size`.
+SelectButton is a thin wrapper around `ButtonBase`: same layout, press animation (`ButtonAnimated`), loading state, sizing, and styling as a button row. Its distinguishing behavior is the trailing arrow from **`endArrowDirection`** (defaults to **down** when you are not using `endAccessory`); set **`hideEndArrow`** to hide the arrow, or use **`endAccessory`** for custom trailing content when you omit `endArrowDirection`. For a different look (plain row, borders, typography), pass through the same props you would on `ButtonBase`—for example `twClassName`, `style`, `textProps`, or `size`.
 
-It supports an optional `startAccessory`, string or node `children`, and the end slot described above. The root matches `ButtonBase` (`accessibilityRole="button"`, `accessibilityState.disabled` when `isDisabled` is true)—use `accessibilityLabel` or `accessibilityLabelledBy` when the visible label is not enough for assistive technologies.
+The main label comes from **`placeholder`** (always required) or **`value`**: when `value` is `undefined` or `null`, **`placeholder`** is rendered as the label passed to `ButtonBase`; otherwise **`value`** is rendered as a string. Only `undefined` and `null` mean “show placeholder”; an empty string `""` still renders as the selected label.
+
+It supports an optional `startAccessory`, and the end slot described above. The root matches `ButtonBase` (`accessibilityRole="button"`, `accessibilityState.disabled` when `isDisabled` is true)—use `accessibilityLabel` or `accessibilityHint` when the visible label is not enough for assistive technologies.
 
 ```tsx
 import {
@@ -10,24 +12,22 @@ import {
   SelectButtonEndArrow,
 } from '@metamask/design-system-react-native';
 
-<SelectButton endArrowDirection={SelectButtonEndArrow.Down} onPress={() => {}}>
-  Select an option
-</SelectButton>;
+<SelectButton placeholder="Select an option" onPress={() => {}} />;
 ```
 
 ## Props
 
-Shared props live in `@metamask/design-system-shared` as `SelectButtonPropsShared` (including `variant`). The React Native props type is that contract plus all `ButtonBase` props except `endIconName`, `endIconProps`, and `disabled` (those are driven by `endArrowDirection` / `endArrowDirectionIconProps` and `isDisabled`). See `ButtonBase` for `size`, `isLoading`, `isFullWidth`, and other options.
+Shared props live in `@metamask/design-system-shared` as `SelectButtonPropsShared` (including `placeholder`, `value`, and `variant`). The React Native props type is that contract plus all `ButtonBase` props except `children`, `endIconName`, `endIconProps`, and `disabled` (`children` is computed from `placeholder` / `value`; trailing icons come from `endArrowDirection` (default **down** when applicable), `hideEndArrow`, and `endArrowDirectionIconProps`; use `isDisabled`). See `ButtonBase` for `size`, `isLoading`, `isFullWidth`, and other options.
 
 **Note:** `SelectButtonVariant.Primary` matches **ButtonSecondary** visuals (muted row with border), not `ButtonPrimary`. `Secondary` and `Tertiary` match **ButtonTertiary** row styling; `Tertiary` adds alternative text and trailing-arrow icon colors.
 
-### `children`
+### `placeholder`
 
-The label content: a string (styled with `textProps`) or any `ReactNode`.
+Label text shown when `value` is `undefined` or `null`.
 
-| TYPE                  | REQUIRED | DEFAULT |
-| --------------------- | -------- | ------- |
-| `ReactNode \| string` | Yes      | N/A     |
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `string` | Yes      | N/A     |
 
 ```tsx
 import {
@@ -35,9 +35,33 @@ import {
   SelectButtonEndArrow,
 } from '@metamask/design-system-react-native';
 
-<SelectButton endArrowDirection={SelectButtonEndArrow.Down} onPress={() => {}}>
-  Network
-</SelectButton>;
+<SelectButton
+  placeholder="Network"
+  endArrowDirection={SelectButtonEndArrow.Down}
+  onPress={() => {}}
+/>;
+```
+
+### `value`
+
+Optional selected label string. When set to a non-null string, it is rendered instead of `placeholder` (styled with `textProps` like other string labels).
+
+| TYPE             | REQUIRED | DEFAULT     |
+| ---------------- | -------- | ----------- |
+| `string \| null` | No       | `undefined` |
+
+```tsx
+import {
+  SelectButton,
+  SelectButtonEndArrow,
+} from '@metamask/design-system-react-native';
+
+<SelectButton
+  placeholder="Select network"
+  value="Ethereum Mainnet"
+  endArrowDirection={SelectButtonEndArrow.Down}
+  onPress={() => {}}
+/>;
 ```
 
 ### `variant`
@@ -63,16 +87,15 @@ import {
 
 <SelectButton
   variant={SelectButtonVariant.Secondary}
+  placeholder="Secondary row"
   endArrowDirection={SelectButtonEndArrow.Down}
   onPress={() => {}}
->
-  Secondary row
-</SelectButton>;
+/>;
 ```
 
 ### `endArrowDirection`
 
-When set, shows the trailing arrow icon. Maps to `IconName.ArrowUp`, `ArrowDown`, `ArrowLeft`, or `ArrowRight`. When `endArrowDirection` is omitted, no arrow is rendered; use `endAccessory` for a custom trailing node instead. If both `endArrowDirection` and `endAccessory` are passed, `endArrowDirection` wins and `endAccessory` is ignored.
+Maps to the trailing arrow `Icon`: `IconName.ArrowUp`, `ArrowDown`, `ArrowLeft`, or `ArrowRight`. When omitted and **`endAccessory`** is not used, the arrow defaults to **down**. When omitted and **`endAccessory`** is set, the accessory renders instead of the arrow. If both `endArrowDirection` and `endAccessory` are passed, `endArrowDirection` wins and `endAccessory` is ignored. Use **`hideEndArrow`** to suppress the arrow regardless.
 
 Available values:
 
@@ -81,9 +104,9 @@ Available values:
 - `SelectButtonEndArrow.Left`
 - `SelectButtonEndArrow.Right`
 
-| TYPE                   | REQUIRED | DEFAULT     |
-| ---------------------- | -------- | ----------- |
-| `SelectButtonEndArrow` | No       | `undefined` |
+| TYPE                   | REQUIRED | DEFAULT                         |
+| ---------------------- | -------- | ------------------------------- |
+| `SelectButtonEndArrow` | No       | `down` (when no `endAccessory`) |
 
 ```tsx
 import {
@@ -91,14 +114,24 @@ import {
   SelectButtonEndArrow,
 } from '@metamask/design-system-react-native';
 
-<SelectButton endArrowDirection={SelectButtonEndArrow.Right} onPress={() => {}}>
-  Navigate
-</SelectButton>;
+<SelectButton
+  placeholder="Navigate"
+  endArrowDirection={SelectButtonEndArrow.Right}
+  onPress={() => {}}
+/>;
 ```
+
+### `hideEndArrow`
+
+When `true`, the trailing arrow is not rendered. `endAccessory` may still render.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ### `endAccessory`
 
-Optional node at the end of the row when `endArrowDirection` is omitted (for example a custom icon or badge). Not rendered when `endArrowDirection` is set.
+Optional node at the end of the row when no trailing arrow is shown: omit `endArrowDirection` and do not rely on the default arrow, or set `hideEndArrow`. Not rendered when an arrow is shown from `endArrowDirection` (including the default **down**).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -114,10 +147,9 @@ import {
 
 <SelectButton
   onPress={() => {}}
+  placeholder="With custom end"
   endAccessory={<Icon name={IconName.Close} size={IconSize.Sm} />}
->
-  With custom end
-</SelectButton>;
+/>;
 ```
 
 ### `startAccessory`
@@ -140,15 +172,14 @@ import {
 <SelectButton
   endArrowDirection={SelectButtonEndArrow.Down}
   onPress={() => {}}
+  placeholder="Search"
   startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
->
-  Search
-</SelectButton>;
+/>;
 ```
 
 ### `textProps`
 
-Optional props passed to `Text` when `children` is a string.
+Optional props passed to `Text` when the rendered label is a string.
 
 | TYPE                                   | REQUIRED | DEFAULT     |
 | -------------------------------------- | -------- | ----------- |
@@ -165,15 +196,14 @@ import {
 <SelectButton
   endArrowDirection={SelectButtonEndArrow.Down}
   onPress={() => {}}
+  placeholder="Styled label"
   textProps={{ variant: TextVariant.BodySm, color: TextColor.TextAlternative }}
->
-  Styled label
-</SelectButton>;
+/>;
 ```
 
 ### `endArrowDirectionIconProps`
 
-Optional props forwarded to the trailing `Icon` when `endArrowDirection` is set, except `name` (always derived from `endArrowDirection`).
+Optional props forwarded to the trailing `Icon` when a trailing arrow is shown (including the default **down**), except `name` (always derived from the resolved direction).
 
 | TYPE                               | REQUIRED | DEFAULT     |
 | ---------------------------------- | -------- | ----------- |
@@ -189,10 +219,9 @@ import {
 <SelectButton
   endArrowDirection={SelectButtonEndArrow.Down}
   onPress={() => {}}
+  placeholder="Compact arrow"
   endArrowDirectionIconProps={{ size: IconSize.Sm }}
->
-  Compact arrow
-</SelectButton>;
+/>;
 ```
 
 ### `isDisabled`
@@ -212,10 +241,9 @@ import {
 <SelectButton
   endArrowDirection={SelectButtonEndArrow.Down}
   onPress={() => {}}
+  placeholder="Disabled"
   isDisabled
->
-  Disabled
-</SelectButton>;
+/>;
 ```
 
 ### `twClassName`
@@ -233,14 +261,10 @@ Use the `twClassName` prop to add Tailwind CSS classes to the root row. These cl
 import { SelectButton } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<SelectButton onPress={() => {}} twClassName="mt-4">
-  With margin
-</SelectButton>
+<SelectButton onPress={() => {}} placeholder="With margin" twClassName="mt-4" />
 
 // Override default styles
-<SelectButton onPress={() => {}} twClassName="px-6">
-  Wider horizontal padding
-</SelectButton>
+<SelectButton onPress={() => {}} placeholder="Wider horizontal padding" twClassName="px-6" />
 ```
 
 ### `style`
@@ -261,10 +285,9 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   return (
     <SelectButton
       onPress={() => {}}
+      placeholder="Conditional styling"
       style={tw.style('bg-transparent', isActive && 'bg-muted')}
-    >
-      Conditional styling
-    </SelectButton>
+    />
   );
 };
 ```

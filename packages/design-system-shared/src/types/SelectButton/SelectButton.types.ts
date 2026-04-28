@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react';
 
-import type { TextOrChildrenPropsShared } from '../TextOrChildren';
-
 /**
  * SelectButton — trailing arrow direction (maps to platform arrow icons).
  * Convert from enum to const object (ADR-0003).
@@ -30,7 +28,15 @@ export type SelectButtonVariant =
 /**
  * SelectButton component shared props (ADR-0004).
  */
-export type SelectButtonPropsShared = TextOrChildrenPropsShared & {
+export type SelectButtonPropsShared = {
+  /**
+   * Label shown when `value` is `undefined` or `null`. Only those two are treated as “no selection”; other falsy values (for example `""`) still render as `value`.
+   */
+  placeholder: string;
+  /**
+   * Selected label text. When `undefined` or `null`, `placeholder` is rendered instead.
+   */
+  value?: string | null;
   /**
    * Visual variant: `primary` matches ButtonSecondary; `secondary` and `tertiary` match ButtonTertiary row styling; `tertiary` uses alternative text and trailing arrow icon color.
    *
@@ -42,12 +48,22 @@ export type SelectButtonPropsShared = TextOrChildrenPropsShared & {
    */
   startAccessory?: ReactNode;
   /**
-   * When set, the mapped trailing arrow icon is shown at the end of the row.
-   * When omitted, use `endAccessory` for a custom trailing node instead.
+   * Maps to the trailing arrow `Icon` at the end of the row.
+   * Defaults to `down` when neither `hideEndArrow` nor `endAccessory` is used.
+   * When `endAccessory` is passed and this prop is omitted, `endAccessory` is shown instead of the arrow.
+   * When both are passed, `endArrowDirection` takes precedence and `endAccessory` is ignored.
+   *
+   * @default down (when no `endAccessory`)
    */
   endArrowDirection?: SelectButtonEndArrow;
   /**
-   * Optional node at the end of the row when `endArrowDirection` is omitted (for example a custom icon or badge).
+   * When `true`, the trailing arrow is not rendered (`endAccessory` may still render).
+   *
+   * @default false
+   */
+  hideEndArrow?: boolean;
+  /**
+   * Optional node at the end of the row when no trailing arrow is shown (for example a custom icon or badge).
    */
   endAccessory?: ReactNode;
   /**

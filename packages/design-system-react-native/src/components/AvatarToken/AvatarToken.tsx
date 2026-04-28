@@ -49,7 +49,7 @@ export const AvatarToken = ({
           height={'100%'}
           {...imageOrSvgProps}
           imageProps={{
-            resizeMode: 'contain',
+            resizeMode: 'cover',
             ...imageOrSvgProps?.imageProps,
           }}
           onImageError={onImageErrorHandler}

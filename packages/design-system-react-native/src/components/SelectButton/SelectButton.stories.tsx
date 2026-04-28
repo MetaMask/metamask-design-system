@@ -31,7 +31,13 @@ const meta: Meta<SelectButtonProps> = {
     isDisabled: {
       control: 'boolean',
     },
+    hideEndArrow: {
+      control: 'boolean',
+    },
     twClassName: {
+      control: 'text',
+    },
+    placeholder: {
       control: 'text',
     },
   },
@@ -55,7 +61,7 @@ type Story = StoryObj<SelectButtonProps>;
 
 export const Default: Story = {
   args: {
-    children: 'Select an option',
+    placeholder: 'Select an option',
     variant: SelectButtonVariant.Primary,
     endArrowDirection: SelectButtonEndArrow.Down,
     isDisabled: false,
@@ -75,10 +81,9 @@ export const StartAccessory: Story = {
       <SelectButton
         onPress={noopPress}
         endArrowDirection={SelectButtonEndArrow.Down}
+        placeholder="With start accessory"
         startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
-      >
-        With start accessory
-      </SelectButton>
+      />
     </SelectButtonStoryWrapper>
   ),
 };
@@ -97,9 +102,8 @@ export const EndArrow: Story = {
           endArrowDirection={value}
           testID={`select-button-end-${key}`}
           onPress={noopPress}
-        >
-          {`End arrow: ${key}`}
-        </SelectButton>
+          placeholder={`End arrow: ${key}`}
+        />
       ))}
     </SelectButtonStoryWrapper>
   ),
@@ -111,13 +115,12 @@ export const TextProps: Story = {
       <SelectButton
         onPress={noopPress}
         endArrowDirection={SelectButtonEndArrow.Down}
+        placeholder="Custom text variant and color"
         textProps={{
           variant: TextVariant.BodySm,
           color: TextColor.TextAlternative,
         }}
-      >
-        Custom text variant and color
-      </SelectButton>
+      />
     </SelectButtonStoryWrapper>
   ),
 };
@@ -128,17 +131,15 @@ export const EndArrowDirectionIconProps: Story = {
       <SelectButton
         onPress={noopPress}
         endArrowDirection={SelectButtonEndArrow.Down}
+        placeholder="Small arrow"
         endArrowDirectionIconProps={{ size: IconSize.Sm }}
-      >
-        Small arrow
-      </SelectButton>
+      />
       <SelectButton
         onPress={noopPress}
         endArrowDirection={SelectButtonEndArrow.Down}
+        placeholder="Large arrow"
         endArrowDirectionIconProps={{ size: IconSize.Lg }}
-      >
-        Large arrow
-      </SelectButton>
+      />
     </SelectButtonStoryWrapper>
   ),
 };
@@ -149,16 +150,14 @@ export const IsDisabled: Story = {
       <SelectButton
         onPress={noopPress}
         endArrowDirection={SelectButtonEndArrow.Down}
-      >
-        Enabled
-      </SelectButton>
+        placeholder="Enabled"
+      />
       <SelectButton
         onPress={noopPress}
         endArrowDirection={SelectButtonEndArrow.Down}
+        placeholder="Disabled"
         isDisabled
-      >
-        Disabled
-      </SelectButton>
+      />
     </SelectButtonStoryWrapper>
   ),
 };
@@ -168,10 +167,9 @@ export const EndAccessory: Story = {
     <SelectButtonStoryWrapper style={{ gap: 16 }}>
       <SelectButton
         onPress={noopPress}
+        placeholder="Custom trailing content"
         endAccessory={<Icon name={IconName.Close} size={IconSize.Sm} />}
-      >
-        Custom trailing content
-      </SelectButton>
+      />
     </SelectButtonStoryWrapper>
   ),
 };
@@ -183,23 +181,20 @@ export const Variants: Story = {
         onPress={noopPress}
         variant={SelectButtonVariant.Primary}
         endArrowDirection={SelectButtonEndArrow.Down}
-      >
-        Primary (ButtonSecondary look)
-      </SelectButton>
+        placeholder="Primary (ButtonSecondary look)"
+      />
       <SelectButton
         onPress={noopPress}
         variant={SelectButtonVariant.Secondary}
         endArrowDirection={SelectButtonEndArrow.Down}
-      >
-        Secondary (ButtonTertiary look)
-      </SelectButton>
+        placeholder="Secondary (ButtonTertiary look)"
+      />
       <SelectButton
         onPress={noopPress}
         variant={SelectButtonVariant.Tertiary}
         endArrowDirection={SelectButtonEndArrow.Down}
-      >
-        Tertiary (alternative text)
-      </SelectButton>
+        placeholder="Tertiary (alternative text)"
+      />
     </SelectButtonStoryWrapper>
   ),
 };

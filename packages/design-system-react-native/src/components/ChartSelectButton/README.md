@@ -19,9 +19,8 @@ import {
   <ChartSelectButton
     endArrowDirection={SelectButtonEndArrow.Down}
     onPress={() => {}}
-  >
-    Range
-  </ChartSelectButton>
+    placeholder="Range"
+  />
 </SegmentGroup>;
 ```
 

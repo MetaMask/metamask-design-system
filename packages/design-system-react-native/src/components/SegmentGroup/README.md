@@ -1,13 +1,16 @@
 # SegmentGroup
 
-`SegmentGroup` is a **controlled-only** row container for `SegmentButton` children. It provides:
+`SegmentGroup` is a **controlled-only** horizontal `ScrollView` for `SegmentButton` children. It provides:
 
 - **`value` + `onChange`** — parent owns which segment is active; only one `SegmentButton` with a matching `value` appears selected.
-- **Layout** — horizontal row, `items-center`, and **12px gap** between children (`Box` `gap={3}` / `gap-3` in the preset).
+- **Layout** — scroll content uses a horizontal row, `items-center`, and **12px gap** between children (`gap-3` in the preset), applied via `contentContainerStyle`.
+- **Scrolling** — `horizontal` with **`showsHorizontalScrollIndicator={false}`** so many segments can overflow and scroll off-screen.
 - **Optional `variant`** — forwarded to participating `SegmentButton`s when a child omits its own `variant`.
-- **`accessibilityRole="tablist"`** on the container.
+- **`accessibilityRole="tablist"`** on the root `ScrollView`.
 
-Other nodes (for example `SelectButton`) can sit beside segments for layout; they do **not** read group context unless they opt in later.
+Other nodes (for example `SelectButton`) can sit beside segments in the scroll row; they do **not** read group context unless they opt in later.
+
+The React Native props type extends **`ScrollViewProps`** (with `horizontal` and `showsHorizontalScrollIndicator` fixed by the component). Use **`style`** for the scroll viewport (defaults include `self-stretch`) and **`contentContainerStyle`** for extra spacing on the row of segments. Optional **`twClassName`** merges into `contentContainerStyle` after the default row layout.
 
 ```tsx
 import { useState } from 'react';
@@ -37,7 +40,7 @@ export const Example = () => {
 
 ## Props
 
-Shared props: `SegmentGroupPropsShared` (`value`, `onChange`, optional `variant`) in `@metamask/design-system-shared`. The React Native type adds `Box` props except `gap` and `flexDirection` (fixed by the component).
+Shared props: `SegmentGroupPropsShared` (`value`, `onChange`, optional `variant`) in `@metamask/design-system-shared`. The React Native type adds **`ScrollView`** props except `horizontal` and `showsHorizontalScrollIndicator`, plus optional **`twClassName`** on the scroll content.
 
 ### `value` / `onChange`
 
@@ -52,7 +55,7 @@ Default visual variant for child `SegmentButton`s that do not set `variant` them
 
 ## `SegmentButton` inside a group
 
-Give each segment a stable **`value`** string. When `value` is set and the button is under `SegmentGroup`, **`isSelected` is ignored**; selection comes from `SegmentGroup`’s `value`.
+Give each segment a stable **`value`** string (segment id) and **`children`** for the visible text. When `value` is set and the button is under `SegmentGroup`, **`isSelected` is ignored**; selection comes from `SegmentGroup`’s `value`.
 
 ## References
 

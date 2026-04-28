@@ -58,6 +58,7 @@ The size of the button.
 
 Available sizes:
 
+- `ButtonBaseSize.Xs` (~20px height, `h-5` / 1.25rem at default root font size)
 - `ButtonBaseSize.Sm` (32px height)
 - `ButtonBaseSize.Md` (40px height)
 - `ButtonBaseSize.Lg` (48px height)

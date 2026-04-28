@@ -22,9 +22,8 @@ import {
   <FilterSelectButton
     endArrowDirection={SelectButtonEndArrow.Down}
     onPress={() => {}}
-  >
-    Filter
-  </FilterSelectButton>
+    placeholder="Filter"
+  />
 </SegmentGroup>;
 ```
 

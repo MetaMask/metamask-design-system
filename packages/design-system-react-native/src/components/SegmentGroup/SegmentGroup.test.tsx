@@ -7,6 +7,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { fireEvent, render } from '@testing-library/react-native';
 import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { TWCLASSMAP_BOX_GAP } from '../Box/Box.constants';
 import { SegmentButton } from '../SegmentButton';
@@ -38,7 +39,7 @@ describe('SegmentGroup', () => {
     expect(getByText('A')).toBeOnTheScreen();
   });
 
-  it('applies row layout, center alignment, and gap between children', () => {
+  it('applies row layout, center alignment, and gap between children via contentContainerStyle', () => {
     const { getByTestId } = render(
       <SegmentGroup value="a" onChange={noopPress} testID={GROUP_TEST_ID}>
         <SegmentButton value="a" onPress={noopPress}>
@@ -47,14 +48,20 @@ describe('SegmentGroup', () => {
       </SegmentGroup>,
     );
 
-    expect(getByTestId(GROUP_TEST_ID)).toHaveStyle(
-      tw.style(
-        'flex',
-        BoxFlexDirection.Row,
-        BoxAlignItems.Center,
-        TWCLASSMAP_BOX_GAP[3],
-      ),
+    const scroll = getByTestId(GROUP_TEST_ID);
+    expect(scroll.props.horizontal).toBe(true);
+    expect(scroll.props.showsHorizontalScrollIndicator).toBe(false);
+
+    const expectedContent = tw.style(
+      'flex',
+      BoxFlexDirection.Row,
+      BoxAlignItems.Center,
+      TWCLASSMAP_BOX_GAP[3],
     );
+
+    expect(
+      StyleSheet.flatten(scroll.props.contentContainerStyle),
+    ).toStrictEqual(StyleSheet.flatten(expectedContent));
   });
 
   it('exposes tablist role on the container', () => {
@@ -141,9 +148,8 @@ describe('SegmentGroup', () => {
         <SelectButton
           endArrowDirection={SelectButtonEndArrow.Down}
           onPress={noopPress}
-        >
-          More
-        </SelectButton>
+          placeholder="More"
+        />
       </SegmentGroup>,
     );
 

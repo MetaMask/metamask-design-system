@@ -7,9 +7,12 @@ import type { IconProps } from '../Icon/Icon.types';
  * SelectButton component props.
  */
 export type SelectButtonProps = SelectButtonPropsShared &
-  Omit<ButtonBaseProps, 'endIconName' | 'endIconProps' | 'disabled'> & {
+  Omit<
+    ButtonBaseProps,
+    'children' | 'endIconName' | 'endIconProps' | 'disabled'
+  > & {
     /**
-     * Optional props passed to the trailing arrow `Icon` when `endArrowDirection` is set (excluding `name`, which is derived from `endArrowDirection`).
+     * Optional props passed to the trailing arrow `Icon` when a trailing arrow is shown (excluding `name`, which is derived from the resolved direction).
      */
     endArrowDirectionIconProps?: Partial<Omit<IconProps, 'name'>>;
   };

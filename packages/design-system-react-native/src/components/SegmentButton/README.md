@@ -4,7 +4,7 @@ SegmentButton is a thin wrapper around `ButtonBase`: same layout, press animatio
 
 For **single selection across segments**, prefer **`SegmentGroup`** with a `value` on each `SegmentButton` (controlled `value` / `onChange` on the group). Standalone rows can still toggle **`isSelected`** from the parent when no `value` is used.
 
-Shared props (`value`, `variant`, `isSelected`) live in `@metamask/design-system-shared` as `SegmentButtonPropsShared`. The React Native type adds all `ButtonBase` props.
+Shared props (`value`, `variant`, `isSelected`) live in `@metamask/design-system-shared` as `SegmentButtonPropsShared`. The React Native type intersects with **`ButtonBase`** props; pass visible text (or other content **`ButtonBase`** supports) as **`children`**.
 
 ## Visual map
 
@@ -28,14 +28,6 @@ import {
 
 ## Props
 
-### `children`
-
-Label content: a string (styled with default `textProps` plus your overrides) or any `ReactNode`.
-
-| TYPE                  | REQUIRED | DEFAULT |
-| --------------------- | -------- | ------- |
-| `ReactNode \| string` | Yes      | N/A     |
-
 ### `variant`
 
 | TYPE                   | REQUIRED | DEFAULT   |
@@ -55,7 +47,7 @@ Ignored when the button is inside **`SegmentGroup`** and **`value`** is set (sel
 
 ### `value`
 
-Stable segment id when used under **`SegmentGroup`**. Must match the group’s controlled `value` for the selected visual.
+Stable segment **id** when used under **`SegmentGroup`** (distinct from visible **`children`**). Must match the group’s controlled `value` for the selected visual.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |

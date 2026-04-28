@@ -17,11 +17,13 @@ describe('FilterSelectButton', () => {
     tw = result.current;
   });
 
-  it('renders string children', () => {
+  it('renders placeholder label', () => {
     const { getByText } = render(
-      <FilterSelectButton testID={ROOT_TEST_ID} onPress={() => undefined}>
-        Filter
-      </FilterSelectButton>,
+      <FilterSelectButton
+        testID={ROOT_TEST_ID}
+        onPress={() => undefined}
+        placeholder="Filter"
+      />,
     );
 
     expect(getByText('Filter')).toHaveTextContent('Filter');
@@ -29,9 +31,11 @@ describe('FilterSelectButton', () => {
 
   it('uses 40px button height', () => {
     const { getByTestId } = render(
-      <FilterSelectButton testID={ROOT_TEST_ID} onPress={() => undefined}>
-        Filter
-      </FilterSelectButton>,
+      <FilterSelectButton
+        testID={ROOT_TEST_ID}
+        onPress={() => undefined}
+        placeholder="Filter"
+      />,
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`h-10`);
@@ -39,9 +43,11 @@ describe('FilterSelectButton', () => {
 
   it('uses primary select row visuals', () => {
     const { getByTestId } = render(
-      <FilterSelectButton testID={ROOT_TEST_ID} onPress={() => undefined}>
-        Filter
-      </FilterSelectButton>,
+      <FilterSelectButton
+        testID={ROOT_TEST_ID}
+        onPress={() => undefined}
+        placeholder="Filter"
+      />,
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-muted`);
@@ -54,9 +60,8 @@ describe('FilterSelectButton', () => {
         testID={ROOT_TEST_ID}
         onPress={onPress}
         endArrowDirection={SelectButtonEndArrow.Down}
-      >
-        Filter
-      </FilterSelectButton>,
+        placeholder="Filter"
+      />,
     );
 
     fireEvent.press(getByTestId(ROOT_TEST_ID));

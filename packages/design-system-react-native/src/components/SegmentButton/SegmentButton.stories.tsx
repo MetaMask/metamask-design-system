@@ -69,31 +69,27 @@ export const Variant: Story = {
       <SegmentButton
         variant={SegmentButtonVariant.Primary}
         isSelected
+        children="Primary selected"
         onPress={noopPress}
-      >
-        Primary / selected
-      </SegmentButton>
+      />
       <SegmentButton
         variant={SegmentButtonVariant.Primary}
         isSelected={false}
+        children="Primary unselected"
         onPress={noopPress}
-      >
-        Primary / unselected
-      </SegmentButton>
+      />
       <SegmentButton
         variant={SegmentButtonVariant.Secondary}
         isSelected
+        children="Secondary selected"
         onPress={noopPress}
-      >
-        Secondary / selected
-      </SegmentButton>
+      />
       <SegmentButton
         variant={SegmentButtonVariant.Secondary}
         isSelected={false}
+        children="Secondary unselected"
         onPress={noopPress}
-      >
-        Secondary / unselected
-      </SegmentButton>
+      />
     </SegmentButtonStoryWrapper>
   ),
 };
@@ -104,17 +100,15 @@ export const IsSelected: Story = {
       <SegmentButton
         variant={SegmentButtonVariant.Primary}
         isSelected
+        children="Selected"
         onPress={noopPress}
-      >
-        Selected
-      </SegmentButton>
+      />
       <SegmentButton
         variant={SegmentButtonVariant.Primary}
         isSelected={false}
+        children="Unselected"
         onPress={noopPress}
-      >
-        Unselected
-      </SegmentButton>
+      />
     </SegmentButtonStoryWrapper>
   ),
 };
@@ -122,16 +116,17 @@ export const IsSelected: Story = {
 export const IsDisabled: Story = {
   render: () => (
     <SegmentButtonStoryWrapper>
-      <SegmentButton variant={SegmentButtonVariant.Primary} onPress={noopPress}>
-        Enabled
-      </SegmentButton>
+      <SegmentButton
+        variant={SegmentButtonVariant.Primary}
+        children="Enabled"
+        onPress={noopPress}
+      />
       <SegmentButton
         variant={SegmentButtonVariant.Primary}
         isDisabled
+        children="Disabled"
         onPress={noopPress}
-      >
-        Disabled
-      </SegmentButton>
+      />
     </SegmentButtonStoryWrapper>
   ),
 };
@@ -143,10 +138,9 @@ export const IsLoading: Story = {
         variant={SegmentButtonVariant.Primary}
         isSelected
         isLoading
+        children="Loading"
         onPress={noopPress}
-      >
-        Loading
-      </SegmentButton>
+      />
     </SegmentButtonStoryWrapper>
   ),
 };
@@ -159,18 +153,16 @@ export const StartAccessory: Story = {
         isSelected={false}
         startIconName={IconName.Search}
         startIconProps={{ testID: 'segment-start-icon' }}
+        children="With icon"
         onPress={noopPress}
-      >
-        With icon
-      </SegmentButton>
+      />
       <SegmentButton
         variant={SegmentButtonVariant.Primary}
         isSelected={false}
         startAccessory={<Icon name={IconName.Wallet} size={IconSize.Sm} />}
+        children="Custom start"
         onPress={noopPress}
-      >
-        Custom start
-      </SegmentButton>
+      />
     </SegmentButtonStoryWrapper>
   ),
 };

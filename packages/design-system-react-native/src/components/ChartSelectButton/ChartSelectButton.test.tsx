@@ -17,11 +17,13 @@ describe('ChartSelectButton', () => {
     tw = result.current;
   });
 
-  it('renders string children', () => {
+  it('renders placeholder label', () => {
     const { getByText } = render(
-      <ChartSelectButton testID={ROOT_TEST_ID} onPress={() => undefined}>
-        Range
-      </ChartSelectButton>,
+      <ChartSelectButton
+        testID={ROOT_TEST_ID}
+        onPress={() => undefined}
+        placeholder="Range"
+      />,
     );
 
     expect(getByText('Range')).toHaveTextContent('Range');
@@ -29,9 +31,11 @@ describe('ChartSelectButton', () => {
 
   it('uses 32px button height', () => {
     const { getByTestId } = render(
-      <ChartSelectButton testID={ROOT_TEST_ID} onPress={() => undefined}>
-        Range
-      </ChartSelectButton>,
+      <ChartSelectButton
+        testID={ROOT_TEST_ID}
+        onPress={() => undefined}
+        placeholder="Range"
+      />,
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`h-8`);
@@ -39,9 +43,11 @@ describe('ChartSelectButton', () => {
 
   it('uses tertiary select row visuals', () => {
     const { getByTestId } = render(
-      <ChartSelectButton testID={ROOT_TEST_ID} onPress={() => undefined}>
-        Range
-      </ChartSelectButton>,
+      <ChartSelectButton
+        testID={ROOT_TEST_ID}
+        onPress={() => undefined}
+        placeholder="Range"
+      />,
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-transparent`);
@@ -54,9 +60,8 @@ describe('ChartSelectButton', () => {
         testID={ROOT_TEST_ID}
         onPress={onPress}
         endArrowDirection={SelectButtonEndArrow.Down}
-      >
-        Range
-      </ChartSelectButton>,
+        placeholder="Range"
+      />,
     );
 
     fireEvent.press(getByTestId(ROOT_TEST_ID));

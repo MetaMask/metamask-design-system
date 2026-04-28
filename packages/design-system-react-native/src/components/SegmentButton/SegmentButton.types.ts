@@ -5,4 +5,7 @@ import type { ButtonBaseProps } from '../ButtonBase/ButtonBase.types';
 /**
  * SegmentButton component props.
  */
-export type SegmentButtonProps = SegmentButtonPropsShared & ButtonBaseProps;
+export type SegmentButtonProps = SegmentButtonPropsShared &
+  Omit<ButtonBaseProps, 'onPress'> & {
+    onPress?: ButtonBaseProps['onPress'];
+  };

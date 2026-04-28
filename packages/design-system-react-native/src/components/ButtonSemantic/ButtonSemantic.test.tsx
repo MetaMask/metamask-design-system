@@ -40,22 +40,24 @@ describe('ButtonSemantic', () => {
       expect(getByText('Danger Button')).toBeDefined();
     });
 
-    it.each([ButtonBaseSize.Sm, ButtonBaseSize.Md, ButtonBaseSize.Lg])(
-      'renders with %s size',
-      (size) => {
-        const { getByText } = render(
-          <ButtonSemantic
-            severity={ButtonSemanticSeverity.Success}
-            size={size}
-            onPress={mockOnPress}
-          >
-            Button
-          </ButtonSemantic>,
-        );
+    it.each([
+      ButtonBaseSize.Xs,
+      ButtonBaseSize.Sm,
+      ButtonBaseSize.Md,
+      ButtonBaseSize.Lg,
+    ])('renders with %s size', (size) => {
+      const { getByText } = render(
+        <ButtonSemantic
+          severity={ButtonSemanticSeverity.Success}
+          size={size}
+          onPress={mockOnPress}
+        >
+          Button
+        </ButtonSemantic>,
+      );
 
-        expect(getByText('Button')).toBeDefined();
-      },
-    );
+      expect(getByText('Button')).toBeDefined();
+    });
 
     it('uses large size by default', () => {
       const { getByText } = render(

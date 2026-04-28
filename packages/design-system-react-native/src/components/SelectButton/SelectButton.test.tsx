@@ -27,11 +27,40 @@ describe('SelectButton', () => {
   });
 
   describe('label slot', () => {
-    it('renders string children', () => {
+    it('renders placeholder when value is omitted', () => {
       const { getByText } = render(
-        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress}>
-          Select
-        </SelectButton>,
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Select"
+        />,
+      );
+
+      expect(getByText('Select')).toHaveTextContent('Select');
+    });
+
+    it('renders value when value is set', () => {
+      const { getByText, queryByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Select"
+          value="Ethereum"
+        />,
+      );
+
+      expect(getByText('Ethereum')).toHaveTextContent('Ethereum');
+      expect(queryByText('Select')).toBeNull();
+    });
+
+    it('renders placeholder when value is null', () => {
+      const { getByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Select"
+          value={null}
+        />,
       );
 
       expect(getByText('Select')).toHaveTextContent('Select');
@@ -39,9 +68,11 @@ describe('SelectButton', () => {
 
     it('exposes testID on the root pressable', () => {
       const { getByTestId } = render(
-        <SelectButton testID="custom-select-button" onPress={noopPress}>
-          Label
-        </SelectButton>,
+        <SelectButton
+          testID="custom-select-button"
+          onPress={noopPress}
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId('custom-select-button')).toBeOnTheScreen();
@@ -52,10 +83,9 @@ describe('SelectButton', () => {
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
+          placeholder="With accessory"
           startAccessory={<View testID="start-accessory" />}
-        >
-          With accessory
-        </SelectButton>,
+        />,
       );
 
       expect(getByTestId('start-accessory')).toBeOnTheScreen();
@@ -94,9 +124,8 @@ describe('SelectButton', () => {
             onPress={noopPress}
             endArrowDirection={endArrowDirection}
             endArrowDirectionIconProps={{ testID: 'end-arrow' }}
-          >
-            Label
-          </SelectButton>,
+            placeholder="Label"
+          />,
         );
 
         expect(getByTestId('end-arrow')).toHaveProp('name', iconName);
@@ -105,17 +134,53 @@ describe('SelectButton', () => {
   });
 
   describe('when endArrowDirection is omitted', () => {
+    it('defaults the trailing icon to ArrowDown', () => {
+      const { getByTestId } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          endArrowDirectionIconProps={{ testID: 'end-arrow' }}
+          placeholder="Label"
+        />,
+      );
+
+      expect(getByTestId('end-arrow')).toHaveProp(
+        'name',
+        MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME[
+          SelectButtonEndArrow.Down
+        ],
+      );
+    });
+  });
+
+  describe('when hideEndArrow is true', () => {
     it('does not render a trailing icon', () => {
       const { queryByTestId } = render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
+          hideEndArrow
           endArrowDirectionIconProps={{ testID: 'end-arrow' }}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
+      expect(queryByTestId('end-arrow')).toBeNull();
+    });
+
+    it('still renders endAccessory when provided', () => {
+      const { getByTestId, queryByTestId } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          hideEndArrow
+          endAccessory={<View testID="end-accessory" />}
+          endArrowDirectionIconProps={{ testID: 'end-arrow' }}
+          placeholder="Label"
+        />,
+      );
+
+      expect(getByTestId('end-accessory')).toBeOnTheScreen();
       expect(queryByTestId('end-arrow')).toBeNull();
     });
   });
@@ -127,9 +192,8 @@ describe('SelectButton', () => {
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           endAccessory={<View testID="end-accessory" />}
-        >
-          With end accessory
-        </SelectButton>,
+          placeholder="With end accessory"
+        />,
       );
 
       expect(getByTestId('end-accessory')).toBeOnTheScreen();
@@ -143,9 +207,8 @@ describe('SelectButton', () => {
           endArrowDirection={SelectButtonEndArrow.Down}
           endAccessory={<View testID="end-accessory" />}
           endArrowDirectionIconProps={{ testID: 'end-arrow' }}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId('end-arrow')).toHaveProp(
@@ -165,9 +228,8 @@ describe('SelectButton', () => {
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           variant={SelectButtonVariant.Primary}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-muted`);
@@ -179,9 +241,8 @@ describe('SelectButton', () => {
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           variant={SelectButtonVariant.Secondary}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-transparent`);
@@ -193,9 +254,8 @@ describe('SelectButton', () => {
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           variant={SelectButtonVariant.Tertiary}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-transparent`);
@@ -207,9 +267,8 @@ describe('SelectButton', () => {
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           variant={SelectButtonVariant.Tertiary}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByText('Label')).toHaveStyle(
@@ -225,9 +284,8 @@ describe('SelectButton', () => {
           variant={SelectButtonVariant.Tertiary}
           endArrowDirection={SelectButtonEndArrow.Down}
           endArrowDirectionIconProps={{ testID: 'end-arrow' }}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId('end-arrow')).toHaveStyle(
@@ -242,9 +300,11 @@ describe('SelectButton', () => {
   describe('root pressable styles', () => {
     it('inherits ButtonBase container presentation for default primary variant', () => {
       const { getByTestId } = render(
-        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress}>
-          Label
-        </SelectButton>,
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Label"
+        />,
       );
 
       const root = getByTestId(ROOT_TEST_ID);
@@ -254,9 +314,12 @@ describe('SelectButton', () => {
 
     it('applies disabled opacity when isDisabled is true', () => {
       const { getByTestId } = render(
-        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress} isDisabled>
-          Label
-        </SelectButton>,
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          isDisabled
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`opacity-50`);
@@ -264,9 +327,11 @@ describe('SelectButton', () => {
 
     it('does not apply disabled opacity when isDisabled is false', () => {
       const { getByTestId } = render(
-        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress}>
-          Label
-        </SelectButton>,
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).not.toHaveStyle(tw`opacity-50`);
@@ -278,9 +343,8 @@ describe('SelectButton', () => {
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           twClassName="mt-4"
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
@@ -294,9 +358,8 @@ describe('SelectButton', () => {
           onPress={noopPress}
           variant={SelectButtonVariant.Primary}
           twClassName={twClassName}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-2`);
@@ -311,9 +374,8 @@ describe('SelectButton', () => {
           onPress={noopPress}
           variant={SelectButtonVariant.Secondary}
           twClassName={twClassName}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-3`);
@@ -328,9 +390,8 @@ describe('SelectButton', () => {
           onPress={noopPress}
           variant={SelectButtonVariant.Tertiary}
           twClassName={twClassName}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-5`);
@@ -345,9 +406,8 @@ describe('SelectButton', () => {
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           style={customStyle}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ marginBottom: 20 });
@@ -359,9 +419,11 @@ describe('SelectButton', () => {
       const onPress = jest.fn();
 
       const { getByTestId } = render(
-        <SelectButton testID={ROOT_TEST_ID} onPress={onPress}>
-          Label
-        </SelectButton>,
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={onPress}
+          placeholder="Label"
+        />,
       );
 
       fireEvent.press(getByTestId(ROOT_TEST_ID));
@@ -375,9 +437,8 @@ describe('SelectButton', () => {
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           variant={SelectButtonVariant.Secondary}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       const root = getByTestId(ROOT_TEST_ID);
@@ -387,9 +448,11 @@ describe('SelectButton', () => {
 
     it('applies primary variant pressed background on pressIn', () => {
       const { getByTestId } = render(
-        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress}>
-          Label
-        </SelectButton>,
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Label"
+        />,
       );
 
       const root = getByTestId(ROOT_TEST_ID);
@@ -399,7 +462,7 @@ describe('SelectButton', () => {
 
     it('does not throw when onPress is omitted', () => {
       const { getByTestId } = render(
-        <SelectButton testID={ROOT_TEST_ID}>Label</SelectButton>,
+        <SelectButton testID={ROOT_TEST_ID} placeholder="Label" />,
       );
 
       expect(() => {
@@ -409,9 +472,7 @@ describe('SelectButton', () => {
 
     it('does not throw when isDisabled is true and onPress is omitted', () => {
       const { getByTestId } = render(
-        <SelectButton testID={ROOT_TEST_ID} isDisabled>
-          Label
-        </SelectButton>,
+        <SelectButton testID={ROOT_TEST_ID} isDisabled placeholder="Label" />,
       );
 
       expect(() => {
@@ -423,9 +484,12 @@ describe('SelectButton', () => {
       const onPress = jest.fn();
 
       const { getByTestId } = render(
-        <SelectButton testID={ROOT_TEST_ID} onPress={onPress} isDisabled>
-          Label
-        </SelectButton>,
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={onPress}
+          isDisabled
+          placeholder="Label"
+        />,
       );
 
       fireEvent.press(getByTestId(ROOT_TEST_ID));
@@ -437,9 +501,12 @@ describe('SelectButton', () => {
   describe('when isDisabled is true', () => {
     it('disables the root pressable', () => {
       const { getByTestId } = render(
-        <SelectButton testID={ROOT_TEST_ID} onPress={noopPress} isDisabled>
-          Label
-        </SelectButton>,
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          isDisabled
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toBeDisabled();
@@ -455,9 +522,8 @@ describe('SelectButton', () => {
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           hitSlop={hitSlop}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveProp('hitSlop', hitSlop);
@@ -475,9 +541,8 @@ describe('SelectButton', () => {
             testID: 'end-arrow',
             size: IconSize.Sm,
           }}
-        >
-          Label
-        </SelectButton>,
+          placeholder="Label"
+        />,
       );
 
       expect(getByTestId('end-arrow')).toHaveStyle(

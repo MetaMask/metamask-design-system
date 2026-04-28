@@ -25,21 +25,35 @@ describe('SegmentButton', () => {
     tw = result.current;
   });
 
-  it('renders string children', () => {
+  it('renders children text', () => {
     const { getByText } = render(
-      <SegmentButton testID={ROOT_TEST_ID} onPress={noopPress}>
-        Label
-      </SegmentButton>,
+      <SegmentButton
+        testID={ROOT_TEST_ID}
+        onPress={noopPress}
+        children="Label"
+      />,
     );
 
     expect(getByText('Label')).toHaveTextContent('Label');
   });
 
+  it('renders JSX children', () => {
+    const { getByText } = render(
+      <SegmentButton testID={ROOT_TEST_ID} onPress={noopPress}>
+        Child label
+      </SegmentButton>,
+    );
+
+    expect(getByText('Child label')).toHaveTextContent('Child label');
+  });
+
   it('exposes testID on the root pressable', () => {
     const { getByTestId } = render(
-      <SegmentButton testID="custom-segment" onPress={noopPress}>
-        A
-      </SegmentButton>,
+      <SegmentButton
+        testID="custom-segment"
+        onPress={noopPress}
+        children="A"
+      />,
     );
 
     expect(getByTestId('custom-segment')).toBeOnTheScreen();
@@ -53,9 +67,8 @@ describe('SegmentButton', () => {
           onPress={noopPress}
           variant={SegmentButtonVariant.Primary}
           isSelected
-        >
-          Label
-        </SegmentButton>,
+          children="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-icon-default`);
@@ -68,9 +81,8 @@ describe('SegmentButton', () => {
           onPress={noopPress}
           variant={SegmentButtonVariant.Primary}
           isSelected={false}
-        >
-          Label
-        </SegmentButton>,
+          children="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-muted`);
@@ -83,9 +95,8 @@ describe('SegmentButton', () => {
           onPress={noopPress}
           variant={SegmentButtonVariant.Secondary}
           isSelected
-        >
-          Label
-        </SegmentButton>,
+          children="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-muted`);
@@ -98,24 +109,22 @@ describe('SegmentButton', () => {
           onPress={noopPress}
           variant={SegmentButtonVariant.Secondary}
           isSelected={false}
-        >
-          Label
-        </SegmentButton>,
+          children="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-transparent`);
     });
 
-    it('secondary unselected applies alternative color to string label', () => {
+    it('secondary unselected applies alternative color to text children', () => {
       const { getByText } = render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           variant={SegmentButtonVariant.Secondary}
           isSelected={false}
-        >
-          Label
-        </SegmentButton>,
+          children="Label"
+        />,
       );
 
       expect(getByText('Label')).toHaveStyle(
@@ -132,9 +141,8 @@ describe('SegmentButton', () => {
           isSelected={false}
           startIconName={IconName.Search}
           startIconProps={{ testID: 'segment-icon' }}
-        >
-          Label
-        </SegmentButton>,
+          children="Label"
+        />,
       );
 
       expect(getByTestId('segment-icon')).toHaveStyle(
@@ -149,9 +157,12 @@ describe('SegmentButton', () => {
   describe('isDisabled', () => {
     it('applies disabled opacity when isDisabled is true', () => {
       const { getByTestId } = render(
-        <SegmentButton testID={ROOT_TEST_ID} onPress={noopPress} isDisabled>
-          Label
-        </SegmentButton>,
+        <SegmentButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          isDisabled
+          children="Label"
+        />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`opacity-50`);
@@ -169,9 +180,8 @@ describe('SegmentButton', () => {
         variant={SegmentButtonVariant.Primary}
         isSelected
         twClassName={twClassName}
-      >
-        Label
-      </SegmentButton>,
+        children="Label"
+      />,
     );
 
     const root = getByTestId(ROOT_TEST_ID);
@@ -190,9 +200,8 @@ describe('SegmentButton', () => {
         variant={SegmentButtonVariant.Primary}
         isSelected={false}
         twClassName={twClassName}
-      >
-        Label
-      </SegmentButton>,
+        children="Label"
+      />,
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-1`);
@@ -208,9 +217,8 @@ describe('SegmentButton', () => {
         variant={SegmentButtonVariant.Secondary}
         isSelected={false}
         twClassName={twClassName}
-      >
-        Label
-      </SegmentButton>,
+        children="Label"
+      />,
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-2`);
@@ -224,9 +232,8 @@ describe('SegmentButton', () => {
         onPress={noopPress}
         variant={SegmentButtonVariant.Primary}
         isSelected
-      >
-        Label
-      </SegmentButton>,
+        children="Label"
+      />,
     );
 
     const root = getByTestId(ROOT_TEST_ID);
@@ -241,9 +248,8 @@ describe('SegmentButton', () => {
         onPress={noopPress}
         variant={SegmentButtonVariant.Secondary}
         isSelected={false}
-      >
-        Label
-      </SegmentButton>,
+        children="Label"
+      />,
     );
 
     const root = getByTestId(ROOT_TEST_ID);
@@ -259,9 +265,8 @@ describe('SegmentButton', () => {
         variant={SegmentButtonVariant.Primary}
         isSelected
         isLoading
-      >
-        Label
-      </SegmentButton>,
+        children="Label"
+      />,
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-icon-default-pressed`);
@@ -275,9 +280,8 @@ describe('SegmentButton', () => {
         variant={SegmentButtonVariant.Primary}
         isSelected={false}
         isLoading
-      >
-        Label
-      </SegmentButton>,
+        children="Label"
+      />,
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-muted-pressed`);
@@ -291,9 +295,8 @@ describe('SegmentButton', () => {
         variant={SegmentButtonVariant.Secondary}
         isSelected={false}
         isLoading
-      >
-        Label
-      </SegmentButton>,
+        children="Label"
+      />,
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-pressed`);
@@ -308,20 +311,18 @@ describe('SegmentButton', () => {
         <SegmentGroup value="b" onChange={noopPress} testID="group">
           <SegmentButton
             value="a"
+            children="A"
             testID="seg-a"
             isSelected
             onPress={noopPress}
-          >
-            A
-          </SegmentButton>
+          />
           <SegmentButton
             value="b"
+            children="B"
             testID="seg-b"
             isSelected={false}
             onPress={noopPress}
-          >
-            B
-          </SegmentButton>
+          />
         </SegmentGroup>,
       );
 

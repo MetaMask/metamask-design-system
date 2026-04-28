@@ -1,9 +1,13 @@
 import type { SegmentGroupPropsShared } from '@metamask/design-system-shared';
-
-import type { BoxProps } from '../Box/Box.types';
+import type { ScrollViewProps } from 'react-native';
 
 /**
  * SegmentGroup component props.
  */
 export type SegmentGroupProps = SegmentGroupPropsShared &
-  Omit<BoxProps, 'gap' | 'flexDirection'>;
+  Omit<ScrollViewProps, 'horizontal' | 'showsHorizontalScrollIndicator'> & {
+    /**
+     * Optional twrnc classes merged into `contentContainerStyle` after the default row layout.
+     */
+    twClassName?: string;
+  };
