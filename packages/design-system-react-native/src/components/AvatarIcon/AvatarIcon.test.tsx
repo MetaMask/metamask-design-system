@@ -1,10 +1,13 @@
+import {
+  AvatarIconSeverity,
+  AvatarIconSize,
+  IconName,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { AvatarIconSeverity, AvatarIconSize } from '../../types';
-import { IconName } from '../Icon';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
 import { AvatarIcon } from './AvatarIcon';
