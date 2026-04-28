@@ -15,13 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Updated `AvatarIcon` type exports to use the shared const-object + string-union model used by `Icon` and `Box`; normal component usage is unchanged, so you can continue importing from `@metamask/design-system-react-native` and using `AvatarIconSize.Md` / `AvatarIconSeverity.Warning` as usual ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
-  - `AvatarIconSize` now reuses the shared avatar size definitions
-  - `AvatarIconSeverity` now uses ADR-0003 const-object + string-union typing instead of a local enum
-  - See [Migration Guide](./MIGRATION.md#from-version-0200-to-0210)
-- **BREAKING:** Updated `BadgeIcon` to use shared cross-platform prop types from `@metamask/design-system-shared`; the public API and normal usage are unchanged, so existing `iconName={IconName.*}` usage should continue to work as before ([#1010](https://github.com/MetaMask/metamask-design-system/pull/1010))
-  - Continue importing `BadgeIcon` from `@metamask/design-system-react-native`
-  - See [Migration Guide](./MIGRATION.md#from-version-0200-to-0210)
+- **BREAKING:** Updated `AvatarIcon` exports to use shared const-object + string-union types rather than local enum-based definitions, aligning React Native with the shared cross-platform type contracts ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react-native` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+- **BREAKING:** Updated `BadgeIcon` to use shared cross-platform prop types from `@metamask/design-system-shared`, aligning React Native with the shared platform contracts ([#1010](https://github.com/MetaMask/metamask-design-system/pull/1010))
+  - No migration required for typical usage; continue importing `BadgeIcon` from `@metamask/design-system-react-native` as before.
+  - Runtime behavior remains unchanged while the prop types move to the shared package.
 
 ## [0.20.0]
 
