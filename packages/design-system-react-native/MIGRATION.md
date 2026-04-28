@@ -2473,12 +2473,13 @@ The legacy `KeyValueRow` rendered the tooltip trigger **and** opened the modal i
 
 The following are no longer available. Remove the imports and refactor any code that branches on them.
 
-| Removed                                                                                                                                         | Migration                                                                                                                           |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `KeyValueRowFieldIconSides` (`LEFT` / `RIGHT` / `BOTH`)                                                                                         | Pass a node on `keyStartAccessory` / `keyEndAccessory` / `valueStartAccessory` / `valueEndAccessory` (both = set start **and** end) |
-| `KeyValueRowSectionAlignments`                                                                                                                  | Alignment is handled internally (key shrinks, value row is `flex-1 min-w-0 justify-end`). Drop the import                           |
-| `TooltipSizes`, `IconSizes`                                                                                                                     | Use `ButtonIconSize` / `IconSize` from `@metamask/design-system-react-native` if sizing is needed                                   |
-| `PreDefinedKeyValueRowLabel`, `KeyValueRowLabelProps`, `KeyValueRowField`, `KeyValueRowTooltip`, `KeyValueRowRootProps`, `KeyValueSectionProps` | Use `KeyValueRowProps` from `@metamask/design-system-react-native` (flat props)                                                     |
+| Removed                                                                                               | Migration                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `KeyValueRowFieldIconSides` (`LEFT` / `RIGHT` / `BOTH`)                                               | Pass a node on `keyStartAccessory` / `keyEndAccessory` / `valueStartAccessory` / `valueEndAccessory` (both = set start **and** end) |
+| `KeyValueRowSectionAlignments`                                                                        | Alignment is handled internally (key shrinks, value row is `flex-1 min-w-0 justify-end`). Drop the import                           |
+| `TooltipSizes`, `IconSizes`                                                                           | Use `ButtonIconSize` / `IconSize` from `@metamask/design-system-react-native` if sizing is needed                                   |
+| `KeyValueRowField`, `KeyValueRowTooltip`                                                              | Use `KeyValueRowProps` from `@metamask/design-system-react-native` (flat props)                                                     |
+| `PreDefinedKeyValueRowLabel`, `KeyValueRowLabelProps`, `KeyValueRowRootProps`, `KeyValueSectionProps` | No direct replacement — these supported custom stub-based layouts not yet available in MMDS                                         |
 
 ##### Default Typography Differences
 
@@ -2640,11 +2641,13 @@ These patterns have no drop-in replacement in `@metamask/design-system-react-nat
 - **Three-or-more-column rows** — `KeyValueRow` renders exactly a key + value row. Compositions that previously nested multiple `KeyValueSection` instances must be rebuilt as plain `BoxRow` layouts.
 - **Using legacy `KeyValueRowLabel` standalone** — the `KeyValueLabel` default export (plus its `useTooltipModal` wiring) is not re-exported. Rebuild with `Text` + a host-owned tooltip handler, or migrate the whole row to `KeyValueRow`.
 
-Examples of mobile call sites currently exercising these blocked patterns (illustrative — re-run a search before relying on this list, since the codebase moves fast):
+A sample of mobile call sites exercising these blocked patterns (not exhaustive — grep `components-temp/KeyValueRow` in `metamask-mobile` for the current full set, as the codebase moves fast):
 
 - `app/components/UI/Bridge/components/QuoteDetailsRecipientKeyValueRow/QuoteDetailsRecipientKeyValueRow.tsx` — uses `KeyValueRowStubs` (owner: `@MetaMask/swaps-engineers`)
 - `app/components/UI/Bridge/components/QuoteDetailsCard/QuoteDetailsCard.tsx` — imports `KeyValueRowLabel` directly alongside `KeyValueRow` (owner: `@MetaMask/swaps-engineers`)
 - `app/components/UI/Rewards/components/Tabs/MusdCalculatorTab/MusdCalculatorTab.tsx` — uses `KeyValueRowStubs` (owner: `@MetaMask/rewards`)
+
+Additional consumers exist across Earn, Stake, Predict, Bridge, and Perps — some import `KeyValueRowLabel` directly, others only pull in `TooltipSizes`. Run the grep above to enumerate the complete set before opening a migration PR.
 
 Separately, the deprecated `TooltipSizes` re-export is consumed across additional files in `Earn`, `Stake`, `Predict`, `Bridge`, and `Perps` even when `KeyValueRow` itself is not rendered. Those sites are not "blocked" — swap `TooltipSizes.<X>` for the value-equivalent `ButtonIconSizes.<X>` from the legacy `ButtonIcon` (or `ButtonIconSize` from the design system if the surrounding `ButtonIcon` is also being migrated). Grep `components-temp/KeyValueRow` to enumerate the current set before opening a migration PR.
 
