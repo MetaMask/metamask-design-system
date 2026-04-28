@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add Telegram icon ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
+- docs: `Label` migration path ([#1113](https://github.com/MetaMask/metamask-design-system/pull/1113))
+- docs: `TabEmptyState` migration (docs) ([#1105](https://github.com/MetaMask/metamask-design-system/pull/1105))
+- feat: migrate BadgeIcon to ADR-0004 shared types (DSYS-479) ([#1010](https://github.com/MetaMask/metamask-design-system/pull/1010))
+- feat: DSYS-476 Migrate AvatarIcon to ADR-0003 and ADR-0004 ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
+- chore: remove unused eslint disable comments ([#1118](https://github.com/MetaMask/metamask-design-system/pull/1118))
+
 ## [0.20.0]
 
 ### Added
