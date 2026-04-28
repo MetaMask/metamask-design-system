@@ -1,5 +1,8 @@
 # ButtonPrimary
 
+`ButtonPrimary` is an internal variant of the public `Button` component.
+Consumers should use `Button` with `variant={ButtonVariant.Primary}` instead of using `ButtonPrimary` directly.
+
 `ButtonPrimary` is a button for most important and desired action to guide the user.
 
 ## Props

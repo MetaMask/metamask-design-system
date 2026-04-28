@@ -1,8 +1,6 @@
+import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
-
-import { ButtonTertiarySize } from '../../../../types';
-import { IconName } from '../../../Icon';
 
 import { ButtonTertiary } from './ButtonTertiary';
 
@@ -55,18 +53,14 @@ describe('ButtonTertiary', () => {
 
   it('renders with correct size classes', () => {
     const { rerender } = render(
-      <ButtonTertiary size={ButtonTertiarySize.Sm}>Small</ButtonTertiary>,
+      <ButtonTertiary size={ButtonSize.Sm}>Small</ButtonTertiary>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
 
-    rerender(
-      <ButtonTertiary size={ButtonTertiarySize.Md}>Medium</ButtonTertiary>,
-    );
+    rerender(<ButtonTertiary size={ButtonSize.Md}>Medium</ButtonTertiary>);
     expect(screen.getByRole('button')).toHaveClass('h-10');
 
-    rerender(
-      <ButtonTertiary size={ButtonTertiarySize.Lg}>Large</ButtonTertiary>,
-    );
+    rerender(<ButtonTertiary size={ButtonSize.Lg}>Large</ButtonTertiary>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 

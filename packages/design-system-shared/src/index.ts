@@ -77,6 +77,17 @@ export {
 // ButtonFilter types (ADR-0004)
 export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 
+// ButtonBase types (ADR-0003 + ADR-0004)
+export {
+  ButtonBaseSize,
+  ButtonHeroSize,
+  ButtonSize,
+  type ButtonBasePropsShared,
+} from './types/ButtonBase';
+
+// Button types (ADR-0003 + ADR-0004)
+export { ButtonVariant, type ButtonPropsShared } from './types/Button';
+
 // AvatarNetwork types (ADR-0004)
 export { type AvatarNetworkPropsShared } from './types/AvatarNetwork';
 
@@ -105,6 +116,12 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+// ButtonIcon types (ADR-0003 + ADR-0004)
+export {
+  ButtonIconSize,
+  ButtonIconVariant,
+  type ButtonIconPropsShared,
+} from './types/ButtonIcon';
 
 export {
   AvatarAccountSize,
