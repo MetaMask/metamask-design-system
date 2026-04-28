@@ -163,6 +163,10 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 };
 ```
 
+## Migration from MetaMask Mobile Component Library
+
+Migrating from the legacy `TabEmptyState` in `app/component-library/components-temp/TabEmptyState`? See the [TabEmptyState migration guide](../../../MIGRATION.md#tabemptystate-component) for the import change and the root prop narrowing from `BoxProps` to `ViewProps`.
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
