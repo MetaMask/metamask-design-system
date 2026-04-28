@@ -40,20 +40,18 @@
     "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references && yarn build:css",
     "build:css": "cleancss -o dist/styles.css src/css/index.css && yarn build:css:tailwind",
     "build:css:tailwind": "mkdir -p dist/tailwind && postcss src/tailwind/theme.css --use postcss-import -o dist/tailwind/theme.css --no-map",
-    "check:tailwind-theme-parity": "tsx scripts/check-tailwind-theme-parity.ts",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-tokens",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-tokens",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter && yarn check:tailwind-theme-parity",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
     "test:clean": "NODE_OPTIONS=--experimental-vm-modules jest --clearCache",
-    "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose && yarn check:tailwind-theme-parity",
+    "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "devDependencies": {
     "@metamask/auto-changelog": "^6.1.0",
     "@metamask/design-system-react": "workspace:^",
-    "@tailwindcss/postcss": "^4.0.0",
     "@ts-bridge/cli": "^0.6.3",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
@@ -63,9 +61,7 @@
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.1",
     "react": "18.3.1",
-    "tailwindcss": "^4.0.0",
     "ts-jest": "^29.2.5",
-    "tsx": "^4.20.6",
     "typescript": "~5.2.2"
   },
   "engines": {

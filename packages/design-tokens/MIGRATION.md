@@ -659,7 +659,7 @@ colors.networks.sepolia.inverse
 
 ## Theme colors
 --color-primary-shadow modified to --color-shadow-primary
---color-error-shadow modified to --color-shadow-primary
+--color-error-shadow modified to --color-shadow-error
 ```
 
 #### JS
@@ -678,7 +678,7 @@ brandColor.black000 modified to brandColor.black
 
 ### Theme colors
 colors.primary.shadow modified to colors.shadow.primary
-colors.error.shadow modified to colors.shadow.primary
+colors.error.shadow modified to colors.shadow.error
 ```
 
 ## From version 2.1.1 to 3.0.0
