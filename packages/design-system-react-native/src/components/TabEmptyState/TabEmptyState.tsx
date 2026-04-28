@@ -49,6 +49,7 @@ export const TabEmptyState = ({
       <Button
         variant={ButtonVariant.Secondary}
         onPress={onAction}
+        twClassName="self-center"
         {...actionButtonProps}
       >
         {actionButtonText}

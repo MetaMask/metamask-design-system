@@ -1,6 +1,9 @@
+import {
+  ButtonIconSize,
+  ButtonIconVariant,
+} from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { ButtonIconSize, ButtonIconVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Icon } from '../Icon';
 

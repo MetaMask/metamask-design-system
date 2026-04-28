@@ -7,21 +7,8 @@ export {
  */
 export { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarGroupSize } from '@metamask/design-system-shared';
-export { AvatarBaseSize as AvatarIconSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarNetworkSize } from '@metamask/design-system-shared';
 export { AvatarBaseSize as AvatarSize } from '@metamask/design-system-shared';
-
-/**
- * AvatarIcon - severity
- */
-export enum AvatarIconSeverity {
-  Neutral = 'neutral',
-  Info = 'info',
-  Success = 'success',
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  Error = 'error',
-  Warning = 'warning',
-}
 
 /**
  * AvatarGroup - variant
@@ -31,74 +18,6 @@ export enum AvatarGroupVariant {
   Favicon = 'favicon',
   Network = 'network',
   Token = 'token',
-}
-
-/**
- * ButtonBase - size
- */
-export enum ButtonBaseSize {
-  /**
-   * Represents a small button size (32px).
-   */
-  Sm = 'sm',
-  /**
-   * Represents a medium button size (40px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large button size (48px).
-   */
-  Lg = 'lg',
-}
-export { ButtonBaseSize as ButtonPrimarySize };
-export { ButtonBaseSize as ButtonSecondarySize };
-export { ButtonBaseSize as ButtonTertiarySize };
-export { ButtonBaseSize as ButtonHeroSize };
-export { ButtonBaseSize as ButtonSize };
-
-/**
- * Button - variant
- */
-export enum ButtonVariant {
-  /**
-   * Primary button variant - used for primary actions
-   */
-  Primary = 'primary',
-  /**
-   * Secondary button variant - used for secondary actions
-   */
-  Secondary = 'secondary',
-  /**
-   * Tertiary button variant - used for tertiary-like actions
-   */
-  Tertiary = 'tertiary',
-}
-
-/**
- * ButtonIcon - size
- */
-export enum ButtonIconSize {
-  /**
-   * Represents a small button size (24px).
-   */
-  Sm = 'sm',
-  /**
-   * Represents a medium button size (32px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large button size (40px).
-   */
-  Lg = 'lg',
-}
-
-/**
- * ButtonIcon - variant
- */
-export enum ButtonIconVariant {
-  Default = 'default',
-  Filled = 'filled',
-  Floating = 'floating',
 }
 
 /**

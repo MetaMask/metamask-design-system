@@ -246,6 +246,7 @@ import TabCloseSVG from './assets/tab-close.svg';
 import TableRowSVG from './assets/table-row.svg';
 import TabletSVG from './assets/tablet.svg';
 import TagSVG from './assets/tag.svg';
+import TelegramSVG from './assets/telegram.svg';
 import ThumbDownFilledSVG from './assets/thumb-down-filled.svg';
 import ThumbDownSVG from './assets/thumb-down.svg';
 import ThumbUpFilledSVG from './assets/thumb-up-filled.svg';
@@ -533,6 +534,7 @@ export const assetByIconName: AssetByIconName = {
   TableRow: TableRowSVG,
   Tablet: TabletSVG,
   Tag: TagSVG,
+  Telegram: TelegramSVG,
   ThumbDownFilled: ThumbDownFilledSVG,
   ThumbDown: ThumbDownSVG,
   ThumbUpFilled: ThumbUpFilledSVG,

@@ -1,8 +1,6 @@
+import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-
-import { ButtonSecondarySize } from '../../../../types';
-import { IconName } from '../../../Icon';
 
 import { ButtonSecondary } from './ButtonSecondary';
 
@@ -99,13 +97,11 @@ describe('ButtonSecondary', () => {
 
   it('renders with correct size classes', () => {
     const { rerender } = render(
-      <ButtonSecondary size={ButtonSecondarySize.Sm}>Small</ButtonSecondary>,
+      <ButtonSecondary size={ButtonSize.Sm}>Small</ButtonSecondary>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
 
-    rerender(
-      <ButtonSecondary size={ButtonSecondarySize.Lg}>Large</ButtonSecondary>,
-    );
+    rerender(<ButtonSecondary size={ButtonSize.Lg}>Large</ButtonSecondary>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 
