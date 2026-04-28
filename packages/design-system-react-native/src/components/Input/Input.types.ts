@@ -26,7 +26,7 @@ export type InputProps = Omit<
    *
    * @default false
    */
-  isReadonly?: boolean;
+  isReadOnly?: boolean;
   /**
    * Optional boolean to disable state styles.
    *

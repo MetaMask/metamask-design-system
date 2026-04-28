@@ -26,7 +26,7 @@ const meta: Meta<TextFieldProps> = {
     isDisabled: {
       control: 'boolean',
     },
-    isReadonly: {
+    isReadOnly: {
       control: 'boolean',
     },
     value: {
@@ -37,9 +37,6 @@ const meta: Meta<TextFieldProps> = {
     },
     twClassName: {
       control: 'text',
-    },
-    inputProps: {
-      control: 'object',
     },
   },
 };

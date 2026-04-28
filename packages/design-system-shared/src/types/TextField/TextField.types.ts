@@ -18,7 +18,7 @@ export type TextFieldPropsShared = {
   /** Placeholder shown when `value` is empty. */
   placeholder?: string;
   /** When true, the value cannot be edited. */
-  isReadonly?: boolean;
+  isReadOnly?: boolean;
   /**
    * When true, interaction and editing are disabled.
    *

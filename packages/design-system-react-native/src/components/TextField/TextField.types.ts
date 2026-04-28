@@ -1,5 +1,6 @@
 import type { TextFieldPropsShared } from '@metamask/design-system-shared';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { Ref } from 'react';
+import type { StyleProp, TextInput, ViewStyle } from 'react-native';
 
 import type { BoxProps } from '../Box/Box.types';
 import type { InputProps } from '../Input/Input.types';
@@ -7,16 +8,16 @@ import type { InputProps } from '../Input/Input.types';
 /**
  * Additional props merged onto the inner `Input` (`../Input/Input.tsx`).
  *
- * TextField owns `value`, `onChangeText`, `placeholder`, `isReadonly`, `onFocus`,
+ * TextField owns `value`, `onChangeText`, `placeholder`, `isReadOnly`, `onFocus`,
  * `onBlur`, `isDisabled`, `autoFocus`, typography, and inner layout (merged with
  * any `twClassName` you pass here). `placeholderTextColor` is omitted (Input sets
  * it from theme).
  */
-export type TextFieldInputProps = Omit<
+type TextFieldInputProps = Omit<
   InputProps,
   | 'autoFocus'
   | 'isDisabled'
-  | 'isReadonly'
+  | 'isReadOnly'
   | 'isStateStylesDisabled'
   | 'onBlur'
   | 'onChangeText'
@@ -43,11 +44,16 @@ export type TextFieldBaseProps = TextFieldPropsShared & {
    */
   onBlur?: InputProps['onBlur'];
   /**
-   * Additional props for the inner `Input`. Use `accessibilityState={{ required: true }}` when
-   * the field is required. Do not pass `placeholder`, `isReadonly`, `onFocus`, or `onBlur` here;
-   * use the TextField-level props above.
+   * Additional props for the inner `Input`. Do not pass `placeholder`, `isReadOnly`, `onFocus`, or `onBlur` here;
+   * use the TextField-level props above. For accessibility, prefer `accessibilityLabel` and `accessibilityHint` on
+   * `inputProps` (for example hint text can note that a field is required). `placeholderTextColor` is omitted from the
+   * type; the inner `Input` sets it from the theme.
    */
   inputProps?: TextFieldInputProps;
+  /**
+   * Ref to the inner `TextInput`. The component `ref` targets the root `Box` (`View`).
+   */
+  inputRef?: Ref<TextInput>;
   /**
    * Optional twrnc classes for the root `Box`.
    */

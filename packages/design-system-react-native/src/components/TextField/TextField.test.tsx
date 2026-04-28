@@ -150,9 +150,9 @@ describe('TextField', () => {
       );
     });
 
-    it('forwards isReadonly to the inner Input', () => {
+    it('forwards isReadOnly to the inner Input', () => {
       const { getByPlaceholderText } = render(
-        <TextField value="" placeholder="readonly-test" isReadonly />,
+        <TextField value="" placeholder="readonly-test" isReadOnly />,
       );
 
       expect(getByPlaceholderText('readonly-test')).toHaveProp(
@@ -163,19 +163,36 @@ describe('TextField', () => {
   });
 
   describe('ref', () => {
-    it('exposes TextInput ref via forwardRef', () => {
-      const ref = createRef<TextInput>();
-      render(<TextField value="" ref={ref} placeholder="ref-test" />);
+    it('exposes the root View ref via forwardRef', () => {
+      const ref = createRef<View>();
+      render(
+        <TextField
+          value=""
+          ref={ref}
+          testID={ROOT_TEST_ID}
+          placeholder="ref-test"
+        />,
+      );
 
       expect(ref.current).not.toBeNull();
-      expect(ref.current).toBeInstanceOf(TextInput);
+      expect(ref.current).toBeInstanceOf(View);
     });
 
-    it('allows calling focus() via the forwarded ref', () => {
-      const ref = createRef<TextInput>();
-      render(<TextField value="" ref={ref} placeholder="ref-focus" />);
+    it('exposes the inner TextInput via inputRef', () => {
+      const inputRef = createRef<TextInput>();
+      render(<TextField value="" inputRef={inputRef} placeholder="ref-test" />);
 
-      expect(() => ref.current?.focus()).not.toThrow();
+      expect(inputRef.current).not.toBeNull();
+      expect(inputRef.current).toBeInstanceOf(TextInput);
+    });
+
+    it('allows calling focus() via inputRef', () => {
+      const inputRef = createRef<TextInput>();
+      render(
+        <TextField value="" inputRef={inputRef} placeholder="ref-focus" />,
+      );
+
+      expect(() => inputRef.current?.focus()).not.toThrow();
     });
   });
 

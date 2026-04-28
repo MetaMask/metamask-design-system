@@ -1,13 +1,7 @@
 import { TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import {
-  forwardRef,
-  useCallback,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from 'react';
-import { TextInput } from 'react-native';
+import { forwardRef, useCallback, useState } from 'react';
+import { TextInput, View } from 'react-native';
 
 import { Box } from '../Box';
 import { Input } from '../Input';
@@ -15,17 +9,18 @@ import type { InputProps } from '../Input/Input.types';
 
 import type { TextFieldProps } from './TextField.types';
 
-export const TextField = forwardRef<TextInput, TextFieldProps>(
+export const TextField = forwardRef<View, TextFieldProps>(
   (
     {
       value,
       onChangeText,
       placeholder,
-      isReadonly,
+      isReadOnly,
       onBlur,
       onFocus,
       autoFocus = false,
       inputProps,
+      inputRef,
       isDisabled = false,
       isError = false,
       inputElement,
@@ -34,24 +29,17 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
       style,
       twClassName,
       testID,
-      ...restProps
+      ...props
     },
     ref,
   ) => {
     const [isFocused, setIsFocused] = useState(autoFocus);
-    const inputRef = useRef<TextInput>(null);
     const tw = useTailwind();
 
     const {
       twClassName: inputTwClassNameFromProps,
       ...inputRestWithoutTwClassName
     } = inputProps ?? {};
-
-    useImperativeHandle<TextInput | null, TextInput | null>(
-      ref,
-      () => inputRef.current,
-      [],
-    );
 
     const onBlurHandler = useCallback(
       (e: Parameters<NonNullable<InputProps['onBlur']>>[0]) => {
@@ -75,7 +63,8 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
 
     return (
       <Box
-        {...restProps}
+        ref={ref}
+        {...props}
         testID={testID}
         accessible={false}
         style={[
@@ -106,7 +95,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
             value={value}
             onChangeText={onChangeText}
             placeholder={placeholder}
-            isReadonly={isReadonly}
+            isReadOnly={isReadOnly}
             textVariant={TextVariant.BodyMd}
             isDisabled={isDisabled}
             autoFocus={autoFocus}

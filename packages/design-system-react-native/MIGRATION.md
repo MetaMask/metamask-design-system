@@ -100,15 +100,20 @@ These tokens had no backing CSS custom property, so any usage was already produc
 **What changed:**
 
 - **`TextField`** is a root **`Box`** (a styled **`View`**) with an inner **`Input`**. Props that belong on the native text control must be passed in **`inputProps`** (for example `keyboardType`, `secureTextEntry`, `returnKeyType`, `autoCapitalize`, `accessibilityLabel`, `accessibilityState`).
-- **`placeholder`**, **`isReadonly`**, **`onFocus`**, and **`onBlur`** are owned at the **`TextField` / `TextFieldSearch` top level** and forwarded to the inner `Input`. Do not pass them only through **`inputProps`**.
+- **`placeholder`**, **`isReadOnly`**, **`onFocus`**, and **`onBlur`** are owned at the **`TextField` / `TextFieldSearch` top level** and forwarded to the inner `Input`. Do not pass them only through **`inputProps`**. The prop **`isReadonly`** was renamed to **`isReadOnly`** (aligned with React / React Native spelling).
 - **`placeholderTextColor`** is not supported on the public **`TextField`** API; the inner **`Input`** sets placeholder color from the theme.
-- Remaining top-level props on **`TextField`** are **`BoxProps`** (layout and **`View`** props from React Native), except for keys reserved by **`TextField`** (see type **`TextFieldProps`**). **`hitSlop`**, **`onPress`**, and other **`Pressable`**-only APIs are not supported on the root; tap-to-focus on the chrome is removed—users focus by tapping the **`Input`** / **`TextInput`**.
-- Cross-platform field definitions live in **`TextFieldPropsShared`** in **`@metamask/design-system-shared`**.
+- Remaining top-level props on **`TextField`** are **`BoxProps`** (layout and **`View`** props from React Native), except for keys reserved by **`TextField`** (see the exported type **`TextFieldProps`** in **`@metamask/design-system-react-native`**). **`hitSlop`**, **`onPress`**, and other **`Pressable`**-only APIs are not supported on the root; tap-to-focus on the chrome is removed—users focus by tapping the **`Input`** / **`TextInput`**.
 - **`TextFieldSearchProps`** extends **`TextFieldProps`**; the same layering applies. **`onPressClearButton`**, **`clearButtonProps`**, **`startAccessory`**, **`endAccessory`**, and **`style`** behavior are unchanged.
+- **`ref`** on **`TextField`** / **`TextFieldSearch`** refers to the **root** **`Box`** (**`View`**). Use **`inputRef`** for the inner **`TextInput`** (for example **`focus()`** / **`blur()`**).
+- Top-level **`testID`** applies to the **wrapper** **`Box`**. To query the editable **`TextInput`** in E2E tests, use **`inputProps.testID`** (or accessibility / placeholder queries).
 
 **Migration:**
 
 Move inner `TextInput` props from the root into **`inputProps`**. Keep **`placeholder`**, **`onFocus`**, and **`onBlur`** on the component root when you use them.
+
+Replace **`isReadonly`** with **`isReadOnly`** on **`TextField`**, **`TextFieldSearch`**, and **`Input`** in **`@metamask/design-system-react-native`**. The **`Input`** in **`@metamask/design-system-react`** keeps the **`isReadonly`** prop name.
+
+If you passed **`ref`** expecting the **`TextInput`**, switch imperative usage to **`inputRef`** and use **`ref`** only when you need the outer container (layout / measurement).
 
 ```tsx
 // Before (0.19.0) — native TextInput props on TextField
@@ -140,9 +145,9 @@ Remove **`placeholderTextColor`** from **`TextField`** call sites; rely on theme
 
 **Impact:**
 
-- Any **`TextField`** or **`TextFieldSearch`** usage that spread or passed **`TextInput`** props on the root must move those keys into **`inputProps`**, except for the props **`TextField`** owns (**`value`**, **`onChangeText`**, **`placeholder`**, **`isReadonly`**, **`onFocus`**, **`onBlur`**, **`isDisabled`**, **`autoFocus`**, **`isError`**, accessories, **`inputElement`**, **`testID`**, **`style`**, **`twClassName`**) and valid **`BoxProps`** / **`View`** props you pass at the top level.
+- Any **`TextField`** or **`TextFieldSearch`** usage that spread or passed **`TextInput`** props on the root must move those keys into **`inputProps`**, except for the props **`TextField`** owns (**`value`**, **`onChangeText`**, **`placeholder`**, **`isReadOnly`**, **`onFocus`**, **`onBlur`**, **`isDisabled`**, **`autoFocus`**, **`isError`**, accessories, **`inputElement`**, **`inputRef`**, **`testID`**, **`style`**, **`twClassName`**) and valid **`BoxProps`** / **`View`** props you pass at the top level.
 - Call sites that passed **`Pressable`**-only props (**`hitSlop`**, root **`onPress`**, root **`disabled`**) must be updated: the root is no longer a **`Pressable`**.
-- Type-only consumers can extend or intersect **`TextFieldPropsShared`** from **`@metamask/design-system-shared`** for shared forms code.
+- Type-only consumers can extend or intersect **`TextFieldProps`** from **`@metamask/design-system-react-native`** for typed wrappers or form helpers. Derive the inner input prop bag with **`TextFieldProps['inputProps']`** when needed.
 
 #### Input: theme `placeholderTextColor` always wins
 
@@ -2369,7 +2374,7 @@ These props work identically in both versions — no migration needed:
 | `onBlur`             | `(e) => void`            | Blur handler (skipped when disabled)      |
 | `isError`            | `boolean`                | Error border state                        |
 | `isDisabled`         | `boolean`                | Disabled state (opacity + no interaction) |
-| `isReadonly`         | `boolean`                | Read-only state                           |
+| `isReadOnly`         | `boolean`                | Read-only state                           |
 | `autoFocus`          | `boolean`                | Auto-focus on mount                       |
 | `startAccessory`     | `ReactNode`              | Content before the input                  |
 | `endAccessory`       | `ReactNode`              | Content after the input                   |

@@ -52,7 +52,7 @@ import { TextField } from '@metamask/design-system-react-native';
 <TextField value="" placeholder="Search" />;
 ```
 
-### `isReadonly`
+### `isReadOnly`
 
 When true, the inner input is not editable.
 
@@ -63,7 +63,7 @@ When true, the inner input is not editable.
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
 
-<TextField value="" isReadonly placeholder="Read-only" />;
+<TextField value="" isReadOnly placeholder="Read-only" />;
 ```
 
 ### `onFocus`
@@ -96,11 +96,11 @@ import { TextField } from '@metamask/design-system-react-native';
 
 ### `inputProps`
 
-Additional props forwarded to the inner [Input](../Input/Input.tsx) / `TextInput`. Do not pass `placeholder`, `isReadonly`, `onFocus`, or `onBlur` here; use the TextField-level props above. `placeholderTextColor` is omitted from the type; the inner `Input` sets it from the theme. For a required field, use `inputProps.accessibilityState={{ required: true }}` (and related accessibility props as needed).
+Additional props forwarded to the inner [Input](../Input/Input.tsx) / `TextInput`. Do not pass `placeholder`, `isReadOnly`, `onFocus`, or `onBlur` here; use the TextField-level props above. `placeholderTextColor` is omitted from the type; the inner `Input` sets it from the theme. For screen readers, set `inputProps.accessibilityLabel` and `inputProps.accessibilityHint` (for example the hint can state that a value is required). You can use `inputProps.testID` to target the native `TextInput` in E2E tests.
 
-| TYPE                                                    | REQUIRED | DEFAULT     |
-| ------------------------------------------------------- | -------- | ----------- |
-| `Omit<InputProps, …>` (see `TextFieldInputProps` types) | No       | `undefined` |
+| TYPE                                                                 | REQUIRED | DEFAULT     |
+| -------------------------------------------------------------------- | -------- | ----------- |
+| `TextFieldProps['inputProps']` (see `TextFieldProps` in the package) | No       | `undefined` |
 
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
@@ -114,6 +114,24 @@ import { TextField } from '@metamask/design-system-react-native';
     returnKeyType: 'search',
   }}
 />;
+```
+
+### `inputRef`
+
+Ref to the inner `TextInput`. The component’s `ref` (from `forwardRef`) points at the root [Box](../Box/Box.tsx) (`View`).
+
+| TYPE             | REQUIRED | DEFAULT     |
+| ---------------- | -------- | ----------- |
+| `Ref<TextInput>` | No       | `undefined` |
+
+```tsx
+import { createRef } from 'react';
+import { TextField } from '@metamask/design-system-react-native';
+import type { TextInput } from 'react-native';
+
+const inputRef = createRef<TextInput>();
+
+<TextField value="" inputRef={inputRef} placeholder="Focus me" />;
 ```
 
 ### `isError`
@@ -194,7 +212,7 @@ import { Text } from 'react-native';
 
 ### `inputElement`
 
-Optional node that replaces the default `Input`. The forwarded ref still targets `TextInput` when the default input is used; with a custom `inputElement`, ensure your control is focusable if users need keyboard entry.
+Optional node that replaces the default `Input`. `inputRef` is only forwarded when the default `Input` is rendered; with a custom `inputElement`, attach your own ref to the control if you need imperative focus or measurement.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -209,7 +227,7 @@ import { TextInput } from 'react-native';
 
 ### `testID`
 
-Optional test id for the root `Box`.
+Optional test id for the root `Box`. The inner `TextInput` does not inherit this id; pass `inputProps.testID` if your tests must query the editable control directly.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -223,7 +241,9 @@ import { TextField } from '@metamask/design-system-react-native';
 
 ### Layout and accessibility (`Box` / `View`)
 
-Pass `BoxProps` and React Native `View` props at the top level for layout and accessibility on the root container (for example `accessibilityHint`, `pointerEvents`). Keys reserved by TextField (`style`, `twClassName`, `testID`, `children`, `accessible`, and all keys owned by `TextFieldBaseProps`) are not passed through from this intersection. Prefer either Tailwind via `twClassName` or explicit `Box` layout props, and avoid conflicting layout when mixing both.
+The root `Box` sets `accessible={false}` so assistive technologies focus the inner `TextInput`. Prefer **`inputProps`** for `accessibilityLabel`, `accessibilityHint`, and other [TextInput](https://reactnative.dev/docs/textinput) accessibility props.
+
+Use top-level `Box` / `View` props for layout and pointer handling (`pointerEvents`, margins, hit areas via wrappers, etc.). Keys reserved by TextField (`style`, `twClassName`, `testID`, `children`, `accessible`, and keys owned by the TextField API surface) are not passed through from this intersection.
 
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
@@ -231,7 +251,10 @@ import { TextField } from '@metamask/design-system-react-native';
 <TextField
   value=""
   placeholder="Search"
-  accessibilityHint="Searches tokens by name or address"
+  inputProps={{
+    accessibilityLabel: 'Token search',
+    accessibilityHint: 'Searches tokens by name or address',
+  }}
 />;
 ```
 
