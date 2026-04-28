@@ -21,7 +21,9 @@ describe('ModalOverlay', () => {
 
   it('applies the overlay-default background color', () => {
     render(<ModalOverlay data-testid="modal-overlay" />);
-    expect(screen.getByTestId('modal-overlay')).toHaveClass('bg-overlay-default');
+    expect(screen.getByTestId('modal-overlay')).toHaveClass(
+      'bg-overlay-default',
+    );
   });
 
   it('marks the overlay as decorative for assistive tech', () => {
@@ -33,19 +35,15 @@ describe('ModalOverlay', () => {
   });
 
   it('merges custom className alongside default classes', () => {
-    render(
-      <ModalOverlay data-testid="modal-overlay" className="custom-class" />,
-    );
+    render(<ModalOverlay data-testid="modal-overlay" className="opacity-50" />);
     const overlay = screen.getByTestId('modal-overlay');
-    expect(overlay).toHaveClass('custom-class');
+    expect(overlay).toHaveClass('opacity-50');
     expect(overlay).toHaveClass('fixed', 'inset-0');
   });
 
   it('fires the onClick handler when clicked', () => {
     const handleClick = jest.fn();
-    render(
-      <ModalOverlay data-testid="modal-overlay" onClick={handleClick} />,
-    );
+    render(<ModalOverlay data-testid="modal-overlay" onClick={handleClick} />);
     fireEvent.click(screen.getByTestId('modal-overlay'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
@@ -58,7 +56,11 @@ describe('ModalOverlay', () => {
 
   it('forwards arbitrary HTML attributes to the underlying element', () => {
     render(
-      <ModalOverlay data-testid="modal-overlay" id="overlay" role="presentation" />,
+      <ModalOverlay
+        data-testid="modal-overlay"
+        id="overlay"
+        role="presentation"
+      />,
     );
     const overlay = screen.getByTestId('modal-overlay');
     expect(overlay).toHaveAttribute('id', 'overlay');

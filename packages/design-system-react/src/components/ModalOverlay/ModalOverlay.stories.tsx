@@ -43,10 +43,7 @@ export const OnClick: Story = {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
-        <Button
-          variant={ButtonVariant.Primary}
-          onClick={() => setIsOpen(true)}
-        >
+        <Button variant={ButtonVariant.Primary} onClick={() => setIsOpen(true)}>
           Show modal overlay
         </Button>
         {isOpen && <ModalOverlay {...args} onClick={() => setIsOpen(false)} />}
