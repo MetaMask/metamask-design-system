@@ -1,4 +1,3 @@
-import { AnimationDuration } from '@metamask/design-tokens';
 import type { Config } from 'tailwindcss';
 
 import { colors } from './colors';
@@ -34,7 +33,9 @@ const tailwindConfig: Config = {
         },
       },
       animation: {
-        'fade-in': `fade-in ${AnimationDuration.Regularly}ms linear forwards`,
+        // Duration matches `AnimationDuration.Regularly` from `@metamask/design-tokens`.
+        // Inlined to avoid a workspace dependency cycle (design-tokens → design-system-react → tailwind-preset).
+        'fade-in': 'fade-in 300ms linear forwards',
       },
     },
   },

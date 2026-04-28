@@ -3413,7 +3413,6 @@ __metadata:
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
     "@metamask/auto-changelog": "npm:^6.1.0"
-    "@metamask/design-tokens": "workspace:^"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
