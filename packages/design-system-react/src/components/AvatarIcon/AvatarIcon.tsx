@@ -1,6 +1,9 @@
+import {
+  AvatarIconSeverity,
+  AvatarIconSize,
+} from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { AvatarBase, AvatarBaseShape } from '../AvatarBase';
 import { Icon } from '../Icon';
