@@ -86,6 +86,9 @@ export {
   type AvatarTokenPropsShared,
 } from './types/AvatarToken';
 
+// BadgeIcon types (ADR-0004)
+export { type BadgeIconPropsShared } from './types/BadgeIcon';
+
 // BannerAlert types (ADR-0003 + ADR-0004)
 export {
   BannerAlertSeverity,
