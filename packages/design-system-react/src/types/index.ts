@@ -21,21 +21,6 @@ export enum AvatarGroupVariant {
 }
 
 /**
- * Button-related types re-exported from shared for compatibility.
- */
-export {
-  ButtonBaseSize,
-  ButtonVariant,
-  ButtonIconSize,
-  ButtonIconVariant,
-} from '@metamask/design-system-shared';
-export { ButtonBaseSize as ButtonPrimarySize } from '@metamask/design-system-shared';
-export { ButtonBaseSize as ButtonSecondarySize } from '@metamask/design-system-shared';
-export { ButtonBaseSize as ButtonTertiarySize } from '@metamask/design-system-shared';
-export { ButtonBaseSize as ButtonHeroSize } from '@metamask/design-system-shared';
-export { ButtonBaseSize as ButtonSize } from '@metamask/design-system-shared';
-
-/**
  * Text - textAlign
  */
 export const TextAlign = {
