@@ -1,7 +1,7 @@
 import { TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { forwardRef, useCallback, useState } from 'react';
-import { TextInput, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Box } from '../Box';
 import { Input } from '../Input';
