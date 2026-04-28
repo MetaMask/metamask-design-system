@@ -13,6 +13,13 @@ export {
   type AvatarBasePropsShared,
 } from './types/AvatarBase';
 
+// AvatarIcon types (ADR-0003 + ADR-0004)
+export {
+  AvatarIconSize,
+  AvatarIconSeverity,
+  type AvatarIconPropsShared,
+} from './types/AvatarIcon';
+
 // BadgeCount types (ADR-0003 + ADR-0004)
 export { BadgeCountSize, type BadgeCountPropsShared } from './types/BadgeCount';
 
@@ -37,6 +44,12 @@ export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
 
 // TitleHub types (ADR-0004)
 export { type TitleHubPropsShared } from './types/TitleHub';
+
+// TitleStandard types (ADR-0004)
+export { type TitleStandardPropsShared } from './types/TitleStandard';
+
+// TitleSubpage types (ADR-0004)
+export { type TitleSubpagePropsShared } from './types/TitleSubpage';
 
 // BoxColumn types (ADR-0004)
 export { type BoxColumnPropsShared } from './types/BoxColumn';
@@ -72,6 +85,9 @@ export {
   AvatarTokenSize,
   type AvatarTokenPropsShared,
 } from './types/AvatarToken';
+
+// BadgeIcon types (ADR-0004)
+export { type BadgeIconPropsShared } from './types/BadgeIcon';
 
 // BannerAlert types (ADR-0003 + ADR-0004)
 export {
