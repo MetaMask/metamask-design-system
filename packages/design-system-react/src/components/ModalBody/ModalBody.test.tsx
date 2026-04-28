@@ -32,6 +32,16 @@ describe('ModalBody', () => {
     expect(screen.getByTestId('modal-body')).toHaveClass('px-4');
   });
 
+  it('is keyboard-focusable by default so users can scroll the region', () => {
+    render(<ModalBody data-testid="modal-body" />);
+    expect(screen.getByTestId('modal-body')).toHaveAttribute('tabindex', '0');
+  });
+
+  it('allows consumers to override tabIndex', () => {
+    render(<ModalBody data-testid="modal-body" tabIndex={-1} />);
+    expect(screen.getByTestId('modal-body')).toHaveAttribute('tabindex', '-1');
+  });
+
   it('merges custom className alongside default classes', () => {
     render(<ModalBody data-testid="modal-body" className="opacity-50" />);
     const body = screen.getByTestId('modal-body');

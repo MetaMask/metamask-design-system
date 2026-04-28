@@ -29,6 +29,11 @@ const meta: Meta<ModalBodyProps> = {
   args: {
     children: 'Modal Body',
   },
+  render: (args) => (
+    <ModalBody {...args}>
+      <Text>{args.children}</Text>
+    </ModalBody>
+  ),
 };
 
 export default meta;
@@ -44,7 +49,9 @@ export const Children: Story = {
   },
   render: (args) => (
     <div className="h-[100px] w-[300px]">
-      <ModalBody {...args} />
+      <ModalBody {...args}>
+        <Text>{args.children}</Text>
+      </ModalBody>
     </div>
   ),
 };

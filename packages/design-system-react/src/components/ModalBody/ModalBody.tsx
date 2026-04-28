@@ -6,10 +6,11 @@ import { Box } from '../Box';
 import type { ModalBodyProps } from './ModalBody.types';
 
 export const ModalBody = forwardRef<HTMLDivElement, ModalBodyProps>(
-  ({ className, children, ...props }, ref) => (
+  ({ className, children, tabIndex = 0, ...props }, ref) => (
     <Box
       ref={ref}
       paddingHorizontal={4}
+      tabIndex={tabIndex}
       className={twMerge('relative max-h-full overflow-y-auto', className)}
       {...props}
     >
