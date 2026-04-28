@@ -1,3 +1,4 @@
+import { AnimationDuration } from '@metamask/design-tokens';
 import type { Config } from 'tailwindcss';
 
 import { colors } from './colors';
@@ -26,6 +27,15 @@ const tailwindConfig: Config = {
       }),
       ...typography,
       boxShadow: shadows,
+      keyframes: {
+        'fade-in': {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+      },
+      animation: {
+        'fade-in': `fade-in ${AnimationDuration.Regularly}ms linear forwards`,
+      },
     },
   },
   plugins: [

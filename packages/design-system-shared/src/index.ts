@@ -131,6 +131,9 @@ export {
 // Checkbox types (ADR-0004)
 export { type CheckboxPropsShared } from './types/Checkbox';
 
+// ModalOverlay types (ADR-0004)
+export { type ModalOverlayPropsShared } from './types/ModalOverlay';
+
 // Tag types (ADR-0003 + ADR-0004)
 export { TagSeverity, type TagPropsShared } from './types/Tag';
 
