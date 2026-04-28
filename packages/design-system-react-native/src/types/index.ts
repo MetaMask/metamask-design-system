@@ -19,15 +19,3 @@ export enum AvatarGroupVariant {
   Network = 'network',
   Token = 'token',
 }
-
-/**
- * AvatarIcon - severity
- */
-export enum AvatarIconSeverity {
-  Neutral = 'neutral',
-  Info = 'info',
-  Success = 'success',
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  Error = 'error',
-  Warning = 'warning',
-}
