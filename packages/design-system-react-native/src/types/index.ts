@@ -51,30 +51,3 @@ export enum ButtonVariant {
   Secondary = 'secondary',
   Tertiary = 'tertiary',
 }
-
-/**
- * ButtonIcon - size
- */
-export enum ButtonIconSize {
-  /**
-   * Represents a small button size (24px).
-   */
-  Sm = 'sm',
-  /**
-   * Represents a medium button size (32px).
-   */
-  Md = 'md',
-  /**
-   * Represents a large button size (40px).
-   */
-  Lg = 'lg',
-}
-
-/**
- * ButtonIcon - variant
- */
-export enum ButtonIconVariant {
-  Default = 'default',
-  Filled = 'filled',
-  Floating = 'floating',
-}
