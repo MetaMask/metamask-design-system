@@ -465,7 +465,7 @@ import {
 The legacy `ButtonLink` (and `Button` with `variant={ButtonVariant.Link}`) is replaced by **two** design system components depending on the use case:
 
 - **`TextButton`** — for inline text-styled links within content flows (the primary replacement)
-- **`Button` with `variant={ButtonVariant.Tertiary}`** — for standalone link-styled buttons that still need `isDanger`, `isLoading`, or full button affordances
+- **`Button` with `variant={ButtonVariant.Tertiary}`** — for standalone link-style buttons with icons, full width, `isDanger`, `isLoading`, or other button-like affordances
 
 `TextButton` is built on `ButtonBase` and inherits its composition API (`asChild`, `textProps`, `startIconName`, `endIconName`, `startAccessory`, `endAccessory`).
 
