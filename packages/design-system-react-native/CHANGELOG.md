@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.0]
+
+### Added
+
+- Added `Telegram` to the `IconName` set for use anywhere the React Native package accepts design system icons ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
+
+### Changed
+
+- **BREAKING:** Updated `AvatarIcon` exports to use shared const-object + string-union types rather than local enum-based definitions, aligning React Native with the shared cross-platform type contracts ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react-native` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+
 ## [0.20.0]
 
 ### Added
@@ -361,7 +373,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.20.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.21.0...HEAD
+[0.21.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.20.0...@metamask/design-system-react-native@0.21.0
 [0.20.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.19.0...@metamask/design-system-react-native@0.20.0
 [0.19.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.18.0...@metamask/design-system-react-native@0.19.0
 [0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.17.0...@metamask/design-system-react-native@0.18.0

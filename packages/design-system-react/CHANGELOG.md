@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.0]
+
+### Added
+
+- Added `Telegram` to the `IconName` set for use anywhere the React package accepts design system icons ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
+
+### Changed
+
+- **BREAKING:** Updated `AvatarIcon` exports to use shared const-object + string-union types rather than local enum-based definitions, aligning React with the shared cross-platform type contracts ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+
 ## [0.18.0]
 
 ### Changed
@@ -257,7 +269,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.18.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.19.0...HEAD
+[0.19.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.18.0...@metamask/design-system-react@0.19.0
 [0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.17.1...@metamask/design-system-react@0.18.0
 [0.17.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.17.0...@metamask/design-system-react@0.17.1
 [0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.16.0...@metamask/design-system-react@0.17.0
