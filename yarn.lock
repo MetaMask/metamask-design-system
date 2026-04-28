@@ -3413,6 +3413,7 @@ __metadata:
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
     "@metamask/auto-changelog": "npm:^6.1.0"
+    "@metamask/design-tokens": "npm:^8.1.0"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
@@ -3457,7 +3458,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/design-tokens@workspace:^, @metamask/design-tokens@workspace:packages/design-tokens":
+"@metamask/design-tokens@npm:^8.1.0, @metamask/design-tokens@workspace:^, @metamask/design-tokens@workspace:packages/design-tokens":
   version: 0.0.0-use.local
   resolution: "@metamask/design-tokens@workspace:packages/design-tokens"
   dependencies:
