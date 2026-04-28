@@ -18,9 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING:** Updated `AvatarIcon` exports to use shared const-object + string-union types rather than local enum-based definitions, aligning React with the shared cross-platform type contracts ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
   - No migration required for typical usage; continue importing from `@metamask/design-system-react` as before.
   - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
-- **BREAKING:** Updated `BadgeIcon` to use shared cross-platform prop types from `@metamask/design-system-shared`, aligning React with the shared platform contracts ([#1010](https://github.com/MetaMask/metamask-design-system/pull/1010))
-  - No migration required for typical usage; continue importing `BadgeIcon` from `@metamask/design-system-react` as before.
-  - Runtime behavior remains unchanged while the prop types move to the shared package.
 
 ## [0.18.0]
 
