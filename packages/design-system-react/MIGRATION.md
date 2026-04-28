@@ -15,6 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [Input Component](#input-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -985,6 +986,94 @@ import { Checkbox } from '@metamask/design-system-react';
 - `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
+
+### Input Component
+
+The extension `Input` (`ui/components/component-library/input`) is a polymorphic `Text` wrapper that rendered a native `<input>` with design-system typography and broad **Box / style-utility** props. The design system `Input` is a thin `forwardRef` wrapper around a real `<input>` with a small typed API on top of standard HTML input props.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) when replacing style-utility props with `className`.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                            | Design System Migration                                           |
+| ------------------------------------------------------------ | ----------------------------------------------------------------- |
+| `import { Input, InputType } from '../../component-library'` | `import { Input } from '@metamask/design-system-react'`           |
+| `import type { InputProps } from '../input/input.types'`     | `import type { InputProps } from '@metamask/design-system-react'` |
+
+##### State and DOM Prop Renames
+
+| Extension Prop | Design System Prop | Notes                                                 |
+| -------------- | ------------------ | ----------------------------------------------------- |
+| `disabled`     | `isDisabled`       | renamed; forwarded to the native `disabled` attribute |
+| `readOnly`     | `isReadonly`       | renamed; forwarded to the native `readOnly` attribute |
+
+##### Removed or Narrowed Legacy Surface
+
+| Extension API                                                                             | Design System Migration                                                         | Change Type  | Notes                                                                                                                             |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| Polymorphic `Text` / `as` and `PolymorphicComponentPropWithRef`                           | Always a native `<input>`                                                       | removed      | No `as` prop — use a different component if you need a non-input control                                                          |
+| `StyleUtilityProps` and other Box/Text style utilities spread via `...props`              | Not accepted                                                                    | removed      | Use Tailwind `className` (merged with `twMerge`) for layout and colors                                                            |
+| `error?: boolean` (sets `aria-invalid` on the field)                                      | No built-in mapping                                                             | removed      | Pass `aria-invalid={hasError}` (and optional `aria-describedby`) yourself on `Input`                                              |
+| `disableStateStyles?: boolean`                                                            | No equivalent                                                                   | removed      | Focus ring follows design-system defaults; override with `className` if you have an accessible alternative                        |
+| `InputType` enum (`text`, `number`, `password`, `search`)                                 | Use HTML `type` string literals                                                 | type change  | Use `type="password"`, `type="search"`, etc. Standard `<input>` types apply                                                       |
+| `autoComplete?: boolean` (`true` → `'on'`, `false` → `'off'`)                             | `autoComplete` as HTML expects                                                  | type / value | Pass `autoComplete="on"` / `"off"` or a [token](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) string |
+| `onChange` / `onBlur` / `onFocus` typed as zero-arg callbacks in legacy `InputStyleProps` | Full `React.ChangeEvent` handler types from `ComponentPropsWithoutRef<'input'>` | signature    | Align handlers with real DOM events (`onChange={(e) => ... e.target.value}`)                                                      |
+| `textVariant` default `TextVariant.bodyMd` (legacy enum style)                            | `textVariant` default `TextVariant.BodyMd`                                      | value casing | Use `TextVariant` from `@metamask/design-system-react` / `@metamask/design-system-shared` (const object + union)                  |
+
+##### Unchanged or Forwarded
+
+Standard controlled/uncontrolled patterns for web inputs still work: `value`, `defaultValue`, `placeholder`, `name`, `id`, `required`, `maxLength`, `type`, `autoFocus`, and most other valid `<input>` attributes are passed through `...rest` after the design-system-specific props.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Input, InputType } from '../../component-library';
+import { TextVariant } from '../../../helpers/constants/design-system';
+
+<Input
+  id="email"
+  name="email"
+  type={InputType.Text}
+  value={email}
+  onChange={() => setEmailFromParent()}
+  placeholder="you@example.com"
+  disabled={isLocked}
+  readOnly={isReadOnly}
+  error={hasError}
+  textVariant={TextVariant.bodyMd}
+  marginTop={2}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react';
+
+<Input
+  id="email"
+  name="email"
+  type="text"
+  value={email}
+  onChange={(event) => setEmail(event.target.value)}
+  placeholder="you@example.com"
+  isDisabled={isLocked}
+  isReadonly={isReadOnly}
+  aria-invalid={hasError}
+  textVariant={TextVariant.BodyMd}
+  className="mt-2"
+/>;
+```
+
+#### API Differences
+
+- `className` is merged with built-in Tailwind classes via `twMerge`; prefer it over removed margin/padding utility props.
+- `style` is still supported for inline overrides.
+- For `autoComplete`, use the HTML string form expected by React and browsers.
 
 ## Version Updates
 

@@ -21,6 +21,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Label Component](#label-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [Input Component](#input-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
   - [TabEmptyState Component](#tabemptystate-component)
@@ -2239,6 +2240,65 @@ import { Checkbox } from '@metamask/design-system-react-native';
 - MMDS `Checkbox` adds `twClassName` and `style` on the outer `Pressable`, plus `checkboxContainerProps` and `checkedIconProps` for targeted customization.
 - Mobile legacy `Checkbox` forwarded `TouchableOpacityProps`; MMDS forwards `PressableProps`.
 - Imperative `ref.toggle()` remains available in MMDS.
+
+### Input Component
+
+The mobile legacy `Input` lives at `app/component-library/components/Form/TextField/foundation/Input` and is composed by the mobile `TextField`. The design system `Input` is the same conceptual building block (single-line `TextInput`) but uses TWRNC styling, **requires** a controlled `value`, and drops `defaultValue`.
+
+For **package-internal** upgrades (already on `@metamask/design-system-react-native`), see also [Input Controlled-Only Requirement](#input-controlled-only-requirement).
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                      | Design System Migration                                                  |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `import Input from '.../Form/TextField/foundation/Input'`                           | `import { Input } from '@metamask/design-system-react-native'`           |
+| `import type { InputProps } from '.../Form/TextField/foundation/Input/Input.types'` | `import type { InputProps } from '@metamask/design-system-react-native'` |
+
+The mobile component uses a **default export**; the design system uses a **named export**.
+
+##### Props and Behavior Mapping
+
+| Mobile API (`Input.types` + implementation)           | Design System API                                   | Change Type    | Notes                                                                     |
+| ----------------------------------------------------- | --------------------------------------------------- | -------------- | ------------------------------------------------------------------------- |
+| `value?: string` (optional in practice)               | `value: string`                                     | **required**   | Controlled-only — no `defaultValue` (omitted from the public type)        |
+| `defaultValue` via `TextInputProps`                   | removed                                             | removed        | Initialize state (`useState('')`) and pass `value`                        |
+| `onChangeText`                                        | `onChangeText`                                      | unchanged      | Still the primary text-change callback                                    |
+| `isDisabled` / `isReadonly` / `isStateStylesDisabled` | same names                                          | unchanged      | Defaults still `false` where applicable                                   |
+| `textVariant` (`TextVariant` from mobile Texts)       | `TextVariant` from `@metamask/design-system-shared` | type alignment | Use design-system `TextVariant` const members (e.g. `TextVariant.BodyMd`) |
+| `style` merged via `useStyles` / style sheet          | `style` array-merged with TWRNC output              | behavior       | Visual parity is close but not pixel-identical; verify screens            |
+| `autoFocus` default **`true`**                        | `autoFocus` default **`false`**                     | default change | Pass `autoFocus` explicitly when you need mount focus                     |
+| `testID` set internally (`INPUT_TEST_ID`)             | not set by default                                  | behavior       | Pass `testID` yourself if tests depend on it                              |
+| —                                                     | `twClassName?: string`                              | new            | Tailwind-style overrides on the `TextInput`                               |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import Input from '../../../component-library/components/Form/TextField/foundation/Input';
+
+// Legacy allowed omitting value / used defaultValue patterns via TextInput
+<Input placeholder="Label" defaultValue="hello" onChangeText={setText} />;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input } from '@metamask/design-system-react-native';
+import { useState } from 'react';
+
+const [text, setText] = useState('hello');
+
+<Input value={text} onChangeText={setText} placeholder="Label" />;
+```
+
+#### API Differences
+
+- Design-system `Input` sets `placeholderTextColor` from theme tokens; you normally do not need the mobile manual `theme.colors.text.alternative` wiring.
+- Focus border styling uses the same focus-state pattern as other MMDS inputs (`border-primary-default` when focused and not disabled).
+- When migrating **TextField**, follow [TextField Component](#textfield-component) — inner `Input` must receive a string `value` and updater.
 
 ### TextField Component
 
