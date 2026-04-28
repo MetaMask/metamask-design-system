@@ -9,6 +9,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Button Component](#button-component)
   - [ButtonBase Component](#buttonbase-component)
   - [ButtonIcon Component](#buttonicon-component)
+  - [TextButton Component (from ButtonLink)](#textbutton-component-from-buttonlink)
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
@@ -458,6 +459,249 @@ import {
 - Box style-utility props are no longer accepted — use Tailwind `className` for styling overrides
 - New `variant` prop (`Default`, `Filled`, `Floating`) for visual styles not available in the extension
 - `IconColor` enum member names now use PascalCase (see [Icon Component](#icon-component))
+
+### TextButton Component (from ButtonLink)
+
+The legacy `ButtonLink` (and `Button` with `variant={ButtonVariant.Link}`) is replaced by **two** design system components depending on the use case:
+
+- **`TextButton`** — for inline text-styled links within content flows (the primary replacement)
+- **`Button` with `variant={ButtonVariant.Tertiary}`** — for standalone link-style buttons with icons, full width, `isDanger`, `isLoading`, or other button-like affordances
+
+`TextButton` is built on `ButtonBase` and inherits its composition API (`asChild`, `textProps`, `startIconName`, `endIconName`, `startAccessory`, `endAccessory`).
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                | Design System Migration                                                |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `import { ButtonLink } from '../../component-library'`           | `import { TextButton } from '@metamask/design-system-react'`           |
+| `import { ButtonLinkSize } from '../../component-library'`       | `import { TextButtonSize } from '@metamask/design-system-react'`       |
+| `import type { ButtonLinkProps } from '../../component-library'` | `import type { TextButtonProps } from '@metamask/design-system-react'` |
+
+##### Size Enum — Typography, Not Button Height
+
+`ButtonLinkSize` controlled the button's height (inherited from `ButtonBaseSize`). `TextButtonSize` instead controls the inner text's typography variant — `TextButton` is a text-styled button, not a fixed-height button.
+
+| Extension Value                                 | Design System Migration                                                                            |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ButtonLinkSize.Auto` (default)                 | `TextButtonSize.BodyMd` (default)                                                                  |
+| `ButtonLinkSize.Sm` (32px height)               | `TextButtonSize.BodySm`                                                                            |
+| `ButtonLinkSize.Md` (40px height)               | `TextButtonSize.BodyMd`                                                                            |
+| `ButtonLinkSize.Lg` (48px height)               | `TextButtonSize.BodyLg`                                                                            |
+| `ButtonLinkSize.Inherit` (inherits parent font) | No direct equivalent — pick a `TextButtonSize` or pass `textProps={{ className: 'text-inherit' }}` |
+| —                                               | `TextButtonSize.BodyXs` (new smallest size)                                                        |
+
+##### State Props Renamed
+
+| Extension Prop | Design System Prop | Notes                                 |
+| -------------- | ------------------ | ------------------------------------- |
+| `disabled`     | `isDisabled`       | renamed                               |
+| `block`        | `isFullWidth`      | renamed (inherited from `ButtonBase`) |
+
+##### `danger` Removed — Use `Button` Tertiary with `isDanger`
+
+`TextButton` does not accept a danger color variant. For error-styled link buttons, use `Button` with `variant={ButtonVariant.Tertiary}` and `isDanger`.
+
+| Extension Pattern | Design System Migration                                          |
+| ----------------- | ---------------------------------------------------------------- |
+| `danger={true}`   | `<Button variant={ButtonVariant.Tertiary} isDanger>...</Button>` |
+
+##### `loading` Removed — Use `Button` Tertiary with `isLoading`
+
+`TextButton` does not support a loading state. If a loading spinner is required on a link-styled button, use `Button` Tertiary.
+
+| Extension Pattern  | Design System Migration                                                        |
+| ------------------ | ------------------------------------------------------------------------------ |
+| `loading={true}`   | `<Button variant={ButtonVariant.Tertiary} isLoading>...</Button>`              |
+| `iconLoadingProps` | Removed — configure loading on `Button` via `loadingIconProps` / `loadingText` |
+
+##### Polymorphism Removed: `as` / `href` → `asChild`
+
+The extension `ButtonLink` is polymorphic — `as` toggles between `button` and `a`, and an `href` prop auto-switches to `a`. The design system `TextButton` always renders a `<button>` and uses the `asChild` composition pattern (inherited from `ButtonBase`) for anchor rendering.
+
+| Extension Prop           | Design System Migration                                                         |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| `as="a"` / `as="button"` | Removed — always `<button>`. Use `asChild` with your own `<a>`.                 |
+| `href="..."`             | Removed — wrap in `asChild` with `<a href="...">`.                              |
+| `externalLink`           | Removed — on your `<a>`, set `target="_blank"` and `rel="noopener noreferrer"`. |
+| `target` / `rel`         | Removed — set directly on your `<a>` inside `asChild`.                          |
+
+##### `color` Removed — Use `isInverse` or `Button` Tertiary
+
+The legacy `ButtonLink` accepted a `color` prop that overrode link coloring. `TextButton` exposes only `isInverse`; for other colors, use `Button` Tertiary.
+
+| Extension Pattern              | Design System Migration                                                               |
+| ------------------------------ | ------------------------------------------------------------------------------------- |
+| `color={Color.primaryDefault}` | Remove — default `TextButton` color                                                   |
+| `color={Color.primaryInverse}` | `isInverse`                                                                           |
+| `color={Color.errorDefault}`   | `<Button variant={ButtonVariant.Tertiary} isDanger>...</Button>`                      |
+| Other `Color.*` values         | `<Button variant={ButtonVariant.Tertiary}>` + `className`, or `textProps={{ color }}` |
+
+##### Removed Props
+
+| Extension Prop                                                                                      | Design System Migration                                                     |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `ellipsis`                                                                                          | Removed — use `className="truncate"` or `textProps` with truncation classes |
+| `textDirection`                                                                                     | Removed — set the standard HTML `dir` attribute directly                    |
+| Box/Text style utility props (`padding*`, `margin*`, `backgroundColor`, `color`, `borderRadius`, …) | Removed — use Tailwind `className` instead                                  |
+
+#### New Props
+
+`TextButton` adds props not available in the extension `ButtonLink`:
+
+- `isInverse` — inverse coloring for use on dark or colored backgrounds
+- `asChild` — compose the button styling onto a child element (replaces `as`/`href` polymorphism)
+
+#### Migration Examples
+
+##### Basic inline link
+
+Before (Extension):
+
+```tsx
+import { ButtonLink } from '../../component-library';
+
+<ButtonLink onClick={handleLearnMore}>Learn more</ButtonLink>;
+```
+
+After (Design System):
+
+```tsx
+import { TextButton } from '@metamask/design-system-react';
+
+<TextButton onClick={handleLearnMore}>Learn more</TextButton>;
+```
+
+##### Sized "show more" toggle
+
+Before (Extension):
+
+```tsx
+import { ButtonLink, ButtonLinkSize } from '../../component-library';
+
+<ButtonLink
+  size={ButtonLinkSize.Sm}
+  disabled={isLocked}
+  onClick={toggleContent}
+>
+  {isExpanded ? 'Show less' : 'Show more'}
+</ButtonLink>;
+```
+
+After (Design System):
+
+```tsx
+import { TextButton, TextButtonSize } from '@metamask/design-system-react';
+
+<TextButton
+  size={TextButtonSize.BodySm}
+  isDisabled={isLocked}
+  onClick={toggleContent}
+>
+  {isExpanded ? 'Show less' : 'Show more'}
+</TextButton>;
+```
+
+##### External link (`as="a"` / `href` → `asChild`)
+
+Before (Extension):
+
+```tsx
+import { ButtonLink } from '../../component-library';
+
+<ButtonLink as="a" href="https://metamask.io" externalLink>
+  Visit MetaMask
+</ButtonLink>;
+```
+
+After (Design System):
+
+```tsx
+import { TextButton } from '@metamask/design-system-react';
+
+<TextButton asChild>
+  <a href="https://metamask.io" target="_blank" rel="noopener noreferrer">
+    Visit MetaMask
+  </a>
+</TextButton>;
+```
+
+##### Danger link → `Button` Tertiary with `isDanger`
+
+Before (Extension):
+
+```tsx
+import { ButtonLink } from '../../component-library';
+
+<ButtonLink danger onClick={handleDelete}>
+  Delete account
+</ButtonLink>;
+```
+
+After (Design System):
+
+```tsx
+import { Button, ButtonVariant } from '@metamask/design-system-react';
+
+<Button variant={ButtonVariant.Tertiary} isDanger onClick={handleDelete}>
+  Delete account
+</Button>;
+```
+
+##### Loading link → `Button` Tertiary with `isLoading`
+
+Before (Extension):
+
+```tsx
+import { ButtonLink } from '../../component-library';
+
+<ButtonLink loading={isSaving} onClick={handleSave}>
+  Save
+</ButtonLink>;
+```
+
+After (Design System):
+
+```tsx
+import { Button, ButtonVariant } from '@metamask/design-system-react';
+
+<Button
+  variant={ButtonVariant.Tertiary}
+  isLoading={isSaving}
+  onClick={handleSave}
+>
+  Save
+</Button>;
+```
+
+##### `Button` with `variant={ButtonVariant.Link}` → `TextButton`
+
+Before (Extension):
+
+```tsx
+import { Button, ButtonVariant } from '../../component-library';
+
+<Button variant={ButtonVariant.Link} onClick={handleLearnMore}>
+  Learn more
+</Button>;
+```
+
+After (Design System):
+
+```tsx
+import { TextButton } from '@metamask/design-system-react';
+
+<TextButton onClick={handleLearnMore}>Learn more</TextButton>;
+```
+
+#### API Differences
+
+- `size` controls typography via `TextButtonSize` (body typography variants) rather than fixed button height
+- No `isDanger`, `isLoading`, or `color` props — use `Button` with `variant={ButtonVariant.Tertiary}` when any of these are required
+- Root element is always `<button>` unless `asChild` is used
+- Coloring is locked to primary (or inverse via `isInverse`)
+- Inherits the full `ButtonBase` composition surface (`asChild`, `textProps`, accessory slots, icons, ARIA props)
 
 ### Box Component
 
