@@ -1,9 +1,9 @@
 import {
   BoxAlignItems,
   BoxBackgroundColor,
-  ButtonBaseSize as ButtonSize,
   BoxFlexDirection,
   ButtonIconSize,
+  ButtonSize,
   FontWeight,
   IconName,
   TextVariant,

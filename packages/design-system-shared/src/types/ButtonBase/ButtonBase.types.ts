@@ -19,6 +19,12 @@ export const ButtonBaseSize = {
 export type ButtonBaseSize =
   (typeof ButtonBaseSize)[keyof typeof ButtonBaseSize];
 
+export const ButtonSize = ButtonBaseSize;
+export type ButtonSize = ButtonBaseSize;
+
+export const ButtonHeroSize = ButtonBaseSize;
+export type ButtonHeroSize = ButtonBaseSize;
+
 /**
  * ButtonBase component shared props (ADR-0004)
  * Platform-independent properties shared across React and React Native

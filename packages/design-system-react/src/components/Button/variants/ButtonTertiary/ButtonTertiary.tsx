@@ -5,6 +5,10 @@ import { ButtonBase } from '../../../ButtonBase';
 
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
+/**
+ * Internal variant of `Button`.
+ * Consumers should use `Button` with `variant`; this variant component is not part of the public package API.
+ */
 export const ButtonTertiary = forwardRef<
   HTMLButtonElement,
   ButtonTertiaryProps

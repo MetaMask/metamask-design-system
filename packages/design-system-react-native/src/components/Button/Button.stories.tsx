@@ -1,5 +1,5 @@
 import {
-  ButtonBaseSize as ButtonSize,
+  ButtonSize,
   ButtonVariant,
   IconName,
 } from '@metamask/design-system-shared';

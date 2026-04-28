@@ -1,7 +1,4 @@
-import {
-  ButtonBaseSize as ButtonPrimarySize,
-  IconName,
-} from '@metamask/design-system-shared';
+import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
@@ -18,7 +15,7 @@ const meta: Meta<ButtonPrimaryProps> = {
     },
     size: {
       control: 'select',
-      options: ButtonPrimarySize,
+      options: ButtonSize,
     },
     isLoading: {
       control: 'boolean',
@@ -70,7 +67,7 @@ const ButtonPrimaryStory: React.FC<ButtonPrimaryProps> = ({
 export const Default: Story = {
   args: {
     children: 'Sample ButtonPrimary Text',
-    size: ButtonPrimarySize.Lg,
+    size: ButtonSize.Lg,
     isLoading: false,
     loadingText: 'Loading',
     startIconName: IconName.Add,
@@ -86,9 +83,9 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonPrimary size={ButtonPrimarySize.Sm}>ButtonSize Sm</ButtonPrimary>
-      <ButtonPrimary size={ButtonPrimarySize.Md}>ButtonSize Md</ButtonPrimary>
-      <ButtonPrimary size={ButtonPrimarySize.Lg}>
+      <ButtonPrimary size={ButtonSize.Sm}>ButtonSize Sm</ButtonPrimary>
+      <ButtonPrimary size={ButtonSize.Md}>ButtonSize Md</ButtonPrimary>
+      <ButtonPrimary size={ButtonSize.Lg}>
         ButtonSize Lg (Default)
       </ButtonPrimary>
     </View>

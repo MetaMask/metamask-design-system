@@ -5,6 +5,10 @@ import { ButtonBase } from '../../../ButtonBase';
 
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 
+/**
+ * Internal variant of `Button`.
+ * Consumers should use `Button` with `variant`; this variant component is not part of the public package API.
+ */
 export const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
   (
     { className, isDanger, isInverse, isDisabled, isLoading, ...props },

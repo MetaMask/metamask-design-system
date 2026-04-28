@@ -1,7 +1,4 @@
-import {
-  ButtonBaseSize as ButtonTertiarySize,
-  IconName,
-} from '@metamask/design-system-shared';
+import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
@@ -18,7 +15,7 @@ const meta: Meta<ButtonTertiaryProps> = {
     },
     size: {
       control: 'select',
-      options: ButtonTertiarySize,
+      options: ButtonSize,
     },
     isLoading: {
       control: 'boolean',
@@ -70,7 +67,7 @@ const ButtonTertiaryStory: React.FC<ButtonTertiaryProps> = ({
 export const Default: Story = {
   args: {
     children: 'Sample ButtonTertiary Text',
-    size: ButtonTertiarySize.Lg,
+    size: ButtonSize.Lg,
     isLoading: false,
     loadingText: 'Loading',
     startIconName: IconName.Add,
@@ -86,13 +83,9 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonTertiary size={ButtonTertiarySize.Sm}>
-        ButtonSize Sm
-      </ButtonTertiary>
-      <ButtonTertiary size={ButtonTertiarySize.Md}>
-        ButtonSize Md
-      </ButtonTertiary>
-      <ButtonTertiary size={ButtonTertiarySize.Lg}>
+      <ButtonTertiary size={ButtonSize.Sm}>ButtonSize Sm</ButtonTertiary>
+      <ButtonTertiary size={ButtonSize.Md}>ButtonSize Md</ButtonTertiary>
+      <ButtonTertiary size={ButtonSize.Lg}>
         ButtonSize Lg (Default)
       </ButtonTertiary>
     </View>

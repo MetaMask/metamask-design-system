@@ -1,6 +1,6 @@
 import {
   ButtonVariant,
-  ButtonBaseSize as ButtonSize,
+  ButtonSize,
   IconName,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';

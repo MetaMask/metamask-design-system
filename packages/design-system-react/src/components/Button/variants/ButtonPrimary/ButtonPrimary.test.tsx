@@ -1,7 +1,4 @@
-import {
-  ButtonBaseSize as ButtonPrimarySize,
-  IconName,
-} from '@metamask/design-system-shared';
+import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
@@ -117,11 +114,11 @@ describe('ButtonPrimary', () => {
 
   it('renders with correct size classes', () => {
     const { rerender } = render(
-      <ButtonPrimary size={ButtonPrimarySize.Sm}>Small</ButtonPrimary>,
+      <ButtonPrimary size={ButtonSize.Sm}>Small</ButtonPrimary>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
 
-    rerender(<ButtonPrimary size={ButtonPrimarySize.Lg}>Large</ButtonPrimary>);
+    rerender(<ButtonPrimary size={ButtonSize.Lg}>Large</ButtonPrimary>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 

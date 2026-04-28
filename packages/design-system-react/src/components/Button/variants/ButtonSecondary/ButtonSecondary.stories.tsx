@@ -1,7 +1,4 @@
-import {
-  ButtonBaseSize as ButtonSecondarySize,
-  IconName,
-} from '@metamask/design-system-shared';
+import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
@@ -39,8 +36,8 @@ const meta: Meta<typeof ButtonSecondary> = {
     },
     size: {
       control: 'select',
-      options: Object.keys(ButtonSecondarySize),
-      mapping: ButtonSecondarySize,
+      options: Object.keys(ButtonSize),
+      mapping: ButtonSize,
       description: 'Optional prop to control the size of the ButtonSecondary',
     },
     isFullWidth: {
@@ -135,13 +132,13 @@ export const IsInverse: Story = {
 export const Size: Story = {
   render: (args) => (
     <div className="flex gap-2">
-      <ButtonSecondary {...args} size={ButtonSecondarySize.Sm}>
+      <ButtonSecondary {...args} size={ButtonSize.Sm}>
         Small
       </ButtonSecondary>
-      <ButtonSecondary {...args} size={ButtonSecondarySize.Md}>
+      <ButtonSecondary {...args} size={ButtonSize.Md}>
         Medium
       </ButtonSecondary>
-      <ButtonSecondary {...args} size={ButtonSecondarySize.Lg}>
+      <ButtonSecondary {...args} size={ButtonSize.Lg}>
         Large
       </ButtonSecondary>
     </div>

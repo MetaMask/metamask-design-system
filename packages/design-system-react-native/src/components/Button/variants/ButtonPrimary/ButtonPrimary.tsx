@@ -6,6 +6,11 @@ import { TextVariant, FontWeight } from '../../../Text';
 
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 
+// eslint-disable-next-line jsdoc/require-param, jsdoc/require-returns
+/**
+ * Internal variant of `Button`.
+ * Consumers should use `Button` with `variant`; this variant component is not part of the public package API.
+ */
 export const ButtonPrimary = ({
   children,
   textProps,
