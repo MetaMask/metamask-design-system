@@ -71,6 +71,7 @@
     "deepmerge": "^4.2.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "react-focus-lock": "^2.9.4",
     "rimraf": "^5.0.5",
     "ts-jest": "^29.2.5",
     "tsx": "^4.20.6",
@@ -81,7 +82,8 @@
     "@metamask/design-tokens": "^8.1.0",
     "@metamask/utils": "^11.11.0",
     "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-focus-lock": "^2.9.4"
   },
   "engines": {
     "node": "^18.18 || >=20"
