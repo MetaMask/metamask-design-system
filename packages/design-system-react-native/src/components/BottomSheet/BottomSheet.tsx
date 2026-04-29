@@ -81,7 +81,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     // Dismiss the sheet when Android back button is pressed.
     useEffect(() => {
       if (Platform.OS !== 'android') {
-        return;
+        return undefined;
       }
 
       const hardwareBackPress = () => {
