@@ -98,6 +98,8 @@ export { ModalBody } from './ModalBody';
 export type { ModalBodyProps } from './ModalBody';
 export { ModalFocus } from './ModalFocus';
 export type { FocusableElement, ModalFocusProps } from './ModalFocus';
+export { ModalFooter } from './ModalFooter';
+export type { ModalFooterProps } from './ModalFooter';
 
 export { Text } from './Text';
 export {

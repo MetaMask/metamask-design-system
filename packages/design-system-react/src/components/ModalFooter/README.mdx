@@ -1,0 +1,207 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as ModalFooterStories from './ModalFooter.stories';
+
+# ModalFooter
+
+`ModalFooter` is the bottom section of a modal. It hosts the primary submit/cancel button row and provides a slot above it for inline form controls (e.g. a "do not show again" checkbox). Pass `onSubmit` / `onCancel` to render the built-in buttons; omit them and provide `children` if you need a fully custom footer.
+
+```tsx
+import { ModalFooter } from '@metamask/design-system-react';
+
+<ModalFooter
+  onSubmit={handleSubmit}
+  submitButtonProps={{ children: t('confirm') }}
+  onCancel={handleClose}
+  cancelButtonProps={{ children: t('cancel') }}
+/>;
+```
+
+<Canvas of={ModalFooterStories.Default} />
+
+## Props
+
+### `onSubmit`
+
+Click handler for the submit button. When provided, a primary `Button` is rendered.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFooterStories.OnSubmit} />
+
+### `onCancel`
+
+Click handler for the cancel button. When provided, a secondary `Button` is rendered before the submit button.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFooterStories.OnCancel} />
+
+### `submitButtonProps` / `cancelButtonProps`
+
+Props forwarded to the underlying submit / cancel `Button`. Use `children` for the (localized) label and any other prop to customize variant, danger styling, icons, etc.
+
+`ModalFooter` is i18n-agnostic — the design system intentionally does not pull strings from a translation context. Pass localized strings from your application's i18n layer:
+
+```tsx
+<ModalFooter
+  onSubmit={handleSubmit}
+  submitButtonProps={{ children: t('confirm') }}
+  onCancel={handleClose}
+  cancelButtonProps={{ children: t('cancel') }}
+/>
+```
+
+When `children` is omitted the component falls back to the literal `'Confirm'` / `'Cancel'` so prototypes and Storybook render correctly without an i18n setup.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;ButtonProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFooterStories.SubmitButtonPropsCancelButtonProps} />
+
+### `containerProps`
+
+Props passed to the inner `Box` that wraps the submit/cancel buttons. Use this to override the default 360px max-width, change the background, or apply any other Box utility. The default `max-w-[360px]` is applied via className and is overridden when `containerProps.className` provides its own `max-w-*` utility (`twMerge` lets the consumer's class win).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;BoxProps, 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFooterStories.ContainerProps} />
+
+### `children`
+
+Optional custom content rendered above the built-in submit/cancel button row. Use this for inline form controls (checkboxes, disclaimers) or to fully replace the built-in button row by omitting `onSubmit` / `onCancel`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFooterStories.Children} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the outer `<footer>` element. These classes are merged with the component's defaults via `twMerge`, so consumer utilities override the defaults (for example, `className="px-0"` wins over the internal `px-4`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={ModalFooterStories.Default} />
+
+## Migration Guide
+
+Migrating from `ui/components/component-library/modal-footer` in MetaMask Extension? See the [ModalFooter Migration Guide](../../../MIGRATION.md#modalfooter-component) for prop mappings, before/after examples, and breaking changes.
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
