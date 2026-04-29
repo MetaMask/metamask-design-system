@@ -1,6 +1,6 @@
+import { ButtonSize, ButtonVariant } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { ButtonSize, ButtonVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Box, BoxAlignItems, BoxFlexWrap } from '../Box';
 import { Button } from '../Button';
