@@ -16,6 +16,21 @@ const meta: Meta<ModalFooterProps> = {
       page: README,
     },
   },
+  // Wrap each story in a dialog landmark so the `<footer>` inside is scoped
+  // to its parent role and is not treated as a top-level `contentinfo`
+  // landmark by axe. This mirrors real usage — `ModalFooter` always lives
+  // inside a `Modal`/`<dialog>`.
+  decorators: [
+    (Story, context) => (
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={`ModalFooter — ${context.name}`}
+      >
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     className: { control: 'text' },
     submitButtonProps: { control: 'object' },
@@ -66,7 +81,7 @@ export const ContainerProps: Story = {
     <Box flexDirection={BoxFlexDirection.Column} gap={4}>
       <ModalFooter
         {...args}
-        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        className="bg-primary-muted"
         containerProps={{
           backgroundColor: BoxBackgroundColor.ErrorMuted,
           className: 'max-w-[480px]',
@@ -74,7 +89,7 @@ export const ContainerProps: Story = {
       />
       <ModalFooter
         {...args}
-        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        className="bg-primary-muted"
         containerProps={{
           backgroundColor: BoxBackgroundColor.ErrorMuted,
           className: 'max-w-[720px]',
@@ -82,7 +97,7 @@ export const ContainerProps: Story = {
       />
       <ModalFooter
         {...args}
-        backgroundColor={BoxBackgroundColor.PrimaryMuted}
+        className="bg-primary-muted"
         containerProps={{
           backgroundColor: BoxBackgroundColor.ErrorMuted,
           className: 'max-w-full',
