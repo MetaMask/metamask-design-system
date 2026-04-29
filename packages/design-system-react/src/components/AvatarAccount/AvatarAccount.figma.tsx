@@ -18,7 +18,7 @@ import { AvatarAccountSize } from '.';
 
 figma.connect(
   AvatarAccount,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=128%3A1673',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=128%3A1673',
   {
     props: {
       size: figma.enum('size', {
