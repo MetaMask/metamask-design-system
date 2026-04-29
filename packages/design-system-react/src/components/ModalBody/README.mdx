@@ -43,12 +43,44 @@ Content rendered inside the body. `ModalBody` handles vertical scrolling when it
 
 <Canvas of={ModalBodyStories.Children} />
 
+### Padding
+
+`ModalBody` applies horizontal padding by default so its contents align with the rest of the modal frame:
+
+- `padding-left: 16px` (`px-4`)
+- `padding-right: 16px` (`px-4`)
+
+Vertical padding is intentionally not set on `ModalBody` itself — `ModalHeader` and `ModalFooter` own the modal's top and bottom spacing.
+
+#### Overriding the default padding
+
+Pass any `px-*` / `py-*` Tailwind utility through `className`. Because the merge is handled by `twMerge`, your utility wins over the default `px-4` — there is no need to "unset" the default.
+
+```tsx
+// Remove the default horizontal padding so children can span the full width
+// (e.g. for full-bleed rows that own their own internal padding).
+<ModalBody className="px-0">{rows}</ModalBody>
+```
+
+#### Edge-to-edge children inside a padded body
+
+A common pattern in the extension was to drop the body's padding and let individual children own their inset. The same pattern works here, expressed with Tailwind:
+
+```tsx
+<ModalBody className="flex flex-col gap-4 px-0">
+  <Text className="px-4">Standard inset row</Text>
+  <Text className="bg-primary-muted px-4">
+    Highlighted row that touches the body edges
+  </Text>
+  <Text className="px-4">Standard inset row</Text>
+</ModalBody>
+```
+
+<Canvas of={ModalBodyStories.Padding} />
+
 ### `className`
 
-Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
-
-- Add new styles that don't exist in the default component
-- Override the component's default styles when needed (for example, removing the default `px-4` to let inner elements span the full width)
+Use the `className` prop to add custom CSS classes to the component. These classes are merged with the component's defaults via `twMerge`, so consumer utilities override the defaults (for example, `className="px-0"` wins over the internal `px-4`).
 
 <table>
   <thead>
@@ -70,8 +102,6 @@ Use the `className` prop to add custom CSS classes to the component. These class
     </tr>
   </tbody>
 </table>
-
-<Canvas of={ModalBodyStories.Padding} />
 
 ## Component API
 

@@ -16,6 +16,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [ModalBody Component](#modalbody-component)
   - [ModalOverlay Component](#modaloverlay-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
@@ -1230,6 +1231,85 @@ import { Checkbox } from '@metamask/design-system-react';
 - `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
+
+### ModalBody Component
+
+The extension `modal-body` component maps to `ModalBody` in the design system. The default visual contract (horizontal padding, scrollable container) is preserved, but the polymorphic Box surface is removed and a keyboard-accessibility default is added.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                               | Design System Migration                                               |
+| --------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `import { ModalBody } from '../../component-library'`           | `import { ModalBody } from '@metamask/design-system-react'`           |
+| `import type { ModalBodyProps } from '../../component-library'` | `import type { ModalBodyProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                                 | Design System API       | Change Type | Notes                                                                                                                          |
+| --------------------------------------------------------------------------------------------- | ----------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `children?: ReactNode`                                                                        | `children?: ReactNode`  | unchanged   | rendered inside the scrollable container                                                                                       |
+| `className?: string`                                                                          | `className?: string`    | unchanged   | merged with default Tailwind classes via `twMerge`                                                                             |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>`                                  | removed                 | removed     | always renders a `<div>`. If you need a different element, wrap or compose.                                                    |
+| Box style-utility props (`paddingLeft`, `paddingRight`, `flexDirection`, `gap`, `display`, …) | removed from public API | removed     | use `className` with Tailwind utilities. The default `px-4` remains, applied internally; override with `className="px-0"` etc. |
+| `mm-modal-body` SCSS class hook                                                               | removed                 | removed     | use `className` and Tailwind utilities to customize                                                                            |
+
+##### Default and Behavior Changes
+
+| Concern                | Extension Behavior                                                                                  | Design System Behavior                                                                                                                                        |
+| ---------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Horizontal padding     | `paddingLeft={4} paddingRight={4}` Box props (16px each side)                                       | `paddingHorizontal={4}` applied internally → `px-4`. Override with `className="px-0"` (or another `px-*` utility).                                            |
+| Scroll/overflow        | `position: relative; max-height: 100%; overflow-y: auto;` from `.mm-modal-body` SCSS                | Same behavior via `relative max-h-full overflow-y-auto` Tailwind utilities applied internally.                                                                |
+| Keyboard accessibility | No default `tabIndex` — scrollable text-only content was not reachable by keyboard for arrow scroll | `tabIndex={0}` applied by default so keyboard users can focus the scrollable region and arrow-scroll. Override with `tabIndex={-1}` if you need to remove it. |
+
+This satisfies the WCAG 2.1.1 "Keyboard" rule for scrollable regions (axe `scrollable-region-focusable`) — modals containing only static text now expose the body as a focusable scroll target out of the box.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalBody } from '../../component-library';
+import { FlexDirection } from '../../../helpers/constants/design-system';
+
+// Default usage
+<ModalBody>{description}</ModalBody>
+
+// Customized: remove default horizontal padding, lay out children as a column
+<ModalBody
+  paddingLeft={0}
+  paddingRight={0}
+  flexDirection={FlexDirection.Column}
+  gap={2}
+>
+  {options}
+</ModalBody>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalBody } from '@metamask/design-system-react';
+
+// Default usage — unchanged
+<ModalBody>{description}</ModalBody>
+
+// Customized: utility-prop overrides move into className
+<ModalBody className="flex flex-col gap-2 px-0">
+  {options}
+</ModalBody>
+```
+
+For typical call sites — for example `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (bare `<ModalBody>{text}</ModalBody>`) and `ui/components/app/alert-system/alert-modal/alert-modal.tsx` (bare with element children) (verified via fresh grep) — the only change is the import path. Sites that override Box utility props, such as `ui/components/multichain-accounts/add-wallet-modal/add-wallet-modal.tsx` (`paddingLeft={0} paddingRight={0} flexDirection={FlexDirection.Column} gap={2}`), need the `className` translation shown above.
+
+#### API Differences
+
+- `ModalBody` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `tabIndex`, `ref`) to it.
+- `tabIndex={0}` is now the default. Pass `tabIndex={-1}` (or any other value) to override; the consumer's value wins.
+- One-off styling that previously used Box utility props should move to Tailwind via `className` (`px-0`, `py-2`, `flex`, `flex-col`, `gap-2`, etc.).
 
 ### ModalOverlay Component
 
