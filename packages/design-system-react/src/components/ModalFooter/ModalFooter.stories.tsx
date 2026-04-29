@@ -15,6 +15,20 @@ const meta: Meta<ModalFooterProps> = {
     docs: {
       page: README,
     },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'landmark-no-duplicate-contentinfo',
+            enabled: false, // Storybook renders light + dark themes simultaneously, duplicating the <footer>
+          },
+          {
+            id: 'landmark-unique',
+            enabled: false, // Same reason — single ModalFooter in production, duplicated by theme decorator
+          },
+        ],
+      },
+    },
   },
   // Wrap each story in a dialog landmark so the `<footer>` inside is scoped
   // to its parent role and is not treated as a top-level `contentinfo`
