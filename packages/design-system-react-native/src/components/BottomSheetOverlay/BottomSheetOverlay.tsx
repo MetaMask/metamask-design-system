@@ -1,11 +1,6 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useEffect } from 'react';
-import {
-  Animated,
-  Easing,
-  TouchableOpacity,
-  useAnimatedValue,
-} from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { Animated, Easing, TouchableOpacity } from 'react-native';
 
 import { DEFAULT_OVERLAY_ANIMATION_DURATION } from './BottomSheetOverlay.constants';
 import { BottomSheetOverlayProps } from './BottomSheetOverlay.types';
@@ -18,7 +13,7 @@ export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
   ...props
 }) => {
   const tw = useTailwind();
-  const opacityVal = useAnimatedValue(0);
+  const opacityVal = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.timing(opacityVal, {

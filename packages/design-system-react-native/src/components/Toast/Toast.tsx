@@ -63,7 +63,7 @@ export const Toast = forwardRef<ToastRef, ToastProps>(
     const bottomOffset = toastOptions?.bottomOffset ?? 0;
     const animatedStyle = useAnimatedStyle(() => ({
       transform: [{ translateY: translateYProgress.value - bottomOffset }],
-    }));
+    }), [bottomOffset]);
     const baseStyle: StyleProp<ViewStyle> = useMemo(
       () => [
         tw.style(

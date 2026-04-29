@@ -227,7 +227,7 @@ export const BottomSheetDialog = forwardRef<
           translateY: currentYOffset.value,
         },
       ],
-    }));
+    }), []);
 
     const sheetStyle = useMemo(
       () => [

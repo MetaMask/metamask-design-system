@@ -6,9 +6,8 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ScrollView } from 'react-native';
 
-import { TextVariant, TextColor, FontWeight } from '../../../types';
 import { Box } from '../../Box';
-import { Text } from '../../Text';
+import { Text, TextVariant, FontWeight } from '../../Text';
 
 import { Blockies } from './Blockies';
 import type { BlockiesProps } from './Blockies.types';
