@@ -9,7 +9,7 @@ import type { RefObject } from 'react';
 
 // Internal dependencies.
 import type { ToastOptions, ToastProps, ToastRef } from './Toast.types';
-import { ToastBase } from './ToastBase';
+import { ToastView } from './ToastView';
 
 let registeredRef: RefObject<ToastRef> | null = null;
 
@@ -43,7 +43,7 @@ const ToastComponent = forwardRef<ToastRef, ToastProps>((props, ref) => {
     };
   }, []);
 
-  return <ToastBase ref={innerRef} {...props} />;
+  return <ToastView ref={innerRef} {...props} />;
 });
 
 ToastComponent.displayName = 'Toast';
