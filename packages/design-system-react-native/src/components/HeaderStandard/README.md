@@ -10,7 +10,7 @@ import { HeaderStandard } from '@metamask/design-system-react-native';
 
 ## Props
 
-Inherits [HeaderBaseProps](../HeaderBase/README.md) (`variant`, `startAccessory`, `endAccessory`, `testID`, `style`, `twClassName`, and other `View` props). Additional props:
+Inherits [HeaderBaseProps](../HeaderBase/README.md) (`startAccessory`, `endAccessory`, `textProps`, `testID`, `style`, `twClassName`, and other `View` props). Additional props:
 
 ### `title`
 
