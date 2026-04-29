@@ -1,4 +1,5 @@
 // Third party dependencies.
+import { TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback, useState } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
@@ -8,7 +9,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // External dependencies.
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
-import { TextVariant } from '../Text';
 
 import type { HeaderBaseProps } from './HeaderBase.types';
 
@@ -40,10 +40,32 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
     setEndAccessoryWidth(e.nativeEvent.layout.width);
   }, []);
 
-  // Determine what to render for start/end
-  const hasStartContent = startAccessory || startButtonIconProps;
-  const hasEndContent =
-    endAccessory || (endButtonIconProps && endButtonIconProps.length > 0);
+  let startContent = startAccessory ?? null;
+  if (!startContent && startButtonIconProps) {
+    startContent = (
+      <ButtonIcon size={ButtonIconSize.Md} {...startButtonIconProps} />
+    );
+  }
+
+  let endContent = endAccessory ?? null;
+  if (!endContent && endButtonIconProps && endButtonIconProps.length > 0) {
+    endContent = endButtonIconProps
+      .map((iconProps, originalIndex) => ({
+        iconProps,
+        originalIndex,
+      }))
+      .reverse()
+      .map(({ iconProps, originalIndex }) => (
+        <ButtonIcon
+          key={`end-button-icon-${originalIndex}`}
+          size={ButtonIconSize.Md}
+          {...iconProps}
+        />
+      ));
+  }
+
+  const hasStartContent = Boolean(startContent);
+  const hasEndContent = Boolean(endContent);
   const hasAnyAccessory = hasStartContent || hasEndContent;
   const shouldRenderStartWrapper = Boolean(hasAnyAccessory);
   const shouldRenderEndWrapper = Boolean(hasAnyAccessory);
@@ -53,40 +75,6 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
     hasAnyAccessory && (startAccessoryWidth || endAccessoryWidth)
       ? Math.max(startAccessoryWidth, endAccessoryWidth)
       : undefined;
-
-  const renderStartContent = () => {
-    if (startAccessory) {
-      return startAccessory;
-    }
-    if (startButtonIconProps) {
-      return <ButtonIcon size={ButtonIconSize.Md} {...startButtonIconProps} />;
-    }
-    return null;
-  };
-
-  const renderEndContent = () => {
-    if (endAccessory) {
-      return endAccessory;
-    }
-    if (endButtonIconProps && endButtonIconProps.length > 0) {
-      // Reverse the array so first item appears rightmost
-      // Use original index (before reversal) for stable React keys
-      const reversedProps = endButtonIconProps
-        .map((iconProps, originalIndex) => ({
-          iconProps,
-          originalIndex,
-        }))
-        .reverse();
-      return reversedProps.map(({ iconProps, originalIndex }) => (
-        <ButtonIcon
-          key={`end-button-icon-${originalIndex}`}
-          size={ButtonIconSize.Md}
-          {...iconProps}
-        />
-      ));
-    }
-    return null;
-  };
 
   // Check if we have multiple end buttons for layout styling
   const hasMultipleEndButtons =
@@ -142,22 +130,21 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
         wrapperProps: startAccessoryWrapperProps,
         alignment: 'items-start',
         onLayout: handleStartAccessoryLayout,
-        content: renderStartContent(),
+        content: startContent,
       })}
 
       {/* Title */}
-      <TextOrChildren
-        textProps={{
-          variant: TextVariant.HeadingSm,
-          ...textProps,
-          style: [
-            tw.style('text-center flex-1 items-center'),
-            textProps?.style,
-          ],
-        }}
-      >
-        {children}
-      </TextOrChildren>
+      <View style={tw.style('flex-1 items-center')}>
+        <TextOrChildren
+          textProps={{
+            variant: TextVariant.HeadingSm,
+            ...textProps,
+            style: [tw.style('text-center'), textProps?.style],
+          }}
+        >
+          {children}
+        </TextOrChildren>
+      </View>
 
       {/* End accessory */}
       {renderAccessoryWrapper({
@@ -165,7 +152,7 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
         wrapperProps: endAccessoryWrapperProps,
         alignment: 'items-end',
         onLayout: handleEndAccessoryLayout,
-        content: renderEndContent(),
+        content: endContent,
         contentStyle: hasMultipleEndButtons
           ? tw.style('flex-row gap-2')
           : undefined,
