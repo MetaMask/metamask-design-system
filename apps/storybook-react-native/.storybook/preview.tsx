@@ -1,20 +1,20 @@
 import type { Preview } from '@storybook/react-native-web-vite';
-import {
-  Theme,
-  ThemeProvider,
-  useTailwind,
-} from '@metamask/design-system-twrnc-preset';
+import { Theme, ThemeProvider } from '@metamask/design-system-twrnc-preset';
 import React, { type PropsWithChildren, useEffect } from 'react';
-import { StyleSheet, useColorScheme, View } from 'react-native';
+import { Appearance, useColorScheme, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-const StorySurface = ({ children }: PropsWithChildren) => {
-  const tw = useTailwind();
-  const backgroundColor = StyleSheet.flatten(
-    tw.style('bg-background-default'),
-  )?.backgroundColor as string | undefined;
+import {
+  getStorybookBackgrounds,
+  getStorybookDefaultBackground,
+} from '../storybook/backgrounds';
 
+type StorySurfaceProps = PropsWithChildren<{
+  backgroundColor: string;
+}>;
+
+const StorySurface = ({ backgroundColor, children }: StorySurfaceProps) => {
   useEffect(() => {
     if (typeof document === 'undefined' || !backgroundColor) {
       return;
@@ -37,33 +37,40 @@ const StorySurface = ({ children }: PropsWithChildren) => {
     }
   }, [backgroundColor]);
 
-  return <View style={tw.style('flex-1 bg-background-default')}>{children}</View>;
+  return <View style={{ flex: 1, backgroundColor }}>{children}</View>;
 };
 
 const ThemeDecorator = ({ children }: PropsWithChildren) => {
   const colorScheme = useColorScheme();
   const theme = colorScheme === 'dark' ? Theme.Dark : Theme.Light;
+  const backgroundColor = getStorybookDefaultBackground(theme);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <ThemeProvider theme={theme}>
-          <StorySurface>{children}</StorySurface>
+          <StorySurface backgroundColor={backgroundColor}>
+            {children}
+          </StorySurface>
         </ThemeProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 };
 
+const initialTheme =
+  Appearance.getColorScheme() === 'dark' ? Theme.Dark : Theme.Light;
+
 const preview: Preview = {
   decorators: [
-    (Story) => (
+    (Story: React.ComponentType) => (
       <ThemeDecorator>
         <Story />
       </ThemeDecorator>
     ),
   ],
   parameters: {
+    backgrounds: getStorybookBackgrounds(initialTheme),
     layout: 'fullscreen',
   },
 };
