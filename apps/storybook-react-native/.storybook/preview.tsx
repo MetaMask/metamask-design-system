@@ -7,6 +7,7 @@ import {
 import React, { type PropsWithChildren, useEffect } from 'react';
 import { StyleSheet, useColorScheme, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const StorySurface = ({ children }: PropsWithChildren) => {
   const tw = useTailwind();
@@ -45,9 +46,11 @@ const ThemeDecorator = ({ children }: PropsWithChildren) => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ThemeProvider theme={theme}>
-        <StorySurface>{children}</StorySurface>
-      </ThemeProvider>
+      <SafeAreaProvider>
+        <ThemeProvider theme={theme}>
+          <StorySurface>{children}</StorySurface>
+        </ThemeProvider>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 };
