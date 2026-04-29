@@ -204,6 +204,9 @@ export type { TextFieldSearchProps } from './TextFieldSearch';
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 
+export { TitleAlert } from './TitleAlert';
+export type { TitleAlertProps, TitleAlertPropsShared } from './TitleAlert';
+
 export { TitleHub } from './TitleHub';
 export type { TitleHubProps, TitleHubPropsShared } from './TitleHub';
 
