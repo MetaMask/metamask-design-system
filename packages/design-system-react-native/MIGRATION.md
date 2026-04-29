@@ -21,6 +21,11 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Label Component](#label-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [BadgeCount Component](#badgecount-component)
+  - [BadgeIcon Component](#badgeicon-component)
+  - [BadgeNetwork Component](#badgenetwork-component)
+  - [BadgeStatus Component](#badgestatus-component)
+  - [BadgeWrapper Component](#badgewrapper-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
   - [TabEmptyState Component](#tabemptystate-component)
@@ -2782,6 +2787,233 @@ Only the import specifier changes.
 
 - Root prop type narrows from `Omit<BoxProps, 'children'>` to `ViewProps`. Move any root-level `Box` shorthands to `twClassName` or a wrapper `<Box>`.
 - All other props (`icon`, `description`, `descriptionProps`, `actionButtonText`, `actionButtonProps`, `onAction`, `children`, `twClassName`, `style`, `ViewProps`) are unchanged.
+
+### BadgeCount Component
+
+There is **no** `BadgeCount` in MetaMask Mobile `app/component-library` on `main` — the design system introduces this primitive. Use it for new work; there is no legacy file path to map from.
+
+#### MMDS API summary (React Native)
+
+| Area         | Notes                                                |
+| ------------ | ---------------------------------------------------- |
+| `count`      | Required `number`                                    |
+| `max`        | Optional (default **99**) — overflow shows as `max+` |
+| `size`       | `BadgeCountSize.Md` (default) or `Lg`                |
+| `textProps`  | Optional — inner `Text`                              |
+| `twClassName`| className override (twrnc)                          |
+
+#### After (Design System)
+
+```tsx
+import { BadgeCount, BadgeCountSize } from '@metamask/design-system-react-native';
+
+<BadgeCount count={4} max={99} size={BadgeCountSize.Md} />;
+```
+
+### BadgeIcon Component
+
+There is **no** mobile `component-library` `BadgeIcon` on `main`. Import the design-system component directly.
+
+#### After (Design System)
+
+```tsx
+import { BadgeIcon, IconName } from '@metamask/design-system-react-native';
+
+<BadgeIcon iconName={IconName.FullCircle} />;
+```
+
+### BadgeNetwork Component
+
+Maps from `app/component-library/components/Badges/Badge/variants/BadgeNetwork` (also reachable via the deprecated aggregate `Badge` with `variant={BadgeVariant.Network}`).
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                 | Design System Migration                                              |
+| ------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `import BadgeNetwork from '.../Badges/Badge/variants/BadgeNetwork'`          | `import { BadgeNetwork } from '@metamask/design-system-react-native'` |
+| `import { Badge, BadgeVariant } from '.../Badges/Badge'` + `variant={Network}` | Use standalone `BadgeNetwork`                                      |
+
+##### Props removed or replaced
+
+| Legacy mobile API (`BadgeNetwork.types.ts`) | MMDS `BadgeNetwork`                                                                 |
+| ------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `imageSource`                               | `src` — use `ImageOrSvgSrc` / remote URI per RN `AvatarNetwork`                    |
+| `size` (avatar icon size inside badge)      | **Removed** — MMDS pins the inner avatar to **XS**                                 |
+| `isScaled`                                  | **Removed** — layout is fixed in the design-system implementation                  |
+| `style` on wrapper                          | Prefer `twClassName` / `style` on MMDS root (still `View`-based)                     |
+
+##### Preserved / aligned
+
+- `name`, `fallbackText` match the shared `BadgeNetworkPropsShared` surface (same semantics as `AvatarNetwork`).
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import BadgeNetwork from '../../../component-library/components/Badges/Badge/variants/BadgeNetwork';
+
+<BadgeNetwork name="Ethereum" imageSource={{ uri: iconUrl }} size={16} isScaled />;
+```
+
+##### After (Design System)
+
+```tsx
+import { BadgeNetwork } from '@metamask/design-system-react-native';
+
+<BadgeNetwork name="Ethereum" src={{ uri: iconUrl }} />;
+```
+
+### BadgeStatus Component
+
+Maps from `app/component-library/components/Badges/Badge/variants/BadgeStatus` (or `Badge` + `variant={BadgeVariant.Status}`).
+
+#### Breaking Changes
+
+##### Status model expanded
+
+Legacy mobile used `BadgeStatusState` with **`Active`** and **`Inactive`** only (plus optional `borderColor`).
+
+MMDS uses `BadgeStatusStatus` string unions:
+
+| Legacy `BadgeStatusState` | MMDS `BadgeStatusStatus` |
+| ------------------------- | ------------------------ |
+| `Active`                  | `BadgeStatusStatus.Active` (`'active'`) |
+| `Inactive`                | `BadgeStatusStatus.Inactive` (`'inactive'`) |
+
+MMDS adds **`Disconnected`**, **`New`**, and **`Attention`** — map product semantics explicitly; there is no automatic translation from the old two-state enum.
+
+##### Props
+
+| Legacy mobile API                    | MMDS API                                              |
+| ------------------------------------ | ----------------------------------------------------- |
+| `state?: BadgeStatusState` (default Inactive) | `status: BadgeStatusStatus` (**required**)         |
+| `borderColor`                        | **Removed** — use `hasBorder` (default **true**) only |
+
+##### Size
+
+- Optional `size` — `BadgeStatusSize.Md` (default) or `Lg`.
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import BadgeStatus from '../../../component-library/components/Badges/Badge/variants/BadgeStatus';
+import { BadgeStatusState } from '../../../component-library/components/Badges/Badge/variants/BadgeStatus/BadgeStatus.types';
+
+<BadgeStatus state={BadgeStatusState.Active} borderColor="#ccc" />;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  BadgeStatus,
+  BadgeStatusStatus,
+} from '@metamask/design-system-react-native';
+
+<BadgeStatus status={BadgeStatusStatus.Active} />;
+```
+
+### BadgeWrapper Component
+
+Maps from `app/component-library/components/Badges/BadgeWrapper`.
+
+When migrating layout-heavy legacy wrappers, prefer explicit design-system props (`twClassName`, `style`) or wrapping with `Box` instead of relying on deprecated broad utility spreads.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                               | Design System Migration                                                   |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `import BadgeWrapper from '.../Badges/BadgeWrapper'`                         | `import { BadgeWrapper } from '@metamask/design-system-react-native'`   |
+
+##### Prop renames
+
+| Legacy mobile API        | MMDS API              |
+| ------------------------ | --------------------- |
+| `badgeElement`           | `badge`               |
+| `badgePosition`          | `position` **or** `customPosition` (MMDS splits preset vs free-form) |
+| `anchorElementShape`     | `positionAnchorShape` |
+
+Legacy `badgePosition` accepted either a `BadgePosition` enum **or** a `{ top, right, bottom, left }` object. MMDS uses **`position`** for presets (`BadgeWrapperPosition`) and **`customPosition`** for the object form — migrate object callers to `customPosition`.
+
+##### Enum value strings
+
+Legacy `BadgePosition` / `BadgeAnchorElementShape` enum members serialized to **PascalCase** strings (`'TopRight'`, `'Circular'`). MMDS const objects use **kebab-case / lowercase** string values (`'top-right'`, `'circular'`). Update any code that compared raw strings.
+
+##### Defaults
+
+| Concern              | Legacy mobile default (see `BadgeWrapper.constants.tsx`) | MMDS default                          |
+| -------------------- | ---------------------------------------------------------- | ------------------------------------- |
+| Anchor shape         | **Circular**                                               | **Circular** (`BadgeWrapperPositionAnchorShape.Circular`) |
+| Preset corner position | **TopRight**                                             | **BottomRight** (`BadgeWrapperPosition.BottomRight`) |
+
+Re-verify badge placement after migrating — the default corner differs.
+
+##### New props in MMDS
+
+- `positionXOffset` / `positionYOffset` — adjust preset placement (default `0`).
+
+##### Removed surfaces
+
+- Root `ViewProps` spread still works, but style-utility patterns from older code should move to `twClassName` where appropriate.
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import BadgeWrapper from '../../../component-library/components/Badges/BadgeWrapper';
+import {
+  BadgeAnchorElementShape,
+  BadgePosition,
+} from '../../../component-library/components/Badges/BadgeWrapper/BadgeWrapper.types';
+
+<BadgeWrapper
+  anchorElementShape={BadgeAnchorElementShape.Circular}
+  badgePosition={BadgePosition.TopRight}
+  badgeElement={<MyBadge />}
+>
+  {children}
+</BadgeWrapper>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  BadgeWrapper,
+  BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
+} from '@metamask/design-system-react-native';
+
+<BadgeWrapper
+  positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+  position={BadgeWrapperPosition.TopRight}
+  badge={<MyBadge />}
+>
+  {children}
+</BadgeWrapper>;
+```
+
+#### Deprecated aggregate `Badge` component
+
+The umbrella `Badge` at `app/component-library/components/Badges/Badge/Badge.tsx` dispatches to `BadgeNetwork`, `BadgeStatus`, or `BadgeNotifications`. **`BadgeNotifications` has no MMDS equivalent** — migrate notification visuals manually (compose `BadgeCount`, `Text`, or product-specific UI).
+
+For **network** and **status** rows, replace:
+
+```tsx
+import Badge, { BadgeVariant } from '.../Badges/Badge';
+
+<Badge variant={BadgeVariant.Network} {...networkProps} />;
+```
+
+with the matching standalone MMDS component (`BadgeNetwork` / `BadgeStatus`) using the sections above.
 
 ## Version Updates
 

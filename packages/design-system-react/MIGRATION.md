@@ -16,6 +16,11 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [BadgeCount Component](#badgecount-component)
+  - [BadgeIcon Component](#badgeicon-component)
+  - [BadgeNetwork Component](#badgenetwork-component)
+  - [BadgeStatus Component](#badgestatus-component)
+  - [BadgeWrapper Component](#badgewrapper-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -1229,6 +1234,171 @@ import { Checkbox } from '@metamask/design-system-react';
 - `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
+
+### BadgeCount Component
+
+There is **no** `BadgeCount` (or equivalent) under MetaMask Extension `ui/components/component-library` on `main`. Treat numeric badges as **new** design-system usage rather than a straight replacement.
+
+#### MMDS API summary
+
+| Area            | Notes                                                                 |
+| --------------- | --------------------------------------------------------------------- |
+| `count`         | Required `number`                                                     |
+| `max`           | Optional — values above `max` render as `max+` (default max: **99**) |
+| `size`          | `BadgeCountSize.Md` (default) or `BadgeCountSize.Lg`                   |
+| `textProps`     | Optional — forwarded to inner `Text`                                  |
+| `className`     | Tailwind overrides                                                    |
+
+#### After (Design System)
+
+```tsx
+import { BadgeCount, BadgeCountSize } from '@metamask/design-system-react';
+
+<BadgeCount count={12} max={99} size={BadgeCountSize.Md} />;
+```
+
+### BadgeIcon Component
+
+There is **no** `BadgeIcon` under MetaMask Extension `ui/components/component-library` on `main`. Use MMDS directly.
+
+#### MMDS API summary
+
+| Area       | Notes                                                        |
+| ---------- | ------------------------------------------------------------ |
+| `iconName` | Required — `IconName` from the shared icon map               |
+| `iconProps`| Optional — passed to `Icon` except `name`                    |
+| `className`| Tailwind overrides                                           |
+
+#### After (Design System)
+
+```tsx
+import { BadgeIcon, IconName } from '@metamask/design-system-react';
+
+<BadgeIcon iconName={IconName.FullCircle} />;
+```
+
+### BadgeNetwork Component
+
+There is **no** `badge-network` folder under MetaMask Extension `ui/components/component-library` on `main`. Product code under `ui/components/multichain/badge-status` is a **different** component (multichain UI), not a legacy wrapper for MMDS `BadgeNetwork`.
+
+MMDS `BadgeNetwork` composes `AvatarNetwork` with **fixed** presentation (`AvatarNetworkSize.Xs`, `hasBorder` on web). Props are the shared network identity surface (`name`, `fallbackText`, image `src`) plus host passthrough (`className`, `imageProps` on web).
+
+#### After (Design System)
+
+```tsx
+import { BadgeNetwork } from '@metamask/design-system-react';
+
+<BadgeNetwork name="Ethereum Mainnet" src="https://example.com/icon.png" />;
+```
+
+### BadgeStatus Component
+
+There is **no** `badge-status` implementation under MetaMask Extension `ui/components/component-library` on `main`. A separate `ui/components/multichain/badge-status` exists for extension UI; it is **not** API-compatible with MMDS `BadgeStatus` — migrate call sites by redesigning around MMDS props (`status`, `size`, `hasBorder`) rather than assuming a prop rename map.
+
+#### MMDS API summary
+
+| Area        | Notes                                                                 |
+| ----------- | --------------------------------------------------------------------- |
+| `status`    | Required — `BadgeStatusStatus` (`Active`, `Inactive`, `Disconnected`, `New`, `Attention`) |
+| `size`      | Optional — `BadgeStatusSize.Md` (default) or `Lg`                    |
+| `hasBorder` | Optional — default **true**                                           |
+
+#### After (Design System)
+
+```tsx
+import {
+  BadgeStatus,
+  BadgeStatusStatus,
+  BadgeStatusSize,
+} from '@metamask/design-system-react';
+
+<BadgeStatus status={BadgeStatusStatus.Active} size={BadgeStatusSize.Md} />;
+```
+
+### BadgeWrapper Component
+
+Maps from MetaMask Extension `ui/components/component-library/badge-wrapper`.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) — legacy `BadgeWrapper` accepted polymorphic `Box` / `StyleUtilityProps` on the root; MMDS uses an explicit `className` surface instead.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                    | Design System Migration                                                    |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `import { BadgeWrapper } from '../../component-library/badge-wrapper'` | `import { BadgeWrapper } from '@metamask/design-system-react'`           |
+
+##### Enum and shape renames (ADR-0003)
+
+Legacy enums used camelCase member names with the same **string** values as today’s const objects (for example `'top-right'`). Prefer importing `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape` from `@metamask/design-system-react` and using PascalCase members (`TopRight`, `Circular`, …).
+
+| Legacy Extension API              | MMDS API                    |
+| --------------------------------- | --------------------------- |
+| `BadgeWrapperAnchorElementShape`  | `BadgeWrapperPositionAnchorShape` |
+| `anchorElementShape`              | `positionAnchorShape`       |
+| `positionObj`                     | `customPosition`            |
+
+##### Defaults changed
+
+| Concern                         | Extension (`badge-wrapper.tsx`)     | MMDS `BadgeWrapper`           |
+| ------------------------------- | ----------------------------------- | ----------------------------- |
+| Preset position                 | Defaults to **`bottomRight`**       | Defaults to **`BottomRight`** (same string `'bottom-right'`; verify visually when migrating) |
+| Anchor shape                    | Defaults to **`rectangular`**       | Defaults to **`Circular`**    |
+| Root polymorphism / Box utilities | Polymorphic `Box` + style utilities | Fixed `div`; use `className` + Tailwind |
+| `badge` optional                | Optional in legacy props            | **Required** in MMDS types — always pass the badge node |
+
+##### New props in MMDS
+
+- `positionXOffset` / `positionYOffset` — fine-tune preset positions (default `0`).
+- `childrenContainerProps` — passthrough to the measured anchor wrapper around `children`.
+
+##### Removed / replaced surfaces
+
+| Legacy Extension Behavior                         | MMDS Migration                                       |
+| ------------------------------------------------- | ---------------------------------------------------- |
+| Root `Box` style-utility props (`marginTop`, …)   | Use Tailwind classes via `className` on `BadgeWrapper` |
+| Polymorphic root (`as`, …)                        | Root is a `div`; wrap if you need another element    |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import {
+  BadgeWrapper,
+  BadgeWrapperPosition,
+  BadgeWrapperAnchorElementShape,
+} from '../../component-library/badge-wrapper';
+import { AvatarNetwork } from '../../component-library';
+
+<BadgeWrapper
+  anchorElementShape={BadgeWrapperAnchorElementShape.circular}
+  position={BadgeWrapperPosition.topRight}
+  badge={<AvatarNetwork name="Polygon" src={src} />}
+>
+  <AvatarNetwork name="Account" src={avatarSrc} />
+</BadgeWrapper>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  BadgeWrapper,
+  BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
+  BadgeNetwork,
+} from '@metamask/design-system-react';
+
+<BadgeWrapper
+  positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+  position={BadgeWrapperPosition.TopRight}
+  badge={<BadgeNetwork name="Polygon" src={src} />}
+>
+  <BadgeNetwork name="Account" src={avatarSrc} />
+</BadgeWrapper>;
+```
 
 ## Version Updates
 
