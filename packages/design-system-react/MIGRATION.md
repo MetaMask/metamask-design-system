@@ -17,6 +17,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
   - [ModalBody Component](#modalbody-component)
+  - [ModalFocus Component](#modalfocus-component)
   - [ModalOverlay Component](#modaloverlay-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
@@ -1310,6 +1311,104 @@ For typical call sites — for example `ui/components/app/connections-removed-mo
 - `ModalBody` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `tabIndex`, `ref`) to it.
 - `tabIndex={0}` is now the default. Pass `tabIndex={-1}` (or any other value) to override; the consumer's value wins.
 - One-off styling that previously used Box utility props should move to Tailwind via `className` (`px-0`, `py-2`, `flex`, `flex-col`, `gap-2`, etc.).
+
+### ModalFocus Component
+
+The extension `modal-focus` component maps to `ModalFocus` in the design system. The runtime API is preserved 1:1 — `initialFocusRef`, `finalFocusRef`, `restoreFocus`, `autoFocus`, and `children` all behave identically — but consumers now have to satisfy a new peer dependency on `react-focus-lock`.
+
+`ModalFocus` is the focus-trap primitive used by `ModalContent`, so it must be installable before any modal-family migration that depends on it.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                                               | Design System Migration                                                 |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `import { ModalFocus } from '../../component-library'`                                          | `import { ModalFocus } from '@metamask/design-system-react'`            |
+| `import type { ModalFocusProps } from '../../component-library'`                                | `import type { ModalFocusProps } from '@metamask/design-system-react'`  |
+| `import type { FocusableElement } from '../../component-library/modal-focus/modal-focus.types'` | `import type { FocusableElement } from '@metamask/design-system-react'` |
+
+##### New Peer Dependency
+
+`@metamask/design-system-react` now declares `react-focus-lock@^2.9.4` as a peer dependency. Consumers that didn't already depend on `react-focus-lock` need to add it:
+
+```jsonc
+// package.json
+{
+  "dependencies": {
+    "react-focus-lock": "^2.9.4",
+  },
+}
+```
+
+The MetaMask Extension already pins `react-focus-lock@^2.9.4`, so for the extension migration this is a no-op — yarn deduplication will share the existing copy.
+
+##### Props and Behavior Mapping
+
+| Extension API                                   | Design System API                               | Change Type | Notes                                                   |
+| ----------------------------------------------- | ----------------------------------------------- | ----------- | ------------------------------------------------------- |
+| `initialFocusRef?: RefObject<FocusableElement>` | `initialFocusRef?: RefObject<FocusableElement>` | unchanged   | element to receive focus on mount                       |
+| `finalFocusRef?: RefObject<FocusableElement>`   | `finalFocusRef?: RefObject<FocusableElement>`   | unchanged   | element to receive focus on unmount                     |
+| `restoreFocus?: boolean`                        | `restoreFocus?: boolean`                        | unchanged   | ignored when `finalFocusRef` is provided                |
+| `autoFocus?: boolean`                           | `autoFocus?: boolean`                           | unchanged   | defaults to `true` (matches `react-focus-lock` default) |
+| `children: ReactNode`                           | `children: ReactNode`                           | unchanged   | the subtree to lock focus inside                        |
+| `FocusableElement` helper type                  | `FocusableElement` helper type                  | unchanged   | now exported from `@metamask/design-system-react`       |
+
+##### Default and Behavior Changes
+
+| Concern                       | Extension Behavior                                                                | Design System Behavior                                                                       |
+| ----------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Underlying focus-trap library | `react-focus-lock` (bundled by the extension as a regular dependency)             | `react-focus-lock@^2.9.4` (declared as a peer dependency on `@metamask/design-system-react`) |
+| ESM/CJS interop               | Falls back through `(ReactFocusLock as any).default ?? ReactFocusLock` internally | Same fallback preserved internally — no consumer-visible difference                          |
+| Chakra-derived implementation | Based on `chakra-ui`'s `ModalFocusScope`                                          | Same source pattern, ported as-is                                                            |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalFocus } from '../../component-library';
+
+// initialFocusRef + restoreFocus
+<ModalFocus restoreFocus initialFocusRef={popoverRef}>
+  {menuContent}
+</ModalFocus>;
+
+// finalFocusRef + autoFocus override
+<ModalFocus
+  restoreFocus={!finalFocusRef}
+  autoFocus={false}
+  finalFocusRef={finalFocusRef}
+>
+  {menuContent}
+</ModalFocus>;
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalFocus } from '@metamask/design-system-react';
+
+// API is identical — only the import path changes
+<ModalFocus restoreFocus initialFocusRef={popoverRef}>
+  {menuContent}
+</ModalFocus>;
+
+<ModalFocus
+  restoreFocus={!finalFocusRef}
+  autoFocus={false}
+  finalFocusRef={finalFocusRef}
+>
+  {menuContent}
+</ModalFocus>;
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/multichain-account-menu/multichain-account-menu.tsx`, `ui/components/multichain/account-list-item-menu/account-list-item-menu.js`, and `ui/components/multichain/network-list-item-menu/network-list-item-menu.js` (verified via fresh grep) — the only change is the import path; the JSX and prop usage stay identical.
+
+#### API Differences
+
+- `ModalFocus`'s public API is unchanged. Any consumer that passed only the documented props (`initialFocusRef`, `finalFocusRef`, `restoreFocus`, `autoFocus`, `children`) needs nothing beyond the import-path swap.
+- Consumers that imported `FocusableElement` directly from the extension's `modal-focus.types` module should re-import it from the design-system package barrel.
 
 ### ModalOverlay Component
 

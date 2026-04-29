@@ -57,4 +57,17 @@ describe('ModalFocus', () => {
     rerender(<button ref={finalRef}>button</button>);
     expect(screen.getByRole('button')).toHaveFocus();
   });
+
+  it('renders with restoreFocus enabled (no finalFocusRef)', () => {
+    // When restoreFocus is true and no finalFocusRef is provided, the trap
+    // delegates focus restoration to react-focus-lock's `returnFocus` path.
+    // The actual focus restoration is exercised by react-focus-lock; here we
+    // just verify the component renders without errors in this configuration.
+    render(
+      <ModalFocus restoreFocus>
+        <input data-testid="input" />
+      </ModalFocus>,
+    );
+    expect(screen.getByTestId('input')).toBeInTheDocument();
+  });
 });
