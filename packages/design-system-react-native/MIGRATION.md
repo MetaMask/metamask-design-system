@@ -21,6 +21,13 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Label Component](#label-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [AvatarBase Component](#avatarbase-component)
+  - [AvatarAccount Component](#avataraccount-component)
+  - [AvatarFavicon Component](#avatarfavicon-component)
+  - [AvatarIcon Component](#avataricon-component)
+  - [AvatarNetwork Component](#avatarenetwork-component)
+  - [AvatarToken Component](#avatartoken-component)
+  - [AvatarGroup Component](#avatargroup-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
   - [TabEmptyState Component](#tabemptystate-component)
@@ -2239,6 +2246,313 @@ import { Checkbox } from '@metamask/design-system-react-native';
 - MMDS `Checkbox` adds `twClassName` and `style` on the outer `Pressable`, plus `checkboxContainerProps` and `checkedIconProps` for targeted customization.
 - Mobile legacy `Checkbox` forwarded `TouchableOpacityProps`; MMDS forwards `PressableProps`.
 - Imperative `ref.toggle()` remains available in MMDS.
+
+### AvatarBase Component
+
+The mobile `Avatar` foundation (`…/Avatars/Avatar/foundation/AvatarBase`) maps to MMDS `AvatarBase` with a **lowercase** `size` value space, **`hasBorder`** (replacing `includesBorder`), plus **`shape`**, **`fallbackText`**, and **token-first styling** via `twClassName` instead of StyleSheet keys.
+
+#### Breaking Changes
+
+| Mobile API                                                       | MMDS API                                            | Change Type           | Notes                                                          |
+| ---------------------------------------------------------------- | --------------------------------------------------- | --------------------- | -------------------------------------------------------------- |
+| `size?: AvatarSize` with string pixel values (`'16'`, `'24'`, …) | `size?: AvatarBaseSize` with labels `'xs'` … `'xl'` | value space + default | use mapping table in [AvatarAccount](#avataraccount-component) |
+| `includesBorder`                                                 | `hasBorder`                                         | renamed               | default `false`                                                |
+| (no `shape` / `fallbackText` on legacy base)                     | `shape?`, `fallbackText?`                           | new                   | MMDS matches web semantics for stacked avatars                 |
+| `ViewProps` spread                                               | `ViewProps` + `twClassName?`                        | extended              | TWRNC utilities replace many bespoke StyleSheet uses           |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar from '.../Avatars/Avatar/Avatar';
+import { AvatarSize } from '.../Avatars/Avatar/Avatar.types';
+
+<Avatar
+  size={AvatarSize.Md}
+  // variant-specific props on wrapper Avatar…
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarBase,
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-react-native';
+
+<AvatarBase
+  size={AvatarBaseSize.Md}
+  shape={AvatarBaseShape.Circle}
+  hasBorder={false}
+/>;
+```
+
+### AvatarAccount Component
+
+`AvatarAccount` is composed through the old mobile `Avatar` + `variant={AvatarVariant.Account}`. MMDS exposes **`AvatarAccount` directly** and normalizes the address field and variant **values** to ADR-0003 consts.
+
+#### Breaking Changes (Mobile `AvatarAccount` props)
+
+| Mobile API                                            | MMDS API                                             | Change Type                | Notes                                                                                              |
+| ----------------------------------------------------- | ---------------------------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------- |
+| `accountAddress: string`                              | `address: string`                                    | renamed                    |                                                                                                    |
+| `type?: AvatarAccountType` (PascalCase string values) | `variant?: AvatarAccountVariant` (lowercase)         | enum style + value mapping | see [React MIGRATION](../design-system-react/MIGRATION.md#avataraccount-component) for value table |
+| `size?: AvatarSize`                                   | `size?: AvatarAccountSize`                           | `AvatarBaseSize`           | map `'16'` → `xs`, etc. (same table as web doc)                                                    |
+| (variant-specific)                                    | `blockiesProps?`, `jazziconProps?`, `maskiconProps?` | new                        | pass-through to temp identicon components                                                          |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar/Avatar';
+import { AvatarAccountType, AvatarSize } from '.../Avatars/Avatar/Avatar.types';
+
+<Avatar
+  variant={AvatarVariant.Account}
+  accountAddress={address}
+  type={AvatarAccountType.JazzIcon}
+  size={AvatarSize.Md}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarAccount,
+  AvatarAccountVariant,
+  AvatarAccountSize,
+} from '@metamask/design-system-react-native';
+
+<AvatarAccount
+  address={address}
+  variant={AvatarAccountVariant.Jazzicon}
+  size={AvatarAccountSize.Md}
+/>;
+```
+
+### AvatarFavicon Component
+
+The mobile `Avatar` favicon branch required **`imageSource: ImageSourcePropType`**. MMDS **`AvatarFavicon`** is URL/source-first: pass **`src`** (typed as `ImageOrSvgSrc` for RN) and an optional dapp `name` for a11y/fallback. There is no longer a required `imageSource` + separate name pairing — **`src` is the primary image** when you want a remote/local asset.
+
+| Mobile API                                    | MMDS API                                  | Change Type   | Notes                                                                                                 |
+| --------------------------------------------- | ----------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------- |
+| `imageSource: ImageSourcePropType` (required) | `src?` + optional `name` / `fallbackText` | restructured  | supply `src` for image-driven favicons; text-only state uses `fallbackText` or first letter of `name` |
+| (implicit sizing via `AvatarSize`)            | `size?: AvatarFaviconSize`                | const + alias | `xs`–`xl` strings, default `Md`                                                                       |
+| (no `twClassName` on old favicon)             | `twClassName?` on `AvatarBase`            | new           |                                                                                                       |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar/Avatar';
+
+<Avatar
+  variant={AvatarVariant.Favicon}
+  imageSource={{ uri: faviconUrl }}
+  size={AvatarSize.Md}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarFavicon,
+  AvatarFaviconSize,
+} from '@metamask/design-system-react-native';
+
+<AvatarFavicon
+  src={{ uri: faviconUrl }}
+  name="Dapp"
+  size={AvatarFaviconSize.Md}
+/>;
+```
+
+### AvatarIcon Component
+
+The mobile `Avatar` + `AvatarVariant.Icon` branch used **`name`** to choose an icon, plus optional **`iconColor` / `backgroundColor` strings**. MMDS `AvatarIcon` is **`iconName: IconName`** and uses **`severity: AvatarIconSeverity`** for a consistent **background + icon** treatment (replacing ad-hoc color strings).
+
+| Mobile API                                   | MMDS API                        | Change Type | Notes                                                                                        |
+| -------------------------------------------- | ------------------------------- | ----------- | -------------------------------------------------------------------------------------------- |
+| `name: IconName` (prop on `AvatarIconProps`) | `iconName: IconName`            | renamed     | align with the rest of MMDS                                                                  |
+| `iconColor?`, `backgroundColor?`             | `iconProps?`, `severity?`       | replaced    | set `iconProps` for one-off icon tweaks; use `severity` for semantic background/icon pairing |
+| (no `severity` on mobile)                    | `severity?: AvatarIconSeverity` | new         | default `Neutral`                                                                            |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar/Avatar';
+
+<Avatar
+  variant={AvatarVariant.Icon}
+  name={IconName.Star}
+  iconColor={colors.primary}
+  size={AvatarSize.Md}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarIcon,
+  AvatarIconSize,
+  AvatarIconSeverity,
+  IconName,
+} from '@metamask/design-system-react-native';
+
+<AvatarIcon
+  iconName={IconName.Star}
+  size={AvatarIconSize.Md}
+  severity={AvatarIconSeverity.Neutral}
+  iconProps={{ color: /* token or string */ undefined }}
+/>;
+```
+
+### AvatarNetwork Component
+
+| Mobile API                          | MMDS API                 | Change Type             | Notes                                         |
+| ----------------------------------- | ------------------------ | ----------------------- | --------------------------------------------- |
+| `imageSource?: ImageSourcePropType` | `src?` (ImageOrSvgSrc)   | renamed + union widened | supports the design-system `ImageOrSvg` types |
+| `name?: string`                     | `name?`, `fallbackText?` | same surface            |                                               |
+| (n/a)                               | `imageOrSvgProps?`       | new                     | pass-through to the underlying `ImageOrSvg`   |
+
+`AvatarNetwork` in MMDS is **square** (via internal `AvatarBase` shape) like web.
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar/Avatar';
+
+<Avatar
+  variant={AvatarVariant.Network}
+  name="Mainnet"
+  imageSource={{ uri: networkIconUrl }}
+  size={AvatarSize.Md}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarNetwork,
+  AvatarNetworkSize,
+} from '@metamask/design-system-react-native';
+
+<AvatarNetwork
+  name="Mainnet"
+  src={{ uri: networkIconUrl }}
+  size={AvatarNetworkSize.Md}
+  imageOrSvgProps={{ testID: 'network-avatar' }}
+/>;
+```
+
+### AvatarToken Component
+
+| Mobile API                             | MMDS API               | Change Type | Notes                              |
+| -------------------------------------- | ---------------------- | ----------- | ---------------------------------- |
+| `imageSource?: ImageSourcePropType`    | `src?` (ImageOrSvgSrc) | renamed     |                                    |
+| `isHaloEnabled?: boolean`              | (not supported)        | removed     | reimplement in product if required |
+| `isIpfsGatewayCheckBypassed?: boolean` | (not supported)        | removed     |                                    |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar/Avatar';
+
+<Avatar
+  variant={AvatarVariant.Token}
+  name="DAI"
+  imageSource={{ uri: tokenIconUrl }}
+  size={AvatarSize.Md}
+  isHaloEnabled
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarToken,
+  AvatarTokenSize,
+} from '@metamask/design-system-react-native';
+
+<AvatarToken
+  name="DAI"
+  src={{ uri: tokenIconUrl }}
+  size={AvatarTokenSize.Md}
+/>;
+```
+
+### AvatarGroup Component
+
+Mobile `AvatarGroup` accepted **`avatarPropsList: AvatarProps[]`** (discriminated-union `Avatar` props) with **`maxStackedAvatars`**, **`size` defaulting to the smaller stack scale**, and **`spaceBetweenAvatars`**. MMDS `AvatarGroup` is **variant + `avatarPropsArr`**, with **`max`**, default **`size` of `AvatarGroupSize.Md`**, optional **`isReverse`**, and **`twClassName`**. The **`spaceBetweenAvatars`**, **stack-level `includesBorder` override**, and mixing **`AvatarVariant.Icon` inside the list** are not part of the MMDS `AvatarGroup` contract — handle icon rows separately or compose multiple `AvatarIcon`s.
+
+| Mobile API                                            | MMDS API                                     | Change Type     | Notes                               |
+| ----------------------------------------------------- | -------------------------------------------- | --------------- | ----------------------------------- |
+| `avatarPropsList: AvatarProps[]`                      | `variant` + `avatarPropsArr: Avatar*Props[]` | restructured    | one variant per group, matching web |
+| `maxStackedAvatars?`                                  | `max?`                                       | renamed         | default `4`                         |
+| `size?` (default `AvatarSize.Xs` in mobile component) | `size?: AvatarGroupSize` (default `Md`)      | default changed | re-check design spacing             |
+| `spaceBetweenAvatars?`                                | (not exposed)                                | removed         | use `twClassName` / parent layout   |
+| (n/a)                                                 | `isReverse?`, `overflowTextProps?`           | new             |                                     |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import AvatarGroup from '.../Avatars/AvatarGroup/AvatarGroup';
+import {
+  AvatarVariant,
+  AvatarSize,
+  AvatarAccountType,
+} from '.../Avatars/Avatar/Avatar.types';
+
+<AvatarGroup
+  size={AvatarSize.Md}
+  maxStackedAvatars={3}
+  avatarPropsList={addresses.map((accountAddress) => ({
+    variant: AvatarVariant.Account,
+    accountAddress,
+    type: AvatarAccountType.JazzIcon,
+  }))}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupVariant,
+  AvatarGroupSize,
+  AvatarAccountVariant,
+} from '@metamask/design-system-react-native';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  size={AvatarGroupSize.Md}
+  max={3}
+  twClassName="mb-2"
+  avatarPropsArr={addresses.map((address) => ({
+    address,
+    variant: AvatarAccountVariant.Jazzicon,
+  }))}
+/>;
+```
 
 ### TextField Component
 
