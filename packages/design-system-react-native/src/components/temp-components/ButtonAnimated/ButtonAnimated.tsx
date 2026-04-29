@@ -27,7 +27,7 @@ export const ButtonAnimated = ({
     return {
       transform: [{ scale: animation.value }],
     };
-  });
+  }, []);
 
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);

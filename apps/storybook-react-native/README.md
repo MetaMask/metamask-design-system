@@ -13,6 +13,7 @@ Storybook app for validating `@metamask/design-system-react-native` components i
 | Mode                                                         | Status                     | Use case                                        |
 | ------------------------------------------------------------ | -------------------------- | ----------------------------------------------- |
 | Development build (`expo run:*` + `expo start --dev-client`) | Supported                  | Primary and required validation path            |
+| Storybook web (`storybook dev` / static build)               | Supported                  | Browser-based component review and sharing      |
 | Expo Go (`expo start --ios` / `--android`)                   | Unsupported for validation | Smoke checks only; known native module failures |
 
 ## Run Storybook (supported flow)
@@ -30,6 +31,16 @@ If you are running Mobile and Storybook side-by-side, use a separate Metro port:
 
 ```bash
 yarn workspace @metamask/storybook-react-native exec expo start --dev-client --port 8088
+```
+
+## Run Storybook web
+
+```bash
+# Start the web Storybook app
+yarn workspace @metamask/storybook-react-native storybook:web
+
+# Build a static Storybook site
+yarn workspace @metamask/storybook-react-native build-storybook
 ```
 
 ## Version alignment policy

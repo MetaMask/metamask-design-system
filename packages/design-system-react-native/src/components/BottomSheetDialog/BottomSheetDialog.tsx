@@ -221,13 +221,16 @@ export const BottomSheetDialog = forwardRef<
       }
     };
 
-    const animatedSheetStyle = useAnimatedStyle(() => ({
-      transform: [
-        {
-          translateY: currentYOffset.value,
-        },
-      ],
-    }));
+    const animatedSheetStyle = useAnimatedStyle(
+      () => ({
+        transform: [
+          {
+            translateY: currentYOffset.value,
+          },
+        ],
+      }),
+      [],
+    );
 
     const sheetStyle = useMemo(
       () => [
