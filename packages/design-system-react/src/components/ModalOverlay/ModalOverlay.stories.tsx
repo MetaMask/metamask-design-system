@@ -1,7 +1,8 @@
+import { ButtonVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
-import { Button, ButtonVariant } from '../Button';
+import { Button } from '../Button';
 
 import { ModalOverlay } from './ModalOverlay';
 import type { ModalOverlayProps } from './ModalOverlay.types';
