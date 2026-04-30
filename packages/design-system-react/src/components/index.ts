@@ -92,6 +92,9 @@ export type { JazziconProps } from './temp-components/Jazzicon';
 export { Maskicon } from './temp-components/Maskicon';
 export type { MaskiconProps } from './temp-components/Maskicon';
 
+export { ModalOverlay } from './ModalOverlay';
+export type { ModalOverlayProps } from './ModalOverlay';
+
 export { Text } from './Text';
 export {
   TextVariant,

@@ -139,6 +139,9 @@ export {
   type TextPropsShared,
 } from './types/Text';
 
+// TextField types (ADR-0004)
+export { type TextFieldPropsShared } from './types/TextField';
+
 // AvatarFavicon types (ADR-0004)
 export {
   AvatarFaviconSize,
