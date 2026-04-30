@@ -17,10 +17,4 @@ export type InputPropsShared = {
    * @default false
    */
   isDisabled?: boolean;
-  /**
-   * Optional boolean to show readonly input.
-   *
-   * @default false
-   */
-  isReadonly?: boolean;
 };

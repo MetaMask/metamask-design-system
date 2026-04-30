@@ -1,5 +1,4 @@
 import type { InputPropsShared } from '@metamask/design-system-shared';
-
 import type { ComponentPropsWithoutRef } from 'react';
 
 export type InputProps = Omit<
@@ -7,6 +6,12 @@ export type InputProps = Omit<
   'disabled' | 'readOnly'
 > &
   InputPropsShared & {
+    /**
+     * Optional boolean to show readonly input.
+     *
+     * @default false
+     */
+    isReadonly?: boolean;
     /**
      * Optional prop for additional CSS classes.
      */
