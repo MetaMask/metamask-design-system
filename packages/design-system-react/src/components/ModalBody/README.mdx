@@ -78,6 +78,18 @@ A common pattern in the extension was to drop the body's padding and let individ
 
 <Canvas of={ModalBodyStories.Padding} />
 
+### Accessibility
+
+`ModalBody` ships with `tabIndex={0}` by default so the scrollable region is reachable by keyboard — keyboard-only users can focus the body and arrow-scroll through long content. This satisfies the WCAG 2.1.1 "Keyboard" rule for scrollable regions (axe `scrollable-region-focusable`).
+
+If your modal body's content already includes focusable elements that own the keyboard scroll experience (forms, lists with focusable rows, etc.) and you don't want an extra tab stop on the body itself, opt out with `tabIndex={-1}` — your value wins over the default:
+
+```tsx
+<ModalBody tabIndex={-1}>{focusableContent}</ModalBody>
+```
+
+The `tabIndex` prop is forwarded to the underlying `<div>` like any other HTML attribute.
+
 ### `className`
 
 Use the `className` prop to add custom CSS classes to the component. These classes are merged with the component's defaults via `twMerge`, so consumer utilities override the defaults (for example, `className="px-0"` wins over the internal `px-4`).
