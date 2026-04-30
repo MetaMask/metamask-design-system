@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 
 import { Box, BoxBorderColor, BoxFlexDirection } from '../Box';
 import { Button, ButtonVariant } from '../Button';
+import { Input } from '../Input';
 import { Text } from '../Text';
 
 import { ModalFocus } from './ModalFocus';
@@ -59,7 +60,7 @@ export const Default: Story = {
           <ModalFocus {...args}>
             <FocusTrappedBox>
               <Text>Modal focus children</Text>
-              <input aria-label="example input" />
+              <Input aria-label="example input" />
               <Text>
                 Tab around — focus is trapped inside the ModalFocus subtree.
               </Text>
@@ -89,7 +90,7 @@ export const InitialFocusRef: Story = {
         {isOpen && (
           <ModalFocus {...args} initialFocusRef={closeRef}>
             <FocusTrappedBox>
-              <input aria-label="first input (skipped)" />
+              <Input aria-label="first input (skipped)" />
               <Text>Initial focus is on the close button.</Text>
               <Button
                 ref={closeRef}
@@ -119,7 +120,7 @@ export const FinalFocusRef: Story = {
           >
             Open
           </Button>
-          <input
+          <Input
             placeholder="Focus will return here"
             aria-label="final focus target"
             ref={inputRef}

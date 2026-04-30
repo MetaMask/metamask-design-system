@@ -1314,9 +1314,9 @@ For typical call sites — for example `ui/components/app/connections-removed-mo
 
 ### ModalFocus Component
 
-The extension `modal-focus` component maps to `ModalFocus` in the design system. The runtime API is preserved 1:1 — `initialFocusRef`, `finalFocusRef`, `restoreFocus`, `autoFocus`, and `children` all behave identically — but consumers now have to satisfy a new peer dependency on `react-focus-lock`.
+The extension `modal-focus` component maps to `ModalFocus` in the design system. The runtime API is preserved 1:1 — `initialFocusRef`, `finalFocusRef`, `restoreFocus`, `autoFocus`, and `children` all behave identically. The migration is a pure import-path swap; no consumer-side install step is needed (`react-focus-lock` is now an internal runtime dependency of `@metamask/design-system-react`, not a peer).
 
-`ModalFocus` is the focus-trap primitive used by `ModalContent`, so it must be installable before any modal-family migration that depends on it.
+`ModalFocus` is the focus-trap primitive used by `ModalContent`, so it must be migrated before any modal-family migration that depends on it.
 
 #### Breaking Changes
 
@@ -1327,21 +1327,6 @@ The extension `modal-focus` component maps to `ModalFocus` in the design system.
 | `import { ModalFocus } from '../../component-library'`                                          | `import { ModalFocus } from '@metamask/design-system-react'`            |
 | `import type { ModalFocusProps } from '../../component-library'`                                | `import type { ModalFocusProps } from '@metamask/design-system-react'`  |
 | `import type { FocusableElement } from '../../component-library/modal-focus/modal-focus.types'` | `import type { FocusableElement } from '@metamask/design-system-react'` |
-
-##### New Peer Dependency
-
-`@metamask/design-system-react` now declares `react-focus-lock@^2.9.4` as a peer dependency. Consumers that didn't already depend on `react-focus-lock` need to add it:
-
-```jsonc
-// package.json
-{
-  "dependencies": {
-    "react-focus-lock": "^2.9.4",
-  },
-}
-```
-
-The MetaMask Extension already pins `react-focus-lock@^2.9.4`, so for the extension migration this is a no-op — yarn deduplication will share the existing copy.
 
 ##### Props and Behavior Mapping
 
@@ -1356,11 +1341,11 @@ The MetaMask Extension already pins `react-focus-lock@^2.9.4`, so for the extens
 
 ##### Default and Behavior Changes
 
-| Concern                       | Extension Behavior                                                                | Design System Behavior                                                                       |
-| ----------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Underlying focus-trap library | `react-focus-lock` (bundled by the extension as a regular dependency)             | `react-focus-lock@^2.9.4` (declared as a peer dependency on `@metamask/design-system-react`) |
-| ESM/CJS interop               | Falls back through `(ReactFocusLock as any).default ?? ReactFocusLock` internally | Same fallback preserved internally — no consumer-visible difference                          |
-| Chakra-derived implementation | Based on `chakra-ui`'s `ModalFocusScope`                                          | Same source pattern, ported as-is                                                            |
+| Concern                       | Extension Behavior                                                                | Design System Behavior                                                                                                                    |
+| ----------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Underlying focus-trap library | `react-focus-lock` (direct dependency of the extension)                           | `react-focus-lock` is an internal runtime dependency of `@metamask/design-system-react` — consumers do not install or import it directly. |
+| ESM/CJS interop               | Falls back through `(ReactFocusLock as any).default ?? ReactFocusLock` internally | Same fallback preserved internally — no consumer-visible difference                                                                       |
+| Chakra-derived implementation | Based on `chakra-ui`'s `ModalFocusScope`                                          | Same source pattern, ported as-is                                                                                                         |
 
 #### Migration Examples
 
