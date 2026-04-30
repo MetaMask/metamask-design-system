@@ -35,6 +35,7 @@ export type HeaderBaseProps = ViewProps & {
   /**
    * Optional ButtonIcon props to render a ButtonIcon as the start accessory.
    * Only used if startAccessory is not provided.
+   * For multiple start-side actions, compose them explicitly with `startAccessory`.
    *
    * @default size: ButtonIconSize.Md
    */
@@ -43,6 +44,8 @@ export type HeaderBaseProps = ViewProps & {
    * Optional array of ButtonIcon props to render multiple ButtonIcons as end accessories.
    * Rendered in reverse order (first item appears rightmost).
    * Only used if endAccessory is not provided.
+   * This is the built-in multiple-action path for HeaderBase; for custom layouts,
+   * use `endAccessory`.
    *
    * @default size: ButtonIconSize.Md for each
    */
