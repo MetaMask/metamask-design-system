@@ -11,8 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Updated `Button`, `ButtonBase`, and `ButtonHero` size and variant exports to use shared const-object + string-union types instead of platform-local enums; existing imports continue to work, but enum-specific type assumptions may need updating. See [Migration Guide](./MIGRATION.md#from-version-0210-to-0220) ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
-- **BREAKING:** Updated `ButtonIconSize` and `ButtonIconVariant` to use shared const-object + string-union types instead of platform-local enums; existing imports continue to work, but enum-specific type assumptions may need updating. See [Migration Guide](./MIGRATION.md#from-version-0210-to-0220) ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+- **BREAKING:** Updated `Button`, `ButtonBase`, and `ButtonHero` size and variant exports to use shared const-object + string-union types rather than platform-local enum-based definitions, aligning React Native with the shared cross-platform type contracts ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react-native` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+- **BREAKING:** Updated `ButtonIconSize` and `ButtonIconVariant` to use shared const-object + string-union types rather than platform-local enum-based definitions, aligning React Native with the shared cross-platform type contracts ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react-native` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
 - **BREAKING:** `TextField` and `TextFieldSearch` now use a root `Box`/`View`, require native `TextInput` props under `inputProps`, rename `isReadonly` to `isReadOnly`, and use `inputRef` for the inner input ref. See [Migration Guide](./MIGRATION.md#from-version-0210-to-0220) ([#1081](https://github.com/MetaMask/metamask-design-system/pull/1081))
 - Updated Figma Code Connect to the live `MMDS Components` file and aligned `ButtonIcon` and `TextButton` mappings with the current component APIs shown in Dev Mode ([#1109](https://github.com/MetaMask/metamask-design-system/pull/1109))
 
