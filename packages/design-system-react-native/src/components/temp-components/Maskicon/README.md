@@ -97,6 +97,10 @@ export const StyleExample = () => (
 );
 ```
 
+## Migration from Mobile Component Library
+
+For migrating Maskicon toward `@metamask/design-system-react-native`, see the [Migration Guide — Identicon temp components (Maskicon section)](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#maskicon-temp-component).
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
