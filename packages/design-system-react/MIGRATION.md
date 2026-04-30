@@ -17,6 +17,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
   - [Modal Component](#modal-component)
+  - [ModalContent Component](#modalcontent-component)
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
   - [ModalOverlay Component](#modaloverlay-component)
@@ -1321,6 +1322,232 @@ For typical call sites — for example `ui/components/multichain-accounts/accoun
 
 - `Modal` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-modal` class hook is gone — use `className` to apply Tailwind utilities.
 - `useModalContext` is now exported from the package barrel (`@metamask/design-system-react`). `ModalContextType` is also exported as a type for consumers building custom subtree integrations.
+
+### Modal Component
+
+The extension `modal` component maps to `Modal` in the design system. The behavioral contract — portal into `document.body` while `isOpen`, unmount on close, expose configuration to descendants via `useModalContext` — is preserved 1:1. The migration is a near-zero-effort import-path swap for typical consumers.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { Modal } from '../../component-library'`           | `import { Modal } from '@metamask/design-system-react'`           |
+| `import { useModalContext } from '../../component-library'` | `import { useModalContext } from '@metamask/design-system-react'` |
+| `import type { ModalProps } from '../../component-library'` | `import type { ModalProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                   | Design System API                               | Change Type | Notes                                                                                                                                                                                         |
+| ----------------------------------------------- | ----------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isOpen: boolean`                               | `isOpen: boolean`                               | unchanged   | gates portal mount/unmount                                                                                                                                                                    |
+| `onClose: () => void`                           | `onClose: () => void`                           | unchanged   | exposed to descendants via `useModalContext().onClose`                                                                                                                                        |
+| `children: ReactNode`                           | `children: ReactNode`                           | unchanged   | typically composed of `ModalOverlay` and `ModalContent`                                                                                                                                       |
+| `isClosedOnOutsideClick?: boolean`              | `isClosedOnOutsideClick?: boolean`              | unchanged   | default `true`; consumed by `ModalContent` via `useModalContext`                                                                                                                              |
+| `isClosedOnEscapeKey?: boolean`                 | `isClosedOnEscapeKey?: boolean`                 | unchanged   | default `true`; consumed by `ModalContent` via `useModalContext`                                                                                                                              |
+| `autoFocus?: boolean`                           | `autoFocus?: boolean`                           | unchanged   | default `true`; consumed by `ModalContent` → `ModalFocus`                                                                                                                                     |
+| `initialFocusRef?: RefObject<FocusableElement>` | `initialFocusRef?: RefObject<FocusableElement>` | unchanged   | exposed to descendants via context                                                                                                                                                            |
+| `finalFocusRef?: RefObject<FocusableElement>`   | `finalFocusRef?: RefObject<FocusableElement>`   | unchanged   | exposed to descendants via context                                                                                                                                                            |
+| `restoreFocus?: boolean`                        | `restoreFocus?: boolean`                        | unchanged   | default `false`; ignored when `finalFocusRef` is provided                                                                                                                                     |
+| `className?: string`                            | `className?: string`                            | unchanged   | merged with the component's defaults via `twMerge` (the extension used `classnames`).                                                                                                         |
+| `extends ModalFocusProps` (interface)           | flat `type ModalProps`                          | shape       | `ModalProps` is no longer an `interface` extending `ModalFocusProps` — it's a flat `type` that inlines the focus-related fields.                                                              |
+| `mm-modal` SCSS class hook                      | removed                                         | removed     | the legacy `mm-modal` class is gone. Use `className` and Tailwind utilities to customize the root portal element. No usage outside the legacy `component-library` itself relies on this hook. |
+
+##### `useModalContext` Error Message
+
+The runtime guard for "called outside a `<Modal>` subtree" is preserved, but the error message text is rewritten for clarity:
+
+| Extension                                                                                                     | Design System                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `useModalContext must be used within a ModalProvider, Seems you forgot to wrap the components in "<Modal />"` | `useModalContext must be used within a Modal — make sure the consuming component is rendered inside <Modal />.` |
+
+This only affects code that asserts on the exact error string (rare). The thrown type is still `Error`.
+
+##### Default and Behavior Changes
+
+| Concern                 | Extension Behavior                                                                                                 | Design System Behavior                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| Portal target           | `document.body` via `ReactDOM.createPortal`                                                                        | `document.body` via `createPortal` from `react-dom`. Unchanged.              |
+| Unmount on close        | Returns `null` when `isOpen` is `false`                                                                            | Returns `null` when `isOpen` is `false`. Unchanged.                          |
+| Default behavior config | `isClosedOnOutsideClick`, `isClosedOnEscapeKey`, `autoFocus` default to `true`; `restoreFocus` defaults to `false` | Same defaults, applied internally before populating `ModalContext`.          |
+| Context shape           | `Omit<ModalProps, 'children'>`                                                                                     | `Omit<ModalProps, 'children'>` — same shape, exported as `ModalContextType`. |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Modal, ModalOverlay, ModalContent } from '../../component-library';
+
+<Modal isOpen={isOpen} onClose={onClose} data-testid="example-modal">
+  <ModalOverlay />
+  <ModalContent>{/* … */}</ModalContent>
+</Modal>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+} from '@metamask/design-system-react';
+
+// API is identical — only the import path changes.
+<Modal isOpen={isOpen} onClose={onClose} data-testid="example-modal">
+  <ModalOverlay />
+  <ModalContent>{/* … */}</ModalContent>
+</Modal>;
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (`<Modal onClose={onClose} isOpen={isOpen}>` with default behavior config), `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`<Modal onClose={closeModal} data-testid="..." isOpen>` forwarding `data-testid` to the root), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (no-op `onClose={() => undefined}`) (verified via fresh grep) — the only change is the import path; the JSX, props, and `data-testid` forwarding stay identical.
+
+#### API Differences
+
+- `Modal` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-modal` class hook is gone — use `className` to apply Tailwind utilities.
+- `useModalContext` is now exported from the package barrel (`@metamask/design-system-react`). `ModalContextType` is also exported as a type for consumers building custom subtree integrations.
+- `FocusableElement` (the focus-target shape used by `initialFocusRef` / `finalFocusRef`) is now exported from the design system package. Consumers can import it directly instead of redeclaring it.
+
+### ModalContent Component
+
+The extension `modal-content` component maps to `ModalContent` in the design system. The behavioral contract — a centered `<section role="dialog">` with built-in close-on-Escape, close-on-outside-click, focus management via `ModalFocus`, and the standard slide-up entrance animation — is preserved. The polymorphic Box surface and the `mm-modal-content` SCSS class hooks are removed in favor of Tailwind utilities, and the legacy `mm-popover` outside-click escape hatch is replaced by a generic, design-system-agnostic data attribute.
+
+`ModalContent` reads its behavior from `useModalContext`, so it must be rendered inside a `<Modal>` — same as the legacy.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                  | Design System Migration                                                  |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `import { ModalContent } from '../../component-library'`           | `import { ModalContent } from '@metamask/design-system-react'`           |
+| `import { ModalContentSize } from '../../component-library'`       | `import { ModalContentSize } from '@metamask/design-system-react'`       |
+| `import type { ModalContentProps } from '../../component-library'` | `import type { ModalContentProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                | Design System API                                                               | Change Type | Notes                                                                                                                                                                             |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children: ReactNode`                                        | `children: ReactNode`                                                           | unchanged   | rendered inside the `<section role="dialog">`                                                                                                                                     |
+| `size?: ModalContentSize` (`Sm`/`Md`/`Lg`)                   | `size?: ModalContentSize` (`Sm`/`Md`/`Lg`)                                      | unchanged   | values and pixel widths preserved (360 / 480 / 720); enum is now a const-object union (ADR-0003), but `ModalContentSize.Sm` etc. still work.                                      |
+| `modalDialogProps?: any`                                     | `modalDialogProps?: Omit<BoxProps, 'children'>` (with `data-*` index signature) | shape       | now typed against MMDS `BoxProps`. `className` is still merged via `twMerge` so consumer utilities win over the defaults.                                                         |
+| `className?: string`                                         | `className?: string`                                                            | unchanged   | applied to the outer positioning element; merged via `twMerge`                                                                                                                    |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` | removed                                                                         | removed     | always renders `<div>` (outer) + `<section role="dialog">` (inner). If you need a different element, wrap or compose.                                                             |
+| Box style-utility props on the outer (`alignItems`, …)       | removed from public API                                                         | removed     | the outer container is no longer a polymorphic Box. Use `className` with Tailwind utilities for layout overrides.                                                                 |
+| `mm-modal-content` / `mm-modal-content__dialog` SCSS hooks   | removed                                                                         | removed     | the slide-up animation moved into the `motion-safe:animate-slide-up` Tailwind utility on the inner dialog (added to `@metamask/design-system-tailwind-preset` in this migration). |
+
+##### Popover-in-Modal Outside-Click Hand-off
+
+The legacy `ModalContent` short-circuited its outside-click handler via a hard-coded `event.target.closest('.mm-popover')` check so that interacting with a portal-rendered Popover inside a Modal would not close the modal. That coupling is design-system-agnostic in MMDS:
+
+| Extension                                                  | Design System                                                                                                                    |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Hard-coded `.mm-popover` class check inside `ModalContent` | Generic data-attribute opt-out: clicks whose target's `closest('[data-mm-modal-ignore-outside-click]')` is non-null are ignored. |
+
+Floating UI primitives that render as siblings to the Modal portal (Popover, Tooltip, Select dropdown, …) opt out by setting the attribute on their root element. The constant `MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR` (= `'data-mm-modal-ignore-outside-click'`) is exported from the package for type-safe usage.
+
+```tsx
+import {
+  Box,
+  MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR,
+} from '@metamask/design-system-react';
+
+<Box {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}>
+  {popoverContent}
+</Box>;
+```
+
+**Required follow-up in MetaMask Extension:** the legacy `ui/components/component-library/popover/popover.tsx` adds the `'mm-popover'` class to its root Box. To preserve the existing Popover-inside-Modal interaction across the extension's 13+ `Popover` + `Modal` call sites (verified via fresh grep — for example `ui/components/multichain/network-list-menu/network-list-menu.tsx`, `ui/pages/confirmations/components/send/network-filter/network-filter.tsx`, `ui/components/app/cancel-speedup-popover/cancel-speedup-popover.js`, `ui/pages/confirmations/components/edit-gas-popover/edit-gas-popover.component.js`, `ui/components/app/terms-of-use-popup/terms-of-use-popup.js`), add the data attribute to the same Box:
+
+```tsx
+// ui/components/component-library/popover/popover.tsx (legacy extension)
+import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from '@metamask/design-system-react';
+
+<Box
+  className={classnames('mm-popover', /* … */)}
+  {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}
+  /* … */
+>
+```
+
+This is a one-line addition; the rest of the legacy `Popover` stays unchanged. After the extension switches its `ModalContent` import to `@metamask/design-system-react`, every Popover-inside-Modal flow keeps working.
+
+##### Default and Behavior Changes
+
+| Concern                    | Extension Behavior                                                                                                 | Design System Behavior                                                                                                                                         |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Outer positioning          | `position: fixed; left: 0; top: 0; z-index: $modal-z-index (1050); width/height: 100vw/100vh` via SCSS + Box props | `fixed inset-0 z-[1050]` Tailwind utilities                                                                                                                    |
+| Outer padding (responsive) | `paddingTop/Bottom={[4, 8, 12]}` Box responsive arrays + `@media (max-height: 475px) { padding: 8px }`             | `p-4 sm:py-8 md:py-12 [@media(max-height:475px)]:p-2` Tailwind utilities (responsive arrays in Box are unsupported in MMDS — use Tailwind prefixes).           |
+| Inner dialog sizing        | `max-width: var(--size, 360px)` per `--size-{sm,md,lg}` SCSS modifier                                              | `max-w-[360px]` / `max-w-[480px]` / `max-w-[720px]` Tailwind utilities, applied via `TWCLASSMAP_MODAL_CONTENT_SIZE`                                            |
+| Inner dialog entrance      | 400ms `cubic-bezier(0.3, 0.8, 0.3, 1)` slide-up + fade keyframe via SCSS, gated by `prefers-reduced-motion`        | New `motion-safe:animate-slide-up` Tailwind utility (matches `AnimationDuration.Slowly` from `@metamask/design-tokens`); reduced-motion users get no animation |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalContent } from '../../component-library';
+
+// Default usage
+<ModalContent>{/* ModalHeader + ModalBody + ModalFooter */}</ModalContent>
+
+// Customize the outer container (centered content)
+<ModalContent alignItems={AlignItems.center}>{/* … */}</ModalContent>
+
+// Customize the inner dialog
+<ModalContent
+  modalDialogProps={{
+    display: Display.Flex,
+    flexDirection: FlexDirection.Column,
+  }}
+>
+  {/* … */}
+</ModalContent>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalContent } from '@metamask/design-system-react';
+
+// Default usage — unchanged
+<ModalContent>{/* ModalHeader + ModalBody + ModalFooter */}</ModalContent>
+
+// Outer overrides move into className
+<ModalContent className="items-center">{/* … */}</ModalContent>
+
+// Inner dialog overrides go through modalDialogProps
+<ModalContent
+  modalDialogProps={{
+    flexDirection: BoxFlexDirection.Column,
+  }}
+>
+  {/* … */}
+</ModalContent>
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (bare `<ModalContent>`), `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (`<ModalContent alignItems={AlignItems.center}>` → `className="items-center"`), and `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`modalDialogProps={{ display: Display.Flex, flexDirection: FlexDirection.Column }}` → drop `display` since `modalDialogProps` is already a Box and uses Tailwind flex utilities by default; replace `flexDirection` with `BoxFlexDirection.Column`) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Move any outer Box utility props onto `className` (e.g. `alignItems={AlignItems.center}` → `className="items-center"`).
+3. Update `modalDialogProps` enum values to MMDS shapes (`Display.Flex` → `BoxDisplay.Flex` is implicit since MMDS Box is already flex when `flexDirection` is set; `FlexDirection.Column` → `BoxFlexDirection.Column`).
+4. If the call site embeds a `Popover` from the legacy extension `component-library`, ensure that `Popover` adds the `data-mm-modal-ignore-outside-click` attribute (one-line change in `popover.tsx`).
+
+#### Deprecated `ModalContent`
+
+The extension exports a separate `deprecated/` `ModalContent` from `ui/components/component-library/modal-content/deprecated`. **It is not migrated.** Consumers still importing from `'../../component-library/modal-content/deprecated'` (e.g. `ui/components/app/snaps/snap-remove-warning/snap-remove-warning.js`, `ui/components/app/srp-quiz-modal/SRPQuiz/SRPQuiz.tsx`, `ui/components/multichain/account-menu/account-menu.tsx`) need to migrate to the current `ModalContent` first, then switch to `@metamask/design-system-react`. The deprecated path predates the current `padding={4}` → `paddingTop={4} paddingBottom={4}` split on the dialog and the body's own padding ownership.
+
+#### API Differences
+
+- `ModalContent` always renders a `<div>` outer + `<section role="dialog" aria-modal="true">` inner. Forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to the outer `<div>`.
+- `ModalContentSize` is now a const-object union (ADR-0003) but the value identifiers and pixel widths are preserved.
+- `MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR` is exported from the package barrel for type-safe use of the outside-click opt-out attribute.
 
 ### ModalBody Component
 
