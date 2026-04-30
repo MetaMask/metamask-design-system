@@ -1,8 +1,8 @@
 // Third party dependencies.
 import React, {
   forwardRef,
-  useEffect,
   useImperativeHandle,
+  useLayoutEffect,
   useRef,
 } from 'react';
 import type { RefObject } from 'react';
@@ -34,7 +34,7 @@ const ToastComponent = forwardRef<ToastRef, ToastProps>((props, ref) => {
     [],
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     registeredRef = innerRef;
     return () => {
       if (registeredRef === innerRef) {

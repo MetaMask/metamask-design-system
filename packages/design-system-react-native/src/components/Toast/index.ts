@@ -1,13 +1,10 @@
 export { Toast } from './Toast';
-export { ToastVariant, ToastCloseButtonVariant } from './Toast.types';
+export { ToastSeverity } from './Toast.types';
 export type {
   ToastOptions,
   ToastProps,
   ToastRef,
-  ToastLabelOptions,
-  ToastDescriptionOptions,
-  ToastLinkButtonOptions,
-  ToastCloseButtonOptions,
+  ToastCloseButtonProps,
 } from './Toast.types';
 export {
   TOAST_VISIBILITY_DURATION,
