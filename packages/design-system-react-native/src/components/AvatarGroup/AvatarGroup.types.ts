@@ -27,7 +27,7 @@ type BaseAvatarGroupProps = Omit<AvatarGroupPropsShared, 'variant'> & {
 export type AvatarGroupProps = BaseAvatarGroupProps &
   (
     | {
-        variant: Extract<AvatarGroupVariant, 'account'>;
+        variant: typeof AvatarGroupVariant.Account;
         /**
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
@@ -35,7 +35,7 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
         avatarPropsArr: AvatarAccountProps[];
       }
     | {
-        variant: Extract<AvatarGroupVariant, 'favicon'>;
+        variant: typeof AvatarGroupVariant.Favicon;
         /**
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
@@ -43,7 +43,7 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
         avatarPropsArr: AvatarFaviconProps[];
       }
     | {
-        variant: Extract<AvatarGroupVariant, 'network'>;
+        variant: typeof AvatarGroupVariant.Network;
         /**
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
@@ -51,7 +51,7 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
         avatarPropsArr: AvatarNetworkProps[];
       }
     | {
-        variant: Extract<AvatarGroupVariant, 'token'>;
+        variant: typeof AvatarGroupVariant.Token;
         /**
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
