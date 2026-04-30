@@ -30,6 +30,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       onBlur,
       onFocus,
       autoFocus = false,
+      multiline,
       ...props
     },
     ref,
@@ -37,6 +38,7 @@ export const Input = forwardRef<TextInput, InputProps>(
     const [isFocused, setIsFocused] = useState(autoFocus);
     const tw = useTailwind();
     const theme = useTheme();
+    const isMultiline = multiline === true;
 
     const placeholderTextColor = useMemo(
       () =>
@@ -59,7 +61,7 @@ export const Input = forwardRef<TextInput, InputProps>(
     const inputStyle = useMemo(
       () =>
         tw.style(
-          fontClass,
+          !isMultiline && fontClass,
           'text-default',
           'bg-default',
           'border',
@@ -73,6 +75,7 @@ export const Input = forwardRef<TextInput, InputProps>(
         ),
       [
         fontClass,
+        isMultiline,
         isStateStylesDisabled,
         isDisabled,
         isFocused,
@@ -82,8 +85,11 @@ export const Input = forwardRef<TextInput, InputProps>(
     );
 
     const variantTextStyle = useMemo(
-      () => MAP_TEXT_VARIANT_INPUT_METRICS[textVariant],
-      [textVariant],
+      () =>
+        isMultiline
+          ? tw.style(`text-${textVariant}`, fontClass)
+          : MAP_TEXT_VARIANT_INPUT_METRICS[textVariant],
+      [isMultiline, textVariant, fontClass, tw],
     );
 
     /* istanbul ignore next: handler body covered by focus/blur tests */
@@ -113,8 +119,10 @@ export const Input = forwardRef<TextInput, InputProps>(
       // iOS-only workaround: when a placeholder is visible, native iOS
       // TextInput can render placeholder text vertically offset.
       // Keep this iOS-only because lineHeight: 0 can collapse text on Android.
+      // Skip for multiline: lineHeight 0 breaks paragraph layout; single-line only.
       Platform.OS === 'ios' &&
-        isPlaceholderVisible && { lineHeight: 0 as const },
+        isPlaceholderVisible &&
+        !isMultiline && { lineHeight: 0 as const },
       style,
     ].filter(Boolean);
 
@@ -122,6 +130,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       <TextInput
         ref={ref}
         {...props}
+        multiline={multiline}
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
         value={value}
