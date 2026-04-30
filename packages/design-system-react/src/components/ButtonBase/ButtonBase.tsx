@@ -1,9 +1,9 @@
+import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
-import { ButtonBaseSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
-import { Icon, IconName, IconSize } from '../Icon';
+import { Icon, IconSize } from '../Icon';
 import { Text, FontWeight, TextColor } from '../Text';
 
 import { TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION } from './ButtonBase.constants';

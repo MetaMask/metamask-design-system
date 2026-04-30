@@ -19,7 +19,7 @@ import { AvatarIconSize, AvatarIconSeverity } from '.';
 
 figma.connect(
   AvatarIcon,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=224%3A1636',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=224%3A1636',
   {
     props: {
       size: figma.enum('size', {

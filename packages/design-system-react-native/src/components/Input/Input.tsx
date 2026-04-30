@@ -23,7 +23,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       textVariant = TextVariant.BodyMd,
       isStateStylesDisabled,
       isDisabled = false,
-      isReadonly = false,
+      isReadOnly = false,
       value,
       placeholder,
       twClassName,
@@ -121,12 +121,12 @@ export const Input = forwardRef<TextInput, InputProps>(
     return (
       <TextInput
         ref={ref}
-        placeholderTextColor={placeholderTextColor}
         {...props}
         placeholder={placeholder}
+        placeholderTextColor={placeholderTextColor}
         value={value}
         style={resolvedStyle}
-        editable={!isDisabled && !isReadonly}
+        editable={!isDisabled && !isReadOnly}
         autoFocus={autoFocus}
         onBlur={onBlurHandler}
         onFocus={onFocusHandler}

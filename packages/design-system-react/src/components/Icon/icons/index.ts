@@ -246,6 +246,7 @@ import TabClose from './TabClose';
 import TableRow from './TableRow';
 import Tablet from './Tablet';
 import Tag from './Tag';
+import Telegram from './Telegram';
 import ThumbDownFilled from './ThumbDownFilled';
 import ThumbDown from './ThumbDown';
 import ThumbUpFilled from './ThumbUpFilled';
@@ -529,6 +530,7 @@ export const Icons = {
   TableRow,
   Tablet,
   Tag,
+  Telegram,
   ThumbDownFilled,
   ThumbDown,
   ThumbUpFilled,
