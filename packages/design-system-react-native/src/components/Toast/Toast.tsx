@@ -1,70 +1,105 @@
 // Third party dependencies.
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useLayoutEffect,
-  useRef,
-} from 'react';
-import type { RefObject } from 'react';
+import {
+  BoxBackgroundColor,
+  BoxBorderColor,
+} from '@metamask/design-system-shared';
+import React from 'react';
+
+// External dependencies.
+import { IconColor, IconName, IconSize } from '../../types';
+import { BannerBase } from '../BannerBase';
+import { Icon } from '../Icon';
 
 // Internal dependencies.
-import type { ToastOptions, ToastProps, ToastRef } from './Toast.types';
-import { ToastView } from './ToastView';
+import type { ToastProps } from './Toast.types';
+import { ToastSeverity } from './Toast.types';
 
-let registeredRef: RefObject<ToastRef> | null = null;
+const TOAST_SEVERITY_ICON_MAP = {
+  [ToastSeverity.Default]: {
+    color: IconColor.IconDefault,
+    name: IconName.FullCircle,
+  },
+  [ToastSeverity.Success]: {
+    color: IconColor.SuccessDefault,
+    name: IconName.Confirmation,
+  },
+  [ToastSeverity.Warning]: {
+    color: IconColor.WarningDefault,
+    name: IconName.Danger,
+  },
+  [ToastSeverity.Error]: {
+    color: IconColor.ErrorDefault,
+    name: IconName.Error,
+  },
+} as const;
 
-const assertRegisteredRef = (method: string): ToastRef => {
-  if (!registeredRef?.current) {
-    throw new Error(
-      `Toast.${method}() called before <Toast /> mounted. Render <Toast /> once at the root of your app.`,
-    );
+const renderSeverityAccessory = (props: ToastProps) => {
+  if (props.startAccessory !== null && props.startAccessory !== undefined) {
+    return props.startAccessory;
   }
-  return registeredRef.current;
+
+  const severity = props.severity ?? ToastSeverity.Default;
+  const { color, name } = TOAST_SEVERITY_ICON_MAP[severity];
+
+  return <Icon color={color} name={name} size={IconSize.Lg} />;
 };
 
-const ToastComponent = forwardRef<ToastRef, ToastProps>((props, ref) => {
-  const innerRef = useRef<ToastRef>(null);
+export const Toast: React.FC<ToastProps> = ({
+  actionText,
+  closeButtonProps,
+  description,
+  onActionPress,
+  onClose,
+  severity,
+  startAccessory,
+  text,
+  twClassName,
+  ...props
+}) => {
+  const handleClosePress = (
+    event: Parameters<
+      NonNullable<NonNullable<typeof closeButtonProps>['onPress']>
+    >[0],
+  ) => {
+    onClose();
+    closeButtonProps?.onPress?.(event);
+  };
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      showToast: (options) => innerRef.current?.showToast(options),
-      closeToast: () => innerRef.current?.closeToast(),
-    }),
-    [],
+  const actionProps =
+    actionText && onActionPress
+      ? {
+          actionButtonLabel: actionText,
+          actionButtonOnPress: onActionPress,
+        }
+      : {};
+
+  return (
+    <BannerBase
+      {...actionProps}
+      backgroundColor={BoxBackgroundColor.BackgroundSection}
+      borderColor={BoxBorderColor.BorderMuted}
+      borderWidth={1}
+      closeButtonProps={{
+        accessibilityLabel: 'Close toast',
+        ...closeButtonProps,
+        onPress: handleClosePress,
+      }}
+      description={description}
+      startAccessory={renderSeverityAccessory({
+        ...props,
+        actionText,
+        closeButtonProps,
+        description,
+        onActionPress,
+        onClose,
+        severity,
+        startAccessory,
+        text,
+        twClassName,
+      })}
+      title={text}
+      twClassName={twClassName ? `rounded-xl ${twClassName}` : 'rounded-xl'}
+      {...props}
+    />
   );
-
-  useLayoutEffect(() => {
-    registeredRef = innerRef;
-    return () => {
-      if (registeredRef === innerRef) {
-        registeredRef = null;
-      }
-    };
-  }, []);
-
-  return <ToastView ref={innerRef} {...props} />;
-});
-
-ToastComponent.displayName = 'Toast';
-
-type ToastWithStatics = typeof ToastComponent & {
-  /**
-   * Show a toast notification. Requires `<Toast />` to be mounted.
-   */
-  show: (options: ToastOptions) => void;
-  /**
-   * Hide the currently visible toast, if any.
-   */
-  hide: () => void;
-};
-
-export const Toast = ToastComponent as ToastWithStatics;
-
-Toast.show = (options) => {
-  assertRegisteredRef('show').showToast(options);
-};
-
-Toast.hide = () => {
-  assertRegisteredRef('hide').closeToast();
 };

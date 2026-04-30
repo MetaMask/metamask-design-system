@@ -1,38 +1,43 @@
 # Toast
 
-Toast is a component that slides up from the bottom of the screen. It is used to show compact, dismissible status updates with an optional description, action button, and leading accessory.
+`Toast` is the presentational toast surface. `Toaster` is the mounted root renderer, and `toast(...)` is the imperative API used to display a toast from anywhere.
 
 ```tsx
-import { Toast, ToastSeverity } from '@metamask/design-system-react-native';
+import {
+  Toast,
+  Toaster,
+  toast,
+  ToastSeverity,
+} from '@metamask/design-system-react-native';
 ```
 
 ## Setup
 
-Using Toast is a two-step process:
+Using the runtime toast API is a two-step process:
 
-### 1. Render `<Toast />` once at the root of the app
+### 1. Render `<Toaster />` once at the root of the app
 
 ```tsx
-import { Toast } from '@metamask/design-system-react-native';
+import { Toaster } from '@metamask/design-system-react-native';
 
 const App = () => (
   <>
     <RootComponent />
-    <Toast />
+    <Toaster />
   </>
 );
 ```
 
-`<Toast />` must be rendered exactly once. On mount it registers itself with the `Toast.show` / `Toast.hide` static methods so they can be called from anywhere — React components, hooks, controllers, services, or plain utilities.
+`<Toaster />` must be rendered exactly once. On mount it registers the `toast(...)` / `toast.hide()` / `toast.dismiss()` API so it can be called from anywhere — React components, hooks, controllers, services, or plain utilities.
 
-### 2. Call `Toast.show` from anywhere
+### 2. Call `toast(...)` from anywhere
 
 ```tsx
-import { Toast, ToastSeverity } from '@metamask/design-system-react-native';
+import { toast, ToastSeverity } from '@metamask/design-system-react-native';
 
 const Content = () => {
   const handlePress = () => {
-    Toast.show({
+    toast({
       text: 'Toast message',
       description: 'Description of toast',
       severity: ToastSeverity.Success,
@@ -48,25 +53,44 @@ const Content = () => {
 };
 ```
 
-Call `Toast.hide()` to dismiss the currently visible toast.
+Call `toast.hide()` or `toast.dismiss()` to dismiss the currently visible toast.
 
-Both `Toast.show` and `Toast.hide` throw a descriptive error if called before `<Toast />` is mounted.
+`toast(...)`, `toast.show(...)`, `toast.hide()`, and `toast.dismiss()` throw a descriptive error if called before `<Toaster />` is mounted.
+
+## Direct Render
+
+Use `Toast` when you want to render a single toast surface directly in Storybook, docs, or bespoke layouts.
+
+```tsx
+import { Toast, ToastSeverity } from '@metamask/design-system-react-native';
+
+<Toast
+  text="Toast message"
+  description="Description of toast"
+  severity={ToastSeverity.Success}
+  actionText="Action"
+  onActionPress={() => {}}
+  onClose={() => {}}
+/>;
+```
 
 ## Props
 
-### `twClassName`
+### `Toaster` Props
 
-Optional Tailwind CSS classes for the toast container.
+#### `twClassName`
+
+Optional Tailwind CSS classes applied to the rendered toast surface.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
 ```tsx
-<Toast twClassName="mx-2" />
+<Toaster twClassName="mx-2" />
 ```
 
-### `testID`
+#### `testID`
 
 Test identifier for the root element, inherited from `ViewProps`.
 
@@ -75,30 +99,51 @@ Test identifier for the root element, inherited from `ViewProps`.
 | `string` | No       | `undefined` |
 
 ```tsx
-<Toast testID="my-toast" />
+<Toaster testID="my-toaster" />
 ```
 
-## Static Methods
+### `Toast` Props
 
-### `Toast.show(options: ToastOptions)`
+`Toast` accepts the display props for a single toast surface:
 
-Slides a toast up with the provided options. Requires `<Toast />` to be mounted. `startAccessory` overrides the default severity icon when you need custom content such as a network avatar or bespoke glyph.
+- `text` - Main toast content. Accepts plain text or rich React content.
+- `description` - Optional secondary content shown below the main text.
+- `actionText` and `onActionPress` - Optional action button content and handler.
+- `onClose` - Required close handler for direct rendering.
+- `closeButtonProps` - Optional props merged onto the close `ButtonIcon`.
+- `startAccessory` - Optional leading accessory that overrides the severity icon.
+- `severity` - Optional semantic state used to choose the default icon.
+- `twClassName` - Optional extra classes for the toast surface.
+
+## Imperative API
+
+### `toast(options: ToastOptions)`
+
+Slides a toast up with the provided options. Requires `<Toaster />` to be mounted. `startAccessory` overrides the default severity icon when you need custom content such as a network avatar or bespoke glyph.
 
 | PARAMETER | TYPE           | DESCRIPTION         |
 | --------- | -------------- | ------------------- |
 | options   | `ToastOptions` | Toast configuration |
 
-### `Toast.hide()`
+### `toast.show(options: ToastOptions)`
+
+Alias for `toast(options)`.
+
+### `toast.hide()`
 
 Dismisses the currently visible toast with a slide-down animation.
 
-## Instance Methods (advanced)
+### `toast.dismiss()`
 
-The underlying ref is still forwarded for advanced cases (for example, Storybook stories with multiple isolated toasts). Prefer the static API in application code.
+Alias for `toast.hide()`.
+
+## `Toaster` Ref (advanced)
+
+The underlying ref is still forwarded for advanced cases. Prefer `toast(...)` in application code.
 
 ```tsx
-const ref = useRef<ToastRef>(null);
-<Toast ref={ref} />;
+const ref = useRef<ToasterRef>(null);
+<Toaster ref={ref} />;
 ref.current?.showToast(options);
 ref.current?.closeToast();
 ```
@@ -115,7 +160,7 @@ ref.current?.closeToast();
 - `text` - Main toast content. Accepts plain text or rich React content.
 - `description` - Optional secondary content shown below the main text.
 - `actionText` and `onActionPress` - Optional action button content and handler.
-- `onClose` - Optional callback invoked when the close button is pressed.
+- `onClose` - Optional callback invoked when the toast closes.
 - `closeButtonProps` - Optional props merged onto the close `ButtonIcon`.
 - `startAccessory` - Optional leading accessory that overrides the severity icon.
 - `severity` - Optional semantic state used to choose the default icon.
