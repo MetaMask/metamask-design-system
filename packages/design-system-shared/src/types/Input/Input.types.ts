@@ -6,6 +6,10 @@ import type { TextVariant } from '../Text/Text.types';
  */
 export type InputPropsShared = {
   /**
+   * Controlled value for Input.
+   */
+  value: string;
+  /**
    * Optional prop to select between Typography variants.
    *
    * @default TextVariant.BodyMd
@@ -17,4 +21,16 @@ export type InputPropsShared = {
    * @default false
    */
   isDisabled?: boolean;
+  /**
+   * Optional boolean to show readonly input.
+   *
+   * @default false
+   */
+  isReadOnly?: boolean;
+  /**
+   * Optional boolean to disable state styles.
+   *
+   * @default false
+   */
+  isStateStylesDisabled?: boolean;
 };

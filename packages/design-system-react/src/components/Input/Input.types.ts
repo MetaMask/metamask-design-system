@@ -3,15 +3,9 @@ import type { ComponentPropsWithoutRef } from 'react';
 
 export type InputProps = Omit<
   ComponentPropsWithoutRef<'input'>,
-  'disabled' | 'readOnly'
+  'defaultValue' | 'disabled' | 'readOnly' | 'value'
 > &
   InputPropsShared & {
-    /**
-     * Optional boolean to show readonly input.
-     *
-     * @default false
-     */
-    isReadonly?: boolean;
     /**
      * Optional prop for additional CSS classes.
      */
