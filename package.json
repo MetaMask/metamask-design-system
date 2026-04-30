@@ -1,6 +1,6 @@
 {
   "name": "@metamask/metamask-design-system",
-  "version": "36.0.0",
+  "version": "37.0.0",
   "private": true,
   "description": "The MetaMask Design System monorepo",
   "repository": {
