@@ -9,13 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20.0]
 
-### Uncategorized
+### Changed
 
-- chore: Updated asset images for networks and tokens ([#1129](https://github.com/MetaMask/metamask-design-system/pull/1129))
-- fix: figma code connect mappings ([#1109](https://github.com/MetaMask/metamask-design-system/pull/1109))
-- docs: add `TextButton` migration (extension) ([#1098](https://github.com/MetaMask/metamask-design-system/pull/1098))
-- chore: migrate Button and ButtonBase to ADR-0003 and ADR-0004 shared types (DSYS-483) ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
-- feat: migrate ButtonIcon to ADR-0003 and ADR-0004 (DSYS-485) ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+- **BREAKING:** Updated `Button`, `ButtonBase`, and `ButtonHero` size and variant exports to use shared const-object + string-union types instead of platform-local enums; existing imports continue to work, but enum-specific type assumptions may need updating. See [Migration Guide](./MIGRATION.md#from-version-0190-to-0200) ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
+- **BREAKING:** Updated `ButtonIconSize` and `ButtonIconVariant` to use shared const-object + string-union types instead of platform-local enums; existing imports continue to work, but enum-specific type assumptions may need updating. See [Migration Guide](./MIGRATION.md#from-version-0190-to-0200) ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+- Updated Figma Code Connect to the live `MMDS Components` file and aligned `ButtonIcon` and `TextButton` mappings with the current component APIs shown in Dev Mode ([#1109](https://github.com/MetaMask/metamask-design-system/pull/1109))
+- Expanded the `TextButton` migration guide for extension consumers replacing `ButtonLink` and `ButtonVariant.Link` with the current design-system APIs ([#1098](https://github.com/MetaMask/metamask-design-system/pull/1098))
 
 ## [0.19.0]
 

@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.15.0]
 
-### Uncategorized
+### Added
 
-- refactor: Aligned TextField with cursor rules ([#1081](https://github.com/MetaMask/metamask-design-system/pull/1081))
-- chore: migrate Button and ButtonBase to ADR-0003 and ADR-0004 shared types (DSYS-483) ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
-- feat: migrate ButtonIcon to ADR-0003 and ADR-0004 (DSYS-485) ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+- Added shared `ButtonBaseSize`, `ButtonSize`, `ButtonHeroSize`, `ButtonVariant`, `ButtonBasePropsShared`, and `ButtonPropsShared` exports so React and React Native button APIs can share one cross-platform type contract ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
+- Added shared `ButtonIconSize`, `ButtonIconVariant`, and `ButtonIconPropsShared` exports so React and React Native `ButtonIcon` APIs can share one cross-platform type contract ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+- Added shared `TextFieldPropsShared` for the controlled text-field contract used by `TextField` and `TextFieldSearch` across platform packages ([#1081](https://github.com/MetaMask/metamask-design-system/pull/1081))
 
 ## [0.14.0]
 
