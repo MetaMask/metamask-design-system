@@ -79,6 +79,9 @@ export type { ButtonIconProps } from './ButtonIcon';
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
+export { HeaderBase } from './HeaderBase';
+export type { HeaderBaseProps } from './HeaderBase';
+
 export { Icon } from './Icon';
 export { IconName, IconSize, IconColor } from './Icon';
 export type { IconProps } from './Icon';
