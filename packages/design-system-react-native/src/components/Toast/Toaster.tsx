@@ -153,6 +153,13 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       return null;
     }
 
+    // Strip ToastOptions-only fields so they don't propagate to native views.
+    const {
+      hasNoTimeout: _omitHasNoTimeout,
+      bottomOffset: _omitBottomOffset,
+      ...toastRenderableProps
+    } = toastOptions;
+
     return (
       <Animated.View
         onLayout={onAnimatedViewLayout}
@@ -160,7 +167,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         {...props}
       >
         <Toast
-          {...toastOptions}
+          {...toastRenderableProps}
           onClose={() => {
             closeToast();
             toastOptions.onClose?.();
