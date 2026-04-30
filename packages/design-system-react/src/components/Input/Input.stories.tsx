@@ -80,17 +80,17 @@ export const Default: Story = {
 export const Variant: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Input
+      <ControlledInput
         placeholder="BodyMd (default)"
         textVariant={TextVariant.BodyMd}
         value="Sample text"
       />
-      <Input
+      <ControlledInput
         placeholder="BodySm"
         textVariant={TextVariant.BodySm}
         value="Sample text"
       />
-      <Input
+      <ControlledInput
         placeholder="HeadingSm"
         textVariant={TextVariant.HeadingSm}
         value="Sample text"
@@ -102,7 +102,7 @@ export const Variant: Story = {
 export const IsDisabled: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Input placeholder="Enabled" value="Editable" />
+      <ControlledInput placeholder="Enabled" value="Editable" />
       <Input placeholder="Disabled" value="Not editable" isDisabled />
     </div>
   ),
@@ -111,7 +111,7 @@ export const IsDisabled: Story = {
 export const IsReadOnly: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Input placeholder="Editable" value="" />
+      <ControlledInput placeholder="Editable" value="" />
       <Input placeholder="Readonly" value="Read-only value" isReadOnly />
     </div>
   ),
