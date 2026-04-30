@@ -95,9 +95,7 @@ describe('Input', () => {
     );
     const input = getByTestId(TEST_ID);
     const lineHeight = getStyleProp(input.props.style, 'lineHeight');
-    if (Platform.OS === 'ios') {
-      expect(lineHeight).not.toBe(0);
-    }
+    expect(Platform.OS === 'ios' ? lineHeight !== 0 : true).toBe(true);
   });
 
   it('when multiline is true, resolved style includes non-zero lineHeight for BodyMd', () => {
