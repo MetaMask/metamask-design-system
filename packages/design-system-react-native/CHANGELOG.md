@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: Aligned TextField with cursor rules ([#1081](https://github.com/MetaMask/metamask-design-system/pull/1081))
+- chore: Updated asset images for networks and tokens ([#1129](https://github.com/MetaMask/metamask-design-system/pull/1129))
+- fix: figma code connect mappings ([#1109](https://github.com/MetaMask/metamask-design-system/pull/1109))
+- chore: migrate Button and ButtonBase to ADR-0003 and ADR-0004 shared types (DSYS-483) ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
+- feat: migrate ButtonIcon to ADR-0003 and ADR-0004 (DSYS-485) ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+
 ## [0.21.0]
 
 ### Added
