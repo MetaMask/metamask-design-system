@@ -6,7 +6,10 @@ import { twMerge } from '../../utils/tw-merge';
 import { Icon, IconSize } from '../Icon';
 import { Text, FontWeight, TextColor } from '../Text';
 
-import { TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION } from './ButtonBase.constants';
+import {
+  TWCLASSMAP_BUTTONBASE_SIZE_BORDER_RADIUS,
+  TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
+} from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
 
 export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
@@ -150,14 +153,15 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const mergedClassName = twMerge(
       // Base styles
       'inline-flex items-center justify-center',
-      'rounded-xl px-4',
+      'px-4',
       'font-medium text-default',
       'bg-muted',
-      'min-w-20 overflow-hidden',
+      'overflow-hidden',
       // Add relative positioning for loading state
       'relative',
       // Size
       TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],
+      TWCLASSMAP_BUTTONBASE_SIZE_BORDER_RADIUS[size],
       // Full width
       isFullWidth && 'w-full',
       // Animation classes - only applied when interactive
