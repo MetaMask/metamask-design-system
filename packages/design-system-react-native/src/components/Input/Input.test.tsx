@@ -163,6 +163,23 @@ describe('Input', () => {
     expect(input).toHaveStyle(tw`border-primary-default`);
   });
 
+  it('clears focused state when input becomes disabled', () => {
+    const { getByTestId, rerender } = render(
+      <Input value="" testID={TEST_ID} placeholder="Focus me" />,
+    );
+
+    const input = getByTestId(TEST_ID);
+
+    fireEvent(input, 'focus');
+    expect(input).toHaveStyle(tw`border-primary-default`);
+
+    rerender(
+      <Input value="" testID={TEST_ID} isDisabled placeholder="Focus me" />,
+    );
+
+    expect(input).not.toHaveStyle(tw`border-primary-default`);
+  });
+
   it('uses dark theme placeholder color when ThemeProvider has theme dark', () => {
     const { getByTestId } = render(
       <ThemeProvider theme={Theme.Dark}>
