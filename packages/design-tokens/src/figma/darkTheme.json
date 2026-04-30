@@ -1,13 +1,13 @@
 {
   "background": {
     "default": {
-      "value": "{grey.900}",
+      "value": "{grey.1000}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For default neutral surface."
     },
     "alternative": {
-      "value": "{grey.1000}",
+      "value": "{grey.900}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For sunken neutral surface below background/default."
@@ -25,7 +25,7 @@
       "description": "For subsection bg usually over background/section."
     },
     "muted": {
-      "value": "#ffffff0a",
+      "value": "#e2e2ff1b",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "For muted neutral surface."
@@ -55,25 +55,25 @@
       "description": "Pressed state surface for background/alternative."
     },
     "muted-hover": {
-      "value": "#ffffff14",
+      "value": "#e2e2ff26",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for background/muted."
     },
     "muted-pressed": {
-      "value": "#ffffff1f",
+      "value": "#e2e2ff30",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for background/muted."
     },
     "hover": {
-      "value": "#ffffff0a",
+      "value": "#e2e2ff1b",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "General purpose hover state tint."
     },
     "pressed": {
-      "value": "#ffffff1f",
+      "value": "#e2e2ff30",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "General purpose pressed state tint."
@@ -93,7 +93,7 @@
       "description": "Softer color for text."
     },
     "muted": {
-      "value": "{grey.600}",
+      "value": "{grey.500}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color for text (Not accessible)."
@@ -125,7 +125,7 @@
       "description": "Softer color for icons, following text/alternative."
     },
     "muted": {
-      "value": "{grey.600}",
+      "value": "{grey.500}",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color for icons (Not accessible), following text/muted."
@@ -145,7 +145,7 @@
       "description": "Default color for borders."
     },
     "muted": {
-      "value": "#ffffff14",
+      "value": "#e2e2ff26",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color for borders."

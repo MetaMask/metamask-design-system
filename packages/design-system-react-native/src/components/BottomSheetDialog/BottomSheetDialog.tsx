@@ -232,7 +232,7 @@ export const BottomSheetDialog = forwardRef<
     const sheetStyle = useMemo(
       () => [
         tw.style(
-          'bg-default rounded-t-3xl overflow-hidden border border-muted',
+          'bg-alternative rounded-t-3xl overflow-hidden border border-muted',
           twClassName,
         ),
         {
