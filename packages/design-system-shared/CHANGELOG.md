@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.0]
+
+### Added
+
+- Added shared `ButtonBaseSize`, `ButtonSize`, `ButtonHeroSize`, `ButtonVariant`, `ButtonBasePropsShared`, and `ButtonPropsShared` exports so React and React Native button APIs can share one cross-platform type contract ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
+- Added shared `ButtonIconSize`, `ButtonIconVariant`, and `ButtonIconPropsShared` exports so React and React Native `ButtonIcon` APIs can share one cross-platform type contract ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+- Added shared `TextFieldPropsShared` for the controlled text-field contract used by `TextField` and `TextFieldSearch` across platform packages ([#1081](https://github.com/MetaMask/metamask-design-system/pull/1081))
+
 ## [0.14.0]
 
 ### Added
@@ -158,7 +166,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.14.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.15.0...HEAD
+[0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.14.0...@metamask/design-system-shared@0.15.0
 [0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.13.0...@metamask/design-system-shared@0.14.0
 [0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.12.0...@metamask/design-system-shared@0.13.0
 [0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.11.0...@metamask/design-system-shared@0.12.0
