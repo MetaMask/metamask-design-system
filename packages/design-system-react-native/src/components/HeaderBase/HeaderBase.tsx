@@ -8,9 +8,69 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
+import type { ButtonIconProps } from '../ButtonIcon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import type { HeaderBaseProps } from './HeaderBase.types';
+
+// `startAccessory` is the primary escape hatch. `startButtonIconProps`
+// remains as a convenience path for the common single-back-button case.
+const resolveStartAccessory = ({
+  startAccessory,
+  startButtonIconProps,
+}: Pick<HeaderBaseProps, 'startAccessory' | 'startButtonIconProps'>) => {
+  if (startAccessory) {
+    return startAccessory;
+  }
+
+  if (startButtonIconProps) {
+    return <ButtonIcon size={ButtonIconSize.Md} {...startButtonIconProps} />;
+  }
+
+  return null;
+};
+
+// Only the end side supports built-in multiple buttons. More complex
+// start-side layouts should be composed explicitly with `startAccessory`.
+const renderEndButtonIcons = (endButtonIconProps: ButtonIconProps[]) =>
+  endButtonIconProps
+    .map((iconProps, originalIndex) => ({
+      iconProps,
+      originalIndex,
+    }))
+    .reverse()
+    .map(({ iconProps, originalIndex }) => (
+      <ButtonIcon
+        key={`end-button-icon-${originalIndex}`}
+        size={ButtonIconSize.Md}
+        {...iconProps}
+      />
+    ));
+
+// `endAccessory` takes precedence over the shorthand icon-props array.
+const resolveEndAccessory = ({
+  endAccessory,
+  endButtonIconProps,
+}: Pick<HeaderBaseProps, 'endAccessory' | 'endButtonIconProps'>) => {
+  if (endAccessory) {
+    return {
+      resolvedEndAccessory: endAccessory,
+      hasMultipleEndButtons: false,
+    };
+  }
+
+  if (endButtonIconProps && endButtonIconProps.length > 0) {
+    return {
+      resolvedEndAccessory: renderEndButtonIcons(endButtonIconProps),
+      hasMultipleEndButtons: endButtonIconProps.length > 1,
+    };
+  }
+
+  return {
+    resolvedEndAccessory: null,
+    hasMultipleEndButtons: false,
+  };
+};
 
 export const HeaderBase: React.FC<HeaderBaseProps> = ({
   children,
@@ -40,35 +100,20 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
     setEndAccessoryWidth(e.nativeEvent.layout.width);
   }, []);
 
-  let startContent = startAccessory ?? null;
-  if (!startContent && startButtonIconProps) {
-    startContent = (
-      <ButtonIcon size={ButtonIconSize.Md} {...startButtonIconProps} />
-    );
-  }
+  // Normalize the public API into resolved slots so the render path only deals
+  // with layout and title rendering.
+  const resolvedStartAccessory = resolveStartAccessory({
+    startAccessory,
+    startButtonIconProps,
+  });
+  const { resolvedEndAccessory, hasMultipleEndButtons } = resolveEndAccessory({
+    endAccessory,
+    endButtonIconProps,
+  });
 
-  let endContent = endAccessory ?? null;
-  if (!endContent && endButtonIconProps && endButtonIconProps.length > 0) {
-    endContent = endButtonIconProps
-      .map((iconProps, originalIndex) => ({
-        iconProps,
-        originalIndex,
-      }))
-      .reverse()
-      .map(({ iconProps, originalIndex }) => (
-        <ButtonIcon
-          key={`end-button-icon-${originalIndex}`}
-          size={ButtonIconSize.Md}
-          {...iconProps}
-        />
-      ));
-  }
-
-  const hasStartContent = Boolean(startContent);
-  const hasEndContent = Boolean(endContent);
-  const hasAnyAccessory = hasStartContent || hasEndContent;
-  const shouldRenderStartWrapper = Boolean(hasAnyAccessory);
-  const shouldRenderEndWrapper = Boolean(hasAnyAccessory);
+  const hasStartAccessory = Boolean(resolvedStartAccessory);
+  const hasEndAccessory = Boolean(resolvedEndAccessory);
+  const hasAnyAccessory = hasStartAccessory || hasEndAccessory;
 
   // Calculate equal width for both accessory wrappers to ensure title stays centered.
   const accessoryWrapperWidth =
@@ -76,26 +121,20 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
       ? Math.max(startAccessoryWidth, endAccessoryWidth)
       : undefined;
 
-  // Check if we have multiple end buttons for layout styling
-  const hasMultipleEndButtons =
-    !endAccessory && endButtonIconProps && endButtonIconProps.length > 1;
-
   const renderAccessoryWrapper = ({
-    shouldRender,
     wrapperProps,
     alignment,
     onLayout,
     content,
-    contentStyle,
+    measuredContentStyle,
   }: {
-    shouldRender: boolean;
     wrapperProps?: HeaderBaseProps['startAccessoryWrapperProps'];
     alignment: 'items-start' | 'items-end';
     onLayout: (e: LayoutChangeEvent) => void;
     content: React.ReactNode;
-    contentStyle?: ReturnType<typeof tw.style>;
+    measuredContentStyle?: ReturnType<typeof tw.style>;
   }) => {
-    if (!shouldRender) {
+    if (!hasAnyAccessory) {
       return null;
     }
 
@@ -108,7 +147,7 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
         }
         {...wrapperProps}
       >
-        <View onLayout={onLayout} style={contentStyle}>
+        <View onLayout={onLayout} style={measuredContentStyle}>
           {content}
         </View>
       </View>
@@ -126,11 +165,10 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
     >
       {/* Start accessory */}
       {renderAccessoryWrapper({
-        shouldRender: shouldRenderStartWrapper,
         wrapperProps: startAccessoryWrapperProps,
         alignment: 'items-start',
         onLayout: handleStartAccessoryLayout,
-        content: startContent,
+        content: resolvedStartAccessory,
       })}
 
       {/* Title */}
@@ -148,12 +186,11 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
 
       {/* End accessory */}
       {renderAccessoryWrapper({
-        shouldRender: shouldRenderEndWrapper,
         wrapperProps: endAccessoryWrapperProps,
         alignment: 'items-end',
         onLayout: handleEndAccessoryLayout,
-        content: endContent,
-        contentStyle: hasMultipleEndButtons
+        content: resolvedEndAccessory,
+        measuredContentStyle: hasMultipleEndButtons
           ? tw.style('flex-row gap-2')
           : undefined,
       })}
