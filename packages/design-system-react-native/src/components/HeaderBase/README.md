@@ -79,7 +79,7 @@ Content displayed after the title. Takes priority over `endButtonIconProps` if b
 
 ### `startButtonIconProps`
 
-ButtonIcon props to render a ButtonIcon as the start accessory. Only used if `startAccessory` is not provided. Defaults to `ButtonIconSize.Md`.
+ButtonIcon props to render a ButtonIcon as the start accessory. Only used if `startAccessory` is not provided. Defaults to `ButtonIconSize.Md`. For multiple start-side actions, compose them explicitly with `startAccessory`.
 
 | TYPE              | REQUIRED | DEFAULT     |
 | ----------------- | -------- | ----------- |
@@ -98,7 +98,7 @@ ButtonIcon props to render a ButtonIcon as the start accessory. Only used if `st
 
 ### `endButtonIconProps`
 
-Array of ButtonIcon props to render multiple ButtonIcons as end accessories. Rendered in reverse order (first item appears rightmost). Only used if `endAccessory` is not provided. Defaults to `ButtonIconSize.Md` for each.
+Array of ButtonIcon props to render multiple ButtonIcons as end accessories. Rendered in reverse order (first item appears rightmost). Only used if `endAccessory` is not provided. Defaults to `ButtonIconSize.Md` for each. This is HeaderBase's built-in multiple-action path on the end side.
 
 | TYPE                | REQUIRED | DEFAULT     |
 | ------------------- | -------- | ----------- |

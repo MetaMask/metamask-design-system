@@ -4,8 +4,10 @@ import type { HeaderBaseProps } from '../HeaderBase/HeaderBase.types';
 /**
  * BottomSheetHeader component props.
  *
- * Extends HeaderBase's props (which extends ViewProps) to inherit standard
- * props such as `testID`, `accessibilityLabel`, and other View props.
+ * Extends HeaderBase's root and title props to inherit standard props such as
+ * `testID`, `accessibilityLabel`, `textProps`, and other View props.
+ * Start and end accessories are controlled internally via `onBack` and
+ * `onClose`, so `startAccessory` and `endAccessory` are not part of this API.
  */
 export type BottomSheetHeaderProps = {
   /**
@@ -30,4 +32,4 @@ export type BottomSheetHeaderProps = {
    * Note: `iconName` and `onPress` are managed internally and excluded.
    */
   closeButtonProps?: Partial<Omit<ButtonIconProps, 'iconName' | 'onPress'>>;
-} & HeaderBaseProps;
+} & Omit<HeaderBaseProps, 'startAccessory' | 'endAccessory'>;

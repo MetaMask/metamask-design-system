@@ -1441,6 +1441,24 @@ import BottomSheetHeader from '.../component-library/components/BottomSheets/Bot
 />;
 ```
 
+##### Removed Prop: `variant`
+
+The DS `BottomSheetHeader` no longer supports `variant` or `BottomSheetHeaderVariant`. It always uses the shared `HeaderBase` layout with a centered title. If you previously used `BottomSheetHeaderVariant.Display` for a custom left-aligned layout, pass custom header content as `children` instead of relying on the built-in variant.
+
+| Mobile Pattern                                   | Design System Migration                                    |
+| ------------------------------------------------ | ---------------------------------------------------------- |
+| `variant={BottomSheetHeaderVariant.Compact}`     | Remove — default DS behavior                               |
+| `variant={BottomSheetHeaderVariant.Display}`     | Remove — compose custom left-aligned content as `children` |
+| `import { BottomSheetHeaderVariant } from '...'` | Remove — enum no longer exists                             |
+
+##### `titleTestID` → `textProps.testID`
+
+The DS `HeaderBase`/`BottomSheetHeader` string-title path no longer exposes `titleTestID`. Use `textProps={{ testID: ... }}` instead.
+
+| Mobile / Older Pattern          | Design System Migration                     |
+| ------------------------------- | ------------------------------------------- |
+| `titleTestID="my-header-title"` | `textProps={{ testID: 'my-header-title' }}` |
+
 #### Migration Examples
 
 ##### Header with Close Button
@@ -1493,7 +1511,7 @@ After (Design System — identical JSX):
 
 #### API Differences
 
-The DS `BottomSheetHeader` adds a `variant` prop (`BottomSheetHeaderVariant.Compact` | `BottomSheetHeaderVariant.Display`) that is also present in the old mobile version — no change needed. The only removal is `endAccessory` (see above).
+The DS `BottomSheetHeader` supports the same back/close convenience props as mobile (`onBack`, `backButtonProps`, `onClose`, `closeButtonProps`), but it does not support `endAccessory` or `variant`, and string-title testing should use `textProps.testID` instead of `titleTestID`.
 
 ---
 
