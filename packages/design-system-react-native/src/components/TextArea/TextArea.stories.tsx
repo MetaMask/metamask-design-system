@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+
+import { Box } from '../Box';
 
 import { TextArea } from './TextArea';
 import type { TextAreaProps } from './TextArea.types';
@@ -53,18 +54,31 @@ export const Default: Story = {
 
 export const IsError: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
+    <Box gap={4}>
       <ControlledTextArea value="" placeholder="Default" />
       <ControlledTextArea value="" placeholder="Error state" isError />
-    </View>
+    </Box>
   ),
 };
 
 export const IsDisabled: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
+    <Box gap={4}>
       <ControlledTextArea value="Editable" placeholder="Enabled" />
       <TextArea value="Not editable" placeholder="Disabled" isDisabled />
-    </View>
+    </Box>
+  ),
+};
+
+export const IsReadOnly: Story = {
+  render: () => (
+    <Box gap={4}>
+      <ControlledTextArea value="Editable" placeholder="Editable field" />
+      <TextArea
+        value="Cannot edit this value"
+        placeholder="Read-only"
+        isReadOnly
+      />
+    </Box>
   ),
 };

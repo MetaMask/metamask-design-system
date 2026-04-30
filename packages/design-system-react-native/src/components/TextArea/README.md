@@ -98,6 +98,8 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 Additional props forwarded to the inner [Input](../Input/Input.tsx) / `TextInput`. Do not pass `placeholder`, `isReadOnly`, `onFocus`, `onBlur`, or `multiline` here; use the TextArea-level props where applicable. `placeholderTextColor` is omitted from the type; the inner `Input` sets it from the theme. For screen readers, set `inputProps.accessibilityLabel` and `inputProps.accessibilityHint`. You can use `inputProps.testID` to target the native `TextInput` in E2E tests.
 
+Use top-level `Box` / `View` props for layout and pointer handling (`pointerEvents`, margins, hit areas via wrappers, etc.). Keys reserved by TextArea (`style`, `twClassName`, `testID`, `children`, `accessible`, and keys owned by the TextArea API surface) are not passed through from this intersection.
+
 | TYPE                                                               | REQUIRED | DEFAULT     |
 | ------------------------------------------------------------------ | -------- | ----------- |
 | `TextAreaProps['inputProps']` (see `TextAreaProps` in the package) | No       | `undefined` |
@@ -179,7 +181,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `inputElement`
 
-Optional node that replaces the default `Input`. `inputRef` is only forwarded when the default `Input` is rendered.
+Optional node that replaces the default `Input`. `inputRef` is only forwarded when the default `Input` is rendered; with a custom `inputElement`, attach your own ref to the control if you need imperative focus or measurement.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -194,7 +196,7 @@ import { TextInput } from 'react-native';
 
 ### `testID`
 
-Optional test id for the root `Box`. Pass `inputProps.testID` if your tests must query the editable control directly.
+Optional test id for the root [Box](../Box/Box.tsx). The root sets `accessible={false}` so assistive technologies focus the inner `TextInput`. The inner `TextInput` does not inherit this id; pass `inputProps.testID` if your tests must query the editable control directly.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -203,31 +205,15 @@ Optional test id for the root `Box`. Pass `inputProps.testID` if your tests must
 ```tsx
 import { TextArea } from '@metamask/design-system-react-native';
 
-<TextArea value="" testID="my-textarea" placeholder="E2E" />;
-```
-
-### Layout and accessibility (`Box` / `View`)
-
-The root `Box` sets `accessible={false}` so assistive technologies focus the inner `TextInput`. Prefer **`inputProps`** for `accessibilityLabel`, `accessibilityHint`, and other [TextInput](https://reactnative.dev/docs/textinput) accessibility props.
-
-Use top-level `Box` / `View` props for layout and pointer handling. Keys reserved by TextArea (`style`, `twClassName`, `testID`, `children`, `accessible`, and keys owned by the TextArea API surface) are not passed through from this intersection.
-
-```tsx
-import { TextArea } from '@metamask/design-system-react-native';
-
-<TextArea
-  value=""
-  placeholder="Comment"
-  inputProps={{
-    accessibilityLabel: 'Comment field',
-    accessibilityHint: 'Enter at least ten characters',
-  }}
-/>;
+<TextArea value="" testID="my-text-area" placeholder="E2E" />;
 ```
 
 ### `twClassName`
 
-Optional Tailwind classes merged onto the container `Box`.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -236,12 +222,20 @@ Optional Tailwind classes merged onto the container `Box`.
 ```tsx
 import { TextArea } from '@metamask/design-system-react-native';
 
-<TextArea value="" twClassName="rounded-lg" placeholder="Extra rounding" />;
+// Add additional styles
+<TextArea value="" twClassName="rounded-lg" placeholder="Extra rounding" />
+
+// Override default styles
+<TextArea
+  value=""
+  twClassName="bg-error-default"
+  placeholder="Override background"
+/>
 ```
 
 ### `style`
 
-Optional React Native styles for the container `Box`.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

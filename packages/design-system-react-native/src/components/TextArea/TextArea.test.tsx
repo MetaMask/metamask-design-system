@@ -76,6 +76,15 @@ describe('TextArea', () => {
       expect(inputNode.props.twClassName).toContain('flex-1');
       expect(inputNode.props.twClassName).toContain('min-h-[88px]');
     });
+
+    it('when inputProps is omitted, inner Input twClassName omits merged extra classes', () => {
+      const tree = create(<TextArea value="" placeholder="no-input-props" />);
+      const inputNode = tree.root.findByType(Input);
+
+      expect(inputNode.props.twClassName).toBe(
+        'min-h-[88px] w-full flex-1 self-stretch bg-transparent border-0 py-1',
+      );
+    });
   });
 
   describe('multiline input', () => {
@@ -282,6 +291,23 @@ describe('TextArea', () => {
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ marginBottom: 20 });
     });
+
+    it('merges twClassName and style on the container', () => {
+      const customStyle = { marginBottom: 12 };
+      const { getByTestId } = render(
+        <TextArea
+          value=""
+          testID={ROOT_TEST_ID}
+          twClassName="mt-2"
+          style={customStyle}
+        />,
+      );
+
+      const root = getByTestId(ROOT_TEST_ID);
+
+      expect(root).toHaveStyle(tw`mt-2`);
+      expect(root).toHaveStyle({ marginBottom: 12 });
+    });
   });
 
   describe('focus and blur', () => {
@@ -434,10 +460,7 @@ describe('TextArea', () => {
         <TextArea value="" placeholder="disabled-input" isDisabled />,
       );
 
-      expect(getByPlaceholderText('disabled-input')).toHaveProp(
-        'editable',
-        false,
-      );
+      expect(getByPlaceholderText('disabled-input')).toBeDisabled();
     });
   });
 });
