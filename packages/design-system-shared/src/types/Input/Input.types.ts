@@ -1,0 +1,26 @@
+import type { TextVariant } from '../Text/Text.types';
+
+/**
+ * Input component shared props (ADR-0004)
+ * Platform-independent properties shared across React and React Native
+ */
+export type InputPropsShared = {
+  /**
+   * Optional prop to select between Typography variants.
+   *
+   * @default TextVariant.BodyMd
+   */
+  textVariant?: TextVariant;
+  /**
+   * Optional boolean to disable Input.
+   *
+   * @default false
+   */
+  isDisabled?: boolean;
+  /**
+   * Optional boolean to show readonly input.
+   *
+   * @default false
+   */
+  isReadonly?: boolean;
+};
