@@ -66,10 +66,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       () => [tw.style('absolute left-4 right-4 bottom-0'), animatedStyle],
       [tw, animatedStyle],
     );
-    const innerRef = useRef<ToasterRef>({
-      closeToast: () => undefined,
-      showToast: () => undefined,
-    });
+    const innerRef = useRef<ToasterRef | null>(null);
 
     const resetState = () => setToastOptions(undefined);
 
@@ -108,7 +105,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       showToast,
     };
 
-    useImperativeHandle(ref, () => innerRef.current);
+    useImperativeHandle(ref, () => innerRef.current as ToasterRef);
 
     useLayoutEffect(() => {
       registeredRef = innerRef;
@@ -119,39 +116,37 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       };
     }, []);
 
-    const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
-      if (toastOptions) {
-        const { height } = e.nativeEvent.layout;
-        const translateYToValue = -(TOAST_BOTTOM_PADDING + bottomNotchSpacing);
-
-        translateYProgress.value = height;
-
-        if (toastOptions.hasNoTimeout) {
-          translateYProgress.value = withTiming(translateYToValue, {
-            duration: TOAST_ANIMATION_DURATION,
-          });
-        } else {
-          translateYProgress.value = withTiming(
-            translateYToValue,
-            { duration: TOAST_ANIMATION_DURATION },
-            () => {
-              translateYProgress.value = withDelay(
-                TOAST_VISIBILITY_DURATION,
-                withTiming(
-                  height,
-                  { duration: TOAST_ANIMATION_DURATION },
-                  runOnJS(resetState),
-                ),
-              );
-            },
-          );
-        }
-      }
-    };
-
     if (!toastOptions) {
       return null;
     }
+
+    const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
+      const { height } = e.nativeEvent.layout;
+      const translateYToValue = -(TOAST_BOTTOM_PADDING + bottomNotchSpacing);
+
+      translateYProgress.value = height;
+
+      if (toastOptions.hasNoTimeout) {
+        translateYProgress.value = withTiming(translateYToValue, {
+          duration: TOAST_ANIMATION_DURATION,
+        });
+      } else {
+        translateYProgress.value = withTiming(
+          translateYToValue,
+          { duration: TOAST_ANIMATION_DURATION },
+          () => {
+            translateYProgress.value = withDelay(
+              TOAST_VISIBILITY_DURATION,
+              withTiming(
+                height,
+                { duration: TOAST_ANIMATION_DURATION },
+                runOnJS(resetState),
+              ),
+            );
+          },
+        );
+      }
+    };
 
     return (
       <Animated.View

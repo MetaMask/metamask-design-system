@@ -1,4 +1,6 @@
 // Third party dependencies.
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { renderHook } from '@testing-library/react-hooks';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { Text as RNText } from 'react-native';
@@ -93,5 +95,20 @@ describe('Toast', () => {
     fireEvent.press(screen.getByTestId('button-icon'));
     expect(onClose).toHaveBeenCalled();
     expect(onCloseButtonPress).toHaveBeenCalled();
+  });
+
+  it('applies twClassName to the toast surface', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    render(
+      <Toast
+        onClose={() => undefined}
+        testID="toast-root"
+        text="Styled toast"
+        twClassName="mx-2"
+      />,
+    );
+
+    expect(screen.getByTestId('toast-root')).toHaveStyle(tw.style('mx-2'));
   });
 });

@@ -383,6 +383,15 @@ describe('specs for `toast` API', () => {
     );
   });
 
+  it('method `toast.show` throws a helpful error when <Toaster /> is not mounted', () => {
+    expect(() =>
+      toast.show({
+        hasNoTimeout: true,
+        text: 'No mount',
+      }),
+    ).toThrow(/toast.show\(\) called before <Toaster \/> mounted/u);
+  });
+
   it('unregisters the global ref when <Toaster /> unmounts', () => {
     const { unmount } = render(<Toaster />);
     unmount();
