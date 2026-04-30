@@ -4,7 +4,6 @@ export type {
   ToastOptions,
   ToastProps,
   ToastRef,
-  ToastCloseButtonProps,
 } from './Toast.types';
 export {
   TOAST_VISIBILITY_DURATION,
