@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-import { View } from 'react-native';
+import { Box } from '../Box';
 
 // External dependencies.
 import { Icon, IconColor, IconName, IconSize } from '../Icon';
@@ -62,12 +62,12 @@ export const Default: Story = {
 
 export const Severity: Story = {
   render: (args) => (
-    <View style={{ gap: 8 }}>
+    <Box gap={2}>
       <Toast {...args} severity={ToastSeverity.Default} text="Default" />
       <Toast {...args} severity={ToastSeverity.Success} text="Success" />
       <Toast {...args} severity={ToastSeverity.Warning} text="Warning" />
       <Toast {...args} severity={ToastSeverity.Error} text="Error" />
-    </View>
+    </Box>
   ),
   args: {
     description: 'Severity controls the default start accessory icon.',

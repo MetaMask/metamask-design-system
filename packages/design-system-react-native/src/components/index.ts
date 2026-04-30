@@ -218,7 +218,6 @@ export type {
   ToastOptions,
   ToastProps,
   ToastCloseButtonProps,
-  ToastSharedProps,
   ToasterProps,
   ToasterRef,
 } from './Toast';

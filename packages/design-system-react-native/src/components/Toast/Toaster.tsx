@@ -120,6 +120,13 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       return null;
     }
 
+    // Filter out internal-only options that should not reach native views.
+    const {
+      hasNoTimeout: _ignoredHasNoTimeout,
+      bottomOffset: _ignoredBottomOffset,
+      ...toastForwardProps
+    } = toastOptions;
+
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
       const { height } = e.nativeEvent.layout;
       const translateYToValue = -(TOAST_BOTTOM_PADDING + bottomNotchSpacing);
@@ -155,7 +162,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         {...props}
       >
         <Toast
-          {...toastOptions}
+          {...toastForwardProps}
           onClose={() => {
             closeToast();
             toastOptions.onClose?.();
