@@ -20,6 +20,10 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Label Component](#label-component)
   - [Icon Component](#icon-component)
+  - [Identicon temp components (Blockies, Jazzicon, Maskicon)](#identicon-temp-components-blockies-jazzicon-maskicon)
+    - [Blockies temp component](#blockies-temp-component)
+    - [Jazzicon temp component](#jazzicon-temp-component)
+    - [Maskicon temp component](#maskicon-temp-component)
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
@@ -2225,6 +2229,91 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+
+### Identicon temp components (Blockies, Jazzicon, Maskicon)
+
+`Blockies`, `Jazzicon`, and `Maskicon` are exported from `@metamask/design-system-react-native` as **temp components** (`temp-components/`). APIs may evolve while these remain “temp” exports.
+
+On MetaMask Mobile `main`, **there are no `Blockies`, `Jazzicon`, or `Maskicon` folders under** `app/component-library/components/` (verified via repository tree). Legacy Blockies-style rendering still appears under **`app/util/blockies.js`**. Use the mappings below when adopting the design-system components instead of ad hoc utilities.
+
+#### Blockies temp component
+
+| Concern     | Legacy / inline (`app/util/blockies.js` or similar) | `@metamask/design-system-react-native` `Blockies`                                                    |
+| ----------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Output      | Lower-level PNG/string pipeline                     | `react-native` `Image` with data URI from shared helper (`toDataUrl`)                                |
+| `address`   | Typically hex string                                | **Required** `string`; normalized with `extractAccountAddress` from `@metamask/design-system-shared` |
+| `size`      | varies                                              | Optional `number`, default **32** (`width`/`height` on `Image`)                                      |
+| Extra props | —                                                   | Spreads `ImageProps` except `source`, `width`, and `height` (those are controlled)                   |
+
+##### Before (conceptual — util-based blockies)
+
+```tsx
+import { Image } from 'react-native';
+// Legacy: derive URI from app/util/blockies or inline helper
+<Image
+  source={{ uri: legacyBlockiesUri(address) }}
+  style={{ width: 40, height: 40 }}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Blockies } from '@metamask/design-system-react-native';
+
+<Blockies address={address} size={40} accessibilityLabel="Account avatar" />;
+```
+
+#### Jazzicon temp component
+
+The design-system wrapper composes `react-native-jazzicon` but **does not expose that package’s prop surface verbatim**. Public props are `JazziconProps` = `{ testID?: string } & IJazziconProps` with **`address` applied through shared extraction and seed generation** (matches MetaMask Mobile expectations).
+
+| Concern | Typical direct `react-native-jazzicon` usage     | Design System `Jazzicon`                                                                                          |
+| ------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| Seed    | Often `seed={number}` only                       | **`address` required** (when provided); seed computed internally via `extractAccountAddress` + `generateIconSeed` |
+| `size`  | From `IJazziconProps` / library default (**40**) | Still from underlying props; **wrapper does not override default diameter**—pass **`size`** as needed             |
+| Shape   | Circular default from library                    | **`containerStyle`** merges `borderRadius: 0` for square icons (override carefully if you need circles)           |
+| Testing | Library-specific                                 | Optional top-level **`testID`** wraps children in a `View`                                                        |
+
+##### Before (conceptual — raw Jazzicon)
+
+```tsx
+import RNJazzicon from 'react-native-jazzicon';
+
+<RNJazzicon seed={123} size={50} />;
+```
+
+##### After (Design System)
+
+```tsx
+import { Jazzicon } from '@metamask/design-system-react-native';
+
+<Jazzicon address={address} size={50} testID="jazzicon-account" />;
+```
+
+#### Maskicon temp component
+
+| Concern     | Inline SVG / image patterns | `@metamask/design-system-react-native` `Maskicon`                                                |
+| ----------- | --------------------------- | ------------------------------------------------------------------------------------------------ |
+| Output      | Custom fetch/render         | `SvgXml` from `react-native-svg` after async SVG load; empty state is a sized `View` placeholder |
+| `address`   | Required for generation     | **Required** `string`                                                                            |
+| `size`      | varies                      | Optional `number`, default **32**                                                                |
+| Extra props | —                           | Spreads `SvgProps` except `width` / `height` (controlled by `size`)                              |
+
+##### Before (conceptual)
+
+```tsx
+import { SvgXml } from 'react-native-svg';
+// Legacy inline SVG fetch + render
+```
+
+##### After (Design System)
+
+```tsx
+import { Maskicon } from '@metamask/design-system-react-native';
+
+<Maskicon address={address} size={32} />;
+```
 
 ### Checkbox Component
 

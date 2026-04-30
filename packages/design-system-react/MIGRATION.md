@@ -15,6 +15,10 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Identicon temp components (Blockies, Jazzicon, Maskicon)](#identicon-temp-components-blockies-jazzicon-maskicon)
+    - [Blockies temp component](#blockies-temp-component)
+    - [Jazzicon temp component](#jazzicon-temp-component)
+    - [Maskicon temp component](#maskicon-temp-component)
   - [Checkbox Component](#checkbox-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
@@ -1145,6 +1149,99 @@ import {
 - `className` and `style` are still supported
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
+
+### Identicon temp components (Blockies, Jazzicon, Maskicon)
+
+`Blockies`, `Jazzicon`, and `Maskicon` are exported from `@metamask/design-system-react` as **temp components**: identicon primitives used by higher-level MetaMask UI (for example avatars). Treat APIs as transitional until they graduate out of `temp-components/`.
+
+There are **no longer dedicated Blockies / Maskicon components** under Extension `ui/components/component-library` on `main`; Blockies/Maskicon rendering moved into the design system (often composed via `AvatarAccount` or similar). **Migration source comparison for Blockies and Maskicon is therefore design-system-only + consumer expectations**, not a side-by-side legacy component-library file.
+
+The Extension still ships a **legacy Jazzicon** at `ui/components/ui/jazzicon/` (not under `component-library`). Use the mappings below when replacing that usage.
+
+#### Blockies temp component
+
+| Concern   | Legacy / prior expectation       | `@metamask/design-system-react` `Blockies`                                                               |
+| --------- | -------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Rendering | Various (PNG/data URL pipelines) | `<img>` with `blo` (`blo` package) from normalized address                                               |
+| `address` | Hex / account string             | **Required** `string`; CAIP-10 supported via `extractAccountAddress` in `@metamask/design-system-shared` |
+| `size`    | varies                           | Optional `number`, default **32** (pixel height and width)                                               |
+| DOM props | —                                | Inherits `ComponentProps<'img'>` (e.g. `className`, `style`, `alt` overrides)                            |
+| Test id   | —                                | Optional `data-testid`                                                                                   |
+
+##### Before (conceptual — legacy or inline blockies)
+
+```tsx
+// Typical legacy pattern: imperative or non-design-system blockies image
+<img src={legacyBlockiesDataUrlFor(address)} width={40} height={40} alt="" />
+```
+
+##### After (Design System)
+
+```tsx
+import { Blockies } from '@metamask/design-system-react';
+
+<Blockies
+  address={address}
+  size={40}
+  className="rounded-none"
+  data-testid="account-icon"
+/>;
+```
+
+#### Jazzicon temp component
+
+Legacy Extension Jazzicon (`ui/components/ui/jazzicon/jazzicon.component.tsx`) exposes a **different prop surface** than the design system temp component.
+
+| Legacy Extension `Jazzicon`       | Design System `Jazzicon`        | Notes                                                                                                   |
+| --------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `diameter` (default **46**)       | `size` (default **32**)         | Rename; defaults differ                                                                                 |
+| `tokenList`, `namespace`          | **removed**                     | No token override map; seeding uses shared `extractAccountAddress` + `generateIconSeed`                 |
+| `className`, `style` on container | `className`, spread `div` props | Design system merges `className` with `twMerge` and applies `flex [&>div]:!rounded-none` on the wrapper |
+| —                                 | `address` **required**          | Single `address` string drives generation and cache key                                                 |
+
+##### Before (Extension — legacy `ui/jazzicon`)
+
+```tsx
+import Jazzicon from '../../../components/ui/jazzicon/jazzicon.component';
+
+<Jazzicon
+  address={address}
+  diameter={46}
+  className="foo"
+  style={{ margin: 4 }}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Jazzicon } from '@metamask/design-system-react';
+
+<Jazzicon address={address} size={46} className="foo" style={{ margin: 4 }} />;
+```
+
+#### Maskicon temp component
+
+| Concern                       | Prior patterns                        | `@metamask/design-system-react` `Maskicon`                                                         |
+| ----------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Output                        | SVG or image URL from custom pipeline | Async SVG fetch rendered as `<img>` with data URI; empty state uses transparent 1×1 placeholder    |
+| `address`                     | Account string                        | **Required**; drives async SVG generation                                                          |
+| `size`                        | varies                                | Optional `number`, default **32**; sets both width and height                                      |
+| `width` / `height` on `<img>` | Set independently                     | **Omitted from public props** (use `size` only); inherited img props apply to the rendered `<img>` |
+
+##### Before (conceptual)
+
+```tsx
+<img src={legacyMaskiconUrl(address)} width={32} height={32} alt="" />
+```
+
+##### After (Design System)
+
+```tsx
+import { Maskicon } from '@metamask/design-system-react';
+
+<Maskicon address={address} size={32} className="rounded-none" />;
+```
 
 ### Checkbox Component
 
