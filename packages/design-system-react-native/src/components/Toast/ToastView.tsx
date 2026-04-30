@@ -1,14 +1,17 @@
 // Third party dependencies.
+import {
+  BoxBackgroundColor,
+  BoxBorderColor,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, {
   forwardRef,
-  isValidElement,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
 } from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions } from 'react-native';
 import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 import Animated, {
   cancelAnimation,
@@ -21,13 +24,9 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
-import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
-import { AvatarFavicon, AvatarFaviconSize } from '../AvatarFavicon';
-import { AvatarIcon, AvatarIconSize } from '../AvatarIcon';
-import { AvatarNetwork, AvatarNetworkSize } from '../AvatarNetwork';
-import { Button, ButtonVariant } from '../Button';
-import { ButtonIcon } from '../ButtonIcon';
-import { Text, TextVariant, TextColor, FontWeight } from '../Text';
+import { IconColor, IconName, IconSize } from '../../types';
+import { BannerBase } from '../BannerBase';
+import { Icon } from '../Icon';
 
 // Internal dependencies.
 import {
@@ -35,22 +34,32 @@ import {
   TOAST_ANIMATION_DURATION,
   TOAST_BOTTOM_PADDING,
 } from './Toast.constants';
-import type {
-  ToastCloseButtonIconOptions,
-  ToastCloseButtonOptions,
-  ToastDescriptionOptions,
-  ToastLabelOptions,
-  ToastLinkButtonOptions,
-  ToastOptions,
-  ToastProps,
-  ToastRef,
-} from './Toast.types';
-import { ToastVariant } from './Toast.types';
+import type { ToastOptions, ToastProps, ToastRef } from './Toast.types';
+import { ToastSeverity } from './Toast.types';
 
 const screenHeight = Dimensions.get('window').height;
 
+const TOAST_SEVERITY_ICON_MAP = {
+  [ToastSeverity.Default]: {
+    color: IconColor.IconDefault,
+    name: IconName.FullCircle,
+  },
+  [ToastSeverity.Success]: {
+    color: IconColor.SuccessDefault,
+    name: IconName.Confirmation,
+  },
+  [ToastSeverity.Warning]: {
+    color: IconColor.WarningDefault,
+    name: IconName.Danger,
+  },
+  [ToastSeverity.Error]: {
+    color: IconColor.ErrorDefault,
+    name: IconName.Error,
+  },
+} as const;
+
 export const ToastView = forwardRef<ToastRef, ToastProps>(
-  ({ twClassName, labelsContainerProps, ...props }, ref) => {
+  ({ twClassName, ...props }, ref) => {
     const tw = useTailwind();
     const [toastOptions, setToastOptions] = useState<ToastOptions | undefined>(
       undefined,
@@ -65,14 +74,8 @@ export const ToastView = forwardRef<ToastRef, ToastProps>(
       transform: [{ translateY: translateYProgress.value - bottomOffset }],
     }));
     const baseStyle: StyleProp<ViewStyle> = useMemo(
-      () => [
-        tw.style(
-          'absolute left-4 right-4 bottom-0 bg-background-section border border-border-muted rounded-xl p-3 flex-row items-center',
-          twClassName,
-        ),
-        animatedStyle,
-      ],
-      [tw, animatedStyle, twClassName],
+      () => [tw.style('absolute left-4 right-4 bottom-0'), animatedStyle],
+      [tw, animatedStyle],
     );
 
     const resetState = () => setToastOptions(undefined);
@@ -113,6 +116,20 @@ export const ToastView = forwardRef<ToastRef, ToastProps>(
       closeToast,
     }));
 
+    const renderSeverityAccessory = (options: ToastOptions) => {
+      if (
+        options.startAccessory !== null &&
+        options.startAccessory !== undefined
+      ) {
+        return options.startAccessory;
+      }
+
+      const severity = options.severity ?? ToastSeverity.Default;
+      const { color, name } = TOAST_SEVERITY_ICON_MAP[severity];
+
+      return <Icon color={color} name={name} size={IconSize.Lg} />;
+    };
+
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
       /* istanbul ignore next - guard only; layout fires when toastOptions is set */
       if (toastOptions) {
@@ -144,153 +161,41 @@ export const ToastView = forwardRef<ToastRef, ToastProps>(
       }
     };
 
-    const renderLabel = (labelOptions: ToastLabelOptions) => (
-      <Text variant={TextVariant.BodyMd}>
-        {labelOptions.map(({ label, isBold }, index) => (
-          <Text
-            key={`toast-label-${index}`}
-            variant={TextVariant.BodyMd}
-            fontWeight={isBold ? FontWeight.Bold : undefined}
-            color={TextColor.TextDefault}
-          >
-            {label}
-          </Text>
-        ))}
-      </Text>
-    );
-
-    const renderDescription = (descriptionOptions?: ToastDescriptionOptions) =>
-      descriptionOptions && (
-        <Text
-          variant={TextVariant.BodySm}
-          color={TextColor.TextAlternative}
-          style={tw.style('mt-1')}
-        >
-          {descriptionOptions.description}
-        </Text>
-      );
-
-    const renderActionButton = (linkButtonOptions?: ToastLinkButtonOptions) =>
-      linkButtonOptions && (
-        <Button
-          variant={ButtonVariant.Secondary}
-          onPress={linkButtonOptions.onPress}
-          style={tw.style('mt-2')}
-        >
-          {linkButtonOptions.label}
-        </Button>
-      );
-
-    const renderCloseButton = (
-      closeButtonOptions?: ToastCloseButtonOptions,
-    ) => {
-      if (closeButtonOptions && 'iconName' in closeButtonOptions) {
-        const iconOptions = closeButtonOptions as ToastCloseButtonIconOptions;
-        return (
-          <ButtonIcon
-            iconName={iconOptions.iconName}
-            onPress={(e) => iconOptions.onPress?.(e)}
-            size={iconOptions.size}
-            isDisabled={iconOptions.isDisabled}
-            twClassName={iconOptions.twClassName}
-            style={iconOptions.style}
-            iconProps={iconOptions.iconProps}
-          />
-        );
-      }
-      return (
-        <Button
-          variant={ButtonVariant.Primary}
-          onPress={(e) => closeButtonOptions?.onPress?.(e)}
-          startIconName={closeButtonOptions?.startIconName}
-          endIconName={closeButtonOptions?.endIconName}
-          style={closeButtonOptions?.style}
-        >
-          {closeButtonOptions?.children}
-        </Button>
-      );
-    };
-
-    const renderAvatar = () => {
-      switch (toastOptions?.variant) {
-        case ToastVariant.Plain:
-          return null;
-        case ToastVariant.Account: {
-          const { accountAddress, accountAvatarType } = toastOptions;
-          return (
-            <AvatarAccount
-              address={accountAddress}
-              variant={accountAvatarType}
-              size={AvatarAccountSize.Md}
-              style={tw.style('mr-4')}
-            />
-          );
-        }
-        case ToastVariant.Network: {
-          const { networkImageSource, networkName } = toastOptions;
-          return (
-            <AvatarNetwork
-              name={networkName}
-              src={networkImageSource}
-              size={AvatarNetworkSize.Md}
-              style={tw.style('mr-4')}
-            />
-          );
-        }
-        case ToastVariant.App: {
-          const { appIconSource } = toastOptions;
-          return (
-            <AvatarFavicon
-              src={appIconSource}
-              size={AvatarFaviconSize.Md}
-              style={tw.style('mr-4')}
-            />
-          );
-        }
-        case ToastVariant.Icon: {
-          const { iconName, severity } = toastOptions;
-          return (
-            <AvatarIcon
-              iconName={iconName}
-              severity={severity}
-              size={AvatarIconSize.Md}
-              style={tw.style('mr-4')}
-            />
-          );
-        }
-        /* istanbul ignore next - all variants handled above */
-        default:
-          return null;
-      }
-    };
-
     const renderToastContent = (options: ToastOptions) => {
-      const {
-        labelOptions,
-        descriptionOptions,
-        linkButtonOptions,
-        closeButtonOptions,
-        startAccessory,
-      } = options;
+      const handleClosePress = (
+        event: Parameters<
+          NonNullable<NonNullable<typeof options.closeButtonProps>['onPress']>
+        >[0],
+      ) => {
+        closeToast();
+        options.onClose?.();
+        options.closeButtonProps?.onPress?.(event);
+      };
 
-      const isStartAccessoryValid =
-        startAccessory !== null &&
-        startAccessory !== undefined &&
-        isValidElement(startAccessory);
+      const actionProps =
+        options.actionText && options.onActionPress
+          ? {
+              actionButtonLabel: options.actionText,
+              actionButtonOnPress: options.onActionPress,
+            }
+          : {};
 
       return (
-        <>
-          {isStartAccessoryValid ? startAccessory : renderAvatar()}
-          <View
-            style={tw.style('flex-1 justify-center')}
-            {...labelsContainerProps}
-          >
-            {renderLabel(labelOptions)}
-            {renderDescription(descriptionOptions)}
-            {renderActionButton(linkButtonOptions)}
-          </View>
-          {closeButtonOptions ? renderCloseButton(closeButtonOptions) : null}
-        </>
+        <BannerBase
+          {...actionProps}
+          backgroundColor={BoxBackgroundColor.BackgroundSection}
+          borderColor={BoxBorderColor.BorderMuted}
+          borderWidth={1}
+          closeButtonProps={{
+            accessibilityLabel: 'Close toast',
+            ...options.closeButtonProps,
+            onPress: handleClosePress,
+          }}
+          description={options.description}
+          startAccessory={renderSeverityAccessory(options)}
+          title={options.text}
+          twClassName={twClassName ? `rounded-xl ${twClassName}` : 'rounded-xl'}
+        />
       );
     };
 

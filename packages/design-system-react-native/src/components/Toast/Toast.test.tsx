@@ -1,16 +1,12 @@
 // Third party dependencies.
 import { render, screen, act, fireEvent } from '@testing-library/react-native';
-import React, { createRef } from 'react';
+import React, { createRef, useEffect } from 'react';
 import { Text as RNText } from 'react-native';
-
-// External dependencies.
-import { IconName } from '../../types';
-import { AvatarAccountVariant } from '../AvatarAccount';
 
 // Internal dependencies.
 import { Toast } from './Toast';
 import type { ToastOptions, ToastRef } from './Toast.types';
-import { ToastCloseButtonVariant, ToastVariant } from './Toast.types';
+import { ToastSeverity } from './Toast.types';
 
 // Mock cancelAnimation as a jest.fn so we can assert on calls.
 const mockCancelAnimation = jest.fn();
@@ -23,64 +19,15 @@ jest.mock('react-native-reanimated', () => {
   };
 });
 
-// Mock avatar components to avoid deep dependency tree.
-jest.mock('../AvatarAccount', () => {
+jest.mock('../Icon', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const ReactMock = require('react');
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { Text } = require('react-native');
   return {
-    ...jest.requireActual('../AvatarAccount'),
-    AvatarAccount: () =>
-      ReactMock.createElement(
-        Text,
-        { testID: 'avatar-account' },
-        'AvatarAccount',
-      ),
-  };
-});
-
-jest.mock('../AvatarNetwork', () => {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const ReactMock = require('react');
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { Text } = require('react-native');
-  return {
-    ...jest.requireActual('../AvatarNetwork'),
-    AvatarNetwork: () =>
-      ReactMock.createElement(
-        Text,
-        { testID: 'avatar-network' },
-        'AvatarNetwork',
-      ),
-  };
-});
-
-jest.mock('../AvatarFavicon', () => {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const ReactMock = require('react');
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { Text } = require('react-native');
-  return {
-    ...jest.requireActual('../AvatarFavicon'),
-    AvatarFavicon: () =>
-      ReactMock.createElement(
-        Text,
-        { testID: 'avatar-favicon' },
-        'AvatarFavicon',
-      ),
-  };
-});
-
-jest.mock('../AvatarIcon', () => {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const ReactMock = require('react');
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { Text } = require('react-native');
-  return {
-    ...jest.requireActual('../AvatarIcon'),
-    AvatarIcon: () =>
-      ReactMock.createElement(Text, { testID: 'avatar-icon' }, 'AvatarIcon'),
+    ...jest.requireActual('../Icon'),
+    Icon: ({ name, testID }: { name: string; testID?: string }) =>
+      ReactMock.createElement(Text, { testID: testID ?? `icon-${name}` }, name),
   };
 });
 
@@ -117,71 +64,27 @@ describe('Toast', () => {
   it('accepts testID on the root element via ViewProps', async () => {
     render(<Toast ref={toastRef} testID="custom-toast" />);
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Test Label' }],
       hasNoTimeout: true,
+      text: 'Test Label',
     });
     expect(screen.getByTestId('custom-toast')).toBeDefined();
   });
 
-  it('accepts testID on the labels container via labelsContainerProps', async () => {
-    render(
-      <Toast
-        ref={toastRef}
-        labelsContainerProps={{ testID: 'custom-labels-container' }}
-      />,
-    );
-    await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Test Label' }],
-      hasNoTimeout: true,
-    });
-    expect(screen.getByTestId('custom-labels-container')).toBeDefined();
-  });
-
-  it('displays toast with correct label when showToast is called', async () => {
+  it('displays toast text when showToast is called', async () => {
     render(<Toast ref={toastRef} />);
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Test Label' }],
       hasNoTimeout: true,
+      text: 'Test Label',
     });
     expect(screen.getByText('Test Label')).toBeDefined();
   });
 
-  it('displays toast with bold label when isBold is true', async () => {
+  it('displays toast with description when provided', async () => {
     render(<Toast ref={toastRef} />);
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Bold Test Label', isBold: true }],
+      description: 'Test description',
       hasNoTimeout: true,
-    });
-    expect(screen.getByText('Bold Test Label')).toBeDefined();
-  });
-
-  it('displays toast with multiple label parts', async () => {
-    render(<Toast ref={toastRef} />);
-    await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [
-        { label: 'First part ' },
-        { label: 'bold part', isBold: true },
-        { label: ' last part' },
-      ],
-      hasNoTimeout: true,
-    });
-    expect(screen.getByText('First part ')).toBeDefined();
-    expect(screen.getByText('bold part')).toBeDefined();
-    expect(screen.getByText(' last part')).toBeDefined();
-  });
-
-  it('displays toast with description when descriptionOptions provided', async () => {
-    render(<Toast ref={toastRef} />);
-    await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Test Label' }],
-      descriptionOptions: { description: 'Test description' },
-      hasNoTimeout: true,
+      text: 'Test Label',
     });
     expect(screen.getByText('Test Label')).toBeDefined();
     expect(screen.getByText('Test description')).toBeDefined();
@@ -192,9 +95,8 @@ describe('Toast', () => {
 
     // Show toast first.
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Test Label' }],
       hasNoTimeout: true,
+      text: 'Test Label',
     });
     expect(screen.getByText('Test Label')).toBeDefined();
 
@@ -205,109 +107,52 @@ describe('Toast', () => {
     expect(screen.queryByText('Test Label')).toBeNull();
   });
 
-  it('renders Account avatar variant', async () => {
+  it('renders the default severity icon when no custom accessory is provided', async () => {
     render(<Toast ref={toastRef} />);
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Account,
-      labelOptions: [{ label: 'Account toast' }],
       hasNoTimeout: true,
-      accountAddress:
-        '0x10e08af911f2e489480fb2855b24771745d0198b50f5c55891369844a8c57092',
-      accountAvatarType: AvatarAccountVariant.Jazzicon,
+      text: 'Default toast',
     });
-    expect(screen.getByTestId('avatar-account')).toBeDefined();
-    expect(screen.getByText('Account toast')).toBeDefined();
+    expect(screen.getByTestId('icon-FullCircle')).toBeDefined();
   });
 
-  it('renders Network avatar variant', async () => {
+  it('renders the configured severity icon when provided', async () => {
     render(<Toast ref={toastRef} />);
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Network,
-      labelOptions: [{ label: 'Network toast' }],
       hasNoTimeout: true,
-      networkImageSource: { uri: 'https://example.com/network.png' },
-      networkName: 'Ethereum',
+      severity: ToastSeverity.Success,
+      text: 'Success toast',
     });
-    expect(screen.getByTestId('avatar-network')).toBeDefined();
-    expect(screen.getByText('Network toast')).toBeDefined();
+    expect(screen.getByTestId('icon-Confirmation')).toBeDefined();
   });
 
-  it('renders App avatar variant', async () => {
+  it('renders startAccessory instead of the severity icon when provided', async () => {
     render(<Toast ref={toastRef} />);
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.App,
-      labelOptions: [{ label: 'App toast' }],
-      hasNoTimeout: true,
-      appIconSource: { uri: 'https://example.com/app.png' },
-    });
-    expect(screen.getByTestId('avatar-favicon')).toBeDefined();
-    expect(screen.getByText('App toast')).toBeDefined();
-  });
-
-  it('renders Icon avatar variant', async () => {
-    render(<Toast ref={toastRef} />);
-    await showToastAndWait(toastRef, {
-      variant: ToastVariant.Icon,
-      labelOptions: [{ label: 'Icon toast' }],
-      hasNoTimeout: true,
-      iconName: IconName.Add,
-    });
-    expect(screen.getByTestId('avatar-icon')).toBeDefined();
-    expect(screen.getByText('Icon toast')).toBeDefined();
-  });
-
-  it('renders startAccessory instead of avatar when provided', async () => {
-    render(<Toast ref={toastRef} />);
-    await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Custom accessory' }],
       hasNoTimeout: true,
       startAccessory: <RNText testID="custom-accessory">Custom</RNText>,
+      text: 'Custom accessory',
     });
     expect(screen.getByTestId('custom-accessory')).toBeDefined();
+    expect(screen.queryByTestId('icon-FullCircle')).toBeNull();
   });
 
-  it('renders link button when linkButtonOptions provided', async () => {
-    const onPress = jest.fn();
+  it('renders an action button when actionText and onActionPress are provided', async () => {
+    const onActionPress = jest.fn();
     render(<Toast ref={toastRef} />);
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'With link' }],
+      actionText: 'Click here',
       hasNoTimeout: true,
-      linkButtonOptions: { label: 'Click here', onPress },
+      onActionPress,
+      text: 'With action',
     });
-    expect(screen.getByText('Click here')).toBeDefined();
-  });
+    const actionButton = screen.getByText('Click here');
+    expect(actionButton).toBeDefined();
 
-  it('renders close button with ButtonIcon variant', async () => {
-    const onPress = jest.fn();
-    render(<Toast ref={toastRef} />);
-    await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'With close icon' }],
-      hasNoTimeout: true,
-      closeButtonOptions: {
-        variant: ToastCloseButtonVariant.Icon,
-        iconName: IconName.Close,
-        onPress,
-      },
+    await act(async () => {
+      fireEvent.press(actionButton);
     });
-    expect(screen.getByText('With close icon')).toBeDefined();
-  });
-
-  it('renders close button with Button variant', async () => {
-    const onPress = jest.fn();
-    render(<Toast ref={toastRef} />);
-    await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'With close button' }],
-      hasNoTimeout: true,
-      closeButtonOptions: {
-        onPress,
-        children: 'Dismiss',
-      },
-    });
-    expect(screen.getByText('Dismiss')).toBeDefined();
+    expect(onActionPress).toHaveBeenCalled();
   });
 
   it('replaces existing toast when showToast called rapidly', async () => {
@@ -315,18 +160,16 @@ describe('Toast', () => {
 
     // Show first toast.
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'First toast' }],
       hasNoTimeout: true,
+      text: 'First toast',
     });
     expect(screen.getByText('First toast')).toBeDefined();
 
     // Show second toast while first is visible.
     await act(async () => {
       toastRef.current?.showToast({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'Second toast' }],
         hasNoTimeout: false,
+        text: 'Second toast',
       });
       jest.runAllTimers();
     });
@@ -337,9 +180,8 @@ describe('Toast', () => {
   it('triggers onLayout and animates with hasNoTimeout true', async () => {
     render(<Toast ref={toastRef} testID="toast-root" />);
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Layout toast' }],
       hasNoTimeout: true,
+      text: 'Layout toast',
     });
     const toastElement = screen.getByTestId('toast-root');
     await act(async () => {
@@ -353,9 +195,8 @@ describe('Toast', () => {
   it('triggers onLayout and animates with hasNoTimeout false', async () => {
     render(<Toast ref={toastRef} testID="toast-root" />);
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Auto-dismiss toast' }],
       hasNoTimeout: false,
+      text: 'Auto-dismiss toast',
     });
     const toastElement = screen.getByTestId('toast-root');
     expect(toastElement).toBeDefined();
@@ -370,43 +211,28 @@ describe('Toast', () => {
     });
   });
 
-  it('calls onPress handler when ButtonIcon close button is pressed', async () => {
-    const onPress = jest.fn();
+  it('calls onClose and hides the toast when the close button is pressed', async () => {
+    const onClose = jest.fn();
+    const onCloseButtonPress = jest.fn();
     render(<Toast ref={toastRef} />);
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Close icon test' }],
-      hasNoTimeout: true,
-      closeButtonOptions: {
-        variant: ToastCloseButtonVariant.Icon,
-        iconName: IconName.Close,
-        onPress,
+      closeButtonProps: {
+        accessibilityLabel: 'Dismiss toast',
+        onPress: onCloseButtonPress,
       },
+      hasNoTimeout: true,
+      onClose,
+      text: 'Close button test',
     });
-    const buttonIcon = screen.getByTestId('button-icon');
-    await act(async () => {
-      fireEvent.press(buttonIcon);
-    });
-    expect(onPress).toHaveBeenCalled();
-  });
 
-  it('calls onPress handler when Button close button is pressed', async () => {
-    const onPress = jest.fn();
-    render(<Toast ref={toastRef} />);
-    await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Close button test' }],
-      hasNoTimeout: true,
-      closeButtonOptions: {
-        onPress,
-        children: 'Close',
-      },
-    });
-    const closeBtn = screen.getByText('Close');
+    const closeBtn = screen.getByTestId('button-icon');
     await act(async () => {
       fireEvent.press(closeBtn);
     });
-    expect(onPress).toHaveBeenCalled();
+
+    expect(onClose).toHaveBeenCalled();
+    expect(onCloseButtonPress).toHaveBeenCalled();
+    expect(screen.queryByText('Close button test')).toBeNull();
   });
 
   it('cancels animation when replacing toast with hasNoTimeout false', async () => {
@@ -414,17 +240,15 @@ describe('Toast', () => {
 
     // Show first toast with no timeout so it stays.
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'Persistent toast' }],
       hasNoTimeout: true,
+      text: 'Persistent toast',
     });
 
     // Show second toast (hasNoTimeout=false triggers cancelAnimation).
     await act(async () => {
       toastRef.current?.showToast({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'Replacement' }],
         hasNoTimeout: false,
+        text: 'Replacement',
       });
       jest.runAllTimers();
     });
@@ -436,17 +260,15 @@ describe('Toast', () => {
 
     // Show first toast.
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'First' }],
       hasNoTimeout: true,
+      text: 'First',
     });
 
     // Replace with another hasNoTimeout=true toast (still cancels old animation).
     await act(async () => {
       toastRef.current?.showToast({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'Second' }],
         hasNoTimeout: true,
+        text: 'Second',
       });
       jest.runAllTimers();
     });
@@ -459,23 +281,20 @@ describe('Toast', () => {
 
     // Show first toast.
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'First' }],
       hasNoTimeout: true,
+      text: 'First',
     });
 
     // Call showToast twice without letting the replacement timer fire.
     await act(async () => {
       toastRef.current?.showToast({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'Second' }],
         hasNoTimeout: true,
+        text: 'Second',
       });
       // Don't run timers — call showToast again while the replacement timer is pending.
       toastRef.current?.showToast({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'Third' }],
         hasNoTimeout: true,
+        text: 'Third',
       });
       jest.runAllTimers();
     });
@@ -488,17 +307,15 @@ describe('Toast', () => {
 
     // Show first toast.
     await showToastAndWait(toastRef, {
-      variant: ToastVariant.Plain,
-      labelOptions: [{ label: 'First' }],
       hasNoTimeout: true,
+      text: 'First',
     });
 
     // Call showToast to schedule a replacement, then closeToast before it fires.
     await act(async () => {
       toastRef.current?.showToast({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'Replacement' }],
         hasNoTimeout: true,
+        text: 'Replacement',
       });
       // Close before the replacement timer fires.
       toastRef.current?.closeToast();
@@ -523,9 +340,8 @@ describe('specs for `Toast` static API', () => {
 
     await act(async () => {
       Toast.show({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'Static show' }],
         hasNoTimeout: true,
+        text: 'Static show',
       });
       jest.runAllTimers();
     });
@@ -538,9 +354,8 @@ describe('specs for `Toast` static API', () => {
 
     await act(async () => {
       Toast.show({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'Will be hidden' }],
         hasNoTimeout: true,
+        text: 'Will be hidden',
       });
       jest.runAllTimers();
     });
@@ -555,9 +370,8 @@ describe('specs for `Toast` static API', () => {
   it('method `Toast.show` throws a helpful error when <Toast /> is not mounted', () => {
     expect(() =>
       Toast.show({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'No mount' }],
         hasNoTimeout: true,
+        text: 'No mount',
       }),
     ).toThrow(/Toast.show\(\) called before <Toast \/> mounted/u);
   });
@@ -574,9 +388,8 @@ describe('specs for `Toast` static API', () => {
 
     expect(() =>
       Toast.show({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'After unmount' }],
         hasNoTimeout: true,
+        text: 'After unmount',
       }),
     ).toThrow(/Toast.show\(\) called before <Toast \/> mounted/u);
   });
@@ -586,9 +399,8 @@ describe('specs for `Toast` static API', () => {
 
     await act(async () => {
       Toast.show({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'First static' }],
         hasNoTimeout: true,
+        text: 'First static',
       });
       jest.runAllTimers();
     });
@@ -596,9 +408,8 @@ describe('specs for `Toast` static API', () => {
 
     await act(async () => {
       Toast.show({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'Second static' }],
         hasNoTimeout: true,
+        text: 'Second static',
       });
       jest.runAllTimers();
     });
@@ -616,9 +427,8 @@ describe('specs for `Toast` static API', () => {
 
     await act(async () => {
       Toast.show({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'Second instance still registered' }],
         hasNoTimeout: true,
+        text: 'Second instance still registered',
       });
       jest.runAllTimers();
     });
@@ -632,9 +442,8 @@ describe('specs for `Toast` static API', () => {
 
     await act(async () => {
       Toast.show({
-        variant: ToastVariant.Plain,
-        labelOptions: [{ label: 'From static' }],
         hasNoTimeout: true,
+        text: 'From static',
       });
       jest.runAllTimers();
     });
@@ -644,5 +453,31 @@ describe('specs for `Toast` static API', () => {
       ref.current?.closeToast();
     });
     expect(screen.queryByText('From static')).toBeNull();
+  });
+
+  it('registers the static API before sibling passive effects run', async () => {
+    const MountEffectCaller = () => {
+      useEffect(() => {
+        Toast.show({
+          hasNoTimeout: true,
+          text: 'Shown from sibling effect',
+        });
+      }, []);
+
+      return null;
+    };
+
+    render(
+      <>
+        <MountEffectCaller />
+        <Toast />
+      </>,
+    );
+
+    await act(async () => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByText('Shown from sibling effect')).toBeDefined();
   });
 });

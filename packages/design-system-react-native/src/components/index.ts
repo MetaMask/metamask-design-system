@@ -213,15 +213,12 @@ export type { TitleStandardProps } from './TitleStandard';
 export { TitleSubpage } from './TitleSubpage';
 export type { TitleSubpageProps } from './TitleSubpage';
 
-export { Toast, ToastVariant, ToastCloseButtonVariant } from './Toast';
+export { Toast, ToastSeverity } from './Toast';
 export type {
   ToastOptions,
   ToastProps,
   ToastRef,
-  ToastLabelOptions,
-  ToastDescriptionOptions,
-  ToastLinkButtonOptions,
-  ToastCloseButtonOptions,
+  ToastCloseButtonProps,
 } from './Toast';
 
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';

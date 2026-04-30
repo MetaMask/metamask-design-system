@@ -1,9 +1,9 @@
 # Toast
 
-Toast is a component that slides up from the bottom of the screen. It is typically used to show post-confirmation information such as account switches, network changes, or transaction confirmations.
+Toast is a component that slides up from the bottom of the screen. It is used to show compact, dismissible status updates with an optional description, action button, and leading accessory.
 
 ```tsx
-import { Toast, ToastVariant } from '@metamask/design-system-react-native';
+import { Toast, ToastSeverity } from '@metamask/design-system-react-native';
 ```
 
 ## Setup
@@ -28,23 +28,19 @@ const App = () => (
 ### 2. Call `Toast.show` from anywhere
 
 ```tsx
-import {
-  Toast,
-  ToastVariant,
-  AvatarAccountVariant,
-} from '@metamask/design-system-react-native';
+import { Toast, ToastSeverity } from '@metamask/design-system-react-native';
 
 const Content = () => {
   const handlePress = () => {
     Toast.show({
-      variant: ToastVariant.Account,
+      text: 'Toast message',
+      description: 'Description of toast',
+      severity: ToastSeverity.Success,
       hasNoTimeout: false,
-      labelOptions: [
-        { label: 'Switching to' },
-        { label: ' Account 2.', isBold: true },
-      ],
-      accountAddress: '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8',
-      accountAvatarType: AvatarAccountVariant.Jazzicon,
+      actionText: 'Action',
+      onActionPress: () => {
+        console.log('Toast action pressed');
+      },
     });
   };
 
@@ -70,18 +66,6 @@ Optional Tailwind CSS classes for the toast container.
 <Toast twClassName="mx-2" />
 ```
 
-### `labelsContainerProps`
-
-Props spread to the labels container View (e.g., `testID` for testing).
-
-| TYPE                                     | REQUIRED | DEFAULT     |
-| ---------------------------------------- | -------- | ----------- |
-| `Omit<ViewProps, 'children' \| 'style'>` | No       | `undefined` |
-
-```tsx
-<Toast labelsContainerProps={{ testID: 'toast-labels' }} />
-```
-
 ### `testID`
 
 Test identifier for the root element, inherited from `ViewProps`.
@@ -98,7 +82,7 @@ Test identifier for the root element, inherited from `ViewProps`.
 
 ### `Toast.show(options: ToastOptions)`
 
-Slides a toast up with the provided options. Requires `<Toast />` to be mounted.
+Slides a toast up with the provided options. Requires `<Toast />` to be mounted. `startAccessory` overrides the default severity icon when you need custom content such as a network avatar or bespoke glyph.
 
 | PARAMETER | TYPE           | DESCRIPTION         |
 | --------- | -------------- | ------------------- |
@@ -119,13 +103,24 @@ ref.current?.showToast(options);
 ref.current?.closeToast();
 ```
 
-## Toast Variants
+## Toast Severity
 
-- `ToastVariant.Plain` - Simple text toast
-- `ToastVariant.Account` - Toast with account avatar
-- `ToastVariant.Network` - Toast with network avatar
-- `ToastVariant.App` - Toast with app favicon
-- `ToastVariant.Icon` - Toast with icon avatar
+- `ToastSeverity.Default` - Neutral toast with the default circle icon
+- `ToastSeverity.Success` - Success toast with the confirmation icon
+- `ToastSeverity.Warning` - Warning toast with the danger icon
+- `ToastSeverity.Error` - Error toast with the error icon
+
+## Toast Options
+
+- `text` - Main toast content. Accepts plain text or rich React content.
+- `description` - Optional secondary content shown below the main text.
+- `actionText` and `onActionPress` - Optional action button content and handler.
+- `onClose` - Optional callback invoked when the close button is pressed.
+- `closeButtonProps` - Optional props merged onto the close `ButtonIcon`.
+- `startAccessory` - Optional leading accessory that overrides the severity icon.
+- `severity` - Optional semantic state used to choose the default icon.
+- `bottomOffset` - Optional offset from the bottom of the screen.
+- `hasNoTimeout` - When `true`, the toast stays visible until dismissed.
 
 ## References
 
