@@ -1,0 +1,300 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as ModalStories from './Modal.stories';
+
+# Modal
+
+`Modal` is the root of the modal component family. When `isOpen` is `true`, it portals its `children` into `document.body` and provides a context that exposes the modal's behavior configuration (close-on-outside-click, close-on-escape, focus management) to any descendant via `useModalContext()`. When `isOpen` is `false`, the subtree is unmounted entirely so focus state and side effects are released.
+
+`Modal` is intentionally a thin shell. Compose it with `ModalOverlay`, `ModalContent`, `ModalHeader`, `ModalBody`, and `ModalFooter` to assemble a full modal UI.
+
+```tsx
+import { Modal } from '@metamask/design-system-react';
+
+<Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+  {/* ModalOverlay + ModalContent + … */}
+</Modal>;
+```
+
+<Canvas of={ModalStories.Default} />
+
+## Props
+
+### `isOpen`
+
+Whether the modal is open. When `false`, `Modal` renders nothing and the portal subtree is unmounted.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `onClose`
+
+Fired when the modal requests close. Wire your state setter (or router-driven dismissal) here. Triggered by the configured close-on-overlay-click and close-on-escape behaviors as well as any custom close affordances inside `children`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `children`
+
+The modal subtree. Typically composed of `ModalOverlay` and `ModalContent` (which read shared behavior via `useModalContext`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `isClosedOnOutsideClick`
+
+When `true`, clicking the overlay (outside the modal content) calls `onClose`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>true</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `isClosedOnEscapeKey`
+
+When `true`, pressing Escape calls `onClose`. When `false`, ensure the modal exposes a visible/keyboard-reachable close affordance for keyboard-only users.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>true</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `autoFocus`
+
+When `true`, the first focusable element within the modal subtree is focused on mount.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>true</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `initialFocusRef`
+
+The element to receive focus when the modal opens. Overrides `autoFocus`'s "first focusable" behavior.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>RefObject&lt;FocusableElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `finalFocusRef`
+
+The element to receive focus when the modal closes/unmounts.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>RefObject&lt;FocusableElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `restoreFocus`
+
+When `true`, focus is restored to the element that opened the modal once the modal closes. Ignored when `finalFocusRef` is provided.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the root portal element. These classes are merged with the component's defaults via `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## `useModalContext`
+
+`Modal` exposes its behavior configuration via context. Sibling/descendant components in the modal family can read it to decide how to react to clicks, keypresses, and lifecycle events:
+
+```tsx
+import { useModalContext } from '@metamask/design-system-react';
+
+function MyCloseButton() {
+  const { onClose } = useModalContext();
+  return <button onClick={onClose}>Close</button>;
+}
+```
+
+Calling `useModalContext()` outside of a `<Modal>` subtree throws a developer-friendly error.
+
+<Canvas of={ModalStories.UseModalContext} />
+
+## Component API
+
+<Controls of={ModalStories.Default} />
+
+## Migration Guide
+
+Migrating from `ui/components/component-library/modal` in MetaMask Extension? See the [Modal Migration Guide](../../../MIGRATION.md#modal-component) for prop mappings, before/after examples, and breaking changes.
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
