@@ -1,16 +1,14 @@
 // Third party dependencies.
-import {
-  BoxBackgroundColor,
-  BoxBorderColor,
-} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, {
   forwardRef,
   useImperativeHandle,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
+import type { RefObject } from 'react';
 import { Dimensions } from 'react-native';
 import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 import Animated, {
@@ -23,42 +21,33 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-// External dependencies.
-import { IconColor, IconName, IconSize } from '../../types';
-import { BannerBase } from '../BannerBase';
-import { Icon } from '../Icon';
-
 // Internal dependencies.
+import { Toast } from './Toast';
 import {
-  TOAST_VISIBILITY_DURATION,
   TOAST_ANIMATION_DURATION,
   TOAST_BOTTOM_PADDING,
+  TOAST_VISIBILITY_DURATION,
 } from './Toast.constants';
-import type { ToastOptions, ToastProps, ToastRef } from './Toast.types';
-import { ToastSeverity } from './Toast.types';
+import type { ToastOptions, ToasterProps, ToasterRef } from './Toast.types';
 
 const screenHeight = Dimensions.get('window').height;
 
-const TOAST_SEVERITY_ICON_MAP = {
-  [ToastSeverity.Default]: {
-    color: IconColor.IconDefault,
-    name: IconName.FullCircle,
-  },
-  [ToastSeverity.Success]: {
-    color: IconColor.SuccessDefault,
-    name: IconName.Confirmation,
-  },
-  [ToastSeverity.Warning]: {
-    color: IconColor.WarningDefault,
-    name: IconName.Danger,
-  },
-  [ToastSeverity.Error]: {
-    color: IconColor.ErrorDefault,
-    name: IconName.Error,
-  },
-} as const;
+let registeredRef: RefObject<ToasterRef> | null = null;
 
-export const ToastView = forwardRef<ToastRef, ToastProps>(
+const assertRegisteredRef = (method: 'hide' | 'show' | 'toast'): ToasterRef => {
+  if (!registeredRef?.current) {
+    const invocation =
+      method === 'toast'
+        ? 'toast()'
+        : `toast.${method === 'hide' ? 'hide' : 'show'}()`;
+    throw new Error(
+      `${invocation} called before <Toaster /> mounted. Render <Toaster /> once at the root of your app.`,
+    );
+  }
+  return registeredRef.current;
+};
+
+const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
   ({ twClassName, ...props }, ref) => {
     const tw = useTailwind();
     const [toastOptions, setToastOptions] = useState<ToastOptions | undefined>(
@@ -77,6 +66,10 @@ export const ToastView = forwardRef<ToastRef, ToastProps>(
       () => [tw.style('absolute left-4 right-4 bottom-0'), animatedStyle],
       [tw, animatedStyle],
     );
+    const innerRef = useRef<ToasterRef>({
+      closeToast: () => undefined,
+      showToast: () => undefined,
+    });
 
     const resetState = () => setToastOptions(undefined);
 
@@ -85,7 +78,6 @@ export const ToastView = forwardRef<ToastRef, ToastProps>(
       if (toastOptions) {
         cancelAnimation(translateYProgress);
         timeoutDuration = 100;
-        // Clear existing toast state to prevent animation conflicts when showing rapid successive toasts
         setToastOptions(undefined);
       }
       if (replacementTimerRef.current !== null) {
@@ -111,27 +103,23 @@ export const ToastView = forwardRef<ToastRef, ToastProps>(
       );
     };
 
-    useImperativeHandle(ref, () => ({
-      showToast,
+    innerRef.current = {
       closeToast,
-    }));
-
-    const renderSeverityAccessory = (options: ToastOptions) => {
-      if (
-        options.startAccessory !== null &&
-        options.startAccessory !== undefined
-      ) {
-        return options.startAccessory;
-      }
-
-      const severity = options.severity ?? ToastSeverity.Default;
-      const { color, name } = TOAST_SEVERITY_ICON_MAP[severity];
-
-      return <Icon color={color} name={name} size={IconSize.Lg} />;
+      showToast,
     };
 
+    useImperativeHandle(ref, () => innerRef.current);
+
+    useLayoutEffect(() => {
+      registeredRef = innerRef;
+      return () => {
+        if (registeredRef === innerRef) {
+          registeredRef = null;
+        }
+      };
+    }, []);
+
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
-      /* istanbul ignore next - guard only; layout fires when toastOptions is set */
       if (toastOptions) {
         const { height } = e.nativeEvent.layout;
         const translateYToValue = -(TOAST_BOTTOM_PADDING + bottomNotchSpacing);
@@ -161,44 +149,6 @@ export const ToastView = forwardRef<ToastRef, ToastProps>(
       }
     };
 
-    const renderToastContent = (options: ToastOptions) => {
-      const handleClosePress = (
-        event: Parameters<
-          NonNullable<NonNullable<typeof options.closeButtonProps>['onPress']>
-        >[0],
-      ) => {
-        closeToast();
-        options.onClose?.();
-        options.closeButtonProps?.onPress?.(event);
-      };
-
-      const actionProps =
-        options.actionText && options.onActionPress
-          ? {
-              actionButtonLabel: options.actionText,
-              actionButtonOnPress: options.onActionPress,
-            }
-          : {};
-
-      return (
-        <BannerBase
-          {...actionProps}
-          backgroundColor={BoxBackgroundColor.BackgroundSection}
-          borderColor={BoxBorderColor.BorderMuted}
-          borderWidth={1}
-          closeButtonProps={{
-            accessibilityLabel: 'Close toast',
-            ...options.closeButtonProps,
-            onPress: handleClosePress,
-          }}
-          description={options.description}
-          startAccessory={renderSeverityAccessory(options)}
-          title={options.text}
-          twClassName={twClassName ? `rounded-xl ${twClassName}` : 'rounded-xl'}
-        />
-      );
-    };
-
     if (!toastOptions) {
       return null;
     }
@@ -209,8 +159,41 @@ export const ToastView = forwardRef<ToastRef, ToastProps>(
         style={baseStyle}
         {...props}
       >
-        {renderToastContent(toastOptions)}
+        <Toast
+          {...toastOptions}
+          onClose={() => {
+            closeToast();
+            toastOptions.onClose?.();
+          }}
+          twClassName={twClassName}
+        />
       </Animated.View>
     );
   },
 );
+
+ToasterComponent.displayName = 'Toaster';
+
+type ToastFunction = ((options: ToastOptions) => void) & {
+  dismiss: () => void;
+  hide: () => void;
+  show: (options: ToastOptions) => void;
+};
+
+export const Toaster = ToasterComponent;
+
+export const toast = ((options: ToastOptions) => {
+  assertRegisteredRef('toast').showToast(options);
+}) as ToastFunction;
+
+toast.show = (options) => {
+  assertRegisteredRef('show').showToast(options);
+};
+
+toast.hide = () => {
+  assertRegisteredRef('hide').closeToast();
+};
+
+toast.dismiss = () => {
+  assertRegisteredRef('hide').closeToast();
+};

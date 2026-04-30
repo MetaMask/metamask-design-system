@@ -2856,28 +2856,28 @@ Only the import specifier changes.
 
 ### Toast Component
 
-The Toast component in `@metamask/design-system-react-native` replaces the mobile `Toast`, `ToastContext`, `ToastContextWrapper`, and `ToastService` patterns with one root-mounted component plus the static `Toast.show` / `Toast.hide` API.
+The toast API in `@metamask/design-system-react-native` replaces the mobile `Toast`, `ToastContext`, `ToastContextWrapper`, and `ToastService` patterns with a root-mounted `Toaster` plus the imperative `toast(...)` API. A presentational `Toast` component is also exported for direct rendering in Storybook and docs, but application code should generally use `Toaster` + `toast(...)`.
 
 #### Breaking Changes
 
 ##### Import Path
 
-| Mobile Pattern                                                            | Design System Migration                                                |
-| ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `import Toast from '.../component-library/components/Toast'`              | `import { Toast } from '@metamask/design-system-react-native'`         |
-| `import { ToastContext } from '.../component-library/components/Toast'`   | _(removed — no longer needed)_                                         |
-| `import { ToastContextWrapper } from '.../component-library/.../Toast'`   | _(removed — no longer needed)_                                         |
-| `import ToastService from '.../app/core/ToastService'`                    | `import { Toast } from '@metamask/design-system-react-native'`         |
-| `import { ToastVariants } from '.../component-library/components/Toast'`  | `import { ToastSeverity } from '@metamask/design-system-react-native'` |
-| `import { ButtonVariants } from '.../component-library/components/Toast'` | _(removed — configure `closeButtonProps` instead)_                     |
+| Mobile Pattern                                                            | Design System Migration                                                    |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `import Toast from '.../component-library/components/Toast'`              | `import { Toaster, toast } from '@metamask/design-system-react-native'`    |
+| `import { ToastContext } from '.../component-library/components/Toast'`   | _(removed — no longer needed)_                                             |
+| `import { ToastContextWrapper } from '.../component-library/.../Toast'`   | _(removed — no longer needed)_                                             |
+| `import ToastService from '.../app/core/ToastService'`                    | `import { Toaster, toast } from '@metamask/design-system-react-native'`    |
+| `import { ToastVariants } from '.../component-library/components/Toast'`  | `import { ToastSeverity } from '@metamask/design-system-react-native'`     |
+| `import { ButtonVariants } from '.../component-library/components/Toast'` | \_(removed — configure `closeButtonProps` / use direct `Toast` rendering)` |
 
-The mobile component uses a default export; the design system uses a named export.
+The mobile component uses a default export; the design system uses named exports.
 
-##### Rendering: one `<Toast />` at the root, no context
+##### Rendering: one `<Toaster />` at the root, no context
 
-| Mobile Pattern                                                                                              | Design System Migration                        |
-| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| Wrap root tree in `<ToastContextWrapper>`, render `<Toast ref={toastRef} />` with a ref pulled from context | Render `<Toast />` once at the root of the app |
+| Mobile Pattern                                                                                              | Design System Migration                          |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Wrap root tree in `<ToastContextWrapper>`, render `<Toast ref={toastRef} />` with a ref pulled from context | Render `<Toaster />` once at the root of the app |
 
 Before (mobile):
 
@@ -2905,14 +2905,14 @@ import { Toast } from '@metamask/design-system-react-native';
 const App = () => (
   <>
     <AppContent />
-    <Toast />
+    <Toaster />
   </>
 );
 ```
 
-On mount `<Toast />` registers itself with the static `Toast.show` / `Toast.hide` methods. Render it exactly once.
+On mount `<Toaster />` registers the `toast(...)` / `toast.hide()` API. Render it exactly once.
 
-##### Showing a toast: `Toast.show` replaces `toastRef.current?.showToast` and `ToastService.showToast`
+##### Showing a toast: `toast(...)` replaces `toastRef.current?.showToast` and `ToastService.showToast`
 
 Before (React component using context):
 
@@ -2935,31 +2935,35 @@ ToastService.closeToast();
 After (both cases, identical call site):
 
 ```tsx
-import { Toast, ToastSeverity } from '@metamask/design-system-react-native';
+import {
+  Toaster,
+  toast,
+  ToastSeverity,
+} from '@metamask/design-system-react-native';
 
-Toast.show({
+toast({
   hasNoTimeout: false,
   text: 'Saved',
   description: 'Your changes are available everywhere.',
   severity: ToastSeverity.Success,
 });
 
-Toast.hide();
+toast.hide();
 ```
 
-There is no longer a distinction between React and service call sites. `Toast.show` works anywhere after the root `<Toast />` has mounted.
+There is no longer a distinction between React and service call sites. `toast(...)` works anywhere after the root `<Toaster />` has mounted.
 
 ##### Method renames
 
-| Mobile (on ref / service)      | Design System (static)                                                                   |
-| ------------------------------ | ---------------------------------------------------------------------------------------- |
-| `toastRef.current.showToast`   | `Toast.show`                                                                             |
-| `toastRef.current.closeToast`  | `Toast.hide`                                                                             |
-| `ToastService.showToast`       | `Toast.show`                                                                             |
-| `ToastService.closeToast`      | `Toast.hide`                                                                             |
-| `ToastService.resetForTesting` | _(removed — not needed; RTL auto-cleanup unregisters the ref when `<Toast />` unmounts)_ |
+| Mobile (on ref / service)      | Design System                                                                              |
+| ------------------------------ | ------------------------------------------------------------------------------------------ |
+| `toastRef.current.showToast`   | `toast(...)` or `toast.show(...)`                                                          |
+| `toastRef.current.closeToast`  | `toast.hide()` or `toast.dismiss()`                                                        |
+| `ToastService.showToast`       | `toast(...)` or `toast.show(...)`                                                          |
+| `ToastService.closeToast`      | `toast.hide()` or `toast.dismiss()`                                                        |
+| `ToastService.resetForTesting` | _(removed — not needed; RTL auto-cleanup unregisters the ref when `<Toaster />` unmounts)_ |
 
-The forwarded ref still exposes `showToast` and `closeToast` for isolated render cases such as Storybook, but application code should prefer the static API.
+The forwarded `Toaster` ref still exposes `showToast` and `closeToast` for advanced cases, but application code should prefer `toast(...)`.
 
 ##### Toast options are now flat and content-first
 
@@ -2987,7 +2991,7 @@ Use `severity` for the default status icon (`default`, `success`, `warning`, `er
 Before:
 
 ```tsx
-Toast.show({
+toast({
   hasNoTimeout: false,
   labelOptions: [{ label: 'Saved' }],
   descriptionOptions: [{ label: 'Your changes are available everywhere.' }],
@@ -3001,7 +3005,7 @@ Toast.show({
 After:
 
 ```tsx
-Toast.show({
+toast({
   hasNoTimeout: false,
   text: 'Saved',
   description: 'Your changes are available everywhere.',
@@ -3016,12 +3020,12 @@ The per-toast offset prop is renamed from `customBottomOffset` to `bottomOffset`
 
 #### Error Behavior
 
-Calling `Toast.show` or `Toast.hide` before `<Toast />` has mounted throws a descriptive error pointing at the missing mount instead of silently no-oping.
+Calling `toast(...)`, `toast.show(...)`, or `toast.hide()` before `<Toaster />` has mounted throws a descriptive error pointing at the missing mount instead of silently no-oping.
 
 #### Removed
 
 - `ToastContext`, `ToastContextWrapper`, `ToastContextParams` — no replacement needed, the static API covers every call site.
-- `ToastService` from `app/core/ToastService` — replace all usages with `Toast.show` / `Toast.hide`.
+- `ToastService` from `app/core/ToastService` — replace all usages with `toast(...)` / `toast.hide()`.
 - Variant-specific toast option shapes and fields such as `accountAddress`, `networkImageSource`, `appIconSource`, and the old `labelOptions` / `descriptionOptions` wrappers.
 
 ## Version Updates

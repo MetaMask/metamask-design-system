@@ -28,34 +28,52 @@ export type ToastCloseButtonProps = Omit<
 };
 
 /**
- * Toast options.
+ * Shared toast content props.
  */
-export type ToastOptions = {
-  hasNoTimeout: boolean;
+export type ToastSharedProps = {
   text: ReactNode;
   description?: ReactNode;
   actionText?: string;
   onActionPress?: () => void;
-  onClose?: () => void;
   closeButtonProps?: ToastCloseButtonProps;
   startAccessory?: ReactNode;
   severity?: ToastSeverity;
+};
+
+/**
+ * Toast options used by the imperative `toast(...)` API.
+ */
+export type ToastOptions = ToastSharedProps & {
+  hasNoTimeout: boolean;
+  onClose?: () => void;
   bottomOffset?: number;
 };
 
 /**
- * Toast component reference.
+ * Toaster component reference.
  */
-export type ToastRef = {
+export type ToasterRef = {
   showToast: (toastOptions: ToastOptions) => void;
   closeToast: () => void;
 };
 
 /**
  * Toast component props.
+ * Intended for direct rendering of a single toast surface.
+ */
+export type ToastProps = ToastSharedProps & {
+  onClose: () => void;
+  /**
+   * Optional Tailwind CSS classes for the toast container.
+   */
+  twClassName?: string;
+} & Omit<ViewProps, 'style'>;
+
+/**
+ * Toaster component props.
  * Extends ViewProps to inherit standard React Native props such as testID and accessibilityLabel.
  */
-export type ToastProps = {
+export type ToasterProps = {
   /**
    * Optional Tailwind CSS classes for the toast container.
    */

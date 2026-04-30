@@ -1,121 +1,103 @@
-// Third party dependencies.
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-import { Alert, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { View } from 'react-native';
 
 // External dependencies.
-import { Box } from '../Box';
-import { Button, ButtonVariant } from '../Button';
 import { Icon, IconColor, IconName, IconSize } from '../Icon';
-import { Text } from '../Text';
 
 // Internal dependencies.
 import { Toast } from './Toast';
-import type { ToastOptions } from './Toast.types';
+import type { ToastProps } from './Toast.types';
 import { ToastSeverity } from './Toast.types';
 
-type ToastStoryArgs = {
-  severity: ToastSeverity;
-  hasAction: boolean;
-  useCustomAccessory: boolean;
-};
-
-const meta: Meta<ToastStoryArgs> = {
+const meta: Meta<ToastProps> = {
   title: 'Components/Toast',
   component: Toast,
   argTypes: {
     severity: {
-      options: Object.values(ToastSeverity),
-      control: {
-        type: 'select',
-      },
+      control: 'select',
+      options: ToastSeverity,
+      description:
+        'Optional semantic severity used for the default leading icon',
     },
-    hasAction: {
-      control: {
-        type: 'boolean',
-      },
+    text: {
+      control: 'text',
+      description: 'Main toast content',
     },
-    useCustomAccessory: {
-      control: {
-        type: 'boolean',
-      },
+    description: {
+      control: 'text',
+      description: 'Optional secondary content shown below the main text',
+    },
+    actionText: {
+      control: 'text',
+      description: 'Optional action button label',
+    },
+    onActionPress: {
+      action: 'onActionPress',
+      description: 'Optional press handler for the action button',
+    },
+    onClose: {
+      action: 'onClose',
+      description: 'Required close handler for direct Toast rendering',
+    },
+    startAccessory: {
+      control: false,
+      description:
+        'Optional leading accessory that overrides the default severity icon',
     },
   },
-  decorators: [
-    (StoryComponent) => (
-      <SafeAreaProvider>
-        <Box twClassName="min-h-[300px] relative">
-          <Box twClassName="absolute inset-0 justify-center items-center">
-            <Text>Content behind toast</Text>
-          </Box>
-          <StoryComponent />
-        </Box>
-      </SafeAreaProvider>
-    ),
-  ],
 };
 
 export default meta;
-type Story = StoryObj<ToastStoryArgs>;
+type Story = StoryObj<ToastProps>;
 
-const ToastStoryRender: React.FC<ToastStoryArgs> = ({
-  severity,
-  hasAction,
-  useCustomAccessory,
-}) => {
-  const tw = useTailwind();
+export const Default: Story = {
+  args: {
+    description: "Description shouldn't repeat title. 1-3 lines.",
+    onClose: () => undefined,
+    severity: ToastSeverity.Default,
+    text: 'Title is sentence case no period',
+  },
+};
 
-  const toastOptions: ToastOptions = {
-    actionText: hasAction ? 'Action' : undefined,
-    description: 'Description of toast',
-    hasNoTimeout: false,
-    onActionPress: hasAction
-      ? () => {
-          Alert.alert('Clicked toast action!');
-        }
-      : undefined,
-    severity,
-    startAccessory: useCustomAccessory ? (
+export const Severity: Story = {
+  render: (args) => (
+    <View style={{ gap: 8 }}>
+      <Toast {...args} severity={ToastSeverity.Default} text="Default" />
+      <Toast {...args} severity={ToastSeverity.Success} text="Success" />
+      <Toast {...args} severity={ToastSeverity.Warning} text="Warning" />
+      <Toast {...args} severity={ToastSeverity.Error} text="Error" />
+    </View>
+  ),
+  args: {
+    description: 'Severity controls the default start accessory icon.',
+    onClose: () => undefined,
+  },
+};
+
+export const StartAccessory: Story = {
+  args: {
+    description: 'Custom accessories override the default severity icon.',
+    onClose: () => undefined,
+    severity: ToastSeverity.Warning,
+    startAccessory: (
       <Icon
         color={IconColor.PrimaryDefault}
         name={IconName.Feedback}
         size={IconSize.Lg}
       />
-    ) : undefined,
-    text: 'Toast message',
-  };
-
-  return (
-    <View style={tw.style('flex-1')}>
-      <Button
-        variant={ButtonVariant.Secondary}
-        onPress={() => {
-          Toast.show(toastOptions);
-        }}
-      >
-        {`Show ${severity} Toast`}
-      </Button>
-      <Toast />
-    </View>
-  );
-};
-
-export const Default: Story = {
-  args: {
-    hasAction: false,
-    severity: ToastSeverity.Default,
-    useCustomAccessory: false,
+    ),
+    text: 'Custom accessory',
   },
-  render: (args) => <ToastStoryRender {...args} />,
 };
 
-export const WithAction: Story = {
+export const Action: Story = {
   args: {
-    hasAction: true,
+    actionText: 'Action',
+    description: 'Optional action button content is rendered below the body.',
+    onActionPress: () => undefined,
+    onClose: () => undefined,
     severity: ToastSeverity.Success,
-    useCustomAccessory: false,
+    text: 'Action toast',
   },
-  render: (args) => <ToastStoryRender {...args} />,
 };
