@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { Box, BoxBackgroundColor } from '../Box';
+import { Text } from '../Text';
 
 import { ModalHeader } from './ModalHeader';
 import type { ModalHeaderProps } from './ModalHeader.types';
@@ -14,11 +15,28 @@ const meta: Meta<ModalHeaderProps> = {
     docs: {
       page: README,
     },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'landmark-no-duplicate-banner',
+            // Storybook renders light + dark themes simultaneously,
+            // duplicating the <header> "banner" landmark. A single
+            // ModalHeader is correct in production.
+            enabled: false,
+          },
+          {
+            id: 'landmark-unique',
+            // Same reason — duplicated by the theme decorator.
+            enabled: false,
+          },
+        ],
+      },
+    },
   },
-  // Wrap each story in a dialog landmark so the `<header>` inside is scoped
-  // to its parent role and is not treated as a top-level `banner` landmark
-  // by axe. This mirrors real usage — `ModalHeader` always lives inside a
-  // `Modal`/`<dialog>`.
+  // Wrap each story in a dialog landmark so the `<header>` semantics are
+  // anchored to a real modal context, mirroring how `ModalHeader` is always
+  // used in production.
   decorators: [
     (Story, context) => (
       <div
@@ -78,7 +96,7 @@ export const NodeTitle: Story = {
       closeButtonProps={{ ariaLabel: 'Close' }}
     >
       <Box backgroundColor={BoxBackgroundColor.PrimaryMuted} padding={2}>
-        Custom node children render as-is
+        <Text>Custom node children render as-is</Text>
       </Box>
     </ModalHeader>
   ),
