@@ -707,7 +707,33 @@ import { TextButton } from '@metamask/design-system-react';
 
 ### Box Component
 
-The Box component has breaking changes when migrating from the extension component-library, particularly around responsive spacing and certain margin/padding props.
+This section maps MetaMask Extension [`ui/components/component-library/box`](https://github.com/MetaMask/metamask-extension/tree/main/ui/components/component-library/box) (`box.tsx`, `box.types.ts`) to `@metamask/design-system-react` [`Box`](https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-system-react/src/components/Box). MMDS `BoxProps` extends shared [`BoxPropsShared`](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-shared/src/types/Box/Box.types.ts) plus `className`, native div props, and optional [`asChild`](https://www.radix-ui.com/primitives/docs/utilities/slot) (Radix `Slot`) for composition.
+
+#### API overview (legacy Extension → MMDS)
+
+| Area | Extension component-library `Box` | MMDS `Box` |
+| ---- | --------------------------------- | ---------- |
+| Polymorphic root | `as` prop (render as arbitrary element/component) | `asChild` only — merges props onto the single child (no arbitrary element string) |
+| Style utilities | Broad `StyleUtilityProps` (margin, padding, flex, display, width/height, text, color, borders, etc.) | Focused layout + spacing + `backgroundColor` / `borderColor` / `borderWidth` via `BoxPropsShared`; everything else use `className` + Tailwind |
+| Responsive props | Many props accept responsive arrays (breakpoint tuples) | Not supported — use Tailwind responsive prefixes on `className` |
+| Gap / spacing scale | `gap` and spacing props: typically `1`–`12` → 4px–48px (and `0` where allowed) | `BoxSpacing` `0`–`12` → 0px–48px via token scale (`0` is explicit) |
+| Border width | `borderWidth` accepts `1`–`12` (see legacy typings) | `borderWidth` is `0`, `1`, `2`, `4`, or `8` only (`BoxBorderWidth`) |
+
+##### Removed or non-mapped style-utility props (Extension → use `className`)
+
+The extension Box exposes many `StyleUtilityProps` that are **not** on MMDS `Box`. Recreate them with Tailwind utilities (or wrap content in `Text` for typography colors).
+
+| Legacy prop(s) | MMDS status | Typical migration |
+| -------------- | ----------- | ----------------- |
+| `display`, `width`, `minWidth`, `height` | Not on `Box` | Tailwind: `className="hidden md:block w-full h-12"` etc. |
+| `textAlign` | Not on `Box` | Put text in `Text` or use `className` on `Box` if a utility is applied |
+| `color` (text/icon colors on the box) | Not on `Box` | Use `Text` / `Icon` with design-system color props, or `className` for inherited text color |
+| `borderRadius`, `borderStyle` | Not on `Box` | `className="rounded-lg border-dashed"` etc. |
+| Responsive arrays on **any** style utility | Not supported | Single value on props that still exist, or responsive `className` |
+
+##### `as` → `asChild`
+
+Extension Box can render as another element via `as`. MMDS Box defaults to a `div` or, with `asChild`, merges into its **child** element (Radix pattern). If you used `as="button"`, replace with `asChild` and a child `<button>` (or use the appropriate design-system component).
 
 #### Breaking Changes
 
