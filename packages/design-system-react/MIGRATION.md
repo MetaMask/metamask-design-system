@@ -18,6 +18,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Checkbox Component](#checkbox-component)
   - [HeaderBase Component](#headerbase-component)
   - [ModalBody Component](#modalbody-component)
+  - [ModalHeader Component](#modalheader-component)
   - [ModalOverlay Component](#modaloverlay-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
@@ -1404,6 +1405,143 @@ For typical call sites — for example `ui/components/app/connections-removed-mo
 - `ModalBody` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `tabIndex`, `ref`) to it.
 - `tabIndex={0}` is now the default. Pass `tabIndex={-1}` (or any other value) to override; the consumer's value wins.
 - One-off styling that previously used Box utility props should move to Tailwind via `className` (`px-0`, `py-2`, `flex`, `flex-col`, `gap-2`, etc.).
+
+### ModalHeader Component
+
+The extension `modal-header` component maps to `ModalHeader` in the design system. The behavioral contract — a `<header>` with an optional back button on the start, a title in the center, and an optional close button on the end — is preserved. The polymorphic Box surface, the `mm-modal-header` SCSS class hook, and the implicit `useI18nContext` coupling for the icon-button `aria-label`s are removed.
+
+`ModalHeader` is built on top of the same three-column grid layout as `HeaderBase`, replicated locally so the outer element stays a single semantic `<header>` (no extra wrapper).
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                 | Design System Migration                                                 |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `import { ModalHeader } from '../../component-library'`           | `import { ModalHeader } from '@metamask/design-system-react'`           |
+| `import type { ModalHeaderProps } from '../../component-library'` | `import type { ModalHeaderProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                        | Design System API                                                                          | Change Type | Notes                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children?: ReactNode`                                               | `children?: ReactNode`                                                                     | unchanged   | string children still auto-wrap as `<Text variant={TextVariant.HeadingSm} textAlign={TextAlign.Center}>`; `ReactNode` children render as-is.                                                                           |
+| `onBack?: () => void`                                                | `onBack?: () => void`                                                                      | unchanged   | when set, renders the back button — but **`backButtonProps` is now co-required** (see "i18n decoupling" below).                                                                                                        |
+| `onClose?: () => void`                                               | `onClose?: () => void`                                                                     | unchanged   | when set, renders the close button — but **`closeButtonProps` is now co-required**.                                                                                                                                    |
+| `backButtonProps?: Partial<ButtonIconProps<'button'>>`               | `backButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.)  | shape       | type now bound to MMDS `ButtonIconProps`; `iconName` (`ArrowLeft`) and `size` (`Md`) are owned by the component and cannot be overridden via the prop bag. `ariaLabel` is required (preserved from `ButtonIconProps`). |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`              | `closeButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.) | shape       | same shape change as `backButtonProps`; component owns `iconName=Close` and `size=Md`.                                                                                                                                 |
+| `startAccessory?: ReactNode`                                         | `startAccessory?: ReactNode`                                                               | unchanged   | when provided, replaces the auto-rendered back button — even if `onBack` is set (legacy precedence preserved).                                                                                                         |
+| `endAccessory?: ReactNode`                                           | `endAccessory?: ReactNode`                                                                 | unchanged   | when provided, replaces the auto-rendered close button — even if `onClose` is set.                                                                                                                                     |
+| `className?: string`                                                 | `className?: string`                                                                       | unchanged   | applied to the outer `<header>`; merged with the component's defaults via `twMerge`.                                                                                                                                   |
+| Polymorphic `as` / extension's `HeaderBaseStyleUtilityProps` surface | removed                                                                                    | removed     | always renders `<header>`. Box utility props on the root (`paddingLeft`, `paddingBottom`, `width`, …) are removed — use `className` with Tailwind utilities (e.g. `className="pt-0 pb-2"`).                            |
+| `mm-modal-header` SCSS class hook                                    | removed                                                                                    | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities.                                                                                   |
+| `childrenWrapperProps={{ width: BlockSize.Full }}` (legacy internal) | applied automatically as `w-full` on the title slot                                        | unchanged   | preserved internal behavior; no consumer-facing prop change.                                                                                                                                                           |
+
+##### i18n Decoupling
+
+The extension auto-defaulted the icon-button `aria-label`s to `t('back')` and `t('close')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. The type system enforces this: `onBack` and `backButtonProps` (and `onClose` / `closeButtonProps`) are co-required via a discriminated union — when `onBack` is set, you must also pass `backButtonProps` with at least an `ariaLabel`:
+
+```tsx
+<ModalHeader onClose={handleClose} closeButtonProps={{ ariaLabel: t('close') }}>
+  {t('removeAccount')}
+</ModalHeader>
+```
+
+If a consumer sets `onClose` without `closeButtonProps`, TypeScript errors at the call site. This guarantees every dismiss button gets a properly localized label without the component reaching into any global i18n context.
+
+##### ButtonIcon API Differences
+
+The extension's `ButtonIconProps<'button'>` is replaced by MMDS `ButtonIconProps`. The most common difference for migrating consumers is that the polymorphic `as` typing is gone (the prop bag types against the underlying `<button>` HTML element directly). All standard ButtonIcon props (`ariaLabel`, `disabled`, `onClick`, `data-testid`, etc.) are preserved.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalHeader } from '../../component-library';
+
+// i18n-defaulted back + close
+<ModalHeader onBack={onBack} onClose={onClose}>
+  {t('headerTitle')}
+</ModalHeader>
+
+// Box utility props on the root
+<ModalHeader
+  paddingBottom={4}
+  paddingRight={4}
+  paddingLeft={4}
+  onClose={onClose}
+>
+  {title}
+</ModalHeader>
+
+// Custom close-button override (test id, aria-label)
+<ModalHeader
+  onClose={onClose}
+  closeButtonProps={{
+    ariaLabel: t('close'),
+    'data-testid': 'modal-close',
+  }}
+>
+  {title}
+</ModalHeader>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalHeader } from '@metamask/design-system-react';
+
+// aria-labels are explicit; back + close prop bags are now co-required
+<ModalHeader
+  onBack={onBack}
+  backButtonProps={{ ariaLabel: t('back') }}
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {t('headerTitle')}
+</ModalHeader>
+
+// Root padding overrides move into className
+<ModalHeader
+  className="pb-4 pr-4 pl-4"
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {title}
+</ModalHeader>
+
+// Custom close-button overrides — same shape, just bound to the new type
+<ModalHeader
+  onClose={onClose}
+  closeButtonProps={{
+    ariaLabel: t('close'),
+    'data-testid': 'modal-close',
+  }}
+>
+  {title}
+</ModalHeader>
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (bare `<ModalHeader onClose={onClose}>{title}</ModalHeader>`), `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`paddingLeft={4} paddingRight={4} paddingBottom={4} onClose={fn}`), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (custom JSX `children`) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Add `closeButtonProps={{ ariaLabel: t('close') }}` (and/or `backButtonProps={{ ariaLabel: t('back') }}`) to every `<ModalHeader>` that uses `onClose` / `onBack`. The compiler flags missing prop bags so this can be applied mechanically.
+3. Move any root-level Box utility props (`paddingLeft`, `paddingRight`, `paddingBottom`, `width`, etc.) onto `className` with Tailwind utilities.
+4. If the call site's `closeButtonProps` / `backButtonProps` already passed `ariaLabel`, only the import path needs to change.
+
+#### Deprecated `ModalHeader`
+
+The extension exports a separate `deprecated/` `ModalHeader` from `ui/components/component-library/modal-header/deprecated`. **It is not migrated.** Consumers still importing from the deprecated path need to migrate to the current `ModalHeader` first, then switch to `@metamask/design-system-react`. The deprecated path predates the current `paddingTop`/`paddingBottom`/`width` defaults and uses `ButtonIconSize.Sm` instead of `Md`.
+
+#### API Differences
+
+- `ModalHeader` always renders a `<header>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- The `useI18nContext` coupling for the icon-button `aria-label`s is gone. Discriminated unions enforce co-required `backButtonProps` / `closeButtonProps` at compile time.
+- The component owns `iconName` (`ArrowLeft` / `Close`) and `size` (`Md`) on the built-in icon buttons. Consumers cannot override them via the prop bag.
+- `startAccessory` / `endAccessory` precedence over the auto-rendered back/close buttons is preserved from the legacy.
 
 ### ModalOverlay Component
 
