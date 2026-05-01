@@ -24,7 +24,9 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
   - [TabEmptyState Component](#tabemptystate-component)
+  - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.21.0 to 0.22.0](#from-version-0210-to-0220)
   - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -36,6 +38,73 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.21.0 to 0.22.0
+
+#### TextField and TextFieldSearch: layered props (`inputProps` and root `Box`)
+
+**What changed:**
+
+- **`TextField`** is a root **`Box`** (a styled **`View`**) with an inner **`Input`**. Props that belong on the native text control must be passed in **`inputProps`** (for example `keyboardType`, `secureTextEntry`, `returnKeyType`, `autoCapitalize`, `accessibilityLabel`, `accessibilityState`).
+- **`placeholder`**, **`isReadOnly`**, **`onFocus`**, and **`onBlur`** are owned at the **`TextField` / `TextFieldSearch` top level** and forwarded to the inner `Input`. Do not pass them only through **`inputProps`**. The prop **`isReadonly`** was renamed to **`isReadOnly`** (aligned with React / React Native spelling).
+- **`placeholderTextColor`** is not supported on the public **`TextField`** API; the inner **`Input`** sets placeholder color from the theme.
+- Remaining top-level props on **`TextField`** are **`BoxProps`** (layout and **`View`** props from React Native), except for keys reserved by **`TextField`** (see the exported type **`TextFieldProps`** in **`@metamask/design-system-react-native`**). **`hitSlop`**, **`onPress`**, and other **`Pressable`**-only APIs are not supported on the root; tap-to-focus on the chrome is removed. Users focus by tapping the **`Input`** / **`TextInput`**.
+- **`TextFieldSearchProps`** extends **`TextFieldProps`**; the same layering applies. **`onPressClearButton`**, **`clearButtonProps`**, **`startAccessory`**, **`endAccessory`**, and **`style`** behavior are unchanged.
+- **`ref`** on **`TextField`** / **`TextFieldSearch`** refers to the **root** **`Box`** (**`View`**). Use **`inputRef`** for the inner **`TextInput`** (for example **`focus()`** / **`blur()`**).
+- Top-level **`testID`** applies to the **wrapper** **`Box`**. To query the editable **`TextInput`** in E2E tests, use **`inputProps.testID`** (or accessibility / placeholder queries).
+
+**Migration:**
+
+Move inner `TextInput` props from the root into **`inputProps`**. Keep **`placeholder`**, **`onFocus`**, and **`onBlur`** on the component root when you use them.
+
+Replace **`isReadonly`** with **`isReadOnly`** on **`TextField`**, **`TextFieldSearch`**, and **`Input`** in **`@metamask/design-system-react-native`**. The **`Input`** in **`@metamask/design-system-react`** keeps the **`isReadonly`** prop name.
+
+If you passed **`ref`** expecting the **`TextInput`**, switch imperative usage to **`inputRef`** and use **`ref`** only when you need the outer container (layout / measurement).
+
+```tsx
+// Before (0.21.0) — native TextInput props on TextField
+<TextField
+  value={query}
+  onChangeText={setQuery}
+  placeholder="Search"
+  keyboardType="default"
+  secureTextEntry
+  onFocus={handleFocus}
+/>
+
+// After (0.22.0)
+<TextField
+  value={query}
+  onChangeText={setQuery}
+  placeholder="Search"
+  onFocus={handleFocus}
+  inputProps={{
+    keyboardType: 'default',
+    secureTextEntry: true,
+  }}
+/>
+```
+
+If you relied on **`hitSlop`** or a larger tap target on the field chrome, wrap **`TextField`** in your own **`Pressable`** (or enlarge the inner input via **`inputProps`**) at the app level.
+
+Remove **`placeholderTextColor`** from **`TextField`** call sites; rely on theme behavior from **`Input`**.
+
+**Impact:**
+
+- Any **`TextField`** or **`TextFieldSearch`** usage that spread or passed **`TextInput`** props on the root must move those keys into **`inputProps`**, except for the props **`TextField`** owns (**`value`**, **`onChangeText`**, **`placeholder`**, **`isReadOnly`**, **`onFocus`**, **`onBlur`**, **`isDisabled`**, **`autoFocus`**, **`isError`**, accessories, **`inputElement`**, **`inputRef`**, **`testID`**, **`style`**, **`twClassName`**) and valid **`BoxProps`** / **`View`** props you pass at the top level.
+- Call sites that passed **`Pressable`**-only props (**`hitSlop`**, root **`onPress`**, root **`disabled`**) must be updated: the root is no longer a **`Pressable`**.
+- Type-only consumers can extend or intersect **`TextFieldProps`** from **`@metamask/design-system-react-native`** for typed wrappers or form helpers. Derive the inner input prop bag with **`TextFieldProps['inputProps']`** when needed.
+
+#### Input: theme `placeholderTextColor` always wins
+
+**What changed:**
+
+**`Input`** used to pass **`placeholderTextColor`** on the native **`TextInput`** **before** **`{...props}`**, so a **`placeholderTextColor`** included in **`props`** could override the theme-derived color. **`Input`** now passes **`placeholderTextColor`** **after** **`{...props}`**, so the **theme token for placeholder text is always applied** and **is not overridden** by caller props.
+
+**Impact:**
+
+- Passing **`placeholderTextColor`** on **`Input`** has **no effect** on the rendered placeholder tint; remove dead props if you had any.
+- **`TextField`** already omits **`placeholderTextColor`** from its public API and forwards inner **`Input`** behavior only.
 
 ### From version 0.19.0 to 0.20.0
 
@@ -92,6 +161,8 @@ These tokens had no backing CSS custom property, so any usage was already produc
 **Impact:**
 
 - Any reference to the removed entries will produce a TypeScript error after upgrading.
+
+---
 
 ### From version 0.18.0 to 0.19.0
 
@@ -2307,7 +2378,7 @@ These props work identically in both versions — no migration needed:
 | `onBlur`             | `(e) => void`            | Blur handler (skipped when disabled)      |
 | `isError`            | `boolean`                | Error border state                        |
 | `isDisabled`         | `boolean`                | Disabled state (opacity + no interaction) |
-| `isReadonly`         | `boolean`                | Read-only state                           |
+| `isReadOnly`         | `boolean`                | Read-only state                           |
 | `autoFocus`          | `boolean`                | Auto-focus on mount                       |
 | `startAccessory`     | `ReactNode`              | Content before the input                  |
 | `endAccessory`       | `ReactNode`              | Content after the input                   |
@@ -2782,6 +2853,160 @@ Only the import specifier changes.
 
 - Root prop type narrows from `Omit<BoxProps, 'children'>` to `ViewProps`. Move any root-level `Box` shorthands to `twClassName` or a wrapper `<Box>`.
 - All other props (`icon`, `description`, `descriptionProps`, `actionButtonText`, `actionButtonProps`, `onAction`, `children`, `twClassName`, `style`, `ViewProps`) are unchanged.
+
+### Toast Component
+
+The Toast component in `@metamask/design-system-react-native` replaces the `component-library` `Toast` plus the accompanying `ToastContext`, `ToastContextWrapper`, and `ToastService` singleton from `app/core/ToastService`. The design system consolidates all of that behind a single `Toast` component that exposes static `Toast.show` / `Toast.hide` methods — one mount at the root of the app, one import, no ref plumbing.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                            | Design System Migration                                                          |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `import Toast from '.../component-library/components/Toast'`              | `import { Toast } from '@metamask/design-system-react-native'`                   |
+| `import { ToastContext } from '.../component-library/components/Toast'`   | _(removed — no longer needed)_                                                   |
+| `import { ToastContextWrapper } from '.../component-library/.../Toast'`   | _(removed — no longer needed)_                                                   |
+| `import ToastService from '.../app/core/ToastService'`                    | `import { Toast } from '@metamask/design-system-react-native'`                   |
+| `import { ToastVariants } from '.../component-library/components/Toast'`  | `import { ToastVariant } from '@metamask/design-system-react-native'`            |
+| `import { ButtonVariants } from '.../component-library/components/Toast'` | `import { ToastCloseButtonVariant } from '@metamask/design-system-react-native'` |
+
+The mobile component uses a **default export**; the design system uses a **named export**.
+
+##### Rendering: one `<Toast />` at the root, no context
+
+| Mobile Pattern                                                                                              | Design System Migration                        |
+| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| Wrap root tree in `<ToastContextWrapper>`, render `<Toast ref={toastRef} />` with a ref pulled from context | Render `<Toast />` once at the root of the app |
+
+Before (mobile):
+
+```tsx
+// Root
+<ToastContextWrapper>
+  <App />
+</ToastContextWrapper>;
+
+// Inside App.tsx
+const { toastRef } = useContext(ToastContext);
+return (
+  <>
+    <AppContent />
+    <Toast ref={toastRef} />
+  </>
+);
+```
+
+After (design system):
+
+```tsx
+import { Toast } from '@metamask/design-system-react-native';
+
+const App = () => (
+  <>
+    <AppContent />
+    <Toast />
+  </>
+);
+```
+
+On mount `<Toast />` registers itself with the static `Toast.show` / `Toast.hide` methods. Render it exactly once.
+
+##### Showing a toast: `Toast.show` replaces `toastRef.current?.showToast` and `ToastService.showToast`
+
+Before (React component using context):
+
+```tsx
+const { toastRef } = useContext(ToastContext);
+toastRef?.current?.showToast({
+  variant: ToastVariants.Plain,
+  labelOptions: [{ label: 'Saved' }],
+  hasNoTimeout: false,
+});
+```
+
+Before (non-React code using the service):
+
+```tsx
+import ToastService from '../../core/ToastService';
+ToastService.showToast({ ... });
+ToastService.closeToast();
+```
+
+After (both cases, identical call site):
+
+```tsx
+import { Toast, ToastVariant } from '@metamask/design-system-react-native';
+
+Toast.show({
+  variant: ToastVariant.Plain,
+  labelOptions: [{ label: 'Saved' }],
+  hasNoTimeout: false,
+});
+
+Toast.hide();
+```
+
+There is no longer a distinction between "React component" and "service" call sites — `Toast.show` works anywhere. `useContext(ToastContext)` and `ToastService` both disappear from the consumer surface.
+
+##### Method renames
+
+| Mobile (on ref / service)      | Design System (static)                                                                   |
+| ------------------------------ | ---------------------------------------------------------------------------------------- |
+| `toastRef.current.showToast`   | `Toast.show`                                                                             |
+| `toastRef.current.closeToast`  | `Toast.hide`                                                                             |
+| `ToastService.showToast`       | `Toast.show`                                                                             |
+| `ToastService.closeToast`      | `Toast.hide`                                                                             |
+| `ToastService.resetForTesting` | _(removed — not needed; RTL auto-cleanup unregisters the ref when `<Toast />` unmounts)_ |
+
+The per-instance `showToast` / `closeToast` methods are still exposed on the forwarded ref for advanced cases (for example, isolated Storybook stories), but application code should use the static API.
+
+##### Enum rename: `ToastVariants` → `ToastVariant`
+
+The enum is renamed from `ToastVariants` (plural) to `ToastVariant` (singular) to match ADR-0003 naming. String values are unchanged, so runtime behavior is identical.
+
+##### Close button variant: `ButtonVariants.Link` → `ToastCloseButtonVariant.Icon`
+
+The close-button branch selector no longer piggybacks on the generic `ButtonVariants` enum. Use the dedicated `ToastCloseButtonVariant.Icon` marker when you want an icon-only close button.
+
+Before:
+
+```tsx
+closeButtonOptions: {
+  variant: ButtonVariants.Link,
+  iconName: IconName.Close,
+  onPress: handleClose,
+}
+```
+
+After:
+
+```tsx
+closeButtonOptions: {
+  variant: ToastCloseButtonVariant.Icon,
+  iconName: IconName.Close,
+  onPress: handleClose,
+}
+```
+
+##### `customBottomOffset` → `bottomOffset`
+
+The per-toast offset prop is renamed from `customBottomOffset` to `bottomOffset` (passed on the `ToastOptions` object, unchanged semantics).
+
+#### Error Behavior
+
+Calling `Toast.show` or `Toast.hide` before `<Toast />` has mounted throws a descriptive error pointing at the missing mount, instead of silently no-oping. Surface this in development as a loud signal that the root `<Toast />` is missing.
+
+#### Unchanged
+
+- All `ToastOptions` shapes (`PlainToastOption`, `AccountToastOption`, `NetworkToastOption`, `AppToastOption`, `IconToastOption`) and their fields — only the enum _name_ (`ToastVariants` → `ToastVariant`) changes.
+- `hasNoTimeout`, `labelOptions`, `descriptionOptions`, `linkButtonOptions`, `closeButtonOptions`, `startAccessory`.
+- Animation timings (`TOAST_VISIBILITY_DURATION`, `TOAST_ANIMATION_DURATION`, `TOAST_BOTTOM_PADDING`) are re-exported from the design system.
+
+#### Removed
+
+- `ToastContext`, `ToastContextWrapper`, `ToastContextParams` — no replacement needed, the static API covers every call site.
+- `ToastService` (from `app/core/ToastService`) — delete the file and the call sites that used `ToastService.toastRef` / `ToastService.showToast` / `ToastService.closeToast` in favor of `Toast.show` / `Toast.hide`.
 
 ## Version Updates
 

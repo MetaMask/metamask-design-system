@@ -1640,10 +1640,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.25.0":
-  version: 7.28.4
-  resolution: "@babel/runtime@npm:7.28.4"
-  checksum: 10/6c9a70452322ea80b3c9b2a412bcf60771819213a67576c8cec41e88a95bb7bf01fc983754cda35dc19603eef52df22203ccbf7777b9d6316932f9fb77c25163
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.25.0":
+  version: 7.29.2
+  resolution: "@babel/runtime@npm:7.29.2"
+  checksum: 10/f55ba4052aa0255055b34371a145fbe69c29b37b49eaea14805b095bfb4153701486416e89392fd27ec8abafa53868be86e960b9f8f959fff91f2c8ac2a14b02
   languageName: node
   linkType: hard
 
@@ -3371,6 +3371,7 @@ __metadata:
     deepmerge: "npm:^4.2.2"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
+    react-focus-lock: "npm:^2.9.4"
     rimraf: "npm:^5.0.5"
     tailwind-merge: "npm:^2.0.0"
     ts-jest: "npm:^29.2.5"
@@ -8283,6 +8284,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"detect-node-es@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "detect-node-es@npm:1.1.0"
+  checksum: 10/e46307d7264644975b71c104b9f028ed1d3d34b83a15b8a22373640ce5ea630e5640b1078b8ea15f202b54641da71e4aa7597093bd4b91f113db520a26a37449
+  languageName: node
+  linkType: hard
+
 "didyoumean@npm:^1.2.2":
   version: 1.2.2
   resolution: "didyoumean@npm:1.2.2"
@@ -9828,6 +9836,15 @@ __metadata:
   version: 0.256.0
   resolution: "flow-parser@npm:0.256.0"
   checksum: 10/e3c680f84683310475642ebcb85e8c26f854b36e872c3d797093fd9494164adf1b106fd6f563259f44d0a1f1c3453703994482b31e7fa1db516130ee2f8458ef
+  languageName: node
+  linkType: hard
+
+"focus-lock@npm:^1.3.6":
+  version: 1.3.6
+  resolution: "focus-lock@npm:1.3.6"
+  dependencies:
+    tslib: "npm:^2.0.3"
+  checksum: 10/50a4bf4e330d4aa89c9440e5c37af6915170e6da9c2798235491ee150164d92270879410b3f1c0b9ee7b23f774a909c610ba77dae67622b7bad2d4dddab43956
   languageName: node
   linkType: hard
 
@@ -14447,7 +14464,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -14575,6 +14592,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-clientside-effect@npm:^1.2.7":
+  version: 1.2.8
+  resolution: "react-clientside-effect@npm:1.2.8"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.13"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+  checksum: 10/17e6778c30e36c16aab18557b31e432080c03a724867f9df7b5cde5b15e334d272955b34964cb89d5d33d100f4d4d3856c45882d8b2c815c6c797795a3a34720
+  languageName: node
+  linkType: hard
+
 "react-devtools-core@npm:^5.3.1":
   version: 5.3.2
   resolution: "react-devtools-core@npm:5.3.2"
@@ -14643,6 +14671,26 @@ __metadata:
   peerDependencies:
     react: ">=16.13.1"
   checksum: 10/7418637bf352b88f35ff3798e6faa094ee046df9d422fc08f54c017892c3c0738dac661ba3d64d97209464e7a60e7fbbeffdbeaee5edc38f3aaf5f1f4a8bf610
+  languageName: node
+  linkType: hard
+
+"react-focus-lock@npm:^2.9.4":
+  version: 2.13.7
+  resolution: "react-focus-lock@npm:2.13.7"
+  dependencies:
+    "@babel/runtime": "npm:^7.0.0"
+    focus-lock: "npm:^1.3.6"
+    prop-types: "npm:^15.6.2"
+    react-clientside-effect: "npm:^1.2.7"
+    use-callback-ref: "npm:^1.3.3"
+    use-sidecar: "npm:^1.1.3"
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10/6d139be2dda350648febcfa1f08c341f65db0e4e3388cb322377a26fa7773605abd4f1fbd621a026bc2c55010d6e41ccb1ab0ae66577ce61404321aad0682a61
   languageName: node
   linkType: hard
 
@@ -16722,7 +16770,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.4.0, tslib@npm:^2.6.2, tslib@npm:^2.6.3":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.4.0, tslib@npm:^2.6.2, tslib@npm:^2.6.3":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
@@ -17080,6 +17128,37 @@ __metadata:
     querystringify: "npm:^2.1.1"
     requires-port: "npm:^1.0.0"
   checksum: 10/c9e96bc8c5b34e9f05ddfeffc12f6aadecbb0d971b3cc26015b58d5b44676a99f50d5aeb1e5c9e61fa4d49961ae3ab1ae997369ed44da51b2f5ac010d188e6ad
+  languageName: node
+  linkType: hard
+
+"use-callback-ref@npm:^1.3.3":
+  version: 1.3.3
+  resolution: "use-callback-ref@npm:1.3.3"
+  dependencies:
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10/adf06a7b6a27d3651c325ac9b66d2b82ccacaed7450b85b211d123e91d9a23cb5a587fcc6db5b4fd07ac7233e5abf024d30cf02ddc2ec46bca712151c0836151
+  languageName: node
+  linkType: hard
+
+"use-sidecar@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "use-sidecar@npm:1.1.3"
+  dependencies:
+    detect-node-es: "npm:^1.1.0"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10/2fec05eb851cdfc4a4657b1dfb434e686f346c3265ffc9db8a974bb58f8128bd4a708a3cc00e8f51655fccf81822ed4419ebed42f41610589e3aab0cf2492edb
   languageName: node
   linkType: hard
 

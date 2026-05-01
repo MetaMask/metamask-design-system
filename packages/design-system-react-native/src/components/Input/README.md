@@ -43,7 +43,7 @@ Optional boolean to disable Input.
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
-### `isReadonly`
+### `isReadOnly`
 
 Optional boolean to show readonly input.
 

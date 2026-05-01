@@ -1,5 +1,4 @@
-import { AvatarGroupSize } from '../../types';
-import { TextVariant } from '../Text';
+import { AvatarGroupSize, TextVariant } from '@metamask/design-system-shared';
 
 // Mappings
 export const TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS: Record<
