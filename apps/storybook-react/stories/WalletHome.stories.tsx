@@ -124,20 +124,20 @@ const WalletHome: React.FC = () => {
           className="md:px-8"
         >
           <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
-            <Icon name={IconName.Bank} className="mb-2" />
-            Buy/Sell
+            <Icon name={IconName.AttachMoney} className="mb-2" />
+            Buy
           </ButtonBase>
           <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
-            <Icon name={IconName.SwapHorizontal} className="mb-2" />
+            <Icon name={IconName.SwapVertical} className="mb-2" />
             Swap
-          </ButtonBase>
-          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
-            <Icon name={IconName.Receive} className="mb-2" />
-            Receive
           </ButtonBase>
           <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
             <Icon name={IconName.Send} className="mb-2" />
             Send
+          </ButtonBase>
+          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
+            <Icon name={IconName.Received} className="mb-2" />
+            Receive
           </ButtonBase>
         </Box>
         {/* Tabs */}

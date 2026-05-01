@@ -130,8 +130,8 @@ const WalletHome: React.FC = () => {
               alignItems={BoxAlignItems.Center}
               justifyContent={BoxJustifyContent.Center}
             >
-              <Icon name={IconName.Bank} />
-              <Text fontWeight={FontWeight.Medium}>Buy/Sell</Text>
+              <Icon name={IconName.AttachMoney} />
+              <Text fontWeight={FontWeight.Medium}>Buy</Text>
             </Box>
           </ButtonBase>
           <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
@@ -140,18 +140,8 @@ const WalletHome: React.FC = () => {
               alignItems={BoxAlignItems.Center}
               justifyContent={BoxJustifyContent.Center}
             >
-              <Icon name={IconName.SwapHorizontal} />
+              <Icon name={IconName.SwapVertical} />
               <Text fontWeight={FontWeight.Medium}>Swap</Text>
-            </Box>
-          </ButtonBase>
-          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
-            <Box
-              flexDirection={BoxFlexDirection.Column}
-              alignItems={BoxAlignItems.Center}
-              justifyContent={BoxJustifyContent.Center}
-            >
-              <Icon name={IconName.Receive} />
-              <Text fontWeight={FontWeight.Medium}>Receive</Text>
             </Box>
           </ButtonBase>
           <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
@@ -162,6 +152,16 @@ const WalletHome: React.FC = () => {
             >
               <Icon name={IconName.Send} />
               <Text fontWeight={FontWeight.Medium}>Send</Text>
+            </Box>
+          </ButtonBase>
+          <ButtonBase twClassName="h-20 flex-1 rounded-lg bg-muted px-0 py-4">
+            <Box
+              flexDirection={BoxFlexDirection.Column}
+              alignItems={BoxAlignItems.Center}
+              justifyContent={BoxJustifyContent.Center}
+            >
+              <Icon name={IconName.Received} />
+              <Text fontWeight={FontWeight.Medium}>Receive</Text>
             </Box>
           </ButtonBase>
         </Box>
