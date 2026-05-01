@@ -2,8 +2,6 @@
 
 Icons are read-only symbols that represent ideas or objects, offered in standard sizes.
 
-> **Note:** The `assets/` folder in this directory is auto-generated. The source of truth for all SVG assets is `packages/design-system-shared/src/assets/icons/`. Run `yarn generate:icons` from the repo root to regenerate.
-
 ```tsx
 import { Icon } from '@metamask/design-system-react-native';
 

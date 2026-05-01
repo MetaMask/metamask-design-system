@@ -1,5 +1,6 @@
-import { IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
+
+import { IconName } from '../Icon';
 
 import { BadgeIcon } from './BadgeIcon';
 import type { BadgeIconProps } from './BadgeIcon.types';

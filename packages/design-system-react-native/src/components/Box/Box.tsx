@@ -1,5 +1,5 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 
 import {
@@ -22,88 +22,77 @@ import {
 } from './Box.constants';
 import type { BoxProps } from './Box.types';
 
-export const Box = forwardRef<View, BoxProps>(
-  (
-    {
-      flexDirection,
-      flexWrap,
-      gap,
-      alignItems,
-      justifyContent,
-      margin,
-      marginTop,
-      marginRight,
-      marginBottom,
-      marginLeft,
-      marginHorizontal,
-      marginVertical,
-      padding,
-      paddingTop,
-      paddingRight,
-      paddingBottom,
-      paddingLeft,
-      paddingHorizontal,
-      paddingVertical,
-      borderWidth,
-      borderColor,
-      backgroundColor,
-      twClassName,
-      style,
-      children,
-      ...props
-    }: BoxProps,
-    ref,
-  ) => {
-    const tw = useTailwind();
+export const Box = ({
+  flexDirection,
+  flexWrap,
+  gap,
+  alignItems,
+  justifyContent,
+  margin,
+  marginTop,
+  marginRight,
+  marginBottom,
+  marginLeft,
+  marginHorizontal,
+  marginVertical,
+  padding,
+  paddingTop,
+  paddingRight,
+  paddingBottom,
+  paddingLeft,
+  paddingHorizontal,
+  paddingVertical,
+  borderWidth,
+  borderColor,
+  backgroundColor,
+  twClassName,
+  style,
+  children,
+  ...props
+}: BoxProps) => {
+  const tw = useTailwind();
 
-    return (
-      <View
-        ref={ref}
-        {...props}
-        style={[
-          tw.style(
-            'flex',
-            flexDirection,
-            flexWrap,
-            gap !== undefined && TWCLASSMAP_BOX_GAP[gap],
-            alignItems,
-            justifyContent,
-            margin !== undefined && TWCLASSMAP_BOX_MARGIN[margin],
-            marginTop !== undefined && TWCLASSMAP_BOX_MARGIN_TOP[marginTop],
-            marginRight !== undefined &&
-              TWCLASSMAP_BOX_MARGIN_RIGHT[marginRight],
-            marginBottom !== undefined &&
-              TWCLASSMAP_BOX_MARGIN_BOTTOM[marginBottom],
-            marginLeft !== undefined && TWCLASSMAP_BOX_MARGIN_LEFT[marginLeft],
-            marginHorizontal !== undefined &&
-              TWCLASSMAP_BOX_MARGIN_HORIZONTAL[marginHorizontal],
-            marginVertical !== undefined &&
-              TWCLASSMAP_BOX_MARGIN_VERTICAL[marginVertical],
-            padding !== undefined && TWCLASSMAP_BOX_PADDING[padding],
-            paddingTop !== undefined && TWCLASSMAP_BOX_PADDING_TOP[paddingTop],
-            paddingRight !== undefined &&
-              TWCLASSMAP_BOX_PADDING_RIGHT[paddingRight],
-            paddingBottom !== undefined &&
-              TWCLASSMAP_BOX_PADDING_BOTTOM[paddingBottom],
-            paddingLeft !== undefined &&
-              TWCLASSMAP_BOX_PADDING_LEFT[paddingLeft],
-            paddingHorizontal !== undefined &&
-              TWCLASSMAP_BOX_PADDING_HORIZONTAL[paddingHorizontal],
-            paddingVertical !== undefined &&
-              TWCLASSMAP_BOX_PADDING_VERTICAL[paddingVertical],
-            borderWidth !== undefined &&
-              TWCLASSMAP_BOX_BORDER_WIDTH[borderWidth],
-            borderColor,
-            backgroundColor,
-            twClassName,
-          ),
-          style,
-        ]}
-      >
-        {children}
-      </View>
-    );
-  },
-);
-
-Box.displayName = 'Box';
+  return (
+    <View
+      {...props}
+      style={[
+        tw.style(
+          'flex',
+          flexDirection,
+          flexWrap,
+          gap !== undefined && TWCLASSMAP_BOX_GAP[gap],
+          alignItems,
+          justifyContent,
+          margin !== undefined && TWCLASSMAP_BOX_MARGIN[margin],
+          marginTop !== undefined && TWCLASSMAP_BOX_MARGIN_TOP[marginTop],
+          marginRight !== undefined && TWCLASSMAP_BOX_MARGIN_RIGHT[marginRight],
+          marginBottom !== undefined &&
+            TWCLASSMAP_BOX_MARGIN_BOTTOM[marginBottom],
+          marginLeft !== undefined && TWCLASSMAP_BOX_MARGIN_LEFT[marginLeft],
+          marginHorizontal !== undefined &&
+            TWCLASSMAP_BOX_MARGIN_HORIZONTAL[marginHorizontal],
+          marginVertical !== undefined &&
+            TWCLASSMAP_BOX_MARGIN_VERTICAL[marginVertical],
+          padding !== undefined && TWCLASSMAP_BOX_PADDING[padding],
+          paddingTop !== undefined && TWCLASSMAP_BOX_PADDING_TOP[paddingTop],
+          paddingRight !== undefined &&
+            TWCLASSMAP_BOX_PADDING_RIGHT[paddingRight],
+          paddingBottom !== undefined &&
+            TWCLASSMAP_BOX_PADDING_BOTTOM[paddingBottom],
+          paddingLeft !== undefined && TWCLASSMAP_BOX_PADDING_LEFT[paddingLeft],
+          paddingHorizontal !== undefined &&
+            TWCLASSMAP_BOX_PADDING_HORIZONTAL[paddingHorizontal],
+          paddingVertical !== undefined &&
+            TWCLASSMAP_BOX_PADDING_VERTICAL[paddingVertical],
+          borderWidth !== undefined && TWCLASSMAP_BOX_BORDER_WIDTH[borderWidth],
+          borderColor,
+          backgroundColor,
+          twClassName,
+        ),
+        style,
+      ]}
+    >
+      {children}
+    </View>
+  );
+};

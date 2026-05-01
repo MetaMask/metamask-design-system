@@ -1,7 +1,7 @@
-import { BoxBackgroundColor } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
+import { BoxBackgroundColor } from '../../types';
 import { Box } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
 import { Text } from '../Text';

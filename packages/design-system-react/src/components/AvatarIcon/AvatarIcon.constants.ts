@@ -1,8 +1,4 @@
-import {
-  AvatarIconSeverity,
-  AvatarIconSize,
-} from '@metamask/design-system-shared';
-
+import { AvatarIconSize, AvatarIconSeverity } from '../../types';
 import { IconSize, IconColor } from '../Icon';
 
 export const MAP_AVATARICON_SIZE_ICONSIZE: Record<AvatarIconSize, IconSize> = {

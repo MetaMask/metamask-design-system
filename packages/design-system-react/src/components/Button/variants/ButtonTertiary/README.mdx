@@ -4,13 +4,12 @@ import * as ButtonTertiaryStories from './ButtonTertiary.stories';
 
 # ButtonTertiary
 
-`ButtonTertiary` is an internal variant of the public `Button` component.
-Consumers should use `Button` with `variant={ButtonVariant.Tertiary}` instead of using `ButtonTertiary` directly.
+`ButtonTertiary` is a button for optional and lowest attention.
 
 ```tsx
-import { Button, ButtonVariant } from '@metamask/design-system-react';
+import { ButtonTertiary } from '@metamask/design-system-react';
 
-<Button variant={ButtonVariant.Tertiary}>Button Tertiary</Button>;
+<ButtonTertiary onClick={() => {}}>Button Tertiary</ButtonTertiary>;
 ```
 
 <Canvas of={ButtonTertiaryStories.Default} />
@@ -23,9 +22,9 @@ ButtonTertiary supports three sizes.
 
 Available sizes:
 
-- `ButtonSize.Sm` (32px)
-- `ButtonSize.Md` (40px)
-- `ButtonSize.Lg` (48px)
+- `ButtonTertiarySize.Sm` (32px)
+- `ButtonTertiarySize.Md` (40px)
+- `ButtonTertiarySize.Lg` (48px)
 
 <table>
   <thead>
@@ -38,11 +37,11 @@ Available sizes:
   <tbody>
     <tr>
       <td align="left">
-        <code>ButtonSize</code>
+        <code>ButtonTertiarySize</code>
       </td>
       <td align="left">No</td>
       <td align="left">
-        <code>ButtonSize.Lg</code>
+        <code>ButtonTertiarySize.Lg</code>
       </td>
     </tr>
   </tbody>

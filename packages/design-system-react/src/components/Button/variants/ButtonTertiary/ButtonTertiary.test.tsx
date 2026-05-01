@@ -1,6 +1,8 @@
-import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
+
+import { ButtonTertiarySize } from '../../../../types';
+import { IconName } from '../../../Icon';
 
 import { ButtonTertiary } from './ButtonTertiary';
 
@@ -9,7 +11,7 @@ describe('ButtonTertiary', () => {
     render(<ButtonTertiary>Button Tertiary</ButtonTertiary>);
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-transparent', 'text-default');
+    expect(button).toHaveClass('bg-transparent', 'text-primary-default');
   });
 
   it('renders with danger styles when isDanger is true', () => {
@@ -34,7 +36,7 @@ describe('ButtonTertiary', () => {
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
       'bg-transparent',
-      'text-default',
+      'text-primary-default',
       'opacity-50',
       'cursor-not-allowed',
     );
@@ -45,7 +47,7 @@ describe('ButtonTertiary', () => {
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
-      'text-default',
+      'text-primary-default',
       'bg-pressed',
       'cursor-not-allowed',
     );
@@ -53,14 +55,18 @@ describe('ButtonTertiary', () => {
 
   it('renders with correct size classes', () => {
     const { rerender } = render(
-      <ButtonTertiary size={ButtonSize.Sm}>Small</ButtonTertiary>,
+      <ButtonTertiary size={ButtonTertiarySize.Sm}>Small</ButtonTertiary>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
 
-    rerender(<ButtonTertiary size={ButtonSize.Md}>Medium</ButtonTertiary>);
+    rerender(
+      <ButtonTertiary size={ButtonTertiarySize.Md}>Medium</ButtonTertiary>,
+    );
     expect(screen.getByRole('button')).toHaveClass('h-10');
 
-    rerender(<ButtonTertiary size={ButtonSize.Lg}>Large</ButtonTertiary>);
+    rerender(
+      <ButtonTertiary size={ButtonTertiarySize.Lg}>Large</ButtonTertiary>,
+    );
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 
@@ -210,7 +216,7 @@ describe('ButtonTertiary', () => {
       const { rerender } = render(<ButtonTertiary>Button</ButtonTertiary>);
 
       // Default
-      expect(screen.getByRole('button')).toHaveClass('text-default');
+      expect(screen.getByRole('button')).toHaveClass('text-primary-default');
 
       // Danger
       rerender(<ButtonTertiary isDanger>Button</ButtonTertiary>);
@@ -283,7 +289,7 @@ describe('ButtonTertiary', () => {
       const { rerender } = render(<ButtonTertiary>Button</ButtonTertiary>);
 
       // Default state (both false)
-      expect(screen.getByRole('button')).toHaveClass('text-default');
+      expect(screen.getByRole('button')).toHaveClass('text-primary-default');
 
       // Only isDanger
       rerender(<ButtonTertiary isDanger>Button</ButtonTertiary>);
@@ -306,7 +312,7 @@ describe('ButtonTertiary', () => {
     it('handles all interactive state combinations', () => {
       render(<ButtonTertiary>Button</ButtonTertiary>);
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('text-default');
+      expect(button).toHaveClass('text-primary-default');
       // Check for transition classes
       expect(button).toHaveClass('transition-all');
       expect(button).toHaveClass('duration-100');

@@ -6,8 +6,6 @@ import { TextVariant, FontWeight } from '../../../Text';
 
 import type { ButtonSecondaryProps } from './ButtonSecondary.types';
 
-// Internal Button variant.
-// Consumers should use `Button` with `variant`.
 export const ButtonSecondary = ({
   children,
   textProps,

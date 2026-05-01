@@ -1,6 +1,8 @@
-import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+
+import { ButtonPrimarySize } from '../../../../types';
+import { IconName } from '../../../Icon';
 
 import { ButtonPrimary } from './ButtonPrimary';
 import README from './README.mdx';
@@ -36,8 +38,8 @@ const meta: Meta<typeof ButtonPrimary> = {
     },
     size: {
       control: 'select',
-      options: Object.keys(ButtonSize),
-      mapping: ButtonSize,
+      options: Object.keys(ButtonPrimarySize),
+      mapping: ButtonPrimarySize,
       description: 'Optional prop to control the size of the ButtonPrimary',
     },
     isFullWidth: {
@@ -132,13 +134,13 @@ export const IsInverse: Story = {
 export const Size: Story = {
   render: (args) => (
     <div className="flex gap-2">
-      <ButtonPrimary {...args} size={ButtonSize.Sm}>
+      <ButtonPrimary {...args} size={ButtonPrimarySize.Sm}>
         Small
       </ButtonPrimary>
-      <ButtonPrimary {...args} size={ButtonSize.Md}>
+      <ButtonPrimary {...args} size={ButtonPrimarySize.Md}>
         Medium
       </ButtonPrimary>
-      <ButtonPrimary {...args} size={ButtonSize.Lg}>
+      <ButtonPrimary {...args} size={ButtonPrimarySize.Lg}>
         Large
       </ButtonPrimary>
     </div>

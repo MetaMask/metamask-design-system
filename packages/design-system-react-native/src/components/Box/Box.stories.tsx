@@ -1,16 +1,16 @@
-import {
-  BoxAlignItems,
-  BoxBackgroundColor,
-  BoxBorderColor,
-  BoxFlexDirection,
-  BoxFlexWrap,
-  BoxJustifyContent,
-  TextColor,
-} from '@metamask/design-system-shared';
+import { TextColor } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView } from 'react-native';
 
+import {
+  BoxFlexDirection,
+  BoxFlexWrap,
+  BoxAlignItems,
+  BoxJustifyContent,
+  BoxBackgroundColor,
+  BoxBorderColor,
+} from '../../types';
 import { Text } from '../Text';
 
 import { Box } from './Box';
@@ -953,6 +953,15 @@ export const BorderColor: Story = {
           {...args}
           padding={3}
           backgroundColor={BoxBackgroundColor.WarningMuted}
+          borderColor={BoxBorderColor.WarningAlternative}
+          borderWidth={2}
+        >
+          <Text>WarningAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.WarningMuted}
           borderColor={BoxBorderColor.WarningMuted}
           borderWidth={2}
         >
@@ -982,6 +991,15 @@ export const BorderColor: Story = {
           {...args}
           padding={3}
           backgroundColor={BoxBackgroundColor.SuccessMuted}
+          borderColor={BoxBorderColor.SuccessAlternative}
+          borderWidth={2}
+        >
+          <Text>SuccessAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessMuted}
           borderColor={BoxBorderColor.SuccessMuted}
           borderWidth={2}
         >
@@ -1006,6 +1024,15 @@ export const BorderColor: Story = {
           borderWidth={2}
         >
           <Text>InfoDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.InfoMuted}
+          borderColor={BoxBorderColor.InfoAlternative}
+          borderWidth={2}
+        >
+          <Text>InfoAlternative</Text>
         </Box>
         <Box
           {...args}
@@ -1239,6 +1266,15 @@ export const BackgroundColor: Story = {
         <Box
           {...args}
           padding={3}
+          backgroundColor={BoxBackgroundColor.WarningAlternative}
+          borderColor={BoxBorderColor.WarningDefault}
+          borderWidth={1}
+        >
+          <Text>WarningAlternative</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
           backgroundColor={BoxBackgroundColor.WarningMuted}
           borderColor={BoxBorderColor.WarningDefault}
           borderWidth={1}
@@ -1264,6 +1300,15 @@ export const BackgroundColor: Story = {
           borderWidth={1}
         >
           <Text>SuccessDefault</Text>
+        </Box>
+        <Box
+          {...args}
+          padding={3}
+          backgroundColor={BoxBackgroundColor.SuccessAlternative}
+          borderColor={BoxBorderColor.SuccessDefault}
+          borderWidth={1}
+        >
+          <Text>SuccessAlternative</Text>
         </Box>
         <Box
           {...args}

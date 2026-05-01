@@ -1,8 +1,7 @@
-import { BoxBackgroundColor } from '@metamask/design-system-shared';
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { IconColor } from '../../types';
+import { BoxBackgroundColor, IconColor } from '../../types';
 
 import { BannerAlert } from './BannerAlert';
 

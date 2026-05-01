@@ -1,5 +1,7 @@
+/* eslint-disable import-x/no-nodejs-modules */
 import { promises as fs } from 'fs';
 import * as path from 'path';
+/* eslint-enable import-x/no-nodejs-modules */
 
 type CreateComponentArgs = {
   name: string;

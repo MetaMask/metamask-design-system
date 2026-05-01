@@ -1,8 +1,5 @@
 # ButtonSecondary
 
-`ButtonSecondary` is an internal variant of the public `Button` component.
-Consumers should use `Button` with `variant={ButtonVariant.Secondary}` instead of using `ButtonSecondary` directly.
-
 `ButtonSecondary` is a button for additional options that are helpful.
 
 ## Props

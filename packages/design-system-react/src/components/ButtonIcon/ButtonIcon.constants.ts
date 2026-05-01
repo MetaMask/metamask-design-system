@@ -1,4 +1,5 @@
-import { ButtonIconSize, IconSize } from '@metamask/design-system-shared';
+import { ButtonIconSize } from '../../types';
+import { IconSize } from '../Icon';
 
 export const TWCLASSMAP_BUTTONICON_SIZE_DIMENSION = {
   [ButtonIconSize.Sm]: 'h-6 w-6',

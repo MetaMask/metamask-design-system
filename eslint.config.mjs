@@ -74,7 +74,6 @@ const config = createConfig([
       '**/tests/**/*.{js,ts}',
       'scripts/*.ts',
       'scripts/create-package/**/*.ts',
-      'packages/*/scripts/**/*.ts',
     ],
     extends: [nodejs],
     rules: {
@@ -190,7 +189,7 @@ const config = createConfig([
     },
   },
   {
-    files: ['scripts/*.ts', 'packages/*/scripts/**/*.ts'],
+    files: ['scripts/*.ts'],
     rules: {
       // Scripts may be self-executable and thus have hashbangs.
       'n/hashbang': 'off',

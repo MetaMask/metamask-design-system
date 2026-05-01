@@ -1,8 +1,5 @@
 # ButtonTertiary
 
-`ButtonTertiary` is an internal variant of the public `Button` component.
-Consumers should use `Button` with `variant={ButtonVariant.Tertiary}` instead of using `ButtonTertiary` directly.
-
 `ButtonTertiary` is a button for optional and lowest attention.
 
 ## Props

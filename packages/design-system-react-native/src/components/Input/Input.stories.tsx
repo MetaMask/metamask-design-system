@@ -26,7 +26,7 @@ const meta: Meta<InputProps> = {
     isDisabled: {
       control: 'boolean',
     },
-    isReadOnly: {
+    isReadonly: {
       control: 'boolean',
     },
     isStateStylesDisabled: {
@@ -87,11 +87,11 @@ export const IsDisabled: Story = {
   ),
 };
 
-export const IsReadOnly: Story = {
+export const IsReadonly: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ControlledInput placeholder="Editable" value="" />
-      <Input placeholder="Readonly" value="Read-only value" isReadOnly />
+      <Input placeholder="Readonly" value="Read-only value" isReadonly />
     </View>
   ),
 };

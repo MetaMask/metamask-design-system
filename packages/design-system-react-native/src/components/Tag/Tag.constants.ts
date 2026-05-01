@@ -1,10 +1,6 @@
-import {
-  BoxBackgroundColor,
-  TagSeverity,
-  TextColor,
-} from '@metamask/design-system-shared';
+import { TagSeverity, TextColor } from '@metamask/design-system-shared';
 
-import { IconColor } from '../../types';
+import { BoxBackgroundColor, IconColor } from '../../types';
 
 export const MAP_TAG_SEVERITY_BACKGROUND: Record<
   TagSeverity,

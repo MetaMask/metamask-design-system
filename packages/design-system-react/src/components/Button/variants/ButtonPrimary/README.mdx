@@ -4,13 +4,12 @@ import * as ButtonPrimaryStories from './ButtonPrimary.stories';
 
 # ButtonPrimary
 
-`ButtonPrimary` is an internal variant of the public `Button` component.
-Consumers should use `Button` with `variant={ButtonVariant.Primary}` instead of using `ButtonPrimary` directly.
+`ButtonPrimary` is a button for most important and desired action to guide the user.
 
 ```tsx
-import { Button, ButtonVariant } from '@metamask/design-system-react';
+import { ButtonPrimary } from '@metamask/design-system-react';
 
-<Button variant={ButtonVariant.Primary}>Primary Button</Button>;
+<ButtonPrimary>Primary Button</ButtonPrimary>;
 ```
 
 <Canvas of={ButtonPrimaryStories.Default} />
@@ -23,9 +22,9 @@ ButtonPrimary supports three sizes.
 
 Available sizes:
 
-- `ButtonSize.Sm` (32px)
-- `ButtonSize.Md` (40px)
-- `ButtonSize.Lg` (48px)
+- `ButtonPrimarySize.Sm` (32px)
+- `ButtonPrimarySize.Md` (40px)
+- `ButtonPrimarySize.Lg` (48px)
 
 <table>
   <thead>
@@ -38,11 +37,11 @@ Available sizes:
   <tbody>
     <tr>
       <td align="left">
-        <code>ButtonSize</code>
+        <code>ButtonPrimarySize</code>
       </td>
       <td align="left">No</td>
       <td align="left">
-        <code>ButtonSize.Lg</code>
+        <code>ButtonPrimarySize.Lg</code>
       </td>
     </tr>
   </tbody>

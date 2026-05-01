@@ -1,8 +1,7 @@
-import { BoxFlexDirection } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 
-import { TextVariant } from '../../types';
+import { BoxFlexDirection, TextVariant } from '../../types';
 import { Box } from '../Box';
 import { Text } from '../Text';
 

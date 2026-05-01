@@ -1,6 +1,8 @@
-import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+
+import { ButtonTertiarySize } from '../../../../types';
+import { IconName } from '../../../Icon';
 
 import { ButtonTertiary } from './ButtonTertiary';
 import README from './README.mdx';
@@ -31,7 +33,7 @@ const meta: Meta<typeof ButtonTertiary> = {
     },
     size: {
       control: 'select',
-      options: Object.values(ButtonSize),
+      options: Object.values(ButtonTertiarySize),
       description: 'Optional prop to control the size of the ButtonTertiary',
     },
     isFullWidth: {
@@ -111,13 +113,13 @@ export const IsDanger: Story = {
 export const Size: Story = {
   render: (args) => (
     <div className="flex gap-2">
-      <ButtonTertiary {...args} size={ButtonSize.Sm}>
+      <ButtonTertiary {...args} size={ButtonTertiarySize.Sm}>
         Small
       </ButtonTertiary>
-      <ButtonTertiary {...args} size={ButtonSize.Md}>
+      <ButtonTertiary {...args} size={ButtonTertiarySize.Md}>
         Medium
       </ButtonTertiary>
-      <ButtonTertiary {...args} size={ButtonSize.Lg}>
+      <ButtonTertiary {...args} size={ButtonTertiarySize.Lg}>
         Large
       </ButtonTertiary>
     </div>

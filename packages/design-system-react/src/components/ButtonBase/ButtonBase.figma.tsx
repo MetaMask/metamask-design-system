@@ -20,7 +20,7 @@ import { ButtonBaseSize } from '.';
 
 figma.connect(
   ButtonBase,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=1%3A432',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=1%3A432',
   {
     props: {
       size: figma.enum('size', {

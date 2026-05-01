@@ -1,10 +1,8 @@
-import {
-  BoxFlexDirection,
-  KeyValueRowVariant,
-} from '@metamask/design-system-shared';
+import { KeyValueRowVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
+import { BoxFlexDirection } from '../../types';
 import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
 import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';

@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
-
-import { Icon, IconName, IconSize } from '../Icon';
+import { Text, View } from 'react-native';
 
 import { TextField } from './TextField';
 import type { TextFieldProps } from './TextField.types';
@@ -26,13 +24,13 @@ const meta: Meta<TextFieldProps> = {
     isDisabled: {
       control: 'boolean',
     },
-    isReadOnly: {
+    isReadonly: {
       control: 'boolean',
     },
-    value: {
+    placeholder: {
       control: 'text',
     },
-    placeholder: {
+    value: {
       control: 'text',
     },
     twClassName: {
@@ -76,7 +74,7 @@ export const StartAccessory: Story = {
     <ControlledTextField
       value=""
       placeholder="With start accessory"
-      startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
+      startAccessory={<Text>🔍</Text>}
     />
   ),
 };
@@ -86,7 +84,7 @@ export const EndAccessory: Story = {
     <ControlledTextField
       value=""
       placeholder="With end accessory"
-      endAccessory={<Icon name={IconName.Close} size={IconSize.Sm} />}
+      endAccessory={<Text>✕</Text>}
     />
   ),
 };

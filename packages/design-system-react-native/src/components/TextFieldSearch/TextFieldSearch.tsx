@@ -1,6 +1,6 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { forwardRef, useCallback } from 'react';
-import type { View } from 'react-native';
+import type { TextInput } from 'react-native';
 
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { Icon, IconColor, IconName, IconSize } from '../Icon';
@@ -8,7 +8,7 @@ import { TextField } from '../TextField';
 
 import type { TextFieldSearchProps } from './TextFieldSearch.types';
 
-export const TextFieldSearch = forwardRef<View, TextFieldSearchProps>(
+export const TextFieldSearch = forwardRef<TextInput, TextFieldSearchProps>(
   (
     {
       onPressClearButton,

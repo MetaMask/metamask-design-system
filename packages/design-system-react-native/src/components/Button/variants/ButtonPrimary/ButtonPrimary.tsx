@@ -6,8 +6,6 @@ import { TextVariant, FontWeight } from '../../../Text';
 
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
 
-// Internal Button variant.
-// Consumers should use `Button` with `variant`.
 export const ButtonPrimary = ({
   children,
   textProps,

@@ -1,3 +1,3 @@
-export { ButtonVariant, ButtonSize } from '@metamask/design-system-shared';
+export { ButtonVariant, ButtonSize } from '../../types';
 export { Button } from './Button';
 export type { ButtonProps } from './Button.types';

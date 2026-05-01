@@ -18,7 +18,7 @@ import { AvatarTokenSize } from '.';
 
 figma.connect(
   AvatarToken,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=128%3A2312',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=128%3A2312',
   {
     props: {
       size: figma.enum('size', {

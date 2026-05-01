@@ -1,7 +1,9 @@
-import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
+
+import { ButtonSecondarySize } from '../../../../types';
+import { IconName } from '../../../Icon';
 
 import { ButtonSecondary } from './ButtonSecondary';
 import type { ButtonSecondaryProps } from './ButtonSecondary.types';
@@ -15,7 +17,7 @@ const meta: Meta<ButtonSecondaryProps> = {
     },
     size: {
       control: 'select',
-      options: ButtonSize,
+      options: ButtonSecondarySize,
     },
     isLoading: {
       control: 'boolean',
@@ -67,7 +69,7 @@ const ButtonSecondaryStory: React.FC<ButtonSecondaryProps> = ({
 export const Default: Story = {
   args: {
     children: 'Sample ButtonSecondary Text',
-    size: ButtonSize.Lg,
+    size: ButtonSecondarySize.Lg,
     isLoading: false,
     loadingText: 'Loading',
     startIconName: IconName.Add,
@@ -83,9 +85,13 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonSecondary size={ButtonSize.Sm}>ButtonSize Sm</ButtonSecondary>
-      <ButtonSecondary size={ButtonSize.Md}>ButtonSize Md</ButtonSecondary>
-      <ButtonSecondary size={ButtonSize.Lg}>
+      <ButtonSecondary size={ButtonSecondarySize.Sm}>
+        ButtonSize Sm
+      </ButtonSecondary>
+      <ButtonSecondary size={ButtonSecondarySize.Md}>
+        ButtonSize Md
+      </ButtonSecondary>
+      <ButtonSecondary size={ButtonSecondarySize.Lg}>
         ButtonSize Lg (Default)
       </ButtonSecondary>
     </View>

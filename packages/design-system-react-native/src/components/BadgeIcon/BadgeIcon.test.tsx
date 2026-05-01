@@ -1,8 +1,8 @@
-import { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
+import { IconName, IconColor, IconSize } from '../Icon';
 import { Text } from '../Text';
 
 import { BadgeIcon } from './BadgeIcon';

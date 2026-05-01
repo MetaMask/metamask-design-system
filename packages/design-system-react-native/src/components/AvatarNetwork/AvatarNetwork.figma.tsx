@@ -18,7 +18,7 @@ import { AvatarNetworkSize } from '.';
 
 figma.connect(
   AvatarNetwork,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=196%3A1563',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=196%3A1563',
   {
     props: {
       size: figma.enum('size', {

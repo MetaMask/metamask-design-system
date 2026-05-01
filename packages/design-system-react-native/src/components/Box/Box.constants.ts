@@ -1,7 +1,4 @@
-import type {
-  BoxSpacing,
-  BoxBorderWidth,
-} from '@metamask/design-system-shared';
+import type { BoxSpacing, BoxBorderWidth } from '../../types';
 
 export const TWCLASSMAP_BOX_GAP: Record<BoxSpacing, string> = {
   0: 'gap-0',

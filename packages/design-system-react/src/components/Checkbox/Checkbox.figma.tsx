@@ -16,7 +16,7 @@ import { Checkbox } from './Checkbox';
 
 figma.connect(
   Checkbox,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=385%3A18907',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=385%3A18907',
   {
     props: {
       isDisabled: figma.boolean('isDisabled'),
