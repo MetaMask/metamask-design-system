@@ -99,6 +99,8 @@ export { ModalOverlay } from './ModalOverlay';
 export type { ModalOverlayProps } from './ModalOverlay';
 export { ModalBody } from './ModalBody';
 export type { ModalBodyProps } from './ModalBody';
+export { ModalHeader } from './ModalHeader';
+export type { ModalHeaderProps } from './ModalHeader';
 
 export { Text } from './Text';
 export {
