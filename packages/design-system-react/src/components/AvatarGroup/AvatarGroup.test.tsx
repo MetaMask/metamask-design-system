@@ -1,7 +1,10 @@
+import {
+  AvatarGroupSize,
+  AvatarGroupVariant,
+} from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { AvatarGroupVariant, AvatarGroupSize } from '../../types';
 import { AvatarAccountVariant } from '../AvatarAccount';
 import { TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE } from '../AvatarBase/AvatarBase.constants';
 import { TextColor } from '../Text';

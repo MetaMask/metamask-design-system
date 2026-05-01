@@ -177,3 +177,10 @@ export {
   IconSize,
   type IconPropsShared,
 } from './types/Icon';
+
+// AvatarGroup types (ADR-0003 + ADR-0004)
+export {
+  AvatarGroupSize,
+  AvatarGroupVariant,
+  type AvatarGroupPropsShared,
+} from './types/AvatarGroup';

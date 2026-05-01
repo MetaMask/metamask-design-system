@@ -51,6 +51,7 @@
     "@metamask/jazzicon": "^2.0.0",
     "@radix-ui/react-slot": "^1.1.0",
     "blo": "^2.0.0",
+    "react-focus-lock": "^2.9.4",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
