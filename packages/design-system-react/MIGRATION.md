@@ -15,6 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
   - [Checkbox Component](#checkbox-component)
   - [ModalBody Component](#modalbody-component)
   - [ModalOverlay Component](#modaloverlay-component)
@@ -1147,6 +1148,84 @@ import {
 - `className` and `style` are still supported
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
+
+### Input Component
+
+The extension `input` component is implemented as `Text` with `as="input"` and carries broad `Box` / style-utility behavior through its polymorphic props. The design system `Input` is a native `<input>` with a small semantic API (`textVariant`, `isDisabled`, `isReadonly`) and standard HTML attributes on the element.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) and the [Text Component](#text-component) section for `TextVariant` value casing (`bodyMd` → `BodyMd`).
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                            | Design System Migration                                              |
+| ------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `import { Input, InputType } from '../../component-library'` | `import { Input, TextVariant } from '@metamask/design-system-react'` |
+
+##### Renamed and Behavioral Props
+
+| Extension API                                                      | Design System API              | Notes                                                                                                                                                   |
+| ------------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `disabled`                                                         | `isDisabled`                   | boolean; default `false`                                                                                                                                |
+| `readOnly`                                                         | `isReadonly`                   | renamed; note **lowercase “only”** in the design system prop name                                                                                       |
+| `error` (sets `aria-invalid`)                                      | pass `aria-invalid` on `Input` | no `error` shorthand; use native ARIA on the underlying `<input>`                                                                                       |
+| `disableStateStyles`                                               | removed                        | removed “disable focus ring” escape hatch; if you need custom focus for accessibility, handle it explicitly (for example with `className` or a wrapper) |
+| `type` using `InputType` enum                                      | `type` as HTML string          | use `'text' \| 'password' \| 'number' \| 'search'` (or other valid `<input type>`). The `InputType` enum is not exported from the design system         |
+| `autoComplete` as `boolean`                                        | `autoComplete` as string       | use standard HTML autocomplete tokens (for example `on` / `off` or a specific token)                                                                    |
+| Polymorphic `as` and `...` style-utility props from `Text` / `Box` | removed from the component API | use `className` (and native attributes allowed on `<input>`) per [General Extension Migration Guidance](#general-extension-migration-guidance)          |
+| `textVariant`                                                      | `textVariant`                  | same name; values move to shared `TextVariant` from `@metamask/design-system-react` (see [Text Component](#text-component))                             |
+
+##### Still Available via Native `<input>`
+
+`Input` is `Omit<ComponentPropsWithoutRef<'input'>, 'disabled' | 'readOnly'>` plus the fields above. Standard attributes such as `id`, `name`, `placeholder`, `value`, `defaultValue`, `onChange`, `onBlur`, `onFocus`, `maxLength`, `required`, and `autoFocus` work as on a normal input.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Input, InputType } from '../../component-library';
+import { TextVariant } from '../../../helpers/constants/design-system';
+
+<Input
+  name="query"
+  placeholder="Search"
+  value={query}
+  onChange={onQueryChange}
+  disabled={isBusy}
+  readOnly={isLocked}
+  error={hasError}
+  type={InputType.Search}
+  textVariant={TextVariant.bodyMd}
+  autoComplete
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react';
+
+<Input
+  name="query"
+  placeholder="Search"
+  value={query}
+  onChange={onQueryChange}
+  isDisabled={isBusy}
+  isReadonly={isLocked}
+  aria-invalid={hasError}
+  type="search"
+  textVariant={TextVariant.BodyMd}
+  autoComplete="on"
+/>;
+```
+
+#### API Differences
+
+- No polymorphic `as` prop — the component always renders `<input>`.
+- Extension-only `error` and `disableStateStyles` are not mirrored; use `aria-invalid` and `className` as needed.
+- `TextVariant` imports and member names follow the design system (Pascal-cased members such as `TextVariant.BodyMd`).
 
 ### Checkbox Component
 
