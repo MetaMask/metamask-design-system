@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.20.0]
+
+### Changed
+
+- **BREAKING:** Updated `Button`, `ButtonBase`, and `ButtonHero` size and variant exports to use shared const-object + string-union types rather than platform-local enum-based definitions, aligning React with the shared cross-platform type contracts ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+- **BREAKING:** Updated `ButtonIconSize` and `ButtonIconVariant` to use shared const-object + string-union types rather than platform-local enum-based definitions, aligning React with the shared cross-platform type contracts ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+- Updated Figma Code Connect to the live `MMDS Components` file and aligned `ButtonIcon` and `TextButton` mappings with the current component APIs shown in Dev Mode ([#1109](https://github.com/MetaMask/metamask-design-system/pull/1109))
+- Expanded the `TextButton` migration guide for extension consumers replacing `ButtonLink` and `ButtonVariant.Link` with the current design-system APIs ([#1098](https://github.com/MetaMask/metamask-design-system/pull/1098))
+
 ## [0.19.0]
 
 ### Added
@@ -269,7 +282,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.19.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.20.0...HEAD
+[0.20.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.19.0...@metamask/design-system-react@0.20.0
 [0.19.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.18.0...@metamask/design-system-react@0.19.0
 [0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.17.1...@metamask/design-system-react@0.18.0
 [0.17.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.17.0...@metamask/design-system-react@0.17.1
