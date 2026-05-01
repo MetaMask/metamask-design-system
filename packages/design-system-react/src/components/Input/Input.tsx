@@ -14,7 +14,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     {
       textVariant = TextVariant.BodyMd,
       isDisabled = false,
-      isReadonly = false,
+      isReadOnly = false,
+      isStateStylesDisabled = false,
       className,
       style,
       ...rest
@@ -23,11 +24,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const mergedClassName = twMerge(
       'w-full rounded border bg-default text-default outline-none transition-colors',
-      'border-transparent focus:border-primary-default focus:outline-none',
+      'border-transparent',
+      !isStateStylesDisabled &&
+        'focus:border-primary-default focus:outline-none',
       'placeholder:text-alternative',
       TWCLASSMAP_TEXT_VARIANT_FONTSTYLE[textVariant],
       TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[textVariant],
-      isDisabled && 'cursor-not-allowed opacity-50',
+      !isStateStylesDisabled && isDisabled && 'cursor-not-allowed opacity-50',
       className,
     );
 
@@ -38,7 +41,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         style={style}
         {...rest}
         disabled={isDisabled}
-        readOnly={isReadonly}
+        readOnly={isReadOnly}
       />
     );
   },

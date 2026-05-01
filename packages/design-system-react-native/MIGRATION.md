@@ -26,6 +26,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.X.0 to 0.X.0](#from-version-0x0-to-0x0)
   - [From version 0.21.0 to 0.22.0](#from-version-0210-to-0220)
   - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
@@ -39,6 +40,27 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
+### From version 0.X.0 to 0.X.0
+
+TODO(release): replace `0.X.0` with the actual version numbers when this PR lands in a release.
+
+#### Input: shared controlled contract and readonly naming alignment
+
+**What changed:**
+
+- **`Input`** now follows the same shared cross-platform prop contract in **`@metamask/design-system-react-native`** and **`@metamask/design-system-react`** for **`value`**, **`textVariant`**, **`isDisabled`**, **`isReadOnly`**, and **`isStateStylesDisabled`**.
+- **`Input`** is now treated as controlled-only on both platforms. On React web, uncontrolled usage via **`defaultValue`** is no longer part of the public type contract.
+- The old **`isReadonly`** prop name is replaced by **`isReadOnly`**.
+- **`isStateStylesDisabled`** is the shared prop name for suppressing the inner input's own focus and disabled styling when a wrapper such as **`TextField`** owns those states.
+
+**Migration:**
+
+Replace **`isReadonly`** with **`isReadOnly`** on **`Input`** call sites and wrappers.
+
+For shared wrappers that target both platforms, align to the cross-platform **`Input`** contract: controlled **`value: string`**, **`isReadOnly`**, and **`isStateStylesDisabled`**.
+
+If your React web usage relied on uncontrolled **`Input`** behavior, move that state into the caller and pass a controlled **`value`** instead.
+
 ### From version 0.21.0 to 0.22.0
 
 #### TextField and TextFieldSearch: layered props (`inputProps` and root `Box`)
@@ -46,7 +68,7 @@ This guide provides detailed instructions for migrating your project from one ve
 **What changed:**
 
 - **`TextField`** is a root **`Box`** (a styled **`View`**) with an inner **`Input`**. Props that belong on the native text control must be passed in **`inputProps`** (for example `keyboardType`, `secureTextEntry`, `returnKeyType`, `autoCapitalize`, `accessibilityLabel`, `accessibilityState`).
-- **`placeholder`**, **`isReadOnly`**, **`onFocus`**, and **`onBlur`** are owned at the **`TextField` / `TextFieldSearch` top level** and forwarded to the inner `Input`. Do not pass them only through **`inputProps`**. The prop **`isReadonly`** was renamed to **`isReadOnly`** (aligned with React / React Native spelling).
+- **`placeholder`**, **`isReadOnly`**, **`onFocus`**, and **`onBlur`** are owned at the **`TextField` / `TextFieldSearch` top level** and forwarded to the inner `Input`. Do not pass them only through **`inputProps`**. The prop **`isReadonly`** was renamed to **`isReadOnly`**.
 - **`placeholderTextColor`** is not supported on the public **`TextField`** API; the inner **`Input`** sets placeholder color from the theme.
 - Remaining top-level props on **`TextField`** are **`BoxProps`** (layout and **`View`** props from React Native), except for keys reserved by **`TextField`** (see the exported type **`TextFieldProps`** in **`@metamask/design-system-react-native`**). **`hitSlop`**, **`onPress`**, and other **`Pressable`**-only APIs are not supported on the root; tap-to-focus on the chrome is removed. Users focus by tapping the **`Input`** / **`TextInput`**.
 - **`TextFieldSearchProps`** extends **`TextFieldProps`**; the same layering applies. **`onPressClearButton`**, **`clearButtonProps`**, **`startAccessory`**, **`endAccessory`**, and **`style`** behavior are unchanged.
@@ -57,7 +79,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 Move inner `TextInput` props from the root into **`inputProps`**. Keep **`placeholder`**, **`onFocus`**, and **`onBlur`** on the component root when you use them.
 
-Replace **`isReadonly`** with **`isReadOnly`** on **`TextField`**, **`TextFieldSearch`**, and **`Input`** in **`@metamask/design-system-react-native`**. The **`Input`** in **`@metamask/design-system-react`** keeps the **`isReadonly`** prop name.
+Replace **`isReadonly`** with **`isReadOnly`** on **`TextField`**, **`TextFieldSearch`**, and **`Input`** in **`@metamask/design-system-react-native`**.
 
 If you passed **`ref`** expecting the **`TextInput`**, switch imperative usage to **`inputRef`** and use **`ref`** only when you need the outer container (layout / measurement).
 
