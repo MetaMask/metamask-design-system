@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-shared",
-  "version": "0.12.0",
+  "version": "0.14.0",
   "description": "Shared types for design system libraries",
   "keywords": [
     "MetaMask",
@@ -35,7 +35,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "tsx scripts/generate-icons.ts && ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-shared",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-shared",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
@@ -43,6 +43,7 @@
     "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
     "since-latest-release": "../../scripts/since-latest-release.sh",
+    "generate-icons": "tsx scripts/generate-icons.ts",
     "publish:preview": "yarn npm publish --tag preview"
   },
   "dependencies": {
@@ -50,6 +51,9 @@
   },
   "devDependencies": {
     "@metamask/auto-changelog": "^6.1.0",
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
     "@ts-bridge/cli": "^0.6.3",
     "@types/jest": "^27.4.1",
     "@types/react": "^18.2.0",
@@ -57,6 +61,7 @@
     "jest": "^29.7.0",
     "react": "18.3.1",
     "ts-jest": "^29.2.5",
+    "tsx": "^4.20.6",
     "typescript": "~5.2.2"
   },
   "peerDependencies": {

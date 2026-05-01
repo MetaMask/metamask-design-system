@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.0]
+
+### Added
+
+- Added `Telegram` to the shared icon exports so both platform packages can consume it through their existing `IconName` APIs ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
+- Added shared `BadgeIconPropsShared` types so `BadgeIcon` now uses one cross-platform prop contract in React and React Native ([#1010](https://github.com/MetaMask/metamask-design-system/pull/1010))
+- Added shared `AvatarIcon` contracts, including `AvatarIconPropsShared`, `AvatarIconSize`, and `AvatarIconSeverity`, so both platform packages consume the same canonical type definitions ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
+
+## [0.13.0]
+
+### Added
+
+- Added `TitleStandardPropsShared` and `TitleSubpagePropsShared` for shared header composition across platform packages ([#1051](https://github.com/MetaMask/metamask-design-system/pull/1051), [#1059](https://github.com/MetaMask/metamask-design-system/pull/1059))
+- Added `TagSeverity` and `TagPropsShared` for shared Tag contracts consumed by platform packages ([#1053](https://github.com/MetaMask/metamask-design-system/pull/1053))
+
+### Changed
+
+- **BREAKING:** Updated shared `Box` exports (`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, `BoxBorderWidth`, `BoxPropsShared`) from enums to const objects with derived string unions ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
+  - Removed `BoxBackgroundColor.WarningAlternative`, `BoxBackgroundColor.SuccessAlternative`, `BoxBorderColor.WarningAlternative`, `BoxBorderColor.SuccessAlternative`, and `BoxBorderColor.InfoAlternative`
+  - See [Migration Guide](./MIGRATION.md#from-version-0120-to-0130)
+- **BREAKING:** Updated shared `Icon` exports (`IconName`, `IconColor`, `IconSize`, `IconPropsShared`) to use const objects with derived string unions and made `@metamask/design-system-shared` the source of truth for icon names and assets across React and React Native ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042))
+  - See [Migration Guide](./MIGRATION.md#from-version-0120-to-0130)
+
 ## [0.12.0]
 
 ### Added
@@ -135,7 +158,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.12.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.14.0...HEAD
+[0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.13.0...@metamask/design-system-shared@0.14.0
+[0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.12.0...@metamask/design-system-shared@0.13.0
 [0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.11.0...@metamask/design-system-shared@0.12.0
 [0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.10.0...@metamask/design-system-shared@0.11.0
 [0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.9.0...@metamask/design-system-shared@0.10.0

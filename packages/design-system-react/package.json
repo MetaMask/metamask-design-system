@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-react",
-  "version": "0.17.1",
+  "version": "0.19.0",
   "description": "Design system react ui components",
   "keywords": [
     "MetaMask",
@@ -35,13 +35,10 @@
     "dist/"
   ],
   "scripts": {
-    "build": "yarn generate-icons && ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
-    "clean:icons": "rimraf src/components/Icon/icons",
     "create-component": "tsx scripts/create-component",
-    "generate-icons": "yarn clean:icons && svgr --config-file src/components/Icon/.svgrrc.js -d src/components/Icon/icons ../design-system-shared/src/assets/icons/*.svg && yarn generate-icons:index",
-    "generate-icons:index": "tsx scripts/generate-icons-index.ts",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",

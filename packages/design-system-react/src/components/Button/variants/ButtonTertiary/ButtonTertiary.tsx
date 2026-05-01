@@ -5,6 +5,8 @@ import { ButtonBase } from '../../../ButtonBase';
 
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
+// Internal Button variant.
+// Consumers should use `Button` with `variant`.
 export const ButtonTertiary = forwardRef<
   HTMLButtonElement,
   ButtonTertiaryProps
@@ -19,7 +21,7 @@ export const ButtonTertiary = forwardRef<
       // Default tertiary styles
       !isDanger &&
         !isInverse && [
-          'bg-transparent text-primary-default',
+          'bg-transparent text-default',
           // Loading state uses pressed color
           isLoading && 'bg-pressed',
         ],

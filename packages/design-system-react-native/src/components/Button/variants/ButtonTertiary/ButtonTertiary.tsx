@@ -6,6 +6,8 @@ import { TextVariant, FontWeight } from '../../../Text';
 
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
+// Internal Button variant.
+// Consumers should use `Button` with `variant`.
 export const ButtonTertiary = ({
   children,
   textProps,
@@ -74,9 +76,8 @@ export const ButtonTertiary = ({
       if (isInverse) {
         return 'text-primary-inverse';
       }
-      return pressed || isLoading
-        ? 'text-primary-default-pressed'
-        : 'text-primary-default';
+      // Use neutral text color for all states (default, pressed, loading)
+      return 'text-default';
     },
     [isDanger, isInverse, isLoading],
   );

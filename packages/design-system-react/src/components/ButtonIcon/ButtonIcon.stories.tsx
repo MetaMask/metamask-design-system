@@ -1,8 +1,10 @@
+import {
+  ButtonIconSize,
+  IconName,
+  ButtonIconVariant,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-
-import { ButtonIconSize, ButtonIconVariant } from '../../types';
-import { IconName } from '../Icon';
 
 import { ButtonIcon } from './ButtonIcon';
 import README from './README.mdx';

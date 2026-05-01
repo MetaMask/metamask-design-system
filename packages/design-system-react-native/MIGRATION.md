@@ -18,11 +18,14 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
+  - [Label Component](#label-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
+  - [TabEmptyState Component](#tabemptystate-component)
 - [Version Updates](#version-updates)
+  - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
@@ -33,6 +36,129 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.19.0 to 0.20.0
+
+#### Box: Enum exports now use const objects and string unions
+
+**What Changed:**
+
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` now follow the ADR-0003 const-object + string-union pattern instead of local enums.
+
+**Migration:**
+
+```tsx
+// Before (0.19.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
+
+// After (0.20.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
+```
+
+#### Box: Removed stale `-alternative` color tokens
+
+**What Changed:**
+
+The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
+
+| Removed Entry                           | Replacement                         |
+| --------------------------------------- | ----------------------------------- |
+| `BoxBackgroundColor.WarningAlternative` | `BoxBackgroundColor.WarningDefault` |
+| `BoxBackgroundColor.SuccessAlternative` | `BoxBackgroundColor.SuccessDefault` |
+| `BoxBorderColor.WarningAlternative`     | `BoxBorderColor.WarningDefault`     |
+| `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`     |
+| `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`        |
+
+**Migration:**
+
+These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate:
+
+```tsx
+// Before (0.19.0)
+<Box backgroundColor={BoxBackgroundColor.WarningAlternative} />
+<Box backgroundColor={BoxBackgroundColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.WarningAlternative} />
+<Box borderColor={BoxBorderColor.SuccessAlternative} />
+<Box borderColor={BoxBorderColor.InfoAlternative} />
+
+// After (0.20.0)
+<Box backgroundColor={BoxBackgroundColor.WarningDefault} />
+<Box backgroundColor={BoxBackgroundColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.WarningDefault} />
+<Box borderColor={BoxBorderColor.SuccessDefault} />
+<Box borderColor={BoxBorderColor.InfoDefault} />
+```
+
+**Impact:**
+
+- Any reference to the removed entries will produce a TypeScript error after upgrading.
+
+---
+
+#### TextField and TextFieldSearch: layered props (`inputProps` and root `Box`)
+
+**What changed:**
+
+- **`TextField`** is a root **`Box`** (a styled **`View`**) with an inner **`Input`**. Props that belong on the native text control must be passed in **`inputProps`** (for example `keyboardType`, `secureTextEntry`, `returnKeyType`, `autoCapitalize`, `accessibilityLabel`, `accessibilityState`).
+- **`placeholder`**, **`isReadOnly`**, **`onFocus`**, and **`onBlur`** are owned at the **`TextField` / `TextFieldSearch` top level** and forwarded to the inner `Input`. Do not pass them only through **`inputProps`**. The prop **`isReadonly`** was renamed to **`isReadOnly`** (aligned with React / React Native spelling).
+- **`placeholderTextColor`** is not supported on the public **`TextField`** API; the inner **`Input`** sets placeholder color from the theme.
+- Remaining top-level props on **`TextField`** are **`BoxProps`** (layout and **`View`** props from React Native), except for keys reserved by **`TextField`** (see the exported type **`TextFieldProps`** in **`@metamask/design-system-react-native`**). **`hitSlop`**, **`onPress`**, and other **`Pressable`**-only APIs are not supported on the root; tap-to-focus on the chrome is removed—users focus by tapping the **`Input`** / **`TextInput`**.
+- **`TextFieldSearchProps`** extends **`TextFieldProps`**; the same layering applies. **`onPressClearButton`**, **`clearButtonProps`**, **`startAccessory`**, **`endAccessory`**, and **`style`** behavior are unchanged.
+- **`ref`** on **`TextField`** / **`TextFieldSearch`** refers to the **root** **`Box`** (**`View`**). Use **`inputRef`** for the inner **`TextInput`** (for example **`focus()`** / **`blur()`**).
+- Top-level **`testID`** applies to the **wrapper** **`Box`**. To query the editable **`TextInput`** in E2E tests, use **`inputProps.testID`** (or accessibility / placeholder queries).
+
+**Migration:**
+
+Move inner `TextInput` props from the root into **`inputProps`**. Keep **`placeholder`**, **`onFocus`**, and **`onBlur`** on the component root when you use them.
+
+Replace **`isReadonly`** with **`isReadOnly`** on **`TextField`**, **`TextFieldSearch`**, and **`Input`** in **`@metamask/design-system-react-native`**. The **`Input`** in **`@metamask/design-system-react`** keeps the **`isReadonly`** prop name.
+
+If you passed **`ref`** expecting the **`TextInput`**, switch imperative usage to **`inputRef`** and use **`ref`** only when you need the outer container (layout / measurement).
+
+```tsx
+// Before (0.19.0) — native TextInput props on TextField
+<TextField
+  value={query}
+  onChangeText={setQuery}
+  placeholder="Search"
+  keyboardType="default"
+  secureTextEntry
+  onFocus={handleFocus}
+/>
+
+// After (0.20.0)
+<TextField
+  value={query}
+  onChangeText={setQuery}
+  placeholder="Search"
+  onFocus={handleFocus}
+  inputProps={{
+    keyboardType: 'default',
+    secureTextEntry: true,
+  }}
+/>
+```
+
+If you relied on **`hitSlop`** or a larger tap target on the field chrome, wrap **`TextField`** in your own **`Pressable`** (or enlarge the inner input via **`inputProps`**) at the app level.
+
+Remove **`placeholderTextColor`** from **`TextField`** call sites; rely on theme behavior from **`Input`**.
+
+**Impact:**
+
+- Any **`TextField`** or **`TextFieldSearch`** usage that spread or passed **`TextInput`** props on the root must move those keys into **`inputProps`**, except for the props **`TextField`** owns (**`value`**, **`onChangeText`**, **`placeholder`**, **`isReadOnly`**, **`onFocus`**, **`onBlur`**, **`isDisabled`**, **`autoFocus`**, **`isError`**, accessories, **`inputElement`**, **`inputRef`**, **`testID`**, **`style`**, **`twClassName`**) and valid **`BoxProps`** / **`View`** props you pass at the top level.
+- Call sites that passed **`Pressable`**-only props (**`hitSlop`**, root **`onPress`**, root **`disabled`**) must be updated: the root is no longer a **`Pressable`**.
+- Type-only consumers can extend or intersect **`TextFieldProps`** from **`@metamask/design-system-react-native`** for typed wrappers or form helpers. Derive the inner input prop bag with **`TextFieldProps['inputProps']`** when needed.
+
+#### Input: theme `placeholderTextColor` always wins
+
+**What changed:**
+
+**`Input`** used to pass **`placeholderTextColor`** on the native **`TextInput`** **before** **`{...props}`**, so a **`placeholderTextColor`** included in **`props`** could override the theme-derived color. **`Input`** now passes **`placeholderTextColor`** **after** **`{...props}`**, so the **theme token for placeholder text is always applied** and **is not overridden** by caller props.
+
+**Impact:**
+
+- Passing **`placeholderTextColor`** on **`Input`** has **no effect** on the rendered placeholder tint; remove dead props if you had any.
+- **`TextField`** already omits **`placeholderTextColor`** from its public API and forwards inner **`Input`** behavior only.
 
 ### From version 0.18.0 to 0.19.0
 
@@ -99,13 +225,39 @@ If TypeScript now flags props you were previously passing to `Icon`, those props
 </View>
 ```
 
+#### Box: Enum exports now use const objects and string unions
+
+`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, and `BoxBorderWidth` now use const-object + string-union types instead of enums.
+
+```tsx
+// Before (0.18.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
+
+// After (0.19.0)
+import { BoxBackgroundColor } from '@metamask/design-system-react-native';
+```
+
+#### Box: Removed stale `-alternative` color tokens
+
+The following `BoxBackgroundColor` and `BoxBorderColor` entries have been removed. These tokens were removed from `@metamask/design-tokens` in v4.0.0 but were incorrectly carried over into the Box const objects:
+
+| Removed Entry                           | Replacement                         |
+| --------------------------------------- | ----------------------------------- |
+| `BoxBackgroundColor.WarningAlternative` | `BoxBackgroundColor.WarningDefault` |
+| `BoxBackgroundColor.SuccessAlternative` | `BoxBackgroundColor.SuccessDefault` |
+| `BoxBorderColor.WarningAlternative`     | `BoxBorderColor.WarningDefault`     |
+| `BoxBorderColor.SuccessAlternative`     | `BoxBorderColor.SuccessDefault`     |
+| `BoxBorderColor.InfoAlternative`        | `BoxBorderColor.InfoDefault`        |
+
+These tokens had no backing CSS custom property, so any usage was already producing no visible style. Replace with `-default` or `-muted` as appropriate.
+
 ---
 
 ### From version 0.16.0 to 0.17.0
 
-#### Text: Typography const values moved to `@metamask/design-system-shared`
+#### Text: Typography enum exports now use const objects and string unions
 
-`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` are now defined in `@metamask/design-system-shared` and re-exported from `@metamask/design-system-react-native`. All existing import paths through `@metamask/design-system-react-native` continue to work without change.
+`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`, and `TextColor` now follow the ADR-0003 const-object + string-union pattern instead of enums.
 
 #### `FontWeight` values changed
 
@@ -218,7 +370,7 @@ import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
 
 - `KeyValueRow` no longer accepts `field` and `value` configuration objects. Use flat props: `keyLabel`, `value`, optional `variant`, start/end accessories, optional `keyTextProps` / `valueTextProps`, and optional `keyEndButtonIconProps` / `valueEndButtonIconProps`.
 - Layout is handled inside the component (`BoxRow` / `Box`). The old stub API used to compose custom rows is removed.
-- `KeyValueRowVariant` is defined in `@metamask/design-system-shared` (shared props follow ADR-0003 / ADR-0004); React Native–specific props remain on `KeyValueRowProps` in this package.
+- `KeyValueRowVariant` now follows the ADR-0003 / ADR-0004 const-object + string-union pattern; React Native–specific props remain on `KeyValueRowProps` in this package.
 
 **Removed from the public API:**
 
@@ -358,7 +510,7 @@ Custom React nodes for key or value remain supported:
 
 **Instructions for downstream consumers:**
 
-- In **MetaMask Mobile**, **MetaMask extension**, and any shared packages, search for `KeyValueRow` and migrate every usage away from `field` / `value` objects to the new props.
+- In **MetaMask Mobile**, **MetaMask extension**, and any other packages that consume `KeyValueRow`, search for usages and migrate every callsite away from `field` / `value` objects to the new props.
 - Remove imports of deleted symbols (`KeyValueRowStubs`, `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes`, and the removed types).
 - If your app defines **KeyValueColumn** or another wrapper that forwards the old `KeyValueRow` props, update that component’s API and all call sites to match the new shape.
 
@@ -1894,6 +2046,122 @@ The mobile and design-system Text components both extend `react-native` `TextPro
 - `fontStyle` - normal or italic text style
 - `twClassName` - Tailwind utility classes merged with component defaults
 
+### Label Component
+
+Label is a thin wrapper around `Text` that defaults the variant to `BodyMd` and is intended to describe form fields. Because it forwards every prop to `Text`, the [Text Component breaking changes](#text-component) (variant casing, font-weight separation, color renames) all apply to `Label` as well.
+
+#### Breaking Changes
+
+##### Import path
+
+The component is now published from the design system package; remove the relative import from `app/component-library/components/Form/Label`.
+
+| Mobile (Before)                                                                         | Design System (After)                                                     |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `import Label from 'app/component-library/components/Form/Label';`                      | `import { Label } from '@metamask/design-system-react-native';`           |
+| `import { LabelProps } from 'app/component-library/components/Form/Label/Label.types';` | `import type { LabelProps } from '@metamask/design-system-react-native';` |
+
+The mobile package exported `Label` as the **default** export. The design system package exports it as a **named** export.
+
+##### `testID` no longer defaults to `"label"`
+
+The mobile `Label` automatically applied `testID="label"` (`LABEL_TEST_ID`). The design system `Label` does **not** set a default `testID` — pass it explicitly when a stable test selector is required.
+
+```tsx
+// Before (Mobile) — implicit testID="label"
+<Label>Email Address</Label>
+
+// After (Design System) — pass testID explicitly
+<Label testID="label">Email Address</Label>
+```
+
+If you previously relied on `LABEL_TEST_ID` from `Label.constants`, replace that import with a string literal local to your test or component, since the constant is not re-exported from the design system.
+
+##### Removed mobile-only constants
+
+The following exports from `Label.constants.ts` are not part of the design system API:
+
+| Mobile Export                | Replacement                                                                 |
+| ---------------------------- | --------------------------------------------------------------------------- |
+| `DEFAULT_LABEL_TEXT_VARIANT` | Inline `TextVariant.BodyMd` (default behavior of `Label`).                  |
+| `LABEL_TEST_ID`              | Pass `testID` explicitly (see above).                                       |
+| `SAMPLE_LABEL_TEXT`          | Test fixture only — colocate any equivalent string with your tests/stories. |
+
+##### Variant, color, and font-weight props
+
+All `TextVariant`, `TextColor`, and font-weight changes from the [Text Component](#text-component) section apply directly. The most common mobile usage:
+
+| Mobile                                              | Design System                                                                |
+| --------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `<Label>Email</Label>`                              | `<Label>Email</Label>` _(default `BodyMd` is unchanged in behavior)_         |
+| `<Label variant={TextVariant.BodySM}>…</Label>`     | `<Label variant={TextVariant.BodySm}>…</Label>`                              |
+| `<Label variant={TextVariant.BodyMDBold}>…</Label>` | `<Label variant={TextVariant.BodyMd} fontWeight={FontWeight.Bold}>…</Label>` |
+| `<Label color={TextColor.Error}>…</Label>`          | `<Label color={TextColor.ErrorDefault}>…</Label>`                            |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import React from 'react';
+import Label from '../../../component-library/components/Form/Label';
+import {
+  TextVariant,
+  TextColor,
+} from '../../../component-library/components/Texts/Text';
+
+<Label>Email Address</Label>
+
+<Label variant={TextVariant.BodySM} color={TextColor.Muted}>
+  Optional
+</Label>
+
+<Label variant={TextVariant.BodyMDBold} color={TextColor.Error}>
+  Required field
+</Label>
+```
+
+##### After (Design System)
+
+```tsx
+import React from 'react';
+import {
+  Label,
+  TextVariant,
+  TextColor,
+  FontWeight,
+} from '@metamask/design-system-react-native';
+
+<Label>Email Address</Label>
+
+<Label variant={TextVariant.BodySm} color={TextColor.TextMuted}>
+  Optional
+</Label>
+
+<Label
+  variant={TextVariant.BodyMd}
+  fontWeight={FontWeight.Bold}
+  color={TextColor.ErrorDefault}
+>
+  Required field
+</Label>
+```
+
+#### API Differences
+
+`LabelProps` now equals `TextProps`, which on the design system side adds the following props on top of React Native's `TextProps` (none of these existed on the mobile `Label`):
+
+- `fontWeight` — separate weight control instead of weight-specific variants
+- `fontFamily` — select default/accent/hero fonts
+- `fontStyle` — normal or italic text style
+- `twClassName` — Tailwind utility classes merged with component defaults
+
+Behavior preserved across both implementations:
+
+- Defaults the rendered variant to body-medium (`BodyMD` → `BodyMd`).
+- Forwards every prop to the underlying `Text` (and therefore to React Native's `Text`).
+- Accepts string or `ReactNode` children.
+
 ### Icon Component
 
 The Icon component has some API and enum changes when migrating from the mobile component-library.
@@ -2106,7 +2374,7 @@ These props work identically in both versions — no migration needed:
 | `onBlur`             | `(e) => void`            | Blur handler (skipped when disabled)      |
 | `isError`            | `boolean`                | Error border state                        |
 | `isDisabled`         | `boolean`                | Disabled state (opacity + no interaction) |
-| `isReadonly`         | `boolean`                | Read-only state                           |
+| `isReadOnly`         | `boolean`                | Read-only state                           |
 | `autoFocus`          | `boolean`                | Auto-focus on mount                       |
 | `startAccessory`     | `ReactNode`              | Content before the input                  |
 | `endAccessory`       | `ReactNode`              | Content after the input                   |
@@ -2458,6 +2726,130 @@ The following mobile `component-library` sub-components build on `ListItem` but 
 - The mobile version uses a default export; MMDS uses a named export.
 - `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.
 
+### TabEmptyState Component
+
+`TabEmptyState` was previously incubated inside `metamask-mobile` at `app/component-library/components-temp/TabEmptyState` as a thin wrapper around `Box` / `Text` / `Button` from `@metamask/design-system-react-native`. It has graduated to the design system in `0.11.0` and the `components-temp` copy is now marked `@deprecated`. The public API (`icon`, `description`, `descriptionProps`, `actionButtonText`, `actionButtonProps`, `onAction`, `children`, `twClassName`, `style`) is preserved — the migration is essentially an import-path change.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                                  | Design System Migration                                                          |
+| ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `import { TabEmptyState } from '.../component-library/components-temp/TabEmptyState'`           | `import { TabEmptyState } from '@metamask/design-system-react-native'`           |
+| `import type { TabEmptyStateProps } from '.../component-library/components-temp/TabEmptyState'` | `import type { TabEmptyStateProps } from '@metamask/design-system-react-native'` |
+
+##### Root Props Narrowed from `BoxProps` to `ViewProps`
+
+The mobile `TabEmptyStateProps` extended `Omit<BoxProps, 'children'>`, so design-system `Box` props (`backgroundColor`, `flexDirection`, `alignItems`, `gap`, `padding`/`margin` shorthands, etc.) could be passed at the root. The design-system version intersects `ViewProps` only — standard React Native `View` props (`style`, `testID`, `accessibilityLabel`, …) are accepted, but `Box`-specific props are not.
+
+| Concern                                                                             | Mobile                       | Design System                                       |
+| ----------------------------------------------------------------------------------- | ---------------------------- | --------------------------------------------------- |
+| Root type extension                                                                 | `Omit<BoxProps, 'children'>` | `ViewProps`                                         |
+| Root accepts `Box` shorthands at top level (`backgroundColor`, `gap`, `padding`, …) | ✅                           | ❌ — move these to `twClassName` or a wrapper `Box` |
+| Root accepts `ViewProps` (`style`, `testID`, …)                                     | ✅                           | ✅                                                  |
+
+Current `metamask-mobile` call sites only pass `testID`, `style`, `twClassName`, `children`, and the explicit slot props — none of them pass `Box` shorthands at the root — so this narrowing is a no-op for every known consumer. If you were relying on root `Box` props, move them to `twClassName` or wrap the component in a `<Box>`.
+
+#### Migration Examples
+
+##### Basic usage
+
+Before (Mobile):
+
+```tsx
+import { TabEmptyState } from '../../../component-library/components-temp/TabEmptyState';
+import { strings } from '../../../../locales/i18n';
+
+<TabEmptyState description={strings('wallet.no_transactions')} />;
+```
+
+After (Design System):
+
+```tsx
+import { TabEmptyState } from '@metamask/design-system-react-native';
+import { strings } from '../../../../locales/i18n';
+
+<TabEmptyState description={strings('wallet.no_transactions')} />;
+```
+
+##### With action button and custom children
+
+Before (Mobile):
+
+```tsx
+import {
+  TabEmptyState,
+  type TabEmptyStateProps,
+} from '../../../component-library/components-temp/TabEmptyState';
+import {
+  Text,
+  TextVariant,
+  TextColor,
+} from '@metamask/design-system-react-native';
+
+<TabEmptyState
+  testID="bridge-token-selector-empty-state"
+  icon={<NoSearchResultsIcon width={72} height={78} />}
+  description={strings('bridge.no_tokens_found')}
+  descriptionProps={{
+    variant: TextVariant.HeadingMd,
+    color: TextColor.TextDefault,
+    twClassName: 'text-center',
+  }}
+  style={styles.emptyStateContainer}
+  twClassName="self-center"
+>
+  <Text
+    variant={TextVariant.BodyMd}
+    color={TextColor.TextAlternative}
+    twClassName="text-center -mt-1"
+  >
+    {strings('bridge.no_tokens_found_description')}
+  </Text>
+</TabEmptyState>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  TabEmptyState,
+  type TabEmptyStateProps,
+  Text,
+  TextVariant,
+  TextColor,
+} from '@metamask/design-system-react-native';
+
+<TabEmptyState
+  testID="bridge-token-selector-empty-state"
+  icon={<NoSearchResultsIcon width={72} height={78} />}
+  description={strings('bridge.no_tokens_found')}
+  descriptionProps={{
+    variant: TextVariant.HeadingMd,
+    color: TextColor.TextDefault,
+    twClassName: 'text-center',
+  }}
+  style={styles.emptyStateContainer}
+  twClassName="self-center"
+>
+  <Text
+    variant={TextVariant.BodyMd}
+    color={TextColor.TextAlternative}
+    twClassName="text-center -mt-1"
+  >
+    {strings('bridge.no_tokens_found_description')}
+  </Text>
+</TabEmptyState>;
+```
+
+Only the import specifier changes.
+
+#### API Differences Summary
+
+- Root prop type narrows from `Omit<BoxProps, 'children'>` to `ViewProps`. Move any root-level `Box` shorthands to `twClassName` or a wrapper `<Box>`.
+- All other props (`icon`, `description`, `descriptionProps`, `actionButtonText`, `actionButtonProps`, `onAction`, `children`, `twClassName`, `style`, `ViewProps`) are unchanged.
+
 ## Version Updates
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react-native`.
@@ -2472,8 +2864,8 @@ This section covers version-to-version breaking changes within `@metamask/design
 
 ### BadgeWrapper types now use const-object + union definitions
 
-- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, which produce string union types rather than TypeScript enums (ADR-0003/ADR-0004). The shared package defines the canonical values and the platform entry points keep re-exporting those names so React Native consumers use the same import paths they already rely on.
-- The switch lets React, React Native, and shared code stay aligned on the string-literal surface without duplicating runtime enums; no import-path change is required.
+- `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now come from const objects annotated `as const`, which produce string union types rather than TypeScript enums (ADR-0003/ADR-0004).
+- The exported names and import paths stay the same, so no import-path change is required.
 
 ## From version 0.11.0 to 0.12.0
 
