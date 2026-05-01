@@ -19,6 +19,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
   - [ModalOverlay Component](#modaloverlay-component)
+  - [Skeleton Component](#skeleton-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -1454,6 +1455,116 @@ For typical call sites — for example `ui/components/multichain/network-list-me
 
 - `ModalOverlay` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - One-off styling that previously used Box utility props (e.g. `backgroundColor={BackgroundColor.overlayAlternative}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="bg-overlay-alternative"`).
+
+### Skeleton Component
+
+The extension `skeleton` component maps to `Skeleton` in the design system. The visual contract — a pulsing placeholder with `bg-icon-alternative` opacity-cycling at 1400ms — is preserved, but the public API is realigned with the React Native `Skeleton` (`@metamask/design-system-react-native`):
+
+- The toggle prop is renamed and **inverted** (`isLoading` → `hideChildren`).
+- A new `autoPlay` prop lets consumers freeze the animation.
+- The polymorphic Box surface and the `mm-skeleton` SCSS class hook are removed.
+- The pulse animation moves from a component-local SCSS keyframe to a `motion-safe:animate-skeleton-pulse` Tailwind utility added to `@metamask/design-system-tailwind-preset` in this migration.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                              | Design System Migration                                              |
+| -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `import { Skeleton } from '../../component-library'`           | `import { Skeleton } from '@metamask/design-system-react'`           |
+| `import type { SkeletonProps } from '../../component-library'` | `import type { SkeletonProps } from '@metamask/design-system-react'` |
+
+##### Toggle Prop: `isLoading` → `hideChildren` (semantics inverted)
+
+This is the headline breaking change. The legacy `isLoading` prop (defaulting to `true`) is replaced by `hideChildren` (defaulting to `false`) — the meaning is **inverted**. This aligns the web Skeleton with the React Native `Skeleton`'s API.
+
+| Extension                               | Design System                    | Behavior                                                                                                         |
+| --------------------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `<Skeleton>` (default `isLoading=true`) | `<Skeleton hideChildren>`        | Standalone placeholder. Animated bar fills the container. Children, if any, render invisibly to preserve layout. |
+| `<Skeleton isLoading={true}>{x}</…>`    | `<Skeleton hideChildren>{x}</…>` | Skeleton overlay; `x` invisible (preserves layout dimensions).                                                   |
+| `<Skeleton isLoading={false}>{x}</…>`   | `<Skeleton>{x}</…>` (default)    | `x` renders directly; no skeleton overlay, no animation.                                                         |
+| `<Skeleton width={100} />`              | `<Skeleton width={100} />`       | Standalone placeholder; unchanged.                                                                               |
+
+The mechanical translation is `isLoading={x}` ⇒ `hideChildren={x}`. The default-prop behavior also flips: a bare `<Skeleton>{x}</Skeleton>` used to render the skeleton; in MMDS it renders `x` directly.
+
+##### Props and Behavior Mapping
+
+| Extension API                                                | Design System API                          | Change Type        | Notes                                                                                                                                                                                                                                |
+| ------------------------------------------------------------ | ------------------------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `isLoading?: boolean` (default `true`)                       | `hideChildren?: boolean` (default `false`) | renamed + inverted | toggle now matches the React Native `Skeleton` API; mechanical translation is `isLoading={x}` ⇒ `hideChildren={x}`.                                                                                                                  |
+| `height?: number \| string`                                  | `height?: number \| string`                | unchanged          | applied as inline style.                                                                                                                                                                                                             |
+| `width?: number \| string`                                   | `width?: number \| string`                 | unchanged          | applied as inline style.                                                                                                                                                                                                             |
+| `children?: ReactNode`                                       | `children?: ReactNode`                     | unchanged          | rendered directly when `hideChildren=false`; rendered invisibly inside the container when `hideChildren=true`.                                                                                                                       |
+| `className?: string`                                         | `className?: string`                       | unchanged          | applied to the container; merged with the component's defaults via `twMerge`.                                                                                                                                                        |
+| —                                                            | `autoPlay?: boolean` (default `true`)      | added              | when `false`, the pulse animation is omitted (useful for screenshots, golden-path tests, or static placeholders). Mirrors the RN `Skeleton` API.                                                                                     |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` | removed                                    | removed            | always renders `<div>`. If you need a different element, wrap or compose.                                                                                                                                                            |
+| Box style-utility props on the root (`marginBottom`, …)      | removed from public API                    | removed            | use `className` with Tailwind utilities (e.g. `className="mb-4"`) for layout overrides.                                                                                                                                              |
+| `mm-skeleton` SCSS class hook                                | removed                                    | removed            | the pulse animation moved into the `motion-safe:animate-skeleton-pulse` Tailwind utility on the inner overlay (added to `@metamask/design-system-tailwind-preset` in this migration). Reduced-motion users see a static placeholder. |
+| `* { visibility: hidden }` SCSS rule on descendants          | replaced with structural invisibility      | replaced           | when `hideChildren=true`, children render inside an `aria-hidden` wrapper with `invisible pointer-events-none`. No global descendant rule.                                                                                           |
+
+##### Default and Behavior Changes
+
+| Concern           | Extension Behavior                                                               | Design System Behavior                                                                                                         |
+| ----------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Default state     | `isLoading=true` — wrapping `<Skeleton>{x}</…>` defaults to showing the skeleton | `hideChildren=false` — wrapping `<Skeleton>{x}</…>` defaults to showing the children directly (no skeleton overlay)            |
+| Animation         | always-on, opacity 0.2 → 0.1 → 0.2 cycle every 1400ms                            | same cycle, gated by `motion-safe:` (reduced-motion users get a static placeholder); can be disabled via `autoPlay={false}`    |
+| Container element | polymorphic Box (`<div>` by default; can render any element via `as`)            | always `<div>`                                                                                                                 |
+| ARIA              | none                                                                             | container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Skeleton } from '../../component-library';
+
+// Default behavior: skeleton showing
+<Skeleton>{maybeContent}</Skeleton>
+
+// State-driven toggle
+<Skeleton isLoading={isLoading}>{content}</Skeleton>
+
+// Standalone placeholder
+<Skeleton width="100px" height="16px" />
+
+// Inverted: render content with no skeleton overlay
+<Skeleton isLoading={false}>{content}</Skeleton>
+```
+
+##### After (Design System)
+
+```tsx
+import { Skeleton } from '@metamask/design-system-react';
+
+// To preserve "show skeleton with hidden children" behavior, set hideChildren
+<Skeleton hideChildren>{maybeContent}</Skeleton>
+
+// State-driven toggle (mechanical translation)
+<Skeleton hideChildren={isLoading}>{content}</Skeleton>
+
+// Standalone placeholder — unchanged
+<Skeleton width="100px" height="16px" />
+
+// Default in MMDS: children render directly (replaces isLoading={false})
+<Skeleton>{content}</Skeleton>
+```
+
+For typical call sites — for example `ui/components/ui/aggregated-balance/aggregated-balance.tsx` (state-driven `isLoading={...}`), `ui/components/app/wallet-overview/coin-overview.tsx` (state-driven `isLoading={...}` with Box utility props), and `ui/components/app/rewards/RewardsPointsBalance.tsx` (standalone `<Skeleton width="100px" />`) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Rename `isLoading` → `hideChildren`. The boolean expression is mechanically the same (e.g. `isLoading={!data}` ⇒ `hideChildren={!data}`).
+3. For any bare `<Skeleton>{x}</Skeleton>` that relied on the legacy default `isLoading=true`, add `hideChildren` explicitly. (Bare standalone `<Skeleton width=… />` without children does not need to change.)
+4. Move any root-level Box utility props (`marginBottom`, etc.) onto `className`.
+
+Codemod-friendly: every `isLoading=` token in the extension's existing call sites maps 1:1 to `hideChildren=`.
+
+#### API Differences
+
+- `Skeleton` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- The new `autoPlay?: boolean` (default `true`) lets consumers freeze the animation — useful for screenshot tests and reduced-motion fallbacks.
+- The container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` by default. The skeleton takes no part in the accessibility tree.
 
 ## Version Updates
 
