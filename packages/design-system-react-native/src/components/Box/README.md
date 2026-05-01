@@ -64,26 +64,26 @@ Border radius of the box.
 
 ### `padding`
 
-Padding inside the box.
+Padding inside the box. Uses the shared spacing scale (`0`–`12` → 0px–48px).
 
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `number` | No       | `0`     |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `BoxSpacing` | No       | `undefined` |
 
 ```tsx
-<Box padding={16}>Box with padding</Box>
+<Box padding={4}>Box with padding</Box>
 ```
 
 ### `margin`
 
-Margin outside the box.
+Margin outside the box. Uses the shared spacing scale (`0`–`12` → 0px–48px).
 
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `number` | No       | `0`     |
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `BoxSpacing` | No       | `undefined` |
 
 ```tsx
-<Box margin={16}>Box with margin</Box>
+<Box margin={4}>Box with margin</Box>
 ```
 
 ### `twClassName`
@@ -131,6 +131,10 @@ export const StyleExample = () => (
   <Box style={styles.custom}>Custom styled box</Box>
 );
 ```
+
+## Migration from Mobile Component Library
+
+For detailed migration instructions from the MetaMask Mobile Box (`app/components/UI/Box` and related typings), see the [Migration Guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#box-component).
 
 ## References
 
