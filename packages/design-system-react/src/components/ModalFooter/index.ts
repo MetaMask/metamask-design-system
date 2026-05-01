@@ -1,2 +1,6 @@
 export { ModalFooter } from './ModalFooter';
-export type { ModalFooterProps } from './ModalFooter.types';
+export { ButtonsAlignment } from './ModalFooter.types';
+export type {
+  ModalFooterButtonProps,
+  ModalFooterProps,
+} from './ModalFooter.types';

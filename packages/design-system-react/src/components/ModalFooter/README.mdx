@@ -4,16 +4,16 @@ import * as ModalFooterStories from './ModalFooter.stories';
 
 # ModalFooter
 
-`ModalFooter` is the bottom section of a modal. It hosts the primary submit/cancel button row and provides a slot above it for inline form controls (e.g. a "do not show again" checkbox). Pass `onSubmit` / `onCancel` to render the built-in buttons; omit them and provide `children` if you need a fully custom footer.
+`ModalFooter` is the bottom section of a modal. It hosts up to two action buttons — primary and secondary — and an optional slot above them for inline form controls (a "do not show again" checkbox, a disclaimer, etc.).
+
+The component owns the button semantics: it renders the primary button with `ButtonVariant.Primary` and the secondary button with `ButtonVariant.Secondary` automatically. Consumers configure each via `primaryButtonProps` / `secondaryButtonProps`, but cannot override the variant. This mirrors the React Native `BottomSheetFooter` so the modal/sheet families share semantics across platforms.
 
 ```tsx
 import { ModalFooter } from '@metamask/design-system-react';
 
 <ModalFooter
-  onSubmit={handleSubmit}
-  submitButtonProps={{ children: t('confirm') }}
-  onCancel={handleClose}
-  cancelButtonProps={{ children: t('cancel') }}
+  primaryButtonProps={{ children: t('confirm'), onClick: handleSubmit }}
+  secondaryButtonProps={{ children: t('cancel'), onClick: handleClose }}
 />;
 ```
 
@@ -21,36 +21,11 @@ import { ModalFooter } from '@metamask/design-system-react';
 
 ## Props
 
-### `onSubmit`
+### `primaryButtonProps`
 
-Click handler for the submit button. When provided, a primary `Button` is rendered.
+Props for the primary action button. Renders with `ButtonVariant.Primary` automatically. Appears second (right in horizontal layout, bottom in vertical layout).
 
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>() =&gt; void</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<Canvas of={ModalFooterStories.OnSubmit} />
-
-### `onCancel`
-
-Click handler for the cancel button. When provided, a secondary `Button` is rendered before the submit button.
+Pass the localized label as `children` and wire the click handler via `onClick`. `ModalFooter` is i18n-agnostic — pass localized strings from your application's i18n layer (e.g. `t('confirm')`).
 
 <table>
   <thead>
@@ -63,7 +38,7 @@ Click handler for the cancel button. When provided, a secondary `Button` is rend
   <tbody>
     <tr>
       <td align="left">
-        <code>() =&gt; void</code>
+        <code>Omit&lt;ButtonProps, 'variant'&gt;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -73,24 +48,11 @@ Click handler for the cancel button. When provided, a secondary `Button` is rend
   </tbody>
 </table>
 
-<Canvas of={ModalFooterStories.OnCancel} />
+<Canvas of={ModalFooterStories.PrimaryOnly} />
 
-### `submitButtonProps` / `cancelButtonProps`
+### `secondaryButtonProps`
 
-Props forwarded to the underlying submit / cancel `Button`. Use `children` for the (localized) label and any other prop to customize variant, danger styling, icons, etc.
-
-`ModalFooter` is i18n-agnostic — the design system intentionally does not pull strings from a translation context. Pass localized strings from your application's i18n layer:
-
-```tsx
-<ModalFooter
-  onSubmit={handleSubmit}
-  submitButtonProps={{ children: t('confirm') }}
-  onCancel={handleClose}
-  cancelButtonProps={{ children: t('cancel') }}
-/>
-```
-
-When `children` is omitted the component falls back to the literal `'Confirm'` / `'Cancel'` so prototypes and Storybook render correctly without an i18n setup.
+Props for the secondary action button. Renders with `ButtonVariant.Secondary` automatically. Appears first (left in horizontal layout, top in vertical layout).
 
 <table>
   <thead>
@@ -103,7 +65,7 @@ When `children` is omitted the component falls back to the literal `'Confirm'` /
   <tbody>
     <tr>
       <td align="left">
-        <code>Partial&lt;ButtonProps&gt;</code>
+        <code>Omit&lt;ButtonProps, 'variant'&gt;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -113,11 +75,14 @@ When `children` is omitted the component falls back to the literal `'Confirm'` /
   </tbody>
 </table>
 
-<Canvas of={ModalFooterStories.SubmitButtonPropsCancelButtonProps} />
+<Canvas of={ModalFooterStories.SecondaryOnly} />
 
-### `containerProps`
+### `buttonsAlignment`
 
-Props passed to the inner `Box` that wraps the submit/cancel buttons. Use this to override the default 360px max-width, change the background, or apply any other Box utility. The default `max-w-[360px]` is applied via className and is overridden when `containerProps.className` provides its own `max-w-*` utility (`twMerge` lets the consumer's class win).
+Layout direction for the action button row.
+
+- `ButtonsAlignment.Horizontal` (default) — buttons share the row, each takes `flex-1`. Order: secondary, primary.
+- `ButtonsAlignment.Vertical` — buttons stack with full width. Order: secondary on top, primary on bottom.
 
 <table>
   <thead>
@@ -130,21 +95,23 @@ Props passed to the inner `Box` that wraps the submit/cancel buttons. Use this t
   <tbody>
     <tr>
       <td align="left">
-        <code>Omit&lt;BoxProps, 'children'&gt;</code>
+        <code>ButtonsAlignment</code>
       </td>
       <td align="left">No</td>
       <td align="left">
-        <code>undefined</code>
+        <code>ButtonsAlignment.Horizontal</code>
       </td>
     </tr>
   </tbody>
 </table>
 
-<Canvas of={ModalFooterStories.ContainerProps} />
+<Canvas of={ModalFooterStories.HorizontalAlignment} />
+
+<Canvas of={ModalFooterStories.VerticalAlignment} />
 
 ### `children`
 
-Optional custom content rendered above the built-in submit/cancel button row. Use this for inline form controls (checkboxes, disclaimers) or to fully replace the built-in button row by omitting `onSubmit` / `onCancel`.
+Optional custom content rendered above the action button row. Use this for inline form controls (checkboxes, disclaimers) or to fully replace the button row by omitting both `primaryButtonProps` and `secondaryButtonProps`.
 
 <table>
   <thead>

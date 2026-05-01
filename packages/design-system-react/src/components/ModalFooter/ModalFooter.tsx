@@ -2,69 +2,65 @@ import { ButtonSize, ButtonVariant } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Box, BoxAlignItems, BoxFlexWrap } from '../Box';
+import { Box, BoxFlexDirection } from '../Box';
 import { Button } from '../Button';
 
+import { ButtonsAlignment } from './ModalFooter.types';
 import type { ModalFooterProps } from './ModalFooter.types';
-
-const FOOTER_BUTTON_CLASSNAME = 'flex-[1_0_auto]';
 
 export const ModalFooter = forwardRef<HTMLElement, ModalFooterProps>(
   (
     {
       className,
       children,
-      onSubmit,
-      submitButtonProps,
-      onCancel,
-      cancelButtonProps,
-      containerProps,
+      buttonsAlignment = ButtonsAlignment.Horizontal,
+      primaryButtonProps,
+      secondaryButtonProps,
       ...props
     },
     ref,
-  ) => (
-    <footer ref={ref} className={twMerge('px-4 pt-4', className)} {...props}>
-      {children}
-      <Box
-        flexWrap={BoxFlexWrap.Wrap}
-        alignItems={BoxAlignItems.Center}
-        gap={4}
-        {...containerProps}
-        className={twMerge(
-          'mx-auto flex max-w-[360px]',
-          containerProps?.className,
-        )}
-      >
-        {onCancel && (
-          <Button
-            size={ButtonSize.Lg}
-            variant={ButtonVariant.Secondary}
-            onClick={onCancel}
-            {...cancelButtonProps}
-            className={twMerge(
-              FOOTER_BUTTON_CLASSNAME,
-              cancelButtonProps?.className,
-            )}
+  ) => {
+    const isHorizontal = buttonsAlignment === ButtonsAlignment.Horizontal;
+    const buttonClassName = isHorizontal ? 'flex-1' : 'w-full';
+    const hasButtons = Boolean(primaryButtonProps || secondaryButtonProps);
+
+    return (
+      <footer ref={ref} className={twMerge('px-4 pt-4', className)} {...props}>
+        {children}
+        {hasButtons && (
+          <Box
+            flexDirection={
+              isHorizontal ? BoxFlexDirection.Row : BoxFlexDirection.Column
+            }
+            gap={4}
           >
-            {cancelButtonProps?.children ?? 'Cancel'}
-          </Button>
-        )}
-        {onSubmit && (
-          <Button
-            size={ButtonSize.Lg}
-            onClick={onSubmit}
-            {...submitButtonProps}
-            className={twMerge(
-              FOOTER_BUTTON_CLASSNAME,
-              submitButtonProps?.className,
+            {secondaryButtonProps && (
+              <Button
+                size={ButtonSize.Lg}
+                {...secondaryButtonProps}
+                variant={ButtonVariant.Secondary}
+                className={twMerge(
+                  buttonClassName,
+                  secondaryButtonProps.className,
+                )}
+              />
             )}
-          >
-            {submitButtonProps?.children ?? 'Confirm'}
-          </Button>
+            {primaryButtonProps && (
+              <Button
+                size={ButtonSize.Lg}
+                {...primaryButtonProps}
+                variant={ButtonVariant.Primary}
+                className={twMerge(
+                  buttonClassName,
+                  primaryButtonProps.className,
+                )}
+              />
+            )}
+          </Box>
         )}
-      </Box>
-    </footer>
-  ),
+      </footer>
+    );
+  },
 );
 
 ModalFooter.displayName = 'ModalFooter';

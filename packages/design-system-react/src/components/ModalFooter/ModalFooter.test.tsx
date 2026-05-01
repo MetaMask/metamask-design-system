@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { ModalFooter } from './ModalFooter';
+import { ButtonsAlignment } from './ModalFooter.types';
 
 describe('ModalFooter', () => {
   it('renders without crashing', () => {
@@ -25,78 +26,113 @@ describe('ModalFooter', () => {
     expect(screen.getByTestId('child')).toBeInTheDocument();
   });
 
-  it('does not render any button when neither onSubmit nor onCancel is provided', () => {
+  it('renders no button row when neither primary nor secondary props are provided', () => {
     render(<ModalFooter />);
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
-  it('renders the submit button with the default label and fires onSubmit when clicked', () => {
-    const onSubmit = jest.fn();
-    render(<ModalFooter onSubmit={onSubmit} />);
+  it('renders the primary button with the configured label and fires onClick', () => {
+    const onClick = jest.fn();
+    render(
+      <ModalFooter primaryButtonProps={{ children: 'Confirm', onClick }} />,
+    );
     const button = screen.getByRole('button', { name: 'Confirm' });
     fireEvent.click(button);
-    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it('renders the cancel button with the default label and fires onCancel when clicked', () => {
-    const onCancel = jest.fn();
-    render(<ModalFooter onCancel={onCancel} />);
+  it('renders the secondary button with the configured label and fires onClick', () => {
+    const onClick = jest.fn();
+    render(
+      <ModalFooter secondaryButtonProps={{ children: 'Cancel', onClick }} />,
+    );
     const button = screen.getByRole('button', { name: 'Cancel' });
     fireEvent.click(button);
-    expect(onCancel).toHaveBeenCalledTimes(1);
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it('uses submitButtonProps.children / cancelButtonProps.children as the button labels', () => {
+  it('renders secondary before primary in DOM order', () => {
     render(
       <ModalFooter
-        onSubmit={jest.fn()}
-        submitButtonProps={{ children: 'Approve' }}
-        onCancel={jest.fn()}
-        cancelButtonProps={{ children: 'Reject' }}
+        primaryButtonProps={{
+          children: 'Approve',
+          'data-testid': 'primary',
+        }}
+        secondaryButtonProps={{
+          children: 'Reject',
+          'data-testid': 'secondary',
+        }}
       />,
     );
-    expect(screen.getByRole('button', { name: 'Approve' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Reject' })).toBeInTheDocument();
+    const buttons = screen.getAllByRole('button');
+    expect(buttons[0]).toBe(screen.getByTestId('secondary'));
+    expect(buttons[1]).toBe(screen.getByTestId('primary'));
   });
 
-  it('forwards additional submitButtonProps and cancelButtonProps to the buttons', () => {
+  it('forwards arbitrary props (data-*) on each button', () => {
     render(
       <ModalFooter
-        onSubmit={jest.fn()}
-        submitButtonProps={{ 'data-testid': 'confirm-button' }}
-        onCancel={jest.fn()}
-        cancelButtonProps={{ 'data-testid': 'cancel-button' }}
+        primaryButtonProps={{
+          children: 'Confirm',
+          'data-testid': 'confirm-button',
+        }}
+        secondaryButtonProps={{
+          children: 'Cancel',
+          'data-testid': 'cancel-button',
+        }}
       />,
     );
     expect(screen.getByTestId('confirm-button')).toBeInTheDocument();
     expect(screen.getByTestId('cancel-button')).toBeInTheDocument();
   });
 
-  it('merges custom button className alongside the internal flex utility', () => {
+  it('uses Horizontal alignment by default — buttons get flex-1, container is flex-row', () => {
     render(
       <ModalFooter
-        onSubmit={jest.fn()}
-        submitButtonProps={{ className: 'opacity-50' }}
+        data-testid="modal-footer"
+        primaryButtonProps={{ children: 'Confirm', 'data-testid': 'primary' }}
+        secondaryButtonProps={{
+          children: 'Cancel',
+          'data-testid': 'secondary',
+        }}
       />,
     );
-    const submit = screen.getByRole('button', { name: 'Confirm' });
-    expect(submit).toHaveClass('flex-[1_0_auto]', 'opacity-50');
+    expect(screen.getByTestId('primary')).toHaveClass('flex-1');
+    expect(screen.getByTestId('secondary')).toHaveClass('flex-1');
+    // The button row container is the parent of the buttons.
+    const buttonRow = screen.getByTestId('primary').parentElement;
+    expect(buttonRow).toHaveClass('flex-row');
   });
 
-  it('forwards arbitrary props to the inner container Box', () => {
-    render(<ModalFooter containerProps={{ 'data-testid': 'container' }} />);
-    expect(screen.getByTestId('container')).toBeInTheDocument();
-  });
-
-  it('lets containerProps.className override the default max-width', () => {
+  it('switches to Vertical alignment — buttons get w-full, container is flex-col', () => {
     render(
       <ModalFooter
-        containerProps={{ 'data-testid': 'container', className: 'max-w-full' }}
+        buttonsAlignment={ButtonsAlignment.Vertical}
+        primaryButtonProps={{ children: 'Confirm', 'data-testid': 'primary' }}
+        secondaryButtonProps={{
+          children: 'Cancel',
+          'data-testid': 'secondary',
+        }}
       />,
     );
-    const container = screen.getByTestId('container');
-    expect(container).toHaveClass('max-w-full');
-    expect(container).not.toHaveClass('max-w-[360px]');
+    expect(screen.getByTestId('primary')).toHaveClass('w-full');
+    expect(screen.getByTestId('secondary')).toHaveClass('w-full');
+    const buttonRow = screen.getByTestId('primary').parentElement;
+    expect(buttonRow).toHaveClass('flex-col');
+  });
+
+  it('merges custom button className alongside the internal alignment utility', () => {
+    render(
+      <ModalFooter
+        primaryButtonProps={{
+          children: 'Confirm',
+          'data-testid': 'primary',
+          className: 'opacity-50',
+        }}
+      />,
+    );
+    const primary = screen.getByTestId('primary');
+    expect(primary).toHaveClass('flex-1', 'opacity-50');
   });
 
   it('merges custom className alongside default footer classes', () => {

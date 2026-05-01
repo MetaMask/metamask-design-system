@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
-import { Box, BoxBackgroundColor, BoxFlexDirection } from '../Box';
+import { Box, BoxFlexDirection } from '../Box';
 import { Checkbox } from '../Checkbox';
 
 import { ModalFooter } from './ModalFooter';
+import { ButtonsAlignment } from './ModalFooter.types';
 import type { ModalFooterProps } from './ModalFooter.types';
 import README from './README.mdx';
 
@@ -47,10 +48,12 @@ const meta: Meta<ModalFooterProps> = {
   ],
   argTypes: {
     className: { control: 'text' },
-    submitButtonProps: { control: 'object' },
-    cancelButtonProps: { control: 'object' },
-    onSubmit: { action: 'onSubmit' },
-    onCancel: { action: 'onCancel' },
+    buttonsAlignment: {
+      control: 'radio',
+      options: Object.values(ButtonsAlignment),
+    },
+    primaryButtonProps: { control: 'object' },
+    secondaryButtonProps: { control: 'object' },
   },
 };
 
@@ -60,77 +63,79 @@ type Story = StoryObj<ModalFooterProps>;
 
 export const Default: Story = {
   args: {
-    onSubmit: () => undefined,
-    onCancel: () => undefined,
+    primaryButtonProps: {
+      children: 'Confirm',
+      onClick: () => undefined,
+    },
+    secondaryButtonProps: {
+      children: 'Cancel',
+      onClick: () => undefined,
+    },
   },
 };
 
-export const OnSubmit: Story = {
+export const PrimaryOnly: Story = {
   args: {
-    onSubmit: () => undefined,
+    primaryButtonProps: {
+      children: 'Confirm',
+      onClick: () => undefined,
+    },
   },
 };
 
-export const OnCancel: Story = {
+export const SecondaryOnly: Story = {
   args: {
-    onCancel: () => undefined,
+    secondaryButtonProps: {
+      children: 'Cancel',
+      onClick: () => undefined,
+    },
   },
 };
 
-export const SubmitButtonPropsCancelButtonProps: Story = {
+export const HorizontalAlignment: Story = {
   args: {
-    onSubmit: () => undefined,
-    onCancel: () => undefined,
-    submitButtonProps: { children: 'I want to approve' },
-    cancelButtonProps: { children: 'Cancel this' },
+    buttonsAlignment: ButtonsAlignment.Horizontal,
+    primaryButtonProps: {
+      children: 'I want to approve',
+      onClick: () => undefined,
+    },
+    secondaryButtonProps: {
+      children: 'Cancel this',
+      onClick: () => undefined,
+    },
   },
 };
 
-export const ContainerProps: Story = {
+export const VerticalAlignment: Story = {
   args: {
-    onSubmit: () => undefined,
-    onCancel: () => undefined,
+    buttonsAlignment: ButtonsAlignment.Vertical,
+    primaryButtonProps: {
+      children: 'I want to approve',
+      onClick: () => undefined,
+    },
+    secondaryButtonProps: {
+      children: 'Cancel this',
+      onClick: () => undefined,
+    },
   },
-  render: (args) => (
-    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
-      <ModalFooter
-        {...args}
-        className="bg-primary-muted"
-        containerProps={{
-          backgroundColor: BoxBackgroundColor.ErrorMuted,
-          className: 'max-w-[480px]',
-        }}
-      />
-      <ModalFooter
-        {...args}
-        className="bg-primary-muted"
-        containerProps={{
-          backgroundColor: BoxBackgroundColor.ErrorMuted,
-          className: 'max-w-[720px]',
-        }}
-      />
-      <ModalFooter
-        {...args}
-        className="bg-primary-muted"
-        containerProps={{
-          backgroundColor: BoxBackgroundColor.ErrorMuted,
-          className: 'max-w-full',
-        }}
-      />
-    </Box>
-  ),
 };
 
 export const Children: Story = {
   args: {
-    onSubmit: () => undefined,
-    onCancel: () => undefined,
+    primaryButtonProps: {
+      children: 'Confirm',
+      onClick: () => undefined,
+    },
+    secondaryButtonProps: {
+      children: 'Cancel',
+      onClick: () => undefined,
+    },
   },
   render: (args) => {
     const [isSelected, setIsSelected] = useState(false);
     return (
       <ModalFooter {...args}>
-        <Box className="mx-auto mb-4 max-w-[360px]">
+        <Box flexDirection={BoxFlexDirection.Row} gap={2} className="mb-4">
           <Checkbox
             id="modal-footer-terms"
             label="I agree to the terms and conditions"

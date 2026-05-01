@@ -1,64 +1,67 @@
 import type { ComponentProps, ReactNode } from 'react';
 
-import type { BoxProps } from '../Box';
 import type { ButtonProps } from '../Button';
 
-type ButtonPropsWithDataAttrs = Partial<ButtonProps> & {
+/**
+ * Layout direction for the action button row.
+ *
+ * Mirrors `BottomSheetFooter`'s `ButtonsAlignment` on the React Native side so
+ * the modal/sheet families share semantics.
+ */
+export const ButtonsAlignment = {
+  Horizontal: 'horizontal',
+  Vertical: 'vertical',
+} as const;
+export type ButtonsAlignment =
+  (typeof ButtonsAlignment)[keyof typeof ButtonsAlignment];
+
+/**
+ * Button props accepted by `ModalFooter`. The `variant` is enforced internally
+ * by the component (Primary or Secondary, depending on slot), so consumers
+ * cannot override it. The `data-*` index signature is preserved so test ids
+ * and other dataset attributes can be passed through `Partial`/`Omit`
+ * indirection.
+ */
+export type ModalFooterButtonProps = Omit<ButtonProps, 'variant'> & {
   [key: `data-${string}`]: string | undefined;
 };
 
 export type ModalFooterProps = ComponentProps<'footer'> & {
   /**
-   * Optional custom content rendered above the built-in submit/cancel button row.
-   * Use this for inline form controls (e.g. a "do not show again" checkbox)
-   * or to fully replace the built-in button row by omitting `onSubmit` / `onCancel`.
+   * Optional custom content rendered above the action button row. Use this
+   * for inline form controls (e.g. a "do not show again" checkbox) or to
+   * fully replace the built-in button row by omitting both
+   * `primaryButtonProps` and `secondaryButtonProps`.
    */
   children?: ReactNode;
   /**
-   * Optional click handler for the submit button. When provided, a primary
-   * "submit" button is rendered.
-   */
-  onSubmit?: () => void;
-  /**
-   * Optional props passed to the submit `Button` (rendered when `onSubmit` is set).
+   * Optional layout direction for the action button row.
    *
-   * The button label is the `children` of this prop — `ModalFooter` is i18n-agnostic
-   * and intentionally does not pull strings from any translation context. Pass a
-   * localized string from your application's i18n layer:
+   * - `Horizontal` — buttons share the row, each takes `flex-1`.
+   * - `Vertical`   — buttons stack with full width.
    *
-   * ```tsx
-   * submitButtonProps={{ children: t('confirm') }}
-   * ```
+   * @default ButtonsAlignment.Horizontal
+   */
+  buttonsAlignment?: ButtonsAlignment;
+  /**
+   * Optional props for the primary action button. Renders with
+   * `ButtonVariant.Primary` automatically. Appears second (right in
+   * horizontal layout, bottom in vertical layout).
    *
-   * If `children` is omitted the component falls back to the literal `'Confirm'`
-   * so prototypes and Storybook render correctly without an i18n setup.
+   * Pass the localized label as `children`. Wire the click handler via
+   * `onClick`. `ModalFooter` is i18n-agnostic and intentionally does not pull
+   * strings from any translation context.
    */
-  submitButtonProps?: ButtonPropsWithDataAttrs;
+  primaryButtonProps?: ModalFooterButtonProps;
   /**
-   * Optional click handler for the cancel button. When provided, a secondary
-   * "cancel" button is rendered before the submit button.
+   * Optional props for the secondary action button. Renders with
+   * `ButtonVariant.Secondary` automatically. Appears first (left in
+   * horizontal layout, top in vertical layout).
    */
-  onCancel?: () => void;
+  secondaryButtonProps?: ModalFooterButtonProps;
   /**
-   * Optional props passed to the cancel `Button` (rendered when `onCancel` is set).
-   *
-   * Same i18n contract as `submitButtonProps`: pass the localized label as
-   * `children`. Falls back to `'Cancel'` when omitted.
-   */
-  cancelButtonProps?: ButtonPropsWithDataAttrs;
-  /**
-   * Optional props passed to the inner `Box` that wraps the submit/cancel
-   * buttons. Use this to override the default max-width, background, or any
-   * other Box utility prop. The default max-width of 360px is applied via
-   * className and will be overridden if `containerProps.className` provides
-   * its own `max-w-*` utility (`twMerge` lets the consumer's class win).
-   */
-  containerProps?: Omit<BoxProps, 'children'> & {
-    [key: `data-${string}`]: string | undefined;
-  };
-  /**
-   * Optional prop for additional CSS classes to be applied to the ModalFooter component.
-   * These classes will be merged with the component's default classes using twMerge.
+   * Optional prop for additional CSS classes to be applied to the
+   * ModalFooter root. Merged with the component's defaults via `twMerge`.
    */
   className?: string;
 };
