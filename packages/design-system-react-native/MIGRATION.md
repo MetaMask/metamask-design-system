@@ -23,7 +23,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BadgeNetwork Component](#badgenetwork-component)
   - [BadgeStatus Component](#badgestatus-component)
   - [BadgeWrapper Component](#badgewrapper-component)
-  - [Composite `Badge` (legacy)](#composite-badge-legacy)
+  - [Deprecated aggregate `Badge` component](#deprecated-aggregate-badge-component)
   - [HeaderBase Component](#headerbase-component)
   - [Text Component](#text-component)
   - [Label Component](#label-component)
@@ -2472,7 +2472,7 @@ import { BadgeCount, BadgeCountSize } from '@metamask/design-system-react-native
 
 ### BadgeIcon Component
 
-There is no separate legacy **BadgeIcon** component file in the mobile component-library. The closest legacy surface is the **`Badge`** composite’s `BadgeVariant.NotificationsKinds` branch (see [Composite `Badge` (legacy)](#composite-badge-legacy)), which maps to MMDS **BadgeIcon** (`iconName`).
+There is no separate legacy **BadgeIcon** component file in the mobile component-library. The closest legacy surface is the **`Badge`** composite’s `BadgeVariant.NotificationsKinds` branch (see [Deprecated aggregate `Badge` component](#deprecated-aggregate-badge-component)), which maps to MMDS **BadgeIcon** (`iconName`).
 
 | Prop       | Type       | Notes                    |
 | ---------- | ---------- | ------------------------ |
@@ -2626,7 +2626,7 @@ import {
 </BadgeWrapper>;
 ```
 
-### Composite `Badge` (legacy)
+### Deprecated aggregate `Badge` component
 
 The mobile **Badge** router (`app/component-library/components/Badges/Badge/Badge.tsx`) dispatches on **`variant`**:
 
