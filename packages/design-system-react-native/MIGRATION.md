@@ -21,6 +21,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Label Component](#label-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [Input Component](#input-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
   - [TabEmptyState Component](#tabemptystate-component)
@@ -2332,6 +2333,84 @@ import { Checkbox } from '@metamask/design-system-react-native';
 - MMDS `Checkbox` adds `twClassName` and `style` on the outer `Pressable`, plus `checkboxContainerProps` and `checkedIconProps` for targeted customization.
 - Mobile legacy `Checkbox` forwarded `TouchableOpacityProps`; MMDS forwards `PressableProps`.
 - Imperative `ref.toggle()` remains available in MMDS.
+
+### Input Component
+
+Mobile exposes `Input` under **`Form/TextField/foundation/Input`** (used inside legacy `TextField`). Migrate that inner surface to `Input` from `@metamask/design-system-react-native`, or prefer **`TextField`** from the design system when you need the full field row (see [TextField Component](#textfield-component)).
+
+For **package upgrade-only** notes (controlled-only `value`, `isReadOnly` rename, `placeholderTextColor` ordering), see [Version Updates](#version-updates) — **Input: shared controlled contract**, **Input Controlled-Only Requirement**, and **Input: theme `placeholderTextColor` always wins**.
+
+#### Source locations (audit)
+
+- **Mobile:** `https://github.com/MetaMask/metamask-mobile/tree/main/app/component-library/components/Form/TextField/foundation/Input` — `Input.tsx`, `Input.types.ts`
+- **MMDS React Native:** `https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-system-react-native/src/components/Input` — `Input.tsx`, `Input.types.ts` (shared `InputPropsShared` in `@metamask/design-system-shared`)
+
+#### Breaking changes
+
+##### Import path
+
+| Mobile pattern | Design system migration |
+| -------------- | ----------------------- |
+| `import Input from '.../Form/TextField/foundation/Input'` | `import { Input } from '@metamask/design-system-react-native'` |
+| Default export | Named export |
+
+##### Props and behavior mapping
+
+| Mobile `Input` API | MMDS `Input` API | Change type | Notes |
+| ------------------ | ---------------- | ----------- | ----- |
+| `TextInputProps` (minus `editable`) | `Omit<TextInputProps, 'editable' \| 'value' \| 'defaultValue'> & InputPropsShared` | contract tightened | **`value: string` is required.** `defaultValue` is omitted from the public type — **controlled-only**. |
+| `value` optional (`string \| undefined` via spread) | `value: string` | required | Always pass a string (use `''` when empty). |
+| `defaultValue` | _not in `InputProps`_ | removed | Use controlled `value` + `onChangeText`. |
+| `isReadonly` | `isReadOnly` | renamed | Align with shared types and web. |
+| `isDisabled` | `isDisabled` | unchanged | |
+| `isStateStylesDisabled` | `isStateStylesDisabled` | unchanged | |
+| `textVariant` | `textVariant` | unchanged | Use `TextVariant` from `@metamask/design-system-shared` / RN package. |
+| `editable` (from `TextInput`) | _removed_ | use `isDisabled` + `isReadOnly` | MMDS sets `editable={!isDisabled && !isReadOnly}`. |
+| `autoFocus` (default **true** in legacy destructuring) | `autoFocus` (default **false**) | default changed | If you relied on implicit autofocus, pass **`autoFocus={true}`** explicitly. |
+| `placeholderTextColor` via `{...props}` | applied **after** spread from theme | behavior | Callers can no longer override theme placeholder tint; see version notes. |
+| Other `TextInput` props | forwarded | unchanged | Passed through `...props` before `value` / styling (see `Input.tsx`). |
+
+##### Inner `TextInput` passthrough
+
+Anything still allowed on `TextInput` after the omit (for example `keyboardType`, `returnKeyType`, `secureTextEntry`, `autoCapitalize`, `accessibilityLabel`, `textContentType`) continues to work when passed to MMDS `Input`.
+
+#### Migration example
+
+##### Before (Mobile component-library)
+
+```tsx
+import Input from '../../../component-library/components/Form/TextField/foundation/Input';
+
+<Input
+  value={text}
+  onChangeText={setText}
+  placeholder="Label"
+  isDisabled={locked}
+  isReadonly={readOnly}
+  keyboardType="numeric"
+/>;
+```
+
+##### After (Design system)
+
+```tsx
+import { Input } from '@metamask/design-system-react-native';
+
+<Input
+  value={text}
+  onChangeText={setText}
+  placeholder="Label"
+  isDisabled={locked}
+  isReadOnly={readOnly}
+  keyboardType="numeric"
+/>;
+```
+
+#### API differences
+
+- **Refs:** both forward `ref` to the inner `TextInput`.
+- **Focus handlers:** MMDS clears focus state when `isDisabled` or `isReadOnly` is true (legacy skipped blur/focus updates only when `isDisabled`).
+- **Layered fields:** for labeled rows, errors, and accessories, use design-system **`TextField`** and pass native control props in **`inputProps`** rather than only migrating the inner `Input`.
 
 ### TextField Component
 

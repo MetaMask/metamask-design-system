@@ -15,6 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
   - [Checkbox Component](#checkbox-component)
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
@@ -1148,6 +1149,96 @@ import {
 - `className` and `style` are still supported
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
+
+### Input Component
+
+The extension `input` component (`ui/components/component-library/input/`) maps to `Input` in `@metamask/design-system-react`. MMDS `Input` is a **plain `<input>`** with token-based styling, not a `Text` wrapper. The cross-platform design system also **requires a controlled `value: string`**, disallows uncontrolled `defaultValue` in the public type, and renames several boolean props to the `is*` pattern.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared guidance. For version-only notes (for example package upgrades), see [Version Updates](#version-updates).
+
+#### Source locations (audit)
+
+- **Extension:** `https://github.com/MetaMask/metamask-extension/tree/main/ui/components/component-library/input` — `input.tsx`, `input.types.ts`
+- **MMDS React:** `https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-system-react/src/components/Input` — `Input.tsx`, `Input.types.ts` (plus `InputPropsShared` in `@metamask/design-system-shared`)
+
+#### Breaking changes
+
+##### Import path
+
+| Extension pattern                                            | Design system migration                                    |
+| ------------------------------------------------------------ | ---------------------------------------------------------- |
+| `import { Input, InputType } from '../../component-library'` | `import { Input, TextVariant } from '@metamask/design-system-react'` |
+
+`InputType` (extension enum for `type`) is not re-exported from the design system. Use a string that matches the native `type` attribute, for example `type="password"`.
+
+##### Props and behavior mapping
+
+| Extension API | MMDS `Input` API | Change type | Notes |
+| ------------- | ---------------- | ----------- | ----- |
+| `value?: string \| number` | `value: string` | **required** + type narrowed | Use a string; control the value from parent state. |
+| `defaultValue` | _omitted from public `InputProps`_ | **removed** from contract | MMDS `Input` is **controlled-only**; lift state up and pass `value`. |
+| `disabled` | `isDisabled` | renamed | |
+| `readOnly` | `isReadOnly` | renamed | |
+| `disableStateStyles` | `isStateStylesDisabled` | renamed | |
+| `error` (sets `aria-invalid`) | not a first-class prop | use native attributes | Pass `aria-invalid` / `data-*` through remaining `input` props (see “Native `input` passthrough” below). |
+| `textVariant` (`TextVariant.bodyMd`, …) | `textVariant` (`TextVariant.BodyMd`, …) | value names | Use `TextVariant` from `@metamask/design-system-react` or `@metamask/design-system-shared` (ADR-0003 string unions). |
+| Polymorphic `as` / `Text`-as-input | `Input` is always a real `<input>` | structural | Styling is Tailwind on the element, not the extension’s `Text` wrapper. |
+| `className` | `className` | unchanged | Merged with `twMerge` with design-system defaults. |
+| `onChange` (React change event) | `onChange` | same DOM event | Still supported via `ComponentProps<'input'>`. |
+| `autoComplete` as **boolean** | `autoComplete` as **string** (HTML) | type change | Extension mapped `true` → `'on'`, `false` → `'off'`. MMDS passes the standard string through; set `autoComplete="on"` or `autoComplete="off"` (or a [valid token](https://developer.mozilla.org/docs/Web/HTML/Attributes/autocomplete)) explicitly. |
+| `required` | `required` | unchanged | Still on the native `input` via spread. |
+| `id`, `name`, `placeholder`, `type`, `maxLength`, `autoFocus`, `onBlur`, `onFocus` | same | unchanged | Forwarded on the native `input` with `...rest`. |
+
+##### Native `input` passthrough
+
+`InputProps` is `Omit<ComponentProps<'input'>, 'defaultValue' | 'disabled' | 'readOnly' | 'value'> & InputPropsShared` plus `className` and `style`. Any other valid `<input>` attribute (for example `min`, `max`, `step`, `pattern`, `inputMode`, `aria-*`, `data-*`) can be passed and is forwarded to the element after shared props are applied.
+
+#### Migration example
+
+##### Before (Extension)
+
+```tsx
+import { Input, InputType } from '../../component-library';
+
+<Input
+  id="amount"
+  name="amount"
+  type={InputType.Number}
+  value={amount}
+  onChange={(e) => setAmount(e.target.value)}
+  disabled={isLocked}
+  readOnly={isReadOnly}
+  error={hasError}
+  disableStateStyles
+  placeholder="0.0"
+/>;
+```
+
+##### After (Design system)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react';
+
+<Input
+  id="amount"
+  name="amount"
+  type="number"
+  value={amount}
+  onChange={(e) => setAmount(e.target.value)}
+  isDisabled={isLocked}
+  isReadOnly={isReadOnly}
+  isStateStylesDisabled
+  aria-invalid={hasError}
+  textVariant={TextVariant.BodyMd}
+  placeholder="0.0"
+/>;
+```
+
+#### API differences
+
+- **Controlled-only:** uncontrolled usage with `defaultValue` is not part of the published `InputProps` contract; use `value` + `onChange` (or `onInput`) from the parent.
+- **Error / invalid UI:** the extension’s `error` boolean is not built in; set `aria-invalid` (and your own `className` if needed) to match product rules.
+- **autocomplete:** replace boolean `autoComplete` with the HTML string form when migrating call sites.
 
 ### Checkbox Component
 

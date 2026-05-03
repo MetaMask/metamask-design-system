@@ -128,6 +128,10 @@ export const ConditionalExample = ({ isFocused }: { isFocused: boolean }) => {
 };
 ```
 
+## Migration from Mobile component library
+
+The legacy mobile `Input` lives under `Form/TextField/foundation/Input`. For API mappings, breaking changes, and before/after examples, see the [Migration Guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#input-component).
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
