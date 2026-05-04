@@ -1,0 +1,152 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as SkeletonStories from './Skeleton.stories';
+
+# Skeleton
+
+`Skeleton` displays a pulsing placeholder while content is loading. It mirrors the React Native `Skeleton` API on `@metamask/design-system-react-native`, so consumers can use the same mental model across platforms.
+
+```tsx
+import { Skeleton } from '@metamask/design-system-react';
+
+// Standalone placeholder (no children) — always renders the animated bar.
+<Skeleton width={240} height={16} />;
+
+// Wrapping content — renders the children directly by default; pass
+// `hideChildren` to overlay the skeleton while children dictate layout.
+<Skeleton hideChildren>
+  <Text variant={TextVariant.HeadingMd}>This text dictates the skeleton's size</Text>
+</Skeleton>;
+```
+
+<Canvas of={SkeletonStories.Default} />
+
+## Props
+
+### `width` / `height`
+
+Optional CSS dimensions for the skeleton container. Numbers are interpreted as px, strings can be any CSS length (`'2rem'`, `'100%'`, etc.). When `children` is provided with `hideChildren`, the children's natural layout takes priority — `width` / `height` are useful for standalone placeholders.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number | string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SkeletonStories.Sizes} />
+
+### `hideChildren`
+
+When `true`, children render invisibly while the skeleton overlay plays — children preserve layout dimensions but assistive tech and visible UI see only the skeleton. When `false` (default), children render directly with no skeleton overlay.
+
+This is the **inverse** of the legacy extension `Skeleton`'s `isLoading` prop: `isLoading={true}` ≡ `hideChildren={true}`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SkeletonStories.HideChildren} />
+
+<Canvas of={SkeletonStories.ToggleHideChildren} />
+
+### `autoPlay`
+
+When `true`, the skeleton plays the pulse animation. Set to `false` to render a static placeholder (useful in screenshots, golden-path tests, or when you want CSS-only fallbacks).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>true</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SkeletonStories.AutoPlay} />
+
+### `className`
+
+Custom CSS classes applied to the skeleton container. Merged with the component's defaults via `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Accessibility
+
+The skeleton container and its animated overlay are both marked `aria-hidden="true"` and `pointer-events-none`. They take no part in the accessibility tree — assistive tech sees through to whatever real content is shown when loading completes.
+
+When using `hideChildren`, the children are rendered inside an `aria-hidden` wrapper too, so they don't double-announce while the skeleton is showing.
+
+## Component API
+
+<Controls of={SkeletonStories.Default} />
+
+## Migration Guide
+
+Migrating from `ui/components/component-library/skeleton` in MetaMask Extension? See the [Skeleton Migration Guide](../../../MIGRATION.md#skeleton-component) for prop mappings, the `isLoading` → `hideChildren` API change, and before/after examples.
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

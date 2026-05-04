@@ -99,6 +99,9 @@ export type { ModalBodyProps } from './ModalBody';
 export { ModalFocus } from './ModalFocus';
 export type { FocusableElement, ModalFocusProps } from './ModalFocus';
 
+export { Skeleton } from './Skeleton';
+export type { SkeletonProps } from './Skeleton';
+
 export { Text } from './Text';
 export {
   TextVariant,
