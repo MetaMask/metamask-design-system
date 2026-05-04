@@ -20,7 +20,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ModalFocus Component](#modalfocus-component)
   - [ModalOverlay Component](#modaloverlay-component)
   - [Components available in React Native only](#components-available-in-react-native-only)
-    - [ActionListItem (React Native)](#actionlistitem-component-react-native)
+    - [ActionListItem (React Native)](#actionlistitem-react-native)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
