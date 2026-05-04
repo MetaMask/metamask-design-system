@@ -28,6 +28,8 @@ export const ButtonBase = ({
   isLoading,
   loadingText,
   spinnerProps,
+  loadingWrapperProps,
+  contentWrapperProps,
   startIconName,
   startIconProps,
   startAccessory,
@@ -157,72 +159,82 @@ export const ButtonBase = ({
       }}
       {...props}
     >
-      {({ pressed }) => (
-        <>
-          {/* Loading spinner overlay */}
-          {isLoading && (
-            <Box
-              twClassName="absolute inset-0 flex items-center justify-center"
-              testID="spinner-container"
-            >
-              <Spinner
-                color={
-                  textClassName
-                    ? (textClassName(pressed) as IconColor)
-                    : IconColor.IconDefault
-                }
-                loadingText={loadingText}
-                {...spinnerProps}
-                loadingTextProps={{
-                  numberOfLines: 1,
-                  variant: labelTextVariant,
-                  twClassName: textClassName ? textClassName(pressed) : '',
-                  ...spinnerProps?.loadingTextProps,
-                }}
-              />
-            </Box>
-          )}
+      {({ pressed }) => {
+        const { twClassName: loadingWrapperTw, ...restLoadingWrapper } =
+          loadingWrapperProps ?? {};
+        const { twClassName: contentWrapperTw, ...restContentWrapper } =
+          contentWrapperProps ?? {};
 
-          <BoxRow
-            gap={hasSideContent ? 1 : 0}
-            startAccessory={
-              finalStartIconName ? (
-                <Icon
-                  name={finalStartIconName}
-                  size={iconSize}
-                  twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
-                  {...startIconProps}
+        return (
+          <>
+            {/* Loading spinner overlay */}
+            {isLoading && (
+              <Box
+                {...restLoadingWrapper}
+                twClassName={`absolute inset-0 flex items-center justify-center ${loadingWrapperTw}`}
+              >
+                <Spinner
+                  color={
+                    textClassName
+                      ? (textClassName(pressed) as IconColor)
+                      : IconColor.IconDefault
+                  }
+                  loadingText={loadingText}
+                  {...spinnerProps}
+                  loadingTextProps={{
+                    numberOfLines: 1,
+                    variant: labelTextVariant,
+                    twClassName: textClassName ? textClassName(pressed) : '',
+                    ...spinnerProps?.loadingTextProps,
+                  }}
                 />
-              ) : (
-                startAccessory
-              )
-            }
-            endAccessory={
-              finalEndIconName ? (
-                <Icon
-                  name={finalEndIconName}
-                  size={iconSize}
-                  twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
-                  {...endIconProps}
-                />
-              ) : (
-                endAccessory
-              )
-            }
-            textProps={{
-              variant: labelTextVariant,
-              fontWeight: FontWeight.Medium,
-              color: TextColor.TextDefault,
-              ...textProps,
-              twClassName:
-                `shrink grow-0 flex-wrap text-center ${textClassName ? textClassName(pressed) : ''} ${textProps?.twClassName ?? ''}`.trim(),
-            }}
-            twClassName={isLoading ? 'opacity-0' : undefined}
-          >
-            {children}
-          </BoxRow>
-        </>
-      )}
+              </Box>
+            )}
+
+            <BoxRow
+              {...restContentWrapper}
+              twClassName={`${contentWrapperTw ?? ''} ${isLoading && 'opacity-0'}`}
+              gap={hasSideContent ? 1 : 0}
+              startAccessory={
+                finalStartIconName ? (
+                  <Icon
+                    name={finalStartIconName}
+                    size={iconSize}
+                    twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
+                    {...startIconProps}
+                  />
+                ) : (
+                  startAccessory
+                )
+              }
+              endAccessory={
+                finalEndIconName ? (
+                  <Icon
+                    name={finalEndIconName}
+                    size={iconSize}
+                    twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
+                    {...endIconProps}
+                  />
+                ) : (
+                  endAccessory
+                )
+              }
+              textProps={{
+                variant: labelTextVariant,
+                fontWeight: FontWeight.Medium,
+                color: TextColor.TextDefault,
+                numberOfLines: 1,
+                ellipsizeMode: 'clip',
+                ...textProps,
+                twClassName:
+                  `shrink grow-0 flex-wrap text-center ${textClassName ? textClassName(pressed) : ''} ${textProps?.twClassName ?? ''}`.trim(),
+              }}
+            >
+              {children}
+            </BoxRow>
+          </>
+        );
+      }}
     </ButtonAnimated>
   );
 };

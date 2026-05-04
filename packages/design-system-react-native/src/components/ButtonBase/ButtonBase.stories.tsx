@@ -73,6 +73,16 @@ const meta: Meta<typeof ButtonBase> = {
       description:
         'Optional prop that when true, makes the ButtonBase take up the full width of its container',
     },
+    loadingWrapperProps: {
+      control: false,
+      description:
+        'Props for the Box wrapping the spinner when loading (e.g. testID). Merges with default overlay layout.',
+    },
+    contentWrapperProps: {
+      control: false,
+      description:
+        'Props for the BoxRow label row. Label text uses textProps on ButtonBase.',
+    },
   },
   decorators: [
     (Story) => (

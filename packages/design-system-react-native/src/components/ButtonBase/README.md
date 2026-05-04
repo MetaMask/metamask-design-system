@@ -146,6 +146,14 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 };
 ```
 
+### `loadingWrapperProps`
+
+Props applied to the `Box` that wraps the loading spinner when `isLoading` is true. Merges with the default full-area centered layout; set `twClassName` to extend (not replace) that layout. The loading wrapper has **no default `testID`**—pass `testID` here for tests or automation (for example, if you previously queried `spinner-container`, pass `loadingWrapperProps={{ testID: 'spinner-container' }}`).
+
+### `contentWrapperProps`
+
+Props applied to the label row (`BoxRow`). Label typography is still controlled via `textProps` on `ButtonBase`, not through this object.
+
 ## Migration from MetaMask Mobile Component Library
 
 Migrating from the legacy `ButtonBase` in `app/component-library/components/Buttons/Button/foundation/ButtonBase`? See the [ButtonBase migration guide](../../../MIGRATION.md#buttonbase-component) for a full prop mapping and before/after examples.

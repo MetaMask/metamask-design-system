@@ -310,14 +310,24 @@ describe('ButtonBase', () => {
   });
 
   describe('textProps', () => {
-    it('passes through textProps to string labels', () => {
+    it('defaults label to single line with clip ellipsis', () => {
+      const { getByText } = render(<ButtonBase>Label</ButtonBase>);
+
+      const label = getByText('Label');
+      expect(label.props.numberOfLines).toBe(1);
+      expect(label.props.ellipsizeMode).toBe('clip');
+    });
+
+    it('allows overriding numberOfLines and ellipsizeMode', () => {
       const { getByText } = render(
-        <ButtonBase textProps={{ numberOfLines: 2 }}>
+        <ButtonBase textProps={{ numberOfLines: 2, ellipsizeMode: 'tail' }}>
           Custom text props
         </ButtonBase>,
       );
 
-      expect(getByText('Custom text props')).toBeOnTheScreen();
+      const label = getByText('Custom text props');
+      expect(label.props.numberOfLines).toBe(2);
+      expect(label.props.ellipsizeMode).toBe('tail');
     });
   });
 
@@ -334,6 +344,7 @@ describe('ButtonBase', () => {
         <ButtonBase
           testID="btn"
           isLoading
+          loadingWrapperProps={{ testID: 'spinner-container' }}
           spinnerProps={{ twClassName: spinnerExtra, testID: 'spinner' }}
         >
           Loading
@@ -347,6 +358,24 @@ describe('ButtonBase', () => {
         tw`absolute inset-0 flex items-center justify-center`,
       );
       expect(getByTestId('btn')).toBeDisabled();
+    });
+
+    it('merges loadingWrapperProps (testID and twClassName) with default overlay layout', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          isLoading
+          loadingWrapperProps={{
+            testID: 'loading-overlay',
+            twClassName: 'opacity-100',
+          }}
+        >
+          X
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('loading-overlay')).toHaveStyle(
+        tw`absolute inset-0 flex items-center justify-center opacity-100`,
+      );
     });
 
     it('renders loadingText in the spinner', () => {

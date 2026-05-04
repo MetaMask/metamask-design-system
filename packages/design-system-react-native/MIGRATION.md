@@ -834,6 +834,7 @@ The design system `ButtonBase` adds these props not available in the mobile vers
 
 - `isLoading` — shows an animated spinner and hides button content
 - `loadingText` — optional text shown alongside the spinner
+- `loadingWrapperProps` / `contentWrapperProps` — pass-through to the loading overlay `Box` and the label `BoxRow` (for example `testID` for tests; the loading wrapper has no default `testID`, so use `loadingWrapperProps={{ testID: 'spinner-container' }}` if you relied on the old hardcoded id)
 - `startAccessory` / `endAccessory` — arbitrary `ReactNode` slots at start/end (in addition to `startIconName`/`endIconName`)
 - `textClassName` / `iconClassName` — pressed-state-aware Tailwind class functions
 - `twClassName` — string or `(pressed: boolean) => string` for container overrides
