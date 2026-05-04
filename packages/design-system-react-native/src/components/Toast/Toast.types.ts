@@ -1,142 +1,81 @@
 // Third party dependencies.
-import type {
-  AvatarIconSeverity,
-  IconName,
-} from '@metamask/design-system-shared';
-import type { ReactElement } from 'react';
-import type { ViewProps } from 'react-native';
+import type { ReactNode } from 'react';
+import type { GestureResponderEvent, ViewProps } from 'react-native';
 
-// External Dependencies.
-import type { AvatarAccountVariant } from '../AvatarAccount';
-import type { ButtonProps } from '../Button';
+// External dependencies.
 import type { ButtonIconProps } from '../ButtonIcon';
-import type { ImageOrSvgSrc } from '../temp-components/ImageOrSvg';
 
 /**
- * Toast variants.
+ * Toast severity variants.
  */
-export enum ToastVariant {
-  Plain = 'Plain',
-  Account = 'Account',
-  Network = 'Network',
-  App = 'App',
-  Icon = 'Icon',
-}
+export const ToastSeverity = {
+  Default: 'default',
+  Success: 'success',
+  Warning: 'warning',
+  Error: 'error',
+} as const;
+
+export type ToastSeverity = (typeof ToastSeverity)[keyof typeof ToastSeverity];
 
 /**
- * Options for the main text in the toast.
+ * Optional props for the close `ButtonIcon`.
  */
-export type ToastLabelOptions = {
-  label: string;
-  isBold?: boolean;
-}[];
-
-/**
- * Options for the description text in the toast.
- */
-export type ToastDescriptionOptions = {
-  description: string;
+export type ToastCloseButtonProps = Omit<
+  Partial<ButtonIconProps>,
+  'iconName' | 'onPress'
+> & {
+  onPress?: (event: GestureResponderEvent) => void;
 };
 
 /**
- * Options for displaying a Link in the toast.
+ * Shared toast content props.
  */
-export type ToastLinkButtonOptions = {
-  label: string;
-  onPress: () => void;
+export type ToastSharedProps = {
+  text: ReactNode;
+  description?: ReactNode;
+  actionText?: string;
+  onActionPress?: () => void;
+  closeButtonProps?: ToastCloseButtonProps;
+  startAccessory?: ReactNode;
+  severity?: ToastSeverity;
 };
 
 /**
- * Common toast option shared between all other options.
+ * Toast options used by the imperative `toast(...)` API.
  */
-type BaseToastVariants = {
+export type ToastOptions = ToastSharedProps & {
   hasNoTimeout: boolean;
-  labelOptions: ToastLabelOptions;
-  descriptionOptions?: ToastDescriptionOptions;
-  linkButtonOptions?: ToastLinkButtonOptions;
-  closeButtonOptions?: ToastCloseButtonOptions;
-  startAccessory?: ReactElement;
+  onClose?: () => void;
   bottomOffset?: number;
 };
 
-export type ToastCloseButtonIconOptions = Omit<ButtonIconProps, 'variant'> & {
-  variant: ToastCloseButtonVariant;
-};
-
-export type ToastCloseButtonOptions = ButtonProps | ToastCloseButtonIconOptions;
-
-export enum ToastCloseButtonVariant {
-  Icon = 'Icon',
-}
-
 /**
- * Plain toast option.
+ * Toaster component reference.
  */
-type PlainToastOption = {
-  variant: ToastVariant.Plain;
-} & BaseToastVariants;
-
-/**
- * Account toast option.
- */
-type AccountToastOption = {
-  variant: ToastVariant.Account;
-  accountAddress: string;
-  accountAvatarType: AvatarAccountVariant;
-} & BaseToastVariants;
-
-/**
- * Network toast option.
- */
-type NetworkToastOption = {
-  variant: ToastVariant.Network;
-  networkName?: string;
-  networkImageSource: ImageOrSvgSrc;
-} & BaseToastVariants;
-
-/**
- * App toast option.
- */
-type AppToastOption = {
-  variant: ToastVariant.App;
-  appIconSource: ImageOrSvgSrc;
-} & BaseToastVariants;
-
-type IconToastOption = {
-  variant: ToastVariant.Icon;
-  iconName: IconName;
-  severity?: AvatarIconSeverity;
-} & BaseToastVariants;
-
-/**
- * Different toast options combined in a union type.
- */
-export type ToastOptions =
-  | PlainToastOption
-  | AccountToastOption
-  | NetworkToastOption
-  | AppToastOption
-  | IconToastOption;
-
-/**
- * Toast component reference.
- */
-export type ToastRef = {
+export type ToasterRef = {
   showToast: (toastOptions: ToastOptions) => void;
   closeToast: () => void;
 };
 
 /**
  * Toast component props.
- * Extends ViewProps to inherit standard React Native props such as testID and accessibilityLabel.
+ * Intended for direct rendering of a single toast surface.
  */
-export type ToastProps = {
+export type ToastProps = ToastSharedProps & {
+  onClose: () => void;
   /**
    * Optional Tailwind CSS classes for the toast container.
    */
   twClassName?: string;
+} & Omit<ViewProps, 'style'>;
+
+/**
+ * Toaster component props.
+ * Extends ViewProps to inherit standard React Native props such as testID and accessibilityLabel.
+ */
+export type ToasterProps = {
   /**
-   * Props spread to the labels container View (e.g., testID for testing).
+   * Optional Tailwind CSS classes for the toast container.
    */
-  labelsContainerProps?: Omit<ViewProps, 'children' | 'style'>;
+  twClassName?: string;
 } & Omit<ViewProps, 'style'>;

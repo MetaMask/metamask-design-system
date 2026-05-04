@@ -1,138 +1,103 @@
-// Third party dependencies.
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-import { Alert, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { View } from 'react-native';
 
 // External dependencies.
-import { AvatarAccountVariant } from '../AvatarAccount';
-import { Box } from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { Text } from '../Text';
+import { Icon, IconColor, IconName, IconSize } from '../Icon';
 
 // Internal dependencies.
 import { Toast } from './Toast';
-import type { ToastOptions } from './Toast.types';
-import { ToastVariant } from './Toast.types';
+import type { ToastProps } from './Toast.types';
+import { ToastSeverity } from './Toast.types';
 
-const TEST_ACCOUNT_ADDRESS =
-  '0x10e08af911f2e489480fb2855b24771745d0198b50f5c55891369844a8c57092';
-const TEST_NETWORK_IMAGE_URL =
-  'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880';
-const TEST_AVATAR_TYPE = AvatarAccountVariant.Jazzicon;
-
-type ToastStoryArgs = {
-  variant: ToastVariant;
-};
-
-const meta: Meta<ToastStoryArgs> = {
+const meta: Meta<ToastProps> = {
   title: 'Components/Toast',
   component: Toast,
   argTypes: {
-    variant: {
-      options: Object.values(ToastVariant),
-      control: {
-        type: 'select',
-      },
+    severity: {
+      control: 'select',
+      options: ToastSeverity,
+      description:
+        'Optional semantic severity used for the default leading icon',
+    },
+    text: {
+      control: 'text',
+      description: 'Main toast content',
+    },
+    description: {
+      control: 'text',
+      description: 'Optional secondary content shown below the main text',
+    },
+    actionText: {
+      control: 'text',
+      description: 'Optional action button label',
+    },
+    onActionPress: {
+      action: 'onActionPress',
+      description: 'Optional press handler for the action button',
+    },
+    onClose: {
+      action: 'onClose',
+      description: 'Required close handler for direct Toast rendering',
+    },
+    startAccessory: {
+      control: false,
+      description:
+        'Optional leading accessory that overrides the default severity icon',
     },
   },
-  decorators: [
-    (StoryComponent) => (
-      <SafeAreaProvider>
-        <Box twClassName="min-h-[300px] relative">
-          <Box twClassName="absolute inset-0 justify-center items-center">
-            <Text>Content behind toast</Text>
-          </Box>
-          <StoryComponent />
-        </Box>
-      </SafeAreaProvider>
-    ),
-  ],
 };
 
 export default meta;
-type Story = StoryObj<ToastStoryArgs>;
-
-const ToastStoryRender: React.FC<ToastStoryArgs> = ({ variant }) => {
-  const tw = useTailwind();
-
-  let toastOptions: ToastOptions;
-
-  switch (variant) {
-    case ToastVariant.Plain:
-      toastOptions = {
-        variant: ToastVariant.Plain,
-        hasNoTimeout: false,
-        labelOptions: [{ label: 'This is a Toast message.' }],
-      };
-      break;
-    case ToastVariant.Account:
-      toastOptions = {
-        variant: ToastVariant.Account,
-        hasNoTimeout: false,
-        labelOptions: [
-          { label: 'Switching to' },
-          { label: ' Account 2.', isBold: true },
-        ],
-        accountAddress: TEST_ACCOUNT_ADDRESS,
-        accountAvatarType: TEST_AVATAR_TYPE,
-      };
-      break;
-    case ToastVariant.Network:
-      toastOptions = {
-        variant: ToastVariant.Network,
-        hasNoTimeout: false,
-        labelOptions: [
-          { label: 'Added' },
-          { label: ' Mainnet', isBold: true },
-          { label: ' network.' },
-        ],
-        networkImageSource: { uri: TEST_NETWORK_IMAGE_URL },
-        descriptionOptions: {
-          description: 'This is a description text for the network toast.',
-        },
-        linkButtonOptions: {
-          label: 'Click here!',
-          onPress: () => {
-            Alert.alert('Clicked toast link!');
-          },
-        },
-      };
-      break;
-    default:
-      toastOptions = {
-        variant: ToastVariant.Plain,
-        hasNoTimeout: false,
-        labelOptions: [{ label: 'This is a Toast message.' }],
-      };
-  }
-
-  return (
-    <View style={tw.style('flex-1')}>
-      <Button
-        variant={ButtonVariant.Secondary}
-        onPress={() => {
-          Toast.show(toastOptions);
-        }}
-      >
-        {`Show ${variant} Toast`}
-      </Button>
-      <Toast />
-    </View>
-  );
-};
+type Story = StoryObj<ToastProps>;
 
 export const Default: Story = {
   args: {
-    variant: ToastVariant.Plain,
+    description: "Description shouldn't repeat title. 1-3 lines.",
+    onClose: () => undefined,
+    severity: ToastSeverity.Default,
+    text: 'Title is sentence case no period',
   },
-  render: (args) => <ToastStoryRender {...args} />,
 };
 
-export const Variant: Story = {
+export const Severity: Story = {
+  render: (args) => (
+    <View style={{ gap: 8 }}>
+      <Toast {...args} severity={ToastSeverity.Default} text="Default" />
+      <Toast {...args} severity={ToastSeverity.Success} text="Success" />
+      <Toast {...args} severity={ToastSeverity.Warning} text="Warning" />
+      <Toast {...args} severity={ToastSeverity.Error} text="Error" />
+    </View>
+  ),
   args: {
-    variant: ToastVariant.Account,
+    description: 'Severity controls the default start accessory icon.',
+    onClose: () => undefined,
   },
-  render: (args) => <ToastStoryRender {...args} />,
+};
+
+export const StartAccessory: Story = {
+  args: {
+    description: 'Custom accessories override the default severity icon.',
+    onClose: () => undefined,
+    severity: ToastSeverity.Warning,
+    startAccessory: (
+      <Icon
+        color={IconColor.PrimaryDefault}
+        name={IconName.Feedback}
+        size={IconSize.Lg}
+      />
+    ),
+    text: 'Custom accessory',
+  },
+};
+
+export const Action: Story = {
+  args: {
+    actionText: 'Action',
+    description: 'Optional action button content is rendered below the body.',
+    onActionPress: () => undefined,
+    onClose: () => undefined,
+    severity: ToastSeverity.Success,
+    text: 'Action toast',
+  },
 };
