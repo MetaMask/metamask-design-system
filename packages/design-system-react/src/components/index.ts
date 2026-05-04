@@ -100,6 +100,12 @@ export { ModalFocus } from './ModalFocus';
 export type { FocusableElement, ModalFocusProps } from './ModalFocus';
 export { Modal, useModalContext } from './Modal';
 export type { ModalContextType, ModalProps } from './Modal';
+export {
+  ModalContent,
+  ModalContentSize,
+  MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR,
+} from './ModalContent';
+export type { ModalContentProps } from './ModalContent';
 
 export { Text } from './Text';
 export {

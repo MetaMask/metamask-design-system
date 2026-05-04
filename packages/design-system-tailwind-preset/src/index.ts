@@ -31,11 +31,20 @@ const tailwindConfig: Config = {
           from: { opacity: '0' },
           to: { opacity: '1' },
         },
+        // Modal dialog entrance: rises 24px while fading in.
+        // Used by `ModalContent` to animate dialogs into view on mount.
+        'slide-up': {
+          from: { transform: 'translateY(24px)', opacity: '0' },
+          to: { transform: 'translateY(0)', opacity: '1' },
+        },
       },
       animation: {
         // Duration matches `AnimationDuration.Regularly` from `@metamask/design-tokens`.
         // Inlined to avoid a workspace dependency cycle (design-tokens → design-system-react → tailwind-preset).
         'fade-in': 'fade-in 300ms linear forwards',
+        // Duration matches `AnimationDuration.Slowly` from `@metamask/design-tokens`.
+        // Inlined to avoid a workspace dependency cycle (design-tokens → design-system-react → tailwind-preset).
+        'slide-up': 'slide-up 400ms cubic-bezier(0.3, 0.8, 0.3, 1) forwards',
       },
     },
   },

@@ -1,0 +1,172 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as ModalContentStories from './ModalContent.stories';
+
+# ModalContent
+
+`ModalContent` is the centered dialog container that lives inside a `Modal`. It owns the close-on-overlay-click and close-on-Escape handlers, hands focus management to `ModalFocus` (using the focus refs/flags from `useModalContext`), and applies the standard `slide-up` entrance animation.
+
+`ModalContent` reads its behavior from `useModalContext`, so it must be rendered inside `<Modal>`.
+
+```tsx
+import { Modal, ModalContent } from '@metamask/design-system-react';
+
+<Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+  <ModalContent>{/* ModalHeader / ModalBody / ModalFooter */}</ModalContent>
+</Modal>;
+```
+
+<Canvas of={ModalContentStories.Default} />
+
+## Props
+
+### `children`
+
+Content rendered inside the dialog. Typically composed of `ModalHeader`, `ModalBody`, and `ModalFooter`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `size`
+
+Max-width of the inner dialog. Override entirely via `modalDialogProps.className="max-w-..."` if you need a custom width.
+
+| Value                  | Max-width |
+| ---------------------- | --------- |
+| `ModalContentSize.Sm`  | 360px     |
+| `ModalContentSize.Md`  | 480px     |
+| `ModalContentSize.Lg`  | 720px     |
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ModalContentSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>ModalContentSize.Sm</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalContentStories.Size} />
+
+### `modalDialogProps`
+
+Props forwarded to the inner dialog `Box` (the `<section role="dialog">`). Use this to add `data-testid`, override layout, change background, or apply Tailwind utilities via `className`. Consumer `className` is merged with the component's defaults via `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;BoxProps, 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Custom CSS classes applied to the outer positioning element. Merged with the component's defaults via `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Behavior controlled via `Modal`
+
+`ModalContent` reads the following flags from `useModalContext` and reacts to them:
+
+| Flag                      | Effect                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------- |
+| `isClosedOnEscapeKey`     | When `true`, pressing Escape calls `onClose`.                                                      |
+| `isClosedOnOutsideClick`  | When `true`, mousedown outside the dialog calls `onClose` (subject to the opt-out below).         |
+| `autoFocus`               | Forwarded to `ModalFocus`. When `true`, the first focusable child is focused on mount.            |
+| `initialFocusRef`         | Forwarded to `ModalFocus`. When set, this element receives focus on mount.                        |
+| `finalFocusRef`           | Forwarded to `ModalFocus`. When set, this element receives focus on close.                        |
+| `restoreFocus`            | Forwarded to `ModalFocus`. When `true`, focus returns to the element that opened the modal.       |
+
+<Canvas of={ModalContentStories.KeyboardAndOutsideClickConfig} />
+
+## Outside-click opt-out for floating UI primitives
+
+Floating UI primitives (Popover, Tooltip, Select dropdown, etc.) often render via portal as **siblings** to the modal — so a click inside the popover lands outside the modal's dialog DOM tree, which would otherwise trigger the close-on-outside-click handler.
+
+To prevent this, `ModalContent` ignores any mousedown whose target's `closest('[data-mm-modal-ignore-outside-click]')` is non-null. Set the attribute on the floating element's root to opt out:
+
+```tsx
+import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from '@metamask/design-system-react';
+
+<Box {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}>{popoverContent}</Box>
+```
+
+The constant resolves to the literal string `data-mm-modal-ignore-outside-click`. The attribute presence is what matters — the value is unused.
+
+<Canvas of={ModalContentStories.IgnoreOutsideClickAttr} />
+
+## Component API
+
+<Controls of={ModalContentStories.Default} />
+
+## Migration Guide
+
+Migrating from `ui/components/component-library/modal-content` in MetaMask Extension? See the [ModalContent Migration Guide](../../../MIGRATION.md#modalcontent-component) for prop mappings, before/after examples, and the Popover-in-Modal interaction migration.
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
