@@ -142,6 +142,9 @@ export {
 // TextField types (ADR-0004)
 export { type TextFieldPropsShared } from './types/TextField';
 
+// TextArea types (ADR-0004)
+export { type TextAreaPropsShared } from './types/TextArea';
+
 // Input types (ADR-0004)
 export { type InputPropsShared } from './types/Input';
 

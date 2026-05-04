@@ -1,15 +1,15 @@
 import { TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { forwardRef, useCallback, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { Box } from '../Box';
 import { Input } from '../Input';
 import type { InputProps } from '../Input/Input.types';
 
-import type { TextFieldProps } from './TextField.types';
+import type { TextAreaProps } from './TextArea.types';
 
-export const TextField = forwardRef<View, TextFieldProps>(
+export const TextArea = forwardRef<View, TextAreaProps>(
   (
     {
       value,
@@ -25,8 +25,6 @@ export const TextField = forwardRef<View, TextFieldProps>(
       isError = false,
       textVariant = TextVariant.BodyMd,
       inputElement,
-      startAccessory,
-      endAccessory,
       style,
       twClassName,
       testID,
@@ -36,6 +34,12 @@ export const TextField = forwardRef<View, TextFieldProps>(
   ) => {
     const [isFocused, setIsFocused] = useState(autoFocus);
     const tw = useTailwind();
+
+    useEffect(() => {
+      if (isDisabled || isReadOnly) {
+        setIsFocused(false);
+      }
+    }, [isDisabled, isReadOnly]);
 
     const {
       twClassName: inputTwClassNameFromProps,
@@ -70,13 +74,11 @@ export const TextField = forwardRef<View, TextFieldProps>(
         accessible={false}
         style={[
           tw.style(
-            'flex-row',
-            'items-center',
-            'gap-3',
             'rounded-lg',
-            'h-12',
+            'min-h-24',
             'border',
             'px-4',
+            'py-3',
             'bg-muted',
             isDisabled && 'border-muted',
             !isDisabled && isError && 'border-error-default',
@@ -88,7 +90,6 @@ export const TextField = forwardRef<View, TextFieldProps>(
           style,
         ]}
       >
-        {startAccessory}
         {inputElement || (
           <Input
             {...inputRestWithoutTwClassName}
@@ -103,17 +104,16 @@ export const TextField = forwardRef<View, TextFieldProps>(
             onBlur={onBlurHandler}
             onFocus={onFocusHandler}
             isStateStylesDisabled
-            twClassName={`min-h-0 flex-1 justify-center h-[46px] bg-transparent border-0${
+            multiline
+            textAlignVertical="top"
+            twClassName={`min-h-[88px] w-full flex-1 self-stretch bg-transparent border-0 py-1${
               inputTwClassNameFromProps ? ` ${inputTwClassNameFromProps}` : ''
             }`}
-            numberOfLines={1}
-            multiline={false}
           />
         )}
-        {endAccessory}
       </Box>
     );
   },
 );
 
-TextField.displayName = 'TextField';
+TextArea.displayName = 'TextArea';

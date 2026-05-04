@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `TextFieldPropsShared` and `TextAreaPropsShared` now derive from `InputPropsShared` (with `isStateStylesDisabled` omitted from the shared surface). Both types now expose `textVariant` alongside the existing Input contract fields.
+- `InputPropsShared` now includes `placeholder` and `autoFocus` so the cross-platform Input contract documents these props explicitly (they remain intersected with native/HTML input props on each platform).
+
 ## [0.15.0]
 
 ### Added
