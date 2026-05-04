@@ -1,9 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useRef, useState } from 'react';
 
-import { Box, BoxBackgroundColor, BoxBorderColor } from '../Box';
+import {
+  Box,
+  BoxBackgroundColor,
+  BoxBorderColor,
+  BoxFlexDirection,
+} from '../Box';
 import { Button, ButtonVariant } from '../Button';
 import { Modal } from '../Modal';
+import { ModalOverlay } from '../ModalOverlay';
 import { Text } from '../Text';
 
 import { ModalContent } from './ModalContent';
@@ -54,13 +60,9 @@ const ModalShellExample = ({
         isClosedOnEscapeKey={isClosedOnEscapeKey}
         isClosedOnOutsideClick={isClosedOnOutsideClick}
       >
-        <Box
-          aria-hidden="true"
-          backgroundColor={BoxBackgroundColor.OverlayDefault}
-          className="fixed inset-0 z-[1049]"
-        />
+        <ModalOverlay />
         <ModalContent size={size}>
-          <Box flexDirection="flex-col" gap={4} padding={4}>
+          <Box flexDirection={BoxFlexDirection.Column} gap={4} padding={4}>
             <Text>Dialog content. Press Escape or click outside to close.</Text>
             <Button
               variant={ButtonVariant.Secondary}
@@ -81,7 +83,7 @@ export const Default: Story = {
 
 export const Size: Story = {
   render: () => (
-    <Box flexDirection="flex-col" gap={4}>
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
       <ModalShellExample size={ModalContentSize.Sm} />
       <ModalShellExample size={ModalContentSize.Md} />
       <ModalShellExample size={ModalContentSize.Lg} />
@@ -91,7 +93,7 @@ export const Size: Story = {
 
 export const KeyboardAndOutsideClickConfig: Story = {
   render: () => (
-    <Box flexDirection="flex-col" gap={4}>
+    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
       <ModalShellExample isClosedOnEscapeKey={false} />
       <ModalShellExample isClosedOnOutsideClick={false} />
     </Box>
@@ -112,13 +114,9 @@ export const IgnoreOutsideClickAttr: Story = {
           Open modal with sibling popover
         </Button>
         <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <Box
-            aria-hidden="true"
-            backgroundColor={BoxBackgroundColor.OverlayDefault}
-            className="fixed inset-0 z-[1049]"
-          />
+          <ModalOverlay />
           <ModalContent>
-            <Box flexDirection="flex-col" gap={4} padding={4}>
+            <Box flexDirection={BoxFlexDirection.Column} gap={4} padding={4}>
               <Text>
                 The "popover" below is rendered as a sibling to the dialog and
                 opts out of the outside-click handler via{' '}
