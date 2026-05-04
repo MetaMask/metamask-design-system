@@ -233,6 +233,8 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 };
 ```
 
+Migrating to `ActionListItem` from a legacy mobile row or building on MetaMask Mobile? See the [ActionListItem migration guide](../../../MIGRATION.md#actionlistitem-component) for the React Native–only API map, legacy source audit notes, and examples.
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

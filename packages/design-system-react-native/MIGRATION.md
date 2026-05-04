@@ -23,6 +23,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
   - [ListItem Component](#listitem-component)
+  - [ActionListItem Component](#actionlistitem-component)
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
@@ -2751,6 +2752,93 @@ The following mobile `component-library` sub-components build on `ListItem` but 
 - The mobile version sets `accessible accessibilityRole="none"` on the root element; MMDS does not.
 - The mobile version uses a default export; MMDS uses a named export.
 - `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.
+
+### ActionListItem Component
+
+`ActionListItem` is **React Native only** — it is not exported from `@metamask/design-system-react`. Use it for a single pressable row with optional leading icon, label, description, and end accessory.
+
+#### Legacy source audit (MetaMask Mobile)
+
+An **`ActionListItem` folder or export was not found** under `app/component-library/components` on the `main` branch at the time this guide was written (top-level folder listing and `List/` subtree checked via the GitHub API). If your app imports `ActionListItem` from a different path (for example a feature module, `components-temp`, or a renamed folder), compare your **local** legacy props to the MMDS API table below and open a docs PR with the legacy file path so the mapping can be completed.
+
+There is **no** MetaMask Extension `component-library` counterpart for this component.
+
+#### Breaking changes (import and usage model)
+
+##### Import path
+
+| Source | Design system |
+| ------ | ------------- |
+| _(legacy path varies — not found under standard component-library roots)_ | `import { ActionListItem } from '@metamask/design-system-react-native'` |
+| `import type { ActionListItemProps } from '…'` (legacy) | `import type { ActionListItemProps } from '@metamask/design-system-react-native'` |
+
+##### Pressable composition
+
+MMDS `ActionListItem` renders a **`Pressable`** root with **flat style** from `useTailwind()` (`bg-default`, horizontal padding, pressed background when enabled). Pass **`onPress`** at the top level; use **`pressableProps`** for additional `Pressable` props (see type: `onPress`, `disabled`, and `style` are omitted from `pressableProps` — use top-level `onPress`, `isDisabled`, and `style` / `twClassName` instead).
+
+| Concern | Notes |
+| ------- | ----- |
+| `disabled` | Use **`isDisabled`** (boolean, default `false`). Passed to `Pressable` as `disabled`. |
+| Opacity | When `isDisabled` is true, the row uses **50% opacity** and does not apply the pressed background. |
+| `style` | Merged with generated styles (array merge when both are set). |
+
+#### API mapping (MMDS `ActionListItem`)
+
+Structured mapping for **`@metamask/design-system-react-native`** (from `ActionListItemProps`):
+
+| Prop | Type / notes |
+| ---- | ------------ |
+| `label` | **`string \| ReactNode`** (required). Strings render inside `Text` with `TextVariant.BodyMd`; nodes render as-is (`labelTextProps` ignored). |
+| `description` | **`string \| ReactNode`** (optional). Strings use `TextVariant.BodySm` and `TextColor.TextAlternative`; nodes render as-is (`descriptionTextProps` ignored). |
+| `iconName` | **`IconName`** (optional). Renders `Icon` at **`IconSize.Md`** when set; ignored if **`startAccessory`** is set. |
+| `startAccessory` | **`ReactNode`** (optional). Takes precedence over `iconName`. |
+| `endAccessory` | **`ReactNode`** (optional). Right-side slot. |
+| `labelTextProps` | **`Partial<TextProps>`** — only when `label` is a string. |
+| `descriptionTextProps` | **`Partial<TextProps>`** — only when `description` is a string. |
+| `iconProps` | **`Partial<IconProps>`** — only when `iconName` is set and `startAccessory` is absent. |
+| `isDisabled` | **`boolean`** (default `false`). |
+| `onPress` | **`PressableProps['onPress']`**. |
+| `pressableProps` | **`Omit<PressableProps, 'onPress' \| 'disabled' \| 'style'>`** — extra Pressable props (e.g. `testID`, `accessibilityRole`, `hitSlop`). |
+| `twClassName` | **`string`** — merged into the Pressable style via `tw.style()`. |
+| `style` | From **`ViewProps`** — merged with generated styles. |
+| Other | **`Omit<ViewProps, 'children'>`** spread onto **`Pressable`** (e.g. `testID` on the root — prefer **`pressableProps`** if you need props specifically on the inner pressable behavior; implementation spreads `pressableProps` then `...props`). |
+
+**Removed vs ad‑hoc list rows:** There is no `children`-based slot like `ListItem`; content is driven by **`label`** / **`description`** / accessories. Rows that used **`ListItem`** with custom horizontal children may need to move markup into **`label`** / **`startAccessory`** / **`endAccessory`** or keep **`ListItem`** where that API still fits (see [ListItem Component](#listitem-component)).
+
+#### Migration examples
+
+##### Typical settings-style row (MMDS)
+
+After (design system):
+
+```tsx
+import { ActionListItem, IconName } from '@metamask/design-system-react-native';
+
+<ActionListItem
+  label="Settings"
+  description="Manage your account preferences"
+  iconName={IconName.Setting}
+  onPress={() => undefined}
+/>;
+```
+
+##### Custom label / description as nodes
+
+```tsx
+import { ActionListItem, Text, TextVariant } from '@metamask/design-system-react-native';
+
+<ActionListItem
+  label={<Text variant={TextVariant.HeadingSm}>Custom title</Text>}
+  description={<Text variant={TextVariant.BodySm}>Subtitle</Text>}
+  onPress={() => undefined}
+/>;
+```
+
+##### Disabled row
+
+```tsx
+<ActionListItem label="Unavailable" isDisabled onPress={() => undefined} />
+```
 
 ### TabEmptyState Component
 

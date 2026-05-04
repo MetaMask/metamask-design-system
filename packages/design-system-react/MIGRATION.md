@@ -19,6 +19,8 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
   - [ModalOverlay Component](#modaloverlay-component)
+  - [Components available in React Native only](#components-available-in-react-native-only)
+    - [ActionListItem (React Native)](#actionlistitem-component-react-native)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -1454,6 +1456,17 @@ For typical call sites — for example `ui/components/multichain/network-list-me
 
 - `ModalOverlay` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - One-off styling that previously used Box utility props (e.g. `backgroundColor={BackgroundColor.overlayAlternative}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="bg-overlay-alternative"`).
+
+## Components available in React Native only
+
+These primitives exist in `@metamask/design-system-react-native` but have **no** export in `@metamask/design-system-react`. If you are building the MetaMask **extension** (or any React web app on this design system), use web alternatives (for example `ListItem`, `Button`, or composition with `Box` / `Text`) or keep your platform-specific row implementation.
+
+### ActionListItem (React Native)
+
+`ActionListItem` is a pressable list row (label, optional description, optional leading `iconName` or `startAccessory`, optional `endAccessory`, `onPress`, `isDisabled`, `twClassName`).
+
+- **Extension:** There is no `ActionListItem` in the extension `component-library` — this section does not apply to extension migrations.
+- **Full API map, legacy audit notes, and before/after examples (Mobile):** [ActionListItem Component](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#actionlistitem-component) in `packages/design-system-react-native/MIGRATION.md`.
 
 ## Version Updates
 
