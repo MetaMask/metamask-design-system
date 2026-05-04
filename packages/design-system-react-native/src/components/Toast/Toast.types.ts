@@ -140,10 +140,3 @@ export type ToastProps = {
    */
   labelsContainerProps?: Omit<ViewProps, 'children' | 'style'>;
 } & Omit<ViewProps, 'style'>;
-
-/**
- * Toast context parameters.
- */
-export type ToastContextParams = {
-  toastRef: React.RefObject<ToastRef> | undefined;
-};
