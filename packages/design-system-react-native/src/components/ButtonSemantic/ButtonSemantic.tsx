@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../ButtonBase';
-import { IconSize } from '../Icon';
-import { TextVariant, FontWeight } from '../Text';
 
 import {
   TWCLASSMAP_BUTTONSEMANTIC_BG,
@@ -52,24 +50,10 @@ export const ButtonSemantic = ({
 
   return (
     <ButtonBase
-      textProps={{
-        variant: TextVariant.BodyMd,
-        fontWeight: FontWeight.Medium,
-        numberOfLines: 1,
-        ellipsizeMode: 'clip',
-        ...textProps,
-      }}
-      spinnerProps={{
-        ...spinnerProps,
-      }}
-      startIconProps={{
-        size: IconSize.Sm,
-        ...startIconProps,
-      }}
-      endIconProps={{
-        size: IconSize.Sm,
-        ...endIconProps,
-      }}
+      textProps={textProps}
+      spinnerProps={spinnerProps}
+      startIconProps={startIconProps}
+      endIconProps={endIconProps}
       isLoading={isLoading}
       twClassName={getContainerClassName}
       textClassName={getTextClassName}

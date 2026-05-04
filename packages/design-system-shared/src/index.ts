@@ -79,6 +79,7 @@ export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 
 // ButtonBase types (ADR-0003 + ADR-0004)
 export {
+  ButtonBaseShape,
   ButtonBaseSize,
   ButtonHeroSize,
   ButtonSize,

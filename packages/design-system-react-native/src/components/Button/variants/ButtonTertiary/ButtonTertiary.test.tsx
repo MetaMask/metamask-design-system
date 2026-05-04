@@ -202,9 +202,11 @@ describe('ButtonTertiary', () => {
   it('shows spinner + hides content when loading', () => {
     const spinnerTW = 'absolute inset-0 flex items-center justify-center';
 
-    const { getByTestId, getByText } = render(
+    const { getByTestId } = render(
       <ButtonTertiary
         isLoading
+        contentWrapperProps={{ testID: 'button-tertiary-content' }}
+        loadingWrapperProps={{ testID: 'spinner-container' }}
         spinnerProps={{ twClassName: spinnerTW }}
         testID="button-tertiary"
       >
@@ -219,12 +221,8 @@ describe('ButtonTertiary', () => {
       expect.arrayContaining([expect.objectContaining(tw`${spinnerTW}`)]),
     );
 
-    // Verify content is hidden with opacity-0
-    const text = getByText('Loading');
-    const textStyles = flattenStyles(text.props.style);
-    expect(textStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining({ opacity: 0 })]),
-    );
+    // Verify content is hidden
+    expect(getByTestId('button-tertiary-content')).toHaveStyle({ opacity: 0 });
 
     expect(
       getByTestId('button-tertiary').props.accessibilityState.disabled,

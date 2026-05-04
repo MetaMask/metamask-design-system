@@ -26,6 +26,23 @@ export const ButtonHeroSize = ButtonBaseSize;
 export type ButtonHeroSize = ButtonBaseSize;
 
 /**
+ * ButtonBase - corner shape
+ * Convert from enum to const object (ADR-0003)
+ */
+export const ButtonBaseShape = {
+  /**
+   * Fully rounded ends (pill / stadium).
+   */
+  Pill: 'pill',
+  /**
+   * Size-based corner radius (8px small, 12px medium and large).
+   */
+  Rounded: 'rounded',
+} as const;
+export type ButtonBaseShape =
+  (typeof ButtonBaseShape)[keyof typeof ButtonBaseShape];
+
+/**
  * ButtonBase component shared props (ADR-0004)
  * Platform-independent properties shared across React and React Native
  */
@@ -40,6 +57,12 @@ export type ButtonBasePropsShared = {
    * @default ButtonBaseSize.Lg
    */
   size?: ButtonBaseSize;
+  /**
+   * Visual corner treatment: pill uses full rounding; rounded uses size-based radius.
+   *
+   * @default ButtonBaseShape.Rounded
+   */
+  shape?: ButtonBaseShape;
   /**
    * Optional prop that when true, shows a loading spinner
    *

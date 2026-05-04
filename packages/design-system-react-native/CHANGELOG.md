@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `ButtonBase` accepts `loadingWrapperProps` and `contentWrapperProps` to customize the loading overlay wrapper (`Box`) and the label row (`BoxRow`).
+
+### Changed
+
+- **BREAKING:** `ButtonBase` no longer sets a default `testID` on the loading overlay wrapper. If you targeted the old `spinner-container` id, pass `loadingWrapperProps={{ testID: 'spinner-container' }}` (or your own id) on `ButtonBase` or on a wrapper component that forwards these props (for example, `ButtonHero`).
+
 ## [0.22.0]
 
 ### Changed

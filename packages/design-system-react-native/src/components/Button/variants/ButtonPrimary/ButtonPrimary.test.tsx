@@ -198,9 +198,11 @@ describe('ButtonPrimary', () => {
   it('shows spinner + hides content when loading', () => {
     const spinnerTW = 'absolute inset-0 flex items-center justify-center';
 
-    const { getByTestId, getByText } = render(
+    const { getByTestId } = render(
       <ButtonPrimary
         isLoading
+        contentWrapperProps={{ testID: 'button-primary-content' }}
+        loadingWrapperProps={{ testID: 'spinner-container' }}
         spinnerProps={{ twClassName: spinnerTW }}
         testID="button-primary"
       >
@@ -215,12 +217,8 @@ describe('ButtonPrimary', () => {
       expect.arrayContaining([expect.objectContaining(tw`${spinnerTW}`)]),
     );
 
-    // Verify content is hidden with opacity-0
-    const text = getByText('Loading');
-    const textStyles = flattenStyles(text.props.style);
-    expect(textStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining({ opacity: 0 })]),
-    );
+    // Verify content is hidden
+    expect(getByTestId('button-primary-content')).toHaveStyle({ opacity: 0 });
 
     expect(
       getByTestId('button-primary').props.accessibilityState.disabled,

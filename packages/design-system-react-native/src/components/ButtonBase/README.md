@@ -5,14 +5,56 @@ ButtonBase is a labeled element that a user can click or tap to initiate an acti
 ```tsx
 import { ButtonBase } from '@metamask/design-system-react-native';
 
-<ButtonBase onPress={() => console.log('Pressed')}>Button Content</ButtonBase>;
+<ButtonBase onPress={() => {}}>Default Example</ButtonBase>;
 ```
 
 ## Props
 
+### `size`
+
+The size of the button.
+
+Available sizes:
+
+- `ButtonBaseSize.Sm` (32px height)
+- `ButtonBaseSize.Md` (40px height)
+- `ButtonBaseSize.Lg` (48px height)
+
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `ButtonBaseSize` | No       | `ButtonBaseSize.Lg` |
+
+```tsx
+import { ButtonBaseSize } from '@metamask/design-system-shared';
+
+<ButtonBase size={ButtonBaseSize.Sm} onPress={() => {}}>
+  Small Button
+</ButtonBase>
+<ButtonBase onPress={() => {}}>Large Button (default)</ButtonBase>
+<ButtonBase size={ButtonBaseSize.Lg} onPress={() => {}}>
+  Large Button
+</ButtonBase>
+```
+
+### `shape`
+
+Corner style: **rounded** uses size-based border radius; **pill** uses fully rounded ends.
+
+| TYPE              | REQUIRED | DEFAULT                   |
+| ----------------- | -------- | ------------------------- |
+| `ButtonBaseShape` | No       | `ButtonBaseShape.Rounded` |
+
+```tsx
+import { ButtonBaseShape } from '@metamask/design-system-shared';
+
+<ButtonBase shape={ButtonBaseShape.Pill} onPress={() => {}}>
+  Pill button
+</ButtonBase>;
+```
+
 ### `children`
 
-The content of the ButtonBase component.
+The content of the `ButtonBase` component.
 
 | TYPE                        | REQUIRED | DEFAULT     |
 | --------------------------- | -------- | ----------- |
@@ -52,32 +94,6 @@ Whether the button is disabled.
 </ButtonBase>
 ```
 
-### `size`
-
-The size of the button.
-
-Available sizes:
-
-- `ButtonBaseSize.Sm` (32px height)
-- `ButtonBaseSize.Md` (40px height)
-- `ButtonBaseSize.Lg` (48px height)
-
-| TYPE             | REQUIRED | DEFAULT             |
-| ---------------- | -------- | ------------------- |
-| `ButtonBaseSize` | No       | `ButtonBaseSize.Lg` |
-
-```tsx
-<ButtonBase size={ButtonBaseSize.Sm} onPress={() => {}}>
-  Small Button
-</ButtonBase>
-<ButtonBase onPress={() => {}}>
-  Large Button (default)
-</ButtonBase>
-<ButtonBase size={ButtonBaseSize.Lg} onPress={() => {}}>
-  Large Button
-</ButtonBase>
-```
-
 ### `twClassName`
 
 Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
@@ -93,44 +109,50 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { ButtonBase } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<ButtonBase
-  onPress={() => {}}
-  twClassName="border-2 border-primary-100"
->
-  Custom Border
+<ButtonBase onPress={() => {}} twClassName="mt-4">
+  Custom Background
 </ButtonBase>
 
 // Override default styles
-<ButtonBase
-  onPress={() => {}}
-  twClassName="!bg-error-100"
->
+<ButtonBase onPress={() => {}} twClassName="bg-error-default">
   Override Background
 </ButtonBase>
 ```
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
 | `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-const styles = StyleSheet.create({
-  custom: {
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-});
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
-export const StyleExample = () => (
-  <ButtonBase onPress={() => {}} style={styles.custom}>
-    Custom styled button
-  </ButtonBase>
-);
+import { ButtonBase } from '@metamask/design-system-react-native';
+
+export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
+  const tw = useTailwind();
+
+  return (
+    <ButtonBase
+      onPress={() => {}}
+      style={tw.style('bg-default', isActive && 'bg-success-default')}
+    >
+      Conditional styling
+    </ButtonBase>
+  );
+};
 ```
+
+### `loadingWrapperProps`
+
+Props applied to the `Box` that wraps the loading spinner when `isLoading` is true. Merges with the default full-area centered layout; set `twClassName` to extend (not replace) that layout. The loading wrapper has **no default `testID`**—pass `testID` here for tests or automation (for example, if you previously queried `spinner-container`, pass `loadingWrapperProps={{ testID: 'spinner-container' }}`).
+
+### `contentWrapperProps`
+
+Props applied to the label row (`BoxRow`). Label typography is still controlled via `textProps` on `ButtonBase`, not through this object.
 
 ## Migration from MetaMask Mobile Component Library
 

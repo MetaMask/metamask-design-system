@@ -1,12 +1,22 @@
-import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
+import {
+  ButtonBaseShape,
+  ButtonBaseSize,
+  IconName,
+} from '@metamask/design-system-shared';
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Icon, IconSize } from '../Icon';
+import { Icon } from '../Icon';
 import { Text, FontWeight, TextColor } from '../Text';
 
-import { TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION } from './ButtonBase.constants';
+import {
+  MAP_BUTTONBASE_SIZE_ICONSIZE,
+  MAP_BUTTONBASE_SIZE_TEXT_VARIANT,
+  getButtonBaseBorderRadiusTwClass,
+  getButtonBaseHorizontalPaddingTwClasses,
+  TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
+} from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
 
 export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
@@ -15,6 +25,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
       children,
       className,
       size = ButtonBaseSize.Lg,
+      shape = ButtonBaseShape.Rounded,
       isFullWidth,
       asChild,
       isDisabled,
@@ -44,6 +55,14 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const Component = asChild ? Slot : 'button';
     const isInteractive = !(isDisabled ?? isLoading);
 
+    const finalStartIconName = startIconName ?? startIconProps?.name;
+    const finalEndIconName = endIconName ?? endIconProps?.name;
+    const hasStart = Boolean(finalStartIconName || startAccessory);
+    const hasEnd = Boolean(finalEndIconName || endAccessory);
+    const hasAccessories = hasStart || hasEnd;
+    const iconSize = MAP_BUTTONBASE_SIZE_ICONSIZE[size];
+    const labelTextVariant = MAP_BUTTONBASE_SIZE_TEXT_VARIANT[size];
+
     // Calculate tabIndex based on asChild and disabled state
     const getTabIndex = () => {
       if (asChild) {
@@ -52,89 +71,11 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
       return isDisabled ? -1 : undefined;
     };
 
-    const renderLoadingState = () => (
-      <>
-        <span className="absolute inline-flex items-center" aria-hidden="true">
-          <Icon
-            name={IconName.Loading}
-            size={IconSize.Sm}
-            className={twMerge(
-              'mr-2 animate-spin text-inherit',
-              loadingIconProps?.className,
-            )}
-            {...loadingIconProps}
-          />
-          <Text
-            fontWeight={FontWeight.Medium}
-            color={TextColor.Inherit}
-            asChild
-            {...loadingTextProps}
-          >
-            <span>{loadingText}</span>
-          </Text>
-        </span>
-        <span className="invisible inline-flex items-center">{children}</span>
-        {/* Screen reader announcement for loading */}
-        <span className="sr-only" aria-live="polite" aria-atomic="true">
-          {loadingText || 'Loading'}
-        </span>
-      </>
-    );
-
-    const renderStartContent = () => {
-      if (startIconName) {
-        return (
-          <Icon
-            name={startIconName}
-            size={IconSize.Sm}
-            className={twMerge(
-              'mr-2 shrink-0 text-inherit',
-              startIconProps?.className,
-            )}
-            aria-hidden="true"
-            {...startIconProps}
-          />
-        );
-      }
-      if (startAccessory) {
-        return (
-          <span className="mr-2" aria-hidden="true">
-            {startAccessory}
-          </span>
-        );
-      }
-      return null;
-    };
-
-    const renderEndContent = () => {
-      if (endIconName) {
-        return (
-          <Icon
-            name={endIconName}
-            size={IconSize.Sm}
-            className={twMerge(
-              'ml-2 shrink-0 text-inherit',
-              endIconProps?.className,
-            )}
-            aria-hidden="true"
-            {...endIconProps}
-          />
-        );
-      }
-      if (endAccessory) {
-        return (
-          <span className="ml-2" aria-hidden="true">
-            {endAccessory}
-          </span>
-        );
-      }
-      return null;
-    };
-
-    const renderContent = () => {
+    const renderLabel = () => {
       if (children && typeof children === 'string') {
         return (
           <Text
+            variant={labelTextVariant}
             fontWeight={FontWeight.Medium}
             color={TextColor.Inherit}
             asChild
@@ -147,13 +88,94 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
       return children;
     };
 
+    const renderLoadingState = () => (
+      <>
+        <span
+          className="absolute inline-flex items-center gap-x-1"
+          aria-hidden="true"
+        >
+          <Icon
+            name={IconName.Loading}
+            size={iconSize}
+            className={twMerge(
+              'animate-spin text-inherit',
+              loadingIconProps?.className,
+            )}
+            {...loadingIconProps}
+          />
+          <Text
+            variant={labelTextVariant}
+            fontWeight={FontWeight.Medium}
+            color={TextColor.Inherit}
+            asChild
+            {...loadingTextProps}
+          >
+            <span>{loadingText}</span>
+          </Text>
+        </span>
+        <span className="invisible inline-flex items-center" aria-hidden="true">
+          {renderLabel()}
+        </span>
+        {/* Screen reader announcement for loading */}
+        <span className="sr-only" aria-live="polite" aria-atomic="true">
+          {loadingText || 'Loading'}
+        </span>
+      </>
+    );
+
+    const renderStartContent = () => {
+      if (finalStartIconName) {
+        return (
+          <Icon
+            name={finalStartIconName}
+            size={iconSize}
+            className={twMerge(
+              'shrink-0 text-inherit',
+              startIconProps?.className,
+            )}
+            aria-hidden="true"
+            {...startIconProps}
+          />
+        );
+      }
+      if (startAccessory) {
+        return <span aria-hidden="true">{startAccessory}</span>;
+      }
+      return null;
+    };
+
+    const renderEndContent = () => {
+      if (finalEndIconName) {
+        return (
+          <Icon
+            name={finalEndIconName}
+            size={iconSize}
+            className={twMerge(
+              'shrink-0 text-inherit',
+              endIconProps?.className,
+            )}
+            aria-hidden="true"
+            {...endIconProps}
+          />
+        );
+      }
+      if (endAccessory) {
+        return <span aria-hidden="true">{endAccessory}</span>;
+      }
+      return null;
+    };
+
+    const renderContent = () => renderLabel();
+
     const mergedClassName = twMerge(
       // Base styles
       'inline-flex items-center justify-center',
-      'rounded-xl px-4',
+      getButtonBaseBorderRadiusTwClass(size, shape),
+      getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
+      hasAccessories && 'gap-x-1',
       'font-medium text-default',
       'bg-muted',
-      'min-w-20 overflow-hidden',
+      'overflow-hidden',
       // Add relative positioning for loading state
       'relative',
       // Size

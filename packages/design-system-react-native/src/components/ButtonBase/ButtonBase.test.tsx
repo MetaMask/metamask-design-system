@@ -1,17 +1,25 @@
-import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
+import {
+  ButtonBaseShape,
+  ButtonBaseSize,
+  IconName,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { View, Text } from 'react-native';
 import * as ReactTestRenderer from 'react-test-renderer';
 
 import { ButtonBase } from './ButtonBase';
+import { getButtonBaseBorderRadiusTwClass } from './ButtonBase.constants';
 
 describe('ButtonBase', () => {
-  const getTw = () => renderHook(() => useTailwind()).result.current;
+  let tw: ReturnType<typeof useTailwind>;
 
-  // Helper functions to avoid conditionals in tests
+  beforeAll(() => {
+    tw = renderHook(() => useTailwind()).result.current;
+  });
+
   const createFunctionStyle =
     () =>
     ({ pressed }: { pressed: boolean }) => {
@@ -36,493 +44,592 @@ describe('ButtonBase', () => {
       return null;
     };
 
-  it('renders children correctly', () => {
-    const { getByText } = render(<ButtonBase>Click me</ButtonBase>);
-    expect(getByText('Click me')).toBeDefined();
-  });
+  describe('rendering', () => {
+    it('displays string children', () => {
+      const { getByText } = render(<ButtonBase>Click me</ButtonBase>);
 
-  it('applies the correct size styles', () => {
-    const { getByTestId } = render(
-      <ButtonBase size={ButtonBaseSize.Sm} testID="btn">
-        Small button
-      </ButtonBase>,
-    );
-    const btn = getByTestId('btn');
-    expect(btn).toBeDefined();
-  });
-
-  it('applies custom className when provided', () => {
-    const customClass = 'bg-default';
-    const { getByTestId } = render(
-      <ButtonBase twClassName={customClass} testID="btn">
-        Custom button
-      </ButtonBase>,
-    );
-    const btn = getByTestId('btn');
-    expect(btn).toBeDefined();
-  });
-
-  it('applies function-based twClassName correctly', () => {
-    const twClassNameFn = (pressed: boolean) =>
-      pressed ? 'bg-pressed' : 'bg-default';
-
-    const tree = ReactTestRenderer.create(
-      <ButtonBase twClassName={twClassNameFn}>Function ClassName</ButtonBase>,
-    );
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
+      expect(getByText('Click me')).toBeOnTheScreen();
     });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
 
-    // Test both pressed states to cover the branch
-    expect(styleFn({ pressed: false })).toBeDefined();
-    expect(styleFn({ pressed: true })).toBeDefined();
+    it('displays element children', () => {
+      const { getByText } = render(
+        <ButtonBase>
+          <Text>Nested</Text>
+        </ButtonBase>,
+      );
+
+      expect(getByText('Nested')).toBeOnTheScreen();
+    });
   });
 
-  it('applies full width class when isFullWidth is true', () => {
-    const { getByTestId } = render(
-      <ButtonBase isFullWidth testID="btn">
-        Full width
-      </ButtonBase>,
-    );
-    const btn = getByTestId('btn');
-    expect(btn).toBeDefined();
+  describe('size', () => {
+    it('applies small height when size is sm', () => {
+      const { getByTestId } = render(
+        <ButtonBase size={ButtonBaseSize.Sm} testID="btn">
+          Small
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('btn')).toHaveStyle(tw`h-8`);
+    });
+
+    it('applies medium height when size is md', () => {
+      const { getByTestId } = render(
+        <ButtonBase size={ButtonBaseSize.Md} testID="btn">
+          Medium
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('btn')).toHaveStyle(tw`h-10`);
+    });
+
+    it('applies large height by default', () => {
+      const { getByTestId } = render(
+        <ButtonBase testID="btn">Large default</ButtonBase>,
+      );
+
+      expect(getByTestId('btn')).toHaveStyle(tw`h-12`);
+    });
   });
 
-  it('disables the button when isDisabled is true', () => {
-    const { getByTestId } = render(
-      <ButtonBase isDisabled testID="btn">
-        Disabled
-      </ButtonBase>,
-    );
-    const btn = getByTestId('btn');
-    expect(btn.props.accessibilityState.disabled).toBe(true);
+  describe('shape', () => {
+    it('uses rounded-full for pill shape', () => {
+      const tree = ReactTestRenderer.create(
+        <ButtonBase shape={ButtonBaseShape.Pill} size={ButtonBaseSize.Lg}>
+          Pill
+        </ButtonBase>,
+      );
+
+      const buttonAnimated = tree.root.findByProps({
+        accessibilityRole: 'button',
+      });
+      const styleFn = buttonAnimated.props.style as (p: {
+        pressed: boolean;
+      }) => unknown[];
+      const resolved = styleFn({ pressed: false })[0] as Record<
+        string,
+        unknown
+      >;
+      const pillRadiusStyle = tw.style(
+        getButtonBaseBorderRadiusTwClass(
+          ButtonBaseSize.Lg,
+          ButtonBaseShape.Pill,
+        ),
+      );
+
+      expect(resolved).toMatchObject(pillRadiusStyle);
+    });
   });
 
-  it('handles press events correctly', async () => {
-    const onPress = jest.fn();
-    const { getByTestId } = render(
-      <ButtonBase onPress={onPress} testID="btn">
-        Press me
-      </ButtonBase>,
-    );
-    const btn = getByTestId('btn');
-    fireEvent.press(btn);
-    await waitFor(() => {
+  describe('twClassName', () => {
+    it('merges static classes onto the button', () => {
+      const { getByTestId } = render(
+        <ButtonBase twClassName="bg-default" testID="btn">
+          Custom
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('btn')).toHaveStyle(tw`bg-default`);
+    });
+
+    it('evaluates function twClassName for pressed state', () => {
+      const twClassNameFn = (pressed: boolean) =>
+        pressed ? 'bg-pressed' : 'bg-default';
+
+      const tree = ReactTestRenderer.create(
+        <ButtonBase twClassName={twClassNameFn}>Fn twClassName</ButtonBase>,
+      );
+
+      const buttonAnimated = tree.root.findByProps({
+        accessibilityRole: 'button',
+      });
+      const styleFn = buttonAnimated.props.style as (p: {
+        pressed: boolean;
+      }) => unknown[];
+
+      expect(styleFn({ pressed: false })).toBeDefined();
+      expect(styleFn({ pressed: true })).toBeDefined();
+    });
+  });
+
+  describe('layout width', () => {
+    it('expands to full width when isFullWidth is true', () => {
+      const { getByTestId } = render(
+        <ButtonBase isFullWidth testID="btn">
+          Full width
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('btn')).toHaveStyle(tw`w-full`);
+    });
+  });
+
+  describe('style prop', () => {
+    it('merges function style when pressed changes', () => {
+      const functionStyle = createFunctionStyle();
+
+      const tree = ReactTestRenderer.create(
+        <ButtonBase style={functionStyle}>Function Style</ButtonBase>,
+      );
+
+      const buttonAnimated = tree.root.findByProps({
+        accessibilityRole: 'button',
+      });
+      const styleFn = buttonAnimated.props.style as (p: {
+        pressed: boolean;
+      }) => unknown[];
+
+      const defaultStyles = styleFn({ pressed: false });
+
+      expect(Array.isArray(defaultStyles)).toBe(true);
+      expect(defaultStyles).toStrictEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            borderWidth: 1,
+            borderColor: 'blue',
+          }),
+        ]),
+      );
+
+      const pressedStyles = styleFn({ pressed: true });
+
+      expect(Array.isArray(pressedStyles)).toBe(true);
+      expect(pressedStyles).toStrictEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            borderWidth: 2,
+            borderColor: 'red',
+          }),
+        ]),
+      );
+    });
+
+    it('omits extra styles when function returns null when not pressed', () => {
+      const falsyStyleFunction = createFalsyStyleFunction();
+
+      const tree = ReactTestRenderer.create(
+        <ButtonBase style={falsyStyleFunction}>Falsy Style</ButtonBase>,
+      );
+
+      const buttonAnimated = tree.root.findByProps({
+        accessibilityRole: 'button',
+      });
+      const styleFn = buttonAnimated.props.style as (p: {
+        pressed: boolean;
+      }) => unknown[];
+
+      const defaultStyles = styleFn({ pressed: false });
+
+      expect(Array.isArray(defaultStyles)).toBe(true);
+      expect(defaultStyles).toHaveLength(1);
+
+      const pressedStyles = styleFn({ pressed: true });
+
+      expect(Array.isArray(pressedStyles)).toBe(true);
+      expect(pressedStyles).toStrictEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            borderWidth: 2,
+          }),
+        ]),
+      );
+    });
+
+    it('merges static style objects', () => {
+      const staticStyle = { borderWidth: 3, borderColor: 'green' };
+
+      const tree = ReactTestRenderer.create(
+        <ButtonBase style={staticStyle}>Static Style</ButtonBase>,
+      );
+
+      const buttonAnimated = tree.root.findByProps({
+        accessibilityRole: 'button',
+      });
+      const styleFn = buttonAnimated.props.style as (p: {
+        pressed: boolean;
+      }) => unknown[];
+
+      const styles = styleFn({ pressed: false });
+
+      expect(Array.isArray(styles)).toBe(true);
+      expect(styles).toStrictEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            borderWidth: 3,
+            borderColor: 'green',
+          }),
+        ]),
+      );
+    });
+  });
+
+  describe('interaction', () => {
+    it('invokes onPress when pressed', () => {
+      const onPress = jest.fn();
+
+      const { getByTestId } = render(
+        <ButtonBase onPress={onPress} testID="btn">
+          Press me
+        </ButtonBase>,
+      );
+
+      fireEvent.press(getByTestId('btn'));
+
       expect(onPress).toHaveBeenCalledTimes(1);
     });
-  });
 
-  it('does not call onPress when disabled', async () => {
-    const onPress = jest.fn();
-    const { getByTestId } = render(
-      <ButtonBase onPress={onPress} isDisabled testID="btn">
-        Disabled
-      </ButtonBase>,
-    );
-    const btn = getByTestId('btn');
-    fireEvent.press(btn);
-    await waitFor(() => {
+    it('does not invoke onPress when disabled', () => {
+      const onPress = jest.fn();
+
+      const { getByTestId } = render(
+        <ButtonBase onPress={onPress} isDisabled testID="btn">
+          Disabled
+        </ButtonBase>,
+      );
+
+      const btn = getByTestId('btn');
+      fireEvent.press(btn);
+
+      expect(onPress).not.toHaveBeenCalled();
+      expect(btn).toBeDisabled();
+    });
+
+    it('does not invoke onPress when loading', () => {
+      const onPress = jest.fn();
+
+      const { getByTestId } = render(
+        <ButtonBase onPress={onPress} isLoading testID="btn">
+          Load
+        </ButtonBase>,
+      );
+
+      fireEvent.press(getByTestId('btn'));
+
       expect(onPress).not.toHaveBeenCalled();
     });
   });
 
-  it('renders with default textProps when not provided', () => {
-    const { getByText } = render(<ButtonBase>Default text</ButtonBase>);
-    expect(getByText('Default text')).toBeDefined();
-  });
+  describe('textProps', () => {
+    it('defaults label to single line with clip ellipsis', () => {
+      const { getByText } = render(<ButtonBase>Label</ButtonBase>);
 
-  it('merges custom textProps with defaults', () => {
-    const { getByText } = render(
-      <ButtonBase textProps={{ numberOfLines: 2 }}>
-        Custom text props
-      </ButtonBase>,
-    );
-    expect(getByText('Custom text props')).toBeDefined();
-  });
-
-  it('renders spinner and hides content when loading', () => {
-    const tw = getTw();
-    const spinnerClasses =
-      'flex-row items-center gap-x-2 absolute inset-0 flex items-center justify-center opacity-100';
-    const expectedSpinner = tw.style(
-      'flex-row items-center gap-x-2',
-      spinnerClasses,
-    );
-
-    const { getByTestId } = render(
-      <ButtonBase
-        testID="btn"
-        isLoading
-        spinnerProps={{ twClassName: spinnerClasses, testID: 'spinner' }}
-      >
-        Loading
-      </ButtonBase>,
-    );
-    expect(getByTestId('spinner').props.style[0]).toStrictEqual(
-      expectedSpinner,
-    );
-    expect(getByTestId('btn').props.accessibilityState.disabled).toBe(true);
-  });
-
-  it('shows loadingText inside the spinner', () => {
-    const text = 'Please wait…';
-    const { getByText } = render(
-      <ButtonBase isLoading loadingText={text}>
-        X
-      </ButtonBase>,
-    );
-    expect(getByText(text)).toBeDefined();
-  });
-
-  it('forwards spinnerProps into Spinner', () => {
-    const { getByTestId } = render(
-      <ButtonBase
-        testID="btn"
-        isLoading
-        spinnerProps={{
-          testID: 'outer-spinner',
-          spinnerIconProps: { testID: 'inner-icon' },
-        }}
-      >
-        X
-      </ButtonBase>,
-    );
-    expect(getByTestId('outer-spinner')).toBeDefined();
-    expect(getByTestId('inner-icon')).toBeDefined();
-  });
-
-  it('renders start and end icons when names are provided', () => {
-    const { getByTestId } = render(
-      <ButtonBase
-        startIconName={IconName.Add}
-        startIconProps={{ testID: 'start' }}
-        endIconName={IconName.Close}
-        endIconProps={{ testID: 'end' }}
-      >
-        X
-      </ButtonBase>,
-    );
-    expect(getByTestId('start')).toBeDefined();
-    expect(getByTestId('end')).toBeDefined();
-  });
-
-  it('renders custom accessories when icon names are omitted', () => {
-    const { getByTestId, queryByTestId } = render(
-      <ButtonBase
-        startAccessory={<View testID="sa" />}
-        endAccessory={<View testID="ea" />}
-      >
-        X
-      </ButtonBase>,
-    );
-    expect(getByTestId('sa')).toBeDefined();
-    expect(getByTestId('ea')).toBeDefined();
-    expect(queryByTestId('start')).toBeNull();
-    expect(queryByTestId('end')).toBeNull();
-  });
-
-  it('renders custom accessories in loading state', () => {
-    const tree = ReactTestRenderer.create(
-      <ButtonBase
-        isLoading
-        startAccessory={<View testID="sa" />}
-        endAccessory={<View testID="ea" />}
-        testID="btn"
-      >
-        Loading
-      </ButtonBase>,
-    );
-
-    // Find the accessory views
-    const startAccessory = tree.root.findByProps({ testID: 'sa' });
-    const endAccessory = tree.root.findByProps({ testID: 'ea' });
-
-    expect(startAccessory).toBeDefined();
-    expect(endAccessory).toBeDefined();
-
-    // Verify the wrapper Views have opacity-0 when loading
-    // The accessories are wrapped in View with tw.style(isLoading && 'opacity-0')
-    const startWrapper = startAccessory.parent;
-    const endWrapper = endAccessory.parent;
-
-    expect(startWrapper?.props.style).toStrictEqual(
-      expect.objectContaining({ opacity: 0 }),
-    );
-    expect(endWrapper?.props.style).toStrictEqual(
-      expect.objectContaining({ opacity: 0 }),
-    );
-  });
-
-  it('hides non-string React element children during loading', () => {
-    const tree = ReactTestRenderer.create(
-      <ButtonBase isLoading testID="btn">
-        <View testID="custom-child">
-          <View testID="nested-content" />
-        </View>
-      </ButtonBase>,
-    );
-
-    // Find the custom child element
-    const customChild = tree.root.findByProps({ testID: 'custom-child' });
-    expect(customChild).toBeDefined();
-
-    // Verify the wrapper View has opacity-0 when loading
-    // Non-string children are wrapped in View with tw.style(isLoading && 'opacity-0')
-    const wrapper = customChild.parent;
-    expect(wrapper?.props.style).toStrictEqual(
-      expect.objectContaining({ opacity: 0 }),
-    );
-  });
-
-  it('applies function-based style prop correctly', () => {
-    const functionStyle = createFunctionStyle();
-
-    const tree = ReactTestRenderer.create(
-      <ButtonBase style={functionStyle}>Function Style</ButtonBase>,
-    );
-
-    // Find the ButtonAnimated component which has the style function
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
-    });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
-
-    // Test the function with pressed: false
-    const defaultStyles = styleFn({ pressed: false });
-    expect(Array.isArray(defaultStyles)).toBe(true);
-    expect(defaultStyles).toStrictEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          borderWidth: 1,
-          borderColor: 'blue',
-        }),
-      ]),
-    );
-
-    // Test the function with pressed: true
-    const pressedStyles = styleFn({ pressed: true });
-    expect(Array.isArray(pressedStyles)).toBe(true);
-    expect(pressedStyles).toStrictEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          borderWidth: 2,
-          borderColor: 'red',
-        }),
-      ]),
-    );
-  });
-
-  it('handles function-based style prop returning falsy value', () => {
-    const falsyStyleFunction = createFalsyStyleFunction();
-
-    const tree = ReactTestRenderer.create(
-      <ButtonBase style={falsyStyleFunction}>Falsy Style</ButtonBase>,
-    );
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
-    });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
-
-    // Test with pressed: false (returns null)
-    const defaultStyles = styleFn({ pressed: false });
-    expect(Array.isArray(defaultStyles)).toBe(true);
-    expect(defaultStyles).toHaveLength(1); // Only base styles, no additional style
-
-    // Test with pressed: true (returns style object)
-    const pressedStyles = styleFn({ pressed: true });
-    expect(Array.isArray(pressedStyles)).toBe(true);
-    expect(pressedStyles).toStrictEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          borderWidth: 2,
-        }),
-      ]),
-    );
-  });
-
-  it('applies static style prop correctly', () => {
-    const staticStyle = { borderWidth: 3, borderColor: 'green' };
-
-    const tree = ReactTestRenderer.create(
-      <ButtonBase style={staticStyle}>Static Style</ButtonBase>,
-    );
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
-    });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
-
-    const styles = styleFn({ pressed: false });
-    expect(Array.isArray(styles)).toBe(true);
-    expect(styles).toStrictEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          borderWidth: 3,
-          borderColor: 'green',
-        }),
-      ]),
-    );
-  });
-
-  it('renders without start or end icons when not provided', () => {
-    const { queryByTestId } = render(<ButtonBase>No Icons</ButtonBase>);
-
-    // Should not render start or end icons
-    expect(queryByTestId('start-icon')).toBeNull();
-    expect(queryByTestId('end-icon')).toBeNull();
-  });
-
-  it('applies iconClassName when provided with icons', () => {
-    const iconClassNameFn = (pressed: boolean) =>
-      pressed ? 'icon-pressed' : 'icon-default';
-
-    const tree = ReactTestRenderer.create(
-      <ButtonBase
-        startIconName={IconName.Add}
-        startIconProps={{ testID: 'start-icon' }}
-        endIconName={IconName.Close}
-        endIconProps={{ testID: 'end-icon' }}
-        iconClassName={iconClassNameFn}
-        testID="button-base"
-      >
-        With Icon Classes
-      </ButtonBase>,
-    );
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
+      const label = getByText('Label');
+      expect(label.props.numberOfLines).toBe(1);
+      expect(label.props.ellipsizeMode).toBe('clip');
     });
 
-    // Verify the iconClassName function is called with pressed states
-    const childrenFn = buttonAnimated.props.children;
-    expect(typeof childrenFn).toBe('function');
+    it('allows overriding numberOfLines and ellipsizeMode', () => {
+      const { getByText } = render(
+        <ButtonBase textProps={{ numberOfLines: 2, ellipsizeMode: 'tail' }}>
+          Custom text props
+        </ButtonBase>,
+      );
 
-    // Test both pressed states
-    const unpressedContent = childrenFn({ pressed: false });
-    const pressedContent = childrenFn({ pressed: true });
-
-    expect(unpressedContent).toBeDefined();
-    expect(pressedContent).toBeDefined();
+      const label = getByText('Custom text props');
+      expect(label.props.numberOfLines).toBe(2);
+      expect(label.props.ellipsizeMode).toBe('tail');
+    });
   });
 
-  it('applies textClassName when provided', () => {
-    const textClassNameFn = (pressed: boolean) =>
-      pressed ? 'text-pressed' : 'text-default';
+  describe('loading state', () => {
+    it('centers the spinner overlay and disables the control', () => {
+      const spinnerExtra =
+        'flex-row items-center gap-x-2 absolute inset-0 flex items-center justify-center opacity-100';
+      const expectedSpinner = tw.style(
+        'flex-row items-center gap-x-2',
+        spinnerExtra,
+      );
 
-    const tree = ReactTestRenderer.create(
-      <ButtonBase textClassName={textClassNameFn}>
-        Text with className
-      </ButtonBase>,
-    );
+      const { getByTestId } = render(
+        <ButtonBase
+          testID="btn"
+          isLoading
+          loadingWrapperProps={{ testID: 'spinner-container' }}
+          spinnerProps={{ twClassName: spinnerExtra, testID: 'spinner' }}
+        >
+          Loading
+        </ButtonBase>,
+      );
 
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
+      expect(getByTestId('spinner').props.style[0]).toStrictEqual(
+        expectedSpinner,
+      );
+      expect(getByTestId('spinner-container')).toHaveStyle(
+        tw`absolute inset-0 flex items-center justify-center`,
+      );
+      expect(getByTestId('btn')).toBeDisabled();
     });
 
-    // Verify the textClassName function is called with pressed states
-    const childrenFn = buttonAnimated.props.children;
-    expect(typeof childrenFn).toBe('function');
+    it('merges loadingWrapperProps (testID and twClassName) with default overlay layout', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          isLoading
+          loadingWrapperProps={{
+            testID: 'loading-overlay',
+            twClassName: 'opacity-100',
+          }}
+        >
+          X
+        </ButtonBase>,
+      );
 
-    // Test both pressed states to ensure function is working
-    const unpressedContent = childrenFn({ pressed: false });
-    const pressedContent = childrenFn({ pressed: true });
+      expect(getByTestId('loading-overlay')).toHaveStyle(
+        tw`absolute inset-0 flex items-center justify-center opacity-100`,
+      );
+    });
 
-    expect(unpressedContent).toBeDefined();
-    expect(pressedContent).toBeDefined();
+    it('renders loadingText in the spinner', () => {
+      const text = 'Please wait…';
+
+      const { getByText } = render(
+        <ButtonBase isLoading loadingText={text}>
+          X
+        </ButtonBase>,
+      );
+
+      expect(getByText(text)).toBeOnTheScreen();
+    });
+
+    it('forwards spinnerProps to Spinner', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          testID="btn"
+          isLoading
+          spinnerProps={{
+            testID: 'outer-spinner',
+            spinnerIconProps: { testID: 'inner-icon' },
+          }}
+        >
+          X
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('outer-spinner')).toBeOnTheScreen();
+      expect(getByTestId('inner-icon')).toBeOnTheScreen();
+    });
+
+    it('hides the content row with opacity while keeping layout', () => {
+      const tree = ReactTestRenderer.create(
+        <ButtonBase
+          isLoading
+          startAccessory={<View testID="sa" />}
+          endAccessory={<View testID="ea" />}
+          testID="btn"
+        >
+          Loading
+        </ButtonBase>,
+      );
+
+      const startAccessory = tree.root.findByProps({ testID: 'sa' });
+      const endAccessory = tree.root.findByProps({ testID: 'ea' });
+
+      const startWrapper = startAccessory.parent;
+      const endWrapper = endAccessory.parent;
+
+      expect(startWrapper).toBe(endWrapper);
+      const rowStyle = startWrapper?.props.style;
+      const rowStyleObject = Array.isArray(rowStyle) ? rowStyle[0] : rowStyle;
+      expect(rowStyleObject).toMatchObject({ opacity: 0 });
+    });
+
+    it('hides non-string children during loading', () => {
+      const tree = ReactTestRenderer.create(
+        <ButtonBase isLoading testID="btn">
+          <View testID="custom-child">
+            <View testID="nested-content" />
+          </View>
+        </ButtonBase>,
+      );
+
+      const customChild = tree.root.findByProps({ testID: 'custom-child' });
+
+      let opacityAncestor: ReactTestRenderer.ReactTestInstance | undefined =
+        customChild.parent ?? undefined;
+      let foundRowOpacity = false;
+      while (opacityAncestor) {
+        const s = opacityAncestor.props.style;
+        const flat = Array.isArray(s) ? s[0] : s;
+        if (flat && typeof flat === 'object' && flat.opacity === 0) {
+          foundRowOpacity = true;
+          break;
+        }
+        opacityAncestor = opacityAncestor.parent ?? undefined;
+      }
+
+      expect(foundRowOpacity).toBe(true);
+    });
   });
 
-  it('applies textClassName in loading state', () => {
-    const textClassNameFn = (pressed: boolean) =>
-      pressed ? 'text-pressed' : 'text-default';
+  describe('icons and accessories', () => {
+    it('renders start and end icons when names are provided', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          startIconName={IconName.Add}
+          startIconProps={{ testID: 'start' }}
+          endIconName={IconName.Close}
+          endIconProps={{ testID: 'end' }}
+        >
+          X
+        </ButtonBase>,
+      );
 
-    const tree = ReactTestRenderer.create(
-      <ButtonBase
-        isLoading
-        loadingText="Loading"
-        textClassName={textClassNameFn}
-        testID="btn"
-      >
-        Content
-      </ButtonBase>,
-    );
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
+      expect(getByTestId('start')).toBeOnTheScreen();
+      expect(getByTestId('end')).toBeOnTheScreen();
     });
 
-    // Verify the textClassName function works in loading state
-    const childrenFn = buttonAnimated.props.children;
-    expect(typeof childrenFn).toBe('function');
+    it('uses startIconProps.name when startIconName is omitted', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          startIconProps={{ name: IconName.Add, testID: 'start-from-props' }}
+        >
+          X
+        </ButtonBase>,
+      );
 
-    // Test both pressed states
-    const unpressedContent = childrenFn({ pressed: false });
-    const pressedContent = childrenFn({ pressed: true });
+      expect(getByTestId('start-from-props')).toBeOnTheScreen();
+    });
 
-    expect(unpressedContent).toBeDefined();
-    expect(pressedContent).toBeDefined();
+    it('uses endIconProps.name when endIconName is omitted', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          endIconProps={{ name: IconName.Close, testID: 'end-from-props' }}
+        >
+          X
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('end-from-props')).toBeOnTheScreen();
+    });
+
+    it('renders custom accessories when icon names are omitted', () => {
+      const { getByTestId, queryByTestId } = render(
+        <ButtonBase
+          startAccessory={<View testID="sa" />}
+          endAccessory={<View testID="ea" />}
+        >
+          X
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('sa')).toBeOnTheScreen();
+      expect(getByTestId('ea')).toBeOnTheScreen();
+      expect(queryByTestId('start')).toBeNull();
+      expect(queryByTestId('end')).toBeNull();
+    });
+
+    it('displays only the label when no icons or accessories are set', () => {
+      const { getByText, queryByTestId } = render(
+        <ButtonBase>No side content</ButtonBase>,
+      );
+
+      expect(getByText('No side content')).toBeOnTheScreen();
+      expect(queryByTestId('start-icon')).toBeNull();
+    });
   });
 
-  it('applies iconClassName in loading state', () => {
-    const iconClassNameFn = (pressed: boolean) =>
-      pressed ? 'icon-pressed' : 'icon-default';
+  describe('when iconClassName and textClassName are set', () => {
+    it('supplies children render function for icon and text class hooks', () => {
+      const iconClassNameFn = (pressed: boolean) =>
+        pressed ? 'icon-pressed' : 'icon-default';
+      const textClassNameFn = (pressed: boolean) =>
+        pressed ? 'text-pressed' : 'text-default';
 
-    const tree = ReactTestRenderer.create(
-      <ButtonBase
-        isLoading
-        startIconName={IconName.Add}
-        startIconProps={{ testID: 'start-icon' }}
-        endIconName={IconName.Close}
-        endIconProps={{ testID: 'end-icon' }}
-        iconClassName={iconClassNameFn}
-        testID="btn"
-      >
-        Loading with icons
-      </ButtonBase>,
-    );
+      const tree = ReactTestRenderer.create(
+        <ButtonBase
+          startIconName={IconName.Add}
+          startIconProps={{ testID: 'start-icon' }}
+          endIconName={IconName.Close}
+          endIconProps={{ testID: 'end-icon' }}
+          iconClassName={iconClassNameFn}
+          textClassName={textClassNameFn}
+          testID="button-base"
+        >
+          With classes
+        </ButtonBase>,
+      );
 
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
+      const buttonAnimated = tree.root.findByProps({
+        accessibilityRole: 'button',
+      });
+      const childrenFn = buttonAnimated.props.children as (p: {
+        pressed: boolean;
+      }) => React.ReactNode;
+
+      expect(typeof childrenFn).toBe('function');
+      expect(childrenFn({ pressed: false })).toBeDefined();
+      expect(childrenFn({ pressed: true })).toBeDefined();
     });
 
-    // Verify the iconClassName function works in loading state
-    const childrenFn = buttonAnimated.props.children;
-    expect(typeof childrenFn).toBe('function');
+    it('applies class hooks while loading with icons', () => {
+      const iconClassNameFn = (pressed: boolean) =>
+        pressed ? 'icon-pressed' : 'icon-default';
 
-    // Test both pressed states
-    const unpressedContent = childrenFn({ pressed: false });
-    const pressedContent = childrenFn({ pressed: true });
+      const tree = ReactTestRenderer.create(
+        <ButtonBase
+          isLoading
+          startIconName={IconName.Add}
+          startIconProps={{ testID: 'start-icon' }}
+          endIconName={IconName.Close}
+          endIconProps={{ testID: 'end-icon' }}
+          iconClassName={iconClassNameFn}
+          testID="btn"
+        >
+          Loading with icons
+        </ButtonBase>,
+      );
 
-    expect(unpressedContent).toBeDefined();
-    expect(pressedContent).toBeDefined();
-  });
+      const buttonAnimated = tree.root.findByProps({
+        accessibilityRole: 'button',
+      });
+      const childrenFn = buttonAnimated.props.children as (p: {
+        pressed: boolean;
+      }) => React.ReactNode;
 
-  it('renders icons without iconClassName when not provided', () => {
-    const tree = ReactTestRenderer.create(
-      <ButtonBase startIconName={IconName.Add} endIconName={IconName.Close}>
-        No Icon Classes
-      </ButtonBase>,
-    );
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
+      expect(typeof childrenFn).toBe('function');
+      expect(childrenFn({ pressed: false })).toBeDefined();
+      expect(childrenFn({ pressed: true })).toBeDefined();
     });
 
-    expect(buttonAnimated).toBeDefined();
+    it('applies textClassName hooks while loading', () => {
+      const textClassNameFn = (pressed: boolean) =>
+        pressed ? 'text-pressed' : 'text-default';
+
+      const tree = ReactTestRenderer.create(
+        <ButtonBase
+          isLoading
+          loadingText="Loading"
+          textClassName={textClassNameFn}
+          testID="btn"
+        >
+          Content
+        </ButtonBase>,
+      );
+
+      const buttonAnimated = tree.root.findByProps({
+        accessibilityRole: 'button',
+      });
+      const childrenFn = buttonAnimated.props.children as (p: {
+        pressed: boolean;
+      }) => React.ReactNode;
+
+      expect(typeof childrenFn).toBe('function');
+      expect(childrenFn({ pressed: false })).toBeDefined();
+      expect(childrenFn({ pressed: true })).toBeDefined();
+    });
+
+    it('renders icons without extra classes when hooks are omitted', () => {
+      const { getByText } = render(
+        <ButtonBase startIconName={IconName.Add} endIconName={IconName.Close}>
+          Plain icons
+        </ButtonBase>,
+      );
+
+      expect(getByText('Plain icons')).toBeOnTheScreen();
+    });
   });
 
   describe('Accessibility', () => {
-    it('applies default accessibility props', () => {
+    it('sets role button and derives label from string children', () => {
       const { getByTestId } = render(
         <ButtonBase testID="btn">Default Button</ButtonBase>,
       );
@@ -531,8 +638,7 @@ describe('ButtonBase', () => {
       expect(btn.props.accessible).toBe(true);
       expect(btn.props.accessibilityRole).toBe('button');
       expect(btn.props.accessibilityLabel).toBe('Default Button');
-      // eslint-disable-next-line jest/prefer-strict-equal
-      expect(btn.props.accessibilityState).toEqual(
+      expect(btn.props.accessibilityState).toStrictEqual(
         expect.not.objectContaining({
           disabled: true,
           busy: true,
@@ -540,7 +646,7 @@ describe('ButtonBase', () => {
       );
     });
 
-    it('applies custom accessibility props', () => {
+    it('respects custom accessibilityLabel, hint, and role', () => {
       const { getByTestId } = render(
         <ButtonBase
           testID="btn"
@@ -558,7 +664,7 @@ describe('ButtonBase', () => {
       expect(btn.props.accessibilityRole).toBe('link');
     });
 
-    it('handles accessibility state for disabled button', () => {
+    it('marks disabled state when isDisabled', () => {
       const { getByTestId } = render(
         <ButtonBase testID="btn" isDisabled>
           Disabled Button
@@ -566,13 +672,13 @@ describe('ButtonBase', () => {
       );
       const btn = getByTestId('btn');
 
-      // eslint-disable-next-line jest/prefer-strict-equal
-      expect(btn.props.accessibilityState).toEqual(
+      expect(btn.props.accessibilityState).toStrictEqual(
         expect.objectContaining({ disabled: true }),
       );
+      expect(btn).toBeDisabled();
     });
 
-    it('handles accessibility state for loading button', () => {
+    it('marks loading state and prefers loadingText as label when provided', () => {
       const { getByTestId } = render(
         <ButtonBase testID="btn" isLoading loadingText="Please wait">
           Loading Button
@@ -580,8 +686,7 @@ describe('ButtonBase', () => {
       );
       const btn = getByTestId('btn');
 
-      // eslint-disable-next-line jest/prefer-strict-equal
-      expect(btn.props.accessibilityState).toEqual(
+      expect(btn.props.accessibilityState).toStrictEqual(
         expect.objectContaining({
           disabled: true,
           busy: true,
@@ -591,9 +696,25 @@ describe('ButtonBase', () => {
       expect(btn.props.accessibilityHint).toBe(
         'Button is currently loading, please wait',
       );
+      expect(btn).toBeDisabled();
     });
 
-    it('handles loading accessibility without loadingText', () => {
+    it('prefers explicit accessibilityLabel over loadingText when loading', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          testID="btn"
+          isLoading
+          loadingText="Wait text"
+          accessibilityLabel="Announce me"
+        >
+          Hidden label
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('btn').props.accessibilityLabel).toBe('Announce me');
+    });
+
+    it('uses string children as label when loading without loadingText', () => {
       const { getByTestId } = render(
         <ButtonBase testID="btn" isLoading>
           Button
@@ -605,8 +726,7 @@ describe('ButtonBase', () => {
       expect(btn.props.accessibilityHint).toBe(
         'Button is currently loading, please wait',
       );
-      // eslint-disable-next-line jest/prefer-strict-equal
-      expect(btn.props.accessibilityState).toEqual(
+      expect(btn.props.accessibilityState).toStrictEqual(
         expect.objectContaining({
           disabled: true,
           busy: true,
@@ -614,7 +734,7 @@ describe('ButtonBase', () => {
       );
     });
 
-    it('prioritizes custom accessibility hint over loading hint', () => {
+    it('uses custom accessibilityHint instead of the loading hint', () => {
       const { getByTestId } = render(
         <ButtonBase
           testID="btn"
@@ -624,12 +744,13 @@ describe('ButtonBase', () => {
           Button
         </ButtonBase>,
       );
-      const btn = getByTestId('btn');
 
-      expect(btn.props.accessibilityHint).toBe('Custom loading hint');
+      expect(getByTestId('btn').props.accessibilityHint).toBe(
+        'Custom loading hint',
+      );
     });
 
-    it('supports accessibility actions', () => {
+    it('forwards accessibility actions', () => {
       const mockActionHandler = jest.fn();
       const accessibilityActions = [
         { name: 'longpress', label: 'Long press for options' },
@@ -652,7 +773,7 @@ describe('ButtonBase', () => {
       expect(btn.props.onAccessibilityAction).toBe(mockActionHandler);
     });
 
-    it('uses children as accessibility label for ReactNode children', () => {
+    it('leaves accessibilityLabel undefined for complex element children', () => {
       const { getByTestId } = render(
         <ButtonBase testID="btn">
           <View>
@@ -660,18 +781,16 @@ describe('ButtonBase', () => {
           </View>
         </ButtonBase>,
       );
-      const btn = getByTestId('btn');
 
-      expect(btn.props.accessibilityLabel).toBeUndefined();
+      expect(getByTestId('btn').props.accessibilityLabel).toBeUndefined();
     });
 
-    it('uses string children as accessibility label', () => {
+    it('uses string children as the accessibility label', () => {
       const { getByTestId } = render(
         <ButtonBase testID="btn">Simple Text</ButtonBase>,
       );
-      const btn = getByTestId('btn');
 
-      expect(btn.props.accessibilityLabel).toBe('Simple Text');
+      expect(getByTestId('btn').props.accessibilityLabel).toBe('Simple Text');
     });
   });
 });

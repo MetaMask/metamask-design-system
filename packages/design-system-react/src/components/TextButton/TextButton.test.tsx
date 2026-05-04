@@ -65,10 +65,12 @@ describe('TextButton', () => {
       </TextButton>,
     );
 
+    const button = screen.getByRole('button');
     const startIcon = screen.getByTestId('start-icon');
     const endIcon = screen.getByTestId('end-icon');
-    expect(startIcon).toHaveClass('mr-2');
-    expect(endIcon).toHaveClass('ml-2');
+    expect(startIcon).toHaveClass('shrink-0', 'text-inherit');
+    expect(endIcon).toHaveClass('shrink-0', 'text-inherit');
+    expect(button).toHaveClass('gap-x-1');
   });
 
   it('renders as child component when asChild is true', () => {

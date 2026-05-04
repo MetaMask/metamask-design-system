@@ -117,10 +117,12 @@ describe('ButtonSecondary', () => {
       </ButtonSecondary>,
     );
 
+    const button = screen.getByRole('button');
     const startIcon = screen.getByTestId('start-icon');
     const endIcon = screen.getByTestId('end-icon');
-    expect(startIcon).toHaveClass('mr-2');
-    expect(endIcon).toHaveClass('ml-2');
+    expect(startIcon).toHaveClass('shrink-0', 'text-inherit');
+    expect(endIcon).toHaveClass('shrink-0', 'text-inherit');
+    expect(button).toHaveClass('gap-x-1');
   });
 
   it('renders loading text when provided', () => {
@@ -131,7 +133,10 @@ describe('ButtonSecondary', () => {
     );
 
     expect(screen.getAllByText('Please wait...')).toHaveLength(2); // Both visible and screen reader text
-    expect(screen.getByText('Submit')).toHaveClass('invisible');
+    const widthPlaceholder = screen
+      .getByRole('button')
+      .querySelector('span.invisible');
+    expect(widthPlaceholder).toHaveTextContent('Submit');
   });
 
   it('applies full width class correctly', () => {
