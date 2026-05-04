@@ -1,5 +1,6 @@
 import type { ComponentProps, ReactNode, RefObject } from 'react';
-import { FocusableElement } from '../ModalFocus/ModalFocus.types';
+
+import type { FocusableElement } from '../ModalFocus/ModalFocus.types';
 
 export type ModalProps = Omit<ComponentProps<'div'>, 'children'> & {
   /**
