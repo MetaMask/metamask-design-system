@@ -9,7 +9,7 @@ import type { InputProps } from '../Input/Input.types';
  * Additional props merged onto the inner `Input` (`../Input/Input.tsx`).
  *
  * TextArea owns `value`, `onChangeText`, `placeholder`, `isReadOnly`, `onFocus`,
- * `onBlur`, `isDisabled`, `autoFocus`, typography, multiline (always on), and inner
+ * `onBlur`, `isDisabled`, `autoFocus`, `textVariant`, multiline (always on), and inner
  * layout (merged with any `twClassName` you pass here). `placeholderTextColor` is
  * omitted (Input sets it from theme).
  */

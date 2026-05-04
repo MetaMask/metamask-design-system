@@ -23,6 +23,7 @@ export const TextField = forwardRef<View, TextFieldProps>(
       inputRef,
       isDisabled = false,
       isError = false,
+      textVariant = TextVariant.BodyMd,
       inputElement,
       startAccessory,
       endAccessory,
@@ -96,7 +97,7 @@ export const TextField = forwardRef<View, TextFieldProps>(
             onChangeText={onChangeText}
             placeholder={placeholder}
             isReadOnly={isReadOnly}
-            textVariant={TextVariant.BodyMd}
+            textVariant={textVariant}
             isDisabled={isDisabled}
             autoFocus={autoFocus}
             onBlur={onBlurHandler}

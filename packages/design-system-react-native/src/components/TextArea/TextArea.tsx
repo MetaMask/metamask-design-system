@@ -23,6 +23,7 @@ export const TextArea = forwardRef<View, TextAreaProps>(
       inputRef,
       isDisabled = false,
       isError = false,
+      textVariant = TextVariant.BodyMd,
       inputElement,
       style,
       twClassName,
@@ -91,7 +92,7 @@ export const TextArea = forwardRef<View, TextAreaProps>(
             onChangeText={onChangeText}
             placeholder={placeholder}
             isReadOnly={isReadOnly}
-            textVariant={TextVariant.BodyMd}
+            textVariant={textVariant}
             isDisabled={isDisabled}
             autoFocus={autoFocus}
             onBlur={onBlurHandler}
