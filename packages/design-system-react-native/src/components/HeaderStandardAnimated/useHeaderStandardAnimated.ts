@@ -1,5 +1,6 @@
 // Third party dependencies.
 import { useCallback } from 'react';
+import type { SharedValue } from 'react-native-reanimated';
 import {
   useSharedValue,
   useAnimatedScrollHandler,
@@ -7,6 +8,19 @@ import {
 
 // Internal dependencies.
 import type { UseHeaderStandardAnimatedReturn } from './HeaderStandardAnimated.types';
+
+/**
+ * Writes a vertical content offset into the scroll shared value.
+ *
+ * @param scrollYValue - Shared value for vertical scroll offset.
+ * @param contentOffsetY - `contentOffset.y` from the scroll event.
+ */
+export function updateScrollYFromEvent(
+  scrollYValue: SharedValue<number>,
+  contentOffsetY: number,
+) {
+  scrollYValue.value = contentOffsetY;
+}
 
 /**
  * Hook for managing HeaderStandardAnimated scroll-linked animations.
@@ -47,10 +61,10 @@ export function useHeaderStandardAnimated(): UseHeaderStandardAnimatedReturn {
     [titleSectionHeightSv],
   );
 
+  /* istanbul ignore next */
   const onScroll = useAnimatedScrollHandler({
-    onScroll: (scrollEvent) => {
-      scrollYValue.value = scrollEvent.contentOffset.y;
-    },
+    onScroll: (scrollEvent) =>
+      updateScrollYFromEvent(scrollYValue, scrollEvent.contentOffset.y),
   });
 
   return {

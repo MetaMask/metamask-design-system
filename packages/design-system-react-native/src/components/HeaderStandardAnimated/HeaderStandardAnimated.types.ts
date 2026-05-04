@@ -1,8 +1,6 @@
 // External dependencies.
-import {
-  type SharedValue,
-  useAnimatedScrollHandler,
-} from 'react-native-reanimated';
+import type { SharedValue } from 'react-native-reanimated';
+import { useAnimatedScrollHandler } from 'react-native-reanimated';
 
 // Internal dependencies.
 import type { HeaderStandardProps } from '../HeaderStandard/HeaderStandard.types';

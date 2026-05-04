@@ -1,21 +1,25 @@
 // Third party dependencies.
-import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-
-// External dependencies.
+import React from 'react';
 import type { SharedValue } from 'react-native-reanimated';
 
+// External dependencies.
 import { IconName } from '../Icon';
+import { Text, TextVariant } from '../Text';
 
 // Internal dependencies.
 import { HeaderStandardAnimated } from './HeaderStandardAnimated';
 
 jest.mock('react-native-reanimated', () => {
   const Reanimated = jest.requireActual('react-native-reanimated/mock');
-  Reanimated.useSharedValue = jest.fn((initial: number) => ({
-    value: initial,
-  }));
-  Reanimated.useAnimatedStyle = jest.fn((fn: () => object) => fn());
+  jest
+    .spyOn(Reanimated, 'useSharedValue')
+    .mockImplementation((initial: unknown) => ({
+      value: initial as number,
+    }));
+  jest
+    .spyOn(Reanimated, 'useAnimatedStyle')
+    .mockImplementation((fn: unknown) => (fn as () => object)());
   return Reanimated;
 });
 
@@ -131,6 +135,77 @@ describe('HeaderStandardAnimated', () => {
 
       expect(getByText('Main Title')).toBeOnTheScreen();
       expect(getByText('Supporting Text')).toBeOnTheScreen();
+    });
+
+    it('renders subtitle as a React node', () => {
+      const { getByText } = render(
+        <HeaderStandardAnimated
+          {...defaultProps}
+          title="Title"
+          subtitle={
+            <Text testID="custom-subtitle-node" variant={TextVariant.BodySm}>
+              Custom node
+            </Text>
+          }
+        />,
+      );
+
+      expect(getByText('Custom node')).toBeOnTheScreen();
+    });
+
+    it('omits center title when title is not provided', () => {
+      const { queryByText } = render(
+        <HeaderStandardAnimated {...defaultProps} />,
+      );
+
+      expect(queryByText('Test Title')).not.toBeOnTheScreen();
+    });
+  });
+
+  describe('scroll-driven title state', () => {
+    it('derives hidden title state when scroll is past the title section', () => {
+      const { getByText } = render(
+        <HeaderStandardAnimated
+          {...defaultProps}
+          scrollY={createMockSharedValue(150)}
+          titleSectionHeight={createMockSharedValue(100)}
+          title="T"
+        />,
+      );
+
+      expect(getByText('T')).toBeOnTheScreen();
+    });
+
+    it('derives visible large title when title section height is not measured', () => {
+      const { getByText } = render(
+        <HeaderStandardAnimated
+          {...defaultProps}
+          scrollY={createMockSharedValue(50)}
+          titleSectionHeight={createMockSharedValue(0)}
+          title="T"
+        />,
+      );
+
+      expect(getByText('T')).toBeOnTheScreen();
+    });
+
+    it('derives visible large title when scroll is below title section height', () => {
+      const { getByText } = render(
+        <HeaderStandardAnimated
+          {...defaultProps}
+          scrollY={createMockSharedValue(30)}
+          titleSectionHeight={createMockSharedValue(100)}
+          title="T"
+        />,
+      );
+
+      expect(getByText('T')).toBeOnTheScreen();
+    });
+  });
+
+  describe('displayName', () => {
+    it('is set for debugging', () => {
+      expect(HeaderStandardAnimated.displayName).toBe('HeaderStandardAnimated');
     });
   });
 
