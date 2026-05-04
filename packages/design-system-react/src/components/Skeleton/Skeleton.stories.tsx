@@ -1,6 +1,6 @@
+import { ButtonVariant, TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
-import { ButtonVariant, TextVariant } from '@metamask/design-system-shared';
 
 import { Box, BoxFlexDirection } from '../Box';
 import { Button } from '../Button';
