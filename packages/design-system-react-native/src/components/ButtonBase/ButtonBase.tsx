@@ -56,7 +56,7 @@ export const ButtonBase = ({
 
   const hasStart = Boolean(finalStartIconName || startAccessory);
   const hasEnd = Boolean(finalEndIconName || endAccessory);
-  const hasSideContent = hasStart || hasEnd;
+  const hasAccessories = hasStart || hasEnd;
 
   const iconSize = size === ButtonBaseSize.Lg ? IconSize.Md : IconSize.Sm;
   const labelTextVariant =
@@ -181,6 +181,10 @@ export const ButtonBase = ({
                   }
                   loadingText={loadingText}
                   {...spinnerProps}
+                  spinnerIconProps={{
+                    size: iconSize,
+                    ...spinnerProps?.spinnerIconProps,
+                  }}
                   loadingTextProps={{
                     numberOfLines: 1,
                     variant: labelTextVariant,
@@ -194,7 +198,7 @@ export const ButtonBase = ({
             <BoxRow
               {...restContentWrapper}
               twClassName={`${contentWrapperTw ?? ''} ${isLoading && 'opacity-0'}`}
-              gap={hasSideContent ? 1 : 0}
+              gap={hasAccessories ? 1 : 0}
               startAccessory={
                 finalStartIconName ? (
                   <Icon
@@ -226,8 +230,7 @@ export const ButtonBase = ({
                 numberOfLines: 1,
                 ellipsizeMode: 'clip',
                 ...textProps,
-                twClassName:
-                  `shrink grow-0 flex-wrap text-center ${textClassName ? textClassName(pressed) : ''} ${textProps?.twClassName ?? ''}`.trim(),
+                twClassName: `shrink grow-0 flex-wrap text-center ${textClassName ? textClassName(pressed) : ''} ${textProps?.twClassName ?? ''}`,
               }}
             >
               {children}

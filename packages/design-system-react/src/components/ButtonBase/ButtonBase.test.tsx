@@ -69,7 +69,10 @@ describe('ButtonBase', () => {
     expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
     const loadingTexts = screen.getAllByText('Please wait...');
     expect(loadingTexts).toHaveLength(2);
-    expect(screen.getByText('Submit')).toHaveClass('invisible');
+    const widthPlaceholder = screen
+      .getByRole('button')
+      .querySelector('span.invisible');
+    expect(widthPlaceholder).toHaveTextContent('Submit');
   });
 
   it('shows loading state with children when no loading text provided', () => {
@@ -97,7 +100,7 @@ describe('ButtonBase', () => {
     expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).not.toHaveClass('mr-2');
+    expect(icon).toHaveClass('shrink-0', 'text-inherit');
   });
 
   it('renders end icon when endIconName is provided', () => {
@@ -112,7 +115,7 @@ describe('ButtonBase', () => {
     expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).not.toHaveClass('ml-2');
+    expect(icon).toHaveClass('shrink-0', 'text-inherit');
   });
 
   it('renders start accessory when provided', () => {
@@ -120,7 +123,7 @@ describe('ButtonBase', () => {
     expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const accessory = screen.getByText('→');
     expect(accessory).toBeInTheDocument();
-    expect(accessory).not.toHaveClass('mr-2');
+    expect(accessory.closest('span')).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('renders end accessory when provided', () => {
@@ -128,7 +131,7 @@ describe('ButtonBase', () => {
     expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const accessory = screen.getByText('←');
     expect(accessory).toBeInTheDocument();
-    expect(accessory).not.toHaveClass('ml-2');
+    expect(accessory.closest('span')).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('applies disabled state', () => {

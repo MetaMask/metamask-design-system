@@ -57,7 +57,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const finalEndIconName = endIconName ?? endIconProps?.name;
     const hasStart = Boolean(finalStartIconName || startAccessory);
     const hasEnd = Boolean(finalEndIconName || endAccessory);
-    const hasSideContent = hasStart || hasEnd;
+    const hasAccessories = hasStart || hasEnd;
     const iconSize = size === ButtonBaseSize.Lg ? IconSize.Md : IconSize.Sm;
     const labelTextVariant =
       size === ButtonBaseSize.Sm ? TextVariant.BodySm : TextVariant.BodyMd;
@@ -70,6 +70,23 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
       return isDisabled ? -1 : undefined;
     };
 
+    const renderLabel = () => {
+      if (children && typeof children === 'string') {
+        return (
+          <Text
+            variant={labelTextVariant}
+            fontWeight={FontWeight.Medium}
+            color={TextColor.Inherit}
+            asChild
+            {...textProps}
+          >
+            <span>{children}</span>
+          </Text>
+        );
+      }
+      return children;
+    };
+
     const renderLoadingState = () => (
       <>
         <span
@@ -78,7 +95,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
         >
           <Icon
             name={IconName.Loading}
-            size={IconSize.Sm}
+            size={iconSize}
             className={twMerge(
               'animate-spin text-inherit',
               loadingIconProps?.className,
@@ -95,7 +112,9 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
             <span>{loadingText}</span>
           </Text>
         </span>
-        <span className="invisible inline-flex items-center">{children}</span>
+        <span className="invisible inline-flex items-center" aria-hidden="true">
+          {renderLabel()}
+        </span>
         {/* Screen reader announcement for loading */}
         <span className="sr-only" aria-live="polite" aria-atomic="true">
           {loadingText || 'Loading'}
@@ -145,29 +164,14 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
       return null;
     };
 
-    const renderContent = () => {
-      if (children && typeof children === 'string') {
-        return (
-          <Text
-            variant={labelTextVariant}
-            fontWeight={FontWeight.Medium}
-            color={TextColor.Inherit}
-            asChild
-            {...textProps}
-          >
-            <span>{children}</span>
-          </Text>
-        );
-      }
-      return children;
-    };
+    const renderContent = () => renderLabel();
 
     const mergedClassName = twMerge(
       // Base styles
       'inline-flex items-center justify-center',
       getButtonBaseBorderRadiusTwClass(size, shape),
       getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
-      hasSideContent && 'gap-x-1',
+      hasAccessories && 'gap-x-1',
       'font-medium text-default',
       'bg-muted',
       'overflow-hidden',
