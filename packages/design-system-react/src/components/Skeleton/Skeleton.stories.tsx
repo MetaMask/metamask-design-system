@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
+import { ButtonVariant, TextVariant } from '@metamask/design-system-shared';
 
 import { Box, BoxFlexDirection } from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { Text, TextVariant } from '../Text';
+import { Button } from '../Button';
+import { Text } from '../Text';
 
 import README from './README.mdx';
 import { Skeleton } from './Skeleton';
