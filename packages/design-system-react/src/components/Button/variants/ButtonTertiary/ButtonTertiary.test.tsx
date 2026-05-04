@@ -73,9 +73,11 @@ describe('ButtonTertiary', () => {
         With Icon
       </ButtonTertiary>,
     );
+    const button = screen.getByRole('button');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('mr-2');
+    expect(icon).toHaveClass('shrink-0', 'text-inherit');
+    expect(button).toHaveClass('gap-x-1');
   });
 
   it('renders end icon when endIconName is provided', () => {
@@ -87,9 +89,11 @@ describe('ButtonTertiary', () => {
         With Icon
       </ButtonTertiary>,
     );
+    const button = screen.getByRole('button');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('ml-2');
+    expect(icon).toHaveClass('shrink-0', 'text-inherit');
+    expect(button).toHaveClass('gap-x-1');
   });
 
   it('applies full width class correctly', () => {

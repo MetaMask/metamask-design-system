@@ -10,8 +10,8 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import * as ReactTestRenderer from 'react-test-renderer';
 
-import { getButtonBaseBorderRadiusTwClass } from './ButtonBase.constants';
 import { ButtonBase } from './ButtonBase';
+import { getButtonBaseBorderRadiusTwClass } from './ButtonBase.constants';
 
 describe('ButtonBase', () => {
   let tw: ReturnType<typeof useTailwind>;
@@ -609,7 +609,7 @@ describe('ButtonBase', () => {
       expect(btn.props.accessible).toBe(true);
       expect(btn.props.accessibilityRole).toBe('button');
       expect(btn.props.accessibilityLabel).toBe('Default Button');
-      expect(btn.props.accessibilityState).toEqual(
+      expect(btn.props.accessibilityState).toStrictEqual(
         expect.not.objectContaining({
           disabled: true,
           busy: true,
@@ -643,7 +643,7 @@ describe('ButtonBase', () => {
       );
       const btn = getByTestId('btn');
 
-      expect(btn.props.accessibilityState).toEqual(
+      expect(btn.props.accessibilityState).toStrictEqual(
         expect.objectContaining({ disabled: true }),
       );
       expect(btn).toBeDisabled();
@@ -657,7 +657,7 @@ describe('ButtonBase', () => {
       );
       const btn = getByTestId('btn');
 
-      expect(btn.props.accessibilityState).toEqual(
+      expect(btn.props.accessibilityState).toStrictEqual(
         expect.objectContaining({
           disabled: true,
           busy: true,
@@ -697,7 +697,7 @@ describe('ButtonBase', () => {
       expect(btn.props.accessibilityHint).toBe(
         'Button is currently loading, please wait',
       );
-      expect(btn.props.accessibilityState).toEqual(
+      expect(btn.props.accessibilityState).toStrictEqual(
         expect.objectContaining({
           disabled: true,
           busy: true,
