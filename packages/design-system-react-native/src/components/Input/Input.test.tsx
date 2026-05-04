@@ -75,26 +75,26 @@ describe('Input', () => {
     expect(input).not.toHaveStyle({ lineHeight: 0 });
   });
 
-  it('when multiline is true, does not apply lineHeight zero for visible placeholder on iOS', () => {
+  it('when multiline is true, does not apply lineHeight zero for visible placeholder', () => {
     const { getByTestId } = render(
       <Input testID={TEST_ID} value="" multiline placeholder="Placeholder" />,
     );
+
     const input = getByTestId(TEST_ID);
-    const lineHeight = getStyleProp(input.props.style, 'lineHeight');
-    expect(Platform.OS === 'ios' ? lineHeight !== 0 : true).toBe(true);
+
+    expect(input).not.toHaveStyle({ lineHeight: 0 });
   });
 
-  it('when multiline is true, resolved style includes non-zero lineHeight for BodyMd', () => {
+  it('when multiline is true, applies BodyMd paragraph lineHeight', () => {
     const { getByTestId } = render(
       <Input testID={TEST_ID} value="" multiline placeholder="p" />,
     );
+
     const input = getByTestId(TEST_ID);
-    const lineHeight = getStyleProp(input.props.style, 'lineHeight');
-    expect(lineHeight).toBeDefined();
-    expect(lineHeight).not.toBe(0);
-    const expectedParagraphLineHeight = (tw.style('text-body-md') as TextStyle)
+    const expectedLineHeight = (tw.style('text-body-md') as TextStyle)
       .lineHeight;
-    expect(lineHeight).toBe(expectedParagraphLineHeight);
+
+    expect(input).toHaveStyle({ lineHeight: expectedLineHeight });
   });
 
   it('removes placeholder lineHeight workaround after value changes from empty to non-empty', () => {

@@ -1,6 +1,6 @@
 import { TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { forwardRef, useCallback, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { Box } from '../Box';
@@ -34,6 +34,12 @@ export const TextArea = forwardRef<View, TextAreaProps>(
   ) => {
     const [isFocused, setIsFocused] = useState(autoFocus);
     const tw = useTailwind();
+
+    useEffect(() => {
+      if (isDisabled || isReadOnly) {
+        setIsFocused(false);
+      }
+    }, [isDisabled, isReadOnly]);
 
     const {
       twClassName: inputTwClassNameFromProps,

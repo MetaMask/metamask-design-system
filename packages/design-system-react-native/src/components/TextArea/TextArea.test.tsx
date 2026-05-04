@@ -256,6 +256,72 @@ describe('TextArea', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-default`);
     });
 
+    it('clears container focus styling after isDisabled toggles following focus', () => {
+      const { getByTestId, getByPlaceholderText, rerender } = render(
+        <TextArea
+          value=""
+          testID={ROOT_TEST_ID}
+          placeholder="toggle-disabled"
+        />,
+      );
+
+      fireEvent(getByPlaceholderText('toggle-disabled'), 'focus');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-default`);
+
+      rerender(
+        <TextArea
+          value=""
+          testID={ROOT_TEST_ID}
+          placeholder="toggle-disabled"
+          isDisabled
+        />,
+      );
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-muted`);
+
+      rerender(
+        <TextArea
+          value=""
+          testID={ROOT_TEST_ID}
+          placeholder="toggle-disabled"
+        />,
+      );
+      expect(getByTestId(ROOT_TEST_ID)).not.toHaveStyle(tw`border-default`);
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-muted`);
+    });
+
+    it('clears container focus styling after isReadOnly toggles following focus', () => {
+      const { getByTestId, getByPlaceholderText, rerender } = render(
+        <TextArea
+          value=""
+          testID={ROOT_TEST_ID}
+          placeholder="toggle-readonly"
+        />,
+      );
+
+      fireEvent(getByPlaceholderText('toggle-readonly'), 'focus');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-default`);
+
+      rerender(
+        <TextArea
+          value=""
+          testID={ROOT_TEST_ID}
+          placeholder="toggle-readonly"
+          isReadOnly
+        />,
+      );
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-muted`);
+
+      rerender(
+        <TextArea
+          value=""
+          testID={ROOT_TEST_ID}
+          placeholder="toggle-readonly"
+        />,
+      );
+      expect(getByTestId(ROOT_TEST_ID)).not.toHaveStyle(tw`border-default`);
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-muted`);
+    });
+
     it('reverts to muted resting border after blur', () => {
       const { getByTestId, getByPlaceholderText } = render(
         <TextArea value="" testID={ROOT_TEST_ID} placeholder="blur-border" />,
