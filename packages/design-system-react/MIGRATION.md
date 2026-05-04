@@ -16,6 +16,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [HeaderBase Component](#headerbase-component)
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
   - [ModalOverlay Component](#modaloverlay-component)
@@ -1232,6 +1233,99 @@ import { Checkbox } from '@metamask/design-system-react';
 - `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
+
+### HeaderBase Component
+
+The extension `header-base` component maps to `HeaderBase` in the design system. The visual contract — a centered title flanked by start/end accessories — is preserved, but the implementation switches from JS-based width measurement (with a window resize listener) to **CSS Grid** layout. The polymorphic Box surface and the `mm-header-base` class hook are removed.
+
+`HeaderBase` is the layout primitive that `ModalHeader`, `PopoverHeader`, and any custom page-level header sit on. Migrate this first if you're moving any of those.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                | Design System Migration                                                |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `import { HeaderBase } from '../../component-library'`           | `import { HeaderBase } from '@metamask/design-system-react'`           |
+| `import type { HeaderBaseProps } from '../../component-library'` | `import type { HeaderBaseProps } from '@metamask/design-system-react'` |
+
+##### Layout Implementation
+
+| Concern              | Extension Behavior                                                                                                                                                                     | Design System Behavior                                                                                                                                                                                                               |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Title centering      | `display: flex; justify-content: space-between` plus a JS `useEffect` that measures both accessories and forces matching `minWidth` on each side; window `resize` listener re-measures | `display: grid; grid-template-columns: 1fr auto 1fr; align-items: center` (Tailwind: `grid grid-cols-[1fr_auto_1fr] items-center`). Title is pinned to column 2; the `1fr` side tracks always balance it. No JS, no resize listener. |
+| Slot wrapper styling | Manual `marginLeft` / `marginRight` / `width: calc(...)` set per-render based on measurements                                                                                          | Static Tailwind utilities: `col-start-1 justify-self-start` (start), `col-start-2 col-end-3` (title), `col-start-3 justify-self-end` (end)                                                                                           |
+| Re-render on resize  | `useState`-driven re-renders whenever the window or children change                                                                                                                    | None — layout is fully declarative                                                                                                                                                                                                   |
+
+The visual output is identical for the documented use cases (modal headers, popover headers, page headers). The only edge case where behavior diverges is when a single accessory is much wider than the column it occupies — in the legacy version the title was forced to compress; in the grid version the title stays centered and the accessory column grows to its content (the `1fr` side track still matches its sibling).
+
+##### Props and Behavior Mapping
+
+| Extension API                                                | Design System API                                                              | Change Type | Notes                                                                                                                                |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `children?: ReactNode`                                       | `children?: ReactNode`                                                         | unchanged   | rendered in the centered grid column                                                                                                 |
+| `startAccessory?: ReactNode`                                 | `startAccessory?: ReactNode`                                                   | unchanged   | rendered in the start column                                                                                                         |
+| `endAccessory?: ReactNode`                                   | `endAccessory?: ReactNode`                                                     | unchanged   | rendered in the end column                                                                                                           |
+| `childrenWrapperProps?: BoxProps<'div'>`                     | `childrenWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*` index sig.) | shape       | now bound to MMDS `BoxProps`; `className` is merged via `twMerge` (consumer utilities can override grid placement when needed).      |
+| `startAccessoryWrapperProps?: BoxProps<'div'>`               | `startAccessoryWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*`)      | shape       | same shape change as `childrenWrapperProps`.                                                                                         |
+| `endAccessoryWrapperProps?: BoxProps<'div'>`                 | `endAccessoryWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*`)        | shape       | same shape change.                                                                                                                   |
+| `className?: string`                                         | `className?: string`                                                           | unchanged   | applied to the grid container; merged via `twMerge`                                                                                  |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` | removed                                                                        | removed     | always renders `<div>`. Wrap or compose if you need a different element.                                                             |
+| Box style-utility props on the root (`marginBottom`, …)      | removed from public API                                                        | removed     | the root is no longer a polymorphic Box. Use `className` with Tailwind utilities (e.g. `className="mb-4"`) for layout overrides.     |
+| `mm-header-base` SCSS class hook                             | removed                                                                        | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities. |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { HeaderBase } from '../../component-library';
+
+// Default usage
+<HeaderBase
+  startAccessory={<BackButton />}
+  endAccessory={<CloseButton />}
+>
+  <Title>Page title</Title>
+</HeaderBase>
+
+// Customize the root via Box utility props
+<HeaderBase marginBottom={4} alignItems={AlignItems.center}>
+  <Title>Page title</Title>
+</HeaderBase>
+```
+
+##### After (Design System)
+
+```tsx
+import { HeaderBase } from '@metamask/design-system-react';
+
+// Default usage — unchanged
+<HeaderBase
+  startAccessory={<BackButton />}
+  endAccessory={<CloseButton />}
+>
+  <Title>Page title</Title>
+</HeaderBase>
+
+// Root overrides move into className (Box utility props on the root are removed)
+<HeaderBase className="mb-4 items-center">
+  <Title>Page title</Title>
+</HeaderBase>
+```
+
+For typical call sites — for example `ui/components/multichain/pages/page/components/header/header.tsx` (direct external consumer) and the internal `popover-header.tsx` / `modal-header.tsx` consumers within the legacy `component-library` (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Move any root-level Box utility props (`marginBottom`, `alignItems`, etc.) onto `className` (`mb-4`, `items-center`, …).
+
+#### API Differences
+
+- `HeaderBase` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-header-base` class hook is gone — use `className` to apply Tailwind utilities.
+- The `useRef` / `useEffect` / `useState` / `window.addEventListener('resize', …)` measurement code is gone. There are no longer any layout side effects on mount or window resize.
+- Slot wrappers (`childrenWrapperProps` / `startAccessoryWrapperProps` / `endAccessoryWrapperProps`) ship their grid-placement utilities (`col-start-*`, `justify-self-*`) as defaults; consumer `className` is merged via `twMerge` so it can override placement when needed.
 
 ### ModalBody Component
 
