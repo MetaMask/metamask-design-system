@@ -1,18 +1,22 @@
+import {
+  AvatarBaseShape,
+  AvatarGroupSize,
+  AvatarGroupVariant,
+  TextColor,
+} from '@metamask/design-system-shared';
+import type { AvatarBaseSize } from '@metamask/design-system-shared';
 import React, { forwardRef, useCallback } from 'react';
 
-import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import type { AvatarAccountProps } from '../AvatarAccount';
 import { AvatarAccount } from '../AvatarAccount';
-import type { AvatarBaseSize } from '../AvatarBase';
-import { AvatarBase, AvatarBaseShape } from '../AvatarBase';
+import { AvatarBase } from '../AvatarBase';
 import type { AvatarFaviconProps } from '../AvatarFavicon';
 import { AvatarFavicon } from '../AvatarFavicon';
 import type { AvatarNetworkProps } from '../AvatarNetwork';
 import { AvatarNetwork } from '../AvatarNetwork';
 import type { AvatarTokenProps } from '../AvatarToken';
 import { AvatarToken } from '../AvatarToken';
-import { TextColor } from '../Text';
 
 import {
   AVATAR_GROUP_SIZE_ISREVERSE_NEGATIVESPACEBETWEENAVATARS_MAP,
@@ -127,7 +131,13 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
               );
           }
         }),
-      [avatarPropsArr, max, size],
+      [
+        avatarPropsArr,
+        max,
+        negativeSpaceBetweenAvatarsTwClassName,
+        size,
+        variant,
+      ],
     );
 
     return (

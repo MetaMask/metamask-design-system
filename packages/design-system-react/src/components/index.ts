@@ -96,6 +96,8 @@ export { ModalOverlay } from './ModalOverlay';
 export type { ModalOverlayProps } from './ModalOverlay';
 export { ModalBody } from './ModalBody';
 export type { ModalBodyProps } from './ModalBody';
+export { ModalFocus } from './ModalFocus';
+export type { FocusableElement, ModalFocusProps } from './ModalFocus';
 
 export { Text } from './Text';
 export {
