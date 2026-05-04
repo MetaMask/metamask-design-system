@@ -3,13 +3,16 @@ import {
   BoxFlexWrap,
   ButtonBaseShape,
   ButtonBaseSize,
+  FontWeight,
   IconName,
+  TextColor,
+  TextVariant,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import { Box } from '../Box';
-import { FontWeight, Text, TextColor, TextVariant } from '../Text';
+import { Text } from '../Text';
 
 import { ButtonBase } from './ButtonBase';
 

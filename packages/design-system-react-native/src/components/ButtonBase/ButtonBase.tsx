@@ -1,6 +1,8 @@
 import {
   ButtonBaseShape,
   ButtonBaseSize,
+  FontWeight,
+  TextColor,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
@@ -11,7 +13,6 @@ import { BoxRow } from '../BoxRow';
 import { Icon, IconColor } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import { Spinner } from '../temp-components/Spinner';
-import { FontWeight, TextColor } from '../Text';
 
 import {
   MAP_BUTTONBASE_SIZE_ICONSIZE,
