@@ -3,6 +3,8 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
+import { ButtonBaseShape } from '@metamask/design-system-shared';
+
 import { IconName } from '../Icon';
 
 import { ButtonBase } from './ButtonBase';
@@ -28,6 +30,10 @@ figma.connect(
         Md: ButtonBaseSize.Md,
         Sm: ButtonBaseSize.Sm,
       }),
+      shape: figma.enum('shape', {
+        Pill: ButtonBaseShape.Pill,
+        Rounded: ButtonBaseShape.Rounded,
+      }),
       children: figma.string('label'),
       startIconName: figma.boolean('startIcon (Figma Only)', {
         true: IconName.Add,
@@ -38,9 +44,10 @@ figma.connect(
         false: undefined,
       }),
     },
-    example: ({ size, startIconName, endIconName, children }) => (
+    example: ({ size, shape, startIconName, endIconName, children }) => (
       <ButtonBase
         size={size}
+        shape={shape}
         startIconName={startIconName}
         endIconName={endIconName}
       >

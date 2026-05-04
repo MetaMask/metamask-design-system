@@ -1,4 +1,8 @@
-import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
+import {
+  ButtonBaseShape,
+  ButtonBaseSize,
+  IconName,
+} from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
@@ -15,17 +19,26 @@ describe('ButtonBase', () => {
       <ButtonBase size={ButtonBaseSize.Sm}>Button</ButtonBase>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
+    expect(screen.getByRole('button')).toHaveClass('px-3');
 
     rerender(<ButtonBase size={ButtonBaseSize.Md}>Button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-10');
+    expect(screen.getByRole('button')).toHaveClass('px-3');
 
     rerender(<ButtonBase>Button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
+    expect(screen.getByRole('button')).toHaveClass('px-4');
   });
 
   it('applies large size by default', () => {
     render(<ButtonBase>Default Size</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
+    expect(screen.getByRole('button')).toHaveClass('px-4');
+  });
+
+  it('applies pill shape with rounded-full class', () => {
+    render(<ButtonBase shape={ButtonBaseShape.Pill}>Pill</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('rounded-full');
   });
 
   it('renders as child component when asChild is true', () => {
@@ -81,9 +94,10 @@ describe('ButtonBase', () => {
         With Icon
       </ButtonBase>,
     );
+    expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('mr-2');
+    expect(icon).not.toHaveClass('mr-2');
   });
 
   it('renders end icon when endIconName is provided', () => {
@@ -95,23 +109,26 @@ describe('ButtonBase', () => {
         With Icon
       </ButtonBase>,
     );
+    expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('ml-2');
+    expect(icon).not.toHaveClass('ml-2');
   });
 
   it('renders start accessory when provided', () => {
     render(<ButtonBase startAccessory="→">With Accessory</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const accessory = screen.getByText('→');
     expect(accessory).toBeInTheDocument();
-    expect(accessory).toHaveClass('mr-2');
+    expect(accessory).not.toHaveClass('mr-2');
   });
 
   it('renders end accessory when provided', () => {
     render(<ButtonBase endAccessory="←">With Accessory</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const accessory = screen.getByText('←');
     expect(accessory).toBeInTheDocument();
-    expect(accessory).toHaveClass('ml-2');
+    expect(accessory).not.toHaveClass('ml-2');
   });
 
   it('applies disabled state', () => {

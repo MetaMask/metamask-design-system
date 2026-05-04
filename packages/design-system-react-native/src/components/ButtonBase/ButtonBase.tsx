@@ -1,21 +1,30 @@
-import { ButtonBaseSize } from '@metamask/design-system-shared';
+import {
+  ButtonBaseShape,
+  ButtonBaseSize,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
-import { View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
+import { Box } from '../Box';
+import { BoxRow } from '../BoxRow';
 import { Icon, IconColor, IconSize } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import { Spinner } from '../temp-components/Spinner';
-import { Text, TextVariant, FontWeight, TextColor } from '../Text';
+import { TextVariant, FontWeight, TextColor } from '../Text';
 
-import { TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION } from './ButtonBase.constants';
+import {
+  getButtonBaseBorderRadiusTwClass,
+  getButtonBaseHorizontalPaddingTwClasses,
+  TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
+} from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
 
 export const ButtonBase = ({
   children,
   textProps,
   size = ButtonBaseSize.Lg,
+  shape = ButtonBaseShape.Rounded,
   isLoading,
   loadingText,
   spinnerProps,
@@ -42,6 +51,14 @@ export const ButtonBase = ({
 
   const finalStartIconName = startIconName ?? startIconProps?.name;
   const finalEndIconName = endIconName ?? endIconProps?.name;
+
+  const hasStart = Boolean(finalStartIconName || startAccessory);
+  const hasEnd = Boolean(finalEndIconName || endAccessory);
+  const hasSideContent = hasStart || hasEnd;
+
+  const iconSize = size === ButtonBaseSize.Lg ? IconSize.Md : IconSize.Sm;
+  const labelTextVariant =
+    size === ButtonBaseSize.Sm ? TextVariant.BodySm : TextVariant.BodyMd;
 
   // Generate accessibility label if not provided
   const finalAccessibilityLabel = useMemo(() => {
@@ -110,9 +127,12 @@ export const ButtonBase = ({
         // Build button container styles
         const buttonStyles = tw.style(
           // Base layout - flex container for button content
-          'flex-row items-center justify-center gap-x-2',
+          'flex-row items-center justify-center',
           // Visual styling
-          'rounded-xl bg-muted px-4 min-w-[80px] overflow-hidden',
+          'bg-muted overflow-hidden',
+          // Conditional Border Radius and Horizontal Spacing based on requirements
+          getButtonBaseBorderRadiusTwClass(size, shape),
+          getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
           // Size
           TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],
           // State-based opacity
@@ -141,10 +161,8 @@ export const ButtonBase = ({
         <>
           {/* Loading spinner overlay */}
           {isLoading && (
-            <View
-              style={tw.style(
-                'absolute inset-0 flex items-center justify-center',
-              )}
+            <Box
+              twClassName="absolute inset-0 flex items-center justify-center"
               testID="spinner-container"
             >
               <Spinner
@@ -154,60 +172,55 @@ export const ButtonBase = ({
                     : IconColor.IconDefault
                 }
                 loadingText={loadingText}
+                {...spinnerProps}
                 loadingTextProps={{
                   numberOfLines: 1,
+                  variant: labelTextVariant,
                   twClassName: textClassName ? textClassName(pressed) : '',
                   ...spinnerProps?.loadingTextProps,
                 }}
-                {...spinnerProps}
               />
-            </View>
+            </Box>
           )}
 
-          {/* Button content - opacity controlled individually on each child */}
-          {finalStartIconName ? (
-            <Icon
-              name={finalStartIconName}
-              size={IconSize.Sm}
-              twClassName={`shrink-0 ${isLoading ? 'opacity-0' : ''} ${iconClassName ? iconClassName(pressed) : ''}`}
-              {...startIconProps}
-            />
-          ) : (
-            startAccessory && (
-              <View style={tw.style(isLoading && 'opacity-0')}>
-                {startAccessory}
-              </View>
-            )
-          )}
-
-          {typeof children === 'string' ? (
-            <Text
-              variant={TextVariant.BodyMd}
-              fontWeight={FontWeight.Medium}
-              color={TextColor.TextDefault}
-              {...textProps}
-              twClassName={`shrink grow-0 flex-wrap text-center ${isLoading ? 'opacity-0' : ''} ${textClassName ? textClassName(pressed) : ''} ${textProps?.twClassName ?? ''}`}
-            >
-              {children}
-            </Text>
-          ) : (
-            <View style={tw.style(isLoading && 'opacity-0')}>{children}</View>
-          )}
-
-          {finalEndIconName ? (
-            <Icon
-              name={finalEndIconName}
-              size={IconSize.Sm}
-              twClassName={`shrink-0 ${isLoading ? 'opacity-0' : ''} ${iconClassName ? iconClassName(pressed) : ''}`}
-              {...endIconProps}
-            />
-          ) : (
-            endAccessory && (
-              <View style={tw.style(isLoading && 'opacity-0')}>
-                {endAccessory}
-              </View>
-            )
-          )}
+          <BoxRow
+            gap={hasSideContent ? 1 : 0}
+            startAccessory={
+              finalStartIconName ? (
+                <Icon
+                  name={finalStartIconName}
+                  size={iconSize}
+                  twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
+                  {...startIconProps}
+                />
+              ) : (
+                startAccessory
+              )
+            }
+            endAccessory={
+              finalEndIconName ? (
+                <Icon
+                  name={finalEndIconName}
+                  size={iconSize}
+                  twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
+                  {...endIconProps}
+                />
+              ) : (
+                endAccessory
+              )
+            }
+            textProps={{
+              variant: labelTextVariant,
+              fontWeight: FontWeight.Medium,
+              color: TextColor.TextDefault,
+              ...textProps,
+              twClassName:
+                `shrink grow-0 flex-wrap text-center ${textClassName ? textClassName(pressed) : ''} ${textProps?.twClassName ?? ''}`.trim(),
+            }}
+            twClassName={isLoading ? 'opacity-0' : undefined}
+          >
+            {children}
+          </BoxRow>
         </>
       )}
     </ButtonAnimated>

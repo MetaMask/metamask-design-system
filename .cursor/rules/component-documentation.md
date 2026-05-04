@@ -39,7 +39,7 @@ Documentation standards for Storybook stories and README files for React and Rea
 
 **Story Structure:**
 
-1. **Default story** - ALWAYS first, minimal args, ALL controls wired up in argTypes
+1. **Default story** - ALWAYS first, minimal args, and **interactive controls** wired in `argTypes` for props that are practical to edit in Storybook (see **React Native (DSRN)** below for on-device limits)
 2. **Story per prop** - Each major prop gets its own story showcasing usage
 3. **Canvas reference** - Each prop section in README references its story Canvas
 
@@ -68,6 +68,25 @@ Each story showcases that specific prop's usage and variations.
 - **NEVER** create stories for `className` (React) or `twClassName` (React Native); document these only in README/template guidance.
 
 See golden path examples for story implementation patterns.
+
+### React Native (DSRN) — `@storybook/react-native` stories
+
+Applies to stories under `packages/design-system-react-native/**` (on-device Storybook). Web controls and RN controls are **not** identical: mobile panels work best with a **small, focused** `argTypes` table.
+
+**argTypes — do:**
+
+- Use **text**, **boolean**, and **select** controls for props that are worth tweaking live (e.g. `children`, `isLoading`, `size`).
+- For shared **const-object** unions (`ButtonBaseSize`, `IconName`, etc.), use `options: Object.keys(Const)` with `mapping: Const` so TypeScript and Storybook stay aligned (never pass the whole object as `options`).
+- Keep **descriptions** on entries where they help consumers scanning the controls panel.
+
+**argTypes — avoid:**
+
+- **`control: 'object'`** for props like `textProps`, `spinnerProps`, `style`, `startIconProps`, etc. Object/json editors are poor on device and add noise; document those props in the component **README** instead.
+- **`control: false`** listings for large sets of non-interactive props. Prefer **omitting** those keys from `argTypes` entirely; Storybook still renders the component, and stories can set values in code. Reserve README for full prop tables.
+
+**Default story:** Wire **only** props that have real on-device controls (per above). Do not require every component prop to appear in `argTypes`.
+
+**Cross-platform:** Keep story **names** and **coverage** aligned with React web where possible; RN `argTypes` may intentionally list **fewer** entries than web when the extra entries would only be `object` or `false` controls.
 
 ### Cross-Platform Consistency
 
@@ -131,7 +150,7 @@ After adding/updating component documentation, verify:
 - [ ] Web README uses Canvas blocks for interactive examples
 - [ ] Cross-platform: documentation is identical across web/native
 - [ ] Stories file exports meta with proper argTypes
-- [ ] Default story is first with minimal args and all controls wired up
+- [ ] Default story is first with minimal args and practical controls wired up (RN: no object-only or `control: false` clutter — see DSRN section)
 - [ ] Story exists for each major prop
 - [ ] Each prop section in README references its story Canvas
 - [ ] Web meta includes README in parameters.docs.page

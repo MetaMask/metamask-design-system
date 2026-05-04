@@ -1,4 +1,5 @@
 import {
+  ButtonBaseShape,
   ButtonBaseSize,
   IconName,
   TextColor,
@@ -37,6 +38,13 @@ const meta: Meta<typeof ButtonBase> = {
       options: Object.keys(ButtonBaseSize),
       mapping: ButtonBaseSize,
       description: 'Optional prop to control the size of the ButtonBase',
+    },
+    shape: {
+      control: 'select',
+      options: Object.keys(ButtonBaseShape),
+      mapping: ButtonBaseShape,
+      description:
+        'Optional prop for corner style: size-based radius or fully rounded (pill)',
     },
     isFullWidth: {
       control: 'boolean',
@@ -124,6 +132,7 @@ type Story = StoryObj<typeof ButtonBase>;
 export const Default: Story = {
   args: {
     children: 'Button Base',
+    shape: ButtonBaseShape.Rounded,
   },
 };
 
@@ -156,6 +165,165 @@ export const Size: Story = {
     </div>
   ),
 };
+
+export const Shape: Story = {
+  render: (args) => (
+    <div className="flex flex-wrap gap-2">
+      <ButtonBase {...args} shape={ButtonBaseShape.Rounded}>
+        Rounded
+      </ButtonBase>
+      <ButtonBase {...args} shape={ButtonBaseShape.Pill}>
+        Pill
+      </ButtonBase>
+    </div>
+  ),
+};
+
+export const Spacing: Story = {
+  render: (args) => (
+    <div className="flex flex-col gap-6">
+      <div className="space-y-2">
+        <Text variant={TextVariant.HeadingSm}>Label only</Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
+          Horizontal padding follows button size when no icons are shown.
+        </Text>
+        <div className="flex flex-wrap gap-2">
+          <ButtonBase {...args} size={ButtonBaseSize.Sm}>
+            Small
+          </ButtonBase>
+          <ButtonBase {...args} size={ButtonBaseSize.Md}>
+            Medium
+          </ButtonBase>
+          <ButtonBase {...args} size={ButtonBaseSize.Lg}>
+            Large
+          </ButtonBase>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <Text variant={TextVariant.HeadingSm}>Start icon</Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
+          Leading inset fits the icon; 4px gap before the label. Large buttons
+          use a medium icon; medium and small use a small icon.
+        </Text>
+        <div className="flex flex-wrap gap-2">
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Sm}
+            startIconName={IconName.Add}
+          >
+            Small
+          </ButtonBase>
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Md}
+            startIconName={IconName.Add}
+          >
+            Medium
+          </ButtonBase>
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Lg}
+            startIconName={IconName.Add}
+          >
+            Large
+          </ButtonBase>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <Text variant={TextVariant.HeadingSm}>End icon</Text>
+        <div className="flex flex-wrap gap-2">
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Sm}
+            endIconName={IconName.Add}
+          >
+            Small
+          </ButtonBase>
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Md}
+            endIconName={IconName.Add}
+          >
+            Medium
+          </ButtonBase>
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Lg}
+            endIconName={IconName.Add}
+          >
+            Large
+          </ButtonBase>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <Text variant={TextVariant.HeadingSm}>Start and end icons</Text>
+        <div className="flex flex-wrap gap-2">
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Sm}
+            startIconName={IconName.Add}
+            endIconName={IconName.ArrowRight}
+          >
+            Small
+          </ButtonBase>
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Md}
+            startIconName={IconName.Add}
+            endIconName={IconName.ArrowRight}
+          >
+            Medium
+          </ButtonBase>
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Lg}
+            startIconName={IconName.Add}
+            endIconName={IconName.ArrowRight}
+          >
+            Large
+          </ButtonBase>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <Text variant={TextVariant.HeadingSm}>Start and end accessories</Text>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
+          Custom nodes use the same padding and gap as named icons.
+        </Text>
+        <div className="flex flex-wrap gap-2">
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Sm}
+            startAccessory="→"
+            endAccessory="←"
+          >
+            Small
+          </ButtonBase>
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Md}
+            startAccessory="→"
+            endAccessory="←"
+          >
+            Medium
+          </ButtonBase>
+          <ButtonBase
+            {...args}
+            size={ButtonBaseSize.Lg}
+            startAccessory="→"
+            endAccessory="←"
+          >
+            Large
+          </ButtonBase>
+        </div>
+      </div>
+    </div>
+  ),
+};
+
 export const IsFullWidth: Story = {
   args: {
     children: 'Full Width Button',
