@@ -16,6 +16,16 @@ import { ButtonBase } from './ButtonBase';
 const meta: Meta<typeof ButtonBase> = {
   title: 'Components/ButtonBase',
   component: ButtonBase,
+  // Match @storybook/react-native patterns (see ButtonSecondary.stories): pass const
+  // objects as `options`, not Object.keys + mapping — mapping leaves controls undefined.
+  args: {
+    children: 'ButtonBase',
+    size: ButtonBaseSize.Lg,
+    shape: ButtonBaseShape.Rounded,
+    isLoading: false,
+    isDisabled: false,
+    isFullWidth: false,
+  },
   argTypes: {
     children: {
       control: 'text',
@@ -24,14 +34,12 @@ const meta: Meta<typeof ButtonBase> = {
     },
     size: {
       control: 'select',
-      options: Object.keys(ButtonBaseSize),
-      mapping: ButtonBaseSize,
+      options: Object.values(ButtonBaseSize),
       description: 'Optional prop to control the size of the ButtonBase',
     },
     shape: {
       control: 'select',
-      options: Object.keys(ButtonBaseShape),
-      mapping: ButtonBaseShape,
+      options: Object.values(ButtonBaseShape),
       description:
         'Optional prop for corner style: size-based radius or fully rounded (pill)',
     },
@@ -46,15 +54,13 @@ const meta: Meta<typeof ButtonBase> = {
     },
     startIconName: {
       control: 'select',
-      options: Object.keys(IconName),
-      mapping: IconName,
+      options: Object.values(IconName),
       description:
         'Optional prop to specify an icon to show at the start of the ButtonBase',
     },
     endIconName: {
       control: 'select',
-      options: Object.keys(IconName),
-      mapping: IconName,
+      options: Object.values(IconName),
       description:
         'Optional prop to specify an icon to show at the end of the ButtonBase',
     },
@@ -82,14 +88,6 @@ export default meta;
 type Story = StoryObj<typeof ButtonBase>;
 
 export const Default: Story = {
-  args: {
-    children: 'ButtonBase',
-    size: ButtonBaseSize.Lg,
-    shape: ButtonBaseShape.Rounded,
-    isLoading: false,
-    isDisabled: false,
-    isFullWidth: false,
-  },
   render: (args) => <ButtonBase {...args}>{args.children}</ButtonBase>,
 };
 
