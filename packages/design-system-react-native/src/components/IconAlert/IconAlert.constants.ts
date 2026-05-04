@@ -1,6 +1,8 @@
-import { IconAlertSeverity } from '@metamask/design-system-shared';
-
-import { IconColor, IconName } from '../../types';
+import {
+  IconAlertSeverity,
+  IconColor,
+  IconName,
+} from '@metamask/design-system-shared';
 
 export const ICON_ALERT_SEVERITY_MAP: Record<
   IconAlertSeverity,
