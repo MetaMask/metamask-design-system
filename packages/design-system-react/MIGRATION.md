@@ -18,6 +18,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Checkbox Component](#checkbox-component)
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
+  - [ModalFooter Component](#modalfooter-component)
   - [ModalOverlay Component](#modaloverlay-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
@@ -1394,6 +1395,161 @@ For typical call sites — for example `ui/components/multichain-accounts/multic
 
 - `ModalFocus`'s public API is unchanged. Any consumer that passed only the documented props (`initialFocusRef`, `finalFocusRef`, `restoreFocus`, `autoFocus`, `children`) needs nothing beyond the import-path swap.
 - Consumers that imported `FocusableElement` directly from the extension's `modal-focus.types` module should re-import it from the design-system package barrel.
+
+### ModalFooter Component
+
+The extension `modal-footer` component maps to `ModalFooter` in the design system. The behavioral contract — a `<footer>` with up to two action buttons plus an optional slot for inline form controls — is preserved, but the API is reshaped to align with the React Native `BottomSheetFooter`:
+
+- Top-level `onSubmit` / `onCancel` callbacks and `submit` / `cancel` button-prop bags are replaced by `primaryButtonProps` / `secondaryButtonProps` whose click handlers ride along inside the props bag.
+- The button variant is **owned by the component** — primary always renders as `ButtonVariant.Primary`, secondary as `ButtonVariant.Secondary`. Consumers cannot override `variant`.
+- Layout direction is now an explicit `buttonsAlignment` prop (`Horizontal` default, `Vertical` opt-in) instead of the legacy `flex-wrap` + `Container.maxWidth` arrangement.
+- The polymorphic Box surface, the `Container` dependency, the `useI18nContext` coupling, and the `mm-modal-footer*` SCSS class hooks are all removed.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                 | Design System Migration                                                 |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `import { ModalFooter } from '../../component-library'`           | `import { ModalFooter } from '@metamask/design-system-react'`           |
+| `import type { ModalFooterProps } from '../../component-library'` | `import type { ModalFooterProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                               | Design System API                                                                     | Change Type        | Notes                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `onSubmit?: () => void`                                                                     | merged into `primaryButtonProps.onClick`                                              | renamed            | the click handler now travels with the rest of the primary-button config inside `primaryButtonProps`. The presence of `primaryButtonProps` is what causes the primary button to render.                                                                |
+| `onCancel?: () => void`                                                                     | merged into `secondaryButtonProps.onClick`                                            | renamed            | same as above for the secondary button.                                                                                                                                                                                                                |
+| `submitButtonProps?: ButtonProps<'button'>`                                                 | `primaryButtonProps?: Omit<ButtonProps, 'variant'>` (with `data-*` index signature)   | renamed + reshaped | renamed for symmetry with React Native `BottomSheetFooter`. `variant` is owned by the component (always `Primary`); `children` is the source of truth for the label. The extension's implicit `t('confirm')` default is gone.                          |
+| `cancelButtonProps?: ButtonProps<'button'>`                                                 | `secondaryButtonProps?: Omit<ButtonProps, 'variant'>` (with `data-*` index signature) | renamed + reshaped | same as above; renders with `Secondary` variant.                                                                                                                                                                                                       |
+| `containerProps?: ContainerProps<'div'>`                                                    | removed; layout direction moved to `buttonsAlignment`                                 | removed            | the `Container.maxWidth` (`Sm` / `Md` / `Lg` ≈ 360 / 480 / 720) is gone. Width is now governed by the surrounding `ModalContent.size`. Custom outer footer styling moves to `className`.                                                               |
+| —                                                                                           | `buttonsAlignment?: ButtonsAlignment` (`Horizontal` default, `Vertical` opt-in)       | added              | `Horizontal` lays buttons in a `flex-row` with each button at `flex-1`; `Vertical` lays them in a `flex-col` with each button at `w-full`. Order: secondary → primary in both modes. Mirrors the React Native `BottomSheetFooter` API.                 |
+| `children?: ReactNode`                                                                      | `children?: ReactNode`                                                                | unchanged          | rendered above the action button row.                                                                                                                                                                                                                  |
+| `className?: string`                                                                        | `className?: string`                                                                  | unchanged          | merged with default Tailwind classes via `twMerge`.                                                                                                                                                                                                    |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>`                                | removed                                                                               | removed            | always renders a `<footer>`. If you need a different element, wrap or compose.                                                                                                                                                                         |
+| Box style-utility props (`paddingLeft`, `paddingRight`, `paddingTop`, `backgroundColor`, …) | removed from public API                                                               | removed            | use `className` with Tailwind utilities. The default `px-4 pt-4` remains, applied internally; override with `className="px-0 pt-2"` etc.                                                                                                               |
+| `mm-modal-footer` and `mm-modal-footer__button` SCSS class hooks                            | removed                                                                               | removed            | the per-button `flex: 1 0 auto` is replaced by the `buttonsAlignment`-driven utilities (`flex-1` horizontal, `w-full` vertical), applied internally to each `Button`. Customize via `primaryButtonProps.className` / `secondaryButtonProps.className`. |
+
+##### Variant Ownership
+
+`primaryButtonProps` and `secondaryButtonProps` are typed as `Omit<ButtonProps, 'variant'>`. The component sets `variant={ButtonVariant.Primary}` / `ButtonVariant.Secondary` after the spread, so even if `variant` were passed it would be overridden — but the type forbids it, surfacing the contract at compile time. This matches React Native `BottomSheetFooter` and prevents consumers from partially bypassing the footer's button semantics.
+
+##### i18n Decoupling
+
+The extension auto-defaulted button labels to `t('confirm')` and `t('cancel')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. Pass localized labels explicitly through `primaryButtonProps.children` / `secondaryButtonProps.children`:
+
+```tsx
+<ModalFooter
+  primaryButtonProps={{ children: t('confirm'), onClick: handleSubmit }}
+  secondaryButtonProps={{ children: t('cancel'), onClick: handleClose }}
+/>
+```
+
+##### Button API Differences
+
+`primaryButtonProps` and `secondaryButtonProps` now accept the MMDS `ButtonProps` shape (minus `variant`). The most common renames for migrating consumers:
+
+| Extension Button Prop | Design System Button Prop | Notes                                           |
+| --------------------- | ------------------------- | ----------------------------------------------- |
+| `danger: true`        | `isDanger: true`          | renamed; matches the broader MMDS Button rename |
+| `disabled`            | `isDisabled`              | renamed                                         |
+| `loading`             | `isLoading`               | renamed                                         |
+| `block`               | `isFullWidth`             | renamed                                         |
+
+See the [Button Component](#button-component) migration entry for the full mapping.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalFooter } from '../../component-library';
+
+// Default labels via useI18nContext + destructive submit
+<ModalFooter
+  onCancel={onClose}
+  onSubmit={onSubmit}
+  submitButtonProps={{
+    children: t('remove'),
+    danger: true,
+  }}
+/>
+
+// Container max-width override via the Container enum
+<ModalFooter
+  onSubmit={onSubmit}
+  submitButtonProps={{ children: t('confirm') }}
+  containerProps={{ maxWidth: ContainerMaxWidth.Md }}
+/>
+
+// Custom child content with a "do not show again" checkbox
+<ModalFooter onSubmit={onSubmit} onCancel={onClose}>
+  <Checkbox
+    isChecked={dontShowAgain}
+    onChange={() => setDontShowAgain(!dontShowAgain)}
+    label={t('dontShowAgain')}
+  />
+</ModalFooter>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalFooter } from '@metamask/design-system-react';
+
+// Click handlers ride inside the prop bags; danger -> isDanger.
+// Variant is owned by the component (Primary / Secondary).
+<ModalFooter
+  primaryButtonProps={{
+    children: t('remove'),
+    isDanger: true,
+    onClick: onSubmit,
+  }}
+  secondaryButtonProps={{
+    children: t('cancel'),
+    onClick: onClose,
+  }}
+/>
+
+// `containerProps.maxWidth` is gone — width is governed by the surrounding
+// `ModalContent.size`. Use `buttonsAlignment` to switch to a stacked button
+// row when needed.
+<ModalFooter
+  buttonsAlignment={ButtonsAlignment.Vertical}
+  primaryButtonProps={{ children: t('confirm'), onClick: onSubmit }}
+/>
+
+// Custom child content + button row — children stay above buttons.
+<ModalFooter
+  primaryButtonProps={{ children: t('confirm'), onClick: onSubmit }}
+  secondaryButtonProps={{ children: t('cancel'), onClick: onClose }}
+>
+  <Checkbox
+    id="dont-show-again"
+    isSelected={dontShowAgain}
+    onChange={() => setDontShowAgain(!dontShowAgain)}
+    label={t('dontShowAgain')}
+  />
+</ModalFooter>
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (uses `submitButtonProps={{ children: t('remove'), danger: true }}` and the i18n-defaulted cancel button), `ui/components/app/snaps/snap-privacy-warning/snap-privacy-warning.js` (already passes `submitButtonProps.children` and `cancelButtonProps.children` explicitly), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (bypasses the built-in buttons by passing a custom `<Button>` as children) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Rename `submitButtonProps` → `primaryButtonProps`, `cancelButtonProps` → `secondaryButtonProps`.
+3. Move `onSubmit` / `onCancel` into the corresponding `*ButtonProps.onClick`.
+4. Add `secondaryButtonProps={{ children: t('cancel'), onClick: onClose }}` to any `ModalFooter` that relied on the implicit `t('cancel')` default.
+5. Rename `danger` → `isDanger` (and any other extension Button → MMDS Button prop renames) inside the button-prop bags. Drop any explicit `variant` — the component owns it.
+6. If the call site set `containerProps.maxWidth`, drop it; width is now governed by `ModalContent.size`. If the call site used `containerProps` for layout direction, switch to `buttonsAlignment={ButtonsAlignment.Vertical}` if a stacked row is desired.
+
+#### API Differences
+
+- `ModalFooter` no longer composes Box's polymorphic API. It always renders a `<footer>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- `ModalFooter` is i18n-agnostic — there is no `useI18nContext` integration and no internal English fallback. Consumers always pass labels via `primaryButtonProps.children` / `secondaryButtonProps.children`.
+- The component **owns** the button variant via `Omit<ButtonProps, 'variant'>` on the prop bags. Consumers cannot pass `variant`; the API surfaces this at compile time. This mirrors the React Native `BottomSheetFooter` and is the recommended footer contract going forward.
+- Layout direction is configured via `buttonsAlignment` (`Horizontal` default, `Vertical` opt-in). The legacy `Container.maxWidth` enum is gone — width comes from the surrounding `ModalContent.size`.
 
 ### ModalOverlay Component
 
