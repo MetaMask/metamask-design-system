@@ -105,6 +105,12 @@ export { ButtonsAlignment, ModalFooter } from './ModalFooter';
 export type { ModalFooterButtonProps, ModalFooterProps } from './ModalFooter';
 export { Modal, useModalContext } from './Modal';
 export type { ModalContextType, ModalProps } from './Modal';
+export {
+  ModalContent,
+  ModalContentSize,
+  MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR,
+} from './ModalContent';
+export type { ModalContentProps } from './ModalContent';
 
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
