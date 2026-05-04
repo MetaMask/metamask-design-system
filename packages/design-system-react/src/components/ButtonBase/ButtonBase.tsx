@@ -7,10 +7,12 @@ import { Slot, Slottable } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Icon, IconSize } from '../Icon';
-import { Text, FontWeight, TextColor, TextVariant } from '../Text';
+import { Icon } from '../Icon';
+import { Text, FontWeight, TextColor } from '../Text';
 
 import {
+  MAP_BUTTONBASE_SIZE_ICONSIZE,
+  MAP_BUTTONBASE_SIZE_TEXT_VARIANT,
   getButtonBaseBorderRadiusTwClass,
   getButtonBaseHorizontalPaddingTwClasses,
   TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
@@ -58,9 +60,8 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const hasStart = Boolean(finalStartIconName || startAccessory);
     const hasEnd = Boolean(finalEndIconName || endAccessory);
     const hasAccessories = hasStart || hasEnd;
-    const iconSize = size === ButtonBaseSize.Lg ? IconSize.Md : IconSize.Sm;
-    const labelTextVariant =
-      size === ButtonBaseSize.Sm ? TextVariant.BodySm : TextVariant.BodyMd;
+    const iconSize = MAP_BUTTONBASE_SIZE_ICONSIZE[size];
+    const labelTextVariant = MAP_BUTTONBASE_SIZE_TEXT_VARIANT[size];
 
     // Calculate tabIndex based on asChild and disabled state
     const getTabIndex = () => {

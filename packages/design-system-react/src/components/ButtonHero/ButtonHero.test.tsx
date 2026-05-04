@@ -70,8 +70,10 @@ describe('ButtonHero Component', () => {
     );
 
     expect(screen.getAllByText('Please wait...')).toHaveLength(2);
-    // Original text should still be present but invisible
-    expect(screen.getByText('Submit')).toHaveClass('invisible');
+    const widthPlaceholder = screen
+      .getByRole('button')
+      .querySelector('span.invisible');
+    expect(widthPlaceholder).toHaveTextContent('Submit');
   });
 
   it('does not apply hover/active classes when disabled or loading', () => {

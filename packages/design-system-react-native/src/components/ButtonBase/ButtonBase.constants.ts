@@ -1,6 +1,8 @@
 import {
   ButtonBaseShape,
   ButtonBaseSize,
+  IconSize,
+  TextVariant,
 } from '@metamask/design-system-shared';
 
 export const TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION: Record<
@@ -19,6 +21,21 @@ export const TWCLASSMAP_BUTTONBASE_BORDER_RADIUS: Record<
   [ButtonBaseSize.Sm]: 'rounded-lg', // 8px.
   [ButtonBaseSize.Md]: 'rounded-xl', // 12px.
   [ButtonBaseSize.Lg]: 'rounded-xl', // 12px.
+};
+
+export const MAP_BUTTONBASE_SIZE_ICONSIZE: Record<ButtonBaseSize, IconSize> = {
+  [ButtonBaseSize.Sm]: IconSize.Sm,
+  [ButtonBaseSize.Md]: IconSize.Sm,
+  [ButtonBaseSize.Lg]: IconSize.Md,
+};
+
+export const MAP_BUTTONBASE_SIZE_TEXT_VARIANT: Record<
+  ButtonBaseSize,
+  TextVariant
+> = {
+  [ButtonBaseSize.Sm]: TextVariant.BodySm,
+  [ButtonBaseSize.Md]: TextVariant.BodyMd,
+  [ButtonBaseSize.Lg]: TextVariant.BodyMd,
 };
 
 export const getButtonBaseBorderRadiusTwClass = (

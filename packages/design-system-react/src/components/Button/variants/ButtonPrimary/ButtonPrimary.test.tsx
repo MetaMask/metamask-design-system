@@ -150,7 +150,10 @@ describe('ButtonPrimary', () => {
     );
 
     expect(screen.getAllByText('Please wait...')).toHaveLength(2);
-    expect(screen.getByText('Submit')).toHaveClass('invisible');
+    const widthPlaceholder = screen
+      .getByRole('button')
+      .querySelector('span.invisible');
+    expect(widthPlaceholder).toHaveTextContent('Submit');
   });
 
   it('applies full width class correctly', () => {

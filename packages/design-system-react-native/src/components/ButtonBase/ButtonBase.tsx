@@ -8,12 +8,14 @@ import type { StyleProp, ViewStyle } from 'react-native';
 
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
-import { Icon, IconColor, IconSize } from '../Icon';
+import { Icon, IconColor } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import { Spinner } from '../temp-components/Spinner';
-import { TextVariant, FontWeight, TextColor } from '../Text';
+import { FontWeight, TextColor } from '../Text';
 
 import {
+  MAP_BUTTONBASE_SIZE_ICONSIZE,
+  MAP_BUTTONBASE_SIZE_TEXT_VARIANT,
   getButtonBaseBorderRadiusTwClass,
   getButtonBaseHorizontalPaddingTwClasses,
   TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
@@ -58,9 +60,8 @@ export const ButtonBase = ({
   const hasEnd = Boolean(finalEndIconName || endAccessory);
   const hasAccessories = hasStart || hasEnd;
 
-  const iconSize = size === ButtonBaseSize.Lg ? IconSize.Md : IconSize.Sm;
-  const labelTextVariant =
-    size === ButtonBaseSize.Sm ? TextVariant.BodySm : TextVariant.BodyMd;
+  const iconSize = MAP_BUTTONBASE_SIZE_ICONSIZE[size];
+  const labelTextVariant = MAP_BUTTONBASE_SIZE_TEXT_VARIANT[size];
 
   // Generate accessibility label if not provided
   const finalAccessibilityLabel = useMemo(() => {
@@ -171,7 +172,7 @@ export const ButtonBase = ({
             {isLoading && (
               <Box
                 {...restLoadingWrapper}
-                twClassName={`absolute inset-0 flex items-center justify-center ${loadingWrapperTw}`}
+                twClassName={`absolute inset-0 flex items-center justify-center ${loadingWrapperTw ?? ''}`}
               >
                 <Spinner
                   color={
@@ -197,7 +198,7 @@ export const ButtonBase = ({
 
             <BoxRow
               {...restContentWrapper}
-              twClassName={`${contentWrapperTw ?? ''} ${isLoading && 'opacity-0'}`}
+              twClassName={`${contentWrapperTw ?? ''} ${isLoading ? 'opacity-0' : ''}`}
               gap={hasAccessories ? 1 : 0}
               startAccessory={
                 finalStartIconName ? (
