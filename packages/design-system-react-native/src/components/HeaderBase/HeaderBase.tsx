@@ -1,4 +1,5 @@
 // Third party dependencies.
+import { TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback, useState } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
@@ -6,19 +7,74 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
-import { Box } from '../Box';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { Text } from '../Text';
+import type { ButtonIconProps } from '../ButtonIcon';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
 
-// Internal dependencies.
-import { HEADERBASE_VARIANT_TEXT_VARIANTS } from './HeaderBase.constants';
 import type { HeaderBaseProps } from './HeaderBase.types';
-import { HeaderBaseVariant } from './HeaderBase.types';
+
+// `startAccessory` is the primary escape hatch. `startButtonIconProps`
+// remains as a convenience path for the common single-back-button case.
+const resolveStartAccessory = ({
+  startAccessory,
+  startButtonIconProps,
+}: Pick<HeaderBaseProps, 'startAccessory' | 'startButtonIconProps'>) => {
+  if (startAccessory) {
+    return startAccessory;
+  }
+
+  if (startButtonIconProps) {
+    return <ButtonIcon size={ButtonIconSize.Md} {...startButtonIconProps} />;
+  }
+
+  return null;
+};
+
+// Only the end side supports built-in multiple buttons. More complex
+// start-side layouts should be composed explicitly with `startAccessory`.
+const renderEndButtonIcons = (endButtonIconProps: ButtonIconProps[]) =>
+  endButtonIconProps
+    .map((iconProps, originalIndex) => ({
+      iconProps,
+      originalIndex,
+    }))
+    .reverse()
+    .map(({ iconProps, originalIndex }) => (
+      <ButtonIcon
+        key={`end-button-icon-${originalIndex}`}
+        size={ButtonIconSize.Md}
+        {...iconProps}
+      />
+    ));
+
+// `endAccessory` takes precedence over the shorthand icon-props array.
+const resolveEndAccessory = ({
+  endAccessory,
+  endButtonIconProps,
+}: Pick<HeaderBaseProps, 'endAccessory' | 'endButtonIconProps'>) => {
+  if (endAccessory) {
+    return {
+      resolvedEndAccessory: endAccessory,
+      hasMultipleEndButtons: false,
+    };
+  }
+
+  if (endButtonIconProps && endButtonIconProps.length > 0) {
+    return {
+      resolvedEndAccessory: renderEndButtonIcons(endButtonIconProps),
+      hasMultipleEndButtons: endButtonIconProps.length > 1,
+    };
+  }
+
+  return {
+    resolvedEndAccessory: null,
+    hasMultipleEndButtons: false,
+  };
+};
 
 export const HeaderBase: React.FC<HeaderBaseProps> = ({
   children,
   style,
-  variant = HeaderBaseVariant.Compact,
   startAccessory,
   endAccessory,
   startButtonIconProps,
@@ -26,7 +82,7 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
   includesTopInset = false,
   startAccessoryWrapperProps,
   endAccessoryWrapperProps,
-  titleTestID,
+  textProps,
   twClassName,
   ...props
 }) => {
@@ -44,133 +100,102 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
     setEndAccessoryWidth(e.nativeEvent.layout.width);
   }, []);
 
-  // Determine what to render for start/end
-  const hasStartContent = startAccessory || startButtonIconProps;
-  const hasEndContent =
-    endAccessory || (endButtonIconProps && endButtonIconProps.length > 0);
-  const hasAnyAccessory = hasStartContent || hasEndContent;
+  // Normalize the public API into resolved slots so the render path only deals
+  // with layout and title rendering.
+  const resolvedStartAccessory = resolveStartAccessory({
+    startAccessory,
+    startButtonIconProps,
+  });
+  const { resolvedEndAccessory, hasMultipleEndButtons } = resolveEndAccessory({
+    endAccessory,
+    endButtonIconProps,
+  });
 
-  const isCompact = variant === HeaderBaseVariant.Compact;
+  const hasStartAccessory = Boolean(resolvedStartAccessory);
+  const hasEndAccessory = Boolean(resolvedEndAccessory);
+  const hasAnyAccessory = hasStartAccessory || hasEndAccessory;
 
-  // For Compact variant, render both wrappers if any accessory exists (for centering)
-  // For Display variant, only render wrappers when they have content
-  const shouldRenderStartWrapper = isCompact
-    ? Boolean(hasAnyAccessory)
-    : Boolean(hasStartContent);
-  const shouldRenderEndWrapper = isCompact
-    ? Boolean(hasAnyAccessory)
-    : Boolean(hasEndContent);
-
-  // Calculate equal width for both accessory wrappers to ensure title stays centered (Compact only)
+  // Calculate equal width for both accessory wrappers to ensure title stays centered.
   const accessoryWrapperWidth =
-    isCompact && hasAnyAccessory && (startAccessoryWidth || endAccessoryWidth)
+    hasAnyAccessory && (startAccessoryWidth || endAccessoryWidth)
       ? Math.max(startAccessoryWidth, endAccessoryWidth)
       : undefined;
 
-  const renderStartContent = () => {
-    if (startAccessory) {
-      return startAccessory;
+  const renderAccessoryWrapper = ({
+    wrapperProps,
+    alignment,
+    onLayout,
+    content,
+    measuredContentStyle,
+  }: {
+    wrapperProps?: HeaderBaseProps['startAccessoryWrapperProps'];
+    alignment: 'items-start' | 'items-end';
+    onLayout: (e: LayoutChangeEvent) => void;
+    content: React.ReactNode;
+    measuredContentStyle?: ReturnType<typeof tw.style>;
+  }) => {
+    if (!hasAnyAccessory) {
+      return null;
     }
-    if (startButtonIconProps) {
-      return <ButtonIcon size={ButtonIconSize.Md} {...startButtonIconProps} />;
-    }
-    return null;
+
+    return (
+      <View
+        style={
+          accessoryWrapperWidth
+            ? tw.style(alignment, { width: accessoryWrapperWidth })
+            : undefined
+        }
+        {...wrapperProps}
+      >
+        <View onLayout={onLayout} style={measuredContentStyle}>
+          {content}
+        </View>
+      </View>
+    );
   };
-
-  const renderEndContent = () => {
-    if (endAccessory) {
-      return endAccessory;
-    }
-    if (endButtonIconProps && endButtonIconProps.length > 0) {
-      // Reverse the array so first item appears rightmost
-      // Use original index (before reversal) for stable React keys
-      const reversedProps = endButtonIconProps
-        .map((iconProps, originalIndex) => ({
-          iconProps,
-          originalIndex,
-        }))
-        .reverse();
-      return reversedProps.map(({ iconProps, originalIndex }) => (
-        <ButtonIcon
-          key={`end-button-icon-${originalIndex}`}
-          size={ButtonIconSize.Md}
-          {...iconProps}
-        />
-      ));
-    }
-    return null;
-  };
-
-  // Check if we have multiple end buttons for layout styling
-  const hasMultipleEndButtons =
-    !endAccessory && endButtonIconProps && endButtonIconProps.length > 1;
-
-  // Merge default styles with passed-in twClassName
-  const baseStyles = 'flex-row items-center gap-4 h-14';
-  const resolvedTwClassName = twClassName
-    ? `${baseStyles} ${twClassName}`
-    : baseStyles;
 
   return (
     <View
       style={[
-        tw.style(resolvedTwClassName),
+        tw.style('flex-row items-center gap-4 h-14', twClassName),
         includesTopInset && { marginTop: insets.top },
         style,
       ]}
       {...props}
     >
       {/* Start accessory */}
-      {shouldRenderStartWrapper && (
-        <View
-          style={
-            accessoryWrapperWidth
-              ? tw.style('items-start', { width: accessoryWrapperWidth })
-              : undefined
-          }
-          {...startAccessoryWrapperProps}
-        >
-          <View onLayout={handleStartAccessoryLayout}>
-            {renderStartContent()}
-          </View>
-        </View>
-      )}
+      {renderAccessoryWrapper({
+        wrapperProps: startAccessoryWrapperProps,
+        alignment: 'items-start',
+        onLayout: handleStartAccessoryLayout,
+        content: resolvedStartAccessory,
+      })}
 
       {/* Title */}
-      <Box twClassName={isCompact ? 'flex-1 items-center' : 'flex-1'}>
-        {typeof children === 'string' ? (
-          <Text
-            variant={HEADERBASE_VARIANT_TEXT_VARIANTS[variant]}
-            testID={titleTestID}
-            style={isCompact ? tw.style('text-center') : undefined}
-          >
-            {children}
-          </Text>
-        ) : (
-          children
-        )}
-      </Box>
+      <View style={tw.style('flex-1 items-center')}>
+        <TextOrChildren
+          textProps={{
+            variant: TextVariant.HeadingSm,
+            ...textProps,
+            style: [tw.style('text-center'), textProps?.style],
+          }}
+        >
+          {children}
+        </TextOrChildren>
+      </View>
 
       {/* End accessory */}
-      {shouldRenderEndWrapper && (
-        <View
-          style={
-            accessoryWrapperWidth
-              ? tw.style('items-end', { width: accessoryWrapperWidth })
-              : undefined
-          }
-          {...endAccessoryWrapperProps}
-        >
-          <View
-            onLayout={handleEndAccessoryLayout}
-            style={
-              hasMultipleEndButtons ? tw.style('flex-row gap-2') : undefined
-            }
-          >
-            {renderEndContent()}
-          </View>
-        </View>
-      )}
+      {renderAccessoryWrapper({
+        wrapperProps: endAccessoryWrapperProps,
+        alignment: 'items-end',
+        onLayout: handleEndAccessoryLayout,
+        content: resolvedEndAccessory,
+        measuredContentStyle: hasMultipleEndButtons
+          ? tw.style('flex-row gap-2')
+          : undefined,
+      })}
     </View>
   );
 };
+
+HeaderBase.displayName = 'HeaderBase';

@@ -2,20 +2,12 @@ import type { ButtonIconProps } from '../ButtonIcon/ButtonIcon.types';
 import type { HeaderBaseProps } from '../HeaderBase/HeaderBase.types';
 
 /**
- * Variant options for BottomSheetHeader component.
- * - Compact: Center-aligned title with HeadingSm text (default)
- * - Display: Left-aligned title with HeadingLg text
- */
-export enum BottomSheetHeaderVariant {
-  Display = 'display',
-  Compact = 'compact',
-}
-
-/**
  * BottomSheetHeader component props.
  *
- * Extends HeaderBase's props (which extends ViewProps) to inherit standard
- * props such as `testID`, `accessibilityLabel`, and other View props.
+ * Extends HeaderBase's root and title props to inherit standard props such as
+ * `testID`, `accessibilityLabel`, `textProps`, and other View props.
+ * Start and end accessories are controlled internally via `onBack` and
+ * `onClose`, so `startAccessory` and `endAccessory` are not part of this API.
  */
 export type BottomSheetHeaderProps = {
   /**
@@ -40,12 +32,4 @@ export type BottomSheetHeaderProps = {
    * Note: `iconName` and `onPress` are managed internally and excluded.
    */
   closeButtonProps?: Partial<Omit<ButtonIconProps, 'iconName' | 'onPress'>>;
-  /**
-   * Variant controlling header alignment and text size.
-   * - Compact: center-aligned with HeadingSm text
-   * - Display: left-aligned with HeadingLg text
-   *
-   * @default BottomSheetHeaderVariant.Compact
-   */
-  variant?: BottomSheetHeaderVariant;
-} & Omit<HeaderBaseProps, 'variant'>;
+} & Omit<HeaderBaseProps, 'startAccessory' | 'endAccessory'>;

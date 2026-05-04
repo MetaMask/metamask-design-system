@@ -15,30 +15,7 @@ import { BottomSheetHeader } from '@metamask/design-system-react-native';
 
 ## Props
 
-### `variant`
-
-Controls the header alignment and text size.
-
-Available variants:
-
-- `BottomSheetHeaderVariant.Compact` - center-aligned with HeadingSm text
-- `BottomSheetHeaderVariant.Display` - left-aligned with HeadingLg text
-
-| TYPE                       | REQUIRED | DEFAULT                            |
-| -------------------------- | -------- | ---------------------------------- |
-| `BottomSheetHeaderVariant` | No       | `BottomSheetHeaderVariant.Compact` |
-
-```tsx
-import { BottomSheetHeader, BottomSheetHeaderVariant } from '@metamask/design-system-react-native';
-
-<BottomSheetHeader variant={BottomSheetHeaderVariant.Compact}>
-  Compact Title
-</BottomSheetHeader>
-
-<BottomSheetHeader variant={BottomSheetHeaderVariant.Display}>
-  Display Title
-</BottomSheetHeader>
-```
+Inherits root and title props from [HeaderBase](../HeaderBase/README.md), including `testID`, `accessibilityLabel`, `style`, `twClassName`, `textProps`, and wrapper props. `BottomSheetHeader` manages its start and end accessories internally through `onBack` and `onClose`, so it does not expose `startAccessory` or `endAccessory` as public props.
 
 ### `onBack`
 

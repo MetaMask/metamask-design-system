@@ -4,17 +4,7 @@ import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
 // External dependencies.
 import type { ButtonIconProps } from '../ButtonIcon';
-
-/**
- * Variant options for HeaderBase component.
- * Controls title text size and alignment.
- */
-export enum HeaderBaseVariant {
-  /** Center-aligned title with HeadingSm text */
-  Compact = 'compact',
-  /** Left-aligned title with HeadingLg text */
-  Display = 'display',
-}
+import type { TextProps } from '../Text';
 
 /**
  * HeaderBase component props.
@@ -23,12 +13,6 @@ export enum HeaderBaseVariant {
  * `testID`, `accessibilityLabel`, and other View props.
  */
 export type HeaderBaseProps = ViewProps & {
-  /**
-   * Variant controlling header text size.
-   *
-   * @default HeaderBaseVariant.Compact
-   */
-  variant?: HeaderBaseVariant;
   /**
    * Title of the HeaderBase. Pass a string for automatic Text rendering,
    * or a ReactNode for custom content.
@@ -51,6 +35,7 @@ export type HeaderBaseProps = ViewProps & {
   /**
    * Optional ButtonIcon props to render a ButtonIcon as the start accessory.
    * Only used if startAccessory is not provided.
+   * For multiple start-side actions, compose them explicitly with `startAccessory`.
    *
    * @default size: ButtonIconSize.Md
    */
@@ -59,6 +44,8 @@ export type HeaderBaseProps = ViewProps & {
    * Optional array of ButtonIcon props to render multiple ButtonIcons as end accessories.
    * Rendered in reverse order (first item appears rightmost).
    * Only used if endAccessory is not provided.
+   * This is the built-in multiple-action path for HeaderBase; for custom layouts,
+   * use `endAccessory`.
    *
    * @default size: ButtonIconSize.Md for each
    */
@@ -79,10 +66,10 @@ export type HeaderBaseProps = ViewProps & {
    */
   endAccessoryWrapperProps?: ViewProps;
   /**
-   * Optional test ID for the title Text element.
-   * Only used when children is a string.
+   * Optional props passed to the Text component when children is a string.
+   * Props are spread onto TextOrChildren `textProps` and can override default values.
    */
-  titleTestID?: string;
+  textProps?: Omit<Partial<TextProps>, 'children'>;
   /**
    * Optional Tailwind class names for the header container.
    * Merged with default styles using tw.style().

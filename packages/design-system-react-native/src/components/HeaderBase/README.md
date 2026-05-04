@@ -79,7 +79,7 @@ Content displayed after the title. Takes priority over `endButtonIconProps` if b
 
 ### `startButtonIconProps`
 
-ButtonIcon props to render a ButtonIcon as the start accessory. Only used if `startAccessory` is not provided. Defaults to `ButtonIconSize.Md`.
+ButtonIcon props to render a ButtonIcon as the start accessory. Only used if `startAccessory` is not provided. Defaults to `ButtonIconSize.Md`. For multiple start-side actions, compose them explicitly with `startAccessory`.
 
 | TYPE              | REQUIRED | DEFAULT     |
 | ----------------- | -------- | ----------- |
@@ -98,7 +98,7 @@ ButtonIcon props to render a ButtonIcon as the start accessory. Only used if `st
 
 ### `endButtonIconProps`
 
-Array of ButtonIcon props to render multiple ButtonIcons as end accessories. Rendered in reverse order (first item appears rightmost). Only used if `endAccessory` is not provided. Defaults to `ButtonIconSize.Md` for each.
+Array of ButtonIcon props to render multiple ButtonIcons as end accessories. Rendered in reverse order (first item appears rightmost). Only used if `endAccessory` is not provided. Defaults to `ButtonIconSize.Md` for each. This is HeaderBase's built-in multiple-action path on the end side.
 
 | TYPE                | REQUIRED | DEFAULT     |
 | ------------------- | -------- | ----------- |
@@ -152,16 +152,16 @@ Use the `style` prop to customize the component's appearance with React Native s
 <HeaderBase style={{ marginHorizontal: 16 }}>Styled Header</HeaderBase>
 ```
 
-### `titleTestID`
+### `textProps`
 
-Test ID for the title Text element. Only used when `children` is a string.
+Props passed to the `Text` element when `children` is a string. This is the preferred way to provide a title `testID` or override text props.
 
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
+| TYPE                                   | REQUIRED | DEFAULT     |
+| -------------------------------------- | -------- | ----------- |
+| `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
-<HeaderBase titleTestID="my-header-title">Page Title</HeaderBase>
+<HeaderBase textProps={{ testID: 'my-header-title' }}>Page Title</HeaderBase>
 ```
 
 ## References

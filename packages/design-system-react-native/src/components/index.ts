@@ -74,10 +74,7 @@ export type {
   BottomSheetFooterButtonProps,
 } from './BottomSheetFooter';
 
-export {
-  BottomSheetHeader,
-  BottomSheetHeaderVariant,
-} from './BottomSheetHeader';
+export { BottomSheetHeader } from './BottomSheetHeader';
 export type { BottomSheetHeaderProps } from './BottomSheetHeader';
 
 export { BottomSheetOverlay } from './BottomSheetOverlay';
@@ -124,7 +121,7 @@ export type { ButtonSemanticProps } from './ButtonSemantic';
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
-export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
+export { HeaderBase } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
 export { HeaderRoot } from './HeaderRoot';
