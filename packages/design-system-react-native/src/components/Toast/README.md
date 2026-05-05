@@ -33,7 +33,10 @@ const App = () => (
 ### 2. Call `toast(...)` from anywhere
 
 ```tsx
-import { toast, BannerAlertSeverity } from '@metamask/design-system-react-native';
+import {
+  toast,
+  BannerAlertSeverity,
+} from '@metamask/design-system-react-native';
 
 const Content = () => {
   const handlePress = () => {
@@ -62,7 +65,10 @@ Call `toast.hide()` or `toast.dismiss()` to dismiss the currently visible toast.
 Use `Toast` when you want to render a single toast surface directly in Storybook, docs, or bespoke layouts.
 
 ```tsx
-import { Toast, BannerAlertSeverity } from '@metamask/design-system-react-native';
+import {
+  Toast,
+  BannerAlertSeverity,
+} from '@metamask/design-system-react-native';
 
 <Toast
   title="Toast message"
