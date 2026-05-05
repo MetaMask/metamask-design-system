@@ -1,6 +1,9 @@
 import { extendTailwindMerge } from 'tailwind-merge';
 
+// Register both legacy (s-*/l-*) and new simplified typography tokens so
+// twMerge can properly resolve conflicts regardless of which format is used.
 const variantClassGroups = [
+  // Legacy tokens (kept for backward compatibility)
   's-display-lg',
   's-display-md',
   's-heading-lg',
@@ -29,6 +32,21 @@ const variantClassGroups = [
   'l-button-label-md',
   'l-button-label-lg',
   'l-amount-display-lg',
+  // New simplified tokens (current Text variant class names)
+  'display-lg',
+  'display-md',
+  'heading-lg',
+  'heading-md',
+  'heading-sm',
+  'body-lg',
+  'body-md',
+  'body-sm',
+  'body-xs',
+  'page-heading',
+  'section-heading',
+  'button-label-md',
+  'button-label-lg',
+  'amount-display-lg',
 ];
 
 /**
