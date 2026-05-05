@@ -1,5 +1,4 @@
 import { BannerAlertSeverity as BannerAlertSeverityValues } from '@metamask/design-system-shared';
-import type { BannerAlertSeverity } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
 import type { BannerBaseProps } from '../BannerBase';
@@ -7,11 +6,14 @@ import type { IconProps } from '../Icon/Icon.types';
 
 /**
  * Toast severity variants.
- * Kept as an alias for BannerAlertSeverity for backwards compatibility.
+ * `Default` renders no built-in leading icon.
  */
-export const ToastSeverity = BannerAlertSeverityValues;
+export const ToastSeverity = {
+  Default: 'default',
+  ...BannerAlertSeverityValues,
+} as const;
 
-export type ToastSeverity = BannerAlertSeverity;
+export type ToastSeverity = (typeof ToastSeverity)[keyof typeof ToastSeverity];
 
 /**
  * Optional props for the leading severity `Icon`.

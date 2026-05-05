@@ -43,23 +43,23 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ### From version 0.22.0 to 0.23.0
 
-#### Toast: static API replaces context-based usage
+#### Toast: `Toaster` + `toast(...)` replace context-based usage
 
 **What changed:**
 
-- **`Toast`** now exposes static **`Toast.show(...)`** and **`Toast.hide()`** methods for application usage, instead of relying on **`ToastContext`**, **`ToastContextWrapper`**, or an app-level service singleton.
+- Mount **`<Toaster />`** once at the root, then call **`toast(...)`**, **`toast.show(...)`**, or **`toast.hide()`** from anywhere, instead of relying on **`ToastContext`**, **`ToastContextWrapper`**, or an app-level service singleton.
 - **`ToastContext`**, **`ToastContextWrapper`**, and **`ToastContextParams`** are no longer part of the public **`@metamask/design-system-react-native`** exports.
-- **`ToastVariants`** is renamed to **`ToastVariant`**.
-- Icon-only close buttons now use **`ToastCloseButtonVariant.Icon`** instead of **`ButtonVariants.Link`**.
+- **`ToastVariants`** is replaced by **`ToastSeverity`**, including **`ToastSeverity.Default`** for a toast with no leading icon.
+- Close button customization now goes through **`closeButtonProps`** instead of the old toast-specific button variant pattern.
 - **`customBottomOffset`** is renamed to **`bottomOffset`**.
-- Calling **`Toast.show()`** or **`Toast.hide()`** before **`<Toast />`** mounts now throws a descriptive runtime error instead of silently doing nothing.
+- Calling **`toast(...)`**, **`toast.show()`**, or **`toast.hide()`** before **`<Toaster />`** mounts now throws a descriptive runtime error instead of silently doing nothing.
 
 **Migration:**
 
-- Mount **`<Toast />`** exactly once near the root of the app.
-- Replace any **`useContext(ToastContext)`**, **`ToastContextWrapper`**, or app-level **`ToastService`** usage with **`Toast.show(...)`** and **`Toast.hide()`**.
-- Rename **`ToastVariants`** to **`ToastVariant`** in all call sites.
-- Replace icon-only close button usage from **`ButtonVariants.Link`** to **`ToastCloseButtonVariant.Icon`**.
+- Mount **`<Toaster />`** exactly once near the root of the app.
+- Replace any **`useContext(ToastContext)`**, **`ToastContextWrapper`**, or app-level **`ToastService`** usage with **`toast(...)`**, **`toast.show(...)`**, and **`toast.hide()`**.
+- Replace **`ToastVariants`** usages with **`ToastSeverity`** in all call sites. Use **`ToastSeverity.Default`** when you want an explicit no-icon severity.
+- Move close button customization to **`closeButtonProps`**.
 - Rename **`customBottomOffset`** to **`bottomOffset`**.
 
 See [Toast Component](#toast-component) for complete before/after examples and API mappings.
@@ -67,7 +67,7 @@ See [Toast Component](#toast-component) for complete before/after examples and A
 **Impact:**
 
 - Existing **`@metamask/design-system-react-native`** consumers using the old context-based Toast flow must update imports, root mounting, and toast invocation patterns.
-- Existing call sites that already use the forwarded **`ToastRef`** methods for isolated cases can keep doing so, but app-level usage should move to the static API.
+- Existing call sites that already use the forwarded **`ToasterRef`** methods for isolated cases can keep doing so, but app-level usage should move to the static API.
 
 #### Input: shared controlled contract and readonly naming alignment
 
@@ -3132,7 +3132,7 @@ return (
 After (design system):
 
 ```tsx
-import { Toast } from '@metamask/design-system-react-native';
+import { Toaster } from '@metamask/design-system-react-native';
 
 const App = () => (
   <>
@@ -3168,14 +3168,13 @@ After (both cases, identical call site):
 
 ```tsx
 import {
-  Toaster,
   toast,
   ToastSeverity,
 } from '@metamask/design-system-react-native';
 
 toast({
   hasNoTimeout: false,
-  text: 'Saved',
+  title: 'Saved',
   description: 'Your changes are available everywhere.',
   severity: ToastSeverity.Success,
 });
@@ -3204,19 +3203,20 @@ The design system no longer exposes separate option unions such as `PlainToastOp
 ```tsx
 type ToastOptions = {
   hasNoTimeout: boolean;
-  text: React.ReactNode;
+  title?: React.ReactNode;
   description?: React.ReactNode;
-  actionText?: string;
-  onActionPress?: () => void;
+  actionButtonLabel?: string;
+  actionButtonOnPress?: () => void;
   onClose?: () => void;
   closeButtonProps?: ToastCloseButtonProps;
   startAccessory?: React.ReactNode;
   severity?: ToastSeverity;
+  iconProps?: ToastIconProps;
   bottomOffset?: number;
 };
 ```
 
-Use `severity` for the default status icon (`default`, `success`, `warning`, `error`). Pass `startAccessory` when you need to override that icon with custom content such as an avatar, network badge, or app icon.
+Use `severity` for the default status icon. `ToastSeverity.Default` renders no built-in icon. Pass `startAccessory` when you need to override that icon with custom content such as an avatar, network badge, or app icon.
 
 ##### `labelOptions` / `descriptionOptions` / `linkButtonOptions` → flat props
 
@@ -3239,10 +3239,10 @@ After:
 ```tsx
 toast({
   hasNoTimeout: false,
-  text: 'Saved',
+  title: 'Saved',
   description: 'Your changes are available everywhere.',
-  actionText: 'Undo',
-  onActionPress: handleUndo,
+  actionButtonLabel: 'Undo',
+  actionButtonOnPress: handleUndo,
 });
 ```
 

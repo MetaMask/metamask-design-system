@@ -1,5 +1,3 @@
-// Third party dependencies.
-import { BannerAlertSeverity } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render, screen, fireEvent } from '@testing-library/react-native';
@@ -8,6 +6,7 @@ import { Text as RNText } from 'react-native';
 
 // Internal dependencies.
 import { Toast } from './Toast';
+import { ToastSeverity } from './Toast.types';
 
 jest.mock('../Icon', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -41,11 +40,23 @@ describe('Toast', () => {
     expect(screen.queryByTestId('icon-Info')).toBeNull();
   });
 
+  it('does not render a severity icon when severity is default', () => {
+    render(
+      <Toast
+        onClose={() => undefined}
+        severity={ToastSeverity.Default}
+        title="Default severity toast"
+      />,
+    );
+
+    expect(screen.queryByTestId('icon-Info')).toBeNull();
+  });
+
   it('renders the severity icon when severity is provided', () => {
     render(
       <Toast
         onClose={() => undefined}
-        severity={BannerAlertSeverity.Success}
+        severity={ToastSeverity.Success}
         title="Success toast"
       />,
     );
@@ -57,7 +68,7 @@ describe('Toast', () => {
     render(
       <Toast
         onClose={() => undefined}
-        severity={BannerAlertSeverity.Danger}
+        severity={ToastSeverity.Danger}
         startAccessory={<RNText testID="custom-accessory">Custom</RNText>}
         title="Custom accessory"
       />,

@@ -1,13 +1,14 @@
-import { BannerAlertSeverity } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
 // External dependencies.
-import { Icon, IconColor, IconName, IconSize } from '../Icon';
+import { IconSize } from '../Icon';
+import { Spinner } from '../temp-components/Spinner';
 
 // Internal dependencies.
 import { Toast } from './Toast';
+import { ToastSeverity } from './Toast.types';
 import type { ToastProps } from './Toast.types';
 
 const meta: Meta<ToastProps> = {
@@ -16,9 +17,9 @@ const meta: Meta<ToastProps> = {
   argTypes: {
     severity: {
       control: 'select',
-      options: Object.values(BannerAlertSeverity),
+      options: Object.values(ToastSeverity),
       description:
-        'Optional semantic severity used for the default leading icon. No icon is shown when omitted.',
+        'Optional semantic severity used for the default leading icon. `ToastSeverity.Default` shows no icon.',
     },
     title: {
       control: 'text',
@@ -41,9 +42,9 @@ const meta: Meta<ToastProps> = {
       description: 'Optional close handler for direct Toast rendering',
     },
     startAccessory: {
-      control: false,
-      description:
-        'Optional leading accessory that overrides the default severity icon',
+      table: {
+        disable: true,
+      },
     },
   },
 };
@@ -51,7 +52,24 @@ const meta: Meta<ToastProps> = {
 export default meta;
 type Story = StoryObj<ToastProps>;
 
+const renderToastStory = (args: ToastProps) => {
+  const { actionButtonLabel, actionButtonOnPress, ...rest } = args;
+
+  if (actionButtonLabel && !actionButtonOnPress) {
+    return (
+      <Toast
+        {...rest}
+        actionButtonLabel={actionButtonLabel}
+        actionButtonOnPress={() => undefined}
+      />
+    );
+  }
+
+  return <Toast {...args} />;
+};
+
 export const Default: Story = {
+  render: renderToastStory,
   args: {
     description: "Description shouldn't repeat title. 1-3 lines.",
     onClose: () => undefined,
@@ -62,11 +80,11 @@ export const Default: Story = {
 export const Severity: Story = {
   render: (args: ToastProps) => (
     <View style={{ gap: 8 }}>
-      <Toast {...args} title="No severity" />
-      <Toast {...args} severity={BannerAlertSeverity.Info} title="Info" />
-      <Toast {...args} severity={BannerAlertSeverity.Success} title="Success" />
-      <Toast {...args} severity={BannerAlertSeverity.Warning} title="Warning" />
-      <Toast {...args} severity={BannerAlertSeverity.Danger} title="Danger" />
+      <Toast {...args} severity={ToastSeverity.Default} title="Default" />
+      <Toast {...args} severity={ToastSeverity.Info} title="Info" />
+      <Toast {...args} severity={ToastSeverity.Success} title="Success" />
+      <Toast {...args} severity={ToastSeverity.Warning} title="Warning" />
+      <Toast {...args} severity={ToastSeverity.Danger} title="Danger" />
     </View>
   ),
   args: {
@@ -77,27 +95,21 @@ export const Severity: Story = {
 
 export const StartAccessory: Story = {
   args: {
-    description: 'Custom accessories override the default severity icon.',
+    description: 'Your withdrawal is processing.',
     onClose: () => undefined,
-    severity: BannerAlertSeverity.Warning,
-    startAccessory: (
-      <Icon
-        color={IconColor.PrimaryDefault}
-        name={IconName.Feedback}
-        size={IconSize.Lg}
-      />
-    ),
-    title: 'Custom accessory',
+    severity: ToastSeverity.Default,
+    startAccessory: <Spinner spinnerIconProps={{ size: IconSize.Lg }} />,
+    title: 'Withdrawal pending',
   },
 };
 
-export const Action: Story = {
+export const ActionButtonOnPress: Story = {
   args: {
-    actionButtonLabel: 'Action',
-    description: 'Optional action button content is rendered below the body.',
+    actionButtonLabel: 'Read more',
+    description: 'Review how Consensys handles your data.',
     actionButtonOnPress: () => undefined,
     onClose: () => undefined,
-    severity: BannerAlertSeverity.Success,
-    title: 'Action toast',
+    severity: ToastSeverity.Default,
+    title: 'Privacy policy update',
   },
 };

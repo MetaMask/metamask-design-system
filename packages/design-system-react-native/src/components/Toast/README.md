@@ -7,7 +7,7 @@ import {
   Toast,
   Toaster,
   toast,
-  BannerAlertSeverity,
+  ToastSeverity,
 } from '@metamask/design-system-react-native';
 ```
 
@@ -35,7 +35,7 @@ const App = () => (
 ```tsx
 import {
   toast,
-  BannerAlertSeverity,
+  ToastSeverity,
 } from '@metamask/design-system-react-native';
 
 const Content = () => {
@@ -43,7 +43,7 @@ const Content = () => {
     toast({
       title: 'Toast message',
       description: 'Description of toast',
-      severity: BannerAlertSeverity.Success,
+      severity: ToastSeverity.Success,
       hasNoTimeout: false,
       actionButtonLabel: 'Action',
       actionButtonOnPress: () => {
@@ -67,13 +67,13 @@ Use `Toast` when you want to render a single toast surface directly in Storybook
 ```tsx
 import {
   Toast,
-  BannerAlertSeverity,
+  ToastSeverity,
 } from '@metamask/design-system-react-native';
 
 <Toast
   title="Toast message"
   description="Description of toast"
-  severity={BannerAlertSeverity.Success}
+  severity={ToastSeverity.Success}
   actionButtonLabel="Action"
   actionButtonOnPress={() => {}}
   onClose={() => {}}
@@ -118,7 +118,7 @@ Test identifier for the root element, inherited from `ViewProps`.
 - `actionButtonLabel`, `actionButtonOnPress`, `actionButtonProps`
 - `startAccessory`
 - `onClose`, `closeButtonProps`
-- `severity` - Optional semantic state used to choose the default icon.
+- `severity` - Optional semantic state used to choose the default icon. Defaults to `ToastSeverity.Default`, which shows no icon.
 - `iconProps` - Optional props merged onto the default severity icon.
 - `twClassName` - Optional extra classes for the toast surface.
 
@@ -157,11 +157,12 @@ ref.current?.closeToast();
 
 ## Toast Severity
 
-- Omit `severity` to render no default leading icon.
-- `BannerAlertSeverity.Info` - Info toast with the info icon
-- `BannerAlertSeverity.Success` - Success toast with the confirmation icon
-- `BannerAlertSeverity.Warning` - Warning toast with the warning icon
-- `BannerAlertSeverity.Danger` - Danger toast with the danger icon
+- Omit `severity` or use `ToastSeverity.Default` to render no default leading icon.
+- `ToastSeverity.Default` - Default toast with no leading icon
+- `ToastSeverity.Info` - Info toast with the info icon
+- `ToastSeverity.Success` - Success toast with the confirmation icon
+- `ToastSeverity.Warning` - Warning toast with the warning icon
+- `ToastSeverity.Danger` - Danger toast with the danger icon
 
 ## Toast Options
 
@@ -172,7 +173,7 @@ ref.current?.closeToast();
 - `onClose` - Optional callback invoked when the toast closes.
 - `closeButtonProps` - Optional props merged onto the close `ButtonIcon`.
 - `startAccessory` - Optional leading accessory that overrides the severity icon.
-- `severity` - Optional semantic state used to choose the default icon.
+- `severity` - Optional semantic state used to choose the default icon. Defaults to `ToastSeverity.Default`, which shows no icon.
 - `iconProps` - Optional props merged onto the default severity icon.
 - `bottomOffset` - Optional offset from the bottom of the screen.
 - `hasNoTimeout` - When `true`, the toast stays visible until dismissed.

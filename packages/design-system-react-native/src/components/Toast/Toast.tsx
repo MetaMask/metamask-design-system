@@ -12,6 +12,7 @@ import { BannerBase } from '../BannerBase';
 import { Icon } from '../Icon';
 
 // Internal dependencies.
+import { ToastSeverity } from './Toast.types';
 import type { ToastProps } from './Toast.types';
 
 const TOAST_SEVERITY_ICON_MAP = {
@@ -42,7 +43,7 @@ const renderSeverityAccessory = ({
     return startAccessory;
   }
 
-  if (!severity) {
+  if (!severity || severity === ToastSeverity.Default) {
     return undefined;
   }
 
@@ -62,7 +63,7 @@ export const Toast: React.FC<ToastProps> = ({
   descriptionProps,
   onClose,
   iconProps,
-  severity,
+  severity = ToastSeverity.Default,
   startAccessory,
   title,
   titleProps,

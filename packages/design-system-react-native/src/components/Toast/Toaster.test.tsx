@@ -1,11 +1,10 @@
-// Third party dependencies.
-import { BannerAlertSeverity } from '@metamask/design-system-shared';
 import { render, screen, act, fireEvent } from '@testing-library/react-native';
 import React, { createRef, useEffect } from 'react';
 import { Text as RNText } from 'react-native';
 
 // Internal dependencies.
 import type { ToastOptions, ToasterRef } from './Toast.types';
+import { ToastSeverity } from './Toast.types';
 import { Toaster, toast } from './Toaster';
 
 // Mock cancelAnimation as a jest.fn so we can assert on calls.
@@ -113,11 +112,21 @@ describe('Toaster', () => {
     expect(screen.queryByTestId('icon-Info')).toBeNull();
   });
 
+  it('does not render a severity icon when severity is default', async () => {
+    render(<Toaster ref={toasterRef} />);
+    await showToastAndWait(toasterRef, {
+      hasNoTimeout: true,
+      severity: ToastSeverity.Default,
+      title: 'Default severity toast',
+    });
+    expect(screen.queryByTestId('icon-Info')).toBeNull();
+  });
+
   it('renders the configured severity icon when provided', async () => {
     render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
-      severity: BannerAlertSeverity.Success,
+      severity: ToastSeverity.Success,
       title: 'Success toast',
     });
     expect(screen.getByTestId('icon-Confirmation')).toBeDefined();
