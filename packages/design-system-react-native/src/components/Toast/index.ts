@@ -4,9 +4,7 @@ export { ToastSeverity } from './Toast.types';
 export type {
   ToastOptions,
   ToastProps,
-  ToastCloseButtonProps,
   ToastIconProps,
-  ToastSharedProps,
   ToasterProps,
   ToasterRef,
 } from './Toast.types';

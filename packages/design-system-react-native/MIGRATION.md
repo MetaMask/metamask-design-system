@@ -3208,7 +3208,7 @@ type ToastOptions = {
   actionButtonLabel?: string;
   actionButtonOnPress?: () => void;
   onClose?: () => void;
-  closeButtonProps?: ToastCloseButtonProps;
+  closeButtonProps?: NonNullable<ToastProps['closeButtonProps']>;
   startAccessory?: React.ReactNode;
   severity?: ToastSeverity;
   iconProps?: ToastIconProps;
