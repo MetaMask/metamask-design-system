@@ -129,6 +129,9 @@ export type { SensitiveTextProps } from './SensitiveText';
 export { PopoverHeader } from './PopoverHeader';
 export type { PopoverHeaderProps } from './PopoverHeader';
 
+export { Popover, PopoverPosition, PopoverRole } from './Popover';
+export type { PopoverProps } from './Popover';
+
 export { Text } from './Text';
 export {
   TextVariant,

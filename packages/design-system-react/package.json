@@ -49,9 +49,11 @@
   "dependencies": {
     "@metamask/design-system-shared": "workspace:^",
     "@metamask/jazzicon": "^2.0.0",
+    "@popperjs/core": "^2.4.0",
     "@radix-ui/react-slot": "^1.1.0",
     "blo": "^2.0.0",
     "react-focus-lock": "^2.9.4",
+    "react-popper": "^2.2.3",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
