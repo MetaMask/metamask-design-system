@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.7.0]
 
+### Added
+
+- Added a `fade-in` animation utility so consumers can use `animate-fade-in` for simple opacity entrance transitions, including the new `ModalOverlay` web migration path ([#1120](https://github.com/MetaMask/metamask-design-system/pull/1120))
+
 ### Changed
 
 - Clarified the migration path for consumers moving to Tailwind CSS v4. Existing Tailwind v3 projects can keep using this preset, while Tailwind v4 projects should move to `@metamask/design-tokens/tailwind/theme.css` instead ([#1117](https://github.com/MetaMask/metamask-design-system/pull/1117))
