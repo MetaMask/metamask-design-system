@@ -9,12 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.4.0]
 
-### Uncategorized
+### Added
 
-- feat: add Tailwind v4 design-tokens foundation ([#1117](https://github.com/MetaMask/metamask-design-system/pull/1117))
-- chore: upgrade React Native v76.9 and Storybook v10 and align deps with MetaMask Mobile ([#844](https://github.com/MetaMask/metamask-design-system/pull/844))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.0.0 to 6.1.0 ([#1079](https://github.com/MetaMask/metamask-design-system/pull/1079))
-- chore(deps-dev): bump @metamask/auto-changelog from 5.3.2 to 6.0.0 ([#1077](https://github.com/MetaMask/metamask-design-system/pull/1077))
+- Added `@metamask/design-tokens/tailwind/theme.css` for Tailwind CSS v4, giving consumers a single import for MetaMask token variables, theme values, typography utilities, font utilities, and shadow utilities. See the [migration guide](./MIGRATION.md#tailwind-css-v3-to-v4) for upgrade steps ([#1117](https://github.com/MetaMask/metamask-design-system/pull/1117))
 
 ## [8.3.0]
 

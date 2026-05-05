@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.16.0]
 
-### Uncategorized
+### Added
 
-- feat(icons): add Merge icon to shared assets and regenerate exports ([#1155](https://github.com/MetaMask/metamask-design-system/pull/1155))
-- feat(DSYS-488): Migrate Input to ADR-0003 and ADR-0004 ([#1043](https://github.com/MetaMask/metamask-design-system/pull/1043))
-- feat(DSYS-475): Migrate AvatarGroup to ADR-0003 and ADR-0004 ([#1067](https://github.com/MetaMask/metamask-design-system/pull/1067))
+- Added `Merge` to the shared icon exports so React and React Native consumers can access it through their existing `IconName` APIs ([#1155](https://github.com/MetaMask/metamask-design-system/pull/1155))
+- Added shared `Input` contracts for a controlled `value`, `isReadOnly`, and `isStateStylesDisabled`, making it easier to build cross-platform wrappers against one public input API ([#1043](https://github.com/MetaMask/metamask-design-system/pull/1043))
+- Added shared `AvatarGroup` size, variant, and prop contracts for consumers building cross-platform abstractions on top of `@metamask/design-system-shared` ([#1067](https://github.com/MetaMask/metamask-design-system/pull/1067))
 
 ## [0.15.0]
 
