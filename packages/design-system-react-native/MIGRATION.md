@@ -3167,10 +3167,7 @@ ToastService.closeToast();
 After (both cases, identical call site):
 
 ```tsx
-import {
-  toast,
-  ToastSeverity,
-} from '@metamask/design-system-react-native';
+import { toast, ToastSeverity } from '@metamask/design-system-react-native';
 
 toast({
   hasNoTimeout: false,
