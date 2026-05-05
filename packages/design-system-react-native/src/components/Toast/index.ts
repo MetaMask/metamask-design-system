@@ -5,6 +5,7 @@ export type {
   ToastOptions,
   ToastProps,
   ToastCloseButtonProps,
+  ToastIconProps,
   ToastSharedProps,
   ToasterProps,
   ToasterRef,

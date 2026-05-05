@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { BannerAlertSeverity } from '@metamask/design-system-shared';
 import React from 'react';
 import { View } from 'react-native';
 
@@ -8,7 +9,6 @@ import { Icon, IconColor, IconName, IconSize } from '../Icon';
 // Internal dependencies.
 import { Toast } from './Toast';
 import type { ToastProps } from './Toast.types';
-import { ToastSeverity } from './Toast.types';
 
 const meta: Meta<ToastProps> = {
   title: 'Components/Toast',
@@ -16,11 +16,11 @@ const meta: Meta<ToastProps> = {
   argTypes: {
     severity: {
       control: 'select',
-      options: ToastSeverity,
+      options: Object.values(BannerAlertSeverity),
       description:
-        'Optional semantic severity used for the default leading icon',
+        'Optional semantic severity used for the default leading icon. No icon is shown when omitted.',
     },
-    text: {
+    title: {
       control: 'text',
       description: 'Main toast content',
     },
@@ -28,17 +28,17 @@ const meta: Meta<ToastProps> = {
       control: 'text',
       description: 'Optional secondary content shown below the main text',
     },
-    actionText: {
+    actionButtonLabel: {
       control: 'text',
       description: 'Optional action button label',
     },
-    onActionPress: {
-      action: 'onActionPress',
+    actionButtonOnPress: {
+      action: 'actionButtonOnPress',
       description: 'Optional press handler for the action button',
     },
     onClose: {
       action: 'onClose',
-      description: 'Required close handler for direct Toast rendering',
+      description: 'Optional close handler for direct Toast rendering',
     },
     startAccessory: {
       control: false,
@@ -55,18 +55,18 @@ export const Default: Story = {
   args: {
     description: "Description shouldn't repeat title. 1-3 lines.",
     onClose: () => undefined,
-    severity: ToastSeverity.Default,
-    text: 'Title is sentence case no period',
+    title: 'Title is sentence case no period',
   },
 };
 
 export const Severity: Story = {
-  render: (args) => (
+  render: (args: ToastProps) => (
     <View style={{ gap: 8 }}>
-      <Toast {...args} severity={ToastSeverity.Default} text="Default" />
-      <Toast {...args} severity={ToastSeverity.Success} text="Success" />
-      <Toast {...args} severity={ToastSeverity.Warning} text="Warning" />
-      <Toast {...args} severity={ToastSeverity.Error} text="Error" />
+      <Toast {...args} title="No severity" />
+      <Toast {...args} severity={BannerAlertSeverity.Info} title="Info" />
+      <Toast {...args} severity={BannerAlertSeverity.Success} title="Success" />
+      <Toast {...args} severity={BannerAlertSeverity.Warning} title="Warning" />
+      <Toast {...args} severity={BannerAlertSeverity.Danger} title="Danger" />
     </View>
   ),
   args: {
@@ -79,7 +79,7 @@ export const StartAccessory: Story = {
   args: {
     description: 'Custom accessories override the default severity icon.',
     onClose: () => undefined,
-    severity: ToastSeverity.Warning,
+    severity: BannerAlertSeverity.Warning,
     startAccessory: (
       <Icon
         color={IconColor.PrimaryDefault}
@@ -87,17 +87,17 @@ export const StartAccessory: Story = {
         size={IconSize.Lg}
       />
     ),
-    text: 'Custom accessory',
+    title: 'Custom accessory',
   },
 };
 
 export const Action: Story = {
   args: {
-    actionText: 'Action',
+    actionButtonLabel: 'Action',
     description: 'Optional action button content is rendered below the body.',
-    onActionPress: () => undefined,
+    actionButtonOnPress: () => undefined,
     onClose: () => undefined,
-    severity: ToastSeverity.Success,
-    text: 'Action toast',
+    severity: BannerAlertSeverity.Success,
+    title: 'Action toast',
   },
 };

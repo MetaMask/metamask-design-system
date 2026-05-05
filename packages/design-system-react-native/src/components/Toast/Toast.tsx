@@ -1,5 +1,6 @@
 // Third party dependencies.
 import {
+  BannerAlertSeverity,
   BoxBackgroundColor,
   BoxBorderColor,
 } from '@metamask/design-system-shared';
@@ -12,64 +13,69 @@ import { Icon } from '../Icon';
 
 // Internal dependencies.
 import type { ToastProps } from './Toast.types';
-import { ToastSeverity } from './Toast.types';
 
 const TOAST_SEVERITY_ICON_MAP = {
-  [ToastSeverity.Default]: {
-    color: IconColor.IconDefault,
-    name: IconName.FullCircle,
+  [BannerAlertSeverity.Info]: {
+    color: IconColor.PrimaryDefault,
+    name: IconName.Info,
   },
-  [ToastSeverity.Success]: {
+  [BannerAlertSeverity.Success]: {
     color: IconColor.SuccessDefault,
     name: IconName.Confirmation,
   },
-  [ToastSeverity.Warning]: {
+  [BannerAlertSeverity.Warning]: {
     color: IconColor.WarningDefault,
     name: IconName.Danger,
   },
-  [ToastSeverity.Error]: {
+  [BannerAlertSeverity.Danger]: {
     color: IconColor.ErrorDefault,
-    name: IconName.Error,
+    name: IconName.Danger,
   },
 } as const;
 
-const renderSeverityAccessory = (props: ToastProps) => {
-  if (props.startAccessory !== null && props.startAccessory !== undefined) {
-    return props.startAccessory;
+const renderSeverityAccessory = ({
+  iconProps,
+  severity,
+  startAccessory,
+}: Pick<ToastProps, 'iconProps' | 'severity' | 'startAccessory'>) => {
+  if (startAccessory !== null && startAccessory !== undefined) {
+    return startAccessory;
   }
 
-  const severity = props.severity ?? ToastSeverity.Default;
+  if (!severity) {
+    return undefined;
+  }
+
   const { color, name } = TOAST_SEVERITY_ICON_MAP[severity];
 
-  return <Icon color={color} name={name} size={IconSize.Lg} />;
+  return <Icon color={color} name={name} size={IconSize.Lg} {...iconProps} />;
 };
 
 export const Toast: React.FC<ToastProps> = ({
-  actionText,
+  actionButtonLabel,
+  actionButtonOnPress,
+  actionButtonProps,
+  children,
+  childrenWrapperProps,
   closeButtonProps,
   description,
-  onActionPress,
+  descriptionProps,
   onClose,
+  iconProps,
   severity,
   startAccessory,
-  text,
+  title,
+  titleProps,
   twClassName,
   ...props
 }) => {
-  const handleClosePress = (
-    event: Parameters<
-      NonNullable<NonNullable<typeof closeButtonProps>['onPress']>
-    >[0],
-  ) => {
-    onClose();
-    closeButtonProps?.onPress?.(event);
-  };
-
+  const shouldShowCloseButton = Boolean(onClose || closeButtonProps);
   const actionProps =
-    actionText && onActionPress
+    actionButtonLabel && actionButtonOnPress
       ? {
-          actionButtonLabel: actionText,
-          actionButtonOnPress: onActionPress,
+          actionButtonLabel,
+          actionButtonOnPress,
+          actionButtonProps,
         }
       : {};
 
@@ -79,25 +85,30 @@ export const Toast: React.FC<ToastProps> = ({
       backgroundColor={BoxBackgroundColor.BackgroundSection}
       borderColor={BoxBorderColor.BorderMuted}
       borderWidth={1}
-      closeButtonProps={{
-        accessibilityLabel: 'Close toast',
-        ...closeButtonProps,
-        onPress: handleClosePress,
-      }}
+      children={children}
+      childrenWrapperProps={childrenWrapperProps}
+      closeButtonProps={
+        shouldShowCloseButton
+          ? {
+              accessibilityLabel: 'Close toast',
+              ...closeButtonProps,
+              onPress: (event) => {
+                onClose?.();
+                closeButtonProps?.onPress?.(event);
+              },
+            }
+          : undefined
+      }
       description={description}
+      descriptionProps={descriptionProps}
+      onClose={undefined}
       startAccessory={renderSeverityAccessory({
-        ...props,
-        actionText,
-        closeButtonProps,
-        description,
-        onActionPress,
-        onClose,
+        iconProps,
         severity,
         startAccessory,
-        text,
-        twClassName,
       })}
-      title={text}
+      title={title}
+      titleProps={titleProps}
       twClassName={twClassName ? `rounded-xl ${twClassName}` : 'rounded-xl'}
       {...props}
     />

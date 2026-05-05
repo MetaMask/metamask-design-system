@@ -1,43 +1,36 @@
-// Third party dependencies.
-import type { ReactNode } from 'react';
-import type { GestureResponderEvent, ViewProps } from 'react-native';
+import {
+  BannerAlertSeverity as BannerAlertSeverityValues,
+  type BannerAlertSeverity,
+} from '@metamask/design-system-shared';
+import type { ViewProps } from 'react-native';
 
-// External dependencies.
-import type { ButtonIconProps } from '../ButtonIcon';
+import type { BannerBaseProps } from '../BannerBase';
+import type { IconProps } from '../Icon/Icon.types';
 
 /**
  * Toast severity variants.
+ * Kept as an alias for BannerAlertSeverity for backwards compatibility.
  */
-export const ToastSeverity = {
-  Default: 'default',
-  Success: 'success',
-  Warning: 'warning',
-  Error: 'error',
-} as const;
+export const ToastSeverity = BannerAlertSeverityValues;
 
-export type ToastSeverity = (typeof ToastSeverity)[keyof typeof ToastSeverity];
+export type ToastSeverity = BannerAlertSeverity;
+
+/**
+ * Optional props for the leading severity `Icon`.
+ */
+export type ToastIconProps = Omit<IconProps, 'name' | 'size' | 'color'>;
 
 /**
  * Optional props for the close `ButtonIcon`.
  */
-export type ToastCloseButtonProps = Omit<
-  Partial<ButtonIconProps>,
-  'iconName' | 'onPress'
-> & {
-  onPress?: (event: GestureResponderEvent) => void;
-};
+export type ToastCloseButtonProps = NonNullable<BannerBaseProps['closeButtonProps']>;
 
 /**
- * Shared toast content props.
+ * Shared toast props aligned with BannerBase, plus optional severity/icon props.
  */
-export type ToastSharedProps = {
-  text: ReactNode;
-  description?: ReactNode;
-  actionText?: string;
-  onActionPress?: () => void;
-  closeButtonProps?: ToastCloseButtonProps;
-  startAccessory?: ReactNode;
+export type ToastSharedProps = BannerBaseProps & {
   severity?: ToastSeverity;
+  iconProps?: ToastIconProps;
 };
 
 /**
@@ -45,7 +38,6 @@ export type ToastSharedProps = {
  */
 export type ToastOptions = ToastSharedProps & {
   hasNoTimeout: boolean;
-  onClose?: () => void;
   bottomOffset?: number;
 };
 
@@ -58,16 +50,9 @@ export type ToasterRef = {
 };
 
 /**
- * Toast component props.
- * Intended for direct rendering of a single toast surface.
+ * Toast component props intended for direct rendering of a single toast surface.
  */
-export type ToastProps = ToastSharedProps & {
-  onClose: () => void;
-  /**
-   * Optional Tailwind CSS classes for the toast container.
-   */
-  twClassName?: string;
-} & Omit<ViewProps, 'style'>;
+export type ToastProps = ToastSharedProps;
 
 /**
  * Toaster component props.

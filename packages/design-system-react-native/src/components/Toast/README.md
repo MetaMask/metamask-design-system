@@ -7,7 +7,7 @@ import {
   Toast,
   Toaster,
   toast,
-  ToastSeverity,
+  BannerAlertSeverity,
 } from '@metamask/design-system-react-native';
 ```
 
@@ -33,17 +33,17 @@ const App = () => (
 ### 2. Call `toast(...)` from anywhere
 
 ```tsx
-import { toast, ToastSeverity } from '@metamask/design-system-react-native';
+import { toast, BannerAlertSeverity } from '@metamask/design-system-react-native';
 
 const Content = () => {
   const handlePress = () => {
     toast({
-      text: 'Toast message',
+      title: 'Toast message',
       description: 'Description of toast',
-      severity: ToastSeverity.Success,
+      severity: BannerAlertSeverity.Success,
       hasNoTimeout: false,
-      actionText: 'Action',
-      onActionPress: () => {
+      actionButtonLabel: 'Action',
+      actionButtonOnPress: () => {
         console.log('Toast action pressed');
       },
     });
@@ -62,14 +62,14 @@ Call `toast.hide()` or `toast.dismiss()` to dismiss the currently visible toast.
 Use `Toast` when you want to render a single toast surface directly in Storybook, docs, or bespoke layouts.
 
 ```tsx
-import { Toast, ToastSeverity } from '@metamask/design-system-react-native';
+import { Toast, BannerAlertSeverity } from '@metamask/design-system-react-native';
 
 <Toast
-  text="Toast message"
+  title="Toast message"
   description="Description of toast"
-  severity={ToastSeverity.Success}
-  actionText="Action"
-  onActionPress={() => {}}
+  severity={BannerAlertSeverity.Success}
+  actionButtonLabel="Action"
+  actionButtonOnPress={() => {}}
   onClose={() => {}}
 />;
 ```
@@ -104,15 +104,16 @@ Test identifier for the root element, inherited from `ViewProps`.
 
 ### `Toast` Props
 
-`Toast` accepts the display props for a single toast surface:
+`Toast` accepts the same content API as `BannerBase`, plus toast-specific severity props:
 
-- `text` - Main toast content. Accepts plain text or rich React content.
-- `description` - Optional secondary content shown below the main text.
-- `actionText` and `onActionPress` - Optional action button content and handler.
-- `onClose` - Required close handler for direct rendering.
-- `closeButtonProps` - Optional props merged onto the close `ButtonIcon`.
-- `startAccessory` - Optional leading accessory that overrides the severity icon.
+- `title`, `titleProps`
+- `description`, `descriptionProps`
+- `children`, `childrenWrapperProps`
+- `actionButtonLabel`, `actionButtonOnPress`, `actionButtonProps`
+- `startAccessory`
+- `onClose`, `closeButtonProps`
 - `severity` - Optional semantic state used to choose the default icon.
+- `iconProps` - Optional props merged onto the default severity icon.
 - `twClassName` - Optional extra classes for the toast surface.
 
 ## Imperative API
@@ -150,20 +151,23 @@ ref.current?.closeToast();
 
 ## Toast Severity
 
-- `ToastSeverity.Default` - Neutral toast with the default circle icon
-- `ToastSeverity.Success` - Success toast with the confirmation icon
-- `ToastSeverity.Warning` - Warning toast with the danger icon
-- `ToastSeverity.Error` - Error toast with the error icon
+- Omit `severity` to render no default leading icon.
+- `BannerAlertSeverity.Info` - Info toast with the info icon
+- `BannerAlertSeverity.Success` - Success toast with the confirmation icon
+- `BannerAlertSeverity.Warning` - Warning toast with the warning icon
+- `BannerAlertSeverity.Danger` - Danger toast with the danger icon
 
 ## Toast Options
 
-- `text` - Main toast content. Accepts plain text or rich React content.
-- `description` - Optional secondary content shown below the main text.
-- `actionText` and `onActionPress` - Optional action button content and handler.
+- `title`, `titleProps` - Main toast content and optional text props.
+- `description`, `descriptionProps` - Optional secondary content and text props.
+- `children`, `childrenWrapperProps` - Optional extra content rendered below the description.
+- `actionButtonLabel`, `actionButtonOnPress`, `actionButtonProps` - Optional action button content and handler.
 - `onClose` - Optional callback invoked when the toast closes.
 - `closeButtonProps` - Optional props merged onto the close `ButtonIcon`.
 - `startAccessory` - Optional leading accessory that overrides the severity icon.
 - `severity` - Optional semantic state used to choose the default icon.
+- `iconProps` - Optional props merged onto the default severity icon.
 - `bottomOffset` - Optional offset from the bottom of the screen.
 - `hasNoTimeout` - When `true`, the toast stays visible until dismissed.
 

@@ -120,6 +120,15 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       return null;
     }
 
+    const {
+      bottomOffset: toastBottomOffset,
+      hasNoTimeout: toastHasNoTimeout,
+      onClose: toastOnClose,
+      ...toastProps
+    } = toastOptions;
+    void toastBottomOffset;
+    void toastHasNoTimeout;
+
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
       const { height } = e.nativeEvent.layout;
       const translateYToValue = -(TOAST_BOTTOM_PADDING + bottomNotchSpacing);
@@ -155,10 +164,10 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         {...props}
       >
         <Toast
-          {...toastOptions}
+          {...toastProps}
           onClose={() => {
             closeToast();
-            toastOptions.onClose?.();
+            toastOnClose?.();
           }}
           twClassName={twClassName}
         />

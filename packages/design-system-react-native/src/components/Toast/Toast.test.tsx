@@ -1,4 +1,5 @@
 // Third party dependencies.
+import { BannerAlertSeverity } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render, screen, fireEvent } from '@testing-library/react-native';
@@ -7,7 +8,6 @@ import { Text as RNText } from 'react-native';
 
 // Internal dependencies.
 import { Toast } from './Toast';
-import { ToastSeverity } from './Toast.types';
 
 jest.mock('../Icon', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -22,12 +22,12 @@ jest.mock('../Icon', () => {
 });
 
 describe('Toast', () => {
-  it('renders text and description', () => {
+  it('renders title and description', () => {
     render(
       <Toast
         description="Description of toast"
         onClose={() => undefined}
-        text="Toast message"
+        title="Toast message"
       />,
     );
 
@@ -35,12 +35,18 @@ describe('Toast', () => {
     expect(screen.getByText('Description of toast')).toBeDefined();
   });
 
-  it('renders the severity icon by default', () => {
+  it('does not render a severity icon by default', () => {
+    render(<Toast onClose={() => undefined} title="Default toast" />);
+
+    expect(screen.queryByTestId('icon-Info')).toBeNull();
+  });
+
+  it('renders the severity icon when severity is provided', () => {
     render(
       <Toast
         onClose={() => undefined}
-        severity={ToastSeverity.Success}
-        text="Success toast"
+        severity={BannerAlertSeverity.Success}
+        title="Success toast"
       />,
     );
 
@@ -51,25 +57,25 @@ describe('Toast', () => {
     render(
       <Toast
         onClose={() => undefined}
-        severity={ToastSeverity.Error}
+        severity={BannerAlertSeverity.Danger}
         startAccessory={<RNText testID="custom-accessory">Custom</RNText>}
-        text="Custom accessory"
+        title="Custom accessory"
       />,
     );
 
     expect(screen.getByTestId('custom-accessory')).toBeDefined();
-    expect(screen.queryByTestId('icon-Error')).toBeNull();
+    expect(screen.queryByTestId('icon-Danger')).toBeNull();
   });
 
-  it('renders an action button and calls onActionPress when pressed', () => {
+  it('renders an action button and calls actionButtonOnPress when pressed', () => {
     const onActionPress = jest.fn();
 
     render(
       <Toast
-        actionText="Action"
-        onActionPress={onActionPress}
+        actionButtonLabel="Action"
+        actionButtonOnPress={onActionPress}
         onClose={() => undefined}
-        text="Action toast"
+        title="Action toast"
       />,
     );
 
@@ -88,7 +94,7 @@ describe('Toast', () => {
           onPress: onCloseButtonPress,
         }}
         onClose={onClose}
-        text="Dismiss me"
+        title="Dismiss me"
       />,
     );
 
@@ -104,7 +110,7 @@ describe('Toast', () => {
       <Toast
         onClose={() => undefined}
         testID="toast-root"
-        text="Styled toast"
+        title="Styled toast"
         twClassName="mx-2"
       />,
     );
