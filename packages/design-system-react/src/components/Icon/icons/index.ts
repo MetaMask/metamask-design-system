@@ -151,6 +151,7 @@ import Logout from './Logout';
 import Mail from './Mail';
 import Map from './Map';
 import Menu from './Menu';
+import Merge from './Merge';
 import MessageQuestion from './MessageQuestion';
 import Messages from './Messages';
 import MetamaskFoxOutline from './MetamaskFoxOutline';
@@ -435,6 +436,7 @@ export const Icons = {
   Mail,
   Map,
   Menu,
+  Merge,
   MessageQuestion,
   Messages,
   MetamaskFoxOutline,

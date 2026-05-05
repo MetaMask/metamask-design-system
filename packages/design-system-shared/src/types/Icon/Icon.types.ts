@@ -199,6 +199,7 @@ export const IconName = {
   Mail: 'Mail',
   Map: 'Map',
   Menu: 'Menu',
+  Merge: 'Merge',
   MessageQuestion: 'MessageQuestion',
   Messages: 'Messages',
   MetamaskFoxOutline: 'MetamaskFoxOutline',
