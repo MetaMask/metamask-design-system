@@ -151,6 +151,7 @@ import LogoutSVG from './assets/logout.svg';
 import MailSVG from './assets/mail.svg';
 import MapSVG from './assets/map.svg';
 import MenuSVG from './assets/menu.svg';
+import MergeSVG from './assets/merge.svg';
 import MessageQuestionSVG from './assets/message-question.svg';
 import MessagesSVG from './assets/messages.svg';
 import MetamaskFoxOutlineSVG from './assets/metamask-fox-outline.svg';
@@ -439,6 +440,7 @@ export const assetByIconName: AssetByIconName = {
   Mail: MailSVG,
   Map: MapSVG,
   Menu: MenuSVG,
+  Merge: MergeSVG,
   MessageQuestion: MessageQuestionSVG,
   Messages: MessagesSVG,
   MetamaskFoxOutline: MetamaskFoxOutlineSVG,
