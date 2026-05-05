@@ -92,6 +92,9 @@ export type { InputProps } from './Input';
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
 
+export { Label } from './Label';
+export type { LabelProps } from './Label';
+
 export { Maskicon } from './temp-components/Maskicon';
 export type { MaskiconProps } from './temp-components/Maskicon';
 
