@@ -1,0 +1,163 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as ModalFocusStories from './ModalFocus.stories';
+
+# ModalFocus
+
+`ModalFocus` traps keyboard focus inside its subtree while it is mounted. Use it to wrap modal, dialog, or popover content so screen-reader and keyboard-only users cannot tab outside the open layer. It is a thin wrapper around [`react-focus-lock`](https://github.com/theKashey/react-focus-lock) with a small API for initial focus, final focus, and focus restoration.
+
+```tsx
+import { ModalFocus } from '@metamask/design-system-react';
+
+<ModalFocus>{modalContent}</ModalFocus>;
+```
+
+<Canvas of={ModalFocusStories.Default} />
+
+## Props
+
+### `children`
+
+The subtree to lock focus inside of. While `ModalFocus` is mounted, Tab cycles only between focusable elements within `children`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `initialFocusRef`
+
+The `ref` of the element to focus on mount. When provided, it overrides the default first-focusable behavior driven by `autoFocus`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>RefObject&lt;FocusableElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFocusStories.InitialFocusRef} />
+
+### `finalFocusRef`
+
+The `ref` of the element to focus when `ModalFocus` unmounts. Use this to direct focus to a specific element after the modal closes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>RefObject&lt;FocusableElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFocusStories.FinalFocusRef} />
+
+### `restoreFocus`
+
+If `true`, focus is restored to the element that triggered `ModalFocus` once it unmounts. Ignored when `finalFocusRef` is provided.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFocusStories.RestoreFocus} />
+
+### `autoFocus`
+
+If `true`, the first focusable element in `children` is focused on mount. Set to `false` if you want the trap active without taking focus.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>true</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFocusStories.AutoFocus} />
+
+## Component API
+
+<Controls of={ModalFocusStories.Default} />
+
+## Migration Guide
+
+Migrating from `ui/components/component-library/modal-focus` in MetaMask Extension? See the [ModalFocus Migration Guide](../../../MIGRATION.md#modalfocus-component) for prop mappings, before/after examples, and breaking changes.
+
+## References
+
+- [react-focus-lock](https://github.com/theKashey/react-focus-lock)
+- [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

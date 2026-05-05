@@ -1,9 +1,13 @@
-import { TextColor, TextVariant } from '@metamask/design-system-shared';
+import {
+  ButtonBaseSize,
+  IconName,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { ButtonBaseSize } from '../../types';
-import { Icon, IconName } from '../Icon';
+import { Icon } from '../Icon';
 import { Text } from '../Text';
 
 import { ButtonBase } from './ButtonBase';

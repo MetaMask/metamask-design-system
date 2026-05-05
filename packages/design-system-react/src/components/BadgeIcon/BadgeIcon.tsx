@@ -1,7 +1,8 @@
+import { IconSize } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Icon, IconSize } from '../Icon';
+import { Icon } from '../Icon';
 
 import type { BadgeIconProps } from './BadgeIcon.types';
 

@@ -3,61 +3,40 @@
 Toast is a component that slides up from the bottom of the screen. It is typically used to show post-confirmation information such as account switches, network changes, or transaction confirmations.
 
 ```tsx
-import {
-  Toast,
-  ToastContext,
-  ToastContextWrapper,
-} from '@metamask/design-system-react-native';
+import { Toast, ToastVariant } from '@metamask/design-system-react-native';
 ```
 
 ## Setup
 
-Using Toast requires a three-step process:
+Using Toast is a two-step process:
 
-### 1. Wrap root with ToastContextWrapper
+### 1. Render `<Toast />` once at the root of the app
 
 ```tsx
-import { ToastContextWrapper } from '@metamask/design-system-react-native';
+import { Toast } from '@metamask/design-system-react-native';
 
 const App = () => (
-  <ToastContextWrapper>
+  <>
     <RootComponent />
-  </ToastContextWrapper>
+    <Toast />
+  </>
 );
 ```
 
-### 2. Render Toast with ref from context
+`<Toast />` must be rendered exactly once. On mount it registers itself with the `Toast.show` / `Toast.hide` static methods so they can be called from anywhere — React components, hooks, controllers, services, or plain utilities.
+
+### 2. Call `Toast.show` from anywhere
 
 ```tsx
-import { useContext } from 'react';
-import { Toast, ToastContext } from '@metamask/design-system-react-native';
-
-const RootComponent = () => {
-  const { toastRef } = useContext(ToastContext);
-
-  return (
-    <>
-      <Content />
-      <Toast ref={toastRef} />
-    </>
-  );
-};
-```
-
-### 3. Call showToast from any child
-
-```tsx
-import { useContext } from 'react';
 import {
-  ToastContext,
+  Toast,
   ToastVariant,
+  AvatarAccountVariant,
 } from '@metamask/design-system-react-native';
 
 const Content = () => {
-  const { toastRef } = useContext(ToastContext);
-
   const handlePress = () => {
-    toastRef.current?.showToast({
+    Toast.show({
       variant: ToastVariant.Account,
       hasNoTimeout: false,
       labelOptions: [
@@ -73,6 +52,10 @@ const Content = () => {
 };
 ```
 
+Call `Toast.hide()` to dismiss the currently visible toast.
+
+Both `Toast.show` and `Toast.hide` throw a descriptive error if called before `<Toast />` is mounted.
+
 ## Props
 
 ### `twClassName`
@@ -84,7 +67,7 @@ Optional Tailwind CSS classes for the toast container.
 | `string` | No       | `undefined` |
 
 ```tsx
-<Toast ref={toastRef} twClassName="mx-2" />
+<Toast twClassName="mx-2" />
 ```
 
 ### `labelsContainerProps`
@@ -96,7 +79,7 @@ Props spread to the labels container View (e.g., `testID` for testing).
 | `Omit<ViewProps, 'children' \| 'style'>` | No       | `undefined` |
 
 ```tsx
-<Toast ref={toastRef} labelsContainerProps={{ testID: 'toast-labels' }} />
+<Toast labelsContainerProps={{ testID: 'toast-labels' }} />
 ```
 
 ### `testID`
@@ -108,22 +91,33 @@ Test identifier for the root element, inherited from `ViewProps`.
 | `string` | No       | `undefined` |
 
 ```tsx
-<Toast ref={toastRef} testID="my-toast" />
+<Toast testID="my-toast" />
 ```
 
-## Methods
+## Static Methods
 
-### `showToast(options: ToastOptions)`
+### `Toast.show(options: ToastOptions)`
 
-Triggers the toast to slide up with the provided options.
+Slides a toast up with the provided options. Requires `<Toast />` to be mounted.
 
 | PARAMETER | TYPE           | DESCRIPTION         |
 | --------- | -------------- | ------------------- |
 | options   | `ToastOptions` | Toast configuration |
 
-### `closeToast()`
+### `Toast.hide()`
 
-Dismisses the toast with a slide-down animation.
+Dismisses the currently visible toast with a slide-down animation.
+
+## Instance Methods (advanced)
+
+The underlying ref is still forwarded for advanced cases (for example, Storybook stories with multiple isolated toasts). Prefer the static API in application code.
+
+```tsx
+const ref = useRef<ToastRef>(null);
+<Toast ref={ref} />;
+ref.current?.showToast(options);
+ref.current?.closeToast();
+```
 
 ## Toast Variants
 

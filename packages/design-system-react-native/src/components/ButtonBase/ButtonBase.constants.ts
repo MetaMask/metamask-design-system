@@ -1,4 +1,4 @@
-import { ButtonBaseSize } from '../../types';
+import { ButtonBaseSize } from '@metamask/design-system-shared';
 
 export const TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION: Record<
   ButtonBaseSize,

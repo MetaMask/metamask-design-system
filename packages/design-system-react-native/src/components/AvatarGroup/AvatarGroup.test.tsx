@@ -1,7 +1,10 @@
+import {
+  AvatarGroupSize,
+  AvatarGroupVariant,
+} from '@metamask/design-system-shared';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import type { AvatarAccountProps } from '../AvatarAccount';
 
 import { AvatarGroup } from './AvatarGroup';

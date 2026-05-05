@@ -1,8 +1,6 @@
+import { ButtonVariant, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
-
-import { ButtonVariant } from '../../types';
-import { IconName } from '../Icon';
 
 import { Button } from './Button';
 
@@ -38,7 +36,7 @@ describe('Button', () => {
       render(<Button variant={ButtonVariant.Tertiary}>Tertiary Button</Button>);
 
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('bg-transparent', 'text-primary-default');
+      expect(button).toHaveClass('bg-transparent', 'text-default');
     });
 
     it('renders primary button when an invalid variant is provided', () => {

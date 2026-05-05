@@ -5,7 +5,8 @@ export {
   BoxJustifyContent,
   BoxBackgroundColor,
   BoxBorderColor,
-} from '../../types';
-export type { BoxSpacing } from '../../types';
+  type BoxSpacing,
+  type BoxBorderWidth,
+} from '@metamask/design-system-shared';
 export { Box } from './Box';
 export type { BoxProps } from './Box.types';

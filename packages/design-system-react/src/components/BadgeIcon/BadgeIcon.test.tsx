@@ -1,8 +1,8 @@
 // BadgeIcon.test.tsx
+import { IconColor, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { IconName, IconColor } from '../Icon';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
 import { BadgeIcon } from './BadgeIcon';

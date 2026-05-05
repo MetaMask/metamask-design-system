@@ -1,13 +1,15 @@
 // Third party dependencies.
+import type {
+  AvatarIconSeverity,
+  IconName,
+} from '@metamask/design-system-shared';
 import type { ReactElement } from 'react';
 import type { ViewProps } from 'react-native';
 
 // External Dependencies.
-import type { AvatarIconSeverity } from '../../types';
 import type { AvatarAccountVariant } from '../AvatarAccount';
 import type { ButtonProps } from '../Button';
 import type { ButtonIconProps } from '../ButtonIcon';
-import type { IconName } from '../Icon';
 import type { ImageOrSvgSrc } from '../temp-components/ImageOrSvg';
 
 /**
@@ -138,10 +140,3 @@ export type ToastProps = {
    */
   labelsContainerProps?: Omit<ViewProps, 'children' | 'style'>;
 } & Omit<ViewProps, 'style'>;
-
-/**
- * Toast context parameters.
- */
-export type ToastContextParams = {
-  toastRef: React.RefObject<ToastRef> | undefined;
-};

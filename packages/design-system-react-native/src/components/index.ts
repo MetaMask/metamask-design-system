@@ -207,18 +207,17 @@ export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 export { TitleHub } from './TitleHub';
 export type { TitleHubProps, TitleHubPropsShared } from './TitleHub';
 
-export {
-  Toast,
-  ToastVariant,
-  ToastCloseButtonVariant,
-  ToastContext,
-  ToastContextWrapper,
-} from './Toast';
+export { TitleStandard } from './TitleStandard';
+export type { TitleStandardProps } from './TitleStandard';
+
+export { TitleSubpage } from './TitleSubpage';
+export type { TitleSubpageProps } from './TitleSubpage';
+
+export { Toast, ToastVariant, ToastCloseButtonVariant } from './Toast';
 export type {
   ToastOptions,
   ToastProps,
   ToastRef,
-  ToastContextParams,
   ToastLabelOptions,
   ToastDescriptionOptions,
   ToastLinkButtonOptions,
@@ -242,3 +241,6 @@ export type { SpinnerProps } from './temp-components/Spinner';
 
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
+
+export { Tag, TagSeverity } from './Tag';
+export type { TagProps } from './Tag';

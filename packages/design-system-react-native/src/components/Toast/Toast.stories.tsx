@@ -1,7 +1,7 @@
 // Third party dependencies.
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
-import React, { useContext } from 'react';
+import React from 'react';
 import { Alert, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -13,7 +13,6 @@ import { Text } from '../Text';
 
 // Internal dependencies.
 import { Toast } from './Toast';
-import { ToastContext, ToastContextWrapper } from './Toast.context';
 import type { ToastOptions } from './Toast.types';
 import { ToastVariant } from './Toast.types';
 
@@ -41,14 +40,12 @@ const meta: Meta<ToastStoryArgs> = {
   decorators: [
     (StoryComponent) => (
       <SafeAreaProvider>
-        <ToastContextWrapper>
-          <Box twClassName="min-h-[300px] relative">
-            <Box twClassName="absolute inset-0 justify-center items-center">
-              <Text>Content behind toast</Text>
-            </Box>
-            <StoryComponent />
+        <Box twClassName="min-h-[300px] relative">
+          <Box twClassName="absolute inset-0 justify-center items-center">
+            <Text>Content behind toast</Text>
           </Box>
-        </ToastContextWrapper>
+          <StoryComponent />
+        </Box>
       </SafeAreaProvider>
     ),
   ],
@@ -58,7 +55,6 @@ export default meta;
 type Story = StoryObj<ToastStoryArgs>;
 
 const ToastStoryRender: React.FC<ToastStoryArgs> = ({ variant }) => {
-  const { toastRef } = useContext(ToastContext);
   const tw = useTailwind();
 
   let toastOptions: ToastOptions;
@@ -117,12 +113,12 @@ const ToastStoryRender: React.FC<ToastStoryArgs> = ({ variant }) => {
       <Button
         variant={ButtonVariant.Secondary}
         onPress={() => {
-          toastRef?.current?.showToast(toastOptions);
+          Toast.show(toastOptions);
         }}
       >
         {`Show ${variant} Toast`}
       </Button>
-      <Toast ref={toastRef} />
+      <Toast />
     </View>
   );
 };

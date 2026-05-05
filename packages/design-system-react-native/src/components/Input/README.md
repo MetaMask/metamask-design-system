@@ -1,6 +1,6 @@
 # Input
 
-Input is a light-weight, controlled-only borderless input used inside of TextField.
+Input is a light-weight, controlled-only borderless input for use inside of `TextField`. Use `TextField` instead when you need labels, error states, or accessories.
 
 ```tsx
 import { Input, TextVariant } from '@metamask/design-system-react-native';
@@ -37,19 +37,31 @@ import { Input, TextVariant } from '@metamask/design-system-react-native';
 
 ### `isDisabled`
 
-Optional boolean to disable Input.
+Optional boolean to disable the input.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
-### `isReadonly`
+```tsx
+import { Input } from '@metamask/design-system-react-native';
 
-Optional boolean to show readonly input.
+<Input value="" isDisabled placeholder="Disabled" />;
+```
+
+### `isReadOnly`
+
+Optional boolean to show a readonly input.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
+
+```tsx
+import { Input } from '@metamask/design-system-react-native';
+
+<Input value="Readonly value" isReadOnly />;
+```
 
 ### `isStateStylesDisabled`
 
@@ -59,9 +71,20 @@ Optional boolean to disable state styles.
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
+```tsx
+import { Input } from '@metamask/design-system-react-native';
+
+<Input
+  value=""
+  isDisabled
+  isStateStylesDisabled
+  placeholder="State styles disabled"
+/>;
+```
+
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be combined with the component's default styles, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed

@@ -5,7 +5,7 @@ import {
   useTheme,
 } from '@metamask/design-system-twrnc-preset';
 import { darkTheme, lightTheme } from '@metamask/design-tokens';
-import { forwardRef, useCallback, useMemo, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 import { Platform, TextInput } from 'react-native';
 
 import {
@@ -23,7 +23,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       textVariant = TextVariant.BodyMd,
       isStateStylesDisabled,
       isDisabled = false,
-      isReadonly = false,
+      isReadOnly = false,
       value,
       placeholder,
       twClassName,
@@ -86,26 +86,26 @@ export const Input = forwardRef<TextInput, InputProps>(
       [textVariant],
     );
 
-    /* istanbul ignore next: handler body covered by focus/blur tests */
+    useEffect(() => {
+      if (isDisabled || isReadOnly) {
+        setIsFocused(false);
+      }
+    }, [isDisabled, isReadOnly]);
+
     const onBlurHandler = useCallback(
       (e: Parameters<NonNullable<InputProps['onBlur']>>[0]) => {
-        if (!isDisabled) {
-          setIsFocused(false);
-          onBlur?.(e);
-        }
+        setIsFocused(false);
+        onBlur?.(e);
       },
-      [isDisabled, onBlur],
+      [onBlur],
     );
 
-    /* istanbul ignore next: handler body covered by focus/blur tests */
     const onFocusHandler = useCallback(
       (e: Parameters<NonNullable<InputProps['onFocus']>>[0]) => {
-        if (!isDisabled) {
-          setIsFocused(true);
-          onFocus?.(e);
-        }
+        setIsFocused(true);
+        onFocus?.(e);
       },
-      [isDisabled, onFocus],
+      [onFocus],
     );
     const resolvedStyle = [
       inputStyle,
@@ -121,12 +121,12 @@ export const Input = forwardRef<TextInput, InputProps>(
     return (
       <TextInput
         ref={ref}
-        placeholderTextColor={placeholderTextColor}
         {...props}
         placeholder={placeholder}
+        placeholderTextColor={placeholderTextColor}
         value={value}
         style={resolvedStyle}
-        editable={!isDisabled && !isReadonly}
+        editable={!isDisabled && !isReadOnly}
         autoFocus={autoFocus}
         onBlur={onBlurHandler}
         onFocus={onFocusHandler}

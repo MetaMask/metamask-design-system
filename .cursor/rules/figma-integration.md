@@ -418,6 +418,6 @@ After creating or updating Code Connect files, verify:
 
 - [Figma Code Connect Documentation](https://www.figma.com/code-connect-docs/)
 - [Connecting React Components](https://www.figma.com/code-connect-docs/react/)
-- [MetaMask Design System Figma File](https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components)
+- [MetaMask Design System Figma File](https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?m=auto)
 - Initial setup guide: @docs/figma-code-connect.md
 - Related cursor rules: @.cursor/rules/component-creation.md

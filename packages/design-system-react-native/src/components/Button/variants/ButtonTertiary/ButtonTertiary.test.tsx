@@ -1,10 +1,9 @@
+import { ButtonBaseSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 import * as ReactTestRenderer from 'react-test-renderer';
-
-import { ButtonBaseSize } from '../../../../types';
 
 import { ButtonTertiary } from './ButtonTertiary';
 

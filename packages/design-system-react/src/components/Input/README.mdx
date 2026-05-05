@@ -4,17 +4,40 @@ import * as InputStories from './Input.stories';
 
 # Input
 
-Input is a light-weight borderless input component used inside of TextField.
+Input is a light-weight, controlled-only borderless input for use inside of `TextField`. Use `TextField` instead when you need labels, error states, or accessories.
 
 ```tsx
 import { Input, TextVariant } from '@metamask/design-system-react';
 
-<Input placeholder="Enter text" textVariant={TextVariant.BodyMd} />;
+<Input value="" placeholder="Enter text" textVariant={TextVariant.BodyMd} />;
 ```
 
 <Canvas of={InputStories.Default} />
 
 ## Props
+
+### `value`
+
+Required controlled value for the Input.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">N/A</td>
+    </tr>
+  </tbody>
+</table>
 
 ### `textVariant`
 
@@ -70,7 +93,7 @@ Optional boolean to disable the input.
 
 <Canvas of={InputStories.IsDisabled} />
 
-### `isReadonly`
+### `isReadOnly`
 
 Optional boolean to show a readonly input.
 
@@ -95,7 +118,34 @@ Optional boolean to show a readonly input.
   </tbody>
 </table>
 
-<Canvas of={InputStories.IsReadonly} />
+<Canvas of={InputStories.IsReadOnly} />
+
+### `isStateStylesDisabled`
+
+Optional boolean to disable state styles.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={InputStories.IsStateStylesDisabled} />
 
 ### `className`
 
