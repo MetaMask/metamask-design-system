@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(icons): add Merge icon to shared assets and regenerate exports ([#1155](https://github.com/MetaMask/metamask-design-system/pull/1155))
+- feat(DSYS-488): Migrate Input to ADR-0003 and ADR-0004 ([#1043](https://github.com/MetaMask/metamask-design-system/pull/1043))
+- feat(DSYS-475): Migrate AvatarGroup to ADR-0003 and ADR-0004 ([#1067](https://github.com/MetaMask/metamask-design-system/pull/1067))
+- feat: new Toast API design ([#1104](https://github.com/MetaMask/metamask-design-system/pull/1104))
+
 ## [0.22.0]
 
 ### Changed
