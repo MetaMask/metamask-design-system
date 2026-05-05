@@ -43,11 +43,11 @@ const usePopperResult = (
     visible: true,
   }) as unknown as ReturnType<typeof usePopper>;
 
-beforeEach(() => {
-  mockedUsePopper.mockReturnValue(usePopperResult());
-});
-
 describe('Popover', () => {
+  beforeEach(() => {
+    mockedUsePopper.mockReturnValue(usePopperResult());
+  });
+
   describe('isOpen', () => {
     it('renders nothing when isOpen is false', () => {
       render(
@@ -92,12 +92,12 @@ describe('Popover', () => {
   describe('className and style', () => {
     it('merges consumer className with internal classes', () => {
       render(
-        <Popover data-testid="popover" isOpen className="custom-class">
+        <Popover data-testid="popover" isOpen className="z-10">
           x
         </Popover>,
       );
       const root = screen.getByTestId('popover');
-      expect(root).toHaveClass('custom-class');
+      expect(root).toHaveClass('z-10');
       expect(root).toHaveClass('rounded-lg');
       expect(root).toHaveClass('shadow-md');
     });
@@ -152,7 +152,7 @@ describe('Popover', () => {
       const callArgs = mockedUsePopper.mock.calls[0][2];
       expect(callArgs?.placement).toBe('auto');
       const modifiers = callArgs?.modifiers ?? [];
-      expect(modifiers).toEqual(
+      expect(modifiers).toStrictEqual(
         expect.arrayContaining([
           expect.objectContaining({ name: 'flip', enabled: true }),
           expect.objectContaining({ name: 'preventOverflow', enabled: true }),
@@ -174,7 +174,7 @@ describe('Popover', () => {
       const callArgs = mockedUsePopper.mock.calls[0][2];
       expect(callArgs?.placement).toBe('top');
       const modifiers = callArgs?.modifiers ?? [];
-      expect(modifiers).toEqual(
+      expect(modifiers).toStrictEqual(
         expect.arrayContaining([
           expect.objectContaining({ name: 'flip', enabled: false }),
           expect.objectContaining({ name: 'preventOverflow', enabled: false }),
@@ -184,18 +184,13 @@ describe('Popover', () => {
 
     it('honors flip and preventOverflow when explicitly enabled with a non-Auto position', () => {
       render(
-        <Popover
-          isOpen
-          position={PopoverPosition.Bottom}
-          flip
-          preventOverflow
-        >
+        <Popover isOpen position={PopoverPosition.Bottom} flip preventOverflow>
           x
         </Popover>,
       );
       const callArgs = mockedUsePopper.mock.calls[0][2];
       const modifiers = callArgs?.modifiers ?? [];
-      expect(modifiers).toEqual(
+      expect(modifiers).toStrictEqual(
         expect.arrayContaining([
           expect.objectContaining({ name: 'flip', enabled: true }),
           expect.objectContaining({ name: 'preventOverflow', enabled: true }),
@@ -211,7 +206,7 @@ describe('Popover', () => {
       );
       const callArgs = mockedUsePopper.mock.calls[0][2];
       const modifiers = callArgs?.modifiers ?? [];
-      expect(modifiers).toEqual(
+      expect(modifiers).toStrictEqual(
         expect.arrayContaining([
           expect.objectContaining({
             name: 'offset',
@@ -229,9 +224,7 @@ describe('Popover', () => {
           x
         </Popover>,
       );
-      expect(
-        screen.queryByTestId('popover-arrow'),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByTestId('popover-arrow')).not.toBeInTheDocument();
     });
 
     it('renders an arrow and disables the arrow modifier accordingly', () => {
@@ -244,7 +237,7 @@ describe('Popover', () => {
 
       const callArgs = mockedUsePopper.mock.calls[0][2];
       const modifiers = callArgs?.modifiers ?? [];
-      expect(modifiers).toEqual(
+      expect(modifiers).toStrictEqual(
         expect.arrayContaining([
           expect.objectContaining({ name: 'arrow', enabled: true }),
         ]),
@@ -424,7 +417,9 @@ describe('Popover', () => {
 
     it('does not throw when Escape is pressed without a handler', () => {
       render(<Popover isOpen>x</Popover>);
-      expect(() => fireEvent.keyDown(document, { key: 'Escape' })).not.toThrow();
+      expect(() =>
+        fireEvent.keyDown(document, { key: 'Escape' }),
+      ).not.toThrow();
     });
   });
 

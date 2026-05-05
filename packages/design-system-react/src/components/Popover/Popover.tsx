@@ -153,7 +153,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         className={twMerge(
           'rounded-lg shadow-md',
           referenceHidden &&
-            'data-[popper-reference-hidden=true]:invisible data-[popper-reference-hidden=true]:pointer-events-none',
+            'data-[popper-reference-hidden=true]:pointer-events-none data-[popper-reference-hidden=true]:invisible',
           className,
         )}
         {...attributes.popper}
@@ -189,7 +189,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       </Box>
     );
 
-    return isPortal ? createPortal(popoverContent, document.body) : popoverContent;
+    return isPortal
+      ? createPortal(popoverContent, document.body)
+      : popoverContent;
   },
 );
 

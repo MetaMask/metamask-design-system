@@ -232,7 +232,9 @@ export const MatchWidth: Story = {
           position={PopoverPosition.Bottom}
           referenceElement={referenceElement}
         >
-          <Text>matchWidth makes the popover the same width as the reference.</Text>
+          <Text>
+            matchWidth makes the popover the same width as the reference.
+          </Text>
         </Popover>
       </>
     );
