@@ -28,7 +28,12 @@ import {
   TOAST_BOTTOM_PADDING,
   TOAST_VISIBILITY_DURATION,
 } from './Toast.constants';
-import type { ToastOptions, ToasterProps, ToasterRef } from './Toast.types';
+import type {
+  ToastOptions,
+  ToastProps,
+  ToasterProps,
+  ToasterRef,
+} from './Toast.types';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -46,6 +51,13 @@ const assertRegisteredRef = (method: 'hide' | 'show' | 'toast'): ToasterRef => {
   }
   return registeredRef.current;
 };
+
+const getToastProps = ({
+  bottomOffset: _bottomOffset,
+  hasNoTimeout: _hasNoTimeout,
+  onClose: _onClose,
+  ...toastProps
+}: ToastOptions): ToastProps => toastProps;
 
 const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
   ({ twClassName, ...props }, ref) => {
@@ -120,14 +132,8 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       return null;
     }
 
-    const {
-      bottomOffset: toastBottomOffset,
-      hasNoTimeout: toastHasNoTimeout,
-      onClose: toastOnClose,
-      ...toastProps
-    } = toastOptions;
-    void toastBottomOffset;
-    void toastHasNoTimeout;
+    const { onClose: toastOnClose } = toastOptions;
+    const toastProps = getToastProps(toastOptions);
 
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
       const { height } = e.nativeEvent.layout;

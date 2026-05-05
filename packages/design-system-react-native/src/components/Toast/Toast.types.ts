@@ -1,7 +1,5 @@
-import {
-  BannerAlertSeverity as BannerAlertSeverityValues,
-  type BannerAlertSeverity,
-} from '@metamask/design-system-shared';
+import { BannerAlertSeverity as BannerAlertSeverityValues } from '@metamask/design-system-shared';
+import type { BannerAlertSeverity } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
 import type { BannerBaseProps } from '../BannerBase';
@@ -23,7 +21,9 @@ export type ToastIconProps = Omit<IconProps, 'name' | 'size' | 'color'>;
 /**
  * Optional props for the close `ButtonIcon`.
  */
-export type ToastCloseButtonProps = NonNullable<BannerBaseProps['closeButtonProps']>;
+export type ToastCloseButtonProps = NonNullable<
+  BannerBaseProps['closeButtonProps']
+>;
 
 /**
  * Shared toast props aligned with BannerBase, plus optional severity/icon props.
