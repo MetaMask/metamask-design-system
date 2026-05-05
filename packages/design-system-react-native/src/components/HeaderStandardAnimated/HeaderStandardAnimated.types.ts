@@ -1,7 +1,7 @@
 // External dependencies.
 import type {
+  ScrollHandlerProcessed,
   SharedValue,
-  useAnimatedScrollHandler,
 } from 'react-native-reanimated';
 
 // Internal dependencies.
@@ -36,5 +36,5 @@ export type UseHeaderStandardAnimatedReturn = {
   scrollY: SharedValue<number>;
   titleSectionHeightSv: SharedValue<number>;
   setTitleSectionHeight: (height: number) => void;
-  onScroll: ReturnType<typeof useAnimatedScrollHandler>;
+  onScroll: ScrollHandlerProcessed;
 };

@@ -61,7 +61,6 @@ export function useHeaderStandardAnimated(): UseHeaderStandardAnimatedReturn {
     [titleSectionHeightSv],
   );
 
-  /* istanbul ignore next */
   const onScroll = useAnimatedScrollHandler({
     onScroll: (scrollEvent) =>
       updateScrollYFromEvent(scrollYValue, scrollEvent.contentOffset.y),
