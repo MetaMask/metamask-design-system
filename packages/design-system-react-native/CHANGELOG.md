@@ -12,10 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added `Merge` to the icon set so it can be used anywhere `IconName` is supported in `@metamask/design-system-react-native` ([#1155](https://github.com/MetaMask/metamask-design-system/pull/1155))
-- Added a `Toast` API that lets apps mount `<Toast />` once and show or hide toasts from anywhere with `Toast.show(...)` and `Toast.hide()` ([#1104](https://github.com/MetaMask/metamask-design-system/pull/1104))
 
 ### Changed
 
+- **BREAKING:** Redesigned `Toast` to use a single mounted `<Toast />` plus static `Toast.show(...)` and `Toast.hide()` methods for application usage ([#1104](https://github.com/MetaMask/metamask-design-system/pull/1104))
+  - Removed `ToastContext`, `ToastContextWrapper`, and `ToastContextParams` from the public export surface
+  - Renamed `ToastVariants` to `ToastVariant`, changed icon-only close buttons to `ToastCloseButtonVariant.Icon`, and renamed `customBottomOffset` to `bottomOffset`
+  - `Toast.show()` and `Toast.hide()` now throw a descriptive error if called before `<Toast />` mounts
+  - See [Migration Guide](./MIGRATION.md#from-version-0220-to-0230)
 - Updated `Input` to use the shared cross-platform API. Consumers should pass a controlled `value`, replace `isReadonly` with `isReadOnly`, and use the shared state-style behavior expected by wrappers like `TextField` ([#1043](https://github.com/MetaMask/metamask-design-system/pull/1043))
 - Updated `AvatarGroup` to use shared cross-platform size and variant contracts, keeping React and React Native aligned on the same public API names and values ([#1067](https://github.com/MetaMask/metamask-design-system/pull/1067))
 

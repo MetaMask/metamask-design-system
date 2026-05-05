@@ -26,7 +26,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.X.0 to 0.X.0](#from-version-0x0-to-0x0)
+  - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.21.0 to 0.22.0](#from-version-0210-to-0220)
   - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
@@ -40,9 +40,33 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.X.0 to 0.X.0
+### From version 0.22.0 to 0.23.0
 
-TODO(release): replace `0.X.0` with the actual version numbers when this PR lands in a release.
+#### Toast: static API replaces context-based usage
+
+**What changed:**
+
+- **`Toast`** now exposes static **`Toast.show(...)`** and **`Toast.hide()`** methods for application usage, instead of relying on **`ToastContext`**, **`ToastContextWrapper`**, or an app-level service singleton.
+- **`ToastContext`**, **`ToastContextWrapper`**, and **`ToastContextParams`** are no longer part of the public **`@metamask/design-system-react-native`** exports.
+- **`ToastVariants`** is renamed to **`ToastVariant`**.
+- Icon-only close buttons now use **`ToastCloseButtonVariant.Icon`** instead of **`ButtonVariants.Link`**.
+- **`customBottomOffset`** is renamed to **`bottomOffset`**.
+- Calling **`Toast.show()`** or **`Toast.hide()`** before **`<Toast />`** mounts now throws a descriptive runtime error instead of silently doing nothing.
+
+**Migration:**
+
+- Mount **`<Toast />`** exactly once near the root of the app.
+- Replace any **`useContext(ToastContext)`**, **`ToastContextWrapper`**, or app-level **`ToastService`** usage with **`Toast.show(...)`** and **`Toast.hide()`**.
+- Rename **`ToastVariants`** to **`ToastVariant`** in all call sites.
+- Replace icon-only close button usage from **`ButtonVariants.Link`** to **`ToastCloseButtonVariant.Icon`**.
+- Rename **`customBottomOffset`** to **`bottomOffset`**.
+
+See [Toast Component](#toast-component) for complete before/after examples and API mappings.
+
+**Impact:**
+
+- Existing **`@metamask/design-system-react-native`** consumers using the old context-based Toast flow must update imports, root mounting, and toast invocation patterns.
+- Existing call sites that already use the forwarded **`ToastRef`** methods for isolated cases can keep doing so, but app-level usage should move to the static API.
 
 #### Input: shared controlled contract and readonly naming alignment
 
