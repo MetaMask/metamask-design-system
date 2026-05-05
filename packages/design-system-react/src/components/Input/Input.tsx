@@ -23,15 +23,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     ref,
   ) => {
     const mergedClassName = twMerge(
-<<<<<<< HEAD
       'w-full rounded border bg-default text-default outline-none transition-colors',
       'border-transparent',
       !isStateStylesDisabled &&
         'focus:border-primary-default focus:outline-none',
-=======
-      'w-full rounded border bg-default text-default transition-colors outline-none',
-      'border-transparent focus:border-primary-default focus:outline-none',
->>>>>>> 771442c8 (chore: resolve lint failures for tailwind v4 migration)
       'placeholder:text-alternative',
       TWCLASSMAP_TEXT_VARIANT_FONTSTYLE[textVariant],
       TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[textVariant],

@@ -4,8 +4,6 @@ This guide provides detailed instructions for migrating your project from one ve
 
 - [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
 - [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
-- [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
-- [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
 - [From version 7.0.0 to 8.0.0](#from-version-700-to-800)
 - [From version 6.0.0 to 7.0.0](#from-version-600-to-700)
 - [From version 5.1.0 to 6.0.0](#from-version-510-to-600)
@@ -114,10 +112,6 @@ The preset is no longer needed for Tailwind v4 consumers. It will eventually be 
 
 ### What `theme.css` provides
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 0fc01bfa (chore(design-tokens): align parity check with v4 shadow utilities)
 | Token category    | How it works in v4                                                                                                                             |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | Colors            | `@theme` variables (e.g. `--color-primary-default`) auto-generate `bg-*`, `text-*`, `border-*` utilities                                       |
@@ -128,7 +122,6 @@ The preset is no longer needed for Tailwind v4 consumers. It will eventually be 
 | Box shadows       | `@theme` variables (`--shadow-xs` / `sm` / `md` / `lg`) auto-generate `shadow-xs`–`shadow-lg` utilities                                        |
 | Shadow colors     | `--color-shadow-default` / `primary` / `error` in `@theme` only (no `shadow-default` etc. utilities; v3’s color-stack pattern had no adoption) |
 | Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                                                              |
-<<<<<<< HEAD
 
 ### Shadow utility changes
 
@@ -164,20 +157,6 @@ If you need a colored shadow in v4, compose the size token with the shadow color
 ```css
 box-shadow: var(--shadow-size-sm) var(--color-shadow-primary);
 ```
-=======
-| Token category    | How it works in v4                                                                                       |
-| ----------------- | -------------------------------------------------------------------------------------------------------- |
-| Colors            | `@theme` variables (e.g. `--color-primary-default`) auto-generate `bg-*`, `text-*`, `border-*` utilities |
-| Color shortcuts   | `@utility` directives (e.g. `bg-default`, `text-default`, `border-default`)                              |
-| Typography        | `@utility` directives for `text-*`, `leading-*`, `tracking-*`                                            |
-| Font weights      | `@utility` directives for `font-regular`, `font-medium`, `font-bold`                                     |
-| Font families     | `@utility` directives for `font-default`, `font-accent`, `font-hero`                                     |
-| Box shadows       | `@theme` variables (`--box-shadow-xs/sm/md/lg`) auto-generate `shadow-*` utilities                       |
-| Shadow colors     | `@utility` directives for `shadow-default`, `shadow-primary`, `shadow-error`                             |
-| Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                        |
->>>>>>> 3bbb40c4 (docs: add Tailwind v3 to v4 migration guides)
-=======
->>>>>>> 0fc01bfa (chore(design-tokens): align parity check with v4 shadow utilities)
 
 ### Class name changes
 
