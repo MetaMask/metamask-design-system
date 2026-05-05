@@ -8,6 +8,17 @@
   --font-sans: var(--font-family-default);
   --color-*: initial;
   --shadow-*: initial;
+  --animate-fade-in: fade-in 300ms linear forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
 
   --color-inherit: inherit;
   --color-current: currentColor;
