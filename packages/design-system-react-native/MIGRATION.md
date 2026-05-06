@@ -3185,9 +3185,9 @@ There is no longer a distinction between React and service call sites. `toast(..
 
 | Mobile (on ref / service)      | Design System                                                                              |
 | ------------------------------ | ------------------------------------------------------------------------------------------ |
-| `toastRef.current.showToast`   | `toast(...)`                                                                                |
+| `toastRef.current.showToast`   | `toast(...)`                                                                               |
 | `toastRef.current.closeToast`  | `toast.dismiss()`                                                                          |
-| `ToastService.showToast`       | `toast(...)`                                                                                |
+| `ToastService.showToast`       | `toast(...)`                                                                               |
 | `ToastService.closeToast`      | `toast.dismiss()`                                                                          |
 | `ToastService.resetForTesting` | _(removed — not needed; RTL auto-cleanup unregisters the ref when `<Toaster />` unmounts)_ |
 
