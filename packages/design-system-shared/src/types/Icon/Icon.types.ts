@@ -190,6 +190,7 @@ export const IconName = {
   LightFilled: 'LightFilled',
   Light: 'Light',
   Link: 'Link',
+  ListArrow: 'ListArrow',
   Loading: 'Loading',
   Location: 'Location',
   LockSlash: 'LockSlash',
