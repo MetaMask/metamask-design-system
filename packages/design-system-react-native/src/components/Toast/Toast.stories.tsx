@@ -83,14 +83,12 @@ export const Default: Story = {
   },
   args: {
     description: "Description shouldn't repeat title. 1-3 lines.",
-    onClose: () => undefined,
     title: 'Title is sentence case no period',
   },
 };
 
 export const Title: Story = {
   args: {
-    onClose: () => undefined,
     title: 'We will notify you.',
   },
 };
@@ -98,7 +96,6 @@ export const Title: Story = {
 export const Description: Story = {
   args: {
     description: 'Enable notifications to stay informed on campaigns',
-    onClose: () => undefined,
     title: "Don't miss out",
   },
 };
@@ -114,14 +111,12 @@ export const Severity: Story = {
   ),
   args: {
     description: 'Severity controls the default start accessory icon.',
-    onClose: () => undefined,
   },
 };
 
 export const StartAccessory: Story = {
   args: {
     description: 'Your withdrawal is processing.',
-    onClose: () => undefined,
     severity: ToastSeverity.Default,
     startAccessory: <Spinner spinnerIconProps={{ size: IconSize.Lg }} />,
     title: 'Withdrawal pending',
@@ -133,7 +128,6 @@ export const ActionButtonOnPress: Story = {
     actionButtonLabel: 'Read more',
     description: 'Review how Consensys handles your data.',
     actionButtonOnPress: () => undefined,
-    onClose: () => undefined,
     severity: ToastSeverity.Default,
     title: 'Privacy policy update',
   },
