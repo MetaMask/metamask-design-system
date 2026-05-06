@@ -137,6 +137,11 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const { onClose: toastOnClose, twClassName: toastTwClassName } =
       toastOptions;
     const toastProps = getToastProps(toastOptions);
+    const { actionButtonLabel, actionButtonOnPress, ...restToastProps } =
+      toastProps;
+    const toastTwClassNames = [twClassName, toastTwClassName]
+      .filter(Boolean)
+      .join(' ');
 
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
       const { height } = e.nativeEvent.layout;
@@ -172,16 +177,27 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         style={baseStyle}
         {...props}
       >
-        <Toast
-          {...toastProps}
-          onClose={() => {
-            closeToast();
-            toastOnClose?.();
-          }}
-          twClassName={[twClassName, toastTwClassName]
-            .filter(Boolean)
-            .join(' ')}
-        />
+        {actionButtonLabel && actionButtonOnPress ? (
+          <Toast
+            {...toastProps}
+            actionButtonLabel={actionButtonLabel}
+            actionButtonOnPress={actionButtonOnPress}
+            onClose={() => {
+              closeToast();
+              toastOnClose?.();
+            }}
+            twClassName={toastTwClassNames}
+          />
+        ) : (
+          <Toast
+            {...restToastProps}
+            onClose={() => {
+              closeToast();
+              toastOnClose?.();
+            }}
+            twClassName={toastTwClassNames}
+          />
+        )}
       </Animated.View>
     );
   },

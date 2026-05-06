@@ -43,6 +43,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Version Updates
 
 <!-- TODO: Replace 0.x.0 with the actual next released version when this Toast follow-up ships. -->
+
 ### From version 0.23.0 to 0.x.0
 
 #### Toast: tighten the runtime API and align the surface with the shipped design
