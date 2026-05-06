@@ -123,6 +123,7 @@ import GiftSVG from './assets/gift.svg';
 import GlobalSearchSVG from './assets/global-search.svg';
 import GlobalSVG from './assets/global.svg';
 import GraphSVG from './assets/graph.svg';
+import GroupSVG from './assets/group.svg';
 import HardwareSVG from './assets/hardware.svg';
 import HashTagSVG from './assets/hash-tag.svg';
 import HeartFilledSVG from './assets/heart-filled.svg';
@@ -175,12 +176,14 @@ import PasswordCheckSVG from './assets/password-check.svg';
 import PendingSVG from './assets/pending.svg';
 import PeopleSVG from './assets/people.svg';
 import PersonCancelSVG from './assets/person-cancel.svg';
+import PieChartSVG from './assets/pie-chart.svg';
 import PinSVG from './assets/pin.svg';
 import PlantSVG from './assets/plant.svg';
 import PlugSVG from './assets/plug.svg';
 import PlusAndMinusSVG from './assets/plus-and-minus.svg';
 import PolicyAlertSVG from './assets/policy-alert.svg';
 import PopUpSVG from './assets/pop-up.svg';
+import PredictionsSVG from './assets/predictions.svg';
 import PrintSVG from './assets/print.svg';
 import PriorityHighSVG from './assets/priority-high.svg';
 import PrivacyTipSVG from './assets/privacy-tip.svg';
@@ -412,6 +415,7 @@ export const assetByIconName: AssetByIconName = {
   GlobalSearch: GlobalSearchSVG,
   Global: GlobalSVG,
   Graph: GraphSVG,
+  Group: GroupSVG,
   Hardware: HardwareSVG,
   HashTag: HashTagSVG,
   HeartFilled: HeartFilledSVG,
@@ -464,12 +468,14 @@ export const assetByIconName: AssetByIconName = {
   Pending: PendingSVG,
   People: PeopleSVG,
   PersonCancel: PersonCancelSVG,
+  PieChart: PieChartSVG,
   Pin: PinSVG,
   Plant: PlantSVG,
   Plug: PlugSVG,
   PlusAndMinus: PlusAndMinusSVG,
   PolicyAlert: PolicyAlertSVG,
   PopUp: PopUpSVG,
+  Predictions: PredictionsSVG,
   Print: PrintSVG,
   PriorityHigh: PriorityHighSVG,
   PrivacyTip: PrivacyTipSVG,
