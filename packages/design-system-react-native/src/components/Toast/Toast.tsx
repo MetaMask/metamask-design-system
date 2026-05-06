@@ -3,6 +3,7 @@ import {
   BoxBackgroundColor,
   BoxBorderColor,
   ButtonSize,
+  IconSize,
 } from '@metamask/design-system-shared';
 import React from 'react';
 
@@ -30,7 +31,9 @@ const renderSeverityAccessory = ({
 
   const iconAlertSeverity = TOAST_SEVERITY_ICON_MAP[severity];
 
-  return <IconAlert severity={iconAlertSeverity} {...iconProps} />;
+  return (
+    <IconAlert severity={iconAlertSeverity} size={IconSize.Lg} {...iconProps} />
+  );
 };
 
 export const Toast: React.FC<ToastProps> = ({
