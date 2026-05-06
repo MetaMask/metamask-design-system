@@ -20,7 +20,7 @@ export const ICON_ALERT_SEVERITY_MAP: Record<
     name: IconName.Danger,
     color: IconColor.WarningDefault,
   },
-  [IconAlertSeverity.Error]: {
+  [IconAlertSeverity.Danger]: {
     name: IconName.Error,
     color: IconColor.ErrorDefault,
   },
