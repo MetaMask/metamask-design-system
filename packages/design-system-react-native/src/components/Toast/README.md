@@ -138,7 +138,7 @@ Dismisses the currently visible toast with a slide-down animation.
 - `children`, `childrenWrapperProps` - Optional extra content rendered below the description.
 - `actionButtonLabel`, `actionButtonOnPress`, `actionButtonProps` - Optional action button content and handler.
 - `onClose` - Optional callback invoked when the toast closes.
-- `closeButtonProps` - Optional props merged onto the close `ButtonIcon`.
+- `closeButtonProps` - Optional props merged onto the always-visible close `ButtonIcon`.
 - `startAccessory` - Optional leading accessory that overrides the severity icon.
 - `severity` - Optional semantic state used to choose the default icon. Defaults to `ToastSeverity.Default`, which shows no icon.
 - `iconAlertProps` - Optional props merged onto the default `IconAlert`.

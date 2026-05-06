@@ -58,7 +58,6 @@ export const Toast: React.FC<ToastProps> = ({
   twClassName,
   ...props
 }) => {
-  const shouldShowCloseButton = Boolean(onClose || closeButtonProps);
   const actionProps =
     actionButtonLabel && actionButtonOnPress
       ? {
@@ -79,18 +78,14 @@ export const Toast: React.FC<ToastProps> = ({
       borderWidth={1}
       children={children}
       childrenWrapperProps={childrenWrapperProps}
-      closeButtonProps={
-        shouldShowCloseButton
-          ? {
-              accessibilityLabel: 'Close toast',
-              ...closeButtonProps,
-              onPress: (event) => {
-                onClose?.();
-                closeButtonProps?.onPress?.(event);
-              },
-            }
-          : undefined
-      }
+      closeButtonProps={{
+        accessibilityLabel: 'Close toast',
+        ...closeButtonProps,
+        onPress: (event) => {
+          onClose?.();
+          closeButtonProps?.onPress?.(event);
+        },
+      }}
       description={description}
       descriptionProps={descriptionProps}
       onClose={undefined}

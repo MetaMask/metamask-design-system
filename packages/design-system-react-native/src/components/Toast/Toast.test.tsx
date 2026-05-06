@@ -118,6 +118,12 @@ describe('Toast', () => {
     expect(onActionPress).toHaveBeenCalled();
   });
 
+  it('always renders a close button', () => {
+    render(<Toast title="Dismiss me" />);
+
+    expect(screen.getByTestId('button-icon')).toBeDefined();
+  });
+
   it('calls onClose and closeButtonProps.onPress when the close button is pressed', () => {
     const onClose = jest.fn();
     const onCloseButtonPress = jest.fn();
