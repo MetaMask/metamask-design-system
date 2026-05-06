@@ -39,14 +39,9 @@ const screenHeight = Dimensions.get('window').height;
 
 let registeredRef: RefObject<ToasterRef> | null = null;
 
-const assertRegisteredRef = (
-  method: 'dismiss' | 'toast',
-): ToasterRef => {
+const assertRegisteredRef = (method: 'dismiss' | 'toast'): ToasterRef => {
   if (!registeredRef?.current) {
-    const invocation =
-      method === 'toast'
-        ? 'toast()'
-        : `toast.${method}()`;
+    const invocation = method === 'toast' ? 'toast()' : `toast.${method}()`;
     throw new Error(
       `${invocation} called before <Toaster /> mounted. Render <Toaster /> once at the root of your app.`,
     );

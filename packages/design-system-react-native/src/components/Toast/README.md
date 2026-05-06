@@ -25,38 +25,55 @@ const Demo = () => {
 };
 ```
 
-## Setup
+## Usage
 
-Using the toast API is a two-step process:
-
-### 1. Render `<Toaster />` once at the root of the app
+Render the `Toaster` component once in your app, then create a toast by calling `toast(...)`.
 
 ```tsx
-import { Toaster } from '@metamask/design-system-react-native';
+import { Button, Toaster, toast } from '@metamask/design-system-react-native';
 
-const App = () => (
-  <>
-    <RootComponent />
-    <Toaster />
-  </>
-);
+const Demo = () => {
+  return (
+    <>
+      <Button
+        onPress={() => {
+          toast({
+            title: 'Title is sentence case no period',
+            description: "Description shouldn't repeat title. 1-3 lines.",
+            hasNoTimeout: false,
+          });
+        }}
+      >
+        Show Toast
+      </Button>
+      <Toaster />
+    </>
+  );
+};
 ```
 
 `<Toaster />` must be rendered exactly once. On mount it registers the `toast(...)` / `toast.dismiss()` API so it can be called from anywhere in your app.
 
-### 2. Call `toast(...)`
-
-Call `toast(...)` from any component, hook, controller, service, or utility after `<Toaster />` has mounted.
-
 Call `toast.dismiss()` to dismiss the currently visible toast.
+
+Use `closeButtonProps` to access the always-visible close button element when you need to set a `testID`, override its accessibility label, or customize its press behavior.
 
 `toast(...)` and `toast.dismiss()` throw a descriptive error if called before `<Toaster />` is mounted.
 
-## Usage
+### `title`
 
-### Title and Description
+Use `title` for the primary message. Use `titleProps` to access the title `Text` element when you need to set a `testID`, accessibility props, or other `Text` overrides.
 
-Use `title` for the primary message and `description` for supporting content.
+```tsx
+toast({
+  title: 'Account switched',
+  hasNoTimeout: false,
+});
+```
+
+### `description`
+
+Use `description` for supporting content below the title. Use `descriptionProps` to access the description `Text` element when you need to set a `testID`, accessibility props, or other `Text` overrides.
 
 ```tsx
 toast({
@@ -66,9 +83,9 @@ toast({
 });
 ```
 
-### Severity
+### `severity`
 
-Use `severity` to show a semantic default start icon.
+Use `severity` to show a semantic default start icon. Use `iconAlertProps` to access the default `IconAlert` element when you need to set a `testID`, accessibility props, or other icon overrides for a non-default severity.
 
 Available severities:
 
@@ -86,9 +103,9 @@ toast({
 });
 ```
 
-### Action Button
+### `actionButtonOnPress`
 
-Use `actionButtonLabel` and `actionButtonOnPress` together when the toast needs a secondary action.
+Use `actionButtonOnPress` together with `actionButtonLabel` when the toast needs a secondary action. Use `actionButtonProps` to access the rendered button element when you need to set a `testID`, accessibility props, or other button overrides.
 
 ```tsx
 toast({
@@ -102,9 +119,9 @@ toast({
 });
 ```
 
-### Custom Start Accessory
+### `startAccessory`
 
-Use `startAccessory` to replace the default severity icon with custom content such as an icon, avatar, or network badge.
+Use `startAccessory` to replace the default severity icon with custom content such as an icon, avatar, or network badge. Use `children` and `childrenWrapperProps` when you need to render additional content below the description, or to access that content wrapper for a `testID` and other view-level overrides.
 
 ```tsx
 import { Icon, IconName, IconSize } from '@metamask/design-system-react-native';
@@ -116,20 +133,6 @@ toast({
   hasNoTimeout: false,
 });
 ```
-
-## Imperative API
-
-### `toast(options: ToastOptions)`
-
-Shows a toast with the provided options.
-
-| PARAMETER | TYPE           | DESCRIPTION         |
-| --------- | -------------- | ------------------- |
-| options   | `ToastOptions` | Toast configuration |
-
-### `toast.dismiss()`
-
-Dismisses the currently visible toast with a slide-down animation.
 
 ## Toast Options
 
