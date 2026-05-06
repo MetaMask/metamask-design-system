@@ -9,7 +9,7 @@ import type { BoxProps } from '../Box';
  * so consumers can pass test ids and other dataset attributes through
  * `Partial`/`Omit` indirection.
  */
-type SlotWrapperProps = Omit<BoxProps, 'children'> & {
+type SlotWrapperProps = Omit<BoxProps, 'children' | 'asChild'> & {
   [key: `data-${string}`]: string | undefined;
 };
 

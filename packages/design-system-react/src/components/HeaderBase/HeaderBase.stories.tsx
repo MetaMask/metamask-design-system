@@ -1,10 +1,15 @@
+import {
+  BoxBackgroundColor,
+  ButtonIconSize,
+  IconName,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box, BoxBackgroundColor } from '../Box';
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { IconName } from '../Icon';
-import { Text, TextVariant } from '../Text';
+import { Box } from '../Box';
+import { ButtonIcon } from '../ButtonIcon';
+import { Text } from '../Text';
 
 import { HeaderBase } from './HeaderBase';
 import type { HeaderBaseProps } from './HeaderBase.types';
