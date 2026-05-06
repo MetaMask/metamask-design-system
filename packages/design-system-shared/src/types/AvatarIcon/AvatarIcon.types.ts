@@ -21,9 +21,9 @@ export const AvatarIconSeverity = {
    */
   Success: 'success',
   /**
-   * Represents an error severity
+   * Represents a danger severity
    */
-  Error: 'error',
+  Danger: 'danger',
   /**
    * Represents a warning severity
    */
@@ -53,7 +53,7 @@ export type AvatarIconPropsShared = {
    * - AvatarIconSeverity.Neutral
    * - AvatarIconSeverity.Info
    * - AvatarIconSeverity.Success
-   * - AvatarIconSeverity.Error
+   * - AvatarIconSeverity.Danger
    * - AvatarIconSeverity.Warning
    *
    * @default AvatarIconSeverity.Neutral
