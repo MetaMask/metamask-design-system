@@ -90,9 +90,9 @@ Use `severity` to show a semantic default start icon. Use `iconAlertProps` to ac
 Available severities:
 
 - `ToastSeverity.Default` - No default leading icon
-- `ToastSeverity.Success` - Confirmation icon
-- `ToastSeverity.Warning` - Warning icon
-- `ToastSeverity.Danger` - Error icon
+- `ToastSeverity.Success`
+- `ToastSeverity.Warning`
+- `ToastSeverity.Danger`
 
 ```tsx
 toast({
