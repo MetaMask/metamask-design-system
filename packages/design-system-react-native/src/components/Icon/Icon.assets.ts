@@ -142,6 +142,7 @@ import LastPageSVG from './assets/last-page.svg';
 import LightFilledSVG from './assets/light-filled.svg';
 import LightSVG from './assets/light.svg';
 import LinkSVG from './assets/link.svg';
+import ListArrowSVG from './assets/list-arrow.svg';
 import LoadingSVG from './assets/loading.svg';
 import LocationSVG from './assets/location.svg';
 import LockSlashSVG from './assets/lock-slash.svg';
@@ -436,6 +437,7 @@ export const assetByIconName: AssetByIconName = {
   LightFilled: LightFilledSVG,
   Light: LightSVG,
   Link: LinkSVG,
+  ListArrow: ListArrowSVG,
   Loading: LoadingSVG,
   Location: LocationSVG,
   LockSlash: LockSlashSVG,

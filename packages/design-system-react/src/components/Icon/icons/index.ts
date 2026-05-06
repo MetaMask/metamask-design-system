@@ -142,6 +142,7 @@ import LastPage from './LastPage';
 import LightFilled from './LightFilled';
 import Light from './Light';
 import Link from './Link';
+import ListArrow from './ListArrow';
 import Loading from './Loading';
 import Location from './Location';
 import LockSlash from './LockSlash';
@@ -432,6 +433,7 @@ export const Icons = {
   LightFilled,
   Light,
   Link,
+  ListArrow,
   Loading,
   Location,
   LockSlash,
