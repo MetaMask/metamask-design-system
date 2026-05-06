@@ -21,6 +21,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ModalFocus Component](#modalfocus-component)
   - [ModalFooter Component](#modalfooter-component)
   - [ModalOverlay Component](#modaloverlay-component)
+  - [HeaderBase (React Native only)](#headerbase-react-native-only)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -1699,6 +1700,14 @@ For typical call sites — for example `ui/components/multichain/network-list-me
 
 - `ModalOverlay` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - One-off styling that previously used Box utility props (e.g. `backgroundColor={BackgroundColor.overlayAlternative}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="bg-overlay-alternative"`).
+
+### HeaderBase (React Native only)
+
+`HeaderBase` is **not** exported from `@metamask/design-system-react`. MetaMask Extension’s `ui/components/component-library` does not include this primitive (it is a **mobile header** pattern). All migration guidance — import swap, removed test-ID constants, new `titleTestID`, and layout differences — lives in the React Native package:
+
+- [HeaderBase migration guide (`@metamask/design-system-react-native`)](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#headerbase-component)
+
+If you are migrating **MetaMask Mobile** `app/component-library` usage, follow that section; no extension → React mapping applies here.
 
 ## Version Updates
 

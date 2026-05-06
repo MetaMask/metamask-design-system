@@ -1766,6 +1766,20 @@ The DS `BottomSheetFooter` adds `twClassName` for Tailwind utility class overrid
 
 The `HeaderBase` component is a flexible header with optional start/end accessories and a configurable title variant. Migration is nearly a drop-in swap — most consumers change the import, remove two constant imports, and switch any affected test IDs to explicit props.
 
+#### API mapping (legacy mobile component-library → MMDS)
+
+| Category | Legacy (`app/component-library/.../HeaderBase`) | `@metamask/design-system-react-native` |
+| -------- | ----------------------------------------------- | --------------------------------------- |
+| **Removed** | `HEADERBASE_TEST_ID`, `HEADERBASE_TITLE_TEST_ID` exports from `HeaderBase.constants` | Removed — use explicit `testID` on the header and `titleTestID` for string titles |
+| **Removed** | Default `testID="header"` on the root `View` (`testID = HEADERBASE_TEST_ID`) | No default; pass `testID` only when needed |
+| **Removed** | Hard-coded `testID` on inner title `Text` (`HEADERBASE_TITLE_TEST_ID`) | Use optional `titleTestID` when `children` is a string |
+| **Renamed / import** | `import HeaderBase from '.../HeaderBase'` (default export) | `import { HeaderBase } from '@metamask/design-system-react-native'` (named export) |
+| **Type / value** | `HeaderBaseVariant` string values unchanged (`compact` / `display`) | Same enum values |
+| **Default / behavior** | `Display` used `min-h-14` only on `Compact`; `Display` had no fixed header height | Both variants use fixed `h-14` (56px); override with `twClassName` / `style` if you relied on content-sized `Display` |
+| **Unchanged** | `children`, `variant`, accessories, `includesTopInset`, wrapper props, `twClassName`, `style`, `ViewProps` | Same names and semantics |
+
+MetaMask Extension has **no** `HeaderBase` in `component-library`; there is no web MMDS counterpart in `@metamask/design-system-react` (see [React migration guide — HeaderBase (React Native only)](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react/MIGRATION.md#headerbase-react-native-only)).
+
 #### Breaking Changes
 
 ##### Import Path
