@@ -113,7 +113,7 @@ Test identifier for the root element, inherited from `ViewProps`.
 - `startAccessory`
 - `onClose`, `closeButtonProps`
 - `severity` - Optional semantic state used to choose the default icon. Defaults to `ToastSeverity.Default`, which shows no icon.
-- `iconProps` - Optional props merged onto the default severity icon.
+- `iconAlertProps` - Optional props merged onto the default `IconAlert`.
 - `twClassName` - Optional extra classes for the toast surface.
 
 ## Imperative API
@@ -167,7 +167,7 @@ ref.current?.closeToast();
 - `closeButtonProps` - Optional props merged onto the close `ButtonIcon`.
 - `startAccessory` - Optional leading accessory that overrides the severity icon.
 - `severity` - Optional semantic state used to choose the default icon. Defaults to `ToastSeverity.Default`, which shows no icon.
-- `iconProps` - Optional props merged onto the default severity icon.
+- `iconAlertProps` - Optional props merged onto the default `IconAlert`.
 - `bottomOffset` - Optional offset from the bottom of the screen.
 - `hasNoTimeout` - When `true`, the toast stays visible until dismissed.
 

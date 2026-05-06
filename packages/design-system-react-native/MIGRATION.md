@@ -3208,7 +3208,7 @@ type ToastOptions = {
   closeButtonProps?: NonNullable<ToastProps['closeButtonProps']>;
   startAccessory?: React.ReactNode;
   severity?: ToastSeverity;
-  iconProps?: ToastIconProps;
+  iconAlertProps?: ToastIconProps;
   bottomOffset?: number;
 };
 ```

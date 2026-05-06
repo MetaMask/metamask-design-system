@@ -17,10 +17,10 @@ import { ToastSeverity } from './Toast.types';
 import type { ToastProps } from './Toast.types';
 
 const renderSeverityAccessory = ({
-  iconProps,
+  iconAlertProps,
   severity,
   startAccessory,
-}: Pick<ToastProps, 'iconProps' | 'severity' | 'startAccessory'>) => {
+}: Pick<ToastProps, 'iconAlertProps' | 'severity' | 'startAccessory'>) => {
   if (startAccessory !== null && startAccessory !== undefined) {
     return startAccessory;
   }
@@ -32,7 +32,11 @@ const renderSeverityAccessory = ({
   const iconAlertSeverity = TOAST_SEVERITY_ICON_MAP[severity];
 
   return (
-    <IconAlert severity={iconAlertSeverity} size={IconSize.Lg} {...iconProps} />
+    <IconAlert
+      severity={iconAlertSeverity}
+      size={IconSize.Lg}
+      {...iconAlertProps}
+    />
   );
 };
 
@@ -46,7 +50,7 @@ export const Toast: React.FC<ToastProps> = ({
   description,
   descriptionProps,
   onClose,
-  iconProps,
+  iconAlertProps,
   severity = ToastSeverity.Default,
   startAccessory,
   title,
@@ -91,7 +95,7 @@ export const Toast: React.FC<ToastProps> = ({
       descriptionProps={descriptionProps}
       onClose={undefined}
       startAccessory={renderSeverityAccessory({
-        iconProps,
+        iconAlertProps,
         severity,
         startAccessory,
       })}

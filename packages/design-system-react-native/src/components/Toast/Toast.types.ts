@@ -33,7 +33,7 @@ export type ToastCloseButtonProps = NonNullable<
  */
 export type ToastSharedProps = BannerBaseProps & {
   severity?: ToastSeverity;
-  iconProps?: ToastIconProps;
+  iconAlertProps?: ToastIconProps;
 };
 
 /**
