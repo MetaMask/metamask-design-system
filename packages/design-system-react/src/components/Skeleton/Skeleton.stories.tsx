@@ -22,8 +22,6 @@ const meta: Meta<SkeletonProps> = {
     height: { control: 'text' },
     width: { control: 'text' },
     hideChildren: { control: 'boolean' },
-    autoPlay: { control: 'boolean' },
-    className: { control: 'text' },
   },
 };
 
@@ -81,15 +79,4 @@ export const ToggleHideChildren: Story = {
       </Box>
     );
   },
-};
-
-export const AutoPlay: Story = {
-  render: () => (
-    <Box flexDirection={BoxFlexDirection.Column} gap={3}>
-      <Text variant={TextVariant.BodySm}>autoPlay = true (default)</Text>
-      <Skeleton width={240} height={16} />
-      <Text variant={TextVariant.BodySm}>autoPlay = false</Text>
-      <Skeleton width={240} height={16} autoPlay={false} />
-    </Box>
-  ),
 };

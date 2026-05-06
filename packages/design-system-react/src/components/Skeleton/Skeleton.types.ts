@@ -34,13 +34,6 @@ export type SkeletonProps = Omit<
    */
   hideChildren?: boolean;
   /**
-   * When `true`, the skeleton plays the pulse animation. Set to `false` to
-   * render a static placeholder.
-   *
-   * @default true
-   */
-  autoPlay?: boolean;
-  /**
    * Optional prop for additional CSS classes to be applied to the skeleton
    * container. Merged with the component's defaults via `twMerge`.
    */

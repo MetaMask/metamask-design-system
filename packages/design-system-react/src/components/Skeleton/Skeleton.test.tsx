@@ -34,16 +34,10 @@ describe('Skeleton', () => {
     expect(content.parentElement).toHaveClass('invisible');
   });
 
-  it('applies the pulse animation by default', () => {
+  it('applies the pulse animation', () => {
     render(<Skeleton data-testid="skeleton" />);
     const overlay = screen.getByTestId('skeleton').firstElementChild;
     expect(overlay).toHaveClass('motion-safe:animate-skeleton-pulse');
-  });
-
-  it('omits the pulse animation when autoPlay is false', () => {
-    render(<Skeleton data-testid="skeleton" autoPlay={false} />);
-    const overlay = screen.getByTestId('skeleton').firstElementChild;
-    expect(overlay).not.toHaveClass('motion-safe:animate-skeleton-pulse');
   });
 
   it('applies width and height as inline styles (numbers interpreted as px)', () => {

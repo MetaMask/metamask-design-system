@@ -11,7 +11,6 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
       width,
       children,
       hideChildren = false,
-      autoPlay = true,
       className,
       style,
       ...props
@@ -37,10 +36,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
       >
         <div
           aria-hidden="true"
-          className={twMerge(
-            'pointer-events-none absolute inset-0 rounded bg-icon-alternative',
-            autoPlay && 'motion-safe:animate-skeleton-pulse',
-          )}
+          className="pointer-events-none absolute inset-0 rounded bg-icon-alternative motion-safe:animate-skeleton-pulse"
         />
         {hasChildren && (
           <div

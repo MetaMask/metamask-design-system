@@ -4,7 +4,7 @@ import * as SkeletonStories from './Skeleton.stories';
 
 # Skeleton
 
-`Skeleton` displays a pulsing placeholder while content is loading. It mirrors the React Native `Skeleton` API on `@metamask/design-system-react-native`, so consumers can use the same mental model across platforms.
+`Skeleton` displays a pulsing placeholder while content is loading.
 
 ```tsx
 import { Skeleton } from '@metamask/design-system-react';
@@ -80,33 +80,6 @@ This is the **inverse** of the legacy extension `Skeleton`'s `isLoading` prop: `
 <Canvas of={SkeletonStories.HideChildren} />
 
 <Canvas of={SkeletonStories.ToggleHideChildren} />
-
-### `autoPlay`
-
-When `true`, the skeleton plays the pulse animation. Set to `false` to render a static placeholder (useful in screenshots, golden-path tests, or when you want CSS-only fallbacks).
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>boolean</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>true</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<Canvas of={SkeletonStories.AutoPlay} />
 
 ### `className`
 
