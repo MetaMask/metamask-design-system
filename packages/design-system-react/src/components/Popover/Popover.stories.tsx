@@ -251,6 +251,7 @@ export const Role: Story = {
         <Popover
           isOpen
           role={PopoverRole.Dialog}
+          aria-label="Dialog example"
           position={PopoverPosition.Left}
           referenceElement={referenceElement}
         >
