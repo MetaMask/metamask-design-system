@@ -121,6 +121,9 @@ export type { SkeletonProps } from './Skeleton';
 export { SensitiveText, SensitiveTextLength } from './SensitiveText';
 export type { SensitiveTextProps } from './SensitiveText';
 
+export { PopoverHeader } from './PopoverHeader';
+export type { PopoverHeaderProps } from './PopoverHeader';
+
 export { Text } from './Text';
 export {
   TextVariant,

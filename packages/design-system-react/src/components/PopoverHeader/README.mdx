@@ -1,0 +1,202 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as PopoverHeaderStories from './PopoverHeader.stories';
+
+# PopoverHeader
+
+`PopoverHeader` is the top section of a popover. It renders a semantic `<header>` with a centered title and optional back/close buttons. The component owns the iconography and size of the built-in buttons (`ArrowLeft` / `Close` at `ButtonIconSize.Sm`); consumers configure the click handler and the (required) accessible label via `backButtonProps` / `closeButtonProps`. The title text and the auto-rendered icon buttons inherit color from the popover surface, so headers placed on inverse or semantic backgrounds pick up the right foreground color automatically.
+
+```tsx
+import { PopoverHeader } from '@metamask/design-system-react';
+
+<PopoverHeader
+  onClose={handleClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {t('removeAccount')}
+</PopoverHeader>;
+```
+
+<Canvas of={PopoverHeaderStories.Default} />
+
+## Props
+
+### `children`
+
+Header title content. When a string, it is auto-wrapped in a `Text` component with `TextVariant.HeadingSm`, `TextAlign.Center`, and `TextColor.Inherit` so the title picks up the popover surface color. When a `ReactNode`, it is rendered as-is so consumers can supply custom title layouts.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverHeaderStories.StringTitle} />
+
+<Canvas of={PopoverHeaderStories.NodeTitle} />
+
+### `onBack` + `backButtonProps`
+
+When `onBack` is set, the component renders a back `ButtonIcon` in the start slot. `backButtonProps` is **co-required** (the type system enforces this): consumers must supply at least `ariaLabel`. The component owns `iconName` (`IconName.ArrowLeft`) and `size` (`ButtonIconSize.Sm`); they cannot be overridden via the prop bag. The auto-rendered button defaults to `text-inherit` so its icon picks up the popover surface color — pass `className` on the prop bag to override.
+
+`PopoverHeader` is i18n-agnostic — pass localized labels from your application's i18n layer (e.g. `t('back')`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>onBack: () =&gt; void</code>
+        <br />
+        <code>backButtonProps: Omit&lt;ButtonIconProps, 'iconName' | 'size'&gt;</code>
+      </td>
+      <td align="left">No (but co-required when set)</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `onClose` + `closeButtonProps`
+
+Same shape as `onBack` / `backButtonProps`. When `onClose` is set, a close `ButtonIcon` (`IconName.Close`, `ButtonIconSize.Sm`) renders in the end slot. `closeButtonProps.ariaLabel` is required.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>onClose: () =&gt; void</code>
+        <br />
+        <code>closeButtonProps: Omit&lt;ButtonIconProps, 'iconName' | 'size'&gt;</code>
+      </td>
+      <td align="left">No (but co-required when set)</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverHeaderStories.WithCloseButton} />
+
+<Canvas of={PopoverHeaderStories.WithBackAndCloseButtons} />
+
+### `startAccessory`
+
+Optional override for the start (left in LTR) slot. When provided, it replaces the auto-rendered back button — even if `onBack` is set.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverHeaderStories.StartAccessoryOverride} />
+
+### `endAccessory`
+
+Optional override for the end (right in LTR) slot. When provided, it replaces the auto-rendered close button — even if `onClose` is set.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverHeaderStories.EndAccessoryOverride} />
+
+### `className`
+
+Custom CSS classes applied to the root `<header>` element. Merged with the component's defaults via `twMerge`. PopoverHeader applies no padding by default — popover surfaces own their own spacing.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={PopoverHeaderStories.Default} />
+
+## Migration Guide
+
+Migrating from `ui/components/component-library/popover-header` in MetaMask Extension? See the [PopoverHeader Migration Guide](../../../MIGRATION.md#popoverheader-component) for prop mappings, before/after examples, and the i18n decoupling steps.
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
