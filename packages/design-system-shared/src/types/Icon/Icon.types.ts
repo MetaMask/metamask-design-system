@@ -216,6 +216,8 @@ export const IconName = {
   MoreHorizontal: 'MoreHorizontal',
   MoreVertical: 'MoreVertical',
   MountainFlag: 'MountainFlag',
+  MusdFilled: 'MusdFilled',
+  Musd: 'Musd',
   MusicNote: 'MusicNote',
   NoPhotography: 'NoPhotography',
   Notification: 'Notification',
