@@ -167,6 +167,8 @@ import Monitor from './Monitor';
 import MoreHorizontal from './MoreHorizontal';
 import MoreVertical from './MoreVertical';
 import MountainFlag from './MountainFlag';
+import MusdFilled from './MusdFilled';
+import Musd from './Musd';
 import MusicNote from './MusicNote';
 import NoPhotography from './NoPhotography';
 import Notification from './Notification';
@@ -455,6 +457,8 @@ export const Icons = {
   MoreHorizontal,
   MoreVertical,
   MountainFlag,
+  MusdFilled,
+  Musd,
   MusicNote,
   NoPhotography,
   Notification,

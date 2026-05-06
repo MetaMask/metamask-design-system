@@ -167,6 +167,8 @@ import MonitorSVG from './assets/monitor.svg';
 import MoreHorizontalSVG from './assets/more-horizontal.svg';
 import MoreVerticalSVG from './assets/more-vertical.svg';
 import MountainFlagSVG from './assets/mountain-flag.svg';
+import MusdFilledSVG from './assets/musd-filled.svg';
+import MusdSVG from './assets/musd.svg';
 import MusicNoteSVG from './assets/music-note.svg';
 import NoPhotographySVG from './assets/no-photography.svg';
 import NotificationSVG from './assets/notification.svg';
@@ -459,6 +461,8 @@ export const assetByIconName: AssetByIconName = {
   MoreHorizontal: MoreHorizontalSVG,
   MoreVertical: MoreVerticalSVG,
   MountainFlag: MountainFlagSVG,
+  MusdFilled: MusdFilledSVG,
+  Musd: MusdSVG,
   MusicNote: MusicNoteSVG,
   NoPhotography: NoPhotographySVG,
   Notification: NotificationSVG,
