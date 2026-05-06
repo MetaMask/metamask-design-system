@@ -73,6 +73,7 @@ export const Toast: React.FC<ToastProps> = ({
   return (
     <BannerBase
       {...actionProps}
+      {...props}
       backgroundColor={BoxBackgroundColor.BackgroundSection}
       borderColor={BoxBorderColor.BorderMuted}
       borderWidth={1}
@@ -97,7 +98,6 @@ export const Toast: React.FC<ToastProps> = ({
       title={title}
       titleProps={titleProps}
       twClassName={twClassName ? `rounded-xl ${twClassName}` : 'rounded-xl'}
-      {...props}
     />
   );
 };

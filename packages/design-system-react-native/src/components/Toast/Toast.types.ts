@@ -22,13 +22,6 @@ export type ToastSeverity = (typeof ToastSeverity)[keyof typeof ToastSeverity];
 export type ToastIconProps = Omit<IconProps, 'name' | 'size' | 'color'>;
 
 /**
- * Optional props for the close `ButtonIcon`.
- */
-export type ToastCloseButtonProps = NonNullable<
-  BannerBaseProps['closeButtonProps']
->;
-
-/**
  * Shared toast props aligned with BannerBase, plus optional severity/icon props.
  */
 export type ToastSharedProps = BannerBaseProps & {

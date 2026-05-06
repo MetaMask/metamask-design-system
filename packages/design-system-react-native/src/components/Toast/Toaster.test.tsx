@@ -1,3 +1,5 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { renderHook } from '@testing-library/react-hooks';
 import { render, screen, act, fireEvent } from '@testing-library/react-native';
 import React, { createRef, useEffect } from 'react';
 import { Text as RNText } from 'react-native';
@@ -231,6 +233,20 @@ describe('Toaster', () => {
     });
 
     expect(screen.queryByText('Default auto-dismiss toast')).toBeNull();
+  });
+
+  it('preserves per-toast twClassName while applying Toaster twClassName', async () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    render(<Toaster ref={toasterRef} twClassName="mx-2" />);
+    await showToastAndWait(toasterRef, {
+      testID: 'toast-surface',
+      title: 'Styled toast',
+      twClassName: 'my-1',
+    });
+
+    expect(screen.getByTestId('toast-surface')).toHaveStyle(tw.style('mx-2'));
+    expect(screen.getByTestId('toast-surface')).toHaveStyle(tw.style('my-1'));
   });
 
   it('calls onClose and hides the toast when the close button is pressed', async () => {

@@ -53,8 +53,9 @@ const getToastProps = ({
   bottomOffset: _bottomOffset,
   hasNoTimeout: _hasNoTimeout,
   onClose: _onClose,
+  twClassName: _twClassName,
   ...toastProps
-}: ToastOptions): ToastProps => toastProps;
+}: ToastOptions): Omit<ToastProps, 'twClassName'> => toastProps;
 
 const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
   ({ twClassName, ...props }, ref) => {
@@ -133,7 +134,8 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       return null;
     }
 
-    const { onClose: toastOnClose } = toastOptions;
+    const { onClose: toastOnClose, twClassName: toastTwClassName } =
+      toastOptions;
     const toastProps = getToastProps(toastOptions);
 
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
@@ -176,7 +178,9 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
             closeToast();
             toastOnClose?.();
           }}
-          twClassName={twClassName}
+          twClassName={[twClassName, toastTwClassName]
+            .filter(Boolean)
+            .join(' ')}
         />
       </Animated.View>
     );
