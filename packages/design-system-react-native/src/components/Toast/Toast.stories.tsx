@@ -65,7 +65,6 @@ export const Default: Story = {
           onPress={() => {
             toast({
               ...toastArgs,
-              hasNoTimeout: false,
               actionButtonLabel,
               actionButtonOnPress:
                 actionButtonLabel && !actionButtonOnPress

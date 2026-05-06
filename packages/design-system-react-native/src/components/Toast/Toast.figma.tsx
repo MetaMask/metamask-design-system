@@ -53,7 +53,6 @@ figma.connect(
                 severity,
                 title,
                 description,
-                hasNoTimeout: false,
                 actionButtonLabel: resolvedActionButtonLabel,
                 actionButtonOnPress: resolvedActionButtonLabel
                   ? () => undefined
