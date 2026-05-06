@@ -4,6 +4,7 @@ import figma from '@figma/code-connect';
 import React from 'react';
 
 import { Button } from '../Button';
+
 import { Toast } from './Toast';
 
 import { ToastSeverity, Toaster, toast } from '.';

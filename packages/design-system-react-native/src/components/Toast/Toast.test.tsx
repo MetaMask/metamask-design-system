@@ -52,7 +52,7 @@ describe('Toast', () => {
     expect(screen.queryByTestId('icon-Info')).toBeNull();
   });
 
-  it('renders the severity icon when severity is provided', () => {
+  it('renders the success severity icon when severity is provided', () => {
     render(
       <Toast
         onClose={() => undefined}
@@ -62,6 +62,30 @@ describe('Toast', () => {
     );
 
     expect(screen.getByTestId('icon-Confirmation')).toBeDefined();
+  });
+
+  it('renders the warning severity icon', () => {
+    render(
+      <Toast
+        onClose={() => undefined}
+        severity={ToastSeverity.Warning}
+        title="Warning toast"
+      />,
+    );
+
+    expect(screen.getByTestId('icon-Danger')).toBeDefined();
+  });
+
+  it('renders the danger severity icon', () => {
+    render(
+      <Toast
+        onClose={() => undefined}
+        severity={ToastSeverity.Danger}
+        title="Danger toast"
+      />,
+    );
+
+    expect(screen.getByTestId('icon-Error')).toBeDefined();
   });
 
   it('renders startAccessory instead of the severity icon when provided', () => {
@@ -75,7 +99,7 @@ describe('Toast', () => {
     );
 
     expect(screen.getByTestId('custom-accessory')).toBeDefined();
-    expect(screen.queryByTestId('icon-Danger')).toBeNull();
+    expect(screen.queryByTestId('icon-Error')).toBeNull();
   });
 
   it('renders an action button and calls actionButtonOnPress when pressed', () => {

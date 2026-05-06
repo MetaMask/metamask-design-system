@@ -1,6 +1,5 @@
 // Third party dependencies.
 import {
-  BannerAlertSeverity,
   BoxBackgroundColor,
   BoxBorderColor,
   ButtonSize,
@@ -8,28 +7,13 @@ import {
 import React from 'react';
 
 // External dependencies.
-import { IconColor, IconName, IconSize } from '../../types';
 import { BannerBase } from '../BannerBase';
-import { Icon } from '../Icon';
+import { IconAlert } from '../IconAlert';
 
 // Internal dependencies.
+import { TOAST_SEVERITY_ICON_MAP } from './Toast.constants';
 import { ToastSeverity } from './Toast.types';
 import type { ToastProps } from './Toast.types';
-
-const TOAST_SEVERITY_ICON_MAP = {
-  [BannerAlertSeverity.Success]: {
-    color: IconColor.SuccessDefault,
-    name: IconName.Confirmation,
-  },
-  [BannerAlertSeverity.Warning]: {
-    color: IconColor.WarningDefault,
-    name: IconName.Danger,
-  },
-  [BannerAlertSeverity.Danger]: {
-    color: IconColor.ErrorDefault,
-    name: IconName.Danger,
-  },
-} as const;
 
 const renderSeverityAccessory = ({
   iconProps,
@@ -44,9 +28,9 @@ const renderSeverityAccessory = ({
     return undefined;
   }
 
-  const { color, name } = TOAST_SEVERITY_ICON_MAP[severity];
+  const iconAlertSeverity = TOAST_SEVERITY_ICON_MAP[severity];
 
-  return <Icon color={color} name={name} size={IconSize.Lg} {...iconProps} />;
+  return <IconAlert severity={iconAlertSeverity} {...iconProps} />;
 };
 
 export const Toast: React.FC<ToastProps> = ({
