@@ -50,6 +50,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - Mount **`<Toaster />`** once at the root, then call **`toast(...)`**, **`toast.show(...)`**, or **`toast.hide()`** from anywhere, instead of relying on **`ToastContext`**, **`ToastContextWrapper`**, or an app-level service singleton.
 - **`ToastContext`**, **`ToastContextWrapper`**, and **`ToastContextParams`** are no longer part of the public **`@metamask/design-system-react-native`** exports.
 - **`ToastVariants`** is replaced by **`ToastSeverity`**, including **`ToastSeverity.Default`** for a toast with no leading icon.
+- **`ToastSeverity.Info`** is no longer part of the React Native Toast API. Use **`ToastSeverity.Default`** for a no-icon informational toast, or choose one of **`Success`**, **`Warning`**, or **`Danger`** when you need semantic icon styling.
 - Close button customization now goes through **`closeButtonProps`** instead of the old toast-specific button variant pattern.
 - **`customBottomOffset`** is renamed to **`bottomOffset`**.
 - Calling **`toast(...)`**, **`toast.show()`**, or **`toast.hide()`** before **`<Toaster />`** mounts now throws a descriptive runtime error instead of silently doing nothing.
@@ -59,6 +60,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - Mount **`<Toaster />`** exactly once near the root of the app.
 - Replace any **`useContext(ToastContext)`**, **`ToastContextWrapper`**, or app-level **`ToastService`** usage with **`toast(...)`**, **`toast.show(...)`**, and **`toast.hide()`**.
 - Replace **`ToastVariants`** usages with **`ToastSeverity`** in all call sites. Use **`ToastSeverity.Default`** when you want an explicit no-icon severity.
+- Replace any remaining **`ToastSeverity.Info`** usages with **`ToastSeverity.Default`** unless the toast should now use a semantic success, warning, or danger state.
 - Move close button customization to **`closeButtonProps`**.
 - Rename **`customBottomOffset`** to **`bottomOffset`**.
 

@@ -153,7 +153,6 @@ ref.current?.closeToast();
 
 - Omit `severity` or use `ToastSeverity.Default` to render no default leading icon.
 - `ToastSeverity.Default` - Default toast with no leading icon
-- `ToastSeverity.Info` - Info toast with the info icon
 - `ToastSeverity.Success` - Success toast with the confirmation icon
 - `ToastSeverity.Warning` - Warning toast with the warning icon
 - `ToastSeverity.Danger` - Danger toast with the danger icon

@@ -1,4 +1,4 @@
-import { BannerAlertSeverity as BannerAlertSeverityValues } from '@metamask/design-system-shared';
+import { BannerAlertSeverity } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
 import type { BannerBaseProps } from '../BannerBase';
@@ -10,7 +10,9 @@ import type { IconProps } from '../Icon/Icon.types';
  */
 export const ToastSeverity = {
   Default: 'default',
-  ...BannerAlertSeverityValues,
+  Success: BannerAlertSeverity.Success,
+  Warning: BannerAlertSeverity.Warning,
+  Danger: BannerAlertSeverity.Danger,
 } as const;
 
 export type ToastSeverity = (typeof ToastSeverity)[keyof typeof ToastSeverity];

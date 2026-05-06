@@ -81,7 +81,6 @@ export const Severity: Story = {
   render: (args: ToastProps) => (
     <View style={{ gap: 8 }}>
       <Toast {...args} severity={ToastSeverity.Default} title="Default" />
-      <Toast {...args} severity={ToastSeverity.Info} title="Info" />
       <Toast {...args} severity={ToastSeverity.Success} title="Success" />
       <Toast {...args} severity={ToastSeverity.Warning} title="Warning" />
       <Toast {...args} severity={ToastSeverity.Danger} title="Danger" />

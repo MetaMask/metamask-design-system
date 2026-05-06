@@ -3,6 +3,7 @@ import {
   BannerAlertSeverity,
   BoxBackgroundColor,
   BoxBorderColor,
+  ButtonSize,
 } from '@metamask/design-system-shared';
 import React from 'react';
 
@@ -16,10 +17,6 @@ import { ToastSeverity } from './Toast.types';
 import type { ToastProps } from './Toast.types';
 
 const TOAST_SEVERITY_ICON_MAP = {
-  [BannerAlertSeverity.Info]: {
-    color: IconColor.PrimaryDefault,
-    name: IconName.Info,
-  },
   [BannerAlertSeverity.Success]: {
     color: IconColor.SuccessDefault,
     name: IconName.Confirmation,
@@ -76,7 +73,10 @@ export const Toast: React.FC<ToastProps> = ({
       ? {
           actionButtonLabel,
           actionButtonOnPress,
-          actionButtonProps,
+          actionButtonProps: {
+            size: ButtonSize.Sm,
+            ...actionButtonProps,
+          },
         }
       : {};
 
