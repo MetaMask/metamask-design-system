@@ -13,7 +13,6 @@ const Demo = () => {
           toast({
             title: 'Title is sentence case no period',
             description: "Description shouldn't repeat title. 1-3 lines.",
-            hasNoTimeout: false,
           });
         }}
       >
@@ -40,7 +39,6 @@ const Demo = () => {
           toast({
             title: 'Title is sentence case no period',
             description: "Description shouldn't repeat title. 1-3 lines.",
-            hasNoTimeout: false,
           });
         }}
       >
@@ -67,7 +65,6 @@ Use `title` for the primary message. Use `titleProps` to access the title `Text`
 ```tsx
 toast({
   title: 'Account switched',
-  hasNoTimeout: false,
 });
 ```
 
@@ -79,7 +76,6 @@ Use `description` for supporting content below the title. Use `descriptionProps`
 toast({
   title: 'Account switched',
   description: 'You are now using Account 2.',
-  hasNoTimeout: false,
 });
 ```
 
@@ -99,7 +95,6 @@ toast({
   title: 'Network changed',
   description: 'You are now connected to Linea.',
   severity: ToastSeverity.Success,
-  hasNoTimeout: false,
 });
 ```
 
@@ -115,7 +110,6 @@ toast({
   actionButtonOnPress: () => {
     console.log('Action pressed');
   },
-  hasNoTimeout: false,
 });
 ```
 
@@ -130,7 +124,6 @@ toast({
   title: 'Withdrawal pending',
   description: 'Your withdrawal is processing.',
   startAccessory: <Icon name={IconName.Clock} size={IconSize.Lg} />,
-  hasNoTimeout: false,
 });
 ```
 

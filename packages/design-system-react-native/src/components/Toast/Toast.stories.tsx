@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-import { View } from 'react-native';
 
 // External dependencies.
+import { Box } from '../Box';
 import { Button } from '../Button';
 import { IconSize } from '../Icon';
 import { Spinner } from '../temp-components/Spinner';
@@ -88,14 +88,29 @@ export const Default: Story = {
   },
 };
 
+export const Title: Story = {
+  args: {
+    onClose: () => undefined,
+    title: 'We will notify you.',
+  },
+};
+
+export const Description: Story = {
+  args: {
+    description: 'Enable notifications to stay informed on campaigns',
+    onClose: () => undefined,
+    title: "Don't miss out",
+  },
+};
+
 export const Severity: Story = {
   render: (args: ToastProps) => (
-    <View style={{ gap: 8 }}>
+    <Box twClassName="gap-2">
       <Toast {...args} severity={ToastSeverity.Default} title="Default" />
       <Toast {...args} severity={ToastSeverity.Success} title="Success" />
       <Toast {...args} severity={ToastSeverity.Warning} title="Warning" />
       <Toast {...args} severity={ToastSeverity.Danger} title="Danger" />
-    </View>
+    </Box>
   ),
   args: {
     description: 'Severity controls the default start accessory icon.',

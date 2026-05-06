@@ -214,6 +214,25 @@ describe('Toaster', () => {
     });
   });
 
+  it('defaults hasNoTimeout to false when omitted', async () => {
+    render(<Toaster ref={toasterRef} testID="toast-root" />);
+    await showToastAndWait(toasterRef, {
+      title: 'Default auto-dismiss toast',
+    });
+    const toastElement = screen.getByTestId('toast-root');
+    expect(toastElement).toBeDefined();
+    await act(async () => {
+      fireEvent(toastElement, 'layout', {
+        nativeEvent: { layout: { height: 100, width: 300, x: 0, y: 0 } },
+      });
+    });
+    await act(async () => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.queryByText('Default auto-dismiss toast')).toBeNull();
+  });
+
   it('calls onClose and hides the toast when the close button is pressed', async () => {
     const onClose = jest.fn();
     const onCloseButtonPress = jest.fn();

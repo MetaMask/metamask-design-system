@@ -81,6 +81,10 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
 
     const showToast = (options: ToastOptions) => {
       let timeoutDuration = 0;
+      const normalizedOptions = {
+        hasNoTimeout: false,
+        ...options,
+      };
       if (toastOptions) {
         cancelAnimation(translateYProgress);
         timeoutDuration = 100;
@@ -91,7 +95,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       }
       replacementTimerRef.current = setTimeout(() => {
         replacementTimerRef.current = null;
-        setToastOptions(options);
+        setToastOptions(normalizedOptions);
       }, timeoutDuration);
     };
 

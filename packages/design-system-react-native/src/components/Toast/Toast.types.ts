@@ -40,7 +40,7 @@ export type ToastSharedProps = BannerBaseProps & {
  * Toast options used by the imperative `toast(...)` API.
  */
 export type ToastOptions = ToastSharedProps & {
-  hasNoTimeout: boolean;
+  hasNoTimeout?: boolean;
   bottomOffset?: number;
 };
 
