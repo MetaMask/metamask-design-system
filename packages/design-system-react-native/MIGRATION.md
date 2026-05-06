@@ -47,17 +47,17 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **What changed:**
 
-- Mount **`<Toaster />`** once at the root, then call **`toast(...)`**, **`toast.show(...)`**, or **`toast.hide()`** from anywhere, instead of relying on **`ToastContext`**, **`ToastContextWrapper`**, or an app-level service singleton.
+- Mount **`<Toaster />`** once at the root, then call **`toast(...)`** or **`toast.dismiss()`** from anywhere, instead of relying on **`ToastContext`**, **`ToastContextWrapper`**, or an app-level service singleton.
 - **`ToastContext`**, **`ToastContextWrapper`**, and **`ToastContextParams`** are no longer part of the public **`@metamask/design-system-react-native`** exports.
 - **`ToastVariants`** is replaced by **`ToastSeverity`**, including **`ToastSeverity.Default`** for a toast with no leading icon.
 - Close button customization now goes through **`closeButtonProps`** instead of the old toast-specific button variant pattern.
 - **`customBottomOffset`** is renamed to **`bottomOffset`**.
-- Calling **`toast(...)`**, **`toast.show()`**, or **`toast.hide()`** before **`<Toaster />`** mounts now throws a descriptive runtime error instead of silently doing nothing.
+- Calling **`toast(...)`** or **`toast.dismiss()`** before **`<Toaster />`** mounts now throws a descriptive runtime error instead of silently doing nothing.
 
 **Migration:**
 
 - Mount **`<Toaster />`** exactly once near the root of the app.
-- Replace any **`useContext(ToastContext)`**, **`ToastContextWrapper`**, or app-level **`ToastService`** usage with **`toast(...)`**, **`toast.show(...)`**, and **`toast.hide()`**.
+- Replace any **`useContext(ToastContext)`**, **`ToastContextWrapper`**, or app-level **`ToastService`** usage with **`toast(...)`** and **`toast.dismiss()`**.
 - Replace **`ToastVariants`** usages with **`ToastSeverity`** in all call sites. Use **`ToastSeverity.Default`** when you want an explicit no-icon severity.
 - Move close button customization to **`closeButtonProps`**.
 - Rename **`customBottomOffset`** to **`bottomOffset`**.
@@ -3142,7 +3142,7 @@ const App = () => (
 );
 ```
 
-On mount `<Toaster />` registers the `toast(...)` / `toast.hide()` API. Render it exactly once.
+On mount `<Toaster />` registers the `toast(...)` / `toast.dismiss()` API. Render it exactly once.
 
 ##### Showing a toast: `toast(...)` replaces `toastRef.current?.showToast` and `ToastService.showToast`
 
@@ -3176,7 +3176,7 @@ toast({
   severity: ToastSeverity.Success,
 });
 
-toast.hide();
+toast.dismiss();
 ```
 
 There is no longer a distinction between React and service call sites. `toast(...)` works anywhere after the root `<Toaster />` has mounted.
@@ -3185,10 +3185,10 @@ There is no longer a distinction between React and service call sites. `toast(..
 
 | Mobile (on ref / service)      | Design System                                                                              |
 | ------------------------------ | ------------------------------------------------------------------------------------------ |
-| `toastRef.current.showToast`   | `toast(...)` or `toast.show(...)`                                                          |
-| `toastRef.current.closeToast`  | `toast.hide()` or `toast.dismiss()`                                                        |
-| `ToastService.showToast`       | `toast(...)` or `toast.show(...)`                                                          |
-| `ToastService.closeToast`      | `toast.hide()` or `toast.dismiss()`                                                        |
+| `toastRef.current.showToast`   | `toast(...)`                                                                                |
+| `toastRef.current.closeToast`  | `toast.dismiss()`                                                                          |
+| `ToastService.showToast`       | `toast(...)`                                                                                |
+| `ToastService.closeToast`      | `toast.dismiss()`                                                                          |
 | `ToastService.resetForTesting` | _(removed — not needed; RTL auto-cleanup unregisters the ref when `<Toaster />` unmounts)_ |
 
 The forwarded `Toaster` ref still exposes `showToast` and `closeToast` for advanced cases, but application code should prefer `toast(...)`.
@@ -3249,12 +3249,12 @@ The per-toast offset prop is renamed from `customBottomOffset` to `bottomOffset`
 
 #### Error Behavior
 
-Calling `toast(...)`, `toast.show(...)`, or `toast.hide()` before `<Toaster />` has mounted throws a descriptive error pointing at the missing mount instead of silently no-oping.
+Calling `toast(...)` or `toast.dismiss()` before `<Toaster />` has mounted throws a descriptive error pointing at the missing mount instead of silently no-oping.
 
 #### Removed
 
 - `ToastContext`, `ToastContextWrapper`, `ToastContextParams` — no replacement needed, the static API covers every call site.
-- `ToastService` from `app/core/ToastService` — replace all usages with `toast(...)` / `toast.hide()`.
+- `ToastService` from `app/core/ToastService` — replace all usages with `toast(...)` / `toast.dismiss()`.
 - Variant-specific toast option shapes and fields such as `accountAddress`, `networkImageSource`, `appIconSource`, and the old `labelOptions` / `descriptionOptions` wrappers.
 
 ## Version Updates

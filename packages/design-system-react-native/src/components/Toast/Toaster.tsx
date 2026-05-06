@@ -39,12 +39,14 @@ const screenHeight = Dimensions.get('window').height;
 
 let registeredRef: RefObject<ToasterRef> | null = null;
 
-const assertRegisteredRef = (method: 'hide' | 'show' | 'toast'): ToasterRef => {
+const assertRegisteredRef = (
+  method: 'dismiss' | 'toast',
+): ToasterRef => {
   if (!registeredRef?.current) {
     const invocation =
       method === 'toast'
         ? 'toast()'
-        : `toast.${method === 'hide' ? 'hide' : 'show'}()`;
+        : `toast.${method}()`;
     throw new Error(
       `${invocation} called before <Toaster /> mounted. Render <Toaster /> once at the root of your app.`,
     );
@@ -186,8 +188,6 @@ ToasterComponent.displayName = 'Toaster';
 
 type ToastFunction = ((options: ToastOptions) => void) & {
   dismiss: () => void;
-  hide: () => void;
-  show: (options: ToastOptions) => void;
 };
 
 export const Toaster = ToasterComponent;
@@ -196,14 +196,6 @@ export const toast = ((options: ToastOptions) => {
   assertRegisteredRef('toast').showToast(options);
 }) as ToastFunction;
 
-toast.show = (options) => {
-  assertRegisteredRef('show').showToast(options);
-};
-
-toast.hide = () => {
-  assertRegisteredRef('hide').closeToast();
-};
-
 toast.dismiss = () => {
-  assertRegisteredRef('hide').closeToast();
+  assertRegisteredRef('dismiss').closeToast();
 };

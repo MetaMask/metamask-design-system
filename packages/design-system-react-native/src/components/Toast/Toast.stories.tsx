@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 // External dependencies.
+import { Button } from '../Button';
 import { IconSize } from '../Icon';
 import { Spinner } from '../temp-components/Spinner';
 
@@ -10,6 +11,7 @@ import { Spinner } from '../temp-components/Spinner';
 import { Toast } from './Toast';
 import { ToastSeverity } from './Toast.types';
 import type { ToastProps } from './Toast.types';
+import { Toaster, toast } from './Toaster';
 
 const meta: Meta<ToastProps> = {
   title: 'Components/Toast',
@@ -52,24 +54,33 @@ const meta: Meta<ToastProps> = {
 export default meta;
 type Story = StoryObj<ToastProps>;
 
-const renderToastStory = (args: ToastProps) => {
-  const { actionButtonLabel, actionButtonOnPress, ...rest } = args;
-
-  if (actionButtonLabel && !actionButtonOnPress) {
-    return (
-      <Toast
-        {...rest}
-        actionButtonLabel={actionButtonLabel}
-        actionButtonOnPress={() => undefined}
-      />
-    );
-  }
-
-  return <Toast {...args} />;
-};
-
 export const Default: Story = {
-  render: renderToastStory,
+  render: (args: ToastProps) => {
+    const { actionButtonLabel, actionButtonOnPress, onClose, ...toastArgs } =
+      args;
+
+    return (
+      <>
+        <Button
+          onPress={() => {
+            toast({
+              ...toastArgs,
+              hasNoTimeout: false,
+              actionButtonLabel,
+              actionButtonOnPress:
+                actionButtonLabel && !actionButtonOnPress
+                  ? () => undefined
+                  : actionButtonOnPress,
+              onClose,
+            });
+          }}
+        >
+          Show Toast
+        </Button>
+        <Toaster />
+      </>
+    );
+  },
   args: {
     description: "Description shouldn't repeat title. 1-3 lines.",
     onClose: () => undefined,

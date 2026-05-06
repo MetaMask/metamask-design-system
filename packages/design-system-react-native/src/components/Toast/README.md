@@ -1,19 +1,33 @@
 # Toast
 
-`Toast` is a component that slides up from the bottom of the screen. It is typically used to show post-confirmation information such as account switches, network changes, or transaction confirmations.
+Toast is a component that slides up from the bottom of the screen. It is typically used to show post-confirmation information such as account switches, network changes, or transaction confirmations.
 
 ```tsx
-import {
-  Toast,
-  Toaster,
-  toast,
-  ToastSeverity,
-} from '@metamask/design-system-react-native';
+import { Button, Toaster, toast } from '@metamask/design-system-react-native';
+
+const Demo = () => {
+  return (
+    <>
+      <Button
+        onPress={() => {
+          toast({
+            title: 'Title is sentence case no period',
+            description: "Description shouldn't repeat title. 1-3 lines.",
+            hasNoTimeout: false,
+          });
+        }}
+      >
+        Show Toast
+      </Button>
+      <Toaster />
+    </>
+  );
+};
 ```
 
 ## Setup
 
-Using the runtime toast API is a two-step process:
+Using the toast API is a two-step process:
 
 ### 1. Render `<Toaster />` once at the root of the app
 
@@ -28,134 +42,94 @@ const App = () => (
 );
 ```
 
-`<Toaster />` must be rendered exactly once. On mount it registers the `toast(...)` / `toast.hide()` / `toast.dismiss()` API so it can be called from anywhere — React components, hooks, controllers, services, or plain utilities.
+`<Toaster />` must be rendered exactly once. On mount it registers the `toast(...)` / `toast.dismiss()` API so it can be called from anywhere in your app.
 
-### 2. Call `toast(...)` from anywhere
+### 2. Call `toast(...)`
 
-```tsx
-import { toast, ToastSeverity } from '@metamask/design-system-react-native';
+Call `toast(...)` from any component, hook, controller, service, or utility after `<Toaster />` has mounted.
 
-const Content = () => {
-  const handlePress = () => {
-    toast({
-      title: 'Toast message',
-      description: 'Description of toast',
-      severity: ToastSeverity.Success,
-      hasNoTimeout: false,
-      actionButtonLabel: 'Action',
-      actionButtonOnPress: () => {
-        console.log('Toast action pressed');
-      },
-    });
-  };
+Call `toast.dismiss()` to dismiss the currently visible toast.
 
-  return <Button onPress={handlePress}>Show Toast</Button>;
-};
-```
+`toast(...)` and `toast.dismiss()` throw a descriptive error if called before `<Toaster />` is mounted.
 
-Call `toast.hide()` or `toast.dismiss()` to dismiss the currently visible toast.
+## Usage
 
-`toast(...)`, `toast.show(...)`, `toast.hide()`, and `toast.dismiss()` throw a descriptive error if called before `<Toaster />` is mounted.
+### Title and Description
 
-## Direct Render
-
-Use `Toast` when you want to render a single toast surface directly in Storybook, docs, or bespoke layouts.
+Use `title` for the primary message and `description` for supporting content.
 
 ```tsx
-import { Toast, ToastSeverity } from '@metamask/design-system-react-native';
-
-<Toast
-  title="Toast message"
-  description="Description of toast"
-  severity={ToastSeverity.Success}
-  actionButtonLabel="Action"
-  actionButtonOnPress={() => {}}
-  onClose={() => {}}
-/>;
+toast({
+  title: 'Account switched',
+  description: 'You are now using Account 2.',
+  hasNoTimeout: false,
+});
 ```
 
-## Props
+### Severity
 
-### `Toaster` Props
+Use `severity` to show a semantic default start icon.
 
-#### `twClassName`
+Available severities:
 
-Optional Tailwind CSS classes applied to the rendered toast surface.
-
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
+- `ToastSeverity.Default` - No default leading icon
+- `ToastSeverity.Success` - Confirmation icon
+- `ToastSeverity.Warning` - Warning icon
+- `ToastSeverity.Danger` - Error icon
 
 ```tsx
-<Toaster twClassName="mx-2" />
+toast({
+  title: 'Network changed',
+  description: 'You are now connected to Linea.',
+  severity: ToastSeverity.Success,
+  hasNoTimeout: false,
+});
 ```
 
-#### `testID`
+### Action Button
 
-Test identifier for the root element, inherited from `ViewProps`.
-
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
+Use `actionButtonLabel` and `actionButtonOnPress` together when the toast needs a secondary action.
 
 ```tsx
-<Toaster testID="my-toaster" />
+toast({
+  title: 'Privacy policy update',
+  description: 'Review how Consensys handles your data.',
+  actionButtonLabel: 'Read more',
+  actionButtonOnPress: () => {
+    console.log('Action pressed');
+  },
+  hasNoTimeout: false,
+});
 ```
 
-### `Toast` Props
+### Custom Start Accessory
 
-`Toast` accepts the same content API as `BannerBase`, plus toast-specific severity props:
+Use `startAccessory` to replace the default severity icon with custom content such as an icon, avatar, or network badge.
 
-- `title`, `titleProps`
-- `description`, `descriptionProps`
-- `children`, `childrenWrapperProps`
-- `actionButtonLabel`, `actionButtonOnPress`, `actionButtonProps`
-- `startAccessory`
-- `onClose`, `closeButtonProps`
-- `severity` - Optional semantic state used to choose the default icon. Defaults to `ToastSeverity.Default`, which shows no icon.
-- `iconAlertProps` - Optional props merged onto the default `IconAlert`.
-- `twClassName` - Optional extra classes for the toast surface.
+```tsx
+import { Icon, IconName, IconSize } from '@metamask/design-system-react-native';
+
+toast({
+  title: 'Withdrawal pending',
+  description: 'Your withdrawal is processing.',
+  startAccessory: <Icon name={IconName.Clock} size={IconSize.Lg} />,
+  hasNoTimeout: false,
+});
+```
 
 ## Imperative API
 
 ### `toast(options: ToastOptions)`
 
-Slides a toast up with the provided options. Requires `<Toaster />` to be mounted. `startAccessory` overrides the default severity icon when you need custom content such as a network avatar or bespoke glyph.
+Shows a toast with the provided options.
 
 | PARAMETER | TYPE           | DESCRIPTION         |
 | --------- | -------------- | ------------------- |
 | options   | `ToastOptions` | Toast configuration |
 
-### `toast.show(options: ToastOptions)`
-
-Alias for `toast(options)`.
-
-### `toast.hide()`
-
-Dismisses the currently visible toast with a slide-down animation.
-
 ### `toast.dismiss()`
 
-Alias for `toast.hide()`.
-
-## `Toaster` Ref (advanced)
-
-The underlying ref is still forwarded for advanced cases. Prefer `toast(...)` in application code.
-
-```tsx
-const ref = useRef<ToasterRef>(null);
-<Toaster ref={ref} />;
-ref.current?.showToast(options);
-ref.current?.closeToast();
-```
-
-## Toast Severity
-
-- Omit `severity` or use `ToastSeverity.Default` to render no default leading icon.
-- `ToastSeverity.Default` - Default toast with no leading icon
-- `ToastSeverity.Success` - Success toast with the confirmation icon
-- `ToastSeverity.Warning` - Warning toast with the warning icon
-- `ToastSeverity.Danger` - Danger toast with the danger icon
+Dismisses the currently visible toast with a slide-down animation.
 
 ## Toast Options
 

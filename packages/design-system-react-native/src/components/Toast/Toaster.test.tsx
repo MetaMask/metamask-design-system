@@ -341,24 +341,6 @@ describe('specs for `toast` API', () => {
     expect(screen.getByText('Static show')).toBeDefined();
   });
 
-  it('method `toast.hide` dismisses the current toast', async () => {
-    render(<Toaster />);
-
-    await act(async () => {
-      toast({
-        hasNoTimeout: true,
-        title: 'Will be hidden',
-      });
-      jest.runAllTimers();
-    });
-    expect(screen.getByText('Will be hidden')).toBeDefined();
-
-    await act(async () => {
-      toast.hide();
-    });
-    expect(screen.queryByText('Will be hidden')).toBeNull();
-  });
-
   it('method `toast.dismiss` also dismisses the current toast', async () => {
     render(<Toaster />);
 
@@ -386,19 +368,10 @@ describe('specs for `toast` API', () => {
     ).toThrow(/toast\(\) called before <Toaster \/> mounted/u);
   });
 
-  it('method `toast.hide` throws a helpful error when <Toaster /> is not mounted', () => {
-    expect(() => toast.hide()).toThrow(
-      /toast.hide\(\) called before <Toaster \/> mounted/u,
+  it('method `toast.dismiss` throws a helpful error when <Toaster /> is not mounted', () => {
+    expect(() => toast.dismiss()).toThrow(
+      /toast.dismiss\(\) called before <Toaster \/> mounted/u,
     );
-  });
-
-  it('method `toast.show` throws a helpful error when <Toaster /> is not mounted', () => {
-    expect(() =>
-      toast.show({
-        hasNoTimeout: true,
-        title: 'No mount',
-      }),
-    ).toThrow(/toast.show\(\) called before <Toaster \/> mounted/u);
   });
 
   it('unregisters the global ref when <Toaster /> unmounts', () => {
@@ -413,11 +386,11 @@ describe('specs for `toast` API', () => {
     ).toThrow(/toast\(\) called before <Toaster \/> mounted/u);
   });
 
-  it('method `toast.show` replaces the existing toast on rapid successive calls', async () => {
+  it('calling `toast(...)` replaces the existing toast on rapid successive calls', async () => {
     render(<Toaster />);
 
     await act(async () => {
-      toast.show({
+      toast({
         hasNoTimeout: true,
         title: 'First static',
       });
@@ -426,7 +399,7 @@ describe('specs for `toast` API', () => {
     expect(screen.getByText('First static')).toBeDefined();
 
     await act(async () => {
-      toast.show({
+      toast({
         hasNoTimeout: true,
         title: 'Second static',
       });
