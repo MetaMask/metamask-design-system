@@ -27,6 +27,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.23.0 to 0.x.0](#from-version-0230-to-0x0)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.21.0 to 0.22.0](#from-version-0210-to-0220)
   - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
@@ -40,6 +41,60 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+<!-- TODO: Replace 0.x.0 with the actual next released version when this Toast follow-up ships. -->
+### From version 0.23.0 to 0.x.0
+
+#### Toast: tighten the runtime API and align the surface with the shipped design
+
+**What changed:**
+
+- **`toast.show(...)`** is removed. Use **`toast(...)`** as the only show method.
+- **`toast.hide()`** is removed. Use **`toast.dismiss()`** as the close method.
+- **`hasNoTimeout`** is now optional and defaults to **`false`**. Toasts auto-dismiss unless you explicitly pass **`hasNoTimeout: true`**.
+- **`ToastSeverity.Info`** is removed. Supported severities are **`ToastSeverity.Default`**, **`ToastSeverity.Success`**, **`ToastSeverity.Warning`**, and **`ToastSeverity.Danger`**.
+- **`iconProps`** is renamed to **`iconAlertProps`** to make it clear the prop is forwarded to the default **`IconAlert`**.
+- The close button is now always visible on the Toast surface. Use **`closeButtonProps`** to customize that button, and **`onClose`** only when you need an additional callback after dismissal.
+
+**Migration:**
+
+- Replace every **`toast.show(options)`** call with **`toast(options)`**.
+- Replace every **`toast.hide()`** call with **`toast.dismiss()`**.
+- Remove **`hasNoTimeout: false`** where you were only spelling out the default behavior. Keep **`hasNoTimeout: true`** only for persistent toasts.
+- Replace **`ToastSeverity.Info`** with one of the supported severities. Use **`ToastSeverity.Default`** when you need no built-in leading icon.
+- Rename **`iconProps`** to **`iconAlertProps`**.
+- If direct-rendered Toast call sites previously assumed the close button could be omitted, update those expectations. The close affordance is now part of the standard surface.
+
+**Before:**
+
+```tsx
+toast.show({
+  title: 'Saved',
+  description: 'Your changes are available everywhere.',
+  severity: ToastSeverity.Info,
+  hasNoTimeout: false,
+  iconProps: {
+    testID: 'toast-icon',
+  },
+});
+
+toast.hide();
+```
+
+**After:**
+
+```tsx
+toast({
+  title: 'Saved',
+  description: 'Your changes are available everywhere.',
+  severity: ToastSeverity.Default,
+  iconAlertProps: {
+    testID: 'toast-icon',
+  },
+});
+
+toast.dismiss();
+```
 
 ### From version 0.22.0 to 0.23.0
 
