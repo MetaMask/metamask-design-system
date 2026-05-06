@@ -1770,6 +1770,7 @@ The `HeaderBase` component is a flexible header with optional start/end accessor
 
 | Category | Legacy (`app/component-library/.../HeaderBase`) | `@metamask/design-system-react-native` |
 | -------- | ----------------------------------------------- | --------------------------------------- |
+| **Added** | — | `titleTestID` — optional `testID` for the inner title `Text` when `children` is a string |
 | **Removed** | `HEADERBASE_TEST_ID`, `HEADERBASE_TITLE_TEST_ID` exports from `HeaderBase.constants` | Removed — use explicit `testID` on the header and `titleTestID` for string titles |
 | **Removed** | Default `testID="header"` on the root `View` (`testID = HEADERBASE_TEST_ID`) | No default; pass `testID` only when needed |
 | **Removed** | Hard-coded `testID` on inner title `Text` (`HEADERBASE_TITLE_TEST_ID`) | Use optional `titleTestID` when `children` is a string |
