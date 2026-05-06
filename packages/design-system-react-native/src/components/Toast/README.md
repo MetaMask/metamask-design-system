@@ -1,6 +1,6 @@
 # Toast
 
-`Toast` is the presentational toast surface. `Toaster` is the mounted root renderer, and `toast(...)` is the imperative API used to display a toast from anywhere.
+`Toast` is a component that slides up from the bottom of the screen. It is typically used to show post-confirmation information such as account switches, network changes, or transaction confirmations.
 
 ```tsx
 import {
