@@ -1,4 +1,3 @@
-import { TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { forwardRef, useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
@@ -23,7 +22,7 @@ export const TextArea = forwardRef<View, TextAreaProps>(
       inputRef,
       isDisabled = false,
       isError = false,
-      textVariant = TextVariant.BodyMd,
+      textVariant,
       inputElement,
       style,
       twClassName,

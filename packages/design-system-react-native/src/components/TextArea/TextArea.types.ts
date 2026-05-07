@@ -37,6 +37,10 @@ type TextAreaInputProps = Omit<
  */
 export type TextAreaBaseProps = TextAreaPropsShared & {
   /**
+   * Called when the inner `TextInput` value changes (React Native naming).
+   */
+  onChangeText?: (text: string) => void;
+  /**
    * Called when the inner input receives focus (composed with TextArea border state).
    */
   onFocus?: InputProps['onFocus'];

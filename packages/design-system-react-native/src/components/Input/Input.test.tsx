@@ -43,36 +43,45 @@ describe('Input', () => {
     const input = getByTestId(TEST_ID);
 
     expect(input).toBeDisabled();
-    expect(input).toHaveStyle({ opacity: tw`opacity-50`.opacity });
+    const expectedOpacity = (tw.style('opacity-50') as TextStyle).opacity;
+    expect(input).toHaveStyle({ opacity: expectedOpacity });
   });
 
-  it('applies iOS placeholder lineHeight workaround when placeholder is visible and multiline is false', () => {
-    const { getByTestId } = render(
-      <Input
-        testID={TEST_ID}
-        value=""
-        placeholder="Disabled"
-        multiline={false}
-      />,
-    );
+  describe('iOS placeholder lineHeight workaround', () => {
+    const originalOS = Platform.OS;
 
-    const input = getByTestId(TEST_ID);
+    afterEach(() => {
+      Platform.OS = originalOS;
+    });
 
-    expect(input).toHaveStyle({ lineHeight: 0 });
-  });
+    it('applies iOS placeholder lineHeight workaround when placeholder is visible and multiline is false', () => {
+      Platform.OS = 'ios';
 
-  it('does not apply placeholder lineHeight workaround outside iOS', () => {
-    if (Platform.OS === 'ios') {
-      return;
-    }
+      const { getByTestId } = render(
+        <Input
+          testID={TEST_ID}
+          value=""
+          placeholder="Disabled"
+          multiline={false}
+        />,
+      );
 
-    const { getByTestId } = render(
-      <Input testID={TEST_ID} value="" placeholder="Disabled" />,
-    );
+      const input = getByTestId(TEST_ID);
 
-    const input = getByTestId(TEST_ID);
+      expect(input).toHaveStyle({ lineHeight: 0 });
+    });
 
-    expect(input).not.toHaveStyle({ lineHeight: 0 });
+    it('does not apply placeholder lineHeight workaround outside iOS', () => {
+      Platform.OS = 'android';
+
+      const { getByTestId } = render(
+        <Input testID={TEST_ID} value="" placeholder="Disabled" />,
+      );
+
+      const input = getByTestId(TEST_ID);
+
+      expect(input).not.toHaveStyle({ lineHeight: 0 });
+    });
   });
 
   it('when multiline is true, does not apply lineHeight zero for visible placeholder', () => {

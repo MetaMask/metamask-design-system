@@ -9,7 +9,7 @@ import type { InputProps } from '../Input/Input.types';
  * Additional props merged onto the inner `Input` (`../Input/Input.tsx`).
  *
  * TextField owns `value`, `onChangeText`, `placeholder`, `isReadOnly`, `onFocus`,
- * `onBlur`, `isDisabled`, `autoFocus`, `textVariant`, and inner layout (merged with
+ * `onBlur`, `isDisabled`, `autoFocus`, and inner layout (merged with
  * any `twClassName` you pass here). `placeholderTextColor` is omitted (Input sets
  * it from theme).
  */
@@ -35,6 +35,10 @@ type TextFieldInputProps = Omit<
  * `testID`.
  */
 export type TextFieldBaseProps = TextFieldPropsShared & {
+  /**
+   * Called when the inner `TextInput` value changes (React Native naming).
+   */
+  onChangeText?: (text: string) => void;
   /**
    * Called when the inner input receives focus (composed with TextField border state).
    */

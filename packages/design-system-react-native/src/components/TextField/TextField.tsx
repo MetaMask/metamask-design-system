@@ -1,4 +1,3 @@
-import { TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { forwardRef, useCallback, useState } from 'react';
 import { View } from 'react-native';
@@ -23,7 +22,6 @@ export const TextField = forwardRef<View, TextFieldProps>(
       inputRef,
       isDisabled = false,
       isError = false,
-      textVariant = TextVariant.BodyMd,
       inputElement,
       startAccessory,
       endAccessory,
@@ -97,7 +95,6 @@ export const TextField = forwardRef<View, TextFieldProps>(
             onChangeText={onChangeText}
             placeholder={placeholder}
             isReadOnly={isReadOnly}
-            textVariant={textVariant}
             isDisabled={isDisabled}
             autoFocus={autoFocus}
             onBlur={onBlurHandler}

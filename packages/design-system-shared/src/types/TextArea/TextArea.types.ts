@@ -12,11 +12,6 @@ export type TextAreaPropsShared = Omit<
   'isStateStylesDisabled'
 > & {
   /**
-   * Called when the text changes. Uses React Native `TextInput` naming; web
-   * implementations may map this from the native input change event.
-   */
-  onChangeText?: (text: string) => void;
-  /**
    * When true, the field shows an error state (for example border treatment).
    *
    * @default false
