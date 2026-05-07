@@ -1,6 +1,5 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render, fireEvent } from '@testing-library/react-native';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React, { createRef } from 'react';
 import { TextInput, View } from 'react-native';
 import { act, create } from 'react-test-renderer';
@@ -13,6 +12,13 @@ const ROOT_TEST_ID = 'textfield';
 
 describe('TextField', () => {
   let tw: ReturnType<typeof useTailwind>;
+  const createRenderer = (element: React.ReactElement) => {
+    let tree!: ReturnType<typeof create>;
+    act(() => {
+      tree = create(element);
+    });
+    return tree;
+  };
 
   beforeAll(() => {
     tw = renderHook(() => useTailwind()).result.current;
@@ -63,7 +69,7 @@ describe('TextField', () => {
     });
 
     it('merges inputProps.twClassName with TextField inner Input layout classes', () => {
-      const tree = create(
+      const tree = createRenderer(
         <TextField
           value=""
           placeholder="tw-class-merge"
@@ -394,7 +400,7 @@ describe('TextField', () => {
 
     it('no-ops TextField blur wiring when disabled if the handler is invoked directly', () => {
       const onBlur = jest.fn();
-      const tree = create(
+      const tree = createRenderer(
         <TextField
           value=""
           isDisabled
@@ -411,7 +417,7 @@ describe('TextField', () => {
 
     it('no-ops TextField focus wiring when disabled if the handler is invoked directly', () => {
       const onFocus = jest.fn();
-      const tree = create(
+      const tree = createRenderer(
         <TextField
           value=""
           isDisabled

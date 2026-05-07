@@ -1,7 +1,11 @@
 import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render, fireEvent } from '@testing-library/react-native';
+import {
+  fireEvent,
+  render,
+  renderHook,
+  waitFor,
+} from '@testing-library/react-native';
 import React from 'react';
 import { View, Text } from 'react-native';
 import * as ReactTestRenderer from 'react-test-renderer';
@@ -10,11 +14,14 @@ import { ButtonBase } from './ButtonBase';
 import { getButtonBaseBorderRadiusTwClass } from './ButtonBase.constants';
 
 describe('ButtonBase', () => {
-  let tw: ReturnType<typeof useTailwind>;
-
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
-  });
+  const getTw = () => renderHook(() => useTailwind()).result.current;
+  const createRenderer = (element: React.ReactElement) => {
+    let tree!: ReactTestRenderer.ReactTestRenderer;
+    ReactTestRenderer.act(() => {
+      tree = ReactTestRenderer.create(element);
+    });
+    return tree;
+  };
 
   const createFunctionStyle =
     () =>
@@ -60,6 +67,7 @@ describe('ButtonBase', () => {
 
   describe('size', () => {
     it('applies small height when size is sm', () => {
+      const tw = getTw();
       const { getByTestId } = render(
         <ButtonBase size={ButtonBaseSize.Sm} testID="btn">
           Small
@@ -70,6 +78,7 @@ describe('ButtonBase', () => {
     });
 
     it('applies medium height when size is md', () => {
+      const tw = getTw();
       const { getByTestId } = render(
         <ButtonBase size={ButtonBaseSize.Md} testID="btn">
           Medium
@@ -80,6 +89,7 @@ describe('ButtonBase', () => {
     });
 
     it('applies large height by default', () => {
+      const tw = getTw();
       const { getByTestId } = render(
         <ButtonBase testID="btn">Large default</ButtonBase>,
       );
@@ -90,6 +100,7 @@ describe('ButtonBase', () => {
 
   describe('border radius', () => {
     it('uses size-based radius classes from constants', () => {
+      const tw = getTw();
       const tree = ReactTestRenderer.create(
         <ButtonBase size={ButtonBaseSize.Lg}>Large</ButtonBase>,
       );
@@ -114,6 +125,7 @@ describe('ButtonBase', () => {
 
   describe('twClassName', () => {
     it('merges static classes onto the button', () => {
+      const tw = getTw();
       const { getByTestId } = render(
         <ButtonBase twClassName="bg-default" testID="btn">
           Custom
@@ -145,6 +157,7 @@ describe('ButtonBase', () => {
 
   describe('layout width', () => {
     it('expands to full width when isFullWidth is true', () => {
+      const tw = getTw();
       const { getByTestId } = render(
         <ButtonBase isFullWidth testID="btn">
           Full width
@@ -324,6 +337,7 @@ describe('ButtonBase', () => {
 
   describe('loading state', () => {
     it('centers the spinner overlay and disables the control', () => {
+      const tw = getTw();
       const spinnerExtra =
         'flex-row items-center gap-x-2 absolute inset-0 flex items-center justify-center opacity-100';
       const expectedSpinner = tw.style(
@@ -352,6 +366,7 @@ describe('ButtonBase', () => {
     });
 
     it('merges loadingWrapperProps (testID and twClassName) with default overlay layout', () => {
+      const tw = getTw();
       const { getByTestId } = render(
         <ButtonBase
           isLoading

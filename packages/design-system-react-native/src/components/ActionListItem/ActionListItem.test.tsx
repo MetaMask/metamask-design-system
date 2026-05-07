@@ -1,7 +1,6 @@
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
-import { Pressable } from 'react-native';
-import { create } from 'react-test-renderer';
+import { act, create } from 'react-test-renderer';
 
 import { Icon, IconName, IconSize } from '../Icon';
 import { FontWeight, Text, TextColor, TextVariant } from '../Text';
@@ -15,6 +14,13 @@ const SAMPLE_ACTIONLISTITEM_PROPS = {
 
 describe('ActionListItem', () => {
   const mockOnPress = jest.fn();
+  const createRenderer = (element: React.ReactElement) => {
+    let tree!: ReturnType<typeof create>;
+    act(() => {
+      tree = create(element);
+    });
+    return tree;
+  };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -271,10 +277,14 @@ describe('ActionListItem', () => {
     });
 
     it('applies pressed background when not disabled', () => {
-      const tree = create(
+      const tree = createRenderer(
         <ActionListItem label="Test Label" onPress={mockOnPress} />,
       );
-      const pressable = tree.root.findByType(Pressable);
+      const pressable = tree.root.find(
+        (node) =>
+          node.props.onPress === mockOnPress &&
+          typeof node.props.style === 'function',
+      );
       const styleFn = pressable.props.style as (p: {
         pressed: boolean;
       }) => unknown;

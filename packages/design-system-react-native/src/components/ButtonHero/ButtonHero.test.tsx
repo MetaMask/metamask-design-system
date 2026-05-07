@@ -1,6 +1,5 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render, fireEvent } from '@testing-library/react-native';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import * as ReactTestRenderer from 'react-test-renderer';
 
@@ -10,6 +9,13 @@ import { ButtonHero } from './ButtonHero';
 
 describe('ButtonHero', () => {
   let tw: ReturnType<typeof useTailwind>;
+  const createRenderer = (element: React.ReactElement) => {
+    let tree!: ReactTestRenderer.ReactTestRenderer;
+    ReactTestRenderer.act(() => {
+      tree = ReactTestRenderer.create(element);
+    });
+    return tree;
+  };
 
   beforeAll(() => {
     const { result } = renderHook(() => useTailwind());
@@ -128,7 +134,7 @@ describe('ButtonHero', () => {
   });
 
   it('toggles pressed background when interactive', () => {
-    const tree = ReactTestRenderer.create(<ButtonHero>Press me</ButtonHero>);
+    const tree = createRenderer(<ButtonHero>Press me</ButtonHero>);
 
     // Find the ButtonAnimated component which has the style function
     const buttonAnimated = tree.root.findByProps({
@@ -149,9 +155,7 @@ describe('ButtonHero', () => {
   });
 
   it('does not apply pressed background when disabled', () => {
-    const tree = ReactTestRenderer.create(
-      <ButtonHero isDisabled>Disabled</ButtonHero>,
-    );
+    const tree = createRenderer(<ButtonHero isDisabled>Disabled</ButtonHero>);
 
     const buttonAnimated = tree.root.findByProps({
       accessibilityRole: 'button',
@@ -172,7 +176,7 @@ describe('ButtonHero', () => {
   });
 
   it('does not apply pressed background when loading', () => {
-    const tree = ReactTestRenderer.create(
+    const tree = createRenderer(
       <ButtonHero isLoading loadingText="Loading...">
         Loading
       </ButtonHero>,

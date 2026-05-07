@@ -1,5 +1,6 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
+import type { TouchableOpacityProps } from 'react-native';
 import { TouchableOpacity, View } from 'react-native';
 
 import type { CardProps } from './Card.types';
@@ -22,10 +23,10 @@ export const Card = ({
   if (onPress) {
     return (
       <TouchableOpacity
+        {...(props as TouchableOpacityProps)}
         onPress={onPress}
         style={cardStyle}
         {...touchableOpacityProps}
-        {...props}
       >
         {children}
       </TouchableOpacity>

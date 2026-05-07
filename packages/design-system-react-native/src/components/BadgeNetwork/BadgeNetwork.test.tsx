@@ -9,15 +9,18 @@ const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 
 describe('BadgeNetwork', () => {
   it('forwards props and enforces BadgeNetwork-specific AvatarNetwork props', () => {
-    const tree = ReactTestRenderer.create(
-      <BadgeNetwork
-        src={remoteImageSrc}
-        testID="badge-network-root"
-        name="Ethereum"
-        fallbackText="E"
-        imageOrSvgProps={{ imageProps: { testID: 'image-or-svg' } }}
-      />,
-    );
+    let tree!: ReactTestRenderer.ReactTestRenderer;
+    ReactTestRenderer.act(() => {
+      tree = ReactTestRenderer.create(
+        <BadgeNetwork
+          src={remoteImageSrc}
+          testID="badge-network-root"
+          name="Ethereum"
+          fallbackText="E"
+          imageOrSvgProps={{ imageProps: { testID: 'image-or-svg' } }}
+        />,
+      );
+    });
 
     const avatarNetwork = tree.root.findByType(AvatarNetwork);
     expect(avatarNetwork.props.src).toStrictEqual(remoteImageSrc);

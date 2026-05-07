@@ -42,7 +42,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     const tw = useTailwind();
     const { bottom: screenBottomPadding } = useSafeAreaInsets();
     const { y: frameY } = useSafeAreaFrame();
-    const postCallback = useRef<BottomSheetPostCallback>();
+    const postCallback = useRef<BottomSheetPostCallback | undefined>(undefined);
     const bottomSheetDialogRef = useRef<BottomSheetDialogRef>(null);
     const didNavigateBackRef = useRef(false);
     const closeRequestedRef = useRef(false);
@@ -86,9 +86,12 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
         }
         return true;
       };
-      BackHandler.addEventListener('hardwareBackPress', hardwareBackPress);
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        hardwareBackPress,
+      );
       return () => {
-        BackHandler.removeEventListener('hardwareBackPress', hardwareBackPress);
+        subscription.remove();
       };
     }, [isInteractable]);
 

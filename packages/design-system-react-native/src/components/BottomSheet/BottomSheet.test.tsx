@@ -238,9 +238,6 @@ describe('BottomSheet', () => {
           backHandlerCallback = handler as () => boolean;
           return { remove: jest.fn() };
         });
-      jest
-        .spyOn(BackHandler, 'removeEventListener')
-        .mockImplementation(jest.fn());
     });
 
     afterEach(() => {

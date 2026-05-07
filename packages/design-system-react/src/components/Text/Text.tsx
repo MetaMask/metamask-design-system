@@ -36,7 +36,9 @@ export const Text: React.FC<TextProps> = ({
 }) => {
   // When asChild is true, use Radix Slot to merge props onto the child component.
   // Otherwise, render the semantic HTML element mapped to this variant (e.g. h1-h4, p).
-  const Component = asChild ? Slot : MAP_TEXT_VARIANT_TAG[variant];
+  const Component: React.ElementType = asChild
+    ? Slot
+    : MAP_TEXT_VARIANT_TAG[variant];
 
   const mergedClassName = `${twMerge(
     color,
