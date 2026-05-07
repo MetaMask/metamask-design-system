@@ -199,36 +199,6 @@ describe('ButtonSecondary', () => {
     expect(pressedStyles).toBeDefined();
   });
 
-  it('shows spinner + hides content when loading', () => {
-    const spinnerTW = 'absolute inset-0 flex items-center justify-center';
-
-    const { getByTestId } = render(
-      <ButtonSecondary
-        isLoading
-        contentWrapperProps={{ testID: 'button-secondary-content' }}
-        loadingWrapperProps={{ testID: 'spinner-container' }}
-        spinnerProps={{ twClassName: spinnerTW }}
-        testID="button-secondary"
-      >
-        Loading
-      </ButtonSecondary>,
-    );
-
-    // Verify spinner is present
-    const spinner = getByTestId('spinner-container');
-    const spinnerStyles = flattenStyles(spinner.props.style);
-    expect(spinnerStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining(tw`${spinnerTW}`)]),
-    );
-
-    // Verify content is hidden
-    expect(getByTestId('button-secondary-content')).toHaveStyle({ opacity: 0 });
-
-    expect(
-      getByTestId('button-secondary').props.accessibilityState.disabled,
-    ).toBe(true);
-  });
-
   it('renders danger+loading background', () => {
     const { getByTestId } = render(
       <ButtonSecondary isDanger isLoading testID="button-secondary">

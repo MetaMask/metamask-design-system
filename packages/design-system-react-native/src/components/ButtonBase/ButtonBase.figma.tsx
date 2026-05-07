@@ -1,7 +1,6 @@
 // import figma needs to remain as figma otherwise it breaks code connect
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
-import { ButtonBaseShape } from '@metamask/design-system-shared';
 import React from 'react';
 
 import { IconName } from '../Icon';
@@ -28,10 +27,6 @@ figma.connect(
         Lg: ButtonBaseSize.Lg,
         Md: ButtonBaseSize.Md,
         Sm: ButtonBaseSize.Sm,
-      }),
-      shape: figma.enum('shape', {
-        Pill: ButtonBaseShape.Pill,
-        Rounded: ButtonBaseShape.Rounded,
       }),
       children: figma.string('label'),
       startIconName: figma.boolean('startIcon (Figma Only)', {
