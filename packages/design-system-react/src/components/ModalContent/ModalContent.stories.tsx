@@ -41,10 +41,12 @@ type Story = StoryObj<ModalContentProps>;
 
 const ModalShellExample = ({
   size,
+  className,
   isClosedOnEscapeKey,
   isClosedOnOutsideClick,
 }: {
   size?: ModalContentSize;
+  className?: string;
   isClosedOnEscapeKey?: boolean;
   isClosedOnOutsideClick?: boolean;
 }) => {
@@ -61,7 +63,7 @@ const ModalShellExample = ({
         isClosedOnOutsideClick={isClosedOnOutsideClick}
       >
         <ModalOverlay />
-        <ModalContent size={size}>
+        <ModalContent size={size} className={className}>
           <Box flexDirection={BoxFlexDirection.Column} gap={4} padding={4}>
             <Text>Dialog content. Press Escape or click outside to close.</Text>
             <Button
@@ -78,7 +80,11 @@ const ModalShellExample = ({
 };
 
 export const Default: Story = {
-  render: () => <ModalShellExample />,
+  args: {
+    size: ModalContentSize.Sm,
+    className: '',
+  },
+  render: (args) => <ModalShellExample size={args.size} className={args.className} />,
 };
 
 export const Size: Story = {

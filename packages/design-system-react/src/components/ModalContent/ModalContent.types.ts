@@ -22,7 +22,7 @@ export type ModalContentSize =
  * carries an explicit `data-*` index signature so consumers can pass through
  * test ids and other dataset attributes through `Partial`/`Omit` indirection.
  */
-type DialogBoxProps = Omit<BoxProps, 'children'> & {
+type DialogBoxProps = Omit<BoxProps, 'children' | 'asChild'> & {
   [key: `data-${string}`]: string | undefined;
 };
 
