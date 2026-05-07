@@ -23,6 +23,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ModalFocus Component](#modalfocus-component)
   - [ModalFooter Component](#modalfooter-component)
   - [ModalOverlay Component](#modaloverlay-component)
+  - [SensitiveText Component](#sensitivetext-component)
   - [Skeleton Component](#skeleton-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
@@ -1932,6 +1933,63 @@ For typical call sites — for example `ui/components/multichain/network-list-me
 
 - `ModalOverlay` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - One-off styling that previously used Box utility props (e.g. `backgroundColor={BackgroundColor.overlayAlternative}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="bg-overlay-alternative"`).
+
+### SensitiveText Component
+
+The extension `sensitive-text` component maps directly to `SensitiveText` in the design system. The public API (`isHidden`, `length`, `children`, plus inherited `Text` props) is unchanged — only the import path moves.
+
+`SensitiveTextLength` is now sourced from `@metamask/design-system-shared` and re-exported from both `@metamask/design-system-react` and `@metamask/design-system-react-native`, so the same const object can be used across web and native consumers.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared style-utility migration patterns.
+
+#### Import Path
+
+| Extension Pattern                                               | Design System Migration                                                   |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `import { SensitiveText } from '../../component-library'`       | `import { SensitiveText } from '@metamask/design-system-react'`           |
+| `import { SensitiveTextLength } from '../../component-library'` | `import { SensitiveTextLength } from '@metamask/design-system-react'`     |
+| `import type { SensitiveTextProps } from '...'`                 | `import type { SensitiveTextProps } from '@metamask/design-system-react'` |
+
+#### Props
+
+| Extension Prop | Design System Prop | Change Type | Notes                                                                            |
+| -------------- | ------------------ | ----------- | -------------------------------------------------------------------------------- |
+| `isHidden`     | `isHidden`         | unchanged   | Defaults to `false`.                                                             |
+| `length`       | `length`           | unchanged   | Accepts `SensitiveTextLength` or a custom numeric string (e.g. `"15"`).          |
+| `children`     | `children`         | unchanged   | The text content to display or hide.                                             |
+| `ref`          | removed            | removed     | The new component is a function component and does not forward a ref to the DOM. |
+
+All other `Text` props (`variant`, `color`, `fontWeight`, `className`, `style`, etc.) continue to be forwarded to the underlying `Text`.
+
+#### Behavior
+
+- Invalid `length` values still fall back to `SensitiveTextLength.Short` and log a `console.warn`, matching the extension behavior.
+- The hidden representation continues to use the bullet character (`•`).
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { SensitiveText, SensitiveTextLength } from '../../component-library';
+
+<SensitiveText isHidden length={SensitiveTextLength.Medium}>
+  $1,234.56
+</SensitiveText>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  SensitiveText,
+  SensitiveTextLength,
+} from '@metamask/design-system-react';
+
+<SensitiveText isHidden length={SensitiveTextLength.Medium}>
+  $1,234.56
+</SensitiveText>;
+```
 
 ### Skeleton Component
 

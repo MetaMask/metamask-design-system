@@ -115,6 +115,9 @@ export type { ModalContentProps } from './ModalContent';
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
 
+export { SensitiveText, SensitiveTextLength } from './SensitiveText';
+export type { SensitiveTextProps } from './SensitiveText';
+
 export { Text } from './Text';
 export {
   TextVariant,

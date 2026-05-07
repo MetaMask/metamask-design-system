@@ -184,3 +184,10 @@ export {
   AvatarGroupVariant,
   type AvatarGroupPropsShared,
 } from './types/AvatarGroup';
+
+// SensitiveText types (ADR-0003 + ADR-0004)
+export {
+  SensitiveTextLength,
+  type CustomLength,
+  type SensitiveTextPropsShared,
+} from './types/SensitiveText';
