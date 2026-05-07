@@ -106,6 +106,9 @@ export type { ModalFooterButtonProps, ModalFooterProps } from './ModalFooter';
 export { Modal, useModalContext } from './Modal';
 export type { ModalContextType, ModalProps } from './Modal';
 
+export { Skeleton } from './Skeleton';
+export type { SkeletonProps } from './Skeleton';
+
 export { Text } from './Text';
 export {
   TextVariant,
