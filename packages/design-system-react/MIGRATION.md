@@ -16,6 +16,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [Modal Component](#modal-component)
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
   - [ModalFooter Component](#modalfooter-component)
@@ -1233,6 +1234,94 @@ import { Checkbox } from '@metamask/design-system-react';
 - `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
+
+### Modal Component
+
+The extension `modal` component maps to `Modal` in the design system. The behavioral contract — portal into `document.body` while `isOpen`, unmount on close, expose configuration to descendants via `useModalContext` — is preserved 1:1. The migration is a near-zero-effort import-path swap for typical consumers.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { Modal } from '../../component-library'`           | `import { Modal } from '@metamask/design-system-react'`           |
+| `import { useModalContext } from '../../component-library'` | `import { useModalContext } from '@metamask/design-system-react'` |
+| `import type { ModalProps } from '../../component-library'` | `import type { ModalProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                   | Design System API                               | Change Type | Notes                                                                                                                                                                                         |
+| ----------------------------------------------- | ----------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isOpen: boolean`                               | `isOpen: boolean`                               | unchanged   | gates portal mount/unmount                                                                                                                                                                    |
+| `onClose: () => void`                           | `onClose: () => void`                           | unchanged   | exposed to descendants via `useModalContext().onClose`                                                                                                                                        |
+| `children: ReactNode`                           | `children: ReactNode`                           | unchanged   | typically composed of `ModalOverlay` and `ModalContent`                                                                                                                                       |
+| `isClosedOnOutsideClick?: boolean`              | `isClosedOnOutsideClick?: boolean`              | unchanged   | default `true`; consumed by `ModalContent` via `useModalContext`                                                                                                                              |
+| `isClosedOnEscapeKey?: boolean`                 | `isClosedOnEscapeKey?: boolean`                 | unchanged   | default `true`; consumed by `ModalContent` via `useModalContext`                                                                                                                              |
+| `autoFocus?: boolean`                           | `autoFocus?: boolean`                           | unchanged   | default `true`; consumed by `ModalContent` → `ModalFocus`                                                                                                                                     |
+| `initialFocusRef?: RefObject<FocusableElement>` | `initialFocusRef?: RefObject<FocusableElement>` | unchanged   | exposed to descendants via context                                                                                                                                                            |
+| `finalFocusRef?: RefObject<FocusableElement>`   | `finalFocusRef?: RefObject<FocusableElement>`   | unchanged   | exposed to descendants via context                                                                                                                                                            |
+| `restoreFocus?: boolean`                        | `restoreFocus?: boolean`                        | unchanged   | default `false`; ignored when `finalFocusRef` is provided                                                                                                                                     |
+| `className?: string`                            | `className?: string`                            | unchanged   | merged with the component's defaults via `twMerge` (the extension used `classnames`).                                                                                                         |
+| `extends ModalFocusProps` (interface)           | flat `type ModalProps`                          | shape       | `ModalProps` is no longer an `interface` extending `ModalFocusProps` — it's a flat `type` that inlines the focus-related fields.                                                              |
+| `mm-modal` SCSS class hook                      | removed                                         | removed     | the legacy `mm-modal` class is gone. Use `className` and Tailwind utilities to customize the root portal element. No usage outside the legacy `component-library` itself relies on this hook. |
+
+##### `useModalContext` Error Message
+
+The runtime guard for "called outside a `<Modal>` subtree" is preserved, but the error message text is rewritten for clarity:
+
+| Extension                                                                                                     | Design System                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `useModalContext must be used within a ModalProvider, Seems you forgot to wrap the components in "<Modal />"` | `useModalContext must be used within a Modal — make sure the consuming component is rendered inside <Modal />.` |
+
+This only affects code that asserts on the exact error string (rare). The thrown type is still `Error`.
+
+##### Default and Behavior Changes
+
+| Concern                 | Extension Behavior                                                                                                 | Design System Behavior                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| Portal target           | `document.body` via `ReactDOM.createPortal`                                                                        | `document.body` via `createPortal` from `react-dom`. Unchanged.              |
+| Unmount on close        | Returns `null` when `isOpen` is `false`                                                                            | Returns `null` when `isOpen` is `false`. Unchanged.                          |
+| Default behavior config | `isClosedOnOutsideClick`, `isClosedOnEscapeKey`, `autoFocus` default to `true`; `restoreFocus` defaults to `false` | Same defaults, applied internally before populating `ModalContext`.          |
+| Context shape           | `Omit<ModalProps, 'children'>`                                                                                     | `Omit<ModalProps, 'children'>` — same shape, exported as `ModalContextType`. |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Modal, ModalOverlay, ModalContent } from '../../component-library';
+
+<Modal isOpen={isOpen} onClose={onClose} data-testid="example-modal">
+  <ModalOverlay />
+  <ModalContent>{/* … */}</ModalContent>
+</Modal>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+} from '@metamask/design-system-react';
+
+// API is identical — only the import path changes.
+<Modal isOpen={isOpen} onClose={onClose} data-testid="example-modal">
+  <ModalOverlay />
+  <ModalContent>{/* … */}</ModalContent>
+</Modal>;
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (`<Modal onClose={onClose} isOpen={isOpen}>` with default behavior config), `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`<Modal onClose={closeModal} data-testid="..." isOpen>` forwarding `data-testid` to the root), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (no-op `onClose={() => undefined}`) (verified via fresh grep) — the only change is the import path; the JSX, props, and `data-testid` forwarding stay identical.
+
+#### API Differences
+
+- `Modal` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-modal` class hook is gone — use `className` to apply Tailwind utilities.
+- `useModalContext` is now exported from the package barrel (`@metamask/design-system-react`). `ModalContextType` is also exported as a type for consumers building custom subtree integrations.
 
 ### ModalBody Component
 
