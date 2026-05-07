@@ -68,9 +68,11 @@ export type PopoverProps = Omit<ComponentProps<'div'>, 'role'> & {
    */
   hasArrow?: boolean;
   /**
-   * Props forwarded to the arrow element.
+   * Props forwarded to the arrow element. `ref`, `style`, and `children` are
+   * reserved for internal use (popper positioning, rotation styles, and the
+   * arrow visual) and cannot be overridden.
    */
-  arrowProps?: ComponentProps<'div'>;
+  arrowProps?: Omit<ComponentProps<'div'>, 'ref' | 'style' | 'children'>;
   /**
    * Match the popover width to the reference element's `clientWidth`.
    *

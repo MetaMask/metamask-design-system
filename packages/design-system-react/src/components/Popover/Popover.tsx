@@ -98,8 +98,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         }
       };
 
-      document.addEventListener('keydown', handleEscKey, { capture: true });
       if (isOpen) {
+        document.addEventListener('keydown', handleEscKey, { capture: true });
         document.addEventListener('click', handleClickOutside, {
           capture: true,
         });
