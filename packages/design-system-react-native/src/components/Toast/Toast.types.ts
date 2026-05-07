@@ -24,7 +24,11 @@ export type ToastIconProps = Omit<IconProps, 'name' | 'size' | 'color'>;
 /**
  * Shared toast props aligned with BannerBase, plus optional severity/icon props.
  */
-export type ToastSharedProps = BannerBaseProps & {
+export type ToastSharedProps = Omit<BannerBaseProps, 'closeButtonProps'> & {
+  closeButtonProps?: Omit<
+    NonNullable<BannerBaseProps['closeButtonProps']>,
+    'onPress'
+  >;
   severity?: ToastSeverity;
   iconAlertProps?: ToastIconProps;
 };

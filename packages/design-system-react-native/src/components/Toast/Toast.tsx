@@ -69,6 +69,15 @@ export const Toast: React.FC<ToastProps> = ({
           },
         }
       : {};
+  // TODO: Remove this conditional once BannerBase only renders a close button
+  // from onClose. At that point Toast can pass closeButtonProps directly.
+  const resolvedCloseButtonProps =
+    onClose || closeButtonProps
+      ? {
+          accessibilityLabel: 'Close toast',
+          ...closeButtonProps,
+        }
+      : undefined;
 
   return (
     <BannerBase
@@ -79,17 +88,10 @@ export const Toast: React.FC<ToastProps> = ({
       borderWidth={1}
       children={children}
       childrenWrapperProps={childrenWrapperProps}
-      closeButtonProps={{
-        accessibilityLabel: 'Close toast',
-        ...closeButtonProps,
-        onPress: (event) => {
-          onClose?.();
-          closeButtonProps?.onPress?.(event);
-        },
-      }}
+      closeButtonProps={resolvedCloseButtonProps}
       description={description}
       descriptionProps={descriptionProps}
-      onClose={undefined}
+      onClose={onClose}
       startAccessory={renderSeverityAccessory({
         iconAlertProps,
         severity,

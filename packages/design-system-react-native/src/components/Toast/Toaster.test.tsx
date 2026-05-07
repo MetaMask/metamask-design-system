@@ -271,25 +271,23 @@ describe('Toaster', () => {
 
   it('calls onClose and hides the toast when the close button is pressed', async () => {
     const onClose = jest.fn();
-    const onCloseButtonPress = jest.fn();
     render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       closeButtonProps: {
         accessibilityLabel: 'Dismiss toast',
-        onPress: onCloseButtonPress,
+        testID: 'dismiss-toast-button',
       },
       hasNoTimeout: true,
       onClose,
       title: 'Close button test',
     });
 
-    const closeBtn = screen.getByTestId('button-icon');
+    const closeBtn = screen.getByTestId('dismiss-toast-button');
     await act(async () => {
       fireEvent.press(closeBtn);
     });
 
     expect(onClose).toHaveBeenCalled();
-    expect(onCloseButtonPress).toHaveBeenCalled();
     expect(screen.queryByText('Close button test')).toBeNull();
   });
 

@@ -118,30 +118,31 @@ describe('Toast', () => {
     expect(onActionPress).toHaveBeenCalled();
   });
 
-  it('always renders a close button', () => {
+  it('does not render a close button when onClose is not provided', () => {
     render(<Toast title="Dismiss me" />);
 
-    expect(screen.getByTestId('button-icon')).toBeDefined();
+    expect(screen.queryByTestId('button-icon')).toBeNull();
   });
 
-  it('calls onClose and closeButtonProps.onPress when the close button is pressed', () => {
+  it('calls onClose and applies close button props when the close button is pressed', () => {
     const onClose = jest.fn();
-    const onCloseButtonPress = jest.fn();
 
     render(
       <Toast
         closeButtonProps={{
           accessibilityLabel: 'Dismiss toast',
-          onPress: onCloseButtonPress,
+          testID: 'dismiss-toast-button',
         }}
         onClose={onClose}
         title="Dismiss me"
       />,
     );
 
-    fireEvent.press(screen.getByTestId('button-icon'));
+    expect(
+      screen.getByTestId('dismiss-toast-button').props.accessibilityLabel,
+    ).toBe('Dismiss toast');
+    fireEvent.press(screen.getByTestId('dismiss-toast-button'));
     expect(onClose).toHaveBeenCalled();
-    expect(onCloseButtonPress).toHaveBeenCalled();
   });
 
   it('applies twClassName to the toast surface', () => {
