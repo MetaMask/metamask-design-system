@@ -15,10 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Redesigned the toast runtime API around a single mounted `<Toaster />` plus `toast(...)`, `toast.show(...)`, and `toast.hide()` for application usage ([#1104](https://github.com/MetaMask/metamask-design-system/pull/1104))
+- **BREAKING:** Redesigned `Toast` to use a single mounted `<Toast />` plus static `Toast.show(...)` and `Toast.hide()` methods for application usage ([#1104](https://github.com/MetaMask/metamask-design-system/pull/1104))
   - Removed `ToastContext`, `ToastContextWrapper`, and `ToastContextParams` from the public export surface
-  - Replaced legacy `ToastVariants` usage with `ToastSeverity`, moved close-button customization to `closeButtonProps`, and renamed `customBottomOffset` to `bottomOffset`
-  - `toast(...)`, `toast.show()`, and `toast.hide()` now throw a descriptive error if called before `<Toaster />` mounts
+  - Renamed `ToastVariants` to `ToastVariant`, changed icon-only close buttons to `ToastCloseButtonVariant.Icon`, and renamed `customBottomOffset` to `bottomOffset`
+  - `Toast.show()` and `Toast.hide()` now throw a descriptive error if called before `<Toast />` mounts
   - See [Migration Guide](./MIGRATION.md#from-version-0220-to-0230)
 - Updated `Input` to use the shared cross-platform API. Consumers should pass a controlled `value`, replace `isReadonly` with `isReadOnly`, and use the shared state-style behavior expected by wrappers like `TextField` ([#1043](https://github.com/MetaMask/metamask-design-system/pull/1043))
 - Updated `AvatarGroup` to use shared cross-platform size and variant contracts, keeping React and React Native aligned on the same public API names and values ([#1067](https://github.com/MetaMask/metamask-design-system/pull/1067))
