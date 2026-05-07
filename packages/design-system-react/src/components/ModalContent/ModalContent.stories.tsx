@@ -84,7 +84,9 @@ export const Default: Story = {
     size: ModalContentSize.Sm,
     className: '',
   },
-  render: (args) => <ModalShellExample size={args.size} className={args.className} />,
+  render: (args) => (
+    <ModalShellExample size={args.size} className={args.className} />
+  ),
 };
 
 export const Size: Story = {
