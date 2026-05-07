@@ -123,6 +123,7 @@ import GiftSVG from './assets/gift.svg';
 import GlobalSearchSVG from './assets/global-search.svg';
 import GlobalSVG from './assets/global.svg';
 import GraphSVG from './assets/graph.svg';
+import GroupSVG from './assets/group.svg';
 import HardwareSVG from './assets/hardware.svg';
 import HashTagSVG from './assets/hash-tag.svg';
 import HeartFilledSVG from './assets/heart-filled.svg';
@@ -141,6 +142,7 @@ import LastPageSVG from './assets/last-page.svg';
 import LightFilledSVG from './assets/light-filled.svg';
 import LightSVG from './assets/light.svg';
 import LinkSVG from './assets/link.svg';
+import ListArrowSVG from './assets/list-arrow.svg';
 import LoadingSVG from './assets/loading.svg';
 import LocationSVG from './assets/location.svg';
 import LockSlashSVG from './assets/lock-slash.svg';
@@ -166,6 +168,8 @@ import MonitorSVG from './assets/monitor.svg';
 import MoreHorizontalSVG from './assets/more-horizontal.svg';
 import MoreVerticalSVG from './assets/more-vertical.svg';
 import MountainFlagSVG from './assets/mountain-flag.svg';
+import MusdFilledSVG from './assets/musd-filled.svg';
+import MusdSVG from './assets/musd.svg';
 import MusicNoteSVG from './assets/music-note.svg';
 import NoPhotographySVG from './assets/no-photography.svg';
 import NotificationSVG from './assets/notification.svg';
@@ -175,12 +179,14 @@ import PasswordCheckSVG from './assets/password-check.svg';
 import PendingSVG from './assets/pending.svg';
 import PeopleSVG from './assets/people.svg';
 import PersonCancelSVG from './assets/person-cancel.svg';
+import PieChartSVG from './assets/pie-chart.svg';
 import PinSVG from './assets/pin.svg';
 import PlantSVG from './assets/plant.svg';
 import PlugSVG from './assets/plug.svg';
 import PlusAndMinusSVG from './assets/plus-and-minus.svg';
 import PolicyAlertSVG from './assets/policy-alert.svg';
 import PopUpSVG from './assets/pop-up.svg';
+import PredictionsSVG from './assets/predictions.svg';
 import PrintSVG from './assets/print.svg';
 import PriorityHighSVG from './assets/priority-high.svg';
 import PrivacyTipSVG from './assets/privacy-tip.svg';
@@ -412,6 +418,7 @@ export const assetByIconName: AssetByIconName = {
   GlobalSearch: GlobalSearchSVG,
   Global: GlobalSVG,
   Graph: GraphSVG,
+  Group: GroupSVG,
   Hardware: HardwareSVG,
   HashTag: HashTagSVG,
   HeartFilled: HeartFilledSVG,
@@ -430,6 +437,7 @@ export const assetByIconName: AssetByIconName = {
   LightFilled: LightFilledSVG,
   Light: LightSVG,
   Link: LinkSVG,
+  ListArrow: ListArrowSVG,
   Loading: LoadingSVG,
   Location: LocationSVG,
   LockSlash: LockSlashSVG,
@@ -455,6 +463,8 @@ export const assetByIconName: AssetByIconName = {
   MoreHorizontal: MoreHorizontalSVG,
   MoreVertical: MoreVerticalSVG,
   MountainFlag: MountainFlagSVG,
+  MusdFilled: MusdFilledSVG,
+  Musd: MusdSVG,
   MusicNote: MusicNoteSVG,
   NoPhotography: NoPhotographySVG,
   Notification: NotificationSVG,
@@ -464,12 +474,14 @@ export const assetByIconName: AssetByIconName = {
   Pending: PendingSVG,
   People: PeopleSVG,
   PersonCancel: PersonCancelSVG,
+  PieChart: PieChartSVG,
   Pin: PinSVG,
   Plant: PlantSVG,
   Plug: PlugSVG,
   PlusAndMinus: PlusAndMinusSVG,
   PolicyAlert: PolicyAlertSVG,
   PopUp: PopUpSVG,
+  Predictions: PredictionsSVG,
   Print: PrintSVG,
   PriorityHigh: PriorityHighSVG,
   PrivacyTip: PrivacyTipSVG,

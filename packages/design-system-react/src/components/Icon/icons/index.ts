@@ -123,6 +123,7 @@ import Gift from './Gift';
 import GlobalSearch from './GlobalSearch';
 import Global from './Global';
 import Graph from './Graph';
+import Group from './Group';
 import Hardware from './Hardware';
 import HashTag from './HashTag';
 import HeartFilled from './HeartFilled';
@@ -141,6 +142,7 @@ import LastPage from './LastPage';
 import LightFilled from './LightFilled';
 import Light from './Light';
 import Link from './Link';
+import ListArrow from './ListArrow';
 import Loading from './Loading';
 import Location from './Location';
 import LockSlash from './LockSlash';
@@ -166,6 +168,8 @@ import Monitor from './Monitor';
 import MoreHorizontal from './MoreHorizontal';
 import MoreVertical from './MoreVertical';
 import MountainFlag from './MountainFlag';
+import MusdFilled from './MusdFilled';
+import Musd from './Musd';
 import MusicNote from './MusicNote';
 import NoPhotography from './NoPhotography';
 import Notification from './Notification';
@@ -175,12 +179,14 @@ import PasswordCheck from './PasswordCheck';
 import Pending from './Pending';
 import People from './People';
 import PersonCancel from './PersonCancel';
+import PieChart from './PieChart';
 import Pin from './Pin';
 import Plant from './Plant';
 import Plug from './Plug';
 import PlusAndMinus from './PlusAndMinus';
 import PolicyAlert from './PolicyAlert';
 import PopUp from './PopUp';
+import Predictions from './Predictions';
 import Print from './Print';
 import PriorityHigh from './PriorityHigh';
 import PrivacyTip from './PrivacyTip';
@@ -408,6 +414,7 @@ export const Icons = {
   GlobalSearch,
   Global,
   Graph,
+  Group,
   Hardware,
   HashTag,
   HeartFilled,
@@ -426,6 +433,7 @@ export const Icons = {
   LightFilled,
   Light,
   Link,
+  ListArrow,
   Loading,
   Location,
   LockSlash,
@@ -451,6 +459,8 @@ export const Icons = {
   MoreHorizontal,
   MoreVertical,
   MountainFlag,
+  MusdFilled,
+  Musd,
   MusicNote,
   NoPhotography,
   Notification,
@@ -460,12 +470,14 @@ export const Icons = {
   Pending,
   People,
   PersonCancel,
+  PieChart,
   Pin,
   Plant,
   Plug,
   PlusAndMinus,
   PolicyAlert,
   PopUp,
+  Predictions,
   Print,
   PriorityHigh,
   PrivacyTip,
