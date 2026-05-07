@@ -36,7 +36,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
       >
         <div
           aria-hidden="true"
-          className="motion-safe:animate-skeleton-pulse pointer-events-none absolute inset-0 rounded bg-icon-alternative"
+          className="pointer-events-none absolute inset-0 rounded bg-icon-alternative motion-safe:animate-skeleton-pulse"
         />
         {hasChildren && (
           <div
