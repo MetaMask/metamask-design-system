@@ -5,9 +5,9 @@ import React, { useMemo } from 'react';
 import type { ButtonIconProps } from '../ButtonIcon';
 import { HeaderBase } from '../HeaderBase';
 import { IconName } from '../Icon';
+import { HeaderStandardCenterColumn } from '../temp-components/HeaderStandardCenterColumn';
 
 // Internal dependencies.
-import { HeaderStandardCenterColumn } from '../temp-components/HeaderStandardCenterColumn';
 import type { HeaderStandardProps } from './HeaderStandard.types';
 
 export const HeaderStandard: React.FC<HeaderStandardProps> = ({

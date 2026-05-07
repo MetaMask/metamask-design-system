@@ -1,4 +1,5 @@
 // Third party dependencies.
+import { AnimationDuration } from '@metamask/design-tokens';
 import React from 'react';
 import Animated, {
   useAnimatedStyle,
@@ -7,7 +8,6 @@ import Animated, {
 } from 'react-native-reanimated';
 
 // External dependencies.
-import { AnimationDuration } from '@metamask/design-tokens';
 import { HeaderStandard } from '../HeaderStandard';
 import { HeaderStandardCenterColumn } from '../temp-components/HeaderStandardCenterColumn';
 

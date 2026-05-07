@@ -4,9 +4,9 @@ import React from 'react';
 // External dependencies.
 import { BoxAlignItems } from '../../Box';
 import { BoxColumn } from '../../BoxColumn';
-import { TextOrChildren } from '../TextOrChildren';
 import type { TextProps } from '../../Text';
 import { FontWeight, TextColor, TextVariant } from '../../Text';
+import { TextOrChildren } from '../TextOrChildren';
 
 // Internal dependencies.
 import type { HeaderStandardCenterColumnProps } from './HeaderStandardCenterColumn.types';

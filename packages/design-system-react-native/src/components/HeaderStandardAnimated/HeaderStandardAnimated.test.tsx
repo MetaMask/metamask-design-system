@@ -120,7 +120,7 @@ describe('HeaderStandardAnimated', () => {
       )();
 
       expect(style.opacity).toBe(1);
-      expect(style.transform).toEqual([{ translateY: 0 }]);
+      expect(style.transform).toStrictEqual([{ translateY: 0 }]);
     });
 
     it('hides center styles when scroll is within title section', () => {
@@ -143,7 +143,7 @@ describe('HeaderStandardAnimated', () => {
       )();
 
       expect(style.opacity).toBe(0);
-      expect(style.transform).toEqual([{ translateY: 8 }]);
+      expect(style.transform).toStrictEqual([{ translateY: 8 }]);
     });
   });
 
