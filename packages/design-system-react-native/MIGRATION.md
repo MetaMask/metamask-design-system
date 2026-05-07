@@ -17,6 +17,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
+  - [HeaderBase Component](#headerbase-component)
   - [Text Component](#text-component)
   - [Label Component](#label-component)
   - [Icon Component](#icon-component)
@@ -26,7 +27,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.X.0 to 0.X.0](#from-version-0x0-to-0x0)
+  - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.21.0 to 0.22.0](#from-version-0210-to-0220)
   - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
@@ -40,9 +41,33 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.X.0 to 0.X.0
+### From version 0.22.0 to 0.23.0
 
-TODO(release): replace `0.X.0` with the actual version numbers when this PR lands in a release.
+#### Toast: static API replaces context-based usage
+
+**What changed:**
+
+- **`Toast`** now exposes static **`Toast.show(...)`** and **`Toast.hide()`** methods for application usage, instead of relying on **`ToastContext`**, **`ToastContextWrapper`**, or an app-level service singleton.
+- **`ToastContext`**, **`ToastContextWrapper`**, and **`ToastContextParams`** are no longer part of the public **`@metamask/design-system-react-native`** exports.
+- **`ToastVariants`** is renamed to **`ToastVariant`**.
+- Icon-only close buttons now use **`ToastCloseButtonVariant.Icon`** instead of **`ButtonVariants.Link`**.
+- **`customBottomOffset`** is renamed to **`bottomOffset`**.
+- Calling **`Toast.show()`** or **`Toast.hide()`** before **`<Toast />`** mounts now throws a descriptive runtime error instead of silently doing nothing.
+
+**Migration:**
+
+- Mount **`<Toast />`** exactly once near the root of the app.
+- Replace any **`useContext(ToastContext)`**, **`ToastContextWrapper`**, or app-level **`ToastService`** usage with **`Toast.show(...)`** and **`Toast.hide()`**.
+- Rename **`ToastVariants`** to **`ToastVariant`** in all call sites.
+- Replace icon-only close button usage from **`ButtonVariants.Link`** to **`ToastCloseButtonVariant.Icon`**.
+- Rename **`customBottomOffset`** to **`bottomOffset`**.
+
+See [Toast Component](#toast-component) for complete before/after examples and API mappings.
+
+**Impact:**
+
+- Existing **`@metamask/design-system-react-native`** consumers using the old context-based Toast flow must update imports, root mounting, and toast invocation patterns.
+- Existing call sites that already use the forwarded **`ToastRef`** methods for isolated cases can keep doing so, but app-level usage should move to the static API.
 
 #### Input: shared controlled contract and readonly naming alignment
 
@@ -1734,6 +1759,191 @@ If the `buttonPropsArray` contains **more than two** button entries, or if butto
 #### API Differences
 
 The DS `BottomSheetFooter` adds `twClassName` for Tailwind utility class overrides. The `style` prop (from `ViewProps`) is still supported and behaves the same.
+
+---
+
+### HeaderBase Component
+
+The `HeaderBase` component is a flexible header with optional start/end accessories and a configurable title variant. Migration is nearly a drop-in swap — most consumers change the import, remove two constant imports, and switch any affected test IDs to explicit props.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                    | Design System Migration                                                       |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `import HeaderBase from '.../component-library/components/HeaderBase'`            | `import { HeaderBase } from '@metamask/design-system-react-native'`           |
+| `import { HeaderBaseVariant } from '.../component-library/components/HeaderBase'` | `import { HeaderBaseVariant } from '@metamask/design-system-react-native'`    |
+| `import type { HeaderBaseProps } from '.../HeaderBase/HeaderBase.types'`          | `import type { HeaderBaseProps } from '@metamask/design-system-react-native'` |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**.
+
+##### Removed Exports: `HEADERBASE_TEST_ID` / `HEADERBASE_TITLE_TEST_ID`
+
+The legacy component exported two test-ID constants from `HeaderBase.constants`:
+
+- `HEADERBASE_TEST_ID = 'header'` — applied as a default `testID` on the container
+- `HEADERBASE_TITLE_TEST_ID = 'header-title'` — applied to the inner title `Text` when `children` is a string
+
+The design system removes both constants. Test IDs are now explicit per call site.
+
+| Mobile Pattern                                                        | Design System Migration                                 |
+| --------------------------------------------------------------------- | ------------------------------------------------------- |
+| `import { HEADERBASE_TEST_ID } from '.../HeaderBase.constants'`       | Remove — pass `testID="..."` explicitly on `HeaderBase` |
+| `import { HEADERBASE_TITLE_TEST_ID } from '.../HeaderBase.constants'` | Remove — use the new `titleTestID` prop on `HeaderBase` |
+| Querying by the default `'header'` container id                       | Pass an explicit `testID` and query by that value       |
+| Querying by `'header-title'` in tests                                 | Pass `titleTestID="..."` and query by that value        |
+
+##### Default Container `testID` Removed
+
+The legacy component set `testID = HEADERBASE_TEST_ID` (`'header'`) by default on the container `View`. The design system no longer applies any default — `testID` comes directly from `ViewProps` and is only present when you pass it.
+
+| Mobile Pattern (implicit)                                          | Design System Migration                                |
+| ------------------------------------------------------------------ | ------------------------------------------------------ |
+| `<HeaderBase>Title</HeaderBase>` — rendered with `testID="header"` | Pass `testID="..."` explicitly if any tests rely on it |
+
+##### New `titleTestID` Prop
+
+The inner title `Text` (rendered when `children` is a string) no longer carries the hard-coded `HEADERBASE_TITLE_TEST_ID`. Pass the new `titleTestID` prop to target the title element in tests.
+
+```tsx
+// Before — queried by the constant
+getByTestId(HEADERBASE_TITLE_TEST_ID);
+
+// After — caller provides the id
+<HeaderBase titleTestID="update-needed-title">{title}</HeaderBase>;
+getByTestId('update-needed-title');
+```
+
+##### `Display` Variant: Fixed Height (`h-14`)
+
+The legacy `HeaderBase` applied `min-h-14` only to the `Compact` variant; `Display` had no vertical height constraint and grew with its content. The design system applies `h-14` (56px fixed) to **both** variants.
+
+Review `Display` headers after migration — they now render with a fixed 56px height. If your layout expects content-sized heights for `Display`, override via `twClassName` or `style` on the call site.
+
+##### Unchanged Props
+
+All other props carry over with the same names, defaults, and semantics:
+
+- `children` — title (string auto-renders as `Text`; `ReactNode` renders as-is)
+- `variant` — `HeaderBaseVariant.Compact` (default) / `HeaderBaseVariant.Display`
+- `startAccessory` / `endAccessory` — custom `ReactNode` slots (take priority over the `*ButtonIconProps` variants)
+- `startButtonIconProps: ButtonIconProps` — render a `ButtonIcon` at the start (default size `ButtonIconSize.Md`)
+- `endButtonIconProps: ButtonIconProps[]` — render multiple `ButtonIcon`s at the end, in reverse order — first item rightmost (default size `ButtonIconSize.Md` each)
+- `includesTopInset` — adds the `react-native-safe-area-context` top inset as a top margin (default `false`)
+- `startAccessoryWrapperProps` / `endAccessoryWrapperProps` — `ViewProps` forwarded to the accessory wrappers
+- `twClassName` — Tailwind classes merged with the container defaults
+- `style` — RN style applied to the container
+- All `ViewProps` (including `testID`, `accessibilityLabel`)
+
+#### Migration Examples
+
+##### Simple title
+
+Before (Mobile):
+
+```tsx
+import HeaderBase from '../../../component-library/components/HeaderBase';
+
+<HeaderBase>Update needed</HeaderBase>;
+```
+
+After (Design System):
+
+```tsx
+import { HeaderBase } from '@metamask/design-system-react-native';
+
+<HeaderBase>Update needed</HeaderBase>;
+```
+
+##### Header with close button and test IDs
+
+Before (Mobile):
+
+```tsx
+import HeaderBase from '../../../../../../component-library/components/HeaderBase';
+import {
+  HEADERBASE_TEST_ID,
+  HEADERBASE_TITLE_TEST_ID,
+} from '../../../../../../component-library/components/HeaderBase/HeaderBase.constants';
+import { IconName, IconColor } from '@metamask/design-system-react-native';
+
+<HeaderBase
+  endButtonIconProps={[
+    {
+      iconName: IconName.Close,
+      iconProps: { color: IconColor.IconDefault },
+      onPress: handleClose,
+    },
+  ]}
+>
+  Account details
+</HeaderBase>;
+
+// Test
+getByTestId(HEADERBASE_TEST_ID);
+getByTestId(HEADERBASE_TITLE_TEST_ID);
+```
+
+After (Design System):
+
+```tsx
+import {
+  HeaderBase,
+  IconName,
+  IconColor,
+} from '@metamask/design-system-react-native';
+
+<HeaderBase
+  testID="account-details-header"
+  titleTestID="account-details-title"
+  endButtonIconProps={[
+    {
+      iconName: IconName.Close,
+      iconProps: { color: IconColor.IconDefault },
+      onPress: handleClose,
+    },
+  ]}
+>
+  Account details
+</HeaderBase>;
+
+// Test
+getByTestId('account-details-header');
+getByTestId('account-details-title');
+```
+
+##### `Display` variant with left-aligned title
+
+Before (Mobile):
+
+```tsx
+import HeaderBase, {
+  HeaderBaseVariant,
+} from '../../../component-library/components/HeaderBase';
+
+<HeaderBase variant={HeaderBaseVariant.Display}>Wallet</HeaderBase>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  HeaderBase,
+  HeaderBaseVariant,
+} from '@metamask/design-system-react-native';
+
+<HeaderBase variant={HeaderBaseVariant.Display}>Wallet</HeaderBase>;
+```
+
+Note: the `Display` variant now has a fixed `h-14` container. If you need the legacy content-sized height, override via `twClassName="h-auto"` or an equivalent `style`.
+
+#### API Differences
+
+- The default container `testID="header"` is gone — pass `testID` explicitly if any tests rely on it
+- The `HEADERBASE_TITLE_TEST_ID` constant is gone — use the new `titleTestID` prop to tag the title `Text`
+- `Display` variant now applies a fixed `h-14` (56px) container height; legacy `Display` was content-sized
+- Variant alignment (`Compact` center, `Display` left) and all accessory, inset, and styling props are otherwise unchanged — most call sites migrate with just an import swap plus a test-ID refactor
 
 ---
 

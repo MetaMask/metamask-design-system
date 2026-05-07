@@ -16,8 +16,11 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [HeaderBase Component](#headerbase-component)
+  - [Modal Component](#modal-component)
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
+  - [ModalFooter Component](#modalfooter-component)
   - [ModalOverlay Component](#modaloverlay-component)
   - [Skeleton Component](#skeleton-component)
 - [Version Updates](#version-updates)
@@ -1234,6 +1237,187 @@ import { Checkbox } from '@metamask/design-system-react';
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
 
+### HeaderBase Component
+
+The extension `header-base` component maps to `HeaderBase` in the design system. The visual contract — a centered title flanked by start/end accessories — is preserved, but the implementation switches from JS-based width measurement (with a window resize listener) to **CSS Grid** layout. The polymorphic Box surface and the `mm-header-base` class hook are removed.
+
+`HeaderBase` is the layout primitive that `ModalHeader`, `PopoverHeader`, and any custom page-level header sit on. Migrate this first if you're moving any of those.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                | Design System Migration                                                |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `import { HeaderBase } from '../../component-library'`           | `import { HeaderBase } from '@metamask/design-system-react'`           |
+| `import type { HeaderBaseProps } from '../../component-library'` | `import type { HeaderBaseProps } from '@metamask/design-system-react'` |
+
+##### Layout Implementation
+
+| Concern              | Extension Behavior                                                                                                                                                                     | Design System Behavior                                                                                                                                                                                                               |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Title centering      | `display: flex; justify-content: space-between` plus a JS `useEffect` that measures both accessories and forces matching `minWidth` on each side; window `resize` listener re-measures | `display: grid; grid-template-columns: 1fr auto 1fr; align-items: center` (Tailwind: `grid grid-cols-[1fr_auto_1fr] items-center`). Title is pinned to column 2; the `1fr` side tracks always balance it. No JS, no resize listener. |
+| Slot wrapper styling | Manual `marginLeft` / `marginRight` / `width: calc(...)` set per-render based on measurements                                                                                          | Static Tailwind utilities: `col-start-1 justify-self-start` (start), `col-start-2 col-end-3` (title), `col-start-3 justify-self-end` (end)                                                                                           |
+| Re-render on resize  | `useState`-driven re-renders whenever the window or children change                                                                                                                    | None — layout is fully declarative                                                                                                                                                                                                   |
+
+The visual output is identical for the documented use cases (modal headers, popover headers, page headers). The only edge case where behavior diverges is when a single accessory is much wider than the column it occupies — in the legacy version the title was forced to compress; in the grid version the title stays centered and the accessory column grows to its content (the `1fr` side track still matches its sibling).
+
+##### Props and Behavior Mapping
+
+| Extension API                                                | Design System API                                                              | Change Type | Notes                                                                                                                                |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `children?: ReactNode`                                       | `children?: ReactNode`                                                         | unchanged   | rendered in the centered grid column                                                                                                 |
+| `startAccessory?: ReactNode`                                 | `startAccessory?: ReactNode`                                                   | unchanged   | rendered in the start column                                                                                                         |
+| `endAccessory?: ReactNode`                                   | `endAccessory?: ReactNode`                                                     | unchanged   | rendered in the end column                                                                                                           |
+| `childrenWrapperProps?: BoxProps<'div'>`                     | `childrenWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*` index sig.) | shape       | now bound to MMDS `BoxProps`; `className` is merged via `twMerge` (consumer utilities can override grid placement when needed).      |
+| `startAccessoryWrapperProps?: BoxProps<'div'>`               | `startAccessoryWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*`)      | shape       | same shape change as `childrenWrapperProps`.                                                                                         |
+| `endAccessoryWrapperProps?: BoxProps<'div'>`                 | `endAccessoryWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*`)        | shape       | same shape change.                                                                                                                   |
+| `className?: string`                                         | `className?: string`                                                           | unchanged   | applied to the grid container; merged via `twMerge`                                                                                  |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` | removed                                                                        | removed     | always renders `<div>`. Wrap or compose if you need a different element.                                                             |
+| Box style-utility props on the root (`marginBottom`, …)      | removed from public API                                                        | removed     | the root is no longer a polymorphic Box. Use `className` with Tailwind utilities (e.g. `className="mb-4"`) for layout overrides.     |
+| `mm-header-base` SCSS class hook                             | removed                                                                        | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities. |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { HeaderBase } from '../../component-library';
+
+// Default usage
+<HeaderBase
+  startAccessory={<BackButton />}
+  endAccessory={<CloseButton />}
+>
+  <Title>Page title</Title>
+</HeaderBase>
+
+// Customize the root via Box utility props
+<HeaderBase marginBottom={4} alignItems={AlignItems.center}>
+  <Title>Page title</Title>
+</HeaderBase>
+```
+
+##### After (Design System)
+
+```tsx
+import { HeaderBase } from '@metamask/design-system-react';
+
+// Default usage — unchanged
+<HeaderBase
+  startAccessory={<BackButton />}
+  endAccessory={<CloseButton />}
+>
+  <Title>Page title</Title>
+</HeaderBase>
+
+// Root overrides move into className (Box utility props on the root are removed)
+<HeaderBase className="mb-4 items-center">
+  <Title>Page title</Title>
+</HeaderBase>
+```
+
+For typical call sites — for example `ui/components/multichain/pages/page/components/header/header.tsx` (direct external consumer) and the internal `popover-header.tsx` / `modal-header.tsx` consumers within the legacy `component-library` (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Move any root-level Box utility props (`marginBottom`, `alignItems`, etc.) onto `className` (`mb-4`, `items-center`, …).
+
+#### API Differences
+
+- `HeaderBase` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-header-base` class hook is gone — use `className` to apply Tailwind utilities.
+- The `useRef` / `useEffect` / `useState` / `window.addEventListener('resize', …)` measurement code is gone. There are no longer any layout side effects on mount or window resize.
+- Slot wrappers (`childrenWrapperProps` / `startAccessoryWrapperProps` / `endAccessoryWrapperProps`) ship their grid-placement utilities (`col-start-*`, `justify-self-*`) as defaults; consumer `className` is merged via `twMerge` so it can override placement when needed.
+
+### Modal Component
+
+The extension `modal` component maps to `Modal` in the design system. The behavioral contract — portal into `document.body` while `isOpen`, unmount on close, expose configuration to descendants via `useModalContext` — is preserved 1:1. The migration is a near-zero-effort import-path swap for typical consumers.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { Modal } from '../../component-library'`           | `import { Modal } from '@metamask/design-system-react'`           |
+| `import { useModalContext } from '../../component-library'` | `import { useModalContext } from '@metamask/design-system-react'` |
+| `import type { ModalProps } from '../../component-library'` | `import type { ModalProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                   | Design System API                               | Change Type | Notes                                                                                                                                                                                         |
+| ----------------------------------------------- | ----------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isOpen: boolean`                               | `isOpen: boolean`                               | unchanged   | gates portal mount/unmount                                                                                                                                                                    |
+| `onClose: () => void`                           | `onClose: () => void`                           | unchanged   | exposed to descendants via `useModalContext().onClose`                                                                                                                                        |
+| `children: ReactNode`                           | `children: ReactNode`                           | unchanged   | typically composed of `ModalOverlay` and `ModalContent`                                                                                                                                       |
+| `isClosedOnOutsideClick?: boolean`              | `isClosedOnOutsideClick?: boolean`              | unchanged   | default `true`; consumed by `ModalContent` via `useModalContext`                                                                                                                              |
+| `isClosedOnEscapeKey?: boolean`                 | `isClosedOnEscapeKey?: boolean`                 | unchanged   | default `true`; consumed by `ModalContent` via `useModalContext`                                                                                                                              |
+| `autoFocus?: boolean`                           | `autoFocus?: boolean`                           | unchanged   | default `true`; consumed by `ModalContent` → `ModalFocus`                                                                                                                                     |
+| `initialFocusRef?: RefObject<FocusableElement>` | `initialFocusRef?: RefObject<FocusableElement>` | unchanged   | exposed to descendants via context                                                                                                                                                            |
+| `finalFocusRef?: RefObject<FocusableElement>`   | `finalFocusRef?: RefObject<FocusableElement>`   | unchanged   | exposed to descendants via context                                                                                                                                                            |
+| `restoreFocus?: boolean`                        | `restoreFocus?: boolean`                        | unchanged   | default `false`; ignored when `finalFocusRef` is provided                                                                                                                                     |
+| `className?: string`                            | `className?: string`                            | unchanged   | merged with the component's defaults via `twMerge` (the extension used `classnames`).                                                                                                         |
+| `extends ModalFocusProps` (interface)           | flat `type ModalProps`                          | shape       | `ModalProps` is no longer an `interface` extending `ModalFocusProps` — it's a flat `type` that inlines the focus-related fields.                                                              |
+| `mm-modal` SCSS class hook                      | removed                                         | removed     | the legacy `mm-modal` class is gone. Use `className` and Tailwind utilities to customize the root portal element. No usage outside the legacy `component-library` itself relies on this hook. |
+
+##### `useModalContext` Error Message
+
+The runtime guard for "called outside a `<Modal>` subtree" is preserved, but the error message text is rewritten for clarity:
+
+| Extension                                                                                                     | Design System                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `useModalContext must be used within a ModalProvider, Seems you forgot to wrap the components in "<Modal />"` | `useModalContext must be used within a Modal — make sure the consuming component is rendered inside <Modal />.` |
+
+This only affects code that asserts on the exact error string (rare). The thrown type is still `Error`.
+
+##### Default and Behavior Changes
+
+| Concern                 | Extension Behavior                                                                                                 | Design System Behavior                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| Portal target           | `document.body` via `ReactDOM.createPortal`                                                                        | `document.body` via `createPortal` from `react-dom`. Unchanged.              |
+| Unmount on close        | Returns `null` when `isOpen` is `false`                                                                            | Returns `null` when `isOpen` is `false`. Unchanged.                          |
+| Default behavior config | `isClosedOnOutsideClick`, `isClosedOnEscapeKey`, `autoFocus` default to `true`; `restoreFocus` defaults to `false` | Same defaults, applied internally before populating `ModalContext`.          |
+| Context shape           | `Omit<ModalProps, 'children'>`                                                                                     | `Omit<ModalProps, 'children'>` — same shape, exported as `ModalContextType`. |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Modal, ModalOverlay, ModalContent } from '../../component-library';
+
+<Modal isOpen={isOpen} onClose={onClose} data-testid="example-modal">
+  <ModalOverlay />
+  <ModalContent>{/* … */}</ModalContent>
+</Modal>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+} from '@metamask/design-system-react';
+
+// API is identical — only the import path changes.
+<Modal isOpen={isOpen} onClose={onClose} data-testid="example-modal">
+  <ModalOverlay />
+  <ModalContent>{/* … */}</ModalContent>
+</Modal>;
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (`<Modal onClose={onClose} isOpen={isOpen}>` with default behavior config), `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`<Modal onClose={closeModal} data-testid="..." isOpen>` forwarding `data-testid` to the root), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (no-op `onClose={() => undefined}`) (verified via fresh grep) — the only change is the import path; the JSX, props, and `data-testid` forwarding stay identical.
+
+#### API Differences
+
+- `Modal` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-modal` class hook is gone — use `className` to apply Tailwind utilities.
+- `useModalContext` is now exported from the package barrel (`@metamask/design-system-react`). `ModalContextType` is also exported as a type for consumers building custom subtree integrations.
+
 ### ModalBody Component
 
 The extension `modal-body` component maps to `ModalBody` in the design system. The default visual contract (horizontal padding, scrollable container) is preserved, but the polymorphic Box surface is removed and a keyboard-accessibility default is added.
@@ -1395,6 +1579,161 @@ For typical call sites — for example `ui/components/multichain-accounts/multic
 
 - `ModalFocus`'s public API is unchanged. Any consumer that passed only the documented props (`initialFocusRef`, `finalFocusRef`, `restoreFocus`, `autoFocus`, `children`) needs nothing beyond the import-path swap.
 - Consumers that imported `FocusableElement` directly from the extension's `modal-focus.types` module should re-import it from the design-system package barrel.
+
+### ModalFooter Component
+
+The extension `modal-footer` component maps to `ModalFooter` in the design system. The behavioral contract — a `<footer>` with up to two action buttons plus an optional slot for inline form controls — is preserved, but the API is reshaped to align with the React Native `BottomSheetFooter`:
+
+- Top-level `onSubmit` / `onCancel` callbacks and `submit` / `cancel` button-prop bags are replaced by `primaryButtonProps` / `secondaryButtonProps` whose click handlers ride along inside the props bag.
+- The button variant is **owned by the component** — primary always renders as `ButtonVariant.Primary`, secondary as `ButtonVariant.Secondary`. Consumers cannot override `variant`.
+- Layout direction is now an explicit `buttonsAlignment` prop (`Horizontal` default, `Vertical` opt-in) instead of the legacy `flex-wrap` + `Container.maxWidth` arrangement.
+- The polymorphic Box surface, the `Container` dependency, the `useI18nContext` coupling, and the `mm-modal-footer*` SCSS class hooks are all removed.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                 | Design System Migration                                                 |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `import { ModalFooter } from '../../component-library'`           | `import { ModalFooter } from '@metamask/design-system-react'`           |
+| `import type { ModalFooterProps } from '../../component-library'` | `import type { ModalFooterProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                               | Design System API                                                                     | Change Type        | Notes                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `onSubmit?: () => void`                                                                     | merged into `primaryButtonProps.onClick`                                              | renamed            | the click handler now travels with the rest of the primary-button config inside `primaryButtonProps`. The presence of `primaryButtonProps` is what causes the primary button to render.                                                                |
+| `onCancel?: () => void`                                                                     | merged into `secondaryButtonProps.onClick`                                            | renamed            | same as above for the secondary button.                                                                                                                                                                                                                |
+| `submitButtonProps?: ButtonProps<'button'>`                                                 | `primaryButtonProps?: Omit<ButtonProps, 'variant'>` (with `data-*` index signature)   | renamed + reshaped | renamed for symmetry with React Native `BottomSheetFooter`. `variant` is owned by the component (always `Primary`); `children` is the source of truth for the label. The extension's implicit `t('confirm')` default is gone.                          |
+| `cancelButtonProps?: ButtonProps<'button'>`                                                 | `secondaryButtonProps?: Omit<ButtonProps, 'variant'>` (with `data-*` index signature) | renamed + reshaped | same as above; renders with `Secondary` variant.                                                                                                                                                                                                       |
+| `containerProps?: ContainerProps<'div'>`                                                    | removed; layout direction moved to `buttonsAlignment`                                 | removed            | the `Container.maxWidth` (`Sm` / `Md` / `Lg` ≈ 360 / 480 / 720) is gone. Width is now governed by the surrounding `ModalContent.size`. Custom outer footer styling moves to `className`.                                                               |
+| —                                                                                           | `buttonsAlignment?: ButtonsAlignment` (`Horizontal` default, `Vertical` opt-in)       | added              | `Horizontal` lays buttons in a `flex-row` with each button at `flex-1`; `Vertical` lays them in a `flex-col` with each button at `w-full`. Order: secondary → primary in both modes. Mirrors the React Native `BottomSheetFooter` API.                 |
+| `children?: ReactNode`                                                                      | `children?: ReactNode`                                                                | unchanged          | rendered above the action button row.                                                                                                                                                                                                                  |
+| `className?: string`                                                                        | `className?: string`                                                                  | unchanged          | merged with default Tailwind classes via `twMerge`.                                                                                                                                                                                                    |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>`                                | removed                                                                               | removed            | always renders a `<footer>`. If you need a different element, wrap or compose.                                                                                                                                                                         |
+| Box style-utility props (`paddingLeft`, `paddingRight`, `paddingTop`, `backgroundColor`, …) | removed from public API                                                               | removed            | use `className` with Tailwind utilities. The default `px-4 pt-4` remains, applied internally; override with `className="px-0 pt-2"` etc.                                                                                                               |
+| `mm-modal-footer` and `mm-modal-footer__button` SCSS class hooks                            | removed                                                                               | removed            | the per-button `flex: 1 0 auto` is replaced by the `buttonsAlignment`-driven utilities (`flex-1` horizontal, `w-full` vertical), applied internally to each `Button`. Customize via `primaryButtonProps.className` / `secondaryButtonProps.className`. |
+
+##### Variant Ownership
+
+`primaryButtonProps` and `secondaryButtonProps` are typed as `Omit<ButtonProps, 'variant'>`. The component sets `variant={ButtonVariant.Primary}` / `ButtonVariant.Secondary` after the spread, so even if `variant` were passed it would be overridden — but the type forbids it, surfacing the contract at compile time. This matches React Native `BottomSheetFooter` and prevents consumers from partially bypassing the footer's button semantics.
+
+##### i18n Decoupling
+
+The extension auto-defaulted button labels to `t('confirm')` and `t('cancel')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. Pass localized labels explicitly through `primaryButtonProps.children` / `secondaryButtonProps.children`:
+
+```tsx
+<ModalFooter
+  primaryButtonProps={{ children: t('confirm'), onClick: handleSubmit }}
+  secondaryButtonProps={{ children: t('cancel'), onClick: handleClose }}
+/>
+```
+
+##### Button API Differences
+
+`primaryButtonProps` and `secondaryButtonProps` now accept the MMDS `ButtonProps` shape (minus `variant`). The most common renames for migrating consumers:
+
+| Extension Button Prop | Design System Button Prop | Notes                                           |
+| --------------------- | ------------------------- | ----------------------------------------------- |
+| `danger: true`        | `isDanger: true`          | renamed; matches the broader MMDS Button rename |
+| `disabled`            | `isDisabled`              | renamed                                         |
+| `loading`             | `isLoading`               | renamed                                         |
+| `block`               | `isFullWidth`             | renamed                                         |
+
+See the [Button Component](#button-component) migration entry for the full mapping.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalFooter } from '../../component-library';
+
+// Default labels via useI18nContext + destructive submit
+<ModalFooter
+  onCancel={onClose}
+  onSubmit={onSubmit}
+  submitButtonProps={{
+    children: t('remove'),
+    danger: true,
+  }}
+/>
+
+// Container max-width override via the Container enum
+<ModalFooter
+  onSubmit={onSubmit}
+  submitButtonProps={{ children: t('confirm') }}
+  containerProps={{ maxWidth: ContainerMaxWidth.Md }}
+/>
+
+// Custom child content with a "do not show again" checkbox
+<ModalFooter onSubmit={onSubmit} onCancel={onClose}>
+  <Checkbox
+    isChecked={dontShowAgain}
+    onChange={() => setDontShowAgain(!dontShowAgain)}
+    label={t('dontShowAgain')}
+  />
+</ModalFooter>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalFooter } from '@metamask/design-system-react';
+
+// Click handlers ride inside the prop bags; danger -> isDanger.
+// Variant is owned by the component (Primary / Secondary).
+<ModalFooter
+  primaryButtonProps={{
+    children: t('remove'),
+    isDanger: true,
+    onClick: onSubmit,
+  }}
+  secondaryButtonProps={{
+    children: t('cancel'),
+    onClick: onClose,
+  }}
+/>
+
+// `containerProps.maxWidth` is gone — width is governed by the surrounding
+// `ModalContent.size`. Use `buttonsAlignment` to switch to a stacked button
+// row when needed.
+<ModalFooter
+  buttonsAlignment={ButtonsAlignment.Vertical}
+  primaryButtonProps={{ children: t('confirm'), onClick: onSubmit }}
+/>
+
+// Custom child content + button row — children stay above buttons.
+<ModalFooter
+  primaryButtonProps={{ children: t('confirm'), onClick: onSubmit }}
+  secondaryButtonProps={{ children: t('cancel'), onClick: onClose }}
+>
+  <Checkbox
+    id="dont-show-again"
+    isSelected={dontShowAgain}
+    onChange={() => setDontShowAgain(!dontShowAgain)}
+    label={t('dontShowAgain')}
+  />
+</ModalFooter>
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (uses `submitButtonProps={{ children: t('remove'), danger: true }}` and the i18n-defaulted cancel button), `ui/components/app/snaps/snap-privacy-warning/snap-privacy-warning.js` (already passes `submitButtonProps.children` and `cancelButtonProps.children` explicitly), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (bypasses the built-in buttons by passing a custom `<Button>` as children) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Rename `submitButtonProps` → `primaryButtonProps`, `cancelButtonProps` → `secondaryButtonProps`.
+3. Move `onSubmit` / `onCancel` into the corresponding `*ButtonProps.onClick`.
+4. Add `secondaryButtonProps={{ children: t('cancel'), onClick: onClose }}` to any `ModalFooter` that relied on the implicit `t('cancel')` default.
+5. Rename `danger` → `isDanger` (and any other extension Button → MMDS Button prop renames) inside the button-prop bags. Drop any explicit `variant` — the component owns it.
+6. If the call site set `containerProps.maxWidth`, drop it; width is now governed by `ModalContent.size`. If the call site used `containerProps` for layout direction, switch to `buttonsAlignment={ButtonsAlignment.Vertical}` if a stacked row is desired.
+
+#### API Differences
+
+- `ModalFooter` no longer composes Box's polymorphic API. It always renders a `<footer>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- `ModalFooter` is i18n-agnostic — there is no `useI18nContext` integration and no internal English fallback. Consumers always pass labels via `primaryButtonProps.children` / `secondaryButtonProps.children`.
+- The component **owns** the button variant via `Omit<ButtonProps, 'variant'>` on the prop bags. Consumers cannot pass `variant`; the API surfaces this at compile time. This mirrors the React Native `BottomSheetFooter` and is the recommended footer contract going forward.
+- Layout direction is configured via `buttonsAlignment` (`Horizontal` default, `Vertical` opt-in). The legacy `Container.maxWidth` enum is gone — width comes from the surrounding `ModalContent.size`.
 
 ### ModalOverlay Component
 
