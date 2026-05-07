@@ -32,4 +32,7 @@ export type BottomSheetHeaderProps = {
    * Note: `iconName` and `onPress` are managed internally and excluded.
    */
   closeButtonProps?: Partial<Omit<ButtonIconProps, 'iconName' | 'onPress'>>;
-} & Omit<HeaderBaseProps, 'startAccessory' | 'endAccessory'>;
+} & Omit<
+  HeaderBaseProps,
+  'startAccessory' | 'endAccessory' | 'startButtonIconProps' | 'endButtonIconProps'
+>;
