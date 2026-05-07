@@ -4,9 +4,9 @@ import React from 'react';
 
 import { TextColor, TextVariant } from '../Text';
 
+import README from './README.mdx';
 import { SensitiveText } from './SensitiveText';
 import type { SensitiveTextProps } from './SensitiveText.types';
-import README from './README.mdx';
 
 const meta: Meta<SensitiveTextProps> = {
   title: 'React Components/SensitiveText',
