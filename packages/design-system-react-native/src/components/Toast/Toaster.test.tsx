@@ -163,6 +163,26 @@ describe('Toaster', () => {
     expect(onActionPress).toHaveBeenCalled();
   });
 
+  it('calls onClose and hides the toast when the close button is pressed on an action toast', async () => {
+    const onClose = jest.fn();
+    render(<Toaster ref={toasterRef} />);
+    await showToastAndWait(toasterRef, {
+      actionButtonLabel: 'Retry',
+      actionButtonOnPress: jest.fn(),
+      hasNoTimeout: true,
+      onClose,
+      title: 'Action toast',
+    });
+
+    const closeBtn = screen.getByTestId('button-icon');
+    await act(async () => {
+      fireEvent.press(closeBtn);
+    });
+
+    expect(onClose).toHaveBeenCalled();
+    expect(screen.queryByText('Action toast')).toBeNull();
+  });
+
   it('replaces existing toast when showToast called rapidly', async () => {
     render(<Toaster ref={toasterRef} />);
 
