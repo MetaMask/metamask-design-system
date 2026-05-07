@@ -43,6 +43,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
 
   const {
     accessibilityLabel: closeButtonAccessibilityLabel = 'Close banner',
+    onPress: _ignoredCloseButtonOnPress,
     twClassName: closeButtonTwClassName,
     ...resolvedCloseButtonProps
   } = closeButtonProps ?? {};

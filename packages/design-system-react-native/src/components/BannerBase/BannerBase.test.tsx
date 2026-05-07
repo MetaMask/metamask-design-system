@@ -110,4 +110,25 @@ describe('BannerBase', () => {
 
     expect(queryByTestId(closeButtonTestId)).toBeNull();
   });
+
+  it('ignores leaked closeButtonProps.onPress and still calls onClose', () => {
+    const onClose = jest.fn();
+    const leakedOnPress = jest.fn();
+    const { getByTestId } = render(
+      <BannerBase
+        onClose={onClose}
+        closeButtonProps={
+          {
+            testID: closeButtonTestId,
+            onPress: leakedOnPress,
+          } as never
+        }
+      />,
+    );
+
+    fireEvent.press(getByTestId(closeButtonTestId));
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(leakedOnPress).not.toHaveBeenCalled();
+  });
 });
