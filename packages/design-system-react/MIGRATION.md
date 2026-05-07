@@ -1418,7 +1418,6 @@ For typical call sites — for example `ui/components/multichain-accounts/accoun
 
 - `Modal` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-modal` class hook is gone — use `className` to apply Tailwind utilities.
 - `useModalContext` is now exported from the package barrel (`@metamask/design-system-react`). `ModalContextType` is also exported as a type for consumers building custom subtree integrations.
-- `FocusableElement` (the focus-target shape used by `initialFocusRef` / `finalFocusRef`) is now exported from the design system package. Consumers can import it directly instead of redeclaring it.
 
 ### ModalContent Component
 
