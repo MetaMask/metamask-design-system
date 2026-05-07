@@ -7,15 +7,14 @@ import Animated, {
 } from 'react-native-reanimated';
 
 // External dependencies.
-import { BoxAlignItems } from '../Box';
-import { BoxColumn } from '../BoxColumn';
+import { AnimationDuration } from '@metamask/design-tokens';
 import { HeaderStandard } from '../HeaderStandard';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
-import type { TextProps } from '../Text';
-import { FontWeight, TextColor, TextVariant } from '../Text';
+import { HeaderStandardCenterColumn } from '../temp-components/HeaderStandardCenterColumn';
 
 // Internal dependencies.
 import type { HeaderStandardAnimatedProps } from './HeaderStandardAnimated.types';
+
+const COMPACT_TITLE_ENTER_OFFSET_PX = 8;
 
 export const HeaderStandardAnimated: React.FC<HeaderStandardAnimatedProps> = ({
   title,
@@ -31,52 +30,33 @@ export const HeaderStandardAnimated: React.FC<HeaderStandardAnimatedProps> = ({
     const hasMeasured = titleSectionHeight.value > 0;
     const isFullyHidden =
       hasMeasured && scrollY.value >= titleSectionHeight.value;
-    return withTiming(isFullyHidden ? 1 : 0, { duration: 150 });
+    return withTiming(isFullyHidden ? 1 : 0, {
+      duration: AnimationDuration.Fast,
+    });
   });
 
   const centerAnimatedStyle = useAnimatedStyle(() => {
     const progress = compactTitleProgress.value;
     return {
       opacity: progress,
-      transform: [{ translateY: (1 - progress) * 8 }],
+      transform: [
+        { translateY: (1 - progress) * COMPACT_TITLE_ENTER_OFFSET_PX },
+      ],
     };
   });
 
-  let subtitleTextProps: Omit<Partial<TextProps>, 'children'> | undefined;
-  if (subtitle && typeof subtitle === 'string') {
-    const { twClassName: subtitleTwClassName, ...subtitleTextRest } =
-      subtitleProps ?? {};
-    subtitleTextProps = {
-      variant: TextVariant.BodySm,
-      color: TextColor.TextAlternative,
-      ...subtitleTextRest,
-      twClassName: ['-mt-0.5', subtitleTwClassName].filter(Boolean).join(' '),
-    };
-  }
-
-  const content = title ? (
-    <BoxColumn
-      alignItems={BoxAlignItems.Center}
-      textProps={{
-        variant: TextVariant.BodyMd,
-        fontWeight: FontWeight.Bold,
-        ...titleProps,
-      }}
-      bottomAccessory={
-        subtitle ? (
-          <TextOrChildren textProps={subtitleTextProps}>
-            {subtitle}
-          </TextOrChildren>
-        ) : undefined
-      }
-    >
-      {title}
-    </BoxColumn>
-  ) : null;
-
   return (
     <HeaderStandard {...headerStandardProps} twClassName={twClassName}>
-      <Animated.View style={centerAnimatedStyle}>{content}</Animated.View>
+      <Animated.View style={centerAnimatedStyle}>
+        {title ? (
+          <HeaderStandardCenterColumn
+            title={title}
+            titleProps={titleProps}
+            subtitle={subtitle}
+            subtitleProps={subtitleProps}
+          />
+        ) : null}
+      </Animated.View>
     </HeaderStandard>
   );
 };

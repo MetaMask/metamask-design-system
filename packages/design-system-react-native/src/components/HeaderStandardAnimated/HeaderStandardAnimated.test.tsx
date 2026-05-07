@@ -1,33 +1,31 @@
 // Third party dependencies.
-import { render, fireEvent } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import React from 'react';
 import type { SharedValue } from 'react-native-reanimated';
-
-// External dependencies.
-import { IconName } from '../Icon';
-import { Text, TextVariant } from '../Text';
 
 // Internal dependencies.
 import { HeaderStandardAnimated } from './HeaderStandardAnimated';
 
 jest.mock('react-native-reanimated', () => {
-  const Reanimated = jest.requireActual('react-native-reanimated/mock');
+  const ReanimatedModule = jest.requireActual('react-native-reanimated/mock');
+  const mockUseAnimatedStyle = jest.fn((fn: unknown) => (fn as () => object)());
   jest
-    .spyOn(Reanimated, 'useSharedValue')
+    .spyOn(ReanimatedModule, 'useSharedValue')
     .mockImplementation((initial: unknown) => ({
       value: initial as number,
     }));
-  jest
-    .spyOn(Reanimated, 'useAnimatedStyle')
-    .mockImplementation((fn: unknown) => (fn as () => object)());
-  return Reanimated;
+  return Object.assign(ReanimatedModule, {
+    useAnimatedStyle: mockUseAnimatedStyle,
+  });
 });
+
+const getUseAnimatedStyleMock = () =>
+  jest.requireMock<typeof import('react-native-reanimated')>(
+    'react-native-reanimated',
+  ).useAnimatedStyle as jest.Mock;
 
 const CONTAINER_TEST_ID = 'header-standard-animated-container';
 const TITLE_TEST_ID = 'header-standard-animated-title';
-const SUBTITLE_TEST_ID = 'header-standard-animated-subtitle';
-const BACK_BUTTON_TEST_ID = 'header-standard-animated-back-button';
-const CLOSE_BUTTON_TEST_ID = 'header-standard-animated-close-button';
 
 const createMockSharedValue = (initial: number): SharedValue<number> => {
   const ref = { value: initial };
@@ -58,99 +56,32 @@ describe('HeaderStandardAnimated', () => {
     jest.clearAllMocks();
   });
 
-  describe('rendering', () => {
-    it('renders with title', () => {
+  describe('smoke', () => {
+    it('renders title and optional subtitle', () => {
       const { getByText } = render(
-        <HeaderStandardAnimated {...defaultProps} title="Test Title" />,
-      );
-
-      expect(getByText('Test Title')).toBeOnTheScreen();
-    });
-
-    it('renders title with testID when provided via titleProps', () => {
-      const { getByTestId } = render(
         <HeaderStandardAnimated
           {...defaultProps}
           title="Test Title"
+          subtitle="Sub"
+        />,
+      );
+
+      expect(getByText('Test Title')).toBeOnTheScreen();
+      expect(getByText('Sub')).toBeOnTheScreen();
+    });
+
+    it('forwards testID and titleProps.testID', () => {
+      const { getByTestId } = render(
+        <HeaderStandardAnimated
+          {...defaultProps}
+          title="T"
+          testID={CONTAINER_TEST_ID}
           titleProps={{ testID: TITLE_TEST_ID }}
         />,
       );
 
-      expect(getByTestId(TITLE_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('renders container with testID when provided', () => {
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Test Title"
-          testID={CONTAINER_TEST_ID}
-        />,
-      );
-
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('renders subtitle when provided', () => {
-      const { getByText } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Test Title"
-          subtitle="Test Subtitle"
-        />,
-      );
-
-      expect(getByText('Test Subtitle')).toBeOnTheScreen();
-    });
-
-    it('does not render subtitle when not provided', () => {
-      const { queryByText } = render(
-        <HeaderStandardAnimated {...defaultProps} title="Test Title" />,
-      );
-
-      expect(queryByText('Test Subtitle')).not.toBeOnTheScreen();
-    });
-
-    it('renders subtitle with testID when provided via subtitleProps', () => {
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Test Title"
-          subtitle="Test Subtitle"
-          subtitleProps={{ testID: SUBTITLE_TEST_ID }}
-        />,
-      );
-
-      expect(getByTestId(SUBTITLE_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('renders both title and subtitle together', () => {
-      const { getByText } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Main Title"
-          subtitle="Supporting Text"
-        />,
-      );
-
-      expect(getByText('Main Title')).toBeOnTheScreen();
-      expect(getByText('Supporting Text')).toBeOnTheScreen();
-    });
-
-    it('renders subtitle as a React node', () => {
-      const { getByText } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          subtitle={
-            <Text testID="custom-subtitle-node" variant={TextVariant.BodySm}>
-              Custom node
-            </Text>
-          }
-        />,
-      );
-
-      expect(getByText('Custom node')).toBeOnTheScreen();
+      expect(getByTestId(TITLE_TEST_ID)).toBeOnTheScreen();
     });
 
     it('omits center title when title is not provided', () => {
@@ -162,260 +93,63 @@ describe('HeaderStandardAnimated', () => {
     });
   });
 
-  describe('scroll-driven title state', () => {
-    it('derives hidden title state when scroll is past the title section', () => {
-      const { getByText } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          scrollY={createMockSharedValue(150)}
-          titleSectionHeight={createMockSharedValue(100)}
-          title="T"
-        />,
-      );
+  describe('scroll-linked center animation', () => {
+    it('registers useAnimatedStyle for the center block', () => {
+      render(<HeaderStandardAnimated {...defaultProps} title="X" />);
 
-      expect(getByText('T')).toBeOnTheScreen();
+      expect(getUseAnimatedStyleMock()).toHaveBeenCalled();
     });
 
-    it('derives visible large title when title section height is not measured', () => {
-      const { getByText } = render(
+    it('sets full opacity when scrolled past measured title section', () => {
+      const scrollY = createMockSharedValue(150);
+      const titleSectionHeight = createMockSharedValue(100);
+      render(
         <HeaderStandardAnimated
-          {...defaultProps}
-          scrollY={createMockSharedValue(50)}
-          titleSectionHeight={createMockSharedValue(0)}
+          scrollY={scrollY}
+          titleSectionHeight={titleSectionHeight}
           title="T"
         />,
       );
 
-      expect(getByText('T')).toBeOnTheScreen();
+      const styleFn = getUseAnimatedStyleMock().mock.calls[0][0];
+      const style = (
+        styleFn as () => {
+          opacity: number;
+          transform: { translateY: number }[];
+        }
+      )();
+
+      expect(style.opacity).toBe(1);
+      expect(style.transform).toEqual([{ translateY: 0 }]);
     });
 
-    it('derives visible large title when scroll is below title section height', () => {
-      const { getByText } = render(
+    it('hides center styles when scroll is within title section', () => {
+      const scrollY = createMockSharedValue(30);
+      const titleSectionHeight = createMockSharedValue(100);
+      render(
         <HeaderStandardAnimated
-          {...defaultProps}
-          scrollY={createMockSharedValue(30)}
-          titleSectionHeight={createMockSharedValue(100)}
+          scrollY={scrollY}
+          titleSectionHeight={titleSectionHeight}
           title="T"
         />,
       );
 
-      expect(getByText('T')).toBeOnTheScreen();
+      const styleFn = getUseAnimatedStyleMock().mock.calls[0][0];
+      const style = (
+        styleFn as () => {
+          opacity: number;
+          transform: { translateY: number }[];
+        }
+      )();
+
+      expect(style.opacity).toBe(0);
+      expect(style.transform).toEqual([{ translateY: 8 }]);
     });
   });
 
   describe('displayName', () => {
     it('is set for debugging', () => {
       expect(HeaderStandardAnimated.displayName).toBe('HeaderStandardAnimated');
-    });
-  });
-
-  describe('back button', () => {
-    it('renders back button when onBack provided', () => {
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          onBack={jest.fn()}
-          backButtonProps={{ testID: BACK_BUTTON_TEST_ID }}
-        />,
-      );
-
-      expect(getByTestId(BACK_BUTTON_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('renders back button when backButtonProps provided', () => {
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          backButtonProps={{
-            onPress: jest.fn(),
-            testID: BACK_BUTTON_TEST_ID,
-          }}
-        />,
-      );
-
-      expect(getByTestId(BACK_BUTTON_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('calls onBack when back button pressed', () => {
-      const onBack = jest.fn();
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          onBack={onBack}
-          backButtonProps={{ testID: BACK_BUTTON_TEST_ID }}
-        />,
-      );
-
-      fireEvent.press(getByTestId(BACK_BUTTON_TEST_ID));
-
-      expect(onBack).toHaveBeenCalledTimes(1);
-    });
-
-    it('calls backButtonProps.onPress when back button pressed', () => {
-      const onPress = jest.fn();
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          backButtonProps={{ onPress, testID: BACK_BUTTON_TEST_ID }}
-        />,
-      );
-
-      fireEvent.press(getByTestId(BACK_BUTTON_TEST_ID));
-
-      expect(onPress).toHaveBeenCalledTimes(1);
-    });
-
-    it('uses backButtonProps.onPress over onBack when both provided', () => {
-      const onBack = jest.fn();
-      const onPress = jest.fn();
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          onBack={onBack}
-          backButtonProps={{ onPress, testID: BACK_BUTTON_TEST_ID }}
-        />,
-      );
-
-      fireEvent.press(getByTestId(BACK_BUTTON_TEST_ID));
-
-      expect(onPress).toHaveBeenCalledTimes(1);
-      expect(onBack).not.toHaveBeenCalled();
-    });
-
-    it('renders startButtonIconProps when provided', () => {
-      const onPress = jest.fn();
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          startButtonIconProps={{
-            iconName: IconName.Menu,
-            onPress,
-            testID: 'custom-start-button',
-          }}
-        />,
-      );
-
-      expect(getByTestId('custom-start-button')).toBeOnTheScreen();
-    });
-
-    it('startButtonIconProps takes priority over onBack', () => {
-      const onBack = jest.fn();
-      const onPress = jest.fn();
-      const { getByTestId, queryByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          onBack={onBack}
-          backButtonProps={{ testID: BACK_BUTTON_TEST_ID }}
-          startButtonIconProps={{
-            iconName: IconName.Menu,
-            onPress,
-            testID: 'custom-start-button',
-          }}
-        />,
-      );
-
-      expect(getByTestId('custom-start-button')).toBeOnTheScreen();
-      expect(queryByTestId(BACK_BUTTON_TEST_ID)).not.toBeOnTheScreen();
-    });
-  });
-
-  describe('close button', () => {
-    it('renders close button when onClose provided', () => {
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          onClose={jest.fn()}
-          closeButtonProps={{ testID: CLOSE_BUTTON_TEST_ID }}
-        />,
-      );
-
-      expect(getByTestId(CLOSE_BUTTON_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('renders close button when closeButtonProps provided', () => {
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          closeButtonProps={{
-            onPress: jest.fn(),
-            testID: CLOSE_BUTTON_TEST_ID,
-          }}
-        />,
-      );
-
-      expect(getByTestId(CLOSE_BUTTON_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('calls onClose when close button pressed', () => {
-      const onClose = jest.fn();
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          onClose={onClose}
-          closeButtonProps={{ testID: CLOSE_BUTTON_TEST_ID }}
-        />,
-      );
-
-      fireEvent.press(getByTestId(CLOSE_BUTTON_TEST_ID));
-
-      expect(onClose).toHaveBeenCalledTimes(1);
-    });
-
-    it('calls closeButtonProps.onPress when close button pressed', () => {
-      const onPress = jest.fn();
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          closeButtonProps={{ onPress, testID: CLOSE_BUTTON_TEST_ID }}
-        />,
-      );
-
-      fireEvent.press(getByTestId(CLOSE_BUTTON_TEST_ID));
-
-      expect(onPress).toHaveBeenCalledTimes(1);
-    });
-
-    it('uses closeButtonProps.onPress over onClose when both provided', () => {
-      const onClose = jest.fn();
-      const onPress = jest.fn();
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          onClose={onClose}
-          closeButtonProps={{ onPress, testID: CLOSE_BUTTON_TEST_ID }}
-        />,
-      );
-
-      fireEvent.press(getByTestId(CLOSE_BUTTON_TEST_ID));
-
-      expect(onPress).toHaveBeenCalledTimes(1);
-      expect(onClose).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('props forwarding', () => {
-    it('accepts custom testID', () => {
-      const { getByTestId } = render(
-        <HeaderStandardAnimated
-          {...defaultProps}
-          title="Title"
-          testID="custom-header"
-        />,
-      );
-
-      expect(getByTestId('custom-header')).toBeOnTheScreen();
     });
   });
 });

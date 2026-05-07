@@ -38,7 +38,6 @@ module.exports = merge(baseConfig, {
   // Add coverage ignore patterns
   coveragePathIgnorePatterns: [
     'index.ts',
-    '\\.types\\.ts$',
     '\\.d\\.ts$',
     '\\.constants\\.ts$', // ignore all .constants.ts files
     '\\.dev\\.ts$', // ignore all .dev.ts files

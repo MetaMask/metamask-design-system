@@ -2,16 +2,12 @@
 import React, { useMemo } from 'react';
 
 // External dependencies.
-import { BoxAlignItems } from '../Box';
-import { BoxColumn } from '../BoxColumn';
 import type { ButtonIconProps } from '../ButtonIcon';
 import { HeaderBase } from '../HeaderBase';
 import { IconName } from '../Icon';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
-import type { TextProps } from '../Text';
-import { FontWeight, TextColor, TextVariant } from '../Text';
 
 // Internal dependencies.
+import { HeaderStandardCenterColumn } from '../temp-components/HeaderStandardCenterColumn';
 import type { HeaderStandardProps } from './HeaderStandard.types';
 
 export const HeaderStandard: React.FC<HeaderStandardProps> = ({
@@ -68,38 +64,13 @@ export const HeaderStandard: React.FC<HeaderStandardProps> = ({
       return children;
     }
     if (title) {
-      let subtitleTextProps: Omit<Partial<TextProps>, 'children'> | undefined;
-      if (subtitle && typeof subtitle === 'string') {
-        const { twClassName: subtitleTwClassName, ...subtitleTextRest } =
-          subtitleProps ?? {};
-        subtitleTextProps = {
-          variant: TextVariant.BodySm,
-          color: TextColor.TextAlternative,
-          ...subtitleTextRest,
-          twClassName: ['-mt-0.5', subtitleTwClassName]
-            .filter(Boolean)
-            .join(' '),
-        };
-      }
-
       return (
-        <BoxColumn
-          alignItems={BoxAlignItems.Center}
-          textProps={{
-            variant: TextVariant.BodyMd,
-            fontWeight: FontWeight.Bold,
-            ...titleProps,
-          }}
-          bottomAccessory={
-            subtitle ? (
-              <TextOrChildren textProps={subtitleTextProps}>
-                {subtitle}
-              </TextOrChildren>
-            ) : undefined
-          }
-        >
-          {title}
-        </BoxColumn>
+        <HeaderStandardCenterColumn
+          title={title}
+          titleProps={titleProps}
+          subtitle={subtitle}
+          subtitleProps={subtitleProps}
+        />
       );
     }
     return null;

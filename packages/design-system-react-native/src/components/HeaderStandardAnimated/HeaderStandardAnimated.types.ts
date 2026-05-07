@@ -10,6 +10,7 @@ import type { HeaderStandardProps } from '../HeaderStandard/HeaderStandard.types
 /**
  * HeaderStandardAnimated component props.
  * Extends HeaderStandardProps with scroll-driven animation inputs.
+ * Title/subtitle fields come from HeaderStandardCenterColumnFields via HeaderStandardProps.
  * Center content is driven by title/subtitle only; `children` is not supported.
  */
 export type HeaderStandardAnimatedProps = Omit<

@@ -149,6 +149,12 @@ export type {
   UseHeaderStandardAnimatedReturn,
 } from './HeaderStandardAnimated';
 
+export { HeaderStandardCenterColumn } from './temp-components/HeaderStandardCenterColumn';
+export type {
+  HeaderStandardCenterColumnFields,
+  HeaderStandardCenterColumnProps,
+} from './temp-components/HeaderStandardCenterColumn';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
