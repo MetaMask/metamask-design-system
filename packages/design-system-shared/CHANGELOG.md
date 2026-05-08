@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0]
+
 ### Uncategorized
 
 - feat(icons): add ListArrow icon ([#1161](https://github.com/MetaMask/metamask-design-system/pull/1161))
@@ -181,7 +183,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.16.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.17.0...HEAD
+[0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.16.0...@metamask/design-system-shared@0.17.0
 [0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.15.0...@metamask/design-system-shared@0.16.0
 [0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.14.0...@metamask/design-system-shared@0.15.0
 [0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.13.0...@metamask/design-system-shared@0.14.0
