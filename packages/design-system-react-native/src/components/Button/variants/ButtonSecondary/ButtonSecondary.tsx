@@ -1,3 +1,4 @@
+import { Theme, useTheme } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../../../ButtonBase';
@@ -15,12 +16,14 @@ export const ButtonSecondary = ({
   startIconProps,
   endIconProps,
   isDanger = false,
+  isDisabled = false,
   isInverse = false,
   isLoading = false,
   twClassName = '',
   style,
   ...props
 }: ButtonSecondaryProps) => {
+  const theme = useTheme();
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
       const classNameStr =
@@ -52,12 +55,15 @@ export const ButtonSecondary = ({
       } else {
         backgroundClass =
           pressed || isLoading ? 'bg-muted-pressed' : 'bg-muted';
-        borderClass = 'border-transparent';
+        borderClass =
+          isDisabled && theme === Theme.Dark
+            ? 'border-default'
+            : 'border-transparent';
       }
 
       return `${backgroundClass} ${borderClass} ${baseClasses}`;
     },
-    [isInverse, isDanger, isLoading, twClassName],
+    [isInverse, isDanger, isDisabled, isLoading, theme, twClassName],
   );
 
   const getTextClassName = useCallback(
@@ -95,6 +101,7 @@ export const ButtonSecondary = ({
         size: IconSize.Sm,
         ...endIconProps,
       }}
+      isDisabled={isDisabled}
       isLoading={isLoading}
       twClassName={getContainerClassName}
       textClassName={getTextClassName}

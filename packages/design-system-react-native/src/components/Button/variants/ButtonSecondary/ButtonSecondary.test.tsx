@@ -1,5 +1,9 @@
 import { ButtonBaseSize } from '@metamask/design-system-shared';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import {
+  Theme,
+  ThemeProvider,
+  useTailwind,
+} from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
 import React from 'react';
@@ -9,10 +13,17 @@ import { ButtonSecondary } from './ButtonSecondary';
 
 describe('ButtonSecondary', () => {
   let tw: ReturnType<typeof useTailwind>;
+  let twDark: ReturnType<typeof useTailwind>;
 
   beforeAll(() => {
     const { result } = renderHook(() => useTailwind());
     tw = result.current;
+    const { result: darkResult } = renderHook(() => useTailwind(), {
+      wrapper: ({ children }) => (
+        <ThemeProvider theme={Theme.Dark}>{children}</ThemeProvider>
+      ),
+    });
+    twDark = darkResult.current;
   });
 
   /**
@@ -48,6 +59,30 @@ describe('ButtonSecondary', () => {
       expect.arrayContaining([
         expect.objectContaining({
           backgroundColor: expected.backgroundColor,
+        }),
+      ]),
+    );
+  }
+
+  /**
+   * Expect border color to match the borderColor produced by a tailwind class
+   * resolved against the supplied tailwind instance (theme-aware).
+   *
+   * @param styleProp - The style prop to check
+   * @param tailwindClass - The tailwind class providing the expected borderColor
+   * @param twInstance - The tailwind instance to resolve the class against
+   */
+  function expectBorderColor(
+    styleProp: unknown,
+    tailwindClass: string,
+    twInstance: ReturnType<typeof useTailwind> = tw,
+  ) {
+    const expected = twInstance`${tailwindClass}`;
+    const allStyles = flattenStyles(styleProp);
+    expect(allStyles).toStrictEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          borderColor: expected.borderColor,
         }),
       ]),
     );
@@ -104,6 +139,32 @@ describe('ButtonSecondary', () => {
     );
     const btn = getByTestId('button-secondary');
     expectBackground(btn.props.style, 'bg-default');
+
+    expect(btn).toBeDefined();
+  });
+
+  it('renders border-default on disabled default in dark theme', () => {
+    const { getByTestId } = render(
+      <ThemeProvider theme={Theme.Dark}>
+        <ButtonSecondary isDisabled testID="button-secondary">
+          Disabled
+        </ButtonSecondary>
+      </ThemeProvider>,
+    );
+    const btn = getByTestId('button-secondary');
+    expectBorderColor(btn.props.style, 'border-default', twDark);
+
+    expect(btn).toBeDefined();
+  });
+
+  it('keeps border transparent on disabled default in light theme', () => {
+    const { getByTestId } = render(
+      <ButtonSecondary isDisabled testID="button-secondary">
+        Disabled
+      </ButtonSecondary>,
+    );
+    const btn = getByTestId('button-secondary');
+    expectBorderColor(btn.props.style, 'border-transparent');
 
     expect(btn).toBeDefined();
   });
