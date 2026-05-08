@@ -97,12 +97,10 @@ describe('BannerBase', () => {
     );
   });
 
-  it('renders close button and triggers closeButtonProps.onPress when onClose is not provided', () => {
-    const onCloseButtonPress = jest.fn();
-    const { getByTestId } = render(
+  it('does not render close button when only closeButtonProps are provided', () => {
+    const { queryByTestId } = render(
       <BannerBase
         closeButtonProps={{
-          onPress: onCloseButtonPress,
           accessibilityLabel: 'Dismiss banner',
           testID: closeButtonTestId,
           twClassName: 'p-2',
@@ -110,10 +108,6 @@ describe('BannerBase', () => {
       />,
     );
 
-    expect(getByTestId(closeButtonTestId).props.accessibilityLabel).toBe(
-      'Dismiss banner',
-    );
-    fireEvent.press(getByTestId(closeButtonTestId));
-    expect(onCloseButtonPress).toHaveBeenCalledTimes(1);
+    expect(queryByTestId(closeButtonTestId)).toBeNull();
   });
 });

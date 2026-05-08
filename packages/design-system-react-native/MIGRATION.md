@@ -27,7 +27,8 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.23.0 to 0.x.0](#from-version-0230-to-0x0)
+  - [From version 0.24.0 to 0.x.0](#from-version-0240-to-0x0)
+  - [From version 0.23.0 to 0.24.0](#from-version-0230-to-0240)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.21.0 to 0.22.0](#from-version-0210-to-0220)
   - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
@@ -42,9 +43,33 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-<!-- TODO: Replace 0.x.0 with the actual next released version when this Toast follow-up ships. -->
+<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
 
-### From version 0.23.0 to 0.x.0
+### From version 0.24.0 to 0.x.0
+
+#### BannerBase: `onClose` is now the only close-button behavior API
+
+**What changed:**
+
+- **`closeButtonProps.onPress`** is removed from the public **`BannerBase`** API.
+- The close button now renders **only** when **`onClose`** is provided.
+- **`closeButtonProps`** is now customization-only for the rendered close **`ButtonIcon`**.
+
+**Migration:**
+
+- Move any close-button behavior from **`closeButtonProps.onPress`** to **`onClose`**.
+- Keep **`closeButtonProps`** only for non-behavioral customization such as **`testID`**, accessibility props, and styling hooks.
+- If you previously passed only **`closeButtonProps`** to force-render a close button, also provide **`onClose`** now.
+
+**Impact:**
+
+- Existing **`@metamask/design-system-react-native`** consumers that relied on **`closeButtonProps.onPress`** or on rendering a close button without **`onClose`** must update those call sites.
+
+<!-- Backward-compatible anchor for the 0.24.0 changelog entry that shipped with the old placeholder link. -->
+
+<a id="from-version-0230-to-0x0"></a>
+
+### From version 0.23.0 to 0.24.0
 
 #### Toast: tighten the runtime API and align the surface with the shipped design
 
@@ -2155,21 +2180,21 @@ Mobile `BannerBase` maps to `BannerBase` in the design system, but the action-bu
 
 ##### Renamed Props
 
-| Legacy Mobile API                            | MMDS API                                     |
-| -------------------------------------------- | -------------------------------------------- |
-| `actionButtonProps.onPress`                  | `actionButtonOnPress`                        |
-| `actionButtonProps.label`                    | `actionButtonLabel`                          |
-| `closeButtonProps.onPress` (still supported) | `closeButtonProps.onPress` (still supported) |
+| Legacy Mobile API           | MMDS API              |
+| --------------------------- | --------------------- |
+| `actionButtonProps.onPress` | `actionButtonOnPress` |
+| `actionButtonProps.label`   | `actionButtonLabel`   |
+| `closeButtonProps.onPress`  | **`onClose`**         |
 
 ##### Type and Callback Signature Changes
 
-| Legacy Mobile API                                       | MMDS API                                                                                                                            | Notes                                                                        |
-| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `actionButtonProps?: ButtonProps`                       | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onPress' \| 'variant'>`                                              | MMDS prevents setting action handler and variant through `actionButtonProps` |
-| `actionButtonProps` controls rendering of action button | `actionButtonOnPress` controls rendering of action button                                                                           | Action button is shown only when `actionButtonOnPress` is provided           |
-| `title?: string \| React.ReactNode`                     | `title?: ReactNode`                                                                                                                 | Equivalent content support                                                   |
-| `description?: string \| React.ReactNode`               | `description?: ReactNode`                                                                                                           | Equivalent content support                                                   |
-| `closeButtonProps?: ButtonIconProps`                    | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onPress'> & { onPress?: (event: GestureResponderEvent) => void }` | `iconName` remains fixed to close icon                                       |
+| Legacy Mobile API                                       | MMDS API                                                                               | Notes                                                                        |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `actionButtonProps?: ButtonProps`                       | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onPress' \| 'variant'>` | MMDS prevents setting action handler and variant through `actionButtonProps` |
+| `actionButtonProps` controls rendering of action button | `actionButtonOnPress` controls rendering of action button                              | Action button is shown only when `actionButtonOnPress` is provided           |
+| `title?: string \| React.ReactNode`                     | `title?: ReactNode`                                                                    | Equivalent content support                                                   |
+| `description?: string \| React.ReactNode`               | `description?: ReactNode`                                                              | Equivalent content support                                                   |
+| `closeButtonProps?: ButtonIconProps`                    | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onPress'>`           | `iconName` remains fixed to close icon; use `onClose` for behavior           |
 
 ##### Default and Behavior Changes
 
@@ -2177,7 +2202,7 @@ Mobile `BannerBase` maps to `BannerBase` in the design system, but the action-bu
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | Action button shown when `actionButtonProps` exists                      | Action button shown when `actionButtonOnPress` exists                                                              |
 | Action button defaults to `size={ButtonSize.Auto}`                       | Action button defaults to `size={ButtonSize.Md}`                                                                   |
-| Close button press fallback uses `noop` when callbacks are missing       | Close button callback is omitted when callbacks are missing                                                        |
+| Close button press fallback uses `noop` when callbacks are missing       | Close button is rendered only when `onClose` is provided                                                           |
 | Close button icon default color is `IconColor.Default`                   | MMDS `BannerBase` delegates icon color to `ButtonIcon` defaults unless explicitly overridden in `closeButtonProps` |
 | Close button accessibility label had no explicit default in `BannerBase` | Default close label is `'Close banner'` (override with `closeButtonProps.accessibilityLabel`)                      |
 
