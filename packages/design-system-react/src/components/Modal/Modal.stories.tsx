@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
-import { Box, BoxBackgroundColor, BoxBorderColor } from '../Box';
+import { Box, BoxBorderColor, BoxFlexDirection } from '../Box';
 import { Button, ButtonVariant } from '../Button';
+import { ModalBody } from '../ModalBody';
+import { ModalContent } from '../ModalContent';
+import { ModalOverlay } from '../ModalOverlay';
 import { Text } from '../Text';
 
 import { Modal } from './Modal';
@@ -32,35 +35,6 @@ export default meta;
 
 type Story = StoryObj<ModalProps>;
 
-const ModalShell = ({ children }: { children: React.ReactNode }) => (
-  // While `Modal` portals into `document.body`, real consumers render the
-  // shell inside a `role="dialog"` container so the modal subtree carries
-  // proper landmark semantics. This minimal shell stands in for that.
-  <Box
-    role="dialog"
-    aria-modal="true"
-    aria-label="Modal example"
-    flexDirection="flex-col"
-    gap={4}
-    padding={4}
-    backgroundColor={BoxBackgroundColor.BackgroundDefault}
-    borderColor={BoxBorderColor.BorderDefault}
-    borderWidth={1}
-    className="fixed left-1/2 top-1/2 z-[1051] w-[360px] -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-md"
-  >
-    {children}
-  </Box>
-);
-
-const Backdrop = ({ onClick }: { onClick?: () => void }) => (
-  <Box
-    aria-hidden="true"
-    onClick={onClick}
-    backgroundColor={BoxBackgroundColor.OverlayDefault}
-    className="fixed inset-0 z-[1050]"
-  />
-);
-
 export const Default: Story = {
   render: (args) => {
     const [isOpen, setIsOpen] = useState(args.isOpen ?? false);
@@ -70,16 +44,22 @@ export const Default: Story = {
           Open modal
         </Button>
         <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <Backdrop onClick={() => setIsOpen(false)} />
-          <ModalShell>
-            <Text>Modal content rendered into document.body via a portal.</Text>
-            <Button
-              variant={ButtonVariant.Secondary}
-              onClick={() => setIsOpen(false)}
-            >
-              Close
-            </Button>
-          </ModalShell>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalBody>
+              <Box flexDirection={BoxFlexDirection.Column} gap={4} padding={4}>
+                <Text>
+                  Modal content rendered into document.body via a portal.
+                </Text>
+                <Button
+                  variant={ButtonVariant.Secondary}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Close
+                </Button>
+              </Box>
+            </ModalBody>
+          </ModalContent>
         </Modal>
       </>
     );
@@ -90,7 +70,7 @@ const ContextSummary = () => {
   const ctx = useModalContext();
   return (
     <Box
-      flexDirection="flex-col"
+      flexDirection={BoxFlexDirection.Column}
       gap={2}
       padding={2}
       borderColor={BoxBorderColor.BorderMuted}
@@ -124,20 +104,24 @@ export const UseModalContext: Story = {
           Open modal
         </Button>
         <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <Backdrop />
-          <ModalShell>
-            <Text>
-              Sibling components consume the configured behavior via{' '}
-              <code>useModalContext()</code>.
-            </Text>
-            <ContextSummary />
-            <Button
-              variant={ButtonVariant.Secondary}
-              onClick={() => setIsOpen(false)}
-            >
-              Close
-            </Button>
-          </ModalShell>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalBody>
+              <Box flexDirection={BoxFlexDirection.Column} gap={4} padding={4}>
+                <Text>
+                  Sibling components consume the configured behavior via{' '}
+                  <code>useModalContext()</code>.
+                </Text>
+                <ContextSummary />
+                <Button
+                  variant={ButtonVariant.Secondary}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Close
+                </Button>
+              </Box>
+            </ModalBody>
+          </ModalContent>
         </Modal>
       </>
     );
