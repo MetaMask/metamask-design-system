@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0]
+
+### Added
+
+- Added `animate-skeleton-pulse` (keyframes `skeleton-pulse`) for the design-system `Skeleton` loading bar ([#1146](https://github.com/MetaMask/metamask-design-system/pull/1146))
+- Added `animate-slide-up` (keyframes `slide-up`) for `ModalContent` dialog entrance motion ([#1139](https://github.com/MetaMask/metamask-design-system/pull/1139))
+
 ## [0.7.0]
 
 ### Added
@@ -72,7 +79,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.7.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.8.0...HEAD
+[0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.7.0...@metamask/design-system-tailwind-preset@0.8.0
 [0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.1...@metamask/design-system-tailwind-preset@0.7.0
 [0.6.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.0...@metamask/design-system-tailwind-preset@0.6.1
 [0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.5.0...@metamask/design-system-tailwind-preset@0.6.0
