@@ -16,11 +16,14 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [HeaderBase Component](#headerbase-component)
   - [Modal Component](#modal-component)
+  - [ModalContent Component](#modalcontent-component)
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
   - [ModalFooter Component](#modalfooter-component)
   - [ModalOverlay Component](#modaloverlay-component)
+  - [Skeleton Component](#skeleton-component)
 - [Version Updates](#version-updates)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -1235,6 +1238,99 @@ import { Checkbox } from '@metamask/design-system-react';
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
 
+### HeaderBase Component
+
+The extension `header-base` component maps to `HeaderBase` in the design system. The visual contract — a centered title flanked by start/end accessories — is preserved, but the implementation switches from JS-based width measurement (with a window resize listener) to **CSS Grid** layout. The polymorphic Box surface and the `mm-header-base` class hook are removed.
+
+`HeaderBase` is the layout primitive that `ModalHeader`, `PopoverHeader`, and any custom page-level header sit on. Migrate this first if you're moving any of those.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                | Design System Migration                                                |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `import { HeaderBase } from '../../component-library'`           | `import { HeaderBase } from '@metamask/design-system-react'`           |
+| `import type { HeaderBaseProps } from '../../component-library'` | `import type { HeaderBaseProps } from '@metamask/design-system-react'` |
+
+##### Layout Implementation
+
+| Concern              | Extension Behavior                                                                                                                                                                     | Design System Behavior                                                                                                                                                                                                               |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Title centering      | `display: flex; justify-content: space-between` plus a JS `useEffect` that measures both accessories and forces matching `minWidth` on each side; window `resize` listener re-measures | `display: grid; grid-template-columns: 1fr auto 1fr; align-items: center` (Tailwind: `grid grid-cols-[1fr_auto_1fr] items-center`). Title is pinned to column 2; the `1fr` side tracks always balance it. No JS, no resize listener. |
+| Slot wrapper styling | Manual `marginLeft` / `marginRight` / `width: calc(...)` set per-render based on measurements                                                                                          | Static Tailwind utilities: `col-start-1 justify-self-start` (start), `col-start-2 col-end-3` (title), `col-start-3 justify-self-end` (end)                                                                                           |
+| Re-render on resize  | `useState`-driven re-renders whenever the window or children change                                                                                                                    | None — layout is fully declarative                                                                                                                                                                                                   |
+
+The visual output is identical for the documented use cases (modal headers, popover headers, page headers). The only edge case where behavior diverges is when a single accessory is much wider than the column it occupies — in the legacy version the title was forced to compress; in the grid version the title stays centered and the accessory column grows to its content (the `1fr` side track still matches its sibling).
+
+##### Props and Behavior Mapping
+
+| Extension API                                                | Design System API                                                              | Change Type | Notes                                                                                                                                |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `children?: ReactNode`                                       | `children?: ReactNode`                                                         | unchanged   | rendered in the centered grid column                                                                                                 |
+| `startAccessory?: ReactNode`                                 | `startAccessory?: ReactNode`                                                   | unchanged   | rendered in the start column                                                                                                         |
+| `endAccessory?: ReactNode`                                   | `endAccessory?: ReactNode`                                                     | unchanged   | rendered in the end column                                                                                                           |
+| `childrenWrapperProps?: BoxProps<'div'>`                     | `childrenWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*` index sig.) | shape       | now bound to MMDS `BoxProps`; `className` is merged via `twMerge` (consumer utilities can override grid placement when needed).      |
+| `startAccessoryWrapperProps?: BoxProps<'div'>`               | `startAccessoryWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*`)      | shape       | same shape change as `childrenWrapperProps`.                                                                                         |
+| `endAccessoryWrapperProps?: BoxProps<'div'>`                 | `endAccessoryWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*`)        | shape       | same shape change.                                                                                                                   |
+| `className?: string`                                         | `className?: string`                                                           | unchanged   | applied to the grid container; merged via `twMerge`                                                                                  |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` | removed                                                                        | removed     | always renders `<div>`. Wrap or compose if you need a different element.                                                             |
+| Box style-utility props on the root (`marginBottom`, …)      | removed from public API                                                        | removed     | the root is no longer a polymorphic Box. Use `className` with Tailwind utilities (e.g. `className="mb-4"`) for layout overrides.     |
+| `mm-header-base` SCSS class hook                             | removed                                                                        | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities. |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { HeaderBase } from '../../component-library';
+
+// Default usage
+<HeaderBase
+  startAccessory={<BackButton />}
+  endAccessory={<CloseButton />}
+>
+  <Title>Page title</Title>
+</HeaderBase>
+
+// Customize the root via Box utility props
+<HeaderBase marginBottom={4} alignItems={AlignItems.center}>
+  <Title>Page title</Title>
+</HeaderBase>
+```
+
+##### After (Design System)
+
+```tsx
+import { HeaderBase } from '@metamask/design-system-react';
+
+// Default usage — unchanged
+<HeaderBase
+  startAccessory={<BackButton />}
+  endAccessory={<CloseButton />}
+>
+  <Title>Page title</Title>
+</HeaderBase>
+
+// Root overrides move into className (Box utility props on the root are removed)
+<HeaderBase className="mb-4 items-center">
+  <Title>Page title</Title>
+</HeaderBase>
+```
+
+For typical call sites — for example `ui/components/multichain/pages/page/components/header/header.tsx` (direct external consumer) and the internal `popover-header.tsx` / `modal-header.tsx` consumers within the legacy `component-library` (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Move any root-level Box utility props (`marginBottom`, `alignItems`, etc.) onto `className` (`mb-4`, `items-center`, …).
+
+#### API Differences
+
+- `HeaderBase` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-header-base` class hook is gone — use `className` to apply Tailwind utilities.
+- The `useRef` / `useEffect` / `useState` / `window.addEventListener('resize', …)` measurement code is gone. There are no longer any layout side effects on mount or window resize.
+- Slot wrappers (`childrenWrapperProps` / `startAccessoryWrapperProps` / `endAccessoryWrapperProps`) ship their grid-placement utilities (`col-start-*`, `justify-self-*`) as defaults; consumer `className` is merged via `twMerge` so it can override placement when needed.
+
 ### Modal Component
 
 The extension `modal` component maps to `Modal` in the design system. The behavioral contract — portal into `document.body` while `isOpen`, unmount on close, expose configuration to descendants via `useModalContext` — is preserved 1:1. The migration is a near-zero-effort import-path swap for typical consumers.
@@ -1322,6 +1418,143 @@ For typical call sites — for example `ui/components/multichain-accounts/accoun
 
 - `Modal` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-modal` class hook is gone — use `className` to apply Tailwind utilities.
 - `useModalContext` is now exported from the package barrel (`@metamask/design-system-react`). `ModalContextType` is also exported as a type for consumers building custom subtree integrations.
+
+### ModalContent Component
+
+The extension `modal-content` component maps to `ModalContent` in the design system. The behavioral contract — a centered `<section role="dialog">` with built-in close-on-Escape, close-on-outside-click, focus management via `ModalFocus`, and the standard slide-up entrance animation — is preserved. The polymorphic Box surface and the `mm-modal-content` SCSS class hooks are removed in favor of Tailwind utilities, and the legacy `mm-popover` outside-click escape hatch is replaced by a generic, design-system-agnostic data attribute.
+
+`ModalContent` reads its behavior from `useModalContext`, so it must be rendered inside a `<Modal>` — same as the legacy.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                  | Design System Migration                                                  |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `import { ModalContent } from '../../component-library'`           | `import { ModalContent } from '@metamask/design-system-react'`           |
+| `import { ModalContentSize } from '../../component-library'`       | `import { ModalContentSize } from '@metamask/design-system-react'`       |
+| `import type { ModalContentProps } from '../../component-library'` | `import type { ModalContentProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                | Design System API                                                               | Change Type | Notes                                                                                                                                                                             |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children: ReactNode`                                        | `children: ReactNode`                                                           | unchanged   | rendered inside the `<section role="dialog">`                                                                                                                                     |
+| `size?: ModalContentSize` (`Sm`/`Md`/`Lg`)                   | `size?: ModalContentSize` (`Sm`/`Md`/`Lg`)                                      | unchanged   | values and pixel widths preserved (360 / 480 / 720); enum is now a const-object union (ADR-0003), but `ModalContentSize.Sm` etc. still work.                                      |
+| `modalDialogProps?: any`                                     | `modalDialogProps?: Omit<BoxProps, 'children'>` (with `data-*` index signature) | shape       | now typed against MMDS `BoxProps`. `className` is still merged via `twMerge` so consumer utilities win over the defaults.                                                         |
+| `className?: string`                                         | `className?: string`                                                            | unchanged   | applied to the outer positioning element; merged via `twMerge`                                                                                                                    |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` | removed                                                                         | removed     | always renders `<div>` (outer) + `<section role="dialog">` (inner). If you need a different element, wrap or compose.                                                             |
+| Box style-utility props on the outer (`alignItems`, …)       | removed from public API                                                         | removed     | the outer container is no longer a polymorphic Box. Use `className` with Tailwind utilities for layout overrides.                                                                 |
+| `mm-modal-content` / `mm-modal-content__dialog` SCSS hooks   | removed                                                                         | removed     | the slide-up animation moved into the `motion-safe:animate-slide-up` Tailwind utility on the inner dialog (added to `@metamask/design-system-tailwind-preset` in this migration). |
+
+##### Popover-in-Modal Outside-Click Hand-off
+
+The legacy `ModalContent` short-circuited its outside-click handler via a hard-coded `event.target.closest('.mm-popover')` check so that interacting with a portal-rendered Popover inside a Modal would not close the modal. That coupling is design-system-agnostic in MMDS:
+
+| Extension                                                  | Design System                                                                                                                    |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Hard-coded `.mm-popover` class check inside `ModalContent` | Generic data-attribute opt-out: clicks whose target's `closest('[data-mm-modal-ignore-outside-click]')` is non-null are ignored. |
+
+Floating UI primitives that render as siblings to the Modal portal (Popover, Tooltip, Select dropdown, …) opt out by setting the attribute on their root element. The constant `MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR` (= `'data-mm-modal-ignore-outside-click'`) is exported from the package for type-safe usage.
+
+```tsx
+import {
+  Box,
+  MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR,
+} from '@metamask/design-system-react';
+
+<Box {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}>
+  {popoverContent}
+</Box>;
+```
+
+**Required follow-up in MetaMask Extension:** the legacy `ui/components/component-library/popover/popover.tsx` adds the `'mm-popover'` class to its root Box. To preserve the existing Popover-inside-Modal interaction across the extension's 13+ `Popover` + `Modal` call sites (verified via fresh grep — for example `ui/components/multichain/network-list-menu/network-list-menu.tsx`, `ui/pages/confirmations/components/send/network-filter/network-filter.tsx`, `ui/components/app/cancel-speedup-popover/cancel-speedup-popover.js`, `ui/pages/confirmations/components/edit-gas-popover/edit-gas-popover.component.js`, `ui/components/app/terms-of-use-popup/terms-of-use-popup.js`), add the data attribute to the same Box:
+
+```tsx
+// ui/components/component-library/popover/popover.tsx (legacy extension)
+import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from '@metamask/design-system-react';
+
+<Box
+  className={classnames('mm-popover', /* … */)}
+  {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}
+  /* … */
+>
+```
+
+This is a one-line addition; the rest of the legacy `Popover` stays unchanged. After the extension switches its `ModalContent` import to `@metamask/design-system-react`, every Popover-inside-Modal flow keeps working.
+
+##### Default and Behavior Changes
+
+| Concern                    | Extension Behavior                                                                                                 | Design System Behavior                                                                                                                                         |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Outer positioning          | `position: fixed; left: 0; top: 0; z-index: $modal-z-index (1050); width/height: 100vw/100vh` via SCSS + Box props | `fixed inset-0 z-[1050]` Tailwind utilities                                                                                                                    |
+| Outer padding (responsive) | `paddingTop/Bottom={[4, 8, 12]}` Box responsive arrays + `@media (max-height: 475px) { padding: 8px }`             | `p-4 sm:py-8 md:py-12 [@media(max-height:475px)]:p-2` Tailwind utilities (responsive arrays in Box are unsupported in MMDS — use Tailwind prefixes).           |
+| Inner dialog sizing        | `max-width: var(--size, 360px)` per `--size-{sm,md,lg}` SCSS modifier                                              | `max-w-[360px]` / `max-w-[480px]` / `max-w-[720px]` Tailwind utilities, applied via `TWCLASSMAP_MODAL_CONTENT_SIZE`                                            |
+| Inner dialog entrance      | 400ms `cubic-bezier(0.3, 0.8, 0.3, 1)` slide-up + fade keyframe via SCSS, gated by `prefers-reduced-motion`        | New `motion-safe:animate-slide-up` Tailwind utility (matches `AnimationDuration.Slowly` from `@metamask/design-tokens`); reduced-motion users get no animation |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalContent } from '../../component-library';
+
+// Default usage
+<ModalContent>{/* ModalHeader + ModalBody + ModalFooter */}</ModalContent>
+
+// Customize the outer container (centered content)
+<ModalContent alignItems={AlignItems.center}>{/* … */}</ModalContent>
+
+// Customize the inner dialog
+<ModalContent
+  modalDialogProps={{
+    display: Display.Flex,
+    flexDirection: FlexDirection.Column,
+  }}
+>
+  {/* … */}
+</ModalContent>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalContent } from '@metamask/design-system-react';
+
+// Default usage — unchanged
+<ModalContent>{/* ModalHeader + ModalBody + ModalFooter */}</ModalContent>
+
+// Outer overrides move into className
+<ModalContent className="items-center">{/* … */}</ModalContent>
+
+// Inner dialog overrides go through modalDialogProps
+<ModalContent
+  modalDialogProps={{
+    flexDirection: BoxFlexDirection.Column,
+  }}
+>
+  {/* … */}
+</ModalContent>
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (bare `<ModalContent>`), `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (`<ModalContent alignItems={AlignItems.center}>` → `className="items-center"`), and `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`modalDialogProps={{ display: Display.Flex, flexDirection: FlexDirection.Column }}` → drop `display` since `modalDialogProps` is already a Box and uses Tailwind flex utilities by default; replace `flexDirection` with `BoxFlexDirection.Column`) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Move any outer Box utility props onto `className` (e.g. `alignItems={AlignItems.center}` → `className="items-center"`).
+3. Update `modalDialogProps` enum values to MMDS shapes (`Display.Flex` → `BoxDisplay.Flex` is implicit since MMDS Box is already flex when `flexDirection` is set; `FlexDirection.Column` → `BoxFlexDirection.Column`).
+4. If the call site embeds a `Popover` from the legacy extension `component-library`, ensure that `Popover` adds the `data-mm-modal-ignore-outside-click` attribute (one-line change in `popover.tsx`).
+
+#### Deprecated `ModalContent`
+
+The extension exports a separate `deprecated/` `ModalContent` from `ui/components/component-library/modal-content/deprecated`. **It is not migrated.** Consumers still importing from `'../../component-library/modal-content/deprecated'` (e.g. `ui/components/app/snaps/snap-remove-warning/snap-remove-warning.js`, `ui/components/app/srp-quiz-modal/SRPQuiz/SRPQuiz.tsx`, `ui/components/multichain/account-menu/account-menu.tsx`) need to migrate to the current `ModalContent` first, then switch to `@metamask/design-system-react`. The deprecated path predates the current `padding={4}` → `paddingTop={4} paddingBottom={4}` split on the dialog and the body's own padding ownership.
+
+#### API Differences
+
+- `ModalContent` always renders a `<div>` outer + `<section role="dialog" aria-modal="true">` inner. Forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to the outer `<div>`.
+- `ModalContentSize` is now a const-object union (ADR-0003) but the value identifiers and pixel widths are preserved.
+- `MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR` is exported from the package barrel for type-safe use of the outside-click opt-out attribute.
 
 ### ModalBody Component
 
@@ -1699,6 +1932,113 @@ For typical call sites — for example `ui/components/multichain/network-list-me
 
 - `ModalOverlay` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - One-off styling that previously used Box utility props (e.g. `backgroundColor={BackgroundColor.overlayAlternative}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="bg-overlay-alternative"`).
+
+### Skeleton Component
+
+The extension `skeleton` component maps to `Skeleton` in the design system. The visual contract — a pulsing placeholder with `bg-icon-alternative` opacity-cycling at 1400ms — is preserved, but the public API is realigned with the React Native `Skeleton` (`@metamask/design-system-react-native`):
+
+- The toggle prop is renamed and **inverted** (`isLoading` → `hideChildren`).
+- The polymorphic Box surface and the `mm-skeleton` SCSS class hook are removed.
+- The pulse animation moves from a component-local SCSS keyframe to a `motion-safe:animate-skeleton-pulse` Tailwind utility added to `@metamask/design-system-tailwind-preset` in this migration.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                              | Design System Migration                                              |
+| -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `import { Skeleton } from '../../component-library'`           | `import { Skeleton } from '@metamask/design-system-react'`           |
+| `import type { SkeletonProps } from '../../component-library'` | `import type { SkeletonProps } from '@metamask/design-system-react'` |
+
+##### Toggle Prop: `isLoading` → `hideChildren` (semantics inverted)
+
+This is the headline breaking change. The legacy `isLoading` prop (defaulting to `true`) is replaced by `hideChildren` (defaulting to `false`) — the meaning is **inverted**. This aligns the web Skeleton with the React Native `Skeleton`'s API.
+
+| Extension                               | Design System                    | Behavior                                                                                                         |
+| --------------------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `<Skeleton>` (default `isLoading=true`) | `<Skeleton hideChildren>`        | Standalone placeholder. Animated bar fills the container. Children, if any, render invisibly to preserve layout. |
+| `<Skeleton isLoading={true}>{x}</…>`    | `<Skeleton hideChildren>{x}</…>` | Skeleton overlay; `x` invisible (preserves layout dimensions).                                                   |
+| `<Skeleton isLoading={false}>{x}</…>`   | `<Skeleton>{x}</…>` (default)    | `x` renders directly; no skeleton overlay, no animation.                                                         |
+| `<Skeleton width={100} />`              | `<Skeleton width={100} />`       | Standalone placeholder; unchanged.                                                                               |
+
+The mechanical translation is `isLoading={x}` ⇒ `hideChildren={x}`. The default-prop behavior also flips: a bare `<Skeleton>{x}</Skeleton>` used to render the skeleton; in MMDS it renders `x` directly.
+
+##### Props and Behavior Mapping
+
+| Extension API                                                | Design System API                          | Change Type        | Notes                                                                                                                                                                                                                                |
+| ------------------------------------------------------------ | ------------------------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `isLoading?: boolean` (default `true`)                       | `hideChildren?: boolean` (default `false`) | renamed + inverted | toggle now matches the React Native `Skeleton` API; mechanical translation is `isLoading={x}` ⇒ `hideChildren={x}`.                                                                                                                  |
+| `height?: number \| string`                                  | `height?: number \| string`                | unchanged          | applied as inline style.                                                                                                                                                                                                             |
+| `width?: number \| string`                                   | `width?: number \| string`                 | unchanged          | applied as inline style.                                                                                                                                                                                                             |
+| `children?: ReactNode`                                       | `children?: ReactNode`                     | unchanged          | rendered directly when `hideChildren=false`; rendered invisibly inside the container when `hideChildren=true`.                                                                                                                       |
+| `className?: string`                                         | `className?: string`                       | unchanged          | applied to the container; merged with the component's defaults via `twMerge`.                                                                                                                                                        |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` | removed                                    | removed            | always renders `<div>`. If you need a different element, wrap or compose.                                                                                                                                                            |
+| Box style-utility props on the root (`marginBottom`, …)      | removed from public API                    | removed            | use `className` with Tailwind utilities (e.g. `className="mb-4"`) for layout overrides.                                                                                                                                              |
+| `mm-skeleton` SCSS class hook                                | removed                                    | removed            | the pulse animation moved into the `motion-safe:animate-skeleton-pulse` Tailwind utility on the inner overlay (added to `@metamask/design-system-tailwind-preset` in this migration). Reduced-motion users see a static placeholder. |
+| `* { visibility: hidden }` SCSS rule on descendants          | replaced with structural invisibility      | replaced           | when `hideChildren=true`, children render inside an `aria-hidden` wrapper with `invisible pointer-events-none`. No global descendant rule.                                                                                           |
+
+##### Default and Behavior Changes
+
+| Concern           | Extension Behavior                                                               | Design System Behavior                                                                                                         |
+| ----------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Default state     | `isLoading=true` — wrapping `<Skeleton>{x}</…>` defaults to showing the skeleton | `hideChildren=false` — wrapping `<Skeleton>{x}</…>` defaults to showing the children directly (no skeleton overlay)            |
+| Animation         | always-on, opacity 0.2 → 0.1 → 0.2 cycle every 1400ms                            | same cycle, gated by `motion-safe:` (reduced-motion users get a static placeholder)                                            |
+| Container element | polymorphic Box (`<div>` by default; can render any element via `as`)            | always `<div>`                                                                                                                 |
+| ARIA              | none                                                                             | container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Skeleton } from '../../component-library';
+
+// Default behavior: skeleton showing
+<Skeleton>{maybeContent}</Skeleton>
+
+// State-driven toggle
+<Skeleton isLoading={isLoading}>{content}</Skeleton>
+
+// Standalone placeholder
+<Skeleton width="100px" height="16px" />
+
+// Inverted: render content with no skeleton overlay
+<Skeleton isLoading={false}>{content}</Skeleton>
+```
+
+##### After (Design System)
+
+```tsx
+import { Skeleton } from '@metamask/design-system-react';
+
+// To preserve "show skeleton with hidden children" behavior, set hideChildren
+<Skeleton hideChildren>{maybeContent}</Skeleton>
+
+// State-driven toggle (mechanical translation)
+<Skeleton hideChildren={isLoading}>{content}</Skeleton>
+
+// Standalone placeholder — unchanged
+<Skeleton width="100px" height="16px" />
+
+// Default in MMDS: children render directly (replaces isLoading={false})
+<Skeleton>{content}</Skeleton>
+```
+
+For typical call sites — for example `ui/components/ui/aggregated-balance/aggregated-balance.tsx` (state-driven `isLoading={...}`), `ui/components/app/wallet-overview/coin-overview.tsx` (state-driven `isLoading={...}` with Box utility props), and `ui/components/app/rewards/RewardsPointsBalance.tsx` (standalone `<Skeleton width="100px" />`) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Rename `isLoading` → `hideChildren`. The boolean expression is mechanically the same (e.g. `isLoading={!data}` ⇒ `hideChildren={!data}`).
+3. For any bare `<Skeleton>{x}</Skeleton>` that relied on the legacy default `isLoading=true`, add `hideChildren` explicitly. (Bare standalone `<Skeleton width=… />` without children does not need to change.)
+4. Move any root-level Box utility props (`marginBottom`, etc.) onto `className`.
+
+Codemod-friendly: every `isLoading=` token in the extension's existing call sites maps 1:1 to `hideChildren=`.
+
+#### API Differences
+
+- `Skeleton` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- The container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` by default. The skeleton takes no part in the accessibility tree.
 
 ## Version Updates
 
