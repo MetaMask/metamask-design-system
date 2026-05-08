@@ -1,10 +1,16 @@
 import React, { forwardRef } from 'react';
 
+import {
+  ButtonIconSize,
+  IconName,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
+
 import { twMerge } from '../../utils/tw-merge';
 import { Box } from '../Box';
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { IconName } from '../Icon';
-import { Text, TextAlign, TextColor, TextVariant } from '../Text';
+import { ButtonIcon } from '../ButtonIcon';
+import { Text, TextAlign } from '../Text';
 
 import type { PopoverHeaderProps } from './PopoverHeader.types';
 
