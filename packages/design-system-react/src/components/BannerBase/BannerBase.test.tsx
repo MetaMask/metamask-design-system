@@ -92,17 +92,18 @@ describe('BannerBase', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it('renders close button and triggers closeButtonProps.onClick when onClose is not provided', () => {
-    const onCloseButtonClick = jest.fn();
-    render(<BannerBase closeButtonProps={{ onClick: onCloseButtonClick }} />);
+  it('does not render close button when only closeButtonProps are provided', () => {
+    render(
+      <BannerBase closeButtonProps={{ 'data-testid': closeButtonTestId }} />,
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: 'Close banner' }));
-    expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
+    expect(screen.queryByTestId(closeButtonTestId)).not.toBeInTheDocument();
   });
 
   it('merges structural and custom close button className values', () => {
     render(
       <BannerBase
+        onClose={() => undefined}
         closeButtonProps={{
           className: 'rotate-45',
           'data-testid': closeButtonTestId,
