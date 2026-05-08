@@ -15,7 +15,7 @@ import { BottomSheetHeader } from '@metamask/design-system-react-native';
 
 ## Props
 
-Inherits root and title props from [HeaderBase](../HeaderBase/README.md), including `testID`, `accessibilityLabel`, `style`, `twClassName`, `textProps`, and wrapper props. `BottomSheetHeader` manages its start and end accessories internally through `onBack` and `onClose`, so it does not expose `startAccessory` or `endAccessory` as public props.
+Inherits root and title props from [HeaderBase](../HeaderBase/README.md), including `testID`, `accessibilityLabel`, `style`, `twClassName`, `textProps`, and wrapper props. `BottomSheetHeader` manages its start and end accessories internally through `onBack` and `onClose`, so it does not expose `startAccessory`, `endAccessory`, `startButtonIconProps`, or `endButtonIconProps` as public props.
 
 ### `onBack`
 

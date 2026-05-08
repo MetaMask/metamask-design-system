@@ -17,6 +17,8 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   backButtonProps,
   onClose,
   closeButtonProps,
+  startButtonIconProps: _startButtonIconProps,
+  endButtonIconProps: _endButtonIconProps,
   ...props
 }) => {
   const tw = useTailwind();
