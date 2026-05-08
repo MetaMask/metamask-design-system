@@ -1,8 +1,4 @@
-import {
-  ButtonBaseShape,
-  ButtonBaseSize,
-  IconName,
-} from '@metamask/design-system-shared';
+import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
@@ -36,9 +32,9 @@ describe('ButtonBase', () => {
     expect(screen.getByRole('button')).toHaveClass('px-4');
   });
 
-  it('applies pill shape with rounded-full class', () => {
-    render(<ButtonBase shape={ButtonBaseShape.Pill}>Pill</ButtonBase>);
-    expect(screen.getByRole('button')).toHaveClass('rounded-full');
+  it('applies size-based border radius for default large button', () => {
+    render(<ButtonBase>Rounded</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('rounded-xl');
   });
 
   it('renders as child component when asChild is true', () => {

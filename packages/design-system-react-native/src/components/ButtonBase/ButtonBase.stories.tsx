@@ -1,7 +1,6 @@
 import {
   BoxFlexDirection,
   BoxFlexWrap,
-  ButtonBaseShape,
   ButtonBaseSize,
   FontWeight,
   IconName,
@@ -29,12 +28,6 @@ const meta: Meta<typeof ButtonBase> = {
       control: 'select',
       options: Object.values(ButtonBaseSize),
       description: 'Optional prop to control the size of the ButtonBase',
-    },
-    shape: {
-      control: 'select',
-      options: Object.values(ButtonBaseShape),
-      description:
-        'Optional prop for corner style: size-based radius or fully rounded (pill)',
     },
     isLoading: {
       control: 'boolean',
@@ -84,7 +77,6 @@ export const Default: Story = {
   args: {
     children: 'ButtonBase',
     size: ButtonBaseSize.Lg,
-    shape: ButtonBaseShape.Rounded,
     isLoading: false,
     isDisabled: false,
     isFullWidth: false,
@@ -103,23 +95,6 @@ export const Size: Story = {
       </ButtonBase>
       <ButtonBase {...args} size={ButtonBaseSize.Lg}>
         ButtonBaseSize Lg (Default)
-      </ButtonBase>
-    </Box>
-  ),
-};
-
-export const Shape: Story = {
-  render: (args) => (
-    <Box
-      flexDirection={BoxFlexDirection.Row}
-      gap={4}
-      flexWrap={BoxFlexWrap.Wrap}
-    >
-      <ButtonBase {...args} shape={ButtonBaseShape.Rounded}>
-        Rounded
-      </ButtonBase>
-      <ButtonBase {...args} shape={ButtonBaseShape.Pill}>
-        Pill
       </ButtonBase>
     </Box>
   ),

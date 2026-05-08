@@ -1,5 +1,4 @@
 import {
-  ButtonBaseShape,
   ButtonBaseSize,
   IconSize,
   TextVariant,
@@ -40,13 +39,7 @@ export const MAP_BUTTONBASE_SIZE_TEXT_VARIANT: Record<
 
 export const getButtonBaseBorderRadiusTwClass = (
   size: ButtonBaseSize,
-  shape: ButtonBaseShape,
-): string => {
-  if (shape === ButtonBaseShape.Pill) {
-    return 'rounded-full';
-  }
-  return TWCLASSMAP_BUTTONBASE_BORDER_RADIUS[size];
-};
+): string => TWCLASSMAP_BUTTONBASE_BORDER_RADIUS[size];
 
 export const getButtonBaseHorizontalPaddingTwClasses = (
   buttonSize: ButtonBaseSize,

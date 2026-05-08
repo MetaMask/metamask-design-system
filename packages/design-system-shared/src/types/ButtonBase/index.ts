@@ -1,5 +1,4 @@
 export {
-  ButtonBaseShape,
   ButtonBaseSize,
   ButtonHeroSize,
   ButtonSize,

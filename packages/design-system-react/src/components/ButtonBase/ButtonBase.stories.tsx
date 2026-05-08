@@ -1,5 +1,4 @@
 import {
-  ButtonBaseShape,
   ButtonBaseSize,
   IconName,
   TextColor,
@@ -38,13 +37,6 @@ const meta: Meta<typeof ButtonBase> = {
       options: Object.keys(ButtonBaseSize),
       mapping: ButtonBaseSize,
       description: 'Optional prop to control the size of the ButtonBase',
-    },
-    shape: {
-      control: 'select',
-      options: Object.keys(ButtonBaseShape),
-      mapping: ButtonBaseShape,
-      description:
-        'Optional prop for corner style: size-based radius or fully rounded (pill)',
     },
     isFullWidth: {
       control: 'boolean',
@@ -132,7 +124,6 @@ type Story = StoryObj<typeof ButtonBase>;
 export const Default: Story = {
   args: {
     children: 'Button Base',
-    shape: ButtonBaseShape.Rounded,
   },
 };
 
@@ -162,19 +153,6 @@ export const Size: Story = {
         Medium
       </ButtonBase>
       <ButtonBase {...args}>Large</ButtonBase>
-    </div>
-  ),
-};
-
-export const Shape: Story = {
-  render: (args) => (
-    <div className="flex flex-wrap gap-2">
-      <ButtonBase {...args} shape={ButtonBaseShape.Rounded}>
-        Rounded
-      </ButtonBase>
-      <ButtonBase {...args} shape={ButtonBaseShape.Pill}>
-        Pill
-      </ButtonBase>
     </div>
   ),
 };

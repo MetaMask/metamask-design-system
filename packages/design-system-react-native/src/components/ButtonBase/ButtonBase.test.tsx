@@ -1,8 +1,4 @@
-import {
-  ButtonBaseShape,
-  ButtonBaseSize,
-  IconName,
-} from '@metamask/design-system-shared';
+import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent } from '@testing-library/react-native';
@@ -92,12 +88,10 @@ describe('ButtonBase', () => {
     });
   });
 
-  describe('shape', () => {
-    it('uses rounded-full for pill shape', () => {
+  describe('border radius', () => {
+    it('uses size-based radius classes from constants', () => {
       const tree = ReactTestRenderer.create(
-        <ButtonBase shape={ButtonBaseShape.Pill} size={ButtonBaseSize.Lg}>
-          Pill
-        </ButtonBase>,
+        <ButtonBase size={ButtonBaseSize.Lg}>Large</ButtonBase>,
       );
 
       const buttonAnimated = tree.root.findByProps({
@@ -110,14 +104,11 @@ describe('ButtonBase', () => {
         string,
         unknown
       >;
-      const pillRadiusStyle = tw.style(
-        getButtonBaseBorderRadiusTwClass(
-          ButtonBaseSize.Lg,
-          ButtonBaseShape.Pill,
-        ),
+      const expectedRadiusStyle = tw.style(
+        getButtonBaseBorderRadiusTwClass(ButtonBaseSize.Lg),
       );
 
-      expect(resolved).toMatchObject(pillRadiusStyle);
+      expect(resolved).toMatchObject(expectedRadiusStyle);
     });
   });
 

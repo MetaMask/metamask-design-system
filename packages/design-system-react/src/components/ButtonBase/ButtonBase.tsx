@@ -1,8 +1,4 @@
-import {
-  ButtonBaseShape,
-  ButtonBaseSize,
-  IconName,
-} from '@metamask/design-system-shared';
+import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
@@ -25,7 +21,6 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
       children,
       className,
       size = ButtonBaseSize.Lg,
-      shape = ButtonBaseShape.Rounded,
       isFullWidth,
       asChild,
       isDisabled,
@@ -170,7 +165,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const mergedClassName = twMerge(
       // Base styles
       'inline-flex items-center justify-center',
-      getButtonBaseBorderRadiusTwClass(size, shape),
+      getButtonBaseBorderRadiusTwClass(size),
       getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
       hasAccessories && 'gap-x-1',
       'font-medium text-default',

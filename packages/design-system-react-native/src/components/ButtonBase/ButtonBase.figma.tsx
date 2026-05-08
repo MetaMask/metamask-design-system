@@ -38,10 +38,9 @@ figma.connect(
         false: undefined,
       }),
     },
-    example: ({ size, shape, startIconName, endIconName, children }) => (
+    example: ({ size, startIconName, endIconName, children }) => (
       <ButtonBase
         size={size}
-        shape={shape}
         startIconName={startIconName}
         endIconName={endIconName}
       >

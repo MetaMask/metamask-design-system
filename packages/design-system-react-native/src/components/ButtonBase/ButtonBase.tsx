@@ -1,5 +1,4 @@
 import {
-  ButtonBaseShape,
   ButtonBaseSize,
   FontWeight,
   TextColor,
@@ -27,7 +26,6 @@ export const ButtonBase = ({
   children,
   textProps,
   size = ButtonBaseSize.Lg,
-  shape = ButtonBaseShape.Rounded,
   isLoading,
   loadingText,
   spinnerProps,
@@ -135,7 +133,7 @@ export const ButtonBase = ({
           // Visual styling
           'bg-muted overflow-hidden',
           // Conditional Border Radius and Horizontal Spacing based on requirements
-          getButtonBaseBorderRadiusTwClass(size, shape),
+          getButtonBaseBorderRadiusTwClass(size),
           getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
           // Size
           TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],

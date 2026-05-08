@@ -36,22 +36,6 @@ import { ButtonBaseSize } from '@metamask/design-system-shared';
 </ButtonBase>
 ```
 
-### `shape`
-
-Corner style: **rounded** uses size-based border radius; **pill** uses fully rounded ends.
-
-| TYPE              | REQUIRED | DEFAULT                   |
-| ----------------- | -------- | ------------------------- |
-| `ButtonBaseShape` | No       | `ButtonBaseShape.Rounded` |
-
-```tsx
-import { ButtonBaseShape } from '@metamask/design-system-shared';
-
-<ButtonBase shape={ButtonBaseShape.Pill} onPress={() => {}}>
-  Pill button
-</ButtonBase>;
-```
-
 ### `children`
 
 The content of the `ButtonBase` component.
