@@ -15,18 +15,24 @@ const meta: Meta<PopoverHeaderProps> = {
       page: README,
     },
   },
-  // Wrap each story in a dialog landmark so the `<header>` inside is scoped
-  // to its parent role and is not treated as a top-level `banner` landmark
-  // by axe. This mirrors real usage — `PopoverHeader` always lives inside a
-  // `Popover`/`<dialog>`.
+  // Wrap each story in a dialog landmark. The inner <article> is a sectioning
+  // element that scopes the <header> inside PopoverHeader so axe does NOT
+  // assign it the banner role (axe computes the header's role from the HTML
+  // element tag hierarchy: article/aside/main/nav/section all scope it).
+  // `text-default` on the dialog ensures `text-inherit` on the title
+  // resolves to the correct design-token color in both light and dark themes
+  // instead of falling back to the browser default.
   decorators: [
     (Story, context) => (
       <div
         role="dialog"
         aria-modal="true"
         aria-label={`PopoverHeader — ${context.name}`}
+        className="text-default"
       >
-        <Story />
+        <article>
+          <Story />
+        </article>
       </div>
     ),
   ],
