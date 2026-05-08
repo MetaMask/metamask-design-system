@@ -17,6 +17,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
   - [HeaderBase Component](#headerbase-component)
+  - [HelpText Component](#helptext-component)
   - [Modal Component](#modal-component)
   - [ModalContent Component](#modalcontent-component)
   - [ModalBody Component](#modalbody-component)
@@ -1330,6 +1331,78 @@ For typical call sites — for example `ui/components/multichain/pages/page/comp
 - `HeaderBase` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-header-base` class hook is gone — use `className` to apply Tailwind utilities.
 - The `useRef` / `useEffect` / `useState` / `window.addEventListener('resize', …)` measurement code is gone. There are no longer any layout side effects on mount or window resize.
 - Slot wrappers (`childrenWrapperProps` / `startAccessoryWrapperProps` / `endAccessoryWrapperProps`) ship their grid-placement utilities (`col-start-*`, `justify-self-*`) as defaults; consumer `className` is merged via `twMerge` so it can override placement when needed.
+
+### HelpText Component
+
+The extension `help-text` component maps to `HelpText` in the design system. It still renders a `<p>` with the `body-sm` typography and applies a severity-based text color, but the polymorphic `as` API is replaced with the design-system `asChild` pattern, and the `HelpTextSeverity` enum is now a const object (ADR-0003) sourced from `@metamask/design-system-shared`.
+
+#### Breaking Changes
+
+##### Imports and Enum Source
+
+| Extension Pattern                                                  | Design System Migration                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `import { HelpText } from '../../component-library/help-text'`     | `import { HelpText } from '@metamask/design-system-react'`         |
+| `import { HelpTextSeverity } from '.../help-text/help-text.types'` | `import { HelpTextSeverity } from '@metamask/design-system-react'` |
+
+##### Severity Values
+
+`HelpTextSeverity` is now a const object instead of a TypeScript enum, but member names and string values are unchanged.
+
+| Extension Value                          | Design System Value        |
+| ---------------------------------------- | -------------------------- |
+| `HelpTextSeverity.Info` (`'info'`)       | `HelpTextSeverity.Info`    |
+| `HelpTextSeverity.Success` (`'success'`) | `HelpTextSeverity.Success` |
+| `HelpTextSeverity.Warning` (`'warning'`) | `HelpTextSeverity.Warning` |
+| `HelpTextSeverity.Danger` (`'danger'`)   | `HelpTextSeverity.Danger`  |
+
+##### Removed / No Direct Equivalent
+
+| Legacy Extension API                                              | MMDS Status                                   | Migration                                                                            |
+| ----------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Polymorphic `as` prop / `PolymorphicRef` typing                   | Removed                                       | Use `asChild` to render a different element (see example below)                      |
+| Implicit `as="div"` switch when `children` is a non-string node   | Removed — always renders `<p>`                | Use `asChild` with a `<div>` wrapper when content includes block-level children      |
+| `Severity` union (extension-wide) accepted by the `severity` prop | Removed — only `HelpTextSeverity` is accepted | Map any `Severity.*` value to the matching `HelpTextSeverity.*` member               |
+| Forwarded `ref` to the underlying element                         | Not supported (matches `Text`)                | If a ref is required, render a parent element via `asChild` and attach the ref there |
+| `mm-help-text` CSS class hook                                     | Removed                                       | Apply Tailwind utilities through `className`                                         |
+
+##### Type Changes
+
+| Legacy Extension API                        | MMDS API                                              | Notes                                                |
+| ------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |
+| `severity?: HelpTextSeverity \| Severity`   | `severity?: HelpTextSeverity`                         | Single source of truth; const object (ADR-0003/0004) |
+| `color?: TextColor` (extension `TextColor`) | `color?: TextColor` (shared `TextColor` const object) | PascalCase members (e.g. `TextColor.ErrorDefault`)   |
+| `children: string \| ReactNodeLike`         | `children: ReactNode`                                 | Standard React typing                                |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { HelpText, HelpTextSeverity } from '../../component-library';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+
+// Implicit `as="div"` when children was an object node
+<HelpText>
+  <span>Complex</span> content
+</HelpText>;
+```
+
+##### After (Design System)
+
+```tsx
+import { HelpText, HelpTextSeverity } from '@metamask/design-system-react';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+
+// Render as a div explicitly via `asChild`
+<HelpText asChild>
+  <div>
+    <span>Complex</span> content
+  </div>
+</HelpText>;
+```
 
 ### Modal Component
 
