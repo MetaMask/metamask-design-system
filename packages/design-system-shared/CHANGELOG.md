@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(icons): add ListArrow icon ([#1161](https://github.com/MetaMask/metamask-design-system/pull/1161))
+- fix(icons): update musd.svg with combined path element ([#1163](https://github.com/MetaMask/metamask-design-system/pull/1163))
+- feat(icons): add Musd and MusdFilled icons ([#1162](https://github.com/MetaMask/metamask-design-system/pull/1162))
+- feat(icons): update candlestick and add group, pie-chart, predictions icons ([#1157](https://github.com/MetaMask/metamask-design-system/pull/1157))
+
 ## [0.16.0]
 
 ### Added

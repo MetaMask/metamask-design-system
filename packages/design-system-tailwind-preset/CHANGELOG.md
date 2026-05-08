@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- [4/N] feat: `ModalContent` migration (extension) ([#1139](https://github.com/MetaMask/metamask-design-system/pull/1139))
+- feat: `Skeleton` migration (extension) ([#1146](https://github.com/MetaMask/metamask-design-system/pull/1146))
+
 ## [0.7.0]
 
 ### Added
