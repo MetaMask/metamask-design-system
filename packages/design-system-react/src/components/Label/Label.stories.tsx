@@ -1,13 +1,29 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Box, BoxFlexDirection } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
+import { Text } from '../Text';
 import { Input } from '../Input';
+import type { InputProps } from '../Input';
 
 import { Label } from './Label';
 import type { LabelProps } from './Label.types';
 import README from './README.mdx';
+
+function ControlledInput(props: InputProps) {
+  const [value, setValue] = useState(props.value);
+  return (
+    <Input
+      {...props}
+      value={value}
+      onChange={(event) => {
+        setValue(event.target.value);
+        props.onChange?.(event);
+      }}
+    />
+  );
+}
 
 const meta: Meta<LabelProps> = {
   title: 'React Components/Label',
@@ -19,7 +35,6 @@ const meta: Meta<LabelProps> = {
   },
   argTypes: {
     htmlFor: { control: 'text' },
-    className: { control: 'text' },
   },
 };
 
@@ -37,18 +52,18 @@ export const HtmlFor: Story = {
   render: () => (
     <Box flexDirection={BoxFlexDirection.Column} gap={2}>
       <Label htmlFor="email-input">Email address</Label>
-      <Input id="email-input" placeholder="you@example.com" />
+      <ControlledInput id="email-input" value="" placeholder="you@example.com" />
     </Box>
   ),
 };
 
 export const WrappingInput: Story = {
   render: () => (
-    <Label>
-      <Box flexDirection={BoxFlexDirection.Column} gap={2} className="w-full">
-        Email address
-        <Input placeholder="you@example.com" />
-      </Box>
+    <Label className="inline-flex w-full flex-col gap-2">
+      <Text asChild>
+        <span>Email address</span>
+      </Text>
+      <ControlledInput value="" placeholder="you@example.com" />
     </Label>
   ),
 };
