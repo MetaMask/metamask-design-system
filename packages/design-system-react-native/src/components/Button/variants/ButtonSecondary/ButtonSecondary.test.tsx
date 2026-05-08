@@ -153,6 +153,8 @@ describe('ButtonSecondary', () => {
     );
     const btn = getByTestId('button-secondary');
     expectBorderColor(btn.props.style, 'border-default', twDark);
+
+    expect(btn).toBeDefined();
   });
 
   it('keeps border transparent on disabled default in light theme', () => {
@@ -163,6 +165,8 @@ describe('ButtonSecondary', () => {
     );
     const btn = getByTestId('button-secondary');
     expectBorderColor(btn.props.style, 'border-transparent');
+
+    expect(btn).toBeDefined();
   });
 
   it('toggles pressed styles (default)', () => {
