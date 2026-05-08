@@ -25,7 +25,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ModalOverlay Component](#modaloverlay-component)
   - [Skeleton Component](#skeleton-component)
 - [Version Updates](#version-updates)
-  - [From version 0.21.0 to 0.x.0](#from-version-0210-to-0x0)
+  - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
@@ -2045,7 +2045,7 @@ Codemod-friendly: every `isLoading=` token in the extension's existing call site
 
 <!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
 
-## From version 0.21.0 to 0.x.0
+## From version 0.22.0 to 0.x.0
 
 ### BannerBase: `onClose` is now the only close-button behavior API
 

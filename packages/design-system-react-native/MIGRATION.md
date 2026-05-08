@@ -27,7 +27,8 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.23.0 to 0.x.0](#from-version-0230-to-0x0)
+  - [From version 0.24.0 to 0.x.0](#from-version-0240-to-0x0)
+  - [From version 0.23.0 to 0.24.0](#from-version-0230-to-0240)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.21.0 to 0.22.0](#from-version-0210-to-0220)
   - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
@@ -42,9 +43,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-<!-- TODO: Replace 0.x.0 with the actual next released version when these unreleased follow-ups ship. -->
+<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
 
-### From version 0.23.0 to 0.x.0
+### From version 0.24.0 to 0.x.0
 
 #### BannerBase: `onClose` is now the only close-button behavior API
 
@@ -63,6 +64,12 @@ This guide provides detailed instructions for migrating your project from one ve
 **Impact:**
 
 - Existing **`@metamask/design-system-react-native`** consumers that relied on **`closeButtonProps.onPress`** or on rendering a close button without **`onClose`** must update those call sites.
+
+<!-- Backward-compatible anchor for the 0.24.0 changelog entry that shipped with the old placeholder link. -->
+
+<a id="from-version-0230-to-0x0"></a>
+
+### From version 0.23.0 to 0.24.0
 
 #### Toast: tighten the runtime API and align the surface with the shipped design
 
