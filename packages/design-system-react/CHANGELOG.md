@@ -9,16 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.22.0]
 
-### Uncategorized
+### Added
 
-- [4/N] feat: `ModalContent` migration (extension) ([#1139](https://github.com/MetaMask/metamask-design-system/pull/1139))
-- feat: `Skeleton` migration (extension) ([#1146](https://github.com/MetaMask/metamask-design-system/pull/1146))
-- feat: `HeaderBase` migration (extension) ([#1142](https://github.com/MetaMask/metamask-design-system/pull/1142))
-- feat(icons): add ListArrow icon ([#1161](https://github.com/MetaMask/metamask-design-system/pull/1161))
-- fix(icons): update musd.svg with combined path element ([#1163](https://github.com/MetaMask/metamask-design-system/pull/1163))
-- feat(icons): add Musd and MusdFilled icons ([#1162](https://github.com/MetaMask/metamask-design-system/pull/1162))
-- feat(icons): update candlestick and add group, pie-chart, predictions icons ([#1157](https://github.com/MetaMask/metamask-design-system/pull/1157))
-- [3/N] feat: `Modal` migration (extension) ([#1136](https://github.com/MetaMask/metamask-design-system/pull/1136))
+- Added `Modal` and `useModalContext` for composing modal dialogs with focus management and the same layout patterns used in the MetaMask extension migration ([#1136](https://github.com/MetaMask/metamask-design-system/pull/1136))
+- Added `ModalContent` (with `ModalContentSize` and `MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR`) for sized modal bodies, entrance motion, and outside-click handling aligned with that migration ([#1139](https://github.com/MetaMask/metamask-design-system/pull/1139))
+- Added `Skeleton` for loading placeholders ([#1146](https://github.com/MetaMask/metamask-design-system/pull/1146))
+- Added `HeaderBase` for flexible header layouts when migrating extension screens into the design system ([#1142](https://github.com/MetaMask/metamask-design-system/pull/1142))
+- Added `ListArrow`, `Musd`, and `MusdFilled` icons; refreshed `Candlestick`; and added `Group`, `PieChart`, and `Predictions` icons ([#1157](https://github.com/MetaMask/metamask-design-system/pull/1157), [#1161](https://github.com/MetaMask/metamask-design-system/pull/1161), [#1162](https://github.com/MetaMask/metamask-design-system/pull/1162), [#1163](https://github.com/MetaMask/metamask-design-system/pull/1163))
 
 ## [0.21.0]
 

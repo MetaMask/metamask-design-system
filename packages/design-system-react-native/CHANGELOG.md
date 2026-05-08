@@ -9,14 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.24.0]
 
-### Uncategorized
+### Added
 
-- refactor: align Toast API with severity and accessory ([#1143](https://github.com/MetaMask/metamask-design-system/pull/1143))
-- feat(icons): add ListArrow icon ([#1161](https://github.com/MetaMask/metamask-design-system/pull/1161))
-- fix(icons): update musd.svg with combined path element ([#1163](https://github.com/MetaMask/metamask-design-system/pull/1163))
-- feat(icons): add Musd and MusdFilled icons ([#1162](https://github.com/MetaMask/metamask-design-system/pull/1162))
-- feat(icons): update candlestick and add group, pie-chart, predictions icons ([#1157](https://github.com/MetaMask/metamask-design-system/pull/1157))
-- docs: `HeaderBase` migration (mobile) ([#1100](https://github.com/MetaMask/metamask-design-system/pull/1100))
+- Added `ListArrow`, `Musd`, and `MusdFilled` icons; refreshed `Candlestick`; and added `Group`, `PieChart`, and `Predictions` icons (same names as in `@metamask/design-system-react`) ([#1157](https://github.com/MetaMask/metamask-design-system/pull/1157), [#1161](https://github.com/MetaMask/metamask-design-system/pull/1161), [#1162](https://github.com/MetaMask/metamask-design-system/pull/1162), [#1163](https://github.com/MetaMask/metamask-design-system/pull/1163))
+
+### Changed
+
+- **BREAKING:** Tightened the `Toast` API shipped with `Toaster` in 0.23.0 ([#1143](https://github.com/MetaMask/metamask-design-system/pull/1143))
+  - **`toast.show`** → **`toast(...)`**; **`toast.hide`** → **`toast.dismiss()`**
+  - **`iconProps`** renamed to **`iconAlertProps`**
+  - **`ToastSeverity.Info`** removed; use **`Default`**, **`Success`**, **`Warning`**, or **`Danger`**
+  - **`hasNoTimeout`** is optional and defaults to auto-dismiss unless set to **`true`**
+  - Close control is always shown on the toast surface
+  - See [Migration Guide](./MIGRATION.md#from-version-0230-to-0x0)
+- Expanded `HeaderBase` migration guidance for apps moving off the mobile component library ([#1100](https://github.com/MetaMask/metamask-design-system/pull/1100))
 
 ## [0.23.0]
 

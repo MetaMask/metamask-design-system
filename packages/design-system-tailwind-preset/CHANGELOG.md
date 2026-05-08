@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0]
 
-### Uncategorized
+### Added
 
-- [4/N] feat: `ModalContent` migration (extension) ([#1139](https://github.com/MetaMask/metamask-design-system/pull/1139))
-- feat: `Skeleton` migration (extension) ([#1146](https://github.com/MetaMask/metamask-design-system/pull/1146))
+- Added `animate-skeleton-pulse` (keyframes `skeleton-pulse`) for the design-system `Skeleton` loading bar ([#1146](https://github.com/MetaMask/metamask-design-system/pull/1146))
+- Added `animate-slide-up` (keyframes `slide-up`) for `ModalContent` dialog entrance motion ([#1139](https://github.com/MetaMask/metamask-design-system/pull/1139))
 
 ## [0.7.0]
 

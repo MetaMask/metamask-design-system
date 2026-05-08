@@ -9,12 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.17.0]
 
-### Uncategorized
+### Added
 
-- feat(icons): add ListArrow icon ([#1161](https://github.com/MetaMask/metamask-design-system/pull/1161))
-- fix(icons): update musd.svg with combined path element ([#1163](https://github.com/MetaMask/metamask-design-system/pull/1163))
-- feat(icons): add Musd and MusdFilled icons ([#1162](https://github.com/MetaMask/metamask-design-system/pull/1162))
-- feat(icons): update candlestick and add group, pie-chart, predictions icons ([#1157](https://github.com/MetaMask/metamask-design-system/pull/1157))
+- Added `ListArrow`, `Musd`, and `MusdFilled` to the shared icon exports; refreshed `Candlestick`; and added `Group`, `PieChart`, and `Predictions` so React and React Native stay aligned on `IconName` ([#1157](https://github.com/MetaMask/metamask-design-system/pull/1157), [#1161](https://github.com/MetaMask/metamask-design-system/pull/1161), [#1162](https://github.com/MetaMask/metamask-design-system/pull/1162), [#1163](https://github.com/MetaMask/metamask-design-system/pull/1163))
 
 ## [0.16.0]
 
