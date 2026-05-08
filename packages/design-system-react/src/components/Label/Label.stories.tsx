@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 
 import { Box, BoxFlexDirection } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
-import { Text } from '../Text';
 import { Input } from '../Input';
 import type { InputProps } from '../Input';
+import { Text } from '../Text';
 
 import { Label } from './Label';
 import type { LabelProps } from './Label.types';
@@ -52,7 +52,11 @@ export const HtmlFor: Story = {
   render: () => (
     <Box flexDirection={BoxFlexDirection.Column} gap={2}>
       <Label htmlFor="email-input">Email address</Label>
-      <ControlledInput id="email-input" value="" placeholder="you@example.com" />
+      <ControlledInput
+        id="email-input"
+        value=""
+        placeholder="you@example.com"
+      />
     </Box>
   ),
 };
