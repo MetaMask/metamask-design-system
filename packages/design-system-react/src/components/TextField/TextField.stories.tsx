@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 
+import { Text } from '../Text';
 import README from './README.mdx';
 import { TextField } from './TextField';
 import { TextFieldSize, TextFieldType } from './TextField.types';
@@ -105,7 +106,7 @@ export const StartAccessory: Story = {
   render: () => (
     <ControlledTextField
       placeholder="0.00"
-      startAccessory={<span>$</span>}
+      startAccessory={<Text>$</Text>}
       value=""
     />
   ),
@@ -115,7 +116,7 @@ export const EndAccessory: Story = {
   render: () => (
     <ControlledTextField
       placeholder="Amount"
-      endAccessory={<span>USD</span>}
+      endAccessory={<Text>USD</Text>}
       value=""
     />
   ),
@@ -146,8 +147,13 @@ export const IsReadOnly: Story = {
 export const Truncate: Story = {
   render: () => (
     <div className="flex w-48 flex-col gap-4">
-      <TextField truncate value="A very long value that should be truncated" />
       <TextField
+        inputProps={{ 'aria-label': 'Truncated value' }}
+        truncate
+        value="A very long value that should be truncated"
+      />
+      <TextField
+        inputProps={{ 'aria-label': 'Non-truncated value' }}
         truncate={false}
         value="A very long value that should not be truncated"
       />
