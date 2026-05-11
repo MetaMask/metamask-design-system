@@ -167,6 +167,18 @@ For shared wrappers that target both platforms, align to the cross-platform **`I
 
 If your React web usage relied on uncontrolled **`Input`** behavior, move that state into the caller and pass a controlled **`value`** instead.
 
+#### ButtonBase: loading wrappers and overlay testID
+
+**What changed:**
+
+- **`ButtonBase`** accepts **`loadingWrapperProps`** and **`contentWrapperProps`** to customize the loading overlay wrapper (**`Box`**) and the label row (**`BoxRow`**).
+- **BREAKING:** **`ButtonBase`** no longer sets a default **`testID`** on the loading overlay wrapper. If tests or automation targeted the previous **`spinner-container`** id, pass **`loadingWrapperProps={{ testID: 'spinner-container' }}`** (or your own id) on **`ButtonBase`** or on a wrapper that forwards these props (for example, **`ButtonHero`**).
+
+**Migration:**
+
+- Add **`loadingWrapperProps`** / **`contentWrapperProps`** only when you need to pass layout or test hooks to those inner wrappers.
+- Restore a stable overlay **`testID`** for tests: **`loadingWrapperProps={{ testID: 'spinner-container' }}`** if you depended on the old default.
+
 ### From version 0.21.0 to 0.22.0
 
 #### TextField and TextFieldSearch: layered props (`inputProps` and root `Box`)
