@@ -140,6 +140,21 @@ export type {
 export { HeaderStandard } from './HeaderStandard';
 export type { HeaderStandardProps } from './HeaderStandard';
 
+export {
+  HeaderStandardAnimated,
+  useHeaderStandardAnimated,
+} from './HeaderStandardAnimated';
+export type {
+  HeaderStandardAnimatedProps,
+  UseHeaderStandardAnimatedReturn,
+} from './HeaderStandardAnimated';
+
+export { HeaderStandardCenterColumn } from './temp-components/HeaderStandardCenterColumn';
+export type {
+  HeaderStandardCenterColumnFields,
+  HeaderStandardCenterColumnProps,
+} from './temp-components/HeaderStandardCenterColumn';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
