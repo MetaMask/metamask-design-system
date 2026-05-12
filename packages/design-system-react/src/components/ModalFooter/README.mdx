@@ -1,0 +1,174 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as ModalFooterStories from './ModalFooter.stories';
+
+# ModalFooter
+
+`ModalFooter` is the bottom section of a modal. It hosts up to two action buttons — primary and secondary — and an optional slot above them for inline form controls (a "do not show again" checkbox, a disclaimer, etc.).
+
+The component owns the button semantics: it renders the primary button with `ButtonVariant.Primary` and the secondary button with `ButtonVariant.Secondary` automatically. Consumers configure each via `primaryButtonProps` / `secondaryButtonProps`, but cannot override the variant. This mirrors the React Native `BottomSheetFooter` so the modal/sheet families share semantics across platforms.
+
+```tsx
+import { ModalFooter } from '@metamask/design-system-react';
+
+<ModalFooter
+  primaryButtonProps={{ children: t('confirm'), onClick: handleSubmit }}
+  secondaryButtonProps={{ children: t('cancel'), onClick: handleClose }}
+/>;
+```
+
+<Canvas of={ModalFooterStories.Default} />
+
+## Props
+
+### `primaryButtonProps`
+
+Props for the primary action button. Renders with `ButtonVariant.Primary` automatically. Appears second (right in horizontal layout, bottom in vertical layout).
+
+Pass the localized label as `children` and wire the click handler via `onClick`. `ModalFooter` is i18n-agnostic — pass localized strings from your application's i18n layer (e.g. `t('confirm')`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;ButtonProps, 'variant'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFooterStories.PrimaryOnly} />
+
+### `secondaryButtonProps`
+
+Props for the secondary action button. Renders with `ButtonVariant.Secondary` automatically. Appears first (left in horizontal layout, top in vertical layout).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;ButtonProps, 'variant'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFooterStories.SecondaryOnly} />
+
+### `buttonsAlignment`
+
+Layout direction for the action button row.
+
+- `ButtonsAlignment.Horizontal` (default) — buttons share the row, each takes `flex-1`. Order: secondary, primary.
+- `ButtonsAlignment.Vertical` — buttons stack with full width. Order: secondary on top, primary on bottom.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ButtonsAlignment</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>ButtonsAlignment.Horizontal</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFooterStories.HorizontalAlignment} />
+
+<Canvas of={ModalFooterStories.VerticalAlignment} />
+
+### `children`
+
+Optional custom content rendered above the action button row. Use this for inline form controls (checkboxes, disclaimers) or to fully replace the button row by omitting both `primaryButtonProps` and `secondaryButtonProps`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFooterStories.Children} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the outer `<footer>` element. These classes are merged with the component's defaults via `twMerge`, so consumer utilities override the defaults (for example, `className="px-0"` wins over the internal `px-4`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={ModalFooterStories.Default} />
+
+## Migration Guide
+
+Migrating from `ui/components/component-library/modal-footer` in MetaMask Extension? See the [ModalFooter Migration Guide](../../../MIGRATION.md#modalfooter-component) for prop mappings, before/after examples, and breaking changes.
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

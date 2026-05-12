@@ -4,6 +4,8 @@ import type {
 } from '@metamask/design-system-shared';
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
+import type { BoxProps } from '../Box/Box.types';
+import type { BoxRowProps } from '../BoxRow/BoxRow.types';
 import type { IconProps } from '../Icon';
 import type { SpinnerProps } from '../temp-components/Spinner';
 import type { TextProps } from '../Text';
@@ -24,6 +26,16 @@ export type ButtonBaseProps = ButtonBasePropsShared & {
    * Optional prop to pass additional properties to the end icon
    */
   spinnerProps?: Partial<SpinnerProps>;
+  /**
+   * Props passed to the loading overlay wrapper (`Box` around the spinner).
+   * Defaults include `twClassName` for full-area centered layout; merge your own `twClassName` to extend.
+   * Pass `testID` here for tests — there is no default test id on this wrapper.
+   */
+  loadingWrapperProps?: Omit<Partial<BoxProps>, 'children'>;
+  /**
+   * Props passed to the label row (`BoxRow`). Label typography remains controlled via `textProps` on ButtonBase.
+   */
+  contentWrapperProps?: Omit<Partial<BoxRowProps>, 'children' | 'textProps'>;
   /**
    * Optional prop to specify an icon to show at the start of the button
    */

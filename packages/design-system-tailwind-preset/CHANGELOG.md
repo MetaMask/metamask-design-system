@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0]
+
+### Added
+
+- Added `animate-skeleton-pulse` (keyframes `skeleton-pulse`) for the design-system `Skeleton` loading bar ([#1146](https://github.com/MetaMask/metamask-design-system/pull/1146))
+- Added `animate-slide-up` (keyframes `slide-up`) for `ModalContent` dialog entrance motion ([#1139](https://github.com/MetaMask/metamask-design-system/pull/1139))
+
+## [0.7.0]
+
+### Added
+
+- Added a `fade-in` animation utility so consumers can use `animate-fade-in` for simple opacity entrance transitions, including the new `ModalOverlay` web migration path ([#1120](https://github.com/MetaMask/metamask-design-system/pull/1120))
+
+### Changed
+
+- Clarified the migration path for consumers moving to Tailwind CSS v4. Existing Tailwind v3 projects can keep using this preset, while Tailwind v4 projects should move to `@metamask/design-tokens/tailwind/theme.css` instead ([#1117](https://github.com/MetaMask/metamask-design-system/pull/1117))
+
 ## [0.6.1]
 
 ### Fixed
@@ -42,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Removed variant-specific font family classnames in favor of base font families ([#533](https://github.com/MetaMask/metamask-design-system/pull/533)):
+- **BREAKING:** Removed variant-specific font family classnames in favor of base font families: ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
   - Removed all `s-*` and `l-*` typography font family classnames (e.g., `s-display-md`, `s-heading-lg`, etc.)
   - Now using three base font family classnames:
     - `font-default` for default text (Geist)
@@ -54,7 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated to use new font family configuration from @metamask/design-tokens@6.0.0 ([#499](https://github.com/MetaMask/metamask-design-system/pull/499)). Note: This includes breaking changes in the design-tokens package - see the [@metamask/design-tokens migration guide](../design-tokens/MIGRATION.md#from-version-510-to-600) for details.
+- Updated to use new font family configuration from @metamask/design-tokens@6.0.0. Note: This includes breaking changes in the design-tokens package - see the [@metamask/design-tokens migration guide](../design-tokens/MIGRATION.md#from-version-510-to-600) for details. ([#499](https://github.com/MetaMask/metamask-design-system/pull/499))
 
 ## [0.1.0]
 
@@ -62,7 +79,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.8.0...HEAD
+[0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.7.0...@metamask/design-system-tailwind-preset@0.8.0
+[0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.1...@metamask/design-system-tailwind-preset@0.7.0
 [0.6.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.0...@metamask/design-system-tailwind-preset@0.6.1
 [0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.5.0...@metamask/design-system-tailwind-preset@0.6.0
 [0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.4.0...@metamask/design-system-tailwind-preset@0.5.0

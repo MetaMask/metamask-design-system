@@ -79,6 +79,9 @@ export type { ButtonIconProps } from './ButtonIcon';
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
+export { HeaderBase } from './HeaderBase';
+export type { HeaderBaseProps } from './HeaderBase';
+
 export { Icon } from './Icon';
 export { IconName, IconSize, IconColor } from './Icon';
 export type { IconProps } from './Icon';
@@ -96,6 +99,21 @@ export { ModalOverlay } from './ModalOverlay';
 export type { ModalOverlayProps } from './ModalOverlay';
 export { ModalBody } from './ModalBody';
 export type { ModalBodyProps } from './ModalBody';
+export { ModalFocus } from './ModalFocus';
+export type { FocusableElement, ModalFocusProps } from './ModalFocus';
+export { ButtonsAlignment, ModalFooter } from './ModalFooter';
+export type { ModalFooterButtonProps, ModalFooterProps } from './ModalFooter';
+export { Modal, useModalContext } from './Modal';
+export type { ModalContextType, ModalProps } from './Modal';
+export {
+  ModalContent,
+  ModalContentSize,
+  MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR,
+} from './ModalContent';
+export type { ModalContentProps } from './ModalContent';
+
+export { Skeleton } from './Skeleton';
+export type { SkeletonProps } from './Skeleton';
 
 export { Text } from './Text';
 export {

@@ -142,6 +142,12 @@ export {
 // TextField types (ADR-0004)
 export { type TextFieldPropsShared } from './types/TextField';
 
+// TextArea types (ADR-0004)
+export { type TextAreaPropsShared } from './types/TextArea';
+
+// Input types (ADR-0004)
+export { type InputPropsShared } from './types/Input';
+
 // AvatarFavicon types (ADR-0004)
 export {
   AvatarFaviconSize,
@@ -174,3 +180,10 @@ export {
   IconSize,
   type IconPropsShared,
 } from './types/Icon';
+
+// AvatarGroup types (ADR-0003 + ADR-0004)
+export {
+  AvatarGroupSize,
+  AvatarGroupVariant,
+  type AvatarGroupPropsShared,
+} from './types/AvatarGroup';

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0]
+
+### Added
+
+- Added `ListArrow`, `Musd`, and `MusdFilled` to the shared icon exports; refreshed `Candlestick`; and added `Group`, `PieChart`, and `Predictions` so React and React Native stay aligned on `IconName` ([#1157](https://github.com/MetaMask/metamask-design-system/pull/1157), [#1161](https://github.com/MetaMask/metamask-design-system/pull/1161), [#1162](https://github.com/MetaMask/metamask-design-system/pull/1162), [#1163](https://github.com/MetaMask/metamask-design-system/pull/1163))
+
+## [0.16.0]
+
+### Added
+
+- Added `Merge` to the shared icon exports so React and React Native consumers can access it through their existing `IconName` APIs ([#1155](https://github.com/MetaMask/metamask-design-system/pull/1155))
+- Added shared `Input` contracts for a controlled `value`, `isReadOnly`, and `isStateStylesDisabled`, making it easier to build cross-platform wrappers against one public input API ([#1043](https://github.com/MetaMask/metamask-design-system/pull/1043))
+- Added shared `AvatarGroup` size, variant, and prop contracts for consumers building cross-platform abstractions on top of `@metamask/design-system-shared` ([#1067](https://github.com/MetaMask/metamask-design-system/pull/1067))
+
 ## [0.15.0]
 
 ### Added
@@ -166,7 +180,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.15.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.17.0...HEAD
+[0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.16.0...@metamask/design-system-shared@0.17.0
+[0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.15.0...@metamask/design-system-shared@0.16.0
 [0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.14.0...@metamask/design-system-shared@0.15.0
 [0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.13.0...@metamask/design-system-shared@0.14.0
 [0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.12.0...@metamask/design-system-shared@0.13.0
