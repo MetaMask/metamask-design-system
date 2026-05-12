@@ -154,6 +154,9 @@ export type { TextFieldProps } from './TextField';
 export { FormTextField } from './FormTextField';
 export type { FormTextFieldProps } from './FormTextField';
 
+export { TextFieldSearch } from './TextFieldSearch';
+export type { TextFieldSearchProps } from './TextFieldSearch';
+
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
 
