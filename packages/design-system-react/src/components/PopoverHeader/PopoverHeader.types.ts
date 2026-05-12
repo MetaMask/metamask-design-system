@@ -17,7 +17,10 @@ import type { ButtonIconProps } from '../ButtonIcon';
  * closeButtonProps={{ ariaLabel: t('close') }}
  * ```
  */
-type PopoverHeaderButtonProps = Omit<ButtonIconProps, 'iconName' | 'size'> & {
+type PopoverHeaderButtonProps = Omit<
+  ButtonIconProps,
+  'iconName' | 'size' | 'onClick'
+> & {
   [key: `data-${string}`]: string | undefined;
 };
 
