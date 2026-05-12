@@ -21,13 +21,18 @@ export type TextFieldType = (typeof TextFieldType)[keyof typeof TextFieldType];
 type TextFieldInputProps = Omit<
   InputProps,
   | 'autoFocus'
+  | 'id'
   | 'isDisabled'
   | 'isReadOnly'
   | 'isStateStylesDisabled'
+  | 'maxLength'
+  | 'name'
   | 'onBlur'
   | 'onChange'
   | 'onFocus'
   | 'placeholder'
+  | 'required'
+  | 'type'
   | 'value'
 >;
 
@@ -76,8 +81,9 @@ export type TextFieldProps = Omit<
     placeholder?: string;
     /**
      * Additional props for the inner `Input`. Do not pass `value`,
-     * `placeholder`, `isDisabled`, `isReadOnly`, `onFocus`, `onBlur`, or
-     * `onChange` here; use the TextField-level props above.
+     * `placeholder`, `isDisabled`, `isReadOnly`, `onFocus`, `onBlur`,
+     * `onChange`, `id`, `name`, `type`, `maxLength`, or `required` here;
+     * use the TextField-level props above.
      */
     inputProps?: TextFieldInputProps;
     /**
