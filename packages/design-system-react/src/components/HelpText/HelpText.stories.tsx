@@ -1,6 +1,12 @@
-import { HelpTextSeverity, TextColor } from '@metamask/design-system-shared';
+import {
+  BoxFlexDirection,
+  HelpTextSeverity,
+  TextColor,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+
+import { Box } from '../Box';
 
 import { HelpText } from './HelpText';
 import type { HelpTextProps } from './HelpText.types';
@@ -51,7 +57,7 @@ export const Default: Story = {
 
 export const Severity: Story = {
   render: () => (
-    <div className="flex flex-col gap-2">
+    <Box flexDirection={BoxFlexDirection.Column} gap={2}>
       {Object.keys(HelpTextSeverity).map((severityKey) => (
         <HelpText
           key={severityKey}
@@ -62,18 +68,18 @@ export const Severity: Story = {
           {severityKey} severity message
         </HelpText>
       ))}
-    </div>
+    </Box>
   ),
 };
 
 export const Color: Story = {
   render: () => (
-    <div className="flex flex-col gap-2">
+    <Box flexDirection={BoxFlexDirection.Column} gap={2}>
       <HelpText color={TextColor.TextDefault}>Default text color</HelpText>
       <HelpText color={TextColor.TextAlternative}>
         Alternative text color
       </HelpText>
       <HelpText color={TextColor.PrimaryDefault}>Primary text color</HelpText>
-    </div>
+    </Box>
   ),
 };
