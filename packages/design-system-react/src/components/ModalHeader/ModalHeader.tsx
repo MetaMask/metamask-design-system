@@ -1,10 +1,14 @@
+import {
+  ButtonIconSize,
+  IconName,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 import { Box } from '../Box';
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { IconName } from '../Icon';
-import { Text, TextAlign, TextVariant } from '../Text';
+import { ButtonIcon } from '../ButtonIcon';
+import { Text, TextAlign } from '../Text';
 
 import type { ModalHeaderProps } from './ModalHeader.types';
 
