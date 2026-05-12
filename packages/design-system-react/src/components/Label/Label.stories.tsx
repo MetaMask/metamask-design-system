@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Box, BoxFlexDirection } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
@@ -13,6 +13,11 @@ import README from './README.mdx';
 
 function ControlledInput(props: InputProps) {
   const [value, setValue] = useState(props.value);
+
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.value]);
+
   return (
     <Input
       {...props}
