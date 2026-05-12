@@ -104,6 +104,25 @@ describe('TextFieldSearch', () => {
       expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
     });
 
+    it('disables the clear button when isDisabled is true', () => {
+      const onClick = jest.fn();
+      render(
+        <TextFieldSearch
+          onChange={noop}
+          value="hello"
+          isDisabled
+          clearButtonOnClick={onClick}
+        />,
+      );
+
+      const clearButton = screen.getByTestId(CLEAR_BUTTON_TEST_ID);
+
+      expect(clearButton).toBeDisabled();
+
+      fireEvent.click(clearButton);
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
     it('allows overriding the clear button aria-label via clearButtonProps', () => {
       render(
         <TextFieldSearch
