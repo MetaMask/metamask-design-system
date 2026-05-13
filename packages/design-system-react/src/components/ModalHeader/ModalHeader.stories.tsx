@@ -1,9 +1,9 @@
-import { BoxBackgroundColor } from '@metamask/design-system-shared';
+import { BoxBackgroundColor, IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { Box } from '../Box';
-import { Icon, IconName } from '../Icon';
+import { Icon } from '../Icon';
 import { Text } from '../Text';
 
 import { ModalHeader } from './ModalHeader';
