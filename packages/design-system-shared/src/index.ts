@@ -145,8 +145,12 @@ export {
   type TextPropsShared,
 } from './types/Text';
 
-// TextField types (ADR-0004)
-export { type TextFieldPropsShared } from './types/TextField';
+// TextField types (ADR-0003 + ADR-0004)
+export {
+  TextFieldSize,
+  TextFieldType,
+  type TextFieldPropsShared,
+} from './types/TextField';
 
 // TextArea types (ADR-0004)
 export { type TextAreaPropsShared } from './types/TextArea';
