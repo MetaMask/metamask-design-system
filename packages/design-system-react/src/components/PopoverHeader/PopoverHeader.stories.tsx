@@ -1,7 +1,10 @@
+import { BoxBackgroundColor, IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box, BoxBackgroundColor } from '../Box';
+import { Box } from '../Box';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
 
 import { PopoverHeader } from './PopoverHeader';
 import type { PopoverHeaderProps } from './PopoverHeader.types';
@@ -51,15 +54,20 @@ export const Default: Story = {
   },
 };
 
-export const WithCloseButton: Story = {
-  args: {
-    children: 'Popover title',
-    onClose: () => undefined,
-    closeButtonProps: { ariaLabel: 'Close' },
-  },
+export const Children: Story = {
+  render: () => (
+    <PopoverHeader
+      onClose={() => undefined}
+      closeButtonProps={{ ariaLabel: 'Close' }}
+    >
+      <Box backgroundColor={BoxBackgroundColor.PrimaryMuted} padding={2}>
+        <Text>Custom node children render as-is</Text>
+      </Box>
+    </PopoverHeader>
+  ),
 };
 
-export const WithBackAndCloseButtons: Story = {
+export const OnBack: Story = {
   args: {
     children: 'Popover title',
     onBack: () => undefined,
@@ -69,31 +77,18 @@ export const WithBackAndCloseButtons: Story = {
   },
 };
 
-export const StringTitle: Story = {
+export const OnClose: Story = {
   args: {
-    children: 'String children auto-wrap as centered HeadingSm Text',
+    children: 'Popover title',
     onClose: () => undefined,
     closeButtonProps: { ariaLabel: 'Close' },
   },
 };
 
-export const NodeTitle: Story = {
+export const StartAccessory: Story = {
   render: () => (
     <PopoverHeader
-      onClose={() => undefined}
-      closeButtonProps={{ ariaLabel: 'Close' }}
-    >
-      <Box backgroundColor={BoxBackgroundColor.PrimaryMuted} padding={2}>
-        Custom node children render as-is
-      </Box>
-    </PopoverHeader>
-  ),
-};
-
-export const StartAccessoryOverride: Story = {
-  render: () => (
-    <PopoverHeader
-      startAccessory={<span aria-label="custom start">⭐</span>}
+      startAccessory={<Icon name={IconName.Star} aria-label="custom start" />}
       onClose={() => undefined}
       closeButtonProps={{ ariaLabel: 'Close' }}
     >
@@ -102,12 +97,14 @@ export const StartAccessoryOverride: Story = {
   ),
 };
 
-export const EndAccessoryOverride: Story = {
+export const EndAccessory: Story = {
   render: () => (
     <PopoverHeader
       onBack={() => undefined}
       backButtonProps={{ ariaLabel: 'Back' }}
-      endAccessory={<span aria-label="custom end">🔔</span>}
+      endAccessory={
+        <Icon name={IconName.Notification} aria-label="custom end" />
+      }
     >
       Custom endAccessory replaces the close button
     </PopoverHeader>
