@@ -30,6 +30,9 @@ export {
   type BadgeStatusPropsShared,
 } from './types/BadgeStatus';
 
+// HelpText types (ADR-0003 + ADR-0004)
+export { HelpTextSeverity, type HelpTextPropsShared } from './types/HelpText';
+
 // IconAlert types (ADR-0003 + ADR-0004)
 export {
   IconAlertSeverity,
