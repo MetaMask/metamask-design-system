@@ -17,6 +17,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
   - [HeaderBase Component](#headerbase-component)
+  - [HelpText Component](#helptext-component)
   - [Modal Component](#modal-component)
   - [ModalContent Component](#modalcontent-component)
   - [ModalBody Component](#modalbody-component)
@@ -26,6 +27,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [SensitiveText Component](#sensitivetext-component)
   - [Skeleton Component](#skeleton-component)
 - [Version Updates](#version-updates)
+  - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
@@ -888,20 +890,20 @@ No direct prop renames were introduced for extension-to-MMDS `BannerBase`.
 
 ##### Type and Callback Signature Changes
 
-| Legacy Extension API                                     | MMDS API                                                                                                                          | Notes                                                 |
-| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| `title?: string`                                         | `title?: ReactNode`                                                                                                               | MMDS now accepts full React node content              |
-| `description?: string`                                   | `description?: ReactNode`                                                                                                         | MMDS now accepts full React node content              |
-| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>`                                            | MMDS action button is a `Button`, not a `ButtonLink`  |
-| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                                                                  | Close callback target is now the close button element |
-| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'> & { onClick?: MouseEventHandler<HTMLButtonElement> }` | `iconName` remains fixed to close icon                |
+| Legacy Extension API                                     | MMDS API                                                                               | Notes                                                              |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `title?: string`                                         | `title?: ReactNode`                                                                    | MMDS now accepts full React node content                           |
+| `description?: string`                                   | `description?: ReactNode`                                                              | MMDS now accepts full React node content                           |
+| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>` | MMDS action button is a `Button`, not a `ButtonLink`               |
+| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                       | Close callback target is now the close button element              |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'>`           | `iconName` remains fixed to close icon; use `onClose` for behavior |
 
 ##### Default and Behavior Changes
 
 | Legacy Extension Behavior                                                  | MMDS Behavior                                                                                      |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Action button defaults to `ButtonLink` semantics and `ButtonLinkSize.Auto` | Action button is `Button` with default `ButtonSize.Md`                                             |
-| Close button renders only when `onClose` is provided                       | Close button renders when `onClose` **or** `closeButtonProps` is provided                          |
+| Close button renders only when `onClose` is provided                       | Close button renders only when `onClose` is provided                                               |
 | Close button `ariaLabel` defaults to translated `t('close')`               | Close button `ariaLabel` defaults to `'Close banner'` (override with `closeButtonProps.ariaLabel`) |
 | String/number `children` are wrapped in extension `Text` defaults          | String/number `children` are wrapped in MMDS `Text` with `TextVariant.BodyMd`                      |
 
@@ -1331,6 +1333,78 @@ For typical call sites — for example `ui/components/multichain/pages/page/comp
 - `HeaderBase` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-header-base` class hook is gone — use `className` to apply Tailwind utilities.
 - The `useRef` / `useEffect` / `useState` / `window.addEventListener('resize', …)` measurement code is gone. There are no longer any layout side effects on mount or window resize.
 - Slot wrappers (`childrenWrapperProps` / `startAccessoryWrapperProps` / `endAccessoryWrapperProps`) ship their grid-placement utilities (`col-start-*`, `justify-self-*`) as defaults; consumer `className` is merged via `twMerge` so it can override placement when needed.
+
+### HelpText Component
+
+The extension `help-text` component maps to `HelpText` in the design system. It still renders a `<p>` with the `body-sm` typography and applies a severity-based text color, but the polymorphic `as` API is replaced with the design-system `asChild` pattern, and the `HelpTextSeverity` enum is now a const object (ADR-0003) sourced from `@metamask/design-system-shared`.
+
+#### Breaking Changes
+
+##### Imports and Enum Source
+
+| Extension Pattern                                                  | Design System Migration                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `import { HelpText } from '../../component-library/help-text'`     | `import { HelpText } from '@metamask/design-system-react'`         |
+| `import { HelpTextSeverity } from '.../help-text/help-text.types'` | `import { HelpTextSeverity } from '@metamask/design-system-react'` |
+
+##### Severity Values
+
+`HelpTextSeverity` is now a const object instead of a TypeScript enum, but member names and string values are unchanged.
+
+| Extension Value                          | Design System Value        |
+| ---------------------------------------- | -------------------------- |
+| `HelpTextSeverity.Info` (`'info'`)       | `HelpTextSeverity.Info`    |
+| `HelpTextSeverity.Success` (`'success'`) | `HelpTextSeverity.Success` |
+| `HelpTextSeverity.Warning` (`'warning'`) | `HelpTextSeverity.Warning` |
+| `HelpTextSeverity.Danger` (`'danger'`)   | `HelpTextSeverity.Danger`  |
+
+##### Removed / No Direct Equivalent
+
+| Legacy Extension API                                              | MMDS Status                                   | Migration                                                                            |
+| ----------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Polymorphic `as` prop / `PolymorphicRef` typing                   | Removed                                       | Use `asChild` to render a different element (see example below)                      |
+| Implicit `as="div"` switch when `children` is a non-string node   | Removed — always renders `<p>`                | Use `asChild` with a `<div>` wrapper when content includes block-level children      |
+| `Severity` union (extension-wide) accepted by the `severity` prop | Removed — only `HelpTextSeverity` is accepted | Map any `Severity.*` value to the matching `HelpTextSeverity.*` member               |
+| Forwarded `ref` to the underlying element                         | Not supported (matches `Text`)                | If a ref is required, render a parent element via `asChild` and attach the ref there |
+| `mm-help-text` CSS class hook                                     | Removed                                       | Apply Tailwind utilities through `className`                                         |
+
+##### Type Changes
+
+| Legacy Extension API                        | MMDS API                                              | Notes                                                |
+| ------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |
+| `severity?: HelpTextSeverity \| Severity`   | `severity?: HelpTextSeverity`                         | Single source of truth; const object (ADR-0003/0004) |
+| `color?: TextColor` (extension `TextColor`) | `color?: TextColor` (shared `TextColor` const object) | PascalCase members (e.g. `TextColor.ErrorDefault`)   |
+| `children: string \| ReactNodeLike`         | `children: ReactNode`                                 | Standard React typing                                |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { HelpText, HelpTextSeverity } from '../../component-library';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+
+// Implicit `as="div"` when children was an object node
+<HelpText>
+  <span>Complex</span> content
+</HelpText>;
+```
+
+##### After (Design System)
+
+```tsx
+import { HelpText, HelpTextSeverity } from '@metamask/design-system-react';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+
+// Render as a div explicitly via `asChild`
+<HelpText asChild>
+  <div>
+    <span>Complex</span> content
+  </div>
+</HelpText>;
+```
 
 ### Modal Component
 
@@ -2099,6 +2173,28 @@ Codemod-friendly: every `isLoading=` token in the extension's existing call site
 - The container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` by default. The skeleton takes no part in the accessibility tree.
 
 ## Version Updates
+
+<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
+
+## From version 0.22.0 to 0.x.0
+
+### BannerBase: `onClose` is now the only close-button behavior API
+
+**What changed:**
+
+- **`closeButtonProps.onClick`** is removed from the public **`BannerBase`** API.
+- The close button now renders **only** when **`onClose`** is provided.
+- **`closeButtonProps`** is now customization-only for the rendered close **`ButtonIcon`**.
+
+**Migration:**
+
+- Move any close-button behavior from **`closeButtonProps.onClick`** to **`onClose`**.
+- Keep **`closeButtonProps`** only for non-behavioral customization such as **`data-testid`**, accessibility props, and styling hooks.
+- If you previously passed only **`closeButtonProps`** to force-render a close button, also provide **`onClose`** now.
+
+**Impact:**
+
+- Existing **`@metamask/design-system-react`** consumers that relied on **`closeButtonProps.onClick`** or on rendering a close button without **`onClose`** must update those call sites.
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
 

@@ -1,70 +1,105 @@
 // Third party dependencies.
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-} from 'react';
-import type { RefObject } from 'react';
+import {
+  BoxBackgroundColor,
+  BoxBorderColor,
+  ButtonSize,
+  IconSize,
+} from '@metamask/design-system-shared';
+import React from 'react';
+
+// External dependencies.
+import { BannerBase } from '../BannerBase';
+import { IconAlert } from '../IconAlert';
 
 // Internal dependencies.
-import type { ToastOptions, ToastProps, ToastRef } from './Toast.types';
-import { ToastView } from './ToastView';
+import { TOAST_SEVERITY_ICON_MAP } from './Toast.constants';
+import { ToastSeverity } from './Toast.types';
+import type { ToastProps } from './Toast.types';
 
-let registeredRef: RefObject<ToastRef> | null = null;
-
-const assertRegisteredRef = (method: string): ToastRef => {
-  if (!registeredRef?.current) {
-    throw new Error(
-      `Toast.${method}() called before <Toast /> mounted. Render <Toast /> once at the root of your app.`,
-    );
+const renderSeverityAccessory = ({
+  iconAlertProps,
+  severity,
+  startAccessory,
+}: Pick<ToastProps, 'iconAlertProps' | 'severity' | 'startAccessory'>) => {
+  if (startAccessory !== null && startAccessory !== undefined) {
+    return startAccessory;
   }
-  return registeredRef.current;
-};
 
-const ToastComponent = forwardRef<ToastRef, ToastProps>((props, ref) => {
-  const innerRef = useRef<ToastRef>(null);
+  if (!severity || severity === ToastSeverity.Default) {
+    return undefined;
+  }
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      showToast: (options) => innerRef.current?.showToast(options),
-      closeToast: () => innerRef.current?.closeToast(),
-    }),
-    [],
+  const iconAlertSeverity = TOAST_SEVERITY_ICON_MAP[severity];
+
+  return (
+    <IconAlert
+      severity={iconAlertSeverity}
+      size={IconSize.Lg}
+      {...iconAlertProps}
+    />
   );
-
-  useEffect(() => {
-    registeredRef = innerRef;
-    return () => {
-      if (registeredRef === innerRef) {
-        registeredRef = null;
-      }
-    };
-  }, []);
-
-  return <ToastView ref={innerRef} {...props} />;
-});
-
-ToastComponent.displayName = 'Toast';
-
-type ToastWithStatics = typeof ToastComponent & {
-  /**
-   * Show a toast notification. Requires `<Toast />` to be mounted.
-   */
-  show: (options: ToastOptions) => void;
-  /**
-   * Hide the currently visible toast, if any.
-   */
-  hide: () => void;
 };
 
-export const Toast = ToastComponent as ToastWithStatics;
+export const Toast: React.FC<ToastProps> = ({
+  actionButtonLabel,
+  actionButtonOnPress,
+  actionButtonProps,
+  children,
+  childrenWrapperProps,
+  closeButtonProps,
+  description,
+  descriptionProps,
+  onClose,
+  iconAlertProps,
+  severity = ToastSeverity.Default,
+  startAccessory,
+  title,
+  titleProps,
+  twClassName,
+  ...props
+}) => {
+  const actionProps =
+    actionButtonLabel && actionButtonOnPress
+      ? {
+          actionButtonLabel,
+          actionButtonOnPress,
+          actionButtonProps: {
+            size: ButtonSize.Sm,
+            ...actionButtonProps,
+          },
+        }
+      : {};
+  // TODO: Remove this conditional once BannerBase only renders a close button
+  // from onClose. At that point Toast can pass closeButtonProps directly.
+  const resolvedCloseButtonProps =
+    onClose || closeButtonProps
+      ? {
+          accessibilityLabel: 'Close toast',
+          ...closeButtonProps,
+        }
+      : undefined;
 
-Toast.show = (options) => {
-  assertRegisteredRef('show').showToast(options);
-};
-
-Toast.hide = () => {
-  assertRegisteredRef('hide').closeToast();
+  return (
+    <BannerBase
+      {...actionProps}
+      {...props}
+      backgroundColor={BoxBackgroundColor.BackgroundSection}
+      borderColor={BoxBorderColor.BorderMuted}
+      borderWidth={1}
+      children={children}
+      childrenWrapperProps={childrenWrapperProps}
+      closeButtonProps={resolvedCloseButtonProps}
+      description={description}
+      descriptionProps={descriptionProps}
+      onClose={onClose}
+      startAccessory={renderSeverityAccessory({
+        iconAlertProps,
+        severity,
+        startAccessory,
+      })}
+      title={title}
+      titleProps={titleProps}
+      twClassName={twClassName ? `rounded-xl ${twClassName}` : 'rounded-xl'}
+    />
+  );
 };

@@ -140,6 +140,21 @@ export type {
 export { HeaderStandard } from './HeaderStandard';
 export type { HeaderStandardProps } from './HeaderStandard';
 
+export {
+  HeaderStandardAnimated,
+  useHeaderStandardAnimated,
+} from './HeaderStandardAnimated';
+export type {
+  HeaderStandardAnimatedProps,
+  UseHeaderStandardAnimatedReturn,
+} from './HeaderStandardAnimated';
+
+export { HeaderStandardCenterColumn } from './temp-components/HeaderStandardCenterColumn';
+export type {
+  HeaderStandardCenterColumnFields,
+  HeaderStandardCenterColumnProps,
+} from './temp-components/HeaderStandardCenterColumn';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
@@ -198,6 +213,9 @@ export type { TextProps } from './Text';
 export { TextField } from './TextField';
 export type { TextFieldProps } from './TextField';
 
+export { TextArea } from './TextArea';
+export type { TextAreaProps } from './TextArea';
+
 export { TextFieldSearch } from './TextFieldSearch';
 export type { TextFieldSearchProps } from './TextFieldSearch';
 
@@ -213,15 +231,13 @@ export type { TitleStandardProps } from './TitleStandard';
 export { TitleSubpage } from './TitleSubpage';
 export type { TitleSubpageProps } from './TitleSubpage';
 
-export { Toast, ToastVariant, ToastCloseButtonVariant } from './Toast';
+export { Toast, Toaster, toast, ToastSeverity } from './Toast';
 export type {
   ToastOptions,
   ToastProps,
-  ToastRef,
-  ToastLabelOptions,
-  ToastDescriptionOptions,
-  ToastLinkButtonOptions,
-  ToastCloseButtonOptions,
+  ToastIconProps,
+  ToasterProps,
+  ToasterRef,
 } from './Toast';
 
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';

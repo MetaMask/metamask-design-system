@@ -43,35 +43,67 @@ describe('Input', () => {
     const input = getByTestId(TEST_ID);
 
     expect(input).toBeDisabled();
-    expect(input).toHaveStyle({ opacity: tw`opacity-50`.opacity });
+    const expectedOpacity = (tw.style('opacity-50') as TextStyle).opacity;
+    expect(input).toHaveStyle({ opacity: expectedOpacity });
   });
 
-  it('applies iOS placeholder lineHeight workaround when placeholder is visible', () => {
-    if (Platform.OS !== 'ios') {
-      return;
-    }
+  describe('iOS placeholder lineHeight workaround', () => {
+    const originalOS = Platform.OS;
 
-    const { getByTestId } = render(
-      <Input testID={TEST_ID} value="" placeholder="Disabled" />,
-    );
+    afterEach(() => {
+      Platform.OS = originalOS;
+    });
 
-    const input = getByTestId(TEST_ID);
+    it('applies iOS placeholder lineHeight workaround when placeholder is visible and multiline is false', () => {
+      Platform.OS = 'ios';
 
-    expect(input).toHaveStyle({ lineHeight: 0 });
+      const { getByTestId } = render(
+        <Input
+          testID={TEST_ID}
+          value=""
+          placeholder="Disabled"
+          multiline={false}
+        />,
+      );
+
+      const input = getByTestId(TEST_ID);
+
+      expect(input).toHaveStyle({ lineHeight: 0 });
+    });
+
+    it('does not apply placeholder lineHeight workaround outside iOS', () => {
+      Platform.OS = 'android';
+
+      const { getByTestId } = render(
+        <Input testID={TEST_ID} value="" placeholder="Disabled" />,
+      );
+
+      const input = getByTestId(TEST_ID);
+
+      expect(input).not.toHaveStyle({ lineHeight: 0 });
+    });
   });
 
-  it('does not apply placeholder lineHeight workaround outside iOS', () => {
-    if (Platform.OS === 'ios') {
-      return;
-    }
-
+  it('when multiline is true, does not apply lineHeight zero for visible placeholder', () => {
     const { getByTestId } = render(
-      <Input testID={TEST_ID} value="" placeholder="Disabled" />,
+      <Input testID={TEST_ID} value="" multiline placeholder="Placeholder" />,
     );
 
     const input = getByTestId(TEST_ID);
 
     expect(input).not.toHaveStyle({ lineHeight: 0 });
+  });
+
+  it('when multiline is true, applies BodyMd paragraph lineHeight', () => {
+    const { getByTestId } = render(
+      <Input testID={TEST_ID} value="" multiline placeholder="p" />,
+    );
+
+    const input = getByTestId(TEST_ID);
+    const expectedLineHeight = (tw.style('text-body-md') as TextStyle)
+      .lineHeight;
+
+    expect(input).toHaveStyle({ lineHeight: expectedLineHeight });
   });
 
   it('removes placeholder lineHeight workaround after value changes from empty to non-empty', () => {
