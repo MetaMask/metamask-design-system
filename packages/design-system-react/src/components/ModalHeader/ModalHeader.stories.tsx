@@ -66,14 +66,6 @@ export const Default: Story = {
 };
 
 export const Children: Story = {
-  args: {
-    children: 'String children auto-wrap as centered HeadingSm Text',
-    onClose: () => undefined,
-    closeButtonProps: { ariaLabel: 'Close' },
-  },
-};
-
-export const ChildrenAsNode: Story = {
   render: () => (
     <ModalHeader
       onClose={() => undefined}

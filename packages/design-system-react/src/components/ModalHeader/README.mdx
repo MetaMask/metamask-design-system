@@ -48,8 +48,6 @@ Header title content. When a string, it is auto-wrapped in a `Text` component wi
 
 <Canvas of={ModalHeaderStories.Children} />
 
-<Canvas of={ModalHeaderStories.ChildrenAsNode} />
-
 ### `onBack` + `backButtonProps`
 
 When `onBack` is set, the component renders a back `ButtonIcon` in the start slot. `backButtonProps` is **co-required** (the type system enforces this): consumers must supply at least `ariaLabel`. The component owns `iconName` (`IconName.ArrowLeft`) and `size` (`ButtonIconSize.Md`); they cannot be overridden via the prop bag.
