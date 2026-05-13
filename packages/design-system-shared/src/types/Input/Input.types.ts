@@ -10,6 +10,10 @@ export type InputPropsShared = {
    */
   value: string;
   /**
+   * Optional placeholder shown when `value` is empty.
+   */
+  placeholder?: string;
+  /**
    * Optional prop to select between Typography variants.
    *
    * @default TextVariant.BodyMd
@@ -27,6 +31,12 @@ export type InputPropsShared = {
    * @default false
    */
   isReadOnly?: boolean;
+  /**
+   * When true, the input requests focus on mount.
+   *
+   * @default false
+   */
+  autoFocus?: boolean;
   /**
    * Optional boolean to disable state styles.
    *

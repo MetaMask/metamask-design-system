@@ -90,7 +90,11 @@ describe('ButtonHero', () => {
 
   it('handles loading state correctly', () => {
     const { getByRole, getByTestId } = render(
-      <ButtonHero isLoading loadingText="Loading...">
+      <ButtonHero
+        isLoading
+        loadingText="Loading..."
+        loadingWrapperProps={{ testID: 'spinner-container' }}
+      >
         Loading Button
       </ButtonHero>,
     );

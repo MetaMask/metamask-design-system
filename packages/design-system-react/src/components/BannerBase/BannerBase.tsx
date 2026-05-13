@@ -48,12 +48,11 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
 
     const {
       ariaLabel: closeButtonAriaLabel = 'Close banner',
-      onClick: closeButtonPropsOnClick,
       className: closeButtonClassName,
       ...resolvedCloseButtonProps
     } = closeButtonProps ?? {};
 
-    const shouldShowCloseButton = Boolean(onClose || closeButtonProps);
+    const shouldShowCloseButton = Boolean(onClose);
     const shouldShowActionButton = Boolean(actionButtonOnClick);
 
     return (
@@ -123,7 +122,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
             iconName={IconName.Close}
             size={ButtonIconSize.Sm}
             ariaLabel={closeButtonAriaLabel}
-            onClick={onClose ?? closeButtonPropsOnClick}
+            onClick={onClose}
             {...resolvedCloseButtonProps}
           />
         )}

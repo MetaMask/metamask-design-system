@@ -175,10 +175,12 @@ This document outlines the process for migrating a MetaMask library into the met
 - Create a separate issue for resolving the marked errors as soon as the migration is completed.
   - e.g. https://github.com/MetaMask/core/issues/1823
 
-### 5. Record changes made to any metamask design system package in its CHANGELOG, under the `## [Unreleased]` heading
+### 5. Document breaking changes in `MIGRATION.md`; reserve `CHANGELOG.md` for release branches
 
-- CHANGELOG entries should be recorded in the migration target's downstream packages for version bumps to the migration target's current release.
-- [Example PR](https://github.com/MetaMask/core/pull/2003/files): this step can be performed either as a part of Phase C, or in a separate, subsequent PR.
+- In normal migration or feature PRs, document consumer-facing breaking changes in the relevant package `MIGRATION.md`.
+- Do not manually update package `CHANGELOG.md` files in these PRs.
+- Package changelog entries should only be added on release branches created by `yarn create-release-branch`.
+- [Example PR](https://github.com/MetaMask/core/pull/2003/files): release-facing changelog work can happen as part of the release flow or in a separate follow-up release PR.
 
 ### 6. Finalize merge
 

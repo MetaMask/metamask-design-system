@@ -26,6 +26,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ModalOverlay Component](#modaloverlay-component)
   - [Skeleton Component](#skeleton-component)
 - [Version Updates](#version-updates)
+  - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
@@ -888,20 +889,20 @@ No direct prop renames were introduced for extension-to-MMDS `BannerBase`.
 
 ##### Type and Callback Signature Changes
 
-| Legacy Extension API                                     | MMDS API                                                                                                                          | Notes                                                 |
-| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| `title?: string`                                         | `title?: ReactNode`                                                                                                               | MMDS now accepts full React node content              |
-| `description?: string`                                   | `description?: ReactNode`                                                                                                         | MMDS now accepts full React node content              |
-| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>`                                            | MMDS action button is a `Button`, not a `ButtonLink`  |
-| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                                                                  | Close callback target is now the close button element |
-| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'> & { onClick?: MouseEventHandler<HTMLButtonElement> }` | `iconName` remains fixed to close icon                |
+| Legacy Extension API                                     | MMDS API                                                                               | Notes                                                              |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `title?: string`                                         | `title?: ReactNode`                                                                    | MMDS now accepts full React node content                           |
+| `description?: string`                                   | `description?: ReactNode`                                                              | MMDS now accepts full React node content                           |
+| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>` | MMDS action button is a `Button`, not a `ButtonLink`               |
+| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                       | Close callback target is now the close button element              |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'>`           | `iconName` remains fixed to close icon; use `onClose` for behavior |
 
 ##### Default and Behavior Changes
 
 | Legacy Extension Behavior                                                  | MMDS Behavior                                                                                      |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Action button defaults to `ButtonLink` semantics and `ButtonLinkSize.Auto` | Action button is `Button` with default `ButtonSize.Md`                                             |
-| Close button renders only when `onClose` is provided                       | Close button renders when `onClose` **or** `closeButtonProps` is provided                          |
+| Close button renders only when `onClose` is provided                       | Close button renders only when `onClose` is provided                                               |
 | Close button `ariaLabel` defaults to translated `t('close')`               | Close button `ariaLabel` defaults to `'Close banner'` (override with `closeButtonProps.ariaLabel`) |
 | String/number `children` are wrapped in extension `Text` defaults          | String/number `children` are wrapped in MMDS `Text` with `TextVariant.BodyMd`                      |
 
@@ -2114,6 +2115,28 @@ Codemod-friendly: every `isLoading=` token in the extension's existing call site
 - The container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` by default. The skeleton takes no part in the accessibility tree.
 
 ## Version Updates
+
+<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
+
+## From version 0.22.0 to 0.x.0
+
+### BannerBase: `onClose` is now the only close-button behavior API
+
+**What changed:**
+
+- **`closeButtonProps.onClick`** is removed from the public **`BannerBase`** API.
+- The close button now renders **only** when **`onClose`** is provided.
+- **`closeButtonProps`** is now customization-only for the rendered close **`ButtonIcon`**.
+
+**Migration:**
+
+- Move any close-button behavior from **`closeButtonProps.onClick`** to **`onClose`**.
+- Keep **`closeButtonProps`** only for non-behavioral customization such as **`data-testid`**, accessibility props, and styling hooks.
+- If you previously passed only **`closeButtonProps`** to force-render a close button, also provide **`onClose`** now.
+
+**Impact:**
+
+- Existing **`@metamask/design-system-react`** consumers that relied on **`closeButtonProps.onClick`** or on rendering a close button without **`onClose`** must update those call sites.
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
 
