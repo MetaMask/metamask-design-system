@@ -64,25 +64,7 @@ export const Default: Story = {
   },
 };
 
-export const WithCloseButton: Story = {
-  args: {
-    children: 'Modal title',
-    onClose: () => undefined,
-    closeButtonProps: { ariaLabel: 'Close' },
-  },
-};
-
-export const WithBackAndCloseButtons: Story = {
-  args: {
-    children: 'Modal title',
-    onBack: () => undefined,
-    backButtonProps: { ariaLabel: 'Back' },
-    onClose: () => undefined,
-    closeButtonProps: { ariaLabel: 'Close' },
-  },
-};
-
-export const StringTitle: Story = {
+export const Children: Story = {
   args: {
     children: 'String children auto-wrap as centered HeadingSm Text',
     onClose: () => undefined,
@@ -90,7 +72,7 @@ export const StringTitle: Story = {
   },
 };
 
-export const NodeTitle: Story = {
+export const ChildrenAsNode: Story = {
   render: () => (
     <ModalHeader
       onClose={() => undefined}
@@ -103,7 +85,25 @@ export const NodeTitle: Story = {
   ),
 };
 
-export const StartAccessoryOverride: Story = {
+export const OnBack: Story = {
+  args: {
+    children: 'Modal title',
+    onBack: () => undefined,
+    backButtonProps: { ariaLabel: 'Back' },
+    onClose: () => undefined,
+    closeButtonProps: { ariaLabel: 'Close' },
+  },
+};
+
+export const OnClose: Story = {
+  args: {
+    children: 'Modal title',
+    onClose: () => undefined,
+    closeButtonProps: { ariaLabel: 'Close' },
+  },
+};
+
+export const StartAccessory: Story = {
   render: () => (
     <ModalHeader
       startAccessory={<span aria-label="custom start">⭐</span>}
@@ -115,7 +115,7 @@ export const StartAccessoryOverride: Story = {
   ),
 };
 
-export const EndAccessoryOverride: Story = {
+export const EndAccessory: Story = {
   render: () => (
     <ModalHeader
       onBack={() => undefined}
