@@ -1,0 +1,167 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as HelpTextStories from './HelpText.stories';
+
+# HelpText
+
+HelpText displays a helper or validation message below a form field. Use it to give the user guidance ("Must be at least 8 characters") or to surface field-level feedback ("Address is invalid"). Reach for a higher-level component such as `BannerAlert` when the message applies to a whole form or page rather than a single field.
+
+```tsx
+import { HelpText, HelpTextSeverity } from '@metamask/design-system-react';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+```
+
+<Canvas of={HelpTextStories.Default} />
+
+## Props
+
+### `severity`
+
+Use the `severity` prop to convey the semantic meaning of the message. When set, `severity` overrides any value passed to `color`.
+
+Available severities:
+
+- `HelpTextSeverity.Info`
+- `HelpTextSeverity.Success`
+- `HelpTextSeverity.Warning`
+- `HelpTextSeverity.Danger`
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>HelpTextSeverity</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HelpTextStories.Severity} />
+
+### `color`
+
+Use `color` to set a custom text color when no `severity` applies. Ignored when `severity` is provided.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextColor</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextColor.TextDefault</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HelpTextStories.Color} />
+
+### `children`
+
+The content of the help text.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `asChild`
+
+When `asChild` is `true`, `HelpText` merges its props onto the immediate child instead of rendering a `<p>` element. Use this when you need the message to render as a different HTML element (for example, a `<div>` when the content includes block-level children).
+
+```tsx
+<HelpText asChild>
+  <div>{complexContent}</div>
+</HelpText>
+```
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. Classes merge with the component's defaults using `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={HelpTextStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

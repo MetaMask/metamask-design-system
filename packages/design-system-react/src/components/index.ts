@@ -82,6 +82,9 @@ export type { CheckboxProps } from './Checkbox';
 export { HeaderBase } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
+export { HelpText, HelpTextSeverity } from './HelpText';
+export type { HelpTextProps } from './HelpText';
+
 export { Icon } from './Icon';
 export { IconName, IconSize, IconColor } from './Icon';
 export type { IconProps } from './Icon';
@@ -117,6 +120,9 @@ export type { ModalContentProps } from './ModalContent';
 
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
+
+export { SensitiveText, SensitiveTextLength } from './SensitiveText';
+export type { SensitiveTextProps } from './SensitiveText';
 
 export { Text } from './Text';
 export {

@@ -95,12 +95,12 @@ When provided, `actionButtonLabel` is required. Use `actionButtonProps` to pass 
 
 ### `onClose`
 
-Optional close callback. If passed, a close button is shown. Use `closeButtonProps` to pass additional props to the close `ButtonIcon`, including `testID` when needed for testing.
+Optional close callback. If passed, a close button is shown. Use `closeButtonProps` to pass additional non-behavioral props to the close `ButtonIcon`, including `testID`, accessibility props, and styling hooks when needed for testing.
 
-| PROP               | TYPE                                                                                                             | REQUIRED | DEFAULT     |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
-| `onClose`          | `() => void`                                                                                                     | No       | `undefined` |
-| `closeButtonProps` | `Omit<Partial<ButtonIconProps>, 'iconName' \| 'onPress'> & { onPress?: (event: GestureResponderEvent) => void }` | No       | `undefined` |
+| PROP               | TYPE                                                      | REQUIRED | DEFAULT     |
+| ------------------ | --------------------------------------------------------- | -------- | ----------- |
+| `onClose`          | `() => void`                                              | No       | `undefined` |
+| `closeButtonProps` | `Omit<Partial<ButtonIconProps>, 'iconName' \| 'onPress'>` | No       | `undefined` |
 
 ```tsx
 <BannerBase
