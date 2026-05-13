@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { Box } from '../Box';
+import { Icon, IconName } from '../Icon';
 import { Text } from '../Text';
 
 import { ModalHeader } from './ModalHeader';
@@ -106,7 +107,7 @@ export const OnClose: Story = {
 export const StartAccessory: Story = {
   render: () => (
     <ModalHeader
-      startAccessory={<span aria-label="custom start">⭐</span>}
+      startAccessory={<Icon name={IconName.Star} aria-label="custom start" />}
       onClose={() => undefined}
       closeButtonProps={{ ariaLabel: 'Close' }}
     >
@@ -120,7 +121,9 @@ export const EndAccessory: Story = {
     <ModalHeader
       onBack={() => undefined}
       backButtonProps={{ ariaLabel: 'Back' }}
-      endAccessory={<span aria-label="custom end">🔔</span>}
+      endAccessory={
+        <Icon name={IconName.Notification} aria-label="custom end" />
+      }
     >
       Custom endAccessory replaces the close button
     </ModalHeader>
