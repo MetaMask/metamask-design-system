@@ -88,7 +88,7 @@ export const StartAccessory: Story = {
   ),
 };
 
-export const EndArrow: Story = {
+export const EndArrowDirection: Story = {
   render: () => (
     <SelectButtonStoryWrapper style={{ gap: 16 }}>
       {(
@@ -174,7 +174,7 @@ export const EndAccessory: Story = {
   ),
 };
 
-export const Variants: Story = {
+export const Variant: Story = {
   render: () => (
     <SelectButtonStoryWrapper style={{ gap: 16 }}>
       <SelectButton
