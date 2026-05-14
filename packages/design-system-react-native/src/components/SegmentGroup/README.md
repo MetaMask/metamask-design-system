@@ -30,7 +30,7 @@ export const Example = () => {
 
 ## Props
 
-Shared fields are defined as **`SegmentGroupPropsShared`** in **`@metamask/design-system-shared`**. The React Native type adds **`ScrollView`** props except **`horizontal`** and **`showsHorizontalScrollIndicator`** (fixed by the component), plus optional **`twClassName`** on the scroll content row.
+The props contract is **`SegmentGroupProps`** from **`@metamask/design-system-react-native`**. It extends **`ScrollView`** props except **`horizontal`** and **`showsHorizontalScrollIndicator`** (fixed by the component), plus optional **`twClassName`** on the scroll content row.
 
 ### `value`
 

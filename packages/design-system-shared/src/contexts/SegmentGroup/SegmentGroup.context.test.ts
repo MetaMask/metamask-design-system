@@ -3,10 +3,8 @@ import { act, create } from 'react-test-renderer';
 
 import { SegmentButtonVariant } from '../../types/SegmentButton/SegmentButton.types';
 
-import {
-  SegmentGroupContext,
-  type SegmentGroupContextValue,
-} from './index';
+import type { SegmentGroupContextValue } from '.';
+import { SegmentGroupContext } from '.';
 
 describe('SegmentGroupContext', () => {
   it('uses displayName for React DevTools', () => {
@@ -20,7 +18,7 @@ describe('SegmentGroupContext', () => {
         return createElement('span', null, value === null ? 'empty' : 'set');
       }
 
-      let root: ReturnType<typeof create>;
+      let root!: ReturnType<typeof create>;
       act(() => {
         root = create(createElement(Consumer));
       });
@@ -48,7 +46,7 @@ describe('SegmentGroupContext', () => {
         return createElement('span', null, ctx.value);
       }
 
-      let root: ReturnType<typeof create>;
+      let root!: ReturnType<typeof create>;
       act(() => {
         root = create(
           createElement(
@@ -77,11 +75,13 @@ describe('SegmentGroupContext', () => {
         return createElement(
           'span',
           null,
-          ctx?.variant === SegmentButtonVariant.Secondary ? 'secondary' : 'other',
+          ctx?.variant === SegmentButtonVariant.Secondary
+            ? 'secondary'
+            : 'other',
         );
       }
 
-      let root: ReturnType<typeof create>;
+      let root!: ReturnType<typeof create>;
       act(() => {
         root = create(
           createElement(

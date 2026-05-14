@@ -10,7 +10,7 @@ import { SelectButton } from '@metamask/design-system-react-native';
 
 ## Props
 
-Shared fields are defined as **`SelectButtonPropsShared`** in **`@metamask/design-system-shared`**. The React Native type adds all **`ButtonBase`** props except **`children`**, **`endIconName`**, **`endIconProps`**, and **`disabled`** (use **`isDisabled`**; the label is derived from **`placeholder`** / **`value`**).
+The props contract is **`SelectButtonProps`** from **`@metamask/design-system-react-native`**. It includes all **`ButtonBase`** props except **`children`**, **`endIconName`**, **`endIconProps`**, and **`disabled`** (use **`isDisabled`**; the label is derived from **`placeholder`** / **`value`**).
 
 ### `placeholder`
 

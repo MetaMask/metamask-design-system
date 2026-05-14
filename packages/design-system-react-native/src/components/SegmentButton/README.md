@@ -160,7 +160,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 
 ### Other `ButtonBase` props
 
-`SegmentButton` accepts the rest of **`ButtonBase`** props (for example **`size`**, **`isLoading`**, **`isDisabled`**, **`startIconName`**, **`startAccessory`**, **`textProps`**, **`startIconProps`**, **`endIconProps`**). Shared segment fields live in **`SegmentButtonPropsShared`** in **`@metamask/design-system-shared`**.
+`SegmentButton` accepts the rest of **`ButtonBase`** props (for example **`size`**, **`isLoading`**, **`isDisabled`**, **`startIconName`**, **`startAccessory`**, **`textProps`**, **`startIconProps`**, **`endIconProps`**). The full props contract is **`SegmentButtonProps`** from **`@metamask/design-system-react-native`**.
 
 ## References
 

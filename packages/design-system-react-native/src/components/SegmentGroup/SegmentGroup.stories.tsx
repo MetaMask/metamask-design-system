@@ -4,7 +4,7 @@ import {
   SegmentButtonVariant,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
 
@@ -52,6 +52,10 @@ type Story = StoryObj<SegmentGroupProps>;
 
 const ControlledSegmentGroup = (args: Partial<SegmentGroupProps>) => {
   const [value, setValue] = useState(args.value ?? 'all');
+
+  useEffect(() => {
+    setValue(args.value ?? 'all');
+  }, [args.value]);
 
   return (
     <SegmentGroupStoryWrapper>
