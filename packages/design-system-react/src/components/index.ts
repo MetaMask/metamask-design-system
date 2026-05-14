@@ -109,6 +109,8 @@ export { ModalFocus } from './ModalFocus';
 export type { FocusableElement, ModalFocusProps } from './ModalFocus';
 export { ButtonsAlignment, ModalFooter } from './ModalFooter';
 export type { ModalFooterButtonProps, ModalFooterProps } from './ModalFooter';
+export { ModalHeader } from './ModalHeader';
+export type { ModalHeaderProps } from './ModalHeader';
 export { Modal, useModalContext } from './Modal';
 export type { ModalContextType, ModalProps } from './Modal';
 export {
