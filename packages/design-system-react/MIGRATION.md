@@ -26,6 +26,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ModalFooter Component](#modalfooter-component)
   - [ModalHeader Component](#modalheader-component)
   - [ModalOverlay Component](#modaloverlay-component)
+  - [PopoverHeader Component](#popoverheader-component)
   - [SensitiveText Component](#sensitivetext-component)
   - [Skeleton Component](#skeleton-component)
 - [Version Updates](#version-updates)
@@ -2208,6 +2209,121 @@ For typical call sites — for example `ui/components/multichain/network-list-me
 
 - `ModalOverlay` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - One-off styling that previously used Box utility props (e.g. `backgroundColor={BackgroundColor.overlayAlternative}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="bg-overlay-alternative"`).
+
+### PopoverHeader Component
+
+The extension `popover-header` component maps to `PopoverHeader` in the design system. The behavioral contract — a `<header>` with an optional back button on the start, a title in the center, and an optional close button on the end — is preserved. The polymorphic Box surface (`HeaderBaseStyleUtilityProps`), the `mm-popover-header` SCSS class hook, and the implicit `useI18nContext` coupling for the icon-button `aria-label`s are removed.
+
+`PopoverHeader` is built on top of the same three-column grid layout as `HeaderBase`, replicated locally so the outer element stays a single semantic `<header>` (no extra wrapper). Unlike `ModalHeader`, it applies no outer padding — popover surfaces own their own spacing.
+
+The auto-rendered icon buttons and the auto-wrapped title default to inheriting color from the popover surface (`text-inherit` / `TextColor.Inherit`), preserving the legacy `IconColor.inherit` / `TextColor.inherit` defaults so headers placed on inverse or semantic backgrounds pick up the right foreground color automatically.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                   | Design System Migration                                                   |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `import { PopoverHeader } from '../../component-library'`           | `import { PopoverHeader } from '@metamask/design-system-react'`           |
+| `import type { PopoverHeaderProps } from '../../component-library'` | `import type { PopoverHeaderProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                        | Design System API                                                                          | Change Type | Notes                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children?: ReactNode`                                               | `children?: ReactNode`                                                                     | unchanged   | string children still auto-wrap as `<Text variant={TextVariant.HeadingSm} textAlign={TextAlign.Center} color={TextColor.Inherit}>`; `ReactNode` children render as-is.                                                 |
+| `onBack?: () => void`                                                | `onBack?: () => void`                                                                      | unchanged   | when set, renders the back button — but **`backButtonProps` is now co-required** (see "i18n decoupling" below).                                                                                                        |
+| `onClose?: () => void`                                               | `onClose?: () => void`                                                                     | unchanged   | when set, renders the close button — but **`closeButtonProps` is now co-required**.                                                                                                                                    |
+| `backButtonProps?: ButtonIconProps<'button'>`                        | `backButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.)  | shape       | type now bound to MMDS `ButtonIconProps`; `iconName` (`ArrowLeft`) and `size` (`Sm`) are owned by the component and cannot be overridden via the prop bag. `ariaLabel` is required (preserved from `ButtonIconProps`). |
+| `closeButtonProps?: ButtonIconProps<'button'>`                       | `closeButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.) | shape       | same shape change as `backButtonProps`; component owns `iconName=Close` and `size=Sm`.                                                                                                                                 |
+| `startAccessory?: ReactNode`                                         | `startAccessory?: ReactNode`                                                               | unchanged   | when provided, replaces the auto-rendered back button — even if `onBack` is set (legacy precedence preserved).                                                                                                         |
+| `endAccessory?: ReactNode`                                           | `endAccessory?: ReactNode`                                                                 | unchanged   | when provided, replaces the auto-rendered close button — even if `onClose` is set.                                                                                                                                     |
+| `className?: string`                                                 | `className?: string`                                                                       | unchanged   | applied to the outer `<header>`; merged with the component's defaults via `twMerge`.                                                                                                                                   |
+| Polymorphic `as` / extension's `HeaderBaseStyleUtilityProps` surface | removed                                                                                    | removed     | always renders `<header>`. Box utility props on the root (`color`, `textAlign`, `justifyContent`, `padding*`, `width`, …) are removed — use `className` with Tailwind utilities.                                       |
+| `mm-popover-header` SCSS class hook                                  | removed                                                                                    | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities.                                                                                   |
+| `childrenWrapperProps`                                               | removed                                                                                    | removed     | the auto-wrapped title slot is fixed at `col-start-2 col-end-3 w-full`. To customize the title layout, pass a custom `ReactNode` as `children` instead of relying on `childrenWrapperProps`.                           |
+
+##### i18n Decoupling
+
+The extension auto-defaulted the icon-button `aria-label`s to `t('back')` and `t('close')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. The type system enforces this: `onBack` and `backButtonProps` (and `onClose` / `closeButtonProps`) are co-required via a discriminated union — when `onBack` is set, you must also pass `backButtonProps` with at least an `ariaLabel`:
+
+```tsx
+<PopoverHeader
+  onClose={handleClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {t('headerTitle')}
+</PopoverHeader>
+```
+
+If a consumer sets `onClose` without `closeButtonProps`, TypeScript errors at the call site. This guarantees every dismiss button gets a properly localized label without the component reaching into any global i18n context.
+
+##### Color Inheritance
+
+The extension hard-coded `IconColor.inherit` and `TextColor.inherit` on the auto-rendered icon buttons and the auto-wrapped title. The design system preserves this default — the title uses `TextColor.Inherit`, and the auto-rendered `ButtonIcon`s receive `className="text-inherit"` (merged with any consumer-provided `className`). To force a specific color, pass `className` on the prop bag:
+
+```tsx
+closeButtonProps={{ ariaLabel: t('close'), className: 'text-error-default' }}
+```
+
+##### ButtonIcon API Differences
+
+The extension's `ButtonIconProps<'button'>` is replaced by MMDS `ButtonIconProps`. The most common difference for migrating consumers is that the polymorphic `as` typing is gone (the prop bag types against the underlying `<button>` HTML element directly). All standard ButtonIcon props (`ariaLabel`, `disabled`, `onClick`, `data-testid`, etc.) are preserved.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { PopoverHeader } from '../../component-library';
+
+// i18n-defaulted close + Box utility props
+<PopoverHeader
+  color={TextColor.infoInverse}
+  textAlign={TextAlign.Center}
+  justifyContent={JustifyContent.spaceBetween}
+  onClose={onClose}
+  childrenWrapperProps={{ style: { whiteSpace: 'nowrap' } }}
+>
+  {title}
+</PopoverHeader>;
+```
+
+##### After (Design System)
+
+```tsx
+import { PopoverHeader } from '@metamask/design-system-react';
+
+// aria-label is explicit; Box utility props move to className.
+// The title and the auto-rendered close button inherit color from the
+// surrounding popover surface, so no `color` prop is needed on the header
+// itself — set the color on the popover container instead.
+<PopoverHeader
+  className="text-info-inverse"
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  <span className="whitespace-nowrap">{title}</span>
+</PopoverHeader>;
+```
+
+For the typical extension call site — `ui/pages/bridge/layout/tooltip.tsx` (the only consumer outside of the `popover-header/` package itself, verified via fresh grep) — the churn is:
+
+1. Swap the import path.
+2. Add `closeButtonProps={{ ariaLabel: t('close') }}` to every `<PopoverHeader>` that uses `onClose` (and `backButtonProps={{ ariaLabel: t('back') }}` for `onBack`). The compiler flags missing prop bags so this can be applied mechanically.
+3. Move any root-level Box utility props (`color`, `textAlign`, `justifyContent`, `padding*`, `width`, etc.) onto `className` with Tailwind utilities.
+4. Replace `childrenWrapperProps` with a custom `ReactNode` `children` that wraps the title in the desired layout.
+
+#### API Differences
+
+- `PopoverHeader` always renders a `<header>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- The `useI18nContext` coupling for the icon-button `aria-label`s is gone. Discriminated unions enforce co-required `backButtonProps` / `closeButtonProps` at compile time.
+- The component owns `iconName` (`ArrowLeft` / `Close`) and `size` (`Sm`) on the built-in icon buttons. Consumers cannot override them via the prop bag.
+- The auto-rendered icon buttons and the auto-wrapped title default to `text-inherit` so they pick up the popover surface color, preserving the legacy `IconColor.inherit` / `TextColor.inherit` behavior.
+- `startAccessory` / `endAccessory` precedence over the auto-rendered back/close buttons is preserved from the legacy.
+- No outer padding is applied by default — popover surfaces own their own spacing.
 
 ### SensitiveText Component
 
