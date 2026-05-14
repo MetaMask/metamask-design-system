@@ -1,5 +1,6 @@
 import {
   ButtonBaseSize,
+  type BoxSpacing,
   FontWeight,
   TextColor,
 } from '@metamask/design-system-shared';
@@ -162,8 +163,18 @@ export const ButtonBase = ({
       {({ pressed }) => {
         const { twClassName: loadingWrapperTw, ...restLoadingWrapper } =
           loadingWrapperProps ?? {};
-        const { twClassName: contentWrapperTw, ...restContentWrapper } =
-          contentWrapperProps ?? {};
+        const {
+          twClassName: contentWrapperTw,
+          gap: contentWrapperGap,
+          ...restContentWrapper
+        } = contentWrapperProps ?? {};
+
+        let contentRowGap: BoxSpacing = 0;
+        if (contentWrapperGap !== undefined) {
+          contentRowGap = contentWrapperGap;
+        } else if (hasAccessories) {
+          contentRowGap = 1;
+        }
 
         return (
           <>
@@ -198,7 +209,7 @@ export const ButtonBase = ({
             <BoxRow
               {...restContentWrapper}
               twClassName={`${contentWrapperTw ?? ''} ${isLoading ? 'opacity-0' : ''}`}
-              gap={hasAccessories ? 1 : 0}
+              gap={contentRowGap}
               startAccessory={
                 finalStartIconName ? (
                   <Icon
