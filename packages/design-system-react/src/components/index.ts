@@ -95,6 +95,9 @@ export type { InputProps } from './Input';
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
 
+export { Label } from './Label';
+export type { LabelProps } from './Label';
+
 export { Maskicon } from './temp-components/Maskicon';
 export type { MaskiconProps } from './temp-components/Maskicon';
 
@@ -106,6 +109,8 @@ export { ModalFocus } from './ModalFocus';
 export type { FocusableElement, ModalFocusProps } from './ModalFocus';
 export { ButtonsAlignment, ModalFooter } from './ModalFooter';
 export type { ModalFooterButtonProps, ModalFooterProps } from './ModalFooter';
+export { ModalHeader } from './ModalHeader';
+export type { ModalHeaderProps } from './ModalHeader';
 export { Modal, useModalContext } from './Modal';
 export type { ModalContextType, ModalProps } from './Modal';
 export {
@@ -120,6 +125,9 @@ export type { SkeletonProps } from './Skeleton';
 
 export { SensitiveText, SensitiveTextLength } from './SensitiveText';
 export type { SensitiveTextProps } from './SensitiveText';
+
+export { PopoverHeader } from './PopoverHeader';
+export type { PopoverHeaderProps } from './PopoverHeader';
 
 export { Text } from './Text';
 export {

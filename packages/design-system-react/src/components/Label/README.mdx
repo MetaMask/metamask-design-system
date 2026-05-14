@@ -1,0 +1,120 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as LabelStories from './Label.stories';
+
+# Label
+
+Label renders a semantic `<label>` element styled for form fields. Use it next to an `Input` (or wrapped around one) so that screen readers announce the label and clicking the label focuses the associated input.
+
+```tsx
+import { Label, Input } from '@metamask/design-system-react';
+
+<Label htmlFor="email-input">Email address</Label>
+<Input id="email-input" placeholder="you@example.com" />;
+```
+
+<Canvas of={LabelStories.Default} />
+
+## Props
+
+`Label` accepts every prop from [`Text`](../Text) (so `color`, `fontWeight`, `variant`, `textAlign`, etc. work as overrides) plus the standard HTML `<label>` attributes. The `asChild` prop is owned by the component and is not exposed — `Label` always renders a `<label>` element.
+
+### `children`
+
+Required content of the label. Strings, elements, or any combination.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+### `htmlFor`
+
+Optional `id` of the form input this label is associated with. When set, clicking the label focuses the corresponding input — the standard HTML `<label htmlFor>` form-association behavior. The component also adds `cursor-pointer` to communicate the affordance.
+
+If you wrap the input inside the label instead of using `htmlFor`, the same focus behavior is provided by the browser and `cursor-pointer` is omitted.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={LabelStories.HtmlFor} />
+
+### Wrapping an input
+
+`Label` can also wrap its associated input directly. The browser still forwards clicks/focus to the nested input, so no `htmlFor` is required.
+
+<Canvas of={LabelStories.WrappingInput} />
+
+### Composition with icons
+
+Because `Label` accepts arbitrary children, you can compose it with `Icon` (or any other element) to add affordances such as an info marker.
+
+<Canvas of={LabelStories.WithIcon} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes. Classes are merged with the component defaults using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={LabelStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
