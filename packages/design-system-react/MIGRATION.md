@@ -17,6 +17,8 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
   - [HeaderBase Component](#headerbase-component)
+  - [HelpText Component](#helptext-component)
+  - [Label Component](#label-component)
   - [Modal Component](#modal-component)
   - [ModalContent Component](#modalcontent-component)
   - [ModalBody Component](#modalbody-component)
@@ -24,8 +26,10 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ModalFooter Component](#modalfooter-component)
   - [ModalHeader Component](#modalheader-component)
   - [ModalOverlay Component](#modaloverlay-component)
+  - [SensitiveText Component](#sensitivetext-component)
   - [Skeleton Component](#skeleton-component)
 - [Version Updates](#version-updates)
+  - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
@@ -888,20 +892,20 @@ No direct prop renames were introduced for extension-to-MMDS `BannerBase`.
 
 ##### Type and Callback Signature Changes
 
-| Legacy Extension API                                     | MMDS API                                                                                                                          | Notes                                                 |
-| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| `title?: string`                                         | `title?: ReactNode`                                                                                                               | MMDS now accepts full React node content              |
-| `description?: string`                                   | `description?: ReactNode`                                                                                                         | MMDS now accepts full React node content              |
-| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>`                                            | MMDS action button is a `Button`, not a `ButtonLink`  |
-| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                                                                  | Close callback target is now the close button element |
-| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'> & { onClick?: MouseEventHandler<HTMLButtonElement> }` | `iconName` remains fixed to close icon                |
+| Legacy Extension API                                     | MMDS API                                                                               | Notes                                                              |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `title?: string`                                         | `title?: ReactNode`                                                                    | MMDS now accepts full React node content                           |
+| `description?: string`                                   | `description?: ReactNode`                                                              | MMDS now accepts full React node content                           |
+| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>` | MMDS action button is a `Button`, not a `ButtonLink`               |
+| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                       | Close callback target is now the close button element              |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'>`           | `iconName` remains fixed to close icon; use `onClose` for behavior |
 
 ##### Default and Behavior Changes
 
 | Legacy Extension Behavior                                                  | MMDS Behavior                                                                                      |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Action button defaults to `ButtonLink` semantics and `ButtonLinkSize.Auto` | Action button is `Button` with default `ButtonSize.Md`                                             |
-| Close button renders only when `onClose` is provided                       | Close button renders when `onClose` **or** `closeButtonProps` is provided                          |
+| Close button renders only when `onClose` is provided                       | Close button renders only when `onClose` is provided                                               |
 | Close button `ariaLabel` defaults to translated `t('close')`               | Close button `ariaLabel` defaults to `'Close banner'` (override with `closeButtonProps.ariaLabel`) |
 | String/number `children` are wrapped in extension `Text` defaults          | String/number `children` are wrapped in MMDS `Text` with `TextVariant.BodyMd`                      |
 
@@ -1331,6 +1335,140 @@ For typical call sites — for example `ui/components/multichain/pages/page/comp
 - `HeaderBase` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-header-base` class hook is gone — use `className` to apply Tailwind utilities.
 - The `useRef` / `useEffect` / `useState` / `window.addEventListener('resize', …)` measurement code is gone. There are no longer any layout side effects on mount or window resize.
 - Slot wrappers (`childrenWrapperProps` / `startAccessoryWrapperProps` / `endAccessoryWrapperProps`) ship their grid-placement utilities (`col-start-*`, `justify-self-*`) as defaults; consumer `className` is merged via `twMerge` so it can override placement when needed.
+
+### HelpText Component
+
+The extension `help-text` component maps to `HelpText` in the design system. It still renders a `<p>` with the `body-sm` typography and applies a severity-based text color, but the polymorphic `as` API is replaced with the design-system `asChild` pattern, and the `HelpTextSeverity` enum is now a const object (ADR-0003) sourced from `@metamask/design-system-shared`.
+
+#### Breaking Changes
+
+##### Imports and Enum Source
+
+| Extension Pattern                                                  | Design System Migration                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `import { HelpText } from '../../component-library/help-text'`     | `import { HelpText } from '@metamask/design-system-react'`         |
+| `import { HelpTextSeverity } from '.../help-text/help-text.types'` | `import { HelpTextSeverity } from '@metamask/design-system-react'` |
+
+##### Severity Values
+
+`HelpTextSeverity` is now a const object instead of a TypeScript enum, but member names and string values are unchanged.
+
+| Extension Value                          | Design System Value        |
+| ---------------------------------------- | -------------------------- |
+| `HelpTextSeverity.Info` (`'info'`)       | `HelpTextSeverity.Info`    |
+| `HelpTextSeverity.Success` (`'success'`) | `HelpTextSeverity.Success` |
+| `HelpTextSeverity.Warning` (`'warning'`) | `HelpTextSeverity.Warning` |
+| `HelpTextSeverity.Danger` (`'danger'`)   | `HelpTextSeverity.Danger`  |
+
+##### Removed / No Direct Equivalent
+
+| Legacy Extension API                                              | MMDS Status                                   | Migration                                                                            |
+| ----------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Polymorphic `as` prop / `PolymorphicRef` typing                   | Removed                                       | Use `asChild` to render a different element (see example below)                      |
+| Implicit `as="div"` switch when `children` is a non-string node   | Removed — always renders `<p>`                | Use `asChild` with a `<div>` wrapper when content includes block-level children      |
+| `Severity` union (extension-wide) accepted by the `severity` prop | Removed — only `HelpTextSeverity` is accepted | Map any `Severity.*` value to the matching `HelpTextSeverity.*` member               |
+| Forwarded `ref` to the underlying element                         | Not supported (matches `Text`)                | If a ref is required, render a parent element via `asChild` and attach the ref there |
+| `mm-help-text` CSS class hook                                     | Removed                                       | Apply Tailwind utilities through `className`                                         |
+
+##### Type Changes
+
+| Legacy Extension API                        | MMDS API                                              | Notes                                                |
+| ------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |
+| `severity?: HelpTextSeverity \| Severity`   | `severity?: HelpTextSeverity`                         | Single source of truth; const object (ADR-0003/0004) |
+| `color?: TextColor` (extension `TextColor`) | `color?: TextColor` (shared `TextColor` const object) | PascalCase members (e.g. `TextColor.ErrorDefault`)   |
+| `children: string \| ReactNodeLike`         | `children: ReactNode`                                 | Standard React typing                                |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { HelpText, HelpTextSeverity } from '../../component-library';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+
+// Implicit `as="div"` when children was an object node
+<HelpText>
+  <span>Complex</span> content
+</HelpText>;
+```
+
+##### After (Design System)
+
+```tsx
+import { HelpText, HelpTextSeverity } from '@metamask/design-system-react';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+
+// Render as a div explicitly via `asChild`
+<HelpText asChild>
+  <div>
+    <span>Complex</span> content
+  </div>
+</HelpText>;
+```
+
+### Label Component
+
+The extension `label` component maps to `Label` in the design system. The runtime API stays the same for typical usage — `<Label htmlFor="...">…</Label>` — but the component drops the polymorphic Box surface and the legacy SCSS class hooks in favor of a `<Text asChild>` composition that renders a semantic `<label>` element with Tailwind utilities.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { Label } from '../../component-library'`           | `import { Label } from '@metamask/design-system-react'`           |
+| `import type { LabelProps } from '../../component-library'` | `import type { LabelProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                                 | Design System API                                                             | Change Type | Notes                                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `htmlFor?: string`                                                                            | `htmlFor?: string`                                                            | unchanged   | forwarded to the underlying `<label>` element as the `for` attribute                                                                                                            |
+| `children: string \| React.ReactNode`                                                         | `children: ReactNode`                                                         | unchanged   | label content                                                                                                                                                                   |
+| `className?: string`                                                                          | `className?: string`                                                          | unchanged   | merged with default Tailwind classes via `twMerge`                                                                                                                              |
+| `'data-testid'?: string`                                                                      | inherited from `ComponentProps<'label'>`                                      | unchanged   | any `data-*`/`aria-*` HTML attribute is forwarded to the `<label>` element                                                                                                      |
+| Polymorphic `as` / `LabelProps<C extends React.ElementType>` typing                           | removed                                                                       | removed     | always renders a semantic `<label>` element. If you need a different element, wrap or compose.                                                                                  |
+| Box / Text style-utility props (`color`, `fontWeight`, `variant`, `display`, `alignItems`, …) | overrides via `Text` props (`color`, `fontWeight`, `variant`, `textAlign`, …) | changed     | `Label` is composed from `Text`, so `Text` props remain available as overrides. The component owns its layout (`inline-flex items-center`); use `className` to override layout. |
+| `mm-label` / `mm-label--html-for` SCSS class hooks                                            | removed                                                                       | removed     | use `className` and Tailwind utilities to customize the label                                                                                                                   |
+
+##### Default and Behavior Changes
+
+| Concern        | Extension Behavior                                                                     | Design System Behavior                                                                   |
+| -------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Element        | `<Text as="label">` → `<label>`                                                        | `<Text asChild><label>…</label></Text>` → still a semantic `<label>`                     |
+| Default layout | `Display.InlineFlex` + `AlignItems.center` Box props                                   | `inline-flex items-center` Tailwind utilities                                            |
+| Typography     | `TextVariant.bodyMd` + `FontWeight.Medium`                                             | `TextVariant.BodyMd` + `FontWeight.Medium` (same defaults; overridable via `Text` props) |
+| Cursor         | `cursor: pointer` applied via `mm-label--html-for` SCSS modifier when `htmlFor` is set | `cursor-pointer` Tailwind utility applied conditionally when `htmlFor` is set            |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Label } from '../../component-library';
+
+<Label htmlFor="email-input">Email address</Label>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Label } from '@metamask/design-system-react';
+
+<Label htmlFor="email-input">Email address</Label>;
+```
+
+For typical call sites — for example `ui/components/component-library/form-text-field/form-text-field.tsx`, `ui/components/component-library/file-uploader/file-uploader.tsx`, and `ui/pages/deep-link/deep-link.tsx` (verified via fresh grep) — the only change is the import path; the JSX stays identical.
+
+#### API Differences
+
+- `Label` no longer composes Box/Text's polymorphic `as` API. It always renders a `<label>` element and forwards arbitrary HTML attributes (`id`, `data-*`, `aria-*`, `ref`) to it.
+- The `asChild` prop is owned by the component and is intentionally excluded from the public API.
+- One-off styling that previously used Box/Text utility props (e.g. `display={Display.Block}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="block"`). Typography overrides (`color`, `fontWeight`, `variant`, `textAlign`) remain available via the inherited `Text` props.
 
 ### Modal Component
 
@@ -2071,6 +2209,63 @@ For typical call sites — for example `ui/components/multichain/network-list-me
 - `ModalOverlay` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - One-off styling that previously used Box utility props (e.g. `backgroundColor={BackgroundColor.overlayAlternative}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="bg-overlay-alternative"`).
 
+### SensitiveText Component
+
+The extension `sensitive-text` component maps directly to `SensitiveText` in the design system. The public API (`isHidden`, `length`, `children`, plus inherited `Text` props) is unchanged — only the import path moves.
+
+`SensitiveTextLength` is now sourced from `@metamask/design-system-shared` and re-exported from both `@metamask/design-system-react` and `@metamask/design-system-react-native`, so the same const object can be used across web and native consumers.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared style-utility migration patterns.
+
+#### Import Path
+
+| Extension Pattern                                               | Design System Migration                                                   |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `import { SensitiveText } from '../../component-library'`       | `import { SensitiveText } from '@metamask/design-system-react'`           |
+| `import { SensitiveTextLength } from '../../component-library'` | `import { SensitiveTextLength } from '@metamask/design-system-react'`     |
+| `import type { SensitiveTextProps } from '...'`                 | `import type { SensitiveTextProps } from '@metamask/design-system-react'` |
+
+#### Props
+
+| Extension Prop | Design System Prop | Change Type | Notes                                                                            |
+| -------------- | ------------------ | ----------- | -------------------------------------------------------------------------------- |
+| `isHidden`     | `isHidden`         | unchanged   | Defaults to `false`.                                                             |
+| `length`       | `length`           | unchanged   | Accepts `SensitiveTextLength` or a custom numeric string (e.g. `"15"`).          |
+| `children`     | `children`         | unchanged   | The text content to display or hide.                                             |
+| `ref`          | removed            | removed     | The new component is a function component and does not forward a ref to the DOM. |
+
+All other `Text` props (`variant`, `color`, `fontWeight`, `className`, `style`, etc.) continue to be forwarded to the underlying `Text`.
+
+#### Behavior
+
+- Invalid `length` values still fall back to `SensitiveTextLength.Short` and log a `console.warn`, matching the extension behavior.
+- The hidden representation continues to use the bullet character (`•`).
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { SensitiveText, SensitiveTextLength } from '../../component-library';
+
+<SensitiveText isHidden length={SensitiveTextLength.Medium}>
+  $1,234.56
+</SensitiveText>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  SensitiveText,
+  SensitiveTextLength,
+} from '@metamask/design-system-react';
+
+<SensitiveText isHidden length={SensitiveTextLength.Medium}>
+  $1,234.56
+</SensitiveText>;
+```
+
 ### Skeleton Component
 
 The extension `skeleton` component maps to `Skeleton` in the design system. The visual contract — a pulsing placeholder with `bg-icon-alternative` opacity-cycling at 1400ms — is preserved, but the public API is realigned with the React Native `Skeleton` (`@metamask/design-system-react-native`):
@@ -2179,6 +2374,28 @@ Codemod-friendly: every `isLoading=` token in the extension's existing call site
 - The container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` by default. The skeleton takes no part in the accessibility tree.
 
 ## Version Updates
+
+<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
+
+## From version 0.22.0 to 0.x.0
+
+### BannerBase: `onClose` is now the only close-button behavior API
+
+**What changed:**
+
+- **`closeButtonProps.onClick`** is removed from the public **`BannerBase`** API.
+- The close button now renders **only** when **`onClose`** is provided.
+- **`closeButtonProps`** is now customization-only for the rendered close **`ButtonIcon`**.
+
+**Migration:**
+
+- Move any close-button behavior from **`closeButtonProps.onClick`** to **`onClose`**.
+- Keep **`closeButtonProps`** only for non-behavioral customization such as **`data-testid`**, accessibility props, and styling hooks.
+- If you previously passed only **`closeButtonProps`** to force-render a close button, also provide **`onClose`** now.
+
+**Impact:**
+
+- Existing **`@metamask/design-system-react`** consumers that relied on **`closeButtonProps.onClick`** or on rendering a close button without **`onClose`** must update those call sites.
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
 
