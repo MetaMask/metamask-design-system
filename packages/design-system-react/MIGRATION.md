@@ -18,11 +18,13 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Checkbox Component](#checkbox-component)
   - [HeaderBase Component](#headerbase-component)
   - [HelpText Component](#helptext-component)
+  - [Label Component](#label-component)
   - [Modal Component](#modal-component)
   - [ModalContent Component](#modalcontent-component)
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
   - [ModalFooter Component](#modalfooter-component)
+  - [ModalHeader Component](#modalheader-component)
   - [ModalOverlay Component](#modaloverlay-component)
   - [PopoverHeader Component](#popoverheader-component)
   - [SensitiveText Component](#sensitivetext-component)
@@ -1407,6 +1409,68 @@ import { HelpText, HelpTextSeverity } from '@metamask/design-system-react';
 </HelpText>;
 ```
 
+### Label Component
+
+The extension `label` component maps to `Label` in the design system. The runtime API stays the same for typical usage — `<Label htmlFor="...">…</Label>` — but the component drops the polymorphic Box surface and the legacy SCSS class hooks in favor of a `<Text asChild>` composition that renders a semantic `<label>` element with Tailwind utilities.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { Label } from '../../component-library'`           | `import { Label } from '@metamask/design-system-react'`           |
+| `import type { LabelProps } from '../../component-library'` | `import type { LabelProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                                 | Design System API                                                             | Change Type | Notes                                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `htmlFor?: string`                                                                            | `htmlFor?: string`                                                            | unchanged   | forwarded to the underlying `<label>` element as the `for` attribute                                                                                                            |
+| `children: string \| React.ReactNode`                                                         | `children: ReactNode`                                                         | unchanged   | label content                                                                                                                                                                   |
+| `className?: string`                                                                          | `className?: string`                                                          | unchanged   | merged with default Tailwind classes via `twMerge`                                                                                                                              |
+| `'data-testid'?: string`                                                                      | inherited from `ComponentProps<'label'>`                                      | unchanged   | any `data-*`/`aria-*` HTML attribute is forwarded to the `<label>` element                                                                                                      |
+| Polymorphic `as` / `LabelProps<C extends React.ElementType>` typing                           | removed                                                                       | removed     | always renders a semantic `<label>` element. If you need a different element, wrap or compose.                                                                                  |
+| Box / Text style-utility props (`color`, `fontWeight`, `variant`, `display`, `alignItems`, …) | overrides via `Text` props (`color`, `fontWeight`, `variant`, `textAlign`, …) | changed     | `Label` is composed from `Text`, so `Text` props remain available as overrides. The component owns its layout (`inline-flex items-center`); use `className` to override layout. |
+| `mm-label` / `mm-label--html-for` SCSS class hooks                                            | removed                                                                       | removed     | use `className` and Tailwind utilities to customize the label                                                                                                                   |
+
+##### Default and Behavior Changes
+
+| Concern        | Extension Behavior                                                                     | Design System Behavior                                                                   |
+| -------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Element        | `<Text as="label">` → `<label>`                                                        | `<Text asChild><label>…</label></Text>` → still a semantic `<label>`                     |
+| Default layout | `Display.InlineFlex` + `AlignItems.center` Box props                                   | `inline-flex items-center` Tailwind utilities                                            |
+| Typography     | `TextVariant.bodyMd` + `FontWeight.Medium`                                             | `TextVariant.BodyMd` + `FontWeight.Medium` (same defaults; overridable via `Text` props) |
+| Cursor         | `cursor: pointer` applied via `mm-label--html-for` SCSS modifier when `htmlFor` is set | `cursor-pointer` Tailwind utility applied conditionally when `htmlFor` is set            |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Label } from '../../component-library';
+
+<Label htmlFor="email-input">Email address</Label>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Label } from '@metamask/design-system-react';
+
+<Label htmlFor="email-input">Email address</Label>;
+```
+
+For typical call sites — for example `ui/components/component-library/form-text-field/form-text-field.tsx`, `ui/components/component-library/file-uploader/file-uploader.tsx`, and `ui/pages/deep-link/deep-link.tsx` (verified via fresh grep) — the only change is the import path; the JSX stays identical.
+
+#### API Differences
+
+- `Label` no longer composes Box/Text's polymorphic `as` API. It always renders a `<label>` element and forwards arbitrary HTML attributes (`id`, `data-*`, `aria-*`, `ref`) to it.
+- The `asChild` prop is owned by the component and is intentionally excluded from the public API.
+- One-off styling that previously used Box/Text utility props (e.g. `display={Display.Block}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="block"`). Typography overrides (`color`, `fontWeight`, `variant`, `textAlign`) remain available via the inherited `Text` props.
+
 ### Modal Component
 
 The extension `modal` component maps to `Modal` in the design system. The behavioral contract — portal into `document.body` while `isOpen`, unmount on close, expose configuration to descendants via `useModalContext` — is preserved 1:1. The migration is a near-zero-effort import-path swap for typical consumers.
@@ -1948,6 +2012,143 @@ For typical call sites — for example `ui/components/multichain-accounts/accoun
 - `ModalFooter` is i18n-agnostic — there is no `useI18nContext` integration and no internal English fallback. Consumers always pass labels via `primaryButtonProps.children` / `secondaryButtonProps.children`.
 - The component **owns** the button variant via `Omit<ButtonProps, 'variant'>` on the prop bags. Consumers cannot pass `variant`; the API surfaces this at compile time. This mirrors the React Native `BottomSheetFooter` and is the recommended footer contract going forward.
 - Layout direction is configured via `buttonsAlignment` (`Horizontal` default, `Vertical` opt-in). The legacy `Container.maxWidth` enum is gone — width comes from the surrounding `ModalContent.size`.
+
+### ModalHeader Component
+
+The extension `modal-header` component maps to `ModalHeader` in the design system. The behavioral contract — a `<header>` with an optional back button on the start, a title in the center, and an optional close button on the end — is preserved. The polymorphic Box surface, the `mm-modal-header` SCSS class hook, and the implicit `useI18nContext` coupling for the icon-button `aria-label`s are removed.
+
+`ModalHeader` is built on top of the same three-column grid layout as `HeaderBase`, replicated locally so the outer element stays a single semantic `<header>` (no extra wrapper).
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                 | Design System Migration                                                 |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `import { ModalHeader } from '../../component-library'`           | `import { ModalHeader } from '@metamask/design-system-react'`           |
+| `import type { ModalHeaderProps } from '../../component-library'` | `import type { ModalHeaderProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                        | Design System API                                                                          | Change Type | Notes                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children?: ReactNode`                                               | `children?: ReactNode`                                                                     | unchanged   | string children still auto-wrap as `<Text variant={TextVariant.HeadingSm} textAlign={TextAlign.Center}>`; `ReactNode` children render as-is.                                                                           |
+| `onBack?: () => void`                                                | `onBack?: () => void`                                                                      | unchanged   | when set, renders the back button — but **`backButtonProps` is now co-required** (see "i18n decoupling" below).                                                                                                        |
+| `onClose?: () => void`                                               | `onClose?: () => void`                                                                     | unchanged   | when set, renders the close button — but **`closeButtonProps` is now co-required**.                                                                                                                                    |
+| `backButtonProps?: Partial<ButtonIconProps<'button'>>`               | `backButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.)  | shape       | type now bound to MMDS `ButtonIconProps`; `iconName` (`ArrowLeft`) and `size` (`Md`) are owned by the component and cannot be overridden via the prop bag. `ariaLabel` is required (preserved from `ButtonIconProps`). |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`              | `closeButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.) | shape       | same shape change as `backButtonProps`; component owns `iconName=Close` and `size=Md`.                                                                                                                                 |
+| `startAccessory?: ReactNode`                                         | `startAccessory?: ReactNode`                                                               | unchanged   | when provided, replaces the auto-rendered back button — even if `onBack` is set (legacy precedence preserved).                                                                                                         |
+| `endAccessory?: ReactNode`                                           | `endAccessory?: ReactNode`                                                                 | unchanged   | when provided, replaces the auto-rendered close button — even if `onClose` is set.                                                                                                                                     |
+| `className?: string`                                                 | `className?: string`                                                                       | unchanged   | applied to the outer `<header>`; merged with the component's defaults via `twMerge`.                                                                                                                                   |
+| Polymorphic `as` / extension's `HeaderBaseStyleUtilityProps` surface | removed                                                                                    | removed     | always renders `<header>`. Box utility props on the root (`paddingLeft`, `paddingBottom`, `width`, …) are removed — use `className` with Tailwind utilities (e.g. `className="pt-0 pb-2"`).                            |
+| `mm-modal-header` SCSS class hook                                    | removed                                                                                    | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities.                                                                                   |
+| `childrenWrapperProps={{ width: BlockSize.Full }}` (legacy internal) | applied automatically as `w-full` on the title slot                                        | unchanged   | preserved internal behavior; no consumer-facing prop change.                                                                                                                                                           |
+
+##### i18n Decoupling
+
+The extension auto-defaulted the icon-button `aria-label`s to `t('back')` and `t('close')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. The type system enforces this: `onBack` and `backButtonProps` (and `onClose` / `closeButtonProps`) are co-required via a discriminated union — when `onBack` is set, you must also pass `backButtonProps` with at least an `ariaLabel`:
+
+```tsx
+<ModalHeader onClose={handleClose} closeButtonProps={{ ariaLabel: t('close') }}>
+  {t('removeAccount')}
+</ModalHeader>
+```
+
+If a consumer sets `onClose` without `closeButtonProps`, TypeScript errors at the call site. This guarantees every dismiss button gets a properly localized label without the component reaching into any global i18n context.
+
+##### ButtonIcon API Differences
+
+The extension's `ButtonIconProps<'button'>` is replaced by MMDS `ButtonIconProps`. The most common difference for migrating consumers is that the polymorphic `as` typing is gone (the prop bag types against the underlying `<button>` HTML element directly). All standard ButtonIcon props (`ariaLabel`, `disabled`, `onClick`, `data-testid`, etc.) are preserved.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalHeader } from '../../component-library';
+
+// i18n-defaulted back + close
+<ModalHeader onBack={onBack} onClose={onClose}>
+  {t('headerTitle')}
+</ModalHeader>
+
+// Box utility props on the root
+<ModalHeader
+  paddingBottom={4}
+  paddingRight={4}
+  paddingLeft={4}
+  onClose={onClose}
+>
+  {title}
+</ModalHeader>
+
+// Custom close-button override (test id, aria-label)
+<ModalHeader
+  onClose={onClose}
+  closeButtonProps={{
+    ariaLabel: t('close'),
+    'data-testid': 'modal-close',
+  }}
+>
+  {title}
+</ModalHeader>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalHeader } from '@metamask/design-system-react';
+
+// aria-labels are explicit; back + close prop bags are now co-required
+<ModalHeader
+  onBack={onBack}
+  backButtonProps={{ ariaLabel: t('back') }}
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {t('headerTitle')}
+</ModalHeader>
+
+// Root padding overrides move into className
+<ModalHeader
+  className="pb-4 pr-4 pl-4"
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {title}
+</ModalHeader>
+
+// Custom close-button overrides — same shape, just bound to the new type
+<ModalHeader
+  onClose={onClose}
+  closeButtonProps={{
+    ariaLabel: t('close'),
+    'data-testid': 'modal-close',
+  }}
+>
+  {title}
+</ModalHeader>
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (bare `<ModalHeader onClose={onClose}>{title}</ModalHeader>`), `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`paddingLeft={4} paddingRight={4} paddingBottom={4} onClose={fn}`), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (custom JSX `children`) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Add `closeButtonProps={{ ariaLabel: t('close') }}` (and/or `backButtonProps={{ ariaLabel: t('back') }}`) to every `<ModalHeader>` that uses `onClose` / `onBack`. The compiler flags missing prop bags so this can be applied mechanically.
+3. Move any root-level Box utility props (`paddingLeft`, `paddingRight`, `paddingBottom`, `width`, etc.) onto `className` with Tailwind utilities.
+4. If the call site's `closeButtonProps` / `backButtonProps` already passed `ariaLabel`, only the import path needs to change.
+
+#### Deprecated `ModalHeader`
+
+The extension exports a separate `deprecated/` `ModalHeader` from `ui/components/component-library/modal-header/deprecated`. **It is not migrated.** Consumers still importing from the deprecated path need to migrate to the current `ModalHeader` first, then switch to `@metamask/design-system-react`. The deprecated path predates the current `paddingTop`/`paddingBottom`/`width` defaults and uses `ButtonIconSize.Sm` instead of `Md`.
+
+#### API Differences
+
+- `ModalHeader` always renders a `<header>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- The `useI18nContext` coupling for the icon-button `aria-label`s is gone. Discriminated unions enforce co-required `backButtonProps` / `closeButtonProps` at compile time.
+- The component owns `iconName` (`ArrowLeft` / `Close`) and `size` (`Md`) on the built-in icon buttons. Consumers cannot override them via the prop bag.
+- `startAccessory` / `endAccessory` precedence over the auto-rendered back/close buttons is preserved from the legacy.
 
 ### ModalOverlay Component
 
