@@ -31,13 +31,16 @@ export const SelectButton = ({
 }: SelectButtonProps) => {
   const labelContent = value ?? placeholder;
 
-  const resolvedEndArrowDirection = hideEndArrow
-    ? undefined
-    : endArrowDirection != null
-      ? endArrowDirection
-      : endAccessory
-        ? undefined
-        : SelectButtonEndArrow.Down;
+  let resolvedEndArrowDirection: SelectButtonEndArrow | undefined;
+  if (hideEndArrow) {
+    resolvedEndArrowDirection = undefined;
+  } else if (endArrowDirection !== undefined && endArrowDirection !== null) {
+    resolvedEndArrowDirection = endArrowDirection;
+  } else if (endAccessory) {
+    resolvedEndArrowDirection = undefined;
+  } else {
+    resolvedEndArrowDirection = SelectButtonEndArrow.Down;
+  }
 
   return (
     <ButtonBase
@@ -74,11 +77,7 @@ export const SelectButton = ({
       twClassName={(pressed) =>
         variant === SelectButtonVariant.Secondary ||
         variant === SelectButtonVariant.Tertiary
-          ? `min-w-0 ${pressed || isLoading ? 'bg-pressed' : 'bg-transparent'} ${
-              pressed || isLoading
-                ? 'border-background-pressed'
-                : 'border-transparent'
-            } border-0 ${
+          ? `min-w-0 ${pressed || isLoading ? 'bg-pressed' : 'bg-transparent'} border-0 ${
               typeof twClassName === 'function'
                 ? twClassName(pressed)
                 : twClassName

@@ -323,7 +323,7 @@ describe('SegmentButton', () => {
     expect(root).toHaveStyle(tw`bg-icon-default-pressed`);
   });
 
-  it('uses pressed border when primary unselected receives pressIn', () => {
+  it('uses pressed background when primary unselected receives pressIn', () => {
     const { getByTestId } = render(
       <SegmentButton
         testID={ROOT_TEST_ID}
@@ -336,10 +336,10 @@ describe('SegmentButton', () => {
 
     const root = getByTestId(ROOT_TEST_ID);
     fireEvent(root, 'pressIn');
-    expect(root).toHaveStyle(tw`border-background-pressed`);
+    expect(root).toHaveStyle(tw`bg-pressed`);
   });
 
-  it('uses pressed border when secondary unselected receives pressIn', () => {
+  it('uses pressed background when secondary unselected receives pressIn', () => {
     const { getByTestId } = render(
       <SegmentButton
         testID={ROOT_TEST_ID}
@@ -352,7 +352,7 @@ describe('SegmentButton', () => {
 
     const root = getByTestId(ROOT_TEST_ID);
     fireEvent(root, 'pressIn');
-    expect(root).toHaveStyle(tw`border-background-pressed`);
+    expect(root).toHaveStyle(tw`bg-pressed`);
   });
 
   it('uses pressed background on root when primary selected is loading', () => {
@@ -383,9 +383,6 @@ describe('SegmentButton', () => {
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-pressed`);
-    expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-      tw`border-background-pressed`,
-    );
   });
 
   it('uses pressed loading container when secondary unselected is loading', () => {
@@ -401,9 +398,6 @@ describe('SegmentButton', () => {
     );
 
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-pressed`);
-    expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-      tw`border-background-pressed`,
-    );
   });
 
   describe('when used inside SegmentGroup', () => {

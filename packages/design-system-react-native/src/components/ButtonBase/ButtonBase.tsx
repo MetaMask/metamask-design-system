@@ -1,6 +1,6 @@
+import type { BoxSpacing } from '@metamask/design-system-shared';
 import {
   ButtonBaseSize,
-  type BoxSpacing,
   FontWeight,
   TextColor,
 } from '@metamask/design-system-shared';

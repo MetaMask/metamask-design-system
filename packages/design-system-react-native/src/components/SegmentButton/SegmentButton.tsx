@@ -107,11 +107,7 @@ export const SegmentButton = ({
           }`;
         }
 
-        return `${pressed || isLoading ? 'bg-pressed' : 'bg-transparent'} ${
-          pressed || isLoading
-            ? 'border-background-pressed'
-            : 'border-transparent'
-        } border-0 ${
+        return `${pressed || isLoading ? 'bg-pressed' : 'bg-transparent'} border-0 ${
           typeof twClassName === 'function' ? twClassName(pressed) : twClassName
         }`;
       }}

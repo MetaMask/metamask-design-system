@@ -65,7 +65,7 @@ Controls row styling and default label colors.
 Available values:
 
 - `SelectButtonVariant.Primary` — muted filled row (default).
-- `SelectButtonVariant.Secondary` — transparent row with border treatment.
+- `SelectButtonVariant.Secondary` — transparent row (`border-0`); pressed and loading use the pressed background.
 - `SelectButtonVariant.Tertiary` — same container idea as secondary, with alternative label and trailing-arrow colors when using defaults.
 
 | TYPE                  | REQUIRED | DEFAULT                       |
