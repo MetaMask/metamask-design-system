@@ -1,5 +1,4 @@
 import { BoxFlexDirection } from '@metamask/design-system-shared';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
@@ -18,7 +17,6 @@ export default meta;
 type Story = StoryObj<typeof SectionDivider>;
 
 function DefaultStoryTemplate(args: SectionDividerProps) {
-  const tw = useTailwind();
   return (
     <Box flexDirection={BoxFlexDirection.Column} gap={2}>
       <Text variant={TextVariant.BodyMd}>Above</Text>
