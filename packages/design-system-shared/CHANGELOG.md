@@ -9,12 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.18.0]
 
-### Uncategorized
+### Added
 
-- feat: Added SelectButton, SegmentButton, and SegmentGroup to DSRN ([#1172](https://github.com/MetaMask/metamask-design-system/pull/1172))
-- feat: `SensitiveText` extension ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
-- feat: `HelpText` migration (extension) ([#1169](https://github.com/MetaMask/metamask-design-system/pull/1169))
-- feat: [DSRN] Added TextArea ([#1141](https://github.com/MetaMask/metamask-design-system/pull/1141))
+- Exported `SelectButton` prop and variant types (`SelectButtonPropsShared`, `SelectButtonVariant`, `SelectButtonEndArrow`), `SegmentGroupPropsShared`, and `SegmentGroupContext` so mobile and web packages share one segment and select contract ([#1172](https://github.com/MetaMask/metamask-design-system/pull/1172))
+- Exported `SensitiveTextLength`, `SensitiveTextPropsShared`, and related types for cross-platform masking and reveal behavior ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- Exported `HelpTextSeverity`, `HelpTextPropsShared`, and related types for cross-platform helper and validation text ([#1169](https://github.com/MetaMask/metamask-design-system/pull/1169))
+- Exported `TextAreaPropsShared` for cross-platform multi-line input wrappers ([#1141](https://github.com/MetaMask/metamask-design-system/pull/1141))
 
 ## [0.17.0]
 

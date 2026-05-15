@@ -9,14 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.25.0]
 
-### Uncategorized
+### Added
 
-- feat: Added SelectButton, SegmentButton, and SegmentGroup to DSRN ([#1172](https://github.com/MetaMask/metamask-design-system/pull/1172))
-- feat: `SensitiveText` extension ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
-- refactor: Improved ButtonBase to support all shapes and sizes ([#1150](https://github.com/MetaMask/metamask-design-system/pull/1150))
-- feat: [DSRN] Added HeaderStandardAnimated ([#1151](https://github.com/MetaMask/metamask-design-system/pull/1151))
-- feat: [DSRN] Added TextArea ([#1141](https://github.com/MetaMask/metamask-design-system/pull/1141))
-- refactor: simplify BannerBase close handling ([#1166](https://github.com/MetaMask/metamask-design-system/pull/1166))
+- Added `SelectButton`, `SegmentButton`, and `SegmentGroup` for option rows, single-choice segments, and grouped segment controls ([#1172](https://github.com/MetaMask/metamask-design-system/pull/1172))
+- Added `SensitiveText` for masking and revealing sensitive strings, matching the cross-platform contract used on web ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- Added `HeaderStandardAnimated` and `useHeaderStandardAnimated` for standard headers with coordinated scroll-driven motion ([#1151](https://github.com/MetaMask/metamask-design-system/pull/1151))
+- Added `TextArea` for multi-line text entry ([#1141](https://github.com/MetaMask/metamask-design-system/pull/1141))
+
+### Changed
+
+- `ButtonBase` now derives label typography, start and end icon sizes, and internal spacing from the `size` prop for every supported `ButtonBaseSize`, keeping defaults aligned without manual per-size tuning ([#1150](https://github.com/MetaMask/metamask-design-system/pull/1150))
+  - If you wrap **`ButtonBase`** and override label, icon, or spacing, see [Migration guide](./MIGRATION.md#buttonbase-size-defaults).
+- `BannerBase` close control behavior is simplified and aligned with the shared dismiss contract ([#1166](https://github.com/MetaMask/metamask-design-system/pull/1166))
 
 ## [0.24.0]
 

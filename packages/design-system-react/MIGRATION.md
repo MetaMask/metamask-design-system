@@ -2513,6 +2513,45 @@ Codemod-friendly: every `isLoading=` token in the extension's existing call site
 
 - Existing **`@metamask/design-system-react`** consumers that relied on **`closeButtonProps.onClick`** or on rendering a close button without **`onClose`** must update those call sites.
 
+<a id="buttonbase-size-defaults"></a>
+
+### ButtonBase: let `size` drive label, icons, and spacing
+
+**What changed:**
+
+- **`ButtonBase`** maps each **`ButtonBaseSize`** to a recommended label **`Text`** variant, matching start and end **`Icon`** sizes, and consistent spacing between accessories and the label.
+
+**Recommendation:**
+
+For any product-specific button built on **`ButtonBase`** (wrappers that forward **`textProps`**, **`startIconProps`**, **`endIconProps`**, **`loadingIconProps`**, or extra layout classes):
+
+- Remove **icon size** overrides on **`startIconProps`**, **`endIconProps`**, and **`loadingIconProps`** unless a written design exception requires them.
+- Remove **label typography overrides** in **`textProps`** (for example a different **`variant`**) so the label follows the mapping for the chosen **`size`**.
+- Remove **spacing or gap overrides** (extra **`className`** / layout utilities on the root or content row) that only existed to nudge icon–label rhythm; **`ButtonBase`** now owns that layout.
+
+**Migration:**
+
+```tsx
+// Before: overrides that duplicate what size already encodes
+<ButtonBase
+  size={ButtonBaseSize.Md}
+  startIconProps={{ name: IconName.Add, size: IconSize.Md }}
+  textProps={{ variant: TextVariant.BodyLg }}
+  className="gap-4"
+>
+  Continue
+</ButtonBase>
+
+// After: rely on size-driven defaults
+<ButtonBase size={ButtonBaseSize.Md} startIconProps={{ name: IconName.Add }}>
+  Continue
+</ButtonBase>
+```
+
+**Impact:**
+
+- Custom **`ButtonBase`** wrappers that hard-coded icon sizes, text variants, or gaps may render slightly differently after removing overrides; visually they should match the current design spec for that **`size`**.
+
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
 
 ## From version 0.17.0 to 0.18.0
