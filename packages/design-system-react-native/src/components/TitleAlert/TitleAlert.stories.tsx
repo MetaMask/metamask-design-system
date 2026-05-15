@@ -1,10 +1,17 @@
-import { IconAlertSeverity } from '@metamask/design-system-shared';
+import {
+  BoxBackgroundColor,
+  BoxFlexDirection,
+  IconAlertSeverity,
+  IconColor,
+  IconName,
+  IconSize,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box, BoxBackgroundColor, BoxFlexDirection } from '../Box';
+import { Box } from '../Box';
 import type { BoxProps } from '../Box';
-import { Icon, IconColor, IconName, IconSize } from '../Icon';
+import { Icon } from '../Icon';
 import { Text } from '../Text';
 
 import { TitleAlert } from './TitleAlert';
