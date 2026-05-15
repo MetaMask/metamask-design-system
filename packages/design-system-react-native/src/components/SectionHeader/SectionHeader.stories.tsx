@@ -8,7 +8,7 @@ import { Icon } from '../Icon';
 import { SectionHeader } from './SectionHeader';
 import type { SectionHeaderProps } from './SectionHeader.types';
 
-const meta: Meta<SectionHeaderProps> = {
+const meta = {
   title: 'Components/SectionHeader',
   component: SectionHeader,
   argTypes: {
@@ -39,17 +39,17 @@ const meta: Meta<SectionHeaderProps> = {
       </Box>
     ),
   ],
-};
+} satisfies Meta<typeof SectionHeader>;
 
 export default meta;
 
-type Story = StoryObj<SectionHeaderProps>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
     title: 'Assets',
   },
-  render: (args) => <SectionHeader {...args} />,
+  render: (args: SectionHeaderProps) => <SectionHeader {...args} />,
 };
 
 export const StartIconName: Story = {
@@ -59,6 +59,28 @@ export const StartIconName: Story = {
 export const EndIconName: Story = {
   render: () => (
     <SectionHeader title="Networks" endIconName={IconName.ArrowRight} />
+  ),
+};
+
+export const StartAccessory: Story = {
+  render: () => (
+    <SectionHeader
+      title="Activity"
+      startAccessory={
+        <Box twClassName="h-6 w-6 shrink-0 rounded-full bg-primary-default" />
+      }
+    />
+  ),
+};
+
+export const EndAccessory: Story = {
+  render: () => (
+    <SectionHeader
+      title="Notifications"
+      endAccessory={
+        <Box twClassName="h-6 w-6 shrink-0 rounded-full bg-error-default" />
+      }
+    />
   ),
 };
 
