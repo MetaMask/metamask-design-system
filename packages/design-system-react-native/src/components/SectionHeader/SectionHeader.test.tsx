@@ -133,6 +133,23 @@ describe('SectionHeader', () => {
       expect(queryByTestId('section-header-start-acc')).toBeNull();
       expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
     });
+
+    it('uses startIconName over startIconProps.name when both are set', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          startIconName={IconName.Add}
+          startIconProps={{
+            name: IconName.Close,
+            testID: 'section-header-start-icon',
+          }}
+        />,
+      );
+
+      expect(getByTestId('section-header-start-icon').props.name).toBe(
+        IconName.Add,
+      );
+    });
   });
 
   describe('endIconName and endAccessory', () => {
@@ -171,6 +188,23 @@ describe('SectionHeader', () => {
 
       expect(queryByTestId('section-header-end-acc')).toBeNull();
       expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('uses endIconName over endIconProps.name when both are set', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          endIconName={IconName.Add}
+          endIconProps={{
+            name: IconName.Close,
+            testID: 'section-header-end-icon',
+          }}
+        />,
+      );
+
+      expect(getByTestId('section-header-end-icon').props.name).toBe(
+        IconName.Add,
+      );
     });
   });
 

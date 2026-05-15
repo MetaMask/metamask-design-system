@@ -55,11 +55,11 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       startAccessory={
         finalStartIconName ? (
           <Icon
-            name={finalStartIconName}
             size={IconSize.Md}
             color={IconColor.IconDefault}
             twClassName="shrink-0"
             {...startIconProps}
+            name={finalStartIconName}
           />
         ) : (
           startAccessory
@@ -68,11 +68,11 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       endAccessory={
         finalEndIconName ? (
           <Icon
-            name={finalEndIconName}
             size={IconSize.Md}
             color={IconColor.IconDefault}
             twClassName="shrink-0"
             {...endIconProps}
+            name={finalEndIconName}
           />
         ) : (
           endAccessory
