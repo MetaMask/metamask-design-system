@@ -97,7 +97,7 @@ import {
 
 ### `titleWrapperProps`
 
-Optional props spread onto the title row [`BoxRow`](../BoxRow/README.md) (excluding `children`, `startAccessory`, `endAccessory`, and `textProps`, which TitleAlert sets).
+Optional props spread onto the title row [`BoxRow`](../BoxRow/README.md) (excluding `children`, `startAccessory`, `endAccessory`, and `textProps`, which TitleAlert sets). The row defaults to centered main-axis alignment and `self-stretch` width; `justifyContent` and `twClassName` from `titleWrapperProps` override those defaults when provided.
 
 | TYPE                                                                                          | REQUIRED | DEFAULT     |
 | --------------------------------------------------------------------------------------------- | -------- | ----------- |

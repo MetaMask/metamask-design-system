@@ -72,9 +72,9 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
     >
       {title ? (
         <BoxRow
-          {...titleWrapperProps}
-          twClassName="self-stretch"
           justifyContent={BoxJustifyContent.Center}
+          twClassName="self-stretch"
+          {...titleWrapperProps}
           startAccessory={titleStartAccessory}
           endAccessory={titleEndAccessory}
           textProps={{

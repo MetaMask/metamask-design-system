@@ -1,4 +1,7 @@
-import { IconAlertSeverity } from '@metamask/design-system-shared';
+import {
+  BoxJustifyContent,
+  IconAlertSeverity,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
@@ -65,6 +68,23 @@ describe('TitleAlert', () => {
       );
 
       expect(getByTestId(TITLE_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('applies titleWrapperProps justifyContent over default center', () => {
+      const { getByTestId } = render(
+        <TitleAlert
+          severity={IconAlertSeverity.Error}
+          title="Error"
+          titleWrapperProps={{
+            testID: TITLE_ROW_WRAPPER_TEST_ID,
+            justifyContent: BoxJustifyContent.Start,
+          }}
+        />,
+      );
+
+      expect(getByTestId(TITLE_ROW_WRAPPER_TEST_ID)).toHaveStyle({
+        justifyContent: 'flex-start',
+      });
     });
 
     it('renders string description with string title', () => {
