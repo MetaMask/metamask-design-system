@@ -16,8 +16,8 @@ export const SectionDivider = forwardRef<View, SectionDividerProps>(
       borderWidth={borderWidth ?? 1}
       borderColor={borderColor ?? BoxBorderColor.BorderMuted}
       marginVertical={marginVertical ?? 5}
-      style={[{ alignSelf: 'stretch' }, style]}
-      twClassName={twClassName}
+      style={style}
+      twClassName={`self-stretch ${twClassName ?? ''}`.trim()}
       {...rest}
     />
   ),

@@ -75,6 +75,16 @@ describe('SectionDivider', () => {
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`opacity-50`);
     });
+
+    it('lets twClassName override default self-stretch', () => {
+      const { getByTestId } = render(
+        <SectionDivider testID={ROOT_TEST_ID} twClassName="self-center" />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({
+        alignSelf: 'center',
+      });
+    });
   });
 
   describe('when style is provided', () => {
