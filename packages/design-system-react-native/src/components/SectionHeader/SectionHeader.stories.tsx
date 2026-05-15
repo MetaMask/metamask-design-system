@@ -8,7 +8,7 @@ import { Icon } from '../Icon';
 import { SectionHeader } from './SectionHeader';
 import type { SectionHeaderProps } from './SectionHeader.types';
 
-const meta = {
+const meta: Meta<typeof SectionHeader> = {
   title: 'Components/SectionHeader',
   component: SectionHeader,
   argTypes: {
@@ -39,11 +39,11 @@ const meta = {
       </Box>
     ),
   ],
-} satisfies Meta<typeof SectionHeader>;
+};
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof SectionHeader>;
 
 export const Default: Story = {
   args: {
