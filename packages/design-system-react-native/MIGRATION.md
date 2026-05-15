@@ -65,6 +65,45 @@ This guide provides detailed instructions for migrating your project from one ve
 
 - Existing **`@metamask/design-system-react-native`** consumers that relied on **`closeButtonProps.onPress`** or on rendering a close button without **`onClose`** must update those call sites.
 
+<a id="buttonbase-size-defaults"></a>
+
+#### ButtonBase: let `size` drive label, icons, and spacing
+
+**What changed:**
+
+- **`ButtonBase`** maps each **`ButtonBaseSize`** to a recommended label **`Text`** variant, matching start and end **`Icon`** sizes, and consistent spacing between accessories and the label.
+
+**Recommendation:**
+
+For any product-specific button built on **`ButtonBase`** (wrappers that forward **`textProps`**, **`textClassName`**, **`startIconProps`**, **`endIconProps`**, **`iconClassName`**, **`spinnerProps`**, or layout **`twClassName`**):
+
+- Remove **icon size** overrides on **`startIconProps`**, **`endIconProps`**, and loading **`spinnerProps`** unless a written design exception requires them.
+- Remove **label typography overrides** in **`textProps`** / **`textClassName`** so the label follows the mapping for the chosen **`size`**.
+- Remove **spacing overrides** (extra gap/margin **`twClassName`** on the root or content row) that only existed to nudge icon–label rhythm; **`ButtonBase`** now owns that layout.
+
+**Migration:**
+
+```tsx
+// Before: overrides that duplicate what size already encodes
+<ButtonBase
+  size={ButtonBaseSize.Md}
+  startIconProps={{ name: IconName.Add, size: IconSize.Md }}
+  textProps={{ variant: TextVariant.BodyLg }}
+  twClassName="gap-4"
+>
+  Continue
+</ButtonBase>
+
+// After: rely on size-driven defaults
+<ButtonBase size={ButtonBaseSize.Md} startIconProps={{ name: IconName.Add }}>
+  Continue
+</ButtonBase>
+```
+
+**Impact:**
+
+- Custom **`ButtonBase`** wrappers that hard-coded icon sizes, text variants, or gaps may render slightly differently after removing overrides; visually they should match the current design spec for that **`size`**.
+
 <!-- Backward-compatible anchor for the 0.24.0 changelog entry that shipped with the old placeholder link. -->
 
 <a id="from-version-0230-to-0x0"></a>

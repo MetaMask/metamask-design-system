@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.0]
+
+### Added
+
+- Exported `SelectButton` prop and variant types (`SelectButtonPropsShared`, `SelectButtonVariant`, `SelectButtonEndArrow`), `SegmentGroupPropsShared`, and `SegmentGroupContext` so mobile and web packages share one segment and select contract ([#1172](https://github.com/MetaMask/metamask-design-system/pull/1172))
+- Exported `SensitiveTextLength`, `SensitiveTextPropsShared`, and related types for cross-platform masking and reveal behavior ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- Exported `HelpTextSeverity`, `HelpTextPropsShared`, and related types for cross-platform helper and validation text ([#1169](https://github.com/MetaMask/metamask-design-system/pull/1169))
+- Exported `TextAreaPropsShared` for cross-platform multi-line input wrappers ([#1141](https://github.com/MetaMask/metamask-design-system/pull/1141))
+
 ## [0.17.0]
 
 ### Added
@@ -180,7 +189,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.17.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.18.0...HEAD
+[0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.17.0...@metamask/design-system-shared@0.18.0
 [0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.16.0...@metamask/design-system-shared@0.17.0
 [0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.15.0...@metamask/design-system-shared@0.16.0
 [0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.14.0...@metamask/design-system-shared@0.15.0
