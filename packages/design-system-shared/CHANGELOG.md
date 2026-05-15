@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added shared `SectionHeaderPropsShared` export for the cross-platform SectionHeader contract.
+
 ## [0.17.0]
 
 ### Added

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added `SectionHeader` for horizontal section titles with optional start/end icons or accessories and an optional title-row accessory.
+
 ## [0.24.0]
 
 ### Added
