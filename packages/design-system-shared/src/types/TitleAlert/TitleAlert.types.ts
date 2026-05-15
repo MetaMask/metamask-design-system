@@ -27,4 +27,9 @@ export type TitleAlertPropsShared = {
    * Only shown when the title row is shown (i.e. when `title` is renderable).
    */
   titleEndAccessory?: ReactNode;
+  /**
+   * Optional description below the title row (platform packages render via `TextOrChildren`).
+   * Shown only when `description` is renderable (`null`, `undefined`, `false`, and `''` are not).
+   */
+  description?: ReactNode;
 };
