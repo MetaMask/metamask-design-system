@@ -48,6 +48,9 @@ export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
 // TitleHub types (ADR-0004)
 export { type TitleHubPropsShared } from './types/TitleHub';
 
+// SectionHeader types (ADR-0004)
+export { type SectionHeaderPropsShared } from './types/SectionHeader';
+
 // TitleStandard types (ADR-0004)
 export { type TitleStandardPropsShared } from './types/TitleStandard';
 

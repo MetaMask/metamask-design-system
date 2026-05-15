@@ -276,3 +276,6 @@ export type { BannerAlertProps } from './BannerAlert';
 
 export { Tag, TagSeverity } from './Tag';
 export type { TagProps } from './Tag';
+
+export { SectionHeader } from './SectionHeader';
+export type { SectionHeaderProps } from './SectionHeader';
