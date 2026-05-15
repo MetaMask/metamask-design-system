@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: `PopoverHeader` migration (extension) ([#1158](https://github.com/MetaMask/metamask-design-system/pull/1158))
+- feat: `ModalHeader` migration (extension) ([#1144](https://github.com/MetaMask/metamask-design-system/pull/1144))
+- feat: `Label` migration (extensions) ([#1152](https://github.com/MetaMask/metamask-design-system/pull/1152))
+- feat: `SensitiveText` extension ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- feat: `HelpText` migration (extension) ([#1169](https://github.com/MetaMask/metamask-design-system/pull/1169))
+- refactor: Improved ButtonBase to support all shapes and sizes ([#1150](https://github.com/MetaMask/metamask-design-system/pull/1150))
+- refactor: simplify BannerBase close handling ([#1166](https://github.com/MetaMask/metamask-design-system/pull/1166))
+
 ## [0.22.0]
 
 ### Added

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: Added SelectButton, SegmentButton, and SegmentGroup to DSRN ([#1172](https://github.com/MetaMask/metamask-design-system/pull/1172))
+- feat: `SensitiveText` extension ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- feat: `HelpText` migration (extension) ([#1169](https://github.com/MetaMask/metamask-design-system/pull/1169))
+- feat: [DSRN] Added TextArea ([#1141](https://github.com/MetaMask/metamask-design-system/pull/1141))
+
 ## [0.17.0]
 
 ### Added

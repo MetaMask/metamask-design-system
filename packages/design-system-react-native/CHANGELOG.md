@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: Added SelectButton, SegmentButton, and SegmentGroup to DSRN ([#1172](https://github.com/MetaMask/metamask-design-system/pull/1172))
+- feat: `SensitiveText` extension ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- refactor: Improved ButtonBase to support all shapes and sizes ([#1150](https://github.com/MetaMask/metamask-design-system/pull/1150))
+- feat: [DSRN] Added HeaderStandardAnimated ([#1151](https://github.com/MetaMask/metamask-design-system/pull/1151))
+- feat: [DSRN] Added TextArea ([#1141](https://github.com/MetaMask/metamask-design-system/pull/1141))
+- refactor: simplify BannerBase close handling ([#1166](https://github.com/MetaMask/metamask-design-system/pull/1166))
+
 ## [0.24.0]
 
 ### Added
