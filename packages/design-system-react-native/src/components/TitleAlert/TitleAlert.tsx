@@ -2,12 +2,11 @@ import {
   BoxAlignItems,
   BoxJustifyContent,
   FontWeight,
+  IconSize,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
 import React from 'react';
-
-import { IconSize } from '../../types';
 import { Box } from '../Box';
 import { BoxColumn } from '../BoxColumn';
 import { BoxRow } from '../BoxRow';
