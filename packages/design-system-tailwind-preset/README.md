@@ -2,6 +2,11 @@
 
 Design System Tailwind CSS preset for MetaMask projects
 
+> This package is the Tailwind CSS v3 preset. For Tailwind CSS v4 consumers, use `@metamask/design-tokens/tailwind/theme.css` instead.
+>
+> Migration guide:
+> <https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-tokens/MIGRATION.md#tailwind-css-v3-to-v4>
+
 ## Installation
 
 `yarn add @metamask/design-system-tailwind-preset`

@@ -164,6 +164,10 @@ Test ID for the title Text element. Only used when `children` is a string.
 <HeaderBase titleTestID="my-header-title">Page Title</HeaderBase>
 ```
 
+## Migration from MetaMask Mobile Component Library
+
+Migrating from the legacy `HeaderBase` in `app/component-library/components/HeaderBase`? See the [HeaderBase migration guide](../../../MIGRATION.md#headerbase-component) for the import swap, the removed `HEADERBASE_TEST_ID` / `HEADERBASE_TITLE_TEST_ID` constants (replaced by explicit `testID` and the new `titleTestID` prop), the fixed-height `Display` variant, and before/after examples.
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

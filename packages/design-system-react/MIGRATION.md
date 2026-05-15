@@ -16,7 +16,21 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Checkbox Component](#checkbox-component)
+  - [HeaderBase Component](#headerbase-component)
+  - [HelpText Component](#helptext-component)
+  - [Label Component](#label-component)
+  - [Modal Component](#modal-component)
+  - [ModalContent Component](#modalcontent-component)
+  - [ModalBody Component](#modalbody-component)
+  - [ModalFocus Component](#modalfocus-component)
+  - [ModalFooter Component](#modalfooter-component)
+  - [ModalHeader Component](#modalheader-component)
+  - [ModalOverlay Component](#modaloverlay-component)
+  - [PopoverHeader Component](#popoverheader-component)
+  - [SensitiveText Component](#sensitivetext-component)
+  - [Skeleton Component](#skeleton-component)
 - [Version Updates](#version-updates)
+  - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
@@ -879,20 +893,20 @@ No direct prop renames were introduced for extension-to-MMDS `BannerBase`.
 
 ##### Type and Callback Signature Changes
 
-| Legacy Extension API                                     | MMDS API                                                                                                                          | Notes                                                 |
-| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| `title?: string`                                         | `title?: ReactNode`                                                                                                               | MMDS now accepts full React node content              |
-| `description?: string`                                   | `description?: ReactNode`                                                                                                         | MMDS now accepts full React node content              |
-| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>`                                            | MMDS action button is a `Button`, not a `ButtonLink`  |
-| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                                                                  | Close callback target is now the close button element |
-| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'> & { onClick?: MouseEventHandler<HTMLButtonElement> }` | `iconName` remains fixed to close icon                |
+| Legacy Extension API                                     | MMDS API                                                                               | Notes                                                              |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `title?: string`                                         | `title?: ReactNode`                                                                    | MMDS now accepts full React node content                           |
+| `description?: string`                                   | `description?: ReactNode`                                                              | MMDS now accepts full React node content                           |
+| `actionButtonProps?: Partial<ButtonLinkProps<'button'>>` | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onClick' \| 'variant'>` | MMDS action button is a `Button`, not a `ButtonLink`               |
+| `onClose?: (e: React.MouseEvent<HTMLElement>) => void`   | `onClose?: MouseEventHandler<HTMLButtonElement>`                                       | Close callback target is now the close button element              |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`  | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onClick'>`           | `iconName` remains fixed to close icon; use `onClose` for behavior |
 
 ##### Default and Behavior Changes
 
 | Legacy Extension Behavior                                                  | MMDS Behavior                                                                                      |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Action button defaults to `ButtonLink` semantics and `ButtonLinkSize.Auto` | Action button is `Button` with default `ButtonSize.Md`                                             |
-| Close button renders only when `onClose` is provided                       | Close button renders when `onClose` **or** `closeButtonProps` is provided                          |
+| Close button renders only when `onClose` is provided                       | Close button renders only when `onClose` is provided                                               |
 | Close button `ariaLabel` defaults to translated `t('close')`               | Close button `ariaLabel` defaults to `'Close banner'` (override with `closeButtonProps.ariaLabel`) |
 | String/number `children` are wrapped in extension `Text` defaults          | String/number `children` are wrapped in MMDS `Text` with `TextVariant.BodyMd`                      |
 
@@ -1230,7 +1244,1313 @@ import { Checkbox } from '@metamask/design-system-react';
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
 
+### HeaderBase Component
+
+The extension `header-base` component maps to `HeaderBase` in the design system. The visual contract — a centered title flanked by start/end accessories — is preserved, but the implementation switches from JS-based width measurement (with a window resize listener) to **CSS Grid** layout. The polymorphic Box surface and the `mm-header-base` class hook are removed.
+
+`HeaderBase` is the layout primitive that `ModalHeader`, `PopoverHeader`, and any custom page-level header sit on. Migrate this first if you're moving any of those.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                | Design System Migration                                                |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `import { HeaderBase } from '../../component-library'`           | `import { HeaderBase } from '@metamask/design-system-react'`           |
+| `import type { HeaderBaseProps } from '../../component-library'` | `import type { HeaderBaseProps } from '@metamask/design-system-react'` |
+
+##### Layout Implementation
+
+| Concern              | Extension Behavior                                                                                                                                                                     | Design System Behavior                                                                                                                                                                                                               |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Title centering      | `display: flex; justify-content: space-between` plus a JS `useEffect` that measures both accessories and forces matching `minWidth` on each side; window `resize` listener re-measures | `display: grid; grid-template-columns: 1fr auto 1fr; align-items: center` (Tailwind: `grid grid-cols-[1fr_auto_1fr] items-center`). Title is pinned to column 2; the `1fr` side tracks always balance it. No JS, no resize listener. |
+| Slot wrapper styling | Manual `marginLeft` / `marginRight` / `width: calc(...)` set per-render based on measurements                                                                                          | Static Tailwind utilities: `col-start-1 justify-self-start` (start), `col-start-2 col-end-3` (title), `col-start-3 justify-self-end` (end)                                                                                           |
+| Re-render on resize  | `useState`-driven re-renders whenever the window or children change                                                                                                                    | None — layout is fully declarative                                                                                                                                                                                                   |
+
+The visual output is identical for the documented use cases (modal headers, popover headers, page headers). The only edge case where behavior diverges is when a single accessory is much wider than the column it occupies — in the legacy version the title was forced to compress; in the grid version the title stays centered and the accessory column grows to its content (the `1fr` side track still matches its sibling).
+
+##### Props and Behavior Mapping
+
+| Extension API                                                | Design System API                                                              | Change Type | Notes                                                                                                                                |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `children?: ReactNode`                                       | `children?: ReactNode`                                                         | unchanged   | rendered in the centered grid column                                                                                                 |
+| `startAccessory?: ReactNode`                                 | `startAccessory?: ReactNode`                                                   | unchanged   | rendered in the start column                                                                                                         |
+| `endAccessory?: ReactNode`                                   | `endAccessory?: ReactNode`                                                     | unchanged   | rendered in the end column                                                                                                           |
+| `childrenWrapperProps?: BoxProps<'div'>`                     | `childrenWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*` index sig.) | shape       | now bound to MMDS `BoxProps`; `className` is merged via `twMerge` (consumer utilities can override grid placement when needed).      |
+| `startAccessoryWrapperProps?: BoxProps<'div'>`               | `startAccessoryWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*`)      | shape       | same shape change as `childrenWrapperProps`.                                                                                         |
+| `endAccessoryWrapperProps?: BoxProps<'div'>`                 | `endAccessoryWrapperProps?: Omit<BoxProps, 'children'>` (with `data-*`)        | shape       | same shape change.                                                                                                                   |
+| `className?: string`                                         | `className?: string`                                                           | unchanged   | applied to the grid container; merged via `twMerge`                                                                                  |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` | removed                                                                        | removed     | always renders `<div>`. Wrap or compose if you need a different element.                                                             |
+| Box style-utility props on the root (`marginBottom`, …)      | removed from public API                                                        | removed     | the root is no longer a polymorphic Box. Use `className` with Tailwind utilities (e.g. `className="mb-4"`) for layout overrides.     |
+| `mm-header-base` SCSS class hook                             | removed                                                                        | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities. |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { HeaderBase } from '../../component-library';
+
+// Default usage
+<HeaderBase
+  startAccessory={<BackButton />}
+  endAccessory={<CloseButton />}
+>
+  <Title>Page title</Title>
+</HeaderBase>
+
+// Customize the root via Box utility props
+<HeaderBase marginBottom={4} alignItems={AlignItems.center}>
+  <Title>Page title</Title>
+</HeaderBase>
+```
+
+##### After (Design System)
+
+```tsx
+import { HeaderBase } from '@metamask/design-system-react';
+
+// Default usage — unchanged
+<HeaderBase
+  startAccessory={<BackButton />}
+  endAccessory={<CloseButton />}
+>
+  <Title>Page title</Title>
+</HeaderBase>
+
+// Root overrides move into className (Box utility props on the root are removed)
+<HeaderBase className="mb-4 items-center">
+  <Title>Page title</Title>
+</HeaderBase>
+```
+
+For typical call sites — for example `ui/components/multichain/pages/page/components/header/header.tsx` (direct external consumer) and the internal `popover-header.tsx` / `modal-header.tsx` consumers within the legacy `component-library` (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Move any root-level Box utility props (`marginBottom`, `alignItems`, etc.) onto `className` (`mb-4`, `items-center`, …).
+
+#### API Differences
+
+- `HeaderBase` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-header-base` class hook is gone — use `className` to apply Tailwind utilities.
+- The `useRef` / `useEffect` / `useState` / `window.addEventListener('resize', …)` measurement code is gone. There are no longer any layout side effects on mount or window resize.
+- Slot wrappers (`childrenWrapperProps` / `startAccessoryWrapperProps` / `endAccessoryWrapperProps`) ship their grid-placement utilities (`col-start-*`, `justify-self-*`) as defaults; consumer `className` is merged via `twMerge` so it can override placement when needed.
+
+### HelpText Component
+
+The extension `help-text` component maps to `HelpText` in the design system. It still renders a `<p>` with the `body-sm` typography and applies a severity-based text color, but the polymorphic `as` API is replaced with the design-system `asChild` pattern, and the `HelpTextSeverity` enum is now a const object (ADR-0003) sourced from `@metamask/design-system-shared`.
+
+#### Breaking Changes
+
+##### Imports and Enum Source
+
+| Extension Pattern                                                  | Design System Migration                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `import { HelpText } from '../../component-library/help-text'`     | `import { HelpText } from '@metamask/design-system-react'`         |
+| `import { HelpTextSeverity } from '.../help-text/help-text.types'` | `import { HelpTextSeverity } from '@metamask/design-system-react'` |
+
+##### Severity Values
+
+`HelpTextSeverity` is now a const object instead of a TypeScript enum, but member names and string values are unchanged.
+
+| Extension Value                          | Design System Value        |
+| ---------------------------------------- | -------------------------- |
+| `HelpTextSeverity.Info` (`'info'`)       | `HelpTextSeverity.Info`    |
+| `HelpTextSeverity.Success` (`'success'`) | `HelpTextSeverity.Success` |
+| `HelpTextSeverity.Warning` (`'warning'`) | `HelpTextSeverity.Warning` |
+| `HelpTextSeverity.Danger` (`'danger'`)   | `HelpTextSeverity.Danger`  |
+
+##### Removed / No Direct Equivalent
+
+| Legacy Extension API                                              | MMDS Status                                   | Migration                                                                            |
+| ----------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Polymorphic `as` prop / `PolymorphicRef` typing                   | Removed                                       | Use `asChild` to render a different element (see example below)                      |
+| Implicit `as="div"` switch when `children` is a non-string node   | Removed — always renders `<p>`                | Use `asChild` with a `<div>` wrapper when content includes block-level children      |
+| `Severity` union (extension-wide) accepted by the `severity` prop | Removed — only `HelpTextSeverity` is accepted | Map any `Severity.*` value to the matching `HelpTextSeverity.*` member               |
+| Forwarded `ref` to the underlying element                         | Not supported (matches `Text`)                | If a ref is required, render a parent element via `asChild` and attach the ref there |
+| `mm-help-text` CSS class hook                                     | Removed                                       | Apply Tailwind utilities through `className`                                         |
+
+##### Type Changes
+
+| Legacy Extension API                        | MMDS API                                              | Notes                                                |
+| ------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |
+| `severity?: HelpTextSeverity \| Severity`   | `severity?: HelpTextSeverity`                         | Single source of truth; const object (ADR-0003/0004) |
+| `color?: TextColor` (extension `TextColor`) | `color?: TextColor` (shared `TextColor` const object) | PascalCase members (e.g. `TextColor.ErrorDefault`)   |
+| `children: string \| ReactNodeLike`         | `children: ReactNode`                                 | Standard React typing                                |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { HelpText, HelpTextSeverity } from '../../component-library';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+
+// Implicit `as="div"` when children was an object node
+<HelpText>
+  <span>Complex</span> content
+</HelpText>;
+```
+
+##### After (Design System)
+
+```tsx
+import { HelpText, HelpTextSeverity } from '@metamask/design-system-react';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+
+// Render as a div explicitly via `asChild`
+<HelpText asChild>
+  <div>
+    <span>Complex</span> content
+  </div>
+</HelpText>;
+```
+
+### Label Component
+
+The extension `label` component maps to `Label` in the design system. The runtime API stays the same for typical usage — `<Label htmlFor="...">…</Label>` — but the component drops the polymorphic Box surface and the legacy SCSS class hooks in favor of a `<Text asChild>` composition that renders a semantic `<label>` element with Tailwind utilities.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { Label } from '../../component-library'`           | `import { Label } from '@metamask/design-system-react'`           |
+| `import type { LabelProps } from '../../component-library'` | `import type { LabelProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                                 | Design System API                                                             | Change Type | Notes                                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `htmlFor?: string`                                                                            | `htmlFor?: string`                                                            | unchanged   | forwarded to the underlying `<label>` element as the `for` attribute                                                                                                            |
+| `children: string \| React.ReactNode`                                                         | `children: ReactNode`                                                         | unchanged   | label content                                                                                                                                                                   |
+| `className?: string`                                                                          | `className?: string`                                                          | unchanged   | merged with default Tailwind classes via `twMerge`                                                                                                                              |
+| `'data-testid'?: string`                                                                      | inherited from `ComponentProps<'label'>`                                      | unchanged   | any `data-*`/`aria-*` HTML attribute is forwarded to the `<label>` element                                                                                                      |
+| Polymorphic `as` / `LabelProps<C extends React.ElementType>` typing                           | removed                                                                       | removed     | always renders a semantic `<label>` element. If you need a different element, wrap or compose.                                                                                  |
+| Box / Text style-utility props (`color`, `fontWeight`, `variant`, `display`, `alignItems`, …) | overrides via `Text` props (`color`, `fontWeight`, `variant`, `textAlign`, …) | changed     | `Label` is composed from `Text`, so `Text` props remain available as overrides. The component owns its layout (`inline-flex items-center`); use `className` to override layout. |
+| `mm-label` / `mm-label--html-for` SCSS class hooks                                            | removed                                                                       | removed     | use `className` and Tailwind utilities to customize the label                                                                                                                   |
+
+##### Default and Behavior Changes
+
+| Concern        | Extension Behavior                                                                     | Design System Behavior                                                                   |
+| -------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Element        | `<Text as="label">` → `<label>`                                                        | `<Text asChild><label>…</label></Text>` → still a semantic `<label>`                     |
+| Default layout | `Display.InlineFlex` + `AlignItems.center` Box props                                   | `inline-flex items-center` Tailwind utilities                                            |
+| Typography     | `TextVariant.bodyMd` + `FontWeight.Medium`                                             | `TextVariant.BodyMd` + `FontWeight.Medium` (same defaults; overridable via `Text` props) |
+| Cursor         | `cursor: pointer` applied via `mm-label--html-for` SCSS modifier when `htmlFor` is set | `cursor-pointer` Tailwind utility applied conditionally when `htmlFor` is set            |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Label } from '../../component-library';
+
+<Label htmlFor="email-input">Email address</Label>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Label } from '@metamask/design-system-react';
+
+<Label htmlFor="email-input">Email address</Label>;
+```
+
+For typical call sites — for example `ui/components/component-library/form-text-field/form-text-field.tsx`, `ui/components/component-library/file-uploader/file-uploader.tsx`, and `ui/pages/deep-link/deep-link.tsx` (verified via fresh grep) — the only change is the import path; the JSX stays identical.
+
+#### API Differences
+
+- `Label` no longer composes Box/Text's polymorphic `as` API. It always renders a `<label>` element and forwards arbitrary HTML attributes (`id`, `data-*`, `aria-*`, `ref`) to it.
+- The `asChild` prop is owned by the component and is intentionally excluded from the public API.
+- One-off styling that previously used Box/Text utility props (e.g. `display={Display.Block}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="block"`). Typography overrides (`color`, `fontWeight`, `variant`, `textAlign`) remain available via the inherited `Text` props.
+
+### Modal Component
+
+The extension `modal` component maps to `Modal` in the design system. The behavioral contract — portal into `document.body` while `isOpen`, unmount on close, expose configuration to descendants via `useModalContext` — is preserved 1:1. The migration is a near-zero-effort import-path swap for typical consumers.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { Modal } from '../../component-library'`           | `import { Modal } from '@metamask/design-system-react'`           |
+| `import { useModalContext } from '../../component-library'` | `import { useModalContext } from '@metamask/design-system-react'` |
+| `import type { ModalProps } from '../../component-library'` | `import type { ModalProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                   | Design System API                               | Change Type | Notes                                                                                                                                                                                         |
+| ----------------------------------------------- | ----------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isOpen: boolean`                               | `isOpen: boolean`                               | unchanged   | gates portal mount/unmount                                                                                                                                                                    |
+| `onClose: () => void`                           | `onClose: () => void`                           | unchanged   | exposed to descendants via `useModalContext().onClose`                                                                                                                                        |
+| `children: ReactNode`                           | `children: ReactNode`                           | unchanged   | typically composed of `ModalOverlay` and `ModalContent`                                                                                                                                       |
+| `isClosedOnOutsideClick?: boolean`              | `isClosedOnOutsideClick?: boolean`              | unchanged   | default `true`; consumed by `ModalContent` via `useModalContext`                                                                                                                              |
+| `isClosedOnEscapeKey?: boolean`                 | `isClosedOnEscapeKey?: boolean`                 | unchanged   | default `true`; consumed by `ModalContent` via `useModalContext`                                                                                                                              |
+| `autoFocus?: boolean`                           | `autoFocus?: boolean`                           | unchanged   | default `true`; consumed by `ModalContent` → `ModalFocus`                                                                                                                                     |
+| `initialFocusRef?: RefObject<FocusableElement>` | `initialFocusRef?: RefObject<FocusableElement>` | unchanged   | exposed to descendants via context                                                                                                                                                            |
+| `finalFocusRef?: RefObject<FocusableElement>`   | `finalFocusRef?: RefObject<FocusableElement>`   | unchanged   | exposed to descendants via context                                                                                                                                                            |
+| `restoreFocus?: boolean`                        | `restoreFocus?: boolean`                        | unchanged   | default `false`; ignored when `finalFocusRef` is provided                                                                                                                                     |
+| `className?: string`                            | `className?: string`                            | unchanged   | merged with the component's defaults via `twMerge` (the extension used `classnames`).                                                                                                         |
+| `extends ModalFocusProps` (interface)           | flat `type ModalProps`                          | shape       | `ModalProps` is no longer an `interface` extending `ModalFocusProps` — it's a flat `type` that inlines the focus-related fields.                                                              |
+| `mm-modal` SCSS class hook                      | removed                                         | removed     | the legacy `mm-modal` class is gone. Use `className` and Tailwind utilities to customize the root portal element. No usage outside the legacy `component-library` itself relies on this hook. |
+
+##### `useModalContext` Error Message
+
+The runtime guard for "called outside a `<Modal>` subtree" is preserved, but the error message text is rewritten for clarity:
+
+| Extension                                                                                                     | Design System                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `useModalContext must be used within a ModalProvider, Seems you forgot to wrap the components in "<Modal />"` | `useModalContext must be used within a Modal — make sure the consuming component is rendered inside <Modal />.` |
+
+This only affects code that asserts on the exact error string (rare). The thrown type is still `Error`.
+
+##### Default and Behavior Changes
+
+| Concern                 | Extension Behavior                                                                                                 | Design System Behavior                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| Portal target           | `document.body` via `ReactDOM.createPortal`                                                                        | `document.body` via `createPortal` from `react-dom`. Unchanged.              |
+| Unmount on close        | Returns `null` when `isOpen` is `false`                                                                            | Returns `null` when `isOpen` is `false`. Unchanged.                          |
+| Default behavior config | `isClosedOnOutsideClick`, `isClosedOnEscapeKey`, `autoFocus` default to `true`; `restoreFocus` defaults to `false` | Same defaults, applied internally before populating `ModalContext`.          |
+| Context shape           | `Omit<ModalProps, 'children'>`                                                                                     | `Omit<ModalProps, 'children'>` — same shape, exported as `ModalContextType`. |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Modal, ModalOverlay, ModalContent } from '../../component-library';
+
+<Modal isOpen={isOpen} onClose={onClose} data-testid="example-modal">
+  <ModalOverlay />
+  <ModalContent>{/* … */}</ModalContent>
+</Modal>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+} from '@metamask/design-system-react';
+
+// API is identical — only the import path changes.
+<Modal isOpen={isOpen} onClose={onClose} data-testid="example-modal">
+  <ModalOverlay />
+  <ModalContent>{/* … */}</ModalContent>
+</Modal>;
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (`<Modal onClose={onClose} isOpen={isOpen}>` with default behavior config), `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`<Modal onClose={closeModal} data-testid="..." isOpen>` forwarding `data-testid` to the root), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (no-op `onClose={() => undefined}`) (verified via fresh grep) — the only change is the import path; the JSX, props, and `data-testid` forwarding stay identical.
+
+#### API Differences
+
+- `Modal` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-modal` class hook is gone — use `className` to apply Tailwind utilities.
+- `useModalContext` is now exported from the package barrel (`@metamask/design-system-react`). `ModalContextType` is also exported as a type for consumers building custom subtree integrations.
+
+### ModalContent Component
+
+The extension `modal-content` component maps to `ModalContent` in the design system. The behavioral contract — a centered `<section role="dialog">` with built-in close-on-Escape, close-on-outside-click, focus management via `ModalFocus`, and the standard slide-up entrance animation — is preserved. The polymorphic Box surface and the `mm-modal-content` SCSS class hooks are removed in favor of Tailwind utilities, and the legacy `mm-popover` outside-click escape hatch is replaced by a generic, design-system-agnostic data attribute.
+
+`ModalContent` reads its behavior from `useModalContext`, so it must be rendered inside a `<Modal>` — same as the legacy.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                  | Design System Migration                                                  |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `import { ModalContent } from '../../component-library'`           | `import { ModalContent } from '@metamask/design-system-react'`           |
+| `import { ModalContentSize } from '../../component-library'`       | `import { ModalContentSize } from '@metamask/design-system-react'`       |
+| `import type { ModalContentProps } from '../../component-library'` | `import type { ModalContentProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                | Design System API                                                               | Change Type | Notes                                                                                                                                                                             |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children: ReactNode`                                        | `children: ReactNode`                                                           | unchanged   | rendered inside the `<section role="dialog">`                                                                                                                                     |
+| `size?: ModalContentSize` (`Sm`/`Md`/`Lg`)                   | `size?: ModalContentSize` (`Sm`/`Md`/`Lg`)                                      | unchanged   | values and pixel widths preserved (360 / 480 / 720); enum is now a const-object union (ADR-0003), but `ModalContentSize.Sm` etc. still work.                                      |
+| `modalDialogProps?: any`                                     | `modalDialogProps?: Omit<BoxProps, 'children'>` (with `data-*` index signature) | shape       | now typed against MMDS `BoxProps`. `className` is still merged via `twMerge` so consumer utilities win over the defaults.                                                         |
+| `className?: string`                                         | `className?: string`                                                            | unchanged   | applied to the outer positioning element; merged via `twMerge`                                                                                                                    |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` | removed                                                                         | removed     | always renders `<div>` (outer) + `<section role="dialog">` (inner). If you need a different element, wrap or compose.                                                             |
+| Box style-utility props on the outer (`alignItems`, …)       | removed from public API                                                         | removed     | the outer container is no longer a polymorphic Box. Use `className` with Tailwind utilities for layout overrides.                                                                 |
+| `mm-modal-content` / `mm-modal-content__dialog` SCSS hooks   | removed                                                                         | removed     | the slide-up animation moved into the `motion-safe:animate-slide-up` Tailwind utility on the inner dialog (added to `@metamask/design-system-tailwind-preset` in this migration). |
+
+##### Popover-in-Modal Outside-Click Hand-off
+
+The legacy `ModalContent` short-circuited its outside-click handler via a hard-coded `event.target.closest('.mm-popover')` check so that interacting with a portal-rendered Popover inside a Modal would not close the modal. That coupling is design-system-agnostic in MMDS:
+
+| Extension                                                  | Design System                                                                                                                    |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Hard-coded `.mm-popover` class check inside `ModalContent` | Generic data-attribute opt-out: clicks whose target's `closest('[data-mm-modal-ignore-outside-click]')` is non-null are ignored. |
+
+Floating UI primitives that render as siblings to the Modal portal (Popover, Tooltip, Select dropdown, …) opt out by setting the attribute on their root element. The constant `MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR` (= `'data-mm-modal-ignore-outside-click'`) is exported from the package for type-safe usage.
+
+```tsx
+import {
+  Box,
+  MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR,
+} from '@metamask/design-system-react';
+
+<Box {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}>
+  {popoverContent}
+</Box>;
+```
+
+**Required follow-up in MetaMask Extension:** the legacy `ui/components/component-library/popover/popover.tsx` adds the `'mm-popover'` class to its root Box. To preserve the existing Popover-inside-Modal interaction across the extension's 13+ `Popover` + `Modal` call sites (verified via fresh grep — for example `ui/components/multichain/network-list-menu/network-list-menu.tsx`, `ui/pages/confirmations/components/send/network-filter/network-filter.tsx`, `ui/components/app/cancel-speedup-popover/cancel-speedup-popover.js`, `ui/pages/confirmations/components/edit-gas-popover/edit-gas-popover.component.js`, `ui/components/app/terms-of-use-popup/terms-of-use-popup.js`), add the data attribute to the same Box:
+
+```tsx
+// ui/components/component-library/popover/popover.tsx (legacy extension)
+import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from '@metamask/design-system-react';
+
+<Box
+  className={classnames('mm-popover', /* … */)}
+  {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}
+  /* … */
+>
+```
+
+This is a one-line addition; the rest of the legacy `Popover` stays unchanged. After the extension switches its `ModalContent` import to `@metamask/design-system-react`, every Popover-inside-Modal flow keeps working.
+
+##### Default and Behavior Changes
+
+| Concern                    | Extension Behavior                                                                                                 | Design System Behavior                                                                                                                                         |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Outer positioning          | `position: fixed; left: 0; top: 0; z-index: $modal-z-index (1050); width/height: 100vw/100vh` via SCSS + Box props | `fixed inset-0 z-[1050]` Tailwind utilities                                                                                                                    |
+| Outer padding (responsive) | `paddingTop/Bottom={[4, 8, 12]}` Box responsive arrays + `@media (max-height: 475px) { padding: 8px }`             | `p-4 sm:py-8 md:py-12 [@media(max-height:475px)]:p-2` Tailwind utilities (responsive arrays in Box are unsupported in MMDS — use Tailwind prefixes).           |
+| Inner dialog sizing        | `max-width: var(--size, 360px)` per `--size-{sm,md,lg}` SCSS modifier                                              | `max-w-[360px]` / `max-w-[480px]` / `max-w-[720px]` Tailwind utilities, applied via `TWCLASSMAP_MODAL_CONTENT_SIZE`                                            |
+| Inner dialog entrance      | 400ms `cubic-bezier(0.3, 0.8, 0.3, 1)` slide-up + fade keyframe via SCSS, gated by `prefers-reduced-motion`        | New `motion-safe:animate-slide-up` Tailwind utility (matches `AnimationDuration.Slowly` from `@metamask/design-tokens`); reduced-motion users get no animation |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalContent } from '../../component-library';
+
+// Default usage
+<ModalContent>{/* ModalHeader + ModalBody + ModalFooter */}</ModalContent>
+
+// Customize the outer container (centered content)
+<ModalContent alignItems={AlignItems.center}>{/* … */}</ModalContent>
+
+// Customize the inner dialog
+<ModalContent
+  modalDialogProps={{
+    display: Display.Flex,
+    flexDirection: FlexDirection.Column,
+  }}
+>
+  {/* … */}
+</ModalContent>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalContent } from '@metamask/design-system-react';
+
+// Default usage — unchanged
+<ModalContent>{/* ModalHeader + ModalBody + ModalFooter */}</ModalContent>
+
+// Outer overrides move into className
+<ModalContent className="items-center">{/* … */}</ModalContent>
+
+// Inner dialog overrides go through modalDialogProps
+<ModalContent
+  modalDialogProps={{
+    flexDirection: BoxFlexDirection.Column,
+  }}
+>
+  {/* … */}
+</ModalContent>
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (bare `<ModalContent>`), `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (`<ModalContent alignItems={AlignItems.center}>` → `className="items-center"`), and `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`modalDialogProps={{ display: Display.Flex, flexDirection: FlexDirection.Column }}` → drop `display` since `modalDialogProps` is already a Box and uses Tailwind flex utilities by default; replace `flexDirection` with `BoxFlexDirection.Column`) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Move any outer Box utility props onto `className` (e.g. `alignItems={AlignItems.center}` → `className="items-center"`).
+3. Update `modalDialogProps` enum values to MMDS shapes (`Display.Flex` → `BoxDisplay.Flex` is implicit since MMDS Box is already flex when `flexDirection` is set; `FlexDirection.Column` → `BoxFlexDirection.Column`).
+4. If the call site embeds a `Popover` from the legacy extension `component-library`, ensure that `Popover` adds the `data-mm-modal-ignore-outside-click` attribute (one-line change in `popover.tsx`).
+
+#### Deprecated `ModalContent`
+
+The extension exports a separate `deprecated/` `ModalContent` from `ui/components/component-library/modal-content/deprecated`. **It is not migrated.** Consumers still importing from `'../../component-library/modal-content/deprecated'` (e.g. `ui/components/app/snaps/snap-remove-warning/snap-remove-warning.js`, `ui/components/app/srp-quiz-modal/SRPQuiz/SRPQuiz.tsx`, `ui/components/multichain/account-menu/account-menu.tsx`) need to migrate to the current `ModalContent` first, then switch to `@metamask/design-system-react`. The deprecated path predates the current `padding={4}` → `paddingTop={4} paddingBottom={4}` split on the dialog and the body's own padding ownership.
+
+#### API Differences
+
+- `ModalContent` always renders a `<div>` outer + `<section role="dialog" aria-modal="true">` inner. Forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to the outer `<div>`.
+- `ModalContentSize` is now a const-object union (ADR-0003) but the value identifiers and pixel widths are preserved.
+- `MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR` is exported from the package barrel for type-safe use of the outside-click opt-out attribute.
+
+### ModalBody Component
+
+The extension `modal-body` component maps to `ModalBody` in the design system. The default visual contract (horizontal padding, scrollable container) is preserved, but the polymorphic Box surface is removed and a keyboard-accessibility default is added.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                               | Design System Migration                                               |
+| --------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `import { ModalBody } from '../../component-library'`           | `import { ModalBody } from '@metamask/design-system-react'`           |
+| `import type { ModalBodyProps } from '../../component-library'` | `import type { ModalBodyProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                                 | Design System API       | Change Type | Notes                                                                                                                          |
+| --------------------------------------------------------------------------------------------- | ----------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `children?: ReactNode`                                                                        | `children?: ReactNode`  | unchanged   | rendered inside the scrollable container                                                                                       |
+| `className?: string`                                                                          | `className?: string`    | unchanged   | merged with default Tailwind classes via `twMerge`                                                                             |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>`                                  | removed                 | removed     | always renders a `<div>`. If you need a different element, wrap or compose.                                                    |
+| Box style-utility props (`paddingLeft`, `paddingRight`, `flexDirection`, `gap`, `display`, …) | removed from public API | removed     | use `className` with Tailwind utilities. The default `px-4` remains, applied internally; override with `className="px-0"` etc. |
+| `mm-modal-body` SCSS class hook                                                               | removed                 | removed     | use `className` and Tailwind utilities to customize                                                                            |
+
+##### Default and Behavior Changes
+
+| Concern                | Extension Behavior                                                                                  | Design System Behavior                                                                                                                                        |
+| ---------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Horizontal padding     | `paddingLeft={4} paddingRight={4}` Box props (16px each side)                                       | `paddingHorizontal={4}` applied internally → `px-4`. Override with `className="px-0"` (or another `px-*` utility).                                            |
+| Scroll/overflow        | `position: relative; max-height: 100%; overflow-y: auto;` from `.mm-modal-body` SCSS                | Same behavior via `relative max-h-full overflow-y-auto` Tailwind utilities applied internally.                                                                |
+| Keyboard accessibility | No default `tabIndex` — scrollable text-only content was not reachable by keyboard for arrow scroll | `tabIndex={0}` applied by default so keyboard users can focus the scrollable region and arrow-scroll. Override with `tabIndex={-1}` if you need to remove it. |
+
+This satisfies the WCAG 2.1.1 "Keyboard" rule for scrollable regions (axe `scrollable-region-focusable`) — modals containing only static text now expose the body as a focusable scroll target out of the box.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalBody } from '../../component-library';
+import { FlexDirection } from '../../../helpers/constants/design-system';
+
+// Default usage
+<ModalBody>{description}</ModalBody>
+
+// Customized: remove default horizontal padding, lay out children as a column
+<ModalBody
+  paddingLeft={0}
+  paddingRight={0}
+  flexDirection={FlexDirection.Column}
+  gap={2}
+>
+  {options}
+</ModalBody>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalBody } from '@metamask/design-system-react';
+
+// Default usage — unchanged
+<ModalBody>{description}</ModalBody>
+
+// Customized: utility-prop overrides move into className
+<ModalBody className="flex flex-col gap-2 px-0">
+  {options}
+</ModalBody>
+```
+
+For typical call sites — for example `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (bare `<ModalBody>{text}</ModalBody>`) and `ui/components/app/alert-system/alert-modal/alert-modal.tsx` (bare with element children) (verified via fresh grep) — the only change is the import path. Sites that override Box utility props, such as `ui/components/multichain-accounts/add-wallet-modal/add-wallet-modal.tsx` (`paddingLeft={0} paddingRight={0} flexDirection={FlexDirection.Column} gap={2}`), need the `className` translation shown above.
+
+#### API Differences
+
+- `ModalBody` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `tabIndex`, `ref`) to it.
+- `tabIndex={0}` is now the default. Pass `tabIndex={-1}` (or any other value) to override; the consumer's value wins.
+- One-off styling that previously used Box utility props should move to Tailwind via `className` (`px-0`, `py-2`, `flex`, `flex-col`, `gap-2`, etc.).
+
+### ModalFocus Component
+
+The extension `modal-focus` component maps to `ModalFocus` in the design system. The runtime API is preserved 1:1 — `initialFocusRef`, `finalFocusRef`, `restoreFocus`, `autoFocus`, and `children` all behave identically. The migration is a pure import-path swap; no consumer-side install step is needed (`react-focus-lock` is now an internal runtime dependency of `@metamask/design-system-react`, not a peer).
+
+`ModalFocus` is the focus-trap primitive used by `ModalContent`, so it must be migrated before any modal-family migration that depends on it.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                                               | Design System Migration                                                 |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `import { ModalFocus } from '../../component-library'`                                          | `import { ModalFocus } from '@metamask/design-system-react'`            |
+| `import type { ModalFocusProps } from '../../component-library'`                                | `import type { ModalFocusProps } from '@metamask/design-system-react'`  |
+| `import type { FocusableElement } from '../../component-library/modal-focus/modal-focus.types'` | `import type { FocusableElement } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                   | Design System API                               | Change Type | Notes                                                   |
+| ----------------------------------------------- | ----------------------------------------------- | ----------- | ------------------------------------------------------- |
+| `initialFocusRef?: RefObject<FocusableElement>` | `initialFocusRef?: RefObject<FocusableElement>` | unchanged   | element to receive focus on mount                       |
+| `finalFocusRef?: RefObject<FocusableElement>`   | `finalFocusRef?: RefObject<FocusableElement>`   | unchanged   | element to receive focus on unmount                     |
+| `restoreFocus?: boolean`                        | `restoreFocus?: boolean`                        | unchanged   | ignored when `finalFocusRef` is provided                |
+| `autoFocus?: boolean`                           | `autoFocus?: boolean`                           | unchanged   | defaults to `true` (matches `react-focus-lock` default) |
+| `children: ReactNode`                           | `children: ReactNode`                           | unchanged   | the subtree to lock focus inside                        |
+| `FocusableElement` helper type                  | `FocusableElement` helper type                  | unchanged   | now exported from `@metamask/design-system-react`       |
+
+##### Default and Behavior Changes
+
+| Concern                       | Extension Behavior                                                                | Design System Behavior                                                                                                                    |
+| ----------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Underlying focus-trap library | `react-focus-lock` (direct dependency of the extension)                           | `react-focus-lock` is an internal runtime dependency of `@metamask/design-system-react` — consumers do not install or import it directly. |
+| ESM/CJS interop               | Falls back through `(ReactFocusLock as any).default ?? ReactFocusLock` internally | Same fallback preserved internally — no consumer-visible difference                                                                       |
+| Chakra-derived implementation | Based on `chakra-ui`'s `ModalFocusScope`                                          | Same source pattern, ported as-is                                                                                                         |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalFocus } from '../../component-library';
+
+// initialFocusRef + restoreFocus
+<ModalFocus restoreFocus initialFocusRef={popoverRef}>
+  {menuContent}
+</ModalFocus>;
+
+// finalFocusRef + autoFocus override
+<ModalFocus
+  restoreFocus={!finalFocusRef}
+  autoFocus={false}
+  finalFocusRef={finalFocusRef}
+>
+  {menuContent}
+</ModalFocus>;
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalFocus } from '@metamask/design-system-react';
+
+// API is identical — only the import path changes
+<ModalFocus restoreFocus initialFocusRef={popoverRef}>
+  {menuContent}
+</ModalFocus>;
+
+<ModalFocus
+  restoreFocus={!finalFocusRef}
+  autoFocus={false}
+  finalFocusRef={finalFocusRef}
+>
+  {menuContent}
+</ModalFocus>;
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/multichain-account-menu/multichain-account-menu.tsx`, `ui/components/multichain/account-list-item-menu/account-list-item-menu.js`, and `ui/components/multichain/network-list-item-menu/network-list-item-menu.js` (verified via fresh grep) — the only change is the import path; the JSX and prop usage stay identical.
+
+#### API Differences
+
+- `ModalFocus`'s public API is unchanged. Any consumer that passed only the documented props (`initialFocusRef`, `finalFocusRef`, `restoreFocus`, `autoFocus`, `children`) needs nothing beyond the import-path swap.
+- Consumers that imported `FocusableElement` directly from the extension's `modal-focus.types` module should re-import it from the design-system package barrel.
+
+### ModalFooter Component
+
+The extension `modal-footer` component maps to `ModalFooter` in the design system. The behavioral contract — a `<footer>` with up to two action buttons plus an optional slot for inline form controls — is preserved, but the API is reshaped to align with the React Native `BottomSheetFooter`:
+
+- Top-level `onSubmit` / `onCancel` callbacks and `submit` / `cancel` button-prop bags are replaced by `primaryButtonProps` / `secondaryButtonProps` whose click handlers ride along inside the props bag.
+- The button variant is **owned by the component** — primary always renders as `ButtonVariant.Primary`, secondary as `ButtonVariant.Secondary`. Consumers cannot override `variant`.
+- Layout direction is now an explicit `buttonsAlignment` prop (`Horizontal` default, `Vertical` opt-in) instead of the legacy `flex-wrap` + `Container.maxWidth` arrangement.
+- The polymorphic Box surface, the `Container` dependency, the `useI18nContext` coupling, and the `mm-modal-footer*` SCSS class hooks are all removed.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                 | Design System Migration                                                 |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `import { ModalFooter } from '../../component-library'`           | `import { ModalFooter } from '@metamask/design-system-react'`           |
+| `import type { ModalFooterProps } from '../../component-library'` | `import type { ModalFooterProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                               | Design System API                                                                     | Change Type        | Notes                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `onSubmit?: () => void`                                                                     | merged into `primaryButtonProps.onClick`                                              | renamed            | the click handler now travels with the rest of the primary-button config inside `primaryButtonProps`. The presence of `primaryButtonProps` is what causes the primary button to render.                                                                |
+| `onCancel?: () => void`                                                                     | merged into `secondaryButtonProps.onClick`                                            | renamed            | same as above for the secondary button.                                                                                                                                                                                                                |
+| `submitButtonProps?: ButtonProps<'button'>`                                                 | `primaryButtonProps?: Omit<ButtonProps, 'variant'>` (with `data-*` index signature)   | renamed + reshaped | renamed for symmetry with React Native `BottomSheetFooter`. `variant` is owned by the component (always `Primary`); `children` is the source of truth for the label. The extension's implicit `t('confirm')` default is gone.                          |
+| `cancelButtonProps?: ButtonProps<'button'>`                                                 | `secondaryButtonProps?: Omit<ButtonProps, 'variant'>` (with `data-*` index signature) | renamed + reshaped | same as above; renders with `Secondary` variant.                                                                                                                                                                                                       |
+| `containerProps?: ContainerProps<'div'>`                                                    | removed; layout direction moved to `buttonsAlignment`                                 | removed            | the `Container.maxWidth` (`Sm` / `Md` / `Lg` ≈ 360 / 480 / 720) is gone. Width is now governed by the surrounding `ModalContent.size`. Custom outer footer styling moves to `className`.                                                               |
+| —                                                                                           | `buttonsAlignment?: ButtonsAlignment` (`Horizontal` default, `Vertical` opt-in)       | added              | `Horizontal` lays buttons in a `flex-row` with each button at `flex-1`; `Vertical` lays them in a `flex-col` with each button at `w-full`. Order: secondary → primary in both modes. Mirrors the React Native `BottomSheetFooter` API.                 |
+| `children?: ReactNode`                                                                      | `children?: ReactNode`                                                                | unchanged          | rendered above the action button row.                                                                                                                                                                                                                  |
+| `className?: string`                                                                        | `className?: string`                                                                  | unchanged          | merged with default Tailwind classes via `twMerge`.                                                                                                                                                                                                    |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>`                                | removed                                                                               | removed            | always renders a `<footer>`. If you need a different element, wrap or compose.                                                                                                                                                                         |
+| Box style-utility props (`paddingLeft`, `paddingRight`, `paddingTop`, `backgroundColor`, …) | removed from public API                                                               | removed            | use `className` with Tailwind utilities. The default `px-4 pt-4` remains, applied internally; override with `className="px-0 pt-2"` etc.                                                                                                               |
+| `mm-modal-footer` and `mm-modal-footer__button` SCSS class hooks                            | removed                                                                               | removed            | the per-button `flex: 1 0 auto` is replaced by the `buttonsAlignment`-driven utilities (`flex-1` horizontal, `w-full` vertical), applied internally to each `Button`. Customize via `primaryButtonProps.className` / `secondaryButtonProps.className`. |
+
+##### Variant Ownership
+
+`primaryButtonProps` and `secondaryButtonProps` are typed as `Omit<ButtonProps, 'variant'>`. The component sets `variant={ButtonVariant.Primary}` / `ButtonVariant.Secondary` after the spread, so even if `variant` were passed it would be overridden — but the type forbids it, surfacing the contract at compile time. This matches React Native `BottomSheetFooter` and prevents consumers from partially bypassing the footer's button semantics.
+
+##### i18n Decoupling
+
+The extension auto-defaulted button labels to `t('confirm')` and `t('cancel')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. Pass localized labels explicitly through `primaryButtonProps.children` / `secondaryButtonProps.children`:
+
+```tsx
+<ModalFooter
+  primaryButtonProps={{ children: t('confirm'), onClick: handleSubmit }}
+  secondaryButtonProps={{ children: t('cancel'), onClick: handleClose }}
+/>
+```
+
+##### Button API Differences
+
+`primaryButtonProps` and `secondaryButtonProps` now accept the MMDS `ButtonProps` shape (minus `variant`). The most common renames for migrating consumers:
+
+| Extension Button Prop | Design System Button Prop | Notes                                           |
+| --------------------- | ------------------------- | ----------------------------------------------- |
+| `danger: true`        | `isDanger: true`          | renamed; matches the broader MMDS Button rename |
+| `disabled`            | `isDisabled`              | renamed                                         |
+| `loading`             | `isLoading`               | renamed                                         |
+| `block`               | `isFullWidth`             | renamed                                         |
+
+See the [Button Component](#button-component) migration entry for the full mapping.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalFooter } from '../../component-library';
+
+// Default labels via useI18nContext + destructive submit
+<ModalFooter
+  onCancel={onClose}
+  onSubmit={onSubmit}
+  submitButtonProps={{
+    children: t('remove'),
+    danger: true,
+  }}
+/>
+
+// Container max-width override via the Container enum
+<ModalFooter
+  onSubmit={onSubmit}
+  submitButtonProps={{ children: t('confirm') }}
+  containerProps={{ maxWidth: ContainerMaxWidth.Md }}
+/>
+
+// Custom child content with a "do not show again" checkbox
+<ModalFooter onSubmit={onSubmit} onCancel={onClose}>
+  <Checkbox
+    isChecked={dontShowAgain}
+    onChange={() => setDontShowAgain(!dontShowAgain)}
+    label={t('dontShowAgain')}
+  />
+</ModalFooter>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalFooter } from '@metamask/design-system-react';
+
+// Click handlers ride inside the prop bags; danger -> isDanger.
+// Variant is owned by the component (Primary / Secondary).
+<ModalFooter
+  primaryButtonProps={{
+    children: t('remove'),
+    isDanger: true,
+    onClick: onSubmit,
+  }}
+  secondaryButtonProps={{
+    children: t('cancel'),
+    onClick: onClose,
+  }}
+/>
+
+// `containerProps.maxWidth` is gone — width is governed by the surrounding
+// `ModalContent.size`. Use `buttonsAlignment` to switch to a stacked button
+// row when needed.
+<ModalFooter
+  buttonsAlignment={ButtonsAlignment.Vertical}
+  primaryButtonProps={{ children: t('confirm'), onClick: onSubmit }}
+/>
+
+// Custom child content + button row — children stay above buttons.
+<ModalFooter
+  primaryButtonProps={{ children: t('confirm'), onClick: onSubmit }}
+  secondaryButtonProps={{ children: t('cancel'), onClick: onClose }}
+>
+  <Checkbox
+    id="dont-show-again"
+    isSelected={dontShowAgain}
+    onChange={() => setDontShowAgain(!dontShowAgain)}
+    label={t('dontShowAgain')}
+  />
+</ModalFooter>
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (uses `submitButtonProps={{ children: t('remove'), danger: true }}` and the i18n-defaulted cancel button), `ui/components/app/snaps/snap-privacy-warning/snap-privacy-warning.js` (already passes `submitButtonProps.children` and `cancelButtonProps.children` explicitly), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (bypasses the built-in buttons by passing a custom `<Button>` as children) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Rename `submitButtonProps` → `primaryButtonProps`, `cancelButtonProps` → `secondaryButtonProps`.
+3. Move `onSubmit` / `onCancel` into the corresponding `*ButtonProps.onClick`.
+4. Add `secondaryButtonProps={{ children: t('cancel'), onClick: onClose }}` to any `ModalFooter` that relied on the implicit `t('cancel')` default.
+5. Rename `danger` → `isDanger` (and any other extension Button → MMDS Button prop renames) inside the button-prop bags. Drop any explicit `variant` — the component owns it.
+6. If the call site set `containerProps.maxWidth`, drop it; width is now governed by `ModalContent.size`. If the call site used `containerProps` for layout direction, switch to `buttonsAlignment={ButtonsAlignment.Vertical}` if a stacked row is desired.
+
+#### API Differences
+
+- `ModalFooter` no longer composes Box's polymorphic API. It always renders a `<footer>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- `ModalFooter` is i18n-agnostic — there is no `useI18nContext` integration and no internal English fallback. Consumers always pass labels via `primaryButtonProps.children` / `secondaryButtonProps.children`.
+- The component **owns** the button variant via `Omit<ButtonProps, 'variant'>` on the prop bags. Consumers cannot pass `variant`; the API surfaces this at compile time. This mirrors the React Native `BottomSheetFooter` and is the recommended footer contract going forward.
+- Layout direction is configured via `buttonsAlignment` (`Horizontal` default, `Vertical` opt-in). The legacy `Container.maxWidth` enum is gone — width comes from the surrounding `ModalContent.size`.
+
+### ModalHeader Component
+
+The extension `modal-header` component maps to `ModalHeader` in the design system. The behavioral contract — a `<header>` with an optional back button on the start, a title in the center, and an optional close button on the end — is preserved. The polymorphic Box surface, the `mm-modal-header` SCSS class hook, and the implicit `useI18nContext` coupling for the icon-button `aria-label`s are removed.
+
+`ModalHeader` is built on top of the same three-column grid layout as `HeaderBase`, replicated locally so the outer element stays a single semantic `<header>` (no extra wrapper).
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                 | Design System Migration                                                 |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `import { ModalHeader } from '../../component-library'`           | `import { ModalHeader } from '@metamask/design-system-react'`           |
+| `import type { ModalHeaderProps } from '../../component-library'` | `import type { ModalHeaderProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                        | Design System API                                                                          | Change Type | Notes                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children?: ReactNode`                                               | `children?: ReactNode`                                                                     | unchanged   | string children still auto-wrap as `<Text variant={TextVariant.HeadingSm} textAlign={TextAlign.Center}>`; `ReactNode` children render as-is.                                                                           |
+| `onBack?: () => void`                                                | `onBack?: () => void`                                                                      | unchanged   | when set, renders the back button — but **`backButtonProps` is now co-required** (see "i18n decoupling" below).                                                                                                        |
+| `onClose?: () => void`                                               | `onClose?: () => void`                                                                     | unchanged   | when set, renders the close button — but **`closeButtonProps` is now co-required**.                                                                                                                                    |
+| `backButtonProps?: Partial<ButtonIconProps<'button'>>`               | `backButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.)  | shape       | type now bound to MMDS `ButtonIconProps`; `iconName` (`ArrowLeft`) and `size` (`Md`) are owned by the component and cannot be overridden via the prop bag. `ariaLabel` is required (preserved from `ButtonIconProps`). |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`              | `closeButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.) | shape       | same shape change as `backButtonProps`; component owns `iconName=Close` and `size=Md`.                                                                                                                                 |
+| `startAccessory?: ReactNode`                                         | `startAccessory?: ReactNode`                                                               | unchanged   | when provided, replaces the auto-rendered back button — even if `onBack` is set (legacy precedence preserved).                                                                                                         |
+| `endAccessory?: ReactNode`                                           | `endAccessory?: ReactNode`                                                                 | unchanged   | when provided, replaces the auto-rendered close button — even if `onClose` is set.                                                                                                                                     |
+| `className?: string`                                                 | `className?: string`                                                                       | unchanged   | applied to the outer `<header>`; merged with the component's defaults via `twMerge`.                                                                                                                                   |
+| Polymorphic `as` / extension's `HeaderBaseStyleUtilityProps` surface | removed                                                                                    | removed     | always renders `<header>`. Box utility props on the root (`paddingLeft`, `paddingBottom`, `width`, …) are removed — use `className` with Tailwind utilities (e.g. `className="pt-0 pb-2"`).                            |
+| `mm-modal-header` SCSS class hook                                    | removed                                                                                    | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities.                                                                                   |
+| `childrenWrapperProps={{ width: BlockSize.Full }}` (legacy internal) | applied automatically as `w-full` on the title slot                                        | unchanged   | preserved internal behavior; no consumer-facing prop change.                                                                                                                                                           |
+
+##### i18n Decoupling
+
+The extension auto-defaulted the icon-button `aria-label`s to `t('back')` and `t('close')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. The type system enforces this: `onBack` and `backButtonProps` (and `onClose` / `closeButtonProps`) are co-required via a discriminated union — when `onBack` is set, you must also pass `backButtonProps` with at least an `ariaLabel`:
+
+```tsx
+<ModalHeader onClose={handleClose} closeButtonProps={{ ariaLabel: t('close') }}>
+  {t('removeAccount')}
+</ModalHeader>
+```
+
+If a consumer sets `onClose` without `closeButtonProps`, TypeScript errors at the call site. This guarantees every dismiss button gets a properly localized label without the component reaching into any global i18n context.
+
+##### ButtonIcon API Differences
+
+The extension's `ButtonIconProps<'button'>` is replaced by MMDS `ButtonIconProps`. The most common difference for migrating consumers is that the polymorphic `as` typing is gone (the prop bag types against the underlying `<button>` HTML element directly). All standard ButtonIcon props (`ariaLabel`, `disabled`, `onClick`, `data-testid`, etc.) are preserved.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalHeader } from '../../component-library';
+
+// i18n-defaulted back + close
+<ModalHeader onBack={onBack} onClose={onClose}>
+  {t('headerTitle')}
+</ModalHeader>
+
+// Box utility props on the root
+<ModalHeader
+  paddingBottom={4}
+  paddingRight={4}
+  paddingLeft={4}
+  onClose={onClose}
+>
+  {title}
+</ModalHeader>
+
+// Custom close-button override (test id, aria-label)
+<ModalHeader
+  onClose={onClose}
+  closeButtonProps={{
+    ariaLabel: t('close'),
+    'data-testid': 'modal-close',
+  }}
+>
+  {title}
+</ModalHeader>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalHeader } from '@metamask/design-system-react';
+
+// aria-labels are explicit; back + close prop bags are now co-required
+<ModalHeader
+  onBack={onBack}
+  backButtonProps={{ ariaLabel: t('back') }}
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {t('headerTitle')}
+</ModalHeader>
+
+// Root padding overrides move into className
+<ModalHeader
+  className="pb-4 pr-4 pl-4"
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {title}
+</ModalHeader>
+
+// Custom close-button overrides — same shape, just bound to the new type
+<ModalHeader
+  onClose={onClose}
+  closeButtonProps={{
+    ariaLabel: t('close'),
+    'data-testid': 'modal-close',
+  }}
+>
+  {title}
+</ModalHeader>
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (bare `<ModalHeader onClose={onClose}>{title}</ModalHeader>`), `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`paddingLeft={4} paddingRight={4} paddingBottom={4} onClose={fn}`), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (custom JSX `children`) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Add `closeButtonProps={{ ariaLabel: t('close') }}` (and/or `backButtonProps={{ ariaLabel: t('back') }}`) to every `<ModalHeader>` that uses `onClose` / `onBack`. The compiler flags missing prop bags so this can be applied mechanically.
+3. Move any root-level Box utility props (`paddingLeft`, `paddingRight`, `paddingBottom`, `width`, etc.) onto `className` with Tailwind utilities.
+4. If the call site's `closeButtonProps` / `backButtonProps` already passed `ariaLabel`, only the import path needs to change.
+
+#### Deprecated `ModalHeader`
+
+The extension exports a separate `deprecated/` `ModalHeader` from `ui/components/component-library/modal-header/deprecated`. **It is not migrated.** Consumers still importing from the deprecated path need to migrate to the current `ModalHeader` first, then switch to `@metamask/design-system-react`. The deprecated path predates the current `paddingTop`/`paddingBottom`/`width` defaults and uses `ButtonIconSize.Sm` instead of `Md`.
+
+#### API Differences
+
+- `ModalHeader` always renders a `<header>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- The `useI18nContext` coupling for the icon-button `aria-label`s is gone. Discriminated unions enforce co-required `backButtonProps` / `closeButtonProps` at compile time.
+- The component owns `iconName` (`ArrowLeft` / `Close`) and `size` (`Md`) on the built-in icon buttons. Consumers cannot override them via the prop bag.
+- `startAccessory` / `endAccessory` precedence over the auto-rendered back/close buttons is preserved from the legacy.
+
+### ModalOverlay Component
+
+The extension `modal-overlay` component maps to `ModalOverlay` in the design system. The runtime API stays the same for typical usage — `<ModalOverlay />` with optional `onClick` and `className` — but the component drops the polymorphic Box surface and the legacy SCSS class hook in favor of Tailwind utilities and a token-driven fade-in animation.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                  | Design System Migration                                                  |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `import { ModalOverlay } from '../../component-library'`           | `import { ModalOverlay } from '@metamask/design-system-react'`           |
+| `import type { ModalOverlayProps } from '../../component-library'` | `import type { ModalOverlayProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                       | Design System API                                       | Change Type | Notes                                                                                                                                              |
+| ------------------------------------------------------------------- | ------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `onClick?: (event: MouseEvent<HTMLDivElement>) => void`             | `onClick?: (event: MouseEvent<HTMLDivElement>) => void` | unchanged   | called when the overlay is clicked                                                                                                                 |
+| `className?: string`                                                | `className?: string`                                    | unchanged   | merged with default Tailwind classes via `twMerge`                                                                                                 |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` typing | removed                                                 | removed     | always renders a `<div>`. If you need a different element, wrap or compose.                                                                        |
+| Box style-utility props (`backgroundColor`, `width`, `height`, …)   | removed from public API                                 | removed     | the overlay renders a fixed full-viewport surface with `BoxBackgroundColor.OverlayDefault`. Override via `className` if a one-off tweak is needed. |
+| `mm-modal-overlay` SCSS class hook                                  | removed                                                 | removed     | use `className` and Tailwind utilities to customize the overlay surface                                                                            |
+| `aria-hidden="true"`                                                | `aria-hidden="true"`                                    | unchanged   | still applied by default                                                                                                                           |
+
+##### Default and Behavior Changes
+
+| Concern         | Extension Behavior                                                                                   | Design System Behavior                                                                                                                                                                                |
+| --------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Positioning     | `position: fixed; inset: 0; z-index: $modal-z-index (1050)` from SCSS                                | `fixed inset-0 z-[1050]` Tailwind utilities                                                                                                                                                           |
+| Sizing          | `width: 100%; height: 100%` via `BlockSize.Full` Box props                                           | full viewport via `inset-0` (no separate width/height props)                                                                                                                                          |
+| Background      | `BackgroundColor.overlayDefault` Box prop                                                            | `BoxBackgroundColor.OverlayDefault` applied internally; `className` to override                                                                                                                       |
+| Mount animation | 250ms linear opacity fade-in via SCSS `@keyframes`, gated by `prefers-reduced-motion: no-preference` | 300ms linear opacity fade-in via the new `motion-safe:animate-fade-in` Tailwind utility (matches `AnimationDuration.Regularly` from `@metamask/design-tokens`); reduced-motion users get no animation |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { ModalOverlay } from '../../component-library';
+
+<ModalOverlay onClick={handleClose} />;
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalOverlay } from '@metamask/design-system-react';
+
+<ModalOverlay onClick={handleClose} />;
+```
+
+For typical call sites — for example `ui/components/multichain/network-list-menu/network-list-menu.tsx`, `ui/components/multichain/edit-accounts-modal/edit-accounts-modal.tsx`, and `ui/components/multichain/funding-method-modal/funding-method-modal.tsx` (verified via fresh grep) — the only change is the import path; the JSX stays identical.
+
+#### API Differences
+
+- `ModalOverlay` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- One-off styling that previously used Box utility props (e.g. `backgroundColor={BackgroundColor.overlayAlternative}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="bg-overlay-alternative"`).
+
+### PopoverHeader Component
+
+The extension `popover-header` component maps to `PopoverHeader` in the design system. The behavioral contract — a `<header>` with an optional back button on the start, a title in the center, and an optional close button on the end — is preserved. The polymorphic Box surface (`HeaderBaseStyleUtilityProps`), the `mm-popover-header` SCSS class hook, and the implicit `useI18nContext` coupling for the icon-button `aria-label`s are removed.
+
+`PopoverHeader` is built on top of the same three-column grid layout as `HeaderBase`, replicated locally so the outer element stays a single semantic `<header>` (no extra wrapper). Unlike `ModalHeader`, it applies no outer padding — popover surfaces own their own spacing.
+
+The auto-rendered icon buttons and the auto-wrapped title default to inheriting color from the popover surface (`text-inherit` / `TextColor.Inherit`), preserving the legacy `IconColor.inherit` / `TextColor.inherit` defaults so headers placed on inverse or semantic backgrounds pick up the right foreground color automatically.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                   | Design System Migration                                                   |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `import { PopoverHeader } from '../../component-library'`           | `import { PopoverHeader } from '@metamask/design-system-react'`           |
+| `import type { PopoverHeaderProps } from '../../component-library'` | `import type { PopoverHeaderProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                        | Design System API                                                                          | Change Type | Notes                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children?: ReactNode`                                               | `children?: ReactNode`                                                                     | unchanged   | string children still auto-wrap as `<Text variant={TextVariant.HeadingSm} textAlign={TextAlign.Center} color={TextColor.Inherit}>`; `ReactNode` children render as-is.                                                 |
+| `onBack?: () => void`                                                | `onBack?: () => void`                                                                      | unchanged   | when set, renders the back button — but **`backButtonProps` is now co-required** (see "i18n decoupling" below).                                                                                                        |
+| `onClose?: () => void`                                               | `onClose?: () => void`                                                                     | unchanged   | when set, renders the close button — but **`closeButtonProps` is now co-required**.                                                                                                                                    |
+| `backButtonProps?: ButtonIconProps<'button'>`                        | `backButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.)  | shape       | type now bound to MMDS `ButtonIconProps`; `iconName` (`ArrowLeft`) and `size` (`Sm`) are owned by the component and cannot be overridden via the prop bag. `ariaLabel` is required (preserved from `ButtonIconProps`). |
+| `closeButtonProps?: ButtonIconProps<'button'>`                       | `closeButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.) | shape       | same shape change as `backButtonProps`; component owns `iconName=Close` and `size=Sm`.                                                                                                                                 |
+| `startAccessory?: ReactNode`                                         | `startAccessory?: ReactNode`                                                               | unchanged   | when provided, replaces the auto-rendered back button — even if `onBack` is set (legacy precedence preserved).                                                                                                         |
+| `endAccessory?: ReactNode`                                           | `endAccessory?: ReactNode`                                                                 | unchanged   | when provided, replaces the auto-rendered close button — even if `onClose` is set.                                                                                                                                     |
+| `className?: string`                                                 | `className?: string`                                                                       | unchanged   | applied to the outer `<header>`; merged with the component's defaults via `twMerge`.                                                                                                                                   |
+| Polymorphic `as` / extension's `HeaderBaseStyleUtilityProps` surface | removed                                                                                    | removed     | always renders `<header>`. Box utility props on the root (`color`, `textAlign`, `justifyContent`, `padding*`, `width`, …) are removed — use `className` with Tailwind utilities.                                       |
+| `mm-popover-header` SCSS class hook                                  | removed                                                                                    | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities.                                                                                   |
+| `childrenWrapperProps`                                               | removed                                                                                    | removed     | the auto-wrapped title slot is fixed at `col-start-2 col-end-3 w-full`. To customize the title layout, pass a custom `ReactNode` as `children` instead of relying on `childrenWrapperProps`.                           |
+
+##### i18n Decoupling
+
+The extension auto-defaulted the icon-button `aria-label`s to `t('back')` and `t('close')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. The type system enforces this: `onBack` and `backButtonProps` (and `onClose` / `closeButtonProps`) are co-required via a discriminated union — when `onBack` is set, you must also pass `backButtonProps` with at least an `ariaLabel`:
+
+```tsx
+<PopoverHeader
+  onClose={handleClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {t('headerTitle')}
+</PopoverHeader>
+```
+
+If a consumer sets `onClose` without `closeButtonProps`, TypeScript errors at the call site. This guarantees every dismiss button gets a properly localized label without the component reaching into any global i18n context.
+
+##### Color Inheritance
+
+The extension hard-coded `IconColor.inherit` and `TextColor.inherit` on the auto-rendered icon buttons and the auto-wrapped title. The design system preserves this default — the title uses `TextColor.Inherit`, and the auto-rendered `ButtonIcon`s receive `className="text-inherit"` (merged with any consumer-provided `className`). To force a specific color, pass `className` on the prop bag:
+
+```tsx
+closeButtonProps={{ ariaLabel: t('close'), className: 'text-error-default' }}
+```
+
+##### ButtonIcon API Differences
+
+The extension's `ButtonIconProps<'button'>` is replaced by MMDS `ButtonIconProps`. The most common difference for migrating consumers is that the polymorphic `as` typing is gone (the prop bag types against the underlying `<button>` HTML element directly). All standard ButtonIcon props (`ariaLabel`, `disabled`, `onClick`, `data-testid`, etc.) are preserved.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { PopoverHeader } from '../../component-library';
+
+// i18n-defaulted close + Box utility props
+<PopoverHeader
+  color={TextColor.infoInverse}
+  textAlign={TextAlign.Center}
+  justifyContent={JustifyContent.spaceBetween}
+  onClose={onClose}
+  childrenWrapperProps={{ style: { whiteSpace: 'nowrap' } }}
+>
+  {title}
+</PopoverHeader>;
+```
+
+##### After (Design System)
+
+```tsx
+import { PopoverHeader } from '@metamask/design-system-react';
+
+// aria-label is explicit; Box utility props move to className.
+// The title and the auto-rendered close button inherit color from the
+// surrounding popover surface, so no `color` prop is needed on the header
+// itself — set the color on the popover container instead.
+<PopoverHeader
+  className="text-info-inverse"
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  <span className="whitespace-nowrap">{title}</span>
+</PopoverHeader>;
+```
+
+For the typical extension call site — `ui/pages/bridge/layout/tooltip.tsx` (the only consumer outside of the `popover-header/` package itself, verified via fresh grep) — the churn is:
+
+1. Swap the import path.
+2. Add `closeButtonProps={{ ariaLabel: t('close') }}` to every `<PopoverHeader>` that uses `onClose` (and `backButtonProps={{ ariaLabel: t('back') }}` for `onBack`). The compiler flags missing prop bags so this can be applied mechanically.
+3. Move any root-level Box utility props (`color`, `textAlign`, `justifyContent`, `padding*`, `width`, etc.) onto `className` with Tailwind utilities.
+4. Replace `childrenWrapperProps` with a custom `ReactNode` `children` that wraps the title in the desired layout.
+
+#### API Differences
+
+- `PopoverHeader` always renders a `<header>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- The `useI18nContext` coupling for the icon-button `aria-label`s is gone. Discriminated unions enforce co-required `backButtonProps` / `closeButtonProps` at compile time.
+- The component owns `iconName` (`ArrowLeft` / `Close`) and `size` (`Sm`) on the built-in icon buttons. Consumers cannot override them via the prop bag.
+- The auto-rendered icon buttons and the auto-wrapped title default to `text-inherit` so they pick up the popover surface color, preserving the legacy `IconColor.inherit` / `TextColor.inherit` behavior.
+- `startAccessory` / `endAccessory` precedence over the auto-rendered back/close buttons is preserved from the legacy.
+- No outer padding is applied by default — popover surfaces own their own spacing.
+
+### SensitiveText Component
+
+The extension `sensitive-text` component maps directly to `SensitiveText` in the design system. The public API (`isHidden`, `length`, `children`, plus inherited `Text` props) is unchanged — only the import path moves.
+
+`SensitiveTextLength` is now sourced from `@metamask/design-system-shared` and re-exported from both `@metamask/design-system-react` and `@metamask/design-system-react-native`, so the same const object can be used across web and native consumers.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared style-utility migration patterns.
+
+#### Import Path
+
+| Extension Pattern                                               | Design System Migration                                                   |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `import { SensitiveText } from '../../component-library'`       | `import { SensitiveText } from '@metamask/design-system-react'`           |
+| `import { SensitiveTextLength } from '../../component-library'` | `import { SensitiveTextLength } from '@metamask/design-system-react'`     |
+| `import type { SensitiveTextProps } from '...'`                 | `import type { SensitiveTextProps } from '@metamask/design-system-react'` |
+
+#### Props
+
+| Extension Prop | Design System Prop | Change Type | Notes                                                                            |
+| -------------- | ------------------ | ----------- | -------------------------------------------------------------------------------- |
+| `isHidden`     | `isHidden`         | unchanged   | Defaults to `false`.                                                             |
+| `length`       | `length`           | unchanged   | Accepts `SensitiveTextLength` or a custom numeric string (e.g. `"15"`).          |
+| `children`     | `children`         | unchanged   | The text content to display or hide.                                             |
+| `ref`          | removed            | removed     | The new component is a function component and does not forward a ref to the DOM. |
+
+All other `Text` props (`variant`, `color`, `fontWeight`, `className`, `style`, etc.) continue to be forwarded to the underlying `Text`.
+
+#### Behavior
+
+- Invalid `length` values still fall back to `SensitiveTextLength.Short` and log a `console.warn`, matching the extension behavior.
+- The hidden representation continues to use the bullet character (`•`).
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { SensitiveText, SensitiveTextLength } from '../../component-library';
+
+<SensitiveText isHidden length={SensitiveTextLength.Medium}>
+  $1,234.56
+</SensitiveText>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  SensitiveText,
+  SensitiveTextLength,
+} from '@metamask/design-system-react';
+
+<SensitiveText isHidden length={SensitiveTextLength.Medium}>
+  $1,234.56
+</SensitiveText>;
+```
+
+### Skeleton Component
+
+The extension `skeleton` component maps to `Skeleton` in the design system. The visual contract — a pulsing placeholder with `bg-icon-alternative` opacity-cycling at 1400ms — is preserved, but the public API is realigned with the React Native `Skeleton` (`@metamask/design-system-react-native`):
+
+- The toggle prop is renamed and **inverted** (`isLoading` → `hideChildren`).
+- The polymorphic Box surface and the `mm-skeleton` SCSS class hook are removed.
+- The pulse animation moves from a component-local SCSS keyframe to a `motion-safe:animate-skeleton-pulse` Tailwind utility added to `@metamask/design-system-tailwind-preset` in this migration.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                              | Design System Migration                                              |
+| -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `import { Skeleton } from '../../component-library'`           | `import { Skeleton } from '@metamask/design-system-react'`           |
+| `import type { SkeletonProps } from '../../component-library'` | `import type { SkeletonProps } from '@metamask/design-system-react'` |
+
+##### Toggle Prop: `isLoading` → `hideChildren` (semantics inverted)
+
+This is the headline breaking change. The legacy `isLoading` prop (defaulting to `true`) is replaced by `hideChildren` (defaulting to `false`) — the meaning is **inverted**. This aligns the web Skeleton with the React Native `Skeleton`'s API.
+
+| Extension                               | Design System                    | Behavior                                                                                                         |
+| --------------------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `<Skeleton>` (default `isLoading=true`) | `<Skeleton hideChildren>`        | Standalone placeholder. Animated bar fills the container. Children, if any, render invisibly to preserve layout. |
+| `<Skeleton isLoading={true}>{x}</…>`    | `<Skeleton hideChildren>{x}</…>` | Skeleton overlay; `x` invisible (preserves layout dimensions).                                                   |
+| `<Skeleton isLoading={false}>{x}</…>`   | `<Skeleton>{x}</…>` (default)    | `x` renders directly; no skeleton overlay, no animation.                                                         |
+| `<Skeleton width={100} />`              | `<Skeleton width={100} />`       | Standalone placeholder; unchanged.                                                                               |
+
+The mechanical translation is `isLoading={x}` ⇒ `hideChildren={x}`. The default-prop behavior also flips: a bare `<Skeleton>{x}</Skeleton>` used to render the skeleton; in MMDS it renders `x` directly.
+
+##### Props and Behavior Mapping
+
+| Extension API                                                | Design System API                          | Change Type        | Notes                                                                                                                                                                                                                                |
+| ------------------------------------------------------------ | ------------------------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `isLoading?: boolean` (default `true`)                       | `hideChildren?: boolean` (default `false`) | renamed + inverted | toggle now matches the React Native `Skeleton` API; mechanical translation is `isLoading={x}` ⇒ `hideChildren={x}`.                                                                                                                  |
+| `height?: number \| string`                                  | `height?: number \| string`                | unchanged          | applied as inline style.                                                                                                                                                                                                             |
+| `width?: number \| string`                                   | `width?: number \| string`                 | unchanged          | applied as inline style.                                                                                                                                                                                                             |
+| `children?: ReactNode`                                       | `children?: ReactNode`                     | unchanged          | rendered directly when `hideChildren=false`; rendered invisibly inside the container when `hideChildren=true`.                                                                                                                       |
+| `className?: string`                                         | `className?: string`                       | unchanged          | applied to the container; merged with the component's defaults via `twMerge`.                                                                                                                                                        |
+| Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>` | removed                                    | removed            | always renders `<div>`. If you need a different element, wrap or compose.                                                                                                                                                            |
+| Box style-utility props on the root (`marginBottom`, …)      | removed from public API                    | removed            | use `className` with Tailwind utilities (e.g. `className="mb-4"`) for layout overrides.                                                                                                                                              |
+| `mm-skeleton` SCSS class hook                                | removed                                    | removed            | the pulse animation moved into the `motion-safe:animate-skeleton-pulse` Tailwind utility on the inner overlay (added to `@metamask/design-system-tailwind-preset` in this migration). Reduced-motion users see a static placeholder. |
+| `* { visibility: hidden }` SCSS rule on descendants          | replaced with structural invisibility      | replaced           | when `hideChildren=true`, children render inside an `aria-hidden` wrapper with `invisible pointer-events-none`. No global descendant rule.                                                                                           |
+
+##### Default and Behavior Changes
+
+| Concern           | Extension Behavior                                                               | Design System Behavior                                                                                                         |
+| ----------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Default state     | `isLoading=true` — wrapping `<Skeleton>{x}</…>` defaults to showing the skeleton | `hideChildren=false` — wrapping `<Skeleton>{x}</…>` defaults to showing the children directly (no skeleton overlay)            |
+| Animation         | always-on, opacity 0.2 → 0.1 → 0.2 cycle every 1400ms                            | same cycle, gated by `motion-safe:` (reduced-motion users get a static placeholder)                                            |
+| Container element | polymorphic Box (`<div>` by default; can render any element via `as`)            | always `<div>`                                                                                                                 |
+| ARIA              | none                                                                             | container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Skeleton } from '../../component-library';
+
+// Default behavior: skeleton showing
+<Skeleton>{maybeContent}</Skeleton>
+
+// State-driven toggle
+<Skeleton isLoading={isLoading}>{content}</Skeleton>
+
+// Standalone placeholder
+<Skeleton width="100px" height="16px" />
+
+// Inverted: render content with no skeleton overlay
+<Skeleton isLoading={false}>{content}</Skeleton>
+```
+
+##### After (Design System)
+
+```tsx
+import { Skeleton } from '@metamask/design-system-react';
+
+// To preserve "show skeleton with hidden children" behavior, set hideChildren
+<Skeleton hideChildren>{maybeContent}</Skeleton>
+
+// State-driven toggle (mechanical translation)
+<Skeleton hideChildren={isLoading}>{content}</Skeleton>
+
+// Standalone placeholder — unchanged
+<Skeleton width="100px" height="16px" />
+
+// Default in MMDS: children render directly (replaces isLoading={false})
+<Skeleton>{content}</Skeleton>
+```
+
+For typical call sites — for example `ui/components/ui/aggregated-balance/aggregated-balance.tsx` (state-driven `isLoading={...}`), `ui/components/app/wallet-overview/coin-overview.tsx` (state-driven `isLoading={...}` with Box utility props), and `ui/components/app/rewards/RewardsPointsBalance.tsx` (standalone `<Skeleton width="100px" />`) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Rename `isLoading` → `hideChildren`. The boolean expression is mechanically the same (e.g. `isLoading={!data}` ⇒ `hideChildren={!data}`).
+3. For any bare `<Skeleton>{x}</Skeleton>` that relied on the legacy default `isLoading=true`, add `hideChildren` explicitly. (Bare standalone `<Skeleton width=… />` without children does not need to change.)
+4. Move any root-level Box utility props (`marginBottom`, etc.) onto `className`.
+
+Codemod-friendly: every `isLoading=` token in the extension's existing call sites maps 1:1 to `hideChildren=`.
+
+#### API Differences
+
+- `Skeleton` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- The container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` by default. The skeleton takes no part in the accessibility tree.
+
 ## Version Updates
+
+<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
+
+## From version 0.22.0 to 0.x.0
+
+### BannerBase: `onClose` is now the only close-button behavior API
+
+**What changed:**
+
+- **`closeButtonProps.onClick`** is removed from the public **`BannerBase`** API.
+- The close button now renders **only** when **`onClose`** is provided.
+- **`closeButtonProps`** is now customization-only for the rendered close **`ButtonIcon`**.
+
+**Migration:**
+
+- Move any close-button behavior from **`closeButtonProps.onClick`** to **`onClose`**.
+- Keep **`closeButtonProps`** only for non-behavioral customization such as **`data-testid`**, accessibility props, and styling hooks.
+- If you previously passed only **`closeButtonProps`** to force-render a close button, also provide **`onClose`** now.
+
+**Impact:**
+
+- Existing **`@metamask/design-system-react`** consumers that relied on **`closeButtonProps.onClick`** or on rendering a close button without **`onClose`** must update those call sites.
+
+<a id="buttonbase-size-defaults"></a>
+
+### ButtonBase: let `size` drive label, icons, and spacing
+
+**What changed:**
+
+- **`ButtonBase`** maps each **`ButtonBaseSize`** to a recommended label **`Text`** variant, matching start and end **`Icon`** sizes, and consistent spacing between accessories and the label.
+
+**Recommendation:**
+
+For any product-specific button built on **`ButtonBase`** (wrappers that forward **`textProps`**, **`startIconProps`**, **`endIconProps`**, **`loadingIconProps`**, or extra layout classes):
+
+- Remove **icon size** overrides on **`startIconProps`**, **`endIconProps`**, and **`loadingIconProps`** unless a written design exception requires them.
+- Remove **label typography overrides** in **`textProps`** (for example a different **`variant`**) so the label follows the mapping for the chosen **`size`**.
+- Remove **spacing or gap overrides** (extra **`className`** / layout utilities on the root or content row) that only existed to nudge icon–label rhythm; **`ButtonBase`** now owns that layout.
+
+**Migration:**
+
+```tsx
+// Before: overrides that duplicate what size already encodes
+<ButtonBase
+  size={ButtonBaseSize.Md}
+  startIconProps={{ name: IconName.Add, size: IconSize.Md }}
+  textProps={{ variant: TextVariant.BodyLg }}
+  className="gap-4"
+>
+  Continue
+</ButtonBase>
+
+// After: rely on size-driven defaults
+<ButtonBase size={ButtonBaseSize.Md} startIconProps={{ name: IconName.Add }}>
+  Continue
+</ButtonBase>
+```
+
+**Impact:**
+
+- Custom **`ButtonBase`** wrappers that hard-coded icon sizes, text variants, or gaps may render slightly differently after removing overrides; visually they should match the current design spec for that **`size`**.
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
 

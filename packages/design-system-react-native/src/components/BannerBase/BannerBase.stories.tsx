@@ -41,7 +41,8 @@ const meta: Meta<BannerBaseProps> = {
     },
     closeButtonProps: {
       control: 'object',
-      description: 'Optional props for the close button',
+      description:
+        'Optional non-behavioral props for the close button when onClose is provided',
     },
     startAccessory: {
       control: false,

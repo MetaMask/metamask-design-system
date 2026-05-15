@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.0]
+
+### Added
+
+- Exported `SelectButton` prop and variant types (`SelectButtonPropsShared`, `SelectButtonVariant`, `SelectButtonEndArrow`), `SegmentGroupPropsShared`, and `SegmentGroupContext` so mobile and web packages share one segment and select contract ([#1172](https://github.com/MetaMask/metamask-design-system/pull/1172))
+- Exported `SensitiveTextLength`, `SensitiveTextPropsShared`, and related types for cross-platform masking and reveal behavior ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- Exported `HelpTextSeverity`, `HelpTextPropsShared`, and related types for cross-platform helper and validation text ([#1169](https://github.com/MetaMask/metamask-design-system/pull/1169))
+- Exported `TextAreaPropsShared` for cross-platform multi-line input wrappers ([#1141](https://github.com/MetaMask/metamask-design-system/pull/1141))
+
+## [0.17.0]
+
+### Added
+
+- Added `ListArrow`, `Musd`, and `MusdFilled` to the shared icon exports; refreshed `Candlestick`; and added `Group`, `PieChart`, and `Predictions` so React and React Native stay aligned on `IconName` ([#1157](https://github.com/MetaMask/metamask-design-system/pull/1157), [#1161](https://github.com/MetaMask/metamask-design-system/pull/1161), [#1162](https://github.com/MetaMask/metamask-design-system/pull/1162), [#1163](https://github.com/MetaMask/metamask-design-system/pull/1163))
+
+## [0.16.0]
+
+### Added
+
+- Added `Merge` to the shared icon exports so React and React Native consumers can access it through their existing `IconName` APIs ([#1155](https://github.com/MetaMask/metamask-design-system/pull/1155))
+- Added shared `Input` contracts for a controlled `value`, `isReadOnly`, and `isStateStylesDisabled`, making it easier to build cross-platform wrappers against one public input API ([#1043](https://github.com/MetaMask/metamask-design-system/pull/1043))
+- Added shared `AvatarGroup` size, variant, and prop contracts for consumers building cross-platform abstractions on top of `@metamask/design-system-shared` ([#1067](https://github.com/MetaMask/metamask-design-system/pull/1067))
+
+## [0.15.0]
+
+### Added
+
+- Added shared `ButtonBaseSize`, `ButtonSize`, `ButtonHeroSize`, `ButtonVariant`, `ButtonBasePropsShared`, and `ButtonPropsShared` exports so React and React Native button APIs can share one cross-platform type contract ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
+- Added shared `ButtonIconSize`, `ButtonIconVariant`, and `ButtonIconPropsShared` exports so React and React Native `ButtonIcon` APIs can share one cross-platform type contract ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+- Added shared `TextFieldPropsShared` for the controlled text-field contract used by `TextField` and `TextFieldSearch` across platform packages ([#1081](https://github.com/MetaMask/metamask-design-system/pull/1081))
+
 ## [0.14.0]
 
 ### Added
@@ -158,7 +189,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.14.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.18.0...HEAD
+[0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.17.0...@metamask/design-system-shared@0.18.0
+[0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.16.0...@metamask/design-system-shared@0.17.0
+[0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.15.0...@metamask/design-system-shared@0.16.0
+[0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.14.0...@metamask/design-system-shared@0.15.0
 [0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.13.0...@metamask/design-system-shared@0.14.0
 [0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.12.0...@metamask/design-system-shared@0.13.0
 [0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.11.0...@metamask/design-system-shared@0.12.0

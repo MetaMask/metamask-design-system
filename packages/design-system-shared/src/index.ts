@@ -30,6 +30,9 @@ export {
   type BadgeStatusPropsShared,
 } from './types/BadgeStatus';
 
+// HelpText types (ADR-0003 + ADR-0004)
+export { HelpTextSeverity, type HelpTextPropsShared } from './types/HelpText';
+
 // IconAlert types (ADR-0003 + ADR-0004)
 export {
   IconAlertSeverity,
@@ -142,6 +145,15 @@ export {
   type TextPropsShared,
 } from './types/Text';
 
+// TextField types (ADR-0004)
+export { type TextFieldPropsShared } from './types/TextField';
+
+// TextArea types (ADR-0004)
+export { type TextAreaPropsShared } from './types/TextArea';
+
+// Input types (ADR-0004)
+export { type InputPropsShared } from './types/Input';
+
 // AvatarFavicon types (ADR-0004)
 export {
   AvatarFaviconSize,
@@ -174,3 +186,39 @@ export {
   IconSize,
   type IconPropsShared,
 } from './types/Icon';
+
+// AvatarGroup types (ADR-0003 + ADR-0004)
+export {
+  AvatarGroupSize,
+  AvatarGroupVariant,
+  type AvatarGroupPropsShared,
+} from './types/AvatarGroup';
+
+// SensitiveText types (ADR-0003 + ADR-0004)
+export {
+  SensitiveTextLength,
+  type CustomLength,
+  type SensitiveTextPropsShared,
+} from './types/SensitiveText';
+
+// SegmentButton types (ADR-0003 + ADR-0004)
+export {
+  SegmentButtonVariant,
+  type SegmentButtonPropsShared,
+} from './types/SegmentButton';
+
+// SegmentGroup types (ADR-0003 + ADR-0004)
+export { type SegmentGroupPropsShared } from './types/SegmentGroup';
+
+// SegmentGroup context (ADR-0003 + ADR-0004)
+export {
+  SegmentGroupContext,
+  type SegmentGroupContextValue,
+} from './contexts/SegmentGroup';
+
+// SelectButton types (ADR-0003 + ADR-0004)
+export {
+  SelectButtonEndArrow,
+  SelectButtonVariant,
+  type SelectButtonPropsShared,
+} from './types/SelectButton';
