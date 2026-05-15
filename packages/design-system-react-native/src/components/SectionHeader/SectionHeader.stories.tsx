@@ -1,9 +1,9 @@
-import { IconName } from '@metamask/design-system-shared';
+import { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import { Box } from '../Box';
-import { Icon, IconSize, IconColor } from '../Icon';
+import { Icon } from '../Icon';
 
 import { SectionHeader } from './SectionHeader';
 import type { SectionHeaderProps } from './SectionHeader.types';
