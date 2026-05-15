@@ -5,9 +5,9 @@ SectionDivider is a horizontal rule built on the root [Box](../Box/Box.tsx). By 
 Use it between blocks of content where you want consistent section separation without hand-picking border and margin tokens each time.
 
 ```tsx
-import { BoxFlexDirection } from '@metamask/design-system-shared';
 import {
   Box,
+  BoxFlexDirection,
   SectionDivider,
   Text,
   TextVariant,
