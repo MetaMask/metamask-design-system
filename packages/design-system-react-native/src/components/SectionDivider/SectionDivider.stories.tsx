@@ -1,9 +1,9 @@
-import { BoxFlexDirection } from '@metamask/design-system-shared';
+import { BoxFlexDirection, TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import { Box } from '../Box';
-import { Text, TextVariant } from '../Text';
+import { Text } from '../Text';
 
 import { SectionDivider } from './SectionDivider';
 import type { SectionDividerProps } from './SectionDivider.types';
