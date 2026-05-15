@@ -222,3 +222,6 @@ export {
   SelectButtonVariant,
   type SelectButtonPropsShared,
 } from './types/SelectButton';
+
+// SectionHeader types (ADR-0004)
+export { type SectionHeaderPropsShared } from './types/SectionHeader';
