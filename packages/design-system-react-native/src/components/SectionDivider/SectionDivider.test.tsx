@@ -54,6 +54,16 @@ describe('SectionDivider', () => {
     });
   });
 
+  describe('when borderWidth is greater than 1', () => {
+    it('maps the width to a border-t-* class', () => {
+      const { getByTestId } = render(
+        <SectionDivider testID={ROOT_TEST_ID} borderWidth={2} />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-t-2`);
+    });
+  });
+
   describe('when borderColor is overridden', () => {
     it('applies the given border color token', () => {
       const { getByTestId } = render(

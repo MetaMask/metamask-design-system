@@ -14,8 +14,14 @@ export const SectionDivider = forwardRef<View, SectionDividerProps>(
   ) => {
     const tw = useTailwind();
     const w = borderWidth ?? 1;
-    const borderTopClass =
-      w === 0 ? 'border-t-0' : w === 1 ? 'border-t' : `border-t-${w}`;
+    let borderTopClass: string;
+    if (w === 0) {
+      borderTopClass = 'border-t-0';
+    } else if (w === 1) {
+      borderTopClass = 'border-t';
+    } else {
+      borderTopClass = `border-t-${w}`;
+    }
 
     return (
       <Box
