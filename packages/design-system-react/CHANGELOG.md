@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.23.0]
+
 ### Uncategorized
 
 - feat: `PopoverHeader` migration (extension) ([#1158](https://github.com/MetaMask/metamask-design-system/pull/1158))
@@ -314,7 +316,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.22.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.23.0...HEAD
+[0.23.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.22.0...@metamask/design-system-react@0.23.0
 [0.22.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.21.0...@metamask/design-system-react@0.22.0
 [0.21.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.20.0...@metamask/design-system-react@0.21.0
 [0.20.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.19.0...@metamask/design-system-react@0.20.0
