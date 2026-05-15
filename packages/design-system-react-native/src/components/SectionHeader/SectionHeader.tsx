@@ -20,8 +20,10 @@ import type { SectionHeaderProps } from './SectionHeader.types';
  * @param props.titleAccessory - Optional node to the right of `title` in the inner row
  * @param props.titleProps - Optional props merged into inner row `Text` when `title` is a string
  * @param props.titleWrapperProps - Optional props spread onto the inner `BoxRow`
+ * @param props.startAccessory - Optional custom node before the title row on the outer row; used when no start icon is resolved
  * @param props.startIconName - Optional start icon; takes precedence over `startAccessory` when resolved
  * @param props.startIconProps - Props merged into the start `Icon` (defaults include medium size and default icon color)
+ * @param props.endAccessory - Optional custom node after the title row on the outer row; used when no end icon is resolved
  * @param props.endIconName - Optional end icon; takes precedence over `endAccessory` when resolved
  * @param props.endIconProps - Props merged into the end `Icon`
  * @param props.twClassName - Optional Tailwind classes on the outer row
