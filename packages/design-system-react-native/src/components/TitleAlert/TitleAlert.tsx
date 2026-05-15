@@ -6,7 +6,6 @@ import {
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
-
 import React from 'react';
 
 import { Box } from '../Box';
