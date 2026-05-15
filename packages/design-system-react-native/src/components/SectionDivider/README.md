@@ -1,8 +1,25 @@
 # SectionDivider
 
-SectionDivider is a horizontal rule built on the root [Box](../Box/Box.tsx). By default it stretches to the available width (`alignSelf: 'stretch'`), uses a **1px** muted border, and **20px** vertical margin (`marginVertical` scale `5`). Pass any other [Box](../Box/Box.types.ts) or `View` props to customize layout, spacing, or accessibility.
+SectionDivider is a horizontal rule built on the root [Box](../Box/Box.tsx). It stretches on the cross axis by default, uses a 1px muted **top-only** border (`border-t` and `border-muted`) so the line reads as a single hairline on a zero-height view, and applies vertical margin from the design scale.
 
-Use it between blocks of content where you want consistent section separation without hand-picking border and margin tokens each time.
+```tsx
+import { SectionDivider } from '@metamask/design-system-react-native';
+
+<SectionDivider />;
+```
+
+## Props
+
+`SectionDividerProps` matches [Box](../Box/Box.types.ts) and React Native `View` props. Override defaults with any `Box` prop (for example `marginVertical={0}` or `borderWidth={0}`) or with `style` / `twClassName`.
+
+### Defaults
+
+| Concern         | Default                                                                                |
+| --------------- | -------------------------------------------------------------------------------------- |
+| Width           | `self-stretch` via `twClassName` (full width in typical column layouts)                |
+| Border width    | `borderWidth={1}` → `border-t` (`0`–`8` map to `border-t-0`, `border-t`, `border-t-*`) |
+| Border color    | `BoxBorderColor.BorderMuted` → `border-muted`                                          |
+| Vertical margin | `marginVertical={5}` → `my-5` (20px)                                                   |
 
 ```tsx
 import {
@@ -13,47 +30,58 @@ import {
   TextVariant,
 } from '@metamask/design-system-react-native';
 
-<Box flexDirection={BoxFlexDirection.Column} gap={2}>
-  <Text variant={TextVariant.BodyMd}>Section A</Text>
-  <SectionDivider />
-  <Text variant={TextVariant.BodyMd}>Section B</Text>
-</Box>;
+export const SectionsExample = () => (
+  <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+    <Text variant={TextVariant.BodyMd}>Section A</Text>
+    <SectionDivider />
+    <Text variant={TextVariant.BodyMd}>Section B</Text>
+  </Box>
+);
 ```
-
-## Props
-
-`SectionDividerProps` matches [Box](../Box/Box.types.ts) / `View` props.
-
-### Defaults
-
-| Concern         | Default token / prop                                      |
-| --------------- | --------------------------------------------------------- |
-| Width           | `alignSelf: 'stretch'` (fills cross-axis in flex layouts) |
-| Border width    | `borderWidth={1}` → `border` (1px)                        |
-| Border color    | `BoxBorderColor.BorderMuted` → `border-muted`             |
-| Vertical margin | `marginVertical={5}` → `my-5` (20px)                      |
-
-Override any of these by passing the corresponding `Box` prop or a later value in `style` (for example `marginVertical={0}` for no vertical margin, or `style={{ alignSelf: 'center' }}` to opt out of full width).
 
 ### `twClassName`
 
-Optional Tailwind classes merged onto the root `Box`.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
 ```tsx
+import { SectionDivider } from '@metamask/design-system-react-native';
+
+// Add additional styles
 <SectionDivider twClassName="opacity-50" />
+
+// Override default styles
+<SectionDivider twClassName="self-center" />
 ```
 
 ### `style`
 
-Standard React Native `View` `style` prop; merged after the default full-width stretch so you can override alignment or dimensions.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
 | `StyleProp<ViewStyle>` | No       | `undefined` |
+
+```tsx
+import { SectionDivider } from '@metamask/design-system-react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+
+export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
+  const tw = useTailwind();
+
+  return (
+    <SectionDivider
+      style={tw.style('self-stretch', isActive && 'opacity-100')}
+    />
+  );
+};
+```
 
 ## References
 

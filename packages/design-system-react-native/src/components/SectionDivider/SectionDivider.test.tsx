@@ -21,7 +21,7 @@ describe('SectionDivider', () => {
       const { getByTestId } = render(<SectionDivider testID={ROOT_TEST_ID} />);
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw`my-5 border border-muted`,
+        tw`my-5 border-t border-muted`,
       );
     });
 
@@ -50,7 +50,7 @@ describe('SectionDivider', () => {
         <SectionDivider testID={ROOT_TEST_ID} borderWidth={0} />,
       );
 
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-0`);
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-t-0`);
     });
   });
 
