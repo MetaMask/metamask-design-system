@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgTelegram = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="m9.78 18.65.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42" /></svg>;
+const SvgTelegram = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M20.295 3.813s1.85-.721 1.696 1.03c-.052.722-.514 3.247-.874 5.978l-1.233 8.09s-.103 1.186-1.028 1.392-2.313-.721-2.57-.928c-.205-.154-3.854-2.473-5.14-3.607-.359-.309-.77-.927.052-1.649l5.397-5.153c.616-.618 1.233-2.061-1.337-.309l-7.195 4.896s-.822.515-2.364.051l-3.34-1.03s-1.234-.774.873-1.547c5.14-2.422 11.461-4.895 17.063-7.214" /></svg>;
 const ForwardRef = forwardRef(SvgTelegram);
 export default ForwardRef;
