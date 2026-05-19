@@ -1,5 +1,6 @@
 import {
   SelectButtonEndArrow,
+  SelectButtonSize,
   SelectButtonVariant,
   TextColor,
   TextVariant,
@@ -20,6 +21,12 @@ const meta: Meta<SelectButtonProps> = {
   title: 'Components/SelectButton',
   component: SelectButton,
   argTypes: {
+    size: {
+      control: 'select',
+      options: Object.keys(SelectButtonSize),
+      mapping: SelectButtonSize,
+      description: 'Height size of the button.',
+    },
     variant: {
       control: 'select',
       options: Object.values(SelectButtonVariant),
@@ -195,6 +202,26 @@ export const Variant: Story = {
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Tertiary (alternative text)"
       />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const Size: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper style={{ gap: 16 }}>
+      {(
+        Object.entries(SelectButtonSize) as [
+          keyof typeof SelectButtonSize,
+          (typeof SelectButtonSize)[keyof typeof SelectButtonSize],
+        ][]
+      ).map(([key, value]) => (
+        <SelectButton
+          key={key}
+          size={value}
+          onPress={noopPress}
+          placeholder={`Size: ${key}`}
+        />
+      ))}
     </SelectButtonStoryWrapper>
   ),
 };
