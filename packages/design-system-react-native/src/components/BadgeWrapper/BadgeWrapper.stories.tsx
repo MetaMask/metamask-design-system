@@ -5,8 +5,8 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
-import { AvatarNetwork } from '../AvatarNetwork';
+import { AccountAvatar, AccountAvatarSize } from '../AccountAvatar';
+import { AvatarNetwork } from '../NetworkAvatar';
 import { BadgeCount } from '../BadgeCount';
 import { BadgeIcon } from '../BadgeIcon';
 import { BadgeNetwork } from '../BadgeNetwork';
@@ -59,9 +59,9 @@ export const Default: Story = {
           />
         }
       >
-        <AvatarAccount
+        <AccountAvatar
           address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-          size={AvatarAccountSize.Md}
+          size={AccountAvatarSize.Md}
         />
       </BadgeWrapper>
     </View>
@@ -89,7 +89,7 @@ export const Position: Story = {
               />
             }
           >
-            <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+            <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
           </BadgeWrapper>
           {/* Position example with rectangular anchor shape */}
           <BadgeWrapper
@@ -136,7 +136,7 @@ export const PositionAnchorShape: Story = {
             />
           }
         >
-          <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+          <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
         </BadgeWrapper>
         {/* PositionAnchorShape example with rectangular anchor shape */}
         <BadgeWrapper
@@ -176,7 +176,7 @@ export const PositionXOffset: Story = {
           />
         }
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
       {/* With Offset */}
       <BadgeWrapper
@@ -190,7 +190,7 @@ export const PositionXOffset: Story = {
         }
         positionXOffset={5}
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
     </View>
   ),
@@ -210,7 +210,7 @@ export const PositionYOffset: Story = {
           />
         }
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
       {/* With offset */}
       <BadgeWrapper
@@ -224,7 +224,7 @@ export const PositionYOffset: Story = {
         }
         positionYOffset={5}
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
     </View>
   ),
@@ -244,7 +244,7 @@ export const CustomPosition: Story = {
           />
         }
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
       {/* With CustomPosition */}
       <BadgeWrapper
@@ -261,7 +261,7 @@ export const CustomPosition: Story = {
           right: 10,
         }}
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
     </View>
   ),
@@ -275,14 +275,14 @@ export const Badge: Story = {
         position={BadgeWrapperPosition.TopRight}
         badge={<BadgeCount count={8} />}
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
       {/* BadgeIcon example */}
       <BadgeWrapper
         position={BadgeWrapperPosition.BottomRight}
         badge={<BadgeIcon iconName={IconName.Snaps} />}
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
       {/* BadgeNetwork example */}
       <BadgeWrapper
@@ -296,14 +296,14 @@ export const Badge: Story = {
           />
         }
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
       {/* BadgeStatus example */}
       <BadgeWrapper
         position={BadgeWrapperPosition.BottomRight}
         badge={<BadgeStatus status={BadgeStatusStatus.Active} />}
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
       <BadgeWrapper
         position={BadgeWrapperPosition.TopRight}
@@ -311,7 +311,7 @@ export const Badge: Story = {
           <BadgeStatus status={BadgeStatusStatus.Attention} hasBorder={false} />
         }
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <AccountAvatar address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       </BadgeWrapper>
     </View>
   ),

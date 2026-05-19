@@ -1,18 +1,32 @@
 export { ActionListItem } from './ActionListItem';
 export type { ActionListItemProps } from './ActionListItem';
 
+export { Avatar } from './Avatar';
+export type { AvatarProps } from './Avatar';
+
 export {
+  AccountAvatar,
   AvatarAccount,
-  AvatarAccountVariant,
-  AvatarAccountSize,
-} from './AvatarAccount';
-export type { AvatarAccountProps } from './AvatarAccount';
+  AccountAvatarVariant,
+  AccountAvatarSize,
+  AccountAvatarVariant as AvatarAccountVariant,
+  AccountAvatarSize as AvatarAccountSize,
+} from './AccountAvatar';
+export type { AccountAvatarProps, AvatarAccountProps } from './AccountAvatar';
 
 export { AvatarBase, AvatarBaseSize, AvatarBaseShape } from './AvatarBase';
 export type { AvatarBaseProps } from './AvatarBase';
 
-export { AvatarFavicon, AvatarFaviconSize } from './AvatarFavicon';
-export type { AvatarFaviconProps } from './AvatarFavicon';
+export {
+  FaviconAvatar,
+  AvatarFavicon,
+  FaviconAvatarSize,
+  FaviconAvatarSize as AvatarFaviconSize,
+} from './FaviconAvatar';
+export type { FaviconAvatarProps, AvatarFaviconProps } from './FaviconAvatar';
+
+export { AvatarImageOrSvg, AvatarInitials } from './Avatar';
+export type { AvatarImageOrSvgProps, AvatarInitialsProps } from './Avatar';
 
 export {
   AvatarGroup,
@@ -21,14 +35,42 @@ export {
 } from './AvatarGroup';
 export type { AvatarGroupProps } from './AvatarGroup';
 
-export { AvatarIcon, AvatarIconSeverity, AvatarIconSize } from './AvatarIcon';
-export type { AvatarIconProps } from './AvatarIcon';
+export {
+  IconAvatar,
+  AvatarIcon,
+  AvatarIconSeverity,
+  AvatarIconSize,
+  AvatarIconPrimitive,
+} from './IconAvatar';
+export type {
+  IconAvatarProps,
+  AvatarIconProps,
+  AvatarIconPrimitiveProps,
+} from './IconAvatar';
 
-export { AvatarNetwork, AvatarNetworkSize } from './AvatarNetwork';
-export type { AvatarNetworkProps } from './AvatarNetwork';
+export {
+  NetworkAvatar,
+  AvatarNetwork,
+  AvatarNetworkSize,
+} from './NetworkAvatar';
+export type { NetworkAvatarProps, AvatarNetworkProps } from './NetworkAvatar';
 
-export { AvatarToken, AvatarTokenSize } from './AvatarToken';
-export type { AvatarTokenProps } from './AvatarToken';
+export {
+  TokenAvatar,
+  AvatarToken,
+  TokenAvatarSize,
+  TokenAvatarSize as AvatarTokenSize,
+} from './TokenAvatar';
+export type { TokenAvatarProps, AvatarTokenProps } from './TokenAvatar';
+
+export { PredictionsAvatar, PredictionsAvatarSize } from './PredictionsAvatar';
+export type { PredictionsAvatarProps } from './PredictionsAvatar';
+
+export { NFTAvatar, NFTAvatarSize } from './NFTAvatar';
+export type { NFTAvatarProps } from './NFTAvatar';
+
+export { SocialAvatar, SocialAvatarSize } from './SocialAvatar';
+export type { SocialAvatarProps } from './SocialAvatar';
 
 export { BadgeCount, BadgeCountSize } from './BadgeCount';
 export type { BadgeCountProps } from './BadgeCount';

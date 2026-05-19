@@ -3,7 +3,9 @@ import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { Text, TextVariant } from '../Text';
+import { BadgeStatusStatus } from '@metamask/design-system-shared';
+
+import { Text } from '../Text';
 
 import { AvatarBase } from './AvatarBase';
 import {
@@ -16,7 +18,7 @@ import {
 import { AvatarBaseSize, AvatarBaseShape } from '.';
 
 describe('AvatarBase', () => {
-  it('renders children when no fallbackText is provided', () => {
+  it('renders children', () => {
     const { getByText } = render(
       <AvatarBase>
         <Text testID="child">Hello</Text>
@@ -25,33 +27,16 @@ describe('AvatarBase', () => {
     expect(getByText('Hello')).toBeDefined();
   });
 
-  it('renders fallbackText with correct Text props and twClassName', () => {
-    const { result } = renderHook(() => useTailwind());
-    const tw = result.current;
-    const fallback = 'XYZ';
-    const { getByTestId, getByText } = render(
+  it('wraps with BadgeWrapper when badge is provided', () => {
+    const { getByTestId } = render(
       <AvatarBase
-        fallbackText={fallback}
-        fallbackTextProps={{
-          testID: 'fb',
-          twClassName: 'mt-1',
-        }}
+        testID="avatar"
+        badge={{ type: 'status', status: BadgeStatusStatus.Active }}
       >
-        <Text>Should not render</Text>
+        <Text>Hello</Text>
       </AvatarBase>,
     );
-    const fallbackText = getByTestId('fb');
-    expect(fallbackText.props.children).toBe(fallback);
-    const expectedTextColor = tw`text-muted`.color;
-    // eslint-disable-next-line tailwindcss/no-custom-classname
-    const expectedFontSize = tw`text-${TextVariant.BodySm}`.fontSize;
-    const expectedMargin = tw`mt-1`.marginTop;
-    expect(fallbackText.props.style[0].color).toBe(expectedTextColor);
-    expect(fallbackText.props.style[0].fontSize).toBe(expectedFontSize);
-    expect(fallbackText.props.style[0].marginTop).toBe(expectedMargin);
-    expect(() => getByText('Should not render')).toThrow(
-      'Unable to find an element with text: Should not render',
-    );
+    expect(getByTestId('avatar')).toBeDefined();
   });
 
   describe('container style without border', () => {

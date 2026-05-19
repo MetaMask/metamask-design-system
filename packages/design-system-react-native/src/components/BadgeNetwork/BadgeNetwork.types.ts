@@ -1,6 +1,6 @@
 import type { BadgeNetworkPropsShared } from '@metamask/design-system-shared';
 
-import type { AvatarNetworkProps } from '../AvatarNetwork';
+import type { AvatarNetworkProps } from '../NetworkAvatar';
 
 /**
  * BadgeNetwork component props (React Native platform-specific)

@@ -3354,6 +3354,55 @@ Calling `toast(...)` or `toast.dismiss()` before `<Toaster />` has mounted throw
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react-native`.
 
+### Avatar system rework (React Native)
+
+Layered architecture:
+
+```text
+AvatarBase
+  → AvatarImageOrSvg | AvatarIcon | AvatarInitials  (primitives)
+  → Avatar  (union: imageOrSvg, icon, initials)
+  → TokenAvatar | NetworkAvatar | FaviconAvatar | AccountAvatar | IconAvatar
+  → PredictionsAvatar | NFTAvatar | SocialAvatar  (domain)
+```
+
+| Layer      | Components                                                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Primitives | `AvatarImageOrSvg`, `AvatarIcon`, `AvatarInitials`                                                                                          |
+| Union      | `Avatar` (`variant`: `imageOrSvg`, `icon`, `initials`)                                                                                      |
+| Domain     | `TokenAvatar`, `NetworkAvatar`, `FaviconAvatar`, `AccountAvatar`, `IconAvatar`, `PredictionsAvatar`, `NFTAvatar`, `SocialAvatar` (circular) |
+
+Deprecated export aliases (`AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, `AvatarAccount`, `AvatarIcon`) remain on the package root for migration; use `TokenAvatar`, `NetworkAvatar`, `FaviconAvatar`, `AccountAvatar`, and `IconAvatar` instead.
+
+#### Breaking changes
+
+- `AvatarBase` no longer accepts `fallbackText` / `fallbackTextProps`. Use `Avatar` with `variant="initials"` and `label`, or `AvatarInitials`.
+- Severity-based icons: use domain `IconAvatar` (or `AvatarIcon` alias). Primitive `AvatarIcon` requires explicit `backgroundColor` and `iconColor` (used internally by `IconAvatar`).
+- `AvatarAccountVariant.Maskicon` is deprecated; use `AvatarAccountVariant.Polyicon` (`'polyicon'`). `Maskicon` is renamed to `Polyicon` (`Polyicon` export; `Maskicon` remains a deprecated alias).
+
+#### Domain avatar badges
+
+Domain avatars accept semantic badge props instead of generic `AvatarBase` `badge` / `position` props. At most one badge renders per avatar.
+
+| Avatar                     | Badge props                     | Position                                   | Precedence when multiple are passed |
+| -------------------------- | ------------------------------- | ------------------------------------------ | ----------------------------------- |
+| `TokenAvatar`, `NFTAvatar` | `networkBadge?`, `iconBadge?`   | Both use bottom-right                      | `networkBadge` > `iconBadge`        |
+| `AccountAvatar`            | `networkBadge?`                 | Bottom-right                               | `networkBadge` only                 |
+| `FaviconAvatar`            | `networkBadge?`, `statusBadge?` | Network → bottom-right; status → top-right | `networkBadge` > `statusBadge`      |
+
+`networkBadge` accepts `{ src?, name?, fallbackText? }`. `iconBadge` accepts `{ iconName }` and always renders as `BadgeIcon`. `statusBadge` accepts `{ status }` and renders as `BadgeStatus`.
+
+Prefer these props over manually composing `BadgeWrapper` + `AvatarNetwork` around a token avatar.
+
+```tsx
+<TokenAvatar
+  src={usdcSrc}
+  name="USD Coin"
+  size={TokenAvatarSize.Lg}
+  networkBadge={{ src: ethSrc, name: 'Ethereum' }}
+/>
+```
+
 ## From version 0.12.0 to 0.13.0
 
 ### Typography: semantic bold is now semibold (600)

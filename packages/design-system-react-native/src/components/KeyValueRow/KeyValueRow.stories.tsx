@@ -5,9 +5,9 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
-import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
+import { AccountAvatar, AccountAvatarSize } from '../AccountAvatar';
+import { AvatarToken, AvatarTokenSize } from '../TokenAvatar';
+import { SAMPLE_AVATARTOKEN_URIS } from '../TokenAvatar/TokenAvatar.dev';
 import { Box } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
 import { TextVariant } from '../Text';
@@ -60,9 +60,9 @@ export const Variant: Story = {
           value="Account 1"
           variant={KeyValueRowVariant.Input}
           valueStartAccessory={
-            <AvatarAccount
+            <AccountAvatar
               address={SAMPLE_ADDRESS}
-              size={AvatarAccountSize.Xs}
+              size={AccountAvatarSize.Xs}
             />
           }
           valueEndAccessory={selectRowChevron}
@@ -193,7 +193,7 @@ export const SingleColumnStack: Story = {
       <KeyValueRow
         keyLabel="Account"
         value={
-          <AvatarAccount address={SAMPLE_ADDRESS} size={AvatarAccountSize.Xs} />
+          <AccountAvatar address={SAMPLE_ADDRESS} size={AccountAvatarSize.Xs} />
         }
       />
       <KeyValueRow

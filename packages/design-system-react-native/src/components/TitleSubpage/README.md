@@ -19,7 +19,7 @@ import {
 
 ### `titleAvatar`
 
-Leading visual for the identity row (required). Passed as the `startAccessory` of the identity `BoxRow` with no inner layout wrapper. Prefer `AvatarToken` at `AvatarTokenSize.Lg` for the standard 40×40 footprint; wrap in `BadgeWrapper` (or similar) when you need a network badge or other element that should sit outside the token bounds.
+Leading visual for the identity row (required). Passed as the `startAccessory` of the identity `BoxRow` with no inner layout wrapper. Prefer `AvatarToken` at `AvatarTokenSize.Lg` for the standard 40×40 footprint; use `networkBadge` on `TokenAvatar` when you need a network indicator (no manual `BadgeWrapper` required).
 
 | TYPE        | REQUIRED | DEFAULT |
 | ----------- | -------- | ------- |
@@ -41,13 +41,8 @@ import {
 
 ```tsx
 import {
-  AvatarNetwork,
-  AvatarNetworkSize,
   AvatarToken,
   AvatarTokenSize,
-  BadgeWrapper,
-  BadgeWrapperPosition,
-  BadgeWrapperPositionAnchorShape,
   TitleSubpage,
 } from '@metamask/design-system-react-native';
 
@@ -55,19 +50,12 @@ import {
 
 <TitleSubpage
   titleAvatar={
-    <BadgeWrapper
-      badge={
-        <AvatarNetwork
-          src={EthSvg}
-          size={AvatarNetworkSize.Xs}
-          name="Ethereum"
-        />
-      }
-      position={BadgeWrapperPosition.BottomRight}
-      positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
-    >
-      <AvatarToken src={UsdcSvg} size={AvatarTokenSize.Lg} name="USD Coin" />
-    </BadgeWrapper>
+    <AvatarToken
+      src={UsdcSvg}
+      size={AvatarTokenSize.Lg}
+      name="USD Coin"
+      networkBadge={{ src: EthSvg, name: 'Ethereum' }}
+    />
   }
   title="USD Coin"
 />;

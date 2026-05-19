@@ -7,7 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import UsdcSVG from '../../assets/token-icons/usdc.svg';
-import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
+import { AvatarToken, AvatarTokenSize } from '../TokenAvatar';
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 import { Icon, IconName, IconSize, IconColor } from '../Icon';
 import { Text } from '../Text';

@@ -5,7 +5,7 @@ import {
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import type { AvatarAccountProps } from '../AvatarAccount';
+import type { AccountAvatarProps } from '../AccountAvatar';
 
 import { AvatarGroup } from './AvatarGroup';
 import {
@@ -231,7 +231,7 @@ describe('AvatarGroup', () => {
       render(
         <AvatarGroup
           variant={invalidVariant}
-          avatarPropsArr={[{ testID: 'test' }] as AvatarAccountProps[]}
+          avatarPropsArr={[{ testID: 'test' }] as AccountAvatarProps[]}
           testID="avatar-group"
         />,
       ),

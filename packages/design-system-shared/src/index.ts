@@ -6,12 +6,26 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
+export { getAvatarInitials } from './utils/getAvatarInitials';
+
 // AvatarBase types (ADR-0003 + ADR-0004)
 export {
   AvatarBaseSize,
   AvatarBaseShape,
   type AvatarBasePropsShared,
 } from './types/AvatarBase';
+
+// Avatar union types (ADR-0004)
+export {
+  type AvatarBadge,
+  type AvatarCommonPropsShared,
+  type AvatarImageOrSvgPropsShared,
+  type AvatarIconVariantPropsShared,
+  type AvatarInitialsPropsShared,
+  type AvatarPropsShared,
+  type AvatarImageSrc,
+  type IconAvatarPropsShared,
+} from './types/Avatar';
 
 // AvatarIcon types (ADR-0003 + ADR-0004)
 export {
@@ -91,14 +105,30 @@ export {
 // Button types (ADR-0003 + ADR-0004)
 export { ButtonVariant, type ButtonPropsShared } from './types/Button';
 
-// AvatarNetwork types (ADR-0004)
-export { type AvatarNetworkPropsShared } from './types/AvatarNetwork';
-
-// AvatarToken types (ADR-0003 + ADR-0004)
+// Avatar badge types (ADR-0004)
 export {
+  type AvatarNetworkBadgeShared,
+  type AvatarIconBadgeShared,
+  type AvatarStatusBadgeShared,
+} from './types/Avatar';
+
+// NetworkAvatar types (ADR-0004)
+export {
+  type NetworkAvatarPropsShared,
+  type AvatarNetworkPropsShared,
+} from './types/NetworkAvatar';
+
+export { type PredictionsAvatarPropsShared } from './types/AvatarPredictions';
+export { type NFTAvatarPropsShared } from './types/NFTAvatar';
+export { type SocialAvatarPropsShared } from './types/AvatarSocial';
+
+// TokenAvatar types (ADR-0003 + ADR-0004)
+export {
+  TokenAvatarSize,
   AvatarTokenSize,
+  type TokenAvatarPropsShared,
   type AvatarTokenPropsShared,
-} from './types/AvatarToken';
+} from './types/TokenAvatar';
 
 // BadgeIcon types (ADR-0004)
 export { type BadgeIconPropsShared } from './types/BadgeIcon';
@@ -127,10 +157,13 @@ export {
 } from './types/ButtonIcon';
 
 export {
+  AccountAvatarSize,
+  AccountAvatarVariant,
   AvatarAccountSize,
   AvatarAccountVariant,
+  type AccountAvatarPropsShared,
   type AvatarAccountPropsShared,
-} from './types/AvatarAccount';
+} from './types/AccountAvatar';
 
 // Text types (ADR-0003 + ADR-0004)
 export {
@@ -151,11 +184,13 @@ export { type TextAreaPropsShared } from './types/TextArea';
 // Input types (ADR-0004)
 export { type InputPropsShared } from './types/Input';
 
-// AvatarFavicon types (ADR-0004)
+// FaviconAvatar types (ADR-0004)
 export {
+  FaviconAvatarSize,
   AvatarFaviconSize,
+  type FaviconAvatarPropsShared,
   type AvatarFaviconPropsShared,
-} from './types/AvatarFavicon';
+} from './types/FaviconAvatar';
 
 // Checkbox types (ADR-0004)
 export { type CheckboxPropsShared } from './types/Checkbox';

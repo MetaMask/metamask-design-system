@@ -2,21 +2,21 @@ import {
   AvatarBaseShape,
   AvatarGroupSize,
   AvatarGroupVariant,
-  TextColor,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
 
-import type { AvatarAccountProps } from '../AvatarAccount';
-import { AvatarAccount } from '../AvatarAccount';
+import type { AccountAvatarProps } from '../AccountAvatar';
+import { AccountAvatar } from '../AccountAvatar';
 import { AvatarBase } from '../AvatarBase';
-import type { AvatarFaviconProps } from '../AvatarFavicon';
-import { AvatarFavicon } from '../AvatarFavicon';
-import type { AvatarNetworkProps } from '../AvatarNetwork';
-import { AvatarNetwork } from '../AvatarNetwork';
-import type { AvatarTokenProps } from '../AvatarToken';
-import { AvatarToken } from '../AvatarToken';
+import { FontWeight, Text, TextColor, TextVariant } from '../Text';
+import type { FaviconAvatarProps } from '../FaviconAvatar';
+import { FaviconAvatar } from '../FaviconAvatar';
+import type { NetworkAvatarProps } from '../NetworkAvatar';
+import { NetworkAvatar } from '../NetworkAvatar';
+import type { TokenAvatarProps } from '../TokenAvatar';
+import { TokenAvatar } from '../TokenAvatar';
 
 import {
   MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT,
@@ -45,36 +45,36 @@ export const AvatarGroup = ({
         switch (variant) {
           case AvatarGroupVariant.Account:
             return (
-              <AvatarAccount
+              <AccountAvatar
                 key={`avatar-${index}`}
-                {...(avatarProps as AvatarAccountProps)}
+                {...(avatarProps as AccountAvatarProps)}
                 size={size}
                 hasBorder
               />
             );
           case AvatarGroupVariant.Favicon:
             return (
-              <AvatarFavicon
+              <FaviconAvatar
                 key={`avatar-${index}`}
-                {...(avatarProps as AvatarFaviconProps)}
+                {...(avatarProps as FaviconAvatarProps)}
                 size={size}
                 hasBorder
               />
             );
           case AvatarGroupVariant.Network:
             return (
-              <AvatarNetwork
+              <NetworkAvatar
                 key={`avatar-${index}`}
-                {...(avatarProps as AvatarNetworkProps)}
+                {...(avatarProps as NetworkAvatarProps)}
                 size={size}
                 hasBorder
               />
             );
           case AvatarGroupVariant.Token:
             return (
-              <AvatarToken
+              <TokenAvatar
                 key={`avatar-${index}`}
-                {...(avatarProps as AvatarTokenProps)}
+                {...(avatarProps as TokenAvatarProps)}
                 size={size}
                 hasBorder
               />
@@ -105,11 +105,6 @@ export const AvatarGroup = ({
         <AvatarBase
           twClassName="bg-icon-default"
           hasBorder
-          fallbackText={`+${overflowCounter}`}
-          fallbackTextProps={{
-            variant: MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT[size],
-            color: TextColor.PrimaryInverse,
-          }}
           size={size}
           shape={
             variant === AvatarGroupVariant.Network
@@ -117,7 +112,15 @@ export const AvatarGroup = ({
               : AvatarBaseShape.Circle
           }
           {...overflowTextProps}
-        />
+        >
+          <Text
+            variant={MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT[size]}
+            color={TextColor.PrimaryInverse}
+            fontWeight={FontWeight.Medium}
+          >
+            {`+${overflowCounter}`}
+          </Text>
+        </AvatarBase>
       )}
     </View>
   );

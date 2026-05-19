@@ -4,4 +4,5 @@ export {
 } from '@metamask/design-system-shared';
 
 export { AvatarBase } from './AvatarBase';
+export { renderAvatarBadge } from '../Avatar/avatarBadge';
 export type { AvatarBaseProps } from './AvatarBase.types';

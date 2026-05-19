@@ -53,13 +53,8 @@ export type AvatarBaseShape =
 export type AvatarBasePropsShared = {
   /**
    * Optional content to be rendered within the AvatarBase.
-   * If fallbackText is provided, fallbackText takes precedence.
    */
   children?: ReactNode;
-  /**
-   * Optional text to display when no children are provided.
-   */
-  fallbackText?: string;
   /**
    * Optional prop to control the size of the AvatarBase.
    *

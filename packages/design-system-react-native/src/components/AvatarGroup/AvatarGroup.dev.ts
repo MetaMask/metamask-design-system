@@ -1,45 +1,46 @@
-import type { AvatarAccountProps } from '../AvatarAccount';
-import { AvatarAccountVariant } from '../AvatarAccount';
-import { SAMPLE_AVATARACCOUNT_ADDRESSES } from '../AvatarAccount/AvatarAccount.constants';
-import type { AvatarFaviconProps } from '../AvatarFavicon';
-import { SAMPLE_AVATARFAVICON_URIS } from '../AvatarFavicon/AvatarFavicon.dev';
-import type { AvatarNetworkProps } from '../AvatarNetwork';
-import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
-import type { AvatarTokenProps } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
+import { AccountAvatarVariant } from '@metamask/design-system-shared';
+
+import type { AccountAvatarProps } from '../AccountAvatar';
+import { SAMPLE_AVATARACCOUNT_ADDRESSES } from '../AccountAvatar/AccountAvatar.constants';
+import type { FaviconAvatarProps } from '../FaviconAvatar';
+import { SAMPLE_AVATARFAVICON_URIS } from '../FaviconAvatar/FaviconAvatar.dev';
+import type { NetworkAvatarProps } from '../NetworkAvatar';
+import { SAMPLE_AVATARNETWORK_URIS } from '../NetworkAvatar/NetworkAvatar.dev';
+import type { TokenAvatarProps } from '../TokenAvatar';
+import { SAMPLE_AVATARTOKEN_URIS } from '../TokenAvatar/TokenAvatar.dev';
 
 // Sample consts
-export const SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR: AvatarAccountProps[] = [
+export const SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR: AccountAvatarProps[] = [
   {
-    variant: AvatarAccountVariant.Jazzicon,
+    variant: AccountAvatarVariant.Jazzicon,
     address: SAMPLE_AVATARACCOUNT_ADDRESSES[0],
   },
   {
-    variant: AvatarAccountVariant.Blockies,
+    variant: AccountAvatarVariant.Blockies,
     address: SAMPLE_AVATARACCOUNT_ADDRESSES[1],
   },
   {
-    variant: AvatarAccountVariant.Jazzicon,
+    variant: AccountAvatarVariant.Jazzicon,
     address: SAMPLE_AVATARACCOUNT_ADDRESSES[2],
   },
   {
-    variant: AvatarAccountVariant.Jazzicon,
+    variant: AccountAvatarVariant.Jazzicon,
     address: SAMPLE_AVATARACCOUNT_ADDRESSES[3],
   },
   {
-    variant: AvatarAccountVariant.Jazzicon,
+    variant: AccountAvatarVariant.Jazzicon,
     address: SAMPLE_AVATARACCOUNT_ADDRESSES[4],
   },
   {
-    variant: AvatarAccountVariant.Blockies,
+    variant: AccountAvatarVariant.Blockies,
     address: SAMPLE_AVATARACCOUNT_ADDRESSES[5],
   },
   {
-    variant: AvatarAccountVariant.Blockies,
+    variant: AccountAvatarVariant.Blockies,
     address: SAMPLE_AVATARACCOUNT_ADDRESSES[6],
   },
 ];
-export const SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR: AvatarFaviconProps[] = [
+export const SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR: FaviconAvatarProps[] = [
   {
     src: SAMPLE_AVATARFAVICON_URIS[0],
   },
@@ -63,7 +64,7 @@ export const SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR: AvatarFaviconProps[] = [
   },
 ];
 
-export const SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR: AvatarNetworkProps[] = [
+export const SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR: NetworkAvatarProps[] = [
   {
     src: SAMPLE_AVATARNETWORK_URIS[0],
   },
@@ -87,7 +88,7 @@ export const SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR: AvatarNetworkProps[] = [
   },
 ];
 
-export const SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR: AvatarTokenProps[] = [
+export const SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR: TokenAvatarProps[] = [
   {
     src: SAMPLE_AVATARTOKEN_URIS[0],
   },

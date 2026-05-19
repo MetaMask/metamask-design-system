@@ -1,7 +1,7 @@
 import React from 'react';
 import * as ReactTestRenderer from 'react-test-renderer';
 
-import { AvatarNetwork } from '../AvatarNetwork';
+import { AvatarNetwork } from '../NetworkAvatar';
 
 import { BadgeNetwork } from './BadgeNetwork';
 

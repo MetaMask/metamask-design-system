@@ -2,9 +2,9 @@ import { BoxFlexDirection } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
-import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
+import { AccountAvatar, AccountAvatarSize } from '../AccountAvatar';
+import { AvatarToken, AvatarTokenSize } from '../TokenAvatar';
+import { SAMPLE_AVATARTOKEN_URIS } from '../TokenAvatar/TokenAvatar.dev';
 import { Box } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
 import { TextVariant } from '../Text';
@@ -153,9 +153,9 @@ export const SingleColumnStack: Story = {
         <KeyValueColumn
           keyLabel="Account"
           value={
-            <AvatarAccount
+            <AccountAvatar
               address={SAMPLE_ADDRESS}
-              size={AvatarAccountSize.Xs}
+              size={AccountAvatarSize.Xs}
             />
           }
         />

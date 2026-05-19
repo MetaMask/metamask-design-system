@@ -4,11 +4,14 @@ import type {
 } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
-import type { AvatarAccountProps } from '../AvatarAccount';
+import type { AccountAvatarProps } from '../AccountAvatar';
 import type { AvatarBaseProps } from '../AvatarBase';
-import type { AvatarFaviconProps } from '../AvatarFavicon';
-import type { AvatarNetworkProps } from '../AvatarNetwork';
-import type { AvatarTokenProps } from '../AvatarToken';
+import type { FaviconAvatarProps } from '../FaviconAvatar';
+import type { NetworkAvatarProps } from '../NetworkAvatar';
+import type { TokenAvatarProps } from '../TokenAvatar';
+
+/** @deprecated Use AccountAvatarProps */
+export type AvatarAccountProps = AccountAvatarProps;
 
 type BaseAvatarGroupProps = Omit<AvatarGroupPropsShared, 'variant'> & {
   /**
@@ -32,7 +35,7 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
          */
-        avatarPropsArr: AvatarAccountProps[];
+        avatarPropsArr: AccountAvatarProps[];
       }
     | {
         variant: typeof AvatarGroupVariant.Favicon;
@@ -40,7 +43,7 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
          */
-        avatarPropsArr: AvatarFaviconProps[];
+        avatarPropsArr: FaviconAvatarProps[];
       }
     | {
         variant: typeof AvatarGroupVariant.Network;
@@ -48,7 +51,7 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
          */
-        avatarPropsArr: AvatarNetworkProps[];
+        avatarPropsArr: NetworkAvatarProps[];
       }
     | {
         variant: typeof AvatarGroupVariant.Token;
@@ -56,6 +59,6 @@ export type AvatarGroupProps = BaseAvatarGroupProps &
          * A list of Avatars to be horizontally stacked.
          * Note: AvatarGroupProps's size prop will overwrite each individual avatarProp's size.
          */
-        avatarPropsArr: AvatarTokenProps[];
+        avatarPropsArr: TokenAvatarProps[];
       }
   );
