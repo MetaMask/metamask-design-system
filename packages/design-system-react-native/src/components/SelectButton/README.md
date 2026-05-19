@@ -300,12 +300,12 @@ Controls the height of the button. Use `SelectButtonSize` values to keep the typ
 Available values:
 
 - `SelectButtonSize.Sm` — 32px height, `rounded-lg` corners.
-- `SelectButtonSize.Md` — 40px height, `rounded-xl` corners (default).
+- `SelectButtonSize.Md` — 40px height, `rounded-xl` corners.
 - `SelectButtonSize.Lg` — 48px height, `rounded-xl` corners.
 
 | TYPE               | REQUIRED | DEFAULT               |
 | ------------------ | -------- | --------------------- |
-| `SelectButtonSize` | No       | `SelectButtonSize.Md` |
+| `SelectButtonSize` | No       | `SelectButtonSize.Sm` |
 
 ```tsx
 import {

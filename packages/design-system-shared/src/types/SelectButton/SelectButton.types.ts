@@ -48,7 +48,7 @@ export type SelectButtonPropsShared = {
   /**
    * Height size of the button. Maps 1:1 to ButtonBaseSize values.
    *
-   * @default Md
+   * @default Sm
    */
   size?: SelectButtonSize;
   /**

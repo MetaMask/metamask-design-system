@@ -24,7 +24,7 @@ export const SelectButton = ({
   endArrowDirectionIconProps,
   variant = SelectButtonVariant.Primary,
   isLoading = false,
-  size = SelectButtonSize.Md,
+  size = SelectButtonSize.Sm,
   twClassName = '',
   style,
   ...buttonBaseRest
