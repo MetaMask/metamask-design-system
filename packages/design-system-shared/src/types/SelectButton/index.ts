@@ -1,4 +1,5 @@
 export {
+  SelectButtonSize,
   SelectButtonEndArrow,
   SelectButtonVariant,
   type SelectButtonPropsShared,

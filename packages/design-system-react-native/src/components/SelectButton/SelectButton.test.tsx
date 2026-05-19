@@ -308,7 +308,7 @@ describe('SelectButton', () => {
       );
 
       const root = getByTestId(ROOT_TEST_ID);
-      expect(root).toHaveStyle(tw`rounded-lg`);
+      expect(root).toHaveStyle(tw`rounded-xl`);
       expect(root).toHaveStyle(tw`bg-muted`);
     });
 

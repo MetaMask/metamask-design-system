@@ -218,6 +218,7 @@ export {
 
 // SelectButton types (ADR-0003 + ADR-0004)
 export {
+  SelectButtonSize,
   SelectButtonEndArrow,
   SelectButtonVariant,
   type SelectButtonPropsShared,

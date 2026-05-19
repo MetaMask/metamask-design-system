@@ -1,6 +1,20 @@
 import type { ReactNode } from 'react';
 
 /**
+ * SelectButton size options (ADR-0003).
+ * Values match ButtonBaseSize — Sm (32px), Md (40px), Lg (48px).
+ *
+ * @default Md
+ */
+export const SelectButtonSize = {
+  Sm: 'sm',
+  Md: 'md',
+  Lg: 'lg',
+} as const;
+export type SelectButtonSize =
+  (typeof SelectButtonSize)[keyof typeof SelectButtonSize];
+
+/**
  * SelectButton — trailing arrow direction (maps to platform arrow icons).
  * Convert from enum to const object (ADR-0003).
  */
@@ -30,9 +44,15 @@ export type SelectButtonVariant =
  */
 export type SelectButtonPropsShared = {
   /**
-   * Label shown when `value` is `undefined` or `null`. Only those two are treated as “no selection”; other falsy values (for example `""`) still render as `value`.
+   * Label shown when `value` is `undefined` or `null`. Only those two are treated as “no selection”; other falsy values (for example `””`) still render as `value`.
    */
   placeholder: string;
+  /**
+   * Height size of the button. Maps 1:1 to ButtonBaseSize values.
+   *
+   * @default Md
+   */
+  size?: SelectButtonSize;
   /**
    * Selected label text. When `undefined` or `null`, `placeholder` is rendered instead.
    */
