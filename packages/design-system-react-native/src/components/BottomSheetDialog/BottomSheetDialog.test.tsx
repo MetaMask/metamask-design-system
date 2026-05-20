@@ -20,11 +20,7 @@ type GestureHandlers = Record<string, GestureCallback>;
 const gestureCallbacksRef: { current: GestureHandlers } = { current: {} };
 
 jest.mock('react-native-gesture-handler', () => ({
-  GestureDetector: ({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) => {
+  GestureDetector: ({ children }: { children: React.ReactNode }) => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { View } = require('react-native');
     return <View>{children}</View>;
