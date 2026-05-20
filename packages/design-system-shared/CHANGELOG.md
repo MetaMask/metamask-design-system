@@ -9,11 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.19.0]
 
-### Uncategorized
+### Added
 
-- chore: Update Telegram icon to official logo design ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
-- feat: [DSRN] Added TitleAlert ([#1131](https://github.com/MetaMask/metamask-design-system/pull/1131))
-- feat: [DSRN] Added SectionHeader ([#1175](https://github.com/MetaMask/metamask-design-system/pull/1175))
+- Exported `TitleAlertPropsShared` for cross-platform alert title layouts ([#1131](https://github.com/MetaMask/metamask-design-system/pull/1131))
+- Exported `SectionHeaderPropsShared` for cross-platform section heading layouts ([#1175](https://github.com/MetaMask/metamask-design-system/pull/1175))
+
+### Changed
+
+- Updated the shared `Telegram` icon asset to match the official Telegram logo so React and React Native stay aligned ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
 
 ## [0.18.0]
 

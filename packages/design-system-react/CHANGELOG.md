@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.23.1]
 
-### Uncategorized
+### Changed
 
-- chore: Update Telegram icon to official logo design ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
+- Updated the `Telegram` icon asset to match the official Telegram logo ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
 
 ## [0.23.0]
 
