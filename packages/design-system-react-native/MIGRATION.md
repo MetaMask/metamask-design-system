@@ -70,9 +70,7 @@ This prop was a compatibility shim from the old `react-native-gesture-handler` v
 **After (0.x.0):**
 
 ```tsx
-<BottomSheet goBack={goBack}>
-  {children}
-</BottomSheet>
+<BottomSheet goBack={goBack}>{children}</BottomSheet>
 ```
 
 If you were relying on `simultaneousHandlers` for nested scroll behaviour, this was not functioning correctly in the previous version. First-class support for simultaneous gesture handling will be addressed in a follow-up.

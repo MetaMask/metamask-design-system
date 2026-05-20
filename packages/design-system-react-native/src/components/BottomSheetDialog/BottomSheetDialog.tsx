@@ -42,7 +42,6 @@ import type {
   BottomSheetDialogProps,
 } from './BottomSheetDialog.types';
 
-
 export const BottomSheetDialog = forwardRef<
   BottomSheetDialogRef,
   BottomSheetDialogProps

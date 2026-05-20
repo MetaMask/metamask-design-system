@@ -37,11 +37,7 @@ jest.mock('react-native-gesture-handler', () => ({
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { View } = require('react-native');
     capturedGestureRef.current = gesture;
-    return (
-      <View>
-        {children}
-      </View>
-    );
+    return <View>{children}</View>;
   },
   Gesture: {
     Pan: () => {

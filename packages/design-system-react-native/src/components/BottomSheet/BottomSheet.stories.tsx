@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useRef, useState } from 'react';
-import { Platform, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { BottomSheetFooter } from '../BottomSheetFooter';
