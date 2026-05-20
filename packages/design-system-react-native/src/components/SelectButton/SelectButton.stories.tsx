@@ -1,14 +1,14 @@
 import {
   SelectButtonEndArrow,
+  SelectButtonSize,
   SelectButtonVariant,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
-import type { ViewProps } from 'react-native';
-import { View } from 'react-native';
 
+import { Box } from '../Box';
+import type { BoxProps } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
 
 import { SelectButton } from './SelectButton';
@@ -20,6 +20,12 @@ const meta: Meta<SelectButtonProps> = {
   title: 'Components/SelectButton',
   component: SelectButton,
   argTypes: {
+    size: {
+      control: 'select',
+      options: Object.keys(SelectButtonSize),
+      mapping: SelectButtonSize,
+      description: 'Height size of the button.',
+    },
     variant: {
       control: 'select',
       options: Object.values(SelectButtonVariant),
@@ -45,15 +51,14 @@ const meta: Meta<SelectButtonProps> = {
 
 export default meta;
 
-const SelectButtonStoryWrapper: React.FC<ViewProps> = ({
+const SelectButtonStoryWrapper: React.FC<BoxProps> = ({
   children,
   ...props
 }) => {
-  const tw = useTailwind();
   return (
-    <View {...props} style={[tw`p-4`, props.style]}>
+    <Box padding={4} {...props}>
       {children}
-    </View>
+    </Box>
   );
 };
 
@@ -77,7 +82,7 @@ export const Default: Story = {
 
 export const StartAccessory: Story = {
   render: () => (
-    <SelectButtonStoryWrapper style={{ gap: 16 }}>
+    <SelectButtonStoryWrapper gap={4}>
       <SelectButton
         onPress={noopPress}
         endArrowDirection={SelectButtonEndArrow.Down}
@@ -90,7 +95,7 @@ export const StartAccessory: Story = {
 
 export const EndArrowDirection: Story = {
   render: () => (
-    <SelectButtonStoryWrapper style={{ gap: 16 }}>
+    <SelectButtonStoryWrapper gap={4}>
       {(
         Object.entries(SelectButtonEndArrow) as [
           keyof typeof SelectButtonEndArrow,
@@ -127,7 +132,7 @@ export const TextProps: Story = {
 
 export const EndArrowDirectionIconProps: Story = {
   render: () => (
-    <SelectButtonStoryWrapper style={{ gap: 16 }}>
+    <SelectButtonStoryWrapper gap={4}>
       <SelectButton
         onPress={noopPress}
         endArrowDirection={SelectButtonEndArrow.Down}
@@ -146,7 +151,7 @@ export const EndArrowDirectionIconProps: Story = {
 
 export const IsDisabled: Story = {
   render: () => (
-    <SelectButtonStoryWrapper style={{ gap: 16 }}>
+    <SelectButtonStoryWrapper gap={4}>
       <SelectButton
         onPress={noopPress}
         endArrowDirection={SelectButtonEndArrow.Down}
@@ -164,7 +169,7 @@ export const IsDisabled: Story = {
 
 export const EndAccessory: Story = {
   render: () => (
-    <SelectButtonStoryWrapper style={{ gap: 16 }}>
+    <SelectButtonStoryWrapper gap={4}>
       <SelectButton
         onPress={noopPress}
         placeholder="Custom trailing content"
@@ -176,7 +181,7 @@ export const EndAccessory: Story = {
 
 export const Variant: Story = {
   render: () => (
-    <SelectButtonStoryWrapper style={{ gap: 16 }}>
+    <SelectButtonStoryWrapper gap={4}>
       <SelectButton
         onPress={noopPress}
         variant={SelectButtonVariant.Primary}
@@ -195,6 +200,26 @@ export const Variant: Story = {
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Tertiary (alternative text)"
       />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const Size: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      {(
+        Object.entries(SelectButtonSize) as [
+          keyof typeof SelectButtonSize,
+          (typeof SelectButtonSize)[keyof typeof SelectButtonSize],
+        ][]
+      ).map(([key, value]) => (
+        <SelectButton
+          key={key}
+          size={value}
+          onPress={noopPress}
+          placeholder={`Size: ${key}`}
+        />
+      ))}
     </SelectButtonStoryWrapper>
   ),
 };

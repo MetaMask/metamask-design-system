@@ -9,7 +9,7 @@ import type { IconProps } from '../Icon/Icon.types';
 export type SelectButtonProps = SelectButtonPropsShared &
   Omit<
     ButtonBaseProps,
-    'children' | 'endIconName' | 'endIconProps' | 'disabled'
+    'children' | 'endIconName' | 'endIconProps' | 'disabled' | 'size'
   > & {
     /**
      * Optional props passed to the trailing arrow `Icon` when a trailing arrow is shown (excluding `name`, which is derived from the resolved direction).
