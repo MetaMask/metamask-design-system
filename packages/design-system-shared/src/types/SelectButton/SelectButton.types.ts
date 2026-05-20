@@ -1,16 +1,12 @@
 import type { ReactNode } from 'react';
+import { ButtonBaseSize } from '../ButtonBase/ButtonBase.types';
 
 /**
  * SelectButton size options (ADR-0003).
- * Sm (32px) | Md (40px, default) | Lg (48px).
+ * Alias to ButtonBaseSize to keep values in sync.
  */
-export const SelectButtonSize = {
-  Sm: 'sm',
-  Md: 'md',
-  Lg: 'lg',
-} as const;
-export type SelectButtonSize =
-  (typeof SelectButtonSize)[keyof typeof SelectButtonSize];
+export const SelectButtonSize = ButtonBaseSize;
+export type SelectButtonSize = ButtonBaseSize;
 
 /**
  * SelectButton — trailing arrow direction (maps to platform arrow icons).
