@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.0]
+
+### Added
+
+- Exported `TitleAlertPropsShared` for cross-platform alert title layouts ([#1131](https://github.com/MetaMask/metamask-design-system/pull/1131))
+- Exported `SectionHeaderPropsShared` for cross-platform section heading layouts ([#1175](https://github.com/MetaMask/metamask-design-system/pull/1175))
+
+### Changed
+
+- Updated the shared `Telegram` icon asset to match the official Telegram logo so React and React Native stay aligned ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
+
 ## [0.18.0]
 
 ### Added
@@ -189,7 +200,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.18.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.19.0...HEAD
+[0.19.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.18.0...@metamask/design-system-shared@0.19.0
 [0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.17.0...@metamask/design-system-shared@0.18.0
 [0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.16.0...@metamask/design-system-shared@0.17.0
 [0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.15.0...@metamask/design-system-shared@0.16.0
