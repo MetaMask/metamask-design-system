@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import type { ReactElement } from 'react';
@@ -10,6 +9,8 @@ import type {
   PressableProps,
   PressableStateCallbackType,
 } from 'react-native';
+
+import { createRenderer } from '../../test-utils/createRenderer';
 
 import { Checkbox } from './Checkbox';
 
@@ -180,30 +181,22 @@ describe('Checkbox', () => {
 
   it('applies pressed container styles', () => {
     const fn = jest.fn();
-    const rtr = require('react-test-renderer');
-    let tree: ReturnType<typeof rtr.create>;
-    rtr.act(() => {
-      tree = rtr.create(
-        <Checkbox
-          checkboxContainerProps={{ testID: 'inner' }}
-          isSelected={false}
-          onChange={fn}
-        />,
-      );
-    });
+    const tree = createRenderer(
+      <Checkbox
+        checkboxContainerProps={{ testID: 'inner' }}
+        isSelected={false}
+        onChange={fn}
+      />,
+    );
     const pressable = tree.root.findByProps({
       accessibilityRole: 'checkbox',
     });
     const renderChildren = pressable.props.children as (p: {
       pressed: boolean;
     }) => ReactElement;
-    let renderedPressed: ReturnType<typeof rtr.create>;
-    rtr.act(() => {
-      renderedPressed = rtr.create(renderChildren({ pressed: true }));
-    });
-    const pressedContainer = renderedPressed.root.findByProps({
-      testID: 'inner',
-    });
+    const pressedContainer = createRenderer(
+      renderChildren({ pressed: true }),
+    ).root.findByProps({ testID: 'inner' });
     const styles = flattenStyles(pressedContainer.props.style);
     expect(styles).toStrictEqual(
       expect.arrayContaining([
