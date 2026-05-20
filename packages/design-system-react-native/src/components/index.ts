@@ -200,6 +200,7 @@ export type { SegmentGroupProps } from './SegmentGroup';
 export {
   SelectButton,
   SelectButtonEndArrow,
+  SelectButtonSize,
   SelectButtonVariant,
 } from './SelectButton';
 export type { SelectButtonProps } from './SelectButton';
