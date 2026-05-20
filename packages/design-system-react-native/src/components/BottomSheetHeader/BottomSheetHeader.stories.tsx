@@ -39,7 +39,7 @@ export const Default: Story = {
   },
 };
 
-export const WithTitle: Story = {
+export const Children: Story = {
   render: () => (
     <BottomSheetHeader>Centered bottom sheet title</BottomSheetHeader>
   ),
