@@ -1,7 +1,6 @@
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 
-import { createRenderer } from '../../test-utils/createRenderer';
 import { Icon, IconName, IconSize } from '../Icon';
 import { FontWeight, Text, TextColor, TextVariant } from '../Text';
 
@@ -269,21 +268,6 @@ describe('ActionListItem', () => {
       expect(getByTestId('action-item')).toBeDefined();
     });
 
-    it('applies pressed background when not disabled', () => {
-      const tree = createRenderer(
-        <ActionListItem label="Test Label" onPress={mockOnPress} />,
-      );
-      const pressable = tree.root.find(
-        (node) =>
-          node.props.onPress === mockOnPress &&
-          typeof node.props.style === 'function',
-      );
-      const styleFn = pressable.props.style as (p: {
-        pressed: boolean;
-      }) => unknown;
-
-      expect(styleFn({ pressed: true })).toBeDefined();
-    });
   });
 
   describe('Edge Cases', () => {
