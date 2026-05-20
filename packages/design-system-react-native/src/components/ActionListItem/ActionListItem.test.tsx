@@ -267,7 +267,6 @@ describe('ActionListItem', () => {
       );
       expect(getByTestId('action-item')).toBeDefined();
     });
-
   });
 
   describe('Edge Cases', () => {
