@@ -3236,7 +3236,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/auto-changelog@npm:^6.1.0, @metamask/auto-changelog@npm:^6.1.1":
+"@metamask/auto-changelog@npm:^6.1.1":
   version: 6.1.1
   resolution: "@metamask/auto-changelog@npm:6.1.1"
   dependencies:
