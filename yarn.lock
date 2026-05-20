@@ -3299,7 +3299,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
     "@figma/code-connect": "npm:^1.0.0"
-    "@metamask/auto-changelog": "npm:^6.1.0"
+    "@metamask/auto-changelog": "npm:^6.1.1"
     "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
@@ -3352,7 +3352,7 @@ __metadata:
   dependencies:
     "@figma/code-connect": "npm:^1.0.0"
     "@jest/globals": "npm:^29.7.0"
-    "@metamask/auto-changelog": "npm:^6.1.0"
+    "@metamask/auto-changelog": "npm:^6.1.1"
     "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/jazzicon": "npm:^2.0.0"
@@ -3390,7 +3390,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-shared@workspace:packages/design-system-shared"
   dependencies:
-    "@metamask/auto-changelog": "npm:^6.1.0"
+    "@metamask/auto-changelog": "npm:^6.1.1"
     "@metamask/utils": "npm:^11.11.0"
     "@svgr/core": "npm:^8.1.0"
     "@svgr/plugin-jsx": "npm:^8.1.0"
@@ -3415,7 +3415,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
-    "@metamask/auto-changelog": "npm:^6.1.0"
+    "@metamask/auto-changelog": "npm:^6.1.1"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
@@ -3438,7 +3438,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@metamask/auto-changelog": "npm:^6.1.0"
+    "@metamask/auto-changelog": "npm:^6.1.1"
     "@metamask/design-tokens": "workspace:^"
     "@testing-library/react-native": "npm:^13.3.3"
     "@ts-bridge/cli": "npm:^0.6.3"
@@ -3464,7 +3464,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-tokens@workspace:packages/design-tokens"
   dependencies:
-    "@metamask/auto-changelog": "npm:^6.1.0"
+    "@metamask/auto-changelog": "npm:^6.1.1"
     "@metamask/design-system-react": "workspace:^"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
