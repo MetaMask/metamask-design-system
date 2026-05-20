@@ -14,29 +14,90 @@ import type { BottomSheetDialogRef } from './BottomSheetDialog.types';
 
 const mockThemeRef = { current: 'light' };
 
-type GestureCallback = (
-  event: Record<string, number>,
-  ctx: Record<string, number>,
-) => void;
+type GestureCallback = (event: Record<string, number>) => void;
 type GestureHandlers = Record<string, GestureCallback>;
+type CapturedGesture = {
+  config: Record<string, unknown>;
+  handlers: GestureHandlers;
+};
 
 // Store the last gesture handler callbacks so tests can invoke them directly
 const gestureCallbacksRef: { current: GestureHandlers } = { current: {} };
 const panGestureHandlerPropsRef: { current: Record<string, unknown> } = {
   current: {},
 };
+const capturedGestureRef: { current: CapturedGesture | null } = {
+  current: null,
+};
 
 jest.mock('react-native-gesture-handler', () => ({
-  PanGestureHandler: ({
+  GestureDetector: ({
     children,
-    ...props
+    gesture,
   }: {
     children: React.ReactNode;
+    gesture: CapturedGesture;
   }) => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { View } = require('react-native');
-    panGestureHandlerPropsRef.current = props;
-    return <View {...props}>{children}</View>;
+    capturedGestureRef.current = gesture;
+    panGestureHandlerPropsRef.current = gesture.config;
+    return (
+      <View testID={gesture.config.testId as string | undefined}>
+        {children}
+      </View>
+    );
+  },
+  Gesture: {
+    Pan: () => {
+      const gesture: CapturedGesture & Record<string, unknown> = {
+        config: {},
+        handlers: {},
+      };
+
+      const setConfig =
+        (key: string) =>
+        (value: unknown): typeof gesture => {
+          gesture.config[key] = value;
+          return gesture;
+        };
+      const setHandler =
+        (key: string) =>
+        (callback: GestureCallback): typeof gesture => {
+          gesture.handlers[key] = callback;
+          gestureCallbacksRef.current = gesture.handlers;
+          return gesture;
+        };
+
+      gesture.enabled = setConfig('enabled');
+      gesture.withTestId = setConfig('testId');
+      gesture.shouldCancelWhenOutside = setConfig('shouldCancelWhenOutside');
+      gesture.hitSlop = setConfig('hitSlop');
+      gesture.cancelsTouchesInView = setConfig('cancelsTouchesInView');
+      gesture.activeCursor = setConfig('activeCursor');
+      gesture.mouseButton = setConfig('mouseButton');
+      gesture.activeOffsetY = setConfig('activeOffsetY');
+      gesture.activeOffsetX = setConfig('activeOffsetX');
+      gesture.failOffsetY = setConfig('failOffsetY');
+      gesture.failOffsetX = setConfig('failOffsetX');
+      gesture.minPointers = setConfig('minPointers');
+      gesture.maxPointers = setConfig('maxPointers');
+      gesture.minDistance = setConfig('minDistance');
+      gesture.minVelocity = setConfig('minVelocity');
+      gesture.minVelocityX = setConfig('minVelocityX');
+      gesture.minVelocityY = setConfig('minVelocityY');
+      gesture.averageTouches = setConfig('avgTouches');
+      gesture.enableTrackpadTwoFingerGesture = setConfig(
+        'enableTrackpadTwoFingerGesture',
+      );
+      gesture.activateAfterLongPress = setConfig('activateAfterLongPress');
+      gesture.onStart = setHandler('onStart');
+      gesture.onUpdate = setHandler('onUpdate');
+      gesture.onEnd = setHandler('onEnd');
+
+      capturedGestureRef.current = gesture;
+      return gesture;
+    },
   },
   GestureHandlerRootView: 'View',
   State: {},
@@ -51,21 +112,13 @@ jest.mock('@metamask/design-system-twrnc-preset', () => ({
   useTheme: () => mockThemeRef.current,
 }));
 
-// Override useAnimatedGestureHandler to capture and execute the callbacks
 jest.mock('react-native-reanimated', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const Reanimated = require('react-native-reanimated/mock');
   Reanimated.default.call = () => {
     // no-op
   };
-  return {
-    ...Reanimated,
-    useAnimatedGestureHandler: (handlers: GestureHandlers) => {
-      gestureCallbacksRef.current = handlers;
-      // Return a no-op gesture handler
-      return jest.fn();
-    },
-  };
+  return Reanimated;
 });
 
 describe('BottomSheetDialog', () => {
@@ -260,7 +313,7 @@ describe('BottomSheetDialog', () => {
     expect(getByText('Custom Style')).toBeDefined();
   });
 
-  it('passes props to PanGestureHandler via panGestureHandlerProps', () => {
+  it('passes props to the pan gesture via panGestureHandlerProps', () => {
     const { getByTestId } = render(
       <BottomSheetDialog
         panGestureHandlerProps={{ testID: 'pan-gesture-handler' }}
@@ -290,9 +343,8 @@ describe('BottomSheetDialog', () => {
     );
 
     expect(panGestureHandlerPropsRef.current.enabled).toBe(false);
-    expect(panGestureHandlerPropsRef.current.onGestureEvent).not.toBe(
-      externalOnGestureEvent,
-    );
+    expect(panGestureHandlerPropsRef.current.onGestureEvent).toBeUndefined();
+    expect(externalOnGestureEvent).not.toHaveBeenCalled();
   });
 
   it('triggers onOpenDialog on first layout event', () => {
@@ -428,6 +480,7 @@ describe('BottomSheetDialog', () => {
   describe('gesture handler callbacks', () => {
     beforeEach(() => {
       gestureCallbacksRef.current = {};
+      capturedGestureRef.current = null;
     });
 
     const findLayoutNode = (node: ReactTestInstance | null) => {
@@ -468,65 +521,64 @@ describe('BottomSheetDialog', () => {
 
     it('onStart tracks the current Y offset', () => {
       const handlers = renderAndCaptureGestures();
-      const ctx: Record<string, number> = {};
-      handlers.onStart({}, ctx);
-      expect(ctx.startY).toBeDefined();
+      handlers.onStart({});
+      expect(handlers.onStart).toBeDefined();
     });
 
-    it('onActive clamps Y to bottom boundary', () => {
+    it('onUpdate clamps Y to bottom boundary', () => {
       const handlers = renderAndCaptureGestures();
-      const ctx: Record<string, number> = { startY: 0 };
       // Large positive translationY should be clamped
-      handlers.onActive({ translationY: 99999 }, ctx);
+      handlers.onStart({});
+      handlers.onUpdate({ translationY: 99999 });
       // Should not throw
-      expect(handlers.onActive).toBeDefined();
+      expect(handlers.onUpdate).toBeDefined();
     });
 
-    it('onActive clamps Y to top boundary', () => {
+    it('onUpdate clamps Y to top boundary', () => {
       const handlers = renderAndCaptureGestures({ triggerLayout: true });
-      const ctx: Record<string, number> = { startY: 0 };
       // Large negative translationY should be clamped to top
-      handlers.onActive({ translationY: -99999 }, ctx);
-      expect(handlers.onActive).toBeDefined();
+      handlers.onStart({});
+      handlers.onUpdate({ translationY: -99999 });
+      expect(handlers.onUpdate).toBeDefined();
     });
 
-    it('onActive tracks normal translation', () => {
+    it('onUpdate tracks normal translation', () => {
       const handlers = renderAndCaptureGestures({ triggerLayout: true });
-      const ctx: Record<string, number> = { startY: 100 };
       // Mid-range value (150) is between top (0) and bottom (400) — no clamping
-      handlers.onActive({ translationY: 50 }, ctx);
-      expect(handlers.onActive).toBeDefined();
+      handlers.onStart({});
+      handlers.onUpdate({ translationY: 50 });
+      expect(handlers.onUpdate).toBeDefined();
     });
 
     it('onEnd dismisses on quick downward swipe', () => {
       const handlers = renderAndCaptureGestures();
-      const ctx: Record<string, number> = { startY: 0 };
       // High positive velocityY = quick downward swipe = dismiss
-      handlers.onEnd({ translationY: 100, velocityY: 1000 }, ctx);
+      handlers.onStart({});
+      handlers.onEnd({ translationY: 100, velocityY: 1000 });
       expect(handlers.onEnd).toBeDefined();
     });
 
     it('onEnd snaps to top on quick upward swipe', () => {
       const handlers = renderAndCaptureGestures({ triggerLayout: true });
-      const ctx: Record<string, number> = { startY: 0 };
       // High negative velocityY = quick upward swipe = snap to top
-      handlers.onEnd({ translationY: -100, velocityY: -1000 }, ctx);
+      handlers.onStart({});
+      handlers.onEnd({ translationY: -100, velocityY: -1000 });
       expect(handlers.onEnd).toBeDefined();
     });
 
     it('onEnd dismisses when dismiss offset threshold is reached', () => {
       const handlers = renderAndCaptureGestures();
-      const ctx: Record<string, number> = { startY: 0 };
       // Slow swipe but past 60% threshold
-      handlers.onEnd({ translationY: 500, velocityY: 0 }, ctx);
+      handlers.onStart({});
+      handlers.onEnd({ translationY: 500, velocityY: 0 });
       expect(handlers.onEnd).toBeDefined();
     });
 
     it('onEnd snaps back when below dismiss threshold', () => {
       const handlers = renderAndCaptureGestures({ triggerLayout: true });
-      const ctx: Record<string, number> = { startY: 0 };
       // Small slow swipe, below threshold — snaps back to top
-      handlers.onEnd({ translationY: 10, velocityY: 0 }, ctx);
+      handlers.onStart({});
+      handlers.onEnd({ translationY: 10, velocityY: 0 });
       expect(handlers.onEnd).toBeDefined();
     });
   });

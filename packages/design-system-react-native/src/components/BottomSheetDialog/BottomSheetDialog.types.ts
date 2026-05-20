@@ -44,7 +44,7 @@ export type BottomSheetDialogProps = {
    */
   onOpen?: (hasPendingAction?: boolean) => void;
   /**
-   * Optional props object passed directly to the child PanGestureHandler.
+   * Optional props object mapped onto the sheet's pan gesture configuration.
    */
   panGestureHandlerProps?: BottomSheetDialogPanGestureHandlerProps;
   /**

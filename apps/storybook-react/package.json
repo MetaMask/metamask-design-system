@@ -37,7 +37,7 @@
     "prop-types": "^15.8.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "storybook": "^10.3.1",
+    "storybook": "10.3.6",
     "tailwindcss": "^3.0.0",
     "typescript": "~5.2.2",
     "vite": "^6.3.6",

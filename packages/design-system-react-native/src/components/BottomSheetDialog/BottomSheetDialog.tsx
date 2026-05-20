@@ -19,13 +19,9 @@ import {
   Platform,
   KeyboardAvoidingView,
 } from 'react-native';
-import {
-  PanGestureHandler,
-  PanGestureHandlerGestureEvent,
-} from 'react-native-gesture-handler';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
-  useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -45,6 +41,81 @@ import type {
   BottomSheetDialogRef,
   BottomSheetDialogProps,
 } from './BottomSheetDialog.types';
+
+const applyPanGestureProps = (
+  gesture: ReturnType<(typeof Gesture)['Pan']>,
+  panGestureHandlerProps?: BottomSheetDialogProps['panGestureHandlerProps'],
+) => {
+  if (!panGestureHandlerProps) {
+    return gesture;
+  }
+
+  if (panGestureHandlerProps.testID) {
+    gesture.withTestId(panGestureHandlerProps.testID);
+  }
+  if (panGestureHandlerProps.shouldCancelWhenOutside !== undefined) {
+    gesture.shouldCancelWhenOutside(
+      panGestureHandlerProps.shouldCancelWhenOutside,
+    );
+  }
+  if (panGestureHandlerProps.hitSlop !== undefined) {
+    gesture.hitSlop(panGestureHandlerProps.hitSlop);
+  }
+  if (panGestureHandlerProps.cancelsTouchesInView !== undefined) {
+    gesture.cancelsTouchesInView(panGestureHandlerProps.cancelsTouchesInView);
+  }
+  if (panGestureHandlerProps.activeCursor !== undefined) {
+    gesture.activeCursor(panGestureHandlerProps.activeCursor);
+  }
+  if (panGestureHandlerProps.mouseButton !== undefined) {
+    gesture.mouseButton(panGestureHandlerProps.mouseButton);
+  }
+  if (panGestureHandlerProps.activeOffsetY !== undefined) {
+    gesture.activeOffsetY(panGestureHandlerProps.activeOffsetY);
+  }
+  if (panGestureHandlerProps.activeOffsetX !== undefined) {
+    gesture.activeOffsetX(panGestureHandlerProps.activeOffsetX);
+  }
+  if (panGestureHandlerProps.failOffsetY !== undefined) {
+    gesture.failOffsetY(panGestureHandlerProps.failOffsetY);
+  }
+  if (panGestureHandlerProps.failOffsetX !== undefined) {
+    gesture.failOffsetX(panGestureHandlerProps.failOffsetX);
+  }
+  if (panGestureHandlerProps.minPointers !== undefined) {
+    gesture.minPointers(panGestureHandlerProps.minPointers);
+  }
+  if (panGestureHandlerProps.maxPointers !== undefined) {
+    gesture.maxPointers(panGestureHandlerProps.maxPointers);
+  }
+  if (panGestureHandlerProps.minDist !== undefined) {
+    gesture.minDistance(panGestureHandlerProps.minDist);
+  }
+  if (panGestureHandlerProps.minVelocity !== undefined) {
+    gesture.minVelocity(panGestureHandlerProps.minVelocity);
+  }
+  if (panGestureHandlerProps.minVelocityX !== undefined) {
+    gesture.minVelocityX(panGestureHandlerProps.minVelocityX);
+  }
+  if (panGestureHandlerProps.minVelocityY !== undefined) {
+    gesture.minVelocityY(panGestureHandlerProps.minVelocityY);
+  }
+  if (panGestureHandlerProps.avgTouches !== undefined) {
+    gesture.averageTouches(panGestureHandlerProps.avgTouches);
+  }
+  if (panGestureHandlerProps.enableTrackpadTwoFingerGesture !== undefined) {
+    gesture.enableTrackpadTwoFingerGesture(
+      panGestureHandlerProps.enableTrackpadTwoFingerGesture,
+    );
+  }
+  if (panGestureHandlerProps.activateAfterLongPress !== undefined) {
+    gesture.activateAfterLongPress(
+      panGestureHandlerProps.activateAfterLongPress,
+    );
+  }
+
+  return gesture;
+};
 
 export const BottomSheetDialog = forwardRef<
   BottomSheetDialogRef,
@@ -82,6 +153,7 @@ export const BottomSheetDialog = forwardRef<
     const currentYOffset = useSharedValue(screenHeight);
     const topOfDialogYValue = useSharedValue(0);
     const bottomOfDialogYValue = useSharedValue(screenHeight);
+    const gestureStartYOffset = useSharedValue(0);
     const isMounted = useRef(false);
 
     const onOpenCB = useCallback(() => {
@@ -108,74 +180,83 @@ export const BottomSheetDialog = forwardRef<
       [onCloseCB],
     );
 
-    const gestureHandler = useAnimatedGestureHandler<
-      PanGestureHandlerGestureEvent,
-      { startY: number }
-    >({
-      onStart: (_, ctx) => {
-        // Starts tracking vertical position of gesture
-        ctx.startY = currentYOffset.value;
-      },
-      onActive: (event, ctx) => {
-        const { translationY } = event;
-        currentYOffset.value = ctx.startY + translationY;
-        // If gesture Y value goes above the bottom of Dialog Y value(bottom of dialog),
-        // which means the gesture is currently below the bottom of the dialog,
-        // sets it to bottom of Dialog Y value
-        if (currentYOffset.value >= bottomOfDialogYValue.value) {
-          currentYOffset.value = bottomOfDialogYValue.value;
-        }
-        // If gesture Y value goes below the top of Dialog Y value(top of dialog),
-        // which means the gesture is currently above the top of the dialog,
-        // sets it to top of Dialog Y value
-        if (currentYOffset.value <= topOfDialogYValue.value) {
-          currentYOffset.value = topOfDialogYValue.value;
-        }
-      },
-      onEnd: (event, ctx) => {
-        const { translationY, velocityY } = event;
-        // finalYOffset is used to animate the Y position of the Dialog after the gesture event
-        let finalYOffset: number;
-        // Measuring dismissing swipe action
-        const latestOffset = ctx.startY + translationY;
-        // Check if the swipe distance reach the dismiss offset threshold,
-        // which is currently 60% of sheet height
-        const hasReachedDismissOffset =
-          latestOffset >
-          bottomOfDialogYValue.value *
-            DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD;
-        // Check if the gesture's vertical speed has reached the threshold to determine a swipe action
-        const hasReachedSwipeThreshold =
-          Math.abs(velocityY) >
-          DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION;
-        const isQuickDismissing = velocityY > 0;
+    const gestureHandler = useMemo(() => {
+      const gesture = Gesture.Pan()
+        .enabled(isInteractable)
+        .onStart(() => {
+          // Starts tracking vertical position of gesture.
+          gestureStartYOffset.value = currentYOffset.value;
+        })
+        .onUpdate((event) => {
+          const { translationY } = event;
+          currentYOffset.value = gestureStartYOffset.value + translationY;
+          // If gesture Y value goes above the bottom of Dialog Y value(bottom of dialog),
+          // which means the gesture is currently below the bottom of the dialog,
+          // sets it to bottom of Dialog Y value
+          if (currentYOffset.value >= bottomOfDialogYValue.value) {
+            currentYOffset.value = bottomOfDialogYValue.value;
+          }
+          // If gesture Y value goes below the top of Dialog Y value(top of dialog),
+          // which means the gesture is currently above the top of the dialog,
+          // sets it to top of Dialog Y value
+          if (currentYOffset.value <= topOfDialogYValue.value) {
+            currentYOffset.value = topOfDialogYValue.value;
+          }
+        })
+        .onEnd((event) => {
+          const { translationY, velocityY } = event;
+          // finalYOffset is used to animate the Y position of the Dialog after the gesture event
+          let finalYOffset: number;
+          // Measuring dismissing swipe action
+          const latestOffset = gestureStartYOffset.value + translationY;
+          // Check if the swipe distance reach the dismiss offset threshold,
+          // which is currently 60% of sheet height
+          const hasReachedDismissOffset =
+            latestOffset >
+            bottomOfDialogYValue.value *
+              DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD;
+          // Check if the gesture's vertical speed has reached the threshold to determine a swipe action
+          const hasReachedSwipeThreshold =
+            Math.abs(velocityY) >
+            DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION;
+          const isQuickDismissing = velocityY > 0;
 
-        // If user is swiping
-        if (hasReachedSwipeThreshold) {
-          // Quick swipe takes priority
-          if (isQuickDismissing) {
+          // If user is swiping
+          if (hasReachedSwipeThreshold) {
+            // Quick swipe takes priority
+            if (isQuickDismissing) {
+              finalYOffset = bottomOfDialogYValue.value;
+            } else {
+              finalYOffset = topOfDialogYValue.value;
+            }
+          } else if (hasReachedDismissOffset) {
             finalYOffset = bottomOfDialogYValue.value;
           } else {
             finalYOffset = topOfDialogYValue.value;
           }
-        } else if (hasReachedDismissOffset) {
-          finalYOffset = bottomOfDialogYValue.value;
-        } else {
-          finalYOffset = topOfDialogYValue.value;
-        }
 
-        const isDismissed = finalYOffset === bottomOfDialogYValue.value;
+          const isDismissed = finalYOffset === bottomOfDialogYValue.value;
 
-        if (isDismissed) {
-          runOnJS(onCloseDialog)();
-        } else {
-          // Only animate dialog to a certain Y position instead
-          currentYOffset.value = withTiming(finalYOffset, {
-            duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
-          });
-        }
-      },
-    });
+          if (isDismissed) {
+            runOnJS(onCloseDialog)();
+          } else {
+            // Only animate dialog to a certain Y position instead
+            currentYOffset.value = withTiming(finalYOffset, {
+              duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
+            });
+          }
+        });
+
+      return applyPanGestureProps(gesture, panGestureHandlerProps);
+    }, [
+      isInteractable,
+      currentYOffset,
+      gestureStartYOffset,
+      bottomOfDialogYValue,
+      topOfDialogYValue,
+      onCloseDialog,
+      panGestureHandlerProps,
+    ]);
 
     // Animate in sheet on initial render.
     const onOpenDialog = (callback?: () => void) => {
@@ -280,11 +361,7 @@ export const BottomSheetDialog = forwardRef<
         enabled={keyboardAvoidingViewEnabled}
         {...props}
       >
-        <PanGestureHandler
-          {...panGestureHandlerProps}
-          enabled={isInteractable}
-          onGestureEvent={gestureHandler}
-        >
+        <GestureDetector gesture={gestureHandler}>
           <Animated.View
             onLayout={updateSheetHeight}
             style={combinedSheetStyle}
@@ -296,7 +373,7 @@ export const BottomSheetDialog = forwardRef<
             )}
             {children}
           </Animated.View>
-        </PanGestureHandler>
+        </GestureDetector>
       </KeyboardAvoidingView>
     );
   },
