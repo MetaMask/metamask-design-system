@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
-import { act, create } from 'react-test-renderer';
 
+import { createRenderer } from '../../test-utils/createRenderer';
 import { Icon, IconName, IconSize } from '../Icon';
 import { FontWeight, Text, TextColor, TextVariant } from '../Text';
 
@@ -14,13 +14,6 @@ const SAMPLE_ACTIONLISTITEM_PROPS = {
 
 describe('ActionListItem', () => {
   const mockOnPress = jest.fn();
-  const createRenderer = (element: React.ReactElement) => {
-    let tree!: ReturnType<typeof create>;
-    act(() => {
-      tree = create(element);
-    });
-    return tree;
-  };
 
   beforeEach(() => {
     jest.clearAllMocks();

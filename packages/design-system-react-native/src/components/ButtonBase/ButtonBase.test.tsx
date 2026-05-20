@@ -8,20 +8,14 @@ import {
 } from '@testing-library/react-native';
 import React from 'react';
 import { View, Text } from 'react-native';
-import * as ReactTestRenderer from 'react-test-renderer';
+
+import { createRenderer } from '../../test-utils/createRenderer';
 
 import { ButtonBase } from './ButtonBase';
 import { getButtonBaseBorderRadiusTwClass } from './ButtonBase.constants';
 
 describe('ButtonBase', () => {
   const getTw = () => renderHook(() => useTailwind()).result.current;
-  const createRenderer = (element: React.ReactElement) => {
-    let tree!: ReactTestRenderer.ReactTestRenderer;
-    ReactTestRenderer.act(() => {
-      tree = ReactTestRenderer.create(element);
-    });
-    return tree;
-  };
 
   const createFunctionStyle =
     () =>

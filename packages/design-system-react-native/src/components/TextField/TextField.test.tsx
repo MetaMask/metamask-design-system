@@ -2,8 +2,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React, { createRef } from 'react';
 import { TextInput, View } from 'react-native';
-import { act, create } from 'react-test-renderer';
+import { act } from 'react-test-renderer';
 
+import { createRenderer } from '../../test-utils/createRenderer';
 import { Input } from '../Input';
 
 import { TextField } from './TextField';
@@ -12,13 +13,6 @@ const ROOT_TEST_ID = 'textfield';
 
 describe('TextField', () => {
   let tw: ReturnType<typeof useTailwind>;
-  const createRenderer = (element: React.ReactElement) => {
-    let tree!: ReturnType<typeof create>;
-    act(() => {
-      tree = create(element);
-    });
-    return tree;
-  };
 
   beforeAll(() => {
     tw = renderHook(() => useTailwind()).result.current;

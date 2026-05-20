@@ -38,6 +38,7 @@ module.exports = merge(baseConfig, {
   // Add coverage ignore patterns
   coveragePathIgnorePatterns: [
     'index.ts',
+    '/test-utils/', // shared test utilities
     '\\.d\\.ts$',
     '\\.constants\\.ts$', // ignore all .constants.ts files
     '\\.dev\\.ts$', // ignore all .dev.ts files

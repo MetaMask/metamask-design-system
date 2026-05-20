@@ -325,6 +325,55 @@ describe('BottomSheetDialog', () => {
     expect(getByTestId('pan-gesture-handler')).toBeDefined();
   });
 
+  it('forwards all supported panGestureHandlerProps to the gesture config', () => {
+    render(
+      <BottomSheetDialog
+        panGestureHandlerProps={{
+          shouldCancelWhenOutside: true,
+          hitSlop: { top: 10 },
+          cancelsTouchesInView: false,
+          activeCursor: 'auto',
+          mouseButton: 0,
+          activeOffsetY: 10,
+          activeOffsetX: 10,
+          failOffsetY: 5,
+          failOffsetX: 5,
+          minPointers: 1,
+          maxPointers: 2,
+          minDist: 5,
+          minVelocity: 0.5,
+          minVelocityX: 0.5,
+          minVelocityY: 0.5,
+          avgTouches: true,
+          enableTrackpadTwoFingerGesture: true,
+          activateAfterLongPress: 500,
+        }}
+      >
+        <Text>Test Child</Text>
+      </BottomSheetDialog>,
+    );
+
+    const config = panGestureHandlerPropsRef.current;
+    expect(config.shouldCancelWhenOutside).toBe(true);
+    expect(config.hitSlop).toStrictEqual({ top: 10 });
+    expect(config.cancelsTouchesInView).toBe(false);
+    expect(config.activeCursor).toBe('auto');
+    expect(config.mouseButton).toBe(0);
+    expect(config.activeOffsetY).toBe(10);
+    expect(config.activeOffsetX).toBe(10);
+    expect(config.failOffsetY).toBe(5);
+    expect(config.failOffsetX).toBe(5);
+    expect(config.minPointers).toBe(1);
+    expect(config.maxPointers).toBe(2);
+    expect(config.minDistance).toBe(5);
+    expect(config.minVelocity).toBe(0.5);
+    expect(config.minVelocityX).toBe(0.5);
+    expect(config.minVelocityY).toBe(0.5);
+    expect(config.avgTouches).toBe(true);
+    expect(config.enableTrackpadTwoFingerGesture).toBe(true);
+    expect(config.activateAfterLongPress).toBe(500);
+  });
+
   it('does not allow panGestureHandlerProps to override internal gesture props', () => {
     const externalOnGestureEvent = jest.fn();
 

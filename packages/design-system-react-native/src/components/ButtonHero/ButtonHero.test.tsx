@@ -1,21 +1,14 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
-import * as ReactTestRenderer from 'react-test-renderer';
 
+import { createRenderer } from '../../test-utils/createRenderer';
 import { IconName } from '../Icon';
 
 import { ButtonHero } from './ButtonHero';
 
 describe('ButtonHero', () => {
   let tw: ReturnType<typeof useTailwind>;
-  const createRenderer = (element: React.ReactElement) => {
-    let tree!: ReactTestRenderer.ReactTestRenderer;
-    ReactTestRenderer.act(() => {
-      tree = ReactTestRenderer.create(element);
-    });
-    return tree;
-  };
 
   beforeAll(() => {
     const { result } = renderHook(() => useTailwind());
