@@ -1,11 +1,5 @@
 // Third party dependencies.
 import type { ViewProps } from 'react-native';
-import type { PanGestureHandlerProps } from 'react-native-gesture-handler';
-
-type BottomSheetDialogPanGestureHandlerProps = Omit<
-  PanGestureHandlerProps,
-  'enabled' | 'onGestureEvent'
->;
 
 /**
  * BottomSheetDialog component props.
@@ -43,10 +37,6 @@ export type BottomSheetDialogProps = {
    * Optional callback that gets triggered when the sheet is opened.
    */
   onOpen?: (hasPendingAction?: boolean) => void;
-  /**
-   * Optional props object mapped onto the sheet's pan gesture configuration.
-   */
-  panGestureHandlerProps?: BottomSheetDialogPanGestureHandlerProps;
   /**
    * Tailwind CSS classes for the dialog container.
    */

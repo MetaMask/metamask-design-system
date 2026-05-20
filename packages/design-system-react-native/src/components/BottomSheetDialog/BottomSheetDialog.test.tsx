@@ -2,7 +2,6 @@
 import { render, act, fireEvent } from '@testing-library/react-native';
 import React, { useRef, useEffect } from 'react';
 import { Platform } from 'react-native';
-import type { PanGestureHandlerProps } from 'react-native-gesture-handler';
 import type { ReactTestInstance } from 'react-test-renderer';
 
 // External dependencies.
@@ -23,9 +22,6 @@ type CapturedGesture = {
 
 // Store the last gesture handler callbacks so tests can invoke them directly
 const gestureCallbacksRef: { current: GestureHandlers } = { current: {} };
-const panGestureHandlerPropsRef: { current: Record<string, unknown> } = {
-  current: {},
-};
 const capturedGestureRef: { current: CapturedGesture | null } = {
   current: null,
 };
@@ -41,9 +37,8 @@ jest.mock('react-native-gesture-handler', () => ({
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { View } = require('react-native');
     capturedGestureRef.current = gesture;
-    panGestureHandlerPropsRef.current = gesture.config;
     return (
-      <View testID={gesture.config.testId as string | undefined}>
+      <View>
         {children}
       </View>
     );
@@ -311,89 +306,6 @@ describe('BottomSheetDialog', () => {
       </BottomSheetDialog>,
     );
     expect(getByText('Custom Style')).toBeDefined();
-  });
-
-  it('passes props to the pan gesture via panGestureHandlerProps', () => {
-    const { getByTestId } = render(
-      <BottomSheetDialog
-        panGestureHandlerProps={{ testID: 'pan-gesture-handler' }}
-      >
-        <Text>Test Child</Text>
-      </BottomSheetDialog>,
-    );
-
-    expect(getByTestId('pan-gesture-handler')).toBeDefined();
-  });
-
-  it('forwards all supported panGestureHandlerProps to the gesture config', () => {
-    render(
-      <BottomSheetDialog
-        panGestureHandlerProps={{
-          shouldCancelWhenOutside: true,
-          hitSlop: { top: 10 },
-          cancelsTouchesInView: false,
-          activeCursor: 'auto',
-          mouseButton: 0,
-          activeOffsetY: 10,
-          activeOffsetX: 10,
-          failOffsetY: 5,
-          failOffsetX: 5,
-          minPointers: 1,
-          maxPointers: 2,
-          minDist: 5,
-          minVelocity: 0.5,
-          minVelocityX: 0.5,
-          minVelocityY: 0.5,
-          avgTouches: true,
-          enableTrackpadTwoFingerGesture: true,
-          activateAfterLongPress: 500,
-        }}
-      >
-        <Text>Test Child</Text>
-      </BottomSheetDialog>,
-    );
-
-    const config = panGestureHandlerPropsRef.current;
-    expect(config.shouldCancelWhenOutside).toBe(true);
-    expect(config.hitSlop).toStrictEqual({ top: 10 });
-    expect(config.cancelsTouchesInView).toBe(false);
-    expect(config.activeCursor).toBe('auto');
-    expect(config.mouseButton).toBe(0);
-    expect(config.activeOffsetY).toBe(10);
-    expect(config.activeOffsetX).toBe(10);
-    expect(config.failOffsetY).toBe(5);
-    expect(config.failOffsetX).toBe(5);
-    expect(config.minPointers).toBe(1);
-    expect(config.maxPointers).toBe(2);
-    expect(config.minDistance).toBe(5);
-    expect(config.minVelocity).toBe(0.5);
-    expect(config.minVelocityX).toBe(0.5);
-    expect(config.minVelocityY).toBe(0.5);
-    expect(config.avgTouches).toBe(true);
-    expect(config.enableTrackpadTwoFingerGesture).toBe(true);
-    expect(config.activateAfterLongPress).toBe(500);
-  });
-
-  it('does not allow panGestureHandlerProps to override internal gesture props', () => {
-    const externalOnGestureEvent = jest.fn();
-
-    render(
-      <BottomSheetDialog
-        isInteractable={false}
-        panGestureHandlerProps={
-          {
-            enabled: true,
-            onGestureEvent: externalOnGestureEvent,
-          } as unknown as PanGestureHandlerProps
-        }
-      >
-        <Text>Test Child</Text>
-      </BottomSheetDialog>,
-    );
-
-    expect(panGestureHandlerPropsRef.current.enabled).toBe(false);
-    expect(panGestureHandlerPropsRef.current.onGestureEvent).toBeUndefined();
-    expect(externalOnGestureEvent).not.toHaveBeenCalled();
   });
 
   it('triggers onOpenDialog on first layout event', () => {

@@ -42,80 +42,6 @@ import type {
   BottomSheetDialogProps,
 } from './BottomSheetDialog.types';
 
-const applyPanGestureProps = (
-  gesture: ReturnType<(typeof Gesture)['Pan']>,
-  panGestureHandlerProps?: BottomSheetDialogProps['panGestureHandlerProps'],
-) => {
-  if (!panGestureHandlerProps) {
-    return gesture;
-  }
-
-  if (panGestureHandlerProps.testID) {
-    gesture.withTestId(panGestureHandlerProps.testID);
-  }
-  if (panGestureHandlerProps.shouldCancelWhenOutside !== undefined) {
-    gesture.shouldCancelWhenOutside(
-      panGestureHandlerProps.shouldCancelWhenOutside,
-    );
-  }
-  if (panGestureHandlerProps.hitSlop !== undefined) {
-    gesture.hitSlop(panGestureHandlerProps.hitSlop);
-  }
-  if (panGestureHandlerProps.cancelsTouchesInView !== undefined) {
-    gesture.cancelsTouchesInView(panGestureHandlerProps.cancelsTouchesInView);
-  }
-  if (panGestureHandlerProps.activeCursor !== undefined) {
-    gesture.activeCursor(panGestureHandlerProps.activeCursor);
-  }
-  if (panGestureHandlerProps.mouseButton !== undefined) {
-    gesture.mouseButton(panGestureHandlerProps.mouseButton);
-  }
-  if (panGestureHandlerProps.activeOffsetY !== undefined) {
-    gesture.activeOffsetY(panGestureHandlerProps.activeOffsetY);
-  }
-  if (panGestureHandlerProps.activeOffsetX !== undefined) {
-    gesture.activeOffsetX(panGestureHandlerProps.activeOffsetX);
-  }
-  if (panGestureHandlerProps.failOffsetY !== undefined) {
-    gesture.failOffsetY(panGestureHandlerProps.failOffsetY);
-  }
-  if (panGestureHandlerProps.failOffsetX !== undefined) {
-    gesture.failOffsetX(panGestureHandlerProps.failOffsetX);
-  }
-  if (panGestureHandlerProps.minPointers !== undefined) {
-    gesture.minPointers(panGestureHandlerProps.minPointers);
-  }
-  if (panGestureHandlerProps.maxPointers !== undefined) {
-    gesture.maxPointers(panGestureHandlerProps.maxPointers);
-  }
-  if (panGestureHandlerProps.minDist !== undefined) {
-    gesture.minDistance(panGestureHandlerProps.minDist);
-  }
-  if (panGestureHandlerProps.minVelocity !== undefined) {
-    gesture.minVelocity(panGestureHandlerProps.minVelocity);
-  }
-  if (panGestureHandlerProps.minVelocityX !== undefined) {
-    gesture.minVelocityX(panGestureHandlerProps.minVelocityX);
-  }
-  if (panGestureHandlerProps.minVelocityY !== undefined) {
-    gesture.minVelocityY(panGestureHandlerProps.minVelocityY);
-  }
-  if (panGestureHandlerProps.avgTouches !== undefined) {
-    gesture.averageTouches(panGestureHandlerProps.avgTouches);
-  }
-  if (panGestureHandlerProps.enableTrackpadTwoFingerGesture !== undefined) {
-    gesture.enableTrackpadTwoFingerGesture(
-      panGestureHandlerProps.enableTrackpadTwoFingerGesture,
-    );
-  }
-  if (panGestureHandlerProps.activateAfterLongPress !== undefined) {
-    gesture.activateAfterLongPress(
-      panGestureHandlerProps.activateAfterLongPress,
-    );
-  }
-
-  return gesture;
-};
 
 export const BottomSheetDialog = forwardRef<
   BottomSheetDialogRef,
@@ -129,7 +55,6 @@ export const BottomSheetDialog = forwardRef<
       keyboardAvoidingViewEnabled = true,
       onClose,
       onOpen,
-      panGestureHandlerProps,
       style,
       twClassName,
       ...props
@@ -247,7 +172,7 @@ export const BottomSheetDialog = forwardRef<
           }
         });
 
-      return applyPanGestureProps(gesture, panGestureHandlerProps);
+      return gesture;
     }, [
       isInteractable,
       currentYOffset,
@@ -255,7 +180,6 @@ export const BottomSheetDialog = forwardRef<
       bottomOfDialogYValue,
       topOfDialogYValue,
       onCloseDialog,
-      panGestureHandlerProps,
     ]);
 
     // Animate in sheet on initial render.

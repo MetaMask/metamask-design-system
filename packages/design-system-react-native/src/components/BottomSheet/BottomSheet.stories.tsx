@@ -135,10 +135,6 @@ const ScrollableListTemplate = (args: BottomSheetProps) => {
           goBack={goBack}
           shouldNavigateBack={false}
           onClose={goBack}
-          panGestureHandlerProps={{
-            simultaneousHandlers:
-              Platform.OS === 'android' ? listGestureRef : undefined,
-          }}
         >
           <BottomSheetHeader onClose={goBack}>
             Scrollable BottomSheet
