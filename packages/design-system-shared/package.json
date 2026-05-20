@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-shared",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "description": "Shared types for design system libraries",
   "keywords": [
     "MetaMask",
@@ -50,7 +50,7 @@
     "@metamask/utils": "^11.11.0"
   },
   "devDependencies": {
-    "@metamask/auto-changelog": "^6.1.0",
+    "@metamask/auto-changelog": "^6.1.1",
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
     "@svgr/plugin-svgo": "^8.1.0",

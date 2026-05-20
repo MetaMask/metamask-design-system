@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.26.0]
+
+### Added
+
+- Added `TitleAlert` for alert-style headings with a severity icon, title row, and optional description in modals, bottom sheets, and other compact surfaces ([#1131](https://github.com/MetaMask/metamask-design-system/pull/1131))
+- Added `SectionHeader` for section titles with optional start and end accessories, icon shortcuts, and an inline title accessory ([#1175](https://github.com/MetaMask/metamask-design-system/pull/1175))
+- Added `SectionDivider` as a horizontal rule with a muted top border and default vertical spacing for separating screen sections ([#1174](https://github.com/MetaMask/metamask-design-system/pull/1174))
+
+### Changed
+
+- Updated the `Telegram` icon asset to match the official Telegram logo ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
+
 ## [0.25.0]
 
 ### Added
@@ -434,7 +446,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.25.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.26.0...HEAD
+[0.26.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.25.0...@metamask/design-system-react-native@0.26.0
 [0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.24.0...@metamask/design-system-react-native@0.25.0
 [0.24.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.23.0...@metamask/design-system-react-native@0.24.0
 [0.23.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.22.0...@metamask/design-system-react-native@0.23.0
