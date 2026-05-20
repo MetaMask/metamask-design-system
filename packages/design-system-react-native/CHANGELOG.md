@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: Update Telegram icon to official logo design ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
+- feat: [DSRN] Added TitleAlert ([#1131](https://github.com/MetaMask/metamask-design-system/pull/1131))
+- feat: [DSRN] Added SectionHeader ([#1175](https://github.com/MetaMask/metamask-design-system/pull/1175))
+- feat: [DSRN] Added SectionDivider ([#1174](https://github.com/MetaMask/metamask-design-system/pull/1174))
+
 ## [0.25.0]
 
 ### Added
