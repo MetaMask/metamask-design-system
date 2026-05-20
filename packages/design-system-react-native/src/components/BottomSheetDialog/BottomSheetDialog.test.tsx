@@ -15,78 +15,38 @@ const mockThemeRef = { current: 'light' };
 
 type GestureCallback = (event: Record<string, number>) => void;
 type GestureHandlers = Record<string, GestureCallback>;
-type CapturedGesture = {
-  config: Record<string, unknown>;
-  handlers: GestureHandlers;
-};
 
-// Store the last gesture handler callbacks so tests can invoke them directly
+// Store gesture handler callbacks so tests can invoke them directly
 const gestureCallbacksRef: { current: GestureHandlers } = { current: {} };
-const capturedGestureRef: { current: CapturedGesture | null } = {
-  current: null,
-};
 
 jest.mock('react-native-gesture-handler', () => ({
   GestureDetector: ({
     children,
-    gesture,
   }: {
     children: React.ReactNode;
-    gesture: CapturedGesture;
   }) => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { View } = require('react-native');
-    capturedGestureRef.current = gesture;
     return <View>{children}</View>;
   },
   Gesture: {
     Pan: () => {
-      const gesture: CapturedGesture & Record<string, unknown> = {
-        config: {},
-        handlers: {},
-      };
+      const handlers: GestureHandlers = {};
+      const gesture: Record<string, unknown> = { handlers };
 
-      const setConfig =
-        (key: string) =>
-        (value: unknown): typeof gesture => {
-          gesture.config[key] = value;
-          return gesture;
-        };
       const setHandler =
         (key: string) =>
         (callback: GestureCallback): typeof gesture => {
-          gesture.handlers[key] = callback;
-          gestureCallbacksRef.current = gesture.handlers;
+          handlers[key] = callback;
+          gestureCallbacksRef.current = handlers;
           return gesture;
         };
 
-      gesture.enabled = setConfig('enabled');
-      gesture.withTestId = setConfig('testId');
-      gesture.shouldCancelWhenOutside = setConfig('shouldCancelWhenOutside');
-      gesture.hitSlop = setConfig('hitSlop');
-      gesture.cancelsTouchesInView = setConfig('cancelsTouchesInView');
-      gesture.activeCursor = setConfig('activeCursor');
-      gesture.mouseButton = setConfig('mouseButton');
-      gesture.activeOffsetY = setConfig('activeOffsetY');
-      gesture.activeOffsetX = setConfig('activeOffsetX');
-      gesture.failOffsetY = setConfig('failOffsetY');
-      gesture.failOffsetX = setConfig('failOffsetX');
-      gesture.minPointers = setConfig('minPointers');
-      gesture.maxPointers = setConfig('maxPointers');
-      gesture.minDistance = setConfig('minDistance');
-      gesture.minVelocity = setConfig('minVelocity');
-      gesture.minVelocityX = setConfig('minVelocityX');
-      gesture.minVelocityY = setConfig('minVelocityY');
-      gesture.averageTouches = setConfig('avgTouches');
-      gesture.enableTrackpadTwoFingerGesture = setConfig(
-        'enableTrackpadTwoFingerGesture',
-      );
-      gesture.activateAfterLongPress = setConfig('activateAfterLongPress');
+      gesture.enabled = () => gesture;
       gesture.onStart = setHandler('onStart');
       gesture.onUpdate = setHandler('onUpdate');
       gesture.onEnd = setHandler('onEnd');
 
-      capturedGestureRef.current = gesture;
       return gesture;
     },
   },
@@ -437,7 +397,6 @@ describe('BottomSheetDialog', () => {
   describe('gesture handler callbacks', () => {
     beforeEach(() => {
       gestureCallbacksRef.current = {};
-      capturedGestureRef.current = null;
     });
 
     const findLayoutNode = (node: ReactTestInstance | null) => {
