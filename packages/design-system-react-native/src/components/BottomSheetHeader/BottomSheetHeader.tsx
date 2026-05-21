@@ -41,6 +41,9 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   return (
     <HeaderBase
       {...props}
+      // Ensure omitted props never leak through to HeaderBase at runtime
+      startButtonIconProps={undefined}
+      endButtonIconProps={undefined}
       style={[tw.style('px-4', twClassName), style]}
       startAccessory={startAccessory}
       endAccessory={endAccessory}
