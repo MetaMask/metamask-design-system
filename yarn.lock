@@ -3613,7 +3613,7 @@ __metadata:
     "@metamask/design-tokens": "workspace:^"
     "@metamask/utils": "npm:^11.11.0"
     "@react-native-async-storage/async-storage": "npm:2.2.0"
-    "@react-native-community/datetimepicker": "npm:8.4.4"
+    "@react-native-community/datetimepicker": "npm:^8.5.1"
     "@react-native-community/slider": "npm:5.0.1"
     "@storybook/addon-ondevice-actions": "npm:10.4.0"
     "@storybook/addon-ondevice-backgrounds": "npm:10.4.0"
@@ -4095,9 +4095,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/datetimepicker@npm:8.4.4":
-  version: 8.4.4
-  resolution: "@react-native-community/datetimepicker@npm:8.4.4"
+"@react-native-community/datetimepicker@npm:^8.5.1":
+  version: 8.6.0
+  resolution: "@react-native-community/datetimepicker@npm:8.6.0"
   dependencies:
     invariant: "npm:^2.2.4"
   peerDependencies:
@@ -4110,7 +4110,7 @@ __metadata:
       optional: true
     react-native-windows:
       optional: true
-  checksum: 10/e7aa38ac032fc4a75e6892e860e0c83d50eb5824c6e0fd8716a5aa28d86e384b46ef40a8d6342b211aad3ab8a386745e867eae43c26bc444cca489eb0812c8b5
+  checksum: 10/8d287227ce68aa0a88475de96bd00c6084800d8662b97ebe8a0583bc36cf204ac2f7551bec926fba9b3163b94fc885b9c3049dd544172405aa6d7ffac49ecd7b
   languageName: node
   linkType: hard
 
