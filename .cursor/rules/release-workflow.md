@@ -15,8 +15,10 @@ AI-first workflow for creating release PRs with proper version bumps, changelogs
 - ✅ **Release often** for non-breaking changes
 - ✅ **Isolate large breaking changes** to single releases (design tokens, major component API changes)
 - ✅ **Use `yarn create-release-branch`** (documented in @docs/contributing.md)
+- ✅ **Edit package `CHANGELOG.md` files only on release branches** created by `yarn create-release-branch`
 - ✅ **Run `yarn constraints --fix && yarn && yarn dedupe`** after release spec
 - ❌ **NO manual peer dependency updates** - handled automatically by yarn workspaces (causes errors)
+- ❌ **NO package `CHANGELOG.md` edits in normal feature/fix PRs** - document breaking changes in `MIGRATION.md` instead and let the release branch collect changelog entries
 
 ### Changelog Quality
 

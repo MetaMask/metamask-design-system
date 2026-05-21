@@ -36,17 +36,20 @@ const meta: Meta<TextFieldSearchProps> = {
     isDisabled: {
       control: 'boolean',
     },
-    isReadonly: {
+    isReadOnly: {
       control: 'boolean',
-    },
-    placeholder: {
-      control: 'text',
     },
     value: {
       control: 'text',
     },
+    placeholder: {
+      control: 'text',
+    },
     twClassName: {
       control: 'text',
+    },
+    inputProps: {
+      control: 'object',
     },
   },
 };
@@ -100,11 +103,11 @@ export const IsDisabled: Story = {
   ),
 };
 
-export const IsReadonly: Story = {
+export const IsReadOnly: Story = {
   args: {
     placeholder: 'Search readonly',
     value: 'Search query',
-    isReadonly: true,
+    isReadOnly: true,
     onPressClearButton: noop,
   },
   render: (args) => <ControlledTextFieldSearch {...args} />,

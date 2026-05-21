@@ -2,13 +2,14 @@ import {
   BoxAlignItems,
   BoxBackgroundColor,
   BoxFlexDirection,
+  ButtonIconSize,
+  ButtonSize,
   FontWeight,
+  IconName,
   TextVariant,
 } from '@metamask/design-system-shared';
 import React from 'react';
-import { GestureResponderEvent } from 'react-native';
 
-import { ButtonIconSize, ButtonSize, IconName } from '../../types';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { ButtonIcon } from '../ButtonIcon';
@@ -42,24 +43,12 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
 
   const {
     accessibilityLabel: closeButtonAccessibilityLabel = 'Close banner',
-    onPress: closeButtonPropsOnPress,
     twClassName: closeButtonTwClassName,
     ...resolvedCloseButtonProps
   } = closeButtonProps ?? {};
 
-  const shouldShowCloseButton = Boolean(onClose || closeButtonProps);
+  const shouldShowCloseButton = Boolean(onClose);
   const shouldShowActionButton = Boolean(actionButtonOnPress);
-
-  const handleClosePress =
-    onClose || closeButtonPropsOnPress
-      ? (event: GestureResponderEvent) => {
-          if (onClose) {
-            onClose();
-            return;
-          }
-          closeButtonPropsOnPress?.(event);
-        }
-      : undefined;
 
   const mergedCloseButtonTwClassName = closeButtonTwClassName
     ? `ml-3 ${closeButtonTwClassName}`
@@ -131,7 +120,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
           iconName={IconName.Close}
           size={ButtonIconSize.Sm}
           accessibilityLabel={closeButtonAccessibilityLabel}
-          onPress={handleClosePress}
+          onPress={onClose}
           {...resolvedCloseButtonProps}
         />
       )}

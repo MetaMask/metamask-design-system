@@ -1,142 +1,133 @@
-// Third party dependencies.
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
-import React, { useContext } from 'react';
-import { Alert, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React from 'react';
 
 // External dependencies.
-import { AvatarAccountVariant } from '../AvatarAccount';
 import { Box } from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { Text } from '../Text';
+import { Button } from '../Button';
+import { IconSize } from '../Icon';
+import { Spinner } from '../temp-components/Spinner';
 
 // Internal dependencies.
 import { Toast } from './Toast';
-import { ToastContext, ToastContextWrapper } from './Toast.context';
-import type { ToastOptions } from './Toast.types';
-import { ToastVariant } from './Toast.types';
+import { ToastSeverity } from './Toast.types';
+import type { ToastProps } from './Toast.types';
+import { Toaster, toast } from './Toaster';
 
-const TEST_ACCOUNT_ADDRESS =
-  '0x10e08af911f2e489480fb2855b24771745d0198b50f5c55891369844a8c57092';
-const TEST_NETWORK_IMAGE_URL =
-  'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880';
-const TEST_AVATAR_TYPE = AvatarAccountVariant.Jazzicon;
-
-type ToastStoryArgs = {
-  variant: ToastVariant;
-};
-
-const meta: Meta<ToastStoryArgs> = {
+const meta: Meta<ToastProps> = {
   title: 'Components/Toast',
   component: Toast,
   argTypes: {
-    variant: {
-      options: Object.values(ToastVariant),
-      control: {
-        type: 'select',
+    severity: {
+      control: 'select',
+      options: Object.values(ToastSeverity),
+      description:
+        'Optional semantic severity used for the default leading icon. `ToastSeverity.Default` shows no icon.',
+    },
+    title: {
+      control: 'text',
+      description: 'Main toast content',
+    },
+    description: {
+      control: 'text',
+      description: 'Optional secondary content shown below the main text',
+    },
+    actionButtonLabel: {
+      control: 'text',
+      description: 'Optional action button label',
+    },
+    actionButtonOnPress: {
+      action: 'actionButtonOnPress',
+      description: 'Optional press handler for the action button',
+    },
+    onClose: {
+      action: 'onClose',
+      description: 'Optional close handler for direct Toast rendering',
+    },
+    startAccessory: {
+      table: {
+        disable: true,
       },
     },
   },
-  decorators: [
-    (StoryComponent) => (
-      <SafeAreaProvider>
-        <ToastContextWrapper>
-          <Box twClassName="min-h-[300px] relative">
-            <Box twClassName="absolute inset-0 justify-center items-center">
-              <Text>Content behind toast</Text>
-            </Box>
-            <StoryComponent />
-          </Box>
-        </ToastContextWrapper>
-      </SafeAreaProvider>
-    ),
-  ],
 };
 
 export default meta;
-type Story = StoryObj<ToastStoryArgs>;
-
-const ToastStoryRender: React.FC<ToastStoryArgs> = ({ variant }) => {
-  const { toastRef } = useContext(ToastContext);
-  const tw = useTailwind();
-
-  let toastOptions: ToastOptions;
-
-  switch (variant) {
-    case ToastVariant.Plain:
-      toastOptions = {
-        variant: ToastVariant.Plain,
-        hasNoTimeout: false,
-        labelOptions: [{ label: 'This is a Toast message.' }],
-      };
-      break;
-    case ToastVariant.Account:
-      toastOptions = {
-        variant: ToastVariant.Account,
-        hasNoTimeout: false,
-        labelOptions: [
-          { label: 'Switching to' },
-          { label: ' Account 2.', isBold: true },
-        ],
-        accountAddress: TEST_ACCOUNT_ADDRESS,
-        accountAvatarType: TEST_AVATAR_TYPE,
-      };
-      break;
-    case ToastVariant.Network:
-      toastOptions = {
-        variant: ToastVariant.Network,
-        hasNoTimeout: false,
-        labelOptions: [
-          { label: 'Added' },
-          { label: ' Mainnet', isBold: true },
-          { label: ' network.' },
-        ],
-        networkImageSource: { uri: TEST_NETWORK_IMAGE_URL },
-        descriptionOptions: {
-          description: 'This is a description text for the network toast.',
-        },
-        linkButtonOptions: {
-          label: 'Click here!',
-          onPress: () => {
-            Alert.alert('Clicked toast link!');
-          },
-        },
-      };
-      break;
-    default:
-      toastOptions = {
-        variant: ToastVariant.Plain,
-        hasNoTimeout: false,
-        labelOptions: [{ label: 'This is a Toast message.' }],
-      };
-  }
-
-  return (
-    <View style={tw.style('flex-1')}>
-      <Button
-        variant={ButtonVariant.Secondary}
-        onPress={() => {
-          toastRef?.current?.showToast(toastOptions);
-        }}
-      >
-        {`Show ${variant} Toast`}
-      </Button>
-      <Toast ref={toastRef} />
-    </View>
-  );
-};
+type Story = StoryObj<ToastProps>;
 
 export const Default: Story = {
-  args: {
-    variant: ToastVariant.Plain,
+  render: (args: ToastProps) => {
+    const { actionButtonLabel, actionButtonOnPress, onClose, ...toastArgs } =
+      args;
+
+    return (
+      <>
+        <Button
+          onPress={() => {
+            toast({
+              ...toastArgs,
+              actionButtonLabel,
+              actionButtonOnPress:
+                actionButtonLabel && !actionButtonOnPress
+                  ? () => undefined
+                  : actionButtonOnPress,
+              onClose,
+            });
+          }}
+        >
+          Show Toast
+        </Button>
+        <Toaster />
+      </>
+    );
   },
-  render: (args) => <ToastStoryRender {...args} />,
+  args: {
+    description: "Description shouldn't repeat title. 1-3 lines.",
+    title: 'Title is sentence case no period',
+  },
 };
 
-export const Variant: Story = {
+export const Title: Story = {
   args: {
-    variant: ToastVariant.Account,
+    title: 'We will notify you.',
   },
-  render: (args) => <ToastStoryRender {...args} />,
+};
+
+export const Description: Story = {
+  args: {
+    description: 'Enable notifications to stay informed on campaigns',
+    title: "Don't miss out",
+  },
+};
+
+export const Severity: Story = {
+  render: (args: ToastProps) => (
+    <Box twClassName="gap-2">
+      <Toast {...args} severity={ToastSeverity.Default} title="Default" />
+      <Toast {...args} severity={ToastSeverity.Success} title="Success" />
+      <Toast {...args} severity={ToastSeverity.Warning} title="Warning" />
+      <Toast {...args} severity={ToastSeverity.Danger} title="Danger" />
+    </Box>
+  ),
+  args: {
+    description: 'Severity controls the default start accessory icon.',
+  },
+};
+
+export const StartAccessory: Story = {
+  args: {
+    description: 'Your withdrawal is processing.',
+    severity: ToastSeverity.Default,
+    startAccessory: <Spinner spinnerIconProps={{ size: IconSize.Lg }} />,
+    title: 'Withdrawal pending',
+  },
+};
+
+export const ActionButtonOnPress: Story = {
+  args: {
+    actionButtonLabel: 'Read more',
+    description: 'Review how Consensys handles your data.',
+    actionButtonOnPress: () => undefined,
+    severity: ToastSeverity.Default,
+    title: 'Privacy policy update',
+  },
 };

@@ -1,8 +1,6 @@
+import { ButtonVariant, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
-
-import { ButtonVariant } from '../../types';
-import { IconName } from '../Icon';
 
 import { Button } from './Button';
 
@@ -118,8 +116,10 @@ describe('Button', () => {
         </Button>,
       );
 
+      let button = screen.getByRole('button');
       let icon = screen.getByTestId('icon');
-      expect(icon).toHaveClass('mr-2');
+      expect(icon).toHaveClass('shrink-0', 'text-inherit');
+      expect(button).toHaveClass('gap-x-1');
 
       rerender(
         <Button
@@ -130,8 +130,10 @@ describe('Button', () => {
           Secondary with Icon
         </Button>,
       );
+      button = screen.getByRole('button');
       icon = screen.getByTestId('icon');
-      expect(icon).toHaveClass('mr-2');
+      expect(icon).toHaveClass('shrink-0', 'text-inherit');
+      expect(button).toHaveClass('gap-x-1');
 
       rerender(
         <Button
@@ -142,8 +144,10 @@ describe('Button', () => {
           Tertiary with Icon
         </Button>,
       );
+      button = screen.getByRole('button');
       icon = screen.getByTestId('icon');
-      expect(icon).toHaveClass('mr-2');
+      expect(icon).toHaveClass('shrink-0', 'text-inherit');
+      expect(button).toHaveClass('gap-x-1');
     });
 
     it('applies loading state correctly for all variants', () => {

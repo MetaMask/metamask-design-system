@@ -5,6 +5,8 @@ import { ButtonBase } from '../../../ButtonBase';
 
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
+// Internal Button variant.
+// Consumers should use `Button` with `variant`.
 export const ButtonTertiary = forwardRef<
   HTMLButtonElement,
   ButtonTertiaryProps

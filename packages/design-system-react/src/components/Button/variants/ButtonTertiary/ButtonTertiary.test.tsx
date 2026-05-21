@@ -1,8 +1,6 @@
+import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
-
-import { ButtonTertiarySize } from '../../../../types';
-import { IconName } from '../../../Icon';
 
 import { ButtonTertiary } from './ButtonTertiary';
 
@@ -55,18 +53,14 @@ describe('ButtonTertiary', () => {
 
   it('renders with correct size classes', () => {
     const { rerender } = render(
-      <ButtonTertiary size={ButtonTertiarySize.Sm}>Small</ButtonTertiary>,
+      <ButtonTertiary size={ButtonSize.Sm}>Small</ButtonTertiary>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
 
-    rerender(
-      <ButtonTertiary size={ButtonTertiarySize.Md}>Medium</ButtonTertiary>,
-    );
+    rerender(<ButtonTertiary size={ButtonSize.Md}>Medium</ButtonTertiary>);
     expect(screen.getByRole('button')).toHaveClass('h-10');
 
-    rerender(
-      <ButtonTertiary size={ButtonTertiarySize.Lg}>Large</ButtonTertiary>,
-    );
+    rerender(<ButtonTertiary size={ButtonSize.Lg}>Large</ButtonTertiary>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 
@@ -79,9 +73,11 @@ describe('ButtonTertiary', () => {
         With Icon
       </ButtonTertiary>,
     );
+    const button = screen.getByRole('button');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('mr-2');
+    expect(icon).toHaveClass('shrink-0', 'text-inherit');
+    expect(button).toHaveClass('gap-x-1');
   });
 
   it('renders end icon when endIconName is provided', () => {
@@ -93,9 +89,11 @@ describe('ButtonTertiary', () => {
         With Icon
       </ButtonTertiary>,
     );
+    const button = screen.getByRole('button');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('ml-2');
+    expect(icon).toHaveClass('shrink-0', 'text-inherit');
+    expect(button).toHaveClass('gap-x-1');
   });
 
   it('applies full width class correctly', () => {

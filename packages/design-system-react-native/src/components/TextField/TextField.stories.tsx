@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+
+import { Box } from '../Box';
+import { Icon, IconName, IconSize } from '../Icon';
 
 import { TextField } from './TextField';
 import type { TextFieldProps } from './TextField.types';
@@ -24,13 +26,13 @@ const meta: Meta<TextFieldProps> = {
     isDisabled: {
       control: 'boolean',
     },
-    isReadonly: {
+    isReadOnly: {
       control: 'boolean',
     },
-    placeholder: {
+    value: {
       control: 'text',
     },
-    value: {
+    placeholder: {
       control: 'text',
     },
     twClassName: {
@@ -53,19 +55,32 @@ export const Default: Story = {
 
 export const IsError: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
+    <Box gap={4}>
       <ControlledTextField value="" placeholder="Default" />
       <ControlledTextField value="" placeholder="Error state" isError />
-    </View>
+    </Box>
   ),
 };
 
 export const IsDisabled: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
+    <Box gap={4}>
       <ControlledTextField value="Editable" placeholder="Enabled" />
       <TextField value="Not editable" placeholder="Disabled" isDisabled />
-    </View>
+    </Box>
+  ),
+};
+
+export const IsReadOnly: Story = {
+  render: () => (
+    <Box gap={4}>
+      <ControlledTextField value="Editable" placeholder="Editable field" />
+      <TextField
+        value="Cannot edit this value"
+        placeholder="Read-only"
+        isReadOnly
+      />
+    </Box>
   ),
 };
 
@@ -74,7 +89,7 @@ export const StartAccessory: Story = {
     <ControlledTextField
       value=""
       placeholder="With start accessory"
-      startAccessory={<Text>🔍</Text>}
+      startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
     />
   ),
 };
@@ -84,7 +99,7 @@ export const EndAccessory: Story = {
     <ControlledTextField
       value=""
       placeholder="With end accessory"
-      endAccessory={<Text>✕</Text>}
+      endAccessory={<Icon name={IconName.Close} size={IconSize.Sm} />}
     />
   ),
 };

@@ -1,9 +1,9 @@
 import {
   AvatarIconSeverity,
   AvatarIconSize,
+  IconColor,
+  IconSize,
 } from '@metamask/design-system-shared';
-
-import { IconSize, IconColor } from '../Icon';
 
 // Mappings
 export const TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR: Record<
