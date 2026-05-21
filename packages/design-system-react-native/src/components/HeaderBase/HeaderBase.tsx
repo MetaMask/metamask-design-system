@@ -82,6 +82,7 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
   includesTopInset = false,
   startAccessoryWrapperProps,
   endAccessoryWrapperProps,
+  childrenWrapperProps,
   textProps,
   twClassName,
   ...props
@@ -172,7 +173,7 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
       })}
 
       {/* Title */}
-      <View style={tw.style('flex-1 items-center')}>
+      <View style={tw.style('flex-1 items-center')} {...childrenWrapperProps}>
         <TextOrChildren
           textProps={{
             variant: TextVariant.HeadingSm,

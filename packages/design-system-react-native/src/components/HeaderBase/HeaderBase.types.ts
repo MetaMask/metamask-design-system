@@ -66,6 +66,10 @@ export type HeaderBaseProps = ViewProps & {
    */
   endAccessoryWrapperProps?: ViewProps;
   /**
+   * Optional props to pass to the title wrapper View.
+   */
+  childrenWrapperProps?: ViewProps;
+  /**
    * Optional props passed to the Text component when children is a string.
    * Props are spread onto TextOrChildren `textProps` and can override default values.
    */

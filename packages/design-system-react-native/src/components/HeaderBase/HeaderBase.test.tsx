@@ -70,6 +70,18 @@ describe('HeaderBase', () => {
     });
   });
 
+  describe('childrenWrapperProps', () => {
+    it('passes childrenWrapperProps to the title wrapper View', () => {
+      const { getByTestId } = render(
+        <HeaderBase childrenWrapperProps={{ testID: 'title-wrapper' }}>
+          Title
+        </HeaderBase>,
+      );
+
+      expect(getByTestId('title-wrapper')).toBeOnTheScreen();
+    });
+  });
+
   describe('startAccessory', () => {
     it('renders custom start accessory content', () => {
       const { getByTestId } = render(
