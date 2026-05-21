@@ -279,6 +279,10 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 };
 ```
 
+## Migration from MetaMask Mobile Component Library
+
+Migrating from the legacy `KeyValueRow` in `app/component-library/components-temp/KeyValueRow`? See the [KeyValueRow migration guide](../../../MIGRATION.md#keyvaluerow-component) for import changes, tooltip rewiring via `useTooltipModal`, removed enums (`TooltipSizes`, `KeyValueRowFieldIconSides`, `KeyValueRowStubs`), and before/after examples. For the underlying `field`/`value` → flat props mapping, see [From version 0.15.0 to 0.16.0 › KeyValueRow API](../../../MIGRATION.md#keyvaluerow-api).
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
