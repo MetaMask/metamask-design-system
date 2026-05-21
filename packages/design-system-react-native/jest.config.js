@@ -39,6 +39,16 @@ module.exports = merge(baseConfig, {
     './src/components/ActionListItem/ActionListItem.tsx': {
       branches: 85,
     },
+    // Gesture handler callbacks (onStart/onUpdate/onEnd) contain the swipe physics
+    // logic. Tests that directly invoked these via the mock only asserted
+    // toBeDefined() on the handler reference — no behavioral signal.
+    // Gesture behavior is verified via Storybook on device.
+    './src/components/BottomSheetDialog/BottomSheetDialog.tsx': {
+      branches: 60,
+      functions: 83,
+      lines: 67,
+      statements: 67,
+    },
   },
 
   // Add coverage ignore patterns
