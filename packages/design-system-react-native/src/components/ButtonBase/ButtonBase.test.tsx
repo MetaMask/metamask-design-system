@@ -1,10 +1,6 @@
 import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import {
-  fireEvent,
-  render,
-  renderHook,
-} from '@testing-library/react-native';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { View, Text } from 'react-native';
 import type { ReactTestInstance } from 'react-test-renderer';

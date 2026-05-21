@@ -1,5 +1,11 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { render, screen, act, fireEvent, renderHook } from '@testing-library/react-native';
+import {
+  render,
+  screen,
+  act,
+  fireEvent,
+  renderHook,
+} from '@testing-library/react-native';
 import React, { createRef, useEffect } from 'react';
 import { Text as RNText } from 'react-native';
 

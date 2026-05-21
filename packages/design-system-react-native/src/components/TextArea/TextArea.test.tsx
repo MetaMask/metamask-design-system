@@ -78,7 +78,9 @@ describe('TextArea', () => {
     });
 
     it('when inputProps is omitted, inner Input twClassName omits merged extra classes', () => {
-      const tree = createRenderer(<TextArea value="" placeholder="no-input-props" />);
+      const tree = createRenderer(
+        <TextArea value="" placeholder="no-input-props" />,
+      );
       const inputNode = tree.root.findByType(Input);
 
       expect(inputNode.props.twClassName).toBe(
