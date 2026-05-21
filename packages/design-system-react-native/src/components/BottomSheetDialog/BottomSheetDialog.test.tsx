@@ -2,7 +2,6 @@
 import { render, act, fireEvent } from '@testing-library/react-native';
 import React, { useRef, useEffect } from 'react';
 import { Platform } from 'react-native';
-import type { ReactTestInstance } from 'react-test-renderer';
 
 // External dependencies.
 import { Text } from '../Text';
