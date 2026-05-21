@@ -293,9 +293,34 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 };
 ```
 
+### `size`
+
+Controls the height of the button. Use `SelectButtonSize` values to keep the type aligned with the component API.
+
+Available values:
+
+- `SelectButtonSize.Sm` — 32px height, `rounded-lg` corners.
+- `SelectButtonSize.Md` — 40px height, `rounded-xl` corners.
+- `SelectButtonSize.Lg` — 48px height, `rounded-xl` corners.
+
+| TYPE               | REQUIRED | DEFAULT               |
+| ------------------ | -------- | --------------------- |
+| `SelectButtonSize` | No       | `SelectButtonSize.Sm` |
+
+```tsx
+import {
+  SelectButton,
+  SelectButtonSize,
+} from '@metamask/design-system-react-native';
+
+<SelectButton size={SelectButtonSize.Sm} placeholder="Compact" onPress={() => {}} />
+<SelectButton size={SelectButtonSize.Md} placeholder="Default" onPress={() => {}} />
+<SelectButton size={SelectButtonSize.Lg} placeholder="Large" onPress={() => {}} />
+```
+
 ### Other `ButtonBase` props
 
-Pass through any other **`ButtonBase`** props you need (for example **`size`**, **`isFullWidth`**, **`accessibilityLabel`**, **`hitSlop`**).
+Pass through any other **`ButtonBase`** props you need (for example **`isFullWidth`**, **`accessibilityLabel`**, **`hitSlop`**).
 
 ## References
 

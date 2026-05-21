@@ -1,4 +1,5 @@
 export {
+  SelectButtonSize,
   SelectButtonEndArrow,
   SelectButtonVariant,
 } from '@metamask/design-system-shared';

@@ -1,6 +1,6 @@
 import {
-  ButtonBaseSize,
   SelectButtonEndArrow,
+  SelectButtonSize,
   SelectButtonVariant,
 } from '@metamask/design-system-shared';
 import React from 'react';
@@ -24,7 +24,7 @@ export const SelectButton = ({
   endArrowDirectionIconProps,
   variant = SelectButtonVariant.Primary,
   isLoading = false,
-  size = ButtonBaseSize.Sm,
+  size = SelectButtonSize.Sm,
   twClassName = '',
   style,
   ...buttonBaseRest
