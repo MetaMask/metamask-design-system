@@ -34,6 +34,14 @@ jest.mock('react-native-gesture-handler', () => ({
   Directions: {},
 }));
 
+jest.mock('@metamask/design-system-twrnc-preset', () => ({
+  Theme: { Light: 'light', Dark: 'dark' },
+  useTailwind: () => ({
+    style: (...args: string[]) => args,
+  }),
+  useTheme: () => mockThemeRef.current,
+}));
+
 jest.mock('react-native-reanimated', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const Reanimated = require('react-native-reanimated/mock');
@@ -42,14 +50,6 @@ jest.mock('react-native-reanimated', () => {
   };
   return Reanimated;
 });
-
-jest.mock('@metamask/design-system-twrnc-preset', () => ({
-  Theme: { Light: 'light', Dark: 'dark' },
-  useTailwind: () => ({
-    style: (...args: string[]) => args,
-  }),
-  useTheme: () => mockThemeRef.current,
-}));
 
 describe('BottomSheetDialog', () => {
   it('renders correctly with children', () => {
