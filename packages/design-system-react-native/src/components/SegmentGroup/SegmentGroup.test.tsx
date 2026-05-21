@@ -5,8 +5,7 @@ import {
   SegmentButtonVariant,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 

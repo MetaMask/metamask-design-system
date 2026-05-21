@@ -1,10 +1,10 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, renderHook } from '@testing-library/react-native';
 import React, { createRef } from 'react';
 import { TextInput, View } from 'react-native';
-import { act, create } from 'react-test-renderer';
+import { act } from 'react-test-renderer';
 
+import { createRenderer } from '../../test-utils/createRenderer';
 import { Input } from '../Input';
 
 import { TextArea } from './TextArea';
@@ -63,7 +63,7 @@ describe('TextArea', () => {
     });
 
     it('merges inputProps.twClassName with TextArea inner Input layout classes', () => {
-      const tree = create(
+      const tree = createRenderer(
         <TextArea
           value=""
           placeholder="tw-class-merge"
@@ -78,7 +78,7 @@ describe('TextArea', () => {
     });
 
     it('when inputProps is omitted, inner Input twClassName omits merged extra classes', () => {
-      const tree = create(<TextArea value="" placeholder="no-input-props" />);
+      const tree = createRenderer(<TextArea value="" placeholder="no-input-props" />);
       const inputNode = tree.root.findByType(Input);
 
       expect(inputNode.props.twClassName).toBe(
@@ -435,7 +435,7 @@ describe('TextArea', () => {
 
     it('no-ops TextArea blur wiring when disabled if the handler is invoked directly', () => {
       const onBlur = jest.fn();
-      const tree = create(
+      const tree = createRenderer(
         <TextArea
           value=""
           isDisabled
@@ -452,7 +452,7 @@ describe('TextArea', () => {
 
     it('no-ops TextArea focus wiring when disabled if the handler is invoked directly', () => {
       const onFocus = jest.fn();
-      const tree = create(
+      const tree = createRenderer(
         <TextArea
           value=""
           isDisabled
