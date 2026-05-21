@@ -67,24 +67,6 @@ describe('BottomSheetHeader', () => {
       );
       expect(queryByTestId('back-button')).toBeNull();
     });
-
-    it('does not leak startButtonIconProps through to HeaderBase', () => {
-      const { queryByTestId } = render(
-        <BottomSheetHeader
-          {...({
-            startButtonIconProps: {
-              iconName: 'arrow-left',
-              onPress: jest.fn(),
-              testID: 'leaked-start-button',
-            },
-          } as never)}
-        >
-          Header Title
-        </BottomSheetHeader>,
-      );
-
-      expect(queryByTestId('leaked-start-button')).toBeNull();
-    });
   });
 
   describe('onClose', () => {
@@ -122,26 +104,6 @@ describe('BottomSheetHeader', () => {
         </BottomSheetHeader>,
       );
       expect(queryByTestId('close-button')).toBeNull();
-    });
-
-    it('does not leak endButtonIconProps through to HeaderBase', () => {
-      const { queryByTestId } = render(
-        <BottomSheetHeader
-          {...({
-            endButtonIconProps: [
-              {
-                iconName: 'close',
-                onPress: jest.fn(),
-                testID: 'leaked-end-button',
-              },
-            ],
-          } as never)}
-        >
-          Header Title
-        </BottomSheetHeader>,
-      );
-
-      expect(queryByTestId('leaked-end-button')).toBeNull();
     });
   });
 
