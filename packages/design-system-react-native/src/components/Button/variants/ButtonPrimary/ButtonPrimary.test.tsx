@@ -1,9 +1,9 @@
 import { ButtonBaseSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render } from '@testing-library/react-native';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
-import * as ReactTestRenderer from 'react-test-renderer';
+
+import { createRenderer } from '../../../../test-utils/createRenderer';
 
 import { ButtonPrimary } from './ButtonPrimary';
 
@@ -105,9 +105,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('toggles pressed styles (default)', () => {
-    const tree = ReactTestRenderer.create(
-      <ButtonPrimary>Press me</ButtonPrimary>,
-    );
+    const tree = createRenderer(<ButtonPrimary>Press me</ButtonPrimary>);
 
     // Find the ButtonAnimated component which has the style function
     const buttonAnimated = tree.root.findByProps({
@@ -128,9 +126,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('toggles pressed styles (danger)', () => {
-    const tree = ReactTestRenderer.create(
-      <ButtonPrimary isDanger>Danger</ButtonPrimary>,
-    );
+    const tree = createRenderer(<ButtonPrimary isDanger>Danger</ButtonPrimary>);
 
     const buttonAnimated = tree.root.findByProps({
       accessibilityRole: 'button',
@@ -150,7 +146,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('toggles pressed styles (inverse)', () => {
-    const tree = ReactTestRenderer.create(
+    const tree = createRenderer(
       <ButtonPrimary isInverse>Inverse</ButtonPrimary>,
     );
 
@@ -172,7 +168,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('toggles pressed styles (inverse+danger)', () => {
-    const tree = ReactTestRenderer.create(
+    const tree = createRenderer(
       <ButtonPrimary isInverse isDanger>
         Inverse+Danger
       </ButtonPrimary>,

@@ -37,7 +37,7 @@ import type {
 
 const screenHeight = Dimensions.get('window').height;
 
-let registeredRef: RefObject<ToasterRef> | null = null;
+let registeredRef: RefObject<ToasterRef | null> | null = null;
 
 const assertRegisteredRef = (method: 'dismiss' | 'toast'): ToasterRef => {
   if (!registeredRef?.current) {

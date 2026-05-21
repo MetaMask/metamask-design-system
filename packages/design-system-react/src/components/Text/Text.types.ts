@@ -1,4 +1,5 @@
 import type { TextPropsShared } from '@metamask/design-system-shared';
+import type { CSSProperties } from 'react';
 
 import type { OverflowWrap, TextAlign, TextTransform } from '../../types';
 
@@ -6,7 +7,7 @@ export type TextProps = TextPropsShared & {
   /**
    * Optional prop for inline styles
    */
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   /**
    * Optional prop for additional CSS classes to be applied to the Text component.
    */

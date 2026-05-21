@@ -8,12 +8,12 @@ export type ModalFocusProps = {
   /**
    * The `ref` of the element to receive focus initially.
    */
-  initialFocusRef?: RefObject<FocusableElement>;
+  initialFocusRef?: RefObject<FocusableElement | null>;
   /**
    * The `ref` of the element to return focus to when `ModalFocus`
    * unmounts.
    */
-  finalFocusRef?: RefObject<FocusableElement>;
+  finalFocusRef?: RefObject<FocusableElement | null>;
   /**
    * If `true`, focus will be restored to the element that
    * triggered the `ModalFocus` once it unmounts.

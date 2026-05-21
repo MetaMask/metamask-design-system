@@ -1,6 +1,6 @@
 import React from 'react';
-import * as ReactTestRenderer from 'react-test-renderer';
 
+import { createRenderer } from '../../test-utils/createRenderer';
 import { AvatarNetwork } from '../AvatarNetwork';
 
 import { BadgeNetwork } from './BadgeNetwork';
@@ -9,7 +9,7 @@ const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 
 describe('BadgeNetwork', () => {
   it('forwards props and enforces BadgeNetwork-specific AvatarNetwork props', () => {
-    const tree = ReactTestRenderer.create(
+    const tree = createRenderer(
       <BadgeNetwork
         src={remoteImageSrc}
         testID="badge-network-root"
