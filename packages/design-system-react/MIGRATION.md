@@ -1190,7 +1190,7 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 
 ##### Still Available via Native `<input>`
 
-`Input` is `Omit<ComponentPropsWithoutRef<'input'>, 'defaultValue' | 'disabled' | 'readOnly' | 'value'>` plus the fields above. Standard attributes such as `id`, `name`, `placeholder`, `onChange`, `onBlur`, `onFocus`, `maxLength`, `required`, and `autoFocus` work as on a normal input. Note that `value` comes from `InputPropsShared` (required `string`) and `defaultValue` is omitted entirely — uncontrolled usage is not supported.
+`Input` is `Omit<ComponentPropsWithoutRef<'input'>, 'defaultValue' | 'disabled' | 'readOnly' | 'value'>` plus the fields above. Standard attributes such as `id`, `name`, `placeholder`, `onChange`, `onBlur`, `onFocus`, `maxLength`, `required`, and `autoFocus` work as on a normal input. Note that `value` is a required `string` prop and `defaultValue` is omitted entirely — uncontrolled usage is not supported.
 
 #### Migration Examples
 
