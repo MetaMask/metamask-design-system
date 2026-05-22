@@ -109,7 +109,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       endAccessory ? 'pr-4' : 'pr-0',
       isDisabled && 'cursor-not-allowed border-muted opacity-50',
       !isDisabled && isError && 'border-error-default',
-      !isDisabled && !isError && isFocused && 'border-primary-default',
+      !isDisabled && !isError && isFocused && 'border-default',
       !isDisabled && !isError && !isFocused && 'border-muted',
       className,
     );

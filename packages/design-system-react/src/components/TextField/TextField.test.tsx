@@ -152,10 +152,12 @@ describe('TextField', () => {
       const input = screen.getByRole('textbox');
 
       fireEvent.focus(input);
-      expect(root).toHaveClass('border-primary-default');
+      expect(root).toHaveClass('border-default');
+      expect(root).not.toHaveClass('border-muted');
 
       fireEvent.blur(input);
-      expect(root).not.toHaveClass('border-primary-default');
+      expect(root).toHaveClass('border-muted');
+      expect(root).not.toHaveClass('border-default');
     });
 
     it('clears focused state when isDisabled becomes true', () => {
@@ -163,9 +165,7 @@ describe('TextField', () => {
         <TextField data-testid={ROOT_TEST_ID} onChange={noop} value="" />,
       );
       fireEvent.focus(screen.getByRole('textbox'));
-      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass(
-        'border-primary-default',
-      );
+      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass('border-default');
 
       rerender(
         <TextField
@@ -177,7 +177,7 @@ describe('TextField', () => {
       );
 
       expect(screen.getByTestId(ROOT_TEST_ID)).not.toHaveClass(
-        'border-primary-default',
+        'border-default',
       );
     });
   });
