@@ -62,8 +62,9 @@ export function useHeaderStandardAnimated(): UseHeaderStandardAnimatedReturn {
   );
 
   const onScroll = useAnimatedScrollHandler({
-    onScroll: (scrollEvent) =>
-      updateScrollYFromEvent(scrollYValue, scrollEvent.contentOffset.y),
+    onScroll: (scrollEvent) => {
+      scrollYValue.value = scrollEvent.contentOffset.y;
+    },
   });
 
   return {
