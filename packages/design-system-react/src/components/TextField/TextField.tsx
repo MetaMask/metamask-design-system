@@ -1,4 +1,3 @@
-import { TextFieldSize, TextFieldType } from '@metamask/design-system-shared';
 import React, {
   forwardRef,
   useCallback,
@@ -10,6 +9,7 @@ import React, {
 import { twMerge } from '../../utils/tw-merge';
 import { Input } from '../Input';
 
+import { TextFieldSize, TextFieldType } from './TextField.types';
 import type { TextFieldProps } from './TextField.types';
 
 const SIZE_CLASS: Record<TextFieldSize, string> = {
