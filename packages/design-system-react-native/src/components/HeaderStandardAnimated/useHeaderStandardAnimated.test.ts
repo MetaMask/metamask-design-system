@@ -63,5 +63,4 @@ describe('useHeaderStandardAnimated', () => {
       expect(result.current.titleSectionHeightSv.value).toBe(200);
     });
   });
-
 });
