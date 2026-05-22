@@ -63,7 +63,24 @@ export const Default: Story = {
     placeholder: 'Sample placeholder',
     value: '',
   },
-  render: (args) => <ControlledTextField {...args} />,
+  render: (args) => {
+    const [value, setValue] = useState(args.value ?? '');
+
+    useEffect(() => {
+      setValue(args.value ?? '');
+    }, [args.value]);
+
+    return (
+      <TextField
+        {...args}
+        value={value}
+        onChange={(event) => {
+          setValue(event.target.value);
+          args.onChange?.(event);
+        }}
+      />
+    );
+  },
 };
 
 export const Size: Story = {
