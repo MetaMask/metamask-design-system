@@ -1,12 +1,8 @@
 // Third party dependencies.
 import { renderHook, act } from '@testing-library/react-native';
-import type { SharedValue } from 'react-native-reanimated';
 
 // Internal dependencies.
-import {
-  updateScrollYFromEvent,
-  useHeaderStandardAnimated,
-} from './useHeaderStandardAnimated';
+import { useHeaderStandardAnimated } from './useHeaderStandardAnimated';
 
 jest.mock('react-native-reanimated', () =>
   jest.requireActual('react-native-reanimated/mock'),
@@ -68,11 +64,4 @@ describe('useHeaderStandardAnimated', () => {
     });
   });
 
-  describe('updateScrollYFromEvent', () => {
-    it('writes contentOffset.y to the shared value', () => {
-      const scrollYValue = { value: 0 } as unknown as SharedValue<number>;
-      updateScrollYFromEvent(scrollYValue, 82);
-      expect(scrollYValue.value).toBe(82);
-    });
-  });
 });
