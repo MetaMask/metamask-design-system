@@ -50,7 +50,6 @@ const meta: Meta<TextFieldProps> = {
     truncate: { control: 'boolean' },
     placeholder: { control: 'text' },
     value: { control: 'text' },
-    className: { control: 'text' },
   },
 };
 
