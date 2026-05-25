@@ -42,7 +42,7 @@ describe('AvatarIcon', () => {
     expect(container.props.style[1][0]).toStrictEqual(expectedIconBgStyle);
 
     const icon = getByTestId('icon');
-    expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);
+    expect(icon.props.style.color).toStrictEqual(expectedIconColor);
     expect(container.props.accessibilityRole).toBe('image');
   });
 
@@ -77,7 +77,7 @@ describe('AvatarIcon', () => {
     expect(container.props.accessibilityLabel).toBe('avatar');
 
     const icon = getByTestId('icon');
-    expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);
+    expect(icon.props.style.color).toStrictEqual(expectedIconColor);
   });
 
   it.each(Object.values(AvatarIconSeverity))(
@@ -105,7 +105,7 @@ describe('AvatarIcon', () => {
       expect(container.props.style[1][0]).toStrictEqual(expectedIconBgStyle);
 
       const icon = getByTestId('icon');
-      expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);
+      expect(icon.props.style.color).toStrictEqual(expectedIconColor);
     },
   );
 
@@ -127,8 +127,8 @@ describe('AvatarIcon', () => {
         />,
       );
       const icon = getByTestId('icon');
-      expect(icon.props.style[0].width).toStrictEqual(expectedStyle.width);
-      expect(icon.props.style[0].height).toStrictEqual(expectedStyle.height);
+      expect(icon.props.style.width).toStrictEqual(expectedStyle.width);
+      expect(icon.props.style.height).toStrictEqual(expectedStyle.height);
     },
   );
 });
