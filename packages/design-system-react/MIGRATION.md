@@ -1347,11 +1347,12 @@ The extension `avatar-base` component maps to `AvatarBase` in the design system.
 
 | Extension API                                                                  | MMDS API                                           | Change Type            | Notes                                                                                                  |
 | ------------------------------------------------------------------------------ | -------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------ |
-| `includesBorder` (naming in style props) / border behavior                     | `hasBorder`                                        | renamed                | default remains `false` in MMDS                                                                        |
 | `backgroundColor`, `borderColor`, `color` (design-system enums on style props) | `className` / `style` on root                      | removed as first-class | use Tailwind or explicit layout; token-backed `Box`-style color props are not re-exposed the same way  |
 | Polymorphic `as` / `ref` from Box                                              | `asChild` on `AvatarBase`                          | different pattern      | MMDS `AvatarBase` is `div` by default; `asChild` merges onto a single child when needed                |
 | `size` values `'xs'`, …, `'xl'`                                                | `AvatarBaseSize` const object (same string values) | value alignment        | e.g. `AvatarBaseSize.Md` is `'md'`                                                                     |
-| (no `shape` in extension)                                                      | `shape` + `AvatarBaseShape`                        | **new**                | `Circle` (default) or `Square` — child avatars set shape internally (e.g. `AvatarNetwork` uses square) |
+| (no equivalent in extension)                                                   | `hasBorder`                                        | new                    | extension `AvatarBase` had no border-inclusion prop; mobile's `includesBorder` maps here               |
+| (no `shape` in extension)                                                      | `shape` + `AvatarBaseShape`                        | new                    | `Circle` (default) or `Square` — child avatars set shape internally (e.g. `AvatarNetwork` uses square) |
+| (no `fallbackText` in extension)                                               | `fallbackText?`                                    | new                    | text rendered when no children or image; first letter used as avatar letter fallback                   |
 
 #### Migration Example
 
@@ -1459,6 +1460,7 @@ The extension `avatar-favicon` and MMDS `AvatarFavicon` both use a dapp name for
 | `fallbackIconProps`               | (no equivalent)                                       | removed         | MMDS uses `fallbackText` + optional `imageProps.onError` for recovery |
 | `size` / `AvatarFaviconSize` enum | `AvatarFaviconSize` (alias of `AvatarBaseSize` const) | values align    | same `xs`–`xl` labels                                                 |
 | `borderColor` on style props      | use `className` / `style` or token classes            | not carried 1:1 | prefer design tokens via Tailwind                                     |
+| (no `fallbackText` in extension)  | `fallbackText?`                                       | new             | explicit fallback text when no image loads; overrides first-letter-of-`name` default                  |
 
 #### Migration Example
 
@@ -1570,7 +1572,6 @@ import { AvatarNetwork, AvatarNetworkSize } from '@metamask/design-system-react'
   name="Mainnet"
   src={networkIcon}
   size={AvatarNetworkSize.Md}
-  imageProps={{ onLoad: /* ... */ }}
 />;
 ```
 
@@ -1582,10 +1583,11 @@ import { AvatarNetwork, AvatarNetworkSize } from '@metamask/design-system-react'
 
 | Extension API        | MMDS API                                      | Change Type     | Notes                                         |
 | -------------------- | --------------------------------------------- | --------------- | --------------------------------------------- |
-| `showHalo?: boolean` | (removed)                                     | not supported   |                                               |
-| `name?: string`      | `name?`, `fallbackText?`                      | extended        | MMDS documents shared fallback rules in types |
-| `src?`               | `src?`                                        | unchanged       |                                               |
-| `size`               | `AvatarTokenSize` (alias of `AvatarBaseSize`) | value alignment |                                               |
+| `showHalo?: boolean`             | (removed)                                     | not supported   |                                                                                       |
+| `name?: string`                  | `name?`, `fallbackText?`                      | extended        | MMDS documents shared fallback rules in types                                         |
+| `src?`                           | `src?`                                        | unchanged       |                                                                                       |
+| `size`                           | `AvatarTokenSize` (alias of `AvatarBaseSize`) | value alignment |                                                                                       |
+| (no `fallbackText` in extension) | `fallbackText?`                               | new             | explicit fallback text when no image loads; overrides first-letter-of-`name` default |
 
 #### Migration Example
 

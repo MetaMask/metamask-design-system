@@ -2964,14 +2964,23 @@ import {
   AvatarIcon,
   AvatarIconSize,
   AvatarIconSeverity,
+  IconColor,
   IconName,
 } from '@metamask/design-system-react-native';
 
+// Severity drives both background and icon color — no iconProps needed for most cases
 <AvatarIcon
   iconName={IconName.Star}
   size={AvatarIconSize.Md}
   severity={AvatarIconSeverity.Neutral}
-  iconProps={{ color: /* token or string */ undefined }}
+/>;
+
+// Override icon color independently via iconProps when severity alone is insufficient
+<AvatarIcon
+  iconName={IconName.Star}
+  size={AvatarIconSize.Md}
+  severity={AvatarIconSeverity.Neutral}
+  iconProps={{ color: IconColor.IconAlternative }}
 />;
 ```
 
