@@ -122,6 +122,12 @@ const styles = StyleSheet.create({
 />;
 ```
 
+## Migration Guide
+
+Migrating from `app/component-library/components/BottomSheets/BottomSheetFooter` in MetaMask Mobile? See the [BottomSheetFooter Migration Guide](../../../MIGRATION.md#bottomsheetfooter-component) for `buttonPropsArray` → `primaryButtonProps` / `secondaryButtonProps` mappings, extension parity notes, and breaking changes.
+
+For MetaMask Extension modal footers (`ModalFooter` on web), see [`design-system-react` MIGRATION.md — ModalFooter](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react/MIGRATION.md#modalfooter-component).
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
