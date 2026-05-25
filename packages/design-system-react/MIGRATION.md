@@ -15,6 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
   - [Checkbox Component](#checkbox-component)
   - [HeaderBase Component](#headerbase-component)
   - [HelpText Component](#helptext-component)
@@ -1161,6 +1162,84 @@ import {
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
 
+### Input Component
+
+The extension `input` component is implemented as `Text` with `as="input"` and carries broad `Box` / style-utility behavior through its polymorphic props. The design system `Input` is a native `<input>` with a small semantic API (`textVariant`, `isDisabled`, `isReadonly`) and standard HTML attributes on the element.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) and the [Text Component](#text-component) section for `TextVariant` value casing (`bodyMd` → `BodyMd`).
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                            | Design System Migration                                              |
+| ------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `import { Input, InputType } from '../../component-library'` | `import { Input, TextVariant } from '@metamask/design-system-react'` |
+
+##### Renamed and Behavioral Props
+
+| Extension API                                                      | Design System API              | Notes                                                                                                                                                   |
+| ------------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `disabled`                                                         | `isDisabled`                   | boolean; default `false`                                                                                                                                |
+| `readOnly`                                                         | `isReadonly`                   | renamed; note **lowercase “only”** in the design system prop name                                                                                       |
+| `error` (sets `aria-invalid`)                                      | pass `aria-invalid` on `Input` | no `error` shorthand; use native ARIA on the underlying `<input>`                                                                                       |
+| `disableStateStyles`                                               | removed                        | removed “disable focus ring” escape hatch; if you need custom focus for accessibility, handle it explicitly (for example with `className` or a wrapper) |
+| `type` using `InputType` enum                                      | `type` as HTML string          | use `'text' \| 'password' \| 'number' \| 'search'` (or other valid `<input type>`). The `InputType` enum is not exported from the design system         |
+| `autoComplete` as `boolean`                                        | `autoComplete` as string       | use standard HTML autocomplete tokens (for example `on` / `off` or a specific token)                                                                    |
+| Polymorphic `as` and `...` style-utility props from `Text` / `Box` | removed from the component API | use `className` (and native attributes allowed on `<input>`) per [General Extension Migration Guidance](#general-extension-migration-guidance)          |
+| `textVariant`                                                      | `textVariant`                  | same name; values move to shared `TextVariant` from `@metamask/design-system-react` (see [Text Component](#text-component))                             |
+
+##### Still Available via Native `<input>`
+
+`Input` is `Omit<ComponentPropsWithoutRef<'input'>, 'defaultValue' | 'disabled' | 'readOnly' | 'value'>` plus the fields above. Standard attributes such as `id`, `name`, `placeholder`, `onChange`, `onBlur`, `onFocus`, `maxLength`, `required`, and `autoFocus` work as on a normal input. Note that `value` is a required `string` prop and `defaultValue` is omitted entirely — uncontrolled usage is not supported.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Input, InputType } from '../../component-library';
+import { TextVariant } from '../../../helpers/constants/design-system';
+
+<Input
+  name="query"
+  placeholder="Search"
+  value={query}
+  onChange={onQueryChange}
+  disabled={isBusy}
+  readOnly={isLocked}
+  error={hasError}
+  type={InputType.Search}
+  textVariant={TextVariant.bodyMd}
+  autoComplete
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react';
+
+<Input
+  name="query"
+  placeholder="Search"
+  value={query}
+  onChange={onQueryChange}
+  isDisabled={isBusy}
+  isReadonly={isLocked}
+  aria-invalid={hasError}
+  type="search"
+  textVariant={TextVariant.BodyMd}
+  autoComplete="on"
+/>;
+```
+
+#### API Differences
+
+- No polymorphic `as` prop — the component always renders `<input>`.
+- Extension-only `error` and `disableStateStyles` are not mirrored; use `aria-invalid` and `className` as needed.
+- `TextVariant` imports and member names follow the design system (Pascal-cased members such as `TextVariant.BodyMd`).
+
 ### Checkbox Component
 
 The extension `checkbox` component maps to `Checkbox` in the design system, with controlled-state naming and callback-signature changes.
@@ -1868,6 +1947,12 @@ The extension `modal-footer` component maps to `ModalFooter` in the design syste
 - Layout direction is now an explicit `buttonsAlignment` prop (`Horizontal` default, `Vertical` opt-in) instead of the legacy `flex-wrap` + `Container.maxWidth` arrangement.
 - The polymorphic Box surface, the `Container` dependency, the `useI18nContext` coupling, and the `mm-modal-footer*` SCSS class hooks are all removed.
 
+#### Cross-platform parity (React Native)
+
+Web `ModalFooter` and React Native `BottomSheetFooter` share the same **named slot** model (`primaryButtonProps` / `secondaryButtonProps`), enforced variants, and secondary-then-primary ordering. For mobile `component-library` → `@metamask/design-system-react-native` mappings (including the legacy `buttonPropsArray` API), see [BottomSheetFooter Component](../design-system-react-native/MIGRATION.md#bottomsheetfooter-component) in the React Native migration guide.
+
+**`ButtonsAlignment` values differ by platform:** on web, `ModalFooter` uses lowercase string literals `'horizontal'` | `'vertical'` (`ButtonsAlignment.Horizontal` / `ButtonsAlignment.Vertical` from `@metamask/design-system-react`). On React Native, the enum string values are `'Horizontal'` | `'Vertical'`. Import the enum from the package you target; do not assume the raw strings are interchangeable across platforms.
+
 Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
 
 #### Breaking Changes
@@ -1890,6 +1975,7 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 | `containerProps?: ContainerProps<'div'>`                                                    | removed; layout direction moved to `buttonsAlignment`                                 | removed            | the `Container.maxWidth` (`Sm` / `Md` / `Lg` ≈ 360 / 480 / 720) is gone. Width is now governed by the surrounding `ModalContent.size`. Custom outer footer styling moves to `className`.                                                               |
 | —                                                                                           | `buttonsAlignment?: ButtonsAlignment` (`Horizontal` default, `Vertical` opt-in)       | added              | `Horizontal` lays buttons in a `flex-row` with each button at `flex-1`; `Vertical` lays them in a `flex-col` with each button at `w-full`. Order: secondary → primary in both modes. Mirrors the React Native `BottomSheetFooter` API.                 |
 | `children?: ReactNode`                                                                      | `children?: ReactNode`                                                                | unchanged          | rendered above the action button row.                                                                                                                                                                                                                  |
+| —                                                                                           | both buttons use `ButtonSize.Lg` internally                                           | behavior note      | same default sizing as extension (`ButtonSize.Lg` on each built-in button); optional `size` on `*ButtonProps` can still override per button if needed.                                                                                                 |
 | `className?: string`                                                                        | `className?: string`                                                                  | unchanged          | merged with default Tailwind classes via `twMerge`.                                                                                                                                                                                                    |
 | Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>`                                | removed                                                                               | removed            | always renders a `<footer>`. If you need a different element, wrap or compose.                                                                                                                                                                         |
 | Box style-utility props (`paddingLeft`, `paddingRight`, `paddingTop`, `backgroundColor`, …) | removed from public API                                                               | removed            | use `className` with Tailwind utilities. The default `px-4 pt-4` remains, applied internally; override with `className="px-0 pt-2"` etc.                                                                                                               |
