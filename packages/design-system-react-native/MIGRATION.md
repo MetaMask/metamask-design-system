@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.23.0 to 0.x.0](#from-version-0230-to-0x0)
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
   - [ButtonBase Component](#buttonbase-component)
@@ -17,16 +18,21 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
+  - [HeaderBase Component](#headerbase-component)
   - [Text Component](#text-component)
   - [Label Component](#label-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
+  - [KeyValueRow Component](#keyvaluerow-component)
   - [ListItem Component](#listitem-component)
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.X.0 to 0.X.0](#from-version-0x0-to-0x0)
+  - [From version 0.24.0 to 0.x.0](#from-version-0240-to-0x0)
+  - [From version 0.23.0 to 0.24.0](#from-version-0230-to-0240)
+  - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.21.0 to 0.22.0](#from-version-0210-to-0220)
   - [From version 0.19.0 to 0.20.0](#from-version-0190-to-0200)
   - [From version 0.18.0 to 0.19.0](#from-version-0180-to-0190)
@@ -40,9 +46,178 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.X.0 to 0.X.0
+<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
 
-TODO(release): replace `0.X.0` with the actual version numbers when this PR lands in a release.
+### From version 0.24.0 to 0.x.0
+
+#### Removed `panGestureHandlerProps` from `BottomSheetDialog` and `BottomSheet`
+
+The `panGestureHandlerProps` prop has been removed from both `BottomSheetDialog` and `BottomSheet`.
+
+This prop was a compatibility shim from the old `react-native-gesture-handler` v1 `PanGestureHandler` JSX component. With the migration to the RNGH v2 `GestureDetector` + `Gesture.Pan()` API, the prop was mapped to individual method calls via an internal `applyPanGestureProps` function — however `simultaneousHandlers` (the only real-world use case) was never wired up and was silently dropped. The prop was also not used anywhere in the MetaMask Mobile or Extension consumer codebases.
+
+**Before (0.24.0):**
+
+```tsx
+<BottomSheet
+  goBack={goBack}
+  panGestureHandlerProps={{
+    simultaneousHandlers: scrollViewRef,
+  }}
+>
+  {children}
+</BottomSheet>
+```
+
+**After (0.x.0):**
+
+```tsx
+<BottomSheet goBack={goBack}>{children}</BottomSheet>
+```
+
+If you were relying on `simultaneousHandlers` for nested scroll behaviour, this was not functioning correctly in the previous version. First-class support for simultaneous gesture handling will be addressed in a follow-up.
+
+#### BannerBase: `onClose` is now the only close-button behavior API
+
+**What changed:**
+
+- **`closeButtonProps.onPress`** is removed from the public **`BannerBase`** API.
+- The close button now renders **only** when **`onClose`** is provided.
+- **`closeButtonProps`** is now customization-only for the rendered close **`ButtonIcon`**.
+
+**Migration:**
+
+- Move any close-button behavior from **`closeButtonProps.onPress`** to **`onClose`**.
+- Keep **`closeButtonProps`** only for non-behavioral customization such as **`testID`**, accessibility props, and styling hooks.
+- If you previously passed only **`closeButtonProps`** to force-render a close button, also provide **`onClose`** now.
+
+**Impact:**
+
+- Existing **`@metamask/design-system-react-native`** consumers that relied on **`closeButtonProps.onPress`** or on rendering a close button without **`onClose`** must update those call sites.
+
+<a id="buttonbase-size-defaults"></a>
+
+#### ButtonBase: let `size` drive label, icons, and spacing
+
+**What changed:**
+
+- **`ButtonBase`** maps each **`ButtonBaseSize`** to a recommended label **`Text`** variant, matching start and end **`Icon`** sizes, and consistent spacing between accessories and the label.
+
+**Recommendation:**
+
+For any product-specific button built on **`ButtonBase`** (wrappers that forward **`textProps`**, **`textClassName`**, **`startIconProps`**, **`endIconProps`**, **`iconClassName`**, **`spinnerProps`**, or layout **`twClassName`**):
+
+- Remove **icon size** overrides on **`startIconProps`**, **`endIconProps`**, and loading **`spinnerProps`** unless a written design exception requires them.
+- Remove **label typography overrides** in **`textProps`** / **`textClassName`** so the label follows the mapping for the chosen **`size`**.
+- Remove **spacing overrides** (extra gap/margin **`twClassName`** on the root or content row) that only existed to nudge icon–label rhythm; **`ButtonBase`** now owns that layout.
+
+**Migration:**
+
+```tsx
+// Before: overrides that duplicate what size already encodes
+<ButtonBase
+  size={ButtonBaseSize.Md}
+  startIconProps={{ name: IconName.Add, size: IconSize.Md }}
+  textProps={{ variant: TextVariant.BodyLg }}
+  twClassName="gap-4"
+>
+  Continue
+</ButtonBase>
+
+// After: rely on size-driven defaults
+<ButtonBase size={ButtonBaseSize.Md} startIconProps={{ name: IconName.Add }}>
+  Continue
+</ButtonBase>
+```
+
+**Impact:**
+
+- Custom **`ButtonBase`** wrappers that hard-coded icon sizes, text variants, or gaps may render slightly differently after removing overrides; visually they should match the current design spec for that **`size`**.
+
+<!-- Backward-compatible anchor for the 0.24.0 changelog entry that shipped with the old placeholder link. -->
+
+<a id="from-version-0230-to-0x0"></a>
+
+### From version 0.23.0 to 0.24.0
+
+#### Toast: tighten the runtime API and align the surface with the shipped design
+
+**What changed:**
+
+- **`toast.show(...)`** is removed. Use **`toast(...)`** as the only show method.
+- **`toast.hide()`** is removed. Use **`toast.dismiss()`** as the close method.
+- **`hasNoTimeout`** is now optional and defaults to **`false`**. Toasts auto-dismiss unless you explicitly pass **`hasNoTimeout: true`**.
+- **`ToastSeverity.Info`** is removed. Supported severities are **`ToastSeverity.Default`**, **`ToastSeverity.Success`**, **`ToastSeverity.Warning`**, and **`ToastSeverity.Danger`**.
+- **`iconProps`** is renamed to **`iconAlertProps`** to make it clear the prop is forwarded to the default **`IconAlert`**.
+- The close button is now always visible on the Toast surface. Use **`closeButtonProps`** to customize that button, and **`onClose`** only when you need an additional callback after dismissal.
+
+**Migration:**
+
+- Replace every **`toast.show(options)`** call with **`toast(options)`**.
+- Replace every **`toast.hide()`** call with **`toast.dismiss()`**.
+- Remove **`hasNoTimeout: false`** where you were only spelling out the default behavior. Keep **`hasNoTimeout: true`** only for persistent toasts.
+- Replace **`ToastSeverity.Info`** with one of the supported severities. Use **`ToastSeverity.Default`** when you need no built-in leading icon.
+- Rename **`iconProps`** to **`iconAlertProps`**.
+- If direct-rendered Toast call sites previously assumed the close button could be omitted, update those expectations. The close affordance is now part of the standard surface.
+
+**Before:**
+
+```tsx
+toast.show({
+  title: 'Saved',
+  description: 'Your changes are available everywhere.',
+  severity: ToastSeverity.Info,
+  hasNoTimeout: false,
+  iconProps: {
+    testID: 'toast-icon',
+  },
+});
+
+toast.hide();
+```
+
+**After:**
+
+```tsx
+toast({
+  title: 'Saved',
+  description: 'Your changes are available everywhere.',
+  severity: ToastSeverity.Default,
+  iconAlertProps: {
+    testID: 'toast-icon',
+  },
+});
+
+toast.dismiss();
+```
+
+### From version 0.22.0 to 0.23.0
+
+#### Toast: `Toaster` + `toast(...)` replace context-based usage
+
+**What changed:**
+
+- Mount **`<Toaster />`** once at the root, then call **`toast(...)`** or **`toast.dismiss()`** from anywhere, instead of relying on **`ToastContext`**, **`ToastContextWrapper`**, or an app-level service singleton.
+- **`ToastContext`**, **`ToastContextWrapper`**, and **`ToastContextParams`** are no longer part of the public **`@metamask/design-system-react-native`** exports.
+- **`ToastVariants`** is replaced by **`ToastSeverity`**, including **`ToastSeverity.Default`** for a toast with no leading icon.
+- Close button customization now goes through **`closeButtonProps`** instead of the old toast-specific button variant pattern.
+- **`customBottomOffset`** is renamed to **`bottomOffset`**.
+- Calling **`toast(...)`** or **`toast.dismiss()`** before **`<Toaster />`** mounts now throws a descriptive runtime error instead of silently doing nothing.
+
+**Migration:**
+
+- Mount **`<Toaster />`** exactly once near the root of the app.
+- Replace any **`useContext(ToastContext)`**, **`ToastContextWrapper`**, or app-level **`ToastService`** usage with **`toast(...)`** and **`toast.dismiss()`**.
+- Replace **`ToastVariants`** usages with **`ToastSeverity`** in all call sites. Use **`ToastSeverity.Default`** when you want an explicit no-icon severity.
+- Move close button customization to **`closeButtonProps`**.
+- Rename **`customBottomOffset`** to **`bottomOffset`**.
+
+See [Toast Component](#toast-component) for complete before/after examples and API mappings.
+
+**Impact:**
+
+- Existing **`@metamask/design-system-react-native`** consumers using the old context-based Toast flow must update imports, root mounting, and toast invocation patterns.
+- Existing call sites that already use the forwarded **`ToasterRef`** methods for isolated cases can keep doing so, but app-level usage should move to the static API.
 
 #### Input: shared controlled contract and readonly naming alignment
 
@@ -60,6 +235,18 @@ Replace **`isReadonly`** with **`isReadOnly`** on **`Input`** call sites and wra
 For shared wrappers that target both platforms, align to the cross-platform **`Input`** contract: controlled **`value: string`**, **`isReadOnly`**, and **`isStateStylesDisabled`**.
 
 If your React web usage relied on uncontrolled **`Input`** behavior, move that state into the caller and pass a controlled **`value`** instead.
+
+#### ButtonBase: loading wrappers and overlay testID
+
+**What changed:**
+
+- **`ButtonBase`** accepts **`loadingWrapperProps`** and **`contentWrapperProps`** to customize the loading overlay wrapper (**`Box`**) and the label row (**`BoxRow`**).
+- **BREAKING:** **`ButtonBase`** no longer sets a default **`testID`** on the loading overlay wrapper. If tests or automation targeted the previous **`spinner-container`** id, pass **`loadingWrapperProps={{ testID: 'spinner-container' }}`** (or your own id) on **`ButtonBase`** or on a wrapper that forwards these props (for example, **`ButtonHero`**).
+
+**Migration:**
+
+- Add **`loadingWrapperProps`** / **`contentWrapperProps`** only when you need to pass layout or test hooks to those inner wrappers.
+- Restore a stable overlay **`testID`** for tests: **`loadingWrapperProps={{ testID: 'spinner-container' }}`** if you depended on the old default.
 
 ### From version 0.21.0 to 0.22.0
 
@@ -1766,6 +1953,191 @@ MetaMask Extension’s `ModalFooter` migrated to the same slot-based API in `@me
 
 ---
 
+### HeaderBase Component
+
+The `HeaderBase` component is a flexible header with optional start/end accessories and a configurable title variant. Migration is nearly a drop-in swap — most consumers change the import, remove two constant imports, and switch any affected test IDs to explicit props.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                    | Design System Migration                                                       |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `import HeaderBase from '.../component-library/components/HeaderBase'`            | `import { HeaderBase } from '@metamask/design-system-react-native'`           |
+| `import { HeaderBaseVariant } from '.../component-library/components/HeaderBase'` | `import { HeaderBaseVariant } from '@metamask/design-system-react-native'`    |
+| `import type { HeaderBaseProps } from '.../HeaderBase/HeaderBase.types'`          | `import type { HeaderBaseProps } from '@metamask/design-system-react-native'` |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**.
+
+##### Removed Exports: `HEADERBASE_TEST_ID` / `HEADERBASE_TITLE_TEST_ID`
+
+The legacy component exported two test-ID constants from `HeaderBase.constants`:
+
+- `HEADERBASE_TEST_ID = 'header'` — applied as a default `testID` on the container
+- `HEADERBASE_TITLE_TEST_ID = 'header-title'` — applied to the inner title `Text` when `children` is a string
+
+The design system removes both constants. Test IDs are now explicit per call site.
+
+| Mobile Pattern                                                        | Design System Migration                                 |
+| --------------------------------------------------------------------- | ------------------------------------------------------- |
+| `import { HEADERBASE_TEST_ID } from '.../HeaderBase.constants'`       | Remove — pass `testID="..."` explicitly on `HeaderBase` |
+| `import { HEADERBASE_TITLE_TEST_ID } from '.../HeaderBase.constants'` | Remove — use the new `titleTestID` prop on `HeaderBase` |
+| Querying by the default `'header'` container id                       | Pass an explicit `testID` and query by that value       |
+| Querying by `'header-title'` in tests                                 | Pass `titleTestID="..."` and query by that value        |
+
+##### Default Container `testID` Removed
+
+The legacy component set `testID = HEADERBASE_TEST_ID` (`'header'`) by default on the container `View`. The design system no longer applies any default — `testID` comes directly from `ViewProps` and is only present when you pass it.
+
+| Mobile Pattern (implicit)                                          | Design System Migration                                |
+| ------------------------------------------------------------------ | ------------------------------------------------------ |
+| `<HeaderBase>Title</HeaderBase>` — rendered with `testID="header"` | Pass `testID="..."` explicitly if any tests rely on it |
+
+##### New `titleTestID` Prop
+
+The inner title `Text` (rendered when `children` is a string) no longer carries the hard-coded `HEADERBASE_TITLE_TEST_ID`. Pass the new `titleTestID` prop to target the title element in tests.
+
+```tsx
+// Before — queried by the constant
+getByTestId(HEADERBASE_TITLE_TEST_ID);
+
+// After — caller provides the id
+<HeaderBase titleTestID="update-needed-title">{title}</HeaderBase>;
+getByTestId('update-needed-title');
+```
+
+##### `Display` Variant: Fixed Height (`h-14`)
+
+The legacy `HeaderBase` applied `min-h-14` only to the `Compact` variant; `Display` had no vertical height constraint and grew with its content. The design system applies `h-14` (56px fixed) to **both** variants.
+
+Review `Display` headers after migration — they now render with a fixed 56px height. If your layout expects content-sized heights for `Display`, override via `twClassName` or `style` on the call site.
+
+##### Unchanged Props
+
+All other props carry over with the same names, defaults, and semantics:
+
+- `children` — title (string auto-renders as `Text`; `ReactNode` renders as-is)
+- `variant` — `HeaderBaseVariant.Compact` (default) / `HeaderBaseVariant.Display`
+- `startAccessory` / `endAccessory` — custom `ReactNode` slots (take priority over the `*ButtonIconProps` variants)
+- `startButtonIconProps: ButtonIconProps` — render a `ButtonIcon` at the start (default size `ButtonIconSize.Md`)
+- `endButtonIconProps: ButtonIconProps[]` — render multiple `ButtonIcon`s at the end, in reverse order — first item rightmost (default size `ButtonIconSize.Md` each)
+- `includesTopInset` — adds the `react-native-safe-area-context` top inset as a top margin (default `false`)
+- `startAccessoryWrapperProps` / `endAccessoryWrapperProps` — `ViewProps` forwarded to the accessory wrappers
+- `twClassName` — Tailwind classes merged with the container defaults
+- `style` — RN style applied to the container
+- All `ViewProps` (including `testID`, `accessibilityLabel`)
+
+#### Migration Examples
+
+##### Simple title
+
+Before (Mobile):
+
+```tsx
+import HeaderBase from '../../../component-library/components/HeaderBase';
+
+<HeaderBase>Update needed</HeaderBase>;
+```
+
+After (Design System):
+
+```tsx
+import { HeaderBase } from '@metamask/design-system-react-native';
+
+<HeaderBase>Update needed</HeaderBase>;
+```
+
+##### Header with close button and test IDs
+
+Before (Mobile):
+
+```tsx
+import HeaderBase from '../../../../../../component-library/components/HeaderBase';
+import {
+  HEADERBASE_TEST_ID,
+  HEADERBASE_TITLE_TEST_ID,
+} from '../../../../../../component-library/components/HeaderBase/HeaderBase.constants';
+import { IconName, IconColor } from '@metamask/design-system-react-native';
+
+<HeaderBase
+  endButtonIconProps={[
+    {
+      iconName: IconName.Close,
+      iconProps: { color: IconColor.IconDefault },
+      onPress: handleClose,
+    },
+  ]}
+>
+  Account details
+</HeaderBase>;
+
+// Test
+getByTestId(HEADERBASE_TEST_ID);
+getByTestId(HEADERBASE_TITLE_TEST_ID);
+```
+
+After (Design System):
+
+```tsx
+import {
+  HeaderBase,
+  IconName,
+  IconColor,
+} from '@metamask/design-system-react-native';
+
+<HeaderBase
+  testID="account-details-header"
+  titleTestID="account-details-title"
+  endButtonIconProps={[
+    {
+      iconName: IconName.Close,
+      iconProps: { color: IconColor.IconDefault },
+      onPress: handleClose,
+    },
+  ]}
+>
+  Account details
+</HeaderBase>;
+
+// Test
+getByTestId('account-details-header');
+getByTestId('account-details-title');
+```
+
+##### `Display` variant with left-aligned title
+
+Before (Mobile):
+
+```tsx
+import HeaderBase, {
+  HeaderBaseVariant,
+} from '../../../component-library/components/HeaderBase';
+
+<HeaderBase variant={HeaderBaseVariant.Display}>Wallet</HeaderBase>;
+```
+
+After (Design System):
+
+```tsx
+import {
+  HeaderBase,
+  HeaderBaseVariant,
+} from '@metamask/design-system-react-native';
+
+<HeaderBase variant={HeaderBaseVariant.Display}>Wallet</HeaderBase>;
+```
+
+Note: the `Display` variant now has a fixed `h-14` container. If you need the legacy content-sized height, override via `twClassName="h-auto"` or an equivalent `style`.
+
+#### API Differences
+
+- The default container `testID="header"` is gone — pass `testID` explicitly if any tests rely on it
+- The `HEADERBASE_TITLE_TEST_ID` constant is gone — use the new `titleTestID` prop to tag the title `Text`
+- `Display` variant now applies a fixed `h-14` (56px) container height; legacy `Display` was content-sized
+- Variant alignment (`Compact` center, `Display` left) and all accessory, inset, and styling props are otherwise unchanged — most call sites migrate with just an import swap plus a test-ID refactor
+
+---
+
 ### Box Component
 
 The Box component has breaking changes when migrating from the mobile component-library. For custom spacing patterns or values outside the BoxSpacing range, use Tailwind classes via `twClassName`.
@@ -1918,21 +2290,21 @@ Mobile `BannerBase` maps to `BannerBase` in the design system, but the action-bu
 
 ##### Renamed Props
 
-| Legacy Mobile API                            | MMDS API                                     |
-| -------------------------------------------- | -------------------------------------------- |
-| `actionButtonProps.onPress`                  | `actionButtonOnPress`                        |
-| `actionButtonProps.label`                    | `actionButtonLabel`                          |
-| `closeButtonProps.onPress` (still supported) | `closeButtonProps.onPress` (still supported) |
+| Legacy Mobile API           | MMDS API              |
+| --------------------------- | --------------------- |
+| `actionButtonProps.onPress` | `actionButtonOnPress` |
+| `actionButtonProps.label`   | `actionButtonLabel`   |
+| `closeButtonProps.onPress`  | **`onClose`**         |
 
 ##### Type and Callback Signature Changes
 
-| Legacy Mobile API                                       | MMDS API                                                                                                                            | Notes                                                                        |
-| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `actionButtonProps?: ButtonProps`                       | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onPress' \| 'variant'>`                                              | MMDS prevents setting action handler and variant through `actionButtonProps` |
-| `actionButtonProps` controls rendering of action button | `actionButtonOnPress` controls rendering of action button                                                                           | Action button is shown only when `actionButtonOnPress` is provided           |
-| `title?: string \| React.ReactNode`                     | `title?: ReactNode`                                                                                                                 | Equivalent content support                                                   |
-| `description?: string \| React.ReactNode`               | `description?: ReactNode`                                                                                                           | Equivalent content support                                                   |
-| `closeButtonProps?: ButtonIconProps`                    | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onPress'> & { onPress?: (event: GestureResponderEvent) => void }` | `iconName` remains fixed to close icon                                       |
+| Legacy Mobile API                                       | MMDS API                                                                               | Notes                                                                        |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `actionButtonProps?: ButtonProps`                       | `actionButtonProps?: Omit<Partial<ButtonProps>, 'children' \| 'onPress' \| 'variant'>` | MMDS prevents setting action handler and variant through `actionButtonProps` |
+| `actionButtonProps` controls rendering of action button | `actionButtonOnPress` controls rendering of action button                              | Action button is shown only when `actionButtonOnPress` is provided           |
+| `title?: string \| React.ReactNode`                     | `title?: ReactNode`                                                                    | Equivalent content support                                                   |
+| `description?: string \| React.ReactNode`               | `description?: ReactNode`                                                              | Equivalent content support                                                   |
+| `closeButtonProps?: ButtonIconProps`                    | `closeButtonProps?: Omit<Partial<ButtonIconProps>, 'iconName' \| 'onPress'>`           | `iconName` remains fixed to close icon; use `onClose` for behavior           |
 
 ##### Default and Behavior Changes
 
@@ -1940,7 +2312,7 @@ Mobile `BannerBase` maps to `BannerBase` in the design system, but the action-bu
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | Action button shown when `actionButtonProps` exists                      | Action button shown when `actionButtonOnPress` exists                                                              |
 | Action button defaults to `size={ButtonSize.Auto}`                       | Action button defaults to `size={ButtonSize.Md}`                                                                   |
-| Close button press fallback uses `noop` when callbacks are missing       | Close button callback is omitted when callbacks are missing                                                        |
+| Close button press fallback uses `noop` when callbacks are missing       | Close button is rendered only when `onClose` is provided                                                           |
 | Close button icon default color is `IconColor.Default`                   | MMDS `BannerBase` delegates icon color to `ButtonIcon` defaults unless explicitly overridden in `closeButtonProps` |
 | Close button accessibility label had no explicit default in `BannerBase` | Default close label is `'Close banner'` (override with `closeButtonProps.accessibilityLabel`)                      |
 
@@ -2281,6 +2653,70 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
 
+### Input Component
+
+The mobile `Input` (under `Form/TextField/foundation/Input`) maps to `Input` in the design system. The legacy component extends `Omit<TextInputProps, 'editable'>`; the design system enforces a controlled `value` and omits `value` and `defaultValue` from the spread to avoid uncontrolled usage.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                     | Design System Migration                                                     |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `import Input from '.../Form/TextField/foundation/Input'`                          | `import { Input, TextVariant } from '@metamask/design-system-react-native'` |
+| `import { TextVariant } from '.../components/Texts/Text'` (legacy casing `BodyMD`) | `import { TextVariant } from '@metamask/design-system-react-native'`        |
+
+##### Props and Typing
+
+| Mobile API                                      | Design System API                                                    | Change type                        | Notes                                                                                                                                      |
+| ----------------------------------------------- | -------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `value?: string` (optional in `TextInputProps`) | `value: string`                                                      | now required on the component type | Input is **controlled-only**; omitting `value` is a type error (see [TextField Component](#textfield-component) for the surrounding field) |
+| `textVariant` default `BodyMD` (legacy enum)    | `TextVariant.BodyMd`                                                 | value rename                       | align with [Text Component](#text-component) variant naming                                                                                |
+| `isDisabled`, `isStateStylesDisabled`           | same names                                                           | unchanged                          | `isStateStylesDisabled` still disables focus/disabled visual treatment                                                                     |
+| `isReadonly`                                    | `isReadOnly`                                                         | renamed                            | capital 'R' in the design system prop; see also [TextField Component](#textfield-component)                                                |
+| `autoFocus` default `true`                      | `autoFocus` default `false`                                          | default changed                    | MMDS matches React Native `TextInput` default; set `autoFocus` explicitly if you relied on the legacy default                              |
+| `style`                                         | `style` + `twClassName`                                              | MMDS adds `twClassName`            | use `twClassName` for Tailwind overrides; `style` still supported                                                                          |
+| Inherits `TextInputProps` except `editable`     | Inherits `TextInputProps` except `editable`, `value`, `defaultValue` | omissions                          | `defaultValue` is omitted so the component stays controlled; use `value` from parent state                                                 |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import Input from '.../component-library/components/Form/TextField/foundation/Input';
+import { TextVariant } from '.../component-library/components/Texts/Text';
+
+<Input
+  value={value}
+  onChangeText={onChangeText}
+  placeholder="Amount"
+  textVariant={TextVariant.BodyMD}
+  isDisabled={false}
+  autoFocus
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react-native';
+
+<Input
+  value={value}
+  onChangeText={onChangeText}
+  placeholder="Amount"
+  textVariant={TextVariant.BodyMd}
+  isDisabled={false}
+  autoFocus
+/>;
+```
+
+#### API Differences
+
+- **Controlled `value`:** the design system requires `value: string` as part of `InputProps`; the legacy `Input` type still allowed the full `TextInput` surface including uncontrolled usage.
+- **`autoFocus` default** is `false` in MMDS (`true` in the legacy `Input` implementation) — set explicitly when you need first-mount focus.
+- Styling: design system input uses the shared Tailwind + token pipeline (`twClassName`); single-line metrics use `MAP_TEXT_VARIANT_INPUT_METRICS` (font size/letter spacing without paragraph `lineHeight`) for consistent `TextInput` layout.
+
 ### Checkbox Component
 
 The mobile `Checkbox` maps to `Checkbox` in the design system, with controlled-state naming changes and removed indeterminate/read-only/danger paths.
@@ -2561,6 +2997,224 @@ const MyInput: React.FC<TextFieldProps> = (props) => (
 - The `testID` prop targets the root `Pressable` in MMDS vs. the inner `TextInput` in the mobile version.
 - MMDS sets `accessible={false}` on the root `Pressable`; the mobile version does not.
 - Border radius is `8px` in MMDS vs. `12px` in the mobile version.
+
+### KeyValueRow Component
+
+The mobile `components-temp/KeyValueRow` is replaced by `KeyValueRow` from `@metamask/design-system-react-native`. The legacy API matches the pre-0.16.0 design system API, so **the prop-shape migration is fully documented in [From version 0.15.0 to 0.16.0 › KeyValueRow API](#keyvaluerow-api)** (nested `field`/`value` objects → flat `keyLabel` / `value` / `*TextProps` / `*StartAccessory` / `*EndAccessory` / `*EndButtonIconProps`). Read that section for the full prop-by-prop mapping; this section covers the mobile-specific concerns.
+
+#### Breaking Changes (Mobile)
+
+##### Import Path and Export Shape
+
+| Mobile Pattern                                                                               | Design System Migration                                                                  |
+| -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `import KeyValueRow from '.../component-library/components-temp/KeyValueRow'`                | `import { KeyValueRow } from '@metamask/design-system-react-native'`                     |
+| `import KeyValueRow from '.../component-library/components-temp/KeyValueRow/KeyValueRow'`    | `import { KeyValueRow } from '@metamask/design-system-react-native'`                     |
+| `import { TooltipSizes } from '.../components-temp/KeyValueRow'`                             | Removed — drop the import, or remap to `ButtonIconSize` from the design system if needed |
+| `import { KeyValueRowStubs } from '.../components-temp/KeyValueRow'`                         | Removed — no equivalent. See [Blocked Patterns](#blocked-patterns-1) below               |
+| `import KeyValueRowLabel from '.../components-temp/KeyValueRow/KeyValueLabel/KeyValueLabel'` | Removed — no equivalent                                                                  |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**. The legacy index also re-exports `TooltipSizes` — that re-export is gone, so imports like `import KeyValueRow, { TooltipSizes } from '.../components-temp/KeyValueRow'` must be split.
+
+##### Tooltip Behavior — Host Must Open the Modal
+
+The legacy `KeyValueRow` rendered the tooltip trigger **and** opened the modal internally via `useTooltipModal` (see `KeyValueLabel.tsx`). The design system renders **only** the `ButtonIcon` trigger — the host app is responsible for opening the modal/sheet.
+
+| Legacy Mobile Behavior                                                                                                     | Design System Behavior                                                                                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tooltip={{ title, content, onPress }}` — component calls `openTooltipModal(title, content, …)` and then invokes `onPress` | `keyEndButtonIconProps={{ iconName, onPress }}` / `valueEndButtonIconProps={{ … }}` — host must call `openTooltipModal(…)` inside `onPress`; `title` and `content` are **not rendered** by the component |
+| `tooltip.size`, `tooltip.iconName`                                                                                         | Use `keyEndButtonIconProps` / `valueEndButtonIconProps` fields (`size`, `iconName`, `iconProps`, etc.)                                                                                                   |
+| Default icon color `IconColor.Alternative` via `KeyValueRowLabel`                                                          | Key trigger defaults to `IconColor.IconAlternative`; value trigger defaults to `IconColor.IconDefault`; override via `iconProps.color`                                                                   |
+
+##### Removed Types and Enums
+
+The following are no longer available. Remove the imports and refactor any code that branches on them.
+
+| Removed                                                                                               | Migration                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `KeyValueRowFieldIconSides` (`LEFT` / `RIGHT` / `BOTH`)                                               | Pass a node on `keyStartAccessory` / `keyEndAccessory` / `valueStartAccessory` / `valueEndAccessory` (both = set start **and** end) |
+| `KeyValueRowSectionAlignments`                                                                        | Alignment is handled internally (key shrinks, value row is `flex-1 min-w-0 justify-end`). Drop the import                           |
+| `TooltipSizes`, `IconSizes`                                                                           | Use `ButtonIconSize` / `IconSize` from `@metamask/design-system-react-native` if sizing is needed                                   |
+| `KeyValueRowField`, `KeyValueRowTooltip`                                                              | Use `KeyValueRowProps` from `@metamask/design-system-react-native` (flat props)                                                     |
+| `PreDefinedKeyValueRowLabel`, `KeyValueRowLabelProps`, `KeyValueRowRootProps`, `KeyValueSectionProps` | No direct replacement — these supported custom stub-based layouts not yet available in MMDS                                         |
+
+##### Default Typography Differences
+
+The legacy `KeyValueRowLabel` defaulted to `TextVariant.BodyMDMedium` + `TextColor.Default` for both sides. The design system applies different defaults per side:
+
+- Key: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextAlternative`, `numberOfLines: 1`, `ellipsizeMode: 'tail'`
+- Value: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextDefault`, `numberOfLines: 1`, `ellipsizeMode: 'tail'`
+
+If you relied on the legacy "both sides identical" styling, override via `keyTextProps` / `valueTextProps`.
+
+##### Row Height Now Fixed
+
+Legacy layout was driven by the intrinsic height of the inner `Label` plus section padding. The design system pins the row height:
+
+- `KeyValueRowVariant.Summary` (default) → 40px (`h-10`)
+- `KeyValueRowVariant.Input` → 48px (`h-12`)
+
+If a screen needs a taller row (e.g. input-style confirmation screens where the value is a chip or button), pass `variant={KeyValueRowVariant.Input}`.
+
+#### Migration Examples (Mobile-Specific)
+
+##### Simple label + tooltip with `useTooltipModal`
+
+Before (Mobile):
+
+```tsx
+import KeyValueRow, {
+  TooltipSizes,
+} from '../../../../../../component-library/components-temp/KeyValueRow';
+import { TextVariant } from '../../../../../../component-library/components/Texts/Text';
+
+<KeyValueRow
+  field={{
+    label: { text: strings('tooltip_modal.unstaking_time.title') },
+    tooltip: {
+      title: strings('tooltip_modal.unstaking_time.title'),
+      content: strings('tooltip_modal.unstaking_time.tooltip'),
+      size: TooltipSizes.Sm,
+      onPress: () => trackEvent(createTooltipOpenedEvent(...)),
+    },
+  }}
+  value={{
+    label: {
+      text: strings('stake.estimated_unstaking_time'),
+      variant: TextVariant.BodyMD,
+    },
+  }}
+/>;
+```
+
+After (Design System — host opens the modal):
+
+```tsx
+import {
+  ButtonIconSize,
+  IconName,
+  KeyValueRow,
+} from '@metamask/design-system-react-native';
+import useTooltipModal from '../../../../../../components/hooks/useTooltipModal';
+
+const { openTooltipModal } = useTooltipModal();
+
+<KeyValueRow
+  keyLabel={strings('tooltip_modal.unstaking_time.title')}
+  value={strings('stake.estimated_unstaking_time')}
+  keyEndButtonIconProps={{
+    size: ButtonIconSize.Sm,
+    iconName: IconName.Question,
+    accessibilityLabel: `${strings(
+      'tooltip_modal.unstaking_time.title',
+    )} tooltip`,
+    onPress: () => {
+      openTooltipModal(
+        strings('tooltip_modal.unstaking_time.title'),
+        strings('tooltip_modal.unstaking_time.tooltip'),
+      );
+      trackEvent(createTooltipOpenedEvent(...));
+    },
+  }}
+/>;
+```
+
+Key points: `keyEndButtonIconProps` renders the trigger; the host calls `openTooltipModal(title, content)` and then invokes any analytics side effect.
+
+##### Icon before the key label (legacy `icon.side: LEFT`)
+
+Before (Mobile):
+
+```tsx
+<KeyValueRow
+  field={{
+    label: { text: 'Network' },
+    icon: {
+      name: IconName.Wifi,
+      color: IconColor.PrimaryDefault,
+      size: IconSize.Sm,
+      side: KeyValueRowFieldIconSides.LEFT,
+    },
+  }}
+  value={{ label: { text: 'Mainnet' } }}
+/>
+```
+
+After (Design System):
+
+```tsx
+import {
+  Icon,
+  IconColor,
+  IconName,
+  IconSize,
+  KeyValueRow,
+} from '@metamask/design-system-react-native';
+
+<KeyValueRow
+  keyLabel="Network"
+  value="Mainnet"
+  keyStartAccessory={
+    <Icon
+      name={IconName.Wifi}
+      color={IconColor.PrimaryDefault}
+      size={IconSize.Sm}
+    />
+  }
+/>;
+```
+
+For `side: BOTH`, pass an accessory on both `keyStartAccessory` and `keyEndAccessory`.
+
+##### Taller input-style row
+
+Before (Mobile) — no explicit height control; callers wrapped `KeyValueRow` in `Card` or added `style` to force height.
+
+After (Design System):
+
+```tsx
+import {
+  Icon,
+  IconName,
+  IconSize,
+  KeyValueRow,
+  KeyValueRowVariant,
+} from '@metamask/design-system-react-native';
+
+<KeyValueRow
+  keyLabel="Pay with"
+  value="Debit or credit"
+  variant={KeyValueRowVariant.Input}
+  valueStartAccessory={<Icon name={IconName.Card} size={IconSize.Sm} />}
+  valueEndAccessory={<Icon name={IconName.ArrowDown} size={IconSize.Sm} />}
+/>;
+```
+
+#### Blocked Patterns
+
+These patterns have no drop-in replacement in `@metamask/design-system-react-native`. Keep the legacy import (or rebuild with `Box` / `BoxRow` + `Text`) until the caller is refactored:
+
+- **`KeyValueRowStubs` (`Root` / `Section` / `Label`)** — the legacy module exported sub-components for bespoke layouts. The design system does **not** expose these. Rebuild custom layouts using `Box`, `BoxRow`, and `Text` from `@metamask/design-system-react-native` directly.
+- **Three-or-more-column rows** — `KeyValueRow` renders exactly a key + value row. Compositions that previously nested multiple `KeyValueSection` instances must be rebuilt as plain `BoxRow` layouts.
+- **Using legacy `KeyValueRowLabel` standalone** — the `KeyValueLabel` default export (plus its `useTooltipModal` wiring) is not re-exported. Rebuild with `Text` + a host-owned tooltip handler, or migrate the whole row to `KeyValueRow`.
+
+A sample of mobile call sites exercising these blocked patterns (not exhaustive — grep `components-temp/KeyValueRow` in `metamask-mobile` for the current full set, as the codebase moves fast):
+
+- `app/components/UI/Bridge/components/QuoteDetailsRecipientKeyValueRow/QuoteDetailsRecipientKeyValueRow.tsx` — uses `KeyValueRowStubs` (owner: `@MetaMask/swaps-engineers`)
+- `app/components/UI/Bridge/components/QuoteDetailsCard/QuoteDetailsCard.tsx` — imports `KeyValueRowLabel` directly alongside `KeyValueRow` (owner: `@MetaMask/swaps-engineers`)
+- `app/components/UI/Rewards/components/Tabs/MusdCalculatorTab/MusdCalculatorTab.tsx` — uses `KeyValueRowStubs` (owner: `@MetaMask/rewards`)
+
+Additional consumers exist across Earn, Stake, Predict, Bridge, and Perps — some import `KeyValueRowLabel` directly, others only pull in `TooltipSizes`. Run the grep above to enumerate the complete set before opening a migration PR.
+
+Separately, the deprecated `TooltipSizes` re-export is consumed across additional files in `Earn`, `Stake`, `Predict`, `Bridge`, and `Perps` even when `KeyValueRow` itself is not rendered. Those sites are not "blocked" — swap `TooltipSizes.<X>` for the value-equivalent `ButtonIconSizes.<X>` from the legacy `ButtonIcon` (or `ButtonIconSize` from the design system if the surrounding `ButtonIcon` is also being migrated). Grep `components-temp/KeyValueRow` to enumerate the current set before opening a migration PR.
+
+#### API Differences
+
+- MMDS `KeyValueRow` uses flat props (`keyLabel`, `value`, `*TextProps`, `*StartAccessory`, `*EndAccessory`, `*EndButtonIconProps`) instead of nested `field` / `value` objects.
+- Row height is controlled by `variant` (`KeyValueRowVariant.Summary` / `KeyValueRowVariant.Input`), not by caller-controlled styles.
+- Tooltips render a `ButtonIcon` trigger only — the host opens the modal in `onPress`.
+- `twClassName` is supported on the outer `BoxRow` for Tailwind overrides.
+- `KeyValueRowStubs`, `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes`, and the matching types are removed.
 
 ### ListItem Component
 
@@ -2907,28 +3561,28 @@ Only the import specifier changes.
 
 ### Toast Component
 
-The Toast component in `@metamask/design-system-react-native` replaces the `component-library` `Toast` plus the accompanying `ToastContext`, `ToastContextWrapper`, and `ToastService` singleton from `app/core/ToastService`. The design system consolidates all of that behind a single `Toast` component that exposes static `Toast.show` / `Toast.hide` methods — one mount at the root of the app, one import, no ref plumbing.
+The toast API in `@metamask/design-system-react-native` replaces the mobile `Toast`, `ToastContext`, `ToastContextWrapper`, and `ToastService` patterns with a root-mounted `Toaster` plus the imperative `toast(...)` API. A presentational `Toast` component is also exported for direct rendering in Storybook and docs, but application code should generally use `Toaster` + `toast(...)`.
 
 #### Breaking Changes
 
 ##### Import Path
 
-| Mobile Pattern                                                            | Design System Migration                                                          |
-| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `import Toast from '.../component-library/components/Toast'`              | `import { Toast } from '@metamask/design-system-react-native'`                   |
-| `import { ToastContext } from '.../component-library/components/Toast'`   | _(removed — no longer needed)_                                                   |
-| `import { ToastContextWrapper } from '.../component-library/.../Toast'`   | _(removed — no longer needed)_                                                   |
-| `import ToastService from '.../app/core/ToastService'`                    | `import { Toast } from '@metamask/design-system-react-native'`                   |
-| `import { ToastVariants } from '.../component-library/components/Toast'`  | `import { ToastVariant } from '@metamask/design-system-react-native'`            |
-| `import { ButtonVariants } from '.../component-library/components/Toast'` | `import { ToastCloseButtonVariant } from '@metamask/design-system-react-native'` |
+| Mobile Pattern                                                            | Design System Migration                                                    |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `import Toast from '.../component-library/components/Toast'`              | `import { Toaster, toast } from '@metamask/design-system-react-native'`    |
+| `import { ToastContext } from '.../component-library/components/Toast'`   | _(removed — no longer needed)_                                             |
+| `import { ToastContextWrapper } from '.../component-library/.../Toast'`   | _(removed — no longer needed)_                                             |
+| `import ToastService from '.../app/core/ToastService'`                    | `import { Toaster, toast } from '@metamask/design-system-react-native'`    |
+| `import { ToastVariants } from '.../component-library/components/Toast'`  | `import { ToastSeverity } from '@metamask/design-system-react-native'`     |
+| `import { ButtonVariants } from '.../component-library/components/Toast'` | \_(removed — configure `closeButtonProps` / use direct `Toast` rendering)` |
 
-The mobile component uses a **default export**; the design system uses a **named export**.
+The mobile component uses a default export; the design system uses named exports.
 
-##### Rendering: one `<Toast />` at the root, no context
+##### Rendering: one `<Toaster />` at the root, no context
 
-| Mobile Pattern                                                                                              | Design System Migration                        |
-| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| Wrap root tree in `<ToastContextWrapper>`, render `<Toast ref={toastRef} />` with a ref pulled from context | Render `<Toast />` once at the root of the app |
+| Mobile Pattern                                                                                              | Design System Migration                          |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Wrap root tree in `<ToastContextWrapper>`, render `<Toast ref={toastRef} />` with a ref pulled from context | Render `<Toaster />` once at the root of the app |
 
 Before (mobile):
 
@@ -2951,28 +3605,27 @@ return (
 After (design system):
 
 ```tsx
-import { Toast } from '@metamask/design-system-react-native';
+import { Toaster } from '@metamask/design-system-react-native';
 
 const App = () => (
   <>
     <AppContent />
-    <Toast />
+    <Toaster />
   </>
 );
 ```
 
-On mount `<Toast />` registers itself with the static `Toast.show` / `Toast.hide` methods. Render it exactly once.
+On mount `<Toaster />` registers the `toast(...)` / `toast.dismiss()` API. Render it exactly once.
 
-##### Showing a toast: `Toast.show` replaces `toastRef.current?.showToast` and `ToastService.showToast`
+##### Showing a toast: `toast(...)` replaces `toastRef.current?.showToast` and `ToastService.showToast`
 
 Before (React component using context):
 
 ```tsx
 const { toastRef } = useContext(ToastContext);
 toastRef?.current?.showToast({
-  variant: ToastVariants.Plain,
-  labelOptions: [{ label: 'Saved' }],
   hasNoTimeout: false,
+  text: 'Saved',
 });
 ```
 
@@ -2980,84 +3633,102 @@ Before (non-React code using the service):
 
 ```tsx
 import ToastService from '../../core/ToastService';
-ToastService.showToast({ ... });
+ToastService.showToast({ hasNoTimeout: false, text: 'Saved' });
 ToastService.closeToast();
 ```
 
 After (both cases, identical call site):
 
 ```tsx
-import { Toast, ToastVariant } from '@metamask/design-system-react-native';
+import { toast, ToastSeverity } from '@metamask/design-system-react-native';
 
-Toast.show({
-  variant: ToastVariant.Plain,
-  labelOptions: [{ label: 'Saved' }],
+toast({
   hasNoTimeout: false,
+  title: 'Saved',
+  description: 'Your changes are available everywhere.',
+  severity: ToastSeverity.Success,
 });
 
-Toast.hide();
+toast.dismiss();
 ```
 
-There is no longer a distinction between "React component" and "service" call sites — `Toast.show` works anywhere. `useContext(ToastContext)` and `ToastService` both disappear from the consumer surface.
+There is no longer a distinction between React and service call sites. `toast(...)` works anywhere after the root `<Toaster />` has mounted.
 
 ##### Method renames
 
-| Mobile (on ref / service)      | Design System (static)                                                                   |
-| ------------------------------ | ---------------------------------------------------------------------------------------- |
-| `toastRef.current.showToast`   | `Toast.show`                                                                             |
-| `toastRef.current.closeToast`  | `Toast.hide`                                                                             |
-| `ToastService.showToast`       | `Toast.show`                                                                             |
-| `ToastService.closeToast`      | `Toast.hide`                                                                             |
-| `ToastService.resetForTesting` | _(removed — not needed; RTL auto-cleanup unregisters the ref when `<Toast />` unmounts)_ |
+| Mobile (on ref / service)      | Design System                                                                              |
+| ------------------------------ | ------------------------------------------------------------------------------------------ |
+| `toastRef.current.showToast`   | `toast(...)`                                                                               |
+| `toastRef.current.closeToast`  | `toast.dismiss()`                                                                          |
+| `ToastService.showToast`       | `toast(...)`                                                                               |
+| `ToastService.closeToast`      | `toast.dismiss()`                                                                          |
+| `ToastService.resetForTesting` | _(removed — not needed; RTL auto-cleanup unregisters the ref when `<Toaster />` unmounts)_ |
 
-The per-instance `showToast` / `closeToast` methods are still exposed on the forwarded ref for advanced cases (for example, isolated Storybook stories), but application code should use the static API.
+The forwarded `Toaster` ref still exposes `showToast` and `closeToast` for advanced cases, but application code should prefer `toast(...)`.
 
-##### Enum rename: `ToastVariants` → `ToastVariant`
+##### Toast options are now flat and content-first
 
-The enum is renamed from `ToastVariants` (plural) to `ToastVariant` (singular) to match ADR-0003 naming. String values are unchanged, so runtime behavior is identical.
+The design system no longer exposes separate option unions such as `PlainToastOption`, `AccountToastOption`, `NetworkToastOption`, `AppToastOption`, or `IconToastOption`. Toast content is modeled with one shape:
 
-##### Close button variant: `ButtonVariants.Link` → `ToastCloseButtonVariant.Icon`
+```tsx
+type ToastOptions = {
+  hasNoTimeout: boolean;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  actionButtonLabel?: string;
+  actionButtonOnPress?: () => void;
+  onClose?: () => void;
+  closeButtonProps?: NonNullable<ToastProps['closeButtonProps']>;
+  startAccessory?: React.ReactNode;
+  severity?: ToastSeverity;
+  iconAlertProps?: ToastIconProps;
+  bottomOffset?: number;
+};
+```
 
-The close-button branch selector no longer piggybacks on the generic `ButtonVariants` enum. Use the dedicated `ToastCloseButtonVariant.Icon` marker when you want an icon-only close button.
+Use `severity` for the default status icon. `ToastSeverity.Default` renders no built-in icon. Pass `startAccessory` when you need to override that icon with custom content such as an avatar, network badge, or app icon.
+
+##### `labelOptions` / `descriptionOptions` / `linkButtonOptions` → flat props
 
 Before:
 
 ```tsx
-closeButtonOptions: {
-  variant: ButtonVariants.Link,
-  iconName: IconName.Close,
-  onPress: handleClose,
-}
+toast({
+  hasNoTimeout: false,
+  labelOptions: [{ label: 'Saved' }],
+  descriptionOptions: [{ label: 'Your changes are available everywhere.' }],
+  linkButtonOptions: {
+    label: 'Undo',
+    onPress: handleUndo,
+  },
+});
 ```
 
 After:
 
 ```tsx
-closeButtonOptions: {
-  variant: ToastCloseButtonVariant.Icon,
-  iconName: IconName.Close,
-  onPress: handleClose,
-}
+toast({
+  hasNoTimeout: false,
+  title: 'Saved',
+  description: 'Your changes are available everywhere.',
+  actionButtonLabel: 'Undo',
+  actionButtonOnPress: handleUndo,
+});
 ```
 
 ##### `customBottomOffset` → `bottomOffset`
 
-The per-toast offset prop is renamed from `customBottomOffset` to `bottomOffset` (passed on the `ToastOptions` object, unchanged semantics).
+The per-toast offset prop is renamed from `customBottomOffset` to `bottomOffset`.
 
 #### Error Behavior
 
-Calling `Toast.show` or `Toast.hide` before `<Toast />` has mounted throws a descriptive error pointing at the missing mount, instead of silently no-oping. Surface this in development as a loud signal that the root `<Toast />` is missing.
-
-#### Unchanged
-
-- All `ToastOptions` shapes (`PlainToastOption`, `AccountToastOption`, `NetworkToastOption`, `AppToastOption`, `IconToastOption`) and their fields — only the enum _name_ (`ToastVariants` → `ToastVariant`) changes.
-- `hasNoTimeout`, `labelOptions`, `descriptionOptions`, `linkButtonOptions`, `closeButtonOptions`, `startAccessory`.
-- Animation timings (`TOAST_VISIBILITY_DURATION`, `TOAST_ANIMATION_DURATION`, `TOAST_BOTTOM_PADDING`) are re-exported from the design system.
+Calling `toast(...)` or `toast.dismiss()` before `<Toaster />` has mounted throws a descriptive error pointing at the missing mount instead of silently no-oping.
 
 #### Removed
 
 - `ToastContext`, `ToastContextWrapper`, `ToastContextParams` — no replacement needed, the static API covers every call site.
-- `ToastService` (from `app/core/ToastService`) — delete the file and the call sites that used `ToastService.toastRef` / `ToastService.showToast` / `ToastService.closeToast` in favor of `Toast.show` / `Toast.hide`.
+- `ToastService` from `app/core/ToastService` — replace all usages with `toast(...)` / `toast.dismiss()`.
+- Variant-specific toast option shapes and fields such as `accountAddress`, `networkImageSource`, `appIconSource`, and the old `labelOptions` / `descriptionOptions` wrappers.
 
 ## Version Updates
 

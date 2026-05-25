@@ -51,7 +51,7 @@ describe('Jazzicon Component', () => {
           borderRadius: 0,
         },
       }),
-      expect.any(Object),
+      undefined,
     );
   });
 
@@ -67,7 +67,7 @@ describe('Jazzicon Component', () => {
           borderRadius: 0,
         },
       }),
-      expect.any(Object),
+      undefined,
     );
   });
 
@@ -89,7 +89,7 @@ describe('Jazzicon Component', () => {
           padding: 5,
         },
       }),
-      expect.any(Object),
+      undefined,
     );
   });
 
@@ -105,7 +105,7 @@ describe('Jazzicon Component', () => {
           borderRadius: 0,
         },
       }),
-      expect.any(Object),
+      undefined,
     );
 
     // Verify extractAccountAddress was not called since address is undefined

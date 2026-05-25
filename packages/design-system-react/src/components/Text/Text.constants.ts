@@ -72,7 +72,7 @@ export const TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT: Record<TextVariant, string> = {
 
 export const MAP_TEXT_VARIANT_TAG: Record<
   TextVariant,
-  keyof JSX.IntrinsicElements
+  keyof React.JSX.IntrinsicElements
 > = {
   [TextVariant.DisplayLg]: 'h1',
   [TextVariant.DisplayMd]: 'h1',

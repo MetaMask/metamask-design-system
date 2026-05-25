@@ -14,12 +14,7 @@ type BannerBaseActionButtonProps = Omit<
 type BannerBaseCloseButtonProps = Omit<
   Partial<ButtonIconProps>,
   'iconName' | 'onPress'
-> & {
-  /**
-   * Optional press handler for the close button.
-   */
-  onPress?: (event: GestureResponderEvent) => void;
-};
+>;
 
 type BannerBasePropsBase = BannerBasePropsShared &
   Omit<BoxProps, 'children'> & {
@@ -42,7 +37,7 @@ type BannerBasePropsBase = BannerBasePropsShared &
     onClose?: () => void;
     /**
      * Optional props for the close `ButtonIcon`.
-     * Providing this also shows a close button.
+     * Only used when `onClose` is provided.
      */
     closeButtonProps?: BannerBaseCloseButtonProps;
   };

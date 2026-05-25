@@ -1,6 +1,5 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render, fireEvent } from '@testing-library/react-native';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import { RadioButton } from './RadioButton';

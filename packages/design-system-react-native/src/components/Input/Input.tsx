@@ -30,6 +30,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       onBlur,
       onFocus,
       autoFocus = false,
+      multiline,
       ...props
     },
     ref,
@@ -37,6 +38,7 @@ export const Input = forwardRef<TextInput, InputProps>(
     const [isFocused, setIsFocused] = useState(autoFocus);
     const tw = useTailwind();
     const theme = useTheme();
+    const isMultiline = multiline === true;
 
     const placeholderTextColor = useMemo(
       () =>
@@ -56,7 +58,30 @@ export const Input = forwardRef<TextInput, InputProps>(
     // scoped to the placeholder-visible state without affecting typed text.
     const isPlaceholderVisible = hasPlaceholder && value === '';
 
-    const inputStyle = useMemo(
+    // Multiline field styles
+    const multilineChromeStyle = useMemo(
+      () =>
+        tw.style(
+          'text-default',
+          'bg-default',
+          'border',
+          'border-transparent',
+          !isStateStylesDisabled && isDisabled && 'opacity-50',
+          !isStateStylesDisabled &&
+            !isDisabled &&
+            isFocused &&
+            'border-primary-default',
+          twClassName,
+        ),
+      [isStateStylesDisabled, isDisabled, isFocused, twClassName, tw],
+    );
+    const multilineTypographyStyle = useMemo(
+      () => tw.style(`text-${textVariant}`, fontClass),
+      [textVariant, fontClass, tw],
+    );
+
+    // Single-line field styles
+    const singleLineChromeStyle = useMemo(
       () =>
         tw.style(
           fontClass,
@@ -80,11 +105,26 @@ export const Input = forwardRef<TextInput, InputProps>(
         tw,
       ],
     );
-
-    const variantTextStyle = useMemo(
+    const singleLineTypographyStyle = useMemo(
       () => MAP_TEXT_VARIANT_INPUT_METRICS[textVariant],
       [textVariant],
     );
+    // iOS-only single-line placeholder fix: native TextInput can render
+    // placeholder text vertically offset. Do not use on Android (lineHeight 0
+    // collapses text) or on multiline (breaks paragraph layout).
+    const iosSingleLinePlaceholderLineHeightFix = Platform.OS === 'ios' &&
+      isPlaceholderVisible && { lineHeight: 0 as const };
+
+    const resolvedStyle = (
+      isMultiline
+        ? [multilineChromeStyle, multilineTypographyStyle, style]
+        : [
+            singleLineChromeStyle,
+            singleLineTypographyStyle,
+            iosSingleLinePlaceholderLineHeightFix,
+            style,
+          ]
+    ).filter(Boolean);
 
     useEffect(() => {
       if (isDisabled || isReadOnly) {
@@ -107,21 +147,12 @@ export const Input = forwardRef<TextInput, InputProps>(
       },
       [onFocus],
     );
-    const resolvedStyle = [
-      inputStyle,
-      variantTextStyle,
-      // iOS-only workaround: when a placeholder is visible, native iOS
-      // TextInput can render placeholder text vertically offset.
-      // Keep this iOS-only because lineHeight: 0 can collapse text on Android.
-      Platform.OS === 'ios' &&
-        isPlaceholderVisible && { lineHeight: 0 as const },
-      style,
-    ].filter(Boolean);
 
     return (
       <TextInput
         ref={ref}
         {...props}
+        multiline={multiline}
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
         value={value}

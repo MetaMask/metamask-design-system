@@ -5,7 +5,7 @@ const config: StorybookConfig = {
     '../../../packages/design-system-react-native/src/**/*.stories.@(js|jsx|ts|tsx)',
     '../stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: [
+  deviceAddons: [
     '@storybook/addon-ondevice-notes',
     '@storybook/addon-ondevice-controls',
     '@storybook/addon-ondevice-backgrounds',
