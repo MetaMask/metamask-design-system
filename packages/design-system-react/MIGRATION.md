@@ -1453,14 +1453,14 @@ The extension `avatar-favicon` and MMDS `AvatarFavicon` both use a dapp name for
 
 #### Breaking Changes (Extension)
 
-| Extension API                     | MMDS API                                              | Change Type     | Notes                                                                 |
-| --------------------------------- | ----------------------------------------------------- | --------------- | --------------------------------------------------------------------- |
-| `name: string` (required)         | `name?: string`                                       | now optional    | still used for alt text; defaults inside component when empty         |
-| `src?: string`                    | `src?: string`                                        | keep            | string URL for `<img>`                                                |
-| `fallbackIconProps`               | (no equivalent)                                       | removed         | MMDS uses `fallbackText` + optional `imageProps.onError` for recovery |
-| `size` / `AvatarFaviconSize` enum | `AvatarFaviconSize` (alias of `AvatarBaseSize` const) | values align    | same `xs`–`xl` labels                                                 |
-| `borderColor` on style props      | use `className` / `style` or token classes            | not carried 1:1 | prefer design tokens via Tailwind                                     |
-| (no `fallbackText` in extension)  | `fallbackText?`                                       | new             | explicit fallback text when no image loads; overrides first-letter-of-`name` default                  |
+| Extension API                     | MMDS API                                              | Change Type     | Notes                                                                                |
+| --------------------------------- | ----------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------ |
+| `name: string` (required)         | `name?: string`                                       | now optional    | still used for alt text; defaults inside component when empty                        |
+| `src?: string`                    | `src?: string`                                        | keep            | string URL for `<img>`                                                               |
+| `fallbackIconProps`               | (no equivalent)                                       | removed         | MMDS uses `fallbackText` + optional `imageProps.onError` for recovery                |
+| `size` / `AvatarFaviconSize` enum | `AvatarFaviconSize` (alias of `AvatarBaseSize` const) | values align    | same `xs`–`xl` labels                                                                |
+| `borderColor` on style props      | use `className` / `style` or token classes            | not carried 1:1 | prefer design tokens via Tailwind                                                    |
+| (no `fallbackText` in extension)  | `fallbackText?`                                       | new             | explicit fallback text when no image loads; overrides first-letter-of-`name` default |
 
 #### Migration Example
 
@@ -1566,13 +1566,12 @@ import {
 ##### After (Design System)
 
 ```tsx
-import { AvatarNetwork, AvatarNetworkSize } from '@metamask/design-system-react';
+import {
+  AvatarNetwork,
+  AvatarNetworkSize,
+} from '@metamask/design-system-react';
 
-<AvatarNetwork
-  name="Mainnet"
-  src={networkIcon}
-  size={AvatarNetworkSize.Md}
-/>;
+<AvatarNetwork name="Mainnet" src={networkIcon} size={AvatarNetworkSize.Md} />;
 ```
 
 ### AvatarToken Component
@@ -1581,12 +1580,12 @@ import { AvatarNetwork, AvatarNetworkSize } from '@metamask/design-system-react'
 
 #### Breaking Changes (Extension)
 
-| Extension API        | MMDS API                                      | Change Type     | Notes                                         |
-| -------------------- | --------------------------------------------- | --------------- | --------------------------------------------- |
-| `showHalo?: boolean`             | (removed)                                     | not supported   |                                                                                       |
-| `name?: string`                  | `name?`, `fallbackText?`                      | extended        | MMDS documents shared fallback rules in types                                         |
-| `src?`                           | `src?`                                        | unchanged       |                                                                                       |
-| `size`                           | `AvatarTokenSize` (alias of `AvatarBaseSize`) | value alignment |                                                                                       |
+| Extension API                    | MMDS API                                      | Change Type     | Notes                                                                                |
+| -------------------------------- | --------------------------------------------- | --------------- | ------------------------------------------------------------------------------------ |
+| `showHalo?: boolean`             | (removed)                                     | not supported   |                                                                                      |
+| `name?: string`                  | `name?`, `fallbackText?`                      | extended        | MMDS documents shared fallback rules in types                                        |
+| `src?`                           | `src?`                                        | unchanged       |                                                                                      |
+| `size`                           | `AvatarTokenSize` (alias of `AvatarBaseSize`) | value alignment |                                                                                      |
 | (no `fallbackText` in extension) | `fallbackText?`                               | new             | explicit fallback text when no image loads; overrides first-letter-of-`name` default |
 
 #### Migration Example
