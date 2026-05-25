@@ -1,1 +1,1 @@
-export type { TextFieldPropsShared } from './TextField.types';
+export { type TextFieldPropsShared } from './TextField.types';

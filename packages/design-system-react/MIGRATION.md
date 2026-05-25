@@ -30,6 +30,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [PopoverHeader Component](#popoverheader-component)
   - [SensitiveText Component](#sensitivetext-component)
   - [Skeleton Component](#skeleton-component)
+  - [TextField Component](#textfield-component)
 - [Version Updates](#version-updates)
   - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
@@ -2574,6 +2575,68 @@ Codemod-friendly: every `isLoading=` token in the extension's existing call site
 
 - `Skeleton` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - The container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` by default. The skeleton takes no part in the accessibility tree.
+
+### TextField Component
+
+The `TextField` is now available from the design system. The new component drops the polymorphic `Box`/`InputComponent` pattern in favor of a concrete `forwardRef<HTMLDivElement>` container that composes the design-system `Input`. State props are renamed to match the system-wide `is*` convention, and styling moves from SCSS (`mm-text-field`) to Tailwind utilities.
+
+#### Import Path
+
+| Extension Pattern                                         | Design System Migration                                         |
+| --------------------------------------------------------- | --------------------------------------------------------------- |
+| `import { TextField } from '../../component-library'`     | `import { TextField } from '@metamask/design-system-react'`     |
+| `import { TextFieldSize } from '../../component-library'` | `import { TextFieldSize } from '@metamask/design-system-react'` |
+| `import { TextFieldType } from '../../component-library'` | `import { TextFieldType } from '@metamask/design-system-react'` |
+
+#### Enums → Const Objects
+
+`TextFieldSize` and `TextFieldType` are now const objects with derived string union types (per ADR-0003). Member access (`TextFieldSize.Md`) and underlying string values (`'sm'`, `'md'`, `'lg'`, `'text'`, `'number'`, `'password'`, `'search'`) are unchanged, so most call sites need no edits.
+
+#### State Props
+
+| Extension Prop | Design System Prop | Notes   |
+| -------------- | ------------------ | ------- |
+| `disabled`     | `isDisabled`       | renamed |
+| `readOnly`     | `isReadOnly`       | renamed |
+| `error`        | `isError`          | renamed |
+
+```tsx
+// Before (Extension)
+<TextField disabled readOnly error value={value} onChange={onChange} />
+
+// After (Design System)
+<TextField isDisabled isReadOnly isError value={value} onChange={onChange} />
+```
+
+#### Removed Props
+
+| Extension Prop                                                | Design System Migration                                                                                                                                 |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`                                        | Removed. The container is always a `<div>`. Wrap with a custom element if you need a different root.                                                    |
+| `InputComponent`                                              | Replaced by the shared `inputElement` slot. Pass a fully-rendered element instead of a component reference.                                             |
+| `testId`                                                      | Pass `data-testid` directly on `TextField` (root). For the inner input, use `getByRole('textbox')` in tests or compose your own via `inputElement`.     |
+| `defaultValue`                                                | Removed. The design-system `Input` is controlled-only; manage state with `value`/`onChange` (or use `inputElement` for an uncontrolled custom input).   |
+| Box style-utility props (`paddingLeft`, `borderRadius`, etc.) | Use `className` with Tailwind utilities, or compose with `Box`. The container's default chrome (border, radius, padding) is fixed by the design system. |
+
+```tsx
+// Before (Extension): custom InputComponent reference
+<TextField InputComponent={CustomInput} value={value} />
+
+// After (Design System): pass a rendered element via inputElement
+<TextField
+  value={value}
+  inputElement={<CustomInput value={value} onChange={onChange} />}
+/>
+```
+
+#### Ref
+
+- `ref` on `TextField` targets the root container (`HTMLDivElement`).
+- Use `inputRef` to reach the inner `<input>`. Both object refs and callback refs are supported.
+
+#### Styling
+
+The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven by design tokens) instead of the `mm-text-field` SCSS module. Custom container styles should be passed via `className`; the legacy `mm-text-field--*` classes are no longer applied.
 
 ## Version Updates
 
