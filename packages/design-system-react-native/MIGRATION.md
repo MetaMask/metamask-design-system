@@ -95,6 +95,25 @@ If you were relying on `simultaneousHandlers` for nested scroll behaviour, this 
 
 - Existing **`@metamask/design-system-react-native`** consumers that relied on **`closeButtonProps.onPress`** or on rendering a close button without **`onClose`** must update those call sites.
 
+#### HeaderBase and BottomSheetHeader: variant-based title API removed
+
+**What changed:**
+
+- **`HeaderBase`** no longer exposes **`variant`** or **`HeaderBaseVariant`**.
+- **`BottomSheetHeader`** no longer exposes **`variant`** or **`BottomSheetHeaderVariant`**.
+- **`HeaderBase`** no longer exposes **`titleTestID`**. Use **`textProps.testID`** for the auto-rendered string title path.
+- String children now render with the shared centered **`HeadingSm`** title treatment. If you need a custom title layout, pass a custom **`ReactNode`** as **`children`** instead of relying on variants.
+- **`BottomSheetHeader`** continues to inherit **`HeaderBase`** root and title props, including **`textProps`**, while still owning its back and close accessories internally through **`onBack`** and **`onClose`**.
+
+**Migration:**
+
+- Remove **`variant`** from **`HeaderBase`** and **`BottomSheetHeader`** call sites.
+- Remove imports of **`HeaderBaseVariant`** and **`BottomSheetHeaderVariant`**.
+- Replace **`titleTestID="..."`** with **`textProps={{ testID: '...' }}`**.
+- If you previously used a variant to change title alignment or layout, pass custom **`children`** instead.
+
+See [HeaderBase Component](#headerbase-component) and [BottomSheetHeader Component](#bottomsheetheader-component) for complete before/after examples and API mappings.
+
 <a id="buttonbase-size-defaults"></a>
 
 #### ButtonBase: let `size` drive label, icons, and spacing
@@ -1721,6 +1740,24 @@ import BottomSheetHeader from '.../component-library/components/BottomSheets/Bot
 />;
 ```
 
+##### Removed Prop: `variant`
+
+The DS `BottomSheetHeader` no longer supports `variant` or `BottomSheetHeaderVariant`. It always uses the shared `HeaderBase` title path. If you previously used a variant to change title layout or alignment, pass custom header content as `children` instead.
+
+| Mobile Pattern                                   | Design System Migration                             |
+| ------------------------------------------------ | --------------------------------------------------- |
+| `variant={BottomSheetHeaderVariant.Compact}`     | Remove — default DS behavior                        |
+| `variant={BottomSheetHeaderVariant.Display}`     | Remove — compose custom title content as `children` |
+| `import { BottomSheetHeaderVariant } from '...'` | Remove — enum no longer exists                      |
+
+##### String title testing: `titleTestID` → `textProps.testID`
+
+The DS `BottomSheetHeader` inherits `textProps` from `HeaderBase`. When `children` is a string, use `textProps={{ testID: ... }}` to target the rendered title element.
+
+| Mobile / Older Pattern          | Design System Migration                     |
+| ------------------------------- | ------------------------------------------- |
+| `titleTestID="my-header-title"` | `textProps={{ testID: 'my-header-title' }}` |
+
 #### Migration Examples
 
 ##### Header with Close Button
@@ -1773,7 +1810,7 @@ After (Design System — identical JSX):
 
 #### API Differences
 
-The DS `BottomSheetHeader` adds a `variant` prop (`BottomSheetHeaderVariant.Compact` | `BottomSheetHeaderVariant.Display`) that is also present in the old mobile version — no change needed. The only removal is `endAccessory` (see above).
+The DS `BottomSheetHeader` supports the same back/close convenience props as mobile (`onBack`, `backButtonProps`, `onClose`, `closeButtonProps`) and still inherits `HeaderBase` root props such as `testID`, `style`, `twClassName`, and `textProps`. It does not support `endAccessory`, `startAccessory`, or `variant`, and string-title testing should use `textProps.testID` instead of `titleTestID`.
 
 ---
 
@@ -1955,7 +1992,7 @@ MetaMask Extension’s `ModalFooter` migrated to the same slot-based API in `@me
 
 ### HeaderBase Component
 
-The `HeaderBase` component is a flexible header with optional start/end accessories and a configurable title variant. Migration is nearly a drop-in swap — most consumers change the import, remove two constant imports, and switch any affected test IDs to explicit props.
+The `HeaderBase` component is a flexible header with optional start/end accessories and a centered title. Migration is still close to a drop-in import swap, but the DS version removes the old variant-based title API and the dedicated `titleTestID` prop.
 
 #### Breaking Changes
 
@@ -1964,7 +2001,7 @@ The `HeaderBase` component is a flexible header with optional start/end accessor
 | Mobile Pattern                                                                    | Design System Migration                                                       |
 | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | `import HeaderBase from '.../component-library/components/HeaderBase'`            | `import { HeaderBase } from '@metamask/design-system-react-native'`           |
-| `import { HeaderBaseVariant } from '.../component-library/components/HeaderBase'` | `import { HeaderBaseVariant } from '@metamask/design-system-react-native'`    |
+| `import { HeaderBaseVariant } from '.../component-library/components/HeaderBase'` | Remove — enum no longer exists                                                |
 | `import type { HeaderBaseProps } from '.../HeaderBase/HeaderBase.types'`          | `import type { HeaderBaseProps } from '@metamask/design-system-react-native'` |
 
 Note: The legacy component uses a **default export**; the design system uses a **named export**.
@@ -1978,12 +2015,12 @@ The legacy component exported two test-ID constants from `HeaderBase.constants`:
 
 The design system removes both constants. Test IDs are now explicit per call site.
 
-| Mobile Pattern                                                        | Design System Migration                                 |
-| --------------------------------------------------------------------- | ------------------------------------------------------- |
-| `import { HEADERBASE_TEST_ID } from '.../HeaderBase.constants'`       | Remove — pass `testID="..."` explicitly on `HeaderBase` |
-| `import { HEADERBASE_TITLE_TEST_ID } from '.../HeaderBase.constants'` | Remove — use the new `titleTestID` prop on `HeaderBase` |
-| Querying by the default `'header'` container id                       | Pass an explicit `testID` and query by that value       |
-| Querying by `'header-title'` in tests                                 | Pass `titleTestID="..."` and query by that value        |
+| Mobile Pattern                                                        | Design System Migration                                      |
+| --------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `import { HEADERBASE_TEST_ID } from '.../HeaderBase.constants'`       | Remove — pass `testID="..."` explicitly on `HeaderBase`      |
+| `import { HEADERBASE_TITLE_TEST_ID } from '.../HeaderBase.constants'` | Remove — use `textProps={{ testID: '...' }}` instead         |
+| Querying by the default `'header'` container id                       | Pass an explicit `testID` and query by that value            |
+| Querying by `'header-title'` in tests                                 | Pass `textProps={{ testID: '...' }}` and query by that value |
 
 ##### Default Container `testID` Removed
 
@@ -1993,36 +2030,42 @@ The legacy component set `testID = HEADERBASE_TEST_ID` (`'header'`) by default o
 | ------------------------------------------------------------------ | ------------------------------------------------------ |
 | `<HeaderBase>Title</HeaderBase>` — rendered with `testID="header"` | Pass `testID="..."` explicitly if any tests rely on it |
 
-##### New `titleTestID` Prop
+##### Removed Prop: `titleTestID`
 
-The inner title `Text` (rendered when `children` is a string) no longer carries the hard-coded `HEADERBASE_TITLE_TEST_ID`. Pass the new `titleTestID` prop to target the title element in tests.
+The DS `HeaderBase` no longer exposes `titleTestID`. When `children` is a string, target the rendered title element with `textProps={{ testID: '...' }}` instead.
 
 ```tsx
 // Before — queried by the constant
 getByTestId(HEADERBASE_TITLE_TEST_ID);
 
-// After — caller provides the id
-<HeaderBase titleTestID="update-needed-title">{title}</HeaderBase>;
+// After — caller provides the id through textProps
+<HeaderBase textProps={{ testID: 'update-needed-title' }}>{title}</HeaderBase>;
 getByTestId('update-needed-title');
 ```
 
-##### `Display` Variant: Fixed Height (`h-14`)
+##### Removed Prop: `variant`
 
-The legacy `HeaderBase` applied `min-h-14` only to the `Compact` variant; `Display` had no vertical height constraint and grew with its content. The design system applies `h-14` (56px fixed) to **both** variants.
+The DS `HeaderBase` no longer exposes `variant` or `HeaderBaseVariant`. String children now render through a single centered title path using the shared `HeadingSm` text treatment.
 
-Review `Display` headers after migration — they now render with a fixed 56px height. If your layout expects content-sized heights for `Display`, override via `twClassName` or `style` on the call site.
+If you previously relied on variants to change title layout or alignment, pass custom title content as `children` instead of using the removed enum.
 
-##### Unchanged Props
+| Mobile Pattern                            | Design System Migration                             |
+| ----------------------------------------- | --------------------------------------------------- |
+| `variant={HeaderBaseVariant.Compact}`     | Remove — default DS behavior                        |
+| `variant={HeaderBaseVariant.Display}`     | Remove — compose custom title content as `children` |
+| `import { HeaderBaseVariant } from '...'` | Remove — enum no longer exists                      |
 
-All other props carry over with the same names, defaults, and semantics:
+##### Title rendering and accessory precedence
 
-- `children` — title (string auto-renders as `Text`; `ReactNode` renders as-is)
-- `variant` — `HeaderBaseVariant.Compact` (default) / `HeaderBaseVariant.Display`
-- `startAccessory` / `endAccessory` — custom `ReactNode` slots (take priority over the `*ButtonIconProps` variants)
+The DS component keeps the same core escape hatches, but there are a few important behavior notes:
+
+- `children` — pass a string for the standard centered title, or a custom `ReactNode` for a fully custom title layout
+- `startAccessory` / `endAccessory` — custom `ReactNode` slots (take priority over the `*ButtonIconProps` convenience props)
 - `startButtonIconProps: ButtonIconProps` — render a `ButtonIcon` at the start (default size `ButtonIconSize.Md`)
-- `endButtonIconProps: ButtonIconProps[]` — render multiple `ButtonIcon`s at the end, in reverse order — first item rightmost (default size `ButtonIconSize.Md` each)
+- `endButtonIconProps: ButtonIconProps[]` — render multiple `ButtonIcon`s at the end, in reverse order, so the first item appears rightmost (default size `ButtonIconSize.Md` each)
 - `includesTopInset` — adds the `react-native-safe-area-context` top inset as a top margin (default `false`)
 - `startAccessoryWrapperProps` / `endAccessoryWrapperProps` — `ViewProps` forwarded to the accessory wrappers
+- `textProps` — forwarded to the auto-rendered title text when `children` is a string
 - `twClassName` — Tailwind classes merged with the container defaults
 - `style` — RN style applied to the container
 - All `ViewProps` (including `testID`, `accessibilityLabel`)
@@ -2087,7 +2130,7 @@ import {
 
 <HeaderBase
   testID="account-details-header"
-  titleTestID="account-details-title"
+  textProps={{ testID: 'account-details-title' }}
   endButtonIconProps={[
     {
       iconName: IconName.Close,
@@ -2104,7 +2147,7 @@ getByTestId('account-details-header');
 getByTestId('account-details-title');
 ```
 
-##### `Display` variant with left-aligned title
+##### Custom title content instead of `variant`
 
 Before (Mobile):
 
@@ -2112,8 +2155,12 @@ Before (Mobile):
 import HeaderBase, {
   HeaderBaseVariant,
 } from '../../../component-library/components/HeaderBase';
+import Text from '../../../component-library/components/Texts/Text';
+import { TextVariant } from '../../../component-library/components/Texts/Text';
 
-<HeaderBase variant={HeaderBaseVariant.Display}>Wallet</HeaderBase>;
+<HeaderBase variant={HeaderBaseVariant.Display}>
+  <Text variant={TextVariant.HeadingMD}>Wallet</Text>
+</HeaderBase>;
 ```
 
 After (Design System):
@@ -2121,20 +2168,26 @@ After (Design System):
 ```tsx
 import {
   HeaderBase,
-  HeaderBaseVariant,
+  Box,
+  Text,
+  TextVariant,
 } from '@metamask/design-system-react-native';
 
-<HeaderBase variant={HeaderBaseVariant.Display}>Wallet</HeaderBase>;
+<HeaderBase>
+  <Box twClassName="w-full items-start">
+    <Text variant={TextVariant.HeadingSm}>Wallet</Text>
+    <Text variant={TextVariant.BodySm}>Subtitle</Text>
+  </Box>
+</HeaderBase>;
 ```
-
-Note: the `Display` variant now has a fixed `h-14` container. If you need the legacy content-sized height, override via `twClassName="h-auto"` or an equivalent `style`.
 
 #### API Differences
 
 - The default container `testID="header"` is gone — pass `testID` explicitly if any tests rely on it
-- The `HEADERBASE_TITLE_TEST_ID` constant is gone — use the new `titleTestID` prop to tag the title `Text`
-- `Display` variant now applies a fixed `h-14` (56px) container height; legacy `Display` was content-sized
-- Variant alignment (`Compact` center, `Display` left) and all accessory, inset, and styling props are otherwise unchanged — most call sites migrate with just an import swap plus a test-ID refactor
+- The `HEADERBASE_TITLE_TEST_ID` constant is gone — use `textProps.testID` to tag the auto-rendered title text
+- The `variant` prop and `HeaderBaseVariant` enum are gone — custom title layouts should be passed as custom `children`
+- `startAccessory` / `endAccessory` override the shorthand `startButtonIconProps` / `endButtonIconProps` paths when both are provided
+- `endButtonIconProps` renders in reverse order so the first item appears rightmost
 
 ---
 
