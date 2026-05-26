@@ -22,6 +22,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Label Component](#label-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
   - [Checkbox Component](#checkbox-component)
   - [TextField Component](#textfield-component)
   - [KeyValueRow Component](#keyvaluerow-component)
@@ -1780,6 +1781,13 @@ The DS `BottomSheetHeader` adds a `variant` prop (`BottomSheetHeaderVariant.Comp
 
 The `BottomSheetFooter` component has significant breaking changes. The old mobile version accepted a generic `buttonPropsArray` (an array of full `ButtonProps` objects including `variant`). The DS version uses a structured `primaryButtonProps` / `secondaryButtonProps` API instead, where `variant` is set automatically.
 
+Source references (for API diffing):
+
+- Legacy: [`app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.tsx`](https://github.com/MetaMask/metamask-mobile/blob/main/app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.tsx) and [`BottomSheetFooter.types.ts`](https://github.com/MetaMask/metamask-mobile/blob/main/app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.types.ts)
+- MMDS: [`packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.tsx`](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.tsx) and [`BottomSheetFooter.types.ts`](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.types.ts)
+
+On web, the extension modal footer migration lives under [ModalFooter Component](../design-system-react/MIGRATION.md#modalfooter-component); that API was converged onto the same primary/secondary slot shape as this footer.
+
 #### Breaking Changes
 
 ##### Import Path
@@ -1792,6 +1800,18 @@ The `BottomSheetFooter` component has significant breaking changes. The old mobi
 ##### `buttonPropsArray` → `primaryButtonProps` / `secondaryButtonProps`
 
 The old `buttonPropsArray: ButtonProps[]` is replaced by two named props. The `variant` field is no longer accepted — the DS footer always renders the primary button as `ButtonVariant.Primary` and the secondary button as `ButtonVariant.Secondary`.
+
+| Legacy mobile API                               | MMDS API                                                 | Change type | Notes                                                                                                                                                                        |
+| ----------------------------------------------- | -------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `buttonPropsArray` (required)                   | `primaryButtonProps` / `secondaryButtonProps` (optional) | reshaped    | At least one slot should be provided when you need actions; see empty footer behavior below.                                                                                 |
+| Index `0` in the array                          | `secondaryButtonProps`                                   | renamed     | Cancel / secondary action — rendered first (left / top).                                                                                                                     |
+| Index `1` (when two buttons)                    | `primaryButtonProps`                                     | renamed     | Confirm / primary action — rendered second (right / bottom).                                                                                                                 |
+| Single-element array                            | Typically `primaryButtonProps` only                      | convention  | If the legacy array had one button, map it to the slot that matches its `variant` (`Primary` → `primaryButtonProps`, `Secondary` → `secondaryButtonProps`).                  |
+| `variant` on each entry                         | removed                                                  | removed     | Always `Primary` / `Secondary` per slot; types use `Omit<ButtonProps, 'variant'>`.                                                                                           |
+| `label`                                         | `children`                                               | renamed     | DS `Button` uses `children` for the visible label.                                                                                                                           |
+| `onPress`                                       | `onPress`                                                | unchanged   | Still the native press handler on each button bag.                                                                                                                           |
+| `style` on footer                               | `style`, `twClassName`                                   | extended    | `twClassName` is new for Tailwind utility overrides on the footer container.                                                                                                 |
+| Renders `View` when `buttonPropsArray` is empty | `null` when both slots omitted                           | behavior    | Legacy still mounted an empty footer `View` (with default `testID`). MMDS returns `null` — wrap with your own `View` if you need a stable layout or test id with no buttons. |
 
 | Old `buttonPropsArray` field                | New prop location                                       |
 | ------------------------------------------- | ------------------------------------------------------- |
@@ -1896,9 +1916,9 @@ After (Design System):
 />
 ```
 
-##### `ButtonsAlignment` — Unchanged
+##### `ButtonsAlignment` — Same enum within React Native
 
-`ButtonsAlignment.Horizontal` / `ButtonsAlignment.Vertical` values and import path are the same in both versions (only the package path changes):
+Between legacy mobile and `@metamask/design-system-react-native`, `ButtonsAlignment.Horizontal` / `ButtonsAlignment.Vertical` keep the same enum values (`'Horizontal'` | `'Vertical'`). Only the import path changes:
 
 ```tsx
 // Before
@@ -1913,6 +1933,8 @@ import {
 } from '@metamask/design-system-react-native';
 ```
 
+On web, `@metamask/design-system-react` **`ModalFooter`** uses lowercase alignment literals (`'horizontal'` | `'vertical'`). Do not copy raw alignment strings from Extension into Mobile or vice versa — import `ButtonsAlignment` from the package you are compiling against.
+
 #### Blocked Patterns
 
 If the `buttonPropsArray` contains **more than two** button entries, or if buttons need variants other than Primary/Secondary (e.g. `ButtonVariants.Link`), the DS `BottomSheetFooter` cannot be used as a drop-in replacement. Keep the old CL import for those files until the DS component adds broader support.
@@ -1920,6 +1942,14 @@ If the `buttonPropsArray` contains **more than two** button entries, or if butto
 #### API Differences
 
 The DS `BottomSheetFooter` adds `twClassName` for Tailwind utility class overrides. The `style` prop (from `ViewProps`) is still supported and behaves the same.
+
+##### Button prop renames inside each slot
+
+Mobile legacy `Button` and MMDS `Button` already share names like `isDanger` on primary/secondary variants. When migrating footers, apply the same [Button Component](#button-component) renames (`isDisabled`, `isLoading`, etc.) inside `primaryButtonProps` / `secondaryButtonProps` if your old `buttonPropsArray` entries used older prop names.
+
+##### Extension / web modal footer (`ModalFooter`)
+
+MetaMask Extension’s `ModalFooter` migrated to the same slot-based API in `@metamask/design-system-react`; event handlers use `onClick` there instead of `onPress`. See [ModalFooter Component](../design-system-react/MIGRATION.md#modalfooter-component).
 
 ---
 
@@ -2622,6 +2652,70 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `name` remains required and uses `IconName` in both implementations
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
+
+### Input Component
+
+The mobile `Input` (under `Form/TextField/foundation/Input`) maps to `Input` in the design system. The legacy component extends `Omit<TextInputProps, 'editable'>`; the design system enforces a controlled `value` and omits `value` and `defaultValue` from the spread to avoid uncontrolled usage.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                     | Design System Migration                                                     |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `import Input from '.../Form/TextField/foundation/Input'`                          | `import { Input, TextVariant } from '@metamask/design-system-react-native'` |
+| `import { TextVariant } from '.../components/Texts/Text'` (legacy casing `BodyMD`) | `import { TextVariant } from '@metamask/design-system-react-native'`        |
+
+##### Props and Typing
+
+| Mobile API                                      | Design System API                                                    | Change type                        | Notes                                                                                                                                      |
+| ----------------------------------------------- | -------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `value?: string` (optional in `TextInputProps`) | `value: string`                                                      | now required on the component type | Input is **controlled-only**; omitting `value` is a type error (see [TextField Component](#textfield-component) for the surrounding field) |
+| `textVariant` default `BodyMD` (legacy enum)    | `TextVariant.BodyMd`                                                 | value rename                       | align with [Text Component](#text-component) variant naming                                                                                |
+| `isDisabled`, `isStateStylesDisabled`           | same names                                                           | unchanged                          | `isStateStylesDisabled` still disables focus/disabled visual treatment                                                                     |
+| `isReadonly`                                    | `isReadOnly`                                                         | renamed                            | capital 'R' in the design system prop; see also [TextField Component](#textfield-component)                                                |
+| `autoFocus` default `true`                      | `autoFocus` default `false`                                          | default changed                    | MMDS matches React Native `TextInput` default; set `autoFocus` explicitly if you relied on the legacy default                              |
+| `style`                                         | `style` + `twClassName`                                              | MMDS adds `twClassName`            | use `twClassName` for Tailwind overrides; `style` still supported                                                                          |
+| Inherits `TextInputProps` except `editable`     | Inherits `TextInputProps` except `editable`, `value`, `defaultValue` | omissions                          | `defaultValue` is omitted so the component stays controlled; use `value` from parent state                                                 |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import Input from '.../component-library/components/Form/TextField/foundation/Input';
+import { TextVariant } from '.../component-library/components/Texts/Text';
+
+<Input
+  value={value}
+  onChangeText={onChangeText}
+  placeholder="Amount"
+  textVariant={TextVariant.BodyMD}
+  isDisabled={false}
+  autoFocus
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react-native';
+
+<Input
+  value={value}
+  onChangeText={onChangeText}
+  placeholder="Amount"
+  textVariant={TextVariant.BodyMd}
+  isDisabled={false}
+  autoFocus
+/>;
+```
+
+#### API Differences
+
+- **Controlled `value`:** the design system requires `value: string` as part of `InputProps`; the legacy `Input` type still allowed the full `TextInput` surface including uncontrolled usage.
+- **`autoFocus` default** is `false` in MMDS (`true` in the legacy `Input` implementation) — set explicitly when you need first-mount focus.
+- Styling: design system input uses the shared Tailwind + token pipeline (`twClassName`); single-line metrics use `MAP_TEXT_VARIANT_INPUT_METRICS` (font size/letter spacing without paragraph `lineHeight`) for consistent `TextInput` layout.
 
 ### Checkbox Component
 
