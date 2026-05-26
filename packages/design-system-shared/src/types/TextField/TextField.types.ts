@@ -7,8 +7,8 @@ import type { InputPropsShared } from '../Input/Input.types';
  *
  * Layers controlled text-field chrome (accessories, custom input slot, error
  * state, etc.) on top of the shared `InputPropsShared` contract. Styling,
- * `testID`, native-only `inputProps`, and typed focus/blur handlers stay on
- * the platform layer.
+ * `testID`, native-only `inputProps`, refs, and typed focus/blur handlers
+ * stay on the platform layer.
  */
 export type TextFieldPropsShared = Omit<
   InputPropsShared,

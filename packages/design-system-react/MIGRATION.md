@@ -15,6 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [BannerBase Component](#bannerbase-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
   - [Checkbox Component](#checkbox-component)
   - [HeaderBase Component](#headerbase-component)
   - [HelpText Component](#helptext-component)
@@ -29,6 +30,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [PopoverHeader Component](#popoverheader-component)
   - [SensitiveText Component](#sensitivetext-component)
   - [Skeleton Component](#skeleton-component)
+  - [TextField Component](#textfield-component)
 - [Version Updates](#version-updates)
   - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
@@ -1160,6 +1162,84 @@ import {
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
 
+### Input Component
+
+The extension `input` component is implemented as `Text` with `as="input"` and carries broad `Box` / style-utility behavior through its polymorphic props. The design system `Input` is a native `<input>` with a small semantic API (`textVariant`, `isDisabled`, `isReadonly`) and standard HTML attributes on the element.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) and the [Text Component](#text-component) section for `TextVariant` value casing (`bodyMd` → `BodyMd`).
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                            | Design System Migration                                              |
+| ------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `import { Input, InputType } from '../../component-library'` | `import { Input, TextVariant } from '@metamask/design-system-react'` |
+
+##### Renamed and Behavioral Props
+
+| Extension API                                                      | Design System API              | Notes                                                                                                                                                   |
+| ------------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `disabled`                                                         | `isDisabled`                   | boolean; default `false`                                                                                                                                |
+| `readOnly`                                                         | `isReadonly`                   | renamed; note **lowercase “only”** in the design system prop name                                                                                       |
+| `error` (sets `aria-invalid`)                                      | pass `aria-invalid` on `Input` | no `error` shorthand; use native ARIA on the underlying `<input>`                                                                                       |
+| `disableStateStyles`                                               | removed                        | removed “disable focus ring” escape hatch; if you need custom focus for accessibility, handle it explicitly (for example with `className` or a wrapper) |
+| `type` using `InputType` enum                                      | `type` as HTML string          | use `'text' \| 'password' \| 'number' \| 'search'` (or other valid `<input type>`). The `InputType` enum is not exported from the design system         |
+| `autoComplete` as `boolean`                                        | `autoComplete` as string       | use standard HTML autocomplete tokens (for example `on` / `off` or a specific token)                                                                    |
+| Polymorphic `as` and `...` style-utility props from `Text` / `Box` | removed from the component API | use `className` (and native attributes allowed on `<input>`) per [General Extension Migration Guidance](#general-extension-migration-guidance)          |
+| `textVariant`                                                      | `textVariant`                  | same name; values move to shared `TextVariant` from `@metamask/design-system-react` (see [Text Component](#text-component))                             |
+
+##### Still Available via Native `<input>`
+
+`Input` is `Omit<ComponentPropsWithoutRef<'input'>, 'defaultValue' | 'disabled' | 'readOnly' | 'value'>` plus the fields above. Standard attributes such as `id`, `name`, `placeholder`, `onChange`, `onBlur`, `onFocus`, `maxLength`, `required`, and `autoFocus` work as on a normal input. Note that `value` is a required `string` prop and `defaultValue` is omitted entirely — uncontrolled usage is not supported.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Input, InputType } from '../../component-library';
+import { TextVariant } from '../../../helpers/constants/design-system';
+
+<Input
+  name="query"
+  placeholder="Search"
+  value={query}
+  onChange={onQueryChange}
+  disabled={isBusy}
+  readOnly={isLocked}
+  error={hasError}
+  type={InputType.Search}
+  textVariant={TextVariant.bodyMd}
+  autoComplete
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react';
+
+<Input
+  name="query"
+  placeholder="Search"
+  value={query}
+  onChange={onQueryChange}
+  isDisabled={isBusy}
+  isReadonly={isLocked}
+  aria-invalid={hasError}
+  type="search"
+  textVariant={TextVariant.BodyMd}
+  autoComplete="on"
+/>;
+```
+
+#### API Differences
+
+- No polymorphic `as` prop — the component always renders `<input>`.
+- Extension-only `error` and `disableStateStyles` are not mirrored; use `aria-invalid` and `className` as needed.
+- `TextVariant` imports and member names follow the design system (Pascal-cased members such as `TextVariant.BodyMd`).
+
 ### Checkbox Component
 
 The extension `checkbox` component maps to `Checkbox` in the design system, with controlled-state naming and callback-signature changes.
@@ -1867,6 +1947,12 @@ The extension `modal-footer` component maps to `ModalFooter` in the design syste
 - Layout direction is now an explicit `buttonsAlignment` prop (`Horizontal` default, `Vertical` opt-in) instead of the legacy `flex-wrap` + `Container.maxWidth` arrangement.
 - The polymorphic Box surface, the `Container` dependency, the `useI18nContext` coupling, and the `mm-modal-footer*` SCSS class hooks are all removed.
 
+#### Cross-platform parity (React Native)
+
+Web `ModalFooter` and React Native `BottomSheetFooter` share the same **named slot** model (`primaryButtonProps` / `secondaryButtonProps`), enforced variants, and secondary-then-primary ordering. For mobile `component-library` → `@metamask/design-system-react-native` mappings (including the legacy `buttonPropsArray` API), see [BottomSheetFooter Component](../design-system-react-native/MIGRATION.md#bottomsheetfooter-component) in the React Native migration guide.
+
+**`ButtonsAlignment` values differ by platform:** on web, `ModalFooter` uses lowercase string literals `'horizontal'` | `'vertical'` (`ButtonsAlignment.Horizontal` / `ButtonsAlignment.Vertical` from `@metamask/design-system-react`). On React Native, the enum string values are `'Horizontal'` | `'Vertical'`. Import the enum from the package you target; do not assume the raw strings are interchangeable across platforms.
+
 Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
 
 #### Breaking Changes
@@ -1889,6 +1975,7 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 | `containerProps?: ContainerProps<'div'>`                                                    | removed; layout direction moved to `buttonsAlignment`                                 | removed            | the `Container.maxWidth` (`Sm` / `Md` / `Lg` ≈ 360 / 480 / 720) is gone. Width is now governed by the surrounding `ModalContent.size`. Custom outer footer styling moves to `className`.                                                               |
 | —                                                                                           | `buttonsAlignment?: ButtonsAlignment` (`Horizontal` default, `Vertical` opt-in)       | added              | `Horizontal` lays buttons in a `flex-row` with each button at `flex-1`; `Vertical` lays them in a `flex-col` with each button at `w-full`. Order: secondary → primary in both modes. Mirrors the React Native `BottomSheetFooter` API.                 |
 | `children?: ReactNode`                                                                      | `children?: ReactNode`                                                                | unchanged          | rendered above the action button row.                                                                                                                                                                                                                  |
+| —                                                                                           | both buttons use `ButtonSize.Lg` internally                                           | behavior note      | same default sizing as extension (`ButtonSize.Lg` on each built-in button); optional `size` on `*ButtonProps` can still override per button if needed.                                                                                                 |
 | `className?: string`                                                                        | `className?: string`                                                                  | unchanged          | merged with default Tailwind classes via `twMerge`.                                                                                                                                                                                                    |
 | Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>`                                | removed                                                                               | removed            | always renders a `<footer>`. If you need a different element, wrap or compose.                                                                                                                                                                         |
 | Box style-utility props (`paddingLeft`, `paddingRight`, `paddingTop`, `backgroundColor`, …) | removed from public API                                                               | removed            | use `className` with Tailwind utilities. The default `px-4 pt-4` remains, applied internally; override with `className="px-0 pt-2"` etc.                                                                                                               |
@@ -2488,6 +2575,68 @@ Codemod-friendly: every `isLoading=` token in the extension's existing call site
 
 - `Skeleton` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - The container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` by default. The skeleton takes no part in the accessibility tree.
+
+### TextField Component
+
+The `TextField` is now available from the design system. The new component drops the polymorphic `Box`/`InputComponent` pattern in favor of a concrete `forwardRef<HTMLDivElement>` container that composes the design-system `Input`. State props are renamed to match the system-wide `is*` convention, and styling moves from SCSS (`mm-text-field`) to Tailwind utilities.
+
+#### Import Path
+
+| Extension Pattern                                         | Design System Migration                                         |
+| --------------------------------------------------------- | --------------------------------------------------------------- |
+| `import { TextField } from '../../component-library'`     | `import { TextField } from '@metamask/design-system-react'`     |
+| `import { TextFieldSize } from '../../component-library'` | `import { TextFieldSize } from '@metamask/design-system-react'` |
+| `import { TextFieldType } from '../../component-library'` | `import { TextFieldType } from '@metamask/design-system-react'` |
+
+#### Enums → Const Objects
+
+`TextFieldSize` and `TextFieldType` are now const objects with derived string union types (per ADR-0003). Member access (`TextFieldSize.Md`) and underlying string values (`'sm'`, `'md'`, `'lg'`, `'text'`, `'number'`, `'password'`, `'search'`) are unchanged, so most call sites need no edits.
+
+#### State Props
+
+| Extension Prop | Design System Prop | Notes   |
+| -------------- | ------------------ | ------- |
+| `disabled`     | `isDisabled`       | renamed |
+| `readOnly`     | `isReadOnly`       | renamed |
+| `error`        | `isError`          | renamed |
+
+```tsx
+// Before (Extension)
+<TextField disabled readOnly error value={value} onChange={onChange} />
+
+// After (Design System)
+<TextField isDisabled isReadOnly isError value={value} onChange={onChange} />
+```
+
+#### Removed Props
+
+| Extension Prop                                                | Design System Migration                                                                                                                                 |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`                                        | Removed. The container is always a `<div>`. Wrap with a custom element if you need a different root.                                                    |
+| `InputComponent`                                              | Replaced by the shared `inputElement` slot. Pass a fully-rendered element instead of a component reference.                                             |
+| `testId`                                                      | Pass `data-testid` directly on `TextField` (root). For the inner input, use `getByRole('textbox')` in tests or compose your own via `inputElement`.     |
+| `defaultValue`                                                | Removed. The design-system `Input` is controlled-only; manage state with `value`/`onChange` (or use `inputElement` for an uncontrolled custom input).   |
+| Box style-utility props (`paddingLeft`, `borderRadius`, etc.) | Use `className` with Tailwind utilities, or compose with `Box`. The container's default chrome (border, radius, padding) is fixed by the design system. |
+
+```tsx
+// Before (Extension): custom InputComponent reference
+<TextField InputComponent={CustomInput} value={value} />
+
+// After (Design System): pass a rendered element via inputElement
+<TextField
+  value={value}
+  inputElement={<CustomInput value={value} onChange={onChange} />}
+/>
+```
+
+#### Ref
+
+- `ref` on `TextField` targets the root container (`HTMLDivElement`).
+- Use `inputRef` to reach the inner `<input>`. Both object refs and callback refs are supported.
+
+#### Styling
+
+The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven by design tokens) instead of the `mm-text-field` SCSS module. Custom container styles should be passed via `className`; the legacy `mm-text-field--*` classes are no longer applied.
 
 ## Version Updates
 

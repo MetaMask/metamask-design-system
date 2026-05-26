@@ -16,24 +16,6 @@
         "backgroundColor": "#ffffff"
       }
     },
-    "plugins": [
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./fonts/Geist/Geist-Regular.otf",
-            "./fonts/Geist/Geist-RegularItalic.otf",
-            "./fonts/Geist/Geist-Medium.otf",
-            "./fonts/Geist/Geist-MediumItalic.otf",
-            "./fonts/Geist/Geist-SemiBold.otf",
-            "./fonts/Geist/Geist-SemiBoldItalic.otf",
-            "./fonts/MMPoly/MMPoly-Regular.otf",
-            "./fonts/MMSans/MMSans-Regular.otf",
-            "./fonts/MMSans/MMSans-Medium.otf",
-            "./fonts/MMSans/MMSans-Bold.otf"
-          ]
-        }
-      ]
-    ]
+    "plugins": []
   }
 }
