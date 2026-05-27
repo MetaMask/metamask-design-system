@@ -145,6 +145,9 @@ export type { TextProps } from './Text';
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
+export { TextField, TextFieldSize, TextFieldType } from './TextField';
+export type { TextFieldProps } from './TextField';
+
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
 
