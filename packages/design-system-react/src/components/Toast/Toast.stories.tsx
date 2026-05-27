@@ -8,10 +8,16 @@ import { Button } from '../Button';
 import { Toast } from './Toast';
 import type { ToastProps } from './Toast.types';
 import { Toaster, toast } from './Toaster';
+import README from './README.mdx';
 
 const meta: Meta<ToastProps> = {
   title: 'React Components/Toast',
   component: Toast,
+  parameters: {
+    docs: {
+      page: README,
+    },
+  },
   argTypes: {
     severity: {
       control: 'select',
