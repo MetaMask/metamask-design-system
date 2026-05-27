@@ -207,8 +207,11 @@ describe('BottomSheet', () => {
 
   describe('Android back button', () => {
     let backHandlerCallback: (() => boolean) | null = null;
+    let originalOS: typeof Platform.OS;
 
     beforeEach(() => {
+      originalOS = Platform.OS;
+      Platform.OS = 'android';
       jest
         .spyOn(BackHandler, 'addEventListener')
         .mockImplementation((_event, handler) => {
@@ -218,6 +221,7 @@ describe('BottomSheet', () => {
     });
 
     afterEach(() => {
+      Platform.OS = originalOS;
       jest.restoreAllMocks();
       backHandlerCallback = null;
     });
