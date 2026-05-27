@@ -71,9 +71,11 @@ Use `title` for the primary message. Use `titleProps` to access the title `Text`
 <Canvas of={ToastStories.Title} sourceState="none" />
 
 ```tsx
-import { Toast } from '@metamask/design-system-react';
+import { toast } from '@metamask/design-system-react';
 
-<Toast title="We will notify you." />
+toast({
+  title: 'We will notify you.',
+});
 ```
 
 ### `description`
@@ -83,12 +85,12 @@ Use `description` for supporting content below the title. Use `descriptionProps`
 <Canvas of={ToastStories.Description} sourceState="none" />
 
 ```tsx
-import { Toast } from '@metamask/design-system-react';
+import { toast } from '@metamask/design-system-react';
 
-<Toast
-  title="Don't miss out"
-  description="Enable notifications to stay informed on campaigns."
-/>
+toast({
+  title: "Don't miss out",
+  description: 'Enable notifications to stay informed on campaigns.',
+});
 ```
 
 ### `severity`
@@ -105,12 +107,13 @@ Available severities:
 <Canvas of={ToastStories.Severity} sourceState="none" />
 
 ```tsx
-import { Toast, ToastSeverity } from '@metamask/design-system-react';
+import { toast, ToastSeverity } from '@metamask/design-system-react';
 
-<Toast severity={ToastSeverity.Default} title="Default" description="Severity controls the default start accessory icon." />
-<Toast severity={ToastSeverity.Success} title="Success" description="Severity controls the default start accessory icon." />
-<Toast severity={ToastSeverity.Warning} title="Warning" description="Severity controls the default start accessory icon." />
-<Toast severity={ToastSeverity.Danger} title="Danger" description="Severity controls the default start accessory icon." />
+toast({
+  title: 'Network changed',
+  description: 'You are now connected to Linea.',
+  severity: ToastSeverity.Success,
+});
 ```
 
 ### `startAccessory`
@@ -120,13 +123,13 @@ Use `startAccessory` to replace the default severity icon with custom content su
 <Canvas of={ToastStories.StartAccessory} sourceState="none" />
 
 ```tsx
-import { Icon, IconName, IconSize, Toast } from '@metamask/design-system-react';
+import { Icon, IconName, IconSize, toast } from '@metamask/design-system-react';
 
-<Toast
-  title="Withdrawal pending"
-  description="Your withdrawal is processing."
-  startAccessory={<Icon name={IconName.Clock} size={IconSize.Lg} />}
-/>
+toast({
+  title: 'Withdrawal pending',
+  description: 'Your withdrawal is processing.',
+  startAccessory: <Icon name={IconName.Clock} size={IconSize.Lg} />,
+});
 ```
 
 ### `actionButtonOnClick`
@@ -136,14 +139,16 @@ Use `actionButtonOnClick` together with `actionButtonLabel` when the toast needs
 <Canvas of={ToastStories.ActionButton} sourceState="none" />
 
 ```tsx
-import { Toast } from '@metamask/design-system-react';
+import { toast } from '@metamask/design-system-react';
 
-<Toast
-  title="Privacy policy update"
-  description="Review how Consensys handles your data."
-  actionButtonLabel="Read more"
-  actionButtonOnClick={() => undefined}
-/>
+toast({
+  title: 'Privacy policy update',
+  description: 'Review how Consensys handles your data.',
+  actionButtonLabel: 'Read more',
+  actionButtonOnClick: () => {
+    console.log('Action clicked');
+  },
+});
 ```
 
 ### `onClose`
@@ -153,14 +158,16 @@ Use `onClose` for a side-effect callback when the close button is clicked. With 
 <Canvas of={ToastStories.OnClose} sourceState="none" />
 
 ```tsx
-import { Toast, ToastSeverity } from '@metamask/design-system-react';
+import { toast, ToastSeverity } from '@metamask/design-system-react';
 
-<Toast
-  title="Account switched"
-  description="You are now using Account 2."
-  severity={ToastSeverity.Success}
-  onClose={() => undefined}
-/>
+toast({
+  title: 'Account switched',
+  description: 'You are now using Account 2.',
+  severity: ToastSeverity.Success,
+  onClose: () => {
+    console.log('Toast dismissed');
+  },
+});
 ```
 
 ## Toast Options
