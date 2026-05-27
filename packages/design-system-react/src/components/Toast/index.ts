@@ -1,15 +1,13 @@
+export { ToastSeverity } from '@metamask/design-system-shared';
 export { Toast } from './Toast';
 export { Toaster, toast } from './Toaster';
-export { ToastSeverity } from '@metamask/design-system-shared';
 export type {
   ToastOptions,
   ToastProps,
-  ToastIconProps,
   ToasterProps,
   ToasterRef,
 } from './Toast.types';
 export {
-  TOAST_VISIBILITY_DURATION,
   TOAST_ANIMATION_DURATION,
-  TOAST_BOTTOM_PADDING,
+  TOAST_VISIBILITY_DURATION,
 } from './Toast.constants';
