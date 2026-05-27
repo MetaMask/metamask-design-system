@@ -4,9 +4,10 @@ import React from 'react';
 
 import { Box } from '../Box';
 import { Button } from '../Button';
+
 import { Toast } from './Toast';
-import { Toaster, toast } from './Toaster';
 import type { ToastProps } from './Toast.types';
+import { Toaster, toast } from './Toaster';
 
 const meta: Meta<ToastProps> = {
   title: 'React Components/Toast',

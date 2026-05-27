@@ -2,15 +2,22 @@ import { ToastSeverity } from '@metamask/design-system-shared';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef, useEffect } from 'react';
 
+import {
+  TOAST_ANIMATION_DURATION,
+  TOAST_VISIBILITY_DURATION,
+} from './Toast.constants';
 import type { ToastOptions, ToasterRef } from './Toast.types';
 import { Toaster, toast } from './Toaster';
-import { TOAST_ANIMATION_DURATION, TOAST_VISIBILITY_DURATION } from './Toast.constants';
 
 jest.mock('../Icon', () => ({
   ...jest.requireActual('../Icon'),
-  Icon: ({ name, 'data-testid': testId }: { name: string; 'data-testid'?: string }) => (
-    <span data-testid={testId ?? `icon-${name}`}>{name}</span>
-  ),
+  Icon: ({
+    name,
+    'data-testid': testId,
+  }: {
+    name: string;
+    'data-testid'?: string;
+  }) => <span data-testid={testId ?? `icon-${name}`}>{name}</span>,
 }));
 
 const showToastAndFlush = async (
@@ -96,7 +103,9 @@ describe('Toaster', () => {
     expect(screen.getByText('Auto-dismiss')).toBeInTheDocument();
 
     await act(async () => {
-      jest.advanceTimersByTime(TOAST_VISIBILITY_DURATION + TOAST_ANIMATION_DURATION);
+      jest.advanceTimersByTime(
+        TOAST_VISIBILITY_DURATION + TOAST_ANIMATION_DURATION,
+      );
     });
 
     expect(screen.queryByText('Auto-dismiss')).not.toBeInTheDocument();
@@ -108,7 +117,9 @@ describe('Toaster', () => {
     await showToastAndFlush(toasterRef, { title: 'Auto-dismiss default' });
 
     await act(async () => {
-      jest.advanceTimersByTime(TOAST_VISIBILITY_DURATION + TOAST_ANIMATION_DURATION);
+      jest.advanceTimersByTime(
+        TOAST_VISIBILITY_DURATION + TOAST_ANIMATION_DURATION,
+      );
     });
 
     expect(screen.queryByText('Auto-dismiss default')).not.toBeInTheDocument();
@@ -267,7 +278,9 @@ describe('Toaster', () => {
       jest.advanceTimersByTime(TOAST_VISIBILITY_DURATION);
     });
 
-    expect(screen.queryByText('Will be manually closed')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Will be manually closed'),
+    ).not.toBeInTheDocument();
   });
 
   it('clears auto-dismiss timer when showToast replaces a visible toast', async () => {
@@ -308,6 +321,8 @@ describe('Toaster', () => {
       title: 'Will be unmounted',
     });
 
+    expect(screen.getByText('Will be unmounted')).toBeInTheDocument();
+
     // Unmount while auto-dismiss timer is still pending.
     unmount();
 
@@ -315,6 +330,8 @@ describe('Toaster', () => {
     await act(async () => {
       jest.runAllTimers();
     });
+
+    expect(screen.queryByText('Will be unmounted')).not.toBeInTheDocument();
   });
 
   it('cancels pending replacement when closeToast is called', async () => {
@@ -326,7 +343,10 @@ describe('Toaster', () => {
     });
 
     await act(async () => {
-      toasterRef.current?.showToast({ hasNoTimeout: true, title: 'Replacement' });
+      toasterRef.current?.showToast({
+        hasNoTimeout: true,
+        title: 'Replacement',
+      });
       toasterRef.current?.closeToast();
       jest.runAllTimers();
     });
@@ -335,7 +355,7 @@ describe('Toaster', () => {
   });
 
   it('applies className to the outer container', async () => {
-    render(<Toaster ref={toasterRef} className="my-custom-class" />);
+    render(<Toaster ref={toasterRef} className="mx-2" />);
 
     await showToastAndFlush(toasterRef, {
       hasNoTimeout: true,
@@ -344,7 +364,7 @@ describe('Toaster', () => {
 
     // The outer wrapper has the class
     const container = screen.getByRole('status');
-    expect(container).toHaveClass('my-custom-class');
+    expect(container).toHaveClass('mx-2');
   });
 
   it('forwards extra props to the outer container', async () => {
@@ -405,9 +425,9 @@ describe('toast() imperative API', () => {
   });
 
   it('throws a helpful error when toast() is called before <Toaster /> mounts', () => {
-    expect(() =>
-      toast({ hasNoTimeout: true, title: 'No mount' }),
-    ).toThrow(/toast\(\) called before <Toaster \/> mounted/u);
+    expect(() => toast({ hasNoTimeout: true, title: 'No mount' })).toThrow(
+      /toast\(\) called before <Toaster \/> mounted/u,
+    );
   });
 
   it('throws a helpful error when toast.dismiss() is called before <Toaster /> mounts', () => {
@@ -420,9 +440,9 @@ describe('toast() imperative API', () => {
     const { unmount } = render(<Toaster />);
     unmount();
 
-    expect(() =>
-      toast({ hasNoTimeout: true, title: 'After unmount' }),
-    ).toThrow(/toast\(\) called before <Toaster \/> mounted/u);
+    expect(() => toast({ hasNoTimeout: true, title: 'After unmount' })).toThrow(
+      /toast\(\) called before <Toaster \/> mounted/u,
+    );
   });
 
   it('registers before sibling passive effects run', async () => {

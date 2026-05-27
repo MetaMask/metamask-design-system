@@ -1,15 +1,19 @@
 import { ToastSeverity } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { Toast } from './Toast';
 
 jest.mock('../Icon', () => ({
   ...jest.requireActual('../Icon'),
-  Icon: ({ name, 'data-testid': testId }: { name: string; 'data-testid'?: string }) => (
-    <span data-testid={testId ?? `icon-${name}`}>{name}</span>
-  ),
+  Icon: ({
+    name,
+    'data-testid': testId,
+  }: {
+    name: string;
+    'data-testid'?: string;
+  }) => <span data-testid={testId ?? `icon-${name}`}>{name}</span>,
 }));
 
 describe('Toast', () => {
@@ -58,9 +62,7 @@ describe('Toast', () => {
         />,
       );
 
-      expect(
-        screen.getByTestId(`icon-${iconName}`),
-      ).toBeInTheDocument();
+      expect(screen.getByTestId(`icon-${iconName}`)).toBeInTheDocument();
     });
   });
 
@@ -105,7 +107,9 @@ describe('Toast', () => {
 
     render(<Toast title="Dismiss me" onClose={onClose} />);
 
-    await userEvent.click(screen.getByRole('button', { name: /close toast/iu }));
+    await userEvent.click(
+      screen.getByRole('button', { name: /close toast/iu }),
+    );
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
@@ -138,14 +142,18 @@ describe('Toast', () => {
 
   it('always applies rounded-xl to the toast surface', () => {
     render(
-      <Toast data-testid="toast-root" title="Rounded" onClose={() => undefined} />,
+      <Toast
+        data-testid="toast-root"
+        title="Rounded"
+        onClose={() => undefined}
+      />,
     );
 
     expect(screen.getByTestId('toast-root')).toHaveClass('rounded-xl');
   });
 
   it('forwards ref to the root element', () => {
-    const ref = React.createRef<HTMLDivElement>();
+    const ref = createRef<HTMLDivElement>();
 
     render(<Toast ref={ref} title="Ref test" onClose={() => undefined} />);
 

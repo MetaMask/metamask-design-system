@@ -9,6 +9,7 @@ import React, {
 import type { RefObject } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
+
 import { Toast } from './Toast';
 import {
   TOAST_ANIMATION_DURATION,
@@ -112,7 +113,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
           });
         });
       }
-    }, [toastOptions]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [toastOptions]); // intentionally omit isVisible — only react to new toast options
 
     // Auto-dismiss timer.
     useEffect(() => {
@@ -128,7 +129,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         };
       }
       return undefined;
-    }, [isVisible]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [isVisible]); // intentionally omit toastOptions — timer fires once per visibility change
 
     if (!toastOptions) {
       return null;
@@ -146,7 +147,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         aria-live="polite"
         aria-atomic="true"
         className={twMerge(
-          'pointer-events-none fixed bottom-4 left-4 right-4 z-[1000] flex justify-center',
+          'pointer-events-none fixed inset-x-4 bottom-4 z-[1000] flex justify-center',
           className,
         )}
         {...props}
