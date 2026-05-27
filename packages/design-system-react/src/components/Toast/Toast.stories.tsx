@@ -5,10 +5,10 @@ import React from 'react';
 import { Box } from '../Box';
 import { Button } from '../Button';
 
+import README from './README.mdx';
 import { Toast } from './Toast';
 import type { ToastProps } from './Toast.types';
 import { Toaster, toast } from './Toaster';
-import README from './README.mdx';
 
 const meta: Meta<ToastProps> = {
   title: 'React Components/Toast',
