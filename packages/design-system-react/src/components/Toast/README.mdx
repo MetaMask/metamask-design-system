@@ -6,6 +6,8 @@ import * as ToastStories from './Toast.stories';
 
 Toast is a notification that slides up from the bottom of the screen. It is typically used to show post-confirmation information such as account switches, network changes, or transaction confirmations.
 
+<Canvas of={ToastStories.Default} sourceState="none" />
+
 ```tsx
 import { Button, Toaster, toast } from '@metamask/design-system-react';
 
@@ -27,8 +29,6 @@ const Demo = () => {
   );
 };
 ```
-
-<Canvas of={ToastStories.Default} />
 
 ## Usage
 
@@ -68,26 +68,28 @@ Use `closeButtonProps` to access the close button element when you need to set a
 
 Use `title` for the primary message. Use `titleProps` to access the title `Text` element when you need to set a `data-testid`, accessibility props, or other `Text` overrides.
 
-```tsx
-toast({
-  title: 'Account switched',
-});
-```
+<Canvas of={ToastStories.Title} sourceState="none" />
 
-<Canvas of={ToastStories.Title} />
+```tsx
+import { Toast } from '@metamask/design-system-react';
+
+<Toast title="We will notify you." />
+```
 
 ### `description`
 
 Use `description` for supporting content below the title. Use `descriptionProps` to access the description `Text` element when you need to set a `data-testid`, accessibility props, or other `Text` overrides.
 
-```tsx
-toast({
-  title: 'Account switched',
-  description: 'You are now using Account 2.',
-});
-```
+<Canvas of={ToastStories.Description} sourceState="none" />
 
-<Canvas of={ToastStories.Description} />
+```tsx
+import { Toast } from '@metamask/design-system-react';
+
+<Toast
+  title="Don't miss out"
+  description="Enable notifications to stay informed on campaigns."
+/>
+```
 
 ### `severity`
 
@@ -100,67 +102,66 @@ Available severities:
 - `ToastSeverity.Warning`
 - `ToastSeverity.Danger`
 
-```tsx
-import { toast, ToastSeverity } from '@metamask/design-system-react';
-
-toast({
-  title: 'Network changed',
-  description: 'You are now connected to Linea.',
-  severity: ToastSeverity.Success,
-});
-```
-
-<Canvas of={ToastStories.Severity} />
-
-### `actionButtonOnClick`
-
-Use `actionButtonOnClick` together with `actionButtonLabel` when the toast needs a secondary action. Use `actionButtonProps` to access the rendered button element when you need to set a `data-testid`, accessibility props, or other button overrides.
+<Canvas of={ToastStories.Severity} sourceState="none" />
 
 ```tsx
-toast({
-  title: 'Privacy policy update',
-  description: 'Review how Consensys handles your data.',
-  actionButtonLabel: 'Read more',
-  actionButtonOnClick: () => {
-    console.log('Action clicked');
-  },
-});
-```
+import { Toast, ToastSeverity } from '@metamask/design-system-react';
 
-<Canvas of={ToastStories.ActionButton} />
+<Toast severity={ToastSeverity.Default} title="Default" description="Severity controls the default start accessory icon." />
+<Toast severity={ToastSeverity.Success} title="Success" description="Severity controls the default start accessory icon." />
+<Toast severity={ToastSeverity.Warning} title="Warning" description="Severity controls the default start accessory icon." />
+<Toast severity={ToastSeverity.Danger} title="Danger" description="Severity controls the default start accessory icon." />
+```
 
 ### `startAccessory`
 
 Use `startAccessory` to replace the default severity icon with custom content such as an icon, avatar, or spinner. Use `children` and `childrenWrapperProps` when you need to render additional content below the description, or to access that content wrapper for a `data-testid` and other element-level overrides.
 
-```tsx
-import { Icon, IconName, IconSize, toast } from '@metamask/design-system-react';
+<Canvas of={ToastStories.StartAccessory} sourceState="none" />
 
-toast({
-  title: 'Withdrawal pending',
-  description: 'Your withdrawal is processing.',
-  startAccessory: <Icon name={IconName.Clock} size={IconSize.Lg} />,
-});
+```tsx
+import { Icon, IconName, IconSize, Toast } from '@metamask/design-system-react';
+
+<Toast
+  title="Withdrawal pending"
+  description="Your withdrawal is processing."
+  startAccessory={<Icon name={IconName.Clock} size={IconSize.Lg} />}
+/>
 ```
 
-<Canvas of={ToastStories.StartAccessory} />
+### `actionButtonOnClick`
+
+Use `actionButtonOnClick` together with `actionButtonLabel` when the toast needs a secondary action. Use `actionButtonProps` to access the rendered button element when you need to set a `data-testid`, accessibility props, or other button overrides.
+
+<Canvas of={ToastStories.ActionButton} sourceState="none" />
+
+```tsx
+import { Toast } from '@metamask/design-system-react';
+
+<Toast
+  title="Privacy policy update"
+  description="Review how Consensys handles your data."
+  actionButtonLabel="Read more"
+  actionButtonOnClick={() => undefined}
+/>
+```
 
 ### `onClose`
 
 Use `onClose` for a side-effect callback when the close button is clicked. With the `toast(...)` / `<Toaster />` flow the close button is always shown; provide `onClose` when you need to run code on dismiss. For direct `<Toast />` rendering, `onClose` must be provided to render the close button.
 
-```tsx
-toast({
-  title: 'Account switched',
-  description: 'You are now using Account 2.',
-  severity: ToastSeverity.Success,
-  onClose: () => {
-    analytics.track('toast_dismissed');
-  },
-});
-```
+<Canvas of={ToastStories.OnClose} sourceState="none" />
 
-<Canvas of={ToastStories.OnClose} />
+```tsx
+import { Toast, ToastSeverity } from '@metamask/design-system-react';
+
+<Toast
+  title="Account switched"
+  description="You are now using Account 2."
+  severity={ToastSeverity.Success}
+  onClose={() => undefined}
+/>
+```
 
 ## Toast Options
 
