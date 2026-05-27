@@ -42,7 +42,7 @@ const config = createConfig([
       'apps/storybook-react/postcss.config.js',
       'apps/storybook-react/tailwind.config.js',
       // storybook react native
-      'apps/storybook-react-native/.rnstorybook/index.ts',
+      'apps/storybook-react-native/.rnstorybook/index.tsx',
       'apps/storybook-react-native/.rnstorybook/main.ts',
       'apps/storybook-react-native/.rnstorybook/preview.tsx',
       'apps/storybook-react-native/.rnstorybook/storybook.requires.ts',
