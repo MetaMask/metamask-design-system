@@ -7,7 +7,6 @@ jobs:
   test-storybook:
     name: Test Storybook (accessibility & stories)
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     strategy:
       matrix:
         node-version: [22.x]
@@ -16,15 +15,8 @@ jobs:
         uses: MetaMask/action-checkout-and-setup@v1
         with:
           is-high-risk-environment: false
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install Playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: yarn workspace @metamask/storybook-react exec playwright install chromium
+        run: npx playwright install --with-deps chromium
       - name: Build packages
         run: yarn build
       - name: Run Storybook tests
