@@ -1,14 +1,21 @@
-import { ContentVerticalAlignment } from '@metamask/design-system-shared';
+import {
+  BoxBackgroundColor,
+  ButtonBaseSize,
+  ButtonVariant,
+  ContentVerticalAlignment,
+  IconName,
+  IconSize,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Box, BoxBackgroundColor } from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { ButtonBaseSize } from '../ButtonBase';
-import { Icon, IconName, IconSize } from '../Icon';
-import { Text, TextVariant } from '../Text';
+import { Box } from '../Box';
+import { Button } from '../Button';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
 
 import { Content } from './Content';
 import type { ContentProps } from './Content.types';
