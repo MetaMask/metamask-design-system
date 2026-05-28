@@ -12,6 +12,7 @@ import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import { VERTICAL_ALIGNMENT_MAP } from './Content.constants';
 import type { ContentProps } from './Content.types';
+
 export const Content: React.FC<ContentProps> = ({
   startAccessory,
   endAccessory,

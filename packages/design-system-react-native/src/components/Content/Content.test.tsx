@@ -469,7 +469,7 @@ describe('Content', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw`flex-row items-center gap-4 min-h-[46px]`,
+        tw`min-h-[46px] flex-row items-center gap-4`,
       );
     });
 
@@ -483,7 +483,7 @@ describe('Content', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw`flex-row items-start gap-4 min-h-[46px]`,
+        tw`min-h-[46px] flex-row items-start gap-4`,
       );
     });
   });

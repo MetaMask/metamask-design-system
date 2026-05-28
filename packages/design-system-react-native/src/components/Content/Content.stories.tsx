@@ -4,9 +4,9 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
+import { Box, BoxBackgroundColor } from '../Box';
 import { Button, ButtonVariant } from '../Button';
 import { ButtonBaseSize } from '../ButtonBase';
-import { Box, BoxBackgroundColor } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
 import { Text, TextVariant } from '../Text';
 
@@ -126,7 +126,7 @@ export const Subvalue: Story = {
           <Button
             variant={ButtonVariant.Secondary}
             size={ButtonBaseSize.Sm}
-            onPress={() => {}}
+            onPress={() => undefined}
           >
             3% bonus
           </Button>
