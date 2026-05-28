@@ -24,10 +24,7 @@ jobs:
           key: playwright-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install Playwright browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: yarn workspace @metamask/storybook-react exec playwright install --with-deps chromium
-      - name: Install Playwright system dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: yarn workspace @metamask/storybook-react exec playwright install-deps chromium
+        run: yarn workspace @metamask/storybook-react exec playwright install chromium
       - name: Build packages
         run: yarn build
       - name: Run Storybook tests
