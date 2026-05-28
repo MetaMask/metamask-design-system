@@ -17,7 +17,7 @@ jobs:
         with:
           is-high-risk-environment: false
       - name: Install Playwright browsers
-        run: yarn playwright install chromium
+        run: yarn exec playwright install chromium
       - name: Build packages
         run: yarn build
       - name: Run Storybook tests
