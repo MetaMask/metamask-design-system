@@ -57,6 +57,7 @@ export const Content: React.FC<ContentProps> = ({
         bottomAccessory={
           description ? (
             <BoxRow
+              twClassName="w-full"
               startAccessory={descriptionStartAccessory}
               endAccessory={descriptionEndAccessory}
               gap={1}
