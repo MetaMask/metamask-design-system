@@ -40,7 +40,7 @@ jobs:
     name: Test Storybook
     needs: check-workflows
     uses: ./.github/workflows/test-storybook.yml
-    continue-on-error: true
+    continue-on-error: true # TODO: remove once playwright install hang is resolved
 
   chromatic:
     name: Chromatic
