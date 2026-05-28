@@ -36,11 +36,11 @@ jobs:
     needs: check-workflows
     uses: ./.github/workflows/lint-build-test.yml
 
-  test-storybook:
-    name: Test Storybook
-    needs: check-workflows
-    uses: ./.github/workflows/test-storybook.yml
-    continue-on-error: true # TODO: remove once playwright install hang is resolved
+  # TODO: re-enable once playwright install hang is resolved (#1193)
+  # test-storybook:
+  #   name: Test Storybook
+  #   needs: check-workflows
+  #   uses: ./.github/workflows/test-storybook.yml
 
   chromatic:
     name: Chromatic
@@ -79,7 +79,7 @@ jobs:
     needs:
       - analyse-code
       - lint-build-test
-      - test-storybook
+      # - test-storybook # TODO: re-enable once playwright install hang is resolved (#1193)
       - chromatic
     outputs:
       passed: ${{ steps.set-output.outputs.passed }}
