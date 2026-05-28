@@ -49,7 +49,7 @@ export const Content: React.FC<ContentProps> = ({
       twClassName={`min-h-[46px] ${hasColumnShell ? 'min-w-0' : (twClassName ?? '')}`.trim()}
       {...(hasColumnShell ? {} : rest)}
     >
-      {avatar && avatar}
+      {avatar}
       {/* Title and description Column */}
       <BoxColumn
         twClassName="flex-1 min-w-0"
