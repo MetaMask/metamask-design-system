@@ -1,16 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
-import { ScrollView } from 'react-native';
-
 import {
-  TextVariant,
-  TextColor,
-  FontWeight,
   BoxFlexDirection,
   BoxFlexWrap,
   BoxAlignItems,
-} from '../../../types';
+} from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-native';
+import { ScrollView } from 'react-native';
+
 import { Box } from '../../Box';
-import { Text } from '../../Text';
+import { Text, TextVariant, FontWeight } from '../../Text';
 
 import { Blockies } from './Blockies';
 import type { BlockiesProps } from './Blockies.types';

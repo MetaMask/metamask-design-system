@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-react",
-  "version": "0.17.0",
+  "version": "0.24.0",
   "description": "Design system react ui components",
   "keywords": [
     "MetaMask",
@@ -35,13 +35,10 @@
     "dist/"
   ],
   "scripts": {
-    "build": "yarn generate-icons && ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
-    "clean:icons": "rimraf src/components/Icon/icons",
     "create-component": "tsx scripts/create-component",
-    "generate-icons": "yarn clean:icons && svgr --config-file src/components/Icon/.svgrrc.js -d src/components/Icon/icons src/components/Icon/assets/*.svg && yarn generate-icons:index",
-    "generate-icons:index": "tsx scripts/generate-icons-index.ts",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
@@ -54,12 +51,13 @@
     "@metamask/jazzicon": "^2.0.0",
     "@radix-ui/react-slot": "^1.1.0",
     "blo": "^2.0.0",
+    "react-focus-lock": "^2.9.4",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
     "@figma/code-connect": "^1.0.0",
     "@jest/globals": "^29.7.0",
-    "@metamask/auto-changelog": "^5.3.2",
+    "@metamask/auto-changelog": "^6.1.1",
     "@metamask/design-system-tailwind-preset": "workspace:^",
     "@metamask/utils": "^11.11.0",
     "@svgr/cli": "^8.1.0",
@@ -69,22 +67,24 @@
     "@ts-bridge/cli": "^0.6.3",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
     "deepmerge": "^4.2.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "rimraf": "^5.0.5",
     "ts-jest": "^29.2.5",
     "tsx": "^4.20.6",
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
-    "@metamask/design-system-tailwind-preset": "^0.6.0",
+    "@metamask/design-system-tailwind-preset": "^0.8.0",
     "@metamask/design-tokens": "^8.1.0",
     "@metamask/utils": "^11.11.0",
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "engines": {
     "node": "^18.18 || >=20"

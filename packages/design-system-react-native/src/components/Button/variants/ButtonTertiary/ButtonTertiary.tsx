@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../../../ButtonBase';
-import { IconSize } from '../../../Icon';
-import { TextVariant, FontWeight } from '../../../Text';
 
 import type { ButtonTertiaryProps } from './ButtonTertiary.types';
 
+// Internal Button variant.
+// Consumers should use `Button` with `variant`.
 export const ButtonTertiary = ({
   children,
   textProps,
@@ -74,33 +74,18 @@ export const ButtonTertiary = ({
       if (isInverse) {
         return 'text-primary-inverse';
       }
-      return pressed || isLoading
-        ? 'text-primary-default-pressed'
-        : 'text-primary-default';
+      // Use neutral text color for all states (default, pressed, loading)
+      return 'text-default';
     },
     [isDanger, isInverse, isLoading],
   );
 
   return (
     <ButtonBase
-      textProps={{
-        variant: TextVariant.BodyMd,
-        fontWeight: FontWeight.Medium,
-        numberOfLines: 1,
-        ellipsizeMode: 'clip',
-        ...textProps,
-      }}
-      spinnerProps={{
-        ...spinnerProps,
-      }}
-      startIconProps={{
-        size: IconSize.Sm,
-        ...startIconProps,
-      }}
-      endIconProps={{
-        size: IconSize.Sm,
-        ...endIconProps,
-      }}
+      textProps={textProps}
+      spinnerProps={spinnerProps}
+      startIconProps={startIconProps}
+      endIconProps={endIconProps}
       isLoading={isLoading}
       twClassName={getContainerClassName}
       textClassName={getTextClassName}

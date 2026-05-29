@@ -1,0 +1,84 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as ModalOverlayStories from './ModalOverlay.stories';
+
+# ModalOverlay
+
+`ModalOverlay` is a transparent backdrop that covers the entire viewport. Use it to dim and isolate the page behind a modal or dialog. The component is purely presentational; pair it with `ModalContent` and the rest of the modal stack when building a full modal experience.
+
+```tsx
+import { ModalOverlay } from '@metamask/design-system-react';
+
+<ModalOverlay onClick={handleClose} />;
+```
+
+<Canvas of={ModalOverlayStories.Default} />
+
+## Props
+
+### `onClick`
+
+Optional click handler invoked when the overlay is clicked. Useful for closing the modal when the user clicks outside its content. Not necessary when used inside `Modal` with `closeOnClickOutside` enabled.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>(event: MouseEvent&lt;HTMLDivElement&gt;) =&gt; void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalOverlayStories.OnClick} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={ModalOverlayStories.Default} />
+
+## Migration Guide
+
+Migrating from `ui/components/component-library/modal-overlay` in MetaMask Extension? See the [ModalOverlay Migration Guide](../../../MIGRATION.md#modaloverlay-component) for prop mappings, before/after examples, and breaking changes.
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

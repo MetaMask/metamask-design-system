@@ -7,11 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.2]
+
+### Changed
+
+- Expanded the `react` peer dependency range to `>=18.2.0`, allowing the preset to install alongside newer React Native 0.76 and React 19 app stacks. ([#844](https://github.com/MetaMask/metamask-design-system/pull/844))
+
 ## [0.4.1]
 
 ### Fixed
 
-- Fixed typography class generation so custom font family mappings are no longer combined with forced `fontWeight` values, preventing incorrect or fallback font rendering in React Native apps that supply custom font families ([#1037](https://github.com/MetaMask/metamask-design-system/pull/1037)).
+- Fixed typography class generation so custom font family mappings are no longer combined with forced `fontWeight` values, preventing incorrect or fallback font rendering in React Native apps that supply custom font families ([#1037](https://github.com/MetaMask/metamask-design-system/pull/1037))
 
 ## [0.4.0]
 
@@ -55,7 +61,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.2...HEAD
+[0.4.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.1...@metamask/design-system-twrnc-preset@0.4.2
 [0.4.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.0...@metamask/design-system-twrnc-preset@0.4.1
 [0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.3.0...@metamask/design-system-twrnc-preset@0.4.0
 [0.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.1...@metamask/design-system-twrnc-preset@0.3.0

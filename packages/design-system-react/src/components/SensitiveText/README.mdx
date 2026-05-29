@@ -1,0 +1,138 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as SensitiveTextStories from './SensitiveText.stories';
+
+# SensitiveText
+
+SensitiveText extends the `Text` component to handle sensitive information. It replaces the text content with bullet characters when hidden — useful for account balances, private keys, and other confidential data.
+
+```tsx
+import { SensitiveText } from '@metamask/design-system-react';
+
+<SensitiveText isHidden>$1,234.56</SensitiveText>;
+```
+
+<Canvas of={SensitiveTextStories.Default} />
+
+## Props
+
+`SensitiveText` extends all [Text](../Text/README.mdx) props (`variant`, `color`, `fontWeight`, `className`, `style`, etc.).
+
+### `isHidden`
+
+Whether the text content should be hidden. When `true`, content is replaced with bullet characters.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SensitiveTextStories.IsHidden} />
+
+### `length`
+
+The number of bullet characters to display when hidden. Can be a predefined `SensitiveTextLength` or a custom numeric string (e.g. `"15"`). Invalid values fall back to `SensitiveTextLength.Short` and log a warning.
+
+Available lengths:
+
+- `SensitiveTextLength.Short` (6 characters)
+- `SensitiveTextLength.Medium` (9 characters)
+- `SensitiveTextLength.Long` (12 characters)
+- `SensitiveTextLength.ExtraLong` (20 characters)
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>SensitiveTextLength | string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>SensitiveTextLength.Short</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SensitiveTextStories.Length} />
+
+### `children`
+
+The text content to display or hide.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Use the `className` prop to add custom CSS classes. They are forwarded to the underlying `Text` component and merged with its default classes via `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={SensitiveTextStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

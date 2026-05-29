@@ -74,10 +74,7 @@ export type {
   BottomSheetFooterButtonProps,
 } from './BottomSheetFooter';
 
-export {
-  BottomSheetHeader,
-  BottomSheetHeaderVariant,
-} from './BottomSheetHeader';
+export { BottomSheetHeader } from './BottomSheetHeader';
 export type { BottomSheetHeaderProps } from './BottomSheetHeader';
 
 export { BottomSheetOverlay } from './BottomSheetOverlay';
@@ -124,7 +121,7 @@ export type { ButtonSemanticProps } from './ButtonSemantic';
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
-export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
+export { HeaderBase } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
 export { HeaderRoot } from './HeaderRoot';
@@ -139,6 +136,21 @@ export type {
 
 export { HeaderStandard } from './HeaderStandard';
 export type { HeaderStandardProps } from './HeaderStandard';
+
+export {
+  HeaderStandardAnimated,
+  useHeaderStandardAnimated,
+} from './HeaderStandardAnimated';
+export type {
+  HeaderStandardAnimatedProps,
+  UseHeaderStandardAnimatedReturn,
+} from './HeaderStandardAnimated';
+
+export { HeaderStandardCenterColumn } from './temp-components/HeaderStandardCenterColumn';
+export type {
+  HeaderStandardCenterColumnFields,
+  HeaderStandardCenterColumnProps,
+} from './temp-components/HeaderStandardCenterColumn';
 
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
@@ -173,6 +185,23 @@ export type { MaskiconProps } from './temp-components/Maskicon';
 export { MainActionButton } from './MainActionButton';
 export type { MainActionButtonProps } from './MainActionButton';
 
+export { SectionDivider } from './SectionDivider';
+export type { SectionDividerProps } from './SectionDivider';
+
+export { SegmentButton, SegmentButtonVariant } from './SegmentButton';
+export type { SegmentButtonProps } from './SegmentButton';
+
+export { SegmentGroup } from './SegmentGroup';
+export type { SegmentGroupProps } from './SegmentGroup';
+
+export {
+  SelectButton,
+  SelectButtonEndArrow,
+  SelectButtonSize,
+  SelectButtonVariant,
+} from './SelectButton';
+export type { SelectButtonProps } from './SelectButton';
+
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
 
@@ -198,28 +227,34 @@ export type { TextProps } from './Text';
 export { TextField } from './TextField';
 export type { TextFieldProps } from './TextField';
 
+export { TextArea } from './TextArea';
+export type { TextAreaProps } from './TextArea';
+
 export { TextFieldSearch } from './TextFieldSearch';
 export type { TextFieldSearchProps } from './TextFieldSearch';
 
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
 
-export {
-  Toast,
-  ToastVariant,
-  ToastCloseButtonVariant,
-  ToastContext,
-  ToastContextWrapper,
-} from './Toast';
+export { TitleAlert } from './TitleAlert';
+export type { TitleAlertProps } from './TitleAlert';
+
+export { TitleHub } from './TitleHub';
+export type { TitleHubProps, TitleHubPropsShared } from './TitleHub';
+
+export { TitleStandard } from './TitleStandard';
+export type { TitleStandardProps } from './TitleStandard';
+
+export { TitleSubpage } from './TitleSubpage';
+export type { TitleSubpageProps } from './TitleSubpage';
+
+export { Toast, Toaster, toast, ToastSeverity } from './Toast';
 export type {
   ToastOptions,
   ToastProps,
-  ToastRef,
-  ToastContextParams,
-  ToastLabelOptions,
-  ToastDescriptionOptions,
-  ToastLinkButtonOptions,
-  ToastCloseButtonOptions,
+  ToastIconProps,
+  ToasterProps,
+  ToasterRef,
 } from './Toast';
 
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';
@@ -239,3 +274,9 @@ export type { SpinnerProps } from './temp-components/Spinner';
 
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
+
+export { Tag, TagSeverity } from './Tag';
+export type { TagProps } from './Tag';
+
+export { SectionHeader } from './SectionHeader';
+export type { SectionHeaderProps } from './SectionHeader';

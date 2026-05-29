@@ -19,10 +19,6 @@ type BannerBaseCloseButtonProps = Omit<
    * Optional test id for the close button element.
    */
   'data-testid'?: string;
-  /**
-   * Optional click handler for the close button.
-   */
-  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 type BannerBasePropsBase = BannerBasePropsShared &
@@ -46,7 +42,7 @@ type BannerBasePropsBase = BannerBasePropsShared &
     onClose?: MouseEventHandler<HTMLButtonElement>;
     /**
      * Optional props for the close `ButtonIcon`.
-     * Providing this also shows a close button.
+     * Only used when `onClose` is provided.
      */
     closeButtonProps?: BannerBaseCloseButtonProps;
   };

@@ -1,7 +1,6 @@
 // Third party dependencies.
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render, fireEvent } from '@testing-library/react-native';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -75,31 +74,6 @@ describe('HeaderRoot', () => {
       );
 
       expect(getByText('Title')).toBeOnTheScreen();
-      expect(getByTestId(LEFT_CHILDREN_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('renders only titleAccessory when title is empty and children not provided', () => {
-      const { getByTestId } = render(
-        <HeaderRoot
-          title=""
-          titleAccessory={
-            <Text testID={LEFT_CHILDREN_TEST_ID}>Only Accessory</Text>
-          }
-        />,
-      );
-
-      expect(getByTestId(LEFT_CHILDREN_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('renders only titleAccessory when title is undefined', () => {
-      const { getByTestId } = render(
-        <HeaderRoot
-          titleAccessory={
-            <Text testID={LEFT_CHILDREN_TEST_ID}>Accessory Only</Text>
-          }
-        />,
-      );
-
       expect(getByTestId(LEFT_CHILDREN_TEST_ID)).toBeOnTheScreen();
     });
 

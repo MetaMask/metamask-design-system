@@ -1,1 +1,1 @@
-export { type TextAreaPropsShared } from './TextArea.types';
+export type { TextAreaPropsShared } from './TextArea.types';

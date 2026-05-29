@@ -42,7 +42,7 @@ export const Spinner = ({
   // Define the animated style
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${rotation.value % 360}deg` }],
-  }));
+  }), []);
 
   const finalSpinnerIconProps: IconProps = {
     size: IconSize.Md,

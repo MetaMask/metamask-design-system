@@ -22,10 +22,10 @@ export const Card = ({
   if (onPress) {
     return (
       <TouchableOpacity
+        {...props}
         onPress={onPress}
         style={cardStyle}
         {...touchableOpacityProps}
-        {...props}
       >
         {children}
       </TouchableOpacity>

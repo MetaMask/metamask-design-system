@@ -5,7 +5,7 @@ import type { InputPropsShared } from '../Input/Input.types';
 /**
  * TextArea shared props (ADR-0004). A multiline input layered on the shared
  * `InputPropsShared` contract. Platform packages layer container and
- * textarea behavior on top.
+ * `TextInput` behavior on top.
  */
 export type TextAreaPropsShared = Omit<
   InputPropsShared,

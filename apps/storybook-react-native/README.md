@@ -1,25 +1,87 @@
 # `@metamask/storybook-react-native`
 
-Storybook setup for React Native components within the MetaMask design system monorepo. It allows developers to visualize and test components in isolation, ensuring consistency and reliability across the application.
+Storybook app for validating `@metamask/design-system-react-native` components in a runtime that stays aligned with MetaMask Mobile.
 
-## Installation
+## What this app is for
 
-`yarn install`
+- Test DSRN components in isolation on iOS and Android.
+- Keep dependency behavior close to Mobile (Expo + React Native alignment).
+- Validate Storybook v10 integration with native modules.
 
-## Running Storybook
+## Runtime policy
 
-Run one of these commands to start Storybook:
+| Mode                                                         | Status                     | Use case                                        |
+| ------------------------------------------------------------ | -------------------------- | ----------------------------------------------- |
+| Development build (`expo run:*` + `expo start --dev-client`) | Supported                  | Primary and required validation path            |
+| Expo Go (`expo start --ios` / `--android`)                   | Unsupported for validation | Smoke checks only; known native module failures |
+
+## Run Storybook (supported flow)
 
 ```bash
-# From repository root
-yarn storybook:ios    # For iOS
-yarn storybook:android    # For Android
+# 1) Build and install the native clients
+yarn storybook:ios
+yarn storybook:android
 
-# OR from apps/storybook-react-native directory
-yarn ios    # For iOS
-yarn android    # For Android
+# 2) Start Metro for dev-client
+yarn workspace @metamask/storybook-react-native exec expo start --dev-client
 ```
 
-## Contributing
+If you are running Mobile and Storybook side-by-side, use a separate Metro port:
 
-This package is part of a monorepo. Instructions for contributing can be found in the [monorepo README](https://github.com/MetaMask/metamask-design-system#readme).
+```bash
+yarn workspace @metamask/storybook-react-native exec expo start --dev-client --port 8088
+```
+
+## Version alignment policy
+
+This app should remain aligned with Mobile versions (currently Expo 52 / RN 0.76.x) rather than tracking newer Storybook template stacks (for example Expo 55) ahead of Mobile.
+
+## Known Expo Go behavior (expected)
+
+- iOS Expo Go can throw repeated Reanimated Worklets initialization errors.
+- Android Expo Go can fail with missing DateTimePicker native module (`RNCMaterialDatePicker`).
+- These are dependency/runtime mismatches in Expo Go for our current alignment, not dev-build blockers.
+
+## Troubleshooting
+
+### No development build is installed
+
+```text
+› Opening on Android...
+CommandError: No development build (com.metamask.storybook) for this project is installed.
+Please make and install a development build on the device first.
+```
+
+```bash
+yarn workspace @metamask/storybook-react-native exec expo run:android
+yarn workspace @metamask/storybook-react-native exec expo start --dev-client --android
+```
+
+### Failed to locate Android application identifier
+
+```bash
+CommandError: Failed to locate the android application identifier in the "android/" folder.
+```
+
+This means the local `android/` folder is partial or malformed. Regenerate it cleanly:
+
+```bash
+yarn workspace @metamask/storybook-react-native exec expo prebuild --clean --platform android
+yarn storybook:android
+```
+
+### Android install fails with insufficient storage
+
+```text
+INSTALL_FAILED_INSUFFICIENT_STORAGE
+```
+
+Free emulator storage (or wipe emulator data), then reinstall.
+
+### Watchman recrawl warnings
+
+Run the `watchman watch-del ... && watchman watch-project ...` command printed in the warning output.
+
+### `expo-doctor` Metro false positive with Storybook
+
+If `expo-doctor` reports an `ERR_REQUIRE_ESM` from Storybook Metro integration, treat that specific Metro check as non-blocking and focus on actual SDK/dependency mismatch findings (`expo install --check`).

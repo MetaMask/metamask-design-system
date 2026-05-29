@@ -34,7 +34,6 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
       isInteractable = true,
       isFullscreen = false,
       keyboardAvoidingViewEnabled = true,
-      panGestureHandlerProps,
       ...props
     },
     ref,
@@ -42,7 +41,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     const tw = useTailwind();
     const { bottom: screenBottomPadding } = useSafeAreaInsets();
     const { y: frameY } = useSafeAreaFrame();
-    const postCallback = useRef<BottomSheetPostCallback>();
+    const postCallback = useRef<BottomSheetPostCallback | undefined>(undefined);
     const bottomSheetDialogRef = useRef<BottomSheetDialogRef>(null);
     const didNavigateBackRef = useRef(false);
     const closeRequestedRef = useRef(false);
@@ -80,15 +79,22 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 
     // Dismiss the sheet when Android back button is pressed.
     useEffect(() => {
+      if (Platform.OS !== 'android') {
+        return undefined;
+      }
+
       const hardwareBackPress = () => {
         if (isInteractable) {
           bottomSheetDialogRef.current?.onCloseDialog();
         }
         return true;
       };
-      BackHandler.addEventListener('hardwareBackPress', hardwareBackPress);
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        hardwareBackPress,
+      );
       return () => {
-        BackHandler.removeEventListener('hardwareBackPress', hardwareBackPress);
+        subscription.remove();
       };
     }, [isInteractable]);
 
@@ -135,7 +141,6 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
           isFullscreen={isFullscreen}
           twClassName={twClassName}
           keyboardAvoidingViewEnabled={keyboardAvoidingViewEnabled}
-          panGestureHandlerProps={panGestureHandlerProps}
         >
           {children}
         </BottomSheetDialog>

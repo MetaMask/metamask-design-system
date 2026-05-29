@@ -189,6 +189,10 @@ ButtonHero is **locked to light theme** colors regardless of the app's theme set
 
 This ensures consistent branding for high-impact actions across different theme modes.
 
+## Migration from MetaMask Mobile Component Library
+
+Migrating from the legacy `ButtonHero` in `app/component-library/components-temp/Buttons/ButtonHero`? See the [ButtonHero migration guide](../../../MIGRATION.md#buttonhero-component) for import changes and `twClassName` behavior differences.
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

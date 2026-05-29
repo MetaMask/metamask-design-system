@@ -63,7 +63,6 @@ export const TitleAccessory = {
 export const Children = {
   render: () => (
     <HeaderRoot
-      twClassName="bg-default"
       endButtonIconProps={[
         {
           iconName: IconName.Menu,
@@ -83,15 +82,16 @@ export const Children = {
         flexDirection={BoxFlexDirection.Row}
         alignItems={BoxAlignItems.Center}
         gap={1}
+        twClassName="flex-1" // flex-1 ensures the text is truncated
       >
-        <Text variant={TextVariant.BodyMd} twClassName="text-default">
-          Imported Account 1
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          twClassName="flex-1" // flex-1 ensures the text is truncated
+        >
+          Imported Account 1 with a really long name
         </Text>
-        <Icon
-          name={IconName.ArrowDown}
-          color={IconColor.IconDefault}
-          twClassName="text-default"
-        />
+        <Icon name={IconName.ArrowDown} />
       </Box>
     </HeaderRoot>
   ),
@@ -100,7 +100,7 @@ export const Children = {
 export const EndAccessory = {
   render: () => (
     <HeaderRoot
-      title="Page Title"
+      title="Page title"
       endAccessory={<Text variant={TextVariant.BodyMd}>Custom end</Text>}
     />
   ),

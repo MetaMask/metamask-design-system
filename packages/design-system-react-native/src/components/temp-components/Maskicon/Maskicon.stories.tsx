@@ -1,16 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
-import { ScrollView } from 'react-native';
-
 import {
-  TextVariant,
-  TextColor,
-  FontWeight,
   BoxFlexDirection,
   BoxFlexWrap,
   BoxAlignItems,
-} from '../../../types';
+} from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-native';
+import { ScrollView } from 'react-native';
+
 import { Box } from '../../Box';
-import { Text } from '../../Text';
+import { Text, TextVariant, TextColor, FontWeight } from '../../Text';
 
 import { Maskicon } from './Maskicon';
 import type { MaskiconProps } from './Maskicon.types';
