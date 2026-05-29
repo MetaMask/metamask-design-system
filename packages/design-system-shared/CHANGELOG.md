@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(shared,react,react-native): add FlashFilled icon ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
+- feat: `TextField` migration (extension) ([#1170](https://github.com/MetaMask/metamask-design-system/pull/1170))
+- chore: Align React Native and Expo dependencies with mobile ([#1165](https://github.com/MetaMask/metamask-design-system/pull/1165))
+- feat(rn): add SelectButtonSize and align SelectButton with Figma ([#1177](https://github.com/MetaMask/metamask-design-system/pull/1177))
+- chore(deps-dev): bump @metamask/auto-changelog from 6.1.0 to 6.1.1 ([#1178](https://github.com/MetaMask/metamask-design-system/pull/1178))
+
 ## [0.19.0]
 
 ### Added
