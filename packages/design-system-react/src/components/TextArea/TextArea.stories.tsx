@@ -62,10 +62,6 @@ const meta: Meta<TextAreaProps> = {
     rows: {
       control: 'number',
     },
-    className: {
-      control: 'text',
-      description: 'Additional CSS classes merged with the component defaults',
-    },
   },
 };
 
