@@ -98,6 +98,8 @@ export const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(
 
     const { className: inputClassNameFromProps, ...inputRest } =
       inputProps ?? {};
+    const resolvedResize = resize as TextAreaResize;
+    const resolvedTextVariant = textVariant as TextVariant;
 
     const containerClassName = twMerge(
       'flex min-h-24 rounded-lg border bg-muted px-4 py-3 transition-colors',
@@ -111,9 +113,9 @@ export const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(
     const textareaClassName = twMerge(
       'm-0 min-h-[88px] w-full flex-1 self-stretch border-0 bg-transparent p-0 text-default outline-none',
       'placeholder:text-alternative',
-      CLASSMAP_TEXTAREA_RESIZE[resize],
-      TWCLASSMAP_TEXT_VARIANT_FONTSTYLE[textVariant],
-      TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[textVariant],
+      CLASSMAP_TEXTAREA_RESIZE[resolvedResize],
+      TWCLASSMAP_TEXT_VARIANT_FONTSTYLE[resolvedTextVariant],
+      TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[resolvedTextVariant],
       inputClassNameFromProps,
     );
 

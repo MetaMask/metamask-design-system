@@ -144,11 +144,7 @@ export const IsReadOnly: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <ControlledTextArea placeholder="Editable" value="" />
-      <TextArea
-        placeholder="Read-only"
-        value="Read-only value"
-        isReadOnly
-      />
+      <TextArea placeholder="Read-only" value="Read-only value" isReadOnly />
     </div>
   ),
 };
@@ -157,7 +153,7 @@ export const IsError: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <ControlledTextArea placeholder="Default state" value="Normal textarea" />
-      <TextArea
+      <ControlledTextArea
         placeholder="Error state"
         value="This field has an error"
         isError

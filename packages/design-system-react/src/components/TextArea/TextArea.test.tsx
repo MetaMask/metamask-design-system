@@ -32,11 +32,7 @@ describe('TextArea', () => {
 
     it('renders placeholder and value on the inner textarea', () => {
       render(
-        <TextArea
-          placeholder="Enter value"
-          value="hello"
-          onChange={noop}
-        />,
+        <TextArea placeholder="Enter value" value="hello" onChange={noop} />,
       );
 
       expect(screen.getByRole('textbox')).toHaveValue('hello');
@@ -62,6 +58,7 @@ describe('TextArea', () => {
       render(
         <TextArea
           value=""
+          onChange={noop}
           placeholder="forwarded"
           inputProps={{ 'aria-label': 'forwarded-label' }}
         />,
@@ -95,9 +92,7 @@ describe('TextArea', () => {
 
     cases.forEach(({ resize, resizeClass }) => {
       it(`applies ${resizeClass} when resize is ${resize}`, () => {
-        render(
-          <TextArea value="" onChange={noop} resize={resize} />,
-        );
+        render(<TextArea value="" onChange={noop} resize={resize} />);
 
         expect(screen.getByRole('textbox')).toHaveClass(resizeClass);
       });
@@ -163,9 +158,7 @@ describe('TextArea', () => {
     });
 
     it('applies focused border on focus and restores muted border on blur', () => {
-      render(
-        <TextArea data-testid={ROOT_TEST_ID} onChange={noop} value="" />,
-      );
+      render(<TextArea data-testid={ROOT_TEST_ID} onChange={noop} value="" />);
 
       const root = screen.getByTestId(ROOT_TEST_ID);
       const textarea = screen.getByRole('textbox');
@@ -247,7 +240,12 @@ describe('TextArea', () => {
 
     it('starts focused when autoFocus is true', () => {
       render(
-        <TextArea data-testid={ROOT_TEST_ID} autoFocus value="" />,
+        <TextArea
+          data-testid={ROOT_TEST_ID}
+          autoFocus
+          onChange={noop}
+          value=""
+        />,
       );
 
       expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass('border-default');
@@ -295,12 +293,7 @@ describe('TextArea', () => {
       const onFocus = jest.fn();
       const onBlur = jest.fn();
       render(
-        <TextArea
-          value=""
-          onChange={noop}
-          onFocus={onFocus}
-          onBlur={onBlur}
-        />,
+        <TextArea value="" onChange={noop} onFocus={onFocus} onBlur={onBlur} />,
       );
 
       fireEvent.focus(screen.getByRole('textbox'));
@@ -311,9 +304,7 @@ describe('TextArea', () => {
     });
 
     it('focuses the inner textarea when the container is clicked', () => {
-      render(
-        <TextArea data-testid={ROOT_TEST_ID} value="" onChange={noop} />,
-      );
+      render(<TextArea data-testid={ROOT_TEST_ID} value="" onChange={noop} />);
 
       fireEvent.click(screen.getByTestId(ROOT_TEST_ID));
 

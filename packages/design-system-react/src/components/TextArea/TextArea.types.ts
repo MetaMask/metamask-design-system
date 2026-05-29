@@ -1,6 +1,4 @@
-import type {
-  TextAreaPropsShared,
-} from '@metamask/design-system-shared';
+import type { TextAreaPropsShared } from '@metamask/design-system-shared';
 import type { ComponentPropsWithoutRef, Ref } from 'react';
 
 import type { TextAreaResize } from './TextArea.constants';
