@@ -159,6 +159,7 @@ export const IconName = {
   Fire: 'Fire',
   FirstPage: 'FirstPage',
   Flag: 'Flag',
+  FlashFilled: 'FlashFilled',
   FlashSlash: 'FlashSlash',
   Flash: 'Flash',
   Flask: 'Flask',
