@@ -9,19 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.27.0]
 
-### Uncategorized
+### Added
 
-- refactor: updated segment group style and gap ([#1194](https://github.com/MetaMask/metamask-design-system/pull/1194))
-- feat(shared,react,react-native): add FlashFilled icon ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
-- fix(rn): web rendering compatibility for BottomSheet, BottomSheetOverlay, Icon, and animated components ([#1187](https://github.com/MetaMask/metamask-design-system/pull/1187))
-- refactor(rn): simplify HeaderBase text API ([#1103](https://github.com/MetaMask/metamask-design-system/pull/1103))
-- fix(HeaderStandardAnimated): inline scroll update to fix Reanimated 4 UI-thread error ([#1185](https://github.com/MetaMask/metamask-design-system/pull/1185))
-- chore: [DSYS-616] create/update ModalFooter migration docs ([#1154](https://github.com/MetaMask/metamask-design-system/pull/1154))
-- chore: [DSYS-616] create/update Input migration docs ([#1041](https://github.com/MetaMask/metamask-design-system/pull/1041))
-- chore: Align React Native and Expo dependencies with mobile ([#1165](https://github.com/MetaMask/metamask-design-system/pull/1165))
-- docs: `KeyValueRow` migration ([#1112](https://github.com/MetaMask/metamask-design-system/pull/1112))
-- feat(rn): add SelectButtonSize and align SelectButton with Figma ([#1177](https://github.com/MetaMask/metamask-design-system/pull/1177))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.1.0 to 6.1.1 ([#1178](https://github.com/MetaMask/metamask-design-system/pull/1178))
+- Added `FlashFilled` icon (filled lightning bolt) to `IconName` ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
+- Added `SelectButtonSize` so `SelectButton` exposes a semantic size type ([#1177](https://github.com/MetaMask/metamask-design-system/pull/1177))
+
+### Changed
+
+- **BREAKING:** Removed `panGestureHandlerProps` from `BottomSheet` and `BottomSheetDialog` following the migration to the `react-native-gesture-handler` v2 `GestureDetector`/`Gesture.Pan()` API ([#1165](https://github.com/MetaMask/metamask-design-system/pull/1165))
+  - See [Migration Guide](./MIGRATION.md#from-version-0260-to-0270)
+- **BREAKING:** Removed the variant-based title API from `HeaderBase` and `BottomSheetHeader` ([#1103](https://github.com/MetaMask/metamask-design-system/pull/1103))
+  - Removed `variant`, `HeaderBaseVariant`, and `BottomSheetHeaderVariant`, plus `HeaderBase`'s `titleTestID`
+  - String titles now render with a centered `HeadingSm` treatment; pass custom `children` for bespoke title layouts and use `textProps.testID` in place of `titleTestID`
+  - See [Migration Guide](./MIGRATION.md#from-version-0260-to-0270)
+- Reduced the default `SegmentGroup` segment spacing from `gap-3` to `gap-1` for tighter grouped segments ([#1194](https://github.com/MetaMask/metamask-design-system/pull/1194))
+
+### Fixed
+
+- Fixed a `HeaderStandardAnimated` runtime crash under React Native Reanimated 4 by inlining the scroll-handler worklet ([#1185](https://github.com/MetaMask/metamask-design-system/pull/1185))
+- Fixed React Native Web rendering for `BottomSheet`, `BottomSheetOverlay`, `Icon`, and the animated `ButtonAnimated` and `Spinner` components ([#1187](https://github.com/MetaMask/metamask-design-system/pull/1187))
 
 ## [0.26.0]
 

@@ -9,14 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.24.0]
 
-### Uncategorized
+### Added
 
-- feat(shared,react,react-native): add FlashFilled icon ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
-- feat: `TextField` migration (extension) ([#1170](https://github.com/MetaMask/metamask-design-system/pull/1170))
-- chore: [DSYS-616] create/update ModalFooter migration docs ([#1154](https://github.com/MetaMask/metamask-design-system/pull/1154))
-- chore: [DSYS-616] create/update Input migration docs ([#1041](https://github.com/MetaMask/metamask-design-system/pull/1041))
-- chore: Align React Native and Expo dependencies with mobile ([#1165](https://github.com/MetaMask/metamask-design-system/pull/1165))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.1.0 to 6.1.1 ([#1178](https://github.com/MetaMask/metamask-design-system/pull/1178))
+- Added `TextField` for labeled text entry with optional helper and validation text, exposing `TextFieldSize` and `TextFieldType` ([#1170](https://github.com/MetaMask/metamask-design-system/pull/1170))
+- Added `FlashFilled` icon (filled lightning bolt) to `IconName` ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
 
 ## [0.23.1]
 

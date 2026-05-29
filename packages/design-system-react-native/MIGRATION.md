@@ -30,7 +30,8 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.24.0 to 0.x.0](#from-version-0240-to-0x0)
+  - [From version 0.26.0 to 0.27.0](#from-version-0260-to-0270)
+  - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
   - [From version 0.23.0 to 0.24.0](#from-version-0230-to-0240)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.21.0 to 0.22.0](#from-version-0210-to-0220)
@@ -46,9 +47,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
-
-### From version 0.24.0 to 0.x.0
+### From version 0.26.0 to 0.27.0
 
 #### Removed `panGestureHandlerProps` from `BottomSheetDialog` and `BottomSheet`
 
@@ -56,7 +55,7 @@ The `panGestureHandlerProps` prop has been removed from both `BottomSheetDialog`
 
 This prop was a compatibility shim from the old `react-native-gesture-handler` v1 `PanGestureHandler` JSX component. With the migration to the RNGH v2 `GestureDetector` + `Gesture.Pan()` API, the prop was mapped to individual method calls via an internal `applyPanGestureProps` function — however `simultaneousHandlers` (the only real-world use case) was never wired up and was silently dropped. The prop was also not used anywhere in the MetaMask Mobile or Extension consumer codebases.
 
-**Before (0.24.0):**
+**Before (0.26.0):**
 
 ```tsx
 <BottomSheet
@@ -69,31 +68,13 @@ This prop was a compatibility shim from the old `react-native-gesture-handler` v
 </BottomSheet>
 ```
 
-**After (0.x.0):**
+**After (0.27.0):**
 
 ```tsx
 <BottomSheet goBack={goBack}>{children}</BottomSheet>
 ```
 
 If you were relying on `simultaneousHandlers` for nested scroll behaviour, this was not functioning correctly in the previous version. First-class support for simultaneous gesture handling will be addressed in a follow-up.
-
-#### BannerBase: `onClose` is now the only close-button behavior API
-
-**What changed:**
-
-- **`closeButtonProps.onPress`** is removed from the public **`BannerBase`** API.
-- The close button now renders **only** when **`onClose`** is provided.
-- **`closeButtonProps`** is now customization-only for the rendered close **`ButtonIcon`**.
-
-**Migration:**
-
-- Move any close-button behavior from **`closeButtonProps.onPress`** to **`onClose`**.
-- Keep **`closeButtonProps`** only for non-behavioral customization such as **`testID`**, accessibility props, and styling hooks.
-- If you previously passed only **`closeButtonProps`** to force-render a close button, also provide **`onClose`** now.
-
-**Impact:**
-
-- Existing **`@metamask/design-system-react-native`** consumers that relied on **`closeButtonProps.onPress`** or on rendering a close button without **`onClose`** must update those call sites.
 
 #### HeaderBase and BottomSheetHeader: variant-based title API removed
 
@@ -113,6 +94,26 @@ If you were relying on `simultaneousHandlers` for nested scroll behaviour, this 
 - If you previously used a variant to change title alignment or layout, pass custom **`children`** instead.
 
 See [HeaderBase Component](#headerbase-component) and [BottomSheetHeader Component](#bottomsheetheader-component) for complete before/after examples and API mappings.
+
+### From version 0.24.0 to 0.25.0
+
+#### BannerBase: `onClose` is now the only close-button behavior API
+
+**What changed:**
+
+- **`closeButtonProps.onPress`** is removed from the public **`BannerBase`** API.
+- The close button now renders **only** when **`onClose`** is provided.
+- **`closeButtonProps`** is now customization-only for the rendered close **`ButtonIcon`**.
+
+**Migration:**
+
+- Move any close-button behavior from **`closeButtonProps.onPress`** to **`onClose`**.
+- Keep **`closeButtonProps`** only for non-behavioral customization such as **`testID`**, accessibility props, and styling hooks.
+- If you previously passed only **`closeButtonProps`** to force-render a close button, also provide **`onClose`** now.
+
+**Impact:**
+
+- Existing **`@metamask/design-system-react-native`** consumers that relied on **`closeButtonProps.onPress`** or on rendering a close button without **`onClose`** must update those call sites.
 
 <a id="buttonbase-size-defaults"></a>
 

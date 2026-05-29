@@ -9,13 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20.0]
 
-### Uncategorized
+### Added
 
-- feat(shared,react,react-native): add FlashFilled icon ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
-- feat: `TextField` migration (extension) ([#1170](https://github.com/MetaMask/metamask-design-system/pull/1170))
-- chore: Align React Native and Expo dependencies with mobile ([#1165](https://github.com/MetaMask/metamask-design-system/pull/1165))
-- feat(rn): add SelectButtonSize and align SelectButton with Figma ([#1177](https://github.com/MetaMask/metamask-design-system/pull/1177))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.1.0 to 6.1.1 ([#1178](https://github.com/MetaMask/metamask-design-system/pull/1178))
+- Added `FlashFilled` icon (filled lightning bolt) to `IconName`, keeping the centralized icon set aligned across React and React Native ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
+- Added `SelectButtonSize` so `SelectButton` exposes a semantic size type shared across platforms ([#1177](https://github.com/MetaMask/metamask-design-system/pull/1177))
+- Added `TextFieldPropsShared` for the cross-platform text field input contract ([#1170](https://github.com/MetaMask/metamask-design-system/pull/1170))
 
 ## [0.19.0]
 
