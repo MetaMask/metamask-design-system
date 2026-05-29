@@ -19,7 +19,7 @@ export const ButtonHero = forwardRef<HTMLButtonElement, ButtonHeroProps>(
         'hover:bg-primary-default-hover',
         'active:bg-primary-default-pressed',
       ],
-      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
+      'focus-visible:outline-primary-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
       className,
     );
 

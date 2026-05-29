@@ -114,7 +114,7 @@ export const AsChild: Story = {
 
 export const IsInverse: Story = {
   render: (args) => (
-    <div className="rounded bg-primary-default p-4">
+    <div className="bg-primary-default rounded p-4">
       <TextButton {...args} isInverse>
         Inverse Button
       </TextButton>

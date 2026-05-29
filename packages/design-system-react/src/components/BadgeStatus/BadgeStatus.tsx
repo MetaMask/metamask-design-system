@@ -25,7 +25,7 @@ export const BadgeStatus = forwardRef<HTMLDivElement, BadgeStatusProps>(
       // Base styles
       'inline-flex rounded-full',
       // hasBorder style
-      hasBorder ? 'border-2 border-background-default' : '',
+      hasBorder ? 'border-background-default border-2' : '',
       // Custom classes
       className,
     );

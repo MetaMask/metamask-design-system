@@ -130,7 +130,7 @@ export const Size: Story = {
 
 export const HasBorder: Story = {
   render: () => (
-    <div className="flex gap-2 bg-primary-muted p-2">
+    <div className="bg-primary-muted flex gap-2 p-2">
       <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
       <AvatarAccount
         address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"

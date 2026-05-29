@@ -14,7 +14,7 @@ const ShadowSwatch: React.FC<ShadowSwatchProps> = ({
   className = '',
 }) => (
   <div
-    className={`grid h-24 place-content-center rounded bg-default text-center ${className}`}
+    className={`bg-default grid h-24 place-content-center rounded text-center ${className}`}
   >
     {children}
   </div>

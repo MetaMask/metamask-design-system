@@ -53,7 +53,7 @@ type Story = StoryObj;
 
 const WalletHome: React.FC = () => {
   return (
-    <Box className="min-h-screen md:flex md:items-center md:justify-center md:bg-alternative md:py-4">
+    <Box className="md:bg-alternative min-h-screen md:flex md:items-center md:justify-center md:py-4">
       {/* Container Expanded View */}
       <Box
         backgroundColor={BoxBackgroundColor.BackgroundDefault}
@@ -123,19 +123,19 @@ const WalletHome: React.FC = () => {
           padding={4}
           className="md:px-8"
         >
-          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
+          <ButtonBase className="bg-muted hover:bg-muted-hover active:bg-muted-pressed h-auto flex-1 flex-col justify-center rounded-lg py-4">
             <Icon name={IconName.Bank} className="mb-2" />
             Buy/Sell
           </ButtonBase>
-          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
+          <ButtonBase className="bg-muted hover:bg-muted-hover active:bg-muted-pressed h-auto flex-1 flex-col justify-center rounded-lg py-4">
             <Icon name={IconName.SwapHorizontal} className="mb-2" />
             Swap
           </ButtonBase>
-          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
+          <ButtonBase className="bg-muted hover:bg-muted-hover active:bg-muted-pressed h-auto flex-1 flex-col justify-center rounded-lg py-4">
             <Icon name={IconName.Receive} className="mb-2" />
             Receive
           </ButtonBase>
-          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
+          <ButtonBase className="bg-muted hover:bg-muted-hover active:bg-muted-pressed h-auto flex-1 flex-col justify-center rounded-lg py-4">
             <Icon name={IconName.Send} className="mb-2" />
             Send
           </ButtonBase>
@@ -150,7 +150,7 @@ const WalletHome: React.FC = () => {
             <Text
               asChild
               fontWeight={FontWeight.Medium}
-              className="flex-1 border-b-2 border-icon-default pb-2 pt-1"
+              className="border-icon-default flex-1 border-b-2 pb-2 pt-1"
             >
               <button>Tokens</button>
             </Text>
@@ -158,7 +158,7 @@ const WalletHome: React.FC = () => {
               asChild
               fontWeight={FontWeight.Medium}
               color={TextColor.TextAlternative}
-              className="flex flex-1 items-center justify-center gap-1 pb-2 pt-1 hover:text-default"
+              className="hover:text-default flex flex-1 items-center justify-center gap-1 pb-2 pt-1"
             >
               <button>
                 <span className="pl-4">DeFi</span>
@@ -169,7 +169,7 @@ const WalletHome: React.FC = () => {
               asChild
               fontWeight={FontWeight.Medium}
               color={TextColor.TextAlternative}
-              className="flex-1 pb-2 pt-1 hover:text-default"
+              className="hover:text-default flex-1 pb-2 pt-1"
             >
               <button>NFTs</button>
             </Text>
@@ -177,7 +177,7 @@ const WalletHome: React.FC = () => {
               asChild
               fontWeight={FontWeight.Medium}
               color={TextColor.TextAlternative}
-              className="flex-1 pb-2 pt-1 hover:text-default"
+              className="hover:text-default flex-1 pb-2 pt-1"
             >
               <button>Activity</button>
             </Text>
@@ -219,7 +219,7 @@ const WalletHome: React.FC = () => {
             justifyContent={BoxJustifyContent.Between}
             paddingHorizontal={4}
             paddingVertical={2}
-            className="w-full hover:bg-hover active:bg-pressed md:px-8"
+            className="hover:bg-hover active:bg-pressed w-full md:px-8"
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
@@ -300,7 +300,7 @@ const WalletHome: React.FC = () => {
             justifyContent={BoxJustifyContent.Between}
             paddingHorizontal={4}
             paddingVertical={2}
-            className="w-full hover:bg-hover active:bg-pressed md:px-8"
+            className="hover:bg-hover active:bg-pressed w-full md:px-8"
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
@@ -362,7 +362,7 @@ const WalletHome: React.FC = () => {
             justifyContent={BoxJustifyContent.Between}
             paddingHorizontal={4}
             paddingVertical={2}
-            className="w-full hover:bg-hover active:bg-pressed md:px-8"
+            className="hover:bg-hover active:bg-pressed w-full md:px-8"
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
@@ -424,7 +424,7 @@ const WalletHome: React.FC = () => {
             justifyContent={BoxJustifyContent.Between}
             paddingHorizontal={4}
             paddingVertical={2}
-            className="w-full hover:bg-hover active:bg-pressed md:px-8"
+            className="hover:bg-hover active:bg-pressed w-full md:px-8"
           >
             <Box
               flexDirection={BoxFlexDirection.Row}

@@ -9,7 +9,7 @@ import type { BadgeIconProps } from './BadgeIcon.types';
 export const BadgeIcon = forwardRef<HTMLDivElement, BadgeIconProps>(
   ({ iconName, iconProps, className = '', style, ...props }, ref) => {
     const mergedClassName = twMerge(
-      'inline-flex size-4 items-center justify-center rounded-full bg-icon-default',
+      'bg-icon-default inline-flex size-4 items-center justify-center rounded-full',
       className,
     );
 

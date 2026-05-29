@@ -43,19 +43,19 @@ describe('twMerge utility', () => {
     });
 
     it('should handle mixed standard and custom font weight overrides', () => {
-      const result = twMerge('font-bold font-regular');
+      const result = twMerge('font-regular font-bold');
       expect(result).toBe('font-regular');
     });
   });
 
   describe('complex class combinations', () => {
     it('should handle multiple property conflicts simultaneously', () => {
-      const result = twMerge('text-l-heading-lg font-bold text-alternative');
+      const result = twMerge('text-l-heading-lg text-alternative font-bold');
       expect(result).toBe('text-l-heading-lg font-bold text-alternative');
     });
 
     it('should preserve non-conflicting classes', () => {
-      const result = twMerge('px-4 py-2 font-bold text-alternative');
+      const result = twMerge('text-alternative px-4 py-2 font-bold');
       expect(result).toBe('px-4 py-2 font-bold text-alternative');
     });
   });

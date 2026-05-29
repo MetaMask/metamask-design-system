@@ -49,7 +49,7 @@ const WalletHome: React.FC = () => {
   const tw = useTailwind();
 
   return (
-    <ScrollView style={tw`flex-1 bg-default`}>
+    <ScrollView style={tw`bg-default flex-1`}>
       {/* Container */}
       <Box
         backgroundColor={BoxBackgroundColor.BackgroundDefault}
@@ -174,7 +174,7 @@ const WalletHome: React.FC = () => {
         >
           <Box flexDirection={BoxFlexDirection.Row}>
             <Pressable
-              style={tw`flex-1 items-center justify-center border-b-2 border-default pb-2 pt-1`}
+              style={tw`border-default flex-1 items-center justify-center border-b-2 pb-2 pt-1`}
             >
               <Text fontWeight={FontWeight.Medium}>Tokens</Text>
             </Pressable>

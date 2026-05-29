@@ -112,7 +112,7 @@ describe('RadioButton', () => {
     );
     const circle = getByTestId('radio-circle');
     expect(circle).toHaveStyle(
-      tw`size-5 items-center justify-center rounded-full border-2 border-primary-default bg-default`,
+      tw`border-primary-default bg-default size-5 items-center justify-center rounded-full border-2`,
     );
   });
 
@@ -126,7 +126,7 @@ describe('RadioButton', () => {
     );
     const circle = getByTestId('radio-circle');
     expect(circle).toHaveStyle(
-      tw`size-5 items-center justify-center rounded-full border-2 border-background-default bg-default`,
+      tw`border-background-default bg-default size-5 items-center justify-center rounded-full border-2`,
     );
   });
 
@@ -140,7 +140,7 @@ describe('RadioButton', () => {
     );
     const circle = getByTestId('radio-circle');
     expect(circle).toHaveStyle(
-      tw`size-5 items-center justify-center rounded-full border-2 border-error-default bg-default`,
+      tw`border-error-default bg-default size-5 items-center justify-center rounded-full border-2`,
     );
   });
 

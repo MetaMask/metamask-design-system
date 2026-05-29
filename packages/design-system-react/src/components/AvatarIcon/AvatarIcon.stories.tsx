@@ -113,7 +113,7 @@ export const Severity: Story = {
 
 export const HasBorder: Story = {
   render: () => (
-    <div className="flex gap-2 bg-primary-muted p-2">
+    <div className="bg-primary-muted flex gap-2 p-2">
       <AvatarIcon
         iconName={IconName.User}
         severity={AvatarIconSeverity.Neutral}

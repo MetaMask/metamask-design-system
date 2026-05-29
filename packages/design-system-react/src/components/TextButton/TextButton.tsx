@@ -30,11 +30,11 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       // Hover/Active states - only applied when interactive
       !isDisabled && [
         !isInverse && [
-          'hover:text-primary-default-hover hover:underline hover:decoration-primary-default-hover hover:decoration-2 hover:underline-offset-4',
+          'hover:text-primary-default-hover hover:decoration-primary-default-hover hover:underline hover:decoration-2 hover:underline-offset-4',
           'active:text-primary-default-pressed active:decoration-primary-default-pressed',
         ],
         isInverse && [
-          'hover:text-primary-inverse hover:underline hover:decoration-primary-inverse hover:decoration-2 hover:underline-offset-4',
+          'hover:text-primary-inverse hover:decoration-primary-inverse hover:underline hover:decoration-2 hover:underline-offset-4',
           'active:text-primary-inverse active:decoration-primary-inverse',
         ],
       ],

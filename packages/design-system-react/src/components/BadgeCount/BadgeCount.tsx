@@ -25,7 +25,7 @@ export const BadgeCount = forwardRef<HTMLDivElement, BadgeCountProps>(
   ) => {
     const mergedClassName = twMerge(
       // Base styles
-      'inline-flex items-center justify-center self-start rounded-lg bg-error-default',
+      'bg-error-default inline-flex items-center justify-center self-start rounded-lg',
       TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[size],
       className,
     );
