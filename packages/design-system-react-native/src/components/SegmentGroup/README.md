@@ -109,7 +109,7 @@ export const WithGroupVariant = () => {
 
 ### `twClassName`
 
-Optional Tailwind classes merged into the scroll content row after the default horizontal layout (**`gap-3`** between children, row alignment). These classes will be merged with the default classes using `twMerge`, allowing you to:
+Optional Tailwind classes merged into the scroll content row after the default horizontal layout (**`gap-1`** between children, row alignment). These classes will be merged with the default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed

@@ -31,7 +31,7 @@ export const SegmentGroup = ({
         accessibilityRole="tablist"
         style={[tw.style('self-stretch'), style]}
         contentContainerStyle={[
-          tw.style('flex-row items-center gap-2', twClassName),
+          tw.style('flex-row items-center gap-1', twClassName),
           contentContainerStyle,
         ]}
       >

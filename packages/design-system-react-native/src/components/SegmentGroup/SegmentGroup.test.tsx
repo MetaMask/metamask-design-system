@@ -49,7 +49,7 @@ describe('SegmentGroup', () => {
     expect(scroll.props.horizontal).toBe(true);
     expect(scroll.props.showsHorizontalScrollIndicator).toBe(false);
 
-    const expectedContent = tw.style('flex-row items-center gap-2');
+    const expectedContent = tw.style('flex-row items-center gap-1');
 
     expect(
       StyleSheet.flatten(scroll.props.contentContainerStyle),
@@ -71,7 +71,7 @@ describe('SegmentGroup', () => {
     );
 
     const scroll = getByTestId(GROUP_TEST_ID);
-    const expectedContent = tw.style('flex-row items-center gap-2', 'px-4');
+    const expectedContent = tw.style('flex-row items-center gap-1', 'px-4');
 
     expect(
       StyleSheet.flatten(scroll.props.contentContainerStyle),
