@@ -1,0 +1,328 @@
+import { Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TextAreaStories from './TextArea.stories';
+
+# TextArea
+
+TextArea renders a controlled, multiline text input inside a bordered container. Use TextField when you need a single-line field or optional leading and trailing accessories.
+
+```tsx
+import { TextArea } from '@metamask/design-system-react';
+
+<TextArea value="" placeholder="Enter multiple lines..." />;
+```
+
+<Canvas of={TextAreaStories.Default} />
+
+## Props
+
+### `value`
+
+Required controlled value for the TextArea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+### `onChange`
+
+Optional callback when the text changes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>(event: ChangeEvent&lt;HTMLTextAreaElement&gt;) =&gt; void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `placeholder`
+
+Optional placeholder string for the inner textarea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `resize`
+
+Controls whether users can resize the inner textarea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextAreaResize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextAreaResize.None</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.Resize} />
+
+### `isDisabled`
+
+When true, the field applies reduced opacity and forwards disabled state to the inner textarea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.IsDisabled} />
+
+### `isReadOnly`
+
+When true, the inner textarea is not editable.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.IsReadOnly} />
+
+### `isError`
+
+When true, the field shows an error state on the container border and marks the inner textarea as invalid.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.IsError} />
+
+### `rows`
+
+Optional number of visible text rows for the inner textarea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.Rows} />
+
+### `inputProps`
+
+Additional props forwarded to the inner `textarea`. Do not pass `value`, `placeholder`, `isReadOnly`, `onFocus`, `onBlur`, `onChange`, `rows`, `cols`, or `required` here; use the TextArea-level props where applicable.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextAreaProps['inputProps']</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `inputRef`
+
+Ref to the inner `textarea`. The component `ref` points at the root `div`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Ref&lt;HTMLTextAreaElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `inputElement`
+
+Optional node that replaces the default textarea. `inputRef` is only forwarded when the default textarea is rendered.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the root container. These classes are merged with the component defaults using `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Controls
+
+<Controls of={TextAreaStories.Default} />
