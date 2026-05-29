@@ -33,7 +33,7 @@ describe('Icon', () => {
       const iconElement = getByTestId('icon');
 
       expect(expectedStyles).toBeDefined();
-      expect(iconElement.props.style[0]).toStrictEqual(expectedStyles);
+      expect(iconElement.props.style).toStrictEqual(expectedStyles);
     });
 
     Object.values(IconSize).forEach((size) => {
@@ -53,7 +53,7 @@ describe('Icon', () => {
         const textElement = getByTestId('icon');
 
         expect(expectedStyles).toBeDefined();
-        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+        expect(textElement.props.style).toStrictEqual(expectedStyles);
       });
     });
 
@@ -74,7 +74,7 @@ describe('Icon', () => {
         const textElement = getByTestId('icon');
 
         expect(expectedStyles).toBeDefined();
-        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+        expect(textElement.props.style).toStrictEqual(expectedStyles);
       });
     });
 
@@ -98,7 +98,7 @@ describe('Icon', () => {
       const textElement = getByTestId('icon');
 
       expect(expectedStyles).toBeDefined();
-      expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+      expect(textElement.props.style).toStrictEqual(expectedStyles);
     });
   });
 });

@@ -3652,7 +3652,7 @@ __metadata:
     "@playwright/test": "npm:^1.52.0"
     "@storybook/addon-a11y": "npm:^10.3.1"
     "@storybook/addon-docs": "npm:^10.3.1"
-    "@storybook/addon-mcp": "npm:^0.4.1"
+    "@storybook/addon-mcp": "npm:^0.6.0"
     "@storybook/addon-vitest": "npm:^10.3.1"
     "@storybook/react-vite": "npm:^10.3.1"
     "@testing-library/dom": "npm:^9.0.0"
@@ -4577,23 +4577,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-mcp@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "@storybook/addon-mcp@npm:0.4.1"
+"@storybook/addon-mcp@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "@storybook/addon-mcp@npm:0.6.0"
   dependencies:
-    "@storybook/mcp": "npm:0.6.1"
-    "@tmcp/adapter-valibot": "npm:^0.1.4"
-    "@tmcp/transport-http": "npm:^0.8.0"
+    "@storybook/mcp": "npm:0.7.0"
+    "@tmcp/adapter-valibot": "npm:^0.1.5"
+    "@tmcp/transport-http": "npm:^0.8.5"
     picoquery: "npm:^2.5.0"
-    tmcp: "npm:^1.16.0"
+    tmcp: "npm:^1.19.3"
     valibot: "npm:1.2.0"
   peerDependencies:
-    "@storybook/addon-vitest": ^9.1.16 || ^10.0.0 || ^10.1.0-0 || ^10.2.0-0 || ^10.3.0-0 || ^10.4.0-0
-    storybook: ^9.1.16 || ^10.0.0 || ^10.1.0-0 || ^10.2.0-0 || ^10.3.0-0 || ^10.4.0-0
+    "@storybook/addon-vitest": ^0.0.0-0 || ^9.1.16 || ^10.0.0 || ^10.1.0-0 || ^10.2.0-0 || ^10.3.0-0 || ^10.4.0-0
+    storybook: ^0.0.0-0 || ^9.1.16 || ^10.0.0 || ^10.1.0-0 || ^10.2.0-0 || ^10.3.0-0 || ^10.4.0-0
   peerDependenciesMeta:
     "@storybook/addon-vitest":
       optional: true
-  checksum: 10/549b00c8b6ab8e96c646a005365d42ca85fc8f021ee1f9b69d6a9ca5f93f4befa64cf589d9ae2b128140a22aadbec329d68e1d42c17db62953d2a6dd737eb987
+  checksum: 10/47599162729ff331be78fe161544fb135cbddf49c1819986a1f81f2ac4edbb11aef435aadd41b488342d5560da6d4cf11b63589fd97fd45bf1569207a80dd95c
   languageName: node
   linkType: hard
 
@@ -4765,15 +4765,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/mcp@npm:0.6.1":
-  version: 0.6.1
-  resolution: "@storybook/mcp@npm:0.6.1"
+"@storybook/mcp@npm:0.7.0":
+  version: 0.7.0
+  resolution: "@storybook/mcp@npm:0.7.0"
   dependencies:
-    "@tmcp/adapter-valibot": "npm:^0.1.4"
-    "@tmcp/transport-http": "npm:^0.8.0"
-    tmcp: "npm:^1.16.0"
+    "@tmcp/adapter-valibot": "npm:^0.1.5"
+    "@tmcp/transport-http": "npm:^0.8.5"
+    tmcp: "npm:^1.19.3"
     valibot: "npm:1.2.0"
-  checksum: 10/0f61c6a3866197ee894eda99642896d83dbbcc946dce089b8b5f099b6de3ec5ec4ec0fc40e0a36fd9e5ef9ff0d3241a49e371aaf5d9ef75ef4f50fd46b5787f8
+  checksum: 10/9386600235faf93430984c587a4ad7c2b24bacdc217deb9c857d197a065e016b724eaa223f987e1f1bab0221f307cce1057e8689a023c176ff11fb3196cf5166
   languageName: node
   linkType: hard
 
@@ -5260,7 +5260,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tmcp/transport-http@npm:^0.8.0, @tmcp/transport-http@npm:^0.8.5":
+"@tmcp/transport-http@npm:^0.8.5":
   version: 0.8.5
   resolution: "@tmcp/transport-http@npm:0.8.5"
   dependencies:
@@ -15989,7 +15989,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tmcp@npm:^1.16.0, tmcp@npm:^1.19.3":
+"tmcp@npm:^1.19.3":
   version: 1.19.3
   resolution: "tmcp@npm:1.19.3"
   dependencies:
