@@ -1,14 +1,7 @@
-import {
-  BoxAlignItems,
-  BoxFlexDirection,
-  SegmentGroupContext,
-} from '@metamask/design-system-shared';
+import { SegmentGroupContext } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { ScrollView } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
-
-import { TWCLASSMAP_BOX_GAP } from '../Box/Box.constants';
 
 import type { SegmentGroupProps } from './SegmentGroup.types';
 
@@ -29,17 +22,6 @@ export const SegmentGroup = ({
     [value, onChange, variant],
   );
 
-  const mergedContentContainerStyle: StyleProp<ViewStyle> = [
-    tw.style(
-      'flex',
-      BoxFlexDirection.Row,
-      BoxAlignItems.Center,
-      TWCLASSMAP_BOX_GAP[3],
-      twClassName,
-    ),
-    contentContainerStyle,
-  ];
-
   return (
     <SegmentGroupContext.Provider value={contextValue}>
       <ScrollView
@@ -48,7 +30,10 @@ export const SegmentGroup = ({
         showsHorizontalScrollIndicator={false}
         accessibilityRole="tablist"
         style={[tw.style('self-stretch'), style]}
-        contentContainerStyle={mergedContentContainerStyle}
+        contentContainerStyle={[
+          tw.style('flex-row items-center gap-2', twClassName),
+          contentContainerStyle,
+        ]}
       >
         {children}
       </ScrollView>

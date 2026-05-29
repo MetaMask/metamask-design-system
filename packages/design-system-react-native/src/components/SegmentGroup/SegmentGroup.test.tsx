@@ -1,6 +1,4 @@
 import {
-  BoxAlignItems,
-  BoxFlexDirection,
   SelectButtonEndArrow,
   SegmentButtonVariant,
 } from '@metamask/design-system-shared';
@@ -9,7 +7,6 @@ import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { TWCLASSMAP_BOX_GAP } from '../Box/Box.constants';
 import { SegmentButton } from '../SegmentButton';
 import { SelectButton } from '../SelectButton';
 
@@ -52,12 +49,7 @@ describe('SegmentGroup', () => {
     expect(scroll.props.horizontal).toBe(true);
     expect(scroll.props.showsHorizontalScrollIndicator).toBe(false);
 
-    const expectedContent = tw.style(
-      'flex',
-      BoxFlexDirection.Row,
-      BoxAlignItems.Center,
-      TWCLASSMAP_BOX_GAP[3],
-    );
+    const expectedContent = tw.style('flex-row items-center gap-2');
 
     expect(
       StyleSheet.flatten(scroll.props.contentContainerStyle),
@@ -79,13 +71,7 @@ describe('SegmentGroup', () => {
     );
 
     const scroll = getByTestId(GROUP_TEST_ID);
-    const expectedContent = tw.style(
-      'flex',
-      BoxFlexDirection.Row,
-      BoxAlignItems.Center,
-      TWCLASSMAP_BOX_GAP[3],
-      'px-4',
-    );
+    const expectedContent = tw.style('flex-row items-center gap-2', 'px-4');
 
     expect(
       StyleSheet.flatten(scroll.props.contentContainerStyle),
