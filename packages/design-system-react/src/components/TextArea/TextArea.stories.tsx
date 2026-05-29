@@ -78,7 +78,19 @@ export const Default: Story = {
     value: '',
     placeholder: 'Sample placeholder',
   },
-  render: (args) => <ControlledTextArea {...args} />,
+  render: (args) => {
+    const [value, setValue] = useState(args.value ?? '');
+    useEffect(() => {
+      setValue(args.value ?? '');
+    }, [args.value]);
+    return (
+      <TextArea
+        {...args}
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+      />
+    );
+  },
 };
 
 export const TextVariantStory: Story = {
