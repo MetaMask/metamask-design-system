@@ -9,7 +9,7 @@ import type { InputPropsShared } from '../Input/Input.types';
  */
 export type TextAreaPropsShared = Omit<
   InputPropsShared,
-  'isStateStylesDisabled'
+  'isStateStylesDisabled' | 'textVariant'
 > & {
   /**
    * When true, the field shows an error state (for example border treatment).

@@ -1,0 +1,201 @@
+import { Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TextAreaStories from './TextArea.stories';
+
+# TextArea
+
+TextArea renders a controlled, multiline text input inside a bordered container. Use TextField when you need a single-line field or optional leading and trailing accessories.
+
+```tsx
+import { TextArea } from '@metamask/design-system-react';
+
+<TextArea value="" placeholder="Enter multiple lines..." />;
+```
+
+## Stories
+
+### Default
+
+<Canvas of={TextAreaStories.Default} />
+
+### IsError
+
+<Canvas of={TextAreaStories.IsError} />
+
+### IsDisabled
+
+<Canvas of={TextAreaStories.IsDisabled} />
+
+### IsReadOnly
+
+<Canvas of={TextAreaStories.IsReadOnly} />
+
+### Resize
+
+<Canvas of={TextAreaStories.Resize} />
+
+### Rows
+
+<Canvas of={TextAreaStories.Rows} />
+
+## Props
+
+### `value`
+
+Required controlled value for the TextArea.
+
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `string` | Yes      | N/A     |
+
+```tsx
+<TextArea value="hello" placeholder="Value example" />
+```
+
+### `onChange`
+
+Optional callback when the text changes.
+
+| TYPE                                                | REQUIRED | DEFAULT     |
+| --------------------------------------------------- | -------- | ----------- |
+| `(event: ChangeEvent<HTMLTextAreaElement>) => void` | No       | `undefined` |
+
+```tsx
+<TextArea value="" onChange={(event) => {}} placeholder="Change handler" />
+```
+
+### `placeholder`
+
+Optional placeholder string for the inner textarea.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+<TextArea value="" placeholder="Long description" />
+```
+
+### `resize`
+
+Controls whether users can resize the inner textarea.
+
+| TYPE             | REQUIRED | DEFAULT               |
+| ---------------- | -------- | --------------------- |
+| `TextAreaResize` | No       | `TextAreaResize.None` |
+
+```tsx
+import { TextArea, TextAreaResize } from '@metamask/design-system-react';
+
+<TextArea value="" resize={TextAreaResize.None} />;
+```
+
+### `isDisabled`
+
+When true, the field applies reduced opacity and forwards disabled state to the inner textarea.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<TextArea value="" isDisabled placeholder="Disabled" />
+```
+
+### `isReadOnly`
+
+When true, the inner textarea is not editable.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<TextArea value="Read-only value" isReadOnly />
+```
+
+### `isError`
+
+When true, the field shows an error state on the container border and marks the inner textarea as invalid.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<TextArea value="" isError placeholder="Error state" />
+```
+
+### `rows`
+
+Optional number of visible text rows for the inner textarea.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `number` | No       | `undefined` |
+
+```tsx
+<TextArea value="" rows={6} placeholder="Longer notes" />
+```
+
+### `inputProps`
+
+Additional props forwarded to the inner `textarea`. Do not pass `value`, `placeholder`, `isReadOnly`, `onFocus`, `onBlur`, `onChange`, `rows`, `cols`, or `required` here; use the TextArea-level props where applicable.
+
+| TYPE                          | REQUIRED | DEFAULT     |
+| ----------------------------- | -------- | ----------- |
+| `TextAreaProps['inputProps']` | No       | `undefined` |
+
+```tsx
+<TextArea
+  value=""
+  placeholder="Notes"
+  inputProps={{
+    autoCapitalize: 'sentences',
+    spellCheck: true,
+  }}
+/>
+```
+
+### `inputRef`
+
+Ref to the inner `textarea`. The component `ref` points at the root `div`.
+
+| TYPE                       | REQUIRED | DEFAULT     |
+| -------------------------- | -------- | ----------- |
+| `Ref<HTMLTextAreaElement>` | No       | `undefined` |
+
+```tsx
+import { createRef } from 'react';
+
+const inputRef = createRef<HTMLTextAreaElement>();
+
+<TextArea value="" inputRef={inputRef} placeholder="Focus me" />;
+```
+
+### `inputElement`
+
+Optional node that replaces the default textarea. `inputRef` is only forwarded when the default textarea is rendered.
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+<TextArea value="" inputElement={<textarea placeholder="Custom input" />} />
+```
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the root container. These classes are merged with the component defaults using `twMerge`.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+<TextArea value="" className="mt-4" placeholder="With margin" />
+```
+
+## Controls
+
+<Controls of={TextAreaStories.Default} />
