@@ -1,16 +1,30 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
-
-import { TextVariant } from '../../types';
+import React, { useEffect, useState } from 'react';
 
 import README from './README.mdx';
-import { Textarea } from './Textarea';
-import { TextareaResize } from './Textarea.constants';
-import type { TextareaProps } from './Textarea.types';
+import { TextArea } from './TextArea';
+import { TextAreaResize } from './TextArea.constants';
+import type { TextAreaProps } from './TextArea.types';
 
-const meta: Meta<TextareaProps> = {
-  title: 'React Components/Textarea',
-  component: Textarea,
+function ControlledTextArea(props: TextAreaProps) {
+  const [value, setValue] = useState(props.value ?? '');
+  useEffect(() => {
+    setValue(props.value ?? '');
+  }, [props.value]);
+
+  return (
+    <TextArea
+      {...props}
+      value={value}
+      onChange={(event) => setValue(event.target.value)}
+    />
+  );
+}
+
+const meta: Meta<TextAreaProps> = {
+  title: 'React Components/TextArea',
+  component: TextArea,
   parameters: {
     docs: {
       page: README,
@@ -24,7 +38,7 @@ const meta: Meta<TextareaProps> = {
     },
     resize: {
       control: 'select',
-      options: Object.values(TextareaResize),
+      options: Object.values(TextAreaResize),
       description: 'Controls the resize behavior of the textarea',
     },
     isDisabled: {
@@ -42,6 +56,9 @@ const meta: Meta<TextareaProps> = {
     placeholder: {
       control: 'text',
     },
+    value: {
+      control: 'text',
+    },
     rows: {
       control: 'number',
     },
@@ -54,32 +71,34 @@ const meta: Meta<TextareaProps> = {
 
 export default meta;
 
-type Story = StoryObj<TextareaProps>;
+type Story = StoryObj<TextAreaProps>;
 
 export const Default: Story = {
   args: {
+    value: '',
     placeholder: 'Sample placeholder',
   },
-  render: (args) => <Textarea {...args} />,
+  render: (args) => <ControlledTextArea {...args} />,
 };
 
-export const Variant: Story = {
+export const TextVariantStory: Story = {
+  name: 'TextVariant',
   render: () => (
     <div className="flex flex-col gap-4">
-      <Textarea
+      <ControlledTextArea
         placeholder="BodyMd (default)"
         textVariant={TextVariant.BodyMd}
-        defaultValue="Sample text"
+        value="Sample text"
       />
-      <Textarea
+      <ControlledTextArea
         placeholder="BodySm"
         textVariant={TextVariant.BodySm}
-        defaultValue="Sample text"
+        value="Sample text"
       />
-      <Textarea
+      <ControlledTextArea
         placeholder="HeadingSm"
         textVariant={TextVariant.HeadingSm}
-        defaultValue="Sample text"
+        value="Sample text"
       />
     </div>
   ),
@@ -88,25 +107,25 @@ export const Variant: Story = {
 export const Resize: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Textarea
+      <ControlledTextArea
         placeholder="Vertical resize (default)"
-        resize={TextareaResize.Vertical}
-        defaultValue="Resize vertical only"
+        resize={TextAreaResize.Vertical}
+        value="Resize vertical only"
       />
-      <Textarea
+      <ControlledTextArea
         placeholder="Horizontal resize"
-        resize={TextareaResize.Horizontal}
-        defaultValue="Resize horizontal only"
+        resize={TextAreaResize.Horizontal}
+        value="Resize horizontal only"
       />
-      <Textarea
+      <ControlledTextArea
         placeholder="Both directions"
-        resize={TextareaResize.Both}
-        defaultValue="Resize in both directions"
+        resize={TextAreaResize.Both}
+        value="Resize in both directions"
       />
-      <Textarea
+      <ControlledTextArea
         placeholder="No resize"
-        resize={TextareaResize.None}
-        defaultValue="Cannot be resized"
+        resize={TextAreaResize.None}
+        value="Cannot be resized"
       />
     </div>
   ),
@@ -115,8 +134,8 @@ export const Resize: Story = {
 export const IsDisabled: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Textarea placeholder="Enabled" defaultValue="Editable" />
-      <Textarea placeholder="Disabled" defaultValue="Not editable" isDisabled />
+      <ControlledTextArea placeholder="Enabled" value="Editable" />
+      <TextArea placeholder="Disabled" value="Not editable" isDisabled />
     </div>
   ),
 };
@@ -124,10 +143,10 @@ export const IsDisabled: Story = {
 export const IsReadOnly: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Textarea placeholder="Editable" defaultValue="" />
-      <Textarea
+      <ControlledTextArea placeholder="Editable" value="" />
+      <TextArea
         placeholder="Read-only"
-        defaultValue="Read-only value"
+        value="Read-only value"
         isReadOnly
       />
     </div>
@@ -137,10 +156,10 @@ export const IsReadOnly: Story = {
 export const IsError: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Textarea placeholder="Default state" defaultValue="Normal textarea" />
-      <Textarea
+      <ControlledTextArea placeholder="Default state" value="Normal textarea" />
+      <TextArea
         placeholder="Error state"
-        defaultValue="This field has an error"
+        value="This field has an error"
         isError
       />
     </div>
@@ -150,15 +169,15 @@ export const IsError: Story = {
 export const Rows: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Textarea
-        placeholder="3 rows (default)"
+      <ControlledTextArea
+        placeholder="3 rows"
         rows={3}
-        defaultValue="3-row textarea"
+        value="3-row textarea"
       />
-      <Textarea
+      <ControlledTextArea
         placeholder="6 rows"
         rows={6}
-        defaultValue="6-row textarea for longer content"
+        value="6-row textarea for longer content"
       />
     </div>
   ),
