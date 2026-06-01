@@ -6,6 +6,25 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
+// Compound slot utilities
+export {
+  createCompoundSlotSystem,
+  mergePropsWithSlots,
+  parseCompoundSlots,
+  partitionChildren,
+  pickProp,
+  useCompoundSlots,
+  type CompoundSlotHandlers,
+  type CompoundSlotSystem,
+  type CreateCompoundSlotSystemConfig,
+  type PartitionedChildren,
+  type SlotComponent,
+  type SlotElement,
+  type SlotElementPredicate,
+  type UseCompoundSlotsOptions,
+  type UseCompoundSlotsResult,
+} from './utils/compound-slots';
+
 // AvatarBase types (ADR-0003 + ADR-0004)
 export {
   AvatarBaseSize,
@@ -35,6 +54,9 @@ export {
   ContentVerticalAlignment,
   type ContentPropsShared,
 } from './types/Content';
+
+// ListItem types (ADR-0004)
+export { type ListItemPropsShared } from './types/ListItem';
 
 // HelpText types (ADR-0003 + ADR-0004)
 export { HelpTextSeverity, type HelpTextPropsShared } from './types/HelpText';

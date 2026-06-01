@@ -1,88 +1,129 @@
+import { useCompoundSlots } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { Children } from 'react';
-import { DimensionValue, View } from 'react-native';
+import React from 'react';
+import { Pressable } from 'react-native';
+import type {
+  PressableStateCallbackType,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
-import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
+import { Box } from '../Box';
+import { Content } from '../Content';
 
 import {
-  DEFAULT_LISTITEM_BOTTOMACCESSORYGAP,
-  DEFAULT_LISTITEM_GAP,
-  DEFAULT_LISTITEM_TOPACCESSORYGAP,
-  DEFAULT_LISTITEM_VERTICALALIGNMENT,
-  TESTID_LISTITEM_BOTTOM_ACCESSORY_WRAPPER,
-  TESTID_LISTITEM_GAP,
-  TESTID_LISTITEM_TOP_ACCESSORY_WRAPPER,
-} from './ListItem.constants';
+  hasListItemSlotChildren,
+  isListItemSlotElement,
+  mergeListItemPropsWithSlots,
+  parseListItemSlots,
+} from './ListItem.slots';
 import type { ListItemProps } from './ListItem.types';
-import { ListItemVerticalAlignment } from './ListItem.types';
 
-const VERTICAL_ALIGNMENT_MAP: Record<ListItemVerticalAlignment, BoxAlignItems> =
-  {
-    [ListItemVerticalAlignment.Top]: BoxAlignItems.Start,
-    [ListItemVerticalAlignment.Center]: BoxAlignItems.Center,
-    [ListItemVerticalAlignment.Bottom]: BoxAlignItems.End,
-  };
-
-export const ListItem: React.FC<ListItemProps> = ({
-  children,
-  topAccessory,
-  bottomAccessory,
-  topAccessoryGap = DEFAULT_LISTITEM_TOPACCESSORYGAP,
-  bottomAccessoryGap = DEFAULT_LISTITEM_BOTTOMACCESSORYGAP,
-  gap = DEFAULT_LISTITEM_GAP,
-  verticalAlignment = DEFAULT_LISTITEM_VERTICALALIGNMENT,
-  twClassName,
-  style,
-  ...props
-}) => {
+export const ListItemRoot: React.FC<ListItemProps> = (props) => {
   const tw = useTailwind();
 
+  const { mergedProps, children } = useCompoundSlots({
+    props,
+    isSlotElement: isListItemSlotElement,
+    hasSlotChildren: hasListItemSlotChildren,
+    parse: parseListItemSlots,
+    merge: mergeListItemPropsWithSlots,
+    partitionNonSlots: true,
+  });
+
+  const {
+    isInteractive = false,
+    twClassName,
+    style,
+    startAccessory,
+    endAccessory,
+    topAccessory,
+    bottomAccessory,
+    verticalAlignment,
+    avatar,
+    title,
+    titleProps,
+    titleStartAccessory,
+    titleEndAccessory,
+    description,
+    descriptionProps,
+    descriptionStartAccessory,
+    descriptionEndAccessory,
+    value,
+    valueProps,
+    valueStartAccessory,
+    valueEndAccessory,
+    subvalue,
+    subvalueProps,
+    subvalueStartAccessory,
+    subvalueEndAccessory,
+    ...wrapperRest
+  } = mergedProps;
+
+  const wrapperStyle = style
+    ? [tw.style('px-4 py-3', twClassName), style]
+    : tw.style('px-4 py-3', twClassName);
+
+  const getPressableStyle = ({
+    pressed,
+  }: PressableStateCallbackType): StyleProp<ViewStyle> => {
+    const baseStyle = tw.style(
+      'w-full px-4 py-3',
+      twClassName,
+      pressed && 'bg-pressed',
+    );
+
+    if (!style) {
+      return baseStyle;
+    }
+
+    const userStyle = typeof style === 'function' ? style({ pressed }) : style;
+
+    return [baseStyle, userStyle];
+  };
+
+  const content = (
+    <Content
+      startAccessory={startAccessory}
+      endAccessory={endAccessory}
+      topAccessory={topAccessory}
+      bottomAccessory={bottomAccessory}
+      verticalAlignment={verticalAlignment}
+      avatar={avatar}
+      title={title}
+      titleProps={titleProps}
+      titleStartAccessory={titleStartAccessory}
+      titleEndAccessory={titleEndAccessory}
+      description={description}
+      descriptionProps={descriptionProps}
+      descriptionStartAccessory={descriptionStartAccessory}
+      descriptionEndAccessory={descriptionEndAccessory}
+      value={value}
+      valueProps={valueProps}
+      valueStartAccessory={valueStartAccessory}
+      valueEndAccessory={valueEndAccessory}
+      subvalue={subvalue}
+      subvalueProps={subvalueProps}
+      subvalueStartAccessory={subvalueStartAccessory}
+      subvalueEndAccessory={subvalueEndAccessory}
+    />
+  );
+
+  if (isInteractive) {
+    return (
+      <Pressable style={getPressableStyle} {...wrapperRest}>
+        {content}
+        {children}
+      </Pressable>
+    );
+  }
+
   return (
-    <Box
-      style={
-        style
-          ? [tw.style('p-4', twClassName), style]
-          : tw.style('p-4', twClassName)
-      }
-      {...props}
-    >
-      {topAccessory && (
-        <View
-          testID={TESTID_LISTITEM_TOP_ACCESSORY_WRAPPER}
-          style={{ marginBottom: topAccessoryGap }}
-        >
-          {topAccessory}
-        </View>
-      )}
-      <Box
-        flexDirection={BoxFlexDirection.Row}
-        alignItems={VERTICAL_ALIGNMENT_MAP[verticalAlignment]}
-      >
-        {Children.toArray(children)
-          .filter((child) => Boolean(child))
-          .map((child, index) => (
-            <React.Fragment key={index}>
-              {index > 0 && (
-                <View
-                  style={{ width: gap as DimensionValue }}
-                  testID={TESTID_LISTITEM_GAP}
-                  accessible={false}
-                />
-              )}
-              {child}
-            </React.Fragment>
-          ))}
-      </Box>
-      {bottomAccessory && (
-        <View
-          testID={TESTID_LISTITEM_BOTTOM_ACCESSORY_WRAPPER}
-          style={{ marginTop: bottomAccessoryGap }}
-        >
-          {bottomAccessory}
-        </View>
-      )}
+    <Box style={wrapperStyle} {...wrapperRest}>
+      {content}
+      {children}
     </Box>
   );
 };
 
-ListItem.displayName = 'ListItem';
+ListItemRoot.displayName = 'ListItem';

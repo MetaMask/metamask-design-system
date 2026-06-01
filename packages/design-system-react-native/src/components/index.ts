@@ -173,7 +173,18 @@ export type { KeyValueRowProps } from './KeyValueRow';
 export { Label } from './Label';
 export type { LabelProps } from './Label';
 
-export { ListItem, ListItemVerticalAlignment } from './ListItem';
+export {
+  ListItem,
+  ListItemAvatar,
+  ListItemBottomAccessory,
+  ListItemDescription,
+  ListItemEndAccessory,
+  ListItemStartAccessory,
+  ListItemSubvalue,
+  ListItemTitle,
+  ListItemTopAccessory,
+  ListItemValue,
+} from './ListItem';
 export type { ListItemProps } from './ListItem';
 
 export { RadioButton } from './RadioButton';
