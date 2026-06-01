@@ -92,6 +92,9 @@ describe('TextArea', () => {
 
       expect(screen.getByRole('textbox')).toHaveAttribute('readonly');
       expect(screen.getByRole('textbox')).toHaveValue('Locked');
+      expect(screen.getByRole('textbox')).toHaveClass(
+        'read-only:focus:border-muted',
+      );
     });
 
     it('applies error styling and aria-invalid when isError is true', () => {
@@ -113,22 +116,15 @@ describe('TextArea', () => {
       );
     });
 
-    it('applies focused border on focus and restores muted border on blur', () => {
+    it('declares focus styling through CSS classes instead of component state', () => {
       render(<TextArea data-testid={ROOT_TEST_ID} onChange={noop} value="" />);
 
-      const root = screen.getByTestId(ROOT_TEST_ID);
-      const textarea = screen.getByRole('textbox');
-
-      fireEvent.focus(textarea);
-      expect(root).toHaveClass('border-default');
-      expect(root).not.toHaveClass('border-muted');
-
-      fireEvent.blur(textarea);
-      expect(root).toHaveClass('border-muted');
-      expect(root).not.toHaveClass('border-default');
+      expect(screen.getByRole('textbox')).toHaveClass('border-muted');
+      expect(screen.getByRole('textbox')).toHaveClass('focus:border-default');
+      expect(screen.getByRole('textbox')).not.toHaveClass('border-default');
     });
 
-    it('keeps error border when focused and isError is true', () => {
+    it('keeps error border when isError is true', () => {
       render(
         <TextArea
           data-testid={ROOT_TEST_ID}
@@ -138,73 +134,12 @@ describe('TextArea', () => {
         />,
       );
 
-      fireEvent.focus(screen.getByRole('textbox'));
-
       expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass(
         'border-error-default',
       );
       expect(screen.getByTestId(ROOT_TEST_ID)).not.toHaveClass(
-        'border-default',
+        'focus:border-default',
       );
-    });
-
-    it('clears focused state when isDisabled becomes true', () => {
-      const { rerender } = render(
-        <TextArea data-testid={ROOT_TEST_ID} onChange={noop} value="" />,
-      );
-
-      fireEvent.focus(screen.getByRole('textbox'));
-      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass('border-default');
-
-      rerender(
-        <TextArea
-          data-testid={ROOT_TEST_ID}
-          isDisabled
-          onChange={noop}
-          value=""
-        />,
-      );
-
-      expect(screen.getByTestId(ROOT_TEST_ID)).not.toHaveClass(
-        'border-default',
-      );
-      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass('border-muted');
-    });
-
-    it('clears focused state when isReadOnly becomes true', () => {
-      const { rerender } = render(
-        <TextArea data-testid={ROOT_TEST_ID} onChange={noop} value="" />,
-      );
-
-      fireEvent.focus(screen.getByRole('textbox'));
-      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass('border-default');
-
-      rerender(
-        <TextArea
-          data-testid={ROOT_TEST_ID}
-          isReadOnly
-          onChange={noop}
-          value=""
-        />,
-      );
-
-      expect(screen.getByTestId(ROOT_TEST_ID)).not.toHaveClass(
-        'border-default',
-      );
-      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass('border-muted');
-    });
-
-    it('starts focused when autoFocus is true', () => {
-      render(
-        <TextArea
-          data-testid={ROOT_TEST_ID}
-          autoFocus
-          onChange={noop}
-          value=""
-        />,
-      );
-
-      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass('border-default');
     });
   });
 

@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useState } from 'react';
+import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 
@@ -23,30 +23,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     },
     ref,
   ) => {
-    const [isFocused, setIsFocused] = useState(autoFocus);
-
-    useEffect(() => {
-      if (isDisabled || isReadOnly) {
-        setIsFocused(false);
-      }
-    }, [isDisabled, isReadOnly]);
-
-    const handleFocus = useCallback(
-      (event: React.FocusEvent<HTMLTextAreaElement>) => {
-        setIsFocused(true);
-        onFocus?.(event);
-      },
-      [onFocus],
-    );
-
-    const handleBlur = useCallback(
-      (event: React.FocusEvent<HTMLTextAreaElement>) => {
-        setIsFocused(false);
-        onBlur?.(event);
-      },
-      [onBlur],
-    );
-
     const resolvedResize = resize as TextAreaResize;
 
     const textAreaClassName = twMerge(
@@ -54,10 +30,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       'text-s-body-md font-regular leading-s-body-md tracking-s-body-md md:text-l-body-md md:leading-l-body-md md:tracking-l-body-md',
       'placeholder:text-alternative',
       CLASSMAP_TEXTAREA_RESIZE[resolvedResize],
+      'border-muted',
       isDisabled && 'cursor-not-allowed border-muted opacity-50',
       !isDisabled && isError && 'border-error-default',
-      !isDisabled && !isError && isFocused && 'border-default',
-      !isDisabled && !isError && !isFocused && 'border-muted',
+      !isDisabled &&
+        !isError &&
+        'focus:border-default read-only:focus:border-muted',
       className,
     );
 
@@ -73,8 +51,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         autoFocus={autoFocus}
         aria-invalid={isError || undefined}
         onChange={onChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     );
   },
