@@ -12,7 +12,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // context.globals.backgrounds.value (which returns the key) both work correctly.
 const backgroundOptions = {
   light: { name: 'light', value: lightTheme.colors.background.default },
-  dark:  { name: 'dark',  value: darkTheme.colors.background.default },
+  dark: { name: 'dark', value: darkTheme.colors.background.default },
 };
 
 function themeFromKey(key?: string): Theme {
@@ -25,7 +25,10 @@ const ThemeDecorator = ({ children, selectedKey }: ThemeDecoratorProps) => {
   const theme = themeFromKey(selectedKey);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView
+      style={{ flex: 1, position: 'relative' }}
+      testID="gesture-handler-root-view"
+    >
       <SafeAreaProvider>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </SafeAreaProvider>

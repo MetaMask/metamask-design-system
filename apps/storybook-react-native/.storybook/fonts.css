@@ -19,3 +19,16 @@
 @font-face { font-family: 'MMSans-Bold';    src: url('/fonts/MMSans/MMSans-Bold.woff2') format('woff2'); }
 
 @font-face { font-family: 'MMPoly-Regular'; src: url('/fonts/MMPoly/MMPoly-Regular.woff2') format('woff2'); }
+
+/* Ensure the height chain reaches flex children so position:relative and
+   useSafeAreaFrame() return the correct canvas dimensions on web. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#storybook-root {
+  display: flex;
+  height: 100%;
+}
