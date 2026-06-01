@@ -42,29 +42,32 @@ export const useCompoundSlots = <
   TParsed,
   TMerged
 >): UseCompoundSlotsResult<TMerged> => {
-  const { children, ...propsWithoutChildren } = props;
-
   return useMemo(() => {
+    const { children, ...propsWithoutChildren } = props;
+
     if (
       children !== undefined &&
       children !== null &&
       hasSlotChildren(children)
     ) {
-      const slotChildren = partitionNonSlots
-        ? partitionChildren(children, isSlotElement).matched
-        : Children.toArray(children).filter(
-            (child) => child !== null && child !== undefined,
-          );
+      let slotChildren: ReactNode[];
+      let nonSlotChildren: ReactNode[] | null = null;
+
+      if (partitionNonSlots) {
+        const { matched, rest } = partitionChildren(children, isSlotElement);
+        slotChildren = matched;
+        nonSlotChildren = rest;
+      } else {
+        slotChildren = Children.toArray(children).filter(
+          (child) => child !== null && child !== undefined,
+        );
+      }
 
       const parsed = parse(slotChildren);
       const mergedProps = merge(props, parsed);
 
-      const partitionedChildren = partitionNonSlots
-        ? (() => {
-            const { rest } = partitionChildren(children, isSlotElement);
-            return rest.length > 0 ? rest : null;
-          })()
-        : null;
+      const partitionedChildren =
+        nonSlotChildren && nonSlotChildren.length > 0 ? nonSlotChildren : null;
 
       return {
         mergedProps: mergedProps,
@@ -86,14 +89,5 @@ export const useCompoundSlots = <
       children: partitionedChildren,
       hasSlots: false,
     };
-  }, [
-    children,
-    hasSlotChildren,
-    isSlotElement,
-    merge,
-    parse,
-    partitionNonSlots,
-    props,
-    propsWithoutChildren,
-  ]);
+  }, [hasSlotChildren, isSlotElement, merge, parse, partitionNonSlots, props]);
 };

@@ -1,4 +1,4 @@
-import { createElement } from 'react';
+import React, { createElement } from 'react';
 import { act, create } from 'react-test-renderer';
 
 import { createCompoundSlotSystem } from './createCompoundSlotSystem';
@@ -170,6 +170,45 @@ describe('useCompoundSlots', () => {
 
       expect(result.hasSlots).toBe(false);
       expect(result.children).toBeNull();
+    });
+  });
+
+  describe('memoization', () => {
+    it('does not re-parse when props reference is stable across re-renders', () => {
+      const parseSpy = jest.fn(parse);
+      let setTick: (value: number) => void = () => undefined;
+      const stableProps = {
+        children: createElement(slots.Title, {}, 'From slot'),
+      };
+
+      function Consumer() {
+        const [, setState] = React.useState(0);
+        setTick = setState;
+
+        useCompoundSlots<TestProps, ParsedTestProps>({
+          props: stableProps,
+          isSlotElement,
+          hasSlotChildren,
+          parse: parseSpy,
+        });
+        return null;
+      }
+
+      let tree!: ReturnType<typeof create>;
+
+      act(() => {
+        tree = create(createElement(Consumer));
+      });
+
+      expect(parseSpy).toHaveBeenCalledTimes(1);
+
+      act(() => {
+        setTick(1);
+      });
+
+      expect(parseSpy).toHaveBeenCalledTimes(1);
+
+      tree.unmount();
     });
   });
 });
