@@ -5,17 +5,6 @@ import React, { createRef } from 'react';
 
 import { Toast } from './Toast';
 
-jest.mock('../Icon', () => ({
-  ...jest.requireActual('../Icon'),
-  Icon: ({
-    name,
-    'data-testid': testId,
-  }: {
-    name: string;
-    'data-testid'?: string;
-  }) => <span data-testid={testId ?? `icon-${name}`}>{name}</span>,
-}));
-
 describe('Toast', () => {
   it('renders title and description', () => {
     render(
@@ -50,19 +39,20 @@ describe('Toast', () => {
 
   describe('Severity icons', () => {
     it.each([
-      [ToastSeverity.Success, 'Confirmation'],
-      [ToastSeverity.Warning, 'Danger'],
-      [ToastSeverity.Danger, 'Danger'],
-    ])('renders icon for %s severity', (severity, iconName) => {
+      [ToastSeverity.Success],
+      [ToastSeverity.Warning],
+      [ToastSeverity.Danger],
+    ])('renders icon for %s severity', (severity) => {
       render(
         <Toast
           title={`${severity} toast`}
           severity={severity}
+          iconProps={{ 'data-testid': 'toast-icon' }}
           onClose={() => undefined}
         />,
       );
 
-      expect(screen.getByTestId(`icon-${iconName}`)).toBeInTheDocument();
+      expect(screen.getByTestId('toast-icon')).toBeInTheDocument();
     });
   });
 

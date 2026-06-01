@@ -38,24 +38,6 @@ const meta: Meta<ToastProps> = {
       control: 'text',
       description: 'Optional action button label',
     },
-    startAccessory: {
-      table: { disable: true },
-    },
-    titleProps: {
-      table: { disable: true },
-    },
-    descriptionProps: {
-      table: { disable: true },
-    },
-    closeButtonProps: {
-      table: { disable: true },
-    },
-    actionButtonProps: {
-      table: { disable: true },
-    },
-    iconProps: {
-      table: { disable: true },
-    },
   },
 };
 

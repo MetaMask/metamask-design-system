@@ -2,6 +2,8 @@ import { ToastSeverity } from '@metamask/design-system-shared';
 
 import { IconColor, IconName } from '../../types';
 
+// TODO: Replace this map with a web IconAlert component once the shared
+// alert-icon primitive exists in React.
 export const TOAST_SEVERITY_ICON_MAP = {
   [ToastSeverity.Success]: {
     name: IconName.Confirmation,

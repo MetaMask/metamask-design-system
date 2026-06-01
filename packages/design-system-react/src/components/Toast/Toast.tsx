@@ -68,6 +68,8 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
           }
         : undefined;
 
+    // Toast reuses BannerBase so the web surface stays aligned with the shared
+    // banner layout and the React Native Toast API.
     return (
       <BannerBase
         ref={ref}
