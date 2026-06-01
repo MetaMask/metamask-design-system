@@ -36,7 +36,7 @@ export const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(
       resize = TextAreaResize.None,
       className,
       style,
-      ...rest
+      ...props
     },
     ref,
   ) => {
@@ -117,7 +117,7 @@ export const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(
         className={containerClassName}
         style={style}
         onClick={handleClick}
-        {...rest}
+        {...props}
       >
         {inputElement ?? (
           <textarea
