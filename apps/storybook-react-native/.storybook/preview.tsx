@@ -1,5 +1,5 @@
 import '../../../packages/design-tokens/dist/styles.css';
-import './fonts.css';
+import './styles.css';
 
 import type { Preview, StoryContext } from '@storybook/react-native-web-vite';
 import { Theme, ThemeProvider } from '@metamask/design-system-twrnc-preset';
@@ -25,10 +25,7 @@ const ThemeDecorator = ({ children, selectedKey }: ThemeDecoratorProps) => {
   const theme = themeFromKey(selectedKey);
 
   return (
-    <GestureHandlerRootView
-      style={{ flex: 1, position: 'relative' }}
-      testID="gesture-handler-root-view"
-    >
+    <GestureHandlerRootView style={{ flex: 1, position: 'relative' }}>
       <SafeAreaProvider>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </SafeAreaProvider>
