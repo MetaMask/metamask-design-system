@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import type { StorybookConfig } from '@storybook/react-native-web-vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
+import babel from '@rolldown/plugin-babel';
 
 const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -35,6 +36,31 @@ const config: StorybookConfig = {
       (plugin) => plugin?.name !== 'vite-tsconfig-paths',
     );
 
+    // Apply the worklets Babel plugin during Rolldown's dep-optimization phase
+    // so it runs on the original source files (before they're pre-bundled into
+    // a single file). This is necessary because:
+    //   1. The Storybook preset's modulesToTranspile exclude regex matches
+    //      `.cache/storybook/.../sb-vite/deps/` paths (the outer `/node_modules/`
+    //      segment), so the plugin never fires during the transform phase.
+    //   2. Running Babel on the pre-bundled giant file is also much slower.
+    //
+    // `disableSourceMaps: true` is belt-and-suspenders alongside the
+    // react-native-worklets patch that strips `?v=...` from readFileSync paths.
+    //
+    // Tracked upstream: https://github.com/dannyhw/vite-plugin-rnw/issues/13
+    const rolldownOptions = viteConfig.optimizeDeps?.rolldownOptions ?? {};
+    const rolldownPlugins: unknown[] = Array.isArray(rolldownOptions.plugins)
+      ? rolldownOptions.plugins
+      : [];
+    rolldownPlugins.push(
+      babel({
+        exclude: /node_modules\/(?!.*(react-native-reanimated|react-native-worklets))/,
+        plugins: [['react-native-worklets/plugin', { disableSourceMaps: true }]],
+        babelrc: false,
+        configFile: false,
+      }),
+    );
+
     return {
       ...viteConfig,
       plugins: [
@@ -62,6 +88,10 @@ const config: StorybookConfig = {
           '@metamask/design-system-twrnc-preset',
           '@metamask/design-tokens',
         ],
+        rolldownOptions: {
+          ...rolldownOptions,
+          plugins: rolldownPlugins,
+        },
       },
       resolve: {
         ...viteConfig.resolve,
