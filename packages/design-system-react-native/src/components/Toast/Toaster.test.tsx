@@ -1,5 +1,9 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import {
+  TOAST_ANIMATION_DURATION,
+  TOAST_VISIBILITY_DURATION,
+} from '@metamask/design-system-shared';
+import {
   render,
   screen,
   act,

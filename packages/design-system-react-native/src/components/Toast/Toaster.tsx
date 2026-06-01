@@ -1,5 +1,9 @@
 // Third party dependencies.
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import {
+  TOAST_ANIMATION_DURATION,
+  TOAST_VISIBILITY_DURATION,
+} from '@metamask/design-system-shared';
 import React, {
   forwardRef,
   useImperativeHandle,
@@ -23,11 +27,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Internal dependencies.
 import { Toast } from './Toast';
-import {
-  TOAST_ANIMATION_DURATION,
-  TOAST_BOTTOM_PADDING,
-  TOAST_VISIBILITY_DURATION,
-} from './Toast.constants';
+import { TOAST_BOTTOM_PADDING } from './Toast.constants';
 import type {
   ToastOptions,
   ToastProps,

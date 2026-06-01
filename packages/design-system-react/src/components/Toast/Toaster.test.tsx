@@ -5,7 +5,7 @@ import React, { createRef, useEffect } from 'react';
 import {
   TOAST_ANIMATION_DURATION,
   TOAST_VISIBILITY_DURATION,
-} from './Toast.constants';
+} from '@metamask/design-system-shared';
 import type { ToastOptions, ToasterRef } from './Toast.types';
 import { Toaster, toast } from './Toaster';
 
