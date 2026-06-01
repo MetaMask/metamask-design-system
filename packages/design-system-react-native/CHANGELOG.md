@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.27.0]
+
+### Added
+
+- Added `FlashFilled` icon (filled lightning bolt) to `IconName` ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
+- Added `SelectButtonSize` so `SelectButton` exposes a semantic size type ([#1177](https://github.com/MetaMask/metamask-design-system/pull/1177))
+
+### Changed
+
+- **BREAKING:** Removed `panGestureHandlerProps` from `BottomSheet` and `BottomSheetDialog` following the migration to the `react-native-gesture-handler` v2 `GestureDetector`/`Gesture.Pan()` API ([#1165](https://github.com/MetaMask/metamask-design-system/pull/1165))
+  - See [Migration Guide](./MIGRATION.md#from-version-0260-to-0270)
+- **BREAKING:** Removed the variant-based title API from `HeaderBase` and `BottomSheetHeader` ([#1103](https://github.com/MetaMask/metamask-design-system/pull/1103))
+  - Removed `variant`, `HeaderBaseVariant`, and `BottomSheetHeaderVariant`, plus `HeaderBase`'s `titleTestID`
+  - String titles now render with a centered `HeadingSm` treatment; pass custom `children` for bespoke title layouts and use `textProps.testID` in place of `titleTestID`
+  - See [Migration Guide](./MIGRATION.md#from-version-0260-to-0270)
+- Reduced the default `SegmentGroup` segment spacing from `gap-3` to `gap-1` for tighter grouped segments ([#1194](https://github.com/MetaMask/metamask-design-system/pull/1194))
+
+### Fixed
+
+- Fixed a `HeaderStandardAnimated` runtime crash under React Native Reanimated 4 by inlining the scroll-handler worklet ([#1185](https://github.com/MetaMask/metamask-design-system/pull/1185))
+- Fixed React Native Web rendering for `BottomSheet`, `BottomSheetOverlay`, `Icon`, and the animated `ButtonAnimated` and `Spinner` components ([#1187](https://github.com/MetaMask/metamask-design-system/pull/1187))
+
 ## [0.26.0]
 
 ### Added
@@ -446,7 +468,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.26.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.27.0...HEAD
+[0.27.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.26.0...@metamask/design-system-react-native@0.27.0
 [0.26.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.25.0...@metamask/design-system-react-native@0.26.0
 [0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.24.0...@metamask/design-system-react-native@0.25.0
 [0.24.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.23.0...@metamask/design-system-react-native@0.24.0

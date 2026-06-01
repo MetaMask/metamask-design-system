@@ -111,6 +111,7 @@ import Fingerprint from './Fingerprint';
 import Fire from './Fire';
 import FirstPage from './FirstPage';
 import Flag from './Flag';
+import FlashFilled from './FlashFilled';
 import FlashSlash from './FlashSlash';
 import Flash from './Flash';
 import Flask from './Flask';
@@ -402,6 +403,7 @@ export const Icons = {
   Fire,
   FirstPage,
   Flag,
+  FlashFilled,
   FlashSlash,
   Flash,
   Flask,

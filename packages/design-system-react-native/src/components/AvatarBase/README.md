@@ -172,6 +172,8 @@ export const StyleExample = () => (
 );
 ```
 
+Migrating from the mobile `component-library` `Avatar` / `AvatarBase`? See the [AvatarBase migration guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#avatarbase-component) for `size` value mapping, `hasBorder`, and `shape`.
+
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

@@ -21,6 +21,9 @@ function getAbsolutePath(value: string): any {
 const isTestMode = process.env.VITEST === 'true';
 
 const config: StorybookConfig = {
+  features: {
+    componentsManifest: true,
+  },
   stories: [
     '../stories/',
     // Only include MDX documentation files when not in test mode
