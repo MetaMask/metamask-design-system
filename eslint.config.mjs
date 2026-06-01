@@ -50,6 +50,10 @@ const config = createConfig([
       'apps/storybook-react-native/.rnstorybook/preview.tsx',
       'apps/storybook-react-native/.rnstorybook/storybook.requires.ts',
       'apps/storybook-react-native/tailwind-intellisense.config.js',
+      'apps/storybook-react-native/.storybook/index.tsx',
+      'apps/storybook-react-native/.storybook/main.ts',
+      'apps/storybook-react-native/.storybook/preview.tsx',
+      'apps/storybook-react-native/.storybook/storybook.requires.ts',
     ],
   },
   {
