@@ -16,7 +16,10 @@ function ControlledTextArea(props: TextAreaProps) {
     <TextArea
       {...props}
       value={value}
-      onChange={(event) => setValue(event.target.value)}
+      onChange={(event) => {
+        setValue(event.target.value);
+        props.onChange?.(event);
+      }}
     />
   );
 }
