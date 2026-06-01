@@ -106,6 +106,11 @@ Separate shared design system concerns from platform-specific implementation con
 - ✅ React: `className?: string` (platform layer)
 - ✅ React Native: `twClassName?: string` (platform layer)
 
+**Prop forwarding convention:**
+
+- When a component forwards the remaining props to its rendered element, name the destructured catch-all `...props` and spread `{...props}` onto the element.
+- Do not use `...rest` for this pattern in component implementations; keep the naming consistent so forwarded props are easy to spot across the codebase.
+
 ## Const Object Value Patterns in Shared
 
 Not all constants in `design-system-shared` have the same kind of value. The rule is simple: **if the class string is identical across both platforms, put it in shared; if the platforms need different class strings, use an abstract value in shared and map per platform.**
