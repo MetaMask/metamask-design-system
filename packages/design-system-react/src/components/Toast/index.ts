@@ -9,5 +9,4 @@ export type {
   ToastOptions,
   ToastProps,
   ToasterProps,
-  ToasterRef,
 } from './Toast.types';

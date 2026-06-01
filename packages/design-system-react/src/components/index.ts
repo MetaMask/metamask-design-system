@@ -162,6 +162,5 @@ export type {
   ToastOptions,
   ToastProps,
   ToasterProps,
-  ToasterRef,
 } from './Toast';
 export { TOAST_ANIMATION_DURATION, TOAST_VISIBILITY_DURATION } from './Toast';
