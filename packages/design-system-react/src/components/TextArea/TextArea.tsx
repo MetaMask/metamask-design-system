@@ -19,7 +19,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       onFocus,
       resize = TextAreaResize.None,
       className,
-      ...rest
+      ...props
     },
     ref,
   ) => {
@@ -63,7 +63,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     return (
       <textarea
-        {...rest}
+        {...props}
         ref={ref}
         value={value}
         placeholder={placeholder}
