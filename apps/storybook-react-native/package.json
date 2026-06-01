@@ -41,7 +41,7 @@
     "@storybook/addon-docs": "^10.4.2",
     "@storybook/addon-ondevice-actions": "10.4.4",
     "@storybook/addon-ondevice-backgrounds": "10.4.4",
-    "@storybook/addon-ondevice-controls": "patch:@storybook/addon-ondevice-controls@npm%3A10.4.0#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.0-dee6ebd17d.patch",
+    "@storybook/addon-ondevice-controls": "patch:@storybook/addon-ondevice-controls@npm%3A10.4.4#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.4-6e8c0f15d9.patch",
     "@storybook/addon-ondevice-notes": "10.4.4",
     "@storybook/react": "^10.4.2",
     "@storybook/react-native": "10.4.4",

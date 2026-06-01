@@ -3482,7 +3482,7 @@ __metadata:
     "@storybook/addon-docs": "npm:^10.4.2"
     "@storybook/addon-ondevice-actions": "npm:10.4.4"
     "@storybook/addon-ondevice-backgrounds": "npm:10.4.4"
-    "@storybook/addon-ondevice-controls": "patch:@storybook/addon-ondevice-controls@npm%3A10.4.0#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.0-dee6ebd17d.patch"
+    "@storybook/addon-ondevice-controls": "patch:@storybook/addon-ondevice-controls@npm%3A10.4.4#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.4-6e8c0f15d9.patch"
     "@storybook/addon-ondevice-notes": "npm:10.4.4"
     "@storybook/react": "npm:^10.4.2"
     "@storybook/react-native": "npm:10.4.4"
@@ -4785,13 +4785,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-ondevice-controls@npm:10.4.0":
-  version: 10.4.0
-  resolution: "@storybook/addon-ondevice-controls@npm:10.4.0"
+"@storybook/addon-ondevice-controls@npm:10.4.4":
+  version: 10.4.4
+  resolution: "@storybook/addon-ondevice-controls@npm:10.4.4"
   dependencies:
     "@gorhom/portal": "npm:^1.0.14"
-    "@storybook/react-native-theming": "npm:^10.4.0"
-    "@storybook/react-native-ui-common": "npm:^10.4.0"
+    "@storybook/react-native-theming": "npm:^10.4.4"
+    "@storybook/react-native-ui-common": "npm:^10.4.4"
     polished: "npm:^4.3.1"
     react-native-modal-datetime-picker: "npm:^18.0.0"
     tinycolor2: "npm:^1.6.0"
@@ -4805,17 +4805,17 @@ __metadata:
   peerDependenciesMeta:
     "@gorhom/bottom-sheet":
       optional: true
-  checksum: 10/acc6fc2078b05f12fe5b1f1b64346185b4e977eb44aeabce80d4cd3b0ac99c60121bccbb789ad98bc681fd5789f16a5f720e9e25dda7b5f13b2ef14f5cca6a07
+  checksum: 10/0cba7ad5767eae71c93b328aacf0bb8e13076930c660192bdf7c32620cfde4f9fae5957f53fb7f7753519f0ab8ea75aebb6e308564028379bbe6b97e844495c5
   languageName: node
   linkType: hard
 
-"@storybook/addon-ondevice-controls@patch:@storybook/addon-ondevice-controls@npm%3A10.4.0#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.0-dee6ebd17d.patch":
-  version: 10.4.0
-  resolution: "@storybook/addon-ondevice-controls@patch:@storybook/addon-ondevice-controls@npm%3A10.4.0#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.0-dee6ebd17d.patch::version=10.4.0&hash=4258e4"
+"@storybook/addon-ondevice-controls@patch:@storybook/addon-ondevice-controls@npm%3A10.4.4#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.4-6e8c0f15d9.patch":
+  version: 10.4.4
+  resolution: "@storybook/addon-ondevice-controls@patch:@storybook/addon-ondevice-controls@npm%3A10.4.4#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.4-6e8c0f15d9.patch::version=10.4.4&hash=16f846"
   dependencies:
     "@gorhom/portal": "npm:^1.0.14"
-    "@storybook/react-native-theming": "npm:^10.4.0"
-    "@storybook/react-native-ui-common": "npm:^10.4.0"
+    "@storybook/react-native-theming": "npm:^10.4.4"
+    "@storybook/react-native-ui-common": "npm:^10.4.4"
     polished: "npm:^4.3.1"
     react-native-modal-datetime-picker: "npm:^18.0.0"
     tinycolor2: "npm:^1.6.0"
@@ -4829,7 +4829,7 @@ __metadata:
   peerDependenciesMeta:
     "@gorhom/bottom-sheet":
       optional: true
-  checksum: 10/507217fb46f1e16c1c0cd720f013d40232cf330007f9d58f98fb52700953679834d3e56b6d3ec8c89dbb18a311b9dd1e0d3d858e329f955484d969e67bdab745
+  checksum: 10/e0360a59720484e63bfbc93d57e9b1c98f5a3bd201284a0f2a2fc3bfb5e8aced89408a30bad1e8d8dd124f2f6d29a5fac1ced33ee4b730527b288675eff1fe5d
   languageName: node
   linkType: hard
 
@@ -5011,7 +5011,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-theming@npm:^10.4.0, @storybook/react-native-theming@npm:^10.4.4":
+"@storybook/react-native-theming@npm:^10.4.4":
   version: 10.4.4
   resolution: "@storybook/react-native-theming@npm:10.4.4"
   dependencies:
@@ -5023,7 +5023,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-ui-common@npm:^10.4.0, @storybook/react-native-ui-common@npm:^10.4.4":
+"@storybook/react-native-ui-common@npm:^10.4.4":
   version: 10.4.4
   resolution: "@storybook/react-native-ui-common@npm:10.4.4"
   dependencies:
