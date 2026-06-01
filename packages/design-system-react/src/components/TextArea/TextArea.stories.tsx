@@ -2,6 +2,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 
+import { Box } from '../Box';
+
 import README from './README.mdx';
 import { TextArea } from './TextArea';
 import { TextAreaResize } from './TextArea.constants';
@@ -129,7 +131,7 @@ export const IsError: Story = {
     const [errorValue, setErrorValue] = useState('');
 
     return (
-      <div className="flex flex-col gap-4">
+      <Box className="flex flex-col gap-4">
         <TextArea
           value={defaultValue}
           placeholder="Default"
@@ -141,7 +143,7 @@ export const IsError: Story = {
           isError
           onChange={(event) => setErrorValue(event.target.value)}
         />
-      </div>
+      </Box>
     );
   },
 };
@@ -151,7 +153,7 @@ export const IsDisabled: Story = {
     const [value, setValue] = useState('Editable');
 
     return (
-      <div className="flex flex-col gap-4">
+      <Box className="flex flex-col gap-4">
         <TextArea
           value={value}
           placeholder="Enabled"
@@ -163,7 +165,7 @@ export const IsDisabled: Story = {
           isDisabled
           onChange={() => undefined}
         />
-      </div>
+      </Box>
     );
   },
 };
@@ -194,7 +196,7 @@ export const IsReadOnly: Story = {
     const [value, setValue] = useState('Editable');
 
     return (
-      <div className="flex flex-col gap-4">
+      <Box className="flex flex-col gap-4">
         <TextArea
           value={value}
           placeholder="Editable field"
@@ -206,7 +208,7 @@ export const IsReadOnly: Story = {
           isReadOnly
           onChange={() => undefined}
         />
-      </div>
+      </Box>
     );
   },
 };
@@ -244,7 +246,7 @@ export const Resize: Story = {
     const [bothValue, setBothValue] = useState('Resize in both directions');
 
     return (
-      <div className="flex flex-col gap-4">
+      <Box className="flex flex-col gap-4">
         <TextArea
           value={noneValue}
           placeholder="No resize (default)"
@@ -269,7 +271,7 @@ export const Resize: Story = {
           resize={TextAreaResize.Both}
           onChange={(event) => setBothValue(event.target.value)}
         />
-      </div>
+      </Box>
     );
   },
 };
