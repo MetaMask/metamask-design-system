@@ -130,6 +130,16 @@ Both React (Tailwind) and React Native (TWRNC) share the same design token class
 - Used directly: `className={color}` (React) / `twClassName={color}` (React Native)
 - ✅ Values live in shared and are used as-is on both platforms
 
+### Platform-specific const objects
+
+If a const object only exists for one platform's behavior or styling, keep it in that platform package near the component instead of moving it to `@metamask/design-system-shared` just to satisfy the barrel export.
+
+- Export it from the component barrel if it is part of the public API
+- Import it locally from the component file in stories, tests, and implementation
+- Only promote it to shared when the same semantic contract is genuinely needed on both platforms
+
+Example: `TextAreaResize` is a React-only API because React Native does not have an equivalent native resize axis, so it should stay in the React package.
+
 ### Semantic constants (`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`)
 
 - Platforms need different class strings for these — they cannot share a single value:
