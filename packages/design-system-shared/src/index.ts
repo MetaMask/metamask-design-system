@@ -30,6 +30,12 @@ export {
   type BadgeStatusPropsShared,
 } from './types/BadgeStatus';
 
+// Content types (ADR-0003 + ADR-0004)
+export {
+  ContentVerticalAlignment,
+  type ContentPropsShared,
+} from './types/Content';
+
 // HelpText types (ADR-0003 + ADR-0004)
 export { HelpTextSeverity, type HelpTextPropsShared } from './types/HelpText';
 

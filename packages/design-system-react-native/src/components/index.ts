@@ -103,6 +103,9 @@ export type { BoxColumnProps } from './BoxColumn';
 export { Card } from './Card';
 export type { CardProps } from './Card';
 
+export { Content, ContentVerticalAlignment } from './Content';
+export type { ContentProps } from './Content';
+
 export { ButtonAnimated } from './temp-components/ButtonAnimated';
 export type { ButtonAnimatedProps } from './temp-components/ButtonAnimated';
 
