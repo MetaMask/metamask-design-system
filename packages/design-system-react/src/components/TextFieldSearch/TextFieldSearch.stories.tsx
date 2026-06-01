@@ -49,7 +49,6 @@ const meta: Meta<TextFieldSearchProps> = {
     isError: { control: 'boolean' },
     placeholder: { control: 'text' },
     value: { control: 'text' },
-    className: { control: 'text' },
   },
 };
 
