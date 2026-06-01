@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
+import { Box, BoxFlexDirection } from '../Box';
 import { HelpText, HelpTextSeverity } from '../HelpText';
 import { Label } from '../Label';
 import { TextField } from '../TextField';
@@ -41,9 +42,10 @@ export const FormTextField = forwardRef<HTMLDivElement, FormTextFieldProps>(
     },
     ref,
   ) => (
-    <div
+    <Box
       ref={ref}
-      className={twMerge('flex flex-col', className)}
+      flexDirection={BoxFlexDirection.Column}
+      className={className}
       style={style}
       {...rest}
     >
@@ -88,7 +90,7 @@ export const FormTextField = forwardRef<HTMLDivElement, FormTextFieldProps>(
           {helpText}
         </HelpText>
       )}
-    </div>
+    </Box>
   ),
 );
 
