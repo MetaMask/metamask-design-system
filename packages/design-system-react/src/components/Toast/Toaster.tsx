@@ -1,3 +1,7 @@
+import {
+  TOAST_ANIMATION_DURATION,
+  TOAST_VISIBILITY_DURATION,
+} from '@metamask/design-system-shared';
 import React, {
   forwardRef,
   useEffect,
@@ -7,10 +11,6 @@ import React, {
   useState,
 } from 'react';
 import type { RefObject } from 'react';
-import {
-  TOAST_ANIMATION_DURATION,
-  TOAST_VISIBILITY_DURATION,
-} from '@metamask/design-system-shared';
 
 import { twMerge } from '../../utils/tw-merge';
 

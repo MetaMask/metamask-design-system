@@ -1,9 +1,9 @@
 // Third party dependencies.
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import {
   TOAST_ANIMATION_DURATION,
   TOAST_VISIBILITY_DURATION,
 } from '@metamask/design-system-shared';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, {
   forwardRef,
   useImperativeHandle,

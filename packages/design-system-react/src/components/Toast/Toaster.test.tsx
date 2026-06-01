@@ -1,11 +1,11 @@
-import { ToastSeverity } from '@metamask/design-system-shared';
-import { act, fireEvent, render, screen } from '@testing-library/react';
-import React, { createRef, useEffect } from 'react';
-
 import {
+  ToastSeverity,
   TOAST_ANIMATION_DURATION,
   TOAST_VISIBILITY_DURATION,
 } from '@metamask/design-system-shared';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import React, { createRef, useEffect } from 'react';
+
 import type { ToastOptions, ToasterRef } from './Toast.types';
 import { Toaster, toast } from './Toaster';
 
