@@ -16,6 +16,7 @@ export const FormTextField = forwardRef<HTMLDivElement, FormTextFieldProps>(
       helpText,
       helpTextProps,
       id,
+      inputElement,
       inputProps,
       inputRef,
       isDisabled,
@@ -59,9 +60,11 @@ export const FormTextField = forwardRef<HTMLDivElement, FormTextFieldProps>(
         </Label>
       )}
       <TextField
+        {...textFieldProps}
         autoFocus={autoFocus}
         endAccessory={endAccessory}
         id={id}
+        inputElement={inputElement}
         inputProps={inputProps}
         inputRef={inputRef}
         isDisabled={isDisabled}
@@ -79,7 +82,6 @@ export const FormTextField = forwardRef<HTMLDivElement, FormTextFieldProps>(
         truncate={truncate}
         type={type}
         value={value}
-        {...textFieldProps}
       />
       {helpText && (
         <HelpText

@@ -39,6 +39,22 @@ describe('FormTextField', () => {
       expect(screen.getByText('Some help text')).toBeInTheDocument();
     });
 
+    it('forwards inputElement to the inner TextField, replacing the default input', () => {
+      render(
+        <FormTextField
+          data-testid={ROOT_TEST_ID}
+          inputElement={<input data-testid="custom-input" />}
+          onChange={noop}
+          value=""
+        />,
+      );
+
+      expect(screen.getByTestId('custom-input')).toBeInTheDocument();
+      expect(screen.queryByRole('textbox')).toBe(
+        screen.getByTestId('custom-input'),
+      );
+    });
+
     it('forwards size to the inner TextField', () => {
       render(
         <FormTextField

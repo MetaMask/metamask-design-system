@@ -5,14 +5,36 @@ import type { LabelProps } from '../Label';
 import type { TextFieldProps } from '../TextField';
 
 /**
- * Props forwarded to the inner `TextField`. Omits keys that consumers must
- * pass at the `FormTextField` level (so a single source of truth controls the
- * input identity and value); `className` / `style` here style the inner
- * `TextField` and are merged with its own defaults.
+ * Props forwarded to the inner `TextField`. Omits every key that
+ * `FormTextField` already owns at the top level — passing those via
+ * `textFieldProps` would either be silently overridden by the explicit prop
+ * or, in the case of `isError`, desynchronize the `TextField` from the
+ * `HelpText` severity. `className` / `style` remain available here to style
+ * the inner `TextField` (merged with its own defaults).
  */
 type FormTextFieldInnerTextFieldProps = Omit<
   TextFieldProps,
-  'id' | 'onChange' | 'value'
+  | 'autoFocus'
+  | 'endAccessory'
+  | 'id'
+  | 'inputElement'
+  | 'inputProps'
+  | 'inputRef'
+  | 'isDisabled'
+  | 'isError'
+  | 'isReadOnly'
+  | 'maxLength'
+  | 'name'
+  | 'onBlur'
+  | 'onChange'
+  | 'onFocus'
+  | 'placeholder'
+  | 'required'
+  | 'size'
+  | 'startAccessory'
+  | 'truncate'
+  | 'type'
+  | 'value'
 >;
 
 type FormTextFieldBaseProps = Omit<TextFieldProps, 'className' | 'style'> & {
