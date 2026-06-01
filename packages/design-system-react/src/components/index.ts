@@ -92,9 +92,6 @@ export type { IconProps } from './Icon';
 export { Input } from './Input';
 export type { InputProps } from './Input';
 
-export { TextArea, TextAreaResize } from './TextArea';
-export type { TextAreaProps } from './TextArea';
-
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
 
@@ -144,6 +141,9 @@ export {
   OverflowWrap,
 } from './Text';
 export type { TextProps } from './Text';
+
+export { TextArea, TextAreaResize } from './TextArea';
+export type { TextAreaProps } from './TextArea';
 
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
