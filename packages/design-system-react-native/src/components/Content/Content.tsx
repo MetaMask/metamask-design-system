@@ -37,7 +37,7 @@ export const Content: React.FC<ContentProps> = ({
   subvalueProps,
   subvalueStartAccessory,
   subvalueEndAccessory,
-  ...rest
+  ...props
 }) => {
   const hasColumnShell = Boolean(topAccessory) || Boolean(bottomAccessory);
 
@@ -48,7 +48,7 @@ export const Content: React.FC<ContentProps> = ({
       alignItems={VERTICAL_ALIGNMENT_MAP[verticalAlignment]}
       gap={4}
       twClassName={`min-h-[46px] ${hasColumnShell ? 'min-w-0' : (twClassName ?? '')}`.trim()}
-      {...(hasColumnShell ? {} : rest)}
+      {...(hasColumnShell ? {} : props)}
     >
       {avatar}
       {/* Title and description Column */}
@@ -153,7 +153,7 @@ export const Content: React.FC<ContentProps> = ({
         topAccessory={topAccessory}
         bottomAccessory={bottomAccessory}
         twClassName={twClassName}
-        {...rest}
+        {...props}
       >
         {contentRow}
       </BoxColumn>

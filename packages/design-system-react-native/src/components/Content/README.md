@@ -1,6 +1,6 @@
 # Content
 
-Content lays out the inner row for list items: optional leading and trailing accessories, an avatar, title and description on the left, and value and subvalue on the right. Use it when you need the row layout without `ListItem` padding or press handling. For compound slots (`ListItem.Title`, `ListItem.Avatar`, …), use [ListItem](../ListItem/README.md) instead.
+Content lays out the inner row for list items: optional leading and trailing accessories, an avatar, title and description on the left, and value and subvalue on the right. Use it when you need the row layout without `ListItem` padding or press handling.
 
 Without `topAccessory` or `bottomAccessory`, the root is a horizontal row (`min-h-[46px]`). When either shell accessory is set, the root becomes a column with that row nested inside.
 
