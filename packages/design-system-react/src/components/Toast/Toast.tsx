@@ -48,6 +48,8 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
     },
     ref,
   ) => {
+    // Only pass action props through when both the label and handler are set so
+    // BannerBase can keep its action button contract simple.
     const resolvedActionProps =
       actionButtonLabel && actionButtonOnClick
         ? {
@@ -60,6 +62,8 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
           }
         : {};
 
+    // Derive the close button config from the Toast API, keeping the button
+    // visible whenever the consumer provides dismiss behavior or overrides.
     const resolvedCloseButtonProps =
       onClose || closeButtonProps
         ? {
