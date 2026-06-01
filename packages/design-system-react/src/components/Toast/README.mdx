@@ -60,7 +60,7 @@ const Demo = () => {
 
 Call `toast.dismiss()` to dismiss the currently visible toast.
 
-Use `closeButtonProps` to access the close button element when you need to set a `data-testid` or override its accessibility label. With the `toast(...)` / `<Toaster />` flow the close button is always shown; for direct `<Toast />` rendering, provide `onClose` to render it.
+Use `closeButtonProps` to access the close button element when you need to set a `data-testid` or override its accessibility label. With the `toast(...)` / `<Toaster />` flow the close button is shown because `<Toaster />` wires `onClose` internally; for direct `<Toast />` rendering, provide `onClose` to render it.
 
 `toast(...)` and `toast.dismiss()` throw a descriptive error if called before `<Toaster />` is mounted.
 
@@ -153,7 +153,7 @@ toast({
 
 ### `onClose`
 
-Use `onClose` for a side-effect callback when the close button is clicked. With the `toast(...)` / `<Toaster />` flow the close button is always shown; provide `onClose` when you need to run code on dismiss. For direct `<Toast />` rendering, `onClose` must be provided to render the close button.
+Use `onClose` for a side-effect callback when the close button is clicked. With the `toast(...)` / `<Toaster />` flow the close button is shown because `<Toaster />` passes `onClose` internally; provide `onClose` when you need to run code on dismiss. For direct `<Toast />` rendering, `onClose` must be provided to render the close button.
 
 <Canvas of={ToastStories.OnClose} sourceState="none" />
 
