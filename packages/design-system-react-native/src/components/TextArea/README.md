@@ -96,7 +96,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `ref`
 
-Ref to the root `TextInput`. The component’s `ref` (from `forwardRef`) points at the editable field itself.
+Ref to the `TextInput`. The component’s `ref` (from `forwardRef`) points at the editable field itself.
 
 | TYPE             | REQUIRED | DEFAULT     |
 | ---------------- | -------- | ----------- |
@@ -156,7 +156,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `testID`
 
-Optional test id for the root `TextInput`.
+Optional test id for the `TextInput`.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -170,7 +170,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the root `TextInput`. These classes are merged with the component's default classes using `twMerge`, allowing you to:
+Use the `twClassName` prop to add Tailwind CSS classes to the `TextInput`. These classes are merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -195,7 +195,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `style`
 
-Use the `style` prop to customize the root `TextInput` appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the `TextInput` appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
