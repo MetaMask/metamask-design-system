@@ -2,11 +2,14 @@ import base, { createConfig } from '@metamask/eslint-config';
 import jest from '@metamask/eslint-config-jest';
 import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
+// eslint-disable-next-line import-x/no-unresolved -- ESM-only package with non-standard "code" export condition
+import storybook from 'eslint-plugin-storybook';
 import tailwind from 'eslint-plugin-tailwindcss';
 
 const NODE_LTS_VERSION = 22;
 
 const config = createConfig([
+  ...storybook.configs['flat/recommended'],
   ...base,
   {
     ignores: [
@@ -220,6 +223,13 @@ const config = createConfig([
     ignores: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.d.ts'],
     rules: {
       'import-x/no-default-export': 'error',
+    },
+  },
+  // React Native storybook stories may import @storybook/react for web-rendered demos
+  {
+    files: ['apps/storybook-react-native/stories/**'],
+    rules: {
+      'storybook/no-renderer-packages': 'off',
     },
   },
   // Tailwind ESLint for React Web
