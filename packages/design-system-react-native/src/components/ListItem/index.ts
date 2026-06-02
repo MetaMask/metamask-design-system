@@ -2,61 +2,37 @@ import type { FC } from 'react';
 
 import { ListItemRoot } from './ListItem';
 import {
-  ListItemAvatar,
-  ListItemBottomAccessory,
   ListItemDescription,
-  ListItemEndAccessory,
-  ListItemStartAccessory,
   ListItemSubvalue,
   ListItemTitle,
-  ListItemTopAccessory,
   ListItemValue,
-} from './ListItem.slots';
+} from './ListItem.parts';
 import type { ListItemProps } from './ListItem.types';
 
 export {
-  ListItemAvatar,
-  ListItemBottomAccessory,
   ListItemDescription,
-  ListItemEndAccessory,
-  ListItemStartAccessory,
   ListItemSubvalue,
   ListItemTitle,
-  ListItemTopAccessory,
   ListItemValue,
 };
 
 type ListItemCompoundComponent = FC<ListItemProps> & {
-  Avatar: typeof ListItemAvatar;
-  BottomAccessory: typeof ListItemBottomAccessory;
   Description: typeof ListItemDescription;
-  EndAccessory: typeof ListItemEndAccessory;
-  StartAccessory: typeof ListItemStartAccessory;
   Subvalue: typeof ListItemSubvalue;
   Title: typeof ListItemTitle;
-  TopAccessory: typeof ListItemTopAccessory;
   Value: typeof ListItemValue;
 };
 
-const createListItemCompound = (
-  root: FC<ListItemProps>,
-): ListItemCompoundComponent => {
-  const ListItem = root as ListItemCompoundComponent;
-
-  ListItem.Avatar = ListItemAvatar;
-  ListItem.BottomAccessory = ListItemBottomAccessory;
-  ListItem.Description = ListItemDescription;
-  ListItem.EndAccessory = ListItemEndAccessory;
-  ListItem.StartAccessory = ListItemStartAccessory;
-  ListItem.Subvalue = ListItemSubvalue;
-  ListItem.Title = ListItemTitle;
-  ListItem.TopAccessory = ListItemTopAccessory;
-  ListItem.Value = ListItemValue;
-
-  return ListItem;
-};
-
-export const ListItem = createListItemCompound(ListItemRoot);
+// RN/Metro: Object.assign is acceptable here because (a) Metro does not use RSC
+// and (b) all sub-components are also exported as flat named exports above for
+// consumers who need individually tree-shakeable imports.
+// Web package: use the Chakra-style namespace facade instead of Object.assign.
+export const ListItem = Object.assign(ListItemRoot, {
+  Description: ListItemDescription,
+  Subvalue: ListItemSubvalue,
+  Title: ListItemTitle,
+  Value: ListItemValue,
+}) as ListItemCompoundComponent;
 
 export type { ListItemProps } from './ListItem.types';
-export type { ListItemTextSlotProps } from './ListItem.slots';
+export type { ListItemTextSlotProps } from './ListItem.parts';

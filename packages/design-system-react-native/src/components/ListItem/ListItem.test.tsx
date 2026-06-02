@@ -90,8 +90,8 @@ describe('ListItem', () => {
     });
   });
 
-  describe('when compound slots are used', () => {
-    it('renders title from ListItem.Title', () => {
+  describe('when text sub-components are used as children', () => {
+    it('renders ListItem.Title content', () => {
       const { getByText } = render(
         <ListItem testID={ROOT_TEST_ID}>
           <ListItem.Title>Label</ListItem.Title>
@@ -100,7 +100,7 @@ describe('ListItem', () => {
       expect(getByText('Label')).toBeOnTheScreen();
     });
 
-    it('renders title and value slots together', () => {
+    it('renders ListItem.Title and ListItem.Value together', () => {
       const { getByText } = render(
         <ListItem>
           <ListItem.Title>Account</ListItem.Title>
@@ -111,7 +111,7 @@ describe('ListItem', () => {
       expect(getByText('$1,234')).toBeOnTheScreen();
     });
 
-    it('renders title row accessories from ListItem.Title props', () => {
+    it('renders accessories from ListItem.Title props', () => {
       const { getByTestId, getByText } = render(
         <ListItem testID={ROOT_TEST_ID}>
           <ListItem.Title
@@ -127,20 +127,20 @@ describe('ListItem', () => {
       expect(getByTestId('title-end')).toBeOnTheScreen();
     });
 
-    it('prefers explicit title prop over ListItem.Title slot', () => {
-      const { getByText, queryByText } = render(
-        <ListItem title="From prop" testID={ROOT_TEST_ID}>
-          <ListItem.Title>From slot</ListItem.Title>
-        </ListItem>,
-      );
-      expect(getByText('From prop')).toBeOnTheScreen();
-      expect(queryByText('From slot')).toBeNull();
-    });
-
-    it('applies top-level Text props on ListItem.Subvalue', () => {
+    it('renders ListItem.Title and ListItem.Description independently', () => {
       const { getByText } = render(
         <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Title>Label</ListItem.Title>
+          <ListItem.Title>Title text</ListItem.Title>
+          <ListItem.Description>Description text</ListItem.Description>
+        </ListItem>,
+      );
+      expect(getByText('Title text')).toBeOnTheScreen();
+      expect(getByText('Description text')).toBeOnTheScreen();
+    });
+
+    it('applies color prop on ListItem.Subvalue', () => {
+      const { getByText } = render(
+        <ListItem testID={ROOT_TEST_ID}>
           <ListItem.Subvalue color={TextColor.SuccessDefault}>
             +2.5%
           </ListItem.Subvalue>
@@ -152,7 +152,6 @@ describe('ListItem', () => {
     it('applies textProps on ListItem.Description when provided', () => {
       const { getByText } = render(
         <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Title>Label</ListItem.Title>
           <ListItem.Description textProps={{ color: TextColor.ErrorDefault }}>
             Secondary
           </ListItem.Description>
@@ -163,10 +162,9 @@ describe('ListItem', () => {
       );
     });
 
-    it('prefers top-level Text props over textProps on the same slot', () => {
+    it('prefers inline Text props over textProps on the same sub-component', () => {
       const { getByText } = render(
         <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Title>Label</ListItem.Title>
           <ListItem.Value
             textProps={{ color: TextColor.ErrorDefault }}
             color={TextColor.SuccessDefault}
@@ -178,7 +176,7 @@ describe('ListItem', () => {
       expect(getByText('$10.00')).toHaveStyle(tw.style('text-success-default'));
     });
 
-    it('applies top-level variant on ListItem.Title', () => {
+    it('applies variant prop on ListItem.Title', () => {
       const { getByText } = render(
         <ListItem testID={ROOT_TEST_ID}>
           <ListItem.Title variant={TextVariant.BodySm}>
@@ -195,15 +193,16 @@ describe('ListItem', () => {
     });
   });
 
-  describe('when non-slot children are provided', () => {
-    it('renders children below Content', () => {
-      const { getByText, getByTestId } = render(
-        <ListItem title="Label">
-          <Text testID="below-content">Below</Text>
+  describe('when children are provided', () => {
+    it('renders children in place and does not render Content from flat props', () => {
+      // When children are present, they render in-place and Content is not
+      // rendered. Use bottomAccessory for content below a prop-driven row.
+      const { getByTestId } = render(
+        <ListItem title="ignored-in-slot-mode">
+          <Text testID="child-content">Slot content</Text>
         </ListItem>,
       );
-      expect(getByText('Label')).toBeOnTheScreen();
-      expect(getByTestId('below-content')).toBeOnTheScreen();
+      expect(getByTestId('child-content')).toBeOnTheScreen();
     });
   });
 

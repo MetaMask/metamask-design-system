@@ -1,4 +1,4 @@
-import { useCompoundSlots } from '@metamask/design-system-shared';
+import { ContentVerticalAlignment } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { Pressable } from 'react-native';
@@ -11,54 +11,38 @@ import type {
 import { Box } from '../Box';
 import { Content } from '../Content';
 
-import {
-  hasListItemSlotChildren,
-  isListItemSlotElement,
-  mergeListItemPropsWithSlots,
-  parseListItemSlots,
-} from './ListItem.slots';
 import type { ListItemProps } from './ListItem.types';
 
-export const ListItemRoot: React.FC<ListItemProps> = (props) => {
+export const ListItemRoot: React.FC<ListItemProps> = ({
+  isInteractive = false,
+  twClassName,
+  style,
+  children,
+  startAccessory,
+  endAccessory,
+  topAccessory,
+  bottomAccessory,
+  verticalAlignment = ContentVerticalAlignment.Center,
+  avatar,
+  title,
+  titleProps,
+  titleStartAccessory,
+  titleEndAccessory,
+  description,
+  descriptionProps,
+  descriptionStartAccessory,
+  descriptionEndAccessory,
+  value,
+  valueProps,
+  valueStartAccessory,
+  valueEndAccessory,
+  subvalue,
+  subvalueProps,
+  subvalueStartAccessory,
+  subvalueEndAccessory,
+  ...wrapperRest
+}) => {
   const tw = useTailwind();
-
-  const { mergedProps, children } = useCompoundSlots({
-    props,
-    isSlotElement: isListItemSlotElement,
-    hasSlotChildren: hasListItemSlotChildren,
-    parse: parseListItemSlots,
-    merge: mergeListItemPropsWithSlots,
-    partitionNonSlots: true,
-  });
-
-  const {
-    isInteractive = false,
-    twClassName,
-    style,
-    startAccessory,
-    endAccessory,
-    topAccessory,
-    bottomAccessory,
-    verticalAlignment,
-    avatar,
-    title,
-    titleProps,
-    titleStartAccessory,
-    titleEndAccessory,
-    description,
-    descriptionProps,
-    descriptionStartAccessory,
-    descriptionEndAccessory,
-    value,
-    valueProps,
-    valueStartAccessory,
-    valueEndAccessory,
-    subvalue,
-    subvalueProps,
-    subvalueStartAccessory,
-    subvalueEndAccessory,
-    ...wrapperRest
-  } = mergedProps;
 
   const wrapperStyle = style
     ? [tw.style('px-4 py-3', twClassName), style]
@@ -72,17 +56,15 @@ export const ListItemRoot: React.FC<ListItemProps> = (props) => {
       twClassName,
       pressed && 'bg-pressed',
     );
-
-    if (!style) {
-      return baseStyle;
-    }
-
+    if (!style) return baseStyle;
     const userStyle = typeof style === 'function' ? style({ pressed }) : style;
-
     return [baseStyle, userStyle];
   };
 
-  const content = (
+  // When slot sub-components are used as children, they render in-place — the
+  // engineer controls layout using Box, BoxRow, and Tailwind classnames.
+  // When no children are present, flat props drive Content directly.
+  const content = children ?? (
     <Content
       startAccessory={startAccessory}
       endAccessory={endAccessory}
@@ -113,7 +95,6 @@ export const ListItemRoot: React.FC<ListItemProps> = (props) => {
     return (
       <Pressable style={getPressableStyle} {...wrapperRest}>
         {content}
-        {children}
       </Pressable>
     );
   }
@@ -121,7 +102,6 @@ export const ListItemRoot: React.FC<ListItemProps> = (props) => {
   return (
     <Box style={wrapperStyle} {...wrapperRest}>
       {content}
-      {children}
     </Box>
   );
 };
