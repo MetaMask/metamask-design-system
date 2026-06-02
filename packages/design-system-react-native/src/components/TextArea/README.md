@@ -94,27 +94,6 @@ import { TextArea } from '@metamask/design-system-react-native';
 <TextArea value="" placeholder="Blur" onBlur={() => {}} />;
 ```
 
-### `TextInput` props
-
-Additional `TextInput` props are passed directly to the root field. Use this for platform-native behavior such as `keyboardType`, `secureTextEntry`, `returnKeyType`, and accessibility props like `accessibilityLabel` / `accessibilityHint`. `placeholderTextColor` is managed by the component theme and should not be overridden directly.
-
-| TYPE                         | REQUIRED | DEFAULT     |
-| ---------------------------- | -------- | ----------- |
-| Additional `TextInput` props | No       | `undefined` |
-
-```tsx
-import { TextArea } from '@metamask/design-system-react-native';
-
-<TextArea
-  value=""
-  onChangeText={(text) => {}}
-  placeholder="Notes"
-  keyboardType="default"
-  autoCapitalize="sentences"
-  scrollEnabled
-/>;
-```
-
 ### `ref`
 
 Ref to the root `TextInput`. The component’s `ref` (from `forwardRef`) points at the editable field itself.
