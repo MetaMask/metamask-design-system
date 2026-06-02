@@ -47,7 +47,6 @@
     "publish:preview": "yarn npm publish --tag preview"
   },
   "dependencies": {
-    "@metamask/design-tokens": "workspace:^",
     "@metamask/utils": "^11.11.0"
   },
   "devDependencies": {

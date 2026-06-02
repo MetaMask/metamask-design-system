@@ -1,7 +1,3 @@
-import {
-  TOAST_ANIMATION_DURATION,
-  TOAST_VISIBILITY_DURATION,
-} from '@metamask/design-system-shared';
 import React, {
   forwardRef,
   useEffect,
@@ -15,6 +11,10 @@ import type { RefObject } from 'react';
 import { twMerge } from '../../utils/tw-merge';
 
 import { Toast } from './Toast';
+import {
+  TOAST_ANIMATION_DURATION,
+  TOAST_VISIBILITY_DURATION,
+} from './Toast.constants';
 import type {
   ToastOptions,
   ToastProps,
@@ -53,6 +53,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     );
     const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const enterAnimationFrameRef = useRef<number | null>(null);
+    const pendingToastRef = useRef<ToastOptions | undefined>(undefined);
     const innerRef = useRef<ToasterRef | null>(null);
 
     const closeToast = () => {
@@ -68,6 +69,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         clearTimeout(exitTimerRef.current);
         exitTimerRef.current = null;
       }
+      pendingToastRef.current = undefined;
       setIsVisible(false);
       exitTimerRef.current = setTimeout(() => {
         exitTimerRef.current = null;
@@ -80,16 +82,21 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     // imperative API centered in the mounted Toaster instance.
     const showToast = (options: ToastOptions) => {
       const normalizedOptions = { hasNoTimeout: false, ...options };
-      let timeoutDuration = 0;
+      const timeoutDuration = 0;
 
       if (toastOptions) {
+        pendingToastRef.current = normalizedOptions;
         setIsVisible(false);
         if (exitTimerRef.current !== null) {
           clearTimeout(exitTimerRef.current);
           exitTimerRef.current = null;
         }
-        timeoutDuration = TOAST_ANIMATION_DURATION;
-        setToastOptions(undefined);
+        exitTimerRef.current = setTimeout(() => {
+          exitTimerRef.current = null;
+          setToastOptions(pendingToastRef.current);
+          pendingToastRef.current = undefined;
+        }, TOAST_ANIMATION_DURATION);
+        return;
       }
 
       if (replacementTimerRef.current !== null) {

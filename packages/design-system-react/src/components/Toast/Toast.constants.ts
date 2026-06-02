@@ -2,6 +2,9 @@ import { ToastSeverity } from '@metamask/design-system-shared';
 
 import { IconColor, IconName } from '../../types';
 
+export const TOAST_VISIBILITY_DURATION = 2750;
+export const TOAST_ANIMATION_DURATION = 200;
+
 // TODO: Replace this map with a web IconAlert component once the shared
 // alert-icon primitive exists in React.
 export const TOAST_SEVERITY_ICON_MAP = {

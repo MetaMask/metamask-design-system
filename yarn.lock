@@ -3423,7 +3423,6 @@ __metadata:
   resolution: "@metamask/design-system-shared@workspace:packages/design-system-shared"
   dependencies:
     "@metamask/auto-changelog": "npm:^6.1.1"
-    "@metamask/design-tokens": "workspace:^"
     "@metamask/utils": "npm:^11.11.0"
     "@svgr/core": "npm:^8.1.0"
     "@svgr/plugin-jsx": "npm:^8.1.0"
