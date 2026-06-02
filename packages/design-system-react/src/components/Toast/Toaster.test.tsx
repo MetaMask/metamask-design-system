@@ -259,6 +259,25 @@ describe('Toaster', () => {
     expect(screen.queryByText('Second')).not.toBeInTheDocument();
   });
 
+  it('clears a pending replacement timer when showToast is called again before mount', async () => {
+    render(<Toaster ref={toasterRef} />);
+
+    await act(async () => {
+      toasterRef.current?.showToast({
+        hasNoTimeout: true,
+        title: 'First',
+      });
+      toasterRef.current?.showToast({
+        hasNoTimeout: true,
+        title: 'Second',
+      });
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByText('Second')).toBeInTheDocument();
+    expect(screen.queryByText('First')).not.toBeInTheDocument();
+  });
+
   it('clears auto-dismiss timer when closeToast is called before it fires', async () => {
     render(<Toaster ref={toasterRef} />);
 
@@ -281,6 +300,21 @@ describe('Toaster', () => {
     expect(
       screen.queryByText('Will be manually closed'),
     ).not.toBeInTheDocument();
+  });
+
+  it('clears a pending replacement timer when closeToast is called before mount', async () => {
+    render(<Toaster ref={toasterRef} />);
+
+    await act(async () => {
+      toasterRef.current?.showToast({
+        hasNoTimeout: true,
+        title: 'Will be cancelled',
+      });
+      toasterRef.current?.closeToast();
+      jest.runAllTimers();
+    });
+
+    expect(screen.queryByText('Will be cancelled')).not.toBeInTheDocument();
   });
 
   it('clears auto-dismiss timer when showToast replaces a visible toast', async () => {
@@ -332,6 +366,25 @@ describe('Toaster', () => {
     });
 
     expect(screen.queryByText('Will be unmounted')).not.toBeInTheDocument();
+  });
+
+  it('cancels the enter animation frame on unmount before the toast is visible', async () => {
+    const { unmount } = render(<Toaster ref={toasterRef} />);
+
+    await act(async () => {
+      toasterRef.current?.showToast({
+        hasNoTimeout: true,
+        title: 'Entering',
+      });
+    });
+
+    unmount();
+
+    await act(async () => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.queryByText('Entering')).not.toBeInTheDocument();
   });
 
   it('cancels pending replacement when closeToast is called', async () => {
