@@ -8,6 +8,7 @@ import { Icon, IconName } from '../Icon';
 import { Tag } from '../Tag';
 
 import type { ListItemProps } from './ListItem.types';
+
 import { ListItem } from '.';
 
 const meta: Meta<ListItemProps> = {
