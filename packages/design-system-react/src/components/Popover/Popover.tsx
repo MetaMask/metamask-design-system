@@ -11,6 +11,8 @@ import type { PopoverProps } from './Popover.types';
 
 type ArrowPlacementKey = keyof typeof POPOVER_ARROW_PLACEMENT_STYLES;
 
+const CAPTURE_EVENT_LISTENER_OPTIONS = { capture: true };
+
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
@@ -69,38 +71,58 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     });
 
     useEffect(() => {
+      if (!isOpen || (!onPressEscKey && !onClickOutside)) {
+        return undefined;
+      }
+
       const handleEscKey = (event: KeyboardEvent) => {
-        if (event.key === 'Escape' && onPressEscKey) {
-          onPressEscKey();
+        if (event.key === 'Escape') {
+          onPressEscKey?.();
         }
       };
 
       const handleClickOutside = (event: MouseEvent) => {
         if (
-          isOpen &&
           popoverRef.current &&
           !popoverRef.current.contains(event.target as Node) &&
-          !referenceElement?.contains(event.target as Node) &&
-          onClickOutside
+          !referenceElement?.contains(event.target as Node)
         ) {
-          onClickOutside();
+          onClickOutside?.();
         }
       };
 
-      if (isOpen) {
-        document.addEventListener('keydown', handleEscKey, { capture: true });
-        document.addEventListener('click', handleClickOutside, {
-          capture: true,
-        });
+      if (onPressEscKey) {
+        document.addEventListener(
+          'keydown',
+          handleEscKey,
+          CAPTURE_EVENT_LISTENER_OPTIONS,
+        );
+      }
+
+      if (onClickOutside) {
+        document.addEventListener(
+          'click',
+          handleClickOutside,
+          CAPTURE_EVENT_LISTENER_OPTIONS,
+        );
       }
 
       return () => {
-        document.removeEventListener('keydown', handleEscKey, {
-          capture: true,
-        } as EventListenerOptions);
-        document.removeEventListener('click', handleClickOutside, {
-          capture: true,
-        } as EventListenerOptions);
+        if (onPressEscKey) {
+          document.removeEventListener(
+            'keydown',
+            handleEscKey,
+            CAPTURE_EVENT_LISTENER_OPTIONS,
+          );
+        }
+
+        if (onClickOutside) {
+          document.removeEventListener(
+            'click',
+            handleClickOutside,
+            CAPTURE_EVENT_LISTENER_OPTIONS,
+          );
+        }
       };
     }, [onPressEscKey, isOpen, onClickOutside, referenceElement]);
 
