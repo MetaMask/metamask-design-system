@@ -1,6 +1,16 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import {
+  arrow,
+  autoPlacement,
+  autoUpdate,
+  flip,
+  hide,
+  offset,
+  shift,
+  useFloating,
+} from '@floating-ui/react-dom';
+import type { Middleware, Placement } from '@floating-ui/react-dom';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { usePopper } from 'react-popper';
 
 import { twMerge } from '../../utils/tw-merge';
 import { Box, BoxBackgroundColor, BoxBorderColor } from '../Box';
@@ -24,8 +34,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       hasArrow = false,
       matchWidth = false,
       preventOverflow = false,
-      offset = [0, 8],
-      flip = false,
+      offset: offsetProp = [0, 8],
+      flip: flipEnabled = false,
       referenceHidden = true,
       referenceElement,
       isOpen,
@@ -37,37 +47,34 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     },
     ref,
   ) => {
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
-      null,
-    );
-    const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(
-      null,
-    );
+    const arrowRef = useRef<HTMLDivElement | null>(null);
     const popoverRef = useRef<HTMLDivElement | null>(null);
 
     const isAuto = position === PopoverPosition.Auto;
+    const [offsetSkidding, offsetDistance] = offsetProp;
 
-    const { styles, attributes } = usePopper(referenceElement, popperElement, {
-      placement: position,
-      modifiers: [
-        {
-          name: 'preventOverflow',
-          enabled: isAuto ? true : preventOverflow,
-        },
-        {
-          name: 'flip',
-          enabled: isAuto ? true : flip,
-        },
-        {
-          name: 'arrow',
-          enabled: hasArrow,
-          options: { element: arrowElement },
-        },
-        {
-          name: 'offset',
-          options: { offset },
-        },
-      ],
+    const middleware: Middleware[] = [
+      offset({ mainAxis: offsetDistance, crossAxis: offsetSkidding }),
+    ];
+    if (isAuto) {
+      middleware.push(autoPlacement());
+    } else if (flipEnabled) {
+      middleware.push(flip());
+    }
+    if (isAuto || preventOverflow) {
+      middleware.push(shift());
+    }
+    if (hasArrow) {
+      middleware.push(arrow({ element: arrowRef }));
+    }
+    middleware.push(hide());
+
+    const { refs, floatingStyles, placement, middlewareData } = useFloating({
+      open: isOpen,
+      whileElementsMounted: autoUpdate,
+      placement: isAuto ? 'bottom' : (position as Placement),
+      elements: { reference: referenceElement ?? null },
+      middleware,
     });
 
     useEffect(() => {
@@ -130,15 +137,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       return null;
     }
 
-    const placement = attributes.popper?.['data-popper-placement'];
-    const arrowPlacementStyle = placement
-      ? POPOVER_ARROW_PLACEMENT_STYLES[
-          placement.split('-')[0] as ArrowPlacementKey
-        ]
-      : undefined;
+    const arrowSide = placement.split('-')[0] as ArrowPlacementKey;
+    const arrowPlacementStyle = POPOVER_ARROW_PLACEMENT_STYLES[arrowSide];
+    const referenceHiddenValue = Boolean(middlewareData.hide?.referenceHidden);
 
     const popoverStyle: React.CSSProperties = {
-      ...styles.popper,
+      ...floatingStyles,
       width: matchWidth ? referenceElement?.clientWidth : 'auto',
       ...style,
     };
@@ -149,7 +153,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       } else if (ref) {
         ref.current = element;
       }
-      setPopperElement(element);
+      refs.setFloating(element);
       popoverRef.current = element;
     };
 
@@ -161,24 +165,28 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         padding={4}
         role={role}
         ref={setPopoverRef}
+        data-popper-placement={placement}
+        data-popper-reference-hidden={referenceHiddenValue}
         className={twMerge(
           'rounded-lg shadow-md',
           referenceHidden &&
             'data-[popper-reference-hidden=true]:pointer-events-none data-[popper-reference-hidden=true]:invisible',
           className,
         )}
-        {...attributes.popper}
         {...props}
         style={popoverStyle}
       >
         {children}
         {hasArrow && (
           <Box
-            ref={setArrowElement}
+            ref={arrowRef}
             data-testid="popover-arrow"
             className="invisible absolute size-10"
-            style={{ ...styles.arrow, ...arrowPlacementStyle?.container }}
-            {...attributes.arrow}
+            style={{
+              left: middlewareData.arrow?.x,
+              top: middlewareData.arrow?.y,
+              ...arrowPlacementStyle.container,
+            }}
             {...arrowProps}
           >
             <Box
@@ -187,7 +195,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               borderWidth={1}
               data-testid="popover-arrow-visual"
               className="visible absolute left-1/2 top-1/2 -ml-1 -mt-1 size-2 rounded-tl-sm border-b-transparent border-r-transparent"
-              style={arrowPlacementStyle?.visual}
+              style={arrowPlacementStyle.visual}
             />
           </Box>
         )}

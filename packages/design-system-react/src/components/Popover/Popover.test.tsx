@@ -1,51 +1,93 @@
+import {
+  arrow,
+  autoPlacement,
+  flip,
+  offset,
+  shift,
+  useFloating,
+} from '@floating-ui/react-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef, useState } from 'react';
-import { usePopper } from 'react-popper';
 
 import { Popover } from './Popover';
 import { PopoverPosition, PopoverRole } from './Popover.types';
 
-jest.mock('react-popper', () => ({
-  usePopper: jest.fn(),
-}));
+jest.mock('@floating-ui/react-dom', () => {
+  const actual = jest.requireActual('@floating-ui/react-dom');
+  return {
+    __esModule: true,
+    ...actual,
+    useFloating: jest.fn(),
+    offset: jest.fn((...args: unknown[]) =>
+      (actual.offset as (...a: unknown[]) => unknown)(...args),
+    ),
+    flip: jest.fn((...args: unknown[]) =>
+      (actual.flip as (...a: unknown[]) => unknown)(...args),
+    ),
+    shift: jest.fn((...args: unknown[]) =>
+      (actual.shift as (...a: unknown[]) => unknown)(...args),
+    ),
+    arrow: jest.fn((...args: unknown[]) =>
+      (actual.arrow as (...a: unknown[]) => unknown)(...args),
+    ),
+    hide: jest.fn((...args: unknown[]) =>
+      (actual.hide as (...a: unknown[]) => unknown)(...args),
+    ),
+    autoPlacement: jest.fn((...args: unknown[]) =>
+      (actual.autoPlacement as (...a: unknown[]) => unknown)(...args),
+    ),
+  };
+});
 
-const mockedUsePopper = usePopper as jest.MockedFunction<typeof usePopper>;
+const mockedUseFloating = useFloating as jest.MockedFunction<
+  typeof useFloating
+>;
+const mockedOffset = offset as jest.MockedFunction<typeof offset>;
+const mockedFlip = flip as jest.MockedFunction<typeof flip>;
+const mockedShift = shift as jest.MockedFunction<typeof shift>;
+const mockedArrow = arrow as jest.MockedFunction<typeof arrow>;
+const mockedAutoPlacement = autoPlacement as jest.MockedFunction<
+  typeof autoPlacement
+>;
 
-const usePopperResult = (
+const useFloatingResult = (
   overrides: {
     placement?: string;
-    popperStyles?: React.CSSProperties;
-    arrowStyles?: React.CSSProperties;
-    popperAttributes?: Record<string, unknown>;
-    arrowAttributes?: Record<string, unknown>;
+    floatingStyles?: React.CSSProperties;
+    arrowData?: { x?: number; y?: number };
+    referenceHidden?: boolean;
   } = {},
 ) =>
   ({
-    styles: {
-      popper: overrides.popperStyles ?? {},
-      arrow: overrides.arrowStyles ?? {},
+    refs: {
+      setReference: jest.fn(),
+      setFloating: jest.fn(),
+      setPositionReference: jest.fn(),
+      reference: { current: null },
+      floating: { current: null },
+      domReference: { current: null },
     },
-    attributes: {
-      popper:
-        overrides.placement || overrides.popperAttributes
-          ? {
-              ...(overrides.placement
-                ? { 'data-popper-placement': overrides.placement }
-                : {}),
-              ...(overrides.popperAttributes ?? {}),
-            }
+    floatingStyles: overrides.floatingStyles ?? {},
+    placement: overrides.placement ?? 'bottom',
+    middlewareData: {
+      arrow: overrides.arrowData,
+      hide:
+        overrides.referenceHidden !== undefined
+          ? { referenceHidden: overrides.referenceHidden, escaped: false }
           : undefined,
-      arrow: overrides.arrowAttributes,
     },
-    update: null,
-    forceUpdate: null,
-    state: null,
-    visible: true,
-  }) as unknown as ReturnType<typeof usePopper>;
+    isPositioned: true,
+    update: jest.fn(),
+    x: 0,
+    y: 0,
+    strategy: 'absolute' as const,
+    elements: { reference: null, floating: null, domReference: null },
+  }) as unknown as ReturnType<typeof useFloating>;
 
 describe('Popover', () => {
   beforeEach(() => {
-    mockedUsePopper.mockReturnValue(usePopperResult());
+    jest.clearAllMocks();
+    mockedUseFloating.mockReturnValue(useFloatingResult());
   });
 
   describe('isOpen', () => {
@@ -125,8 +167,8 @@ describe('Popover', () => {
     });
 
     it('merges consumer style on top of computed popper styles', () => {
-      mockedUsePopper.mockReturnValue(
-        usePopperResult({ popperStyles: { left: '10px', top: '20px' } }),
+      mockedUseFloating.mockReturnValue(
+        useFloatingResult({ floatingStyles: { left: '10px', top: '20px' } }),
       );
       render(
         <Popover
@@ -147,17 +189,11 @@ describe('Popover', () => {
   });
 
   describe('position', () => {
-    it('uses Auto by default and forces flip and preventOverflow on', () => {
+    it('uses Auto by default and applies autoPlacement and shift middleware', () => {
       render(<Popover isOpen>x</Popover>);
-      const callArgs = mockedUsePopper.mock.calls[0][2];
-      expect(callArgs?.placement).toBe('auto');
-      const modifiers = callArgs?.modifiers ?? [];
-      expect(modifiers).toStrictEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ name: 'flip', enabled: true }),
-          expect.objectContaining({ name: 'preventOverflow', enabled: true }),
-        ]),
-      );
+      expect(mockedAutoPlacement).toHaveBeenCalled();
+      expect(mockedShift).toHaveBeenCalled();
+      expect(mockedFlip).not.toHaveBeenCalled();
     });
 
     it('passes the requested position when not Auto and respects flip and preventOverflow flags', () => {
@@ -171,15 +207,11 @@ describe('Popover', () => {
           x
         </Popover>,
       );
-      const callArgs = mockedUsePopper.mock.calls[0][2];
+      const callArgs = mockedUseFloating.mock.calls[0][0];
       expect(callArgs?.placement).toBe('top');
-      const modifiers = callArgs?.modifiers ?? [];
-      expect(modifiers).toStrictEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ name: 'flip', enabled: false }),
-          expect.objectContaining({ name: 'preventOverflow', enabled: false }),
-        ]),
-      );
+      expect(mockedAutoPlacement).not.toHaveBeenCalled();
+      expect(mockedFlip).not.toHaveBeenCalled();
+      expect(mockedShift).not.toHaveBeenCalled();
     });
 
     it('honors flip and preventOverflow when explicitly enabled with a non-Auto position', () => {
@@ -188,32 +220,20 @@ describe('Popover', () => {
           x
         </Popover>,
       );
-      const callArgs = mockedUsePopper.mock.calls[0][2];
-      const modifiers = callArgs?.modifiers ?? [];
-      expect(modifiers).toStrictEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ name: 'flip', enabled: true }),
-          expect.objectContaining({ name: 'preventOverflow', enabled: true }),
-        ]),
-      );
+      expect(mockedFlip).toHaveBeenCalled();
+      expect(mockedShift).toHaveBeenCalled();
     });
 
-    it('forwards the offset prop to the offset modifier', () => {
+    it('forwards the offset prop to the offset middleware', () => {
       render(
         <Popover isOpen offset={[4, 16]}>
           x
         </Popover>,
       );
-      const callArgs = mockedUsePopper.mock.calls[0][2];
-      const modifiers = callArgs?.modifiers ?? [];
-      expect(modifiers).toStrictEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            name: 'offset',
-            options: { offset: [4, 16] },
-          }),
-        ]),
-      );
+      expect(mockedOffset).toHaveBeenCalledWith({
+        mainAxis: 16,
+        crossAxis: 4,
+      });
     });
   });
 
@@ -227,21 +247,23 @@ describe('Popover', () => {
       expect(screen.queryByTestId('popover-arrow')).not.toBeInTheDocument();
     });
 
-    it('renders an arrow and disables the arrow modifier accordingly', () => {
+    it('renders an arrow and applies the arrow middleware', () => {
       render(
         <Popover data-testid="popover" isOpen hasArrow>
           x
         </Popover>,
       );
       expect(screen.getByTestId('popover-arrow')).toBeInTheDocument();
+      expect(mockedArrow).toHaveBeenCalled();
+    });
 
-      const callArgs = mockedUsePopper.mock.calls[0][2];
-      const modifiers = callArgs?.modifiers ?? [];
-      expect(modifiers).toStrictEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ name: 'arrow', enabled: true }),
-        ]),
+    it('does not apply the arrow middleware when hasArrow is false', () => {
+      render(
+        <Popover data-testid="popover" isOpen>
+          x
+        </Popover>,
       );
+      expect(mockedArrow).not.toHaveBeenCalled();
     });
 
     it('forwards arrowProps to the arrow element', () => {
@@ -258,9 +280,9 @@ describe('Popover', () => {
           x
         </Popover>,
       );
-      const arrow = document.getElementById('custom-arrow');
-      expect(arrow).not.toBeNull();
-      expect(arrow).toHaveClass('custom-arrow-class');
+      const arrowEl = document.getElementById('custom-arrow');
+      expect(arrowEl).not.toBeNull();
+      expect(arrowEl).toHaveClass('custom-arrow-class');
     });
 
     it.each([
@@ -273,7 +295,12 @@ describe('Popover', () => {
     ])(
       'rotates the arrow visual for %s placement',
       (placement, expectedTransform) => {
-        mockedUsePopper.mockReturnValue(usePopperResult({ placement }));
+        mockedUseFloating.mockReturnValue(
+          useFloatingResult({
+            placement,
+            arrowData: { x: 12, y: undefined },
+          }),
+        );
         render(
           <Popover isOpen hasArrow>
             x
@@ -284,17 +311,18 @@ describe('Popover', () => {
       },
     );
 
-    it('uses the unrotated arrow visual when no placement has resolved yet', () => {
-      mockedUsePopper.mockReturnValue(usePopperResult());
+    it('exposes the resolved placement and reference-hidden state on the popover root', () => {
+      mockedUseFloating.mockReturnValue(
+        useFloatingResult({ placement: 'top', referenceHidden: true }),
+      );
       render(
-        <Popover isOpen hasArrow>
+        <Popover data-testid="popover" isOpen hasArrow>
           x
         </Popover>,
       );
-      const visual = screen.getByTestId('popover-arrow-visual');
-      // Without a placement the inline transform is not set, so the inherited
-      // `none` style remains.
-      expect(visual).not.toHaveStyle({ transform: 'rotate(-135deg)' });
+      const root = screen.getByTestId('popover');
+      expect(root).toHaveAttribute('data-popper-placement', 'top');
+      expect(root).toHaveAttribute('data-popper-reference-hidden', 'true');
     });
   });
 
