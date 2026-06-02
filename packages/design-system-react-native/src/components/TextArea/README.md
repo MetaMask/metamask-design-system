@@ -40,7 +40,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `placeholder`
 
-Optional placeholder string for the root input.
+Optional placeholder string for the input.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -54,7 +54,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `isReadOnly`
 
-When true, the root input is not editable.
+When true, the input is not editable.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -68,7 +68,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `onFocus`
 
-Optional handler when the root input receives focus. TextArea composes this with its own focus border behavior.
+Optional handler when the input receives focus. TextArea composes this with its own focus border behavior.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -82,7 +82,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `onBlur`
 
-Optional handler when the root input loses focus. TextArea composes this with its own focus border behavior.
+Optional handler when the input loses focus. TextArea composes this with its own focus border behavior.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -149,7 +149,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `isDisabled`
 
-When true, the field applies reduced opacity and forwards disabled state to the root input (non-editable).
+When true, the field applies reduced opacity and forwards disabled state to the input (non-editable).
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -163,7 +163,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `autoFocus`
 
-When true, the root input requests focus on mount.
+When true, the input requests focus on mount.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |

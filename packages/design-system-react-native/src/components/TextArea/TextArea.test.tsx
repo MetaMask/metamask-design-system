@@ -35,7 +35,7 @@ describe('TextArea', () => {
       expect(getByTestId('custom-test-id')).toBeOnTheScreen();
     });
 
-    it('forwards TextInput props to the root Input', () => {
+    it('forwards TextInput props to the input', () => {
       const { getByPlaceholderText } = render(
         <TextArea
           value=""
@@ -50,7 +50,7 @@ describe('TextArea', () => {
       );
     });
 
-    it('applies TextArea chrome classes to the root Input', () => {
+    it('applies TextArea chrome classes to the input', () => {
       const { getByTestId } = render(
         <TextArea
           value=""
@@ -63,7 +63,7 @@ describe('TextArea', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-2`);
     });
 
-    it('uses the default chrome classes on the root Input', () => {
+    it('uses the default chrome classes on the input', () => {
       const { getByTestId } = render(
         <TextArea
           value=""
@@ -77,7 +77,7 @@ describe('TextArea', () => {
   });
 
   describe('multiline input', () => {
-    it('sets multiline to true on the root input', () => {
+    it('sets multiline to true on the input', () => {
       const { getByPlaceholderText } = render(
         <TextArea value="" placeholder="multiline-field" />,
       );
@@ -88,7 +88,7 @@ describe('TextArea', () => {
       );
     });
 
-    it('sets textAlignVertical to top on the root input', () => {
+    it('sets textAlignVertical to top on the input', () => {
       const { getByPlaceholderText } = render(
         <TextArea value="" placeholder="top-align" />,
       );
@@ -119,7 +119,7 @@ describe('TextArea', () => {
   });
 
   describe('TextInput props', () => {
-    it('forwards secureTextEntry to the root Input', () => {
+    it('forwards secureTextEntry to the input', () => {
       const { getByPlaceholderText } = render(
         <TextArea value="" placeholder="secure" secureTextEntry />,
       );
@@ -130,7 +130,7 @@ describe('TextArea', () => {
       );
     });
 
-    it('forwards isReadOnly to the root Input', () => {
+    it('forwards isReadOnly to the input', () => {
       const { getByPlaceholderText } = render(
         <TextArea value="" placeholder="readonly-test" isReadOnly />,
       );
@@ -311,7 +311,7 @@ describe('TextArea', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-default`);
     });
 
-    it('applies twClassName to the root Input', () => {
+    it('applies twClassName to the input', () => {
       const { getByTestId } = render(
         <TextArea value="" testID={ROOT_TEST_ID} twClassName="mt-4" />,
       );
@@ -328,7 +328,7 @@ describe('TextArea', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ marginBottom: 20 });
     });
 
-    it('merges twClassName and style on the root Input', () => {
+    it('merges twClassName and style on the input', () => {
       const customStyle = { marginBottom: 12 };
       const { getByTestId } = render(
         <TextArea
@@ -491,7 +491,7 @@ describe('TextArea', () => {
   });
 
   describe('disabled state', () => {
-    it('disables the root Input when isDisabled is true', () => {
+    it('disables the input when isDisabled is true', () => {
       const { getByPlaceholderText } = render(
         <TextArea value="" placeholder="disabled-input" isDisabled />,
       );
