@@ -103,6 +103,27 @@ If you were relying on `simultaneousHandlers` for nested scroll behaviour, this 
 
 See [HeaderBase Component](#headerbase-component) and [BottomSheetHeader Component](#bottomsheetheader-component) for complete before/after examples and API mappings.
 
+#### TextArea: flattened to the root `TextInput`
+
+`TextArea` now renders the root `TextInput` directly instead of wrapping it in a separate container with a nested input slot.
+
+**What changed:**
+
+- **`inputElement`** is removed.
+- **`inputProps`** is removed. Pass `TextInput` props directly on `TextArea`.
+- **`inputRef`** is removed. Use the component **`ref`** to access the root **`TextInput`**.
+- **`testID`**, **`style`**, and **`twClassName`** now apply to the root **`TextInput`**.
+
+**Migration:**
+
+- Move any custom input replacement out of `TextArea` and compose it around the component instead.
+- Pass native **`TextInput`** props directly to `TextArea`.
+- Update any imperative focus or measurement logic to use the component **`ref`**.
+
+**Impact:**
+
+- Existing call sites that relied on the wrapper `Box`, `inputProps`, or `inputRef` must update to the flattened API.
+
 ### From version 0.24.0 to 0.25.0
 
 #### BannerBase: `onClose` is now the only close-button behavior API
@@ -3299,7 +3320,6 @@ These props work identically in both versions — no migration needed:
 | `autoFocus`          | `boolean`                | Auto-focus on mount                       |
 | `startAccessory`     | `ReactNode`              | Content before the input                  |
 | `endAccessory`       | `ReactNode`              | Content after the input                   |
-| `inputElement`       | `ReactNode`              | Custom input replacement                  |
 | `ref`                | `Ref<TextInput>`         | Forwarded to inner TextInput              |
 | `numberOfLines`      | Forced to `1`            | Single-line enforced                      |
 | `multiline`          | Forced to `false`        | Single-line enforced                      |
