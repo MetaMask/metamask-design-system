@@ -225,13 +225,6 @@ const config = createConfig([
       'import-x/no-default-export': 'error',
     },
   },
-  // React Native storybook stories may import @storybook/react for web-rendered demos
-  {
-    files: ['apps/storybook-react-native/stories/**'],
-    rules: {
-      'storybook/no-renderer-packages': 'off',
-    },
-  },
   // Tailwind ESLint for React Web
   {
     files: [
