@@ -9,7 +9,12 @@ export type ListItemPropsShared = {
    */
   isInteractive?: boolean;
   /**
-   * Optional content rendered below the main Content block inside the padded root.
+   * Sub-components (`ListItem.Title`, `ListItem.Description`, etc.) or
+   * arbitrary content rendered inside the padded root.
+   *
+   * When children are provided, they render in-place and flat props
+   * (`title`, `description`, `value`, etc.) are ignored. When absent,
+   * flat props drive the layout via `Content`.
    */
   children?: ReactNode;
 };

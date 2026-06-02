@@ -138,10 +138,10 @@ describe('ListItem', () => {
       expect(getByText('Description text')).toBeOnTheScreen();
     });
 
-    it('applies color prop on ListItem.Subvalue', () => {
+    it('applies textProps color on ListItem.Subvalue', () => {
       const { getByText } = render(
         <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Subvalue color={TextColor.SuccessDefault}>
+          <ListItem.Subvalue textProps={{ color: TextColor.SuccessDefault }}>
             +2.5%
           </ListItem.Subvalue>
         </ListItem>,
@@ -162,13 +162,10 @@ describe('ListItem', () => {
       );
     });
 
-    it('prefers inline Text props over textProps on the same sub-component', () => {
+    it('applies textProps on ListItem.Value when provided', () => {
       const { getByText } = render(
         <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Value
-            textProps={{ color: TextColor.ErrorDefault }}
-            color={TextColor.SuccessDefault}
-          >
+          <ListItem.Value textProps={{ color: TextColor.SuccessDefault }}>
             $10.00
           </ListItem.Value>
         </ListItem>,
@@ -176,10 +173,10 @@ describe('ListItem', () => {
       expect(getByText('$10.00')).toHaveStyle(tw.style('text-success-default'));
     });
 
-    it('applies variant prop on ListItem.Title', () => {
+    it('applies textProps variant on ListItem.Title', () => {
       const { getByText } = render(
         <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Title variant={TextVariant.BodySm}>
+          <ListItem.Title textProps={{ variant: TextVariant.BodySm }}>
             Small title
           </ListItem.Title>
         </ListItem>,
