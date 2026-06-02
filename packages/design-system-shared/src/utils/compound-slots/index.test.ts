@@ -5,7 +5,7 @@ import {
   partitionChildren,
   pickProp,
   useCompoundSlots,
-} from './index';
+} from '.';
 
 describe('compound-slots index', () => {
   it('re-exports compound slot utilities', () => {

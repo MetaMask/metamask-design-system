@@ -44,9 +44,10 @@ export const ListItemRoot: React.FC<ListItemProps> = ({
 }) => {
   const tw = useTailwind();
 
-  const wrapperStyle = style
-    ? [tw.style('px-4 py-3', twClassName), style]
-    : tw.style('px-4 py-3', twClassName);
+  const wrapperStyle =
+    style !== undefined
+      ? [tw.style('px-4 py-3', twClassName), style]
+      : tw.style('px-4 py-3', twClassName);
 
   const getPressableStyle = ({
     pressed,
@@ -56,7 +57,9 @@ export const ListItemRoot: React.FC<ListItemProps> = ({
       twClassName,
       pressed && 'bg-pressed',
     );
-    if (!style) return baseStyle;
+    if (!style) {
+      return baseStyle;
+    }
     const userStyle = typeof style === 'function' ? style({ pressed }) : style;
     return [baseStyle, userStyle];
   };

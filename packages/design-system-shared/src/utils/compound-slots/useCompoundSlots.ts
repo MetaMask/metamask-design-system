@@ -70,7 +70,7 @@ export const useCompoundSlots = <
         nonSlotChildren && nonSlotChildren.length > 0 ? nonSlotChildren : null;
 
       return {
-        mergedProps: mergedProps,
+        mergedProps,
         children: partitionedChildren,
         hasSlots: true,
       };

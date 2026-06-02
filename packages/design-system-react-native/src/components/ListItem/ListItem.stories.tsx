@@ -2,13 +2,13 @@ import { ContentVerticalAlignment } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
 import { AvatarToken } from '../AvatarToken';
+import { Box } from '../Box';
 import { Icon, IconName } from '../Icon';
 import { Tag } from '../Tag';
 
-import { ListItem } from '.';
 import type { ListItemProps } from './ListItem.types';
+import { ListItem } from '.';
 
 const meta: Meta<ListItemProps> = {
   title: 'Components/ListItem',
@@ -43,7 +43,7 @@ export const Default: Story = {
 
 export const IsInteractive: Story = {
   render: (args: ListItemProps) => (
-    <ListItem {...args} isInteractive onPress={() => {}} />
+    <ListItem {...args} isInteractive onPress={() => undefined} />
   ),
 };
 
@@ -101,7 +101,6 @@ export const SlotComposition: Story = {
           <ListItem.Value>$5,678.00</ListItem.Value>
           <ListItem.Subvalue>1.2 ETH</ListItem.Subvalue>
         </Box>
-        <Icon name="ArrowRight" />
       </ListItem>
     </>
   ),

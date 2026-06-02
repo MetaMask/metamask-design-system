@@ -36,7 +36,7 @@ describe('parseCompoundSlots', () => {
         {} as Parsed,
       );
 
-      expect(parsed).toEqual({ title: 'Label', value: '100' });
+      expect(parsed).toStrictEqual({ title: 'Label', value: '100' });
     });
 
     it('skips slots without handlers', () => {
@@ -53,7 +53,7 @@ describe('parseCompoundSlots', () => {
         {} as Parsed,
       );
 
-      expect(parsed).toEqual({});
+      expect(parsed).toStrictEqual({});
     });
   });
 });

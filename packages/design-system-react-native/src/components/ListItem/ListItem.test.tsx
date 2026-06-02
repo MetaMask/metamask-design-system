@@ -69,7 +69,7 @@ describe('ListItem', () => {
         <ListItem
           isInteractive
           title="Label"
-          onPress={() => {}}
+          onPress={jest.fn()}
           testID={ROOT_TEST_ID}
         />,
       );
@@ -81,7 +81,7 @@ describe('ListItem', () => {
         <ListItem
           isInteractive
           title="Tappable row"
-          onPress={() => {}}
+          onPress={jest.fn()}
           testID={ROOT_TEST_ID}
         />,
       );

@@ -1,9 +1,7 @@
 import { createElement } from 'react';
 
-import {
-  createCompoundSlotSystem,
-  type SlotElement,
-} from './createCompoundSlotSystem';
+import type { SlotElement } from './createCompoundSlotSystem';
+import { createCompoundSlotSystem } from './createCompoundSlotSystem';
 
 const TestSlotId = {
   Title: 'Title',
@@ -70,4 +68,3 @@ describe('createCompoundSlotSystem', () => {
   });
 });
 
-export type { SlotElement };

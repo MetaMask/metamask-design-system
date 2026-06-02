@@ -1,12 +1,7 @@
 import type { FC } from 'react';
 
 import { ListItemRoot } from './ListItem';
-import {
-  ListItemDescription,
-  ListItemSubvalue,
-  ListItemTitle,
-  ListItemValue,
-} from './ListItem.parts';
+import { ListItemDescription, ListItemSubvalue, ListItemTitle, ListItemValue } from './ListItem.parts';
 import type { ListItemProps } from './ListItem.types';
 
 export {

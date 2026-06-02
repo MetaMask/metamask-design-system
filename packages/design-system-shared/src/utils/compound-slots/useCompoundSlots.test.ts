@@ -1,4 +1,4 @@
-import React, { createElement } from 'react';
+import { createElement, useState } from 'react';
 import { act, create } from 'react-test-renderer';
 
 import { createCompoundSlotSystem } from './createCompoundSlotSystem';
@@ -63,7 +63,7 @@ describe('useCompoundSlots', () => {
       });
 
       expect(result.hasSlots).toBe(true);
-      expect(result.mergedProps).toEqual({ title: 'From slot' });
+      expect(result.mergedProps).toStrictEqual({ title: 'From slot' });
       expect(result.children).toHaveLength(1);
     });
 
@@ -89,7 +89,7 @@ describe('useCompoundSlots', () => {
       });
 
       expect(result.hasSlots).toBe(true);
-      expect(result.mergedProps).toEqual({ title: 'From slot' });
+      expect(result.mergedProps).toStrictEqual({ title: 'From slot' });
       expect(result.children).toBeNull();
     });
 
@@ -144,7 +144,7 @@ describe('useCompoundSlots', () => {
       });
 
       expect(result.hasSlots).toBe(false);
-      expect(result.mergedProps).toEqual({ title: 'From prop' });
+      expect(result.mergedProps).toStrictEqual({ title: 'From prop' });
       expect(result.children).not.toBeNull();
     });
 
@@ -182,7 +182,7 @@ describe('useCompoundSlots', () => {
       };
 
       function Consumer() {
-        const [, setState] = React.useState(0);
+        const [, setState] = useState(0);
         setTick = setState;
 
         useCompoundSlots<TestProps, ParsedTestProps>({

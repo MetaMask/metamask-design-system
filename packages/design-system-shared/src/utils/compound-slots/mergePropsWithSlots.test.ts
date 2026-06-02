@@ -32,7 +32,7 @@ describe('mergePropsWithSlots', () => {
         children: 'ignored',
       };
 
-      expect(mergePropsWithSlots(props, slotProps)).toEqual({
+      expect(mergePropsWithSlots(props, slotProps)).toStrictEqual({
         title: 'From prop',
         value: '100',
       });
