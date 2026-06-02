@@ -179,15 +179,18 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         {children}
         {hasArrow && (
           <Box
-            ref={arrowRef}
             data-testid="popover-arrow"
-            className="invisible absolute size-10"
+            {...arrowProps}
+            ref={arrowRef}
+            className={twMerge(
+              'invisible absolute size-10',
+              arrowProps?.className,
+            )}
             style={{
               left: middlewareData.arrow?.x,
               top: middlewareData.arrow?.y,
               ...arrowPlacementStyle.container,
             }}
-            {...arrowProps}
           >
             <Box
               backgroundColor={BoxBackgroundColor.BackgroundDefault}

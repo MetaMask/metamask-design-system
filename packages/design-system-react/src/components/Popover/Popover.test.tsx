@@ -266,7 +266,7 @@ describe('Popover', () => {
       expect(mockedArrow).not.toHaveBeenCalled();
     });
 
-    it('forwards arrowProps to the arrow element', () => {
+    it('forwards arrowProps to the arrow element and merges className with the internal positioning classes', () => {
       render(
         <Popover
           data-testid="popover"
@@ -282,7 +282,12 @@ describe('Popover', () => {
       );
       const arrowEl = document.getElementById('custom-arrow');
       expect(arrowEl).not.toBeNull();
+      // Consumer's className lands on the element
       expect(arrowEl).toHaveClass('custom-arrow-class');
+      // and the internal positioning classes are preserved (regression guard:
+      // `arrowProps` must not clobber the classes that anchor the arrow to
+      // popper's positioning)
+      expect(arrowEl).toHaveClass('invisible', 'absolute', 'size-10');
     });
 
     it.each([
