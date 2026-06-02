@@ -3,20 +3,9 @@ import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
 import { twMerge } from '../../utils/tw-merge';
-import {
-  Box,
-  BoxAlignItems,
-  BoxBackgroundColor,
-  BoxBorderColor,
-  BoxFlexDirection,
-  BoxJustifyContent,
-} from '../Box';
+import { Box, BoxBackgroundColor, BoxBorderColor } from '../Box';
 
-import {
-  POPOVER_ARROW_CONTAINER_STYLE,
-  POPOVER_ARROW_PLACEMENT_STYLES,
-  POPOVER_ARROW_VISUAL_STYLE,
-} from './Popover.constants';
+import { POPOVER_ARROW_PLACEMENT_STYLES } from './Popover.constants';
 import { PopoverPosition, PopoverRole } from './Popover.types';
 import type { PopoverProps } from './Popover.types';
 
@@ -163,26 +152,20 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         {children}
         {hasArrow && (
           <Box
-            borderColor={BoxBorderColor.BorderMuted}
-            flexDirection={BoxFlexDirection.Row}
-            justifyContent={BoxJustifyContent.Center}
-            alignItems={BoxAlignItems.Center}
             ref={setArrowElement}
             data-testid="popover-arrow"
-            style={{
-              ...POPOVER_ARROW_CONTAINER_STYLE,
-              ...styles.arrow,
-              ...arrowPlacementStyle?.container,
-            }}
+            className="invisible absolute size-10"
+            style={{ ...styles.arrow, ...arrowPlacementStyle?.container }}
             {...attributes.arrow}
             {...arrowProps}
           >
-            <span
+            <Box
+              backgroundColor={BoxBackgroundColor.BackgroundDefault}
+              borderColor={BoxBorderColor.BorderMuted}
+              borderWidth={1}
               data-testid="popover-arrow-visual"
-              style={{
-                ...POPOVER_ARROW_VISUAL_STYLE,
-                ...arrowPlacementStyle?.visual,
-              }}
+              className="visible absolute left-1/2 top-1/2 -ml-1 -mt-1 size-2 rounded-tl-sm border-b-transparent border-r-transparent"
+              style={arrowPlacementStyle?.visual}
             />
           </Box>
         )}

@@ -74,7 +74,7 @@ const ReferenceBox = ({
     flexDirection={BoxFlexDirection.Row}
     padding={4}
     asChild
-    style={{ width: 200, height: 200 }}
+    className="size-[200px]"
   >
     <button type="button" onClick={onClick}>
       <Text color={TextColor.PrimaryInverse}>{children}</Text>
@@ -134,7 +134,7 @@ export const Position: Story = {
         padding={12}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        style={{ minHeight: 600, minWidth: 800 }}
+        className="min-h-[600px] min-w-[800px]"
       >
         <Box
           ref={setReferenceElement}
@@ -143,7 +143,7 @@ export const Position: Story = {
           justifyContent={BoxJustifyContent.Center}
           flexDirection={BoxFlexDirection.Row}
           padding={4}
-          style={{ width: 360, height: 200 }}
+          className="h-[200px] w-[360px]"
         >
           <Text>Reference element</Text>
         </Box>

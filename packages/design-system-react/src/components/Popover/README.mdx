@@ -157,7 +157,7 @@ Renders a small notch pointing at the reference element. Position-aware — the 
 
 ### `arrowProps`
 
-Props forwarded to the arrow element, including `className` for additional styling and `data-testid` for tests.
+Props forwarded to the arrow element, such as `className` for additional styling and `data-testid` for tests. `ref`, `style`, and `children` are reserved for internal use (popper positioning, rotation styles, and the arrow visual) and cannot be overridden.
 
 <table>
   <thead>
@@ -169,7 +169,7 @@ Props forwarded to the arrow element, including `className` for additional styli
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>ComponentProps&lt;'div'&gt;</code></td>
+      <td align="left"><code>Omit&lt;ComponentProps&lt;'div'&gt;, 'ref' | 'style' | 'children'&gt;</code></td>
       <td align="left">No</td>
       <td align="left"><code>undefined</code></td>
     </tr>
