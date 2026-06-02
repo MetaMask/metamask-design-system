@@ -4,12 +4,7 @@ import { ListItemRoot } from './ListItem';
 import { ListItemDescription, ListItemSubvalue, ListItemTitle, ListItemValue } from './ListItem.parts';
 import type { ListItemProps } from './ListItem.types';
 
-export {
-  ListItemDescription,
-  ListItemSubvalue,
-  ListItemTitle,
-  ListItemValue,
-};
+export { ListItemDescription, ListItemSubvalue, ListItemTitle, ListItemValue };
 
 type ListItemCompoundComponent = FC<ListItemProps> & {
   Description: typeof ListItemDescription;
