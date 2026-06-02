@@ -347,25 +347,58 @@ describe('Toaster', () => {
     expect(screen.getByText('Replacement toast')).toBeInTheDocument();
   });
 
-  it('clears auto-dismiss timer on unmount', async () => {
+  it.each([
+    {
+      name: 'clears the auto-dismiss timer on unmount',
+      setup: async () => {
+        await showToastAndFlush(toasterRef, {
+          hasNoTimeout: false,
+          title: 'Will be unmounted',
+        });
+      },
+    },
+    {
+      name: 'clears the pending mount timer on unmount before the toast is shown',
+      setup: async () => {
+        await act(async () => {
+          toasterRef.current?.showToast({
+            hasNoTimeout: true,
+            title: 'Pending mount',
+          });
+        });
+      },
+    },
+    {
+      name: 'clears the pending exit timer on unmount when replacing a visible toast',
+      setup: async () => {
+        await showToastAndFlush(toasterRef, {
+          hasNoTimeout: true,
+          title: 'Visible toast',
+        });
+
+        await act(async () => {
+          toasterRef.current?.showToast({
+            hasNoTimeout: true,
+            title: 'Replacement toast',
+          });
+        });
+      },
+    },
+  ])('$name', async ({ setup }) => {
     const { unmount } = render(<Toaster ref={toasterRef} />);
+    const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout');
 
-    await showToastAndFlush(toasterRef, {
-      hasNoTimeout: false,
-      title: 'Will be unmounted',
-    });
+    await setup();
 
-    expect(screen.getByText('Will be unmounted')).toBeInTheDocument();
+    const clearTimeoutCallsBeforeUnmount = clearTimeoutSpy.mock.calls.length;
 
-    // Unmount while auto-dismiss timer is still pending.
     unmount();
 
-    // Running all timers should not throw (cleanup cleared the pending timer).
-    await act(async () => {
-      jest.runAllTimers();
-    });
+    expect(clearTimeoutSpy.mock.calls.length).toBeGreaterThan(
+      clearTimeoutCallsBeforeUnmount,
+    );
 
-    expect(screen.queryByText('Will be unmounted')).not.toBeInTheDocument();
+    clearTimeoutSpy.mockRestore();
   });
 
   it('cancels the enter animation frame on unmount before the toast is visible', async () => {

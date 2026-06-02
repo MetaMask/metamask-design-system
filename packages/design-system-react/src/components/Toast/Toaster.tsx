@@ -160,6 +160,28 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       return undefined;
     }, [isVisible]); // intentionally omit toastOptions — timer fires once per visibility change
 
+    useEffect(() => {
+      return () => {
+        if (replacementTimerRef.current !== null) {
+          clearTimeout(replacementTimerRef.current);
+          replacementTimerRef.current = null;
+        }
+        if (autoDismissTimerRef.current !== null) {
+          clearTimeout(autoDismissTimerRef.current);
+          autoDismissTimerRef.current = null;
+        }
+        if (exitTimerRef.current !== null) {
+          clearTimeout(exitTimerRef.current);
+          exitTimerRef.current = null;
+        }
+        if (enterAnimationFrameRef.current !== null) {
+          cancelAnimationFrame(enterAnimationFrameRef.current);
+          enterAnimationFrameRef.current = null;
+        }
+        pendingToastRef.current = undefined;
+      };
+    }, []);
+
     if (!toastOptions) {
       return null;
     }
