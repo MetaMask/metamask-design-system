@@ -56,7 +56,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const pendingToastRef = useRef<ToastOptions | undefined>(undefined);
     const innerRef = useRef<ToasterRef | null>(null);
 
-    const closeToast = () => {
+    const clearPendingTimers = () => {
       if (replacementTimerRef.current !== null) {
         clearTimeout(replacementTimerRef.current);
         replacementTimerRef.current = null;
@@ -69,6 +69,14 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         clearTimeout(exitTimerRef.current);
         exitTimerRef.current = null;
       }
+      if (enterAnimationFrameRef.current !== null) {
+        cancelAnimationFrame(enterAnimationFrameRef.current);
+        enterAnimationFrameRef.current = null;
+      }
+    };
+
+    const closeToast = () => {
+      clearPendingTimers();
       pendingToastRef.current = undefined;
       setIsVisible(false);
       exitTimerRef.current = setTimeout(() => {
@@ -135,10 +143,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         });
       }
       return () => {
-        if (enterAnimationFrameRef.current !== null) {
-          cancelAnimationFrame(enterAnimationFrameRef.current);
-          enterAnimationFrameRef.current = null;
-        }
+        clearPendingTimers();
       };
     }, [toastOptions]); // intentionally omit isVisible — only react to new toast options
 
@@ -151,10 +156,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
           innerRef.current?.closeToast();
         }, TOAST_VISIBILITY_DURATION);
         return () => {
-          if (autoDismissTimerRef.current !== null) {
-            clearTimeout(autoDismissTimerRef.current);
-            autoDismissTimerRef.current = null;
-          }
+          clearPendingTimers();
         };
       }
       return undefined;
@@ -162,22 +164,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
 
     useEffect(() => {
       return () => {
-        if (replacementTimerRef.current !== null) {
-          clearTimeout(replacementTimerRef.current);
-          replacementTimerRef.current = null;
-        }
-        if (autoDismissTimerRef.current !== null) {
-          clearTimeout(autoDismissTimerRef.current);
-          autoDismissTimerRef.current = null;
-        }
-        if (exitTimerRef.current !== null) {
-          clearTimeout(exitTimerRef.current);
-          exitTimerRef.current = null;
-        }
-        if (enterAnimationFrameRef.current !== null) {
-          cancelAnimationFrame(enterAnimationFrameRef.current);
-          enterAnimationFrameRef.current = null;
-        }
+        clearPendingTimers();
         pendingToastRef.current = undefined;
       };
     }, []);

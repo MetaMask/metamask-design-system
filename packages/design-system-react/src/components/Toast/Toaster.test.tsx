@@ -401,23 +401,107 @@ describe('Toaster', () => {
     clearTimeoutSpy.mockRestore();
   });
 
-  it('cancels the enter animation frame on unmount before the toast is visible', async () => {
+  it('cancels the enter animation frame on unmount while the toast is still entering', async () => {
     const { unmount } = render(<Toaster ref={toasterRef} />);
+    const pendingAnimationFrames = new Map<
+      number,
+      FrameRequestCallback
+    >();
+    let nextAnimationFrameId = 1;
+    const requestAnimationFrameSpy = jest
+      .spyOn(global, 'requestAnimationFrame')
+      .mockImplementation((callback) => {
+        const id = nextAnimationFrameId++;
+        pendingAnimationFrames.set(id, callback);
+        return id;
+      });
+    const cancelAnimationFrameSpy = jest
+      .spyOn(global, 'cancelAnimationFrame')
+      .mockImplementation((id) => {
+        pendingAnimationFrames.delete(id);
+      });
 
     await act(async () => {
       toasterRef.current?.showToast({
         hasNoTimeout: true,
         title: 'Entering',
       });
+      jest.runOnlyPendingTimers();
     });
+
+    expect(pendingAnimationFrames.size).toBe(1);
 
     unmount();
 
+    expect(screen.queryByText('Entering')).not.toBeInTheDocument();
+    expect(cancelAnimationFrameSpy).toHaveBeenCalled();
+    expect(pendingAnimationFrames.size).toBe(0);
+
+    requestAnimationFrameSpy.mockRestore();
+    cancelAnimationFrameSpy.mockRestore();
+  });
+
+  it('clears the auto-dismiss timer on unmount after the toast becomes visible', async () => {
+    const { unmount } = render(<Toaster ref={toasterRef} />);
+    const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout');
+    const pendingAnimationFrames = new Map<
+      number,
+      FrameRequestCallback
+    >();
+    let nextAnimationFrameId = 1;
+    const requestAnimationFrameSpy = jest
+      .spyOn(global, 'requestAnimationFrame')
+      .mockImplementation((callback) => {
+        const id = nextAnimationFrameId++;
+        pendingAnimationFrames.set(id, callback);
+        return id;
+      });
+    const cancelAnimationFrameSpy = jest
+      .spyOn(global, 'cancelAnimationFrame')
+      .mockImplementation((id) => {
+        pendingAnimationFrames.delete(id);
+      });
+    const flushNextAnimationFrame = () => {
+      const next = pendingAnimationFrames.entries().next();
+      if (next.done) {
+        throw new Error('Expected a pending animation frame');
+      }
+
+      const [id, callback] = next.value;
+      pendingAnimationFrames.delete(id);
+      callback(0);
+    };
+
     await act(async () => {
-      jest.runAllTimers();
+      toasterRef.current?.showToast({
+        hasNoTimeout: false,
+        title: 'Auto-dismiss cleanup',
+      });
+      jest.runOnlyPendingTimers();
     });
 
-    expect(screen.queryByText('Entering')).not.toBeInTheDocument();
+    await act(async () => {
+      flushNextAnimationFrame();
+    });
+
+    await act(async () => {
+      flushNextAnimationFrame();
+    });
+
+    expect(screen.getByText('Auto-dismiss cleanup')).toBeInTheDocument();
+    expect(pendingAnimationFrames.size).toBe(0);
+
+    const clearTimeoutCallsBeforeUnmount = clearTimeoutSpy.mock.calls.length;
+
+    unmount();
+
+    expect(clearTimeoutSpy.mock.calls.length).toBeGreaterThan(
+      clearTimeoutCallsBeforeUnmount,
+    );
+
+    requestAnimationFrameSpy.mockRestore();
+    cancelAnimationFrameSpy.mockRestore();
+    clearTimeoutSpy.mockRestore();
   });
 
   it('cancels pending replacement when closeToast is called', async () => {
