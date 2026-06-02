@@ -32,6 +32,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [AvatarToken Component](#avatartoken-component)
   - [AvatarGroup Component](#avatargroup-component)
   - [TextField Component](#textfield-component)
+  - [TextArea Component](#textarea-component)
   - [KeyValueRow Component](#keyvaluerow-component)
   - [ListItem Component](#listitem-component)
   - [TabEmptyState Component](#tabemptystate-component)
@@ -2777,6 +2778,58 @@ import { Input, TextVariant } from '@metamask/design-system-react-native';
 - **Controlled `value`:** the design system requires `value: string` as part of `InputProps`; the legacy `Input` type still allowed the full `TextInput` surface including uncontrolled usage.
 - **`autoFocus` default** is `false` in MMDS (`true` in the legacy `Input` implementation) — set explicitly when you need first-mount focus.
 - Styling: design system input uses the shared Tailwind + token pipeline (`twClassName`); single-line metrics use `MAP_TEXT_VARIANT_INPUT_METRICS` (font size/letter spacing without paragraph `lineHeight`) for consistent `TextInput` layout.
+
+### TextArea Component
+
+The TextArea component in `@metamask/design-system-react-native` maps the mobile multiline text area to the design system. It keeps the controlled `value` / `onChangeText` flow and renders the built-in `TextInput` directly.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                   | Design System Migration                                                     |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `import TextArea from '.../component-library/components/Form/TextArea'`          | `import { TextArea } from '@metamask/design-system-react-native'`           |
+| `import { TextAreaProps } from '.../component-library/components/Form/TextArea'` | `import type { TextAreaProps } from '@metamask/design-system-react-native'` |
+
+The mobile component uses a **default export**; the design system uses a **named export**.
+
+##### Removed `inputElement`
+
+| Mobile Behavior                                    | Design System Behavior                                                                     |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `inputElement` could replace the inner `TextInput` | `inputElement` is not supported; the design system always renders its built-in `TextInput` |
+
+##### Removed wrapper and flattening the root props
+
+| Mobile Behavior                                                 | Design System Behavior                                 |
+| --------------------------------------------------------------- | ------------------------------------------------------ |
+| `TextArea` wrapped the inner `TextInput` in a root `Box`        | `TextArea` renders the root `TextInput` directly       |
+| `inputProps` forwarded props to the inner `TextInput`           | pass `TextInput` props directly on `TextArea`          |
+| `inputRef` targeted the inner `TextInput`                       | use the component `ref` to access the root `TextInput` |
+| `testID`, `style`, and `twClassName` targeted the wrapper `Box` | those props now apply directly to the root `TextInput` |
+
+If you were using custom input replacement or wrapper layout concerns, move that composition outside `TextArea` and use the root `TextInput` props directly instead.
+
+#### Unchanged Props
+
+These props work the same in both versions — no migration needed:
+
+| Prop           | Type                     | Notes                                     |
+| -------------- | ------------------------ | ----------------------------------------- |
+| `value`        | `string`                 | Controlled input value                    |
+| `placeholder`  | `string`                 | Placeholder text                          |
+| `onChangeText` | `(text: string) => void` | Text change handler                       |
+| `onFocus`      | `(e) => void`            | Focus handler                             |
+| `onBlur`       | `(e) => void`            | Blur handler                              |
+| `isError`      | `boolean`                | Error border state                        |
+| `isDisabled`   | `boolean`                | Disabled state (opacity + no interaction) |
+| `isReadOnly`   | `boolean`                | Read-only state                           |
+| `autoFocus`    | `boolean`                | Auto-focus on mount                       |
+| `ref`          | `Ref<TextInput>`         | Root `TextInput` ref                      |
+| `testID`       | `string`                 | Root `TextInput` test id                  |
+| `twClassName`  | `string`                 | Root `TextInput` Tailwind classes         |
+| `style`        | `StyleProp<ViewStyle>`   | Root `TextInput` style                    |
 
 ### Checkbox Component
 

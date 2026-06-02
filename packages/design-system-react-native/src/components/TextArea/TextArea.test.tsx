@@ -1,7 +1,7 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, fireEvent, renderHook } from '@testing-library/react-native';
 import React, { createRef } from 'react';
-import { TextInput, View } from 'react-native';
+import { TextInput } from 'react-native';
 import { act } from 'react-test-renderer';
 
 import { createRenderer } from '../../test-utils/createRenderer';
@@ -35,24 +35,12 @@ describe('TextArea', () => {
       expect(getByTestId('custom-test-id')).toBeOnTheScreen();
     });
 
-    it('renders custom inputElement when provided', () => {
-      const { getByTestId } = render(
-        <TextArea
-          value=""
-          testID={ROOT_TEST_ID}
-          inputElement={<View testID="custom-input" />}
-        />,
-      );
-
-      expect(getByTestId('custom-input')).toBeOnTheScreen();
-    });
-
-    it('forwards inputProps to the inner Input', () => {
+    it('forwards TextInput props to the root Input', () => {
       const { getByPlaceholderText } = render(
         <TextArea
           value=""
           placeholder="forwarded-placeholder"
-          inputProps={{ keyboardType: 'default' }}
+          keyboardType="default"
         />,
       );
 
@@ -62,35 +50,34 @@ describe('TextArea', () => {
       );
     });
 
-    it('merges inputProps.twClassName with TextArea inner Input layout classes', () => {
-      const tree = createRenderer(
+    it('applies TextArea chrome classes to the root Input', () => {
+      const { getByTestId } = render(
         <TextArea
           value=""
+          testID={ROOT_TEST_ID}
           placeholder="tw-class-merge"
-          inputProps={{ twClassName: 'mt-2' }}
+          twClassName="mt-2"
         />,
       );
-      const inputNode = tree.root.findByType(Input);
 
-      expect(inputNode.props.twClassName).toContain('mt-2');
-      expect(inputNode.props.twClassName).toContain('flex-1');
-      expect(inputNode.props.twClassName).toContain('min-h-[88px]');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-2`);
     });
 
-    it('when inputProps is omitted, inner Input twClassName omits merged extra classes', () => {
-      const tree = createRenderer(
-        <TextArea value="" placeholder="no-input-props" />,
+    it('uses the default chrome classes on the root Input', () => {
+      const { getByTestId } = render(
+        <TextArea
+          value=""
+          testID={ROOT_TEST_ID}
+          placeholder="no-input-props"
+        />,
       );
-      const inputNode = tree.root.findByType(Input);
 
-      expect(inputNode.props.twClassName).toBe(
-        'min-h-[88px] w-full flex-1 self-stretch bg-transparent border-0 py-1',
-      );
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`min-h-24 rounded-lg`);
     });
   });
 
   describe('multiline input', () => {
-    it('sets multiline to true on the inner input', () => {
+    it('sets multiline to true on the root input', () => {
       const { getByPlaceholderText } = render(
         <TextArea value="" placeholder="multiline-field" />,
       );
@@ -101,7 +88,7 @@ describe('TextArea', () => {
       );
     });
 
-    it('sets textAlignVertical to top on the inner input', () => {
+    it('sets textAlignVertical to top on the root input', () => {
       const { getByPlaceholderText } = render(
         <TextArea value="" placeholder="top-align" />,
       );
@@ -131,14 +118,10 @@ describe('TextArea', () => {
     });
   });
 
-  describe('Input props', () => {
-    it('forwards secureTextEntry to the inner Input', () => {
+  describe('TextInput props', () => {
+    it('forwards secureTextEntry to the root Input', () => {
       const { getByPlaceholderText } = render(
-        <TextArea
-          value=""
-          placeholder="secure"
-          inputProps={{ secureTextEntry: true }}
-        />,
+        <TextArea value="" placeholder="secure" secureTextEntry />,
       );
 
       expect(getByPlaceholderText('secure')).toHaveProp(
@@ -147,7 +130,7 @@ describe('TextArea', () => {
       );
     });
 
-    it('forwards isReadOnly to the inner Input', () => {
+    it('forwards isReadOnly to the root Input', () => {
       const { getByPlaceholderText } = render(
         <TextArea value="" placeholder="readonly-test" isReadOnly />,
       );
@@ -160,8 +143,8 @@ describe('TextArea', () => {
   });
 
   describe('ref', () => {
-    it('exposes the root View ref via forwardRef', () => {
-      const ref = createRef<View>();
+    it('exposes the root TextInput ref via forwardRef', () => {
+      const ref = createRef<TextInput>();
       render(
         <TextArea
           value=""
@@ -172,22 +155,7 @@ describe('TextArea', () => {
       );
 
       expect(ref.current).not.toBeNull();
-      expect(ref.current).toBeInstanceOf(View);
-    });
-
-    it('exposes the inner TextInput via inputRef', () => {
-      const inputRef = createRef<TextInput>();
-      render(<TextArea value="" inputRef={inputRef} placeholder="ref-test" />);
-
-      expect(inputRef.current).not.toBeNull();
-      expect(inputRef.current).toBeInstanceOf(TextInput);
-    });
-
-    it('allows calling focus() via inputRef', () => {
-      const inputRef = createRef<TextInput>();
-      render(<TextArea value="" inputRef={inputRef} placeholder="ref-focus" />);
-
-      expect(() => inputRef.current?.focus()).not.toThrow();
+      expect(ref.current).toBeInstanceOf(TextInput);
     });
   });
 
@@ -343,7 +311,7 @@ describe('TextArea', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-default`);
     });
 
-    it('applies twClassName to the container', () => {
+    it('applies twClassName to the root Input', () => {
       const { getByTestId } = render(
         <TextArea value="" testID={ROOT_TEST_ID} twClassName="mt-4" />,
       );
@@ -351,7 +319,7 @@ describe('TextArea', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
     });
 
-    it('merges custom style prop with container styles', () => {
+    it('merges custom style prop with root Input styles', () => {
       const customStyle = { marginBottom: 20 };
       const { getByTestId } = render(
         <TextArea value="" testID={ROOT_TEST_ID} style={customStyle} />,
@@ -360,7 +328,7 @@ describe('TextArea', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ marginBottom: 20 });
     });
 
-    it('merges twClassName and style on the container', () => {
+    it('merges twClassName and style on the root Input', () => {
       const customStyle = { marginBottom: 12 };
       const { getByTestId } = render(
         <TextArea
@@ -523,7 +491,7 @@ describe('TextArea', () => {
   });
 
   describe('disabled state', () => {
-    it('disables the inner Input when isDisabled is true', () => {
+    it('disables the root Input when isDisabled is true', () => {
       const { getByPlaceholderText } = render(
         <TextArea value="" placeholder="disabled-input" isDisabled />,
       );
