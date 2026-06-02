@@ -403,15 +403,13 @@ describe('Toaster', () => {
 
   it('cancels the enter animation frame on unmount while the toast is still entering', async () => {
     const { unmount } = render(<Toaster ref={toasterRef} />);
-    const pendingAnimationFrames = new Map<
-      number,
-      FrameRequestCallback
-    >();
+    const pendingAnimationFrames = new Map<number, FrameRequestCallback>();
     let nextAnimationFrameId = 1;
     const requestAnimationFrameSpy = jest
       .spyOn(global, 'requestAnimationFrame')
       .mockImplementation((callback) => {
-        const id = nextAnimationFrameId++;
+        const id = nextAnimationFrameId;
+        nextAnimationFrameId += 1;
         pendingAnimationFrames.set(id, callback);
         return id;
       });
@@ -444,15 +442,13 @@ describe('Toaster', () => {
   it('clears the auto-dismiss timer on unmount after the toast becomes visible', async () => {
     const { unmount } = render(<Toaster ref={toasterRef} />);
     const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout');
-    const pendingAnimationFrames = new Map<
-      number,
-      FrameRequestCallback
-    >();
+    const pendingAnimationFrames = new Map<number, FrameRequestCallback>();
     let nextAnimationFrameId = 1;
     const requestAnimationFrameSpy = jest
       .spyOn(global, 'requestAnimationFrame')
       .mockImplementation((callback) => {
-        const id = nextAnimationFrameId++;
+        const id = nextAnimationFrameId;
+        nextAnimationFrameId += 1;
         pendingAnimationFrames.set(id, callback);
         return id;
       });
