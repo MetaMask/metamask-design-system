@@ -25,11 +25,7 @@ describe('TextFieldSearch', () => {
 
     it('renders the default search icon as start accessory', () => {
       const { container } = render(
-        <TextFieldSearch
-          onChange={noop}
-          value=""
-          clearButtonOnClick={noop}
-        />,
+        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
       );
 
       // Icon renders an <svg>; assert one exists before the input.
@@ -68,11 +64,7 @@ describe('TextFieldSearch', () => {
   describe('clear button', () => {
     it('is hidden when value is empty', () => {
       render(
-        <TextFieldSearch
-          onChange={noop}
-          value=""
-          clearButtonOnClick={noop}
-        />,
+        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
       );
 
       expect(
@@ -207,11 +199,7 @@ describe('TextFieldSearch', () => {
   describe('forwarding to TextField', () => {
     it('sets the input type to "search"', () => {
       render(
-        <TextFieldSearch
-          onChange={noop}
-          value=""
-          clearButtonOnClick={noop}
-        />,
+        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
       );
 
       expect(screen.getByRole('searchbox')).toHaveAttribute('type', 'search');

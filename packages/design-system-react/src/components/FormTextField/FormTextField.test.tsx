@@ -52,7 +52,6 @@ describe('FormTextField', () => {
         screen.getByTestId('custom-input'),
       );
     });
-
   });
 
   describe('error', () => {
