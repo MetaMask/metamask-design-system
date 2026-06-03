@@ -1,4 +1,3 @@
-import { TextColor, TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
@@ -90,112 +89,7 @@ describe('ListItem', () => {
     });
   });
 
-  describe('when compound slots are used', () => {
-    it('renders title from ListItem.Title', () => {
-      const { getByText } = render(
-        <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Title>Label</ListItem.Title>
-        </ListItem>,
-      );
-      expect(getByText('Label')).toBeOnTheScreen();
-    });
-
-    it('renders title and value slots together', () => {
-      const { getByText } = render(
-        <ListItem>
-          <ListItem.Title>Account</ListItem.Title>
-          <ListItem.Value>$1,234</ListItem.Value>
-        </ListItem>,
-      );
-      expect(getByText('Account')).toBeOnTheScreen();
-      expect(getByText('$1,234')).toBeOnTheScreen();
-    });
-
-    it('renders title row accessories from ListItem.Title props', () => {
-      const { getByTestId, getByText } = render(
-        <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Title
-            startAccessory={<Text testID="title-start">A</Text>}
-            endAccessory={<Text testID="title-end">B</Text>}
-          >
-            Label
-          </ListItem.Title>
-        </ListItem>,
-      );
-      expect(getByText('Label')).toBeOnTheScreen();
-      expect(getByTestId('title-start')).toBeOnTheScreen();
-      expect(getByTestId('title-end')).toBeOnTheScreen();
-    });
-
-    it('prefers explicit title prop over ListItem.Title slot', () => {
-      const { getByText, queryByText } = render(
-        <ListItem title="From prop" testID={ROOT_TEST_ID}>
-          <ListItem.Title>From slot</ListItem.Title>
-        </ListItem>,
-      );
-      expect(getByText('From prop')).toBeOnTheScreen();
-      expect(queryByText('From slot')).toBeNull();
-    });
-
-    it('applies top-level Text props on ListItem.Subvalue', () => {
-      const { getByText } = render(
-        <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Title>Label</ListItem.Title>
-          <ListItem.Subvalue color={TextColor.SuccessDefault}>
-            +2.5%
-          </ListItem.Subvalue>
-        </ListItem>,
-      );
-      expect(getByText('+2.5%')).toHaveStyle(tw.style('text-success-default'));
-    });
-
-    it('applies textProps on ListItem.Description when provided', () => {
-      const { getByText } = render(
-        <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Title>Label</ListItem.Title>
-          <ListItem.Description textProps={{ color: TextColor.ErrorDefault }}>
-            Secondary
-          </ListItem.Description>
-        </ListItem>,
-      );
-      expect(getByText('Secondary')).toHaveStyle(
-        tw.style('text-error-default'),
-      );
-    });
-
-    it('prefers top-level Text props over textProps on the same slot', () => {
-      const { getByText } = render(
-        <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Title>Label</ListItem.Title>
-          <ListItem.Value
-            textProps={{ color: TextColor.ErrorDefault }}
-            color={TextColor.SuccessDefault}
-          >
-            $10.00
-          </ListItem.Value>
-        </ListItem>,
-      );
-      expect(getByText('$10.00')).toHaveStyle(tw.style('text-success-default'));
-    });
-
-    it('applies top-level variant on ListItem.Title', () => {
-      const { getByText } = render(
-        <ListItem testID={ROOT_TEST_ID}>
-          <ListItem.Title variant={TextVariant.BodySm}>
-            Small title
-          </ListItem.Title>
-        </ListItem>,
-      );
-      const textNode = getByText('Small title');
-      const styles = [textNode.props.style].flat();
-      expect(
-        styles.find((s: Record<string, unknown>) => s?.fontSize !== undefined)
-          ?.fontSize,
-      ).toBe(tw.style(`text-${TextVariant.BodySm}`).fontSize);
-    });
-  });
-
-  describe('when non-slot children are provided', () => {
+  describe('when children are provided', () => {
     it('renders children below Content', () => {
       const { getByText, getByTestId } = render(
         <ListItem title="Label">

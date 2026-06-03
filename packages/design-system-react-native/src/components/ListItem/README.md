@@ -1,6 +1,6 @@
 # ListItem
 
-ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.md) in a `Box` or `Pressable` shell (`px-4 py-3`). Use props or compound slots (`ListItem.Title`, `ListItem.Avatar`, …) for the row layout. For row layout without padding or press handling, use [Content](../Content/README.md) directly.
+ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.md) in a `Box` or `Pressable` shell (`px-4 py-3`). For row layout without padding or press handling, use [Content](../Content/README.md) directly.
 
 The row root is transparent by default so it inherits the surface behind it. Place list items inside a parent that sets the list background (for example a `Box` or screen section). Interactive rows apply a semi-transparent `bg-pressed` tint on press, which reads correctly over different parent backgrounds without per-row color setup.
 
@@ -257,50 +257,19 @@ import {
 
 ### `children`
 
-Optional React children on the padded root.
-
-- **`ListItem.*` slot elements** (`ListItem.Avatar`, `ListItem.Title`, …) compose the row. Slots are parsed into Content props before render.
-- **Any other node** renders below the `Content` block.
-
-When both explicit Content props and slots are set, **props take precedence**.
-
-Available compound slots: `ListItem.Avatar`, `ListItem.Title`, `ListItem.Description`, `ListItem.Value`, `ListItem.Subvalue`, `ListItem.StartAccessory`, `ListItem.EndAccessory`, `ListItem.TopAccessory`, `ListItem.BottomAccessory`.
-
-Inline accessories on text slots use props on the slot (`startAccessory`, `endAccessory`). Text styling uses top-level Text props on the slot (`variant`, `color`, …) or `textProps`.
+Optional React children rendered below the `Content` block on the padded root.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-import {
-  AvatarAccount,
-  AvatarAccountSize,
-  Box,
-  Icon,
-  IconName,
-  ListItem,
-} from '@metamask/design-system-react-native';
+import { Box, ListItem } from '@metamask/design-system-react-native';
 
-// Non-slot children render below Content
 <ListItem title="Summary">
   <Box twClassName="mt-2 rounded bg-background-muted px-3 py-2">
     Expanded details
   </Box>
-</ListItem>
-
-// Compound slots compose the row
-<ListItem isInteractive onPress={() => {}}>
-  <ListItem.Avatar>
-    <AvatarAccount
-      address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-      size={AvatarAccountSize.Md}
-    />
-  </ListItem.Avatar>
-  <ListItem.Title endAccessory={<Icon name={IconName.ArrowRight} />}>
-    Account 1
-  </ListItem.Title>
-  <ListItem.Value>$1,234</ListItem.Value>
 </ListItem>;
 ```
 

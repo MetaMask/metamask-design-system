@@ -82,23 +82,6 @@ export const Children: Story = {
   ),
 };
 
-export const SlotComposition: Story = {
-  render: () => (
-    <StoryWrapper>
-      <ListItem isInteractive onPress={() => {}}>
-        <ListItem.Avatar>
-          <Box twClassName="h-10 w-10 rounded-full bg-primary-default" />
-        </ListItem.Avatar>
-        <ListItem.Title endAccessory={<Icon name={IconName.ArrowRight} />}>
-          Account 1
-        </ListItem.Title>
-        <ListItem.Description>Secondary text</ListItem.Description>
-        <ListItem.Value>$1,234.00</ListItem.Value>
-      </ListItem>
-    </StoryWrapper>
-  ),
-};
-
 export const StartAccessory: Story = {
   render: (args: ListItemProps) => (
     <StoryWrapper>
