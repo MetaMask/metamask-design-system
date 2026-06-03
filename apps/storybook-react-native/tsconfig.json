@@ -15,9 +15,7 @@
     ".storybook/**/*.ts",
     ".storybook/**/*.tsx",
     ".rnstorybook/**/*.ts",
-    ".rnstorybook/**/*.tsx",
-    "storybook/**/*.ts",
-    "storybook/**/*.tsx"
+    ".rnstorybook/**/*.tsx"
   ],
   "exclude": [
     "node_modules",
