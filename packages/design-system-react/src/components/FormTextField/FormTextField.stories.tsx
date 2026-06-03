@@ -1,30 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 
+import { Box, BoxFlexDirection } from '../Box';
 import { TextFieldSize, TextFieldType } from '../TextField';
 
 import { FormTextField } from './FormTextField';
 import type { FormTextFieldProps } from './FormTextField.types';
 import README from './README.mdx';
-
-function ControlledFormTextField(props: FormTextFieldProps) {
-  const [value, setValue] = useState(props.value);
-
-  useEffect(() => {
-    setValue(props.value);
-  }, [props.value]);
-
-  return (
-    <FormTextField
-      {...props}
-      value={value}
-      onChange={(event) => {
-        setValue(event.target.value);
-        props.onChange?.(event);
-      }}
-    />
-  );
-}
 
 const meta: Meta<FormTextFieldProps> = {
   title: 'React Components/FormTextField',
@@ -61,12 +43,13 @@ type Story = StoryObj<FormTextFieldProps>;
 
 export const Default: Story = {
   args: {
-    id: 'form-text-field-default',
-    label: 'Amount',
-    placeholder: 'Enter amount',
+    id: 'email',
+    label: 'Email',
+    placeholder: 'you@example.com',
+    helpText: 'We never share your email.',
     value: '',
   },
-  render: (args) => {
+  render: (args: FormTextFieldProps) => {
     const [value, setValue] = useState(args.value);
 
     useEffect(() => {
@@ -87,51 +70,71 @@ export const Default: Story = {
 };
 
 export const Label: Story = {
-  render: () => (
-    <ControlledFormTextField
-      id="form-text-field-label"
-      label="Recipient address"
-      placeholder="0x…"
-      value=""
-    />
-  ),
+  render: () => {
+    const [value, setValue] = useState('');
+
+    return (
+      <FormTextField
+        id="form-text-field-label"
+        label="Recipient address"
+        placeholder="0x…"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+      />
+    );
+  },
 };
 
 export const HelpText: Story = {
-  render: () => (
-    <ControlledFormTextField
-      helpText="We never share your email."
-      id="form-text-field-help"
-      label="Email"
-      placeholder="you@example.com"
-      value=""
-    />
-  ),
+  render: () => {
+    const [value, setValue] = useState('');
+
+    return (
+      <FormTextField
+        helpText="We never share your email."
+        id="form-text-field-help"
+        label="Email"
+        placeholder="you@example.com"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+      />
+    );
+  },
 };
 
 export const IsError: Story = {
-  render: () => (
-    <ControlledFormTextField
-      helpText="This field is required"
-      id="form-text-field-error"
-      isError
-      label="Amount"
-      placeholder="0.00"
-      value=""
-    />
-  ),
+  render: () => {
+    const [value, setValue] = useState('');
+
+    return (
+      <FormTextField
+        helpText="This field is required"
+        id="form-text-field-error"
+        isError
+        label="Amount"
+        placeholder="0.00"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+      />
+    );
+  },
 };
 
 export const IsDisabled: Story = {
-  render: () => (
-    <ControlledFormTextField
-      id="form-text-field-disabled"
-      isDisabled
-      label="Amount"
-      placeholder="0.00"
-      value="Not editable"
-    />
-  ),
+  render: () => {
+    const [value, setValue] = useState('Not editable');
+
+    return (
+      <FormTextField
+        id="form-text-field-disabled"
+        isDisabled
+        label="Amount"
+        placeholder="0.00"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+      />
+    );
+  },
 };
 
 export const IsReadOnly: Story = {
@@ -146,29 +149,38 @@ export const IsReadOnly: Story = {
 };
 
 export const Size: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <ControlledFormTextField
-        id="form-text-field-sm"
-        label="Sm"
-        placeholder="Sm"
-        size={TextFieldSize.Sm}
-        value=""
-      />
-      <ControlledFormTextField
-        id="form-text-field-md"
-        label="Md"
-        placeholder="Md"
-        size={TextFieldSize.Md}
-        value=""
-      />
-      <ControlledFormTextField
-        id="form-text-field-lg"
-        label="Lg"
-        placeholder="Lg"
-        size={TextFieldSize.Lg}
-        value=""
-      />
-    </div>
-  ),
+  render: () => {
+    const [smValue, setSmValue] = useState('');
+    const [mdValue, setMdValue] = useState('');
+    const [lgValue, setLgValue] = useState('');
+
+    return (
+      <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+        <FormTextField
+          id="form-text-field-sm"
+          label="Sm"
+          placeholder="Sm"
+          size={TextFieldSize.Sm}
+          value={smValue}
+          onChange={(event) => setSmValue(event.target.value)}
+        />
+        <FormTextField
+          id="form-text-field-md"
+          label="Md"
+          placeholder="Md"
+          size={TextFieldSize.Md}
+          value={mdValue}
+          onChange={(event) => setMdValue(event.target.value)}
+        />
+        <FormTextField
+          id="form-text-field-lg"
+          label="Lg"
+          placeholder="Lg"
+          size={TextFieldSize.Lg}
+          value={lgValue}
+          onChange={(event) => setLgValue(event.target.value)}
+        />
+      </Box>
+    );
+  },
 };

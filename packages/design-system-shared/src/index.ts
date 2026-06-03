@@ -154,9 +154,6 @@ export {
 // TextField types (ADR-0004)
 export { type TextFieldPropsShared } from './types/TextField';
 
-// TextFieldSearch types (ADR-0004)
-export { type TextFieldSearchPropsShared } from './types/TextFieldSearch';
-
 // TextArea types (ADR-0004)
 export { type TextAreaPropsShared } from './types/TextArea';
 

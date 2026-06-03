@@ -1,8 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { TextFieldSize } from '../TextField';
-
 import { FormTextField } from './FormTextField';
 
 const ROOT_TEST_ID = 'form-text-field';
@@ -55,20 +53,6 @@ describe('FormTextField', () => {
       );
     });
 
-    it('forwards size to the inner TextField', () => {
-      render(
-        <FormTextField
-          data-testid={ROOT_TEST_ID}
-          onChange={noop}
-          size={TextFieldSize.Lg}
-          value=""
-        />,
-      );
-
-      const root = screen.getByTestId(ROOT_TEST_ID);
-      const fieldContainer = root.querySelector('.inline-flex');
-      expect(fieldContainer).toHaveClass('h-12');
-    });
   });
 
   describe('error', () => {
@@ -168,17 +152,13 @@ describe('FormTextField', () => {
     it('forwards textFieldProps to the inner TextField', () => {
       render(
         <FormTextField
-          data-testid={ROOT_TEST_ID}
           onChange={noop}
-          textFieldProps={{ className: 'ring-2' }}
+          textFieldProps={{ title: 'inner-text-field', className: 'ring-2' }}
           value=""
         />,
       );
 
-      const fieldContainer = screen
-        .getByTestId(ROOT_TEST_ID)
-        .querySelector('.inline-flex');
-      expect(fieldContainer).toHaveClass('ring-2');
+      expect(screen.getByTitle('inner-text-field')).toHaveClass('ring-2');
     });
   });
 

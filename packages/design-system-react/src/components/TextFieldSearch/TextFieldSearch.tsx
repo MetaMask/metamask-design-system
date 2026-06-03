@@ -1,37 +1,36 @@
 import React, { forwardRef } from 'react';
 
-import { ButtonIcon } from '../ButtonIcon';
-import { ButtonIconSize } from '../ButtonIcon';
-import { Icon, IconName, IconSize } from '../Icon';
-import { TextField } from '../TextField';
-import { TextFieldType } from '../TextField/TextField.types';
+import { twMerge } from '../../utils/tw-merge';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
+import { Icon, IconColor, IconName, IconSize } from '../Icon';
+import { TextField, TextFieldType } from '../TextField';
 
 import type { TextFieldSearchProps } from './TextFieldSearch.types';
 
 export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
   (
     {
-      showClearButton = true,
       clearButtonOnClick,
       clearButtonProps,
       endAccessory,
       value,
       startAccessory,
       isDisabled = false,
+      className,
       ...props
     },
     ref,
   ) => {
-    const hasClearButton = Boolean(value) && showClearButton;
-    const clearButton = hasClearButton ? (
+    const clearButton = value ? (
       <ButtonIcon
         data-testid="text-field-search-clear-button"
         ariaLabel="Clear"
-        iconName={IconName.Close}
-        size={ButtonIconSize.Sm}
+        iconName={IconName.CircleX}
+        size={ButtonIconSize.Md}
+        iconProps={{ color: IconColor.IconAlternative }}
         isDisabled={isDisabled}
-        onClick={clearButtonOnClick}
         {...clearButtonProps}
+        onClick={clearButtonOnClick}
       />
     ) : null;
 
@@ -49,8 +48,15 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
         value={value}
         isDisabled={isDisabled}
         type={TextFieldType.Search}
+        className={twMerge('rounded-full', className)}
         startAccessory={
-          startAccessory ?? <Icon name={IconName.Search} size={IconSize.Sm} />
+          startAccessory ?? (
+            <Icon
+              name={IconName.Search}
+              size={IconSize.Md}
+              color={IconColor.IconAlternative}
+            />
+          )
         }
         endAccessory={resolvedEndAccessory}
         {...props}

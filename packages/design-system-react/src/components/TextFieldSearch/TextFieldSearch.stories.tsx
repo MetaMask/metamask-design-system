@@ -1,13 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 
-import { TextFieldSize } from '../TextField/TextField.types';
+import { TextFieldSize } from '../TextField';
 
 import README from './README.mdx';
 import { TextFieldSearch } from './TextFieldSearch';
 import type { TextFieldSearchProps } from './TextFieldSearch.types';
 
-function ControlledTextFieldSearch(props: TextFieldSearchProps) {
+type ControlledTextFieldSearchProps = Omit<
+  TextFieldSearchProps,
+  'clearButtonOnClick'
+> & {
+  clearButtonOnClick?: TextFieldSearchProps['clearButtonOnClick'];
+};
+
+function ControlledTextFieldSearch(props: ControlledTextFieldSearchProps) {
   const [value, setValue] = useState(props.value ?? '');
 
   useEffect(() => {
@@ -43,7 +50,6 @@ const meta: Meta<TextFieldSearchProps> = {
       control: 'select',
       options: Object.values(TextFieldSize),
     },
-    showClearButton: { control: 'boolean' },
     isDisabled: { control: 'boolean' },
     isReadOnly: { control: 'boolean' },
     isError: { control: 'boolean' },
@@ -62,23 +68,6 @@ export const Default: Story = {
     value: '',
   },
   render: (args) => <ControlledTextFieldSearch {...args} />,
-};
-
-export const ShowClearButton: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <ControlledTextFieldSearch
-        placeholder="With clear button"
-        value="hello"
-        showClearButton
-      />
-      <ControlledTextFieldSearch
-        placeholder="Without clear button"
-        value="hello"
-        showClearButton={false}
-      />
-    </div>
-  ),
 };
 
 export const Size: Story = {

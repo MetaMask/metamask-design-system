@@ -9,23 +9,16 @@ TextFieldSearch is a controlled search input built on top of `TextField`. It ren
 ```tsx
 import { TextFieldSearch } from '@metamask/design-system-react';
 
-<TextFieldSearch
-  placeholder="Search"
-  value={value}
-  onChange={(event) => setValue(event.target.value)}
-  clearButtonOnClick={() => setValue('')}
-/>;
+<TextFieldSearch placeholder="Search" value="" />;
 ```
+
+The component is controlled. Wire `value`, `onChange`, and `clearButtonOnClick` to your own state — the clear button always renders when `value` is truthy and `clearButtonOnClick` is required.
 
 <Canvas of={TextFieldSearchStories.Default} />
 
 ## Props
 
-### `showClearButton`
-
-When `true` (default), a clear button is rendered after the input when `value` is truthy. Set to `false` to hide the clear button entirely.
-
-<Canvas of={TextFieldSearchStories.ShowClearButton} />
+The clear button is rendered automatically after the input whenever `value` is truthy.
 
 ### `clearButtonOnClick`
 

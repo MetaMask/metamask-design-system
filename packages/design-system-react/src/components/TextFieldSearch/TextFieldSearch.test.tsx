@@ -11,7 +11,12 @@ describe('TextFieldSearch', () => {
   describe('rendering', () => {
     it('renders root container and inner search input', () => {
       render(
-        <TextFieldSearch data-testid={ROOT_TEST_ID} onChange={noop} value="" />,
+        <TextFieldSearch
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
       );
 
       expect(screen.getByTestId(ROOT_TEST_ID)).toBeInTheDocument();
@@ -20,7 +25,11 @@ describe('TextFieldSearch', () => {
 
     it('renders the default search icon as start accessory', () => {
       const { container } = render(
-        <TextFieldSearch onChange={noop} value="" />,
+        <TextFieldSearch
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
       );
 
       // Icon renders an <svg>; assert one exists before the input.
@@ -32,6 +41,7 @@ describe('TextFieldSearch', () => {
         <TextFieldSearch
           onChange={noop}
           value=""
+          clearButtonOnClick={noop}
           startAccessory={<span data-testid="custom-start">$</span>}
         />,
       );
@@ -47,6 +57,7 @@ describe('TextFieldSearch', () => {
           data-testid={ROOT_TEST_ID}
           onChange={noop}
           value=""
+          clearButtonOnClick={noop}
         />,
       );
 
@@ -56,7 +67,13 @@ describe('TextFieldSearch', () => {
 
   describe('clear button', () => {
     it('is hidden when value is empty', () => {
-      render(<TextFieldSearch onChange={noop} value="" />);
+      render(
+        <TextFieldSearch
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
 
       expect(
         screen.queryByTestId(CLEAR_BUTTON_TEST_ID),
@@ -64,23 +81,15 @@ describe('TextFieldSearch', () => {
     });
 
     it('is shown when value is truthy', () => {
-      render(<TextFieldSearch onChange={noop} value="hello" />);
-
-      expect(screen.getByTestId(CLEAR_BUTTON_TEST_ID)).toBeInTheDocument();
-    });
-
-    it('is hidden when showClearButton is false even with a value', () => {
       render(
         <TextFieldSearch
           onChange={noop}
           value="hello"
-          showClearButton={false}
+          clearButtonOnClick={noop}
         />,
       );
 
-      expect(
-        screen.queryByTestId(CLEAR_BUTTON_TEST_ID),
-      ).not.toBeInTheDocument();
+      expect(screen.getByTestId(CLEAR_BUTTON_TEST_ID)).toBeInTheDocument();
     });
 
     it('calls clearButtonOnClick when pressed', () => {
@@ -99,7 +108,13 @@ describe('TextFieldSearch', () => {
     });
 
     it('uses a default "Clear" aria-label', () => {
-      render(<TextFieldSearch onChange={noop} value="hello" />);
+      render(
+        <TextFieldSearch
+          onChange={noop}
+          value="hello"
+          clearButtonOnClick={noop}
+        />,
+      );
 
       expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
     });
@@ -123,11 +138,30 @@ describe('TextFieldSearch', () => {
       expect(onClick).not.toHaveBeenCalled();
     });
 
+    it('clearButtonOnClick wins over an onClick passed via clearButtonProps', () => {
+      const onClick = jest.fn();
+      const overrideOnClick = jest.fn();
+      render(
+        <TextFieldSearch
+          onChange={noop}
+          value="hello"
+          clearButtonOnClick={onClick}
+          clearButtonProps={{ onClick: overrideOnClick }}
+        />,
+      );
+
+      fireEvent.click(screen.getByTestId(CLEAR_BUTTON_TEST_ID));
+
+      expect(onClick).toHaveBeenCalledTimes(1);
+      expect(overrideOnClick).not.toHaveBeenCalled();
+    });
+
     it('allows overriding the clear button aria-label via clearButtonProps', () => {
       render(
         <TextFieldSearch
           onChange={noop}
           value="hello"
+          clearButtonOnClick={noop}
           clearButtonProps={{ ariaLabel: 'Clear search' }}
         />,
       );
@@ -144,6 +178,7 @@ describe('TextFieldSearch', () => {
         <TextFieldSearch
           onChange={noop}
           value="hello"
+          clearButtonOnClick={noop}
           endAccessory={<span data-testid="custom-end">extra</span>}
         />,
       );
@@ -157,6 +192,7 @@ describe('TextFieldSearch', () => {
         <TextFieldSearch
           onChange={noop}
           value=""
+          clearButtonOnClick={noop}
           endAccessory={<span data-testid="custom-end">extra</span>}
         />,
       );
@@ -170,14 +206,26 @@ describe('TextFieldSearch', () => {
 
   describe('forwarding to TextField', () => {
     it('sets the input type to "search"', () => {
-      render(<TextFieldSearch onChange={noop} value="" />);
+      render(
+        <TextFieldSearch
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
 
       expect(screen.getByRole('searchbox')).toHaveAttribute('type', 'search');
     });
 
     it('forwards onChange events from the inner input', () => {
       const onChange = jest.fn();
-      render(<TextFieldSearch onChange={onChange} value="" />);
+      render(
+        <TextFieldSearch
+          onChange={onChange}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
 
       fireEvent.change(screen.getByRole('searchbox'), {
         target: { value: 'h' },
