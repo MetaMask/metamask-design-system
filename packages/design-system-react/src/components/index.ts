@@ -142,6 +142,9 @@ export {
 } from './Text';
 export type { TextProps } from './Text';
 
+export { TextArea, TextAreaResize } from './TextArea';
+export type { TextAreaProps } from './TextArea';
+
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
