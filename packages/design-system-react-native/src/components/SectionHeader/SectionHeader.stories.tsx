@@ -32,13 +32,6 @@ const meta: Meta<typeof SectionHeader> = {
         'Optional end icon; when set, renders instead of endAccessory',
     },
   },
-  decorators: [
-    (Story) => (
-      <Box twClassName="w-full bg-background-default p-4">
-        <Story />
-      </Box>
-    ),
-  ],
 };
 
 export default meta;
@@ -96,5 +89,11 @@ export const TitleAccessory: Story = {
         />
       }
     />
+  ),
+};
+
+export const Interactive: Story = {
+  render: () => (
+    <SectionHeader title="Assets" isInteractive onPress={() => {}} />
   ),
 };

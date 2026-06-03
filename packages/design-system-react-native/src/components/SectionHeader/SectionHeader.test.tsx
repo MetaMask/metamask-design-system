@@ -1,7 +1,7 @@
 // Third party dependencies.
 import { IconName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { render, renderHook } from '@testing-library/react-native';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
@@ -216,6 +216,14 @@ describe('SectionHeader', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`gap-1`);
     });
 
+    it('applies default padding to outer row', () => {
+      const { getByTestId } = render(
+        <SectionHeader title="Section" testID={ROOT_TEST_ID} />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pt-3 pb-2`);
+    });
+
     it('applies gap-1 to inner title row', () => {
       const { getByTestId } = render(
         <SectionHeader
@@ -237,7 +245,95 @@ describe('SectionHeader', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`gap-1`);
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pt-3 pb-2`);
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
+    });
+  });
+
+  describe('isInteractive', () => {
+    it('forwards testID to Pressable root when isInteractive is true', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          isInteractive
+          onPress={jest.fn()}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('calls onPress when pressed', () => {
+      const onPress = jest.fn();
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          isInteractive
+          onPress={onPress}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      fireEvent.press(getByTestId(ROOT_TEST_ID));
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
+    it('applies default padding to Pressable root', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          isInteractive
+          onPress={jest.fn()}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pt-3 pb-2`);
+    });
+
+    it('merges custom style prop on Pressable root', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          isInteractive
+          onPress={jest.fn()}
+          testID={ROOT_TEST_ID}
+          style={{ marginTop: 8 }}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ marginTop: 8 });
+    });
+
+    it('defaults end icon to ArrowRight when no end icon or endAccessory is provided', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          isInteractive
+          onPress={jest.fn()}
+          endIconProps={{ testID: 'section-header-end-icon' }}
+        />,
+      );
+
+      expect(getByTestId('section-header-end-icon').props.name).toBe(
+        IconName.ArrowRight,
+      );
+    });
+
+    it('renders endAccessory instead of default ArrowRight when endAccessory is provided', () => {
+      const { getByTestId, queryByTestId } = render(
+        <SectionHeader
+          title="Section"
+          isInteractive
+          onPress={jest.fn()}
+          endIconProps={{ testID: 'section-header-end-icon' }}
+          endAccessory={<Text testID="section-header-end-acc">X</Text>}
+        />,
+      );
+
+      expect(getByTestId('section-header-end-acc')).toBeOnTheScreen();
+      expect(queryByTestId('section-header-end-icon')).toBeNull();
     });
   });
 });
