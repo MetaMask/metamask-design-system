@@ -16,6 +16,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Input Component](#input-component)
+  - [TextArea Component](#textarea-component)
   - [Checkbox Component](#checkbox-component)
   - [AvatarBase Component](#avatarbase-component)
   - [AvatarAccount Component](#avataraccount-component)
@@ -1248,6 +1249,89 @@ import { Input, TextVariant } from '@metamask/design-system-react';
 - No polymorphic `as` prop — the component always renders `<input>`.
 - Extension-only `error` and `disableStateStyles` are not mirrored; use `aria-invalid` and `className` as needed.
 - `TextVariant` imports and member names follow the design system (Pascal-cased members such as `TextVariant.BodyMd`).
+
+### TextArea Component
+
+The extension `textarea` component maps to `TextArea` in the design system. The design system keeps the controlled textarea contract, but removes the extension's `defaultValue` path, renames state props to the shared `is*` convention, and narrows the resize options to the values supported by the design-system component.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration behavior.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                              | Design System Migration                                              |
+| -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `import { Textarea } from '../../component-library'`           | `import { TextArea } from '@metamask/design-system-react'`           |
+| `import { TextareaResize } from '../../component-library'`     | `import { TextAreaResize } from '@metamask/design-system-react'`     |
+| `import type { TextareaProps } from '../../component-library'` | `import type { TextAreaProps } from '@metamask/design-system-react'` |
+
+##### Renamed and Removed Props
+
+| Extension Prop / Value                              | Design System Migration                           | Notes                                              |
+| --------------------------------------------------- | ------------------------------------------------- | -------------------------------------------------- |
+| `disabled`                                          | `isDisabled`                                      | renamed                                            |
+| `readOnly`                                          | `isReadOnly`                                      | renamed                                            |
+| `error`                                             | `isError`                                         | renamed                                            |
+| `defaultValue`                                      | removed                                           | use controlled `value` instead                     |
+| `TextareaResize.Initial` / `TextareaResize.Inherit` | removed                                           | use one of the supported resize values below       |
+| `resize` default                                    | `TextareaResize.Vertical` → `TextAreaResize.None` | the design system defaults to no resize affordance |
+
+##### Supported Resize Values
+
+| Extension Value             | Design System Value         | Notes                                                      |
+| --------------------------- | --------------------------- | ---------------------------------------------------------- |
+| `TextareaResize.None`       | `TextAreaResize.None`       | unchanged                                                  |
+| `TextareaResize.Both`       | `TextAreaResize.Both`       | unchanged                                                  |
+| `TextareaResize.Horizontal` | `TextAreaResize.Horizontal` | unchanged                                                  |
+| `TextareaResize.Vertical`   | `TextAreaResize.Vertical`   | unchanged                                                  |
+| `TextareaResize.Initial`    | removed                     | use `TextAreaResize.None` if you want no resize affordance |
+| `TextareaResize.Inherit`    | removed                     | no direct equivalent                                       |
+
+##### Style and Native Props
+
+- The extension's Box-style utility props are removed from the public API.
+- Use `className` for layout and style overrides.
+- Native `<textarea>` props such as `rows`, `cols`, `name`, `id`, `maxLength`, `required`, `onChange`, `onBlur`, `onFocus`, and `onClick` continue to work on the design system component.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Textarea, TextareaResize } from '../../component-library';
+
+<Textarea
+  defaultValue="Notes"
+  disabled={isBusy}
+  readOnly={isLocked}
+  error={hasError}
+  resize={TextareaResize.Vertical}
+  rows={4}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { TextArea, TextAreaResize } from '@metamask/design-system-react';
+
+<TextArea
+  value={notes}
+  isDisabled={isBusy}
+  isReadOnly={isLocked}
+  isError={hasError}
+  resize={TextAreaResize.Vertical}
+  rows={4}
+/>;
+```
+
+#### API Differences
+
+- `TextArea` is controlled-only in the design system; there is no `defaultValue` escape hatch.
+- `resize` now defaults to `TextAreaResize.None`, so call sites that depended on the extension's vertical resize affordance should opt back into `TextAreaResize.Vertical`.
+- `TextareaResize.Initial` and `TextareaResize.Inherit` are no longer available.
+- The component remains a native `<textarea>` with standard HTML attributes and `className`.
 
 ### Checkbox Component
 
