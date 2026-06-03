@@ -103,6 +103,28 @@ export const Name: Story = {
   ),
 };
 
+export const Fallback: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarNetwork name="Ethereum" fallbackText="ETH" />
+      <AvatarNetwork name="Arbitrum" />
+      <AvatarNetwork />
+    </div>
+  ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
+};
+
 export const FallbackText: Story = {
   render: () => (
     <div className="flex gap-2">

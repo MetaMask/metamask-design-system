@@ -21,7 +21,7 @@ export const AvatarFavicon = ({
 }: AvatarFaviconProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
 
-  const backupFallbackText = fallbackText || name?.[0] || '';
+  const backupFallbackText = fallbackText || name?.[0] || '?';
   const onImageErrorHandler = (
     e: NativeSyntheticEvent<ImageErrorEventData>,
   ) => {
@@ -38,7 +38,7 @@ export const AvatarFavicon = ({
     <AvatarBase
       size={size}
       shape={AvatarBaseShape.Circle}
-      fallbackText={finalFallbackText}
+      fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
       {...props}
     >

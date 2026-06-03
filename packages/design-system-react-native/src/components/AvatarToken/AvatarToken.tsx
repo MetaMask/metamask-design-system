@@ -20,8 +20,8 @@ export const AvatarToken = ({
   ...props
 }: AvatarTokenProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
+  const backupFallbackText = fallbackText || name?.[0] || '?';
 
-  const backupFallbackText = fallbackText || name?.[0] || '';
   const onImageErrorHandler = (
     e: NativeSyntheticEvent<ImageErrorEventData>,
   ) => {
@@ -38,7 +38,7 @@ export const AvatarToken = ({
     <AvatarBase
       size={size}
       shape={AvatarBaseShape.Circle}
-      fallbackText={finalFallbackText}
+      fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
       {...props}
     >
