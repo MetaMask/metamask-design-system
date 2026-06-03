@@ -203,7 +203,7 @@ export const WithStartAndEndAccessory: Story = {
     </View>
   ),
 };
-export const isDisabled: Story = {
+export const IsDisabled: Story = {
   render: () => (
     <View style={{ gap: 8 }}>
       {Object.keys(ButtonVariant).map((variantKey) => (
@@ -221,7 +221,7 @@ export const isDisabled: Story = {
   ),
 };
 
-export const isFullWidth: Story = {
+export const IsFullWidth: Story = {
   render: () => (
     <View style={{ gap: 8 }}>
       {Object.keys(ButtonVariant).map((variantKey) => (
@@ -239,7 +239,7 @@ export const isFullWidth: Story = {
   ),
 };
 
-export const isDanger: Story = {
+export const IsDanger: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <View style={{ gap: 8 }}>
@@ -269,7 +269,7 @@ export const isDanger: Story = {
   ),
 };
 
-export const isInverse: Story = {
+export const IsInverse: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <View style={{ gap: 8 }}>
