@@ -100,7 +100,7 @@
     "react-native-safe-area-context": ">=5.0.0"
   },
   "engines": {
-    "node": "^18.18 || >=20"
+    "node": ">=20"
   },
   "publishConfig": {
     "access": "public",
