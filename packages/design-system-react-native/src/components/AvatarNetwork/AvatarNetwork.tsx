@@ -1,6 +1,6 @@
 import { AvatarBaseShape } from '@metamask/design-system-shared';
 import React, { useState } from 'react';
-import type { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
+import type { ImageErrorEvent } from 'react-native';
 
 import { AvatarNetworkSize } from '../../types';
 import { AvatarBase } from '../AvatarBase';
@@ -20,9 +20,7 @@ export const AvatarNetwork = ({
   const [finalFallbackText, setFallbackText] = useState<string>('');
 
   const backupFallbackText = fallbackText || name?.[0] || '?';
-  const onImageErrorHandler = (
-    e: NativeSyntheticEvent<ImageErrorEventData>,
-  ) => {
+  const onImageErrorHandler = (e: ImageErrorEvent) => {
     setFallbackText(backupFallbackText);
     imageOrSvgProps?.onImageError?.(e);
   };
