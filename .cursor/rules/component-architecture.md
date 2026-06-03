@@ -106,6 +106,11 @@ Separate shared design system concerns from platform-specific implementation con
 - ✅ React: `className?: string` (platform layer)
 - ✅ React Native: `twClassName?: string` (platform layer)
 
+**Prop forwarding convention:**
+
+- When a component forwards the remaining props to its rendered element, name the destructured catch-all `...props` and spread `{...props}` onto the element.
+- Do not use `...rest` for this pattern in component implementations; keep the naming consistent so forwarded props are easy to spot across the codebase.
+
 ## Const Object Value Patterns in Shared
 
 Not all constants in `design-system-shared` have the same kind of value. The rule is simple: **if the class string is identical across both platforms, put it in shared; if the platforms need different class strings, use an abstract value in shared and map per platform.**
@@ -124,6 +129,16 @@ Both React (Tailwind) and React Native (TWRNC) share the same design token class
 - Values ARE the Tailwind/TWRNC class strings — identical across both platforms
 - Used directly: `className={color}` (React) / `twClassName={color}` (React Native)
 - ✅ Values live in shared and are used as-is on both platforms
+
+### Platform-specific const objects
+
+If a const object only exists for one platform's behavior or styling, keep it in that platform package near the component instead of moving it to `@metamask/design-system-shared` just to satisfy the barrel export.
+
+- Export it from the component barrel if it is part of the public API
+- Import it locally from the component file in stories, tests, and implementation
+- Only promote it to shared when the same semantic contract is genuinely needed on both platforms
+
+Example: `TextAreaResize` is a React-only API because React Native does not have an equivalent native resize axis, so it should stay in the React package.
 
 ### Semantic constants (`FontWeight`, `FontStyle`, `FontFamily`, `TextVariant`)
 
