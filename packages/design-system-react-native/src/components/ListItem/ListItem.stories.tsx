@@ -6,8 +6,11 @@ import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
 import { Box } from '../Box';
 import { Icon, IconName } from '../Icon';
 
-import { ListItem } from '.';
 import type { ListItemProps } from './ListItem.types';
+
+import { ListItem } from '.';
+
+const noopPress = () => undefined;
 
 const listItemAvatar = (
   <AvatarToken
@@ -48,7 +51,7 @@ export const Default: Story = {};
 
 export const IsInteractive: Story = {
   render: (args: ListItemProps) => (
-    <ListItem {...args} isInteractive onPress={() => {}} />
+    <ListItem {...args} isInteractive onPress={noopPress} />
   ),
 };
 
