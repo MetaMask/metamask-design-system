@@ -151,6 +151,9 @@ export type { TextButtonProps } from './TextButton';
 export { TextField, TextFieldSize, TextFieldType } from './TextField';
 export type { TextFieldProps } from './TextField';
 
+export { FormTextField } from './FormTextField';
+export type { FormTextFieldProps } from './FormTextField';
+
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
 
