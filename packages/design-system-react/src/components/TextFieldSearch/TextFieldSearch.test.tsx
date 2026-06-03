@@ -130,6 +130,33 @@ describe('TextFieldSearch', () => {
       expect(onClick).not.toHaveBeenCalled();
     });
 
+    it('stays disabled when isDisabled is true even if clearButtonProps says otherwise', () => {
+      render(
+        <TextFieldSearch
+          onChange={noop}
+          value="hello"
+          isDisabled
+          clearButtonOnClick={noop}
+          clearButtonProps={{ isDisabled: false }}
+        />,
+      );
+
+      expect(screen.getByTestId(CLEAR_BUTTON_TEST_ID)).toBeDisabled();
+    });
+
+    it('clearButtonProps.isDisabled can disable the clear button when the field is enabled', () => {
+      render(
+        <TextFieldSearch
+          onChange={noop}
+          value="hello"
+          clearButtonOnClick={noop}
+          clearButtonProps={{ isDisabled: true }}
+        />,
+      );
+
+      expect(screen.getByTestId(CLEAR_BUTTON_TEST_ID)).toBeDisabled();
+    });
+
     it('clearButtonOnClick wins over an onClick passed via clearButtonProps', () => {
       const onClick = jest.fn();
       const overrideOnClick = jest.fn();

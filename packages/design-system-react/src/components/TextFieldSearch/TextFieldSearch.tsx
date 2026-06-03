@@ -28,8 +28,8 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
         iconName={IconName.CircleX}
         size={ButtonIconSize.Md}
         iconProps={{ color: IconColor.IconAlternative }}
-        isDisabled={isDisabled}
         {...clearButtonProps}
+        isDisabled={isDisabled || clearButtonProps?.isDisabled}
         onClick={clearButtonOnClick}
       />
     ) : null;
