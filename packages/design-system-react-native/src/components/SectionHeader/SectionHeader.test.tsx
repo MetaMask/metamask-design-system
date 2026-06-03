@@ -221,7 +221,7 @@ describe('SectionHeader', () => {
         <SectionHeader title="Section" testID={ROOT_TEST_ID} />,
       );
 
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pt-3 pb-2`);
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pb-2 pt-3`);
     });
 
     it('applies gap-1 to inner title row', () => {
@@ -245,7 +245,7 @@ describe('SectionHeader', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`gap-1`);
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pt-3 pb-2`);
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pb-2 pt-3`);
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
     });
   });
@@ -289,7 +289,7 @@ describe('SectionHeader', () => {
         />,
       );
 
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pt-3 pb-2`);
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pb-2 pt-3`);
     });
 
     it('merges custom style prop on Pressable root', () => {

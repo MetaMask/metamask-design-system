@@ -8,6 +8,8 @@ import { Icon } from '../Icon';
 import { SectionHeader } from './SectionHeader';
 import type { SectionHeaderProps } from './SectionHeader.types';
 
+const noopPress = () => undefined;
+
 const meta: Meta<typeof SectionHeader> = {
   title: 'Components/SectionHeader',
   component: SectionHeader,
@@ -94,6 +96,6 @@ export const TitleAccessory: Story = {
 
 export const Interactive: Story = {
   render: () => (
-    <SectionHeader title="Assets" isInteractive onPress={() => {}} />
+    <SectionHeader title="Assets" isInteractive onPress={noopPress} />
   ),
 };

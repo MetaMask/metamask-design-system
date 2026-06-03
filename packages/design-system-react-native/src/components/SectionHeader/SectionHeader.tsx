@@ -31,6 +31,7 @@ import type { SectionHeaderProps } from './SectionHeader.types';
  * @param props.endIconName - Optional end icon; takes precedence over `endAccessory` when resolved. Defaults to `IconName.ArrowRight` when `isInteractive` is `true` and no end icon or `endAccessory` is provided
  * @param props.endIconProps - Props merged into the end `Icon`
  * @param props.isInteractive - When `true`, wraps the header in a `Pressable` with reduced opacity on press
+ * @param props.style - Optional style on the outer wrapper (`View` or `Pressable` style, including function form when interactive)
  * @param props.twClassName - Optional Tailwind classes on the outer row
  *
  * @returns The rendered SectionHeader layout.
@@ -102,7 +103,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       <Pressable
         style={({ pressed }) => {
           const baseStyle = tw.style(
-            'px-4 pt-3 pb-2',
+            'px-4 pb-2 pt-3',
             twClassName,
             pressed && 'opacity-70',
           );
@@ -129,7 +130,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       {...wrapperRest}
       gap={1}
       style={style}
-      twClassName={`px-4 pt-3 pb-2 ${twClassName}`}
+      twClassName={`px-4 pb-2 pt-3 ${twClassName}`}
       startAccessory={resolvedStartAccessory}
       endAccessory={resolvedEndAccessory}
     >
