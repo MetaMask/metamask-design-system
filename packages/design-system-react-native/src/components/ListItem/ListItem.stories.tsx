@@ -1,14 +1,21 @@
 import { ContentVerticalAlignment } from '@metamask/design-system-shared';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
-import React from 'react';
-import { View } from 'react-native';
 
-import { Box, BoxBackgroundColor } from '../Box';
+import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
+import { Box } from '../Box';
 import { Icon, IconName } from '../Icon';
 
 import { ListItem } from '.';
 import type { ListItemProps } from './ListItem.types';
+
+const listItemAvatar = (
+  <AvatarToken
+    name="ETH"
+    src={SAMPLE_AVATARTOKEN_URIS[1]}
+    size={AvatarTokenSize.Lg}
+  />
+);
 
 const meta: Meta<ListItemProps> = {
   title: 'Components/ListItem',
@@ -31,131 +38,115 @@ const meta: Meta<ListItemProps> = {
     subvalue: { control: 'text' },
     isInteractive: { control: 'boolean' },
   },
-  decorators: [
-    (Story) => (
-      <Box
-        twClassName="w-full"
-        backgroundColor={BoxBackgroundColor.BackgroundDefault}
-      >
-        <Story />
-      </Box>
-    ),
-  ],
 };
 
 export default meta;
 
 type Story = StoryObj<ListItemProps>;
 
-const StoryWrapper: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const tw = useTailwind();
-  return <View style={tw`p-4`}>{children}</View>;
-};
-
-export const Default: Story = {
-  render: (args: ListItemProps) => (
-    <StoryWrapper>
-      <ListItem {...args} />
-    </StoryWrapper>
-  ),
-};
+export const Default: Story = {};
 
 export const IsInteractive: Story = {
   render: (args: ListItemProps) => (
-    <StoryWrapper>
-      <ListItem {...args} isInteractive onPress={() => {}} />
-    </StoryWrapper>
+    <ListItem {...args} isInteractive onPress={() => {}} />
   ),
 };
 
 export const Children: Story = {
   render: (args: ListItemProps) => (
-    <StoryWrapper>
-      <ListItem {...args} title="Row title" description="Primary row">
-        <Box twClassName="mt-2 rounded bg-background-muted px-3 py-2">
-          <Icon name={IconName.Info} />
-        </Box>
-      </ListItem>
-    </StoryWrapper>
+    <ListItem {...args} title="Row title" description="Primary row">
+      <Box twClassName="mt-2 rounded bg-background-muted px-3 py-2">
+        <Icon name={IconName.Info} />
+      </Box>
+    </ListItem>
   ),
 };
 
 export const StartAccessory: Story = {
   render: (args: ListItemProps) => (
-    <StoryWrapper>
-      <ListItem
-        {...args}
-        startAccessory={<Icon name={IconName.Coin} />}
-        title="With start accessory"
-        description={undefined}
-        value={undefined}
-      />
-    </StoryWrapper>
+    <ListItem
+      {...args}
+      startAccessory={<Icon name={IconName.Coin} />}
+      title="With start accessory"
+      description={undefined}
+      value={undefined}
+    />
   ),
 };
 
 export const EndAccessory: Story = {
   render: (args: ListItemProps) => (
-    <StoryWrapper>
-      <ListItem
-        {...args}
-        endAccessory={<Icon name={IconName.ArrowRight} />}
-        title="With end accessory"
-        description={undefined}
-        value={undefined}
-      />
-    </StoryWrapper>
+    <ListItem
+      {...args}
+      endAccessory={<Icon name={IconName.ArrowRight} />}
+      title="With end accessory"
+      description={undefined}
+      value={undefined}
+    />
   ),
 };
 
 export const TopAccessory: Story = {
   render: (args: ListItemProps) => (
-    <StoryWrapper>
-      <ListItem
-        {...args}
-        topAccessory={
-          <Box twClassName="rounded bg-warning-muted px-2 py-1">
-            <Icon name={IconName.Info} />
-          </Box>
-        }
-        title="With top accessory"
-        description={undefined}
-        value={undefined}
-      />
-    </StoryWrapper>
+    <ListItem
+      {...args}
+      topAccessory={
+        <Box twClassName="rounded bg-warning-muted px-2 py-1">
+          <Icon name={IconName.Info} />
+        </Box>
+      }
+      title="With top accessory"
+      description={undefined}
+      value={undefined}
+    />
   ),
 };
 
 export const Avatar: Story = {
   render: (args: ListItemProps) => (
-    <StoryWrapper>
-      <ListItem
-        {...args}
-        avatar={<Box twClassName="h-10 w-10 rounded-full bg-primary-default" />}
-        title="With avatar"
-        value="Value"
-        description={undefined}
-      />
-    </StoryWrapper>
+    <ListItem
+      {...args}
+      avatar={listItemAvatar}
+      title="Ethereum"
+      value="0.24 ETH"
+      description={undefined}
+    />
   ),
+};
+
+const verticalAlignmentExamples: Record<
+  ContentVerticalAlignment,
+  { title: string; description: string }
+> = {
+  [ContentVerticalAlignment.Center]: {
+    title: 'Center',
+    description: 'Default for one- or two-line rows',
+  },
+  [ContentVerticalAlignment.Top]: {
+    title: 'Top',
+    description:
+      'Use for three or more lines, or when row height is 88dp or more',
+  },
 };
 
 export const VerticalAlignment: Story = {
   render: (args: ListItemProps) => (
-    <StoryWrapper>
-      {Object.values(ContentVerticalAlignment).map((alignment) => (
-        <ListItem
-          key={alignment}
-          {...args}
-          verticalAlignment={alignment}
-          avatar={<Box twClassName="h-12 w-12 rounded-lg bg-primary-default" />}
-          title={alignment}
-          description="Secondary line"
-          value="Value"
-        />
-      ))}
-    </StoryWrapper>
+    <>
+      {Object.values(ContentVerticalAlignment).map((alignment) => {
+        const { title, description } = verticalAlignmentExamples[alignment];
+
+        return (
+          <ListItem
+            key={alignment}
+            {...args}
+            verticalAlignment={alignment}
+            avatar={listItemAvatar}
+            title={title}
+            description={description}
+            value="Value"
+          />
+        );
+      })}
+    </>
   ),
 };
