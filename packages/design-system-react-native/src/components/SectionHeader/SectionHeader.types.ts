@@ -22,11 +22,11 @@ type SectionHeaderPropsBase = SectionHeaderPropsShared & {
   /**
    * Optional prop to pass additional properties to the start icon.
    */
-  startIconProps?: Partial<IconProps>;
+  startIconProps?: Omit<Partial<IconProps>, 'name'>;
   /**
    * Optional prop to pass additional properties to the end icon.
    */
-  endIconProps?: Partial<IconProps>;
+  endIconProps?: Omit<Partial<IconProps>, 'name'>;
   /**
    * Optional Tailwind class name to apply to the outer row.
    */

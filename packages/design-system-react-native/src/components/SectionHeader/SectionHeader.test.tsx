@@ -171,29 +171,12 @@ describe('SectionHeader', () => {
       expect(getByTestId('section-header-start-acc')).toBeOnTheScreen();
     });
 
-    it('resolves start icon from startIconProps.name when startIconName is omitted', () => {
-      const { getByTestId, queryByTestId } = render(
-        <SectionHeader
-          title="Section"
-          testID={ROOT_TEST_ID}
-          startIconProps={{ name: IconName.Add }}
-          startAccessory={<Text testID="section-header-start-acc">X</Text>}
-        />,
-      );
-
-      expect(queryByTestId('section-header-start-acc')).toBeNull();
-      expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('uses startIconName over startIconProps.name when both are set', () => {
+    it('forwards startIconProps to start Icon when startIconName is set', () => {
       const { getByTestId } = render(
         <SectionHeader
           title="Section"
           startIconName={IconName.Add}
-          startIconProps={{
-            name: IconName.Close,
-            testID: 'section-header-start-icon',
-          }}
+          startIconProps={{ testID: 'section-header-start-icon' }}
         />,
       );
 
@@ -227,29 +210,12 @@ describe('SectionHeader', () => {
       expect(getByTestId('section-header-end-acc')).toBeOnTheScreen();
     });
 
-    it('resolves end icon from endIconProps.name when endIconName is omitted', () => {
-      const { getByTestId, queryByTestId } = render(
-        <SectionHeader
-          title="Section"
-          testID={ROOT_TEST_ID}
-          endIconProps={{ name: IconName.Close }}
-          endAccessory={<Text testID="section-header-end-acc">X</Text>}
-        />,
-      );
-
-      expect(queryByTestId('section-header-end-acc')).toBeNull();
-      expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
-    });
-
-    it('uses endIconName over endIconProps.name when both are set', () => {
+    it('forwards endIconProps to end Icon when endIconName is set', () => {
       const { getByTestId } = render(
         <SectionHeader
           title="Section"
           endIconName={IconName.Add}
-          endIconProps={{
-            name: IconName.Close,
-            testID: 'section-header-end-icon',
-          }}
+          endIconProps={{ testID: 'section-header-end-icon' }}
         />,
       );
 
@@ -303,6 +269,19 @@ describe('SectionHeader', () => {
   });
 
   describe('isInteractive', () => {
+    it('defaults accessibilityRole to button when isInteractive is true', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          isInteractive
+          onPress={jest.fn()}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID).props.accessibilityRole).toBe('button');
+    });
+
     it('forwards testID to Pressable root when isInteractive is true', () => {
       const { getByTestId } = render(
         <SectionHeader

@@ -33,6 +33,11 @@ const meta: Meta<typeof SectionHeader> = {
       description:
         'Optional end icon; when set, renders instead of endAccessory',
     },
+    isInteractive: {
+      control: 'boolean',
+      description:
+        'When true, wraps the header in a Pressable so the full row is tappable',
+    },
   },
 };
 
@@ -43,8 +48,14 @@ type Story = StoryObj<typeof SectionHeader>;
 export const Default: Story = {
   args: {
     title: 'Assets',
+    isInteractive: false,
   },
-  render: (args: SectionHeaderProps) => <SectionHeader {...args} />,
+  render: (args: SectionHeaderProps) => (
+    <SectionHeader
+      {...args}
+      {...(args.isInteractive ? { onPress: noopPress } : {})}
+    />
+  ),
 };
 
 export const StartIconName: Story = {

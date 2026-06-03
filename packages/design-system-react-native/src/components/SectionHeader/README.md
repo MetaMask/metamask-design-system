@@ -48,7 +48,7 @@ import {
 
 ### `startIconName`
 
-Optional icon name for the start of the **outer** row. When a name is resolved (including via `startIconProps.name`), an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconDefault`; override with `startIconProps`.
+Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconDefault`; override with `startIconProps`.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -62,7 +62,7 @@ import { SectionHeader, IconName } from '@metamask/design-system-react-native';
 
 ### `endIconName`
 
-Optional icon name for the end of the **outer** row. When a name is resolved (including via `endIconProps.name`), an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconDefault`; override with `endIconProps`.
+Optional icon name for the end of the **outer** row. When set, an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconAlternative`; override with `endIconProps`.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -143,9 +143,9 @@ import { SectionHeader } from '@metamask/design-system-react-native';
 
 Optional props merged into the start `Icon` when a start icon is shown.
 
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<IconProps>` | No       | `undefined` |
+| TYPE                               | REQUIRED | DEFAULT     |
+| ---------------------------------- | -------- | ----------- |
+| `Omit<Partial<IconProps>, 'name'>` | No       | `undefined` |
 
 ```tsx
 import {
@@ -165,9 +165,9 @@ import {
 
 Optional props merged into the end `Icon` when an end icon is shown.
 
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<IconProps>` | No       | `undefined` |
+| TYPE                               | REQUIRED | DEFAULT     |
+| ---------------------------------- | -------- | ----------- |
+| `Omit<Partial<IconProps>, 'name'>` | No       | `undefined` |
 
 ```tsx
 import {
@@ -185,7 +185,7 @@ import {
 
 ### `isInteractive`
 
-When `true`, wraps the header in a `Pressable` so the full row is tappable. The header opacity reduces to `0.7` while pressed. An `IconName.ArrowRight` end icon is rendered by default unless `endIconName`, `endIconProps.name`, or `endAccessory` is provided. In this mode, the component accepts `PressableProps` (for example `onPress`, `disabled`, and accessibility props) on the outer wrapper. When `false` or omitted, the outer wrapper is a static `BoxRow` with `ViewProps`.
+When `true`, wraps the header in a `Pressable` so the full row is tappable. The header opacity reduces to `0.7` while pressed. An `IconName.ArrowRight` end icon is rendered by default unless `endIconName` or `endAccessory` is provided. `accessibilityRole` defaults to `button` when not provided. In this mode, the component accepts `PressableProps` (for example `onPress`, `disabled`, and accessibility props) on the outer wrapper. When `false` or omitted, the outer wrapper is a static `BoxRow` with `ViewProps`.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
