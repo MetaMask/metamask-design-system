@@ -1258,33 +1258,33 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 
 ##### Import Path
 
-| Extension Pattern                                      | Design System Migration                                              |
-| ------------------------------------------------------ | -------------------------------------------------------------------- |
-| `import { Textarea } from '../../component-library'`   | `import { TextArea } from '@metamask/design-system-react'`          |
-| `import { TextareaResize } from '../../component-library'` | `import { TextAreaResize } from '@metamask/design-system-react'` |
+| Extension Pattern                                              | Design System Migration                                              |
+| -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `import { Textarea } from '../../component-library'`           | `import { TextArea } from '@metamask/design-system-react'`           |
+| `import { TextareaResize } from '../../component-library'`     | `import { TextAreaResize } from '@metamask/design-system-react'`     |
 | `import type { TextareaProps } from '../../component-library'` | `import type { TextAreaProps } from '@metamask/design-system-react'` |
 
 ##### Renamed and Removed Props
 
-| Extension Prop / Value                                  | Design System Migration                                                                 | Notes |
-| ------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----- |
-| `disabled`                                              | `isDisabled`                                                                            | renamed |
-| `readOnly`                                              | `isReadOnly`                                                                            | renamed |
-| `error`                                                 | `isError`                                                                               | renamed |
-| `defaultValue`                                          | removed                                                                                 | use controlled `value` instead |
-| `TextareaResize.Initial` / `TextareaResize.Inherit`    | removed                                                                                 | use one of the supported resize values below |
-| `resize` default                                         | `TextareaResize.Vertical` → `TextAreaResize.None`                                       | the design system defaults to no resize affordance |
+| Extension Prop / Value                              | Design System Migration                           | Notes                                              |
+| --------------------------------------------------- | ------------------------------------------------- | -------------------------------------------------- |
+| `disabled`                                          | `isDisabled`                                      | renamed                                            |
+| `readOnly`                                          | `isReadOnly`                                      | renamed                                            |
+| `error`                                             | `isError`                                         | renamed                                            |
+| `defaultValue`                                      | removed                                           | use controlled `value` instead                     |
+| `TextareaResize.Initial` / `TextareaResize.Inherit` | removed                                           | use one of the supported resize values below       |
+| `resize` default                                    | `TextareaResize.Vertical` → `TextAreaResize.None` | the design system defaults to no resize affordance |
 
 ##### Supported Resize Values
 
-| Extension Value                 | Design System Value              | Notes |
-| ------------------------------- | -------------------------------- | ----- |
-| `TextareaResize.None`           | `TextAreaResize.None`           | unchanged |
-| `TextareaResize.Both`           | `TextAreaResize.Both`           | unchanged |
-| `TextareaResize.Horizontal`     | `TextAreaResize.Horizontal`     | unchanged |
-| `TextareaResize.Vertical`       | `TextAreaResize.Vertical`       | unchanged |
-| `TextareaResize.Initial`        | removed                          | use `TextAreaResize.None` if you want no resize affordance |
-| `TextareaResize.Inherit`        | removed                          | no direct equivalent |
+| Extension Value             | Design System Value         | Notes                                                      |
+| --------------------------- | --------------------------- | ---------------------------------------------------------- |
+| `TextareaResize.None`       | `TextAreaResize.None`       | unchanged                                                  |
+| `TextareaResize.Both`       | `TextAreaResize.Both`       | unchanged                                                  |
+| `TextareaResize.Horizontal` | `TextAreaResize.Horizontal` | unchanged                                                  |
+| `TextareaResize.Vertical`   | `TextAreaResize.Vertical`   | unchanged                                                  |
+| `TextareaResize.Initial`    | removed                     | use `TextAreaResize.None` if you want no resize affordance |
+| `TextareaResize.Inherit`    | removed                     | no direct equivalent                                       |
 
 ##### Style and Native Props
 
