@@ -31,6 +31,10 @@ export type ToastProps = Omit<BannerBaseProps, 'closeButtonProps' | 'onClose'> &
      * `ariaLabel` defaults to `'Close toast'`.
      */
     closeButtonProps?: ToastCloseButtonProps;
+    /**
+     * Optional test identifier forwarded to the root Toast element.
+     */
+    'data-testid'?: string;
   };
 
 /**

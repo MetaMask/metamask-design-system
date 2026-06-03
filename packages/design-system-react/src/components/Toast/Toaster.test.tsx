@@ -637,6 +637,24 @@ describe('toast() imperative API', () => {
     expect(screen.getByText('From sibling effect')).toBeInTheDocument();
   });
 
+  it('forwards data-testid to the rendered Toast', async () => {
+    render(<Toaster />);
+
+    await act(async () => {
+      toast({
+        'data-testid': 'my-toast',
+        hasNoTimeout: true,
+        title: 'Testid toast',
+      });
+      jest.runAllTimers();
+    });
+    await act(async () => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByTestId('my-toast')).toBeInTheDocument();
+  });
+
   it('forwarded ref and imperative API drive the same instance', async () => {
     const ref = createRef<ToasterRef | null>();
     render(<Toaster ref={ref} />);
