@@ -38,6 +38,8 @@ This guide provides detailed instructions for migrating your project from one ve
   - [SensitiveText Component](#sensitivetext-component)
   - [Skeleton Component](#skeleton-component)
   - [TextField Component](#textfield-component)
+  - [TextFieldSearch Component](#textfieldsearch-component)
+  - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
   - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
@@ -2993,6 +2995,151 @@ The `TextField` is now available from the design system. The new component drops
 #### Styling
 
 The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven by design tokens) instead of the `mm-text-field` SCSS module. Custom container styles should be passed via `className`; the legacy `mm-text-field--*` classes are no longer applied.
+
+### TextFieldSearch Component
+
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`.
+
+#### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { TextFieldSearch } from '../../component-library'` | `import { TextFieldSearch } from '@metamask/design-system-react'` |
+
+#### Size Enum
+
+The extension exported a dedicated `TextFieldSearchSize` enum with the same values as `TextFieldSize` (`'sm'`, `'md'`, `'lg'`). The design system removes this duplicate and reuses `TextFieldSize` from `TextField` directly. Import `TextFieldSize` instead.
+
+```tsx
+// Before (Extension)
+import { TextFieldSearch, TextFieldSearchSize } from '../../component-library';
+<TextFieldSearch size={TextFieldSearchSize.Lg} />;
+
+// After (Design System)
+import { TextFieldSearch, TextFieldSize } from '@metamask/design-system-react';
+<TextFieldSearch size={TextFieldSize.Lg} />;
+```
+
+#### State Props
+
+`TextFieldSearch` inherits the renamed state props from `TextField`:
+
+| Extension Prop | Design System Prop | Notes   |
+| -------------- | ------------------ | ------- |
+| `disabled`     | `isDisabled`       | renamed |
+| `readOnly`     | `isReadOnly`       | renamed |
+| `error`        | `isError`          | renamed |
+
+#### Clear Button Aria Label (`useI18nContext` removed)
+
+The extension component pulled the clear-button aria-label from `useI18nContext` (`t('clear')`). The design system has no i18n context, so the clear `ButtonIcon` uses a default `ariaLabel` of `'Clear'` and lets consumers override it via `clearButtonProps`.
+
+```tsx
+// Before (Extension): label resolved via useI18nContext('clear')
+<TextFieldSearch value={value} clearButtonOnClick={handleClear} />
+
+// After (Design System): pass a localized label via clearButtonProps
+<TextFieldSearch
+  value={value}
+  clearButtonOnClick={handleClear}
+  clearButtonProps={{ ariaLabel: t('clear') }}
+/>
+```
+
+#### Removed Props
+
+| Extension Prop                      | Design System Migration                                                                                                     |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`              | Removed. The container is always a `<div>`.                                                                                 |
+| `type`                              | Fixed to `'search'`; not configurable. Use `TextField` if you need a different input type.                                  |
+| `inputProps.marginRight` adjustment | Removed. The container automatically reserves room for the clear button via the existing `TextField` end-accessory padding. |
+
+#### Ref
+
+- `ref` on `TextFieldSearch` targets the root container (`HTMLDivElement`).
+- Use `inputRef` (inherited from `TextField`) to reach the inner `<input>`.
+
+#### Styling
+
+The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `mm-text-field-search` / `mm-text-field__button-clear` SCSS classes. Custom container styles should be passed via `className`.
+
+### FormTextField Component
+
+`FormTextField` is now available from the design system. The new component drops the polymorphic `Box` root and the standalone `FormTextFieldSize` enum, switches state props to the `is*` convention, and replaces SCSS (`mm-form-text-field`) with Tailwind utilities. Internally it composes the design-system `Label`, `TextField`, and `HelpText`.
+
+#### Import Path
+
+| Extension Pattern                                             | Design System Migration                                         |
+| ------------------------------------------------------------- | --------------------------------------------------------------- |
+| `import { FormTextField } from '../../component-library'`     | `import { FormTextField } from '@metamask/design-system-react'` |
+| `import { FormTextFieldSize } from '../../component-library'` | `import { TextFieldSize } from '@metamask/design-system-react'` |
+
+#### Size Enum Consolidation
+
+`FormTextFieldSize` is removed. Use `TextFieldSize` (`'sm'`/`'md'`/`'lg'`) directly — the values are unchanged from the extension.
+
+```tsx
+// Before (Extension)
+<FormTextField size={FormTextFieldSize.Md} … />
+
+// After (Design System)
+<FormTextField size={TextFieldSize.Md} … />
+```
+
+#### State Props
+
+| Extension Prop            | Design System Prop | Notes                                     |
+| ------------------------- | ------------------ | ----------------------------------------- |
+| `disabled` / `isDisabled` | `isDisabled`       | Single canonical name                     |
+| `readOnly`                | `isReadOnly`       | renamed                                   |
+| `error`                   | `isError`          | renamed (also drives `HelpText` severity) |
+
+```tsx
+// Before (Extension)
+<FormTextField
+  id="amount"
+  label="Amount"
+  disabled
+  readOnly
+  error
+  helpText="Required"
+  value={value}
+  onChange={onChange}
+/>
+
+// After (Design System)
+<FormTextField
+  id="amount"
+  label="Amount"
+  isDisabled
+  isReadOnly
+  isError
+  helpText="Required"
+  value={value}
+  onChange={onChange}
+/>
+```
+
+#### Removed Props
+
+| Extension Prop          | Design System Migration                                                                                                       |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`  | Removed. The root is always a `<div>`. Wrap with a custom element if you need a different root.                               |
+| `defaultValue`          | Removed. The inner `TextField` is controlled-only — manage state with `value`/`onChange`.                                     |
+| Box style-utility props | Use `className` with Tailwind utilities. The container's `flex flex-col` layout and child spacing are owned by the component. |
+
+#### Refs
+
+- `ref` on `FormTextField` targets the root container (`HTMLDivElement`).
+- Use `inputRef` to reach the inner `<input>`. Object refs and callback refs are both supported.
+
+#### Forwarded sub-component props
+
+- `labelProps`, `helpTextProps`, and `textFieldProps` continue to forward extra props to the rendered `Label`, `HelpText`, and `TextField`. Their `className` is merged with the component defaults (`mb-1` on the label, `mt-1` on the help text).
+
+#### Styling
+
+`FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
 
