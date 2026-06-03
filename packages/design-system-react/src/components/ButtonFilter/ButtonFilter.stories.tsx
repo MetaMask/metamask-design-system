@@ -94,6 +94,5 @@ const ButtonFilterGroupStory = ({
 };
 
 export const ButtonFilterGroup: Story = {
-  name: 'Button Filter Group',
   render: (args) => <ButtonFilterGroupStory {...args} />,
 };
