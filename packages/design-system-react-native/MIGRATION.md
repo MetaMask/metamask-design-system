@@ -59,6 +59,7 @@ This guide provides detailed instructions for migrating your project from one ve
 #### TextArea: flattened to the root `TextInput`
 
 `TextArea` now renders the root `TextInput` directly instead of wrapping it in a separate container with a nested input slot.
+This change is scoped to `TextArea`; `TextField` still supports `inputElement` and `inputRef`.
 
 **What changed:**
 
