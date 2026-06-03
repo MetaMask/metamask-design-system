@@ -4,8 +4,11 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
+import type { ReactTestInstance } from 'react-test-renderer';
 
 // Internal dependencies.
+import { createRenderer } from '../../test-utils/createRenderer';
 import { SectionHeader } from './SectionHeader';
 
 const ROOT_TEST_ID = 'section-header-root';
@@ -22,6 +25,54 @@ describe('SectionHeader', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
+
+  const flattenStyles = (
+    styleProp: StyleProp<ViewStyle> | undefined,
+  ): ViewStyle[] => {
+    if (styleProp === null || styleProp === undefined) {
+      return [];
+    }
+    if (Array.isArray(styleProp)) {
+      return styleProp.flatMap((item) =>
+        flattenStyles(item as StyleProp<ViewStyle>),
+      );
+    }
+    if (typeof styleProp === 'object') {
+      return [styleProp as ViewStyle];
+    }
+    return [];
+  };
+
+  const findPressableStyleFn = (
+    instance: ReactTestInstance,
+  ): ((state: { pressed: boolean }) => StyleProp<ViewStyle>) | null => {
+    if (typeof instance.props.style === 'function') {
+      return instance.props.style;
+    }
+
+    for (const child of instance.children) {
+      if (typeof child === 'object' && child !== null && 'props' in child) {
+        const styleFn = findPressableStyleFn(child as ReactTestInstance);
+        if (styleFn) {
+          return styleFn;
+        }
+      }
+    }
+
+    return null;
+  };
+
+  const getPressableStyleFn = (
+    tree: ReturnType<typeof createRenderer>,
+  ): ((state: { pressed: boolean }) => StyleProp<ViewStyle>) => {
+    const styleFn = findPressableStyleFn(tree.root);
+
+    if (!styleFn) {
+      throw new Error('Expected Pressable style to be a function');
+    }
+
+    return styleFn;
+  };
 
   describe('rendering', () => {
     it('renders string title', () => {
@@ -277,6 +328,67 @@ describe('SectionHeader', () => {
 
       fireEvent.press(getByTestId(ROOT_TEST_ID));
       expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not call onPress when disabled', () => {
+      const onPress = jest.fn();
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          isInteractive
+          disabled
+          onPress={onPress}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      fireEvent.press(getByTestId(ROOT_TEST_ID));
+      expect(onPress).not.toHaveBeenCalled();
+    });
+
+    it('does not apply pressed opacity when disabled', () => {
+      const tree = createRenderer(
+        <SectionHeader
+          title="Section"
+          isInteractive
+          disabled
+          onPress={jest.fn()}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      const styleFn = getPressableStyleFn(tree);
+      const pressedStyles = flattenStyles(styleFn({ pressed: true }));
+      const unpressedStyles = flattenStyles(styleFn({ pressed: false }));
+
+      expect(pressedStyles).toStrictEqual(
+        expect.not.arrayContaining([expect.objectContaining(tw`opacity-70`)]),
+      );
+      expect(unpressedStyles).toStrictEqual(
+        expect.not.arrayContaining([expect.objectContaining(tw`opacity-70`)]),
+      );
+    });
+
+    it('applies pressed opacity when enabled', () => {
+      const tree = createRenderer(
+        <SectionHeader
+          title="Section"
+          isInteractive
+          onPress={jest.fn()}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      const styleFn = getPressableStyleFn(tree);
+      const pressedStyles = flattenStyles(styleFn({ pressed: true }));
+      const unpressedStyles = flattenStyles(styleFn({ pressed: false }));
+
+      expect(pressedStyles).toStrictEqual(
+        expect.arrayContaining([expect.objectContaining(tw`opacity-70`)]),
+      );
+      expect(unpressedStyles).toStrictEqual(
+        expect.not.arrayContaining([expect.objectContaining(tw`opacity-70`)]),
+      );
     });
 
     it('applies default padding to Pressable root', () => {

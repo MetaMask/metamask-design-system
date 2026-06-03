@@ -7,7 +7,7 @@ import {
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, type PressableProps } from 'react-native';
 
 import { BoxRow } from '../BoxRow';
 import { Icon } from '../Icon';
@@ -99,13 +99,17 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   ) : null;
 
   if (isInteractive) {
+    const isDisabled = Boolean(
+      (wrapperRest as Omit<PressableProps, 'children'>).disabled,
+    );
+
     return (
       <Pressable
         style={({ pressed }) => {
           const baseStyle = tw.style(
             'px-4 pb-2 pt-3',
             twClassName,
-            pressed && 'opacity-70',
+            pressed && !isDisabled && 'opacity-70',
           );
           const additionalStyle =
             typeof style === 'function' ? style({ pressed }) : style;
