@@ -63,7 +63,7 @@ export const Size: Story = {
   ),
 };
 
-export const isDisabled: Story = {
+export const IsDisabled: Story = {
   render: () => <ButtonIconStory iconName={IconName.Close} isDisabled />,
 };
 
