@@ -106,6 +106,33 @@ describe('AvatarNetwork Component', () => {
     expect(avatarBase.props.children.props.children).toBe('E');
   });
 
+  describe('when src is NOT provided', () => {
+    it('renders the first letter of name as fallback', () => {
+      const { getByTestId } = render(
+        <AvatarNetwork name="Example" testID="avatar-base" />,
+      );
+
+      const avatarBase = getByTestId('avatar-base');
+      expect(avatarBase.props.children.props.children).toBe('E');
+    });
+
+    it('uses explicit fallbackText over name initial', () => {
+      const { getByTestId } = render(
+        <AvatarNetwork name="Example" fallbackText="FB" testID="avatar-base" />,
+      );
+
+      const avatarBase = getByTestId('avatar-base');
+      expect(avatarBase.props.children.props.children).toBe('FB');
+    });
+
+    it('renders "?" when no name or fallbackText is provided', () => {
+      const { getByTestId } = render(<AvatarNetwork testID="avatar-base" />);
+
+      const avatarBase = getByTestId('avatar-base');
+      expect(avatarBase.props.children.props.children).toBe('?');
+    });
+  });
+
   it('passes additional AvatarBase props correctly', () => {
     const customStyle = { margin: 10 };
     const { getByTestId } = render(
