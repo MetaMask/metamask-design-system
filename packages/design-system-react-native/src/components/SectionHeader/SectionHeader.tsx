@@ -7,7 +7,8 @@ import {
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
-import { Pressable, type PressableProps } from 'react-native';
+import { Pressable } from 'react-native';
+import type { PressableProps } from 'react-native';
 
 import { BoxRow } from '../BoxRow';
 import { Icon } from '../Icon';

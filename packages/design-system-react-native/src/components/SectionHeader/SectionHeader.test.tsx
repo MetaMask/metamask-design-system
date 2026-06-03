@@ -9,6 +9,7 @@ import type { ReactTestInstance } from 'react-test-renderer';
 
 // Internal dependencies.
 import { createRenderer } from '../../test-utils/createRenderer';
+
 import { SectionHeader } from './SectionHeader';
 
 const ROOT_TEST_ID = 'section-header-root';
