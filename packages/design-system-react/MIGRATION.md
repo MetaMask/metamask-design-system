@@ -38,6 +38,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [SensitiveText Component](#sensitivetext-component)
   - [Skeleton Component](#skeleton-component)
   - [TextField Component](#textfield-component)
+  - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
   - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
@@ -2994,6 +2995,73 @@ The `TextField` is now available from the design system. The new component drops
 #### Styling
 
 The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven by design tokens) instead of the `mm-text-field` SCSS module. Custom container styles should be passed via `className`; the legacy `mm-text-field--*` classes are no longer applied.
+
+### TextFieldSearch Component
+
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`.
+
+#### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { TextFieldSearch } from '../../component-library'` | `import { TextFieldSearch } from '@metamask/design-system-react'` |
+
+#### Size Enum
+
+The extension exported a dedicated `TextFieldSearchSize` enum with the same values as `TextFieldSize` (`'sm'`, `'md'`, `'lg'`). The design system removes this duplicate and reuses `TextFieldSize` from `TextField` directly. Import `TextFieldSize` instead.
+
+```tsx
+// Before (Extension)
+import { TextFieldSearch, TextFieldSearchSize } from '../../component-library';
+<TextFieldSearch size={TextFieldSearchSize.Lg} />;
+
+// After (Design System)
+import { TextFieldSearch, TextFieldSize } from '@metamask/design-system-react';
+<TextFieldSearch size={TextFieldSize.Lg} />;
+```
+
+#### State Props
+
+`TextFieldSearch` inherits the renamed state props from `TextField`:
+
+| Extension Prop | Design System Prop | Notes   |
+| -------------- | ------------------ | ------- |
+| `disabled`     | `isDisabled`       | renamed |
+| `readOnly`     | `isReadOnly`       | renamed |
+| `error`        | `isError`          | renamed |
+
+#### Clear Button Aria Label (`useI18nContext` removed)
+
+The extension component pulled the clear-button aria-label from `useI18nContext` (`t('clear')`). The design system has no i18n context, so the clear `ButtonIcon` uses a default `ariaLabel` of `'Clear'` and lets consumers override it via `clearButtonProps`.
+
+```tsx
+// Before (Extension): label resolved via useI18nContext('clear')
+<TextFieldSearch value={value} clearButtonOnClick={handleClear} />
+
+// After (Design System): pass a localized label via clearButtonProps
+<TextFieldSearch
+  value={value}
+  clearButtonOnClick={handleClear}
+  clearButtonProps={{ ariaLabel: t('clear') }}
+/>
+```
+
+#### Removed Props
+
+| Extension Prop                      | Design System Migration                                                                                                     |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`              | Removed. The container is always a `<div>`.                                                                                 |
+| `type`                              | Fixed to `'search'`; not configurable. Use `TextField` if you need a different input type.                                  |
+| `inputProps.marginRight` adjustment | Removed. The container automatically reserves room for the clear button via the existing `TextField` end-accessory padding. |
+
+#### Ref
+
+- `ref` on `TextFieldSearch` targets the root container (`HTMLDivElement`).
+- Use `inputRef` (inherited from `TextField`) to reach the inner `<input>`.
+
+#### Styling
+
+The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `mm-text-field-search` / `mm-text-field__button-clear` SCSS classes. Custom container styles should be passed via `className`.
 
 ### FormTextField Component
 
