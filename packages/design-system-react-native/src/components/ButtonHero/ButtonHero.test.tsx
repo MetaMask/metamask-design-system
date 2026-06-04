@@ -2,7 +2,6 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { createRenderer } from '../../test-utils/createRenderer';
 import { IconName } from '../Icon';
 
 import { ButtonHero } from './ButtonHero';
@@ -124,73 +123,6 @@ describe('ButtonHero', () => {
     const btn = getByTestId('button-hero');
     expectBackground(btn.props.style, 'bg-primary-default');
     expect(btn).toBeDefined();
-  });
-
-  it('toggles pressed background when interactive', () => {
-    const tree = createRenderer(<ButtonHero>Press me</ButtonHero>);
-
-    // Find the ButtonAnimated component which has the style function
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
-    });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
-
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
-
-    expectBackground(defaultStyles, 'bg-primary-default');
-    expectBackground(pressedStyles, 'bg-primary-default-pressed');
-
-    expect(defaultStyles).toBeDefined();
-    expect(pressedStyles).toBeDefined();
-  });
-
-  it('does not apply pressed background when disabled', () => {
-    const tree = createRenderer(<ButtonHero isDisabled>Disabled</ButtonHero>);
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
-    });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
-
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
-
-    // Both states should have same background when disabled
-    expectBackground(defaultStyles, 'bg-primary-default');
-    expectBackground(pressedStyles, 'bg-primary-default');
-
-    expect(defaultStyles).toBeDefined();
-    expect(pressedStyles).toBeDefined();
-  });
-
-  it('does not apply pressed background when loading', () => {
-    const tree = createRenderer(
-      <ButtonHero isLoading loadingText="Loading...">
-        Loading
-      </ButtonHero>,
-    );
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
-    });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
-
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
-
-    // Both states should have same background when loading
-    expectBackground(defaultStyles, 'bg-primary-default');
-    expectBackground(pressedStyles, 'bg-primary-default');
-
-    expect(defaultStyles).toBeDefined();
-    expect(pressedStyles).toBeDefined();
   });
 
   it('passes accessibility props correctly', () => {

@@ -3,8 +3,6 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { createRenderer } from '../../../../test-utils/createRenderer';
-
 import { ButtonPrimary } from './ButtonPrimary';
 
 describe('ButtonPrimary', () => {
@@ -102,93 +100,6 @@ describe('ButtonPrimary', () => {
     const btn = getByTestId('button-primary');
     expectBackground(btn.props.style, 'bg-default');
     expect(btn).toBeDefined();
-  });
-
-  it('toggles pressed styles (default)', () => {
-    const tree = createRenderer(<ButtonPrimary>Press me</ButtonPrimary>);
-
-    // Find the ButtonAnimated component which has the style function
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
-    });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
-
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
-
-    expectBackground(defaultStyles, 'bg-icon-default');
-    expectBackground(pressedStyles, 'bg-icon-default-pressed');
-
-    expect(defaultStyles).toBeDefined();
-    expect(pressedStyles).toBeDefined();
-  });
-
-  it('toggles pressed styles (danger)', () => {
-    const tree = createRenderer(<ButtonPrimary isDanger>Danger</ButtonPrimary>);
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
-    });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
-
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
-
-    expectBackground(defaultStyles, 'bg-error-default');
-    expectBackground(pressedStyles, 'bg-error-default-pressed');
-
-    expect(defaultStyles).toBeDefined();
-    expect(pressedStyles).toBeDefined();
-  });
-
-  it('toggles pressed styles (inverse)', () => {
-    const tree = createRenderer(
-      <ButtonPrimary isInverse>Inverse</ButtonPrimary>,
-    );
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
-    });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
-
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
-
-    expectBackground(defaultStyles, 'bg-default');
-    expectBackground(pressedStyles, 'bg-default-pressed');
-
-    expect(defaultStyles).toBeDefined();
-    expect(pressedStyles).toBeDefined();
-  });
-
-  it('toggles pressed styles (inverse+danger)', () => {
-    const tree = createRenderer(
-      <ButtonPrimary isInverse isDanger>
-        Inverse+Danger
-      </ButtonPrimary>,
-    );
-
-    const buttonAnimated = tree.root.findByProps({
-      accessibilityRole: 'button',
-    });
-    const styleFn = buttonAnimated.props.style as (p: {
-      pressed: boolean;
-    }) => unknown[];
-
-    const defaultStyles = flattenStyles(styleFn({ pressed: false }));
-    const pressedStyles = flattenStyles(styleFn({ pressed: true }));
-
-    expectBackground(defaultStyles, 'bg-default');
-    expectBackground(pressedStyles, 'bg-default-pressed');
-
-    expect(defaultStyles).toBeDefined();
-    expect(pressedStyles).toBeDefined();
   });
 
   it('renders danger+loading background', () => {

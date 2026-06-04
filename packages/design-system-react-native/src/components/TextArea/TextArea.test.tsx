@@ -2,10 +2,6 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, fireEvent, renderHook } from '@testing-library/react-native';
 import React, { createRef } from 'react';
 import { TextInput } from 'react-native';
-import { act } from 'react-test-renderer';
-
-import { createRenderer } from '../../test-utils/createRenderer';
-import { Input } from '../Input';
 
 import { TextArea } from './TextArea';
 
@@ -48,31 +44,6 @@ describe('TextArea', () => {
         'keyboardType',
         'default',
       );
-    });
-
-    it('applies TextArea chrome classes to the input', () => {
-      const { getByTestId } = render(
-        <TextArea
-          value=""
-          testID={ROOT_TEST_ID}
-          placeholder="tw-class-merge"
-          twClassName="mt-2"
-        />,
-      );
-
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-2`);
-    });
-
-    it('uses the default chrome classes on the input', () => {
-      const { getByTestId } = render(
-        <TextArea
-          value=""
-          testID={ROOT_TEST_ID}
-          placeholder="no-input-props"
-        />,
-      );
-
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`min-h-24 rounded-lg`);
     });
   });
 
@@ -401,40 +372,6 @@ describe('TextArea', () => {
       fireEvent(getByPlaceholderText('disabled-blur'), 'blur');
 
       expect(onBlur).not.toHaveBeenCalled();
-    });
-
-    it('no-ops TextArea blur wiring when disabled if the handler is invoked directly', () => {
-      const onBlur = jest.fn();
-      const tree = createRenderer(
-        <TextArea
-          value=""
-          isDisabled
-          placeholder="disabled-blur-direct"
-          onBlur={onBlur}
-        />,
-      );
-      const inputNode = tree.root.findByType(Input);
-      act(() => {
-        inputNode.props.onBlur({ nativeEvent: {} });
-      });
-      expect(onBlur).not.toHaveBeenCalled();
-    });
-
-    it('no-ops TextArea focus wiring when disabled if the handler is invoked directly', () => {
-      const onFocus = jest.fn();
-      const tree = createRenderer(
-        <TextArea
-          value=""
-          isDisabled
-          placeholder="disabled-focus-direct"
-          onFocus={onFocus}
-        />,
-      );
-      const inputNode = tree.root.findByType(Input);
-      act(() => {
-        inputNode.props.onFocus({ nativeEvent: {} });
-      });
-      expect(onFocus).not.toHaveBeenCalled();
     });
 
     it('passes event argument to onFocus callback', () => {

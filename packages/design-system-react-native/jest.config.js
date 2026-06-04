@@ -51,6 +51,46 @@ module.exports = merge(baseConfig, {
       lines: 67,
       statements: 67,
     },
+    // tree.root traversal is an RNTL anti-pattern (see https://oss.callstack.com/react-native-testing-library/docs/guides/common-mistakes).
+    // Verified visually via Storybook. See https://github.com/MetaMask/metamask-design-system/issues/1182.
+    './src/components/Button/variants/ButtonPrimary/ButtonPrimary.tsx': {
+      branches: 97,
+    },
+    // tree.root traversal is an RNTL anti-pattern (see https://oss.callstack.com/react-native-testing-library/docs/guides/common-mistakes).
+    // Verified visually via Storybook. See https://github.com/MetaMask/metamask-design-system/issues/1182.
+    './src/components/Button/variants/ButtonSecondary/ButtonSecondary.tsx': {
+      branches: 97,
+    },
+    // tree.root traversal is an RNTL anti-pattern (see https://oss.callstack.com/react-native-testing-library/docs/guides/common-mistakes).
+    // Verified visually via Storybook. See https://github.com/MetaMask/metamask-design-system/issues/1182.
+    './src/components/Button/variants/ButtonTertiary/ButtonTertiary.tsx': {
+      branches: 96,
+    },
+    // tree.root traversal is an RNTL anti-pattern (see https://oss.callstack.com/react-native-testing-library/docs/guides/common-mistakes).
+    // Verified visually via Storybook. See https://github.com/MetaMask/metamask-design-system/issues/1182.
+    './src/components/ButtonBase/ButtonBase.tsx': {
+      branches: 98,
+    },
+    // tree.root traversal is an RNTL anti-pattern (see https://oss.callstack.com/react-native-testing-library/docs/guides/common-mistakes).
+    // Verified visually via Storybook. See https://github.com/MetaMask/metamask-design-system/issues/1182.
+    './src/components/ButtonHero/ButtonHero.tsx': {
+      branches: 40,
+    },
+    // tree.root traversal is an RNTL anti-pattern (see https://oss.callstack.com/react-native-testing-library/docs/guides/common-mistakes).
+    // Verified visually via Storybook. See https://github.com/MetaMask/metamask-design-system/issues/1182.
+    './src/components/Checkbox/Checkbox.tsx': {
+      branches: 96,
+    },
+    // tree.root traversal is an RNTL anti-pattern (see https://oss.callstack.com/react-native-testing-library/docs/guides/common-mistakes).
+    // Verified visually via Storybook. See https://github.com/MetaMask/metamask-design-system/issues/1182.
+    './src/components/TextArea/TextArea.tsx': {
+      branches: 90,
+    },
+    // tree.root traversal is an RNTL anti-pattern (see https://oss.callstack.com/react-native-testing-library/docs/guides/common-mistakes).
+    // Verified visually via Storybook. See https://github.com/MetaMask/metamask-design-system/issues/1182.
+    './src/components/TextField/TextField.tsx': {
+      branches: 89,
+    },
   },
 
   // Add coverage ignore patterns

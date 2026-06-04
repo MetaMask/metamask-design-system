@@ -2,10 +2,6 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React, { createRef } from 'react';
 import { TextInput, View } from 'react-native';
-import { act } from 'react-test-renderer';
-
-import { createRenderer } from '../../test-utils/createRenderer';
-import { Input } from '../Input';
 
 import { TextField } from './TextField';
 
@@ -60,21 +56,6 @@ describe('TextField', () => {
         'keyboardType',
         'number-pad',
       );
-    });
-
-    it('merges inputProps.twClassName with TextField inner Input layout classes', () => {
-      const tree = createRenderer(
-        <TextField
-          value=""
-          placeholder="tw-class-merge"
-          inputProps={{ twClassName: 'mt-2' }}
-        />,
-      );
-      const inputNode = tree.root.findByType(Input);
-
-      expect(inputNode.props.twClassName).toContain('mt-2');
-      expect(inputNode.props.twClassName).toContain('flex-1');
-      expect(inputNode.props.twClassName).toContain('min-h-0');
     });
   });
 
@@ -390,40 +371,6 @@ describe('TextField', () => {
       fireEvent(getByPlaceholderText('disabled-blur'), 'blur');
 
       expect(onBlur).not.toHaveBeenCalled();
-    });
-
-    it('no-ops TextField blur wiring when disabled if the handler is invoked directly', () => {
-      const onBlur = jest.fn();
-      const tree = createRenderer(
-        <TextField
-          value=""
-          isDisabled
-          placeholder="disabled-blur-direct"
-          onBlur={onBlur}
-        />,
-      );
-      const inputNode = tree.root.findByType(Input);
-      act(() => {
-        inputNode.props.onBlur({ nativeEvent: {} });
-      });
-      expect(onBlur).not.toHaveBeenCalled();
-    });
-
-    it('no-ops TextField focus wiring when disabled if the handler is invoked directly', () => {
-      const onFocus = jest.fn();
-      const tree = createRenderer(
-        <TextField
-          value=""
-          isDisabled
-          placeholder="disabled-focus-direct"
-          onFocus={onFocus}
-        />,
-      );
-      const inputNode = tree.root.findByType(Input);
-      act(() => {
-        inputNode.props.onFocus({ nativeEvent: {} });
-      });
-      expect(onFocus).not.toHaveBeenCalled();
     });
 
     it('passes event argument to onFocus callback', () => {

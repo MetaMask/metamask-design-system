@@ -128,6 +128,33 @@ See [HeaderBase Component](#headerbase-component) and [BottomSheetHeader Compone
 
 ### From version 0.24.0 to 0.25.0
 
+#### Removed `panGestureHandlerProps` from `BottomSheetDialog` and `BottomSheet`
+
+The `panGestureHandlerProps` prop has been removed from both `BottomSheetDialog` and `BottomSheet`.
+
+This prop was a compatibility shim from the old `react-native-gesture-handler` v1 `PanGestureHandler` JSX component. With the migration to the RNGH v2 `GestureDetector` + `Gesture.Pan()` API, the prop was mapped to individual method calls via an internal `applyPanGestureProps` function — however `simultaneousHandlers` (the only real-world use case) was never wired up and was silently dropped. The prop was also not used anywhere in the MetaMask Mobile or Extension consumer codebases.
+
+**Before (0.24.0):**
+
+```tsx
+<BottomSheet
+  goBack={goBack}
+  panGestureHandlerProps={{
+    simultaneousHandlers: scrollViewRef,
+  }}
+>
+  {children}
+</BottomSheet>
+```
+
+**After (0.x.0):**
+
+```tsx
+<BottomSheet goBack={goBack}>{children}</BottomSheet>
+```
+
+If you were relying on `simultaneousHandlers` for nested scroll behaviour, this was not functioning correctly in the previous version. First-class support for simultaneous gesture handling will be addressed in a follow-up.
+
 #### BannerBase: `onClose` is now the only close-button behavior API
 
 **What changed:**
