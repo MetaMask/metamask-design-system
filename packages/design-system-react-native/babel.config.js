@@ -3,7 +3,7 @@ module.exports = {
     test: {
       presets: ['@react-native/babel-preset'],
       plugins: [
-        'react-native-reanimated/plugin', // Must be the last plugin
+        'react-native-worklets/plugin', // Must be the last plugin
       ],
     },
   },
