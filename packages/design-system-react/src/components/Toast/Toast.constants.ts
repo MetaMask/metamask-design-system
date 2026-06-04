@@ -19,7 +19,7 @@ export const TOAST_SEVERITY_ICON_MAP = {
     color: IconColor.WarningDefault,
   },
   [ToastSeverity.Danger]: {
-    name: IconName.Danger,
+    name: IconName.Error,
     color: IconColor.ErrorDefault,
   },
 } as const;
