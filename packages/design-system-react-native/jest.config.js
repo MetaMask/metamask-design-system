@@ -91,6 +91,9 @@ module.exports = merge(baseConfig, {
     './src/components/TextField/TextField.tsx': {
       branches: 89,
     },
+    './src/components/temp-components/Maskicon/Maskicon.tsx': {
+      branches: 80,
+    },
   },
 
   // Add coverage ignore patterns
