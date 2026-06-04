@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: Added default padding and added isInteractive to SectionHeader ([#1210](https://github.com/MetaMask/metamask-design-system/pull/1210))
+- refactor: Updated fallback behavior for avatar token, network, and favicon ([#1212](https://github.com/MetaMask/metamask-design-system/pull/1212))
+- feat(rn): flatten TextArea to root TextInput ([#1205](https://github.com/MetaMask/metamask-design-system/pull/1205))
+- chore(storybook-react): upgrade to Storybook 10.4.2, Vite 8, re-enable CI test job ([#1209](https://github.com/MetaMask/metamask-design-system/pull/1209))
+- chore: drop Node v18 support ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+- feat: [DSRN] Added Content component ([#1192](https://github.com/MetaMask/metamask-design-system/pull/1192))
+- chore: [DSYS-616] create/update Avatar migration docs ([#1114](https://github.com/MetaMask/metamask-design-system/pull/1114))
+
 ## [0.27.0]
 
 ### Added
