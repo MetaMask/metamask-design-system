@@ -56,7 +56,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
         {...startIconProps}
       />
     ) : (
-      startAccessory ?? null
+      (startAccessory ?? null)
     );
 
     const resolvedEndAccessory = finalEndIconName ? (
@@ -68,7 +68,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
         {...endIconProps}
       />
     ) : (
-      endAccessory ?? null
+      (endAccessory ?? null)
     );
 
     const content = isTextContent(children) ? (

@@ -6,14 +6,16 @@ import {
 
 import { IconColor } from '../../types';
 
-export const MAP_TAG_SEVERITY_BACKGROUND: Record<TagSeverity, BoxBackgroundColor> =
-  {
-    [TagSeverity.Neutral]: BoxBackgroundColor.BackgroundMuted,
-    [TagSeverity.Success]: BoxBackgroundColor.SuccessMuted,
-    [TagSeverity.Error]: BoxBackgroundColor.ErrorMuted,
-    [TagSeverity.Warning]: BoxBackgroundColor.WarningMuted,
-    [TagSeverity.Info]: BoxBackgroundColor.InfoMuted,
-  };
+export const MAP_TAG_SEVERITY_BACKGROUND: Record<
+  TagSeverity,
+  BoxBackgroundColor
+> = {
+  [TagSeverity.Neutral]: BoxBackgroundColor.BackgroundMuted,
+  [TagSeverity.Success]: BoxBackgroundColor.SuccessMuted,
+  [TagSeverity.Error]: BoxBackgroundColor.ErrorMuted,
+  [TagSeverity.Warning]: BoxBackgroundColor.WarningMuted,
+  [TagSeverity.Info]: BoxBackgroundColor.InfoMuted,
+};
 
 export const MAP_TAG_SEVERITY_TEXT_COLOR: Record<TagSeverity, TextColor> = {
   [TagSeverity.Neutral]: TextColor.TextDefault,

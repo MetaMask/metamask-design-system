@@ -4,9 +4,9 @@ import React from 'react';
 
 import { IconName } from '../../types';
 
+import README from './README.mdx';
 import { Tag } from './Tag';
 import type { TagProps } from './Tag.types';
-import README from './README.mdx';
 
 const meta: Meta<TagProps> = {
   title: 'React Components/Tag',
@@ -75,7 +75,9 @@ export const EndIconName: Story = {
 
 export const StartAccessory: Story = {
   render: () => (
-    <Tag startAccessory={<span data-testid="tag-story-start-accessory">→</span>}>
+    <Tag
+      startAccessory={<span data-testid="tag-story-start-accessory">→</span>}
+    >
       Tag
     </Tag>
   ),

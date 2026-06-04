@@ -76,7 +76,9 @@ describe('Tag', () => {
 
       const icon = screen.getByTestId('tag-start-icon');
       expect(icon).toBeInTheDocument();
-      expect(icon).toHaveClass(MAP_TAG_SEVERITY_ICON_COLOR[TagSeverity.Neutral]);
+      expect(icon).toHaveClass(
+        MAP_TAG_SEVERITY_ICON_COLOR[TagSeverity.Neutral],
+      );
     });
 
     it('resolves icon from startIconProps.name when startIconName is omitted', () => {
