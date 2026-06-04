@@ -26,8 +26,9 @@
     "react": "19.1.0",
     "react-native": "0.81.5",
     "react-native-gesture-handler": "~2.28.0",
-    "react-native-reanimated": "~4.1.1",
-    "react-native-web": "^0.21.0"
+    "react-native-reanimated": "~4.3.0",
+    "react-native-web": "^0.21.0",
+    "react-native-worklets": "0.8.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -53,7 +54,6 @@
     "react-native-safe-area-context": "~5.6.0",
     "react-native-svg": "15.12.1",
     "react-native-svg-transformer": "^1.5.3",
-    "react-native-worklets": "patch:react-native-worklets@npm%3A0.5.1#~/.yarn/patches/react-native-worklets-npm-0.5.1-dcf1422a19.patch",
     "storybook": "10.4.2",
     "typescript": "~5.2.2",
     "vite": "^8.0.14",

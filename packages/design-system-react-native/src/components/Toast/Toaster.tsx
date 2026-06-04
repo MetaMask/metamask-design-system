@@ -13,13 +13,13 @@ import { Dimensions } from 'react-native';
 import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 import Animated, {
   cancelAnimation,
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { scheduleOnRN } from 'react-native-worklets';
 
 // Internal dependencies.
 import { Toast } from './Toast';
@@ -109,7 +109,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         screenHeight,
         { duration: TOAST_ANIMATION_DURATION },
         () => {
-          runOnJS(resetState)();
+          scheduleOnRN(resetState);
         },
       );
     };
@@ -163,7 +163,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
               withTiming(
                 height,
                 { duration: TOAST_ANIMATION_DURATION },
-                runOnJS(resetState),
+                () => scheduleOnRN(resetState),
               ),
             );
           },
