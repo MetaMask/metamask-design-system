@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.5.0]
+
 ### Uncategorized
 
 - chore: drop Node v18 support ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
@@ -441,7 +443,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.4.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.5.0...HEAD
+[8.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.4.0...@metamask/design-tokens@8.5.0
 [8.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.3.0...@metamask/design-tokens@8.4.0
 [8.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.2...@metamask/design-tokens@8.3.0
 [8.2.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.1...@metamask/design-tokens@8.2.2
